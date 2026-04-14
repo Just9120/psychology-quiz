@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    command: ["python", "-m", "app.main"]
     volumes:
       - ./data:/data
       - ./content:/app/content:ro

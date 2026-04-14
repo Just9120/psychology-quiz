@@ -29,6 +29,7 @@ def main() -> int:
         with sqlite3.connect(db_path) as conn:
             conn.executescript(schema_sql)
         print(f"[OK] База данных инициализирована: {db_path}")
+        print("[OK] SQL-схема успешно применена.")
         return 0
     except sqlite3.Error as exc:
         print(f"[ERROR] Ошибка SQLite: {exc}")

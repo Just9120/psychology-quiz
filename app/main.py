@@ -12,16 +12,23 @@ from app.db import init_db_connection
 logger = logging.getLogger(__name__)
 
 
+async def safe_reply(update: Update, text: str) -> None:
+    if update.message:
+        await update.message.reply_text(text)
+
+
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    await update.message.reply_text(
+    await safe_reply(
+        update,
         "Привет! Я учебный бот-викторина по психологии. Используйте /help для списка команд."
     )
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    await update.message.reply_text(
+    await safe_reply(
+        update,
         "Доступные команды:\n"
         "/start — приветствие\n"
         "/help — список команд\n"
@@ -32,12 +39,12 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def ping_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    await update.message.reply_text("pong")
+    await safe_reply(update, "pong")
 
 
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    await update.message.reply_text("Движок викторины еще не подключен.")
+    await safe_reply(update, "Движок викторины еще не подключен.")
 
 
 def configure_logging(log_level: str) -> None:
