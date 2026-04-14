@@ -5,6 +5,9 @@ from pathlib import Path
 from typing import Any
 
 
+SESSION_QUESTION_LIMIT = 5
+
+
 def get_connection(db_path: str) -> sqlite3.Connection:
     db_file = Path(db_path)
     db_file.parent.mkdir(parents=True, exist_ok=True)
@@ -195,19 +198,67 @@ def start_quiz_session(conn: sqlite3.Connection, user_id: int, category_id: int)
     return int(cursor.lastrowid)
 
 
-def get_random_approved_question_by_category(
+def select_random_approved_question_ids_by_category(
     conn: sqlite3.Connection,
     category_id: int,
-) -> sqlite3.Row | None:
-    return conn.execute(
+    limit: int = SESSION_QUESTION_LIMIT,
+) -> list[int]:
+    rows = conn.execute(
         """
-        SELECT q.id, q.external_id, q.question_text, q.explanation
+        SELECT q.id
         FROM questions q
         WHERE q.category_id = ? AND q.status = 'approved'
         ORDER BY RANDOM()
+        LIMIT ?
+        """,
+        (category_id, limit),
+    ).fetchall()
+    return [int(row["id"]) for row in rows]
+
+
+def store_session_questions(conn: sqlite3.Connection, session_id: int, question_ids: list[int]) -> None:
+    for order_index, question_id in enumerate(question_ids, start=1):
+        conn.execute(
+            """
+            INSERT INTO quiz_session_questions (session_id, question_id, order_index)
+            VALUES (?, ?, ?)
+            """,
+            (session_id, question_id, order_index),
+        )
+
+
+def get_session_question_count(conn: sqlite3.Connection, session_id: int) -> int:
+    row = conn.execute(
+        """
+        SELECT COUNT(*) AS total_questions
+        FROM quiz_session_questions
+        WHERE session_id = ?
+        """,
+        (session_id,),
+    ).fetchone()
+    return int(row["total_questions"]) if row else 0
+
+
+def get_current_unanswered_question(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
+    return conn.execute(
+        """
+        SELECT
+            sq.question_id,
+            sq.order_index,
+            q.question_text,
+            q.explanation,
+            (SELECT COUNT(*) FROM quiz_session_questions WHERE session_id = sq.session_id) AS total_questions
+        FROM quiz_session_questions sq
+        INNER JOIN questions q ON q.id = sq.question_id
+        LEFT JOIN quiz_answers qa
+            ON qa.session_id = sq.session_id
+           AND qa.question_id = sq.question_id
+        WHERE sq.session_id = ?
+          AND qa.id IS NULL
+        ORDER BY sq.order_index ASC
         LIMIT 1
         """,
-        (category_id,),
+        (session_id,),
     ).fetchone()
 
 
@@ -262,14 +313,28 @@ def save_quiz_answer(
     return {"is_correct": is_correct, "already_answered": 0}
 
 
-def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
-    stats = conn.execute(
+def get_answered_questions_count(conn: sqlite3.Connection, session_id: int) -> int:
+    row = conn.execute(
         """
-        SELECT COALESCE(SUM(is_correct), 0) AS score, COUNT(*) AS total_questions
+        SELECT COUNT(*) AS answered_questions
         FROM quiz_answers
         WHERE session_id = ?
         """,
         (session_id,),
+    ).fetchone()
+    return int(row["answered_questions"]) if row else 0
+
+
+def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
+    stats = conn.execute(
+        """
+        SELECT
+            COALESCE(SUM(qa.is_correct), 0) AS score,
+            (SELECT COUNT(*) FROM quiz_session_questions WHERE session_id = ?) AS total_questions
+        FROM quiz_answers qa
+        WHERE qa.session_id = ?
+        """,
+        (session_id, session_id),
     ).fetchone()
 
     if stats is None:
@@ -301,3 +366,16 @@ def get_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row |
         "SELECT * FROM quiz_sessions WHERE id = ?",
         (session_id,),
     ).fetchone()
+
+
+def is_question_in_session(conn: sqlite3.Connection, session_id: int, question_id: int) -> bool:
+    row = conn.execute(
+        """
+        SELECT 1
+        FROM quiz_session_questions
+        WHERE session_id = ? AND question_id = ?
+        LIMIT 1
+        """,
+        (session_id, question_id),
+    ).fetchone()
+    return row is not None
