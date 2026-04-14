@@ -55,6 +55,18 @@ CREATE TABLE IF NOT EXISTS quiz_sessions (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
+CREATE TABLE IF NOT EXISTS quiz_session_questions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+    order_index INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (session_id, question_id),
+    UNIQUE (session_id, order_index),
+    FOREIGN KEY (session_id) REFERENCES quiz_sessions(id) ON DELETE CASCADE,
+    FOREIGN KEY (question_id) REFERENCES questions(id)
+);
+
 CREATE TABLE IF NOT EXISTS quiz_answers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     session_id INTEGER NOT NULL,
