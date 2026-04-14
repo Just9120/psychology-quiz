@@ -149,8 +149,6 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     if query is None or query.data is None:
         return
 
-    await query.answer()
-
     data = query.data
     if not data.startswith("ans:"):
         return
@@ -189,7 +187,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             last_name=tg_user.last_name,
         )
         if int(session["user_id"]) != int(user_row["id"]):
-            await query.edit_message_text("Эта сессия вам не принадлежит.")
+            await query.answer("Эта сессия вам не принадлежит.", show_alert=True)
             return
 
         answer = save_quiz_answer(conn, session_id, question_id, selected_option_index)
