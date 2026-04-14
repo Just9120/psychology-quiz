@@ -174,6 +174,13 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         if session is None or str(session["status"]) != "in_progress":
             await query.edit_message_text("Сессия уже завершена или не найдена.")
             return
+        tg_user = update.effective_user
+        if tg_user is None:
+            await query.edit_message_text("Не удалось определить пользователя.")
+            return
+        if int(session["user_id"]) != tg_user.id:
+            await query.answer("Эта сессия принадлежит другому пользователю.", show_alert=True)
+            return
 
         answer = save_quiz_answer(conn, session_id, question_id, selected_option_index)
 
