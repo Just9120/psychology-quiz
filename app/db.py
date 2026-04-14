@@ -115,6 +115,23 @@ def upsert_approved_questions(conn: sqlite3.Connection, questions: list[dict[str
                 (question_id, idx, str(option_text), 1 if idx == correct_option_index else 0),
             )
 
+        if options:
+            placeholders = ",".join("?" for _ in options)
+            params = [question_id, *range(len(options))]
+            conn.execute(
+                f"""
+                DELETE FROM question_options
+                WHERE question_id = ?
+                  AND option_index NOT IN ({placeholders})
+                """,
+                params,
+            )
+        else:
+            conn.execute(
+                "DELETE FROM question_options WHERE question_id = ?",
+                (question_id,),
+            )
+
         inserted_or_updated += 1
 
     return {
@@ -212,6 +229,18 @@ def save_quiz_answer(
     question_id: int,
     selected_option_index: int,
 ) -> dict[str, int]:
+    existing = conn.execute(
+        """
+        SELECT is_correct
+        FROM quiz_answers
+        WHERE session_id = ? AND question_id = ?
+        LIMIT 1
+        """,
+        (session_id, question_id),
+    ).fetchone()
+    if existing is not None:
+        return {"is_correct": int(existing["is_correct"]), "already_answered": 1}
+
     option_row = conn.execute(
         """
         SELECT is_correct
@@ -230,7 +259,7 @@ def save_quiz_answer(
         (session_id, question_id, selected_option_index, is_correct),
     )
 
-    return {"is_correct": is_correct}
+    return {"is_correct": is_correct, "already_answered": 0}
 
 
 def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:

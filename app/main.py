@@ -121,6 +121,8 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         options = get_question_options(conn, int(question["id"]))
 
     if not options:
+        with get_connection(settings.db_path) as conn:
+            conn.execute("DELETE FROM quiz_sessions WHERE id = ?", (session_id,))
         await query.edit_message_text("Для вопроса не найдены варианты ответа.")
         return
 
@@ -174,8 +176,26 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         if session is None or str(session["status"]) != "in_progress":
             await query.edit_message_text("Сессия уже завершена или не найдена.")
             return
+        tg_user = update.effective_user
+        if tg_user is None:
+            await query.edit_message_text("Не удалось определить пользователя.")
+            return
+
+        user_row = create_or_load_user(
+            conn,
+            telegram_user_id=tg_user.id,
+            username=tg_user.username,
+            first_name=tg_user.first_name,
+            last_name=tg_user.last_name,
+        )
+        if int(session["user_id"]) != int(user_row["id"]):
+            await query.edit_message_text("Эта сессия вам не принадлежит.")
+            return
 
         answer = save_quiz_answer(conn, session_id, question_id, selected_option_index)
+        if int(answer["already_answered"]) == 1:
+            await query.edit_message_text("На этот вопрос уже дан ответ.")
+            return
 
         question_row = conn.execute(
             "SELECT explanation FROM questions WHERE id = ?",
