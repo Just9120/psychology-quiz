@@ -1,0 +1,1 @@
+"""psychology-quiz application package."""
