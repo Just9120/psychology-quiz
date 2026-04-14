@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS quiz_answers (
     selected_option_index INTEGER,
     is_correct INTEGER NOT NULL DEFAULT 0,
     answered_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (session_id, question_id),
     FOREIGN KEY (session_id) REFERENCES quiz_sessions(id) ON DELETE CASCADE,
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
