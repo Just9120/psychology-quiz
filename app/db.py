@@ -207,7 +207,13 @@ def select_random_approved_question_ids_by_category(
         """
         SELECT q.id
         FROM questions q
-        WHERE q.category_id = ? AND q.status = 'approved'
+        WHERE q.category_id = ?
+          AND q.status = 'approved'
+          AND EXISTS (
+              SELECT 1
+              FROM question_options qo
+              WHERE qo.question_id = q.id
+          )
         ORDER BY RANDOM()
         LIMIT ?
         """,
