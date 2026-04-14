@@ -1,0 +1,10 @@
+services:
+  psych_quiz_bot:
+    build: .
+    container_name: psych_quiz_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+      - ./content:/app/content:ro
