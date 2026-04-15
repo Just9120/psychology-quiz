@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from html import escape
 import logging
 
 from telegram import (
@@ -219,8 +220,9 @@ async def send_current_question(query, settings, session_id: int) -> bool:
                 return False
 
             await query.edit_message_text(
-                "Викторина завершена\n"
-                f"Результат: {int(finalized['score'])} из {int(finalized['total_questions'])}"
+                "<b>Викторина завершена</b>\n"
+                f"<b>Результат:</b> {int(finalized['score'])} из {int(finalized['total_questions'])}",
+                parse_mode="HTML",
             )
             return False
 
@@ -243,7 +245,8 @@ async def send_current_question(query, settings, session_id: int) -> bool:
         await query.edit_message_text(
             "Для текущего вопроса не найдены варианты ответа.\n"
             "Сессия завершена досрочно.\n"
-            f"Результат: {finalize_payload['score']} из {finalize_payload['total_questions']}"
+            f"<b>Результат:</b> {finalize_payload['score']} из {finalize_payload['total_questions']}",
+            parse_mode="HTML",
         )
         return False
 
@@ -259,9 +262,11 @@ async def send_current_question(query, settings, session_id: int) -> bool:
             ]
         )
 
+    question_text = escape(str(current["question_text"]))
     await query.edit_message_text(
-        f"Вопрос {order_index} из {total_questions}\n\n{current['question_text']}",
+        f"<b>Вопрос {order_index} из {total_questions}</b>\n\n{question_text}",
         reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode="HTML",
     )
     return True
 
@@ -541,8 +546,9 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 await query.edit_message_text("Не удалось завершить сессию.")
                 return
             await query.edit_message_text(
-                "Викторина завершена\n"
-                f"Результат: {int(finalized['score'])} из {int(finalized['total_questions'])}"
+                "<b>Викторина завершена</b>\n"
+                f"<b>Результат:</b> {int(finalized['score'])} из {int(finalized['total_questions'])}",
+                parse_mode="HTML",
             )
             return
 
@@ -567,28 +573,29 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 return
 
     is_correct = int(answer["is_correct"]) == 1
-    result_line = "Верно ✅" if is_correct else "Неверно ❌"
+    result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
+    escaped_explanation = escape(explanation)
 
     if is_last_question:
         message = (
             f"{result_line}\n\n"
-            f"Пояснение: {explanation}\n\n"
-            "Викторина завершена\n"
-            f"Результат: {int(finalized['score'])} из {int(finalized['total_questions'])}"
+            f"<b>Пояснение:</b> {escaped_explanation}\n\n"
+            "<b>Викторина завершена</b>\n"
+            f"<b>Результат:</b> {int(finalized['score'])} из {int(finalized['total_questions'])}"
         )
-        await query.edit_message_text(message)
+        await query.edit_message_text(message, parse_mode="HTML")
         return
 
     next_number = answered_questions + 1
     message = (
         f"{result_line}\n\n"
-        f"Пояснение: {explanation}\n\n"
-        f"Вопрос {next_number} из {total_questions}"
+        f"<b>Пояснение:</b> {escaped_explanation}\n\n"
+        f"<b>Вопрос {next_number} из {total_questions}</b>"
     )
     markup = InlineKeyboardMarkup(
         [[InlineKeyboardButton("Дальше", callback_data=f"next:{session_id}")]]
     )
-    await query.edit_message_text(message, reply_markup=markup)
+    await query.edit_message_text(message, reply_markup=markup, parse_mode="HTML")
 
 
 async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -622,8 +629,9 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             return
         if str(session["status"]) == "finished":
             await query.edit_message_text(
-                "Викторина завершена\n"
-                f"Результат: {int(session['score'])} из {int(session['total_questions'])}"
+                "<b>Викторина завершена</b>\n"
+                f"<b>Результат:</b> {int(session['score'])} из {int(session['total_questions'])}",
+                parse_mode="HTML",
             )
             return
 
