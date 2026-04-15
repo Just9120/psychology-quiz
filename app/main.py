@@ -2,12 +2,21 @@ from __future__ import annotations
 
 import logging
 
-from telegram import BotCommand, InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import (
+    BotCommand,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    KeyboardButton,
+    ReplyKeyboardMarkup,
+    Update,
+)
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
     CommandHandler,
     ContextTypes,
+    MessageHandler,
+    filters,
 )
 
 from app.config import load_settings
@@ -62,12 +71,36 @@ async def safe_reply(update: Update, text: str) -> None:
         await update.message.reply_text(text)
 
 
+def is_private_chat(update: Update) -> bool:
+    return bool(update.effective_chat and update.effective_chat.type == "private")
+
+
+def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton("🎯 Начать викторину")],
+            [KeyboardButton("ℹ️ Помощь")],
+        ],
+        resize_keyboard=True,
+        is_persistent=True,
+    )
+
+
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    await safe_reply(
-        update,
-        "Привет! Я учебный бот-викторина по психологии. Используйте /help для списка команд.",
-    )
+    if update.message:
+        await update.message.reply_text(
+            "Привет! Я учебный бот-викторина по психологии. Используйте /help для списка команд.",
+            reply_markup=get_main_menu_keyboard() if is_private_chat(update) else None,
+        )
+
+
+async def start_quiz_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await quiz_command(update, context)
+
+
+async def help_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await help_command(update, context)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -495,6 +528,18 @@ def main() -> None:
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.Regex(r"^🎯 Начать викторину$"),
+            start_quiz_button_handler,
+        )
+    )
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.Regex(r"^ℹ️ Помощь$"),
+            help_button_handler,
+        )
+    )
     application.add_handler(CallbackQueryHandler(category_callback, pattern=r"^cat:\d+$"))
     application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all)$"))
     application.add_handler(
