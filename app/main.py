@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import BotCommand, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
@@ -30,6 +30,17 @@ from app.db import (
 
 
 logger = logging.getLogger(__name__)
+
+
+async def post_init(application: Application) -> None:
+    await application.bot.set_my_commands(
+        [
+            BotCommand("start", "Запуск бота"),
+            BotCommand("help", "Список команд"),
+            BotCommand("ping", "Проверка доступности"),
+            BotCommand("quiz", "Начать викторину"),
+        ]
+    )
 
 
 async def safe_reply(update: Update, text: str) -> None:
@@ -361,7 +372,7 @@ def main() -> None:
     init_db_connection(settings.db_path)
     logger.info("Подключение к SQLite успешно")
 
-    application = Application.builder().token(settings.bot_token).build()
+    application = Application.builder().token(settings.bot_token).post_init(post_init).build()
     application.bot_data["settings"] = settings
 
     application.add_handler(CommandHandler("start", start_command))
