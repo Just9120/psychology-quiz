@@ -201,18 +201,27 @@ def start_quiz_session(conn: sqlite3.Connection, user_id: int, category_id: int)
 def select_random_approved_question_ids_by_category(
     conn: sqlite3.Connection,
     category_id: int,
-    limit: int = SESSION_QUESTION_LIMIT,
+    limit: int | None = SESSION_QUESTION_LIMIT,
+    difficulty_mode: str | None = None,
 ) -> list[int]:
-    rows = conn.execute(
-        """
+    params: list[Any] = [category_id]
+    where_clause = "q.category_id = ? AND q.status = 'approved'"
+    if difficulty_mode:
+        where_clause += " AND q.difficulty = ?"
+        params.append(difficulty_mode)
+
+    query = f"""
         SELECT q.id
         FROM questions q
-        WHERE q.category_id = ? AND q.status = 'approved'
+        WHERE {where_clause}
         ORDER BY RANDOM()
-        LIMIT ?
-        """,
-        (category_id, limit),
-    ).fetchall()
+    """
+
+    if limit is not None:
+        query += "\nLIMIT ?"
+        params.append(limit)
+
+    rows = conn.execute(query, params).fetchall()
     return [int(row["id"]) for row in rows]
 
 
