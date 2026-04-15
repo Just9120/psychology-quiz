@@ -114,6 +114,18 @@ def build_quiz_finished_text(score: int, total_questions: int) -> str:
     return "<b>Викторина завершена</b>\n" f"<b>Результат:</b> {score} из {total_questions}"
 
 
+def build_question_text_with_options(order_index: int, total_questions: int, question_text: str, options) -> str:
+    formatted_options = "\n".join(
+        f"{int(opt['option_index'])}. {escape(str(opt['option_text']))}"
+        for opt in options
+    )
+    return (
+        f"<b>Вопрос {order_index} из {total_questions}</b>\n\n"
+        f"{escape(question_text)}\n\n"
+        f"{formatted_options}"
+    )
+
+
 async def post_init(application: Application) -> None:
     await application.bot.set_my_commands(
         [
@@ -281,15 +293,19 @@ async def send_current_question(query, settings, session_id: int) -> bool:
         keyboard.append(
             [
                 InlineKeyboardButton(
-                    str(opt["option_text"]),
+                    str(option_index),
                     callback_data=f"ans:{session_id}:{question_id}:{option_index}",
                 )
             ]
         )
 
-    question_text = escape(str(current["question_text"]))
     await query.edit_message_text(
-        f"<b>Вопрос {order_index} из {total_questions}</b>\n\n{question_text}",
+        build_question_text_with_options(
+            order_index=order_index,
+            total_questions=total_questions,
+            question_text=str(current["question_text"]),
+            options=options,
+        ),
         reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode="HTML",
     )
