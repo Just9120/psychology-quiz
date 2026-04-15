@@ -116,7 +116,7 @@ def build_quiz_finished_text(score: int, total_questions: int) -> str:
 
 def build_question_text_with_options(order_index: int, total_questions: int, question_text: str, options) -> str:
     formatted_options = "\n".join(
-        f"{int(opt['option_index'])}. {escape(str(opt['option_text']))}"
+        f"{int(opt['option_index']) + 1}. {escape(str(opt['option_text']))}"
         for opt in options
     )
     return (
@@ -290,10 +290,11 @@ async def send_current_question(query, settings, session_id: int) -> bool:
     keyboard = []
     for opt in options:
         option_index = int(opt["option_index"])
+        display_number = option_index + 1
         keyboard.append(
             [
                 InlineKeyboardButton(
-                    str(option_index),
+                    str(display_number),
                     callback_data=f"ans:{session_id}:{question_id}:{option_index}",
                 )
             ]
