@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 
-SESSION_QUESTION_LIMIT = 5
+SESSION_QUESTION_LIMIT = 10
 
 
 def get_connection(db_path: str) -> sqlite3.Connection:
@@ -302,13 +302,27 @@ def save_quiz_answer(
     ).fetchone()
     is_correct = int(option_row["is_correct"]) if option_row else 0
 
-    conn.execute(
-        """
-        INSERT INTO quiz_answers (session_id, question_id, selected_option_index, is_correct)
-        VALUES (?, ?, ?, ?)
-        """,
-        (session_id, question_id, selected_option_index, is_correct),
-    )
+    try:
+        conn.execute(
+            """
+            INSERT INTO quiz_answers (session_id, question_id, selected_option_index, is_correct)
+            VALUES (?, ?, ?, ?)
+            """,
+            (session_id, question_id, selected_option_index, is_correct),
+        )
+    except sqlite3.IntegrityError:
+        existing = conn.execute(
+            """
+            SELECT is_correct
+            FROM quiz_answers
+            WHERE session_id = ? AND question_id = ?
+            LIMIT 1
+            """,
+            (session_id, question_id),
+        ).fetchone()
+        if existing is not None:
+            return {"is_correct": int(existing["is_correct"]), "already_answered": 1}
+        raise
 
     return {"is_correct": is_correct, "already_answered": 0}
 

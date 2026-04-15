@@ -83,6 +83,7 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 
 async def send_current_question(query, settings, session_id: int) -> bool:
+    finalize_payload = None
     with get_connection(settings.db_path) as conn:
         current = get_current_unanswered_question(conn, session_id)
         if current is None:
@@ -101,9 +102,23 @@ async def send_current_question(query, settings, session_id: int) -> bool:
         order_index = int(current["order_index"])
         total_questions = int(current["total_questions"])
         options = get_question_options(conn, question_id)
+        if not options:
+            finalized = finalize_quiz_session(conn, session_id)
+            if finalized is not None:
+                finalize_payload = {
+                    "score": int(finalized["score"]),
+                    "total_questions": int(finalized["total_questions"]),
+                }
 
     if not options:
-        await query.edit_message_text("Для вопроса не найдены варианты ответа.")
+        if finalize_payload is None:
+            await query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена.")
+            return False
+        await query.edit_message_text(
+            "Для текущего вопроса не найдены варианты ответа.\n"
+            "Сессия завершена досрочно.\n"
+            f"Результат: {finalize_payload['score']} из {finalize_payload['total_questions']}"
+        )
         return False
 
     keyboard = []
