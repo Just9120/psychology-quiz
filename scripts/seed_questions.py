@@ -21,29 +21,31 @@ def resolve_db_path() -> str:
     return os.getenv("DB_PATH", "/data/quiz.sqlite3").strip() or "/data/quiz.sqlite3"
 
 
-def validate_question(item: dict[str, Any], index: int) -> tuple[bool, str | None]:
+def validate_question(item: dict[str, Any], index: int, source_name: str) -> tuple[bool, str | None]:
     required = ["id", "category", "question", "options", "correct_option_index", "status"]
     for field in required:
         if field not in item:
-            return False, f"Элемент #{index}: отсутствует обязательное поле '{field}'"
+            return False, f"{source_name} элемент #{index}: отсутствует обязательное поле '{field}'"
 
     if not isinstance(item["options"], list) or len(item["options"]) < 2:
-        return False, f"Элемент #{index}: поле 'options' должно содержать минимум 2 варианта"
+        return False, (
+            f"{source_name} элемент #{index}: поле 'options' должно содержать минимум 2 варианта"
+        )
 
     correct_option_index = item["correct_option_index"]
     if not isinstance(correct_option_index, int):
-        return False, f"Элемент #{index}: 'correct_option_index' должен быть целым числом"
+        return False, f"{source_name} элемент #{index}: 'correct_option_index' должен быть целым числом"
 
     if correct_option_index < 0 or correct_option_index >= len(item["options"]):
         return (
             False,
-            f"Элемент #{index}: 'correct_option_index' выходит за границы массива 'options'",
+            f"{source_name} элемент #{index}: 'correct_option_index' выходит за границы массива 'options'",
         )
 
     return True, None
 
 
-def load_questions(file_path: Path) -> list[dict[str, Any]]:
+def load_questions_from_file(file_path: Path) -> list[dict[str, Any]]:
     raw = json.loads(file_path.read_text(encoding="utf-8"))
     if not isinstance(raw, list):
         raise ValueError("JSON должен содержать массив вопросов")
@@ -53,10 +55,10 @@ def load_questions(file_path: Path) -> list[dict[str, Any]]:
 
     for idx, item in enumerate(raw, start=1):
         if not isinstance(item, dict):
-            errors.append(f"Элемент #{idx}: должен быть объектом")
+            errors.append(f"{file_path.name} элемент #{idx}: должен быть объектом")
             continue
 
-        ok, error = validate_question(item, idx)
+        ok, error = validate_question(item, idx, file_path.name)
         if not ok and error:
             errors.append(error)
             continue
@@ -70,13 +72,24 @@ def load_questions(file_path: Path) -> list[dict[str, Any]]:
     return valid_items
 
 
+def load_questions_from_folder(folder_path: Path) -> tuple[list[dict[str, Any]], int]:
+    if not folder_path.exists() or not folder_path.is_dir():
+        raise FileNotFoundError(f"Не найдена директория с вопросами: {folder_path}")
+
+    json_files = sorted(folder_path.glob("*.json"), key=lambda p: p.name)
+    if not json_files:
+        raise FileNotFoundError(f"В директории нет JSON-файлов с вопросами: {folder_path}")
+
+    all_questions: list[dict[str, Any]] = []
+    for file_path in json_files:
+        all_questions.extend(load_questions_from_file(file_path))
+
+    return all_questions, len(json_files)
+
+
 def main() -> int:
     repo_root = Path(__file__).resolve().parent.parent
-    input_file = repo_root / "content" / "questions" / "module1.json"
-
-    if not input_file.exists():
-        print(f"[ERROR] Не найден файл с вопросами: {input_file}")
-        return 1
+    questions_dir = repo_root / "content" / "questions" / "module1"
 
     db_path = Path(resolve_db_path())
     if not db_path.exists():
@@ -85,10 +98,12 @@ def main() -> int:
         return 1
 
     try:
-        questions = load_questions(input_file)
-    except (OSError, ValueError, json.JSONDecodeError) as exc:
-        print(f"[ERROR] Ошибка загрузки JSON: {exc}")
+        questions, processed_files = load_questions_from_folder(questions_dir)
+    except (FileNotFoundError, OSError, ValueError, json.JSONDecodeError) as exc:
+        print(f"[ERROR] Ошибка загрузки вопросов: {exc}")
         return 1
+
+    approved_total = sum(1 for question in questions if question.get("status") == "approved")
 
     try:
         with sqlite3.connect(db_path) as conn:
@@ -99,8 +114,8 @@ def main() -> int:
         print(f"[ERROR] Ошибка SQLite при загрузке вопросов: {exc}")
         return 1
 
-    print(f"[OK] Файл обработан: {input_file}")
-    print(f"[OK] Одобренных вопросов найдено: {stats['approved_questions']}")
+    print(f"[OK] Файлов обработано: {processed_files}")
+    print(f"[OK] Одобренных вопросов найдено: {approved_total}")
     print(f"[OK] Категорий создано/обновлено: {stats['categories']}")
     print(f"[OK] Вопросов создано/обновлено: {stats['upserted_questions']}")
     print("[OK] Загрузка вопросов в БД завершена успешно")
