@@ -31,6 +31,20 @@ from app.db import (
 
 logger = logging.getLogger(__name__)
 
+QUESTION_COUNT_CHOICES = (
+    (5, "5"),
+    (10, "10"),
+    (15, "15"),
+    (None, "Все доступные"),
+)
+
+DIFFICULTY_CHOICES = (
+    ("any", "Любые"),
+    ("easy", "Только easy"),
+    ("medium", "Только medium"),
+    ("hard", "Только hard"),
+)
+
 
 async def post_init(application: Application) -> None:
     await application.bot.set_my_commands(
@@ -162,14 +176,110 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     if not data.startswith("cat:"):
         return
 
-    settings = context.application.bot_data["settings"]
-
     try:
         category_id = int(data.split(":", 1)[1])
     except ValueError:
         await query.edit_message_text("Некорректный выбор категории.")
         return
 
+    keyboard = []
+    for count, label in QUESTION_COUNT_CHOICES:
+        count_value = "all" if count is None else str(count)
+        keyboard.append(
+            [InlineKeyboardButton(label, callback_data=f"qcnt:{category_id}:{count_value}")]
+        )
+
+    await query.edit_message_text(
+        "Выберите количество вопросов:",
+        reply_markup=InlineKeyboardMarkup(keyboard),
+    )
+
+
+async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+
+    data = query.data
+    if not data.startswith("qcnt:"):
+        return
+
+    parts = data.split(":")
+    if len(parts) != 3:
+        await query.edit_message_text("Некорректный выбор количества вопросов.")
+        return
+
+    _, category_raw, count_raw = parts
+    try:
+        category_id = int(category_raw)
+    except ValueError:
+        await query.edit_message_text("Некорректная категория.")
+        return
+
+    if count_raw != "all":
+        try:
+            int(count_raw)
+        except ValueError:
+            await query.edit_message_text("Некорректное количество вопросов.")
+            return
+
+    keyboard = []
+    for mode, label in DIFFICULTY_CHOICES:
+        keyboard.append(
+            [
+                InlineKeyboardButton(
+                    label,
+                    callback_data=f"qmode:{category_id}:{count_raw}:{mode}",
+                )
+            ]
+        )
+
+    await query.edit_message_text(
+        "Выберите режим сложности:",
+        reply_markup=InlineKeyboardMarkup(keyboard),
+    )
+
+
+async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+
+    data = query.data
+    if not data.startswith("qmode:"):
+        return
+
+    parts = data.split(":")
+    if len(parts) != 4:
+        await query.edit_message_text("Некорректный выбор режима.")
+        return
+
+    _, category_raw, count_raw, mode = parts
+    try:
+        category_id = int(category_raw)
+    except ValueError:
+        await query.edit_message_text("Некорректная категория.")
+        return
+
+    if mode not in {"any", "easy", "medium", "hard"}:
+        await query.edit_message_text("Некорректный режим сложности.")
+        return
+
+    selected_limit: int | None
+    if count_raw == "all":
+        selected_limit = None
+    else:
+        try:
+            selected_limit = int(count_raw)
+        except ValueError:
+            await query.edit_message_text("Некорректное количество вопросов.")
+            return
+
+    settings = context.application.bot_data["settings"]
     tg_user = update.effective_user
     if tg_user is None:
         await query.edit_message_text("Не удалось определить пользователя.")
@@ -184,7 +294,13 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             last_name=tg_user.last_name,
         )
 
-        question_ids = select_random_approved_question_ids_by_category(conn, category_id)
+        difficulty_filter = None if mode == "any" else mode
+        question_ids = select_random_approved_question_ids_by_category(
+            conn,
+            category_id=category_id,
+            limit=selected_limit,
+            difficulty_mode=difficulty_filter,
+        )
         if not question_ids:
             await query.edit_message_text("В этой категории пока нет одобренных вопросов.")
             return
@@ -380,6 +496,13 @@ def main() -> None:
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
     application.add_handler(CallbackQueryHandler(category_callback, pattern=r"^cat:\d+$"))
+    application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all)$"))
+    application.add_handler(
+        CallbackQueryHandler(
+            difficulty_mode_callback,
+            pattern=r"^qmode:\d+:(5|10|15|all):(any|easy|medium|hard)$",
+        )
+    )
     application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))
     application.add_handler(CallbackQueryHandler(next_callback, pattern=r"^next:\d+$"))
 
