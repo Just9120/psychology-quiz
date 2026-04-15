@@ -56,6 +56,14 @@ DIFFICULTY_CHOICES = (
     ("hard", "Только hard"),
 )
 
+HELP_TEXT = (
+    "Доступные команды:\n"
+    "/start — приветствие\n"
+    "/help — список команд\n"
+    "/ping — проверка доступности\n"
+    "/quiz — запустить викторину"
+)
+
 
 def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
     keyboard = []
@@ -90,6 +98,20 @@ def build_category_keyboard(categories) -> InlineKeyboardMarkup:
         for row in categories
     ]
     return InlineKeyboardMarkup(keyboard)
+
+
+def build_post_quiz_keyboard(session_id: int) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("🔁 Пройти еще раз", callback_data=f"postquiz:repeat:{session_id}")],
+            [InlineKeyboardButton("🎯 Новая викторина", callback_data="postquiz:new")],
+            [InlineKeyboardButton("ℹ️ Помощь", callback_data="postquiz:help")],
+        ]
+    )
+
+
+def build_quiz_finished_text(score: int, total_questions: int) -> str:
+    return "<b>Викторина завершена</b>\n" f"<b>Результат:</b> {score} из {total_questions}"
 
 
 async def post_init(application: Application) -> None:
@@ -142,14 +164,7 @@ async def help_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    await safe_reply(
-        update,
-        "Доступные команды:\n"
-        "/start — приветствие\n"
-        "/help — список команд\n"
-        "/ping — проверка доступности\n"
-        "/quiz — запустить викторину",
-    )
+    await safe_reply(update, HELP_TEXT)
 
 
 async def ping_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -177,6 +192,14 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
                 ]
             ),
         )
+
+
+async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int) -> None:
+    await query.edit_message_text(
+        build_quiz_finished_text(score, total_questions),
+        reply_markup=build_post_quiz_keyboard(session_id),
+        parse_mode="HTML",
+    )
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -219,10 +242,11 @@ async def send_current_question(query, settings, session_id: int) -> bool:
                 await query.edit_message_text("Не удалось завершить сессию.")
                 return False
 
-            await query.edit_message_text(
-                "<b>Викторина завершена</b>\n"
-                f"<b>Результат:</b> {int(finalized['score'])} из {int(finalized['total_questions'])}",
-                parse_mode="HTML",
+            await show_finished_quiz_message(
+                query,
+                session_id=session_id,
+                score=int(finalized["score"]),
+                total_questions=int(finalized["total_questions"]),
             )
             return False
 
@@ -245,7 +269,8 @@ async def send_current_question(query, settings, session_id: int) -> bool:
         await query.edit_message_text(
             "Для текущего вопроса не найдены варианты ответа.\n"
             "Сессия завершена досрочно.\n"
-            f"<b>Результат:</b> {finalize_payload['score']} из {finalize_payload['total_questions']}",
+            f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}",
+            reply_markup=build_post_quiz_keyboard(session_id),
             parse_mode="HTML",
         )
         return False
@@ -269,6 +294,53 @@ async def send_current_question(query, settings, session_id: int) -> bool:
         parse_mode="HTML",
     )
     return True
+
+
+async def restart_quiz_from_finished_session(query, settings, tg_user, session_id: int) -> None:
+    with get_connection(settings.db_path) as conn:
+        session = get_quiz_session(conn, session_id)
+        if session is None:
+            await query.edit_message_text("Сессия не найдена.")
+            return
+        if str(session["status"]) != "finished":
+            await query.edit_message_text("Эту сессию пока нельзя повторить.")
+            return
+
+        user_row = create_or_load_user(
+            conn,
+            telegram_user_id=tg_user.id,
+            username=tg_user.username,
+            first_name=tg_user.first_name,
+            last_name=tg_user.last_name,
+        )
+        if int(session["user_id"]) != int(user_row["id"]):
+            await query.edit_message_text("Эта сессия вам не принадлежит.")
+            return
+
+        category_id = session["category_id"]
+        question_limit = int(session["total_questions"])
+        if category_id is None:
+            question_ids = select_random_approved_question_ids_across_active_categories(
+                conn,
+                limit=question_limit,
+                difficulty_mode=None,
+            )
+        else:
+            question_ids = select_random_approved_question_ids_by_category(
+                conn,
+                category_id=int(category_id),
+                limit=question_limit,
+                difficulty_mode=None,
+            )
+
+        if not question_ids:
+            await query.edit_message_text("Не удалось подобрать вопросы для повторной попытки.")
+            return
+
+        new_session_id = start_quiz_session(conn, int(user_row["id"]), category_id)
+        store_session_questions(conn, new_session_id, question_ids)
+
+    await send_current_question(query, settings, new_session_id)
 
 
 async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -545,10 +617,11 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             if finalized is None:
                 await query.edit_message_text("Не удалось завершить сессию.")
                 return
-            await query.edit_message_text(
-                "<b>Викторина завершена</b>\n"
-                f"<b>Результат:</b> {int(finalized['score'])} из {int(finalized['total_questions'])}",
-                parse_mode="HTML",
+            await show_finished_quiz_message(
+                query,
+                session_id=session_id,
+                score=int(finalized["score"]),
+                total_questions=int(finalized["total_questions"]),
             )
             return
 
@@ -580,10 +653,13 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         message = (
             f"{result_line}\n\n"
             f"<b>Пояснение:</b> {escaped_explanation}\n\n"
-            "<b>Викторина завершена</b>\n"
-            f"<b>Результат:</b> {int(finalized['score'])} из {int(finalized['total_questions'])}"
+            f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}"
         )
-        await query.edit_message_text(message, parse_mode="HTML")
+        await query.edit_message_text(
+            message,
+            reply_markup=build_post_quiz_keyboard(session_id),
+            parse_mode="HTML",
+        )
         return
 
     next_number = answered_questions + 1
@@ -628,10 +704,11 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             await query.edit_message_text("Сессия не найдена.")
             return
         if str(session["status"]) == "finished":
-            await query.edit_message_text(
-                "<b>Викторина завершена</b>\n"
-                f"<b>Результат:</b> {int(session['score'])} из {int(session['total_questions'])}",
-                parse_mode="HTML",
+            await show_finished_quiz_message(
+                query,
+                session_id=session_id,
+                score=int(session["score"]),
+                total_questions=int(session["total_questions"]),
             )
             return
 
@@ -647,6 +724,48 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             return
 
     await send_current_question(query, settings, session_id)
+
+
+async def post_quiz_action_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+    data = query.data
+
+    if data == "postquiz:new":
+        await query.edit_message_text(
+            "Выберите режим викторины:",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton("Одна тема", callback_data="qzmode:single")],
+                    [InlineKeyboardButton("🎲 Микс тем", callback_data="qzmode:mix")],
+                ]
+            ),
+        )
+        return
+
+    if data == "postquiz:help":
+        await query.edit_message_text(HELP_TEXT)
+        return
+
+    if not data.startswith("postquiz:repeat:"):
+        return
+
+    try:
+        session_id = int(data.split(":")[-1])
+    except ValueError:
+        await query.edit_message_text("Некорректная сессия для повтора.")
+        return
+
+    tg_user = update.effective_user
+    if tg_user is None:
+        await query.edit_message_text("Не удалось определить пользователя.")
+        return
+
+    settings = context.application.bot_data["settings"]
+    await restart_quiz_from_finished_session(query, settings, tg_user, session_id)
 
 
 def configure_logging(log_level: str) -> None:
@@ -705,6 +824,12 @@ def main() -> None:
     )
     application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))
     application.add_handler(CallbackQueryHandler(next_callback, pattern=r"^next:\d+$"))
+    application.add_handler(
+        CallbackQueryHandler(
+            post_quiz_action_callback,
+            pattern=r"^postquiz:(new|help|repeat:\d+)$",
+        )
+    )
 
     logger.info("Бот запущен (long polling)")
     application.run_polling()
