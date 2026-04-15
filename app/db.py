@@ -187,7 +187,7 @@ def create_or_load_user(
     return row
 
 
-def start_quiz_session(conn: sqlite3.Connection, user_id: int, category_id: int) -> int:
+def start_quiz_session(conn: sqlite3.Connection, user_id: int, category_id: int | None) -> int:
     cursor = conn.execute(
         """
         INSERT INTO quiz_sessions (user_id, category_id, status)
@@ -214,6 +214,39 @@ def select_random_approved_question_ids_by_category(
         SELECT q.id
         FROM questions q
         WHERE {where_clause}
+        ORDER BY RANDOM()
+    """
+
+    if limit is not None:
+        query += "\nLIMIT ?"
+        params.append(limit)
+
+    rows = conn.execute(query, params).fetchall()
+    return [int(row["id"]) for row in rows]
+
+
+def select_random_approved_question_ids_across_active_categories(
+    conn: sqlite3.Connection,
+    limit: int | None = SESSION_QUESTION_LIMIT,
+    difficulty_mode: str | None = None,
+) -> list[int]:
+    params: list[Any] = []
+    where_clause = "q.status = 'approved'"
+    if difficulty_mode:
+        where_clause += " AND q.difficulty = ?"
+        params.append(difficulty_mode)
+
+    query = f"""
+        SELECT q.id
+        FROM questions q
+        INNER JOIN categories c ON c.id = q.category_id
+        WHERE {where_clause}
+          AND EXISTS (
+              SELECT 1
+              FROM questions q2
+              WHERE q2.category_id = c.id
+                AND q2.status = 'approved'
+          )
         ORDER BY RANDOM()
     """
 

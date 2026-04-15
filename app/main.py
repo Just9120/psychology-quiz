@@ -32,6 +32,7 @@ from app.db import (
     init_db_connection,
     is_question_in_session,
     save_quiz_answer,
+    select_random_approved_question_ids_across_active_categories,
     select_random_approved_question_ids_by_category,
     start_quiz_session,
     store_session_questions,
@@ -53,6 +54,41 @@ DIFFICULTY_CHOICES = (
     ("medium", "Только medium"),
     ("hard", "Только hard"),
 )
+
+
+def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
+    keyboard = []
+    for count, label in QUESTION_COUNT_CHOICES:
+        count_value = "all" if count is None else str(count)
+        if category_id is None:
+            callback_data = f"{callback_prefix}:{count_value}"
+        else:
+            callback_data = f"{callback_prefix}:{category_id}:{count_value}"
+        keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
+    return InlineKeyboardMarkup(keyboard)
+
+
+def build_difficulty_keyboard(
+    callback_prefix: str,
+    category_id: int | None = None,
+    count_raw: str | None = None,
+) -> InlineKeyboardMarkup:
+    keyboard = []
+    for mode, label in DIFFICULTY_CHOICES:
+        if category_id is None:
+            callback_data = f"{callback_prefix}:{count_raw}:{mode}"
+        else:
+            callback_data = f"{callback_prefix}:{category_id}:{count_raw}:{mode}"
+        keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
+    return InlineKeyboardMarkup(keyboard)
+
+
+def build_category_keyboard(categories) -> InlineKeyboardMarkup:
+    keyboard = [
+        [InlineKeyboardButton(str(row["name"]), callback_data=f"cat:{int(row['id'])}")]
+        for row in categories
+    ]
+    return InlineKeyboardMarkup(keyboard)
 
 
 async def post_init(application: Application) -> None:
@@ -130,14 +166,46 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         await safe_reply(update, "Нет доступных категорий. Сначала загрузите вопросы в базу данных.")
         return
 
-    keyboard = [
-        [InlineKeyboardButton(str(row["name"]), callback_data=f"cat:{int(row['id'])}")]
-        for row in categories
-    ]
-    markup = InlineKeyboardMarkup(keyboard)
-
     if update.message:
-        await update.message.reply_text("Выберите категорию:", reply_markup=markup)
+        await update.message.reply_text(
+            "Выберите режим викторины:",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton("Одна тема", callback_data="qzmode:single")],
+                    [InlineKeyboardButton("🎲 Микс тем", callback_data="qzmode:mix")],
+                ]
+            ),
+        )
+
+
+async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+
+    data = query.data
+    if data == "qzmode:single":
+        settings = context.application.bot_data["settings"]
+        with get_connection(settings.db_path) as conn:
+            categories = get_active_categories(conn)
+        if not categories:
+            await query.edit_message_text(
+                "Нет доступных категорий. Сначала загрузите вопросы в базу данных."
+            )
+            return
+        await query.edit_message_text(
+            "Выберите категорию:",
+            reply_markup=build_category_keyboard(categories),
+        )
+        return
+
+    if data == "qzmode:mix":
+        await query.edit_message_text(
+            "Выберите количество вопросов:",
+            reply_markup=build_question_count_keyboard("qcntmix"),
+        )
 
 
 async def send_current_question(query, settings, session_id: int) -> bool:
@@ -215,16 +283,9 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         await query.edit_message_text("Некорректный выбор категории.")
         return
 
-    keyboard = []
-    for count, label in QUESTION_COUNT_CHOICES:
-        count_value = "all" if count is None else str(count)
-        keyboard.append(
-            [InlineKeyboardButton(label, callback_data=f"qcnt:{category_id}:{count_value}")]
-        )
-
     await query.edit_message_text(
         "Выберите количество вопросов:",
-        reply_markup=InlineKeyboardMarkup(keyboard),
+        reply_markup=build_question_count_keyboard("qcnt", category_id),
     )
 
 
@@ -258,20 +319,9 @@ async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_
             await query.edit_message_text("Некорректное количество вопросов.")
             return
 
-    keyboard = []
-    for mode, label in DIFFICULTY_CHOICES:
-        keyboard.append(
-            [
-                InlineKeyboardButton(
-                    label,
-                    callback_data=f"qmode:{category_id}:{count_raw}:{mode}",
-                )
-            ]
-        )
-
     await query.edit_message_text(
         "Выберите режим сложности:",
-        reply_markup=InlineKeyboardMarkup(keyboard),
+        reply_markup=build_difficulty_keyboard("qmode", category_id, count_raw),
     )
 
 
@@ -339,6 +389,93 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
             return
 
         session_id = start_quiz_session(conn, int(user_row["id"]), category_id)
+        store_session_questions(conn, session_id, question_ids)
+
+    await send_current_question(query, settings, session_id)
+
+
+async def question_count_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+
+    data = query.data
+    if not data.startswith("qcntmix:"):
+        return
+
+    _, count_raw = data.split(":", 1)
+    if count_raw != "all":
+        try:
+            int(count_raw)
+        except ValueError:
+            await query.edit_message_text("Некорректное количество вопросов.")
+            return
+
+    await query.edit_message_text(
+        "Выберите режим сложности:",
+        reply_markup=build_difficulty_keyboard("qmodemix", count_raw=count_raw),
+    )
+
+
+async def difficulty_mode_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+
+    data = query.data
+    if not data.startswith("qmodemix:"):
+        return
+
+    parts = data.split(":")
+    if len(parts) != 3:
+        await query.edit_message_text("Некорректный выбор режима.")
+        return
+
+    _, count_raw, mode = parts
+    if mode not in {"any", "easy", "medium", "hard"}:
+        await query.edit_message_text("Некорректный режим сложности.")
+        return
+
+    selected_limit: int | None
+    if count_raw == "all":
+        selected_limit = None
+    else:
+        try:
+            selected_limit = int(count_raw)
+        except ValueError:
+            await query.edit_message_text("Некорректное количество вопросов.")
+            return
+
+    settings = context.application.bot_data["settings"]
+    tg_user = update.effective_user
+    if tg_user is None:
+        await query.edit_message_text("Не удалось определить пользователя.")
+        return
+
+    with get_connection(settings.db_path) as conn:
+        user_row = create_or_load_user(
+            conn,
+            telegram_user_id=tg_user.id,
+            username=tg_user.username,
+            first_name=tg_user.first_name,
+            last_name=tg_user.last_name,
+        )
+
+        difficulty_filter = None if mode == "any" else mode
+        question_ids = select_random_approved_question_ids_across_active_categories(
+            conn,
+            limit=selected_limit,
+            difficulty_mode=difficulty_filter,
+        )
+        if not question_ids:
+            await query.edit_message_text("Пока нет одобренных вопросов в активных темах.")
+            return
+
+        session_id = start_quiz_session(conn, int(user_row["id"]), None)
         store_session_questions(conn, session_id, question_ids)
 
     await send_current_question(query, settings, session_id)
@@ -540,12 +677,22 @@ def main() -> None:
             help_button_handler,
         )
     )
+    application.add_handler(CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|mix)$"))
     application.add_handler(CallbackQueryHandler(category_callback, pattern=r"^cat:\d+$"))
     application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all)$"))
     application.add_handler(
         CallbackQueryHandler(
             difficulty_mode_callback,
             pattern=r"^qmode:\d+:(5|10|15|all):(any|easy|medium|hard)$",
+        )
+    )
+    application.add_handler(
+        CallbackQueryHandler(question_count_mix_callback, pattern=r"^qcntmix:(5|10|15|all)$")
+    )
+    application.add_handler(
+        CallbackQueryHandler(
+            difficulty_mode_mix_callback,
+            pattern=r"^qmodemix:(5|10|15|all):(any|easy|medium|hard)$",
         )
     )
     application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))
