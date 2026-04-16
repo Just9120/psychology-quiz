@@ -30,6 +30,12 @@ VALID_READING_MODES = {"normal", "bionic"}
 
 
 def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
+    table_exists = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'users'"
+    ).fetchone()
+    if table_exists is None:
+        return
+
     columns = conn.execute("PRAGMA table_info(users)").fetchall()
     column_names = {str(column["name"]) for column in columns}
     if "reading_mode" in column_names:
