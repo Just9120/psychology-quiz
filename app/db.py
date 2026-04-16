@@ -21,8 +21,29 @@ def init_db_connection(db_path: str) -> None:
     conn = get_connection(db_path)
     try:
         conn.execute("SELECT 1;")
+        ensure_users_reading_mode_column(conn)
     finally:
         conn.close()
+
+
+VALID_READING_MODES = {"normal", "bionic"}
+
+
+def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
+    columns = conn.execute("PRAGMA table_info(users)").fetchall()
+    column_names = {str(column["name"]) for column in columns}
+    if "reading_mode" in column_names:
+        return
+
+    conn.execute(
+        "ALTER TABLE users ADD COLUMN reading_mode TEXT NOT NULL DEFAULT 'normal'"
+    )
+
+
+def _normalize_reading_mode(mode: str | None) -> str:
+    if mode in VALID_READING_MODES:
+        return str(mode)
+    return "normal"
 
 
 def _slugify_category(name: str) -> str:
@@ -165,6 +186,8 @@ def create_or_load_user(
     first_name: str | None,
     last_name: str | None,
 ) -> sqlite3.Row:
+    ensure_users_reading_mode_column(conn)
+
     conn.execute(
         """
         INSERT INTO users (telegram_user_id, username, first_name, last_name)
@@ -435,3 +458,24 @@ def is_question_in_session(conn: sqlite3.Connection, session_id: int, question_i
         (session_id, question_id),
     ).fetchone()
     return row is not None
+
+
+def get_user_reading_mode(conn: sqlite3.Connection, user_id: int) -> str:
+    ensure_users_reading_mode_column(conn)
+    row = conn.execute(
+        "SELECT reading_mode FROM users WHERE id = ?",
+        (user_id,),
+    ).fetchone()
+    if row is None:
+        return "normal"
+    return _normalize_reading_mode(row["reading_mode"])
+
+
+def set_user_reading_mode(conn: sqlite3.Connection, user_id: int, mode: str) -> str:
+    ensure_users_reading_mode_column(conn)
+    normalized_mode = _normalize_reading_mode(mode)
+    conn.execute(
+        "UPDATE users SET reading_mode = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        (normalized_mode, user_id),
+    )
+    return normalized_mode
