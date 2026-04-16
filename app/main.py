@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from html import escape
 import logging
+import re
 
 from telegram import (
     BotCommand,
@@ -23,6 +24,7 @@ from telegram.ext import (
 from app.config import load_settings
 from app.db import (
     create_or_load_user,
+    get_user_reading_mode,
     finalize_quiz_session,
     get_active_categories,
     get_answered_questions_count,
@@ -35,6 +37,7 @@ from app.db import (
     save_quiz_answer,
     select_random_approved_question_ids_across_active_categories,
     select_random_approved_question_ids_by_category,
+    set_user_reading_mode,
     start_quiz_session,
     store_session_questions,
 )
@@ -63,6 +66,12 @@ HELP_TEXT = (
     "/ping — проверка доступности\n"
     "/quiz — запустить викторину"
 )
+READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
+READING_MODE_LABELS = {
+    "normal": "Обычный",
+    "bionic": "Бионическое чтение",
+}
+WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)")
 
 
 def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
@@ -129,14 +138,62 @@ def option_index_to_label(option_index: int) -> str:
     return label
 
 
-def build_question_text_with_options(order_index: int, total_questions: int, question_text: str, options) -> str:
+def apply_bionic_reading(text: str) -> str:
+    rendered_parts: list[str] = []
+    for chunk in re.split(r"(\s+)", text):
+        if not chunk:
+            continue
+        if chunk.isspace():
+            rendered_parts.append(chunk)
+            continue
+        for part in WORD_RE.findall(chunk):
+            if not part:
+                continue
+            if not re.fullmatch(r"[0-9A-Za-zА-Яа-яЁё]+", part):
+                rendered_parts.append(escape(part))
+                continue
+            if len(part) <= 3:
+                rendered_parts.append(escape(part))
+                continue
+
+            bold_len = max(1, len(part) // 2)
+            prefix = escape(part[:bold_len])
+            suffix = escape(part[bold_len:])
+            rendered_parts.append(f"<b>{prefix}</b>{suffix}")
+
+    return "".join(rendered_parts)
+
+
+def render_reading_mode_text(text: str, mode: str) -> str:
+    if mode == "bionic":
+        return apply_bionic_reading(text)
+    return escape(text)
+
+
+def build_reading_mode_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("Обычный", callback_data="readingmode:set:normal")],
+            [InlineKeyboardButton("Бионическое чтение", callback_data="readingmode:set:bionic")],
+        ]
+    )
+
+
+def build_question_text_with_options(
+    order_index: int,
+    total_questions: int,
+    question_text: str,
+    options,
+    reading_mode: str,
+) -> str:
     formatted_options = "\n".join(
-        f"{option_index_to_label(int(opt['option_index']))}. {escape(str(opt['option_text']))}"
+        f"{option_index_to_label(int(opt['option_index']))}. "
+        f"{render_reading_mode_text(str(opt['option_text']), reading_mode)}"
         for opt in options
     )
     return (
         f"<b>Вопрос {order_index} из {total_questions}</b>\n\n"
-        f"{escape(question_text)}\n\n"
+        f"{render_reading_mode_text(question_text, reading_mode)}\n\n"
         f"{formatted_options}"
     )
 
@@ -166,6 +223,7 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
         keyboard=[
             [KeyboardButton("🎯 Начать викторину")],
             [KeyboardButton("ℹ️ Помощь")],
+            [KeyboardButton(READING_MODE_BUTTON_TEXT)],
         ],
         resize_keyboard=True,
         is_persistent=True,
@@ -187,6 +245,28 @@ async def start_quiz_button_handler(update: Update, context: ContextTypes.DEFAUL
 
 async def help_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await help_command(update, context)
+
+
+async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    tg_user = update.effective_user
+    if tg_user is None or update.message is None:
+        return
+
+    settings = context.application.bot_data["settings"]
+    with get_connection(settings.db_path) as conn:
+        user_row = create_or_load_user(
+            conn,
+            telegram_user_id=tg_user.id,
+            username=tg_user.username,
+            first_name=tg_user.first_name,
+            last_name=tg_user.last_name,
+        )
+        current_mode = get_user_reading_mode(conn, int(user_row["id"]))
+
+    await update.message.reply_text(
+        f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
+        reply_markup=build_reading_mode_keyboard(),
+    )
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -261,6 +341,7 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 async def send_current_question(query, settings, session_id: int) -> bool:
     finalize_payload = None
+    reading_mode = "normal"
     with get_connection(settings.db_path) as conn:
         current = get_current_unanswered_question(conn, session_id)
         if current is None:
@@ -280,6 +361,9 @@ async def send_current_question(query, settings, session_id: int) -> bool:
         question_id = int(current["question_id"])
         order_index = int(current["order_index"])
         total_questions = int(current["total_questions"])
+        session = get_quiz_session(conn, session_id)
+        if session is not None:
+            reading_mode = get_user_reading_mode(conn, int(session["user_id"]))
         options = get_question_options(conn, question_id)
         if not options:
             finalized = finalize_quiz_session(conn, session_id)
@@ -320,6 +404,7 @@ async def send_current_question(query, settings, session_id: int) -> bool:
             total_questions=total_questions,
             question_text=str(current["question_text"]),
             options=options,
+            reading_mode=reading_mode,
         ),
         reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode="HTML",
@@ -668,6 +753,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         explanation = str(current["explanation"] or "")
         total_questions = int(current["total_questions"])
         answered_questions = get_answered_questions_count(conn, session_id)
+        reading_mode = get_user_reading_mode(conn, int(user_row["id"]))
 
         is_last_question = answered_questions >= total_questions
         if is_last_question:
@@ -678,12 +764,12 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
     is_correct = int(answer["is_correct"]) == 1
     result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
-    escaped_explanation = escape(explanation)
+    rendered_explanation = render_reading_mode_text(explanation, reading_mode)
 
     if is_last_question:
         message = (
             f"{result_line}\n\n"
-            f"<b>Пояснение:</b> {escaped_explanation}\n\n"
+            f"<b>Пояснение:</b> {rendered_explanation}\n\n"
             f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}"
         )
         await query.edit_message_text(
@@ -696,7 +782,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     next_number = answered_questions + 1
     message = (
         f"{result_line}\n\n"
-        f"<b>Пояснение:</b> {escaped_explanation}\n\n"
+        f"<b>Пояснение:</b> {rendered_explanation}\n\n"
         f"<b>Вопрос {next_number} из {total_questions}</b>"
     )
     markup = InlineKeyboardMarkup(
@@ -799,6 +885,69 @@ async def post_quiz_action_callback(update: Update, context: ContextTypes.DEFAUL
     await restart_quiz_from_finished_session(query, settings, tg_user, session_id)
 
 
+async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+
+    data = query.data
+    if data == "readingmode:menu":
+        tg_user = update.effective_user
+        if tg_user is None:
+            await query.edit_message_text("Не удалось определить пользователя.")
+            return
+
+        settings = context.application.bot_data["settings"]
+        with get_connection(settings.db_path) as conn:
+            user_row = create_or_load_user(
+                conn,
+                telegram_user_id=tg_user.id,
+                username=tg_user.username,
+                first_name=tg_user.first_name,
+                last_name=tg_user.last_name,
+            )
+            current_mode = get_user_reading_mode(conn, int(user_row["id"]))
+
+        await query.edit_message_text(
+            f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
+            reply_markup=build_reading_mode_keyboard(),
+        )
+        return
+
+    if not data.startswith("readingmode:set:"):
+        return
+
+    mode = data.split(":")[-1]
+    if mode not in READING_MODE_LABELS:
+        await query.edit_message_text("Некорректный режим чтения.")
+        return
+
+    tg_user = update.effective_user
+    if tg_user is None:
+        await query.edit_message_text("Не удалось определить пользователя.")
+        return
+
+    settings = context.application.bot_data["settings"]
+    with get_connection(settings.db_path) as conn:
+        user_row = create_or_load_user(
+            conn,
+            telegram_user_id=tg_user.id,
+            username=tg_user.username,
+            first_name=tg_user.first_name,
+            last_name=tg_user.last_name,
+        )
+        saved_mode = set_user_reading_mode(conn, int(user_row["id"]), mode)
+
+    await query.edit_message_text(
+        f"Режим чтения обновлен: {READING_MODE_LABELS[saved_mode]}",
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Изменить режим", callback_data="readingmode:menu")]]
+        ),
+    )
+
+
 def configure_logging(log_level: str) -> None:
     numeric_level = getattr(logging, log_level.upper(), logging.INFO)
     logging.basicConfig(
@@ -833,6 +982,18 @@ def main() -> None:
         MessageHandler(
             filters.ChatType.PRIVATE & filters.Regex(r"^ℹ️ Помощь$"),
             help_button_handler,
+        )
+    )
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.Regex(r"^👁 Режим чтения$"),
+            reading_mode_button_handler,
+        )
+    )
+    application.add_handler(
+        CallbackQueryHandler(
+            reading_mode_callback,
+            pattern=r"^readingmode:(menu|set:(normal|bionic))$",
         )
     )
     application.add_handler(CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|mix)$"))

@@ -8,6 +8,16 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
+def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
+    columns = conn.execute("PRAGMA table_info(users)").fetchall()
+    column_names = {str(column[1]) for column in columns}
+    if "reading_mode" in column_names:
+        return
+    conn.execute(
+        "ALTER TABLE users ADD COLUMN reading_mode TEXT NOT NULL DEFAULT 'normal'"
+    )
+
+
 def resolve_db_path() -> str:
     load_dotenv()
     return os.getenv("DB_PATH", "/data/quiz.sqlite3").strip() or "/data/quiz.sqlite3"
@@ -28,6 +38,7 @@ def main() -> int:
         schema_sql = schema_path.read_text(encoding="utf-8")
         with sqlite3.connect(db_path) as conn:
             conn.executescript(schema_sql)
+            ensure_users_reading_mode_column(conn)
         print(f"[OK] База данных инициализирована: {db_path}")
         print("[OK] SQL-схема успешно применена.")
         return 0

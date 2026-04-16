@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT,
     first_name TEXT,
     last_name TEXT,
+    reading_mode TEXT NOT NULL DEFAULT 'normal',
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
