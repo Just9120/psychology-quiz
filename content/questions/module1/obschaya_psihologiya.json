@@ -690,7 +690,7 @@
   {
     "id": "m1_gp_044",
     "category": "Общая психология",
-    "source_ref": "module1/general/practice2",
+    "source_ref": "module1/general/lecture2",
     "difficulty": "hard",
     "status": "approved",
     "question": "Почему при большом объеме рассказа клиента консультант может «услышать свое» и упустить часть материала?",
@@ -722,7 +722,7 @@
   {
     "id": "m1_gp_046",
     "category": "Общая психология",
-    "source_ref": "module1/general/practice3",
+    "source_ref": "module1/general/lecture3",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой вывод наиболее корректен в мини-кейсе: «клиент стал медленнее отвечать к вечеру после долгого рабочего дня»?",
@@ -738,7 +738,7 @@
   {
     "id": "m1_gp_047",
     "category": "Общая психология",
-    "source_ref": "module1/general/practice3",
+    "source_ref": "module1/general/lecture1",
     "difficulty": "medium",
     "status": "approved",
     "question": "Что в первую очередь помогает снизить ошибку «достраивания» при анализе ответа клиента?",
@@ -754,7 +754,7 @@
   {
     "id": "m1_gp_048",
     "category": "Общая психология",
-    "source_ref": "module1/general/practice4",
+    "source_ref": "module1/general/lecture1",
     "difficulty": "hard",
     "status": "approved",
     "question": "Какое рассуждение психолога лучше соответствует научному подходу в общей психологии?",
