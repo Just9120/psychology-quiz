@@ -89,7 +89,8 @@ def load_questions_from_folder(folder_path: Path) -> tuple[list[dict[str, Any]],
 
 def main() -> int:
     repo_root = Path(__file__).resolve().parent.parent
-    questions_dir = repo_root / "content" / "questions" / "module1"
+    questions_root = repo_root / "content" / "questions"
+    module_dirs = [questions_root / "module1", questions_root / "module2"]
 
     db_path = Path(resolve_db_path())
     if not db_path.exists():
@@ -98,7 +99,12 @@ def main() -> int:
         return 1
 
     try:
-        questions, processed_files = load_questions_from_folder(questions_dir)
+        questions: list[dict[str, Any]] = []
+        processed_files = 0
+        for module_dir in module_dirs:
+            module_questions, module_files = load_questions_from_folder(module_dir)
+            questions.extend(module_questions)
+            processed_files += module_files
     except (FileNotFoundError, OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"[ERROR] Ошибка загрузки вопросов: {exc}")
         return 1
