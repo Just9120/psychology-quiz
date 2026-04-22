@@ -69,6 +69,7 @@ HELP_TEXT = (
 )
 READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
+SHOW_MENU_CALLBACK_DATA = "menu:show"
 READING_MODE_LABELS = {
     "normal": "Обычный",
     "bionic": "Бионическое чтение",
@@ -284,8 +285,27 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
         return
 
     await update.message.reply_text(
-        "Меню скрыто. Чтобы вернуть кнопки, нажмите значок клавиатуры в Telegram.",
+        "Меню скрыто.",
         reply_markup=ReplyKeyboardRemove(),
+    )
+    await update.message.reply_text(
+        "Чтобы вернуть меню, нажмите кнопку ниже. Если это сообщение потеряется, используйте /start.",
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("👁 Показать меню", callback_data=SHOW_MENU_CALLBACK_DATA)]]
+        ),
+    )
+
+
+async def show_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    del context
+    query = update.callback_query
+    if query is None or query.message is None:
+        return
+
+    await query.answer()
+    await query.message.reply_text(
+        "Меню снова показано.",
+        reply_markup=get_main_menu_keyboard(),
     )
 
 
@@ -1022,6 +1042,7 @@ def main() -> None:
             pattern=r"^readingmode:(menu|set:(normal|bionic))$",
         )
     )
+    application.add_handler(CallbackQueryHandler(show_menu_callback, pattern=r"^menu:show$"))
     application.add_handler(CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|mix)$"))
     application.add_handler(CallbackQueryHandler(category_callback, pattern=r"^cat:\d+$"))
     application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all)$"))
