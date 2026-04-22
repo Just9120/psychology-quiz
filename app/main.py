@@ -10,6 +10,7 @@ from telegram import (
     InlineKeyboardMarkup,
     KeyboardButton,
     ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
     Update,
 )
 from telegram.ext import (
@@ -67,6 +68,7 @@ HELP_TEXT = (
     "/quiz — запустить викторину"
 )
 READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
+HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
 READING_MODE_LABELS = {
     "normal": "Обычный",
     "bionic": "Бионическое чтение",
@@ -156,7 +158,13 @@ def apply_bionic_reading(text: str) -> str:
                 rendered_parts.append(escape(part))
                 continue
 
-            bold_len = max(1, len(part) // 2)
+            part_length = len(part)
+            if part_length <= 5:
+                bold_len = 1
+            elif part_length <= 9:
+                bold_len = 2
+            else:
+                bold_len = 3
             prefix = escape(part[:bold_len])
             suffix = escape(part[bold_len:])
             rendered_parts.append(f"<b>{prefix}</b>{suffix}")
@@ -224,6 +232,7 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton("🎯 Начать викторину")],
             [KeyboardButton("ℹ️ Помощь")],
             [KeyboardButton(READING_MODE_BUTTON_TEXT)],
+            [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
         ],
         resize_keyboard=True,
         is_persistent=True,
@@ -266,6 +275,17 @@ async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFA
     await update.message.reply_text(
         f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
         reply_markup=build_reading_mode_keyboard(),
+    )
+
+
+async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    del context
+    if update.message is None:
+        return
+
+    await update.message.reply_text(
+        "Меню скрыто. Чтобы вернуть кнопки, нажмите значок клавиатуры в Telegram.",
+        reply_markup=ReplyKeyboardRemove(),
     )
 
 
@@ -783,10 +803,10 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     message = (
         f"{result_line}\n\n"
         f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-        f"<b>Вопрос {next_number} из {total_questions}</b>"
+        f"<b>Прогресс:</b> {answered_questions} из {total_questions} отвечено"
     )
     markup = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Дальше", callback_data=f"next:{session_id}")]]
+        [[InlineKeyboardButton(f"Дальше → {next_number}/{total_questions}", callback_data=f"next:{session_id}")]]
     )
     await query.edit_message_text(message, reply_markup=markup, parse_mode="HTML")
 
@@ -988,6 +1008,12 @@ def main() -> None:
         MessageHandler(
             filters.ChatType.PRIVATE & filters.Regex(r"^👁 Режим чтения$"),
             reading_mode_button_handler,
+        )
+    )
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.Regex(r"^🙈 Скрыть меню$"),
+            hide_menu_button_handler,
         )
     )
     application.add_handler(
