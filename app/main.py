@@ -33,12 +33,15 @@ from app.db import (
     get_current_unanswered_question,
     get_question_options,
     get_quiz_session,
+    get_selected_categories_for_session,
     init_db_connection,
     is_question_in_session,
     save_quiz_answer,
     select_random_approved_question_ids_across_active_categories,
     select_random_approved_question_ids_by_category,
+    select_random_approved_question_ids_by_categories,
     set_user_reading_mode,
+    set_selected_categories_for_session,
     start_quiz_session,
     store_session_questions,
 )
@@ -109,6 +112,35 @@ def build_category_keyboard(categories) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(str(row["name"]), callback_data=f"cat:{int(row['id'])}")]
         for row in categories
     ]
+    return InlineKeyboardMarkup(keyboard)
+
+
+def build_quiz_mode_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("Конкретная тема", callback_data="qzmode:single")],
+            [InlineKeyboardButton("Микс из выбранных тем", callback_data="qzmode:selected_mix")],
+            [InlineKeyboardButton("Все темы", callback_data="qzmode:all")],
+        ]
+    )
+
+
+def build_selected_mix_keyboard(categories, selected_ids: set[int]) -> InlineKeyboardMarkup:
+    keyboard = []
+    for row in categories:
+        category_id = int(row["id"])
+        marker = "✅" if category_id in selected_ids else "☑️"
+        keyboard.append(
+            [
+                InlineKeyboardButton(
+                    f"{marker} {row['name']}",
+                    callback_data=f"mixsel:toggle:{category_id}",
+                )
+            ]
+        )
+
+    keyboard.append([InlineKeyboardButton("Готово", callback_data="mixsel:done")])
+    keyboard.append([InlineKeyboardButton("Сбросить", callback_data="mixsel:reset")])
     return InlineKeyboardMarkup(keyboard)
 
 
@@ -330,14 +362,10 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         return
 
     if update.message:
+        context.user_data["selected_mix_categories"] = set()
         await update.message.reply_text(
             "Выберите режим викторины:",
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton("Одна тема", callback_data="qzmode:single")],
-                    [InlineKeyboardButton("🎲 Микс тем", callback_data="qzmode:mix")],
-                ]
-            ),
+            reply_markup=build_quiz_mode_keyboard(),
         )
 
 
@@ -372,10 +400,27 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         )
         return
 
-    if data == "qzmode:mix":
+    if data == "qzmode:all":
         await query.edit_message_text(
             "Выберите количество вопросов:",
-            reply_markup=build_question_count_keyboard("qcntmix"),
+            reply_markup=build_question_count_keyboard("qcntall"),
+        )
+        return
+
+    if data == "qzmode:selected_mix":
+        settings = context.application.bot_data["settings"]
+        with get_connection(settings.db_path) as conn:
+            categories = get_active_categories(conn)
+        if not categories:
+            await query.edit_message_text(
+                "Нет доступных категорий. Сначала загрузите вопросы в базу данных."
+            )
+            return
+
+        context.user_data["selected_mix_categories"] = set()
+        await query.edit_message_text(
+            "Выберите темы для микса:",
+            reply_markup=build_selected_mix_keyboard(categories, set()),
         )
 
 
@@ -475,12 +520,22 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
 
         category_id = session["category_id"]
         question_limit = int(session["total_questions"])
-        if category_id is None:
+        selected_categories = get_selected_categories_for_session(conn, session_id)
+        if selected_categories:
+            question_ids = select_random_approved_question_ids_by_categories(
+                conn,
+                category_ids=selected_categories,
+                limit=question_limit,
+                difficulty_mode=None,
+            )
+            new_category_id = None
+        elif category_id is None:
             question_ids = select_random_approved_question_ids_across_active_categories(
                 conn,
                 limit=question_limit,
                 difficulty_mode=None,
             )
+            new_category_id = None
         else:
             question_ids = select_random_approved_question_ids_by_category(
                 conn,
@@ -488,12 +543,15 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
                 limit=question_limit,
                 difficulty_mode=None,
             )
+            new_category_id = int(category_id)
 
         if not question_ids:
             await query.edit_message_text("Не удалось подобрать вопросы для повторной попытки.")
             return
 
-        new_session_id = start_quiz_session(conn, int(user_row["id"]), category_id)
+        new_session_id = start_quiz_session(conn, int(user_row["id"]), new_category_id)
+        if selected_categories:
+            set_selected_categories_for_session(conn, new_session_id, selected_categories)
         store_session_questions(conn, new_session_id, question_ids)
 
     await send_current_question(query, settings, new_session_id)
@@ -635,7 +693,7 @@ async def question_count_mix_callback(update: Update, context: ContextTypes.DEFA
     await query.answer()
 
     data = query.data
-    if not data.startswith("qcntmix:"):
+    if not data.startswith("qcntall:"):
         return
 
     _, count_raw = data.split(":", 1)
@@ -648,11 +706,11 @@ async def question_count_mix_callback(update: Update, context: ContextTypes.DEFA
 
     await query.edit_message_text(
         "Выберите режим сложности:",
-        reply_markup=build_difficulty_keyboard("qmodemix", count_raw=count_raw),
+        reply_markup=build_difficulty_keyboard("qmodeall", count_raw=count_raw),
     )
 
 
-async def difficulty_mode_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -660,7 +718,7 @@ async def difficulty_mode_mix_callback(update: Update, context: ContextTypes.DEF
     await query.answer()
 
     data = query.data
-    if not data.startswith("qmodemix:"):
+    if not data.startswith("qmodeall:"):
         return
 
     parts = data.split(":")
@@ -669,6 +727,145 @@ async def difficulty_mode_mix_callback(update: Update, context: ContextTypes.DEF
         return
 
     _, count_raw, mode = parts
+    await start_mix_quiz(
+        query=query,
+        context=context,
+        tg_user=update.effective_user,
+        count_raw=count_raw,
+        mode=mode,
+        selected_category_ids=None,
+    )
+
+
+async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+    data = query.data
+    if not data.startswith("mixsel:"):
+        return
+
+    settings = context.application.bot_data["settings"]
+    with get_connection(settings.db_path) as conn:
+        categories = get_active_categories(conn)
+    if not categories:
+        await query.edit_message_text("Нет доступных категорий.")
+        return
+
+    selected_ids = set(context.user_data.get("selected_mix_categories", set()))
+    active_category_ids = {int(row["id"]) for row in categories}
+    selected_ids = {category_id for category_id in selected_ids if category_id in active_category_ids}
+
+    if data.startswith("mixsel:toggle:"):
+        try:
+            category_id = int(data.split(":")[-1])
+        except ValueError:
+            await query.edit_message_text("Некорректная категория.")
+            return
+        if category_id not in active_category_ids:
+            await query.edit_message_text("Категория недоступна.")
+            return
+        if category_id in selected_ids:
+            selected_ids.remove(category_id)
+        else:
+            selected_ids.add(category_id)
+        context.user_data["selected_mix_categories"] = selected_ids
+        await query.edit_message_text(
+            "Выберите темы для микса:",
+            reply_markup=build_selected_mix_keyboard(categories, selected_ids),
+        )
+        return
+
+    if data == "mixsel:reset":
+        context.user_data["selected_mix_categories"] = set()
+        await query.edit_message_text(
+            "Выберите темы для микса:",
+            reply_markup=build_selected_mix_keyboard(categories, set()),
+        )
+        return
+
+    if data == "mixsel:done":
+        if not selected_ids:
+            await query.answer("Выберите хотя бы одну тему.", show_alert=True)
+            return
+        context.user_data["selected_mix_categories"] = selected_ids
+        await query.edit_message_text(
+            "Выберите количество вопросов:",
+            reply_markup=build_question_count_keyboard("qcntselmix"),
+        )
+        return
+
+
+async def question_count_selected_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+    data = query.data
+    if not data.startswith("qcntselmix:"):
+        return
+
+    parts = data.split(":")
+    if len(parts) != 2:
+        await query.edit_message_text("Некорректный выбор количества вопросов.")
+        return
+
+    _, count_raw = parts
+    if count_raw != "all":
+        try:
+            int(count_raw)
+        except ValueError:
+            await query.edit_message_text("Некорректное количество вопросов.")
+            return
+
+    await query.edit_message_text(
+        "Выберите режим сложности:",
+        reply_markup=build_difficulty_keyboard("qmodeselmix", count_raw=count_raw),
+    )
+
+
+async def difficulty_mode_selected_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    await query.answer()
+    data = query.data
+    if not data.startswith("qmodeselmix:"):
+        return
+
+    parts = data.split(":")
+    if len(parts) != 3:
+        await query.edit_message_text("Некорректный выбор режима.")
+        return
+
+    _, count_raw, mode = parts
+    selected_ids = set(context.user_data.get("selected_mix_categories", set()))
+    if not selected_ids:
+        await query.edit_message_text("Сначала выберите темы для микса.")
+        return
+
+    await start_mix_quiz(
+        query=query,
+        context=context,
+        tg_user=update.effective_user,
+        count_raw=count_raw,
+        mode=mode,
+        selected_category_ids=sorted(selected_ids),
+    )
+
+
+async def start_mix_quiz(
+    query,
+    context: ContextTypes.DEFAULT_TYPE,
+    tg_user,
+    count_raw: str,
+    mode: str,
+    selected_category_ids: list[int] | None,
+) -> None:
     if mode not in {"any", "easy", "medium", "hard"}:
         await query.edit_message_text("Некорректный режим сложности.")
         return
@@ -684,7 +881,6 @@ async def difficulty_mode_mix_callback(update: Update, context: ContextTypes.DEF
             return
 
     settings = context.application.bot_data["settings"]
-    tg_user = update.effective_user
     if tg_user is None:
         await query.edit_message_text("Не удалось определить пользователя.")
         return
@@ -699,16 +895,31 @@ async def difficulty_mode_mix_callback(update: Update, context: ContextTypes.DEF
         )
 
         difficulty_filter = None if mode == "any" else mode
-        question_ids = select_random_approved_question_ids_across_active_categories(
-            conn,
-            limit=selected_limit,
-            difficulty_mode=difficulty_filter,
-        )
+        if selected_category_ids:
+            active_ids = {int(row["id"]) for row in get_active_categories(conn)}
+            filtered_selected_ids = [category_id for category_id in selected_category_ids if category_id in active_ids]
+            if not filtered_selected_ids:
+                await query.edit_message_text("Выбранные темы больше недоступны.")
+                return
+            question_ids = select_random_approved_question_ids_by_categories(
+                conn,
+                category_ids=filtered_selected_ids,
+                limit=selected_limit,
+                difficulty_mode=difficulty_filter,
+            )
+        else:
+            question_ids = select_random_approved_question_ids_across_active_categories(
+                conn,
+                limit=selected_limit,
+                difficulty_mode=difficulty_filter,
+            )
         if not question_ids:
             await query.edit_message_text("Пока нет одобренных вопросов в активных темах.")
             return
 
         session_id = start_quiz_session(conn, int(user_row["id"]), None)
+        if selected_category_ids:
+            set_selected_categories_for_session(conn, session_id, selected_category_ids)
         store_session_questions(conn, session_id, question_ids)
 
     await send_current_question(query, settings, session_id)
@@ -892,14 +1103,10 @@ async def post_quiz_action_callback(update: Update, context: ContextTypes.DEFAUL
     data = query.data
 
     if data == "postquiz:new":
+        context.user_data["selected_mix_categories"] = set()
         await query.edit_message_text(
             "Выберите режим викторины:",
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton("Одна тема", callback_data="qzmode:single")],
-                    [InlineKeyboardButton("🎲 Микс тем", callback_data="qzmode:mix")],
-                ]
-            ),
+            reply_markup=build_quiz_mode_keyboard(),
         )
         return
 
@@ -1043,7 +1250,9 @@ def main() -> None:
         )
     )
     application.add_handler(CallbackQueryHandler(show_menu_callback, pattern=r"^menu:show$"))
-    application.add_handler(CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|mix)$"))
+    application.add_handler(
+        CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|selected_mix|all)$")
+    )
     application.add_handler(CallbackQueryHandler(category_callback, pattern=r"^cat:\d+$"))
     application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all)$"))
     application.add_handler(
@@ -1053,12 +1262,22 @@ def main() -> None:
         )
     )
     application.add_handler(
-        CallbackQueryHandler(question_count_mix_callback, pattern=r"^qcntmix:(5|10|15|all)$")
+        CallbackQueryHandler(question_count_mix_callback, pattern=r"^qcntall:(5|10|15|all)$")
     )
     application.add_handler(
         CallbackQueryHandler(
-            difficulty_mode_mix_callback,
-            pattern=r"^qmodemix:(5|10|15|all):(any|easy|medium|hard)$",
+            difficulty_mode_all_callback,
+            pattern=r"^qmodeall:(5|10|15|all):(any|easy|medium|hard)$",
+        )
+    )
+    application.add_handler(CallbackQueryHandler(mix_selection_callback, pattern=r"^mixsel:(toggle:\d+|done|reset)$"))
+    application.add_handler(
+        CallbackQueryHandler(question_count_selected_mix_callback, pattern=r"^qcntselmix:(5|10|15|all)$")
+    )
+    application.add_handler(
+        CallbackQueryHandler(
+            difficulty_mode_selected_mix_callback,
+            pattern=r"^qmodeselmix:(5|10|15|all):(any|easy|medium|hard)$",
         )
     )
     application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))

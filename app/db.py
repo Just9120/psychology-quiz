@@ -22,6 +22,7 @@ def init_db_connection(db_path: str) -> None:
     try:
         conn.execute("SELECT 1;")
         ensure_users_reading_mode_column(conn)
+        ensure_quiz_session_selected_categories_table(conn)
     finally:
         conn.close()
 
@@ -37,6 +38,21 @@ def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
 
     conn.execute(
         "ALTER TABLE users ADD COLUMN reading_mode TEXT NOT NULL DEFAULT 'normal'"
+    )
+
+
+def ensure_quiz_session_selected_categories_table(conn: sqlite3.Connection) -> None:
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS quiz_session_selected_categories (
+            session_id INTEGER NOT NULL,
+            category_id INTEGER NOT NULL,
+            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (session_id, category_id),
+            FOREIGN KEY (session_id) REFERENCES quiz_sessions(id) ON DELETE CASCADE,
+            FOREIGN KEY (category_id) REFERENCES categories(id)
+        )
+        """
     )
 
 
@@ -281,6 +297,37 @@ def select_random_approved_question_ids_across_active_categories(
     return [int(row["id"]) for row in rows]
 
 
+def select_random_approved_question_ids_by_categories(
+    conn: sqlite3.Connection,
+    category_ids: list[int],
+    limit: int | None = SESSION_QUESTION_LIMIT,
+    difficulty_mode: str | None = None,
+) -> list[int]:
+    if not category_ids:
+        return []
+
+    placeholders = ",".join("?" for _ in category_ids)
+    params: list[Any] = list(category_ids)
+    where_clause = f"q.category_id IN ({placeholders}) AND q.status = 'approved'"
+    if difficulty_mode:
+        where_clause += " AND q.difficulty = ?"
+        params.append(difficulty_mode)
+
+    query = f"""
+        SELECT q.id
+        FROM questions q
+        WHERE {where_clause}
+        ORDER BY RANDOM()
+    """
+
+    if limit is not None:
+        query += "\nLIMIT ?"
+        params.append(limit)
+
+    rows = conn.execute(query, params).fetchall()
+    return [int(row["id"]) for row in rows]
+
+
 def store_session_questions(conn: sqlite3.Connection, session_id: int, question_ids: list[int]) -> None:
     for order_index, question_id in enumerate(question_ids, start=1):
         conn.execute(
@@ -445,6 +492,37 @@ def get_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row |
         "SELECT * FROM quiz_sessions WHERE id = ?",
         (session_id,),
     ).fetchone()
+
+
+def set_selected_categories_for_session(
+    conn: sqlite3.Connection,
+    session_id: int,
+    category_ids: list[int],
+) -> None:
+    ensure_quiz_session_selected_categories_table(conn)
+    unique_category_ids = sorted(set(category_ids))
+    for category_id in unique_category_ids:
+        conn.execute(
+            """
+            INSERT OR IGNORE INTO quiz_session_selected_categories (session_id, category_id)
+            VALUES (?, ?)
+            """,
+            (session_id, category_id),
+        )
+
+
+def get_selected_categories_for_session(conn: sqlite3.Connection, session_id: int) -> list[int]:
+    ensure_quiz_session_selected_categories_table(conn)
+    rows = conn.execute(
+        """
+        SELECT category_id
+        FROM quiz_session_selected_categories
+        WHERE session_id = ?
+        ORDER BY category_id ASC
+        """,
+        (session_id,),
+    ).fetchall()
+    return [int(row["category_id"]) for row in rows]
 
 
 def is_question_in_session(conn: sqlite3.Connection, session_id: int, question_id: int) -> bool:
