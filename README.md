@@ -39,22 +39,22 @@
 - SQLite **не** является source of truth; это runtime layer хранения и выдачи данных.
 - Заполнение и обновление SQLite выполняется сидером `scripts/seed_questions.py`.
 
-Операционный поток:
-1. изменить JSON в repo;
-2. сделать PR;
-3. merge;
-4. `git pull` на сервере;
-5. запустить seed;
-6. SQLite получает обновления.
+Операционный поток (основной путь, CI/CD-first):
+1. подготовить изменения в repo и сделать PR;
+2. выполнить merge в `main`;
+3. по `push` в `main` автоматически запускается GitHub Actions workflow;
+4. workflow по SSH вызывает deploy-процесс на сервере;
+5. deploy logic условно выполняет build/seed/restart (или no-op) по diff;
+6. runtime-слой получает актуальные изменения без ручного `git pull + seed` как базового сценария.
 
-## Operational nuance: когда нужен rebuild
+Fallback:
+- при необходимости деплой можно запустить вручную через GitHub Actions (`workflow_dispatch`).
 
-- Если меняется только `content/`, обычно достаточно `git pull + seed`.
-- Если меняются `app/` или `scripts/`, нужен `docker compose build psych_quiz_bot`.
+## Operational nuance: как отрабатывает deploy logic
 
-Почему так:
-- в `docker-compose.yml` монтируются `./data` и `./content`;
-- `app/` и `scripts/` берутся из Docker image.
+- `content`-only изменения → автосидинг (autoseed) в deploy-процессе.
+- Изменения в `app/`, `scripts/`, `sql/` и runtime/Docker-related частях → deploy logic conditionally выполняет build/seed/restart.
+- Docs-only изменения → no-op или почти no-op на runtime-слое.
 
 ## Вспомогательный UX
 
