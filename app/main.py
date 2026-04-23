@@ -335,6 +335,9 @@ async def show_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         return
 
     await query.answer()
+    await query.edit_message_text(
+        "Меню возвращено. Если понадобится скрыть его снова — используйте кнопку «🙈 Скрыть меню».",
+    )
     await query.message.reply_text(
         "Меню снова показано.",
         reply_markup=get_main_menu_keyboard(),
