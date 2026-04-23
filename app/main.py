@@ -311,16 +311,48 @@ async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFA
     )
 
 
+def has_in_progress_quiz_for_user(settings, tg_user) -> bool:
+    with get_connection(settings.db_path) as conn:
+        user_row = create_or_load_user(
+            conn,
+            telegram_user_id=tg_user.id,
+            username=tg_user.username,
+            first_name=tg_user.first_name,
+            last_name=tg_user.last_name,
+        )
+        in_progress_session = conn.execute(
+            """
+            SELECT id
+            FROM quiz_sessions
+            WHERE user_id = ?
+              AND status = 'in_progress'
+            LIMIT 1
+            """,
+            (int(user_row["id"]),),
+        ).fetchone()
+    return in_progress_session is not None
+
+
 async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    del context
-    if update.message is None:
+    message = update.message
+    tg_user = update.effective_user
+    if message is None or tg_user is None:
         return
 
-    await update.message.reply_text(
-        "Меню скрыто.",
-        reply_markup=ReplyKeyboardRemove(),
-    )
-    await update.message.reply_text(
+    settings = context.application.bot_data["settings"]
+    if has_in_progress_quiz_for_user(settings, tg_user):
+        removal_message = await message.reply_text(
+            text="Скрываю меню…",
+            reply_markup=ReplyKeyboardRemove(),
+        )
+        await context.bot.delete_message(
+            chat_id=removal_message.chat_id,
+            message_id=removal_message.message_id,
+        )
+        return
+
+    await message.reply_text("Меню скрыто.", reply_markup=ReplyKeyboardRemove())
+    await message.reply_text(
         "Чтобы вернуть меню, нажмите кнопку ниже. Если это сообщение потеряется, используйте /start.",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("👁 Показать меню", callback_data=SHOW_MENU_CALLBACK_DATA)]]
