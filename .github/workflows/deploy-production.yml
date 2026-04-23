@@ -1,0 +1,49 @@
+name: Deploy production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 15
+
+    steps:
+      - name: Prepare SSH
+        run: |
+          set -Eeuo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy over SSH
+        run: |
+          set -Eeuo pipefail
+          ssh -i ~/.ssh/id_ed25519 "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" 'bash -se' <<'REMOTE'
+          set -Eeuo pipefail
+
+          if [ -f /opt/psychology-quiz/deploy.sh ]; then
+            echo "[deploy] Found /opt/psychology-quiz/deploy.sh, running normal path"
+            bash /opt/psychology-quiz/deploy.sh
+            exit 0
+          fi
+
+          echo "[deploy] /opt/psychology-quiz/deploy.sh not found, running bootstrap path"
+          cd /opt/psychology-quiz
+          git fetch origin main
+          git reset --hard origin/main
+          chmod +x deploy.sh
+          docker compose build psych_quiz_bot
+          docker compose run --rm psych_quiz_bot python scripts/seed_questions.py
+          docker compose up -d --force-recreate psych_quiz_bot
+          REMOTE
