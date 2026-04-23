@@ -75,18 +75,21 @@
 - Практико-ориентированные вопросы встраиваются в профильные категории, а не выделяются в отдельную рабочую категорию.
 
 ## 8. Операционный процесс
-Официальная последовательность синхронизации:
-1. изменить JSON в репозитории;
-2. оформить PR;
-3. выполнить merge;
-4. выполнить `git pull` на сервере;
-5. запустить `scripts/seed_questions.py`;
-6. получить актуализированную рабочую SQLite.
+Основной путь синхронизации (CI/CD-first):
+1. подготовить изменения в репозитории и оформить PR;
+2. выполнить merge в `main`;
+3. по `push` в `main` автоматически запускается GitHub Actions workflow;
+4. workflow по SSH вызывает deploy-процесс на сервере;
+5. deploy logic conditionally синхронизирует runtime-состояние по diff.
 
-Операционные правила деплоя:
-- Если меняется только `content/`, обычно достаточно `git pull + seed`.
-- Если меняются `app/` или `scripts/`, нужен rebuild образа: `docker compose build psych_quiz_bot`.
-- Причина: `docker-compose.yml` монтирует `./data` и `./content`, а `app/` и `scripts/` попадают в runtime из Docker image.
+Логическая модель deploy-процесса:
+- content changes → seed (autoseed).
+- Изменения в `app/`, `scripts/`, `sql/` и Docker-related слоях → build/seed/restart по условиям deploy logic.
+- Docs-only changes не требуют runtime sync (no-op/почти no-op).
+
+Fallback path:
+- При необходимости деплой инициируется вручную через GitHub Actions `workflow_dispatch`.
+- Ручное server-side вмешательство допускается только как аварийный сценарий, а не основной operational path.
 
 ## 9. Ограничения и анти-паттерны
 - Нельзя объявлять SQLite источником истины для банка вопросов.
