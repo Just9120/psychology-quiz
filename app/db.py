@@ -225,8 +225,6 @@ def create_or_load_user(
     first_name: str | None,
     last_name: str | None,
 ) -> sqlite3.Row:
-    ensure_users_reading_mode_column(conn)
-
     conn.execute(
         """
         INSERT INTO users (telegram_user_id, username, first_name, last_name)
@@ -255,7 +253,6 @@ def start_quiz_session(
     category_id: int | None,
     difficulty_mode: str | None = None,
 ) -> int:
-    ensure_quiz_sessions_difficulty_mode_column(conn)
     normalized_difficulty_mode = _normalize_difficulty_mode(difficulty_mode)
     cursor = conn.execute(
         """
@@ -521,7 +518,6 @@ def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.
 
 
 def get_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
-    ensure_quiz_sessions_difficulty_mode_column(conn)
     return conn.execute(
         "SELECT * FROM quiz_sessions WHERE id = ?",
         (session_id,),
@@ -533,7 +529,6 @@ def set_selected_categories_for_session(
     session_id: int,
     category_ids: list[int],
 ) -> None:
-    ensure_quiz_session_selected_categories_table(conn)
     unique_category_ids = sorted(set(category_ids))
     for category_id in unique_category_ids:
         conn.execute(
@@ -546,7 +541,6 @@ def set_selected_categories_for_session(
 
 
 def get_selected_categories_for_session(conn: sqlite3.Connection, session_id: int) -> list[int]:
-    ensure_quiz_session_selected_categories_table(conn)
     rows = conn.execute(
         """
         SELECT category_id
@@ -573,7 +567,6 @@ def is_question_in_session(conn: sqlite3.Connection, session_id: int, question_i
 
 
 def get_user_reading_mode(conn: sqlite3.Connection, user_id: int) -> str:
-    ensure_users_reading_mode_column(conn)
     row = conn.execute(
         "SELECT reading_mode FROM users WHERE id = ?",
         (user_id,),
@@ -584,7 +577,6 @@ def get_user_reading_mode(conn: sqlite3.Connection, user_id: int) -> str:
 
 
 def set_user_reading_mode(conn: sqlite3.Connection, user_id: int, mode: str) -> str:
-    ensure_users_reading_mode_column(conn)
     normalized_mode = _normalize_reading_mode(mode)
     conn.execute(
         "UPDATE users SET reading_mode = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
