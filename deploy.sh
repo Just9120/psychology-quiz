@@ -74,6 +74,8 @@ else
 fi
 
 if [[ "${NEEDS_SEED}" -eq 1 ]]; then
+  echo "[deploy] Initializing DB schema before seed"
+  docker compose run --rm "${SERVICE_NAME}" python scripts/init_db.py
   echo "[deploy] Running seed"
   docker compose run --rm "${SERVICE_NAME}" python scripts/seed_questions.py
 else
