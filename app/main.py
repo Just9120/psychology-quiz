@@ -520,20 +520,21 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
 
         category_id = session["category_id"]
         question_limit = int(session["total_questions"])
+        difficulty_filter = session["difficulty_mode"]
         selected_categories = get_selected_categories_for_session(conn, session_id)
         if selected_categories:
             question_ids = select_random_approved_question_ids_by_categories(
                 conn,
                 category_ids=selected_categories,
                 limit=question_limit,
-                difficulty_mode=None,
+                difficulty_mode=difficulty_filter,
             )
             new_category_id = None
         elif category_id is None:
             question_ids = select_random_approved_question_ids_across_active_categories(
                 conn,
                 limit=question_limit,
-                difficulty_mode=None,
+                difficulty_mode=difficulty_filter,
             )
             new_category_id = None
         else:
@@ -541,7 +542,7 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
                 conn,
                 category_id=int(category_id),
                 limit=question_limit,
-                difficulty_mode=None,
+                difficulty_mode=difficulty_filter,
             )
             new_category_id = int(category_id)
 
@@ -549,7 +550,12 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
             await query.edit_message_text("Не удалось подобрать вопросы для повторной попытки.")
             return
 
-        new_session_id = start_quiz_session(conn, int(user_row["id"]), new_category_id)
+        new_session_id = start_quiz_session(
+            conn,
+            int(user_row["id"]),
+            new_category_id,
+            difficulty_mode=difficulty_filter,
+        )
         if selected_categories:
             set_selected_categories_for_session(conn, new_session_id, selected_categories)
         store_session_questions(conn, new_session_id, question_ids)
@@ -679,7 +685,12 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
             await query.edit_message_text("В этой категории пока нет одобренных вопросов.")
             return
 
-        session_id = start_quiz_session(conn, int(user_row["id"]), category_id)
+        session_id = start_quiz_session(
+            conn,
+            int(user_row["id"]),
+            category_id,
+            difficulty_mode=difficulty_filter,
+        )
         store_session_questions(conn, session_id, question_ids)
 
     await send_current_question(query, settings, session_id)
@@ -917,7 +928,12 @@ async def start_mix_quiz(
             await query.edit_message_text("Пока нет одобренных вопросов в активных темах.")
             return
 
-        session_id = start_quiz_session(conn, int(user_row["id"]), None)
+        session_id = start_quiz_session(
+            conn,
+            int(user_row["id"]),
+            None,
+            difficulty_mode=difficulty_filter,
+        )
         if selected_category_ids:
             set_selected_categories_for_session(conn, session_id, selected_category_ids)
         store_session_questions(conn, session_id, question_ids)

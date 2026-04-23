@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS quiz_sessions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     category_id INTEGER,
+    difficulty_mode TEXT,
     started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     finished_at TEXT,
     score INTEGER NOT NULL DEFAULT 0,
