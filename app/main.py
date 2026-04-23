@@ -143,16 +143,6 @@ def build_selected_mix_keyboard(categories, selected_ids: set[int]) -> InlineKey
     return InlineKeyboardMarkup(keyboard)
 
 
-def build_post_quiz_keyboard(session_id: int) -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("🔁 Пройти еще раз", callback_data=f"postquiz:repeat:{session_id}")],
-            [InlineKeyboardButton("🎯 Новая викторина", callback_data="postquiz:new")],
-            [InlineKeyboardButton("ℹ️ Помощь", callback_data="postquiz:help")],
-        ]
-    )
-
-
 def build_quiz_finished_text(score: int, total_questions: int) -> str:
     return "<b>Викторина завершена</b>\n" f"<b>Результат:</b> {score} из {total_questions}"
 
@@ -325,11 +315,10 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
         return
 
     try:
-        removal_message = await message.reply_text(
-            text="\u2060",
+        await message.reply_text(
+            text="Меню скрыто.",
             reply_markup=ReplyKeyboardRemove(),
         )
-        await removal_message.delete()
     except Exception:
         logger.exception("Не удалось скрыть меню для сообщения %s", message.message_id)
 
@@ -371,11 +360,10 @@ async def remove_main_menu_for_active_quiz(query) -> None:
     if query.message is None or query.message.chat.type != "private":
         return
 
-    removal_message = await query.message.reply_text(
-        "\u2060",
+    await query.message.reply_text(
+        "Меню скрыто на время викторины.",
         reply_markup=ReplyKeyboardRemove(),
     )
-    await removal_message.delete()
 
 
 async def restore_main_menu_after_quiz(query) -> None:
@@ -391,11 +379,6 @@ async def restore_main_menu_after_quiz(query) -> None:
 async def send_quiz_result_with_main_menu(query, text: str) -> None:
     if query.message is None:
         return
-
-    try:
-        await query.message.delete()
-    except Exception:
-        logger.debug("Не удалось удалить предыдущее сообщение перед отправкой результата викторины.")
 
     await query.message.chat.send_message(
         text,
@@ -1142,44 +1125,6 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     await send_current_question(query, settings, session_id)
 
 
-async def post_quiz_action_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    if query is None or query.data is None:
-        return
-
-    await query.answer()
-    data = query.data
-
-    if data == "postquiz:new":
-        context.user_data["selected_mix_categories"] = set()
-        await query.edit_message_text(
-            "Выберите режим викторины:",
-            reply_markup=build_quiz_mode_keyboard(),
-        )
-        return
-
-    if data == "postquiz:help":
-        await query.edit_message_text(HELP_TEXT)
-        return
-
-    if not data.startswith("postquiz:repeat:"):
-        return
-
-    try:
-        session_id = int(data.split(":")[-1])
-    except ValueError:
-        await query.edit_message_text("Некорректная сессия для повтора.")
-        return
-
-    tg_user = update.effective_user
-    if tg_user is None:
-        await query.edit_message_text("Не удалось определить пользователя.")
-        return
-
-    settings = context.application.bot_data["settings"]
-    await restart_quiz_from_finished_session(query, settings, tg_user, session_id)
-
-
 async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     if query is None or query.data is None:
@@ -1329,12 +1274,6 @@ def main() -> None:
     )
     application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))
     application.add_handler(CallbackQueryHandler(next_callback, pattern=r"^next:\d+$"))
-    application.add_handler(
-        CallbackQueryHandler(
-            post_quiz_action_callback,
-            pattern=r"^postquiz:(new|help|repeat:\d+)$",
-        )
-    )
 
     logger.info("Бот запущен (long polling)")
     application.run_polling()
