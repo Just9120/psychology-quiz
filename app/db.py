@@ -22,6 +22,7 @@ def init_db_connection(db_path: str) -> None:
     try:
         conn.execute("SELECT 1;")
         ensure_users_reading_mode_column(conn)
+        ensure_quiz_sessions_difficulty_mode_column(conn)
         ensure_quiz_session_selected_categories_table(conn)
     finally:
         conn.close()
@@ -54,6 +55,15 @@ def ensure_quiz_session_selected_categories_table(conn: sqlite3.Connection) -> N
         )
         """
     )
+
+
+def ensure_quiz_sessions_difficulty_mode_column(conn: sqlite3.Connection) -> None:
+    columns = conn.execute("PRAGMA table_info(quiz_sessions)").fetchall()
+    column_names = {str(column["name"]) for column in columns}
+    if "difficulty_mode" in column_names:
+        return
+
+    conn.execute("ALTER TABLE quiz_sessions ADD COLUMN difficulty_mode TEXT")
 
 
 def _normalize_reading_mode(mode: str | None) -> str:
@@ -226,13 +236,19 @@ def create_or_load_user(
     return row
 
 
-def start_quiz_session(conn: sqlite3.Connection, user_id: int, category_id: int | None) -> int:
+def start_quiz_session(
+    conn: sqlite3.Connection,
+    user_id: int,
+    category_id: int | None,
+    difficulty_mode: str | None = None,
+) -> int:
+    ensure_quiz_sessions_difficulty_mode_column(conn)
     cursor = conn.execute(
         """
-        INSERT INTO quiz_sessions (user_id, category_id, status)
-        VALUES (?, ?, 'in_progress')
+        INSERT INTO quiz_sessions (user_id, category_id, status, difficulty_mode)
+        VALUES (?, ?, 'in_progress', ?)
         """,
-        (user_id, category_id),
+        (user_id, category_id, difficulty_mode),
     )
     return int(cursor.lastrowid)
 
@@ -488,6 +504,7 @@ def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.
 
 
 def get_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
+    ensure_quiz_sessions_difficulty_mode_column(conn)
     return conn.execute(
         "SELECT * FROM quiz_sessions WHERE id = ?",
         (session_id,),
