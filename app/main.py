@@ -72,7 +72,6 @@ HELP_TEXT = (
 )
 READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
-SHOW_MENU_CALLBACK_DATA = "menu:show"
 READING_MODE_LABELS = {
     "normal": "Обычный",
     "bionic": "Бионическое чтение",
@@ -311,69 +310,25 @@ async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFA
     )
 
 
-def has_in_progress_quiz_for_user(settings, tg_user) -> bool:
-    with get_connection(settings.db_path) as conn:
-        user_row = create_or_load_user(
-            conn,
-            telegram_user_id=tg_user.id,
-            username=tg_user.username,
-            first_name=tg_user.first_name,
-            last_name=tg_user.last_name,
-        )
-        in_progress_session = conn.execute(
-            """
-            SELECT id
-            FROM quiz_sessions
-            WHERE user_id = ?
-              AND status = 'in_progress'
-            LIMIT 1
-            """,
-            (int(user_row["id"]),),
-        ).fetchone()
-    return in_progress_session is not None
-
 
 async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     message = update.message
-    tg_user = update.effective_user
-    if message is None or tg_user is None:
+    if message is None:
         return
 
-    settings = context.application.bot_data["settings"]
-    if has_in_progress_quiz_for_user(settings, tg_user):
+    try:
         removal_message = await message.reply_text(
             text="Скрываю меню…",
             reply_markup=ReplyKeyboardRemove(),
         )
-        await context.bot.delete_message(
-            chat_id=removal_message.chat_id,
-            message_id=removal_message.message_id,
-        )
-        return
+        await removal_message.delete()
+    except Exception:
+        logger.exception("Не удалось скрыть меню для сообщения %s", message.message_id)
 
-    await message.reply_text("Меню скрыто.", reply_markup=ReplyKeyboardRemove())
-    await message.reply_text(
-        "Чтобы вернуть меню, нажмите кнопку ниже. Если это сообщение потеряется, используйте /start.",
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("👁 Показать меню", callback_data=SHOW_MENU_CALLBACK_DATA)]]
-        ),
-    )
-
-
-async def show_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    del context
-    query = update.callback_query
-    if query is None or query.message is None:
-        return
-
-    await query.answer()
-    await query.edit_message_text(
-        "Меню возвращено. Если понадобится скрыть его снова — используйте кнопку «🙈 Скрыть меню».",
-    )
-    await query.message.reply_text(
-        "Меню снова показано.",
-        reply_markup=get_main_menu_keyboard(),
-    )
+    try:
+        await message.delete()
+    except Exception:
+        logger.debug("Не удалось удалить сообщение-триггер скрытия меню %s", message.message_id)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1327,7 +1282,6 @@ def main() -> None:
             pattern=r"^readingmode:(menu|set:(normal|bionic))$",
         )
     )
-    application.add_handler(CallbackQueryHandler(show_menu_callback, pattern=r"^menu:show$"))
     application.add_handler(
         CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|selected_mix|all)$")
     )
