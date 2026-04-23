@@ -44,6 +44,7 @@ jobs:
           git reset --hard origin/main
           chmod +x deploy.sh
           docker compose build psych_quiz_bot
+          docker compose run --rm psych_quiz_bot python scripts/init_db.py
           docker compose run --rm psych_quiz_bot python scripts/seed_questions.py
           docker compose up -d --force-recreate psych_quiz_bot
           REMOTE
