@@ -272,12 +272,20 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    del context
-    if update.message:
-        await update.message.reply_text(
-            "Привет! Я учебный бот-викторина по психологии. Используйте /help для списка команд.",
-            reply_markup=get_main_menu_keyboard() if is_private_chat(update) else None,
-        )
+    if update.message is None:
+        return
+
+    first_entry = not context.user_data.get("start_seen", False)
+    context.user_data["start_seen"] = True
+    message_text = (
+        "Привет! Я учебный бот-викторина по психологии. Используйте /help для списка команд."
+        if first_entry
+        else "Меню показано."
+    )
+    await update.message.reply_text(
+        message_text,
+        reply_markup=get_main_menu_keyboard() if is_private_chat(update) else None,
+    )
 
 
 async def start_quiz_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -318,7 +326,7 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
 
     try:
         removal_message = await message.reply_text(
-            text="Скрываю меню…",
+            text="\u2060",
             reply_markup=ReplyKeyboardRemove(),
         )
         await removal_message.delete()
@@ -364,7 +372,7 @@ async def remove_main_menu_for_active_quiz(query) -> None:
         return
 
     removal_message = await query.message.reply_text(
-        "Скрываю меню…",
+        "\u2060",
         reply_markup=ReplyKeyboardRemove(),
     )
     await removal_message.delete()
@@ -380,13 +388,25 @@ async def restore_main_menu_after_quiz(query) -> None:
     )
 
 
-async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int) -> None:
-    await query.edit_message_text(
-        build_quiz_finished_text(score, total_questions),
-        reply_markup=build_post_quiz_keyboard(session_id),
+async def send_quiz_result_with_main_menu(query, text: str) -> None:
+    if query.message is None:
+        return
+
+    try:
+        await query.message.delete()
+    except Exception:
+        logger.debug("Не удалось удалить предыдущее сообщение перед отправкой результата викторины.")
+
+    await query.message.chat.send_message(
+        text,
+        reply_markup=get_main_menu_keyboard() if query.message.chat.type == "private" else None,
         parse_mode="HTML",
     )
-    await restore_main_menu_after_quiz(query)
+
+
+async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int) -> None:
+    del session_id
+    await send_quiz_result_with_main_menu(query, build_quiz_finished_text(score, total_questions))
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -474,14 +494,13 @@ async def send_current_question(query, settings, session_id: int) -> bool:
         if finalize_payload is None:
             await query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена.")
             return False
-        await query.edit_message_text(
+        await send_quiz_result_with_main_menu(
+            query,
             "Для текущего вопроса не найдены варианты ответа.\n"
             "Сессия завершена досрочно.\n"
-            f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}",
-            reply_markup=build_post_quiz_keyboard(session_id),
-            parse_mode="HTML",
+            f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}\n\n"
+            "Чтобы запустить новую викторину, используйте /quiz.",
         )
-        await restore_main_menu_after_quiz(query)
         return False
 
     keyboard = []
@@ -1053,14 +1072,10 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         message = (
             f"{result_line}\n\n"
             f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-            f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}"
+            f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}\n\n"
+            "Чтобы запустить новую викторину, используйте /quiz."
         )
-        await query.edit_message_text(
-            message,
-            reply_markup=build_post_quiz_keyboard(session_id),
-            parse_mode="HTML",
-        )
-        await restore_main_menu_after_quiz(query)
+        await send_quiz_result_with_main_menu(query, message)
         return
 
     next_number = answered_questions + 1
