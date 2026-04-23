@@ -29,6 +29,7 @@ def init_db_connection(db_path: str) -> None:
 
 
 VALID_READING_MODES = {"normal", "bionic"}
+VALID_DIFFICULTY_MODES = {"easy", "medium", "hard"}
 
 
 def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
@@ -70,6 +71,18 @@ def _normalize_reading_mode(mode: str | None) -> str:
     if mode in VALID_READING_MODES:
         return str(mode)
     return "normal"
+
+
+def _normalize_difficulty_mode(mode: str | None) -> str | None:
+    if mode is None:
+        return None
+
+    normalized_mode = str(mode).strip().lower()
+    if normalized_mode in {"", "any"}:
+        return None
+    if normalized_mode in VALID_DIFFICULTY_MODES:
+        return normalized_mode
+    return None
 
 
 def _slugify_category(name: str) -> str:
@@ -243,12 +256,13 @@ def start_quiz_session(
     difficulty_mode: str | None = None,
 ) -> int:
     ensure_quiz_sessions_difficulty_mode_column(conn)
+    normalized_difficulty_mode = _normalize_difficulty_mode(difficulty_mode)
     cursor = conn.execute(
         """
         INSERT INTO quiz_sessions (user_id, category_id, status, difficulty_mode)
         VALUES (?, ?, 'in_progress', ?)
         """,
-        (user_id, category_id, difficulty_mode),
+        (user_id, category_id, normalized_difficulty_mode),
     )
     return int(cursor.lastrowid)
 
@@ -259,11 +273,12 @@ def select_random_approved_question_ids_by_category(
     limit: int | None = SESSION_QUESTION_LIMIT,
     difficulty_mode: str | None = None,
 ) -> list[int]:
+    normalized_difficulty_mode = _normalize_difficulty_mode(difficulty_mode)
     params: list[Any] = [category_id]
     where_clause = "q.category_id = ? AND q.status = 'approved'"
-    if difficulty_mode:
+    if normalized_difficulty_mode:
         where_clause += " AND q.difficulty = ?"
-        params.append(difficulty_mode)
+        params.append(normalized_difficulty_mode)
 
     query = f"""
         SELECT q.id
@@ -285,11 +300,12 @@ def select_random_approved_question_ids_across_active_categories(
     limit: int | None = SESSION_QUESTION_LIMIT,
     difficulty_mode: str | None = None,
 ) -> list[int]:
+    normalized_difficulty_mode = _normalize_difficulty_mode(difficulty_mode)
     params: list[Any] = []
     where_clause = "q.status = 'approved'"
-    if difficulty_mode:
+    if normalized_difficulty_mode:
         where_clause += " AND q.difficulty = ?"
-        params.append(difficulty_mode)
+        params.append(normalized_difficulty_mode)
 
     query = f"""
         SELECT q.id
@@ -325,9 +341,10 @@ def select_random_approved_question_ids_by_categories(
     placeholders = ",".join("?" for _ in category_ids)
     params: list[Any] = list(category_ids)
     where_clause = f"q.category_id IN ({placeholders}) AND q.status = 'approved'"
-    if difficulty_mode:
+    normalized_difficulty_mode = _normalize_difficulty_mode(difficulty_mode)
+    if normalized_difficulty_mode:
         where_clause += " AND q.difficulty = ?"
-        params.append(difficulty_mode)
+        params.append(normalized_difficulty_mode)
 
     query = f"""
         SELECT q.id
