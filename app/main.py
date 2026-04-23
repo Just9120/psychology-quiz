@@ -404,12 +404,34 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         )
 
 
+async def remove_main_menu_for_active_quiz(query) -> None:
+    if query.message is None or query.message.chat.type != "private":
+        return
+
+    removal_message = await query.message.reply_text(
+        "Скрываю меню…",
+        reply_markup=ReplyKeyboardRemove(),
+    )
+    await removal_message.delete()
+
+
+async def restore_main_menu_after_quiz(query) -> None:
+    if query.message is None or query.message.chat.type != "private":
+        return
+
+    await query.message.reply_text(
+        "Главное меню снова доступно.",
+        reply_markup=get_main_menu_keyboard(),
+    )
+
+
 async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int) -> None:
     await query.edit_message_text(
         build_quiz_finished_text(score, total_questions),
         reply_markup=build_post_quiz_keyboard(session_id),
         parse_mode="HTML",
     )
+    await restore_main_menu_after_quiz(query)
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -504,6 +526,7 @@ async def send_current_question(query, settings, session_id: int) -> bool:
             reply_markup=build_post_quiz_keyboard(session_id),
             parse_mode="HTML",
         )
+        await restore_main_menu_after_quiz(query)
         return False
 
     keyboard = []
@@ -595,6 +618,7 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
             set_selected_categories_for_session(conn, new_session_id, selected_categories)
         store_session_questions(conn, new_session_id, question_ids)
 
+    await remove_main_menu_for_active_quiz(query)
     await send_current_question(query, settings, new_session_id)
 
 
@@ -728,6 +752,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         )
         store_session_questions(conn, session_id, question_ids)
 
+    await remove_main_menu_for_active_quiz(query)
     await send_current_question(query, settings, session_id)
 
 
@@ -973,6 +998,7 @@ async def start_mix_quiz(
             set_selected_categories_for_session(conn, session_id, selected_category_ids)
         store_session_questions(conn, session_id, question_ids)
 
+    await remove_main_menu_for_active_quiz(query)
     await send_current_question(query, settings, session_id)
 
 
@@ -1079,6 +1105,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             reply_markup=build_post_quiz_keyboard(session_id),
             parse_mode="HTML",
         )
+        await restore_main_menu_after_quiz(query)
         return
 
     next_number = answered_questions + 1
