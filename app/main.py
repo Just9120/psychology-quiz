@@ -315,11 +315,10 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
         return
 
     try:
-        removal_message = await message.reply_text(
+        await message.reply_text(
             text="\u2060",
             reply_markup=ReplyKeyboardRemove(),
         )
-        await removal_message.delete()
     except Exception:
         logger.exception("Не удалось скрыть меню для сообщения %s", message.message_id)
 
@@ -361,11 +360,10 @@ async def remove_main_menu_for_active_quiz(query) -> None:
     if query.message is None or query.message.chat.type != "private":
         return
 
-    removal_message = await query.message.reply_text(
+    await query.message.reply_text(
         "\u2060",
         reply_markup=ReplyKeyboardRemove(),
     )
-    await removal_message.delete()
 
 
 async def restore_main_menu_after_quiz(query) -> None:
