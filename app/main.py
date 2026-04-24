@@ -382,6 +382,11 @@ async def send_quiz_result_with_main_menu(query, text: str) -> None:
     if query.message is None:
         return
 
+    try:
+        await query.edit_message_reply_markup(reply_markup=None)
+    except Exception:
+        logger.debug("Не удалось отключить inline-кнопки у предыдущего сообщения перед показом результата.")
+
     await query.message.chat.send_message(
         text,
         reply_markup=get_main_menu_keyboard() if query.message.chat.type == "private" else None,
