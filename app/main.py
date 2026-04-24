@@ -377,6 +377,7 @@ async def restore_main_menu_after_quiz(query) -> None:
 
 
 async def send_quiz_result_with_main_menu(query, text: str) -> None:
+    """Single completion sink: disable stale quiz inline controls, then send final result."""
     if query.message is None:
         return
 
