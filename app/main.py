@@ -314,13 +314,23 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
     if message is None:
         return
 
+    removal_message = None
     try:
-        await message.reply_text(
+        removal_message = await message.reply_text(
             text="\u2060",
             reply_markup=ReplyKeyboardRemove(),
         )
     except Exception:
         logger.exception("Не удалось скрыть меню для сообщения %s", message.message_id)
+
+    if removal_message is not None:
+        try:
+            await removal_message.delete()
+        except Exception:
+            logger.debug(
+                "Не удалось удалить техническое сообщение скрытия меню %s",
+                removal_message.message_id,
+            )
 
     try:
         await message.delete()
@@ -360,10 +370,23 @@ async def remove_main_menu_for_active_quiz(query) -> None:
     if query.message is None or query.message.chat.type != "private":
         return
 
-    await query.message.reply_text(
-        "\u2060",
-        reply_markup=ReplyKeyboardRemove(),
-    )
+    removal_message = None
+    try:
+        removal_message = await query.message.reply_text(
+            "\u2060",
+            reply_markup=ReplyKeyboardRemove(),
+        )
+    except Exception:
+        logger.debug("Не удалось скрыть главное меню в активной викторине.")
+
+    if removal_message is not None:
+        try:
+            await removal_message.delete()
+        except Exception:
+            logger.debug(
+                "Не удалось удалить техническое сообщение скрытия меню в викторине %s",
+                removal_message.message_id,
+            )
 
 
 async def restore_main_menu_after_quiz(query) -> None:
