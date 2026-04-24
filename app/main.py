@@ -394,6 +394,7 @@ async def send_quiz_result_with_main_menu(query, text: str) -> None:
 
 
 async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int) -> None:
+    # Reuse the single completion sink so stale inline quiz controls are always disabled first.
     del session_id
     await send_quiz_result_with_main_menu(query, build_quiz_finished_text(score, total_questions))
 
