@@ -67,7 +67,7 @@ def validate() -> list[str]:
 
             correct_idx = question.get("correct_option_index")
             if isinstance(options, list):
-                if not isinstance(correct_idx, int):
+                if type(correct_idx) is not int:
                     errors.append(f"{label}: correct_option_index must be an integer")
                 elif correct_idx < 0 or correct_idx >= len(options):
                     errors.append(
