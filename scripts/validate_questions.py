@@ -15,6 +15,7 @@ REQUIRED_FIELDS = {
     "options",
     "correct_option_index",
     "status",
+    "source_ref",
 }
 
 
@@ -80,7 +81,7 @@ def validate() -> list[str]:
             if "source_ref" in question:
                 source_ref = question.get("source_ref")
                 if source_ref is None or not str(source_ref).strip():
-                    errors.append(f"{label}: source_ref, if present, must be non-empty")
+                    errors.append(f"{label}: source_ref must be non-empty")
 
     return errors
 
