@@ -583,3 +583,81 @@ def set_user_reading_mode(conn: sqlite3.Connection, user_id: int, mode: str) -> 
         (normalized_mode, user_id),
     )
     return normalized_mode
+
+
+def get_owner_stats(conn: sqlite3.Connection) -> dict[str, Any]:
+    total_users = int(conn.execute("SELECT COUNT(*) FROM users").fetchone()[0])
+    new_users = {
+        "24h": int(conn.execute("SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-1 day')").fetchone()[0]),
+        "7d": int(conn.execute("SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-7 day')").fetchone()[0]),
+        "30d": int(conn.execute("SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-30 day')").fetchone()[0]),
+    }
+    active_users = {
+        "24h": int(conn.execute("SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-1 day')").fetchone()[0]),
+        "7d": int(conn.execute("SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-7 day')").fetchone()[0]),
+        "30d": int(conn.execute("SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-30 day')").fetchone()[0]),
+    }
+    sessions_row = conn.execute(
+        """
+        SELECT
+            COUNT(*) AS total_sessions,
+            SUM(CASE WHEN status = 'finished' OR finished_at IS NOT NULL THEN 1 ELSE 0 END) AS completed_sessions,
+            SUM(CASE WHEN status = 'in_progress' AND finished_at IS NULL THEN 1 ELSE 0 END) AS in_progress_sessions
+        FROM quiz_sessions
+        """
+    ).fetchone()
+    total_answers = int(conn.execute("SELECT COUNT(*) FROM quiz_answers").fetchone()[0])
+    total_approved_questions = int(conn.execute("SELECT COUNT(*) FROM questions WHERE status = 'approved'").fetchone()[0])
+    active_categories_count = int(
+        conn.execute(
+            """
+            SELECT COUNT(*)
+            FROM categories c
+            WHERE EXISTS (
+                SELECT 1 FROM questions q
+                WHERE q.category_id = c.id AND q.status = 'approved'
+            )
+            """
+        ).fetchone()[0]
+    )
+    questions_by_category = [
+        {"category": str(row["name"]), "questions": int(row["approved_questions"])}
+        for row in conn.execute(
+            """
+            SELECT c.name, COUNT(q.id) AS approved_questions
+            FROM categories c
+            JOIN questions q ON q.category_id = c.id
+            WHERE q.status = 'approved'
+            GROUP BY c.id, c.name
+            ORDER BY c.name ASC
+            """
+        ).fetchall()
+    ]
+    top_categories_30d = [
+        {"category": str(row["name"]), "sessions": int(row["started_sessions"])}
+        for row in conn.execute(
+            """
+            SELECT c.name, COUNT(*) AS started_sessions
+            FROM quiz_sessions qs
+            JOIN quiz_session_selected_categories qssc ON qssc.session_id = qs.id
+            JOIN categories c ON c.id = qssc.category_id
+            WHERE qs.started_at >= datetime('now', '-30 day')
+            GROUP BY c.id, c.name
+            ORDER BY started_sessions DESC, c.name ASC
+            LIMIT 5
+            """
+        ).fetchall()
+    ]
+    return {
+        "total_users": total_users,
+        "new_users": new_users,
+        "active_users": active_users,
+        "total_sessions": int(sessions_row["total_sessions"] or 0),
+        "completed_sessions": int(sessions_row["completed_sessions"] or 0),
+        "in_progress_sessions": int(sessions_row["in_progress_sessions"] or 0),
+        "total_answers": total_answers,
+        "total_approved_questions": total_approved_questions,
+        "active_categories_count": active_categories_count,
+        "questions_by_category": questions_by_category,
+        "top_categories_30d": top_categories_30d,
+    }
