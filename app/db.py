@@ -583,3 +583,92 @@ def set_user_reading_mode(conn: sqlite3.Connection, user_id: int, mode: str) -> 
         (normalized_mode, user_id),
     )
     return normalized_mode
+
+
+def get_owner_stats(conn: sqlite3.Connection) -> dict[str, Any]:
+    def _fetch_count(query: str) -> int:
+        row = conn.execute(query).fetchone()
+        if row is None:
+            return 0
+        return int(row[0])
+
+    questions_by_category_rows = conn.execute(
+        """
+        SELECT c.name AS category_name, COUNT(q.id) AS question_count
+        FROM categories c
+        LEFT JOIN questions q
+          ON q.category_id = c.id
+         AND q.status = 'approved'
+        GROUP BY c.id, c.name
+        HAVING COUNT(q.id) > 0
+        ORDER BY c.name ASC
+        """
+    ).fetchall()
+
+    top_categories_30d_rows = conn.execute(
+        """
+        SELECT c.name, COUNT(DISTINCT qs.id) AS started_sessions
+        FROM quiz_sessions qs
+        JOIN quiz_session_questions qsq ON qsq.session_id = qs.id
+        JOIN questions q ON q.id = qsq.question_id
+        JOIN categories c ON c.id = q.category_id
+        WHERE qs.started_at >= datetime('now', '-30 day')
+        GROUP BY c.id, c.name
+        ORDER BY started_sessions DESC, c.name ASC
+        LIMIT 5
+        """
+    ).fetchall()
+
+    return {
+        "total_users": _fetch_count("SELECT COUNT(*) FROM users"),
+        "new_users_24h": _fetch_count(
+            "SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-24 hour')"
+        ),
+        "new_users_7d": _fetch_count(
+            "SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-7 day')"
+        ),
+        "new_users_30d": _fetch_count(
+            "SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-30 day')"
+        ),
+        "active_users_24h": _fetch_count(
+            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-24 hour')"
+        ),
+        "active_users_7d": _fetch_count(
+            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-7 day')"
+        ),
+        "active_users_30d": _fetch_count(
+            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-30 day')"
+        ),
+        "total_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions"),
+        "completed_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions WHERE status = 'finished'"),
+        "in_progress_quiz_sessions": _fetch_count(
+            "SELECT COUNT(*) FROM quiz_sessions WHERE status = 'in_progress'"
+        ),
+        "total_quiz_answers": _fetch_count("SELECT COUNT(*) FROM quiz_answers"),
+        "total_approved_questions": _fetch_count("SELECT COUNT(*) FROM questions WHERE status = 'approved'"),
+        "active_categories_count": _fetch_count(
+            """
+            SELECT COUNT(*)
+            FROM categories c
+            WHERE EXISTS (
+                SELECT 1 FROM questions q
+                WHERE q.category_id = c.id
+                  AND q.status = 'approved'
+            )
+            """
+        ),
+        "questions_by_category": [
+            {
+                "category_name": str(row["category_name"]),
+                "question_count": int(row["question_count"]),
+            }
+            for row in questions_by_category_rows
+        ],
+        "top_categories_30d": [
+            {
+                "category_name": str(row["name"]),
+                "started_sessions": int(row["started_sessions"]),
+            }
+            for row in top_categories_30d_rows
+        ],
+    }
