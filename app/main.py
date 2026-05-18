@@ -353,6 +353,10 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     settings = context.application.bot_data["settings"]
     tg_user = update.effective_user
 
+    if not is_private_chat(update):
+        await safe_reply(update, "Недоступно")
+        return
+
     if not settings.admin_telegram_ids:
         logger.warning("Команда /stats вызвана при отключенной ADMIN_TELEGRAM_IDS")
         await safe_reply(update, "Недоступно")
