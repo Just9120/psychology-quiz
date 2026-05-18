@@ -637,10 +637,11 @@ def get_owner_stats(conn: sqlite3.Connection) -> dict[str, Any]:
         {"category": str(row["name"]), "sessions": int(row["started_sessions"])}
         for row in conn.execute(
             """
-            SELECT c.name, COUNT(*) AS started_sessions
+            SELECT c.name, COUNT(DISTINCT qs.id) AS started_sessions
             FROM quiz_sessions qs
-            JOIN quiz_session_selected_categories qssc ON qssc.session_id = qs.id
-            JOIN categories c ON c.id = qssc.category_id
+            JOIN quiz_session_questions qsq ON qsq.session_id = qs.id
+            JOIN questions q ON q.id = qsq.question_id
+            JOIN categories c ON c.id = q.category_id
             WHERE qs.started_at >= datetime('now', '-30 day')
             GROUP BY c.id, c.name
             ORDER BY started_sessions DESC, c.name ASC
