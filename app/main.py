@@ -34,6 +34,7 @@ from app.db import (
     get_question_options,
     get_quiz_session,
     get_selected_categories_for_session,
+    get_owner_stats,
     init_db_connection,
     is_question_in_session,
     save_quiz_answer,
@@ -346,6 +347,76 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def ping_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
     await safe_reply(update, "pong")
+
+
+def format_owner_stats_text(stats: dict) -> str:
+    lines = [
+        "📊 Статистика бота",
+        "",
+        f"Пользователи всего: {stats['total_users']}",
+        (
+            "Новые пользователи: "
+            f"24ч — {stats['new_users_24h']}, "
+            f"7д — {stats['new_users_7d']}, "
+            f"30д — {stats['new_users_30d']}"
+        ),
+        (
+            "Активные пользователи: "
+            f"24ч — {stats['active_users_24h']}, "
+            f"7д — {stats['active_users_7d']}, "
+            f"30д — {stats['active_users_30d']}"
+        ),
+        "",
+        f"Сессии всего: {stats['total_quiz_sessions']}",
+        f"Сессии завершено: {stats['completed_quiz_sessions']}",
+        f"Сессии в процессе: {stats['in_progress_quiz_sessions']}",
+        f"Ответов всего: {stats['total_quiz_answers']}",
+        "",
+        f"Одобренных вопросов: {stats['total_approved_questions']}",
+        f"Активных категорий: {stats['active_categories_count']}",
+        "",
+        "Вопросы по категориям:",
+    ]
+
+    questions_by_category = stats.get("questions_by_category", [])
+    if questions_by_category:
+        lines.extend(
+            f"• {item['category_name']}: {item['question_count']}"
+            for item in questions_by_category
+        )
+    else:
+        lines.append("• Нет данных")
+
+    lines.extend(["", "Топ-5 категорий по начатым сессиям (30 дней):"])
+    top_categories = stats.get("top_categories_30d", [])
+    if top_categories:
+        lines.extend(
+            f"• {item['category_name']}: {item['started_sessions']}"
+            for item in top_categories
+        )
+    else:
+        lines.append("• Нет данных")
+
+    return "\n".join(lines)
+
+
+async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not is_private_chat(update):
+        return
+
+    user = update.effective_user
+    if user is None:
+        return
+
+    settings = context.application.bot_data["settings"]
+    if not settings.admin_telegram_ids or user.id not in settings.admin_telegram_ids:
+        await safe_reply(update, "Недоступно")
+        return
+
+    with get_connection(settings.db_path) as conn:
+        stats = get_owner_stats(conn)
+
+    await safe_reply(update, format_owner_stats_text(stats))
 
 
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1242,6 +1313,7 @@ def main() -> None:
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
+    application.add_handler(CommandHandler("stats", stats_command))
     application.add_handler(
         MessageHandler(
             filters.ChatType.PRIVATE & filters.Regex(r"^🎯 Начать викторину$"),
