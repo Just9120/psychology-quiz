@@ -86,3 +86,10 @@ Fallback:
 - webhook
 - RAG и внешняя генерация вопросов во время работы
 - расширение Module 2 на новые темы без отдельного согласованного решения (помимо уже открытых активных категорий)
+
+## Documentation
+
+- [Project Specification](docs/project-spec.md)
+- [AI Coding Workflow](docs/ai-coding-workflow.md)
+- [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md)
+
