@@ -92,4 +92,5 @@ Fallback:
 - [Project Specification](docs/project-spec.md)
 - [AI Coding Workflow](docs/ai-coding-workflow.md)
 - [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md)
+- [Delivery Plan](docs/delivery-plan.md)
 
