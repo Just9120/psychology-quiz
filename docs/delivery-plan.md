@@ -44,7 +44,8 @@
 | #107 | Module 2 qualitative batch 3 content QA | ✅ Done |
 | #108 | Module 2 experimental batch content QA | ✅ Done |
 | #109 | Module 2 coverage audit | ✅ Done |
-| This PR | Module 2 qualitative applied case questions | ✅ Done |
+| #110 | Module 2 qualitative applied case questions | ✅ Done |
+| This PR | Module 2 qualitative applied-case batch QA | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -54,7 +55,7 @@
 ## Next recommended item
 После этого PR:
 1. Использовать `docs/content_audit_module2.md` для выбора следующего gap-driven content PR.
-2. Рекомендуемый следующий PR: `QA Module 2 qualitative applied-case batch`.
+2. Рекомендуемый следующий PR: `Add Module 2 experimental design interpretation questions`.
 3. Продолжать QA и controlled growth только в уже активных категориях Module 2.
 4. Telegram Mini App / Web App оставлять в статусе analytics/design only и не переносить в implementation scope.
 5. Новую категорию Module 2 не открывать без отдельного явного решения.
