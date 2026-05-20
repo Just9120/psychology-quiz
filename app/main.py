@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from html import escape
+import json
 import logging
 import re
+import urllib.parse
 
 from telegram import (
     BotCommand,
@@ -12,6 +14,7 @@ from telegram import (
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
     Update,
+    WebAppInfo,
 )
 from telegram.ext import (
     Application,
@@ -69,7 +72,8 @@ HELP_TEXT = (
     "/start — приветствие\n"
     "/help — список команд\n"
     "/ping — проверка доступности\n"
-    "/quiz — запустить викторину"
+    "/quiz — запустить викторину\n"
+    "/ui — экспериментальный Mini App setup"
 )
 READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
@@ -78,6 +82,8 @@ READING_MODE_LABELS = {
     "bionic": "Бионическое чтение",
 }
 WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)")
+MAX_MINIAPP_URL_LENGTH = 1800
+MAX_WEBAPP_DATA_BYTES = 4096
 
 
 def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
@@ -236,8 +242,31 @@ async def post_init(application: Application) -> None:
             BotCommand("help", "Список команд"),
             BotCommand("ping", "Проверка доступности"),
             BotCommand("quiz", "Начать викторину"),
+            BotCommand("ui", "Экспериментальный Mini App setup"),
         ]
     )
+
+
+def build_miniapp_setup_context(categories) -> dict:
+    return {
+        "type": "miniapp_setup_context",
+        "version": 1,
+        "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories],
+    }
+
+
+def encode_miniapp_setup_context(context: dict) -> str:
+    context_json = json.dumps(context, ensure_ascii=False, separators=(",", ":"))
+    return urllib.parse.quote(context_json, safe="")
+
+
+def build_miniapp_url(base_url: str, context: dict) -> str:
+    encoded_context = encode_miniapp_setup_context(context)
+    parsed = urllib.parse.urlsplit(base_url)
+    query_params = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+    query_params.append(("context", encoded_context))
+    new_query = urllib.parse.urlencode(query_params)
+    return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, new_query, parsed.fragment))
 
 
 async def safe_reply(update: Update, text: str) -> None:
@@ -435,6 +464,206 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
             "Выберите режим викторины:",
             reply_markup=build_quiz_mode_keyboard(),
         )
+
+
+async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if update.message is None:
+        return
+    if not is_private_chat(update):
+        await update.message.reply_text("Mini App setup screen доступен только в личном чате с ботом.")
+        return
+
+    settings = context.application.bot_data["settings"]
+    if not settings.mini_app_url:
+        await update.message.reply_text(
+            "Mini App setup screen пока не настроен.\n"
+            "Используйте обычный запуск викторины через /quiz."
+        )
+        return
+
+    with get_connection(settings.db_path) as conn:
+        categories = get_active_categories(conn)
+    if not categories:
+        await update.message.reply_text(
+            "Сейчас нет доступных тем для запуска викторины.\n"
+            "Используйте /quiz позже или проверьте загрузку вопросов."
+        )
+        return
+
+    miniapp_context = build_miniapp_setup_context(categories)
+    miniapp_url = build_miniapp_url(settings.mini_app_url, miniapp_context)
+    # Conservative guard: practical Telegram button URL and query size safety.
+    if len(miniapp_url) > MAX_MINIAPP_URL_LENGTH:
+        await update.message.reply_text(
+            "Mini App setup screen временно недоступен: слишком большой список категорий.\n"
+            "Используйте обычный запуск викторины через /quiz."
+        )
+        return
+
+    await update.message.reply_text(
+        "Текущий основной режим: classic Telegram chat UX.\n\n"
+        "Доступен экспериментальный Mini App setup screen.\n"
+        "Он позволяет выбрать параметры викторины в web-like интерфейсе внутри Telegram.\n"
+        "Сами вопросы пока продолжают проходиться в обычном чате.\n\n"
+        "Вы можете открыть Mini App или остаться в classic UX.",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                [KeyboardButton("🧪 Открыть Mini App", web_app=WebAppInfo(url=miniapp_url))],
+                [KeyboardButton("🎯 Начать викторину")],
+            ],
+            resize_keyboard=True,
+            is_persistent=True,
+        ),
+    )
+
+
+async def send_current_question_to_chat(chat, settings, session_id: int) -> bool:
+    with get_connection(settings.db_path) as conn:
+        current = get_current_unanswered_question(conn, session_id)
+        if current is None:
+            return False
+        question_id = int(current["question_id"])
+        options = get_question_options(conn, question_id)
+        session = get_quiz_session(conn, session_id)
+        reading_mode = "normal"
+        if session is not None:
+            reading_mode = get_user_reading_mode(conn, int(session["user_id"]))
+    if not options:
+        await chat.send_message("Для вопроса не найдены варианты ответа. Сессия завершена.")
+        return False
+    keyboard = [[InlineKeyboardButton(option_index_to_label(int(opt["option_index"])), callback_data=f"ans:{session_id}:{question_id}:{int(opt['option_index'])}")] for opt in options]
+    await chat.send_message(
+        build_question_text_with_options(
+            order_index=int(current["order_index"]),
+            total_questions=int(current["total_questions"]),
+            question_text=str(current["question_text"]),
+            options=options,
+            reading_mode=reading_mode,
+        ),
+        reply_markup=InlineKeyboardMarkup(keyboard),
+        parse_mode="HTML",
+    )
+    return True
+
+
+def _invalid_miniapp_payload_text() -> str:
+    return (
+        "Не удалось запустить викторину: некорректные параметры Mini App.\n"
+        "Откройте настройку заново через /ui или запустите обычную викторину через /quiz."
+    )
+
+
+async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    message = update.message
+    if message is None or message.web_app_data is None:
+        return
+    if not is_private_chat(update):
+        await message.reply_text("Mini App setup screen доступен только в личном чате с ботом.")
+        return
+    try:
+        await message.delete()
+    except Exception:
+        logger.debug("Не удалось удалить service message web_app_data: %s", message.message_id)
+
+    raw_data = message.web_app_data.data or ""
+    if not raw_data or len(raw_data.encode("utf-8")) > MAX_WEBAPP_DATA_BYTES:
+        await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+    try:
+        payload = json.loads(raw_data)
+    except json.JSONDecodeError:
+        await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+    if not isinstance(payload, dict):
+        await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+
+    quiz_mode = payload.get("quiz_mode")
+    question_count = payload.get("question_count")
+    difficulty = payload.get("difficulty")
+    category_ids = payload.get("category_ids")
+    if (
+        payload.get("type") != "quiz_setup"
+        or quiz_mode not in {"single", "selected_mix", "all"}
+        or question_count not in {5, 10, 15, None}
+        or difficulty not in {"any", "easy", "medium", "hard"}
+        or not isinstance(category_ids, list)
+        or any(not isinstance(item, int) for item in category_ids)
+    ):
+        await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+
+    settings = context.application.bot_data["settings"]
+    tg_user = update.effective_user
+    if tg_user is None:
+        await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+    with get_connection(settings.db_path) as conn:
+        active_categories = get_active_categories(conn)
+        active_ids = {int(row["id"]) for row in active_categories}
+        difficulty_filter = None if difficulty == "any" else difficulty
+        if quiz_mode == "single":
+            if len(category_ids) != 1:
+                await message.chat.send_message(_invalid_miniapp_payload_text())
+                return
+            category_id = int(category_ids[0])
+            if category_id not in active_ids:
+                await message.chat.send_message("Выбранная тема больше недоступна. Откройте настройку викторины заново.")
+                return
+            question_ids = select_random_approved_question_ids_by_category(conn, category_id, question_count, difficulty_filter)
+            session_category_id: int | None = category_id
+            selected_ids: list[int] | None = None
+        elif quiz_mode == "selected_mix":
+            if not category_ids:
+                await message.chat.send_message(_invalid_miniapp_payload_text())
+                return
+            if any(category_id not in active_ids for category_id in category_ids):
+                await message.chat.send_message("Выбранные темы больше недоступны. Откройте настройку викторины заново.")
+                return
+            for category_id in category_ids:
+                category_probe = select_random_approved_question_ids_by_category(
+                    conn,
+                    category_id=category_id,
+                    limit=1,
+                    difficulty_mode=difficulty_filter,
+                )
+                if not category_probe:
+                    await message.chat.send_message(
+                        "Не удалось подобрать вопросы под выбранные параметры.\n"
+                        "Попробуйте изменить тему, количество вопросов или сложность."
+                    )
+                    return
+            question_ids = select_random_approved_question_ids_by_categories(conn, category_ids, question_count, difficulty_filter)
+            session_category_id = None
+            selected_ids = category_ids
+        else:
+            # Safer behavior: all mode ignores client category_ids completely.
+            question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
+            session_category_id = None
+            selected_ids = None
+        if not question_ids:
+            await message.chat.send_message(
+                "Не удалось подобрать вопросы под выбранные параметры.\n"
+                "Попробуйте изменить тему, количество вопросов или сложность."
+            )
+            return
+        user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+        session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
+        if selected_ids:
+            set_selected_categories_for_session(conn, session_id, selected_ids)
+        store_session_questions(conn, session_id, question_ids)
+
+    removal_message = None
+    try:
+        removal_message = await message.chat.send_message("\u2060", reply_markup=ReplyKeyboardRemove())
+    except Exception:
+        logger.debug("Не удалось скрыть главное меню после Mini App setup.")
+    if removal_message is not None:
+        try:
+            await removal_message.delete()
+        except Exception:
+            logger.debug("Не удалось удалить техническое сообщение скрытия меню %s", removal_message.message_id)
+    await send_current_question_to_chat(message.chat, settings, session_id)
 
 
 async def remove_main_menu_for_active_quiz(query) -> None:
@@ -1313,6 +1542,7 @@ def main() -> None:
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
+    application.add_handler(CommandHandler("ui", ui_command))
     application.add_handler(CommandHandler("stats", stats_command))
     application.add_handler(
         MessageHandler(
@@ -1376,6 +1606,7 @@ def main() -> None:
     )
     application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))
     application.add_handler(CallbackQueryHandler(next_callback, pattern=r"^next:\d+$"))
+    application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data_handler))
 
     logger.info("Бот запущен (long polling)")
     application.run_polling()

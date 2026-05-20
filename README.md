@@ -110,3 +110,8 @@ Source-of-truth модель:
 - Source of truth банка вопросов — JSON-файлы в `content/questions/`.
 - SQLite — только runtime layer.
 
+
+## Mini App setup (MVP)
+
+- `MINI_APP_URL` (optional): URL статического Telegram Mini App setup-экрана для opt-in команды `/ui`; при отсутствии переменной бот продолжает работать только в classic chat UX режиме.
+- В этом PR добавлен только статический setup-screen (`miniapp/index.html`); его hosting и публикация URL должны быть настроены отдельно на стороне deploy/infrastructure.

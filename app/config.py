@@ -17,6 +17,7 @@ class Settings:
     app_env: str
     log_level: str
     db_path: str
+    mini_app_url: str | None
     admin_telegram_ids: frozenset[int]
 
 
@@ -45,6 +46,7 @@ def load_settings() -> Settings:
     app_env = os.getenv("APP_ENV", "dev").strip() or "dev"
     log_level = os.getenv("LOG_LEVEL", "INFO").strip() or "INFO"
     db_path = os.getenv("DB_PATH", "/data/quiz.sqlite3").strip() or "/data/quiz.sqlite3"
+    mini_app_url = os.getenv("MINI_APP_URL", "").strip() or None
     admin_telegram_ids = _parse_admin_telegram_ids(os.getenv("ADMIN_TELEGRAM_IDS", ""))
 
     return Settings(
@@ -53,6 +55,7 @@ def load_settings() -> Settings:
         app_env=app_env,
         log_level=log_level,
         db_path=db_path,
+        mini_app_url=mini_app_url,
         admin_telegram_ids=admin_telegram_ids,
     )
 logger = logging.getLogger(__name__)
