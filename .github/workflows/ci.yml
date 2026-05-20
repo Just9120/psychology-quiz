@@ -9,11 +9,18 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate-and-smoke-test:
     runs-on: ubuntu-latest
     env:
-      DB_PATH: ${{ runner.temp }}/quiz.sqlite3
+      DB_PATH: ${{ runner.temp }}/quiz-ci.sqlite3
 
     steps:
       - name: Checkout repository
@@ -30,11 +37,48 @@ jobs:
       - name: Check Python syntax
         run: python -m compileall app scripts
 
+      - name: Check JSON syntax for question bank files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          paths = sorted(Path("content/questions").rglob("*.json"))
+          if not paths:
+              raise SystemExit("No question JSON files found")
+
+          for path in paths:
+              with path.open("r", encoding="utf-8") as f:
+                  json.load(f)
+              print(f"OK {path}")
+          PY
+
       - name: Validate question bank JSON
         run: python scripts/validate_questions.py
+
+      - name: Check for whitespace and merge marker issues
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
 
       - name: Initialize temporary database
         run: python scripts/init_db.py
 
       - name: Seed questions into temporary database
         run: python scripts/seed_questions.py
+
+      - name: Write CI summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "### CI validation summary"
+            echo "- compileall passed"
+            echo "- JSON syntax passed"
+            echo "- validate_questions passed"
+            echo "- DB init/seed smoke passed"
+            echo "- git diff --check passed"
+          } >> "$GITHUB_STEP_SUMMARY"
