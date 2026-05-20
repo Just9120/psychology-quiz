@@ -41,7 +41,8 @@
 | #103 | Module 1 general psychology and intro content QA cleanup | ✅ Done |
 | #104 | Module 2 existing categories content QA revision | ✅ Done |
 | #106 | Module 2 qualitative methods content growth (batch 3) | ✅ Done |
-| This PR | Module 2 qualitative batch 3 content QA | ✅ Done |
+| #107 | Module 2 qualitative batch 3 content QA | ✅ Done |
+| This PR | Module 2 experimental batch content QA | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
