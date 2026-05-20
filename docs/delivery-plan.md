@@ -40,7 +40,8 @@
 | #102 | Module 1 baseline content QA cleanup | ✅ Done |
 | #103 | Module 1 general psychology and intro content QA cleanup | ✅ Done |
 | #104 | Module 2 existing categories content QA revision | ✅ Done |
-| This PR | Module 2 qualitative methods content growth (batch 3) | ✅ Done |
+| #106 | Module 2 qualitative methods content growth (batch 3) | ✅ Done |
+| This PR | Module 2 qualitative batch 3 content QA | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -49,10 +50,11 @@
 
 ## Next recommended item
 После этого PR:
-1. Продолжать контролируемый рост и QA контента в двух существующих категориях Module 2:
+1. Продолжать QA и контролируемый рост банка вопросов в двух уже активных категориях Module 2:
    - `Основы экспериментальной психологии`
    - `Качественные методы исследования`
-2. Новую категорию Module 2 пока не открывать; если она понадобится, сначала принять отдельное явное решение.
+2. Telegram Mini App / Web App оставлять в статусе analytics/design only и не переносить в implementation scope.
+3. Новую категорию Module 2 пока не открывать; если она понадобится, сначала принять отдельное явное решение.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
