@@ -80,6 +80,14 @@ Fallback:
 - резервное восстановление через `/start`
 - режим чтения: `Обычный` / `Бионическое чтение`
 
+
+## Telegram Mini App (experimental note)
+
+- Standalone Web UI / PWA сейчас не входят в текущий scope проекта.
+- Telegram Mini App может быть добавлен как экспериментальный opt-in UX mode внутри Telegram.
+- Первый MVP Mini App ограничен setup-экраном и не заменяет текущий chat-based quiz runner.
+- При будущем открытии через `/ui` Mini App получает активные категории от бота через setup context.
+
 ## Что вне текущего продуктового контура
 
 - Web UI
