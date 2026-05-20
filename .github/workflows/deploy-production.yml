@@ -1,4 +1,4 @@
-name: Deploy production
+name: CD
 
 on:
   push:
@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   deploy:
+    name: Deploy production
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 15
