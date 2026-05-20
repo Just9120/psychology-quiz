@@ -67,7 +67,6 @@
 - [ ] Следующую категорию Module 2 определять отдельным решением перед её открытием.
 
 ## Runtime / UX / analytics backlog
-- [ ] Define experimental Telegram Mini App mode as opt-in UX mode.
 - [ ] Implement `/ui` command and Mini App setup-screen MVP.
 - [ ] Keep classic Telegram chat UX as default until a separate decision is made.
 - [ ] Сохранять owner-only и агрегированный характер `/stats`.
