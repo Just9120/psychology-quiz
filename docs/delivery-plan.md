@@ -37,7 +37,8 @@
 | #97 | Migrate canonical `docs/project-spec.md` + add `docs/ai-delivery-infrastructure-plan.md` | ✅ Done |
 | #100 | Module 2 qualitative methods content growth (batch 2) | ✅ Done |
 | #101 | Module 2 experimental psychology content growth (next batch) | ✅ Done |
-| This PR | Module 1 baseline content QA cleanup | ✅ Done |
+| #102 | Module 1 baseline content QA cleanup | ✅ Done |
+| This PR | Module 1 general psychology and intro content QA cleanup | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -68,7 +69,7 @@
 ## Deferred / out-of-scope items
 - Внедрение Context Bundle Builder (deferred, not adopted).
 - Попытки сделать `docs/delivery-plan.md` заменой полного product spec (out-of-scope).
-- Возврат `docs/TZ_psychology_quiz.md` в статус active source of truth (запрещено; файл остаётся obsolete/historical).
+- Возврат или пересоздание `docs/TZ_psychology_quiz.md` как active source of truth запрещены; файл удалён после миграции в `docs/project-spec.md`.
 
 ## Update rules
 1. Обновлять этот документ в каждом PR, который меняет delivery-state (done/in-progress/deferred/next).
