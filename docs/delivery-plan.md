@@ -35,7 +35,8 @@
 | #95 | Hidden owner-only `/stats` analytics | ✅ Done |
 | #96 | Add `docs/ai-coding-workflow.md` | ✅ Done |
 | #97 | Migrate canonical `docs/project-spec.md` + add `docs/ai-delivery-infrastructure-plan.md` | ✅ Done |
-| This PR | Module 2 qualitative methods content growth (batch 2) | ✅ Done |
+| #100 | Module 2 qualitative methods content growth (batch 2) | ✅ Done |
+| This PR | Module 2 experimental psychology content growth (next batch) | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
