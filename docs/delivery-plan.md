@@ -43,7 +43,8 @@
 | #106 | Module 2 qualitative methods content growth (batch 3) | ✅ Done |
 | #107 | Module 2 qualitative batch 3 content QA | ✅ Done |
 | #108 | Module 2 experimental batch content QA | ✅ Done |
-| This PR | Module 2 coverage audit | ✅ Done |
+| #109 | Module 2 coverage audit | ✅ Done |
+| This PR | Module 2 qualitative applied case questions | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -53,9 +54,10 @@
 ## Next recommended item
 После этого PR:
 1. Использовать `docs/content_audit_module2.md` для выбора следующего gap-driven content PR.
-2. Recommended next PR: `Add Module 2 qualitative applied case questions`.
-3. Telegram Mini App / Web App оставлять в статусе analytics/design only и не переносить в implementation scope.
-4. Новую категорию Module 2 не открывать без отдельного явного решения.
+2. Рекомендуемый следующий PR: `QA Module 2 qualitative applied-case batch`.
+3. Продолжать QA и controlled growth только в уже активных категориях Module 2.
+4. Telegram Mini App / Web App оставлять в статусе analytics/design only и не переносить в implementation scope.
+5. Новую категорию Module 2 не открывать без отдельного явного решения.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
