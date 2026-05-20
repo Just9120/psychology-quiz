@@ -48,7 +48,8 @@
 | #111 | Module 2 qualitative applied-case batch QA | ✅ Done |
 | #112 | Module 2 experimental design interpretation questions | ✅ Done |
 | #115 | Module 2 experimental design interpretation batch QA | ✅ Done |
-| This PR | Define experimental Telegram Mini App mode | ✅ Done |
+| #116 | Define experimental Telegram Mini App mode | ✅ Done |
+| This PR | Implement /ui command and Mini App setup-screen MVP | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -56,8 +57,8 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-После этого docs/design PR:
-1. Рекомендуемый следующий технический PR: `Implement /ui command and Mini App setup-screen MVP behind an opt-in test mode`.
+После технического MVP Mini App setup-screen:
+1. Провести manual QA и deployment-валидацию статического Mini App hosting URL (`MINI_APP_URL`) в Telegram.
 2. Classic Telegram chat UX сохранять дефолтным до отдельного явного product-решения по смене default UX.
 3. Задачу `QA Module 2 duplicate and source_ref balance` держать в backlog как отдельный content QA шаг без удаления из delivery-фокуса.
 
@@ -67,7 +68,7 @@
 - [ ] Следующую категорию Module 2 определять отдельным решением перед её открытием.
 
 ## Runtime / UX / analytics backlog
-- [ ] Implement `/ui` command and Mini App setup-screen MVP.
+- [x] Implement `/ui` command and Mini App setup-screen MVP.
 - [ ] Keep classic Telegram chat UX as default until a separate decision is made.
 - [ ] Сохранять owner-only и агрегированный характер `/stats`.
 
