@@ -48,10 +48,10 @@
 
 ## Next recommended item
 После этого PR:
-1. Continue controlled content growth and QA in the two existing Module 2 categories:
+1. Продолжать контролируемый рост и QA контента в двух существующих категориях Module 2:
    - `Основы экспериментальной психологии`
    - `Качественные методы исследования`
-2. Do not open a new Module 2 category until a separate explicit decision is made.
+2. Новую категорию Module 2 пока не открывать; если она понадобится, сначала принять отдельное явное решение.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
