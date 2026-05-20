@@ -47,7 +47,8 @@
 | #110 | Module 2 qualitative applied case questions | ✅ Done |
 | #111 | Module 2 qualitative applied-case batch QA | ✅ Done |
 | #112 | Module 2 experimental design interpretation questions | ✅ Done |
-| This PR | Module 2 experimental design interpretation batch QA | ✅ Done |
+| #115 | Module 2 experimental design interpretation batch QA | ✅ Done |
+| This PR | Define experimental Telegram Mini App mode | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -55,12 +56,10 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-После этого PR:
-1. Использовать `docs/content_audit_module2.md` для выбора следующего gap-driven content PR.
-2. Рекомендуемый следующий PR: `QA Module 2 duplicate and source_ref balance` (gap-driven шаг из `docs/content_audit_module2.md` в активной experimental-категории).
-3. Продолжать QA и controlled growth только в уже активных категориях Module 2.
-4. Telegram Mini App / Web App оставлять в статусе analytics/design only и не переносить в implementation scope.
-5. Новую категорию Module 2 не открывать без отдельного явного решения.
+После этого docs/design PR:
+1. Рекомендуемый следующий технический PR: `Implement /ui command and Mini App setup-screen MVP behind an opt-in test mode`.
+2. Classic Telegram chat UX сохранять дефолтным до отдельного явного product-решения по смене default UX.
+3. Задачу `QA Module 2 duplicate and source_ref balance` держать в backlog как отдельный content QA шаг без удаления из delivery-фокуса.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
@@ -68,8 +67,9 @@
 - [ ] Следующую категорию Module 2 определять отдельным решением перед её открытием.
 
 ## Runtime / UX / analytics backlog
+- [ ] Implement `/ui` command and Mini App setup-screen MVP.
+- [ ] Keep classic Telegram chat UX as default until a separate decision is made.
 - [ ] Сохранять owner-only и агрегированный характер `/stats`.
-- [ ] Сохранять текущий quiz UX без изменений, пока UX-изменение явно не согласовано отдельным scope-решением.
 
 ## Docs / workflow maintenance backlog
 - [ ] Держать `README.md`, `docs/project-spec.md`, `docs/delivery-plan.md` и `docs/ai-coding-workflow.md` синхронизированными при изменениях продукта/категорий/runtime-поведения.

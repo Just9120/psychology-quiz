@@ -78,6 +78,79 @@
   3. Obsidian/пересобранная база знаний как вторичный синтетический слой.
 - Практико-ориентированные вопросы встраиваются в профильные категории, а не выделяются в отдельную рабочую категорию.
 
+
+## Telegram UX modes
+- `classic` — текущий и дефолтный UX в Telegram-чате (активный режим по умолчанию).
+- `miniapp_test` — экспериментальный opt-in режим Telegram Mini App для setup-потока внутри Telegram; не включается по умолчанию.
+- `miniapp_default` — потенциальный будущий режим по умолчанию для Mini App, сейчас неактивен и не реализован.
+
+Ограничения и позиционирование:
+- Classic chat UX остаётся дефолтным режимом.
+- Telegram Mini App не является PWA.
+- Telegram Mini App не является standalone Web UI.
+- Mini App не заменяет текущий bot UX и текущий chat quiz runner.
+- Первый MVP Mini App ограничен только setup-экраном.
+- После подтверждения setup существующий Telegram chat quiz runner продолжает показывать вопросы и принимать ответы.
+
+Первый MVP Mini App (scope на будущую implementation-фазу):
+- планируемая точка входа: `/ui`;
+- setup-экран внутри Telegram Mini App;
+- выбор quiz mode:
+  - `single`;
+  - `selected_mix`;
+  - `all`;
+- выбор категорий, когда применимо;
+- выбор количества вопросов:
+  - `5`;
+  - `10`;
+  - `15`;
+  - `all available`;
+- выбор сложности:
+  - `any`;
+  - `easy`;
+  - `medium`;
+  - `hard`;
+- подтверждение старта;
+- дальнейший запуск прохождения в существующем chat runner.
+
+Category initialization model для Mini App setup:
+- В момент `/ui` бот загружает активные категории из SQLite runtime-слоя.
+- Бот формирует компактный setup context с `category_id` и именами категорий.
+- Бот передаёт setup context в Mini App через encoded URL query parameter.
+- Mini App рендерит категории из URL setup context.
+- Хардкод категорий во frontend Mini App запрещён.
+- Setup context — только UI rendering context, не source of truth.
+
+Payload contract summary (Mini App → bot):
+- `type`: `quiz_setup`;
+- `quiz_mode`: `single | selected_mix | all`;
+- `category_ids`: `number[]`;
+- `question_count`: `5 | 10 | 15 | null`;
+- `difficulty`: `any | easy | medium | hard`;
+- `question_count = null` означает «все доступные вопросы».
+
+Trust boundary:
+- Payload из Mini App считается недоверенным client input.
+- URL setup context может быть изменён на стороне клиента.
+- Бот обязан валидировать payload server-side перед запуском квиза.
+- В момент приёма payload бот обязан повторно проверять активность категорий и доступность вопросов.
+- `/stats` остаётся скрытой owner-only private-chat-only агрегированной аналитикой и не переносится в Mini App.
+
+Out of scope для первого Mini App MVP:
+- standalone Web UI;
+- PWA;
+- backend API;
+- полный quiz runner внутри Mini App;
+- question cards и results внутри Mini App;
+- web analytics;
+- account area;
+- `/stats` внутри Mini App;
+- DB schema changes;
+- persistence пользовательского UI preference;
+- изменения Module 1;
+- расширение scope/категорий Module 2;
+- изменения workflow question bank.
+
 ## Data and runtime state model
 - SQLite не является source of truth; SQLite — runtime layer хранения и выдачи данных.
 - Обновление runtime-слоя выполняется через `scripts/seed_questions.py`.
