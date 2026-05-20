@@ -36,7 +36,8 @@
 | #96 | Add `docs/ai-coding-workflow.md` | ✅ Done |
 | #97 | Migrate canonical `docs/project-spec.md` + add `docs/ai-delivery-infrastructure-plan.md` | ✅ Done |
 | #100 | Module 2 qualitative methods content growth (batch 2) | ✅ Done |
-| This PR | Module 2 experimental psychology content growth (next batch) | ✅ Done |
+| #101 | Module 2 experimental psychology content growth (next batch) | ✅ Done |
+| This PR | Module 1 baseline content QA cleanup | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
