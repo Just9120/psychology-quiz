@@ -89,8 +89,16 @@ Fallback:
 
 ## Documentation
 
-- [Project Specification](docs/project-spec.md)
-- [AI Coding Workflow](docs/ai-coding-workflow.md)
-- [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md)
-- [Delivery Plan](docs/delivery-plan.md)
+| Document | Role | Use when |
+|---|---|---|
+| [Project Specification](docs/project-spec.md) | Canonical product/project spec | Need scope, product rules, content model, runtime constraints |
+| [Delivery Plan](docs/delivery-plan.md) | Operational delivery state | Need current checkpoints, active focus, next recommended work |
+| [AI Coding Workflow](docs/ai-coding-workflow.md) | ChatGPT / Codex / PR workflow rules | Preparing prompts, reviewing PRs, updating docs |
+| [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md) | AI workflow adoption tracking | Checking docs-first adoption status and Context Bundle Builder decision |
+
+Source-of-truth model:
+- Product scope lives in `docs/project-spec.md`.
+- Current delivery state lives in `docs/delivery-plan.md`.
+- Question bank source of truth is JSON under `content/questions/`.
+- SQLite is runtime layer only.
 
