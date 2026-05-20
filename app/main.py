@@ -620,6 +620,19 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             if any(category_id not in active_ids for category_id in category_ids):
                 await message.chat.send_message("Выбранные темы больше недоступны. Откройте настройку викторины заново.")
                 return
+            for category_id in category_ids:
+                category_probe = select_random_approved_question_ids_by_category(
+                    conn,
+                    category_id=category_id,
+                    limit=1,
+                    difficulty_mode=difficulty_filter,
+                )
+                if not category_probe:
+                    await message.chat.send_message(
+                        "Не удалось подобрать вопросы под выбранные параметры.\n"
+                        "Попробуйте изменить тему, количество вопросов или сложность."
+                    )
+                    return
             question_ids = select_random_approved_question_ids_by_categories(conn, category_ids, question_count, difficulty_filter)
             session_category_id = None
             selected_ids = category_ids
@@ -640,7 +653,16 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             set_selected_categories_for_session(conn, session_id, selected_ids)
         store_session_questions(conn, session_id, question_ids)
 
-    await message.chat.send_message("\u2060", reply_markup=ReplyKeyboardRemove())
+    removal_message = None
+    try:
+        removal_message = await message.chat.send_message("\u2060", reply_markup=ReplyKeyboardRemove())
+    except Exception:
+        logger.debug("Не удалось скрыть главное меню после Mini App setup.")
+    if removal_message is not None:
+        try:
+            await removal_message.delete()
+        except Exception:
+            logger.debug("Не удалось удалить техническое сообщение скрытия меню %s", removal_message.message_id)
     await send_current_question_to_chat(message.chat, settings, session_id)
 
 
