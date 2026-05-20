@@ -38,7 +38,8 @@
 | #100 | Module 2 qualitative methods content growth (batch 2) | ✅ Done |
 | #101 | Module 2 experimental psychology content growth (next batch) | ✅ Done |
 | #102 | Module 1 baseline content QA cleanup | ✅ Done |
-| This PR | Module 1 general psychology and intro content QA cleanup | ✅ Done |
+| #103 | Module 1 general psychology and intro content QA cleanup | ✅ Done |
+| This PR | Module 2 existing categories content QA revision | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -47,10 +48,10 @@
 
 ## Next recommended item
 После этого PR:
-1. Продолжить рост контента Module 2 в текущих активных категориях:
+1. Continue controlled content growth and QA in the two existing Module 2 categories:
    - `Основы экспериментальной психологии`
    - `Качественные методы исследования`
-2. Если планируется новая тема Module 2 — сначала принять отдельное явное решение по следующей категории и только после этого открывать её в отдельном PR.
+2. Do not open a new Module 2 category until a separate explicit decision is made.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
