@@ -87,18 +87,18 @@ Fallback:
 - RAG и внешняя генерация вопросов во время работы
 - расширение Module 2 на новые темы без отдельного согласованного решения (помимо уже открытых активных категорий)
 
-## Documentation
+## Документация
 
-| Document | Role | Use when |
+| Документ | Роль | Когда читать |
 |---|---|---|
-| [Project Specification](docs/project-spec.md) | Canonical product/project spec | Need scope, product rules, content model, runtime constraints |
-| [Delivery Plan](docs/delivery-plan.md) | Operational delivery state | Need current checkpoints, active focus, next recommended work |
-| [AI Coding Workflow](docs/ai-coding-workflow.md) | ChatGPT / Codex / PR workflow rules | Preparing prompts, reviewing PRs, updating docs |
-| [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md) | AI workflow adoption tracking | Checking docs-first adoption status and Context Bundle Builder decision |
+| [Project Specification](docs/project-spec.md) | Каноническая продуктовая/проектная спецификация | Нужно проверить scope, продуктовые правила, модель контента и runtime-ограничения |
+| [Delivery Plan](docs/delivery-plan.md) | Операционное состояние delivery | Нужно понять текущие checkpoints, активный фокус и следующий рекомендуемый шаг |
+| [AI Coding Workflow](docs/ai-coding-workflow.md) | Правила ChatGPT / Codex / PR / docs workflow | Нужно подготовить prompt, проверить PR или понять правила обновления документации |
+| [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md) | Трекинг внедрения AI workflow | Нужно проверить статус docs-first adoption и решение по Context Bundle Builder |
 
-Source-of-truth model:
-- Product scope lives in `docs/project-spec.md`.
-- Current delivery state lives in `docs/delivery-plan.md`.
-- Question bank source of truth is JSON under `content/questions/`.
-- SQLite is runtime layer only.
+Source-of-truth модель:
+- Product scope хранится в `docs/project-spec.md`.
+- Текущее delivery-состояние хранится в `docs/delivery-plan.md`.
+- Source of truth банка вопросов — JSON-файлы в `content/questions/`.
+- SQLite — только runtime layer.
 
