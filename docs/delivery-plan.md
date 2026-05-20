@@ -40,6 +40,7 @@
 | #102 | Module 1 baseline content QA cleanup | ✅ Done |
 | #103 | Module 1 general psychology and intro content QA cleanup | ✅ Done |
 | #104 | Module 2 existing categories content QA revision | ✅ Done |
+| This PR | Module 2 qualitative methods content growth (batch 3) | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
