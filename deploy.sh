@@ -66,6 +66,33 @@ echo "[deploy] needs build: ${NEEDS_BUILD}"
 echo "[deploy] needs seed: ${NEEDS_SEED}"
 echo "[deploy] needs restart: ${NEEDS_RESTART}"
 
+if [[ ! -f ".env.example" ]]; then
+  echo "[deploy] .env.example not found. Skipping env sync."
+elif [[ ! -f ".env" ]]; then
+  echo "[deploy] WARNING: .env not found. Skipping env sync without creating a new .env."
+else
+  ENV_BACKUP=".env.bak.$(date -u +%Y%m%d%H%M%S)"
+  cp ".env" "${ENV_BACKUP}"
+  echo "[deploy] Backed up .env to ${ENV_BACKUP}"
+
+  while IFS= read -r line; do
+    trimmed_line="$(printf '%s' "${line}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+    [[ -z "${trimmed_line}" ]] && continue
+    [[ "${trimmed_line}" =~ ^# ]] && continue
+
+    key="${trimmed_line%%=*}"
+    key="$(printf '%s' "${key}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+    [[ -z "${key}" ]] && continue
+
+    if grep -Eq "^[[:space:]]*${key}[[:space:]]*=" ".env"; then
+      continue
+    fi
+
+    printf '%s\n' "${trimmed_line}" >> ".env"
+    echo "[deploy] Added missing env key: ${key}"
+  done < ".env.example"
+fi
+
 if [[ "${NEEDS_BUILD}" -eq 1 ]]; then
   echo "[deploy] Running build for ${SERVICE_NAME}"
   docker compose build "${SERVICE_NAME}"
