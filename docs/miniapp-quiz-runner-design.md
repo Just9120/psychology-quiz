@@ -147,6 +147,7 @@ Recommend **Hybrid (Option C)** as safest next step:
 - Status: **implemented** in this PR.
 - Goal: add in-app progress indicators and final server-derived result view.
 - Note: due to static hosting and no dedicated backend state-refresh API, users still reopen `/ui` to render refreshed authoritative snapshots after each submit.
+- `/ui` resolution order: latest `in_progress` session is preferred; if none exists, latest `finished` session is used for server-derived completed/result screen.
 - Likely files: Mini App progress/result components, backend result payload formatter.
 - Validation approach: result consistency checks against server session data.
 - Non-goals: `/stats` integration.

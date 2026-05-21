@@ -160,6 +160,41 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         other = create_or_load_user(self.conn, 2002, "u2", "U2", None)
         state = build_miniapp_runner_state(self.conn, actor_user_id=int(other["id"]), session_id=self.session_id)
         self.assertEqual("forbidden", state.get("state"))
+
+    def test_runner_state_without_session_id_uses_latest_finished_result(self):
+        submit_miniapp_answer_event(
+            self.conn,
+            session_id=self.session_id,
+            actor_user_id=self.user_id,
+            question_id=1,
+            selected_option_index=0,
+        )
+        submit_miniapp_answer_event(
+            self.conn,
+            session_id=self.session_id,
+            actor_user_id=self.user_id,
+            question_id=2,
+            selected_option_index=1,
+        )
+        self.conn.execute(
+            "UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?",
+            (self.session_id,),
+        )
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
+        self.assertEqual("completed", state.get("state"))
+        self.assertEqual(2, state.get("result", {}).get("score"))
+
+    def test_runner_state_prefers_in_progress_over_older_finished(self):
+        self.conn.execute(
+            "UPDATE quiz_sessions SET status='finished', score=1, total_questions=2 WHERE id = ?",
+            (self.session_id,),
+        )
+        newer_session_id = start_quiz_session(self.conn, self.user_id, 1)
+        store_session_questions(self.conn, newer_session_id, [1, 2])
+
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
+        self.assertEqual("in_progress", state.get("state"))
+        self.assertEqual(newer_session_id, state.get("session", {}).get("session_id"))
     def test_parse_valid_miniapp_answer_payload(self):
         parsed = _parse_miniapp_answer_payload({
             "type": "quiz_answer",

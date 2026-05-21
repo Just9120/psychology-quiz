@@ -163,7 +163,39 @@ def submit_miniapp_answer_event(
 
 
 def build_miniapp_runner_state(conn, *, actor_user_id: int, session_id: int | None = None) -> dict:
-    snapshot = get_current_miniapp_question_snapshot(conn, actor_user_id=actor_user_id, session_id=session_id)
+    resolved_session_id = session_id
+    if resolved_session_id is None:
+        latest_in_progress = conn.execute(
+            """
+            SELECT id
+            FROM quiz_sessions
+            WHERE user_id = ? AND status = 'in_progress'
+            ORDER BY started_at DESC, id DESC
+            LIMIT 1
+            """,
+            (actor_user_id,),
+        ).fetchone()
+        if latest_in_progress is not None:
+            resolved_session_id = int(latest_in_progress["id"])
+        else:
+            latest_finished = conn.execute(
+                """
+                SELECT id
+                FROM quiz_sessions
+                WHERE user_id = ? AND status = 'finished'
+                ORDER BY finished_at DESC, started_at DESC, id DESC
+                LIMIT 1
+                """,
+                (actor_user_id,),
+            ).fetchone()
+            if latest_finished is not None:
+                resolved_session_id = int(latest_finished["id"])
+
+    snapshot = get_current_miniapp_question_snapshot(
+        conn,
+        actor_user_id=actor_user_id,
+        session_id=resolved_session_id,
+    )
 
     if snapshot.status == "session_not_found":
         return {
