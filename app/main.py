@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from html import escape
+import base64
 import json
 import logging
 import re
@@ -257,7 +258,9 @@ def build_miniapp_setup_context(categories) -> dict:
 
 def encode_miniapp_setup_context(context: dict) -> str:
     context_json = json.dumps(context, ensure_ascii=False, separators=(",", ":"))
-    return urllib.parse.quote(context_json, safe="")
+    context_bytes = context_json.encode("utf-8")
+    encoded = base64.urlsafe_b64encode(context_bytes).decode("ascii")
+    return encoded.rstrip("=")
 
 
 def build_miniapp_url(base_url: str, context: dict) -> str:
@@ -492,6 +495,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
     miniapp_context = build_miniapp_setup_context(categories)
     miniapp_url = build_miniapp_url(settings.mini_app_url, miniapp_context)
+    logger.debug("Mini App setup URL length: %s", len(miniapp_url))
     # Conservative guard: practical Telegram button URL and query size safety.
     if len(miniapp_url) > MAX_MINIAPP_URL_LENGTH:
         await update.message.reply_text(

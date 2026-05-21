@@ -3,7 +3,8 @@ const err=document.getElementById('err'),form=document.getElementById('f'),cats=
 const catsFieldset=document.getElementById('cats_fieldset');
 const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand();}
 function bad(){err.textContent='Не удалось загрузить список тем. Закройте окно и откройте Mini App заново через /ui.'}
-let ctx; try{const raw=new URLSearchParams(location.search).get('context'); ctx=raw?JSON.parse(decodeURIComponent(raw)):null;}catch{ctx=null}
+function parseContext(raw){if(!raw)return null;try{const b64=raw.replace(/-/g,'+').replace(/_/g,'/');const padding='='.repeat((4-(b64.length%4))%4);const bin=atob(b64+padding);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i+=1){bytes[i]=bin.charCodeAt(i);}const json=new TextDecoder('utf-8').decode(bytes);return JSON.parse(json);}catch{try{return JSON.parse(decodeURIComponent(raw));}catch{return null;}}}
+let ctx=parseContext(new URLSearchParams(location.search).get('context'));
 if(!ctx||ctx.type!=='miniapp_setup_context'||ctx.version!==1||!Array.isArray(ctx.categories)){bad();} else {form.hidden=false;ctx.categories.forEach(c=>{const id=Number(c.id); if(!Number.isInteger(id)) return; const l=document.createElement('label'); const i=document.createElement('input'); i.type='checkbox'; i.value=String(id); l.appendChild(i); l.appendChild(document.createTextNode(` ${String(c.name ?? '')}`)); cats.appendChild(l);});}
 function selectedCategoryIds(){return [...cats.querySelectorAll('input:checked')].map(x=>Number(x.value)).filter(Number.isInteger)}
 function syncCategoryUi(){const mode=form.quiz_mode.value; const allMode=mode==='all'; catsFieldset.hidden=allMode; [...cats.querySelectorAll('input')].forEach((input)=>{input.disabled=allMode;});}
