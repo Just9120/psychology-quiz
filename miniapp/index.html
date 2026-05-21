@@ -49,7 +49,39 @@ function renderQuestion(snapshot){
   });
   questionView.appendChild(ol);
 }
-renderQuestion(ctx?.current_question_snapshot);
+function renderProgress(progress){
+  if(!progress||progress.server_derived!==true) return;
+  const cur=Number(progress.current_question_number);
+  const total=Number(progress.total_questions);
+  const answered=Number(progress.answered_count);
+  const remaining=Number(progress.remaining_count);
+  const parts=['Серверный прогресс'];
+  if(Number.isInteger(cur)&&Number.isInteger(total)&&total>0) parts.push(`вопрос ${cur}/${total}`);
+  if(Number.isInteger(answered)) parts.push(`отвечено: ${answered}`);
+  if(Number.isInteger(remaining)) parts.push(`осталось: ${remaining}`);
+  runnerState.textContent=`Экспериментальный режим /ui: ${parts.join(' · ')}.`;
+}
+function renderResult(result){
+  questionView.replaceChildren(); questionView.hidden=false;
+  const h=document.createElement('h4'); h.textContent='Викторина завершена'; questionView.appendChild(h);
+  const p=document.createElement('p');
+  const score=Number(result?.score); const total=Number(result?.total_questions); const percent=Number(result?.percent);
+  p.textContent=`Результат: ${Number.isInteger(score)?score:0} из ${Number.isInteger(total)?total:0}${Number.isInteger(percent)?` (${percent}%)`:''}`;
+  questionView.appendChild(p);
+  const n=document.createElement('p'); n.textContent='Чтобы начать новую попытку, используйте /ui (setup) или классический /quiz.'; questionView.appendChild(n);
+  runnerState.textContent='Экспериментальный режим /ui: итог загружен из серверного состояния.';
+}
+function renderRunnerState(state){
+  if(!state||typeof state!=='object') { renderQuestion(ctx?.current_question_snapshot); return; }
+  if(state.state==='completed'&&state.server_derived===true){ renderResult(state.result||{}); return; }
+  if(state.state==='in_progress'){
+    renderQuestion(state.current_question||ctx?.current_question_snapshot);
+    renderProgress(state.progress);
+    return;
+  }
+  runnerState.textContent='Экспериментальный режим /ui: активная сессия не найдена. Выберите параметры ниже или используйте /quiz.';
+}
+renderRunnerState(ctx?.runner_state);
 function selectedCategoryIds(){return [...cats.querySelectorAll('input:checked')].map(x=>Number(x.value)).filter(Number.isInteger)}
 function syncCategoryUi(){const mode=form.quiz_mode.value; const allMode=mode==='all'; catsFieldset.hidden=allMode; [...cats.querySelectorAll('input')].forEach((input)=>{input.disabled=allMode;});}
 function validate(){syncCategoryUi(); const mode=form.quiz_mode.value;const selected=selectedCategoryIds();let ok=false;if(mode==='single')ok=selected.length===1;else if(mode==='selected_mix')ok=selected.length>=1;else ok=true;go.disabled=!ok}

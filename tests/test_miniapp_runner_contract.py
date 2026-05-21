@@ -3,7 +3,7 @@ import unittest
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
 from app.main import _parse_miniapp_answer_payload
-from app.miniapp_runner import get_current_miniapp_question_snapshot, submit_miniapp_answer_event
+from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
 
 def _setup_schema(conn: sqlite3.Connection) -> None:
@@ -120,6 +120,46 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertNotIn("is_correct", result.options[0])
 
 
+
+    def test_runner_state_in_progress_contains_server_progress(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        self.assertEqual("in_progress", state.get("state"))
+        self.assertTrue(state.get("server_derived"))
+        progress = state.get("progress", {})
+        self.assertEqual(1, progress.get("current_question_number"))
+        self.assertEqual(2, progress.get("total_questions"))
+        self.assertEqual(0, progress.get("answered_count"))
+        self.assertEqual(2, progress.get("remaining_count"))
+
+    def test_runner_progress_changes_after_accepted_answer(self):
+        submit_miniapp_answer_event(self.conn, session_id=self.session_id, actor_user_id=self.user_id, question_id=1, selected_option_index=0)
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        progress = state.get("progress", {})
+        self.assertEqual(1, progress.get("answered_count"))
+        self.assertEqual(1, progress.get("remaining_count"))
+
+    def test_runner_state_completed_contains_result(self):
+        submit_miniapp_answer_event(self.conn, session_id=self.session_id, actor_user_id=self.user_id, question_id=1, selected_option_index=0)
+        submit_miniapp_answer_event(self.conn, session_id=self.session_id, actor_user_id=self.user_id, question_id=2, selected_option_index=1)
+        self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        self.assertEqual("completed", state.get("state"))
+        self.assertEqual("finished", state.get("status"))
+        result = state.get("result", {})
+        self.assertEqual(2, result.get("score"))
+        self.assertEqual(2, result.get("total_questions"))
+        self.assertEqual(100, result.get("percent"))
+        self.assertNotIn("stats", state)
+
+    def test_runner_state_no_active_session_returns_setup(self):
+        user = create_or_load_user(self.conn, 3003, "u3", "U3", None)
+        state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
+        self.assertEqual("setup", state.get("state"))
+
+    def test_runner_state_wrong_user_forbidden(self):
+        other = create_or_load_user(self.conn, 2002, "u2", "U2", None)
+        state = build_miniapp_runner_state(self.conn, actor_user_id=int(other["id"]), session_id=self.session_id)
+        self.assertEqual("forbidden", state.get("state"))
     def test_parse_valid_miniapp_answer_payload(self):
         parsed = _parse_miniapp_answer_payload({
             "type": "quiz_answer",

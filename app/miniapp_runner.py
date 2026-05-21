@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Literal
 
 from app.db import (
+    get_answered_questions_count,
     get_current_unanswered_question,
     get_question_options,
     get_quiz_session,
@@ -158,3 +159,103 @@ def submit_miniapp_answer_event(
         is_correct=bool(int(answer["is_correct"])),
         resolved_question_id=question_id,
     )
+
+
+
+def build_miniapp_runner_state(conn, *, actor_user_id: int, session_id: int | None = None) -> dict:
+    snapshot = get_current_miniapp_question_snapshot(conn, actor_user_id=actor_user_id, session_id=session_id)
+
+    if snapshot.status == "session_not_found":
+        return {
+            "state": "setup",
+            "status": "session_not_found",
+            "server_derived": True,
+            "session": None,
+        }
+
+    if snapshot.status == "forbidden":
+        return {
+            "state": "forbidden",
+            "status": "forbidden",
+            "server_derived": True,
+            "session": {"session_id": snapshot.session_id} if snapshot.session_id else None,
+        }
+
+    if snapshot.status == "session_not_in_progress":
+        session = get_quiz_session(conn, int(snapshot.session_id)) if snapshot.session_id else None
+        if session is None:
+            return {
+                "state": "setup",
+                "status": "session_not_found",
+                "server_derived": True,
+                "session": None,
+            }
+        if str(session["status"]) == "finished":
+            score = int(session["score"] or 0)
+            total_questions = int(session["total_questions"] or 0)
+            percent = int((score * 100) / total_questions) if total_questions > 0 else 0
+            return {
+                "state": "completed",
+                "status": "finished",
+                "server_derived": True,
+                "session": {"session_id": int(session["id"]), "session_status": "finished"},
+                "result": {
+                    "score": score,
+                    "total_questions": total_questions,
+                    "percent": percent,
+                    "summary": f"{score}/{total_questions} ({percent}%)",
+                    "completion_state": "completed",
+                },
+            }
+        return {
+            "state": "setup",
+            "status": "session_not_in_progress",
+            "server_derived": True,
+            "session": {"session_id": int(session["id"]), "session_status": str(session["status"])},
+        }
+
+    if snapshot.status == "no_current_question":
+        answered = get_answered_questions_count(conn, int(snapshot.session_id)) if snapshot.session_id else 0
+        return {
+            "state": "in_progress",
+            "status": "no_current_question",
+            "server_derived": True,
+            "session": {"session_id": snapshot.session_id, "session_status": "in_progress"},
+            "progress": {
+                "current_question_number": None,
+                "total_questions": answered,
+                "answered_count": answered,
+                "remaining_count": 0,
+                "session_status": "in_progress",
+                "server_derived": True,
+            },
+        }
+
+    answered = get_answered_questions_count(conn, int(snapshot.session_id))
+    total_questions = int(snapshot.total_questions or 0)
+    current_number = int(snapshot.order_index or answered + 1)
+    remaining = max(total_questions - answered, 0)
+    return {
+        "state": "in_progress",
+        "status": "ok",
+        "server_derived": True,
+        "session": {"session_id": snapshot.session_id, "session_status": "in_progress"},
+        "progress": {
+            "current_question_number": current_number,
+            "total_questions": total_questions,
+            "answered_count": answered,
+            "remaining_count": remaining,
+            "session_status": "in_progress",
+            "server_derived": True,
+        },
+        "current_question": {
+            "session_id": snapshot.session_id,
+            "question_id": snapshot.question_id,
+            "question_text": snapshot.question_text,
+            "order_index": snapshot.order_index,
+            "total_questions": snapshot.total_questions,
+            "status": snapshot.status,
+            "session_status": snapshot.session_status,
+            "options": list(snapshot.options),
+        },
+    }
