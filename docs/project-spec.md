@@ -153,21 +153,13 @@ Out of scope для первого Mini App MVP:
 
 ## Future Mini App quiz runner direction
 - Текущая реализованная область Mini App: только setup-screen MVP.
-- Следующая фаза: оценить перенос в Mini App экрана вопросов, выбора ответов, отображения прогресса и итогового result-screen.
-- Это направление **не реализовано** в данном PR и не меняет текущее runtime-поведение.
-- В любой будущей фазе валидация ответов должна оставаться server-side; состоянию клиента Mini App доверять нельзя.
-- Classic Telegram chat UX остаётся дефолтным.
-- `/quiz` должен оставаться доступным.
+- Полный quiz runner в Mini App (вопросы/ответы/прогресс/результат) — запланированное будущее направление.
+- Данный PR по этой теме — **design-only** и не меняет runtime-поведение.
+- Classic Telegram chat UX остаётся дефолтным; `/quiz` остаётся доступным как default entry point.
+- `/ui` остаётся экспериментальным opt-in входом в Mini App.
 - `/stats` остаётся owner-only и вне Mini App на текущем этапе.
-- Перед runtime-реализацией нужен отдельный design/technical PR с фиксацией архитектуры.
-
-Открытые design-вопросы для будущей фазы:
-- использовать ли для Mini App quiz runner `Telegram.WebApp.sendData` на каждый ответ или отдельный backend API;
-- как загружать и обновлять session state;
-- как обрабатывать закрытие/повторное открытие Mini App в середине сессии;
-- как показывать итоговый экран результатов;
-- как гарантировать server-side валидацию ответов;
-- должен ли chat fallback оставаться доступным во время Mini App quiz sessions.
+- Детальная архитектура и поэтапный план зафиксированы в `docs/miniapp-quiz-runner-design.md`.
+- В любой future implementation-фазе состояние Mini App клиента считается недоверенным, а server-side валидация остаётся авторитативной.
 
 ## Data and runtime state model
 - SQLite не является source of truth; SQLite — runtime layer хранения и выдачи данных.
