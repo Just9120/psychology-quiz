@@ -1,0 +1,92 @@
+# Mini App deployment and manual QA checklist (MVP)
+
+## Purpose
+Этот runbook нужен для безопасной ручной deployment-валидации Telegram Mini App setup-screen MVP из PR #117 без изменения runtime-поведения бота.
+
+## 1) Current state
+- Mini App MVP код уже в репозитории.
+- Статический frontend setup-screen расположен в `miniapp/index.html`.
+- Бот открывает Mini App URL через `MINI_APP_URL` (опциональная env-переменная).
+- Классический `/quiz` остаётся дефолтным UX.
+- Mini App запускается opt-in через `/ui`.
+- `/stats` остаётся скрытой owner-only командой только для private chat.
+
+## 2) Hosting requirement
+- `miniapp/index.html` должен быть опубликован по **HTTPS**.
+- URL должен быть доступен из Telegram-клиентов (mobile/desktop).
+- Production URL задаётся в `MINI_APP_URL` окружении бота.
+- `MINI_APP_URL` не должен содержать секретов.
+- На текущем состоянии репозитория автоматический production-hosting для `miniapp/index.html` **не реализован** в составе `deploy.sh`/`docker-compose.yml` (операторская задача инфраструктуры).
+
+## 3) Configuration checklist
+1. Опубликовать `miniapp/index.html` на HTTPS static hosting в deployment environment.
+2. Установить `MINI_APP_URL` на этот HTTPS URL в env бота.
+3. Перезапустить/передеплоить bot service, чтобы env подхватился.
+4. Проверить в Telegram, что `/ui` показывает кнопку открытия Mini App (при наличии активных категорий).
+5. По возможности в staging/dev отдельно проверить fallback-поведение `/ui`, когда `MINI_APP_URL` отсутствует.
+
+### Optional local sanity check (не заменяет Telegram QA)
+Для быстрой browser-проверки разметки setup-screen можно локально отдать файл, например:
+- `python -m http.server 8080`
+
+Важно: локальная браузерная проверка **не** является полной валидацией Telegram Mini App интеграции.
+
+## 4) Telegram / BotFather operator checklist (generic)
+- Убедиться, что бот в Telegram может открыть указанный Web App URL.
+- Проверить валидность HTTPS URL (сертификат/доступность).
+- Если в вашей Telegram/BotFather конфигурации требуется доменная привязка для Web App — отдельно подтвердить, что она настроена для выбранного host (без хранения секретов и private деталей в репозитории).
+
+## 5) Manual QA checklist
+
+### A. Private chat checks
+- [ ] `/ui` без `MINI_APP_URL` показывает fallback.
+- [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает кнопку открытия Mini App.
+- [ ] `/ui` при отсутствии активных категорий показывает no-categories fallback.
+- [ ] `/ui` вне private chat корректно отклоняется.
+
+### B. Mini App setup-screen checks
+- [ ] Mini App открывается внутри Telegram.
+- [ ] Контекст корректно читается из URL.
+- [ ] Отображаются активные категории из bot context.
+- [ ] Категории не хардкодятся во frontend.
+- [ ] `single` требует ровно одну категорию.
+- [ ] `selected_mix` требует минимум одну категорию.
+- [ ] `all` скрывает/отключает выбор категорий и отправляет `category_ids: []`.
+- [ ] `question_count=all` отправляется как `question_count: null`.
+- [ ] При невалидном/отсутствующем context показывается понятная frontend-ошибка.
+
+### C. Payload / bot validation checks
+- [ ] Валидный payload `single` запускает существующий chat quiz runner.
+- [ ] Валидный payload `selected_mix` запускает chat quiz runner и сохраняет выбранные категории в сессии.
+- [ ] Валидный payload `all` запускает chat quiz runner.
+- [ ] Невалидный JSON/payload корректно отклоняется.
+- [ ] Поддельные/недоступные category IDs отклоняются.
+- [ ] Категория без подходящих вопросов по сложности отклоняется.
+- [ ] `web_app_data` service message best-effort удаляется.
+- [ ] Первый вопрос появляется в чате с inline answer buttons.
+
+### D. Regression checks
+- [ ] `/quiz` работает без изменений.
+- [ ] Reply keyboard работает как раньше.
+- [ ] Reading mode работает.
+- [ ] `/stats` остаётся скрытым owner-only.
+- [ ] После завершения квиза восстанавливается главное меню.
+- [ ] DB schema changes не требуются.
+
+## 6) Deployment validation evidence template
+
+Заполнить после ручной проверки:
+
+- Date/time (UTC):
+- Environment (prod/staging/dev):
+- `MINI_APP_URL` class (например: `https://<public-host>/miniapp/index.html`, без секретов):
+- Deployed commit SHA:
+- Scenarios passed:
+- Scenarios failed:
+- Screenshots / logs links:
+- Blockers / follow-ups:
+
+## 7) Boundary / non-goals reminder
+- Этот runbook не деплоит production автоматически.
+- Не добавлять в репозиторий реальные секреты, private hostnames или token values.
+- Не менять runtime-поведение бота в рамках docs-only readiness PR.

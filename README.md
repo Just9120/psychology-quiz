@@ -95,6 +95,13 @@ Fallback:
 - RAG и внешняя генерация вопросов во время работы
 - расширение Module 2 на новые темы без отдельного согласованного решения (помимо уже открытых активных категорий)
 
+## Mini App deployment / QA runbook
+
+Для ручной deployment-валидации Mini App setup-screen используйте чеклист:
+- [`docs/miniapp-deployment-qa.md`](docs/miniapp-deployment-qa.md)
+
+Важно: в текущем репозитории hosting `miniapp/index.html` не автоматизирован runtime/deploy-скриптами и остаётся операторской инфраструктурной задачей.
+
 ## Документация
 
 | Документ | Роль | Когда читать |
@@ -103,6 +110,7 @@ Fallback:
 | [Delivery Plan](docs/delivery-plan.md) | Операционное состояние delivery | Нужно понять текущие checkpoints, активный фокус и следующий рекомендуемый шаг |
 | [AI Coding Workflow](docs/ai-coding-workflow.md) | Правила ChatGPT / Codex / PR / docs workflow | Нужно подготовить prompt, проверить PR или понять правила обновления документации |
 | [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md) | Трекинг внедрения AI workflow | Нужно проверить статус docs-first adoption и решение по Context Bundle Builder |
+| [Mini App deployment / QA runbook](docs/miniapp-deployment-qa.md) | Чеклист/runbook по настройке `MINI_APP_URL`, HTTPS static hosting и ручной Telegram QA | Перед deployment-валидацией или ручным Mini App QA |
 
 Source-of-truth модель:
 - Product scope хранится в `docs/project-spec.md`.
