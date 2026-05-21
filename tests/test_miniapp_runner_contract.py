@@ -2,7 +2,7 @@ import sqlite3
 import unittest
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
-from app.miniapp_runner import submit_miniapp_answer_event
+from app.miniapp_runner import get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
 
 def _setup_schema(conn: sqlite3.Connection) -> None:
@@ -104,6 +104,51 @@ class MiniAppRunnerContractTests(unittest.TestCase):
             selected_option_index=0,
         )
         self.assertEqual("forbidden", result.status)
+
+    def test_snapshot_for_authorized_user(self):
+        result = get_current_miniapp_question_snapshot(
+            self.conn,
+            actor_user_id=self.user_id,
+            session_id=self.session_id,
+        )
+        self.assertEqual("ok", result.status)
+        self.assertEqual(1, result.question_id)
+        self.assertEqual(1, result.order_index)
+        self.assertEqual(2, result.total_questions)
+        self.assertTrue(result.options)
+        self.assertNotIn("is_correct", result.options[0])
+
+    def test_snapshot_wrong_user_forbidden(self):
+        other = create_or_load_user(self.conn, 2002, "u2", "U2", None)
+        result = get_current_miniapp_question_snapshot(
+            self.conn,
+            actor_user_id=int(other["id"]),
+            session_id=self.session_id,
+        )
+        self.assertEqual("forbidden", result.status)
+
+    def test_snapshot_finished_session_safe_status(self):
+        submit_miniapp_answer_event(
+            self.conn,
+            session_id=self.session_id,
+            actor_user_id=self.user_id,
+            question_id=1,
+            selected_option_index=0,
+        )
+        submit_miniapp_answer_event(
+            self.conn,
+            session_id=self.session_id,
+            actor_user_id=self.user_id,
+            question_id=2,
+            selected_option_index=1,
+        )
+        self.conn.execute("UPDATE quiz_sessions SET status = 'finished' WHERE id = ?", (self.session_id,))
+        result = get_current_miniapp_question_snapshot(
+            self.conn,
+            actor_user_id=self.user_id,
+            session_id=self.session_id,
+        )
+        self.assertEqual("session_not_in_progress", result.status)
 
 
 if __name__ == "__main__":

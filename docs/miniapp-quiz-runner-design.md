@@ -127,11 +127,13 @@ Recommend **Hybrid (Option C)** as safest next step:
 - Risks: contract drift between Mini App payload and backend expectations.
 
 ### Slice 2 — render current question in Mini App
+- Status: **implemented** in this PR.
 - Goal: show authoritative current question/answers in Mini App for opt-in `/ui` users.
 - Likely files: Mini App frontend rendering logic, minimal state-load contract, bot/backend state adapter.
 - Validation approach: manual QA + targeted tests for empty/expired state rendering.
 - Non-goals: final result screen completeness.
 - Risks: reopen race conditions and stale client cache assumptions.
+ - Implementation note: because Mini App assets are static and no dedicated backend API is introduced in this slice, snapshot delivery is embedded into `/ui` launch context from bot-side authoritative DB state.
 
 ### Slice 3 — answer submission + next transition
 - Goal: submit answers from Mini App and transition to next question safely.

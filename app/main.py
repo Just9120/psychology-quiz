@@ -49,7 +49,7 @@ from app.db import (
     store_session_questions,
 )
 
-from app.miniapp_runner import submit_miniapp_answer_event
+from app.miniapp_runner import get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
 
 logger = logging.getLogger(__name__)
@@ -248,12 +248,15 @@ async def post_init(application: Application) -> None:
     )
 
 
-def build_miniapp_setup_context(categories) -> dict:
-    return {
+def build_miniapp_setup_context(categories, question_snapshot: dict | None = None) -> dict:
+    context = {
         "type": "miniapp_setup_context",
         "version": 1,
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories],
     }
+    if question_snapshot is not None:
+        context["current_question_snapshot"] = question_snapshot
+    return context
 
 
 def encode_miniapp_setup_context(context: dict) -> str:
@@ -486,6 +489,22 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
     with get_connection(settings.db_path) as conn:
         categories = get_active_categories(conn)
+        tg_user = update.effective_user
+        question_snapshot = None
+        if tg_user is not None:
+            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+            snapshot = get_current_miniapp_question_snapshot(conn, actor_user_id=int(user_row["id"]))
+            if snapshot.status == "ok":
+                question_snapshot = {
+                    "session_id": snapshot.session_id,
+                    "question_id": snapshot.question_id,
+                    "question_text": snapshot.question_text,
+                    "order_index": snapshot.order_index,
+                    "total_questions": snapshot.total_questions,
+                    "status": snapshot.status,
+                    "session_status": snapshot.session_status,
+                    "options": list(snapshot.options),
+                }
     if not categories:
         await update.message.reply_text(
             "Сейчас нет доступных тем для запуска викторины.\n"
@@ -493,7 +512,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         )
         return
 
-    miniapp_context = build_miniapp_setup_context(categories)
+    miniapp_context = build_miniapp_setup_context(categories, question_snapshot=question_snapshot)
     miniapp_url = build_miniapp_url(settings.mini_app_url, miniapp_context)
     logger.debug("Mini App setup URL length: %s", len(miniapp_url))
     # Conservative guard: practical Telegram button URL and query size safety.
