@@ -54,7 +54,8 @@
 | #119 | Add Cloudflare Workers Static Assets config for Mini App | ✅ Done |
 | #120 | Sync environment example with Mini App and admin settings | ✅ Done |
 | #122 | Add safe deploy-time .env missing-key sync | ✅ Done |
-| This PR | Compact Mini App setup context URL encoding | ✅ Done |
+| #123 | Compact Mini App setup context URL encoding | ✅ Done |
+| This PR | Record Mini App deployment/manual QA smoke result | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -62,7 +63,7 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-1. Deploy Cloudflare Worker Static Assets project, attach custom domain, set `MINI_APP_URL`, and run manual Telegram QA.
+1. Design next Mini App phase: full quiz runner inside Mini App while keeping classic Telegram chat UX as default.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
@@ -72,7 +73,7 @@
 ## Runtime / UX / analytics backlog
 - [x] Implement `/ui` command and Mini App setup-screen MVP.
 - [ ] Keep classic Telegram chat UX as default until a separate decision is made.
-- [ ] Сохранять owner-only и агрегированный характер `/stats`.
+- [ ] Keep `/stats` owner-only and outside Mini App unless a future explicit decision changes this.
 
 ## Docs / workflow maintenance backlog
 - [ ] Держать `README.md`, `docs/project-spec.md`, `docs/delivery-plan.md` и `docs/ai-coding-workflow.md` синхронизированными при изменениях продукта/категорий/runtime-поведения.
