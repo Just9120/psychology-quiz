@@ -569,6 +569,19 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
     return True
 
 
+
+
+def _parse_miniapp_answer_payload(payload: dict) -> tuple[int, int, int] | None:
+    if payload.get("type") != "quiz_answer":
+        return None
+    session_id = payload.get("session_id")
+    question_id = payload.get("question_id")
+    selected_option_index = payload.get("selected_option_index")
+    if not all(isinstance(v, int) for v in (session_id, question_id, selected_option_index)):
+        return None
+    if session_id <= 0 or question_id <= 0 or selected_option_index < 0:
+        return None
+    return session_id, question_id, selected_option_index
 def _invalid_miniapp_payload_text() -> str:
     return (
         "Не удалось запустить викторину: некорректные параметры Mini App.\n"
@@ -599,6 +612,59 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         return
     if not isinstance(payload, dict):
         await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+
+    answer_payload = _parse_miniapp_answer_payload(payload)
+    if answer_payload is not None:
+        settings = context.application.bot_data["settings"]
+        tg_user = update.effective_user
+        if tg_user is None:
+            await message.chat.send_message("Не удалось определить пользователя.")
+            return
+
+        session_id, question_id, selected_option_index = answer_payload
+        with get_connection(settings.db_path) as conn:
+            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+            submission = submit_miniapp_answer_event(
+                conn,
+                session_id=session_id,
+                actor_user_id=int(user_row["id"]),
+                question_id=question_id,
+                selected_option_index=selected_option_index,
+            )
+
+            if submission.status == "accepted":
+                session = get_quiz_session(conn, session_id)
+                if session is not None and str(session["status"]) == "in_progress":
+                    current_unanswered = get_current_unanswered_question(conn, session_id)
+                    if current_unanswered is None:
+                        finalized = finalize_quiz_session(conn, session_id)
+                        if finalized is None:
+                            await message.chat.send_message("Ответ получен. Обновите /ui для проверки состояния.")
+                            return
+                        await message.chat.send_message(
+                            f"Ответ получен. Сессия завершена: {int(finalized['score'])} из {int(finalized['total_questions'])}."
+                        )
+                        return
+                await message.chat.send_message("Ответ получен. Откройте /ui снова для следующего вопроса.")
+                return
+            if submission.status == "duplicate":
+                await message.chat.send_message("Ответ на этот вопрос уже получен. Откройте /ui заново.")
+                return
+            if submission.status == "stale_question":
+                await message.chat.send_message("Этот вопрос уже неактуален. Откройте /ui заново.")
+                return
+            if submission.status == "invalid_option":
+                await message.chat.send_message("Некорректный вариант ответа.")
+                return
+            if submission.status in {"session_not_found", "invalid_question"}:
+                await message.chat.send_message("Сессия не найдена или завершена. Запустите /quiz или /ui заново.")
+                return
+            if submission.status == "forbidden":
+                await message.chat.send_message("Эта сессия вам не принадлежит.")
+                return
+
+            await message.chat.send_message("Не удалось обработать ответ. Откройте /ui заново.")
         return
 
     quiz_mode = payload.get("quiz_mode")
