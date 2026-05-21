@@ -53,7 +53,8 @@
 | #118 | Add Mini App deployment and manual QA checklist | ✅ Done |
 | #119 | Add Cloudflare Workers Static Assets config for Mini App | ✅ Done |
 | #120 | Sync environment example with Mini App and admin settings | ✅ Done |
-| This PR | Add safe deploy-time .env missing-key sync | ✅ Done |
+| #122 | Add safe deploy-time .env missing-key sync | ✅ Done |
+| This PR | Compact Mini App setup context URL encoding | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
