@@ -253,6 +253,41 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         )
         self.assertEqual("session_not_in_progress", result.status)
 
+    def test_parse_bool_values_rejected_in_answer_payload(self):
+        self.assertIsNone(_parse_miniapp_answer_payload({
+            "type": "quiz_answer",
+            "session_id": True,
+            "question_id": 1,
+            "selected_option_index": 0,
+        }))
+
+    def test_runner_state_current_question_does_not_expose_correctness_flags(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        current_question = state.get("current_question", {})
+        self.assertNotIn("is_correct", current_question)
+        options = current_question.get("options", [])
+        self.assertTrue(options)
+        self.assertNotIn("is_correct", options[0])
+
+    def test_runner_state_without_session_id_prefers_in_progress_over_newer_finished(self):
+        self.conn.execute(
+            "UPDATE quiz_sessions SET status='finished', score=1, total_questions=2, finished_at=CURRENT_TIMESTAMP WHERE id = ?",
+            (self.session_id,),
+        )
+        in_progress_id = start_quiz_session(self.conn, self.user_id, 1)
+        store_session_questions(self.conn, in_progress_id, [1, 2])
+
+        newer_finished_id = start_quiz_session(self.conn, self.user_id, 1)
+        store_session_questions(self.conn, newer_finished_id, [1, 2])
+        self.conn.execute(
+            "UPDATE quiz_sessions SET status='finished', score=2, total_questions=2, finished_at=CURRENT_TIMESTAMP WHERE id = ?",
+            (newer_finished_id,),
+        )
+
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
+        self.assertEqual("in_progress", state.get("state"))
+        self.assertEqual(in_progress_id, state.get("session", {}).get("session_id"))
+
 
 if __name__ == "__main__":
     unittest.main()
