@@ -59,7 +59,8 @@
 | #125 | Design full Mini App quiz runner architecture | ✅ Done |
 | #126 | Implement Mini App runner session/transport contract baseline | ✅ Done |
 | #127 | Render authoritative current question in Mini App | ✅ Done |
-| This PR | Implement Mini App answer submission and next-question transition | ✅ Done |
+| #128 | Implement Mini App answer submission and next-question transition | ✅ Done |
+| This PR | Add Mini App progress and result screen | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -67,7 +68,7 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-1. Add Mini App progress and result screen behind the opt-in `/ui` flow.
+1. Harden Mini App reopen/recovery handling and polish the opt-in `/ui` runner flow.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
