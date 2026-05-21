@@ -102,6 +102,8 @@ Fallback:
 
 Важно: в текущем репозитории hosting `miniapp/index.html` не автоматизирован runtime/deploy-скриптами и остаётся операторской инфраструктурной задачей.
 
+Важно: для Cloudflare Workers Static Assets добавлен root `wrangler.toml` с публикацией статики из `./miniapp` через `npx wrangler deploy`.
+
 ## Документация
 
 | Документ | Роль | Когда читать |
