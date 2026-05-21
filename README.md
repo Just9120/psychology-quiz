@@ -130,3 +130,10 @@ Source-of-truth модель:
 
 - `MINI_APP_URL` (optional): URL статического Telegram Mini App setup-экрана для opt-in команды `/ui`; при отсутствии переменной бот продолжает работать только в classic chat UX режиме.
 - В этом PR добавлен только статический setup-screen (`miniapp/index.html`); его hosting и публикация URL должны быть настроены отдельно на стороне deploy/infrastructure.
+
+## Deploy safety note
+
+- Во время deploy `deploy.sh` безопасно дополняет production `.env` отсутствующими ключами из `.env.example`, если оба файла существуют.
+- Существующие production-значения в `.env` никогда не перезаписываются.
+- Реальные production-значения (например, `BOT_TOKEN`, `MINI_APP_URL`) оператор заполняет вручную.
+- Секреты и реальные значения не должны коммититься в репозиторий.

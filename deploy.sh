@@ -23,6 +23,46 @@ git reset --hard origin/main
 NEW_HEAD="$(git rev-parse HEAD)"
 echo "[deploy] new head: ${NEW_HEAD}"
 
+if [[ -f ".env.example" ]]; then
+  if [[ -f ".env" ]]; then
+    echo "[deploy] Syncing missing .env keys from .env.example"
+    env_backup_created=0
+
+    while IFS= read -r raw_line || [[ -n "${raw_line}" ]]; do
+      trimmed_line="$(printf '%s' "${raw_line}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+      [[ -z "${trimmed_line}" ]] && continue
+      [[ "${trimmed_line}" == \#* ]] && continue
+      [[ "${raw_line}" != *"="* ]] && continue
+
+      raw_key="${raw_line%%=*}"
+      key="$(printf '%s' "${raw_key}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+
+      if [[ ! "${key}" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+        echo "[deploy] Warning: skipped invalid env key: ${key}"
+        continue
+      fi
+
+      if grep -qE "^${key}=" ".env"; then
+        continue
+      fi
+
+      if [[ "${env_backup_created}" -eq 0 ]]; then
+        env_backup_path=".env.backup.$(date +%Y%m%d%H%M%S)"
+        cp ".env" "${env_backup_path}"
+        echo "[deploy] Backed up .env to ${env_backup_path}"
+        env_backup_created=1
+      fi
+
+      printf '%s\n' "${raw_line}" >> ".env"
+      echo "[deploy] Added missing env key: ${key}"
+    done < ".env.example"
+  else
+    echo "[deploy] Warning: .env is missing; env sync skipped"
+  fi
+else
+  echo "[deploy] .env.example is missing; env sync skipped"
+fi
+
 if [[ "${OLD_HEAD}" == "${NEW_HEAD}" ]]; then
   echo "[deploy] No new commits. Nothing to do."
   exit 0
