@@ -80,7 +80,22 @@
 - [ ] После завершения квиза восстанавливается главное меню.
 - [ ] DB schema changes не требуются.
 
-## 6) Deployment validation evidence template
+## 6) Manual QA smoke result
+
+- Environment: production
+- Mini App hosting: Cloudflare Workers Static Assets
+- Custom domain: https://miniapp.librechat.online/
+- Bot entry point: `/ui`
+- Result: smoke passed
+- Notes:
+  - Mini App setup screen opens inside Telegram.
+  - Active categories are displayed from bot-provided context.
+  - Mini App setup can start the existing chat quiz runner.
+  - Classic `/quiz` remains the default UX.
+  - Questions are still displayed in Telegram chat, not inside Mini App.
+  - Minor UI/polish bugs should be handled as follow-up backlog items, not as blockers for MVP smoke validation.
+
+## 7) Deployment validation evidence template
 
 Заполнить после ручной проверки:
 
@@ -93,7 +108,7 @@
 - Screenshots / logs links:
 - Blockers / follow-ups:
 
-## 7) Boundary / non-goals reminder
+## 8) Boundary / non-goals reminder
 - Этот runbook не деплоит production автоматически.
 - Не добавлять в репозиторий реальные секреты, private hostnames или token values.
 - Не менять runtime-поведение бота в рамках docs-only readiness PR.
