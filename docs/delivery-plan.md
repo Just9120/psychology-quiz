@@ -60,7 +60,8 @@
 | #126 | Implement Mini App runner session/transport contract baseline | ✅ Done |
 | #127 | Render authoritative current question in Mini App | ✅ Done |
 | #128 | Implement Mini App answer submission and next-question transition | ✅ Done |
-| This PR | Add Mini App progress and result screen | ✅ Done |
+| #129 | Add Mini App progress and result screen | ✅ Done |
+| This PR | Harden Mini App reopen/recovery handling and polish opt-in `/ui` runner flow | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -68,7 +69,7 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-1. Harden Mini App reopen/recovery handling and polish the opt-in `/ui` runner flow.
+1. Run production manual QA for the opt-in Mini App runner and document findings before considering default UX changes.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.

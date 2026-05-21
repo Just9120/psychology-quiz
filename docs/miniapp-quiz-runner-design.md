@@ -2,11 +2,12 @@
 
 ## Status and scope
 - This is a **design-only** document for the next phase after PR #124.
-- Current implemented Mini App scope remains **setup-screen only** via `/ui`.
-- Runtime behavior remains unchanged in this PR:
+- Current implemented Mini App scope includes setup + in-app question rendering/submission + server-derived progress/result via `/ui`.
+- Runtime behavior in current state:
   - `/quiz` stays the default classic chat entry point.
   - `/ui` stays experimental opt-in.
-  - Questions/answers/results still run in classic chat today.
+  - Mini App can render current server question and submit answers through `sendData`.
+  - Users reopen `/ui` to refresh authoritative state after each submit (static hosting + long polling constraints).
   - `/stats` remains owner-only and outside Mini App.
 
 ## Future target scope
@@ -154,11 +155,11 @@ Recommend **Hybrid (Option C)** as safest next step:
 - Risks: mismatched client display vs server canonical score if mapping is wrong.
 
 ### Slice 5 — recovery/reopen hardening + polish
-- Goal: robust resume/fallback UX and operational hardening.
-- Likely files: Mini App recovery states, backend TTL/expiry messaging, QA docs.
-- Validation approach: manual scenario matrix for reopen/failure paths; regression checks for classic `/quiz`.
-- Non-goals: introducing standalone Web UI/PWA.
-- Risks: edge-case churn and increased state-machine complexity.
+- Status: **implemented** in this PR.
+- Delivered: clearer `/ui` experimental messaging, safer reopen/recovery wording, strict answer payload parsing (`bool` rejected), and compact retry/fallback guidance in Mini App UI and bot replies.
+- Validation approach: parser/state unit tests + regression checks + manual QA checklist updates.
+- Remaining limitation: no dedicated state-refresh API; reopen `/ui` is still required for authoritative refresh.
+- Non-goals preserved: default UX switch, `/stats` exposure, broad backend API expansion.
 
 ## Non-goals for this design phase
 - No runtime code changes.

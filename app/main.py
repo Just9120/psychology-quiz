@@ -519,10 +519,10 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         return
 
     await update.message.reply_text(
-        "Текущий основной режим: classic Telegram chat UX.\n\n"
-        "Доступен экспериментальный Mini App setup screen.\n"
-        "Он позволяет выбрать параметры викторины в web-like интерфейсе внутри Telegram.\n"
-        "Сами вопросы пока продолжают проходиться в обычном чате.\n\n"
+        "Текущий основной режим: classic Telegram chat UX (/quiz).\n\n"
+        "Доступен экспериментальный opt-in Mini App runner через /ui.\n"
+        "В Mini App можно настроить квиз, увидеть серверный текущий вопрос и отправить ответ.\n"
+        "Состояние после ответа обновляется при повторном открытии /ui.\n\n"
         "Вы можете открыть Mini App или остаться в classic UX.",
         reply_markup=ReplyKeyboardMarkup(
             keyboard=[
@@ -572,7 +572,7 @@ def _parse_miniapp_answer_payload(payload: dict) -> tuple[int, int, int] | None:
     session_id = payload.get("session_id")
     question_id = payload.get("question_id")
     selected_option_index = payload.get("selected_option_index")
-    if not all(isinstance(v, int) for v in (session_id, question_id, selected_option_index)):
+    if not all(type(v) is int for v in (session_id, question_id, selected_option_index)):
         return None
     if session_id <= 0 or question_id <= 0 or selected_option_index < 0:
         return None
@@ -644,16 +644,16 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
                 await message.chat.send_message("Ответ получен. Откройте /ui снова для следующего вопроса.")
                 return
             if submission.status == "duplicate":
-                await message.chat.send_message("Ответ на этот вопрос уже получен. Откройте /ui заново.")
+                await message.chat.send_message("Ответ уже получен для этого шага. Откройте /ui снова, чтобы синхронизировать состояние.")
                 return
             if submission.status == "stale_question":
-                await message.chat.send_message("Этот вопрос уже неактуален. Откройте /ui заново.")
+                await message.chat.send_message("Этот вопрос уже неактуален. Откройте /ui снова, чтобы продолжить с актуального вопроса.")
                 return
             if submission.status == "invalid_option":
-                await message.chat.send_message("Некорректный вариант ответа.")
+                await message.chat.send_message("Некорректный вариант ответа. Откройте /ui снова и выберите вариант из текущего вопроса.")
                 return
             if submission.status in {"session_not_found", "invalid_question"}:
-                await message.chat.send_message("Сессия не найдена или завершена. Запустите /quiz или /ui заново.")
+                await message.chat.send_message("Сессия не найдена или уже завершена. Запустите /ui для новой попытки или используйте /quiz.")
                 return
             if submission.status == "forbidden":
                 await message.chat.send_message("Эта сессия вам не принадлежит.")

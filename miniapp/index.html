@@ -1,9 +1,9 @@
-<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Quiz Setup</title><style>body{font-family:sans-serif;padding:12px}fieldset{margin:10px 0}button{width:100%;padding:12px}label{display:block;margin:6px 0}.err{color:#b00020}[hidden]{display:none}.note{padding:10px;border:1px solid #ddd;border-radius:8px;margin:10px 0}.qopt button{opacity:.75}</style><script src="https://telegram.org/js/telegram-web-app.js"></script></head><body><h3>Настройка викторины</h3><div class="note" id="runner_state"></div><div id="err" class="err"></div><div id="question_view" hidden></div><form id="f" hidden><fieldset><legend>Режим</legend><label><input type="radio" name="quiz_mode" value="single" checked> Конкретная тема</label><label><input type="radio" name="quiz_mode" value="selected_mix"> Микс из выбранных тем</label><label><input type="radio" name="quiz_mode" value="all"> Все темы</label></fieldset><fieldset id="cats_fieldset"><legend>Темы</legend><div id="cats"></div></fieldset><fieldset><legend>Количество</legend><label><input type="radio" name="question_count" value="5" checked>5</label><label><input type="radio" name="question_count" value="10">10</label><label><input type="radio" name="question_count" value="15">15</label><label><input type="radio" name="question_count" value="all">Все доступные</label></fieldset><fieldset><legend>Сложность</legend><label><input type="radio" name="difficulty" value="any" checked>Любая</label><label><input type="radio" name="difficulty" value="easy">easy</label><label><input type="radio" name="difficulty" value="medium">medium</label><label><input type="radio" name="difficulty" value="hard">hard</label></fieldset><button type="submit" id="go" disabled>Начать викторину</button></form><script>
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Quiz Setup</title><style>body{font-family:sans-serif;padding:12px}fieldset{margin:10px 0}button{width:100%;padding:12px}label{display:block;margin:6px 0}.err{color:#b00020}[hidden]{display:none}.note{padding:10px;border:1px solid #ddd;border-radius:8px;margin:10px 0}.qopt button{opacity:.75}</style><script src="https://telegram.org/js/telegram-web-app.js"></script></head><body><h3>/ui — экспериментальный Mini App runner</h3><div class="note" id="runner_state"></div><div id="err" class="err"></div><div id="question_view" hidden></div><form id="f" hidden><fieldset><legend>Режим</legend><label><input type="radio" name="quiz_mode" value="single" checked> Конкретная тема</label><label><input type="radio" name="quiz_mode" value="selected_mix"> Микс из выбранных тем</label><label><input type="radio" name="quiz_mode" value="all"> Все темы</label></fieldset><fieldset id="cats_fieldset"><legend>Темы</legend><div id="cats"></div></fieldset><fieldset><legend>Количество</legend><label><input type="radio" name="question_count" value="5" checked>5</label><label><input type="radio" name="question_count" value="10">10</label><label><input type="radio" name="question_count" value="15">15</label><label><input type="radio" name="question_count" value="all">Все доступные</label></fieldset><fieldset><legend>Сложность</legend><label><input type="radio" name="difficulty" value="any" checked>Любая</label><label><input type="radio" name="difficulty" value="easy">easy</label><label><input type="radio" name="difficulty" value="medium">medium</label><label><input type="radio" name="difficulty" value="hard">hard</label></fieldset><button type="submit" id="go" disabled>Начать викторину</button></form><script>
 const err=document.getElementById('err'),form=document.getElementById('f'),cats=document.getElementById('cats'),go=document.getElementById('go');
 const catsFieldset=document.getElementById('cats_fieldset');
 const runnerState=document.getElementById('runner_state');
 const questionView=document.getElementById('question_view');
-const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand();} else {runnerState.textContent='Mini App API недоступен. Откройте /ui из Telegram.';}
+const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand();} else {runnerState.textContent='Mini App API недоступен. Используйте /quiz или откройте /ui из Telegram-клиента.';}
 function bad(){err.textContent='Не удалось загрузить список тем. Закройте окно и откройте Mini App заново через /ui.'}
 function parseContext(raw){if(!raw)return null;try{const b64=raw.replace(/-/g,'+').replace(/_/g,'/');const padding='='.repeat((4-(b64.length%4))%4);const bin=atob(b64+padding);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i+=1){bytes[i]=bin.charCodeAt(i);}const json=new TextDecoder('utf-8').decode(bytes);return JSON.parse(json);}catch{try{return JSON.parse(decodeURIComponent(raw));}catch{return null;}}}
 let ctx=parseContext(new URLSearchParams(location.search).get('context'));
@@ -14,7 +14,7 @@ function renderQuestion(snapshot){
     runnerState.textContent='Экспериментальный режим /ui: активный вопрос не найден. Выберите параметры ниже или запустите /quiz.';
     return;
   }
-  runnerState.textContent='Экспериментальный режим /ui: текущий вопрос показан из серверного состояния. Выберите вариант ответа. После отправки откройте /ui снова для обновления состояния.';
+  runnerState.textContent='Вы продолжаете активную сессию. Вопрос загружен из серверного состояния. После отправки ответа откройте /ui снова для обновления.';
   questionView.hidden=false;
   const header=document.createElement('h4');
   const order=Number(snapshot.order_index); const total=Number(snapshot.total_questions);
@@ -31,17 +31,17 @@ function renderQuestion(snapshot){
     btn.textContent=`${Number.isInteger(idx)?idx+1:'?'}: ${txt}`;
     btn.addEventListener('click',()=>{
       if(!tg||!snapshot||typeof snapshot.session_id!=='number'||typeof snapshot.question_id!=='number'||!Number.isInteger(idx)||btn.disabled){
-        runnerState.textContent='Не удалось отправить ответ. Откройте /ui заново.';
+        runnerState.textContent='Не удалось отправить ответ. Повторите попытку или откройте /ui снова для синхронизации.';
         return;
       }
       const payload={type:'quiz_answer',session_id:snapshot.session_id,question_id:snapshot.question_id,selected_option_index:idx};
       [...questionView.querySelectorAll('button')].forEach((b)=>{b.disabled=true;});
-      runnerState.textContent='Отправляем ответ...';
+      runnerState.textContent='Отправляем ответ в Telegram...';
       try{
         tg.sendData(JSON.stringify(payload));
-        runnerState.textContent='Ответ отправлен. Откройте /ui снова, чтобы получить следующий вопрос.';
+        runnerState.textContent='Ответ отправлен. Откройте /ui снова, чтобы получить актуальный следующий шаг.';
       }catch{
-        runnerState.textContent='Не удалось отправить ответ. Откройте /ui заново.';
+        runnerState.textContent='Не удалось отправить ответ. Повторите попытку или откройте /ui снова для синхронизации.';
         [...questionView.querySelectorAll('button')].forEach((b)=>{b.disabled=false;});
       }
     });
@@ -55,7 +55,7 @@ function renderProgress(progress){
   const total=Number(progress.total_questions);
   const answered=Number(progress.answered_count);
   const remaining=Number(progress.remaining_count);
-  const parts=['Серверный прогресс'];
+  const parts=['Серверный прогресс (экспериментальный /ui)'];
   if(Number.isInteger(cur)&&Number.isInteger(total)&&total>0) parts.push(`вопрос ${cur}/${total}`);
   if(Number.isInteger(answered)) parts.push(`отвечено: ${answered}`);
   if(Number.isInteger(remaining)) parts.push(`осталось: ${remaining}`);
@@ -68,8 +68,8 @@ function renderResult(result){
   const score=Number(result?.score); const total=Number(result?.total_questions); const percent=Number(result?.percent);
   p.textContent=`Результат: ${Number.isInteger(score)?score:0} из ${Number.isInteger(total)?total:0}${Number.isInteger(percent)?` (${percent}%)`:''}`;
   questionView.appendChild(p);
-  const n=document.createElement('p'); n.textContent='Чтобы начать новую попытку, используйте /ui (setup) или классический /quiz.'; questionView.appendChild(n);
-  runnerState.textContent='Экспериментальный режим /ui: итог загружен из серверного состояния.';
+  const n=document.createElement('p'); n.textContent='Чтобы начать новую попытку, откройте /ui (setup) или используйте классический /quiz. /stats здесь не отображается.'; questionView.appendChild(n);
+  runnerState.textContent='Вы просматриваете завершённый результат из серверного состояния.';
 }
 function renderRunnerState(state){
   if(!state||typeof state!=='object') { renderQuestion(ctx?.current_question_snapshot); return; }
@@ -79,7 +79,7 @@ function renderRunnerState(state){
     renderProgress(state.progress);
     return;
   }
-  runnerState.textContent='Экспериментальный режим /ui: активная сессия не найдена. Выберите параметры ниже или используйте /quiz.';
+  runnerState.textContent='Новая сессия ещё не запущена. Выберите параметры ниже (opt-in /ui) или используйте /quiz.';
 }
 renderRunnerState(ctx?.runner_state);
 function selectedCategoryIds(){return [...cats.querySelectorAll('input:checked')].map(x=>Number(x.value)).filter(Number.isInteger)}
