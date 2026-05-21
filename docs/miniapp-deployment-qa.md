@@ -19,6 +19,13 @@
 - На текущем состоянии репозитория автоматический production-hosting для `miniapp/index.html` **не реализован** в составе `deploy.sh`/`docker-compose.yml` (операторская задача инфраструктуры).
 
 ## 3) Configuration checklist
+
+### Cloudflare Workers Static Assets (GitHub deployment flow)
+- Build command: empty
+- Deploy command: `npx wrangler deploy`
+- Path: `/`
+- Static assets directory in `wrangler.toml`: `./miniapp`
+
 1. Опубликовать `miniapp/index.html` на HTTPS static hosting в deployment environment.
 2. Установить `MINI_APP_URL` на этот HTTPS URL в env бота.
 3. Перезапустить/передеплоить bot service, чтобы env подхватился.

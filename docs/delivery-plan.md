@@ -50,7 +50,8 @@
 | #115 | Module 2 experimental design interpretation batch QA | ✅ Done |
 | #116 | Define experimental Telegram Mini App mode | ✅ Done |
 | #117 | Implement /ui command and Mini App setup-screen MVP | ✅ Done |
-| This PR | Add Mini App deployment and manual QA checklist | ✅ Done |
+| #118 | Add Mini App deployment and manual QA checklist | ✅ Done |
+| This PR | Add Cloudflare Workers Static Assets config for Mini App | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -58,10 +59,7 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-1. Configure static Mini App hosting in deployment environment and run manual Telegram QA with configured `MINI_APP_URL`.
-2. Record manual QA results using `docs/miniapp-deployment-qa.md` evidence template.
-3. Classic Telegram chat UX сохранять дефолтным до отдельного явного product-решения по смене default UX.
-4. Задачу `QA Module 2 duplicate and source_ref balance` держать в backlog как отдельный content QA шаг без удаления из delivery-фокуса.
+1. Deploy Cloudflare Worker Static Assets project, attach custom domain, set `MINI_APP_URL`, and run manual Telegram QA.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
