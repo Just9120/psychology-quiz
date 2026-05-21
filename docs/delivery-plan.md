@@ -51,7 +51,8 @@
 | #116 | Define experimental Telegram Mini App mode | ✅ Done |
 | #117 | Implement /ui command and Mini App setup-screen MVP | ✅ Done |
 | #118 | Add Mini App deployment and manual QA checklist | ✅ Done |
-| This PR | Add Cloudflare Workers Static Assets config for Mini App | ✅ Done |
+| #119 | Add Cloudflare Workers Static Assets config for Mini App | ✅ Done |
+| This PR | Sync environment example with Mini App and admin settings | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.

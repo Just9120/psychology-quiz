@@ -27,7 +27,7 @@
 - Static assets directory in `wrangler.toml`: `./miniapp`
 
 1. Опубликовать `miniapp/index.html` на HTTPS static hosting в deployment environment.
-2. Установить `MINI_APP_URL` на этот HTTPS URL в env бота.
+2. После готовности Cloudflare custom domain установить `MINI_APP_URL` на этот HTTPS URL в runtime `.env` на VPS.
 3. Перезапустить/передеплоить bot service, чтобы env подхватился.
 4. Проверить в Telegram, что `/ui` показывает кнопку открытия Mini App (при наличии активных категорий).
 5. По возможности в staging/dev отдельно проверить fallback-поведение `/ui`, когда `MINI_APP_URL` отсутствует.
