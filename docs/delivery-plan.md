@@ -52,7 +52,8 @@
 | #117 | Implement /ui command and Mini App setup-screen MVP | ✅ Done |
 | #118 | Add Mini App deployment and manual QA checklist | ✅ Done |
 | #119 | Add Cloudflare Workers Static Assets config for Mini App | ✅ Done |
-| This PR | Sync environment example with Mini App and admin settings | ✅ Done |
+| #120 | Sync environment example with Mini App and admin settings | ✅ Done |
+| This PR | Add safe deploy-time .env missing-key sync | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
