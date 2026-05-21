@@ -49,7 +49,8 @@
 | #112 | Module 2 experimental design interpretation questions | ✅ Done |
 | #115 | Module 2 experimental design interpretation batch QA | ✅ Done |
 | #116 | Define experimental Telegram Mini App mode | ✅ Done |
-| This PR | Implement /ui command and Mini App setup-screen MVP | ✅ Done |
+| #117 | Implement /ui command and Mini App setup-screen MVP | ✅ Done |
+| This PR | Add Mini App deployment and manual QA checklist | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -57,10 +58,10 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-После технического MVP Mini App setup-screen:
-1. Провести manual QA и deployment-валидацию статического Mini App hosting URL (`MINI_APP_URL`) в Telegram.
-2. Classic Telegram chat UX сохранять дефолтным до отдельного явного product-решения по смене default UX.
-3. Задачу `QA Module 2 duplicate and source_ref balance` держать в backlog как отдельный content QA шаг без удаления из delivery-фокуса.
+1. Configure static Mini App hosting in deployment environment and run manual Telegram QA with configured `MINI_APP_URL`.
+2. Record manual QA results using `docs/miniapp-deployment-qa.md` evidence template.
+3. Classic Telegram chat UX сохранять дефолтным до отдельного явного product-решения по смене default UX.
+4. Задачу `QA Module 2 duplicate and source_ref balance` держать в backlog как отдельный content QA шаг без удаления из delivery-фокуса.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.

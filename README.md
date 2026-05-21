@@ -95,6 +95,13 @@ Fallback:
 - RAG и внешняя генерация вопросов во время работы
 - расширение Module 2 на новые темы без отдельного согласованного решения (помимо уже открытых активных категорий)
 
+## Mini App deployment / QA runbook
+
+Для ручной deployment-валидации Mini App setup-screen используйте чеклист:
+- [`docs/miniapp-deployment-qa.md`](docs/miniapp-deployment-qa.md)
+
+Важно: в текущем репозитории hosting `miniapp/index.html` не автоматизирован runtime/deploy-скриптами и остаётся операторской инфраструктурной задачей.
+
 ## Документация
 
 | Документ | Роль | Когда читать |
