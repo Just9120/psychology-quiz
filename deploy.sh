@@ -71,21 +71,33 @@ if [[ ! -f ".env.example" ]]; then
 elif [[ ! -f ".env" ]]; then
   echo "[deploy] WARNING: .env not found. Skipping env sync without creating a new .env."
 else
-  ENV_BACKUP=".env.bak.$(date -u +%Y%m%d%H%M%S)"
-  cp ".env" "${ENV_BACKUP}"
-  echo "[deploy] Backed up .env to ${ENV_BACKUP}"
+  ENV_BACKUP_CREATED=0
+  ENV_BACKUP=""
 
   while IFS= read -r line; do
     trimmed_line="$(printf '%s' "${line}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
     [[ -z "${trimmed_line}" ]] && continue
     [[ "${trimmed_line}" =~ ^# ]] && continue
+    [[ "${trimmed_line}" != *"="* ]] && continue
 
     key="${trimmed_line%%=*}"
     key="$(printf '%s' "${key}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
     [[ -z "${key}" ]] && continue
 
+    if [[ ! "${key}" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+      echo "[deploy] WARNING: Skipping invalid env key from .env.example: ${key}"
+      continue
+    fi
+
     if grep -Eq "^[[:space:]]*${key}[[:space:]]*=" ".env"; then
       continue
+    fi
+
+    if [[ "${ENV_BACKUP_CREATED}" -eq 0 ]]; then
+      ENV_BACKUP=".env.bak.$(date -u +%Y%m%d%H%M%S)"
+      cp ".env" "${ENV_BACKUP}"
+      echo "[deploy] Backed up .env to ${ENV_BACKUP}"
+      ENV_BACKUP_CREATED=1
     fi
 
     printf '%s\n' "${trimmed_line}" >> ".env"
