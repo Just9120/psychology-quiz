@@ -3,7 +3,7 @@ const err=document.getElementById('err'),form=document.getElementById('f'),cats=
 const catsFieldset=document.getElementById('cats_fieldset');
 const runnerState=document.getElementById('runner_state');
 const questionView=document.getElementById('question_view');
-const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand();}
+const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand();} else {runnerState.textContent='Mini App API недоступен. Откройте /ui из Telegram.';}
 function bad(){err.textContent='Не удалось загрузить список тем. Закройте окно и откройте Mini App заново через /ui.'}
 function parseContext(raw){if(!raw)return null;try{const b64=raw.replace(/-/g,'+').replace(/_/g,'/');const padding='='.repeat((4-(b64.length%4))%4);const bin=atob(b64+padding);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i+=1){bytes[i]=bin.charCodeAt(i);}const json=new TextDecoder('utf-8').decode(bytes);return JSON.parse(json);}catch{try{return JSON.parse(decodeURIComponent(raw));}catch{return null;}}}
 let ctx=parseContext(new URLSearchParams(location.search).get('context'));
@@ -14,7 +14,7 @@ function renderQuestion(snapshot){
     runnerState.textContent='Экспериментальный режим /ui: активный вопрос не найден. Выберите параметры ниже или запустите /quiz.';
     return;
   }
-  runnerState.textContent='Экспериментальный режим /ui: текущий вопрос показан из серверного состояния. Ответы в Mini App будут добавлены в следующем срезе.';
+  runnerState.textContent='Экспериментальный режим /ui: текущий вопрос показан из серверного состояния. Выберите вариант ответа. После отправки откройте /ui снова для обновления состояния.';
   questionView.hidden=false;
   const header=document.createElement('h4');
   const order=Number(snapshot.order_index); const total=Number(snapshot.total_questions);
@@ -25,10 +25,26 @@ function renderQuestion(snapshot){
   snapshot.options.forEach((opt)=>{
     const li=document.createElement('li');
     const btn=document.createElement('button');
-    btn.type='button'; btn.disabled=true; btn.className='qopt';
+    btn.type='button'; btn.disabled=false; btn.className='qopt';
     const idx=Number(opt.option_index);
     const txt=typeof opt.option_text==='string'?opt.option_text:'';
-    btn.textContent=`${Number.isInteger(idx)?idx+1:'?'}: ${txt} (скоро)`;
+    btn.textContent=`${Number.isInteger(idx)?idx+1:'?'}: ${txt}`;
+    btn.addEventListener('click',()=>{
+      if(!tg||!snapshot||typeof snapshot.session_id!=='number'||typeof snapshot.question_id!=='number'||!Number.isInteger(idx)||btn.disabled){
+        runnerState.textContent='Не удалось отправить ответ. Откройте /ui заново.';
+        return;
+      }
+      const payload={type:'quiz_answer',session_id:snapshot.session_id,question_id:snapshot.question_id,selected_option_index:idx};
+      [...questionView.querySelectorAll('button')].forEach((b)=>{b.disabled=true;});
+      runnerState.textContent='Отправляем ответ...';
+      try{
+        tg.sendData(JSON.stringify(payload));
+        runnerState.textContent='Ответ отправлен. Откройте /ui снова, чтобы получить следующий вопрос.';
+      }catch{
+        runnerState.textContent='Не удалось отправить ответ. Откройте /ui заново.';
+        [...questionView.querySelectorAll('button')].forEach((b)=>{b.disabled=false;});
+      }
+    });
     li.appendChild(btn); ol.appendChild(li);
   });
   questionView.appendChild(ol);

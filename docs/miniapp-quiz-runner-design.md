@@ -136,6 +136,7 @@ Recommend **Hybrid (Option C)** as safest next step:
  - Implementation note: because Mini App assets are static and no dedicated backend API is introduced in this slice, snapshot delivery is embedded into `/ui` launch context from bot-side authoritative DB state.
 
 ### Slice 3 — answer submission + next transition
+- Status: **implemented** in this PR (minimal `sendData` transport and chat-confirmed transition).
 - Goal: submit answers from Mini App and transition to next question safely.
 - Likely files: answer submit handlers, Mini App submit UI state, dedupe/idempotency handling.
 - Validation approach: stale/duplicate/out-of-order submission tests and manual Telegram QA.
@@ -144,6 +145,7 @@ Recommend **Hybrid (Option C)** as safest next step:
 
 ### Slice 4 — progress + result screen
 - Goal: add in-app progress indicators and final server-derived result view.
+- Note: Slice 3 keeps lightweight UX due to static hosting and no dedicated backend state-refresh API; users reopen `/ui` to render the next authoritative snapshot.
 - Likely files: Mini App progress/result components, backend result payload formatter.
 - Validation approach: result consistency checks against server session data.
 - Non-goals: `/stats` integration.

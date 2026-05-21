@@ -2,6 +2,7 @@ import sqlite3
 import unittest
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
+from app.main import _parse_miniapp_answer_payload
 from app.miniapp_runner import get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
 
@@ -117,6 +118,33 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertEqual(2, result.total_questions)
         self.assertTrue(result.options)
         self.assertNotIn("is_correct", result.options[0])
+
+
+    def test_parse_valid_miniapp_answer_payload(self):
+        parsed = _parse_miniapp_answer_payload({
+            "type": "quiz_answer",
+            "session_id": self.session_id,
+            "question_id": 1,
+            "selected_option_index": 0,
+        })
+        self.assertEqual((self.session_id, 1, 0), parsed)
+
+    def test_parse_malformed_miniapp_answer_payload(self):
+        self.assertIsNone(_parse_miniapp_answer_payload({"type": "quiz_answer", "session_id": "1"}))
+        self.assertIsNone(_parse_miniapp_answer_payload({"type": "quiz_answer", "session_id": 0, "question_id": 1, "selected_option_index": 0}))
+
+    def test_snapshot_moves_to_next_question_after_accepted_answer(self):
+        accepted = submit_miniapp_answer_event(
+            self.conn,
+            session_id=self.session_id,
+            actor_user_id=self.user_id,
+            question_id=1,
+            selected_option_index=0,
+        )
+        self.assertEqual("accepted", accepted.status)
+        snapshot = get_current_miniapp_question_snapshot(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        self.assertEqual("ok", snapshot.status)
+        self.assertEqual(2, snapshot.question_id)
 
     def test_snapshot_wrong_user_forbidden(self):
         other = create_or_load_user(self.conn, 2002, "u2", "U2", None)
