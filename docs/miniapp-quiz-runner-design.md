@@ -120,10 +120,10 @@ Recommend **Hybrid (Option C)** as safest next step:
 ## Phased implementation slices
 
 ### Slice 1 — session/transport contract baseline
-- Goal: define and implement minimal authoritative contract for Mini App runner transitions.
-- Likely files: bot session handlers, Mini App data contract docs, tests for validation/idempotency paths.
-- Validation approach: unit/integration tests for ownership, stale submission, duplicate handling, invalid option rejection.
-- Non-goals: full Mini App UI runner screens.
+- Status: **implemented** in PR #126 (current PR).
+- Delivered baseline: minimal authoritative server-side contract for answer submission with explicit ownership/session/current-question/allowed-option validation and predictable stale/duplicate handling.
+- Validation approach: unit tests for ownership, stale submission, duplicate safety, and invalid option rejection.
+- Non-goals kept: no full Mini App UI runner screens in this slice.
 - Risks: contract drift between Mini App payload and backend expectations.
 
 ### Slice 2 — render current question in Mini App

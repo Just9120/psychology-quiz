@@ -40,8 +40,6 @@ from app.db import (
     get_selected_categories_for_session,
     get_owner_stats,
     init_db_connection,
-    is_question_in_session,
-    save_quiz_answer,
     select_random_approved_question_ids_across_active_categories,
     select_random_approved_question_ids_by_category,
     select_random_approved_question_ids_by_categories,
@@ -50,6 +48,8 @@ from app.db import (
     start_quiz_session,
     store_session_questions,
 )
+
+from app.miniapp_runner import submit_miniapp_answer_event
 
 
 logger = logging.getLogger(__name__)
@@ -1342,32 +1342,44 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             await query.edit_message_text("Эта сессия вам не принадлежит.")
             return
 
-        if not is_question_in_session(conn, session_id, question_id):
+        current = get_current_unanswered_question(conn, session_id)
+
+        submission = submit_miniapp_answer_event(
+            conn,
+            session_id=session_id,
+            actor_user_id=int(user_row["id"]),
+            question_id=question_id,
+            selected_option_index=selected_option_index,
+        )
+        if submission.status == "invalid_question":
             await query.edit_message_text("Этот вопрос не относится к текущей сессии.")
             return
-
-        current = get_current_unanswered_question(conn, session_id)
-        if current is None:
-            finalized = finalize_quiz_session(conn, session_id)
-            if finalized is None:
-                await query.edit_message_text("Не удалось завершить сессию.")
+        if submission.status == "stale_question":
+            if submission.expected_question_id is None:
+                finalized = finalize_quiz_session(conn, session_id)
+                if finalized is None:
+                    await query.edit_message_text("Не удалось завершить сессию.")
+                    return
+                await show_finished_quiz_message(
+                    query,
+                    session_id=session_id,
+                    score=int(finalized["score"]),
+                    total_questions=int(finalized["total_questions"]),
+                )
                 return
-            await show_finished_quiz_message(
-                query,
-                session_id=session_id,
-                score=int(finalized["score"]),
-                total_questions=int(finalized["total_questions"]),
-            )
-            return
-
-        if int(current["question_id"]) != question_id:
             await query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше».")
             return
-
-        answer = save_quiz_answer(conn, session_id, question_id, selected_option_index)
-        if int(answer["already_answered"]) == 1:
+        if submission.status == "invalid_option":
+            await query.edit_message_text("Выбран некорректный вариант ответа.")
+            return
+        if submission.status == "duplicate":
             await query.edit_message_text("На этот вопрос уже дан ответ.")
             return
+        if submission.status != "accepted":
+            await query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины.")
+            return
+
+        answer = {"is_correct": 1 if submission.is_correct else 0}
 
         explanation = str(current["explanation"] or "")
         total_questions = int(current["total_questions"])
