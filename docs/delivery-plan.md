@@ -57,7 +57,8 @@
 | #123 | Compact Mini App setup context URL encoding | ✅ Done |
 | #124 | Record Mini App deployment/manual QA smoke result | ✅ Done |
 | #125 | Design full Mini App quiz runner architecture | ✅ Done |
-| This PR | Implement Mini App runner session/transport contract baseline | ✅ Done |
+| #126 | Implement Mini App runner session/transport contract baseline | ✅ Done |
+| This PR | Render authoritative current question in Mini App | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
@@ -65,7 +66,7 @@
 - Синхронизировать документы при изменении продуктового состояния.
 
 ## Next recommended item
-1. Render the authoritative current question in the Mini App behind the opt-in `/ui` flow.
+1. Implement Mini App answer submission and next-question transition behind the opt-in `/ui` flow.
 
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
