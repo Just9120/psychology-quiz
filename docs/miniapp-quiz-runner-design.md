@@ -185,3 +185,5 @@ Recommend **Hybrid (Option C)** as safest next step:
 - Fallback order for `mode=runner`: compact question payload -> compact progress-only `runner_state` (`compact_progress_only=true`) -> reject `/ui` if still too large.
 
 - 2026-05-22 UX hardening: /ui при active in_progress показывает явный путь Continue + отдельную кнопку нового setup; после sendData бот присылает кнопку переоткрытия Mini App для следующего серверного шага/результата.
+
+- Force setup path now carries explicit context markers (`force_setup=true`, `abandons_active_session=true`) so Mini App can warn users before replacing active attempt.

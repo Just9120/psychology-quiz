@@ -384,12 +384,29 @@ class MiniAppRunnerContractTests(unittest.TestCase):
 
     def test_force_setup_context_overrides_active_session(self):
         setup_state = {"state": "setup", "status": "force_setup", "server_derived": True}
-        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], setup_state)
+        url, _ = build_miniapp_url_with_fallback(
+            "https://example.com/ui",
+            [{"id": 1, "name": "Category 1"}],
+            setup_state,
+            abandons_active_session=True,
+        )
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
         self.assertEqual("setup", ctx.get("mode"))
         self.assertEqual(1, len(ctx.get("categories", [])))
+        self.assertTrue(ctx.get("force_setup"))
+        self.assertTrue(ctx.get("abandons_active_session"))
+
+    def test_normal_setup_context_has_no_abandon_marker(self):
+        user = create_or_load_user(self.conn, 4444, "u5", "U5", None)
+        state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
+        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        self.assertNotIn("force_setup", ctx)
+        self.assertNotIn("abandons_active_session", ctx)
 
     def test_abandon_old_in_progress_before_new_session(self):
         newer_session = start_quiz_session(self.conn, self.user_id, 1)

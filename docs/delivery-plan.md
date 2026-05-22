@@ -103,4 +103,4 @@
 
 | #133-fix | Compact runner question URL payload for `/ui` active sessions + explicit progress-only message | ✅ Done |
 
-| 2026-05-22 | PR #135 | Mini App UX hardening after compact runner transport: active-session explicit choice, force setup path, reopen button after answer | done |
+| 2026-05-22 | PR #135/#135-fix | Mini App UX hardening + explicit abandon warning on force-setup path | done |

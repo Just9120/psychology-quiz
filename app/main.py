@@ -321,7 +321,14 @@ def _build_compact_runner_question_payload(runner_state: dict | None) -> dict | 
     return payload
 
 
-def _build_miniapp_context(categories, runner_state: dict | None, *, mode: str, compact: bool = False) -> dict:
+def _build_miniapp_context(
+    categories,
+    runner_state: dict | None,
+    *,
+    mode: str,
+    compact: bool = False,
+    abandons_active_session: bool = False,
+) -> dict:
     selected_state = _build_compact_runner_progress_state(runner_state) if compact else runner_state
     include_categories = mode == "setup"
     context = {
@@ -332,10 +339,19 @@ def _build_miniapp_context(categories, runner_state: dict | None, *, mode: str, 
     }
     if selected_state is not None:
         context["runner_state"] = selected_state
+    if mode == "setup" and abandons_active_session:
+        context["force_setup"] = True
+        context["abandons_active_session"] = True
     return context
 
 
-def build_miniapp_url_with_fallback(base_url: str, categories, runner_state: dict | None) -> tuple[str | None, bool]:
+def build_miniapp_url_with_fallback(
+    base_url: str,
+    categories,
+    runner_state: dict | None,
+    *,
+    abandons_active_session: bool = False,
+) -> tuple[str | None, bool]:
     has_runner = isinstance(runner_state, dict) and runner_state.get("state") in {"in_progress", "completed"}
     preferred_mode = "setup"
     if has_runner:
@@ -359,12 +375,23 @@ def build_miniapp_url_with_fallback(base_url: str, categories, runner_state: dic
             return compact_url, True
         return None, False
 
-    primary_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode)
+    primary_context = _build_miniapp_context(
+        categories,
+        runner_state,
+        mode=preferred_mode,
+        abandons_active_session=abandons_active_session,
+    )
     primary_url = build_miniapp_url(base_url, primary_context)
     if len(primary_url) <= MAX_MINIAPP_URL_LENGTH:
         return primary_url, False
 
-    compact_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode, compact=True)
+    compact_context = _build_miniapp_context(
+        categories,
+        runner_state,
+        mode=preferred_mode,
+        compact=True,
+        abandons_active_session=abandons_active_session,
+    )
     compact_url = build_miniapp_url(base_url, compact_context)
     if len(compact_url) <= MAX_MINIAPP_URL_LENGTH:
         return compact_url, True
@@ -633,6 +660,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         settings.mini_app_url,
         categories,
         {"state": "setup", "status": "force_setup", "server_derived": True},
+        abandons_active_session=True,
     )
     if miniapp_url is None:
         await update.message.reply_text(
