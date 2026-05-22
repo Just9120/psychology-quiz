@@ -262,13 +262,14 @@ def build_miniapp_setup_context(categories, question_snapshot: dict | None = Non
     return context
 
 
-def _build_compact_runner_state(runner_state: dict | None) -> dict | None:
+def _build_compact_runner_progress_state(runner_state: dict | None) -> dict | None:
     if not isinstance(runner_state, dict):
         return None
     compact: dict = {
         "state": runner_state.get("state"),
         "status": runner_state.get("status"),
         "server_derived": bool(runner_state.get("server_derived")),
+        "compact_progress_only": True,
     }
     if isinstance(runner_state.get("session"), dict):
         compact["session"] = {
@@ -287,8 +288,40 @@ def _build_compact_runner_state(runner_state: dict | None) -> dict | None:
     return compact
 
 
+def _build_compact_runner_question_payload(runner_state: dict | None) -> dict | None:
+    if not isinstance(runner_state, dict) or runner_state.get("state") != "in_progress":
+        return None
+    current_question = runner_state.get("current_question")
+    session = runner_state.get("session")
+    progress = runner_state.get("progress")
+    if not isinstance(current_question, dict) or not isinstance(session, dict):
+        return None
+    options = []
+    for option in current_question.get("options", []):
+        if not isinstance(option, dict):
+            continue
+        option_index = option.get("option_index")
+        option_text = option.get("option_text")
+        if isinstance(option_index, int) and isinstance(option_text, str):
+            options.append([option_index, option_text])
+    payload = {
+        "m": "runner",
+        "s": session.get("session_id"),
+        "q": current_question.get("question_id"),
+        "qt": current_question.get("question_text"),
+        "o": options,
+        "sd": True,
+    }
+    if isinstance(progress, dict):
+        payload["n"] = progress.get("current_question_number")
+        payload["t"] = progress.get("total_questions")
+        payload["a"] = progress.get("answered_count")
+        payload["r"] = progress.get("remaining_count")
+    return payload
+
+
 def _build_miniapp_context(categories, runner_state: dict | None, *, mode: str, compact: bool = False) -> dict:
-    selected_state = _build_compact_runner_state(runner_state) if compact else runner_state
+    selected_state = _build_compact_runner_progress_state(runner_state) if compact else runner_state
     include_categories = mode == "setup"
     context = {
         "type": "miniapp_setup_context",
@@ -306,6 +339,24 @@ def build_miniapp_url_with_fallback(base_url: str, categories, runner_state: dic
     preferred_mode = "setup"
     if has_runner:
         preferred_mode = "completed" if runner_state.get("state") == "completed" else "runner"
+
+    if preferred_mode == "runner":
+        compact_question_context = {
+            "type": "miniapp_setup_context",
+            "version": 1,
+            "mode": "runner",
+            "categories": [],
+            "runner_q": _build_compact_runner_question_payload(runner_state),
+        }
+        compact_question_url = build_miniapp_url(base_url, compact_question_context)
+        if len(compact_question_url) <= MAX_MINIAPP_URL_LENGTH:
+            return compact_question_url, False
+
+        compact_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode, compact=True)
+        compact_url = build_miniapp_url(base_url, compact_context)
+        if len(compact_url) <= MAX_MINIAPP_URL_LENGTH:
+            return compact_url, True
+        return None, False
 
     primary_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode)
     primary_url = build_miniapp_url(base_url, primary_context)

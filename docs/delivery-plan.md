@@ -100,3 +100,5 @@
 3. Если меняется product scope, сначала обновлять `docs/project-spec.md`, затем синхронизировать `docs/delivery-plan.md`.
 4. Для контентных изменений source of truth остаются JSON в репозитории; SQLite меняется только через штатный seed workflow.
 5. Поддерживать согласованность с `docs/ai-coding-workflow.md`; AI infrastructure-трек вести отдельно в `docs/ai-delivery-infrastructure-plan.md`.
+
+| #133-fix | Compact runner question URL payload for `/ui` active sessions + explicit progress-only message | ✅ Done |

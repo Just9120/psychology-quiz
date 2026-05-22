@@ -125,3 +125,6 @@
 - Этот runbook не деплоит production автоматически.
 - Не добавлять в репозиторий реальные секреты, private hostnames или token values.
 - Не менять runtime-поведение бота в рамках docs-only readiness PR.
+
+- [ ] Active `/ui` session with normal question shows question text + options (not progress-only).
+- [ ] If progress-only fallback is used, Mini App shows: `Текущий вопрос слишком большой для Mini App URL-транспорта. Продолжите этот вопрос через /quiz или откройте /ui позже.`

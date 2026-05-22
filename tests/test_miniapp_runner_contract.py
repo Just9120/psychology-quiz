@@ -7,6 +7,7 @@ from app.db import create_or_load_user, start_quiz_session, store_session_questi
 from app.main import (
     MAX_MINIAPP_URL_LENGTH,
     _parse_miniapp_answer_payload,
+    _build_compact_runner_question_payload,
     build_miniapp_setup_context,
     build_miniapp_url,
     build_miniapp_url_with_fallback,
@@ -343,22 +344,42 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertEqual("setup", ctx.get("mode"))
         self.assertEqual(1, len(ctx.get("categories", [])))
 
-    def test_fallback_compact_context_fits_and_keeps_server_derived_state(self):
-        long_text = "Y" * 2400
-        self.conn.execute("UPDATE questions SET question_text = ? WHERE id = 1", (long_text,))
+    def test_compact_runner_payload_omits_categories_contains_question_and_no_correctness(self):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
-        categories = [{"id": 1, "name": "Category 1"}]
-        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", categories, state)
+        payload = _build_compact_runner_question_payload(state)
+        self.assertEqual("runner", payload.get("m"))
+        self.assertNotIn("categories", payload)
+        self.assertIsInstance(payload.get("qt"), str)
+        self.assertTrue(payload.get("o"))
+        self.assertNotIn("is_correct", json.dumps(payload, ensure_ascii=False))
+
+    def test_compact_runner_payload_shorter_than_verbose(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        compact = json.dumps(_build_compact_runner_question_payload(state), ensure_ascii=False, separators=(",", ":"))
+        verbose = json.dumps(state, ensure_ascii=False, separators=(",", ":"))
+        self.assertLess(len(compact), len(verbose))
+
+    def test_runner_url_prefers_compact_question_payload_and_fits(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        self.assertFalse(used_fallback)
+        self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
+        ctx = json.loads(base64.urlsafe_b64decode((url.split("context=", 1)[1] + "=" * ((4 - len(url.split("context=", 1)[1]) % 4) % 4)).encode("ascii")).decode("utf-8"))
+        self.assertIn("runner_q", ctx)
+        self.assertEqual([], ctx.get("categories"))
+
+    def test_extreme_long_question_falls_back_to_progress_only(self):
+        long_text = "Y" * 2400
+        long_option = "Z" * 1600
+        self.conn.execute("UPDATE questions SET question_text = ? WHERE id = 1", (long_text,))
+        self.conn.execute("UPDATE question_options SET option_text = ? WHERE question_id = 1", (long_option,))
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
         self.assertTrue(used_fallback)
         self.assertIsNotNone(url)
-        self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
-        encoded = url.split("context=", 1)[1]
-        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
-        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
-        runner_state = ctx.get("runner_state", {})
-        self.assertTrue(runner_state.get("server_derived"))
-        self.assertNotIn("current_question", runner_state)
-        self.assertNotIn("result", runner_state)
+        ctx = json.loads(base64.urlsafe_b64decode((url.split("context=", 1)[1] + "=" * ((4 - len(url.split("context=", 1)[1]) % 4) % 4)).encode("ascii")).decode("utf-8"))
+        self.assertTrue(ctx.get("runner_state", {}).get("compact_progress_only"))
+        self.assertNotIn("runner_q", ctx)
 
 
 if __name__ == "__main__":
