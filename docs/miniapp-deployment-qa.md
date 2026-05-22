@@ -88,6 +88,8 @@
 - [ ] После финального ответа повторное открытие `/ui` показывает completed result.
 - [ ] Сценарии stale/duplicate кликов безопасны и дают recoverable сообщение.
 - [ ] Mini App fallback подсказывает, что можно использовать классический `/quiz`.
+- [ ] `/ui` при длинном текущем вопросе/опциях не падает из-за launch-context length: Mini App открывается в compact setup fallback.
+- [ ] Если даже compact fallback не помещается, текст ошибки: `Mini App временно недоступен: слишком большой launch context. Используйте /quiz.`
 
 ## 6) Manual QA smoke result
 

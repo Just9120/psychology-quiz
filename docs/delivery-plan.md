@@ -61,6 +61,7 @@
 | #127 | Render authoritative current question in Mini App | ✅ Done |
 | #128 | Implement Mini App answer submission and next-question transition | ✅ Done |
 | #129 | Add Mini App progress and result screen | ✅ Done |
+| #130 | Fix `/ui` launch-context URL regression with compact fallback | ✅ Done |
 | This PR | Harden Mini App reopen/recovery handling and polish opt-in `/ui` runner flow | ✅ Done |
 
 ## Active focus

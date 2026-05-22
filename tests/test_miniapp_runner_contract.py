@@ -1,8 +1,16 @@
+import base64
+import json
 import sqlite3
 import unittest
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
-from app.main import _parse_miniapp_answer_payload
+from app.main import (
+    MAX_MINIAPP_URL_LENGTH,
+    _parse_miniapp_answer_payload,
+    build_miniapp_setup_context,
+    build_miniapp_url,
+    build_miniapp_url_with_fallback,
+)
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
 
@@ -287,6 +295,38 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
         self.assertEqual("in_progress", state.get("state"))
         self.assertEqual(in_progress_id, state.get("session", {}).get("session_id"))
+
+    def test_context_builder_does_not_duplicate_question_payload_by_default(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        categories = [{"id": 1, "name": "Category 1"}]
+        context = build_miniapp_setup_context(categories, runner_state=state)
+        self.assertIn("runner_state", context)
+        self.assertNotIn("current_question_snapshot", context)
+
+    def test_full_context_with_large_question_can_exceed_limit(self):
+        long_text = "X" * 2400
+        self.conn.execute("UPDATE questions SET question_text = ? WHERE id = 1", (long_text,))
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        categories = [{"id": 1, "name": "Category 1"}]
+        url = build_miniapp_url("https://example.com/ui", build_miniapp_setup_context(categories, runner_state=state))
+        self.assertGreater(len(url), MAX_MINIAPP_URL_LENGTH)
+
+    def test_fallback_compact_context_fits_and_keeps_server_derived_state(self):
+        long_text = "Y" * 2400
+        self.conn.execute("UPDATE questions SET question_text = ? WHERE id = 1", (long_text,))
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        categories = [{"id": 1, "name": "Category 1"}]
+        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", categories, state)
+        self.assertTrue(used_fallback)
+        self.assertIsNotNone(url)
+        self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        runner_state = ctx.get("runner_state", {})
+        self.assertTrue(runner_state.get("server_derived"))
+        self.assertNotIn("current_question", runner_state)
+        self.assertNotIn("result", runner_state)
 
 
 if __name__ == "__main__":

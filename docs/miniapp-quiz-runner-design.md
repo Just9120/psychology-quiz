@@ -117,6 +117,11 @@ Recommend **Hybrid (Option C)** as safest next step:
    - Client shows retry affordance and performs state refresh before resubmit.
 7. **Fallback to classic chat flow**
    - User can always continue/start via `/quiz`; fallback remains supported during rollout.
+8. **Launch context URL size limit**
+   - `/ui` launch context is encoded into URL query and guarded by `MAX_MINIAPP_URL_LENGTH`.
+   - Canonical payload uses `runner_state` and must not duplicate the current question via both `runner_state.current_question` and top-level `current_question_snapshot`.
+   - If full `runner_state` is too large (e.g., long question/options), bot retries with compact setup-focused context (categories + compact server-derived runner metadata without full question/result payload).
+   - If compact context still exceeds limit, Mini App opening is rejected with: `Mini App временно недоступен: слишком большой launch context. Используйте /quiz.`
 
 ## Phased implementation slices
 
