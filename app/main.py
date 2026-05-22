@@ -253,6 +253,7 @@ def build_miniapp_setup_context(categories, question_snapshot: dict | None = Non
         "type": "miniapp_setup_context",
         "version": 1,
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories],
+        "mode": "setup",
     }
     if question_snapshot is not None:
         context["current_question_snapshot"] = question_snapshot
@@ -286,16 +287,36 @@ def _build_compact_runner_state(runner_state: dict | None) -> dict | None:
     return compact
 
 
-def build_miniapp_url_with_fallback(base_url: str, categories, runner_state: dict | None) -> tuple[str | None, bool]:
-    full_context = build_miniapp_setup_context(categories, runner_state=runner_state)
-    full_url = build_miniapp_url(base_url, full_context)
-    if len(full_url) <= MAX_MINIAPP_URL_LENGTH:
-        return full_url, False
+def _build_miniapp_context(categories, runner_state: dict | None, *, mode: str, compact: bool = False) -> dict:
+    selected_state = _build_compact_runner_state(runner_state) if compact else runner_state
+    include_categories = mode == "setup"
+    context = {
+        "type": "miniapp_setup_context",
+        "version": 1,
+        "mode": mode,
+        "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories] if include_categories else [],
+    }
+    if selected_state is not None:
+        context["runner_state"] = selected_state
+    return context
 
-    compact_context = build_miniapp_setup_context(categories, runner_state=_build_compact_runner_state(runner_state))
+
+def build_miniapp_url_with_fallback(base_url: str, categories, runner_state: dict | None) -> tuple[str | None, bool]:
+    has_runner = isinstance(runner_state, dict) and runner_state.get("state") in {"in_progress", "completed"}
+    preferred_mode = "setup"
+    if has_runner:
+        preferred_mode = "completed" if runner_state.get("state") == "completed" else "runner"
+
+    primary_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode)
+    primary_url = build_miniapp_url(base_url, primary_context)
+    if len(primary_url) <= MAX_MINIAPP_URL_LENGTH:
+        return primary_url, False
+
+    compact_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode, compact=True)
     compact_url = build_miniapp_url(base_url, compact_context)
     if len(compact_url) <= MAX_MINIAPP_URL_LENGTH:
         return compact_url, True
+
     return None, False
 
 
@@ -558,8 +579,8 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     )
     if fallback_mode:
         intro_text = (
-            "Mini App открыт в безопасном setup-режиме: текущий runner state оказался слишком большим для URL-транспорта.\n"
-            "Для полного потока можно продолжить через /quiz или повторно открыть /ui позже.\n\n"
+            "Mini App открыт в компактном режиме: текущий вопрос слишком большой для URL-транспорта. "
+            "Используйте /quiz или откройте /ui позже.\n\n"
             + intro_text
         )
     await update.message.reply_text(

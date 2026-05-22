@@ -311,6 +311,38 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         url = build_miniapp_url("https://example.com/ui", build_miniapp_setup_context(categories, runner_state=state))
         self.assertGreater(len(url), MAX_MINIAPP_URL_LENGTH)
 
+
+    def test_in_progress_context_omits_categories(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        self.assertFalse(used_fallback)
+        self.assertIsNotNone(url)
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        self.assertEqual("runner", ctx.get("mode"))
+        self.assertEqual([], ctx.get("categories"))
+
+    def test_completed_context_omits_categories(self):
+        self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        self.assertEqual("completed", ctx.get("mode"))
+        self.assertEqual([], ctx.get("categories"))
+
+    def test_setup_context_still_includes_categories(self):
+        user = create_or_load_user(self.conn, 3333, "u4", "U4", None)
+        state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
+        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        self.assertEqual("setup", ctx.get("mode"))
+        self.assertEqual(1, len(ctx.get("categories", [])))
+
     def test_fallback_compact_context_fits_and_keeps_server_derived_state(self):
         long_text = "Y" * 2400
         self.conn.execute("UPDATE questions SET question_text = ? WHERE id = 1", (long_text,))

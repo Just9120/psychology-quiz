@@ -171,3 +171,9 @@ Recommend **Hybrid (Option C)** as safest next step:
 - No default UX switch from classic chat to Mini App.
 - No `/stats` exposure in Mini App.
 - No DB schema change required by this design document itself.
+
+## Adaptive launch context profiles
+- setup mode includes categories and setup payload.
+- runner mode includes runner_state and omits categories.
+- completed mode includes result runner_state and omits categories.
+- If URL is too long, compact runner/setup state is used; if still too long, /ui is rejected and user is sent to /quiz.

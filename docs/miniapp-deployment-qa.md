@@ -123,3 +123,5 @@
 - Этот runbook не деплоит production автоматически.
 - Не добавлять в репозиторий реальные секреты, private hostnames или token values.
 - Не менять runtime-поведение бота в рамках docs-only readiness PR.
+
+- [ ] With active in-progress session, /ui opens in runner mode without full categories payload bloat.
