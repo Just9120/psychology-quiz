@@ -63,6 +63,7 @@
 | #129 | Add Mini App progress and result screen | ✅ Done |
 | #130 | Fix `/ui` launch-context URL regression with compact fallback | ✅ Done |
 | This PR | Harden Mini App reopen/recovery handling and polish opt-in `/ui` runner flow | ✅ Done |
+| #132 | Reduce /ui launch context size with adaptive setup/runner/completed profiles | ✅ Done |
 
 ## Active focus
 - Поддерживать docs-first AI-assisted workflow.
