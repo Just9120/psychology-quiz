@@ -261,6 +261,44 @@ def build_miniapp_setup_context(categories, question_snapshot: dict | None = Non
     return context
 
 
+def _build_compact_runner_state(runner_state: dict | None) -> dict | None:
+    if not isinstance(runner_state, dict):
+        return None
+    compact: dict = {
+        "state": runner_state.get("state"),
+        "status": runner_state.get("status"),
+        "server_derived": bool(runner_state.get("server_derived")),
+    }
+    if isinstance(runner_state.get("session"), dict):
+        compact["session"] = {
+            "session_id": runner_state["session"].get("session_id"),
+            "session_status": runner_state["session"].get("session_status"),
+        }
+    if isinstance(runner_state.get("progress"), dict):
+        compact["progress"] = {
+            "current_question_number": runner_state["progress"].get("current_question_number"),
+            "total_questions": runner_state["progress"].get("total_questions"),
+            "answered_count": runner_state["progress"].get("answered_count"),
+            "remaining_count": runner_state["progress"].get("remaining_count"),
+            "session_status": runner_state["progress"].get("session_status"),
+            "server_derived": bool(runner_state["progress"].get("server_derived")),
+        }
+    return compact
+
+
+def build_miniapp_url_with_fallback(base_url: str, categories, runner_state: dict | None) -> tuple[str | None, bool]:
+    full_context = build_miniapp_setup_context(categories, runner_state=runner_state)
+    full_url = build_miniapp_url(base_url, full_context)
+    if len(full_url) <= MAX_MINIAPP_URL_LENGTH:
+        return full_url, False
+
+    compact_context = build_miniapp_setup_context(categories, runner_state=_build_compact_runner_state(runner_state))
+    compact_url = build_miniapp_url(base_url, compact_context)
+    if len(compact_url) <= MAX_MINIAPP_URL_LENGTH:
+        return compact_url, True
+    return None, False
+
+
 def encode_miniapp_setup_context(context: dict) -> str:
     context_json = json.dumps(context, ensure_ascii=False, separators=(",", ":"))
     context_bytes = context_json.encode("utf-8")
@@ -492,14 +530,10 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     with get_connection(settings.db_path) as conn:
         categories = get_active_categories(conn)
         tg_user = update.effective_user
-        question_snapshot = None
         runner_state = None
         if tg_user is not None:
             user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
             runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
-            current = runner_state.get("current_question") if isinstance(runner_state, dict) else None
-            if isinstance(current, dict):
-                question_snapshot = current
     if not categories:
         await update.message.reply_text(
             "Сейчас нет доступных тем для запуска викторины.\n"
@@ -507,23 +541,29 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         )
         return
 
-    miniapp_context = build_miniapp_setup_context(categories, question_snapshot=question_snapshot, runner_state=runner_state)
-    miniapp_url = build_miniapp_url(settings.mini_app_url, miniapp_context)
-    logger.debug("Mini App setup URL length: %s", len(miniapp_url))
-    # Conservative guard: practical Telegram button URL and query size safety.
-    if len(miniapp_url) > MAX_MINIAPP_URL_LENGTH:
+    miniapp_url, fallback_mode = build_miniapp_url_with_fallback(settings.mini_app_url, categories, runner_state)
+    if miniapp_url is None:
         await update.message.reply_text(
-            "Mini App setup screen временно недоступен: слишком большой список категорий.\n"
-            "Используйте обычный запуск викторины через /quiz."
+            "Mini App временно недоступен: слишком большой launch context. Используйте /quiz."
         )
         return
+    logger.debug("Mini App setup URL length: %s", len(miniapp_url))
 
-    await update.message.reply_text(
+    intro_text = (
         "Текущий основной режим: classic Telegram chat UX (/quiz).\n\n"
         "Доступен экспериментальный opt-in Mini App runner через /ui.\n"
         "В Mini App можно настроить квиз, увидеть серверный текущий вопрос и отправить ответ.\n"
         "Состояние после ответа обновляется при повторном открытии /ui.\n\n"
-        "Вы можете открыть Mini App или остаться в classic UX.",
+        "Вы можете открыть Mini App или остаться в classic UX."
+    )
+    if fallback_mode:
+        intro_text = (
+            "Mini App открыт в безопасном setup-режиме: текущий runner state оказался слишком большим для URL-транспорта.\n"
+            "Для полного потока можно продолжить через /quiz или повторно открыть /ui позже.\n\n"
+            + intro_text
+        )
+    await update.message.reply_text(
+        intro_text,
         reply_markup=ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton("🧪 Открыть Mini App", web_app=WebAppInfo(url=miniapp_url))],
