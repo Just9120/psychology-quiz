@@ -8,7 +8,8 @@ function parseContext(raw){if(!raw)return null;try{const b64=raw.replace(/-/g,'+
 function getContextParam(){const searchParams=new URLSearchParams(location.search.slice(1)); const searchContext=searchParams.get('context'); if(searchContext) return searchContext; const hashParams=new URLSearchParams(location.hash.replace(/^#/,'')); return hashParams.get('context');}
 const ctx=parseContext(getContextParam())||{};
 const rs=ctx?.runner_state||{};
-const runnerMode=rs?.state==='in_progress';
+const hasCompactRunnerQuestion=ctx?.runner_q?.m==='runner'&&ctx?.runner_q?.sd===true;
+const runnerMode=rs?.state==='in_progress'||hasCompactRunnerQuestion;
 const completedMode=rs?.state==='completed';
 const setupMode=!runnerMode&&!completedMode;
 if(!ctx||ctx.type!=='miniapp_setup_context'||ctx.version!==1){bad();}
