@@ -102,3 +102,5 @@
 5. Поддерживать согласованность с `docs/ai-coding-workflow.md`; AI infrastructure-трек вести отдельно в `docs/ai-delivery-infrastructure-plan.md`.
 
 | #133-fix | Compact runner question URL payload for `/ui` active sessions + explicit progress-only message | ✅ Done |
+
+| 2026-05-22 | PR #135/#135-fix | Mini App UX hardening + explicit abandon warning on force-setup path | done |

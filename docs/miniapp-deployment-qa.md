@@ -131,3 +131,9 @@
 
 - [ ] Compact `runner_q` context renders question/options and setup form is hidden.
 - [ ] Progress-only runner fallback (`compact_progress_only`) keeps setup form hidden and shows explicit limitation message.
+
+- [ ] Active in_progress: /ui открывает текущий вопрос и в чате есть кнопка «Новый setup в Mini App».
+- [ ] После ответа из Mini App пользователь возвращается в чат и получает кнопку открыть следующий шаг (/ui).
+- [ ] После последнего ответа кнопка в чате ведёт к просмотру результата в Mini App.
+
+- [ ] Active session -> New setup in Mini App shows warning: "Запуск новой викторины завершит текущую активную попытку." before submit.

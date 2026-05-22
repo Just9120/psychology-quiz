@@ -264,6 +264,20 @@ def start_quiz_session(
     return int(cursor.lastrowid)
 
 
+def abandon_in_progress_sessions_for_user(conn: sqlite3.Connection, user_id: int) -> int:
+    cursor = conn.execute(
+        """
+        UPDATE quiz_sessions
+        SET status = 'abandoned',
+            finished_at = CURRENT_TIMESTAMP
+        WHERE user_id = ?
+          AND status = 'in_progress'
+        """,
+        (user_id,),
+    )
+    return int(cursor.rowcount or 0)
+
+
 def select_random_approved_question_ids_by_category(
     conn: sqlite3.Connection,
     category_id: int,

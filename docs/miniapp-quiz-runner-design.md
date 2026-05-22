@@ -183,3 +183,7 @@ Recommend **Hybrid (Option C)** as safest next step:
 - Runner `/ui` launch now prefers compact `runner_q` payload with short keys (`m,s,q,n,t,a,r,qt,o`) derived from server runner state.
 - Compact payload includes only fields needed for rendering/submission and excludes correctness flags, score, stats, and categories.
 - Fallback order for `mode=runner`: compact question payload -> compact progress-only `runner_state` (`compact_progress_only=true`) -> reject `/ui` if still too large.
+
+- 2026-05-22 UX hardening: /ui при active in_progress показывает явный путь Continue + отдельную кнопку нового setup; после sendData бот присылает кнопку переоткрытия Mini App для следующего серверного шага/результата.
+
+- Force setup path now carries explicit context markers (`force_setup=true`, `abandons_active_session=true`) so Mini App can warn users before replacing active attempt.
