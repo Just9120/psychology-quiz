@@ -28,6 +28,7 @@ from telegram.ext import (
 
 from app.config import load_settings
 from app.db import (
+    abandon_in_progress_sessions_for_user,
     create_or_load_user,
     get_user_reading_mode,
     finalize_quiz_session,
@@ -387,6 +388,20 @@ def build_miniapp_url(base_url: str, context: dict) -> str:
     return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, new_query, parsed.fragment))
 
 
+def build_miniapp_open_keyboard(
+    url: str,
+    *,
+    force_setup_url: str | None = None,
+    reopen_result: bool = False,
+) -> ReplyKeyboardMarkup:
+    first_label = "📊 Показать результат в Mini App" if reopen_result else "🧪 Продолжить в Mini App"
+    keyboard = [[KeyboardButton(first_label, web_app=WebAppInfo(url=url))]]
+    if force_setup_url:
+        keyboard.append([KeyboardButton("🆕 Новый setup в Mini App", web_app=WebAppInfo(url=force_setup_url))])
+    keyboard.append([KeyboardButton("🎯 Начать викторину")])
+    return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True, is_persistent=True)
+
+
 async def safe_reply(update: Update, text: str) -> None:
     if update.message:
         await update.message.reply_text(text)
@@ -614,6 +629,11 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         return
 
     miniapp_url, fallback_mode = build_miniapp_url_with_fallback(settings.mini_app_url, categories, runner_state)
+    force_setup_url, _ = build_miniapp_url_with_fallback(
+        settings.mini_app_url,
+        categories,
+        {"state": "setup", "status": "force_setup", "server_derived": True},
+    )
     if miniapp_url is None:
         await update.message.reply_text(
             "Mini App временно недоступен: слишком большой launch context. Используйте /quiz."
@@ -634,16 +654,17 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
             "Используйте /quiz или откройте /ui позже.\n\n"
             + intro_text
         )
+    has_active = isinstance(runner_state, dict) and runner_state.get("state") == "in_progress"
+    if has_active:
+        intro_text = (
+            "У вас уже есть активная сессия викторины (in_progress).\n"
+            "Кнопка Mini App продолжит текущий вопрос из серверного состояния.\n"
+            "Если хотите, можно остаться в classic режиме через /quiz.\n\n"
+            "Также доступен отдельный запуск нового setup в Mini App."
+        )
     await update.message.reply_text(
         intro_text,
-        reply_markup=ReplyKeyboardMarkup(
-            keyboard=[
-                [KeyboardButton("🧪 Открыть Mini App", web_app=WebAppInfo(url=miniapp_url))],
-                [KeyboardButton("🎯 Начать викторину")],
-            ],
-            resize_keyboard=True,
-            is_persistent=True,
-        ),
+        reply_markup=build_miniapp_open_keyboard(miniapp_url, force_setup_url=force_setup_url if has_active else None),
     )
 
 
@@ -749,11 +770,25 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
                         if finalized is None:
                             await message.chat.send_message("Ответ получен. Обновите /ui для проверки состояния.")
                             return
+                        result_url, _ = build_miniapp_url_with_fallback(
+                            settings.mini_app_url,
+                            get_active_categories(conn),
+                            build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id),
+                        )
                         await message.chat.send_message(
-                            f"Ответ получен. Сессия завершена: {int(finalized['score'])} из {int(finalized['total_questions'])}."
+                            f"Ответ получен. Сессия завершена: {int(finalized['score'])} из {int(finalized['total_questions'])}.",
+                            reply_markup=build_miniapp_open_keyboard(result_url, reopen_result=True) if result_url else None,
                         )
                         return
-                await message.chat.send_message("Ответ получен. Откройте /ui снова для следующего вопроса.")
+                next_url, _ = build_miniapp_url_with_fallback(
+                    settings.mini_app_url,
+                    get_active_categories(conn),
+                    build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"])),
+                )
+                await message.chat.send_message(
+                    "Ответ получен. Откройте Mini App для следующего шага.",
+                    reply_markup=build_miniapp_open_keyboard(next_url) if next_url else None,
+                )
                 return
             if submission.status == "duplicate":
                 await message.chat.send_message("Ответ уже получен для этого шага. Откройте /ui снова, чтобы синхронизировать состояние.")
@@ -844,6 +879,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             )
             return
         user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+        abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
         session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
         if selected_ids:
             set_selected_categories_for_session(conn, session_id, selected_ids)

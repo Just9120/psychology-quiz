@@ -3,7 +3,7 @@ import json
 import sqlite3
 import unittest
 
-from app.db import create_or_load_user, start_quiz_session, store_session_questions
+from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, start_quiz_session, store_session_questions
 from app.main import (
     MAX_MINIAPP_URL_LENGTH,
     _parse_miniapp_answer_payload,
@@ -11,6 +11,7 @@ from app.main import (
     build_miniapp_setup_context,
     build_miniapp_url,
     build_miniapp_url_with_fallback,
+    build_miniapp_open_keyboard,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
@@ -380,6 +381,29 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         ctx = json.loads(base64.urlsafe_b64decode((url.split("context=", 1)[1] + "=" * ((4 - len(url.split("context=", 1)[1]) % 4) % 4)).encode("ascii")).decode("utf-8"))
         self.assertTrue(ctx.get("runner_state", {}).get("compact_progress_only"))
         self.assertNotIn("runner_q", ctx)
+
+    def test_force_setup_context_overrides_active_session(self):
+        setup_state = {"state": "setup", "status": "force_setup", "server_derived": True}
+        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], setup_state)
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        self.assertEqual("setup", ctx.get("mode"))
+        self.assertEqual(1, len(ctx.get("categories", [])))
+
+    def test_abandon_old_in_progress_before_new_session(self):
+        newer_session = start_quiz_session(self.conn, self.user_id, 1)
+        store_session_questions(self.conn, newer_session, [1, 2])
+        updated = abandon_in_progress_sessions_for_user(self.conn, self.user_id)
+        self.assertGreaterEqual(updated, 2)
+        replacement = start_quiz_session(self.conn, self.user_id, 1)
+        store_session_questions(self.conn, replacement, [1, 2])
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
+        self.assertEqual(replacement, state.get("session", {}).get("session_id"))
+
+    def test_open_keyboard_can_include_setup_button(self):
+        kb = build_miniapp_open_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
+        self.assertEqual(3, len(kb.keyboard))
 
 
 if __name__ == "__main__":
