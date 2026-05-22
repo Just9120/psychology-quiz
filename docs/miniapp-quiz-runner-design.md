@@ -177,3 +177,9 @@ Recommend **Hybrid (Option C)** as safest next step:
 - runner mode includes runner_state and omits categories.
 - completed mode includes result runner_state and omits categories.
 - If URL is too long, compact runner/setup state is used; if still too long, /ui is rejected and user is sent to /quiz.
+
+
+### Compact runner question URL profile (post-#133 fix)
+- Runner `/ui` launch now prefers compact `runner_q` payload with short keys (`m,s,q,n,t,a,r,qt,o`) derived from server runner state.
+- Compact payload includes only fields needed for rendering/submission and excludes correctness flags, score, stats, and categories.
+- Fallback order for `mode=runner`: compact question payload -> compact progress-only `runner_state` (`compact_progress_only=true`) -> reject `/ui` if still too large.
