@@ -5,9 +5,8 @@ const runnerState=document.getElementById('runner_state');
 const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand();} else {runnerState.textContent='Mini App API недоступен. Используйте /quiz или откройте /ui из Telegram-клиента.';}
 function bad(){err.textContent='Не удалось загрузить список тем. Закройте окно и откройте Mini App заново через /ui.'}
 function parseContext(raw){if(!raw)return null;try{const b64=raw.replace(/-/g,'+').replace(/_/g,'/');const padding='='.repeat((4-(b64.length%4))%4);const bin=atob(b64+padding);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i+=1){bytes[i]=bin.charCodeAt(i);}const json=new TextDecoder('utf-8').decode(bytes);return JSON.parse(json);}catch{try{return JSON.parse(decodeURIComponent(raw));}catch{return null;}}}
-const hash=location.hash.startsWith('#')?location.hash.slice(1):location.hash;
-const params=new URLSearchParams(hash||location.search.slice(1));
-const ctx=parseContext(params.get('context'))||{};
+function getContextParam(){const searchParams=new URLSearchParams(location.search.slice(1)); const searchContext=searchParams.get('context'); if(searchContext) return searchContext; const hashParams=new URLSearchParams(location.hash.replace(/^#/,'')); return hashParams.get('context');}
+const ctx=parseContext(getContextParam())||{};
 const rs=ctx?.runner_state||{};
 const runnerMode=rs?.state==='in_progress';
 const completedMode=rs?.state==='completed';
