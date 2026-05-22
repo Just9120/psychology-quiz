@@ -86,6 +86,8 @@
 - [ ] Отправка ответа через Mini App работает.
 - [ ] Повторное открытие `/ui` показывает следующий вопрос/прогресс.
 - [ ] После финального ответа повторное открытие `/ui` показывает completed result.
+- [ ] Runner mode shows current question/progress without rendering setup form.
+- [ ] Completed mode shows result without rendering setup form.
 - [ ] Сценарии stale/duplicate кликов безопасны и дают recoverable сообщение.
 - [ ] Mini App fallback подсказывает, что можно использовать классический `/quiz`.
 - [ ] `/ui` при длинном текущем вопросе/опциях не падает из-за launch-context length: Mini App открывается в compact setup fallback.
@@ -123,5 +125,3 @@
 - Этот runbook не деплоит production автоматически.
 - Не добавлять в репозиторий реальные секреты, private hostnames или token values.
 - Не менять runtime-поведение бота в рамках docs-only readiness PR.
-
-- [ ] With active in-progress session, /ui opens in runner mode without full categories payload bloat.
