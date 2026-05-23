@@ -142,7 +142,17 @@
 
 - [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
 - [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.
-- [ ] Runner mode shows Mini App diagnostic line with:
+- [ ] Frontend marker is visible near the title in every mode: `Mini App frontend: api-diagnostics-v2`.
+- [ ] Diagnostics block is always visible once JS runs (setup / runner / completed / invalid context).
+- [ ] Diagnostic line shows:
+  - frontend version marker value
+  - context mode (`setup` / `runner` / `completed` / `invalid`)
+  - API configured: yes/no
+  - Telegram initData present: yes/no
+  - API status transitions (`not_attempted`, `attempted`, `success` or explicit fallback reason)
+  - API origin only (when configured)
+- [ ] If marker/diagnostics are stale or missing after deploy, close Mini App and open a fresh `/ui` button to bust Telegram WebView cache.
+- [ ] Runner mode diagnostics still include:
   - API configured: yes/no
   - Telegram initData present: yes/no
   - API status transitions (`not_attempted`, `attempted`, `success` or explicit fallback reason).
