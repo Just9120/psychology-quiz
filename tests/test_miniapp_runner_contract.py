@@ -12,6 +12,7 @@ from app.main import (
     build_miniapp_url,
     build_miniapp_url_with_fallback,
     build_miniapp_open_keyboard,
+    build_post_setup_miniapp_prompt,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
@@ -421,6 +422,16 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_open_keyboard_can_include_setup_button(self):
         kb = build_miniapp_open_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
         self.assertEqual(3, len(kb.keyboard))
+
+
+    def test_post_setup_prompt_returns_open_miniapp_keyboard(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        categories = [{"id": 1, "name": "Category 1"}]
+        text, keyboard = build_post_setup_miniapp_prompt("https://example.com/ui", categories, state)
+        self.assertIn("Откройте Mini App", text)
+        self.assertIn("/quiz", text)
+        self.assertIsNotNone(keyboard)
+        self.assertEqual("🧪 Продолжить в Mini App", keyboard.keyboard[0][0].text)
 
 
 if __name__ == "__main__":

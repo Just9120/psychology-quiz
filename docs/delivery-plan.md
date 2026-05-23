@@ -62,7 +62,8 @@
 | #128 | Implement Mini App answer submission and next-question transition | ✅ Done |
 | #129 | Add Mini App progress and result screen | ✅ Done |
 | #130 | Fix `/ui` launch-context URL regression with compact fallback | ✅ Done |
-| This PR | Harden Mini App reopen/recovery handling and polish opt-in `/ui` runner flow | ✅ Done |
+| This PR | Keep Mini App setup completion inside Mini App (no automatic first chat question) | ✅ Done |
+| #135 | Harden Mini App reopen/recovery handling and polish opt-in `/ui` runner flow | ✅ Done |
 | #132 | Reduce /ui launch context size with adaptive setup/runner/completed profiles | ✅ Done |
 
 ## Active focus
@@ -104,3 +105,5 @@
 | #133-fix | Compact runner question URL payload for `/ui` active sessions + explicit progress-only message | ✅ Done |
 
 | 2026-05-22 | PR #135/#135-fix | Mini App UX hardening + explicit abandon warning on force-setup path | done |
+
+| 2026-05-23 | follow-up after PR #135 | Mini App setup submit now sends open-first-question button in Mini App and does not auto-post question in chat | done |
