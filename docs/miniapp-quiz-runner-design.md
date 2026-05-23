@@ -187,3 +187,5 @@ Recommend **Hybrid (Option C)** as safest next step:
 - 2026-05-22 UX hardening: /ui при active in_progress показывает явный путь Continue + отдельную кнопку нового setup; после sendData бот присылает кнопку переоткрытия Mini App для следующего серверного шага/результата.
 
 - Force setup path now carries explicit context markers (`force_setup=true`, `abandons_active_session=true`) so Mini App can warn users before replacing active attempt.
+
+- 2026-05-23 setup completion update: after valid `quiz_setup`, bot creates session and sends a Mini App open button for the first authoritative question; it no longer auto-sends the first question in chat.

@@ -415,6 +415,21 @@ def build_miniapp_url(base_url: str, context: dict) -> str:
     return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, new_query, parsed.fragment))
 
 
+
+
+def build_post_setup_miniapp_prompt(base_url: str, categories, runner_state: dict | None) -> tuple[str, ReplyKeyboardMarkup | None]:
+    miniapp_url, _ = build_miniapp_url_with_fallback(base_url, categories, runner_state)
+    if not miniapp_url:
+        return (
+            "Викторина создана, но не удалось подготовить ссылку Mini App. "
+            "Откройте /ui заново или используйте /quiz для прохождения в чате.",
+            None,
+        )
+    return (
+        "Викторина создана. Откройте Mini App, чтобы пройти первый вопрос. "
+        "Если хотите классический режим, используйте /quiz.",
+        build_miniapp_open_keyboard(miniapp_url),
+    )
 def build_miniapp_open_keyboard(
     url: str,
     *,
@@ -923,7 +938,15 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             await removal_message.delete()
         except Exception:
             logger.debug("Не удалось удалить техническое сообщение скрытия меню %s", removal_message.message_id)
-    await send_current_question_to_chat(message.chat, settings, session_id)
+    with get_connection(settings.db_path) as conn:
+        runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
+        active_categories = get_active_categories(conn)
+    confirmation_text, confirmation_keyboard = build_post_setup_miniapp_prompt(
+        settings.mini_app_url,
+        active_categories,
+        runner_state,
+    )
+    await message.chat.send_message(confirmation_text, reply_markup=confirmation_keyboard)
 
 
 async def remove_main_menu_for_active_quiz(query) -> None:
