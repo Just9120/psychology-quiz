@@ -1852,6 +1852,17 @@ def configure_logging(log_level: str) -> None:
     )
 
 
+def should_start_miniapp_api(settings) -> bool:
+    if not settings.miniapp_api_enabled:
+        return False
+    if not settings.mini_app_api_base_url:
+        logger.warning("Mini App API explicitly enabled but MINI_APP_API_BASE_URL is missing; API server will not start.")
+        return False
+    if not settings.miniapp_api_allowed_origin:
+        logger.warning("Mini App API enabled without MINIAPP_API_ALLOWED_ORIGIN; cross-origin Mini App fetch may be blocked.")
+    return True
+
+
 def main() -> None:
     settings = load_settings()
     configure_logging(settings.log_level)
@@ -1936,23 +1947,28 @@ def main() -> None:
 
     logger.info("Бот запущен (long polling)")
 
-    api_server = start_miniapp_api_server(
-        settings.miniapp_api_bind,
-        settings.miniapp_api_port,
-        db_path=settings.db_path,
-        bot_token=settings.bot_token,
-        initdata_ttl_seconds=settings.miniapp_api_initdata_ttl_seconds,
-        allowed_origin=settings.miniapp_api_allowed_origin,
-    )
-    api_thread = threading.Thread(target=api_server.serve_forever, daemon=True)
-    api_thread.start()
-    logger.info("Mini App API server started on %s:%s", settings.miniapp_api_bind, settings.miniapp_api_port)
+    api_server = None
+    if should_start_miniapp_api(settings):
+        api_server = start_miniapp_api_server(
+            settings.miniapp_api_bind,
+            settings.miniapp_api_port,
+            db_path=settings.db_path,
+            bot_token=settings.bot_token,
+            initdata_ttl_seconds=settings.miniapp_api_initdata_ttl_seconds,
+            allowed_origin=settings.miniapp_api_allowed_origin,
+        )
+        api_thread = threading.Thread(target=api_server.serve_forever, daemon=True)
+        api_thread.start()
+        logger.info("Mini App API server started on %s:%s", settings.miniapp_api_bind, settings.miniapp_api_port)
+    else:
+        logger.info("Mini App API server is disabled. Mini App uses sendData fallback unless API is explicitly enabled/configured.")
 
     try:
         application.run_polling()
     finally:
-        api_server.shutdown()
-        api_server.server_close()
+        if api_server is not None:
+            api_server.shutdown()
+            api_server.server_close()
 
 
 if __name__ == "__main__":

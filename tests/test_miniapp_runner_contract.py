@@ -2,6 +2,7 @@ import base64
 import json
 import sqlite3
 import unittest
+from types import SimpleNamespace
 
 from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, start_quiz_session, store_session_questions
 from app.main import (
@@ -13,6 +14,7 @@ from app.main import (
     build_miniapp_url_with_fallback,
     build_miniapp_open_keyboard,
     build_post_setup_miniapp_prompt,
+    should_start_miniapp_api,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
@@ -449,6 +451,30 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertIn("/quiz", text)
         self.assertIsNotNone(keyboard)
         self.assertEqual("🧪 Продолжить в Mini App", keyboard.keyboard[0][0].text)
+
+    def test_should_start_miniapp_api_disabled_by_default(self):
+        settings = SimpleNamespace(
+            miniapp_api_enabled=False,
+            mini_app_api_base_url=None,
+            miniapp_api_allowed_origin=None,
+        )
+        self.assertFalse(should_start_miniapp_api(settings))
+
+    def test_should_start_miniapp_api_requires_base_url_when_enabled(self):
+        settings = SimpleNamespace(
+            miniapp_api_enabled=True,
+            mini_app_api_base_url=None,
+            miniapp_api_allowed_origin="https://miniapp.example.com",
+        )
+        self.assertFalse(should_start_miniapp_api(settings))
+
+    def test_should_start_miniapp_api_enabled_with_base_url(self):
+        settings = SimpleNamespace(
+            miniapp_api_enabled=True,
+            mini_app_api_base_url="https://api.example.com",
+            miniapp_api_allowed_origin="https://miniapp.example.com",
+        )
+        self.assertTrue(should_start_miniapp_api(settings))
 
 
 if __name__ == "__main__":

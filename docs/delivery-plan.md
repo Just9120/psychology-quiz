@@ -111,3 +111,5 @@
 | #136-next | Narrow Mini App API for in-window runner progression with Telegram initData auth + sendData fallback retained | ✅ Done |
 
 | #137-fix | Production hardening for narrow Mini App API (api_base_url wiring, CORS/OPTIONS, TTL enforcement, safer answer responses) | ✅ Done |
+
+| #137-fix2 | Make Mini App API startup explicit opt-in (`MINIAPP_API_ENABLED`) with safe no-start when base URL missing | ✅ Done |

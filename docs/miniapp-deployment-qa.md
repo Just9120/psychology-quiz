@@ -157,3 +157,7 @@
   - `MINIAPP_API_PORT` (default `8081`)
   - `MINIAPP_API_INITDATA_TTL_SECONDS` (default `3600`)
 - If `MINI_APP_API_BASE_URL` is not set, Mini App intentionally uses `sendData` fallback only.
+
+- **Enablement gate:** set `MINIAPP_API_ENABLED=true` to start API server; default is disabled.
+- If enabled but `MINI_APP_API_BASE_URL` is missing, API server is not started (safe no-start) and Mini App remains on `sendData` fallback.
+- Recommended production: always set `MINIAPP_API_ALLOWED_ORIGIN` to exact Mini App origin when enabling API.

@@ -193,3 +193,5 @@ Recommend **Hybrid (Option C)** as safest next step:
 - 2026-05-23: Added narrow Mini App API (`GET /miniapp/state`, `POST /miniapp/answer`) authenticated by Telegram `initData`; Mini App now prefers in-window fetch progression and falls back to `sendData` on API failure/unavailability.
 
 - 2026-05-23 PR #137 fix: wired `MINI_APP_API_BASE_URL` into all `/ui` launch contexts (including compact runner payload), added CORS/OPTIONS + configured origin allowlist, and enforced configurable initData TTL in API handlers.
+
+- API startup is now explicit opt-in: set `MINIAPP_API_ENABLED=true` together with `MINI_APP_API_BASE_URL` and `MINIAPP_API_ALLOWED_ORIGIN`. Without this, bot does not start the Mini App API server and Mini App stays on `sendData` fallback.
