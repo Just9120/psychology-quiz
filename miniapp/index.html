@@ -1,44 +1,561 @@
-<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Quiz Setup</title><style>body{font-family:sans-serif;padding:12px}fieldset{margin:10px 0}button{width:100%;padding:12px}label{display:block;margin:6px 0}.err{color:#b00020}[hidden]{display:none}.note{padding:10px;border:1px solid #ddd;border-radius:8px;margin:10px 0}.warn{padding:10px;border:1px solid #b00020;border-radius:8px;background:#fff5f5;color:#7a0012;margin:10px 0}.qopt button{opacity:.75}.meta{color:#555;font-size:.95em;margin:-6px 0 10px 0}</style><script src="https://telegram.org/js/telegram-web-app.js"></script></head><body><h3>/ui — экспериментальный Mini App runner</h3><div class="meta" id="frontend_marker">Mini App frontend: api-diagnostics-v2</div><div class="meta">Если версия не обновилась, закройте Mini App и откройте новую кнопку /ui.</div><div class="note" id="runner_state"></div><div id="err" class="err"></div><div id="question_view" hidden></div><div id="setup_warning" class="warn" hidden></div><form id="f" hidden><fieldset><legend>Режим</legend><label><input type="radio" name="quiz_mode" value="single" checked> Конкретная тема</label><label><input type="radio" name="quiz_mode" value="selected_mix"> Микс из выбранных тем</label><label><input type="radio" name="quiz_mode" value="all"> Все темы</label></fieldset><fieldset id="cats_fieldset"><legend>Темы</legend><div id="cats"></div></fieldset><fieldset><legend>Количество</legend><label><input type="radio" name="question_count" value="5" checked>5</label><label><input type="radio" name="question_count" value="10">10</label><label><input type="radio" name="question_count" value="15">15</label><label><input type="radio" name="question_count" value="all">Все доступные</label></fieldset><fieldset><legend>Сложность</legend><label><input type="radio" name="difficulty" value="any" checked>Любая</label><label><input type="radio" name="difficulty" value="easy">easy</label><label><input type="radio" name="difficulty" value="medium">medium</label><label><input type="radio" name="difficulty" value="hard">hard</label></fieldset><button type="submit" id="go" disabled>Начать викторину</button></form><script>
-const err=document.getElementById('err'),form=document.getElementById('f'),cats=document.getElementById('cats'),go=document.getElementById('go'),questionView=document.getElementById('question_view');
-const catsFieldset=document.getElementById('cats_fieldset'),setupWarning=document.getElementById('setup_warning');
-const runnerState=document.getElementById('runner_state');
-const apiDiag=document.createElement('div'); apiDiag.className='note'; apiDiag.hidden=true; runnerState.insertAdjacentElement('afterend', apiDiag);
-const FRONTEND_VERSION='api-diagnostics-v2';
-const apiDiagState={configured:false,initDataPresent:false,attemptStatus:'not_attempted',apiOrigin:''};
-function detectContextMode(){if(!ctx||ctx.type!=='miniapp_setup_context'||ctx.version!==1) return 'invalid'; if(completedMode) return 'completed'; if(runnerMode) return 'runner'; return 'setup';}
-function renderApiDiagnostics(){const mode=detectContextMode(); const origin=apiDiagState.apiOrigin?` · origin: ${apiDiagState.apiOrigin}`:''; apiDiag.hidden=false; apiDiag.textContent=`API diag — frontend: ${FRONTEND_VERSION} · mode: ${mode} · configured: ${apiDiagState.configured?'yes':'no'} · initData: ${apiDiagState.initDataPresent?'yes':'no'} · status: ${apiDiagState.attemptStatus}${origin}`;}
-const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand();} else {runnerState.textContent='Mini App API недоступен. Используйте /quiz или откройте /ui из Telegram-клиента.';}
-function bad(){err.textContent='Не удалось загрузить список тем. Закройте окно и откройте Mini App заново через /ui.'}
-function parseContext(raw){if(!raw)return null;try{const b64=raw.replace(/-/g,'+').replace(/_/g,'/');const padding='='.repeat((4-(b64.length%4))%4);const bin=atob(b64+padding);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i+=1){bytes[i]=bin.charCodeAt(i);}const json=new TextDecoder('utf-8').decode(bytes);return JSON.parse(json);}catch{try{return JSON.parse(decodeURIComponent(raw));}catch{return null;}}}
-function getContextParam(){const searchParams=new URLSearchParams(location.search.slice(1)); const searchContext=searchParams.get('context'); if(searchContext) return searchContext; const hashParams=new URLSearchParams(location.hash.replace(/^#/,'')); return hashParams.get('context');}
-const ctx=parseContext(getContextParam())||{};
-const rs=ctx?.runner_state||{};
-const hasCompactRunnerQuestion=ctx?.runner_q?.m==='runner'&&ctx?.runner_q?.sd===true;
-const runnerMode=rs?.state==='in_progress'||hasCompactRunnerQuestion;
-const completedMode=rs?.state==='completed';
-const setupMode=!runnerMode&&!completedMode;
-if(!ctx||ctx.type!=='miniapp_setup_context'||ctx.version!==1){bad();}
-else if(setupMode&&!Array.isArray(ctx.categories)){bad();}
-else {
-  const list=Array.isArray(ctx.categories)?ctx.categories:[];
-  if(setupMode){form.hidden=false; if(ctx?.abandons_active_session===true){setupWarning.hidden=false; setupWarning.textContent='Запуск новой викторины завершит текущую активную попытку.'; go.textContent='Начать новую викторину';} list.forEach(c=>{const id=Number(c.id); if(!Number.isInteger(id)) return; const l=document.createElement('label'); const i=document.createElement('input'); i.type='checkbox'; i.value=String(id); l.appendChild(i); l.appendChild(document.createTextNode(` ${String(c.name ?? '')}`)); cats.appendChild(l);});}
-}
-function selectedCategoryIds(){return [...cats.querySelectorAll('input:checked')].map(x=>Number(x.value)).filter(Number.isInteger)}
-function syncCategoryUi(){const mode=form.quiz_mode.value; const allMode=mode==='all'; catsFieldset.hidden=allMode; [...cats.querySelectorAll('input')].forEach((input)=>{input.disabled=allMode;});}
-function validate(){if(form.hidden){go.disabled=true;return;} syncCategoryUi(); const mode=form.quiz_mode.value; const selected=selectedCategoryIds(); let ok=false; if(mode==='single') ok=selected.length===1; else if(mode==='selected_mix') ok=selected.length>=1; else ok=true; go.disabled=!ok;}
-form.addEventListener('change',validate);
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiz Setup</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 12px;
+      }
 
-function normalizeCompactRunnerQuestion(compact){if(!compact||compact.m!=='runner'||compact.sd!==true)return null;const options=Array.isArray(compact.o)?compact.o:[];const normalizedOptions=[];options.forEach((pair)=>{if(!Array.isArray(pair)||pair.length!==2)return;const idx=Number(pair[0]);const txt=typeof pair[1]==='string'?pair[1]:'';if(Number.isInteger(idx))normalizedOptions.push({option_index:idx,option_text:txt});});return {status:'ok',session_id:Number(compact.s),question_id:Number(compact.q),order_index:Number(compact.n),total_questions:Number(compact.t),question_text:typeof compact.qt==='string'?compact.qt:'',options:normalizedOptions};}
-function renderProgress(progress){if(!progress||progress.server_derived!==true)return; const cur=Number(progress.current_question_number); const total=Number(progress.total_questions); const answered=Number(progress.answered_count); const remaining=Number(progress.remaining_count); const parts=[]; if(Number.isInteger(cur)&&Number.isInteger(total)&&total>0)parts.push(`вопрос ${cur}/${total}`); if(Number.isInteger(answered))parts.push(`отвечено: ${answered}`); if(Number.isInteger(remaining))parts.push(`осталось: ${remaining}`); if(parts.length>0) runnerState.textContent=`Экспериментальный режим /ui: ${parts.join(' · ')}.`;}
-function renderResult(result){questionView.replaceChildren(); questionView.hidden=false; const h=document.createElement('h4'); h.textContent='Викторина завершена'; questionView.appendChild(h); const p=document.createElement('p'); const score=Number(result?.score); const total=Number(result?.total_questions); const percent=Number(result?.percent); p.textContent=`Результат: ${Number.isInteger(score)?score:0} из ${Number.isInteger(total)?total:0}${Number.isInteger(percent)?` (${percent}%)`:''}`; questionView.appendChild(p); const n=document.createElement('p'); n.textContent='Чтобы начать новую попытку, откройте /ui (setup) или используйте классический /quiz. /stats здесь не отображается.'; questionView.appendChild(n); runnerState.textContent='Вы просматриваете завершённый результат из серверного состояния.';}
-const apiBase=(ctx?.api_base_url&&typeof ctx.api_base_url==='string'&&ctx.api_base_url.trim())?ctx.api_base_url.trim():'';
-apiDiagState.configured=Boolean(apiBase);
-try{apiDiagState.apiOrigin=apiBase?new URL(apiBase).origin:'';}catch{apiDiagState.apiOrigin='';}
-apiDiagState.initDataPresent=Boolean(tg?.initData);
-renderApiDiagnostics();
-async function submitAnswer(sessionId, questionId, selectedOptionIndex){const payload={type:'quiz_answer',session_id:sessionId,question_id:questionId,selected_option_index:selectedOptionIndex}; [...questionView.querySelectorAll('button')].forEach((b)=>{b.disabled=true;}); const initData=tg?.initData||''; apiDiagState.initDataPresent=Boolean(initData); if(!apiBase){apiDiagState.attemptStatus='skipped_missing_api_base'; renderApiDiagnostics(); runnerState.textContent='API: skipped_missing_api_base. Используется sendData fallback.';} else if(!initData){apiDiagState.attemptStatus='skipped_missing_init_data'; renderApiDiagnostics(); runnerState.textContent='API: skipped_missing_init_data. Используется sendData fallback.';} else {apiDiagState.attemptStatus='attempted'; renderApiDiagnostics(); try{const answerResp=await fetch(`${apiBase}/miniapp/answer`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`tma ${initData}`},body:JSON.stringify({session_id:sessionId,question_id:questionId,selected_option_index:selectedOptionIndex})}); if(!answerResp.ok){apiDiagState.attemptStatus='api_non_ok'; renderApiDiagnostics(); runnerState.textContent=`API: api_non_ok (HTTP ${answerResp.status}). Используется sendData fallback.`;} else {const answerJson=await answerResp.json(); if(answerJson?.ok===true&&answerJson?.runner_state){apiDiagState.attemptStatus='success'; renderApiDiagnostics(); renderRunnerState(answerJson.runner_state,{preferLaunchCompact:false}); return;} if(answerJson?.ok===true&&!answerJson?.runner_state){apiDiagState.attemptStatus='api_no_runner_state'; renderApiDiagnostics(); runnerState.textContent='API: api_no_runner_state. Используется sendData fallback.';} else {apiDiagState.attemptStatus='api_non_ok'; renderApiDiagnostics(); runnerState.textContent='API: api_non_ok. Используется sendData fallback.';}}}catch{apiDiagState.attemptStatus='failed_fetch'; renderApiDiagnostics(); runnerState.textContent='API: failed_fetch. Используется sendData fallback.';}} if(!tg?.sendData){runnerState.textContent='Не удалось отправить ответ. Повторите попытку или откройте /ui снова для синхронизации.'; [...questionView.querySelectorAll('button')].forEach((b)=>{b.disabled=false;});return;} try{apiDiagState.attemptStatus='fallback_sendData'; renderApiDiagnostics(); tg.sendData(JSON.stringify(payload)); runnerState.textContent='Ответ отправлен через sendData fallback. Если Mini App закроется и вернёт вас в чат, используйте кнопку /ui для следующего шага.';}catch{runnerState.textContent='Не удалось отправить ответ. Повторите попытку или откройте /ui снова для синхронизации.'; [...questionView.querySelectorAll('button')].forEach((b)=>{b.disabled=false;});}}
-function renderQuestion(snapshot){questionView.replaceChildren(); if(!snapshot||snapshot.status!=='ok'||!Array.isArray(snapshot.options)||typeof snapshot.question_text!=='string'){runnerState.textContent='Экспериментальный режим /ui: активный вопрос не найден. Выберите параметры ниже или запустите /quiz.'; return;} runnerState.textContent='Вы продолжаете активную сессию. Вопрос загружен из серверного состояния. После отправки ответа Telegram может вернуть вас в чат; откройте /ui снова для обновления.'; questionView.hidden=false; const header=document.createElement('h4'); const order=Number(snapshot.order_index); const total=Number(snapshot.total_questions); header.textContent=(Number.isInteger(order)&&Number.isInteger(total)&&total>0)?`Вопрос ${order} из ${total}`:'Текущий вопрос'; questionView.appendChild(header); const q=document.createElement('p'); q.textContent=snapshot.question_text; questionView.appendChild(q); const ol=document.createElement('ol'); snapshot.options.forEach((opt)=>{const li=document.createElement('li'); const btn=document.createElement('button'); btn.type='button'; const idx=Number(opt.option_index); const txt=typeof opt.option_text==='string'?opt.option_text:''; btn.textContent=`${Number.isInteger(idx)?idx+1:'?'}: ${txt}`; btn.addEventListener('click',()=>submitAnswer(Number(snapshot.session_id), Number(snapshot.question_id), idx)); li.appendChild(btn); ol.appendChild(li);}); questionView.appendChild(ol);}
-function renderRunnerState(state,{preferLaunchCompact=false}={}){const compact=normalizeCompactRunnerQuestion(ctx?.runner_q); if(preferLaunchCompact&&compact){renderQuestion(compact); renderProgress({server_derived:true,current_question_number:compact.order_index,total_questions:compact.total_questions,answered_count:Number(ctx?.runner_q?.a),remaining_count:Number(ctx?.runner_q?.r)}); renderApiDiagnostics(); return;} if(!state||typeof state!=='object'){runnerState.textContent='Новая сессия ещё не запущена. Выберите параметры ниже (opt-in /ui) или используйте /quiz.'; renderApiDiagnostics(); return;} if(state.state==='completed'&&state.server_derived===true){renderResult(state.result||{}); renderApiDiagnostics(); return;} if(state.state==='in_progress'){renderQuestion(state.current_question); renderProgress(state.progress); if(state.compact_progress_only===true&&!state.current_question){runnerState.textContent='Текущий вопрос слишком большой для Mini App URL-транспорта. Продолжите этот вопрос через /quiz или откройте /ui позже.';} renderApiDiagnostics(); return;} runnerState.textContent='Новая сессия ещё не запущена. Выберите параметры ниже (opt-in /ui) или используйте /quiz.'; renderApiDiagnostics();}
-form.addEventListener('submit',(e)=>{e.preventDefault(); validate(); if(go.disabled||!tg?.sendData) return; const mode=form.quiz_mode.value; const selected=selectedCategoryIds(); const rawCount=form.question_count.value; const payload={type:'quiz_setup',quiz_mode:mode,category_ids:mode==='all'?[]:selected,question_count:rawCount==='all'?null:Number(rawCount),difficulty:form.difficulty.value}; try{tg.sendData(JSON.stringify(payload)); tg.close();}catch{err.textContent='Не удалось отправить setup-данные. Попробуйте снова или используйте /quiz.';}});
-renderRunnerState(rs,{preferLaunchCompact:true}); validate();
-</script></body></html>
+      fieldset {
+        margin: 10px 0;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+      }
+
+      label {
+        display: block;
+        margin: 6px 0;
+      }
+
+      [hidden] {
+        display: none;
+      }
+
+      .err {
+        color: #b00020;
+      }
+
+      .meta {
+        color: #555;
+        font-size: 0.95em;
+        margin: -6px 0 10px 0;
+      }
+
+      .note {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px 0;
+      }
+
+      .warn {
+        padding: 10px;
+        border: 1px solid #b00020;
+        border-radius: 8px;
+        background: #fff5f5;
+        color: #7a0012;
+        margin: 10px 0;
+      }
+    </style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <h3>/ui — экспериментальный Mini App runner</h3>
+    <div id="frontend_marker" class="meta" hidden></div>
+    <div id="runner_state" class="note"></div>
+    <div id="api_diag" class="note" hidden></div>
+    <div id="err" class="err"></div>
+    <div id="question_view" hidden></div>
+    <div id="setup_warning" class="warn" hidden></div>
+
+    <form id="f" hidden>
+      <fieldset>
+        <legend>Режим</legend>
+        <label><input type="radio" name="quiz_mode" value="single" checked /> Конкретная тема</label>
+        <label><input type="radio" name="quiz_mode" value="selected_mix" /> Микс из выбранных тем</label>
+        <label><input type="radio" name="quiz_mode" value="all" /> Все темы</label>
+      </fieldset>
+
+      <fieldset id="cats_fieldset">
+        <legend>Темы</legend>
+        <div id="cats"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Количество</legend>
+        <label><input type="radio" name="question_count" value="5" checked /> 5</label>
+        <label><input type="radio" name="question_count" value="10" /> 10</label>
+        <label><input type="radio" name="question_count" value="15" /> 15</label>
+        <label><input type="radio" name="question_count" value="all" /> Все доступные</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Сложность</legend>
+        <label><input type="radio" name="difficulty" value="any" checked /> Любая</label>
+        <label><input type="radio" name="difficulty" value="easy" /> easy</label>
+        <label><input type="radio" name="difficulty" value="medium" /> medium</label>
+        <label><input type="radio" name="difficulty" value="hard" /> hard</label>
+      </fieldset>
+
+      <button type="submit" id="go" disabled>Начать викторину</button>
+    </form>
+
+    <script>
+      const FRONTEND_VERSION = 'ui-polish-v1';
+
+      const err = document.getElementById('err');
+      const form = document.getElementById('f');
+      const cats = document.getElementById('cats');
+      const go = document.getElementById('go');
+      const questionView = document.getElementById('question_view');
+      const catsFieldset = document.getElementById('cats_fieldset');
+      const setupWarning = document.getElementById('setup_warning');
+      const runnerState = document.getElementById('runner_state');
+      const apiDiag = document.getElementById('api_diag');
+      const frontendMarker = document.getElementById('frontend_marker');
+      const tg = window.Telegram?.WebApp;
+
+      if (tg) {
+        tg.ready();
+        tg.expand();
+      } else {
+        runnerState.textContent =
+          'Mini App API недоступен. Используйте /quiz или откройте /ui из Telegram-клиента.';
+      }
+
+      function parseContext(raw) {
+        if (!raw) return null;
+        try {
+          const b64 = raw.replace(/-/g, '+').replace(/_/g, '/');
+          const padding = '='.repeat((4 - (b64.length % 4)) % 4);
+          const bin = atob(b64 + padding);
+          const bytes = new Uint8Array(bin.length);
+          for (let i = 0; i < bin.length; i += 1) {
+            bytes[i] = bin.charCodeAt(i);
+          }
+          const json = new TextDecoder('utf-8').decode(bytes);
+          return JSON.parse(json);
+        } catch {
+          try {
+            return JSON.parse(decodeURIComponent(raw));
+          } catch {
+            return null;
+          }
+        }
+      }
+
+      function getQueryParam(name) {
+        const searchParams = new URLSearchParams(location.search.slice(1));
+        return searchParams.get(name);
+      }
+
+      function getContextParam() {
+        const searchContext = getQueryParam('context');
+        if (searchContext) return searchContext;
+        const hashParams = new URLSearchParams(location.hash.replace(/^#/, ''));
+        return hashParams.get('context');
+      }
+
+      const ctx = parseContext(getContextParam()) || {};
+      const rs = ctx?.runner_state || {};
+      const hasCompactRunnerQuestion = ctx?.runner_q?.m === 'runner' && ctx?.runner_q?.sd === true;
+      const runnerMode = rs?.state === 'in_progress' || hasCompactRunnerQuestion;
+      const completedMode = rs?.state === 'completed';
+      const setupMode = !runnerMode && !completedMode;
+
+      function isDebugMode() {
+        if (getQueryParam('debug') === '1') return true;
+        return ctx?.debug === true;
+      }
+
+      const debugMode = isDebugMode();
+      frontendMarker.textContent = `Mini App frontend: ${FRONTEND_VERSION}`;
+      frontendMarker.hidden = !debugMode;
+
+      const apiDiagState = {
+        configured: false,
+        initDataPresent: false,
+        attemptStatus: 'not_attempted',
+        apiOrigin: '',
+      };
+
+      function detectContextMode() {
+        if (!ctx || ctx.type !== 'miniapp_setup_context' || ctx.version !== 1) return 'invalid';
+        if (completedMode) return 'completed';
+        if (runnerMode) return 'runner';
+        return 'setup';
+      }
+
+      function renderApiDiagnostics() {
+        if (!debugMode) {
+          apiDiag.hidden = true;
+          return;
+        }
+        const mode = detectContextMode();
+        const origin = apiDiagState.apiOrigin ? ` · origin: ${apiDiagState.apiOrigin}` : '';
+        apiDiag.hidden = false;
+        apiDiag.textContent =
+          `API diag — frontend: ${FRONTEND_VERSION} · mode: ${mode} · configured: ` +
+          `${apiDiagState.configured ? 'yes' : 'no'} · initData: ${apiDiagState.initDataPresent ? 'yes' : 'no'} ` +
+          `· status: ${apiDiagState.attemptStatus}${origin}`;
+      }
+
+      function showLoadError() {
+        err.textContent =
+          'Не удалось загрузить список тем. Закройте окно и откройте Mini App заново через /ui.';
+      }
+
+      if (!ctx || ctx.type !== 'miniapp_setup_context' || ctx.version !== 1) {
+        showLoadError();
+      } else if (setupMode && !Array.isArray(ctx.categories)) {
+        showLoadError();
+      } else {
+        const list = Array.isArray(ctx.categories) ? ctx.categories : [];
+        if (setupMode) {
+          form.hidden = false;
+          if (ctx?.abandons_active_session === true) {
+            setupWarning.hidden = false;
+            setupWarning.textContent = 'Запуск новой викторины завершит текущую активную попытку.';
+            go.textContent = 'Начать новую викторину';
+          }
+          list.forEach((c) => {
+            const id = Number(c.id);
+            if (!Number.isInteger(id)) return;
+            const label = document.createElement('label');
+            const input = document.createElement('input');
+            input.type = 'checkbox';
+            input.value = String(id);
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(` ${String(c.name ?? '')}`));
+            cats.appendChild(label);
+          });
+        }
+      }
+
+      function selectedCategoryIds() {
+        return [...cats.querySelectorAll('input:checked')].map((x) => Number(x.value)).filter(Number.isInteger);
+      }
+
+      function syncCategoryUi() {
+        const mode = form.quiz_mode.value;
+        const allMode = mode === 'all';
+        catsFieldset.hidden = allMode;
+        [...cats.querySelectorAll('input')].forEach((input) => {
+          input.disabled = allMode;
+        });
+      }
+
+      function validate() {
+        if (form.hidden) {
+          go.disabled = true;
+          return;
+        }
+        syncCategoryUi();
+        const mode = form.quiz_mode.value;
+        const selected = selectedCategoryIds();
+        let ok = false;
+        if (mode === 'single') ok = selected.length === 1;
+        else if (mode === 'selected_mix') ok = selected.length >= 1;
+        else ok = true;
+        go.disabled = !ok;
+      }
+
+      form.addEventListener('change', validate);
+
+      function normalizeCompactRunnerQuestion(compact) {
+        if (!compact || compact.m !== 'runner' || compact.sd !== true) return null;
+        const options = Array.isArray(compact.o) ? compact.o : [];
+        const normalizedOptions = [];
+        options.forEach((pair) => {
+          if (!Array.isArray(pair) || pair.length !== 2) return;
+          const idx = Number(pair[0]);
+          const txt = typeof pair[1] === 'string' ? pair[1] : '';
+          if (Number.isInteger(idx)) normalizedOptions.push({ option_index: idx, option_text: txt });
+        });
+        return {
+          status: 'ok',
+          session_id: Number(compact.s),
+          question_id: Number(compact.q),
+          order_index: Number(compact.n),
+          total_questions: Number(compact.t),
+          question_text: typeof compact.qt === 'string' ? compact.qt : '',
+          options: normalizedOptions,
+        };
+      }
+
+      function renderProgress(progress) {
+        if (!progress || progress.server_derived !== true) return;
+        const cur = Number(progress.current_question_number);
+        const total = Number(progress.total_questions);
+        const answered = Number(progress.answered_count);
+        const remaining = Number(progress.remaining_count);
+        const parts = [];
+        if (Number.isInteger(cur) && Number.isInteger(total) && total > 0) parts.push(`вопрос ${cur}/${total}`);
+        if (Number.isInteger(answered)) parts.push(`отвечено: ${answered}`);
+        if (Number.isInteger(remaining)) parts.push(`осталось: ${remaining}`);
+        if (parts.length > 0) {
+          runnerState.textContent = `Экспериментальный режим /ui: ${parts.join(' · ')}.`;
+        }
+      }
+
+      function buildCompletionActions() {
+        const actions = document.createElement('div');
+
+        const restart = document.createElement('button');
+        restart.type = 'button';
+        restart.textContent = 'Новая викторина';
+        restart.addEventListener('click', () => {
+          if (ctx?.setup_url && typeof ctx.setup_url === 'string') {
+            location.href = ctx.setup_url;
+            return;
+          }
+          location.reload();
+        });
+        actions.appendChild(restart);
+
+        if (tg?.close) {
+          const closeBtn = document.createElement('button');
+          closeBtn.type = 'button';
+          closeBtn.textContent = 'Закрыть Mini App';
+          closeBtn.style.marginTop = '8px';
+          closeBtn.addEventListener('click', () => tg.close());
+          actions.appendChild(closeBtn);
+        }
+        return actions;
+      }
+
+      function renderResult(result) {
+        questionView.replaceChildren();
+        questionView.hidden = false;
+
+        const title = document.createElement('h4');
+        title.textContent = 'Викторина завершена';
+        questionView.appendChild(title);
+
+        const score = Number(result?.score);
+        const total = Number(result?.total_questions);
+        const percent = Number(result?.percent);
+
+        const summary = document.createElement('p');
+        summary.textContent =
+          `Результат: ${Number.isInteger(score) ? score : 0} из ${Number.isInteger(total) ? total : 0}` +
+          `${Number.isInteger(percent) ? ` (${percent}%)` : ''}`;
+        questionView.appendChild(summary);
+
+        const hint = document.createElement('p');
+        hint.textContent =
+          'Вы можете начать новую викторину здесь или вернуться к классическому режиму через /quiz.';
+        questionView.appendChild(hint);
+
+        questionView.appendChild(buildCompletionActions());
+        runnerState.textContent = 'Вы просматриваете завершённый результат из серверного состояния.';
+      }
+
+      const apiBase =
+        ctx?.api_base_url && typeof ctx.api_base_url === 'string' && ctx.api_base_url.trim()
+          ? ctx.api_base_url.trim()
+          : '';
+
+      apiDiagState.configured = Boolean(apiBase);
+      try {
+        apiDiagState.apiOrigin = apiBase ? new URL(apiBase).origin : '';
+      } catch {
+        apiDiagState.apiOrigin = '';
+      }
+      apiDiagState.initDataPresent = Boolean(tg?.initData);
+      renderApiDiagnostics();
+
+      function setFallbackStatus(text, status) {
+        apiDiagState.attemptStatus = status;
+        renderApiDiagnostics();
+        runnerState.textContent = text;
+      }
+
+      async function submitAnswer(sessionId, questionId, selectedOptionIndex) {
+        const payload = {
+          type: 'quiz_answer',
+          session_id: sessionId,
+          question_id: questionId,
+          selected_option_index: selectedOptionIndex,
+        };
+
+        [...questionView.querySelectorAll('button')].forEach((b) => {
+          b.disabled = true;
+        });
+
+        const initData = tg?.initData || '';
+        apiDiagState.initDataPresent = Boolean(initData);
+
+        if (!apiBase) {
+          setFallbackStatus('Используется резервная отправка ответа через Telegram.', 'skipped_missing_api_base');
+        } else if (!initData) {
+          setFallbackStatus('Используется резервная отправка ответа через Telegram.', 'skipped_missing_init_data');
+        } else {
+          apiDiagState.attemptStatus = 'attempted';
+          renderApiDiagnostics();
+          try {
+            const answerResp = await fetch(`${apiBase}/miniapp/answer`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `tma ${initData}`,
+              },
+              body: JSON.stringify({
+                session_id: sessionId,
+                question_id: questionId,
+                selected_option_index: selectedOptionIndex,
+              }),
+            });
+            if (!answerResp.ok) {
+              setFallbackStatus('Не удалось отправить ответ через API. Используется резервный режим.', 'api_non_ok');
+            } else {
+              const answerJson = await answerResp.json();
+              if (answerJson?.ok === true && answerJson?.runner_state) {
+                apiDiagState.attemptStatus = 'success';
+                renderApiDiagnostics();
+                renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
+                return;
+              }
+              if (answerJson?.ok === true && !answerJson?.runner_state) {
+                setFallbackStatus(
+                  'API вернул неполные данные. Используется резервная отправка через Telegram.',
+                  'api_no_runner_state',
+                );
+              } else {
+                setFallbackStatus('Не удалось отправить ответ через API. Используется резервный режим.', 'api_non_ok');
+              }
+            }
+          } catch {
+            setFallbackStatus('Ошибка сети при API-запросе. Используется резервный режим.', 'failed_fetch');
+          }
+        }
+
+        if (!tg?.sendData) {
+          runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
+          [...questionView.querySelectorAll('button')].forEach((b) => {
+            b.disabled = false;
+          });
+          return;
+        }
+
+        try {
+          apiDiagState.attemptStatus = 'fallback_sendData';
+          renderApiDiagnostics();
+          tg.sendData(JSON.stringify(payload));
+          runnerState.textContent =
+            'Ответ отправлен через резервный режим Telegram. При необходимости откройте /ui для продолжения.';
+        } catch {
+          runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
+          [...questionView.querySelectorAll('button')].forEach((b) => {
+            b.disabled = false;
+          });
+        }
+      }
+
+      function renderQuestion(snapshot) {
+        questionView.replaceChildren();
+        if (!snapshot || snapshot.status !== 'ok' || !Array.isArray(snapshot.options) || typeof snapshot.question_text !== 'string') {
+          runnerState.textContent =
+            'Экспериментальный режим /ui: активный вопрос не найден. Выберите параметры ниже или запустите /quiz.';
+          return;
+        }
+
+        runnerState.textContent = 'Ответы отправляются в этом окне. Выберите вариант, чтобы перейти к следующему вопросу.';
+        questionView.hidden = false;
+
+        const header = document.createElement('h4');
+        const order = Number(snapshot.order_index);
+        const total = Number(snapshot.total_questions);
+        header.textContent =
+          Number.isInteger(order) && Number.isInteger(total) && total > 0 ? `Вопрос ${order} из ${total}` : 'Текущий вопрос';
+        questionView.appendChild(header);
+
+        const q = document.createElement('p');
+        q.textContent = snapshot.question_text;
+        questionView.appendChild(q);
+
+        const list = document.createElement('ol');
+        snapshot.options.forEach((opt) => {
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          const idx = Number(opt.option_index);
+          const txt = typeof opt.option_text === 'string' ? opt.option_text : '';
+          btn.textContent = `${Number.isInteger(idx) ? idx + 1 : '?'}: ${txt}`;
+          btn.addEventListener('click', () => submitAnswer(Number(snapshot.session_id), Number(snapshot.question_id), idx));
+          li.appendChild(btn);
+          list.appendChild(li);
+        });
+        questionView.appendChild(list);
+      }
+
+      function renderRunnerState(state, { preferLaunchCompact = false } = {}) {
+        const compact = normalizeCompactRunnerQuestion(ctx?.runner_q);
+        if (preferLaunchCompact && compact) {
+          renderQuestion(compact);
+          renderProgress({
+            server_derived: true,
+            current_question_number: compact.order_index,
+            total_questions: compact.total_questions,
+            answered_count: Number(ctx?.runner_q?.a),
+            remaining_count: Number(ctx?.runner_q?.r),
+          });
+          renderApiDiagnostics();
+          return;
+        }
+
+        if (!state || typeof state !== 'object') {
+          runnerState.textContent =
+            'Новая сессия ещё не запущена. Выберите параметры ниже (opt-in /ui) или используйте /quiz.';
+          renderApiDiagnostics();
+          return;
+        }
+
+        if (state.state === 'completed' && state.server_derived === true) {
+          renderResult(state.result || {});
+          renderApiDiagnostics();
+          return;
+        }
+
+        if (state.state === 'in_progress') {
+          renderQuestion(state.current_question);
+          renderProgress(state.progress);
+          if (state.compact_progress_only === true && !state.current_question) {
+            runnerState.textContent =
+              'Текущий вопрос слишком большой для Mini App URL-транспорта. Продолжите вопрос через /quiz или откройте /ui позже.';
+          }
+          renderApiDiagnostics();
+          return;
+        }
+
+        runnerState.textContent =
+          'Новая сессия ещё не запущена. Выберите параметры ниже (opt-in /ui) или используйте /quiz.';
+        renderApiDiagnostics();
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        validate();
+        if (go.disabled || !tg?.sendData) return;
+
+        const mode = form.quiz_mode.value;
+        const selected = selectedCategoryIds();
+        const rawCount = form.question_count.value;
+        const payload = {
+          type: 'quiz_setup',
+          quiz_mode: mode,
+          category_ids: mode === 'all' ? [] : selected,
+          question_count: rawCount === 'all' ? null : Number(rawCount),
+          difficulty: form.difficulty.value,
+        };
+
+        try {
+          tg.sendData(JSON.stringify(payload));
+          tg.close();
+        } catch {
+          err.textContent = 'Не удалось отправить setup-данные. Попробуйте снова или используйте /quiz.';
+        }
+      });
+
+      renderRunnerState(rs, { preferLaunchCompact: true });
+      validate();
+    </script>
+  </body>
+</html>

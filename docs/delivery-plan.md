@@ -113,3 +113,4 @@
 | #137-fix | Production hardening for narrow Mini App API (api_base_url wiring, CORS/OPTIONS, TTL enforcement, safer answer responses) | ✅ Done |
 
 | #137-fix2 | Make Mini App API startup explicit opt-in (`MINIAPP_API_ENABLED`) with safe no-start when base URL missing | ✅ Done |
+| #140-polish | Mini App runner polish: debug-gated diagnostics, completed-state actions, readable `miniapp/index.html`, QA/docs refresh | ✅ Done |

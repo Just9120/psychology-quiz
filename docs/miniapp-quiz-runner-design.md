@@ -191,6 +191,7 @@ Recommend **Hybrid (Option C)** as safest next step:
 - 2026-05-23 setup completion update: after valid `quiz_setup`, bot creates session and sends a Mini App open button for the first authoritative question; it no longer auto-sends the first question in chat.
 
 - 2026-05-23: Added narrow Mini App API (`GET /miniapp/state`, `POST /miniapp/answer`) authenticated by Telegram `initData`; Mini App now prefers in-window fetch progression and falls back to `sendData` on API failure/unavailability.
+- 2026-05-23 polish follow-up (post-#140): Mini App keeps API in-window progression as primary UX, diagnostics are gated behind debug mode (`debug=1` or `context.debug=true`), and completed state now includes explicit in-app next actions (`Новая викторина`, optional close button).
 
 - 2026-05-23 PR #137 fix: wired `MINI_APP_API_BASE_URL` into all `/ui` launch contexts (including compact runner payload), added CORS/OPTIONS + configured origin allowlist, and enforced configurable initData TTL in API handlers.
 
