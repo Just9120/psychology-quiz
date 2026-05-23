@@ -19,6 +19,10 @@ class Settings:
     db_path: str
     mini_app_url: str | None
     admin_telegram_ids: frozenset[int]
+    miniapp_api_bind: str
+    miniapp_api_port: int
+    miniapp_api_initdata_ttl_seconds: int
+    mini_app_api_base_url: str | None
 
 
 def _parse_admin_telegram_ids(raw_ids: str) -> frozenset[int]:
@@ -48,6 +52,10 @@ def load_settings() -> Settings:
     db_path = os.getenv("DB_PATH", "/data/quiz.sqlite3").strip() or "/data/quiz.sqlite3"
     mini_app_url = os.getenv("MINI_APP_URL", "").strip() or None
     admin_telegram_ids = _parse_admin_telegram_ids(os.getenv("ADMIN_TELEGRAM_IDS", ""))
+    miniapp_api_bind = os.getenv("MINIAPP_API_BIND", "127.0.0.1").strip() or "127.0.0.1"
+    miniapp_api_port = int(os.getenv("MINIAPP_API_PORT", "8081"))
+    miniapp_api_initdata_ttl_seconds = int(os.getenv("MINIAPP_API_INITDATA_TTL_SECONDS", "3600"))
+    mini_app_api_base_url = os.getenv("MINI_APP_API_BASE_URL", "").strip() or None
 
     return Settings(
         bot_token=bot_token,
@@ -57,5 +65,9 @@ def load_settings() -> Settings:
         db_path=db_path,
         mini_app_url=mini_app_url,
         admin_telegram_ids=admin_telegram_ids,
+        miniapp_api_bind=miniapp_api_bind,
+        miniapp_api_port=miniapp_api_port,
+        miniapp_api_initdata_ttl_seconds=miniapp_api_initdata_ttl_seconds,
+        mini_app_api_base_url=mini_app_api_base_url,
     )
 logger = logging.getLogger(__name__)

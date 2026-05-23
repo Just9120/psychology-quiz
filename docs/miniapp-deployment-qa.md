@@ -139,3 +139,6 @@
 - [ ] После последнего ответа кнопка в чате ведёт к просмотру результата в Mini App.
 
 - [ ] Active session -> New setup in Mini App shows warning: "Запуск новой викторины завершит текущую активную попытку." before submit.
+
+- [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
+- [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.

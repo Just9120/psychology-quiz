@@ -6,6 +6,7 @@ import json
 import logging
 import re
 import urllib.parse
+import threading
 
 from telegram import (
     BotCommand,
@@ -51,6 +52,7 @@ from app.db import (
 )
 
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
+from app.miniapp_api import start_miniapp_api_server
 
 
 logger = logging.getLogger(__name__)
@@ -328,6 +330,7 @@ def _build_miniapp_context(
     mode: str,
     compact: bool = False,
     abandons_active_session: bool = False,
+    api_base_url: str | None = None,
 ) -> dict:
     selected_state = _build_compact_runner_progress_state(runner_state) if compact else runner_state
     include_categories = mode == "setup"
@@ -339,6 +342,8 @@ def _build_miniapp_context(
     }
     if selected_state is not None:
         context["runner_state"] = selected_state
+    if api_base_url:
+        context["api_base_url"] = api_base_url
     if mode == "setup" and abandons_active_session:
         context["force_setup"] = True
         context["abandons_active_session"] = True
@@ -369,7 +374,7 @@ def build_miniapp_url_with_fallback(
         if len(compact_question_url) <= MAX_MINIAPP_URL_LENGTH:
             return compact_question_url, False
 
-        compact_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode, compact=True)
+        compact_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode, compact=True, api_base_url=None)
         compact_url = build_miniapp_url(base_url, compact_context)
         if len(compact_url) <= MAX_MINIAPP_URL_LENGTH:
             return compact_url, True
@@ -1904,7 +1909,22 @@ def main() -> None:
     application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data_handler))
 
     logger.info("Бот запущен (long polling)")
-    application.run_polling()
+
+    api_server = start_miniapp_api_server(
+        settings.miniapp_api_bind,
+        settings.miniapp_api_port,
+        db_path=settings.db_path,
+        bot_token=settings.bot_token,
+    )
+    api_thread = threading.Thread(target=api_server.serve_forever, daemon=True)
+    api_thread.start()
+    logger.info("Mini App API server started on %s:%s", settings.miniapp_api_bind, settings.miniapp_api_port)
+
+    try:
+        application.run_polling()
+    finally:
+        api_server.shutdown()
+        api_server.server_close()
 
 
 if __name__ == "__main__":

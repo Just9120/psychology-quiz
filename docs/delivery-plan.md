@@ -107,3 +107,5 @@
 | 2026-05-22 | PR #135/#135-fix | Mini App UX hardening + explicit abandon warning on force-setup path | done |
 
 | 2026-05-23 | follow-up after PR #135 | Mini App setup submit now sends open-first-question button in Mini App and does not auto-post question in chat | done |
+
+| #136-next | Narrow Mini App API for in-window runner progression with Telegram initData auth + sendData fallback retained | ✅ Done |
