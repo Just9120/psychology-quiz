@@ -22,6 +22,7 @@ class Settings:
     miniapp_api_bind: str
     miniapp_api_port: int
     miniapp_api_initdata_ttl_seconds: int
+    miniapp_api_allowed_origin: str | None
     mini_app_api_base_url: str | None
 
 
@@ -55,6 +56,7 @@ def load_settings() -> Settings:
     miniapp_api_bind = os.getenv("MINIAPP_API_BIND", "127.0.0.1").strip() or "127.0.0.1"
     miniapp_api_port = int(os.getenv("MINIAPP_API_PORT", "8081"))
     miniapp_api_initdata_ttl_seconds = int(os.getenv("MINIAPP_API_INITDATA_TTL_SECONDS", "3600"))
+    miniapp_api_allowed_origin = os.getenv("MINIAPP_API_ALLOWED_ORIGIN", "").strip() or None
     mini_app_api_base_url = os.getenv("MINI_APP_API_BASE_URL", "").strip() or None
 
     return Settings(
@@ -68,6 +70,7 @@ def load_settings() -> Settings:
         miniapp_api_bind=miniapp_api_bind,
         miniapp_api_port=miniapp_api_port,
         miniapp_api_initdata_ttl_seconds=miniapp_api_initdata_ttl_seconds,
+        miniapp_api_allowed_origin=miniapp_api_allowed_origin,
         mini_app_api_base_url=mini_app_api_base_url,
     )
 logger = logging.getLogger(__name__)

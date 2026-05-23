@@ -85,9 +85,15 @@ def _extract_init_data(headers) -> str:
     return headers.get("X-Telegram-Init-Data", "").strip()
 
 
-def build_state_response(db_path: str, bot_token: str, init_data: str) -> tuple[int, dict[str, str], bytes]:
+def build_state_response(
+    db_path: str,
+    bot_token: str,
+    init_data: str,
+    *,
+    max_age_seconds: int = 3600,
+) -> tuple[int, dict[str, str], bytes]:
     try:
-        verified = verify_telegram_init_data(init_data, bot_token)
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
     except InitDataValidationError as exc:
         return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
 
@@ -103,9 +109,16 @@ def build_state_response(db_path: str, bot_token: str, init_data: str) -> tuple[
     return _json(HTTPStatus.OK, {"ok": True, "runner_state": state})
 
 
-def build_answer_response(db_path: str, bot_token: str, init_data: str, body: bytes) -> tuple[int, dict[str, str], bytes]:
+def build_answer_response(
+    db_path: str,
+    bot_token: str,
+    init_data: str,
+    body: bytes,
+    *,
+    max_age_seconds: int = 3600,
+) -> tuple[int, dict[str, str], bytes]:
     try:
-        verified = verify_telegram_init_data(init_data, bot_token)
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
     except InitDataValidationError as exc:
         return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
     try:
@@ -134,22 +147,49 @@ def build_answer_response(db_path: str, bot_token: str, init_data: str, body: by
                 if finalized is not None:
                     state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
             return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "runner_state": state})
-        return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status})
+        response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
+        if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
+            response_payload["runner_state"] = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
+        return _json(HTTPStatus.OK, response_payload)
 
 
 class MiniAppApiHandler(BaseHTTPRequestHandler):
     db_path = ""
     bot_token = ""
+    initdata_ttl_seconds = 3600
+    allowed_origin: str | None = None
+
+    def _set_common_headers(self) -> None:
+        self.send_header("Cache-Control", "no-store")
+        request_origin = self.headers.get("Origin", "")
+        if self.allowed_origin and request_origin == self.allowed_origin:
+            self.send_header("Access-Control-Allow-Origin", self.allowed_origin)
+            self.send_header("Vary", "Origin")
+
+    def do_OPTIONS(self):
+        if self.path.split("?")[0] not in {"/miniapp/state", "/miniapp/answer"}:
+            self.send_error(HTTPStatus.NOT_FOUND)
+            return
+        self.send_response(HTTPStatus.NO_CONTENT)
+        self._set_common_headers()
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type, X-Telegram-Init-Data")
+        self.end_headers()
 
     def do_GET(self):
         if self.path.split("?")[0] != "/miniapp/state":
             self.send_error(HTTPStatus.NOT_FOUND)
             return
-        status, headers, body = build_state_response(self.db_path, self.bot_token, _extract_init_data(self.headers))
+        status, headers, body = build_state_response(
+            self.db_path,
+            self.bot_token,
+            _extract_init_data(self.headers),
+            max_age_seconds=self.initdata_ttl_seconds,
+        )
         self.send_response(status)
         for k, v in headers.items():
             self.send_header(k, v)
-        self.send_header("Cache-Control", "no-store")
+        self._set_common_headers()
         self.end_headers()
         self.wfile.write(body)
 
@@ -159,17 +199,33 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
             return
         length = int(self.headers.get("Content-Length", "0"))
         body = self.rfile.read(length)
-        status, headers, data = build_answer_response(self.db_path, self.bot_token, _extract_init_data(self.headers), body)
+        status, headers, data = build_answer_response(
+            self.db_path,
+            self.bot_token,
+            _extract_init_data(self.headers),
+            body,
+            max_age_seconds=self.initdata_ttl_seconds,
+        )
         self.send_response(status)
         for k, v in headers.items():
             self.send_header(k, v)
-        self.send_header("Cache-Control", "no-store")
+        self._set_common_headers()
         self.end_headers()
         self.wfile.write(data)
 
 
-def start_miniapp_api_server(host: str, port: int, *, db_path: str, bot_token: str) -> ThreadingHTTPServer:
+def start_miniapp_api_server(
+    host: str,
+    port: int,
+    *,
+    db_path: str,
+    bot_token: str,
+    initdata_ttl_seconds: int = 3600,
+    allowed_origin: str | None = None,
+) -> ThreadingHTTPServer:
     MiniAppApiHandler.db_path = db_path
     MiniAppApiHandler.bot_token = bot_token
+    MiniAppApiHandler.initdata_ttl_seconds = initdata_ttl_seconds
+    MiniAppApiHandler.allowed_origin = allowed_origin
     server = ThreadingHTTPServer((host, port), MiniAppApiHandler)
     return server

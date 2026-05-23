@@ -142,3 +142,18 @@
 
 - [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
 - [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.
+
+## 9) Mini App API route (PR #137 hardening)
+- Narrow API runs in the bot process (`MINIAPP_API_BIND`/`MINIAPP_API_PORT`) alongside long polling.
+- For Mini App browser fetch, operators must expose a public HTTPS route that proxies:
+  - `GET /miniapp/state`
+  - `POST /miniapp/answer`
+  to the bot API bind/port.
+- Required env for API fetch path:
+  - `MINI_APP_API_BASE_URL` (public HTTPS API base; injected into Mini App launch context)
+  - `MINIAPP_API_ALLOWED_ORIGIN` (exact Mini App origin, e.g. `https://miniapp.librechat.online`)
+- Optional env:
+  - `MINIAPP_API_BIND` (default `127.0.0.1`)
+  - `MINIAPP_API_PORT` (default `8081`)
+  - `MINIAPP_API_INITDATA_TTL_SECONDS` (default `3600`)
+- If `MINI_APP_API_BASE_URL` is not set, Mini App intentionally uses `sendData` fallback only.

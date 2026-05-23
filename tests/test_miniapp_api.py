@@ -1,7 +1,9 @@
 import hashlib
+import http.client
 import hmac
 import json
 import sqlite3
+import threading
 import time
 import unittest
 import tempfile
@@ -9,7 +11,12 @@ import os
 import urllib.parse
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
-from app.miniapp_api import build_answer_response, build_state_response, verify_telegram_init_data
+from app.miniapp_api import (
+    build_answer_response,
+    build_state_response,
+    start_miniapp_api_server,
+    verify_telegram_init_data,
+)
 
 
 def _setup_schema(conn):
@@ -78,6 +85,59 @@ class MiniAppApiTests(unittest.TestCase):
         payload = json.loads(body)
         self.assertTrue(payload['ok'])
         self.assertIn(payload['submission_status'], {'accepted', 'duplicate', 'stale_question'})
+        self.assertIn('runner_state', payload)
+        self.assertNotIn('is_correct', json.dumps(payload))
+
+    def test_ttl_enforced_in_state_response(self):
+        old_init_data = _make_init_data(self.bot_token, {'id': 42, 'username': 'u'}, auth_date=int(time.time()) - 10)
+        code, _, body = build_state_response(self.db, self.bot_token, old_init_data, max_age_seconds=1)
+        self.assertEqual(401, code)
+        payload = json.loads(body)
+        self.assertEqual('expired_init_data', payload['error'])
+
+    def test_stale_response_contains_runner_state(self):
+        first = build_answer_response(
+            self.db,
+            self.bot_token,
+            self.init_data,
+            json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode(),
+        )
+        self.assertEqual(200, first[0])
+        second_code, _, second_body = build_answer_response(
+            self.db,
+            self.bot_token,
+            self.init_data,
+            json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode(),
+        )
+        self.assertEqual(200, second_code)
+        payload = json.loads(second_body)
+        self.assertIn(payload['submission_status'], {'stale_question', 'duplicate', 'session_not_found'})
+        self.assertIn('runner_state', payload)
+
+    def test_options_cors_headers_when_allowed_origin_is_set(self):
+        server = start_miniapp_api_server(
+            "127.0.0.1",
+            0,
+            db_path=self.db,
+            bot_token=self.bot_token,
+            initdata_ttl_seconds=3600,
+            allowed_origin="https://miniapp.example.com",
+        )
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            port = server.server_address[1]
+            conn = http.client.HTTPConnection("127.0.0.1", port, timeout=3)
+            conn.request("OPTIONS", "/miniapp/answer", headers={"Origin": "https://miniapp.example.com"})
+            response = conn.getresponse()
+            self.assertEqual(204, response.status)
+            self.assertEqual("https://miniapp.example.com", response.getheader("Access-Control-Allow-Origin"))
+            self.assertEqual("GET, POST, OPTIONS", response.getheader("Access-Control-Allow-Methods"))
+            self.assertIn("Authorization", response.getheader("Access-Control-Allow-Headers") or "")
+            conn.close()
+        finally:
+            server.shutdown()
+            server.server_close()
 
 if __name__ == '__main__':
     unittest.main()

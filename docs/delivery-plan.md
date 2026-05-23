@@ -109,3 +109,5 @@
 | 2026-05-23 | follow-up after PR #135 | Mini App setup submit now sends open-first-question button in Mini App and does not auto-post question in chat | done |
 
 | #136-next | Narrow Mini App API for in-window runner progression with Telegram initData auth + sendData fallback retained | ✅ Done |
+
+| #137-fix | Production hardening for narrow Mini App API (api_base_url wiring, CORS/OPTIONS, TTL enforcement, safer answer responses) | ✅ Done |
