@@ -41,13 +41,15 @@
 ## 4) Telegram / BotFather operator checklist (generic)
 - Убедиться, что бот в Telegram может открыть указанный Web App URL.
 - Проверить валидность HTTPS URL (сертификат/доступность).
-- Если в вашей Telegram/BotFather конфигурации требуется доменная привязка для Web App — отдельно подтвердить, что она настроена для выбранного host (без хранения секретов и private деталей в репозитории).
+- В BotFather настроить Mini App domain на `miniapp.librechat.online` (без коммита токенов/секретов в репозиторий).
+- API домен остаётся `quiz-api.librechat.online`; разрешённый origin API остаётся `https://miniapp.librechat.online`.
+- Primary launch path для `/ui` должен использовать inline WebApp button (не plain URL button), чтобы Telegram передавал `WebApp.initData`.
 
 ## 5) Manual QA checklist
 
 ### A. Private chat checks
 - [ ] `/ui` без `MINI_APP_URL` показывает fallback.
-- [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает кнопку открытия Mini App.
+- [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает primary inline кнопку открытия Mini App.
 - [ ] `/ui` при отсутствии активных категорий показывает no-categories fallback.
 - [ ] `/ui` вне private chat корректно отклоняется.
 
@@ -144,6 +146,7 @@
 - [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.
 - [ ] Frontend marker is visible near the title in every mode: `Mini App frontend: api-diagnostics-v2`.
 - [ ] Diagnostics block is always visible once JS runs (setup / runner / completed / invalid context).
+- [ ] После открытия через primary `/ui` кнопку диагностика показывает `initData: yes`.
 - [ ] Diagnostic line shows:
   - frontend version marker value
   - context mode (`setup` / `runner` / `completed` / `invalid`)

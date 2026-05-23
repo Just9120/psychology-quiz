@@ -12,6 +12,7 @@ from app.main import (
     build_miniapp_setup_context,
     build_miniapp_url,
     build_miniapp_url_with_fallback,
+    build_miniapp_launch_inline_keyboard,
     build_miniapp_open_keyboard,
     build_post_setup_miniapp_prompt,
     should_start_miniapp_api,
@@ -442,6 +443,12 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         kb = build_miniapp_open_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
         self.assertEqual(3, len(kb.keyboard))
 
+    def test_inline_launch_keyboard_is_primary_for_ui_flow(self):
+        kb = build_miniapp_launch_inline_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
+        self.assertEqual(2, len(kb.inline_keyboard))
+        self.assertEqual("🧪 Продолжить в Mini App", kb.inline_keyboard[0][0].text)
+        self.assertEqual("https://example.com/ui?context=x", kb.inline_keyboard[0][0].web_app.url)
+        self.assertEqual("https://example.com/ui?context=y", kb.inline_keyboard[1][0].web_app.url)
 
     def test_post_setup_prompt_returns_open_miniapp_keyboard(self):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
@@ -450,7 +457,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertIn("Откройте Mini App", text)
         self.assertIn("/quiz", text)
         self.assertIsNotNone(keyboard)
-        self.assertEqual("🧪 Продолжить в Mini App", keyboard.keyboard[0][0].text)
+        self.assertEqual("🧪 Продолжить в Mini App", keyboard.inline_keyboard[0][0].text)
 
     def test_should_start_miniapp_api_disabled_by_default(self):
         settings = SimpleNamespace(

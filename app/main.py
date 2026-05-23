@@ -439,7 +439,7 @@ def build_post_setup_miniapp_prompt(
     runner_state: dict | None,
     *,
     api_base_url: str | None = None,
-) -> tuple[str, ReplyKeyboardMarkup | None]:
+) -> tuple[str, InlineKeyboardMarkup | None]:
     miniapp_url, _ = build_miniapp_url_with_fallback(base_url, categories, runner_state, api_base_url=api_base_url)
     if not miniapp_url:
         return (
@@ -450,8 +450,22 @@ def build_post_setup_miniapp_prompt(
     return (
         "Викторина создана. Откройте Mini App, чтобы пройти первый вопрос. "
         "Если хотите классический режим, используйте /quiz.",
-        build_miniapp_open_keyboard(miniapp_url),
+        build_miniapp_launch_inline_keyboard(miniapp_url),
     )
+
+
+def build_miniapp_launch_inline_keyboard(
+    url: str,
+    *,
+    force_setup_url: str | None = None,
+    reopen_result: bool = False,
+) -> InlineKeyboardMarkup:
+    first_label = "📊 Показать результат в Mini App" if reopen_result else "🧪 Продолжить в Mini App"
+    keyboard = [[InlineKeyboardButton(first_label, web_app=WebAppInfo(url=url))]]
+    if force_setup_url:
+        keyboard.append([InlineKeyboardButton("🆕 Новый setup в Mini App", web_app=WebAppInfo(url=force_setup_url))])
+    return InlineKeyboardMarkup(keyboard)
+
 def build_miniapp_open_keyboard(
     url: str,
     *,
@@ -735,6 +749,13 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         )
     await update.message.reply_text(
         intro_text,
+        reply_markup=build_miniapp_launch_inline_keyboard(
+            miniapp_url,
+            force_setup_url=force_setup_url if has_active else None,
+        ),
+    )
+    await update.message.reply_text(
+        "Резервный способ запуска Mini App через reply-кнопки (если inline недоступен):",
         reply_markup=build_miniapp_open_keyboard(miniapp_url, force_setup_url=force_setup_url if has_active else None),
     )
 
@@ -849,7 +870,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
                         )
                         await message.chat.send_message(
                             f"Ответ получен. Сессия завершена: {int(finalized['score'])} из {int(finalized['total_questions'])}.",
-                            reply_markup=build_miniapp_open_keyboard(result_url, reopen_result=True) if result_url else None,
+                            reply_markup=build_miniapp_launch_inline_keyboard(result_url, reopen_result=True) if result_url else None,
                         )
                         return
                 next_url, _ = build_miniapp_url_with_fallback(
@@ -860,7 +881,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
                 )
                 await message.chat.send_message(
                     "Ответ получен. Откройте Mini App для следующего шага.",
-                    reply_markup=build_miniapp_open_keyboard(next_url) if next_url else None,
+                    reply_markup=build_miniapp_launch_inline_keyboard(next_url) if next_url else None,
                 )
                 return
             if submission.status == "duplicate":
