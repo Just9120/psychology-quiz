@@ -144,8 +144,8 @@
 
 - [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
 - [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.
-- [ ] Frontend marker is visible near the title in every mode: `Mini App frontend: api-diagnostics-v2`.
-- [ ] Diagnostics block is always visible once JS runs (setup / runner / completed / invalid context).
+- [ ] Production Mini App UI does **not** show diagnostics by default.
+- [ ] Debug diagnostics are visible only when opened with `?debug=1` (or debug context flag) and remain hidden otherwise.
 - [ ] После открытия через primary `/ui` кнопку диагностика показывает `initData: yes`.
 - [ ] Diagnostic line shows:
   - frontend version marker value
@@ -162,6 +162,7 @@
 - [ ] On successful API submission, no `sendData` fallback message appears and Mini App does not close.
 - [ ] Server logs contain `POST /miniapp/answer` during successful in-place answer flow.
 - [ ] Diagnostics never expose secrets (no raw `initData`, no authorization header/token values, no full secret-bearing URLs; origin-only is acceptable).
+- [ ] Completed result screen shows a clear next action (`Новая викторина` and optional `Закрыть Mini App`).
 
 ## 9) Mini App API route (PR #137 hardening)
 - Narrow API runs in the bot process (`MINIAPP_API_BIND`/`MINIAPP_API_PORT`) alongside long polling.
