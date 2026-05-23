@@ -142,6 +142,13 @@
 
 - [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
 - [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.
+- [ ] Runner mode shows Mini App diagnostic line with:
+  - API configured: yes/no
+  - Telegram initData present: yes/no
+  - API status transitions (`not_attempted`, `attempted`, `success` or explicit fallback reason).
+- [ ] On successful API submission, no `sendData` fallback message appears and Mini App does not close.
+- [ ] Server logs contain `POST /miniapp/answer` during successful in-place answer flow.
+- [ ] Diagnostics never expose secrets (no raw `initData`, no authorization header/token values, no full secret-bearing URLs; origin-only is acceptable).
 
 ## 9) Mini App API route (PR #137 hardening)
 - Narrow API runs in the bot process (`MINIAPP_API_BIND`/`MINIAPP_API_PORT`) alongside long polling.
