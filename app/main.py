@@ -6,6 +6,7 @@ import json
 import logging
 import re
 import urllib.parse
+import threading
 
 from telegram import (
     BotCommand,
@@ -51,6 +52,7 @@ from app.db import (
 )
 
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
+from app.miniapp_api import start_miniapp_api_server
 
 
 logger = logging.getLogger(__name__)
@@ -328,6 +330,7 @@ def _build_miniapp_context(
     mode: str,
     compact: bool = False,
     abandons_active_session: bool = False,
+    api_base_url: str | None = None,
 ) -> dict:
     selected_state = _build_compact_runner_progress_state(runner_state) if compact else runner_state
     include_categories = mode == "setup"
@@ -339,6 +342,8 @@ def _build_miniapp_context(
     }
     if selected_state is not None:
         context["runner_state"] = selected_state
+    if api_base_url:
+        context["api_base_url"] = api_base_url
     if mode == "setup" and abandons_active_session:
         context["force_setup"] = True
         context["abandons_active_session"] = True
@@ -351,6 +356,7 @@ def build_miniapp_url_with_fallback(
     runner_state: dict | None,
     *,
     abandons_active_session: bool = False,
+    api_base_url: str | None = None,
 ) -> tuple[str | None, bool]:
     has_runner = isinstance(runner_state, dict) and runner_state.get("state") in {"in_progress", "completed"}
     preferred_mode = "setup"
@@ -365,11 +371,19 @@ def build_miniapp_url_with_fallback(
             "categories": [],
             "runner_q": _build_compact_runner_question_payload(runner_state),
         }
+        if api_base_url:
+            compact_question_context["api_base_url"] = api_base_url
         compact_question_url = build_miniapp_url(base_url, compact_question_context)
         if len(compact_question_url) <= MAX_MINIAPP_URL_LENGTH:
             return compact_question_url, False
 
-        compact_context = _build_miniapp_context(categories, runner_state, mode=preferred_mode, compact=True)
+        compact_context = _build_miniapp_context(
+            categories,
+            runner_state,
+            mode=preferred_mode,
+            compact=True,
+            api_base_url=api_base_url,
+        )
         compact_url = build_miniapp_url(base_url, compact_context)
         if len(compact_url) <= MAX_MINIAPP_URL_LENGTH:
             return compact_url, True
@@ -380,6 +394,7 @@ def build_miniapp_url_with_fallback(
         runner_state,
         mode=preferred_mode,
         abandons_active_session=abandons_active_session,
+        api_base_url=api_base_url,
     )
     primary_url = build_miniapp_url(base_url, primary_context)
     if len(primary_url) <= MAX_MINIAPP_URL_LENGTH:
@@ -391,6 +406,7 @@ def build_miniapp_url_with_fallback(
         mode=preferred_mode,
         compact=True,
         abandons_active_session=abandons_active_session,
+        api_base_url=api_base_url,
     )
     compact_url = build_miniapp_url(base_url, compact_context)
     if len(compact_url) <= MAX_MINIAPP_URL_LENGTH:
@@ -417,8 +433,14 @@ def build_miniapp_url(base_url: str, context: dict) -> str:
 
 
 
-def build_post_setup_miniapp_prompt(base_url: str, categories, runner_state: dict | None) -> tuple[str, ReplyKeyboardMarkup | None]:
-    miniapp_url, _ = build_miniapp_url_with_fallback(base_url, categories, runner_state)
+def build_post_setup_miniapp_prompt(
+    base_url: str,
+    categories,
+    runner_state: dict | None,
+    *,
+    api_base_url: str | None = None,
+) -> tuple[str, ReplyKeyboardMarkup | None]:
+    miniapp_url, _ = build_miniapp_url_with_fallback(base_url, categories, runner_state, api_base_url=api_base_url)
     if not miniapp_url:
         return (
             "Викторина создана, но не удалось подготовить ссылку Mini App. "
@@ -670,12 +692,18 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         )
         return
 
-    miniapp_url, fallback_mode = build_miniapp_url_with_fallback(settings.mini_app_url, categories, runner_state)
+    miniapp_url, fallback_mode = build_miniapp_url_with_fallback(
+        settings.mini_app_url,
+        categories,
+        runner_state,
+        api_base_url=settings.mini_app_api_base_url,
+    )
     force_setup_url, _ = build_miniapp_url_with_fallback(
         settings.mini_app_url,
         categories,
         {"state": "setup", "status": "force_setup", "server_derived": True},
         abandons_active_session=True,
+        api_base_url=settings.mini_app_api_base_url,
     )
     if miniapp_url is None:
         await update.message.reply_text(
@@ -817,6 +845,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
                             settings.mini_app_url,
                             get_active_categories(conn),
                             build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id),
+                            api_base_url=settings.mini_app_api_base_url,
                         )
                         await message.chat.send_message(
                             f"Ответ получен. Сессия завершена: {int(finalized['score'])} из {int(finalized['total_questions'])}.",
@@ -827,6 +856,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
                     settings.mini_app_url,
                     get_active_categories(conn),
                     build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"])),
+                    api_base_url=settings.mini_app_api_base_url,
                 )
                 await message.chat.send_message(
                     "Ответ получен. Откройте Mini App для следующего шага.",
@@ -945,6 +975,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         settings.mini_app_url,
         active_categories,
         runner_state,
+        api_base_url=settings.mini_app_api_base_url,
     )
     await message.chat.send_message(confirmation_text, reply_markup=confirmation_keyboard)
 
@@ -1821,6 +1852,17 @@ def configure_logging(log_level: str) -> None:
     )
 
 
+def should_start_miniapp_api(settings) -> bool:
+    if not settings.miniapp_api_enabled:
+        return False
+    if not settings.mini_app_api_base_url:
+        logger.warning("Mini App API explicitly enabled but MINI_APP_API_BASE_URL is missing; API server will not start.")
+        return False
+    if not settings.miniapp_api_allowed_origin:
+        logger.warning("Mini App API enabled without MINIAPP_API_ALLOWED_ORIGIN; cross-origin Mini App fetch may be blocked.")
+    return True
+
+
 def main() -> None:
     settings = load_settings()
     configure_logging(settings.log_level)
@@ -1904,7 +1946,29 @@ def main() -> None:
     application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data_handler))
 
     logger.info("Бот запущен (long polling)")
-    application.run_polling()
+
+    api_server = None
+    if should_start_miniapp_api(settings):
+        api_server = start_miniapp_api_server(
+            settings.miniapp_api_bind,
+            settings.miniapp_api_port,
+            db_path=settings.db_path,
+            bot_token=settings.bot_token,
+            initdata_ttl_seconds=settings.miniapp_api_initdata_ttl_seconds,
+            allowed_origin=settings.miniapp_api_allowed_origin,
+        )
+        api_thread = threading.Thread(target=api_server.serve_forever, daemon=True)
+        api_thread.start()
+        logger.info("Mini App API server started on %s:%s", settings.miniapp_api_bind, settings.miniapp_api_port)
+    else:
+        logger.info("Mini App API server is disabled. Mini App uses sendData fallback unless API is explicitly enabled/configured.")
+
+    try:
+        application.run_polling()
+    finally:
+        if api_server is not None:
+            api_server.shutdown()
+            api_server.server_close()
 
 
 if __name__ == "__main__":

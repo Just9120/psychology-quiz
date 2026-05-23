@@ -2,6 +2,7 @@ import base64
 import json
 import sqlite3
 import unittest
+from types import SimpleNamespace
 
 from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, start_quiz_session, store_session_questions
 from app.main import (
@@ -13,6 +14,7 @@ from app.main import (
     build_miniapp_url_with_fallback,
     build_miniapp_open_keyboard,
     build_post_setup_miniapp_prompt,
+    should_start_miniapp_api,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
@@ -363,12 +365,29 @@ class MiniAppRunnerContractTests(unittest.TestCase):
 
     def test_runner_url_prefers_compact_question_payload_and_fits(self):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
-        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        url, used_fallback = build_miniapp_url_with_fallback(
+            "https://example.com/ui",
+            [{"id": 1, "name": "Category 1"}],
+            state,
+            api_base_url="https://api.example.com",
+        )
         self.assertFalse(used_fallback)
         self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
         ctx = json.loads(base64.urlsafe_b64decode((url.split("context=", 1)[1] + "=" * ((4 - len(url.split("context=", 1)[1]) % 4) % 4)).encode("ascii")).decode("utf-8"))
         self.assertIn("runner_q", ctx)
         self.assertEqual([], ctx.get("categories"))
+        self.assertEqual("https://api.example.com", ctx.get("api_base_url"))
+
+    def test_context_omits_api_base_when_not_configured(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        url, _ = build_miniapp_url_with_fallback(
+            "https://example.com/ui",
+            [{"id": 1, "name": "Category 1"}],
+            state,
+            api_base_url=None,
+        )
+        ctx = json.loads(base64.urlsafe_b64decode((url.split("context=", 1)[1] + "=" * ((4 - len(url.split("context=", 1)[1]) % 4) % 4)).encode("ascii")).decode("utf-8"))
+        self.assertNotIn("api_base_url", ctx)
 
     def test_extreme_long_question_falls_back_to_progress_only(self):
         long_text = "Y" * 2400
@@ -432,6 +451,30 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertIn("/quiz", text)
         self.assertIsNotNone(keyboard)
         self.assertEqual("🧪 Продолжить в Mini App", keyboard.keyboard[0][0].text)
+
+    def test_should_start_miniapp_api_disabled_by_default(self):
+        settings = SimpleNamespace(
+            miniapp_api_enabled=False,
+            mini_app_api_base_url=None,
+            miniapp_api_allowed_origin=None,
+        )
+        self.assertFalse(should_start_miniapp_api(settings))
+
+    def test_should_start_miniapp_api_requires_base_url_when_enabled(self):
+        settings = SimpleNamespace(
+            miniapp_api_enabled=True,
+            mini_app_api_base_url=None,
+            miniapp_api_allowed_origin="https://miniapp.example.com",
+        )
+        self.assertFalse(should_start_miniapp_api(settings))
+
+    def test_should_start_miniapp_api_enabled_with_base_url(self):
+        settings = SimpleNamespace(
+            miniapp_api_enabled=True,
+            mini_app_api_base_url="https://api.example.com",
+            miniapp_api_allowed_origin="https://miniapp.example.com",
+        )
+        self.assertTrue(should_start_miniapp_api(settings))
 
 
 if __name__ == "__main__":
