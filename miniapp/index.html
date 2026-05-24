@@ -183,6 +183,9 @@
         setupErrorCode: '',
         apiOrigin: '',
       };
+      const setupOptionsCache = {
+        categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
+      };
 
       function detectContextMode() {
         if (!ctx || ctx.type !== 'miniapp_setup_context' || ctx.version !== 1) return 'invalid';
@@ -217,9 +220,11 @@
         showLoadError();
       } else {
         const list = Array.isArray(ctx.categories) ? ctx.categories : [];
+        setupOptionsCache.categories = list;
         const renderSetupCategories = () => {
+          const activeCategories = Array.isArray(setupOptionsCache.categories) ? setupOptionsCache.categories : [];
           cats.replaceChildren();
-          list.forEach((c) => {
+          activeCategories.forEach((c) => {
             const id = Number(c.id);
             if (!Number.isInteger(id)) return;
             const label = document.createElement('label');
@@ -241,7 +246,8 @@
           renderSetupCategories();
         }
         window.__miniappRenderSetupInPlace = () => {
-          if (list.length === 0) return false;
+          const activeCategories = Array.isArray(setupOptionsCache.categories) ? setupOptionsCache.categories : [];
+          if (activeCategories.length === 0) return false;
           questionView.hidden = true;
           questionView.replaceChildren();
           form.hidden = false;
@@ -337,10 +343,35 @@
         const restart = document.createElement('button');
         restart.type = 'button';
         restart.textContent = 'Новая викторина';
-        restart.addEventListener('click', () => {
+        restart.addEventListener('click', async () => {
           if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
             setSetupStatus('ready_for_submit');
             return;
+          }
+          if (Array.isArray(setupOptionsCache.categories) && setupOptionsCache.categories.length > 0) {
+            ctx.categories = setupOptionsCache.categories;
+            if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
+              setSetupStatus('ready_for_submit');
+              return;
+            }
+          }
+          if (apiBase && tg?.initData) {
+            runnerState.textContent = 'Загрузка параметров новой викторины...';
+            try {
+              const resp = await apiFetch(`${apiBase}/miniapp/setup-options`, {
+                headers: { Authorization: `tma ${tg.initData}` },
+              });
+              const data = await resp.json();
+              const categories = Array.isArray(data?.setup_options?.categories) ? data.setup_options.categories : [];
+              if (resp.ok && data?.ok === true && categories.length > 0) {
+                setupOptionsCache.categories = categories;
+                ctx.categories = categories;
+                if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
+                  setSetupStatus('ready_for_submit');
+                  return;
+                }
+              }
+            } catch (_) {}
           }
           const safeSetupUrl = getSafeSetupUrl();
           if (safeSetupUrl) {

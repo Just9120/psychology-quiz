@@ -259,6 +259,34 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
     return _json(HTTPStatus.OK, {"ok": True, "runner_state": state})
 
 
+def build_setup_options_response(
+    db_path: str,
+    bot_token: str,
+    init_data: str,
+    *,
+    max_age_seconds: int = 3600,
+) -> tuple[int, dict[str, str], bytes]:
+    try:
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
+    except InitDataValidationError as exc:
+        return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
+
+    with get_connection(db_path) as conn:
+        create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+        categories = [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)]
+    return _json(
+        HTTPStatus.OK,
+        {
+            "ok": True,
+            "setup_options": {
+                "categories": categories,
+                "question_count_choices": [5, 10, 15, "all"],
+                "difficulty_choices": ["any", "easy", "medium", "hard"],
+            },
+        },
+    )
+
+
 class MiniAppApiHandler(BaseHTTPRequestHandler):
     db_path = ""
     bot_token = ""
@@ -273,7 +301,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
             self.send_header("Vary", "Origin")
 
     def do_OPTIONS(self):
-        if self.path.split("?")[0] not in {"/miniapp/state", "/miniapp/answer", "/miniapp/setup"}:
+        if self.path.split("?")[0] not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         self.send_response(HTTPStatus.NO_CONTENT)
@@ -283,15 +311,24 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        if self.path.split("?")[0] != "/miniapp/state":
+        endpoint = self.path.split("?")[0]
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
-        status, headers, body = build_state_response(
-            self.db_path,
-            self.bot_token,
-            _extract_init_data(self.headers),
-            max_age_seconds=self.initdata_ttl_seconds,
-        )
+        if endpoint == "/miniapp/state":
+            status, headers, body = build_state_response(
+                self.db_path,
+                self.bot_token,
+                _extract_init_data(self.headers),
+                max_age_seconds=self.initdata_ttl_seconds,
+            )
+        else:
+            status, headers, body = build_setup_options_response(
+                self.db_path,
+                self.bot_token,
+                _extract_init_data(self.headers),
+                max_age_seconds=self.initdata_ttl_seconds,
+            )
         self.send_response(status)
         for k, v in headers.items():
             self.send_header(k, v)
