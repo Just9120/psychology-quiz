@@ -102,7 +102,9 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_debug_diagnostics_include_safe_request_phases(self):
         self.assertIn("function buildMiniappRequestId()", self.content)
+        self.assertIn("function firstSuccessfulOrAllFailed(candidateFactories)", self.content)
         self.assertIn("function apiFetchWithRetry(", self.content)
+        self.assertNotIn("Promise.race([attemptPromise, hedgePromise])", self.content)
         self.assertIn("apiDiagState.answerPhase = 'preparing';", self.content)
         self.assertIn("const ANSWER_API_TIMEOUT_MS = 4000;", self.content)
         self.assertIn("const ANSWER_HEDGE_DELAY_MS = 1200;", self.content)

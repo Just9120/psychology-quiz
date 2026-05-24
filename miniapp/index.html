@@ -556,6 +556,37 @@
         if (!Number.isInteger(currentQuestionId)) return false;
         return currentQuestionId !== Number(submittedQuestionId);
       }
+      async function firstSuccessfulOrAllFailed(candidateFactories) {
+        const candidates = Array.isArray(candidateFactories) ? candidateFactories : [];
+        if (candidates.length === 0) throw new Error('no_candidates');
+        return new Promise((resolve, reject) => {
+          let pending = candidates.length;
+          let settled = false;
+          let lastError = null;
+          candidates.forEach((createCandidate) => {
+            Promise.resolve()
+              .then(() => createCandidate())
+              .then((value) => {
+                if (settled) return;
+                if (value === null) {
+                  pending -= 1;
+                  if (pending === 0) {
+                    const exhausted = new Error('all_candidates_suppressed');
+                    reject(lastError || exhausted);
+                  }
+                  return;
+                }
+                settled = true;
+                resolve(value);
+              })
+              .catch((error) => {
+                lastError = error;
+                pending -= 1;
+                if (!settled && pending === 0) reject(lastError || new Error('all_candidates_failed'));
+              });
+          });
+        });
+      }
       async function apiFetchWithRetry(url, optionsFactory, timeoutMs, retryOptions = {}) {
         const retries = Number.isInteger(retryOptions.retries) ? retryOptions.retries : 1;
         const backoffMs = Array.isArray(retryOptions.backoffMs) ? retryOptions.backoffMs : [500, 1000];
@@ -601,7 +632,10 @@
               return { resp, data, attempt: nextAttempt, retries, requestId: nextRequestId, hedged: true };
             })();
             try {
-              const winner = await Promise.race([attemptPromise, hedgePromise]);
+              const winner = await firstSuccessfulOrAllFailed([
+                async () => attemptPromise,
+                async () => hedgePromise,
+              ]);
               raceSettled = true;
               attemptPromise.catch(() => {});
               hedgePromise.catch(() => {});
