@@ -143,9 +143,15 @@
 - [ ] Active session -> New setup in Mini App shows warning: "Запуск новой викторины завершит текущую активную попытку." before submit.
 
 - [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
-- [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.
+- [ ] Force answer API failure/timeout keeps Mini App open, shows `Не удалось отправить ответ через API. Попробуйте снова.`, re-enables answer buttons, and allows retry in-place.
+- [ ] Force setup API failure/timeout keeps setup form visible, shows `Не удалось запустить викторину через API. Попробуйте снова.`, re-enables `Начать викторину`, and allows retry in-place.
+- [ ] When API + `initData` are present, timeout/failure does **not** auto-send `sendData`; explicit fallback button (if shown) is user-triggered only.
+- [ ] Explicit fallback action warns that Telegram fallback may close Mini App and appears only after API failure (or when API/initData are missing).
+- [ ] QA confirms no disabled-button deadlock after API timeout/failure on both answer and setup paths.
 - [ ] Production Mini App UI does **not** show diagnostics by default.
-- [ ] Debug diagnostics are visible only when opened with `?debug=1` (or debug context flag) and remain hidden otherwise, including setup path statuses (`api_attempted/api_success/api_failed/fallback_sendData`).
+- [ ] Debug diagnostics are visible only when opened with `?debug=1` (or debug context flag) and remain hidden otherwise, including statuses:
+  - answer: `api_attempted` / `api_success` / `api_timeout` / `api_failed` / `explicit_fallback_sendData`
+  - setup: `api_attempted` / `api_success` / `api_timeout` / `api_failed` / `explicit_fallback_sendData`
 - [ ] После открытия через primary `/ui` кнопку диагностика показывает `initData: yes`.
 - [ ] Diagnostic line shows:
   - frontend version marker value

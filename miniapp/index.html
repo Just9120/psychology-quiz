@@ -187,6 +187,8 @@
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
       };
       let setupRenderCategories = null;
+      let answerSubmitInFlight = false;
+      let setupSubmitInFlight = false;
 
       function clearRunnerView() {
         questionView.replaceChildren();
@@ -464,6 +466,36 @@
         renderApiDiagnostics();
         runnerState.textContent = text;
       }
+      function clearAnswerFallbackActions() {
+        const existing = questionView.querySelector('[data-answer-fallback-actions="1"]');
+        if (existing) existing.remove();
+      }
+      function showAnswerFallbackAction(payload) {
+        clearAnswerFallbackActions();
+        if (!tg?.sendData) return;
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('data-answer-fallback-actions', '1');
+        wrapper.className = 'warn';
+        const warning = document.createElement('p');
+        warning.textContent = 'Резервный режим Telegram может закрыть Mini App.';
+        wrapper.appendChild(warning);
+        const fallbackBtn = document.createElement('button');
+        fallbackBtn.type = 'button';
+        fallbackBtn.textContent = 'Отправить через резервный режим Telegram';
+        fallbackBtn.addEventListener('click', () => {
+          try {
+            apiDiagState.attemptStatus = 'explicit_fallback_sendData';
+            renderApiDiagnostics();
+            tg.sendData(JSON.stringify(payload));
+            runnerState.textContent =
+              'Ответ отправлен через резервный режим Telegram. При необходимости откройте /ui для продолжения.';
+          } catch {
+            runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
+          }
+        });
+        wrapper.appendChild(fallbackBtn);
+        questionView.appendChild(wrapper);
+      }
       function setSetupStatus(status, code = '') {
         apiDiagState.setupStatus = status;
         apiDiagState.setupErrorCode = code;
@@ -481,6 +513,9 @@
       }
 
       async function submitAnswer(sessionId, questionId, selectedOptionIndex, snapshot) {
+        if (answerSubmitInFlight) return;
+        answerSubmitInFlight = true;
+        clearAnswerFallbackActions();
         const payload = {
           type: 'quiz_answer',
           session_id: sessionId,
@@ -489,12 +524,12 @@
         };
 
         const disableButtons = () => {
-          [...questionView.querySelectorAll('button')].forEach((b) => {
+          [...questionView.querySelectorAll('ol button')].forEach((b) => {
             b.disabled = true;
           });
         };
         const enableButtons = () => {
-          [...questionView.querySelectorAll('button')].forEach((b) => {
+          [...questionView.querySelectorAll('ol button')].forEach((b) => {
             b.disabled = false;
           });
         };
@@ -508,8 +543,9 @@
         } else if (!initData) {
           setFallbackStatus('Используется резервная отправка ответа через Telegram.', 'skipped_missing_init_data');
         } else {
-          apiDiagState.attemptStatus = 'attempted';
+          apiDiagState.attemptStatus = 'api_attempted';
           renderApiDiagnostics();
+          runnerState.textContent = 'Отправка ответа через API...';
           try {
             const answerResp = await apiFetch(`${apiBase}/miniapp/answer`, {
               method: 'POST',
@@ -523,43 +559,41 @@
                 selected_option_index: selectedOptionIndex,
               }),
             });
-            if (!answerResp.ok) {
-              setFallbackStatus('Не удалось отправить ответ через API. Используется резервный режим.', 'api_non_ok');
-            } else {
-              const answerJson = await answerResp.json();
-              if (answerJson?.ok === true && answerJson?.runner_state) {
-                apiDiagState.attemptStatus = 'success';
-                renderApiDiagnostics();
-                try {
-                  renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
-                  return;
-                } catch (_) {
-                  setFallbackStatus('Ошибка UI после ответа. Используется резервный режим.', 'ui_render_failed');
-                  enableButtons();
-                }
-              }
-              if (answerJson?.ok === true && !answerJson?.runner_state) {
-                setFallbackStatus(
-                  'API вернул неполные данные. Используется резервная отправка через Telegram.',
-                  'api_no_runner_state',
-                );
-              } else {
-                setFallbackStatus('Не удалось отправить ответ через API. Используется резервный режим.', 'api_non_ok');
-              }
+            if (!answerResp.ok) throw new Error('api_non_ok');
+            const answerJson = await answerResp.json();
+            if (!(answerJson?.ok === true && answerJson?.runner_state)) throw new Error('api_invalid_payload');
+            apiDiagState.attemptStatus = 'api_success';
+            renderApiDiagnostics();
+            try {
+              renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
+              answerSubmitInFlight = false;
+              return;
+            } catch (_) {
+              runnerState.textContent = 'Не удалось обновить интерфейс после ответа. Попробуйте снова.';
+              enableButtons();
+              answerSubmitInFlight = false;
+              return;
             }
           } catch (e) {
-            setFallbackStatus(e?.name === 'AbortError' ? 'Таймаут API. Используется резервный режим.' : 'Ошибка сети при API-запросе. Используется резервный режим.', 'failed_fetch');
+            apiDiagState.attemptStatus = e?.name === 'AbortError' ? 'api_timeout' : 'api_failed';
+            renderApiDiagnostics();
+            runnerState.textContent = 'Не удалось отправить ответ через API. Попробуйте снова.';
+            enableButtons();
+            showAnswerFallbackAction(payload);
+            answerSubmitInFlight = false;
+            return;
           }
         }
 
         if (!tg?.sendData) {
           runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
           enableButtons();
+          answerSubmitInFlight = false;
           return;
         }
 
         try {
-          apiDiagState.attemptStatus = 'fallback_sendData';
+          apiDiagState.attemptStatus = 'explicit_fallback_sendData';
           renderApiDiagnostics();
           tg.sendData(JSON.stringify(payload));
           runnerState.textContent =
@@ -568,6 +602,7 @@
           runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
           enableButtons();
         }
+        answerSubmitInFlight = false;
       }
       function renderAnswerFeedback(snapshot, selectedOptionIndex, feedback, nextState) {
         showRunnerMode();
@@ -700,7 +735,7 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         validate();
-        if (go.disabled) return;
+        if (go.disabled || setupSubmitInFlight) return;
 
         const mode = form.quiz_mode.value;
         const selected = selectedCategoryIds();
@@ -714,6 +749,7 @@
         };
 
         if (apiBase && tg?.initData) {
+          setupSubmitInFlight = true;
           setSetupStatus('api_attempted');
           go.disabled = true;
           runnerState.textContent = 'Запуск викторины...';
@@ -723,7 +759,7 @@
               method: 'POST',
               headers: { 'Content-Type': 'application/json', Authorization: `tma ${tg.initData}` },
               body: JSON.stringify(payload),
-            });
+            }, 25000);
             let data = null;
             try {
               data = await resp.json();
@@ -734,19 +770,20 @@
               setupWarning.hidden = true;
               err.textContent = '';
               renderRunnerState(data.runner_state, { preferLaunchCompact: false });
+              setupSubmitInFlight = false;
               return;
             }
             setSetupStatus('api_failed', String(resp.status || 'non_ok'));
-            err.textContent = 'Не удалось запустить викторину через API. Попробуйте снова или используйте резервный режим.';
-            runnerState.textContent = 'Запуск через API не удался. Можно повторить попытку или отправить через Telegram.';
+            err.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
+            runnerState.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
           } catch (e) {
-            setSetupStatus('api_failed', e?.name === 'AbortError' ? 'timeout' : 'network_error');
-            err.textContent = e?.name === 'AbortError'
-              ? 'Таймаут запуска викторины через API. Попробуйте снова.'
-              : 'Сетевая ошибка запуска викторины через API. Попробуйте снова.';
-            runnerState.textContent = 'Запуск через API не удался. Можно повторить попытку или отправить через Telegram.';
+            setSetupStatus(e?.name === 'AbortError' ? 'api_timeout' : 'api_failed', e?.name === 'AbortError' ? 'timeout' : 'network_error');
+            err.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
+            runnerState.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
           }
           go.disabled = false;
+          setupSubmitInFlight = false;
+          return;
         }
         if (!tg?.sendData) {
           setSetupStatus('fallback_unavailable');
@@ -754,7 +791,7 @@
           return;
         }
         try {
-          setSetupStatus('fallback_sendData');
+          setSetupStatus('explicit_fallback_sendData');
           tg.sendData(JSON.stringify(payload));
           runnerState.textContent = 'Setup отправлен через резервный режим Telegram.';
         } catch {
