@@ -568,6 +568,7 @@
           const requestId = retryOptions.requestIdFactory ? retryOptions.requestIdFactory(attempt) : '';
           if (hedgeDelayMs > 0 && attempt < totalAttempts && typeof retryOptions.onHedgeBeforeRetry === 'function') {
             if (retryOptions.onHedgeTimerStarted) retryOptions.onHedgeTimerStarted(attempt, requestId);
+            let raceSettled = false;
             const attemptPromise = (async () => {
               const resp = await apiFetch(url, optionsFactory(attempt, requestId), timeoutMs);
               const data = await resp.json();
@@ -581,11 +582,14 @@
             })();
             const hedgePromise = (async () => {
               await waitMs(hedgeDelayMs);
+              if (raceSettled) return null;
               const hedgeResult = await retryOptions.onHedgeBeforeRetry(attempt, retries, requestId);
+              if (raceSettled) return null;
               if (hedgeResult?.skipRetry === true) return hedgeResult.result;
               const nextAttempt = attempt + 1;
               const nextRequestId = retryOptions.requestIdFactory ? retryOptions.requestIdFactory(nextAttempt) : '';
               if (retryOptions.onHedgeRetryStarted) retryOptions.onHedgeRetryStarted(nextAttempt, nextRequestId);
+              if (raceSettled) return null;
               const resp = await apiFetch(url, optionsFactory(nextAttempt, nextRequestId), timeoutMs);
               const data = await resp.json();
               if (!resp.ok) {
@@ -598,8 +602,15 @@
             })();
             try {
               const winner = await Promise.race([attemptPromise, hedgePromise]);
+              raceSettled = true;
+              attemptPromise.catch(() => {});
+              hedgePromise.catch(() => {});
+              if (winner === null) continue;
               return winner;
             } catch (error) {
+              raceSettled = true;
+              attemptPromise.catch(() => {});
+              hedgePromise.catch(() => {});
               const errorKind = error?.errorKind
                 || (error?.name === 'AbortError' ? 'timeout'
                   : (error?.message === 'api_non_ok' ? 'api_non_ok' : 'fetch_rejected'));
