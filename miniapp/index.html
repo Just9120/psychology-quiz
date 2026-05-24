@@ -182,6 +182,11 @@
         setupStatus: 'not_attempted',
         setupErrorCode: '',
         apiOrigin: '',
+        answerRequestId: '',
+        answerPhase: 'idle',
+        answerElapsedMs: 0,
+        answerRetryCount: 0,
+        answerEndpointPath: '/miniapp/answer',
       };
       const setupOptionsCache = {
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
@@ -238,7 +243,14 @@
           `API diag — frontend: ${FRONTEND_VERSION} · mode: ${mode} · configured: ` +
           `${apiDiagState.configured ? 'yes' : 'no'} · initData: ${apiDiagState.initDataPresent ? 'yes' : 'no'} ` +
           `· answer: ${apiDiagState.attemptStatus} · setup: ${apiDiagState.setupStatus}` +
+          ` · req_id: ${apiDiagState.answerRequestId || '-'} · phase: ${apiDiagState.answerPhase}` +
+          ` · elapsed_ms: ${apiDiagState.answerElapsedMs} · retry: ${apiDiagState.answerRetryCount}` +
+          ` · endpoint: ${apiDiagState.answerEndpointPath}` +
           `${apiDiagState.setupErrorCode ? ` · setup_code: ${apiDiagState.setupErrorCode}` : ''}${origin}`;
+      }
+
+      function buildMiniappRequestId() {
+        return `rq_${Math.random().toString(36).slice(2, 10)}`;
       }
 
       function showLoadError() {
@@ -516,6 +528,11 @@
         if (answerSubmitInFlight) return;
         answerSubmitInFlight = true;
         clearAnswerFallbackActions();
+        const startedAt = Date.now();
+        const requestId = buildMiniappRequestId();
+        apiDiagState.answerRequestId = requestId;
+        apiDiagState.answerPhase = 'preparing';
+        apiDiagState.answerElapsedMs = 0;
         const payload = {
           type: 'quiz_answer',
           session_id: sessionId,
@@ -544,6 +561,7 @@
           setFallbackStatus('Используется резервная отправка ответа через Telegram.', 'skipped_missing_init_data');
         } else {
           apiDiagState.attemptStatus = 'api_attempted';
+          apiDiagState.answerPhase = 'fetch_started';
           renderApiDiagnostics();
           runnerState.textContent = 'Отправка ответа через API...';
           try {
@@ -552,6 +570,7 @@
               headers: {
                 'Content-Type': 'application/json',
                 Authorization: `tma ${initData}`,
+                'X-Miniapp-Request-Id': requestId,
               },
               body: JSON.stringify({
                 session_id: sessionId,
@@ -559,25 +578,50 @@
                 selected_option_index: selectedOptionIndex,
               }),
             });
+            apiDiagState.answerPhase = 'response_headers_received';
+            apiDiagState.answerElapsedMs = Date.now() - startedAt;
             if (!answerResp.ok) throw new Error('api_non_ok');
+            apiDiagState.answerPhase = 'json_parse_started';
             const answerJson = await answerResp.json();
             if (!(answerJson?.ok === true && answerJson?.runner_state)) throw new Error('api_invalid_payload');
             apiDiagState.attemptStatus = 'api_success';
+            apiDiagState.answerPhase = 'api_success';
+            apiDiagState.answerElapsedMs = Date.now() - startedAt;
             renderApiDiagnostics();
             try {
               renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
               answerSubmitInFlight = false;
               return;
             } catch (_) {
+              apiDiagState.answerPhase = 'ui_render_failed';
+              apiDiagState.answerElapsedMs = Date.now() - startedAt;
+              renderApiDiagnostics();
               runnerState.textContent = 'Не удалось обновить интерфейс после ответа. Попробуйте снова.';
               enableButtons();
               answerSubmitInFlight = false;
               return;
             }
           } catch (e) {
-            apiDiagState.attemptStatus = e?.name === 'AbortError' ? 'api_timeout' : 'api_failed';
+            apiDiagState.answerElapsedMs = Date.now() - startedAt;
+            if (e?.name === 'AbortError') {
+              apiDiagState.attemptStatus = 'api_timeout';
+              apiDiagState.answerPhase = 'api_timeout';
+            } else if (e?.message === 'api_non_ok') {
+              apiDiagState.attemptStatus = 'api_non_ok';
+              apiDiagState.answerPhase = 'api_non_ok';
+            } else if (e?.message === 'api_invalid_payload') {
+              apiDiagState.attemptStatus = 'api_invalid_payload';
+              apiDiagState.answerPhase = 'api_invalid_payload';
+            } else if (e instanceof SyntaxError) {
+              apiDiagState.attemptStatus = 'api_invalid_payload';
+              apiDiagState.answerPhase = 'json_parse_failed';
+            } else {
+              apiDiagState.attemptStatus = 'fetch_rejected';
+              apiDiagState.answerPhase = 'fetch_rejected';
+            }
+            apiDiagState.answerRetryCount += 1;
             renderApiDiagnostics();
-            runnerState.textContent = 'Не удалось отправить ответ через API. Попробуйте снова.';
+            runnerState.textContent = 'Не удалось отправить ответ через API. Попробуйте снова. Если ошибка повторяется, закройте и откройте /ui заново.';
             enableButtons();
             showAnswerFallbackAction(payload);
             answerSubmitInFlight = false;
@@ -757,7 +801,7 @@
           try {
             const resp = await apiFetch(`${apiBase}/miniapp/setup`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `tma ${tg.initData}` },
+              headers: { 'Content-Type': 'application/json', Authorization: `tma ${tg.initData}`, 'X-Miniapp-Request-Id': buildMiniappRequestId() },
               body: JSON.stringify(payload),
             }, 25000);
             let data = null;

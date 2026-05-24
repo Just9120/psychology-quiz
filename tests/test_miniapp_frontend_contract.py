@@ -69,13 +69,24 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("Не удалось обновить интерфейс после ответа. Попробуйте снова.", self.content)
 
     def test_no_automatic_send_data_after_api_failures(self):
-        self.assertIn("apiDiagState.attemptStatus = e?.name === 'AbortError' ? 'api_timeout' : 'api_failed';", self.content)
+        self.assertIn("apiDiagState.attemptStatus = 'fetch_rejected';", self.content)
         self.assertIn("showAnswerFallbackAction(payload);", self.content)
         self.assertIn("fallbackBtn.textContent = 'Отправить через резервный режим Telegram';", self.content)
         self.assertIn("warning.textContent = 'Резервный режим Telegram может закрыть Mini App.';", self.content)
         self.assertIn("setSetupStatus(e?.name === 'AbortError' ? 'api_timeout' : 'api_failed'", self.content)
         self.assertIn("setSetupStatus('explicit_fallback_sendData');", self.content)
         self.assertIn("if (answerSubmitInFlight) return;", self.content)
+        self.assertIn("'X-Miniapp-Request-Id': requestId", self.content)
+
+    def test_debug_diagnostics_include_safe_request_phases(self):
+        self.assertIn("function buildMiniappRequestId()", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'preparing';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'fetch_started';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'response_headers_received';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'json_parse_started';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'json_parse_failed';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'ui_render_failed';", self.content)
+        self.assertNotIn("Authorization: `tma ${initData}` +", self.content)
 
     def test_setup_mode_hydration_is_guarded(self):
         self.assertIn("const hydrateOnSetup = ctx?.hydrate_on_setup === true;", self.content)
