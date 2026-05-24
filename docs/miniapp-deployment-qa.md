@@ -166,6 +166,8 @@
 - [ ] Clicking `Новая викторина` from completed result opens setup in the same Mini App window (without close/reopen).
 - [ ] Completed `Новая викторина` can fetch setup options via authenticated `GET /miniapp/setup-options` when launch context has no categories.
 - [ ] Setup submit after completed restart uses `POST /miniapp/setup` and starts a new quiz in-place.
+- [ ] After completed → `Новая викторина` → new setup submit, the first question is shown and setup form is not visible below it.
+- [ ] Final question flow in Mini App: answer last question → feedback (`Верно/Неверно`) → `Далее` → completed result renders once without hang/loading lock.
 - [ ] Explicit close + `/ui` fallback message is shown only as a final fallback path.
 
 ## 9) Mini App API route (PR #137 hardening)

@@ -36,8 +36,19 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("if (apiBase && tg?.initData) {", self.content)
         self.assertIn("setSetupStatus('api_attempted')", self.content)
         self.assertIn("setSetupStatus('api_success')", self.content)
+        self.assertIn('form.hidden = true;', self.content)
+        self.assertIn('setupWarning.hidden = true;', self.content)
         self.assertIn("setSetupStatus('api_failed'", self.content)
         self.assertNotIn("tg.close();", self.content)
+
+    def test_ui_mode_helpers_prevent_mixed_dom(self):
+        self.assertIn('function showSetupMode(', self.content)
+        self.assertIn('function showRunnerMode()', self.content)
+        self.assertIn('function showCompletedMode()', self.content)
+        self.assertIn('function clearRunnerView()', self.content)
+        self.assertIn('showSetupMode();', self.content)
+        self.assertIn('showRunnerMode();', self.content)
+        self.assertIn('showCompletedMode();', self.content)
 
     def test_timeout_and_feedback_ui_contract(self):
         self.assertIn("AbortController", self.content)
@@ -51,6 +62,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("answer-selected-wrong", self.content)
         self.assertIn("Ваш ответ:", self.content)
         self.assertIn("Правильный ответ:", self.content)
+        self.assertIn("setFallbackStatus('Ошибка UI после ответа. Используется резервный режим.', 'ui_render_failed');", self.content)
 
     def test_setup_mode_hydration_is_guarded(self):
         self.assertIn("const hydrateOnSetup = ctx?.hydrate_on_setup === true;", self.content)
