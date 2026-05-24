@@ -74,6 +74,20 @@
 ## Next recommended item
 1. Run production manual QA for the opt-in Mini App runner and document findings before considering default UX changes.
 
+## Mini App technical roadmap (post-#155, no date commitments)
+- **Done / urgent**
+  - SQLite hardening from #155 is in place: WAL, `busy_timeout`, explicit connection closing, performance indexes.
+- **Next**
+  - Production validation cycle with focused monitoring of `database is locked` / `miniapp_db_locked` logs.
+- **Near-term**
+  - Keep reverse-proxy expectations explicit (`quiz-api.librechat.online` → local `MINIAPP_API_BIND`/`MINIAPP_API_PORT`).
+  - Keep DB migration/upgrade policy explicit (`schema.sql` source of truth + additive runtime `ensure_*` path).
+- **Medium-term**
+  - Split overloaded `app/main.py` into focused modules (Mini App context builder module + handler domain separation).
+- **Backlog**
+  - Migrate Mini App API from `ThreadingHTTPServer` to ASGI framework (FastAPI/Litestar/aiohttp candidate set).
+  - Move `miniapp/index.html` flow from monolithic imperative state machine to more declarative state management if Mini App remains strategic.
+
 ## Product/content backlog
 - [ ] Расширить `Основы экспериментальной психологии` новыми `approved` вопросами с корректным `source_ref`.
 - [ ] Расширить `Качественные методы исследования` новыми `approved` вопросами с корректным `source_ref`.
@@ -115,6 +129,7 @@
 | #137-fix2 | Make Mini App API startup explicit opt-in (`MINIAPP_API_ENABLED`) with safe no-start when base URL missing | ✅ Done |
 | #140-polish | Mini App runner polish: debug-gated diagnostics, completed-state actions, readable `miniapp/index.html`, QA/docs refresh | ✅ Done |
 | #141-fix | Completed Mini App `Новая викторина` action now opens setup context (no completed-state reload loop) | ✅ Done |
+| #155 | SQLite runtime stabilization for Mini App load (WAL, busy_timeout, explicit connection closing, performance indexes) | ✅ Done |
 
 | 2026-05-24 | Mini App runner stabilization PR | Added `/miniapp/setup`, server-authoritative startup hydration, timeout/recovery UX, and post-answer feedback with next-step control. |
 
