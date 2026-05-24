@@ -39,6 +39,10 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn('form.hidden = true;', self.content)
         self.assertIn('setupWarning.hidden = true;', self.content)
         self.assertIn("setSetupStatus('api_failed'", self.content)
+        self.assertIn("if (go.disabled || setupSubmitInFlight) return;", self.content)
+        self.assertIn("setupSubmitInFlight = true;", self.content)
+        self.assertIn("setupSubmitInFlight = false;", self.content)
+        self.assertIn("return;\n        }\n        if (!tg?.sendData)", self.content)
         self.assertNotIn("tg.close();", self.content)
 
     def test_ui_mode_helpers_prevent_mixed_dom(self):
@@ -52,8 +56,8 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_timeout_and_feedback_ui_contract(self):
         self.assertIn("AbortController", self.content)
-        self.assertIn("Таймаут API. Используется резервный режим.", self.content)
-        self.assertIn("Таймаут запуска викторины через API. Попробуйте снова.", self.content)
+        self.assertIn("Не удалось отправить ответ через API. Попробуйте снова.", self.content)
+        self.assertIn("Не удалось запустить викторину через API. Попробуйте снова.", self.content)
         self.assertIn("feedback-correct", self.content)
         self.assertIn("feedback-wrong", self.content)
         self.assertIn("next.textContent = 'Далее'", self.content)
@@ -62,7 +66,16 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("answer-selected-wrong", self.content)
         self.assertIn("Ваш ответ:", self.content)
         self.assertIn("Правильный ответ:", self.content)
-        self.assertIn("setFallbackStatus('Ошибка UI после ответа. Используется резервный режим.', 'ui_render_failed');", self.content)
+        self.assertIn("Не удалось обновить интерфейс после ответа. Попробуйте снова.", self.content)
+
+    def test_no_automatic_send_data_after_api_failures(self):
+        self.assertIn("apiDiagState.attemptStatus = e?.name === 'AbortError' ? 'api_timeout' : 'api_failed';", self.content)
+        self.assertIn("showAnswerFallbackAction(payload);", self.content)
+        self.assertIn("fallbackBtn.textContent = 'Отправить через резервный режим Telegram';", self.content)
+        self.assertIn("warning.textContent = 'Резервный режим Telegram может закрыть Mini App.';", self.content)
+        self.assertIn("setSetupStatus(e?.name === 'AbortError' ? 'api_timeout' : 'api_failed'", self.content)
+        self.assertIn("setSetupStatus('explicit_fallback_sendData');", self.content)
+        self.assertIn("if (answerSubmitInFlight) return;", self.content)
 
     def test_setup_mode_hydration_is_guarded(self):
         self.assertIn("const hydrateOnSetup = ctx?.hydrate_on_setup === true;", self.content)
