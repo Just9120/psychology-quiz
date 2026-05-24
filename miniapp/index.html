@@ -105,6 +105,7 @@
     <script>
       const FRONTEND_VERSION = 'ui-polish-v3';
       const ANSWER_API_TIMEOUT_MS = 4000;
+      const ANSWER_HEDGE_DELAY_MS = 1200;
 
       const err = document.getElementById('err');
       const form = document.getElementById('f');
@@ -200,6 +201,7 @@
       };
       let setupRenderCategories = null;
       let answerSubmitInFlight = false;
+      let answerSubmitGeneration = 0;
       let setupSubmitInFlight = false;
 
       function clearRunnerView() {
@@ -557,12 +559,64 @@
       async function apiFetchWithRetry(url, optionsFactory, timeoutMs, retryOptions = {}) {
         const retries = Number.isInteger(retryOptions.retries) ? retryOptions.retries : 1;
         const backoffMs = Array.isArray(retryOptions.backoffMs) ? retryOptions.backoffMs : [500, 1000];
+        const hedgeDelayMs = Number.isInteger(retryOptions.hedgeDelayMs) ? retryOptions.hedgeDelayMs : 0;
         let lastError = null;
         let lastMeta = null;
         const totalAttempts = retries + 1;
         for (let attempt = 1; attempt <= totalAttempts; attempt += 1) {
           if (retryOptions.onRetryStarted) retryOptions.onRetryStarted(attempt, retries);
           const requestId = retryOptions.requestIdFactory ? retryOptions.requestIdFactory(attempt) : '';
+          if (hedgeDelayMs > 0 && attempt < totalAttempts && typeof retryOptions.onHedgeBeforeRetry === 'function') {
+            if (retryOptions.onHedgeTimerStarted) retryOptions.onHedgeTimerStarted(attempt, requestId);
+            const attemptPromise = (async () => {
+              const resp = await apiFetch(url, optionsFactory(attempt, requestId), timeoutMs);
+              const data = await resp.json();
+              if (!resp.ok) {
+                const nonOk = new Error('api_non_ok');
+                nonOk.errorKind = 'api_non_ok';
+                nonOk.meta = { attempt, retries, requestId, resp, data };
+                throw nonOk;
+              }
+              return { resp, data, attempt, retries, requestId };
+            })();
+            const hedgePromise = (async () => {
+              await waitMs(hedgeDelayMs);
+              const hedgeResult = await retryOptions.onHedgeBeforeRetry(attempt, retries, requestId);
+              if (hedgeResult?.skipRetry === true) return hedgeResult.result;
+              const nextAttempt = attempt + 1;
+              const nextRequestId = retryOptions.requestIdFactory ? retryOptions.requestIdFactory(nextAttempt) : '';
+              if (retryOptions.onHedgeRetryStarted) retryOptions.onHedgeRetryStarted(nextAttempt, nextRequestId);
+              const resp = await apiFetch(url, optionsFactory(nextAttempt, nextRequestId), timeoutMs);
+              const data = await resp.json();
+              if (!resp.ok) {
+                const nonOk = new Error('api_non_ok');
+                nonOk.errorKind = 'api_non_ok';
+                nonOk.meta = { attempt: nextAttempt, retries, requestId: nextRequestId, resp, data };
+                throw nonOk;
+              }
+              return { resp, data, attempt: nextAttempt, retries, requestId: nextRequestId, hedged: true };
+            })();
+            try {
+              const winner = await Promise.race([attemptPromise, hedgePromise]);
+              return winner;
+            } catch (error) {
+              const errorKind = error?.errorKind
+                || (error?.name === 'AbortError' ? 'timeout'
+                  : (error?.message === 'api_non_ok' ? 'api_non_ok' : 'fetch_rejected'));
+              const meta = error?.meta || { attempt, retries, requestId };
+              lastMeta = { ...meta, errorKind };
+              lastError = error;
+              if (meta?.attempt && meta.attempt > attempt) {
+                attempt = meta.attempt;
+              }
+              if (attempt <= retries && isTransientApiError(errorKind)) {
+                if (retryOptions.onRetryScheduled) retryOptions.onRetryScheduled(attempt, retries, errorKind, requestId);
+                await waitMs(backoffMs[attempt - 1] || 1000);
+                continue;
+              }
+              break;
+            }
+          }
           try {
             const resp = await apiFetch(url, optionsFactory(attempt, requestId), timeoutMs);
             let data = null;
@@ -611,6 +665,8 @@
       async function submitAnswer(sessionId, questionId, selectedOptionIndex, snapshot) {
         if (answerSubmitInFlight) return;
         answerSubmitInFlight = true;
+        answerSubmitGeneration += 1;
+        const submitGeneration = answerSubmitGeneration;
         clearAnswerFallbackActions();
         const startedAt = Date.now();
         const requestBaseId = buildMiniappRequestId();
@@ -640,6 +696,17 @@
         disableButtons();
 
         const initData = tg?.initData || '';
+        const isSubmissionActive = () => submitGeneration === answerSubmitGeneration;
+        const isAttemptCurrent = (attempt) => answerSubmitGeneration === submitGeneration && attempt === currentActiveAttempt;
+        const ignoreLateAttempt = (attempt, requestId, phase) => {
+          apiDiagState.answerPhase = 'answer_late_result_ignored';
+          apiDiagState.answerFinalPhase = phase;
+          apiDiagState.answerElapsedMs = Date.now() - startedAt;
+          apiDiagState.answerRequestId = requestId;
+          apiDiagState.answerAttempt = attempt;
+          renderApiDiagnostics();
+        };
+        let currentActiveAttempt = 1;
         apiDiagState.initDataPresent = Boolean(initData);
 
         if (!apiBase) {
@@ -673,6 +740,7 @@
                 retries: 2,
                 requestIdFactory: (attempt) => `${requestBaseId}_a${attempt}`,
                 onRetryScheduled: (attempt, retries, errorKind, requestId) => {
+                  if (!isAttemptCurrent(attempt)) return;
                   apiDiagState.answerRetryCount = attempt;
                   apiDiagState.answerAttempt = attempt;
                   apiDiagState.answerRequestId = requestId;
@@ -683,6 +751,10 @@
                   runnerState.textContent = 'Сеть подвисла, пробую отправить ещё раз...';
                 },
                 onBeforeRetry: async (attempt, retries, errorKind, requestId) => {
+                  if (!isAttemptCurrent(attempt)) {
+                    ignoreLateAttempt(attempt, requestId, 'pre_retry_superseded');
+                    return { skipRetry: true, result: null };
+                  }
                   apiDiagState.answerElapsedMs = Date.now() - startedAt;
                   apiDiagState.answerPhase = 'pre_retry_state_resync_attempted';
                   apiDiagState.answerFinalPhase = errorKind;
@@ -713,6 +785,11 @@
                   }
                 },
                 onRetryStarted: (attempt, retries) => {
+                  currentActiveAttempt = attempt;
+                  if (!isAttemptCurrent(attempt)) {
+                    ignoreLateAttempt(attempt, `${requestBaseId}_a${attempt}`, 'retry_started_superseded');
+                    return;
+                  }
                   apiDiagState.answerAttempt = attempt;
                   apiDiagState.answerRetryCount = Math.max(0, attempt - 1);
                   apiDiagState.answerPhase = attempt === 1 ? 'fetch_started' : 'retry_started';
@@ -723,8 +800,62 @@
                   }
                   renderApiDiagnostics();
                 },
+                onHedgeTimerStarted: (attempt, requestId) => {
+                  if (!isAttemptCurrent(attempt)) return;
+                  apiDiagState.answerPhase = 'answer_hedge_timer_started';
+                  apiDiagState.answerRequestId = requestId;
+                  apiDiagState.answerAttempt = attempt;
+                  apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                  renderApiDiagnostics();
+                },
+                onHedgeRetryStarted: (attempt, requestId) => {
+                  currentActiveAttempt = attempt;
+                  if (!isAttemptCurrent(attempt)) return;
+                  apiDiagState.answerPhase = 'answer_hedge_retry_started';
+                  apiDiagState.answerRequestId = requestId;
+                  apiDiagState.answerAttempt = attempt;
+                  apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                  renderApiDiagnostics();
+                  runnerState.textContent = 'Сеть подвисла, пробую отправить ещё раз...';
+                },
+                onHedgeBeforeRetry: async (attempt, retries, requestId) => {
+                  if (!isAttemptCurrent(attempt)) return { skipRetry: true, result: null };
+                  apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                  apiDiagState.answerPhase = 'answer_hedge_state_resync_attempted';
+                  apiDiagState.answerFinalPhase = 'answer_hedge_state_resync_attempted';
+                  renderApiDiagnostics();
+                  runnerState.textContent = 'Проверяю, был ли ответ принят...';
+                  try {
+                    const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${initData}` } });
+                    const stateData = await stateResp.json();
+                    if (stateResp.ok && stateData?.ok && stateData?.runner_state
+                      && didRunnerStateAdvanceForAnswer(sessionId, questionId, stateData.runner_state)) {
+                      apiDiagState.answerPhase = 'answer_hedge_state_resync_success';
+                      apiDiagState.answerFinalPhase = 'answer_hedge_state_resync_success';
+                      apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                      renderApiDiagnostics();
+                      return { skipRetry: true, result: { resp: stateResp, data: { ok: true, submission_status: 'resynced', runner_state: stateData.runner_state }, attempt, retries, requestId } };
+                    }
+                    apiDiagState.answerPhase = 'answer_hedge_state_resync_no_change';
+                    apiDiagState.answerFinalPhase = 'answer_hedge_state_resync_no_change';
+                    apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                    renderApiDiagnostics();
+                    return { skipRetry: false };
+                  } catch {
+                    apiDiagState.answerPhase = 'answer_hedge_state_resync_no_change';
+                    apiDiagState.answerFinalPhase = 'answer_hedge_state_resync_no_change';
+                    apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                    renderApiDiagnostics();
+                    return { skipRetry: false };
+                  }
+                },
+                hedgeDelayMs: ANSWER_HEDGE_DELAY_MS,
               },
             );
+            if (!answerResult || !isSubmissionActive()) {
+              ignoreLateAttempt(currentActiveAttempt, apiDiagState.answerRequestId || `${requestBaseId}_a${currentActiveAttempt}`, 'late_attempt_result');
+              return;
+            }
             const answerJson = answerResult.data;
             if (!(answerJson?.ok === true && answerJson?.runner_state)) throw new Error('api_invalid_payload');
             apiDiagState.attemptStatus = 'api_success';
