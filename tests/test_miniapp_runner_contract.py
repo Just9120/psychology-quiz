@@ -1,8 +1,11 @@
 import base64
 import json
+import asyncio
 import sqlite3
+import tempfile
 import unittest
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, start_quiz_session, store_session_questions
 from app.main import (
@@ -13,9 +16,9 @@ from app.main import (
     build_miniapp_url,
     build_miniapp_url_with_fallback,
     build_miniapp_launch_inline_keyboard,
-    build_miniapp_open_keyboard,
     build_post_setup_miniapp_prompt,
     should_start_miniapp_api,
+    ui_command,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
@@ -462,9 +465,51 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
         self.assertEqual(replacement, state.get("session", {}).get("session_id"))
 
-    def test_open_keyboard_can_include_setup_button(self):
-        kb = build_miniapp_open_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
-        self.assertEqual(3, len(kb.keyboard))
+
+    def test_ui_command_uses_inline_launch_only_without_reply_webapp_keyboard(self):
+        with tempfile.NamedTemporaryFile(suffix=".db") as db_file:
+            db_conn = sqlite3.connect(db_file.name)
+            db_conn.row_factory = sqlite3.Row
+            db_conn.execute("PRAGMA foreign_keys = ON;")
+            _setup_schema(db_conn)
+            db_conn.execute("INSERT INTO categories (slug, name) VALUES ('cat-1', 'Category 1')")
+            db_conn.execute("INSERT INTO questions (external_id, category_id, source_ref, difficulty, status, question_text, explanation) VALUES ('q1', 1, 'src', 'easy', 'approved', 'Q1?', 'E1')")
+            db_conn.execute("INSERT INTO question_options (question_id, option_index, option_text, is_correct) VALUES (1, 0, 'A', 1), (1, 1, 'B', 0)")
+            db_conn.commit()
+            db_conn.close()
+
+            message = SimpleNamespace(reply_text=AsyncMock())
+            update = SimpleNamespace(
+                message=message,
+                effective_chat=SimpleNamespace(type="private"),
+                effective_user=SimpleNamespace(id=12345, username="u", first_name="U", last_name=None),
+            )
+            context = SimpleNamespace(
+                application=SimpleNamespace(
+                    bot_data={
+                        "settings": SimpleNamespace(
+                            db_path=db_file.name,
+                            mini_app_url="https://example.com/ui",
+                            mini_app_api_base_url="https://api.example.com",
+                        )
+                    }
+                ),
+                user_data={},
+            )
+
+            asyncio.run(ui_command(update, context))
+
+            self.assertGreaterEqual(message.reply_text.await_count, 1)
+            first_call = message.reply_text.await_args_list[0]
+            self.assertIn("reply_markup", first_call.kwargs)
+            inline_markup = first_call.kwargs["reply_markup"]
+            self.assertTrue(hasattr(inline_markup, "inline_keyboard"))
+            self.assertTrue(inline_markup.inline_keyboard[0][0].web_app.url.startswith("https://example.com/ui?context="))
+
+            if message.reply_text.await_count > 1:
+                second_call = message.reply_text.await_args_list[1]
+                self.assertNotIn("reply_markup", second_call.kwargs)
+                self.assertIn("отправьте /ui заново", second_call.args[0])
 
     def test_inline_launch_keyboard_is_primary_for_ui_flow(self):
         kb = build_miniapp_launch_inline_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
