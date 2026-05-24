@@ -204,3 +204,17 @@
 - [ ] Проверить, что после ответа UI показывает: «Верно/Неверно», «Ваш ответ», «Правильный ответ», пояснение (если есть), затем кнопку «Далее».
 
 - [ ] Server logs contain `POST /miniapp/setup` after setup submit in /ui API path.
+
+## 10) Troubleshooting: `OPTIONS /miniapp/answer` = 204 but `POST /miniapp/answer` missing
+- Симптом: в логах есть preflight `OPTIONS /miniapp/answer` (204), но нет `POST /miniapp/answer` для той же попытки; позже повтор может пройти с `POST /miniapp/answer` 200.
+- Включите debug UI (`/ui` c `?debug=1`) и проверьте:
+  - `req_id` — короткий `X-Miniapp-Request-Id` для корреляции;
+  - `phase` — ключевая фаза (`preparing`, `fetch_started`, `response_headers_received`, `json_parse_started`, `json_parse_failed`, `api_success`, `api_non_ok`, `api_invalid_payload`, `api_timeout`, `fetch_rejected`, `ui_render_failed`);
+  - `elapsed_ms` и `retry`.
+- Безопасность: diagnostics и логи не должны содержать raw `initData`, `Authorization`, bot token, полный профиль пользователя, текст вопроса/ответов.
+- Если в debug UI есть `req_id`, но backend не видит POST c тем же `request_id`, проблема до входа запроса в API (WebView/network/proxy path между клиентом и сервером).
+- Если backend видит POST c `request_id`, используйте статус/error_code и duration для локализации причины.
+
+Примеры grep для корреляции:
+- `grep "miniapp_api endpoint=/miniapp/answer request_id=rq_ab12cd34" <bot-log-file>`
+- `grep "miniapp_options endpoint=/miniapp/answer request_id=rq_ab12cd34" <bot-log-file>`

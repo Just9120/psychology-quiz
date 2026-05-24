@@ -143,6 +143,7 @@ class MiniAppApiTests(unittest.TestCase):
             self.assertEqual("https://miniapp.example.com", response.getheader("Access-Control-Allow-Origin"))
             self.assertEqual("GET, POST, OPTIONS", response.getheader("Access-Control-Allow-Methods"))
             self.assertIn("Authorization", response.getheader("Access-Control-Allow-Headers") or "")
+            self.assertIn("X-Miniapp-Request-Id", response.getheader("Access-Control-Allow-Headers") or "")
             conn.close()
         finally:
             server.shutdown()
