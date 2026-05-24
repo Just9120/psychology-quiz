@@ -144,6 +144,7 @@ class MiniAppApiTests(unittest.TestCase):
             self.assertEqual("GET, POST, OPTIONS", response.getheader("Access-Control-Allow-Methods"))
             self.assertIn("Authorization", response.getheader("Access-Control-Allow-Headers") or "")
             self.assertIn("X-Miniapp-Request-Id", response.getheader("Access-Control-Allow-Headers") or "")
+            self.assertEqual("600", response.getheader("Access-Control-Max-Age"))
             conn.close()
         finally:
             server.shutdown()
@@ -185,6 +186,45 @@ class MiniAppApiTests(unittest.TestCase):
         payload = json.loads(body)
         self.assertTrue(payload["ok"])
         self.assertEqual("in_progress", payload["runner_state"]["state"])
+
+    def test_simple_body_auth_for_answer_and_setup(self):
+        server = start_miniapp_api_server("127.0.0.1", 0, db_path=self.db, bot_token=self.bot_token, allowed_origin="https://miniapp.example.com")
+        t = threading.Thread(target=server.serve_forever, daemon=True); t.start()
+        try:
+            port = server.server_address[1]
+            conn = http.client.HTTPConnection("127.0.0.1", port, timeout=3)
+            answer_body = json.dumps({"init_data": self.init_data, "request_id": "rq_" + ("x" * 100), "payload": {"session_id": self.session_id, "question_id": 1, "selected_option_index": 0}})
+            conn.request("POST", "/miniapp/answer", body=answer_body, headers={"Content-Type": "text/plain;charset=UTF-8", "Origin": "https://miniapp.example.com"})
+            answer_resp = conn.getresponse()
+            self.assertEqual(200, answer_resp.status)
+            answer_payload = json.loads(answer_resp.read())
+            self.assertTrue(answer_payload["ok"])
+            self.assertIn(answer_payload["submission_status"], {"accepted", "duplicate", "stale_question"})
+            setup_body = json.dumps({"init_data": self.init_data, "request_id": "rq_setup", "payload": {"quiz_mode": "single", "category_ids": [1], "question_count": 5, "difficulty": "any", "user_id": 999}})
+            conn.request("POST", "/miniapp/setup", body=setup_body, headers={"Content-Type": "text/plain;charset=UTF-8", "Origin": "https://miniapp.example.com"})
+            setup_resp = conn.getresponse()
+            self.assertEqual(200, setup_resp.status)
+            setup_payload = json.loads(setup_resp.read())
+            self.assertTrue(setup_payload["ok"])
+            conn.close()
+        finally:
+            server.shutdown(); server.server_close()
+
+    def test_simple_body_rejects_missing_or_invalid_init_data(self):
+        server = start_miniapp_api_server("127.0.0.1", 0, db_path=self.db, bot_token=self.bot_token)
+        t = threading.Thread(target=server.serve_forever, daemon=True); t.start()
+        try:
+            port = server.server_address[1]
+            conn = http.client.HTTPConnection("127.0.0.1", port, timeout=3)
+            bad_body = json.dumps({"request_id": "rq_bad", "payload": {"session_id": self.session_id, "question_id": 1, "selected_option_index": 0}})
+            conn.request("POST", "/miniapp/answer", body=bad_body, headers={"Content-Type": "text/plain;charset=UTF-8"})
+            resp = conn.getresponse()
+            self.assertEqual(401, resp.status)
+            payload = json.loads(resp.read())
+            self.assertFalse(payload["ok"])
+            conn.close()
+        finally:
+            server.shutdown(); server.server_close()
 
 if __name__ == '__main__':
     unittest.main()

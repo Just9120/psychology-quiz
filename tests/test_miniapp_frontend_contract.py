@@ -70,13 +70,19 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_no_automatic_send_data_after_api_failures(self):
         self.assertIn("apiDiagState.attemptStatus = 'fetch_rejected';", self.content)
-        self.assertIn("showAnswerFallbackAction(payload);", self.content)
-        self.assertIn("fallbackBtn.textContent = 'Отправить через резервный режим Telegram';", self.content)
-        self.assertIn("warning.textContent = 'Резервный режим Telegram может закрыть Mini App.';", self.content)
         self.assertIn("setSetupStatus(e?.name === 'AbortError' ? 'api_timeout' : 'api_failed'", self.content)
-        self.assertIn("setSetupStatus('explicit_fallback_sendData');", self.content)
+        self.assertNotIn("setSetupStatus('explicit_fallback_sendData');", self.content)
         self.assertIn("if (answerSubmitInFlight) return;", self.content)
-        self.assertIn("'X-Miniapp-Request-Id': requestId", self.content)
+        self.assertNotIn("'X-Miniapp-Request-Id': requestId", self.content)
+        self.assertIn("function showAnswerFallbackAction(payload)", self.content)
+
+    def test_simple_body_transport_contract(self):
+        self.assertIn("headers: { 'Content-Type': 'text/plain;charset=UTF-8' }", self.content)
+        self.assertIn("init_data: initData", self.content)
+        self.assertIn("request_id: requestId", self.content)
+        self.assertIn("apiDiagState.answerTransport = 'simple_body';", self.content)
+        self.assertIn("apiDiagState.setupTransport = 'simple_body';", self.content)
+        self.assertNotIn("Authorization: `tma ${initData}`", self.content)
 
     def test_debug_diagnostics_include_safe_request_phases(self):
         self.assertIn("function buildMiniappRequestId()", self.content)

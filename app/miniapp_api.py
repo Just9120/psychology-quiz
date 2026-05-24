@@ -34,6 +34,13 @@ def _read_request_id(headers) -> str:
     return raw[:64]
 
 
+def _sanitize_request_id(raw: str) -> str:
+    raw = (raw or "").strip()
+    if not raw:
+        return ""
+    return raw[:64]
+
+
 class InitDataValidationError(ValueError):
     pass
 
@@ -100,6 +107,25 @@ def _extract_init_data(headers) -> str:
     if auth.startswith("tma "):
         return auth[4:].strip()
     return headers.get("X-Telegram-Init-Data", "").strip()
+
+
+def _extract_transport_payload(headers, body: bytes) -> tuple[str, bytes, str, str]:
+    header_init_data = _extract_init_data(headers)
+    if header_init_data:
+        return header_init_data, body, _read_request_id(headers), "header_auth"
+    try:
+        parsed = json.loads(body.decode("utf-8"))
+    except Exception:
+        return "", body, _read_request_id(headers), "simple_body"
+    if not isinstance(parsed, dict):
+        return "", body, _read_request_id(headers), "simple_body"
+    init_data = parsed.get("init_data")
+    request_id = _sanitize_request_id(str(parsed.get("request_id", "")))
+    payload = parsed.get("payload")
+    if isinstance(init_data, str) and isinstance(payload, dict):
+        payload_bytes = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        return init_data, payload_bytes, request_id or _read_request_id(headers), "simple_body"
+    return "", body, request_id or _read_request_id(headers), "simple_body"
 
 
 def build_state_response(
@@ -321,6 +347,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         self._set_common_headers()
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type, X-Telegram-Init-Data, X-Miniapp-Request-Id")
+        self.send_header("Access-Control-Max-Age", "600")
         self.end_headers()
         logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s", endpoint, request_id or "-", HTTPStatus.NO_CONTENT.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no", self.headers.get("Access-Control-Request-Method", ""), self.headers.get("Access-Control-Request-Headers", ""))
 
@@ -354,25 +381,28 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         started_at = time.time()
         endpoint = self.path.split("?")[0]
         request_id = _read_request_id(self.headers)
+        transport = "header_auth"
         if endpoint not in {"/miniapp/answer", "/miniapp/setup"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         length = int(self.headers.get("Content-Length", "0"))
         body = self.rfile.read(length)
+        init_data, payload_body, body_request_id, transport = _extract_transport_payload(self.headers, body)
+        request_id = body_request_id or request_id
         if endpoint == "/miniapp/answer":
             status, headers, data = build_answer_response(
                 self.db_path,
                 self.bot_token,
-                _extract_init_data(self.headers),
-                body,
+                init_data,
+                payload_body,
                 max_age_seconds=self.initdata_ttl_seconds,
             )
         else:
             status, headers, data = build_setup_response(
                 self.db_path,
                 self.bot_token,
-                _extract_init_data(self.headers),
-                body,
+                init_data,
+                payload_body,
                 max_age_seconds=self.initdata_ttl_seconds,
             )
         self.send_response(status)
@@ -388,14 +418,15 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
             if isinstance(payload, dict):
                 if isinstance(payload.get("error"), str):
                     error_code = payload["error"]
-            verified = verify_telegram_init_data(_extract_init_data(self.headers), self.bot_token, max_age_seconds=self.initdata_ttl_seconds)
+            verified = verify_telegram_init_data(init_data, self.bot_token, max_age_seconds=self.initdata_ttl_seconds)
             safe_user_id = str(verified.telegram_user_id)
         except Exception:
             pass
         logger.info(
-            "miniapp_api endpoint=%s request_id=%s method=POST status=%s duration_ms=%s telegram_user_id=%s error_code=%s",
+            "miniapp_api endpoint=%s request_id=%s transport=%s method=POST status=%s duration_ms=%s telegram_user_id=%s error_code=%s",
             endpoint,
             request_id or "-",
+            transport,
             status,
             int((time.time() - started_at) * 1000),
             safe_user_id,
