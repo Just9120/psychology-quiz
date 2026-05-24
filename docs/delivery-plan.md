@@ -114,3 +114,4 @@
 
 | #137-fix2 | Make Mini App API startup explicit opt-in (`MINIAPP_API_ENABLED`) with safe no-start when base URL missing | ✅ Done |
 | #140-polish | Mini App runner polish: debug-gated diagnostics, completed-state actions, readable `miniapp/index.html`, QA/docs refresh | ✅ Done |
+| #141-fix | Completed Mini App `Новая викторина` action now opens setup context (no completed-state reload loop) | ✅ Done |

@@ -350,6 +350,25 @@ def _build_miniapp_context(
     return context
 
 
+def _with_completed_setup_url_if_fit(
+    base_url: str,
+    context: dict,
+    categories,
+    *,
+    api_base_url: str | None = None,
+) -> dict:
+    if context.get("mode") != "completed":
+        return context
+
+    setup_context = _build_miniapp_context(categories, None, mode="setup", api_base_url=api_base_url)
+    setup_url = build_miniapp_url(base_url, setup_context)
+    context_with_setup = dict(context)
+    context_with_setup["setup_url"] = setup_url
+    if len(build_miniapp_url(base_url, context_with_setup)) <= MAX_MINIAPP_URL_LENGTH:
+        return context_with_setup
+    return context
+
+
 def build_miniapp_url_with_fallback(
     base_url: str,
     categories,
@@ -396,6 +415,12 @@ def build_miniapp_url_with_fallback(
         abandons_active_session=abandons_active_session,
         api_base_url=api_base_url,
     )
+    primary_context = _with_completed_setup_url_if_fit(
+        base_url,
+        primary_context,
+        categories,
+        api_base_url=api_base_url,
+    )
     primary_url = build_miniapp_url(base_url, primary_context)
     if len(primary_url) <= MAX_MINIAPP_URL_LENGTH:
         return primary_url, False
@@ -406,6 +431,12 @@ def build_miniapp_url_with_fallback(
         mode=preferred_mode,
         compact=True,
         abandons_active_session=abandons_active_session,
+        api_base_url=api_base_url,
+    )
+    compact_context = _with_completed_setup_url_if_fit(
+        base_url,
+        compact_context,
+        categories,
         api_base_url=api_base_url,
     )
     compact_url = build_miniapp_url(base_url, compact_context)

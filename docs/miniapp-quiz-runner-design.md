@@ -176,6 +176,8 @@ Recommend **Hybrid (Option C)** as safest next step:
 - setup mode includes categories and setup payload.
 - runner mode includes runner_state and omits categories.
 - completed mode includes result runner_state and omits categories.
+- completed mode now also attempts to include `setup_url` that points to a setup-context Mini App launch (with categories and optional `api_base_url`) when it fits URL limits.
+- if completed `setup_url` cannot fit launch URL limits, frontend must not silently reload completed state; it shows explicit reopen `/ui` guidance.
 - If URL is too long, compact runner/setup state is used; if still too long, /ui is rejected and user is sent to /quiz.
 
 

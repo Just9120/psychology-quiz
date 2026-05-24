@@ -208,13 +208,8 @@
         showLoadError();
       } else {
         const list = Array.isArray(ctx.categories) ? ctx.categories : [];
-        if (setupMode) {
-          form.hidden = false;
-          if (ctx?.abandons_active_session === true) {
-            setupWarning.hidden = false;
-            setupWarning.textContent = 'Запуск новой викторины завершит текущую активную попытку.';
-            go.textContent = 'Начать новую викторину';
-          }
+        const renderSetupCategories = () => {
+          cats.replaceChildren();
           list.forEach((c) => {
             const id = Number(c.id);
             if (!Number.isInteger(id)) return;
@@ -226,7 +221,27 @@
             label.appendChild(document.createTextNode(` ${String(c.name ?? '')}`));
             cats.appendChild(label);
           });
+        };
+        if (setupMode) {
+          form.hidden = false;
+          if (ctx?.abandons_active_session === true) {
+            setupWarning.hidden = false;
+            setupWarning.textContent = 'Запуск новой викторины завершит текущую активную попытку.';
+            go.textContent = 'Начать новую викторину';
+          }
+          renderSetupCategories();
         }
+        window.__miniappRenderSetupInPlace = () => {
+          if (list.length === 0) return false;
+          questionView.hidden = true;
+          questionView.replaceChildren();
+          form.hidden = false;
+          setupWarning.hidden = true;
+          renderSetupCategories();
+          validate();
+          runnerState.textContent = 'Выберите параметры и нажмите «Начать викторину».';
+          return true;
+        };
       }
 
       function selectedCategoryIds() {
@@ -306,7 +321,11 @@
             location.href = ctx.setup_url;
             return;
           }
-          location.reload();
+          if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
+            return;
+          }
+          runnerState.textContent =
+            'Чтобы начать новую викторину, закройте Mini App и отправьте /ui заново.';
         });
         actions.appendChild(restart);
 

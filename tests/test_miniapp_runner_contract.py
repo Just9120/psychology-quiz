@@ -338,6 +338,29 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
         self.assertEqual("completed", ctx.get("mode"))
         self.assertEqual([], ctx.get("categories"))
+        self.assertIn("setup_url", ctx)
+        self.assertNotEqual(url, ctx.get("setup_url"))
+        self.assertIn("context=", ctx.get("setup_url"))
+
+    def test_completed_context_setup_url_includes_api_base_when_configured(self):
+        self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        url, _ = build_miniapp_url_with_fallback(
+            "https://example.com/ui",
+            [{"id": 1, "name": "Category 1"}],
+            state,
+            api_base_url="https://api.example.com",
+        )
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        setup_url = ctx.get("setup_url")
+        self.assertIsInstance(setup_url, str)
+        setup_encoded = setup_url.split("context=", 1)[1]
+        setup_padded = setup_encoded + ("=" * ((4 - len(setup_encoded) % 4) % 4))
+        setup_ctx = json.loads(base64.urlsafe_b64decode(setup_padded.encode("ascii")).decode("utf-8"))
+        self.assertEqual("setup", setup_ctx.get("mode"))
+        self.assertEqual("https://api.example.com", setup_ctx.get("api_base_url"))
 
     def test_setup_context_still_includes_categories(self):
         user = create_or_load_user(self.conn, 3333, "u4", "U4", None)
