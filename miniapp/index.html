@@ -186,6 +186,36 @@
       const setupOptionsCache = {
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
       };
+      let setupRenderCategories = null;
+
+      function clearRunnerView() {
+        questionView.replaceChildren();
+        questionView.hidden = true;
+      }
+
+      function showSetupMode({ message = 'Выберите параметры и нажмите «Начать викторину».', clearError = true } = {}) {
+        clearRunnerView();
+        form.hidden = false;
+        setupWarning.hidden = true;
+        if (clearError) err.textContent = '';
+        if (typeof setupRenderCategories === 'function') {
+          setupRenderCategories();
+        }
+        validate();
+        runnerState.textContent = message;
+      }
+
+      function showRunnerMode() {
+        form.hidden = true;
+        setupWarning.hidden = true;
+        questionView.hidden = false;
+      }
+
+      function showCompletedMode() {
+        form.hidden = true;
+        setupWarning.hidden = true;
+        questionView.hidden = false;
+      }
 
       function detectContextMode() {
         if (!ctx || ctx.type !== 'miniapp_setup_context' || ctx.version !== 1) return 'invalid';
@@ -221,7 +251,7 @@
       } else {
         const list = Array.isArray(ctx.categories) ? ctx.categories : [];
         setupOptionsCache.categories = list;
-        const renderSetupCategories = () => {
+        setupRenderCategories = () => {
           const activeCategories = Array.isArray(setupOptionsCache.categories) ? setupOptionsCache.categories : [];
           cats.replaceChildren();
           activeCategories.forEach((c) => {
@@ -243,18 +273,12 @@
             setupWarning.textContent = 'Запуск новой викторины завершит текущую активную попытку.';
             go.textContent = 'Начать новую викторину';
           }
-          renderSetupCategories();
+          setupRenderCategories();
         }
         window.__miniappRenderSetupInPlace = () => {
           const activeCategories = Array.isArray(setupOptionsCache.categories) ? setupOptionsCache.categories : [];
           if (activeCategories.length === 0) return false;
-          questionView.hidden = true;
-          questionView.replaceChildren();
-          form.hidden = false;
-          setupWarning.hidden = true;
-          renderSetupCategories();
-          validate();
-          runnerState.textContent = 'Выберите параметры и нажмите «Начать викторину».';
+          showSetupMode();
           return true;
         };
       }
@@ -395,8 +419,8 @@
       }
 
       function renderResult(result) {
+        showCompletedMode();
         questionView.replaceChildren();
-        questionView.hidden = false;
 
         const title = document.createElement('h4');
         title.textContent = 'Викторина завершена';
@@ -464,9 +488,17 @@
           selected_option_index: selectedOptionIndex,
         };
 
-        [...questionView.querySelectorAll('button')].forEach((b) => {
-          b.disabled = true;
-        });
+        const disableButtons = () => {
+          [...questionView.querySelectorAll('button')].forEach((b) => {
+            b.disabled = true;
+          });
+        };
+        const enableButtons = () => {
+          [...questionView.querySelectorAll('button')].forEach((b) => {
+            b.disabled = false;
+          });
+        };
+        disableButtons();
 
         const initData = tg?.initData || '';
         apiDiagState.initDataPresent = Boolean(initData);
@@ -498,8 +530,13 @@
               if (answerJson?.ok === true && answerJson?.runner_state) {
                 apiDiagState.attemptStatus = 'success';
                 renderApiDiagnostics();
-                renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
-                return;
+                try {
+                  renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
+                  return;
+                } catch (_) {
+                  setFallbackStatus('Ошибка UI после ответа. Используется резервный режим.', 'ui_render_failed');
+                  enableButtons();
+                }
               }
               if (answerJson?.ok === true && !answerJson?.runner_state) {
                 setFallbackStatus(
@@ -517,9 +554,7 @@
 
         if (!tg?.sendData) {
           runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
-          [...questionView.querySelectorAll('button')].forEach((b) => {
-            b.disabled = false;
-          });
+          enableButtons();
           return;
         }
 
@@ -531,12 +566,11 @@
             'Ответ отправлен через резервный режим Telegram. При необходимости откройте /ui для продолжения.';
         } catch {
           runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
-          [...questionView.querySelectorAll('button')].forEach((b) => {
-            b.disabled = false;
-          });
+          enableButtons();
         }
       }
       function renderAnswerFeedback(snapshot, selectedOptionIndex, feedback, nextState) {
+        showRunnerMode();
         questionView.hidden = false;
         const optionButtons = [...questionView.querySelectorAll('ol button')];
         optionButtons.forEach((btn) => btn.disabled = true);
@@ -581,6 +615,7 @@
       }
 
       function renderQuestion(snapshot) {
+        showRunnerMode();
         questionView.replaceChildren();
         if (!snapshot || snapshot.status !== 'ok' || !Array.isArray(snapshot.options) || typeof snapshot.question_text !== 'string') {
           runnerState.textContent =
@@ -589,8 +624,6 @@
         }
 
         runnerState.textContent = 'Ответы отправляются в этом окне. Выберите вариант, чтобы перейти к следующему вопросу.';
-        questionView.hidden = false;
-
         const header = document.createElement('h4');
         const order = Number(snapshot.order_index);
         const total = Number(snapshot.total_questions);
@@ -621,6 +654,7 @@
       function renderRunnerState(state, { preferLaunchCompact = false } = {}) {
         const compact = normalizeCompactRunnerQuestion(ctx?.runner_q);
         if (preferLaunchCompact && compact) {
+          showRunnerMode();
           renderQuestion(compact);
           renderProgress({
             server_derived: true,
@@ -647,6 +681,7 @@
         }
 
         if (state.state === 'in_progress') {
+          showRunnerMode();
           renderQuestion(state.current_question);
           renderProgress(state.progress);
           if (state.compact_progress_only === true && !state.current_question) {
@@ -695,8 +730,10 @@
             } catch {}
             if (resp.ok && data?.ok && data?.runner_state) {
               setSetupStatus('api_success');
+              form.hidden = true;
+              setupWarning.hidden = true;
+              err.textContent = '';
               renderRunnerState(data.runner_state, { preferLaunchCompact: false });
-              go.disabled = false;
               return;
             }
             setSetupStatus('api_failed', String(resp.status || 'non_ok'));
