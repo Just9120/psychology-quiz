@@ -565,18 +565,20 @@
           renderApiDiagnostics();
           runnerState.textContent = 'Отправка ответа через API...';
           try {
-            const answerResp = await apiFetch(`${apiBase}/miniapp/answer`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `tma ${initData}`,
-                'X-Miniapp-Request-Id': requestId,
-              },
-              body: JSON.stringify({
+            apiDiagState.answerTransport = 'simple_body';
+            const simpleBody = {
+              init_data: initData,
+              request_id: requestId,
+              payload: {
                 session_id: sessionId,
                 question_id: questionId,
                 selected_option_index: selectedOptionIndex,
-              }),
+              },
+            };
+            const answerResp = await apiFetch(`${apiBase}/miniapp/answer`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+              body: JSON.stringify(simpleBody),
             });
             apiDiagState.answerPhase = 'response_headers_received';
             apiDiagState.answerElapsedMs = Date.now() - startedAt;
@@ -623,29 +625,12 @@
             renderApiDiagnostics();
             runnerState.textContent = 'Не удалось отправить ответ через API. Попробуйте снова. Если ошибка повторяется, закройте и откройте /ui заново.';
             enableButtons();
-            showAnswerFallbackAction(payload);
             answerSubmitInFlight = false;
             return;
           }
         }
-
-        if (!tg?.sendData) {
-          runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
-          enableButtons();
-          answerSubmitInFlight = false;
-          return;
-        }
-
-        try {
-          apiDiagState.attemptStatus = 'explicit_fallback_sendData';
-          renderApiDiagnostics();
-          tg.sendData(JSON.stringify(payload));
-          runnerState.textContent =
-            'Ответ отправлен через резервный режим Telegram. При необходимости откройте /ui для продолжения.';
-        } catch {
-          runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
-          enableButtons();
-        }
+        runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
+        enableButtons();
         answerSubmitInFlight = false;
       }
       function renderAnswerFeedback(snapshot, selectedOptionIndex, feedback, nextState) {
@@ -799,10 +784,12 @@
           runnerState.textContent = 'Запуск викторины...';
           err.textContent = '';
           try {
+            const requestId = buildMiniappRequestId();
+            apiDiagState.setupTransport = 'simple_body';
             const resp = await apiFetch(`${apiBase}/miniapp/setup`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `tma ${tg.initData}`, 'X-Miniapp-Request-Id': buildMiniappRequestId() },
-              body: JSON.stringify(payload),
+              headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+              body: JSON.stringify({ init_data: tg.initData, request_id: requestId, payload }),
             }, 25000);
             let data = null;
             try {
@@ -834,14 +821,8 @@
           err.textContent = 'API недоступен и sendData недоступен. Переоткройте /ui.';
           return;
         }
-        try {
-          setSetupStatus('explicit_fallback_sendData');
-          tg.sendData(JSON.stringify(payload));
-          runnerState.textContent = 'Setup отправлен через резервный режим Telegram.';
-        } catch {
-          setSetupStatus('fallback_failed');
-          err.textContent = 'Не удалось отправить setup-данные. Попробуйте снова или используйте /quiz.';
-        }
+        setSetupStatus('fallback_unavailable');
+        err.textContent = 'API недоступен. Повторите попытку или используйте /quiz.';
       });
 
       (async () => {
