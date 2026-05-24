@@ -121,6 +121,9 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_state_advance_helper_contract(self):
         self.assertIn('function didRunnerStateAdvanceForAnswer(submittedSessionId, submittedQuestionId, runnerState)', self.content)
+        self.assertIn('const nestedSessionId = Number(runnerState.session?.session_id);', self.content)
+        self.assertIn('const resolvedSessionId = Number.isInteger(nestedSessionId) ? nestedSessionId : (', self.content)
+        self.assertIn('if (Number.isInteger(resolvedSessionId) && resolvedSessionId !== Number(submittedSessionId)) return false;', self.content)
         self.assertIn("stateName === 'completed'", self.content)
         self.assertIn("statusName === 'no_current_question'", self.content)
         self.assertIn('currentQuestionId !== Number(submittedQuestionId);', self.content)

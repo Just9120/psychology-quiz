@@ -541,10 +541,15 @@
       }
       function didRunnerStateAdvanceForAnswer(submittedSessionId, submittedQuestionId, runnerState) {
         if (!runnerState || typeof runnerState !== 'object') return false;
+        const nestedSessionId = Number(runnerState.session?.session_id);
+        const topLevelSessionId = Number(runnerState.session_id);
+        const resolvedSessionId = Number.isInteger(nestedSessionId) ? nestedSessionId : (
+          Number.isInteger(topLevelSessionId) ? topLevelSessionId : null
+        );
+        if (Number.isInteger(resolvedSessionId) && resolvedSessionId !== Number(submittedSessionId)) return false;
         const stateName = typeof runnerState.state === 'string' ? runnerState.state : '';
         const statusName = typeof runnerState.status === 'string' ? runnerState.status : '';
         if (stateName === 'completed' || statusName === 'completed' || statusName === 'no_current_question') return true;
-        if (Number.isInteger(Number(runnerState.session_id)) && Number(runnerState.session_id) !== Number(submittedSessionId)) return false;
         const currentQuestionId = Number(runnerState.current_question?.question_id);
         if (!Number.isInteger(currentQuestionId)) return false;
         return currentQuestionId !== Number(submittedQuestionId);
