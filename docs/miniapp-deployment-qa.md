@@ -163,8 +163,10 @@
 - [ ] Server logs contain `POST /miniapp/answer` during successful in-place answer flow.
 - [ ] Diagnostics never expose secrets (no raw `initData`, no authorization header/token values, no full secret-bearing URLs; origin-only is acceptable).
 - [ ] Completed result screen shows a clear next action (`Новая викторина` and optional `Закрыть Mini App`).
-- [ ] Clicking `Новая викторина` from completed result opens a setup form/context and does not reload the same completed URL.
-- [ ] If `setup_url` is unavailable (URL-length fallback), Mini App shows explicit instruction: `Чтобы начать новую викторину, закройте Mini App и отправьте /ui заново.`
+- [ ] Clicking `Новая викторина` from completed result opens setup in the same Mini App window (without close/reopen).
+- [ ] Completed `Новая викторина` can fetch setup options via authenticated `GET /miniapp/setup-options` when launch context has no categories.
+- [ ] Setup submit after completed restart uses `POST /miniapp/setup` and starts a new quiz in-place.
+- [ ] Explicit close + `/ui` fallback message is shown only as a final fallback path.
 
 ## 9) Mini App API route (PR #137 hardening)
 - Narrow API runs in the bot process (`MINIAPP_API_BIND`/`MINIAPP_API_PORT`) alongside long polling.

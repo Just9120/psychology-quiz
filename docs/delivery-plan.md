@@ -119,3 +119,4 @@
 | 2026-05-24 | Mini App runner stabilization PR | Added `/miniapp/setup`, server-authoritative startup hydration, timeout/recovery UX, and post-answer feedback with next-step control. |
 
 | 2026-05-24 | Mini App runner follow-up after #144 | Fixed setup API observability/recovery, in-place `Новая викторина` setup restart, and cache-busting launch URL version (`v=ui-polish-v2`). |
+| 2026-05-24 | Focused completed→new quiz fix after #145 | Added authenticated `GET /miniapp/setup-options` and completed-state API-first in-window setup restart when launch context is missing categories/setup URL. |

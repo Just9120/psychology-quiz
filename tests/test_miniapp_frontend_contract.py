@@ -25,6 +25,11 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertNotIn("ctx.setup_url.includes('api_base_url=')", self.content)
         self.assertIn('const safeSetupUrl = getSafeSetupUrl();', self.content)
         self.assertIn('if (safeSetupUrl) {', self.content)
+        self.assertIn("await apiFetch(`${apiBase}/miniapp/setup-options`", self.content)
+        self.assertIn("if (apiBase && tg?.initData) {", self.content)
+        self.assertIn("setupOptionsCache.categories = categories;", self.content)
+        self.assertIn("ctx.categories = categories;", self.content)
+        self.assertIn('Чтобы начать новую викторину, закройте Mini App и отправьте /ui заново.', self.content)
 
     def test_setup_prefers_api_and_no_close_on_api_path(self):
         self.assertIn("/miniapp/setup", self.content)

@@ -12,6 +12,7 @@ import urllib.parse
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
 from app.miniapp_api import (
+    build_setup_options_response,
     build_setup_response,
     build_answer_response,
     build_state_response,
@@ -153,6 +154,24 @@ class MiniAppApiTests(unittest.TestCase):
         )
         self.assertEqual(401, code)
         self.assertFalse(json.loads(body)["ok"])
+
+    def test_setup_options_requires_auth(self):
+        code, _, body = build_setup_options_response(self.db, self.bot_token, "")
+        self.assertEqual(401, code)
+        self.assertFalse(json.loads(body)["ok"])
+
+    def test_setup_options_uses_verified_user_and_returns_safe_payload(self):
+        code, _, body = build_setup_options_response(self.db, self.bot_token, self.init_data)
+        self.assertEqual(200, code)
+        payload = json.loads(body)
+        self.assertTrue(payload["ok"])
+        self.assertIn("setup_options", payload)
+        self.assertIn("categories", payload["setup_options"])
+        self.assertEqual([{"id": 1, "name": "C"}], payload["setup_options"]["categories"])
+        dumped = json.dumps(payload, ensure_ascii=False)
+        self.assertNotIn("is_correct", dumped)
+        self.assertNotIn("correct_option_index", dumped)
+        self.assertNotIn("score", dumped)
 
     def test_setup_uses_verified_user_not_payload_user(self):
         code, _, body = build_setup_response(
