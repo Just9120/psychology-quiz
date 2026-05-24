@@ -319,6 +319,18 @@
         }
       }
 
+      function getSafeSetupUrl() {
+        if (!(ctx?.setup_url && typeof ctx.setup_url === 'string')) return null;
+        try {
+          const setupUrl = new URL(ctx.setup_url, location.origin);
+          if (setupUrl.origin !== location.origin) return null;
+          if (!(setupUrl.pathname === '/ui' || setupUrl.pathname === '/miniapp' || setupUrl.pathname === '/miniapp/')) return null;
+          return setupUrl.toString();
+        } catch (_) {
+          return null;
+        }
+      }
+
       function buildCompletionActions() {
         const actions = document.createElement('div');
 
@@ -330,8 +342,9 @@
             setSetupStatus('ready_for_submit');
             return;
           }
-          if (ctx?.setup_url && typeof ctx.setup_url === 'string' && ctx.setup_url.includes('api_base_url=')) {
-            location.href = ctx.setup_url;
+          const safeSetupUrl = getSafeSetupUrl();
+          if (safeSetupUrl) {
+            location.href = safeSetupUrl;
             return;
           }
           runnerState.textContent =

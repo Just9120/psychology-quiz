@@ -18,8 +18,12 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("restart.textContent = 'Новая викторина'", self.content)
         self.assertIn("closeBtn.textContent = 'Закрыть Mini App'", self.content)
         self.assertNotIn('location.reload();', self.content)
+        self.assertIn('function getSafeSetupUrl()', self.content)
+        self.assertIn('new URL(ctx.setup_url, location.origin)', self.content)
         self.assertIn("setSetupStatus('ready_for_submit')", self.content)
-        self.assertIn("ctx.setup_url.includes('api_base_url=')", self.content)
+        self.assertNotIn("ctx.setup_url.includes('api_base_url=')", self.content)
+        self.assertIn('const safeSetupUrl = getSafeSetupUrl();', self.content)
+        self.assertIn('if (safeSetupUrl) {', self.content)
 
     def test_setup_prefers_api_and_no_close_on_api_path(self):
         self.assertIn("/miniapp/setup", self.content)
