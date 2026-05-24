@@ -103,7 +103,8 @@
     </form>
 
     <script>
-      const FRONTEND_VERSION = 'ui-polish-v2';
+      const FRONTEND_VERSION = 'ui-polish-v3';
+      const ANSWER_API_TIMEOUT_MS = 4000;
 
       const err = document.getElementById('err');
       const form = document.getElementById('f');
@@ -628,7 +629,7 @@
           apiDiagState.attemptStatus = 'api_attempted';
           apiDiagState.answerPhase = 'fetch_started';
           renderApiDiagnostics();
-          runnerState.textContent = 'Отправка ответа через API...';
+          runnerState.textContent = 'Отправляю ответ...';
           try {
             apiDiagState.answerTransport = 'simple_body';
             const answerResult = await apiFetchWithRetry(
@@ -646,7 +647,7 @@
                   },
                 }),
               }),
-              9000,
+              ANSWER_API_TIMEOUT_MS,
               {
                 retries: 2,
                 requestIdFactory: (attempt) => `${requestBaseId}_a${attempt}`,
@@ -658,7 +659,7 @@
                   apiDiagState.answerFinalPhase = errorKind;
                   apiDiagState.answerElapsedMs = Date.now() - startedAt;
                   renderApiDiagnostics();
-                  runnerState.textContent = 'Ответ не отправился, повторная попытка...';
+                  runnerState.textContent = 'Сеть подвисла, пробую отправить ещё раз...';
                 },
                 onRetryStarted: (attempt, retries) => {
                   apiDiagState.answerAttempt = attempt;
@@ -666,6 +667,9 @@
                   apiDiagState.answerPhase = attempt === 1 ? 'fetch_started' : 'retry_started';
                   apiDiagState.answerElapsedMs = Date.now() - startedAt;
                   apiDiagState.answerRequestId = `${requestBaseId}_a${attempt}`;
+                  if (attempt > 1) {
+                    runnerState.textContent = 'Повторная отправка ответа...';
+                  }
                   renderApiDiagnostics();
                 },
               },
