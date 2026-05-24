@@ -149,7 +149,9 @@
 - [ ] Force transient answer API failure/timeout shows `Сеть подвисла, пробую отправить ещё раз...`, keeps answer buttons disabled during retry, and auto-recovers on successful retry.
 - [ ] При transient timeout/fetch-failure на ответ Mini App сначала делает `GET /miniapp/state` (pre-retry resync) перед следующим `POST /miniapp/answer`.
 - [ ] Если первый `POST /miniapp/answer` был принят, но ответ потерялся в сети/WebView, Mini App восстанавливает UI из `runner_state` без duplicate `POST`.
-- [ ] Если `GET /miniapp/state` не показал продвижение по вопросу/сессии, Mini App продолжает bounded retry `POST /miniapp/answer` (`_a1/_a2/_a3`).
+- [ ] После `POST /miniapp/answer` (`_a1`) Mini App запускает ранний hedge-таймер и может выполнить `GET /miniapp/state` до полного timeout `_a1`.
+- [ ] Если ранний `GET /miniapp/state` показал продвижение по вопросу/сессии, Mini App восстанавливается без дублирующего `POST`.
+- [ ] Если ранний `GET /miniapp/state` не показал продвижение, Mini App запускает bounded retry `POST /miniapp/answer` (`_a1/_a2/_a3`) без ожидания полного timeout первого запроса.
 - [ ] If answer retries are exhausted, Mini App shows `Не удалось отправить ответ через API. Попробуйте снова.`, re-enables answer buttons, and keeps manual retry on the same question.
 - [ ] Force transient setup API failure/timeout shows `Запуск не удался, повторная попытка...`, keeps setup submit disabled during retry, and auto-recovers on successful retry.
 - [ ] If setup retries are exhausted, setup form remains visible, `Начать викторину` is re-enabled, and user can retry manually.
@@ -228,7 +230,7 @@
   - `transport` — `simple_body` или `header_auth`;
   - `phase`/`final` — ключевые фазы (`preparing`, `fetch_started`, `retry_scheduled`, `retry_started`, `retry_exhausted`, `state_resync_*`, `api_success`, `ui_render_failed`);
   - `elapsed_ms`, `retry`, `attempt`;
-  - `req_id` с attempt suffix (`rq_xxx_a1`, `rq_xxx_a2`, ...).
+  - `req_id` с attempt suffix (`rq_xxx_a1`, `rq_xxx_a2`, ...); в smoke-паттерне допустимо увидеть ранний `/miniapp/state` между `_a1` и `_a2`.
 - Безопасность: diagnostics и логи не должны содержать raw `initData`, `Authorization`, bot token, полный профиль пользователя, текст вопроса/ответов.
 - Если в debug UI есть `req_id`, но backend не видит POST c тем же `request_id`, проблема до входа запроса в API (WebView/network/proxy path между клиентом и сервером).
 - Если backend видит POST c `request_id`, используйте статус/error_code и duration для локализации причины.
