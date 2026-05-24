@@ -43,13 +43,16 @@
 - Проверить валидность HTTPS URL (сертификат/доступность).
 - В BotFather настроить Mini App domain на `miniapp.librechat.online` (без коммита токенов/секретов в репозиторий).
 - API домен остаётся `quiz-api.librechat.online`; разрешённый origin API остаётся `https://miniapp.librechat.online`.
-- Primary launch path для `/ui` должен использовать inline WebApp button (не plain URL button), чтобы Telegram передавал `WebApp.initData`.
+- Primary launch path для `/ui` должен использовать свежую inline WebApp кнопку (не plain URL button), чтобы Telegram передавал `WebApp.initData`.
+- Persistent reply-keyboard WebApp launch-кнопки для Mini App намеренно не используются: они могут сохранить stale launch context.
 
 ## 5) Manual QA checklist
 
 ### A. Private chat checks
 - [ ] `/ui` без `MINI_APP_URL` показывает fallback.
 - [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает primary inline кнопку открытия Mini App.
+- [ ] `/ui` не показывает persistent bottom WebApp reply-кнопки для Mini App (только стандартное главное меню).
+- [ ] Если пользователь видит `API недоступен`, закрыть Mini App, отправить свежий `/ui` и открыть новую inline-кнопку.
 - [ ] `/ui` при отсутствии активных категорий показывает no-categories fallback.
 - [ ] `/ui` вне private chat корректно отклоняется.
 

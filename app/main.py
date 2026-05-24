@@ -501,20 +501,6 @@ def build_miniapp_launch_inline_keyboard(
         keyboard.append([InlineKeyboardButton("🆕 Новый setup в Mini App", web_app=WebAppInfo(url=force_setup_url))])
     return InlineKeyboardMarkup(keyboard)
 
-def build_miniapp_open_keyboard(
-    url: str,
-    *,
-    force_setup_url: str | None = None,
-    reopen_result: bool = False,
-) -> ReplyKeyboardMarkup:
-    first_label = "📊 Показать результат в Mini App" if reopen_result else "🧪 Продолжить в Mini App"
-    keyboard = [[KeyboardButton(first_label, web_app=WebAppInfo(url=url))]]
-    if force_setup_url:
-        keyboard.append([KeyboardButton("🆕 Новый setup в Mini App", web_app=WebAppInfo(url=force_setup_url))])
-    keyboard.append([KeyboardButton("🎯 Начать викторину")])
-    return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True, is_persistent=True)
-
-
 async def safe_reply(update: Update, text: str) -> None:
     if update.message:
         await update.message.reply_text(text)
@@ -790,8 +776,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         ),
     )
     await update.message.reply_text(
-        "Резервный способ запуска Mini App через reply-кнопки (если inline недоступен):",
-        reply_markup=build_miniapp_open_keyboard(miniapp_url, force_setup_url=force_setup_url if has_active else None),
+        "Если Mini App не открылся, отправьте /ui заново и используйте свежую inline-кнопку.",
     )
 
 
