@@ -145,7 +145,7 @@
 - [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
 - [ ] Force API failure (bad base URL) falls back to `sendData` behavior and remains recoverable via `/ui` reopen.
 - [ ] Production Mini App UI does **not** show diagnostics by default.
-- [ ] Debug diagnostics are visible only when opened with `?debug=1` (or debug context flag) and remain hidden otherwise.
+- [ ] Debug diagnostics are visible only when opened with `?debug=1` (or debug context flag) and remain hidden otherwise, including setup path statuses (`api_attempted/api_success/api_failed/fallback_sendData`).
 - [ ] После открытия через primary `/ui` кнопку диагностика показывает `initData: yes`.
 - [ ] Diagnostic line shows:
   - frontend version marker value
@@ -192,3 +192,5 @@
 
 - [ ] Проверить сценарий: completed → «Новая викторина» → setup остаётся на экране (авто-hydration не перерисовывает latest completed).
 - [ ] Проверить, что после ответа UI показывает: «Верно/Неверно», «Ваш ответ», «Правильный ответ», пояснение (если есть), затем кнопку «Далее».
+
+- [ ] Server logs contain `POST /miniapp/setup` after setup submit in /ui API path.

@@ -103,7 +103,7 @@
     </form>
 
     <script>
-      const FRONTEND_VERSION = 'ui-polish-v1';
+      const FRONTEND_VERSION = 'ui-polish-v2';
 
       const err = document.getElementById('err');
       const form = document.getElementById('f');
@@ -179,6 +179,8 @@
         configured: false,
         initDataPresent: false,
         attemptStatus: 'not_attempted',
+        setupStatus: 'not_attempted',
+        setupErrorCode: '',
         apiOrigin: '',
       };
 
@@ -200,7 +202,8 @@
         apiDiag.textContent =
           `API diag — frontend: ${FRONTEND_VERSION} · mode: ${mode} · configured: ` +
           `${apiDiagState.configured ? 'yes' : 'no'} · initData: ${apiDiagState.initDataPresent ? 'yes' : 'no'} ` +
-          `· status: ${apiDiagState.attemptStatus}${origin}`;
+          `· answer: ${apiDiagState.attemptStatus} · setup: ${apiDiagState.setupStatus}` +
+          `${apiDiagState.setupErrorCode ? ` · setup_code: ${apiDiagState.setupErrorCode}` : ''}${origin}`;
       }
 
       function showLoadError() {
@@ -316,6 +319,18 @@
         }
       }
 
+      function getSafeSetupUrl() {
+        if (!(ctx?.setup_url && typeof ctx.setup_url === 'string')) return null;
+        try {
+          const setupUrl = new URL(ctx.setup_url, location.origin);
+          if (setupUrl.origin !== location.origin) return null;
+          if (!(setupUrl.pathname === '/' || setupUrl.pathname === '/ui' || setupUrl.pathname === '/miniapp' || setupUrl.pathname === '/miniapp/')) return null;
+          return setupUrl.toString();
+        } catch (_) {
+          return null;
+        }
+      }
+
       function buildCompletionActions() {
         const actions = document.createElement('div');
 
@@ -323,11 +338,13 @@
         restart.type = 'button';
         restart.textContent = 'Новая викторина';
         restart.addEventListener('click', () => {
-          if (ctx?.setup_url && typeof ctx.setup_url === 'string') {
-            location.href = ctx.setup_url;
+          if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
+            setSetupStatus('ready_for_submit');
             return;
           }
-          if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
+          const safeSetupUrl = getSafeSetupUrl();
+          if (safeSetupUrl) {
+            location.href = safeSetupUrl;
             return;
           }
           runnerState.textContent =
@@ -391,6 +408,11 @@
         apiDiagState.attemptStatus = status;
         renderApiDiagnostics();
         runnerState.textContent = text;
+      }
+      function setSetupStatus(status, code = '') {
+        apiDiagState.setupStatus = status;
+        apiDiagState.setupErrorCode = code;
+        renderApiDiagnostics();
       }
 
       async function apiFetch(url, options = {}, timeoutMs = 9000) {
@@ -626,30 +648,49 @@
         };
 
         if (apiBase && tg?.initData) {
+          setSetupStatus('api_attempted');
           go.disabled = true;
           runnerState.textContent = 'Запуск викторины...';
+          err.textContent = '';
           try {
             const resp = await apiFetch(`${apiBase}/miniapp/setup`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', Authorization: `tma ${tg.initData}` },
               body: JSON.stringify(payload),
             });
-            const data = await resp.json();
+            let data = null;
+            try {
+              data = await resp.json();
+            } catch {}
             if (resp.ok && data?.ok && data?.runner_state) {
+              setSetupStatus('api_success');
               renderRunnerState(data.runner_state, { preferLaunchCompact: false });
               go.disabled = false;
               return;
             }
-          } catch {}
+            setSetupStatus('api_failed', String(resp.status || 'non_ok'));
+            err.textContent = 'Не удалось запустить викторину через API. Попробуйте снова или используйте резервный режим.';
+            runnerState.textContent = 'Запуск через API не удался. Можно повторить попытку или отправить через Telegram.';
+          } catch (e) {
+            setSetupStatus('api_failed', e?.name === 'AbortError' ? 'timeout' : 'network_error');
+            err.textContent = e?.name === 'AbortError'
+              ? 'Таймаут запуска викторины через API. Попробуйте снова.'
+              : 'Сетевая ошибка запуска викторины через API. Попробуйте снова.';
+            runnerState.textContent = 'Запуск через API не удался. Можно повторить попытку или отправить через Telegram.';
+          }
           go.disabled = false;
         }
         if (!tg?.sendData) {
+          setSetupStatus('fallback_unavailable');
           err.textContent = 'API недоступен и sendData недоступен. Переоткройте /ui.';
           return;
         }
         try {
+          setSetupStatus('fallback_sendData');
           tg.sendData(JSON.stringify(payload));
+          runnerState.textContent = 'Setup отправлен через резервный режим Telegram.';
         } catch {
+          setSetupStatus('fallback_failed');
           err.textContent = 'Не удалось отправить setup-данные. Попробуйте снова или используйте /quiz.';
         }
       });

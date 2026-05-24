@@ -88,6 +88,7 @@ READING_MODE_LABELS = {
 WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)")
 MAX_MINIAPP_URL_LENGTH = 1800
 MAX_WEBAPP_DATA_BYTES = 4096
+MINIAPP_FRONTEND_VERSION = "ui-polish-v2"
 
 
 def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
@@ -255,6 +256,7 @@ def build_miniapp_setup_context(categories, question_snapshot: dict | None = Non
     context = {
         "type": "miniapp_setup_context",
         "version": 1,
+        "frontend_version": MINIAPP_FRONTEND_VERSION,
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories],
         "mode": "setup",
     }
@@ -337,6 +339,7 @@ def _build_miniapp_context(
     context = {
         "type": "miniapp_setup_context",
         "version": 1,
+        "frontend_version": MINIAPP_FRONTEND_VERSION,
         "mode": mode,
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories] if include_categories else [],
     }
@@ -386,6 +389,7 @@ def build_miniapp_url_with_fallback(
         compact_question_context = {
             "type": "miniapp_setup_context",
             "version": 1,
+        "frontend_version": MINIAPP_FRONTEND_VERSION,
             "mode": "runner",
             "categories": [],
             "runner_q": _build_compact_runner_question_payload(runner_state),
