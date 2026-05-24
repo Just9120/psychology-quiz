@@ -12,6 +12,7 @@ import urllib.parse
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
 from app.miniapp_api import (
+    build_setup_response,
     build_answer_response,
     build_state_response,
     start_miniapp_api_server,
@@ -73,6 +74,10 @@ class MiniAppApiTests(unittest.TestCase):
         payload = json.loads(body)
         self.assertTrue(payload['ok'])
         self.assertIn(payload['runner_state']['state'], {'in_progress', 'completed', 'setup'})
+        dumped = json.dumps(payload, ensure_ascii=False)
+        self.assertNotIn('is_correct', dumped)
+        self.assertNotIn('correct_option_index', dumped)
+        self.assertNotIn('explanation', dumped)
 
     def test_answer_response(self):
         code, _, body = build_answer_response(
@@ -86,7 +91,10 @@ class MiniAppApiTests(unittest.TestCase):
         self.assertTrue(payload['ok'])
         self.assertIn(payload['submission_status'], {'accepted', 'duplicate', 'stale_question'})
         self.assertIn('runner_state', payload)
-        self.assertNotIn('is_correct', json.dumps(payload))
+        self.assertIn('feedback', payload)
+        self.assertIn('is_correct', payload['feedback'])
+        self.assertEqual('A', payload['feedback'].get('selected_option_text'))
+        self.assertEqual('A', payload['feedback'].get('correct_option_text'))
 
     def test_ttl_enforced_in_state_response(self):
         old_init_data = _make_init_data(self.bot_token, {'id': 42, 'username': 'u'}, auth_date=int(time.time()) - 10)
@@ -138,6 +146,25 @@ class MiniAppApiTests(unittest.TestCase):
         finally:
             server.shutdown()
             server.server_close()
+
+    def test_setup_requires_auth(self):
+        code, _, body = build_setup_response(
+            self.db, self.bot_token, "", json.dumps({"quiz_mode": "all", "category_ids": [], "question_count": 5, "difficulty": "any"}).encode()
+        )
+        self.assertEqual(401, code)
+        self.assertFalse(json.loads(body)["ok"])
+
+    def test_setup_uses_verified_user_not_payload_user(self):
+        code, _, body = build_setup_response(
+            self.db,
+            self.bot_token,
+            self.init_data,
+            json.dumps({"quiz_mode": "single", "category_ids": [1], "question_count": 5, "difficulty": "any", "user_id": 999999}).encode(),
+        )
+        self.assertEqual(200, code)
+        payload = json.loads(body)
+        self.assertTrue(payload["ok"])
+        self.assertEqual("in_progress", payload["runner_state"]["state"])
 
 if __name__ == '__main__':
     unittest.main()

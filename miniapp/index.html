@@ -53,6 +53,11 @@
         color: #7a0012;
         margin: 10px 0;
       }
+      .feedback-correct { color: #0a7d24; font-weight: 700; }
+      .feedback-wrong { color: #b00020; font-weight: 700; }
+      .answer-selected { outline: 2px solid #666; }
+      .answer-correct { outline: 2px solid #0a7d24; }
+      .answer-selected-wrong { outline: 2px solid #b00020; }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
@@ -159,6 +164,7 @@
       const runnerMode = rs?.state === 'in_progress' || hasCompactRunnerQuestion;
       const completedMode = rs?.state === 'completed';
       const setupMode = !runnerMode && !completedMode;
+      const hydrateOnSetup = ctx?.hydrate_on_setup === true;
 
       function isDebugMode() {
         if (getQueryParam('debug') === '1') return true;
@@ -387,7 +393,17 @@
         runnerState.textContent = text;
       }
 
-      async function submitAnswer(sessionId, questionId, selectedOptionIndex) {
+      async function apiFetch(url, options = {}, timeoutMs = 9000) {
+        const c = new AbortController();
+        const t = setTimeout(() => c.abort(), timeoutMs);
+        try {
+          return await fetch(url, { ...options, signal: c.signal });
+        } finally {
+          clearTimeout(t);
+        }
+      }
+
+      async function submitAnswer(sessionId, questionId, selectedOptionIndex, snapshot) {
         const payload = {
           type: 'quiz_answer',
           session_id: sessionId,
@@ -410,7 +426,7 @@
           apiDiagState.attemptStatus = 'attempted';
           renderApiDiagnostics();
           try {
-            const answerResp = await fetch(`${apiBase}/miniapp/answer`, {
+            const answerResp = await apiFetch(`${apiBase}/miniapp/answer`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -429,7 +445,7 @@
               if (answerJson?.ok === true && answerJson?.runner_state) {
                 apiDiagState.attemptStatus = 'success';
                 renderApiDiagnostics();
-                renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
+                renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
                 return;
               }
               if (answerJson?.ok === true && !answerJson?.runner_state) {
@@ -441,8 +457,8 @@
                 setFallbackStatus('Не удалось отправить ответ через API. Используется резервный режим.', 'api_non_ok');
               }
             }
-          } catch {
-            setFallbackStatus('Ошибка сети при API-запросе. Используется резервный режим.', 'failed_fetch');
+          } catch (e) {
+            setFallbackStatus(e?.name === 'AbortError' ? 'Таймаут API. Используется резервный режим.' : 'Ошибка сети при API-запросе. Используется резервный режим.', 'failed_fetch');
           }
         }
 
@@ -466,6 +482,49 @@
             b.disabled = false;
           });
         }
+      }
+      function renderAnswerFeedback(snapshot, selectedOptionIndex, feedback, nextState) {
+        questionView.hidden = false;
+        const optionButtons = [...questionView.querySelectorAll('ol button')];
+        optionButtons.forEach((btn) => btn.disabled = true);
+        const selectedIdx = Number.isInteger(Number(feedback?.selected_option_index))
+          ? Number(feedback.selected_option_index)
+          : Number(selectedOptionIndex);
+        const correctIdx = Number.isInteger(Number(feedback?.correct_option_index))
+          ? Number(feedback.correct_option_index)
+          : null;
+        optionButtons.forEach((btn) => {
+          const idx = Number(btn.getAttribute('data-option-index'));
+          if (idx === selectedIdx) btn.classList.add('answer-selected');
+          if (correctIdx !== null && idx === correctIdx) btn.classList.add('answer-correct');
+          if (idx === selectedIdx && correctIdx !== null && selectedIdx !== correctIdx) btn.classList.add('answer-selected-wrong');
+        });
+
+        const status = document.createElement('p');
+        status.className = feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong';
+        status.textContent = feedback?.is_correct ? 'Верно' : 'Неверно';
+        questionView.appendChild(status);
+        const details = document.createElement('p');
+        const selectedText = typeof feedback?.selected_option_text === 'string' && feedback.selected_option_text
+          ? feedback.selected_option_text
+          : (Array.isArray(snapshot?.options) ? (snapshot.options.find((o) => Number(o.option_index) === selectedIdx)?.option_text || '') : '');
+        const correctText = typeof feedback?.correct_option_text === 'string' && feedback.correct_option_text
+          ? feedback.correct_option_text
+          : (Array.isArray(snapshot?.options) && correctIdx !== null ? (snapshot.options.find((o) => Number(o.option_index) === correctIdx)?.option_text || '') : '');
+        const selectedLabel = Number.isInteger(selectedIdx) ? `${selectedIdx + 1}` : '?';
+        const correctLabel = correctIdx !== null ? `${correctIdx + 1}` : '?';
+        details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}. Правильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
+        questionView.appendChild(details);
+        if (typeof feedback?.explanation === 'string' && feedback.explanation) {
+          const ex = document.createElement('p');
+          ex.textContent = `Пояснение: ${feedback.explanation}`;
+          questionView.appendChild(ex);
+        }
+        const next = document.createElement('button');
+        next.type = 'button';
+        next.textContent = 'Далее';
+        next.addEventListener('click', () => renderRunnerState(nextState, { preferLaunchCompact: false }));
+        questionView.appendChild(next);
       }
 
       function renderQuestion(snapshot) {
@@ -498,7 +557,8 @@
           const idx = Number(opt.option_index);
           const txt = typeof opt.option_text === 'string' ? opt.option_text : '';
           btn.textContent = `${Number.isInteger(idx) ? idx + 1 : '?'}: ${txt}`;
-          btn.addEventListener('click', () => submitAnswer(Number(snapshot.session_id), Number(snapshot.question_id), idx));
+          btn.setAttribute('data-option-index', String(idx));
+          btn.addEventListener('click', () => submitAnswer(Number(snapshot.session_id), Number(snapshot.question_id), idx, snapshot));
           li.appendChild(btn);
           list.appendChild(li);
         });
@@ -549,10 +609,10 @@
         renderApiDiagnostics();
       }
 
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
         validate();
-        if (go.disabled || !tg?.sendData) return;
+        if (go.disabled) return;
 
         const mode = form.quiz_mode.value;
         const selected = selectedCategoryIds();
@@ -565,15 +625,51 @@
           difficulty: form.difficulty.value,
         };
 
+        if (apiBase && tg?.initData) {
+          go.disabled = true;
+          runnerState.textContent = 'Запуск викторины...';
+          try {
+            const resp = await apiFetch(`${apiBase}/miniapp/setup`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `tma ${tg.initData}` },
+              body: JSON.stringify(payload),
+            });
+            const data = await resp.json();
+            if (resp.ok && data?.ok && data?.runner_state) {
+              renderRunnerState(data.runner_state, { preferLaunchCompact: false });
+              go.disabled = false;
+              return;
+            }
+          } catch {}
+          go.disabled = false;
+        }
+        if (!tg?.sendData) {
+          err.textContent = 'API недоступен и sendData недоступен. Переоткройте /ui.';
+          return;
+        }
         try {
           tg.sendData(JSON.stringify(payload));
-          tg.close();
         } catch {
           err.textContent = 'Не удалось отправить setup-данные. Попробуйте снова или используйте /quiz.';
         }
       });
 
-      renderRunnerState(rs, { preferLaunchCompact: true });
+      (async () => {
+        renderRunnerState(rs, { preferLaunchCompact: true });
+        if (apiBase && tg?.initData && (!setupMode || hydrateOnSetup)) {
+          runnerState.textContent = 'Синхронизация состояния с сервером...';
+          try {
+            const resp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${tg.initData}` } });
+            const data = await resp.json();
+            if (resp.ok && data?.ok) renderRunnerState(data.runner_state, { preferLaunchCompact: false });
+            else runnerState.textContent = 'Не удалось синхронизировать состояние. Используется контекст запуска.';
+          } catch (e) {
+            runnerState.textContent = e?.name === 'AbortError'
+              ? 'Таймаут синхронизации. Используется контекст запуска; при необходимости переоткройте /ui.'
+              : 'Сетевая ошибка синхронизации. Используется контекст запуска.';
+          }
+        }
+      })();
       validate();
     </script>
   </body>
