@@ -324,7 +324,7 @@
         try {
           const setupUrl = new URL(ctx.setup_url, location.origin);
           if (setupUrl.origin !== location.origin) return null;
-          if (!(setupUrl.pathname === '/ui' || setupUrl.pathname === '/miniapp' || setupUrl.pathname === '/miniapp/')) return null;
+          if (!(setupUrl.pathname === '/' || setupUrl.pathname === '/ui' || setupUrl.pathname === '/miniapp' || setupUrl.pathname === '/miniapp/')) return null;
           return setupUrl.toString();
         } catch (_) {
           return null;

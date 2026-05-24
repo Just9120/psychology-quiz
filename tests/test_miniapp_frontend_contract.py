@@ -20,6 +20,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertNotIn('location.reload();', self.content)
         self.assertIn('function getSafeSetupUrl()', self.content)
         self.assertIn('new URL(ctx.setup_url, location.origin)', self.content)
+        self.assertIn("setupUrl.pathname === '/'", self.content)
         self.assertIn("setSetupStatus('ready_for_submit')", self.content)
         self.assertNotIn("ctx.setup_url.includes('api_base_url=')", self.content)
         self.assertIn('const safeSetupUrl = getSafeSetupUrl();', self.content)
