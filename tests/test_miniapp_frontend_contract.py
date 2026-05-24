@@ -70,8 +70,10 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("Правильный ответ:", self.content)
         self.assertNotIn("Правильный ответ: ?.", self.content)
         self.assertIn("Отправляю ответ...", self.content)
+        self.assertIn("Проверяю, был ли ответ принят...", self.content)
         self.assertIn("Повторная отправка ответа...", self.content)
         self.assertIn("Ответ принят.", self.content)
+        self.assertIn("Ответ принят, состояние обновлено.", self.content)
         self.assertIn("Ответ уже был принят, состояние обновлено.", self.content)
         self.assertIn("Не удалось обновить интерфейс после ответа. Попробуйте снова.", self.content)
 
@@ -104,6 +106,10 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("apiDiagState.answerPhase = 'preparing';", self.content)
         self.assertIn("const ANSWER_API_TIMEOUT_MS = 4000;", self.content)
         self.assertIn("apiDiagState.answerPhase = 'retry_scheduled';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'pre_retry_state_resync_attempted';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'pre_retry_state_resync_success';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'pre_retry_state_resync_no_change';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'pre_retry_state_resync_failed';", self.content)
         self.assertIn("'retry_started'", self.content)
         self.assertIn("runnerState.textContent = 'Повторная отправка ответа...';", self.content)
         self.assertIn("apiDiagState.answerPhase = 'retry_exhausted';", self.content)
@@ -112,6 +118,15 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("apiDiagState.answerPhase = 'state_resync_failed';", self.content)
         self.assertIn("apiDiagState.answerPhase = 'ui_render_failed';", self.content)
         self.assertNotIn("Authorization: `tma ${initData}` +", self.content)
+
+    def test_state_advance_helper_contract(self):
+        self.assertIn('function didRunnerStateAdvanceForAnswer(submittedSessionId, submittedQuestionId, runnerState)', self.content)
+        self.assertIn('const nestedSessionId = Number(runnerState.session?.session_id);', self.content)
+        self.assertIn('const resolvedSessionId = Number.isInteger(nestedSessionId) ? nestedSessionId : (', self.content)
+        self.assertIn('if (Number.isInteger(resolvedSessionId) && resolvedSessionId !== Number(submittedSessionId)) return false;', self.content)
+        self.assertIn("stateName === 'completed'", self.content)
+        self.assertIn("statusName === 'no_current_question'", self.content)
+        self.assertIn('currentQuestionId !== Number(submittedQuestionId);', self.content)
 
     def test_setup_mode_hydration_is_guarded(self):
         self.assertIn("const hydrateOnSetup = ctx?.hydrate_on_setup === true;", self.content)

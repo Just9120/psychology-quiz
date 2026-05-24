@@ -539,6 +539,21 @@
       function isTransientApiError(errorKind) {
         return errorKind === 'timeout' || errorKind === 'fetch_rejected' || errorKind === 'invalid_json';
       }
+      function didRunnerStateAdvanceForAnswer(submittedSessionId, submittedQuestionId, runnerState) {
+        if (!runnerState || typeof runnerState !== 'object') return false;
+        const nestedSessionId = Number(runnerState.session?.session_id);
+        const topLevelSessionId = Number(runnerState.session_id);
+        const resolvedSessionId = Number.isInteger(nestedSessionId) ? nestedSessionId : (
+          Number.isInteger(topLevelSessionId) ? topLevelSessionId : null
+        );
+        if (Number.isInteger(resolvedSessionId) && resolvedSessionId !== Number(submittedSessionId)) return false;
+        const stateName = typeof runnerState.state === 'string' ? runnerState.state : '';
+        const statusName = typeof runnerState.status === 'string' ? runnerState.status : '';
+        if (stateName === 'completed' || statusName === 'completed' || statusName === 'no_current_question') return true;
+        const currentQuestionId = Number(runnerState.current_question?.question_id);
+        if (!Number.isInteger(currentQuestionId)) return false;
+        return currentQuestionId !== Number(submittedQuestionId);
+      }
       async function apiFetchWithRetry(url, optionsFactory, timeoutMs, retryOptions = {}) {
         const retries = Number.isInteger(retryOptions.retries) ? retryOptions.retries : 1;
         const backoffMs = Array.isArray(retryOptions.backoffMs) ? retryOptions.backoffMs : [500, 1000];
@@ -574,6 +589,12 @@
             lastMeta = { ...meta, errorKind };
             lastError = error;
             if (attempt <= retries && isTransientApiError(errorKind)) {
+              if (retryOptions.onBeforeRetry) {
+                const earlyResult = await retryOptions.onBeforeRetry(attempt, retries, errorKind, requestId);
+                if (earlyResult && earlyResult.skipRetry === true) {
+                  return earlyResult.result;
+                }
+              }
               if (retryOptions.onRetryScheduled) retryOptions.onRetryScheduled(attempt, retries, errorKind, requestId);
               await waitMs(backoffMs[attempt - 1] || 1000);
               continue;
@@ -661,6 +682,36 @@
                   renderApiDiagnostics();
                   runnerState.textContent = 'Сеть подвисла, пробую отправить ещё раз...';
                 },
+                onBeforeRetry: async (attempt, retries, errorKind, requestId) => {
+                  apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                  apiDiagState.answerPhase = 'pre_retry_state_resync_attempted';
+                  apiDiagState.answerFinalPhase = errorKind;
+                  renderApiDiagnostics();
+                  runnerState.textContent = 'Проверяю, был ли ответ принят...';
+                  try {
+                    const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${initData}` } });
+                    const stateData = await stateResp.json();
+                    if (!(stateResp.ok && stateData?.ok && stateData?.runner_state)) {
+                      apiDiagState.answerPhase = 'pre_retry_state_resync_failed';
+                      renderApiDiagnostics();
+                      return { skipRetry: false };
+                    }
+                    if (didRunnerStateAdvanceForAnswer(sessionId, questionId, stateData.runner_state)) {
+                      apiDiagState.answerPhase = 'pre_retry_state_resync_success';
+                      apiDiagState.answerFinalPhase = 'pre_retry_state_resync_success';
+                      apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                      renderApiDiagnostics();
+                      return { skipRetry: true, result: { resp: stateResp, data: { ok: true, submission_status: 'resynced', runner_state: stateData.runner_state }, attempt, retries, requestId } };
+                    }
+                    apiDiagState.answerPhase = 'pre_retry_state_resync_no_change';
+                    renderApiDiagnostics();
+                    return { skipRetry: false };
+                  } catch {
+                    apiDiagState.answerPhase = 'pre_retry_state_resync_failed';
+                    renderApiDiagnostics();
+                    return { skipRetry: false };
+                  }
+                },
                 onRetryStarted: (attempt, retries) => {
                   apiDiagState.answerAttempt = attempt;
                   apiDiagState.answerRetryCount = Math.max(0, attempt - 1);
@@ -687,6 +738,9 @@
                 renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
               } else if ((answerJson.submission_status === 'duplicate' || answerJson.submission_status === 'stale_question') && answerJson.runner_state) {
                 runnerState.textContent = 'Ответ уже был принят, состояние обновлено.';
+                renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
+              } else if (answerJson.submission_status === 'resynced' && answerJson.runner_state) {
+                runnerState.textContent = 'Ответ принят, состояние обновлено.';
                 renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
               } else {
                 runnerState.textContent = 'Ответ принят.';
