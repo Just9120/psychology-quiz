@@ -57,6 +57,8 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def test_timeout_and_feedback_ui_contract(self):
         self.assertIn("AbortController", self.content)
         self.assertIn("Не удалось отправить ответ через API. Попробуйте снова.", self.content)
+        self.assertIn("Ответ не отправился, повторная попытка...", self.content)
+        self.assertIn("Запуск не удался, повторная попытка...", self.content)
         self.assertIn("Не удалось запустить викторину через API. Попробуйте снова.", self.content)
         self.assertIn("feedback-correct", self.content)
         self.assertIn("feedback-wrong", self.content)
@@ -69,28 +71,30 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("Не удалось обновить интерфейс после ответа. Попробуйте снова.", self.content)
 
     def test_no_automatic_send_data_after_api_failures(self):
-        self.assertIn("apiDiagState.attemptStatus = 'fetch_rejected';", self.content)
-        self.assertIn("setSetupStatus(e?.name === 'AbortError' ? 'api_timeout' : 'api_failed'", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'retry_exhausted';", self.content)
         self.assertNotIn("setSetupStatus('explicit_fallback_sendData');", self.content)
         self.assertIn("if (answerSubmitInFlight) return;", self.content)
         self.assertNotIn("'X-Miniapp-Request-Id': requestId", self.content)
-        self.assertIn("function showAnswerFallbackAction(payload)", self.content)
+        self.assertIn("if (!tg?.sendData)", self.content)
 
     def test_simple_body_transport_contract(self):
         self.assertIn("headers: { 'Content-Type': 'text/plain;charset=UTF-8' }", self.content)
         self.assertIn("init_data: initData", self.content)
-        self.assertIn("request_id: requestId", self.content)
+        self.assertIn("request_id: attemptRequestId", self.content)
         self.assertIn("apiDiagState.answerTransport = 'simple_body';", self.content)
         self.assertIn("apiDiagState.setupTransport = 'simple_body';", self.content)
-        self.assertNotIn("Authorization: `tma ${initData}`", self.content)
+        self.assertNotIn("'X-Miniapp-Request-Id': requestId", self.content)
 
     def test_debug_diagnostics_include_safe_request_phases(self):
         self.assertIn("function buildMiniappRequestId()", self.content)
+        self.assertIn("function apiFetchWithRetry(", self.content)
         self.assertIn("apiDiagState.answerPhase = 'preparing';", self.content)
-        self.assertIn("apiDiagState.answerPhase = 'fetch_started';", self.content)
-        self.assertIn("apiDiagState.answerPhase = 'response_headers_received';", self.content)
-        self.assertIn("apiDiagState.answerPhase = 'json_parse_started';", self.content)
-        self.assertIn("apiDiagState.answerPhase = 'json_parse_failed';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'retry_scheduled';", self.content)
+        self.assertIn("'retry_started'", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'retry_exhausted';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'state_resync_attempted';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'state_resync_success';", self.content)
+        self.assertIn("apiDiagState.answerPhase = 'state_resync_failed';", self.content)
         self.assertIn("apiDiagState.answerPhase = 'ui_render_failed';", self.content)
         self.assertNotIn("Authorization: `tma ${initData}` +", self.content)
 

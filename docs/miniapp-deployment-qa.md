@@ -146,15 +146,16 @@
 - [ ] Active session -> New setup in Mini App shows warning: "Запуск новой викторины завершит текущую активную попытку." before submit.
 
 - [ ] API path: answer inside Mini App advances to next question/result without closing window (`/miniapp/answer` + `/miniapp/state`).
-- [ ] Force answer API failure/timeout keeps Mini App open, shows `Не удалось отправить ответ через API. Попробуйте снова.`, re-enables answer buttons, and allows retry in-place.
-- [ ] Force setup API failure/timeout keeps setup form visible, shows `Не удалось запустить викторину через API. Попробуйте снова.`, re-enables `Начать викторину`, and allows retry in-place.
-- [ ] When API + `initData` are present, timeout/failure does **not** auto-send `sendData`; explicit fallback button (if shown) is user-triggered only.
-- [ ] Explicit fallback action warns that Telegram fallback may close Mini App and appears only after API failure (or when API/initData are missing).
+- [ ] Force transient answer API failure/timeout shows `Ответ не отправился, повторная попытка...`, keeps answer buttons disabled during retry, and auto-recovers on successful retry.
+- [ ] If answer retries are exhausted, Mini App shows `Не удалось отправить ответ через API. Попробуйте снова.`, re-enables answer buttons, and keeps manual retry on the same question.
+- [ ] Force transient setup API failure/timeout shows `Запуск не удался, повторная попытка...`, keeps setup submit disabled during retry, and auto-recovers on successful retry.
+- [ ] If setup retries are exhausted, setup form remains visible, `Начать викторину` is re-enabled, and user can retry manually.
+- [ ] When API + `initData` are present, timeout/failure does **not** auto-send `sendData`.
 - [ ] QA confirms no disabled-button deadlock after API timeout/failure on both answer and setup paths.
 - [ ] Production Mini App UI does **not** show diagnostics by default.
 - [ ] Debug diagnostics are visible only when opened with `?debug=1` (or debug context flag) and remain hidden otherwise, including statuses:
-  - answer: `api_attempted` / `api_success` / `api_timeout` / `api_failed` / `explicit_fallback_sendData`
-  - setup: `api_attempted` / `api_success` / `api_timeout` / `api_failed` / `explicit_fallback_sendData`
+  - answer: `api_attempted` / `api_success` / `retry_scheduled` / `retry_started` / `retry_exhausted` / `state_resync_attempted` / `state_resync_success` / `state_resync_failed`
+  - setup: `api_attempted` / `api_success` / `retry_scheduled` / `retry_started` / `retry_exhausted`
 - [ ] После открытия через primary `/ui` кнопку диагностика показывает `initData: yes`.
 - [ ] Diagnostic line shows:
   - frontend version marker value
@@ -219,8 +220,9 @@
 - Включите debug UI (`/ui` c `?debug=1`) и проверьте:
   - `req_id` — корреляционный id из simple body (`request_id`) или legacy header;
   - `transport` — `simple_body` или `header_auth`;
-  - `phase` — ключевая фаза (`preparing`, `fetch_started`, `response_headers_received`, `json_parse_started`, `json_parse_failed`, `api_success`, `api_non_ok`, `api_invalid_payload`, `api_timeout`, `fetch_rejected`, `ui_render_failed`);
-  - `elapsed_ms` и `retry`.
+  - `phase`/`final` — ключевые фазы (`preparing`, `fetch_started`, `retry_scheduled`, `retry_started`, `retry_exhausted`, `state_resync_*`, `api_success`, `ui_render_failed`);
+  - `elapsed_ms`, `retry`, `attempt`;
+  - `req_id` с attempt suffix (`rq_xxx_a1`, `rq_xxx_a2`, ...).
 - Безопасность: diagnostics и логи не должны содержать raw `initData`, `Authorization`, bot token, полный профиль пользователя, текст вопроса/ответов.
 - Если в debug UI есть `req_id`, но backend не видит POST c тем же `request_id`, проблема до входа запроса в API (WebView/network/proxy path между клиентом и сервером).
 - Если backend видит POST c `request_id`, используйте статус/error_code и duration для локализации причины.
