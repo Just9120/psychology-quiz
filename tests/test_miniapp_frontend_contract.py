@@ -17,6 +17,8 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def test_completed_view_has_next_actions(self):
         self.assertIn("restart.textContent = 'Новая викторина'", self.content)
         self.assertIn("closeBtn.textContent = 'Закрыть Mini App'", self.content)
+        self.assertNotIn('location.reload();', self.content)
+        self.assertIn('Чтобы начать новую викторину, закройте Mini App и отправьте /ui заново.', self.content)
 
 
 if __name__ == '__main__':
