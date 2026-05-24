@@ -253,3 +253,63 @@ Post-deploy DB checks:
 Post-deploy log checks:
 - `grep "miniapp_db_locked endpoint=" <bot-log-file>`
 - `grep "database is locked" <bot-log-file>`
+
+## 12) Reverse proxy configuration (production API exposure)
+- Mini App API process listens on local bind/port from:
+  - `MINIAPP_API_BIND` (default `127.0.0.1`)
+  - `MINIAPP_API_PORT` (default `8081`)
+- Production HTTPS API domain `quiz-api.librechat.online` must reverse-proxy requests to this local bind/port.
+- Mini App frontend origin is `https://miniapp.librechat.online`; `MINIAPP_API_ALLOWED_ORIGIN` must match this exact origin.
+
+Example Nginx server block (reference):
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name quiz-api.librechat.online;
+
+    # TLS settings/certs are managed by infrastructure.
+
+    location /miniapp/ {
+        proxy_pass http://127.0.0.1:8081;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 30s;
+    }
+}
+```
+
+Minimal operator checklist:
+1. Confirm `MINIAPP_API_ENABLED=true` and correct `MINIAPP_API_BIND`/`MINIAPP_API_PORT`.
+2. Configure HTTPS vhost `quiz-api.librechat.online` with reverse proxy to local API bind/port.
+3. Set `MINIAPP_API_ALLOWED_ORIGIN=https://miniapp.librechat.online`.
+4. Set `MINI_APP_API_BASE_URL=https://quiz-api.librechat.online`.
+5. Reload Nginx and validate CORS + endpoint reachability.
+
+Smoke checks:
+- `curl -i https://quiz-api.librechat.online/miniapp/state`
+- `curl -i -X OPTIONS https://quiz-api.librechat.online/miniapp/answer -H "Origin: https://miniapp.librechat.online" -H "Access-Control-Request-Method: POST"`
+
+## 13) DB migration / upgrade policy
+- `schema.sql` is source of truth for fresh database creation.
+- Runtime `ensure_*` migration helpers are used for selected additive upgrades on existing DBs (for example, missing indexes/columns that can be added safely).
+- Production deploy must run normal bot startup (`init_db_connection`) so runtime checks can ensure expected additive indexes exist.
+- Destructive or behavior-changing migrations (drop/rewrite/backfill with risk) require explicit migration scripts + operator-approved backups/rollback plan.
+
+Backup example for production DB file:
+- `cp /data/quiz.sqlite3 /data/quiz.sqlite3.backup.$(date -u +%Y%m%dT%H%M%SZ)`
+
+## 14) Architecture notes (planned, docs-only)
+- `app/main.py` is currently overloaded and should be split in follow-up refactor PRs:
+  - Move Mini App context/URL builder concerns into `app/miniapp_context.py`.
+  - Split Telegram handlers by domain responsibility instead of one large module.
+- Mini App API is currently implemented via `BaseHTTPRequestHandler` / `ThreadingHTTPServer`; planned medium/long-term target is migration to an ASGI service (e.g. FastAPI, Litestar, or aiohttp) with cleaner routing/lifecycle/testability.
+- `miniapp/index.html` currently contains a large imperative state machine; if Mini App remains a strategic product direction, plan a declarative state-management refactor in a dedicated backlog track.
+
+## 15) Prioritized roadmap (after #155)
+- **Done / urgent:** SQLite hardening shipped in #155 (WAL, `busy_timeout`, explicit connection closing, performance indexes).
+- **Next:** production validation and lock-log monitoring.
+- **Near-term:** keep reverse proxy setup and DB migration policy explicit in ops/docs.
+- **Medium-term:** split `app/main.py` into focused modules.
+- **Backlog:** migrate Mini App API to ASGI stack + move frontend state flow to declarative model.
