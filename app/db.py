@@ -11,8 +11,12 @@ SESSION_QUESTION_LIMIT = 10
 def get_connection(db_path: str) -> sqlite3.Connection:
     db_file = Path(db_path)
     db_file.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(db_file)
+    conn = sqlite3.connect(db_file, timeout=10.0)
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA busy_timeout = 10000;")
+    if db_file != Path(":memory:"):
+        conn.execute("PRAGMA journal_mode = WAL;")
+    conn.execute("PRAGMA synchronous = NORMAL;")
     conn.execute("PRAGMA foreign_keys = ON;")
     return conn
 
@@ -24,8 +28,24 @@ def init_db_connection(db_path: str) -> None:
         ensure_users_reading_mode_column(conn)
         ensure_quiz_sessions_difficulty_mode_column(conn)
         ensure_quiz_session_selected_categories_table(conn)
+        ensure_performance_indexes(conn)
     finally:
         conn.close()
+
+
+def ensure_performance_indexes(conn: sqlite3.Connection) -> None:
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_quiz_sessions_user_status ON quiz_sessions(user_id, status)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_quiz_answers_session_question ON quiz_answers(session_id, question_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_session_order ON quiz_session_questions(session_id, order_index)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_question ON quiz_session_questions(question_id)"
+    )
 
 
 VALID_READING_MODES = {"normal", "bionic"}

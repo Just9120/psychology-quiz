@@ -4,8 +4,10 @@ import hashlib
 import hmac
 import json
 import logging
+import sqlite3
 import time
 import urllib.parse
+from contextlib import closing
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from dataclasses import dataclass
@@ -25,6 +27,14 @@ from app.db import (
 from app.miniapp_runner import build_miniapp_runner_state, submit_miniapp_answer_event
 
 logger = logging.getLogger(__name__)
+
+
+def _log_locked_db(endpoint: str, started_at: float) -> None:
+    logger.warning(
+        "miniapp_db_locked endpoint=%s duration_ms=%s",
+        endpoint,
+        int((time.time() - started_at) * 1000),
+    )
 
 
 def _read_request_id(headers) -> str:
@@ -135,20 +145,27 @@ def build_state_response(
     *,
     max_age_seconds: int = 3600,
 ) -> tuple[int, dict[str, str], bytes]:
+    started_at = time.time()
     try:
         verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
     except InitDataValidationError as exc:
         return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
 
-    with get_connection(db_path) as conn:
-        user_row = create_or_load_user(
-            conn,
-            verified.telegram_user_id,
-            verified.username,
-            verified.first_name,
-            verified.last_name,
-        )
-        state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                user_row = create_or_load_user(
+                    conn,
+                    verified.telegram_user_id,
+                    verified.username,
+                    verified.first_name,
+                    verified.last_name,
+                )
+                state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
+    except sqlite3.OperationalError as exc:
+        if "database is locked" in str(exc).lower():
+            _log_locked_db("/miniapp/state", started_at)
+        raise
     return _json(HTTPStatus.OK, {"ok": True, "runner_state": state})
 
 
@@ -174,6 +191,7 @@ def build_answer_response(
     *,
     max_age_seconds: int = 3600,
 ) -> tuple[int, dict[str, str], bytes]:
+    started_at = time.time()
     try:
         verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
     except InitDataValidationError as exc:
@@ -188,30 +206,36 @@ def build_answer_response(
     if not all(type(v) is int for v in req):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
 
-    with get_connection(db_path) as conn:
-        user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
-        submission = submit_miniapp_answer_event(
-            conn,
-            session_id=req[0],
-            actor_user_id=int(user_row["id"]),
-            question_id=req[1],
-            selected_option_index=req[2],
-        )
-        if submission.status in {"accepted", "duplicate"}:
-            state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
-            if state.get("state") == "in_progress" and state.get("status") == "no_current_question":
-                finalized = finalize_quiz_session(conn, req[0])
-                if finalized is not None:
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+                submission = submit_miniapp_answer_event(
+                    conn,
+                    session_id=req[0],
+                    actor_user_id=int(user_row["id"]),
+                    question_id=req[1],
+                    selected_option_index=req[2],
+                )
+                if submission.status in {"accepted", "duplicate"}:
                     state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
-            is_correct = bool(submission.is_correct) if submission.is_correct is not None else (
-                submission.selected_option_index == _find_correct_option_index(conn, req[1])
-            )
-            feedback = _build_answer_feedback(conn, req[1], int(submission.selected_option_index), is_correct)
-            return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "feedback": feedback, "runner_state": state})
-        response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
-        if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
-            response_payload["runner_state"] = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
-        return _json(HTTPStatus.OK, response_payload)
+                    if state.get("state") == "in_progress" and state.get("status") == "no_current_question":
+                        finalized = finalize_quiz_session(conn, req[0])
+                        if finalized is not None:
+                            state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
+                    is_correct = bool(submission.is_correct) if submission.is_correct is not None else (
+                        submission.selected_option_index == _find_correct_option_index(conn, req[1])
+                    )
+                    feedback = _build_answer_feedback(conn, req[1], int(submission.selected_option_index), is_correct)
+                    return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "feedback": feedback, "runner_state": state})
+                response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
+                if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
+                    response_payload["runner_state"] = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
+                return _json(HTTPStatus.OK, response_payload)
+    except sqlite3.OperationalError as exc:
+        if "database is locked" in str(exc).lower():
+            _log_locked_db("/miniapp/answer", started_at)
+        raise
 
 
 def _find_correct_option_index(conn, question_id: int) -> int | None:
@@ -244,6 +268,7 @@ def _get_option_text(conn, question_id: int, option_index: int | None) -> str | 
 
 
 def build_setup_response(db_path: str, bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+    started_at = time.time()
     try:
         verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
     except InitDataValidationError as exc:
@@ -268,37 +293,43 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
     ):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
 
-    with get_connection(db_path) as conn:
-        user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
-        active_categories = get_active_categories(conn)
-        active_ids = {int(row["id"]) for row in active_categories}
-        if not active_ids:
-            return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_categories"})
-        difficulty_filter = None if difficulty == "any" else difficulty
-        if quiz_mode == "single":
-            if len(category_ids) != 1 or int(category_ids[0]) not in active_ids:
-                return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
-            session_category_id = int(category_ids[0])
-            selected_ids = None
-            question_ids = select_random_approved_question_ids_by_category(conn, session_category_id, question_count, difficulty_filter)
-        elif quiz_mode == "selected_mix":
-            if not category_ids or any(int(cid) not in active_ids for cid in category_ids):
-                return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
-            session_category_id = None
-            selected_ids = [int(cid) for cid in category_ids]
-            question_ids = select_random_approved_question_ids_by_categories(conn, selected_ids, question_count, difficulty_filter)
-        else:
-            session_category_id = None
-            selected_ids = None
-            question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
-        if not question_ids:
-            return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_questions"})
-        abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
-        session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
-        if selected_ids:
-            set_selected_categories_for_session(conn, session_id, selected_ids)
-        store_session_questions(conn, session_id, question_ids)
-        state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+                active_categories = get_active_categories(conn)
+                active_ids = {int(row["id"]) for row in active_categories}
+                if not active_ids:
+                    return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_categories"})
+                difficulty_filter = None if difficulty == "any" else difficulty
+                if quiz_mode == "single":
+                    if len(category_ids) != 1 or int(category_ids[0]) not in active_ids:
+                        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
+                    session_category_id = int(category_ids[0])
+                    selected_ids = None
+                    question_ids = select_random_approved_question_ids_by_category(conn, session_category_id, question_count, difficulty_filter)
+                elif quiz_mode == "selected_mix":
+                    if not category_ids or any(int(cid) not in active_ids for cid in category_ids):
+                        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
+                    session_category_id = None
+                    selected_ids = [int(cid) for cid in category_ids]
+                    question_ids = select_random_approved_question_ids_by_categories(conn, selected_ids, question_count, difficulty_filter)
+                else:
+                    session_category_id = None
+                    selected_ids = None
+                    question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
+                if not question_ids:
+                    return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_questions"})
+                abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
+                session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
+                if selected_ids:
+                    set_selected_categories_for_session(conn, session_id, selected_ids)
+                store_session_questions(conn, session_id, question_ids)
+                state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
+    except sqlite3.OperationalError as exc:
+        if "database is locked" in str(exc).lower():
+            _log_locked_db("/miniapp/setup", started_at)
+        raise
     return _json(HTTPStatus.OK, {"ok": True, "runner_state": state})
 
 
@@ -309,14 +340,21 @@ def build_setup_options_response(
     *,
     max_age_seconds: int = 3600,
 ) -> tuple[int, dict[str, str], bytes]:
+    started_at = time.time()
     try:
         verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
     except InitDataValidationError as exc:
         return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
 
-    with get_connection(db_path) as conn:
-        create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
-        categories = [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)]
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+                categories = [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)]
+    except sqlite3.OperationalError as exc:
+        if "database is locked" in str(exc).lower():
+            _log_locked_db("/miniapp/setup-options", started_at)
+        raise
     return _json(
         HTTPStatus.OK,
         {
