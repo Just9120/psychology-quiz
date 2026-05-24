@@ -30,6 +30,15 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("feedback-correct", self.content)
         self.assertIn("feedback-wrong", self.content)
         self.assertIn("next.textContent = 'Далее'", self.content)
+        self.assertIn("answer-selected", self.content)
+        self.assertIn("answer-correct", self.content)
+        self.assertIn("answer-selected-wrong", self.content)
+        self.assertIn("Ваш ответ:", self.content)
+        self.assertIn("Правильный ответ:", self.content)
+
+    def test_setup_mode_hydration_is_guarded(self):
+        self.assertIn("const hydrateOnSetup = ctx?.hydrate_on_setup === true;", self.content)
+        self.assertIn("if (apiBase && tg?.initData && (!setupMode || hydrateOnSetup)) {", self.content)
 
 
 if __name__ == '__main__':

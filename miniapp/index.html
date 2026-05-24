@@ -57,6 +57,7 @@
       .feedback-wrong { color: #b00020; font-weight: 700; }
       .answer-selected { outline: 2px solid #666; }
       .answer-correct { outline: 2px solid #0a7d24; }
+      .answer-selected-wrong { outline: 2px solid #b00020; }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
@@ -163,6 +164,7 @@
       const runnerMode = rs?.state === 'in_progress' || hasCompactRunnerQuestion;
       const completedMode = rs?.state === 'completed';
       const setupMode = !runnerMode && !completedMode;
+      const hydrateOnSetup = ctx?.hydrate_on_setup === true;
 
       function isDebugMode() {
         if (getQueryParam('debug') === '1') return true;
@@ -401,7 +403,7 @@
         }
       }
 
-      async function submitAnswer(sessionId, questionId, selectedOptionIndex) {
+      async function submitAnswer(sessionId, questionId, selectedOptionIndex, snapshot) {
         const payload = {
           type: 'quiz_answer',
           session_id: sessionId,
@@ -443,7 +445,7 @@
               if (answerJson?.ok === true && answerJson?.runner_state) {
                 apiDiagState.attemptStatus = 'success';
                 renderApiDiagnostics();
-                renderAnswerFeedback(selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
+                renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
                 return;
               }
               if (answerJson?.ok === true && !answerJson?.runner_state) {
@@ -481,12 +483,38 @@
           });
         }
       }
-      function renderAnswerFeedback(selectedOptionIndex, feedback, nextState) {
+      function renderAnswerFeedback(snapshot, selectedOptionIndex, feedback, nextState) {
         questionView.hidden = false;
+        const optionButtons = [...questionView.querySelectorAll('ol button')];
+        optionButtons.forEach((btn) => btn.disabled = true);
+        const selectedIdx = Number.isInteger(Number(feedback?.selected_option_index))
+          ? Number(feedback.selected_option_index)
+          : Number(selectedOptionIndex);
+        const correctIdx = Number.isInteger(Number(feedback?.correct_option_index))
+          ? Number(feedback.correct_option_index)
+          : null;
+        optionButtons.forEach((btn) => {
+          const idx = Number(btn.getAttribute('data-option-index'));
+          if (idx === selectedIdx) btn.classList.add('answer-selected');
+          if (correctIdx !== null && idx === correctIdx) btn.classList.add('answer-correct');
+          if (idx === selectedIdx && correctIdx !== null && selectedIdx !== correctIdx) btn.classList.add('answer-selected-wrong');
+        });
+
         const status = document.createElement('p');
         status.className = feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong';
         status.textContent = feedback?.is_correct ? 'Верно' : 'Неверно';
         questionView.appendChild(status);
+        const details = document.createElement('p');
+        const selectedText = typeof feedback?.selected_option_text === 'string' && feedback.selected_option_text
+          ? feedback.selected_option_text
+          : (Array.isArray(snapshot?.options) ? (snapshot.options.find((o) => Number(o.option_index) === selectedIdx)?.option_text || '') : '');
+        const correctText = typeof feedback?.correct_option_text === 'string' && feedback.correct_option_text
+          ? feedback.correct_option_text
+          : (Array.isArray(snapshot?.options) && correctIdx !== null ? (snapshot.options.find((o) => Number(o.option_index) === correctIdx)?.option_text || '') : '');
+        const selectedLabel = Number.isInteger(selectedIdx) ? `${selectedIdx + 1}` : '?';
+        const correctLabel = correctIdx !== null ? `${correctIdx + 1}` : '?';
+        details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}. Правильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
+        questionView.appendChild(details);
         if (typeof feedback?.explanation === 'string' && feedback.explanation) {
           const ex = document.createElement('p');
           ex.textContent = `Пояснение: ${feedback.explanation}`;
@@ -529,7 +557,8 @@
           const idx = Number(opt.option_index);
           const txt = typeof opt.option_text === 'string' ? opt.option_text : '';
           btn.textContent = `${Number.isInteger(idx) ? idx + 1 : '?'}: ${txt}`;
-          btn.addEventListener('click', () => submitAnswer(Number(snapshot.session_id), Number(snapshot.question_id), idx));
+          btn.setAttribute('data-option-index', String(idx));
+          btn.addEventListener('click', () => submitAnswer(Number(snapshot.session_id), Number(snapshot.question_id), idx, snapshot));
           li.appendChild(btn);
           list.appendChild(li);
         });
@@ -596,7 +625,7 @@
           difficulty: form.difficulty.value,
         };
 
-        if (apiBase && tg?.initData) {
+        if (apiBase && tg?.initData && (!setupMode || hydrateOnSetup)) {
           go.disabled = true;
           runnerState.textContent = 'Запуск викторины...';
           try {

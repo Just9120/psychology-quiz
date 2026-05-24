@@ -162,6 +162,8 @@ def build_answer_response(
                 "correct_option_index": _find_correct_option_index(conn, req[1]),
                 "explanation": _get_question_explanation(conn, req[1]),
             }
+            feedback["selected_option_text"] = _get_option_text(conn, req[1], submission.selected_option_index)
+            feedback["correct_option_text"] = _get_option_text(conn, req[1], feedback["correct_option_index"])
             return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "feedback": feedback, "runner_state": state})
         response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
         if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
@@ -182,6 +184,19 @@ def _get_question_explanation(conn, question_id: int) -> str | None:
     if row is None:
         return None
     value = row["explanation"]
+    return str(value) if isinstance(value, str) else None
+
+
+def _get_option_text(conn, question_id: int, option_index: int | None) -> str | None:
+    if not isinstance(option_index, int):
+        return None
+    row = conn.execute(
+        "SELECT option_text FROM question_options WHERE question_id = ? AND option_index = ? LIMIT 1",
+        (question_id, option_index),
+    ).fetchone()
+    if row is None:
+        return None
+    value = row["option_text"]
     return str(value) if isinstance(value, str) else None
 
 

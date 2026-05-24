@@ -74,6 +74,10 @@ class MiniAppApiTests(unittest.TestCase):
         payload = json.loads(body)
         self.assertTrue(payload['ok'])
         self.assertIn(payload['runner_state']['state'], {'in_progress', 'completed', 'setup'})
+        dumped = json.dumps(payload, ensure_ascii=False)
+        self.assertNotIn('is_correct', dumped)
+        self.assertNotIn('correct_option_index', dumped)
+        self.assertNotIn('explanation', dumped)
 
     def test_answer_response(self):
         code, _, body = build_answer_response(
@@ -89,6 +93,8 @@ class MiniAppApiTests(unittest.TestCase):
         self.assertIn('runner_state', payload)
         self.assertIn('feedback', payload)
         self.assertIn('is_correct', payload['feedback'])
+        self.assertEqual('A', payload['feedback'].get('selected_option_text'))
+        self.assertEqual('A', payload['feedback'].get('correct_option_text'))
 
     def test_ttl_enforced_in_state_response(self):
         old_init_data = _make_init_data(self.bot_token, {'id': 42, 'username': 'u'}, auth_date=int(time.time()) - 10)

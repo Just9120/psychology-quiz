@@ -189,3 +189,6 @@
 - [ ] Verify startup state hydrates from `GET /miniapp/state` and stale launch context is replaced.
 - [ ] Verify timeout/error messages are shown and controls recover.
 - [ ] Verify answer feedback shows correctness, correct option, explanation, and `Далее` transition.
+
+- [ ] Проверить сценарий: completed → «Новая викторина» → setup остаётся на экране (авто-hydration не перерисовывает latest completed).
+- [ ] Проверить, что после ответа UI показывает: «Верно/Неверно», «Ваш ответ», «Правильный ответ», пояснение (если есть), затем кнопку «Далее».
