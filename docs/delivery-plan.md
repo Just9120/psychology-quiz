@@ -117,3 +117,5 @@
 | #141-fix | Completed Mini App `Новая викторина` action now opens setup context (no completed-state reload loop) | ✅ Done |
 
 | 2026-05-24 | Mini App runner stabilization PR | Added `/miniapp/setup`, server-authoritative startup hydration, timeout/recovery UX, and post-answer feedback with next-step control. |
+
+| 2026-05-24 | Mini App runner follow-up after #144 | Fixed setup API observability/recovery, in-place `Новая викторина` setup restart, and cache-busting launch URL version (`v=ui-polish-v2`). |

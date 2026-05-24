@@ -202,3 +202,5 @@ Recommend **Hybrid (Option C)** as safest next step:
 - 2026-05-24 stabilization: added authenticated `POST /miniapp/setup`, startup hydration via `GET /miniapp/state`, request timeouts/recoverable UI states, and post-answer feedback (`correct/incorrect`, correct option, explanation, `Далее`).
 
 - 2026-05-24 follow-up for PR #143: startup hydration is now guarded for explicit setup launches (skipped in setup unless `hydrate_on_setup=true`) to prevent completed-result override after `Новая викторина`; feedback view now marks selected/correct options and renders explicit selected/correct answer text.
+
+- 2026-05-24 follow-up after #144: setup submit now emits debug-safe setup status markers (`api_attempted/api_success/api_failed/fallback_sendData`), completed `Новая викторина` prefers in-place setup render, and setup API failures are recoverable without silent fallback.
