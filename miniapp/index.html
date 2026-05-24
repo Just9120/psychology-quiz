@@ -678,7 +678,16 @@
             apiDiagState.answerElapsedMs = Date.now() - startedAt;
             renderApiDiagnostics();
             try {
-              renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
+              if (hasCompleteFeedback(answerJson.feedback)) {
+                runnerState.textContent = 'Ответ принят.';
+                renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
+              } else if ((answerJson.submission_status === 'duplicate' || answerJson.submission_status === 'stale_question') && answerJson.runner_state) {
+                runnerState.textContent = 'Ответ уже был принят, состояние обновлено.';
+                renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
+              } else {
+                runnerState.textContent = 'Ответ принят.';
+                renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
+              }
               answerSubmitInFlight = false;
               return;
             } catch (_) {
@@ -727,6 +736,14 @@
         enableButtons();
         answerSubmitInFlight = false;
       }
+      function hasCompleteFeedback(feedback) {
+        return Number.isInteger(Number(feedback?.selected_option_index))
+          && Number.isInteger(Number(feedback?.correct_option_index))
+          && typeof feedback?.selected_option_text === 'string' && feedback.selected_option_text
+          && typeof feedback?.correct_option_text === 'string' && feedback.correct_option_text
+          && typeof feedback?.is_correct === 'boolean';
+      }
+
       function renderAnswerFeedback(snapshot, selectedOptionIndex, feedback, nextState) {
         showRunnerMode();
         questionView.hidden = false;
@@ -757,8 +774,12 @@
           ? feedback.correct_option_text
           : (Array.isArray(snapshot?.options) && correctIdx !== null ? (snapshot.options.find((o) => Number(o.option_index) === correctIdx)?.option_text || '') : '');
         const selectedLabel = Number.isInteger(selectedIdx) ? `${selectedIdx + 1}` : '?';
-        const correctLabel = correctIdx !== null ? `${correctIdx + 1}` : '?';
-        details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}. Правильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
+        if (correctIdx !== null) {
+          const correctLabel = `${correctIdx + 1}`;
+          details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}. Правильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
+        } else {
+          details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}.`;
+        }
         questionView.appendChild(details);
         if (typeof feedback?.explanation === 'string' && feedback.explanation) {
           const ex = document.createElement('p');
