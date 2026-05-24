@@ -234,3 +234,22 @@
 Примеры grep для корреляции:
 - `grep "miniapp_api endpoint=/miniapp/answer request_id=rq_ab12cd34 transport=simple_body" <bot-log-file>`
 - `grep "miniapp_options endpoint=/miniapp/answer request_id=rq_ab12cd34" <bot-log-file>`
+
+## 11) SQLite runtime hardening checks (post-deploy)
+- Mini App API handlers explicitly close SQLite connections (`closing(get_connection(...))` + nested `with conn:`) to avoid lingering file locks.
+- SQLite connection defaults now include:
+  - `PRAGMA busy_timeout = 10000`
+  - `PRAGMA journal_mode = WAL`
+  - `PRAGMA synchronous = NORMAL`
+  - `PRAGMA foreign_keys = ON`
+- For file-backed DBs, side files `quiz.sqlite3-wal` and `quiz.sqlite3-shm` may appear; this is expected in WAL mode.
+- Runtime performance indexes are ensured on startup for both existing and fresh DBs.
+
+Post-deploy DB checks:
+- `sqlite3 /path/to/quiz.sqlite3 "PRAGMA journal_mode;"`
+- `sqlite3 /path/to/quiz.sqlite3 "PRAGMA busy_timeout;"`
+- `sqlite3 /path/to/quiz.sqlite3 "SELECT name FROM sqlite_master WHERE type='index' AND name IN ('idx_quiz_sessions_user_status','idx_quiz_answers_session_question','idx_quiz_session_questions_session_order','idx_quiz_session_questions_question') ORDER BY name;"`
+
+Post-deploy log checks:
+- `grep "miniapp_db_locked endpoint=" <bot-log-file>`
+- `grep "database is locked" <bot-log-file>`

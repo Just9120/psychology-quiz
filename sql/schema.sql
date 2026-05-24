@@ -89,3 +89,12 @@ CREATE TABLE IF NOT EXISTS quiz_answers (
     FOREIGN KEY (session_id) REFERENCES quiz_sessions(id) ON DELETE CASCADE,
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
+
+CREATE INDEX IF NOT EXISTS idx_quiz_sessions_user_status
+    ON quiz_sessions(user_id, status);
+CREATE INDEX IF NOT EXISTS idx_quiz_answers_session_question
+    ON quiz_answers(session_id, question_id);
+CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_session_order
+    ON quiz_session_questions(session_id, order_index);
+CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_question
+    ON quiz_session_questions(question_id);

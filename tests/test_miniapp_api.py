@@ -11,7 +11,7 @@ import os
 import urllib.parse
 from unittest.mock import patch
 
-from app.db import create_or_load_user, start_quiz_session, store_session_questions
+from app.db import create_or_load_user, get_connection, init_db_connection, start_quiz_session, store_session_questions
 from app.miniapp_api import (
     build_setup_options_response,
     build_setup_response,
@@ -217,6 +217,53 @@ class MiniAppApiTests(unittest.TestCase):
         code, _, body = build_setup_options_response(self.db, self.bot_token, "")
         self.assertEqual(401, code)
         self.assertFalse(json.loads(body)["ok"])
+
+    def test_get_connection_configures_busy_timeout_and_wal(self):
+        conn = get_connection(self.db)
+        try:
+            busy_timeout = conn.execute("PRAGMA busy_timeout").fetchone()[0]
+            journal_mode = conn.execute("PRAGMA journal_mode").fetchone()[0]
+            self.assertEqual(10000, busy_timeout)
+            self.assertEqual("wal", str(journal_mode).lower())
+        finally:
+            conn.close()
+
+    def test_init_db_connection_ensures_performance_indexes(self):
+        init_db_connection(self.db)
+        conn = sqlite3.connect(self.db)
+        try:
+            rows = conn.execute(
+                """
+                SELECT name FROM sqlite_master
+                WHERE type = 'index'
+                  AND name IN (
+                    'idx_quiz_sessions_user_status',
+                    'idx_quiz_answers_session_question',
+                    'idx_quiz_session_questions_session_order',
+                    'idx_quiz_session_questions_question'
+                  )
+                """
+            ).fetchall()
+            self.assertEqual(
+                {
+                    "idx_quiz_sessions_user_status",
+                    "idx_quiz_answers_session_question",
+                    "idx_quiz_session_questions_session_order",
+                    "idx_quiz_session_questions_question",
+                },
+                {name for (name,) in rows},
+            )
+        finally:
+            conn.close()
+
+    def test_connection_context_with_closing_closes_connection(self):
+        from contextlib import closing
+
+        with closing(get_connection(self.db)) as conn:
+            with conn:
+                conn.execute("SELECT 1")
+        with self.assertRaises(sqlite3.ProgrammingError):
+            conn.execute("SELECT 1")
 
     def test_setup_options_uses_verified_user_and_returns_safe_payload(self):
         code, _, body = build_setup_options_response(self.db, self.bot_token, self.init_data)
