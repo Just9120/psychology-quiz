@@ -9,6 +9,7 @@ import unittest
 import tempfile
 import os
 import urllib.parse
+from unittest.mock import patch
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
 from app.miniapp_api import (
@@ -19,6 +20,7 @@ from app.miniapp_api import (
     start_miniapp_api_server,
     verify_telegram_init_data,
 )
+from app.miniapp_runner import MiniAppAnswerSubmissionResult
 
 
 def _setup_schema(conn):
@@ -49,11 +51,13 @@ class MiniAppApiTests(unittest.TestCase):
         _setup_schema(conn)
         conn.execute("INSERT INTO categories (slug,name) VALUES ('c','C')")
         conn.execute("INSERT INTO questions (external_id,category_id,source_ref,difficulty,status,question_text,explanation) VALUES ('q1',1,'s','easy','approved','Q1','E')")
+        conn.execute("INSERT INTO questions (external_id,category_id,source_ref,difficulty,status,question_text,explanation) VALUES ('q2',1,'s','easy','approved','Q2','E2')")
         conn.execute("INSERT INTO question_options (question_id,option_index,option_text,is_correct) VALUES (1,0,'A',1),(1,1,'B',0)")
+        conn.execute("INSERT INTO question_options (question_id,option_index,option_text,is_correct) VALUES (2,0,'C',1),(2,1,'D',0)")
         user = create_or_load_user(conn, 42, 'u', 'f', None)
         self.user_id = int(user['id'])
         self.session_id = start_quiz_session(conn, self.user_id, 1)
-        store_session_questions(conn, self.session_id, [1])
+        store_session_questions(conn, self.session_id, [1, 2])
         conn.commit(); conn.close()
         self.init_data = _make_init_data(self.bot_token, {'id': 42, 'username': 'u', 'first_name': 'f'})
 
@@ -90,7 +94,7 @@ class MiniAppApiTests(unittest.TestCase):
         self.assertEqual(200, code)
         payload = json.loads(body)
         self.assertTrue(payload['ok'])
-        self.assertIn(payload['submission_status'], {'accepted', 'duplicate', 'stale_question'})
+        self.assertEqual('accepted', payload['submission_status'])
         self.assertIn('runner_state', payload)
         self.assertIn('feedback', payload)
         self.assertIn('is_correct', payload['feedback'])
@@ -122,6 +126,58 @@ class MiniAppApiTests(unittest.TestCase):
         payload = json.loads(second_body)
         self.assertIn(payload['submission_status'], {'stale_question', 'duplicate', 'session_not_found'})
         self.assertIn('runner_state', payload)
+
+
+    def test_duplicate_answer_returns_full_feedback(self):
+        with patch(
+            'app.miniapp_api.submit_miniapp_answer_event',
+            return_value=MiniAppAnswerSubmissionResult(
+                status='duplicate',
+                session_id=self.session_id,
+                selected_option_index=0,
+                is_correct=True,
+                resolved_question_id=1,
+            ),
+        ):
+            code, _, body = build_answer_response(
+                self.db,
+                self.bot_token,
+                self.init_data,
+                json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode(),
+            )
+        self.assertEqual(200, code)
+        payload = json.loads(body)
+        self.assertTrue(payload['ok'])
+        self.assertEqual('duplicate', payload['submission_status'])
+        self.assertIn('feedback', payload)
+        self.assertEqual(0, payload['feedback'].get('correct_option_index'))
+        self.assertEqual('A', payload['feedback'].get('correct_option_text'))
+        self.assertEqual('E', payload['feedback'].get('explanation'))
+
+    def test_invalid_option_does_not_expose_feedback(self):
+        code, _, body = build_answer_response(
+            self.db,
+            self.bot_token,
+            self.init_data,
+            json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 99}).encode(),
+        )
+        self.assertEqual(200, code)
+        payload = json.loads(body)
+        self.assertEqual('invalid_option', payload['submission_status'])
+        self.assertNotIn('feedback', payload)
+
+    def test_forbidden_does_not_expose_feedback(self):
+        other_init = _make_init_data(self.bot_token, {'id': 777, 'username': 'other', 'first_name': 'o'})
+        code, _, body = build_answer_response(
+            self.db,
+            self.bot_token,
+            other_init,
+            json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode(),
+        )
+        self.assertEqual(200, code)
+        payload = json.loads(body)
+        self.assertEqual('forbidden', payload['submission_status'])
+        self.assertNotIn('feedback', payload)
 
     def test_options_cors_headers_when_allowed_origin_is_set(self):
         server = start_miniapp_api_server(

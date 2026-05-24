@@ -68,7 +68,18 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("answer-selected-wrong", self.content)
         self.assertIn("Ваш ответ:", self.content)
         self.assertIn("Правильный ответ:", self.content)
+        self.assertNotIn("Правильный ответ: ?.", self.content)
+        self.assertIn("Ответ принят.", self.content)
+        self.assertIn("Ответ уже был принят, состояние обновлено.", self.content)
         self.assertIn("Не удалось обновить интерфейс после ответа. Попробуйте снова.", self.content)
+
+
+    def test_incomplete_feedback_resync_guard(self):
+        self.assertIn('function hasCompleteFeedback(feedback)', self.content)
+        self.assertIn("if (hasCompleteFeedback(answerJson.feedback))", self.content)
+        self.assertIn("answerJson.submission_status === 'duplicate'", self.content)
+        self.assertIn("answerJson.submission_status === 'stale_question'", self.content)
+        self.assertIn("renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });", self.content)
 
     def test_no_automatic_send_data_after_api_failures(self):
         self.assertIn("apiDiagState.answerPhase = 'retry_exhausted';", self.content)

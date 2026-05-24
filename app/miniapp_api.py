@@ -152,6 +152,20 @@ def build_state_response(
     return _json(HTTPStatus.OK, {"ok": True, "runner_state": state})
 
 
+
+
+def _build_answer_feedback(conn, question_id: int, selected_option_index: int, is_correct: bool) -> dict[str, Any]:
+    feedback = {
+        "selected_option_index": selected_option_index,
+        "selected_option_text": _get_option_text(conn, question_id, selected_option_index),
+        "is_correct": bool(is_correct),
+        "correct_option_index": _find_correct_option_index(conn, question_id),
+        "explanation": _get_question_explanation(conn, question_id),
+    }
+    feedback["correct_option_text"] = _get_option_text(conn, question_id, feedback["correct_option_index"])
+    return feedback
+
+
 def build_answer_response(
     db_path: str,
     bot_token: str,
@@ -183,20 +197,16 @@ def build_answer_response(
             question_id=req[1],
             selected_option_index=req[2],
         )
-        if submission.status == "accepted":
+        if submission.status in {"accepted", "duplicate"}:
             state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
             if state.get("state") == "in_progress" and state.get("status") == "no_current_question":
                 finalized = finalize_quiz_session(conn, req[0])
                 if finalized is not None:
                     state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
-            feedback = {
-                "selected_option_index": submission.selected_option_index,
-                "is_correct": bool(submission.is_correct),
-                "correct_option_index": _find_correct_option_index(conn, req[1]),
-                "explanation": _get_question_explanation(conn, req[1]),
-            }
-            feedback["selected_option_text"] = _get_option_text(conn, req[1], submission.selected_option_index)
-            feedback["correct_option_text"] = _get_option_text(conn, req[1], feedback["correct_option_index"])
+            is_correct = bool(submission.is_correct) if submission.is_correct is not None else (
+                submission.selected_option_index == _find_correct_option_index(conn, req[1])
+            )
+            feedback = _build_answer_feedback(conn, req[1], int(submission.selected_option_index), is_correct)
             return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "feedback": feedback, "runner_state": state})
         response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
         if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
