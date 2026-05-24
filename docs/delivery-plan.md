@@ -115,3 +115,5 @@
 | #137-fix2 | Make Mini App API startup explicit opt-in (`MINIAPP_API_ENABLED`) with safe no-start when base URL missing | ✅ Done |
 | #140-polish | Mini App runner polish: debug-gated diagnostics, completed-state actions, readable `miniapp/index.html`, QA/docs refresh | ✅ Done |
 | #141-fix | Completed Mini App `Новая викторина` action now opens setup context (no completed-state reload loop) | ✅ Done |
+
+| 2026-05-24 | Mini App runner stabilization PR | Added `/miniapp/setup`, server-authoritative startup hydration, timeout/recovery UX, and post-answer feedback with next-step control. |

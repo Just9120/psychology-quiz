@@ -12,6 +12,16 @@ from dataclasses import dataclass
 from typing import Any
 
 from app.db import create_or_load_user, finalize_quiz_session, get_connection
+from app.db import (
+    abandon_in_progress_sessions_for_user,
+    get_active_categories,
+    select_random_approved_question_ids_across_active_categories,
+    select_random_approved_question_ids_by_categories,
+    select_random_approved_question_ids_by_category,
+    set_selected_categories_for_session,
+    start_quiz_session,
+    store_session_questions,
+)
 from app.miniapp_runner import build_miniapp_runner_state, submit_miniapp_answer_event
 
 logger = logging.getLogger(__name__)
@@ -146,11 +156,92 @@ def build_answer_response(
                 finalized = finalize_quiz_session(conn, req[0])
                 if finalized is not None:
                     state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
-            return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "runner_state": state})
+            feedback = {
+                "selected_option_index": submission.selected_option_index,
+                "is_correct": bool(submission.is_correct),
+                "correct_option_index": _find_correct_option_index(conn, req[1]),
+                "explanation": _get_question_explanation(conn, req[1]),
+            }
+            return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "feedback": feedback, "runner_state": state})
         response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
         if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
             response_payload["runner_state"] = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
         return _json(HTTPStatus.OK, response_payload)
+
+
+def _find_correct_option_index(conn, question_id: int) -> int | None:
+    row = conn.execute(
+        "SELECT option_index FROM question_options WHERE question_id = ? AND is_correct = 1 LIMIT 1",
+        (question_id,),
+    ).fetchone()
+    return int(row["option_index"]) if row is not None else None
+
+
+def _get_question_explanation(conn, question_id: int) -> str | None:
+    row = conn.execute("SELECT explanation FROM questions WHERE id = ? LIMIT 1", (question_id,)).fetchone()
+    if row is None:
+        return None
+    value = row["explanation"]
+    return str(value) if isinstance(value, str) else None
+
+
+def build_setup_response(db_path: str, bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+    try:
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
+    except InitDataValidationError as exc:
+        return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
+    try:
+        payload = json.loads(body.decode("utf-8"))
+    except Exception:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    if not isinstance(payload, dict):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
+
+    quiz_mode = payload.get("quiz_mode")
+    question_count = payload.get("question_count")
+    difficulty = payload.get("difficulty")
+    category_ids = payload.get("category_ids")
+    if (
+        quiz_mode not in {"single", "selected_mix", "all"}
+        or question_count not in {5, 10, 15, None}
+        or difficulty not in {"any", "easy", "medium", "hard"}
+        or not isinstance(category_ids, list)
+        or any(not isinstance(item, int) for item in category_ids)
+    ):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
+
+    with get_connection(db_path) as conn:
+        user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+        active_categories = get_active_categories(conn)
+        active_ids = {int(row["id"]) for row in active_categories}
+        if not active_ids:
+            return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_categories"})
+        difficulty_filter = None if difficulty == "any" else difficulty
+        if quiz_mode == "single":
+            if len(category_ids) != 1 or int(category_ids[0]) not in active_ids:
+                return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
+            session_category_id = int(category_ids[0])
+            selected_ids = None
+            question_ids = select_random_approved_question_ids_by_category(conn, session_category_id, question_count, difficulty_filter)
+        elif quiz_mode == "selected_mix":
+            if not category_ids or any(int(cid) not in active_ids for cid in category_ids):
+                return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
+            session_category_id = None
+            selected_ids = [int(cid) for cid in category_ids]
+            question_ids = select_random_approved_question_ids_by_categories(conn, selected_ids, question_count, difficulty_filter)
+        else:
+            session_category_id = None
+            selected_ids = None
+            question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
+        if not question_ids:
+            return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_questions"})
+        abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
+        session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
+        if selected_ids:
+            set_selected_categories_for_session(conn, session_id, selected_ids)
+        store_session_questions(conn, session_id, question_ids)
+        state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
+    return _json(HTTPStatus.OK, {"ok": True, "runner_state": state})
 
 
 class MiniAppApiHandler(BaseHTTPRequestHandler):
@@ -167,7 +258,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
             self.send_header("Vary", "Origin")
 
     def do_OPTIONS(self):
-        if self.path.split("?")[0] not in {"/miniapp/state", "/miniapp/answer"}:
+        if self.path.split("?")[0] not in {"/miniapp/state", "/miniapp/answer", "/miniapp/setup"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         self.send_response(HTTPStatus.NO_CONTENT)
@@ -194,18 +285,28 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_POST(self):
-        if self.path.split("?")[0] != "/miniapp/answer":
+        endpoint = self.path.split("?")[0]
+        if endpoint not in {"/miniapp/answer", "/miniapp/setup"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         length = int(self.headers.get("Content-Length", "0"))
         body = self.rfile.read(length)
-        status, headers, data = build_answer_response(
-            self.db_path,
-            self.bot_token,
-            _extract_init_data(self.headers),
-            body,
-            max_age_seconds=self.initdata_ttl_seconds,
-        )
+        if endpoint == "/miniapp/answer":
+            status, headers, data = build_answer_response(
+                self.db_path,
+                self.bot_token,
+                _extract_init_data(self.headers),
+                body,
+                max_age_seconds=self.initdata_ttl_seconds,
+            )
+        else:
+            status, headers, data = build_setup_response(
+                self.db_path,
+                self.bot_token,
+                _extract_init_data(self.headers),
+                body,
+                max_age_seconds=self.initdata_ttl_seconds,
+            )
         self.send_response(status)
         for k, v in headers.items():
             self.send_header(k, v)

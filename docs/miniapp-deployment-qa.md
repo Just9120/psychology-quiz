@@ -184,3 +184,8 @@
 - **Enablement gate:** set `MINIAPP_API_ENABLED=true` to start API server; default is disabled.
 - If enabled but `MINI_APP_API_BASE_URL` is missing, API server is not started (safe no-start) and Mini App remains on `sendData` fallback.
 - Recommended production: always set `MINIAPP_API_ALLOWED_ORIGIN` to exact Mini App origin when enabling API.
+
+- [ ] Verify setup submit uses API path and Mini App does not close when `initData` + API are available.
+- [ ] Verify startup state hydrates from `GET /miniapp/state` and stale launch context is replaced.
+- [ ] Verify timeout/error messages are shown and controls recover.
+- [ ] Verify answer feedback shows correctness, correct option, explanation, and `Далее` transition.

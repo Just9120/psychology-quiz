@@ -53,6 +53,10 @@
         color: #7a0012;
         margin: 10px 0;
       }
+      .feedback-correct { color: #0a7d24; font-weight: 700; }
+      .feedback-wrong { color: #b00020; font-weight: 700; }
+      .answer-selected { outline: 2px solid #666; }
+      .answer-correct { outline: 2px solid #0a7d24; }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
@@ -387,6 +391,16 @@
         runnerState.textContent = text;
       }
 
+      async function apiFetch(url, options = {}, timeoutMs = 9000) {
+        const c = new AbortController();
+        const t = setTimeout(() => c.abort(), timeoutMs);
+        try {
+          return await fetch(url, { ...options, signal: c.signal });
+        } finally {
+          clearTimeout(t);
+        }
+      }
+
       async function submitAnswer(sessionId, questionId, selectedOptionIndex) {
         const payload = {
           type: 'quiz_answer',
@@ -410,7 +424,7 @@
           apiDiagState.attemptStatus = 'attempted';
           renderApiDiagnostics();
           try {
-            const answerResp = await fetch(`${apiBase}/miniapp/answer`, {
+            const answerResp = await apiFetch(`${apiBase}/miniapp/answer`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -429,7 +443,7 @@
               if (answerJson?.ok === true && answerJson?.runner_state) {
                 apiDiagState.attemptStatus = 'success';
                 renderApiDiagnostics();
-                renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
+                renderAnswerFeedback(selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
                 return;
               }
               if (answerJson?.ok === true && !answerJson?.runner_state) {
@@ -441,8 +455,8 @@
                 setFallbackStatus('Не удалось отправить ответ через API. Используется резервный режим.', 'api_non_ok');
               }
             }
-          } catch {
-            setFallbackStatus('Ошибка сети при API-запросе. Используется резервный режим.', 'failed_fetch');
+          } catch (e) {
+            setFallbackStatus(e?.name === 'AbortError' ? 'Таймаут API. Используется резервный режим.' : 'Ошибка сети при API-запросе. Используется резервный режим.', 'failed_fetch');
           }
         }
 
@@ -466,6 +480,23 @@
             b.disabled = false;
           });
         }
+      }
+      function renderAnswerFeedback(selectedOptionIndex, feedback, nextState) {
+        questionView.hidden = false;
+        const status = document.createElement('p');
+        status.className = feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong';
+        status.textContent = feedback?.is_correct ? 'Верно' : 'Неверно';
+        questionView.appendChild(status);
+        if (typeof feedback?.explanation === 'string' && feedback.explanation) {
+          const ex = document.createElement('p');
+          ex.textContent = `Пояснение: ${feedback.explanation}`;
+          questionView.appendChild(ex);
+        }
+        const next = document.createElement('button');
+        next.type = 'button';
+        next.textContent = 'Далее';
+        next.addEventListener('click', () => renderRunnerState(nextState, { preferLaunchCompact: false }));
+        questionView.appendChild(next);
       }
 
       function renderQuestion(snapshot) {
@@ -549,10 +580,10 @@
         renderApiDiagnostics();
       }
 
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
         validate();
-        if (go.disabled || !tg?.sendData) return;
+        if (go.disabled) return;
 
         const mode = form.quiz_mode.value;
         const selected = selectedCategoryIds();
@@ -565,15 +596,51 @@
           difficulty: form.difficulty.value,
         };
 
+        if (apiBase && tg?.initData) {
+          go.disabled = true;
+          runnerState.textContent = 'Запуск викторины...';
+          try {
+            const resp = await apiFetch(`${apiBase}/miniapp/setup`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `tma ${tg.initData}` },
+              body: JSON.stringify(payload),
+            });
+            const data = await resp.json();
+            if (resp.ok && data?.ok && data?.runner_state) {
+              renderRunnerState(data.runner_state, { preferLaunchCompact: false });
+              go.disabled = false;
+              return;
+            }
+          } catch {}
+          go.disabled = false;
+        }
+        if (!tg?.sendData) {
+          err.textContent = 'API недоступен и sendData недоступен. Переоткройте /ui.';
+          return;
+        }
         try {
           tg.sendData(JSON.stringify(payload));
-          tg.close();
         } catch {
           err.textContent = 'Не удалось отправить setup-данные. Попробуйте снова или используйте /quiz.';
         }
       });
 
-      renderRunnerState(rs, { preferLaunchCompact: true });
+      (async () => {
+        renderRunnerState(rs, { preferLaunchCompact: true });
+        if (apiBase && tg?.initData) {
+          runnerState.textContent = 'Синхронизация состояния с сервером...';
+          try {
+            const resp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${tg.initData}` } });
+            const data = await resp.json();
+            if (resp.ok && data?.ok) renderRunnerState(data.runner_state, { preferLaunchCompact: false });
+            else runnerState.textContent = 'Не удалось синхронизировать состояние. Используется контекст запуска.';
+          } catch (e) {
+            runnerState.textContent = e?.name === 'AbortError'
+              ? 'Таймаут синхронизации. Используется контекст запуска; при необходимости переоткройте /ui.'
+              : 'Сетевая ошибка синхронизации. Используется контекст запуска.';
+          }
+        }
+      })();
       validate();
     </script>
   </body>
