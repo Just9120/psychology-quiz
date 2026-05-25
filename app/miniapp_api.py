@@ -138,6 +138,50 @@ def _extract_transport_payload(headers, body: bytes) -> tuple[str, bytes, str, s
     return "", body, request_id or _read_request_id(headers), "simple_body"
 
 
+
+
+def _find_latest_session_id_for_feedback(conn, actor_user_id: int) -> int | None:
+    row = conn.execute(
+        """
+        SELECT id
+        FROM quiz_sessions
+        WHERE user_id = ?
+          AND status IN ('in_progress', 'finished')
+        ORDER BY
+          CASE WHEN status = 'in_progress' THEN 0 ELSE 1 END,
+          COALESCE(finished_at, started_at) DESC,
+          started_at DESC,
+          id DESC
+        LIMIT 1
+        """,
+        (actor_user_id,),
+    ).fetchone()
+    return int(row["id"]) if row is not None else None
+
+
+def _build_recent_answer_feedback(conn, *, actor_user_id: int) -> dict[str, Any] | None:
+    session_id = _find_latest_session_id_for_feedback(conn, actor_user_id)
+    if session_id is None:
+        return None
+    row = conn.execute(
+        """
+        SELECT question_id, selected_option_index, is_correct
+        FROM quiz_answers
+        WHERE session_id = ?
+        ORDER BY answered_at DESC, id DESC
+        LIMIT 1
+        """,
+        (session_id,),
+    ).fetchone()
+    if row is None:
+        return None
+    question_id = int(row["question_id"])
+    selected_option_index = int(row["selected_option_index"])
+    is_correct = bool(int(row["is_correct"]))
+    feedback = _build_answer_feedback(conn, question_id, selected_option_index, is_correct)
+    feedback["question_id"] = question_id
+    return feedback
+
 def build_state_response(
     db_path: str,
     bot_token: str,
@@ -161,12 +205,17 @@ def build_state_response(
                     verified.first_name,
                     verified.last_name,
                 )
-                state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
+                actor_user_id = int(user_row["id"])
+                state = build_miniapp_runner_state(conn, actor_user_id=actor_user_id)
+                recent_answer_feedback = _build_recent_answer_feedback(conn, actor_user_id=actor_user_id)
     except sqlite3.OperationalError as exc:
         if "database is locked" in str(exc).lower():
             _log_locked_db("/miniapp/state", started_at)
         raise
-    return _json(HTTPStatus.OK, {"ok": True, "runner_state": state})
+    payload: dict[str, Any] = {"ok": True, "runner_state": state}
+    if recent_answer_feedback is not None:
+        payload["recent_answer_feedback"] = recent_answer_feedback
+    return _json(HTTPStatus.OK, payload)
 
 
 

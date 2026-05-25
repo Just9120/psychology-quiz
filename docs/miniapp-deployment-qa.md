@@ -324,3 +324,5 @@ Backup example for production DB file:
 - **Near-term:** keep reverse proxy setup and DB migration policy explicit in ops/docs.
 - **Medium-term:** split `app/main.py` into focused modules.
 - **Backlog:** migrate Mini App API to ASGI stack + move frontend state flow to declarative model.
+
+- If `/miniapp/answer` response is lost/delayed but `/miniapp/state` confirms answer acceptance, Mini App still shows the answer feedback card first (`✅/❌`, `Ваш ответ`, `Правильный ответ`, `Пояснение`, `Далее`) and only then advances.

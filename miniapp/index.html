@@ -627,6 +627,15 @@
         if (!Number.isInteger(currentQuestionId)) return false;
         return currentQuestionId !== Number(submittedQuestionId);
       }
+
+      function getResyncedFeedbackForSubmission(stateData, submittedQuestionId, selectedOptionIndex) {
+        const feedback = stateData?.recent_answer_feedback;
+        if (!hasCompleteFeedback(feedback)) return null;
+        if (Number(feedback.question_id) !== Number(submittedQuestionId)) return null;
+        if (Number(feedback.selected_option_index) !== Number(selectedOptionIndex)) return null;
+        return feedback;
+      }
+
       async function firstSuccessfulOrAllFailed(candidateFactories) {
         const candidates = Array.isArray(candidateFactories) ? candidateFactories : [];
         if (candidates.length === 0) throw new Error('no_candidates');
@@ -907,7 +916,9 @@
                       apiDiagState.answerFinalPhase = 'pre_retry_state_resync_success';
                       apiDiagState.answerElapsedMs = Date.now() - startedAt;
                       renderApiDiagnostics();
-                      return { skipRetry: true, result: { resp: stateResp, data: { ok: true, submission_status: 'resynced', runner_state: stateData.runner_state }, attempt, retries, requestId } };
+                      const feedback = getResyncedFeedbackForSubmission(stateData, questionId, selectedOptionIndex);
+                      const submissionStatus = feedback ? 'resynced_with_feedback' : 'resynced';
+                      return { skipRetry: true, result: { resp: stateResp, data: { ok: true, submission_status: submissionStatus, feedback, runner_state: stateData.runner_state }, attempt, retries, requestId } };
                     }
                     apiDiagState.answerPhase = 'pre_retry_state_resync_no_change';
                     renderApiDiagnostics();
@@ -968,7 +979,9 @@
                       apiDiagState.answerFinalPhase = 'answer_hedge_state_resync_success';
                       apiDiagState.answerElapsedMs = Date.now() - startedAt;
                       renderApiDiagnostics();
-                      return { skipRetry: true, result: { resp: stateResp, data: { ok: true, submission_status: 'resynced', runner_state: stateData.runner_state }, attempt, retries, requestId } };
+                      const feedback = getResyncedFeedbackForSubmission(stateData, questionId, selectedOptionIndex);
+                      const submissionStatus = feedback ? 'resynced_with_feedback' : 'resynced';
+                      return { skipRetry: true, result: { resp: stateResp, data: { ok: true, submission_status: submissionStatus, feedback, runner_state: stateData.runner_state }, attempt, retries, requestId } };
                     }
                     apiDiagState.answerPhase = 'answer_hedge_state_resync_no_change';
                     apiDiagState.answerFinalPhase = 'answer_hedge_state_resync_no_change';
@@ -1004,6 +1017,9 @@
               } else if ((answerJson.submission_status === 'duplicate' || answerJson.submission_status === 'stale_question') && answerJson.runner_state) {
                 runnerState.textContent = 'Ответ уже был принят, состояние обновлено.';
                 renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
+              } else if (answerJson.submission_status === 'resynced_with_feedback' && hasCompleteFeedback(answerJson.feedback) && answerJson.runner_state) {
+                runnerState.textContent = 'Ответ принят.';
+                renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
               } else if (answerJson.submission_status === 'resynced' && answerJson.runner_state) {
                 runnerState.textContent = 'Ответ принят, состояние обновлено.';
                 renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
