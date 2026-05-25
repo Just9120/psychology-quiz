@@ -90,10 +90,12 @@
 - Telegram Mini App не является standalone Web UI.
 - Mini App не заменяет текущий bot UX как default mode.
 - Реализованный MVP Mini App поддерживает setup, state hydration, отображение вопроса, отправку ответа, feedback, переход к следующему шагу и completed/result экран.
-- `/quiz` остаётся дефолтным классическим режимом; `/ui` остаётся opt-in экспериментом.
+- `/quiz` остаётся дефолтным классическим режимом.
+- Opt-in входы в Mini App: `/ui` и кнопка нижнего меню `🚀 Викторина в окне`.
+- Фактический launch Mini App выполняется через fresh inline WebApp-кнопку `🚀 Открыть викторину`, сгенерированную текущим `/ui`-контекстом.
 
 Первый MVP Mini App (scope на будущую implementation-фазу):
-- планируемая точка входа: `/ui`;
+- планируемые точки входа: `/ui` и кнопка нижнего меню `🚀 Викторина в окне` (делегирует в `/ui`);
 - setup-экран внутри Telegram Mini App;
 - выбор quiz mode:
   - `single`;
@@ -120,6 +122,7 @@ Category initialization model для Mini App setup:
 - Mini App рендерит категории из URL setup context.
 - Хардкод категорий во frontend Mini App запрещён.
 - Setup context — только UI rendering context, не source of truth.
+- Persistent reply keyboard не должен хранить `web_app` URL/launch-context для Mini App; launch URL/context генерируется fresh через `/ui`.
 
 Payload contract summary (Mini App → bot):
 - `type`: `quiz_setup`;
