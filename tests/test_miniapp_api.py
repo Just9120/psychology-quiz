@@ -9,14 +9,17 @@ import unittest
 import tempfile
 import os
 import urllib.parse
+from http import HTTPStatus
 from unittest.mock import patch
 
 from app.db import create_or_load_user, get_connection, init_db_connection, start_quiz_session, store_session_questions
 from app.miniapp_api import (
+    MiniAppApiHandler,
     build_setup_options_response,
     build_setup_response,
     build_answer_response,
     build_state_response,
+    _json,
     start_miniapp_api_server,
     verify_telegram_init_data,
 )
@@ -74,8 +77,9 @@ class MiniAppApiTests(unittest.TestCase):
             verify_telegram_init_data(self.init_data + 'x', self.bot_token)
 
     def test_state_response(self):
-        code, _, body = build_state_response(self.db, self.bot_token, self.init_data)
+        code, headers, body = build_state_response(self.db, self.bot_token, self.init_data)
         self.assertEqual(200, code)
+        self.assertEqual(str(len(body)), headers.get("Content-Length"))
         payload = json.loads(body)
         self.assertTrue(payload['ok'])
         self.assertIn(payload['runner_state']['state'], {'in_progress', 'completed', 'setup'})
@@ -201,6 +205,7 @@ class MiniAppApiTests(unittest.TestCase):
             self.assertIn("Authorization", response.getheader("Access-Control-Allow-Headers") or "")
             self.assertIn("X-Miniapp-Request-Id", response.getheader("Access-Control-Allow-Headers") or "")
             self.assertEqual("600", response.getheader("Access-Control-Max-Age"))
+            self.assertEqual("0", response.getheader("Content-Length"))
             conn.close()
         finally:
             server.shutdown()
@@ -328,6 +333,15 @@ class MiniAppApiTests(unittest.TestCase):
             conn.close()
         finally:
             server.shutdown(); server.server_close()
+
+    def test_json_helper_sets_content_length(self):
+        status, headers, body = _json(HTTPStatus.OK, {"ok": True, "message": "hello"})
+        self.assertEqual(200, status)
+        self.assertEqual("application/json; charset=utf-8", headers.get("Content-Type"))
+        self.assertEqual(str(len(body)), headers.get("Content-Length"))
+
+    def test_handler_uses_http_1_1(self):
+        self.assertEqual("HTTP/1.1", MiniAppApiHandler.protocol_version)
 
 if __name__ == '__main__':
     unittest.main()
