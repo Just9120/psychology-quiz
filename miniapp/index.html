@@ -18,6 +18,10 @@
         width: 100%;
         padding: 12px;
       }
+      ol button:disabled {
+        color: #222;
+        -webkit-text-fill-color: #222;
+      }
 
       label {
         display: block;
@@ -59,11 +63,26 @@
       .answer-pending {
         outline: 2px solid #3653a5;
         background: #eef3ff;
+        color: #1e2f6b;
+        -webkit-text-fill-color: #1e2f6b;
       }
-      .answer-correct { outline: 2px solid #0a7d24; }
-      .answer-selected-wrong { outline: 2px solid #b00020; }
+      .answer-correct {
+        outline: 2px solid #0a7d24;
+        background: #edf9f1;
+        color: #124d22;
+        -webkit-text-fill-color: #124d22;
+      }
+      .answer-selected-wrong {
+        outline: 2px solid #b00020;
+        background: #fff1f3;
+        color: #711226;
+        -webkit-text-fill-color: #711226;
+      }
       .answer-disabled {
-        opacity: 0.65;
+        background: #f6f7fb;
+        border-color: #cfd5e3;
+        color: #222;
+        -webkit-text-fill-color: #222;
       }
       .answer-status {
         min-height: 24px;
@@ -75,25 +94,46 @@
         content: '⏳ ';
       }
       .answer-feedback {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px;
-        margin: 10px 0;
+        border: 1px solid #d6dce8;
+        border-radius: 12px;
+        padding: 12px;
+        margin: 12px 0;
+        background: #fafcff;
+      }
+      .answer-feedback p {
+        margin: 0 0 8px;
+        line-height: 1.4;
+        white-space: pre-line;
+      }
+      .answer-feedback p:last-child {
+        margin-bottom: 0;
+      }
+      .feedback-line {
+        font-weight: 700;
       }
       .progress-chip {
         display: inline-block;
-        font-size: 0.9em;
-        color: #334;
-        background: #f1f4f9;
+        font-size: 0.82em;
+        color: #4a5876;
+        background: #f3f6fc;
+        border: 1px solid #d9e1f1;
         border-radius: 999px;
-        padding: 4px 10px;
-        margin: 0 0 8px;
+        padding: 2px 8px;
+        margin: 0 0 10px;
+      }
+      .answer-next {
+        margin-top: 10px;
+        border: 0;
+        border-radius: 10px;
+        background: #3653a5;
+        color: #fff;
+        font-weight: 700;
       }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
   <body>
-    <h3>/ui — экспериментальный Mini App runner</h3>
+    <h3>Мини-викторина</h3>
     <div id="frontend_marker" class="meta" hidden></div>
     <div id="runner_state" class="note"></div>
     <div id="api_diag" class="note" hidden></div>
@@ -1050,7 +1090,7 @@
         const feedbackWrap = document.createElement('div');
         feedbackWrap.className = 'answer-feedback';
         const status = document.createElement('p');
-        status.className = feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong';
+        status.className = `feedback-line ${feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong'}`;
         status.textContent = feedback?.is_correct ? '✅ Верно' : '❌ Неверно';
         feedbackWrap.appendChild(status);
         const details = document.createElement('p');
@@ -1063,7 +1103,7 @@
         const selectedLabel = Number.isInteger(selectedIdx) ? `${selectedIdx + 1}` : '?';
         if (correctIdx !== null && correctText) {
           const correctLabel = `${correctIdx + 1}`;
-          details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}. Правильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
+          details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}.\nПравильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
         } else {
           details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}.`;
         }
@@ -1077,6 +1117,7 @@
         const next = document.createElement('button');
         next.type = 'button';
         next.textContent = 'Далее';
+        next.className = 'answer-next';
         next.addEventListener('click', () => renderRunnerState(nextState, { preferLaunchCompact: false }));
         questionView.appendChild(next);
       }
@@ -1100,7 +1141,7 @@
         const progress = document.createElement('div');
         progress.className = 'progress-chip';
         progress.textContent =
-          Number.isInteger(order) && Number.isInteger(total) && total > 0 ? `Прогресс: вопрос ${order} из ${total}` : 'Текущий вопрос';
+          Number.isInteger(order) && Number.isInteger(total) && total > 0 ? `${Math.round((order / total) * 100)}%` : 'Прогресс';
         questionView.appendChild(progress);
 
         const q = document.createElement('p');
