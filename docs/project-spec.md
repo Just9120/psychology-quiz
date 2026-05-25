@@ -177,17 +177,17 @@ Out of scope для первого Mini App MVP:
 Основной путь синхронизации (CI/CD-first):
 1. подготовить изменения в репозитории и оформить PR;
 2. выполнить merge в `main`;
-3. по `push` в `main` автоматически запускается GitHub Actions workflow;
-4. workflow запускает deploy-процесс (для текущего репозитория — SSH deploy; в других deployment environments конкретная автоматизация может отличаться);
-5. deploy logic conditionally синхронизирует runtime-состояние по diff.
+3. по `push` в `main` автоматически запускается GitHub Actions CI workflow (validation/checks);
+4. deployment/CD выполняется в настроенном deployment environment и/или внешней инфраструктуре; конкретная автоматизация может отличаться и не обязана быть репозиторий-видимой;
+5. после merge необходимо проверить факт деплоя по deployed commit/runtime state целевой среды.
 
-Логическая модель deploy-процесса:
+Логическая модель runtime-синхронизации (для deployment environment):
 - content changes → seed (autoseed).
-- Изменения в `app/`, `scripts/`, `sql/` и Docker-related слоях → build/seed/restart по условиям deploy logic.
+- Изменения в `app/`, `scripts/`, `sql/` и Docker-related слоях → build/seed/restart по условиям deploy logic среды.
 - Docs-only changes не требуют runtime sync (no-op/почти no-op).
 
 Fallback path:
-- При необходимости деплой инициируется вручную через GitHub Actions `workflow_dispatch`.
+- При необходимости деплой/восстановление инициируется через штатные механизмы deployment environment.
 - Ручное server-side вмешательство допускается только как аварийный сценарий, а не основной operational path.
 
 ## Security / privacy constraints
