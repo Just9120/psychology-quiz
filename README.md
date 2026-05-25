@@ -89,7 +89,8 @@ Fallback:
 ## Telegram Mini App (experimental note)
 
 - Standalone Web UI / PWA сейчас не входят в текущий scope проекта.
-- Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram по команде `/ui`.
+- Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram: через `/ui` или через кнопку нижнего меню `🚀 Викторина в окне`.
+- Кнопка `🚀 Викторина в окне` запускает безопасный fresh-flow: бот отправляет новое сообщение с inline WebApp-кнопкой `🚀 Открыть викторину`, а не хранит persistent `web_app` URL в reply keyboard.
 - Текущий Mini App MVP покрывает setup, state hydration, показ текущего вопроса, отправку ответа, feedback, переход к следующему шагу и итоговый результат с рестартом в окне Mini App.
 - `/quiz` остаётся дефолтным entry point и классическим chat-based runner.
 - Mini App использует backend API (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state.

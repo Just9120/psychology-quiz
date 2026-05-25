@@ -25,6 +25,7 @@ Planned future UX inside Mini App (opt-in path):
 ## Entry-point model
 - `/quiz`: unchanged classic default flow.
 - `/ui`: experimental Mini App flow for users who opt in.
+- `🚀 Викторина в окне`: bottom-menu opt-in entry that delegates to `/ui` and returns a fresh inline launch button `🚀 Открыть викторину`.
 - Product safety rule: no switch of default UX in this phase; any default switch needs a separate product decision.
 
 ## Session model (authoritative server state)

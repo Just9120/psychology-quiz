@@ -51,7 +51,8 @@
 ### A. Private chat checks
 - [ ] `/ui` без `MINI_APP_URL` показывает fallback.
 - [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает primary inline кнопку открытия Mini App.
-- [ ] Кнопка нижнего меню `🚀 Викторина в окне` отправляет свежий launch-сценарий через `/ui` (бот присылает новую inline WebApp-кнопку).
+- [ ] После `/start` в нижнем меню видна кнопка `🚀 Викторина в окне`.
+- [ ] Кнопка нижнего меню `🚀 Викторина в окне` отправляет свежий launch-сценарий через `/ui` (бот присылает новую inline WebApp-кнопку `🚀 Открыть викторину`).
 - [ ] Кнопка `🚀 Викторина в окне` не использует persistent WebApp URL в reply keyboard (stale launch context не хранится).
 - [ ] `/ui` не показывает persistent bottom WebApp reply-кнопки для Mini App (только стандартное главное меню).
 - [ ] Если пользователь видит `API недоступен`, закрыть Mini App, отправить свежий `/ui` и открыть новую inline-кнопку.
@@ -81,6 +82,7 @@
 
 ### D. Regression checks
 - [ ] `/quiz` работает без изменений.
+- [ ] Кнопка `🎯 Начать викторину` в главном меню работает без изменений.
 - [ ] Reply keyboard работает как раньше.
 - [ ] Reading mode работает.
 - [ ] `/stats` остаётся скрытым owner-only.
@@ -157,6 +159,7 @@
 - [ ] При transient timeout/fetch-failure на ответ Mini App сначала делает `GET /miniapp/state` (pre-retry resync) перед следующим `POST /miniapp/answer`.
 - [ ] Если первый `POST /miniapp/answer` был принят, но ответ потерялся в сети/WebView, Mini App восстанавливает UI из `runner_state` без duplicate `POST`.
 - [ ] После `POST /miniapp/answer` (`_a1`) Mini App запускает ранний hedge-таймер и может выполнить `GET /miniapp/state` до полного timeout `_a1`.
+- [ ] Mini App answer flow после transient recovery всё равно показывает feedback (`Верно/Неверно`, правильный ответ, пояснение) перед переходом дальше.
 - [ ] Если ранний `GET /miniapp/state` показал продвижение по вопросу/сессии, Mini App восстанавливается без дублирующего `POST`.
 - [ ] Если ранний `GET /miniapp/state` не показал продвижение, Mini App запускает bounded retry `POST /miniapp/answer` (`_a1/_a2/_a3`) без ожидания полного timeout первого запроса.
 - [ ] If answer retries are exhausted, Mini App shows `Не удалось отправить ответ через API. Попробуйте снова.`, re-enables answer buttons, and keeps manual retry on the same question.
