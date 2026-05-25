@@ -1,11 +1,11 @@
 # Mini App deployment and manual QA checklist (MVP)
 
 ## Purpose
-Этот runbook нужен для безопасной ручной deployment-валидации Telegram Mini App setup-screen MVP из PR #117 без изменения runtime-поведения бота.
+Этот runbook нужен для безопасной ручной deployment-валидации Telegram Mini App runner MVP (implemented through PR #162) без изменения runtime-поведения бота.
 
 ## 1) Current state
 - Mini App MVP код уже в репозитории.
-- Статический frontend setup-screen расположен в `miniapp/index.html`.
+- Статический frontend runner MVP расположен в `miniapp/index.html`.
 - Бот открывает Mini App URL через `MINI_APP_URL` (опциональная env-переменная).
 - Классический `/quiz` остаётся дефолтным UX.
 - Mini App запускается opt-in через `/ui`.
@@ -33,7 +33,7 @@
 5. По возможности в staging/dev отдельно проверить fallback-поведение `/ui`, когда `MINI_APP_URL` отсутствует.
 
 ### Optional local sanity check (не заменяет Telegram QA)
-Для быстрой browser-проверки разметки setup-screen можно локально отдать файл, например:
+Для быстрой browser-проверки разметки runner MVP можно локально отдать файл, например:
 - `python -m http.server 8080`
 
 Важно: локальная браузерная проверка **не** является полной валидацией Telegram Mini App интеграции.
@@ -56,7 +56,7 @@
 - [ ] `/ui` при отсутствии активных категорий показывает no-categories fallback.
 - [ ] `/ui` вне private chat корректно отклоняется.
 
-### B. Mini App setup-screen checks
+### B. Mini App runner MVP checks
 - [ ] Mini App открывается внутри Telegram.
 - [ ] Контекст корректно читается из URL.
 - [ ] Отображаются активные категории из bot context.
@@ -117,7 +117,7 @@
   - Active categories are displayed from bot-provided context.
   - Mini App setup can start the existing chat quiz runner.
   - Classic `/quiz` remains the default UX.
-  - Questions are still displayed in Telegram chat, not inside Mini App.
+  - Questions are displayed inside Mini App runner using server-authoritative state.
   - Minor UI/polish bugs should be handled as follow-up backlog items, not as blockers for MVP smoke validation.
 
 ## 7) Deployment validation evidence template

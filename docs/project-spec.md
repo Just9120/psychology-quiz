@@ -81,16 +81,16 @@
 
 ## Telegram UX modes
 - `classic` — текущий и дефолтный UX в Telegram-чате (активный режим по умолчанию).
-- `miniapp_test` — экспериментальный opt-in режим Telegram Mini App для setup-потока внутри Telegram; не включается по умолчанию.
+- `miniapp_test` — экспериментальный opt-in режим Telegram Mini App runner внутри Telegram; не включается по умолчанию.
 - `miniapp_default` — потенциальный будущий режим по умолчанию для Mini App, сейчас неактивен и не реализован.
 
 Ограничения и позиционирование:
 - Classic chat UX остаётся дефолтным режимом.
 - Telegram Mini App не является PWA.
 - Telegram Mini App не является standalone Web UI.
-- Mini App не заменяет текущий bot UX и текущий chat quiz runner.
-- Первый MVP Mini App ограничен только setup-экраном.
-- После подтверждения setup существующий Telegram chat quiz runner продолжает показывать вопросы и принимать ответы.
+- Mini App не заменяет текущий bot UX как default mode.
+- Реализованный MVP Mini App поддерживает setup, state hydration, отображение вопроса, отправку ответа, feedback, переход к следующему шагу и completed/result экран.
+- `/quiz` остаётся дефолтным классическим режимом; `/ui` остаётся opt-in экспериментом.
 
 Первый MVP Mini App (scope на будущую implementation-фазу):
 - планируемая точка входа: `/ui`;
@@ -139,9 +139,6 @@ Trust boundary:
 Out of scope для первого Mini App MVP:
 - standalone Web UI;
 - PWA;
-- backend API;
-- полный quiz runner внутри Mini App;
-- question cards и results внутри Mini App;
 - web analytics;
 - account area;
 - `/stats` внутри Mini App;
@@ -151,15 +148,15 @@ Out of scope для первого Mini App MVP:
 - расширение scope/категорий Module 2;
 - изменения workflow question bank.
 
-## Future Mini App quiz runner direction
-- Текущая реализованная область Mini App: только setup-screen MVP.
-- Полный quiz runner в Mini App (вопросы/ответы/прогресс/результат) — запланированное будущее направление.
-- Данный PR по этой теме — **design-only** и не меняет runtime-поведение.
-- Classic Telegram chat UX остаётся дефолтным; `/quiz` остаётся доступным как default entry point.
+## Future Mini App direction
+- Mini App runner MVP реализован и стабилизирован через PR #155–#162.
+- Classic Telegram chat UX остаётся дефолтным; `/quiz` остаётся default entry point.
 - `/ui` остаётся экспериментальным opt-in входом в Mini App.
+- `miniapp_default` остаётся потенциальным будущим режимом и сейчас не активируется.
 - `/stats` остаётся owner-only и вне Mini App на текущем этапе.
-- Детальная архитектура и поэтапный план зафиксированы в `docs/miniapp-quiz-runner-design.md`.
-- В любой future implementation-фазе состояние Mini App клиента считается недоверенным, а server-side валидация остаётся авторитативной.
+- Следующий этап: расширенный MVP QA и наблюдаемость перед любым обсуждением смены default UX.
+- Детальная эволюция архитектуры и исторические решения зафиксированы в `docs/miniapp-quiz-runner-design.md`.
+- Состояние Mini App клиента считается недоверенным, server-side валидация остаётся авторитативной.
 
 ## Data and runtime state model
 - SQLite не является source of truth; SQLite — runtime layer хранения и выдачи данных.
@@ -181,7 +178,7 @@ Out of scope для первого Mini App MVP:
 1. подготовить изменения в репозитории и оформить PR;
 2. выполнить merge в `main`;
 3. по `push` в `main` автоматически запускается GitHub Actions workflow;
-4. workflow по SSH вызывает deploy-процесс на сервере;
+4. workflow запускает deploy-процесс (для текущего репозитория — SSH deploy; в других deployment environments конкретная автоматизация может отличаться);
 5. deploy logic conditionally синхронизирует runtime-состояние по diff.
 
 Логическая модель deploy-процесса:
