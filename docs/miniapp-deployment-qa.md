@@ -51,6 +51,8 @@
 ### A. Private chat checks
 - [ ] `/ui` без `MINI_APP_URL` показывает fallback.
 - [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает primary inline кнопку открытия Mini App.
+- [ ] Кнопка нижнего меню `🚀 Викторина в окне` отправляет свежий launch-сценарий через `/ui` (бот присылает новую inline WebApp-кнопку).
+- [ ] Кнопка `🚀 Викторина в окне` не использует persistent WebApp URL в reply keyboard (stale launch context не хранится).
 - [ ] `/ui` не показывает persistent bottom WebApp reply-кнопки для Mini App (только стандартное главное меню).
 - [ ] Если пользователь видит `API недоступен`, закрыть Mini App, отправить свежий `/ui` и открыть новую inline-кнопку.
 - [ ] `/ui` при отсутствии активных категорий показывает no-categories fallback.
