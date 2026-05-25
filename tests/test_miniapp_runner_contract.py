@@ -1,6 +1,7 @@
 import base64
 import json
 import asyncio
+import inspect
 import sqlite3
 import tempfile
 import unittest
@@ -9,6 +10,8 @@ from unittest.mock import AsyncMock
 
 from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, start_quiz_session, store_session_questions
 from app.main import (
+    HELP_TEXT,
+    MINI_APP_BUTTON_TEXT,
     MAX_MINIAPP_URL_LENGTH,
     _parse_miniapp_answer_payload,
     _build_compact_runner_question_payload,
@@ -18,6 +21,8 @@ from app.main import (
     build_miniapp_launch_inline_keyboard,
     build_post_setup_miniapp_prompt,
     should_start_miniapp_api,
+    get_main_menu_keyboard,
+    post_init,
     ui_command,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
@@ -509,12 +514,12 @@ class MiniAppRunnerContractTests(unittest.TestCase):
             if message.reply_text.await_count > 1:
                 second_call = message.reply_text.await_args_list[1]
                 self.assertNotIn("reply_markup", second_call.kwargs)
-                self.assertIn("отправьте /ui заново", second_call.args[0])
+                self.assertIn("отправьте /ui ещё раз", second_call.args[0])
 
     def test_inline_launch_keyboard_is_primary_for_ui_flow(self):
         kb = build_miniapp_launch_inline_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
         self.assertEqual(2, len(kb.inline_keyboard))
-        self.assertEqual("🧪 Продолжить в Mini App", kb.inline_keyboard[0][0].text)
+        self.assertEqual("🚀 Открыть викторину", kb.inline_keyboard[0][0].text)
         self.assertEqual("https://example.com/ui?context=x", kb.inline_keyboard[0][0].web_app.url)
         self.assertEqual("https://example.com/ui?context=y", kb.inline_keyboard[1][0].web_app.url)
 
@@ -522,10 +527,37 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
         categories = [{"id": 1, "name": "Category 1"}]
         text, keyboard = build_post_setup_miniapp_prompt("https://example.com/ui", categories, state)
-        self.assertIn("Откройте Mini App", text)
-        self.assertIn("/quiz", text)
+        self.assertEqual("Викторина создана. Откройте её в окне, чтобы начать.", text)
         self.assertIsNotNone(keyboard)
-        self.assertEqual("🧪 Продолжить в Mini App", keyboard.inline_keyboard[0][0].text)
+        self.assertEqual("🚀 Открыть викторину", keyboard.inline_keyboard[0][0].text)
+
+    def test_main_menu_contains_quiz_and_mini_app_entry_without_persistent_webapp_button(self):
+        keyboard = get_main_menu_keyboard()
+        texts = [button.text for row in keyboard.keyboard for button in row]
+        self.assertIn("🎯 Начать викторину", texts)
+        self.assertIn(MINI_APP_BUTTON_TEXT, texts)
+        self.assertTrue(all(getattr(button, "web_app", None) is None for row in keyboard.keyboard for button in row))
+
+    def test_help_text_uses_non_technical_ui_copy(self):
+        self.assertIn("/ui — открыть викторину в окне", HELP_TEXT)
+        self.assertNotIn("setup", HELP_TEXT.lower())
+        self.assertNotIn("runner", HELP_TEXT.lower())
+        self.assertNotIn("classic telegram chat ux", HELP_TEXT.lower())
+        self.assertNotIn("server state", HELP_TEXT.lower())
+
+    def test_ui_command_copy_avoids_technical_terms(self):
+        src = inspect.getsource(ui_command).lower()
+        self.assertNotIn("classic telegram chat ux", src)
+        self.assertNotIn("server state", src)
+        self.assertNotIn("mini app setup screen", src)
+
+    def test_post_init_sets_non_technical_ui_command_copy(self):
+        bot = SimpleNamespace(set_my_commands=AsyncMock())
+        app = SimpleNamespace(bot=bot)
+        asyncio.run(post_init(app))
+        commands = bot.set_my_commands.await_args.args[0]
+        ui_cmd = next(cmd for cmd in commands if cmd.command == "ui")
+        self.assertEqual("Открыть викторину в окне", ui_cmd.description)
 
     def test_should_start_miniapp_api_disabled_by_default(self):
         settings = SimpleNamespace(

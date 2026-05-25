@@ -77,8 +77,9 @@ HELP_TEXT = (
     "/help — список команд\n"
     "/ping — проверка доступности\n"
     "/quiz — запустить викторину\n"
-    "/ui — экспериментальный Mini App setup"
+    "/ui — открыть викторину в окне"
 )
+MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
 READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
 READING_MODE_LABELS = {
@@ -247,7 +248,7 @@ async def post_init(application: Application) -> None:
             BotCommand("help", "Список команд"),
             BotCommand("ping", "Проверка доступности"),
             BotCommand("quiz", "Начать викторину"),
-            BotCommand("ui", "Экспериментальный Mini App setup"),
+            BotCommand("ui", "Открыть викторину в окне"),
         ]
     )
 
@@ -483,8 +484,7 @@ def build_post_setup_miniapp_prompt(
             None,
         )
     return (
-        "Викторина создана. Откройте Mini App, чтобы пройти первый вопрос. "
-        "Если хотите классический режим, используйте /quiz.",
+        "Викторина создана. Откройте её в окне, чтобы начать.",
         build_miniapp_launch_inline_keyboard(miniapp_url),
     )
 
@@ -495,10 +495,10 @@ def build_miniapp_launch_inline_keyboard(
     force_setup_url: str | None = None,
     reopen_result: bool = False,
 ) -> InlineKeyboardMarkup:
-    first_label = "📊 Показать результат в Mini App" if reopen_result else "🧪 Продолжить в Mini App"
+    first_label = "📊 Показать результат" if reopen_result else "🚀 Открыть викторину"
     keyboard = [[InlineKeyboardButton(first_label, web_app=WebAppInfo(url=url))]]
     if force_setup_url:
-        keyboard.append([InlineKeyboardButton("🆕 Новый setup в Mini App", web_app=WebAppInfo(url=force_setup_url))])
+        keyboard.append([InlineKeyboardButton("🆕 Новая викторина", web_app=WebAppInfo(url=force_setup_url))])
     return InlineKeyboardMarkup(keyboard)
 
 async def safe_reply(update: Update, text: str) -> None:
@@ -514,6 +514,7 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton("🎯 Начать викторину")],
+            [KeyboardButton(MINI_APP_BUTTON_TEXT)],
             [KeyboardButton("ℹ️ Помощь")],
             [KeyboardButton(READING_MODE_BUTTON_TEXT)],
             [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
@@ -598,6 +599,10 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
         await message.delete()
     except Exception:
         logger.debug("Не удалось удалить сообщение-триггер скрытия меню %s", message.message_id)
+
+
+async def mini_app_menu_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await ui_command(update, context)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -702,14 +707,13 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     if update.message is None:
         return
     if not is_private_chat(update):
-        await update.message.reply_text("Mini App setup screen доступен только в личном чате с ботом.")
+        await update.message.reply_text("Викторина в окне доступна только в личном чате с ботом.")
         return
 
     settings = context.application.bot_data["settings"]
     if not settings.mini_app_url:
         await update.message.reply_text(
-            "Mini App setup screen пока не настроен.\n"
-            "Используйте обычный запуск викторины через /quiz."
+            "Викторина в окне пока не настроена. Можно пройти викторину в чате через /quiz."
         )
         return
 
@@ -747,13 +751,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         return
     logger.debug("Mini App setup URL length: %s", len(miniapp_url))
 
-    intro_text = (
-        "Текущий основной режим: classic Telegram chat UX (/quiz).\n\n"
-        "Доступен экспериментальный opt-in Mini App runner через /ui.\n"
-        "В Mini App можно настроить квиз, увидеть серверный текущий вопрос и отправить ответ.\n"
-        "Состояние после ответа обновляется при повторном открытии /ui.\n\n"
-        "Вы можете открыть Mini App или остаться в classic UX."
-    )
+    intro_text = "Откройте викторину в удобном окне. Классический режим в чате остаётся доступен через /quiz."
     if fallback_mode:
         intro_text = (
             "Mini App открыт в компактном режиме: текущий вопрос слишком большой для URL-транспорта. "
@@ -763,10 +761,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     has_active = isinstance(runner_state, dict) and runner_state.get("state") == "in_progress"
     if has_active:
         intro_text = (
-            "У вас уже есть активная сессия викторины (in_progress).\n"
-            "Кнопка Mini App продолжит текущий вопрос из серверного состояния.\n"
-            "Если хотите, можно остаться в classic режиме через /quiz.\n\n"
-            "Также доступен отдельный запуск нового setup в Mini App."
+            "У вас уже есть начатая викторина. Откройте её в удобном окне, чтобы продолжить."
         )
     await update.message.reply_text(
         intro_text,
@@ -776,7 +771,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         ),
     )
     await update.message.reply_text(
-        "Если Mini App не открылся, отправьте /ui заново и используйте свежую inline-кнопку.",
+        "Если кнопка не открылась, нажмите 🚀 Викторина в окне в меню или отправьте /ui ещё раз.",
     )
 
 
@@ -834,7 +829,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     if message is None or message.web_app_data is None:
         return
     if not is_private_chat(update):
-        await message.reply_text("Mini App setup screen доступен только в личном чате с ботом.")
+        await message.reply_text("Викторина в окне доступна только в личном чате с ботом.")
         return
     try:
         await message.delete()
@@ -1926,6 +1921,12 @@ def main() -> None:
         MessageHandler(
             filters.ChatType.PRIVATE & filters.Regex(r"^🎯 Начать викторину$"),
             start_quiz_button_handler,
+        )
+    )
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.Regex(r"^🚀 Викторина в окне$"),
+            mini_app_menu_button_handler,
         )
     )
     application.add_handler(
