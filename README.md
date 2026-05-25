@@ -25,7 +25,7 @@
 
 Кратко по конфигурации:
 - `BOT_TOKEN` — обязательный.
-- `MINI_APP_URL` — опциональный; включает экспериментальный setup-screen Mini App.
+- `MINI_APP_URL` — опциональный; включает экспериментальный opt-in Telegram Mini App runner (`/ui`).
 - `ADMIN_TELEGRAM_IDS` — опциональный список numeric Telegram user id через запятую для owner-only команд (например, `/stats`).
 
 ## Текущий продуктовый контур
@@ -89,9 +89,10 @@ Fallback:
 ## Telegram Mini App (experimental note)
 
 - Standalone Web UI / PWA сейчас не входят в текущий scope проекта.
-- Telegram Mini App может быть добавлен как экспериментальный opt-in UX mode внутри Telegram.
-- Первый MVP Mini App ограничен setup-экраном и не заменяет текущий chat-based quiz runner.
-- При будущем открытии через `/ui` Mini App получает активные категории от бота через setup context.
+- Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram по команде `/ui`.
+- Текущий Mini App MVP покрывает setup, state hydration, показ текущего вопроса, отправку ответа, feedback, переход к следующему шагу и итоговый результат с рестартом в окне Mini App.
+- `/quiz` остаётся дефолтным entry point и классическим chat-based runner.
+- Mini App использует backend API (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state.
 
 ## Что вне текущего продуктового контура
 
@@ -102,7 +103,7 @@ Fallback:
 
 ## Mini App deployment / QA runbook
 
-Для ручной deployment-валидации Mini App setup-screen используйте чеклист:
+Для ручной deployment-валидации Mini App runner используйте чеклист:
 - [`docs/miniapp-deployment-qa.md`](docs/miniapp-deployment-qa.md)
 
 Важно: в текущем репозитории hosting `miniapp/index.html` не автоматизирован runtime/deploy-скриптами и остаётся операторской инфраструктурной задачей.
@@ -128,8 +129,8 @@ Source-of-truth модель:
 
 ## Mini App setup (MVP)
 
-- `MINI_APP_URL` (optional): URL статического Telegram Mini App setup-экрана для opt-in команды `/ui`; при отсутствии переменной бот продолжает работать только в classic chat UX режиме.
-- В этом PR добавлен только статический setup-screen (`miniapp/index.html`); его hosting и публикация URL должны быть настроены отдельно на стороне deploy/infrastructure.
+- `MINI_APP_URL` (optional): URL статического Telegram Mini App runner для opt-in команды `/ui`; при отсутствии переменной бот продолжает работать только в classic chat UX режиме.
+- `miniapp/index.html` публикуется отдельно на стороне deploy/infrastructure; runtime-секреты и Telegram токены в frontend не размещаются.
 
 ## Deploy safety note
 

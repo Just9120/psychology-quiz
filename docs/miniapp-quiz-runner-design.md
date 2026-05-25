@@ -1,14 +1,18 @@
 # Mini App quiz runner design (next phase)
 
 ## Status and scope
-- This is a **design-only** document for the next phase after PR #124.
-- Current implemented Mini App scope includes setup + in-app question rendering/submission + server-derived progress/result via `/ui`.
+- Document type: **historical design + implemented architecture summary**.
+- Implemented through PR #162: setup, state hydration, in-app question rendering, answer submission, feedback, next transition, completed/result view, and in-window new quiz restart.
 - Runtime behavior in current state:
   - `/quiz` stays the default classic chat entry point.
   - `/ui` stays experimental opt-in.
-  - Mini App can render current server question and submit answers through `sendData`.
-  - Users reopen `/ui` to refresh authoritative state after each submit (static hosting + long polling constraints).
+  - Mini App uses dedicated API endpoints (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) with `initData` auth and resilient retry/recovery behavior.
   - `/stats` remains owner-only and outside Mini App.
+
+## Implemented through #162
+- Client transport for critical POSTs uses `simple_body`; retries include pre-retry state resync and early hedge recovery.
+- API responses are served over HTTP/1.1 with explicit `Content-Length` to improve WebView/proxy interoperability.
+- Automatic `sendData` fallback after API failure is intentionally disabled to avoid duplicate/misaligned state transitions.
 
 ## Future target scope
 Planned future UX inside Mini App (opt-in path):
@@ -38,7 +42,7 @@ Planned future UX inside Mini App (opt-in path):
 5. **Result produce**
    - Backend computes completion/result summary server-side and returns read-only result payload for display.
 
-## Transport options considered
+## Transport options considered (historical)
 
 ### Option A: `Telegram.WebApp.sendData` per answer
 **How it works**
