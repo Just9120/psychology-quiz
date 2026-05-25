@@ -76,6 +76,39 @@ class MiniAppApiTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify_telegram_init_data(self.init_data + 'x', self.bot_token)
 
+    def test_state_response_includes_recent_answer_feedback_after_accept(self):
+        build_answer_response(
+            self.db,
+            self.bot_token,
+            self.init_data,
+            json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode(),
+        )
+        code, _, body = build_state_response(self.db, self.bot_token, self.init_data)
+        self.assertEqual(200, code)
+        payload = json.loads(body)
+        feedback = payload.get('recent_answer_feedback')
+        self.assertIsInstance(feedback, dict)
+        self.assertEqual(1, feedback.get('question_id'))
+        self.assertEqual(0, feedback.get('selected_option_index'))
+        self.assertEqual(0, feedback.get('correct_option_index'))
+        self.assertEqual('A', feedback.get('selected_option_text'))
+        self.assertEqual('A', feedback.get('correct_option_text'))
+        self.assertTrue(feedback.get('is_correct'))
+        self.assertEqual('E', feedback.get('explanation'))
+
+    def test_state_response_does_not_expose_other_user_feedback(self):
+        build_answer_response(
+            self.db,
+            self.bot_token,
+            self.init_data,
+            json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode(),
+        )
+        other_init = _make_init_data(self.bot_token, {'id': 777, 'username': 'other', 'first_name': 'o'})
+        code, _, body = build_state_response(self.db, self.bot_token, other_init)
+        self.assertEqual(200, code)
+        payload = json.loads(body)
+        self.assertNotIn('recent_answer_feedback', payload)
+
     def test_state_response(self):
         code, headers, body = build_state_response(self.db, self.bot_token, self.init_data)
         self.assertEqual(200, code)

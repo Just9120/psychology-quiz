@@ -90,9 +90,12 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_incomplete_feedback_resync_guard(self):
         self.assertIn('function hasCompleteFeedback(feedback)', self.content)
+        self.assertIn("function getResyncedFeedbackForSubmission(stateData, submittedQuestionId, selectedOptionIndex)", self.content)
+        self.assertIn("const feedback = stateData?.recent_answer_feedback;", self.content)
         self.assertIn("if (hasCompleteFeedback(answerJson.feedback))", self.content)
         self.assertIn("answerJson.submission_status === 'duplicate'", self.content)
         self.assertIn("answerJson.submission_status === 'stale_question'", self.content)
+        self.assertIn("answerJson.submission_status === 'resynced_with_feedback'", self.content)
         self.assertIn("renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });", self.content)
 
     def test_no_automatic_send_data_after_api_failures(self):
