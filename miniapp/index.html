@@ -56,8 +56,39 @@
       .feedback-correct { color: #0a7d24; font-weight: 700; }
       .feedback-wrong { color: #b00020; font-weight: 700; }
       .answer-selected { outline: 2px solid #666; }
+      .answer-pending {
+        outline: 2px solid #3653a5;
+        background: #eef3ff;
+      }
       .answer-correct { outline: 2px solid #0a7d24; }
       .answer-selected-wrong { outline: 2px solid #b00020; }
+      .answer-disabled {
+        opacity: 0.65;
+      }
+      .answer-status {
+        min-height: 24px;
+        margin: 8px 0 10px;
+        color: #445;
+        font-size: 0.95em;
+      }
+      .answer-status.pending::before {
+        content: '⏳ ';
+      }
+      .answer-feedback {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      .progress-chip {
+        display: inline-block;
+        font-size: 0.9em;
+        color: #334;
+        background: #f1f4f9;
+        border-radius: 999px;
+        padding: 4px 10px;
+        margin: 0 0 8px;
+      }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
@@ -731,13 +762,31 @@
         const disableButtons = () => {
           [...questionView.querySelectorAll('ol button')].forEach((b) => {
             b.disabled = true;
+            b.classList.add('answer-disabled');
           });
         };
         const enableButtons = () => {
           [...questionView.querySelectorAll('ol button')].forEach((b) => {
             b.disabled = false;
+            b.classList.remove('answer-disabled');
+            b.classList.remove('answer-pending');
           });
         };
+        const statusEl = questionView.querySelector('[data-answer-status="1"]');
+        const optionButtons = [...questionView.querySelectorAll('ol button')];
+        optionButtons.forEach((btn) => {
+          const idx = Number(btn.getAttribute('data-option-index'));
+          if (idx === selectedOptionIndex) {
+            btn.classList.add('answer-selected', 'answer-pending');
+            btn.setAttribute('aria-label', `${btn.textContent}. Выбрано, идёт отправка`);
+          } else {
+            btn.classList.add('answer-disabled');
+          }
+        });
+        if (statusEl) {
+          statusEl.classList.add('pending');
+          statusEl.textContent = 'Проверяю ответ...';
+        }
         disableButtons();
 
         const initData = tg?.initData || '';
@@ -981,6 +1030,8 @@
       function renderAnswerFeedback(snapshot, selectedOptionIndex, feedback, nextState) {
         showRunnerMode();
         questionView.hidden = false;
+        const pendingStatus = questionView.querySelector('[data-answer-status="1"]');
+        if (pendingStatus) pendingStatus.remove();
         const optionButtons = [...questionView.querySelectorAll('ol button')];
         optionButtons.forEach((btn) => btn.disabled = true);
         const selectedIdx = Number.isInteger(Number(feedback?.selected_option_index))
@@ -996,10 +1047,12 @@
           if (idx === selectedIdx && correctIdx !== null && selectedIdx !== correctIdx) btn.classList.add('answer-selected-wrong');
         });
 
+        const feedbackWrap = document.createElement('div');
+        feedbackWrap.className = 'answer-feedback';
         const status = document.createElement('p');
         status.className = feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong';
-        status.textContent = feedback?.is_correct ? 'Верно' : 'Неверно';
-        questionView.appendChild(status);
+        status.textContent = feedback?.is_correct ? '✅ Верно' : '❌ Неверно';
+        feedbackWrap.appendChild(status);
         const details = document.createElement('p');
         const selectedText = typeof feedback?.selected_option_text === 'string' && feedback.selected_option_text
           ? feedback.selected_option_text
@@ -1008,18 +1061,19 @@
           ? feedback.correct_option_text
           : (Array.isArray(snapshot?.options) && correctIdx !== null ? (snapshot.options.find((o) => Number(o.option_index) === correctIdx)?.option_text || '') : '');
         const selectedLabel = Number.isInteger(selectedIdx) ? `${selectedIdx + 1}` : '?';
-        if (correctIdx !== null) {
+        if (correctIdx !== null && correctText) {
           const correctLabel = `${correctIdx + 1}`;
           details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}. Правильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
         } else {
           details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}.`;
         }
-        questionView.appendChild(details);
+        feedbackWrap.appendChild(details);
         if (typeof feedback?.explanation === 'string' && feedback.explanation) {
           const ex = document.createElement('p');
           ex.textContent = `Пояснение: ${feedback.explanation}`;
-          questionView.appendChild(ex);
+          feedbackWrap.appendChild(ex);
         }
+        questionView.appendChild(feedbackWrap);
         const next = document.createElement('button');
         next.type = 'button';
         next.textContent = 'Далее';
@@ -1043,6 +1097,11 @@
         header.textContent =
           Number.isInteger(order) && Number.isInteger(total) && total > 0 ? `Вопрос ${order} из ${total}` : 'Текущий вопрос';
         questionView.appendChild(header);
+        const progress = document.createElement('div');
+        progress.className = 'progress-chip';
+        progress.textContent =
+          Number.isInteger(order) && Number.isInteger(total) && total > 0 ? `Прогресс: вопрос ${order} из ${total}` : 'Текущий вопрос';
+        questionView.appendChild(progress);
 
         const q = document.createElement('p');
         q.textContent = snapshot.question_text;
@@ -1062,6 +1121,11 @@
           list.appendChild(li);
         });
         questionView.appendChild(list);
+        const status = document.createElement('p');
+        status.className = 'answer-status';
+        status.setAttribute('data-answer-status', '1');
+        status.textContent = 'Выберите вариант ответа.';
+        questionView.appendChild(status);
       }
 
       function renderRunnerState(state, { preferLaunchCompact = false } = {}) {
