@@ -68,6 +68,9 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("answer-disabled", self.content)
         self.assertIn("answer-correct", self.content)
         self.assertIn("answer-selected-wrong", self.content)
+        self.assertIn("ol button:disabled {", self.content)
+        self.assertIn("-webkit-text-fill-color: #222;", self.content)
+        self.assertNotIn("opacity: 0.65;", self.content)
         self.assertIn("statusEl.textContent = 'Проверяю ответ...';", self.content)
         self.assertIn("status.className = 'answer-status';", self.content)
         self.assertIn("statusEl.classList.add('pending');", self.content)
@@ -81,6 +84,8 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("Ответ принят, состояние обновлено.", self.content)
         self.assertIn("Ответ уже был принят, состояние обновлено.", self.content)
         self.assertIn("Не удалось обновить интерфейс после ответа. Попробуйте снова.", self.content)
+        self.assertIn("feedback-line", self.content)
+        self.assertIn("next.className = 'answer-next';", self.content)
 
 
     def test_incomplete_feedback_resync_guard(self):
