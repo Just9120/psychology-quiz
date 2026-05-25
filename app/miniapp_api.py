@@ -109,7 +109,7 @@ def verify_telegram_init_data(init_data: str, bot_token: str, *, max_age_seconds
 
 def _json(status: HTTPStatus, payload: dict[str, Any]) -> tuple[int, dict[str, str], bytes]:
     body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
-    return status.value, {"Content-Type": "application/json; charset=utf-8"}, body
+    return status.value, {"Content-Type": "application/json; charset=utf-8", "Content-Length": str(len(body))}, body
 
 
 def _extract_init_data(headers) -> str:
@@ -369,6 +369,7 @@ def build_setup_options_response(
 
 
 class MiniAppApiHandler(BaseHTTPRequestHandler):
+    protocol_version = "HTTP/1.1"
     db_path = ""
     bot_token = ""
     initdata_ttl_seconds = 3600
@@ -396,6 +397,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type, X-Telegram-Init-Data, X-Miniapp-Request-Id")
         self.send_header("Access-Control-Max-Age", "600")
+        self.send_header("Content-Length", "0")
         self.end_headers()
         logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s", endpoint, request_id or "-", HTTPStatus.NO_CONTENT.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no", self.headers.get("Access-Control-Request-Method", ""), self.headers.get("Access-Control-Request-Headers", ""))
 
