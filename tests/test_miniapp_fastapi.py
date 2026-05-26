@@ -102,6 +102,27 @@ class MiniAppFastApiTests(unittest.TestCase):
         self.assertEqual("https://miniapp.example.com", response.headers.get("Access-Control-Allow-Origin"))
         self.assertEqual("GET, POST, OPTIONS", response.headers.get("Access-Control-Allow-Methods"))
 
+
+    def test_get_state_trailing_slash_returns_404(self):
+        response = self.client.get("/miniapp/state/", headers={"Authorization": f"tma {self.init_data}"}, follow_redirects=False)
+        self.assertEqual(404, response.status_code)
+
+    def test_options_state_trailing_slash_returns_404(self):
+        response = self.client.options(
+            "/miniapp/state/",
+            headers={
+                "Origin": "https://miniapp.example.com",
+                "Access-Control-Request-Method": "GET",
+                "Access-Control-Request-Headers": "Authorization",
+            },
+            follow_redirects=False,
+        )
+        self.assertEqual(404, response.status_code)
+
+    def test_get_setup_options_trailing_slash_returns_404(self):
+        response = self.client.get("/miniapp/setup-options/", headers={"Authorization": f"tma {self.init_data}"}, follow_redirects=False)
+        self.assertEqual(404, response.status_code)
+
     def test_database_busy_returns_json_503(self):
         with patch("app.miniapp_fastapi.build_state_response", side_effect=lambda *args, **kwargs: _database_busy_response()):
             response = self.client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})

@@ -69,7 +69,7 @@ def _log_request(
 
 
 def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600, allowed_origin: str | None = None) -> FastAPI:
-    app = FastAPI()
+    app = FastAPI(redirect_slashes=False)
 
     def _set_common_headers(response: Response, request: Request) -> None:
         response.headers["Cache-Control"] = "no-store"
