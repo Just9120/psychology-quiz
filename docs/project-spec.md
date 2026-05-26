@@ -161,6 +161,45 @@ Out of scope для первого Mini App MVP:
 - Детальная эволюция архитектуры и исторические решения зафиксированы в `docs/miniapp-quiz-runner-design.md`.
 - Состояние Mini App клиента считается недоверенным, server-side валидация остаётся авторитативной.
 
+
+## Mini App API target architecture (phased)
+- Bot runtime remains responsible for Telegram command/update handling and classic `/quiz` UX.
+- Dedicated FastAPI service is the target runtime for Mini App API endpoints (`/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`).
+- Static Mini App frontend remains separately hosted over HTTPS (unchanged hosting model).
+- API endpoint contracts remain backward-compatible; migration target is HTTP serving/runtime layer, not quiz business semantics.
+
+Deployment model (final target):
+- One repository + one VPS/deployment environment + one Docker Compose stack.
+- Separate services/containers (`psych_quiz_bot`, `psych_quiz_miniapp_api`) in Compose.
+- This is **not** multiple services inside one Docker container.
+- Not a separate project/server; operationally coordinated in same deployment environment.
+
+Phased rollout model:
+- **Phase 1 (repo-only implementation):**
+  - FastAPI implementation exists in repository and tests only;
+  - production CD does not enable/start FastAPI;
+  - FastAPI does not receive production Mini App traffic;
+  - current production bot + legacy Mini App API runtime remains unchanged.
+- **Phase 2 (production switch-over, separate PR):**
+  - separate PR enables FastAPI as production Mini App API;
+  - updates compose/CD/routing/env as needed in same repo/VPS environment;
+  - CD rebuilds/restarts relevant runtime services after switch-over (`psych_quiz_bot`, `psych_quiz_miniapp_api`);
+  - smoke + logs/metrics validation required before completion.
+- **Phase 3 (cleanup after soak):**
+  - remove/disable legacy `ThreadingHTTPServer` Mini App API path only after soak period confirms stability.
+
+Trust model (unchanged):
+- Mini App client remains untrusted.
+- Server-side validation/authorization/state transitions remain authoritative.
+- `/quiz` classic behavior remains unchanged and default.
+
+Migration non-goals (explicit):
+- no PostgreSQL introduction in this sprint;
+- no Redis;
+- no FastAPI rewrite for Telegram bot handlers;
+- no frontend rewrite;
+- no scoring/session schema changes.
+
 ## Data and runtime state model
 - SQLite не является source of truth; SQLite — runtime layer хранения и выдачи данных.
 - Обновление runtime-слоя выполняется через `scripts/seed_questions.py`.
