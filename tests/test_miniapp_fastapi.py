@@ -83,17 +83,18 @@ class MiniAppFastApiTests(unittest.TestCase):
 
         shadow_db = f"{self.db}.expected"
         shutil.copyfile(self.db, shadow_db)
-        expected_status, expected_headers, expected_body = build_setup_response(
-            shadow_db,
-            self.bot_token,
-            self.init_data,
-            json.dumps(request_payload["payload"], separators=(",", ":")).encode("utf-8"),
-        )
+        with patch("app.miniapp_api.select_random_approved_question_ids_across_active_categories", return_value=[1, 2]):
+            expected_status, expected_headers, expected_body = build_setup_response(
+                shadow_db,
+                self.bot_token,
+                self.init_data,
+                json.dumps(request_payload["payload"], separators=(",", ":")).encode("utf-8"),
+            )
 
-        response = self.client.post(
-            "/miniapp/setup",
-            json=request_payload,
-        )
+            response = self.client.post(
+                "/miniapp/setup",
+                json=request_payload,
+            )
         self.assertEqual(200, response.status_code)
         payload = response.json()
         self.assertTrue(payload["ok"])
@@ -102,12 +103,7 @@ class MiniAppFastApiTests(unittest.TestCase):
 
         self.assertEqual(expected_status, response.status_code)
         self.assertEqual(expected_headers["Content-Type"], response.headers.get("content-type"))
-        expected_payload = self._decode_json_bytes(expected_body)
-        self.assertEqual(expected_payload["ok"], payload["ok"])
-        self.assertEqual(expected_payload["runner_state"]["state"], payload["runner_state"]["state"])
-        self.assertEqual(expected_payload["runner_state"]["session"]["session_status"], payload["runner_state"]["session"]["session_status"])
-        self.assertEqual(expected_payload["runner_state"]["progress"]["total_questions"], payload["runner_state"]["progress"]["total_questions"])
-        self.assertIn(payload["runner_state"]["current_question"]["question_id"], {1, 2})
+        self.assertEqual(self._decode_json_bytes(expected_body), payload)
         os.remove(shadow_db)
 
     def test_post_answer_simple_body_transport(self):
