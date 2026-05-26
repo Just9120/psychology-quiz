@@ -1,5 +1,6 @@
 import unittest
 from pathlib import Path
+import re
 
 
 class MiniAppFrontendContractTests(unittest.TestCase):
@@ -196,11 +197,12 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("setup_transport:", self.content)
 
 
-    def test_docs_section_numbering_is_unique_around_diagnostics(self):
+    def test_docs_numbered_h2_headings_have_unique_numbers(self):
         docs = Path('docs/miniapp-deployment-qa.md').read_text(encoding='utf-8')
-        self.assertEqual(docs.count('## 12) Frontend timing diagnostics vs backend `duration_ms` (debug-only)'), 1)
-        self.assertEqual(docs.count('## 13) FastAPI runtime notes: threadpool offload + structured latency logs'), 1)
-        self.assertEqual(docs.count('## 12) FastAPI runtime notes: threadpool offload + structured latency logs'), 0)
+        numbers = re.findall(r'^## (\d+)\)', docs, flags=re.MULTILINE)
+        self.assertTrue(numbers, 'Expected numbered ## headings in docs/miniapp-deployment-qa.md')
+        duplicates = sorted({n for n in numbers if numbers.count(n) > 1}, key=int)
+        self.assertEqual(duplicates, [], f'Duplicate numbered ## headings found: {duplicates}')
 
     def test_debug_diagnostics_do_not_render_secrets(self):
         self.assertNotIn("tg.initData", " ".join(line for line in self.content.splitlines() if "apiDiag.textContent" in line or "answer_phases" in line or "setup_phases" in line))
