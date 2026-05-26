@@ -258,6 +258,34 @@
 ## 11) SQLite runtime hardening checks (post-deploy)
 - Mini App API handlers explicitly close SQLite connections (`closing(get_connection(...))` + nested `with conn:`) to avoid lingering file locks.
 - SQLite connection defaults now include:
+
+## 12) FastAPI Phase 1 local/dev parity run (repo-only, no production switch-over)
+
+> ⚠️ **Local/dev only.** This section is for repository validation and manual QA on a developer machine.
+>
+> - It does **not** change production deployment.
+> - It does **not** change CD/workflows/routing.
+> - Legacy `ThreadingHTTPServer` API path remains the current production path.
+> - Any production switch-over must happen in a later explicit PR.
+
+Run FastAPI locally from the repo root:
+
+```bash
+MINIAPP_DB_PATH=/absolute/path/to/local.sqlite3 \
+BOT_TOKEN=123456:dev-token \
+uvicorn scripts.run_miniapp_fastapi_dev:app --host 127.0.0.1 --port 8081
+```
+
+The helper `scripts/run_miniapp_fastapi_dev.py` only wires local env values into `create_app(...)` for development use (without changing production runtime files). Optional env vars:
+
+- `MINIAPP_API_ALLOWED_ORIGIN` (for local CORS checks)
+- `MINIAPP_API_INITDATA_TTL_SECONDS` (defaults to `3600`)
+
+For automated parity checks, use:
+
+```bash
+python -m unittest tests/test_miniapp_fastapi.py
+```
   - `PRAGMA busy_timeout = 10000`
   - `PRAGMA journal_mode = WAL`
   - `PRAGMA synchronous = NORMAL`
