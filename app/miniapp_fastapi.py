@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import time
 from typing import Any
 
@@ -68,6 +69,22 @@ def _log_request(
     )
 
 
+
+def _required_env(name: str) -> str:
+    value = os.getenv(name, "").strip()
+    if not value:
+        raise RuntimeError(f"Missing required env var for FastAPI runtime: {name}")
+    return value
+
+
+def create_app_from_env() -> FastAPI:
+    return create_app(
+        db_path=_required_env("DB_PATH"),
+        bot_token=_required_env("BOT_TOKEN"),
+        initdata_ttl_seconds=int(os.getenv("MINIAPP_API_INITDATA_TTL_SECONDS", "3600")),
+        allowed_origin=os.getenv("MINIAPP_API_ALLOWED_ORIGIN", "").strip() or None,
+    )
+
 def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600, allowed_origin: str | None = None) -> FastAPI:
     app = FastAPI(redirect_slashes=False)
 
@@ -77,6 +94,11 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
         if allowed_origin and request_origin == allowed_origin:
             response.headers["Access-Control-Allow-Origin"] = allowed_origin
             response.headers["Vary"] = "Origin"
+
+
+    @app.get("/healthz")
+    async def healthz() -> dict[str, Any]:
+        return {"ok": True, "service": "miniapp_api"}
 
     @app.api_route("/miniapp/{rest:path}", methods=["OPTIONS"])
     async def options_handler(rest: str, request: Request) -> Response:
