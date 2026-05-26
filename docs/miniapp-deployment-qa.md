@@ -268,18 +268,36 @@
 > - Legacy `ThreadingHTTPServer` API path remains the current production path.
 > - Any production switch-over must happen in a later explicit PR.
 
-Run FastAPI locally from the repo root:
+Run FastAPI locally from the repo root with the future runtime entrypoint:
 
 ```bash
-MINIAPP_DB_PATH=/absolute/path/to/local.sqlite3 \
+DB_PATH=/absolute/path/to/local.sqlite3 \
 BOT_TOKEN=123456:dev-token \
-uvicorn scripts.run_miniapp_fastapi_dev:app --host 127.0.0.1 --port 8081
+uvicorn app.miniapp_fastapi_runtime:app --host 127.0.0.1 --port 8081
 ```
 
-The helper `scripts/run_miniapp_fastapi_dev.py` only wires local env values into `create_app(...)` for development use (without changing production runtime files). Optional env vars:
+Runtime wiring is intentionally minimal and repo-only:
 
-- `MINIAPP_API_ALLOWED_ORIGIN` (for local CORS checks)
-- `MINIAPP_API_INITDATA_TTL_SECONDS` (defaults to `3600`)
+- required env: `BOT_TOKEN`, `DB_PATH`
+- optional env: `MINIAPP_API_ALLOWED_ORIGIN`, `MINIAPP_API_INITDATA_TTL_SECONDS`
+- the runtime entrypoint uses `create_app_from_env()` and reuses the existing `create_app(...)` + `app.miniapp_api` builders
+
+`GET /healthz` is available for lightweight process-level health checks and returns JSON:
+
+```json
+{"ok": true, "service": "miniapp_api"}
+```
+
+For local/dev smoke validation (no real Telegram traffic required):
+
+```bash
+python scripts/smoke_miniapp_fastapi.py
+```
+
+Smoke helper checks:
+- `GET /healthz`
+- `OPTIONS /miniapp/answer`
+- `GET /miniapp/state` without `initData` returns JSON auth error (not HTML)
 
 For automated parity checks, use:
 

@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
 from app.miniapp_api import _database_busy_response, build_answer_response, build_setup_options_response, build_setup_response, build_state_response
-from app.miniapp_fastapi import create_app
+from app.miniapp_fastapi import create_app, create_app_from_env
 from tests.test_miniapp_api import _make_init_data, _setup_schema
 
 
@@ -135,6 +135,12 @@ class MiniAppFastApiTests(unittest.TestCase):
         self.assertEqual(200, response.status_code)
         self.assertTrue(response.json()["ok"])
 
+    def test_healthz_returns_expected_payload(self):
+        response = self.client.get("/healthz")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual({"ok": True, "service": "miniapp_api"}, response.json())
+        self.assertEqual("application/json", response.headers.get("content-type"))
+
     def test_options_cors(self):
         response = self.client.options(
             "/miniapp/answer",
@@ -199,6 +205,23 @@ class MiniAppFastApiTests(unittest.TestCase):
         self.assertEqual(401, response.status_code)
         self.assertEqual("application/json; charset=utf-8", response.headers.get("content-type"))
         self.assertIn(response.json().get("error"), {"invalid_hash", "missing_hash", "invalid_auth_date"})
+
+
+class MiniAppFastApiRuntimeEnvTests(unittest.TestCase):
+    def test_create_app_from_env_success(self):
+        with patch.dict(os.environ, {"BOT_TOKEN": "123:abc", "DB_PATH": "/tmp/dev.sqlite3", "MINIAPP_API_INITDATA_TTL_SECONDS": "120", "MINIAPP_API_ALLOWED_ORIGIN": "https://miniapp.example.com"}, clear=True):
+            app = create_app_from_env()
+        client = TestClient(app)
+        response = client.get("/healthz")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual({"ok": True, "service": "miniapp_api"}, response.json())
+
+    def test_create_app_from_env_missing_required_var_fails_fast(self):
+        with patch.dict(os.environ, {"DB_PATH": "/tmp/dev.sqlite3"}, clear=True):
+            with self.assertRaisesRegex(RuntimeError, "BOT_TOKEN"):
+                create_app_from_env()
+
+
 
 
 if __name__ == "__main__":
