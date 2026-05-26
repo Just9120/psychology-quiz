@@ -118,6 +118,17 @@ def _database_busy_response() -> tuple[int, dict[str, str], bytes]:
     return status, headers, body
 
 
+def _is_sqlite_locked_error(exc: sqlite3.OperationalError) -> bool:
+    message = str(exc).lower()
+    return (
+        "database is locked" in message
+        or "database table is locked" in message
+        or "database schema is locked" in message
+        or "table is locked" in message
+        or "schema is locked" in message
+    )
+
+
 def _extract_init_data(headers) -> str:
     auth = headers.get("Authorization", "")
     if auth.startswith("tma "):
@@ -215,7 +226,7 @@ def build_state_response(
                 state = build_miniapp_runner_state(conn, actor_user_id=actor_user_id)
                 recent_answer_feedback = _build_recent_answer_feedback(conn, actor_user_id=actor_user_id)
     except sqlite3.OperationalError as exc:
-        if "database is locked" in str(exc).lower():
+        if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/state", started_at)
             return _database_busy_response()
         raise
@@ -289,7 +300,7 @@ def build_answer_response(
                     response_payload["runner_state"] = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
                 return _json(HTTPStatus.OK, response_payload)
     except sqlite3.OperationalError as exc:
-        if "database is locked" in str(exc).lower():
+        if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/answer", started_at)
             return _database_busy_response()
         raise
@@ -384,7 +395,7 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
                 store_session_questions(conn, session_id, question_ids)
                 state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
     except sqlite3.OperationalError as exc:
-        if "database is locked" in str(exc).lower():
+        if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/setup", started_at)
             return _database_busy_response()
         raise
@@ -410,7 +421,7 @@ def build_setup_options_response(
                 create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 categories = [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)]
     except sqlite3.OperationalError as exc:
-        if "database is locked" in str(exc).lower():
+        if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/setup-options", started_at)
             return _database_busy_response()
         raise
@@ -485,7 +496,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
         except sqlite3.OperationalError as exc:
-            if "database is locked" not in str(exc).lower():
+            if not _is_sqlite_locked_error(exc):
                 raise
             _log_locked_db(endpoint, started_at)
             status, headers, body = _database_busy_response()
@@ -546,7 +557,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
         except sqlite3.OperationalError as exc:
-            if "database is locked" not in str(exc).lower():
+            if not _is_sqlite_locked_error(exc):
                 raise
             _log_locked_db(endpoint, started_at)
             status, headers, data = _database_busy_response()

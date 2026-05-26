@@ -405,6 +405,17 @@ class MiniAppApiTests(unittest.TestCase):
             status, headers, body = build_setup_options_response(self.db, self.bot_token, self.init_data)
         self._assert_db_busy_response(status, headers, body)
 
+    def test_db_table_locked_returns_structured_503_json(self):
+        with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("database table is locked")):
+            status, headers, body = build_state_response(self.db, self.bot_token, self.init_data)
+        self._assert_db_busy_response(status, headers, body)
+
+    def test_db_schema_locked_returns_structured_503_json(self):
+        body = json.dumps({"session_id": self.session_id, "question_id": 1, "selected_option_index": 0}).encode()
+        with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("database schema is locked")):
+            status, headers, payload = build_answer_response(self.db, self.bot_token, self.init_data, body)
+        self._assert_db_busy_response(status, headers, payload)
+
     def test_non_lock_operational_error_is_not_converted(self):
         with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("disk I/O error")):
             with self.assertRaises(sqlite3.OperationalError):
