@@ -259,6 +259,26 @@
 - Mini App API handlers explicitly close SQLite connections (`closing(get_connection(...))` + nested `with conn:`) to avoid lingering file locks.
 - SQLite connection defaults now include:
 
+## 12) FastAPI runtime notes: threadpool offload + structured latency logs
+- FastAPI Mini App routes are `async`, but Mini App builders (`build_state_response`, `build_setup_options_response`, `build_setup_response`, `build_answer_response`) are synchronous and include SQLite I/O.
+- To avoid ASGI event-loop blocking, these builders are intentionally executed through threadpool offload (`asyncio.to_thread(...)`) from `app/miniapp_fastapi.py`.
+- This preserves existing transport semantics and response contract (`(status, headers, body)` → `Response(content=body, status_code=status, headers=...)`).
+- `database_busy_retry` contract remains unchanged: HTTP `503` with structured JSON `{"ok": false, "error": "database_busy_retry"}`.
+
+### Post-deploy log visibility check (FastAPI container)
+1. Run a request that should produce a fast auth failure (missing initData):
+   - `curl -i http://127.0.0.1:8081/miniapp/state`
+2. Check structured logs in Docker:
+   - `docker compose -f docker-compose.yml logs --no-log-prefix --since 1m --timestamps psych_quiz_miniapp_api | grep -Ei 'miniapp_api endpoint=|duration_ms=|miniapp_api_slow'`
+
+Expected signal:
+- You should see a `miniapp_api endpoint=/miniapp/state ... status=401 ... duration_ms=...` line even for early returns.
+- Slow requests above threshold should additionally produce `miniapp_api_slow ...` at WARNING level.
+
+How to interpret:
+- Low `duration_ms` while users still report hangs usually indicates delay outside backend handler execution (network path, Telegram WebView, proxy/CDN, or frontend state flow).
+- High `duration_ms` and/or recurring `miniapp_api_slow` points to backend latency (DB contention, slow code path, or server resource pressure) and should be investigated server-side.
+
 ## 12) FastAPI Phase 1 local/dev parity run (repo-only, no production switch-over)
 
 > ⚠️ **Local/dev only.** This section is for repository validation and manual QA on a developer machine.
