@@ -335,3 +335,40 @@ Backup example for production DB file:
 - **Backlog:** migrate Mini App API to ASGI stack + move frontend state flow to declarative model.
 
 - If `/miniapp/answer` response is lost/delayed but `/miniapp/state` confirms answer acceptance, Mini App still shows the answer feedback card first (`✅/❌`, `Ваш ответ`, `Правильный ответ`, `Пояснение`, `Далее`) and only then advances.
+
+
+## 13) FastAPI HTTP-layer migration QA checklist
+Goal: validate migration from legacy `ThreadingHTTPServer` Mini App API to FastAPI + uvicorn without UX/contract regressions.
+
+Functional smoke:
+- [ ] `GET /miniapp/state` returns expected JSON state for active and completed sessions.
+- [ ] `GET /miniapp/setup-options` returns expected JSON setup payload.
+- [ ] `POST /miniapp/setup` creates/continues sessions per existing contract.
+- [ ] `POST /miniapp/answer` preserves accepted/stale/duplicate behavior and payload schema.
+- [ ] CORS behavior remains correct for configured Mini App origin.
+- [ ] `OPTIONS` preflight behavior is correct for Mini App API endpoints.
+
+Protocol/response checks:
+- [ ] Responses are valid JSON where JSON is expected.
+- [ ] HTTP framing is ASGI-correct (Content-Length when applicable and/or equivalent correct transfer framing).
+- [ ] Structured `database_busy_retry` error contract still returns JSON 503 with expected fields.
+
+Resilience regression checks:
+- [ ] Answer feedback recovery still works after transient lost response/network hiccup.
+- [ ] Frontend retry behavior remains jittered and recoverable (no duplicate score/session corruption).
+
+Classic UX safety:
+- [ ] `/quiz` flow remains unaffected and default in Telegram chat UX.
+
+Rollout/rollback operational checks:
+- [ ] New API service/container (e.g., `psych_quiz_miniapp_api`) is up and healthy.
+- [ ] Legacy API service name/path is still available for rollback during cutover window.
+- [ ] `MINI_APP_API_BASE_URL` (or reverse proxy upstream) points to FastAPI target during rollout.
+- [ ] Rollback procedure verified: switching route/env back to legacy API restores stable Mini App behavior without contract changes.
+
+Suggested smoke/log commands (adjust service names for environment):
+- `docker compose ps`
+- `docker compose logs --tail=200 psych_quiz_miniapp_api`
+- `docker compose logs --tail=200 <legacy-miniapp-api-service>`
+- `grep "miniapp_api endpoint=/miniapp/answer" <bot-log-file>`
+- `grep "database_busy_retry" <bot-log-file>`

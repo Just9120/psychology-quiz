@@ -19,6 +19,36 @@
 ## Next recommended item
 Run expanded MVP QA with 2–3 real users/devices; collect UX/latency findings before changing default UX.
 
+## Next technical sprint
+### Migrate Mini App API from `ThreadingHTTPServer` to FastAPI + uvicorn
+- Scope: targeted migration of the Mini App API HTTP layer only (`/miniapp/*` endpoints), without changing endpoint contracts or quiz/session semantics.
+- Why now:
+  - reduce custom low-level HTTP handling in application code;
+  - improve production HTTP stack via mature ASGI server/runtime;
+  - simplify CORS/`OPTIONS`/error-handling behavior;
+  - improve observability and create a cleaner path for future API evolution.
+- Product/runtime invariants:
+  - `/quiz` remains the default classic Telegram flow;
+  - Mini App remains opt-in (`/ui`, `🚀 Викторина в окне`);
+  - SQLite remains current runtime store in this sprint.
+- Data-layer position:
+  - PostgreSQL is explicitly deferred and considered only as a later option if concurrency, analytics, or operational requirements outgrow current SQLite constraints.
+- Non-goals:
+  - no PostgreSQL introduction in this sprint;
+  - no Redis;
+  - no FastAPI rewrite of Telegram bot command handlers;
+  - no frontend rewrite;
+  - no scoring/session schema changes;
+  - no `/quiz` behavior change.
+- Rollout plan:
+  1. deploy FastAPI Mini App API service in parallel with legacy API process;
+  2. route `MINI_APP_API_BASE_URL` (and/or reverse proxy target) to FastAPI service;
+  3. run Mini App smoke QA (`state/setup/answer` flows + CORS/OPTIONS checks);
+  4. monitor logs/latency/error buckets and retry behavior.
+- Rollback plan:
+  1. switch API route/env back to legacy `ThreadingHTTPServer` service;
+  2. keep endpoint contracts unchanged so rollback remains low-risk and transparent to frontend.
+
 ## Mini App roadmap
 ### Done (through #166)
 - SQLite runtime hardening (WAL, busy timeout, explicit connection closing, indexes).

@@ -11,7 +11,8 @@
 
 ## Implemented through #162
 - Client transport for critical POSTs uses `simple_body`; retries include pre-retry state resync and early hedge recovery.
-- API responses are served over HTTP/1.1 with explicit `Content-Length` to improve WebView/proxy interoperability.
+- API responses in current MVP are served by legacy `ThreadingHTTPServer` path with HTTP/1.1 + explicit `Content-Length` hardening.
+- Target next step: migrate HTTP serving layer to FastAPI + uvicorn while preserving endpoint contracts and server-authoritative quiz semantics.
 - Automatic `sendData` fallback after API failure is intentionally disabled to avoid duplicate/misaligned state transitions.
 
 ## Future target scope

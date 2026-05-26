@@ -161,6 +161,31 @@ Out of scope для первого Mini App MVP:
 - Детальная эволюция архитектуры и исторические решения зафиксированы в `docs/miniapp-quiz-runner-design.md`.
 - Состояние Mini App клиента считается недоверенным, server-side валидация остаётся авторитативной.
 
+
+## Mini App API target architecture (next sprint)
+- Bot runtime remains responsible for Telegram command/update handling and classic `/quiz` UX.
+- Dedicated FastAPI service becomes responsible for Mini App API endpoints (`/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`).
+- Static Mini App frontend remains separately hosted over HTTPS (unchanged hosting model).
+- API endpoint contracts remain backward-compatible for Mini App client flows; migration targets transport/runtime layer, not business semantics.
+
+Deployment model (intended):
+- Same repository (no repo split).
+- Same VPS/deployment environment (no separate server purchase/provisioning).
+- Separate Docker Compose service/container for `psych_quiz_miniapp_api`.
+- Not a separate project; operationally coordinated with existing bot deployment.
+
+Trust model (unchanged):
+- Mini App client remains untrusted.
+- Server-side validation/authorization/state transitions remain authoritative.
+- `/quiz` classic behavior remains unchanged and default.
+
+Migration non-goals (explicit):
+- no PostgreSQL introduction in this sprint;
+- no Redis;
+- no FastAPI rewrite for Telegram bot handlers;
+- no frontend rewrite;
+- no scoring/session schema changes.
+
 ## Data and runtime state model
 - SQLite не является source of truth; SQLite — runtime layer хранения и выдачи данных.
 - Обновление runtime-слоя выполняется через `scripts/seed_questions.py`.
