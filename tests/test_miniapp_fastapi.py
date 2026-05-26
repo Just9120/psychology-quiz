@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+
 from fastapi.testclient import TestClient
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
@@ -147,6 +148,49 @@ class MiniAppFastApiTests(unittest.TestCase):
         self.assertEqual(200, response.status_code)
         self.assertTrue(response.json()["ok"])
 
+
+
+    def test_structured_request_logging_includes_duration(self):
+        with self.assertLogs("app.miniapp_fastapi", level="INFO") as logs:
+            response = self.client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}", "X-Miniapp-Request-Id": "rid-1"})
+        self.assertEqual(200, response.status_code)
+        joined = "\n".join(logs.output)
+        self.assertIn("miniapp_api endpoint=/miniapp/state", joined)
+        self.assertIn("request_id=rid-1", joined)
+        self.assertIn("duration_ms=", joined)
+
+    def test_slow_request_logging_warning(self):
+        app = create_app(db_path=self.db, bot_token=self.bot_token, slow_request_ms=1, allowed_origin="https://miniapp.example.com")
+        client = TestClient(app)
+        with patch("app.miniapp_fastapi.verify_telegram_init_data") as verify_mock:
+            verify_mock.return_value.telegram_user_id = 42
+            with patch("app.miniapp_fastapi._duration_ms", return_value=10):
+                with self.assertLogs("app.miniapp_fastapi", level="WARNING") as logs:
+                    response = client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})
+        self.assertEqual(200, response.status_code)
+        self.assertTrue(any("miniapp_api_slow endpoint=/miniapp/state" in line for line in logs.output))
+
+    def test_logs_do_not_contain_init_data_or_authorization(self):
+        secret_token = "super-secret-init-data"
+        with self.assertLogs("app.miniapp_fastapi", level="INFO") as logs:
+            self.client.get("/miniapp/state", headers={"Authorization": f"tma {secret_token}"})
+        joined = "\n".join(logs.output)
+        self.assertNotIn(secret_token, joined)
+        self.assertNotIn("Authorization", joined)
+
+    def test_options_preflight_emits_structured_log(self):
+        with self.assertLogs("app.miniapp_fastapi", level="INFO") as logs:
+            response = self.client.options(
+                "/miniapp/answer",
+                headers={
+                    "Origin": "https://miniapp.example.com",
+                    "Access-Control-Request-Method": "POST",
+                    "Access-Control-Request-Headers": "Authorization, Content-Type",
+                },
+            )
+        self.assertEqual(204, response.status_code)
+        self.assertTrue(any("miniapp_api endpoint=/miniapp/answer" in line and "method=OPTIONS" in line for line in logs.output))
+
     def test_healthz_returns_expected_payload(self):
         response = self.client.get("/healthz")
         self.assertEqual(200, response.status_code)
@@ -221,7 +265,7 @@ class MiniAppFastApiTests(unittest.TestCase):
 
 class MiniAppFastApiRuntimeEnvTests(unittest.TestCase):
     def test_create_app_from_env_success(self):
-        with patch.dict(os.environ, {"BOT_TOKEN": "123:abc", "DB_PATH": "/tmp/dev.sqlite3", "MINIAPP_API_INITDATA_TTL_SECONDS": "120", "MINIAPP_API_ALLOWED_ORIGIN": "https://miniapp.example.com"}, clear=True):
+        with patch.dict(os.environ, {"BOT_TOKEN": "123:abc", "DB_PATH": "/tmp/dev.sqlite3", "MINIAPP_API_INITDATA_TTL_SECONDS": "120", "MINIAPP_API_SLOW_REQUEST_MS": "250", "MINIAPP_API_ALLOWED_ORIGIN": "https://miniapp.example.com"}, clear=True):
             app = create_app_from_env()
         client = TestClient(app)
         response = client.get("/healthz")

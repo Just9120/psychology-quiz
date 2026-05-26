@@ -29,6 +29,10 @@ def _to_response(status: int, headers: dict[str, str], body: bytes) -> Response:
     return Response(content=body, status_code=status, headers=headers)
 
 
+def _duration_ms(started_at: float) -> int:
+    return int((time.perf_counter() - started_at) * 1000)
+
+
 def _log_request(
     *,
     endpoint: str,
@@ -41,6 +45,7 @@ def _log_request(
     request_id: str,
     transport: str,
     body: bytes,
+    slow_request_ms: int,
 ) -> None:
     safe_user_id = "-"
     error_code = "-"
@@ -56,6 +61,7 @@ def _log_request(
     except Exception:
         pass
 
+    duration_ms = _duration_ms(started_at)
     logger.info(
         "miniapp_api endpoint=%s request_id=%s transport=%s method=%s status=%s duration_ms=%s telegram_user_id=%s error_code=%s",
         endpoint,
@@ -63,11 +69,18 @@ def _log_request(
         transport,
         method,
         status,
-        int((time.time() - started_at) * 1000),
+        duration_ms,
         safe_user_id,
         error_code,
     )
-
+    if duration_ms > slow_request_ms:
+        logger.warning(
+            "miniapp_api_slow endpoint=%s duration_ms=%s status=%s request_id=%s",
+            endpoint,
+            duration_ms,
+            status,
+            request_id or "-",
+        )
 
 
 def _required_env(name: str) -> str:
@@ -82,10 +95,19 @@ def create_app_from_env() -> FastAPI:
         db_path=_required_env("DB_PATH"),
         bot_token=_required_env("BOT_TOKEN"),
         initdata_ttl_seconds=int(os.getenv("MINIAPP_API_INITDATA_TTL_SECONDS", "3600")),
+        slow_request_ms=int(os.getenv("MINIAPP_API_SLOW_REQUEST_MS", "500")),
         allowed_origin=os.getenv("MINIAPP_API_ALLOWED_ORIGIN", "").strip() or None,
     )
 
-def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600, allowed_origin: str | None = None) -> FastAPI:
+
+def create_app(
+    *,
+    db_path: str,
+    bot_token: str,
+    initdata_ttl_seconds: int = 3600,
+    slow_request_ms: int = 500,
+    allowed_origin: str | None = None,
+) -> FastAPI:
     app = FastAPI(redirect_slashes=False)
 
     def _set_common_headers(response: Response, request: Request) -> None:
@@ -95,13 +117,12 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
             response.headers["Access-Control-Allow-Origin"] = allowed_origin
             response.headers["Vary"] = "Origin"
 
-
     @app.get("/healthz")
     async def healthz() -> dict[str, Any]:
         return {"ok": True, "service": "miniapp_api"}
 
     async def _options_response(endpoint: str, request: Request) -> Response:
-        started_at = time.time()
+        started_at = time.perf_counter()
         request_id = _read_request_id(request.headers)
         origin = request.headers.get("Origin", "")
         allowed = bool(allowed_origin and origin == allowed_origin)
@@ -115,18 +136,34 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
             response.headers["Access-Control-Max-Age"] = "600"
             response.headers["Content-Length"] = "0"
 
+        duration_ms = _duration_ms(started_at)
+        logger.info(
+            "miniapp_api endpoint=%s request_id=%s transport=preflight method=OPTIONS status=%s duration_ms=%s telegram_user_id=- error_code=-",
+            endpoint,
+            request_id or "-",
+            response.status_code,
+            duration_ms,
+        )
+        if duration_ms > slow_request_ms:
+            logger.warning(
+                "miniapp_api_slow endpoint=%s duration_ms=%s status=%s request_id=%s",
+                endpoint,
+                duration_ms,
+                response.status_code,
+                request_id or "-",
+            )
+
         logger.info(
             "miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s",
             endpoint,
             request_id or "-",
             response.status_code,
-            int((time.time() - started_at) * 1000),
+            duration_ms,
             "yes" if allowed else "no",
             request.headers.get("Access-Control-Request-Method", ""),
             request.headers.get("Access-Control-Request-Headers", ""),
         )
         return response
-
 
     @app.options("/miniapp/state")
     async def options_state(request: Request) -> Response:
@@ -146,7 +183,7 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
 
     @app.get("/miniapp/state")
     async def get_state(request: Request) -> Response:
-        started_at = time.time()
+        started_at = time.perf_counter()
         endpoint = "/miniapp/state"
         request_id = _read_request_id(request.headers)
         transport = "header_auth"
@@ -154,12 +191,12 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
         status, headers, body = build_state_response(db_path, bot_token, init_data, max_age_seconds=initdata_ttl_seconds)
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body)
+        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
     @app.get("/miniapp/setup-options")
     async def get_setup_options(request: Request) -> Response:
-        started_at = time.time()
+        started_at = time.perf_counter()
         endpoint = "/miniapp/setup-options"
         request_id = _read_request_id(request.headers)
         transport = "header_auth"
@@ -167,12 +204,12 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
         status, headers, body = build_setup_options_response(db_path, bot_token, init_data, max_age_seconds=initdata_ttl_seconds)
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body)
+        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
     @app.post("/miniapp/setup")
     async def post_setup(request: Request) -> Response:
-        started_at = time.time()
+        started_at = time.perf_counter()
         endpoint = "/miniapp/setup"
         request_id = _read_request_id(request.headers)
         raw_body = await request.body()
@@ -181,12 +218,12 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
         status, headers, body = build_setup_response(db_path, bot_token, init_data, payload_body, max_age_seconds=initdata_ttl_seconds)
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body)
+        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
     @app.post("/miniapp/answer")
     async def post_answer(request: Request) -> Response:
-        started_at = time.time()
+        started_at = time.perf_counter()
         endpoint = "/miniapp/answer"
         request_id = _read_request_id(request.headers)
         raw_body = await request.body()
@@ -195,7 +232,7 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
         status, headers, body = build_answer_response(db_path, bot_token, init_data, payload_body, max_age_seconds=initdata_ttl_seconds)
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body)
+        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
     return app
