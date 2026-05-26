@@ -376,5 +376,57 @@ class MiniAppApiTests(unittest.TestCase):
     def test_handler_uses_http_1_1(self):
         self.assertEqual("HTTP/1.1", MiniAppApiHandler.protocol_version)
 
+    def _assert_db_busy_response(self, status, headers, body):
+        self.assertEqual(503, status)
+        self.assertEqual("application/json; charset=utf-8", headers.get("Content-Type"))
+        self.assertEqual(str(len(body)), headers.get("Content-Length"))
+        self.assertEqual("1", headers.get("Retry-After"))
+        self.assertEqual({"ok": False, "error": "database_busy_retry"}, json.loads(body))
+
+    def test_db_locked_state_returns_structured_503_json(self):
+        with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("database is locked")):
+            status, headers, body = build_state_response(self.db, self.bot_token, self.init_data)
+        self._assert_db_busy_response(status, headers, body)
+
+    def test_db_locked_answer_returns_structured_503_json(self):
+        body = json.dumps({"session_id": self.session_id, "question_id": 1, "selected_option_index": 0}).encode()
+        with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("database is locked")):
+            status, headers, payload = build_answer_response(self.db, self.bot_token, self.init_data, body)
+        self._assert_db_busy_response(status, headers, payload)
+
+    def test_db_locked_setup_returns_structured_503_json(self):
+        body = json.dumps({"quiz_mode": "single", "category_ids": [1], "question_count": 5, "difficulty": "any"}).encode()
+        with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("database is locked")):
+            status, headers, payload = build_setup_response(self.db, self.bot_token, self.init_data, body)
+        self._assert_db_busy_response(status, headers, payload)
+
+    def test_db_locked_setup_options_returns_structured_503_json(self):
+        with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("database is locked")):
+            status, headers, body = build_setup_options_response(self.db, self.bot_token, self.init_data)
+        self._assert_db_busy_response(status, headers, body)
+
+    def test_non_lock_operational_error_is_not_converted(self):
+        with patch("app.miniapp_api.get_connection", side_effect=sqlite3.OperationalError("disk I/O error")):
+            with self.assertRaises(sqlite3.OperationalError):
+                build_state_response(self.db, self.bot_token, self.init_data)
+
+    def test_handler_safety_net_returns_503_json_on_locked_db(self):
+        server = start_miniapp_api_server("127.0.0.1", 0, db_path=self.db, bot_token=self.bot_token)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with patch("app.miniapp_api.build_state_response", side_effect=sqlite3.OperationalError("database is locked")):
+                port = server.server_address[1]
+                conn = http.client.HTTPConnection("127.0.0.1", port, timeout=3)
+                conn.request("GET", "/miniapp/state", headers={"X-Telegram-Init-Data": self.init_data})
+                response = conn.getresponse()
+                body = response.read()
+                headers = {k: v for (k, v) in response.getheaders()}
+                self._assert_db_busy_response(response.status, headers, body)
+                conn.close()
+        finally:
+            server.shutdown()
+            server.server_close()
+
 if __name__ == '__main__':
     unittest.main()
