@@ -480,3 +480,28 @@ Rollback plan:
 2. Re-enable legacy API in bot (`MINIAPP_LEGACY_API_ENABLED=true`) and move `127.0.0.1:8081:8081` binding back to `psych_quiz_bot` while disabling/removing `psych_quiz_miniapp_api` service.
 
 Endpoint contracts are intentionally unchanged to keep rollback low-risk.
+
+## FastAPI Mini App latency logs and slow-request diagnostics
+
+The FastAPI Mini App API now emits structured request logs for all Mini App endpoints (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`, and `OPTIONS` preflight). Each entry includes endpoint, request id, transport, method, status, and `duration_ms`.
+
+### Slow request threshold
+
+Set `MINIAPP_API_SLOW_REQUEST_MS` (default `500`) to control when a request is flagged as slow.
+
+### How to inspect logs
+
+```bash
+journalctl -u psych_quiz_miniapp_api -n 200 --no-pager | grep 'miniapp_api endpoint='
+```
+
+### How to grep slow requests
+
+```bash
+journalctl -u psych_quiz_miniapp_api --since '15 min ago' --no-pager | grep 'miniapp_api_slow'
+```
+
+### Interpretation guide
+
+- Low backend `duration_ms` with user-visible hang usually points to network path, Telegram WebView, proxy buffering, or frontend rendering/JS timing.
+- High backend `duration_ms` indicates server-side bottlenecks (DB lock contention, expensive code path, or backend compute/IO delay).
