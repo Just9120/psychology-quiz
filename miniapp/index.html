@@ -1367,6 +1367,10 @@
               err.textContent = '';
               renderRunnerState(data.runner_state, { preferLaunchCompact: false });
               pushDiagPhase('setup', 'state_update_applied', setupStartedAt, { request_id: apiDiagState.setupRequestId });
+              requestAnimationFrame(() => {
+                pushDiagPhase('setup', 'ui_render_mark', setupStartedAt, { request_id: apiDiagState.setupRequestId });
+                renderApiDiagnostics();
+              });
               setupSubmitInFlight = false;
               return;
             }
