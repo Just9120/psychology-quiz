@@ -550,6 +550,9 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertNotIn("classic telegram chat ux", src)
         self.assertNotIn("server state", src)
         self.assertNotIn("mini app setup screen", src)
+        self.assertNotIn("launch context", src)
+        self.assertNotIn("url-транспорта", src)
+        self.assertIn("часть данных не поместилась в ссылку открытия", src)
 
     def test_post_init_sets_non_technical_ui_command_copy(self):
         bot = SimpleNamespace(set_my_commands=AsyncMock())

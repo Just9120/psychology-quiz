@@ -60,6 +60,7 @@
 - [ ] `/ui` вне private chat корректно отклоняется.
 
 ### B. Mini App runner MVP checks
+- [ ] User-facing messages in normal mode avoid technical API/server/transport wording.
 - [ ] Mini App открывается внутри Telegram.
 - [ ] Контекст корректно читается из URL.
 - [ ] Отображаются активные категории из bot context.
@@ -107,7 +108,7 @@
 - [ ] Сценарии stale/duplicate кликов безопасны и дают recoverable сообщение.
 - [ ] Mini App fallback подсказывает, что можно использовать классический `/quiz`.
 - [ ] `/ui` при длинном текущем вопросе/опциях не падает из-за launch-context length: Mini App открывается в compact setup fallback.
-- [ ] Если даже compact fallback не помещается, текст ошибки: `Mini App временно недоступен: слишком большой launch context. Используйте /quiz.`
+- [ ] Если даже compact fallback не помещается, текст ошибки: `Викторину в окне сейчас не удалось открыть. Попробуйте /ui ещё раз или пройдите её в чате через /quiz.`
 
 ## 6) Manual QA smoke result
 
@@ -143,7 +144,7 @@
 - Не менять runtime-поведение бота в рамках docs-only readiness PR.
 
 - [ ] Active `/ui` session with normal question shows question text + options (not progress-only).
-- [ ] If progress-only fallback is used, Mini App shows: `Текущий вопрос слишком большой для Mini App URL-транспорта. Продолжите этот вопрос через /quiz или откройте /ui позже.`
+- [ ] If progress-only fallback is used, Mini App shows: `Этот вопрос не удалось открыть в окне. Продолжите в чате через /quiz или откройте викторину заново.`
 
 - [ ] Compact `runner_q` context renders question/options and setup form is hidden.
 - [ ] Progress-only runner fallback (`compact_progress_only`) keeps setup form hidden and shows explicit limitation message.
