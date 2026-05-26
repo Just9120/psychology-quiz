@@ -162,17 +162,31 @@ Out of scope для первого Mini App MVP:
 - Состояние Mini App клиента считается недоверенным, server-side валидация остаётся авторитативной.
 
 
-## Mini App API target architecture (next sprint)
+## Mini App API target architecture (phased)
 - Bot runtime remains responsible for Telegram command/update handling and classic `/quiz` UX.
-- Dedicated FastAPI service becomes responsible for Mini App API endpoints (`/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`).
+- Dedicated FastAPI service is the target runtime for Mini App API endpoints (`/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`).
 - Static Mini App frontend remains separately hosted over HTTPS (unchanged hosting model).
-- API endpoint contracts remain backward-compatible for Mini App client flows; migration targets transport/runtime layer, not business semantics.
+- API endpoint contracts remain backward-compatible; migration target is HTTP serving/runtime layer, not quiz business semantics.
 
-Deployment model (intended):
-- Same repository (no repo split).
-- Same VPS/deployment environment (no separate server purchase/provisioning).
-- Separate Docker Compose service/container for `psych_quiz_miniapp_api`.
-- Not a separate project; operationally coordinated with existing bot deployment.
+Deployment model (final target):
+- One repository + one VPS/deployment environment + one Docker Compose stack.
+- Separate services/containers (`psych_quiz_bot`, `psych_quiz_miniapp_api`) in Compose.
+- This is **not** multiple services inside one Docker container.
+- Not a separate project/server; operationally coordinated in same deployment environment.
+
+Phased rollout model:
+- **Phase 1 (repo-only implementation):**
+  - FastAPI implementation exists in repository and tests only;
+  - production CD does not enable/start FastAPI;
+  - FastAPI does not receive production Mini App traffic;
+  - current production bot + legacy Mini App API runtime remains unchanged.
+- **Phase 2 (production switch-over, separate PR):**
+  - separate PR enables FastAPI as production Mini App API;
+  - updates compose/CD/routing/env as needed in same repo/VPS environment;
+  - CD rebuilds/restarts relevant runtime services after switch-over (`psych_quiz_bot`, `psych_quiz_miniapp_api`);
+  - smoke + logs/metrics validation required before completion.
+- **Phase 3 (cleanup after soak):**
+  - remove/disable legacy `ThreadingHTTPServer` Mini App API path only after soak period confirms stability.
 
 Trust model (unchanged):
 - Mini App client remains untrusted.

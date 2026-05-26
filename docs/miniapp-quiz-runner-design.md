@@ -15,6 +15,8 @@
 - Target next step: migrate HTTP serving layer to FastAPI + uvicorn while preserving endpoint contracts and server-authoritative quiz semantics.
 - Automatic `sendData` fallback after API failure is intentionally disabled to avoid duplicate/misaligned state transitions.
 
+- FastAPI target is phased: Phase 1 repo-only implementation (no production traffic/CD change), Phase 2 separate production switch-over PR, Phase 3 legacy HTTP-layer cleanup after soak.
+
 ## Future target scope
 Planned future UX inside Mini App (opt-in path):
 1. Question display inside Mini App.

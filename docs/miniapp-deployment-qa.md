@@ -337,38 +337,55 @@ Backup example for production DB file:
 - If `/miniapp/answer` response is lost/delayed but `/miniapp/state` confirms answer acceptance, Mini App still shows the answer feedback card first (`✅/❌`, `Ваш ответ`, `Правильный ответ`, `Пояснение`, `Далее`) and only then advances.
 
 
-## 13) FastAPI HTTP-layer migration QA checklist
-Goal: validate migration from legacy `ThreadingHTTPServer` Mini App API to FastAPI + uvicorn without UX/contract regressions.
+## 16) FastAPI migration QA (phased)
+Goal: validate phased migration from legacy `ThreadingHTTPServer` Mini App API to FastAPI + uvicorn without regressions.
 
-Functional smoke:
-- [ ] `GET /miniapp/state` returns expected JSON state for active and completed sessions.
-- [ ] `GET /miniapp/setup-options` returns expected JSON setup payload.
-- [ ] `POST /miniapp/setup` creates/continues sessions per existing contract.
-- [ ] `POST /miniapp/answer` preserves accepted/stale/duplicate behavior and payload schema.
-- [ ] CORS behavior remains correct for configured Mini App origin.
-- [ ] `OPTIONS` preflight behavior is correct for Mini App API endpoints.
+### Phase 1 — repo-only implementation validation (no production switch)
+- [ ] Production bot runtime behavior remains unchanged.
+- [ ] `/quiz` remains fully operational in production.
+- [ ] `🚀 Викторина в окне` + `/ui` continue using current production legacy Mini App API path.
+- [ ] FastAPI implementation is not receiving production traffic.
+- [ ] Production CD/deploy behavior is unchanged (no FastAPI enable/start in production).
 
-Protocol/response checks:
-- [ ] Responses are valid JSON where JSON is expected.
+### Phase 2 — production switch-over validation (separate PR)
+Endpoint smoke:
+- [ ] `GET /miniapp/state` works.
+- [ ] `GET /miniapp/setup-options` works.
+- [ ] `POST /miniapp/setup` works.
+- [ ] `POST /miniapp/answer` works.
+
+Protocol/contract checks:
+- [ ] CORS behavior is correct for configured Mini App origin.
+- [ ] `OPTIONS` preflight behavior is correct.
+- [ ] Responses remain JSON where JSON is expected.
 - [ ] HTTP framing is ASGI-correct (Content-Length when applicable and/or equivalent correct transfer framing).
-- [ ] Structured `database_busy_retry` error contract still returns JSON 503 with expected fields.
+- [ ] `database_busy_retry` JSON 503 contract remains unchanged.
 
-Resilience regression checks:
-- [ ] Answer feedback recovery still works after transient lost response/network hiccup.
-- [ ] Frontend retry behavior remains jittered and recoverable (no duplicate score/session corruption).
+Resilience/UX safety:
+- [ ] Answer feedback recovery remains correct after transient lost response.
+- [ ] Retry behavior (`_a2`/`_a3` patterns) remains controlled and does not corrupt session/score.
+- [ ] No silent jump over feedback and no lost feedback card on accepted answers.
+- [ ] `/quiz` remains unaffected and default.
 
-Classic UX safety:
-- [ ] `/quiz` flow remains unaffected and default in Telegram chat UX.
+Logs/analytics review after switch-over:
+- [ ] FastAPI request counts/status/duration look normal by endpoint.
+- [ ] No abnormal 4xx/5xx spike versus baseline.
+- [ ] `database_busy_retry` incidence is monitored and acceptable.
+- [ ] `_a2`/`_a3` retry pattern frequency is reviewed for regressions.
 
-Rollout/rollback operational checks:
-- [ ] New API service/container (e.g., `psych_quiz_miniapp_api`) is up and healthy.
-- [ ] Legacy API service name/path is still available for rollback during cutover window.
-- [ ] `MINI_APP_API_BASE_URL` (or reverse proxy upstream) points to FastAPI target during rollout.
-- [ ] Rollback procedure verified: switching route/env back to legacy API restores stable Mini App behavior without contract changes.
+Operational checks:
+- [ ] `psych_quiz_miniapp_api` and `psych_quiz_bot` are rebuilt/restarted by CD after switch-over changes.
+- [ ] Smoke logs/metrics are reviewed before declaring rollout successful.
+
+Rollback (if smoke fails):
+- [ ] Switch route/env/reverse-proxy back to legacy Mini App API.
+- [ ] Keep endpoint contracts unchanged to make rollback safe.
 
 Suggested smoke/log commands (adjust service names for environment):
 - `docker compose ps`
 - `docker compose logs --tail=200 psych_quiz_miniapp_api`
+- `docker compose logs --tail=200 psych_quiz_bot`
 - `docker compose logs --tail=200 <legacy-miniapp-api-service>`
 - `grep "miniapp_api endpoint=/miniapp/answer" <bot-log-file>`
 - `grep "database_busy_retry" <bot-log-file>`
+- `grep "_a2\|_a3" <bot-log-file>`
