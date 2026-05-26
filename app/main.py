@@ -7,6 +7,7 @@ import logging
 import re
 import urllib.parse
 import threading
+import asyncio
 
 from telegram import (
     BotCommand,
@@ -469,6 +470,12 @@ def build_miniapp_url(base_url: str, context: dict) -> str:
 
 
 
+
+
+async def _run_db_task(func, *args, **kwargs):
+    return await asyncio.to_thread(func, *args, **kwargs)
+
+
 def build_post_setup_miniapp_prompt(
     base_url: str,
     categories,
@@ -555,15 +562,19 @@ async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFA
         return
 
     settings = context.application.bot_data["settings"]
-    with get_connection(settings.db_path) as conn:
-        user_row = create_or_load_user(
-            conn,
-            telegram_user_id=tg_user.id,
-            username=tg_user.username,
-            first_name=tg_user.first_name,
-            last_name=tg_user.last_name,
-        )
-        current_mode = get_user_reading_mode(conn, int(user_row["id"]))
+
+    def _load_mode():
+        with get_connection(settings.db_path) as conn:
+            user_row = create_or_load_user(
+                conn,
+                telegram_user_id=tg_user.id,
+                username=tg_user.username,
+                first_name=tg_user.first_name,
+                last_name=tg_user.last_name,
+            )
+            return get_user_reading_mode(conn, int(user_row["id"]))
+
+    current_mode = await _run_db_task(_load_mode)
 
     await update.message.reply_text(
         f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
@@ -679,17 +690,22 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await safe_reply(update, "Недоступно")
         return
 
-    with get_connection(settings.db_path) as conn:
-        stats = get_owner_stats(conn)
+    def _load_stats():
+        with get_connection(settings.db_path) as conn:
+            return get_owner_stats(conn)
 
+    stats = await _run_db_task(_load_stats)
     await safe_reply(update, format_owner_stats_text(stats))
 
 
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     settings = context.application.bot_data["settings"]
 
-    with get_connection(settings.db_path) as conn:
-        categories = get_active_categories(conn)
+    def _load_categories():
+        with get_connection(settings.db_path) as conn:
+            return get_active_categories(conn)
+
+    categories = await _run_db_task(_load_categories)
 
     if not categories:
         await safe_reply(update, "Нет доступных категорий. Сначала загрузите вопросы в базу данных.")
@@ -717,13 +733,18 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         )
         return
 
-    with get_connection(settings.db_path) as conn:
-        categories = get_active_categories(conn)
-        tg_user = update.effective_user
-        runner_state = None
-        if tg_user is not None:
-            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-            runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
+    tg_user = update.effective_user
+
+    def _load_ui_context():
+        with get_connection(settings.db_path) as conn:
+            categories = get_active_categories(conn)
+            runner_state = None
+            if tg_user is not None:
+                user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+                runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
+            return categories, runner_state
+
+    categories, runner_state = await _run_db_task(_load_ui_context)
     if not categories:
         await update.message.reply_text(
             "Сейчас нет доступных тем для запуска викторины.\n"
@@ -1666,84 +1687,83 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         await query.edit_message_text("Некорректные данные ответа.")
         return
 
-    with get_connection(settings.db_path) as conn:
-        session = get_quiz_session(conn, session_id)
-        if session is None or str(session["status"]) != "in_progress":
-            await query.edit_message_text("Сессия уже завершена или не найдена.")
-            return
+    tg_user = update.effective_user
+    if tg_user is None:
+        await query.edit_message_text("Не удалось определить пользователя.")
+        return
 
-        tg_user = update.effective_user
-        if tg_user is None:
-            await query.edit_message_text("Не удалось определить пользователя.")
-            return
-
-        user_row = create_or_load_user(
-            conn,
-            telegram_user_id=tg_user.id,
-            username=tg_user.username,
-            first_name=tg_user.first_name,
-            last_name=tg_user.last_name,
-        )
-        if int(session["user_id"]) != int(user_row["id"]):
-            await query.edit_message_text("Эта сессия вам не принадлежит.")
-            return
-
-        current = get_current_unanswered_question(conn, session_id)
-
-        submission = submit_miniapp_answer_event(
-            conn,
-            session_id=session_id,
-            actor_user_id=int(user_row["id"]),
-            question_id=question_id,
-            selected_option_index=selected_option_index,
-        )
-        if submission.status == "invalid_question":
-            await query.edit_message_text("Этот вопрос не относится к текущей сессии.")
-            return
-        if submission.status == "stale_question":
-            if submission.expected_question_id is None:
+    def _handle_answer_db():
+        with get_connection(settings.db_path) as conn:
+            session = get_quiz_session(conn, session_id)
+            if session is None or str(session["status"]) != "in_progress":
+                return {"status": "session_missing"}
+            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+            if int(session["user_id"]) != int(user_row["id"]):
+                return {"status": "forbidden"}
+            current = get_current_unanswered_question(conn, session_id)
+            submission = submit_miniapp_answer_event(
+                conn,
+                session_id=session_id,
+                actor_user_id=int(user_row["id"]),
+                question_id=question_id,
+                selected_option_index=selected_option_index,
+            )
+            if submission.status == "stale_question" and submission.expected_question_id is None:
                 finalized = finalize_quiz_session(conn, session_id)
-                if finalized is None:
-                    await query.edit_message_text("Не удалось завершить сессию.")
-                    return
-                await show_finished_quiz_message(
-                    query,
-                    session_id=session_id,
-                    score=int(finalized["score"]),
-                    total_questions=int(finalized["total_questions"]),
-                )
-                return
-            await query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше».")
-            return
-        if submission.status == "invalid_option":
-            await query.edit_message_text("Выбран некорректный вариант ответа.")
-            return
-        if submission.status == "duplicate":
-            await query.edit_message_text("На этот вопрос уже дан ответ.")
-            return
-        if submission.status != "accepted":
-            await query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины.")
-            return
+                return {"status": "stale_finished", "finalized": finalized}
+            if submission.status != "accepted":
+                return {"status": submission.status}
+            answered_questions = get_answered_questions_count(conn, session_id)
+            total_questions = int(current["total_questions"])
+            is_last_question = answered_questions >= total_questions
+            finalized = finalize_quiz_session(conn, session_id) if is_last_question else None
+            return {
+                "status": "accepted",
+                "is_correct": bool(submission.is_correct),
+                "explanation": str(current["explanation"] or ""),
+                "answered_questions": answered_questions,
+                "total_questions": total_questions,
+                "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
+                "is_last_question": is_last_question,
+                "finalized": finalized,
+            }
 
-        answer = {"is_correct": 1 if submission.is_correct else 0}
+    result = await _run_db_task(_handle_answer_db)
+    if result["status"] == "session_missing":
+        await query.edit_message_text("Сессия уже завершена или не найдена.")
+        return
+    if result["status"] == "forbidden":
+        await query.edit_message_text("Эта сессия вам не принадлежит.")
+        return
+    if result["status"] == "invalid_question":
+        await query.edit_message_text("Этот вопрос не относится к текущей сессии.")
+        return
+    if result["status"] == "stale_question":
+        await query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше».")
+        return
+    if result["status"] == "stale_finished":
+        finalized = result["finalized"]
+        if finalized is None:
+            await query.edit_message_text("Не удалось завершить сессию.")
+            return
+        await show_finished_quiz_message(query, session_id=session_id, score=int(finalized["score"]), total_questions=int(finalized["total_questions"]))
+        return
+    if result["status"] == "invalid_option":
+        await query.edit_message_text("Выбран некорректный вариант ответа.")
+        return
+    if result["status"] == "duplicate":
+        await query.edit_message_text("На этот вопрос уже дан ответ.")
+        return
+    if result["status"] != "accepted":
+        await query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины.")
+        return
 
-        explanation = str(current["explanation"] or "")
-        total_questions = int(current["total_questions"])
-        answered_questions = get_answered_questions_count(conn, session_id)
-        reading_mode = get_user_reading_mode(conn, int(user_row["id"]))
-
-        is_last_question = answered_questions >= total_questions
-        if is_last_question:
-            finalized = finalize_quiz_session(conn, session_id)
-            if finalized is None:
-                await query.edit_message_text("Не удалось завершить сессию.")
-                return
-
-    is_correct = int(answer["is_correct"]) == 1
+    is_correct = result["is_correct"]
     result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
-    rendered_explanation = render_reading_mode_text(explanation, reading_mode)
+    rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
 
-    if is_last_question:
+    if result["is_last_question"]:
+        finalized = result["finalized"]
         message = (
             f"{result_line}\n\n"
             f"<b>Пояснение:</b> {rendered_explanation}\n\n"
@@ -1753,14 +1773,14 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         await send_quiz_result_with_main_menu(query, message)
         return
 
-    next_number = answered_questions + 1
+    next_number = result["answered_questions"] + 1
     message = (
         f"{result_line}\n\n"
         f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-        f"<b>Прогресс:</b> {answered_questions} из {total_questions} отвечено"
+        f"<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']} отвечено"
     )
     markup = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(f"Дальше → {next_number}/{total_questions}", callback_data=f"next:{session_id}")]]
+        [[InlineKeyboardButton(f"Дальше → {next_number}/{result['total_questions']}", callback_data=f"next:{session_id}")]]
     )
     await query.edit_message_text(message, reply_markup=markup, parse_mode="HTML")
 

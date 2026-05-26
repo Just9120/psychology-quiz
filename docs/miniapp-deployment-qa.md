@@ -281,6 +281,7 @@
 ## 13) FastAPI runtime notes: threadpool offload + structured latency logs
 - FastAPI Mini App routes are `async`, but Mini App builders (`build_state_response`, `build_setup_options_response`, `build_setup_response`, `build_answer_response`) are synchronous and include SQLite I/O.
 - To avoid ASGI event-loop blocking, these builders are intentionally executed through threadpool offload (`asyncio.to_thread(...)`) from `app/miniapp_fastapi.py`.
+- Telegram bot async handlers that perform synchronous SQLite/business logic in `app/main.py` are also offloaded through `asyncio.to_thread(...)` on the bot side to keep long-polling update processing responsive.
 - This preserves existing transport semantics and response contract (`(status, headers, body)` → `Response(content=body, status_code=status, headers=...)`).
 - `database_busy_retry` contract remains unchanged: HTTP `503` with structured JSON `{"ok": false, "error": "database_busy_retry"}`.
 
