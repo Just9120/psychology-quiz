@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Quiz Setup</title>
+    <title>Мини-викторина</title>
     <style>
       body {
         font-family: sans-serif;
@@ -165,9 +165,9 @@
       <fieldset>
         <legend>Сложность</legend>
         <label><input type="radio" name="difficulty" value="any" checked /> Любая</label>
-        <label><input type="radio" name="difficulty" value="easy" /> easy</label>
-        <label><input type="radio" name="difficulty" value="medium" /> medium</label>
-        <label><input type="radio" name="difficulty" value="hard" /> hard</label>
+        <label><input type="radio" name="difficulty" value="easy" /> Лёгкие</label>
+        <label><input type="radio" name="difficulty" value="medium" /> Средние</label>
+        <label><input type="radio" name="difficulty" value="hard" /> Сложные</label>
       </fieldset>
 
       <button type="submit" id="go" disabled>Начать викторину</button>
@@ -195,7 +195,7 @@
         tg.expand();
       } else {
         runnerState.textContent =
-          'Mini App API недоступен. Используйте /quiz или откройте /ui из Telegram-клиента.';
+          'Не удалось открыть викторину в окне. Попробуйте открыть её из Telegram ещё раз или пройдите викторину в чате через /quiz.';
       }
 
       function parseContext(raw) {
@@ -280,7 +280,7 @@
         questionView.hidden = true;
       }
 
-      function showSetupMode({ message = 'Выберите параметры и нажмите «Начать викторину».', clearError = true } = {}) {
+      function showSetupMode({ message = 'Выберите тему, количество вопросов и сложность.', clearError = true } = {}) {
         clearRunnerView();
         form.hidden = false;
         setupWarning.hidden = true;
@@ -338,7 +338,7 @@
 
       function showLoadError() {
         err.textContent =
-          'Не удалось загрузить список тем. Закройте окно и откройте Mini App заново через /ui.';
+          'Не удалось загрузить темы. Закройте окно и откройте викторину заново через кнопку 🚀 Викторина в окне или команду /ui.';
       }
 
       if (!ctx || ctx.type !== 'miniapp_setup_context' || ctx.version !== 1) {
@@ -442,7 +442,7 @@
         if (Number.isInteger(answered)) parts.push(`отвечено: ${answered}`);
         if (Number.isInteger(remaining)) parts.push(`осталось: ${remaining}`);
         if (parts.length > 0) {
-          runnerState.textContent = `Экспериментальный режим /ui: ${parts.join(' · ')}.`;
+          runnerState.textContent = `Идёт викторина: ${parts.join(' · ')}.`;
         }
       }
 
@@ -1143,7 +1143,7 @@
         questionView.replaceChildren();
         if (!snapshot || snapshot.status !== 'ok' || !Array.isArray(snapshot.options) || typeof snapshot.question_text !== 'string') {
           runnerState.textContent =
-            'Экспериментальный режим /ui: активный вопрос не найден. Выберите параметры ниже или запустите /quiz.';
+            'Идёт викторина: активный вопрос не найден. Выберите параметры ниже или запустите /quiz.';
           return;
         }
 
@@ -1203,7 +1203,7 @@
 
         if (!state || typeof state !== 'object') {
           runnerState.textContent =
-            'Новая сессия ещё не запущена. Выберите параметры ниже (opt-in /ui) или используйте /quiz.';
+            'Викторина ещё не начата. Выберите параметры ниже или запустите викторину в чате через /quiz.';
           renderApiDiagnostics();
           return;
         }
@@ -1220,14 +1220,14 @@
           renderProgress(state.progress);
           if (state.compact_progress_only === true && !state.current_question) {
             runnerState.textContent =
-              'Текущий вопрос слишком большой для Mini App URL-транспорта. Продолжите вопрос через /quiz или откройте /ui позже.';
+              'Этот вопрос не удалось открыть в окне. Продолжите в чате через /quiz или откройте викторину заново.';
           }
           renderApiDiagnostics();
           return;
         }
 
         runnerState.textContent =
-          'Новая сессия ещё не запущена. Выберите параметры ниже (opt-in /ui) или используйте /quiz.';
+          'Викторина ещё не начата. Выберите параметры ниже или запустите викторину в чате через /quiz.';
         renderApiDiagnostics();
       }
 
@@ -1297,14 +1297,14 @@
               return;
             }
             setSetupStatus('api_failed', String(resp.status || 'non_ok'));
-            err.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
-            runnerState.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
+            err.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
+            runnerState.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
           } catch (e) {
             const errorKind = e?.meta?.errorKind || e?.cause?.errorKind || 'network_error';
             apiDiagState.setupFinalPhase = 'retry_exhausted';
             setSetupStatus(errorKind === 'timeout' ? 'api_timeout' : 'api_failed', errorKind);
-            err.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
-            runnerState.textContent = 'Не удалось запустить викторину через API. Попробуйте снова.';
+            err.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
+            runnerState.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
           }
           go.disabled = false;
           setupSubmitInFlight = false;
@@ -1312,26 +1312,26 @@
         }
         if (!tg?.sendData) {
           setSetupStatus('fallback_unavailable');
-          err.textContent = 'API недоступен и sendData недоступен. Переоткройте /ui.';
+          err.textContent = 'Не удалось начать викторину в окне. Попробуйте открыть её заново или используйте /quiz.';
           return;
         }
         setSetupStatus('fallback_unavailable');
-        err.textContent = 'API недоступен. Повторите попытку или используйте /quiz.';
+        err.textContent = 'Не удалось начать викторину в окне. Попробуйте ещё раз или используйте /quiz.';
       });
 
       (async () => {
         renderRunnerState(rs, { preferLaunchCompact: true });
         if (apiBase && tg?.initData && (!setupMode || hydrateOnSetup)) {
-          runnerState.textContent = 'Синхронизация состояния с сервером...';
+          runnerState.textContent = 'Обновляю викторину...';
           try {
             const resp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${tg.initData}` } });
             const data = await resp.json();
             if (resp.ok && data?.ok) renderRunnerState(data.runner_state, { preferLaunchCompact: false });
-            else runnerState.textContent = 'Не удалось синхронизировать состояние. Используется контекст запуска.';
+            else runnerState.textContent = 'Не удалось обновить состояние. Показываю последний доступный экран.';
           } catch (e) {
             runnerState.textContent = e?.name === 'AbortError'
-              ? 'Таймаут синхронизации. Используется контекст запуска; при необходимости переоткройте /ui.'
-              : 'Сетевая ошибка синхронизации. Используется контекст запуска.';
+              ? 'Обновление заняло слишком много времени. Показываю последний доступный экран.'
+              : 'Проблема с сетью. Показываю последний доступный экран.';
           }
         }
       })();

@@ -7,6 +7,19 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def setUpClass(cls):
         cls.content = Path('miniapp/index.html').read_text(encoding='utf-8')
 
+
+    def test_user_facing_copy_is_product_style(self):
+        self.assertIn('<title>Мини-викторина</title>', self.content)
+        self.assertIn('/> Лёгкие</label>', self.content)
+        self.assertIn('/> Средние</label>', self.content)
+        self.assertIn('/> Сложные</label>', self.content)
+        self.assertNotIn('Экспериментальный режим /ui', self.content)
+        self.assertNotIn('Mini App API недоступен', self.content)
+        self.assertNotIn('URL-транспорта', self.content)
+        self.assertNotIn('opt-in /ui', self.content)
+        self.assertNotIn('sendData недоступен', self.content)
+        self.assertNotIn('server state', self.content)
+
     def test_diagnostics_hidden_by_default(self):
         self.assertIn('id="api_diag" class="note" hidden', self.content)
         self.assertIn('if (!debugMode) {', self.content)
@@ -59,7 +72,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("Не удалось отправить ответ через API. Попробуйте снова.", self.content)
         self.assertIn("Сеть подвисла, пробую отправить ещё раз...", self.content)
         self.assertIn("Запуск не удался, повторная попытка...", self.content)
-        self.assertIn("Не удалось запустить викторину через API. Попробуйте снова.", self.content)
+        self.assertIn("Не удалось начать викторину. Попробуйте ещё раз.", self.content)
         self.assertIn("feedback-correct", self.content)
         self.assertIn("feedback-wrong", self.content)
         self.assertIn("next.textContent = 'Далее'", self.content)

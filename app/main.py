@@ -66,9 +66,9 @@ QUESTION_COUNT_CHOICES = (
 
 DIFFICULTY_CHOICES = (
     ("any", "Любые"),
-    ("easy", "Только easy"),
-    ("medium", "Только medium"),
-    ("hard", "Только hard"),
+    ("easy", "Лёгкие"),
+    ("medium", "Средние"),
+    ("hard", "Сложные"),
 )
 
 HELP_TEXT = (
@@ -746,16 +746,16 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     )
     if miniapp_url is None:
         await update.message.reply_text(
-            "Mini App временно недоступен: слишком большой launch context. Используйте /quiz."
+            "Викторину в окне сейчас не удалось открыть. Попробуйте /ui ещё раз или пройдите её в чате через /quiz."
         )
         return
     logger.debug("Mini App setup URL length: %s", len(miniapp_url))
 
-    intro_text = "Откройте викторину в удобном окне. Классический режим в чате остаётся доступен через /quiz."
+    intro_text = "Откройте викторину в удобном окне. Пройти её в чате по-прежнему можно через /quiz."
     if fallback_mode:
         intro_text = (
-            "Mini App открыт в компактном режиме: текущий вопрос слишком большой для URL-транспорта. "
-            "Используйте /quiz или откройте /ui позже.\n\n"
+            "Часть данных не поместилась в ссылку открытия. Если экран выглядит неполным, "
+            "откройте викторину заново или используйте /quiz.\n\n"
             + intro_text
         )
     has_active = isinstance(runner_state, dict) and runner_state.get("state") == "in_progress"
