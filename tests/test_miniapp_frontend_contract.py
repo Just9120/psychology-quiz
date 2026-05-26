@@ -154,6 +154,12 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("apiDiagState.answerPhase = 'state_resync_failed';", self.content)
         self.assertIn("apiDiagState.answerPhase = 'ui_render_failed';", self.content)
         self.assertNotIn("Authorization: `tma ${initData}` +", self.content)
+        self.assertIn("database_busy_retry", self.content)
+        self.assertIn("status === 503", self.content)
+        self.assertIn("status === 429", self.content)
+        self.assertIn("Math.floor(Math.random() * 500)", self.content)
+        self.assertIn("function getRetryDelayMs(baseMs)", self.content)
+        self.assertIn("await waitMs(getRetryDelayMs(backoffMs[attempt - 1] || 1000));", self.content)
 
     def test_state_advance_helper_contract(self):
         self.assertIn('function didRunnerStateAdvanceForAnswer(submittedSessionId, submittedQuestionId, runnerState)', self.content)

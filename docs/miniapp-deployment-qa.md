@@ -215,6 +215,9 @@
 - If enabled but `MINI_APP_API_BASE_URL` is missing, API server is not started (safe no-start) and Mini App remains on `sendData` fallback.
 - Recommended production: always set `MINIAPP_API_ALLOWED_ORIGIN` to exact Mini App origin when enabling API.
 - Mini App API responses now use `HTTP/1.1` with explicit `Content-Length` on JSON responses (and `Content-Length: 0` on `OPTIONS 204`) to reduce connection churn and mobile WebView latency.
+- Temporary SQLite lock/contention (`database is locked`) must return structured API response `503` with JSON `{"ok": false, "error": "database_busy_retry"}` (no raw HTML/unstructured 500).
+- Mini App should treat `database_busy_retry` as transient, retry within the existing API retry/resync flow, and recover without exposing technical DB errors to normal users.
+- Retry waits keep the same base backoff and add a small jitter to avoid synchronized retry bursts under contention.
 
 - [ ] Verify setup submit uses API path and Mini App does not close when `initData` + API are available.
 - [ ] Verify startup state hydrates from `GET /miniapp/state` and stale launch context is replaced.

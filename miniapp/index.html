@@ -609,8 +609,18 @@
       function waitMs(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
       }
+      function getRetryDelayMs(baseMs) {
+        return baseMs + Math.floor(Math.random() * 500);
+      }
       function isTransientApiError(errorKind) {
-        return errorKind === 'timeout' || errorKind === 'fetch_rejected' || errorKind === 'invalid_json';
+        return errorKind === 'timeout' || errorKind === 'fetch_rejected' || errorKind === 'invalid_json' || errorKind === 'database_busy_retry';
+      }
+      function getApiErrorKind(resp, data, fallbackKind = 'api_non_ok') {
+        const status = Number(resp?.status);
+        const isDbBusyResponse = status === 503
+          && data && data.ok === false && data.error === 'database_busy_retry';
+        if (isDbBusyResponse || status === 429) return 'database_busy_retry';
+        return fallbackKind;
       }
       function didRunnerStateAdvanceForAnswer(submittedSessionId, submittedQuestionId, runnerState) {
         if (!runnerState || typeof runnerState !== 'object') return false;
@@ -685,7 +695,7 @@
               const data = await resp.json();
               if (!resp.ok) {
                 const nonOk = new Error('api_non_ok');
-                nonOk.errorKind = 'api_non_ok';
+                nonOk.errorKind = getApiErrorKind(resp, data);
                 nonOk.meta = { attempt, retries, requestId, resp, data };
                 throw nonOk;
               }
@@ -705,7 +715,7 @@
               const data = await resp.json();
               if (!resp.ok) {
                 const nonOk = new Error('api_non_ok');
-                nonOk.errorKind = 'api_non_ok';
+                nonOk.errorKind = getApiErrorKind(resp, data);
                 nonOk.meta = { attempt: nextAttempt, retries, requestId: nextRequestId, resp, data };
                 throw nonOk;
               }
@@ -736,7 +746,7 @@
               }
               if (attempt <= retries && isTransientApiError(errorKind)) {
                 if (retryOptions.onRetryScheduled) retryOptions.onRetryScheduled(attempt, retries, errorKind, requestId);
-                await waitMs(backoffMs[attempt - 1] || 1000);
+                await waitMs(getRetryDelayMs(backoffMs[attempt - 1] || 1000));
                 continue;
               }
               break;
@@ -755,7 +765,7 @@
             }
             if (!resp.ok) {
               const nonOk = new Error('api_non_ok');
-              nonOk.errorKind = 'api_non_ok';
+              nonOk.errorKind = getApiErrorKind(resp, data);
               nonOk.meta = { attempt, retries, requestId, resp, data };
               throw nonOk;
             }
@@ -775,7 +785,7 @@
                 }
               }
               if (retryOptions.onRetryScheduled) retryOptions.onRetryScheduled(attempt, retries, errorKind, requestId);
-              await waitMs(backoffMs[attempt - 1] || 1000);
+              await waitMs(getRetryDelayMs(backoffMs[attempt - 1] || 1000));
               continue;
             }
             break;
