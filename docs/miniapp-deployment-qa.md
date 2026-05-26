@@ -265,7 +265,7 @@
   - frontend marker/version (`Mini App frontend: ...`) to detect stale Telegram WebView cache;
   - correlation fields: `req_id`/`setup_req_id` with attempt suffix (`_a1`, `_a2`, ...), `endpoint`, `method`, `transport`, `status`, `answer_error`;
   - phase timelines (`answer_phases`, `setup_phases`) with per-phase `elapsed_ms` and total elapsed counters.
-- Expected phase sequence for healthy calls:
+- Expected phase sequence for healthy calls (answer/setup):
   - `request_scheduled` → `fetch_started` → `response_headers_received` → `response_body_parsed` → `state_update_started` → `state_update_applied` → `ui_render_mark`.
   - Retry flows additionally include `retry_scheduled`, `retry_started`, `retry_exhausted` (if failed).
 - Correlation workflow:
@@ -278,7 +278,7 @@
 - Secret-safety reminder:
   - Debug output must never include raw `initData`, `Authorization`, bot token, full request body, full profile, question text, or answer text.
 
-## 12) FastAPI runtime notes: threadpool offload + structured latency logs
+## 13) FastAPI runtime notes: threadpool offload + structured latency logs
 - FastAPI Mini App routes are `async`, but Mini App builders (`build_state_response`, `build_setup_options_response`, `build_setup_response`, `build_answer_response`) are synchronous and include SQLite I/O.
 - To avoid ASGI event-loop blocking, these builders are intentionally executed through threadpool offload (`asyncio.to_thread(...)`) from `app/miniapp_fastapi.py`.
 - This preserves existing transport semantics and response contract (`(status, headers, body)` → `Response(content=body, status_code=status, headers=...)`).
@@ -298,7 +298,7 @@ How to interpret:
 - Low `duration_ms` while users still report hangs usually indicates delay outside backend handler execution (network path, Telegram WebView, proxy/CDN, or frontend state flow).
 - High `duration_ms` and/or recurring `miniapp_api_slow` points to backend latency (DB contention, slow code path, or server resource pressure) and should be investigated server-side.
 
-## 13) FastAPI Phase 1 local/dev parity run (repo-only, no production switch-over)
+## 14) FastAPI Phase 1 local/dev parity run (repo-only, no production switch-over)
 
 > ⚠️ **Local/dev only.** This section is for repository validation and manual QA on a developer machine.
 >

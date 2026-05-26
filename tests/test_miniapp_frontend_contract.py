@@ -191,8 +191,16 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("pushDiagPhase('setup', 'response_body_parsed'", self.content)
         self.assertIn("pushDiagPhase('setup', 'state_update_started'", self.content)
         self.assertIn("pushDiagPhase('setup', 'state_update_applied'", self.content)
+        self.assertIn("pushDiagPhase('setup', 'ui_render_mark'", self.content)
         self.assertIn("answer_transport:", self.content)
         self.assertIn("setup_transport:", self.content)
+
+
+    def test_docs_section_numbering_is_unique_around_diagnostics(self):
+        docs = Path('docs/miniapp-deployment-qa.md').read_text(encoding='utf-8')
+        self.assertEqual(docs.count('## 12) Frontend timing diagnostics vs backend `duration_ms` (debug-only)'), 1)
+        self.assertEqual(docs.count('## 13) FastAPI runtime notes: threadpool offload + structured latency logs'), 1)
+        self.assertEqual(docs.count('## 12) FastAPI runtime notes: threadpool offload + structured latency logs'), 0)
 
     def test_debug_diagnostics_do_not_render_secrets(self):
         self.assertNotIn("tg.initData", " ".join(line for line in self.content.splitlines() if "apiDiag.textContent" in line or "answer_phases" in line or "setup_phases" in line))
