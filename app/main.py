@@ -1990,7 +1990,7 @@ def main() -> None:
     logger.info("Бот запущен (long polling)")
 
     api_server = None
-    if should_start_miniapp_api(settings):
+    if settings.miniapp_legacy_api_enabled and should_start_miniapp_api(settings):
         api_server = start_miniapp_api_server(
             settings.miniapp_api_bind,
             settings.miniapp_api_port,
@@ -2002,6 +2002,8 @@ def main() -> None:
         api_thread = threading.Thread(target=api_server.serve_forever, daemon=True)
         api_thread.start()
         logger.info("Mini App API server started on %s:%s", settings.miniapp_api_bind, settings.miniapp_api_port)
+    elif not settings.miniapp_legacy_api_enabled:
+        logger.info("Legacy Mini App API server is disabled by MINIAPP_LEGACY_API_ENABLED=false.")
     else:
         logger.info("Mini App API server is disabled. Mini App uses sendData fallback unless API is explicitly enabled/configured.")
 

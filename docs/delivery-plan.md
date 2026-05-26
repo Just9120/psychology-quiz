@@ -46,6 +46,7 @@ Run expanded MVP QA with 2–3 real users/devices; collect UX/latency findings b
 
 ## Later sprint
 ### FastAPI production switch-over
+- **Status: in progress (Phase 2 switch-over PR).**
 - Implemented via separate explicit switch-over PR after Phase 1 repo-only implementation is merged and reviewed.
 - Switch-over PR responsibilities:
   1. deploy FastAPI Mini App API **instead of** current legacy production Mini App API path;

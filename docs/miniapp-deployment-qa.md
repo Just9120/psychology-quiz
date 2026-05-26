@@ -435,3 +435,42 @@ Suggested smoke/log commands (adjust service names for environment):
 - `grep "miniapp_api endpoint=/miniapp/answer" <bot-log-file>`
 - `grep "database_busy_retry" <bot-log-file>`
 - `grep "_a2\|_a3" <bot-log-file>`
+
+## 17) Phase 2 production switch-over (bot + FastAPI split)
+
+Target runtime shape after switch-over (SQLite unchanged):
+- `psych_quiz_bot` runs Telegram long polling only (`python -m app.main`).
+- `psych_quiz_bot` has `MINIAPP_LEGACY_API_ENABLED=false` so legacy `ThreadingHTTPServer` is not started.
+- `psych_quiz_miniapp_api` runs FastAPI/uvicorn (`uvicorn app.miniapp_fastapi_runtime:app --host 0.0.0.0 --port 8081`).
+- Reverse proxy target stays stable: host `127.0.0.1:8081`.
+
+Expected `docker compose ps` shape:
+- `psych_quiz_bot` (no `127.0.0.1:8081->8081/tcp` binding)
+- `psych_quiz_miniapp_api` (`127.0.0.1:8081->8081/tcp`)
+
+Health checks:
+- `docker compose exec psych_quiz_miniapp_api python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8081/healthz', timeout=3).read().decode())"`
+- Expect JSON: `{"ok": true, "service": "miniapp_api"}`.
+
+Log expectations:
+- Bot logs should include legacy-disable info and should **not** include `Mini App API server started on ...`.
+- FastAPI logs should show uvicorn process start and requests for `/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`, `/healthz`.
+
+Smoke checklist:
+- `/ping` in bot chat.
+- `/quiz` classic flow.
+- Bottom menu `🚀 Викторина в окне` opens Mini App flow.
+- Full 5-question Mini App run: setup → answers with feedback after each answer → result screen.
+
+Post-switch log checks:
+- 200/204 status for expected endpoint traffic.
+- No abnormal 5xx spike.
+- Monitor `database_busy_retry` events.
+- Monitor retry suffix patterns (`_a2`, `_a3`).
+- Confirm no silent jump and no lost answer feedback card.
+
+Rollback plan:
+1. Revert this switch-over PR; or
+2. Re-enable legacy API in bot (`MINIAPP_LEGACY_API_ENABLED=true`) and move `127.0.0.1:8081:8081` binding back to `psych_quiz_bot` while disabling/removing `psych_quiz_miniapp_api` service.
+
+Endpoint contracts are intentionally unchanged to keep rollback low-risk.
