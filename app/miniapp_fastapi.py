@@ -100,10 +100,8 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
     async def healthz() -> dict[str, Any]:
         return {"ok": True, "service": "miniapp_api"}
 
-    @app.api_route("/miniapp/{rest:path}", methods=["OPTIONS"])
-    async def options_handler(rest: str, request: Request) -> Response:
+    async def _options_response(endpoint: str, request: Request) -> Response:
         started_at = time.time()
-        endpoint = f"/miniapp/{rest}"
         request_id = _read_request_id(request.headers)
         origin = request.headers.get("Origin", "")
         allowed = bool(allowed_origin and origin == allowed_origin)
@@ -128,6 +126,23 @@ def create_app(*, db_path: str, bot_token: str, initdata_ttl_seconds: int = 3600
             request.headers.get("Access-Control-Request-Headers", ""),
         )
         return response
+
+
+    @app.options("/miniapp/state")
+    async def options_state(request: Request) -> Response:
+        return await _options_response("/miniapp/state", request)
+
+    @app.options("/miniapp/setup-options")
+    async def options_setup_options(request: Request) -> Response:
+        return await _options_response("/miniapp/setup-options", request)
+
+    @app.options("/miniapp/setup")
+    async def options_setup(request: Request) -> Response:
+        return await _options_response("/miniapp/setup", request)
+
+    @app.options("/miniapp/answer")
+    async def options_answer(request: Request) -> Response:
+        return await _options_response("/miniapp/answer", request)
 
     @app.get("/miniapp/state")
     async def get_state(request: Request) -> Response:

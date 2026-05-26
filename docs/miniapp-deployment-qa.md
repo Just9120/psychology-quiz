@@ -429,14 +429,20 @@ Rollback (if smoke fails):
 
 Suggested smoke/log commands (adjust service names for environment):
 - `docker compose ps`
-- `docker compose logs --tail=200 psych_quiz_miniapp_api`
-- `docker compose logs --tail=200 psych_quiz_bot`
-- `docker compose logs --tail=200 <legacy-miniapp-api-service>`
-- `grep "miniapp_api endpoint=/miniapp/answer" <bot-log-file>`
-- `grep "database_busy_retry" <bot-log-file>`
-- `grep "_a2\|_a3" <bot-log-file>`
+- `curl -fsS http://127.0.0.1:8081/healthz`
+- `docker compose logs --tail=200 psych_quiz_bot | grep -E "Legacy Mini App API server is disabled|Mini App API server started"`
+- `docker compose logs --tail=200 psych_quiz_miniapp_api | grep -E "Uvicorn running on|GET /healthz|POST /miniapp/"`
+- Telegram smoke: `/ping`, `/quiz`, `🚀 Викторина в окне`.
 
 ## 17) Phase 2 production switch-over (bot + FastAPI split)
+
+Failed deploy lesson learned (PR #176 rollback):
+- `psych_quiz_bot` must **not** publish host port `8081`.
+- `psych_quiz_miniapp_api` must be the **only** service publishing `127.0.0.1:8081:8081`.
+- `docker compose ps` must show **both** runtime services: `psych_quiz_bot` and `psych_quiz_miniapp_api`.
+- `curl -fsS http://127.0.0.1:8081/healthz` should return JSON with `{"ok": true, ...}`.
+- Bot logs must **not** show `Mini App API server started`.
+- FastAPI logs must show uvicorn/API process startup and requests.
 
 Target runtime shape after switch-over (SQLite unchanged):
 - `psych_quiz_bot` runs Telegram long polling only (`python -m app.main`).
