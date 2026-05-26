@@ -179,6 +179,24 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("Math.floor(Math.random() * 500)", self.content)
         self.assertIn("function getRetryDelayMs(baseMs)", self.content)
         self.assertIn("await waitMs(getRetryDelayMs(backoffMs[attempt - 1] || 1000));", self.content)
+        self.assertIn("function pushDiagPhase(track, phase, startedAt, extras = {})", self.content)
+        self.assertIn("pushDiagPhase('answer', 'request_scheduled'", self.content)
+        self.assertIn("pushDiagPhase('answer', 'response_headers_received'", self.content)
+        self.assertIn("pushDiagPhase('answer', 'response_body_parsed'", self.content)
+        self.assertIn("pushDiagPhase('answer', 'state_update_started'", self.content)
+        self.assertIn("pushDiagPhase('answer', 'state_update_applied'", self.content)
+        self.assertIn("pushDiagPhase('answer', 'ui_render_mark'", self.content)
+        self.assertIn("pushDiagPhase('setup', 'request_scheduled'", self.content)
+        self.assertIn("pushDiagPhase('setup', 'response_headers_received'", self.content)
+        self.assertIn("pushDiagPhase('setup', 'response_body_parsed'", self.content)
+        self.assertIn("pushDiagPhase('setup', 'state_update_started'", self.content)
+        self.assertIn("pushDiagPhase('setup', 'state_update_applied'", self.content)
+        self.assertIn("answer_transport:", self.content)
+        self.assertIn("setup_transport:", self.content)
+
+    def test_debug_diagnostics_do_not_render_secrets(self):
+        self.assertNotIn("tg.initData", " ".join(line for line in self.content.splitlines() if "apiDiag.textContent" in line or "answer_phases" in line or "setup_phases" in line))
+        self.assertNotIn("Authorization", " ".join(line for line in self.content.splitlines() if "apiDiag.textContent" in line))
 
     def test_state_advance_helper_contract(self):
         self.assertIn('function didRunnerStateAdvanceForAnswer(submittedSessionId, submittedQuestionId, runnerState)', self.content)
