@@ -3,6 +3,7 @@ import os
 import shutil
 import sqlite3
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
@@ -151,7 +152,7 @@ class MiniAppFastApiTests(unittest.TestCase):
 
 
     def test_structured_request_logging_includes_duration(self):
-        with self.assertLogs("app.miniapp_fastapi", level="INFO") as logs:
+        with self.assertLogs("uvicorn.error", level="INFO") as logs:
             response = self.client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}", "X-Miniapp-Request-Id": "rid-1"})
         self.assertEqual(200, response.status_code)
         joined = "\n".join(logs.output)
@@ -165,21 +166,21 @@ class MiniAppFastApiTests(unittest.TestCase):
         with patch("app.miniapp_fastapi.verify_telegram_init_data") as verify_mock:
             verify_mock.return_value.telegram_user_id = 42
             with patch("app.miniapp_fastapi._duration_ms", return_value=10):
-                with self.assertLogs("app.miniapp_fastapi", level="WARNING") as logs:
+                with self.assertLogs("uvicorn.error", level="WARNING") as logs:
                     response = client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})
         self.assertEqual(200, response.status_code)
         self.assertTrue(any("miniapp_api_slow endpoint=/miniapp/state" in line for line in logs.output))
 
     def test_logs_do_not_contain_init_data_or_authorization(self):
         secret_token = "super-secret-init-data"
-        with self.assertLogs("app.miniapp_fastapi", level="INFO") as logs:
+        with self.assertLogs("uvicorn.error", level="INFO") as logs:
             self.client.get("/miniapp/state", headers={"Authorization": f"tma {secret_token}"})
         joined = "\n".join(logs.output)
         self.assertNotIn(secret_token, joined)
         self.assertNotIn("Authorization", joined)
 
     def test_options_preflight_emits_structured_log(self):
-        with self.assertLogs("app.miniapp_fastapi", level="INFO") as logs:
+        with self.assertLogs("uvicorn.error", level="INFO") as logs:
             response = self.client.options(
                 "/miniapp/answer",
                 headers={
@@ -249,6 +250,57 @@ class MiniAppFastApiTests(unittest.TestCase):
             response = self.client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})
         self.assertEqual(503, response.status_code)
         self.assertEqual("database_busy_retry", response.json().get("error"))
+
+    def test_missing_init_data_logs_structured_duration(self):
+        with self.assertLogs("uvicorn.error", level="INFO") as logs:
+            response = self.client.get("/miniapp/state")
+        self.assertEqual(401, response.status_code)
+        joined = "\n".join(logs.output)
+        self.assertIn("miniapp_api endpoint=/miniapp/state", joined)
+        self.assertIn("status=401", joined)
+        self.assertIn("duration_ms=", joined)
+
+    def test_fastapi_routes_use_to_thread_for_builders(self):
+        to_thread_calls = []
+
+        async def fake_to_thread(func, *args, **kwargs):
+            to_thread_calls.append(func.__name__)
+            return func(*args, **kwargs)
+
+        with patch("app.miniapp_fastapi.asyncio.to_thread", side_effect=fake_to_thread):
+            self.client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})
+            self.client.get("/miniapp/setup-options", headers={"Authorization": f"tma {self.init_data}"})
+            self.client.post("/miniapp/setup", json={"init_data": self.init_data, "payload": {"quiz_mode": "all", "category_ids": [], "question_count": 1, "difficulty": "any"}})
+            self.client.post("/miniapp/answer", json={"init_data": self.init_data, "payload": {"session_id": self.session_id, "question_id": 1, "selected_option_index": 0}})
+
+        self.assertEqual(
+            ["build_state_response", "build_setup_options_response", "build_setup_response", "build_answer_response"],
+            to_thread_calls,
+        )
+
+    def test_slow_builder_does_not_block_healthz(self):
+        app = create_app(db_path=self.db, bot_token=self.bot_token, allowed_origin="https://miniapp.example.com")
+        with patch("app.miniapp_fastapi.build_state_response", side_effect=lambda *args, **kwargs: (time.sleep(0.25) or (200, {"Content-Type": "application/json; charset=utf-8"}, b'{"ok":true}'))):
+            import threading
+
+            state_client = TestClient(app)
+            health_client = TestClient(app)
+            state_status = {}
+
+            def call_state():
+                state_status["code"] = state_client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"}).status_code
+
+            t = threading.Thread(target=call_state)
+            t.start()
+            time.sleep(0.05)
+            started = time.perf_counter()
+            health_response = health_client.get("/healthz")
+            elapsed = time.perf_counter() - started
+            t.join()
+
+        self.assertEqual(200, state_status["code"])
+        self.assertEqual(200, health_response.status_code)
+        self.assertLess(elapsed, 0.2)
 
     def test_missing_init_data_returns_json_error(self):
         response = self.client.get("/miniapp/state")

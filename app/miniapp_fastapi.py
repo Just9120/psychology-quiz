@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import time
+import asyncio
 from typing import Any
 
 from fastapi import FastAPI, Request
@@ -20,7 +21,7 @@ from app.miniapp_api import (
     verify_telegram_init_data,
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("uvicorn.error")
 
 _ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer"}
 
@@ -88,6 +89,10 @@ def _required_env(name: str) -> str:
     if not value:
         raise RuntimeError(f"Missing required env var for FastAPI runtime: {name}")
     return value
+
+
+async def _run_builder_in_thread(builder: Any, *args: Any, **kwargs: Any) -> tuple[int, dict[str, str], bytes]:
+    return await asyncio.to_thread(builder, *args, **kwargs)
 
 
 def create_app_from_env() -> FastAPI:
@@ -188,7 +193,13 @@ def create_app(
         request_id = _read_request_id(request.headers)
         transport = "header_auth"
         init_data = _extract_init_data(request.headers)
-        status, headers, body = build_state_response(db_path, bot_token, init_data, max_age_seconds=initdata_ttl_seconds)
+        status, headers, body = await _run_builder_in_thread(
+            build_state_response,
+            db_path,
+            bot_token,
+            init_data,
+            max_age_seconds=initdata_ttl_seconds,
+        )
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
         _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
@@ -201,7 +212,13 @@ def create_app(
         request_id = _read_request_id(request.headers)
         transport = "header_auth"
         init_data = _extract_init_data(request.headers)
-        status, headers, body = build_setup_options_response(db_path, bot_token, init_data, max_age_seconds=initdata_ttl_seconds)
+        status, headers, body = await _run_builder_in_thread(
+            build_setup_options_response,
+            db_path,
+            bot_token,
+            init_data,
+            max_age_seconds=initdata_ttl_seconds,
+        )
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
         _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
@@ -215,7 +232,14 @@ def create_app(
         raw_body = await request.body()
         init_data, payload_body, body_request_id, transport = _extract_transport_payload(request.headers, raw_body)
         request_id = body_request_id or request_id
-        status, headers, body = build_setup_response(db_path, bot_token, init_data, payload_body, max_age_seconds=initdata_ttl_seconds)
+        status, headers, body = await _run_builder_in_thread(
+            build_setup_response,
+            db_path,
+            bot_token,
+            init_data,
+            payload_body,
+            max_age_seconds=initdata_ttl_seconds,
+        )
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
         _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
@@ -229,7 +253,14 @@ def create_app(
         raw_body = await request.body()
         init_data, payload_body, body_request_id, transport = _extract_transport_payload(request.headers, raw_body)
         request_id = body_request_id or request_id
-        status, headers, body = build_answer_response(db_path, bot_token, init_data, payload_body, max_age_seconds=initdata_ttl_seconds)
+        status, headers, body = await _run_builder_in_thread(
+            build_answer_response,
+            db_path,
+            bot_token,
+            init_data,
+            payload_body,
+            max_age_seconds=initdata_ttl_seconds,
+        )
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
         _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
