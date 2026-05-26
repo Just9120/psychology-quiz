@@ -797,16 +797,26 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
 
 async def send_current_question_to_chat(chat, settings, session_id: int) -> bool:
-    with get_connection(settings.db_path) as conn:
-        current = get_current_unanswered_question(conn, session_id)
-        if current is None:
-            return False
-        question_id = int(current["question_id"])
-        options = get_question_options(conn, question_id)
-        session = get_quiz_session(conn, session_id)
-        reading_mode = "normal"
-        if session is not None:
-            reading_mode = get_user_reading_mode(conn, int(session["user_id"]))
+    def _load_current_question():
+        with get_connection(settings.db_path) as conn:
+            current = get_current_unanswered_question(conn, session_id)
+            if current is None:
+                return {"current": None}
+            question_id = int(current["question_id"])
+            options = get_question_options(conn, question_id)
+            session = get_quiz_session(conn, session_id)
+            reading_mode = "normal"
+            if session is not None:
+                reading_mode = get_user_reading_mode(conn, int(session["user_id"]))
+            return {"current": current, "question_id": question_id, "options": options, "reading_mode": reading_mode}
+
+    loaded = await _run_db_task(_load_current_question)
+    current = loaded["current"]
+    if current is None:
+        return False
+    question_id = loaded["question_id"]
+    options = loaded["options"]
+    reading_mode = loaded["reading_mode"]
     if not options:
         await chat.send_message("Для вопроса не найдены варианты ответа. Сессия завершена.")
         return False
@@ -879,64 +889,79 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             return
 
         session_id, question_id, selected_option_index = answer_payload
-        with get_connection(settings.db_path) as conn:
-            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-            submission = submit_miniapp_answer_event(
-                conn,
-                session_id=session_id,
-                actor_user_id=int(user_row["id"]),
-                question_id=question_id,
-                selected_option_index=selected_option_index,
-            )
+        def _handle_webapp_answer():
+            with get_connection(settings.db_path) as conn:
+                user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+                submission = submit_miniapp_answer_event(
+                    conn,
+                    session_id=session_id,
+                    actor_user_id=int(user_row["id"]),
+                    question_id=question_id,
+                    selected_option_index=selected_option_index,
+                )
+                if submission.status != "accepted":
+                    return {"status": submission.status}
 
-            if submission.status == "accepted":
                 session = get_quiz_session(conn, session_id)
                 if session is not None and str(session["status"]) == "in_progress":
                     current_unanswered = get_current_unanswered_question(conn, session_id)
                     if current_unanswered is None:
                         finalized = finalize_quiz_session(conn, session_id)
                         if finalized is None:
-                            await message.chat.send_message("Ответ получен. Обновите /ui для проверки состояния.")
-                            return
+                            return {"status": "finalize_failed"}
                         result_url, _ = build_miniapp_url_with_fallback(
                             settings.mini_app_url,
                             get_active_categories(conn),
                             build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id),
                             api_base_url=settings.mini_app_api_base_url,
                         )
-                        await message.chat.send_message(
-                            f"Ответ получен. Сессия завершена: {int(finalized['score'])} из {int(finalized['total_questions'])}.",
-                            reply_markup=build_miniapp_launch_inline_keyboard(result_url, reopen_result=True) if result_url else None,
-                        )
-                        return
+                        return {
+                            "status": "accepted_finished",
+                            "score": int(finalized["score"]),
+                            "total_questions": int(finalized["total_questions"]),
+                            "result_url": result_url,
+                        }
+
                 next_url, _ = build_miniapp_url_with_fallback(
                     settings.mini_app_url,
                     get_active_categories(conn),
                     build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"])),
                     api_base_url=settings.mini_app_api_base_url,
                 )
-                await message.chat.send_message(
-                    "Ответ получен. Откройте Mini App для следующего шага.",
-                    reply_markup=build_miniapp_launch_inline_keyboard(next_url) if next_url else None,
-                )
-                return
-            if submission.status == "duplicate":
-                await message.chat.send_message("Ответ уже получен для этого шага. Откройте /ui снова, чтобы синхронизировать состояние.")
-                return
-            if submission.status == "stale_question":
-                await message.chat.send_message("Этот вопрос уже неактуален. Откройте /ui снова, чтобы продолжить с актуального вопроса.")
-                return
-            if submission.status == "invalid_option":
-                await message.chat.send_message("Некорректный вариант ответа. Откройте /ui снова и выберите вариант из текущего вопроса.")
-                return
-            if submission.status in {"session_not_found", "invalid_question"}:
-                await message.chat.send_message("Сессия не найдена или уже завершена. Запустите /ui для новой попытки или используйте /quiz.")
-                return
-            if submission.status == "forbidden":
-                await message.chat.send_message("Эта сессия вам не принадлежит.")
-                return
+                return {"status": "accepted_next", "next_url": next_url}
 
-            await message.chat.send_message("Не удалось обработать ответ. Откройте /ui заново.")
+        result = await _run_db_task(_handle_webapp_answer)
+        if result["status"] == "accepted_finished":
+            await message.chat.send_message(
+                f"Ответ получен. Сессия завершена: {result['score']} из {result['total_questions']}.",
+                reply_markup=build_miniapp_launch_inline_keyboard(result["result_url"], reopen_result=True) if result["result_url"] else None,
+            )
+            return
+        if result["status"] == "accepted_next":
+            await message.chat.send_message(
+                "Ответ получен. Откройте Mini App для следующего шага.",
+                reply_markup=build_miniapp_launch_inline_keyboard(result["next_url"]) if result["next_url"] else None,
+            )
+            return
+        if result["status"] == "finalize_failed":
+            await message.chat.send_message("Ответ получен. Обновите /ui для проверки состояния.")
+            return
+        if result["status"] == "duplicate":
+            await message.chat.send_message("Ответ уже получен для этого шага. Откройте /ui снова, чтобы синхронизировать состояние.")
+            return
+        if result["status"] == "stale_question":
+            await message.chat.send_message("Этот вопрос уже неактуален. Откройте /ui снова, чтобы продолжить с актуального вопроса.")
+            return
+        if result["status"] == "invalid_option":
+            await message.chat.send_message("Некорректный вариант ответа. Откройте /ui снова и выберите вариант из текущего вопроса.")
+            return
+        if result["status"] in {"session_not_found", "invalid_question"}:
+            await message.chat.send_message("Сессия не найдена или уже завершена. Запустите /ui для новой попытки или используйте /quiz.")
+            return
+        if result["status"] == "forbidden":
+            await message.chat.send_message("Эта сессия вам не принадлежит.")
+            return
+        await message.chat.send_message("Не удалось обработать ответ. Откройте /ui заново.")
         return
 
     quiz_mode = payload.get("quiz_mode")
@@ -959,61 +984,72 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     if tg_user is None:
         await message.chat.send_message(_invalid_miniapp_payload_text())
         return
-    with get_connection(settings.db_path) as conn:
-        active_categories = get_active_categories(conn)
-        active_ids = {int(row["id"]) for row in active_categories}
-        difficulty_filter = None if difficulty == "any" else difficulty
-        if quiz_mode == "single":
-            if len(category_ids) != 1:
-                await message.chat.send_message(_invalid_miniapp_payload_text())
-                return
-            category_id = int(category_ids[0])
-            if category_id not in active_ids:
-                await message.chat.send_message("Выбранная тема больше недоступна. Откройте настройку викторины заново.")
-                return
-            question_ids = select_random_approved_question_ids_by_category(conn, category_id, question_count, difficulty_filter)
-            session_category_id: int | None = category_id
-            selected_ids: list[int] | None = None
-        elif quiz_mode == "selected_mix":
-            if not category_ids:
-                await message.chat.send_message(_invalid_miniapp_payload_text())
-                return
-            if any(category_id not in active_ids for category_id in category_ids):
-                await message.chat.send_message("Выбранные темы больше недоступны. Откройте настройку викторины заново.")
-                return
-            for category_id in category_ids:
-                category_probe = select_random_approved_question_ids_by_category(
-                    conn,
-                    category_id=category_id,
-                    limit=1,
-                    difficulty_mode=difficulty_filter,
-                )
-                if not category_probe:
-                    await message.chat.send_message(
-                        "Не удалось подобрать вопросы под выбранные параметры.\n"
-                        "Попробуйте изменить тему, количество вопросов или сложность."
+    def _handle_webapp_setup():
+        with get_connection(settings.db_path) as conn:
+            active_categories = get_active_categories(conn)
+            active_ids = {int(row["id"]) for row in active_categories}
+            difficulty_filter = None if difficulty == "any" else difficulty
+            selected_ids: list[int] | None
+            session_category_id: int | None
+            if quiz_mode == "single":
+                if len(category_ids) != 1:
+                    return {"status": "invalid_payload"}
+                category_id = int(category_ids[0])
+                if category_id not in active_ids:
+                    return {"status": "category_unavailable"}
+                question_ids = select_random_approved_question_ids_by_category(conn, category_id, question_count, difficulty_filter)
+                session_category_id = category_id
+                selected_ids = None
+            elif quiz_mode == "selected_mix":
+                if not category_ids:
+                    return {"status": "invalid_payload"}
+                if any(category_id not in active_ids for category_id in category_ids):
+                    return {"status": "selected_unavailable"}
+                for category_id in category_ids:
+                    category_probe = select_random_approved_question_ids_by_category(
+                        conn,
+                        category_id=category_id,
+                        limit=1,
+                        difficulty_mode=difficulty_filter,
                     )
-                    return
-            question_ids = select_random_approved_question_ids_by_categories(conn, category_ids, question_count, difficulty_filter)
-            session_category_id = None
-            selected_ids = category_ids
-        else:
-            # Safer behavior: all mode ignores client category_ids completely.
-            question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
-            session_category_id = None
-            selected_ids = None
-        if not question_ids:
-            await message.chat.send_message(
-                "Не удалось подобрать вопросы под выбранные параметры.\n"
-                "Попробуйте изменить тему, количество вопросов или сложность."
-            )
-            return
-        user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-        abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
-        session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
-        if selected_ids:
-            set_selected_categories_for_session(conn, session_id, selected_ids)
-        store_session_questions(conn, session_id, question_ids)
+                    if not category_probe:
+                        return {"status": "questions_not_found"}
+                question_ids = select_random_approved_question_ids_by_categories(conn, category_ids, question_count, difficulty_filter)
+                session_category_id = None
+                selected_ids = category_ids
+            else:
+                # Safer behavior: all mode ignores client category_ids completely.
+                question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
+                session_category_id = None
+                selected_ids = None
+            if not question_ids:
+                return {"status": "questions_not_found"}
+            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+            abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
+            session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
+            if selected_ids:
+                set_selected_categories_for_session(conn, session_id, selected_ids)
+            store_session_questions(conn, session_id, question_ids)
+            runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
+            refreshed_categories = get_active_categories(conn)
+            return {"status": "ok", "runner_state": runner_state, "active_categories": refreshed_categories}
+
+    setup_result = await _run_db_task(_handle_webapp_setup)
+    if setup_result["status"] == "invalid_payload":
+        await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+    if setup_result["status"] == "category_unavailable":
+        await message.chat.send_message("Выбранная тема больше недоступна. Откройте настройку викторины заново.")
+        return
+    if setup_result["status"] == "selected_unavailable":
+        await message.chat.send_message("Выбранные темы больше недоступны. Откройте настройку викторины заново.")
+        return
+    if setup_result["status"] == "questions_not_found":
+        await message.chat.send_message(
+            "Не удалось подобрать вопросы под выбранные параметры.\n"
+            "Попробуйте изменить тему, количество вопросов или сложность."
+        )
+        return
 
     removal_message = None
     try:
@@ -1025,13 +1061,10 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             await removal_message.delete()
         except Exception:
             logger.debug("Не удалось удалить техническое сообщение скрытия меню %s", removal_message.message_id)
-    with get_connection(settings.db_path) as conn:
-        runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
-        active_categories = get_active_categories(conn)
     confirmation_text, confirmation_keyboard = build_post_setup_miniapp_prompt(
         settings.mini_app_url,
-        active_categories,
-        runner_state,
+        setup_result["active_categories"],
+        setup_result["runner_state"],
         api_base_url=settings.mini_app_api_base_url,
     )
     await message.chat.send_message(confirmation_text, reply_markup=confirmation_keyboard)
@@ -1382,36 +1415,29 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         await query.edit_message_text("Не удалось определить пользователя.")
         return
 
-    with get_connection(settings.db_path) as conn:
-        user_row = create_or_load_user(
-            conn,
-            telegram_user_id=tg_user.id,
-            username=tg_user.username,
-            first_name=tg_user.first_name,
-            last_name=tg_user.last_name,
-        )
+    def _start_single_category_quiz():
+        with get_connection(settings.db_path) as conn:
+            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+            difficulty_filter = None if mode == "any" else mode
+            question_ids = select_random_approved_question_ids_by_category(
+                conn,
+                category_id=category_id,
+                limit=selected_limit,
+                difficulty_mode=difficulty_filter,
+            )
+            if not question_ids:
+                return {"status": "no_questions"}
+            session_id = start_quiz_session(conn, int(user_row["id"]), category_id, difficulty_mode=difficulty_filter)
+            store_session_questions(conn, session_id, question_ids)
+            return {"status": "ok", "session_id": session_id}
 
-        difficulty_filter = None if mode == "any" else mode
-        question_ids = select_random_approved_question_ids_by_category(
-            conn,
-            category_id=category_id,
-            limit=selected_limit,
-            difficulty_mode=difficulty_filter,
-        )
-        if not question_ids:
-            await query.edit_message_text("В этой категории пока нет одобренных вопросов.")
-            return
-
-        session_id = start_quiz_session(
-            conn,
-            int(user_row["id"]),
-            category_id,
-            difficulty_mode=difficulty_filter,
-        )
-        store_session_questions(conn, session_id, question_ids)
+    result = await _run_db_task(_start_single_category_quiz)
+    if result["status"] == "no_questions":
+        await query.edit_message_text("В этой категории пока нет одобренных вопросов.")
+        return
 
     await remove_main_menu_for_active_quiz(query)
-    await send_current_question(query, settings, session_id)
+    await send_current_question(query, settings, result["session_id"])
 
 
 async def question_count_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1477,8 +1503,12 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
         return
 
     settings = context.application.bot_data["settings"]
-    with get_connection(settings.db_path) as conn:
-        categories = get_active_categories(conn)
+
+    def _load_mix_categories():
+        with get_connection(settings.db_path) as conn:
+            return get_active_categories(conn)
+
+    categories = await _run_db_task(_load_mix_categories)
     if not categories:
         await query.edit_message_text("Нет доступных категорий.")
         return
@@ -1614,50 +1644,46 @@ async def start_mix_quiz(
         await query.edit_message_text("Не удалось определить пользователя.")
         return
 
-    with get_connection(settings.db_path) as conn:
-        user_row = create_or_load_user(
-            conn,
-            telegram_user_id=tg_user.id,
-            username=tg_user.username,
-            first_name=tg_user.first_name,
-            last_name=tg_user.last_name,
-        )
+    def _start_mix_quiz_db():
+        with get_connection(settings.db_path) as conn:
+            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+            difficulty_filter = None if mode == "any" else mode
+            filtered_selected_ids = selected_category_ids
+            if selected_category_ids:
+                active_ids = {int(row["id"]) for row in get_active_categories(conn)}
+                filtered_selected_ids = [category_id for category_id in selected_category_ids if category_id in active_ids]
+                if not filtered_selected_ids:
+                    return {"status": "selected_unavailable"}
+                question_ids = select_random_approved_question_ids_by_categories(
+                    conn,
+                    category_ids=filtered_selected_ids,
+                    limit=selected_limit,
+                    difficulty_mode=difficulty_filter,
+                )
+            else:
+                question_ids = select_random_approved_question_ids_across_active_categories(
+                    conn,
+                    limit=selected_limit,
+                    difficulty_mode=difficulty_filter,
+                )
+            if not question_ids:
+                return {"status": "no_questions"}
+            session_id = start_quiz_session(conn, int(user_row["id"]), None, difficulty_mode=difficulty_filter)
+            if filtered_selected_ids:
+                set_selected_categories_for_session(conn, session_id, filtered_selected_ids)
+            store_session_questions(conn, session_id, question_ids)
+            return {"status": "ok", "session_id": session_id}
 
-        difficulty_filter = None if mode == "any" else mode
-        if selected_category_ids:
-            active_ids = {int(row["id"]) for row in get_active_categories(conn)}
-            filtered_selected_ids = [category_id for category_id in selected_category_ids if category_id in active_ids]
-            if not filtered_selected_ids:
-                await query.edit_message_text("Выбранные темы больше недоступны.")
-                return
-            question_ids = select_random_approved_question_ids_by_categories(
-                conn,
-                category_ids=filtered_selected_ids,
-                limit=selected_limit,
-                difficulty_mode=difficulty_filter,
-            )
-        else:
-            question_ids = select_random_approved_question_ids_across_active_categories(
-                conn,
-                limit=selected_limit,
-                difficulty_mode=difficulty_filter,
-            )
-        if not question_ids:
-            await query.edit_message_text("Пока нет одобренных вопросов в активных темах.")
-            return
-
-        session_id = start_quiz_session(
-            conn,
-            int(user_row["id"]),
-            None,
-            difficulty_mode=difficulty_filter,
-        )
-        if selected_category_ids:
-            set_selected_categories_for_session(conn, session_id, selected_category_ids)
-        store_session_questions(conn, session_id, question_ids)
+    result = await _run_db_task(_start_mix_quiz_db)
+    if result["status"] == "selected_unavailable":
+        await query.edit_message_text("Выбранные темы больше недоступны.")
+        return
+    if result["status"] == "no_questions":
+        await query.edit_message_text("Пока нет одобренных вопросов в активных темах.")
+        return
 
     await remove_main_menu_for_active_quiz(query)
-    await send_current_question(query, settings, session_id)
+    await send_current_question(query, settings, result["session_id"])
 
 
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1809,30 +1835,33 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await query.edit_message_text("Не удалось определить пользователя.")
         return
 
-    with get_connection(settings.db_path) as conn:
-        session = get_quiz_session(conn, session_id)
-        if session is None:
-            await query.edit_message_text("Сессия не найдена.")
-            return
-        if str(session["status"]) == "finished":
-            await show_finished_quiz_message(
-                query,
-                session_id=session_id,
-                score=int(session["score"]),
-                total_questions=int(session["total_questions"]),
-            )
-            return
+    def _load_next_state():
+        with get_connection(settings.db_path) as conn:
+            session = get_quiz_session(conn, session_id)
+            if session is None:
+                return {"status": "missing"}
+            if str(session["status"]) == "finished":
+                return {"status": "finished", "score": int(session["score"]), "total_questions": int(session["total_questions"])}
+            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+            if int(session["user_id"]) != int(user_row["id"]):
+                return {"status": "forbidden"}
+            return {"status": "ok"}
 
-        user_row = create_or_load_user(
-            conn,
-            telegram_user_id=tg_user.id,
-            username=tg_user.username,
-            first_name=tg_user.first_name,
-            last_name=tg_user.last_name,
+    next_state = await _run_db_task(_load_next_state)
+    if next_state["status"] == "missing":
+        await query.edit_message_text("Сессия не найдена.")
+        return
+    if next_state["status"] == "finished":
+        await show_finished_quiz_message(
+            query,
+            session_id=session_id,
+            score=next_state["score"],
+            total_questions=next_state["total_questions"],
         )
-        if int(session["user_id"]) != int(user_row["id"]):
-            await query.edit_message_text("Эта сессия вам не принадлежит.")
-            return
+        return
+    if next_state["status"] == "forbidden":
+        await query.edit_message_text("Эта сессия вам не принадлежит.")
+        return
 
     await send_current_question(query, settings, session_id)
 
