@@ -279,7 +279,7 @@ How to interpret:
 - Low `duration_ms` while users still report hangs usually indicates delay outside backend handler execution (network path, Telegram WebView, proxy/CDN, or frontend state flow).
 - High `duration_ms` and/or recurring `miniapp_api_slow` points to backend latency (DB contention, slow code path, or server resource pressure) and should be investigated server-side.
 
-## 12) FastAPI Phase 1 local/dev parity run (repo-only, no production switch-over)
+## 13) FastAPI Phase 1 local/dev parity run (repo-only, no production switch-over)
 
 > ⚠️ **Local/dev only.** This section is for repository validation and manual QA on a developer machine.
 >
@@ -340,7 +340,7 @@ Post-deploy log checks:
 - `grep "miniapp_db_locked endpoint=" <bot-log-file>`
 - `grep "database is locked" <bot-log-file>`
 
-## 12) Reverse proxy configuration (production API exposure)
+## 14) Reverse proxy configuration (production API exposure)
 - Mini App API process listens on local bind/port from:
   - `MINIAPP_API_BIND` (default `127.0.0.1`)
   - `MINIAPP_API_PORT` (default `8081`)
@@ -377,7 +377,7 @@ Smoke checks:
 - `curl -i https://quiz-api.librechat.online/miniapp/state`
 - `curl -i -X OPTIONS https://quiz-api.librechat.online/miniapp/answer -H "Origin: https://miniapp.librechat.online" -H "Access-Control-Request-Method: POST"`
 
-## 13) DB migration / upgrade policy
+## 15) DB migration / upgrade policy
 - `schema.sql` is source of truth for fresh database creation.
 - Runtime `ensure_*` migration helpers are used for selected additive upgrades on existing DBs (for example, missing indexes/columns that can be added safely).
 - Production deploy must run normal bot startup (`init_db_connection`) so runtime checks can ensure expected additive indexes exist.
@@ -386,14 +386,14 @@ Smoke checks:
 Backup example for production DB file:
 - `cp /data/quiz.sqlite3 /data/quiz.sqlite3.backup.$(date -u +%Y%m%dT%H%M%SZ)`
 
-## 14) Architecture notes (planned, docs-only)
+## 16) Architecture notes (planned, docs-only)
 - `app/main.py` is currently overloaded and should be split in follow-up refactor PRs:
   - Move Mini App context/URL builder concerns into `app/miniapp_context.py`.
   - Split Telegram handlers by domain responsibility instead of one large module.
 - Mini App API is currently implemented via `BaseHTTPRequestHandler` / `ThreadingHTTPServer`; planned medium/long-term target is migration to an ASGI service (e.g. FastAPI, Litestar, or aiohttp) with cleaner routing/lifecycle/testability.
 - `miniapp/index.html` currently contains a large imperative state machine; if Mini App remains a strategic product direction, plan a declarative state-management refactor in a dedicated backlog track.
 
-## 15) Prioritized roadmap (after #155)
+## 17) Prioritized roadmap (after #155)
 - **Done / urgent:** SQLite hardening shipped in #155 (WAL, `busy_timeout`, explicit connection closing, performance indexes).
 - **Next:** production validation and lock-log monitoring.
 - **Near-term:** keep reverse proxy setup and DB migration policy explicit in ops/docs.
@@ -403,7 +403,7 @@ Backup example for production DB file:
 - If `/miniapp/answer` response is lost/delayed but `/miniapp/state` confirms answer acceptance, Mini App still shows the answer feedback card first (`✅/❌`, `Ваш ответ`, `Правильный ответ`, `Пояснение`, `Далее`) and only then advances.
 
 
-## 16) FastAPI migration QA (phased)
+## 18) FastAPI migration QA (phased)
 Goal: validate phased migration from legacy `ThreadingHTTPServer` Mini App API to FastAPI + uvicorn without regressions.
 
 ### Phase 1 — repo-only implementation validation (no production switch)
@@ -454,7 +454,7 @@ Suggested smoke/log commands (adjust service names for environment):
 - `docker compose logs --tail=200 psych_quiz_miniapp_api | grep -E "Uvicorn running on|GET /healthz|POST /miniapp/"`
 - Telegram smoke: `/ping`, `/quiz`, `🚀 Викторина в окне`.
 
-## 17) Phase 2 production switch-over (bot + FastAPI split)
+## 19) Phase 2 production switch-over (bot + FastAPI split)
 
 Failed deploy lesson learned (PR #176 rollback):
 - `psych_quiz_bot` must **not** publish host port `8081`.
