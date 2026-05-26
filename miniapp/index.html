@@ -183,7 +183,7 @@
     </form>
 
     <script>
-      const FRONTEND_VERSION = 'ui-polish-v3';
+      const FRONTEND_VERSION = 'ui-polish-v4-diag';
       const ANSWER_API_TIMEOUT_MS = 4000;
       const ANSWER_HEDGE_DELAY_MS = 1200;
 
@@ -275,6 +275,17 @@
         setupRequestId: '',
         setupFinalPhase: 'idle',
         answerEndpointPath: '/miniapp/answer',
+        setupEndpointPath: '/miniapp/setup',
+        answerTransport: '',
+        setupTransport: '',
+        answerMethod: 'POST',
+        setupMethod: 'POST',
+        answerStatus: '',
+        setupStatusCode: '',
+        answerErrorCode: '',
+        setupElapsedMs: 0,
+        answerPhases: [],
+        setupPhases: [],
       };
       const setupOptionsCache = {
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
@@ -328,17 +339,30 @@
         const mode = detectContextMode();
         const origin = apiDiagState.apiOrigin ? ` · origin: ${apiDiagState.apiOrigin}` : '';
         apiDiag.hidden = false;
+        const answerPhases = apiDiagState.answerPhases.map((entry) => `${entry.phase}:${entry.elapsed_ms}`).join(',') || '-';
+        const setupPhases = apiDiagState.setupPhases.map((entry) => `${entry.phase}:${entry.elapsed_ms}`).join(',') || '-';
         apiDiag.textContent =
           `API diag — frontend: ${FRONTEND_VERSION} · mode: ${mode} · configured: ` +
           `${apiDiagState.configured ? 'yes' : 'no'} · initData: ${apiDiagState.initDataPresent ? 'yes' : 'no'} ` +
           `· answer: ${apiDiagState.attemptStatus} · setup: ${apiDiagState.setupStatus}` +
           ` · req_id: ${apiDiagState.answerRequestId || '-'} · phase: ${apiDiagState.answerPhase}` +
+          ` · answer_transport: ${apiDiagState.answerTransport || '-'} · answer_method: ${apiDiagState.answerMethod}` +
+          ` · answer_status: ${apiDiagState.answerStatus || '-'} · answer_error: ${apiDiagState.answerErrorCode || '-'}` +
           ` · elapsed_ms: ${apiDiagState.answerElapsedMs} · retry: ${apiDiagState.answerRetryCount}` +
           ` · attempt: ${apiDiagState.answerAttempt} · final: ${apiDiagState.answerFinalPhase}` +
-          ` · setup_req_id: ${apiDiagState.setupRequestId || '-'} · setup_retry: ${apiDiagState.setupRetryCount}` +
+          ` · setup_req_id: ${apiDiagState.setupRequestId || '-'} · setup_transport: ${apiDiagState.setupTransport || '-'} · setup_method: ${apiDiagState.setupMethod}` +
+          ` · setup_status: ${apiDiagState.setupStatusCode || '-'} · setup_elapsed_ms: ${apiDiagState.setupElapsedMs}` +
+          ` · setup_retry: ${apiDiagState.setupRetryCount}` +
           ` · setup_attempt: ${apiDiagState.setupAttempt} · setup_final: ${apiDiagState.setupFinalPhase}` +
-          ` · endpoint: ${apiDiagState.answerEndpointPath}` +
+          ` · endpoint: ${apiDiagState.answerEndpointPath} · setup_endpoint: ${apiDiagState.setupEndpointPath}` +
+          ` · answer_phases: ${answerPhases} · setup_phases: ${setupPhases}` +
           `${apiDiagState.setupErrorCode ? ` · setup_code: ${apiDiagState.setupErrorCode}` : ''}${origin}`;
+      }
+      function pushDiagPhase(track, phase, startedAt, extras = {}) {
+        const key = track === 'setup' ? 'setupPhases' : 'answerPhases';
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const entry = { phase, elapsed_ms: elapsed, ...extras };
+        apiDiagState[key] = [...apiDiagState[key].slice(-19), entry];
       }
 
       function buildMiniappRequestId() {
@@ -820,6 +844,8 @@
         apiDiagState.answerElapsedMs = 0;
         apiDiagState.answerRetryCount = 0;
         apiDiagState.answerAttempt = 1;
+        apiDiagState.answerPhases = [];
+        pushDiagPhase('answer', 'request_scheduled', startedAt, { request_id: apiDiagState.answerRequestId });
         const payload = {
           type: 'quiz_answer',
           session_id: sessionId,
@@ -878,6 +904,7 @@
         } else {
           apiDiagState.attemptStatus = 'api_attempted';
           apiDiagState.answerPhase = 'fetch_started';
+          pushDiagPhase('answer', 'fetch_started', startedAt, { request_id: apiDiagState.answerRequestId });
           renderApiDiagnostics();
           runnerState.textContent = 'Отправляю ответ...';
           try {
@@ -909,6 +936,7 @@
                   apiDiagState.answerPhase = 'retry_scheduled';
                   apiDiagState.answerFinalPhase = errorKind;
                   apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                  pushDiagPhase('answer', 'retry_scheduled', startedAt, { request_id: requestId, error_code: errorKind });
                   renderApiDiagnostics();
                   runnerState.textContent = 'Сеть подвисла, пробую отправить ещё раз...';
                 },
@@ -959,6 +987,7 @@
                   apiDiagState.answerPhase = attempt === 1 ? 'fetch_started' : 'retry_started';
                   apiDiagState.answerElapsedMs = Date.now() - startedAt;
                   apiDiagState.answerRequestId = `${requestBaseId}_a${attempt}`;
+                  pushDiagPhase('answer', attempt === 1 ? 'fetch_started' : 'retry_started', startedAt, { request_id: apiDiagState.answerRequestId });
                   if (attempt > 1) {
                     runnerState.textContent = 'Повторная отправка ответа...';
                   }
@@ -1023,6 +1052,9 @@
               return;
             }
             const answerJson = answerResult.data;
+            apiDiagState.answerStatus = String(answerResult.resp?.status || '');
+            pushDiagPhase('answer', 'response_headers_received', startedAt, { request_id: answerResult.requestId, status: apiDiagState.answerStatus });
+            pushDiagPhase('answer', 'response_body_parsed', startedAt, { request_id: answerResult.requestId });
             if (!(answerJson?.ok === true && answerJson?.runner_state)) throw new Error('api_invalid_payload');
             apiDiagState.attemptStatus = 'api_success';
             apiDiagState.answerPhase = 'api_success';
@@ -1031,21 +1063,31 @@
             renderApiDiagnostics();
             try {
               if (hasCompleteFeedback(answerJson.feedback)) {
+                pushDiagPhase('answer', 'state_update_started', startedAt, { request_id: answerResult.requestId });
                 runnerState.textContent = 'Ответ принят.';
                 renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
               } else if ((answerJson.submission_status === 'duplicate' || answerJson.submission_status === 'stale_question') && answerJson.runner_state) {
+                pushDiagPhase('answer', 'state_update_started', startedAt, { request_id: answerResult.requestId });
                 runnerState.textContent = 'Ответ уже был принят, состояние обновлено.';
                 renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
               } else if (answerJson.submission_status === 'resynced_with_feedback' && hasCompleteFeedback(answerJson.feedback) && answerJson.runner_state) {
+                pushDiagPhase('answer', 'state_update_started', startedAt, { request_id: answerResult.requestId });
                 runnerState.textContent = 'Ответ принят.';
                 renderAnswerFeedback(snapshot, selectedOptionIndex, answerJson.feedback, answerJson.runner_state);
               } else if (answerJson.submission_status === 'resynced' && answerJson.runner_state) {
+                pushDiagPhase('answer', 'state_update_started', startedAt, { request_id: answerResult.requestId });
                 runnerState.textContent = 'Ответ принят, состояние обновлено.';
                 renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
               } else {
+                pushDiagPhase('answer', 'state_update_started', startedAt, { request_id: answerResult.requestId });
                 runnerState.textContent = 'Ответ принят.';
                 renderRunnerState(answerJson.runner_state, { preferLaunchCompact: false });
               }
+              pushDiagPhase('answer', 'state_update_applied', startedAt, { request_id: answerResult.requestId });
+              requestAnimationFrame(() => {
+                pushDiagPhase('answer', 'ui_render_mark', startedAt, { request_id: answerResult.requestId });
+                renderApiDiagnostics();
+              });
               answerSubmitInFlight = false;
               return;
             } catch (_) {
@@ -1060,10 +1102,12 @@
           } catch (e) {
             apiDiagState.answerElapsedMs = Date.now() - startedAt;
             const errorKind = e?.meta?.errorKind || e?.cause?.errorKind || 'fetch_rejected';
+            apiDiagState.answerErrorCode = errorKind;
             apiDiagState.attemptStatus = errorKind;
             apiDiagState.answerPhase = 'retry_exhausted';
             apiDiagState.answerFinalPhase = errorKind;
             apiDiagState.answerRetryCount = Number.isInteger(e?.meta?.attempt) ? e.meta.attempt - 1 : apiDiagState.answerRetryCount;
+            pushDiagPhase('answer', 'retry_exhausted', startedAt, { request_id: apiDiagState.answerRequestId, error_code: errorKind });
             renderApiDiagnostics();
             if (apiBase && initData) {
               apiDiagState.answerPhase = 'state_resync_attempted';
@@ -1275,9 +1319,12 @@
           try {
             apiDiagState.setupTransport = 'simple_body';
             const requestBaseId = buildMiniappRequestId();
+            const setupStartedAt = Date.now();
             apiDiagState.setupRetryCount = 0;
             apiDiagState.setupAttempt = 1;
             apiDiagState.setupFinalPhase = 'fetch_started';
+            apiDiagState.setupPhases = [];
+            pushDiagPhase('setup', 'request_scheduled', setupStartedAt, { request_id: `${requestBaseId}_a1` });
             const { data, resp } = await apiFetchWithRetry(
               `${apiBase}/miniapp/setup`,
               (attempt, attemptRequestId) => ({
@@ -1294,6 +1341,7 @@
                   apiDiagState.setupAttempt = attempt;
                   apiDiagState.setupRequestId = requestId;
                   apiDiagState.setupFinalPhase = 'retry_scheduled';
+                  pushDiagPhase('setup', 'retry_scheduled', setupStartedAt, { request_id: requestId, error_code: errorKind });
                   renderApiDiagnostics();
                   runnerState.textContent = 'Запуск не удался, повторная попытка...';
                 },
@@ -1302,16 +1350,23 @@
                   apiDiagState.setupRetryCount = Math.max(0, attempt - 1);
                   apiDiagState.setupRequestId = `${requestBaseId}_a${attempt}`;
                   apiDiagState.setupFinalPhase = attempt === 1 ? 'fetch_started' : 'retry_started';
+                  pushDiagPhase('setup', attempt === 1 ? 'fetch_started' : 'retry_started', setupStartedAt, { request_id: apiDiagState.setupRequestId });
                   renderApiDiagnostics();
                 },
               },
             );
+            apiDiagState.setupStatusCode = String(resp.status || '');
+            apiDiagState.setupElapsedMs = Date.now() - setupStartedAt;
+            pushDiagPhase('setup', 'response_headers_received', setupStartedAt, { request_id: apiDiagState.setupRequestId, status: apiDiagState.setupStatusCode });
+            pushDiagPhase('setup', 'response_body_parsed', setupStartedAt, { request_id: apiDiagState.setupRequestId });
             if (resp.ok && data?.ok && data?.runner_state) {
               setSetupStatus('api_success');
+              pushDiagPhase('setup', 'state_update_started', setupStartedAt, { request_id: apiDiagState.setupRequestId });
               form.hidden = true;
               setupWarning.hidden = true;
               err.textContent = '';
               renderRunnerState(data.runner_state, { preferLaunchCompact: false });
+              pushDiagPhase('setup', 'state_update_applied', setupStartedAt, { request_id: apiDiagState.setupRequestId });
               setupSubmitInFlight = false;
               return;
             }

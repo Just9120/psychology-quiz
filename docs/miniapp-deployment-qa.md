@@ -259,6 +259,25 @@
 - Mini App API handlers explicitly close SQLite connections (`closing(get_connection(...))` + nested `with conn:`) to avoid lingering file locks.
 - SQLite connection defaults now include:
 
+## 12) Frontend timing diagnostics vs backend `duration_ms` (debug-only)
+- Enable debug mode by opening Mini App with `?debug=1` (for `/ui` launch, append on the Mini App URL in the launch flow).
+- In debug mode, `API diag` now shows:
+  - frontend marker/version (`Mini App frontend: ...`) to detect stale Telegram WebView cache;
+  - correlation fields: `req_id`/`setup_req_id` with attempt suffix (`_a1`, `_a2`, ...), `endpoint`, `method`, `transport`, `status`, `answer_error`;
+  - phase timelines (`answer_phases`, `setup_phases`) with per-phase `elapsed_ms` and total elapsed counters.
+- Expected phase sequence for healthy calls:
+  - `request_scheduled` → `fetch_started` → `response_headers_received` → `response_body_parsed` → `state_update_started` → `state_update_applied` → `ui_render_mark`.
+  - Retry flows additionally include `retry_scheduled`, `retry_started`, `retry_exhausted` (if failed).
+- Correlation workflow:
+  1. Copy `req_id` from debug UI (example `rq_xxx_a2`).
+  2. Find matching backend log event by `request_id`.
+  3. Compare client total elapsed with backend `duration_ms`.
+- Interpretation:
+  - backend `duration_ms` low + client total high ⇒ likely WebView/network/proxy/frontend render/retry latency.
+  - backend `duration_ms` high **or** `miniapp_api_slow` present ⇒ backend/SQLite/code-path bottleneck.
+- Secret-safety reminder:
+  - Debug output must never include raw `initData`, `Authorization`, bot token, full request body, full profile, question text, or answer text.
+
 ## 12) FastAPI runtime notes: threadpool offload + structured latency logs
 - FastAPI Mini App routes are `async`, but Mini App builders (`build_state_response`, `build_setup_options_response`, `build_setup_response`, `build_answer_response`) are synchronous and include SQLite I/O.
 - To avoid ASGI event-loop blocking, these builders are intentionally executed through threadpool offload (`asyncio.to_thread(...)`) from `app/miniapp_fastapi.py`.
