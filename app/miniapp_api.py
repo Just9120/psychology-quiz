@@ -67,7 +67,10 @@ class VerifiedInitData:
 def verify_telegram_init_data(init_data: str, bot_token: str, *, max_age_seconds: int = 3600) -> VerifiedInitData:
     if not init_data:
         raise InitDataValidationError("missing_init_data")
-    pairs = urllib.parse.parse_qsl(init_data, keep_blank_values=True, strict_parsing=True)
+    try:
+        pairs = urllib.parse.parse_qsl(init_data, keep_blank_values=True, strict_parsing=True)
+    except ValueError as exc:
+        raise InitDataValidationError("invalid_hash") from exc
     data = {k: v for k, v in pairs}
     recv_hash = data.pop("hash", "")
     if not recv_hash:

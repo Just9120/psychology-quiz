@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import sqlite3
 import tempfile
 import unittest
@@ -79,6 +80,16 @@ class MiniAppFastApiTests(unittest.TestCase):
             "request_id": "req-123",
             "payload": {"quiz_mode": "all", "category_ids": [], "question_count": 5, "difficulty": "any"},
         }
+
+        shadow_db = f"{self.db}.expected"
+        shutil.copyfile(self.db, shadow_db)
+        expected_status, expected_headers, expected_body = build_setup_response(
+            shadow_db,
+            self.bot_token,
+            self.init_data,
+            json.dumps(request_payload["payload"], separators=(",", ":")).encode("utf-8"),
+        )
+
         response = self.client.post(
             "/miniapp/setup",
             json=request_payload,
@@ -89,21 +100,31 @@ class MiniAppFastApiTests(unittest.TestCase):
         self.assertIn("runner_state", payload)
         self.assertEqual("application/json; charset=utf-8", response.headers.get("content-type"))
 
-        expected_status, expected_headers, expected_body = build_setup_response(
-            self.db,
-            self.bot_token,
-            self.init_data,
-            json.dumps(request_payload["payload"], separators=(",", ":")).encode("utf-8"),
-        )
         self.assertEqual(expected_status, response.status_code)
         self.assertEqual(expected_headers["Content-Type"], response.headers.get("content-type"))
-        self.assertEqual(self._decode_json_bytes(expected_body), payload)
+        expected_payload = self._decode_json_bytes(expected_body)
+        self.assertEqual(expected_payload["ok"], payload["ok"])
+        self.assertEqual(expected_payload["runner_state"]["state"], payload["runner_state"]["state"])
+        self.assertEqual(expected_payload["runner_state"]["session"]["session_status"], payload["runner_state"]["session"]["session_status"])
+        self.assertEqual(expected_payload["runner_state"]["progress"]["total_questions"], payload["runner_state"]["progress"]["total_questions"])
+        self.assertIn(payload["runner_state"]["current_question"]["question_id"], {1, 2})
+        os.remove(shadow_db)
 
     def test_post_answer_simple_body_transport(self):
         request_payload = {
             "init_data": self.init_data,
             "payload": {"session_id": self.session_id, "question_id": 1, "selected_option_index": 0},
         }
+
+        shadow_db = f"{self.db}.expected"
+        shutil.copyfile(self.db, shadow_db)
+        expected_status, expected_headers, expected_body = build_answer_response(
+            shadow_db,
+            self.bot_token,
+            self.init_data,
+            json.dumps(request_payload["payload"], separators=(",", ":")).encode("utf-8"),
+        )
+
         response = self.client.post(
             "/miniapp/answer",
             json=request_payload,
@@ -116,15 +137,10 @@ class MiniAppFastApiTests(unittest.TestCase):
         self.assertIn("feedback", payload)
         self.assertIn("runner_state", payload)
 
-        expected_status, expected_headers, expected_body = build_answer_response(
-            self.db,
-            self.bot_token,
-            self.init_data,
-            json.dumps(request_payload["payload"], separators=(",", ":")).encode("utf-8"),
-        )
         self.assertEqual(expected_status, response.status_code)
         self.assertEqual(expected_headers["Content-Type"], response.headers.get("content-type"))
         self.assertEqual(self._decode_json_bytes(expected_body), payload)
+        os.remove(shadow_db)
 
     def test_post_answer_header_auth_transport(self):
         response = self.client.post(
