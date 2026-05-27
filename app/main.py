@@ -1225,8 +1225,14 @@ async def show_finished_quiz_message(query, session_id: int, score: int, total_q
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(
+        handler="quiz_mode_callback",
+        callback_prefix="qzmode",
+        telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None),
+    )
     query = update.callback_query
     if query is None or query.data is None:
+        latency.summary()
         return
 
     await _timed_telegram_api_call(latency, query.answer())
@@ -1234,41 +1240,55 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     data = query.data
     if data == "qzmode:single":
         settings = context.application.bot_data["settings"]
-        with get_connection(settings.db_path) as conn:
-            categories = get_active_categories(conn)
+        def _load_categories():
+            with get_connection(settings.db_path) as conn:
+                return get_active_categories(conn)
+
+        categories = await _run_db_task(_load_categories)
         if not categories:
-            await query.edit_message_text(
+            await _timed_telegram_api_call(latency, query.edit_message_text(
                 "Нет доступных категорий. Сначала загрузите вопросы в базу данных."
-            )
+            ))
+            latency.summary()
             return
-        await query.edit_message_text(
+        await _timed_telegram_api_call(latency, query.edit_message_text(
             "Выберите категорию:",
             reply_markup=build_category_keyboard(categories),
-        )
+        ))
+        latency.summary()
         return
 
     if data == "qzmode:all":
-        await query.edit_message_text(
+        await _timed_telegram_api_call(latency, query.edit_message_text(
             "Выберите количество вопросов:",
             reply_markup=build_question_count_keyboard("qcntall"),
-        )
+        ))
+        latency.summary()
         return
 
     if data == "qzmode:selected_mix":
         settings = context.application.bot_data["settings"]
-        with get_connection(settings.db_path) as conn:
-            categories = get_active_categories(conn)
+        def _load_categories():
+            with get_connection(settings.db_path) as conn:
+                return get_active_categories(conn)
+
+        categories = await _run_db_task(_load_categories)
         if not categories:
-            await query.edit_message_text(
+            await _timed_telegram_api_call(latency, query.edit_message_text(
                 "Нет доступных категорий. Сначала загрузите вопросы в базу данных."
-            )
+            ))
+            latency.summary()
             return
 
         context.user_data["selected_mix_categories"] = set()
-        await query.edit_message_text(
+        await _timed_telegram_api_call(latency, query.edit_message_text(
             "Выберите темы для микса:",
             reply_markup=build_selected_mix_keyboard(categories, set()),
-        )
+        ))
+        latency.summary()
+        return
+
+    latency.summary()
 
 
 async def send_current_question(query, settings, session_id: int, latency: _HandlerLatency | None = None) -> bool:
