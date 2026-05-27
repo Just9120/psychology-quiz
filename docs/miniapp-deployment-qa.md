@@ -545,3 +545,26 @@ journalctl -u psych_quiz_miniapp_api --since '15 min ago' --no-pager | grep 'min
 
 - Low backend `duration_ms` with user-visible hang usually points to network path, Telegram WebView, proxy buffering, or frontend rendering/JS timing.
 - High backend `duration_ms` indicates server-side bottlenecks (DB lock contention, expensive code path, or backend compute/IO delay).
+
+## Classic Telegram bot latency diagnostics
+
+The bot now emits structured summary lines per classic user action in `psych_quiz_bot` logs with prefix `bot_latency`.
+
+### How to grep
+
+```bash
+docker compose logs --tail=300 psych_quiz_bot | grep 'bot_latency'
+```
+
+Filter a specific handler:
+
+```bash
+docker compose logs --since=15m psych_quiz_bot | grep 'bot_latency handler=answer_callback'
+```
+
+### Interpretation guide
+
+- High `db_elapsed_ms` ⇒ likely SQLite/business path latency (query/transaction/selection flow).
+- High `telegram_api_elapsed_ms` ⇒ Telegram Bot API/network/client delivery latency.
+- High `render_elapsed_ms` ⇒ local message preparation/formatting overhead.
+- `bot_event_loop_lag` warning (if present) ⇒ event-loop blocking or CPU pressure in bot process.
