@@ -1,6 +1,7 @@
 import asyncio
 import ast
 import inspect
+import re
 import unittest
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
@@ -125,7 +126,14 @@ class BotDbOffloadTests(unittest.TestCase):
             message=SimpleNamespace(reply_text=AsyncMock()),
             effective_user=SimpleNamespace(id=123),
         )
-        query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        async def _slow_noop(*args, **kwargs):
+            await asyncio.sleep(0.01)
+
+        query = SimpleNamespace(
+            data='ans:1:1:0',
+            answer=AsyncMock(side_effect=_slow_noop),
+            edit_message_text=AsyncMock(side_effect=_slow_noop),
+        )
         update_answer = SimpleNamespace(
             callback_query=query,
             effective_user=SimpleNamespace(id=123, username='u', first_name='f', last_name='l'),
@@ -155,8 +163,14 @@ class BotDbOffloadTests(unittest.TestCase):
         self.assertIn("handler=quiz_command", logged)
         self.assertIn("handler=answer_callback", logged)
         self.assertIn("elapsed_ms=", logged)
+        self.assertIn("telegram_api_elapsed_ms=", logged)
+        self.assertIn("other_elapsed_ms=", logged)
+        match = re.search(r"handler=answer_callback.*?telegram_api_elapsed_ms=(\d+)", logged)
+        self.assertIsNotNone(match)
+        self.assertGreater(int(match.group(1)), 0)
         self.assertNotIn("BOT_TOKEN", logged)
         self.assertNotIn("question_text", logged)
+        self.assertNotIn("callback_data=", logged)
 
     def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
         source = inspect.getsource(main)

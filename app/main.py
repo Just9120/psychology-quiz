@@ -108,6 +108,7 @@ class _HandlerLatency:
         self.db_elapsed_ms = 0
         self.render_elapsed_ms = 0
         self.telegram_api_elapsed_ms = 0
+        self.other_elapsed_ms = 0
 
     def add_db(self, started_at: float) -> None:
         self.db_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
@@ -124,6 +125,8 @@ class _HandlerLatency:
 
     def summary(self) -> None:
         elapsed_ms = int((time.perf_counter() - self._started_at) * 1000)
+        known_elapsed_ms = self.db_elapsed_ms + self.render_elapsed_ms + self.telegram_api_elapsed_ms
+        self.other_elapsed_ms = max(0, elapsed_ms - known_elapsed_ms)
         fields = [
             f"handler={self.handler}",
             f"phase=handler_done",
@@ -132,6 +135,7 @@ class _HandlerLatency:
             f"db_elapsed_ms={self.db_elapsed_ms}",
             f"render_elapsed_ms={self.render_elapsed_ms}",
             f"telegram_api_elapsed_ms={self.telegram_api_elapsed_ms}",
+            f"other_elapsed_ms={self.other_elapsed_ms}",
         ]
         if self.command:
             fields.append(f"command={self.command}")
@@ -144,6 +148,14 @@ class _HandlerLatency:
         if self.error_code:
             fields.append(f"error_code={self.error_code}")
         logger.info("%s %s", LATENCY_LOG_PREFIX, " ".join(fields))
+
+
+async def _timed_telegram_api_call(latency: _HandlerLatency | None, call):
+    started_at = time.perf_counter()
+    result = await call
+    if latency is not None:
+        latency.add_telegram_api(started_at)
+    return result
 
 
 def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
@@ -1259,15 +1271,16 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         )
 
 
-async def send_current_question(query, settings, session_id: int) -> bool:
+async def send_current_question(query, settings, session_id: int, latency: _HandlerLatency | None = None) -> bool:
     finalize_payload = None
     reading_mode = "normal"
+    db_started_at = time.perf_counter()
     with get_connection(settings.db_path) as conn:
         current = get_current_unanswered_question(conn, session_id)
         if current is None:
             finalized = finalize_quiz_session(conn, session_id)
             if finalized is None:
-                await query.edit_message_text("Не удалось завершить сессию.")
+                await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."))
                 return False
 
             await show_finished_quiz_message(
@@ -1293,9 +1306,12 @@ async def send_current_question(query, settings, session_id: int) -> bool:
                     "total_questions": int(finalized["total_questions"]),
                 }
 
+    if latency is not None:
+        latency.add_db(db_started_at)
+
     if not options:
         if finalize_payload is None:
-            await query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена."))
             return False
         await send_quiz_result_with_main_menu(
             query,
@@ -1318,16 +1334,24 @@ async def send_current_question(query, settings, session_id: int) -> bool:
             ]
         )
 
-    await query.edit_message_text(
-        build_question_text_with_options(
+    render_started_at = time.perf_counter()
+    message_text = build_question_text_with_options(
             order_index=order_index,
             total_questions=total_questions,
             question_text=str(current["question_text"]),
             options=options,
             reading_mode=reading_mode,
+    )
+    markup = InlineKeyboardMarkup(keyboard)
+    if latency is not None:
+        latency.add_render(render_started_at)
+    await _timed_telegram_api_call(
+        latency,
+        query.edit_message_text(
+            message_text,
+            reply_markup=markup,
+            parse_mode="HTML",
         ),
-        reply_markup=InlineKeyboardMarkup(keyboard),
-        parse_mode="HTML",
     )
     return True
 
@@ -1414,7 +1438,8 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     try:
         category_id = int(data.split(":", 1)[1])
     except ValueError:
-        await query.edit_message_text("Некорректный выбор категории.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный выбор категории."))
+        latency.summary()
         return
 
     api_started_at = time.perf_counter()
@@ -1431,7 +1456,7 @@ async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("qcnt:"):
@@ -1468,7 +1493,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("qmode:"):
@@ -1476,18 +1501,21 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
 
     parts = data.split(":")
     if len(parts) != 4:
-        await query.edit_message_text("Некорректный выбор режима.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный выбор режима."))
+        latency.summary()
         return
 
     _, category_raw, count_raw, mode = parts
     try:
         category_id = int(category_raw)
     except ValueError:
-        await query.edit_message_text("Некорректная категория.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректная категория."))
+        latency.summary()
         return
 
     if mode not in {"any", "easy", "medium", "hard"}:
-        await query.edit_message_text("Некорректный режим сложности.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный режим сложности."))
+        latency.summary()
         return
 
     selected_limit: int | None
@@ -1497,13 +1525,15 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         try:
             selected_limit = int(count_raw)
         except ValueError:
-            await query.edit_message_text("Некорректное количество вопросов.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
+            latency.summary()
             return
 
     settings = context.application.bot_data["settings"]
     tg_user = update.effective_user
     if tg_user is None:
-        await query.edit_message_text("Не удалось определить пользователя.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+        latency.summary()
         return
 
     def _start_single_category_quiz():
@@ -1526,11 +1556,12 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
     result = await _run_db_task(_start_single_category_quiz)
     latency.add_db(db_started_at)
     if result["status"] == "no_questions":
-        await query.edit_message_text("В этой категории пока нет одобренных вопросов.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("В этой категории пока нет одобренных вопросов."))
+        latency.summary()
         return
 
     await remove_main_menu_for_active_quiz(query)
-    await send_current_question(query, settings, result["session_id"])
+    await send_current_question(query, settings, result["session_id"], latency=latency)
     latency.session_id = result["session_id"]
     latency.summary()
 
@@ -1540,7 +1571,7 @@ async def question_count_mix_callback(update: Update, context: ContextTypes.DEFA
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("qcntall:"):
@@ -1805,7 +1836,8 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
     parts = data.split(":")
     if len(parts) != 4:
-        await query.edit_message_text("Некорректный формат ответа.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный формат ответа."))
+        latency.summary()
         return
 
     try:
@@ -1815,12 +1847,14 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         question_id = int(question_id_raw)
         selected_option_index = int(selected_option_raw)
     except ValueError:
-        await query.edit_message_text("Некорректные данные ответа.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректные данные ответа."))
+        latency.summary()
         return
 
     tg_user = update.effective_user
     if tg_user is None:
-        await query.edit_message_text("Не удалось определить пользователя.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+        latency.summary()
         return
 
     def _handle_answer_db():
@@ -1863,33 +1897,40 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     result = await _run_db_task(_handle_answer_db)
     latency.add_db(db_started_at)
     if result["status"] == "session_missing":
-        await query.edit_message_text("Сессия уже завершена или не найдена.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Сессия уже завершена или не найдена."))
         latency.summary()
         return
     if result["status"] == "forbidden":
-        await query.edit_message_text("Эта сессия вам не принадлежит.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
+        latency.summary()
         return
     if result["status"] == "invalid_question":
-        await query.edit_message_text("Этот вопрос не относится к текущей сессии.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос не относится к текущей сессии."))
+        latency.summary()
         return
     if result["status"] == "stale_question":
-        await query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше».")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше»."))
+        latency.summary()
         return
     if result["status"] == "stale_finished":
         finalized = result["finalized"]
         if finalized is None:
-            await query.edit_message_text("Не удалось завершить сессию.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."))
+            latency.summary()
             return
         await show_finished_quiz_message(query, session_id=session_id, score=int(finalized["score"]), total_questions=int(finalized["total_questions"]))
         return
     if result["status"] == "invalid_option":
-        await query.edit_message_text("Выбран некорректный вариант ответа.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Выбран некорректный вариант ответа."))
+        latency.summary()
         return
     if result["status"] == "duplicate":
-        await query.edit_message_text("На этот вопрос уже дан ответ.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("На этот вопрос уже дан ответ."))
+        latency.summary()
         return
     if result["status"] != "accepted":
-        await query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины."))
+        latency.summary()
         return
 
     is_correct = result["is_correct"]
@@ -1917,7 +1958,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     markup = InlineKeyboardMarkup(
         [[InlineKeyboardButton(f"Дальше → {next_number}/{result['total_questions']}", callback_data=f"next:{session_id}")]]
     )
-    await query.edit_message_text(message, reply_markup=markup, parse_mode="HTML")
+    await _timed_telegram_api_call(latency, query.edit_message_text(message, reply_markup=markup, parse_mode="HTML"))
     latency.summary()
 
 
@@ -1927,7 +1968,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("next:"):
@@ -1939,12 +1980,14 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         session_id = int(data.split(":", 1)[1])
         latency.session_id = session_id
     except ValueError:
-        await query.edit_message_text("Некорректные данные кнопки «Дальше».")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректные данные кнопки «Дальше»."))
+        latency.summary()
         return
 
     tg_user = update.effective_user
     if tg_user is None:
-        await query.edit_message_text("Не удалось определить пользователя.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+        latency.summary()
         return
 
     def _load_next_state():
@@ -1963,7 +2006,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     next_state = await _run_db_task(_load_next_state)
     latency.add_db(db_started_at)
     if next_state["status"] == "missing":
-        await query.edit_message_text("Сессия не найдена.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Сессия не найдена."))
         latency.summary()
         return
     if next_state["status"] == "finished":
@@ -1975,10 +2018,11 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         )
         return
     if next_state["status"] == "forbidden":
-        await query.edit_message_text("Эта сессия вам не принадлежит.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
+        latency.summary()
         return
 
-    await send_current_question(query, settings, session_id)
+    await send_current_question(query, settings, session_id, latency=latency)
     latency.summary()
 
 

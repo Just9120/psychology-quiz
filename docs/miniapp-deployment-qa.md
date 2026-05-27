@@ -567,4 +567,5 @@ docker compose logs --since=15m psych_quiz_bot | grep 'bot_latency handler=answe
 - High `db_elapsed_ms` ⇒ likely SQLite/business path latency (query/transaction/selection flow).
 - High `telegram_api_elapsed_ms` ⇒ Telegram Bot API/network/client delivery latency.
 - High `render_elapsed_ms` ⇒ local message preparation/formatting overhead.
+- High `other_elapsed_ms` ⇒ instrumentation gap, callback dispatch, event-loop scheduling, or other unclassified overhead.
 - `bot_event_loop_lag` warning (if present) ⇒ event-loop blocking or CPU pressure in bot process.
