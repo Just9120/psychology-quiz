@@ -172,6 +172,29 @@ class BotDbOffloadTests(unittest.TestCase):
         self.assertNotIn("question_text", logged)
         self.assertNotIn("callback_data=", logged)
 
+
+    def test_question_count_callbacks_do_not_raise_nameerror_and_render_next_step(self):
+        context = self._context()
+
+        qcnt_query = SimpleNamespace(data='qcnt:1:5', answer=AsyncMock(), edit_message_text=AsyncMock())
+        qcnt_update = SimpleNamespace(callback_query=qcnt_query, effective_user=SimpleNamespace(id=1))
+        asyncio.run(main.question_count_callback(qcnt_update, context))
+
+        qcntall_query = SimpleNamespace(data='qcntall:5', answer=AsyncMock(), edit_message_text=AsyncMock())
+        qcntall_update = SimpleNamespace(callback_query=qcntall_query, effective_user=SimpleNamespace(id=1))
+        asyncio.run(main.question_count_mix_callback(qcntall_update, context))
+
+        qcntselmix_query = SimpleNamespace(data='qcntselmix:5', answer=AsyncMock(), edit_message_text=AsyncMock())
+        qcntselmix_update = SimpleNamespace(callback_query=qcntselmix_query, effective_user=SimpleNamespace(id=1))
+        asyncio.run(main.question_count_selected_mix_callback(qcntselmix_update, context))
+
+        qcnt_query.answer.assert_awaited()
+        qcntall_query.answer.assert_awaited()
+        qcntselmix_query.answer.assert_awaited()
+        qcnt_query.edit_message_text.assert_awaited()
+        qcntall_query.edit_message_text.assert_awaited()
+        qcntselmix_query.edit_message_text.assert_awaited()
+
     def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
         source = inspect.getsource(main)
         module_ast = ast.parse(source)
@@ -232,6 +255,39 @@ class BotDbOffloadTests(unittest.TestCase):
                 direct_get_connection_with_count,
                 msg=f"{fn} contains direct with get_connection(...) outside nested worker functions",
             )
+
+    def test_static_guard_no_unbound_latency_reads_in_classic_callbacks(self):
+        source = inspect.getsource(main)
+        module_ast = ast.parse(source)
+        target_names = {
+            'question_count_callback',
+            'question_count_mix_callback',
+            'question_count_selected_mix_callback',
+            'difficulty_mode_callback',
+            'difficulty_mode_all_callback',
+            'difficulty_mode_selected_mix_callback',
+            'category_callback',
+            'answer_callback',
+            'next_callback',
+        }
+
+        for node in module_ast.body:
+            if not isinstance(node, ast.AsyncFunctionDef) or node.name not in target_names:
+                continue
+
+            assigned = {arg.arg for arg in node.args.args}
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.Name) and sub.id == 'latency' and isinstance(sub.ctx, ast.Store):
+                    assigned.add('latency')
+
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.Name) and sub.id == 'latency' and isinstance(sub.ctx, ast.Load):
+                    self.assertIn(
+                        'latency',
+                        assigned,
+                        msg=f"{node.name} reads latency without assigning/passing it",
+                    )
+
 
 
 if __name__ == '__main__':

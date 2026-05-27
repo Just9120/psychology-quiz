@@ -1229,7 +1229,7 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if data == "qzmode:single":
@@ -1452,6 +1452,7 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 
 
 async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="question_count_callback", callback_prefix="qcnt", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1464,27 +1465,34 @@ async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_
 
     parts = data.split(":")
     if len(parts) != 3:
-        await query.edit_message_text("Некорректный выбор количества вопросов.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный выбор количества вопросов."))
+        latency.summary()
         return
 
     _, category_raw, count_raw = parts
     try:
         category_id = int(category_raw)
     except ValueError:
-        await query.edit_message_text("Некорректная категория.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректная категория."))
+        latency.summary()
         return
 
     if count_raw != "all":
         try:
             int(count_raw)
         except ValueError:
-            await query.edit_message_text("Некорректное количество вопросов.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
+            latency.summary()
             return
 
-    await query.edit_message_text(
-        "Выберите режим сложности:",
-        reply_markup=build_difficulty_keyboard("qmode", category_id, count_raw),
+    await _timed_telegram_api_call(
+        latency,
+        query.edit_message_text(
+            "Выберите режим сложности:",
+            reply_markup=build_difficulty_keyboard("qmode", category_id, count_raw),
+        ),
     )
+    latency.summary()
 
 
 async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1567,6 +1575,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
 
 
 async def question_count_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="question_count_mix_callback", callback_prefix="qcntall", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1582,13 +1591,18 @@ async def question_count_mix_callback(update: Update, context: ContextTypes.DEFA
         try:
             int(count_raw)
         except ValueError:
-            await query.edit_message_text("Некорректное количество вопросов.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
+            latency.summary()
             return
 
-    await query.edit_message_text(
-        "Выберите режим сложности:",
-        reply_markup=build_difficulty_keyboard("qmodeall", count_raw=count_raw),
+    await _timed_telegram_api_call(
+        latency,
+        query.edit_message_text(
+            "Выберите режим сложности:",
+            reply_markup=build_difficulty_keyboard("qmodeall", count_raw=count_raw),
+        ),
     )
+    latency.summary()
 
 
 async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1690,18 +1704,21 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
 
 
 async def question_count_selected_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="question_count_selected_mix_callback", callback_prefix="qcntselmix", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
+
     data = query.data
     if not data.startswith("qcntselmix:"):
         return
 
     parts = data.split(":")
     if len(parts) != 2:
-        await query.edit_message_text("Некорректный выбор количества вопросов.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный выбор количества вопросов."))
+        latency.summary()
         return
 
     _, count_raw = parts
@@ -1709,13 +1726,18 @@ async def question_count_selected_mix_callback(update: Update, context: ContextT
         try:
             int(count_raw)
         except ValueError:
-            await query.edit_message_text("Некорректное количество вопросов.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
+            latency.summary()
             return
 
-    await query.edit_message_text(
-        "Выберите режим сложности:",
-        reply_markup=build_difficulty_keyboard("qmodeselmix", count_raw=count_raw),
+    await _timed_telegram_api_call(
+        latency,
+        query.edit_message_text(
+            "Выберите режим сложности:",
+            reply_markup=build_difficulty_keyboard("qmodeselmix", count_raw=count_raw),
+        ),
     )
+    latency.summary()
 
 
 async def difficulty_mode_selected_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
