@@ -238,6 +238,7 @@ class BotDbOffloadTests(unittest.TestCase):
         source = inspect.getsource(main)
         module_ast = ast.parse(source)
         target_names = [
+            'quiz_mode_callback',
             'send_current_question_to_chat',
             'web_app_data_handler',
             'difficulty_mode_callback',
