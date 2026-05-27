@@ -8,6 +8,7 @@ import re
 import urllib.parse
 import threading
 import asyncio
+import time
 
 from telegram import (
     BotCommand,
@@ -91,6 +92,58 @@ WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)"
 MAX_MINIAPP_URL_LENGTH = 1800
 MAX_WEBAPP_DATA_BYTES = 4096
 MINIAPP_FRONTEND_VERSION = "ui-polish-v2"
+LATENCY_LOG_PREFIX = "bot_latency"
+
+
+class _HandlerLatency:
+    def __init__(self, *, handler: str, command: str | None = None, callback_prefix: str | None = None, telegram_user_id: int | None = None, session_id: int | None = None):
+        self.handler = handler
+        self.command = command
+        self.callback_prefix = callback_prefix
+        self.telegram_user_id = telegram_user_id
+        self.session_id = session_id
+        self.status = "ok"
+        self.error_code: str | None = None
+        self._started_at = time.perf_counter()
+        self.db_elapsed_ms = 0
+        self.render_elapsed_ms = 0
+        self.telegram_api_elapsed_ms = 0
+
+    def add_db(self, started_at: float) -> None:
+        self.db_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
+
+    def add_render(self, started_at: float) -> None:
+        self.render_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
+
+    def add_telegram_api(self, started_at: float) -> None:
+        self.telegram_api_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
+
+    def set_error(self, error_code: str) -> None:
+        self.status = "error"
+        self.error_code = error_code
+
+    def summary(self) -> None:
+        elapsed_ms = int((time.perf_counter() - self._started_at) * 1000)
+        fields = [
+            f"handler={self.handler}",
+            f"phase=handler_done",
+            f"status={self.status}",
+            f"elapsed_ms={elapsed_ms}",
+            f"db_elapsed_ms={self.db_elapsed_ms}",
+            f"render_elapsed_ms={self.render_elapsed_ms}",
+            f"telegram_api_elapsed_ms={self.telegram_api_elapsed_ms}",
+        ]
+        if self.command:
+            fields.append(f"command={self.command}")
+        if self.callback_prefix:
+            fields.append(f"callback_prefix={self.callback_prefix}")
+        if self.telegram_user_id is not None:
+            fields.append(f"telegram_user_id={self.telegram_user_id}")
+        if self.session_id is not None:
+            fields.append(f"session_id={self.session_id}")
+        if self.error_code:
+            fields.append(f"error_code={self.error_code}")
+        logger.info("%s %s", LATENCY_LOG_PREFIX, " ".join(fields))
 
 
 def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
@@ -700,26 +753,39 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     settings = context.application.bot_data["settings"]
+    latency = _HandlerLatency(handler="quiz_command", command="/quiz", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
 
     def _load_categories():
         with get_connection(settings.db_path) as conn:
             return get_active_categories(conn)
 
+    db_started_at = time.perf_counter()
     categories = await _run_db_task(_load_categories)
+    latency.add_db(db_started_at)
 
     if not categories:
+        api_started_at = time.perf_counter()
         await safe_reply(update, "Нет доступных категорий. Сначала загрузите вопросы в базу данных.")
+        latency.add_telegram_api(api_started_at)
+        latency.summary()
         return
 
     if update.message:
         context.user_data["selected_mix_categories"] = set()
+        render_started_at = time.perf_counter()
+        reply_markup = build_quiz_mode_keyboard()
+        latency.add_render(render_started_at)
+        api_started_at = time.perf_counter()
         await update.message.reply_text(
             "Выберите режим викторины:",
-            reply_markup=build_quiz_mode_keyboard(),
+            reply_markup=reply_markup,
         )
+        latency.add_telegram_api(api_started_at)
+    latency.summary()
 
 
 async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="ui_command", command="/ui", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     if update.message is None:
         return
     if not is_private_chat(update):
@@ -744,12 +810,17 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
                 runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
             return categories, runner_state
 
+    db_started_at = time.perf_counter()
     categories, runner_state = await _run_db_task(_load_ui_context)
+    latency.add_db(db_started_at)
     if not categories:
+        api_started_at = time.perf_counter()
         await update.message.reply_text(
             "Сейчас нет доступных тем для запуска викторины.\n"
             "Используйте /quiz позже или проверьте загрузку вопросов."
         )
+        latency.add_telegram_api(api_started_at)
+        latency.summary()
         return
 
     miniapp_url, fallback_mode = build_miniapp_url_with_fallback(
@@ -784,6 +855,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         intro_text = (
             "У вас уже есть начатая викторина. Откройте её в удобном окне, чтобы продолжить."
         )
+    api_started_at = time.perf_counter()
     await update.message.reply_text(
         intro_text,
         reply_markup=build_miniapp_launch_inline_keyboard(
@@ -791,12 +863,17 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
             force_setup_url=force_setup_url if has_active else None,
         ),
     )
+    latency.add_telegram_api(api_started_at)
+    api_started_at = time.perf_counter()
     await update.message.reply_text(
         "Если кнопка не открылась, нажмите 🚀 Викторина в окне в меню или отправьте /ui ещё раз.",
     )
+    latency.add_telegram_api(api_started_at)
+    latency.summary()
 
 
 async def send_current_question_to_chat(chat, settings, session_id: int) -> bool:
+    latency = _HandlerLatency(handler="send_current_question_to_chat", callback_prefix="sendq", session_id=session_id)
     def _load_current_question():
         with get_connection(settings.db_path) as conn:
             current = get_current_unanswered_question(conn, session_id)
@@ -810,28 +887,37 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
                 reading_mode = get_user_reading_mode(conn, int(session["user_id"]))
             return {"current": current, "question_id": question_id, "options": options, "reading_mode": reading_mode}
 
+    db_started_at = time.perf_counter()
     loaded = await _run_db_task(_load_current_question)
+    latency.add_db(db_started_at)
     current = loaded["current"]
     if current is None:
+        latency.summary()
         return False
     question_id = loaded["question_id"]
     options = loaded["options"]
     reading_mode = loaded["reading_mode"]
     if not options:
+        api_started_at = time.perf_counter()
         await chat.send_message("Для вопроса не найдены варианты ответа. Сессия завершена.")
+        latency.add_telegram_api(api_started_at)
+        latency.summary()
         return False
     keyboard = [[InlineKeyboardButton(option_index_to_label(int(opt["option_index"])), callback_data=f"ans:{session_id}:{question_id}:{int(opt['option_index'])}")] for opt in options]
-    await chat.send_message(
-        build_question_text_with_options(
-            order_index=int(current["order_index"]),
-            total_questions=int(current["total_questions"]),
-            question_text=str(current["question_text"]),
-            options=options,
-            reading_mode=reading_mode,
-        ),
-        reply_markup=InlineKeyboardMarkup(keyboard),
-        parse_mode="HTML",
+    render_started_at = time.perf_counter()
+    message_text = build_question_text_with_options(
+        order_index=int(current["order_index"]),
+        total_questions=int(current["total_questions"]),
+        question_text=str(current["question_text"]),
+        options=options,
+        reading_mode=reading_mode,
     )
+    markup = InlineKeyboardMarkup(keyboard)
+    latency.add_render(render_started_at)
+    api_started_at = time.perf_counter()
+    await chat.send_message(message_text, reply_markup=markup, parse_mode="HTML")
+    latency.add_telegram_api(api_started_at)
+    latency.summary()
     return True
 
 
@@ -1314,6 +1400,7 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
 
 
 async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="category_callback", callback_prefix="cat", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1330,10 +1417,13 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         await query.edit_message_text("Некорректный выбор категории.")
         return
 
+    api_started_at = time.perf_counter()
     await query.edit_message_text(
         "Выберите количество вопросов:",
         reply_markup=build_question_count_keyboard("qcnt", category_id),
     )
+    latency.add_telegram_api(api_started_at)
+    latency.summary()
 
 
 async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1373,6 +1463,7 @@ async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_
 
 
 async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="difficulty_mode_callback", callback_prefix="qmode", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1431,13 +1522,17 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
             store_session_questions(conn, session_id, question_ids)
             return {"status": "ok", "session_id": session_id}
 
+    db_started_at = time.perf_counter()
     result = await _run_db_task(_start_single_category_quiz)
+    latency.add_db(db_started_at)
     if result["status"] == "no_questions":
         await query.edit_message_text("В этой категории пока нет одобренных вопросов.")
         return
 
     await remove_main_menu_for_active_quiz(query)
     await send_current_question(query, settings, result["session_id"])
+    latency.session_id = result["session_id"]
+    latency.summary()
 
 
 async def question_count_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1493,6 +1588,7 @@ async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEF
 
 
 async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="mix_selection_callback", callback_prefix="mixsel", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1508,7 +1604,9 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
         with get_connection(settings.db_path) as conn:
             return get_active_categories(conn)
 
+    db_started_at = time.perf_counter()
     categories = await _run_db_task(_load_mix_categories)
+    latency.add_db(db_started_at)
     if not categories:
         await query.edit_message_text("Нет доступных категорий.")
         return
@@ -1535,6 +1633,7 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
             "Выберите темы для микса:",
             reply_markup=build_selected_mix_keyboard(categories, selected_ids),
         )
+        latency.summary()
         return
 
     if data == "mixsel:reset":
@@ -1543,6 +1642,7 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
             "Выберите темы для микса:",
             reply_markup=build_selected_mix_keyboard(categories, set()),
         )
+        latency.summary()
         return
 
     if data == "mixsel:done":
@@ -1554,6 +1654,7 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
             "Выберите количество вопросов:",
             reply_markup=build_question_count_keyboard("qcntselmix"),
         )
+        latency.summary()
         return
 
 
@@ -1587,6 +1688,7 @@ async def question_count_selected_mix_callback(update: Update, context: ContextT
 
 
 async def difficulty_mode_selected_mix_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="difficulty_mode_selected_mix_callback", callback_prefix="qmodeselmix", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1615,6 +1717,7 @@ async def difficulty_mode_selected_mix_callback(update: Update, context: Context
         mode=mode,
         selected_category_ids=sorted(selected_ids),
     )
+    latency.summary()
 
 
 async def start_mix_quiz(
@@ -1687,6 +1790,7 @@ async def start_mix_quiz(
 
 
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="answer_callback", callback_prefix="ans", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1707,6 +1811,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     try:
         _, session_id_raw, question_id_raw, selected_option_raw = parts
         session_id = int(session_id_raw)
+        latency.session_id = session_id
         question_id = int(question_id_raw)
         selected_option_index = int(selected_option_raw)
     except ValueError:
@@ -1754,9 +1859,12 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 "finalized": finalized,
             }
 
+    db_started_at = time.perf_counter()
     result = await _run_db_task(_handle_answer_db)
+    latency.add_db(db_started_at)
     if result["status"] == "session_missing":
         await query.edit_message_text("Сессия уже завершена или не найдена.")
+        latency.summary()
         return
     if result["status"] == "forbidden":
         await query.edit_message_text("Эта сессия вам не принадлежит.")
@@ -1797,6 +1905,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             "Чтобы запустить новую викторину, используйте /quiz."
         )
         await send_quiz_result_with_main_menu(query, message)
+        latency.summary()
         return
 
     next_number = result["answered_questions"] + 1
@@ -1809,9 +1918,11 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         [[InlineKeyboardButton(f"Дальше → {next_number}/{result['total_questions']}", callback_data=f"next:{session_id}")]]
     )
     await query.edit_message_text(message, reply_markup=markup, parse_mode="HTML")
+    latency.summary()
 
 
 async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="next_callback", callback_prefix="next", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -1826,6 +1937,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
     try:
         session_id = int(data.split(":", 1)[1])
+        latency.session_id = session_id
     except ValueError:
         await query.edit_message_text("Некорректные данные кнопки «Дальше».")
         return
@@ -1847,9 +1959,12 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 return {"status": "forbidden"}
             return {"status": "ok"}
 
+    db_started_at = time.perf_counter()
     next_state = await _run_db_task(_load_next_state)
+    latency.add_db(db_started_at)
     if next_state["status"] == "missing":
         await query.edit_message_text("Сессия не найдена.")
+        latency.summary()
         return
     if next_state["status"] == "finished":
         await show_finished_quiz_message(
@@ -1864,6 +1979,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         return
 
     await send_current_question(query, settings, session_id)
+    latency.summary()
 
 
 async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

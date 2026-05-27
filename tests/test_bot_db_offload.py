@@ -119,6 +119,45 @@ class BotDbOffloadTests(unittest.TestCase):
 
         self.assertTrue(mocked.called)
 
+    def test_latency_logging_for_quiz_and_answer(self):
+        context = self._context()
+        update_quiz = SimpleNamespace(
+            message=SimpleNamespace(reply_text=AsyncMock()),
+            effective_user=SimpleNamespace(id=123),
+        )
+        query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        update_answer = SimpleNamespace(
+            callback_query=query,
+            effective_user=SimpleNamespace(id=123, username='u', first_name='f', last_name='l'),
+        )
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            if func.__name__ == '_load_categories':
+                return [{'id': 1, 'name': 'Cat'}]
+            if func.__name__ == '_handle_answer_db':
+                return {
+                    'status': 'accepted',
+                    'is_correct': True,
+                    'explanation': 'ok',
+                    'answered_questions': 1,
+                    'total_questions': 2,
+                    'reading_mode': 'normal',
+                    'is_last_question': False,
+                    'finalized': None,
+                }
+            return {'status': 'ok'}
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task), patch('app.main.logger.info') as info_log:
+            asyncio.run(main.quiz_command(update_quiz, context))
+            asyncio.run(main.answer_callback(update_answer, context))
+
+        logged = " ".join(str(call.args[2]) for call in info_log.call_args_list if len(call.args) >= 3 and call.args[0] == "%s %s")
+        self.assertIn("handler=quiz_command", logged)
+        self.assertIn("handler=answer_callback", logged)
+        self.assertIn("elapsed_ms=", logged)
+        self.assertNotIn("BOT_TOKEN", logged)
+        self.assertNotIn("question_text", logged)
+
     def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
         source = inspect.getsource(main)
         module_ast = ast.parse(source)
