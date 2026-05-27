@@ -198,8 +198,9 @@ class BotDbOffloadTests(unittest.TestCase):
     def test_quiz_mode_callback_branches_do_not_raise_nameerror_and_render_next_step(self):
         context = self._context()
 
+        categories = [{'id': 1, 'name': 'Cat'}]
         async def fake_run_db_task(func, *args, **kwargs):
-            return [{'id': 1, 'name': 'Cat'}]
+            return categories
 
         with patch('app.main._run_db_task', side_effect=fake_run_db_task):
             single_query = SimpleNamespace(data='qzmode:single', answer=AsyncMock(), edit_message_text=AsyncMock())
@@ -220,6 +221,18 @@ class BotDbOffloadTests(unittest.TestCase):
         single_query.edit_message_text.assert_awaited()
         all_query.edit_message_text.assert_awaited()
         selected_mix_query.edit_message_text.assert_awaited()
+        single_query.edit_message_text.assert_awaited_with(
+            "Выберите категорию:",
+            reply_markup=main.build_category_keyboard(categories),
+        )
+        all_query.edit_message_text.assert_awaited_with(
+            "Выберите количество вопросов:",
+            reply_markup=main.build_question_count_keyboard("qcntall"),
+        )
+        selected_mix_query.edit_message_text.assert_awaited_with(
+            "Выберите темы для микса:",
+            reply_markup=main.build_selected_mix_keyboard(categories, set()),
+        )
 
     def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
         source = inspect.getsource(main)
