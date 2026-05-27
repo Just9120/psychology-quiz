@@ -195,6 +195,32 @@ class BotDbOffloadTests(unittest.TestCase):
         qcntall_query.edit_message_text.assert_awaited()
         qcntselmix_query.edit_message_text.assert_awaited()
 
+    def test_quiz_mode_callback_branches_do_not_raise_nameerror_and_render_next_step(self):
+        context = self._context()
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            return [{'id': 1, 'name': 'Cat'}]
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+            single_query = SimpleNamespace(data='qzmode:single', answer=AsyncMock(), edit_message_text=AsyncMock())
+            single_update = SimpleNamespace(callback_query=single_query, effective_user=SimpleNamespace(id=1))
+            asyncio.run(main.quiz_mode_callback(single_update, context))
+
+            all_query = SimpleNamespace(data='qzmode:all', answer=AsyncMock(), edit_message_text=AsyncMock())
+            all_update = SimpleNamespace(callback_query=all_query, effective_user=SimpleNamespace(id=1))
+            asyncio.run(main.quiz_mode_callback(all_update, context))
+
+            selected_mix_query = SimpleNamespace(data='qzmode:selected_mix', answer=AsyncMock(), edit_message_text=AsyncMock())
+            selected_mix_update = SimpleNamespace(callback_query=selected_mix_query, effective_user=SimpleNamespace(id=1))
+            asyncio.run(main.quiz_mode_callback(selected_mix_update, context))
+
+        single_query.answer.assert_awaited()
+        all_query.answer.assert_awaited()
+        selected_mix_query.answer.assert_awaited()
+        single_query.edit_message_text.assert_awaited()
+        all_query.edit_message_text.assert_awaited()
+        selected_mix_query.edit_message_text.assert_awaited()
+
     def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
         source = inspect.getsource(main)
         module_ast = ast.parse(source)
@@ -260,6 +286,7 @@ class BotDbOffloadTests(unittest.TestCase):
         source = inspect.getsource(main)
         module_ast = ast.parse(source)
         target_names = {
+            'quiz_mode_callback',
             'question_count_callback',
             'question_count_mix_callback',
             'question_count_selected_mix_callback',
