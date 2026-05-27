@@ -1,4 +1,5 @@
 import asyncio
+import ast
 import inspect
 import unittest
 from types import SimpleNamespace
@@ -118,18 +119,66 @@ class BotDbOffloadTests(unittest.TestCase):
 
         self.assertTrue(mocked.called)
 
-    def test_static_guard_no_direct_with_get_connection_in_target_async_functions(self):
+    def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
         source = inspect.getsource(main)
-        for fn in [
+        module_ast = ast.parse(source)
+        target_names = [
             'send_current_question_to_chat',
             'web_app_data_handler',
             'difficulty_mode_callback',
             'mix_selection_callback',
             'start_mix_quiz',
             'next_callback',
-        ]:
-            block = source.split(f'async def {fn}', 1)[1].split('\nasync def ', 1)[0]
-            self.assertIn('await _run_db_task(', block)
+        ]
+
+        async_nodes = {
+            node.name: node
+            for node in module_ast.body
+            if isinstance(node, ast.AsyncFunctionDef) and node.name in target_names
+        }
+        self.assertEqual(set(target_names), set(async_nodes.keys()))
+
+        def _is_get_connection_with(node: ast.With) -> bool:
+            for item in node.items:
+                call = item.context_expr
+                if isinstance(call, ast.Call) and isinstance(call.func, ast.Name) and call.func.id == 'get_connection':
+                    return True
+            return False
+
+        def _walk_excluding_nested_defs(root: ast.AST):
+            stack = [root]
+            while stack:
+                node = stack.pop()
+                yield node
+                for child in ast.iter_child_nodes(node):
+                    if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+                        continue
+                    stack.append(child)
+
+        for fn in target_names:
+            fn_node = async_nodes[fn]
+
+            has_run_db_task_await = False
+            direct_get_connection_with_count = 0
+
+            for node in _walk_excluding_nested_defs(fn_node):
+                if isinstance(node, ast.Await):
+                    call = node.value
+                    if isinstance(call, ast.Call) and isinstance(call.func, ast.Name) and call.func.id == '_run_db_task':
+                        has_run_db_task_await = True
+
+                if isinstance(node, ast.With) and _is_get_connection_with(node):
+                    direct_get_connection_with_count += 1
+
+            self.assertTrue(
+                has_run_db_task_await,
+                msg=f"{fn} must call await _run_db_task(...)",
+            )
+            self.assertEqual(
+                0,
+                direct_get_connection_with_count,
+                msg=f"{fn} contains direct with get_connection(...) outside nested worker functions",
+            )
 
 
 if __name__ == '__main__':
