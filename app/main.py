@@ -93,6 +93,8 @@ MAX_MINIAPP_URL_LENGTH = 1800
 MAX_WEBAPP_DATA_BYTES = 4096
 MINIAPP_FRONTEND_VERSION = "ui-polish-v2"
 LATENCY_LOG_PREFIX = "bot_latency"
+SLOW_LATENCY_LOG_PREFIX = "bot_latency_slow"
+SLOW_HANDLER_THRESHOLD_MS = 1000
 
 
 class _HandlerLatency:
@@ -147,7 +149,10 @@ class _HandlerLatency:
             fields.append(f"session_id={self.session_id}")
         if self.error_code:
             fields.append(f"error_code={self.error_code}")
-        logger.info("%s %s", LATENCY_LOG_PREFIX, " ".join(fields))
+        payload = " ".join(fields)
+        logger.info("%s %s", LATENCY_LOG_PREFIX, payload)
+        if elapsed_ms >= SLOW_HANDLER_THRESHOLD_MS:
+            logger.warning("%s %s", SLOW_LATENCY_LOG_PREFIX, payload)
 
 
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call):
@@ -1168,16 +1173,16 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     await message.chat.send_message(confirmation_text, reply_markup=confirmation_keyboard)
 
 
-async def remove_main_menu_for_active_quiz(query) -> None:
+async def remove_main_menu_for_active_quiz(query, latency: _HandlerLatency | None = None) -> None:
     if query.message is None or query.message.chat.type != "private":
         return
 
     removal_message = None
     try:
-        removal_message = await query.message.reply_text(
+        removal_message = await _timed_telegram_api_call(latency, query.message.reply_text(
             "\u2060",
             reply_markup=ReplyKeyboardRemove(),
-        )
+        ))
     except Exception:
         logger.debug("Не удалось скрыть главное меню в активной викторине.")
 
@@ -1201,27 +1206,27 @@ async def restore_main_menu_after_quiz(query) -> None:
     )
 
 
-async def send_quiz_result_with_main_menu(query, text: str) -> None:
+async def send_quiz_result_with_main_menu(query, text: str, latency: _HandlerLatency | None = None) -> None:
     """Single completion sink: disable stale quiz inline controls, then send final result."""
     if query.message is None:
         return
 
     try:
-        await query.edit_message_reply_markup(reply_markup=None)
+        await _timed_telegram_api_call(latency, query.edit_message_reply_markup(reply_markup=None))
     except Exception:
         logger.debug("Не удалось отключить inline-кнопки у предыдущего сообщения перед показом результата.")
 
-    await query.message.chat.send_message(
+    await _timed_telegram_api_call(latency, query.message.chat.send_message(
         text,
         reply_markup=get_main_menu_keyboard() if query.message.chat.type == "private" else None,
         parse_mode="HTML",
-    )
+    ))
 
 
-async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int) -> None:
+async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int, latency: _HandlerLatency | None = None) -> None:
     # Reuse the single completion sink so stale inline quiz controls are always disabled first.
     del session_id
-    await send_quiz_result_with_main_menu(query, build_quiz_finished_text(score, total_questions))
+    await send_quiz_result_with_main_menu(query, build_quiz_finished_text(score, total_questions), latency=latency)
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1308,6 +1313,7 @@ async def send_current_question(query, settings, session_id: int, latency: _Hand
                 session_id=session_id,
                 score=int(finalized["score"]),
                 total_questions=int(finalized["total_questions"]),
+                latency=latency,
             )
             return False
 
@@ -1439,7 +1445,7 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
             set_selected_categories_for_session(conn, new_session_id, selected_categories)
         store_session_questions(conn, new_session_id, question_ids)
 
-    await remove_main_menu_for_active_quiz(query)
+    await remove_main_menu_for_active_quiz(query, latency=latency)
     await send_current_question(query, settings, new_session_id)
 
 
@@ -1449,7 +1455,7 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("cat:"):
@@ -1588,7 +1594,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         latency.summary()
         return
 
-    await remove_main_menu_for_active_quiz(query)
+    await remove_main_menu_for_active_quiz(query, latency=latency)
     await send_current_question(query, settings, result["session_id"], latency=latency)
     latency.session_id = result["session_id"]
     latency.summary()
@@ -1626,11 +1632,12 @@ async def question_count_mix_callback(update: Update, context: ContextTypes.DEFA
 
 
 async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="difficulty_mode_all_callback", callback_prefix="qmodeall", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("qmodeall:"):
@@ -1638,7 +1645,8 @@ async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEF
 
     parts = data.split(":")
     if len(parts) != 3:
-        await query.edit_message_text("Некорректный выбор режима.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный выбор режима."))
+        latency.summary()
         return
 
     _, count_raw, mode = parts
@@ -1649,7 +1657,9 @@ async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEF
         count_raw=count_raw,
         mode=mode,
         selected_category_ids=None,
+        latency=latency,
     )
+    latency.summary()
 
 
 async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1658,7 +1668,7 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
     data = query.data
     if not data.startswith("mixsel:"):
         return
@@ -1766,20 +1776,20 @@ async def difficulty_mode_selected_mix_callback(update: Update, context: Context
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
     data = query.data
     if not data.startswith("qmodeselmix:"):
         return
 
     parts = data.split(":")
     if len(parts) != 3:
-        await query.edit_message_text("Некорректный выбор режима.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный выбор режима."))
         return
 
     _, count_raw, mode = parts
     selected_ids = set(context.user_data.get("selected_mix_categories", set()))
     if not selected_ids:
-        await query.edit_message_text("Сначала выберите темы для микса.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Сначала выберите темы для микса."))
         return
 
     await start_mix_quiz(
@@ -1789,6 +1799,7 @@ async def difficulty_mode_selected_mix_callback(update: Update, context: Context
         count_raw=count_raw,
         mode=mode,
         selected_category_ids=sorted(selected_ids),
+        latency=latency,
     )
     latency.summary()
 
@@ -1800,9 +1811,10 @@ async def start_mix_quiz(
     count_raw: str,
     mode: str,
     selected_category_ids: list[int] | None,
+    latency: _HandlerLatency | None = None,
 ) -> None:
     if mode not in {"any", "easy", "medium", "hard"}:
-        await query.edit_message_text("Некорректный режим сложности.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный режим сложности."))
         return
 
     selected_limit: int | None
@@ -1812,12 +1824,12 @@ async def start_mix_quiz(
         try:
             selected_limit = int(count_raw)
         except ValueError:
-            await query.edit_message_text("Некорректное количество вопросов.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
             return
 
     settings = context.application.bot_data["settings"]
     if tg_user is None:
-        await query.edit_message_text("Не удалось определить пользователя.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
         return
 
     def _start_mix_quiz_db():
@@ -1852,14 +1864,14 @@ async def start_mix_quiz(
 
     result = await _run_db_task(_start_mix_quiz_db)
     if result["status"] == "selected_unavailable":
-        await query.edit_message_text("Выбранные темы больше недоступны.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Выбранные темы больше недоступны."))
         return
     if result["status"] == "no_questions":
-        await query.edit_message_text("Пока нет одобренных вопросов в активных темах.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Пока нет одобренных вопросов в активных темах."))
         return
 
-    await remove_main_menu_for_active_quiz(query)
-    await send_current_question(query, settings, result["session_id"])
+    await remove_main_menu_for_active_quiz(query, latency=latency)
+    await send_current_question(query, settings, result["session_id"], latency=latency)
 
 
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1868,7 +1880,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("ans:"):
@@ -1960,7 +1972,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."))
             latency.summary()
             return
-        await show_finished_quiz_message(query, session_id=session_id, score=int(finalized["score"]), total_questions=int(finalized["total_questions"]))
+        await show_finished_quiz_message(query, session_id=session_id, score=int(finalized["score"]), total_questions=int(finalized["total_questions"]), latency=latency)
         return
     if result["status"] == "invalid_option":
         await _timed_telegram_api_call(latency, query.edit_message_text("Выбран некорректный вариант ответа."))
@@ -1987,7 +1999,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}\n\n"
             "Чтобы запустить новую викторину, используйте /quiz."
         )
-        await send_quiz_result_with_main_menu(query, message)
+        await send_quiz_result_with_main_menu(query, message, latency=latency)
         latency.summary()
         return
 
@@ -2073,13 +2085,13 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
     if query is None or query.data is None:
         return
 
-    await query.answer()
+    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if data == "readingmode:menu":
         tg_user = update.effective_user
         if tg_user is None:
-            await query.edit_message_text("Не удалось определить пользователя.")
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
             return
 
         settings = context.application.bot_data["settings"]
@@ -2109,7 +2121,7 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
 
     tg_user = update.effective_user
     if tg_user is None:
-        await query.edit_message_text("Не удалось определить пользователя.")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
         return
 
     settings = context.application.bot_data["settings"]
