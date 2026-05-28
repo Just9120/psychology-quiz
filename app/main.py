@@ -1177,23 +1177,7 @@ async def remove_main_menu_for_active_quiz(query, latency: _HandlerLatency | Non
     if query.message is None or query.message.chat.type != "private":
         return
 
-    removal_message = None
-    try:
-        removal_message = await _timed_telegram_api_call(latency, query.message.reply_text(
-            "\u2060",
-            reply_markup=ReplyKeyboardRemove(),
-        ))
-    except Exception:
-        logger.debug("Не удалось скрыть главное меню в активной викторине.")
-
-    if removal_message is not None:
-        try:
-            await removal_message.delete()
-        except Exception:
-            logger.debug(
-                "Не удалось удалить техническое сообщение скрытия меню в викторине %s",
-                removal_message.message_id,
-            )
+    del latency
 
 
 async def restore_main_menu_after_quiz(query) -> None:
@@ -1874,13 +1858,26 @@ async def start_mix_quiz(
     await send_current_question(query, settings, result["session_id"], latency=latency)
 
 
+
+
+def _mark_callback_processing(context: ContextTypes.DEFAULT_TYPE, key: str) -> bool:
+    in_progress = context.user_data.setdefault("_callback_in_progress", set())
+    if key in in_progress:
+        return False
+    in_progress.add(key)
+    return True
+
+
+def _unmark_callback_processing(context: ContextTypes.DEFAULT_TYPE, key: str) -> None:
+    in_progress = context.user_data.get("_callback_in_progress")
+    if isinstance(in_progress, set):
+        in_progress.discard(key)
+
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     latency = _HandlerLatency(handler="answer_callback", callback_prefix="ans", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
-
-    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("ans:"):
@@ -1905,115 +1902,124 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         latency.summary()
         return
 
-    tg_user = update.effective_user
-    if tg_user is None:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+    processing_key = f"answer:{session_id}:{question_id}"
+    if not _mark_callback_processing(context, processing_key):
+        await _timed_telegram_api_call(latency, query.answer("Ответ уже обрабатывается…", cache_time=1))
         latency.summary()
         return
-
-    def _handle_answer_db():
-        with get_connection(settings.db_path) as conn:
-            session = get_quiz_session(conn, session_id)
-            if session is None or str(session["status"]) != "in_progress":
-                return {"status": "session_missing"}
-            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-            if int(session["user_id"]) != int(user_row["id"]):
-                return {"status": "forbidden"}
-            current = get_current_unanswered_question(conn, session_id)
-            submission = submit_miniapp_answer_event(
-                conn,
-                session_id=session_id,
-                actor_user_id=int(user_row["id"]),
-                question_id=question_id,
-                selected_option_index=selected_option_index,
-            )
-            if submission.status == "stale_question" and submission.expected_question_id is None:
-                finalized = finalize_quiz_session(conn, session_id)
-                return {"status": "stale_finished", "finalized": finalized}
-            if submission.status != "accepted":
-                return {"status": submission.status}
-            answered_questions = get_answered_questions_count(conn, session_id)
-            total_questions = int(current["total_questions"])
-            is_last_question = answered_questions >= total_questions
-            finalized = finalize_quiz_session(conn, session_id) if is_last_question else None
-            return {
-                "status": "accepted",
-                "is_correct": bool(submission.is_correct),
-                "explanation": str(current["explanation"] or ""),
-                "answered_questions": answered_questions,
-                "total_questions": total_questions,
-                "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
-                "is_last_question": is_last_question,
-                "finalized": finalized,
-            }
-
-    db_started_at = time.perf_counter()
-    result = await _run_db_task(_handle_answer_db)
-    latency.add_db(db_started_at)
-    if result["status"] == "session_missing":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Сессия уже завершена или не найдена."))
-        latency.summary()
-        return
-    if result["status"] == "forbidden":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
-        latency.summary()
-        return
-    if result["status"] == "invalid_question":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос не относится к текущей сессии."))
-        latency.summary()
-        return
-    if result["status"] == "stale_question":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше»."))
-        latency.summary()
-        return
-    if result["status"] == "stale_finished":
-        finalized = result["finalized"]
-        if finalized is None:
-            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."))
+    try:
+        await _timed_telegram_api_call(latency, query.answer("Принято", cache_time=1))
+        tg_user = update.effective_user
+        if tg_user is None:
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
             latency.summary()
             return
-        await show_finished_quiz_message(query, session_id=session_id, score=int(finalized["score"]), total_questions=int(finalized["total_questions"]), latency=latency)
-        return
-    if result["status"] == "invalid_option":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Выбран некорректный вариант ответа."))
-        latency.summary()
-        return
-    if result["status"] == "duplicate":
-        await _timed_telegram_api_call(latency, query.edit_message_text("На этот вопрос уже дан ответ."))
-        latency.summary()
-        return
-    if result["status"] != "accepted":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины."))
-        latency.summary()
-        return
 
-    is_correct = result["is_correct"]
-    result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
-    rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
+        def _handle_answer_db():
+            with get_connection(settings.db_path) as conn:
+                session = get_quiz_session(conn, session_id)
+                if session is None or str(session["status"]) != "in_progress":
+                    return {"status": "session_missing"}
+                user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+                if int(session["user_id"]) != int(user_row["id"]):
+                    return {"status": "forbidden"}
+                current = get_current_unanswered_question(conn, session_id)
+                submission = submit_miniapp_answer_event(
+                    conn,
+                    session_id=session_id,
+                    actor_user_id=int(user_row["id"]),
+                    question_id=question_id,
+                    selected_option_index=selected_option_index,
+                )
+                if submission.status == "stale_question" and submission.expected_question_id is None:
+                    finalized = finalize_quiz_session(conn, session_id)
+                    return {"status": "stale_finished", "finalized": finalized}
+                if submission.status != "accepted":
+                    return {"status": submission.status}
+                answered_questions = get_answered_questions_count(conn, session_id)
+                total_questions = int(current["total_questions"])
+                is_last_question = answered_questions >= total_questions
+                finalized = finalize_quiz_session(conn, session_id) if is_last_question else None
+                return {
+                    "status": "accepted",
+                    "is_correct": bool(submission.is_correct),
+                    "explanation": str(current["explanation"] or ""),
+                    "answered_questions": answered_questions,
+                    "total_questions": total_questions,
+                    "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
+                    "is_last_question": is_last_question,
+                    "finalized": finalized,
+                }
 
-    if result["is_last_question"]:
-        finalized = result["finalized"]
+        db_started_at = time.perf_counter()
+        result = await _run_db_task(_handle_answer_db)
+        latency.add_db(db_started_at)
+        if result["status"] == "session_missing":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Сессия уже завершена или не найдена."))
+            latency.summary()
+            return
+        if result["status"] == "forbidden":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
+            latency.summary()
+            return
+        if result["status"] == "invalid_question":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос не относится к текущей сессии."))
+            latency.summary()
+            return
+        if result["status"] == "stale_question":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше»."))
+            latency.summary()
+            return
+        if result["status"] == "stale_finished":
+            finalized = result["finalized"]
+            if finalized is None:
+                await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."))
+                latency.summary()
+                return
+            await show_finished_quiz_message(query, session_id=session_id, score=int(finalized["score"]), total_questions=int(finalized["total_questions"]), latency=latency)
+            return
+        if result["status"] == "invalid_option":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Выбран некорректный вариант ответа."))
+            latency.summary()
+            return
+        if result["status"] == "duplicate":
+            await _timed_telegram_api_call(latency, query.edit_message_text("На этот вопрос уже дан ответ."))
+            latency.summary()
+            return
+        if result["status"] != "accepted":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины."))
+            latency.summary()
+            return
+
+        is_correct = result["is_correct"]
+        result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
+        rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
+
+        if result["is_last_question"]:
+            finalized = result["finalized"]
+            message = (
+                f"{result_line}\n\n"
+                f"<b>Пояснение:</b> {rendered_explanation}\n\n"
+                f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}\n\n"
+                "Чтобы запустить новую викторину, используйте /quiz."
+            )
+            await send_quiz_result_with_main_menu(query, message, latency=latency)
+            latency.summary()
+            return
+
+        next_number = result["answered_questions"] + 1
         message = (
             f"{result_line}\n\n"
             f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-            f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}\n\n"
-            "Чтобы запустить новую викторину, используйте /quiz."
+            f"<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']} отвечено"
         )
-        await send_quiz_result_with_main_menu(query, message, latency=latency)
+        markup = InlineKeyboardMarkup(
+            [[InlineKeyboardButton(f"Дальше → {next_number}/{result['total_questions']}", callback_data=f"next:{session_id}")]]
+        )
+        await _timed_telegram_api_call(latency, query.edit_message_text(message, reply_markup=markup, parse_mode="HTML"))
         latency.summary()
-        return
-
-    next_number = result["answered_questions"] + 1
-    message = (
-        f"{result_line}\n\n"
-        f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-        f"<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']} отвечено"
-    )
-    markup = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(f"Дальше → {next_number}/{result['total_questions']}", callback_data=f"next:{session_id}")]]
-    )
-    await _timed_telegram_api_call(latency, query.edit_message_text(message, reply_markup=markup, parse_mode="HTML"))
-    latency.summary()
+    finally:
+        _unmark_callback_processing(context, processing_key)
 
 
 async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -2021,8 +2027,6 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     query = update.callback_query
     if query is None or query.data is None:
         return
-
-    await _timed_telegram_api_call(latency, query.answer())
 
     data = query.data
     if not data.startswith("next:"):
@@ -2038,46 +2042,56 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         latency.summary()
         return
 
-    tg_user = update.effective_user
-    if tg_user is None:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+    processing_key = f"next:{session_id}"
+    if not _mark_callback_processing(context, processing_key):
+        await _timed_telegram_api_call(latency, query.answer("Переход уже выполняется…", cache_time=1))
         latency.summary()
         return
 
-    def _load_next_state():
-        with get_connection(settings.db_path) as conn:
-            session = get_quiz_session(conn, session_id)
-            if session is None:
-                return {"status": "missing"}
-            if str(session["status"]) == "finished":
-                return {"status": "finished", "score": int(session["score"]), "total_questions": int(session["total_questions"])}
-            user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-            if int(session["user_id"]) != int(user_row["id"]):
-                return {"status": "forbidden"}
-            return {"status": "ok"}
+    try:
+        await _timed_telegram_api_call(latency, query.answer("Загружаю следующий вопрос…", cache_time=1))
+        tg_user = update.effective_user
+        if tg_user is None:
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+            latency.summary()
+            return
 
-    db_started_at = time.perf_counter()
-    next_state = await _run_db_task(_load_next_state)
-    latency.add_db(db_started_at)
-    if next_state["status"] == "missing":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Сессия не найдена."))
-        latency.summary()
-        return
-    if next_state["status"] == "finished":
-        await show_finished_quiz_message(
-            query,
-            session_id=session_id,
-            score=next_state["score"],
-            total_questions=next_state["total_questions"],
-        )
-        return
-    if next_state["status"] == "forbidden":
-        await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
-        latency.summary()
-        return
+        def _load_next_state():
+            with get_connection(settings.db_path) as conn:
+                session = get_quiz_session(conn, session_id)
+                if session is None:
+                    return {"status": "missing"}
+                if str(session["status"]) == "finished":
+                    return {"status": "finished", "score": int(session["score"]), "total_questions": int(session["total_questions"])}
+                user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+                if int(session["user_id"]) != int(user_row["id"]):
+                    return {"status": "forbidden"}
+                return {"status": "ok"}
 
-    await send_current_question(query, settings, session_id, latency=latency)
-    latency.summary()
+        db_started_at = time.perf_counter()
+        next_state = await _run_db_task(_load_next_state)
+        latency.add_db(db_started_at)
+        if next_state["status"] == "missing":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Сессия не найдена."))
+            latency.summary()
+            return
+        if next_state["status"] == "finished":
+            await show_finished_quiz_message(
+                query,
+                session_id=session_id,
+                score=next_state["score"],
+                total_questions=next_state["total_questions"],
+            )
+            return
+        if next_state["status"] == "forbidden":
+            await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
+            latency.summary()
+            return
+
+        await send_current_question(query, settings, session_id, latency=latency)
+        latency.summary()
+    finally:
+        _unmark_callback_processing(context, processing_key)
 
 
 async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
