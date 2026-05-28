@@ -172,6 +172,57 @@ class BotDbOffloadTests(unittest.TestCase):
         self.assertNotIn("question_text", logged)
         self.assertNotIn("callback_data=", logged)
 
+    def test_answer_and_next_callbacks_emit_secret_safe_handler_start_logs(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+        answer_query = SimpleNamespace(data='ans:123:456:2', answer=AsyncMock(), edit_message_text=AsyncMock())
+        answer_update = SimpleNamespace(callback_query=answer_query, effective_user=user)
+        next_query = SimpleNamespace(data='next:123', answer=AsyncMock(), edit_message_text=AsyncMock())
+        next_update = SimpleNamespace(callback_query=next_query, effective_user=user)
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            if func.__name__ == '_handle_answer_db':
+                return {
+                    'status': 'accepted',
+                    'is_correct': False,
+                    'explanation': 'question text marker and answer text marker',
+                    'answered_questions': 1,
+                    'total_questions': 2,
+                    'reading_mode': 'normal',
+                    'is_last_question': False,
+                    'finalized': None,
+                }
+            if func.__name__ == '_load_next_state':
+                return {'status': 'ok'}
+            return {'status': 'ok'}
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
+             patch('app.main.send_current_question', new=AsyncMock()), \
+             patch('app.main.logger.info') as info_log:
+            asyncio.run(main.answer_callback(answer_update, context))
+            context.user_data['_callback_in_progress'] = set()
+            asyncio.run(main.next_callback(next_update, context))
+
+        start_logs = [
+            str(call.args[2])
+            for call in info_log.call_args_list
+            if len(call.args) >= 3 and call.args[0] == "%s %s" and call.args[1] == main.HANDLER_START_LOG_PREFIX
+        ]
+        joined = " ".join(start_logs)
+        self.assertIn("handler=answer_callback", joined)
+        self.assertIn("handler=next_callback", joined)
+        self.assertIn("phase=handler_start", joined)
+        self.assertIn("callback_prefix=ans", joined)
+        self.assertIn("callback_prefix=next", joined)
+        self.assertIn("telegram_user_id=1", joined)
+        self.assertIn("session_id=123", joined)
+        self.assertNotIn("ans:123:456:2", joined)
+        self.assertNotIn("next:123", joined)
+        self.assertNotIn("question text marker", joined)
+        self.assertNotIn("answer text marker", joined)
+        self.assertNotIn("BOT_TOKEN", joined)
+        self.assertNotIn("callback_data=", joined)
+
     def test_answer_and_next_callbacks_send_single_feedback_and_guard_repeated_taps(self):
         context = self._context()
         user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')

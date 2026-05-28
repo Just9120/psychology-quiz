@@ -92,6 +92,7 @@ WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)"
 MAX_MINIAPP_URL_LENGTH = 1800
 MAX_WEBAPP_DATA_BYTES = 4096
 MINIAPP_FRONTEND_VERSION = "ui-polish-v2"
+HANDLER_START_LOG_PREFIX = "bot_handler_start"
 LATENCY_LOG_PREFIX = "bot_latency"
 SLOW_LATENCY_LOG_PREFIX = "bot_latency_slow"
 SLOW_HANDLER_THRESHOLD_MS = 1000
@@ -125,6 +126,21 @@ class _HandlerLatency:
         self.status = "error"
         self.error_code = error_code
 
+    def start(self) -> None:
+        fields = [
+            f"handler={self.handler}",
+            "phase=handler_start",
+        ]
+        if self.command:
+            fields.append(f"command={self.command}")
+        if self.callback_prefix:
+            fields.append(f"callback_prefix={self.callback_prefix}")
+        if self.telegram_user_id is not None:
+            fields.append(f"telegram_user_id={self.telegram_user_id}")
+        if self.session_id is not None:
+            fields.append(f"session_id={self.session_id}")
+        logger.info("%s %s", HANDLER_START_LOG_PREFIX, " ".join(fields))
+
     def summary(self) -> None:
         elapsed_ms = int((time.perf_counter() - self._started_at) * 1000)
         known_elapsed_ms = self.db_elapsed_ms + self.render_elapsed_ms + self.telegram_api_elapsed_ms
@@ -154,6 +170,15 @@ class _HandlerLatency:
         if elapsed_ms >= SLOW_HANDLER_THRESHOLD_MS:
             logger.warning("%s %s", SLOW_LATENCY_LOG_PREFIX, payload)
 
+
+def _safe_callback_session_id(data: str, expected_prefix: str) -> int | None:
+    parts = data.split(":", 2)
+    if len(parts) < 2 or parts[0] != expected_prefix:
+        return None
+    try:
+        return int(parts[1])
+    except ValueError:
+        return None
 
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call):
     started_at = time.perf_counter()
@@ -771,6 +796,7 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     settings = context.application.bot_data["settings"]
     latency = _HandlerLatency(handler="quiz_command", command="/quiz", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
+    latency.start()
 
     def _load_categories():
         with get_connection(settings.db_path) as conn:
@@ -803,6 +829,7 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     latency = _HandlerLatency(handler="ui_command", command="/ui", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
+    latency.start()
     if update.message is None:
         return
     if not is_private_chat(update):
@@ -1224,9 +1251,14 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         latency.summary()
         return
 
+    data = query.data
+    if not data.startswith("qzmode:"):
+        latency.summary()
+        return
+    latency.start()
+
     await _timed_telegram_api_call(latency, query.answer())
 
-    data = query.data
     if data == "qzmode:single":
         settings = context.application.bot_data["settings"]
         def _load_categories():
@@ -1439,11 +1471,12 @@ async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
-
     data = query.data
     if not data.startswith("cat:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     try:
         category_id = int(data.split(":", 1)[1])
@@ -1467,11 +1500,12 @@ async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
-
     data = query.data
     if not data.startswith("qcnt:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     parts = data.split(":")
     if len(parts) != 3:
@@ -1511,11 +1545,12 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
-
     data = query.data
     if not data.startswith("qmode:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     parts = data.split(":")
     if len(parts) != 4:
@@ -1590,11 +1625,12 @@ async def question_count_mix_callback(update: Update, context: ContextTypes.DEFA
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
-
     data = query.data
     if not data.startswith("qcntall:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     _, count_raw = data.split(":", 1)
     if count_raw != "all":
@@ -1621,11 +1657,12 @@ async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEF
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
-
     data = query.data
     if not data.startswith("qmodeall:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     parts = data.split(":")
     if len(parts) != 3:
@@ -1652,10 +1689,12 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
     data = query.data
     if not data.startswith("mixsel:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     settings = context.application.bot_data["settings"]
 
@@ -1723,11 +1762,12 @@ async def question_count_selected_mix_callback(update: Update, context: ContextT
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
-
     data = query.data
     if not data.startswith("qcntselmix:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     parts = data.split(":")
     if len(parts) != 2:
@@ -1760,10 +1800,12 @@ async def difficulty_mode_selected_mix_callback(update: Update, context: Context
     if query is None or query.data is None:
         return
 
-    await _timed_telegram_api_call(latency, query.answer())
     data = query.data
     if not data.startswith("qmodeselmix:"):
         return
+    latency.start()
+
+    await _timed_telegram_api_call(latency, query.answer())
 
     parts = data.split(":")
     if len(parts) != 3:
@@ -1882,6 +1924,8 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     data = query.data
     if not data.startswith("ans:"):
         return
+    latency.session_id = _safe_callback_session_id(data, "ans")
+    latency.start()
 
     settings = context.application.bot_data["settings"]
 
@@ -2031,6 +2075,8 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     data = query.data
     if not data.startswith("next:"):
         return
+    latency.session_id = _safe_callback_session_id(data, "next")
+    latency.start()
 
     settings = context.application.bot_data["settings"]
 
@@ -2100,9 +2146,13 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
     if query is None or query.data is None:
         return
 
+    data = query.data
+    if not data.startswith("readingmode:"):
+        return
+    latency.start()
+
     await _timed_telegram_api_call(latency, query.answer())
 
-    data = query.data
     if data == "readingmode:menu":
         tg_user = update.effective_user
         if tg_user is None:
