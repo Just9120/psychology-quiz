@@ -173,6 +173,57 @@ class BotDbOffloadTests(unittest.TestCase):
         self.assertNotIn("callback_data=", logged)
 
 
+
+    def test_start_mix_quiz_and_answer_callback_include_helper_telegram_timing(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+
+        mix_query = SimpleNamespace(data='qmodeselmix:5:any', answer=AsyncMock(), edit_message_text=AsyncMock())
+        mix_update = SimpleNamespace(callback_query=mix_query, effective_user=user)
+        context.user_data['selected_mix_categories'] = {1}
+
+        answer_query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        answer_update = SimpleNamespace(callback_query=answer_query, effective_user=user)
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            if func.__name__ == '_start_mix_quiz_db':
+                return {'status': 'ok', 'session_id': 1}
+            if func.__name__ == '_handle_answer_db':
+                return {
+                    'status': 'accepted', 'is_correct': True, 'explanation': 'ok',
+                    'answered_questions': 1, 'total_questions': 1, 'reading_mode': 'normal',
+                    'is_last_question': True, 'finalized': {'score': 1, 'total_questions': 1},
+                }
+            return {'status': 'ok'}
+
+        async def slow_reply(*args, **kwargs):
+            await asyncio.sleep(0.01)
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task),              patch('app.main.remove_main_menu_for_active_quiz', new=AsyncMock(side_effect=slow_reply)),              patch('app.main.send_current_question', new=AsyncMock(side_effect=slow_reply)),              patch('app.main.send_quiz_result_with_main_menu', new=AsyncMock(side_effect=slow_reply)),              patch('app.main.logger.info') as info_log:
+            asyncio.run(main.difficulty_mode_selected_mix_callback(mix_update, context))
+            asyncio.run(main.answer_callback(answer_update, context))
+
+        logged = " ".join(str(call.args[2]) for call in info_log.call_args_list if len(call.args) >= 3 and call.args[0] == "%s %s")
+        mix_values = [int(v) for v in re.findall(r"handler=difficulty_mode_selected_mix_callback.*?telegram_api_elapsed_ms=(\d+)", logged)]
+        ans_values = [int(v) for v in re.findall(r"handler=answer_callback.*?telegram_api_elapsed_ms=(\d+)", logged)]
+        self.assertTrue(mix_values)
+        self.assertTrue(ans_values)
+        self.assertTrue(all(v >= 0 for v in mix_values))
+        self.assertTrue(all(v >= 0 for v in ans_values))
+        self.assertRegex(logged, r"other_elapsed_ms=\d+")
+
+    def test_bot_latency_slow_threshold(self):
+        latency = main._HandlerLatency(handler='slow_test', callback_prefix='slow')
+        latency._started_at -= (main.SLOW_HANDLER_THRESHOLD_MS + 50) / 1000
+        with patch('app.main.logger.info') as info_log, patch('app.main.logger.warning') as warn_log:
+            latency.summary()
+        self.assertTrue(info_log.called)
+        self.assertTrue(warn_log.called)
+
+        fast_latency = main._HandlerLatency(handler='fast_test', callback_prefix='fast')
+        with patch('app.main.logger.warning') as warn_fast:
+            fast_latency.summary()
+        self.assertFalse(warn_fast.called)
     def test_question_count_callbacks_do_not_raise_nameerror_and_render_next_step(self):
         context = self._context()
 
@@ -194,6 +245,33 @@ class BotDbOffloadTests(unittest.TestCase):
         qcnt_query.edit_message_text.assert_awaited()
         qcntall_query.edit_message_text.assert_awaited()
         qcntselmix_query.edit_message_text.assert_awaited()
+
+    def test_reading_mode_callback_menu_and_set(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+        menu_query = SimpleNamespace(data='readingmode:menu', answer=AsyncMock(), edit_message_text=AsyncMock())
+        set_query = SimpleNamespace(data='readingmode:set:normal', answer=AsyncMock(), edit_message_text=AsyncMock())
+        menu_update = SimpleNamespace(callback_query=menu_query, effective_user=user)
+        set_update = SimpleNamespace(callback_query=set_query, effective_user=user)
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            if func.__name__ == '_load_current_mode':
+                return 'normal'
+            if func.__name__ == '_save_mode':
+                return 'normal'
+            return None
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task), patch('app.main.logger.info') as info_log:
+            asyncio.run(main.reading_mode_callback(menu_update, context))
+            asyncio.run(main.reading_mode_callback(set_update, context))
+
+        menu_query.answer.assert_awaited()
+        set_query.answer.assert_awaited()
+        menu_query.edit_message_text.assert_awaited()
+        set_query.edit_message_text.assert_awaited()
+        logged = " ".join(str(call.args[2]) for call in info_log.call_args_list if len(call.args) >= 3 and call.args[0] == "%s %s")
+        self.assertIn("handler=reading_mode_callback", logged)
+        self.assertIn("callback_prefix=readingmode", logged)
 
     def test_quiz_mode_callback_branches_do_not_raise_nameerror_and_render_next_step(self):
         context = self._context()
@@ -310,6 +388,7 @@ class BotDbOffloadTests(unittest.TestCase):
             'category_callback',
             'answer_callback',
             'next_callback',
+            'reading_mode_callback',
         }
 
         for node in module_ast.body:
@@ -328,6 +407,38 @@ class BotDbOffloadTests(unittest.TestCase):
                         assigned,
                         msg=f"{node.name} reads latency without assigning/passing it",
                     )
+
+    def test_static_guard_timed_telegram_calls_require_latency_binding(self):
+        source = inspect.getsource(main)
+        module_ast = ast.parse(source)
+
+        for node in module_ast.body:
+            if not isinstance(node, ast.AsyncFunctionDef):
+                continue
+            uses_timed_latency = False
+            for sub in ast.walk(node):
+                if not isinstance(sub, ast.Call):
+                    continue
+                if not isinstance(sub.func, ast.Name) or sub.func.id != '_timed_telegram_api_call':
+                    continue
+                if not sub.args:
+                    continue
+                first_arg = sub.args[0]
+                if isinstance(first_arg, ast.Name) and first_arg.id == 'latency':
+                    uses_timed_latency = True
+                    break
+            if not uses_timed_latency:
+                continue
+
+            has_latency_arg = any(arg.arg == 'latency' for arg in node.args.args)
+            has_latency_store = any(
+                isinstance(sub, ast.Name) and sub.id == 'latency' and isinstance(sub.ctx, ast.Store)
+                for sub in ast.walk(node)
+            )
+            self.assertTrue(
+                has_latency_arg or has_latency_store,
+                msg=f"{node.name} uses _timed_telegram_api_call(latency, ...) without defining latency",
+            )
 
 
 
