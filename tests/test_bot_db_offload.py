@@ -172,6 +172,74 @@ class BotDbOffloadTests(unittest.TestCase):
         self.assertNotIn("question_text", logged)
         self.assertNotIn("callback_data=", logged)
 
+    def test_update_ingress_logs_callback_safely_and_allows_callback_handler(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='secret first', last_name='secret last')
+        query = SimpleNamespace(data='ans:123:456:2', answer=AsyncMock(), edit_message_text=AsyncMock())
+        callback_update = SimpleNamespace(update_id=777, callback_query=query, effective_user=user, message=None)
+        message_update = SimpleNamespace(
+            update_id=778,
+            callback_query=None,
+            message=SimpleNamespace(text='secret message text', web_app_data=None),
+            effective_user=user,
+        )
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            if func.__name__ == '_handle_answer_db':
+                return {
+                    'status': 'accepted',
+                    'is_correct': False,
+                    'explanation': 'question text marker and answer text marker',
+                    'answered_questions': 1,
+                    'total_questions': 2,
+                    'reading_mode': 'normal',
+                    'is_last_question': False,
+                    'finalized': None,
+                }
+            return {'status': 'ok'}
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
+             patch('app.main.logger.info') as info_log:
+            asyncio.run(main.update_ingress_logger(callback_update, context))
+            asyncio.run(main.update_ingress_logger(message_update, context))
+            asyncio.run(main.answer_callback(callback_update, context))
+
+        logged = " ".join(
+            " ".join(str(arg) for arg in call.args)
+            for call in info_log.call_args_list
+        )
+        self.assertIn(main.UPDATE_INGRESS_LOG_PREFIX, logged)
+        self.assertIn('update_id=777', logged)
+        self.assertIn('update_type=callback_query', logged)
+        self.assertIn('callback_prefix=ans', logged)
+        self.assertIn('telegram_user_id=1', logged)
+        self.assertIn('update_id=778', logged)
+        self.assertIn('update_type=message', logged)
+        self.assertIn('handler=answer_callback', logged)
+        self.assertNotIn('ans:123:456:2', logged)
+        self.assertNotIn('secret message text', logged)
+        self.assertNotIn('question text marker', logged)
+        self.assertNotIn('answer text marker', logged)
+        query.answer.assert_awaited()
+        query.edit_message_text.assert_awaited()
+
+    def test_update_ingress_handler_registered_in_early_group(self):
+        class FakeApplication:
+            def __init__(self):
+                self.handlers = []
+
+            def add_handler(self, handler, group=0):
+                self.handlers.append((handler, group))
+
+        app = FakeApplication()
+        main.register_update_ingress_handler(app)
+
+        self.assertEqual(1, len(app.handlers))
+        handler, group = app.handlers[0]
+        self.assertEqual(main.UPDATE_INGRESS_HANDLER_GROUP, group)
+        self.assertEqual(main.update_ingress_logger, handler.callback)
+        self.assertLess(group, 0)
+
     def test_answer_and_next_callbacks_emit_secret_safe_handler_start_logs(self):
         context = self._context()
         user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')

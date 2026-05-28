@@ -26,6 +26,7 @@ from telegram.ext import (
     CommandHandler,
     ContextTypes,
     MessageHandler,
+    TypeHandler,
     filters,
 )
 
@@ -92,6 +93,8 @@ WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)"
 MAX_MINIAPP_URL_LENGTH = 1800
 MAX_WEBAPP_DATA_BYTES = 4096
 MINIAPP_FRONTEND_VERSION = "ui-polish-v2"
+UPDATE_INGRESS_LOG_PREFIX = "bot_update_ingress"
+UPDATE_INGRESS_HANDLER_GROUP = -100
 HANDLER_START_LOG_PREFIX = "bot_handler_start"
 LATENCY_LOG_PREFIX = "bot_latency"
 SLOW_LATENCY_LOG_PREFIX = "bot_latency_slow"
@@ -169,6 +172,87 @@ class _HandlerLatency:
         logger.info("%s %s", LATENCY_LOG_PREFIX, payload)
         if elapsed_ms >= SLOW_HANDLER_THRESHOLD_MS:
             logger.warning("%s %s", SLOW_LATENCY_LOG_PREFIX, payload)
+
+
+def _safe_callback_prefix(data: object) -> str | None:
+    if not isinstance(data, str) or not data:
+        return None
+    prefix = data.split(":", 1)[0]
+    if re.fullmatch(r"[A-Za-z0-9_]{1,32}", prefix):
+        return prefix
+    return None
+
+
+def _safe_message_kind(message: object | None) -> str | None:
+    if message is None:
+        return None
+    if getattr(message, "web_app_data", None) is not None:
+        return "web_app_data"
+
+    text = getattr(message, "text", None)
+    if not isinstance(text, str):
+        return None
+    if text.startswith("/"):
+        return "command"
+    if text in {
+        "🎯 Начать викторину",
+        MINI_APP_BUTTON_TEXT,
+        "ℹ️ Помощь",
+        READING_MODE_BUTTON_TEXT,
+        HIDE_MENU_BUTTON_TEXT,
+    }:
+        return "text_button"
+    return None
+
+
+def _safe_update_type(update: Update) -> str:
+    if getattr(update, "callback_query", None) is not None:
+        return "callback_query"
+    message = getattr(update, "message", None)
+    if message is not None:
+        if getattr(message, "web_app_data", None) is not None:
+            return "web_app_data"
+        return "message"
+    return "unknown"
+
+
+def _safe_update_user_id(update: Update) -> int | None:
+    effective_user = getattr(update, "effective_user", None)
+    user_id = getattr(effective_user, "id", None)
+    if user_id is not None:
+        return user_id
+    callback_query = getattr(update, "callback_query", None)
+    callback_user = getattr(callback_query, "from_user", None)
+    return getattr(callback_user, "id", None)
+
+
+async def update_ingress_logger(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    fields = [
+        f"update_id={getattr(update, 'update_id', None)}",
+        f"update_type={_safe_update_type(update)}",
+    ]
+
+    callback_query = getattr(update, "callback_query", None)
+    callback_prefix = _safe_callback_prefix(getattr(callback_query, "data", None))
+    if callback_prefix:
+        fields.append(f"callback_prefix={callback_prefix}")
+
+    telegram_user_id = _safe_update_user_id(update)
+    if telegram_user_id is not None:
+        fields.append(f"telegram_user_id={telegram_user_id}")
+
+    message_kind = _safe_message_kind(getattr(update, "message", None))
+    if message_kind:
+        fields.append(f"message_kind={message_kind}")
+
+    logger.info("%s %s", UPDATE_INGRESS_LOG_PREFIX, " ".join(fields))
+
+
+def register_update_ingress_handler(application: Application) -> None:
+    application.add_handler(
+        TypeHandler(Update, update_ingress_logger),
+        group=UPDATE_INGRESS_HANDLER_GROUP,
+    )
 
 
 def _safe_callback_session_id(data: str, expected_prefix: str) -> int | None:
@@ -2252,6 +2336,8 @@ def main() -> None:
 
     application = Application.builder().token(settings.bot_token).post_init(post_init).build()
     application.bot_data["settings"] = settings
+
+    register_update_ingress_handler(application)
 
     application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CommandHandler("help", help_command))

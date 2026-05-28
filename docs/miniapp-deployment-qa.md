@@ -549,38 +549,45 @@ journalctl -u psych_quiz_miniapp_api --since '15 min ago' --no-pager | grep 'min
 
 ## Classic Telegram bot latency diagnostics
 
-The bot now emits a low-noise start line and the existing structured summary line per classic user action in `psych_quiz_bot` logs.
-The start line uses prefix `bot_handler_start`; the completion summary keeps prefix `bot_latency`.
+The bot now emits three low-noise diagnostics around classic user actions in `psych_quiz_bot` logs:
+
+- application-level update ingress with prefix `bot_update_ingress`;
+- specific handler start with prefix `bot_handler_start`;
+- completion summary with prefix `bot_latency`.
+
+`bot_update_ingress` is logged from an early, generic update handler before specific callback/message handlers. It includes only safe metadata such as `update_id`, `update_type`, `telegram_user_id`, `message_kind`, and a redacted `callback_prefix`; it must not include raw callback payloads or message text.
 
 ### How to grep
 
 ```bash
-docker compose logs --tail=300 psych_quiz_bot | grep 'bot_latency'
+docker compose logs --tail=300 psych_quiz_bot | grep -E 'bot_update_ingress|bot_handler_start|bot_latency'
 ```
 
 Compare handler start and completion lines together:
 
 ```bash
-docker compose logs --since=15m psych_quiz_bot | grep -E 'bot_handler_start|bot_latency'
+docker compose logs --since=15m psych_quiz_bot | grep -E 'bot_update_ingress|bot_handler_start|bot_latency'
 ```
 
 Filter a specific handler:
 
 ```bash
-docker compose logs --since=15m psych_quiz_bot | grep -E 'bot_handler_start|bot_latency' | grep 'handler=answer_callback'
+docker compose logs --since=15m psych_quiz_bot | grep -E 'callback_prefix=ans|handler=answer_callback'
 ```
 
-Example start/done pair:
+Example ingress/start/done triplet:
 
 ```text
+bot_update_ingress update_id=987654 update_type=callback_query callback_prefix=ans telegram_user_id=123
 bot_handler_start handler=answer_callback phase=handler_start callback_prefix=ans telegram_user_id=123 session_id=456
 bot_latency handler=answer_callback phase=handler_done status=ok elapsed_ms=42 db_elapsed_ms=8 render_elapsed_ms=1 telegram_api_elapsed_ms=27 other_elapsed_ms=6 callback_prefix=ans telegram_user_id=123 session_id=456
 ```
 
 ### Interpretation guide
 
-- `bot_handler_start` appears late after the user tap, but `bot_latency elapsed_ms` is low ⇒ likely Telegram delivery, client, network, or polling delay before the backend handler started.
-- `bot_handler_start` appears quickly, but `bot_latency elapsed_ms` is high ⇒ backend-side delay inside the handler, such as DB work, rendering, or a Telegram Bot API await.
+- `tap -> bot_update_ingress late -> bot_handler_start immediate -> bot_latency low` ⇒ Telegram delivery, long polling, client, or network delay before application-level processing.
+- `tap -> bot_update_ingress quick -> bot_handler_start late` ⇒ dispatcher queue/backpressure or handler routing delay inside the bot process before the specific handler starts.
+- `tap -> bot_handler_start quick -> bot_latency high` ⇒ backend handler delay or Telegram Bot API await delay.
 - `bot_latency_slow` ⇒ backend-side slow handler requiring investigation.
 - High `db_elapsed_ms` ⇒ likely SQLite/business path latency (query/transaction/selection flow).
 - High `telegram_api_elapsed_ms` ⇒ Telegram Bot API/network/client delivery latency.
