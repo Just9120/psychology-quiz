@@ -2081,6 +2081,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 
 async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    latency = _HandlerLatency(handler="reading_mode_callback", callback_prefix="readingmode", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
     if query is None or query.data is None:
         return
@@ -2092,9 +2093,49 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
         tg_user = update.effective_user
         if tg_user is None:
             await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+            latency.summary()
             return
 
         settings = context.application.bot_data["settings"]
+        def _load_current_mode():
+            with get_connection(settings.db_path) as conn:
+                user_row = create_or_load_user(
+                    conn,
+                    telegram_user_id=tg_user.id,
+                    username=tg_user.username,
+                    first_name=tg_user.first_name,
+                    last_name=tg_user.last_name,
+                )
+                return get_user_reading_mode(conn, int(user_row["id"]))
+        db_started_at = time.perf_counter()
+        current_mode = await _run_db_task(_load_current_mode)
+        latency.add_db(db_started_at)
+
+        await _timed_telegram_api_call(latency, query.edit_message_text(
+            f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
+            reply_markup=build_reading_mode_keyboard(),
+        ))
+        latency.summary()
+        return
+
+    if not data.startswith("readingmode:set:"):
+        latency.summary()
+        return
+
+    mode = data.split(":")[-1]
+    if mode not in READING_MODE_LABELS:
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный режим чтения."))
+        latency.summary()
+        return
+
+    tg_user = update.effective_user
+    if tg_user is None:
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+        latency.summary()
+        return
+
+    settings = context.application.bot_data["settings"]
+    def _save_mode():
         with get_connection(settings.db_path) as conn:
             user_row = create_or_load_user(
                 conn,
@@ -2103,44 +2144,18 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
                 first_name=tg_user.first_name,
                 last_name=tg_user.last_name,
             )
-            current_mode = get_user_reading_mode(conn, int(user_row["id"]))
+            return set_user_reading_mode(conn, int(user_row["id"]), mode)
+    db_started_at = time.perf_counter()
+    saved_mode = await _run_db_task(_save_mode)
+    latency.add_db(db_started_at)
 
-        await query.edit_message_text(
-            f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
-            reply_markup=build_reading_mode_keyboard(),
-        )
-        return
-
-    if not data.startswith("readingmode:set:"):
-        return
-
-    mode = data.split(":")[-1]
-    if mode not in READING_MODE_LABELS:
-        await query.edit_message_text("Некорректный режим чтения.")
-        return
-
-    tg_user = update.effective_user
-    if tg_user is None:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
-        return
-
-    settings = context.application.bot_data["settings"]
-    with get_connection(settings.db_path) as conn:
-        user_row = create_or_load_user(
-            conn,
-            telegram_user_id=tg_user.id,
-            username=tg_user.username,
-            first_name=tg_user.first_name,
-            last_name=tg_user.last_name,
-        )
-        saved_mode = set_user_reading_mode(conn, int(user_row["id"]), mode)
-
-    await query.edit_message_text(
+    await _timed_telegram_api_call(latency, query.edit_message_text(
         f"Режим чтения обновлен: {READING_MODE_LABELS[saved_mode]}",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("Изменить режим", callback_data="readingmode:menu")]]
         ),
-    )
+    ))
+    latency.summary()
 
 
 def configure_logging(log_level: str) -> None:
