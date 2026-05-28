@@ -548,7 +548,8 @@ journalctl -u psych_quiz_miniapp_api --since '15 min ago' --no-pager | grep 'min
 
 ## Classic Telegram bot latency diagnostics
 
-The bot now emits structured summary lines per classic user action in `psych_quiz_bot` logs with prefix `bot_latency`.
+The bot now emits a low-noise start line and the existing structured summary line per classic user action in `psych_quiz_bot` logs.
+The start line uses prefix `bot_handler_start`; the completion summary keeps prefix `bot_latency`.
 
 ### How to grep
 
@@ -556,14 +557,30 @@ The bot now emits structured summary lines per classic user action in `psych_qui
 docker compose logs --tail=300 psych_quiz_bot | grep 'bot_latency'
 ```
 
+Compare handler start and completion lines together:
+
+```bash
+docker compose logs --since=15m psych_quiz_bot | grep -E 'bot_handler_start|bot_latency'
+```
+
 Filter a specific handler:
 
 ```bash
-docker compose logs --since=15m psych_quiz_bot | grep 'bot_latency handler=answer_callback'
+docker compose logs --since=15m psych_quiz_bot | grep -E 'bot_handler_start|bot_latency' | grep 'handler=answer_callback'
+```
+
+Example start/done pair:
+
+```text
+bot_handler_start handler=answer_callback phase=handler_start callback_prefix=ans telegram_user_id=123 session_id=456
+bot_latency handler=answer_callback phase=handler_done status=ok elapsed_ms=42 db_elapsed_ms=8 render_elapsed_ms=1 telegram_api_elapsed_ms=27 other_elapsed_ms=6 callback_prefix=ans telegram_user_id=123 session_id=456
 ```
 
 ### Interpretation guide
 
+- `bot_handler_start` appears late after the user tap, but `bot_latency elapsed_ms` is low ⇒ likely Telegram delivery, client, network, or polling delay before the backend handler started.
+- `bot_handler_start` appears quickly, but `bot_latency elapsed_ms` is high ⇒ backend-side delay inside the handler, such as DB work, rendering, or a Telegram Bot API await.
+- `bot_latency_slow` ⇒ backend-side slow handler requiring investigation.
 - High `db_elapsed_ms` ⇒ likely SQLite/business path latency (query/transaction/selection flow).
 - High `telegram_api_elapsed_ms` ⇒ Telegram Bot API/network/client delivery latency.
 - High `render_elapsed_ms` ⇒ local message preparation/formatting overhead.
