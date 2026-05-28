@@ -14,8 +14,6 @@ def get_connection(db_path: str) -> sqlite3.Connection:
     conn = sqlite3.connect(db_file, timeout=10.0)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA busy_timeout = 10000;")
-    if db_file != Path(":memory:"):
-        conn.execute("PRAGMA journal_mode = WAL;")
     conn.execute("PRAGMA synchronous = NORMAL;")
     conn.execute("PRAGMA foreign_keys = ON;")
     return conn
@@ -24,6 +22,8 @@ def get_connection(db_path: str) -> sqlite3.Connection:
 def init_db_connection(db_path: str) -> None:
     conn = get_connection(db_path)
     try:
+        if Path(db_path) != Path(":memory:"):
+            conn.execute("PRAGMA journal_mode = WAL;")
         conn.execute("SELECT 1;")
         ensure_users_reading_mode_column(conn)
         ensure_quiz_sessions_difficulty_mode_column(conn)
