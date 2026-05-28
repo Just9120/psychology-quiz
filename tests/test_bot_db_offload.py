@@ -326,11 +326,11 @@ class BotDbOffloadTests(unittest.TestCase):
             repeated_next_query.answer.assert_awaited_once_with("Переход уже выполняется…", cache_time=1)
 
             asyncio.run(main.answer_callback(normal_answer_update, context))
-            normal_answer_query.answer.assert_awaited_once_with("Принято", cache_time=1)
+            normal_answer_query.answer.assert_awaited_once_with(cache_time=1)
 
             context.user_data['_callback_in_progress'] = set()
             asyncio.run(main.next_callback(normal_next_update, context))
-            normal_next_query.answer.assert_awaited_once_with("Загружаю следующий вопрос…", cache_time=1)
+            normal_next_query.answer.assert_awaited_once_with(cache_time=1)
 
     def test_callback_in_progress_guard_is_cleared_on_error_paths(self):
         context = self._context()
