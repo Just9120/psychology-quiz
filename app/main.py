@@ -1952,7 +1952,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         latency.summary()
         return
     try:
-        await _timed_telegram_api_call(latency, query.answer("Принято", cache_time=1))
+        await _timed_telegram_api_call(latency, query.answer(cache_time=1))
         tg_user = update.effective_user
         if tg_user is None:
             await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
@@ -2095,7 +2095,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         return
 
     try:
-        await _timed_telegram_api_call(latency, query.answer("Загружаю следующий вопрос…", cache_time=1))
+        await _timed_telegram_api_call(latency, query.answer(cache_time=1))
         tg_user = update.effective_user
         if tg_user is None:
             await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
