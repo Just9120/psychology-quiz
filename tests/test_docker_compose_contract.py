@@ -13,11 +13,13 @@ class DockerComposeContractTests(unittest.TestCase):
     def test_fastapi_service_exists(self):
         self.assertIn("psych_quiz_miniapp_api:", self.compose)
 
-    def test_bot_has_no_8081_host_port_binding(self):
+    def test_bot_publishes_only_internal_webhook_port(self):
         marker = "psych_quiz_bot:"
         bot_block = self.compose.split(marker, 1)[1].split("\n\n", 1)[0]
         self.assertNotIn("127.0.0.1:8081:8081", bot_block)
-        self.assertNotIn("ports:", bot_block)
+        self.assertIn("ports:", bot_block)
+        self.assertIn('"127.0.0.1:8090:8090"', bot_block)
+        self.assertNotIn('"0.0.0.0:8090:8090"', bot_block)
 
     def test_fastapi_service_owns_8081_binding_and_uvicorn_command(self):
         fastapi_block = self.compose.split("psych_quiz_miniapp_api:", 1)[1]

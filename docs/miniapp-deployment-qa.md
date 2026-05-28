@@ -394,6 +394,29 @@ Minimal operator checklist:
 4. Set `MINI_APP_API_BASE_URL=https://quiz-api.librechat.online`.
 5. Reload Nginx and validate CORS + endpoint reachability.
 
+### 15.1) Telegram webhook experiment route
+For the controlled Telegram webhook-delivery experiment, reuse the production HTTPS vhost and add an exact webhook route. The bot container listens on `TELEGRAM_WEBHOOK_LISTEN=0.0.0.0` / `TELEGRAM_WEBHOOK_PORT=8090`, while Compose publishes only `127.0.0.1:8090:8090` on the host, keeping direct public access closed.
+
+```nginx
+location = /telegram/webhook {
+    proxy_pass http://127.0.0.1:8090/telegram/webhook;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_read_timeout 30s;
+}
+```
+
+Experiment runtime env values, with secrets redacted:
+- `TELEGRAM_UPDATE_MODE=webhook`
+- `TELEGRAM_WEBHOOK_URL=https://quiz-api.librechat.online/telegram/webhook`
+- `TELEGRAM_WEBHOOK_LISTEN=0.0.0.0`
+- `TELEGRAM_WEBHOOK_PORT=8090`
+- `TELEGRAM_WEBHOOK_SECRET_TOKEN=<redacted-random-long-secret>`
+
+Rollback is only `TELEGRAM_UPDATE_MODE=polling`, followed by the standard two-service restart.
+
 Smoke checks:
 - `curl -i https://quiz-api.librechat.online/miniapp/state`
 - `curl -i -X OPTIONS https://quiz-api.librechat.online/miniapp/answer -H "Origin: https://miniapp.librechat.online" -H "Access-Control-Request-Method: POST"`
