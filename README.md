@@ -49,15 +49,30 @@ Expected safe startup log:
 bot_update_mode mode=polling
 ```
 
-To enable webhook mode behind a reverse proxy, terminate public HTTPS on the proxy and forward only the webhook path to the bot container/listener. Example environment:
+To enable webhook mode behind a reverse proxy, terminate public HTTPS on the proxy and forward only the webhook path to the bot container/listener. The Compose service publishes the webhook listener only on the host loopback (`127.0.0.1:8090:8090`), so public access should continue to go through HTTPS reverse proxy instead of a direct container port. Example environment:
 
 ```dotenv
 TELEGRAM_UPDATE_MODE=webhook
-TELEGRAM_WEBHOOK_URL=https://quiz.example.com/telegram/webhook
-TELEGRAM_WEBHOOK_LISTEN=127.0.0.1
+TELEGRAM_WEBHOOK_URL=https://quiz-api.librechat.online/telegram/webhook
+TELEGRAM_WEBHOOK_LISTEN=0.0.0.0
 TELEGRAM_WEBHOOK_PORT=8090
 TELEGRAM_WEBHOOK_SECRET_TOKEN=<operator-generated-secret>
 ```
+
+Example Nginx route for the controlled webhook-delivery experiment:
+
+```nginx
+location = /telegram/webhook {
+    proxy_pass http://127.0.0.1:8090/telegram/webhook;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_read_timeout 30s;
+}
+```
+
+Rollback remains setting `TELEGRAM_UPDATE_MODE=polling` and restarting `psych_quiz_bot` plus `psych_quiz_miniapp_api`; keep the loopback port mapping in place so webhook mode can be re-tested without another Compose change.
 
 Example reverse-proxy smoke checks from the host after deploy:
 

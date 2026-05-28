@@ -9,6 +9,8 @@ services:
     volumes:
       - ./data:/data
       - ./content:/app/content:ro
+    ports:
+      - "127.0.0.1:8090:8090"
     environment:
       MINIAPP_LEGACY_API_ENABLED: "false"
 
