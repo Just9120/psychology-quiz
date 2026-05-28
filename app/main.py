@@ -2325,6 +2325,52 @@ def should_start_miniapp_api(settings) -> bool:
     return True
 
 
+def _safe_webhook_host_for_log(settings) -> str:
+    webhook_url = settings.telegram_webhook_url or ""
+    parsed = urllib.parse.urlparse(webhook_url)
+    return parsed.hostname or ""
+
+
+def _safe_webhook_path_for_log(settings) -> str:
+    webhook_url = settings.telegram_webhook_url or ""
+    parsed = urllib.parse.urlparse(webhook_url)
+    path = parsed.path or "/"
+    for secret in (settings.bot_token, settings.telegram_webhook_secret_token):
+        if secret:
+            path = path.replace(secret, "<redacted>")
+    return path
+
+
+def _webhook_url_path(settings) -> str:
+    webhook_url = settings.telegram_webhook_url or ""
+    parsed = urllib.parse.urlparse(webhook_url)
+    return parsed.path.lstrip("/")
+
+
+def run_application(application: Application, settings) -> None:
+    if settings.telegram_update_mode == "webhook":
+        safe_host = _safe_webhook_host_for_log(settings)
+        safe_path = _safe_webhook_path_for_log(settings)
+        logger.info(
+            "bot_update_mode mode=webhook webhook_host=%s listen=%s port=%s path=%s",
+            safe_host,
+            settings.telegram_webhook_listen,
+            settings.telegram_webhook_port,
+            safe_path,
+        )
+        application.run_webhook(
+            listen=settings.telegram_webhook_listen,
+            port=settings.telegram_webhook_port,
+            url_path=_webhook_url_path(settings),
+            webhook_url=settings.telegram_webhook_url,
+            secret_token=settings.telegram_webhook_secret_token,
+        )
+        return
+
+    logger.info("bot_update_mode mode=polling")
+    application.run_polling()
+
+
 def main() -> None:
     settings = load_settings()
     configure_logging(settings.log_level)
@@ -2415,8 +2461,6 @@ def main() -> None:
     application.add_handler(CallbackQueryHandler(next_callback, pattern=r"^next:\d+$"))
     application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data_handler))
 
-    logger.info("Бот запущен (long polling)")
-
     api_server = None
     if settings.miniapp_legacy_api_enabled and should_start_miniapp_api(settings):
         api_server = start_miniapp_api_server(
@@ -2436,7 +2480,7 @@ def main() -> None:
         logger.info("Mini App API server is disabled. Mini App uses sendData fallback unless API is explicitly enabled/configured.")
 
     try:
-        application.run_polling()
+        run_application(application, settings)
     finally:
         if api_server is not None:
             api_server.shutdown()

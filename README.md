@@ -6,7 +6,7 @@
 - **Module 1** — стабильный baseline.
 - **Module 2** — запущен в ограниченном рабочем scope.
 
-Бот работает в режиме **long polling** (без webhook), **Web UI отсутствует**, внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
+Бот по умолчанию работает в режиме **long polling**; для инфраструктурного эксперимента доступен опциональный webhook mode за конфиг-флагом. **Web UI отсутствует**, внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
 ## Переменные окружения
 
@@ -16,6 +16,13 @@
 - `APP_ENV` (по умолчанию `dev`)
 - `LOG_LEVEL` (по умолчанию `INFO`)
 - `DB_PATH` (по умолчанию `/data/quiz.sqlite3`)
+
+Telegram update delivery mode:
+- `TELEGRAM_UPDATE_MODE` — `polling` или `webhook`; по умолчанию `polling`.
+- `TELEGRAM_WEBHOOK_URL` — публичный HTTPS URL webhook endpoint; обязателен только при `TELEGRAM_UPDATE_MODE=webhook`.
+- `TELEGRAM_WEBHOOK_LISTEN` — локальный listen host для webhook сервера python-telegram-bot; обязателен только в webhook mode.
+- `TELEGRAM_WEBHOOK_PORT` — локальный listen port для webhook сервера python-telegram-bot; обязателен только в webhook mode.
+- `TELEGRAM_WEBHOOK_SECRET_TOKEN` — опциональный secret token для Telegram webhook header; не логируется.
 
 Дополнительно для owner-only аналитики:
 - `ADMIN_TELEGRAM_IDS` (опционально) — список numeric Telegram user id через запятую.
@@ -27,6 +34,49 @@
 - `BOT_TOKEN` — обязательный.
 - `MINI_APP_URL` — опциональный; включает экспериментальный opt-in Telegram Mini App runner (`/ui`).
 - `ADMIN_TELEGRAM_IDS` — опциональный список numeric Telegram user id через запятую для owner-only команд (например, `/stats`).
+
+## Telegram update delivery experiment: polling vs webhook
+
+Current production default remains long polling. To run the current mode explicitly:
+
+```bash
+TELEGRAM_UPDATE_MODE=polling python -m app.main
+```
+
+Expected safe startup log:
+
+```text
+bot_update_mode mode=polling
+```
+
+To enable webhook mode behind a reverse proxy, terminate public HTTPS on the proxy and forward only the webhook path to the bot container/listener. Example environment:
+
+```dotenv
+TELEGRAM_UPDATE_MODE=webhook
+TELEGRAM_WEBHOOK_URL=https://quiz.example.com/telegram/webhook
+TELEGRAM_WEBHOOK_LISTEN=127.0.0.1
+TELEGRAM_WEBHOOK_PORT=8090
+TELEGRAM_WEBHOOK_SECRET_TOKEN=<operator-generated-secret>
+```
+
+Example reverse-proxy smoke checks from the host after deploy:
+
+```bash
+docker compose up -d --build --remove-orphans psych_quiz_bot
+docker compose logs --tail=100 psych_quiz_bot | grep 'bot_update_mode mode=webhook'
+curl -fsS http://127.0.0.1:8090/telegram/webhook -X POST -H 'Content-Type: application/json' -d '{}' || true
+```
+
+Safe webhook startup logs include the mode, local listen host/port, and URL path only; they must not include `BOT_TOKEN`, `TELEGRAM_WEBHOOK_SECRET_TOKEN`, or raw update payloads. Example:
+
+```text
+bot_update_mode mode=webhook webhook_host=quiz.example.com listen=127.0.0.1 port=8090 path=/telegram/webhook
+```
+
+Diagnostic comparison for the experiment:
+- If a user tap is visibly slow and `bot_update_ingress` appears late in polling but quickly in webhook mode, the likely bottleneck is long polling / `getUpdates` delivery before application ingress.
+- If a user tap is visibly slow and `bot_update_ingress` is still late in webhook mode, the likely bottleneck is Telegram/client/network delivery before the webhook reaches the application.
+- Existing `bot_update_ingress`, `bot_handler_start`, `bot_latency`, and `bot_latency_slow` diagnostics are preserved in both modes.
 
 ## Текущий продуктовый контур
 
@@ -98,7 +148,7 @@ Fallback:
 ## Что вне текущего продуктового контура
 
 - standalone Web UI / PWA
-- webhook
+- webhook как обязательный/единственный runtime mode; доступен только опциональный infrastructure experiment за `TELEGRAM_UPDATE_MODE=webhook`
 - RAG и внешняя генерация вопросов во время работы
 - расширение Module 2 на новые темы без отдельного согласованного решения (помимо уже открытых активных категорий)
 

@@ -26,6 +26,11 @@ class Settings:
     miniapp_api_initdata_ttl_seconds: int
     miniapp_api_allowed_origin: str | None
     mini_app_api_base_url: str | None
+    telegram_update_mode: str
+    telegram_webhook_url: str | None
+    telegram_webhook_listen: str | None
+    telegram_webhook_port: int | None
+    telegram_webhook_secret_token: str | None
 
 
 def _parse_admin_telegram_ids(raw_ids: str) -> frozenset[int]:
@@ -68,6 +73,33 @@ def load_settings() -> Settings:
     miniapp_api_allowed_origin = os.getenv("MINIAPP_API_ALLOWED_ORIGIN", "").strip() or None
     mini_app_api_base_url = os.getenv("MINI_APP_API_BASE_URL", "").strip() or None
 
+    telegram_update_mode = os.getenv("TELEGRAM_UPDATE_MODE", "polling").strip().lower() or "polling"
+    if telegram_update_mode not in {"polling", "webhook"}:
+        raise ValueError("TELEGRAM_UPDATE_MODE должен быть одним из: polling, webhook.")
+
+    telegram_webhook_url = os.getenv("TELEGRAM_WEBHOOK_URL", "").strip() or None
+    telegram_webhook_listen = os.getenv("TELEGRAM_WEBHOOK_LISTEN", "").strip() or None
+    telegram_webhook_port_raw = os.getenv("TELEGRAM_WEBHOOK_PORT", "").strip()
+    telegram_webhook_port = None
+    telegram_webhook_secret_token = os.getenv("TELEGRAM_WEBHOOK_SECRET_TOKEN", "").strip() or None
+
+    if telegram_update_mode == "webhook":
+        missing = []
+        if not telegram_webhook_url:
+            missing.append("TELEGRAM_WEBHOOK_URL")
+        if not telegram_webhook_listen:
+            missing.append("TELEGRAM_WEBHOOK_LISTEN")
+        if not telegram_webhook_port_raw:
+            missing.append("TELEGRAM_WEBHOOK_PORT")
+        if missing:
+            raise ValueError("Webhook mode requires environment variables: " + ", ".join(missing) + ".")
+        try:
+            telegram_webhook_port = int(telegram_webhook_port_raw)
+        except ValueError as exc:
+            raise ValueError("TELEGRAM_WEBHOOK_PORT должен быть integer port.") from exc
+        if not 1 <= telegram_webhook_port <= 65535:
+            raise ValueError("TELEGRAM_WEBHOOK_PORT должен быть в диапазоне 1..65535.")
+
     return Settings(
         bot_token=bot_token,
         bot_username=bot_username,
@@ -83,5 +115,10 @@ def load_settings() -> Settings:
         miniapp_api_initdata_ttl_seconds=miniapp_api_initdata_ttl_seconds,
         miniapp_api_allowed_origin=miniapp_api_allowed_origin,
         mini_app_api_base_url=mini_app_api_base_url,
+        telegram_update_mode=telegram_update_mode,
+        telegram_webhook_url=telegram_webhook_url,
+        telegram_webhook_listen=telegram_webhook_listen,
+        telegram_webhook_port=telegram_webhook_port,
+        telegram_webhook_secret_token=telegram_webhook_secret_token,
     )
 logger = logging.getLogger(__name__)
