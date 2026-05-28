@@ -172,6 +172,38 @@ class BotDbOffloadTests(unittest.TestCase):
         self.assertNotIn("question_text", logged)
         self.assertNotIn("callback_data=", logged)
 
+    def test_answer_and_next_callbacks_send_fast_feedback_and_guard_repeated_taps(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+
+        answer_query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        answer_update = SimpleNamespace(callback_query=answer_query, effective_user=user)
+
+        next_query = SimpleNamespace(data='next:1', answer=AsyncMock(), edit_message_text=AsyncMock())
+        next_update = SimpleNamespace(callback_query=next_query, effective_user=user)
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            if func.__name__ == '_handle_answer_db':
+                return {
+                    'status': 'accepted', 'is_correct': True, 'explanation': 'ok',
+                    'answered_questions': 1, 'total_questions': 2, 'reading_mode': 'normal',
+                    'is_last_question': False, 'finalized': None,
+                }
+            if func.__name__ == '_load_next_state':
+                return {'status': 'ok'}
+            return {'status': 'ok'}
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
+             patch('app.main.send_current_question', new=AsyncMock()):
+            context.user_data['_callback_in_progress'] = {'answer:1:1'}
+            asyncio.run(main.answer_callback(answer_update, context))
+            answer_query.answer.assert_any_await("Принято", cache_time=1)
+            answer_query.answer.assert_any_await("Ответ уже обрабатывается…", cache_time=1)
+
+            context.user_data['_callback_in_progress'] = {'next:1'}
+            asyncio.run(main.next_callback(next_update, context))
+            next_query.answer.assert_any_await("Загружаю следующий вопрос…", cache_time=1)
+            next_query.answer.assert_any_await("Переход уже выполняется…", cache_time=1)
 
 
     def test_start_mix_quiz_and_answer_callback_include_helper_telegram_timing(self):
