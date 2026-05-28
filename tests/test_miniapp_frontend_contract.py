@@ -153,7 +153,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertNotIn("Promise.race([attemptPromise, hedgePromise])", self.content)
         self.assertIn("apiDiagState.answerPhase = 'preparing';", self.content)
         self.assertIn("const ANSWER_API_TIMEOUT_MS = 4000;", self.content)
-        self.assertIn("const ANSWER_HEDGE_DELAY_MS = 1200;", self.content)
+        self.assertIn("const ANSWER_HEDGE_DELAY_MS = 3000;", self.content)
         self.assertIn("apiDiagState.answerPhase = 'retry_scheduled';", self.content)
         self.assertIn("apiDiagState.answerPhase = 'answer_hedge_timer_started';", self.content)
         self.assertIn("apiDiagState.answerPhase = 'answer_hedge_state_resync_attempted';", self.content)
