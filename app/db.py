@@ -245,17 +245,52 @@ def create_or_load_user(
     first_name: str | None,
     last_name: str | None,
 ) -> sqlite3.Row:
+    row = conn.execute(
+        "SELECT * FROM users WHERE telegram_user_id = ?",
+        (telegram_user_id,),
+    ).fetchone()
+
+    if row is None:
+        try:
+            conn.execute(
+                """
+                INSERT INTO users (telegram_user_id, username, first_name, last_name)
+                VALUES (?, ?, ?, ?)
+                """,
+                (telegram_user_id, username, first_name, last_name),
+            )
+        except sqlite3.IntegrityError:
+            # Another caller may have inserted the same Telegram user inside a
+            # concurrent transaction. Fall through to the normal load/update
+            # path while preserving the caller-owned connection and transaction.
+            pass
+
+        row = conn.execute(
+            "SELECT * FROM users WHERE telegram_user_id = ?",
+            (telegram_user_id,),
+        ).fetchone()
+
+    if row is None:
+        raise RuntimeError("Не удалось создать или загрузить пользователя")
+
+    profile_fields_changed = (
+        row["username"] != username
+        or row["first_name"] != first_name
+        or row["last_name"] != last_name
+    )
+    if not profile_fields_changed:
+        return row
+
     conn.execute(
         """
-        INSERT INTO users (telegram_user_id, username, first_name, last_name)
-        VALUES (?, ?, ?, ?)
-        ON CONFLICT(telegram_user_id) DO UPDATE SET
-            username = excluded.username,
-            first_name = excluded.first_name,
-            last_name = excluded.last_name,
+        UPDATE users
+        SET username = ?,
+            first_name = ?,
+            last_name = ?,
             updated_at = CURRENT_TIMESTAMP
+        WHERE telegram_user_id = ?
         """,
-        (telegram_user_id, username, first_name, last_name),
+        (username, first_name, last_name, telegram_user_id),
     )
 
     row = conn.execute(
