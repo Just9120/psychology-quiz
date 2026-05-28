@@ -31,6 +31,20 @@ def _setup_schema(conn):
         conn.executescript(f.read())
 
 
+class _RecordingConnection:
+    def __init__(self):
+        self.statements = []
+        self.row_factory = None
+        self.closed = False
+
+    def execute(self, statement, *args, **kwargs):
+        self.statements.append(statement)
+        return self
+
+    def close(self):
+        self.closed = True
+
+
 def _make_init_data(bot_token: str, user: dict, auth_date: int | None = None):
     auth_date = auth_date or int(time.time())
     payload = {
@@ -256,15 +270,51 @@ class MiniAppApiTests(unittest.TestCase):
         self.assertEqual(401, code)
         self.assertFalse(json.loads(body)["ok"])
 
-    def test_get_connection_configures_busy_timeout_and_wal(self):
+    def test_get_connection_configures_per_connection_pragmas_without_wal_activation(self):
+        recording_conn = _RecordingConnection()
+        with patch("app.db.sqlite3.connect", return_value=recording_conn):
+            conn = get_connection(self.db)
+
+        self.assertIs(conn, recording_conn)
+        self.assertEqual(sqlite3.Row, conn.row_factory)
+        self.assertIn("PRAGMA busy_timeout = 10000;", recording_conn.statements)
+        self.assertIn("PRAGMA synchronous = NORMAL;", recording_conn.statements)
+        self.assertIn("PRAGMA foreign_keys = ON;", recording_conn.statements)
+        self.assertNotIn("PRAGMA journal_mode = WAL;", recording_conn.statements)
+
+    def test_get_connection_runtime_pragmas_remain_configured(self):
         conn = get_connection(self.db)
         try:
             busy_timeout = conn.execute("PRAGMA busy_timeout").fetchone()[0]
-            journal_mode = conn.execute("PRAGMA journal_mode").fetchone()[0]
+            foreign_keys = conn.execute("PRAGMA foreign_keys").fetchone()[0]
             self.assertEqual(10000, busy_timeout)
+            self.assertEqual(1, foreign_keys)
+        finally:
+            conn.close()
+
+    def test_init_db_connection_enables_wal_for_file_backed_db(self):
+        init_db_connection(self.db)
+        conn = sqlite3.connect(self.db)
+        try:
+            journal_mode = conn.execute("PRAGMA journal_mode").fetchone()[0]
             self.assertEqual("wal", str(journal_mode).lower())
         finally:
             conn.close()
+
+    def test_init_db_connection_skips_wal_for_in_memory_db(self):
+        recording_conn = _RecordingConnection()
+        with (
+            patch("app.db.sqlite3.connect", return_value=recording_conn),
+            patch("app.db.ensure_users_reading_mode_column"),
+            patch("app.db.ensure_quiz_sessions_difficulty_mode_column"),
+            patch("app.db.ensure_quiz_session_selected_categories_table"),
+            patch("app.db.ensure_performance_indexes"),
+        ):
+            init_db_connection(":memory:")
+
+        self.assertNotIn("PRAGMA journal_mode = WAL;", recording_conn.statements)
+        self.assertIn("SELECT 1;", recording_conn.statements)
+        self.assertTrue(recording_conn.closed)
 
     def test_init_db_connection_ensures_performance_indexes(self):
         init_db_connection(self.db)

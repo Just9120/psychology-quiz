@@ -257,7 +257,8 @@
 
 ## 11) SQLite runtime hardening checks (post-deploy)
 - Mini App API handlers explicitly close SQLite connections (`closing(get_connection(...))` + nested `with conn:`) to avoid lingering file locks.
-- SQLite connection defaults now include:
+- SQLite WAL mode is enabled during startup/init (`init_db_connection`) for file-backed databases, not on every regular connection; ordinary `get_connection(...)` calls avoid connection-time journal mode changes.
+- SQLite connection defaults now include `PRAGMA busy_timeout = 10000`, `PRAGMA synchronous = NORMAL`, and `PRAGMA foreign_keys = ON`.
 
 ## 12) Frontend timing diagnostics vs backend `duration_ms` (debug-only)
 - Enable debug mode by opening Mini App with `?debug=1` (for `/ui` launch, append on the Mini App URL in the launch flow).
@@ -344,14 +345,12 @@ For automated parity checks, use:
 ```bash
 python -m unittest tests/test_miniapp_fastapi.py
 ```
-  - `PRAGMA busy_timeout = 10000`
-  - `PRAGMA journal_mode = WAL`
-  - `PRAGMA synchronous = NORMAL`
-  - `PRAGMA foreign_keys = ON`
+  - Startup/init enables `PRAGMA journal_mode = WAL` once for file-backed databases.
+  - Regular connections configure `PRAGMA busy_timeout = 10000`, `PRAGMA synchronous = NORMAL`, and `PRAGMA foreign_keys = ON` without changing journal mode.
 - For file-backed DBs, side files `quiz.sqlite3-wal` and `quiz.sqlite3-shm` may appear; this is expected in WAL mode.
 - Runtime performance indexes are ensured on startup for both existing and fresh DBs.
 - Repeated user loads should not update `users.updated_at` unless Telegram profile fields (`username`, `first_name`, `last_name`) changed; this keeps read-like bot and Mini App flows from taking avoidable SQLite write locks.
-- Mini App answer hedging is intentionally conservative so transient answer latency does not create extra `/miniapp/state` resync or retry pressure against SQLite/API under load.
+- Mini App answer timeout is intentionally less aggressive than hedge timing (`ANSWER_API_TIMEOUT_MS = 8000`, `ANSWER_HEDGE_DELAY_MS = 3000`) so transient answer latency does not create extra `/miniapp/state` resync or retry pressure against SQLite/API under load.
 
 Post-deploy DB checks:
 - `sqlite3 /path/to/quiz.sqlite3 "PRAGMA journal_mode;"`
