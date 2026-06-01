@@ -190,9 +190,9 @@
     </form>
 
     <script>
-      const FRONTEND_VERSION = 'ui-polish-v4-diag';
+      const FRONTEND_VERSION = 'ui-polish-v5-answer-hedge-diag';
       const ANSWER_API_TIMEOUT_MS = 8000;
-      const ANSWER_HEDGE_DELAY_MS = 3000;
+      const ANSWER_HEDGE_DELAY_MS = 1000;
 
       const err = document.getElementById('err');
       const form = document.getElementById('f');
@@ -291,6 +291,10 @@
         answerStatus: '',
         setupStatusCode: '',
         answerErrorCode: '',
+        answerHedged: false,
+        answerWinnerAttempt: 0,
+        answerHedgeDelayMs: 0,
+        answerHedgeStartedMs: '-',
         setupElapsedMs: 0,
         answerPhases: [],
         setupPhases: [],
@@ -360,6 +364,8 @@
           ` · answer_status: ${apiDiagState.answerStatus || '-'} · answer_error: ${apiDiagState.answerErrorCode || '-'}` +
           ` · elapsed_ms: ${apiDiagState.answerElapsedMs} · retry: ${apiDiagState.answerRetryCount}` +
           ` · attempt: ${apiDiagState.answerAttempt} · final: ${apiDiagState.answerFinalPhase}` +
+          ` · hedged: ${apiDiagState.answerHedged ? 'true' : 'false'} · winner_attempt: ${apiDiagState.answerWinnerAttempt || '-'}` +
+          ` · hedge_delay_ms: ${apiDiagState.answerHedgeDelayMs || '-'} · hedge_started_ms: ${apiDiagState.answerHedgeStartedMs || '-'}` +
           ` · setup_req_id: ${apiDiagState.setupRequestId || '-'} · setup_transport: ${apiDiagState.setupTransport || '-'} · setup_method: ${apiDiagState.setupMethod}` +
           ` · setup_status: ${apiDiagState.setupStatusCode || '-'} · setup_elapsed_ms: ${apiDiagState.setupElapsedMs}` +
           ` · setup_retry: ${apiDiagState.setupRetryCount}` +
@@ -398,6 +404,9 @@
           status: 'started',
           http_code: '',
           missing_network_marks: false,
+          hedged: false,
+          winner_attempt: '',
+          hedge_delay_ms: '',
           marks: { action_start: startedAt, 'tap/action_start': startedAt },
         };
         telemetryRows.unshift(row);
@@ -433,6 +442,9 @@
         if (extras.attempt !== undefined && extras.attempt !== null) row.attempt = String(extras.attempt).slice(0, 8);
         if (extras.status) row.status = String(extras.status).slice(0, 40);
         if (extras.http_code !== undefined && extras.http_code !== null) row.http_code = String(extras.http_code).slice(0, 8);
+        if (extras.hedged !== undefined && extras.hedged !== null) row.hedged = extras.hedged === true;
+        if (extras.winner_attempt !== undefined && extras.winner_attempt !== null) row.winner_attempt = String(extras.winner_attempt).slice(0, 8);
+        if (extras.hedge_delay_ms !== undefined && extras.hedge_delay_ms !== null) row.hedge_delay_ms = String(extras.hedge_delay_ms).slice(0, 8);
         if (phase === 'action_done') finalizeTelemetry(row);
         renderTelemetryDebug();
         if (phase === 'action_done' && debugMode) {
@@ -456,6 +468,10 @@
           parse_ms: safeDuration(marks.json_parsed, marks.response_received),
           render_ms: safeDuration(marks.render_done, marks.render_start),
           total_ms: safeDuration(marks.action_done, actionStart),
+          hedged: row.hedged === true,
+          winner_attempt: row.winner_attempt || '-',
+          hedge_delay_ms: row.hedge_delay_ms || '-',
+          hedge_started_ms: safeDuration(marks.hedge_retry_started, actionStart),
         };
       }
 
@@ -465,10 +481,10 @@
           return;
         }
         telemetryDebug.hidden = false;
-        const lines = ['Client telemetry (last actions): action request_id pre_request_ms request_ms parse_ms render_ms total_ms status/http_code missing_network_marks'];
+        const lines = ['Client telemetry (last actions): action request_id pre_request_ms request_ms parse_ms render_ms total_ms status/http_code missing_network_marks hedged winner_attempt hedge_delay_ms hedge_started_ms'];
         telemetryRows.slice(0, 6).forEach((row) => {
           const s = buildTelemetrySummary(row);
-          lines.push(`${s.action} ${s.request_id || '-'} attempt=${s.attempt} pre=${s.pre_request_ms} req=${s.request_ms} parse=${s.parse_ms} render=${s.render_ms} total=${s.total_ms} status=${s.status}/${s.http_code} missing_network_marks=${s.missing_network_marks ? 'true' : 'false'}`);
+          lines.push(`${s.action} ${s.request_id || '-'} attempt=${s.attempt} pre=${s.pre_request_ms} req=${s.request_ms} parse=${s.parse_ms} render=${s.render_ms} total=${s.total_ms} status=${s.status}/${s.http_code} missing_network_marks=${s.missing_network_marks ? 'true' : 'false'} hedged=${s.hedged ? 'true' : 'false'} winner_attempt=${s.winner_attempt} hedge_delay_ms=${s.hedge_delay_ms} hedge_started_ms=${s.hedge_started_ms}`);
         });
         telemetryDebug.textContent = lines.join('\n');
       }
@@ -993,6 +1009,10 @@
         apiDiagState.answerRetryCount = 0;
         apiDiagState.answerAttempt = 1;
         apiDiagState.answerPhases = [];
+        apiDiagState.answerHedged = false;
+        apiDiagState.answerWinnerAttempt = 0;
+        apiDiagState.answerHedgeDelayMs = ANSWER_HEDGE_DELAY_MS;
+        apiDiagState.answerHedgeStartedMs = '-';
         pushDiagPhase('answer', 'request_scheduled', startedAt, { request_id: apiDiagState.answerRequestId });
         const payload = {
           type: 'quiz_answer',
@@ -1163,7 +1183,10 @@
                   apiDiagState.answerPhase = 'answer_hedge_timer_started';
                   apiDiagState.answerRequestId = requestId;
                   apiDiagState.answerAttempt = attempt;
+                  apiDiagState.answerHedgeDelayMs = ANSWER_HEDGE_DELAY_MS;
                   apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                  pushDiagPhase('answer', 'answer_hedge_timer_started', startedAt, { request_id: requestId, hedge_delay_ms: ANSWER_HEDGE_DELAY_MS });
+                  markTelemetry(telemetry, 'hedge_timer_started', { request_id: requestId, attempt, hedge_delay_ms: ANSWER_HEDGE_DELAY_MS });
                   renderApiDiagnostics();
                 },
                 onHedgeRetryStarted: (attempt, requestId) => {
@@ -1172,7 +1195,12 @@
                   apiDiagState.answerPhase = 'answer_hedge_retry_started';
                   apiDiagState.answerRequestId = requestId;
                   apiDiagState.answerAttempt = attempt;
+                  apiDiagState.answerHedged = true;
+                  apiDiagState.answerHedgeDelayMs = ANSWER_HEDGE_DELAY_MS;
+                  apiDiagState.answerHedgeStartedMs = Date.now() - startedAt;
                   apiDiagState.answerElapsedMs = Date.now() - startedAt;
+                  pushDiagPhase('answer', 'answer_hedge_retry_started', startedAt, { request_id: requestId, hedge_delay_ms: ANSWER_HEDGE_DELAY_MS });
+                  markTelemetry(telemetry, 'hedge_retry_started', { request_id: requestId, attempt, hedged: true, hedge_delay_ms: ANSWER_HEDGE_DELAY_MS });
                   renderApiDiagnostics();
                   runnerState.textContent = 'Сеть подвисла, пробую отправить ещё раз...';
                 },
@@ -1218,7 +1246,9 @@
             }
             const answerJson = answerResult.data;
             apiDiagState.answerStatus = String(answerResult.resp?.status || '');
-            pushDiagPhase('answer', 'response_headers_received', startedAt, { request_id: answerResult.requestId, status: apiDiagState.answerStatus });
+            apiDiagState.answerHedged = answerResult.hedged === true;
+            apiDiagState.answerWinnerAttempt = Number.isInteger(answerResult.attempt) ? answerResult.attempt : 0;
+            pushDiagPhase('answer', 'response_headers_received', startedAt, { request_id: answerResult.requestId, status: apiDiagState.answerStatus, winner_attempt: apiDiagState.answerWinnerAttempt, hedged: apiDiagState.answerHedged });
             pushDiagPhase('answer', 'response_body_parsed', startedAt, { request_id: answerResult.requestId });
             if (!(answerJson?.ok === true && answerJson?.runner_state)) throw new Error('api_invalid_payload');
             apiDiagState.attemptStatus = 'api_success';
@@ -1253,7 +1283,14 @@
               requestAnimationFrame(() => {
                 pushDiagPhase('answer', 'ui_render_mark', startedAt, { request_id: answerResult.requestId });
                 markTelemetry(telemetry, 'render_done', { request_id: answerResult.requestId, status: 'rendered' });
-                markTelemetry(telemetry, 'action_done', { request_id: answerResult.requestId, status: 'ok', http_code: apiDiagState.answerStatus });
+                markTelemetry(telemetry, 'action_done', {
+                  request_id: answerResult.requestId,
+                  status: 'ok',
+                  http_code: apiDiagState.answerStatus,
+                  hedged: answerResult.hedged === true,
+                  winner_attempt: answerResult.attempt,
+                  hedge_delay_ms: ANSWER_HEDGE_DELAY_MS,
+                });
                 renderApiDiagnostics();
               });
               answerSubmitInFlight = false;
