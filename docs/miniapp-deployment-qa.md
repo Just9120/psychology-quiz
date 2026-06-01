@@ -159,10 +159,10 @@
 - [ ] Force transient answer API failure/timeout shows `Сеть подвисла, пробую отправить ещё раз...`, keeps answer buttons disabled during retry, and auto-recovers on successful retry.
 - [ ] При transient timeout/fetch-failure на ответ Mini App сначала делает `GET /miniapp/state` (pre-retry resync) перед следующим `POST /miniapp/answer`.
 - [ ] Если первый `POST /miniapp/answer` был принят, но ответ потерялся в сети/WebView, Mini App восстанавливает UI из `runner_state` без duplicate `POST`.
-- [ ] После `POST /miniapp/answer` (`_a1`) Mini App запускает ранний hedge-таймер и может выполнить `GET /miniapp/state` до полного timeout `_a1`.
+- [ ] После `POST /miniapp/answer` (`_a1`) Mini App запускает ранний hedge-таймер примерно на 1 секунду и может выполнить `GET /miniapp/state` до полного timeout `_a1`.
 - [ ] Mini App answer flow после transient recovery всё равно показывает feedback (`Верно/Неверно`, правильный ответ, пояснение) перед переходом дальше.
 - [ ] Если ранний `GET /miniapp/state` показал продвижение по вопросу/сессии, Mini App восстанавливается без дублирующего `POST`.
-- [ ] Если ранний `GET /miniapp/state` не показал продвижение, Mini App запускает bounded retry `POST /miniapp/answer` (`_a1/_a2/_a3`) без ожидания полного timeout первого запроса.
+- [ ] Если ранний `GET /miniapp/state` не показал продвижение, Mini App запускает bounded retry `POST /miniapp/answer` (`_a1/_a2/_a3`) без ожидания полного timeout первого запроса; в debug-telemetry ожидаются `hedged=true`, `winner_attempt=2`, `hedge_delay_ms=1000` и `hedge_started_ms` около 1000 мс, если победил hedge/retry.
 - [ ] If answer retries are exhausted, Mini App shows `Не удалось отправить ответ через API. Попробуйте снова.`, re-enables answer buttons, and keeps manual retry on the same question.
 - [ ] Force transient setup API failure/timeout shows `Запуск не удался, повторная попытка...`, keeps setup submit disabled during retry, and auto-recovers on successful retry.
 - [ ] If setup retries are exhausted, setup form remains visible, `Начать викторину` is re-enabled, and user can retry manually.
@@ -350,7 +350,7 @@ python -m unittest tests/test_miniapp_fastapi.py
 - For file-backed DBs, side files `quiz.sqlite3-wal` and `quiz.sqlite3-shm` may appear; this is expected in WAL mode.
 - Runtime performance indexes are ensured on startup for both existing and fresh DBs.
 - Repeated user loads should not update `users.updated_at` unless Telegram profile fields (`username`, `first_name`, `last_name`) changed; this keeps read-like bot and Mini App flows from taking avoidable SQLite write locks.
-- Mini App answer timeout is intentionally less aggressive than hedge timing (`ANSWER_API_TIMEOUT_MS = 8000`, `ANSWER_HEDGE_DELAY_MS = 3000`) so transient answer latency does not create extra `/miniapp/state` resync or retry pressure against SQLite/API under load.
+- Mini App answer timeout remains longer than hedge timing (`ANSWER_API_TIMEOUT_MS = 8000`, `ANSWER_HEDGE_DELAY_MS = 1000`). The answer hedge still waits briefly before attempt 2 and performs state-resync first, but it now recovers from a stalled first WebView/fetch attempt in roughly 1 second instead of roughly 3 seconds. If debug telemetry shows `attempt=2`, `hedged=true`, `winner_attempt=2`, and `pre_request_ms`/`hedge_started_ms` roughly equal to the hedge delay while backend logs have no matching `_a1` `miniapp_api` line, interpret it as the first frontend/WebView fetch attempt likely stalling before it reached backend; the `_a2` backend `duration_ms` should then represent the successful hedged request.
 
 Post-deploy DB checks:
 - `sqlite3 /path/to/quiz.sqlite3 "PRAGMA journal_mode;"`
