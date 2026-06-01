@@ -11,7 +11,7 @@ import app.main as main
 
 class BotDbOffloadTests(unittest.TestCase):
     def _context(self):
-        settings = SimpleNamespace(db_path=':memory:', mini_app_url='https://example.com', mini_app_api_base_url=None, admin_telegram_ids={1})
+        settings = SimpleNamespace(db_path=':memory:', mini_app_url='https://example.com', mini_app_api_base_url=None, admin_telegram_ids={1}, classic_quiz_send_next_as_new_message=False)
         app = SimpleNamespace(bot_data={'settings': settings})
         return SimpleNamespace(application=app, user_data={})
 
@@ -359,6 +359,85 @@ class BotDbOffloadTests(unittest.TestCase):
             asyncio.run(main.next_callback(next_update, context))
         self.assertNotIn('next:1', context.user_data.get('_callback_in_progress', set()))
 
+
+
+    def test_answer_and_next_acknowledge_before_db_work(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+        answer_query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        answer_update = SimpleNamespace(callback_query=answer_query, effective_user=user)
+
+        async def fake_answer_db(func, *args, **kwargs):
+            if func.__name__ == '_handle_answer_db':
+                self.assertEqual(answer_query.answer.await_count, 1)
+                return {
+                    'status': 'accepted', 'is_correct': True, 'explanation': 'ok',
+                    'answered_questions': 1, 'total_questions': 2, 'reading_mode': 'normal',
+                    'is_last_question': False, 'finalized': None,
+                }
+            return {'status': 'ok'}
+
+        with patch('app.main._run_db_task', side_effect=fake_answer_db):
+            asyncio.run(main.answer_callback(answer_update, context))
+
+        next_query = SimpleNamespace(data='next:1', answer=AsyncMock(), edit_message_text=AsyncMock())
+        next_update = SimpleNamespace(callback_query=next_query, effective_user=user)
+
+        async def fake_next_db(func, *args, **kwargs):
+            if func.__name__ == '_load_next_state':
+                self.assertEqual(next_query.answer.await_count, 1)
+                return {'status': 'missing'}
+            return {'status': 'ok'}
+
+        with patch('app.main._run_db_task', side_effect=fake_next_db):
+            asyncio.run(main.next_callback(next_update, context))
+
+    def test_answer_and_next_latency_logs_split_telegram_api_timings(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+        answer_query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        answer_update = SimpleNamespace(callback_query=answer_query, effective_user=user)
+        next_query = SimpleNamespace(data='next:1', answer=AsyncMock(), edit_message_text=AsyncMock())
+        next_update = SimpleNamespace(callback_query=next_query, effective_user=user)
+
+        async def fake_answer_db(func, *args, **kwargs):
+            if func.__name__ == '_handle_answer_db':
+                return {
+                    'status': 'accepted', 'is_correct': True, 'explanation': 'ok',
+                    'answered_questions': 1, 'total_questions': 2, 'reading_mode': 'normal',
+                    'is_last_question': False, 'finalized': None,
+                }
+            return {'status': 'ok'}
+
+        async def fake_next_db(func, *args, **kwargs):
+            if func.__name__ == '_load_next_state':
+                return {'status': 'missing'}
+            return {'status': 'ok'}
+
+        with patch('app.main.logger.info') as info_log:
+            with patch('app.main._run_db_task', side_effect=fake_answer_db):
+                asyncio.run(main.answer_callback(answer_update, context))
+            with patch('app.main._run_db_task', side_effect=fake_next_db):
+                asyncio.run(main.next_callback(next_update, context))
+
+        logged = " ".join(str(call.args[2]) for call in info_log.call_args_list if len(call.args) >= 3 and call.args[0] == "%s %s")
+        self.assertRegex(logged, r"handler=answer_callback.*telegram_api_elapsed_ms=\d+.*callback_ack_elapsed_ms=\d+.*message_edit_elapsed_ms=\d+.*message_send_elapsed_ms=\d+")
+        self.assertRegex(logged, r"handler=next_callback.*telegram_api_elapsed_ms=\d+.*callback_ack_elapsed_ms=\d+.*message_edit_elapsed_ms=\d+.*message_send_elapsed_ms=\d+")
+
+    def test_repeated_tap_logs_safe_status_field(self):
+        context = self._context()
+        context.user_data['_callback_in_progress'] = {'answer:1:1'}
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+        answer_query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        answer_update = SimpleNamespace(callback_query=answer_query, effective_user=user)
+
+        with patch('app.main.logger.info') as info_log:
+            asyncio.run(main.answer_callback(answer_update, context))
+
+        logged = " ".join(str(call.args[2]) for call in info_log.call_args_list if len(call.args) >= 3 and call.args[0] == "%s %s")
+        self.assertIn('status=ignored_repeated_tap', logged)
+        self.assertIn('repeated_tap=true', logged)
+        answer_query.answer.assert_awaited_with('Ответ уже обрабатывается…', cache_time=1)
 
     def test_start_mix_quiz_and_answer_callback_include_helper_telegram_timing(self):
         context = self._context()

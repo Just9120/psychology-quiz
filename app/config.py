@@ -31,6 +31,7 @@ class Settings:
     telegram_webhook_listen: str | None
     telegram_webhook_port: int | None
     telegram_webhook_secret_token: str | None
+    classic_quiz_send_next_as_new_message: bool
 
 
 def _parse_admin_telegram_ids(raw_ids: str) -> frozenset[int]:
@@ -82,6 +83,9 @@ def load_settings() -> Settings:
     telegram_webhook_port_raw = os.getenv("TELEGRAM_WEBHOOK_PORT", "").strip()
     telegram_webhook_port = None
     telegram_webhook_secret_token = os.getenv("TELEGRAM_WEBHOOK_SECRET_TOKEN", "").strip() or None
+    classic_quiz_send_next_as_new_message = os.getenv(
+        "CLASSIC_QUIZ_SEND_NEXT_AS_NEW_MESSAGE", "false"
+    ).strip().lower() in {"1", "true", "yes", "on"}
 
     if telegram_update_mode == "webhook":
         missing = []
@@ -120,5 +124,6 @@ def load_settings() -> Settings:
         telegram_webhook_listen=telegram_webhook_listen,
         telegram_webhook_port=telegram_webhook_port,
         telegram_webhook_secret_token=telegram_webhook_secret_token,
+        classic_quiz_send_next_as_new_message=classic_quiz_send_next_as_new_message,
     )
 logger = logging.getLogger(__name__)
