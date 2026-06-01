@@ -39,7 +39,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertNotIn("ctx.setup_url.includes('api_base_url=')", self.content)
         self.assertIn('const safeSetupUrl = getSafeSetupUrl();', self.content)
         self.assertIn('if (safeSetupUrl) {', self.content)
-        self.assertIn("await apiFetch(`${apiBase}/miniapp/setup-options`", self.content)
+        self.assertIn("await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`", self.content)
         self.assertIn("if (apiBase && tg?.initData) {", self.content)
         self.assertIn("setupOptionsCache.categories = categories;", self.content)
         self.assertIn("ctx.categories = categories;", self.content)
@@ -195,6 +195,23 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("pushDiagPhase('setup', 'ui_render_mark'", self.content)
         self.assertIn("answer_transport:", self.content)
         self.assertIn("setup_transport:", self.content)
+
+    def test_client_telemetry_debug_contract(self):
+        self.assertIn('id="telemetry_debug" class="note telemetry-debug" hidden', self.content)
+        self.assertIn("function startTelemetry(action, endpoint", self.content)
+        self.assertIn("marks: { 'tap/action_start': perfNowMs() }", self.content)
+        self.assertIn("markTelemetry(telemetry, 'request_start'", self.content)
+        self.assertIn("markTelemetry(telemetry, 'response_received'", self.content)
+        self.assertIn("markTelemetry(telemetry, 'json_parsed'", self.content)
+        self.assertIn("markTelemetry(telemetry, 'render_start'", self.content)
+        self.assertIn("markTelemetry(telemetry, 'render_done'", self.content)
+        self.assertIn("markTelemetry(telemetry, 'action_done'", self.content)
+        self.assertIn("console.info('miniapp_client_telemetry'", self.content)
+        self.assertIn("'X-Miniapp-Request-Id'", self.content)
+        self.assertIn("function withMiniappRequestId(headers = {}, requestId = '')", self.content)
+        self.assertIn("action request_id request_ms parse_ms render_ms total_ms status", self.content)
+        self.assertNotIn("apiDiag.textContent = tg.initData", self.content)
+
 
 
     def test_docs_numbered_h2_headings_have_unique_numbers(self):

@@ -642,3 +642,34 @@ bot_latency handler=answer_callback phase=handler_done status=ok elapsed_ms=42 d
 - High `render_elapsed_ms` ⇒ local message preparation/formatting overhead.
 - High `other_elapsed_ms` ⇒ instrumentation gap, callback dispatch, event-loop scheduling, or other unclassified overhead.
 - `bot_event_loop_lag` warning (if present) ⇒ event-loop blocking or CPU pressure in bot process.
+
+## Mini App client telemetry smoke (PR #201)
+
+Client-side telemetry is opt-in and hidden by default. Use it only for operator diagnostics when a Telegram WebView user reports that the Mini App appears to hang.
+
+### How to run the smoke
+
+1. Open the Mini App URL with `?debug=1` appended (preserve the existing `context` parameter). Example shape: `https://miniapp.librechat.online/?debug=1&context=...`.
+2. Tap a user action that performs an API request, for example choose an answer, tap `Далее` until an answer is available, or start a new quiz from setup.
+3. In the debug panel, copy the `request_id` from the latest telemetry row for `answer`, `setup`, `state`, or `setup_options`.
+4. Compare that `request_id` with backend API logs from `psych_quiz_miniapp_api`:
+
+```bash
+docker compose logs --since=15m psych_quiz_miniapp_api | grep 'miniapp_api' | grep '<request_id>'
+```
+
+Backend `miniapp_api` lines include the safe `request_id`, endpoint, method, status, and backend `duration_ms`. The client request also sends `X-Miniapp-Request-Id` so header-auth GETs and simple-body POSTs can be correlated without logging Telegram init data, question text, answer text, or secrets.
+
+### How to interpret the client row
+
+The debug panel shows the latest safe rows as `action request_id request_ms parse_ms render_ms total_ms status`:
+
+- High `request_ms` means the delay is on the frontend-to-API path: network, Nginx/API, Cloudflare/frontend path before the API request reaches the backend, or backend response delivery.
+- Low backend `duration_ms` for the same `request_id` but high frontend `total_ms` means the backend is fast and the remaining delay is likely Telegram WebView, frontend JavaScript, rendering, proxy buffering, or client UI update.
+- A large gap before `request_start` (visible in console as `pre_request_ms`) means the Mini App JavaScript/UI froze before the network request began.
+- High `parse_ms` points to JSON body parsing or a WebView main-thread stall immediately after response receipt.
+- High `render_ms` points to DOM rendering or WebView paint/update delay after the JSON was parsed.
+
+### Remaining ops experiment
+
+Because `miniapp.librechat.online` is Cloudflare-proxied while `quiz-api.librechat.online` appears to be direct Nginx, a remaining production experiment is to temporarily bypass Cloudflare for the Mini App frontend (or publish an equivalent non-proxied frontend hostname) and compare debug rows for the same user action. If `request_ms` and `total_ms` improve only on the bypassed frontend while backend `duration_ms` remains low, Cloudflare/frontend caching/proxy/WebView interaction remains a likely contributor. This experiment should not change classic Telegram callback routing or production DNS permanently in this PR.
