@@ -389,13 +389,16 @@
       }
 
       function startTelemetry(action, endpoint, requestId = buildMiniappRequestId()) {
+        const startedAt = perfNowMs();
         const row = {
           action,
           endpoint,
           request_id: requestId,
+          attempt: '',
           status: 'started',
           http_code: '',
-          marks: { 'tap/action_start': perfNowMs() },
+          missing_network_marks: false,
+          marks: { action_start: startedAt, 'tap/action_start': startedAt },
         };
         telemetryRows.unshift(row);
         telemetryRows.splice(8);
@@ -403,12 +406,34 @@
         return row;
       }
 
+      function hasTelemetryMark(row, phase) {
+        return Object.prototype.hasOwnProperty.call(row?.marks || {}, phase);
+      }
+
+      function isOk200Telemetry(row) {
+        return row?.status === 'ok' && String(row?.http_code || '') === '200';
+      }
+
+      function networkMarksMissing(row) {
+        return !hasTelemetryMark(row, 'request_start')
+          || !hasTelemetryMark(row, 'response_received')
+          || !hasTelemetryMark(row, 'json_parsed');
+      }
+
+      function finalizeTelemetry(row) {
+        if (!row) return;
+        row.missing_network_marks = isOk200Telemetry(row) && networkMarksMissing(row);
+        if (row.missing_network_marks) row.status = 'ok_missing_network_marks';
+      }
+
       function markTelemetry(row, phase, extras = {}) {
         if (!row) return;
         row.marks[phase] = perfNowMs();
         if (extras.request_id) row.request_id = String(extras.request_id).slice(0, 64);
+        if (extras.attempt !== undefined && extras.attempt !== null) row.attempt = String(extras.attempt).slice(0, 8);
         if (extras.status) row.status = String(extras.status).slice(0, 40);
         if (extras.http_code !== undefined && extras.http_code !== null) row.http_code = String(extras.http_code).slice(0, 8);
+        if (phase === 'action_done') finalizeTelemetry(row);
         renderTelemetryDebug();
         if (phase === 'action_done' && debugMode) {
           console.info('miniapp_client_telemetry', buildTelemetrySummary(row));
@@ -417,17 +442,20 @@
 
       function buildTelemetrySummary(row) {
         const marks = row?.marks || {};
+        const actionStart = marks.action_start ?? marks['tap/action_start'];
         return {
           action: row.action,
           endpoint: row.endpoint,
           request_id: row.request_id,
+          attempt: row.attempt || '-',
           status: row.status || '-',
           http_code: row.http_code || '-',
-          pre_request_ms: safeDuration(marks.request_start, marks['tap/action_start']),
+          missing_network_marks: row.missing_network_marks === true,
+          pre_request_ms: safeDuration(marks.request_start, actionStart),
           request_ms: safeDuration(marks.response_received, marks.request_start),
           parse_ms: safeDuration(marks.json_parsed, marks.response_received),
           render_ms: safeDuration(marks.render_done, marks.render_start),
-          total_ms: safeDuration(marks.action_done, marks['tap/action_start']),
+          total_ms: safeDuration(marks.action_done, actionStart),
         };
       }
 
@@ -437,10 +465,10 @@
           return;
         }
         telemetryDebug.hidden = false;
-        const lines = ['Client telemetry (last actions): action request_id request_ms parse_ms render_ms total_ms status'];
+        const lines = ['Client telemetry (last actions): action request_id pre_request_ms request_ms parse_ms render_ms total_ms status/http_code missing_network_marks'];
         telemetryRows.slice(0, 6).forEach((row) => {
           const s = buildTelemetrySummary(row);
-          lines.push(`${s.action} ${s.request_id || '-'} req=${s.request_ms} parse=${s.parse_ms} render=${s.render_ms} total=${s.total_ms} status=${s.status}/${s.http_code}`);
+          lines.push(`${s.action} ${s.request_id || '-'} attempt=${s.attempt} pre=${s.pre_request_ms} req=${s.request_ms} parse=${s.parse_ms} render=${s.render_ms} total=${s.total_ms} status=${s.status}/${s.http_code} missing_network_marks=${s.missing_network_marks ? 'true' : 'false'}`);
         });
         telemetryDebug.textContent = lines.join('\n');
       }
@@ -452,13 +480,16 @@
       }
 
       async function fetchJsonWithTelemetry(url, options = {}, timeoutMs = 9000, telemetry = null) {
-        const requestId = telemetry?.request_id || buildMiniappRequestId();
-        markTelemetry(telemetry, 'request_start', { request_id: requestId, status: 'requesting' });
+        const existingRequestId = options.headers?.['X-Miniapp-Request-Id'] || '';
+        const requestId = existingRequestId || telemetry?.request_id || buildMiniappRequestId();
+        markTelemetry(telemetry, 'before_build_payload', { request_id: requestId, attempt: 1, status: 'preparing' });
         const headers = withMiniappRequestId(options.headers || {}, requestId);
+        markTelemetry(telemetry, 'before_fetch', { request_id: requestId, attempt: 1, status: 'before_fetch' });
+        markTelemetry(telemetry, 'request_start', { request_id: requestId, attempt: 1, status: 'requesting' });
         const resp = await apiFetch(url, { ...options, headers }, timeoutMs);
-        markTelemetry(telemetry, 'response_received', { http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
+        markTelemetry(telemetry, 'response_received', { request_id: requestId, attempt: 1, http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
         const data = await resp.json();
-        markTelemetry(telemetry, 'json_parsed', { status: resp.ok ? 'json_ok' : 'json_error' });
+        markTelemetry(telemetry, 'json_parsed', { request_id: requestId, attempt: 1, http_code: resp.status, status: resp.ok ? 'json_ok' : 'json_error' });
         return { resp, data, requestId };
       }
 
@@ -606,23 +637,23 @@
             runnerState.textContent = 'Загрузка параметров новой викторины...';
             try {
               const telemetry = startTelemetry('setup_options', '/miniapp/setup-options');
-              const { resp, data } = await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`, {
-                headers: withMiniappRequestId({ Authorization: `tma ${tg.initData}` }, buildMiniappRequestId()),
+              const { resp, data, requestId } = await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`, {
+                headers: { Authorization: `tma ${tg.initData}` },
               }, 9000, telemetry);
               const categories = Array.isArray(data?.setup_options?.categories) ? data.setup_options.categories : [];
               if (resp.ok && data?.ok === true && categories.length > 0) {
                 setupOptionsCache.categories = categories;
                 ctx.categories = categories;
-                markTelemetry(telemetry, 'render_start', { status: 'rendering' });
+                markTelemetry(telemetry, 'render_start', { request_id: requestId, status: 'rendering' });
                 if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
                   setSetupStatus('ready_for_submit');
-                  markTelemetry(telemetry, 'render_done', { status: 'ok' });
-                  markTelemetry(telemetry, 'action_done', { status: 'ok' });
+                  markTelemetry(telemetry, 'render_done', { request_id: requestId, status: 'ok' });
+                  markTelemetry(telemetry, 'action_done', { request_id: requestId, status: 'ok', http_code: resp.status });
                   return;
                 }
-                markTelemetry(telemetry, 'render_done', { status: 'no_render' });
+                markTelemetry(telemetry, 'render_done', { request_id: requestId, status: 'no_render' });
               }
-              markTelemetry(telemetry, 'action_done', { status: resp.ok ? 'no_options' : 'api_error' });
+              markTelemetry(telemetry, 'action_done', { request_id: requestId, status: resp.ok ? 'no_options' : 'api_error', http_code: resp.status });
             } catch (_) {}
           }
           const safeSetupUrl = getSafeSetupUrl();
@@ -822,8 +853,10 @@
             if (retryOptions.onHedgeTimerStarted) retryOptions.onHedgeTimerStarted(attempt, requestId);
             let raceSettled = false;
             const attemptPromise = (async () => {
-              if (retryOptions.onRequestStart) retryOptions.onRequestStart(attempt, requestId);
+              if (retryOptions.onBeforeBuildPayload) retryOptions.onBeforeBuildPayload(attempt, requestId);
               const attemptOptions = optionsFactory(attempt, requestId);
+              if (retryOptions.onBeforeFetch) retryOptions.onBeforeFetch(attempt, requestId);
+              if (retryOptions.onRequestStart) retryOptions.onRequestStart(attempt, requestId);
               const resp = await apiFetch(url, { ...attemptOptions, headers: withMiniappRequestId(attemptOptions.headers || {}, requestId) }, timeoutMs);
               if (retryOptions.onResponseReceived) retryOptions.onResponseReceived(attempt, requestId, resp);
               const data = await resp.json();
@@ -846,8 +879,10 @@
               const nextRequestId = retryOptions.requestIdFactory ? retryOptions.requestIdFactory(nextAttempt) : '';
               if (retryOptions.onHedgeRetryStarted) retryOptions.onHedgeRetryStarted(nextAttempt, nextRequestId);
               if (raceSettled) return null;
-              if (retryOptions.onRequestStart) retryOptions.onRequestStart(nextAttempt, nextRequestId);
+              if (retryOptions.onBeforeBuildPayload) retryOptions.onBeforeBuildPayload(nextAttempt, nextRequestId);
               const nextOptions = optionsFactory(nextAttempt, nextRequestId);
+              if (retryOptions.onBeforeFetch) retryOptions.onBeforeFetch(nextAttempt, nextRequestId);
+              if (retryOptions.onRequestStart) retryOptions.onRequestStart(nextAttempt, nextRequestId);
               const resp = await apiFetch(url, { ...nextOptions, headers: withMiniappRequestId(nextOptions.headers || {}, nextRequestId) }, timeoutMs);
               if (retryOptions.onResponseReceived) retryOptions.onResponseReceived(nextAttempt, nextRequestId, resp);
               const data = await resp.json();
@@ -892,8 +927,10 @@
             }
           }
           try {
-            if (retryOptions.onRequestStart) retryOptions.onRequestStart(attempt, requestId);
+            if (retryOptions.onBeforeBuildPayload) retryOptions.onBeforeBuildPayload(attempt, requestId);
             const attemptOptions = optionsFactory(attempt, requestId);
+            if (retryOptions.onBeforeFetch) retryOptions.onBeforeFetch(attempt, requestId);
+            if (retryOptions.onRequestStart) retryOptions.onRequestStart(attempt, requestId);
             const resp = await apiFetch(url, { ...attemptOptions, headers: withMiniappRequestId(attemptOptions.headers || {}, requestId) }, timeoutMs);
             if (retryOptions.onResponseReceived) retryOptions.onResponseReceived(attempt, requestId, resp);
             let data = null;
@@ -1041,14 +1078,20 @@
               {
                 retries: 2,
                 requestIdFactory: (attempt) => `${requestBaseId}_a${attempt}`,
+                onBeforeBuildPayload: (attempt, requestId) => {
+                  markTelemetry(telemetry, 'before_build_payload', { request_id: requestId, attempt, status: 'preparing' });
+                },
+                onBeforeFetch: (attempt, requestId) => {
+                  markTelemetry(telemetry, 'before_fetch', { request_id: requestId, attempt, status: 'before_fetch' });
+                },
                 onRequestStart: (attempt, requestId) => {
-                  markTelemetry(telemetry, 'request_start', { request_id: requestId, status: attempt > 1 ? 'retrying' : 'requesting' });
+                  markTelemetry(telemetry, 'request_start', { request_id: requestId, attempt, status: attempt > 1 ? 'retrying' : 'requesting' });
                 },
                 onResponseReceived: (attempt, requestId, resp) => {
-                  markTelemetry(telemetry, 'response_received', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
+                  markTelemetry(telemetry, 'response_received', { request_id: requestId, attempt, http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
                 },
                 onJsonParsed: (attempt, requestId, resp) => {
-                  markTelemetry(telemetry, 'json_parsed', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'json_ok' : 'json_error' });
+                  markTelemetry(telemetry, 'json_parsed', { request_id: requestId, attempt, http_code: resp.status, status: resp.ok ? 'json_ok' : 'json_error' });
                 },
                 onRetryScheduled: (attempt, retries, errorKind, requestId) => {
                   if (!isAttemptCurrent(attempt)) return;
@@ -1469,14 +1512,20 @@
               {
                 retries: 1,
                 requestIdFactory: (attempt) => `${requestBaseId}_a${attempt}`,
+                onBeforeBuildPayload: (attempt, requestId) => {
+                  markTelemetry(telemetry, 'before_build_payload', { request_id: requestId, attempt, status: 'preparing' });
+                },
+                onBeforeFetch: (attempt, requestId) => {
+                  markTelemetry(telemetry, 'before_fetch', { request_id: requestId, attempt, status: 'before_fetch' });
+                },
                 onRequestStart: (attempt, requestId) => {
-                  markTelemetry(telemetry, 'request_start', { request_id: requestId, status: attempt > 1 ? 'retrying' : 'requesting' });
+                  markTelemetry(telemetry, 'request_start', { request_id: requestId, attempt, status: attempt > 1 ? 'retrying' : 'requesting' });
                 },
                 onResponseReceived: (attempt, requestId, resp) => {
-                  markTelemetry(telemetry, 'response_received', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
+                  markTelemetry(telemetry, 'response_received', { request_id: requestId, attempt, http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
                 },
                 onJsonParsed: (attempt, requestId, resp) => {
-                  markTelemetry(telemetry, 'json_parsed', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'json_ok' : 'json_error' });
+                  markTelemetry(telemetry, 'json_parsed', { request_id: requestId, attempt, http_code: resp.status, status: resp.ok ? 'json_ok' : 'json_error' });
                 },
                 onRetryScheduled: (attempt, retries, errorKind, requestId) => {
                   apiDiagState.setupRetryCount = attempt;
