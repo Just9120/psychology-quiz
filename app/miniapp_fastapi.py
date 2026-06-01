@@ -10,6 +10,7 @@ from typing import Any
 from fastapi import FastAPI, Request
 from fastapi.responses import Response
 
+from app.logging_config import configure_noisy_http_client_loggers, install_telegram_url_redaction
 from app.miniapp_api import (
     _extract_init_data,
     _extract_transport_payload,
@@ -96,6 +97,8 @@ async def _run_builder_in_thread(builder: Any, *args: Any, **kwargs: Any) -> tup
 
 
 def create_app_from_env() -> FastAPI:
+    install_telegram_url_redaction()
+    configure_noisy_http_client_loggers()
     return create_app(
         db_path=_required_env("DB_PATH"),
         bot_token=_required_env("BOT_TOKEN"),

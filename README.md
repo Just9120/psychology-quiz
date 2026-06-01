@@ -6,7 +6,7 @@
 - **Module 1** — стабильный baseline.
 - **Module 2** — запущен в ограниченном рабочем scope.
 
-Бот по умолчанию работает в режиме **long polling**; для инфраструктурного эксперимента доступен опциональный webhook mode за конфиг-флагом. **Web UI отсутствует**, внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
+Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. **Web UI отсутствует**, внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
 ## Переменные окружения
 
@@ -22,7 +22,7 @@ Telegram update delivery mode:
 - `TELEGRAM_WEBHOOK_URL` — публичный HTTPS URL webhook endpoint; обязателен только при `TELEGRAM_UPDATE_MODE=webhook`.
 - `TELEGRAM_WEBHOOK_LISTEN` — локальный listen host для webhook сервера python-telegram-bot; обязателен только в webhook mode.
 - `TELEGRAM_WEBHOOK_PORT` — локальный listen port для webhook сервера python-telegram-bot; обязателен только в webhook mode.
-- `TELEGRAM_WEBHOOK_SECRET_TOKEN` — опциональный secret token для Telegram webhook header; не логируется.
+- `TELEGRAM_WEBHOOK_SECRET_TOKEN` — secret token для Telegram webhook header; не логируется и должен задаваться только как секрет окружения.
 
 Дополнительно для owner-only аналитики:
 - `ADMIN_TELEGRAM_IDS` (опционально) — список numeric Telegram user id через запятую.
@@ -35,9 +35,9 @@ Telegram update delivery mode:
 - `MINI_APP_URL` — опциональный; включает экспериментальный opt-in Telegram Mini App runner (`/ui`).
 - `ADMIN_TELEGRAM_IDS` — опциональный список numeric Telegram user id через запятую для owner-only команд (например, `/stats`).
 
-## Telegram update delivery experiment: polling vs webhook
+## Telegram update delivery mode: polling vs webhook
 
-Current production default remains long polling. To run the current mode explicitly:
+Production can run in either long polling or webhook mode. To run polling explicitly:
 
 ```bash
 TELEGRAM_UPDATE_MODE=polling python -m app.main
@@ -49,17 +49,17 @@ Expected safe startup log:
 bot_update_mode mode=polling
 ```
 
-To enable webhook mode behind a reverse proxy, terminate public HTTPS on the proxy and forward only the webhook path to the bot container/listener. The Compose service publishes the webhook listener only on the host loopback (`127.0.0.1:8090:8090`), so public access should continue to go through HTTPS reverse proxy instead of a direct container port. Example environment:
+Production webhook mode is enabled by terminating public HTTPS on Nginx and forwarding only the webhook path to the bot listener. The Compose service must keep port `8090` loopback-only (`127.0.0.1:8090:8090`); do not expose the bot listener directly to the internet. Current production webhook environment:
 
 ```dotenv
 TELEGRAM_UPDATE_MODE=webhook
 TELEGRAM_WEBHOOK_URL=https://quiz-api.librechat.online/telegram/webhook
 TELEGRAM_WEBHOOK_LISTEN=0.0.0.0
 TELEGRAM_WEBHOOK_PORT=8090
-TELEGRAM_WEBHOOK_SECRET_TOKEN=<operator-generated-secret>
+TELEGRAM_WEBHOOK_SECRET_TOKEN=<secret>
 ```
 
-Example Nginx route for the controlled webhook-delivery experiment:
+Example Nginx route for webhook delivery:
 
 ```nginx
 location = /telegram/webhook {
@@ -72,7 +72,7 @@ location = /telegram/webhook {
 }
 ```
 
-Rollback remains setting `TELEGRAM_UPDATE_MODE=polling` and restarting `psych_quiz_bot` plus `psych_quiz_miniapp_api`; keep the loopback port mapping in place so webhook mode can be re-tested without another Compose change.
+Rollback remains setting `TELEGRAM_UPDATE_MODE=polling` and restarting `psych_quiz_bot` plus `psych_quiz_miniapp_api`; keep the loopback port mapping in place so webhook mode can be re-tested without another Compose change. If `BOT_TOKEN` was exposed in logs, rotate it manually via BotFather and then update production environment secrets; do not rotate tokens in code or commit tokens to the repository.
 
 Example reverse-proxy smoke checks from the host after deploy:
 
@@ -82,7 +82,7 @@ docker compose logs --tail=100 psych_quiz_bot | grep 'bot_update_mode mode=webho
 curl -fsS http://127.0.0.1:8090/telegram/webhook -X POST -H 'Content-Type: application/json' -d '{}' || true
 ```
 
-Safe webhook startup logs include the mode, local listen host/port, and URL path only; they must not include `BOT_TOKEN`, `TELEGRAM_WEBHOOK_SECRET_TOKEN`, or raw update payloads. Example:
+Safe webhook startup logs include the mode, local listen host/port, and URL path only; they must not include `BOT_TOKEN`, Telegram Bot API URLs containing the token, `TELEGRAM_WEBHOOK_SECRET_TOKEN`, or raw update payloads. Example:
 
 ```text
 bot_update_mode mode=webhook webhook_host=quiz.example.com listen=127.0.0.1 port=8090 path=/telegram/webhook

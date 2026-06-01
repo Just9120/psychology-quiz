@@ -31,6 +31,7 @@ from telegram.ext import (
 )
 
 from app.config import load_settings
+from app.logging_config import configure_app_logging
 from app.db import (
     abandon_in_progress_sessions_for_user,
     create_or_load_user,
@@ -2307,11 +2308,7 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
 
 
 def configure_logging(log_level: str) -> None:
-    numeric_level = getattr(logging, log_level.upper(), logging.INFO)
-    logging.basicConfig(
-        level=numeric_level,
-        format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-    )
+    configure_app_logging(log_level)
 
 
 def should_start_miniapp_api(settings) -> bool:

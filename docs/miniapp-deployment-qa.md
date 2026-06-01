@@ -570,6 +570,31 @@ journalctl -u psych_quiz_miniapp_api --since '15 min ago' --no-pager | grep 'min
 - Low backend `duration_ms` with user-visible hang usually points to network path, Telegram WebView, proxy buffering, or frontend rendering/JS timing.
 - High backend `duration_ms` indicates server-side bottlenecks (DB lock contention, expensive code path, or backend compute/IO delay).
 
+
+## Production Telegram webhook operating mode
+
+Production may run the classic Telegram bot in webhook mode after HTTPS termination by Nginx. Use only secret-free environment documentation in the repository:
+
+```dotenv
+TELEGRAM_UPDATE_MODE=webhook
+TELEGRAM_WEBHOOK_URL=https://quiz-api.librechat.online/telegram/webhook
+TELEGRAM_WEBHOOK_LISTEN=0.0.0.0
+TELEGRAM_WEBHOOK_PORT=8090
+TELEGRAM_WEBHOOK_SECRET_TOKEN=<secret>
+```
+
+Port `8090` must remain loopback-only on the Docker host, for example `127.0.0.1:8090:8090`, with public traffic reaching it only through the Nginx `location = /telegram/webhook` reverse proxy. Do not publish the webhook listener on a public interface.
+
+Rollback knob:
+
+```dotenv
+TELEGRAM_UPDATE_MODE=polling
+```
+
+After changing the update mode, restart the bot service and verify the startup diagnostic (`bot_update_mode mode=webhook` or `bot_update_mode mode=polling`). Existing bot diagnostics such as `bot_update_ingress`, `bot_handler_start`, `bot_latency`, `bot_latency_slow`, and `bot_event_loop_lag` should remain visible. Third-party HTTP client INFO logs should not be used for Telegram Bot API tracing because request URLs can contain `BOT_TOKEN`.
+
+If `BOT_TOKEN` was exposed in logs, rotate the token manually via BotFather and update the production environment secret. Token rotation is an operational action; do not store replacement tokens in code, docs, commits, or pasted logs.
+
 ## Classic Telegram bot latency diagnostics
 
 The bot now emits three low-noise diagnostics around classic user actions in `psych_quiz_bot` logs:
