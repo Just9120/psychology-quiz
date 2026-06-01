@@ -199,7 +199,9 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def test_client_telemetry_debug_contract(self):
         self.assertIn('id="telemetry_debug" class="note telemetry-debug" hidden', self.content)
         self.assertIn("function startTelemetry(action, endpoint", self.content)
-        self.assertIn("marks: { 'tap/action_start': perfNowMs() }", self.content)
+        self.assertIn("marks: { action_start: startedAt, 'tap/action_start': startedAt }", self.content)
+        self.assertIn("markTelemetry(telemetry, 'before_build_payload'", self.content)
+        self.assertIn("markTelemetry(telemetry, 'before_fetch'", self.content)
         self.assertIn("markTelemetry(telemetry, 'request_start'", self.content)
         self.assertIn("markTelemetry(telemetry, 'response_received'", self.content)
         self.assertIn("markTelemetry(telemetry, 'json_parsed'", self.content)
@@ -209,7 +211,12 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("console.info('miniapp_client_telemetry'", self.content)
         self.assertIn("'X-Miniapp-Request-Id'", self.content)
         self.assertIn("function withMiniappRequestId(headers = {}, requestId = '')", self.content)
-        self.assertIn("action request_id request_ms parse_ms render_ms total_ms status", self.content)
+        self.assertIn("pre_request_ms", self.content)
+        self.assertIn("missing_network_marks", self.content)
+        self.assertIn("ok_missing_network_marks", self.content)
+        self.assertIn("existingRequestId || telemetry?.request_id || buildMiniappRequestId()", self.content)
+        self.assertIn("action request_id pre_request_ms request_ms parse_ms render_ms total_ms status/http_code missing_network_marks", self.content)
+        self.assertIn("headers: { Authorization: `tma ${tg.initData}` }", self.content)
         self.assertNotIn("apiDiag.textContent = tg.initData", self.content)
 
 
