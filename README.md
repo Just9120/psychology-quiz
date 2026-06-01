@@ -23,6 +23,7 @@ Telegram update delivery mode:
 - `TELEGRAM_WEBHOOK_LISTEN` — локальный listen host для webhook сервера python-telegram-bot; обязателен только в webhook mode.
 - `TELEGRAM_WEBHOOK_PORT` — локальный listen port для webhook сервера python-telegram-bot; обязателен только в webhook mode.
 - `TELEGRAM_WEBHOOK_SECRET_TOKEN` — secret token для Telegram webhook header; не логируется и должен задаваться только как секрет окружения.
+- `CLASSIC_QUIZ_SEND_NEXT_AS_NEW_MESSAGE` — экспериментальный UX-флаг для classic quiz: при `true` кнопка «Дальше» отправляет следующий вопрос новым сообщением вместо редактирования предыдущего; по умолчанию `false`.
 
 Дополнительно для owner-only аналитики:
 - `ADMIN_TELEGRAM_IDS` (опционально) — список numeric Telegram user id через запятую.

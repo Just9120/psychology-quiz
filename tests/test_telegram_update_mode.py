@@ -69,6 +69,18 @@ class TelegramUpdateModeSettingsTests(unittest.TestCase):
         self.assertEqual(settings.telegram_webhook_port, 8090)
         self.assertEqual(settings.telegram_webhook_secret_token, "secret-header-token")
 
+
+    def test_classic_quiz_send_next_as_new_message_defaults_false_and_parses_true(self):
+        with patch.dict(os.environ, self._base_env(), clear=True):
+            settings = load_settings()
+        self.assertFalse(settings.classic_quiz_send_next_as_new_message)
+
+        env = self._base_env()
+        env["CLASSIC_QUIZ_SEND_NEXT_AS_NEW_MESSAGE"] = "true"
+        with patch.dict(os.environ, env, clear=True):
+            settings = load_settings()
+        self.assertTrue(settings.classic_quiz_send_next_as_new_message)
+
     def test_invalid_update_mode_is_rejected(self):
         env = self._base_env()
         env["TELEGRAM_UPDATE_MODE"] = "invalid"

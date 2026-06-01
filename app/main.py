@@ -115,7 +115,11 @@ class _HandlerLatency:
         self.db_elapsed_ms = 0
         self.render_elapsed_ms = 0
         self.telegram_api_elapsed_ms = 0
+        self.callback_ack_elapsed_ms = 0
+        self.message_edit_elapsed_ms = 0
+        self.message_send_elapsed_ms = 0
         self.other_elapsed_ms = 0
+        self.extra_fields: dict[str, str] = {}
 
     def add_db(self, started_at: float) -> None:
         self.db_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
@@ -123,8 +127,23 @@ class _HandlerLatency:
     def add_render(self, started_at: float) -> None:
         self.render_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
 
-    def add_telegram_api(self, started_at: float) -> None:
-        self.telegram_api_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
+    def add_telegram_api(self, started_at: float, api_kind: str | None = None) -> None:
+        elapsed_ms = int((time.perf_counter() - started_at) * 1000)
+        self.telegram_api_elapsed_ms += elapsed_ms
+        if api_kind == "callback_ack":
+            self.callback_ack_elapsed_ms += elapsed_ms
+        elif api_kind == "message_edit":
+            self.message_edit_elapsed_ms += elapsed_ms
+        elif api_kind == "message_send":
+            self.message_send_elapsed_ms += elapsed_ms
+
+    def add_field(self, key: str, value: str | bool | int) -> None:
+        if re.fullmatch(r"[A-Za-z0-9_]{1,32}", key):
+            self.extra_fields[key] = str(value).lower() if isinstance(value, bool) else str(value)
+
+    def set_status(self, status: str) -> None:
+        if re.fullmatch(r"[A-Za-z0-9_]{1,32}", status):
+            self.status = status
 
     def set_error(self, error_code: str) -> None:
         self.status = "error"
@@ -157,6 +176,9 @@ class _HandlerLatency:
             f"db_elapsed_ms={self.db_elapsed_ms}",
             f"render_elapsed_ms={self.render_elapsed_ms}",
             f"telegram_api_elapsed_ms={self.telegram_api_elapsed_ms}",
+            f"callback_ack_elapsed_ms={self.callback_ack_elapsed_ms}",
+            f"message_edit_elapsed_ms={self.message_edit_elapsed_ms}",
+            f"message_send_elapsed_ms={self.message_send_elapsed_ms}",
             f"other_elapsed_ms={self.other_elapsed_ms}",
         ]
         if self.command:
@@ -169,6 +191,8 @@ class _HandlerLatency:
             fields.append(f"session_id={self.session_id}")
         if self.error_code:
             fields.append(f"error_code={self.error_code}")
+        for key in sorted(self.extra_fields):
+            fields.append(f"{key}={self.extra_fields[key]}")
         payload = " ".join(fields)
         logger.info("%s %s", LATENCY_LOG_PREFIX, payload)
         if elapsed_ms >= SLOW_HANDLER_THRESHOLD_MS:
@@ -265,12 +289,22 @@ def _safe_callback_session_id(data: str, expected_prefix: str) -> int | None:
     except ValueError:
         return None
 
-async def _timed_telegram_api_call(latency: _HandlerLatency | None, call):
+async def _timed_telegram_api_call(latency: _HandlerLatency | None, call, api_kind: str | None = None):
     started_at = time.perf_counter()
     result = await call
     if latency is not None:
-        latency.add_telegram_api(started_at)
+        latency.add_telegram_api(started_at, api_kind=api_kind)
     return result
+
+
+def _mark_repeated_tap(latency: _HandlerLatency) -> None:
+    latency.set_status("ignored_repeated_tap")
+    latency.add_field("repeated_tap", True)
+
+
+def _mark_stale_callback(latency: _HandlerLatency) -> None:
+    latency.set_status("ignored_stale_callback")
+    latency.add_field("stale_callback", True)
 
 
 def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
@@ -1308,7 +1342,7 @@ async def send_quiz_result_with_main_menu(query, text: str, latency: _HandlerLat
         return
 
     try:
-        await _timed_telegram_api_call(latency, query.edit_message_reply_markup(reply_markup=None))
+        await _timed_telegram_api_call(latency, query.edit_message_reply_markup(reply_markup=None), api_kind="message_edit")
     except Exception:
         logger.debug("Не удалось отключить inline-кнопки у предыдущего сообщения перед показом результата.")
 
@@ -1316,7 +1350,7 @@ async def send_quiz_result_with_main_menu(query, text: str, latency: _HandlerLat
         text,
         reply_markup=get_main_menu_keyboard() if query.message.chat.type == "private" else None,
         parse_mode="HTML",
-    ))
+    ), api_kind="message_send")
 
 
 async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int, latency: _HandlerLatency | None = None) -> None:
@@ -1397,7 +1431,14 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     latency.summary()
 
 
-async def send_current_question(query, settings, session_id: int, latency: _HandlerLatency | None = None) -> bool:
+async def send_current_question(
+    query,
+    settings,
+    session_id: int,
+    latency: _HandlerLatency | None = None,
+    *,
+    send_as_new_message: bool = False,
+) -> bool:
     finalize_payload = None
     reading_mode = "normal"
     db_started_at = time.perf_counter()
@@ -1406,7 +1447,7 @@ async def send_current_question(query, settings, session_id: int, latency: _Hand
         if current is None:
             finalized = finalize_quiz_session(conn, session_id)
             if finalized is None:
-                await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."))
+                await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."), api_kind="message_edit")
                 return False
 
             await show_finished_quiz_message(
@@ -1438,7 +1479,7 @@ async def send_current_question(query, settings, session_id: int, latency: _Hand
 
     if not options:
         if finalize_payload is None:
-            await _timed_telegram_api_call(latency, query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена."), api_kind="message_edit")
             return False
         await send_quiz_result_with_main_menu(
             query,
@@ -1446,6 +1487,7 @@ async def send_current_question(query, settings, session_id: int, latency: _Hand
             "Сессия завершена досрочно.\n"
             f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}\n\n"
             "Чтобы запустить новую викторину, используйте /quiz.",
+            latency=latency,
         )
         return False
 
@@ -1472,6 +1514,26 @@ async def send_current_question(query, settings, session_id: int, latency: _Hand
     markup = InlineKeyboardMarkup(keyboard)
     if latency is not None:
         latency.add_render(render_started_at)
+    if send_as_new_message and query.message is not None:
+        try:
+            await _timed_telegram_api_call(
+                latency,
+                query.edit_message_reply_markup(reply_markup=None),
+                api_kind="message_edit",
+            )
+        except Exception:
+            logger.debug("Не удалось отключить inline-кнопки перед отправкой следующего вопроса новым сообщением.")
+        await _timed_telegram_api_call(
+            latency,
+            query.message.chat.send_message(
+                message_text,
+                reply_markup=markup,
+                parse_mode="HTML",
+            ),
+            api_kind="message_send",
+        )
+        return True
+
     await _timed_telegram_api_call(
         latency,
         query.edit_message_text(
@@ -1479,6 +1541,7 @@ async def send_current_question(query, settings, session_id: int, latency: _Hand
             reply_markup=markup,
             parse_mode="HTML",
         ),
+        api_kind="message_edit",
     )
     return True
 
@@ -1670,7 +1733,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
     settings = context.application.bot_data["settings"]
     tg_user = update.effective_user
     if tg_user is None:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."), api_kind="message_edit")
         latency.summary()
         return
 
@@ -1940,7 +2003,7 @@ async def start_mix_quiz(
 
     settings = context.application.bot_data["settings"]
     if tg_user is None:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."), api_kind="message_edit")
         return
 
     def _start_mix_quiz_db():
@@ -2016,7 +2079,8 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
     parts = data.split(":")
     if len(parts) != 4:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный формат ответа."))
+        await _timed_telegram_api_call(latency, query.answer(cache_time=1), api_kind="callback_ack")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный формат ответа."), api_kind="message_edit")
         latency.summary()
         return
 
@@ -2027,20 +2091,22 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         question_id = int(question_id_raw)
         selected_option_index = int(selected_option_raw)
     except ValueError:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректные данные ответа."))
+        await _timed_telegram_api_call(latency, query.answer(cache_time=1), api_kind="callback_ack")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректные данные ответа."), api_kind="message_edit")
         latency.summary()
         return
 
     processing_key = f"answer:{session_id}:{question_id}"
     if not _mark_callback_processing(context, processing_key):
-        await _timed_telegram_api_call(latency, query.answer("Ответ уже обрабатывается…", cache_time=1))
+        _mark_repeated_tap(latency)
+        await _timed_telegram_api_call(latency, query.answer("Ответ уже обрабатывается…", cache_time=1), api_kind="callback_ack")
         latency.summary()
         return
     try:
-        await _timed_telegram_api_call(latency, query.answer(cache_time=1))
+        await _timed_telegram_api_call(latency, query.answer(cache_time=1), api_kind="callback_ack")
         tg_user = update.effective_user
         if tg_user is None:
-            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."), api_kind="message_edit")
             latency.summary()
             return
 
@@ -2084,39 +2150,42 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         result = await _run_db_task(_handle_answer_db)
         latency.add_db(db_started_at)
         if result["status"] == "session_missing":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Сессия уже завершена или не найдена."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Сессия уже завершена или не найдена."), api_kind="message_edit")
             latency.summary()
             return
         if result["status"] == "forbidden":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."), api_kind="message_edit")
             latency.summary()
             return
         if result["status"] == "invalid_question":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос не относится к текущей сессии."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос не относится к текущей сессии."), api_kind="message_edit")
             latency.summary()
             return
         if result["status"] == "stale_question":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше»."))
+            _mark_stale_callback(latency)
+            await _timed_telegram_api_call(latency, query.edit_message_text("Этот вопрос уже неактуален. Нажмите «Дальше»."), api_kind="message_edit")
             latency.summary()
             return
         if result["status"] == "stale_finished":
             finalized = result["finalized"]
             if finalized is None:
-                await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."))
+                await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."), api_kind="message_edit")
                 latency.summary()
                 return
             await show_finished_quiz_message(query, session_id=session_id, score=int(finalized["score"]), total_questions=int(finalized["total_questions"]), latency=latency)
+            latency.summary()
             return
         if result["status"] == "invalid_option":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Выбран некорректный вариант ответа."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Выбран некорректный вариант ответа."), api_kind="message_edit")
             latency.summary()
             return
         if result["status"] == "duplicate":
-            await _timed_telegram_api_call(latency, query.edit_message_text("На этот вопрос уже дан ответ."))
+            _mark_repeated_tap(latency)
+            await _timed_telegram_api_call(latency, query.edit_message_text("На этот вопрос уже дан ответ."), api_kind="message_edit")
             latency.summary()
             return
         if result["status"] != "accepted":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины."), api_kind="message_edit")
             latency.summary()
             return
 
@@ -2145,7 +2214,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         markup = InlineKeyboardMarkup(
             [[InlineKeyboardButton(f"Дальше → {next_number}/{result['total_questions']}", callback_data=f"next:{session_id}")]]
         )
-        await _timed_telegram_api_call(latency, query.edit_message_text(message, reply_markup=markup, parse_mode="HTML"))
+        await _timed_telegram_api_call(latency, query.edit_message_text(message, reply_markup=markup, parse_mode="HTML"), api_kind="message_edit")
         latency.summary()
     finally:
         _unmark_callback_processing(context, processing_key)
@@ -2169,21 +2238,23 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         session_id = int(data.split(":", 1)[1])
         latency.session_id = session_id
     except ValueError:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректные данные кнопки «Дальше»."))
+        await _timed_telegram_api_call(latency, query.answer(cache_time=1), api_kind="callback_ack")
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректные данные кнопки «Дальше»."), api_kind="message_edit")
         latency.summary()
         return
 
     processing_key = f"next:{session_id}"
     if not _mark_callback_processing(context, processing_key):
-        await _timed_telegram_api_call(latency, query.answer("Переход уже выполняется…", cache_time=1))
+        _mark_repeated_tap(latency)
+        await _timed_telegram_api_call(latency, query.answer("Переход уже выполняется…", cache_time=1), api_kind="callback_ack")
         latency.summary()
         return
 
     try:
-        await _timed_telegram_api_call(latency, query.answer(cache_time=1))
+        await _timed_telegram_api_call(latency, query.answer(cache_time=1), api_kind="callback_ack")
         tg_user = update.effective_user
         if tg_user is None:
-            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."), api_kind="message_edit")
             latency.summary()
             return
 
@@ -2203,7 +2274,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         next_state = await _run_db_task(_load_next_state)
         latency.add_db(db_started_at)
         if next_state["status"] == "missing":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Сессия не найдена."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Сессия не найдена."), api_kind="message_edit")
             latency.summary()
             return
         if next_state["status"] == "finished":
@@ -2212,14 +2283,22 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 session_id=session_id,
                 score=next_state["score"],
                 total_questions=next_state["total_questions"],
+                latency=latency,
             )
+            latency.summary()
             return
         if next_state["status"] == "forbidden":
-            await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Эта сессия вам не принадлежит."), api_kind="message_edit")
             latency.summary()
             return
 
-        await send_current_question(query, settings, session_id, latency=latency)
+        await send_current_question(
+            query,
+            settings,
+            session_id,
+            latency=latency,
+            send_as_new_message=getattr(settings, "classic_quiz_send_next_as_new_message", False),
+        )
         latency.summary()
     finally:
         _unmark_callback_processing(context, processing_key)
@@ -2241,7 +2320,7 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
     if data == "readingmode:menu":
         tg_user = update.effective_user
         if tg_user is None:
-            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+            await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."), api_kind="message_edit")
             latency.summary()
             return
 
@@ -2279,7 +2358,7 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
 
     tg_user = update.effective_user
     if tg_user is None:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."))
+        await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось определить пользователя."), api_kind="message_edit")
         latency.summary()
         return
 
