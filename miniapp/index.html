@@ -138,6 +138,12 @@
         color: #fff;
         font-weight: 700;
       }
+      .telemetry-debug {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.82em;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
@@ -146,6 +152,7 @@
     <div id="frontend_marker" class="meta" hidden></div>
     <div id="runner_state" class="note"></div>
     <div id="api_diag" class="note" hidden></div>
+    <div id="telemetry_debug" class="note telemetry-debug" hidden></div>
     <div id="err" class="err"></div>
     <div id="question_view" hidden></div>
     <div id="setup_warning" class="warn" hidden></div>
@@ -196,6 +203,7 @@
       const setupWarning = document.getElementById('setup_warning');
       const runnerState = document.getElementById('runner_state');
       const apiDiag = document.getElementById('api_diag');
+      const telemetryDebug = document.getElementById('telemetry_debug');
       const frontendMarker = document.getElementById('frontend_marker');
       const tg = window.Telegram?.WebApp;
 
@@ -287,6 +295,7 @@
         answerPhases: [],
         setupPhases: [],
       };
+      const telemetryRows = [];
       const setupOptionsCache = {
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
       };
@@ -332,6 +341,7 @@
       }
 
       function renderApiDiagnostics() {
+        renderTelemetryDebug();
         if (!debugMode) {
           apiDiag.hidden = true;
           return;
@@ -365,8 +375,91 @@
         apiDiagState[key] = [...apiDiagState[key].slice(-19), entry];
       }
 
+      function perfNowMs() {
+        return Math.round((window.performance?.now?.() || Date.now()) * 10) / 10;
+      }
+
+      function safeDuration(end, start) {
+        if (typeof end !== 'number' || typeof start !== 'number') return '-';
+        return String(Math.max(0, Math.round(end - start)));
+      }
+
       function buildMiniappRequestId() {
         return `rq_${Math.random().toString(36).slice(2, 10)}`;
+      }
+
+      function startTelemetry(action, endpoint, requestId = buildMiniappRequestId()) {
+        const row = {
+          action,
+          endpoint,
+          request_id: requestId,
+          status: 'started',
+          http_code: '',
+          marks: { 'tap/action_start': perfNowMs() },
+        };
+        telemetryRows.unshift(row);
+        telemetryRows.splice(8);
+        renderTelemetryDebug();
+        return row;
+      }
+
+      function markTelemetry(row, phase, extras = {}) {
+        if (!row) return;
+        row.marks[phase] = perfNowMs();
+        if (extras.request_id) row.request_id = String(extras.request_id).slice(0, 64);
+        if (extras.status) row.status = String(extras.status).slice(0, 40);
+        if (extras.http_code !== undefined && extras.http_code !== null) row.http_code = String(extras.http_code).slice(0, 8);
+        renderTelemetryDebug();
+        if (phase === 'action_done' && debugMode) {
+          console.info('miniapp_client_telemetry', buildTelemetrySummary(row));
+        }
+      }
+
+      function buildTelemetrySummary(row) {
+        const marks = row?.marks || {};
+        return {
+          action: row.action,
+          endpoint: row.endpoint,
+          request_id: row.request_id,
+          status: row.status || '-',
+          http_code: row.http_code || '-',
+          pre_request_ms: safeDuration(marks.request_start, marks['tap/action_start']),
+          request_ms: safeDuration(marks.response_received, marks.request_start),
+          parse_ms: safeDuration(marks.json_parsed, marks.response_received),
+          render_ms: safeDuration(marks.render_done, marks.render_start),
+          total_ms: safeDuration(marks.action_done, marks['tap/action_start']),
+        };
+      }
+
+      function renderTelemetryDebug() {
+        if (!debugMode) {
+          telemetryDebug.hidden = true;
+          return;
+        }
+        telemetryDebug.hidden = false;
+        const lines = ['Client telemetry (last actions): action request_id request_ms parse_ms render_ms total_ms status'];
+        telemetryRows.slice(0, 6).forEach((row) => {
+          const s = buildTelemetrySummary(row);
+          lines.push(`${s.action} ${s.request_id || '-'} req=${s.request_ms} parse=${s.parse_ms} render=${s.render_ms} total=${s.total_ms} status=${s.status}/${s.http_code}`);
+        });
+        telemetryDebug.textContent = lines.join('\n');
+      }
+
+      function withMiniappRequestId(headers = {}, requestId = '') {
+        const result = { ...headers };
+        if (requestId && !result['X-Miniapp-Request-Id']) result['X-Miniapp-Request-Id'] = requestId;
+        return result;
+      }
+
+      async function fetchJsonWithTelemetry(url, options = {}, timeoutMs = 9000, telemetry = null) {
+        const requestId = telemetry?.request_id || buildMiniappRequestId();
+        markTelemetry(telemetry, 'request_start', { request_id: requestId, status: 'requesting' });
+        const headers = withMiniappRequestId(options.headers || {}, requestId);
+        const resp = await apiFetch(url, { ...options, headers }, timeoutMs);
+        markTelemetry(telemetry, 'response_received', { http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
+        const data = await resp.json();
+        markTelemetry(telemetry, 'json_parsed', { status: resp.ok ? 'json_ok' : 'json_error' });
+        return { resp, data, requestId };
       }
 
       function showLoadError() {
@@ -512,19 +605,24 @@
           if (apiBase && tg?.initData) {
             runnerState.textContent = 'Загрузка параметров новой викторины...';
             try {
-              const resp = await apiFetch(`${apiBase}/miniapp/setup-options`, {
-                headers: { Authorization: `tma ${tg.initData}` },
-              });
-              const data = await resp.json();
+              const telemetry = startTelemetry('setup_options', '/miniapp/setup-options');
+              const { resp, data } = await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`, {
+                headers: withMiniappRequestId({ Authorization: `tma ${tg.initData}` }, buildMiniappRequestId()),
+              }, 9000, telemetry);
               const categories = Array.isArray(data?.setup_options?.categories) ? data.setup_options.categories : [];
               if (resp.ok && data?.ok === true && categories.length > 0) {
                 setupOptionsCache.categories = categories;
                 ctx.categories = categories;
+                markTelemetry(telemetry, 'render_start', { status: 'rendering' });
                 if (typeof window.__miniappRenderSetupInPlace === 'function' && window.__miniappRenderSetupInPlace()) {
                   setSetupStatus('ready_for_submit');
+                  markTelemetry(telemetry, 'render_done', { status: 'ok' });
+                  markTelemetry(telemetry, 'action_done', { status: 'ok' });
                   return;
                 }
+                markTelemetry(telemetry, 'render_done', { status: 'no_render' });
               }
+              markTelemetry(telemetry, 'action_done', { status: resp.ok ? 'no_options' : 'api_error' });
             } catch (_) {}
           }
           const safeSetupUrl = getSafeSetupUrl();
@@ -724,8 +822,12 @@
             if (retryOptions.onHedgeTimerStarted) retryOptions.onHedgeTimerStarted(attempt, requestId);
             let raceSettled = false;
             const attemptPromise = (async () => {
-              const resp = await apiFetch(url, optionsFactory(attempt, requestId), timeoutMs);
+              if (retryOptions.onRequestStart) retryOptions.onRequestStart(attempt, requestId);
+              const attemptOptions = optionsFactory(attempt, requestId);
+              const resp = await apiFetch(url, { ...attemptOptions, headers: withMiniappRequestId(attemptOptions.headers || {}, requestId) }, timeoutMs);
+              if (retryOptions.onResponseReceived) retryOptions.onResponseReceived(attempt, requestId, resp);
               const data = await resp.json();
+              if (retryOptions.onJsonParsed) retryOptions.onJsonParsed(attempt, requestId, resp);
               if (!resp.ok) {
                 const nonOk = new Error('api_non_ok');
                 nonOk.errorKind = getApiErrorKind(resp, data);
@@ -744,8 +846,12 @@
               const nextRequestId = retryOptions.requestIdFactory ? retryOptions.requestIdFactory(nextAttempt) : '';
               if (retryOptions.onHedgeRetryStarted) retryOptions.onHedgeRetryStarted(nextAttempt, nextRequestId);
               if (raceSettled) return null;
-              const resp = await apiFetch(url, optionsFactory(nextAttempt, nextRequestId), timeoutMs);
+              if (retryOptions.onRequestStart) retryOptions.onRequestStart(nextAttempt, nextRequestId);
+              const nextOptions = optionsFactory(nextAttempt, nextRequestId);
+              const resp = await apiFetch(url, { ...nextOptions, headers: withMiniappRequestId(nextOptions.headers || {}, nextRequestId) }, timeoutMs);
+              if (retryOptions.onResponseReceived) retryOptions.onResponseReceived(nextAttempt, nextRequestId, resp);
               const data = await resp.json();
+              if (retryOptions.onJsonParsed) retryOptions.onJsonParsed(nextAttempt, nextRequestId, resp);
               if (!resp.ok) {
                 const nonOk = new Error('api_non_ok');
                 nonOk.errorKind = getApiErrorKind(resp, data);
@@ -786,10 +892,14 @@
             }
           }
           try {
-            const resp = await apiFetch(url, optionsFactory(attempt, requestId), timeoutMs);
+            if (retryOptions.onRequestStart) retryOptions.onRequestStart(attempt, requestId);
+            const attemptOptions = optionsFactory(attempt, requestId);
+            const resp = await apiFetch(url, { ...attemptOptions, headers: withMiniappRequestId(attemptOptions.headers || {}, requestId) }, timeoutMs);
+            if (retryOptions.onResponseReceived) retryOptions.onResponseReceived(attempt, requestId, resp);
             let data = null;
             try {
               data = await resp.json();
+              if (retryOptions.onJsonParsed) retryOptions.onJsonParsed(attempt, requestId, resp);
             } catch {
               const jsonError = new Error('invalid_json');
               jsonError.errorKind = 'invalid_json';
@@ -838,6 +948,7 @@
         clearAnswerFallbackActions();
         const startedAt = Date.now();
         const requestBaseId = buildMiniappRequestId();
+        const telemetry = startTelemetry('answer', '/miniapp/answer', `${requestBaseId}_a1`);
         apiDiagState.answerRequestId = `${requestBaseId}_a1`;
         apiDiagState.answerPhase = 'preparing';
         apiDiagState.answerFinalPhase = 'preparing';
@@ -899,8 +1010,10 @@
 
         if (!apiBase) {
           setFallbackStatus('Используется резервная отправка ответа через Telegram.', 'skipped_missing_api_base');
+          markTelemetry(telemetry, 'action_done', { status: 'skipped_missing_api_base' });
         } else if (!initData) {
           setFallbackStatus('Используется резервная отправка ответа через Telegram.', 'skipped_missing_init_data');
+          markTelemetry(telemetry, 'action_done', { status: 'skipped_missing_init_data' });
         } else {
           apiDiagState.attemptStatus = 'api_attempted';
           apiDiagState.answerPhase = 'fetch_started';
@@ -928,6 +1041,15 @@
               {
                 retries: 2,
                 requestIdFactory: (attempt) => `${requestBaseId}_a${attempt}`,
+                onRequestStart: (attempt, requestId) => {
+                  markTelemetry(telemetry, 'request_start', { request_id: requestId, status: attempt > 1 ? 'retrying' : 'requesting' });
+                },
+                onResponseReceived: (attempt, requestId, resp) => {
+                  markTelemetry(telemetry, 'response_received', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
+                },
+                onJsonParsed: (attempt, requestId, resp) => {
+                  markTelemetry(telemetry, 'json_parsed', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'json_ok' : 'json_error' });
+                },
                 onRetryScheduled: (attempt, retries, errorKind, requestId) => {
                   if (!isAttemptCurrent(attempt)) return;
                   apiDiagState.answerRetryCount = attempt;
@@ -951,7 +1073,7 @@
                   renderApiDiagnostics();
                   runnerState.textContent = 'Проверяю, был ли ответ принят...';
                   try {
-                    const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${initData}` } });
+                    const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: withMiniappRequestId({ Authorization: `tma ${initData}` }, buildMiniappRequestId()) });
                     const stateData = await stateResp.json();
                     if (!(stateResp.ok && stateData?.ok && stateData?.runner_state)) {
                       apiDiagState.answerPhase = 'pre_retry_state_resync_failed';
@@ -1019,7 +1141,7 @@
                   renderApiDiagnostics();
                   runnerState.textContent = 'Проверяю, был ли ответ принят...';
                   try {
-                    const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${initData}` } });
+                    const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: withMiniappRequestId({ Authorization: `tma ${initData}` }, buildMiniappRequestId()) });
                     const stateData = await stateResp.json();
                     if (stateResp.ok && stateData?.ok && stateData?.runner_state
                       && didRunnerStateAdvanceForAnswer(sessionId, questionId, stateData.runner_state)) {
@@ -1062,6 +1184,7 @@
             apiDiagState.answerElapsedMs = Date.now() - startedAt;
             renderApiDiagnostics();
             try {
+              markTelemetry(telemetry, 'render_start', { request_id: answerResult.requestId, status: 'rendering' });
               if (hasCompleteFeedback(answerJson.feedback)) {
                 pushDiagPhase('answer', 'state_update_started', startedAt, { request_id: answerResult.requestId });
                 runnerState.textContent = 'Ответ принят.';
@@ -1086,6 +1209,8 @@
               pushDiagPhase('answer', 'state_update_applied', startedAt, { request_id: answerResult.requestId });
               requestAnimationFrame(() => {
                 pushDiagPhase('answer', 'ui_render_mark', startedAt, { request_id: answerResult.requestId });
+                markTelemetry(telemetry, 'render_done', { request_id: answerResult.requestId, status: 'rendered' });
+                markTelemetry(telemetry, 'action_done', { request_id: answerResult.requestId, status: 'ok', http_code: apiDiagState.answerStatus });
                 renderApiDiagnostics();
               });
               answerSubmitInFlight = false;
@@ -1095,6 +1220,7 @@
               apiDiagState.answerElapsedMs = Date.now() - startedAt;
               renderApiDiagnostics();
               runnerState.textContent = 'Не удалось обновить интерфейс после ответа. Попробуйте снова.';
+              markTelemetry(telemetry, 'action_done', { status: 'ui_render_failed' });
               enableButtons();
               answerSubmitInFlight = false;
               return;
@@ -1108,17 +1234,21 @@
             apiDiagState.answerFinalPhase = errorKind;
             apiDiagState.answerRetryCount = Number.isInteger(e?.meta?.attempt) ? e.meta.attempt - 1 : apiDiagState.answerRetryCount;
             pushDiagPhase('answer', 'retry_exhausted', startedAt, { request_id: apiDiagState.answerRequestId, error_code: errorKind });
+            markTelemetry(telemetry, 'action_done', { request_id: apiDiagState.answerRequestId, status: errorKind });
             renderApiDiagnostics();
             if (apiBase && initData) {
               apiDiagState.answerPhase = 'state_resync_attempted';
               renderApiDiagnostics();
               try {
-                const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${initData}` } });
+                const stateResp = await apiFetch(`${apiBase}/miniapp/state`, { headers: withMiniappRequestId({ Authorization: `tma ${initData}` }, buildMiniappRequestId()) });
                 const stateData = await stateResp.json();
                 if (stateResp.ok && stateData?.ok && stateData?.runner_state) {
                   apiDiagState.answerPhase = 'state_resync_success';
                   renderApiDiagnostics();
+                  markTelemetry(telemetry, 'render_start', { status: 'resync_rendering' });
                   renderRunnerState(stateData.runner_state, { preferLaunchCompact: false });
+                  markTelemetry(telemetry, 'render_done', { status: 'resynced' });
+                  markTelemetry(telemetry, 'action_done', { status: 'resynced', http_code: stateResp.status });
                   answerSubmitInFlight = false;
                   return;
                 }
@@ -1135,6 +1265,7 @@
           }
         }
         runnerState.textContent = 'Не удалось отправить ответ. Повторите попытку или откройте /ui снова.';
+        markTelemetry(telemetry, 'action_done', { status: 'fallback_failed' });
         enableButtons();
         answerSubmitInFlight = false;
       }
@@ -1316,9 +1447,11 @@
           go.disabled = true;
           runnerState.textContent = 'Запуск викторины...';
           err.textContent = '';
+          let telemetry = null;
           try {
             apiDiagState.setupTransport = 'simple_body';
             const requestBaseId = buildMiniappRequestId();
+            telemetry = startTelemetry('setup', '/miniapp/setup', `${requestBaseId}_a1`);
             const setupStartedAt = Date.now();
             apiDiagState.setupRetryCount = 0;
             apiDiagState.setupAttempt = 1;
@@ -1336,6 +1469,15 @@
               {
                 retries: 1,
                 requestIdFactory: (attempt) => `${requestBaseId}_a${attempt}`,
+                onRequestStart: (attempt, requestId) => {
+                  markTelemetry(telemetry, 'request_start', { request_id: requestId, status: attempt > 1 ? 'retrying' : 'requesting' });
+                },
+                onResponseReceived: (attempt, requestId, resp) => {
+                  markTelemetry(telemetry, 'response_received', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'response_ok' : 'response_error' });
+                },
+                onJsonParsed: (attempt, requestId, resp) => {
+                  markTelemetry(telemetry, 'json_parsed', { request_id: requestId, http_code: resp.status, status: resp.ok ? 'json_ok' : 'json_error' });
+                },
                 onRetryScheduled: (attempt, retries, errorKind, requestId) => {
                   apiDiagState.setupRetryCount = attempt;
                   apiDiagState.setupAttempt = attempt;
@@ -1362,6 +1504,7 @@
             if (resp.ok && data?.ok && data?.runner_state) {
               setSetupStatus('api_success');
               pushDiagPhase('setup', 'state_update_started', setupStartedAt, { request_id: apiDiagState.setupRequestId });
+              markTelemetry(telemetry, 'render_start', { request_id: apiDiagState.setupRequestId, status: 'rendering' });
               form.hidden = true;
               setupWarning.hidden = true;
               err.textContent = '';
@@ -1369,17 +1512,21 @@
               pushDiagPhase('setup', 'state_update_applied', setupStartedAt, { request_id: apiDiagState.setupRequestId });
               requestAnimationFrame(() => {
                 pushDiagPhase('setup', 'ui_render_mark', setupStartedAt, { request_id: apiDiagState.setupRequestId });
+                markTelemetry(telemetry, 'render_done', { request_id: apiDiagState.setupRequestId, status: 'rendered' });
+                markTelemetry(telemetry, 'action_done', { request_id: apiDiagState.setupRequestId, status: 'ok', http_code: apiDiagState.setupStatusCode });
                 renderApiDiagnostics();
               });
               setupSubmitInFlight = false;
               return;
             }
             setSetupStatus('api_failed', String(resp.status || 'non_ok'));
+            markTelemetry(telemetry, 'action_done', { request_id: apiDiagState.setupRequestId, status: 'api_failed', http_code: resp.status });
             err.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
             runnerState.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
           } catch (e) {
             const errorKind = e?.meta?.errorKind || e?.cause?.errorKind || 'network_error';
             apiDiagState.setupFinalPhase = 'retry_exhausted';
+            markTelemetry(telemetry, 'action_done', { request_id: apiDiagState.setupRequestId, status: errorKind });
             setSetupStatus(errorKind === 'timeout' ? 'api_timeout' : 'api_failed', errorKind);
             err.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
             runnerState.textContent = 'Не удалось начать викторину. Попробуйте ещё раз.';
@@ -1401,12 +1548,20 @@
         renderRunnerState(rs, { preferLaunchCompact: true });
         if (apiBase && tg?.initData && (!setupMode || hydrateOnSetup)) {
           runnerState.textContent = 'Обновляю викторину...';
+          const telemetry = startTelemetry('state', '/miniapp/state');
           try {
-            const resp = await apiFetch(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${tg.initData}` } });
-            const data = await resp.json();
-            if (resp.ok && data?.ok) renderRunnerState(data.runner_state, { preferLaunchCompact: false });
-            else runnerState.textContent = 'Не удалось обновить состояние. Показываю последний доступный экран.';
+            const { resp, data } = await fetchJsonWithTelemetry(`${apiBase}/miniapp/state`, { headers: { Authorization: `tma ${tg.initData}` } }, 9000, telemetry);
+            if (resp.ok && data?.ok) {
+              markTelemetry(telemetry, 'render_start', { status: 'rendering' });
+              renderRunnerState(data.runner_state, { preferLaunchCompact: false });
+              markTelemetry(telemetry, 'render_done', { status: 'rendered' });
+              markTelemetry(telemetry, 'action_done', { status: 'ok', http_code: resp.status });
+            } else {
+              markTelemetry(telemetry, 'action_done', { status: 'api_failed', http_code: resp.status });
+              runnerState.textContent = 'Не удалось обновить состояние. Показываю последний доступный экран.';
+            }
           } catch (e) {
+            markTelemetry(telemetry, 'action_done', { status: e?.name === 'AbortError' ? 'timeout' : 'fetch_failed' });
             runnerState.textContent = e?.name === 'AbortError'
               ? 'Обновление заняло слишком много времени. Показываю последний доступный экран.'
               : 'Проблема с сетью. Показываю последний доступный экран.';
