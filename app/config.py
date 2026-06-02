@@ -32,6 +32,7 @@ class Settings:
     telegram_webhook_port: int | None
     telegram_webhook_secret_token: str | None
     classic_quiz_send_next_as_new_message: bool
+    classic_quiz_reply_keyboard_mode: bool
 
 
 def _parse_admin_telegram_ids(raw_ids: str) -> frozenset[int]:
@@ -86,6 +87,9 @@ def load_settings() -> Settings:
     classic_quiz_send_next_as_new_message = os.getenv(
         "CLASSIC_QUIZ_SEND_NEXT_AS_NEW_MESSAGE", "false"
     ).strip().lower() in {"1", "true", "yes", "on"}
+    classic_quiz_reply_keyboard_mode = os.getenv(
+        "CLASSIC_QUIZ_REPLY_KEYBOARD_MODE", "false"
+    ).strip().lower() in {"1", "true", "yes", "on"}
 
     if telegram_update_mode == "webhook":
         missing = []
@@ -125,5 +129,6 @@ def load_settings() -> Settings:
         telegram_webhook_port=telegram_webhook_port,
         telegram_webhook_secret_token=telegram_webhook_secret_token,
         classic_quiz_send_next_as_new_message=classic_quiz_send_next_as_new_message,
+        classic_quiz_reply_keyboard_mode=classic_quiz_reply_keyboard_mode,
     )
 logger = logging.getLogger(__name__)

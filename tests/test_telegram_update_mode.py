@@ -81,6 +81,17 @@ class TelegramUpdateModeSettingsTests(unittest.TestCase):
             settings = load_settings()
         self.assertTrue(settings.classic_quiz_send_next_as_new_message)
 
+    def test_classic_quiz_reply_keyboard_mode_defaults_false_and_parses_true(self):
+        with patch.dict(os.environ, self._base_env(), clear=True):
+            settings = load_settings()
+        self.assertFalse(settings.classic_quiz_reply_keyboard_mode)
+
+        env = self._base_env()
+        env["CLASSIC_QUIZ_REPLY_KEYBOARD_MODE"] = "true"
+        with patch.dict(os.environ, env, clear=True):
+            settings = load_settings()
+        self.assertTrue(settings.classic_quiz_reply_keyboard_mode)
+
     def test_invalid_update_mode_is_rejected(self):
         env = self._base_env()
         env["TELEGRAM_UPDATE_MODE"] = "invalid"

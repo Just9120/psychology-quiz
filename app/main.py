@@ -86,6 +86,8 @@ HELP_TEXT = (
 MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
 READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
+CLASSIC_REPLY_NEXT_TEXT = "Далее"
+CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
 READING_MODE_LABELS = {
     "normal": "Обычный",
     "bionic": "Бионическое чтение",
@@ -437,17 +439,76 @@ def build_reading_mode_keyboard() -> InlineKeyboardMarkup:
     )
 
 
+def build_classic_answer_reply_keyboard(options) -> ReplyKeyboardMarkup:
+    buttons = [str(position) for position, _ in enumerate(options, start=1)]
+    keyboard = [buttons[index : index + 2] for index in range(0, len(buttons), 2)]
+    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=False)
+
+
+def build_classic_next_reply_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup([[CLASSIC_REPLY_NEXT_TEXT]], resize_keyboard=True, one_time_keyboard=False)
+
+
+def _classic_reply_mode_enabled(settings) -> bool:
+    return bool(getattr(settings, "classic_quiz_reply_keyboard_mode", False))
+
+
+def _set_classic_reply_state(context: ContextTypes.DEFAULT_TYPE | None, state: dict | None) -> None:
+    if context is None:
+        return
+    if state is None:
+        context.user_data.pop(CLASSIC_REPLY_STATE_KEY, None)
+        return
+    context.user_data[CLASSIC_REPLY_STATE_KEY] = state
+
+
+def parse_classic_reply_answer_number(text: str, option_count: int) -> int | None:
+    cleaned = text.strip()
+    if not cleaned.isdigit():
+        return None
+    answer_number = int(cleaned)
+    if not 1 <= answer_number <= option_count:
+        return None
+    return answer_number - 1
+
+
+def _safe_classic_text_log_fields(*, telegram_user_id: int | None, session_id: int | None = None, question_id: int | None = None, elapsed_ms: int | None = None, status: str = "ok") -> str:
+    fields = []
+    if telegram_user_id is not None:
+        fields.append(f"telegram_user_id={telegram_user_id}")
+    if session_id is not None:
+        fields.append(f"session_id={session_id}")
+    if question_id is not None:
+        fields.append(f"question_id={question_id}")
+    if elapsed_ms is not None:
+        fields.append(f"elapsed_ms={elapsed_ms}")
+    fields.append(f"status={status if re.fullmatch(r'[A-Za-z0-9_]{1,32}', status) else 'unknown'}")
+    return " ".join(fields)
+
+
+def _log_classic_text_event(event_name: str, **fields) -> None:
+    if event_name in {
+        "classic_text_answer_ingress",
+        "classic_text_answer_latency",
+        "classic_text_next_ingress",
+        "classic_text_next_latency",
+    }:
+        logger.info("%s %s", event_name, _safe_classic_text_log_fields(**fields))
+
+
 def build_question_text_with_options(
     order_index: int,
     total_questions: int,
     question_text: str,
     options,
     reading_mode: str,
+    *,
+    numeric_labels: bool = False,
 ) -> str:
     formatted_options = "\n".join(
-        f"{option_index_to_label(int(opt['option_index']))}. "
+        f"{position if numeric_labels else option_index_to_label(int(opt['option_index']))}. "
         f"{render_reading_mode_text(str(opt['option_text']), reading_mode)}"
-        for opt in options
+        for position, opt in enumerate(options, start=1)
     )
     return (
         f"<b>Вопрос {order_index} из {total_questions}</b>\n\n"
@@ -1086,6 +1147,85 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
 
 
 
+async def send_current_question_to_message(message, settings, session_id: int, context: ContextTypes.DEFAULT_TYPE, latency: _HandlerLatency | None = None) -> bool:
+    finalize_payload = None
+    db_started_at = time.perf_counter()
+    with get_connection(settings.db_path) as conn:
+        current = get_current_unanswered_question(conn, session_id)
+        if current is None:
+            finalized = finalize_quiz_session(conn, session_id)
+            if finalized is not None:
+                finalize_payload = {
+                    "score": int(finalized["score"]),
+                    "total_questions": int(finalized["total_questions"]),
+                }
+            options = []
+            reading_mode = "normal"
+            question_id = None
+        else:
+            question_id = int(current["question_id"])
+            options = get_question_options(conn, question_id)
+            session = get_quiz_session(conn, session_id)
+            reading_mode = "normal"
+            if session is not None:
+                reading_mode = get_user_reading_mode(conn, int(session["user_id"]))
+    if latency is not None:
+        latency.add_db(db_started_at)
+
+    if current is None:
+        _set_classic_reply_state(context, None)
+        if finalize_payload is None:
+            await _timed_telegram_api_call(latency, message.reply_text("Не удалось завершить сессию."), api_kind="message_send")
+            return False
+        await _timed_telegram_api_call(
+            latency,
+            message.reply_text(
+                f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}\n\n"
+                "Чтобы запустить новую викторину, используйте /quiz.",
+                reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None,
+                parse_mode="HTML",
+            ),
+            api_kind="message_send",
+        )
+        return False
+
+    if not options:
+        _set_classic_reply_state(context, None)
+        await _timed_telegram_api_call(
+            latency,
+            message.reply_text(
+                "Для текущего вопроса не найдены варианты ответа. Сессия завершена.",
+                reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None,
+            ),
+            api_kind="message_send",
+        )
+        return False
+
+    render_started_at = time.perf_counter()
+    message_text = build_question_text_with_options(
+        order_index=int(current["order_index"]),
+        total_questions=int(current["total_questions"]),
+        question_text=str(current["question_text"]),
+        options=options,
+        reading_mode=reading_mode,
+        numeric_labels=True,
+    )
+    markup = build_classic_answer_reply_keyboard(options)
+    if latency is not None:
+        latency.add_render(render_started_at)
+    _set_classic_reply_state(
+        context,
+        {"status": "awaiting_answer", "session_id": session_id, "question_id": question_id},
+    )
+    await _timed_telegram_api_call(
+        latency,
+        message.reply_text(message_text, reply_markup=markup, parse_mode="HTML"),
+        api_kind="message_send",
+    )
+    return True
+
+
+
 def _parse_miniapp_answer_payload(payload: dict) -> tuple[int, int, int] | None:
     if payload.get("type") != "quiz_answer":
         return None
@@ -1438,6 +1578,7 @@ async def send_current_question(
     latency: _HandlerLatency | None = None,
     *,
     send_as_new_message: bool = False,
+    context: ContextTypes.DEFAULT_TYPE | None = None,
 ) -> bool:
     finalize_payload = None
     reading_mode = "normal"
@@ -1450,6 +1591,7 @@ async def send_current_question(
                 await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось завершить сессию."), api_kind="message_edit")
                 return False
 
+            _set_classic_reply_state(context, None)
             await show_finished_quiz_message(
                 query,
                 session_id=session_id,
@@ -1510,10 +1652,41 @@ async def send_current_question(
             question_text=str(current["question_text"]),
             options=options,
             reading_mode=reading_mode,
+            numeric_labels=_classic_reply_mode_enabled(settings),
     )
-    markup = InlineKeyboardMarkup(keyboard)
     if latency is not None:
         latency.add_render(render_started_at)
+    if _classic_reply_mode_enabled(settings):
+        markup = build_classic_answer_reply_keyboard(options)
+        _set_classic_reply_state(
+            context,
+            {
+                "status": "awaiting_answer",
+                "session_id": session_id,
+                "question_id": question_id,
+            },
+        )
+        if query.message is not None:
+            try:
+                await _timed_telegram_api_call(
+                    latency,
+                    query.edit_message_reply_markup(reply_markup=None),
+                    api_kind="message_edit",
+                )
+            except Exception:
+                logger.debug("Не удалось отключить inline-кнопки перед reply-keyboard вопросом.")
+            await _timed_telegram_api_call(
+                latency,
+                query.message.chat.send_message(
+                    message_text,
+                    reply_markup=markup,
+                    parse_mode="HTML",
+                ),
+                api_kind="message_send",
+            )
+            return True
+
+    markup = InlineKeyboardMarkup(keyboard)
     if send_as_new_message and query.message is not None:
         try:
             await _timed_telegram_api_call(
@@ -1610,7 +1783,7 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
         store_session_questions(conn, new_session_id, question_ids)
 
     await remove_main_menu_for_active_quiz(query, latency=latency)
-    await send_current_question(query, settings, new_session_id)
+    await send_current_question(query, settings, new_session_id, context=context)
 
 
 async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1762,7 +1935,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         return
 
     await remove_main_menu_for_active_quiz(query, latency=latency)
-    await send_current_question(query, settings, result["session_id"], latency=latency)
+    await send_current_question(query, settings, result["session_id"], latency=latency, context=context)
     latency.session_id = result["session_id"]
     latency.summary()
 
@@ -2045,7 +2218,7 @@ async def start_mix_quiz(
         return
 
     await remove_main_menu_for_active_quiz(query, latency=latency)
-    await send_current_question(query, settings, result["session_id"], latency=latency)
+    await send_current_question(query, settings, result["session_id"], latency=latency, context=context)
 
 
 
@@ -2062,6 +2235,277 @@ def _unmark_callback_processing(context: ContextTypes.DEFAULT_TYPE, key: str) ->
     in_progress = context.user_data.get("_callback_in_progress")
     if isinstance(in_progress, set):
         in_progress.discard(key)
+
+def _get_classic_reply_state(context: ContextTypes.DEFAULT_TYPE) -> dict:
+    state = context.user_data.get(CLASSIC_REPLY_STATE_KEY)
+    return state if isinstance(state, dict) else {}
+
+
+def _load_classic_text_answer_context(settings, tg_user, state: dict) -> dict:
+    if tg_user is None:
+        return {"status": "missing_user"}
+    if not _classic_reply_mode_enabled(settings):
+        return {"status": "disabled"}
+    if state.get("status") != "awaiting_answer":
+        return {"status": "not_awaiting_answer"}
+    try:
+        session_id = int(state.get("session_id"))
+        expected_question_id = int(state.get("question_id"))
+    except (TypeError, ValueError):
+        return {"status": "not_awaiting_answer"}
+
+    with get_connection(settings.db_path) as conn:
+        session = get_quiz_session(conn, session_id)
+        if session is None or str(session["status"]) != "in_progress":
+            return {"status": "session_missing", "session_id": session_id, "question_id": expected_question_id}
+        user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+        if int(session["user_id"]) != int(user_row["id"]):
+            return {"status": "forbidden", "session_id": session_id, "question_id": expected_question_id}
+        current = get_current_unanswered_question(conn, session_id)
+        if current is None:
+            return {"status": "no_current_question", "session_id": session_id, "question_id": expected_question_id}
+        question_id = int(current["question_id"])
+        if question_id != expected_question_id:
+            return {"status": "stale_question", "session_id": session_id, "question_id": expected_question_id}
+        options = get_question_options(conn, question_id)
+        return {"status": "ok", "session_id": session_id, "question_id": question_id, "options": options}
+
+
+def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, question_id: int, selected_option_index: int) -> dict:
+    with get_connection(settings.db_path) as conn:
+        session = get_quiz_session(conn, session_id)
+        if session is None or str(session["status"]) != "in_progress":
+            return {"status": "session_missing"}
+        user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+        if int(session["user_id"]) != int(user_row["id"]):
+            return {"status": "forbidden"}
+        current = get_current_unanswered_question(conn, session_id)
+        submission = submit_miniapp_answer_event(
+            conn,
+            session_id=session_id,
+            actor_user_id=int(user_row["id"]),
+            question_id=question_id,
+            selected_option_index=selected_option_index,
+        )
+        if submission.status == "stale_question" and submission.expected_question_id is None:
+            finalized = finalize_quiz_session(conn, session_id)
+            return {"status": "stale_finished", "finalized": finalized}
+        if submission.status != "accepted":
+            return {"status": submission.status}
+        answered_questions = get_answered_questions_count(conn, session_id)
+        total_questions = int(current["total_questions"])
+        is_last_question = answered_questions >= total_questions
+        finalized = finalize_quiz_session(conn, session_id) if is_last_question else None
+        return {
+            "status": "accepted",
+            "is_correct": bool(submission.is_correct),
+            "explanation": str(current["explanation"] or ""),
+            "answered_questions": answered_questions,
+            "total_questions": total_questions,
+            "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
+            "is_last_question": is_last_question,
+            "finalized": finalized,
+        }
+
+
+def _load_classic_text_next_state(settings, tg_user, state: dict) -> dict:
+    if tg_user is None:
+        return {"status": "missing_user"}
+    if not _classic_reply_mode_enabled(settings):
+        return {"status": "disabled"}
+    if state.get("status") != "awaiting_next":
+        return {"status": "not_awaiting_next"}
+    try:
+        session_id = int(state.get("session_id"))
+    except (TypeError, ValueError):
+        return {"status": "not_awaiting_next"}
+    with get_connection(settings.db_path) as conn:
+        session = get_quiz_session(conn, session_id)
+        if session is None:
+            return {"status": "missing", "session_id": session_id}
+        if str(session["status"]) == "finished":
+            return {"status": "finished", "session_id": session_id, "score": int(session["score"]), "total_questions": int(session["total_questions"])}
+        user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
+        if int(session["user_id"]) != int(user_row["id"]):
+            return {"status": "forbidden", "session_id": session_id}
+        return {"status": "ok", "session_id": session_id}
+
+
+async def classic_reply_text_answer_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    message = update.message
+    tg_user = update.effective_user
+    if message is None or message.text is None or tg_user is None:
+        return
+    settings = context.application.bot_data["settings"]
+    if not _classic_reply_mode_enabled(settings):
+        return
+
+    started_at = time.perf_counter()
+    state = _get_classic_reply_state(context)
+    context_result = await _run_db_task(lambda: _load_classic_text_answer_context(settings, tg_user, state))
+    session_id = context_result.get("session_id")
+    question_id = context_result.get("question_id")
+    if context_result["status"] != "ok":
+        return
+
+    _log_classic_text_event(
+        "classic_text_answer_ingress",
+        telegram_user_id=tg_user.id,
+        session_id=session_id,
+        question_id=question_id,
+        status="received",
+    )
+
+    options = context_result["options"]
+    option_position = parse_classic_reply_answer_number(message.text, len(options))
+    if option_position is None:
+        elapsed_ms = int((time.perf_counter() - started_at) * 1000)
+        await message.reply_text(f"Выберите вариант числом от 1 до {len(options)}.")
+        _log_classic_text_event(
+            "classic_text_answer_latency",
+            telegram_user_id=tg_user.id,
+            session_id=session_id,
+            question_id=question_id,
+            elapsed_ms=elapsed_ms,
+            status="invalid_input",
+        )
+        return
+
+    selected_option_index = int(options[option_position]["option_index"])
+    processing_key = f"answer:{session_id}:{question_id}"
+    if not _mark_callback_processing(context, processing_key):
+        elapsed_ms = int((time.perf_counter() - started_at) * 1000)
+        await message.reply_text("Ответ уже обрабатывается…")
+        _log_classic_text_event(
+            "classic_text_answer_latency",
+            telegram_user_id=tg_user.id,
+            session_id=session_id,
+            question_id=question_id,
+            elapsed_ms=elapsed_ms,
+            status="ignored_repeated_input",
+        )
+        return
+
+    latency = _HandlerLatency(handler="classic_reply_text_answer", telegram_user_id=tg_user.id, session_id=session_id)
+    latency.start()
+    try:
+        db_started_at = time.perf_counter()
+        result = await _run_db_task(
+            lambda: _handle_classic_text_answer_db(
+                settings,
+                tg_user,
+                session_id=session_id,
+                question_id=question_id,
+                selected_option_index=selected_option_index,
+            )
+        )
+        latency.add_db(db_started_at)
+
+        status = result["status"]
+        if status == "accepted":
+            is_correct = result["is_correct"]
+            result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
+            rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
+            if result["is_last_question"]:
+                finalized = result["finalized"]
+                _set_classic_reply_state(context, None)
+                await _timed_telegram_api_call(
+                    latency,
+                    message.reply_text(
+                        f"{result_line}\n\n"
+                        f"<b>Пояснение:</b> {rendered_explanation}\n\n"
+                        f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}\n\n"
+                        "Чтобы запустить новую викторину, используйте /quiz.",
+                        reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None,
+                        parse_mode="HTML",
+                    ),
+                    api_kind="message_send",
+                )
+            else:
+                next_number = result["answered_questions"] + 1
+                _set_classic_reply_state(context, {"status": "awaiting_next", "session_id": session_id})
+                await _timed_telegram_api_call(
+                    latency,
+                    message.reply_text(
+                        f"{result_line}\n\n"
+                        f"<b>Пояснение:</b> {rendered_explanation}\n\n"
+                        f"<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']} отвечено\n\n"
+                        f"Нажмите «{CLASSIC_REPLY_NEXT_TEXT}», чтобы перейти к вопросу {next_number}/{result['total_questions']}.",
+                        reply_markup=build_classic_next_reply_keyboard(),
+                        parse_mode="HTML",
+                    ),
+                    api_kind="message_send",
+                )
+        elif status in {"stale_question", "duplicate"}:
+            _set_classic_reply_state(context, {"status": "awaiting_next", "session_id": session_id})
+            await _timed_telegram_api_call(
+                latency,
+                message.reply_text("На этот вопрос уже дан ответ. Нажмите «Далее».", reply_markup=build_classic_next_reply_keyboard()),
+                api_kind="message_send",
+            )
+        else:
+            await _timed_telegram_api_call(latency, message.reply_text("Не удалось обработать ответ. Используйте /quiz, чтобы начать заново."), api_kind="message_send")
+
+        elapsed_ms = int((time.perf_counter() - started_at) * 1000)
+        _log_classic_text_event(
+            "classic_text_answer_latency",
+            telegram_user_id=tg_user.id,
+            session_id=session_id,
+            question_id=question_id,
+            elapsed_ms=elapsed_ms,
+            status=status,
+        )
+        latency.set_status(status)
+        latency.summary()
+    finally:
+        _unmark_callback_processing(context, processing_key)
+
+
+async def classic_reply_text_next_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    message = update.message
+    tg_user = update.effective_user
+    if message is None or message.text is None or tg_user is None:
+        return
+    settings = context.application.bot_data["settings"]
+    if not _classic_reply_mode_enabled(settings) or message.text.strip().lower() != CLASSIC_REPLY_NEXT_TEXT.lower():
+        return
+
+    started_at = time.perf_counter()
+    state = _get_classic_reply_state(context)
+    next_state = await _run_db_task(lambda: _load_classic_text_next_state(settings, tg_user, state))
+    if next_state["status"] != "ok":
+        return
+    session_id = int(next_state["session_id"])
+    _log_classic_text_event("classic_text_next_ingress", telegram_user_id=tg_user.id, session_id=session_id, status="received")
+
+    processing_key = f"next:{session_id}"
+    if not _mark_callback_processing(context, processing_key):
+        await message.reply_text("Переход уже выполняется…")
+        _log_classic_text_event(
+            "classic_text_next_latency",
+            telegram_user_id=tg_user.id,
+            session_id=session_id,
+            elapsed_ms=int((time.perf_counter() - started_at) * 1000),
+            status="ignored_repeated_input",
+        )
+        return
+
+    latency = _HandlerLatency(handler="classic_reply_text_next", telegram_user_id=tg_user.id, session_id=session_id)
+    latency.start()
+    try:
+        await send_current_question_to_message(message, settings, session_id, context, latency=latency)
+        elapsed_ms = int((time.perf_counter() - started_at) * 1000)
+        _log_classic_text_event(
+            "classic_text_next_latency",
+            telegram_user_id=tg_user.id,
+            session_id=session_id,
+            elapsed_ms=elapsed_ms,
+            status="ok",
+        )
+        latency.summary()
+    finally:
+        _unmark_callback_processing(context, processing_key)
+
 
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     latency = _HandlerLatency(handler="answer_callback", callback_prefix="ans", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
@@ -2298,6 +2742,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             session_id,
             latency=latency,
             send_as_new_message=getattr(settings, "classic_quiz_send_next_as_new_message", False),
+            context=context,
         )
         latency.summary()
     finally:
@@ -2497,6 +2942,19 @@ def main() -> None:
             hide_menu_button_handler,
         )
     )
+    if _classic_reply_mode_enabled(settings):
+        application.add_handler(
+            MessageHandler(
+                filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(r"^\s*\d+\s*$"),
+                classic_reply_text_answer_handler,
+            )
+        )
+        application.add_handler(
+            MessageHandler(
+                filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(rf"^\s*{re.escape(CLASSIC_REPLY_NEXT_TEXT)}\s*$"),
+                classic_reply_text_next_handler,
+            )
+        )
     application.add_handler(
         CallbackQueryHandler(
             reading_mode_callback,
