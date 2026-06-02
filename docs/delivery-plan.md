@@ -3,11 +3,12 @@
 ## Current status dashboard
 - Module 1 stable baseline; Module 2 limited active scope.
 - `/quiz` remains the default classic Telegram chat entry point.
-- Production classic chat UX: `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` is now the recommended implementation; a 15-question classic smoke completed without hangs, and the cleaner bottom reply keyboard UX is preferred.
+- Production classic chat UX: `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` remains the recommended implementation; the cleaner bottom reply keyboard UX is preferred for answers and `Далее`.
 - Classic inline callback mode remains available only as legacy/fallback (`CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`).
-- `/ui` remains experimental opt-in Mini App runner; Mini App does not become the default UX.
-- Mini App answer stalls are mitigated: hedged cases improved from roughly 3.4s to roughly 1.3s in observed production behavior.
-- Current delivery posture: observe/QA the stabilized production paths with safe classic latency buckets and existing Mini App request/client telemetry before another immediate code change.
+- `/ui` / `🚀 В окне` remains opt-in Mini App runner; Mini App does not become the default UX.
+- Mini App setup/question/result screens are now product-facing after P1/P2 polish.
+- UX-polish runtime smoke passed after manual Telegram/Mini App checks: no current bugs reported, classic `/quiz` + reply keyboard remains stable, and the Mini App opt-in flow has been checked.
+- Current delivery posture: observation/manual QA only; do not start another immediate code/refactor PR while no reproducible bugs are present.
 
 ## Recently completed PRs (#199–#204)
 - #199: webhook/logging/security cleanup and safer operational diagnostics.
@@ -17,13 +18,26 @@
 - #203: Mini App hedge mitigation for answer stalls, reducing hedged-case wait time.
 - #204: classic reply keyboard mode for `/quiz`, moving answer/`Далее` controls to bottom Telegram reply keyboard text updates.
 
+## Completed UX polish loop (#207–#211)
+- #207: main menu, `/start`, `/help`, `/ping`, and `/ui` UX cleanup.
+- #208: Reading Mode UX polish.
+- #209: classic chat quiz feedback and final screen polish.
+- #210: Mini App P1 UX polish for setup/question/result flow.
+- #211: Mini App P2 visual cleanup for product-facing setup/result screens.
+
+Current outcome:
+- Classic `/quiz` with reply keyboard mode remains stable.
+- UX-polish smoke passed with no current bugs reported after manual Telegram/Mini App checks.
+- Mini App opt-in flow now has product-facing setup, question, and result screens after P1/P2 polish.
+- Delivery posture is observation/QA, not another immediate code PR.
+
 ## Next recommended item
-Observe production and run focused manual QA instead of starting another immediate code PR:
+Continue observation/manual QA instead of starting another immediate code PR:
 1. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
-2. Run 10–15 question classic `/quiz` smoke checks via bottom reply keyboard after restarts/deploys.
-3. Watch safe classic logs: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`; latency lines include `status`, `elapsed_ms`, and `latency_bucket`.
-4. Continue Mini App QA for answer latency/retry behavior, especially hedged cases and completed-result flow.
-5. Escalate to a new code PR only if observation shows reproducible hangs, regressions, or unsafe logs.
+2. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys.
+3. Watch only for reproducible regressions, hangs, unsafe logs, or user-reported bugs with enough detail to reproduce.
+4. Avoid speculative code/refactor PRs while no bugs are present.
+5. Consider future work only after new evidence from QA/production observation or a clear product priority.
 
 ## Product/runtime invariants
 - `/quiz` remains default classic Telegram flow.
