@@ -443,11 +443,34 @@ def render_reading_mode_text(text: str, mode: str) -> str:
     return escape(text)
 
 
-def build_reading_mode_keyboard() -> InlineKeyboardMarkup:
+def format_reading_mode_screen(current_mode: str) -> str:
+    mode_label = READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS["normal"])
+    return (
+        "Режим чтения\n"
+        "\n"
+        f"Текущий режим: {mode_label}\n"
+        "\n"
+        "Режим влияет на отображение текста вопросов и пояснений.\n"
+        "Бионическое чтение выделяет начало слов жирным, чтобы текст было легче читать."
+    )
+
+
+def build_reading_mode_keyboard(current_mode: str = "normal") -> InlineKeyboardMarkup:
+    normalized_mode = current_mode if current_mode in READING_MODE_LABELS else "normal"
     return InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("Обычный", callback_data="readingmode:set:normal")],
-            [InlineKeyboardButton("Бионическое чтение", callback_data="readingmode:set:bionic")],
+            [
+                InlineKeyboardButton(
+                    f"{'✅ ' if normalized_mode == 'normal' else ''}{READING_MODE_LABELS['normal']}",
+                    callback_data="readingmode:set:normal",
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    f"{'✅ ' if normalized_mode == 'bionic' else ''}{READING_MODE_LABELS['bionic']}",
+                    callback_data="readingmode:set:bionic",
+                )
+            ],
         ]
     )
 
@@ -881,8 +904,8 @@ async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFA
     current_mode = await _run_db_task(_load_mode)
 
     await update.message.reply_text(
-        f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
-        reply_markup=build_reading_mode_keyboard(),
+        format_reading_mode_screen(current_mode),
+        reply_markup=build_reading_mode_keyboard(current_mode),
     )
 
 
@@ -2817,8 +2840,8 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
         latency.add_db(db_started_at)
 
         await _timed_telegram_api_call(latency, query.edit_message_text(
-            f"Текущий режим чтения: {READING_MODE_LABELS.get(current_mode, READING_MODE_LABELS['normal'])}",
-            reply_markup=build_reading_mode_keyboard(),
+            format_reading_mode_screen(current_mode),
+            reply_markup=build_reading_mode_keyboard(current_mode),
         ))
         latency.summary()
         return
@@ -2855,7 +2878,7 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
     latency.add_db(db_started_at)
 
     await _timed_telegram_api_call(latency, query.edit_message_text(
-        f"Режим чтения обновлен: {READING_MODE_LABELS[saved_mode]}",
+        f"Режим чтения обновлён: {READING_MODE_LABELS[saved_mode]}",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("Изменить режим", callback_data="readingmode:menu")]]
         ),
