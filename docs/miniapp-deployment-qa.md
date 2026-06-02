@@ -79,10 +79,19 @@
 - [ ] Поддельные/недоступные category IDs отклоняются.
 - [ ] Категория без подходящих вопросов по сложности отклоняется.
 - [ ] `web_app_data` service message best-effort удаляется.
-- [ ] Первый вопрос появляется в чате с inline answer buttons.
+- [ ] Первый вопрос появляется в чате с classic answer controls according to configured mode (recommended production: bottom reply keyboard; fallback: inline answer buttons).
 
-### D. Regression checks
-- [ ] `/quiz` работает без изменений.
+### D. Classic reply keyboard production smoke
+- [ ] Enable `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` in the target environment.
+- [ ] Restart the affected services/containers.
+- [ ] Run `/quiz` in Telegram classic chat UX.
+- [ ] Answer 10–15 questions via the bottom Telegram reply keyboard, including the `Далее` action.
+- [ ] Verify there are no long inline-callback-style hangs and the chat stays cleaner because answer controls do not remain attached to quiz messages.
+- [ ] Check only safe logs/metrics: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`.
+- [ ] Roll back if needed by setting `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false` and restarting services.
+
+### E. Regression checks
+- [ ] `/quiz` работает без изменений as the default classic Telegram chat entry point.
 - [ ] Кнопка `🎯 Начать викторину` в главном меню работает без изменений.
 - [ ] Reply keyboard работает как раньше.
 - [ ] Reading mode работает.
@@ -90,7 +99,7 @@
 - [ ] После завершения квиза восстанавливается главное меню.
 - [ ] DB schema changes не требуются.
 
-### E. Mini App runner reopen/recovery checks
+### F. Mini App runner reopen/recovery checks
 - [ ] После submit setup бот присылает сообщение «Викторина создана. Откройте Mini App, чтобы пройти первый вопрос.» с кнопкой WebApp.
 - [ ] После submit setup первый вопрос не отправляется автоматически в чат.
 - [ ] `/ui` setup запускает новую сессию.

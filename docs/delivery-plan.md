@@ -1,83 +1,40 @@
 # Delivery Plan
 
-## Current status
+## Current status dashboard
 - Module 1 stable baseline; Module 2 limited active scope.
-- `/quiz` remains default classic Telegram UX.
-- `/ui` is experimental opt-in Mini App runner (MVP) and is now stabilized for broader QA.
-- PR #166 completed Mini App entry UX polish: safe bottom-menu entry `🚀 Викторина в окне` delegates to fresh `/ui` inline launch flow.
+- `/quiz` remains the default classic Telegram chat entry point.
+- Production classic chat UX: `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` is now the recommended implementation; a 15-question classic smoke completed without hangs, and the cleaner bottom reply keyboard UX is preferred.
+- Classic inline callback mode remains available only as legacy/fallback (`CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`).
+- `/ui` remains experimental opt-in Mini App runner; Mini App does not become the default UX.
+- Mini App answer stalls are mitigated: hedged cases improved from roughly 3.4s to roughly 1.3s in observed production behavior.
+- Current delivery posture: observe/QA the stabilized production paths before another immediate code change.
 
-## Completed checkpoints
-- #156: proxy / DB migration docs and deployment notes synchronized.
-- #157: shorter answer timeout + GET diagnostics for Mini App API.
-- #158: pre-retry state resync before answer retries.
-- #159: early hedge recovery (`ANSWER_HEDGE_DELAY_MS = 1200`).
-- #160: HTTP/1.1 + explicit `Content-Length` + keep-alive behavior.
-- #161: answer-submit UX polish (pending/disabled states, clearer flow).
-- #162: feedback readability and visual hierarchy polish.
-- #166: Mini App entry UX polish + safe bottom-menu entry (`🚀 Викторина в окне` → fresh inline `🚀 Открыть викторину`).
+## Recently completed PRs (#199–#204)
+- #199: webhook/logging/security cleanup and safer operational diagnostics.
+- #200: classic inline callback diagnostics for update ingress and callback latency investigation.
+- #201: Mini App telemetry for answer/setup state, retries, and safe diagnostics.
+- #202: Mini App production diagnostics/operational follow-up for stalled answer reports.
+- #203: Mini App hedge mitigation for answer stalls, reducing hedged-case wait time.
+- #204: classic reply keyboard mode for `/quiz`, moving answer/`Далее` controls to bottom Telegram reply keyboard text updates.
 
 ## Next recommended item
-Run expanded MVP QA with 2–3 real users/devices; collect UX/latency findings before changing default UX.
+Observe production and run focused manual QA instead of starting another immediate code PR:
+1. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
+2. Run 10–15 question classic `/quiz` smoke checks via bottom reply keyboard after restarts/deploys.
+3. Watch safe classic logs: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`.
+4. Continue Mini App QA for answer latency/retry behavior, especially hedged cases and completed-result flow.
+5. Escalate to a new code PR only if observation shows reproducible hangs, regressions, or unsafe logs.
 
-## Next technical sprint
-### Repo-only FastAPI Mini App API implementation
-- Scope: implement FastAPI + uvicorn Mini App API layer in repository code/tests only, preserving current endpoint contracts and quiz/session semantics.
-- Phase 1 guardrails (explicit):
-  - production CD must **not** start FastAPI in this phase;
-  - production Mini App traffic must **not** route to FastAPI in this phase;
-  - `MINI_APP_API_BASE_URL` and reverse proxy upstream remain pointed to the current legacy Mini App API;
-  - production bot + current Mini App API runtime behavior remains unchanged.
-- Why this shape:
-  - reduce migration risk by validating implementation quality before traffic cutover;
-  - keep user-visible behavior stable while hardening tests/observability hooks;
-  - preserve safe rollback posture before production switch-over.
-- Product/runtime invariants:
-  - `/quiz` remains default classic Telegram flow;
-  - Mini App remains opt-in (`/ui`, `🚀 Викторина в окне`);
-  - SQLite remains current runtime store.
-- Data-layer position:
-  - PostgreSQL and Redis are explicitly deferred; PostgreSQL is a later option only if concurrency/analytics/ops needs require it.
-- Non-goals (Phase 1):
-  - no production routing/CD/runtime switch;
-  - no FastAPI rewrite of Telegram bot handlers;
-  - no frontend rewrite;
-  - no scoring/session schema changes;
-  - no `/quiz` behavior change.
+## Product/runtime invariants
+- `/quiz` remains default classic Telegram flow.
+- Mini App remains opt-in (`/ui`, `🚀 Викторина в окне`) and separate from classic chat UX.
+- Standalone Web UI/PWA remains out of scope.
+- SQLite remains current runtime store; JSON files in the repository remain question-bank source of truth.
+- Docs-only changes do not require runtime sync.
 
-## Later sprint
-### FastAPI production switch-over
-- **Status: in progress (Phase 2 switch-over PR).**
-- Implemented via separate explicit switch-over PR after Phase 1 repo-only implementation is merged and reviewed.
-- Switch-over PR responsibilities:
-  1. deploy FastAPI Mini App API **instead of** current legacy production Mini App API path;
-  2. update compose/CD/routing/env wiring as needed;
-  3. ensure CD rebuilds/restarts both runtime services/containers after cutover:
-     - `psych_quiz_bot`
-     - `psych_quiz_miniapp_api`
-  4. run Mini App smoke QA (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`, CORS/OPTIONS);
-  5. analyze logs/metrics (status mix, latency, retry patterns, `database_busy_retry` rates).
-- Rollback requirement:
-  - keep rollback path to legacy `ThreadingHTTPServer` API via route/env/reverse-proxy switch if smoke/monitoring fails;
-  - preserve endpoint contracts to keep rollback low-risk.
-
-## Mini App roadmap
-### Done (through #166)
-- SQLite runtime hardening (WAL, busy timeout, explicit connection closing, indexes).
-- GET diagnostics for state/answer flows.
-- Pre-retry state resync.
-- Early hedge recovery.
-- HTTP/1.1 keep-alive + explicit content length stability.
-- Visual polish for submit/feedback/readability states.
-- Safe bottom-menu Mini App entry that always reissues a fresh inline launch button.
-
-### Next
+## Later technical direction
 - Broader MVP QA in production-like conditions.
-- Lightweight monitoring pass (latency/error buckets, retry-rate visibility, stale-state frequency).
-
-### Medium-term
-- Split overloaded `app/main.py` responsibilities.
+- Lightweight monitoring pass for latency/error buckets, retry-rate visibility, and stale-state frequency.
+- Split overloaded `app/main.py` responsibilities when a code sprint is justified.
 - Extract Mini App context/service modules for cleaner ownership and testability.
-
-### Backlog (strategic)
-- Move Mini App API toward ASGI service when justified by scale/maintenance.
-- Consider declarative frontend architecture if Mini App remains strategic default candidate.
+- Move Mini App API/runtime architecture forward only after observation confirms the next bottleneck and rollback posture.
