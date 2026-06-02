@@ -41,6 +41,33 @@ class BotDbOffloadTests(unittest.TestCase):
 
         self.assertGreaterEqual(len(calls), 4)
 
+
+    def test_quiz_command_explains_modes_and_preserves_callback_buttons(self):
+        context = self._context()
+        update = SimpleNamespace(
+            message=SimpleNamespace(reply_text=AsyncMock()),
+            effective_user=SimpleNamespace(id=123),
+        )
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            self.assertEqual('_load_categories', func.__name__)
+            return [{'id': 1, 'name': 'Cat'}]
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+            asyncio.run(main.quiz_command(update, context))
+
+        text = update.message.reply_text.call_args.args[0]
+        markup = update.message.reply_text.call_args.kwargs['reply_markup']
+        button_texts = [row[0].text for row in markup.inline_keyboard]
+        callback_data = [row[0].callback_data for row in markup.inline_keyboard]
+
+        self.assertIn('Выберите режим викторины:', text)
+        self.assertIn('Конкретная тема — вопросы по одной выбранной теме.', text)
+        self.assertIn('Микс из выбранных тем — вопросы из нескольких тем.', text)
+        self.assertIn('Все темы — случайные вопросы из всего доступного банка.', text)
+        self.assertEqual(['Конкретная тема', 'Микс из выбранных тем', 'Все темы'], button_texts)
+        self.assertEqual(['qzmode:single', 'qzmode:selected_mix', 'qzmode:all'], callback_data)
+
     def test_send_current_question_to_chat_offloads_db(self):
         chat = SimpleNamespace(send_message=AsyncMock())
         settings = self._context().application.bot_data['settings']
