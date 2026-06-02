@@ -544,6 +544,114 @@ class BotDbOffloadTests(unittest.TestCase):
         qcntall_query.edit_message_text.assert_awaited()
         qcntselmix_query.edit_message_text.assert_awaited()
 
+    def test_reading_mode_screen_text_and_normal_selected_state(self):
+        context = self._context()
+        message = SimpleNamespace(reply_text=AsyncMock())
+        update = SimpleNamespace(
+            effective_user=SimpleNamespace(id=1, username='u', first_name='f', last_name='l'),
+            message=message,
+        )
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            return 'normal'
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+            asyncio.run(main.reading_mode_button_handler(update, context))
+
+        message.reply_text.assert_awaited_once()
+        text = message.reply_text.call_args.args[0]
+        keyboard = message.reply_text.call_args.kwargs['reply_markup']
+        button_texts = [row[0].text for row in keyboard.inline_keyboard]
+        callback_data = [row[0].callback_data for row in keyboard.inline_keyboard]
+
+        self.assertIn('Режим чтения', text)
+        self.assertIn('Текущий режим: Обычный', text)
+        self.assertIn('Режим влияет на отображение текста вопросов и пояснений.', text)
+        self.assertIn('Бионическое чтение выделяет начало слов жирным', text)
+        self.assertEqual(button_texts, ['✅ Обычный', 'Бионическое чтение'])
+        self.assertEqual(callback_data, ['readingmode:set:normal', 'readingmode:set:bionic'])
+
+    def test_reading_mode_keyboard_marks_only_current_mode(self):
+        normal_keyboard = main.build_reading_mode_keyboard('normal')
+        bionic_keyboard = main.build_reading_mode_keyboard('bionic')
+
+        normal_texts = [row[0].text for row in normal_keyboard.inline_keyboard]
+        bionic_texts = [row[0].text for row in bionic_keyboard.inline_keyboard]
+
+        self.assertEqual(normal_texts, ['✅ Обычный', 'Бионическое чтение'])
+        self.assertEqual(bionic_texts, ['Обычный', '✅ Бионическое чтение'])
+        self.assertEqual(sum(text.startswith('✅') for text in normal_texts), 1)
+        self.assertEqual(sum(text.startswith('✅') for text in bionic_texts), 1)
+
+    def test_reading_mode_callback_confirmations_and_change_mode_button(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+
+        saved_modes = iter(['bionic', 'normal'])
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            if func.__name__ == '_save_mode':
+                return next(saved_modes)
+            return 'normal'
+
+        bionic_query = SimpleNamespace(data='readingmode:set:bionic', answer=AsyncMock(), edit_message_text=AsyncMock())
+        normal_query = SimpleNamespace(data='readingmode:set:normal', answer=AsyncMock(), edit_message_text=AsyncMock())
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+            asyncio.run(main.reading_mode_callback(SimpleNamespace(callback_query=bionic_query, effective_user=user), context))
+            asyncio.run(main.reading_mode_callback(SimpleNamespace(callback_query=normal_query, effective_user=user), context))
+
+        self.assertEqual(bionic_query.edit_message_text.call_args.args[0], 'Режим чтения обновлён: Бионическое чтение')
+        self.assertEqual(normal_query.edit_message_text.call_args.args[0], 'Режим чтения обновлён: Обычный')
+        bionic_keyboard = bionic_query.edit_message_text.call_args.kwargs['reply_markup']
+        normal_keyboard = normal_query.edit_message_text.call_args.kwargs['reply_markup']
+        self.assertEqual(bionic_keyboard.inline_keyboard[0][0].text, 'Изменить режим')
+        self.assertEqual(bionic_keyboard.inline_keyboard[0][0].callback_data, 'readingmode:menu')
+        self.assertEqual(normal_keyboard.inline_keyboard[0][0].text, 'Изменить режим')
+        self.assertEqual(normal_keyboard.inline_keyboard[0][0].callback_data, 'readingmode:menu')
+
+    def test_reading_mode_change_button_reopens_selection_with_selected_state(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+        query = SimpleNamespace(data='readingmode:menu', answer=AsyncMock(), edit_message_text=AsyncMock())
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            return 'bionic'
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+            asyncio.run(main.reading_mode_callback(SimpleNamespace(callback_query=query, effective_user=user), context))
+
+        text = query.edit_message_text.call_args.args[0]
+        keyboard = query.edit_message_text.call_args.kwargs['reply_markup']
+        button_texts = [row[0].text for row in keyboard.inline_keyboard]
+
+        self.assertIn('Текущий режим: Бионическое чтение', text)
+        self.assertIn('Режим влияет на отображение текста вопросов и пояснений.', text)
+        self.assertEqual(button_texts, ['Обычный', '✅ Бионическое чтение'])
+
+    def test_bionic_rendering_still_applies_to_reading_mode_text(self):
+        rendered = main.render_reading_mode_text('Привет, мир!', 'bionic')
+
+        self.assertIn('<b>Пр</b>ивет', rendered)
+        self.assertIn('мир!', rendered)
+
+    def test_hide_menu_removes_reply_keyboard_without_visible_message(self):
+        removal_message = SimpleNamespace(delete=AsyncMock(), message_id=99)
+        message = SimpleNamespace(
+            reply_text=AsyncMock(return_value=removal_message),
+            delete=AsyncMock(),
+            message_id=10,
+        )
+        update = SimpleNamespace(message=message)
+
+        asyncio.run(main.hide_menu_button_handler(update, self._context()))
+
+        message.reply_text.assert_awaited_once()
+        self.assertEqual(message.reply_text.call_args.kwargs['text'], '\u2060')
+        self.assertIsInstance(message.reply_text.call_args.kwargs['reply_markup'], main.ReplyKeyboardRemove)
+        removal_message.delete.assert_awaited_once()
+        message.delete.assert_awaited_once()
+
     def test_reading_mode_callback_menu_and_set(self):
         context = self._context()
         user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
