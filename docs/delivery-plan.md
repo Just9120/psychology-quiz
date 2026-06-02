@@ -7,7 +7,7 @@
 - Classic inline callback mode remains available only as legacy/fallback (`CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`).
 - `/ui` remains experimental opt-in Mini App runner; Mini App does not become the default UX.
 - Mini App answer stalls are mitigated: hedged cases improved from roughly 3.4s to roughly 1.3s in observed production behavior.
-- Current delivery posture: observe/QA the stabilized production paths before another immediate code change.
+- Current delivery posture: observe/QA the stabilized production paths with safe classic latency buckets and existing Mini App request/client telemetry before another immediate code change.
 
 ## Recently completed PRs (#199–#204)
 - #199: webhook/logging/security cleanup and safer operational diagnostics.
@@ -21,7 +21,7 @@
 Observe production and run focused manual QA instead of starting another immediate code PR:
 1. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
 2. Run 10–15 question classic `/quiz` smoke checks via bottom reply keyboard after restarts/deploys.
-3. Watch safe classic logs: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`.
+3. Watch safe classic logs: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`; latency lines include `status`, `elapsed_ms`, and `latency_bucket`.
 4. Continue Mini App QA for answer latency/retry behavior, especially hedged cases and completed-result flow.
 5. Escalate to a new code PR only if observation shows reproducible hangs, regressions, or unsafe logs.
 
@@ -34,7 +34,7 @@ Observe production and run focused manual QA instead of starting another immedia
 
 ## Later technical direction
 - Broader MVP QA in production-like conditions.
-- Lightweight monitoring pass for latency/error buckets, retry-rate visibility, and stale-state frequency.
+- Continue lightweight monitoring only if observation shows new gaps after the current classic latency buckets and Mini App telemetry.
 - Split overloaded `app/main.py` responsibilities when a code sprint is justified.
 - Extract Mini App context/service modules for cleaner ownership and testability.
 - Move Mini App API/runtime architecture forward only after observation confirms the next bottleneck and rollback posture.

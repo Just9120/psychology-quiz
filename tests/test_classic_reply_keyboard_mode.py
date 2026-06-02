@@ -7,9 +7,11 @@ from types import SimpleNamespace
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
 from app.main import (
     CLASSIC_REPLY_NEXT_TEXT,
+    _classic_text_latency_bucket,
     _handle_classic_text_answer_db,
     _load_classic_text_answer_context,
     _load_classic_text_next_state,
+    _safe_classic_text_log_fields,
     build_classic_answer_reply_keyboard,
     build_question_text_with_options,
     parse_classic_reply_answer_number,
@@ -80,6 +82,34 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
 
         no_state = _load_classic_text_answer_context(self.settings, self.tg_user, {})
         self.assertEqual("not_awaiting_answer", no_state["status"])
+
+    def test_safe_classic_text_latency_fields_include_deterministic_bucket(self):
+        fields = _safe_classic_text_log_fields(
+            telegram_user_id=1001,
+            session_id=self.session_id,
+            question_id=1,
+            elapsed_ms=499,
+            status="accepted",
+        )
+
+        self.assertIn("telegram_user_id=1001", fields)
+        self.assertIn(f"session_id={self.session_id}", fields)
+        self.assertIn("question_id=1", fields)
+        self.assertIn("elapsed_ms=499", fields)
+        self.assertIn("latency_bucket=lt_500ms", fields)
+        self.assertIn("status=accepted", fields)
+        self.assertNotIn("Q1?", fields)
+        self.assertNotIn("A", fields)
+        self.assertNotIn("initData", fields)
+
+    def test_classic_text_latency_bucket_boundaries_are_stable(self):
+        self.assertEqual("lt_100ms", _classic_text_latency_bucket(0))
+        self.assertEqual("lt_100ms", _classic_text_latency_bucket(99))
+        self.assertEqual("lt_500ms", _classic_text_latency_bucket(100))
+        self.assertEqual("lt_500ms", _classic_text_latency_bucket(499))
+        self.assertEqual("lt_1000ms", _classic_text_latency_bucket(500))
+        self.assertEqual("lt_1000ms", _classic_text_latency_bucket(999))
+        self.assertEqual("gte_1000ms", _classic_text_latency_bucket(1000))
 
     def test_valid_answer_number_handling_records_answer(self):
         context = _load_classic_text_answer_context(self.settings, self.tg_user, self.state)

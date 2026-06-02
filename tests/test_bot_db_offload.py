@@ -120,6 +120,39 @@ class BotDbOffloadTests(unittest.TestCase):
 
         self.assertTrue(mocked.called)
 
+    def test_classic_reply_text_answer_logs_safe_status_and_latency_bucket(self):
+        context = self._context()
+        context.application.bot_data['settings'].classic_quiz_reply_keyboard_mode = True
+        context.user_data[main.CLASSIC_REPLY_STATE_KEY] = {"status": "awaiting_answer", "session_id": 10, "question_id": 20}
+        message = SimpleNamespace(text="secret answer text", reply_text=AsyncMock())
+        update = SimpleNamespace(
+            message=message,
+            effective_user=SimpleNamespace(id=123, username='u', first_name='secret first', last_name='secret last'),
+        )
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            return {
+                'status': 'ok',
+                'session_id': 10,
+                'question_id': 20,
+                'options': [{'option_index': 0, 'option_text': 'sensitive option'}],
+            }
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
+             patch('app.main.logger.info') as info_log:
+            asyncio.run(main.classic_reply_text_answer_handler(update, context))
+
+        logged = "\n".join(" ".join(str(arg) for arg in call.args) for call in info_log.call_args_list)
+        self.assertIn("classic_text_answer_ingress", logged)
+        self.assertIn("classic_text_answer_latency", logged)
+        self.assertIn("status=received", logged)
+        self.assertIn("status=invalid_input", logged)
+        self.assertIn("elapsed_ms=", logged)
+        self.assertIn("latency_bucket=lt_", logged)
+        self.assertNotIn("secret answer text", logged)
+        self.assertNotIn("sensitive option", logged)
+        self.assertNotIn("secret first", logged)
+
     def test_latency_logging_for_quiz_and_answer(self):
         context = self._context()
         update_quiz = SimpleNamespace(
