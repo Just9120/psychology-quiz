@@ -149,6 +149,7 @@ Fallback:
 - classic `/quiz` остаётся дефолтным Telegram chat entry point
 - для production classic chat UX рекомендуется `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true`: ответы и «Далее» отображаются в нижней Telegram reply keyboard и приходят в бот как обычные text message updates, поэтому сообщения викторины не засоряются inline-кнопками
 - production smoke для reply keyboard mode: пользователь завершил 15 classic quiz questions без hangs
+- recent UX polish loop завершён для меню/`/start`/`/help`, Reading Mode, classic feedback/final screen и Mini App setup/result screens; текущая posture — observation/manual QA без immediate code PR при отсутствии багов
 - legacy/fallback classic inline callback mode остаётся доступен при `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`
 - ручное скрытие меню через `🙈 Скрыть меню`
 - во время активной викторины меню скрывается без отдельного уведомления

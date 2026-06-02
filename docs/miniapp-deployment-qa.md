@@ -71,7 +71,21 @@
 - [ ] `question_count=all` отправляется как `question_count: null`.
 - [ ] При невалидном/отсутствующем context показывается понятная frontend-ошибка.
 
-### C. Payload / bot validation checks
+### C. Post-UX-polish Mini App smoke checklist
+- [ ] `/ui` opens Mini App via fresh inline WebApp button.
+- [ ] Setup screen renders cleanly.
+- [ ] `single` allows one topic.
+- [ ] `selected_mix` allows multiple topics.
+- [ ] `all` hides topics and starts without category selection.
+- [ ] Disabled start explains missing input.
+- [ ] Answer cards are readable and not double-numbered.
+- [ ] Correct feedback does not duplicate `Правильный ответ`.
+- [ ] Wrong feedback shows `Ваш ответ` and `Правильный ответ`.
+- [ ] Final screen is product-facing and neutral.
+- [ ] `Новая викторина` works.
+- [ ] Close action works when available.
+
+### D. Payload / bot validation checks
 - [ ] Валидный payload `single` запускает существующий chat quiz runner.
 - [ ] Валидный payload `selected_mix` запускает chat quiz runner и сохраняет выбранные категории в сессии.
 - [ ] Валидный payload `all` запускает chat quiz runner.
@@ -81,7 +95,7 @@
 - [ ] `web_app_data` service message best-effort удаляется.
 - [ ] Первый вопрос появляется в чате с classic answer controls according to configured mode (recommended production: bottom reply keyboard; fallback: inline answer buttons).
 
-### D. Classic reply keyboard production smoke
+### E. Classic reply keyboard production smoke
 - [ ] Enable `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` in the target environment.
 - [ ] Restart the affected services/containers.
 - [ ] Run `/quiz` in Telegram classic chat UX.
@@ -90,7 +104,7 @@
 - [ ] Check only safe logs/metrics: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`; latency lines include deterministic `status` and `latency_bucket` fields.
 - [ ] Roll back if needed by setting `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false` and restarting services.
 
-### E. Regression checks
+### F. Regression checks
 - [ ] `/quiz` работает без изменений as the default classic Telegram chat entry point.
 - [ ] Кнопка `🎯 Начать` в главном меню работает без изменений.
 - [ ] Reply keyboard работает как раньше.
@@ -99,7 +113,7 @@
 - [ ] После завершения квиза восстанавливается главное меню.
 - [ ] DB schema changes не требуются.
 
-### F. Mini App runner reopen/recovery checks
+### G. Mini App runner reopen/recovery checks
 - [ ] После submit setup бот присылает сообщение «Викторина создана. Откройте Mini App, чтобы пройти первый вопрос.» с кнопкой WebApp.
 - [ ] После submit setup первый вопрос не отправляется автоматически в чат.
 - [ ] `/ui` setup запускает новую сессию.

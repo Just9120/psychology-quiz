@@ -82,7 +82,7 @@
 - `classic` — текущий и дефолтный UX в Telegram-чате; `/quiz` остаётся default chat entry point.
 - `classic_reply_keyboard` — preferred production implementation внутри classic chat UX: ответы и действие `Далее` отправляются как обычные Telegram message updates через bottom reply keyboard buttons.
 - `classic_inline_callback` — legacy/fallback implementation classic chat UX: ответы и переходы идут через inline callback-кнопки в сообщениях.
-- `miniapp_test` — экспериментальный opt-in режим Telegram Mini App runner внутри Telegram; не включается по умолчанию.
+- `miniapp_test` — opt-in режим Telegram Mini App runner внутри Telegram; доступен через `/ui` / `🚀 В окне` и не включается по умолчанию.
 - `miniapp_default` — потенциальный будущий режим по умолчанию для Mini App, сейчас неактивен и не реализован.
 
 Ограничения и позиционирование:
@@ -91,32 +91,30 @@
 - Inline callback mode сохраняется только как legacy/fallback для classic chat UX.
 - Telegram Mini App не является PWA.
 - Telegram Mini App не является standalone Web UI.
-- Mini App не заменяет текущий bot UX как default mode.
-- Реализованный MVP Mini App поддерживает setup, state hydration, отображение вопроса, отправку ответа, feedback, переход к следующему шагу и completed/result экран.
+- Mini App остаётся отдельным opt-in UX и не заменяет текущий bot UX как default mode.
 - `/quiz` остаётся дефолтным классическим режимом.
 - Opt-in входы в Mini App: `/ui` и кнопка нижнего меню `🚀 В окне`.
 - Фактический launch Mini App выполняется через fresh inline WebApp-кнопку `🚀 Открыть викторину`, сгенерированную текущим `/ui`-контекстом.
+- Persistent reply keyboard не должен хранить stale `web_app` URL/launch-context для Mini App; `/ui` генерирует fresh launch context.
 
-Первый MVP Mini App (scope на будущую implementation-фазу):
-- планируемые точки входа: `/ui` и кнопка нижнего меню `🚀 В окне` (делегирует в `/ui`);
-- setup-экран внутри Telegram Mini App;
-- выбор quiz mode:
+Реализованный MVP Mini App:
+- поддерживает setup, state hydration, отображение вопроса, отправку ответа, feedback, переход к следующему шагу и completed/result экран;
+- setup поддерживает quiz modes:
   - `single`;
   - `selected_mix`;
   - `all`;
-- выбор категорий, когда применимо;
-- выбор количества вопросов:
+- setup поддерживает выбор категорий, когда применимо;
+- setup поддерживает выбор количества вопросов:
   - `5`;
   - `10`;
   - `15`;
   - `all available`;
-- выбор сложности:
+- setup поддерживает выбор сложности:
   - `any`;
   - `easy`;
   - `medium`;
   - `hard`;
-- подтверждение старта;
-- дальнейший запуск прохождения в существующем chat runner.
+- Mini App runner остаётся separate opt-in flow внутри Telegram и не становится default UX.
 
 Category initialization model для Mini App setup:
 - В момент `/ui` бот загружает активные категории из SQLite runtime-слоя.
