@@ -21,6 +21,9 @@
       ol button {
         border-radius: 14px;
         border: 1px solid #d6dce8;
+        text-align: left;
+        white-space: normal;
+        line-height: 1.35;
       }
       ol button:disabled {
         color: #222;
@@ -186,6 +189,7 @@
         <label><input type="radio" name="difficulty" value="hard" /> Сложные</label>
       </fieldset>
 
+      <p id="setup_hint" class="meta"></p>
       <button type="submit" id="go" disabled>Начать викторину</button>
     </form>
 
@@ -198,6 +202,7 @@
       const form = document.getElementById('f');
       const cats = document.getElementById('cats');
       const go = document.getElementById('go');
+      const setupHint = document.getElementById('setup_hint');
       const questionView = document.getElementById('question_view');
       const catsFieldset = document.getElementById('cats_fieldset');
       const setupWarning = document.getElementById('setup_warning');
@@ -304,6 +309,7 @@
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
       };
       let setupRenderCategories = null;
+      let currentCategoryInputType = '';
       let answerSubmitInFlight = false;
       let answerSubmitGeneration = 0;
       let setupSubmitInFlight = false;
@@ -523,14 +529,22 @@
         setupOptionsCache.categories = list;
         setupRenderCategories = () => {
           const activeCategories = Array.isArray(setupOptionsCache.categories) ? setupOptionsCache.categories : [];
+          const mode = form.quiz_mode?.value || 'single';
+          const inputType = mode === 'selected_mix' ? 'checkbox' : 'radio';
+          const selectedIds = selectedCategoryIds();
+          const selectedSet = new Set(mode === 'single' ? selectedIds.slice(0, 1) : selectedIds);
           cats.replaceChildren();
+          currentCategoryInputType = inputType;
           activeCategories.forEach((c) => {
             const id = Number(c.id);
             if (!Number.isInteger(id)) return;
             const label = document.createElement('label');
             const input = document.createElement('input');
-            input.type = 'checkbox';
+            input.type = inputType;
+            input.name = inputType === 'radio' ? 'category_id' : 'category_ids';
             input.value = String(id);
+            input.checked = selectedSet.has(id);
+            input.addEventListener('change', validate);
             label.appendChild(input);
             label.appendChild(document.createTextNode(` ${String(c.name ?? '')}`));
             cats.appendChild(label);
@@ -560,6 +574,14 @@
       function syncCategoryUi() {
         const mode = form.quiz_mode.value;
         const allMode = mode === 'all';
+        const expectedInputType = mode === 'selected_mix' ? 'checkbox' : 'radio';
+        if (!allMode && currentCategoryInputType !== expectedInputType && typeof setupRenderCategories === 'function') {
+          setupRenderCategories();
+        }
+        if (mode === 'single') {
+          const checked = [...cats.querySelectorAll('input:checked')];
+          checked.slice(1).forEach((input) => { input.checked = false; });
+        }
         catsFieldset.hidden = allMode;
         [...cats.querySelectorAll('input')].forEach((input) => {
           input.disabled = allMode;
@@ -569,19 +591,33 @@
       function validate() {
         if (form.hidden) {
           go.disabled = true;
+          setupHint.textContent = '';
           return;
         }
         syncCategoryUi();
         const mode = form.quiz_mode.value;
         const selected = selectedCategoryIds();
         let ok = false;
-        if (mode === 'single') ok = selected.length === 1;
-        else if (mode === 'selected_mix') ok = selected.length >= 1;
-        else ok = true;
+        let hint = '';
+        if (mode === 'single') {
+          ok = selected.length === 1;
+          if (!ok) hint = 'Выберите одну тему, чтобы начать.';
+        } else if (mode === 'selected_mix') {
+          ok = selected.length >= 1;
+          if (!ok) hint = 'Выберите хотя бы одну тему.';
+        } else {
+          ok = true;
+        }
         go.disabled = !ok;
+        setupHint.textContent = hint;
       }
 
-      form.addEventListener('change', validate);
+      form.addEventListener('change', (event) => {
+        if (event.target?.name === 'quiz_mode' && typeof setupRenderCategories === 'function') {
+          setupRenderCategories();
+        }
+        validate();
+      });
 
       function normalizeCompactRunnerQuestion(compact) {
         if (!compact || compact.m !== 'runner' || compact.sd !== true) return null;
@@ -698,26 +734,22 @@
         questionView.replaceChildren();
 
         const title = document.createElement('h4');
-        title.textContent = 'Викторина завершена';
+        title.textContent = 'Последняя викторина завершена 🎉';
         questionView.appendChild(title);
 
         const score = Number(result?.score);
         const total = Number(result?.total_questions);
-        const percent = Number(result?.percent);
-
         const summary = document.createElement('p');
         summary.textContent =
-          `Результат: ${Number.isInteger(score) ? score : 0} из ${Number.isInteger(total) ? total : 0}` +
-          `${Number.isInteger(percent) ? ` (${percent}%)` : ''}`;
+          `Результат: ${Number.isInteger(score) ? score : 0} из ${Number.isInteger(total) ? total : 0}`;
         questionView.appendChild(summary);
 
         const hint = document.createElement('p');
-        hint.textContent =
-          'Вы можете начать новую викторину здесь или вернуться к классическому режиму через /quiz.';
+        hint.textContent = 'Можно начать новую викторину или закрыть окно.';
         questionView.appendChild(hint);
 
         questionView.appendChild(buildCompletionActions());
-        runnerState.textContent = 'Вы просматриваете завершённый результат из серверного состояния.';
+        runnerState.textContent = 'Последняя викторина завершена.';
       }
 
       const apiBase =
@@ -1391,9 +1423,11 @@
           ? feedback.correct_option_text
           : (Array.isArray(snapshot?.options) && correctIdx !== null ? (snapshot.options.find((o) => Number(o.option_index) === correctIdx)?.option_text || '') : '');
         const selectedLabel = Number.isInteger(selectedIdx) ? `${selectedIdx + 1}` : '?';
-        if (correctIdx !== null && correctText) {
+        const isCorrect = feedback?.is_correct === true || (correctIdx !== null && selectedIdx === correctIdx);
+        if (!isCorrect && correctIdx !== null && correctText) {
           const correctLabel = `${correctIdx + 1}`;
-          details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}.\nПравильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
+          details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}.
+Правильный ответ: ${correctLabel}${correctText ? ` — ${correctText}` : ''}.`;
         } else {
           details.textContent = `Ваш ответ: ${selectedLabel}${selectedText ? ` — ${selectedText}` : ''}.`;
         }
@@ -1445,7 +1479,7 @@
           btn.type = 'button';
           const idx = Number(opt.option_index);
           const txt = typeof opt.option_text === 'string' ? opt.option_text : '';
-          btn.textContent = `${Number.isInteger(idx) ? idx + 1 : '?'}: ${txt}`;
+          btn.textContent = txt;
           btn.setAttribute('data-option-index', String(idx));
           btn.addEventListener('click', () => submitAnswer(Number(snapshot.session_id), Number(snapshot.question_id), idx, snapshot));
           li.appendChild(btn);
