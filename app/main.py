@@ -75,16 +75,29 @@ DIFFICULTY_CHOICES = (
     ("hard", "Сложные"),
 )
 
+START_QUIZ_BUTTON_TEXT = "🎯 Начать"
+MINI_APP_BUTTON_TEXT = "🚀 В окне"
+READING_MODE_BUTTON_TEXT = "👁 Чтение"
+LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
+LEGACY_MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
+LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
+START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
+MINI_APP_BUTTON_ALIASES = (MINI_APP_BUTTON_TEXT, LEGACY_MINI_APP_BUTTON_TEXT)
+READING_MODE_BUTTON_ALIASES = (READING_MODE_BUTTON_TEXT, LEGACY_READING_MODE_BUTTON_TEXT)
 HELP_TEXT = (
-    "Доступные команды:\n"
-    "/start — приветствие\n"
-    "/help — список команд\n"
-    "/ping — проверка доступности\n"
-    "/quiz — запустить викторину\n"
-    "/ui — открыть викторину в окне"
+    "Что можно сделать:\n"
+    "\n"
+    f"{START_QUIZ_BUTTON_TEXT} — пройти викторину прямо в чате.\n"
+    f"{MINI_APP_BUTTON_TEXT} — открыть удобный режим внутри Telegram.\n"
+    f"{READING_MODE_BUTTON_TEXT} — выбрать обычный или бионический режим.\n"
+    "🙈 Скрыть меню — убрать нижнюю клавиатуру.\n"
+    "\n"
+    "/start — вернуть меню\n"
+    "/quiz — начать викторину в чате\n"
+    "/ui — открыть викторину в окне\n"
+    "\n"
+    "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
-MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
-READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
 CLASSIC_REPLY_NEXT_TEXT = "Далее"
 CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
@@ -222,10 +235,10 @@ def _safe_message_kind(message: object | None) -> str | None:
     if text.startswith("/"):
         return "command"
     if text in {
-        "🎯 Начать викторину",
-        MINI_APP_BUTTON_TEXT,
+        *START_QUIZ_BUTTON_ALIASES,
+        *MINI_APP_BUTTON_ALIASES,
         "ℹ️ Помощь",
-        READING_MODE_BUTTON_TEXT,
+        *READING_MODE_BUTTON_ALIASES,
         HIDE_MENU_BUTTON_TEXT,
     }:
         return "text_button"
@@ -533,7 +546,7 @@ async def post_init(application: Application) -> None:
         [
             BotCommand("start", "Запуск бота"),
             BotCommand("help", "Список команд"),
-            BotCommand("ping", "Проверка доступности"),
+            BotCommand("ping", "Проверить, что бот на связи"),
             BotCommand("quiz", "Начать викторину"),
             BotCommand("ui", "Открыть викторину в окне"),
         ]
@@ -803,13 +816,15 @@ def is_private_chat(update: Update) -> bool:
     return bool(update.effective_chat and update.effective_chat.type == "private")
 
 
+def build_menu_button_regex(*labels: str) -> str:
+    return rf"^({'|'.join(re.escape(label) for label in labels)})$"
+
+
 def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton("🎯 Начать викторину")],
-            [KeyboardButton(MINI_APP_BUTTON_TEXT)],
-            [KeyboardButton("ℹ️ Помощь")],
-            [KeyboardButton(READING_MODE_BUTTON_TEXT)],
+            [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
+            [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton("ℹ️ Помощь")],
             [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
         ],
         resize_keyboard=True,
@@ -821,12 +836,15 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     if update.message is None:
         return
 
-    first_entry = not context.user_data.get("start_seen", False)
-    context.user_data["start_seen"] = True
+    del context
     message_text = (
-        "Привет! Я учебный бот-викторина по психологии. Используйте /help для списка команд."
-        if first_entry
-        else "Меню показано."
+        "Привет! Я учебный бот-викторина по психологии.\n"
+        "\n"
+        "Можно пройти викторину двумя способами:\n"
+        "🎯 В чате — быстрый классический режим.\n"
+        "🚀 В окне — удобный режим внутри Telegram.\n"
+        "\n"
+        "Выберите действие ниже 👇"
     )
     await update.message.reply_text(
         message_text,
@@ -909,7 +927,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def ping_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    await safe_reply(update, "pong")
+    await safe_reply(update, "Бот на связи ✅")
 
 
 def format_owner_stats_text(stats: dict) -> str:
@@ -1078,7 +1096,13 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         return
     logger.debug("Mini App setup URL length: %s", len(miniapp_url))
 
-    intro_text = "Откройте викторину в удобном окне. Пройти её в чате по-прежнему можно через /quiz."
+    intro_text = (
+        "Откройте викторину в удобном окне.\n"
+        "\n"
+        f"В чате её по-прежнему можно пройти через {START_QUIZ_BUTTON_TEXT}.\n"
+        "\n"
+        f"Если кнопка не открылась, нажмите {MINI_APP_BUTTON_TEXT} в меню или отправьте /ui ещё раз."
+    )
     if fallback_mode:
         intro_text = (
             "Часть данных не поместилась в ссылку открытия. Если экран выглядит неполным, "
@@ -1088,7 +1112,9 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     has_active = isinstance(runner_state, dict) and runner_state.get("state") == "in_progress"
     if has_active:
         intro_text = (
-            "У вас уже есть начатая викторина. Откройте её в удобном окне, чтобы продолжить."
+            "У вас уже есть начатая викторина. Откройте её в удобном окне, чтобы продолжить.\n"
+            "\n"
+            f"Если кнопка не открылась, нажмите {MINI_APP_BUTTON_TEXT} в меню или отправьте /ui ещё раз."
         )
     api_started_at = time.perf_counter()
     await update.message.reply_text(
@@ -1097,11 +1123,6 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
             miniapp_url,
             force_setup_url=force_setup_url if has_active else None,
         ),
-    )
-    latency.add_telegram_api(api_started_at)
-    api_started_at = time.perf_counter()
-    await update.message.reply_text(
-        "Если кнопка не открылась, нажмите 🚀 Викторина в окне в меню или отправьте /ui ещё раз.",
     )
     latency.add_telegram_api(api_started_at)
     latency.summary()
@@ -2925,13 +2946,13 @@ def main() -> None:
     application.add_handler(CommandHandler("stats", stats_command))
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.Regex(r"^🎯 Начать викторину$"),
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*START_QUIZ_BUTTON_ALIASES)),
             start_quiz_button_handler,
         )
     )
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.Regex(r"^🚀 Викторина в окне$"),
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*MINI_APP_BUTTON_ALIASES)),
             mini_app_menu_button_handler,
         )
     )
@@ -2943,13 +2964,13 @@ def main() -> None:
     )
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.Regex(r"^👁 Режим чтения$"),
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*READING_MODE_BUTTON_ALIASES)),
             reading_mode_button_handler,
         )
     )
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.Regex(r"^🙈 Скрыть меню$"),
+            filters.ChatType.PRIVATE & filters.Regex(rf"^{re.escape(HIDE_MENU_BUTTON_TEXT)}$"),
             hide_menu_button_handler,
         )
     )

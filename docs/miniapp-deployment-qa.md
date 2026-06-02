@@ -51,9 +51,9 @@
 ### A. Private chat checks
 - [ ] `/ui` без `MINI_APP_URL` показывает fallback.
 - [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает primary inline кнопку открытия Mini App.
-- [ ] После `/start` в нижнем меню видна кнопка `🚀 Викторина в окне`.
-- [ ] Кнопка нижнего меню `🚀 Викторина в окне` отправляет свежий launch-сценарий через `/ui` (бот присылает новую inline WebApp-кнопку `🚀 Открыть викторину`).
-- [ ] Кнопка `🚀 Викторина в окне` не использует persistent WebApp URL в reply keyboard (stale launch context не хранится).
+- [ ] После `/start` в нижнем меню видна кнопка `🚀 В окне`.
+- [ ] Кнопка нижнего меню `🚀 В окне` отправляет свежий launch-сценарий через `/ui` (бот присылает новую inline WebApp-кнопку `🚀 Открыть викторину`).
+- [ ] Кнопка `🚀 В окне` не использует persistent WebApp URL в reply keyboard (stale launch context не хранится).
 - [ ] `/ui` не показывает persistent bottom WebApp reply-кнопки для Mini App (только стандартное главное меню).
 - [ ] Если пользователь видит `API недоступен`, закрыть Mini App, отправить свежий `/ui` и открыть новую inline-кнопку.
 - [ ] `/ui` при отсутствии активных категорий показывает no-categories fallback.
@@ -92,7 +92,7 @@
 
 ### E. Regression checks
 - [ ] `/quiz` работает без изменений as the default classic Telegram chat entry point.
-- [ ] Кнопка `🎯 Начать викторину` в главном меню работает без изменений.
+- [ ] Кнопка `🎯 Начать` в главном меню работает без изменений.
 - [ ] Reply keyboard работает как раньше.
 - [ ] Reading mode работает.
 - [ ] `/stats` остаётся скрытым owner-only.
@@ -462,7 +462,7 @@ Goal: validate phased migration from legacy `ThreadingHTTPServer` Mini App API t
 ### Phase 1 — repo-only implementation validation (no production switch)
 - [ ] Production bot runtime behavior remains unchanged.
 - [ ] `/quiz` remains fully operational in production.
-- [ ] `🚀 Викторина в окне` + `/ui` continue using current production legacy Mini App API path.
+- [ ] `🚀 В окне` + `/ui` continue using current production legacy Mini App API path.
 - [ ] FastAPI implementation is not receiving production traffic.
 - [ ] Production CD/deploy behavior is unchanged (no FastAPI enable/start in production).
 
@@ -505,7 +505,7 @@ Suggested smoke/log commands (adjust service names for environment):
 - `curl -fsS http://127.0.0.1:8081/healthz`
 - `docker compose logs --tail=200 psych_quiz_bot | grep -E "Legacy Mini App API server is disabled|Mini App API server started"`
 - `docker compose logs --tail=200 psych_quiz_miniapp_api | grep -E "Uvicorn running on|GET /healthz|POST /miniapp/"`
-- Telegram smoke: `/ping`, `/quiz`, `🚀 Викторина в окне`.
+- Telegram smoke: `/ping`, `/quiz`, `🚀 В окне`.
 
 ## 20) Phase 2 production switch-over (bot + FastAPI split)
 
@@ -538,7 +538,7 @@ Log expectations:
 Smoke checklist:
 - `/ping` in bot chat.
 - `/quiz` classic flow.
-- Bottom menu `🚀 Викторина в окне` opens Mini App flow.
+- Bottom menu `🚀 В окне` opens Mini App flow.
 - Full 5-question Mini App run: setup → answers with feedback after each answer → result screen.
 
 Post-switch log checks:

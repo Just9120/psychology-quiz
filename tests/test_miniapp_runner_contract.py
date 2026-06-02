@@ -2,6 +2,7 @@ import base64
 import json
 import asyncio
 import inspect
+import re
 import sqlite3
 import tempfile
 import unittest
@@ -12,17 +13,25 @@ from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, s
 from app.main import (
     HELP_TEXT,
     MINI_APP_BUTTON_TEXT,
+    MINI_APP_BUTTON_ALIASES,
+    READING_MODE_BUTTON_TEXT,
+    READING_MODE_BUTTON_ALIASES,
+    START_QUIZ_BUTTON_TEXT,
+    START_QUIZ_BUTTON_ALIASES,
     MAX_MINIAPP_URL_LENGTH,
     _parse_miniapp_answer_payload,
     _build_compact_runner_question_payload,
     build_miniapp_setup_context,
     build_miniapp_url,
     build_miniapp_url_with_fallback,
+    build_menu_button_regex,
     build_miniapp_launch_inline_keyboard,
     build_post_setup_miniapp_prompt,
     should_start_miniapp_api,
     get_main_menu_keyboard,
+    ping_command,
     post_init,
+    start_command,
     ui_command,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
@@ -504,17 +513,15 @@ class MiniAppRunnerContractTests(unittest.TestCase):
 
             asyncio.run(ui_command(update, context))
 
-            self.assertGreaterEqual(message.reply_text.await_count, 1)
+            self.assertEqual(1, message.reply_text.await_count)
             first_call = message.reply_text.await_args_list[0]
+            self.assertIn("Откройте викторину в удобном окне.", first_call.args[0])
+            self.assertIn(f"через {START_QUIZ_BUTTON_TEXT}", first_call.args[0])
+            self.assertIn(f"нажмите {MINI_APP_BUTTON_TEXT} в меню", first_call.args[0])
             self.assertIn("reply_markup", first_call.kwargs)
             inline_markup = first_call.kwargs["reply_markup"]
             self.assertTrue(hasattr(inline_markup, "inline_keyboard"))
             self.assertTrue(inline_markup.inline_keyboard[0][0].web_app.url.startswith("https://example.com/ui?context="))
-
-            if message.reply_text.await_count > 1:
-                second_call = message.reply_text.await_args_list[1]
-                self.assertNotIn("reply_markup", second_call.kwargs)
-                self.assertIn("отправьте /ui ещё раз", second_call.args[0])
 
     def test_inline_launch_keyboard_is_primary_for_ui_flow(self):
         kb = build_miniapp_launch_inline_keyboard("https://example.com/ui?context=x", force_setup_url="https://example.com/ui?context=y")
@@ -531,15 +538,71 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertIsNotNone(keyboard)
         self.assertEqual("🚀 Открыть викторину", keyboard.inline_keyboard[0][0].text)
 
-    def test_main_menu_contains_quiz_and_mini_app_entry_without_persistent_webapp_button(self):
+    def test_main_menu_contains_compact_entries_without_persistent_webapp_button(self):
         keyboard = get_main_menu_keyboard()
-        texts = [button.text for row in keyboard.keyboard for button in row]
-        self.assertIn("🎯 Начать викторину", texts)
-        self.assertIn(MINI_APP_BUTTON_TEXT, texts)
+        rows = [[button.text for button in row] for row in keyboard.keyboard]
+        self.assertEqual(
+            [
+                [START_QUIZ_BUTTON_TEXT, MINI_APP_BUTTON_TEXT],
+                [READING_MODE_BUTTON_TEXT, "ℹ️ Помощь"],
+                ["🙈 Скрыть меню"],
+            ],
+            rows,
+        )
         self.assertTrue(all(getattr(button, "web_app", None) is None for row in keyboard.keyboard for button in row))
 
-    def test_help_text_uses_non_technical_ui_copy(self):
+    def test_menu_button_alias_patterns_match_new_and_legacy_labels(self):
+        alias_cases = (
+            (START_QUIZ_BUTTON_ALIASES, "🎯 Начать викторину"),
+            (MINI_APP_BUTTON_ALIASES, "🚀 Викторина в окне"),
+            (READING_MODE_BUTTON_ALIASES, "👁 Режим чтения"),
+        )
+
+        for aliases, legacy_label in alias_cases:
+            pattern = build_menu_button_regex(*aliases)
+            self.assertRegex(aliases[0], pattern)
+            self.assertRegex(legacy_label, pattern)
+            self.assertIsNone(re.match(pattern, f" {legacy_label}"))
+
+    def test_displayed_main_menu_does_not_reintroduce_legacy_labels(self):
+        keyboard = get_main_menu_keyboard()
+        texts = [button.text for row in keyboard.keyboard for button in row]
+
+        self.assertNotIn("🎯 Начать викторину", texts)
+        self.assertNotIn("🚀 Викторина в окне", texts)
+        self.assertNotIn("👁 Режим чтения", texts)
+
+    def test_start_command_shows_user_intro_and_menu(self):
+        message = SimpleNamespace(reply_text=AsyncMock())
+        update = SimpleNamespace(message=message, effective_chat=SimpleNamespace(type="private"))
+        context = SimpleNamespace(user_data={})
+
+        asyncio.run(start_command(update, context))
+
+        call = message.reply_text.await_args
+        self.assertIn("Привет! Я учебный бот-викторина по психологии.", call.args[0])
+        self.assertIn("🎯 В чате — быстрый классический режим.", call.args[0])
+        self.assertIn("🚀 В окне — удобный режим внутри Telegram.", call.args[0])
+        self.assertIn("Выберите действие ниже 👇", call.args[0])
+        self.assertIsNotNone(call.kwargs.get("reply_markup"))
+
+    def test_ping_command_uses_user_friendly_response(self):
+        message = SimpleNamespace(reply_text=AsyncMock())
+        update = SimpleNamespace(message=message)
+        context = SimpleNamespace()
+
+        asyncio.run(ping_command(update, context))
+
+        message.reply_text.assert_awaited_once_with("Бот на связи ✅")
+
+    def test_help_text_uses_user_facing_copy_and_restore_instruction(self):
+        self.assertIn(f"{START_QUIZ_BUTTON_TEXT} — пройти викторину прямо в чате.", HELP_TEXT)
+        self.assertIn(f"{MINI_APP_BUTTON_TEXT} — открыть удобный режим внутри Telegram.", HELP_TEXT)
+        self.assertIn(f"{READING_MODE_BUTTON_TEXT} — выбрать обычный или бионический режим.", HELP_TEXT)
+        self.assertIn("/start — вернуть меню", HELP_TEXT)
+        self.assertIn("Если меню скрыто, нажмите кнопку «Меню»", HELP_TEXT)
         self.assertIn("/ui — открыть викторину в окне", HELP_TEXT)
+        self.assertNotIn("/ping", HELP_TEXT)
         self.assertNotIn("setup", HELP_TEXT.lower())
         self.assertNotIn("runner", HELP_TEXT.lower())
         self.assertNotIn("classic telegram chat ux", HELP_TEXT.lower())
@@ -553,6 +616,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertNotIn("launch context", src)
         self.assertNotIn("url-транспорта", src)
         self.assertIn("часть данных не поместилась в ссылку открытия", src)
+        self.assertIn("откройте викторину в удобном окне", src)
 
     def test_post_init_sets_non_technical_ui_command_copy(self):
         bot = SimpleNamespace(set_my_commands=AsyncMock())
@@ -560,7 +624,9 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         asyncio.run(post_init(app))
         commands = bot.set_my_commands.await_args.args[0]
         ui_cmd = next(cmd for cmd in commands if cmd.command == "ui")
+        ping_cmd = next(cmd for cmd in commands if cmd.command == "ping")
         self.assertEqual("Открыть викторину в окне", ui_cmd.description)
+        self.assertEqual("Проверить, что бот на связи", ping_cmd.description)
 
     def test_should_start_miniapp_api_disabled_by_default(self):
         settings = SimpleNamespace(
