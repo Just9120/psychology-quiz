@@ -24,7 +24,7 @@ Telegram update delivery mode:
 - `TELEGRAM_WEBHOOK_PORT` — локальный listen port для webhook сервера python-telegram-bot; обязателен только в webhook mode.
 - `TELEGRAM_WEBHOOK_SECRET_TOKEN` — secret token для Telegram webhook header; не логируется и должен задаваться только как секрет окружения.
 - `CLASSIC_QUIZ_SEND_NEXT_AS_NEW_MESSAGE` — экспериментальный UX-флаг для classic quiz: при `true` кнопка «Дальше» отправляет следующий вопрос новым сообщением вместо редактирования предыдущего; по умолчанию `false`.
-- `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE` — экспериментальный workaround для classic quiz: при `true` ответы и действие «Далее» идут обычными текстовыми сообщениями/reply keyboard вместо inline callback-кнопок; по умолчанию `false`, чтобы production UX не менялся без явного включения.
+- `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE` — recommended production classic chat UX: при `true` ответы и действие «Далее» идут обычными Telegram text message updates через bottom reply keyboard вместо inline callback-кнопок; production smoke подтвердил 15 classic quiz questions без hangs. При `false` сохраняется legacy/fallback inline callback mode; env default не меняется.
 
 Дополнительно для owner-only аналитики:
 - `ADMIN_TELEGRAM_IDS` (опционально) — список numeric Telegram user id через запятую.
@@ -146,6 +146,10 @@ Fallback:
 ## Вспомогательный UX
 
 - постоянная клавиатура reply keyboard в личном чате (`🎯 Начать викторину`, `ℹ️ Помощь`, `👁 Режим чтения`, `🙈 Скрыть меню`)
+- classic `/quiz` остаётся дефолтным Telegram chat entry point
+- для production classic chat UX рекомендуется `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true`: ответы и «Далее» отображаются в нижней Telegram reply keyboard и приходят в бот как обычные text message updates, поэтому сообщения викторины не засоряются inline-кнопками
+- production smoke для reply keyboard mode: пользователь завершил 15 classic quiz questions без hangs
+- legacy/fallback classic inline callback mode остаётся доступен при `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`
 - ручное скрытие меню через `🙈 Скрыть меню`
 - во время активной викторины меню скрывается без отдельного уведомления
 - после завершения викторины итоговый результат автоматически возвращает главное меню

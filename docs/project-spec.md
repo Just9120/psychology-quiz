@@ -79,12 +79,16 @@
 
 
 ## Telegram UX modes
-- `classic` — текущий и дефолтный UX в Telegram-чате (активный режим по умолчанию).
+- `classic` — текущий и дефолтный UX в Telegram-чате; `/quiz` остаётся default chat entry point.
+- `classic_reply_keyboard` — preferred production implementation внутри classic chat UX: ответы и действие `Далее` отправляются как обычные Telegram message updates через bottom reply keyboard buttons.
+- `classic_inline_callback` — legacy/fallback implementation classic chat UX: ответы и переходы идут через inline callback-кнопки в сообщениях.
 - `miniapp_test` — экспериментальный opt-in режим Telegram Mini App runner внутри Telegram; не включается по умолчанию.
 - `miniapp_default` — потенциальный будущий режим по умолчанию для Mini App, сейчас неактивен и не реализован.
 
 Ограничения и позиционирование:
 - Classic chat UX остаётся дефолтным режимом.
+- В production для classic chat UX рекомендуется reply keyboard mode, потому что answer controls живут в нижней Telegram-клавиатуре и не засоряют сообщения викторины inline-кнопками.
+- Inline callback mode сохраняется только как legacy/fallback для classic chat UX.
 - Telegram Mini App не является PWA.
 - Telegram Mini App не является standalone Web UI.
 - Mini App не заменяет текущий bot UX как default mode.
