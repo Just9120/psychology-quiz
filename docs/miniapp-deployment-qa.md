@@ -87,7 +87,7 @@
 - [ ] Run `/quiz` in Telegram classic chat UX.
 - [ ] Answer 10–15 questions via the bottom Telegram reply keyboard, including the `Далее` action.
 - [ ] Verify there are no long inline-callback-style hangs and the chat stays cleaner because answer controls do not remain attached to quiz messages.
-- [ ] Check only safe logs/metrics: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`.
+- [ ] Check only safe logs/metrics: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, `classic_text_next_latency`; latency lines include deterministic `status` and `latency_bucket` fields.
 - [ ] Roll back if needed by setting `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false` and restarting services.
 
 ### E. Regression checks
@@ -606,7 +606,9 @@ If `BOT_TOKEN` was exposed in logs, rotate the token manually via BotFather and 
 
 ## Classic Telegram bot latency diagnostics
 
-The bot now emits three low-noise diagnostics around classic user actions in `psych_quiz_bot` logs:
+For production classic reply keyboard observation (`CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true`), watch the text-update logs first: `classic_text_answer_ingress`, `classic_text_answer_latency`, `classic_text_next_ingress`, and `classic_text_next_latency`. Ingress lines confirm that a numeric answer or `Далее` reached the bot for an active session; latency lines include safe IDs plus `elapsed_ms`, deterministic `latency_bucket` (`lt_100ms`, `lt_500ms`, `lt_1000ms`, `gte_1000ms`), and `status` values such as `accepted`, `invalid_input`, `duplicate`, `stale_question`, `ignored_repeated_input`, or `ok`. These lines intentionally omit Telegram payloads, answer text, option text, question text, profile names, `initData`, tokens, and webhook secrets.
+
+The bot also emits three low-noise diagnostics around classic user actions in `psych_quiz_bot` logs:
 
 - application-level update ingress with prefix `bot_update_ingress`;
 - specific handler start with prefix `bot_handler_start`;
@@ -617,7 +619,7 @@ The bot now emits three low-noise diagnostics around classic user actions in `ps
 ### How to grep
 
 ```bash
-docker compose logs --tail=300 psych_quiz_bot | grep -E 'bot_update_ingress|bot_handler_start|bot_latency'
+docker compose logs --tail=300 psych_quiz_bot | grep -E 'classic_text_(answer|next)_(ingress|latency)|bot_update_ingress|bot_handler_start|bot_latency'
 ```
 
 Compare handler start and completion lines together:

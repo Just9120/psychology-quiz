@@ -472,6 +472,16 @@ def parse_classic_reply_answer_number(text: str, option_count: int) -> int | Non
     return answer_number - 1
 
 
+def _classic_text_latency_bucket(elapsed_ms: int) -> str:
+    if elapsed_ms < 100:
+        return "lt_100ms"
+    if elapsed_ms < 500:
+        return "lt_500ms"
+    if elapsed_ms < 1000:
+        return "lt_1000ms"
+    return "gte_1000ms"
+
+
 def _safe_classic_text_log_fields(*, telegram_user_id: int | None, session_id: int | None = None, question_id: int | None = None, elapsed_ms: int | None = None, status: str = "ok") -> str:
     fields = []
     if telegram_user_id is not None:
@@ -482,6 +492,7 @@ def _safe_classic_text_log_fields(*, telegram_user_id: int | None, session_id: i
         fields.append(f"question_id={question_id}")
     if elapsed_ms is not None:
         fields.append(f"elapsed_ms={elapsed_ms}")
+        fields.append(f"latency_bucket={_classic_text_latency_bucket(elapsed_ms)}")
     fields.append(f"status={status if re.fullmatch(r'[A-Za-z0-9_]{1,32}', status) else 'unknown'}")
     return " ".join(fields)
 
