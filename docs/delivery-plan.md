@@ -27,7 +27,7 @@ Observe production and run focused manual QA instead of starting another immedia
 
 ## Product/runtime invariants
 - `/quiz` remains default classic Telegram flow.
-- Mini App remains opt-in (`/ui`, `🚀 Викторина в окне`) and separate from classic chat UX.
+- Mini App remains opt-in (`/ui`, `🚀 В окне`) and separate from classic chat UX.
 - Standalone Web UI/PWA remains out of scope.
 - SQLite remains current runtime store; JSON files in the repository remain question-bank source of truth.
 - Docs-only changes do not require runtime sync.

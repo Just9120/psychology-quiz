@@ -145,7 +145,7 @@ Fallback:
 
 ## Вспомогательный UX
 
-- постоянная клавиатура reply keyboard в личном чате (`🎯 Начать викторину`, `ℹ️ Помощь`, `👁 Режим чтения`, `🙈 Скрыть меню`)
+- постоянная клавиатура reply keyboard в личном чате: `🎯 Начать` / `🚀 В окне`, `👁 Чтение` / `ℹ️ Помощь`, `🙈 Скрыть меню`
 - classic `/quiz` остаётся дефолтным Telegram chat entry point
 - для production classic chat UX рекомендуется `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true`: ответы и «Далее» отображаются в нижней Telegram reply keyboard и приходят в бот как обычные text message updates, поэтому сообщения викторины не засоряются inline-кнопками
 - production smoke для reply keyboard mode: пользователь завершил 15 classic quiz questions без hangs
@@ -160,8 +160,8 @@ Fallback:
 ## Telegram Mini App (experimental note)
 
 - Standalone Web UI / PWA сейчас не входят в текущий scope проекта.
-- Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram: через `/ui` или через кнопку нижнего меню `🚀 Викторина в окне`.
-- Кнопка `🚀 Викторина в окне` запускает безопасный fresh-flow: бот отправляет новое сообщение с inline WebApp-кнопкой `🚀 Открыть викторину`, а не хранит persistent `web_app` URL в reply keyboard.
+- Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram: через `/ui` или через кнопку нижнего меню `🚀 В окне`.
+- Кнопка `🚀 В окне` запускает безопасный fresh-flow: бот отправляет новое сообщение с inline WebApp-кнопкой `🚀 Открыть викторину`, а не хранит persistent `web_app` URL в reply keyboard.
 - Текущий Mini App MVP покрывает setup, state hydration, показ текущего вопроса, отправку ответа, feedback, переход к следующему шагу и итоговый результат с рестартом в окне Mini App.
 - `/quiz` остаётся дефолтным entry point и классическим chat-based runner.
 - Mini App использует backend API (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state.
