@@ -2,6 +2,7 @@ import base64
 import json
 import asyncio
 import inspect
+import re
 import sqlite3
 import tempfile
 import unittest
@@ -12,14 +13,18 @@ from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, s
 from app.main import (
     HELP_TEXT,
     MINI_APP_BUTTON_TEXT,
+    MINI_APP_BUTTON_ALIASES,
     READING_MODE_BUTTON_TEXT,
+    READING_MODE_BUTTON_ALIASES,
     START_QUIZ_BUTTON_TEXT,
+    START_QUIZ_BUTTON_ALIASES,
     MAX_MINIAPP_URL_LENGTH,
     _parse_miniapp_answer_payload,
     _build_compact_runner_question_payload,
     build_miniapp_setup_context,
     build_miniapp_url,
     build_miniapp_url_with_fallback,
+    build_menu_button_regex,
     build_miniapp_launch_inline_keyboard,
     build_post_setup_miniapp_prompt,
     should_start_miniapp_api,
@@ -545,6 +550,27 @@ class MiniAppRunnerContractTests(unittest.TestCase):
             rows,
         )
         self.assertTrue(all(getattr(button, "web_app", None) is None for row in keyboard.keyboard for button in row))
+
+    def test_menu_button_alias_patterns_match_new_and_legacy_labels(self):
+        alias_cases = (
+            (START_QUIZ_BUTTON_ALIASES, "🎯 Начать викторину"),
+            (MINI_APP_BUTTON_ALIASES, "🚀 Викторина в окне"),
+            (READING_MODE_BUTTON_ALIASES, "👁 Режим чтения"),
+        )
+
+        for aliases, legacy_label in alias_cases:
+            pattern = build_menu_button_regex(*aliases)
+            self.assertRegex(aliases[0], pattern)
+            self.assertRegex(legacy_label, pattern)
+            self.assertIsNone(re.match(pattern, f" {legacy_label}"))
+
+    def test_displayed_main_menu_does_not_reintroduce_legacy_labels(self):
+        keyboard = get_main_menu_keyboard()
+        texts = [button.text for row in keyboard.keyboard for button in row]
+
+        self.assertNotIn("🎯 Начать викторину", texts)
+        self.assertNotIn("🚀 Викторина в окне", texts)
+        self.assertNotIn("👁 Режим чтения", texts)
 
     def test_start_command_shows_user_intro_and_menu(self):
         message = SimpleNamespace(reply_text=AsyncMock())

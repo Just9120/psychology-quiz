@@ -78,6 +78,12 @@ DIFFICULTY_CHOICES = (
 START_QUIZ_BUTTON_TEXT = "🎯 Начать"
 MINI_APP_BUTTON_TEXT = "🚀 В окне"
 READING_MODE_BUTTON_TEXT = "👁 Чтение"
+LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
+LEGACY_MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
+LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
+START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
+MINI_APP_BUTTON_ALIASES = (MINI_APP_BUTTON_TEXT, LEGACY_MINI_APP_BUTTON_TEXT)
+READING_MODE_BUTTON_ALIASES = (READING_MODE_BUTTON_TEXT, LEGACY_READING_MODE_BUTTON_TEXT)
 HELP_TEXT = (
     "Что можно сделать:\n"
     "\n"
@@ -229,10 +235,10 @@ def _safe_message_kind(message: object | None) -> str | None:
     if text.startswith("/"):
         return "command"
     if text in {
-        START_QUIZ_BUTTON_TEXT,
-        MINI_APP_BUTTON_TEXT,
+        *START_QUIZ_BUTTON_ALIASES,
+        *MINI_APP_BUTTON_ALIASES,
         "ℹ️ Помощь",
-        READING_MODE_BUTTON_TEXT,
+        *READING_MODE_BUTTON_ALIASES,
         HIDE_MENU_BUTTON_TEXT,
     }:
         return "text_button"
@@ -808,6 +814,10 @@ async def safe_reply(update: Update, text: str) -> None:
 
 def is_private_chat(update: Update) -> bool:
     return bool(update.effective_chat and update.effective_chat.type == "private")
+
+
+def build_menu_button_regex(*labels: str) -> str:
+    return rf"^({'|'.join(re.escape(label) for label in labels)})$"
 
 
 def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
@@ -2936,13 +2946,13 @@ def main() -> None:
     application.add_handler(CommandHandler("stats", stats_command))
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.Regex(rf"^{re.escape(START_QUIZ_BUTTON_TEXT)}$"),
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*START_QUIZ_BUTTON_ALIASES)),
             start_quiz_button_handler,
         )
     )
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.Regex(rf"^{re.escape(MINI_APP_BUTTON_TEXT)}$"),
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*MINI_APP_BUTTON_ALIASES)),
             mini_app_menu_button_handler,
         )
     )
@@ -2954,7 +2964,7 @@ def main() -> None:
     )
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.Regex(rf"^{re.escape(READING_MODE_BUTTON_TEXT)}$"),
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*READING_MODE_BUTTON_ALIASES)),
             reading_mode_button_handler,
         )
     )
