@@ -387,7 +387,11 @@ def build_selected_mix_keyboard(categories, selected_ids: set[int]) -> InlineKey
 
 
 def build_quiz_finished_text(score: int, total_questions: int) -> str:
-    return "<b>Викторина завершена</b>\n" f"<b>Результат:</b> {score} из {total_questions}"
+    return (
+        "<b>Викторина завершена 🎉</b>\n\n"
+        f"<b>Результат:</b> {score} из {total_questions}\n\n"
+        f"Чтобы начать новую викторину, нажмите {START_QUIZ_BUTTON_TEXT} или отправьте /quiz."
+    )
 
 
 def option_index_to_label(option_index: int) -> str:
@@ -485,6 +489,60 @@ def build_classic_next_reply_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup([[CLASSIC_REPLY_NEXT_TEXT]], resize_keyboard=True, one_time_keyboard=False)
 
 
+def numeric_answer_label_for_option(options, option_index: int) -> str:
+    for position, opt in enumerate(options, start=1):
+        if int(opt["option_index"]) == option_index:
+            return str(position)
+    raise ValueError("option_index is not present in options")
+
+
+def _find_option_by_index(options, option_index: int):
+    for opt in options:
+        if int(opt["option_index"]) == option_index:
+            return opt
+    return None
+
+
+def build_classic_reply_answer_detail_line(
+    label: str,
+    *,
+    option_position_label: str,
+    option_text: str,
+    reading_mode: str,
+) -> str:
+    rendered_option_text = render_reading_mode_text(option_text, reading_mode)
+    return f"<b>{label}:</b> {option_position_label} — {rendered_option_text}"
+
+
+def build_classic_reply_feedback_text(result: dict) -> str:
+    result_line = "<b>Верно ✅</b>" if result["is_correct"] else "<b>Неверно ❌</b>"
+    answer_lines = [
+        build_classic_reply_answer_detail_line(
+            "Ваш ответ",
+            option_position_label=str(result["selected_option_label"]),
+            option_text=str(result["selected_option_text"]),
+            reading_mode=str(result["reading_mode"]),
+        )
+    ]
+    if not result["is_correct"]:
+        answer_lines.append(
+            build_classic_reply_answer_detail_line(
+                "Правильный ответ",
+                option_position_label=str(result["correct_option_label"]),
+                option_text=str(result["correct_option_text"]),
+                reading_mode=str(result["reading_mode"]),
+            )
+        )
+    rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
+    answer_lines_text = "\n".join(answer_lines)
+    return (
+        f"{result_line}\n\n"
+        f"{answer_lines_text}\n\n"
+        f"<b>Пояснение:</b>\n{rendered_explanation}\n\n"
+        f"<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']}"
+    )
+
+
 def _classic_reply_mode_enabled(settings) -> bool:
     return bool(getattr(settings, "classic_quiz_reply_keyboard_mode", False))
 
@@ -551,16 +609,19 @@ def build_question_text_with_options(
     reading_mode: str,
     *,
     numeric_labels: bool = False,
+    show_answer_keyboard_hint: bool = False,
 ) -> str:
     formatted_options = "\n".join(
         f"{position if numeric_labels else option_index_to_label(int(opt['option_index']))}. "
         f"{render_reading_mode_text(str(opt['option_text']), reading_mode)}"
         for position, opt in enumerate(options, start=1)
     )
+    hint = "\n\nОтветьте кнопкой с номером варианта внизу 👇" if show_answer_keyboard_hint else ""
     return (
         f"<b>Вопрос {order_index} из {total_questions}</b>\n\n"
         f"{render_reading_mode_text(question_text, reading_mode)}\n\n"
         f"{formatted_options}"
+        f"{hint}"
     )
 
 
@@ -1052,7 +1113,10 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         latency.add_render(render_started_at)
         api_started_at = time.perf_counter()
         await update.message.reply_text(
-            "Выберите режим викторины:",
+            "Выберите режим викторины:\n\n"
+            "Конкретная тема — вопросы по одной выбранной теме.\n"
+            "Микс из выбранных тем — вопросы из нескольких тем.\n"
+            "Все темы — случайные вопросы из всего доступного банка.",
             reply_markup=reply_markup,
         )
         latency.add_telegram_api(api_started_at)
@@ -1235,8 +1299,7 @@ async def send_current_question_to_message(message, settings, session_id: int, c
         await _timed_telegram_api_call(
             latency,
             message.reply_text(
-                f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}\n\n"
-                "Чтобы запустить новую викторину, используйте /quiz.",
+                build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions']),
                 reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None,
                 parse_mode="HTML",
             ),
@@ -1264,6 +1327,7 @@ async def send_current_question_to_message(message, settings, session_id: int, c
         options=options,
         reading_mode=reading_mode,
         numeric_labels=True,
+        show_answer_keyboard_hint=int(current["order_index"]) == 1,
     )
     markup = build_classic_answer_reply_keyboard(options)
     if latency is not None:
@@ -1682,8 +1746,7 @@ async def send_current_question(
             query,
             "Для текущего вопроса не найдены варианты ответа.\n"
             "Сессия завершена досрочно.\n"
-            f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}\n\n"
-            "Чтобы запустить новую викторину, используйте /quiz.",
+            f"{build_quiz_finished_text(finalize_payload['score'], finalize_payload['total_questions'])}",
             latency=latency,
         )
         return False
@@ -1708,6 +1771,7 @@ async def send_current_question(
             options=options,
             reading_mode=reading_mode,
             numeric_labels=_classic_reply_mode_enabled(settings),
+            show_answer_keyboard_hint=_classic_reply_mode_enabled(settings) and order_index == 1,
     )
     if latency is not None:
         latency.add_render(render_started_at)
@@ -2335,6 +2399,7 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
         if int(session["user_id"]) != int(user_row["id"]):
             return {"status": "forbidden"}
         current = get_current_unanswered_question(conn, session_id)
+        options = get_question_options(conn, question_id)
         submission = submit_miniapp_answer_event(
             conn,
             session_id=session_id,
@@ -2347,13 +2412,22 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
             return {"status": "stale_finished", "finalized": finalized}
         if submission.status != "accepted":
             return {"status": submission.status}
+        selected_option = _find_option_by_index(options, selected_option_index)
+        correct_option = next((opt for opt in options if bool(int(opt["is_correct"]))), None)
+        if selected_option is None or correct_option is None:
+            return {"status": "invalid_option"}
         answered_questions = get_answered_questions_count(conn, session_id)
         total_questions = int(current["total_questions"])
         is_last_question = answered_questions >= total_questions
         finalized = finalize_quiz_session(conn, session_id) if is_last_question else None
+        correct_option_index = int(correct_option["option_index"])
         return {
             "status": "accepted",
             "is_correct": bool(submission.is_correct),
+            "selected_option_label": numeric_answer_label_for_option(options, selected_option_index),
+            "selected_option_text": str(selected_option["option_text"]),
+            "correct_option_label": numeric_answer_label_for_option(options, correct_option_index),
+            "correct_option_text": str(correct_option["option_text"]),
             "explanation": str(current["explanation"] or ""),
             "answered_questions": answered_questions,
             "total_questions": total_questions,
@@ -2458,34 +2532,26 @@ async def classic_reply_text_answer_handler(update: Update, context: ContextType
 
         status = result["status"]
         if status == "accepted":
-            is_correct = result["is_correct"]
-            result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
-            rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
+            feedback_text = build_classic_reply_feedback_text(result)
             if result["is_last_question"]:
                 finalized = result["finalized"]
                 _set_classic_reply_state(context, None)
                 await _timed_telegram_api_call(
                     latency,
                     message.reply_text(
-                        f"{result_line}\n\n"
-                        f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-                        f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}\n\n"
-                        "Чтобы запустить новую викторину, используйте /quiz.",
+                        f"{feedback_text}\n\n"
+                        f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}",
                         reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None,
                         parse_mode="HTML",
                     ),
                     api_kind="message_send",
                 )
             else:
-                next_number = result["answered_questions"] + 1
                 _set_classic_reply_state(context, {"status": "awaiting_next", "session_id": session_id})
                 await _timed_telegram_api_call(
                     latency,
                     message.reply_text(
-                        f"{result_line}\n\n"
-                        f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-                        f"<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']} отвечено\n\n"
-                        f"Нажмите «{CLASSIC_REPLY_NEXT_TEXT}», чтобы перейти к вопросу {next_number}/{result['total_questions']}.",
+                        feedback_text,
                         reply_markup=build_classic_next_reply_keyboard(),
                         parse_mode="HTML",
                     ),
@@ -2697,8 +2763,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             message = (
                 f"{result_line}\n\n"
                 f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-                f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}\n\n"
-                "Чтобы запустить новую викторину, используйте /quiz."
+                f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}"
             )
             await send_quiz_result_with_main_menu(query, message, latency=latency)
             latency.summary()
