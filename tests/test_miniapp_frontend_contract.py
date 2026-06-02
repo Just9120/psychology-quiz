@@ -28,7 +28,46 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def test_debug_mode_query_flag_supported(self):
         self.assertIn("getQueryParam('debug') === '1'", self.content)
 
+    def test_setup_visual_structure_preserves_native_controls(self):
+        self.assertIn('id="setup_intro" class="setup-intro"', self.content)
+        self.assertIn('Выберите формат, темы и сложность — всё пройдёт внутри Telegram.', self.content)
+        self.assertIn('<form id="f" class="setup-form" hidden>', self.content)
+        self.assertGreaterEqual(self.content.count('class="setup-section"'), 3)
+        self.assertIn('<fieldset id="cats_fieldset" class="setup-section">', self.content)
+        self.assertIn('border-radius: 16px;', self.content)
+        self.assertIn('background: #fff;', self.content)
+        self.assertIn('label input {', self.content)
+        self.assertIn('<input type="radio" name="quiz_mode" value="single" checked /> Конкретная тема', self.content)
+        self.assertIn('<input type="radio" name="quiz_mode" value="selected_mix" /> Микс из выбранных тем', self.content)
+        self.assertIn('<input type="radio" name="quiz_mode" value="all" /> Все темы', self.content)
+        self.assertIn('<input type="radio" name="question_count" value="5" checked /> 5', self.content)
+        self.assertIn('<input type="radio" name="question_count" value="10" /> 10', self.content)
+        self.assertIn('<input type="radio" name="question_count" value="15" /> 15', self.content)
+        self.assertIn('<input type="radio" name="question_count" value="all" /> Все доступные', self.content)
+        self.assertIn('<input type="radio" name="difficulty" value="any" checked /> Любая', self.content)
+        self.assertIn('<input type="radio" name="difficulty" value="easy" /> Лёгкие', self.content)
+        self.assertIn('<input type="radio" name="difficulty" value="medium" /> Средние', self.content)
+        self.assertIn('<input type="radio" name="difficulty" value="hard" /> Сложные', self.content)
+        self.assertIn("input.name = inputType === 'radio' ? 'category_id' : 'category_ids';", self.content)
+        self.assertIn("label.className = 'setup-option';", self.content)
+
+    def test_progress_is_single_clear_question_presentation(self):
+        self.assertIn("function renderProgress(progress)", self.content)
+        self.assertIn("runnerState.textContent = 'Выберите вариант ответа.';", self.content)
+        self.assertNotIn("Идёт викторина: ${parts.join(' · ')}.", self.content)
+        self.assertNotIn("отвечено: ${answered}", self.content)
+        self.assertNotIn("осталось: ${remaining}", self.content)
+        self.assertNotIn("className = 'progress-chip'", self.content)
+        self.assertNotIn("Math.round((order / total) * 100)", self.content)
+        self.assertIn("progress.className = 'question-progress';", self.content)
+        self.assertIn("? `Вопрос ${order} из ${total}` : 'Прогресс';", self.content)
+        self.assertIn("header.className = 'question-title';", self.content)
+        self.assertIn("q.className = 'question-text';", self.content)
+
     def test_completed_view_has_product_facing_copy_and_next_actions(self):
+        self.assertIn("card.className = 'result-card';", self.content)
+        self.assertIn("title.className = 'result-title';", self.content)
+        self.assertIn("actions.className = 'completion-actions';", self.content)
         self.assertIn("title.textContent = 'Последняя викторина завершена 🎉'", self.content)
         self.assertIn('Результат: ${Number.isInteger(score) ? score : 0} из ${Number.isInteger(total) ? total : 0}', self.content)
         self.assertIn("hint.textContent = 'Можно начать новую викторину или закрыть окно.'", self.content)
@@ -116,6 +155,8 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("-webkit-text-fill-color: #222;", self.content)
         self.assertNotIn("opacity: 0.65;", self.content)
         self.assertIn("statusEl.textContent = 'Проверяю ответ...';", self.content)
+        self.assertIn("card.className = 'question-card';", self.content)
+        self.assertIn("card.appendChild(list);", self.content)
         self.assertIn("status.className = 'answer-status';", self.content)
         self.assertIn("statusEl.classList.add('pending');", self.content)
         self.assertIn("Ваш ответ:", self.content)
@@ -241,6 +282,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_client_telemetry_debug_contract(self):
         self.assertIn('id="telemetry_debug" class="note telemetry-debug" hidden', self.content)
+        self.assertIn("const FRONTEND_VERSION = 'ui-polish-v6-visual-cleanup';", self.content)
         self.assertIn("function startTelemetry(action, endpoint", self.content)
         self.assertIn("marks: { action_start: startedAt, 'tap/action_start': startedAt }", self.content)
         self.assertIn("markTelemetry(telemetry, 'before_build_payload'", self.content)
