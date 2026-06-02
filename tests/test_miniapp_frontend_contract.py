@@ -28,9 +28,17 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def test_debug_mode_query_flag_supported(self):
         self.assertIn("getQueryParam('debug') === '1'", self.content)
 
-    def test_completed_view_has_next_actions(self):
+    def test_completed_view_has_product_facing_copy_and_next_actions(self):
+        self.assertIn("title.textContent = 'Последняя викторина завершена 🎉'", self.content)
+        self.assertIn('Результат: ${Number.isInteger(score) ? score : 0} из ${Number.isInteger(total) ? total : 0}', self.content)
+        self.assertIn("hint.textContent = 'Можно начать новую викторину или закрыть окно.'", self.content)
+        self.assertIn("runnerState.textContent = 'Последняя викторина завершена.'", self.content)
         self.assertIn("restart.textContent = 'Новая викторина'", self.content)
         self.assertIn("closeBtn.textContent = 'Закрыть Mini App'", self.content)
+        self.assertNotIn('Вы просматриваете завершённый результат из серверного состояния', self.content)
+        self.assertNotIn('тема требует повторения', self.content)
+        self.assertNotIn('база уже есть', self.content)
+        self.assertNotIn('тема хорошо усвоена', self.content)
         self.assertNotIn('location.reload();', self.content)
         self.assertIn('function getSafeSetupUrl()', self.content)
         self.assertIn('new URL(ctx.setup_url, location.origin)', self.content)
@@ -85,6 +93,9 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("ol button {", self.content)
         self.assertIn("border-radius: 14px;", self.content)
         self.assertIn("border: 1px solid #d6dce8;", self.content)
+        self.assertIn("text-align: left;", self.content)
+        self.assertIn("white-space: normal;", self.content)
+        self.assertIn("line-height: 1.35;", self.content)
         self.assertIn("ol button.answer-selected {", self.content)
         self.assertIn("ol button.answer-pending {", self.content)
         self.assertIn("ol button.answer-correct {", self.content)
@@ -109,6 +120,8 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("statusEl.classList.add('pending');", self.content)
         self.assertIn("Ваш ответ:", self.content)
         self.assertIn("Правильный ответ:", self.content)
+        self.assertIn("const isCorrect = feedback?.is_correct === true || (correctIdx !== null && selectedIdx === correctIdx);", self.content)
+        self.assertIn("if (!isCorrect && correctIdx !== null && correctText) {", self.content)
         self.assertNotIn("Правильный ответ: ?.", self.content)
         self.assertIn("Отправляю ответ...", self.content)
         self.assertIn("Проверяю, был ли ответ принят...", self.content)
@@ -119,6 +132,29 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("Не удалось обновить интерфейс после ответа. Попробуйте снова.", self.content)
         self.assertIn("feedback-line", self.content)
         self.assertIn("next.className = 'answer-next';", self.content)
+
+
+    def test_setup_topic_selection_modes_and_disabled_reasons(self):
+        self.assertIn('id="setup_hint" class="meta"', self.content)
+        self.assertIn("const setupHint = document.getElementById('setup_hint');", self.content)
+        self.assertIn("const inputType = mode === 'selected_mix' ? 'checkbox' : 'radio';", self.content)
+        self.assertIn("input.type = inputType;", self.content)
+        self.assertIn("input.name = inputType === 'radio' ? 'category_id' : 'category_ids';", self.content)
+        self.assertIn("const selectedSet = new Set(mode === 'single' ? selectedIds.slice(0, 1) : selectedIds);", self.content)
+        self.assertIn("checked.slice(1).forEach((input) => { input.checked = false; });", self.content)
+        self.assertIn("catsFieldset.hidden = allMode;", self.content)
+        self.assertIn("category_ids: mode === 'all' ? [] : selected,", self.content)
+        self.assertIn("if (!ok) hint = 'Выберите одну тему, чтобы начать.';", self.content)
+        self.assertIn("if (!ok) hint = 'Выберите хотя бы одну тему.';", self.content)
+        self.assertIn("setupHint.textContent = hint;", self.content)
+
+    def test_answer_rendering_avoids_duplicate_numbering_and_preserves_clickable_cards(self):
+        self.assertIn("const list = document.createElement('ol');", self.content)
+        self.assertIn("btn.textContent = txt;", self.content)
+        self.assertNotIn("btn.textContent = `${Number.isInteger(idx) ? idx + 1 : '?'}: ${txt}`;", self.content)
+        self.assertIn("btn.addEventListener('click', () => submitAnswer", self.content)
+        self.assertIn("text-align: left;", self.content)
+        self.assertIn("white-space: normal;", self.content)
 
 
     def test_incomplete_feedback_resync_guard(self):
