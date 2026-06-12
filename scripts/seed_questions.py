@@ -87,10 +87,23 @@ def load_questions_from_folder(folder_path: Path) -> tuple[list[dict[str, Any]],
     return all_questions, len(json_files)
 
 
+def discover_module_dirs(questions_root: Path) -> list[Path]:
+    if not questions_root.exists() or not questions_root.is_dir():
+        raise FileNotFoundError(f"Не найдена директория с вопросами: {questions_root}")
+
+    module_dirs = sorted(
+        (path for path in questions_root.iterdir() if path.is_dir() and path.name.startswith("module")),
+        key=lambda path: path.name,
+    )
+    if not module_dirs:
+        raise FileNotFoundError(f"Не найдены module-директории с вопросами: {questions_root}")
+
+    return module_dirs
+
+
 def main() -> int:
     repo_root = Path(__file__).resolve().parent.parent
     questions_root = repo_root / "content" / "questions"
-    module_dirs = [questions_root / "module1", questions_root / "module2"]
 
     db_path = Path(resolve_db_path())
     if not db_path.exists():
@@ -99,6 +112,7 @@ def main() -> int:
         return 1
 
     try:
+        module_dirs = discover_module_dirs(questions_root)
         questions: list[dict[str, Any]] = []
         processed_files = 0
         for module_dir in module_dirs:
@@ -120,6 +134,8 @@ def main() -> int:
         print(f"[ERROR] Ошибка SQLite при загрузке вопросов: {exc}")
         return 1
 
+    processed_modules = ", ".join(module_dir.name for module_dir in module_dirs)
+    print(f"[OK] Директории обработаны: {processed_modules}")
     print(f"[OK] Файлов обработано: {processed_files}")
     print(f"[OK] Одобренных вопросов найдено: {approved_total}")
     print(f"[OK] Категорий создано/обновлено: {stats['categories']}")
