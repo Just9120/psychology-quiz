@@ -129,11 +129,11 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 - Difficulty balance: easy 32, medium 52, hard 24 gives a healthy progression for a newly opened Module 3 topic.
 - Correct answer distribution: perfectly balanced at 27 questions per answer position.
 - Dedup/source-alignment candidates: no exact duplicate question text, option sets, or repeated explanations were found. The lecture/practice split should still receive a source-backed review for overlap between conceptual lecture questions and practical application questions before broader Module 3 expansion.
-- Readability: stems are generally compact. One uppercase `НЕ` item should be reviewed for learner-friendly wording, but there is no pattern of excessive negation.
+- Readability: stems are generally compact. Follow-up polish reworded `m3_psychological_consulting_063` from an uppercase negation stem to a positive out-of-scope formulation while preserving the same concept and answer.
 
 ## Recommended follow-up PRs
 
-1. Module 3 dedup/readability/source-alignment polish: review lecture/practice overlap, the single uppercase `НЕ` item, and source mapping for practice/checklist/technique-card questions without changing category structure.
+1. Module 3 dedup/readability/source-alignment polish: addressed in a focused follow-up pass for lecture/practice overlap, the single uppercase `НЕ` item, and family-level source mapping without changing category structure.
 2. Module 2 experimental psychology balance pass: address answer-position imbalance, review easy/medium/hard assignments for definition-like validity items, and polish long/mirrored stems.
 3. Module 1 answer-distribution cleanup: mechanically reshuffle options across stable baseline topics while preserving correct answers, explanations, IDs, and source refs.
 4. Module 2 qualitative methods light polish: review `m2_qual_023`/`m2_qual_041` overlap and underuse of correct answer position 3.
