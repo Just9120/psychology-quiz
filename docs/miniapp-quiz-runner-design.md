@@ -1,24 +1,27 @@
-# Mini App quiz runner design (next phase)
+# Mini App quiz runner design (historical/supporting)
 
 ## Status and scope
-- Document type: **historical design + implemented architecture summary**.
-- Implemented through PR #162: setup, state hydration, in-app question rendering, answer submission, feedback, next transition, completed/result view, and in-window new quiz restart.
+- Document type: **historical/supporting design + implemented architecture summary**.
+- Current product behavior is defined in `docs/project-spec.md`; current delivery state is defined in `docs/delivery-plan.md`.
+- This file must not authorize new Mini App implementation by itself. Treat old plans, slices, and tradeoffs below as supporting context only.
+- Original Mini App runner work implemented setup, state hydration, in-app question rendering, answer submission, feedback, next transition, completed/result view, and in-window new quiz restart.
 - Runtime behavior in current state:
   - `/quiz` stays the default classic chat entry point.
   - `/ui` stays experimental opt-in.
   - Mini App uses dedicated API endpoints (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) with `initData` auth and resilient retry/recovery behavior.
   - `/stats` remains owner-only and outside Mini App.
 
-## Implemented through #162
+## Historical implementation summary
 - Client transport for critical POSTs uses `simple_body`; retries include pre-retry state resync and early hedge recovery.
 - API responses in current MVP are served by legacy `ThreadingHTTPServer` path with HTTP/1.1 + explicit `Content-Length` hardening.
-- Target next step: migrate HTTP serving layer to FastAPI + uvicorn while preserving endpoint contracts and server-authoritative quiz semantics.
+- Historical target considered after the original runner work: migrate HTTP serving layer to FastAPI + uvicorn while preserving endpoint contracts and server-authoritative quiz semantics. Current delivery authority remains `docs/delivery-plan.md`.
 - Automatic `sendData` fallback after API failure is intentionally disabled to avoid duplicate/misaligned state transitions.
 
-- FastAPI target is phased: Phase 1 repo-only implementation (no production traffic/CD change), Phase 2 separate production switch-over PR, Phase 3 legacy HTTP-layer cleanup after soak.
+- Historical FastAPI target was phased: Phase 1 repo-only implementation (no production traffic/CD change), Phase 2 separate production switch-over PR, Phase 3 legacy HTTP-layer cleanup after soak.
 
-## Future target scope
-Planned future UX inside Mini App (opt-in path):
+## Historical target scope considered during Mini App runner design
+These UX capabilities were considered during the Mini App runner design. The core setup/question/answer/feedback/result flow is now implemented as product-facing opt-in Mini App behavior; use `docs/project-spec.md` for current product behavior and `docs/delivery-plan.md` for active delivery state.
+
 1. Question display inside Mini App.
 2. Answer selection inside Mini App.
 3. Progress display inside Mini App.
@@ -89,8 +92,8 @@ Planned future UX inside Mini App (opt-in path):
 - Observability/debugging: medium/high (state fetch points improve diagnosis).
 - Failure/retry: good with idempotent answer handling + explicit state refresh channel.
 
-## Recommended architecture (first implementation phase)
-Recommend **Hybrid (Option C)** as safest next step:
+## Historical architecture recommendation for first implementation phase
+The original design recommended **Hybrid (Option C)** as the safest first implementation approach:
 - Preserves existing bot-centric authority and validation model.
 - Minimizes risky platform changes while enabling in-Mini App question rendering.
 - Supports reopen/recovery better than pure `sendData` alone.
@@ -131,26 +134,26 @@ Recommend **Hybrid (Option C)** as safest next step:
    - If full `runner_state` is too large (e.g., long question/options), bot retries with compact setup-focused context (categories + compact server-derived runner metadata without full question/result payload).
    - If compact context still exceeds limit, Mini App opening is rejected with: `Mini App временно недоступен: слишком большой launch context. Используйте /quiz.`
 
-## Phased implementation slices
+## Historical phased implementation slices
 
 ### Slice 1 — session/transport contract baseline
-- Status: **implemented** in PR #126 (current PR).
+- Status: **implemented** in earlier Mini App runner work (PR #126).
 - Delivered baseline: minimal authoritative server-side contract for answer submission with explicit ownership/session/current-question/allowed-option validation and predictable stale/duplicate handling.
 - Validation approach: unit tests for ownership, stale submission, duplicate safety, and invalid option rejection.
 - Non-goals kept: no full Mini App UI runner screens in this slice.
 - Risks: contract drift between Mini App payload and backend expectations.
 
 ### Slice 2 — render current question in Mini App
-- Status: **implemented** in this PR.
+- Status: **implemented** in earlier Mini App runner work.
 - Goal: show authoritative current question/answers in Mini App for opt-in `/ui` users.
 - Likely files: Mini App frontend rendering logic, minimal state-load contract, bot/backend state adapter.
 - Validation approach: manual QA + targeted tests for empty/expired state rendering.
 - Non-goals: final result screen completeness.
 - Risks: reopen race conditions and stale client cache assumptions.
- - Implementation note: because Mini App assets are static and no dedicated backend API is introduced in this slice, snapshot delivery is embedded into `/ui` launch context from bot-side authoritative DB state.
+- Implementation note: because Mini App assets are static and no dedicated backend API is introduced in this slice, snapshot delivery is embedded into `/ui` launch context from bot-side authoritative DB state.
 
 ### Slice 3 — answer submission + next transition
-- Status: **implemented** in this PR (minimal `sendData` transport and chat-confirmed transition).
+- Status: **implemented** in earlier Mini App runner work (minimal `sendData` transport and chat-confirmed transition).
 - Goal: submit answers from Mini App and transition to next question safely.
 - Likely files: answer submit handlers, Mini App submit UI state, dedupe/idempotency handling.
 - Validation approach: stale/duplicate/out-of-order submission tests and manual Telegram QA.
@@ -158,7 +161,7 @@ Recommend **Hybrid (Option C)** as safest next step:
 - Risks: double-submit under poor network conditions.
 
 ### Slice 4 — progress + result screen
-- Status: **implemented** in this PR.
+- Status: **implemented** in earlier Mini App runner work.
 - Goal: add in-app progress indicators and final server-derived result view.
 - Note: due to static hosting and no dedicated backend state-refresh API, users still reopen `/ui` to render refreshed authoritative snapshots after each submit.
 - `/ui` resolution order: latest `in_progress` session is preferred; if none exists, latest `finished` session is used for server-derived completed/result screen.
@@ -168,13 +171,13 @@ Recommend **Hybrid (Option C)** as safest next step:
 - Risks: mismatched client display vs server canonical score if mapping is wrong.
 
 ### Slice 5 — recovery/reopen hardening + polish
-- Status: **implemented** in this PR.
+- Status: **implemented** in earlier Mini App runner work.
 - Delivered: clearer `/ui` experimental messaging, safer reopen/recovery wording, strict answer payload parsing (`bool` rejected), and compact retry/fallback guidance in Mini App UI and bot replies.
 - Validation approach: parser/state unit tests + regression checks + manual QA checklist updates.
 - Remaining limitation: no dedicated state-refresh API; reopen `/ui` is still required for authoritative refresh.
 - Non-goals preserved: default UX switch, `/stats` exposure, broad backend API expansion.
 
-## Non-goals for this design phase
+## Historical non-goals for this design phase
 - No runtime code changes.
 - No default UX switch from classic chat to Mini App.
 - No `/stats` exposure in Mini App.

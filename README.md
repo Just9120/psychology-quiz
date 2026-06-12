@@ -39,61 +39,19 @@ Telegram update delivery mode:
 
 ## Telegram update delivery mode: polling vs webhook
 
-Production can run in either long polling or webhook mode. To run polling explicitly:
+Production can run in either long polling or webhook mode. Long polling remains the default runtime mode, while webhook mode is an optional infrastructure/runtime configuration guarded by environment flags.
 
-```bash
-TELEGRAM_UPDATE_MODE=polling python -m app.main
-```
+Keep detailed webhook, reverse-proxy, rollback, and diagnostic procedures outside the README so this file remains navigation/overview material. For CI/CD, deploy, secrets, rollback, and stateful-service safety boundaries, use [`docs/ci-cd-rules.md`](docs/ci-cd-rules.md). For Mini App deployment/manual QA, use [`docs/miniapp-deployment-qa.md`](docs/miniapp-deployment-qa.md).
 
-Expected safe startup log:
+## CI/CD and deployment model
 
-```text
-bot_update_mode mode=polling
-```
-
-Production webhook mode is enabled by terminating public HTTPS on Nginx and forwarding only the webhook path to the bot listener. The Compose service must keep port `8090` loopback-only (`127.0.0.1:8090:8090`); do not expose the bot listener directly to the internet. Current production webhook environment:
-
-```dotenv
-TELEGRAM_UPDATE_MODE=webhook
-TELEGRAM_WEBHOOK_URL=https://quiz-api.librechat.online/telegram/webhook
-TELEGRAM_WEBHOOK_LISTEN=0.0.0.0
-TELEGRAM_WEBHOOK_PORT=8090
-TELEGRAM_WEBHOOK_SECRET_TOKEN=<secret>
-```
-
-Example Nginx route for webhook delivery:
-
-```nginx
-location = /telegram/webhook {
-    proxy_pass http://127.0.0.1:8090/telegram/webhook;
-    proxy_http_version 1.1;
-    proxy_set_header Host $host;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_read_timeout 30s;
-}
-```
-
-Rollback remains setting `TELEGRAM_UPDATE_MODE=polling` and restarting `psych_quiz_bot` plus `psych_quiz_miniapp_api`; keep the loopback port mapping in place so webhook mode can be re-tested without another Compose change. If `BOT_TOKEN` was exposed in logs, rotate it manually via BotFather and then update production environment secrets; do not rotate tokens in code or commit tokens to the repository.
-
-Example reverse-proxy smoke checks from the host after deploy:
-
-```bash
-docker compose up -d --build --remove-orphans psych_quiz_bot
-docker compose logs --tail=100 psych_quiz_bot | grep 'bot_update_mode mode=webhook'
-curl -fsS http://127.0.0.1:8090/telegram/webhook -X POST -H 'Content-Type: application/json' -d '{}' || true
-```
-
-Safe webhook startup logs include the mode, local listen host/port, and URL path only; they must not include `BOT_TOKEN`, Telegram Bot API URLs containing the token, `TELEGRAM_WEBHOOK_SECRET_TOKEN`, or raw update payloads. Example:
-
-```text
-bot_update_mode mode=webhook webhook_host=quiz.example.com listen=127.0.0.1 port=8090 path=/telegram/webhook
-```
-
-Diagnostic comparison for the experiment:
-- If a user tap is visibly slow and `bot_update_ingress` appears late in polling but quickly in webhook mode, the likely bottleneck is long polling / `getUpdates` delivery before application ingress.
-- If a user tap is visibly slow and `bot_update_ingress` is still late in webhook mode, the likely bottleneck is Telegram/client/network delivery before the webhook reaches the application.
-- Existing `bot_update_ingress`, `bot_handler_start`, `bot_latency`, and `bot_latency_slow` diagnostics are preserved in both modes.
+Current repository-visible GitHub Actions workflow is CI-only:
+- open PR and merge approved changes to `main`;
+- GitHub Actions CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`;
+- repo-visible CI must not deploy, access production SSH, or mutate production runtime state;
+- deployment/CD is handled by the configured deployment environment and/or external infrastructure, and the concrete automation may differ from what is visible in this repository;
+- after merge, verify deployed commit/runtime state in the target environment when deployment matters;
+- docs-only changes do not require runtime sync.
 
 ## Текущий продуктовый контур
 
@@ -126,22 +84,9 @@ Diagnostic comparison for the experiment:
 - SQLite **не** является source of truth; это runtime layer хранения и выдачи данных.
 - Заполнение и обновление SQLite выполняется сидером `scripts/seed_questions.py`.
 
-Операционный поток (основной путь, CI/CD-first):
-1. подготовить изменения в repo и сделать PR;
-2. выполнить merge в `main`;
-3. по `push` в `main` автоматически запускается GitHub Actions workflow;
-4. workflow по SSH вызывает deploy-процесс на сервере;
-5. deploy logic условно выполняет build/seed/restart (или no-op) по diff;
-6. runtime-слой получает актуальные изменения без ручного `git pull + seed` как базового сценария.
+Runtime sync for JSON/content changes is deployment-environment-specific. Repository-visible CI validates question-bank syntax and seedability, but does not deploy or mutate runtime SQLite. When deployment matters, verify deployed commit/runtime state in the target environment after merge; docs-only changes do not require runtime sync.
 
-Fallback:
-- при необходимости деплой можно запустить вручную через GitHub Actions (`workflow_dispatch`).
-
-## Operational nuance: как отрабатывает deploy logic
-
-- `content`-only изменения → автосидинг (autoseed) в deploy-процессе.
-- Изменения в `app/`, `scripts/`, `sql/` и runtime/Docker-related частях → deploy logic conditionally выполняет build/seed/restart.
-- Docs-only изменения → no-op или почти no-op на runtime-слое.
+Operational deploy/seed/restart details and safety boundaries belong in [`docs/ci-cd-rules.md`](docs/ci-cd-rules.md) and the configured deployment environment, not in this README.
 
 ## Вспомогательный UX
 
@@ -207,10 +152,3 @@ Source-of-truth модель:
 
 - `MINI_APP_URL` (optional): URL статического Telegram Mini App runner для opt-in команды `/ui`; при отсутствии переменной бот продолжает работать только в classic chat UX режиме.
 - `miniapp/index.html` публикуется отдельно на стороне deploy/infrastructure; runtime-секреты и Telegram токены в frontend не размещаются.
-
-## Deploy safety note
-
-- Во время deploy `deploy.sh` безопасно дополняет production `.env` отсутствующими ключами из `.env.example`, если оба файла существуют.
-- Существующие production-значения в `.env` никогда не перезаписываются.
-- Реальные production-значения (например, `BOT_TOKEN`, `MINI_APP_URL`) оператор заполняет вручную.
-- Секреты и реальные значения не должны коммититься в репозиторий.
