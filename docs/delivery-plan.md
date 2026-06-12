@@ -8,7 +8,7 @@
 - `/ui` / `🚀 В окне` remains opt-in Mini App runner; Mini App does not become the default UX.
 - Mini App setup/question/result screens are now product-facing after P1/P2 polish.
 - UX-polish runtime smoke passed after manual Telegram/Mini App checks: no current bugs reported, classic `/quiz` + reply keyboard remains stable, and the Mini App opt-in flow has been checked.
-- Current delivery posture: third Module 3 psychological consulting content batch completed for lessons 5–8 as a focused source-backed sprint; keep runtime observation/manual QA posture for app behavior.
+- Current delivery posture: fourth Module 3 psychological consulting content batch completed from practice/case/checklist materials inside the existing `Психологическое консультирование` category; no separate practice category was created.
 
 ## Archived completed delivery groups
 Historical completed delivery groups are archived in `docs/delivery-plan-archive.md`.
@@ -20,14 +20,15 @@ Current outcome:
 - First Module 3 content batch for `Психологическое консультирование` is complete from the glossary + lesson 1 source pack.
 - Second Module 3 content batch for `Психологическое консультирование` is complete from lessons 2–4 source materials.
 - Third Module 3 content batch for `Психологическое консультирование` is complete from lessons 5–8 source materials.
+- Fourth Module 3 content batch for `Психологическое консультирование` is complete from practice/case/checklist materials; practical questions remain embedded in the existing topic category and no separate practice category was created.
 - Delivery posture remains observation/QA for runtime behavior; future content expansion should proceed only through focused source-backed batches.
 
 ## Next recommended item
-Module 3 content sprint outcome: third approved batch for `Психологическое консультирование` is complete from lessons 5–8 materials. Recommended next step:
-1. Manually review the new question quality and source alignment before broader content expansion.
+Module 3 content sprint outcome: fourth approved batch for `Психологическое консультирование` is complete from practice/case/checklist materials. Recommended next step:
+1. Manually review the full Module 3 consulting question quality, balancing, deduplication, and source alignment before broader expansion.
 2. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
 3. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
-4. Future Module 3 content should proceed only in separate focused source-backed batches, with practice/case/checklist materials as the next content batch and final manual balancing/deduplication if needed.
+4. Future Module 3 content should proceed only in separate focused source-backed batches after the manual balancing/deduplication/source-alignment review.
 5. Avoid speculative code/refactor PRs while no reproducible runtime bugs are present.
 
 ## Product/runtime invariants
