@@ -10,20 +10,8 @@
 - UX-polish runtime smoke passed after manual Telegram/Mini App checks: no current bugs reported, classic `/quiz` + reply keyboard remains stable, and the Mini App opt-in flow has been checked.
 - Current delivery posture: observation/manual QA only; do not start another immediate code/refactor PR while no reproducible bugs are present.
 
-## Recently completed PRs (#199–#204)
-- #199: webhook/logging/security cleanup and safer operational diagnostics.
-- #200: classic inline callback diagnostics for update ingress and callback latency investigation.
-- #201: Mini App telemetry for answer/setup state, retries, and safe diagnostics.
-- #202: Mini App production diagnostics/operational follow-up for stalled answer reports.
-- #203: Mini App hedge mitigation for answer stalls, reducing hedged-case wait time.
-- #204: classic reply keyboard mode for `/quiz`, moving answer/`Далее` controls to bottom Telegram reply keyboard text updates.
-
-## Completed UX polish loop (#207–#211)
-- #207: main menu, `/start`, `/help`, `/ping`, and `/ui` UX cleanup.
-- #208: Reading Mode UX polish.
-- #209: classic chat quiz feedback and final screen polish.
-- #210: Mini App P1 UX polish for setup/question/result flow.
-- #211: Mini App P2 visual cleanup for product-facing setup/result screens.
+## Archived completed delivery groups
+Historical completed delivery groups are archived in `docs/delivery-plan-archive.md`.
 
 Current outcome:
 - Classic `/quiz` with reply keyboard mode remains stable.
