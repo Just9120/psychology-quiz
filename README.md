@@ -5,6 +5,7 @@
 Текущее состояние продукта:
 - **Module 1** — стабильный baseline.
 - **Module 2** — запущен в ограниченном рабочем scope.
+- **Module 3** — открыт первой активной категорией `Психологическое консультирование`.
 
 Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. **Web UI отсутствует**, внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
@@ -60,6 +61,7 @@ Current repository-visible GitHub Actions workflow is CI-only:
 Содержательно:
 - Module 1: рабочий baseline по основным дисциплинам.
 - Module 2: активные рабочие темы — **`Основы экспериментальной психологии`** и **`Качественные методы исследования`**.
+- Module 3: первая активная категория — **`Психологическое консультирование`**.
 
 ## Режимы викторины (UX v2)
 
@@ -81,6 +83,7 @@ Current repository-visible GitHub Actions workflow is CI-only:
 - Рабочие директории банка:
   - `content/questions/module1/`
   - `content/questions/module2/`
+  - `content/questions/module3/`
 - SQLite **не** является source of truth; это runtime layer хранения и выдачи данных.
 - Заполнение и обновление SQLite выполняется сидером `scripts/seed_questions.py`.
 
