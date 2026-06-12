@@ -240,11 +240,26 @@ Use existing project commands where available.
 
 ```text
 Install:
+  pip install -r requirements.txt
+
 Lint:
+  N/A — no dedicated lint command configured. Use git diff --check for whitespace/merge-marker issues.
+
 Typecheck:
-Test:
+  N/A — no dedicated typecheck command configured.
+
+Test / validation:
+  python -m compileall app scripts
+  python scripts/validate_questions.py
+  DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/init_db.py
+  DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/seed_questions.py
+  git diff --check
+
 Build:
+  N/A — no separate build step configured for the bot. Mini App static hosting is handled outside runtime deploy scripts.
+
 Run:
+  python -m app.main
 ```
 
 If commands are unknown, inspect package/config files and use the smallest relevant checks.
