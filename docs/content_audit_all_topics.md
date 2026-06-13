@@ -19,8 +19,8 @@ Audited the active question-bank source files under `content/questions/module1/`
 - Total approved questions found: 575.
 - Validator/seed status: JSON parsing, repository validator, DB initialization, and seed smoke all pass.
 - Blockers: none found.
-- JSON files changed: no. This PR is audit-only and does not add questions, categories, or content rewrites.
-- Recommended next action: run a focused Module 3 dedup/readability/source-alignment polish PR first, then address global answer-position imbalance in Module 1 and the large Module 2 experimental topic.
+- Original audit JSON files changed: no. Follow-up notes now record subsequent focused content QA passes without changing the original audit scope.
+- Recommended next action: Module 3 polish and the large Module 2 experimental balance pass have been addressed; remaining high-value follow-up is Module 1 answer-position cleanup, plus separate source-alignment reviews where needed.
 
 ## Topic inventory
 
@@ -32,7 +32,7 @@ Audited the active question-bank source files under `content/questions/module1/`
 | Module 1 | `content/questions/module1/fiziologiya_cheloveka.json` | `Физиология человека` | 55 | 0 | easy 12, medium 36, hard 7 | 0: 18, 1: 37, 2: 0, 3: 0 | Valid schema/category; correct answers use only positions 0 and 1. |
 | Module 1 | `content/questions/module1/vvedenie_v_professiyu.json` | `Введение в профессию` | 57 | 0 | easy 7, medium 41, hard 9 | 0: 5, 1: 48, 2: 4, 3: 0 | Valid schema/category; severe answer-position imbalance; one legacy ID pattern anomaly: `m1-q3`. |
 | Module 2 | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | `Качественные методы исследования` | 53 | 0 | easy 8, medium 32, hard 13 | 0: 23, 1: 15, 2: 12, 3: 3 | Valid schema/category; answer position 3 is underused; one near-duplicate learning target. |
-| Module 2 | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | `Основы экспериментальной психологии` | 118 | 0 | easy 8, medium 78, hard 32 | 0: 26, 1: 77, 2: 15, 3: 0 | Valid schema/category; large topic with severe answer-position imbalance and low easy-question share. |
+| Module 2 | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | `Основы экспериментальной психологии` | 118 | 0 | easy 8, medium 80, hard 30 | 0: 30, 1: 30, 2: 29, 3: 29 | Valid schema/category; follow-up pass addressed answer-position imbalance; low easy-question share and source-alignment review remain separate if needed. |
 | Module 3 | `content/questions/module3/psychological_consulting.json` | `Психологическое консультирование` | 108 | 0 | easy 32, medium 52, hard 24 | 0: 27, 1: 27, 2: 27, 3: 27 | Valid schema/category; expected 108 approved questions confirmed; practical/case/checklist questions are embedded in the topic category. |
 
 ## Blockers
@@ -50,10 +50,10 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 | `content/questions/module1/psihofiziologiya.json` | topic-level | Severe answer-position imbalance | 56 of 71 correct answers are in position 1; position 3 is unused. | Prioritize before adding more Module 1 content; reshuffle without changing wording. |
 | `content/questions/module1/fiziologiya_cheloveka.json` | topic-level | Severe answer-position imbalance | Correct answers use only positions 0 and 1. | Mechanical reshuffle PR; preserve explanations and source refs. |
 | `content/questions/module1/vvedenie_v_professiyu.json` | topic-level | Severe answer-position imbalance | 48 of 57 correct answers are in position 1; position 3 is unused. | Mechanical reshuffle PR; include regression script output. |
-| `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | topic-level | Severe answer-position imbalance | 77 of 118 correct answers are in position 1; position 3 is unused. | Split into a targeted Module 2 experimental option-distribution PR. |
+| `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | topic-level | Answer-position imbalance addressed | Follow-up pass redistributed correct answers from 0:26, 1:77, 2:15, 3:0 to 0:30, 1:30, 2:29, 3:29. | No further answer-position cleanup needed for this topic; source-alignment review remains separate if needed. |
 | `content/questions/module1/fiziologiya_vnd.json` | `m1_vnd_021`, `m1_vnd_045`, `m1_vnd_046` | Telegram quiz readability | Case stems are useful but long for compact quiz UX. | Shorten stems in a separate wording-polish PR without changing concepts. |
 | `content/questions/module1/obschaya_psihologiya.json` | `m1_gp_030` | Telegram quiz readability | Long multi-clause stem and long option text may be harder to parse on mobile. | Compress scenario and options while preserving the processes/states/properties distinction. |
-| `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | `m2_exp_116` | Telegram quiz readability | Long case stem; concept is useful but could be made more compact. | Shorten in a Module 2 wording-polish PR. |
+| `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | `m2_exp_116` | Telegram quiz readability addressed | Long case stem was shortened in a follow-up pass while preserving concept, answer, and source ref. | No further action needed for this flagged stem unless later UX testing finds another issue. |
 | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | `m2_qual_023`, `m2_qual_041` | Near-duplicate learning target | Both test code/theme distinctions; the second adds category as a third level. | Keep both only if source review confirms intentional scaffolding; otherwise consolidate wording. |
 | `content/questions/module1/*`, `content/questions/module2/*` | topic-level | Source-ref needs review | Source refs are non-empty and consistent, but source alignment was not re-confirmed against local source packs in this audit. | Run a source-backed review PR before substantive content edits. |
 
@@ -61,9 +61,9 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 
 - `content/questions/module1/vvedenie_v_professiyu.json` / `m1-q3`: ID is valid and unique, but it breaks the otherwise stable `m1_intro_###` naming pattern. Treat as a legacy ID hygiene candidate; change only if downstream references are checked.
 - `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json`: easy questions are a small share of a 118-question topic. Consider a targeted difficulty review before new experimental-psychology batches.
-- `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_009` and `m2_exp_010`: the nomothetic/ideographic pair is educationally reasonable, but appears as adjacent mirrored stems. Consider spacing or wording variation if quiz randomization still surfaces them together often.
-- `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_013` and `m2_exp_014`: the Milgram strength/limitation contrast is likely intentional, but should be reviewed for adjacent mirrored phrasing.
-- `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_022` and `m2_exp_023`: the internal/external validity contrast is useful, but both are marked hard despite being close to core definitions. Consider `medium` if source review supports it.
+- `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_009` and `m2_exp_010`: reviewed in follow-up; the nomothetic/ideographic pair remains educationally useful as a direct conceptual contrast.
+- `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_013` and `m2_exp_014`: reviewed in follow-up; the Milgram strength/limitation pair remains intentionally contrastive and source-aligned at the learning-target level.
+- `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_022` and `m2_exp_023`: follow-up pass reclassified the core internal/external validity definition contrast from `hard` to `medium`; the paired contrast remains educationally useful.
 - `content/questions/module3/psychological_consulting.json` / `m3_psychological_consulting_063`: single uppercase `НЕ` item found. It is not excessive globally, but can be checked for learner-friendly phrasing in the Module 3 polish PR.
 - Module 1 and Module 2 explanations are generally present and educational, but some distractors are obviously implausible. A later polish PR can improve distractor plausibility without changing correct answers.
 
@@ -117,8 +117,8 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 
 - Coverage strengths: experimental method, validity, research designs, classic experiments, applied method, hypotheses, and threats to inference.
 - Likely gaps or underrepresented areas: as a large 118-question topic, it would benefit from a source-alignment pass to confirm whether easy onboarding questions are sufficient.
-- Balance: medium and hard questions dominate; only 8 easy questions. Correct answer position 1 dominates and position 3 is unused.
-- Usability: several mirrored conceptual pairs are useful for learning but should be checked for quiz repetition effects.
+- Balance: medium and hard questions dominate; only 8 easy questions. A follow-up pass balanced correct answer positions to 0:30, 1:30, 2:29, 3:29 while preserving IDs, source refs, explanations, and correct-answer texts.
+- Usability: `m2_exp_116` was shortened for mobile readability. Mirrored conceptual pairs were reviewed as useful contrast items; the validity pair was lightly varied and reclassified to `medium`.
 
 ## Module 3 notes
 
@@ -134,7 +134,7 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 ## Recommended follow-up PRs
 
 1. Module 3 dedup/readability/source-alignment polish: addressed in a focused follow-up pass for lecture/practice overlap, the single uppercase `НЕ` item, and family-level source mapping without changing category structure.
-2. Module 2 experimental psychology balance pass: address answer-position imbalance, review easy/medium/hard assignments for definition-like validity items, and polish long/mirrored stems.
+2. Module 2 experimental psychology balance pass: addressed for answer-position imbalance, definition-like validity item difficulty, and the flagged long stem; source-alignment review remains separate if needed.
 3. Module 1 answer-distribution cleanup: mechanically reshuffle options across stable baseline topics while preserving correct answers, explanations, IDs, and source refs.
 4. Module 2 qualitative methods light polish: review `m2_qual_023`/`m2_qual_041` overlap and underuse of correct answer position 3.
 5. Global minor ID/readability cleanup: decide whether the legacy `m1-q3` ID should remain stable or be normalized after downstream reference checks.
