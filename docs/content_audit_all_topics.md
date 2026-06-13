@@ -31,7 +31,7 @@ Audited the active question-bank source files under `content/questions/module1/`
 | Module 1 | `content/questions/module1/psihofiziologiya.json` | `Психофизиология` | 71 | 0 | easy 14, medium 35, hard 22 | 0: 18, 1: 18, 2: 18, 3: 17 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass. |
 | Module 1 | `content/questions/module1/fiziologiya_cheloveka.json` | `Физиология человека` | 55 | 0 | easy 12, medium 36, hard 7 | 0: 14, 1: 14, 2: 14, 3: 13 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass. |
 | Module 1 | `content/questions/module1/vvedenie_v_professiyu.json` | `Введение в профессию` | 57 | 0 | easy 7, medium 41, hard 9 | 0: 15, 1: 14, 2: 14, 3: 14 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass; one legacy ID pattern anomaly remains separate: `m1-q3`. |
-| Module 2 | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | `Качественные методы исследования` | 53 | 0 | easy 8, medium 32, hard 13 | 0: 23, 1: 15, 2: 12, 3: 3 | Valid schema/category; answer position 3 is underused; one near-duplicate learning target. |
+| Module 2 | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | `Качественные методы исследования` | 53 | 0 | easy 8, medium 32, hard 13 | 0: 14, 1: 13, 2: 13, 3: 13 | Valid schema/category; answer-position underuse addressed; `m2_qual_023`/`m2_qual_041` reviewed as acceptable scaffolding. |
 | Module 2 | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | `Основы экспериментальной психологии` | 118 | 0 | easy 8, medium 80, hard 30 | 0: 30, 1: 30, 2: 29, 3: 29 | Valid schema/category; follow-up pass addressed answer-position imbalance; low easy-question share and source-alignment review remain separate if needed. |
 | Module 3 | `content/questions/module3/psychological_consulting.json` | `Психологическое консультирование` | 108 | 0 | easy 32, medium 52, hard 24 | 0: 27, 1: 27, 2: 27, 3: 27 | Valid schema/category; expected 108 approved questions confirmed; practical/case/checklist questions are embedded in the topic category. |
 
@@ -54,7 +54,7 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 | `content/questions/module1/fiziologiya_vnd.json` | `m1_vnd_021`, `m1_vnd_045`, `m1_vnd_046` | Telegram quiz readability | Case stems are useful but long for compact quiz UX. | Shorten stems in a separate wording-polish PR without changing concepts. |
 | `content/questions/module1/obschaya_psihologiya.json` | `m1_gp_030` | Telegram quiz readability | Long multi-clause stem and long option text may be harder to parse on mobile. | Compress scenario and options while preserving the processes/states/properties distinction. |
 | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | `m2_exp_116` | Telegram quiz readability addressed | Long case stem was shortened in a follow-up pass while preserving concept, answer, and source ref. | No further action needed for this flagged stem unless later UX testing finds another issue. |
-| `content/questions/module2/kachestvennye_metody_issledovaniya.json` | `m2_qual_023`, `m2_qual_041` | Near-duplicate learning target | Both test code/theme distinctions; the second adds category as a third level. | Keep both only if source review confirms intentional scaffolding; otherwise consolidate wording. |
+| `content/questions/module2/kachestvennye_metody_issledovaniya.json` | `m2_qual_023`, `m2_qual_041` | Near-duplicate learning target reviewed | `m2_qual_023` tests code/theme distinction; `m2_qual_041` was lightly varied to make the added category layer explicit. | Keep both as intentional scaffolding; full source-alignment review remains separate if needed. |
 | `content/questions/module1/*`, `content/questions/module2/*` | topic-level | Source-ref needs review | Source refs are non-empty and consistent, but source alignment was not re-confirmed against local source packs in this audit. | Run a source-backed review PR before substantive content edits. |
 
 ## Medium-priority improvements
@@ -110,8 +110,8 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 
 - Coverage strengths: qualitative research logic, coding, themes, interviews, observation, triangulation, reflexivity, and practice materials 10–12.
 - Likely gaps or underrepresented areas: source refs are concentrated in three practice sessions plus one intro lecture; verify against local source materials before adding or removing content.
-- Balance: difficulty distribution is healthy; correct answer position 3 is underused.
-- Deduplication: `m2_qual_023` and `m2_qual_041` overlap on code/theme distinctions, but may be acceptable as a two-level versus three-level distinction.
+- Balance: difficulty distribution is healthy; follow-up pass addressed correct answer position 3 underuse by moving from 0:23, 1:15, 2:12, 3:3 to 0:14, 1:13, 2:13, 3:13.
+- Deduplication: `m2_qual_023` and `m2_qual_041` were reviewed as acceptable scaffolding: the first keeps the code/theme distinction, while the second now explicitly foregrounds the transition from codes to categories and themes.
 
 ### `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json`
 
@@ -136,7 +136,7 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 1. Module 3 dedup/readability/source-alignment polish: addressed in a focused follow-up pass for lecture/practice overlap, the single uppercase `НЕ` item, and family-level source mapping without changing category structure.
 2. Module 2 experimental psychology balance pass: addressed for answer-position imbalance, definition-like validity item difficulty, and the flagged long stem; source-alignment review remains separate if needed.
 3. Module 1 answer-distribution cleanup: addressed by mechanically reshuffling options across stable baseline topics while preserving correct answers, explanations, IDs, difficulties, and source refs.
-4. Module 2 qualitative methods light polish: review `m2_qual_023`/`m2_qual_041` overlap and underuse of correct answer position 3.
+4. Module 2 qualitative methods light polish: addressed answer position 3 underuse and reviewed `m2_qual_023`/`m2_qual_041` as intentional scaffolding; full source-alignment review remains separate if needed.
 5. Global minor ID/readability cleanup: decide whether the legacy `m1-q3` ID should remain stable or be normalized after downstream reference checks.
 
 ## Validation
