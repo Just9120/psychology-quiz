@@ -21,6 +21,7 @@ Audited the active question-bank source files under `content/questions/module1/`
 - Blockers: none found.
 - Original audit JSON files changed: no. Follow-up notes now record subsequent focused content QA passes without changing the original audit scope.
 - Recommended next action: Module 3 polish, Module 2 experimental balance, Module 1 answer-position cleanup, Module 2 qualitative light polish, and the focused Module 1/2 repo-local source-ref/readability/legacy-ID pass have been addressed; remaining high-value follow-up is source-backed alignment against original local/Drive source packs if those materials are available.
+- Module 2 qualitative-methods source-alignment evidence is now tracked in `docs/content_source_alignment_module2_qualitative.md`; it records supplied evidence-pack findings only and does not claim complete Module 1/2 source alignment.
 
 ## Topic inventory
 
@@ -72,6 +73,8 @@ Repo-local review covered the seven active Module 1/2 files listed above. All 46
 | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | 53 | 53 | all `module2/qualitative/*` | concentrated in `practice10` 15, `practice11` 16, `practice12` 13, plus `lecture1_intro` 9; this is consistent with the active limited-scope topic. |
 
 Full source-backed alignment was not confirmed in this pass because original source packs were not present in the repository. A future source-backed alignment pass should use the local/Drive source materials before adding, removing, or remapping source-backed content.
+
+A focused supplied-evidence report for Module 2 qualitative methods is available at `docs/content_source_alignment_module2_qualitative.md`. It documents supported, weakly supported, and human-review-needed items for `m2_qual_001`–`m2_qual_053` without changing question JSON or claiming full Module 1/2 completion.
 
 ## Medium-priority improvements
 

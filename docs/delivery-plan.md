@@ -2,7 +2,7 @@
 
 ## Current status dashboard
 - ✅ Module 1 content QA — answer-position cleanup completed; flagged long-stem readability candidates shortened; repo-local source_ref hygiene reviewed; `m1-q3` kept stable as an intentional legacy ID.
-- ✅ Module 2 content QA — experimental-psychology answer-position balance completed; qualitative-methods light polish completed with `m2_qual_023` / `m2_qual_041` kept as intentional scaffolding; repo-local source_ref hygiene reviewed.
+- ✅ Module 2 content QA — experimental-psychology answer-position balance completed; qualitative-methods light polish completed with `m2_qual_023` / `m2_qual_041` kept as intentional scaffolding; repo-local source_ref hygiene reviewed; qualitative-methods supplied-evidence source-alignment report added without changing question JSON.
 - ✅ Module 3 first active scope — `Психологическое консультирование` contains 108 approved source-backed questions after the consulting content and polish sequence.
 - 👉 Repository source-of-truth posture — docs now track the post-QA content baseline; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
 
@@ -31,14 +31,14 @@
 | **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline. |
 
 ## Next recommended item
-1. If original local/Drive source packs are available, run a source-backed Module 1/2 alignment pass before substantive content edits; repo-local source_ref hygiene is already reviewed and should not be overclaimed as full alignment.
+1. If original local/Drive source packs are available, continue source-backed Module 1/2 alignment before substantive content edits; repo-local source_ref hygiene and the Module 2 qualitative supplied-evidence report should not be overclaimed as full alignment.
 2. Keep Module 2 experimental difficulty/onboarding review as optional future work only if new experimental-psychology content work is planned.
 3. Keep future Module 3 expansion in separate focused source-backed batches; do not create a separate practice category unless explicitly decided.
 4. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
 5. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
 
 ## Near backlog
-- Full Module 1/2 source-backed alignment against original local/Drive source packs if those materials are available.
+- Full Module 1/2 source-backed alignment against original local/Drive source packs if those materials are available; Module 2 qualitative methods now has a supplied-evidence report, but weakly supported and human-review-needed items remain.
 - Module 2 experimental difficulty/onboarding review if future experimental-psychology content work is planned.
 - Keep `m1-q3` stable as an intentional legacy ID unless a future explicit migration repeats downstream-reference checks and reviews downstream ID stability risks.
 - Future Module 3 source-backed batches only after a focused content decision.
