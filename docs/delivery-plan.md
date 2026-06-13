@@ -38,6 +38,7 @@
 5. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
 
 ## Near backlog
+- LEARN-CONTOURS-RFC-001 follow-up: use `docs/glossary_literature_contours_rfc.md` as a proposal-only reference for future topic-based glossary and literature contour design; active runtime scope remains unchanged until a separate focused implementation task.
 - Full Module 1/2 source-backed alignment against original local/Drive source packs if those materials are available; Module 2 qualitative methods now has a provenance-limited tracking report, but source_ref alignment risks, weakly supported items, and human-review-needed items remain.
 - Module 2 experimental difficulty/onboarding review if future experimental-psychology content work is planned.
 - Keep `m1-q3` stable as an intentional legacy ID unless a future explicit migration repeats downstream-reference checks and reviews downstream ID stability risks.
