@@ -20,7 +20,7 @@ Audited the active question-bank source files under `content/questions/module1/`
 - Validator/seed status: JSON parsing, repository validator, DB initialization, and seed smoke all pass.
 - Blockers: none found.
 - Original audit JSON files changed: no. Follow-up notes now record subsequent focused content QA passes without changing the original audit scope.
-- Recommended next action: Module 3 polish, the large Module 2 experimental balance pass, and Module 1 answer-position cleanup have been addressed; remaining high-value follow-up is separate source-alignment/readability review where needed.
+- Recommended next action: Module 3 polish, Module 2 experimental balance, Module 1 answer-position cleanup, and Module 2 qualitative light polish have been addressed; remaining high-value follow-up is separate source-alignment/readability review where needed.
 
 ## Topic inventory
 
@@ -41,7 +41,7 @@ None.
 
 No invalid JSON, validator failures, seed failures, duplicate IDs, missing required fields, invalid correct indexes, or severe category drift were found in the audited active files.
 
-## High-priority content issues
+## Completed content QA follow-ups and remaining issues
 
 | File path | Question ID | Issue type | Short reason | Suggested next action |
 |---|---|---|---|---|
@@ -64,7 +64,7 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 - `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_009` and `m2_exp_010`: reviewed in follow-up; the nomothetic/ideographic pair remains educationally useful as a direct conceptual contrast.
 - `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_013` and `m2_exp_014`: reviewed in follow-up; the Milgram strength/limitation pair remains intentionally contrastive and source-aligned at the learning-target level.
 - `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` / `m2_exp_022` and `m2_exp_023`: follow-up pass reclassified the core internal/external validity definition contrast from `hard` to `medium`; the paired contrast remains educationally useful.
-- `content/questions/module3/psychological_consulting.json` / `m3_psychological_consulting_063`: single uppercase `НЕ` item found. It is not excessive globally, but can be checked for learner-friendly phrasing in the Module 3 polish PR.
+- `content/questions/module3/psychological_consulting.json` / `m3_psychological_consulting_063`: uppercase `НЕ` phrasing was addressed in the Module 3 polish pass; no remaining action for that specific stem.
 - Module 1 and Module 2 explanations are generally present and educational, but some distractors are obviously implausible. A later polish PR can improve distractor plausibility without changing correct answers.
 
 ## Module 1 notes

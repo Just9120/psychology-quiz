@@ -4,14 +4,15 @@
 - Проект — Telegram-бот викторины по психологии.
 - Продукт ориентирован на учебную практику и самопроверку.
 - Текущий контур: стабильный Module 1 + запущенный Module 2 в ограниченном scope + первый активный content-scope Module 3 для психологического консультирования.
+- Текущий активный approved банк вопросов: 575 вопросов в 8 topic JSON files.
 
 ## Current product scope
-- **Module 1** — baseline (стабильный рабочий контур).
-- **Module 2** — уже запущен с двумя активными темами:
-  - `Основы экспериментальной психологии`
-  - `Качественные методы исследования`
-- **Module 3** — открыт только первым активным content-scope по утверждённым source-backed материалам:
-  - `Психологическое консультирование`
+- **Module 1** — baseline (стабильный рабочий контур), 296 approved questions across five active topics.
+- **Module 2** — уже запущен с двумя активными темами, 171 approved questions total:
+  - `Основы экспериментальной психологии` — 118 approved
+  - `Качественные методы исследования` — 53 approved
+- **Module 3** — открыт только первым активным content-scope по утверждённым source-backed материалам, 108 approved questions:
+  - `Психологическое консультирование` — 108 approved
 - Этот первый scope Module 3 не авторизует широкое расширение Module 3 за пределы доступных согласованных материалов с явной опорой на источник.
 - Активные категории в runtime определяются из БД по `approved`-вопросам, а не хардкодом в UI.
 - Режим работы бота: long polling по умолчанию; опциональный webhook mode доступен только как config-gated infrastructure experiment.
@@ -81,6 +82,21 @@
   2. текущий банк вопросов в репозитории;
   3. Obsidian/пересобранная база знаний как вторичный синтетический слой.
 - Практико-ориентированные вопросы встраиваются в профильные категории, а не выделяются в отдельную рабочую категорию.
+
+
+Current approved content inventory:
+
+| Module | Topic/category | JSON source file | Approved questions |
+|---|---|---|---:|
+| Module 1 | `Физиология ВНД` | `content/questions/module1/fiziologiya_vnd.json` | 57 |
+| Module 1 | `Общая психология` | `content/questions/module1/obschaya_psihologiya.json` | 56 |
+| Module 1 | `Психофизиология` | `content/questions/module1/psihofiziologiya.json` | 71 |
+| Module 1 | `Физиология человека` | `content/questions/module1/fiziologiya_cheloveka.json` | 55 |
+| Module 1 | `Введение в профессию` | `content/questions/module1/vvedenie_v_professiyu.json` | 57 |
+| Module 2 | `Основы экспериментальной психологии` | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | 118 |
+| Module 2 | `Качественные методы исследования` | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | 53 |
+| Module 3 | `Психологическое консультирование` | `content/questions/module3/psychological_consulting.json` | 108 |
+| **Total** | 8 active topics | `content/questions/**/*.json` | **575** |
 
 
 ## Telegram UX modes
@@ -226,8 +242,8 @@ Migration non-goals (explicit):
 1. подготовить изменения в репозитории и оформить PR;
 2. выполнить merge в `main`;
 3. по `push` в `main` автоматически запускается GitHub Actions CI workflow (validation/checks);
-4. deployment/CD выполняется в настроенном deployment environment и/или внешней инфраструктуре; конкретная автоматизация может отличаться и не обязана быть репозиторий-видимой;
-5. после merge необходимо проверить факт деплоя по deployed commit/runtime state целевой среды.
+4. repository-visible production CD workflow/deploy script may run only in the configured deployment environment with Repository Secrets and CI/CD safety boundaries; do not invoke or change it from ordinary product/docs tasks;
+5. после merge необходимо проверить факт деплоя по deployed commit/runtime state целевой среды, если runtime deployment matters.
 
 Логическая модель runtime-синхронизации (для deployment environment):
 - content changes → seed (autoseed).
