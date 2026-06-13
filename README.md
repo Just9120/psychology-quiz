@@ -3,9 +3,10 @@
 `psychology-quiz` — Telegram-бот викторины по психологии для учебного использования.
 
 Текущее состояние продукта:
-- **Module 1** — стабильный baseline.
-- **Module 2** — запущен в ограниченном рабочем scope.
-- **Module 3** — открыт первой активной категорией `Психологическое консультирование`.
+- **Module 1** — стабильный baseline, 296 approved questions across five active topics.
+- **Module 2** — ограниченный рабочий scope, 171 approved questions across two active topics.
+- **Module 3** — первая активная категория `Психологическое консультирование`, 108 approved questions.
+- Активный банк вопросов: 575 approved questions в JSON source-of-truth under `content/questions/**/*.json`.
 
 Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. **Web UI отсутствует**, внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
@@ -46,22 +47,37 @@ Keep detailed webhook, reverse-proxy, rollback, and diagnostic procedures outsid
 
 ## CI/CD and deployment model
 
-Current repository-visible GitHub Actions workflow is CI-only:
+Repository-visible GitHub Actions are split by responsibility:
 - open PR and merge approved changes to `main`;
-- GitHub Actions CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`;
-- repo-visible CI must not deploy, access production SSH, or mutate production runtime state;
-- deployment/CD is handled by the configured deployment environment and/or external infrastructure, and the concrete automation may differ from what is visible in this repository;
-- after merge, verify deployed commit/runtime state in the target environment when deployment matters;
+- CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`;
+- the repository also contains a production CD workflow/deploy script for configured deployment environments; do not change or run deploy automation from ordinary docs/product tasks;
+- CI must not deploy, access production SSH, or mutate production runtime state;
+- deployment/CD uses Repository Secrets and the configured target environment; after merge, verify deployed commit/runtime state when deployment matters;
 - docs-only changes do not require runtime sync.
+
+
+## Быстрый старт и проверки
+
+```bash
+pip install -r requirements.txt
+python -m compileall app scripts
+python scripts/validate_questions.py
+DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/init_db.py
+DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/seed_questions.py
+git diff --check
+python -m app.main
+```
+
+`BOT_TOKEN` is required for `python -m app.main`; validation/seed commands above can run against a temporary SQLite path.
 
 ## Текущий продуктовый контур
 
 Активные категории в продукте формируются из БД по `approved`-вопросам (не хардкодятся в UI).
 
 Содержательно:
-- Module 1: рабочий baseline по основным дисциплинам.
-- Module 2: активные рабочие темы — **`Основы экспериментальной психологии`** и **`Качественные методы исследования`**.
-- Module 3: первая активная категория — **`Психологическое консультирование`**.
+- Module 1: рабочий baseline по основным дисциплинам — **296 approved**.
+- Module 2: активные рабочие темы — **`Основы экспериментальной психологии`** (**118 approved**) и **`Качественные методы исследования`** (**53 approved**).
+- Module 3: первая активная категория — **`Психологическое консультирование`** (**108 approved**).
 
 ## Режимы викторины (UX v2)
 
@@ -132,6 +148,9 @@ Operational deploy/seed/restart details and safety boundaries belong in [`docs/c
 Важно: для Cloudflare Workers Static Assets добавлен root `wrangler.toml` с публикацией статики из `./miniapp` через `npx wrangler deploy`.
 
 ## Документация
+
+README is the repository entrypoint and navigation layer, not the full product specification or delivery journal.
+
 
 | Документ | Роль | Когда читать |
 |---|---|---|

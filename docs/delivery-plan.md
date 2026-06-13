@@ -1,46 +1,50 @@
 # Delivery Plan
 
 ## Current status dashboard
-- Module 1 stable baseline; Module 2 limited active scope; Module 3 opened for the first focused content scope.
+- ✅ Module 1 content QA — answer-position cleanup completed across the stable baseline topics; remaining Module 1 follow-ups are readability/source-ref/legacy-ID review only.
+- ✅ Module 2 content QA — experimental-psychology answer-position balance completed; qualitative-methods light polish completed with `m2_qual_023` / `m2_qual_041` kept as intentional scaffolding.
+- ✅ Module 3 first active scope — `Психологическое консультирование` contains 108 approved source-backed questions after the consulting content and polish sequence.
+- 👉 Repository source-of-truth posture — docs now track the post-QA content baseline; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
+
+## Current product/runtime posture
 - `/quiz` remains the default classic Telegram chat entry point.
 - Production classic chat UX: `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` remains the recommended implementation; the cleaner bottom reply keyboard UX is preferred for answers and `Далее`.
 - Classic inline callback mode remains available only as legacy/fallback (`CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`).
 - `/ui` / `🚀 В окне` remains opt-in Mini App runner; Mini App does not become the default UX.
-- Mini App setup/question/result screens are now product-facing after P1/P2 polish.
-- UX-polish runtime smoke passed after manual Telegram/Mini App checks: no current bugs reported, classic `/quiz` + reply keyboard remains stable, and the Mini App opt-in flow has been checked.
-- Current delivery posture: fourth Module 3 psychological consulting content batch completed from practice/case/checklist materials inside the existing `Психологическое консультирование` category; no separate practice category was created.
+- Long polling remains the default runtime mode; webhook is optional/config-gated infrastructure.
+- Standalone Web UI/PWA remains out of scope.
+- SQLite remains current runtime store; JSON files in `content/questions/**/*.json` remain the question-bank source of truth.
+- Docs-only changes do not require runtime sync.
+
+## Current content baseline
+
+| Module | Active topic/category | Approved questions | Current content state |
+|---|---|---:|---|
+| Module 1 | `Физиология ВНД` | 57 | Stable baseline; answer positions balanced; long-stem/source-ref review remains separate. |
+| Module 1 | `Общая психология` | 56 | Stable baseline; answer positions balanced; one long-stem candidate remains separate. |
+| Module 1 | `Психофизиология` | 71 | Stable baseline; answer positions balanced; source-ref review remains separate. |
+| Module 1 | `Физиология человека` | 55 | Stable baseline; answer positions balanced; source-ref review remains separate. |
+| Module 1 | `Введение в профессию` | 57 | Stable baseline; answer positions balanced; legacy `m1-q3` decision/source-ref review remains separate. |
+| Module 2 | `Основы экспериментальной психологии` | 118 | Active limited scope; answer positions balanced; source-alignment/difficulty review remains separate. |
+| Module 2 | `Качественные методы исследования` | 53 | Active limited scope; answer positions balanced; `m2_qual_023` / `m2_qual_041` intentionally retained as scaffolding. |
+| Module 3 | `Психологическое консультирование` | 108 | First active Module 3 scope; practical/case/checklist questions embedded in the topic category. |
+| **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline. |
+
+## Next recommended item
+1. Run a focused source-alignment/readability review for Module 1/2 before substantive content edits, especially the Module 1 long-stem candidates and the Module 2 experimental source/difficulty notes.
+2. Decide whether the legacy `m1-q3` ID should remain stable or be normalized only after downstream reference checks.
+3. Keep future Module 3 expansion in separate focused source-backed batches; do not create a separate practice category unless explicitly decided.
+4. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
+5. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
+
+## Near backlog
+- Module 1 long-stem readability polish candidates from `docs/content_audit_all_topics.md`.
+- Module 1/2 source-ref/source-alignment review against local source packs.
+- Module 2 experimental difficulty/onboarding review if future experimental-psychology content work is planned.
+- Legacy `m1-q3` ID hygiene decision after downstream-reference checks.
+- Future Module 3 source-backed batches only after a focused content decision.
 
 ## Archived completed delivery groups
 Historical completed delivery groups are archived in `docs/delivery-plan-archive.md`.
 
-Current outcome:
-- Classic `/quiz` with reply keyboard mode remains stable.
-- UX-polish smoke passed with no current bugs reported after manual Telegram/Mini App checks.
-- Mini App opt-in flow now has product-facing setup, question, and result screens after P1/P2 polish.
-- First Module 3 content batch for `Психологическое консультирование` is complete from the glossary + lesson 1 source pack.
-- Second Module 3 content batch for `Психологическое консультирование` is complete from lessons 2–4 source materials.
-- Third Module 3 content batch for `Психологическое консультирование` is complete from lessons 5–8 source materials.
-- Fourth Module 3 content batch for `Психологическое консультирование` is complete from practice/case/checklist materials; practical questions remain embedded in the existing topic category and no separate practice category was created.
-- Delivery posture remains observation/QA for runtime behavior; future content expansion should proceed only through focused source-backed batches.
-
-## Next recommended item
-Module 3 content sprint outcome: fourth approved batch for `Психологическое консультирование` is complete from practice/case/checklist materials. Recommended next step:
-1. Manually review the full Module 3 consulting question quality, balancing, deduplication, and source alignment before broader expansion.
-2. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
-3. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
-4. Future Module 3 content should proceed only in separate focused source-backed batches after the manual balancing/deduplication/source-alignment review.
-5. Avoid speculative code/refactor PRs while no reproducible runtime bugs are present.
-
-## Product/runtime invariants
-- `/quiz` remains default classic Telegram flow.
-- Mini App remains opt-in (`/ui`, `🚀 В окне`) and separate from classic chat UX.
-- Standalone Web UI/PWA remains out of scope.
-- SQLite remains current runtime store; JSON files in the repository remain question-bank source of truth.
-- Docs-only changes do not require runtime sync.
-
-## Later technical direction
-- Broader MVP QA in production-like conditions.
-- Continue lightweight monitoring only if observation shows new gaps after the current classic latency buckets and Mini App telemetry.
-- Split overloaded `app/main.py` responsibilities when a code sprint is justified.
-- Extract Mini App context/service modules for cleaner ownership and testability.
-- Move Mini App API/runtime architecture forward only after observation confirms the next bottleneck and rollback posture.
+Do not use the archive as active implementation authority; use this file for current operational state and `docs/project-spec.md` for durable product scope.
