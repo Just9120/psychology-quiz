@@ -58,6 +58,9 @@ jobs:
       - name: Validate question bank JSON
         run: python scripts/validate_questions.py
 
+      - name: Validate topic registry
+        run: python scripts/validate_topics.py
+
       - name: Check for whitespace and merge marker issues
         shell: bash
         run: |
@@ -79,6 +82,7 @@ jobs:
             echo "- compileall passed"
             echo "- JSON syntax passed"
             echo "- validate_questions passed"
+            echo "- validate_topics passed"
             echo "- DB init/seed smoke passed"
             echo "- git diff --check passed"
           } >> "$GITHUB_STEP_SUMMARY"
