@@ -20,17 +20,17 @@ Audited the active question-bank source files under `content/questions/module1/`
 - Validator/seed status: JSON parsing, repository validator, DB initialization, and seed smoke all pass.
 - Blockers: none found.
 - Original audit JSON files changed: no. Follow-up notes now record subsequent focused content QA passes without changing the original audit scope.
-- Recommended next action: Module 3 polish and the large Module 2 experimental balance pass have been addressed; remaining high-value follow-up is Module 1 answer-position cleanup, plus separate source-alignment reviews where needed.
+- Recommended next action: Module 3 polish, the large Module 2 experimental balance pass, and Module 1 answer-position cleanup have been addressed; remaining high-value follow-up is separate source-alignment/readability review where needed.
 
 ## Topic inventory
 
 | Module | File | Category | Approved count | Draft/other count | Difficulty distribution | Correct answer distribution | Notes |
 |---|---|---:|---:|---:|---|---|---|
-| Module 1 | `content/questions/module1/fiziologiya_vnd.json` | `Физиология ВНД` | 57 | 0 | easy 9, medium 32, hard 16 | 0: 24, 1: 32, 2: 1, 3: 0 | Valid schema/category; severe answer-position imbalance; 3 overlong case questions. |
-| Module 1 | `content/questions/module1/obschaya_psihologiya.json` | `Общая психология` | 56 | 0 | easy 8, medium 35, hard 13 | 0: 18, 1: 35, 2: 3, 3: 0 | Valid schema/category; severe answer-position imbalance; 1 overlong question. |
-| Module 1 | `content/questions/module1/psihofiziologiya.json` | `Психофизиология` | 71 | 0 | easy 14, medium 35, hard 22 | 0: 12, 1: 56, 2: 3, 3: 0 | Valid schema/category; strongest answer-position clustering in Module 1. |
-| Module 1 | `content/questions/module1/fiziologiya_cheloveka.json` | `Физиология человека` | 55 | 0 | easy 12, medium 36, hard 7 | 0: 18, 1: 37, 2: 0, 3: 0 | Valid schema/category; correct answers use only positions 0 and 1. |
-| Module 1 | `content/questions/module1/vvedenie_v_professiyu.json` | `Введение в профессию` | 57 | 0 | easy 7, medium 41, hard 9 | 0: 5, 1: 48, 2: 4, 3: 0 | Valid schema/category; severe answer-position imbalance; one legacy ID pattern anomaly: `m1-q3`. |
+| Module 1 | `content/questions/module1/fiziologiya_vnd.json` | `Физиология ВНД` | 57 | 0 | easy 9, medium 32, hard 16 | 0: 15, 1: 14, 2: 14, 3: 14 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass; 3 overlong case questions remain separate. |
+| Module 1 | `content/questions/module1/obschaya_psihologiya.json` | `Общая психология` | 56 | 0 | easy 8, medium 35, hard 13 | 0: 14, 1: 14, 2: 14, 3: 14 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass; 1 overlong question remains separate. |
+| Module 1 | `content/questions/module1/psihofiziologiya.json` | `Психофизиология` | 71 | 0 | easy 14, medium 35, hard 22 | 0: 18, 1: 18, 2: 18, 3: 17 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass. |
+| Module 1 | `content/questions/module1/fiziologiya_cheloveka.json` | `Физиология человека` | 55 | 0 | easy 12, medium 36, hard 7 | 0: 14, 1: 14, 2: 14, 3: 13 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass. |
+| Module 1 | `content/questions/module1/vvedenie_v_professiyu.json` | `Введение в профессию` | 57 | 0 | easy 7, medium 41, hard 9 | 0: 15, 1: 14, 2: 14, 3: 14 | Valid schema/category; answer-position imbalance was addressed in a follow-up pass; one legacy ID pattern anomaly remains separate: `m1-q3`. |
 | Module 2 | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | `Качественные методы исследования` | 53 | 0 | easy 8, medium 32, hard 13 | 0: 23, 1: 15, 2: 12, 3: 3 | Valid schema/category; answer position 3 is underused; one near-duplicate learning target. |
 | Module 2 | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | `Основы экспериментальной психологии` | 118 | 0 | easy 8, medium 80, hard 30 | 0: 30, 1: 30, 2: 29, 3: 29 | Valid schema/category; follow-up pass addressed answer-position imbalance; low easy-question share and source-alignment review remain separate if needed. |
 | Module 3 | `content/questions/module3/psychological_consulting.json` | `Психологическое консультирование` | 108 | 0 | easy 32, medium 52, hard 24 | 0: 27, 1: 27, 2: 27, 3: 27 | Valid schema/category; expected 108 approved questions confirmed; practical/case/checklist questions are embedded in the topic category. |
@@ -45,11 +45,11 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 
 | File path | Question ID | Issue type | Short reason | Suggested next action |
 |---|---|---|---|---|
-| `content/questions/module1/fiziologiya_vnd.json` | topic-level | Severe answer-position imbalance | Correct answers appear only in positions 0, 1, and 2; position 3 is unused and position 1 dominates. | Plan a mechanical option-reshuffle PR with source-backed answer preservation. |
-| `content/questions/module1/obschaya_psihologiya.json` | topic-level | Severe answer-position imbalance | Correct answers appear only in positions 0, 1, and 2; position 3 is unused and position 1 dominates. | Plan a mechanical option-reshuffle PR with answer-index verification. |
-| `content/questions/module1/psihofiziologiya.json` | topic-level | Severe answer-position imbalance | 56 of 71 correct answers are in position 1; position 3 is unused. | Prioritize before adding more Module 1 content; reshuffle without changing wording. |
-| `content/questions/module1/fiziologiya_cheloveka.json` | topic-level | Severe answer-position imbalance | Correct answers use only positions 0 and 1. | Mechanical reshuffle PR; preserve explanations and source refs. |
-| `content/questions/module1/vvedenie_v_professiyu.json` | topic-level | Severe answer-position imbalance | 48 of 57 correct answers are in position 1; position 3 is unused. | Mechanical reshuffle PR; include regression script output. |
+| `content/questions/module1/fiziologiya_vnd.json` | topic-level | Answer-position imbalance addressed | Follow-up pass redistributed correct answers from 0:24, 1:32, 2:1, 3:0 to 0:15, 1:14, 2:14, 3:14. | No further answer-position cleanup needed for this topic; long-stem/source-ref review remains separate if needed. |
+| `content/questions/module1/obschaya_psihologiya.json` | topic-level | Answer-position imbalance addressed | Follow-up pass redistributed correct answers from 0:18, 1:35, 2:3, 3:0 to 0:14, 1:14, 2:14, 3:14. | No further answer-position cleanup needed for this topic; long-stem/source-ref review remains separate if needed. |
+| `content/questions/module1/psihofiziologiya.json` | topic-level | Answer-position imbalance addressed | Follow-up pass redistributed correct answers from 0:12, 1:56, 2:3, 3:0 to 0:18, 1:18, 2:18, 3:17. | No further answer-position cleanup needed for this topic; source-ref review remains separate if needed. |
+| `content/questions/module1/fiziologiya_cheloveka.json` | topic-level | Answer-position imbalance addressed | Follow-up pass redistributed correct answers from 0:18, 1:37, 2:0, 3:0 to 0:14, 1:14, 2:14, 3:13. | No further answer-position cleanup needed for this topic; source-ref review remains separate if needed. |
+| `content/questions/module1/vvedenie_v_professiyu.json` | topic-level | Answer-position imbalance addressed | Follow-up pass redistributed correct answers from 0:5, 1:48, 2:4, 3:0 to 0:15, 1:14, 2:14, 3:14. | No further answer-position cleanup needed for this topic; legacy ID/source-ref review remains separate if needed. |
 | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | topic-level | Answer-position imbalance addressed | Follow-up pass redistributed correct answers from 0:26, 1:77, 2:15, 3:0 to 0:30, 1:30, 2:29, 3:29. | No further answer-position cleanup needed for this topic; source-alignment review remains separate if needed. |
 | `content/questions/module1/fiziologiya_vnd.json` | `m1_vnd_021`, `m1_vnd_045`, `m1_vnd_046` | Telegram quiz readability | Case stems are useful but long for compact quiz UX. | Shorten stems in a separate wording-polish PR without changing concepts. |
 | `content/questions/module1/obschaya_psihologiya.json` | `m1_gp_030` | Telegram quiz readability | Long multi-clause stem and long option text may be harder to parse on mobile. | Compress scenario and options while preserving the processes/states/properties distinction. |
@@ -73,35 +73,35 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 
 - Coverage strengths: foundational ВНД concepts, Павловская tradition, conditioning, inhibition/excitation balance, learning/memory, needs, emotions, will/decision-making, and practice-oriented cases.
 - Likely gaps or underrepresented areas: source-backed review should confirm whether later lecture/practice materials are proportionally represented; no new topic should be added in this audit PR.
-- Balance: difficulty distribution is reasonable overall, but answer positions are strongly clustered and position 3 is unused.
+- Balance: difficulty distribution is reasonable overall; answer-position imbalance was addressed to 0:15, 1:14, 2:14, 3:14 in a follow-up pass.
 - Usability: several practical scenario stems are useful but too long for compact Telegram quiz flow.
 
 ### `content/questions/module1/obschaya_psihologiya.json`
 
 - Coverage strengths: object/subject of psychology, psychics/mental phenomena, methods, observation/interview/testing, processes/states/properties, and practical examples.
 - Likely gaps or underrepresented areas: source-backed review should verify whether practice materials after `practice4` need any future balancing.
-- Balance: difficulty distribution is acceptable; correct answer position 1 dominates and position 3 is unused.
+- Balance: difficulty distribution is acceptable; answer-position imbalance was addressed to 0:14, 1:14, 2:14, 3:14 in a follow-up pass.
 - Usability: `m1_gp_030` is the main long-stem candidate.
 
 ### `content/questions/module1/psihofiziologiya.json`
 
 - Coverage strengths: brain/anatomy, neurotransmitters, inhibition, motivation, wakefulness, attention, perception, behavioral organization, and integrated module review items.
 - Likely gaps or underrepresented areas: `module1/psychophysiology/module1_integration` is heavily represented; check whether this is intended as review coverage.
-- Balance: high count is acceptable for a stable baseline topic, but answer-position clustering is severe.
+- Balance: high count is acceptable for a stable baseline topic; answer-position imbalance was addressed to 0:18, 1:18, 2:18, 3:17 in a follow-up pass.
 - Usability: no overlong stems were flagged by length threshold.
 
 ### `content/questions/module1/fiziologiya_cheloveka.json`
 
 - Coverage strengths: nervous, endocrine, cardiovascular, respiratory, immune, digestive, blood-system, stress/emotion, and consulting-adjacent physiology materials.
 - Likely gaps or underrepresented areas: cardiovascular and nervous-system content are better represented than blood/immune/digestive topics; source review should decide whether this reflects source weight.
-- Balance: difficulty skews medium with few hard questions; correct answers use only positions 0 and 1.
+- Balance: difficulty skews medium with few hard questions; answer-position imbalance was addressed to 0:14, 1:14, 2:14, 3:13 in a follow-up pass.
 - Usability: stems are compact and generally quiz-friendly.
 
 ### `content/questions/module1/vvedenie_v_professiyu.json`
 
 - Coverage strengths: profession introduction, ethics, interview/observation, professional identity, practice topics, and role boundaries.
 - Likely gaps or underrepresented areas: source review should confirm whether practice topics are proportionate to lecture topics.
-- Balance: difficulty skews medium; answer-position clustering is severe.
+- Balance: difficulty skews medium; answer-position imbalance was addressed to 0:15, 1:14, 2:14, 3:14 in a follow-up pass.
 - Usability: stems are compact; one legacy ID (`m1-q3`) should be reviewed separately if ID normalization is desired.
 
 ## Module 2 notes
@@ -135,7 +135,7 @@ No invalid JSON, validator failures, seed failures, duplicate IDs, missing requi
 
 1. Module 3 dedup/readability/source-alignment polish: addressed in a focused follow-up pass for lecture/practice overlap, the single uppercase `НЕ` item, and family-level source mapping without changing category structure.
 2. Module 2 experimental psychology balance pass: addressed for answer-position imbalance, definition-like validity item difficulty, and the flagged long stem; source-alignment review remains separate if needed.
-3. Module 1 answer-distribution cleanup: mechanically reshuffle options across stable baseline topics while preserving correct answers, explanations, IDs, and source refs.
+3. Module 1 answer-distribution cleanup: addressed by mechanically reshuffling options across stable baseline topics while preserving correct answers, explanations, IDs, difficulties, and source refs.
 4. Module 2 qualitative methods light polish: review `m2_qual_023`/`m2_qual_041` overlap and underuse of correct answer position 3.
 5. Global minor ID/readability cleanup: decide whether the legacy `m1-q3` ID should remain stable or be normalized after downstream reference checks.
 
