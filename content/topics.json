@@ -1,0 +1,82 @@
+[
+  {
+    "id": "vvedenie_v_professiyu",
+    "title": "Введение в профессию",
+    "module": "module1",
+    "question_file": "content/questions/module1/vvedenie_v_professiyu.json",
+    "status": "active",
+    "order": 110,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+  },
+  {
+    "id": "obschaya_psihologiya",
+    "title": "Общая психология",
+    "module": "module1",
+    "question_file": "content/questions/module1/obschaya_psihologiya.json",
+    "status": "active",
+    "order": 120,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+  },
+  {
+    "id": "fiziologiya_cheloveka",
+    "title": "Физиология человека",
+    "module": "module1",
+    "question_file": "content/questions/module1/fiziologiya_cheloveka.json",
+    "status": "active",
+    "order": 130,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+  },
+  {
+    "id": "fiziologiya_vnd",
+    "title": "Физиология ВНД",
+    "module": "module1",
+    "question_file": "content/questions/module1/fiziologiya_vnd.json",
+    "status": "active",
+    "order": 140,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+  },
+  {
+    "id": "psihofiziologiya",
+    "title": "Психофизиология",
+    "module": "module1",
+    "question_file": "content/questions/module1/psihofiziologiya.json",
+    "status": "active",
+    "order": 150,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+  },
+  {
+    "id": "osnovy_eksperimentalnoy_psihologii",
+    "title": "Основы экспериментальной психологии",
+    "module": "module2",
+    "question_file": "content/questions/module2/osnovy_eksperimentalnoy_psihologii.json",
+    "status": "active",
+    "order": 210,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+  },
+  {
+    "id": "kachestvennye_metody_issledovaniya",
+    "title": "Качественные методы исследования",
+    "module": "module2",
+    "question_file": "content/questions/module2/kachestvennye_metody_issledovaniya.json",
+    "status": "active",
+    "order": 220,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+  },
+  {
+    "id": "psychological_consulting",
+    "title": "Психологическое консультирование",
+    "module": "module3",
+    "question_file": "content/questions/module3/psychological_consulting.json",
+    "status": "active",
+    "order": 310,
+    "available_contours": ["questions"],
+    "source_notes": "Existing approved question topic; English filename slug retained intentionally as the stable ID candidate; glossary/literature contours not implemented yet."
+  }
+]
