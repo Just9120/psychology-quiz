@@ -21,6 +21,7 @@ Audited the active question-bank source files under `content/questions/module1/`
 - Blockers: none found.
 - Original audit JSON files changed: no. Follow-up notes now record subsequent focused content QA passes without changing the original audit scope.
 - Recommended next action: Module 3 polish, Module 2 experimental balance, Module 1 answer-position cleanup, Module 2 qualitative light polish, and the focused Module 1/2 repo-local source-ref/readability/legacy-ID pass have been addressed; remaining high-value follow-up is source-backed alignment against original local/Drive source packs if those materials are available.
+- Module 1/2 source-backed alignment attempt: see `docs/content_source_alignment_module1_module2.md`. This pass completed Level A metadata/source_ref coverage for all 467 Module 1/2 approved questions but could not perform source-text support sampling because the original local/Drive source packs were not available in the workspace; source alignment remains partial/blocked, not confirmed.
 
 ## Topic inventory
 
@@ -72,6 +73,8 @@ Repo-local review covered the seven active Module 1/2 files listed above. All 46
 | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | 53 | 53 | all `module2/qualitative/*` | concentrated in `practice10` 15, `practice11` 16, `practice12` 13, plus `lecture1_intro` 9; this is consistent with the active limited-scope topic. |
 
 Full source-backed alignment was not confirmed in this pass because original source packs were not present in the repository. A future source-backed alignment pass should use the local/Drive source materials before adding, removing, or remapping source-backed content.
+
+A follow-up source-backed alignment attempt is documented in `docs/content_source_alignment_module1_module2.md`. It confirmed the same all-467 non-empty source_ref metadata posture but found the original local/Drive source packs unavailable in the execution environment, so no question-level source-text support was claimed and no JSON was changed.
 
 ## Medium-priority improvements
 
