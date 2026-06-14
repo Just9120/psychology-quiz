@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from html import escape
+import random
 import base64
 import json
 import logging
@@ -58,14 +59,19 @@ from app.db import (
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 from app.miniapp_api import start_miniapp_api_server
 from app.glossary import (
+    GLOSSARY_QUIZ_SESSION_KEY,
     GLOSSARY_UNAVAILABLE_TEXT,
-    build_glossary_entry_keyboard,
-    build_glossary_terms_keyboard,
+    build_glossary_answer_keyboard,
+    build_glossary_count_keyboard,
+    build_glossary_feedback_keyboard,
+    build_glossary_quiz_question,
+    build_glossary_result_keyboard,
     build_glossary_topics_keyboard,
     callback_token_to_topic_id,
-    find_glossary_entry,
-    format_glossary_entry_text,
-    format_glossary_terms_text,
+    format_glossary_count_text,
+    format_glossary_feedback_text,
+    format_glossary_question_text,
+    format_glossary_result_text,
     format_glossary_topics_text,
     load_glossary_entries,
     topic_title,
@@ -105,13 +111,13 @@ HELP_TEXT = (
     f"{START_QUIZ_BUTTON_TEXT} — пройти викторину прямо в чате.\n"
     f"{MINI_APP_BUTTON_TEXT} — открыть удобный режим внутри Telegram.\n"
     f"{READING_MODE_BUTTON_TEXT} — выбрать обычный или бионический режим.\n"
-    f"{GLOSSARY_BUTTON_TEXT} — открыть учебный глоссарий.\n"
+    f"{GLOSSARY_BUTTON_TEXT} — пройти тест по терминам.\n"
     "🙈 Скрыть меню — убрать нижнюю клавиатуру.\n"
     "\n"
     "/start — вернуть меню\n"
     "/quiz — начать викторину в чате\n"
     "/ui — открыть викторину в окне\n"
-    "/glossary — открыть глоссарий\n"
+    "/glossary — открыть глоссарий-тест\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
@@ -996,17 +1002,67 @@ async def glossary_button_handler(update: Update, context: ContextTypes.DEFAULT_
 
 
 async def glossary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    del context
+    context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
     if update.message is None:
         return
     await update.message.reply_text(
         format_glossary_topics_text(),
         reply_markup=build_glossary_topics_keyboard(),
+        parse_mode="HTML",
+    )
+
+
+def _build_glossary_session(topic_id: str, entries, count_raw: str) -> dict | None:
+    if entries is None or len(entries) < 4:
+        return None
+    requested_count = len(entries) if count_raw == "all" else int(count_raw)
+    question_count = min(requested_count, len(entries))
+    selected_entries = random.sample(entries, question_count)
+    return {
+        "topic_id": topic_id,
+        "count_raw": count_raw,
+        "entry_ids": [entry.id for entry in selected_entries],
+        "current_index": 0,
+        "score": 0,
+        "answered": False,
+        "last_question": None,
+    }
+
+
+def _current_glossary_question(session: dict, entries) -> object | None:
+    current_index = int(session.get("current_index", 0))
+    entry_ids = session.get("entry_ids")
+    if not isinstance(entry_ids, list) or current_index < 0 or current_index >= len(entry_ids):
+        return None
+    current_entry_id = entry_ids[current_index]
+    current_entry = next((entry for entry in entries if entry.id == current_entry_id), None)
+    if current_entry is None:
+        return None
+    return build_glossary_quiz_question(entries, current_entry)
+
+
+async def _render_current_glossary_question(query, latency: _HandlerLatency, context: ContextTypes.DEFAULT_TYPE, session: dict, entries) -> None:
+    question = _current_glossary_question(session, entries)
+    if question is None:
+        context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
+        await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+        return
+    session["answered"] = False
+    session["last_question"] = question
+    total = len(session["entry_ids"])
+    current_index = int(session["current_index"])
+    await _timed_telegram_api_call(
+        latency,
+        query.edit_message_text(
+            format_glossary_question_text(question, current_index + 1, total),
+            reply_markup=build_glossary_answer_keyboard(question),
+            parse_mode="HTML",
+        ),
+        api_kind="message_edit",
     )
 
 
 async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    del context
     latency = _HandlerLatency(
         handler="glossary_callback",
         callback_prefix="gls",
@@ -1017,17 +1073,19 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         return
 
     data = query.data
-    if not data.startswith("gls:"):
+    if not (data.startswith("gls:") or data.startswith("glsq:")):
         return
     latency.start()
     await _timed_telegram_api_call(latency, query.answer(cache_time=1), api_kind="callback_ack")
 
     if data == "gls:topics":
+        context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
         await _timed_telegram_api_call(
             latency,
             query.edit_message_text(
                 format_glossary_topics_text(),
                 reply_markup=build_glossary_topics_keyboard(),
+                parse_mode="HTML",
             ),
             api_kind="message_edit",
         )
@@ -1035,6 +1093,7 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         return
 
     if data == "gls:main":
+        context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
         if query.message is not None:
             try:
                 await _timed_telegram_api_call(latency, query.edit_message_reply_markup(reply_markup=None), api_kind="message_edit")
@@ -1049,14 +1108,10 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         return
 
     parts = data.split(":")
-    if len(parts) == 4 and parts[1] == "topic":
-        _, _, topic_token, page_raw = parts
+    if len(parts) == 3 and parts[0] == "gls" and parts[1] == "topic":
+        topic_token = parts[2]
         selected_topic_id = callback_token_to_topic_id(topic_token)
         title = topic_title(selected_topic_id)
-        try:
-            page = max(0, int(page_raw))
-        except ValueError:
-            page = 0
         entries = load_glossary_entries(selected_topic_id) if selected_topic_id is not None else None
         if selected_topic_id is None or title is None or entries is None:
             await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
@@ -1065,8 +1120,8 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         await _timed_telegram_api_call(
             latency,
             query.edit_message_text(
-                format_glossary_terms_text(title, page, len(entries)),
-                reply_markup=build_glossary_terms_keyboard(selected_topic_id, entries, page),
+                format_glossary_count_text(title, len(entries)),
+                reply_markup=build_glossary_count_keyboard(selected_topic_id, len(entries)),
                 parse_mode="HTML",
             ),
             api_kind="message_edit",
@@ -1074,34 +1129,96 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         latency.summary()
         return
 
-    if len(parts) == 5 and parts[1] == "term":
-        _, _, topic_token, entry_id, page_raw = parts
-        selected_topic_id = callback_token_to_topic_id(topic_token)
-        try:
-            page = max(0, int(page_raw))
-        except ValueError:
-            page = 0
+    if len(parts) == 4 and parts[0] == "glsq" and parts[1] == "count" and parts[3] in {"5", "10", "all"}:
+        selected_topic_id = callback_token_to_topic_id(parts[2])
         entries = load_glossary_entries(selected_topic_id) if selected_topic_id is not None else None
-        entry = find_glossary_entry(entries, entry_id) if entries is not None else None
-        if entry is None:
+        session = _build_glossary_session(selected_topic_id, entries, parts[3]) if selected_topic_id is not None else None
+        if session is None:
             await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
             latency.summary()
             return
-        await _timed_telegram_api_call(
-            latency,
-            query.edit_message_text(
-                format_glossary_entry_text(entry),
-                reply_markup=build_glossary_entry_keyboard(selected_topic_id, page),
-                parse_mode="HTML",
-            ),
-            api_kind="message_edit",
-        )
+        context.user_data[GLOSSARY_QUIZ_SESSION_KEY] = session
+        await _render_current_glossary_question(query, latency, context, session, entries)
+        latency.summary()
+        return
+
+    if len(parts) == 3 and parts[0] == "glsq" and parts[1] == "ans" and parts[2].isdigit():
+        session = context.user_data.get(GLOSSARY_QUIZ_SESSION_KEY)
+        if not isinstance(session, dict) or session.get("answered"):
+            _mark_repeated_tap(latency)
+            latency.summary()
+            return
+        selected_index = int(parts[2])
+        question = session.get("last_question")
+        if question is None or not 0 <= selected_index < len(question.options):
+            await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+            latency.summary()
+            return
+        is_correct = selected_index == question.correct_option_index
+        if is_correct:
+            session["score"] = int(session.get("score", 0)) + 1
+        session["answered"] = True
+        total = len(session["entry_ids"])
+        answered_count = int(session["current_index"]) + 1
+        if answered_count >= total:
+            feedback = format_glossary_feedback_text(question, selected_index, answered_count, total)
+            result = format_glossary_result_text(int(session.get("score", 0)), total)
+            await _timed_telegram_api_call(
+                latency,
+                query.edit_message_text(
+                    f"{feedback}\n\n{result}",
+                    reply_markup=build_glossary_result_keyboard(),
+                    parse_mode="HTML",
+                ),
+                api_kind="message_edit",
+            )
+        else:
+            await _timed_telegram_api_call(
+                latency,
+                query.edit_message_text(
+                    format_glossary_feedback_text(question, selected_index, answered_count, total),
+                    reply_markup=build_glossary_feedback_keyboard(has_next=True),
+                    parse_mode="HTML",
+                ),
+                api_kind="message_edit",
+            )
+        latency.summary()
+        return
+
+    if data == "glsq:next":
+        session = context.user_data.get(GLOSSARY_QUIZ_SESSION_KEY)
+        if not isinstance(session, dict) or not session.get("answered"):
+            _mark_stale_callback(latency)
+            latency.summary()
+            return
+        selected_topic_id = session.get("topic_id")
+        entries = load_glossary_entries(selected_topic_id) if isinstance(selected_topic_id, str) else None
+        if entries is None:
+            await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+            latency.summary()
+            return
+        session["current_index"] = int(session.get("current_index", 0)) + 1
+        await _render_current_glossary_question(query, latency, context, session, entries)
+        latency.summary()
+        return
+
+    if data == "glsq:retry":
+        session = context.user_data.get(GLOSSARY_QUIZ_SESSION_KEY)
+        topic_id = session.get("topic_id") if isinstance(session, dict) else "kachestvennye_metody_issledovaniya"
+        count_raw = session.get("count_raw") if isinstance(session, dict) else "5"
+        entries = load_glossary_entries(topic_id) if isinstance(topic_id, str) else None
+        new_session = _build_glossary_session(topic_id, entries, str(count_raw)) if isinstance(topic_id, str) else None
+        if new_session is None:
+            await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+            latency.summary()
+            return
+        context.user_data[GLOSSARY_QUIZ_SESSION_KEY] = new_session
+        await _render_current_glossary_question(query, latency, context, new_session, entries)
         latency.summary()
         return
 
     await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
     latency.summary()
-
 
 
 async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -3224,7 +3341,7 @@ def main() -> None:
     application.add_handler(
         CallbackQueryHandler(
             glossary_callback,
-            pattern=r"^gls:(topics|main|topic:[a-z0-9_]+:\d+|term:[a-z0-9_]+:[a-z0-9_]+:\d+)$",
+            pattern=r"^(gls:(topics|main|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|ans:\d+|next|retry))$",
         )
     )
     application.add_handler(
