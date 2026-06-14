@@ -57,6 +57,19 @@ from app.db import (
 
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 from app.miniapp_api import start_miniapp_api_server
+from app.glossary import (
+    GLOSSARY_UNAVAILABLE_TEXT,
+    build_glossary_entry_keyboard,
+    build_glossary_terms_keyboard,
+    build_glossary_topics_keyboard,
+    callback_token_to_topic_id,
+    find_glossary_entry,
+    format_glossary_entry_text,
+    format_glossary_terms_text,
+    format_glossary_topics_text,
+    load_glossary_entries,
+    topic_title,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -78,23 +91,27 @@ DIFFICULTY_CHOICES = (
 START_QUIZ_BUTTON_TEXT = "🎯 Начать"
 MINI_APP_BUTTON_TEXT = "🚀 В окне"
 READING_MODE_BUTTON_TEXT = "👁 Чтение"
+GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
 LEGACY_MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
 MINI_APP_BUTTON_ALIASES = (MINI_APP_BUTTON_TEXT, LEGACY_MINI_APP_BUTTON_TEXT)
 READING_MODE_BUTTON_ALIASES = (READING_MODE_BUTTON_TEXT, LEGACY_READING_MODE_BUTTON_TEXT)
+GLOSSARY_BUTTON_ALIASES = (GLOSSARY_BUTTON_TEXT, "Глоссарий")
 HELP_TEXT = (
     "Что можно сделать:\n"
     "\n"
     f"{START_QUIZ_BUTTON_TEXT} — пройти викторину прямо в чате.\n"
     f"{MINI_APP_BUTTON_TEXT} — открыть удобный режим внутри Telegram.\n"
     f"{READING_MODE_BUTTON_TEXT} — выбрать обычный или бионический режим.\n"
+    f"{GLOSSARY_BUTTON_TEXT} — открыть учебный глоссарий.\n"
     "🙈 Скрыть меню — убрать нижнюю клавиатуру.\n"
     "\n"
     "/start — вернуть меню\n"
     "/quiz — начать викторину в чате\n"
     "/ui — открыть викторину в окне\n"
+    "/glossary — открыть глоссарий\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
@@ -239,6 +256,7 @@ def _safe_message_kind(message: object | None) -> str | None:
         *MINI_APP_BUTTON_ALIASES,
         "ℹ️ Помощь",
         *READING_MODE_BUTTON_ALIASES,
+        *GLOSSARY_BUTTON_ALIASES,
         HIDE_MENU_BUTTON_TEXT,
     }:
         return "text_button"
@@ -633,6 +651,7 @@ async def post_init(application: Application) -> None:
             BotCommand("ping", "Проверить, что бот на связи"),
             BotCommand("quiz", "Начать викторину"),
             BotCommand("ui", "Открыть викторину в окне"),
+            BotCommand("glossary", "Открыть глоссарий"),
         ]
     )
 
@@ -908,7 +927,8 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
-            [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton("ℹ️ Помощь")],
+            [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
+            [KeyboardButton("ℹ️ Помощь")],
             [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
         ],
         resize_keyboard=True,
@@ -927,6 +947,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         "Можно пройти викторину двумя способами:\n"
         "🎯 В чате — быстрый классический режим.\n"
         "🚀 В окне — удобный режим внутри Telegram.\n"
+        "📚 Глоссарий — короткие определения по темам.\n"
         "\n"
         "Выберите действие ниже 👇"
     )
@@ -968,6 +989,118 @@ async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFA
         format_reading_mode_screen(current_mode),
         reply_markup=build_reading_mode_keyboard(current_mode),
     )
+
+
+async def glossary_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await glossary_command(update, context)
+
+
+async def glossary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    del context
+    if update.message is None:
+        return
+    await update.message.reply_text(
+        format_glossary_topics_text(),
+        reply_markup=build_glossary_topics_keyboard(),
+    )
+
+
+async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    del context
+    latency = _HandlerLatency(
+        handler="glossary_callback",
+        callback_prefix="gls",
+        telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None),
+    )
+    query = update.callback_query
+    if query is None or query.data is None:
+        return
+
+    data = query.data
+    if not data.startswith("gls:"):
+        return
+    latency.start()
+    await _timed_telegram_api_call(latency, query.answer(cache_time=1), api_kind="callback_ack")
+
+    if data == "gls:topics":
+        await _timed_telegram_api_call(
+            latency,
+            query.edit_message_text(
+                format_glossary_topics_text(),
+                reply_markup=build_glossary_topics_keyboard(),
+            ),
+            api_kind="message_edit",
+        )
+        latency.summary()
+        return
+
+    if data == "gls:main":
+        if query.message is not None:
+            try:
+                await _timed_telegram_api_call(latency, query.edit_message_reply_markup(reply_markup=None), api_kind="message_edit")
+            except Exception:
+                logger.debug("Не удалось отключить inline-кнопки глоссария перед возвратом в главное меню.")
+            await _timed_telegram_api_call(
+                latency,
+                query.message.chat.send_message("Главное меню:", reply_markup=get_main_menu_keyboard()),
+                api_kind="message_send",
+            )
+        latency.summary()
+        return
+
+    parts = data.split(":")
+    if len(parts) == 4 and parts[1] == "topic":
+        _, _, topic_token, page_raw = parts
+        selected_topic_id = callback_token_to_topic_id(topic_token)
+        title = topic_title(selected_topic_id)
+        try:
+            page = max(0, int(page_raw))
+        except ValueError:
+            page = 0
+        entries = load_glossary_entries(selected_topic_id) if selected_topic_id is not None else None
+        if selected_topic_id is None or title is None or entries is None:
+            await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+            latency.summary()
+            return
+        await _timed_telegram_api_call(
+            latency,
+            query.edit_message_text(
+                format_glossary_terms_text(title, page, len(entries)),
+                reply_markup=build_glossary_terms_keyboard(selected_topic_id, entries, page),
+                parse_mode="HTML",
+            ),
+            api_kind="message_edit",
+        )
+        latency.summary()
+        return
+
+    if len(parts) == 5 and parts[1] == "term":
+        _, _, topic_token, entry_id, page_raw = parts
+        selected_topic_id = callback_token_to_topic_id(topic_token)
+        try:
+            page = max(0, int(page_raw))
+        except ValueError:
+            page = 0
+        entries = load_glossary_entries(selected_topic_id) if selected_topic_id is not None else None
+        entry = find_glossary_entry(entries, entry_id) if entries is not None else None
+        if entry is None:
+            await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+            latency.summary()
+            return
+        await _timed_telegram_api_call(
+            latency,
+            query.edit_message_text(
+                format_glossary_entry_text(entry),
+                reply_markup=build_glossary_entry_keyboard(selected_topic_id, page),
+                parse_mode="HTML",
+            ),
+            api_kind="message_edit",
+        )
+        latency.summary()
+        return
+
+    await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+    latency.summary()
 
 
 
@@ -3031,6 +3164,7 @@ def main() -> None:
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
     application.add_handler(CommandHandler("ui", ui_command))
+    application.add_handler(CommandHandler("glossary", glossary_command))
     application.add_handler(CommandHandler("stats", stats_command))
     application.add_handler(
         MessageHandler(
@@ -3058,6 +3192,12 @@ def main() -> None:
     )
     application.add_handler(
         MessageHandler(
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*GLOSSARY_BUTTON_ALIASES)),
+            glossary_button_handler,
+        )
+    )
+    application.add_handler(
+        MessageHandler(
             filters.ChatType.PRIVATE & filters.Regex(rf"^{re.escape(HIDE_MENU_BUTTON_TEXT)}$"),
             hide_menu_button_handler,
         )
@@ -3079,6 +3219,12 @@ def main() -> None:
         CallbackQueryHandler(
             reading_mode_callback,
             pattern=r"^readingmode:(menu|set:(normal|bionic))$",
+        )
+    )
+    application.add_handler(
+        CallbackQueryHandler(
+            glossary_callback,
+            pattern=r"^gls:(topics|main|topic:[a-z0-9_]+:\d+|term:[a-z0-9_]+:[a-z0-9_]+:\d+)$",
         )
     )
     application.add_handler(
