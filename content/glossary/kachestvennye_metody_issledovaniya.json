@@ -7,16 +7,164 @@
       "качественные методы",
       "качественные исследования"
     ],
-    "definition": "Качественные методы исследования — учебная тема о подходах в психологии, которые рассматриваются рядом с вопросами психологии как науки и практики, а также в сопоставлении с количественными методами.",
-    "short_definition": "Подходы к исследованию в психологии, изучаемые в связи с научной и практической работой психолога.",
+    "definition": "Качественные методы исследования — подходы в психологии, которые помогают изучать смысл, опыт и контекст, а также сопоставляются с количественными методами.",
+    "short_definition": "Подходы к изучению смысла, опыта и контекста в психологии.",
     "examples": [
-      "Психолог изучает, как качественные методы могут помогать консультанту понимать опыт клиента."
+      "Психолог выбирает качественный метод, чтобы понять, как человек описывает собственный опыт."
     ],
     "confusable_with": [],
     "source_refs": [
       "supplied_snippet:practice10:qualitative_methods_intro"
     ],
     "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_semistructured_interview",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Глубинное полуструктурированное интервью",
+    "aliases": [
+      "полуструктурированное интервью",
+      "глубинное интервью"
+    ],
+    "definition": "Глубинное полуструктурированное интервью — качественный способ беседы, где исследователь заранее задаёт основные темы, но оставляет место для уточнений и подробного рассказа участника.",
+    "short_definition": "Гибкая исследовательская беседа по заранее намеченным темам.",
+    "examples": [
+      "Интервьюер спрашивает студента о переживании экзамена и задаёт уточняющие вопросы по ходу рассказа."
+    ],
+    "confusable_with": [
+      "qual_methods_focus_group"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:qualitative_methods_intro"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_focus_group",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Фокус-группа",
+    "aliases": [
+      "групповая дискуссия"
+    ],
+    "definition": "Фокус-группа — качественный метод, в котором несколько участников обсуждают заданную тему, а исследователь анализирует высказывания и взаимодействие в группе.",
+    "short_definition": "Групповое обсуждение темы под руководством исследователя.",
+    "examples": [
+      "Модератор просит группу обсудить, как они выбирают психологическую помощь."
+    ],
+    "confusable_with": [
+      "qual_methods_semistructured_interview"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:qualitative_methods_intro"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_artifact",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Артефакт",
+    "aliases": [
+      "исследовательский артефакт"
+    ],
+    "definition": "Артефакт — искажение или след в данных, который возникает из-за условий исследования, процедуры или влияния исследователя, а не из-за изучаемого явления само по себе.",
+    "short_definition": "Искажение данных, созданное процедурой или контекстом исследования.",
+    "examples": [
+      "Участник отвечает так, как, по его мнению, ожидает интервьюер, и это становится артефактом данных."
+    ],
+    "confusable_with": [
+      "qual_methods_methodological_reflection"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:qualitative_methods_intro"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_transcription",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Транскрибирование",
+    "aliases": [
+      "транскрипция",
+      "расшифровка записи"
+    ],
+    "definition": "Транскрибирование — перевод аудио- или видеозаписи интервью, фокус-группы либо наблюдения в письменный текст для последующего анализа.",
+    "short_definition": "Перевод записи качественных данных в текст.",
+    "examples": [
+      "После интервью исследователь расшифровывает запись, чтобы выделить повторяющиеся темы."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "supplied_snippet:practice10:qualitative_methods_intro"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_case_study",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Case study / анализ индивидуального случая",
+    "aliases": [
+      "case study",
+      "анализ случая",
+      "изучение индивидуального случая"
+    ],
+    "definition": "Case study — качественный анализ одного случая, человека, группы или ситуации, который помогает подробно рассмотреть контекст и ход психологического явления.",
+    "short_definition": "Подробное качественное изучение отдельного случая в контексте.",
+    "examples": [
+      "Консультант разбирает один случай обращения клиента, чтобы понять последовательность событий и решений."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "supplied_snippet:practice10:qualitative_methods_intro"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_phenomenological_openness",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Феноменологическая открытость",
+    "aliases": [
+      "открытость опыту участника"
+    ],
+    "definition": "Феноменологическая открытость — установка исследователя внимательно относиться к тому, как участник сам описывает свой опыт, не подменяя это описание готовыми объяснениями слишком рано.",
+    "short_definition": "Готовность слышать опыт участника в его собственных описаниях.",
+    "examples": [
+      "Исследователь просит участника подробнее описать переживание, а не сразу относит ответ к готовой категории."
+    ],
+    "confusable_with": [
+      "qual_methods_methodological_reflection"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:qualitative_methods_intro"
+    ],
+    "difficulty": "hard",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_methodological_reflection",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Методологическая рефлексия",
+    "aliases": [
+      "рефлексия исследователя"
+    ],
+    "definition": "Методологическая рефлексия — осмысление исследователем того, как выбранный метод, вопросы, позиция и условия работы влияют на получение и интерпретацию качественных данных.",
+    "short_definition": "Анализ влияния метода и позиции исследователя на данные.",
+    "examples": [
+      "После интервью исследователь отмечает, какие его вопросы могли направить рассказ участника."
+    ],
+    "confusable_with": [
+      "qual_methods_artifact",
+      "qual_methods_phenomenological_openness"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:qualitative_methods_intro"
+    ],
+    "difficulty": "hard",
     "status": "approved"
   }
 ]

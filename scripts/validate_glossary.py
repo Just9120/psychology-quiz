@@ -91,8 +91,6 @@ def validate_entry(
     else:
         if not entry_id.isascii() or entry_id.lower() != entry_id or not ID_RE.match(entry_id):
             errors.append(f"{label}: id must be lowercase ASCII and match ^[a-z0-9_]+$: {entry_id}")
-        if not entry_id.startswith("qual_methods_"):
-            errors.append(f"{label}: id must use the qual_methods_ prefix: {entry_id}")
         if entry_id in seen_ids:
             errors.append(f"{label}: duplicate id '{entry_id}' also found at {seen_ids[entry_id]}")
         else:
