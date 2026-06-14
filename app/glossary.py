@@ -4,17 +4,18 @@ from dataclasses import dataclass
 from html import escape
 import json
 from pathlib import Path
+import random
 from typing import Any
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 GLOSSARY_UNAVAILABLE_TEXT = "Глоссарий временно недоступен. Попробуйте позже."
-GLOSSARY_PAGE_SIZE = 6
 GLOSSARY_TOPICS: tuple[tuple[str, str], ...] = (
     ("kachestvennye_metody_issledovaniya", "Качественные методы исследования"),
 )
 GLOSSARY_TOPIC_CALLBACK_TOKENS = {"kmi": "kachestvennye_metody_issledovaniya"}
 GLOSSARY_TOPIC_ID_TO_TOKEN = {topic_id: token for token, topic_id in GLOSSARY_TOPIC_CALLBACK_TOKENS.items()}
+GLOSSARY_QUIZ_SESSION_KEY = "glossary_quiz_session"
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 _GLOSSARY_DIR = _REPO_ROOT / "content" / "glossary"
 
@@ -30,6 +31,13 @@ class GlossaryEntry:
     examples: tuple[str, ...]
     difficulty: str
     source_refs: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class GlossaryQuizQuestion:
+    entry: GlossaryEntry
+    options: tuple[str, ...]
+    correct_option_index: int
 
 
 def _string_list(value: Any) -> tuple[str, ...] | None:
@@ -91,76 +99,92 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
 
 def build_glossary_topics_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
-        [[InlineKeyboardButton(title, callback_data=f"gls:topic:{GLOSSARY_TOPIC_ID_TO_TOKEN[topic_id]}:0")] for topic_id, title in GLOSSARY_TOPICS]
+        [[InlineKeyboardButton(title, callback_data=f"gls:topic:{GLOSSARY_TOPIC_ID_TO_TOKEN[topic_id]}")] for topic_id, title in GLOSSARY_TOPICS]
     )
 
 
 def format_glossary_topics_text() -> str:
-    return "Глоссарий по психологии\nВыберите тему:"
+    return "<b>Глоссарий: тест по терминам</b>\nВыберите тему:"
 
 
-def build_glossary_terms_keyboard(topic_id: str, entries: list[GlossaryEntry], page: int) -> InlineKeyboardMarkup:
-    safe_page = max(0, page)
-    start = safe_page * GLOSSARY_PAGE_SIZE
-    page_entries = entries[start : start + GLOSSARY_PAGE_SIZE]
-    keyboard = [
-        [InlineKeyboardButton(entry.term, callback_data=f"gls:term:{GLOSSARY_TOPIC_ID_TO_TOKEN[topic_id]}:{entry.id}:{safe_page}")]
-        for entry in page_entries
+def build_glossary_count_keyboard(topic_id: str, available_count: int) -> InlineKeyboardMarkup:
+    token = GLOSSARY_TOPIC_ID_TO_TOKEN[topic_id]
+    rows = [
+        [InlineKeyboardButton("5", callback_data=f"glsq:count:{token}:5")],
+        [InlineKeyboardButton("10", callback_data=f"glsq:count:{token}:10")],
+        [InlineKeyboardButton("Все доступные", callback_data=f"glsq:count:{token}:all")],
+        [InlineKeyboardButton("Назад к темам", callback_data="gls:topics")],
     ]
-    nav_row = []
-    if safe_page > 0:
-        nav_row.append(InlineKeyboardButton("Назад", callback_data=f"gls:topic:{GLOSSARY_TOPIC_ID_TO_TOKEN[topic_id]}:{safe_page - 1}"))
-    if start + GLOSSARY_PAGE_SIZE < len(entries):
-        nav_row.append(InlineKeyboardButton("Далее", callback_data=f"gls:topic:{GLOSSARY_TOPIC_ID_TO_TOKEN[topic_id]}:{safe_page + 1}"))
-    if nav_row:
-        keyboard.append(nav_row)
-    keyboard.append([InlineKeyboardButton("Назад к темам", callback_data="gls:topics")])
-    return InlineKeyboardMarkup(keyboard)
+    return InlineKeyboardMarkup(rows)
 
 
-def format_glossary_terms_text(topic_title: str, page: int, total_entries: int) -> str:
-    total_pages = max(1, (total_entries + GLOSSARY_PAGE_SIZE - 1) // GLOSSARY_PAGE_SIZE)
-    safe_page = min(max(0, page), total_pages - 1)
-    return f"<b>{escape(topic_title)}</b>\n\nВыберите термин. Страница {safe_page + 1} из {total_pages}."
+def format_glossary_count_text(topic_title: str, available_count: int) -> str:
+    return f"<b>{escape(topic_title)}</b>\n\nВыберите количество вопросов:\nДоступно терминов: {available_count}."
 
 
-def find_glossary_entry(entries: list[GlossaryEntry], entry_id: str) -> GlossaryEntry | None:
-    return next((entry for entry in entries if entry.id == entry_id), None)
+def build_glossary_quiz_question(entries: list[GlossaryEntry], entry: GlossaryEntry, *, rng: random.Random | None = None) -> GlossaryQuizQuestion | None:
+    valid_entries = [candidate for candidate in entries if candidate.short_definition]
+    distractors = [candidate.short_definition for candidate in valid_entries if candidate.id != entry.id]
+    if len(valid_entries) < 4 or len(distractors) < 3 or not entry.short_definition:
+        return None
+    picker = rng or random
+    selected_distractors = picker.sample(distractors, 3)
+    options = [entry.short_definition, *selected_distractors]
+    picker.shuffle(options)
+    correct_index = options.index(entry.short_definition)
+    return GlossaryQuizQuestion(entry=entry, options=tuple(options), correct_option_index=correct_index)
 
 
-def format_glossary_entry_text(entry: GlossaryEntry) -> str:
-    lines = [
-        f"<b>{escape(entry.term)}</b>",
-        "",
-    ]
-    if entry.aliases:
-        lines.append(f"<b>Также:</b> {escape(', '.join(entry.aliases))}")
-        lines.append("")
-    lines.extend(
-        [
-            f"<b>Кратко:</b> {escape(entry.short_definition)}",
-            "",
-            f"<b>Определение:</b> {escape(entry.definition)}",
-        ]
+def build_glossary_answer_keyboard(question: GlossaryQuizQuestion) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        [[InlineKeyboardButton(option, callback_data=f"glsq:ans:{index}")] for index, option in enumerate(question.options)]
     )
-    if entry.examples:
-        lines.append("")
-        lines.append("<b>Примеры:</b>")
-        lines.extend(f"• {escape(example)}" for example in entry.examples)
+
+
+def format_glossary_question_text(question: GlossaryQuizQuestion, order_index: int, total_questions: int) -> str:
+    return (
+        f"<b>Вопрос {order_index} из {total_questions}</b>\n\n"
+        "Что означает термин:\n"
+        f"<b>{escape(question.entry.term)}</b>"
+    )
+
+
+def build_glossary_feedback_keyboard(has_next: bool) -> InlineKeyboardMarkup:
+    if has_next:
+        return InlineKeyboardMarkup([[InlineKeyboardButton("Далее", callback_data="glsq:next")]])
+    return build_glossary_result_keyboard()
+
+
+def format_glossary_feedback_text(question: GlossaryQuizQuestion, selected_option_index: int, answered_count: int, total_questions: int) -> str:
+    selected_text = question.options[selected_option_index] if 0 <= selected_option_index < len(question.options) else ""
+    correct_text = question.options[question.correct_option_index]
+    is_correct = selected_option_index == question.correct_option_index
+    lines = [
+        "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>",
+        "",
+        f"<b>Ваш ответ:</b> {escape(selected_text)}",
+    ]
+    if not is_correct:
+        lines.append(f"<b>Правильный ответ:</b> {escape(correct_text)}")
     lines.extend(
         [
             "",
-            f"<b>Сложность:</b> {escape(entry.difficulty)}",
-            f"<b>Источники:</b> {escape('; '.join(entry.source_refs))}",
+            f"<b>Краткое объяснение:</b> {escape(question.entry.definition)}",
+            "",
+            f"<b>Прогресс:</b> {answered_count} из {total_questions}",
         ]
     )
     return "\n".join(lines)
 
 
-def build_glossary_entry_keyboard(topic_id: str, page: int) -> InlineKeyboardMarkup:
+def format_glossary_result_text(score: int, total_questions: int) -> str:
+    return f"<b>Тест завершён</b>\n\n<b>Результат:</b> {score} из {total_questions}"
+
+
+def build_glossary_result_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("Назад к списку терминов", callback_data=f"gls:topic:{GLOSSARY_TOPIC_ID_TO_TOKEN[topic_id]}:{max(0, page)}")],
+            [InlineKeyboardButton("Пройти ещё раз", callback_data="glsq:retry")],
             [InlineKeyboardButton("Назад к темам", callback_data="gls:topics")],
             [InlineKeyboardButton("Главное меню", callback_data="gls:main")],
         ]

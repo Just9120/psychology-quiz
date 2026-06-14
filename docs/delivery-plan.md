@@ -38,6 +38,7 @@
 5. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
 
 ## Near backlog
+- LEARN-CONTOURS-GLOSSARY-QUIZ-MVP-001 completed: converted the Telegram glossary runtime from a reference/detail view into a read-only glossary quiz mode with topic selection, question count, multiple-choice answers, feedback, progress, and final score; source_refs remain internal and are not shown to users; no DB/seed/Mini App/literature/deploy behavior changes.
 - LEARN-CONTOURS-GLOSSARY-RUNTIME-MVP-001 completed: added a read-only Telegram chat glossary MVP backed by static content/glossary JSON files, including /glossary, a main-menu button, topic selection, paginated term list, and term detail view; no DB/seed/Mini App/literature/deploy behavior changes.
 - LEARN-CONTOURS-GLOSSARY-BATCH2-001 completed: expanded the static qualitative-methods glossary with 6 approved supplied-snippet-backed entries; scope remains content/validation-only with no runtime/UI/DB/seed/deploy behavior changes and no literature items added.
 - LEARN-CONTOURS-PHASE1-001 follow-up completed: `docs/topic_registry_schema_phase1.md` proposes a docs-only topic registry and schema validation approach; active runtime scope remains unchanged until a separate focused implementation task.
