@@ -167,5 +167,133 @@
     ],
     "difficulty": "hard",
     "status": "approved"
+  },
+  {
+    "id": "qual_methods_subject_approach",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Субъектный подход",
+    "aliases": [
+      "субъект-ориентированное отношение"
+    ],
+    "definition": "Субъектный подход — отношение в качественной и практической психологической работе, при котором другой человек рассматривается как человек и субъект, а не как объект для манипуляции, объяснения или изучения.",
+    "short_definition": "Отношение к другому человеку как к субъекту, а не объекту работы или исследования.",
+    "examples": [
+      "Исследователь строит контакт так, чтобы видеть в участнике самостоятельного субъекта, а не материал для готового объяснения."
+    ],
+    "confusable_with": [
+      "qual_methods_phenomenological_openness"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:subject_approach"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_position_of_not_knowing",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Позиция незнания",
+    "aliases": [
+      "позиция неопределённости"
+    ],
+    "definition": "Позиция незнания — способность исследователя или психолога оставаться с неопределённостью, не торопиться с готовыми объяснениями и ценить эту неопределённость в психологическом контакте или исследовании.",
+    "short_definition": "Умение выдерживать неопределённость и не заменять её готовыми объяснениями.",
+    "examples": [
+      "Во время интервью психолог не спешит подводить рассказ участника под знакомую схему и сохраняет внимание к неясному."
+    ],
+    "confusable_with": [
+      "qual_methods_phenomenological_openness"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:position_of_not_knowing"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_double_attention",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Двойное внимание",
+    "aliases": [
+      "внимание к методу и контакту"
+    ],
+    "definition": "Двойное внимание — одновременное внимание исследователя к методу и ходу исследовательского процесса, а также к живому контакту с другим человеком.",
+    "short_definition": "Одновременное внимание к исследовательскому процессу и живому контакту с человеком.",
+    "examples": [
+      "Интервьюер следит за логикой исследования, но одновременно остаётся внимательным к тому, как участник переживает сам разговор."
+    ],
+    "confusable_with": [
+      "qual_methods_methodological_reflection"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:double_attention"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_researcher_bias",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Предвзятость исследователя",
+    "aliases": [
+      "исследовательская предвзятость",
+      "установки исследователя"
+    ],
+    "definition": "Предвзятость исследователя — влияние собственных предположений, установок и возможных bias исследователя на качественную работу; их нужно замечать и анализировать.",
+    "short_definition": "Собственные предположения и установки исследователя, которые важно замечать и анализировать.",
+    "examples": [
+      "Перед анализом интервью исследователь отмечает, какие собственные ожидания могут направлять его чтение материала."
+    ],
+    "confusable_with": [
+      "qual_methods_methodological_reflection"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:researcher_bias"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_text_texture",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Фактура текста",
+    "aliases": [
+      "фактура материала",
+      "детали выражения"
+    ],
+    "definition": "Фактура текста — внимательная работа с материалом или текстом качественных данных, при которой детали выражения важны для последующего анализа.",
+    "short_definition": "Значимые детали текста или материала качественных данных, важные для анализа.",
+    "examples": [
+      "При чтении расшифровки исследователь обращает внимание не только на общий смысл, но и на детали формулировок участника."
+    ],
+    "confusable_with": [
+      "qual_methods_transcription"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:text_texture"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_method_as_instrument",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Метод как инструмент",
+    "aliases": [
+      "метод-инструмент"
+    ],
+    "definition": "Метод как инструмент — понимание метода как важной структуры и рабочего инструмента, который помогает исследованию или практике, но не является панацеей; живой контакт с человеком остаётся первичным.",
+    "short_definition": "Метод важен как инструмент, но не заменяет живой контакт с человеком.",
+    "examples": [
+      "Психолог использует метод как опору для работы, но не позволяет процедуре заслонить контакт с участником."
+    ],
+    "confusable_with": [
+      "qual_methods_double_attention"
+    ],
+    "source_refs": [
+      "supplied_snippet:practice10:method_as_instrument"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
   }
 ]

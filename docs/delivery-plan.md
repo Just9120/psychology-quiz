@@ -38,6 +38,7 @@
 5. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
 
 ## Near backlog
+- LEARN-CONTOURS-GLOSSARY-BATCH2-001 completed: expanded the static qualitative-methods glossary with 6 approved supplied-snippet-backed entries; scope remains content/validation-only with no runtime/UI/DB/seed/deploy behavior changes and no literature items added.
 - LEARN-CONTOURS-PHASE1-001 follow-up completed: `docs/topic_registry_schema_phase1.md` proposes a docs-only topic registry and schema validation approach; active runtime scope remains unchanged until a separate focused implementation task.
 - LEARN-CONTOURS-PHASE1B-001 completed: added static `content/topics.json` for the 8 active question-backed topics and `scripts/validate_topics.py` for repository-local validation against `content/questions/**/*.json`; runtime scope remains unchanged and future glossary/literature contours require separate focused tasks.
 - LEARN-CONTOURS-CI-001 completed: standard CI now runs `python scripts/validate_topics.py` alongside question-bank validation; topic registry scope remains static validation-only with no runtime, CD/deploy, database, glossary, or literature behavior changes.
