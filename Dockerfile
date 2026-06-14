@@ -13,4 +13,4 @@ COPY scripts /app/scripts
 COPY sql /app/sql
 COPY content /app/content
 
-CMD ["python", "-m", "app.main"]
+
