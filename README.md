@@ -64,6 +64,7 @@ python -m compileall app scripts
 python scripts/validate_questions.py
 python scripts/validate_topics.py
 python scripts/validate_glossary.py
+python scripts/validate_literature.py
 DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/init_db.py
 DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/seed_questions.py
 git diff --check
