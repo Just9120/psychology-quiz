@@ -64,6 +64,9 @@ jobs:
       - name: Validate glossary
         run: python scripts/validate_glossary.py
 
+      - name: Validate literature
+        run: python scripts/validate_literature.py
+
       - name: Check for whitespace and merge marker issues
         shell: bash
         run: |
@@ -87,6 +90,7 @@ jobs:
             echo "- validate_questions passed"
             echo "- validate_topics passed"
             echo "- validate_glossary passed"
+            echo "- validate_literature passed"
             echo "- DB init/seed smoke passed"
             echo "- git diff --check passed"
           } >> "$GITHUB_STEP_SUMMARY"
