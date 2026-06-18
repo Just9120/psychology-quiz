@@ -7,6 +7,7 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
 import app.main as main
+import app.classic_quiz_handlers as classic
 
 
 class BotDbOffloadTests(unittest.TestCase):
@@ -745,13 +746,39 @@ class BotDbOffloadTests(unittest.TestCase):
             reply_markup=main.build_selected_mix_keyboard(categories, set()),
         )
 
-    def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
+
+    def test_main_registers_imported_classic_quiz_handlers_and_patterns(self):
         source = inspect.getsource(main)
-        module_ast = ast.parse(source)
+        self.assertIn('from app.classic_quiz_handlers import (', source)
+        self.assertIn('CommandHandler("quiz", quiz_command)', source)
+        self.assertIn('start_quiz_button_handler,', source)
+        self.assertIn('if _classic_reply_mode_enabled(settings):', source)
+        self.assertIn('classic_reply_text_answer_handler,', source)
+        self.assertIn('classic_reply_text_next_handler,', source)
+        expected_patterns = [
+            r'^qzmode:(single|selected_mix|all)$',
+            r'^cat:\d+$',
+            r'^qcnt:\d+:(5|10|15|all)$',
+            r'^qmode:\d+:(5|10|15|all):(any|easy|medium|hard)$',
+            r'^qcntall:(5|10|15|all)$',
+            r'^qmodeall:(5|10|15|all):(any|easy|medium|hard)$',
+            r'^mixsel:(toggle:\d+|done|reset)$',
+            r'^qcntselmix:(5|10|15|all)$',
+            r'^qmodeselmix:(5|10|15|all):(any|easy|medium|hard)$',
+            r'^ans:\d+:\d+:\d+$',
+            r'^next:\d+$',
+        ]
+        for pattern in expected_patterns:
+            self.assertIn(f'pattern=r"{pattern}"', source)
+
+    def test_static_guard_enforces_run_db_task_and_no_direct_get_connection_in_target_async_functions(self):
+        classic_source = inspect.getsource(classic)
+        main_source = inspect.getsource(main)
+        classic_ast = ast.parse(classic_source)
+        main_ast = ast.parse(main_source)
         target_names = [
             'quiz_mode_callback',
             'send_current_question_to_chat',
-            'web_app_data_handler',
             'difficulty_mode_callback',
             'mix_selection_callback',
             'start_mix_quiz',
@@ -760,10 +787,16 @@ class BotDbOffloadTests(unittest.TestCase):
 
         async_nodes = {
             node.name: node
-            for node in module_ast.body
+            for node in classic_ast.body
             if isinstance(node, ast.AsyncFunctionDef) and node.name in target_names
         }
-        self.assertEqual(set(target_names), set(async_nodes.keys()))
+        main_async_nodes = {
+            node.name: node
+            for node in main_ast.body
+            if isinstance(node, ast.AsyncFunctionDef) and node.name == 'web_app_data_handler'
+        }
+        async_nodes.update(main_async_nodes)
+        self.assertEqual(set([*target_names, 'web_app_data_handler']), set(async_nodes.keys()))
 
         def _is_get_connection_with(node: ast.With) -> bool:
             for item in node.items:
@@ -808,7 +841,7 @@ class BotDbOffloadTests(unittest.TestCase):
             )
 
     def test_static_guard_no_unbound_latency_reads_in_classic_callbacks(self):
-        source = inspect.getsource(main)
+        source = inspect.getsource(main) + "\n" + inspect.getsource(classic)
         module_ast = ast.parse(source)
         target_names = {
             'quiz_mode_callback',

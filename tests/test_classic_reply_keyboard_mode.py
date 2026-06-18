@@ -7,7 +7,7 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
-from app.main import (
+from app.classic_quiz_handlers import (
     CLASSIC_REPLY_NEXT_TEXT,
     CLASSIC_REPLY_STATE_KEY,
     _classic_text_latency_bucket,
