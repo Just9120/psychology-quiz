@@ -68,7 +68,7 @@ Additional CD inputs:
 - deploy directory, for example `APP_DIR`;
 - expected remote, for example `EXPECTED_REMOTE`;
 - expected branch, for example `EXPECTED_BRANCH`;
-- target service, for example `COMPOSE_SERVICE`;
+- target runtime service or service set, for example `COMPOSE_SERVICE` or `COMPOSE_SERVICES`;
 - deploy command/model;
 - runtime env model;
 - health check or post-check;
@@ -120,7 +120,7 @@ CD should:
 - update code safely, preferably by fast-forward when using git-based deploy;
 - preserve existing runtime secrets;
 - block deploy when required runtime secrets are unresolved;
-- deploy only the intended application service;
+- deploy only the intended application runtime service or service set;
 - run a post-check;
 - report success, for example `DEPLOY_OK`, only after post-check passes.
 
@@ -245,7 +245,7 @@ Recommended checks for git-based deploy:
 - configured remote matches expected repository;
 - current branch matches expected deploy branch;
 - working tree has no unsafe local tracked changes;
-- target service name matches configured service;
+- target service name or service set matches configured runtime service identity;
 - required runtime files exist;
 - required runtime placeholders are resolved.
 
@@ -285,8 +285,8 @@ CI is done when:
 
 CD is done when:
 
-- it deploys only the intended target service;
-- target directory, expected remote, expected branch, and service identity are explicit;
+- it deploys only the intended target runtime service or service set;
+- target directory, expected remote, expected branch, and runtime service/service-set identity are explicit;
 - required secrets and runtime env are handled safely;
 - unresolved required runtime secrets block deploy before build/up/restart;
 - stateful services and volumes are not touched;

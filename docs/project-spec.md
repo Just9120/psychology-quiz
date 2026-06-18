@@ -16,11 +16,11 @@
 - Этот первый scope Module 3 не авторизует широкое расширение Module 3 за пределы доступных согласованных материалов с явной опорой на источник.
 - Активные категории в runtime определяются из БД по `approved`-вопросам, а не хардкодом в UI.
 - Режим работы бота: long polling по умолчанию; опциональный webhook mode доступен только как config-gated infrastructure experiment.
-- Web UI отсутствует.
+- Standalone Web UI отсутствует; Telegram Mini App является opt-in UX внутри Telegram и не считается standalone Web UI.
 - RAG/внешняя генерация вопросов во время работы отсутствуют.
 
 ## Out of scope
-- Web UI.
+- Standalone Web UI вне Telegram Mini App.
 - Webhook как обязательный/единственный production mode; long polling должен сохраняться как default.
 - RAG и внешняя генерация вопросов во время runtime.
 - Расширение Module 2 на новые темы без отдельного согласованного решения.
@@ -58,6 +58,10 @@
 
 ## Content model and question-bank rules
 - Source of truth банка вопросов: JSON-файлы в репозитории.
+- Learning contours: tests/questions, glossary/terms, and a literature reading-tracker scaffold.
+- Tests/questions contour uses `content/questions/**/*.json` as canonical content and SQLite as runtime serving layer.
+- Glossary/terms contour uses static `content/glossary/*.json`; source/source_refs/provenance stay internal and are not shown in user-facing chat or Mini App UI.
+- Literature scaffold uses static `content/literature/*.json`; it is content/validation scaffolding until separate source-backed runtime work is explicitly authorized.
 - Рабочие директории:
   - `content/questions/module1/`
   - `content/questions/module2/`
@@ -115,11 +119,16 @@ Current approved content inventory:
 - Mini App остаётся отдельным opt-in UX и не заменяет текущий bot UX как default mode.
 - `/quiz` остаётся дефолтным классическим режимом.
 - Opt-in входы в Mini App: `/ui` и кнопка нижнего меню `🚀 В окне`.
+- `/ui` и `🚀 В окне` открывают setup/contour chooser даже если у пользователя активен normal quiz runner; в этом случае warning о завершении текущей активной попытки остаётся ожидаемым.
+- Chat `📚 Глоссарий` / `/glossary` остаётся отдельным Telegram chat glossary quiz и не открывает Mini App contour chooser.
 - Фактический launch Mini App выполняется через fresh inline WebApp-кнопку `🚀 Открыть викторину`, сгенерированную текущим `/ui`-контекстом.
 - Persistent reply keyboard не должен хранить stale `web_app` URL/launch-context для Mini App; `/ui` генерирует fresh launch context.
 
 Реализованный MVP Mini App:
-- поддерживает setup, state hydration, отображение вопроса, отправку ответа, feedback, переход к следующему шагу и completed/result экран;
+- поддерживает setup/contour chooser, state hydration, отображение вопроса, отправку ответа, feedback, переход к следующему шагу и completed/result экран;
+- на setup entrypoint показывает два пользовательских контура: `Тесты по темам` и `Глоссарий`;
+- контур `Тесты по темам` использует обычный question-bank runner;
+- контур `Глоссарий` использует glossary quiz по static `content/glossary/*.json` через существующие Mini App API endpoints (`GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`, `GET /miniapp/state`);
 - setup поддерживает quiz modes:
   - `single`;
   - `selected_mix`;
@@ -184,9 +193,9 @@ Out of scope для первого Mini App MVP:
 - Состояние Mini App клиента считается недоверенным, server-side валидация остаётся авторитативной.
 
 
-## Mini App API target architecture (phased)
+## Mini App API runtime architecture
 - Bot runtime remains responsible for Telegram command/update handling and classic `/quiz` UX.
-- Dedicated FastAPI service is the target runtime for Mini App API endpoints (`/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`).
+- Dedicated FastAPI service is the production runtime for Mini App API endpoints (`/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`).
 - Static Mini App frontend remains separately hosted over HTTPS (unchanged hosting model).
 - API endpoint contracts remain backward-compatible; migration target is HTTP serving/runtime layer, not quiz business semantics.
 
@@ -196,19 +205,11 @@ Deployment model (final target):
 - This is **not** multiple services inside one Docker container.
 - Not a separate project/server; operationally coordinated in same deployment environment.
 
-Phased rollout model:
-- **Phase 1 (repo-only implementation):**
-  - FastAPI implementation exists in repository and tests only;
-  - production CD does not enable/start FastAPI;
-  - FastAPI does not receive production Mini App traffic;
-  - current production bot + legacy Mini App API runtime remains unchanged.
-- **Phase 2 (production switch-over, separate PR):**
-  - separate PR enables FastAPI as production Mini App API;
-  - updates compose/CD/routing/env as needed in same repo/VPS environment;
-  - CD rebuilds/restarts relevant runtime services after switch-over (`psych_quiz_bot`, `psych_quiz_miniapp_api`);
-  - smoke + logs/metrics validation required before completion.
-- **Phase 3 (cleanup after soak):**
-  - remove/disable legacy `ThreadingHTTPServer` Mini App API path only after soak period confirms stability.
+Current production model:
+- FastAPI is enabled as the production Mini App API service.
+- Production Compose/CD treats both `psych_quiz_bot` and `psych_quiz_miniapp_api` as the intended runtime service set for app runtime restarts.
+- CD must rebuild/recreate both services when runtime code or Mini App API behavior changes.
+- Legacy in-bot `ThreadingHTTPServer` Mini App API path is not the current production serving path.
 
 Trust model (unchanged):
 - Mini App client remains untrusted.

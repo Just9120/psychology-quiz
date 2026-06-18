@@ -585,6 +585,20 @@ Do not create `docs/project-archive.md` as a baseline workflow document.
 
 ---
 
+
+## Production bug triage before stacked hotfixes
+
+Before stacking another hotfix PR for a production bug, classify the failing layer as specifically as possible:
+
+- frontend/static asset;
+- launch context;
+- API/backend;
+- CD/deploy;
+- runtime container freshness;
+- data/content.
+
+Use available evidence from screenshots, safe logs, deploy state, service/container state, or endpoint checks. Do not create another code PR until the failing layer is identified, unless the task explicitly asks to add diagnostics or instrumentation to gather that evidence.
+
 ## Done means
 
 A workflow-compliant task is done when:

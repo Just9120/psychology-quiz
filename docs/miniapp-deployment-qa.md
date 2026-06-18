@@ -9,7 +9,12 @@
 - UX polish loop #207–#211 completed; current delivery posture is observation/manual QA when no reproducible bugs are present.
 - Бот открывает Mini App URL через `MINI_APP_URL` (опциональная env-переменная).
 - Классический `/quiz` остаётся дефолтным UX.
-- Mini App запускается opt-in через `/ui`.
+- Mini App запускается opt-in через `/ui` и нижнюю кнопку `🚀 В окне`.
+- `/ui` и `🚀 В окне` открывают setup/contour chooser даже при активном normal quiz runner; warning о завершении активной попытки остаётся ожидаемым.
+- Первый экран chooser должен включать два контура: `Тесты по темам` и `Глоссарий`.
+- Chat `📚 Глоссарий` / `/glossary` остаётся Telegram chat glossary quiz, не Mini App chooser.
+- Mini App API — dedicated FastAPI service `psych_quiz_miniapp_api`; bot service `psych_quiz_bot` не является production-serving процессом Mini App API.
+- Static Mini App frontend hosting remains separate/operator/static hosting.
 - `/stats` остаётся скрытой owner-only командой только для private chat.
 
 ## 2) Hosting requirement
@@ -29,7 +34,7 @@
 
 1. Опубликовать `miniapp/index.html` на HTTPS static hosting в deployment environment.
 2. После готовности Cloudflare custom domain установить `MINI_APP_URL` на этот HTTPS URL в runtime `.env` на VPS.
-3. Перезапустить/передеплоить bot service, чтобы env подхватился.
+3. Перезапустить/передеплоить intended runtime service set (`psych_quiz_bot` и `psych_quiz_miniapp_api`), чтобы env/код подхватились где применимо.
 4. Проверить в Telegram, что `/ui` показывает кнопку открытия Mini App (при наличии активных категорий).
 5. По возможности в staging/dev отдельно проверить fallback-поведение `/ui`, когда `MINI_APP_URL` отсутствует.
 
@@ -54,6 +59,10 @@
 - [ ] `/ui` с `MINI_APP_URL` и активными категориями показывает primary inline кнопку открытия Mini App.
 - [ ] После `/start` в нижнем меню видна кнопка `🚀 В окне`.
 - [ ] Кнопка нижнего меню `🚀 В окне` отправляет свежий launch-сценарий через `/ui` (бот присылает новую inline WebApp-кнопку `🚀 Открыть викторину`).
+- [ ] `/ui` and `🚀 В окне` open setup/contour chooser even when a normal quiz runner is active.
+- [ ] If a normal quiz runner is active, the new-quiz warning remains visible before setup submit.
+- [ ] First Mini App setup/chooser screen includes `Тесты по темам` and `Глоссарий`.
+- [ ] Chat `📚 Глоссарий` / `/glossary` still opens the chat glossary quiz, not the Mini App chooser.
 - [ ] Кнопка `🚀 В окне` не использует persistent WebApp URL в reply keyboard (stale launch context не хранится).
 - [ ] `/ui` не показывает persistent bottom WebApp reply-кнопки для Mini App (только стандартное главное меню).
 - [ ] Если пользователь видит `API недоступен`, закрыть Mini App, отправить свежий `/ui` и открыть новую inline-кнопку.
@@ -74,7 +83,7 @@
 
 ### C. Post-UX-polish Mini App smoke checklist
 - [ ] `/ui` opens Mini App via fresh inline WebApp button.
-- [ ] Setup screen renders cleanly.
+- [ ] Setup/contour chooser screen renders cleanly and includes `Тесты по темам` and `Глоссарий`.
 - [ ] `single` allows one topic.
 - [ ] `selected_mix` allows multiple topics.
 - [ ] `all` hides topics and starts without category selection.
@@ -117,8 +126,8 @@
 ### G. Mini App runner reopen/recovery checks
 - [ ] После submit setup бот присылает сообщение «Викторина создана. Откройте Mini App, чтобы пройти первый вопрос.» с кнопкой WebApp.
 - [ ] После submit setup первый вопрос не отправляется автоматически в чат.
-- [ ] `/ui` setup запускает новую сессию.
-- [ ] `/ui` показывает текущий вопрос для активной сессии.
+- [ ] `/ui` setup opens the setup/contour chooser and can launch a new session.
+- [ ] `/ui` and `🚀 В окне` do not default to showing the current question when used as primary entrypoints; runner/result reopen links remain valid after setup/answer where applicable.
 - [ ] Отправка ответа через Mini App работает.
 - [ ] После тапа по варианту выбранный ответ сразу подсвечивается, остальные варианты выглядят неактивными, и появляется спокойный pending-статус (`Проверяю ответ...` / `Отправляю ответ...`).
 - [ ] После feedback текст опций остаётся читаемым (без «выцветания» disabled-текста), а selected/correct/wrong состояния визуально различимы.
@@ -142,9 +151,9 @@
 - Bot entry point: `/ui`
 - Result: smoke passed
 - Notes:
-  - Mini App setup screen opens inside Telegram.
+  - Mini App setup/contour chooser screen opens inside Telegram.
   - Active categories are displayed from bot-provided context.
-  - Mini App setup can start the existing chat quiz runner.
+  - Mini App setup can start the question runner and glossary contour through the existing Mini App API endpoints.
   - Classic `/quiz` remains the default UX.
   - Questions are displayed inside Mini App runner using server-authoritative state.
   - No current UI/polish blockers are recorded here. Treat new UI/polish notes as observation/manual QA findings unless they are reproducible bugs with clear scope.
@@ -220,12 +229,14 @@
 - [ ] Final question flow in Mini App: answer last question → feedback (`Верно/Неверно`) → `Далее` → completed result renders once without hang/loading lock.
 - [ ] Explicit close + `/ui` fallback message is shown only as a final fallback path.
 
-## 9) Mini App API route (PR #137 hardening)
-- Narrow API runs in the bot process (`MINIAPP_API_BIND`/`MINIAPP_API_PORT`) alongside long polling.
-- For Mini App browser fetch, operators must expose a public HTTPS route that proxies:
+## 9) Mini App API route
+- Production Mini App API runs as the dedicated FastAPI service `psych_quiz_miniapp_api`, separate from `psych_quiz_bot` long polling.
+- For Mini App browser fetch, operators must expose a public HTTPS route that proxies to the FastAPI bind/port.
+- Production Mini App API endpoints include:
   - `GET /miniapp/state`
+  - `GET /miniapp/setup-options`
+  - `POST /miniapp/setup`
   - `POST /miniapp/answer`
-  to the bot API bind/port.
 - Required env for API fetch path:
   - `MINI_APP_API_BASE_URL` (public HTTPS API base; injected into Mini App launch context)
   - `MINIAPP_API_ALLOWED_ORIGIN` (exact Mini App origin, e.g. `https://miniapp.librechat.online`)
@@ -324,16 +335,15 @@ How to interpret:
 - Low `duration_ms` while users still report hangs usually indicates delay outside backend handler execution (network path, Telegram WebView, proxy/CDN, or frontend state flow).
 - High `duration_ms` and/or recurring `miniapp_api_slow` points to backend latency (DB contention, slow code path, or server resource pressure) and should be investigated server-side.
 
-## 14) FastAPI Phase 1 local/dev parity run (repo-only, no production switch-over)
+## 14) FastAPI local/dev parity run
 
 > ⚠️ **Local/dev only.** This section is for repository validation and manual QA on a developer machine.
 >
 > - It does **not** change production deployment.
 > - It does **not** change CD/workflows/routing.
-> - Legacy `ThreadingHTTPServer` API path remains the current production path.
-> - Any production switch-over must happen in a later explicit PR.
+> - Production already uses the dedicated FastAPI service; this section is only for local parity checks and does not imply deploy changes.
 
-Run FastAPI locally from the repo root with the future runtime entrypoint:
+Run FastAPI locally from the repo root with the runtime entrypoint:
 
 ```bash
 DB_PATH=/absolute/path/to/local.sqlite3 \
@@ -458,7 +468,7 @@ Backup example for production DB file:
 - `app/main.py` is currently overloaded and should be split in follow-up refactor PRs:
   - Move Mini App context/URL builder concerns into `app/miniapp_context.py`.
   - Split Telegram handlers by domain responsibility instead of one large module.
-- Mini App API is currently implemented via `BaseHTTPRequestHandler` / `ThreadingHTTPServer`; planned medium/long-term target is migration to an ASGI service (e.g. FastAPI, Litestar, or aiohttp) with cleaner routing/lifecycle/testability.
+- Mini App API production serving is now the dedicated FastAPI/uvicorn service `psych_quiz_miniapp_api`; legacy in-bot `ThreadingHTTPServer` notes are historical only.
 - `miniapp/index.html` currently contains a large imperative state machine; if Mini App remains a strategic product direction, plan a declarative state-management refactor in a dedicated backlog track.
 
 ## 18) Prioritized roadmap (after #155)
@@ -466,22 +476,21 @@ Backup example for production DB file:
 - **Next:** production validation and lock-log monitoring.
 - **Near-term:** keep reverse proxy setup and DB migration policy explicit in ops/docs.
 - **Medium-term:** split `app/main.py` into focused modules.
-- **Backlog:** migrate Mini App API to ASGI stack + move frontend state flow to declarative model.
+- **Backlog:** consider moving frontend state flow to a declarative model in a dedicated track.
 
 - If `/miniapp/answer` response is lost/delayed but `/miniapp/state` confirms answer acceptance, Mini App still shows the answer feedback card first (`✅/❌`, `Ваш ответ`, `Правильный ответ`, `Пояснение`, `Далее`) and only then advances.
 
 
-## 19) FastAPI migration QA (phased)
-Goal: validate phased migration from legacy `ThreadingHTTPServer` Mini App API to FastAPI + uvicorn without regressions.
+## 19) Dedicated FastAPI Mini App API production QA
+Goal: validate the current dedicated FastAPI/uvicorn Mini App API service without regressions.
 
-### Phase 1 — repo-only implementation validation (no production switch)
+Baseline checks:
 - [ ] Production bot runtime behavior remains unchanged.
 - [ ] `/quiz` remains fully operational in production.
-- [ ] `🚀 В окне` + `/ui` continue using current production legacy Mini App API path.
-- [ ] FastAPI implementation is not receiving production traffic.
-- [ ] Production CD/deploy behavior is unchanged (no FastAPI enable/start in production).
+- [ ] `🚀 В окне` + `/ui` use the dedicated production Mini App API service.
+- [ ] `psych_quiz_miniapp_api` receives Mini App API traffic.
+- [ ] Production CD/deploy recreates both runtime services when app runtime changes.
 
-### Phase 2 — production switch-over validation (separate PR)
 Endpoint smoke:
 - [ ] `GET /miniapp/state` works.
 - [ ] `GET /miniapp/setup-options` works.
@@ -501,18 +510,18 @@ Resilience/UX safety:
 - [ ] No silent jump over feedback and no lost feedback card on accepted answers.
 - [ ] `/quiz` remains unaffected and default.
 
-Logs/analytics review after switch-over:
+Logs/analytics review after deploy:
 - [ ] FastAPI request counts/status/duration look normal by endpoint.
 - [ ] No abnormal 4xx/5xx spike versus baseline.
 - [ ] `database_busy_retry` incidence is monitored and acceptable.
 - [ ] `_a2`/`_a3` retry pattern frequency is reviewed for regressions.
 
 Operational checks:
-- [ ] `psych_quiz_miniapp_api` and `psych_quiz_bot` are rebuilt/restarted by CD after switch-over changes.
+- [ ] `psych_quiz_miniapp_api` and `psych_quiz_bot` are rebuilt/restarted by CD after runtime changes.
 - [ ] Smoke logs/metrics are reviewed before declaring rollout successful.
 
 Rollback (if smoke fails):
-- [ ] Switch route/env/reverse-proxy back to legacy Mini App API.
+- [ ] Revert the faulty runtime/deploy change or use an explicit rollback task.
 - [ ] Keep endpoint contracts unchanged to make rollback safe.
 
 Suggested smoke/log commands (adjust service names for environment):
@@ -522,7 +531,7 @@ Suggested smoke/log commands (adjust service names for environment):
 - `docker compose logs --tail=200 psych_quiz_miniapp_api | grep -E "Uvicorn running on|GET /healthz|POST /miniapp/"`
 - Telegram smoke: `/ping`, `/quiz`, `🚀 В окне`.
 
-## 20) Phase 2 production switch-over (bot + FastAPI split)
+## 20) Production runtime shape (bot + FastAPI split)
 
 Failed deploy lesson learned (PR #176 rollback):
 - `psych_quiz_bot` must **not** publish host port `8081`.
@@ -532,7 +541,7 @@ Failed deploy lesson learned (PR #176 rollback):
 - Bot logs must **not** show `Mini App API server started`.
 - FastAPI logs must show uvicorn/API process startup and requests.
 
-Target runtime shape after switch-over (SQLite unchanged):
+Target runtime shape (SQLite unchanged):
 - `psych_quiz_bot` runs Telegram long polling only (`python -m app.main`).
 - `psych_quiz_bot` has `MINIAPP_LEGACY_API_ENABLED=false` so legacy `ThreadingHTTPServer` is not started.
 - `psych_quiz_miniapp_api` runs FastAPI/uvicorn (`uvicorn app.miniapp_fastapi_runtime:app --host 0.0.0.0 --port 8081`).
@@ -556,7 +565,7 @@ Smoke checklist:
 - Bottom menu `🚀 В окне` opens Mini App flow.
 - Full 5-question Mini App run: setup → answers with feedback after each answer → result screen.
 
-Post-switch log checks:
+Post-deploy log checks:
 - 200/204 status for expected endpoint traffic.
 - No abnormal 5xx spike.
 - Monitor `database_busy_retry` events.
@@ -564,8 +573,8 @@ Post-switch log checks:
 - Confirm no silent jump and no lost answer feedback card.
 
 Rollback plan:
-1. Revert this switch-over PR; or
-2. Re-enable legacy API in bot (`MINIAPP_LEGACY_API_ENABLED=true`) and move `127.0.0.1:8081:8081` binding back to `psych_quiz_bot` while disabling/removing `psych_quiz_miniapp_api` service.
+1. Revert the runtime/API change being validated; or
+2. Use an explicit rollback task/runbook before moving API serving back to the legacy bot process, because production source of truth is the dedicated `psych_quiz_miniapp_api` service.
 
 Endpoint contracts are intentionally unchanged to keep rollback low-risk.
 
