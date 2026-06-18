@@ -3,29 +3,53 @@ import unittest
 from unittest.mock import patch
 
 from app.glossary import (
+    GLOSSARY_TOPICS,
     build_glossary_answer_keyboard,
     build_glossary_count_keyboard,
+    build_glossary_feedback_keyboard,
     build_glossary_quiz_question,
+    build_glossary_topics_keyboard,
     callback_token_to_topic_id,
     format_glossary_feedback_text,
     format_glossary_question_text,
     format_glossary_result_text,
     load_glossary_entries,
 )
-from app.main import GLOSSARY_BUTTON_TEXT, HELP_TEXT, get_main_menu_keyboard
+from app.main import GLOSSARY_BUTTON_TEXT, HELP_TEXT, get_main_menu_keyboard, parse_glossary_reply_answer_number
 
 
 TOPIC_ID = "kachestvennye_metody_issledovaniya"
+EXP_TOPIC_ID = "osnovy_eksperimentalnoy_psihologii"
+INTERNAL_MARKERS = ("source_refs", "supplied_snippet", "question:m2_exp", "exp_psych_")
 
 
 class GlossaryRuntimeTests(unittest.TestCase):
-    def test_static_glossary_loads_from_json(self):
+    def test_static_glossary_topics_load_from_json(self):
         entries = load_glossary_entries(TOPIC_ID)
+        exp_entries = load_glossary_entries(EXP_TOPIC_ID)
 
         self.assertIsNotNone(entries)
         self.assertGreaterEqual(len(entries), 14)
         self.assertEqual(TOPIC_ID, entries[0].topic_id)
         self.assertTrue(entries[0].term)
+        self.assertIsNotNone(exp_entries)
+        self.assertEqual(10, len(exp_entries))
+        self.assertTrue(all(entry.id.startswith("exp_psych_") for entry in exp_entries))
+        self.assertTrue(all(entry.source_refs for entry in exp_entries))
+
+    def test_both_topics_appear_and_new_token_maps(self):
+        topic_ids = [topic_id for topic_id, _title in GLOSSARY_TOPICS]
+        topic_titles = [title for _topic_id, title in GLOSSARY_TOPICS]
+        callbacks = [button.callback_data for row in build_glossary_topics_keyboard().inline_keyboard for button in row]
+
+        self.assertIn(TOPIC_ID, topic_ids)
+        self.assertIn(EXP_TOPIC_ID, topic_ids)
+        self.assertIn("Качественные методы исследования", topic_titles)
+        self.assertIn("Основы экспериментальной психологии", topic_titles)
+        self.assertIn("gls:topic:kmi", callbacks)
+        self.assertIn("gls:topic:oep", callbacks)
+        self.assertEqual(EXP_TOPIC_ID, callback_token_to_topic_id("oep"))
+        self.assertTrue(all(len(callback) <= 64 for callback in callbacks))
 
     def test_main_menu_and_help_expose_glossary_quiz(self):
         keyboard = get_main_menu_keyboard()
@@ -36,7 +60,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertIn("пройти тест по терминам", HELP_TEXT)
 
     def test_quiz_question_builds_four_options_with_correct_and_distractors(self):
-        entries = load_glossary_entries(TOPIC_ID)
+        entries = load_glossary_entries(EXP_TOPIC_ID)
         question = build_glossary_quiz_question(entries, entries[2], rng=random.Random(1))
 
         self.assertIsNotNone(question)
@@ -48,43 +72,74 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertTrue(all(distractor in other_definitions for distractor in distractors))
 
     def test_callback_data_stays_compact(self):
-        entries = load_glossary_entries(TOPIC_ID)
-        question = build_glossary_quiz_question(entries, entries[0], rng=random.Random(2))
-        callbacks = [button.callback_data for row in build_glossary_answer_keyboard(question).inline_keyboard for button in row]
-        callbacks += [button.callback_data for row in build_glossary_count_keyboard(TOPIC_ID, len(entries)).inline_keyboard for button in row]
+        entries = load_glossary_entries(EXP_TOPIC_ID)
+        callbacks = [button.callback_data for row in build_glossary_count_keyboard(EXP_TOPIC_ID, len(entries)).inline_keyboard for button in row]
 
-        self.assertIn("glsq:count:kmi:5", callbacks)
-        self.assertIn("glsq:count:kmi:10", callbacks)
-        self.assertIn("glsq:count:kmi:all", callbacks)
+        self.assertIn("glsq:count:oep:5", callbacks)
+        self.assertIn("glsq:count:oep:10", callbacks)
+        self.assertIn("glsq:count:oep:all", callbacks)
         self.assertIn("gls:topics", callbacks)
         self.assertTrue(all(len(callback) <= 64 for callback in callbacks))
 
-    def test_rendered_question_and_feedback_hide_internal_provenance(self):
-        entries = load_glossary_entries(TOPIC_ID)
-        entry = entries[2]
-        self.assertTrue(any("supplied_snippet" in ref for ref in entry.source_refs))
-        question = build_glossary_quiz_question(entries, entry, rng=random.Random(3))
+    def test_question_uses_numbered_message_and_reply_keyboard(self):
+        entries = load_glossary_entries(EXP_TOPIC_ID)
+        question = build_glossary_quiz_question(entries, entries[0], rng=random.Random(2))
 
         question_text = format_glossary_question_text(question, 1, 5)
-        feedback_text = format_glossary_feedback_text(question, question.correct_option_index, 1, 5)
-        rendered = f"{question_text}\n{feedback_text}"
+        keyboard = build_glossary_answer_keyboard(question)
+        labels = [button.text for row in keyboard.keyboard for button in row]
 
-        self.assertIn("Вопрос 1 из 5", rendered)
-        self.assertIn("Верно ✅", rendered)
-        self.assertIn("Краткое объяснение", rendered)
-        self.assertNotIn("source_refs", rendered)
-        self.assertNotIn("supplied_snippet", rendered)
-        self.assertNotIn(entry.id, rendered)
+        self.assertIn("Вопрос 1 из 5", question_text)
+        self.assertIn("Ответьте кнопкой с номером варианта внизу", question_text)
+        for number in range(1, 5):
+            self.assertIn(f"{number}. ", question_text)
+        self.assertEqual(["1", "2", "3", "4"], labels)
+        self.assertFalse(hasattr(keyboard, "inline_keyboard"))
 
-    def test_final_result_text_includes_score(self):
-        text = format_glossary_result_text(3, 5)
+    def test_feedback_numbers_next_keyboard_and_result(self):
+        entries = load_glossary_entries(EXP_TOPIC_ID)
+        question = build_glossary_quiz_question(entries, entries[1], rng=random.Random(3))
+        selected = 0 if question.correct_option_index != 0 else 1
 
-        self.assertIn("Тест завершён", text)
-        self.assertIn("Результат:</b> 3 из 5", text)
+        feedback_text = format_glossary_feedback_text(question, selected, 1, 5)
+        next_keyboard = build_glossary_feedback_keyboard(has_next=True)
+        result_text = format_glossary_result_text(3, 5)
+        next_labels = [button.text for row in next_keyboard.keyboard for button in row]
+
+        self.assertIn(f"Ваш ответ:</b> {selected + 1} —", feedback_text)
+        self.assertIn(f"Правильный ответ:</b> {question.correct_option_index + 1} —", feedback_text)
+        self.assertEqual(["Далее"], next_labels)
+        self.assertIn("Тест завершён", result_text)
+        self.assertIn("Результат:</b> 3 из 5", result_text)
+
+    def test_rendered_question_feedback_result_hide_internal_provenance(self):
+        entries = load_glossary_entries(EXP_TOPIC_ID)
+        entry = entries[8]
+        self.assertIn("question:m2_exp_022", entry.source_refs)
+        question = build_glossary_quiz_question(entries, entry, rng=random.Random(4))
+
+        rendered = "\n".join(
+            [
+                format_glossary_question_text(question, 1, 5),
+                format_glossary_feedback_text(question, question.correct_option_index, 1, 5),
+                format_glossary_result_text(1, 5),
+            ]
+        )
+
+        for marker in INTERNAL_MARKERS:
+            self.assertNotIn(marker, rendered)
+
+    def test_invalid_glossary_reply_numbers_are_rejected(self):
+        self.assertIsNone(parse_glossary_reply_answer_number("", 4))
+        self.assertIsNone(parse_glossary_reply_answer_number("abc", 4))
+        self.assertIsNone(parse_glossary_reply_answer_number("0", 4))
+        self.assertIsNone(parse_glossary_reply_answer_number("5", 4))
+        self.assertEqual(0, parse_glossary_reply_answer_number("1", 4))
+        self.assertEqual(3, parse_glossary_reply_answer_number(" 4 ", 4))
 
     def test_loader_handles_missing_or_malformed_without_db_access(self):
         with patch("app.glossary.get_connection", side_effect=AssertionError("DB should not be used"), create=True):
-            entries = load_glossary_entries(TOPIC_ID)
+            entries = load_glossary_entries(EXP_TOPIC_ID)
 
         self.assertIsNotNone(entries)
         self.assertEqual(TOPIC_ID, callback_token_to_topic_id("kmi"))

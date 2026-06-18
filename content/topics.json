@@ -6,7 +6,9 @@
     "question_file": "content/questions/module1/vvedenie_v_professiyu.json",
     "status": "active",
     "order": 110,
-    "available_contours": ["questions"],
+    "available_contours": [
+      "questions"
+    ],
     "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
   },
   {
@@ -16,7 +18,9 @@
     "question_file": "content/questions/module1/obschaya_psihologiya.json",
     "status": "active",
     "order": 120,
-    "available_contours": ["questions"],
+    "available_contours": [
+      "questions"
+    ],
     "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
   },
   {
@@ -26,7 +30,9 @@
     "question_file": "content/questions/module1/fiziologiya_cheloveka.json",
     "status": "active",
     "order": 130,
-    "available_contours": ["questions"],
+    "available_contours": [
+      "questions"
+    ],
     "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
   },
   {
@@ -36,7 +42,9 @@
     "question_file": "content/questions/module1/fiziologiya_vnd.json",
     "status": "active",
     "order": 140,
-    "available_contours": ["questions"],
+    "available_contours": [
+      "questions"
+    ],
     "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
   },
   {
@@ -46,7 +54,9 @@
     "question_file": "content/questions/module1/psihofiziologiya.json",
     "status": "active",
     "order": 150,
-    "available_contours": ["questions"],
+    "available_contours": [
+      "questions"
+    ],
     "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
   },
   {
@@ -56,8 +66,11 @@
     "question_file": "content/questions/module2/osnovy_eksperimentalnoy_psihologii.json",
     "status": "active",
     "order": 210,
-    "available_contours": ["questions"],
-    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+    "available_contours": [
+      "questions",
+      "glossary"
+    ],
+    "source_notes": "Existing approved question topic; glossary contour is available from static source-backed content/glossary JSON."
   },
   {
     "id": "kachestvennye_metody_issledovaniya",
@@ -66,8 +79,11 @@
     "question_file": "content/questions/module2/kachestvennye_metody_issledovaniya.json",
     "status": "active",
     "order": 220,
-    "available_contours": ["questions"],
-    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+    "available_contours": [
+      "questions",
+      "glossary"
+    ],
+    "source_notes": "Existing approved question topic; glossary contour is available from static content/glossary JSON."
   },
   {
     "id": "psychological_consulting",
@@ -76,7 +92,9 @@
     "question_file": "content/questions/module3/psychological_consulting.json",
     "status": "active",
     "order": 310,
-    "available_contours": ["questions"],
+    "available_contours": [
+      "questions"
+    ],
     "source_notes": "Existing approved question topic; English filename slug retained intentionally as the stable ID candidate; glossary/literature contours not implemented yet."
   }
 ]

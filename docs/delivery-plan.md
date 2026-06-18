@@ -38,6 +38,7 @@
 5. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
 
 ## Near backlog
+- LEARN-CONTOURS-GLOSSARY-V2-EXPERIMENTAL-PSYCHOLOGY-001 completed: added a second source-backed glossary topic for Основы экспериментальной психологии from approved question-bank items and aligned Telegram glossary quiz UX with the classic chat quiz by rendering numbered options in the message and using reply-keyboard number buttons plus Далее; source_refs remain internal and hidden from users; no DB/seed/Mini App/literature/deploy behavior changes.
 - LEARN-CONTOURS-GLOSSARY-QUIZ-MVP-001 completed: converted the Telegram glossary runtime from a reference/detail view into a read-only glossary quiz mode with topic selection, question count, multiple-choice answers, feedback, progress, and final score; source_refs remain internal and are not shown to users; no DB/seed/Mini App/literature/deploy behavior changes.
 - LEARN-CONTOURS-GLOSSARY-RUNTIME-MVP-001 completed: added a read-only Telegram chat glossary MVP backed by static content/glossary JSON files, including /glossary, a main-menu button, topic selection, paginated term list, and term detail view; no DB/seed/Mini App/literature/deploy behavior changes.
 - LEARN-CONTOURS-GLOSSARY-BATCH2-001 completed: expanded the static qualitative-methods glossary with 6 approved supplied-snippet-backed entries; scope remains content/validation-only with no runtime/UI/DB/seed/deploy behavior changes and no literature items added.

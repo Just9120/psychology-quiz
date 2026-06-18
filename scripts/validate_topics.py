@@ -21,7 +21,7 @@ REQUIRED_FIELDS = {
     "source_notes",
 }
 VALID_STATUSES = {"active", "draft", "deprecated", "placeholder"}
-VALID_CONTOURS = {"questions"}
+VALID_CONTOURS = {"questions", "glossary"}
 TOPIC_ID_RE = re.compile(r"^[a-z0-9_]+$")
 
 
@@ -152,7 +152,7 @@ def validate() -> list[str]:
             for contour in contours:
                 if contour not in VALID_CONTOURS:
                     errors.append(
-                        f"{label}: unsupported available_contours value '{contour}'; Phase 1b allows only questions"
+                        f"{label}: unsupported available_contours value '{contour}'; allowed values: glossary, questions"
                     )
 
         if "questions" in contours:

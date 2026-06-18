@@ -65,7 +65,6 @@ from app.glossary import (
     build_glossary_count_keyboard,
     build_glossary_feedback_keyboard,
     build_glossary_quiz_question,
-    build_glossary_result_keyboard,
     build_glossary_topics_keyboard,
     callback_token_to_topic_id,
     format_glossary_count_text,
@@ -946,7 +945,8 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     if update.message is None:
         return
 
-    del context
+    context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
+    _set_classic_reply_state(context, None)
     message_text = (
         "Привет! Я учебный бот-викторина по психологии.\n"
         "\n"
@@ -1025,6 +1025,7 @@ def _build_glossary_session(topic_id: str, entries, count_raw: str) -> dict | No
         "current_index": 0,
         "score": 0,
         "answered": False,
+        "status": "awaiting_answer",
         "last_question": None,
     }
 
@@ -1041,24 +1042,25 @@ def _current_glossary_question(session: dict, entries) -> object | None:
     return build_glossary_quiz_question(entries, current_entry)
 
 
-async def _render_current_glossary_question(query, latency: _HandlerLatency, context: ContextTypes.DEFAULT_TYPE, session: dict, entries) -> None:
+async def _send_current_glossary_question_to_chat(chat, latency: _HandlerLatency | None, context: ContextTypes.DEFAULT_TYPE, session: dict, entries) -> None:
     question = _current_glossary_question(session, entries)
     if question is None:
         context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
-        await _timed_telegram_api_call(latency, query.edit_message_text(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_edit")
+        await _timed_telegram_api_call(latency, chat.send_message(GLOSSARY_UNAVAILABLE_TEXT), api_kind="message_send")
         return
     session["answered"] = False
+    session["status"] = "awaiting_answer"
     session["last_question"] = question
     total = len(session["entry_ids"])
     current_index = int(session["current_index"])
     await _timed_telegram_api_call(
         latency,
-        query.edit_message_text(
+        chat.send_message(
             format_glossary_question_text(question, current_index + 1, total),
             reply_markup=build_glossary_answer_keyboard(question),
             parse_mode="HTML",
         ),
-        api_kind="message_edit",
+        api_kind="message_send",
     )
 
 
@@ -1138,7 +1140,9 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             latency.summary()
             return
         context.user_data[GLOSSARY_QUIZ_SESSION_KEY] = session
-        await _render_current_glossary_question(query, latency, context, session, entries)
+        if query.message is not None:
+            await _timed_telegram_api_call(latency, query.edit_message_reply_markup(reply_markup=None), api_kind="message_edit")
+            await _send_current_glossary_question_to_chat(query.message.chat, latency, context, session, entries)
         latency.summary()
         return
 
@@ -1163,14 +1167,15 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         if answered_count >= total:
             feedback = format_glossary_feedback_text(question, selected_index, answered_count, total)
             result = format_glossary_result_text(int(session.get("score", 0)), total)
+            context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
             await _timed_telegram_api_call(
                 latency,
-                query.edit_message_text(
+                query.message.chat.send_message(
                     f"{feedback}\n\n{result}",
-                    reply_markup=build_glossary_result_keyboard(),
+                    reply_markup=get_main_menu_keyboard() if query.message.chat.type == "private" else None,
                     parse_mode="HTML",
                 ),
-                api_kind="message_edit",
+                api_kind="message_send",
             )
         else:
             await _timed_telegram_api_call(
@@ -1198,7 +1203,8 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             latency.summary()
             return
         session["current_index"] = int(session.get("current_index", 0)) + 1
-        await _render_current_glossary_question(query, latency, context, session, entries)
+        if query.message is not None:
+            await _send_current_glossary_question_to_chat(query.message.chat, latency, context, session, entries)
         latency.summary()
         return
 
@@ -1213,7 +1219,8 @@ async def glossary_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             latency.summary()
             return
         context.user_data[GLOSSARY_QUIZ_SESSION_KEY] = new_session
-        await _render_current_glossary_question(query, latency, context, new_session, entries)
+        if query.message is not None:
+            await _send_current_glossary_question_to_chat(query.message.chat, latency, context, new_session, entries)
         latency.summary()
         return
 
@@ -1340,6 +1347,7 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     settings = context.application.bot_data["settings"]
     latency = _HandlerLatency(handler="quiz_command", command="/quiz", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     latency.start()
+    context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
 
     def _load_categories():
         with get_connection(settings.db_path) as conn:
@@ -1376,6 +1384,7 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     latency = _HandlerLatency(handler="ui_command", command="/ui", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     latency.start()
+    context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
     if update.message is None:
         return
     if not is_private_chat(update):
@@ -2878,6 +2887,86 @@ async def classic_reply_text_next_handler(update: Update, context: ContextTypes.
         _unmark_callback_processing(context, processing_key)
 
 
+
+def _active_glossary_session(context: ContextTypes.DEFAULT_TYPE) -> dict | None:
+    session = context.user_data.get(GLOSSARY_QUIZ_SESSION_KEY)
+    return session if isinstance(session, dict) else None
+
+
+def parse_glossary_reply_answer_number(text: str, option_count: int = 4) -> int | None:
+    cleaned = text.strip()
+    if not cleaned.isdigit():
+        return None
+    answer_number = int(cleaned)
+    if not 1 <= answer_number <= option_count:
+        return None
+    return answer_number - 1
+
+
+async def glossary_reply_text_answer_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    message = update.message
+    if message is None or message.text is None:
+        return
+    classic_state = _get_classic_reply_state(context)
+    if classic_state.get("status") == "awaiting_answer":
+        return
+    session = _active_glossary_session(context)
+    if session is None or session.get("status") != "awaiting_answer" or session.get("answered"):
+        return
+    question = session.get("last_question")
+    if question is None:
+        context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
+        await message.reply_text(GLOSSARY_UNAVAILABLE_TEXT, reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None)
+        return
+    selected_index = parse_glossary_reply_answer_number(message.text, len(question.options))
+    if selected_index is None:
+        await message.reply_text(f"Выберите вариант числом от 1 до {len(question.options)}.", reply_markup=build_glossary_answer_keyboard(question))
+        return
+
+    is_correct = selected_index == question.correct_option_index
+    if is_correct:
+        session["score"] = int(session.get("score", 0)) + 1
+    session["answered"] = True
+    session["status"] = "awaiting_next"
+    total = len(session["entry_ids"])
+    answered_count = int(session["current_index"]) + 1
+    feedback = format_glossary_feedback_text(question, selected_index, answered_count, total)
+    if answered_count >= total:
+        result = format_glossary_result_text(int(session.get("score", 0)), total)
+        context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
+        await message.reply_text(
+            f"{feedback}\n\n{result}",
+            reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None,
+            parse_mode="HTML",
+        )
+        return
+    await message.reply_text(
+        feedback,
+        reply_markup=build_glossary_feedback_keyboard(has_next=True),
+        parse_mode="HTML",
+    )
+
+
+async def glossary_reply_text_next_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    message = update.message
+    if message is None or message.text is None or message.text.strip().lower() != CLASSIC_REPLY_NEXT_TEXT.lower():
+        return
+    classic_state = _get_classic_reply_state(context)
+    if classic_state.get("status") == "awaiting_next":
+        return
+    session = _active_glossary_session(context)
+    if session is None or session.get("status") != "awaiting_next" or not session.get("answered"):
+        return
+    selected_topic_id = session.get("topic_id")
+    entries = load_glossary_entries(selected_topic_id) if isinstance(selected_topic_id, str) else None
+    if entries is None:
+        context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
+        await message.reply_text(GLOSSARY_UNAVAILABLE_TEXT, reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None)
+        return
+    session["current_index"] = int(session.get("current_index", 0)) + 1
+    await _send_current_glossary_question_to_chat(message.chat, None, context, session, entries)
+
+
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     latency = _HandlerLatency(handler="answer_callback", callback_prefix="ans", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
@@ -3333,6 +3422,20 @@ def main() -> None:
             )
         )
     application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(r"^\s*\d+\s*$"),
+            glossary_reply_text_answer_handler,
+        ),
+        group=1,
+    )
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(rf"^\s*{re.escape(CLASSIC_REPLY_NEXT_TEXT)}\s*$"),
+            glossary_reply_text_next_handler,
+        ),
+        group=1,
+    )
+    application.add_handler(
         CallbackQueryHandler(
             reading_mode_callback,
             pattern=r"^readingmode:(menu|set:(normal|bionic))$",
@@ -3341,7 +3444,7 @@ def main() -> None:
     application.add_handler(
         CallbackQueryHandler(
             glossary_callback,
-            pattern=r"^(gls:(topics|main|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|ans:\d+|next|retry))$",
+            pattern=r"^(gls:(topics|main|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|retry))$",
         )
     )
     application.add_handler(
