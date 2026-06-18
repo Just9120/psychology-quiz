@@ -18,13 +18,7 @@ from app.main import (
     READING_MODE_BUTTON_ALIASES,
     START_QUIZ_BUTTON_TEXT,
     START_QUIZ_BUTTON_ALIASES,
-    MAX_MINIAPP_URL_LENGTH,
     _parse_miniapp_answer_payload,
-    _build_compact_runner_question_payload,
-    build_miniapp_setup_context,
-    build_miniapp_url,
-    build_miniapp_setup_entrypoint_url,
-    build_miniapp_url_with_fallback,
     build_menu_button_regex,
     build_miniapp_launch_inline_keyboard,
     build_post_setup_miniapp_prompt,
@@ -34,6 +28,14 @@ from app.main import (
     post_init,
     start_command,
     ui_command,
+)
+from app.miniapp_context import (
+    MAX_MINIAPP_URL_LENGTH,
+    _build_compact_runner_question_payload,
+    build_miniapp_setup_context,
+    build_miniapp_url,
+    build_miniapp_setup_entrypoint_url,
+    build_miniapp_url_with_fallback,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 
