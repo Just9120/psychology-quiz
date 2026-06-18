@@ -517,6 +517,7 @@ def build_setup_options_response(
             _log_locked_db("/miniapp/setup-options", started_at)
             return _database_busy_response()
         raise
+    glossary = list_glossary_topics_payload()
     return _json(
         HTTPStatus.OK,
         {
@@ -526,8 +527,10 @@ def build_setup_options_response(
                 "question_count_choices": [5, 10, 15, "all"],
                 "difficulty_choices": ["any", "easy", "medium", "hard"],
                 "modes": [{"mode": "topics", "title": "Тесты по темам"}, {"mode": "glossary", "title": "Глоссарий"}],
-                "glossary": list_glossary_topics_payload(),
+                "glossary": glossary,
             },
+            "setup": {"glossary": glossary},
+            "glossary": glossary,
         },
     )
 
