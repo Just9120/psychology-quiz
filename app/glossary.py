@@ -7,13 +7,17 @@ from pathlib import Path
 import random
 from typing import Any
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 
 GLOSSARY_UNAVAILABLE_TEXT = "Глоссарий временно недоступен. Попробуйте позже."
 GLOSSARY_TOPICS: tuple[tuple[str, str], ...] = (
     ("kachestvennye_metody_issledovaniya", "Качественные методы исследования"),
+    ("osnovy_eksperimentalnoy_psihologii", "Основы экспериментальной психологии"),
 )
-GLOSSARY_TOPIC_CALLBACK_TOKENS = {"kmi": "kachestvennye_metody_issledovaniya"}
+GLOSSARY_TOPIC_CALLBACK_TOKENS = {
+    "kmi": "kachestvennye_metody_issledovaniya",
+    "oep": "osnovy_eksperimentalnoy_psihologii",
+}
 GLOSSARY_TOPIC_ID_TO_TOKEN = {topic_id: token for token, topic_id in GLOSSARY_TOPIC_CALLBACK_TOKENS.items()}
 GLOSSARY_QUIZ_SESSION_KEY = "glossary_quiz_session"
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -135,24 +139,30 @@ def build_glossary_quiz_question(entries: list[GlossaryEntry], entry: GlossaryEn
     return GlossaryQuizQuestion(entry=entry, options=tuple(options), correct_option_index=correct_index)
 
 
-def build_glossary_answer_keyboard(question: GlossaryQuizQuestion) -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(
-        [[InlineKeyboardButton(option, callback_data=f"glsq:ans:{index}")] for index, option in enumerate(question.options)]
+def build_glossary_answer_keyboard(question: GlossaryQuizQuestion) -> ReplyKeyboardMarkup:
+    buttons = [str(index) for index in range(1, len(question.options) + 1)]
+    return ReplyKeyboardMarkup(
+        [buttons[index : index + 2] for index in range(0, len(buttons), 2)],
+        resize_keyboard=True,
+        one_time_keyboard=False,
     )
 
 
 def format_glossary_question_text(question: GlossaryQuizQuestion, order_index: int, total_questions: int) -> str:
+    option_lines = "\n".join(f"{index}. {escape(option)}" for index, option in enumerate(question.options, start=1))
     return (
         f"<b>Вопрос {order_index} из {total_questions}</b>\n\n"
         "Что означает термин:\n"
-        f"<b>{escape(question.entry.term)}</b>"
+        f"<b>{escape(question.entry.term)}</b>\n\n"
+        f"{option_lines}\n\n"
+        "Ответьте кнопкой с номером варианта внизу 👇"
     )
 
 
-def build_glossary_feedback_keyboard(has_next: bool) -> InlineKeyboardMarkup:
+def build_glossary_feedback_keyboard(has_next: bool) -> ReplyKeyboardMarkup | None:
     if has_next:
-        return InlineKeyboardMarkup([[InlineKeyboardButton("Далее", callback_data="glsq:next")]])
-    return build_glossary_result_keyboard()
+        return ReplyKeyboardMarkup([["Далее"]], resize_keyboard=True, one_time_keyboard=False)
+    return None
 
 
 def format_glossary_feedback_text(question: GlossaryQuizQuestion, selected_option_index: int, answered_count: int, total_questions: int) -> str:
@@ -162,10 +172,10 @@ def format_glossary_feedback_text(question: GlossaryQuizQuestion, selected_optio
     lines = [
         "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>",
         "",
-        f"<b>Ваш ответ:</b> {escape(selected_text)}",
+        f"<b>Ваш ответ:</b> {selected_option_index + 1} — {escape(selected_text)}",
     ]
     if not is_correct:
-        lines.append(f"<b>Правильный ответ:</b> {escape(correct_text)}")
+        lines.append(f"<b>Правильный ответ:</b> {question.correct_option_index + 1} — {escape(correct_text)}")
     lines.extend(
         [
             "",

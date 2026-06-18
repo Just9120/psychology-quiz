@@ -114,7 +114,7 @@ Operational deploy/seed/restart details and safety boundaries belong in [`docs/c
 
 - постоянная клавиатура reply keyboard в личном чате: `🎯 Начать` / `🚀 В окне`, `👁 Чтение` / `📚 Глоссарий`, `ℹ️ Помощь`, `🙈 Скрыть меню`
 - classic `/quiz` остаётся дефолтным Telegram chat entry point
-- `📚 Глоссарий` / `/glossary` opens a glossary test/quiz mode backed by static `content/glossary/*.json`, not a reference dictionary
+- `📚 Глоссарий` / `/glossary` opens a glossary test/quiz mode backed by static `content/glossary/*.json`, not a reference dictionary; it includes `Качественные методы исследования` and `Основы экспериментальной психологии` and uses the same bottom-button numeric answer style as the classic chat quiz
 - для production classic chat UX рекомендуется `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true`: ответы и «Далее» отображаются в нижней Telegram reply keyboard и приходят в бот как обычные text message updates, поэтому сообщения викторины не засоряются inline-кнопками
 - production smoke для reply keyboard mode: пользователь завершил 15 classic quiz questions без hangs
 - recent UX polish loop завершён для меню/`/start`/`/help`, Reading Mode, classic feedback/final screen и Mini App setup/result screens; текущая posture — observation/manual QA без immediate code PR при отсутствии багов
