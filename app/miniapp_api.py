@@ -187,6 +187,18 @@ def _parse_json_payload(body: bytes) -> dict[str, Any] | None:
         return None
     return payload if isinstance(payload, dict) else None
 
+def _normalize_glossary_question_count(value: Any) -> int | str | None:
+    if value is None or value == "all":
+        return value
+    if value in {5, 10}:
+        return value
+    if value == "5":
+        return 5
+    if value == "10":
+        return 10
+    raise ValueError("invalid_glossary_setup")
+
+
 def build_glossary_start_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
     verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
     if not isinstance(verified, VerifiedInitData):
@@ -195,8 +207,11 @@ def build_glossary_start_response(bot_token: str, init_data: str, body: bytes, *
     if payload is None:
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
     topic_id = payload.get("topic_id")
-    count = payload.get("question_count")
-    if not isinstance(topic_id, str) or count not in {5, 10, "all", None}:
+    try:
+        count = _normalize_glossary_question_count(payload.get("question_count"))
+    except ValueError:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
+    if not isinstance(topic_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
     state = start_glossary_session(verified.telegram_user_id, topic_id, count)
     if state is None:
@@ -257,8 +272,11 @@ def _is_glossary_setup_payload(payload: dict[str, Any]) -> bool:
 
 def _build_existing_endpoint_glossary_setup_response(verified: VerifiedInitData, payload: dict[str, Any]):
     topic_id = payload.get("topic_id")
-    count = payload.get("question_count")
-    if not isinstance(topic_id, str) or count not in {5, 10, "all", None}:
+    try:
+        count = _normalize_glossary_question_count(payload.get("question_count"))
+    except ValueError:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
+    if not isinstance(topic_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
     state = start_glossary_session(verified.telegram_user_id, topic_id, count)
     if state is None:

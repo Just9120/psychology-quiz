@@ -1773,9 +1773,39 @@
         runnerState.textContent = 'Выберите тему глоссария.';
       }
 
+      function normalizeGlossaryCountForPayload(count) {
+        if (count === 'all') return 'all';
+        const numeric = Number(count);
+        return numeric === 5 || numeric === 10 ? numeric : count;
+      }
+
+      function getGlossaryStartErrorMessage(errorCode, httpStatus) {
+        if (errorCode === 'invalid_glossary_setup') return 'Не удалось начать тест: некорректные параметры глоссария.';
+        if (errorCode === 'glossary_unavailable') return 'Для этой темы пока недостаточно терминов.';
+        if (errorCode === 'unauthorized' || errorCode === 'missing_init_data' || errorCode === 'missing_hash' || errorCode === 'invalid_hash' || errorCode === 'expired_init_data' || errorCode === 'invalid_auth_date' || errorCode === 'missing_user' || errorCode === 'invalid_user_json' || errorCode === 'invalid_user_id' || String(httpStatus) === '401') {
+          return 'Не удалось подтвердить сессию Mini App. Закройте окно и откройте /ui заново.';
+        }
+        return 'Не удалось начать тест по глоссарию. Попробуйте открыть /ui заново.';
+      }
+
+      function showGlossaryStartError(details = {}) {
+        const errorCode = details.error_code ? String(details.error_code).slice(0, 64) : '';
+        const httpStatus = details.http_status === undefined || details.http_status === null ? '' : String(details.http_status).slice(0, 8);
+        const message = getGlossaryStartErrorMessage(errorCode, httpStatus);
+        runnerState.textContent = message;
+        err.textContent = message;
+        apiDiagState.setupErrorCode = errorCode;
+        apiDiagState.setupStatusCode = httpStatus;
+        apiDiagState.setupRequestId = details.request_id ? String(details.request_id).slice(0, 64) : apiDiagState.setupRequestId;
+        apiDiagState.setupFinalPhase = 'glossary_start_failed';
+        renderApiDiagnostics();
+        if (debugMode) console.info('miniapp_glossary_start_failed', { http_status: httpStatus, error_code: errorCode, request_id: apiDiagState.setupRequestId || '' });
+      }
+
       function renderGlossaryCounts(topic) {
         showGlossaryView();
         glossaryView.replaceChildren();
+        err.textContent = '';
         const card = document.createElement('div');
         card.className = 'question-card';
         const title = document.createElement('h4');
@@ -1788,9 +1818,16 @@
           btn.textContent = count === 'all' ? 'Все доступные' : String(count);
           btn.addEventListener('click', async () => {
             runnerState.textContent = 'Запуск теста по глоссарию...';
-            const { resp, data } = await glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: count });
-            if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
-            else runnerState.textContent = 'Не удалось начать тест по глоссарию.';
+            err.textContent = '';
+            const requestId = buildMiniappRequestId();
+            const payloadCount = normalizeGlossaryCountForPayload(count);
+            try {
+              const { resp, data } = await glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: payloadCount }, requestId);
+              if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
+              else showGlossaryStartError({ http_status: resp.status, error_code: data?.error || '', request_id: requestId });
+            } catch (_) {
+              showGlossaryStartError({ http_status: '', error_code: 'request_failed', request_id: requestId });
+            }
           });
           card.appendChild(btn);
         });

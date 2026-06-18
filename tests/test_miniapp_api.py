@@ -512,6 +512,43 @@ class MiniAppApiTests(unittest.TestCase):
         self.assertEqual('in_progress', payload['glossary_state']['state'])
         self.assertIn('current_question', payload['glossary_state'])
 
+
+    def test_existing_setup_endpoint_accepts_glossary_count_variants_without_db(self):
+        from app.glossary import GLOSSARY_TOPICS
+        topic_id = GLOSSARY_TOPICS[0][0]
+        variants = [5, "5", 10, "10", "all", None]
+        with patch('app.miniapp_api.get_connection', side_effect=AssertionError('DB should not be used')):
+            for count in variants:
+                with self.subTest(question_count=count):
+                    code, _, body = build_setup_response(
+                        '/tmp/unused.sqlite3',
+                        self.bot_token,
+                        self.init_data,
+                        json.dumps({'mode': 'glossary', 'topic_id': topic_id, 'question_count': count}).encode(),
+                    )
+                    self.assertEqual(200, code)
+                    payload = json.loads(body.decode('utf-8'))
+                    self.assertTrue(payload['ok'])
+                    self.assertEqual('glossary', payload['mode'])
+                    self.assertEqual('in_progress', payload['glossary_state']['state'])
+
+    def test_existing_setup_endpoint_rejects_invalid_glossary_count_without_db(self):
+        from app.glossary import GLOSSARY_TOPICS
+        topic_id = GLOSSARY_TOPICS[0][0]
+        with patch('app.miniapp_api.get_connection', side_effect=AssertionError('DB should not be used')):
+            for count in (15, "15"):
+                with self.subTest(question_count=count):
+                    code, _, body = build_setup_response(
+                        '/tmp/unused.sqlite3',
+                        self.bot_token,
+                        self.init_data,
+                        json.dumps({'mode': 'glossary', 'topic_id': topic_id, 'question_count': count}).encode(),
+                    )
+                    self.assertEqual(400, code)
+                    payload = json.loads(body.decode('utf-8'))
+                    self.assertFalse(payload['ok'])
+                    self.assertEqual('invalid_glossary_setup', payload['error'])
+
     def test_existing_setup_endpoint_accepts_quiz_mode_glossary_compat(self):
         from app.glossary import GLOSSARY_TOPICS
         topic_id = GLOSSARY_TOPICS[0][0]

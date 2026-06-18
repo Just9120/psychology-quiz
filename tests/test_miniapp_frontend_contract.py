@@ -348,6 +348,22 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         for endpoint in ("/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/glossary/topics"):
             self.assertNotIn(endpoint, self.content)
 
+
+    def test_glossary_start_normalizes_count_and_maps_safe_errors(self):
+        self.assertIn("glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: payloadCount }, requestId)", self.content)
+        self.assertIn("function normalizeGlossaryCountForPayload(count)", self.content)
+        self.assertIn("return numeric === 5 || numeric === 10 ? numeric : count;", self.content)
+        self.assertIn("function getGlossaryStartErrorMessage(errorCode, httpStatus)", self.content)
+        self.assertIn("Не удалось начать тест: некорректные параметры глоссария.", self.content)
+        self.assertIn("Для этой темы пока недостаточно терминов.", self.content)
+        self.assertIn("Не удалось подтвердить сессию Mini App. Закройте окно и откройте /ui заново.", self.content)
+        self.assertIn("Не удалось начать тест по глоссарию. Попробуйте открыть /ui заново.", self.content)
+        self.assertIn("console.info('miniapp_glossary_start_failed'", self.content)
+        self.assertIn("{ http_status: httpStatus, error_code: errorCode, request_id: apiDiagState.setupRequestId || '' }", self.content)
+        self.assertNotIn("source_refs", self.content)
+        self.assertNotIn("supplied_snippet", self.content)
+        self.assertNotIn("question:m2_exp", self.content)
+
     def test_glossary_error_only_after_setup_options_attempted(self):
         handler_start = self.content.index("modeGlossary.addEventListener('click', async () => {")
         handler = self.content[handler_start:self.content.index("      });", handler_start) + 10]
