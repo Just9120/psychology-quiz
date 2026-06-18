@@ -319,6 +319,34 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertEqual("in_progress", state.get("state"))
         self.assertEqual(in_progress_id, state.get("session", {}).get("session_id"))
 
+
+    def test_setup_context_includes_safe_glossary_topics(self):
+        context = build_miniapp_setup_context([{"id": 1, "name": "Category 1"}])
+        titles = [topic["title"] for topic in context["glossary"]["topics"]]
+        self.assertIn("Качественные методы исследования", titles)
+        self.assertIn("Основы экспериментальной психологии", titles)
+        self.assertEqual([5, 10, "all"], context["glossary"]["question_count_choices"])
+        dumped = json.dumps(context, ensure_ascii=False)
+        for forbidden in ("source_refs", "supplied_snippet", "question:m2_exp", "exp_psych_", "short_definition", "definition"):
+            self.assertNotIn(forbidden, dumped)
+
+    def test_build_miniapp_context_setup_includes_safe_glossary_topics(self):
+        user = create_or_load_user(self.conn, 2222, "u2", "U2", None)
+        state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
+        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        self.assertFalse(used_fallback)
+        self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
+        encoded = url.split("context=", 1)[1]
+        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+        self.assertEqual("setup", ctx.get("mode"))
+        titles = [topic["title"] for topic in ctx["glossary"]["topics"]]
+        self.assertIn("Качественные методы исследования", titles)
+        self.assertIn("Основы экспериментальной психологии", titles)
+        dumped = json.dumps(ctx, ensure_ascii=False)
+        for forbidden in ("source_refs", "supplied_snippet", "question:m2_exp", "exp_psych_", "short_definition", "definition"):
+            self.assertNotIn(forbidden, dumped)
+
     def test_context_builder_does_not_duplicate_question_payload_by_default(self):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
         categories = [{"id": 1, "name": "Category 1"}]
