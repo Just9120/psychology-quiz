@@ -867,6 +867,23 @@ def build_miniapp_url_with_fallback(
     return None, False
 
 
+def build_miniapp_setup_entrypoint_url(
+    base_url: str,
+    categories,
+    *,
+    abandons_active_session: bool = False,
+    api_base_url: str | None = None,
+) -> tuple[str | None, bool]:
+    setup_state = {"state": "setup", "status": "entrypoint", "server_derived": True}
+    return build_miniapp_url_with_fallback(
+        base_url,
+        categories,
+        setup_state,
+        abandons_active_session=abandons_active_session,
+        api_base_url=api_base_url,
+    )
+
+
 def encode_miniapp_setup_context(context: dict) -> str:
     context_json = json.dumps(context, ensure_ascii=False, separators=(",", ":"))
     context_bytes = context_json.encode("utf-8")
@@ -1430,17 +1447,11 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         latency.summary()
         return
 
-    miniapp_url, fallback_mode = build_miniapp_url_with_fallback(
+    has_active = isinstance(runner_state, dict) and runner_state.get("state") == "in_progress"
+    miniapp_url, fallback_mode = build_miniapp_setup_entrypoint_url(
         settings.mini_app_url,
         categories,
-        runner_state,
-        api_base_url=settings.mini_app_api_base_url,
-    )
-    force_setup_url, _ = build_miniapp_url_with_fallback(
-        settings.mini_app_url,
-        categories,
-        {"state": "setup", "status": "force_setup", "server_derived": True},
-        abandons_active_session=True,
+        abandons_active_session=has_active,
         api_base_url=settings.mini_app_api_base_url,
     )
     if miniapp_url is None:
@@ -1463,20 +1474,17 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
             "откройте викторину заново или используйте /quiz.\n\n"
             + intro_text
         )
-    has_active = isinstance(runner_state, dict) and runner_state.get("state") == "in_progress"
     if has_active:
         intro_text = (
-            "У вас уже есть начатая викторина. Откройте её в удобном окне, чтобы продолжить.\n"
+            "У вас уже есть начатая викторина. В окне можно выбрать новый режим.\n"
+            "Запуск новой викторины завершит текущую активную попытку.\n"
             "\n"
             f"Если кнопка не открылась, нажмите {MINI_APP_BUTTON_TEXT} в меню или отправьте /ui ещё раз."
         )
     api_started_at = time.perf_counter()
     await update.message.reply_text(
         intro_text,
-        reply_markup=build_miniapp_launch_inline_keyboard(
-            miniapp_url,
-            force_setup_url=force_setup_url if has_active else None,
-        ),
+        reply_markup=build_miniapp_launch_inline_keyboard(miniapp_url),
     )
     latency.add_telegram_api(api_started_at)
     latency.summary()
