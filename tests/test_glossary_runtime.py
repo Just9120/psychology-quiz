@@ -15,7 +15,15 @@ from app.glossary import (
     format_glossary_result_text,
     load_glossary_entries,
 )
-from app.main import GLOSSARY_BUTTON_TEXT, HELP_TEXT, get_main_menu_keyboard, parse_glossary_reply_answer_number
+from app.glossary_handlers import (
+    glossary_button_handler,
+    glossary_callback,
+    glossary_command,
+    glossary_reply_text_answer_handler,
+    glossary_reply_text_next_handler,
+    parse_glossary_reply_answer_number,
+)
+from app.main import GLOSSARY_BUTTON_TEXT, HELP_TEXT, get_main_menu_keyboard
 
 
 TOPIC_ID = "kachestvennye_metody_issledovaniya"
@@ -128,6 +136,29 @@ class GlossaryRuntimeTests(unittest.TestCase):
 
         for marker in INTERNAL_MARKERS:
             self.assertNotIn(marker, rendered)
+
+
+    def test_glossary_handlers_are_importable_from_extracted_module(self):
+        self.assertTrue(callable(glossary_command))
+        self.assertTrue(callable(glossary_button_handler))
+        self.assertTrue(callable(glossary_callback))
+        self.assertTrue(callable(glossary_reply_text_answer_handler))
+        self.assertTrue(callable(glossary_reply_text_next_handler))
+
+    def test_main_registers_imported_glossary_handlers_with_same_patterns(self):
+        import inspect
+        import app.main as main
+
+        source = inspect.getsource(main.main)
+
+        self.assertIn('CommandHandler("glossary", glossary_command)', source)
+        self.assertIn('filters.Regex(build_menu_button_regex(*GLOSSARY_BUTTON_ALIASES))', source)
+        self.assertIn('glossary_button_handler', source)
+        self.assertIn('glossary_reply_text_answer_handler,', source)
+        self.assertIn('glossary_reply_text_next_handler,', source)
+        self.assertGreaterEqual(source.count('group=1'), 2)
+        self.assertIn("CallbackQueryHandler(\n            glossary_callback,", source)
+        self.assertIn(r'pattern=r"^(gls:(topics|main|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|retry))$"', source)
 
     def test_invalid_glossary_reply_numbers_are_rejected(self):
         self.assertIsNone(parse_glossary_reply_answer_number("", 4))
