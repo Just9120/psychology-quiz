@@ -748,13 +748,34 @@ class BotDbOffloadTests(unittest.TestCase):
 
 
     def test_main_registers_imported_classic_quiz_handlers_and_patterns(self):
+        registered_names = [
+            'quiz_command',
+            'start_quiz_button_handler',
+            'classic_reply_text_answer_handler',
+            'classic_reply_text_next_handler',
+            'quiz_mode_callback',
+            'category_callback',
+            'question_count_callback',
+            'difficulty_mode_callback',
+            'question_count_mix_callback',
+            'difficulty_mode_all_callback',
+            'mix_selection_callback',
+            'question_count_selected_mix_callback',
+            'difficulty_mode_selected_mix_callback',
+            'answer_callback',
+            'next_callback',
+            '_classic_reply_mode_enabled',
+        ]
+        for name in registered_names:
+            self.assertTrue(hasattr(main, name), msg=f'app.main is missing {name}')
+            self.assertIs(
+                getattr(main, name),
+                getattr(classic, name),
+                msg=f'app.main.{name} must be imported from app.classic_quiz_handlers',
+            )
+
         source = inspect.getsource(main)
-        self.assertIn('from app.classic_quiz_handlers import (', source)
         self.assertIn('CommandHandler("quiz", quiz_command)', source)
-        self.assertIn('start_quiz_button_handler,', source)
-        self.assertIn('if _classic_reply_mode_enabled(settings):', source)
-        self.assertIn('classic_reply_text_answer_handler,', source)
-        self.assertIn('classic_reply_text_next_handler,', source)
         expected_patterns = [
             r'^qzmode:(single|selected_mix|all)$',
             r'^cat:\d+$',
