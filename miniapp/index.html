@@ -392,7 +392,7 @@
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
       };
       const glossarySetupCache = {
-        topics: Array.isArray(ctx?.glossary?.topics) ? ctx.glossary.topics : [],
+        topics: getGlossaryTopicsFromSetupPayload(ctx),
       };
       let setupRenderCategories = null;
       let currentCategoryInputType = '';
@@ -1668,9 +1668,41 @@
         }
       }
 
+      function hasUsableGlossaryTopics(topics) {
+        return Array.isArray(topics)
+          && topics.some((topic) => topic && typeof topic.topic_id === 'string' && typeof topic.title === 'string');
+      }
+
+      function getGlossaryTopicsFromSetupPayload(payload) {
+        const candidates = [
+          payload?.setup?.glossary?.topics,
+          payload?.glossary?.topics,
+          payload?.setup_options?.glossary?.topics,
+          payload?.setupOptions?.glossary?.topics,
+        ];
+        for (const topics of candidates) {
+          if (hasUsableGlossaryTopics(topics)) return topics;
+        }
+        return [];
+      }
+
       function getGlossaryTopicsFromSetupCache() {
         const topics = Array.isArray(glossarySetupCache.topics) ? glossarySetupCache.topics : [];
-        return topics.length > 0 ? topics : [];
+        return hasUsableGlossaryTopics(topics) ? topics : [];
+      }
+
+      async function fetchGlossaryTopicsFromSetupOptions(requestId) {
+        const telemetry = startTelemetry('glossary_setup_options', '/miniapp/setup-options', requestId);
+        const { resp, data, parseFailureType } = await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`, {
+          headers: withMiniappRequestId({ Authorization: `tma ${tg.initData}` }, requestId),
+        }, 9000, telemetry);
+        const topics = getGlossaryTopicsFromSetupPayload(data);
+        markTelemetry(telemetry, 'action_done', {
+          request_id: requestId,
+          status: resp.ok && data?.ok === true && hasUsableGlossaryTopics(topics) ? 'ok' : (parseFailureType || (resp.ok ? 'unexpected_payload' : 'non_ok_response')),
+          http_code: resp.status,
+        });
+        return { resp, data, topics, parseFailureType };
       }
 
       function showGlossaryLoading() {
@@ -1692,11 +1724,12 @@
         card.className = 'question-card';
         const msg = document.createElement('p');
         msg.className = 'err';
-        msg.textContent = 'Не удалось открыть глоссарий. Закройте окно и откройте /ui заново.';
+        msg.textContent = 'Не удалось открыть глоссарий. Попробуйте закрыть окно и открыть /ui заново.';
         card.appendChild(msg);
         glossaryView.appendChild(card);
-        runnerState.textContent = 'Не удалось открыть глоссарий. Закройте окно и откройте /ui заново.';
+        runnerState.textContent = 'Не удалось открыть глоссарий. Попробуйте закрыть окно и открыть /ui заново.';
         const safeDetails = {
+          attempted_sources: Array.isArray(details.attempted_sources) ? details.attempted_sources.map((source) => String(source).slice(0, 32)) : [],
           endpoint: String(details.endpoint || '/miniapp/glossary/topics'),
           http_status: details.http_status === undefined || details.http_status === null ? '' : String(details.http_status).slice(0, 8),
           parse_failure_type: details.parse_failure_type ? String(details.parse_failure_type).slice(0, 40) : '',
@@ -1875,40 +1908,49 @@
       modeTopics.addEventListener('click', () => showSetupMode());
       modeGlossary.addEventListener('click', async () => {
         showGlossaryLoading();
+        const attemptedSources = ['cache'];
         const cachedTopics = getGlossaryTopicsFromSetupCache();
-        if (!apiBase || !tg?.initData) {
-          if (cachedTopics.length > 0) {
-            glossaryTopicsCache = cachedTopics;
-            renderGlossaryTopics(glossaryTopicsCache);
-          } else {
-            showGlossaryOpenError({ endpoint: '/miniapp/glossary/topics', http_status: 'not_configured', parse_failure_type: 'missing_api_or_init_data' });
-          }
+        if (hasUsableGlossaryTopics(cachedTopics)) {
+          glossaryTopicsCache = cachedTopics;
+          renderGlossaryTopics(glossaryTopicsCache);
           return;
         }
+        if (!apiBase || !tg?.initData) {
+          showGlossaryOpenError({ attempted_sources: attemptedSources, endpoint: '/miniapp/setup-options', http_status: 'not_configured', parse_failure_type: 'missing_api_or_init_data' });
+          return;
+        }
+
         const requestId = buildMiniappRequestId();
+        let lastFailure = { endpoint: '/miniapp/setup-options', parse_failure_type: 'not_attempted', request_id: requestId };
+        attemptedSources.push('setup-options');
+        try {
+          const setupResult = await fetchGlossaryTopicsFromSetupOptions(requestId);
+          if (setupResult.resp.ok && setupResult.data?.ok === true && hasUsableGlossaryTopics(setupResult.topics)) {
+            glossaryTopicsCache = setupResult.topics;
+            glossarySetupCache.topics = setupResult.topics;
+            renderGlossaryTopics(glossaryTopicsCache);
+            return;
+          }
+          lastFailure = { endpoint: '/miniapp/setup-options', http_status: setupResult.resp.status, parse_failure_type: setupResult.parseFailureType || (setupResult.resp.ok ? 'unexpected_payload' : 'non_ok_response'), request_id: requestId };
+        } catch (_) {
+          lastFailure = { endpoint: '/miniapp/setup-options', parse_failure_type: 'request_exception', request_id: requestId };
+        }
+
+        attemptedSources.push('glossary-topics');
         try {
           const { resp, data, parseFailureType } = await glossaryFetch('/miniapp/glossary/topics', null, requestId);
-          const topics = Array.isArray(data?.glossary?.topics) ? data.glossary.topics : [];
-          if (resp.ok && data?.ok === true && topics.length > 0) {
+          const topics = getGlossaryTopicsFromSetupPayload(data);
+          if (resp.ok && data?.ok === true && hasUsableGlossaryTopics(topics)) {
             glossaryTopicsCache = topics;
             glossarySetupCache.topics = topics;
             renderGlossaryTopics(glossaryTopicsCache);
             return;
           }
-          if (cachedTopics.length > 0) {
-            glossaryTopicsCache = cachedTopics;
-            renderGlossaryTopics(glossaryTopicsCache);
-            return;
-          }
-          showGlossaryOpenError({ endpoint: '/miniapp/glossary/topics', http_status: resp.status, parse_failure_type: parseFailureType || (resp.ok ? 'unexpected_payload' : 'non_ok_response'), request_id: requestId });
+          lastFailure = { endpoint: '/miniapp/glossary/topics', http_status: resp.status, parse_failure_type: parseFailureType || (resp.ok ? 'unexpected_payload' : 'non_ok_response'), request_id: requestId };
         } catch (_) {
-          if (cachedTopics.length > 0) {
-            glossaryTopicsCache = cachedTopics;
-            renderGlossaryTopics(glossaryTopicsCache);
-            return;
-          }
-          showGlossaryOpenError({ endpoint: '/miniapp/glossary/topics', parse_failure_type: 'request_exception', request_id: requestId });
+          lastFailure = { endpoint: '/miniapp/glossary/topics', parse_failure_type: 'request_exception', request_id: requestId };
         }
+        showGlossaryOpenError({ ...lastFailure, attempted_sources: attemptedSources });
       });
 
       form.addEventListener('submit', async (e) => {

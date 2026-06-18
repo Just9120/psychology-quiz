@@ -309,7 +309,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def test_glossary_open_has_loading_fallback_and_visible_failure(self):
         self.assertIn("msg.textContent = 'Загружаем глоссарий...';", self.content)
         self.assertIn("runnerState.textContent = 'Загружаем глоссарий...';", self.content)
-        self.assertIn("Не удалось открыть глоссарий. Закройте окно и откройте /ui заново.", self.content)
+        self.assertIn("Не удалось открыть глоссарий. Попробуйте закрыть окно и открыть /ui заново.", self.content)
         self.assertIn("parseFailureType || (resp.ok ? 'unexpected_payload' : 'non_ok_response')", self.content)
         self.assertIn("parse_failure_type: 'request_exception'", self.content)
         self.assertIn("parse_failure_type: 'missing_api_or_init_data'", self.content)
@@ -318,9 +318,28 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("parseFailureType: 'invalid_json'", self.content)
         self.assertIn("parseFailureType: 'empty_body'", self.content)
         self.assertIn("function getGlossaryTopicsFromSetupCache()", self.content)
-        self.assertIn("glossarySetupCache.topics = topics;", self.content)
-        self.assertIn("if (cachedTopics.length > 0)", self.content)
+        self.assertIn("function getGlossaryTopicsFromSetupPayload(payload)", self.content)
+        self.assertIn("function hasUsableGlossaryTopics(topics)", self.content)
+        self.assertIn("glossarySetupCache.topics = setupResult.topics;", self.content)
+        self.assertIn("attemptedSources.push('setup-options');", self.content)
+        self.assertIn("attemptedSources.push('glossary-topics');", self.content)
         self.assertIn("console.info('miniapp_glossary_open_failed'", self.content)
+
+    def test_glossary_open_uses_setup_options_before_topics_endpoint(self):
+        self.assertIn("await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`", self.content)
+        self.assertIn("payload?.setup?.glossary?.topics", self.content)
+        self.assertIn("payload?.glossary?.topics", self.content)
+        self.assertIn("payload?.setup_options?.glossary?.topics", self.content)
+        self.assertLess(self.content.index("attemptedSources.push('setup-options');"), self.content.index("attemptedSources.push('glossary-topics');"))
+        self.assertLess(self.content.index("fetchGlossaryTopicsFromSetupOptions(requestId)"), self.content.index("glossaryFetch('/miniapp/glossary/topics', null, requestId)"))
+
+    def test_glossary_error_only_after_all_sources_attempted(self):
+        handler_start = self.content.index("modeGlossary.addEventListener('click', async () => {")
+        handler = self.content[handler_start:self.content.index("      });", handler_start) + 10]
+        self.assertIn("const attemptedSources = ['cache'];", handler)
+        self.assertIn("attemptedSources.push('setup-options');", handler)
+        self.assertIn("attemptedSources.push('glossary-topics');", handler)
+        self.assertEqual(1, handler.count("showGlossaryOpenError({ ...lastFailure, attempted_sources: attemptedSources });"))
 
 
     def test_docs_numbered_h2_headings_have_unique_numbers(self):
