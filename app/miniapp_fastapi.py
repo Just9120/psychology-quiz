@@ -16,6 +16,11 @@ from app.miniapp_api import (
     _extract_transport_payload,
     _read_request_id,
     build_answer_response,
+    build_glossary_answer_response,
+    build_glossary_next_response,
+    build_glossary_restart_response,
+    build_glossary_start_response,
+    build_glossary_topics_response,
     build_setup_options_response,
     build_setup_response,
     build_state_response,
@@ -24,7 +29,7 @@ from app.miniapp_api import (
 
 logger = logging.getLogger("uvicorn.error")
 
-_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer"}
+_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart"}
 
 
 def _to_response(status: int, headers: dict[str, str], body: bytes) -> Response:
@@ -189,6 +194,27 @@ def create_app(
     async def options_answer(request: Request) -> Response:
         return await _options_response("/miniapp/answer", request)
 
+
+    @app.options("/miniapp/glossary/topics")
+    async def options_glossary_topics(request: Request) -> Response:
+        return await _options_response("/miniapp/glossary/topics", request)
+
+    @app.options("/miniapp/glossary/start")
+    async def options_glossary_start(request: Request) -> Response:
+        return await _options_response("/miniapp/glossary/start", request)
+
+    @app.options("/miniapp/glossary/answer")
+    async def options_glossary_answer(request: Request) -> Response:
+        return await _options_response("/miniapp/glossary/answer", request)
+
+    @app.options("/miniapp/glossary/next")
+    async def options_glossary_next(request: Request) -> Response:
+        return await _options_response("/miniapp/glossary/next", request)
+
+    @app.options("/miniapp/glossary/restart")
+    async def options_glossary_restart(request: Request) -> Response:
+        return await _options_response("/miniapp/glossary/restart", request)
+
     @app.get("/miniapp/state")
     async def get_state(request: Request) -> Response:
         started_at = time.perf_counter()
@@ -268,5 +294,58 @@ def create_app(
         _set_common_headers(response, request)
         _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
+
+
+    @app.get("/miniapp/glossary/topics")
+    async def get_glossary_topics(request: Request) -> Response:
+        started_at = time.perf_counter()
+        endpoint = "/miniapp/glossary/topics"
+        request_id = _read_request_id(request.headers)
+        transport = "header_auth"
+        init_data = _extract_init_data(request.headers)
+        status, headers, body = await _run_builder_in_thread(
+            build_glossary_topics_response,
+            bot_token,
+            init_data,
+            max_age_seconds=initdata_ttl_seconds,
+        )
+        response = _to_response(status, headers, body)
+        _set_common_headers(response, request)
+        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
+        return response
+
+    async def _post_glossary(request: Request, endpoint: str, builder: Any) -> Response:
+        started_at = time.perf_counter()
+        request_id = _read_request_id(request.headers)
+        raw_body = await request.body()
+        init_data, payload_body, body_request_id, transport = _extract_transport_payload(request.headers, raw_body)
+        request_id = body_request_id or request_id
+        status, headers, body = await _run_builder_in_thread(
+            builder,
+            bot_token,
+            init_data,
+            payload_body,
+            max_age_seconds=initdata_ttl_seconds,
+        )
+        response = _to_response(status, headers, body)
+        _set_common_headers(response, request)
+        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
+        return response
+
+    @app.post("/miniapp/glossary/start")
+    async def post_glossary_start(request: Request) -> Response:
+        return await _post_glossary(request, "/miniapp/glossary/start", build_glossary_start_response)
+
+    @app.post("/miniapp/glossary/answer")
+    async def post_glossary_answer(request: Request) -> Response:
+        return await _post_glossary(request, "/miniapp/glossary/answer", build_glossary_answer_response)
+
+    @app.post("/miniapp/glossary/next")
+    async def post_glossary_next(request: Request) -> Response:
+        return await _post_glossary(request, "/miniapp/glossary/next", build_glossary_next_response)
+
+    @app.post("/miniapp/glossary/restart")
+    async def post_glossary_restart(request: Request) -> Response:
+        return await _post_glossary(request, "/miniapp/glossary/restart", build_glossary_restart_response)
 
     return app

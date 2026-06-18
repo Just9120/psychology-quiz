@@ -491,3 +491,97 @@ class MiniAppApiTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class MiniAppGlossaryApiTests(unittest.TestCase):
+    def setUp(self):
+        self.bot_token = '123:abc'
+        self.init_data = _make_init_data(self.bot_token, {'id': 4242, 'username': 'gls', 'first_name': 'g'})
+
+    def _payload(self, body):
+        return json.loads(body.decode('utf-8'))
+
+    def test_glossary_topics_lists_both_topics_and_modes_without_db(self):
+        from app.miniapp_api import build_glossary_topics_response
+        with patch('app.miniapp_api.get_connection', side_effect=AssertionError('DB should not be used')):
+            code, _, body = build_glossary_topics_response(self.bot_token, self.init_data)
+        self.assertEqual(200, code)
+        payload = self._payload(body)
+        self.assertTrue(payload['ok'])
+        self.assertIn({'mode': 'topics', 'title': 'Тесты по темам'}, payload['modes'])
+        self.assertIn({'mode': 'glossary', 'title': 'Глоссарий'}, payload['modes'])
+        titles = [topic['title'] for topic in payload['glossary']['topics']]
+        self.assertIn('Качественные методы исследования', titles)
+        self.assertIn('Основы экспериментальной психологии', titles)
+
+    def test_glossary_start_answer_next_final_restart_hide_internal_fields(self):
+        from app.glossary import GLOSSARY_TOPICS
+        from app.miniapp_api import (
+            build_glossary_answer_response,
+            build_glossary_next_response,
+            build_glossary_restart_response,
+            build_glossary_start_response,
+        )
+        internal = ('source_refs', 'supplied_snippet', 'question:m2_exp', 'internal', 'entry_id', 'exp_psych_')
+        for topic_id, _title in GLOSSARY_TOPICS:
+            code, _, body = build_glossary_start_response(
+                self.bot_token,
+                self.init_data,
+                json.dumps({'topic_id': topic_id, 'question_count': 5}).encode(),
+            )
+            self.assertEqual(200, code)
+            payload = self._payload(body)
+            state = payload['glossary_state']
+            q = state['current_question']
+            self.assertEqual('in_progress', state['state'])
+            self.assertIsInstance(q['term'], str)
+            self.assertEqual(4, len(q['options']))
+            dumped_question = json.dumps(q, ensure_ascii=False)
+            self.assertNotIn('correct_option', dumped_question)
+            for marker in internal:
+                self.assertNotIn(marker, dumped_question)
+
+            session_id = q['session_id']
+            selected = q['options'][0]['option_index']
+            code, _, body = build_glossary_answer_response(
+                self.bot_token,
+                self.init_data,
+                json.dumps({'session_id': session_id, 'selected_option_index': selected}).encode(),
+            )
+            self.assertEqual(200, code)
+            feedback = self._payload(body)['glossary_state']['feedback']
+            self.assertIn('selected_option_text', feedback)
+            self.assertIn('correct_option_text', feedback)
+            self.assertIn('explanation', feedback)
+            self.assertNotIn('source_refs', json.dumps(feedback, ensure_ascii=False))
+
+            # Finish the short session and verify final score shape.
+            final = None
+            for _ in range(5):
+                code, _, body = build_glossary_next_response(
+                    self.bot_token,
+                    self.init_data,
+                    json.dumps({'session_id': session_id}).encode(),
+                )
+                self.assertEqual(200, code)
+                state = self._payload(body)['glossary_state']
+                if state['state'] == 'completed':
+                    final = state['result']
+                    break
+                q = state['current_question']
+                build_glossary_answer_response(
+                    self.bot_token,
+                    self.init_data,
+                    json.dumps({'session_id': session_id, 'selected_option_index': q['options'][0]['option_index']}).encode(),
+                )
+            self.assertIsNotNone(final)
+            self.assertIn('score', final)
+            self.assertEqual(5, final['total_questions'])
+
+            code, _, body = build_glossary_restart_response(
+                self.bot_token,
+                self.init_data,
+                json.dumps({'session_id': session_id}).encode(),
+            )
+            self.assertEqual(200, code)
+            restarted = self._payload(body)['glossary_state']
+            self.assertEqual('in_progress', restarted['state'])

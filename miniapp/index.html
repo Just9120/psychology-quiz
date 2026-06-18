@@ -228,6 +228,14 @@
     <div id="telemetry_debug" class="note telemetry-debug" hidden></div>
     <div id="err" class="err"></div>
     <div id="question_view" hidden></div>
+    <div id="mode_view" class="question-card" hidden>
+      <h4 class="question-title">Выберите режим</h4>
+      <div class="completion-actions">
+        <button type="button" id="mode_topics">Тесты по темам</button>
+        <button type="button" id="mode_glossary">Глоссарий</button>
+      </div>
+    </div>
+    <div id="glossary_view" hidden></div>
     <div id="setup_warning" class="warn" hidden></div>
 
     <form id="f" class="setup-form" hidden>
@@ -275,6 +283,10 @@
       const go = document.getElementById('go');
       const setupHint = document.getElementById('setup_hint');
       const questionView = document.getElementById('question_view');
+      const modeView = document.getElementById('mode_view');
+      const glossaryView = document.getElementById('glossary_view');
+      const modeTopics = document.getElementById('mode_topics');
+      const modeGlossary = document.getElementById('mode_glossary');
       const catsFieldset = document.getElementById('cats_fieldset');
       const setupWarning = document.getElementById('setup_warning');
       const runnerState = document.getElementById('runner_state');
@@ -388,10 +400,21 @@
       function clearRunnerView() {
         questionView.replaceChildren();
         questionView.hidden = true;
+        glossaryView.replaceChildren();
+        glossaryView.hidden = true;
+      }
+
+      function showModeSelection() {
+        clearRunnerView();
+        form.hidden = true;
+        setupIntro.hidden = false;
+        modeView.hidden = false;
+        runnerState.textContent = 'Выберите режим: тесты по темам или глоссарий.';
       }
 
       function showSetupMode({ message = 'Выберите формат, темы и сложность.', clearError = true } = {}) {
         clearRunnerView();
+        modeView.hidden = true;
         form.hidden = false;
         setupIntro.hidden = false;
         setupWarning.hidden = true;
@@ -404,6 +427,8 @@
       }
 
       function showRunnerMode() {
+        modeView.hidden = true;
+        modeView.hidden = true;
         form.hidden = true;
         setupIntro.hidden = true;
         setupWarning.hidden = true;
@@ -411,6 +436,8 @@
       }
 
       function showCompletedMode() {
+        modeView.hidden = true;
+        modeView.hidden = true;
         form.hidden = true;
         setupIntro.hidden = true;
         setupWarning.hidden = true;
@@ -626,8 +653,7 @@
           });
         };
         if (setupMode) {
-          form.hidden = false;
-          setupIntro.hidden = false;
+          showModeSelection();
           if (ctx?.abandons_active_session === true) {
             setupWarning.hidden = false;
             setupWarning.textContent = 'Запуск новой викторины завершит текущую активную попытку.';
@@ -1620,6 +1646,195 @@
           'Викторина ещё не начата. Выберите параметры ниже или запустите викторину в чате через /quiz.';
         renderApiDiagnostics();
       }
+
+      let glossaryTopicsCache = [];
+      let glossaryLastSessionId = '';
+
+      function glossaryFetch(path, payload = null) {
+        const initData = tg?.initData || '';
+        const options = payload === null
+          ? { headers: { Authorization: `tma ${initData}` } }
+          : { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: JSON.stringify({ init_data: initData, payload }) };
+        return apiFetch(`${apiBase}${path}`, options, 9000).then((resp) => resp.json().then((data) => ({ resp, data })));
+      }
+
+      function showGlossaryView() {
+        modeView.hidden = true;
+        form.hidden = true;
+        setupIntro.hidden = true;
+        questionView.hidden = true;
+        glossaryView.hidden = false;
+      }
+
+      function renderGlossaryTopics(topics) {
+        showGlossaryView();
+        glossaryView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const title = document.createElement('h4');
+        title.className = 'question-title';
+        title.textContent = 'Глоссарий';
+        card.appendChild(title);
+        (topics || []).forEach((topic) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = topic.title;
+          btn.addEventListener('click', () => renderGlossaryCounts(topic));
+          card.appendChild(btn);
+        });
+        const back = document.createElement('button');
+        back.type = 'button';
+        back.textContent = 'К выбору режима';
+        back.addEventListener('click', showModeSelection);
+        card.appendChild(back);
+        glossaryView.appendChild(card);
+        runnerState.textContent = 'Выберите тему глоссария.';
+      }
+
+      function renderGlossaryCounts(topic) {
+        showGlossaryView();
+        glossaryView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const title = document.createElement('h4');
+        title.className = 'question-title';
+        title.textContent = topic.title;
+        card.appendChild(title);
+        [5, 10, 'all'].forEach((count) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = count === 'all' ? 'Все доступные' : String(count);
+          btn.addEventListener('click', async () => {
+            runnerState.textContent = 'Запуск теста по глоссарию...';
+            const { resp, data } = await glossaryFetch('/miniapp/glossary/start', { topic_id: topic.topic_id, question_count: count });
+            if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
+            else runnerState.textContent = 'Не удалось начать тест по глоссарию.';
+          });
+          card.appendChild(btn);
+        });
+        const back = document.createElement('button');
+        back.type = 'button';
+        back.textContent = 'К темам глоссария';
+        back.addEventListener('click', () => renderGlossaryTopics(glossaryTopicsCache));
+        card.appendChild(back);
+        glossaryView.appendChild(card);
+        runnerState.textContent = 'Выберите количество вопросов.';
+      }
+
+      function renderGlossaryState(state) {
+        if (state?.state === 'completed') return renderGlossaryResult(state.result || {});
+        const q = state?.current_question;
+        if (!q) return;
+        glossaryLastSessionId = q.session_id;
+        showGlossaryView();
+        glossaryView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const title = document.createElement('h4');
+        title.className = 'question-title';
+        title.textContent = 'Термин';
+        card.appendChild(title);
+        const progress = document.createElement('div');
+        progress.className = 'question-progress';
+        progress.textContent = `Вопрос ${q.order_index} из ${q.total_questions}`;
+        card.appendChild(progress);
+        const term = document.createElement('p');
+        term.className = 'question-text';
+        term.textContent = q.term;
+        card.appendChild(term);
+        const list = document.createElement('ol');
+        q.options.forEach((opt) => {
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = opt.option_text;
+          btn.addEventListener('click', async () => {
+            const { resp, data } = await glossaryFetch('/miniapp/glossary/answer', { session_id: q.session_id, selected_option_index: Number(opt.option_index) });
+            if (resp.ok && data?.ok) renderGlossaryFeedback(q, data.glossary_state.feedback);
+          });
+          li.appendChild(btn);
+          list.appendChild(li);
+        });
+        card.appendChild(list);
+        glossaryView.appendChild(card);
+        runnerState.textContent = 'Выберите определение термина.';
+      }
+
+      function renderGlossaryFeedback(question, feedback) {
+        const wrap = document.createElement('div');
+        wrap.className = 'answer-feedback';
+        const status = document.createElement('p');
+        status.className = `feedback-line ${feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong'}`;
+        status.textContent = feedback?.is_correct ? 'Верно' : 'Неверно';
+        wrap.appendChild(status);
+        const details = document.createElement('p');
+        details.textContent = feedback?.is_correct
+          ? `Ваш ответ: ${feedback.selected_option_text}.`
+          : `Ваш ответ: ${feedback.selected_option_text}.
+Правильный ответ: ${feedback.correct_option_text}.`;
+        wrap.appendChild(details);
+        const ex = document.createElement('p');
+        ex.textContent = `Пояснение: ${feedback?.explanation || ''}`;
+        wrap.appendChild(ex);
+        const next = document.createElement('button');
+        next.type = 'button';
+        next.textContent = 'Далее';
+        next.className = 'answer-next';
+        next.addEventListener('click', async () => {
+          const { resp, data } = await glossaryFetch('/miniapp/glossary/next', { session_id: question.session_id });
+          if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
+        });
+        wrap.appendChild(next);
+        glossaryView.appendChild(wrap);
+        runnerState.textContent = 'Ответ проверен.';
+      }
+
+      function renderGlossaryResult(result) {
+        showGlossaryView();
+        glossaryView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'result-card';
+        const title = document.createElement('h4');
+        title.className = 'result-title';
+        title.textContent = 'Тест завершён';
+        card.appendChild(title);
+        const score = document.createElement('p');
+        score.textContent = `Результат: ${Number(result.score) || 0} из ${Number(result.total_questions) || 0}`;
+        card.appendChild(score);
+        const retry = document.createElement('button');
+        retry.type = 'button';
+        retry.textContent = 'Пройти ещё раз';
+        retry.addEventListener('click', async () => {
+          const { resp, data } = await glossaryFetch('/miniapp/glossary/restart', { session_id: glossaryLastSessionId });
+          if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
+        });
+        card.appendChild(retry);
+        const topics = document.createElement('button');
+        topics.type = 'button';
+        topics.textContent = 'К темам глоссария';
+        topics.addEventListener('click', () => renderGlossaryTopics(glossaryTopicsCache));
+        card.appendChild(topics);
+        const modes = document.createElement('button');
+        modes.type = 'button';
+        modes.textContent = 'К выбору режима';
+        modes.addEventListener('click', showModeSelection);
+        card.appendChild(modes);
+        glossaryView.appendChild(card);
+        runnerState.textContent = 'Тест по глоссарию завершён.';
+      }
+
+      modeTopics.addEventListener('click', () => showSetupMode());
+      modeGlossary.addEventListener('click', async () => {
+        if (!apiBase || !tg?.initData) {
+          runnerState.textContent = 'Глоссарий в Mini App временно недоступен.';
+          return;
+        }
+        const { resp, data } = await glossaryFetch('/miniapp/glossary/topics');
+        if (resp.ok && data?.ok) {
+          glossaryTopicsCache = data.glossary.topics || [];
+          renderGlossaryTopics(glossaryTopicsCache);
+        }
+      });
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();

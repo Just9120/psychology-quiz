@@ -25,6 +25,13 @@ from app.db import (
     store_session_questions,
 )
 from app.miniapp_runner import build_miniapp_runner_state, submit_miniapp_answer_event
+from app.miniapp_glossary import (
+    answer_glossary_session,
+    list_glossary_topics_payload,
+    next_glossary_session,
+    restart_glossary_session,
+    start_glossary_session,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -159,6 +166,88 @@ def _extract_transport_payload(headers, body: bytes) -> tuple[str, bytes, str, s
 
 
 
+
+
+def _verified_user_or_error(bot_token: str, init_data: str, max_age_seconds: int) -> VerifiedInitData | tuple[int, dict[str, str], bytes]:
+    try:
+        return verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
+    except InitDataValidationError as exc:
+        return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
+
+def build_glossary_topics_response(bot_token: str, init_data: str, *, max_age_seconds: int = 3600):
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    return _json(HTTPStatus.OK, {"ok": True, "modes": [{"mode": "topics", "title": "Тесты по темам"}, {"mode": "glossary", "title": "Глоссарий"}], "glossary": list_glossary_topics_payload()})
+
+def _parse_json_payload(body: bytes) -> dict[str, Any] | None:
+    try:
+        payload = json.loads(body.decode("utf-8"))
+    except Exception:
+        return None
+    return payload if isinstance(payload, dict) else None
+
+def build_glossary_start_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    payload = _parse_json_payload(body)
+    if payload is None:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    topic_id = payload.get("topic_id")
+    count = payload.get("question_count")
+    if not isinstance(topic_id, str) or count not in {5, 10, "all", None}:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
+    state = start_glossary_session(verified.telegram_user_id, topic_id, count)
+    if state is None:
+        return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "glossary_unavailable"})
+    return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
+
+def build_glossary_answer_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    payload = _parse_json_payload(body)
+    if payload is None:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    session_id = payload.get("session_id")
+    selected = payload.get("selected_option_index")
+    if not isinstance(session_id, str) or not isinstance(selected, int):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
+    state = answer_glossary_session(verified.telegram_user_id, session_id, selected)
+    if state is None:
+        return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_answer"})
+    return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
+
+def build_glossary_next_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    payload = _parse_json_payload(body)
+    if payload is None:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    session_id = payload.get("session_id")
+    if not isinstance(session_id, str):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_session"})
+    state = next_glossary_session(verified.telegram_user_id, session_id)
+    if state is None:
+        return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_session"})
+    return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
+
+def build_glossary_restart_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    payload = _parse_json_payload(body)
+    if payload is None:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    session_id = payload.get("session_id")
+    if not isinstance(session_id, str):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_session"})
+    state = restart_glossary_session(verified.telegram_user_id, session_id)
+    if state is None:
+        return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_session"})
+    return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
 
 def _find_latest_session_id_for_feedback(conn, actor_user_id: int) -> int | None:
     row = conn.execute(
@@ -436,6 +525,8 @@ def build_setup_options_response(
                 "categories": categories,
                 "question_count_choices": [5, 10, 15, "all"],
                 "difficulty_choices": ["any", "easy", "medium", "hard"],
+                "modes": [{"mode": "topics", "title": "Тесты по темам"}, {"mode": "glossary", "title": "Глоссарий"}],
+                "glossary": list_glossary_topics_payload(),
             },
         },
     )
@@ -461,7 +552,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         origin = self.headers.get("Origin", "")
         allowed = bool(self.allowed_origin and origin == self.allowed_origin)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s", endpoint, request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no", self.headers.get("Access-Control-Request-Method", ""), self.headers.get("Access-Control-Request-Headers", ""))
             return
@@ -480,7 +571,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         transport = "header_auth"
         init_data = _extract_init_data(self.headers)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/glossary/topics"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         try:
@@ -491,9 +582,15 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     init_data,
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
-            else:
+            elif endpoint == "/miniapp/setup-options":
                 status, headers, body = build_setup_options_response(
                     self.db_path,
+                    self.bot_token,
+                    init_data,
+                    max_age_seconds=self.initdata_ttl_seconds,
+                )
+            else:
+                status, headers, body = build_glossary_topics_response(
                     self.bot_token,
                     init_data,
                     max_age_seconds=self.initdata_ttl_seconds,
@@ -535,7 +632,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         endpoint = self.path.split("?")[0]
         request_id = _read_request_id(self.headers)
         transport = "header_auth"
-        if endpoint not in {"/miniapp/answer", "/miniapp/setup"}:
+        if endpoint not in {"/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         length = int(self.headers.get("Content-Length", "0"))
@@ -551,7 +648,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     payload_body,
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
-            else:
+            elif endpoint == "/miniapp/setup":
                 status, headers, data = build_setup_response(
                     self.db_path,
                     self.bot_token,
@@ -559,6 +656,14 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     payload_body,
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
+            elif endpoint == "/miniapp/glossary/start":
+                status, headers, data = build_glossary_start_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
+            elif endpoint == "/miniapp/glossary/answer":
+                status, headers, data = build_glossary_answer_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
+            elif endpoint == "/miniapp/glossary/next":
+                status, headers, data = build_glossary_next_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
+            else:
+                status, headers, data = build_glossary_restart_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
         except sqlite3.OperationalError as exc:
             if not _is_sqlite_locked_error(exc):
                 raise
