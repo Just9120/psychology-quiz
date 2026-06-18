@@ -8,7 +8,7 @@
 - **Module 3** — первая активная категория `Психологическое консультирование`, 108 approved questions.
 - Активный банк вопросов: 575 approved questions в JSON source-of-truth under `content/questions/**/*.json`.
 
-Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. **Web UI отсутствует**, внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
+Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. **Standalone Web UI отсутствует**; Telegram Mini App является opt-in UX внутри Telegram. Внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
 ## Переменные окружения
 
@@ -131,11 +131,11 @@ Operational deploy/seed/restart details and safety boundaries belong in [`docs/c
 - Standalone Web UI / PWA сейчас не входят в текущий scope проекта.
 - Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram: через `/ui` или через кнопку нижнего меню `🚀 В окне`.
 - Кнопка `🚀 В окне` запускает безопасный fresh-flow: бот отправляет новое сообщение с inline WebApp-кнопкой `🚀 Открыть викторину`, а не хранит persistent `web_app` URL в reply keyboard.
-- Текущий Mini App MVP покрывает setup, state hydration, показ текущего вопроса, отправку ответа, feedback, переход к следующему шагу и итоговый результат с рестартом в окне Mini App.
-- `/ui` поддерживает обычный тест по темам и режим теста по глоссарию; безопасные метаданные тем глоссария включаются в launch context, чтобы topic picker открывался без runtime lookup.
+- Текущий Mini App MVP покрывает setup/contour chooser, state hydration, показ текущего вопроса, отправку ответа, feedback, переход к следующему шагу и итоговый результат с рестартом в окне Mini App.
+- `/ui` и `🚀 В окне` открывают setup/contour chooser с контурами `Тесты по темам` и `Глоссарий` даже если активен normal quiz runner; chat `📚 Глоссарий` остаётся отдельным Telegram chat glossary quiz.
 - Режим глоссария в Mini App использует существующие Mini App API endpoints (`GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и статические JSON-файлы `content/glossary`; provenance/source refs не показываются пользователям.
 - `/quiz` остаётся дефолтным entry point и классическим chat-based runner.
-- Mini App использует backend API (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state; user-facing glossary flow also stays on those existing endpoints with transient in-memory glossary sessions.
+- Mini App использует dedicated FastAPI backend service `psych_quiz_miniapp_api` с endpoints (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state; user-facing glossary flow also stays on those existing endpoints with transient in-memory glossary sessions.
 
 ## Что вне текущего продуктового контура
 
