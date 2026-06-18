@@ -322,23 +322,30 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("function hasUsableGlossaryTopics(topics)", self.content)
         self.assertIn("glossarySetupCache.topics = setupResult.topics;", self.content)
         self.assertIn("attemptedSources.push('setup-options');", self.content)
-        self.assertIn("attemptedSources.push('glossary-topics');", self.content)
+        self.assertNotIn("attemptedSources.push('glossary-topics');", self.content)
         self.assertIn("console.info('miniapp_glossary_open_failed'", self.content)
 
-    def test_glossary_open_uses_setup_options_before_topics_endpoint(self):
+    def test_glossary_open_uses_setup_options_only_for_primary_flow(self):
         self.assertIn("await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`", self.content)
         self.assertIn("payload?.setup?.glossary?.topics", self.content)
         self.assertIn("payload?.glossary?.topics", self.content)
         self.assertIn("payload?.setup_options?.glossary?.topics", self.content)
-        self.assertLess(self.content.index("attemptedSources.push('setup-options');"), self.content.index("attemptedSources.push('glossary-topics');"))
-        self.assertLess(self.content.index("fetchGlossaryTopicsFromSetupOptions(requestId)"), self.content.index("glossaryFetch('/miniapp/glossary/topics', null, requestId)"))
+        self.assertNotIn("/miniapp/glossary/topics", self.content)
 
-    def test_glossary_error_only_after_all_sources_attempted(self):
+    def test_glossary_primary_flow_uses_existing_endpoints_only(self):
+        self.assertIn("glossaryFetch('/miniapp/setup', { mode: 'glossary'", self.content)
+        self.assertIn("glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'answer'", self.content)
+        self.assertIn("glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'next'", self.content)
+        self.assertIn("glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'restart'", self.content)
+        for endpoint in ("/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/glossary/topics"):
+            self.assertNotIn(endpoint, self.content)
+
+    def test_glossary_error_only_after_setup_options_attempted(self):
         handler_start = self.content.index("modeGlossary.addEventListener('click', async () => {")
         handler = self.content[handler_start:self.content.index("      });", handler_start) + 10]
         self.assertIn("const attemptedSources = ['cache'];", handler)
         self.assertIn("attemptedSources.push('setup-options');", handler)
-        self.assertIn("attemptedSources.push('glossary-topics');", handler)
+        self.assertNotIn("attemptedSources.push('glossary-topics');", handler)
         self.assertEqual(1, handler.count("showGlossaryOpenError({ ...lastFailure, attempted_sources: attemptedSources });"))
 
 

@@ -249,6 +249,46 @@ def build_glossary_restart_response(bot_token: str, init_data: str, body: bytes,
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_session"})
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
 
+
+
+def _is_glossary_setup_payload(payload: dict[str, Any]) -> bool:
+    return payload.get("mode") == "glossary" or payload.get("quiz_mode") == "glossary"
+
+
+def _build_existing_endpoint_glossary_setup_response(verified: VerifiedInitData, payload: dict[str, Any]):
+    topic_id = payload.get("topic_id")
+    count = payload.get("question_count")
+    if not isinstance(topic_id, str) or count not in {5, 10, "all", None}:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
+    state = start_glossary_session(verified.telegram_user_id, topic_id, count)
+    if state is None:
+        return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "glossary_unavailable"})
+    return _json(HTTPStatus.OK, {"ok": True, "mode": "glossary", "glossary_state": state})
+
+
+def _build_existing_endpoint_glossary_answer_response(verified: VerifiedInitData, payload: dict[str, Any]):
+    action = payload.get("action")
+    session_id = payload.get("session_id")
+    if action not in {"answer", "next", "restart"}:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_action"})
+    if not isinstance(session_id, str):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_session"})
+    if action == "answer":
+        selected = payload.get("selected_option_index")
+        if not isinstance(selected, int):
+            return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
+        state = answer_glossary_session(verified.telegram_user_id, session_id, selected)
+        error = "invalid_glossary_answer"
+    elif action == "next":
+        state = next_glossary_session(verified.telegram_user_id, session_id)
+        error = "invalid_glossary_session"
+    else:
+        state = restart_glossary_session(verified.telegram_user_id, session_id)
+        error = "invalid_glossary_session"
+    if state is None:
+        return _json(HTTPStatus.CONFLICT, {"ok": False, "error": error})
+    return _json(HTTPStatus.OK, {"ok": True, "mode": "glossary", "glossary_state": state})
+
 def _find_latest_session_id_for_feedback(conn, actor_user_id: int) -> int | None:
     row = conn.execute(
         """
@@ -361,6 +401,8 @@ def build_answer_response(
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
     if not isinstance(payload, dict):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
+    if payload.get("mode") == "glossary":
+        return _build_existing_endpoint_glossary_answer_response(verified, payload)
     req = (payload.get("session_id"), payload.get("question_id"), payload.get("selected_option_index"))
     if not all(type(v) is int for v in req):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
@@ -439,6 +481,8 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
     if not isinstance(payload, dict):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
+    if _is_glossary_setup_payload(payload):
+        return _build_existing_endpoint_glossary_setup_response(verified, payload)
 
     quiz_mode = payload.get("quiz_mode")
     question_count = payload.get("question_count")

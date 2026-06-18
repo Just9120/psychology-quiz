@@ -495,6 +495,79 @@ class MiniAppApiTests(unittest.TestCase):
         finally:
             server.shutdown()
             server.server_close()
+    def test_existing_setup_endpoint_starts_glossary_without_db(self):
+        from app.glossary import GLOSSARY_TOPICS
+        topic_id = GLOSSARY_TOPICS[0][0]
+        with patch('app.miniapp_api.get_connection', side_effect=AssertionError('DB should not be used')):
+            code, _, body = build_setup_response(
+                '/tmp/unused.sqlite3',
+                self.bot_token,
+                self.init_data,
+                json.dumps({'mode': 'glossary', 'topic_id': topic_id, 'question_count': 5}).encode(),
+            )
+        self.assertEqual(200, code)
+        payload = json.loads(body.decode('utf-8'))
+        self.assertTrue(payload['ok'])
+        self.assertEqual('glossary', payload['mode'])
+        self.assertEqual('in_progress', payload['glossary_state']['state'])
+        self.assertIn('current_question', payload['glossary_state'])
+
+    def test_existing_setup_endpoint_accepts_quiz_mode_glossary_compat(self):
+        from app.glossary import GLOSSARY_TOPICS
+        topic_id = GLOSSARY_TOPICS[0][0]
+        code, _, body = build_setup_response(
+            '/tmp/unused.sqlite3',
+            self.bot_token,
+            self.init_data,
+            json.dumps({'quiz_mode': 'glossary', 'topic_id': topic_id, 'question_count': 5}).encode(),
+        )
+        self.assertEqual(200, code)
+        payload = json.loads(body.decode('utf-8'))
+        self.assertTrue(payload['ok'])
+        self.assertEqual('glossary', payload['mode'])
+
+    def test_existing_answer_endpoint_handles_glossary_answer_next_restart_without_db(self):
+        from app.glossary import GLOSSARY_TOPICS
+        topic_id = GLOSSARY_TOPICS[0][0]
+        code, _, body = build_setup_response(
+            '/tmp/unused.sqlite3',
+            self.bot_token,
+            self.init_data,
+            json.dumps({'mode': 'glossary', 'topic_id': topic_id, 'question_count': 5}).encode(),
+        )
+        self.assertEqual(200, code)
+        question = json.loads(body.decode('utf-8'))['glossary_state']['current_question']
+        session_id = question['session_id']
+        selected = question['options'][0]['option_index']
+        with patch('app.miniapp_api.get_connection', side_effect=AssertionError('DB should not be used')):
+            code, _, body = build_answer_response(
+                '/tmp/unused.sqlite3',
+                self.bot_token,
+                self.init_data,
+                json.dumps({'mode': 'glossary', 'action': 'answer', 'session_id': session_id, 'selected_option_index': selected}).encode(),
+            )
+            self.assertEqual(200, code)
+            feedback_state = json.loads(body.decode('utf-8'))['glossary_state']
+            self.assertEqual('feedback', feedback_state['state'])
+            self.assertIn('feedback', feedback_state)
+            code, _, body = build_answer_response(
+                '/tmp/unused.sqlite3',
+                self.bot_token,
+                self.init_data,
+                json.dumps({'mode': 'glossary', 'action': 'next', 'session_id': session_id}).encode(),
+            )
+            self.assertEqual(200, code)
+            next_state = json.loads(body.decode('utf-8'))['glossary_state']
+            self.assertIn(next_state['state'], {'in_progress', 'completed'})
+            code, _, body = build_answer_response(
+                '/tmp/unused.sqlite3',
+                self.bot_token,
+                self.init_data,
+                json.dumps({'mode': 'glossary', 'action': 'restart', 'session_id': session_id}).encode(),
+            )
+        self.assertEqual(200, code)
+        restarted = json.loads(body.decode('utf-8'))['glossary_state']
+        self.assertEqual('in_progress', restarted['state'])
 
 if __name__ == '__main__':
     unittest.main()
@@ -512,7 +585,7 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
         with patch('app.miniapp_api.get_connection', side_effect=AssertionError('DB should not be used')):
             code, _, body = build_glossary_topics_response(self.bot_token, self.init_data)
         self.assertEqual(200, code)
-        payload = self._payload(body)
+        payload = json.loads(body.decode('utf-8'))
         self.assertTrue(payload['ok'])
         self.assertIn({'mode': 'topics', 'title': 'Тесты по темам'}, payload['modes'])
         self.assertIn({'mode': 'glossary', 'title': 'Глоссарий'}, payload['modes'])
@@ -544,7 +617,7 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
                 json.dumps({'topic_id': topic_id, 'question_count': 5}).encode(),
             )
             self.assertEqual(200, code)
-            payload = self._payload(body)
+            payload = json.loads(body.decode('utf-8'))
             state = payload['glossary_state']
             q = state['current_question']
             self.assertEqual('in_progress', state['state'])
@@ -563,7 +636,7 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
                 json.dumps({'session_id': session_id, 'selected_option_index': selected}).encode(),
             )
             self.assertEqual(200, code)
-            feedback = self._payload(body)['glossary_state']['feedback']
+            feedback = json.loads(body.decode('utf-8'))['glossary_state']['feedback']
             self.assertIn('selected_option_text', feedback)
             self.assertIn('correct_option_text', feedback)
             self.assertIn('explanation', feedback)
@@ -578,7 +651,7 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
                     json.dumps({'session_id': session_id}).encode(),
                 )
                 self.assertEqual(200, code)
-                state = self._payload(body)['glossary_state']
+                state = json.loads(body.decode('utf-8'))['glossary_state']
                 if state['state'] == 'completed':
                     final = state['result']
                     break
@@ -598,5 +671,5 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
                 json.dumps({'session_id': session_id}).encode(),
             )
             self.assertEqual(200, code)
-            restarted = self._payload(body)['glossary_state']
+            restarted = json.loads(body.decode('utf-8'))['glossary_state']
             self.assertEqual('in_progress', restarted['state'])

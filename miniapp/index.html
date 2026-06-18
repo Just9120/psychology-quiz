@@ -1730,7 +1730,7 @@
         runnerState.textContent = 'Не удалось открыть глоссарий. Попробуйте закрыть окно и открыть /ui заново.';
         const safeDetails = {
           attempted_sources: Array.isArray(details.attempted_sources) ? details.attempted_sources.map((source) => String(source).slice(0, 32)) : [],
-          endpoint: String(details.endpoint || '/miniapp/glossary/topics'),
+          endpoint: String(details.endpoint || '/miniapp/setup-options'),
           http_status: details.http_status === undefined || details.http_status === null ? '' : String(details.http_status).slice(0, 8),
           parse_failure_type: details.parse_failure_type ? String(details.parse_failure_type).slice(0, 40) : '',
           request_id: details.request_id ? String(details.request_id).slice(0, 64) : '',
@@ -1788,7 +1788,7 @@
           btn.textContent = count === 'all' ? 'Все доступные' : String(count);
           btn.addEventListener('click', async () => {
             runnerState.textContent = 'Запуск теста по глоссарию...';
-            const { resp, data } = await glossaryFetch('/miniapp/glossary/start', { topic_id: topic.topic_id, question_count: count });
+            const { resp, data } = await glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: count });
             if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
             else runnerState.textContent = 'Не удалось начать тест по глоссарию.';
           });
@@ -1831,7 +1831,7 @@
           btn.type = 'button';
           btn.textContent = opt.option_text;
           btn.addEventListener('click', async () => {
-            const { resp, data } = await glossaryFetch('/miniapp/glossary/answer', { session_id: q.session_id, selected_option_index: Number(opt.option_index) });
+            const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'answer', session_id: q.session_id, selected_option_index: Number(opt.option_index) });
             if (resp.ok && data?.ok) renderGlossaryFeedback(q, data.glossary_state.feedback);
           });
           li.appendChild(btn);
@@ -1863,7 +1863,7 @@
         next.textContent = 'Далее';
         next.className = 'answer-next';
         next.addEventListener('click', async () => {
-          const { resp, data } = await glossaryFetch('/miniapp/glossary/next', { session_id: question.session_id });
+          const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'next', session_id: question.session_id });
           if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
         });
         wrap.appendChild(next);
@@ -1887,7 +1887,7 @@
         retry.type = 'button';
         retry.textContent = 'Пройти ещё раз';
         retry.addEventListener('click', async () => {
-          const { resp, data } = await glossaryFetch('/miniapp/glossary/restart', { session_id: glossaryLastSessionId });
+          const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'restart', session_id: glossaryLastSessionId });
           if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
         });
         card.appendChild(retry);
@@ -1936,20 +1936,6 @@
           lastFailure = { endpoint: '/miniapp/setup-options', parse_failure_type: 'request_exception', request_id: requestId };
         }
 
-        attemptedSources.push('glossary-topics');
-        try {
-          const { resp, data, parseFailureType } = await glossaryFetch('/miniapp/glossary/topics', null, requestId);
-          const topics = getGlossaryTopicsFromSetupPayload(data);
-          if (resp.ok && data?.ok === true && hasUsableGlossaryTopics(topics)) {
-            glossaryTopicsCache = topics;
-            glossarySetupCache.topics = topics;
-            renderGlossaryTopics(glossaryTopicsCache);
-            return;
-          }
-          lastFailure = { endpoint: '/miniapp/glossary/topics', http_status: resp.status, parse_failure_type: parseFailureType || (resp.ok ? 'unexpected_payload' : 'non_ok_response'), request_id: requestId };
-        } catch (_) {
-          lastFailure = { endpoint: '/miniapp/glossary/topics', parse_failure_type: 'request_exception', request_id: requestId };
-        }
         showGlossaryOpenError({ ...lastFailure, attempted_sources: attemptedSources });
       });
 
