@@ -327,10 +327,18 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_glossary_open_uses_setup_options_only_for_primary_flow(self):
         self.assertIn("await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`", self.content)
+        self.assertIn("topics: getGlossaryTopicsFromSetupPayload(ctx)", self.content)
         self.assertIn("payload?.setup?.glossary?.topics", self.content)
         self.assertIn("payload?.glossary?.topics", self.content)
         self.assertIn("payload?.setup_options?.glossary?.topics", self.content)
         self.assertNotIn("/miniapp/glossary/topics", self.content)
+
+    def test_glossary_click_prefers_context_cache_before_setup_options(self):
+        handler_start = self.content.index("modeGlossary.addEventListener('click', async () => {")
+        handler = self.content[handler_start:self.content.index("      });", handler_start) + 10]
+        self.assertLess(handler.index("const cachedTopics = getGlossaryTopicsFromSetupCache();"), handler.index("attemptedSources.push('setup-options');"))
+        self.assertLess(handler.index("renderGlossaryTopics(glossaryTopicsCache);"), handler.index("if (!apiBase || !tg?.initData)"))
+        self.assertIn("showGlossaryOpenError({ ...lastFailure, attempted_sources: attemptedSources });", handler)
 
     def test_glossary_primary_flow_uses_existing_endpoints_only(self):
         self.assertIn("glossaryFetch('/miniapp/setup', { mode: 'glossary'", self.content)

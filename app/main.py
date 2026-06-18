@@ -58,6 +58,7 @@ from app.db import (
 
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
 from app.miniapp_api import start_miniapp_api_server
+from app.miniapp_glossary import list_glossary_topics_payload
 from app.glossary import (
     GLOSSARY_QUIZ_SESSION_KEY,
     GLOSSARY_UNAVAILABLE_TEXT,
@@ -661,6 +662,10 @@ async def post_init(application: Application) -> None:
     )
 
 
+def _safe_miniapp_glossary_context() -> dict:
+    return list_glossary_topics_payload()
+
+
 def build_miniapp_setup_context(categories, question_snapshot: dict | None = None, runner_state: dict | None = None) -> dict:
     context = {
         "type": "miniapp_setup_context",
@@ -668,6 +673,7 @@ def build_miniapp_setup_context(categories, question_snapshot: dict | None = Non
         "frontend_version": MINIAPP_FRONTEND_VERSION,
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories],
         "mode": "setup",
+        "glossary": _safe_miniapp_glossary_context(),
     }
     if question_snapshot is not None:
         context["current_question_snapshot"] = question_snapshot
@@ -752,6 +758,8 @@ def _build_miniapp_context(
         "mode": mode,
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories] if include_categories else [],
     }
+    if mode == "setup":
+        context["glossary"] = _safe_miniapp_glossary_context()
     if selected_state is not None:
         context["runner_state"] = selected_state
     if api_base_url:
