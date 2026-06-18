@@ -11,6 +11,8 @@ flock -n 200 || {
 PROJECT_DIR="${PROJECT_DIR:-/opt/psychology-quiz}"
 DEPLOY_BRANCH="${DEPLOY_BRANCH:-main}"
 SERVICE_NAME="${SERVICE_NAME:-psych_quiz_bot}"
+MINIAPP_API_SERVICE_NAME="${MINIAPP_API_SERVICE_NAME:-psych_quiz_miniapp_api}"
+RUNTIME_SERVICE_NAMES=("${SERVICE_NAME}" "${MINIAPP_API_SERVICE_NAME}")
 
 log() {
   echo "[deploy] $*"
@@ -67,21 +69,28 @@ ensure_safe_service_name() {
 
 ensure_service_identity() {
   ensure_safe_service_name
+  [[ "${MINIAPP_API_SERVICE_NAME}" =~ ^[A-Za-z0-9_.-]+$ ]] || fail "Configured Mini App API service name contains unsupported characters."
+  local expected_service=""
+  local found_service=""
   local raw_line=""
   local trimmed_line=""
   local service_key=""
 
-  while IFS= read -r raw_line || [[ -n "${raw_line}" ]]; do
-    trimmed_line="$(trim "${raw_line}")"
-    [[ "${trimmed_line}" == *":"* ]] || continue
-    service_key="$(trim "${trimmed_line%%:*}")"
-    if [[ "${service_key}" == "${SERVICE_NAME}" ]]; then
-      log "Service identity check passed: ${SERVICE_NAME}"
-      return 0
-    fi
-  done < docker-compose.yml
+  for expected_service in "${RUNTIME_SERVICE_NAMES[@]}"; do
+    found_service=0
+    while IFS= read -r raw_line || [[ -n "${raw_line}" ]]; do
+      trimmed_line="$(trim "${raw_line}")"
+      [[ "${trimmed_line}" == *":"* ]] || continue
+      service_key="$(trim "${trimmed_line%%:*}")"
+      if [[ "${service_key}" == "${expected_service}" ]]; then
+        log "Service identity check passed: ${expected_service}"
+        found_service=1
+        break
+      fi
+    done < docker-compose.yml
 
-  fail "Expected service is not present in docker-compose.yml."
+    [[ "${found_service}" -eq 1 ]] || fail "Expected service is not present in docker-compose.yml: ${expected_service}"
+  done
 }
 
 ensure_required_runtime_files() {
@@ -215,13 +224,21 @@ validate_runtime_env() {
 
 post_check() {
   if [[ "${NEEDS_RESTART}" -eq 1 ]]; then
-    log "Running post-check for ${SERVICE_NAME} container state."
+    log "Running post-check for runtime container state."
+    docker compose ps "${RUNTIME_SERVICE_NAMES[@]}"
+
+    local service_name=""
     local container_id=""
-    container_id="$(docker compose ps -q "${SERVICE_NAME}")"
-    [[ -n "${container_id}" ]] || fail "Post-check failed: expected service container was not found."
-    [[ "$(docker inspect -f '{{.State.Running}}' "${container_id}")" == "true" ]] \
-      || fail "Post-check failed: expected service container is not running."
-    log "Post-check passed: ${SERVICE_NAME} container is running."
+    for service_name in "${RUNTIME_SERVICE_NAMES[@]}"; do
+      container_id="$(docker compose ps -q "${service_name}")"
+      [[ -n "${container_id}" ]] || fail "Post-check failed: expected service container was not found: ${service_name}"
+      [[ "$(docker inspect -f '{{.State.Running}}' "${container_id}")" == "true" ]] \
+        || fail "Post-check failed: expected service container is not running: ${service_name}"
+      log "Post-check passed: ${service_name} container is running."
+    done
+
+    log "Recent Mini App API logs"
+    docker compose logs --tail=50 "${MINIAPP_API_SERVICE_NAME}"
   else
     log "No restart post-check required because restart was not needed."
   fi
@@ -293,9 +310,11 @@ log "needs build: ${NEEDS_BUILD}"
 log "needs seed: ${NEEDS_SEED}"
 log "needs restart: ${NEEDS_RESTART}"
 
-if [[ "${NEEDS_BUILD}" -eq 1 ]]; then
+if [[ "${NEEDS_BUILD}" -eq 1 && "${NEEDS_RESTART}" -eq 0 ]]; then
   log "Running build for ${SERVICE_NAME}"
   docker compose build "${SERVICE_NAME}"
+elif [[ "${NEEDS_BUILD}" -eq 1 ]]; then
+  log "Build will run during runtime service restart"
 else
   log "Skipping build"
 fi
@@ -310,8 +329,8 @@ else
 fi
 
 if [[ "${NEEDS_RESTART}" -eq 1 ]]; then
-  log "Restarting ${SERVICE_NAME}"
-  docker compose up -d --force-recreate "${SERVICE_NAME}"
+  log "Rebuilding and restarting runtime services: ${RUNTIME_SERVICE_NAMES[*]}"
+  docker compose up -d --build --force-recreate "${RUNTIME_SERVICE_NAMES[@]}"
 else
   log "Skipping restart"
 fi
