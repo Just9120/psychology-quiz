@@ -544,7 +544,8 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertEqual(
             [
                 [START_QUIZ_BUTTON_TEXT, MINI_APP_BUTTON_TEXT],
-                [READING_MODE_BUTTON_TEXT, "ℹ️ Помощь"],
+                [READING_MODE_BUTTON_TEXT, "📚 Глоссарий"],
+                ["ℹ️ Помощь"],
                 ["🙈 Скрыть меню"],
             ],
             rows,

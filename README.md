@@ -132,8 +132,10 @@ Operational deploy/seed/restart details and safety boundaries belong in [`docs/c
 - Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram: через `/ui` или через кнопку нижнего меню `🚀 В окне`.
 - Кнопка `🚀 В окне` запускает безопасный fresh-flow: бот отправляет новое сообщение с inline WebApp-кнопкой `🚀 Открыть викторину`, а не хранит persistent `web_app` URL в reply keyboard.
 - Текущий Mini App MVP покрывает setup, state hydration, показ текущего вопроса, отправку ответа, feedback, переход к следующему шагу и итоговый результат с рестартом в окне Mini App.
+- `/ui` поддерживает обычный тест по темам и режим теста по глоссарию.
+- Режим глоссария в Mini App использует статические JSON-файлы `content/glossary` и не показывает provenance/source refs.
 - `/quiz` остаётся дефолтным entry point и классическим chat-based runner.
-- Mini App использует backend API (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state.
+- Mini App использует backend API (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state; glossary endpoints are separate and transient.
 
 ## Что вне текущего продуктового контура
 
