@@ -23,6 +23,7 @@ from app.main import (
     _build_compact_runner_question_payload,
     build_miniapp_setup_context,
     build_miniapp_url,
+    build_miniapp_setup_entrypoint_url,
     build_miniapp_url_with_fallback,
     build_menu_button_regex,
     build_miniapp_launch_inline_keyboard,
@@ -35,6 +36,12 @@ from app.main import (
     ui_command,
 )
 from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_question_snapshot, submit_miniapp_answer_event
+
+
+def _decode_context_from_url(url: str) -> dict:
+    encoded = url.split("context=", 1)[1]
+    padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
+    return json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
 
 
 def _setup_schema(conn: sqlite3.Connection) -> None:
@@ -374,6 +381,31 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertEqual("runner", ctx.get("mode"))
         self.assertEqual([], ctx.get("categories"))
 
+    def test_setup_entrypoint_url_forces_setup_with_active_runner_state(self):
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        self.assertEqual("in_progress", state.get("state"))
+        url, used_fallback = build_miniapp_setup_entrypoint_url(
+            "https://example.com/ui",
+            [{"id": 1, "name": "Category 1"}],
+            abandons_active_session=True,
+            api_base_url="https://api.example.com",
+        )
+        self.assertFalse(used_fallback)
+        self.assertIsNotNone(url)
+        ctx = _decode_context_from_url(url)
+        self.assertEqual("setup", ctx.get("mode"))
+        self.assertEqual([{"id": 1, "name": "Category 1"}], ctx.get("categories"))
+        self.assertIn("glossary", ctx)
+        self.assertTrue(ctx.get("abandons_active_session"))
+        self.assertEqual("https://api.example.com", ctx.get("api_base_url"))
+
+    def test_miniapp_static_contains_mode_chooser_buttons(self):
+        with open("miniapp/index.html", "r", encoding="utf-8") as f:
+            html = f.read()
+        self.assertIn('id="mode_view"', html)
+        self.assertIn("Тесты по темам", html)
+        self.assertIn("Глоссарий", html)
+
     def test_completed_context_omits_categories(self):
         self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
@@ -507,6 +539,52 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
         self.assertEqual(replacement, state.get("session", {}).get("session_id"))
 
+
+    def test_ui_command_launches_setup_entrypoint_with_active_session(self):
+        with tempfile.NamedTemporaryFile(suffix=".db") as db_file:
+            db_conn = sqlite3.connect(db_file.name)
+            db_conn.row_factory = sqlite3.Row
+            db_conn.execute("PRAGMA foreign_keys = ON;")
+            _setup_schema(db_conn)
+            db_conn.execute("INSERT INTO categories (slug, name) VALUES ('cat-1', 'Category 1')")
+            db_conn.execute("INSERT INTO questions (external_id, category_id, source_ref, difficulty, status, question_text, explanation) VALUES ('q1', 1, 'src', 'easy', 'approved', 'Q1?', 'E1')")
+            db_conn.execute("INSERT INTO question_options (question_id, option_index, option_text, is_correct) VALUES (1, 0, 'A', 1), (1, 1, 'B', 0)")
+            user = create_or_load_user(db_conn, 12345, "u", "U", None)
+            session_id = start_quiz_session(db_conn, int(user["id"]), 1)
+            store_session_questions(db_conn, session_id, [1])
+            db_conn.commit()
+            db_conn.close()
+
+            message = SimpleNamespace(reply_text=AsyncMock())
+            update = SimpleNamespace(
+                message=message,
+                effective_chat=SimpleNamespace(type="private"),
+                effective_user=SimpleNamespace(id=12345, username="u", first_name="U", last_name=None),
+            )
+            context = SimpleNamespace(
+                application=SimpleNamespace(
+                    bot_data={
+                        "settings": SimpleNamespace(
+                            db_path=db_file.name,
+                            mini_app_url="https://example.com/ui",
+                            mini_app_api_base_url="https://api.example.com",
+                        )
+                    }
+                ),
+                user_data={},
+            )
+
+            asyncio.run(ui_command(update, context))
+
+            call = message.reply_text.await_args
+            self.assertIn("Запуск новой викторины завершит текущую активную попытку.", call.args[0])
+            inline_markup = call.kwargs["reply_markup"]
+            self.assertEqual(1, len(inline_markup.inline_keyboard))
+            launch_url = inline_markup.inline_keyboard[0][0].web_app.url
+            ctx = _decode_context_from_url(launch_url)
+            self.assertEqual("setup", ctx.get("mode"))
+            self.assertIn("glossary", ctx)
+            self.assertTrue(ctx.get("abandons_active_session"))
 
     def test_ui_command_uses_inline_launch_only_without_reply_webapp_keyboard(self):
         with tempfile.NamedTemporaryFile(suffix=".db") as db_file:
