@@ -3,6 +3,7 @@
 ## Current status dashboard
 - ✅ `REFACTOR-RFC-MINIAPP-BOT-001` — Mini App / bot refactor RFC added; proposal defines incremental no-UX-change seams and recommends Mini App context extraction first.
 - ✅ `REFACTOR-MINIAPP-CONTEXT-EXTRACT-001` — Mini App context encoding, URL construction, setup entrypoint, compact runner payload, and URL-length fallback helpers extracted from `app/main.py` into `app/miniapp_context.py` without UX/runtime/API/deploy/DB/content changes.
+- ✅ `REFACTOR-MINIAPP-ENTRYPOINT-HANDLERS-EXTRACT-001` — `/ui` and `🚀 В окне` Mini App launch orchestration extracted from `app/main.py` into `app/miniapp_entrypoint_handlers.py` without UX/runtime/API/deploy/DB/content changes.
 - ✅ Module 1 content QA — answer-position cleanup completed; flagged long-stem readability candidates shortened; repo-local source_ref hygiene reviewed; `m1-q3` kept stable as an intentional legacy ID.
 - ✅ Module 2 content QA — experimental-psychology answer-position balance completed; qualitative-methods light polish completed with `m2_qual_023` / `m2_qual_041` kept as intentional scaffolding; repo-local source_ref hygiene reviewed; qualitative-methods provenance-limited tracking report added without changing question JSON.
 - ✅ Module 3 first active scope — `Психологическое консультирование` contains 108 approved source-backed questions after the consulting content and polish sequence.
@@ -35,7 +36,7 @@
 | **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline. |
 
 ## Next recommended item
-1. Implement `REFACTOR-MINIAPP-ENTRYPOINT-HANDLERS-EXTRACT-001`: extract `/ui` and `🚀 В окне` Mini App launch orchestration into `app/miniapp_entrypoint_handlers.py` as the next no-UX-change refactor seam from `docs/proposals/refactor-plan-miniapp-bot.md`.
+1. Implement `REFACTOR-MINIAPP-GLOSSARY-HANDLERS-EXTRACT-001`: extract Telegram chat `/glossary` / `📚 Глоссарий` orchestration into `app/glossary_handlers.py` as the next no-UX-change refactor seam from `docs/proposals/refactor-plan-miniapp-bot.md`.
 2. If original local/Drive source packs are available, continue source-backed Module 1/2 alignment before substantive content edits; repo-local source_ref hygiene and the Module 2 qualitative provenance-limited tracking report should not be overclaimed as full alignment or final source-backed certification.
 3. Keep Module 2 experimental difficulty/onboarding review as optional future work only if new experimental-psychology content work is planned.
 4. Keep future Module 3 expansion in separate focused source-backed batches; do not create a separate practice category unless explicitly decided.

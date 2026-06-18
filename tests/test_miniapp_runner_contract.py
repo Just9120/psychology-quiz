@@ -27,6 +27,9 @@ from app.main import (
     ping_command,
     post_init,
     start_command,
+)
+from app.miniapp_entrypoint_handlers import (
+    mini_app_menu_button_handler,
     ui_command,
 )
 from app.miniapp_context import (
@@ -541,6 +544,23 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id)
         self.assertEqual(replacement, state.get("session", {}).get("session_id"))
 
+
+    def test_ui_command_is_imported_from_entrypoint_module(self):
+        from app import main as main_module
+        from app import miniapp_entrypoint_handlers as entrypoint_module
+
+        self.assertIs(ui_command, entrypoint_module.ui_command)
+        self.assertIs(main_module.ui_command, entrypoint_module.ui_command)
+        self.assertIs(main_module.mini_app_menu_button_handler, entrypoint_module.mini_app_menu_button_handler)
+
+    def test_main_registers_ui_and_menu_handlers_with_entrypoint_handlers(self):
+        import app.main as main_module
+
+        source = inspect.getsource(main_module.main)
+        self.assertIn('CommandHandler("ui", ui_command)', source)
+        self.assertIn('build_menu_button_regex(*MINI_APP_BUTTON_ALIASES)', source)
+        self.assertIn('mini_app_menu_button_handler', source)
+        self.assertIsNotNone(mini_app_menu_button_handler)
 
     def test_ui_command_launches_setup_entrypoint_with_active_session(self):
         with tempfile.NamedTemporaryFile(suffix=".db") as db_file:
