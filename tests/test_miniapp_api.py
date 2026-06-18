@@ -513,6 +513,14 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
         self.assertIn('Качественные методы исследования', titles)
         self.assertIn('Основы экспериментальной психологии', titles)
 
+
+    def test_fastapi_route_list_includes_glossary_topics(self):
+        from app.miniapp_fastapi import create_app
+        app = create_app(db_path=':memory:', bot_token=self.bot_token)
+        routes = {(route.path, method) for route in app.routes for method in getattr(route, 'methods', set())}
+        self.assertIn(('/miniapp/glossary/topics', 'GET'), routes)
+        self.assertIn(('/miniapp/glossary/topics', 'OPTIONS'), routes)
+
     def test_glossary_start_answer_next_final_restart_hide_internal_fields(self):
         from app.glossary import GLOSSARY_TOPICS
         from app.miniapp_api import (

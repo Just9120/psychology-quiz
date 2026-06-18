@@ -306,6 +306,23 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
 
 
+    def test_glossary_open_has_loading_fallback_and_visible_failure(self):
+        self.assertIn("msg.textContent = 'Загружаем глоссарий...';", self.content)
+        self.assertIn("runnerState.textContent = 'Загружаем глоссарий...';", self.content)
+        self.assertIn("Не удалось открыть глоссарий. Закройте окно и откройте /ui заново.", self.content)
+        self.assertIn("parseFailureType || (resp.ok ? 'unexpected_payload' : 'non_ok_response')", self.content)
+        self.assertIn("parse_failure_type: 'request_exception'", self.content)
+        self.assertIn("parse_failure_type: 'missing_api_or_init_data'", self.content)
+        self.assertIn("const text = await resp.text();", self.content)
+        self.assertIn("JSON.parse(text)", self.content)
+        self.assertIn("parseFailureType: 'invalid_json'", self.content)
+        self.assertIn("parseFailureType: 'empty_body'", self.content)
+        self.assertIn("function getGlossaryTopicsFromSetupCache()", self.content)
+        self.assertIn("glossarySetupCache.topics = topics;", self.content)
+        self.assertIn("if (cachedTopics.length > 0)", self.content)
+        self.assertIn("console.info('miniapp_glossary_open_failed'", self.content)
+
+
     def test_docs_numbered_h2_headings_have_unique_numbers(self):
         docs = Path('docs/miniapp-deployment-qa.md').read_text(encoding='utf-8')
         numbers = re.findall(r'^## (\d+)\)', docs, flags=re.MULTILINE)

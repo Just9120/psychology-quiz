@@ -391,6 +391,9 @@
       const setupOptionsCache = {
         categories: Array.isArray(ctx?.categories) ? ctx.categories : [],
       };
+      const glossarySetupCache = {
+        topics: Array.isArray(ctx?.glossary?.topics) ? ctx.glossary.topics : [],
+      };
       let setupRenderCategories = null;
       let currentCategoryInputType = '';
       let answerSubmitInFlight = false;
@@ -1650,12 +1653,58 @@
       let glossaryTopicsCache = [];
       let glossaryLastSessionId = '';
 
-      function glossaryFetch(path, payload = null) {
+      async function glossaryFetch(path, payload = null, requestId = '') {
         const initData = tg?.initData || '';
         const options = payload === null
-          ? { headers: { Authorization: `tma ${initData}` } }
+          ? { headers: withMiniappRequestId({ Authorization: `tma ${initData}` }, requestId) }
           : { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: JSON.stringify({ init_data: initData, payload }) };
-        return apiFetch(`${apiBase}${path}`, options, 9000).then((resp) => resp.json().then((data) => ({ resp, data })));
+        const resp = await apiFetch(`${apiBase}${path}`, options, 9000);
+        const text = await resp.text();
+        if (!text.trim()) return { resp, data: null, parseFailureType: 'empty_body' };
+        try {
+          return { resp, data: JSON.parse(text), parseFailureType: '' };
+        } catch (_) {
+          return { resp, data: null, parseFailureType: 'invalid_json' };
+        }
+      }
+
+      function getGlossaryTopicsFromSetupCache() {
+        const topics = Array.isArray(glossarySetupCache.topics) ? glossarySetupCache.topics : [];
+        return topics.length > 0 ? topics : [];
+      }
+
+      function showGlossaryLoading() {
+        showGlossaryView();
+        glossaryView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const msg = document.createElement('p');
+        msg.textContent = 'Загружаем глоссарий...';
+        card.appendChild(msg);
+        glossaryView.appendChild(card);
+        runnerState.textContent = 'Загружаем глоссарий...';
+      }
+
+      function showGlossaryOpenError(details = {}) {
+        showGlossaryView();
+        glossaryView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const msg = document.createElement('p');
+        msg.className = 'err';
+        msg.textContent = 'Не удалось открыть глоссарий. Закройте окно и откройте /ui заново.';
+        card.appendChild(msg);
+        glossaryView.appendChild(card);
+        runnerState.textContent = 'Не удалось открыть глоссарий. Закройте окно и откройте /ui заново.';
+        const safeDetails = {
+          endpoint: String(details.endpoint || '/miniapp/glossary/topics'),
+          http_status: details.http_status === undefined || details.http_status === null ? '' : String(details.http_status).slice(0, 8),
+          parse_failure_type: details.parse_failure_type ? String(details.parse_failure_type).slice(0, 40) : '',
+          request_id: details.request_id ? String(details.request_id).slice(0, 64) : '',
+        };
+        if (debugMode) console.info('miniapp_glossary_open_failed', safeDetails);
+        const row = startTelemetry('glossary_topics', safeDetails.endpoint, safeDetails.request_id || undefined);
+        markTelemetry(row, 'action_done', { request_id: safeDetails.request_id, status: safeDetails.parse_failure_type || 'api_failed', http_code: safeDetails.http_status });
       }
 
       function showGlossaryView() {
@@ -1825,14 +1874,40 @@
 
       modeTopics.addEventListener('click', () => showSetupMode());
       modeGlossary.addEventListener('click', async () => {
+        showGlossaryLoading();
+        const cachedTopics = getGlossaryTopicsFromSetupCache();
         if (!apiBase || !tg?.initData) {
-          runnerState.textContent = 'Глоссарий в Mini App временно недоступен.';
+          if (cachedTopics.length > 0) {
+            glossaryTopicsCache = cachedTopics;
+            renderGlossaryTopics(glossaryTopicsCache);
+          } else {
+            showGlossaryOpenError({ endpoint: '/miniapp/glossary/topics', http_status: 'not_configured', parse_failure_type: 'missing_api_or_init_data' });
+          }
           return;
         }
-        const { resp, data } = await glossaryFetch('/miniapp/glossary/topics');
-        if (resp.ok && data?.ok) {
-          glossaryTopicsCache = data.glossary.topics || [];
-          renderGlossaryTopics(glossaryTopicsCache);
+        const requestId = buildMiniappRequestId();
+        try {
+          const { resp, data, parseFailureType } = await glossaryFetch('/miniapp/glossary/topics', null, requestId);
+          const topics = Array.isArray(data?.glossary?.topics) ? data.glossary.topics : [];
+          if (resp.ok && data?.ok === true && topics.length > 0) {
+            glossaryTopicsCache = topics;
+            glossarySetupCache.topics = topics;
+            renderGlossaryTopics(glossaryTopicsCache);
+            return;
+          }
+          if (cachedTopics.length > 0) {
+            glossaryTopicsCache = cachedTopics;
+            renderGlossaryTopics(glossaryTopicsCache);
+            return;
+          }
+          showGlossaryOpenError({ endpoint: '/miniapp/glossary/topics', http_status: resp.status, parse_failure_type: parseFailureType || (resp.ok ? 'unexpected_payload' : 'non_ok_response'), request_id: requestId });
+        } catch (_) {
+          if (cachedTopics.length > 0) {
+            glossaryTopicsCache = cachedTopics;
+            renderGlossaryTopics(glossaryTopicsCache);
+            return;
+          }
+          showGlossaryOpenError({ endpoint: '/miniapp/glossary/topics', parse_failure_type: 'request_exception', request_id: requestId });
         }
       });
 
