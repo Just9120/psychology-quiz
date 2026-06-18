@@ -1791,12 +1791,19 @@
       function showGlossaryStartError(details = {}) {
         const errorCode = details.error_code ? String(details.error_code).slice(0, 64) : '';
         const httpStatus = details.http_status === undefined || details.http_status === null ? '' : String(details.http_status).slice(0, 8);
+        const requestId = details.request_id ? String(details.request_id).slice(0, 64) : apiDiagState.setupRequestId;
         const message = getGlossaryStartErrorMessage(errorCode, httpStatus);
-        runnerState.textContent = message;
-        err.textContent = message;
+        const diagnosticLines = [
+          `Код: ${errorCode || 'unknown'}`,
+          `HTTP: ${httpStatus || 'unknown'}`,
+          `Request: ${requestId || 'unknown'}`,
+        ];
+        const visibleMessage = [message, ...diagnosticLines].join('\n');
+        runnerState.textContent = visibleMessage;
+        err.textContent = visibleMessage;
         apiDiagState.setupErrorCode = errorCode;
         apiDiagState.setupStatusCode = httpStatus;
-        apiDiagState.setupRequestId = details.request_id ? String(details.request_id).slice(0, 64) : apiDiagState.setupRequestId;
+        apiDiagState.setupRequestId = requestId;
         apiDiagState.setupFinalPhase = 'glossary_start_failed';
         renderApiDiagnostics();
         if (debugMode) console.info('miniapp_glossary_start_failed', { http_status: httpStatus, error_code: errorCode, request_id: apiDiagState.setupRequestId || '' });
