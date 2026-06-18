@@ -48,4 +48,6 @@ jobs:
           docker compose run --rm psych_quiz_bot python scripts/init_db.py
           docker compose run --rm psych_quiz_bot python scripts/seed_questions.py
           docker compose up -d --build --remove-orphans psych_quiz_bot psych_quiz_miniapp_api
+          docker compose ps psych_quiz_bot psych_quiz_miniapp_api
+          docker compose logs --tail=50 psych_quiz_miniapp_api
           REMOTE
