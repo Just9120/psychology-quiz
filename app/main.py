@@ -18,7 +18,6 @@ from telegram import (
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
     Update,
-    WebAppInfo,
 )
 from telegram.ext import (
     Application,
@@ -32,6 +31,14 @@ from telegram.ext import (
 
 from app.config import load_settings
 from app.logging_config import configure_app_logging
+from app.handler_latency import HandlerLatency as _HandlerLatency
+from app.miniapp_entrypoint_handlers import (
+    MINI_APP_BUTTON_ALIASES,
+    MINI_APP_BUTTON_TEXT,
+    build_miniapp_launch_inline_keyboard,
+    mini_app_menu_button_handler,
+    ui_command,
+)
 from app.db import (
     abandon_in_progress_sessions_for_user,
     create_or_load_user,
@@ -59,7 +66,6 @@ from app.miniapp_runner import build_miniapp_runner_state, get_current_miniapp_q
 from app.miniapp_api import start_miniapp_api_server
 from app.miniapp_context import (
     build_miniapp_setup_context,
-    build_miniapp_setup_entrypoint_url,
     build_miniapp_url,
     build_miniapp_url_with_fallback,
 )
@@ -99,14 +105,11 @@ DIFFICULTY_CHOICES = (
 )
 
 START_QUIZ_BUTTON_TEXT = "🎯 Начать"
-MINI_APP_BUTTON_TEXT = "🚀 В окне"
 READING_MODE_BUTTON_TEXT = "👁 Чтение"
 GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
-LEGACY_MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
-MINI_APP_BUTTON_ALIASES = (MINI_APP_BUTTON_TEXT, LEGACY_MINI_APP_BUTTON_TEXT)
 READING_MODE_BUTTON_ALIASES = (READING_MODE_BUTTON_TEXT, LEGACY_READING_MODE_BUTTON_TEXT)
 GLOSSARY_BUTTON_ALIASES = (GLOSSARY_BUTTON_TEXT, "Глоссарий")
 HELP_TEXT = (
@@ -141,102 +144,6 @@ LATENCY_LOG_PREFIX = "bot_latency"
 SLOW_LATENCY_LOG_PREFIX = "bot_latency_slow"
 SLOW_HANDLER_THRESHOLD_MS = 1000
 
-
-class _HandlerLatency:
-    def __init__(self, *, handler: str, command: str | None = None, callback_prefix: str | None = None, telegram_user_id: int | None = None, session_id: int | None = None):
-        self.handler = handler
-        self.command = command
-        self.callback_prefix = callback_prefix
-        self.telegram_user_id = telegram_user_id
-        self.session_id = session_id
-        self.status = "ok"
-        self.error_code: str | None = None
-        self._started_at = time.perf_counter()
-        self.db_elapsed_ms = 0
-        self.render_elapsed_ms = 0
-        self.telegram_api_elapsed_ms = 0
-        self.callback_ack_elapsed_ms = 0
-        self.message_edit_elapsed_ms = 0
-        self.message_send_elapsed_ms = 0
-        self.other_elapsed_ms = 0
-        self.extra_fields: dict[str, str] = {}
-
-    def add_db(self, started_at: float) -> None:
-        self.db_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
-
-    def add_render(self, started_at: float) -> None:
-        self.render_elapsed_ms += int((time.perf_counter() - started_at) * 1000)
-
-    def add_telegram_api(self, started_at: float, api_kind: str | None = None) -> None:
-        elapsed_ms = int((time.perf_counter() - started_at) * 1000)
-        self.telegram_api_elapsed_ms += elapsed_ms
-        if api_kind == "callback_ack":
-            self.callback_ack_elapsed_ms += elapsed_ms
-        elif api_kind == "message_edit":
-            self.message_edit_elapsed_ms += elapsed_ms
-        elif api_kind == "message_send":
-            self.message_send_elapsed_ms += elapsed_ms
-
-    def add_field(self, key: str, value: str | bool | int) -> None:
-        if re.fullmatch(r"[A-Za-z0-9_]{1,32}", key):
-            self.extra_fields[key] = str(value).lower() if isinstance(value, bool) else str(value)
-
-    def set_status(self, status: str) -> None:
-        if re.fullmatch(r"[A-Za-z0-9_]{1,32}", status):
-            self.status = status
-
-    def set_error(self, error_code: str) -> None:
-        self.status = "error"
-        self.error_code = error_code
-
-    def start(self) -> None:
-        fields = [
-            f"handler={self.handler}",
-            "phase=handler_start",
-        ]
-        if self.command:
-            fields.append(f"command={self.command}")
-        if self.callback_prefix:
-            fields.append(f"callback_prefix={self.callback_prefix}")
-        if self.telegram_user_id is not None:
-            fields.append(f"telegram_user_id={self.telegram_user_id}")
-        if self.session_id is not None:
-            fields.append(f"session_id={self.session_id}")
-        logger.info("%s %s", HANDLER_START_LOG_PREFIX, " ".join(fields))
-
-    def summary(self) -> None:
-        elapsed_ms = int((time.perf_counter() - self._started_at) * 1000)
-        known_elapsed_ms = self.db_elapsed_ms + self.render_elapsed_ms + self.telegram_api_elapsed_ms
-        self.other_elapsed_ms = max(0, elapsed_ms - known_elapsed_ms)
-        fields = [
-            f"handler={self.handler}",
-            f"phase=handler_done",
-            f"status={self.status}",
-            f"elapsed_ms={elapsed_ms}",
-            f"db_elapsed_ms={self.db_elapsed_ms}",
-            f"render_elapsed_ms={self.render_elapsed_ms}",
-            f"telegram_api_elapsed_ms={self.telegram_api_elapsed_ms}",
-            f"callback_ack_elapsed_ms={self.callback_ack_elapsed_ms}",
-            f"message_edit_elapsed_ms={self.message_edit_elapsed_ms}",
-            f"message_send_elapsed_ms={self.message_send_elapsed_ms}",
-            f"other_elapsed_ms={self.other_elapsed_ms}",
-        ]
-        if self.command:
-            fields.append(f"command={self.command}")
-        if self.callback_prefix:
-            fields.append(f"callback_prefix={self.callback_prefix}")
-        if self.telegram_user_id is not None:
-            fields.append(f"telegram_user_id={self.telegram_user_id}")
-        if self.session_id is not None:
-            fields.append(f"session_id={self.session_id}")
-        if self.error_code:
-            fields.append(f"error_code={self.error_code}")
-        for key in sorted(self.extra_fields):
-            fields.append(f"{key}={self.extra_fields[key]}")
-        payload = " ".join(fields)
-        logger.info("%s %s", LATENCY_LOG_PREFIX, payload)
-        if elapsed_ms >= SLOW_HANDLER_THRESHOLD_MS:
-            logger.warning("%s %s", SLOW_LATENCY_LOG_PREFIX, payload)
 
 
 def _safe_callback_prefix(data: object) -> str | None:
@@ -688,17 +595,6 @@ def build_post_setup_miniapp_prompt(
     )
 
 
-def build_miniapp_launch_inline_keyboard(
-    url: str,
-    *,
-    force_setup_url: str | None = None,
-    reopen_result: bool = False,
-) -> InlineKeyboardMarkup:
-    first_label = "📊 Показать результат" if reopen_result else "🚀 Открыть викторину"
-    keyboard = [[InlineKeyboardButton(first_label, web_app=WebAppInfo(url=url))]]
-    if force_setup_url:
-        keyboard.append([InlineKeyboardButton("🆕 Новая викторина", web_app=WebAppInfo(url=force_setup_url))])
-    return InlineKeyboardMarkup(keyboard)
 
 async def safe_reply(update: Update, text: str) -> None:
     if update.message:
@@ -1042,9 +938,6 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
         logger.debug("Не удалось удалить сообщение-триггер скрытия меню %s", message.message_id)
 
 
-async def mini_app_menu_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await ui_command(update, context)
-
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
@@ -1165,89 +1058,6 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         latency.add_telegram_api(api_started_at)
     latency.summary()
 
-
-async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    latency = _HandlerLatency(handler="ui_command", command="/ui", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
-    latency.start()
-    context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
-    if update.message is None:
-        return
-    if not is_private_chat(update):
-        await update.message.reply_text("Викторина в окне доступна только в личном чате с ботом.")
-        return
-
-    settings = context.application.bot_data["settings"]
-    if not settings.mini_app_url:
-        await update.message.reply_text(
-            "Викторина в окне пока не настроена. Можно пройти викторину в чате через /quiz."
-        )
-        return
-
-    tg_user = update.effective_user
-
-    def _load_ui_context():
-        with get_connection(settings.db_path) as conn:
-            categories = get_active_categories(conn)
-            runner_state = None
-            if tg_user is not None:
-                user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-                runner_state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
-            return categories, runner_state
-
-    db_started_at = time.perf_counter()
-    categories, runner_state = await _run_db_task(_load_ui_context)
-    latency.add_db(db_started_at)
-    if not categories:
-        api_started_at = time.perf_counter()
-        await update.message.reply_text(
-            "Сейчас нет доступных тем для запуска викторины.\n"
-            "Используйте /quiz позже или проверьте загрузку вопросов."
-        )
-        latency.add_telegram_api(api_started_at)
-        latency.summary()
-        return
-
-    has_active = isinstance(runner_state, dict) and runner_state.get("state") == "in_progress"
-    miniapp_url, fallback_mode = build_miniapp_setup_entrypoint_url(
-        settings.mini_app_url,
-        categories,
-        abandons_active_session=has_active,
-        api_base_url=settings.mini_app_api_base_url,
-    )
-    if miniapp_url is None:
-        await update.message.reply_text(
-            "Викторину в окне сейчас не удалось открыть. Попробуйте /ui ещё раз или пройдите её в чате через /quiz."
-        )
-        return
-    logger.debug("Mini App setup URL length: %s", len(miniapp_url))
-
-    intro_text = (
-        "Откройте викторину в удобном окне.\n"
-        "\n"
-        f"В чате её по-прежнему можно пройти через {START_QUIZ_BUTTON_TEXT}.\n"
-        "\n"
-        f"Если кнопка не открылась, нажмите {MINI_APP_BUTTON_TEXT} в меню или отправьте /ui ещё раз."
-    )
-    if fallback_mode:
-        intro_text = (
-            "Часть данных не поместилась в ссылку открытия. Если экран выглядит неполным, "
-            "откройте викторину заново или используйте /quiz.\n\n"
-            + intro_text
-        )
-    if has_active:
-        intro_text = (
-            "У вас уже есть начатая викторина. В окне можно выбрать новый режим.\n"
-            "Запуск новой викторины завершит текущую активную попытку.\n"
-            "\n"
-            f"Если кнопка не открылась, нажмите {MINI_APP_BUTTON_TEXT} в меню или отправьте /ui ещё раз."
-        )
-    api_started_at = time.perf_counter()
-    await update.message.reply_text(
-        intro_text,
-        reply_markup=build_miniapp_launch_inline_keyboard(miniapp_url),
-    )
-    latency.add_telegram_api(api_started_at)
-    latency.summary()
 
 
 async def send_current_question_to_chat(chat, settings, session_id: int) -> bool:
