@@ -215,17 +215,14 @@ def create_app(
     async def options_glossary_restart(request: Request) -> Response:
         return await _options_response("/miniapp/glossary/restart", request)
 
-    @app.get("/miniapp/state")
-    async def get_state(request: Request) -> Response:
+    async def _get_builder_response(endpoint: str, request: Request, builder: Any, *builder_args: Any) -> Response:
         started_at = time.perf_counter()
-        endpoint = "/miniapp/state"
         request_id = _read_request_id(request.headers)
         transport = "header_auth"
         init_data = _extract_init_data(request.headers)
         status, headers, body = await _run_builder_in_thread(
-            build_state_response,
-            db_path,
-            bot_token,
+            builder,
+            *builder_args,
             init_data,
             max_age_seconds=initdata_ttl_seconds,
         )
@@ -234,87 +231,7 @@ def create_app(
         _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
-    @app.get("/miniapp/setup-options")
-    async def get_setup_options(request: Request) -> Response:
-        started_at = time.perf_counter()
-        endpoint = "/miniapp/setup-options"
-        request_id = _read_request_id(request.headers)
-        transport = "header_auth"
-        init_data = _extract_init_data(request.headers)
-        status, headers, body = await _run_builder_in_thread(
-            build_setup_options_response,
-            db_path,
-            bot_token,
-            init_data,
-            max_age_seconds=initdata_ttl_seconds,
-        )
-        response = _to_response(status, headers, body)
-        _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
-        return response
-
-    @app.post("/miniapp/setup")
-    async def post_setup(request: Request) -> Response:
-        started_at = time.perf_counter()
-        endpoint = "/miniapp/setup"
-        request_id = _read_request_id(request.headers)
-        raw_body = await request.body()
-        init_data, payload_body, body_request_id, transport = _extract_transport_payload(request.headers, raw_body)
-        request_id = body_request_id or request_id
-        status, headers, body = await _run_builder_in_thread(
-            build_setup_response,
-            db_path,
-            bot_token,
-            init_data,
-            payload_body,
-            max_age_seconds=initdata_ttl_seconds,
-        )
-        response = _to_response(status, headers, body)
-        _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
-        return response
-
-    @app.post("/miniapp/answer")
-    async def post_answer(request: Request) -> Response:
-        started_at = time.perf_counter()
-        endpoint = "/miniapp/answer"
-        request_id = _read_request_id(request.headers)
-        raw_body = await request.body()
-        init_data, payload_body, body_request_id, transport = _extract_transport_payload(request.headers, raw_body)
-        request_id = body_request_id or request_id
-        status, headers, body = await _run_builder_in_thread(
-            build_answer_response,
-            db_path,
-            bot_token,
-            init_data,
-            payload_body,
-            max_age_seconds=initdata_ttl_seconds,
-        )
-        response = _to_response(status, headers, body)
-        _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
-        return response
-
-
-    @app.get("/miniapp/glossary/topics")
-    async def get_glossary_topics(request: Request) -> Response:
-        started_at = time.perf_counter()
-        endpoint = "/miniapp/glossary/topics"
-        request_id = _read_request_id(request.headers)
-        transport = "header_auth"
-        init_data = _extract_init_data(request.headers)
-        status, headers, body = await _run_builder_in_thread(
-            build_glossary_topics_response,
-            bot_token,
-            init_data,
-            max_age_seconds=initdata_ttl_seconds,
-        )
-        response = _to_response(status, headers, body)
-        _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
-        return response
-
-    async def _post_glossary(request: Request, endpoint: str, builder: Any) -> Response:
+    async def _post_builder_response(endpoint: str, request: Request, builder: Any, *builder_args: Any) -> Response:
         started_at = time.perf_counter()
         request_id = _read_request_id(request.headers)
         raw_body = await request.body()
@@ -322,7 +239,7 @@ def create_app(
         request_id = body_request_id or request_id
         status, headers, body = await _run_builder_in_thread(
             builder,
-            bot_token,
+            *builder_args,
             init_data,
             payload_body,
             max_age_seconds=initdata_ttl_seconds,
@@ -331,6 +248,29 @@ def create_app(
         _set_common_headers(response, request)
         _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
+
+    @app.get("/miniapp/state")
+    async def get_state(request: Request) -> Response:
+        return await _get_builder_response("/miniapp/state", request, build_state_response, db_path, bot_token)
+
+    @app.get("/miniapp/setup-options")
+    async def get_setup_options(request: Request) -> Response:
+        return await _get_builder_response("/miniapp/setup-options", request, build_setup_options_response, db_path, bot_token)
+
+    @app.post("/miniapp/setup")
+    async def post_setup(request: Request) -> Response:
+        return await _post_builder_response("/miniapp/setup", request, build_setup_response, db_path, bot_token)
+
+    @app.post("/miniapp/answer")
+    async def post_answer(request: Request) -> Response:
+        return await _post_builder_response("/miniapp/answer", request, build_answer_response, db_path, bot_token)
+
+    @app.get("/miniapp/glossary/topics")
+    async def get_glossary_topics(request: Request) -> Response:
+        return await _get_builder_response("/miniapp/glossary/topics", request, build_glossary_topics_response, bot_token)
+
+    async def _post_glossary(request: Request, endpoint: str, builder: Any) -> Response:
+        return await _post_builder_response(endpoint, request, builder, bot_token)
 
     @app.post("/miniapp/glossary/start")
     async def post_glossary_start(request: Request) -> Response:
