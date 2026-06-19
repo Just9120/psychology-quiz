@@ -1,0 +1,206 @@
+[
+  {
+    "id": "psyf_neuron",
+    "topic_id": "psihofiziologiya",
+    "term": "Нейрон",
+    "aliases": [],
+    "short_definition": "Специализированная клетка, принимающая, обрабатывающая и передающая информацию.",
+    "definition": "В психофизиологии нейрон рассматривается как базовый элемент обработки информации в нервных сетях.",
+    "examples": [
+      "Вопрос m1_psyf_001 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_001"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "psyf_dendrites",
+    "topic_id": "psihofiziologiya",
+    "term": "Дендриты",
+    "aliases": [],
+    "short_definition": "Части нейрона, принимающие и первично интегрирующие входящие сигналы.",
+    "definition": "Дендриты получают сигналы от других клеток и проводят их к телу нейрона.",
+    "examples": [
+      "Вопрос m1_psyf_002 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_002"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "psyf_synapse",
+    "topic_id": "psihofiziologiya",
+    "term": "Синапс",
+    "aliases": [],
+    "short_definition": "Место регулируемой передачи сигнала между клетками.",
+    "definition": "Синапс обеспечивает передачу сигнала между клетками и изменение эффективности связи.",
+    "examples": [
+      "Вопрос m1_psyf_003 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_003"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "chemical_synapse",
+    "topic_id": "psihofiziologiya",
+    "term": "Химический синапс",
+    "aliases": [],
+    "short_definition": "Передача через выделение медиатора и связывание с рецепторами.",
+    "definition": "В химическом синапсе пресинаптическая клетка выделяет медиатор, действующий на постсинаптические рецепторы.",
+    "examples": [
+      "Вопрос m1_psyf_004 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_004"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "gaba_inhibition",
+    "topic_id": "psihofiziologiya",
+    "term": "ГАМК-торможение",
+    "aliases": [],
+    "short_definition": "Тормозная медиаторная система, ограничивающая избыточную активность.",
+    "definition": "ГАМК снижает вероятность возбуждения нейронов и поддерживает селективность обработки.",
+    "examples": [
+      "Вопрос m1_psyf_005 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_005"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "dopamine",
+    "topic_id": "psihofiziologiya",
+    "term": "Дофамин",
+    "aliases": [],
+    "short_definition": "Система вознаграждения, мотивационной значимости и ошибки прогноза.",
+    "definition": "Дофаминовые системы участвуют в ожидании вознаграждения и поддержке целенаправленного поведения.",
+    "examples": [
+      "Вопрос m1_psyf_006 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_006"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "noradrenaline",
+    "topic_id": "psihofiziologiya",
+    "term": "Норадреналин",
+    "aliases": [],
+    "short_definition": "Медиатор готовности к реагированию, бодрствования и мобилизации.",
+    "definition": "Норадренергическая система повышает бодрствование и помогает перераспределять внимание при значимых изменениях.",
+    "examples": [
+      "Вопрос m1_psyf_007 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_007"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "melatonin",
+    "topic_id": "psihofiziologiya",
+    "term": "Мелатонин",
+    "aliases": [],
+    "short_definition": "Регулятор циркадных ритмов и цикла сон—бодрствование.",
+    "definition": "Мелатонин сигнализирует о биологической ночи и поддерживает нормальный цикл сна и бодрствования.",
+    "examples": [
+      "Вопрос m1_psyf_008 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_008"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "inhibition_attention",
+    "topic_id": "psihofiziologiya",
+    "term": "Торможение в внимании",
+    "aliases": [],
+    "short_definition": "Подавление нерелевантных сигналов и снижение интерференции.",
+    "definition": "Торможение повышает селективность обработки и управляемость поведения.",
+    "examples": [
+      "Вопрос m1_psyf_009 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_009"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "neuroplasticity",
+    "topic_id": "psihofiziologiya",
+    "term": "Нейропластичность",
+    "aliases": [],
+    "short_definition": "Способность нервной системы перестраивать связи под влиянием опыта.",
+    "definition": "Нейропластичность лежит в основе обучения, адаптации и восстановления функций.",
+    "examples": [
+      "Вопрос m1_psyf_010 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_010"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "limited_attention_resource",
+    "topic_id": "psihofiziologiya",
+    "term": "Ограниченный ресурс внимания",
+    "aliases": [],
+    "short_definition": "Необходимость выбирать приоритеты при ограниченной пропускной способности обработки.",
+    "definition": "Ресурсный подход подчёркивает, что усиление одного канала снижает доступные ресурсы для других.",
+    "examples": [
+      "Вопрос m1_psyf_011 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_011"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "attention_filtering",
+    "topic_id": "psihofiziologiya",
+    "term": "Фильтрация внимания",
+    "aliases": [],
+    "short_definition": "Отбор релевантных сигналов для поддержки текущей цели деятельности.",
+    "definition": "Фильтрация ограничивает доступ нерелевантной информации и распределяет ресурсы обработки.",
+    "examples": [
+      "Вопрос m1_psyf_012 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_psyf_012"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  }
+]

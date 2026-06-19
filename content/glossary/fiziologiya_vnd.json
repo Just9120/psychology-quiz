@@ -1,0 +1,206 @@
+[
+  {
+    "id": "higher_nervous_activity",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Высшая нервная деятельность",
+    "aliases": [],
+    "short_definition": "Работа коры и связанных структур, обеспечивающая обучение, поведение и адаптацию.",
+    "definition": "ВНД связывается с корой и системами, позволяющими учитывать цель, прошлый опыт и текущую ситуацию.",
+    "examples": [
+      "Вопрос m1_vnd_001 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_001"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "pavlov_teaching",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Учение Павлова",
+    "aliases": [],
+    "short_definition": "Классическая линия физиологии ВНД, связанная с условными рефлексами.",
+    "definition": "Систематическое развитие физиологии ВНД прежде всего связано с работами И. П. Павлова.",
+    "examples": [
+      "Вопрос m1_vnd_002 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_002"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "unconditioned_reflex",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Безусловный рефлекс",
+    "aliases": [],
+    "short_definition": "Врожденная реакция, не требующая специального обучения.",
+    "definition": "Безусловные рефлексы являются врождёнными реакциями, например миганием при внезапном приближении объекта.",
+    "examples": [
+      "Вопрос m1_vnd_003 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_003"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "conditioned_reflex",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Условный рефлекс",
+    "aliases": [],
+    "short_definition": "Реакция на нейтральный сигнал, сформированная через подкрепление.",
+    "definition": "Условный рефлекс формируется в обучении, когда нейтральный сигнал получает сигнальное значение.",
+    "examples": [
+      "Вопрос m1_vnd_004 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_004"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "reinforcement",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Подкрепление",
+    "aliases": [],
+    "short_definition": "Биологически значимое событие, с которым сочетается условный сигнал.",
+    "definition": "Для формирования условной реакции нейтральный сигнал должен сочетаться с подкреплением.",
+    "examples": [
+      "Вопрос m1_vnd_005 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_005"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "extinction",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Угасание",
+    "aliases": [],
+    "short_definition": "Ослабление условной реакции при повторении сигнала без подкрепления.",
+    "definition": "Если условный сигнал многократно предъявляется без подкрепления, реакция постепенно ослабевает.",
+    "examples": [
+      "Вопрос m1_vnd_006 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_006"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "differentiation",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Дифференцировка",
+    "aliases": [],
+    "short_definition": "Выборочная реакция на подкрепляемый сигнал при подавлении ответа на сходные сигналы.",
+    "definition": "Дифференцировка позволяет различать сходные стимулы и реагировать на значимый сигнал.",
+    "examples": [
+      "Вопрос m1_vnd_007 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_007"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "excitation_and_inhibition",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Возбуждение и торможение",
+    "aliases": [],
+    "short_definition": "Основные процессы ВНД в павловском описании нервной регуляции.",
+    "definition": "Павлов рассматривал возбуждение и торможение как основные процессы высшей нервной деятельности.",
+    "examples": [
+      "Вопрос m1_vnd_008 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_008"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "inhibition",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Торможение",
+    "aliases": [],
+    "short_definition": "Процесс ограничения нерелевантной активности и перестройки нервной реакции.",
+    "definition": "Торможение регулирует поведение, ограничивая или перестраивая нервную активность.",
+    "examples": [
+      "Вопрос m1_vnd_009 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_009"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "balance_of_processes",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Соотношение возбуждения и торможения",
+    "aliases": [],
+    "short_definition": "Фактор устойчивости, гибкости и точности поведенческих реакций.",
+    "definition": "Соотношение возбуждения и торможения влияет на устойчивость, переключаемость и характер реагирования.",
+    "examples": [
+      "Вопрос m1_vnd_010 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_010"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "type_of_higher_nervous_activity",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Тип ВНД",
+    "aliases": [],
+    "short_definition": "Сочетание силы, уравновешенности и подвижности нервных процессов.",
+    "definition": "Тип ВНД описывается через свойства нервных процессов: силу, уравновешенность и подвижность.",
+    "examples": [
+      "Вопрос m1_vnd_011 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_011"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "strength_of_nervous_processes",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Сила нервных процессов",
+    "aliases": [],
+    "short_definition": "Способность нервной системы сохранять работоспособность при значимой нагрузке.",
+    "definition": "Сила нервных процессов связана с устойчивостью нервной системы к интенсивным воздействиям.",
+    "examples": [
+      "Вопрос m1_vnd_012 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_vnd_012"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  }
+]

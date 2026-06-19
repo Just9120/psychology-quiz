@@ -11,6 +11,7 @@
 - ✅ Module 2 content QA — experimental-psychology answer-position balance completed; qualitative-methods light polish completed with `m2_qual_023` / `m2_qual_041` kept as intentional scaffolding; repo-local source_ref hygiene reviewed; qualitative-methods provenance-limited tracking report added without changing question JSON.
 - ✅ Module 3 first active scope — `Психологическое консультирование` contains 108 approved source-backed questions after the consulting content and polish sequence.
 - ✅ `GLOSSARY-CONTENT-AUDIT-001` — Documentation-only audit of active glossary content delivered; no glossary data, runtime, UI/API, deploy, DB, or test behavior changed.
+- ✅ `GLOSSARY-COVERAGE-EXPANSION-ALL-TOPICS-001` — One implementation PR expanded glossary coverage from 2 to all 8 currently active main-quiz categories; total glossary entries now: Введение в профессию 12, Общая психология 12, Физиология человека 12, Физиология ВНД 12, Психофизиология 12, Качественные методы исследования 14, Основы экспериментальной психологии 10, Психологическое консультирование 12. Source-backed terminology certification against original external materials and any future distractor-logic work remain deferred.
 - 👉 Repository source-of-truth posture — docs now track the post-QA content baseline and glossary audit posture; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
 
 ## Current product/runtime posture
@@ -40,8 +41,8 @@
 | **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline. |
 
 ## Next recommended item
-1. Run `GLOSSARY-CONTENT-POLISH-001` as the highest-value glossary follow-up: a documentation/content-only typo, clarity, and terminology-consistency pass for `kachestvennye_metody_issledovaniya`, without marking source-sensitive glossary issues fixed until human/source review confirms them.
-2. Then run `GLOSSARY-SOURCE-ALIGNMENT-001` if original local/Drive source packs or SME review are available; verify glossary terms and definitions one topic at a time before substantive content edits.
+1. Run `GLOSSARY-SOURCE-ALIGNMENT-001` only if original local/Drive source packs or SME review are available; verify glossary terms and definitions one topic at a time before substantive content edits.
+2. Consider `GLOSSARY-CONTENT-POLISH-001` as optional conservative wording polish only; it is no longer the immediate next mandatory item after full active-topic coverage.
 3. Consider `GLOSSARY-DISTRACTOR-QUALITY-001` only after content/source review shows that semantically adjacent glossary entries still create multiple-defensible-answer risks.
 4. Consider the optional no-build static frontend split from PR 6 in `docs/proposals/refactor-plan-miniapp-bot.md` only if review risk justifies it; otherwise prefer source-backed content alignment work.
 5. Keep Module 2 experimental difficulty/onboarding review as optional future work only if new experimental-psychology content work is planned.
