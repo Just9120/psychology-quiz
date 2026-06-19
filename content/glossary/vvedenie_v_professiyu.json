@@ -9,7 +9,9 @@
     "examples": [
       "Вопрос m1_intro_001 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "psychiatrist_difference"
+    ],
     "source_refs": [
       "question:m1_intro_001"
     ],
@@ -26,7 +28,9 @@
     "examples": [
       "Вопрос m1_intro_002 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "psychologist_consultant_role"
+    ],
     "source_refs": [
       "question:m1_intro_002"
     ],
@@ -60,7 +64,10 @@
     "examples": [
       "Вопрос m1_intro_004 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "professional_boundary",
+      "informed_consent"
+    ],
     "source_refs": [
       "question:m1_intro_004"
     ],
@@ -77,7 +84,10 @@
     "examples": [
       "Вопрос m1_intro_005 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "confidentiality",
+      "informed_consent"
+    ],
     "source_refs": [
       "question:m1_intro_005"
     ],
@@ -94,7 +104,10 @@
     "examples": [
       "Вопрос m1_intro_006 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "professional_boundary",
+      "confidentiality"
+    ],
     "source_refs": [
       "question:m1_intro_006"
     ],
@@ -128,7 +141,9 @@
     "examples": [
       "Вопрос m1_intro_008 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "client_centeredness"
+    ],
     "source_refs": [
       "question:m1_intro_008"
     ],
@@ -145,7 +160,9 @@
     "examples": [
       "Вопрос m1_intro_009 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "client_autonomy"
+    ],
     "source_refs": [
       "question:m1_intro_009"
     ],
@@ -162,7 +179,9 @@
     "examples": [
       "Вопрос m1_intro_010 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "active_listening"
+    ],
     "source_refs": [
       "question:m1_intro_010"
     ],
@@ -179,7 +198,9 @@
     "examples": [
       "Вопрос m1_intro_011 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "empathy"
+    ],
     "source_refs": [
       "question:m1_intro_011"
     ],

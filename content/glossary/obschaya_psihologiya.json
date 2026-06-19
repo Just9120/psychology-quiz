@@ -26,7 +26,9 @@
     "examples": [
       "Вопрос m1_gp_002 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "experiment"
+    ],
     "source_refs": [
       "question:m1_gp_002"
     ],
@@ -43,7 +45,9 @@
     "examples": [
       "Вопрос m1_gp_003 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "scientific_hypothesis"
+    ],
     "source_refs": [
       "question:m1_gp_003"
     ],
@@ -77,7 +81,9 @@
     "examples": [
       "Вопрос m1_gp_005 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "perception"
+    ],
     "source_refs": [
       "question:m1_gp_005"
     ],
@@ -94,7 +100,9 @@
     "examples": [
       "Вопрос m1_gp_006 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "sensation"
+    ],
     "source_refs": [
       "question:m1_gp_006"
     ],
@@ -111,7 +119,9 @@
     "examples": [
       "Вопрос m1_gp_007 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "attention_stability"
+    ],
     "source_refs": [
       "question:m1_gp_007"
     ],
@@ -179,7 +189,9 @@
     "examples": [
       "Вопрос m1_gp_011 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "attention"
+    ],
     "source_refs": [
       "question:m1_gp_011"
     ],

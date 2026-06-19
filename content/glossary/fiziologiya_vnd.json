@@ -43,7 +43,9 @@
     "examples": [
       "Вопрос m1_vnd_003 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "conditioned_reflex"
+    ],
     "source_refs": [
       "question:m1_vnd_003"
     ],
@@ -60,7 +62,9 @@
     "examples": [
       "Вопрос m1_vnd_004 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "unconditioned_reflex"
+    ],
     "source_refs": [
       "question:m1_vnd_004"
     ],
@@ -128,7 +132,10 @@
     "examples": [
       "Вопрос m1_vnd_008 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "inhibition",
+      "balance_of_processes"
+    ],
     "source_refs": [
       "question:m1_vnd_008"
     ],
@@ -145,7 +152,10 @@
     "examples": [
       "Вопрос m1_vnd_009 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "excitation_and_inhibition",
+      "balance_of_processes"
+    ],
     "source_refs": [
       "question:m1_vnd_009"
     ],
@@ -162,7 +172,10 @@
     "examples": [
       "Вопрос m1_vnd_010 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "excitation_and_inhibition",
+      "inhibition"
+    ],
     "source_refs": [
       "question:m1_vnd_010"
     ],
@@ -173,7 +186,10 @@
     "id": "type_of_higher_nervous_activity",
     "topic_id": "fiziologiya_vnd",
     "term": "Тип ВНД",
-    "aliases": [],
+    "aliases": [
+      "тип высшей нервной деятельности",
+      "тип ВНД"
+    ],
     "short_definition": "Сочетание силы, уравновешенности и подвижности нервных процессов.",
     "definition": "Тип ВНД описывается через свойства нервных процессов: силу, уравновешенность и подвижность.",
     "examples": [
