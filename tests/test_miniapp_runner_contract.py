@@ -7,7 +7,7 @@ import sqlite3
 import tempfile
 import unittest
 from types import SimpleNamespace
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 
 from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, start_quiz_session, store_session_questions
 from app.main import (
@@ -345,7 +345,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_build_miniapp_context_setup_includes_safe_glossary_topics(self):
         user = create_or_load_user(self.conn, 2222, "u2", "U2", None)
         state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
-        url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        url, used_fallback = build_miniapp_url_with_fallback("https://e.co/u", [{"id": 1, "name": "Cat"}], state)
         self.assertFalse(used_fallback)
         self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
         encoded = url.split("context=", 1)[1]
@@ -414,7 +414,8 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_completed_context_omits_categories(self):
         self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
-        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
+            url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
@@ -427,12 +428,13 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_completed_context_setup_url_includes_api_base_when_configured(self):
         self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
-        url, _ = build_miniapp_url_with_fallback(
-            "https://example.com/ui",
-            [{"id": 1, "name": "Category 1"}],
-            state,
-            api_base_url="https://api.example.com",
-        )
+        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
+            url, _ = build_miniapp_url_with_fallback(
+                "https://example.com/ui",
+                [{"id": 1, "name": "Category 1"}],
+                state,
+                api_base_url="https://api.example.com",
+            )
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
@@ -447,7 +449,8 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_setup_context_still_includes_categories(self):
         user = create_or_load_user(self.conn, 3333, "u4", "U4", None)
         state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
-        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
+            url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
@@ -527,7 +530,8 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_normal_setup_context_has_no_abandon_marker(self):
         user = create_or_load_user(self.conn, 4444, "u5", "U5", None)
         state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
-        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
+            url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))

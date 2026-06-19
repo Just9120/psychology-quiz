@@ -9,7 +9,10 @@
     "examples": [
       "Вопрос m1_psyf_001 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "psyf_dendrites",
+      "psyf_synapse"
+    ],
     "source_refs": [
       "question:m1_psyf_001"
     ],
@@ -26,7 +29,10 @@
     "examples": [
       "Вопрос m1_psyf_002 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "psyf_neuron",
+      "psyf_synapse"
+    ],
     "source_refs": [
       "question:m1_psyf_002"
     ],
@@ -43,7 +49,10 @@
     "examples": [
       "Вопрос m1_psyf_003 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "psyf_neuron",
+      "chemical_synapse"
+    ],
     "source_refs": [
       "question:m1_psyf_003"
     ],
@@ -60,7 +69,9 @@
     "examples": [
       "Вопрос m1_psyf_004 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "psyf_synapse"
+    ],
     "source_refs": [
       "question:m1_psyf_004"
     ],
@@ -145,7 +156,10 @@
     "examples": [
       "Вопрос m1_psyf_009 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "attention_filtering",
+      "limited_attention_resource"
+    ],
     "source_refs": [
       "question:m1_psyf_009"
     ],
@@ -179,7 +193,10 @@
     "examples": [
       "Вопрос m1_psyf_011 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "attention_filtering",
+      "inhibition_attention"
+    ],
     "source_refs": [
       "question:m1_psyf_011"
     ],
@@ -196,7 +213,10 @@
     "examples": [
       "Вопрос m1_psyf_012 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "inhibition_attention",
+      "limited_attention_resource"
+    ],
     "source_refs": [
       "question:m1_psyf_012"
     ],

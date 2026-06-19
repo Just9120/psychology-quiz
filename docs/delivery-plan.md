@@ -12,6 +12,7 @@
 - ✅ Module 3 first active scope — `Психологическое консультирование` contains 108 approved source-backed questions after the consulting content and polish sequence.
 - ✅ `GLOSSARY-CONTENT-AUDIT-001` — Documentation-only audit of active glossary content delivered; no glossary data, runtime, UI/API, deploy, DB, or test behavior changed.
 - ✅ `GLOSSARY-COVERAGE-EXPANSION-ALL-TOPICS-001` — One implementation PR expanded glossary coverage from 2 to all 8 currently active main-quiz categories; total glossary entries now: Введение в профессию 12, Общая психология 12, Физиология человека 12, Физиология ВНД 12, Психофизиология 12, Качественные методы исследования 14, Основы экспериментальной психологии 10, Психологическое консультирование 12. Source-backed terminology certification against original external materials and any future distractor-logic work remain deferred.
+- ✅ `GLOSSARY-GLOBAL-QUALITY-ALIGNMENT-001` — One global repository-evidence quality baseline now covers the complete 96-entry glossary system across all 8 active topics; conservative glossary JSON corrections and deterministic registry/source/confusable validation were added without question-bank, runtime, API, UI, DB, deploy, Docker, or external source-certification claims. Future glossary work should be source-pack / SME alignment only unless a concrete runtime issue is found.
 - 👉 Repository source-of-truth posture — docs now track the post-QA content baseline and glossary audit posture; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
 
 ## Current product/runtime posture
@@ -41,9 +42,9 @@
 | **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline. |
 
 ## Next recommended item
-1. Run `GLOSSARY-SOURCE-ALIGNMENT-001` only if original local/Drive source packs or SME review are available; verify glossary terms and definitions one topic at a time before substantive content edits.
-2. Consider `GLOSSARY-CONTENT-POLISH-001` as optional conservative wording polish only; it is no longer the immediate next mandatory item after full active-topic coverage.
-3. Consider `GLOSSARY-DISTRACTOR-QUALITY-001` only after content/source review shows that semantically adjacent glossary entries still create multiple-defensible-answer risks.
+1. Run future glossary source-pack / SME alignment only if original local/Drive source packs or SME review are available; the current baseline is repository-evidence aligned but not externally source-certified.
+2. Do not schedule another small glossary polish PR by default; only open glossary content work for source/SME alignment or a concrete runtime/data-integrity issue.
+3. Consider `GLOSSARY-DISTRACTOR-QUALITY-001` only after source/SME review shows that semantically adjacent glossary entries still create multiple-defensible-answer risks.
 4. Consider the optional no-build static frontend split from PR 6 in `docs/proposals/refactor-plan-miniapp-bot.md` only if review risk justifies it; otherwise prefer source-backed content alignment work.
 5. Keep Module 2 experimental difficulty/onboarding review as optional future work only if new experimental-psychology content work is planned.
 6. Keep future Module 3 expansion in separate focused source-backed batches; do not create a separate practice category unless explicitly decided.
@@ -51,7 +52,7 @@
 8. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
 
 ## Near backlog
-- Glossary content follow-ups from `docs/glossary_content_audit.md`: conservative qualitative-methods polish first, source/human alignment second, and distractor-quality review only if evidence remains after content review.
+- Glossary content follow-up: source-pack / SME alignment only when original materials or expert review are available; otherwise limit future glossary work to concrete runtime/data-integrity issues.
 - Full Module 1/2 source-backed alignment against original local/Drive source packs if those materials are available; Module 2 qualitative methods now has a provenance-limited tracking report, but source_ref alignment risks, weakly supported items, and human-review-needed items remain.
 - Module 2 experimental difficulty/onboarding review if future experimental-psychology content work is planned.
 - Keep `m1-q3` stable as an intentional legacy ID unless a future explicit migration repeats downstream-reference checks and reviews downstream ID stability risks.

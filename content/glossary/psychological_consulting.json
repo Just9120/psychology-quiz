@@ -60,7 +60,9 @@
     "examples": [
       "Вопрос m3_psychological_consulting_004 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "client_request"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_004"
     ],
@@ -77,7 +79,9 @@
     "examples": [
       "Вопрос m3_psychological_consulting_005 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "complaint"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_005"
     ],
@@ -94,7 +98,10 @@
     "examples": [
       "Вопрос m3_psychological_consulting_006 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "reflection_of_feelings",
+      "open_question"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_006"
     ],
@@ -111,7 +118,9 @@
     "examples": [
       "Вопрос m3_psychological_consulting_007 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "reflective_listening"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_007"
     ],
@@ -128,7 +137,9 @@
     "examples": [
       "Вопрос m3_psychological_consulting_008 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "rapport"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_008"
     ],
@@ -145,7 +156,9 @@
     "examples": [
       "Вопрос m3_psychological_consulting_009 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "therapeutic_contract"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_009"
     ],
@@ -179,7 +192,9 @@
     "examples": [
       "Вопрос m3_psychological_consulting_013 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "reflective_listening"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_013"
     ],

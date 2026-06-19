@@ -1,5 +1,6 @@
 import json
 import random
+import unicodedata
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -32,6 +33,31 @@ from app.main import GLOSSARY_BUTTON_TEXT, HELP_TEXT, get_main_menu_keyboard
 TOPIC_ID = "kachestvennye_metody_issledovaniya"
 EXP_TOPIC_ID = "osnovy_eksperimentalnoy_psihologii"
 INTERNAL_MARKERS = ("source_refs", "supplied_snippet", "question:m2_exp", "exp_psych_")
+
+
+def normalize_glossary_text(value: str) -> str:
+    return " ".join(unicodedata.normalize("NFKC", value).casefold().split())
+
+
+def load_active_question_topics():
+    topics = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
+    return [
+        topic
+        for topic in topics
+        if topic.get("status") == "active" and "questions" in topic.get("available_contours", [])
+    ]
+
+
+def load_approved_questions_by_id(active_topics):
+    questions = {}
+    for topic in active_topics:
+        for question in json.loads(Path(topic["question_file"]).read_text(encoding="utf-8")):
+            if question.get("status") == "approved":
+                questions[question["id"]] = {
+                    "topic_id": topic["id"],
+                    "category": question.get("category"),
+                }
+    return questions
 
 
 class GlossaryRuntimeTests(unittest.TestCase):
@@ -179,19 +205,13 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertEqual(TOPIC_ID, callback_token_to_topic_id("kmi"))
 
     def test_glossary_registry_matches_active_question_topics_contract(self):
-        topics = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
-        active_question_topics = [
-            (topic["id"], topic["title"])
-            for topic in topics
-            if topic.get("status") == "active" and "questions" in topic.get("available_contours", [])
-        ]
+        active_topics = load_active_question_topics()
+        active_question_topics = [(topic["id"], topic["title"]) for topic in active_topics]
         active_topic_ids = {topic_id for topic_id, _title in active_question_topics}
 
         self.assertEqual(active_question_topics, list(GLOSSARY_TOPICS))
         self.assertTrue(active_question_topics)
-        self.assertTrue(
-            all("glossary" in topic.get("available_contours", []) for topic in topics if topic.get("id") in active_topic_ids)
-        )
+        self.assertTrue(all("glossary" in topic.get("available_contours", []) for topic in active_topics))
         callback_topic_ids = list(GLOSSARY_TOPIC_CALLBACK_TOKENS.values())
         self.assertEqual(len(GLOSSARY_TOPIC_CALLBACK_TOKENS), len(set(GLOSSARY_TOPIC_CALLBACK_TOKENS)))
         self.assertEqual(len(callback_topic_ids), len(set(callback_topic_ids)))
@@ -216,13 +236,19 @@ class GlossaryRuntimeTests(unittest.TestCase):
                 self.assertEqual(4, len(question.options))
 
     def test_glossary_source_refs_use_supported_formats_and_question_refs_resolve(self):
-        approved_question_ids = set()
-        for path in Path("content/questions").glob("**/*.json"):
-            for question in json.loads(path.read_text(encoding="utf-8")):
-                if question.get("status") == "approved":
-                    approved_question_ids.add(question["id"])
+        active_topics = load_active_question_topics()
+        topic_titles = {topic["id"]: topic["title"] for topic in active_topics}
+        approved_questions = load_approved_questions_by_id(active_topics)
+
         for topic_id, _title in GLOSSARY_TOPICS:
             raw_entries = json.loads(Path(f"content/glossary/{topic_id}.json").read_text(encoding="utf-8"))
+            valid_ids = {entry["id"] for entry in raw_entries}
+            self.assertEqual(len(valid_ids), len(raw_entries), topic_id)
+            normalized_terms = [normalize_glossary_text(item["term"]) for item in raw_entries]
+            normalized_short_definitions = [normalize_glossary_text(item["short_definition"]) for item in raw_entries]
+            self.assertEqual(len(normalized_terms), len(set(normalized_terms)), topic_id)
+            self.assertEqual(len(normalized_short_definitions), len(set(normalized_short_definitions)), topic_id)
+
             for item in raw_entries:
                 for field in ("id", "topic_id", "term", "short_definition", "definition", "difficulty", "status"):
                     self.assertTrue(item.get(field), (topic_id, item.get("id"), field))
@@ -233,8 +259,11 @@ class GlossaryRuntimeTests(unittest.TestCase):
                 for source_ref in item["source_refs"]:
                     self.assertTrue(source_ref.startswith(("question:", "supplied_snippet:")), source_ref)
                     if source_ref.startswith("question:"):
-                        self.assertIn(source_ref.removeprefix("question:"), approved_question_ids)
-                valid_ids = {entry["id"] for entry in raw_entries}
+                        question_id = source_ref.removeprefix("question:")
+                        self.assertIn(question_id, approved_questions)
+                        self.assertEqual(topic_id, approved_questions[question_id]["topic_id"], (topic_id, item["id"], question_id))
+                        self.assertEqual(topic_titles[topic_id], approved_questions[question_id]["category"], (topic_id, item["id"], question_id))
+                self.assertNotIn(item["id"], item["confusable_with"], (topic_id, item["id"]))
                 self.assertTrue(set(item["confusable_with"]).issubset(valid_ids), (topic_id, item["id"]))
 
     def test_miniapp_glossary_payload_exposes_all_active_topics(self):
@@ -245,6 +274,17 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertEqual(len(GLOSSARY_TOPICS), len(payload["topics"]))
         self.assertEqual([topic_id for topic_id, _title in GLOSSARY_TOPICS], [topic["topic_id"] for topic in payload["topics"]])
         self.assertTrue(all(topic["available_count"] >= 10 for topic in payload["topics"]))
+        for topic in payload["topics"]:
+            self.assertEqual({"topic_id", "title", "available_count"}, set(topic))
+
+    def test_every_glossary_topic_can_generate_four_option_questions_for_all_entries(self):
+        for topic_id, _title in GLOSSARY_TOPICS:
+            entries = load_glossary_entries(topic_id)
+            for index, entry in enumerate(entries):
+                question = build_glossary_quiz_question(entries, entry, rng=random.Random(index))
+                self.assertIsNotNone(question, (topic_id, entry.id))
+                self.assertEqual(4, len(question.options), (topic_id, entry.id))
+                self.assertEqual(len(question.options), len(set(question.options)), (topic_id, entry.id))
 
 
 if __name__ == "__main__":
