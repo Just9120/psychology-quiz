@@ -14,6 +14,7 @@
 - ✅ `GLOSSARY-COVERAGE-EXPANSION-ALL-TOPICS-001` — One implementation PR expanded glossary coverage from 2 to all 8 currently active main-quiz categories; total glossary entries now: Введение в профессию 12, Общая психология 12, Физиология человека 12, Физиология ВНД 12, Психофизиология 12, Качественные методы исследования 14, Основы экспериментальной психологии 10, Психологическое консультирование 12. Source-backed terminology certification against original external materials and any future distractor-logic work remain deferred.
 - ✅ `GLOSSARY-GLOBAL-QUALITY-ALIGNMENT-001` — One global repository-evidence quality baseline now covers the complete 96-entry glossary system across all 8 active topics; conservative glossary JSON corrections and deterministic registry/source/confusable validation were added without question-bank, runtime, API, UI, DB, deploy, Docker, or external source-certification claims. Future glossary work should be source-pack / SME alignment only unless a concrete runtime issue is found.
 - ✅ `MINIAPP-SETUP-URL-DECUPLING-001` — Mini App setup launch URLs now carry compact bootstrap data and hydrate categories/glossary topics through the existing authenticated `/miniapp/setup-options` API, protecting `/ui` from category/glossary growth without changing user-visible quiz semantics.
+- ✅ `GLOSSARY-DISTRACTOR-QUALITY-ENGINE-001` — Glossary distractors are now selected from curated same-topic `confusable_with` relationships first, then reciprocal relations, then same-topic fallback; future source/SME review remains a separate optional quality layer.
 - 👉 Repository source-of-truth posture — docs now track the post-QA content baseline and glossary audit posture; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
 
 ## Current product/runtime posture
@@ -46,7 +47,7 @@
 ## Next recommended item
 1. Run future glossary source-pack / SME alignment only if original local/Drive source packs or SME review are available; the current baseline is repository-evidence aligned but not externally source-certified.
 2. Do not schedule another small glossary polish PR by default; only open glossary content work for source/SME alignment or a concrete runtime/data-integrity issue.
-3. Consider `GLOSSARY-DISTRACTOR-QUALITY-001` only after source/SME review shows that semantically adjacent glossary entries still create multiple-defensible-answer risks.
+3. Treat future glossary source/SME review as an optional quality layer for semantic correctness; the runtime distractor engine already prefers curated same-topic relationships before fallback.
 4. Consider the optional no-build static frontend split from PR 6 in `docs/proposals/refactor-plan-miniapp-bot.md` only if review risk justifies it; otherwise prefer source-backed content alignment work.
 5. Keep Module 2 experimental difficulty/onboarding review as optional future work only if new experimental-psychology content work is planned.
 6. Keep future Module 3 expansion in separate focused source-backed batches; do not create a separate practice category unless explicitly decided.

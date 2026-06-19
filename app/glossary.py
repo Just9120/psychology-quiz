@@ -5,6 +5,7 @@ from html import escape
 import json
 from pathlib import Path
 import random
+import unicodedata
 from typing import Any
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
@@ -47,6 +48,7 @@ class GlossaryEntry:
     examples: tuple[str, ...]
     difficulty: str
     source_refs: tuple[str, ...]
+    confusable_with: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -93,9 +95,10 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
         aliases = _string_list(item.get("aliases"))
         examples = _string_list(item.get("examples"))
         source_refs = _string_list(item.get("source_refs"))
+        confusable_with = _string_list(item.get("confusable_with"))
         if not all(isinstance(value, str) and value.strip() for value in (entry_id, entry_topic_id, term, short_definition, definition, difficulty)):
             return None
-        if entry_topic_id != topic_id or aliases is None or examples is None or source_refs is None:
+        if entry_topic_id != topic_id or aliases is None or examples is None or source_refs is None or confusable_with is None:
             return None
         entries.append(
             GlossaryEntry(
@@ -108,6 +111,7 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
                 examples=examples,
                 difficulty=difficulty.strip(),
                 source_refs=source_refs,
+                confusable_with=confusable_with,
             )
         )
     return entries
@@ -138,16 +142,84 @@ def format_glossary_count_text(topic_title: str, available_count: int) -> str:
     return f"<b>{escape(topic_title)}</b>\n\nВыберите количество вопросов:\nДоступно терминов: {available_count}."
 
 
+def _normalize_option_text(value: str) -> str:
+    return " ".join(unicodedata.normalize("NFKC", value).casefold().split())
+
+
+def _shuffled_candidates(candidates: list[GlossaryEntry], picker: Any) -> list[GlossaryEntry]:
+    shuffled = list(candidates)
+    picker.shuffle(shuffled)
+    return shuffled
+
+
 def build_glossary_quiz_question(entries: list[GlossaryEntry], entry: GlossaryEntry, *, rng: random.Random | None = None) -> GlossaryQuizQuestion | None:
-    valid_entries = [candidate for candidate in entries if candidate.short_definition]
-    distractors = [candidate.short_definition for candidate in valid_entries if candidate.id != entry.id]
-    if len(valid_entries) < 4 or len(distractors) < 3 or not entry.short_definition:
+    correct_option = entry.short_definition.strip()
+    correct_normalized = _normalize_option_text(correct_option)
+    if not correct_option or not correct_normalized:
         return None
+
+    topic_entries_by_id: dict[str, GlossaryEntry] = {}
+    for candidate in entries:
+        if candidate.topic_id != entry.topic_id or candidate.id in topic_entries_by_id:
+            continue
+        if not candidate.short_definition.strip():
+            continue
+        topic_entries_by_id[candidate.id] = candidate
+
+    if entry.id not in topic_entries_by_id:
+        return None
+
     picker = rng or random
-    selected_distractors = picker.sample(distractors, 3)
-    options = [entry.short_definition, *selected_distractors]
+    selected: list[GlossaryEntry] = []
+    selected_ids = {entry.id}
+    selected_option_texts = {correct_normalized}
+
+    def add_from_tier(candidates: list[GlossaryEntry]) -> None:
+        for candidate in _shuffled_candidates(candidates, picker):
+            if len(selected) == 3:
+                return
+            option_text = candidate.short_definition.strip()
+            normalized = _normalize_option_text(option_text)
+            if (
+                candidate.id in selected_ids
+                or candidate.id == entry.id
+                or not option_text
+                or not normalized
+                or normalized in selected_option_texts
+            ):
+                continue
+            selected.append(candidate)
+            selected_ids.add(candidate.id)
+            selected_option_texts.add(normalized)
+
+    tier_1 = [topic_entries_by_id[confusable_id] for confusable_id in entry.confusable_with if confusable_id in topic_entries_by_id and confusable_id != entry.id]
+    tier_1_ids = {candidate.id for candidate in tier_1}
+    tier_2 = [
+        candidate
+        for candidate in topic_entries_by_id.values()
+        if candidate.id != entry.id and candidate.id not in tier_1_ids and entry.id in candidate.confusable_with
+    ]
+    tier_2_ids = {candidate.id for candidate in tier_2}
+    tier_3 = [
+        candidate
+        for candidate in topic_entries_by_id.values()
+        if candidate.id != entry.id and candidate.id not in tier_1_ids and candidate.id not in tier_2_ids
+    ]
+
+    add_from_tier(tier_1)
+    add_from_tier(tier_2)
+    add_from_tier(tier_3)
+
+    if len(selected) != 3:
+        return None
+
+    options = [correct_option, *(candidate.short_definition.strip() for candidate in selected)]
+    if len({_normalize_option_text(option) for option in options}) != 4:
+        return None
     picker.shuffle(options)
-    correct_index = options.index(entry.short_definition)
+    correct_index = next((index for index, option in enumerate(options) if _normalize_option_text(option) == correct_normalized), -1)
+    if correct_index < 0:
+        return None
     return GlossaryQuizQuestion(entry=entry, options=tuple(options), correct_option_index=correct_index)
 
 
