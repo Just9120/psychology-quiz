@@ -1,0 +1,206 @@
+[
+  {
+    "id": "subject_general_psychology",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Предмет общей психологии",
+    "aliases": [],
+    "short_definition": "Психические процессы, состояния, свойства личности и закономерности поведения.",
+    "definition": "Предмет общей психологии включает закономерности психических процессов, состояний, свойств личности и поведения.",
+    "examples": [
+      "Вопрос m1_gp_001 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_001"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "scientific_hypothesis",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Проверяемая гипотеза",
+    "aliases": [],
+    "short_definition": "Научное предположение, сопоставляемое с операциональными критериями и данными.",
+    "definition": "Научная психология переводит житейские объяснения в проверяемые гипотезы и проверяет их эмпирическими данными.",
+    "examples": [
+      "Вопрос m1_gp_002 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_002"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "experiment",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Эксперимент",
+    "aliases": [],
+    "short_definition": "Метод целенаправленного изменения условий для проверки влияния фактора.",
+    "definition": "В эксперименте исследователь контролирует условия и меняет значимый фактор, чтобы проверить его влияние на психическое явление.",
+    "examples": [
+      "Вопрос m1_gp_003 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_003"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "explanation_mechanism",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Объяснение в психологии",
+    "aliases": [],
+    "short_definition": "Формулирование и проверка механизма явления на данных.",
+    "definition": "Психологическое объяснение требует предположений о механизмах и закономерных связях, а не только описания проявлений.",
+    "examples": [
+      "Вопрос m1_gp_004 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_004"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "sensation",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Ощущение",
+    "aliases": [],
+    "short_definition": "Отражение отдельных свойств стимула, например температуры или запаха.",
+    "definition": "Ощущение даёт материал отдельных признаков, на основе которых восприятие строит целостный образ.",
+    "examples": [
+      "Вопрос m1_gp_005 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_005"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "perception",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Восприятие",
+    "aliases": [],
+    "short_definition": "Формирование целостного образа объекта на основе ощущений.",
+    "definition": "Восприятие организует отдельные ощущения в целостный предметный образ.",
+    "examples": [
+      "Вопрос m1_gp_006 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_006"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "attention",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Внимание",
+    "aliases": [],
+    "short_definition": "Направленность и устойчивость психической обработки на выбранном объекте или задаче.",
+    "definition": "При нарушении внимания материал обрабатывается фрагментарно, потому что не удерживается фокус деятельности.",
+    "examples": [
+      "Вопрос m1_gp_007 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_007"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "memory",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Память",
+    "aliases": [],
+    "short_definition": "Запоминание, сохранение и последующее воспроизведение опыта.",
+    "definition": "Память включает запечатление, сохранение и воспроизведение изученного материала.",
+    "examples": [
+      "Вопрос m1_gp_008 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_008"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "thinking",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Мышление",
+    "aliases": [],
+    "short_definition": "Оперирование обобщениями и связями при сравнении альтернатив и выводах.",
+    "definition": "Мышление проявляется в анализе условий, сопоставлении вариантов и обосновании решения.",
+    "examples": [
+      "Вопрос m1_gp_009 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_009"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "imagination",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Воображение",
+    "aliases": [],
+    "short_definition": "Создание новых образов через переработку прошлого опыта.",
+    "definition": "Воображение не просто воспроизводит прошлое, а конструирует новые сценарии из известных элементов.",
+    "examples": [
+      "Вопрос m1_gp_010 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_010"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "attention_stability",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Устойчивость внимания",
+    "aliases": [],
+    "short_definition": "Способность длительно сохранять сосредоточенность на задаче.",
+    "definition": "Устойчивость внимания проявляется при продолжительном решении задачи без частых отвлечений.",
+    "examples": [
+      "Вопрос m1_gp_011 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_011"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "cognitive_processes",
+    "topic_id": "obschaya_psihologiya",
+    "term": "Познавательные процессы",
+    "aliases": [],
+    "short_definition": "Ощущение, восприятие, память и мышление как процессы познания.",
+    "definition": "К познавательным процессам относят ощущение, восприятие, память и мышление, а не состояния или свойства личности.",
+    "examples": [
+      "Вопрос m1_gp_012 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_gp_012"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  }
+]

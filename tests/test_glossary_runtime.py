@@ -175,6 +175,63 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertIsNotNone(entries)
         self.assertEqual(TOPIC_ID, callback_token_to_topic_id("kmi"))
 
+    def test_active_glossary_registry_has_eight_topics_and_unique_tokens(self):
+        topic_ids = [topic_id for topic_id, _title in GLOSSARY_TOPICS]
+        self.assertEqual(8, len(GLOSSARY_TOPICS))
+        self.assertEqual(len(topic_ids), len(set(topic_ids)))
+        self.assertEqual(8, len(set(__import__('app.glossary', fromlist=['GLOSSARY_TOPIC_CALLBACK_TOKENS']).GLOSSARY_TOPIC_CALLBACK_TOKENS)))
+        self.assertEqual(set(topic_ids), set(__import__('app.glossary', fromlist=['GLOSSARY_TOPIC_CALLBACK_TOKENS']).GLOSSARY_TOPIC_CALLBACK_TOKENS.values()))
+
+    def test_all_active_glossary_topics_load_have_valid_entries_and_questions(self):
+        for topic_id, _title in GLOSSARY_TOPICS:
+            entries = load_glossary_entries(topic_id)
+            self.assertIsNotNone(entries, topic_id)
+            self.assertGreaterEqual(len(entries), 10, topic_id)
+            for entry in entries:
+                self.assertTrue(entry.id)
+                self.assertEqual(topic_id, entry.topic_id)
+                self.assertTrue(entry.term)
+                self.assertTrue(entry.short_definition)
+                self.assertTrue(entry.definition)
+                self.assertTrue(entry.examples)
+                self.assertTrue(entry.source_refs)
+                self.assertTrue(entry.difficulty)
+                self.assertIsNotNone(build_glossary_quiz_question(entries, entry, rng=random.Random(5)), entry.id)
+
+    def test_glossary_source_refs_use_supported_formats_and_question_refs_resolve(self):
+        import json
+        from pathlib import Path
+
+        approved_question_ids = set()
+        for path in Path("content/questions").glob("**/*.json"):
+            for question in json.loads(path.read_text(encoding="utf-8")):
+                if question.get("status") == "approved":
+                    approved_question_ids.add(question["id"])
+        for topic_id, _title in GLOSSARY_TOPICS:
+            raw_entries = json.loads(Path(f"content/glossary/{topic_id}.json").read_text(encoding="utf-8"))
+            for item in raw_entries:
+                for field in ("id", "topic_id", "term", "short_definition", "definition", "difficulty", "status"):
+                    self.assertTrue(item.get(field), (topic_id, item.get("id"), field))
+                for field in ("aliases", "examples", "confusable_with", "source_refs"):
+                    self.assertIsInstance(item.get(field), list, (topic_id, item.get("id"), field))
+                self.assertTrue(item["examples"], (topic_id, item["id"]))
+                self.assertEqual("approved", item["status"])
+                for source_ref in item["source_refs"]:
+                    self.assertTrue(source_ref.startswith(("question:", "supplied_snippet:")), source_ref)
+                    if source_ref.startswith("question:"):
+                        self.assertIn(source_ref.removeprefix("question:"), approved_question_ids)
+                valid_ids = {entry["id"] for entry in raw_entries}
+                self.assertTrue(set(item["confusable_with"]).issubset(valid_ids), (topic_id, item["id"]))
+
+    def test_miniapp_glossary_payload_exposes_all_active_topics(self):
+        from app.miniapp_glossary import list_glossary_topics_payload
+
+        payload = list_glossary_topics_payload()
+        self.assertEqual([5, 10, "all"], payload["question_count_choices"])
+        self.assertEqual(8, len(payload["topics"]))
+        self.assertEqual([topic_id for topic_id, _title in GLOSSARY_TOPICS], [topic["topic_id"] for topic in payload["topics"]])
+        self.assertTrue(all(topic["available_count"] >= 10 for topic in payload["topics"]))
+
 
 if __name__ == "__main__":
     unittest.main()

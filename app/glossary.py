@@ -11,12 +11,24 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 
 GLOSSARY_UNAVAILABLE_TEXT = "Глоссарий временно недоступен. Попробуйте позже."
 GLOSSARY_TOPICS: tuple[tuple[str, str], ...] = (
+    ("vvedenie_v_professiyu", "Введение в профессию"),
+    ("obschaya_psihologiya", "Общая психология"),
+    ("fiziologiya_cheloveka", "Физиология человека"),
+    ("fiziologiya_vnd", "Физиология ВНД"),
+    ("psihofiziologiya", "Психофизиология"),
     ("kachestvennye_metody_issledovaniya", "Качественные методы исследования"),
     ("osnovy_eksperimentalnoy_psihologii", "Основы экспериментальной психологии"),
+    ("psihologicheskoe_konsultirovanie", "Психологическое консультирование"),
 )
 GLOSSARY_TOPIC_CALLBACK_TOKENS = {
+    "vvp": "vvedenie_v_professiyu",
+    "op": "obschaya_psihologiya",
+    "fch": "fiziologiya_cheloveka",
+    "vnd": "fiziologiya_vnd",
+    "psyf": "psihofiziologiya",
     "kmi": "kachestvennye_metody_issledovaniya",
     "oep": "osnovy_eksperimentalnoy_psihologii",
+    "pk": "psihologicheskoe_konsultirovanie",
 }
 GLOSSARY_TOPIC_ID_TO_TOKEN = {topic_id: token for token, topic_id in GLOSSARY_TOPIC_CALLBACK_TOKENS.items()}
 GLOSSARY_QUIZ_SESSION_KEY = "glossary_quiz_session"

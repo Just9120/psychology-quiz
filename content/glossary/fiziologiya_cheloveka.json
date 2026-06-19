@@ -1,0 +1,206 @@
+[
+  {
+    "id": "neuron",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Нейрон",
+    "aliases": [],
+    "short_definition": "Клетка нервной системы, принимающая, преобразующая и передающая сигналы.",
+    "definition": "Нейрон является базовой клеткой нервной системы; работа нейронных сетей связана с восприятием, эмоциями и поведением.",
+    "examples": [
+      "Вопрос m1_phys_001 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_001"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "dendrites",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Дендриты",
+    "aliases": [],
+    "short_definition": "Отростки нейрона для приёма и интеграции входящих сигналов.",
+    "definition": "Дендриты в основном принимают сигналы от других клеток и проводят их к телу нейрона.",
+    "examples": [
+      "Вопрос m1_phys_002 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_002"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "axon",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Аксон",
+    "aliases": [],
+    "short_definition": "Отросток, проводящий сигнал от тела нейрона к другим клеткам.",
+    "definition": "Аксон обеспечивает передачу нервного импульса от тела нейрона к следующей клетке.",
+    "examples": [
+      "Вопрос m1_phys_003 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_003"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "myelin",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Миелиновая оболочка",
+    "aliases": [],
+    "short_definition": "Структура, ускоряющая и повышающая надёжность проведения импульса.",
+    "definition": "Миелиновая оболочка помогает быстрее проводить нервный импульс по волокну.",
+    "examples": [
+      "Вопрос m1_phys_004 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_004"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "synapse",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Синапс",
+    "aliases": [],
+    "short_definition": "Специализированный контакт, где регулируется передача сигнала между клетками.",
+    "definition": "Синапс — место передачи сигнала между клетками, часто через медиатор в химическом синапсе.",
+    "examples": [
+      "Вопрос m1_phys_005 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_005"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "chemical_synaptic_transmission",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Химическая синаптическая передача",
+    "aliases": [],
+    "short_definition": "Выделение медиатора в щель и связывание с рецепторами следующей клетки.",
+    "definition": "В химическом синапсе сигнал передаётся через нейромедиатор и его действие на следующую клетку.",
+    "examples": [
+      "Вопрос m1_phys_006 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_006"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "reflex_principle",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Рефлекторный принцип",
+    "aliases": [],
+    "short_definition": "Подход к пониманию автоматических и быстро запускающихся реакций организма.",
+    "definition": "Рефлекторный принцип помогает понимать автоматические, привычные и быстро запускающиеся реакции.",
+    "examples": [
+      "Вопрос m1_phys_007 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_007"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "voluntary_involuntary_regulation",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Произвольная и непроизвольная регуляция",
+    "aliases": [],
+    "short_definition": "Различение осознанных движений и автоматических телесных реакций.",
+    "definition": "Для психолога важно отличать произвольное действие от непроизвольной регуляции внутренних органов и реакций.",
+    "examples": [
+      "Вопрос m1_phys_008 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_008"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "central_nervous_system",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Центральная нервная система",
+    "aliases": [],
+    "short_definition": "Головной и спинной мозг.",
+    "definition": "Центральная нервная система включает головной и спинной мозг.",
+    "examples": [
+      "Вопрос m1_phys_009 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_009"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "peripheral_nervous_system",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Периферическая нервная система",
+    "aliases": [],
+    "short_definition": "Нервы и нервные узлы вне головного и спинного мозга.",
+    "definition": "Периферическая нервная система включает нервы и нервные узлы, расположенные вне ЦНС.",
+    "examples": [
+      "Вопрос m1_phys_010 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_010"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "sleep_stability",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Сон и устойчивость",
+    "aliases": [],
+    "short_definition": "Условие когнитивной и эмоциональной устойчивости.",
+    "definition": "Сон рассматривается как важное условие когнитивной и эмоциональной устойчивости.",
+    "examples": [
+      "Вопрос m1_phys_011 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_011"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "reflex",
+    "topic_id": "fiziologiya_cheloveka",
+    "term": "Рефлекс",
+    "aliases": [],
+    "short_definition": "Закономерный ответ организма на раздражитель с участием нервной системы.",
+    "definition": "Рефлекс — ответная реакция организма на раздражение при участии нервной системы.",
+    "examples": [
+      "Вопрос m1_phys_012 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_phys_012"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  }
+]

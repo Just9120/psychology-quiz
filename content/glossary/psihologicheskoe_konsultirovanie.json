@@ -1,0 +1,206 @@
+[
+  {
+    "id": "psychological_consulting",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Психологическое консультирование",
+    "aliases": [],
+    "short_definition": "Профессиональная помощь психологически здоровым людям с личными и межличностными трудностями.",
+    "definition": "Консультирование ориентировано на работу с внутриличностными и межличностными затруднениями психологически здоровых людей.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_001 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_001"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "here_and_now_focus",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Фокус «здесь и сейчас»",
+    "aliases": [],
+    "short_definition": "Ориентация на актуальные затруднения клиента.",
+    "definition": "Консультирование работает с текущими проблемами клиента, а не с медицинской патологией как главным предметом.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_002 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_002"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "client_responsibility",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Ответственность клиента",
+    "aliases": [],
+    "short_definition": "Основная активность и ответственность за изменения остаются у клиента.",
+    "definition": "Консультант создаёт условия для диалога, но не забирает у клиента ответственность за изменения.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_003 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_003"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "complaint",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Жалоба",
+    "aliases": [],
+    "short_definition": "Первичный эмоционально заряженный рассказ клиента о неудовлетворённости.",
+    "definition": "Жалоба является исходным материалом, который в работе важно переводить в запрос.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_004 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_004"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "client_request",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Запрос клиента",
+    "aliases": [],
+    "short_definition": "Формулировка желаемого результата и зоны ответственности клиента.",
+    "definition": "Запрос связывает цель консультирования с тем, за что клиент готов брать ответственность.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_005 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_005"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "reflective_listening",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Рефлексивное слушание",
+    "aliases": [],
+    "short_definition": "Перефразирование, отражение чувств, уточнение и резюмирование.",
+    "definition": "Активное или рефлексивное слушание помогает проверять понимание и расшифровывать смыслы сообщений клиента.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_006 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_006"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "open_question",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Открытый вопрос",
+    "aliases": [],
+    "short_definition": "Вопрос, побуждающий к развёрнутому ответу и самоанализу.",
+    "definition": "Открытые вопросы часто начинаются с «что» или «как» и помогают клиенту подробнее исследовать ситуацию.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_007 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_007"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "therapeutic_contract",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Терапевтический контракт",
+    "aliases": [],
+    "short_definition": "Соглашение о целях, методах, ролях, условиях и конфиденциальности.",
+    "definition": "Контракт задаёт рабочие договорённости и границы консультативного процесса.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_008 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_008"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "rapport",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Раппорт",
+    "aliases": [],
+    "short_definition": "Доверие, понимание и эмоциональная связь консультанта и клиента.",
+    "definition": "Раппорт описывает качество контакта между консультантом и клиентом.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_009 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_009"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "metagoal",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Метацель",
+    "aliases": [],
+    "short_definition": "Развитие способности клиента справляться с трудностями в будущем.",
+    "definition": "Метацель отличается от ситуативной цели тем, что направлена на будущую самостоятельность клиента.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_010 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_010"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "reflection_of_feelings",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Отражение чувств",
+    "aliases": [],
+    "short_definition": "Вербализация эмоционального смысла, услышанного в словах клиента.",
+    "definition": "Отражение чувств показывает, что консультант услышал эмоциональный смысл сообщения клиента.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_013 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_013"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "case_conceptualization",
+    "topic_id": "psihologicheskoe_konsultirovanie",
+    "term": "Концептуализация случая",
+    "aliases": [],
+    "short_definition": "Систематизация данных о клиенте, гипотез и стратегии работы.",
+    "definition": "Концептуализация случая объединяет сведения о клиенте, рабочие гипотезы и план консультирования.",
+    "examples": [
+      "Вопрос m3_psychological_consulting_017 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m3_psychological_consulting_017"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  }
+]

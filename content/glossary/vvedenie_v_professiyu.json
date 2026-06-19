@@ -1,0 +1,206 @@
+[
+  {
+    "id": "psychologist_consultant_role",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Роль психолога-консультанта",
+    "aliases": [],
+    "short_definition": "Сопровождение клиента в прояснении переживаний, смыслов и вариантов действий.",
+    "definition": "Психолог-консультант работает с психологическими трудностями и ресурсами клиента немедикаментозно, в рамках профессионального контакта.",
+    "examples": [
+      "Вопрос m1_intro_001 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_001"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "psychiatrist_difference",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Психиатр",
+    "aliases": [],
+    "short_definition": "Медицинский специалист, имеющий право назначать лекарственную терапию.",
+    "definition": "Отличие психиатра от психолога-консультанта связано с медицинской квалификацией и правом на медикаментозное лечение.",
+    "examples": [
+      "Вопрос m1_intro_002 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_002"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "consulting_request_topics",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Типичный консультативный запрос",
+    "aliases": [],
+    "short_definition": "Запрос о совладании со стрессом, отношениях, самооценке или жизненном выборе.",
+    "definition": "Консультирование обычно касается переживаний, отношений, самооценки, стрессовых и жизненных выборов, а не медицинских назначений.",
+    "examples": [
+      "Вопрос m1_intro_003 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_003"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "confidentiality",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Конфиденциальность",
+    "aliases": [],
+    "short_definition": "Бережная защита информации клиента в профессиональных и правовых границах.",
+    "definition": "Конфиденциальность означает защиту клиентской информации с учётом профессиональных правил и заранее оговорённых ограничений.",
+    "examples": [
+      "Вопрос m1_intro_004 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_004"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "professional_boundary",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Профессиональная граница",
+    "aliases": [],
+    "short_definition": "Различение роли, ответственности консультанта и личных отношений.",
+    "definition": "Профессиональные границы удерживают рабочий формат контакта и не позволяют смешивать психологическую помощь с личными отношениями.",
+    "examples": [
+      "Вопрос m1_intro_005 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_005"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "informed_consent",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Информированное согласие",
+    "aliases": [],
+    "short_definition": "Осознанное согласие после обсуждения целей, формата, рисков и ограничений.",
+    "definition": "Информированное согласие предполагает ясное предварительное объяснение условий, границ работы и правил конфиденциальности.",
+    "examples": [
+      "Вопрос m1_intro_006 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_006"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "professional_position",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Профессиональная позиция",
+    "aliases": [],
+    "short_definition": "Уважительный, внимательный, неосуждающий и структурированный контакт.",
+    "definition": "Профессиональная позиция консультанта проявляется в уважении, рабочей нейтральности и внимательном отношении к клиенту.",
+    "examples": [
+      "Вопрос m1_intro_007 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_007"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "client_autonomy",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Автономия клиента",
+    "aliases": [],
+    "short_definition": "Сохранение субъектности клиента в понимании ситуации и выборе решений.",
+    "definition": "Навязывание советов ослабляет автономию клиента, потому что подменяет его собственный анализ готовым решением консультанта.",
+    "examples": [
+      "Вопрос m1_intro_008 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_008"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "client_centeredness",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Клиент-центрированность",
+    "aliases": [],
+    "short_definition": "Фокус на переживаниях, смыслах и потребностях клиента.",
+    "definition": "Клиент-центрированность означает внимание к субъективному опыту клиента при сохранении профессиональной рамки контакта.",
+    "examples": [
+      "Вопрос m1_intro_009 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_009"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "empathy",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Эмпатия",
+    "aliases": [],
+    "short_definition": "Понимание переживаний клиента при сохранении профессиональных границ.",
+    "definition": "Эмпатия помогает точнее понимать внутренний опыт клиента, но не отменяет рабочую позицию и ответственность специалиста.",
+    "examples": [
+      "Вопрос m1_intro_010 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_010"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "active_listening",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Активное слушание",
+    "aliases": [],
+    "short_definition": "Отражение содержания и чувств с уточняющими вопросами.",
+    "definition": "Активное слушание включает прояснение смысла, отражение переживаний и поддержание контакта без поспешных выводов.",
+    "examples": [
+      "Вопрос m1_intro_011 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_011"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "working_alliance",
+    "topic_id": "vvedenie_v_professiyu",
+    "term": "Консультативный альянс",
+    "aliases": [],
+    "short_definition": "Доверительный рабочий контакт, основанный на надёжности, уважении и ясной рамке.",
+    "definition": "Альянс строится на доверии, предсказуемости взаимодействия, ясности рамки и ощущении безопасности контакта.",
+    "examples": [
+      "Вопрос m1_intro_012 использует это понятие как ключ к различению близких учебных вариантов."
+    ],
+    "confusable_with": [],
+    "source_refs": [
+      "question:m1_intro_012"
+    ],
+    "difficulty": "easy",
+    "status": "approved"
+  }
+]
