@@ -1,9 +1,12 @@
+import json
 import random
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from app.glossary import (
     GLOSSARY_TOPICS,
+    GLOSSARY_TOPIC_CALLBACK_TOKENS,
     build_glossary_answer_keyboard,
     build_glossary_count_keyboard,
     build_glossary_feedback_keyboard,
@@ -175,12 +178,24 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertIsNotNone(entries)
         self.assertEqual(TOPIC_ID, callback_token_to_topic_id("kmi"))
 
-    def test_active_glossary_registry_has_eight_topics_and_unique_tokens(self):
-        topic_ids = [topic_id for topic_id, _title in GLOSSARY_TOPICS]
-        self.assertEqual(8, len(GLOSSARY_TOPICS))
-        self.assertEqual(len(topic_ids), len(set(topic_ids)))
-        self.assertEqual(8, len(set(__import__('app.glossary', fromlist=['GLOSSARY_TOPIC_CALLBACK_TOKENS']).GLOSSARY_TOPIC_CALLBACK_TOKENS)))
-        self.assertEqual(set(topic_ids), set(__import__('app.glossary', fromlist=['GLOSSARY_TOPIC_CALLBACK_TOKENS']).GLOSSARY_TOPIC_CALLBACK_TOKENS.values()))
+    def test_glossary_registry_matches_active_question_topics_contract(self):
+        topics = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
+        active_question_topics = [
+            (topic["id"], topic["title"])
+            for topic in topics
+            if topic.get("status") == "active" and "questions" in topic.get("available_contours", [])
+        ]
+        active_topic_ids = {topic_id for topic_id, _title in active_question_topics}
+
+        self.assertEqual(active_question_topics, list(GLOSSARY_TOPICS))
+        self.assertTrue(active_question_topics)
+        self.assertTrue(
+            all("glossary" in topic.get("available_contours", []) for topic in topics if topic.get("id") in active_topic_ids)
+        )
+        callback_topic_ids = list(GLOSSARY_TOPIC_CALLBACK_TOKENS.values())
+        self.assertEqual(len(GLOSSARY_TOPIC_CALLBACK_TOKENS), len(set(GLOSSARY_TOPIC_CALLBACK_TOKENS)))
+        self.assertEqual(len(callback_topic_ids), len(set(callback_topic_ids)))
+        self.assertEqual(active_topic_ids, set(callback_topic_ids))
 
     def test_all_active_glossary_topics_load_have_valid_entries_and_questions(self):
         for topic_id, _title in GLOSSARY_TOPICS:
@@ -196,12 +211,11 @@ class GlossaryRuntimeTests(unittest.TestCase):
                 self.assertTrue(entry.examples)
                 self.assertTrue(entry.source_refs)
                 self.assertTrue(entry.difficulty)
-                self.assertIsNotNone(build_glossary_quiz_question(entries, entry, rng=random.Random(5)), entry.id)
+                question = build_glossary_quiz_question(entries, entry, rng=random.Random(5))
+                self.assertIsNotNone(question, entry.id)
+                self.assertEqual(4, len(question.options))
 
     def test_glossary_source_refs_use_supported_formats_and_question_refs_resolve(self):
-        import json
-        from pathlib import Path
-
         approved_question_ids = set()
         for path in Path("content/questions").glob("**/*.json"):
             for question in json.loads(path.read_text(encoding="utf-8")):
@@ -228,7 +242,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
 
         payload = list_glossary_topics_payload()
         self.assertEqual([5, 10, "all"], payload["question_count_choices"])
-        self.assertEqual(8, len(payload["topics"]))
+        self.assertEqual(len(GLOSSARY_TOPICS), len(payload["topics"]))
         self.assertEqual([topic_id for topic_id, _title in GLOSSARY_TOPICS], [topic["topic_id"] for topic in payload["topics"]])
         self.assertTrue(all(topic["available_count"] >= 10 for topic in payload["topics"]))
 

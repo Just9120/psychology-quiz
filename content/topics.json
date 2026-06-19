@@ -7,9 +7,10 @@
     "status": "active",
     "order": 110,
     "available_contours": [
-      "questions"
+      "questions",
+      "glossary"
     ],
-    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+    "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
   {
     "id": "obschaya_psihologiya",
@@ -19,9 +20,10 @@
     "status": "active",
     "order": 120,
     "available_contours": [
-      "questions"
+      "questions",
+      "glossary"
     ],
-    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+    "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
   {
     "id": "fiziologiya_cheloveka",
@@ -31,9 +33,10 @@
     "status": "active",
     "order": 130,
     "available_contours": [
-      "questions"
+      "questions",
+      "glossary"
     ],
-    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+    "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
   {
     "id": "fiziologiya_vnd",
@@ -43,9 +46,10 @@
     "status": "active",
     "order": 140,
     "available_contours": [
-      "questions"
+      "questions",
+      "glossary"
     ],
-    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+    "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
   {
     "id": "psihofiziologiya",
@@ -55,9 +59,10 @@
     "status": "active",
     "order": 150,
     "available_contours": [
-      "questions"
+      "questions",
+      "glossary"
     ],
-    "source_notes": "Existing approved question topic; glossary/literature contours not implemented yet."
+    "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
   {
     "id": "osnovy_eksperimentalnoy_psihologii",
@@ -93,8 +98,9 @@
     "status": "active",
     "order": 310,
     "available_contours": [
-      "questions"
+      "questions",
+      "glossary"
     ],
-    "source_notes": "Existing approved question topic; English filename slug retained intentionally as the stable ID candidate; glossary/literature contours not implemented yet."
+    "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   }
 ]

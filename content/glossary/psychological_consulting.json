@@ -1,7 +1,7 @@
 [
   {
     "id": "psychological_consulting",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Психологическое консультирование",
     "aliases": [],
     "short_definition": "Профессиональная помощь психологически здоровым людям с личными и межличностными трудностями.",
@@ -18,7 +18,7 @@
   },
   {
     "id": "here_and_now_focus",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Фокус «здесь и сейчас»",
     "aliases": [],
     "short_definition": "Ориентация на актуальные затруднения клиента.",
@@ -35,7 +35,7 @@
   },
   {
     "id": "client_responsibility",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Ответственность клиента",
     "aliases": [],
     "short_definition": "Основная активность и ответственность за изменения остаются у клиента.",
@@ -52,7 +52,7 @@
   },
   {
     "id": "complaint",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Жалоба",
     "aliases": [],
     "short_definition": "Первичный эмоционально заряженный рассказ клиента о неудовлетворённости.",
@@ -69,7 +69,7 @@
   },
   {
     "id": "client_request",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Запрос клиента",
     "aliases": [],
     "short_definition": "Формулировка желаемого результата и зоны ответственности клиента.",
@@ -86,7 +86,7 @@
   },
   {
     "id": "reflective_listening",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Рефлексивное слушание",
     "aliases": [],
     "short_definition": "Перефразирование, отражение чувств, уточнение и резюмирование.",
@@ -103,7 +103,7 @@
   },
   {
     "id": "open_question",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Открытый вопрос",
     "aliases": [],
     "short_definition": "Вопрос, побуждающий к развёрнутому ответу и самоанализу.",
@@ -120,7 +120,7 @@
   },
   {
     "id": "therapeutic_contract",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Терапевтический контракт",
     "aliases": [],
     "short_definition": "Соглашение о целях, методах, ролях, условиях и конфиденциальности.",
@@ -137,7 +137,7 @@
   },
   {
     "id": "rapport",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Раппорт",
     "aliases": [],
     "short_definition": "Доверие, понимание и эмоциональная связь консультанта и клиента.",
@@ -154,7 +154,7 @@
   },
   {
     "id": "metagoal",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Метацель",
     "aliases": [],
     "short_definition": "Развитие способности клиента справляться с трудностями в будущем.",
@@ -171,7 +171,7 @@
   },
   {
     "id": "reflection_of_feelings",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Отражение чувств",
     "aliases": [],
     "short_definition": "Вербализация эмоционального смысла, услышанного в словах клиента.",
@@ -188,7 +188,7 @@
   },
   {
     "id": "case_conceptualization",
-    "topic_id": "psihologicheskoe_konsultirovanie",
+    "topic_id": "psychological_consulting",
     "term": "Концептуализация случая",
     "aliases": [],
     "short_definition": "Систематизация данных о клиенте, гипотез и стратегии работы.",

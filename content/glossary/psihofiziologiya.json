@@ -1,6 +1,6 @@
 [
   {
-    "id": "neuron",
+    "id": "psyf_neuron",
     "topic_id": "psihofiziologiya",
     "term": "Нейрон",
     "aliases": [],
@@ -17,7 +17,7 @@
     "status": "approved"
   },
   {
-    "id": "dendrites",
+    "id": "psyf_dendrites",
     "topic_id": "psihofiziologiya",
     "term": "Дендриты",
     "aliases": [],
@@ -34,7 +34,7 @@
     "status": "approved"
   },
   {
-    "id": "synapse",
+    "id": "psyf_synapse",
     "topic_id": "psihofiziologiya",
     "term": "Синапс",
     "aliases": [],

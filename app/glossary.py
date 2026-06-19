@@ -16,9 +16,9 @@ GLOSSARY_TOPICS: tuple[tuple[str, str], ...] = (
     ("fiziologiya_cheloveka", "Физиология человека"),
     ("fiziologiya_vnd", "Физиология ВНД"),
     ("psihofiziologiya", "Психофизиология"),
-    ("kachestvennye_metody_issledovaniya", "Качественные методы исследования"),
     ("osnovy_eksperimentalnoy_psihologii", "Основы экспериментальной психологии"),
-    ("psihologicheskoe_konsultirovanie", "Психологическое консультирование"),
+    ("kachestvennye_metody_issledovaniya", "Качественные методы исследования"),
+    ("psychological_consulting", "Психологическое консультирование"),
 )
 GLOSSARY_TOPIC_CALLBACK_TOKENS = {
     "vvp": "vvedenie_v_professiyu",
@@ -28,7 +28,7 @@ GLOSSARY_TOPIC_CALLBACK_TOKENS = {
     "psyf": "psihofiziologiya",
     "kmi": "kachestvennye_metody_issledovaniya",
     "oep": "osnovy_eksperimentalnoy_psihologii",
-    "pk": "psihologicheskoe_konsultirovanie",
+    "pc": "psychological_consulting",
 }
 GLOSSARY_TOPIC_ID_TO_TOKEN = {topic_id: token for token, topic_id in GLOSSARY_TOPIC_CALLBACK_TOKENS.items()}
 GLOSSARY_QUIZ_SESSION_KEY = "glossary_quiz_session"
