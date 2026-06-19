@@ -111,6 +111,7 @@ def compare_db(db_path: str, canonical_inventory: list[dict[str, Any]]) -> dict[
         "foreign_key_check": [],
         "missing_approved_db_rows": [],
         "retired_canonical_db_rows": [],
+        "legacy_retired_db_rows": [],
         "unknown_db_rows": [],
         "mismatched_approved_rows": [],
         "orphan_option_rows": [],
@@ -127,7 +128,9 @@ def compare_db(db_path: str, canonical_inventory: list[dict[str, Any]]) -> dict[
 
     result["missing_approved_db_rows"] = sorted(set(approved_by_id) - set(db_rows))
     result["retired_canonical_db_rows"] = sorted(set(retired_by_id) & set(db_rows))
-    result["unknown_db_rows"] = sorted(set(db_rows) - set(canonical_by_id))
+    unknown_ids = set(db_rows) - set(canonical_by_id)
+    result["legacy_retired_db_rows"] = sorted(external_id for external_id in unknown_ids if db_rows[external_id]["status"] == "retired")
+    result["unknown_db_rows"] = sorted(external_id for external_id in unknown_ids if db_rows[external_id]["status"] != "retired")
     result["orphan_option_rows"] = meta["orphan_options"]
     result["duplicate_external_ids"] = sorted(meta["duplicate_external_ids"])
 
@@ -203,6 +206,7 @@ def main() -> int:
         print(f"- foreign_key_check rows: {len(db['foreign_key_check'])}")
         print(f"- missing approved rows: {len(db['missing_approved_db_rows'])}")
         print(f"- retired canonical rows retained: {len(db['retired_canonical_db_rows'])}")
+        print(f"- legacy retired rows retained: {len(db['legacy_retired_db_rows'])}")
         print(f"- unknown rows: {len(db['unknown_db_rows'])}")
         print(f"- mismatched approved rows: {len(db['mismatched_approved_rows'])}")
         print(f"- orphan option rows: {len(db['orphan_option_rows'])}")
