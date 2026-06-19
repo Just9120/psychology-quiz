@@ -8,6 +8,7 @@ from unittest.mock import patch
 from app.glossary import (
     GLOSSARY_TOPICS,
     GLOSSARY_TOPIC_CALLBACK_TOKENS,
+    GlossaryEntry,
     build_glossary_answer_keyboard,
     build_glossary_count_keyboard,
     build_glossary_feedback_keyboard,
@@ -38,6 +39,30 @@ INTERNAL_MARKERS = ("source_refs", "supplied_snippet", "question:m2_exp", "exp_p
 def normalize_glossary_text(value: str) -> str:
     return " ".join(unicodedata.normalize("NFKC", value).casefold().split())
 
+
+
+def make_glossary_entry(entry_id: str, short_definition: str, confusable_with: tuple[str, ...] = (), topic_id: str = "fixture_topic") -> GlossaryEntry:
+    return GlossaryEntry(
+        id=entry_id,
+        topic_id=topic_id,
+        term=f"Term {entry_id}",
+        aliases=(),
+        short_definition=short_definition,
+        definition=f"Definition {entry_id}",
+        examples=(f"Example {entry_id}",),
+        difficulty="basic",
+        source_refs=("supplied_snippet:test",),
+        confusable_with=confusable_with,
+    )
+
+
+def question_distractor_entry_ids(question, entries):
+    by_definition = {normalize_glossary_text(entry.short_definition): entry.id for entry in entries}
+    return {
+        by_definition[normalize_glossary_text(option)]
+        for index, option in enumerate(question.options)
+        if index != question.correct_option_index
+    }
 
 def load_active_question_topics():
     topics = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
@@ -73,6 +98,8 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertEqual(10, len(exp_entries))
         self.assertTrue(all(entry.id.startswith("exp_psych_") for entry in exp_entries))
         self.assertTrue(all(entry.source_refs for entry in exp_entries))
+        self.assertTrue(all(isinstance(entry.confusable_with, tuple) for entry in exp_entries))
+        self.assertTrue(any(entry.confusable_with for entry in exp_entries))
 
     def test_both_topics_appear_and_new_token_maps(self):
         topic_ids = [topic_id for topic_id, _title in GLOSSARY_TOPICS]
@@ -204,6 +231,80 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertIsNotNone(entries)
         self.assertEqual(TOPIC_ID, callback_token_to_topic_id("kmi"))
 
+    def test_loader_rejects_malformed_confusable_metadata(self):
+        raw_entries = json.loads(Path(f"content/glossary/{EXP_TOPIC_ID}.json").read_text(encoding="utf-8"))
+        raw_entries[0]["confusable_with"] = "not-a-list"
+
+        with patch("app.glossary.Path.read_text", return_value=json.dumps(raw_entries, ensure_ascii=False)):
+            self.assertIsNone(load_glossary_entries(EXP_TOPIC_ID))
+
+    def test_direct_confusables_fill_all_distractor_slots(self):
+        entries = [
+            make_glossary_entry("target", "correct", ("a", "b", "c")),
+            make_glossary_entry("a", "direct a"),
+            make_glossary_entry("b", "direct b"),
+            make_glossary_entry("c", "direct c"),
+            make_glossary_entry("d", "fallback d"),
+        ]
+
+        question = build_glossary_quiz_question(entries, entries[0], rng=random.Random(10))
+
+        self.assertEqual({"a", "b", "c"}, question_distractor_entry_ids(question, entries))
+
+    def test_partial_direct_confusables_use_ranked_fallback(self):
+        entries = [
+            make_glossary_entry("target", "correct", ("a",)),
+            make_glossary_entry("a", "direct a"),
+            make_glossary_entry("b", "reciprocal b", ("target",)),
+            make_glossary_entry("c", "fallback c"),
+            make_glossary_entry("d", "fallback d"),
+        ]
+
+        question = build_glossary_quiz_question(entries, entries[0], rng=random.Random(11))
+        distractor_ids = question_distractor_entry_ids(question, entries)
+
+        self.assertIn("a", distractor_ids)
+        self.assertIn("b", distractor_ids)
+        self.assertEqual(3, len(distractor_ids))
+
+    def test_reciprocal_confusables_are_preferred_over_unrelated_fallback(self):
+        entries = [
+            make_glossary_entry("target", "correct"),
+            make_glossary_entry("a", "reciprocal a", ("target",)),
+            make_glossary_entry("b", "reciprocal b", ("target",)),
+            make_glossary_entry("c", "reciprocal c", ("target",)),
+            make_glossary_entry("d", "fallback d"),
+        ]
+
+        question = build_glossary_quiz_question(entries, entries[0], rng=random.Random(12))
+
+        self.assertEqual({"a", "b", "c"}, question_distractor_entry_ids(question, entries))
+
+    def test_no_confusables_falls_back_to_same_topic_options(self):
+        entries = [
+            make_glossary_entry("target", "correct"),
+            make_glossary_entry("a", "fallback a"),
+            make_glossary_entry("b", "fallback b"),
+            make_glossary_entry("c", "fallback c"),
+        ]
+
+        question = build_glossary_quiz_question(entries, entries[0], rng=random.Random(13))
+
+        self.assertIsNotNone(question)
+        self.assertEqual(4, len(question.options))
+        self.assertEqual({"a", "b", "c"}, question_distractor_entry_ids(question, entries))
+
+    def test_duplicate_or_empty_option_texts_return_none_instead_of_short_question(self):
+        entries = [
+            make_glossary_entry("target", "correct", ("a", "b", "c")),
+            make_glossary_entry("a", "duplicate"),
+            make_glossary_entry("b", " Duplicate "),
+            make_glossary_entry("c", ""),
+            make_glossary_entry("d", "fallback d"),
+        ]
+
+        self.assertIsNone(build_glossary_quiz_question(entries, entries[0], rng=random.Random(14)))
+
     def test_glossary_registry_matches_active_question_topics_contract(self):
         active_topics = load_active_question_topics()
         active_question_topics = [(topic["id"], topic["title"]) for topic in active_topics]
@@ -277,14 +378,38 @@ class GlossaryRuntimeTests(unittest.TestCase):
         for topic in payload["topics"]:
             self.assertEqual({"topic_id", "title", "available_count"}, set(topic))
 
-    def test_every_glossary_topic_can_generate_four_option_questions_for_all_entries(self):
+    def test_every_glossary_topic_generates_ranked_same_topic_unique_questions(self):
         for topic_id, _title in GLOSSARY_TOPICS:
             entries = load_glossary_entries(topic_id)
+            entries_by_id = {entry.id: entry for entry in entries}
+            entry_id_by_definition = {normalize_glossary_text(entry.short_definition): entry.id for entry in entries}
             for index, entry in enumerate(entries):
                 question = build_glossary_quiz_question(entries, entry, rng=random.Random(index))
                 self.assertIsNotNone(question, (topic_id, entry.id))
                 self.assertEqual(4, len(question.options), (topic_id, entry.id))
-                self.assertEqual(len(question.options), len(set(question.options)), (topic_id, entry.id))
+                normalized_options = [normalize_glossary_text(option) for option in question.options]
+                self.assertTrue(all(normalized_options), (topic_id, entry.id))
+                self.assertEqual(4, len(set(normalized_options)), (topic_id, entry.id))
+                self.assertEqual(1, normalized_options.count(normalize_glossary_text(entry.short_definition)), (topic_id, entry.id))
+
+                distractor_ids = {
+                    entry_id_by_definition[normalized_option]
+                    for option_index, normalized_option in enumerate(normalized_options)
+                    if option_index != question.correct_option_index
+                }
+                self.assertEqual(3, len(distractor_ids), (topic_id, entry.id))
+                self.assertNotIn(entry.id, distractor_ids, (topic_id, entry.id))
+                self.assertTrue(all(entries_by_id[distractor_id].topic_id == topic_id for distractor_id in distractor_ids), (topic_id, entry.id))
+
+                direct_confusables = [
+                    entries_by_id[confusable_id].id
+                    for confusable_id in entry.confusable_with
+                    if confusable_id in entries_by_id
+                    and confusable_id != entry.id
+                    and normalize_glossary_text(entries_by_id[confusable_id].short_definition) not in {normalize_glossary_text(entry.short_definition)}
+                ]
+                if len(set(direct_confusables)) <= 3:
+                    self.assertTrue(set(direct_confusables).issubset(distractor_ids), (topic_id, entry.id, direct_confusables, distractor_ids))
 
 
 if __name__ == "__main__":
