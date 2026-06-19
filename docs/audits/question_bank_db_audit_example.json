@@ -62,6 +62,7 @@
     "foreign_key_check": [],
     "missing_approved_db_rows": [],
     "retired_canonical_db_rows": [],
+    "legacy_retired_db_rows": [],
     "unknown_db_rows": [],
     "mismatched_approved_rows": [],
     "orphan_option_rows": [],

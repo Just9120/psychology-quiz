@@ -52,3 +52,14 @@ Semantic question-quality calibration remains the next separate content PR. Queu
 - This repository pass is structural validation plus reproducible SQLite parity tooling; it is not a substitute for original source-pack review or psychology SME certification.
 - Repository `source_ref` values identify repository/source-pack references only; they are not external-source certification.
 - Ambiguous semantic quality questions should be handled in the next separate content calibration PR with source material or SME input.
+
+## QUESTION-BANK-QUALITY-CALIBRATION-001 update
+
+The SQLite audit now distinguishes retained non-blocking rows from true blockers:
+
+- `retired_canonical_db_rows` are non-approved canonical rows that still exist in SQLite and are informational only.
+- `legacy_retired_db_rows` are SQLite rows absent from current canonical JSON with DB status `retired` and are informational only.
+- `unknown_db_rows` are SQLite rows absent from canonical JSON whose DB status is not `retired` and remain blocking.
+- `missing_approved_db_rows` and `mismatched_approved_rows` remain blocking for approved canonical content.
+
+The deterministic quality report is generated with `python scripts/audit_question_quality.py --report-path docs/audits/question_bank_quality_report.json`. After calibration, the active approved bank is 487/575 unique-longest-correct (84.70%) with 21 high-severity length cues after artificial padding cleanup; remaining cases are tracked in the compact review queue.

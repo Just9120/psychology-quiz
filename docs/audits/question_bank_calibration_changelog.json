@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "task_id": "QUESTION-BANK-QUALITY-CALIBRATION-001",
+    "changed_question_count": 1,
+    "scope_note": "Only real semantic content changes are listed; mechanical length-padding edits were removed."
+  },
+  "items": [
+    {
+      "question_id": "m3_psychological_consulting_031",
+      "topic_id": "psychological_consulting",
+      "issue_type": "near_duplicate_resolution",
+      "change_summary": "Reworked a generic rapport definition prompt into a recognition item about signs that rapport is forming during a consultation.",
+      "source_ref": "Модуль 3 / Психологическое консультирование / Урок 4. Структура и процесс консультирования. Навыки первичной консультации",
+      "validation_basis": "Repository-grounded review of the confirmed near-duplicate pair m3_psychological_consulting_009 and m3_psychological_consulting_031; the two items now assess different learning objectives."
+    }
+  ]
+}

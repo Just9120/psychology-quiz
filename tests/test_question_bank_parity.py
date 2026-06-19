@@ -148,3 +148,22 @@ def test_review_queue_is_compact_unique_and_capped() -> None:
             evidence = item["evidence"]
             assert evidence["correct_length_to_median_distractor_ratio"] >= 2.75
             assert evidence["correct_length_minus_longest_distractor"] >= 45
+
+def test_legacy_retired_db_rows_are_informational_not_blocking(tmp_path: Path) -> None:
+    db_path = _init_seeded_db(tmp_path)
+    with sqlite3.connect(db_path) as conn:
+        _insert_question(conn, external_id="legacy-retired-question")
+        conn.execute("UPDATE questions SET status = 'retired' WHERE external_id = ?", ("legacy-retired-question",))
+    report = build_report(str(db_path))
+    assert report["sqlite"]["legacy_retired_db_rows"] == ["legacy-retired-question"]
+    assert report["sqlite"]["unknown_db_rows"] == []
+    assert not audit_question_bank.has_blockers(report)
+
+
+def test_unknown_non_retired_db_row_is_blocking(tmp_path: Path) -> None:
+    db_path = _init_seeded_db(tmp_path)
+    with sqlite3.connect(db_path) as conn:
+        _insert_question(conn, external_id="unknown-approved-question")
+    report = build_report(str(db_path))
+    assert report["sqlite"]["unknown_db_rows"] == ["unknown-approved-question"]
+    assert audit_question_bank.has_blockers(report)
