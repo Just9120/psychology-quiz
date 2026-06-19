@@ -19,11 +19,26 @@ def test_global_canonical_quality_thresholds_and_rapport_resolution() -> None:
     report=build_report()
     g=report["global"]
     assert g["approved_question_count"] == 575
-    assert g["unique_longest_correct_rate"] <= 0.60
-    assert g["high_severity_length_cue_count"] == 0
+    assert g["unique_longest_correct_count"] == 487
+    assert g["high_severity_length_cue_count"] == 21
     assert g["duplicate_normalized_stems"] == {}
     inv,_=load_canonical_inventory(); by_id={r["external_id"]:r for r in inv}
     assert "что такое раппорт в консультировании?" not in {normalize_text(by_id["m3_psychological_consulting_031"]["question_text"])}
+
+
+def test_question_options_do_not_contain_artificial_padding_phrases() -> None:
+    forbidden = [
+        "в рамках того же учебного раздела",
+        "при сохранении исходной логики темы",
+        "частный вариант похожего процесса",
+    ]
+    inv, _ = load_canonical_inventory()
+    offending = []
+    for row in inv:
+        for option in row["options"]:
+            if any(phrase in option for phrase in forbidden):
+                offending.append((row["external_id"], option))
+    assert offending == []
 
 def test_changelog_references_active_canonical_question_ids() -> None:
     inv,_=load_canonical_inventory(); active={r["external_id"] for r in inv if r["status"]=="approved"}

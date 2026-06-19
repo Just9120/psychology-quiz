@@ -16,7 +16,7 @@
 - ✅ `MINIAPP-SETUP-URL-DECUPLING-001` — Mini App setup launch URLs now carry compact bootstrap data and hydrate categories/glossary topics through the existing authenticated `/miniapp/setup-options` API, protecting `/ui` from category/glossary growth without changing user-visible quiz semantics.
 - ✅ `GLOSSARY-DISTRACTOR-QUALITY-ENGINE-001` — Glossary distractors are now selected from curated same-topic `confusable_with` relationships first, then reciprocal relations, then same-topic fallback; future source/SME review remains a separate optional quality layer.
 - ✅ `QUESTION-BANK-GLOBAL-QUALITY-AND-DB-PARITY-001` — All 575 active approved canonical questions across 8 active topics are structurally validated and auditable against SQLite with read-only JSON → DB parity checks; the oversized full-bank review manifest was replaced with a compact actionable quality queue.
-- ✅ `QUESTION-BANK-QUALITY-CALIBRATION-001` — Active question-bank calibration reduced unique-longest-correct cueing from 487/575 (84.70%) to 304/575 (52.87%), eliminated high-severity length cues, resolved the rapport near-duplicate, added deterministic quality reporting, separated legacy retired SQLite rows as informational, and documented explicit unfinished-session closure for safe content rollout.
+- ✅ `QUESTION-BANK-QUALITY-CALIBRATION-001` — Active question-bank calibration kept repository-grounded quality ahead of metric compliance, removed artificial length-padding edits, resolved the rapport near-duplicate, added deterministic quality reporting, separated legacy retired SQLite rows as informational, and documented explicit unfinished-session closure for safe content rollout.
 - 👉 Repository source-of-truth posture — docs now track the post-QA content baseline and glossary audit posture; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
 
 ## Current product/runtime posture
@@ -44,7 +44,7 @@
 | Module 2 | `Основы экспериментальной психологии` | 118 | Active limited scope; answer positions balanced; repo-local source_ref hygiene reviewed; difficulty/onboarding review remains optional future work. |
 | Module 2 | `Качественные методы исследования` | 53 | Active limited scope; answer positions balanced; `m2_qual_023` / `m2_qual_041` intentionally retained as scaffolding; repo-local source_ref hygiene reviewed. |
 | Module 3 | `Психологическое консультирование` | 108 | First active Module 3 scope; practical/case/checklist questions embedded in the topic category. |
-| **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline; structurally validated, calibrated below the <=60% unique-longest-correct target, covered by JSON → SQLite parity and deterministic quality audit tooling, and paired with an empty compact actionable queue after this pass. |
+| **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline; structurally validated, covered by JSON → SQLite parity and deterministic quality audit tooling, with remaining high-severity length-cue follow-up retained in the compact actionable queue rather than hidden by artificial padding. |
 
 ## Next recommended item
 1. For question-bank content replacement while unfinished sessions exist, follow `docs/question_bank_content_rollout.md`; unfinished-session closure is explicit operator action only and never automatic.

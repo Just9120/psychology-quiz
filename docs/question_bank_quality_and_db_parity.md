@@ -62,4 +62,4 @@ The SQLite audit now distinguishes retained non-blocking rows from true blockers
 - `unknown_db_rows` are SQLite rows absent from canonical JSON whose DB status is not `retired` and remain blocking.
 - `missing_approved_db_rows` and `mismatched_approved_rows` remain blocking for approved canonical content.
 
-The deterministic quality report is generated with `python scripts/audit_question_quality.py --report-path docs/audits/question_bank_quality_report.json`. After calibration, the active approved bank is 304/575 unique-longest-correct (52.87%) with 0 high-severity length cues.
+The deterministic quality report is generated with `python scripts/audit_question_quality.py --report-path docs/audits/question_bank_quality_report.json`. After calibration, the active approved bank is 487/575 unique-longest-correct (84.70%) with 21 high-severity length cues after artificial padding cleanup; remaining cases are tracked in the compact review queue.

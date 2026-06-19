@@ -1,9 +1,409 @@
 {
   "metadata": {
     "purpose": "Compact actionable queue for reproducible question-bank quality follow-up; not a full-bank semantic review manifest.",
-    "generation_rule": "Resolved high-severity answer-length cue items and the confirmed rapport near-duplicate during QUESTION-BANK-QUALITY-CALIBRATION-001. Retain only concrete unresolved follow-up items.",
+    "generation_rule": "Includes confirmed structural blockers/duplicates/contradictions when present, plus answer-length-cue cases selected by the deterministic rule embedded in each item. Current structural validation found no blockers, duplicate IDs, or duplicate normalized stems.",
     "max_items": 50,
-    "item_count": 0
+    "item_count": 21
   },
-  "items": []
+  "items": [
+    {
+      "question_id": "m1_gp_019",
+      "topic_id": "obschaya_psihologiya",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          23,
+          34,
+          92,
+          24
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 3.83,
+        "correct_length_minus_longest_distractor": 58
+      },
+      "severity": "high",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_vnd_048",
+      "topic_id": "fiziologiya_vnd",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          41,
+          35,
+          39,
+          133
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 3.41,
+        "correct_length_minus_longest_distractor": 92
+      },
+      "severity": "high",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_intro_035",
+      "topic_id": "vvedenie_v_professiyu",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          90,
+          27,
+          43,
+          26
+        ],
+        "correct_option_index": 0,
+        "correct_length_to_median_distractor_ratio": 3.33,
+        "correct_length_minus_longest_distractor": 47
+      },
+      "severity": "high",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_psyf_022",
+      "topic_id": "psihofiziologiya",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          85,
+          32,
+          26,
+          19
+        ],
+        "correct_option_index": 0,
+        "correct_length_to_median_distractor_ratio": 3.27,
+        "correct_length_minus_longest_distractor": 53
+      },
+      "severity": "high",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m2_exp_027",
+      "topic_id": "osnovy_eksperimentalnoy_psihologii",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          50,
+          42,
+          42,
+          136
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 3.24,
+        "correct_length_minus_longest_distractor": 86
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m3_psychological_consulting_100",
+      "topic_id": "psychological_consulting",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          50,
+          51,
+          48,
+          159
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 3.18,
+        "correct_length_minus_longest_distractor": 108
+      },
+      "severity": "high",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m3_psychological_consulting_108",
+      "topic_id": "psychological_consulting",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          38,
+          54,
+          40,
+          125
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 3.12,
+        "correct_length_minus_longest_distractor": 71
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m2_exp_046",
+      "topic_id": "osnovy_eksperimentalnoy_psihologii",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          136,
+          44,
+          49,
+          38
+        ],
+        "correct_option_index": 0,
+        "correct_length_to_median_distractor_ratio": 3.09,
+        "correct_length_minus_longest_distractor": 87
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_psyf_069",
+      "topic_id": "psihofiziologiya",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          22,
+          35,
+          57,
+          107
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 3.06,
+        "correct_length_minus_longest_distractor": 50
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_vnd_047",
+      "topic_id": "fiziologiya_vnd",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          57,
+          68,
+          173,
+          52
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 3.04,
+        "correct_length_minus_longest_distractor": 105
+      },
+      "severity": "high",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m3_psychological_consulting_096",
+      "topic_id": "psychological_consulting",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          53,
+          41,
+          37,
+          121
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 2.95,
+        "correct_length_minus_longest_distractor": 68
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m3_psychological_consulting_107",
+      "topic_id": "psychological_consulting",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          44,
+          35,
+          123,
+          42
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 2.93,
+        "correct_length_minus_longest_distractor": 79
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m3_psychological_consulting_106",
+      "topic_id": "psychological_consulting",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          30,
+          117,
+          46,
+          40
+        ],
+        "correct_option_index": 1,
+        "correct_length_to_median_distractor_ratio": 2.92,
+        "correct_length_minus_longest_distractor": 71
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m3_psychological_consulting_039",
+      "topic_id": "psychological_consulting",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          40,
+          44,
+          116,
+          38
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 2.9,
+        "correct_length_minus_longest_distractor": 72
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_vnd_031",
+      "topic_id": "fiziologiya_vnd",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          35,
+          37,
+          107,
+          37
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 2.89,
+        "correct_length_minus_longest_distractor": 70
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_phys_051",
+      "topic_id": "fiziologiya_cheloveka",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          41,
+          64,
+          135,
+          47
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 2.87,
+        "correct_length_minus_longest_distractor": 71
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_intro_031",
+      "topic_id": "vvedenie_v_professiyu",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          128,
+          30,
+          45,
+          65
+        ],
+        "correct_option_index": 0,
+        "correct_length_to_median_distractor_ratio": 2.84,
+        "correct_length_minus_longest_distractor": 63
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m2_exp_030",
+      "topic_id": "osnovy_eksperimentalnoy_psihologii",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          33,
+          36,
+          33,
+          93
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 2.82,
+        "correct_length_minus_longest_distractor": 57
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_phys_049",
+      "topic_id": "fiziologiya_cheloveka",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          43,
+          37,
+          118,
+          42
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 2.81,
+        "correct_length_minus_longest_distractor": 75
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_vnd_034",
+      "topic_id": "fiziologiya_vnd",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          57,
+          34,
+          41,
+          115
+        ],
+        "correct_option_index": 3,
+        "correct_length_to_median_distractor_ratio": 2.8,
+        "correct_length_minus_longest_distractor": 58
+      },
+      "severity": "medium",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    },
+    {
+      "question_id": "m1_phys_047",
+      "topic_id": "fiziologiya_cheloveka",
+      "issue_type": "answer_length_cue",
+      "evidence": {
+        "rule": "correct option is the longest option AND length(correct) / median(length(distractors)) >= 2.75 AND length(correct) - max(length(distractors)) >= 45 characters; queue capped at 50 highest ratio/delta cases",
+        "option_lengths": [
+          61,
+          74,
+          171,
+          62
+        ],
+        "correct_option_index": 2,
+        "correct_length_to_median_distractor_ratio": 2.76,
+        "correct_length_minus_longest_distractor": 97
+      },
+      "severity": "high",
+      "recommended_next_action": "Review with source material or SME; if the keyed answer is visibly cued by length, rewrite distractors or shorten the keyed answer without changing meaning."
+    }
+  ]
 }
