@@ -46,6 +46,98 @@ class MiniAppFastApiTests(unittest.TestCase):
         if os.path.exists(self.db):
             os.remove(self.db)
 
+
+    def test_all_miniapp_api_routes_keep_methods_and_paths(self):
+        app = create_app(db_path=self.db, bot_token=self.bot_token)
+        routes = {(route.path, method) for route in app.routes for method in getattr(route, "methods", set())}
+        expected = {
+            ("/healthz", "GET"),
+            ("/miniapp/state", "OPTIONS"),
+            ("/miniapp/setup-options", "OPTIONS"),
+            ("/miniapp/setup", "OPTIONS"),
+            ("/miniapp/answer", "OPTIONS"),
+            ("/miniapp/glossary/topics", "OPTIONS"),
+            ("/miniapp/glossary/start", "OPTIONS"),
+            ("/miniapp/glossary/answer", "OPTIONS"),
+            ("/miniapp/glossary/next", "OPTIONS"),
+            ("/miniapp/glossary/restart", "OPTIONS"),
+            ("/miniapp/state", "GET"),
+            ("/miniapp/setup-options", "GET"),
+            ("/miniapp/setup", "POST"),
+            ("/miniapp/answer", "POST"),
+            ("/miniapp/glossary/topics", "GET"),
+            ("/miniapp/glossary/start", "POST"),
+            ("/miniapp/glossary/answer", "POST"),
+            ("/miniapp/glossary/next", "POST"),
+            ("/miniapp/glossary/restart", "POST"),
+        }
+        self.assertTrue(expected.issubset(routes))
+
+    def test_options_preflight_contract_for_allowed_and_disallowed_origins(self):
+        for origin, expected_origin in (("https://miniapp.example.com", "https://miniapp.example.com"), ("https://evil.example.com", None)):
+            with self.subTest(origin=origin):
+                response = self.client.options(
+                    "/miniapp/setup",
+                    headers={
+                        "Origin": origin,
+                        "Access-Control-Request-Method": "POST",
+                        "Access-Control-Request-Headers": "Authorization, Content-Type",
+                    },
+                )
+                self.assertEqual(204, response.status_code)
+                self.assertEqual(expected_origin, response.headers.get("Access-Control-Allow-Origin"))
+                self.assertEqual("GET, POST, OPTIONS", response.headers.get("Access-Control-Allow-Methods"))
+                self.assertEqual("Authorization, Content-Type, X-Telegram-Init-Data, X-Miniapp-Request-Id", response.headers.get("Access-Control-Allow-Headers"))
+                self.assertEqual("600", response.headers.get("Access-Control-Max-Age"))
+                self.assertEqual("0", response.headers.get("Content-Length"))
+
+    def test_get_endpoint_builder_status_headers_and_body_pass_through(self):
+        with patch("app.miniapp_fastapi.build_state_response", return_value=(202, {"Content-Type": "application/custom", "X-Builder": "yes"}, b"custom-body")) as builder:
+            response = self.client.get(
+                "/miniapp/state",
+                headers={"Authorization": "tma header-init", "X-Miniapp-Request-Id": "rid"},
+            )
+
+        self.assertEqual(202, response.status_code)
+        self.assertEqual("application/custom", response.headers.get("Content-Type"))
+        self.assertEqual("yes", response.headers.get("X-Builder"))
+        self.assertEqual("no-store", response.headers.get("Cache-Control"))
+        self.assertEqual(b"custom-body", response.content)
+        builder.assert_called_once_with(self.db, self.bot_token, "header-init", max_age_seconds=3600)
+
+    def test_post_endpoints_extract_same_transport_payloads(self):
+        endpoints = (
+            ("/miniapp/setup", "build_setup_response", (self.db, self.bot_token)),
+            ("/miniapp/answer", "build_answer_response", (self.db, self.bot_token)),
+            ("/miniapp/glossary/start", "build_glossary_start_response", (self.bot_token,)),
+            ("/miniapp/glossary/answer", "build_glossary_answer_response", (self.bot_token,)),
+            ("/miniapp/glossary/next", "build_glossary_next_response", (self.bot_token,)),
+            ("/miniapp/glossary/restart", "build_glossary_restart_response", (self.bot_token,)),
+        )
+        for path, builder_name, leading_args in endpoints:
+            with self.subTest(path=path):
+                request_payload = {"init_data": "simple-init", "request_id": "body-rid", "payload": {"value": path}}
+                with patch(f"app.miniapp_fastapi.{builder_name}", return_value=(207, {"Content-Type": "application/json; charset=utf-8", "X-Builder": path}, b'{"ok":true}')) as builder:
+                    response = self.client.post(path, json=request_payload)
+
+                self.assertEqual(207, response.status_code)
+                self.assertEqual(path, response.headers.get("X-Builder"))
+                self.assertEqual({"ok": True}, response.json())
+                expected_body = json.dumps(request_payload["payload"], ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+                builder.assert_called_once_with(*leading_args, "simple-init", expected_body, max_age_seconds=3600)
+
+    def test_post_endpoint_header_auth_uses_raw_body_and_header_request_id(self):
+        with patch("app.miniapp_fastapi.build_answer_response", return_value=(208, {"Content-Type": "text/plain"}, b"raw-ok")) as builder:
+            response = self.client.post(
+                "/miniapp/answer",
+                headers={"X-Telegram-Init-Data": "header-init", "X-Miniapp-Request-Id": "header-rid"},
+                content=b'{"raw":true}',
+            )
+
+        self.assertEqual(208, response.status_code)
+        self.assertEqual(b"raw-ok", response.content)
+        builder.assert_called_once_with(self.db, self.bot_token, "header-init", b'{"raw":true}', max_age_seconds=3600)
+
     def test_get_state_with_header_auth(self):
         response = self.client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})
         self.assertEqual(200, response.status_code)
