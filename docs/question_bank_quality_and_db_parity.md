@@ -1,16 +1,17 @@
-# Question bank quality and SQLite parity audit
+# Question bank structural quality and SQLite parity audit
 
 ## Scope
 
 - Canonical source: `content/topics.json` active topics with the `questions` contour and their referenced JSON files.
-- Active question topics reviewed: 8.
-- Active approved questions reviewed: 575.
-- Complete-review confirmation: `docs/audits/question_bank_review_manifest.json` has one record for each active approved canonical question ID and no additional IDs.
-- Content corrections applied in this pass: 0. No high-confidence repository-evidenced corrections were required by deterministic validation.
+- Active question topics covered by structural validation: 8.
+- Canonical question rows in active question files: 575.
+- Active approved questions covered by JSON → SQLite parity tooling: 575.
+- This pass does not claim completed semantic, source-pack, or SME review for every question.
+- Content corrections applied in this pass: 0. Question IDs, text, options, correct answers, explanations, source refs, and statuses were not changed.
 
-## Structural results
+## Structural validation results
 
-Deterministic validation now checks active approved questions for required content shape, option cardinality, answer index validity, canonical category mapping, source reference presence, and global duplicate IDs/stems.
+Deterministic validation checks active approved questions for required content shape, option cardinality, answer index validity, canonical category mapping, source reference presence, and global duplicate IDs/stems.
 
 - Duplicate question IDs: 0 found.
 - Duplicate normalized question text: 0 found.
@@ -20,26 +21,17 @@ Deterministic validation now checks active approved questions for required conte
 - Missing explanations: 0 found.
 - Missing `source_ref` values: 0 found.
 
-## Pedagogical review
+## Compact actionable quality queue
 
-The manifest uses non-blocking pedagogical flags only. These flags identify review signals; they are not hard validation failures and were not used to silently rewrite ambiguous psychology content.
+The previous full one-record-per-question manifest was removed because it over-labeled the bank with generic low-actionability heuristic flags. It is replaced by `docs/audits/question_bank_review_queue.json`, a compact queue for concrete follow-up only.
 
-- `ok`: 43.
-- `corrected`: 0.
-- `needs_source_or_SME_review`: 532.
+- Queue item count: 21.
+- Queue cap: 50 items.
+- Current queue issue type: bounded highest-severity `answer_length_cue` cases.
+- Deterministic answer-length severity rule: include only cases where the keyed option is the longest option, `length(correct) / median(length(distractors)) >= 2.75`, and `length(correct) - max(length(distractors)) >= 45`; keep at most the 50 highest ratio/delta cases.
+- Confirmed structural blockers, exact duplicate IDs, and duplicate normalized stems are not present in the current active approved bank.
 
-Summary by topic:
-
-| Topic | Approved questions | ok | corrected | needs source/SME review |
-|---|---:|---:|---:|---:|
-| `vvedenie_v_professiyu` | 57 | 2 | 0 | 55 |
-| `obschaya_psihologiya` | 56 | 10 | 0 | 46 |
-| `fiziologiya_cheloveka` | 55 | 5 | 0 | 50 |
-| `fiziologiya_vnd` | 57 | 3 | 0 | 54 |
-| `psihofiziologiya` | 71 | 4 | 0 | 67 |
-| `osnovy_eksperimentalnoy_psihologii` | 118 | 9 | 0 | 109 |
-| `kachestvennye_metody_issledovaniya` | 53 | 0 | 0 | 53 |
-| `psychological_consulting` | 108 | 10 | 0 | 98 |
+Semantic question-quality calibration remains the next separate content PR. Queue entries are review targets, not automatic authorization to rewrite ambiguous psychology content.
 
 ## SQLite parity model
 
@@ -47,11 +39,16 @@ Summary by topic:
 - SQLite is a seeded runtime projection of approved canonical JSON rows.
 - `scripts/audit_question_bank.py` supports content-only validation and optional read-only SQLite auditing with `--db-path`.
 - SQLite audit mode opens the database with a read-only URI, runs `PRAGMA integrity_check` and `PRAGMA foreign_key_check`, and compares approved canonical rows to DB questions and options.
-- Stale production rows are reported as stale; the audit does not auto-delete, auto-deprecate, or mutate production data.
+- DB row classifications are explicit:
+  - `missing_approved_db_rows`: approved canonical rows absent from SQLite; blocking.
+  - `retired_canonical_db_rows`: non-approved canonical rows that remain in SQLite; informational only.
+  - `unknown_db_rows`: DB rows absent from all canonical question JSON files; blocking.
+  - `mismatched_approved_rows`: approved canonical rows whose runtime DB projection differs from canonical JSON; blocking.
+- Retired canonical rows are reported but are not auto-deleted, auto-deprecated, or treated as blockers solely because they remain in SQLite.
 - `docs/audits/question_bank_db_audit_example.json` is an example report generated from a temporary repository-seeded SQLite database, not from production.
 
 ## Limitations
 
-- This repository review is not a substitute for original source-pack review or psychology SME certification.
+- This repository pass is structural validation plus reproducible SQLite parity tooling; it is not a substitute for original source-pack review or psychology SME certification.
 - Repository `source_ref` values identify repository/source-pack references only; they are not external-source certification.
-- Ambiguous items remain explicitly queued in the manifest as `needs_source_or_SME_review` and were not silently rewritten.
+- Ambiguous semantic quality questions should be handled in the next separate content calibration PR with source material or SME input.
