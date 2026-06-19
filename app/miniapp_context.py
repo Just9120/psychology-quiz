@@ -99,7 +99,7 @@ def _build_miniapp_context(
     api_base_url: str | None = None,
 ) -> dict:
     selected_state = _build_compact_runner_progress_state(runner_state) if compact else runner_state
-    include_categories = mode == "setup"
+    include_categories = mode == "setup" and not compact
     context = {
         "type": "miniapp_setup_context",
         "version": 1,
@@ -107,7 +107,9 @@ def _build_miniapp_context(
         "mode": mode,
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in categories] if include_categories else [],
     }
-    if mode == "setup":
+    if mode == "setup" and compact:
+        context["setup_hydration_required"] = True
+    elif mode == "setup":
         context["glossary"] = _safe_miniapp_glossary_context()
     if selected_state is not None:
         context["runner_state"] = selected_state
@@ -129,7 +131,7 @@ def _with_completed_setup_url_if_fit(
     if context.get("mode") != "completed":
         return context
 
-    setup_context = _build_miniapp_context(categories, None, mode="setup", api_base_url=api_base_url)
+    setup_context = _build_miniapp_context(categories, None, mode="setup", compact=bool(api_base_url), api_base_url=api_base_url)
     setup_url = build_miniapp_url(base_url, setup_context)
     context_with_setup = dict(context)
     context_with_setup["setup_url"] = setup_url
@@ -178,10 +180,12 @@ def build_miniapp_url_with_fallback(
             return compact_url, True
         return None, False
 
+    setup_requires_api_hydration = preferred_mode == "setup" and bool(api_base_url)
     primary_context = _build_miniapp_context(
         categories,
         runner_state,
         mode=preferred_mode,
+        compact=setup_requires_api_hydration,
         abandons_active_session=abandons_active_session,
         api_base_url=api_base_url,
     )

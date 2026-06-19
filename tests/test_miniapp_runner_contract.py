@@ -359,6 +359,26 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         for forbidden in ("source_refs", "supplied_snippet", "question:m2_exp", "exp_psych_", "short_definition", "definition"):
             self.assertNotIn(forbidden, dumped)
 
+    def test_setup_entrypoint_url_uses_compact_hydration_context_at_real_limit(self):
+        categories = [{"id": i, "name": f"Category {i}"} for i in range(1, 9)]
+        url, used_fallback = build_miniapp_setup_entrypoint_url(
+            "https://example.com/ui",
+            categories,
+            api_base_url="https://api.example.com",
+        )
+        self.assertFalse(used_fallback)
+        self.assertIsNotNone(url)
+        self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
+        ctx = _decode_context_from_url(url)
+        self.assertEqual("setup", ctx.get("mode"))
+        self.assertTrue(ctx.get("setup_hydration_required"))
+        self.assertEqual("https://api.example.com", ctx.get("api_base_url"))
+        self.assertEqual([], ctx.get("categories"))
+        self.assertNotIn("glossary", ctx)
+        dumped = json.dumps(ctx, ensure_ascii=False)
+        for forbidden in ("source_refs", "supplied_snippet", "short_definition", "definition", "Качественные методы исследования"):
+            self.assertNotIn(forbidden, dumped)
+
     def test_context_builder_does_not_duplicate_question_payload_by_default(self):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
         categories = [{"id": 1, "name": "Category 1"}]
@@ -399,8 +419,9 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertIsNotNone(url)
         ctx = _decode_context_from_url(url)
         self.assertEqual("setup", ctx.get("mode"))
-        self.assertEqual([{"id": 1, "name": "Category 1"}], ctx.get("categories"))
-        self.assertIn("glossary", ctx)
+        self.assertEqual([], ctx.get("categories"))
+        self.assertTrue(ctx.get("setup_hydration_required"))
+        self.assertNotIn("glossary", ctx)
         self.assertTrue(ctx.get("abandons_active_session"))
         self.assertEqual("https://api.example.com", ctx.get("api_base_url"))
 
@@ -414,8 +435,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_completed_context_omits_categories(self):
         self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
-        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
-            url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state, api_base_url="https://api.example.com")
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
@@ -428,13 +448,12 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_completed_context_setup_url_includes_api_base_when_configured(self):
         self.conn.execute("UPDATE quiz_sessions SET status='finished', score=2, total_questions=2 WHERE id = ?", (self.session_id,))
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
-        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
-            url, _ = build_miniapp_url_with_fallback(
-                "https://example.com/ui",
-                [{"id": 1, "name": "Category 1"}],
-                state,
-                api_base_url="https://api.example.com",
-            )
+        url, _ = build_miniapp_url_with_fallback(
+            "https://example.com/ui",
+            [{"id": 1, "name": "Category 1"}],
+            state,
+            api_base_url="https://api.example.com",
+        )
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
@@ -444,18 +463,19 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         setup_padded = setup_encoded + ("=" * ((4 - len(setup_encoded) % 4) % 4))
         setup_ctx = json.loads(base64.urlsafe_b64decode(setup_padded.encode("ascii")).decode("utf-8"))
         self.assertEqual("setup", setup_ctx.get("mode"))
+        self.assertTrue(setup_ctx.get("setup_hydration_required"))
         self.assertEqual("https://api.example.com", setup_ctx.get("api_base_url"))
 
     def test_setup_context_still_includes_categories(self):
         user = create_or_load_user(self.conn, 3333, "u4", "U4", None)
         state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
-        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
-            url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state, api_base_url="https://api.example.com")
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
         self.assertEqual("setup", ctx.get("mode"))
-        self.assertEqual(1, len(ctx.get("categories", [])))
+        self.assertEqual([], ctx.get("categories", []))
+        self.assertTrue(ctx.get("setup_hydration_required"))
 
     def test_compact_runner_payload_omits_categories_contains_question_and_no_correctness(self):
         state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
@@ -530,8 +550,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
     def test_normal_setup_context_has_no_abandon_marker(self):
         user = create_or_load_user(self.conn, 4444, "u5", "U5", None)
         state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
-        with patch("app.miniapp_context.MAX_MINIAPP_URL_LENGTH", 4000):
-            url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
+        url, _ = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state, api_base_url="https://api.example.com")
         encoded = url.split("context=", 1)[1]
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
@@ -609,7 +628,9 @@ class MiniAppRunnerContractTests(unittest.TestCase):
             launch_url = inline_markup.inline_keyboard[0][0].web_app.url
             ctx = _decode_context_from_url(launch_url)
             self.assertEqual("setup", ctx.get("mode"))
-            self.assertIn("glossary", ctx)
+            self.assertTrue(ctx.get("setup_hydration_required"))
+            self.assertNotIn("glossary", ctx)
+            self.assertEqual([], ctx.get("categories"))
             self.assertTrue(ctx.get("abandons_active_session"))
 
     def test_ui_command_uses_inline_launch_only_without_reply_webapp_keyboard(self):
