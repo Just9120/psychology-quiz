@@ -202,6 +202,30 @@
         gap: 8px;
         margin-top: 12px;
       }
+      .miniapp-choice-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .miniapp-choice-button {
+        min-height: 44px;
+        border: 1px solid #d6dce8;
+        border-radius: 14px;
+        background: #fbfcff;
+        color: #1f2533;
+        font-weight: 600;
+        line-height: 1.3;
+        text-align: left;
+        white-space: normal;
+      }
+      .miniapp-choice-button:disabled {
+        color: #222;
+        -webkit-text-fill-color: #222;
+      }
+      .mode-choice-button,
+      .glossary-choice-button {
+        box-shadow: 0 1px 2px rgba(30, 42, 72, 0.04);
+      }
       .answer-next {
         margin-top: 10px;
         border: 0;
@@ -230,9 +254,9 @@
     <div id="question_view" hidden></div>
     <div id="mode_view" class="question-card" hidden>
       <h4 class="question-title">Выберите режим</h4>
-      <div class="completion-actions">
-        <button type="button" id="mode_topics">Тесты по темам</button>
-        <button type="button" id="mode_glossary">Глоссарий</button>
+      <div class="miniapp-choice-list">
+        <button type="button" id="mode_topics" class="miniapp-choice-button mode-choice-button">Тесты по темам</button>
+        <button type="button" id="mode_glossary" class="miniapp-choice-button mode-choice-button">Глоссарий</button>
       </div>
     </div>
     <div id="glossary_view" hidden></div>
@@ -407,11 +431,25 @@
         glossaryView.hidden = true;
       }
 
+      function showSetupWarningIfNeeded() {
+        if (ctx?.abandons_active_session === true) {
+          setupWarning.hidden = false;
+          setupWarning.textContent = 'Запуск новой викторины завершит текущую активную попытку.';
+          return;
+        }
+        hideSetupWarning();
+      }
+
+      function hideSetupWarning() {
+        setupWarning.hidden = true;
+      }
+
       function showModeSelection() {
         clearRunnerView();
         form.hidden = true;
         setupIntro.hidden = false;
         modeView.hidden = false;
+        showSetupWarningIfNeeded();
         runnerState.textContent = 'Выберите режим: тесты по темам или глоссарий.';
       }
 
@@ -420,7 +458,7 @@
         modeView.hidden = true;
         form.hidden = false;
         setupIntro.hidden = false;
-        setupWarning.hidden = true;
+        hideSetupWarning();
         if (clearError) err.textContent = '';
         if (typeof setupRenderCategories === 'function') {
           setupRenderCategories();
@@ -434,7 +472,7 @@
         modeView.hidden = true;
         form.hidden = true;
         setupIntro.hidden = true;
-        setupWarning.hidden = true;
+        hideSetupWarning();
         questionView.hidden = false;
       }
 
@@ -443,7 +481,7 @@
         modeView.hidden = true;
         form.hidden = true;
         setupIntro.hidden = true;
-        setupWarning.hidden = true;
+        hideSetupWarning();
         questionView.hidden = false;
       }
 
@@ -658,8 +696,6 @@
         if (setupMode) {
           showModeSelection();
           if (ctx?.abandons_active_session === true) {
-            setupWarning.hidden = false;
-            setupWarning.textContent = 'Запуск новой викторины завершит текущую активную попытку.';
             go.textContent = 'Начать новую викторину';
           }
           setupRenderCategories();
@@ -1744,12 +1780,14 @@
         modeView.hidden = true;
         form.hidden = true;
         setupIntro.hidden = true;
+        hideSetupWarning();
         questionView.hidden = true;
         glossaryView.hidden = false;
       }
 
       function renderGlossaryTopics(topics) {
         showGlossaryView();
+        hideSetupWarning();
         glossaryView.replaceChildren();
         const card = document.createElement('div');
         card.className = 'question-card';
@@ -1757,18 +1795,23 @@
         title.className = 'question-title';
         title.textContent = 'Глоссарий';
         card.appendChild(title);
+        const choices = document.createElement('div');
+        choices.className = 'miniapp-choice-list';
         (topics || []).forEach((topic) => {
           const btn = document.createElement('button');
           btn.type = 'button';
+          btn.className = 'miniapp-choice-button glossary-choice-button';
           btn.textContent = topic.title;
           btn.addEventListener('click', () => renderGlossaryCounts(topic));
-          card.appendChild(btn);
+          choices.appendChild(btn);
         });
         const back = document.createElement('button');
         back.type = 'button';
+        back.className = 'miniapp-choice-button glossary-choice-button';
         back.textContent = 'К выбору режима';
         back.addEventListener('click', showModeSelection);
-        card.appendChild(back);
+        choices.appendChild(back);
+        card.appendChild(choices);
         glossaryView.appendChild(card);
         runnerState.textContent = 'Выберите тему глоссария.';
       }
@@ -1811,6 +1854,7 @@
 
       function renderGlossaryCounts(topic) {
         showGlossaryView();
+        hideSetupWarning();
         glossaryView.replaceChildren();
         err.textContent = '';
         const card = document.createElement('div');
@@ -1819,9 +1863,12 @@
         title.className = 'question-title';
         title.textContent = topic.title;
         card.appendChild(title);
+        const choices = document.createElement('div');
+        choices.className = 'miniapp-choice-list';
         [5, 10, 'all'].forEach((count) => {
           const btn = document.createElement('button');
           btn.type = 'button';
+          btn.className = 'miniapp-choice-button glossary-choice-button';
           btn.textContent = count === 'all' ? 'Все доступные' : String(count);
           btn.addEventListener('click', async () => {
             runnerState.textContent = 'Запуск теста по глоссарию...';
@@ -1836,18 +1883,21 @@
               showGlossaryStartError({ http_status: '', error_code: 'request_failed', request_id: requestId });
             }
           });
-          card.appendChild(btn);
+          choices.appendChild(btn);
         });
         const back = document.createElement('button');
         back.type = 'button';
+        back.className = 'miniapp-choice-button glossary-choice-button';
         back.textContent = 'К темам глоссария';
         back.addEventListener('click', () => renderGlossaryTopics(glossaryTopicsCache));
-        card.appendChild(back);
+        choices.appendChild(back);
+        card.appendChild(choices);
         glossaryView.appendChild(card);
         runnerState.textContent = 'Выберите количество вопросов.';
       }
 
       function renderGlossaryState(state) {
+        hideSetupWarning();
         if (state?.state === 'completed') return renderGlossaryResult(state.result || {});
         const q = state?.current_question;
         if (!q) return;
@@ -1872,10 +1922,13 @@
         q.options.forEach((opt) => {
           const li = document.createElement('li');
           const btn = document.createElement('button');
+          const idx = Number(opt.option_index);
           btn.type = 'button';
           btn.textContent = opt.option_text;
+          btn.setAttribute('data-option-index', String(idx));
           btn.addEventListener('click', async () => {
-            const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'answer', session_id: q.session_id, selected_option_index: Number(opt.option_index) });
+            btn.classList.add('answer-pending');
+            const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'answer', session_id: q.session_id, selected_option_index: idx });
             if (resp.ok && data?.ok) renderGlossaryFeedback(q, data.glossary_state.feedback);
           });
           li.appendChild(btn);
@@ -1887,11 +1940,32 @@
       }
 
       function renderGlossaryFeedback(question, feedback) {
+        showGlossaryView();
+        hideSetupWarning();
+        const optionButtons = [...glossaryView.querySelectorAll('ol button')];
+        optionButtons.forEach((btn) => {
+          btn.disabled = true;
+          btn.classList.remove('answer-pending', 'answer-selected', 'answer-correct', 'answer-selected-wrong', 'answer-disabled');
+        });
+        const selectedIdx = Number.isInteger(Number(feedback?.selected_option_index))
+          ? Number(feedback.selected_option_index)
+          : null;
+        const correctIdx = Number.isInteger(Number(feedback?.correct_option_index))
+          ? Number(feedback.correct_option_index)
+          : null;
+        optionButtons.forEach((btn) => {
+          const idx = Number(btn.getAttribute('data-option-index'));
+          const isSelected = selectedIdx !== null && idx === selectedIdx;
+          const isCorrect = correctIdx !== null && idx === correctIdx;
+          if (isCorrect) btn.classList.add('answer-correct');
+          if (isSelected && !isCorrect) btn.classList.add('answer-selected-wrong');
+          if (!isSelected && !isCorrect) btn.classList.add('answer-disabled');
+        });
         const wrap = document.createElement('div');
         wrap.className = 'answer-feedback';
         const status = document.createElement('p');
         status.className = `feedback-line ${feedback?.is_correct ? 'feedback-correct' : 'feedback-wrong'}`;
-        status.textContent = feedback?.is_correct ? 'Верно' : 'Неверно';
+        status.textContent = feedback?.is_correct ? '✅ Верно' : '❌ Неверно';
         wrap.appendChild(status);
         const details = document.createElement('p');
         details.textContent = feedback?.is_correct
@@ -1917,6 +1991,7 @@
 
       function renderGlossaryResult(result) {
         showGlossaryView();
+        hideSetupWarning();
         glossaryView.replaceChildren();
         const card = document.createElement('div');
         card.className = 'result-card';
@@ -1929,6 +2004,7 @@
         card.appendChild(score);
         const retry = document.createElement('button');
         retry.type = 'button';
+        retry.className = 'miniapp-choice-button glossary-choice-button';
         retry.textContent = 'Пройти ещё раз';
         retry.addEventListener('click', async () => {
           const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'restart', session_id: glossaryLastSessionId });
@@ -1937,11 +2013,13 @@
         card.appendChild(retry);
         const topics = document.createElement('button');
         topics.type = 'button';
+        topics.className = 'miniapp-choice-button glossary-choice-button';
         topics.textContent = 'К темам глоссария';
         topics.addEventListener('click', () => renderGlossaryTopics(glossaryTopicsCache));
         card.appendChild(topics);
         const modes = document.createElement('button');
         modes.type = 'button';
+        modes.className = 'miniapp-choice-button glossary-choice-button';
         modes.textContent = 'К выбору режима';
         modes.addEventListener('click', showModeSelection);
         card.appendChild(modes);

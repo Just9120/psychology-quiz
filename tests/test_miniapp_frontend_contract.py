@@ -115,6 +115,49 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn('showRunnerMode();', self.content)
         self.assertIn('showCompletedMode();', self.content)
 
+    def test_setup_warning_is_limited_to_mode_selection(self):
+        self.assertIn('function showSetupWarningIfNeeded()', self.content)
+        self.assertIn('function hideSetupWarning()', self.content)
+        mode_start = self.content.index('function showModeSelection()')
+        mode_body = self.content[mode_start:self.content.index('      }', mode_start) + 7]
+        self.assertIn('showSetupWarningIfNeeded();', mode_body)
+        for function_name in (
+            'showSetupMode',
+            'showRunnerMode',
+            'showCompletedMode',
+            'showGlossaryView',
+            'renderGlossaryTopics',
+            'renderGlossaryCounts',
+            'renderGlossaryState',
+            'renderGlossaryFeedback',
+            'renderGlossaryResult',
+        ):
+            function_start = self.content.index(f'function {function_name}')
+            function_body = self.content[function_start:self.content.index('      }', function_start) + 7]
+            self.assertIn('hideSetupWarning();', function_body)
+
+    def test_glossary_choices_use_soft_miniapp_button_styles(self):
+        self.assertIn('.miniapp-choice-list {', self.content)
+        self.assertIn('.miniapp-choice-button {', self.content)
+        self.assertIn('.glossary-choice-button {', self.content)
+        self.assertIn('id="mode_topics" class="miniapp-choice-button mode-choice-button"', self.content)
+        self.assertIn("choices.className = 'miniapp-choice-list';", self.content)
+        self.assertIn("btn.className = 'miniapp-choice-button glossary-choice-button';", self.content)
+        self.assertIn("back.className = 'miniapp-choice-button glossary-choice-button';", self.content)
+
+    def test_glossary_feedback_highlights_answer_buttons(self):
+        self.assertIn("btn.setAttribute('data-option-index', String(idx));", self.content)
+        function_start = self.content.index('function renderGlossaryFeedback(question, feedback)')
+        function_body = self.content[function_start:self.content.index('      function renderGlossaryResult', function_start)]
+        self.assertIn("const optionButtons = [...glossaryView.querySelectorAll('ol button')];", function_body)
+        self.assertIn("btn.disabled = true;", function_body)
+        self.assertIn("btn.classList.add('answer-correct');", function_body)
+        self.assertIn("btn.classList.add('answer-selected-wrong');", function_body)
+        self.assertIn("btn.classList.add('answer-disabled');", function_body)
+        self.assertIn("feedback?.selected_option_index", function_body)
+        self.assertIn("feedback?.correct_option_index", function_body)
+        self.assertIn("status.textContent = feedback?.is_correct ? '✅ Верно' : '❌ Неверно';", function_body)
+
     def test_timeout_and_feedback_ui_contract(self):
         self.assertIn("AbortController", self.content)
         self.assertIn("Не удалось отправить ответ через API. Попробуйте снова.", self.content)
