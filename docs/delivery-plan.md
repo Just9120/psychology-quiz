@@ -10,7 +10,8 @@
 - ✅ Module 1 content QA — answer-position cleanup completed; flagged long-stem readability candidates shortened; repo-local source_ref hygiene reviewed; `m1-q3` kept stable as an intentional legacy ID.
 - ✅ Module 2 content QA — experimental-psychology answer-position balance completed; qualitative-methods light polish completed with `m2_qual_023` / `m2_qual_041` kept as intentional scaffolding; repo-local source_ref hygiene reviewed; qualitative-methods provenance-limited tracking report added without changing question JSON.
 - ✅ Module 3 first active scope — `Психологическое консультирование` contains 108 approved source-backed questions after the consulting content and polish sequence.
-- 👉 Repository source-of-truth posture — docs now track the post-QA content baseline; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
+- ✅ `GLOSSARY-CONTENT-AUDIT-001` — Documentation-only audit of active glossary content delivered; no glossary data, runtime, UI/API, deploy, DB, or test behavior changed.
+- 👉 Repository source-of-truth posture — docs now track the post-QA content baseline and glossary audit posture; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
 
 ## Current product/runtime posture
 - `/quiz` remains the default classic Telegram chat entry point.
@@ -39,14 +40,17 @@
 | **Total** | 8 active topics | **575** | Current approved JSON question-bank baseline. |
 
 ## Next recommended item
-1. Consider the optional no-build static frontend split from PR 6 in `docs/proposals/refactor-plan-miniapp-bot.md` only if review risk justifies it; otherwise prefer source-backed content alignment work.
-2. If original local/Drive source packs are available, continue source-backed Module 1/2 alignment before substantive content edits; repo-local source_ref hygiene and the Module 2 qualitative provenance-limited tracking report should not be overclaimed as full alignment or final source-backed certification.
-3. Keep Module 2 experimental difficulty/onboarding review as optional future work only if new experimental-psychology content work is planned.
-4. Keep future Module 3 expansion in separate focused source-backed batches; do not create a separate practice category unless explicitly decided.
-5. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
-6. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
+1. Run `GLOSSARY-CONTENT-POLISH-001` as the highest-value glossary follow-up: a documentation/content-only typo, clarity, and terminology-consistency pass for `kachestvennye_metody_issledovaniya`, without marking source-sensitive glossary issues fixed until human/source review confirms them.
+2. Then run `GLOSSARY-SOURCE-ALIGNMENT-001` if original local/Drive source packs or SME review are available; verify glossary terms and definitions one topic at a time before substantive content edits.
+3. Consider `GLOSSARY-DISTRACTOR-QUALITY-001` only after content/source review shows that semantically adjacent glossary entries still create multiple-defensible-answer risks.
+4. Consider the optional no-build static frontend split from PR 6 in `docs/proposals/refactor-plan-miniapp-bot.md` only if review risk justifies it; otherwise prefer source-backed content alignment work.
+5. Keep Module 2 experimental difficulty/onboarding review as optional future work only if new experimental-psychology content work is planned.
+6. Keep future Module 3 expansion in separate focused source-backed batches; do not create a separate practice category unless explicitly decided.
+7. Keep `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` enabled for classic production UX.
+8. Run focused classic `/quiz` and Mini App opt-in smoke checks after restarts/deploys when runtime sync/deployment matters.
 
 ## Near backlog
+- Glossary content follow-ups from `docs/glossary_content_audit.md`: conservative qualitative-methods polish first, source/human alignment second, and distractor-quality review only if evidence remains after content review.
 - Full Module 1/2 source-backed alignment against original local/Drive source packs if those materials are available; Module 2 qualitative methods now has a provenance-limited tracking report, but source_ref alignment risks, weakly supported items, and human-review-needed items remain.
 - Module 2 experimental difficulty/onboarding review if future experimental-psychology content work is planned.
 - Keep `m1-q3` stable as an intentional legacy ID unless a future explicit migration repeats downstream-reference checks and reviews downstream ID stability risks.
