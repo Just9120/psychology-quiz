@@ -1,0 +1,70 @@
+{
+  "canonical_source": "content/topics.json active questions contours and referenced JSON question files",
+  "active_topic_count": 8,
+  "canonical_row_count": 575,
+  "approved_question_count": 575,
+  "topics": {
+    "vvedenie_v_professiyu": {
+      "title": "Введение в профессию",
+      "question_file": "content/questions/module1/vvedenie_v_professiyu.json",
+      "canonical_rows": 57,
+      "approved_questions": 57
+    },
+    "obschaya_psihologiya": {
+      "title": "Общая психология",
+      "question_file": "content/questions/module1/obschaya_psihologiya.json",
+      "canonical_rows": 56,
+      "approved_questions": 56
+    },
+    "fiziologiya_cheloveka": {
+      "title": "Физиология человека",
+      "question_file": "content/questions/module1/fiziologiya_cheloveka.json",
+      "canonical_rows": 55,
+      "approved_questions": 55
+    },
+    "fiziologiya_vnd": {
+      "title": "Физиология ВНД",
+      "question_file": "content/questions/module1/fiziologiya_vnd.json",
+      "canonical_rows": 57,
+      "approved_questions": 57
+    },
+    "psihofiziologiya": {
+      "title": "Психофизиология",
+      "question_file": "content/questions/module1/psihofiziologiya.json",
+      "canonical_rows": 71,
+      "approved_questions": 71
+    },
+    "osnovy_eksperimentalnoy_psihologii": {
+      "title": "Основы экспериментальной психологии",
+      "question_file": "content/questions/module2/osnovy_eksperimentalnoy_psihologii.json",
+      "canonical_rows": 118,
+      "approved_questions": 118
+    },
+    "kachestvennye_metody_issledovaniya": {
+      "title": "Качественные методы исследования",
+      "question_file": "content/questions/module2/kachestvennye_metody_issledovaniya.json",
+      "canonical_rows": 53,
+      "approved_questions": 53
+    },
+    "psychological_consulting": {
+      "title": "Психологическое консультирование",
+      "question_file": "content/questions/module3/psychological_consulting.json",
+      "canonical_rows": 108,
+      "approved_questions": 108
+    }
+  },
+  "structural_errors": [],
+  "sqlite": {
+    "db_path": "/tmp/tmp.THV0OqLhnW/quiz.sqlite3",
+    "integrity_check": [
+      "ok"
+    ],
+    "foreign_key_check": [],
+    "missing_approved_db_rows": [],
+    "retired_canonical_db_rows": [],
+    "unknown_db_rows": [],
+    "mismatched_approved_rows": [],
+    "orphan_option_rows": [],
+    "duplicate_external_ids": []
+  }
+}
