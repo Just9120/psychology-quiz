@@ -453,6 +453,24 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertIn("if (apiBase && tg?.initData && (!setupMode || hydrateOnSetup)) {", self.content)
         self.assertIn("await apiFetch(`${apiBase}/miniapp/state`", self.content)
 
+    def test_setup_hydration_required_uses_setup_options_before_mode_chooser(self):
+        self.assertIn("const setupHydrationRequired = setupMode && ctx?.setup_hydration_required === true;", self.content)
+        self.assertIn("async function hydrateSetupOptionsBeforeModeSelection()", self.content)
+        self.assertIn("await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`", self.content)
+        self.assertIn("headers: { Authorization: `tma ${tg.initData}` }", self.content)
+        self.assertIn("setupOptionsCache.categories = categories;", self.content)
+        self.assertIn("glossarySetupCache.topics = topics;", self.content)
+        self.assertIn("if (resp.ok && data?.ok === true && applyHydratedSetupOptions(data))", self.content)
+        self.assertIn("showModeSelection();", self.content)
+        self.assertIn("modeView.hidden = true;", self.content)
+        self.assertIn("Не удалось загрузить параметры викторины: Mini App API или данные Telegram недоступны.", self.content)
+        self.assertIn("payload?.setup_options?.glossary?.topics", self.content)
+
+    def test_legacy_inline_setup_context_still_renders_without_hydration(self):
+        self.assertIn("} else if (setupMode && !setupHydrationRequired && !Array.isArray(ctx.categories)) {", self.content)
+        self.assertIn("if (setupHydrationRequired) {", self.content)
+        self.assertIn("} else {\n            showModeSelection();\n          }", self.content)
+
 
 if __name__ == '__main__':
     unittest.main()

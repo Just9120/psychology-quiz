@@ -643,6 +643,12 @@
         return result;
       }
 
+      const setupHydrationRequired = setupMode && ctx?.setup_hydration_required === true;
+      const apiBase =
+        ctx?.api_base_url && typeof ctx.api_base_url === 'string' && ctx.api_base_url.trim()
+          ? ctx.api_base_url.trim()
+          : '';
+
       async function fetchJsonWithTelemetry(url, options = {}, timeoutMs = 9000, telemetry = null) {
         const existingRequestId = options.headers?.['X-Miniapp-Request-Id'] || '';
         const requestId = existingRequestId || telemetry?.request_id || buildMiniappRequestId();
@@ -662,9 +668,72 @@
           'Не удалось загрузить темы. Закройте окно и откройте викторину заново через кнопку 🚀 Викторина в окне или команду /ui.';
       }
 
+      function getCategoriesFromSetupOptionsPayload(payload) {
+        return Array.isArray(payload?.setup_options?.categories) ? payload.setup_options.categories : [];
+      }
+
+      function applyHydratedSetupOptions(payload) {
+        const setupOptions = payload?.setup_options || {};
+        const categories = getCategoriesFromSetupOptionsPayload(payload);
+        const topics = getGlossaryTopicsFromSetupPayload(payload);
+        setupOptionsCache.categories = categories;
+        glossarySetupCache.topics = topics;
+        ctx.categories = categories;
+        ctx.glossary = setupOptions.glossary || payload?.glossary || ctx.glossary;
+        ctx.setup_options = setupOptions;
+        return categories.length > 0;
+      }
+
+      function showSetupHydrationError(message) {
+        clearRunnerView();
+        modeView.hidden = true;
+        form.hidden = true;
+        setupIntro.hidden = false;
+        hideSetupWarning();
+        const fallback = 'Не удалось загрузить параметры викторины. Закройте окно и откройте /ui заново.';
+        err.textContent = message || fallback;
+        runnerState.textContent = message || fallback;
+      }
+
+      async function hydrateSetupOptionsBeforeModeSelection() {
+        if (!setupHydrationRequired) return true;
+        if (!apiBase || !tg?.initData) {
+          showSetupHydrationError('Не удалось загрузить параметры викторины: Mini App API или данные Telegram недоступны. Закройте окно и откройте /ui заново.');
+          return false;
+        }
+        modeView.hidden = true;
+        form.hidden = true;
+        setupIntro.hidden = false;
+        hideSetupWarning();
+        err.textContent = '';
+        runnerState.textContent = 'Загружаем параметры викторины...';
+        const telemetry = startTelemetry('setup_options_hydration', '/miniapp/setup-options');
+        try {
+          const { resp, data, requestId } = await fetchJsonWithTelemetry(`${apiBase}/miniapp/setup-options`, {
+            headers: { Authorization: `tma ${tg.initData}` },
+          }, 9000, telemetry);
+          markTelemetry(telemetry, 'render_start', { request_id: requestId, status: 'rendering' });
+          if (resp.ok && data?.ok === true && applyHydratedSetupOptions(data)) {
+            setupRenderCategories();
+            showModeSelection();
+            markTelemetry(telemetry, 'render_done', { request_id: requestId, status: 'ok' });
+            markTelemetry(telemetry, 'action_done', { request_id: requestId, status: 'ok', http_code: resp.status });
+            return true;
+          }
+          markTelemetry(telemetry, 'render_done', { request_id: requestId, status: 'invalid_payload' });
+          markTelemetry(telemetry, 'action_done', { request_id: requestId, status: resp.ok ? 'unexpected_payload' : 'non_ok_response', http_code: resp.status });
+          showSetupHydrationError('Не удалось загрузить параметры викторины. Закройте окно и откройте /ui заново.');
+          return false;
+        } catch (_) {
+          markTelemetry(telemetry, 'action_done', { status: 'request_exception' });
+          showSetupHydrationError('Не удалось загрузить параметры викторины. Проверьте соединение, затем закройте окно и откройте /ui заново.');
+          return false;
+        }
+      }
+
       if (!ctx || ctx.type !== 'miniapp_setup_context' || ctx.version !== 1) {
         showLoadError();
-      } else if (setupMode && !Array.isArray(ctx.categories)) {
+      } else if (setupMode && !setupHydrationRequired && !Array.isArray(ctx.categories)) {
         showLoadError();
       } else {
         const list = Array.isArray(ctx.categories) ? ctx.categories : [];
@@ -694,11 +763,15 @@
           });
         };
         if (setupMode) {
-          showModeSelection();
+          if (setupHydrationRequired) {
+            hydrateSetupOptionsBeforeModeSelection();
+          } else {
+            showModeSelection();
+          }
           if (ctx?.abandons_active_session === true) {
             go.textContent = 'Начать новую викторину';
           }
-          setupRenderCategories();
+          if (!setupHydrationRequired) setupRenderCategories();
         }
         window.__miniappRenderSetupInPlace = () => {
           const activeCategories = Array.isArray(setupOptionsCache.categories) ? setupOptionsCache.categories : [];
@@ -894,11 +967,6 @@
         questionView.appendChild(card);
         runnerState.textContent = 'Последняя викторина завершена.';
       }
-
-      const apiBase =
-        ctx?.api_base_url && typeof ctx.api_base_url === 'string' && ctx.api_base_url.trim()
-          ? ctx.api_base_url.trim()
-          : '';
 
       apiDiagState.configured = Boolean(apiBase);
       try {

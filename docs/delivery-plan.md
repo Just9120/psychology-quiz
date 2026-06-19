@@ -13,6 +13,7 @@
 - ✅ `GLOSSARY-CONTENT-AUDIT-001` — Documentation-only audit of active glossary content delivered; no glossary data, runtime, UI/API, deploy, DB, or test behavior changed.
 - ✅ `GLOSSARY-COVERAGE-EXPANSION-ALL-TOPICS-001` — One implementation PR expanded glossary coverage from 2 to all 8 currently active main-quiz categories; total glossary entries now: Введение в профессию 12, Общая психология 12, Физиология человека 12, Физиология ВНД 12, Психофизиология 12, Качественные методы исследования 14, Основы экспериментальной психологии 10, Психологическое консультирование 12. Source-backed terminology certification against original external materials and any future distractor-logic work remain deferred.
 - ✅ `GLOSSARY-GLOBAL-QUALITY-ALIGNMENT-001` — One global repository-evidence quality baseline now covers the complete 96-entry glossary system across all 8 active topics; conservative glossary JSON corrections and deterministic registry/source/confusable validation were added without question-bank, runtime, API, UI, DB, deploy, Docker, or external source-certification claims. Future glossary work should be source-pack / SME alignment only unless a concrete runtime issue is found.
+- ✅ `MINIAPP-SETUP-URL-DECUPLING-001` — Mini App setup launch URLs now carry compact bootstrap data and hydrate categories/glossary topics through the existing authenticated `/miniapp/setup-options` API, protecting `/ui` from category/glossary growth without changing user-visible quiz semantics.
 - 👉 Repository source-of-truth posture — docs now track the post-QA content baseline and glossary audit posture; future work should be narrow, source-backed, and should not change runtime behavior without a focused task.
 
 ## Current product/runtime posture
@@ -21,6 +22,7 @@
 - Classic inline callback mode remains available only as legacy/fallback (`CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`).
 - `/ui` / `🚀 В окне` remains opt-in Mini App runner; Mini App does not become the default UX.
 - Mini App setup entrypoint now offers two contours: `Тесты по темам` and `Глоссарий`; chat `📚 Глоссарий` remains the separate Telegram chat glossary quiz.
+- Mini App setup data is hydrated through authenticated `/miniapp/setup-options` instead of being embedded in launch URLs, so all eight glossary topics and active categories remain available while `/ui` stays within the configured URL-size limit.
 - Production app runtime service set is `psych_quiz_bot` + `psych_quiz_miniapp_api`; static Mini App frontend hosting remains separate/operator-managed.
 - Long polling remains the default runtime mode; webhook is optional/config-gated infrastructure.
 - Standalone Web UI/PWA remains out of scope.
