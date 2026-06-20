@@ -63,7 +63,9 @@
       "Вопрос m1_vnd_004 использует это понятие как ключ к различению близких учебных вариантов."
     ],
     "confusable_with": [
-      "unconditioned_reflex"
+      "unconditioned_reflex",
+      "reinforcement",
+      "extinction"
     ],
     "source_refs": [
       "question:m1_vnd_004"
@@ -76,12 +78,15 @@
     "topic_id": "fiziologiya_vnd",
     "term": "Подкрепление",
     "aliases": [],
-    "short_definition": "Биологически значимое событие, с которым сочетается условный сигнал.",
-    "definition": "Для формирования условной реакции нейтральный сигнал должен сочетаться с подкреплением.",
+    "short_definition": "Подкрепляющее событие, благодаря которому нейтральный сигнал становится условным.",
+    "definition": "В формировании условного рефлекса подкрепление связывает нейтральный сигнал с биологически значимым событием и поддерживает условную реакцию.",
     "examples": [
       "Вопрос m1_vnd_005 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "conditioned_reflex",
+      "extinction"
+    ],
     "source_refs": [
       "question:m1_vnd_005"
     ],
@@ -98,7 +103,10 @@
     "examples": [
       "Вопрос m1_vnd_006 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "conditioned_reflex",
+      "reinforcement"
+    ],
     "source_refs": [
       "question:m1_vnd_006"
     ],

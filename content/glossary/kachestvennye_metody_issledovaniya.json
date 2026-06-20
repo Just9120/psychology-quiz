@@ -97,7 +97,9 @@
     "examples": [
       "При расшифровке интервью исследователь отмечает паузы, самопоправки и оговорки, если они важны для анализа."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "qual_methods_text_texture"
+    ],
     "source_refs": [
       "supplied_snippet:practice12:transcription"
     ],
@@ -238,17 +240,18 @@
   {
     "id": "qual_methods_researcher_bias",
     "topic_id": "kachestvennye_metody_issledovaniya",
-    "term": "Предвзятость исследователя",
+    "term": "Предпосылки исследователя",
     "aliases": [
-      "исследовательская предвзятость",
-      "установки исследователя"
+      "предвзятость исследователя",
+      "позиция исследователя"
     ],
-    "definition": "Предвзятость исследователя — это собственные предположения и установки, которые важно замечать и анализировать.",
-    "short_definition": "Собственные предположения и установки исследователя, которые важно замечать и анализировать.",
+    "definition": "В качественной работе исследователь учитывает, что его позиция, установки и ценности могут влиять на описание реальности, сбор данных и интерпретацию.",
+    "short_definition": "Позиция, установки и ценности исследователя, влияющие на сбор и интерпретацию данных.",
     "examples": [
       "Перед анализом интервью исследователь отмечает, какие собственные ожидания могут направлять его чтение материала."
     ],
     "confusable_with": [
+      "qual_methods_researcher_reflexivity",
       "qual_methods_methodological_reflection"
     ],
     "source_refs": [
@@ -271,7 +274,8 @@
       "При чтении расшифровки исследователь обращает внимание не только на общий смысл, но и на детали формулировок участника."
     ],
     "confusable_with": [
-      "qual_methods_transcription"
+      "qual_methods_transcription",
+      "qual_methods_thick_description"
     ],
     "source_refs": [
       "supplied_snippet:practice10:text_texture"
@@ -297,6 +301,80 @@
     ],
     "source_refs": [
       "supplied_snippet:practice10:method_as_instrument"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_researcher_reflexivity",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Рефлексивность исследователя",
+    "aliases": [
+      "исследовательская рефлексивность"
+    ],
+    "definition": "Рефлексивность исследователя — осознанное отслеживание того, как авторские предпосылки, позиция, отношения и ценности исследователя влияют на производство знания и описание реальности.",
+    "short_definition": "Осознанный анализ влияния позиции исследователя на данные и интерпретацию.",
+    "examples": [
+      "Исследователь фиксирует, какие собственные ожидания могли повлиять на вопросы интервью и чтение ответов."
+    ],
+    "confusable_with": [
+      "qual_methods_researcher_bias",
+      "qual_methods_methodological_reflection"
+    ],
+    "source_refs": [
+      "question:m2_qual_004",
+      "supplied_snippet:practice11:researcher_reflexivity"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_thick_description",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Насыщенное описание",
+    "aliases": [
+      "thick description",
+      "подробное описание контекста"
+    ],
+    "definition": "Насыщенное описание подробно показывает контекст, участников, условия и значимые детали данных, чтобы читатель мог оценить переносимость качественных результатов в сходные ситуации.",
+    "short_definition": "Подробное описание контекста и условий для оценки переносимости результатов.",
+    "examples": [
+      "В отчёте описывают не только вывод, но и ситуацию, участников и условия получения данных."
+    ],
+    "confusable_with": [
+      "qual_methods_text_texture",
+      "qual_methods_transferability"
+    ],
+    "source_refs": [
+      "question:m2_qual_028",
+      "question:m2_qual_030",
+      "supplied_snippet:practice12:transferability"
+    ],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "qual_methods_transferability",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "term": "Переносимость",
+    "aliases": [
+      "transferability",
+      "аналитическая переносимость"
+    ],
+    "definition": "Переносимость в качественном исследовании означает осторожную оценку того, применимы ли выводы к сходным контекстам; она отличается от статистической репрезентативности.",
+    "short_definition": "Осторожная применимость качественных выводов к сходным контекстам, не статистическая репрезентативность.",
+    "examples": [
+      "Исследователь не обобщает результат на всю популяцию, а показывает, в каких сходных условиях он может быть полезен."
+    ],
+    "confusable_with": [
+      "qual_methods_thick_description",
+      "qual_methods_qualitative_methods"
+    ],
+    "source_refs": [
+      "question:m2_qual_014",
+      "question:m2_qual_028",
+      "question:m2_qual_053",
+      "supplied_snippet:practice12:transferability"
     ],
     "difficulty": "medium",
     "status": "approved"

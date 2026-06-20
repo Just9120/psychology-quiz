@@ -21,12 +21,15 @@
     "topic_id": "psychological_consulting",
     "term": "Фокус «здесь и сейчас»",
     "aliases": [],
-    "short_definition": "Ориентация на актуальные затруднения клиента.",
-    "definition": "Консультирование работает с текущими проблемами клиента, а не с медицинской патологией как главным предметом.",
+    "short_definition": "Работа с актуальными трудностями клиента, а не с медицинской патологией как главным предметом.",
+    "definition": "Фокус «здесь и сейчас» удерживает консультирование на текущих проблемах, переживаниях и решениях клиента в пределах немедицинской помощи.",
     "examples": [
       "Вопрос m3_psychological_consulting_002 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "metagoal",
+      "psychological_consulting"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_002"
     ],
@@ -175,7 +178,10 @@
     "examples": [
       "Вопрос m3_psychological_consulting_010 использует это понятие как ключ к различению близких учебных вариантов."
     ],
-    "confusable_with": [],
+    "confusable_with": [
+      "here_and_now_focus",
+      "client_responsibility"
+    ],
     "source_refs": [
       "question:m3_psychological_consulting_010"
     ],
