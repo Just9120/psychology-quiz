@@ -1,0 +1,274 @@
+[
+  {
+    "id": "fch_gazzaniga_kto_za_glavnogo",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Кто за главного?",
+    "authors": [
+      "Газзанига М."
+    ],
+    "year": 2017,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_dubynin_mozg_i_ego_potrebnosti",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Мозг и его потребности. От питания до признания",
+    "authors": [
+      "Дубынин В. А."
+    ],
+    "year": 2020,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_kandel_v_poiskah_pamyati",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "В поисках памяти",
+    "authors": [
+      "Кандель Э."
+    ],
+    "year": 2012,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_carter_kak_rabotaet_mozg",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Как работает мозг",
+    "authors": [
+      "Картер Р."
+    ],
+    "year": 2015,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_martynov_mozg",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Мозг. Как он устроен и что с ним делать",
+    "authors": [
+      "Мартынов И. А."
+    ],
+    "year": 2019,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_nicholls_martin_ot_neirona_k_mozgu",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "От нейрона к мозгу",
+    "authors": [
+      "Николлс Дж. Г.",
+      "Мартин А. Р."
+    ],
+    "year": 2017,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_pavlov_dvadtsatiletniy_opyt",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Двадцатилетний опыт объективного изучения высшей нервной деятельности (поведения) животных",
+    "authors": [
+      "Павлов И. П."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_ramachandran_mozg_rasskazyvaet",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Мозг рассказывает",
+    "authors": [
+      "Рамачандран В."
+    ],
+    "year": 2012,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_swaab_my_eto_nash_mozg",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Мы — это наш мозг",
+    "authors": [
+      "Свааб Д."
+    ],
+    "year": 2014,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_sergeev_dubynin_telo_cheloveka",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Тело человека",
+    "authors": [
+      "Сергеев И. Ю.",
+      "Дубынин В. А."
+    ],
+    "year": 2022,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_simonov_motivirovanny_mozg",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Мотивированный мозг",
+    "authors": [
+      "Симонов П. В."
+    ],
+    "year": 1987,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_simonov_emotsionalny_mozg",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Эмоциональный мозг",
+    "authors": [
+      "Симонов П. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_ukhtomsky_dominanta",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Доминанта",
+    "authors": [
+      "Ухтомский А. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_shulgovsky_neirofiziologiya",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Нейрофизиология",
+    "authors": [
+      "Шульговский В. В."
+    ],
+    "year": 2017,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  },
+  {
+    "id": "fch_yakutenko_volya_i_samokontrol",
+    "topic_id": "fiziologiya_cheloveka",
+    "title": "Воля и самоконтроль",
+    "authors": [
+      "Якутенко И."
+    ],
+    "year": 2018,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+      "source_list:spisok_literatury_fiziologiya_cheloveka"
+    ],
+    "notes": "Источник «Список литературы. Физиология человека» содержит эту запись в видимом 15-пунктном списке rendered PDF; библиографическая нормализация и детали издания требуют ручной проверки."
+  }
+]

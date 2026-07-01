@@ -1,6 +1,7 @@
 # Delivery Plan
 
 ## Current status dashboard
+- ✅ `LITERATURE-MODULE1-SOURCE-SEED-002` — Remaining currently available Module 1 literature source lists seeded from readable rendered PDFs; all entries remain static `review` metadata, with no runtime, user-progress, UI/API, DB, deploy, Docker, or migration changes.
 - ✅ `LITERATURE-SOURCE-INVENTORY-001` — Literature scaffold/source inventory started with one `Общая психология` static metadata topic seeded; remaining Drive source lists are documented as extraction-pending, with no runtime, user-progress, UI/API, DB, deploy, or migration changes.
 - ✅ `REFACTOR-RFC-MINIAPP-BOT-001` — Mini App / bot refactor RFC added; proposal defines incremental no-UX-change seams and recommends Mini App context extraction first.
 - ✅ `REFACTOR-MINIAPP-CONTEXT-EXTRACT-001` — Mini App context encoding, URL construction, setup entrypoint, compact runner payload, and URL-length fallback helpers extracted from `app/main.py` into `app/miniapp_context.py` without UX/runtime/API/deploy/DB/content changes.
