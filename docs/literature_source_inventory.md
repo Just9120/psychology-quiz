@@ -11,9 +11,9 @@ Repository literature files describe reading metadata only. They must not store 
 | Drive source-list title | Topic ID | Current repository status |
 |---|---|---|
 | `Список литературы. Общая психология` | `obschaya_psihologiya` | Extracted and seeded in this PR from Drive source `1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ`. |
-| `Список литературы. Физиология человека` | `fiziologiya_cheloveka` | Source exists; extraction pending because text extraction returned empty. |
-| `Список литературы.Физиология высшей нервной деятельности` | `fiziologiya_vnd` | Source exists; extraction pending because text extraction returned empty. |
-| `Список литературы. Психофизиология` | `psihofiziologiya` | Source exists; extraction pending because text extraction returned empty. |
+| `Список литературы. Физиология человека` | `fiziologiya_cheloveka` | Seeded from rendered PDF source `1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S`; raw text extraction returned empty. |
+| `Список литературы.Физиология высшей нервной деятельности` | `fiziologiya_vnd` | Seeded from rendered PDF source `1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX`; raw text extraction returned empty. |
+| `Список литературы. Психофизиология` | `psihofiziologiya` | Seeded from rendered PDF source `1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni`; raw text extraction returned empty. |
 
 ## Boundary for this scaffold
 
@@ -23,4 +23,4 @@ Static literature entry `status` values describe repository content lifecycle st
 
 ## Remaining limitations
 
-Only `Список литературы. Общая психология` has been seeded. The remaining source lists require readable extraction or manual bibliographic normalization before content entries are added. The seeded entries from `Список литературы. Общая психология` are marked `review` where OCR artifacts or incomplete bibliographic metadata require follow-up verification.
+The currently available Module 1 source lists have been seeded where the rendered PDFs were readable, even when raw PDF text extraction was empty. All seeded bibliographic metadata remains marked `review`; years, editions, publisher details, title normalization, and editor/translator roles still require human bibliographic verification before approval.

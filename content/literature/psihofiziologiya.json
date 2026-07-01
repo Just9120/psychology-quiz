@@ -1,0 +1,110 @@
+[
+  {
+    "id": "psf_danilova_psihofiziologiya",
+    "topic_id": "psihofiziologiya",
+    "title": "Психофизиология: учебник для вузов",
+    "authors": [
+      "Данилова Н. Н."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "source_list:spisok_literatury_psihofiziologiya"
+    ],
+    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+  },
+  {
+    "id": "psf_ilyin_psihofiziologiya_sostoyaniy",
+    "topic_id": "psihofiziologiya",
+    "title": "Психофизиология состояний человека",
+    "authors": [
+      "Ильин Е. П."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "source_list:spisok_literatury_psihofiziologiya"
+    ],
+    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+  },
+  {
+    "id": "psf_aleksandrov_psihofiziologiya",
+    "topic_id": "psihofiziologiya",
+    "title": "Психофизиология: учебник для вузов",
+    "authors": [
+      "Александров Ю. И."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "source_list:spisok_literatury_psihofiziologiya"
+    ],
+    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+  },
+  {
+    "id": "psf_van_der_kolk_telo_pomnit_vse",
+    "topic_id": "psihofiziologiya",
+    "title": "Тело помнит все: какую роль психологическая травма играет в жизни человека и какие техники помогают ее преодолеть",
+    "authors": [
+      "Ван дер Колк Б."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "source_list:spisok_literatury_psihofiziologiya"
+    ],
+    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+  },
+  {
+    "id": "psf_sapolsky_psihologiya_stressa",
+    "topic_id": "psihofiziologiya",
+    "title": "Психология стресса",
+    "authors": [
+      "Сапольски Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "source_list:spisok_literatury_psihofiziologiya"
+    ],
+    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+  },
+  {
+    "id": "psf_kabat_zinn_kuda_by_ty_ni_shel",
+    "topic_id": "psihofiziologiya",
+    "title": "Куда бы ты ни шел — ты уже там",
+    "authors": [
+      "Кабат-Зинн Дж."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "source_list:spisok_literatury_psihofiziologiya"
+    ],
+    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+  }
+]
