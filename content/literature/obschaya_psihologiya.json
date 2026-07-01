@@ -1,0 +1,111 @@
+[
+  {
+    "id": "gippenreiter_vvedenie_v_obschuyu_psihologiyu",
+    "topic_id": "obschaya_psihologiya",
+    "title": "Введение в общую психологию: курс лекций",
+    "authors": [
+      "Гиппенрейтер Ю. Б."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "source_list:spisok_literatury_obschaya_psihologiya"
+    ],
+    "notes": "Источник «Список литературы. Общая психология» указывает работу в основном списке литературы и допускает любое издание; библиографическая нормализация требует проверки из-за OCR-артефактов."
+  },
+  {
+    "id": "nurkova_berezanskaya_obschaya_psihologiya",
+    "topic_id": "obschaya_psihologiya",
+    "title": "Общая психология: учебник",
+    "authors": [
+      "Нуркова В. В.",
+      "Березанская Н. Б."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "foundation",
+    "status": "review",
+    "priority": "high",
+    "source_refs": [
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "source_list:spisok_literatury_obschaya_psihologiya"
+    ],
+    "notes": "Источник «Список литературы. Общая психология» указывает работу в основном списке литературы; год оставлен пустым до ручной проверки библиографических данных из-за OCR-артефактов."
+  },
+  {
+    "id": "vygotsky_myshlenie_i_rech",
+    "topic_id": "obschaya_psihologiya",
+    "title": "Мышление и речь",
+    "authors": [
+      "Выготский Л. С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "source_list:spisok_literatury_obschaya_psihologiya"
+    ],
+    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; год и издание требуют проверки из-за OCR-артефактов."
+  },
+  {
+    "id": "zhdan_istoriya_psihologii",
+    "topic_id": "obschaya_psihologiya",
+    "title": "История психологии: от античности до наших дней",
+    "authors": [
+      "Ждан А. Н."
+    ],
+    "year": 2008,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "source_list:spisok_literatury_obschaya_psihologiya"
+    ],
+    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; извлеченный год 2008 сохранен, но запись остается на проверке из-за OCR-артефактов."
+  },
+  {
+    "id": "myers_psihologiya",
+    "topic_id": "obschaya_psihologiya",
+    "title": "Психология",
+    "authors": [
+      "Майерс Д."
+    ],
+    "year": 2008,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "source_list:spisok_literatury_obschaya_psihologiya"
+    ],
+    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; извлеченный год 2008 сохранен, но запись остается на проверке из-за OCR-артефактов."
+  },
+  {
+    "id": "rubinstein_osnovy_obschey_psihologii",
+    "topic_id": "obschaya_psihologiya",
+    "title": "Основы общей психологии",
+    "authors": [
+      "Рубинштейн С. Л."
+    ],
+    "year": 2002,
+    "type": "book",
+    "reading_level": "core",
+    "status": "review",
+    "priority": "medium",
+    "source_refs": [
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "source_list:spisok_literatury_obschaya_psihologiya"
+    ],
+    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; извлеченный год 2002 сохранен, но запись остается на проверке из-за OCR-артефактов."
+  }
+]

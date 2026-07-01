@@ -25,7 +25,8 @@ REQUIRED_FIELDS = {
 }
 VALID_TYPES = {"book", "article", "chapter", "course_material", "video", "other"}
 VALID_READING_LEVELS = {"foundation", "core", "applied", "deepening", "advanced", "reference"}
-VALID_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
+VALID_STATUSES = {"draft", "review", "approved", "deprecated", "placeholder"}
+USER_READING_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
 VALID_PRIORITIES = {"low", "medium", "high"}
 ID_RE = re.compile(r"^[a-z0-9_]+$")
 
@@ -126,7 +127,12 @@ def validate_entry(
         errors.append(f"{label}: reading_level must be one of {', '.join(sorted(VALID_READING_LEVELS))}")
 
     status = entry.get("status")
-    if status not in VALID_STATUSES:
+    if status in USER_READING_STATUSES:
+        errors.append(
+            f"{label}: status '{status}' is a per-user reading state; "
+            "repository literature content must use static lifecycle statuses only"
+        )
+    elif status not in VALID_STATUSES:
         errors.append(f"{label}: status must be one of {', '.join(sorted(VALID_STATUSES))}")
 
     priority = entry.get("priority")
@@ -138,6 +144,10 @@ def validate_entry(
         errors.append(f"{label}: source_refs must be a list")
     elif not source_refs:
         errors.append(f"{label}: source_refs must contain at least one item for real reading entries")
+    else:
+        for ref_idx, source_ref in enumerate(source_refs):
+            if not is_non_empty_string(source_ref):
+                errors.append(f"{label}: source_refs[{ref_idx}] must be a non-empty string")
 
 
 def validate() -> list[str]:
