@@ -11,6 +11,19 @@
     "reading_level": "core",
     "status": "review",
     "priority": "high",
+    "topic_order": 10,
+    "global_order": 150010,
+    "estimated_minutes": null,
+    "tags": [
+      "psychophysiology",
+      "textbook"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по психофизиологии.",
+      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
       "source_list:spisok_literatury_psihofiziologiya"
@@ -29,6 +42,19 @@
     "reading_level": "core",
     "status": "review",
     "priority": "high",
+    "topic_order": 20,
+    "global_order": 150020,
+    "estimated_minutes": null,
+    "tags": [
+      "psychophysiology",
+      "stress"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по психофизиологии.",
+      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
       "source_list:spisok_literatury_psihofiziologiya"
@@ -47,6 +73,19 @@
     "reading_level": "core",
     "status": "review",
     "priority": "high",
+    "topic_order": 30,
+    "global_order": 150030,
+    "estimated_minutes": null,
+    "tags": [
+      "psychophysiology",
+      "textbook"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по психофизиологии.",
+      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
       "source_list:spisok_literatury_psihofiziologiya"
@@ -65,6 +104,19 @@
     "reading_level": "applied",
     "status": "review",
     "priority": "medium",
+    "topic_order": 40,
+    "global_order": 150040,
+    "estimated_minutes": null,
+    "tags": [
+      "psychophysiology",
+      "stress"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по психофизиологии.",
+      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
       "source_list:spisok_literatury_psihofiziologiya"
@@ -83,6 +135,20 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "medium",
+    "topic_order": 50,
+    "global_order": 150050,
+    "estimated_minutes": null,
+    "tags": [
+      "psychophysiology",
+      "foundation",
+      "stress"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по психофизиологии.",
+      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
       "source_list:spisok_literatury_psihofiziologiya"
@@ -101,6 +167,19 @@
     "reading_level": "applied",
     "status": "review",
     "priority": "medium",
+    "topic_order": 60,
+    "global_order": 150060,
+    "estimated_minutes": null,
+    "tags": [
+      "psychophysiology",
+      "mindfulness"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по психофизиологии.",
+      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
       "source_list:spisok_literatury_psihofiziologiya"

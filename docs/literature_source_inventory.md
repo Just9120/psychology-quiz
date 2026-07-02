@@ -24,3 +24,9 @@ Static literature entry `status` values describe repository content lifecycle st
 ## Remaining limitations
 
 The currently available Module 1 source lists have been seeded where the rendered PDFs were readable, even when raw PDF text extraction was empty. All seeded bibliographic metadata remains marked `review`; years, editions, publisher details, title normalization, and editor/translator roles still require human bibliographic verification before approval.
+
+## Module 1 pedagogical metadata normalization
+
+All seeded Module 1 literature entries now include static pedagogical metadata for topic-level ordering, cross-topic ordering, learner-facing rationale, conservative learning outcomes, tags, prerequisites, and optional estimated reading time. This metadata is intended to support future Literature-contour logic such as “what to read next” or reading-plan construction without implementing runtime behavior in this scaffold.
+
+User reading progress remains out of repository content and belongs only to future runtime/user state. All seeded entries remain in `status: "review"` pending separate human bibliographic verification.

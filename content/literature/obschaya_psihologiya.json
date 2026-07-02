@@ -11,6 +11,20 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "high",
+    "topic_order": 10,
+    "global_order": 120010,
+    "estimated_minutes": null,
+    "tags": [
+      "general_psychology",
+      "foundation",
+      "textbook"
+    ],
+    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по общей психологии.",
+      "Связать материал чтения с ключевыми понятиями темы общей психологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
       "source_list:spisok_literatury_obschaya_psihologiya"
@@ -30,6 +44,20 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "high",
+    "topic_order": 20,
+    "global_order": 120020,
+    "estimated_minutes": null,
+    "tags": [
+      "general_psychology",
+      "foundation",
+      "textbook"
+    ],
+    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по общей психологии.",
+      "Связать материал чтения с ключевыми понятиями темы общей психологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
       "source_list:spisok_literatury_obschaya_psihologiya"
@@ -48,6 +76,18 @@
     "reading_level": "core",
     "status": "review",
     "priority": "medium",
+    "topic_order": 30,
+    "global_order": 120030,
+    "estimated_minutes": null,
+    "tags": [
+      "general_psychology"
+    ],
+    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по общей психологии.",
+      "Связать материал чтения с ключевыми понятиями темы общей психологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
       "source_list:spisok_literatury_obschaya_psihologiya"
@@ -66,6 +106,19 @@
     "reading_level": "deepening",
     "status": "review",
     "priority": "medium",
+    "topic_order": 40,
+    "global_order": 120040,
+    "estimated_minutes": null,
+    "tags": [
+      "general_psychology",
+      "history"
+    ],
+    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по общей психологии.",
+      "Связать материал чтения с ключевыми понятиями темы общей психологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
       "source_list:spisok_literatury_obschaya_psihologiya"
@@ -84,6 +137,19 @@
     "reading_level": "reference",
     "status": "review",
     "priority": "medium",
+    "topic_order": 50,
+    "global_order": 120050,
+    "estimated_minutes": null,
+    "tags": [
+      "general_psychology",
+      "reference"
+    ],
+    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по общей психологии.",
+      "Связать материал чтения с ключевыми понятиями темы общей психологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
       "source_list:spisok_literatury_obschaya_psihologiya"
@@ -102,6 +168,18 @@
     "reading_level": "core",
     "status": "review",
     "priority": "medium",
+    "topic_order": 60,
+    "global_order": 120060,
+    "estimated_minutes": null,
+    "tags": [
+      "general_psychology"
+    ],
+    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по общей психологии.",
+      "Связать материал чтения с ключевыми понятиями темы общей психологии."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
       "source_list:spisok_literatury_obschaya_psihologiya"

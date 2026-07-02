@@ -20,6 +20,13 @@ REQUIRED_FIELDS = {
     "reading_level",
     "status",
     "priority",
+    "topic_order",
+    "global_order",
+    "estimated_minutes",
+    "tags",
+    "why_read",
+    "learning_outcomes",
+    "prerequisites",
     "source_refs",
     "notes",
 }
@@ -29,6 +36,7 @@ VALID_STATUSES = {"draft", "review", "approved", "deprecated", "placeholder"}
 USER_READING_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
 VALID_PRIORITIES = {"low", "medium", "high"}
 ID_RE = re.compile(r"^[a-z0-9_]+$")
+TAG_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
 
 def load_json(path: Path, errors: list[str], label: str) -> Any | None:
@@ -74,6 +82,11 @@ def validate_string_list(value: Any, field: str, label: str, errors: list[str], 
     for item_idx, item in enumerate(value):
         if not is_non_empty_string(item):
             errors.append(f"{label}: {field}[{item_idx}] must be a non-empty string")
+
+
+def validate_positive_int(value: Any, field: str, label: str, errors: list[str]) -> None:
+    if type(value) is not int or value <= 0:
+        errors.append(f"{label}: {field} must be a positive integer")
 
 
 def validate_entry(
@@ -139,6 +152,44 @@ def validate_entry(
     if priority not in VALID_PRIORITIES:
         errors.append(f"{label}: priority must be one of {', '.join(sorted(VALID_PRIORITIES))}")
 
+    validate_positive_int(entry.get("topic_order"), "topic_order", label, errors)
+    validate_positive_int(entry.get("global_order"), "global_order", label, errors)
+
+    estimated_minutes = entry.get("estimated_minutes")
+    if estimated_minutes is not None and (type(estimated_minutes) is not int or estimated_minutes <= 0):
+        errors.append(f"{label}: estimated_minutes must be a positive integer or null")
+
+    tags = entry.get("tags")
+    if not isinstance(tags, list):
+        errors.append(f"{label}: tags must be a list")
+    else:
+        for tag_idx, tag in enumerate(tags):
+            if not is_non_empty_string(tag):
+                errors.append(f"{label}: tags[{tag_idx}] must be a non-empty string")
+            elif not tag.isascii() or not TAG_RE.match(tag):
+                errors.append(f"{label}: tags[{tag_idx}] must be lowercase ASCII snake_case: {tag}")
+
+    if not is_non_empty_string(entry.get("why_read")):
+        errors.append(f"{label}: why_read must be a non-empty string")
+
+    validate_string_list(
+        entry.get("learning_outcomes"),
+        "learning_outcomes",
+        label,
+        errors,
+        require_non_empty=True,
+    )
+
+    prerequisites = entry.get("prerequisites")
+    if not isinstance(prerequisites, list):
+        errors.append(f"{label}: prerequisites must be a list")
+    else:
+        for prerequisite_idx, prerequisite in enumerate(prerequisites):
+            if not is_non_empty_string(prerequisite):
+                errors.append(f"{label}: prerequisites[{prerequisite_idx}] must be a non-empty literature entry id")
+            elif prerequisite == entry_id:
+                errors.append(f"{label}: prerequisites[{prerequisite_idx}] must not reference the entry itself")
+
     source_refs = entry.get("source_refs")
     if not isinstance(source_refs, list):
         errors.append(f"{label}: source_refs must be a list")
@@ -159,6 +210,8 @@ def validate() -> list[str]:
         return errors
 
     seen_ids: dict[str, str] = {}
+    seen_global_orders: dict[int, str] = {}
+    prerequisite_refs: list[tuple[str, str]] = []
     for path in literature_files:
         raw_data = load_json(path, errors, str(path))
         if raw_data is None:
@@ -171,12 +224,42 @@ def validate() -> list[str]:
         if file_topic_id not in active_topic_ids:
             errors.append(f"{path}: filename topic '{file_topic_id}' is not an active topic in {TOPICS_FILE}")
 
+        seen_topic_orders: dict[int, str] = {}
         for idx, entry in enumerate(raw_data):
             label = f"{path}[{idx}]"
             if not isinstance(entry, dict):
                 errors.append(f"{label}: literature entry must be an object")
                 continue
             validate_entry(entry, label, file_topic_id, active_topic_ids, seen_ids, errors)
+
+            topic_order = entry.get("topic_order")
+            if type(topic_order) is int:
+                if topic_order in seen_topic_orders:
+                    errors.append(
+                        f"{label}: duplicate topic_order '{topic_order}' also found at {seen_topic_orders[topic_order]}"
+                    )
+                else:
+                    seen_topic_orders[topic_order] = label
+
+            global_order = entry.get("global_order")
+            if type(global_order) is int:
+                if global_order in seen_global_orders:
+                    errors.append(
+                        f"{label}: duplicate global_order '{global_order}' also found at "
+                        f"{seen_global_orders[global_order]}"
+                    )
+                else:
+                    seen_global_orders[global_order] = label
+
+            prerequisites = entry.get("prerequisites")
+            if isinstance(prerequisites, list):
+                for prerequisite in prerequisites:
+                    if is_non_empty_string(prerequisite):
+                        prerequisite_refs.append((label, prerequisite))
+
+    for label, prerequisite in prerequisite_refs:
+        if prerequisite not in seen_ids:
+            errors.append(f"{label}: prerequisite '{prerequisite}' does not match any literature entry id")
 
     return errors
 
