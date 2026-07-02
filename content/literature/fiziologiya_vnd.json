@@ -11,6 +11,19 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "high",
+    "topic_order": 10,
+    "global_order": 140010,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -29,6 +42,21 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "high",
+    "topic_order": 20,
+    "global_order": 140020,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation",
+      "brain",
+      "motivation"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -47,6 +75,20 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "high",
+    "topic_order": 30,
+    "global_order": 140030,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation",
+      "memory"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -65,6 +107,20 @@
     "reading_level": "reference",
     "status": "review",
     "priority": "medium",
+    "topic_order": 40,
+    "global_order": 140040,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "reference",
+      "brain"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -83,6 +139,20 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "medium",
+    "topic_order": 50,
+    "global_order": 140050,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation",
+      "brain"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -102,6 +172,19 @@
     "reading_level": "deepening",
     "status": "review",
     "priority": "medium",
+    "topic_order": 60,
+    "global_order": 140060,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "brain"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -120,6 +203,19 @@
     "reading_level": "core",
     "status": "review",
     "priority": "medium",
+    "topic_order": 70,
+    "global_order": 140070,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "brain"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -138,6 +234,20 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "medium",
+    "topic_order": 80,
+    "global_order": 140080,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation",
+      "brain"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -156,6 +266,20 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "high",
+    "topic_order": 90,
+    "global_order": 140090,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation",
+      "brain"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -175,6 +299,19 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "high",
+    "topic_order": 100,
+    "global_order": 140100,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -193,6 +330,20 @@
     "reading_level": "core",
     "status": "review",
     "priority": "medium",
+    "topic_order": 110,
+    "global_order": 140110,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "brain",
+      "motivation"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -211,6 +362,20 @@
     "reading_level": "core",
     "status": "review",
     "priority": "medium",
+    "topic_order": 120,
+    "global_order": 140120,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "brain",
+      "emotion"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -229,6 +394,18 @@
     "reading_level": "core",
     "status": "review",
     "priority": "medium",
+    "topic_order": 130,
+    "global_order": 140130,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -247,6 +424,19 @@
     "reading_level": "deepening",
     "status": "review",
     "priority": "medium",
+    "topic_order": 140,
+    "global_order": 140140,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "brain"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
@@ -265,6 +455,19 @@
     "reading_level": "foundation",
     "status": "review",
     "priority": "medium",
+    "topic_order": 150,
+    "global_order": 140150,
+    "estimated_minutes": null,
+    "tags": [
+      "neurophysiology",
+      "foundation"
+    ],
+    "why_read": "Помогает связать чтение с базовыми вопросами физиологии высшей нервной деятельности и учебной темой.",
+    "learning_outcomes": [
+      "Объяснить, зачем это чтение включено в список по физиологии высшей нервной деятельности.",
+      "Связать материал чтения с ключевыми понятиями темы физиологии высшей нервной деятельности."
+    ],
+    "prerequisites": [],
     "source_refs": [
       "drive:1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
       "source_list:spisok_literatury_fiziologiya_vysshey_nervnoy_deyatelnosti"
