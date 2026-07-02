@@ -62,6 +62,7 @@
 - Tests/questions contour uses `content/questions/**/*.json` as canonical content and SQLite as runtime serving layer.
 - Glossary/terms contour uses static `content/glossary/*.json`; source/source_refs/provenance stay internal and are not shown in user-facing chat or Mini App UI.
 - Literature scaffold uses static `content/literature/*.json`; it is content/validation scaffolding until separate source-backed runtime work is explicitly authorized.
+- Future Literature / Reading Tracker runtime boundaries are documented in `docs/literature_runtime_rfc.md`; that RFC is supporting detail and does not activate runtime scope by itself.
 - Рабочие директории:
   - `content/questions/module1/`
   - `content/questions/module2/`
