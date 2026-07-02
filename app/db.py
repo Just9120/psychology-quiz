@@ -28,6 +28,7 @@ def init_db_connection(db_path: str) -> None:
         ensure_users_reading_mode_column(conn)
         ensure_quiz_sessions_difficulty_mode_column(conn)
         ensure_quiz_session_selected_categories_table(conn)
+        ensure_user_literature_progress_table(conn)
         ensure_performance_indexes(conn)
     finally:
         conn.close()
@@ -75,6 +76,47 @@ def ensure_quiz_session_selected_categories_table(conn: sqlite3.Connection) -> N
             FOREIGN KEY (category_id) REFERENCES categories(id)
         )
         """
+    )
+
+
+USER_LITERATURE_READING_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
+
+
+def ensure_user_literature_progress_table(conn: sqlite3.Connection) -> None:
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS user_literature_progress (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            literature_id TEXT NOT NULL CHECK (length(trim(literature_id)) > 0),
+            reading_status TEXT NOT NULL CHECK (
+                reading_status IN ('not_started', 'in_progress', 'read', 'revisit', 'skipped')
+            ),
+            progress_percent INTEGER CHECK (
+                progress_percent IS NULL OR (progress_percent >= 0 AND progress_percent <= 100)
+            ),
+            started_at TEXT,
+            completed_at TEXT,
+            updated_at TEXT NOT NULL,
+            last_opened_at TEXT,
+            private_note TEXT,
+            remind_at TEXT,
+            UNIQUE (user_id, literature_id),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+        """
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_id "
+        "ON user_literature_progress(user_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_reading_status "
+        "ON user_literature_progress(reading_status)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_updated "
+        "ON user_literature_progress(user_id, updated_at)"
     )
 
 

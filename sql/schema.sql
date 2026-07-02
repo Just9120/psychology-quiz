@@ -90,6 +90,26 @@ CREATE TABLE IF NOT EXISTS quiz_answers (
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 
+CREATE TABLE IF NOT EXISTS user_literature_progress (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    literature_id TEXT NOT NULL CHECK (length(trim(literature_id)) > 0),
+    reading_status TEXT NOT NULL CHECK (
+        reading_status IN ('not_started', 'in_progress', 'read', 'revisit', 'skipped')
+    ),
+    progress_percent INTEGER CHECK (
+        progress_percent IS NULL OR (progress_percent >= 0 AND progress_percent <= 100)
+    ),
+    started_at TEXT,
+    completed_at TEXT,
+    updated_at TEXT NOT NULL,
+    last_opened_at TEXT,
+    private_note TEXT,
+    remind_at TEXT,
+    UNIQUE (user_id, literature_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 CREATE INDEX IF NOT EXISTS idx_quiz_sessions_user_status
     ON quiz_sessions(user_id, status);
 CREATE INDEX IF NOT EXISTS idx_quiz_answers_session_question
@@ -98,3 +118,9 @@ CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_session_order
     ON quiz_session_questions(session_id, order_index);
 CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_question
     ON quiz_session_questions(question_id);
+CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_id
+    ON user_literature_progress(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_literature_progress_reading_status
+    ON user_literature_progress(reading_status);
+CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_updated
+    ON user_literature_progress(user_id, updated_at);
