@@ -1,6 +1,7 @@
 # Delivery Plan
 
 ## Current status dashboard
+- ✅ `LITERATURE-RUNTIME-STATE-MODEL-005` — SQLite-backed user literature progress state model/migration added for future Reading Tracker; no API, UI, bot UX, recommendation logic, reminders, literature JSON, questions, glossary, deploy, Docker, or CI/CD changes.
 - ✅ `LITERATURE-RUNTIME-RFC-004` — Documentation-only runtime contour RFC added for future Literature / Reading Tracker product flow, user state, API candidates, Mini App UX, next-reading logic, privacy, and staged rollout; no runtime, UI/API, DB, deploy, questions, glossary, or literature JSON content changes.
 - ✅ `LITERATURE-MODULE1-METADATA-NORMALIZATION-003` — All seeded Module 1 literature entries now include pedagogical ordering and learner-facing metadata; no runtime, user-progress, UI/API, DB, deploy, questions, glossary, Docker, or migration changes.
 - ✅ `LITERATURE-MODULE1-SOURCE-SEED-002` — Remaining currently available Module 1 literature source lists seeded from readable rendered PDFs; all entries remain static `review` metadata, with no runtime, user-progress, UI/API, DB, deploy, Docker, or migration changes.

@@ -18,6 +18,44 @@ def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
     )
 
 
+def ensure_user_literature_progress_table(conn: sqlite3.Connection) -> None:
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS user_literature_progress (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            literature_id TEXT NOT NULL CHECK (length(trim(literature_id)) > 0),
+            reading_status TEXT NOT NULL CHECK (
+                reading_status IN ('not_started', 'in_progress', 'read', 'revisit', 'skipped')
+            ),
+            progress_percent INTEGER CHECK (
+                progress_percent IS NULL OR (progress_percent >= 0 AND progress_percent <= 100)
+            ),
+            started_at TEXT,
+            completed_at TEXT,
+            updated_at TEXT NOT NULL,
+            last_opened_at TEXT,
+            private_note TEXT,
+            remind_at TEXT,
+            UNIQUE (user_id, literature_id),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+        """
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_id "
+        "ON user_literature_progress(user_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_reading_status "
+        "ON user_literature_progress(reading_status)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_updated "
+        "ON user_literature_progress(user_id, updated_at)"
+    )
+
+
 def ensure_quiz_sessions_difficulty_mode_column(conn: sqlite3.Connection) -> None:
     columns = conn.execute("PRAGMA table_info(quiz_sessions)").fetchall()
     column_names = {str(column[1]) for column in columns}
@@ -48,6 +86,7 @@ def main() -> int:
             conn.executescript(schema_sql)
             ensure_users_reading_mode_column(conn)
             ensure_quiz_sessions_difficulty_mode_column(conn)
+            ensure_user_literature_progress_table(conn)
         print(f"[OK] База данных инициализирована: {db_path}")
         print("[OK] SQL-схема успешно применена.")
         return 0

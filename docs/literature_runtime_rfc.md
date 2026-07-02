@@ -144,12 +144,19 @@ CREATE INDEX idx_user_literature_progress_user_updated
     ON user_literature_progress (user_id, updated_at);
 ```
 
+Implementation status:
+
+- `LITERATURE-RUNTIME-STATE-MODEL-005` begins Phase B by adding this SQLite table and indexes through the existing idempotent schema/init style.
+- No backfill is required because this is new per-user runtime state.
+- Rollback should drop only `user_literature_progress` and its indexes, and only after confirming no production reading-progress data must be preserved.
+- Production rollout must follow existing deployment/migration rules; this PR does not perform a manual production migration.
+
 Implementation boundaries:
 
-- no migration is added in this PR;
-- no table is created in this PR;
-- no runtime storage code is added in this PR;
-- any migration must be a separate implementation PR with rollback notes, validation steps, and compatibility review for existing SQLite runtime data.
+- no API endpoint implementation is added in this state-model step;
+- no Mini App UI or Telegram bot UX is added in this state-model step;
+- no recommendation, reminder, or reading-plan logic is added in this state-model step;
+- no repository literature JSON content is changed in this state-model step.
 
 ## 7. Future Mini App API design
 
