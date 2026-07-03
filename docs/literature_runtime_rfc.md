@@ -179,6 +179,14 @@ API boundaries:
 - endpoints should be implemented only in future focused API PRs;
 - this RFC does not change existing endpoint contracts.
 
+
+Phase D implementation status:
+
+- `POST /miniapp/literature/progress` is now implemented for authenticated per-user `user_literature_progress` mutations.
+- Phase E Mini App UI remains future scope.
+- Phase F “what to read next” remains future scope.
+- Reminders and reading plans remain future scope.
+
 ## 8. Future Telegram / Mini App UX flow
 
 Flow-level candidate UX:
