@@ -428,6 +428,31 @@ class MiniAppFrontendContractTests(unittest.TestCase):
         self.assertEqual(1, handler.count("showGlossaryOpenError({ ...lastFailure, attempted_sources: attemptedSources });"))
 
 
+    def test_literature_frontend_contract(self):
+        self.assertIn('id="mode_literature" class="miniapp-choice-button mode-choice-button">Литература</button>', self.content)
+        self.assertIn('id="literature_view" hidden', self.content)
+        for endpoint in (
+            '/miniapp/literature/topics',
+            '/miniapp/literature/items',
+            '/miniapp/literature/state',
+            '/miniapp/literature/progress',
+        ):
+            self.assertIn(endpoint, self.content)
+        self.assertIn("['in_progress', 'read', 'revisit', 'skipped'].forEach((readingStatus)", self.content)
+        self.assertIn("btn.setAttribute('data-reading-status', readingStatus);", self.content)
+        self.assertIn("payload = { literature_id: literatureId, reading_status: readingStatus };", self.content)
+        self.assertIn('Вся литература', self.content)
+        self.assertIn('function showLiteratureView()', self.content)
+        self.assertIn('function renderLiteratureTopics(topics)', self.content)
+        self.assertIn('function renderLiteratureItems(items, topic)', self.content)
+        self.assertIn('function updateLiteratureProgress(item, readingStatus)', self.content)
+        self.assertNotIn('/miniapp/literature/next', self.content)
+        self.assertNotIn('private_note', self.content)
+        self.assertNotIn('remind_at', self.content)
+        self.assertNotIn('reading_plan', self.content)
+        self.assertNotIn('deadline', self.content)
+
+
     def test_docs_numbered_h2_headings_have_unique_numbers(self):
         docs = Path('docs/miniapp-deployment-qa.md').read_text(encoding='utf-8')
         numbers = re.findall(r'^## (\d+)\)', docs, flags=re.MULTILINE)
