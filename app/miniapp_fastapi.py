@@ -22,6 +22,7 @@ from app.miniapp_api import (
     build_glossary_start_response,
     build_glossary_topics_response,
     build_literature_items_response,
+    build_literature_progress_response,
     build_literature_state_response,
     build_literature_topics_response,
     build_setup_options_response,
@@ -32,7 +33,7 @@ from app.miniapp_api import (
 
 logger = logging.getLogger("uvicorn.error")
 
-_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state"}
+_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}
 
 
 def _to_response(status: int, headers: dict[str, str], body: bytes) -> Response:
@@ -230,6 +231,10 @@ def create_app(
     async def options_literature_state(request: Request) -> Response:
         return await _options_response("/miniapp/literature/state", request)
 
+    @app.options("/miniapp/literature/progress")
+    async def options_literature_progress(request: Request) -> Response:
+        return await _options_response("/miniapp/literature/progress", request)
+
     async def _get_builder_response(endpoint: str, request: Request, builder: Any, *builder_args: Any) -> Response:
         started_at = time.perf_counter()
         request_id = _read_request_id(request.headers)
@@ -290,12 +295,31 @@ def create_app(
 
     @app.get("/miniapp/literature/items")
     async def get_literature_items(request: Request) -> Response:
+        started_at = time.perf_counter()
+        request_id = _read_request_id(request.headers)
+        transport = "header_auth"
+        init_data = _extract_init_data(request.headers)
         topic_id = request.query_params.get("topic_id")
-        return await _get_builder_response("/miniapp/literature/items", request, build_literature_items_response, db_path, bot_token, topic_id)
+        status, headers, body = await _run_builder_in_thread(
+            build_literature_items_response,
+            db_path,
+            bot_token,
+            init_data,
+            topic_id,
+            max_age_seconds=initdata_ttl_seconds,
+        )
+        response = _to_response(status, headers, body)
+        _set_common_headers(response, request)
+        _log_request(endpoint="/miniapp/literature/items", method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
+        return response
 
     @app.get("/miniapp/literature/state")
     async def get_literature_state(request: Request) -> Response:
         return await _get_builder_response("/miniapp/literature/state", request, build_literature_state_response, db_path, bot_token)
+
+    @app.post("/miniapp/literature/progress")
+    async def post_literature_progress(request: Request) -> Response:
+        return await _post_builder_response("/miniapp/literature/progress", request, build_literature_progress_response, db_path, bot_token)
 
     async def _post_glossary(request: Request, endpoint: str, builder: Any) -> Response:
         return await _post_builder_response(endpoint, request, builder, bot_token)

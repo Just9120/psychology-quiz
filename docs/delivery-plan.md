@@ -1,5 +1,6 @@
 # Delivery Plan
 
+- ✅ `LITERATURE-API-PROGRESS-WRITE-007` — Authenticated Mini App Literature progress write endpoint added for `user_literature_progress`; no recommendation logic, Mini App UI, Telegram bot UX, reminders, reading plans, private notes, literature JSON, questions, glossary, Docker, deploy, or CI/CD changes.
 ## Current status dashboard
 - ✅ `LITERATURE-API-READONLY-006` — Read-only Mini App Literature API added for topics/items/existing user state; no progress mutation, recommendation logic, Mini App UI, Telegram bot UX, reminders, literature JSON, questions, glossary, Docker, deploy, or CI/CD changes.
 - ✅ `LITERATURE-RUNTIME-STATE-MODEL-005` — SQLite-backed user literature progress state model/migration added for future Reading Tracker; no API, UI, bot UX, recommendation logic, reminders, literature JSON, questions, glossary, deploy, Docker, or CI/CD changes.

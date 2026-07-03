@@ -7,13 +7,14 @@ import logging
 import sqlite3
 import time
 import urllib.parse
+from datetime import datetime, timezone
 from contextlib import closing
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from dataclasses import dataclass
 from typing import Any
 
-from app.db import create_or_load_user, finalize_quiz_session, get_connection
+from app.db import USER_LITERATURE_READING_STATUSES, create_or_load_user, finalize_quiz_session, get_connection
 from app.db import (
     abandon_in_progress_sessions_for_user,
     get_active_categories,
@@ -385,6 +386,157 @@ def build_literature_state_response(
         raise
     return _json(HTTPStatus.OK, {"ok": True, "literature_state": states})
 
+
+def _utc_timestamp() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _known_literature_ids() -> set[str]:
+    return {str(item["id"]) for item in load_literature_items() if isinstance(item.get("id"), str)}
+
+
+def _validate_literature_progress_payload(payload: dict[str, Any]) -> tuple[str, str, int | None] | str:
+    literature_id = payload.get("literature_id")
+    if not isinstance(literature_id, str) or not literature_id.strip():
+        return "invalid_literature_id"
+    literature_id = literature_id.strip()
+    if literature_id not in _known_literature_ids():
+        return "unknown_literature_id"
+
+    reading_status = payload.get("reading_status")
+    if reading_status not in USER_LITERATURE_READING_STATUSES:
+        return "invalid_reading_status"
+
+    progress_percent = payload.get("progress_percent")
+    if progress_percent is None:
+        return literature_id, str(reading_status), None
+    if type(progress_percent) is not int or progress_percent < 0 or progress_percent > 100:
+        return "invalid_progress_percent"
+    return literature_id, str(reading_status), progress_percent
+
+
+def _build_literature_progress_values(existing: Any, reading_status: str, requested_progress: int | None, now: str) -> dict[str, Any]:
+    existing_status = existing["reading_status"] if existing is not None else None
+    existing_progress = existing["progress_percent"] if existing is not None else None
+    existing_started = existing["started_at"] if existing is not None else None
+    existing_completed = existing["completed_at"] if existing is not None else None
+    existing_last_opened = existing["last_opened_at"] if existing is not None else None
+
+    progress_percent = requested_progress
+    started_at = existing_started
+    completed_at = existing_completed
+    last_opened_at = existing_last_opened
+
+    if reading_status == "read":
+        progress_percent = 100
+        started_at = started_at or now
+        if not completed_at or existing_status != "read":
+            completed_at = now
+        last_opened_at = now
+    elif reading_status == "not_started":
+        progress_percent = 0
+        started_at = None
+        completed_at = None
+        last_opened_at = None
+    else:
+        if progress_percent is None:
+            progress_percent = existing_progress
+        if reading_status in {"in_progress", "revisit"}:
+            started_at = started_at or now
+            last_opened_at = now
+        elif reading_status == "skipped":
+            completed_at = None
+
+    return {
+        "reading_status": reading_status,
+        "progress_percent": progress_percent,
+        "started_at": started_at,
+        "completed_at": completed_at,
+        "updated_at": now,
+        "last_opened_at": last_opened_at,
+    }
+
+
+def _upsert_literature_progress(conn, actor_user_id: int, literature_id: str, reading_status: str, progress_percent: int | None) -> dict[str, Any]:
+    existing = conn.execute(
+        """
+        SELECT reading_status, progress_percent, started_at, completed_at, last_opened_at
+        FROM user_literature_progress
+        WHERE user_id = ? AND literature_id = ?
+        LIMIT 1
+        """,
+        (actor_user_id, literature_id),
+    ).fetchone()
+    values = _build_literature_progress_values(existing, reading_status, progress_percent, _utc_timestamp())
+    conn.execute(
+        """
+        INSERT INTO user_literature_progress (
+            user_id, literature_id, reading_status, progress_percent,
+            started_at, completed_at, updated_at, last_opened_at, remind_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NULL)
+        ON CONFLICT(user_id, literature_id) DO UPDATE SET
+            reading_status = excluded.reading_status,
+            progress_percent = excluded.progress_percent,
+            started_at = excluded.started_at,
+            completed_at = excluded.completed_at,
+            updated_at = excluded.updated_at,
+            last_opened_at = excluded.last_opened_at
+        """,
+        (
+            actor_user_id,
+            literature_id,
+            values["reading_status"],
+            values["progress_percent"],
+            values["started_at"],
+            values["completed_at"],
+            values["updated_at"],
+            values["last_opened_at"],
+        ),
+    )
+    row = conn.execute(
+        """
+        SELECT literature_id, reading_status, progress_percent, started_at, completed_at, updated_at, last_opened_at, remind_at
+        FROM user_literature_progress
+        WHERE user_id = ? AND literature_id = ?
+        LIMIT 1
+        """,
+        (actor_user_id, literature_id),
+    ).fetchone()
+    return state_row_to_payload(row)
+
+
+def build_literature_progress_response(
+    db_path: str,
+    bot_token: str,
+    init_data: str,
+    body: bytes,
+    *,
+    max_age_seconds: int = 3600,
+) -> tuple[int, dict[str, str], bytes]:
+    started_at = time.time()
+    try:
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
+    except InitDataValidationError as exc:
+        return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
+    payload = _parse_json_payload(body)
+    if payload is None:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    validated = _validate_literature_progress_payload(payload)
+    if isinstance(validated, str):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": validated})
+    literature_id, reading_status, progress_percent = validated
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+                progress = _upsert_literature_progress(conn, int(user_row["id"]), literature_id, reading_status, progress_percent)
+    except sqlite3.OperationalError as exc:
+        if _is_sqlite_locked_error(exc):
+            _log_locked_db("/miniapp/literature/progress", started_at)
+            return _database_busy_response()
+        raise
+    return _json(HTTPStatus.OK, {"ok": True, "literature_progress": progress})
+
 def _is_glossary_setup_payload(payload: dict[str, Any]) -> bool:
     return payload.get("mode") == "glossary" or payload.get("quiz_mode") == "glossary"
 
@@ -736,7 +888,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         origin = self.headers.get("Origin", "")
         allowed = bool(self.allowed_origin and origin == self.allowed_origin)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s", endpoint, request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no", self.headers.get("Access-Control-Request-Method", ""), self.headers.get("Access-Control-Request-Headers", ""))
             return
@@ -830,7 +982,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         endpoint = self.path.split("?")[0]
         request_id = _read_request_id(self.headers)
         transport = "header_auth"
-        if endpoint not in {"/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart"}:
+        if endpoint not in {"/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         length = int(self.headers.get("Content-Length", "0"))
@@ -853,6 +1005,10 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     init_data,
                     payload_body,
                     max_age_seconds=self.initdata_ttl_seconds,
+                )
+            elif endpoint == "/miniapp/literature/progress":
+                status, headers, data = build_literature_progress_response(
+                    self.db_path, self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds
                 )
             elif endpoint == "/miniapp/glossary/start":
                 status, headers, data = build_glossary_start_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
