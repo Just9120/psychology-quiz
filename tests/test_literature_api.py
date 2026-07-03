@@ -192,6 +192,8 @@ class LiteratureApiTests(unittest.TestCase):
         before = self._progress_count()
         cases = [
             ({"literature_id": self.first_item["id"], "reading_status": "bad"}, "invalid_reading_status"),
+            ({"literature_id": self.first_item["id"], "reading_status": []}, "invalid_reading_status"),
+            ({"literature_id": self.first_item["id"], "reading_status": {}}, "invalid_reading_status"),
             ({"literature_id": self.first_item["id"], "reading_status": "in_progress", "progress_percent": -1}, "invalid_progress_percent"),
             ({"literature_id": self.first_item["id"], "reading_status": "in_progress", "progress_percent": 101}, "invalid_progress_percent"),
             ({"literature_id": "", "reading_status": "in_progress"}, "invalid_literature_id"),

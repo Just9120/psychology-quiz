@@ -404,7 +404,7 @@ def _validate_literature_progress_payload(payload: dict[str, Any]) -> tuple[str,
         return "unknown_literature_id"
 
     reading_status = payload.get("reading_status")
-    if reading_status not in USER_LITERATURE_READING_STATUSES:
+    if not isinstance(reading_status, str) or reading_status not in USER_LITERATURE_READING_STATUSES:
         return "invalid_reading_status"
 
     progress_percent = payload.get("progress_percent")
