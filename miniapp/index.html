@@ -257,9 +257,11 @@
       <div class="miniapp-choice-list">
         <button type="button" id="mode_topics" class="miniapp-choice-button mode-choice-button">Тесты по темам</button>
         <button type="button" id="mode_glossary" class="miniapp-choice-button mode-choice-button">Глоссарий</button>
+        <button type="button" id="mode_literature" class="miniapp-choice-button mode-choice-button">Литература</button>
       </div>
     </div>
     <div id="glossary_view" hidden></div>
+    <div id="literature_view" hidden></div>
     <div id="setup_warning" class="warn" hidden></div>
 
     <form id="f" class="setup-form" hidden>
@@ -309,8 +311,10 @@
       const questionView = document.getElementById('question_view');
       const modeView = document.getElementById('mode_view');
       const glossaryView = document.getElementById('glossary_view');
+      const literatureView = document.getElementById('literature_view');
       const modeTopics = document.getElementById('mode_topics');
       const modeGlossary = document.getElementById('mode_glossary');
+      const modeLiterature = document.getElementById('mode_literature');
       const catsFieldset = document.getElementById('cats_fieldset');
       const setupWarning = document.getElementById('setup_warning');
       const runnerState = document.getElementById('runner_state');
@@ -429,6 +433,8 @@
         questionView.hidden = true;
         glossaryView.replaceChildren();
         glossaryView.hidden = true;
+        literatureView.replaceChildren();
+        literatureView.hidden = true;
       }
 
       function showSetupWarningIfNeeded() {
@@ -450,7 +456,7 @@
         setupIntro.hidden = false;
         modeView.hidden = false;
         showSetupWarningIfNeeded();
-        runnerState.textContent = 'Выберите режим: тесты по темам или глоссарий.';
+        runnerState.textContent = 'Выберите режим: тесты по темам, глоссарий или литература.';
       }
 
       function showSetupMode({ message = 'Выберите формат, темы и сложность.', clearError = true } = {}) {
@@ -473,6 +479,8 @@
         form.hidden = true;
         setupIntro.hidden = true;
         hideSetupWarning();
+        glossaryView.hidden = true;
+        literatureView.hidden = true;
         questionView.hidden = false;
       }
 
@@ -482,6 +490,8 @@
         form.hidden = true;
         setupIntro.hidden = true;
         hideSetupWarning();
+        glossaryView.hidden = true;
+        literatureView.hidden = true;
         questionView.hidden = false;
       }
 
@@ -1756,6 +1766,254 @@
 
       let glossaryTopicsCache = [];
       let glossaryLastSessionId = '';
+
+
+
+      const literatureStatusLabels = {
+        not_started: 'Не начато',
+        in_progress: 'Читаю',
+        read: 'Прочитано',
+        revisit: 'Повторить',
+        skipped: 'Пропущено',
+      };
+      let literatureTopicsCache = [];
+      let literatureItemsCache = [];
+      let literatureSelectedTopic = null;
+
+      async function literatureFetch(path, payload = null, requestId = '') {
+        const initData = tg?.initData || '';
+        const options = payload === null
+          ? { headers: withMiniappRequestId({ Authorization: `tma ${initData}` }, requestId) }
+          : { method: 'POST', headers: withMiniappRequestId({ Authorization: `tma ${initData}`, 'Content-Type': 'application/json' }, requestId), body: JSON.stringify(payload) };
+        const resp = await apiFetch(`${apiBase}${path}`, options, 9000);
+        const text = await resp.text();
+        if (!text.trim()) return { resp, data: null, parseFailureType: 'empty_body' };
+        try {
+          return { resp, data: JSON.parse(text), parseFailureType: '' };
+        } catch (_) {
+          return { resp, data: null, parseFailureType: 'invalid_json' };
+        }
+      }
+
+      function showLiteratureView() {
+        modeView.hidden = true;
+        form.hidden = true;
+        setupIntro.hidden = true;
+        hideSetupWarning();
+        questionView.hidden = true;
+        glossaryView.hidden = true;
+        literatureView.hidden = false;
+      }
+
+      function renderLiteratureLoading(message = 'Загружаем литературу...') {
+        showLiteratureView();
+        literatureView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const msg = document.createElement('p');
+        msg.textContent = message;
+        card.appendChild(msg);
+        literatureView.appendChild(card);
+        runnerState.textContent = message;
+      }
+
+      function showLiteratureError(message = 'Не удалось загрузить литературу. Попробуйте закрыть окно и открыть /ui заново.') {
+        showLiteratureView();
+        literatureView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const msg = document.createElement('p');
+        msg.className = 'err';
+        msg.textContent = message;
+        card.appendChild(msg);
+        literatureView.appendChild(card);
+        runnerState.textContent = message;
+      }
+
+      function getLiteratureItemId(item) {
+        return typeof item?.literature_id === 'string' ? item.literature_id : String(item?.id || '');
+      }
+
+      function literatureText(value) {
+        if (Array.isArray(value)) return value.filter(Boolean).join(', ');
+        if (value === null || value === undefined || value === '') return '';
+        return String(value);
+      }
+
+      function renderLiteratureMetaLine(label, value) {
+        const text = literatureText(value);
+        if (!text) return null;
+        const p = document.createElement('p');
+        p.className = 'meta';
+        p.textContent = `${label}: ${text}`;
+        return p;
+      }
+
+      function renderLiteratureTopics(topics) {
+        showLiteratureView();
+        literatureView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const title = document.createElement('h4');
+        title.className = 'question-title';
+        title.textContent = 'Литература';
+        card.appendChild(title);
+        const hint = document.createElement('p');
+        hint.className = 'meta';
+        hint.textContent = 'Выберите тему или откройте общий список.';
+        card.appendChild(hint);
+        const choices = document.createElement('div');
+        choices.className = 'miniapp-choice-list';
+        const allBtn = document.createElement('button');
+        allBtn.type = 'button';
+        allBtn.className = 'miniapp-choice-button literature-choice-button';
+        allBtn.textContent = 'Вся литература';
+        allBtn.addEventListener('click', () => loadLiteratureItems(null));
+        choices.appendChild(allBtn);
+        (topics || []).forEach((topic) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'miniapp-choice-button literature-choice-button';
+          btn.textContent = `${topic.title || topic.topic_id} (${Number(topic.item_count) || 0})`;
+          btn.addEventListener('click', () => loadLiteratureItems(topic));
+          choices.appendChild(btn);
+        });
+        const back = document.createElement('button');
+        back.type = 'button';
+        back.className = 'miniapp-choice-button literature-choice-button';
+        back.textContent = 'К выбору режима';
+        back.addEventListener('click', showModeSelection);
+        choices.appendChild(back);
+        card.appendChild(choices);
+        literatureView.appendChild(card);
+        runnerState.textContent = 'Выберите раздел литературы.';
+      }
+
+      async function loadLiteratureItems(topic) {
+        literatureSelectedTopic = topic;
+        renderLiteratureLoading('Загружаем список литературы...');
+        const requestId = buildMiniappRequestId();
+        const query = topic?.topic_id ? `?topic_id=${encodeURIComponent(topic.topic_id)}` : '';
+        try {
+          const { resp, data } = await literatureFetch(`/miniapp/literature/items${query}`, null, requestId);
+          if (resp.ok && data?.ok === true && Array.isArray(data.literature_items)) {
+            literatureItemsCache = data.literature_items;
+            renderLiteratureItems(literatureItemsCache, topic);
+            return;
+          }
+        } catch (_) {}
+        showLiteratureError('Не удалось загрузить список литературы. Попробуйте открыть /ui заново.');
+      }
+
+      function renderLiteratureItems(items, topic) {
+        showLiteratureView();
+        literatureView.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        const title = document.createElement('h4');
+        title.className = 'question-title';
+        title.textContent = topic?.title || 'Вся литература';
+        card.appendChild(title);
+        const list = document.createElement('div');
+        list.className = 'miniapp-choice-list';
+        (items || []).forEach((item) => list.appendChild(renderLiteratureItemCard(item)));
+        card.appendChild(list);
+        const back = document.createElement('button');
+        back.type = 'button';
+        back.className = 'miniapp-choice-button literature-choice-button';
+        back.textContent = 'К темам литературы';
+        back.addEventListener('click', () => renderLiteratureTopics(literatureTopicsCache));
+        card.appendChild(back);
+        literatureView.appendChild(card);
+        runnerState.textContent = items?.length ? 'Выберите материал и отметьте прогресс.' : 'Для выбранной темы пока нет материалов.';
+      }
+
+      function renderLiteratureItemCard(item) {
+        const details = document.createElement('details');
+        details.className = 'question-card';
+        const summary = document.createElement('summary');
+        summary.textContent = item.title || getLiteratureItemId(item);
+        details.appendChild(summary);
+        [
+          ['Авторы', item.authors],
+          ['Год', item.year],
+          ['Тип', item.type],
+          ['Уровень', item.reading_level],
+          ['Приоритет', item.priority],
+          ['Время', item.estimated_minutes ? `${item.estimated_minutes} мин.` : ''],
+          ['Теги', item.tags],
+          ['Зачем читать', item.why_read],
+          ['Что вы освоите', item.learning_outcomes],
+          ['Перед чтением', item.prerequisites],
+        ].forEach(([label, value]) => {
+          const line = renderLiteratureMetaLine(label, value);
+          if (line) details.appendChild(line);
+        });
+        const state = item.user_state || {};
+        const currentStatus = state.reading_status || 'not_started';
+        const status = document.createElement('p');
+        status.className = 'answer-status';
+        status.textContent = `Статус: ${literatureStatusLabels[currentStatus] || currentStatus}`;
+        details.appendChild(status);
+        const actions = document.createElement('div');
+        actions.className = 'miniapp-choice-list';
+        ['in_progress', 'read', 'revisit', 'skipped'].forEach((readingStatus) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'miniapp-choice-button literature-choice-button';
+          btn.setAttribute('data-reading-status', readingStatus);
+          btn.textContent = literatureStatusLabels[readingStatus];
+          btn.addEventListener('click', () => updateLiteratureProgress(item, readingStatus));
+          actions.appendChild(btn);
+        });
+        const reset = document.createElement('button');
+        reset.type = 'button';
+        reset.className = 'miniapp-choice-button literature-choice-button';
+        reset.setAttribute('data-reading-status', 'not_started');
+        reset.textContent = 'Сбросить статус';
+        reset.addEventListener('click', () => updateLiteratureProgress(item, 'not_started'));
+        actions.appendChild(reset);
+        details.appendChild(actions);
+        return details;
+      }
+
+      async function updateLiteratureProgress(item, readingStatus) {
+        const literatureId = getLiteratureItemId(item);
+        if (!literatureId) return;
+        runnerState.textContent = 'Сохраняем прогресс чтения...';
+        err.textContent = '';
+        const requestId = buildMiniappRequestId();
+        const payload = { literature_id: literatureId, reading_status: readingStatus };
+        try {
+          const { resp, data } = await literatureFetch('/miniapp/literature/progress', payload, requestId);
+          if (resp.ok && data?.ok === true && data.literature_progress) {
+            item.user_state = data.literature_progress;
+            renderLiteratureItems(literatureItemsCache, literatureSelectedTopic);
+            runnerState.textContent = `Прогресс обновлён: ${literatureStatusLabels[readingStatus] || readingStatus}.`;
+            return;
+          }
+        } catch (_) {}
+        showLiteratureError('Не удалось сохранить прогресс чтения. Попробуйте ещё раз.');
+      }
+
+      modeLiterature.addEventListener('click', async () => {
+        renderLiteratureLoading();
+        if (!apiBase || !tg?.initData) {
+          showLiteratureError('Не удалось открыть литературу: Mini App API или данные Telegram недоступны.');
+          return;
+        }
+        const requestId = buildMiniappRequestId();
+        try {
+          const topicsResult = await literatureFetch('/miniapp/literature/topics', null, requestId);
+          await literatureFetch('/miniapp/literature/state', null, requestId);
+          if (topicsResult.resp.ok && topicsResult.data?.ok === true && Array.isArray(topicsResult.data.literature_topics)) {
+            literatureTopicsCache = topicsResult.data.literature_topics;
+            renderLiteratureTopics(literatureTopicsCache);
+            return;
+          }
+        } catch (_) {}
+        showLiteratureError();
+      });
 
       async function glossaryFetch(path, payload = null, requestId = '') {
         const initData = tg?.initData || '';

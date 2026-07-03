@@ -1,6 +1,7 @@
 # Delivery Plan
 
 ## Current status dashboard
+- ✅ `LITERATURE-MINIAPP-UI-008` — Mini App Literature contour added with authenticated topics/items/state reads and progress status writes; no `/next`, recommendation logic, reminders, reading plans, private notes, literature JSON, question bank, glossary data, DB/schema, Telegram chat UX, Docker, deploy, or CI/CD changes.
 - ✅ `LITERATURE-API-PROGRESS-WRITE-007` — Authenticated Mini App Literature progress write endpoint added for `user_literature_progress`; no recommendation logic, Mini App UI, Telegram bot UX, reminders, reading plans, private notes, literature JSON, questions, glossary, Docker, deploy, or CI/CD changes.
 - ✅ `LITERATURE-API-READONLY-006` — Read-only Mini App Literature API added for topics/items/existing user state; no progress mutation, recommendation logic, Mini App UI, Telegram bot UX, reminders, literature JSON, questions, glossary, Docker, deploy, or CI/CD changes.
 - ✅ `LITERATURE-RUNTIME-STATE-MODEL-005` — SQLite-backed user literature progress state model/migration added for future Reading Tracker; no API, UI, bot UX, recommendation logic, reminders, literature JSON, questions, glossary, deploy, Docker, or CI/CD changes.
@@ -32,7 +33,7 @@
 - Production classic chat UX: `CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=true` remains the recommended implementation; the cleaner bottom reply keyboard UX is preferred for answers and `Далее`.
 - Classic inline callback mode remains available only as legacy/fallback (`CLASSIC_QUIZ_REPLY_KEYBOARD_MODE=false`).
 - `/ui` / `🚀 В окне` remains opt-in Mini App runner; Mini App does not become the default UX.
-- Mini App setup entrypoint now offers two contours: `Тесты по темам` and `Глоссарий`; chat `📚 Глоссарий` remains the separate Telegram chat glossary quiz.
+- Mini App setup entrypoint now offers three contours: `Тесты по темам`, `Глоссарий`, and `Литература`; chat `📚 Глоссарий` remains the separate Telegram chat glossary quiz.
 - Mini App setup data is hydrated through authenticated `/miniapp/setup-options` instead of being embedded in launch URLs, so all eight glossary topics and active categories remain available while `/ui` stays within the configured URL-size limit.
 - Production app runtime service set is `psych_quiz_bot` + `psych_quiz_miniapp_api`; static Mini App frontend hosting remains separate/operator-managed.
 - Long polling remains the default runtime mode; webhook is optional/config-gated infrastructure.
