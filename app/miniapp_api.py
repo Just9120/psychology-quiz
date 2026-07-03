@@ -25,6 +25,12 @@ from app.db import (
     store_session_questions,
 )
 from app.miniapp_runner import build_miniapp_runner_state, submit_miniapp_answer_event
+from app.literature import (
+    list_literature_topic_payloads,
+    load_literature_items,
+    state_row_to_item_user_state,
+    state_row_to_payload,
+)
 from app.miniapp_glossary import (
     answer_glossary_session,
     list_glossary_topics_payload,
@@ -265,6 +271,119 @@ def build_glossary_restart_response(bot_token: str, init_data: str, body: bytes,
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
 
 
+
+
+def _load_literature_progress_by_user(conn, actor_user_id: int) -> dict[str, dict[str, Any]]:
+    rows = conn.execute(
+        """
+        SELECT literature_id, reading_status, progress_percent, started_at, completed_at, updated_at, last_opened_at, remind_at
+        FROM user_literature_progress
+        WHERE user_id = ?
+        ORDER BY updated_at DESC, literature_id ASC
+        """,
+        (actor_user_id,),
+    ).fetchall()
+    return {str(row["literature_id"]): state_row_to_payload(row) for row in rows}
+
+
+def _load_literature_item_states_by_user(conn, actor_user_id: int) -> dict[str, dict[str, Any]]:
+    rows = conn.execute(
+        """
+        SELECT literature_id, reading_status, progress_percent, started_at, completed_at, updated_at, last_opened_at, remind_at
+        FROM user_literature_progress
+        WHERE user_id = ?
+        """,
+        (actor_user_id,),
+    ).fetchall()
+    return {str(row["literature_id"]): state_row_to_item_user_state(row) for row in rows}
+
+
+def build_literature_topics_response(
+    db_path: str,
+    bot_token: str,
+    init_data: str,
+    *,
+    max_age_seconds: int = 3600,
+) -> tuple[int, dict[str, str], bytes]:
+    started_at = time.time()
+    try:
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
+    except InitDataValidationError as exc:
+        return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+                user_states = _load_literature_progress_by_user(conn, int(user_row["id"]))
+    except sqlite3.OperationalError as exc:
+        if _is_sqlite_locked_error(exc):
+            _log_locked_db("/miniapp/literature/topics", started_at)
+            return _database_busy_response()
+        raise
+    return _json(HTTPStatus.OK, {"ok": True, "literature_topics": list_literature_topic_payloads(user_states)})
+
+
+def build_literature_items_response(
+    db_path: str,
+    bot_token: str,
+    init_data: str,
+    topic_id: str | None = None,
+    *,
+    max_age_seconds: int = 3600,
+) -> tuple[int, dict[str, str], bytes]:
+    started_at = time.time()
+    try:
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
+    except InitDataValidationError as exc:
+        return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
+    normalized_topic_id = topic_id.strip() if isinstance(topic_id, str) and topic_id.strip() else None
+    try:
+        items = load_literature_items(normalized_topic_id)
+    except FileNotFoundError:
+        items = []
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+                user_states = _load_literature_item_states_by_user(conn, int(user_row["id"]))
+    except sqlite3.OperationalError as exc:
+        if _is_sqlite_locked_error(exc):
+            _log_locked_db("/miniapp/literature/items", started_at)
+            return _database_busy_response()
+        raise
+    enriched_items = []
+    for item in items:
+        enriched = dict(item)
+        item_id = enriched.get("id")
+        if isinstance(item_id, str) and item_id in user_states:
+            enriched["user_state"] = user_states[item_id]
+        enriched_items.append(enriched)
+    return _json(HTTPStatus.OK, {"ok": True, "literature_items": enriched_items})
+
+
+def build_literature_state_response(
+    db_path: str,
+    bot_token: str,
+    init_data: str,
+    *,
+    max_age_seconds: int = 3600,
+) -> tuple[int, dict[str, str], bytes]:
+    started_at = time.time()
+    try:
+        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
+    except InitDataValidationError as exc:
+        return _json(HTTPStatus.UNAUTHORIZED, {"ok": False, "error": str(exc)})
+    try:
+        with closing(get_connection(db_path)) as conn:
+            with conn:
+                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
+                states = list(_load_literature_progress_by_user(conn, int(user_row["id"])).values())
+    except sqlite3.OperationalError as exc:
+        if _is_sqlite_locked_error(exc):
+            _log_locked_db("/miniapp/literature/state", started_at)
+            return _database_busy_response()
+        raise
+    return _json(HTTPStatus.OK, {"ok": True, "literature_state": states})
 
 def _is_glossary_setup_payload(payload: dict[str, Any]) -> bool:
     return payload.get("mode") == "glossary" or payload.get("quiz_mode") == "glossary"
@@ -617,7 +736,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         origin = self.headers.get("Origin", "")
         allowed = bool(self.allowed_origin and origin == self.allowed_origin)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s", endpoint, request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no", self.headers.get("Access-Control-Request-Method", ""), self.headers.get("Access-Control-Request-Headers", ""))
             return
@@ -636,7 +755,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         transport = "header_auth"
         init_data = _extract_init_data(self.headers)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/glossary/topics"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/glossary/topics", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         try:
@@ -654,11 +773,25 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     init_data,
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
-            else:
+            elif endpoint == "/miniapp/glossary/topics":
                 status, headers, body = build_glossary_topics_response(
                     self.bot_token,
                     init_data,
                     max_age_seconds=self.initdata_ttl_seconds,
+                )
+            elif endpoint == "/miniapp/literature/topics":
+                status, headers, body = build_literature_topics_response(
+                    self.db_path, self.bot_token, init_data, max_age_seconds=self.initdata_ttl_seconds
+                )
+            elif endpoint == "/miniapp/literature/items":
+                query = urllib.parse.urlparse(self.path).query
+                params = urllib.parse.parse_qs(query)
+                status, headers, body = build_literature_items_response(
+                    self.db_path, self.bot_token, init_data, (params.get("topic_id") or [None])[0], max_age_seconds=self.initdata_ttl_seconds
+                )
+            else:
+                status, headers, body = build_literature_state_response(
+                    self.db_path, self.bot_token, init_data, max_age_seconds=self.initdata_ttl_seconds
                 )
         except sqlite3.OperationalError as exc:
             if not _is_sqlite_locked_error(exc):
