@@ -6,6 +6,18 @@ import pytest
 
 from scripts.deployment_db import backup_and_rehearse, check_business, read_connection, verify_preserved
 from app.attempt_content import ensure_attempt_snapshots
+from scripts.deployment_db import check_runtime_config
+
+
+def test_preflight_rejects_incomplete_pwa_before_runtime_changes(monkeypatch):
+    monkeypatch.setenv("BOT_TOKEN", "123:synthetic")
+    monkeypatch.setenv("TELEGRAM_UPDATE_MODE", "polling")
+    monkeypatch.setenv("PWA_ENABLED", "false")
+    check_runtime_config()
+    monkeypatch.setenv("PWA_ENABLED", "true")
+    monkeypatch.delenv("PWA_ORIGIN", raising=False)
+    with pytest.raises(RuntimeError, match="Missing PWA_ORIGIN"):
+        check_runtime_config()
 
 
 @pytest.fixture
