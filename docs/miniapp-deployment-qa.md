@@ -8,7 +8,7 @@
 
 | Поверхность | Контракт / ограничение |
 | --- | --- |
-| CI | [ci.yml](../.github/workflows/ci.yml): PR к main, push main, manual; Ubuntu/Python 3.12, contents:read, cancellation по workflow/ref. Canonical pytest запускает все unittest/pytest cases, Docker compose contract, deployment failure scenarios; validators/init/seed и whitespace по actual base..HEAD. |
+| CI | [ci.yml](../.github/workflows/ci.yml): PR к main, push main, manual; Ubuntu/Python 3.12, contents:read, cancellation по workflow/ref. Canonical pytest запускает все unittest/pytest cases, Docker compose contract, deployment failure scenarios; validators/init/seed/parity и whitespace по actual base..HEAD. |
 | Проверяемая revision | PR — default merge ref, после merge — main push SHA. Не считать PR head и merge tree одним commit. CD требует успешный последний push CI именно candidate SHA; более поздний failed/in-progress run запрещает reuse старого green. |
 | Gates/review | GitHub snapshot 19.09: main protected=false, rulesets=[], required approvals отсутствуют (остаток F-003). AGENTS требует дождаться всех опубликованных checks/self-review. Pipeline CI→CD gate не заменяет branch policy. |
 | CD trigger/permissions | [deploy-production.yml](../.github/workflows/deploy-production.yml): successful trusted main push CI через workflow_run либо manual main с тем же exact-CI gate. contents:read/actions:read; actions pinned SHA; PR/fork source не получает SSH credentials. Production Environment пока без protection/branch rules. |
@@ -19,7 +19,7 @@
 | Static frontend | Отдельная Cloudflare Git integration/Worker psychology-quiz-miniapp, не Compose service. После frontend PR нужны опубликованный asset и provider check; backend CD этого не доказывает. |
 | Stateful class | Обычный code-only release — NONE. Schema/seed/content DB release этой Goal — BACKWARD_COMPATIBLE_AUTOMATED; Для первой поставки без прежнего image SHA обязательны backup rehearsal/user preservation; init/seed выполняются только при соответствующем source diff, не из-за отсутствия label. Stateful script останавливает оба writer services, создаёт backup, репетирует restore отдельно, затем init/seed и проверяет сохранность всех прежних user fields. |
 | Backup / recovery | [deployment_db.py](../scripts/deployment_db.py): SQLite backup API в private `/data/backups/release-*/quiz.sqlite3`; restore во временный файл, integrity/FK и fingerprint users/sessions/answers/literature. До migrations failure запускает только прежние containers. После начала migration/post-check failure — stop продвижения и forward-fix; production restore/volume cleanup не автоматизированы. Retention/удаление backups — отдельная maintenance задача. |
-| Обязательные post-checks | Проверка DB serving questions/options, неизменности user state для stateful release, [internal HTTP smoke](../scripts/deployment_http_smoke.py) `/healthz` с expected SHA и unauthenticated `/miniapp/state` → 401; затем обе службы Running и image revision. `DEPLOY_OK revision=...` допустим только после всех checks. Bot Telegram roundtrip не входит в read-only smoke. |
+| Обязательные post-checks | Проверка DB serving questions/options, всех attempt snapshot hashes и canonical parity, неизменности user state для stateful release, [internal HTTP smoke](../scripts/deployment_http_smoke.py) `/healthz` с expected SHA и unauthenticated `/miniapp/state` → 401; затем обе службы Running и image revision. `DEPLOY_OK revision=...` допустим только после всех checks. Bot Telegram roundtrip не входит в read-only smoke. |
 
 Routine entrypoint — [deploy.sh](../deploy.sh), переданный по verified SSH из validated candidate с positional expected SHA. SSH сначала читает полный script в аргумент bash -c, чтобы stdin дочернего процесса не забрал оставшийся код; workflow отдельно требует exact completion marker. Не запускать старую host-копию script: checkout обновляется внутри candidate procedure. Docs-only change синхронизирует source без runtime restart и сообщает отдельно SOURCE_SYNC_OK/runtime_unchanged. Повторный deploy ради статуса не нужен: читать CI/CD records.
 
@@ -494,8 +494,7 @@ Smoke checks:
 - Production deploy must run normal bot startup (`init_db_connection`) so runtime checks can ensure expected additive indexes exist.
 - Destructive or behavior-changing migrations (drop/rewrite/backfill with risk) require explicit migration scripts + operator-approved backups/rollback plan.
 
-Backup example for production DB file:
-- `cp /data/quiz.sqlite3 /data/quiz.sqlite3.backup.$(date -u +%Y%m%dT%H%M%SZ)`
+Для действующей production SQLite с WAL используйте SQLite backup API и isolated restore rehearsal из [DB checks](../scripts/deployment_db.py), вызываемые штатным [deploy](../deploy.sh). Простое копирование основного файла не является принятой backup procedure.
 
 ## 17) Historical architecture notes (planned at that time)
 - `app/main.py` is currently overloaded and should be split in follow-up refactor PRs:

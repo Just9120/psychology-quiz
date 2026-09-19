@@ -363,7 +363,7 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
             if current is None:
                 return {"current": None}
             question_id = int(current["question_id"])
-            options = get_question_options(conn, question_id)
+            options = get_question_options(conn, question_id, session_id=session_id)
             session = get_quiz_session(conn, session_id)
             reading_mode = "normal"
             if session is not None:
@@ -423,7 +423,7 @@ async def send_current_question_to_message(message, settings, session_id: int, c
             question_id = None
         else:
             question_id = int(current["question_id"])
-            options = get_question_options(conn, question_id)
+            options = get_question_options(conn, question_id, session_id=session_id)
             session = get_quiz_session(conn, session_id)
             reading_mode = "normal"
             if session is not None:
@@ -635,7 +635,7 @@ async def send_current_question(
         session = get_quiz_session(conn, session_id)
         if session is not None:
             reading_mode = get_user_reading_mode(conn, int(session["user_id"]))
-        options = get_question_options(conn, question_id)
+        options = get_question_options(conn, question_id, session_id=session_id)
         if not options:
             finalized = finalize_quiz_session(conn, session_id)
             if finalized is not None:
@@ -1295,7 +1295,7 @@ def _load_classic_text_answer_context(settings, tg_user, state: dict) -> dict:
         question_id = int(current["question_id"])
         if question_id != expected_question_id:
             return {"status": "stale_question", "session_id": session_id, "question_id": expected_question_id}
-        options = get_question_options(conn, question_id)
+        options = get_question_options(conn, question_id, session_id=session_id)
         return {"status": "ok", "session_id": session_id, "question_id": question_id, "options": options}
 
 
@@ -1308,7 +1308,7 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
         if int(session["user_id"]) != int(user_row["id"]):
             return {"status": "forbidden"}
         current = get_current_unanswered_question(conn, session_id)
-        options = get_question_options(conn, question_id)
+        options = get_question_options(conn, question_id, session_id=session_id)
         submission = submit_miniapp_answer_event(
             conn,
             session_id=session_id,

@@ -524,7 +524,10 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         long_option = "Z" * 1600
         self.conn.execute("UPDATE questions SET question_text = ? WHERE id = 1", (long_text,))
         self.conn.execute("UPDATE question_options SET option_text = ? WHERE question_id = 1", (long_option,))
-        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=self.session_id)
+        # Content edits apply to a new attempt; the existing attempt is immutable.
+        long_session = start_quiz_session(self.conn, self.user_id, 1)
+        store_session_questions(self.conn, long_session, [1])
+        state = build_miniapp_runner_state(self.conn, actor_user_id=self.user_id, session_id=long_session)
         url, used_fallback = build_miniapp_url_with_fallback("https://example.com/ui", [{"id": 1, "name": "Category 1"}], state)
         self.assertTrue(used_fallback)
         self.assertIsNotNone(url)

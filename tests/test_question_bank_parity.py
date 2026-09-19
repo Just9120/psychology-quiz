@@ -9,6 +9,7 @@ import pytest
 from app.db import upsert_approved_questions
 from scripts import audit_question_bank
 from scripts.audit_question_bank import build_report, load_canonical, load_canonical_inventory
+from scripts.deployment_db import check_content_parity
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -114,21 +115,30 @@ def test_audit_reports_missing_unknown_mismatched_rows_without_mutating(tmp_path
     assert mutated_text == "Injected mismatch"
 
 
-def test_retired_canonical_db_rows_are_informational_not_blocking(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.mark.parametrize("canonical_status", ["draft", "review", "retired"])
+@pytest.mark.parametrize("db_status", ["approved", "retired"])
+def test_nonapproved_canonical_rows_block_only_when_still_serving(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, canonical_status, db_status) -> None:
     db_path = _init_seeded_db(tmp_path)
     inventory, topics = load_canonical_inventory()
     retired = dict(inventory[0])
     retired["external_id"] = "retired-canonical-question"
-    retired["status"] = "retired"
+    retired["status"] = canonical_status
     with sqlite3.connect(db_path) as conn:
         _insert_question(conn, external_id=retired["external_id"])
+        conn.execute("UPDATE questions SET status=? WHERE external_id=?", (db_status, retired["external_id"]))
     monkeypatch.setattr(audit_question_bank, "load_canonical_inventory", lambda: (inventory + [retired], topics))
 
     report = audit_question_bank.build_report(str(db_path))
 
     assert report["sqlite"]["retired_canonical_db_rows"] == [retired["external_id"]]
     assert report["sqlite"]["unknown_db_rows"] == []
-    assert not audit_question_bank.has_blockers(report)
+    assert report["sqlite"]["nonapproved_canonical_serving_rows"] == ([retired["external_id"]] if db_status == "approved" else [])
+    assert audit_question_bank.has_blockers(report) == (db_status == "approved")
+    if db_status == "approved":
+        with pytest.raises(RuntimeError, match="Serving content"):
+            check_content_parity(db_path)
+    else:
+        check_content_parity(db_path)
 
 
 def test_review_queue_is_compact_unique_and_capped() -> None:

@@ -5,6 +5,7 @@ import sqlite3
 import pytest
 
 from scripts.deployment_db import backup_and_rehearse, check_business, read_connection, verify_preserved
+from app.attempt_content import ensure_attempt_snapshots
 
 
 @pytest.fixture
@@ -20,6 +21,7 @@ def database(tmp_path):
         conn.execute("INSERT INTO quiz_session_questions (session_id, question_id, order_index) VALUES (1, 1, 0)")
         conn.execute("INSERT INTO quiz_answers (session_id, question_id, selected_option_index, is_correct) VALUES (1, 1, 0, 1)")
         conn.execute("INSERT INTO user_literature_progress (user_id, literature_id, reading_status, updated_at, private_note) VALUES (1, 'lit', 'read', 'today', 'private note')")
+        ensure_attempt_snapshots(conn)
     return path
 
 

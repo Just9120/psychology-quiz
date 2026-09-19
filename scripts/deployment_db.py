@@ -8,7 +8,14 @@ import json
 import os
 from pathlib import Path
 import sqlite3
+import sys
 import tempfile
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+from app.attempt_content import get_attempt_content
+from scripts.audit_question_bank import build_report, has_blockers
 
 USER_TABLES = (
     "users", "quiz_sessions", "quiz_session_selected_categories",
@@ -21,7 +28,7 @@ def read_connection(path: Path) -> sqlite3.Connection:
 
 
 def check_integrity(conn: sqlite3.Connection) -> None:
-    if conn.execute("PRAGMA integrity_check").fetchall() != [("ok",)]:
+    if [row[0] for row in conn.execute("PRAGMA integrity_check")] != ["ok"]:
         raise RuntimeError("Database integrity check failed")
     if conn.execute("PRAGMA foreign_key_check").fetchone() is not None:
         raise RuntimeError("Database foreign key check failed")
@@ -39,7 +46,7 @@ def user_state(conn: sqlite3.Connection, columns: dict | None = None) -> dict:
         digest = hashlib.sha256()
         count = 0
         for row in conn.execute(f'SELECT {fields} FROM "{table}" ORDER BY {fields}'):
-            digest.update(json.dumps(row, ensure_ascii=False, separators=(",", ":")).encode())
+            digest.update(json.dumps(tuple(row), ensure_ascii=False, separators=(",", ":")).encode())
             digest.update(b"\n")
             count += 1
         result[table] = {"columns": names, "rows": count, "sha256": digest.hexdigest()}
@@ -89,6 +96,13 @@ def check_business(conn: sqlite3.Connection) -> None:
     """).fetchone()
     if invalid:
         raise RuntimeError("Invalid serving question options")
+    for session_id, question_id in conn.execute("SELECT session_id, question_id FROM quiz_session_questions"):
+        get_attempt_content(conn, session_id, question_id)
+
+
+def check_content_parity(db_path: Path) -> None:
+    if has_blockers(build_report(str(db_path))):
+        raise RuntimeError("Serving content differs from canonical approved bank")
 
 
 def main() -> None:
@@ -127,6 +141,8 @@ def main() -> None:
     else:
         with closing(read_connection(db_path)) as conn:
             check_business(conn)
+        check_content_parity(db_path)
+        print("CONTENT_PARITY_OK")
         print("DATABASE_SMOKE_OK")
 
 

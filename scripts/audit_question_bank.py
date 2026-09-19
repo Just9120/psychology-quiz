@@ -111,6 +111,7 @@ def compare_db(db_path: str, canonical_inventory: list[dict[str, Any]]) -> dict[
         "foreign_key_check": [],
         "missing_approved_db_rows": [],
         "retired_canonical_db_rows": [],
+        "nonapproved_canonical_serving_rows": [],
         "legacy_retired_db_rows": [],
         "unknown_db_rows": [],
         "mismatched_approved_rows": [],
@@ -128,6 +129,10 @@ def compare_db(db_path: str, canonical_inventory: list[dict[str, Any]]) -> dict[
 
     result["missing_approved_db_rows"] = sorted(set(approved_by_id) - set(db_rows))
     result["retired_canonical_db_rows"] = sorted(set(retired_by_id) & set(db_rows))
+    result["nonapproved_canonical_serving_rows"] = sorted(
+        external_id for external_id in set(retired_by_id) & set(db_rows)
+        if db_rows[external_id]["status"] == "approved"
+    )
     unknown_ids = set(db_rows) - set(canonical_by_id)
     result["legacy_retired_db_rows"] = sorted(external_id for external_id in unknown_ids if db_rows[external_id]["status"] == "retired")
     result["unknown_db_rows"] = sorted(external_id for external_id in unknown_ids if db_rows[external_id]["status"] != "retired")
@@ -159,6 +164,7 @@ def has_blockers(report: dict[str, Any]) -> bool:
         or (db and (
             db.get("missing_approved_db_rows")
             or db.get("mismatched_approved_rows")
+            or db.get("nonapproved_canonical_serving_rows")
             or db.get("unknown_db_rows")
             or db.get("orphan_option_rows")
             or db.get("duplicate_external_ids")
@@ -206,6 +212,7 @@ def main() -> int:
         print(f"- foreign_key_check rows: {len(db['foreign_key_check'])}")
         print(f"- missing approved rows: {len(db['missing_approved_db_rows'])}")
         print(f"- retired canonical rows retained: {len(db['retired_canonical_db_rows'])}")
+        print(f"- non-approved canonical rows still serving: {len(db['nonapproved_canonical_serving_rows'])}")
         print(f"- legacy retired rows retained: {len(db['legacy_retired_db_rows'])}")
         print(f"- unknown rows: {len(db['unknown_db_rows'])}")
         print(f"- mismatched approved rows: {len(db['mismatched_approved_rows'])}")

@@ -4,6 +4,8 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
+from app.attempt_content import capture_question, ensure_attempt_snapshots, get_attempt_content
+
 
 SESSION_QUESTION_LIMIT = 10
 
@@ -30,6 +32,8 @@ def init_db_connection(db_path: str) -> None:
         ensure_quiz_session_selected_categories_table(conn)
         ensure_user_literature_progress_table(conn)
         ensure_performance_indexes(conn)
+        ensure_attempt_snapshots(conn)
+        conn.commit()
     finally:
         conn.close()
 
@@ -180,7 +184,26 @@ def ensure_categories(conn: sqlite3.Connection, category_names: list[str]) -> di
     return category_ids
 
 
-def upsert_approved_questions(conn: sqlite3.Connection, questions: list[dict[str, Any]]) -> dict[str, int]:
+def upsert_approved_questions(
+    conn: sqlite3.Connection, questions: list[dict[str, Any]], *, authoritative: bool = False
+) -> dict[str, int]:
+    # A partial import may update supplied IDs, but may not retire unspecified IDs.
+    ids = [str(item["id"]).strip() for item in questions]
+    if any(not external_id for external_id in ids) or len(set(ids)) != len(ids):
+        raise ValueError("Question IDs must be non-empty and unique")
+    ensure_attempt_snapshots(conn)  # Preserve legacy attempts BEFORE mutating live content.
+    for item in questions:
+        if item.get("status") != "approved":
+            conn.execute(
+                "UPDATE questions SET status=?, updated_at=CURRENT_TIMESTAMP WHERE external_id=? AND status IS NOT ?",
+                (str(item.get("status") or "retired"), str(item["id"]).strip(), str(item.get("status") or "retired")),
+            )
+    if authoritative:
+        # Avoid SQL parameter limits on a growing bank; no deletion of history rows.
+        supplied = set(ids)
+        for row in conn.execute("SELECT external_id FROM questions WHERE status != 'retired'").fetchall():
+            if row[0] not in supplied:
+                conn.execute("UPDATE questions SET status='retired', updated_at=CURRENT_TIMESTAMP WHERE external_id=?", (row[0],))
     approved = [item for item in questions if item.get("status") == "approved"]
     categories = sorted({str(item["category"]).strip() for item in approved if item.get("category")})
     category_ids = ensure_categories(conn, categories)
@@ -470,13 +493,20 @@ def select_random_approved_question_ids_by_categories(
 
 
 def store_session_questions(conn: sqlite3.Connection, session_id: int, question_ids: list[int]) -> None:
+    if not conn.in_transaction:
+        conn.execute("BEGIN IMMEDIATE")
     for order_index, question_id in enumerate(question_ids, start=1):
+        serving = conn.execute("SELECT 1 FROM questions WHERE id=? AND status='approved'", (question_id,)).fetchone()
+        if serving is None:
+            raise ValueError("Only approved questions can enter a new attempt")
+        snapshot, digest = capture_question(conn, question_id)
         conn.execute(
             """
-            INSERT INTO quiz_session_questions (session_id, question_id, order_index)
-            VALUES (?, ?, ?)
+            INSERT INTO quiz_session_questions
+                (session_id, question_id, order_index, content_snapshot, content_sha256, snapshot_provenance)
+            VALUES (?, ?, ?, ?, ?, 'captured')
             """,
-            (session_id, question_id, order_index),
+            (session_id, question_id, order_index, snapshot, digest),
         )
 
 
@@ -492,17 +522,14 @@ def get_session_question_count(conn: sqlite3.Connection, session_id: int) -> int
     return int(row["total_questions"]) if row else 0
 
 
-def get_current_unanswered_question(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
-    return conn.execute(
+def get_current_unanswered_question(conn: sqlite3.Connection, session_id: int) -> dict | None:
+    row = conn.execute(
         """
         SELECT
             sq.question_id,
             sq.order_index,
-            q.question_text,
-            q.explanation,
             (SELECT COUNT(*) FROM quiz_session_questions WHERE session_id = sq.session_id) AS total_questions
         FROM quiz_session_questions sq
-        INNER JOIN questions q ON q.id = sq.question_id
         LEFT JOIN quiz_answers qa
             ON qa.session_id = sq.session_id
            AND qa.question_id = sq.question_id
@@ -513,18 +540,15 @@ def get_current_unanswered_question(conn: sqlite3.Connection, session_id: int) -
         """,
         (session_id,),
     ).fetchone()
+    if row is None:
+        return None
+    content = get_attempt_content(conn, session_id, int(row["question_id"]))
+    return {**dict(row), "question_text": content["question_text"], "explanation": content["explanation"]}
 
 
-def get_question_options(conn: sqlite3.Connection, question_id: int) -> list[sqlite3.Row]:
-    return conn.execute(
-        """
-        SELECT option_index, option_text, is_correct
-        FROM question_options
-        WHERE question_id = ?
-        ORDER BY option_index ASC
-        """,
-        (question_id,),
-    ).fetchall()
+def get_question_options(conn: sqlite3.Connection, question_id: int, *, session_id: int) -> list[dict]:
+    content = get_attempt_content(conn, session_id, question_id)
+    return content["options"] if content is not None else []
 
 
 def save_quiz_answer(
@@ -545,15 +569,11 @@ def save_quiz_answer(
     if existing is not None:
         return {"is_correct": int(existing["is_correct"]), "already_answered": 1}
 
-    option_row = conn.execute(
-        """
-        SELECT is_correct
-        FROM question_options
-        WHERE question_id = ? AND option_index = ?
-        """,
-        (question_id, selected_option_index),
-    ).fetchone()
-    is_correct = int(option_row["is_correct"]) if option_row else 0
+    option_row = next((option for option in get_question_options(conn, question_id, session_id=session_id)
+                       if option["option_index"] == selected_option_index), None)
+    if option_row is None:
+        raise ValueError("Invalid attempt question/option")
+    is_correct = int(option_row["is_correct"])
 
     try:
         conn.execute(
