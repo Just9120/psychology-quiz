@@ -4,7 +4,7 @@
 
 ## Установленный target и operator setup
 
-Источник: явные решения владельца, DNS screenshot и вывод root-сессии MobaXterm 19.09.2026; локального SSH-доступа агента нет. Текущий статус поставки и primary records — [Current Goal](delivery-plan.md#current-goal--pwa-first-001).
+Источник: явные решения владельца, DNS screenshot и вывод root-сессии MobaXterm 19.09.2026; локального SSH-доступа агента нет. Текущий статус поставки и primary records — [Результаты PWA Goal](delivery-plan.md#завершённая-goal--pwa-first-001).
 
 | Поверхность | Значение / owner |
 | --- | --- |

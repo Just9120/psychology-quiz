@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from app.database import is_postgres_target, resolve_database_target
+
 import json
 import logging
 import os
@@ -98,8 +100,12 @@ async def _run_builder_in_thread(builder: Any, *args: Any, **kwargs: Any) -> tup
 def create_app_from_env() -> FastAPI:
     install_telegram_url_redaction()
     configure_noisy_http_client_loggers()
+    target = resolve_database_target(require_sqlite_path=True)
+    if is_postgres_target(target):
+        from app.db import init_db_connection
+        init_db_connection(target)
     return create_app(
-        db_path=_required_env("DB_PATH"),
+        db_path=target,
         bot_token=_required_env("BOT_TOKEN"),
         initdata_ttl_seconds=int(os.getenv("MINIAPP_API_INITDATA_TTL_SECONDS", "3600")),
         slow_request_ms=int(os.getenv("MINIAPP_API_SLOW_REQUEST_MS", "500")),

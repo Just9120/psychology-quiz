@@ -1,29 +1,27 @@
 from __future__ import annotations
 
-import sqlite3
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 from app.attempt_content import capture_question, ensure_attempt_snapshots, get_attempt_content
+from app.database import Connection, Row, begin_write, connect_database, is_postgres, timestamp_sql
 
 
 SESSION_QUESTION_LIMIT = 10
 
 
-def get_connection(db_path: str) -> sqlite3.Connection:
-    db_file = Path(db_path)
-    db_file.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(db_file, timeout=10.0)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA busy_timeout = 10000;")
-    conn.execute("PRAGMA synchronous = NORMAL;")
-    conn.execute("PRAGMA foreign_keys = ON;")
-    return conn
+def get_connection(db_path: str) -> Connection:
+    return connect_database(db_path)
 
 
 def init_db_connection(db_path: str) -> None:
     conn = get_connection(db_path)
     try:
+        if is_postgres(conn):
+            from app.postgres_schema import verify_schema
+            verify_schema(conn)
+            return
         if Path(db_path) != Path(":memory:"):
             conn.execute("PRAGMA journal_mode = WAL;")
         conn.execute("SELECT 1;")
@@ -38,7 +36,7 @@ def init_db_connection(db_path: str) -> None:
         conn.close()
 
 
-def ensure_performance_indexes(conn: sqlite3.Connection) -> None:
+def ensure_performance_indexes(conn: Connection) -> None:
     conn.execute(
         "CREATE INDEX IF NOT EXISTS idx_quiz_sessions_user_status ON quiz_sessions(user_id, status)"
     )
@@ -57,7 +55,7 @@ VALID_READING_MODES = {"normal", "bionic"}
 VALID_DIFFICULTY_MODES = {"easy", "medium", "hard"}
 
 
-def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
+def ensure_users_reading_mode_column(conn: Connection) -> None:
     columns = conn.execute("PRAGMA table_info(users)").fetchall()
     column_names = {str(column["name"]) for column in columns}
     if "reading_mode" in column_names:
@@ -68,7 +66,7 @@ def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
     )
 
 
-def ensure_quiz_session_selected_categories_table(conn: sqlite3.Connection) -> None:
+def ensure_quiz_session_selected_categories_table(conn: Connection) -> None:
     conn.execute(
         """
         CREATE TABLE IF NOT EXISTS quiz_session_selected_categories (
@@ -86,7 +84,7 @@ def ensure_quiz_session_selected_categories_table(conn: sqlite3.Connection) -> N
 USER_LITERATURE_READING_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
 
 
-def ensure_user_literature_progress_table(conn: sqlite3.Connection) -> None:
+def ensure_user_literature_progress_table(conn: Connection) -> None:
     conn.execute(
         """
         CREATE TABLE IF NOT EXISTS user_literature_progress (
@@ -124,7 +122,7 @@ def ensure_user_literature_progress_table(conn: sqlite3.Connection) -> None:
     )
 
 
-def ensure_quiz_sessions_difficulty_mode_column(conn: sqlite3.Connection) -> None:
+def ensure_quiz_sessions_difficulty_mode_column(conn: Connection) -> None:
     columns = conn.execute("PRAGMA table_info(quiz_sessions)").fetchall()
     column_names = {str(column["name"]) for column in columns}
     if "difficulty_mode" in column_names:
@@ -156,7 +154,7 @@ def _slugify_category(name: str) -> str:
     return slug or "category"
 
 
-def ensure_categories(conn: sqlite3.Connection, category_names: list[str]) -> dict[str, int]:
+def ensure_categories(conn: Connection, category_names: list[str]) -> dict[str, int]:
     category_ids: dict[str, int] = {}
 
     for raw_name in category_names:
@@ -185,8 +183,9 @@ def ensure_categories(conn: sqlite3.Connection, category_names: list[str]) -> di
 
 
 def upsert_approved_questions(
-    conn: sqlite3.Connection, questions: list[dict[str, Any]], *, authoritative: bool = False
+    conn: Connection, questions: list[dict[str, Any]], *, authoritative: bool = False
 ) -> dict[str, int]:
+    begin_write(conn, "content")
     # A partial import may update supplied IDs, but may not retire unspecified IDs.
     ids = [str(item["id"]).strip() for item in questions]
     if any(not external_id for external_id in ids) or len(set(ids)) != len(ids):
@@ -195,7 +194,7 @@ def upsert_approved_questions(
     for item in questions:
         if item.get("status") != "approved":
             conn.execute(
-                "UPDATE questions SET status=?, updated_at=CURRENT_TIMESTAMP WHERE external_id=? AND status IS NOT ?",
+                f"UPDATE questions SET status=?, updated_at={timestamp_sql(conn)} WHERE external_id=? AND status IS DISTINCT FROM ?",
                 (str(item.get("status") or "retired"), str(item["id"]).strip(), str(item.get("status") or "retired")),
             )
     if authoritative:
@@ -203,7 +202,7 @@ def upsert_approved_questions(
         supplied = set(ids)
         for row in conn.execute("SELECT external_id FROM questions WHERE status != 'retired'").fetchall():
             if row[0] not in supplied:
-                conn.execute("UPDATE questions SET status='retired', updated_at=CURRENT_TIMESTAMP WHERE external_id=?", (row[0],))
+                conn.execute(f"UPDATE questions SET status='retired', updated_at={timestamp_sql(conn)} WHERE external_id=?", (row[0],))
     approved = [item for item in questions if item.get("status") == "approved"]
     categories = sorted({str(item["category"]).strip() for item in approved if item.get("category")})
     category_ids = ensure_categories(conn, categories)
@@ -223,7 +222,7 @@ def upsert_approved_questions(
         explanation = item.get("explanation")
 
         conn.execute(
-            """
+            f"""
             INSERT INTO questions (
                 external_id, category_id, source_ref, difficulty, status, question_text, explanation
             )
@@ -235,7 +234,7 @@ def upsert_approved_questions(
                 status = excluded.status,
                 question_text = excluded.question_text,
                 explanation = excluded.explanation,
-                updated_at = CURRENT_TIMESTAMP
+                updated_at = {timestamp_sql(conn)}
             """,
             (external_id, category_id, source_ref, difficulty, question_text, explanation),
         )
@@ -289,7 +288,7 @@ def upsert_approved_questions(
     }
 
 
-def get_active_categories(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+def get_active_categories(conn: Connection) -> list[Row]:
     return conn.execute(
         """
         SELECT c.id, c.slug, c.name
@@ -304,31 +303,25 @@ def get_active_categories(conn: sqlite3.Connection) -> list[sqlite3.Row]:
 
 
 def create_or_load_user(
-    conn: sqlite3.Connection,
+    conn: Connection,
     telegram_user_id: int,
     username: str | None,
     first_name: str | None,
     last_name: str | None,
-) -> sqlite3.Row:
+) -> Row:
     row = conn.execute(
         "SELECT * FROM users WHERE telegram_user_id = ?",
         (telegram_user_id,),
     ).fetchone()
 
     if row is None:
-        try:
-            conn.execute(
-                """
-                INSERT INTO users (telegram_user_id, username, first_name, last_name)
-                VALUES (?, ?, ?, ?)
-                """,
-                (telegram_user_id, username, first_name, last_name),
-            )
-        except sqlite3.IntegrityError:
-            # Another caller may have inserted the same Telegram user inside a
-            # concurrent transaction. Fall through to the normal load/update
-            # path while preserving the caller-owned connection and transaction.
-            pass
+        conn.execute(
+            """
+            INSERT INTO users (telegram_user_id, username, first_name, last_name)
+            VALUES (?, ?, ?, ?) ON CONFLICT(telegram_user_id) DO NOTHING
+            """,
+            (telegram_user_id, username, first_name, last_name),
+        )
 
         row = conn.execute(
             "SELECT * FROM users WHERE telegram_user_id = ?",
@@ -347,12 +340,12 @@ def create_or_load_user(
         return row
 
     conn.execute(
-        """
+        f"""
         UPDATE users
         SET username = ?,
             first_name = ?,
             last_name = ?,
-            updated_at = CURRENT_TIMESTAMP
+            updated_at = {timestamp_sql(conn)}
         WHERE telegram_user_id = ?
         """,
         (username, first_name, last_name, telegram_user_id),
@@ -368,7 +361,7 @@ def create_or_load_user(
 
 
 def start_quiz_session(
-    conn: sqlite3.Connection,
+    conn: Connection,
     user_id: int,
     category_id: int | None,
     difficulty_mode: str | None = None,
@@ -377,19 +370,19 @@ def start_quiz_session(
     cursor = conn.execute(
         """
         INSERT INTO quiz_sessions (user_id, category_id, status, difficulty_mode)
-        VALUES (?, ?, 'in_progress', ?)
+        VALUES (?, ?, 'in_progress', ?) RETURNING id
         """,
         (user_id, category_id, normalized_difficulty_mode),
     )
-    return int(cursor.lastrowid)
+    return int(cursor.fetchone()[0])
 
 
-def abandon_in_progress_sessions_for_user(conn: sqlite3.Connection, user_id: int) -> int:
+def abandon_in_progress_sessions_for_user(conn: Connection, user_id: int) -> int:
     cursor = conn.execute(
-        """
+        f"""
         UPDATE quiz_sessions
         SET status = 'abandoned',
-            finished_at = CURRENT_TIMESTAMP
+            finished_at = {timestamp_sql(conn)}
         WHERE user_id = ?
           AND status = 'in_progress'
         """,
@@ -399,7 +392,7 @@ def abandon_in_progress_sessions_for_user(conn: sqlite3.Connection, user_id: int
 
 
 def select_random_approved_question_ids_by_category(
-    conn: sqlite3.Connection,
+    conn: Connection,
     category_id: int,
     limit: int | None = SESSION_QUESTION_LIMIT,
     difficulty_mode: str | None = None,
@@ -427,7 +420,7 @@ def select_random_approved_question_ids_by_category(
 
 
 def select_random_approved_question_ids_across_active_categories(
-    conn: sqlite3.Connection,
+    conn: Connection,
     limit: int | None = SESSION_QUESTION_LIMIT,
     difficulty_mode: str | None = None,
 ) -> list[int]:
@@ -461,7 +454,7 @@ def select_random_approved_question_ids_across_active_categories(
 
 
 def select_random_approved_question_ids_by_categories(
-    conn: sqlite3.Connection,
+    conn: Connection,
     category_ids: list[int],
     limit: int | None = SESSION_QUESTION_LIMIT,
     difficulty_mode: str | None = None,
@@ -492,9 +485,9 @@ def select_random_approved_question_ids_by_categories(
     return [int(row["id"]) for row in rows]
 
 
-def store_session_questions(conn: sqlite3.Connection, session_id: int, question_ids: list[int]) -> None:
-    if not conn.in_transaction:
-        conn.execute("BEGIN IMMEDIATE")
+def store_session_questions(conn: Connection, session_id: int, question_ids: list[int]) -> None:
+    # Both question and option reads must see the same committed edition.
+    begin_write(conn, "content")
     for order_index, question_id in enumerate(question_ids, start=1):
         serving = conn.execute("SELECT 1 FROM questions WHERE id=? AND status='approved'", (question_id,)).fetchone()
         if serving is None:
@@ -510,7 +503,7 @@ def store_session_questions(conn: sqlite3.Connection, session_id: int, question_
         )
 
 
-def get_session_question_count(conn: sqlite3.Connection, session_id: int) -> int:
+def get_session_question_count(conn: Connection, session_id: int) -> int:
     row = conn.execute(
         """
         SELECT COUNT(*) AS total_questions
@@ -522,7 +515,7 @@ def get_session_question_count(conn: sqlite3.Connection, session_id: int) -> int
     return int(row["total_questions"]) if row else 0
 
 
-def get_current_unanswered_question(conn: sqlite3.Connection, session_id: int) -> dict | None:
+def get_current_unanswered_question(conn: Connection, session_id: int) -> dict | None:
     row = conn.execute(
         """
         SELECT
@@ -546,13 +539,13 @@ def get_current_unanswered_question(conn: sqlite3.Connection, session_id: int) -
     return {**dict(row), "question_text": content["question_text"], "explanation": content["explanation"]}
 
 
-def get_question_options(conn: sqlite3.Connection, question_id: int, *, session_id: int) -> list[dict]:
+def get_question_options(conn: Connection, question_id: int, *, session_id: int) -> list[dict]:
     content = get_attempt_content(conn, session_id, question_id)
     return content["options"] if content is not None else []
 
 
 def save_quiz_answer(
-    conn: sqlite3.Connection,
+    conn: Connection,
     session_id: int,
     question_id: int,
     selected_option_index: int,
@@ -575,15 +568,14 @@ def save_quiz_answer(
         raise ValueError("Invalid attempt question/option")
     is_correct = int(option_row["is_correct"])
 
-    try:
-        conn.execute(
-            """
-            INSERT INTO quiz_answers (session_id, question_id, selected_option_index, is_correct)
-            VALUES (?, ?, ?, ?)
-            """,
-            (session_id, question_id, selected_option_index, is_correct),
-        )
-    except sqlite3.IntegrityError:
+    inserted = conn.execute(
+        """
+        INSERT INTO quiz_answers (session_id, question_id, selected_option_index, is_correct)
+        VALUES (?, ?, ?, ?) ON CONFLICT(session_id, question_id) DO NOTHING
+        """,
+        (session_id, question_id, selected_option_index, is_correct),
+    )
+    if not inserted.rowcount:
         existing = conn.execute(
             """
             SELECT is_correct
@@ -595,12 +587,12 @@ def save_quiz_answer(
         ).fetchone()
         if existing is not None:
             return {"is_correct": int(existing["is_correct"]), "already_answered": 1}
-        raise
+        raise RuntimeError("Conflicting answer is missing")
 
     return {"is_correct": is_correct, "already_answered": 0}
 
 
-def get_answered_questions_count(conn: sqlite3.Connection, session_id: int) -> int:
+def get_answered_questions_count(conn: Connection, session_id: int) -> int:
     row = conn.execute(
         """
         SELECT COUNT(*) AS answered_questions
@@ -612,7 +604,7 @@ def get_answered_questions_count(conn: sqlite3.Connection, session_id: int) -> i
     return int(row["answered_questions"]) if row else 0
 
 
-def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
+def finalize_quiz_session(conn: Connection, session_id: int) -> Row | None:
     stats = conn.execute(
         """
         SELECT
@@ -631,11 +623,11 @@ def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.
     total_questions = int(stats["total_questions"])
 
     conn.execute(
-        """
+        f"""
         UPDATE quiz_sessions
         SET score = ?,
             total_questions = ?,
-            finished_at = CURRENT_TIMESTAMP,
+            finished_at = {timestamp_sql(conn)},
             status = 'finished'
         WHERE id = ?
         """,
@@ -648,7 +640,7 @@ def finalize_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.
     ).fetchone()
 
 
-def get_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row | None:
+def get_quiz_session(conn: Connection, session_id: int) -> Row | None:
     return conn.execute(
         "SELECT * FROM quiz_sessions WHERE id = ?",
         (session_id,),
@@ -656,7 +648,7 @@ def get_quiz_session(conn: sqlite3.Connection, session_id: int) -> sqlite3.Row |
 
 
 def set_selected_categories_for_session(
-    conn: sqlite3.Connection,
+    conn: Connection,
     session_id: int,
     category_ids: list[int],
 ) -> None:
@@ -664,14 +656,14 @@ def set_selected_categories_for_session(
     for category_id in unique_category_ids:
         conn.execute(
             """
-            INSERT OR IGNORE INTO quiz_session_selected_categories (session_id, category_id)
-            VALUES (?, ?)
+            INSERT INTO quiz_session_selected_categories (session_id, category_id)
+            VALUES (?, ?) ON CONFLICT(session_id, category_id) DO NOTHING
             """,
             (session_id, category_id),
         )
 
 
-def get_selected_categories_for_session(conn: sqlite3.Connection, session_id: int) -> list[int]:
+def get_selected_categories_for_session(conn: Connection, session_id: int) -> list[int]:
     rows = conn.execute(
         """
         SELECT category_id
@@ -684,7 +676,7 @@ def get_selected_categories_for_session(conn: sqlite3.Connection, session_id: in
     return [int(row["category_id"]) for row in rows]
 
 
-def is_question_in_session(conn: sqlite3.Connection, session_id: int, question_id: int) -> bool:
+def is_question_in_session(conn: Connection, session_id: int, question_id: int) -> bool:
     row = conn.execute(
         """
         SELECT 1
@@ -697,7 +689,7 @@ def is_question_in_session(conn: sqlite3.Connection, session_id: int, question_i
     return row is not None
 
 
-def get_user_reading_mode(conn: sqlite3.Connection, user_id: int) -> str:
+def get_user_reading_mode(conn: Connection, user_id: int) -> str:
     row = conn.execute(
         "SELECT reading_mode FROM users WHERE id = ?",
         (user_id,),
@@ -707,18 +699,21 @@ def get_user_reading_mode(conn: sqlite3.Connection, user_id: int) -> str:
     return _normalize_reading_mode(row["reading_mode"])
 
 
-def set_user_reading_mode(conn: sqlite3.Connection, user_id: int, mode: str) -> str:
+def set_user_reading_mode(conn: Connection, user_id: int, mode: str) -> str:
     normalized_mode = _normalize_reading_mode(mode)
     conn.execute(
-        "UPDATE users SET reading_mode = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        f"UPDATE users SET reading_mode = ?, updated_at = {timestamp_sql(conn)} WHERE id = ?",
         (normalized_mode, user_id),
     )
     return normalized_mode
 
 
-def get_owner_stats(conn: sqlite3.Connection) -> dict[str, Any]:
-    def _fetch_count(query: str) -> int:
-        row = conn.execute(query).fetchone()
+def get_owner_stats(conn: Connection) -> dict[str, Any]:
+    now = datetime.now(timezone.utc)
+    cutoffs = {days: (now - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S") for days in (1, 7, 30)}
+
+    def _fetch_count(query: str, parameters=()) -> int:
+        row = conn.execute(query, parameters).fetchone()
         if row is None:
             return 0
         return int(row[0])
@@ -743,32 +738,32 @@ def get_owner_stats(conn: sqlite3.Connection) -> dict[str, Any]:
         JOIN quiz_session_questions qsq ON qsq.session_id = qs.id
         JOIN questions q ON q.id = qsq.question_id
         JOIN categories c ON c.id = q.category_id
-        WHERE qs.started_at >= datetime('now', '-30 day')
+        WHERE qs.started_at >= ?
         GROUP BY c.id, c.name
         ORDER BY started_sessions DESC, c.name ASC
         LIMIT 5
-        """
+        """, (cutoffs[30],)
     ).fetchall()
 
     return {
         "total_users": _fetch_count("SELECT COUNT(*) FROM users"),
         "new_users_24h": _fetch_count(
-            "SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-24 hour')"
+            "SELECT COUNT(*) FROM users WHERE created_at >= ?", (cutoffs[1],)
         ),
         "new_users_7d": _fetch_count(
-            "SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-7 day')"
+            "SELECT COUNT(*) FROM users WHERE created_at >= ?", (cutoffs[7],)
         ),
         "new_users_30d": _fetch_count(
-            "SELECT COUNT(*) FROM users WHERE created_at >= datetime('now', '-30 day')"
+            "SELECT COUNT(*) FROM users WHERE created_at >= ?", (cutoffs[30],)
         ),
         "active_users_24h": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-24 hour')"
+            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[1],)
         ),
         "active_users_7d": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-7 day')"
+            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[7],)
         ),
         "active_users_30d": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= datetime('now', '-30 day')"
+            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[30],)
         ),
         "total_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions"),
         "completed_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions WHERE status = 'finished'"),

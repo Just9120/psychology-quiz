@@ -1,6 +1,6 @@
 # Самостоятельный PWA quiz client
 
-[README](../README.md#pwa-local-run-и-проверки) хранит canonical команды; [auth contract](pwa-auth.md) — конфигурацию сервера, sessions, почту и identity policy. Исходники — [pwa](../pwa/). Owner PWA опубликована на установленном HTTPS target; конфигурация и процедура — [PWA delivery](pwa-delivery.md). Public smoke/browser evidence и оставшиеся owner/mail/standalone checks — [план](delivery-plan.md#current-goal--pwa-first-001).
+[README](../README.md#pwa-local-run-и-проверки) хранит canonical команды; [auth contract](pwa-auth.md) — конфигурацию сервера, sessions, почту и identity policy. Исходники — [pwa](../pwa/). Owner PWA опубликована на установленном HTTPS target; конфигурация и процедура — [PWA delivery](pwa-delivery.md). Public smoke/browser evidence и оставшиеся owner/mail/standalone checks — [план](delivery-plan.md#завершённая-goal--pwa-first-001).
 
 ## Клиент и границы
 

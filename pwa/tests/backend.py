@@ -1,6 +1,7 @@
 """Local-only E2E harness. Temporary synthetic DB/mail; never imported by runtime."""
-from contextlib import closing
+from contextlib import closing, ExitStack
 from pathlib import Path
+import os
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -15,6 +16,8 @@ from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.miniapp_fastapi import create_app
 from app.web_config import WebSettings
+from app.postgres_import import import_snapshot
+from scripts.postgres_test_support import isolated_postgres_target
 
 EMAIL = "owner@example.test"
 PASSWORD = "A synthetic browser passphrase"
@@ -29,14 +32,17 @@ class Mailbox:
 
 
 def main():
-    with tempfile.TemporaryDirectory(prefix="pwa-e2e-") as directory:
+    with tempfile.TemporaryDirectory(prefix="pwa-e2e-") as directory, ExitStack() as stack:
         path = str(Path(directory) / "synthetic.sqlite3")
+        postgres_path = stack.enter_context(isolated_postgres_target(os.environ["POSTGRES_TEST_DSN"])) if os.environ.get("POSTGRES_TEST_DSN") else None
         mailbox = Mailbox()
         settings = WebSettings("http://127.0.0.1:4173", EMAIL, "smtp.example.test", 465,
                                EMAIL, "synthetic-only", EMAIL, False)
-        app = create_app(db_path=path, bot_token="123:synthetic-e2e", web_settings=settings, web_mailer=mailbox)
+        app = create_app(db_path=postgres_path or path, bot_token="123:synthetic-e2e", web_settings=settings, web_mailer=mailbox)
 
         def reset(seed=True):
+            nonlocal path
+            path = str(Path(directory) / "synthetic.sqlite3")
             Path(path).unlink(missing_ok=True)
             mailbox.messages.clear()
             with closing(get_connection(path)) as conn, conn:
@@ -52,6 +58,16 @@ def main():
             with closing(get_connection(path)) as conn:
                 migrate_identity_schema(conn)
                 migrate_auth_schema(conn)
+            if postgres_path:
+                with closing(get_connection(postgres_path)) as conn, conn:
+                    if conn.execute("SELECT to_regclass('postgres_storage')").fetchone()[0] is not None:
+                        from app.postgres_schema import TABLES, verify_schema
+                        verify_schema(conn)
+                        conn.execute("TRUNCATE " + ",".join(TABLES) + " RESTART IDENTITY")
+                        conn.execute("UPDATE postgres_storage SET import_manifest=NULL WHERE singleton=1")
+                import_snapshot(Path(path), postgres_path)
+                path = postgres_path
+            app.state.web_auth.db_path = path
             if seed:
                 app.state.web_auth.request_mail(EMAIL, "register")
                 app.state.web_auth.set_password(mailbox.messages[-1]["token"], PASSWORD, "register")

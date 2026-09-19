@@ -261,7 +261,7 @@ class MiniAppApiTests(unittest.TestCase):
 
     def test_get_connection_configures_per_connection_pragmas_without_wal_activation(self):
         recording_conn = _RecordingConnection()
-        with patch("app.db.sqlite3.connect", return_value=recording_conn):
+        with patch("app.database.sqlite3.connect", return_value=recording_conn):
             conn = get_connection(self.db)
 
         self.assertIs(conn, recording_conn)
@@ -293,7 +293,7 @@ class MiniAppApiTests(unittest.TestCase):
     def test_init_db_connection_skips_wal_for_in_memory_db(self):
         recording_conn = _RecordingConnection()
         with (
-            patch("app.db.sqlite3.connect", return_value=recording_conn),
+            patch("app.database.sqlite3.connect", return_value=recording_conn),
             patch("app.db.ensure_users_reading_mode_column"),
             patch("app.db.ensure_quiz_sessions_difficulty_mode_column"),
             patch("app.db.ensure_quiz_session_selected_categories_table"),

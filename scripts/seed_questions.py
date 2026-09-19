@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from contextlib import closing
 import json
-import os
-import sqlite3
 import sys
 from pathlib import Path
 from typing import Any
@@ -14,12 +12,14 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from app.db import upsert_approved_questions
+from app.db import upsert_approved_questions, get_connection
+from app.database import DATABASE_ERRORS, is_postgres, is_postgres_target, resolve_database_target
+from app.postgres_schema import verify_schema
 
 
 def resolve_db_path() -> str:
     load_dotenv()
-    return os.getenv("DB_PATH", "/data/quiz.sqlite3").strip() or "/data/quiz.sqlite3"
+    return resolve_database_target()
 
 
 def validate_question(item: dict[str, Any], index: int, source_name: str) -> tuple[bool, str | None]:
@@ -106,8 +106,8 @@ def main() -> int:
     repo_root = Path(__file__).resolve().parent.parent
     questions_root = repo_root / "content" / "questions"
 
-    db_path = Path(resolve_db_path())
-    if not db_path.exists():
+    db_path = resolve_db_path()
+    if not is_postgres_target(db_path) and not Path(db_path).exists():
         print(f"[ERROR] База данных не найдена: {db_path}")
         print("[HINT] Сначала выполните инициализацию схемы: python scripts/init_db.py")
         return 1
@@ -127,12 +127,12 @@ def main() -> int:
     approved_total = sum(1 for question in questions if question.get("status") == "approved")
 
     try:
-        with closing(sqlite3.connect(db_path)) as conn, conn:
-            conn.row_factory = sqlite3.Row
-            conn.execute("PRAGMA foreign_keys = ON;")
+        with closing(get_connection(db_path)) as conn, conn:
+            if is_postgres(conn):
+                verify_schema(conn)
             stats = upsert_approved_questions(conn, questions, authoritative=True)
-    except (sqlite3.Error, ValueError) as exc:
-        print(f"[ERROR] Ошибка SQLite при загрузке вопросов: {exc}")
+    except (*DATABASE_ERRORS, ValueError) as exc:
+        print(f"[ERROR] Ошибка базы данных при загрузке вопросов: {type(exc).__name__}")
         return 1
 
     processed_modules = ", ".join(module_dir.name for module_dir in module_dirs)

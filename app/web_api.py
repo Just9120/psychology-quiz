@@ -2,7 +2,7 @@
 import asyncio
 import json
 import logging
-import sqlite3
+from app.database import OPERATIONAL_ERRORS
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -120,7 +120,7 @@ def install_web_api(app, auth: WebAuth) -> None:
             response = JSONResponse(result)
         except AuthError as exc:
             response = JSONResponse({"ok": False, "error": exc.code}, status_code=exc.status)
-        except sqlite3.OperationalError:
+        except OPERATIONAL_ERRORS:
             response = JSONResponse({"ok": False, "error": "database_unavailable"}, status_code=503)
         except Exception as exc:
             logger.error("web_api_failure type=%s", type(exc).__name__)

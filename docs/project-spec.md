@@ -237,6 +237,8 @@ E04 зависит от user identity и content versioning. E06/E07 требу�
 - D-12 (identity-v1 и shared quiz, реализация D-09/10): `users.id` — неизменный learning actor, Telegram ID — nullable UNIQUE external identity; web-only users не получают synthetic Telegram ID. Existing progress сохраняется versioned migration по [runbook](miniapp-deployment-qa.md#identity-v1-для-pwa); credentials/linking остаются отдельным auth boundary. Shared quiz service принимает actor после проверки auth adapter. Ответ одному вопросу одной попытки фиксируется один раз: retry, включая conflicting choice и finished attempt, возвращает исходный сохранённый выбор/результат без перезаписи; чужой actor не получает feedback. Новые попытки и будущие вопросы не разрешают отвечать в обход текущего шага.
 
 
+- D-13 (явное поручение пользователя 20.09.2026 после закрытия PWA-FIRST-001): выполнить POSTGRES-MIGRATION-001 с сохранением всех existing identities/accounts, sessions, quiz/literature state и immutable question snapshots. Runtime переключается после real PostgreSQL migration/reconciliation/recovery checks и установленной operator procedure; source SQLite сохраняется, dual writers и автоматический возврат к устаревшей SQLite после PostgreSQL writes не допускаются. PostgreSQL 18 / psycopg 3 — технический baseline реализации; точные pins и команды фиксируются после проверки официальных пакетов. pgvector/search и новые learning features этой Goal не активируются.
+
 ## Открытые решения / SPEC gaps
 
 | ID | Решение и зависимый scope |

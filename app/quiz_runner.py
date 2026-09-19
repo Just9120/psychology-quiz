@@ -1,6 +1,8 @@
 """Shared quiz state and answer transitions for verified internal actors."""
 from __future__ import annotations
 
+from app.database import begin_write
+
 from dataclasses import dataclass
 from typing import Literal
 
@@ -119,8 +121,7 @@ def submit_answer_event(
     selected_option_index: int,
 ) -> AnswerSubmissionResult:
     # Serialize answer writers before reading current state (including other clients).
-    if not conn.in_transaction:
-        conn.execute("BEGIN IMMEDIATE")
+    begin_write(conn, f"actor:{actor_user_id}")
     session = get_quiz_session(conn, session_id)
     if session is None:
         return AnswerSubmissionResult(status="session_not_found", session_id=session_id)

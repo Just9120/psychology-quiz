@@ -15,6 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 from app.attempt_content import get_attempt_content
+from app.database import is_postgres_target, resolve_database_target
 from app.auth_schema import AUTH_TABLES
 from app.web_config import WebSettings
 from scripts.audit_question_bank import build_report, has_blockers
@@ -133,6 +134,8 @@ def main() -> None:
     parser.add_argument("action", choices=("preflight", "backup", "verify", "smoke"))
     parser.add_argument("--backup", type=Path)
     args = parser.parse_args()
+    if is_postgres_target(resolve_database_target()):
+        raise RuntimeError("PostgreSQL cutover/delivery is not enabled in this preparatory release")
     os.umask(0o077)
     # The runtime's database must live in the existing persistent bind mount.
     raw_path = os.environ.get("DB_PATH", "")

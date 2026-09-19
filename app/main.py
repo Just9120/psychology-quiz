@@ -953,9 +953,9 @@ def main() -> None:
     configure_logging(settings.log_level)
 
     logger.info("Запуск приложения в окружении '%s'", settings.app_env)
-    logger.info("Проверка подключения к SQLite: %s", settings.db_path)
+    logger.info("Проверка подключения к базе данных")
     init_db_connection(settings.db_path)
-    logger.info("Подключение к SQLite успешно")
+    logger.info("Подключение к базе данных успешно")
 
     application = Application.builder().token(settings.bot_token).post_init(post_init).build()
     application.bot_data["settings"] = settings
