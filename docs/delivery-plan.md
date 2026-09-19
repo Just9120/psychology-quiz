@@ -1,10 +1,62 @@
 # Delivery Plan
 
-## Current Goal — PWA-FIRST-001
+## Current Goal — POSTGRES-MIGRATION-001
 
-**Статус: ACTIVE / IN_PROGRESS.** Поручение 19.09.2026 — «Я думал ты начнешь реализацию. А ты только план сделал?» — подтверждает выполнение PWA-FIRST-001. Пользователь выбрал «PWA сначала, PostgreSQL следующей Goal». Встроенная implementation Goal активирована. Код поставлен; оставшиеся delivery/owner gates перечислены в E-PWA-05 и checkpoint.
+**Статус: ACTIVE / IN_PROGRESS.** Основание: после закрытия PWA-FIRST-001 пользователь 20.09.2026 поручил «Ок, делай» в ответ на предложение переноса PostgreSQL; дополнительно разрешил проверку авторизованной PWA во внутреннем браузере. Встроенная Goal активирована. Это implementation, не повторный аудит; проценты проекта/эпиков не пересчитываются.
 
-**Текущий этап:** подготовка кода завершена PR #290–293. После исходного решения «потом, подготовь сначала весь код» пользователь 19.09.2026 выбрал hostname/owner/sender и поручил «давай значит настраивать. Я жду от тебя команды на VPS». Первичная публикация разрешена: backend включён, static release активирован, local HTTPS и независимый public smoke PASS. Первоначальный VPS-side public probe завершился URLError; последующий read-only повтор той же проверки PASS без изменения конфигурации. Real-mail/owner acceptance ещё PENDING. Ordinary backend CD сохраняет существующий flow; initial operator setup описан в [PWA delivery](pwa-delivery.md#установленный-target-и-operator-setup).
+**Результат:** bot, Mini App и PWA используют PostgreSQL как единственный runtime store после проверенного cutover; прежние learning actors, accounts, sessions, attempts, answers, snapshots, literature state и content IDs сохраняются. SQLite остаётся неизменённым исходником/точкой восстановления до переключения, а не параллельным writer после него.
+
+**Baseline:** main `391df11ab38122a32dacb18667e69fd4966c7879`, CI 35468716335 / source-sync CD 35468781341 PASS; runtime/public PWA `1963e76`. Local main чистый, один worktree, open PR нет, protections/rulesets отсутствуют. PR1 branch `codex/postgres-storage-foundation`, base этот main; до initial push выполняются code и local validation. Изменения host PostgreSQL ещё не выполнялись.
+
+### Scope, критерии и DoD
+
+Parent AC: AC-FND-05 и сохранение уже выполненных AUTH-01/02/05, QUIZ-01/02/07, E14; применимые части FND-06/07/08/10 и OPS-01/02/03/04/05. Не закрывать целиком более широкие platform/learning AC результатом одной миграции. F-025 исследовать в части SQL/lifecycle/concurrency, F-014 — в части PostgreSQL backup/cutover/recovery; остальное остаётся в реестре.
+
+| ID | Условие/действие → результат и проверка |
+| --- | --- |
+| G-PG-01 | Выбран PostgreSQL runtime → все существующие bot/Mini App/PWA auth/quiz/literature операции работают на реальном PostgreSQL; SQLite source/default продолжает работать на подготовительных PR. Schema version/тип конфигурации проверяются явно; неверный DSN не переключает тихо на SQLite. Проверка: обе backend suites, init/seed/parity и API/E2E. |
+| G-PG-02 | Мигрируется стабильный SQLite snapshot → IDs, FK/unique constraints, accounts/password hashes/proof/session digests, timestamps, answers/score, immutable snapshot JSON/hash/provenance и literature rows сохранены. Sequence high-water marks не дают повторно использовать прежние IDs. Проверка: row-level reconciliation/fixtures, включая legacy backfill и deleted-ID high-water mark. |
+| G-PG-03 | Повтор/ошибка/чужой непустой target → нет destructive overwrite или потери source; частичный import откатывается атомарно, корректный повтор сверяет identity/content. Несоответствие схемы, повреждённый snapshot/FK или drift после snapshot запрещают cutover. Проверка: retry/fault-injection/negative target tests. |
+| G-PG-04 | Одновременные setup/answers/token consume/linking/recovery → один согласованный результат, без duplicate score/active attempts/reassignment. Транзакции, locks и конфликтные SQL используют PostgreSQL semantics; connection/timeout ошибки не раскрывают DSN/пароли. Проверка: real PostgreSQL concurrency, auth/replay/isolation/regression и failure cases. |
+| G-PG-05 | После миграции выполняется backup/isolated restore → data/schema/sequence reconciliation и application smoke PASS. До первых PG writes допускается согласованное возвращение к неизменённому SQLite; после них автоматический rollback на старый SQLite запрещён, используется stop/forward-fix/проверенное восстановление PG. Проверка: изолированный recovery rehearsal без production restore. |
+| G-PG-06 | Поставляется PostgreSQL на установленный VPS → dedicated DB/role/persistent storage, приватный network без публичного DB port, secrets только runtime, preflight/health/version checks. Cutover выполняется под общей delivery lock после остановки всех writers и verified source backup; source сохраняется. Проверка: Compose/config review, operator output и actual post-checks. |
+| G-PG-07 | Все PR прошли CI/review/merge, cutover и bounded post-checks → точный runtime version/backend подтверждён; owner quiz/resume/auth и Telegram compatibility не нарушены. Commands/config ownership/runbook/checkpoint обновлены, собственные merged branches/worktrees безопасно очищены. |
+
+**DoD:** G-PG-01–07 выполнены; выбранный runtime действительно PostgreSQL, source SQLite и user-state сохранены; обязательные real-DB/CI/recovery checks PASS, implementation PR merged и applicable delivery подтверждён. Default-off подготовка сама по себе не закрывает Goal.
+
+**Non-goals:** pgvector/search/knowledge, новые learning features, новые users/sharing, переделка UI/Telegram Mini App, удаление SQLite source/backups, production data reset, восстановление всей VPS/соседних проектов, HA/replicas, придуманные SLO/RPO/RTO и автоматическая retention policy.
+
+### Решения и последовательность PR
+
+1. **Storage foundation:** небольшой DB boundary с явным PostgreSQL driver и versioned schema, перенос существующих запросов/transaction semantics, конфигурация с fail-closed selection, import/reconciliation fixtures и real PostgreSQL behavioral tests. SQLite остаётся production default до отдельного cutover; никакого request-time DDL или автоимпорта.
+2. **Delivery/recovery:** PostgreSQL backup/isolated restore, deploy preflight/post-check support, dedicated private Compose service и operator cutover tooling/runbook. CI PostgreSQL service обязателен; workflow изменения ограничены проверкой/поставкой этой Goal. Перед ними применяются ci-cd-rules.md.
+3. **Cutover:** установленный target и credentials owner, health/storage capacity, прекращение writers, verified backup и schema-compatible import, reconciliation, переключение app config, exact runtime/backend и bounded auth/quiz smoke. Начать следующий PR только после применимой поставки предыдущего. Разбиение можно уточнить по связности без расширения scope.
+
+PostgreSQL поддерживаемой major 18 выбран как технический baseline; точный patch/image digest фиксируется после проверки доступных официальных packages/images. Driver — psycopg 3 с pinned release после local validation. Изменение SQL dialect не означает переписывание domain/API contracts. Порядок блокировок/конфликтов определяется до изменения соответствующих функций и подтверждается concurrency tests; общего выдуманного latency target нет.
+
+### Зависимости и доступ
+
+| ID | Состояние / влияние |
+| --- | --- |
+| PG-D1 / production target | VPS `167.86.68.98`, `/opt/psychology-quiz`, owner root через MobaXterm установлены предыдущей Goal. Прямого SSH агента нет. Новый PostgreSQL service/DB/role/storage и доступная ёмкость ещё UNSET; не использовать БД другого проекта по предположению. |
+| PG-D2 / local test runtime | Python 3.12 и Node доступны; Docker/psql/pg_ctl локально не обнаружены. Для обязательных PostgreSQL checks подготовить изолированный local server из официальных binaries либо подтверждённый test service; отсутствие DB не является N/A. Production history не использовать как fixture. |
+| PG-D3 / recovery | Источник сохраняется, cutover без dual writers. PostgreSQL dump/restore и reconciliation до включения обязательны; retention/RPO/RTO остаются UNSET и не блокируют bounded migration rehearsal. |
+| PG-D4 / signed-in browser | Пользователь вошёл во внутреннем браузере и разрешил проверки. В текущем наборе tools нет управления этой вкладкой; авторизованную сессию не наблюдали, cookies/credentials из файлов не извлекаются. Доступ блокирует только этот способ проверки; local/CI suites и подготовка PostgreSQL продолжаются. |
+
+### Validation Plan
+
+| AC/риск | Проверка / ожидаемый результат | Команда/tool, каталог и environment | Этап / обязательность |
+| --- | --- | --- | --- |
+| G-PG-01/04, shared compatibility | Existing behavior остаётся прежним; обе БД проходят auth/quiz/literature и restart/concurrency negatives | Canonical `python -m pytest -q` (root, isolated venv); targeted PostgreSQL suite/fixture command фиксируется в README при реализации, реальный local PostgreSQL/CI service | REQUIRED local affected suite и CI; полный existing suite перед PR1 из-за общего DB boundary |
+| G-PG-02/03 | Полная миграция synthetic legacy fixtures, sequence preservation, exact row reconciliation, retry/failure/unknown-target guards | Новые migration CLI/tests в root, synthetic SQLite и отдельная temporary PostgreSQL DB; concrete commands в README/runbook | REQUIRED до initial push и CI; production snapshot rehearsal до cutover |
+| G-PG-05/06 | Backup/isolated restore и preflight/cutover failure recovery; no exposed DB/secrets | Existing deployment test harness + PostgreSQL recovery integration; Compose CLI/actual isolated service, root | REQUIRED локально где доступен service и в CI; host gates REQUIRED до изменения runtime |
+| G-PG-01/04/07 | Auth/link/quiz/setup/answer/result/reload работают поверх PG; negative access и no private cache/logs | `npm run test:e2e` в pwa с real PostgreSQL backend test fixture; `npm test`/`npm run build` при затронутом frontend/harness | REQUIRED CI; affected local browser suite до push; owner signed-in smoke при доступном инструменте |
+| SQL/performance risk F-025 | Измерить representative query plans/повторные подключения/lock contention, не делать вывод о throughput всей production | `EXPLAIN` и bounded synthetic measurements на выбранном PostgreSQL; источник/объём/revision в Evidence | RECOMMENDED до cutover; обнаруженная integrity/timeout regression становится REQUIRED fix |
+| G-PG-07, delivery | Exact candidate CI/review/merge, running backend/version, preserved-state, health и bounded owner/Telegram checks | GitHub records, existing AGENTS/VPS procedure, readonly/synthetic preflight и согласованный operator cutover | REQUIRED для каждого применимого PR и финального cutover; не запускать deploy ради статуса |
+
+## Завершённая Goal — PWA-FIRST-001
+
+**Статус: DONE, 20.09.2026.** G-PWA-01–08 закрыты по code/CI/CD/public browser records и owner-reported acceptance. Пользователь подтвердил первый вход/письмо/login/Telegram linking («Все сделал»), затем quiz/reload/result, logout/recovery/login и установку/запуск с иконки («Вроде все ок»). Устройство/браузер ручной установки UNSET; это не самостоятельно наблюдённая browser trace. PR #290–294 merged/delivered, main `391df11`, runtime/public static `1963e76`; все свои ветки удалены. Встроенная PWA Goal завершена. Исторические E-PWA-01–06 сохраняют свои время и ограничения; новые записи не пересчитывают общий readiness.
 
 **Результат:** владелец открывает PsychologyAtlas в обычном desktop/mobile browser, входит по e-mail/паролю, подтверждённо связывает существующую Telegram identity и проходит quiz с тем же банком и сохранённым состоянием. PWA устанавливается в поддерживаемом браузере, запускается вне Telegram и возобновляет попытку после закрытия клиента/перезапуска API. Контур работает на общем FastAPI backend и текущей SQLite; модель не требует подставных Telegram IDs для web accounts.
 
@@ -204,7 +256,7 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | AC-FND-02 | IN_PROGRESS | MANDATORY | SQLite отделяет quiz/literature state по user_id; repetitions, bookmarks, assignments и platform identity отсутствуют (F-026). |
 | AC-FND-03 | IN_PROGRESS | MANDATORY | FastAPI, Python bot и analytics существуют; общего backend для целевых контуров ещё нет (E-CODE, F-026). |
 | AC-FND-04 | IN_PROGRESS | MANDATORY | PR3 React/TypeScript/Vite PWA quiz package/build/CI, E-PWA-03; перенос Mini App на общий React client и остальные learning contours позже. |
-| AC-FND-05 | BACKLOG | MANDATORY | Runtime — SQLite; PostgreSQL migration/recovery fixtures отсутствуют; Q-02, F-026. |
+| AC-FND-05 | IN_PROGRESS | MANDATORY | POSTGRES-MIGRATION-001 выбрана; production пока SQLite. PostgreSQL boundary/migration/recovery и cutover ещё требуют реализации и Evidence; Q-02/F-026. |
 | AC-FND-06 | IN_PROGRESS | MANDATORY | SQLite content sync сохраняет versioned attempts, answers/users/literature (E-STAB-05); target indexes/embeddings и остальные learning subsystems ещё не реализованы. |
 | AC-FND-07 | IN_PROGRESS | MANDATORY | Quiz shared-domain/replay/concurrency/restart PASS E-PWA-01/02; PR3 PWA lost-reply/reload/server-state browser checks PASS E-PWA-03. Другие целевые learning contours остаются. |
 | AC-FND-08 | IN_PROGRESS | MANDATORY | Quiz/literature сохраняются в SQLite; glossary state теряется при restart и не разделяется между процессами; F-018. |
@@ -258,7 +310,7 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | AC-PRC-04 | BACKLOG | MANDATORY | Нет отдельного transcript-analysis package и checks учебной формулировки; F-026. |
 | AC-PRC-05 | BACKLOG | CONDITIONAL | Условный scope; direct API/voice не выбраны, Q-05. |
 | AC-AUTH-01 | READY | MANDATORY | E-PWA-02/03, merged #291/292: independent owner email/password, registration/verification/login UI, negative API и real-backend desktop/mobile browser tests PASS. Public enablement отдельно от code readiness. |
-| AC-AUTH-02 | IN_PROGRESS | MANDATORY | One-time verify/recover, atomic consume, Argon2id и SMTP TLS/error handling tests PASS (E-PWA-02). Яндекс sender/config и SMTP TLS authentication подтверждены; real verification/recovery PENDING (E-PWA-05). |
+| AC-AUTH-02 | READY | MANDATORY | E-PWA-02: one-time verify/recover, atomic consume, Argon2id и SMTP TLS/error handling tests PASS. E-PWA-05: SMTP config/auth подтверждены; 20.09 owner-reported verification/recovery PASS при закрытии PWA-FIRST-001. |
 | AC-AUTH-03 | IN_PROGRESS | MANDATORY | Owner-only web boundary, CSRF/session/recovery и two-user isolation PASS (E-PWA-02); broader dashboard/sharing ещё не реализованы; Q-01. |
 | AC-AUTH-04 | BACKLOG | CONDITIONAL | Условный scope; Google OAuth/linking не выбран и не реализован, Q-01. |
 | AC-AUTH-05 | READY | MANDATORY | E-PWA-01–03, merged #290–292: stable actor/data migration preservation, private Telegram confirmation + bound explicit PWA complete, expiry/conflict/replay negatives и browser linking screen PASS. Real owner linking PENDING после public activation (E-PWA-05). |
@@ -373,10 +425,8 @@ False-positive review: 16 test failures — Windows fixture/lifecycle, не 16 �
 
 ## Checkpoint и следующий шаг
 
-19.09.2026: PWA-FIRST-001 IN_PROGRESS, первоначальная публикация поручена владельцем. PR #290–293 merged/delivered; backend/public static `1963e76b5b897e72440cdda676737713af164c6a`, main CI 35457495076 / CD 35457573364 PASS. Operator setup record `/root/psychology-pwa-setup-1uibc0u4/record.json` остановился на `local_https_verified`, после чего отдельный read-only VPS smoke и независимый smoke PASS (E-PWA-05); заново запускать installer не нужно. Public browser desktop/mobile и installability diagnostics PASS (E-PWA-06). SMTP authentication подтверждена, отправка/получение писем владельцем ещё не подтверждены.
+20.09.2026: PWA-FIRST-001 DONE по primary GitHub/operator/browser records и сообщениям пользователя; POSTGRES-MIGRATION-001 явно выбрана и активирована. Base/main `391df11ab38122a32dacb18667e69fd4966c7879`; новая ветка `codex/postgres-storage-foundation`, один worktree. Перед веткой main чистый, fresh fetch/base совпали; open PR/protections/rulesets нет. Результат PWA #294 source-sync CD 35468781341: runtime unchanged `1963e76`.
 
-Docs-ветка `codex/pwa-publication-context`, base `1963e76b5b897e72440cdda676737713af164c6a`, сохраняет выбранный target/config owners, operator setup/recovery и acceptance gates; локальный checkpoint commit `c06ffa1` дополнен результатом повторного smoke. Итоговый docs PR должен пройти actual CI/review и merge; результаты не предсказываются. Для Markdown-only diff runtime/static redeploy не требуется: existing CD может выполнить source-sync, его результат сверяется по primary records. Runtime/public artifact остаётся проверенной совместимой версией, пока новый application diff не требует поставки.
+Выполнено discovery SQLite-specific SQL/locks/auth/schema/deployment и существующих тестов, проверены canonical commands и доступы. До implementation закреплены G-PG-01–07, non-goals, последовательность PR и Validation Plan. PostgreSQL код/host config ещё не менялись; текущая production PWA остаётся на SQLite. Внутренний браузер пользователя авторизован, но управляющий инструмент этой вкладки не доступен в текущем сеансе; не выдавать isolated anonymous Playwright за проверку его аккаунта.
 
-Local docs validation 19.09.2026: 71 relative link/anchor и `git diff --check` PASS; 76 AC IDs, восемь G-PWA критериев и последний audit snapshot сохранены. Self-review target/procedure/evidence/privacy выполнен; реальные mailbox values и внешние navigation links не добавлены. Scope — README и четыре PWA/plan Markdown files, runtime/code/tests не меняются. Local PASS не заменяет PR CI; check/review/merge gates итоговой revision ещё PENDING до push.
-
-Следующий шаг — владелец проходит первый вход/verification и явно подтверждает Telegram linking; затем quiz/reload/logout/recovery и установка/standalone в поддерживаемом браузере. G-PWA-01/02/08 пока не закрыты; PostgreSQL остаётся следующей отдельно выбираемой Goal. Owner account/password/e-mail proof и Telegram confirmation не подставлять автоматически. Доступ агента к VPS остаётся через вывод владельца; live process handle отсутствует. Проценты не пересчитывались.
+Следующий шаг: подготовить реальный изолированный PostgreSQL для tests, реализовать явный DB boundary/schema и portable SQL/transaction behavior, migration fixtures и обязательные regressions первого PR. Никакого автоматического cutover при установке driver. Production PG target/storage/roles и операторские preconditions установить до зависимых действий. Проценты не пересчитывались.
