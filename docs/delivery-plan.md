@@ -1,30 +1,49 @@
 # Delivery Plan
 
-## Current Goal и разрешённая работа
+## Current Goal — PLATFORM-STABILIZATION-001
 
-**Implementation Goal не выбрана.** Пользователь 2026-09-19 явно запросил полный AUDIT. Разрешённый результат — независимая оценка всего проекта и один docs PR только для [spec](project-spec.md)/этого плана; находки не разрешают исправлять code/content/workflows/settings.
+**Поручение:** пользователь 2026-09-19 одобрил предложенную stabilization Goal и отдельно подтвердил приоритет перехода на PWA. Goal активирована встроенным инструментом. Результат — безопасный существующий quiz/backend как основа общего PWA backend; расширение Telegram-only UX не входит в работу.
 
-Предыдущая DOCS-WORKFLOW-SPEC-001 завершена: PR #282 merged 2026-09-19 12:44:50 UTC, merge `c914793946c25de78ac5d966969663639cc61b90`; CI и published static check успешны. Её старый pre-merge checkpoint сверён с primary records, повторять работу не нужно. История прежних delivery IDs сохранена в [архиве](delivery-plan-archive.md).
+**Scope:** F-016/017/019/020/021/028; необходимые test discovery/Windows fixtures (F-022), behavioral CI и минимальные delivery preconditions (затронутая часть F-003/004/014). Область AC: QUIZ-01/02/07, GLO-01, LEG-03, OPS-02/03/05, части FND-06/07 и PROG-04. Целые platform/progress epics и все OPS AC не считаются автоматически завершёнными.
 
-**Audit branch:** `codex/audit-psychologyatlas-20260919`; **base/main SHA:** `c914793946c25de78ac5d966969663639cc61b90`. Root — repository psychology-quiz, один worktree; на старте дерево чистое, divergence нет, open PR нет. PR до initial push — UNSET; находить по этой head branch. Детальный отчёт и diagnostics хранятся вне repository.
+**Non-goals:** PWA/React и PostgreSQL migration, accounts, repetition/knowledge/search, новые учебные контуры, массовая правка content, полное persistence глоссария F-018, dependency/security modernization всего проекта и broad refactor. После Goal остановиться; следующий приоритет для выбора — PWA/platform foundation.
 
-**DoD аудита:** source coverage/AC traceability; code/tests/config/security/delivery/docs review; fresh AC readiness; полный findings registry с confidence; quality review; local docs checks, self-review, published checks и merge одного docs PR. **Non-goals:** implementation, dependency upgrades в repo/global Python, source content changes, deployments, production writes, настройка CI/GitHub/VPS, новый historical archive.
+**Baseline:** `df383200fd0e6c389038f5b080ec23310a26be07`, fresh origin/main 2026-09-19. Main чистый, один worktree, open PR нет. Первый PR branch `codex/stabilization-delivery-foundation`, base тот же SHA; PR ID до push UNSET. Audit PR #283 merged; последняя аудиторская готовность ниже остаётся snapshot c914793 и не пересчитывается.
+
+### Решения и порядок PR
+
+- История: фиксировать неизменяемую редакцию вопроса/вариантов при включении в попытку; хранение независимо от Telegram-клиента. Существующие попытки backfill только доступным содержимым, без выдумывания утраченных редакций; migration additive/idempotent, оригинальные answers/score/user data сохраняются. Детальный контракт закрепить в spec перед соответствующим PR (Q-02).
+- Lifecycle: non-approved/removed derivative исключается из новых selections, прежняя attempt revision остаётся читаемой. Physical delete user/history rows не нужен.
+- Recovery: перед stateful changes согласованный pipeline создаёт SQLite backup и проверяет восстановление в отдельный временный файл. Production restore/volume cleanup не выполняются автоматически. При post-check failure остановка и forward-fix в scope; rollback только после доказательства совместимости.
+- Delivery: существующий trusted VPS target из Repository Secrets + pinned host verification; exact validated main SHA, allowlisted directory/services, build before init/seed, runtime image/source identity, internal health и read-only business smoke. Никакого bootstrap/reset --hard/remove-orphans; неизвестный или изменившийся target останавливает поставку.
+- GitHub-wide approval/access policy не изменять попутно. Настроить необходимый CI→CD gate в workflows; оставшиеся protections/supply-chain gaps сохранять findings.
+
+| PR / связная задача | DoD / результат | Состояние |
+| --- | --- | --- |
+| 1. Validation/delivery foundation | Canonical pytest обнаруживает все tests; Windows fixtures и explicit DB closing исправлены; behavioral CI, exact revision delivery/build-before-migration, verified backup/recovery precheck, image/version/health/readonly smoke; targeted procedures обновлены | IN_PROGRESS, branch выше |
+| 2. API input/privacy/destination | F-020/021/028 закрыты regression tests; 4xx без state mutation, отсутствие raw user IDs/initData в logs и невозможность отправки auth на arbitrary origin; совместимые clients | BACKLOG |
+| 3. Glossary retry | F-019: stable step/options, answer/next idempotency и concurrent/retry tests; legacy compatibility; без нового durable learning subsystem | BACKLOG |
+| 4. Content history/publication | F-016/017: immutable attempt content + safe backfill/lifecycle sync, retired-serving gate, regression/migration/preservation tests и stateful delivery | BACKLOG |
+
+Каждый следующий PR — после merge/applicable delivery предыдущего и fresh main. Разбиение может уточняться по связанности без расширения согласованного scope.
 
 ### Validation Plan
 
-Рабочий каталог локальных проверок — repository root; canonical commands — [README](../README.md#быстрый-старт-и-проверки). Проверки audit поведения не являются исправлениями найденных дефектов.
+Рабочий каталог — root repository. Canonical commands — [README](../README.md#быстрый-старт-и-проверки); environment — isolated Python 3.12 и отдельная test SQLite. Production credentials/user data в fixtures не используются.
 
-| AC/риск | Проверка / ожидаемый результат | Команда/tool, environment | Этап / обязательность |
+| AC/риск | Проверка / ожидаемый результат | Tool/команда и environment | Этап / обязательность |
 | --- | --- | --- | --- |
-| Полнота scope/готовности | 76 unique AC spec=plan; 67 mandatory + 9 conditional; каждый READY имеет evidence, gaps/findings не исчезли | Source/AST/Git inspection + разовая docs диагностика | До PR, REQUIRED |
-| Existing behavior | Изолированный Python 3.12, requirements; existing pytest/unittest cases, synthetic API/DB fixtures; failures классифицированы | README validators/compile/init/seed; дополнительно `python -m pytest -q -p no:cacheprovider` (audit venv, не новая canonical команда) | Для аудита, REQUIRED выполнить/оценить; defects идут в registry, не исправляются |
-| Content/schema | Fresh temporary DB parity, quality metrics, invalid states/history fixtures | Existing audit scripts с report-path вне repo | Для аудита, REQUIRED |
-| Runtime/access | Read-only GitHub records/settings; public HTTP/browser smoke без user writes | CLI/API/Drive/browser, baseline и live момент проверки | RECOMMENDED; недоступные authenticated/VPS проверки — PARTIAL, не PASS |
-| Docs PR | Только spec/plan diff, relative links/anchors, no new external links, stable IDs, `git diff --check` | Python/readback/Git, audit branch | До initial push, REQUIRED |
-| Integration | Текущие CI `validate-and-smoke-test` и опубликованные checks успешны; review по settings | GitHub PR/Actions/check records | После push, REQUIRED |
-| Runtime delivery | Код/content/config не изменены, class NONE | N/A для DoD docs PR; не запускать deploy для статуса | После merge sync main/verify tree/cleanup собственной ветки |
+| F-022 / baseline | Existing suite обнаруживает unittest и pytest functions, переносимые SQLite fixtures; no skipped required behavior | Canonical pytest из README, Windows локально + Linux CI; Docker contract check в CI | PR1 local/CI, REQUIRED |
+| Delivery revision/trust/failure | Success gate только trusted main CI; stale/unknown revision не доставляется; script не меняет чужой worktree/config; image build перед seed, failure останавливает flow | Unit/contract + shell syntax и fake-command deployment scenarios; GitHub records на merge | PR1 local/CI + применимый CD, REQUIRED |
+| Stateful recovery | SQLite backup/restore в отдельный файл, integrity/FK и user-state invariants; original file не меняется; failure не запускает migrations | Automated temporary DB tests; candidate image preflight на проверенном VPS target | Перед stateful delivery, REQUIRED |
+| F-020/021/028 | Invalid types/enums/IDs → 4xx без session changes; privacy negative tests; arbitrary URL не получает initData | API tests + pure frontend configuration/behavior checks и relevant browser smoke | PR2 local/CI; unsafe production cases N/A, REQUIRED synthetic coverage |
+| F-019 | Duplicate/concurrent answer/next/retry сохраняют options/score и owner isolation | Glossary domain/API tests, controlled network/retry fixtures | PR3 local/CI, REQUIRED |
+| F-016/017 | Content edits/demotion/remove/seed retry сохраняют original attempt semantics и users/literature; inactive content не попадает в новые attempts | DB/API/migration/parity fixtures; validators/init/seed | PR4 local/CI и stateful post-check, REQUIRED |
+| Compatible legacy/UI | Выбранные handler/API/frontend contracts, readable feedback/setup/answer; expanded core при общем DB/config impact | Existing suites; browser при изменении UI/network flow | Каждый PR по impact, REQUIRED |
+| Docs/diff | Links, stable AC/finding IDs, scope и git diff --check; readiness snapshot неизменен | Git/readback + docs validation | Перед каждым push, REQUIRED |
+| Delivery completion | Required checks/reviews текущей revision, merge; exact version/image, internal health, read-only business smoke и applicable migration records | GitHub CI/CD + deployed service probes | Каждый runtime PR, REQUIRED; недоступность не N/A |
 
-После достаточных проверок код не тестируется заново только из-за правки Markdown. Исходные 16 test failures остаются findings; для docs PR требуется корректный отчёт о них, а не ложный green или исправление вне scope.
+Не вводить load/E2E infrastructure целиком; конкретные regression и safety gates обязательны. Не повторять полный suite без нового влияющего изменения/failure. Findings outside scope сохраняются.
 
 ## Аудиторский baseline и готовность
 

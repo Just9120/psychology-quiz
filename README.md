@@ -62,7 +62,7 @@ Repository-visible GitHub Actions are split by responsibility:
 
 Рабочий каталог — корень репозитория. Runtime/CI: Python 3.12, package manager — pip; прямые зависимости фиксирует [requirements.txt](requirements.txt), transitive lockfile отсутствует. Для локальной работы используйте изолированное Python-окружение; команды ниже предполагают, что оно активировано.
 
-Карта: [app](app/) — bot/API/domain code, [miniapp](miniapp/) — текущая статика, [content](content/) — производный учебный контент, [sql](sql/) — SQLite schema, [scripts](scripts/) — init/seed/validators, [tests](tests/) — unittest suites. Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
+Карта: [app](app/) — bot/API/domain code, [miniapp](miniapp/) — текущая статика, [content](content/) — производный учебный контент, [sql](sql/) — SQLite schema, [scripts](scripts/) — init/seed/validators, [tests](tests/) — pytest suite (включая unittest cases). Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
 
 ```bash
 pip install -r requirements.txt
@@ -83,8 +83,8 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 
 | Назначение | Canonical команда / условие |
 | --- | --- |
-| Behavioral suite | `python -m unittest discover -s tests -p 'test_*.py'`; test dependencies из requirements, временные/in-memory DB внутри tests |
-| Выбранная suite | `python -m unittest tests.test_miniapp_frontend_contract -q` для frontend/docs contracts; выбирайте другие существующие test modules по diff |
+| Behavioral suite | `python -m pip install -r requirements-dev.txt`, затем `python -m pytest -q`; временные/in-memory DB внутри tests. Docker compose contract требует Docker CLI (локально иначе skip; в CI обязателен) |
+| Выбранная suite | `python -m pytest tests/test_miniapp_frontend_contract.py -q` для frontend/docs contracts; выбирайте другие существующие test modules по diff |
 | FastAPI local run | `python -m uvicorn app.miniapp_fastapi_runtime:app --host 127.0.0.1 --port 8081`; тот же тестовый DB_PATH/BOT_TOKEN; подробности в [runbook](docs/miniapp-deployment-qa.md) |
 | Format / lint / typecheck | N/A: отдельных команд текущий проект не задаёт; whitespace проверяет `git diff --check` |
 | Build | N/A для текущих Python/статических исходников; runtime image собирается Docker в разрешённой delivery Goal. Vite build появится при реализации target frontend |

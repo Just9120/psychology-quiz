@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from contextlib import closing
+
 from html import escape
 import random
 import json
@@ -458,7 +460,7 @@ async def reading_mode_button_handler(update: Update, context: ContextTypes.DEFA
     settings = context.application.bot_data["settings"]
 
     def _load_mode():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             user_row = create_or_load_user(
                 conn,
                 telegram_user_id=tg_user.id,
@@ -581,7 +583,7 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         return
 
     def _load_stats():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             return get_owner_stats(conn)
 
     stats = await _run_db_task(_load_stats)
@@ -641,7 +643,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
 
         session_id, question_id, selected_option_index = answer_payload
         def _handle_webapp_answer():
-            with get_connection(settings.db_path) as conn:
+            with closing(get_connection(settings.db_path)) as conn, conn:
                 user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
                 submission = submit_miniapp_answer_event(
                     conn,
@@ -736,7 +738,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         await message.chat.send_message(_invalid_miniapp_payload_text())
         return
     def _handle_webapp_setup():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             active_categories = get_active_categories(conn)
             active_ids = {int(row["id"]) for row in active_categories}
             difficulty_filter = None if difficulty == "any" else difficulty
@@ -843,7 +845,7 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
 
         settings = context.application.bot_data["settings"]
         def _load_current_mode():
-            with get_connection(settings.db_path) as conn:
+            with closing(get_connection(settings.db_path)) as conn, conn:
                 user_row = create_or_load_user(
                     conn,
                     telegram_user_id=tg_user.id,
@@ -881,7 +883,7 @@ async def reading_mode_callback(update: Update, context: ContextTypes.DEFAULT_TY
 
     settings = context.application.bot_data["settings"]
     def _save_mode():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             user_row = create_or_load_user(
                 conn,
                 telegram_user_id=tg_user.id,

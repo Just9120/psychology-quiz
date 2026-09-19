@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from contextlib import closing
+
 import asyncio
 import logging
 import time
@@ -72,7 +74,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     tg_user = update.effective_user
 
     def _load_ui_context():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             categories = get_active_categories(conn)
             runner_state = None
             if tg_user is not None:

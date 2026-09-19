@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from contextlib import closing
+
 import asyncio
 import logging
 import re
@@ -322,7 +324,7 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     context.user_data.pop(GLOSSARY_QUIZ_SESSION_KEY, None)
 
     def _load_categories():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             return get_active_categories(conn)
 
     db_started_at = time.perf_counter()
@@ -357,7 +359,7 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def send_current_question_to_chat(chat, settings, session_id: int) -> bool:
     latency = _HandlerLatency(handler="send_current_question_to_chat", callback_prefix="sendq", session_id=session_id)
     def _load_current_question():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             current = get_current_unanswered_question(conn, session_id)
             if current is None:
                 return {"current": None}
@@ -408,7 +410,7 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
 async def send_current_question_to_message(message, settings, session_id: int, context: ContextTypes.DEFAULT_TYPE, latency: _HandlerLatency | None = None) -> bool:
     finalize_payload = None
     db_started_at = time.perf_counter()
-    with get_connection(settings.db_path) as conn:
+    with closing(get_connection(settings.db_path)) as conn, conn:
         current = get_current_unanswered_question(conn, session_id)
         if current is None:
             finalized = finalize_quiz_session(conn, session_id)
@@ -548,7 +550,7 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     if data == "qzmode:single":
         settings = context.application.bot_data["settings"]
         def _load_categories():
-            with get_connection(settings.db_path) as conn:
+            with closing(get_connection(settings.db_path)) as conn, conn:
                 return get_active_categories(conn)
 
         categories = await _run_db_task(_load_categories)
@@ -576,7 +578,7 @@ async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     if data == "qzmode:selected_mix":
         settings = context.application.bot_data["settings"]
         def _load_categories():
-            with get_connection(settings.db_path) as conn:
+            with closing(get_connection(settings.db_path)) as conn, conn:
                 return get_active_categories(conn)
 
         categories = await _run_db_task(_load_categories)
@@ -610,7 +612,7 @@ async def send_current_question(
     finalize_payload = None
     reading_mode = "normal"
     db_started_at = time.perf_counter()
-    with get_connection(settings.db_path) as conn:
+    with closing(get_connection(settings.db_path)) as conn, conn:
         current = get_current_unanswered_question(conn, session_id)
         if current is None:
             finalized = finalize_quiz_session(conn, session_id)
@@ -747,7 +749,7 @@ async def send_current_question(
 
 
 async def restart_quiz_from_finished_session(query, settings, tg_user, session_id: int) -> None:
-    with get_connection(settings.db_path) as conn:
+    with closing(get_connection(settings.db_path)) as conn, conn:
         session = get_quiz_session(conn, session_id)
         if session is None:
             await query.edit_message_text("Сессия не найдена.")
@@ -938,7 +940,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         return
 
     def _start_single_category_quiz():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
             difficulty_filter = None if mode == "any" else mode
             question_ids = select_random_approved_question_ids_by_category(
@@ -1047,7 +1049,7 @@ async def mix_selection_callback(update: Update, context: ContextTypes.DEFAULT_T
     settings = context.application.bot_data["settings"]
 
     def _load_mix_categories():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             return get_active_categories(conn)
 
     db_started_at = time.perf_counter()
@@ -1207,7 +1209,7 @@ async def start_mix_quiz(
         return
 
     def _start_mix_quiz_db():
-        with get_connection(settings.db_path) as conn:
+        with closing(get_connection(settings.db_path)) as conn, conn:
             user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
             difficulty_filter = None if mode == "any" else mode
             filtered_selected_ids = selected_category_ids
@@ -1281,7 +1283,7 @@ def _load_classic_text_answer_context(settings, tg_user, state: dict) -> dict:
     except (TypeError, ValueError):
         return {"status": "not_awaiting_answer"}
 
-    with get_connection(settings.db_path) as conn:
+    with closing(get_connection(settings.db_path)) as conn, conn:
         session = get_quiz_session(conn, session_id)
         if session is None or str(session["status"]) != "in_progress":
             return {"status": "session_missing", "session_id": session_id, "question_id": expected_question_id}
@@ -1299,7 +1301,7 @@ def _load_classic_text_answer_context(settings, tg_user, state: dict) -> dict:
 
 
 def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, question_id: int, selected_option_index: int) -> dict:
-    with get_connection(settings.db_path) as conn:
+    with closing(get_connection(settings.db_path)) as conn, conn:
         session = get_quiz_session(conn, session_id)
         if session is None or str(session["status"]) != "in_progress":
             return {"status": "session_missing"}
@@ -1356,7 +1358,7 @@ def _load_classic_text_next_state(settings, tg_user, state: dict) -> dict:
         session_id = int(state.get("session_id"))
     except (TypeError, ValueError):
         return {"status": "not_awaiting_next"}
-    with get_connection(settings.db_path) as conn:
+    with closing(get_connection(settings.db_path)) as conn, conn:
         session = get_quiz_session(conn, session_id)
         if session is None:
             return {"status": "missing", "session_id": session_id}
@@ -1585,7 +1587,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             return
 
         def _handle_answer_db():
-            with get_connection(settings.db_path) as conn:
+            with closing(get_connection(settings.db_path)) as conn, conn:
                 session = get_quiz_session(conn, session_id)
                 if session is None or str(session["status"]) != "in_progress":
                     return {"status": "session_missing"}
@@ -1732,7 +1734,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             return
 
         def _load_next_state():
-            with get_connection(settings.db_path) as conn:
+            with closing(get_connection(settings.db_path)) as conn, conn:
                 session = get_quiz_session(conn, session_id)
                 if session is None:
                     return {"status": "missing"}
