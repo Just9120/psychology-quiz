@@ -11,6 +11,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 from app.attempt_content import ensure_attempt_snapshots
 from app.identity_schema import migrate_identity_schema
+from app.auth_schema import migrate_auth_schema
 
 from dotenv import load_dotenv
 
@@ -92,6 +93,7 @@ def main() -> int:
         with closing(sqlite3.connect(db_path)) as conn, conn:
             conn.executescript(schema_sql)
             migrate_identity_schema(conn)
+            migrate_auth_schema(conn)
             ensure_users_reading_mode_column(conn)
             ensure_quiz_sessions_difficulty_mode_column(conn)
             ensure_user_literature_progress_table(conn)

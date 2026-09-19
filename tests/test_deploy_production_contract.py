@@ -80,6 +80,7 @@ git() {
       elif [[ "$FAULT" == first_adoption ]]; then echo app/main.py;
       elif [[ "$FAULT" == snapshot_change ]]; then echo app/attempt_content.py;
       elif [[ "$FAULT" == identity_change ]]; then echo app/identity_schema.py;
+      elif [[ "$FAULT" == auth_change ]]; then echo app/auth_schema.py;
       else echo app/db.py; fi ;;
     'merge --ff-only '*) FAKE_HEAD="$EXPECTED" ;;
     *) return 0 ;;
@@ -145,7 +146,7 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
     return result, log.read_text() if log.exists() else ""
 
 
-@pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change"])
+@pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change", "auth_change"])
 def test_deployment_builds_before_backup_migration_and_checks_running_revision(tmp_path, change):
     result, log = run_deploy(tmp_path, change)
     assert result.returncode == 0, result.stderr + result.stdout

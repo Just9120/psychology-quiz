@@ -93,6 +93,8 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 
 Базовые local services — SQLite и, для Mini App, FastAPI; live Telegram smoke требует тестовый bot/client. PostgreSQL/pgvector и Яндекс 360 — целевые зависимости, пока не условия существующих локальных команд. Требуемые CI проверки и ограничения текущего pipeline — в [плане](docs/delivery-plan.md); зелёный CI пока не означает запуск behavioral suite.
 
+Owner PWA auth backend поставляется выключенным по умолчанию. Переменные, API contract, mail/session/linking policy и условия включения — в [PWA auth](docs/pwa-auth.md). Новые credentials не заменяют Telegram initData в прежних routes.
+
 ## Текущий продуктовый контур
 
 Активные категории в продукте формируются из БД по `approved`-вопросам (не хардкодятся в UI).

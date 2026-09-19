@@ -26,6 +26,15 @@ def main() -> None:
             raise RuntimeError("API authentication boundary failed") from None
     else:
         raise RuntimeError("Unauthenticated API request was accepted")
+    expected_web_status = 401 if os.getenv("PWA_ENABLED", "false").strip().lower() == "true" else 404
+    try:
+        urllib.request.urlopen("http://127.0.0.1:8081/web/auth/me", timeout=3)
+    except urllib.error.HTTPError as error:
+        if error.code != expected_web_status:
+            raise RuntimeError("PWA authentication/configuration boundary failed") from None
+    else:
+        raise RuntimeError("Unauthenticated PWA request was accepted")
+    print(f"PWA_AUTH_BOUNDARY_OK status={expected_web_status}")
     print(f"HTTP_SMOKE_OK revision={expected}")
 
 

@@ -15,6 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 from app.attempt_content import get_attempt_content
+from app.auth_schema import AUTH_TABLES
 from scripts.audit_question_bank import build_report, has_blockers
 
 USER_TABLES = (
@@ -37,7 +38,13 @@ def check_integrity(conn: sqlite3.Connection) -> None:
 def user_state(conn: sqlite3.Connection, columns: dict | None = None) -> dict:
     """Compare all pre-existing user fields; additive columns are permitted."""
     result = {}
-    for table in USER_TABLES:
+    existing = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    # Old backups lack auth tables. Preserve every table present in that backup,
+    # while newly introduced empty auth tables are allowed by an additive migration.
+    tables = tuple(columns) if columns is not None else USER_TABLES + tuple(name for name in AUTH_TABLES if name in existing)
+    for table in tables:
+        if table not in USER_TABLES + AUTH_TABLES:
+            raise RuntimeError("Unexpected user-state table")
         names = (columns[table]["columns"] if columns else
                  [row[1] for row in conn.execute(f'PRAGMA table_info("{table}")')])
         if not names or any(not name.replace("_", "").isalnum() for name in names):

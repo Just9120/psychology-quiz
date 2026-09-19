@@ -38,7 +38,7 @@ def test_migration_backup_restore_preserves_all_legacy_data_and_supports_web_use
     with closing(get_connection(str(path))) as conn, conn:
         assert conn.execute('PRAGMA foreign_keys').fetchone()[0] == 1
         assert conn.execute('PRAGMA foreign_key_check').fetchone() is None
-        assert conn.execute('SELECT count(*) FROM schema_migrations').fetchone()[0] == 1
+        assert conn.execute("SELECT count(*) FROM schema_migrations WHERE version='identity-v1'").fetchone()[0] == 1
         user = create_or_load_user(conn, 42, 'legacy', 'Name', 'Surname')
         assert user['id'] == 1
         web1 = conn.execute('INSERT INTO users DEFAULT VALUES').lastrowid
