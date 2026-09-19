@@ -4,7 +4,7 @@
 
 ## Конфигурация
 
-По умолчанию `PWA_ENABLED=false`: `/web/*` routes отсутствуют. Владелец отложил реальные настройки до подготовки всего кода. Hostname/mailbox/config owners сейчас UNSET, включение и real-mail acceptance PENDING. Runtime host `.env` — существующий источник secrets; PR/CD его не заменяют и не заполняют.
+По умолчанию `PWA_ENABLED=false`: `/web/*` routes отсутствуют. После подготовки кода владелец 19.09.2026 поручил публикацию: hostname, owner mailbox и источник SMTP установлены в [operator setup](pwa-delivery.md#установленный-target-и-operator-setup). Включение и SMTP TLS authentication подтверждены operator output; real-mail/owner acceptance пока PENDING (E-PWA-05 плана). Runtime host `.env` — существующий источник secrets; обычные PR/CD его не заменяют и не заполняют. Первичную конфигурацию выполняет владелец на VPS с сохранением остальных settings и приватной резервной копии.
 
 Enabled API и bot требуют:
 
@@ -58,4 +58,4 @@ Durable owner-only limits: login 10/min; register/recover совместно 5/h
 
 Используется [VPS procedure](miniapp-deployment-qa.md#действующие-правила-и-delivery-snapshot): stop writers → verified backup/isolated restore → init/seed → preservation/FK/parity → up → exact revision/image/HTTP smoke. Дополнительно `/web/auth/me` обязан отвечать 404 при disabled, 401 при enabled. Это не real-mail acceptance. После migration failure — stop/forward-fix; production restore/rollback не автоматизированы. Default-off backend delivery не меняет secrets/DNS/Nginx.
 
-Перед включением нужны hostname/DNS/TLS/same-origin proxy и config owner, frontend build/publication, sender/credentials, bounded verification/recovery на согласованном адресе, auth/link/quiz/installability smoke с версией. Эти внешние этапы отложены пользователем; code tests их не выдают за PASS. [Static release/Nginx procedure](pwa-delivery.md) готовит этот этап. Existing backend preflight вызывает тот же WebSettings validator до остановки writers, поэтому неполный enabled config не допускается к переключению.
+Перед включением нужны hostname/DNS/TLS/same-origin proxy и config owner, frontend build/publication, sender/credentials, bounded verification/recovery на согласованном адресе, auth/link/quiz/installability smoke с версией. DNS/HTTP/TLS, runtime config/SMTP authentication и local HTTPS подтверждены operator output; независимый public smoke PASS. Public probe из VPS также PASS после read-only повтора; real-mail/owner gates ещё PENDING (E-PWA-05 плана). [Static release/Nginx procedure](pwa-delivery.md) описывает этот этап. Existing backend preflight вызывает тот же WebSettings validator до остановки writers, поэтому неполный enabled config не допускается к переключению.

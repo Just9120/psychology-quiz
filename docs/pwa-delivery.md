@@ -1,6 +1,31 @@
 # Публикация самостоятельной PWA
 
-Сейчас подготовлен код; применение на production отложено пользователем. Hostname, static release root, DNS/TLS/config owner и реальные owner/SMTP settings — **UNSET**. Не подставлять адрес Mini App и не запускать операции на неизвестном target. [Backend auth/config](pwa-auth.md), [existing VPS procedure](miniapp-deployment-qa.md) и [client/build](pwa-client.md) сохраняют свои роли. Canonical frontend commands — [README](../README.md#pwa-local-run-и-проверки).
+После подготовки кода пользователь 19.09.2026 поручил настройку VPS и публикацию PWA. Target и config owner установлены; первичный HTTP маршрут и сертификат подготовлены оператором. Активация backend/static, local HTTPS и public smoke из VPS и независимой сети подтверждены. Первоначальный URLError не воспроизвёлся при read-only повторе проверки; конфигурация не менялась. Real-mail/owner acceptance пока PENDING; результаты и ограничения — в E-PWA-05 плана. [Backend auth/config](pwa-auth.md), [existing VPS procedure](miniapp-deployment-qa.md) и [client/build](pwa-client.md) сохраняют свои роли. Canonical frontend commands — [README](../README.md#pwa-local-run-и-проверки).
+
+## Установленный target и operator setup
+
+Источник: явные решения владельца, DNS screenshot и вывод root-сессии MobaXterm 19.09.2026; локального SSH-доступа агента нет. Текущий статус поставки и primary records — [Current Goal](delivery-plan.md#current-goal--pwa-first-001).
+
+| Поверхность | Значение / owner |
+| --- | --- |
+| VPS / operator | `167.86.68.98`, Ubuntu 24.04; владелец проекта выполняет команды как root через MobaXterm |
+| Public hostname | `psy.cloud-nodes.net`, HTTPS; A record в Cloudflare указывает на этот VPS, Proxied. DNS/Cloudflare управляет владелец |
+| Application source / services | `/opt/psychology-quiz`, Compose `psychology-quiz`, `psych_quiz_bot` и `psych_quiz_miniapp_api`; API `127.0.0.1:8081` |
+| Static namespace | `/var/www/psychology-atlas`, marker `.pwa-root` = `psychology-atlas-pwa`; public pointer `current`, immutable `releases/<sha>` |
+| Nginx site | `/etc/nginx/sites-available/psy.cloud-nodes.net.conf`, symlink в `sites-enabled`; отдельные HTTP/HTTPS server blocks, соседние сайты сохраняются |
+| ACME webroot | `/var/www/psychology-atlas/acme`; HTTP location `/.well-known/acme-challenge/` остаётся доступным после включения HTTPS redirect |
+| TLS | Certbot 2.9.0; `/etc/letsencrypt/live/psy.cloud-nodes.net/fullchain.pem` и `privkey.pem`. Operator output подтверждает сертификат CN нужного hostname до 18.12.2026 и настроенное автоматическое продление; фактический будущий renewal ещё не проверен |
+| Config / mail owner | Владелец проекта; login mailbox согласован отдельно, его значение и SMTP credentials в репозитории не хранятся |
+| SMTP source | Существующий Compose `smart-life-platform`, service `api` на том же VPS, переменные `RECOVERY_SMTP_*`; перенос только нужных значений в `PWA_SMTP_*` внутри VPS, без изменения исходного проекта |
+| Runtime destination | Существующий `/opt/psychology-quiz/.env`; оригинал сохранить в приватной operator backup directory до записи. Остальные поля, ownership и permissions сохраняются |
+
+Initial setup не является обычным CD. Для него владелец явно разрешил создание dedicated static root, Nginx site, сертификата и owner/SMTP configuration. Production Environment и существующий backend CD сохраняют свои правила. Операция сериализуется через существующий `/tmp/psychology-quiz-deploy.lock`; неизвестный или уже изменённый target требует readback, а не повторного bootstrap.
+
+При первой активации сверить clean checkout/main, source SHA, running image IDs и эффективную Compose configuration. SMTP authentication проверяется через TLS без отправки письма; затем сохранить private config backups и подготовить проверенные static assets через `stage`. До restart подтвердить сохранность остальных dotenv values и проверить candidate через existing `scripts/deployment_db.py preflight`. Пересоздаются только bot/API из уже проверенных images, с прежним `APP_REVISION`; миграций, rebuild образов, остановки соседних проектов и операций над volumes этот этап не требует. После backend post-checks применяются HTTPS template, `activate` и Nginx reload по процедуре ниже. Ошибка до restart позволяет восстановить только собственную невалидную config-запись; failure после переключения требует остановки продвижения и разбора текущего state по record. DB restore не выполняется.
+
+Nginx reload завершается раньше, чем все workers переключатся: после reload проверять точный контрольный ответ ограниченными повторными GET, а не повторять создание файлов после первого 404. Во время setup Certbot один раз получил reset на ACME directory; последующая проверка IPv4/IPv6 дала 200, а одна повторная попытка успешно выдала сертификат. Это Evidence восстановленного запроса, не основание менять Cloudflare proxy или отключать IPv6.
+
+Для Cloudflare public probes использовать идентификатор клиента `PsychologyAtlas-Deployment-Check/1.0`. В этой зоне default Python-urllib получил 403/1010; именованный probe получил контрольный файл с 200. Если оператор задаёт User-Agent у opener существующего `scripts/pwa_smoke.py`, все проверки TLS, запрета redirects, revision, hashes, MIME, headers и actual 401 остаются обязательными. Логи не должны содержать auth query/body/cookie values. Public smoke не выполняет регистрацию и не отправляет real mail.
 
 ## Deployment unit и доступы
 
@@ -43,4 +68,4 @@ Smoke проверяет HTTPS certificate без redirect bypass, полный 
 
 `python -m pytest tests/test_pwa_release.py tests/test_pwa_smoke.py -q`: hash/revision/file set, stale/concurrent activation, link safety, immutable retry, corruption и explicit static rollback. Windows без symlink privilege пропускает только соответствующие cases; Linux CI обязан выполнить их.
 
-В CI frontend job после build/browser suite устанавливает Nginx из runner OS repositories и выполняет из `pwa/` `python tests/nginx_smoke.py`: реальный Nginx, временный TLS certificate с verification, public artifact и synthetic 401 upstream. Это test dependency, не pin production Nginx. Проверены syntax/HTTPS/static integrity/headers/path forwarding. Actual FastAPI auth/quiz покрыты отдельными real-backend browser/API tests. Доступ к production Nginx/settings и live public PWA пока не подтверждён.
+В CI frontend job после build/browser suite устанавливает Nginx из runner OS repositories и выполняет из `pwa/` `python tests/nginx_smoke.py`: реальный Nginx, временный TLS certificate с verification, public artifact и synthetic 401 upstream. Это test dependency, не pin production Nginx. Проверены syntax/HTTPS/static integrity/headers/path forwarding. Actual FastAPI auth/quiz покрыты отдельными real-backend browser/API tests. Operator output подтверждает production config/SMTP authentication, enabled runtime и local HTTPS; независимый public smoke проверил HTTPS app routing и все assets. Повтор той же public проверки из VPS также PASS без повторной установки. Real-mail/owner acceptance остаётся PENDING (E-PWA-05); public browser и ограничения installation evidence — E-PWA-06.
