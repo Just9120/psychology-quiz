@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from contextlib import closing
+from app.payload_validation import valid_quiz_setup
 
 from html import escape
 import random
@@ -211,16 +212,6 @@ def _safe_update_type(update: Update) -> str:
     return "unknown"
 
 
-def _safe_update_user_id(update: Update) -> int | None:
-    effective_user = getattr(update, "effective_user", None)
-    user_id = getattr(effective_user, "id", None)
-    if user_id is not None:
-        return user_id
-    callback_query = getattr(update, "callback_query", None)
-    callback_user = getattr(callback_query, "from_user", None)
-    return getattr(callback_user, "id", None)
-
-
 async def update_ingress_logger(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     fields = [
         f"update_id={getattr(update, 'update_id', None)}",
@@ -231,10 +222,6 @@ async def update_ingress_logger(update: Update, context: ContextTypes.DEFAULT_TY
     callback_prefix = _safe_callback_prefix(getattr(callback_query, "data", None))
     if callback_prefix:
         fields.append(f"callback_prefix={callback_prefix}")
-
-    telegram_user_id = _safe_update_user_id(update)
-    if telegram_user_id is not None:
-        fields.append(f"telegram_user_id={telegram_user_id}")
 
     message_kind = _safe_message_kind(getattr(update, "message", None))
     if message_kind:
@@ -721,14 +708,7 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     question_count = payload.get("question_count")
     difficulty = payload.get("difficulty")
     category_ids = payload.get("category_ids")
-    if (
-        payload.get("type") != "quiz_setup"
-        or quiz_mode not in {"single", "selected_mix", "all"}
-        or question_count not in {5, 10, 15, None}
-        or difficulty not in {"any", "easy", "medium", "hard"}
-        or not isinstance(category_ids, list)
-        or any(not isinstance(item, int) for item in category_ids)
-    ):
+    if payload.get("type") != "quiz_setup" or not valid_quiz_setup(payload):
         await message.chat.send_message(_invalid_miniapp_payload_text())
         return
 

@@ -4,6 +4,7 @@ import hashlib
 import hmac
 import json
 import logging
+import re
 import sqlite3
 import time
 import urllib.parse
@@ -13,6 +14,7 @@ from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from dataclasses import dataclass
 from typing import Any
+from app.payload_validation import is_sqlite_integer, valid_quiz_setup
 
 from app.db import USER_LITERATURE_READING_STATUSES, create_or_load_user, finalize_quiz_session, get_connection
 from app.db import (
@@ -52,17 +54,12 @@ def _log_locked_db(endpoint: str, started_at: float) -> None:
 
 
 def _read_request_id(headers) -> str:
-    raw = headers.get("X-Miniapp-Request-Id", "").strip()
-    if not raw:
-        return ""
-    return raw[:64]
+    return _sanitize_request_id(headers.get("X-Miniapp-Request-Id", ""))
 
 
 def _sanitize_request_id(raw: str) -> str:
-    raw = (raw or "").strip()
-    if not raw:
-        return ""
-    return raw[:64]
+    # Only a bounded correlation token, never arbitrary header/body contents.
+    return raw if isinstance(raw, str) and re.fullmatch(r"[A-Za-z][A-Za-z0-9_.-]{0,63}", raw) else ""
 
 
 class InitDataValidationError(ValueError):
@@ -92,7 +89,10 @@ def verify_telegram_init_data(init_data: str, bot_token: str, *, max_age_seconds
     auth_date_raw = data.get("auth_date")
     if auth_date_raw is None or not auth_date_raw.isdigit():
         raise InitDataValidationError("invalid_auth_date")
-    auth_date = int(auth_date_raw)
+    try:
+        auth_date = int(auth_date_raw)
+    except ValueError as exc:
+        raise InitDataValidationError("invalid_auth_date") from exc
     now = int(time.time())
     if auth_date > now + 60 or now - auth_date > max_age_seconds:
         raise InitDataValidationError("expired_init_data")
@@ -111,8 +111,10 @@ def verify_telegram_init_data(init_data: str, bot_token: str, *, max_age_seconds
     except json.JSONDecodeError as exc:
         raise InitDataValidationError("invalid_user_json") from exc
 
+    if not isinstance(user, dict):
+        raise InitDataValidationError("invalid_user_json")
     telegram_user_id = user.get("id")
-    if not isinstance(telegram_user_id, int) or telegram_user_id <= 0:
+    if not is_sqlite_integer(telegram_user_id, minimum=1):
         raise InitDataValidationError("invalid_user_id")
 
     return VerifiedInitData(
@@ -197,7 +199,7 @@ def _parse_json_payload(body: bytes) -> dict[str, Any] | None:
 def _normalize_glossary_question_count(value: Any) -> int | str | None:
     if value is None or value == "all":
         return value
-    if value in {5, 10}:
+    if type(value) is int and value in {5, 10}:
         return value
     if value == "5":
         return 5
@@ -234,7 +236,7 @@ def build_glossary_answer_response(bot_token: str, init_data: str, body: bytes, 
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
     session_id = payload.get("session_id")
     selected = payload.get("selected_option_index")
-    if not isinstance(session_id, str) or not isinstance(selected, int):
+    if not isinstance(session_id, str) or not is_sqlite_integer(selected):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
     state = answer_glossary_session(verified.telegram_user_id, session_id, selected)
     if state is None:
@@ -558,13 +560,13 @@ def _build_existing_endpoint_glossary_setup_response(verified: VerifiedInitData,
 def _build_existing_endpoint_glossary_answer_response(verified: VerifiedInitData, payload: dict[str, Any]):
     action = payload.get("action")
     session_id = payload.get("session_id")
-    if action not in {"answer", "next", "restart"}:
+    if not isinstance(action, str) or action not in {"answer", "next", "restart"}:
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_action"})
     if not isinstance(session_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_session"})
     if action == "answer":
         selected = payload.get("selected_option_index")
-        if not isinstance(selected, int):
+        if not is_sqlite_integer(selected):
             return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
         state = answer_glossary_session(verified.telegram_user_id, session_id, selected)
         error = "invalid_glossary_answer"
@@ -693,7 +695,8 @@ def build_answer_response(
     if payload.get("mode") == "glossary":
         return _build_existing_endpoint_glossary_answer_response(verified, payload)
     req = (payload.get("session_id"), payload.get("question_id"), payload.get("selected_option_index"))
-    if not all(type(v) is int for v in req):
+    if not (is_sqlite_integer(req[0], minimum=1) and is_sqlite_integer(req[1], minimum=1)
+            and is_sqlite_integer(req[2])):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
 
     try:
@@ -777,23 +780,18 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
     question_count = payload.get("question_count")
     difficulty = payload.get("difficulty")
     category_ids = payload.get("category_ids")
-    if (
-        quiz_mode not in {"single", "selected_mix", "all"}
-        or question_count not in {5, 10, 15, None}
-        or difficulty not in {"any", "easy", "medium", "hard"}
-        or not isinstance(category_ids, list)
-        or any(not isinstance(item, int) for item in category_ids)
-    ):
+    if not valid_quiz_setup(payload):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
 
     try:
         with closing(get_connection(db_path)) as conn:
             with conn:
-                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 active_categories = get_active_categories(conn)
                 active_ids = {int(row["id"]) for row in active_categories}
                 if not active_ids:
                     return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_categories"})
+                if any(category_id not in active_ids for category_id in category_ids):
+                    return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
                 difficulty_filter = None if difficulty == "any" else difficulty
                 if quiz_mode == "single":
                     if len(category_ids) != 1 or int(category_ids[0]) not in active_ids:
@@ -813,6 +811,7 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
                     question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
                 if not question_ids:
                     return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_questions"})
+                user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
                 session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
                 if selected_ids:
@@ -869,6 +868,10 @@ def build_setup_options_response(
 
 
 class MiniAppApiHandler(BaseHTTPRequestHandler):
+    def log_message(self, format, *args):
+        # Structured endpoint logs below exclude raw URLs, queries and credentials.
+        return
+
     protocol_version = "HTTP/1.1"
     db_path = ""
     bot_token = ""
@@ -890,7 +893,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         allowed = bool(self.allowed_origin and origin == self.allowed_origin)
         if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
-            logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s", endpoint, request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no", self.headers.get("Access-Control-Request-Method", ""), self.headers.get("Access-Control-Request-Headers", ""))
+            logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s", "unknown", request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no")
             return
         self.send_response(HTTPStatus.NO_CONTENT)
         self._set_common_headers()
@@ -899,7 +902,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Max-Age", "600")
         self.send_header("Content-Length", "0")
         self.end_headers()
-        logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s", endpoint, request_id or "-", HTTPStatus.NO_CONTENT.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no", self.headers.get("Access-Control-Request-Method", ""), self.headers.get("Access-Control-Request-Headers", ""))
+        logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s", endpoint, request_id or "-", HTTPStatus.NO_CONTENT.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no")
 
     def do_GET(self):
         started_at = time.time()
@@ -956,24 +959,20 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         self._set_common_headers()
         self.end_headers()
         self.wfile.write(body)
-        safe_user_id = "-"
         error_code = ""
         try:
             payload = json.loads(body.decode("utf-8"))
             if isinstance(payload, dict) and isinstance(payload.get("error"), str):
                 error_code = payload["error"]
-            verified = verify_telegram_init_data(init_data, self.bot_token, max_age_seconds=self.initdata_ttl_seconds)
-            safe_user_id = str(verified.telegram_user_id)
         except Exception:
             pass
         logger.info(
-            "miniapp_api endpoint=%s request_id=%s transport=%s method=GET status=%s duration_ms=%s telegram_user_id=%s error_code=%s",
+            "miniapp_api endpoint=%s request_id=%s transport=%s method=GET status=%s duration_ms=%s error_code=%s",
             endpoint,
             request_id or "-",
             transport,
             status,
             int((time.time() - started_at) * 1000),
-            safe_user_id,
             error_code or "-",
         )
 
@@ -1029,25 +1028,21 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         self._set_common_headers()
         self.end_headers()
         self.wfile.write(data)
-        safe_user_id = "-"
         error_code = ""
         try:
             payload = json.loads(data.decode("utf-8"))
             if isinstance(payload, dict):
                 if isinstance(payload.get("error"), str):
                     error_code = payload["error"]
-            verified = verify_telegram_init_data(init_data, self.bot_token, max_age_seconds=self.initdata_ttl_seconds)
-            safe_user_id = str(verified.telegram_user_id)
         except Exception:
             pass
         logger.info(
-            "miniapp_api endpoint=%s request_id=%s transport=%s method=POST status=%s duration_ms=%s telegram_user_id=%s error_code=%s",
+            "miniapp_api endpoint=%s request_id=%s transport=%s method=POST status=%s duration_ms=%s error_code=%s",
             endpoint,
             request_id or "-",
             transport,
             status,
             int((time.time() - started_at) * 1000),
-            safe_user_id,
             error_code or "-",
         )
 

@@ -289,7 +289,6 @@ def _classic_text_latency_bucket(elapsed_ms: int) -> str:
 
 def _safe_classic_text_log_fields(*, telegram_user_id: int | None, session_id: int | None = None, question_id: int | None = None, elapsed_ms: int | None = None, status: str = "ok") -> str:
     fields = []
-    if telegram_user_id is not None: fields.append(f"telegram_user_id={telegram_user_id}")
     if session_id is not None: fields.append(f"session_id={session_id}")
     if question_id is not None: fields.append(f"question_id={question_id}")
     if elapsed_ms is not None:

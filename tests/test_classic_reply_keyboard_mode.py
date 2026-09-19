@@ -216,7 +216,7 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
             status="accepted",
         )
 
-        self.assertIn("telegram_user_id=1001", fields)
+        self.assertNotIn("telegram_user_id=", fields)
         self.assertIn(f"session_id={self.session_id}", fields)
         self.assertIn("question_id=1", fields)
         self.assertIn("elapsed_ms=499", fields)

@@ -17,7 +17,6 @@ class HandlerLatency:
         self.handler = handler
         self.command = command
         self.callback_prefix = callback_prefix
-        self.telegram_user_id = telegram_user_id
         self.session_id = session_id
         self.status = "ok"
         self.error_code: str | None = None
@@ -68,8 +67,6 @@ class HandlerLatency:
             fields.append(f"command={self.command}")
         if self.callback_prefix:
             fields.append(f"callback_prefix={self.callback_prefix}")
-        if self.telegram_user_id is not None:
-            fields.append(f"telegram_user_id={self.telegram_user_id}")
         if self.session_id is not None:
             fields.append(f"session_id={self.session_id}")
         logger.info("%s %s", HANDLER_START_LOG_PREFIX, " ".join(fields))
@@ -95,8 +92,6 @@ class HandlerLatency:
             fields.append(f"command={self.command}")
         if self.callback_prefix:
             fields.append(f"callback_prefix={self.callback_prefix}")
-        if self.telegram_user_id is not None:
-            fields.append(f"telegram_user_id={self.telegram_user_id}")
         if self.session_id is not None:
             fields.append(f"session_id={self.session_id}")
         if self.error_code:
