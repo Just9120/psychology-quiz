@@ -163,5 +163,3 @@ def build_answer_feedback(conn, session_id: int, question_id: int, selected_opti
         "content_sha256": content["content_sha256"],
         "snapshot_provenance": content["snapshot_provenance"],
     }
-
-
