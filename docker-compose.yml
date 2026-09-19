@@ -1,6 +1,9 @@
 services:
   psych_quiz_bot:
-    build: .
+    build:
+      context: .
+      args:
+        APP_REVISION: ${APP_REVISION:-UNSET}
     container_name: psych_quiz_bot
     restart: unless-stopped
     env_file:
@@ -13,13 +16,19 @@ services:
       - "127.0.0.1:8090:8090"
     environment:
       MINIAPP_LEGACY_API_ENABLED: "false"
+      APP_REVISION: ${APP_REVISION:-UNSET}
 
   psych_quiz_miniapp_api:
-    build: .
+    build:
+      context: .
+      args:
+        APP_REVISION: ${APP_REVISION:-UNSET}
     container_name: psych_quiz_miniapp_api
     restart: unless-stopped
     env_file:
       - .env
+    environment:
+      APP_REVISION: ${APP_REVISION:-UNSET}
     command: ["uvicorn", "app.miniapp_fastapi_runtime:app", "--host", "0.0.0.0", "--port", "8081"]
     volumes:
       - ./data:/data

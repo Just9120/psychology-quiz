@@ -287,7 +287,7 @@ class MiniAppFastApiTests(unittest.TestCase):
     def test_healthz_returns_expected_payload(self):
         response = self.client.get("/healthz")
         self.assertEqual(200, response.status_code)
-        self.assertEqual({"ok": True, "service": "miniapp_api"}, response.json())
+        self.assertEqual({"ok": True, "service": "miniapp_api", "revision": "UNSET"}, response.json())
         self.assertEqual("application/json", response.headers.get("content-type"))
 
     def test_options_cors(self):
@@ -408,13 +408,19 @@ class MiniAppFastApiTests(unittest.TestCase):
 
 
 class MiniAppFastApiRuntimeEnvTests(unittest.TestCase):
+    def test_health_reports_immutable_build_revision(self):
+        revision = "a" * 40
+        with patch.dict(os.environ, {"BOT_TOKEN": "123:abc", "DB_PATH": "/tmp/dev.sqlite3", "APP_REVISION": revision}, clear=True):
+            app = create_app_from_env()
+        self.assertEqual(revision, TestClient(app).get("/healthz").json()["revision"])
+
     def test_create_app_from_env_success(self):
         with patch.dict(os.environ, {"BOT_TOKEN": "123:abc", "DB_PATH": "/tmp/dev.sqlite3", "MINIAPP_API_INITDATA_TTL_SECONDS": "120", "MINIAPP_API_SLOW_REQUEST_MS": "250", "MINIAPP_API_ALLOWED_ORIGIN": "https://miniapp.example.com"}, clear=True):
             app = create_app_from_env()
         client = TestClient(app)
         response = client.get("/healthz")
         self.assertEqual(200, response.status_code)
-        self.assertEqual({"ok": True, "service": "miniapp_api"}, response.json())
+        self.assertEqual({"ok": True, "service": "miniapp_api", "revision": "UNSET"}, response.json())
 
     def test_create_app_from_env_missing_required_var_fails_fast(self):
         with patch.dict(os.environ, {"DB_PATH": "/tmp/dev.sqlite3"}, clear=True):
