@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -12,6 +11,8 @@ if str(REPO_ROOT) not in sys.path:
 from app.attempt_content import ensure_attempt_snapshots
 from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
+from app.database import connect_database, is_postgres_target, resolve_database_target
+from app.postgres_schema import verify_schema
 
 from dotenv import load_dotenv
 
@@ -74,7 +75,7 @@ def ensure_quiz_sessions_difficulty_mode_column(conn: sqlite3.Connection) -> Non
 
 def resolve_db_path() -> str:
     load_dotenv()
-    return os.getenv("DB_PATH", "/data/quiz.sqlite3").strip() or "/data/quiz.sqlite3"
+    return resolve_database_target()
 
 
 def main() -> int:
@@ -85,7 +86,18 @@ def main() -> int:
         print(f"[ERROR] Не найден файл схемы: {schema_path}")
         return 1
 
-    db_path = Path(resolve_db_path())
+    target = resolve_db_path()
+    if is_postgres_target(target):
+        # Runtime init only verifies; bootstrap/import is an explicit operation.
+        try:
+            with closing(connect_database(target)) as conn:
+                verify_schema(conn)
+            print("[OK] PostgreSQL schema verified; no migration performed.")
+            return 0
+        except Exception as error:
+            print("[ERROR] PostgreSQL verification failed: " + type(error).__name__)
+            return 1
+    db_path = Path(target)
     db_path.parent.mkdir(parents=True, exist_ok=True)
 
     try:

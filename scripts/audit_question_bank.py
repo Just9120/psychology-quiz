@@ -4,17 +4,21 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 import json
 import sqlite3
 import sys
 from pathlib import Path
 from typing import Any
+from dotenv import load_dotenv
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.validate_questions import validate
+from app.database import connect_database, is_postgres, is_postgres_target, resolve_database_target
+from app.postgres_schema import verify_schema
 
 TOPICS_PATH = REPO_ROOT / "content" / "topics.json"
 COMPARE_FIELDS = ["external_id", "category", "difficulty", "status", "source_ref", "question_text", "explanation", "options"]
@@ -65,6 +69,10 @@ def load_canonical() -> tuple[list[dict[str, Any]], dict[str, Any]]:
 
 
 def read_only_connection(db_path: str) -> sqlite3.Connection:
+    if is_postgres_target(db_path):
+        conn = connect_database(db_path)
+        conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
+        return conn
     uri = f"file:{Path(db_path).resolve()}?mode=ro"
     conn = sqlite3.connect(uri, uri=True)
     conn.row_factory = sqlite3.Row
@@ -106,7 +114,8 @@ def db_projection(conn: sqlite3.Connection) -> tuple[dict[str, Any], dict[str, A
 
 def compare_db(db_path: str, canonical_inventory: list[dict[str, Any]]) -> dict[str, Any]:
     result: dict[str, Any] = {
-        "db_path": db_path,
+        "db_path": "REDACTED PostgreSQL target" if is_postgres_target(db_path) else db_path,
+        "backend": "postgresql" if is_postgres_target(db_path) else "sqlite",
         "integrity_check": [],
         "foreign_key_check": [],
         "missing_approved_db_rows": [],
@@ -118,9 +127,14 @@ def compare_db(db_path: str, canonical_inventory: list[dict[str, Any]]) -> dict[
         "orphan_option_rows": [],
         "duplicate_external_ids": [],
     }
-    with read_only_connection(db_path) as conn:
-        result["integrity_check"] = [row[0] for row in conn.execute("PRAGMA integrity_check")]
-        result["foreign_key_check"] = [dict(row) for row in conn.execute("PRAGMA foreign_key_check")]
+    with closing(read_only_connection(db_path)) as conn:
+        if is_postgres(conn):
+            verify_schema(conn)
+            result["schema_check"] = "ok"
+            result["integrity_check"] = ["N/A: SQLite physical check; PostgreSQL schema/constraints verified"]
+        else:
+            result["integrity_check"] = [row[0] for row in conn.execute("PRAGMA integrity_check")]
+            result["foreign_key_check"] = [dict(row) for row in conn.execute("PRAGMA foreign_key_check")]
         db_rows, meta = db_projection(conn)
 
     canonical_by_id = {row["external_id"]: row for row in canonical_inventory}
@@ -159,7 +173,7 @@ def has_blockers(report: dict[str, Any]) -> bool:
     db = report.get("sqlite") or {}
     return bool(
         report["structural_errors"]
-        or (db and db.get("integrity_check") != ["ok"])
+        or (db and (db.get("schema_check") != "ok" if db.get("backend") == "postgresql" else db.get("integrity_check") != ["ok"]))
         or (db and db.get("foreign_key_check"))
         or (db and (
             db.get("missing_approved_db_rows")
@@ -193,9 +207,14 @@ def build_report(db_path: str | None = None) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db-path", help="SQLite database to audit in read-only mode")
+    parser.add_argument("--configured-database", action="store_true", help="Read-only audit of DATABASE_URL/DB_PATH; never put credentials in arguments")
     parser.add_argument("--report-path", help="Write machine-readable JSON report")
     args = parser.parse_args()
-    report = build_report(args.db_path)
+    if args.db_path and args.configured_database:
+        parser.error("Choose --db-path or --configured-database")
+    if args.configured_database:
+        load_dotenv()
+    report = build_report(resolve_database_target(require_sqlite_path=True) if args.configured_database else args.db_path)
     print(f"Active question topics: {report['active_topic_count']}")
     print(f"Canonical question rows: {report['canonical_row_count']}")
     print(f"Approved canonical questions: {report['approved_question_count']}")
@@ -207,7 +226,7 @@ def main() -> int:
             print(f"- {err}")
     if report["sqlite"]:
         db = report["sqlite"]
-        print("SQLite read-only audit:")
+        print(f"Database read-only audit: {db['backend']}")
         print(f"- integrity_check: {db['integrity_check']}")
         print(f"- foreign_key_check rows: {len(db['foreign_key_check'])}")
         print(f"- missing approved rows: {len(db['missing_approved_db_rows'])}")

@@ -5,6 +5,8 @@ The caller owns the transaction; commit successful results before replying.
 """
 from __future__ import annotations
 
+from app.database import begin_write
+
 from dataclasses import dataclass
 from typing import Any
 from app.attempt_content import get_attempt_content
@@ -62,8 +64,7 @@ def prepare_quiz(conn, payload: dict) -> PreparedQuiz:
 
 def start_prepared_quiz(conn, *, actor_user_id: int, prepared: PreparedQuiz) -> dict:
     # Serialization starts before abandoning/creating attempts; one active attempt.
-    if not conn.in_transaction:
-        conn.execute("BEGIN IMMEDIATE")
+    begin_write(conn, f"actor:{actor_user_id}")
     abandon_in_progress_sessions_for_user(conn, actor_user_id)
     session_id = start_quiz_session(conn, actor_user_id, prepared.category_id, difficulty_mode=prepared.difficulty)
     if prepared.selected_ids:

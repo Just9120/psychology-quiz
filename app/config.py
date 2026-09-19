@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import os
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from app.database import resolve_database_target
 
 from dotenv import load_dotenv
 
@@ -16,7 +17,7 @@ class Settings:
     bot_username: str | None
     app_env: str
     log_level: str
-    db_path: str
+    db_path: str = field(repr=False)
     mini_app_url: str | None
     admin_telegram_ids: frozenset[int]
     miniapp_api_bind: str
@@ -58,7 +59,7 @@ def load_settings() -> Settings:
     bot_username = os.getenv("BOT_USERNAME", "").strip() or None
     app_env = os.getenv("APP_ENV", "dev").strip() or "dev"
     log_level = os.getenv("LOG_LEVEL", "INFO").strip() or "INFO"
-    db_path = os.getenv("DB_PATH", "/data/quiz.sqlite3").strip() or "/data/quiz.sqlite3"
+    db_path = resolve_database_target()
     mini_app_url = os.getenv("MINI_APP_URL", "").strip() or None
     admin_telegram_ids = _parse_admin_telegram_ids(os.getenv("ADMIN_TELEGRAM_IDS", ""))
     miniapp_api_bind = os.getenv("MINIAPP_API_BIND", "127.0.0.1").strip() or "127.0.0.1"

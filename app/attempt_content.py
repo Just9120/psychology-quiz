@@ -3,10 +3,10 @@ from __future__ import annotations
 
 import hashlib
 import json
-import sqlite3
+from app.database import Connection, begin_write, is_postgres
 
 
-def capture_question(conn: sqlite3.Connection, question_id: int) -> tuple[str, str]:
+def capture_question(conn: Connection, question_id: int) -> tuple[str, str]:
     row = conn.execute(
         """SELECT q.external_id, q.question_text, q.explanation, q.source_ref,
                   c.name, q.difficulty
@@ -30,14 +30,18 @@ def capture_question(conn: sqlite3.Connection, question_id: int) -> tuple[str, s
     return encoded, hashlib.sha256(encoded.encode()).hexdigest()
 
 
-def ensure_attempt_snapshots(conn: sqlite3.Connection) -> None:
+def ensure_attempt_snapshots(conn: Connection) -> None:
     """Idempotent additive migration; caller owns transaction and commit.
 
     Legacy rows capture only the edition still available before content sync.
     Never claim it is the original edition and never recalculate saved answers.
     """
-    if not conn.in_transaction:
-        conn.execute("BEGIN IMMEDIATE")
+    if is_postgres(conn):
+        # PostgreSQL schema/import is explicit, never migrated by a request.
+        if conn.execute("SELECT 1 FROM quiz_session_questions WHERE content_snapshot IS NULL LIMIT 1").fetchone():
+            raise ValueError("Attempt snapshots require migration/recovery")
+        return
+    begin_write(conn)
     columns = {row[1] for row in conn.execute("PRAGMA table_info(quiz_session_questions)")}
     for name in ("content_snapshot", "content_sha256", "snapshot_provenance"):
         if name not in columns:
@@ -63,7 +67,7 @@ def ensure_attempt_snapshots(conn: sqlite3.Connection) -> None:
     """)
 
 
-def get_attempt_content(conn: sqlite3.Connection, session_id: int, question_id: int) -> dict | None:
+def get_attempt_content(conn: Connection, session_id: int, question_id: int) -> dict | None:
     row = conn.execute(
         """SELECT content_snapshot, content_sha256, snapshot_provenance
            FROM quiz_session_questions WHERE session_id=? AND question_id=?""",

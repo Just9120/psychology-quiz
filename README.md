@@ -62,7 +62,7 @@ Repository-visible GitHub Actions are split by responsibility:
 
 Рабочий каталог — корень репозитория. Runtime/CI: Python 3.12, package manager — pip; прямые зависимости фиксирует [requirements.txt](requirements.txt), transitive lockfile отсутствует. Для локальной работы используйте изолированное Python-окружение; команды ниже предполагают, что оно активировано.
 
-Карта: [app](app/) — bot/API/domain code, [miniapp](miniapp/) — текущая статика, [content](content/) — производный учебный контент, [sql](sql/) — SQLite schema, [scripts](scripts/) — init/seed/validators, [tests](tests/) — pytest suite (включая unittest cases). Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
+Карта: [app](app/) — bot/API/domain code, [miniapp](miniapp/) — текущая статика, [content](content/) — производный учебный контент, [sql](sql/) — SQLite/PostgreSQL schemas, [scripts](scripts/) — init/seed/validators, [tests](tests/) — pytest suite (включая unittest cases). Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
 
 Общий quiz backend: [quiz_service](app/quiz_service.py) задаёт setup/state/answer/feedback для проверенного `users.id`; [quiz_runner](app/quiz_runner.py) — переходы попытки. Telegram API проверяет initData отдельно; `miniapp_runner` сохраняет совместимые imports для bot. [Identity migration](app/identity_schema.py) выполняется через canonical init command, сохраняет legacy данные и допускает пользователей без Telegram. Процедура production migration — в [runbook](docs/miniapp-deployment-qa.md#identity-v1-для-pwa).
 
@@ -81,6 +81,8 @@ git diff --check
 python -m app.main
 ```
 
+`DATABASE_URL`, если задан, имеет приоритет над `DB_PATH`; перед SQLite quickstart убедитесь, что он пуст. PostgreSQL init/import и test target — в [storage procedure](docs/postgres-storage.md).
+
 PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $env:TEMP 'quiz-local.sqlite3'`; остальные Python-команды те же. Используйте отдельную тестовую БД. Init/seed берут approved fixtures из content; production data не нужны. Для bot/API нужен тестовый BOT_TOKEN, для validators и DB smoke он не нужен. Значения env имеют приоритет над .env согласно [config](app/config.py); Docker Compose дополнительно задаёт service overrides в [compose](docker-compose.yml).
 
 | Назначение | Canonical команда / условие |
@@ -91,7 +93,7 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 | Python format / lint / typecheck | N/A: отдельных команд нет; whitespace проверяет `git diff --check`. Frontend typecheck — ниже |
 | Python build | N/A отдельная компиляция; runtime image собирает действующая Docker delivery procedure |
 
-Базовые local services — SQLite и FastAPI; live Telegram smoke требует тестовый bot/client. PostgreSQL/pgvector — следующий scope. Яндекс 360 требуется для реального PWA onboarding; synthetic suite использует test mailbox. CI запускает Python behavioral suite и frontend checks; ограничения — в [плане](docs/delivery-plan.md).
+Базовые local services — SQLite и FastAPI; live Telegram smoke требует тестовый bot/client. Подготовительная PostgreSQL storage foundation и проверки описаны в [PostgreSQL storage](docs/postgres-storage.md); production cutover — оставшаяся часть текущей Goal. pgvector остаётся отдельным optional scope. Яндекс 360 требуется для реального PWA onboarding; synthetic suite использует test mailbox. CI запускает Python behavioral suite и frontend checks; ограничения — в [плане](docs/delivery-plan.md).
 
 Owner PWA auth backend поставляется выключенным по умолчанию. Переменные, API contract, mail/session/linking policy и условия включения — в [PWA auth](docs/pwa-auth.md). Новые credentials не заменяют Telegram initData в прежних routes.
 

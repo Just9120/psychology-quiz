@@ -13,6 +13,7 @@ from argon2 import PasswordHasher
 from argon2.exceptions import VerificationError, InvalidHashError
 
 from app.db import create_or_load_user, get_connection
+from app.database import begin_write
 from app.web_config import WebSettings, normalize_email
 
 SESSION_TTL = 7 * 86400
@@ -74,7 +75,7 @@ class WebAuth:
     @contextmanager
     def transaction(self):
         with closing(get_connection(self.db_path)) as conn, conn:
-            conn.execute("BEGIN IMMEDIATE")
+            begin_write(conn, "auth")
             yield conn
 
     def limit(self, bucket: str, maximum: int, window: int) -> None:
@@ -82,7 +83,8 @@ class WebAuth:
         with self.transaction() as conn:
             row = conn.execute("SELECT started_at,count FROM web_auth_limits WHERE bucket=?", (bucket,)).fetchone()
             if row is None or now >= row["started_at"] + window:
-                conn.execute("INSERT OR REPLACE INTO web_auth_limits VALUES(?,?,1)", (bucket, now))
+                conn.execute("""INSERT INTO web_auth_limits VALUES(?,?,1)
+                    ON CONFLICT(bucket) DO UPDATE SET started_at=excluded.started_at,count=1""", (bucket, now))
                 allowed = True
             else:
                 allowed = row["count"] < maximum
@@ -193,8 +195,9 @@ class WebAuth:
             conn.execute("INSERT INTO web_sessions VALUES(?,?,?,?,?)", (digest(token), row["id"], now, now+SESSION_TTL, now))
             # Bound retained sessions for this closed owner application.
             conn.execute("""DELETE FROM web_sessions WHERE account_id=? AND digest NOT IN (
-                SELECT digest FROM web_sessions WHERE account_id=? ORDER BY created_at DESC,rowid DESC LIMIT 10
-            )""", (row["id"], row["id"]))
+                SELECT digest FROM web_sessions WHERE account_id=?
+                ORDER BY CASE WHEN digest=? THEN 0 ELSE 1 END,created_at DESC,digest DESC LIMIT 10
+            )""", (row["id"], row["id"], digest(token)))
         return token
 
     def authenticate(self, conn, token: object, *, csrf: object = None, mutation=False):
@@ -229,7 +232,7 @@ class WebAuth:
     def fresh_identity(self, conn, account) -> None:
         if account["user_id"] is not None:
             return
-        actor = conn.execute("INSERT INTO users DEFAULT VALUES").lastrowid
+        actor = conn.execute("INSERT INTO users DEFAULT VALUES RETURNING id").fetchone()[0]
         conn.execute("UPDATE web_accounts SET user_id=? WHERE id=? AND user_id IS NULL", (actor, account["id"]))
         conn.execute("DELETE FROM web_link_tokens WHERE account_id=?", (account["id"],))
 

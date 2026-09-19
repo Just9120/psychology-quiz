@@ -5,7 +5,7 @@ import hmac
 import json
 import logging
 import re
-import sqlite3
+from app.database import OperationalError, OPERATIONAL_ERRORS
 import time
 import urllib.parse
 from datetime import datetime, timezone
@@ -129,7 +129,9 @@ def _database_busy_response() -> tuple[int, dict[str, str], bytes]:
     return status, headers, body
 
 
-def _is_sqlite_locked_error(exc: sqlite3.OperationalError) -> bool:
+def _is_sqlite_locked_error(exc: Exception) -> bool:
+    if isinstance(exc, OperationalError):
+        return exc.sqlstate in {"55P03", "40P01", "40001"}
     message = str(exc).lower()
     return (
         "database is locked" in message
@@ -316,7 +318,7 @@ def build_literature_topics_response(
             with conn:
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 user_states = _load_literature_progress_by_user(conn, int(user_row["id"]))
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/literature/topics", started_at)
             return _database_busy_response()
@@ -347,7 +349,7 @@ def build_literature_items_response(
             with conn:
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 user_states = _load_literature_item_states_by_user(conn, int(user_row["id"]))
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/literature/items", started_at)
             return _database_busy_response()
@@ -379,7 +381,7 @@ def build_literature_state_response(
             with conn:
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 states = list(_load_literature_progress_by_user(conn, int(user_row["id"])).values())
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/literature/state", started_at)
             return _database_busy_response()
@@ -530,7 +532,7 @@ def build_literature_progress_response(
             with conn:
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 progress = _upsert_literature_progress(conn, int(user_row["id"]), literature_id, reading_status, progress_percent)
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/literature/progress", started_at)
             return _database_busy_response()
@@ -605,7 +607,7 @@ def build_state_response(
                     verified.last_name,
                 )
                 payload = quiz_state(conn, actor_user_id=int(user_row["id"]))
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/state", started_at)
             return _database_busy_response()
@@ -648,7 +650,7 @@ def build_answer_response(
                 result = answer_quiz(conn, actor_user_id=int(user_row["id"]), session_id=req[0],
                                      question_id=req[1], selected_option_index=req[2])
                 return _json(HTTPStatus.OK, result)
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/answer", started_at)
             return _database_busy_response()
@@ -684,7 +686,7 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
                     return _json(status, {"ok": False, "error": str(exc)})
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 state = start_prepared_quiz(conn, actor_user_id=int(user_row["id"]), prepared=prepared)
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/setup", started_at)
             return _database_busy_response()
@@ -710,7 +712,7 @@ def build_setup_options_response(
             with conn:
                 create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 options = quiz_setup_options(conn)
-    except sqlite3.OperationalError as exc:
+    except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/setup-options", started_at)
             return _database_busy_response()
@@ -812,7 +814,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                 status, headers, body = build_literature_state_response(
                     self.db_path, self.bot_token, init_data, max_age_seconds=self.initdata_ttl_seconds
                 )
-        except sqlite3.OperationalError as exc:
+        except OPERATIONAL_ERRORS as exc:
             if not _is_sqlite_locked_error(exc):
                 raise
             _log_locked_db(endpoint, started_at)
@@ -881,7 +883,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                 status, headers, data = build_glossary_next_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
             else:
                 status, headers, data = build_glossary_restart_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
-        except sqlite3.OperationalError as exc:
+        except OPERATIONAL_ERRORS as exc:
             if not _is_sqlite_locked_error(exc):
                 raise
             _log_locked_db(endpoint, started_at)
