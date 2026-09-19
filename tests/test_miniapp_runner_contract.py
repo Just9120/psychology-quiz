@@ -102,7 +102,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         )
         self.assertEqual("invalid_option", result.status)
 
-    def test_stale_question_rejected(self):
+    def test_answer_retry_returns_recorded_outcome(self):
         accepted = submit_miniapp_answer_event(
             self.conn,
             session_id=self.session_id,
@@ -118,8 +118,9 @@ class MiniAppRunnerContractTests(unittest.TestCase):
             question_id=1,
             selected_option_index=0,
         )
-        self.assertEqual("stale_question", stale.status)
-        self.assertEqual(2, stale.expected_question_id)
+        self.assertEqual("duplicate", stale.status)
+        self.assertEqual(0, stale.selected_option_index)
+        self.assertTrue(stale.is_correct)
 
     def test_duplicate_submission_handled_safely(self):
         first = submit_miniapp_answer_event(

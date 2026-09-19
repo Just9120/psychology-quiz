@@ -177,7 +177,7 @@ class MiniAppFastApiTests(unittest.TestCase):
 
         shadow_db = f"{self.db}.expected"
         shutil.copyfile(self.db, shadow_db)
-        with patch("app.miniapp_api.select_random_approved_question_ids_across_active_categories", return_value=[1, 2]):
+        with patch("app.quiz_service.select_random_approved_question_ids_across_active_categories", return_value=[1, 2]):
             expected_status, expected_headers, expected_body = build_setup_response(
                 shadow_db,
                 self.bot_token,

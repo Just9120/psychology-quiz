@@ -2,7 +2,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    telegram_user_id INTEGER NOT NULL UNIQUE,
+    telegram_user_id INTEGER UNIQUE,
     username TEXT,
     first_name TEXT,
     last_name TEXT,

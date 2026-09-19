@@ -488,6 +488,12 @@ Smoke checks:
 - `curl -i https://quiz-api.librechat.online/miniapp/state`
 - `curl -i -X OPTIONS https://quiz-api.librechat.online/miniapp/answer -H "Origin: https://miniapp.librechat.online" -H "Access-Control-Request-Method: POST"`
 
+## Identity v1 для PWA
+
+`scripts/init_db.py` запускает [identity-v1](../app/identity_schema.py) в отдельной SQLite transaction: existing `users.id` остаётся learning actor, `telegram_user_id` становится nullable UNIQUE. Runtime requests не перестраивают users. Миграция сохраняет все значения columns, IDs, indexes/triggers и AUTOINCREMENT high-water mark; FK check до/после, rollback при ошибке и повторный запуск проверены `tests/test_identity_schema.py`. Неизвестная legacy declaration отказывается мигрировать; не исправлять её вручную без reconciliation.
+
+Класс изменения для текущего Telegram-only rollout: BACKWARD_COMPATIBLE_AUTOMATED, до появления web users; нет удаления пользовательских данных. Target и writers — существующий `/opt/psychology-quiz`, Compose `psychology-quiz`, bot/API. Обязательны stop writers, backup с isolated restore, init/seed, полный prior-user fingerprint/snapshot/parity и post-checks из таблицы выше. `app/identity_schema.py` входит в stateful classifier. После начала migration failure требует сверки DB/backup и forward-fix; production restore не автоматизирован. После появления web identities rollback к Telegram-only schema несовместим и не допускается без отдельного плана. PWA credentials/session tables и включение web routes поставляются отдельными следующими этапами; эта migration их не включает.
+
 ## 16) DB migration / upgrade policy
 - `schema.sql` is source of truth for fresh database creation.
 - Runtime `ensure_*` migration helpers are used for selected additive upgrades on existing DBs (for example, missing indexes/columns that can be added safely).

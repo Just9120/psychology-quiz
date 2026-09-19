@@ -61,7 +61,7 @@ while IFS= read -r file; do
     Dockerfile|docker-compose.yml|requirements.txt|app/*|scripts/*|sql/*|content/*|deploy.sh|.github/workflows/deploy-production.yml) NEEDS_RUNTIME=1 ;;
   esac
   case "$file" in
-    app/db.py|app/attempt_content.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*) STATEFUL=1; MIGRATE=1 ;;
+    app/db.py|app/attempt_content.py|app/identity_schema.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*) STATEFUL=1; MIGRATE=1 ;;
   esac
 done <<< "$CHANGED_FILES"
 git merge --ff-only "$EXPECTED_SHA"
