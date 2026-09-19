@@ -1,5 +1,7 @@
 # Content Audit — All Active Question Topics
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 ## Scope
 
 Audited the active question-bank source files under `content/questions/module1/`, `content/questions/module2/`, and `content/questions/module3/`:

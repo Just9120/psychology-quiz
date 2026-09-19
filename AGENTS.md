@@ -1,282 +1,84 @@
-# AGENTS.md
+# Работа в репозитории
 
-## Purpose
+Этот файл — постоянный router и рабочие правила агента. Прочитай его при старте и восстановлении контекста; далее используй прочитанные правила и перечитывай при их изменении или потере нужного контекста. При входе в subtree и смене scope проверяй применимые вложенные `AGENTS.md` / `AGENTS.override.md`. В этот AGENTS.md и документацию репозитория не добавляй внешние ссылки. Для навигации используй относительные Markdown-ссылки на файлы и при необходимости их разделы, особенно в README.md.
 
-This file is the lightweight operating guide for coding agents in this repository.
+## Источники и контекст
 
-It tells the agent what context to read, what to avoid, how to keep changes focused, and when documentation must be updated.
+| Документ | Когда и зачем читать |
+| --- | --- |
+| [README.md](README.md) | Назначение, карта проекта, stack, canonical commands и ссылки на действующие процедуры |
+| [docs/project-spec.md](docs/project-spec.md) | Требования, эпики/features, продуктовые и технические AC, ограничения и решения |
+| [docs/delivery-plan.md](docs/delivery-plan.md) | Current Goal, задачи, findings, состояния AC, Evidence и checkpoint |
+| [Mini App design](docs/miniapp-quiz-runner-design.md), [deployment / QA](docs/miniapp-deployment-qa.md), [content rollout](docs/question_bank_content_rollout.md) | Действующие supporting документы по архитектуре, окружению, поставке и stateful content rollout; исторические разделы не задают текущий scope |
+| [ci-cd-rules.md](ci-cd-rules.md) | При настройке CI/CD и исправлении проблем pipeline |
+| [docs/delivery-plan-archive.md](docs/delivery-plan-archive.md) | Только для завершённой истории, если архив существует |
 
-This file is not the project specification, not the delivery plan, not an implementation guide, and not a replacement for repository documentation.
+При адаптации проверь реальные пути и цели ссылок; не оставляй ссылки на отсутствующие документы и не создавай пустые документы ради таблицы. Commands/settings храни в canonical scripts, README и процедурах. Повседневная работа должна восстанавливаться без внешнего промта. При обычных проверках, merge и routine deploy достаточно действующих процедур; при CI failure сначала изучи logs и отличи ошибку кода от проблемы pipeline.
 
-Keep this file short. Put detailed product, delivery, CI/CD, architecture, runbook, or devtool rules in the referenced documents.
+Сверяй план с файлами, Git/remotes и первичными PR/CI/CD records. Во время реализации читай Current Goal, нужные разделы spec/plan, затронутый код и зависимости; не загружай повторно весь реестр и историю без причины. Spec хранит согласованные требования, план — работу и checkpoint; запись в документе не создаёт новых полномочий. Явно разрешённый scope восстанавливай по запросу и доверенному контексту; неизвестное блокирует только зависимое действие.
 
----
+## Требования, findings и готовность
 
-## Default behavior
+Сохраняй стабильные ID требований/AC и связи изменённых критериев. Spec охватывает весь согласованный проект; текущие статусы не дублируй в нём. В плане сохраняй все findings, включая мусор, дефекты, техдолг, gaps и отложенные проблемы: ID, суть, область/AC, Evidence, влияние/приоритет, действие и обоснование, зависимости, confidence HIGH / MEDIUM / LOW. Действия: FIX / IMPLEMENT / REMOVE / REFACTOR / CONSOLIDATE / DEPRECATE / DOCUMENT / DEFER.
 
-For normal focused tasks:
+Повторный аудит обновляет существующие findings без дублей, с сохранением ID и решений. Отсутствие finding в новом отчёте не означает устранение; закрытие требует подтверждения исправления либо обоснованного признания finding ошибочным. Подробный отчёт и исследовательские материалы в репозиторий не включай.
 
-1. Read this `AGENTS.md` first.
-2. Treat the user task or prepared task prompt as the primary working context.
-3. Before opening additional documentation, decide the minimal context needed.
-4. Read only the files and sections relevant to the requested change.
-5. Inspect only code, tests, configuration, and docs directly related to the task.
-6. Make the smallest safe change that satisfies the task.
-7. Run relevant existing checks when available.
-8. Report what changed, what was checked, and what was not checked.
+AC: BACKLOG — работа не начата; IN_PROGRESS — выполнен не полностью; READY — выполнен в коде, что подтверждают анализ реализации и подходящие автоматические проверки. BLOCKED указывай с причиной. Известный дефект, нарушающий AC, требует пересмотра READY. Ожидание CD не уменьшает готовность кода. Ad-hoc тестирование — по необходимости/запросу; его ожидание не блокирует READY, merge или Goal. Дефекты учитывай как findings.
 
-Do not perform broad audits, large refactors, dependency upgrades, architecture changes, cleanup, CI/CD changes, deployment changes, or documentation rewrites unless explicitly requested.
+Процент готовности проекта/эпиков рассчитывай только по итогам полного аудита по запросу пользователя. Готовность = READY AC / все AC текущего scope × 100%. Продуктовые и технические AC равноправны. Используй проверенный `origin/main`; указывай дату, SHA, числитель, denominator и основание. Незамерженные AC показывай в прогрессе PR/Goal отдельно. Не усредняй проценты эпиков. Неизвестный/нулевой denominator — SPEC gap без выдуманного процента.
 
----
+Каждую аудиторскую оценку считай заново по текущим требованиям, коду и Evidence. Прежняя аудиторская оценка нужна только для сравнения; разницу более 10 процентных пунктов объясни. Нарушение существующего AC не меняет denominator. Пропущенное требование согласованного источника восстанови с объяснением; новое улучшение включай в требования только после согласования. Finding не становится AC автоматически.
 
-## Repository documents
+Во время Goal, после PR и при закрытии Goal обновляй статусы затронутых AC и Evidence с учётом зависимостей, задачи и findings. Процент проекта/эпиков не пересчитывай, в том числе при изменении scope. Последняя аудиторская оценка — snapshot на её дату и SHA; не выдавай её за текущую готовность. RESUME не запускает полный аудит без запроса пользователя.
 
-Typical repository documents:
+Evidence: тип/результат, источник или команда/сценарий, revision/artifact, environment, время и ограничения; для dirty state — соответствующий diff/worktree. Результаты: PASS / PARTIAL / FAIL / PENDING / N/A с основанием. Сохраняй ссылки/ID первичных records, не raw logs. Config подтверждает настройки, tests — проверенные условия; вывод о работающем окружении требует его Evidence. Старый PASS применяй только после проверки соответствия требованиям и версии.
 
-| File | Role |
-|---|---|
-| `README.md` | Repository entrypoint and navigation. |
-| `AGENTS.md` | Lightweight coding-agent routing rules. Read first. |
-| `docs/project-spec.md` | Active product/project source of truth. |
-| `docs/delivery-plan.md` | Active delivery state, active item, next item, blockers, and near backlog. |
-| `docs/delivery-plan-archive.md` | Optional on-demand delivery-history archive. Created only by an explicit archival/reconciliation task. Not active source of truth. |
-| `docs/architecture.md` | Supporting architecture reference and component map. |
-| `docs/ai-coding-workflow.md` | AI-assisted development workflow rules. |
-| `docs/ci-cd-rules.md` | CI/CD and deployment safety boundaries. |
-| `docs/runbooks/*` | Opt-in operational, audit, evidence, rollout, maintenance, or troubleshooting detail. |
-| `docs/context-bundle-builder/MASTER_SPEC.md` | Source of truth only for the Context Bundle Builder utility. |
-| `docs/ai-delivery-infrastructure-plan.md` | Optional plan for AI delivery infrastructure/tooling workstreams. |
+## Goal и проверки
 
-If a referenced document is missing, do not invent its content. State the limitation and continue only with available evidence.
+Пользователь выбирает Goal. До реализации зафиксируй в плане результат, scope/AC или критерии закрытия findings, non-goals, зависимости, DoD, Validation Plan и доступное основание поручения. Явно порученную Goal активируй встроенным инструментом, если он доступен; при продолжении используй существующую. Соблюдай lifecycle инструмента; недоступность сообщи без имитации активации.
 
-This workflow does not use `docs/project-archive.md` as a baseline repository document.
+Работай автономно до DoD. Разбивай Goal на содержательные последовательные PR по связности, зависимостям, риску и проверяемости; отдельный commit не требует отдельного PR. Каждый PR оставляет main в допустимом состоянии; незавершённой функциональности нужен безопасный способ интеграции. Расширение scope, изменение требований/политики, ослабление gates и неразрешённые privileged/destructive operations выноси пользователю. Обычные исправимые failures и conflicts устраняй в той же Goal.
 
----
+Validation Plan: AC/риск, проверка/ожидаемый результат, canonical команда/tool и рабочий каталог, environment, этап, REQUIRED / RECOMMENDED / N/A с основанием. Раздели локальные, CI и расширенные проверки контура; укажи условия их запуска. REQUIRED failure или недоступная обязательная проверка оставляет этап незавершённым; отсутствие доступа не является N/A.
 
-## Project specification reading rule
+Покрывай критичные бизнес-сценарии, ошибки, права доступа, целостность данных и регрессии подходящими unit/integration/E2E tests. Coverage помогает искать gaps, но не доказывает AC. Не задавай универсальный coverage target и не добавляй tests, повторяющие implementation. После дефекта добавляй содержательный regression test, когда применимо. Для текущего изменения выбирай минимально достаточные проверки поведения и affected dependencies; при неясном impact расширяй набор. Расширенную проверку контура выполняй на согласованном этапе; необходимое подтверждение текущих AC не откладывай. Не ослабляй assertions/gates ради green CI.
 
-`docs/project-spec.md` is the active product/project source of truth for humans and reasoning models.
+Перед PR выполни оставшиеся применимые локальные проверки итогового diff. Учитывай уже успешные результаты, если последующие изменения не затронули проверяемый код, зависимости и условия. Полная local validation означает выполнение применимого Validation Plan, а не всех suites проекта. Локальный PASS не заменяет required CI. После достаточных успешных checks расширяй или повторяй проверки только из-за новых изменений, failures или конкретного нерешённого риска.
 
-For coding agents, it is a source to consult only when needed. For ordinary focused implementation tasks, do not read the full file by default.
+## Ветка, commits и PR
 
-Read only the relevant sections of `docs/project-spec.md` when the task changes or depends on:
+Перед изменениями для каждого PR, включая docs PR аудита, проверь фактические Git/GitHub, remotes, divergence, worktrees и protections. Получи свежий `origin/main`; обнови локальный main безопасным fast-forward с сохранением unrelated/unknown user changes. Если это невозможно, сохрани его состояние и создай чистую ветку/worktree от проверенного `origin/main`. Работай в отдельной ветке на каждый PR, зафиксируй base SHA. Для иной default branch используй фактическое имя проекта.
 
-- product scope;
-- new feature behavior;
-- business rules;
-- user-facing behavior;
-- architecture;
-- data/state model;
-- integrations;
-- runtime authority;
-- safety, security, risk, or execution boundaries;
-- acceptance criteria;
-- source-of-truth conflict resolution.
+Для нового repository без исходного commit сначала выполни разрешённый bootstrap, затем создай рабочую ветку с base SHA. Без remote возможна разрешённая локальная подготовка; создание remote и публикация должны входить в scope.
 
-When a reasoning model provides relevant excerpts from `docs/project-spec.md` in the task prompt, treat those excerpts as the primary working context. Open the full file only if the excerpt is insufficient, stale, contradictory, or the task explicitly requires broader source-of-truth reconciliation.
+После каждой завершённой узкой задачи выполни необходимые проверки и создай commit. До завершения scope конкретного PR и полной применимой local validation работай локально. Затем выполни self-review, актуализируй документацию/план, сделай initial push и создай PR с результатом, AC, проверками и ограничениями. Завершения всей Goal перед первым PR ждать не нужно.
 
-Future or deferred sections do not authorize implementation by themselves. Active implementation scope must come from the current user task and, when applicable, `docs/delivery-plan.md`.
+Подтверждённые CI/review failures собирай в batch, исправляй и проверяй локально; отправляй один сгруппированный push на каждый цикл. Повторный self-review охватывает исправления и их влияние; полный review повторяй только при соответствующем изменении scope или риска. Число необходимых циклов не ограничено. Необходимое обновление base допускается с сохранением user changes и повторной применимой validation. Speculative pushes не допускаются. Hotfix может иметь сокращённый flow, но сохраняет обязательные safety/CI/deployment gates.
 
----
+После каждого push дождись required checks/review актуальной revision из предусмотренных источников. Разбери failures, cancellations и skips: skip допустим только при подтверждённой неприменимости. Self-review не заменяет required approval. При выполненных gates и необходимых правах самостоятельно доведи PR до merge, соблюдая protections.
 
-## Delivery plan reading rule
+Для ожидания CI/CD используй доступный wait или разумные интервалы с увеличением при неизменном состоянии. Успех checks своди к краткому результату; logs читай по failure и нужному фрагменту, расширяя при необходимости. Не запускай workflow ради получения статуса.
 
-Use `docs/delivery-plan.md` to determine:
+Разрешённый аудит завершай одним отдельным docs PR с актуализированными spec/plan, по тому же Git/validation flow. После merge покажи аудиторскую оценку с её датой и SHA, findings и эпики/AC для выбора следующей Goal. Read-only аудит ограничивается отчётом.
 
-- the current checkpoint or milestone;
-- the active delivery item;
-- the next recommended item;
-- current blockers;
-- near backlog;
-- item-specific acceptance criteria and validation notes.
+## Поставка и очистка
 
-For implementation tasks, update `docs/delivery-plan.md` only when the task changes delivery state, completes an item, blocks an item, splits an item, cancels an item, supersedes an item, changes the current next recommended item, or creates a new tracked item.
+После каждого merge подтверди его в GitHub, получи свежий `origin/main` и безопасно синхронизируй локальный main по правилу выше, проверив результат интеграции. Затем дождись applicable delivery flow: для runtime изменений — CD на целевой VPS с expected merge revision/artifact, обязательными environment gates, проверкой запущенной версии, health/readiness и прикладными smoke checks. Для изменений без deployment CD неприменим по scope PR/DoD.
 
-Do not turn `docs/delivery-plan.md` into a historical journal. Historical checkpoints, old PR notes, long status chains, and old delivery narrative should be moved to `docs/delivery-plan-archive.md` only when an explicit archival or reconciliation task asks for it.
+Исполняй проверенную проектную процедуру: установи точный target, artifact/config, preconditions и отсутствие конфликтующей поставки. Сохраняй secrets и persistent state. Не обходи approvals, host verification и recovery gates; неизвестный target блокирует действие. При failed post-check останови дальнейшее продвижение и примени согласованную recovery strategy; содержательный hotfix в scope остаётся частью Goal.
 
----
+Результат CD устанавливай по первичным records с environment, revision/artifact, временем и итогами обязательных checks. Наличие workflow или ответ endpoint без идентификации версии недостаточны. Отдельные статусы DEPLOY/LIVE и обязательная post-merge запись delivery metadata в main не нужны. Metadata-only follow-up PR не создавай. Недоступный/неуспешный CD остаётся неподтверждённой/незавершённой поставкой.
 
-## Delivery archive and runbook boundary
+Длительный monitoring/observation и speculative reruns на GitHub-hosted Actions требуют отдельного owner approval и проверки остатка included minutes. Неизвестный остаток сообщи. Ограниченные обязательные post-checks входят в поставку.
 
-`docs/delivery-plan-archive.md` is optional historical delivery context.
+После applicable delivery удали созданные для PR локальную/remote ветки и ненужный worktree только после safe deletion: принадлежность этой работе, подтверждённый merge, отсутствие неинтегрированных изменений, нужных локальных файлов и зависимостей активных задач. Учитывай squash/rebase по фактическому результату PR. Уже автоматически удалённую GitHub ветку не восстанавливай; CD не должен зависеть от её существования.
 
-It may be absent in a repository until a reasoning model prepares an explicit task to archive old delivery history from `docs/delivery-plan.md`.
+Следующий PR той же Goal начинай после завершения поставки предыдущего, повторной проверки актуальности main и безопасной синхронизации. Создай новую ветку от актуальной base. При закрытии Goal повтори синхронизацию и проверку оставшихся её веток/worktrees; сохрани чужие и созданные до работы, объясни причины сохранения своих.
 
-Coding agents must not create, read, or modify `docs/delivery-plan-archive.md` for ordinary focused tasks.
+## Checkpoint и завершение
 
-Create, read, or modify `docs/delivery-plan-archive.md` only when the task explicitly asks for historical delivery review, delivery reconciliation, migration from old delivery history, or broad source-of-truth audit.
+Обновляй план в содержательных commits и перед прерыванием: Goal, baseline, branch/base SHA/worktree, выполненное/оставшееся, следующий шаг, известные PR/records, проверки и blockers. До последнего push сохрани условия оставшихся gates, не предсказывая их успех. Достаточно последнего и предыдущего snapshot полного аудита с датами и SHA; не создавай commits ради самообновляющихся SHA/процентов.
 
-Archived delivery items do not authorize implementation by themselves.
+При восстановлении установи связанные PR, merge revision и соответствующие CD records нужного окружения; недостающие ID найди по фактическому Git/GitHub. Не повторяй deploy ради статуса. План может отражать checkpoint до merge; окончательный результат поставки восстанавливается по первичным records независимо от сессии, без обязательного переписывания Markdown.
 
-`docs/runbooks/*` are opt-in detail documents.
-
-Do not read runbooks unless the task explicitly names a runbook or touches the exact operational, audit, evidence, rollout, troubleshooting, or maintenance surface covered by that runbook.
-
-Runbooks and delivery archives must not silently expand active product scope beyond `docs/project-spec.md` and `docs/delivery-plan.md`.
-
----
-
-## Prepared task context
-
-When the user prompt already provides a focused task, delivery item ID, relevant source excerpts, target files, non-goals, and expected checks, treat that prompt as the primary working context.
-
-Use repository documents only to resolve specific uncertainty:
-
-- read `docs/delivery-plan.md` only to verify or update the referenced delivery item;
-- read relevant sections of `docs/project-spec.md` only when product scope, behavior, architecture, safety, data, integrations, or acceptance criteria are affected;
-- read or create `docs/delivery-plan-archive.md` only when the task explicitly requires historical delivery archival or reconciliation;
-- read `docs/ai-coding-workflow.md` only for workflow, PR process, documentation-rule, or AI delivery setup tasks;
-- read `docs/ci-cd-rules.md` only for CI/CD, deploy, Docker, VPS/server, secrets, runtime environment, rollback, or stateful-service tasks;
-- read `docs/context-bundle-builder/MASTER_SPEC.md` only for Context Bundle Builder tasks.
-
-Do not re-read full repository documentation just because it exists.
-
----
-
-## Broad audit and planning tasks
-
-For broad audit, handoff, docs-vs-code audit, architecture review, release review, migration, or source-of-truth reconciliation:
-
-- read the relevant source-of-truth documents;
-- preserve source priority;
-- report docs/code/test drift clearly;
-- distinguish facts from assumptions and recommendations;
-- do not turn findings into implementation unless explicitly requested.
-
----
-
-## Source priority
-
-When sources conflict, use this priority:
-
-1. Explicit user request in the current task.
-2. `docs/project-spec.md` for product scope, requirements, business rules, durable constraints, and acceptance criteria.
-3. `docs/delivery-plan.md` for current delivery state and active work.
-4. `AGENTS.md` and `docs/ai-coding-workflow.md` for AI-assisted workflow and coding-agent rules.
-5. `docs/ci-cd-rules.md` for CI/CD and deployment boundaries.
-6. Devtool specifications only for their own devtool scope.
-7. `docs/architecture.md` as supporting architecture reference where it does not conflict with the product spec.
-8. Current code/configuration as evidence of actual behavior.
-9. Tests and CI as verification evidence.
-10. Runbooks, supporting docs, generated bundles, exports, old notes, and `docs/delivery-plan-archive.md`.
-
-If requirements, architecture, code, and tests conflict, report the conflict. Do not silently rewrite requirements or architecture to match current code or historical notes.
-
----
-
-## Documentation update rules
-
-Update `docs/delivery-plan.md` only when delivery state changes.
-
-Create or update `docs/delivery-plan-archive.md` only when explicitly moving old delivery history out of `docs/delivery-plan.md`, reconciling historical delivery state, or performing a broad delivery-history audit.
-
-Update `docs/project-spec.md` only when the task intentionally changes product scope, business logic, requirements, constraints, data model, integrations, acceptance criteria, or intended behavior.
-
-Update `docs/architecture.md` only when the task intentionally changes architecture, component boundaries, runtime model, or important implementation structure.
-
-Update `docs/ci-cd-rules.md` only when CI/CD or deployment rules intentionally change.
-
-Update `docs/ai-coding-workflow.md` or this `AGENTS.md` only when the task explicitly concerns workflow, coding-agent behavior, or AI delivery infrastructure.
-
-Update `docs/ai-delivery-infrastructure-plan.md` only when that file exists and the task changes AI workflow/tooling adoption state, Context Bundle Builder delivery state, or related validation/evidence.
-
-Do not casually rewrite documentation as a side effect of code work.
-
----
-
-## AGENTS.md edit policy
-
-Do not edit this file during ordinary product/code tasks.
-
-Edit this file only when:
-
-- the user explicitly asks to update coding-agent instructions;
-- the task is specifically about repository workflow or AI delivery setup;
-- repeated agent mistakes need durable routing guidance;
-- a repository-specific command, path, or rule changed and the user asked to persist it.
-
-Keep this file compact. If a rule becomes long, move details to a referenced document and keep only the routing rule here.
-
----
-
-## CI/CD and deployment safety
-
-Do not modify CI/CD, Docker, deploy scripts, server/VPS configuration, secrets, `.env`, stateful services, database migrations, backups, restores, or rollback logic unless explicitly requested.
-
-For CI/CD or deployment tasks, read `docs/ci-cd-rules.md` before making changes.
-
-Never print secret values.
-
-Never add real secrets to code, docs, logs, prompts, tests, examples, generated bundles, or archives.
-
-Standard CI must not deploy.
-
-Standard CD must not perform cleanup, hardening, destructive commands, database maintenance, volume changes, or stateful service recreation unless this is a separate explicit maintenance task.
-
----
-
-## Implementation boundaries
-
-Do not:
-
-- implement unrelated backlog items;
-- expand scope without explicit approval;
-- perform broad refactors unless requested;
-- add production dependencies without justification;
-- change architecture as a side effect of a local fix;
-- rewrite working code only for style;
-- remove backward compatibility unless requested;
-- change public behavior without checking relevant requirements;
-- treat generated files, delivery archives, logs, or old notes as source of truth;
-- introduce persistence, queues, caches, migrations, or external services as a side effect of unrelated work.
-
-Prefer small, focused, reviewable changes.
-
----
-
-## Repository-specific commands
-
-Use existing project commands where available.
-
-```text
-Install:
-  pip install -r requirements.txt
-
-Lint:
-  N/A — no dedicated lint command configured. Use git diff --check for whitespace/merge-marker issues.
-
-Typecheck:
-  N/A — no dedicated typecheck command configured.
-
-Test / validation:
-  python -m compileall app scripts
-  python scripts/validate_questions.py
-  DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/init_db.py
-  DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/seed_questions.py
-  git diff --check
-
-Build:
-  N/A — no separate build step configured for the bot. Mini App static hosting is handled outside runtime deploy scripts.
-
-Run:
-  python -m app.main
-```
-
-If commands are unknown, inspect package/config files and use the smallest relevant checks.
-
-If checks cannot be run, explain why.
-
-Do not introduce heavy testing infrastructure unless explicitly requested.
-
----
-
-## Done means
-
-A task is done when:
-
-- the requested focused change is implemented;
-- the change stays within scope;
-- relevant checks were run or limitations are stated;
-- risky assumptions and source conflicts are called out;
-- required documentation updates were made only when applicable;
-- the final response explains changed files, validation, and remaining risks.
+DONE требует выполненных scope/DoD, обязательных checks/review, merge и applicable delivery всех PR. Исправимый failure не завершает Goal; при внешнем blocker сохрани причину и нужное действие, продолжая независимую работу. Заверши встроенную Goal по её правилам, сообщи результат, выполнение AC/задач, Evidence, PR/поставку и ограничения. Остановись: следующую Goal выбирает пользователь.

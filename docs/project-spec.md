@@ -1,283 +1,235 @@
-# Project Specification
+# PsychologyAtlas — спецификация проекта
 
-## Product goal
-- Проект — Telegram-бот викторины по психологии.
-- Продукт ориентирован на учебную практику и самопроверку.
-- Текущий контур: стабильный Module 1 + запущенный Module 2 в ограниченном scope + первый активный content-scope Module 3 для психологического консультирования.
-- Текущий активный approved банк вопросов: 575 вопросов в 8 topic JSON files.
+## Назначение и границы
 
-## Current product scope
-- **Module 1** — baseline (стабильный рабочий контур), 296 approved questions across five active topics.
-- **Module 2** — уже запущен с двумя активными темами, 171 approved questions total:
-  - `Основы экспериментальной психологии` — 118 approved
-  - `Качественные методы исследования` — 53 approved
-- **Module 3** — открыт только первым активным content-scope по утверждённым source-backed материалам, 108 approved questions:
-  - `Психологическое консультирование` — 108 approved
-- Этот первый scope Module 3 не авторизует широкое расширение Module 3 за пределы доступных согласованных материалов с явной опорой на источник.
-- Активные категории в runtime определяются из БД по `approved`-вопросам, а не хардкодом в UI.
-- Режим работы бота: long polling по умолчанию; опциональный webhook mode доступен только как config-gated infrastructure experiment.
-- Standalone Web UI отсутствует; Telegram Mini App является opt-in UX внутри Telegram и не считается standalone Web UI.
-- RAG/внешняя генерация вопросов во время работы отсутствуют.
+PsychologyAtlas — личная учебная платформа владельца для фундаментального изучения психологии по его программе и материалам. Учебные контуры: тесты, глоссарий, повторение, прогресс, база знаний, литература, домашние задания и практические кейсы. Модули сохраняются как структура программы и metadata; основная навигация ориентирована на дисциплины и темы.
 
-## Out of scope
-- Standalone Web UI вне Telegram Mini App.
-- Webhook как обязательный/единственный production mode; long polling должен сохраняться как default.
-- RAG и внешняя генерация вопросов во время runtime.
-- Расширение Module 2 на новые темы без отдельного согласованного решения.
-- Широкое расширение Module 3 за пределы первой активной категории `Психологическое консультирование` без отдельного согласованного source-backed content batch.
+Поддержка независимого состояния нескольких пользователей нужна в data model с первого этапа. Открытие доступа студентам не является обязательством первого этапа. PWA — стратегический основной клиент; Mini App — быстрый quiz runner; classic Telegram — лёгкий fallback.
 
-## User roles / actors
-- Обычный пользователь Telegram-бота (прохождение викторины и выбор режимов UX).
-- Owner/admin (операционный доступ к скрытой агрегированной аналитике через `/stats`).
+Ни наличие требования, ни supporting RFC не разрешает реализацию. Пользователь выбирает следующий scope; задачи, статусы AC, Evidence и delivery находятся только в [плане](delivery-plan.md). Эта редакция — согласование документации, не полный аудит готовности и не объявление перечисленных функций реализованными.
 
-## Core quiz scenarios
-Поддерживаются отдельные режимы работы:
-- `Конкретная тема`
-- `Микс из выбранных тем`
-- `Все темы`
+## Источники и приоритет
 
-Потоки:
-- `Конкретная тема` → выбор одной категории → выбор количества вопросов → выбор сложности.
-- `Микс из выбранных тем` → мультивыбор категорий → `Готово` / `Сбросить` → выбор количества вопросов → выбор сложности.
-- `Все темы` → выбор количества вопросов → выбор сложности.
+| ID | Источник и область |
+| --- | --- |
+| SRC-01 | Предоставленный пользователем Google Doc, file ID `1V--6vLsM8qSwtPNFQ9MQDp4mW9wlFNufHxxp07tMP1M`; modifiedTime `2026-09-16T11:07:25.174Z`; полностью прочитан через Google Drive 2026-09-19. Разделы источника указаны у каждого эпика ниже. Это согласованный продуктовый и технический intent. |
+| SRC-02 | Явное поручение пользователя 2026-09-19 принять новые workflow-документы и дополнительно перенести весь scope/AC из SRC-01. Разрешает документацию, не реализацию платформы. |
+| SRC-03 | Прежняя репозиторная спецификация на `ddc661172b50f549a8e1ef4ef8ff5ab54152ae64`: сохраняемые правила classic/Mini App совместимости и legacy контента, если они не отменены SRC-01. |
+| SRC-04 | Предоставленные workflow templates от 2026-09-12: [AGENTS.md](../AGENTS.md) и [ci-cd-rules.md](../ci-cd-rules.md). Правила работы и CI/CD; не источник учебных знаний. |
 
-Повторяемость выбранного микса:
-- режим `Микс из выбранных тем` является отдельным рабочим сценарием;
-- выбранный набор тем сохраняется в рамках пользовательской сессии;
-- сценарий post-quiz через inline-кнопки `Пройти еще раз` / `Новая викторина` / `Помощь` не является частью текущего активного UX.
+Явные решения пользователя имеют приоритет. Этот spec задаёт согласованные требования; план — состояние работы. Код/config и tests — Evidence фактической реализации, не основание переписывать intent. Supporting docs и исторические отчёты не расширяют scope.
 
-## UX behavior
-- Используется постоянная клавиатура reply keyboard в личном чате.
-- Меню можно скрыть через `🙈 Скрыть меню`.
-- Во время активной викторины меню скрывается без отдельного уведомления.
-- После завершения викторины итоговый результат автоматически возвращает главное меню.
-- Дополнительный резервный способ восстановления интерфейса — `/start`.
-- Поддерживаются режимы чтения:
-  - `Обычный`
-  - `Бионическое чтение`
+Единственный первичный источник учебных знаний — Google Drive, папка «Психология» и её вложенные материалы. Её точный folder ID — UNSET до проверки inventory в соответствующей Goal. JSON approved content — контролируемое производное содержимое; runtime DB, indexes и Obsidian не являются первичными источниками знаний.
 
-## Content model and question-bank rules
-- Source of truth банка вопросов: JSON-файлы в репозитории.
-- Learning contours: tests/questions, glossary/terms, and a literature reading-tracker scaffold.
-- Tests/questions contour uses `content/questions/**/*.json` as canonical content and SQLite as runtime serving layer.
-- Glossary/terms contour uses static `content/glossary/*.json`; source/source_refs/provenance stay internal and are not shown in user-facing chat or Mini App UI.
-- Literature scaffold uses static `content/literature/*.json`; it is content/validation scaffolding until separate source-backed runtime work is explicitly authorized.
-- Future Literature / Reading Tracker runtime boundaries are documented in `docs/literature_runtime_rfc.md`; that RFC is supporting detail and does not activate runtime scope by itself.
-- Рабочие директории:
-  - `content/questions/module1/`
-  - `content/questions/module2/`
-  - `content/questions/module3/`
-- Категории хранятся отдельными JSON-файлами в соответствующих module-директориях.
-- Базовая схема элемента вопроса:
-  - `id`
-  - `category`
-  - `source_ref`
-  - `difficulty`
-  - `status`
-  - `question`
-  - `options`
-  - `correct_option_index`
-  - `explanation`
-- В SQLite загружаются только записи со статусом `approved`.
-- Контент банка вопросов должен быть на русском языке.
-- Вопросы без подтвержденной опоры на источник добавлять нельзя.
-- Интернет не используется как первичный источник для наполнения банка вопросов.
-- Приоритет источников для нового контента:
-  1. папка `Психология` с исходными лекциями, транскрибациями, презентациями и практиками;
-  2. текущий банк вопросов в репозитории;
-  3. Obsidian/пересобранная база знаний как вторичный синтетический слой.
-- Практико-ориентированные вопросы встраиваются в профильные категории, а не выделяются в отдельную рабочую категорию.
+## Эпики, business rules и AC
 
+Каждая строка связывает стабильный requirement ID с AC. Формат критерия: условие/действие → наблюдаемый результат; затем способ проверки. AC со словом «позже» или «опционально» сохраняют условный scope исходного требования; их включение в implementation Goal требует решения. Числовые SLO, coverage targets, алгоритмы и новая политика доступа здесь не вводятся.
 
-Current approved content inventory:
+### E01 — Platform/data foundation и клиенты
 
-| Module | Topic/category | JSON source file | Approved questions |
-|---|---|---|---:|
-| Module 1 | `Физиология ВНД` | `content/questions/module1/fiziologiya_vnd.json` | 57 |
-| Module 1 | `Общая психология` | `content/questions/module1/obschaya_psihologiya.json` | 56 |
-| Module 1 | `Психофизиология` | `content/questions/module1/psihofiziologiya.json` | 71 |
-| Module 1 | `Физиология человека` | `content/questions/module1/fiziologiya_cheloveka.json` | 55 |
-| Module 1 | `Введение в профессию` | `content/questions/module1/vvedenie_v_professiyu.json` | 57 |
-| Module 2 | `Основы экспериментальной психологии` | `content/questions/module2/osnovy_eksperimentalnoy_psihologii.json` | 118 |
-| Module 2 | `Качественные методы исследования` | `content/questions/module2/kachestvennye_metody_issledovaniya.json` | 53 |
-| Module 3 | `Психологическое консультирование` | `content/questions/module3/psychological_consulting.json` | 108 |
-| **Total** | 8 active topics | `content/questions/**/*.json` | **575** |
+Источник SRC-01: «Общая концепция», «Пользователи», «Клиенты», «User model», «Основные технологии», «Клиенты и учебное состояние».
 
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-FND-01 / AC-FND-01 | При работе владельца учебные сущности организованы по дисциплинам/темам с module metadata; классификация не создаёт дубликаты исходных файлов. Проверка: data fixtures и навигационный сценарий. |
+| R-FND-02 / AC-FND-02 | Два пользователя работают с attempts, progress, errors, repetitions, bookmarks, assignments и literature state → состояние каждого независимо, approved content общий. Проверка: integration tests чтения/записи и попыток доступа к чужим данным. |
+| R-FND-03 / AC-FND-03 | Запуск целевой платформы → Python/FastAPI обслуживает общий backend; bot/content processing/server analytics остаются на Python без отдельного решения о другом языке. Проверка: entrypoints, dependency manifests и API smoke. |
+| R-FND-04 / AC-FND-04 | Сборка PWA и Mini App → React + TypeScript + Vite, оба клиента используют общий банк и backend state. Проверка: build/typecheck и cross-client contract tests. |
+| R-FND-05 / AC-FND-05 | Перенос runtime с SQLite → PostgreSQL сохраняет identities, attempts и пользовательский прогресс; повтор/ошибка migration не уничтожает исходные данные. Проверка: migration fixtures, reconciliation и согласованный recovery rehearsal до production. |
+| R-FND-06 / AC-FND-06 | Пересборка approved content/runtime indexes/embeddings → первичные Drive sources и user learning state не изменяются. Проверка: integration fixtures и сравнение состояния до/после. |
+| R-FND-07 / AC-FND-07 | Один ответ повторно отправлен из разных клиентов → учитывается один раз; потеря связи не превращается в неправильный ответ. Проверка: повторные/конкурентные API requests и network-failure scenario. |
+| R-FND-08 / AC-FND-08 | Клиент закрыт или сервер перезапущен после сохранения ответа → ответы и прогресс восстанавливаются. Проверка: restart/integration scenario для всех использующих состояние клиентов. |
+| R-FND-09 / AC-FND-09 | PWA открыта на desktop/mobile без Telegram → доступны разрешённые учебные разделы и навигация; offline не обязателен. Проверка: browser smoke на обоих размерах и без Telegram context. |
+| R-FND-10 / AC-FND-10 | Пользователь использует Mini App/classic fallback → правила ответа, scoring и доступного прогресса согласованы с PWA; сложные knowledge/literature/analytics flows не переносятся в classic без отдельного решения. Проверка: cross-client сценарии и review scope. |
 
-## Telegram UX modes
-- `classic` — текущий и дефолтный UX в Telegram-чате; `/quiz` остаётся default chat entry point.
-- `classic_reply_keyboard` — preferred production implementation внутри classic chat UX: ответы и действие `Далее` отправляются как обычные Telegram message updates через bottom reply keyboard buttons.
-- `classic_inline_callback` — legacy/fallback implementation classic chat UX: ответы и переходы идут через inline callback-кнопки в сообщениях.
-- `miniapp_test` — opt-in режим Telegram Mini App runner внутри Telegram; доступен через `/ui` / `🚀 В окне` и не включается по умолчанию.
-- `miniapp_default` — потенциальный будущий режим по умолчанию для Mini App, сейчас неактивен и не реализован.
+### E02 — Sources, provenance и content pipeline
 
-Ограничения и позиционирование:
-- Classic chat UX остаётся дефолтным режимом.
-- В production для classic chat UX рекомендуется reply keyboard mode, потому что answer controls живут в нижней Telegram-клавиатуре и не засоряют сообщения викторины inline-кнопками.
-- Inline callback mode сохраняется только как legacy/fallback для classic chat UX.
-- Telegram Mini App не является PWA.
-- Telegram Mini App не является standalone Web UI.
-- Mini App остаётся отдельным opt-in UX и не заменяет текущий bot UX как default mode.
-- `/quiz` остаётся дефолтным классическим режимом.
-- Opt-in входы в Mini App: `/ui` и кнопка нижнего меню `🚀 В окне`.
-- `/ui` и `🚀 В окне` открывают setup/contour chooser даже если у пользователя активен normal quiz runner; в этом случае warning о завершении текущей активной попытки остаётся ожидаемым.
-- Chat `📚 Глоссарий` / `/glossary` остаётся отдельным Telegram chat glossary quiz и не открывает Mini App contour chooser.
-- Фактический launch Mini App выполняется через fresh inline WebApp-кнопку `🚀 Открыть викторину`, сгенерированную текущим `/ui`-контекстом.
-- Persistent reply keyboard не должен хранить stale `web_app` URL/launch-context для Mini App; `/ui` генерирует fresh launch context.
+Источник SRC-01: «Google Drive», «Обновление источников», «Provenance», «Content pipeline», «Обновление контента».
 
-Реализованный MVP Mini App:
-- поддерживает setup/contour chooser, state hydration, отображение вопроса, отправку ответа, feedback, переход к следующему шагу и completed/result экран;
-- на setup entrypoint показывает два пользовательских контура: `Тесты по темам` и `Глоссарий`;
-- контур `Тесты по темам` использует обычный question-bank runner;
-- контур `Глоссарий` использует glossary quiz по static `content/glossary/*.json` через существующие Mini App API endpoints (`GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`, `GET /miniapp/state`);
-- setup поддерживает quiz modes:
-  - `single`;
-  - `selected_mix`;
-  - `all`;
-- setup поддерживает выбор категорий, когда применимо;
-- setup поддерживает выбор количества вопросов:
-  - `5`;
-  - `10`;
-  - `15`;
-  - `all available`;
-- setup поддерживает выбор сложности:
-  - `any`;
-  - `easy`;
-  - `medium`;
-  - `hard`;
-- Mini App runner остаётся separate opt-in flow внутри Telegram и не становится default UX.
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-SRC-01 / AC-SRC-01 | Обработка «Психологии» → учитываются вложенные транскрипты лекций/практик, glossary, PDF, задания и списки литературы; пустые папки пропускаются. Проверка: nested Drive inventory fixtures, pagination и empty-folder case. |
+| R-SRC-02 / AC-SRC-02 | Материалы одного занятия представлены разными форматами/папками → они связаны metadata без дублирования учебного занятия и исходного файла. Проверка: fixture с транскриптом, презентацией, glossary и практикой. |
+| R-SRC-03 / AC-SRC-03 | Источник новый, неизменённый или изменённый → pipeline различает эти состояния и показывает обработанное/необработанное; повторная обработка обновляет производные связи без потери прогресса. Проверка: incremental processing tests. |
+| R-SRC-04 / AC-SRC-04 | Производный материал предлагается к approval → есть Drive file ID и использованная редакция; страница/timestamp/фрагмент сохранены, когда доступны. Неподтверждённое не публикуется как approved. Проверка: provenance validator и отрицательные fixtures. |
+| R-SRC-05 / AC-SRC-05 | Источники противоречат друг другу → сведения не объединяются автоматически; материал направляется на проверку источника. Проверка: conflict fixture и review record. |
+| R-SRC-06 / AC-SRC-06 | Книга присутствует только в библиографии → её содержание не используется как знание без доступного source corpus; интернет, LLM, Obsidian и старые вопросы не подменяют corpus. Проверка: source review и negative approval cases. |
+| R-SRC-07 / AC-SRC-07 | Новый файл появился в Drive → он не публикуется автоматически; coding/reasoning agent подготавливает и проверяет derivative content до approval через repository/content pipeline. Проверка: publication-state tests и review trail. |
+| R-SRC-08 / AC-SRC-08 | Пользователь проходит тест либо редактируется контент → runtime не генерирует вопросы через LLM; публичного editor UI и ручной DB-правки как пути публикации нет. Проверка: runtime dependencies/routes и publication tests. |
 
-Category initialization model для Mini App setup:
-- В момент `/ui` бот загружает активные категории из SQLite runtime-слоя.
-- Бот формирует компактный setup context с `category_id` и именами категорий.
-- Бот передаёт setup context в Mini App через encoded URL query parameter.
-- Mini App рендерит категории из URL setup context.
-- Хардкод категорий во frontend Mini App запрещён.
-- Setup context — только UI rendering context, не source of truth.
-- Persistent reply keyboard не должен хранить `web_app` URL/launch-context для Mini App; launch URL/context генерируется fresh через `/ui`.
+### E03 — Тесты и качество банка
 
-Payload contract summary (Mini App → bot):
-- `type`: `quiz_setup`;
-- `quiz_mode`: `single | selected_mix | all`;
-- `category_ids`: `number[]`;
-- `question_count`: `5 | 10 | 15 | null`;
-- `difficulty`: `any | easy | medium | hard`;
-- `question_count = null` означает «все доступные вопросы».
+Источник SRC-01: «Банк вопросов», «Аудит качества банка», «Режимы тестирования», «Объяснения и связь с базой знаний».
 
-Trust boundary:
-- Payload из Mini App считается недоверенным client input.
-- URL setup context может быть изменён на стороне клиента.
-- Бот обязан валидировать payload server-side перед запуском квиза.
-- В момент приёма payload бот обязан повторно проверять активность категорий и доступность вопросов.
-- `/stats` остаётся скрытой owner-only private-chat-only агрегированной аналитикой и не переносится в Mini App.
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-QUIZ-01 / AC-QUIZ-01 | Запуск теста → выбираются только approved вопросы; темы получаются из фактического backend content, не hardcoded во frontend. Проверка: смешанные статусы и изменение набора тем в integration fixtures. |
+| R-QUIZ-02 / AC-QUIZ-02 | Выбрана тема, микс или все темы и количество/все доступные вопросы → выдача соответствует scope; неверные или недоступные категории отклоняются server-side. Проверка: setup/selection tests, empty-content и invalid-ID cases. |
+| R-QUIZ-03 / AC-QUIZ-03 | Выбрана обычная random выборка → она остаётся доступной; adaptive режим учитывает недавние вопросы, ошибки и слабые темы, избегает постоянных повторов и не исключает повторение по расписанию. Проверка: history fixtures; точная policy — Q-03. |
+| R-QUIZ-04 / AC-QUIZ-04 | Пользователь выбирает тест → easy/medium/hard допустимы как metadata, но не обязательный главный шаг выбора. Поздняя статистическая калибровка не выводит общую сложность из ошибки одного человека. Проверка: UX scenario; statistical rule — Q-03. |
+| R-QUIZ-05 / AC-QUIZ-05 | Пользователь отвечает → видит правильный ответ и краткое explanation, если оно есть; доступен переход к связанной knowledge topic и исходному материалу с проверкой доступа. Проверка: answer/API и navigation tests, отсутствующее explanation. |
+| R-QUIZ-06 / AC-QUIZ-06 | Аудит существующих questions и glossary → проверены смысл, ответы, объяснения, неоднозначность, дубли и sources; спорное/неподтверждённое явно отмечено, source_ref/approved не считаются доказательством сами по себе. Проверка: source-backed review ledger и regression cases. |
+| R-QUIZ-07 / AC-QUIZ-07 | Исправляется банк → рабочий legacy контент сохраняется до контролируемой замены; практические вопросы остаются в своей предметной теме, учебная история не искажается. Проверка: rollout/parity tests совместно с AC-PROG-04. |
 
-Out of scope для первого Mini App MVP:
-- standalone Web UI;
-- PWA;
-- web analytics;
-- account area;
-- `/stats` внутри Mini App;
-- DB schema changes;
-- persistence пользовательского UI preference;
-- изменения Module 1;
-- расширение scope/категорий Module 2;
-- изменения workflow question bank.
+### E04 — Повторение и личный прогресс
 
-## Future Mini App direction
-- Mini App runner MVP реализован и стабилизирован через PR #155–#162.
-- Classic Telegram chat UX остаётся дефолтным; `/quiz` остаётся default entry point.
-- `/ui` остаётся экспериментальным opt-in входом в Mini App.
-- `miniapp_default` остаётся потенциальным будущим режимом и сейчас не активируется.
-- `/stats` остаётся owner-only и вне Mini App на текущем этапе.
-- Следующий этап: расширенный MVP QA и наблюдаемость перед любым обсуждением смены default UX.
-- Детальная эволюция архитектуры и исторические решения зафиксированы в `docs/miniapp-quiz-runner-design.md`.
-- Состояние Mini App клиента считается недоверенным, server-side валидация остаётся авторитативной.
+Источник SRC-01: «Интервальное повторение», «Прогресс».
 
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-PROG-01 / AC-PROG-01 | Есть история ответов пользователя по вопросам и терминам → формируется due-list; ошибочные/неустойчивые знания возвращаются чаще устойчивых, не только по глобальной difficulty. Проверка: deterministic time/history fixtures; алгоритм — Q-03. |
+| R-PROG-02 / AC-PROG-02 | Открыт режим ошибок или повторения на сегодня → показан соответствующий персональный набор; пустая очередь корректно объясняется. Проверка: API/UI cases для двух пользователей и empty queue. |
+| R-PROG-03 / AC-PROG-03 | Пользователь открывает прогресс → видны история, процент правильных ответов, слабые темы и динамика по дисциплинам/темам. Результат попытки отличим от mastery; при недостатке истории нет уверенной оценки знаний. Проверка: aggregation fixtures и UI; mastery policy — Q-03. |
+| R-PROG-04 / AC-PROG-04 | Вопрос/варианты/правильный ответ исправлены или вопрос заменён → прежние attempts сохраняют исходный смысл; новый материал не становится автоматически выученным, повторение учитывает изменение. Проверка: versioned-content migration/regression fixtures; representation — Q-02. |
+| R-PROG-05 / AC-PROG-05 | Запрошен сброс темы/всего обучения → требуется явное подтверждение; чужой прогресс, bookmarks, литература, заметки и прочий user content не удаляются. Проверка: authorization, cancel/confirm и transactional tests. |
+| R-PROG-06 / AC-PROG-06 | Позже вводится mastery → оценка учитывает устойчивость повторения, а не только правильные ответы; формула и достаточность истории согласованы заранее. Проверка: temporal fixtures по принятой Q-03 policy. |
 
-## Mini App API runtime architecture
-- Bot runtime remains responsible for Telegram command/update handling and classic `/quiz` UX.
-- Dedicated FastAPI service is the production runtime for Mini App API endpoints (`/miniapp/state`, `/miniapp/setup-options`, `/miniapp/setup`, `/miniapp/answer`).
-- Static Mini App frontend remains separately hosted over HTTPS (unchanged hosting model).
-- API endpoint contracts remain backward-compatible; migration target is HTTP serving/runtime layer, not quiz business semantics.
+### E05 — Глоссарий
 
-Deployment model (final target):
-- One repository + one VPS/deployment environment + one Docker Compose stack.
-- Separate services/containers (`psych_quiz_bot`, `psych_quiz_miniapp_api`) in Compose.
-- This is **not** multiple services inside one Docker container.
-- Not a separate project/server; operationally coordinated in same deployment environment.
+Источник SRC-01: «Термины».
 
-Current production model:
-- FastAPI is enabled as the production Mini App API service.
-- Production Compose/CD treats both `psych_quiz_bot` and `psych_quiz_miniapp_api` as the intended runtime service set for app runtime restarts.
-- CD must rebuild/recreate both services when runtime code or Mini App API behavior changes.
-- Legacy in-bot `ThreadingHTTPServer` Mini App API path is not the current production serving path.
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-GLO-01 / AC-GLO-01 | Открыт glossary contour → доступен quiz терминов/определений по теме с персональным результатом. Проверка: glossary runtime/API и cross-user tests. |
+| R-GLO-02 / AC-GLO-02 | Термин связан с knowledge → доступны переходы к atomic notes/темам; его история участвует в общей системе повторения. Проверка: link integrity и integration с E04/E06. |
+| R-GLO-03 / AC-GLO-03 | Если выбран дополнительный PWA term-card scope → видны definition, связанные понятия и разрешённые source references. Проверка: browser/access cases. Карточка — опциональное дополнение к quiz. |
 
-Trust model (unchanged):
-- Mini App client remains untrusted.
-- Server-side validation/authorization/state transitions remain authoritative.
-- `/quiz` classic behavior remains unchanged and default.
+### E06 — Knowledge layer и Obsidian
 
-Migration non-goals (explicit):
-- no PostgreSQL introduction in this sprint;
-- no Redis;
-- no FastAPI rewrite for Telegram bot handlers;
-- no frontend rewrite;
-- no scoring/session schema changes.
+Источник SRC-01: «Knowledge layer», «Obsidian».
 
-## Data and runtime state model
-- SQLite не является source of truth; SQLite — runtime layer хранения и выдачи данных.
-- Обновление runtime-слоя выполняется через `scripts/seed_questions.py`.
-- Ручное редактирование SQLite как способ обновления контента запрещено.
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-KNW-01 / AC-KNW-01 | Обработан source-backed материал → summaries и atomic notes самостоятельны по смыслу, связаны между собой и с sources, пригодны для навигации/retrieval. Проверка: provenance/link validator и содержательный source review. |
+| R-KNW-02 / AC-KNW-02 | Владелец открывает knowledge section в PWA → доступны статьи и применимые связи с понятиями, questions, glossary, sources и literature. Доступ других пользователей определяется Q-01. Проверка: navigation/access tests. |
+| R-KNW-03 / AC-KNW-03 | Экспортирована база → Markdown можно открыть как Obsidian Vault, links разрешаются, atomic notes сохраняют смысл. Проверка: export fixture/link check и opening smoke. |
+| R-KNW-04 / AC-KNW-04 | Vault обновляется → личные заметки владельца сохраняются, не попадают автоматически в approved content; обратная синхронизация правок отсутствует в обязательном scope. Проверка: update fixture с personal files. |
+| R-KNW-05 / AC-KNW-05 | Obsidian не установлен/не открыт → Telegram и PWA продолжают работать с knowledge backend. Проверка: runtime/dependency isolation scenario. |
 
-## Admin / owner-only operational features
-- `/stats` — скрытая owner-only аналитика.
-- `/stats` не является частью публичного UX и не должен отображаться в публичном меню/списке команд.
-- Доступ к `/stats` контролируется через `ADMIN_TELEGRAM_IDS`.
-- Авторизация основана на numeric Telegram user id.
-- `/stats` работает только в личном чате.
-- `/stats` возвращает только агрегированные метрики.
-- `/stats` не должен раскрывать персональные списки пользователей.
-- Реальный production owner Telegram id не должен фиксироваться в документации/репозитории.
+### E07 — Поиск и optional RAG
 
-## CI/CD and operational process
-Основной путь синхронизации (CI/CD-first):
-1. подготовить изменения в репозитории и оформить PR;
-2. выполнить merge в `main`;
-3. по `push` в `main` автоматически запускается GitHub Actions CI workflow (validation/checks);
-4. repository-visible production CD workflow/deploy script may run only in the configured deployment environment with Repository Secrets and CI/CD safety boundaries; do not invoke or change it from ordinary product/docs tasks;
-5. после merge необходимо проверить факт деплоя по deployed commit/runtime state целевой среды, если runtime deployment matters.
+Источник SRC-01: «Semantic search», «Optional RAG», «Основные технологии».
 
-Логическая модель runtime-синхронизации (для deployment environment):
-- content changes → seed (autoseed).
-- Изменения в `app/`, `scripts/`, `sql/` и Docker-related слоях → build/seed/restart по условиям deploy logic среды.
-- Docs-only changes не требуют runtime sync (no-op/почти no-op).
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-SRH-01 / AC-SRH-01 | Запрос по словам или смыслу, включая перефразирование лекции → возвращаются релевантные доступные материалы с source refs без обязательного AI-ответа. Проверка: curated retrieval set, empty/no-access cases; числовой target — UNSET. |
+| R-SRH-02 / AC-SRH-02 | Строится semantic index → используется PostgreSQL/pgvector как пересобираемый derivative; отдельная vector DB не обязательна. Проверка: rebuild и source/user-state invariants. |
+| R-SRH-03 / AC-SRH-03 | Рассматривается другая vector DB → решение основано на измеренном corpus/performance ограничении PostgreSQL. Проверка: decision record до изменения архитектуры; текущая миграция к Qdrant не запрошена. |
+| R-SRH-04 / AC-SRH-04 | Позже включается RAG → ответы основаны на retrieved материалах, сохраняют sources, используют ограниченный контекст; основной UX работает без LLM API. Проверка: grounding/access/failure cases. |
+| R-SRH-05 / AC-SRH-05 | RAG предлагается как постоянная production feature → отдельно оценены полезность и tokenomics, получено решение о включении. Проверка: decision record; provider/model/budget — Q-05. |
 
-Fallback path:
-- При необходимости деплой/восстановление инициируется через штатные механизмы deployment environment.
-- Ручное server-side вмешательство допускается только как аварийный сценарий, а не основной operational path.
+### E08 — Домашние задания
 
-## Security / privacy constraints
-- Не коммитить реальные секреты и production owner Telegram id.
-- Owner-only аналитика должна оставаться ограниченной списком `ADMIN_TELEGRAM_IDS`.
-- Публикуемые метрики `/stats` должны быть агрегированными и безопасными с точки зрения приватности.
+Источник SRC-01: «Учебные задания».
 
-## Anti-patterns
-- Нельзя объявлять SQLite источником истины для банка вопросов.
-- Нельзя обновлять контент через прямые правки SQLite.
-- Нельзя добавлять вопросы без внятного `source_ref` и подтвержденной опоры на источник.
-- Нельзя смешивать в банке вопросов нерелевантный PM-layer.
-- Нельзя расширять Module 2 на новые темы в рамках «широких» PR без отдельного решения.
-- README — компактный операционный обзор; детальные нормы фиксируются в этом документе.
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-HWK-01 / AC-HWK-01 | Задание обнаружено в Drive → доступно в отдельном учебном контуре по module/discipline/topic независимо от исходной папки, со ссылкой на source. Проверка: ingestion/navigation fixtures. |
+| R-HWK-02 / AC-HWK-02 | Пользователь меняет состояние задания → сохраняются «не начато», «в работе», «выполнено» только для него; неверное состояние/чужое изменение отклоняется. Проверка: state/authorization tests. |
+| R-HWK-03 / AC-HWK-03 | Для задания существуют связанные материалы → доступны связи с темой, knowledge и другими материалами; отсутствие применимой связи не выдумывается. Проверка: link integrity и access cases. |
 
-## Current roadmap / next-scope rules
-1. Поддерживать практику синхронизации документации с фактическим состоянием репозитория после содержательных изменений.
-2. Продолжать узкие, grounded PR в рамках текущего запущенного scope Module 2 и синхронизировать документацию при открытии новых активных категорий.
-3. Выбор следующей дисциплины Module 2 фиксировать отдельно, отдельным согласованным решением и отдельным PR.
-4. Поддерживать контентный рост малыми целевыми итерациями; при контентных изменениях обновлять docs только точечно для устранения расхождений.
+### E09 — Литература / Reading Tracker
 
-Примечание по фазе:
-- Module 1 остается baseline.
-- Module 2 уже в работе и включает две активные категории, формируемые через approved-вопросы после seed.
+Источник SRC-01: «Reading tracker».
 
-## Open questions
-- На текущем этапе открытых обязательных scope-вопросов нет; расширение Module 2 и возможные новые категории выносятся в отдельные согласованные решения.
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-LIT-01 / AC-LIT-01 | Списки литературы поступили из разных учебных материалов → единый каталог сохраняет module/topic/source связи. Проверка: multi-source ingestion и duplicate review. |
+| R-LIT-02 / AC-LIT-02 | Пользователь отмечает книгу → доступны «не начато», «читаю/слушаю», «прочитано», «отложено» и progress, когда его удобно определить; чужое состояние недоступно. Проверка: state/auth/persistence tests; mapping legacy statuses — Q-04. |
+| R-LIT-03 / AC-LIT-03 | В каталоге текстовая книга или аудиокнига → оба формата поддерживаются; для коммерческого источника достаточно metadata и легального outbound reference без файла в corpus. Содержимое книги не считается доступным знанием. Проверка: format/source fixtures. |
+| R-LIT-04 / AC-LIT-04 | Если выбрана классификация значимости → видны согласованные уровни (например, базовая/важная/дополнительная/углублённая). Проверка: metadata/UI review; конкретная taxonomy не предписана. |
+| R-LIT-05 / AC-LIT-05 | Позже добавляются связи с авторами/atomic notes или PDF/EPUB reader → сохраняются provenance и права; встроенный reader не обязателен для первого среза. Проверка: feature-specific navigation/access cases. |
+
+### E10 — Учебная практика через внешнюю модель
+
+Источник SRC-01: «Моделирование сессии клиент–психолог», «Внешняя модель по подписке», «Voice».
+
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-PRC-01 / AC-PRC-01 | Создан кейс → вводная ученика отделена от роли клиента; допустим вымышленный клиент, но психологические основания и критерии разбора связаны с corpus. Проверка: case schema и source review. |
+| R-PRC-02 / AC-PRC-02 | Экспортирован structured case package → есть кейс, роль, материалы, ограничения и критерии; пакет можно передать внешней модели по подписке без встроенного LLM API. Проверка: export fixtures и manual handoff smoke. |
+| R-PRC-03 / AC-PRC-03 | Идёт упражнение → role instructions исключают подсказки консультанту и показ скрытого контекста как подсказки. Техническая секретность экспортируемого пакета от самого пользователя не обещается. Проверка: package review/scenario. |
+| R-PRC-04 / AC-PRC-04 | Сессия завершена → можно сформировать отдельный transcript-analysis package с инструкциями, материалами и критериями; feedback учебный, не оценка профессиональной компетентности. Проверка: export fixture и copy review. |
+| R-PRC-05 / AC-PRC-05 | Позже выбирается direct API/voice → сначала оцениваются польза/стоимость; voice использует ту же case/evaluation logic. Возврат/хранение transcript не входят в обязательный первый этап. Проверка: decision record и parity tests; Q-05. |
+
+### E11 — Аккаунты и права
+
+Источник SRC-01: «Пользователи», «User model», «Регистрация и доступ».
+
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-AUTH-01 / AC-AUTH-01 | Пользователь регистрируется/входит в PWA по e-mail/паролю → аккаунт не зависит только от Telegram ID; неверные credentials не дают доступ. Проверка: auth integration и negative cases. |
+| R-AUTH-02 / AC-AUTH-02 | Запрошены подтверждение e-mail/восстановление доступа → используются настроенные письма Яндекс 360; недействительное/повторное подтверждение и ошибка отправки обрабатываются без выдачи доступа. Проверка: mail/auth integration; token policy — Q-06. |
+| R-AUTH-03 / AC-AUTH-03 | Пользователь пришёл через sharing или не имеет owner-роли → owner features/личные данные закрыты; guest/student доступ не предполагается до решения. Проверка: role/access matrix; Q-01. |
+| R-AUTH-04 / AC-AUTH-04 | Позже добавлен Google OAuth → связывание с существующим аккаунтом не создаёт отдельный прогресс и не позволяет захватить чужую identity. Проверка: linking/conflict cases; Q-01. |
+| R-AUTH-05 / AC-AUTH-05 | Telegram аккаунт связывается с платформенным → принадлежность подтверждается, состояние не смешивается/не теряется. Проверка: identity migration и ownership tests; точный linking flow — Q-01. |
+
+### E12 — Owner content dashboard
+
+Источник SRC-01: «Owner dashboard», «Обновление контента».
+
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-OWN-01 / AC-OWN-01 | Владелец открывает dashboard → видны counts questions/materials по темам, source coverage, новые/необработанные источники и content gaps. Проверка: inventory/aggregation fixtures. |
+| R-OWN-02 / AC-OWN-02 | У материала нет производных notes/glossary/questions или тема недостаточно покрыта → это различимо без выдуманного универсального порога достаточности. Проверка: fixtures; пороги при необходимости — Q-07. |
+| R-OWN-03 / AC-OWN-03 | Не-owner запрашивает dashboard/analytics → персональные и operational данные не раскрываются; editing approved content остаётся в repository pipeline. Проверка: auth/API negative cases. |
+
+### E13 — Deployment, безопасность и восстановление
+
+Источник SRC-01: «Production», «Клиенты и учебное состояние»; SRC-03: privacy/owner restrictions.
+
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-OPS-01 / AC-OPS-01 | Поставляется runtime → Docker/VPS остаются baseline; Nginx обслуживает HTTPS и раздельно маршрутизирует PWA/Mini App/API без изменения application logic. FastAPI/PostgreSQL напрямую в internet не публикуются. Проверка: config review и безопасные exposure checks. |
+| R-OPS-02 / AC-OPS-02 | Меняется code/content → GitHub Actions обеспечивает контролируемую поставку проверенной revision; exact target, validation/artifact и post-checks восстанавливаются из records. Проверка: CI/CD records и правила [ci-cd-rules.md](../ci-cd-rules.md). |
+| R-OPS-03 / AC-OPS-03 | Меняется content/schema → migration/rollout контролируется, сохраняет прогресс и имеет применимые stateful/recovery gates. Проверка: preconditions, migration fixtures и post-checks по согласованному rollout. |
+| R-OPS-04 / AC-OPS-04 | Нужен backup/restore → user data восстанавливаются отдельно от пересобираемых content/indexes. Проверка: изолированный restore rehearsal и reconciliation; период/RPO/RTO — UNSET, не выдумываются. |
+| R-OPS-05 / AC-OPS-05 | Выполняются auth/runtime операции → secrets, initData, credentials и production owner ID не попадают в репозиторий/логи/артефакты; приватные данные доступны только по правам. Проверка: negative/log tests и review. |
+
+### E14 — Совместимость существующего Telegram продукта
+
+Источник SRC-03; применяется до отдельной согласованной миграции, без превращения legacy UX в целевую платформенную архитектуру.
+
+| Requirement / AC | Условие → результат; проверка |
+| --- | --- |
+| R-LEG-01 / AC-LEG-01 | Classic quiz запускается через /quiz или меню → доступны single/selected_mix/all, session-selected темы, выбор 5/10/15/всех доступных вопросов и обратная связь; вопросный контент остаётся русским. Проверка: classic/runtime regression tests. |
+| R-LEG-02 / AC-LEG-02 | Используются /start, /help, скрытие меню и чтение → меню восстанавливается после квиза, чтение поддерживает обычный/бионический вид; reply keyboard и inline fallback сохраняются до решения о смене UX. Проверка: handler tests и Telegram smoke. |
+| R-LEG-03 / AC-LEG-03 | /ui или «В окне» → fresh inline WebApp launch, компактный bootstrap, backend hydration, server-side validation; legacy inline context fallback не ломается. До отдельной UX-миграции /ui остаётся opt-in setup chooser даже при активной попытке с предупреждением о её завершении; chat /glossary остаётся отдельным glossary quiz. Проверка: context/entrypoint/API/frontend contracts. |
+| R-LEG-04 / AC-LEG-04 | Не-owner или групповой чат вызывает /stats → доступ закрыт; разрешённый private owner получает только агрегаты; команда не становится публичным меню. Проверка: access/handler tests. |
+| R-LEG-05 / AC-LEG-05 | Меняется runtime config → polling остаётся default, webhook включается явной конфигурацией; classic работает без MINI_APP_URL, отключённый legacy in-bot HTTP path не подменяет dedicated FastAPI. Проверка: config/runtime tests. |
+| R-LEG-06 / AC-LEG-06 | Мигрируются текущие JSON IDs/topic registry → сохраняются downstream references и понятный путь миграции; legacy m1-q3 не переименовывается без проверки связей. Проверка: validators, parity и migration fixtures. |
+
+## Интерфейсы, данные и зависимости
+
+Логические слои: source corpus → проверяемый derivative/approved content → пересобираемые serving/search indexes; отдельно accounts, attempts/answers, repetitions, progress, bookmarks, assignments, literature state и личные заметки. Редакции sources и content должны позволять восстановить смысл старых attempts. Конкретные PostgreSQL schema, migration order и linking contract определяются до реализации E01/E11 (Q-01/Q-02).
+
+Существующие Mini App routes /miniapp/state, /setup-options, /setup, /answer и literature topics/items/state/progress — совместимые интерфейсы переходного периода; полные paths и payloads проверяются по backend и [hydration contract](miniapp_setup_hydration.md). Telegram initData остаётся недоверенным input до backend verification; PWA auth не подменяется Telegram ID.
+
+E04 зависит от user identity и content versioning. E06/E07 требуют provenance; E05/E08/E09 связываются с knowledge по мере его появления. E10 сначала использует export без runtime LLM. Минимальная PWA должна быть доступна к появлению зависящих от неё учебных разделов. Точный порядок PR — в плане.
+
+Технические ограничения: PostgreSQL/pgvector вместо добавления обязательного vector service; React/TypeScript/Vite для новых клиентов; Python/FastAPI backend; Docker/VPS/Nginx для production; Яндекс 360 для account mail. Нет согласованных throughput/latency/availability targets; их нельзя выводить из выбранного stack. Учебная обратная связь не является профессиональной сертификацией.
+
+## Принятые решения и изменённые ограничения
+
+- D-01 (SRC-01/SRC-02): прежний запрет standalone Web UI/PWA заменён целевым PWA scope E01. Classic остаётся fallback, а не стратегическим центром новых функций.
+- D-02: прежний SQLite baseline — исходная реализация для перехода; target PostgreSQL. Изменение docs не выполняет migration и не разрешает потерю user state.
+- D-03: первичен Drive corpus; JSON и Obsidian — производные. Старые repository-evidence reviews не объявляются source-certified и не заменяют AC-SRC-04/AC-QUIZ-06.
+- D-04: полный запрет RAG заменён optional future RAG после оценки; запрет runtime LLM-генерации тестовых вопросов сохраняется.
+- D-05: исторические RFC о /next, reminders/reading plans и private-note UI не создают обязательств SRC-01; они требуют отдельного решения. Reader, OAuth, voice и direct LLM API сохраняют свой поздний/опциональный характер.
+- D-06: старые продуктовые AC ID отсутствовали; новые ID введены здесь впервые. Идентификаторы прежних delivery items сохранены в плане/архиве, не переиспользованы как новые AC.
+- D-07: implementation/code baseline и content counts хранятся в плане, команды — в README, workflow — в AGENTS.md. Дубли статусов и старый процесс «сначала merge, затем CI» не являются нормативными.
+
+## Открытые решения / SPEC gaps
+
+| ID | Решение и зависимый scope |
+| --- | --- |
+| Q-01 | Правила student/guest sharing, доступ к knowledge, linking e-mail/Telegram/Google и ownership конфликтов; E01/E11. Owner-only граница уже обязательна. |
+| Q-02 | Versioned content/attempt representation, migration SQLite → PostgreSQL и сохранение legacy progress; E01/E04/E13. |
+| Q-03 | Алгоритм intervals/adaptive sampling, достаточность истории и mastery/global difficulty policy; E03/E04. |
+| Q-04 | Mapping legacy not_started/in_progress/read/revisit/skipped в согласованные «читаю/слушаю/отложено», progress units и дедупликация библиографии; E09. |
+| Q-05 | Условия включения optional RAG/direct API/voice; provider/token budget и возврат transcript не определены; E07/E10. |
+| Q-06 | Mail configuration owner, account token/session policy и recovery flow; E11. Секреты здесь не фиксируются. |
+| Q-07 | Coverage taxonomy/пороги и точный Drive root inventory; E02/E12. |
+| Q-08 | Фактические production config owners, artifact/version identity и recovery procedure для target stack; E13. SLO, RPO/RTO — UNSET до решения. |
+
+Эти вопросы блокируют только зависящие от них решения; декомпозиция понятных требований в AC не требует повторного утверждения каждой строки.

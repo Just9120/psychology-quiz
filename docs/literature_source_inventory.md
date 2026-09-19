@@ -15,11 +15,11 @@ Repository literature files describe reading metadata only. They must not store 
 | `Список литературы.Физиология высшей нервной деятельности` | `fiziologiya_vnd` | Seeded from rendered PDF source `1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX`; raw text extraction returned empty. |
 | `Список литературы. Психофизиология` | `psihofiziologiya` | Seeded from rendered PDF source `1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni`; raw text extraction returned empty. |
 
-## Boundary for this scaffold
+## Boundary for this source inventory
 
-This scaffold does not implement user reading progress, reminders, reading plans, runtime UI, Mini App behavior, API behavior, database changes, migrations, or runtime storage.
+This inventory documents static source extraction. Reading state, API and Mini App UI were subsequently added by PR #278–#281; their current target requirements/status are in [spec](project-spec.md) and [plan](delivery-plan.md). Reminders and reading plans are not activated by this inventory.
 
-Static literature entry `status` values describe repository content lifecycle state only, such as `draft`, `review`, `approved`, `deprecated`, or `placeholder`. Per-user reading states such as `not_started`, `in_progress`, `read`, `revisit`, or `skipped` belong only to future runtime/user state and must not be stored in repository content files.
+Static literature entry `status` values describe repository content lifecycle state only, such as `draft`, `review`, `approved`, `deprecated`, or `placeholder`. Per-user reading states such as `not_started`, `in_progress`, `read`, `revisit`, or `skipped` belong only to runtime/user state and must not be stored in repository content files.
 
 ## Remaining limitations
 
@@ -29,4 +29,4 @@ The currently available Module 1 source lists have been seeded where the rendere
 
 All seeded Module 1 literature entries now include static pedagogical metadata for topic-level ordering, cross-topic ordering, learner-facing rationale, conservative learning outcomes, tags, prerequisites, and optional estimated reading time. This metadata is intended to support future Literature-contour logic such as “what to read next” or reading-plan construction without implementing runtime behavior in this scaffold.
 
-User reading progress remains out of repository content and belongs only to future runtime/user state. All seeded entries remain in `status: "review"` pending separate human bibliographic verification.
+User reading progress remains out of repository content and belongs only to runtime/user state. All seeded entries remain in `status: "review"` pending separate human bibliographic verification.

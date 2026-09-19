@@ -1,5 +1,7 @@
 # GLOSSARY-CONTENT-AUDIT-001 — аудит качества глоссария
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 ## Scope and evidence posture
 
 This is a documentation-only audit of the active glossary content used by both the classic Telegram glossary quiz and the Mini App glossary flow.

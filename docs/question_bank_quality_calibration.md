@@ -1,5 +1,7 @@
 # QUESTION-BANK-QUALITY-CALIBRATION-001
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 This repository-grounded calibration pass adjusted active canonical JSON question options and audit tooling. It is not external-source certification or SME certification.
 
 ## Metrics

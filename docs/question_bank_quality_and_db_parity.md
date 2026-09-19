@@ -1,5 +1,7 @@
 # Question bank structural quality and SQLite parity audit
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 ## Scope
 
 - Canonical source: `content/topics.json` active topics with the `questions` contour and their referenced JSON files.

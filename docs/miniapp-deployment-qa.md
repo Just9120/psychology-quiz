@@ -1,5 +1,31 @@
 # Mini App deployment and manual QA checklist
 
+## Действующие правила и delivery snapshot
+
+[AGENTS.md](../AGENTS.md) задаёт routine Git/PR/delivery flow; [ci-cd-rules.md](../ci-cd-rules.md) — настройку и исправление pipeline. Продуктовый target — [spec](project-spec.md); AC/findings/checkpoint — [план](delivery-plan.md). Этот runbook сохраняет процедуры существующего Telegram/SQLite deployment, не объявляет целевые PWA/PostgreSQL уже развёрнутыми.
+
+Snapshot проверен 2026-09-19 по GitHub API, workflows и deployment logs; code baseline `ddc661172b50f549a8e1ef4ef8ff5ab54152ae64`. Старые QA результаты ниже действуют только для названных ими PR/сценариев. Разделы «planned»/«after #155» — исторический roadmap, не текущий scope.
+
+| Поверхность | Факт / ограничение |
+| --- | --- |
+| CI | [ci.yml](../.github/workflows/ci.yml): pull_request к main, push main, workflow_dispatch; ubuntu-latest, Python 3.12, contents:read, concurrency по workflow/ref с отменой устаревшего CI. Behavioral suite пока не запускается (F-004). |
+| Проверяемая revision | PR checkout использует default actions/checkout PR merge ref; run head_sha и фактический checkout commit/tree различать. После merge push CI проверяет main. Reuse validation не реализован. |
+| Gates/review | На дату snapshot main protected=false, rulesets пусты, обязательных GitHub approvals/checks не настроено. Это gap F-003; для текущего docs PR всё равно дождаться опубликованных checks и self-review по AGENTS. |
+| GitHub Environment | Единственный — production; job Deploy production из [deploy-production.yml](../.github/workflows/deploy-production.yml). Protection rules/branch policy отсутствуют. Отдельных environments для classic/Mini App нет. |
+| Runtime target | VPS checkout /opt/psychology-quiz; host/account берутся из DEPLOY_HOST/DEPLOY_USER, значения здесь UNSET. Compose project identity и config owner — UNSET до безопасной runtime проверки; не выбирать другой target по догадке. |
+| Deployment unit | Services psych_quiz_bot и psych_quiz_miniapp_api, persistent bind ./data и read-only ./content; [compose](../docker-compose.yml). Static frontend — отдельный Cloudflare Worker psychology-quiz-miniapp, не Compose service. |
+| Config ownership | Workflow использует Repository Secrets DEPLOY_SSH_KEY/DEPLOY_KNOWN_HOSTS/DEPLOY_HOST/DEPLOY_USER; runtime config — host .env + Compose overrides. Имена известны, фактический владелец/rotation policy — UNSET; значения не читать в logs. |
+| Release selection / queue | Push main/manual CD, production-deploy concurrency без cancel; [deploy.sh](../deploy.sh) использует nonblocking flock и fast-forward origin/main. Exact artifact/digest и защита от stale candidate не доказаны: F-014. При занятом lock script может завершиться без поставки — проверить records. |
+| Историческая поставка | CD 28649314034 на bed22836b86d6a644d45d6e4ebf3b25f640fc369 пересоздал bot/API 03.07; CD 28652240249 / deployment 5297661057 обновил checkout до baseline без restart. Не подтверждает текущий health. |
+| Static frontend | Cloudflare check baseline success 03.07, build fac07c7b-d59d-4c3d-9e54-98247d80d9ca. Настройки интеграции и текущий published asset отдельно не проверены. |
+| Stateful/recovery | Docs class NONE; content rollout — [отдельная процедура](question_bank_content_rollout.md). Restore/rollback schema и backup пригодность неизвестны до проверки конкретного scope, не запускать автоматически. |
+
+Для применимого runtime delivery сначала установить target/config, expected revision/artifact, stateful preconditions и recovery. Затем использовать только согласованный путь; workflow bootstrap с reset --hard/remove-orphans не является разрешённой routine процедурой (F-014). Наличие этих команд в workflow не даёт полномочий их запускать.
+
+После поставки сопоставить source/artifact с фактически работающими services, выполнить health и необходимые прикладные smoke из разделов ниже и сохранить environment/revision/time/results в первичных records. Docker Running и JSON health сами по себе не доказывают version identity или бизнес-сценарий. При failed/missing обязательном post-check остановить продвижение; отдельный ad-hoc QA не подменяет обязательные gates. Без безопасно определённого rollback использовать согласованный forward-fix, не импровизировать destructive recovery.
+
+Документационные изменения не требуют runtime поставки. Существующий CD всё ещё автоматически стартует при любом push main; не инициировать повторный deploy ради статуса и не менять pipeline в docs задаче.
+
 ## Purpose
 Этот runbook нужен для безопасной ручной deployment-валидации Telegram Mini App runner без изменения runtime-поведения бота.
 
@@ -11,7 +37,7 @@
 - Классический `/quiz` остаётся дефолтным UX.
 - Mini App запускается opt-in через `/ui` и нижнюю кнопку `🚀 В окне`.
 - `/ui` и `🚀 В окне` открывают setup/contour chooser даже при активном normal quiz runner; warning о завершении активной попытки остаётся ожидаемым.
-- Первый экран chooser должен включать два контура: `Тесты по темам` и `Глоссарий`.
+- Первый экран chooser baseline включает три контура: `Тесты по темам`, `Глоссарий`, `Литература`.
 - Chat `📚 Глоссарий` / `/glossary` остаётся Telegram chat glossary quiz, не Mini App chooser.
 - Mini App API — dedicated FastAPI service `psych_quiz_miniapp_api`; bot service `psych_quiz_bot` не является production-serving процессом Mini App API.
 - Static Mini App frontend hosting remains separate/operator/static hosting.
@@ -464,14 +490,14 @@ Smoke checks:
 Backup example for production DB file:
 - `cp /data/quiz.sqlite3 /data/quiz.sqlite3.backup.$(date -u +%Y%m%dT%H%M%SZ)`
 
-## 17) Architecture notes (planned, docs-only)
+## 17) Historical architecture notes (planned at that time)
 - `app/main.py` is currently overloaded and should be split in follow-up refactor PRs:
   - Move Mini App context/URL builder concerns into `app/miniapp_context.py`.
   - Split Telegram handlers by domain responsibility instead of one large module.
 - Mini App API production serving is now the dedicated FastAPI/uvicorn service `psych_quiz_miniapp_api`; legacy in-bot `ThreadingHTTPServer` notes are historical only.
 - `miniapp/index.html` currently contains a large imperative state machine; if Mini App remains a strategic product direction, plan a declarative state-management refactor in a dedicated backlog track.
 
-## 18) Prioritized roadmap (after #155)
+## 18) Historical roadmap (after #155; superseded by project-spec)
 - **Done / urgent:** SQLite hardening shipped in #155 (WAL, `busy_timeout`, explicit connection closing, performance indexes).
 - **Next:** production validation and lock-log monitoring.
 - **Near-term:** keep reverse proxy setup and DB migration policy explicit in ops/docs.
