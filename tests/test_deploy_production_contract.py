@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import textwrap
 
 import pytest
 
@@ -74,7 +75,10 @@ git() {
     'diff --quiet') [[ "$FAULT" != dirty ]] ;;
     'rev-parse HEAD') echo "$FAKE_HEAD" ;;
     'rev-parse origin/main') if [[ "$FAULT" == stale ]]; then echo "$OLD"; else echo "$EXPECTED"; fi ;;
-    'diff --name-only '*) if [[ "$FAULT" == docs ]]; then echo README.md; else echo app/db.py; fi ;;
+    'diff --name-only '*)
+      if [[ "$FAULT" == docs ]]; then echo README.md;
+      elif [[ "$FAULT" == first_adoption ]]; then echo app/main.py;
+      else echo app/db.py; fi ;;
     'merge --ff-only '*) FAKE_HEAD="$EXPECTED" ;;
     *) return 0 ;;
   esac
@@ -88,7 +92,9 @@ docker() {
       *com.docker.compose.project*) if [[ "$FAULT" == project ]]; then echo foreign; else echo psychology-quiz; fi ;;
       *com.docker.compose.service*) echo "${@: -1}" ;;
       *org.opencontainers.image.revision*)
-        if [[ "$DEPLOY_STARTED" == 1 && "$FAULT" != image ]]; then echo "$EXPECTED"; else echo "$OLD"; fi ;;
+        if [[ "$DEPLOY_STARTED" == 1 && "$FAULT" != image ]]; then echo "$EXPECTED";
+        elif [[ "$FAULT" == first_adoption ]]; then echo '<no value>';
+        else echo "$OLD"; fi ;;
       *Image*) echo sha256:test-image ;;
     esac
     return
@@ -97,6 +103,7 @@ docker() {
   if [[ "$1 $2" == 'ps -q' ]]; then echo "$3"; return; fi
   case "$*" in
     build*) [[ "$FAULT" != build ]] ;;
+    *deployment_db.py\ preflight) cat >/dev/null ;;
     *deployment_db.py\ backup) [[ "$FAULT" != backup ]] || return 2; echo /data/backups/release-test/quiz.sqlite3 ;;
     *scripts/init_db.py) [[ "$FAULT" != migration ]] ;;
     *deployment_db.py\ verify*) [[ "$FAULT" != preservation ]] ;;
@@ -108,7 +115,7 @@ docker() {
 '''
 
 
-def run_deploy(tmp_path, fault=""):
+def run_deploy(tmp_path, fault="", through_workflow=False):
     bash = ("C:/Program Files/Git/bin/bash.exe" if os.name == "nt" else shutil.which("bash"))
     assert bash and Path(bash).exists(), "Bash is required for deployment behavior tests"
     (tmp_path / ".env").write_text("BOT_TOKEN=synthetic\n", encoding="utf-8")
@@ -118,7 +125,16 @@ def run_deploy(tmp_path, fault=""):
     env.pop("DOCKER_HOST", None)
     env.pop("COMPOSE_FILE", None)
     script = Path("deploy.sh").read_text(encoding="utf-8")
-    result = subprocess.run([bash, "-c", BOUNDARIES + "\n" + script, "deploy-test", SHA],
+    code = BOUNDARIES + "\n" + script
+    if through_workflow:
+        # Execute the actual workflow step; fake SSH runs its received remote command.
+        (tmp_path / "deploy.sh").write_text(code, encoding="utf-8", newline="\n")
+        workflow = Path(".github/workflows/deploy-production.yml").read_text(encoding="utf-8")
+        step = workflow.split("- name: Deploy exact revision over verified SSH", 1)[1]
+        step = step.split("run: |", 1)[1].split("\n      - name:", 1)[0]
+        code = 'ssh() { bash -c "${@: -1}"; }\n' + textwrap.dedent(step)
+        env.update(EXPECTED_SHA=SHA, DEPLOY_USER="test", DEPLOY_HOST="localhost", RUNNER_TEMP=tmp_path.as_posix())
+    result = subprocess.run([bash, "-c", code, "deploy-test", SHA], input="",
                             cwd=tmp_path, env=env, capture_output=True, text=True, timeout=20)
     return result, log.read_text() if log.exists() else ""
 
@@ -163,3 +179,33 @@ def test_documentation_change_only_syncs_source(tmp_path):
     assert result.returncode == 0, result.stderr
     assert "SOURCE_SYNC_OK" in result.stdout
     assert "build psych_quiz_bot" not in log
+
+
+def test_first_versioned_image_rehearses_backup_without_unneeded_seed(tmp_path):
+    result, log = run_deploy(tmp_path, "first_adoption")
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert "deployment_db.py backup" in log
+    assert "deployment_db.py verify" in log
+    assert "scripts/init_db.py" not in log
+    assert "scripts/seed_questions.py" not in log
+
+
+def test_ssh_transport_cannot_lose_script_to_a_child_reading_stdin(tmp_path):
+    result, log = run_deploy(tmp_path, through_workflow=True)
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert "scripts/init_db.py" in log
+    assert "deployment_http_smoke.py" in log
+    assert f"DEPLOY_OK revision={SHA}" in result.stdout
+
+
+def test_workflow_rejects_zero_exit_without_completion_record(tmp_path):
+    # A command may end successfully without executing the complete remote procedure.
+    workflow = Path(".github/workflows/deploy-production.yml").read_text(encoding="utf-8")
+    step = workflow.split("- name: Deploy exact revision over verified SSH", 1)[1]
+    step = step.split("run: |", 1)[1].split("\n      - name:", 1)[0]
+    (tmp_path / "deploy.sh").write_text("# synthetic script\n", encoding="utf-8")
+    env = {**os.environ, "EXPECTED_SHA": SHA, "DEPLOY_USER": "test", "DEPLOY_HOST": "localhost", "RUNNER_TEMP": tmp_path.as_posix()}
+    bash = "C:/Program Files/Git/bin/bash.exe" if os.name == "nt" else shutil.which("bash")
+    result = subprocess.run([bash, "-c", 'ssh() { cat >/dev/null; echo PREFLIGHT_OK; }\n' + textwrap.dedent(step)],
+                            cwd=tmp_path, env=env, capture_output=True, text=True, timeout=20)
+    assert result.returncode != 0

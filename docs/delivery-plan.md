@@ -20,7 +20,7 @@
 
 | PR / связная задача | DoD / результат | Состояние |
 | --- | --- | --- |
-| 1. Validation/delivery foundation | Canonical pytest обнаруживает все tests; Windows fixtures и explicit DB closing исправлены; behavioral CI, exact revision delivery/build-before-migration, verified backup/recovery precheck, image/version/health/readonly smoke; targeted procedures обновлены | IN_PROGRESS, branch выше |
+| 1. Validation/delivery foundation | Canonical pytest обнаруживает все tests; Windows fixtures и explicit DB closing исправлены; behavioral CI, exact revision delivery/build-before-migration, verified backup/recovery precheck, image/version/health/readonly smoke; targeted procedures обновлены | IN_PROGRESS: #284 merged; runtime delivery неполна, transport hotfix ниже |
 | 2. API input/privacy/destination | F-020/021/028 закрыты regression tests; 4xx без state mutation, отсутствие raw user IDs/initData в logs и невозможность отправки auth на arbitrary origin; совместимые clients | BACKLOG |
 | 3. Glossary retry | F-019: stable step/options, answer/next idempotency и concurrent/retry tests; legacy compatibility; без нового durable learning subsystem | BACKLOG |
 | 4. Content history/publication | F-016/017: immutable attempt content + safe backfill/lifecycle sync, retired-serving gate, regression/migration/preservation tests и stateful delivery | BACKLOG |
@@ -286,4 +286,6 @@ PLATFORM-STABILIZATION-001 активна по поручению пользов
 
 Audit PR #283 merged в baseline; CI 35445120304 и post-merge 35445143654 PASS, docs CD 35445143646 PASS без restart. Прошлая audit branch безопасно удалена. Это не evidence новой runtime версии.
 
-Следующий шаг PR1: initial push/PR (local validation/self-review завершены), дождаться CI/provider checks, merge, получить exact merge SHA и подтвердить gated CD с backup rehearsal, user preservation, health/revision и image IDs. До этого runtime delivery PENDING. После поставки — очистить только свою merged branch, fresh main и PR2 input/privacy/trusted destination; далее PR3 glossary и PR4 history/lifecycle. Не пересчитывать readiness snapshot и не начинать PWA в этой Goal.
+PR1 #284 merged `9d6d6ccc83294c711c00985b2d3353ce7c9e9aff`; PR CI 35446748336, post-merge CI 35446795669 и Cloudflare PASS. CD 35446837711/job 105907119259 завершился success, но прошёл только candidate build/preflight: compose child consumed SSH stdin, оставшаяся программа не исполнилась. Runtime delivery НЕ завершена; DB migration/restart не выполнялись.
+
+Содержательный transport hotfix: branch `codex/stabilization-ssh-transport`, base `9d6d6ccc83294c711c00985b2d3353ce7c9e9aff`. SSH читает весь script до запуска child commands; первая versioned-image adoption выполняет backup rehearsal, но init/seed только при фактическом schema/seed diff, чтобы не переписывать content до history fix; workflow требует точную completion запись, одного exit=0 недостаточно. Regression исполняет actual workflow shell step с fake SSH/Compose stdin consumer. Следующий шаг: проверить/push hotfix, CI/merge и реальная stateful поставка; PR1 branch сохраняется до её завершения. После поставки — очистить только свою merged branch, fresh main и PR2 input/privacy/trusted destination; далее PR3 glossary и PR4 history/lifecycle. Не пересчитывать readiness snapshot и не начинать PWA в этой Goal.

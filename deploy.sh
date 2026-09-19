@@ -45,6 +45,7 @@ for service in "${SERVICES[@]}"; do
 done
 
 STATEFUL=0
+MIGRATE=0
 if [[ "$DEPLOYED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
   git cat-file -e "${DEPLOYED_SHA}^{commit}" || fail 'Unknown deployed source revision'
   BASE_SHA="$DEPLOYED_SHA"
@@ -60,7 +61,7 @@ while IFS= read -r file; do
     Dockerfile|docker-compose.yml|requirements.txt|app/*|scripts/*|sql/*|content/*|deploy.sh|.github/workflows/deploy-production.yml) NEEDS_RUNTIME=1 ;;
   esac
   case "$file" in
-    app/db.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*) STATEFUL=1 ;;
+    app/db.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*) STATEFUL=1; MIGRATE=1 ;;
   esac
 done <<< "$CHANGED_FILES"
 git merge --ff-only "$EXPECTED_SHA"
@@ -71,7 +72,7 @@ if [[ "$NEEDS_RUNTIME" == 0 && "$DEPLOYED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
 fi
 
 export APP_REVISION="$EXPECTED_SHA"
-log "Building candidate revision=$EXPECTED_SHA stateful=$STATEFUL"
+log "Building candidate revision=$EXPECTED_SHA stateful=$STATEFUL migrate=$MIGRATE"
 # Build both images before any candidate migration. Runtime .env remains untouched.
 compose build "${SERVICES[@]}"
 compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py preflight
@@ -94,9 +95,11 @@ if [[ "$STATEFUL" == 1 ]]; then
   BACKUP_PATH="$(compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py backup)"
   [[ "$BACKUP_PATH" == /data/backups/release-*/quiz.sqlite3 ]] || fail 'Invalid backup record'
   log "BACKUP_RESTORE_OK backup=$BACKUP_PATH"
-  MIGRATION_STARTED=1
-  compose run --rm --no-deps psych_quiz_bot python scripts/init_db.py
-  compose run --rm --no-deps psych_quiz_bot python scripts/seed_questions.py
+  if [[ "$MIGRATE" == 1 ]]; then
+    MIGRATION_STARTED=1
+    compose run --rm --no-deps psych_quiz_bot python scripts/init_db.py
+    compose run --rm --no-deps psych_quiz_bot python scripts/seed_questions.py
+  fi
   compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py verify --backup "$BACKUP_PATH"
 fi
 compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py smoke
