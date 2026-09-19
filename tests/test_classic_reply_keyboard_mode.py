@@ -1,4 +1,5 @@
 import os
+from contextlib import closing
 import sqlite3
 import tempfile
 import asyncio
@@ -36,7 +37,7 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
         self.db_path = self.tmp.name
         self.settings = SimpleNamespace(db_path=self.db_path, classic_quiz_reply_keyboard_mode=True)
         self.disabled_settings = SimpleNamespace(db_path=self.db_path, classic_quiz_reply_keyboard_mode=False)
-        with sqlite3.connect(self.db_path) as conn:
+        with closing(sqlite3.connect(self.db_path)) as conn, conn:
             conn.row_factory = sqlite3.Row
             conn.execute("PRAGMA foreign_keys = ON;")
             _setup_schema(conn)

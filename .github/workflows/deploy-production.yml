@@ -1,10 +1,15 @@
 name: CD
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
 
 concurrency:
   group: production-deploy
@@ -13,41 +18,61 @@ concurrency:
 jobs:
   deploy:
     name: Deploy production
+    if: >-
+      github.repository == 'Just9120/psychology-quiz' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.head_repository.full_name == github.repository))
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 15
-
     steps:
+      - name: Checkout trusted main delivery procedure
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Verify latest exact-revision CI
+        id: candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/check_deploy_candidate.py
+
+      - name: Checkout validated candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ steps.candidate.outputs.sha }}
+          persist-credentials: false
+
       - name: Prepare SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         run: |
           set -Eeuo pipefail
+          test -n "$DEPLOY_SSH_KEY" && test -n "$DEPLOY_KNOWN_HOSTS"
           install -m 700 -d ~/.ssh
-          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          printf '%s\n' "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
 
-      - name: Deploy over SSH
+      - name: Deploy exact revision over verified SSH
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          EXPECTED_SHA: ${{ steps.candidate.outputs.sha }}
         run: |
           set -Eeuo pipefail
-          ssh -i ~/.ssh/id_ed25519 "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" 'bash -se' <<'REMOTE'
-          set -Eeuo pipefail
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$DEPLOY_USER" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]*$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15 \
+            -i ~/.ssh/id_ed25519 "$DEPLOY_USER@$DEPLOY_HOST" \
+            "bash -s -- $EXPECTED_SHA" < deploy.sh
 
-          if [ -f /opt/psychology-quiz/deploy.sh ]; then
-            echo "[deploy] Found /opt/psychology-quiz/deploy.sh, running normal path"
-            bash /opt/psychology-quiz/deploy.sh
-            exit 0
-          fi
-
-          echo "[deploy] /opt/psychology-quiz/deploy.sh not found, running bootstrap path"
-          cd /opt/psychology-quiz
-          git fetch origin main
-          git reset --hard origin/main
-          chmod +x deploy.sh
-          docker compose build psych_quiz_bot
-          docker compose run --rm psych_quiz_bot python scripts/init_db.py
-          docker compose run --rm psych_quiz_bot python scripts/seed_questions.py
-          docker compose up -d --build --remove-orphans psych_quiz_bot psych_quiz_miniapp_api
-          docker compose ps psych_quiz_bot psych_quiz_miniapp_api
-          docker compose logs --tail=50 psych_quiz_miniapp_api
-          REMOTE
+      - name: Remove ephemeral SSH identity
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519 ~/.ssh/known_hosts

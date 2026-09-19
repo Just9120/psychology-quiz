@@ -5,6 +5,7 @@ import inspect
 import re
 import sqlite3
 import tempfile
+from pathlib import Path
 import unittest
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
@@ -586,8 +587,9 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         self.assertIsNotNone(mini_app_menu_button_handler)
 
     def test_ui_command_launches_setup_entrypoint_with_active_session(self):
-        with tempfile.NamedTemporaryFile(suffix=".db") as db_file:
-            db_conn = sqlite3.connect(db_file.name)
+        with tempfile.TemporaryDirectory() as db_dir:
+            db_path = str(Path(db_dir) / "quiz.db")
+            db_conn = sqlite3.connect(db_path)
             db_conn.row_factory = sqlite3.Row
             db_conn.execute("PRAGMA foreign_keys = ON;")
             _setup_schema(db_conn)
@@ -610,7 +612,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
                 application=SimpleNamespace(
                     bot_data={
                         "settings": SimpleNamespace(
-                            db_path=db_file.name,
+                            db_path=db_path,
                             mini_app_url="https://example.com/ui",
                             mini_app_api_base_url="https://api.example.com",
                         )
@@ -634,8 +636,9 @@ class MiniAppRunnerContractTests(unittest.TestCase):
             self.assertTrue(ctx.get("abandons_active_session"))
 
     def test_ui_command_uses_inline_launch_only_without_reply_webapp_keyboard(self):
-        with tempfile.NamedTemporaryFile(suffix=".db") as db_file:
-            db_conn = sqlite3.connect(db_file.name)
+        with tempfile.TemporaryDirectory() as db_dir:
+            db_path = str(Path(db_dir) / "quiz.db")
+            db_conn = sqlite3.connect(db_path)
             db_conn.row_factory = sqlite3.Row
             db_conn.execute("PRAGMA foreign_keys = ON;")
             _setup_schema(db_conn)
@@ -655,7 +658,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
                 application=SimpleNamespace(
                     bot_data={
                         "settings": SimpleNamespace(
-                            db_path=db_file.name,
+                            db_path=db_path,
                             mini_app_url="https://example.com/ui",
                             mini_app_api_base_url="https://api.example.com",
                         )

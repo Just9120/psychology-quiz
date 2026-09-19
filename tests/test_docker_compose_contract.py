@@ -1,6 +1,7 @@
 import pathlib
 import shutil
 import subprocess
+import tempfile
 import unittest
 
 
@@ -42,12 +43,17 @@ class DockerComposeContractTests(unittest.TestCase):
     def test_compose_services_include_bot_and_fastapi(self):
         if shutil.which("docker") is None:
             self.skipTest("docker CLI is not installed in this environment")
-        result = subprocess.run(
-            ["docker", "compose", "config", "--services"],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            (root / "docker-compose.yml").write_text(self.compose, encoding="utf-8")
+            (root / ".env").write_text("", encoding="utf-8")
+            result = subprocess.run(
+                ["docker", "compose", "config", "--services"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
         services = {line.strip() for line in result.stdout.splitlines() if line.strip()}
         self.assertIn("psych_quiz_bot", services)
         self.assertIn("psych_quiz_miniapp_api", services)

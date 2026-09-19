@@ -114,6 +114,7 @@ def create_app_from_env() -> FastAPI:
         initdata_ttl_seconds=int(os.getenv("MINIAPP_API_INITDATA_TTL_SECONDS", "3600")),
         slow_request_ms=int(os.getenv("MINIAPP_API_SLOW_REQUEST_MS", "500")),
         allowed_origin=os.getenv("MINIAPP_API_ALLOWED_ORIGIN", "").strip() or None,
+        revision=os.getenv("APP_REVISION", "UNSET"),
     )
 
 
@@ -124,6 +125,7 @@ def create_app(
     initdata_ttl_seconds: int = 3600,
     slow_request_ms: int = 500,
     allowed_origin: str | None = None,
+    revision: str = "UNSET",
 ) -> FastAPI:
     app = FastAPI(redirect_slashes=False)
 
@@ -136,7 +138,7 @@ def create_app(
 
     @app.get("/healthz")
     async def healthz() -> dict[str, Any]:
-        return {"ok": True, "service": "miniapp_api"}
+        return {"ok": True, "service": "miniapp_api", "revision": revision}
 
     async def _options_response(endpoint: str, request: Request) -> Response:
         started_at = time.perf_counter()
