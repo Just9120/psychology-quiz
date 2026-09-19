@@ -1,5 +1,7 @@
 # Mini App Runner Audit — 2026-05-24 (after #146)
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](../project-spec.md), текущие AC/findings и выбор работы — [план](../delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 ## 1) Executive summary
 
 **Overall health:** **yellow / fragile but serviceable** for experimental `/ui`.

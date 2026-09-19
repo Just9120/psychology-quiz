@@ -1,5 +1,7 @@
 # RFC: Topic-based glossary and literature learning contours
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 Delivery Item ID: `LEARN-CONTOURS-RFC-001`
 
 ## 1. Problem statement

@@ -1,33 +1,17 @@
-# AI Delivery Infrastructure Plan
+# Workflow adoption record
 
-## Purpose
-Этот документ отслеживает **только** внедрение AI delivery-практик в репозитории:
-- docs-first workflow;
-- использование `docs/ai-coding-workflow.md` как правил AI-assisted разработки;
-- lightweight first-read routing для coding agents;
-- фиксацию статуса adoption (что внедрено, что не внедрено).
+Этот файл сохраняет происхождение workflow-документов и прежние решения по devtools. Он не является вторым планом, набором правил или разрешением на реализацию.
 
-Документ **не заменяет** `docs/delivery-plan.md`, не является продуктовым backlog-документом и не авторизует runtime/product work сам по себе.
+## Принятые документы
 
-## Current adoption status
-- ✅ `docs/ai-coding-workflow.md` — adopted and used as AI-assisted development / PR / docs workflow guidance.
-- ✅ `AGENTS.md` — adopted as the lightweight first-read coding-agent guide.
-- ✅ `docs/ci-cd-rules.md` — adopted as the CI/CD, deploy, secrets, rollback, and stateful-service boundary document.
-- ✅ `docs/project-spec.md` migration — completed; product/project source of truth is in use.
-- ✅ `docs/delivery-plan.md` — operational delivery-state document is in use.
-- ✅ `docs/delivery-plan-archive.md` — created for historical completed delivery groups; not active delivery authority.
-- ✅ README navigation — updated to point agents/humans to the current source-of-truth and supporting workflow documents.
-- ✅ AGENTS command shortcuts — filled from the current CI validation commands.
-- ✅ `docs/TZ_psychology_quiz.md` — removed after the project-spec migration.
-- ⛔ Context Bundle Builder — **not adopted**.
+- 2026-09-19 пользователь поручил заменить репозиторные инструкции и актуализировать spec/plan по согласованным требованиям.
+- Источник: предоставленные пользователем файлы `workflow-documents/repository/AGENTS.md` и `workflow-documents/repository/ci-cd-rules.md`; timestamp файлов источника — 2026-09-12 15:09:09 по локальному filesystem. Номер версии шаблона — UNSET.
+- [AGENTS.md](../AGENTS.md) содержит постоянные правила Goal, AC/Evidence, проверок, Git/PR и поставки. Единственная адаптация шаблона — routing к существующим документам вместо отсутствующих architecture/runbooks.
+- [ci-cd-rules.md](../ci-cd-rules.md) находится в корне и заменяет прежний CI/CD документ. Его содержимое сохранено без изменения правил.
+- Отдельный прежний AI-assisted workflow удалён; его правила не продолжают действовать параллельно.
+- Canonical commands и навигация — в [README](../README.md), требования — в [spec](project-spec.md), работа и findings — в [плане](delivery-plan.md).
+- Принятие правил не означает, что существующие workflows/settings уже им соответствуют; gaps сохранены в плане.
 
-## Track status
-- **Track A — AI Coding Workflow:** adopted for current lightweight workflow.
-- **Track B — Context Bundle Builder:** not adopted.
-- **Track C — Integration with Builder artifacts:** not applicable until Builder adoption.
+## Сохранённое решение по devtools
 
-## Notes
-- Этот файл ведёт только AI workflow adoption-трек.
-- Продуктовые/content checkpoint-ы фиксируются в `docs/delivery-plan.md`.
-- Канонический продуктовый scope хранится в `docs/project-spec.md`.
-- CI/CD/deploy/secrets/stateful-service boundaries фиксируются в `docs/ci-cd-rules.md`.
+Context Bundle Builder не принят. Интеграция с его artifacts — N/A до отдельного решения пользователя. В этой задаче devtool не добавляется и его спецификация не создаётся.

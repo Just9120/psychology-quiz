@@ -1,5 +1,7 @@
 # Phase 1 proposal: topic registry and schema validation
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 Delivery Item ID: `LEARN-CONTOURS-PHASE1-001`
 
 ## 1. Purpose

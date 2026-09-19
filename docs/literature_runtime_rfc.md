@@ -1,5 +1,7 @@
 # RFC: Literature / Reading Tracker runtime contour
 
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+
 Delivery Item ID: `LITERATURE-RUNTIME-RFC-004`
 
 ## 1. Status and scope
@@ -183,7 +185,7 @@ API boundaries:
 Phase D implementation status:
 
 - `POST /miniapp/literature/progress` is now implemented for authenticated per-user `user_literature_progress` mutations.
-- Phase E Mini App UI remains future scope.
+- Phase E Mini App UI implemented in PR #281 (baseline ddc6611); full target Reading Tracker criteria remain in project-spec.
 - Phase F “what to read next” remains future scope.
 - Reminders and reading plans remain future scope.
 
@@ -205,7 +207,7 @@ UX boundaries:
 
 - no UI implementation is added in this PR;
 - Telegram chat UX is not changed in this PR;
-- Mini App contour chooser changes are future implementation scope;
+- Mini App contour chooser includes Literature in baseline ddc6611;
 - Literature UX should not replace the default classic `/quiz` flow unless a separate product decision authorizes that change.
 
 ## 9. Deterministic “what to read next” logic

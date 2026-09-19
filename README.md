@@ -1,6 +1,8 @@
 # psychology-quiz
 
-`psychology-quiz` — Telegram-бот викторины по психологии для учебного использования.
+`psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами, повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md).
+
+Текущая реализация — Telegram-бот и Mini App на Python/FastAPI, SQLite и статическом HTML/JavaScript. Целевые PostgreSQL/pgvector и React/TypeScript/Vite ещё не следует считать действующим stack. Расширение продукта выполняется только в выбранной Goal.
 
 Текущее состояние продукта:
 - **Module 1** — стабильный baseline, 296 approved questions across five active topics.
@@ -43,20 +45,24 @@ Telegram update delivery mode:
 
 Production can run in either long polling or webhook mode. Long polling remains the default runtime mode, while webhook mode is an optional infrastructure/runtime configuration guarded by environment flags.
 
-Keep detailed webhook, reverse-proxy, rollback, and diagnostic procedures outside the README so this file remains navigation/overview material. For CI/CD, deploy, secrets, rollback, and stateful-service safety boundaries, use [`docs/ci-cd-rules.md`](docs/ci-cd-rules.md). For Mini App deployment/manual QA, use [`docs/miniapp-deployment-qa.md`](docs/miniapp-deployment-qa.md).
+Правила повседневной работы, проверок и поставки находятся в [AGENTS.md](AGENTS.md), проектные deployment/manual QA процедуры — в [Mini App deployment / QA](docs/miniapp-deployment-qa.md). [ci-cd-rules.md](ci-cd-rules.md) применяется при настройке CI/CD и исправлении pipeline.
 
 ## CI/CD and deployment model
 
 Repository-visible GitHub Actions are split by responsibility:
 - open PR and merge approved changes to `main`;
 - CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`;
-- the repository also contains a production CD workflow/deploy script for configured deployment environments; do not change or run deploy automation from ordinary docs/product tasks;
+- routine delivery follows [AGENTS.md](AGENTS.md) and [project procedures](docs/miniapp-deployment-qa.md); workflow/settings changes require their own authorized scope;
 - CI must not deploy, access production SSH, or mutate production runtime state;
 - deployment/CD uses Repository Secrets and the configured target environment; after merge, verify deployed commit/runtime state when deployment matters;
-- docs-only changes do not require runtime sync.
+- docs-only changes do not require runtime sync. The existing CD workflow still triggers on every push to `main`; this is observed behavior, not a requirement to deploy documentation.
 
 
 ## Быстрый старт и проверки
+
+Рабочий каталог — корень репозитория. Runtime/CI: Python 3.12, package manager — pip; прямые зависимости фиксирует [requirements.txt](requirements.txt), transitive lockfile отсутствует. Для локальной работы используйте изолированное Python-окружение; команды ниже предполагают, что оно активировано.
+
+Карта: [app](app/) — bot/API/domain code, [miniapp](miniapp/) — текущая статика, [content](content/) — производный учебный контент, [sql](sql/) — SQLite schema, [scripts](scripts/) — init/seed/validators, [tests](tests/) — unittest suites. Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
 
 ```bash
 pip install -r requirements.txt
@@ -65,13 +71,25 @@ python scripts/validate_questions.py
 python scripts/validate_topics.py
 python scripts/validate_glossary.py
 python scripts/validate_literature.py
-DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/init_db.py
-DB_PATH=/tmp/quiz-ci.sqlite3 python scripts/seed_questions.py
+# Bash: один временный DB_PATH для init, seed и локального запуска
+export DB_PATH=/tmp/quiz-local.sqlite3
+python scripts/init_db.py
+python scripts/seed_questions.py
 git diff --check
 python -m app.main
 ```
 
-`BOT_TOKEN` is required for `python -m app.main`; validation/seed commands above can run against a temporary SQLite path.
+PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $env:TEMP 'quiz-local.sqlite3'`; остальные Python-команды те же. Используйте отдельную тестовую БД. Init/seed берут approved fixtures из content; production data не нужны. Для bot/API нужен тестовый BOT_TOKEN, для validators и DB smoke он не нужен. Значения env имеют приоритет над .env согласно [config](app/config.py); Docker Compose дополнительно задаёт service overrides в [compose](docker-compose.yml).
+
+| Назначение | Canonical команда / условие |
+| --- | --- |
+| Behavioral suite | `python -m unittest discover -s tests -p 'test_*.py'`; test dependencies из requirements, временные/in-memory DB внутри tests |
+| Выбранная suite | `python -m unittest tests.test_miniapp_frontend_contract -q` для frontend/docs contracts; выбирайте другие существующие test modules по diff |
+| FastAPI local run | `python -m uvicorn app.miniapp_fastapi_runtime:app --host 127.0.0.1 --port 8081`; тот же тестовый DB_PATH/BOT_TOKEN; подробности в [runbook](docs/miniapp-deployment-qa.md) |
+| Format / lint / typecheck | N/A: отдельных команд текущий проект не задаёт; whitespace проверяет `git diff --check` |
+| Build | N/A для текущих Python/статических исходников; runtime image собирается Docker в разрешённой delivery Goal. Vite build появится при реализации target frontend |
+
+Базовые local services — SQLite и, для Mini App, FastAPI; live Telegram smoke требует тестовый bot/client. PostgreSQL/pgvector и Яндекс 360 — целевые зависимости, пока не условия существующих локальных команд. Требуемые CI проверки и ограничения текущего pipeline — в [плане](docs/delivery-plan.md); зелёный CI пока не означает запуск behavioral suite.
 
 ## Текущий продуктовый контур
 
@@ -98,7 +116,7 @@ python -m app.main
 
 ## Поток данных: JSON → seed → SQLite
 
-- Source of truth банка вопросов: JSON в репозитории.
+- Первичные учебные знания — согласованный Drive corpus; JSON в репозитории — canonical approved derivative для runtime банка.
 - Рабочие директории банка:
   - `content/questions/module1/`
   - `content/questions/module2/`
@@ -108,7 +126,7 @@ python -m app.main
 
 Runtime sync for JSON/content changes is deployment-environment-specific. Repository-visible CI validates question-bank syntax and seedability, but does not deploy or mutate runtime SQLite. When deployment matters, verify deployed commit/runtime state in the target environment after merge; docs-only changes do not require runtime sync.
 
-Operational deploy/seed/restart details and safety boundaries belong in [`docs/ci-cd-rules.md`](docs/ci-cd-rules.md) and the configured deployment environment, not in this README.
+Операционные процедуры находятся в [deployment / QA](docs/miniapp-deployment-qa.md) и [content rollout](docs/question_bank_content_rollout.md); правила работы агента — в [AGENTS.md](AGENTS.md). Настройка pipeline регулируется [ci-cd-rules.md](ci-cd-rules.md).
 
 ## Вспомогательный UX
 
@@ -128,20 +146,20 @@ Operational deploy/seed/restart details and safety boundaries belong in [`docs/c
 
 ## Telegram Mini App (experimental note)
 
-- Standalone Web UI / PWA сейчас не входят в текущий scope проекта.
+- PWA входит в согласованный target scope; текущий Mini App остаётся отдельным Telegram-клиентом.
 - Telegram Mini App доступен как экспериментальный opt-in UX mode внутри Telegram: через `/ui` или через кнопку нижнего меню `🚀 В окне`.
 - Кнопка `🚀 В окне` запускает безопасный fresh-flow: бот отправляет новое сообщение с inline WebApp-кнопкой `🚀 Открыть викторину`, а не хранит persistent `web_app` URL в reply keyboard.
 - Текущий Mini App MVP покрывает setup/contour chooser, state hydration, показ текущего вопроса, отправку ответа, feedback, переход к следующему шагу и итоговый результат с рестартом в окне Mini App.
-- `/ui` и `🚀 В окне` открывают setup/contour chooser с контурами `Тесты по темам` и `Глоссарий` даже если активен normal quiz runner; chat `📚 Глоссарий` остаётся отдельным Telegram chat glossary quiz.
+- `/ui` и `🚀 В окне` открывают setup/contour chooser с контурами `Тесты по темам`, `Глоссарий` и `Литература` даже если активен normal quiz runner; chat `📚 Глоссарий` остаётся отдельным Telegram chat glossary quiz.
 - Режим глоссария в Mini App использует существующие Mini App API endpoints (`GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и статические JSON-файлы `content/glossary`; provenance/source refs не показываются пользователям.
 - `/quiz` остаётся дефолтным entry point и классическим chat-based runner.
 - Mini App использует dedicated FastAPI backend service `psych_quiz_miniapp_api` с endpoints (`GET /miniapp/state`, `GET /miniapp/setup-options`, `POST /miniapp/setup`, `POST /miniapp/answer`) и server-authoritative state; user-facing glossary flow also stays on those existing endpoints with transient in-memory glossary sessions.
 
-## Что вне текущего продуктового контура
+## Границы дальнейшей работы
 
-- standalone Web UI / PWA
+- PWA, PostgreSQL, progress/repetition и knowledge layer планируются по [новой спецификации](docs/project-spec.md), а не реализуются принятием документации
 - webhook как обязательный/единственный runtime mode; доступен только опциональный infrastructure experiment за `TELEGRAM_UPDATE_MODE=webhook`
-- RAG и внешняя генерация вопросов во время работы
+- runtime LLM-генерация вопросов запрещена; optional RAG поверх retrieval требует отдельного решения и оценки
 - расширение Module 2 на новые темы без отдельного согласованного решения (помимо уже открытых активных категорий)
 
 ## Mini App deployment / QA runbook
@@ -160,13 +178,12 @@ README is the repository entrypoint and navigation layer, not the full product s
 
 | Документ | Роль | Когда читать |
 |---|---|---|
-| [AGENTS.md](AGENTS.md) | Лёгкий first-read guide для coding agents | Перед implementation tasks |
+| [AGENTS.md](AGENTS.md) | Постоянный router, Goal, AC/Evidence, проверки, Git/PR и поставка | При старте и восстановлении контекста |
 | [Project Specification](docs/project-spec.md) | Каноническая продуктовая/проектная спецификация | Нужно проверить scope, продуктовые правила, модель контента и runtime-ограничения |
 | [Delivery Plan](docs/delivery-plan.md) | Операционное состояние delivery | Нужно понять текущие checkpoints, активный фокус и следующий рекомендуемый шаг |
 | [Delivery Plan Archive](docs/delivery-plan-archive.md) | Исторический архив delivery | Только для явных history/archive/reconciliation tasks |
-| [AI Coding Workflow](docs/ai-coding-workflow.md) | Правила ChatGPT / Codex / PR / docs workflow | Нужно подготовить prompt, проверить PR или понять правила обновления документации |
-| [CI/CD Rules](docs/ci-cd-rules.md) | Границы CI/CD, deploy, secrets, rollback и stateful services | Только для CI/CD/deploy/ops tasks |
-| [AI Delivery Infrastructure Plan](docs/ai-delivery-infrastructure-plan.md) | Трекинг внедрения AI workflow | Нужно проверить статус docs-first adoption и решение по Context Bundle Builder |
+| [CI/CD Rules](ci-cd-rules.md) | Правила настройки workflows, gates, artifacts, окружений и recovery | При настройке CI/CD и исправлении pipeline |
+| [Workflow adoption record](docs/ai-delivery-infrastructure-plan.md) | Происхождение принятых документов и прежнее решение по Context Bundle Builder | При проверке истории workflow; текущие задачи находятся в Delivery Plan |
 | [Mini App deployment / QA runbook](docs/miniapp-deployment-qa.md) | Чеклист/runbook по настройке `MINI_APP_URL`, HTTPS static hosting и ручной Telegram QA | Перед deployment-валидацией или ручным Mini App QA |
 
 Source-of-truth модель:
