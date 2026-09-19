@@ -45,8 +45,7 @@ def _parse_admin_telegram_ids(raw_ids: str) -> frozenset[int]:
             parsed_ids.add(int(clean_token))
             continue
         logger.warning(
-            "Некорректный ADMIN_TELEGRAM_IDS токен '%s' проигнорирован. Ожидался numeric Telegram user id.",
-            clean_token,
+            "Некорректный ADMIN_TELEGRAM_IDS токен проигнорирован. Ожидался numeric Telegram user id.",
         )
     return frozenset(parsed_ids)
 

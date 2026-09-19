@@ -28,7 +28,6 @@ from app.miniapp_api import (
     build_setup_options_response,
     build_setup_response,
     build_state_response,
-    verify_telegram_init_data,
 )
 
 logger = logging.getLogger("uvicorn.error")
@@ -50,15 +49,11 @@ def _log_request(
     method: str,
     status: int,
     started_at: float,
-    bot_token: str,
-    init_data: str,
-    max_age_seconds: int,
     request_id: str,
     transport: str,
     body: bytes,
     slow_request_ms: int,
 ) -> None:
-    safe_user_id = "-"
     error_code = "-"
     try:
         payload = json.loads(body.decode("utf-8"))
@@ -66,22 +61,16 @@ def _log_request(
             error_code = payload["error"]
     except Exception:
         pass
-    try:
-        verified = verify_telegram_init_data(init_data, bot_token, max_age_seconds=max_age_seconds)
-        safe_user_id = str(verified.telegram_user_id)
-    except Exception:
-        pass
 
     duration_ms = _duration_ms(started_at)
     logger.info(
-        "miniapp_api endpoint=%s request_id=%s transport=%s method=%s status=%s duration_ms=%s telegram_user_id=%s error_code=%s",
+        "miniapp_api endpoint=%s request_id=%s transport=%s method=%s status=%s duration_ms=%s error_code=%s",
         endpoint,
         request_id or "-",
         transport,
         method,
         status,
         duration_ms,
-        safe_user_id,
         error_code,
     )
     if duration_ms > slow_request_ms:
@@ -157,7 +146,7 @@ def create_app(
 
         duration_ms = _duration_ms(started_at)
         logger.info(
-            "miniapp_api endpoint=%s request_id=%s transport=preflight method=OPTIONS status=%s duration_ms=%s telegram_user_id=- error_code=-",
+            "miniapp_api endpoint=%s request_id=%s transport=preflight method=OPTIONS status=%s duration_ms=%s error_code=-",
             endpoint,
             request_id or "-",
             response.status_code,
@@ -173,14 +162,12 @@ def create_app(
             )
 
         logger.info(
-            "miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s req_method=%s req_headers=%s",
+            "miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s",
             endpoint,
             request_id or "-",
             response.status_code,
             duration_ms,
             "yes" if allowed else "no",
-            request.headers.get("Access-Control-Request-Method", ""),
-            request.headers.get("Access-Control-Request-Headers", ""),
         )
         return response
 
@@ -250,7 +237,7 @@ def create_app(
         )
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
+        _log_request(endpoint=endpoint, method="GET", status=status, started_at=started_at, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
     async def _post_builder_response(endpoint: str, request: Request, builder: Any, *builder_args: Any) -> Response:
@@ -268,7 +255,7 @@ def create_app(
         )
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
-        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
+        _log_request(endpoint=endpoint, method="POST", status=status, started_at=started_at, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
     @app.get("/miniapp/state")
@@ -312,7 +299,7 @@ def create_app(
         )
         response = _to_response(status, headers, body)
         _set_common_headers(response, request)
-        _log_request(endpoint="/miniapp/literature/items", method="GET", status=status, started_at=started_at, bot_token=bot_token, init_data=init_data, max_age_seconds=initdata_ttl_seconds, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
+        _log_request(endpoint="/miniapp/literature/items", method="GET", status=status, started_at=started_at, request_id=request_id, transport=transport, body=body, slow_request_ms=slow_request_ms)
         return response
 
     @app.get("/miniapp/literature/state")

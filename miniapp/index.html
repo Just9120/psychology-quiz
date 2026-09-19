@@ -242,6 +242,7 @@
       }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="api-config.js"></script>
   </head>
   <body>
     <h3>Мини-викторина</h3>
@@ -654,10 +655,7 @@
       }
 
       const setupHydrationRequired = setupMode && ctx?.setup_hydration_required === true;
-      const apiBase =
-        ctx?.api_base_url && typeof ctx.api_base_url === 'string' && ctx.api_base_url.trim()
-          ? ctx.api_base_url.trim()
-          : '';
+      const apiBase = window.MiniappApi?.baseUrl || '';
 
       async function fetchJsonWithTelemetry(url, options = {}, timeoutMs = 9000, telemetry = null) {
         const existingRequestId = options.headers?.['X-Miniapp-Request-Id'] || '';
@@ -1032,7 +1030,7 @@
         const c = new AbortController();
         const t = setTimeout(() => c.abort(), timeoutMs);
         try {
-          return await fetch(url, { ...options, signal: c.signal });
+          return await window.MiniappApi.fetch(url, { ...options, signal: c.signal });
         } finally {
           clearTimeout(t);
         }

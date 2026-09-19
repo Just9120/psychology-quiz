@@ -83,7 +83,7 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 
 | Назначение | Canonical команда / условие |
 | --- | --- |
-| Behavioral suite | `python -m pip install -r requirements-dev.txt`, затем `python -m pytest -q`; временные/in-memory DB внутри tests. Docker compose contract требует Docker CLI (локально иначе skip; в CI обязателен) |
+| Behavioral suite | `python -m pip install -r requirements-dev.txt`, затем `python -m pytest -q`; временные/in-memory DB внутри tests. Frontend security regression требует Node.js без npm dependencies; Docker compose contract требует Docker CLI (локально иначе skip; в CI обязателен) |
 | Выбранная suite | `python -m pytest tests/test_miniapp_frontend_contract.py -q` для frontend/docs contracts; выбирайте другие существующие test modules по diff |
 | FastAPI local run | `python -m uvicorn app.miniapp_fastapi_runtime:app --host 127.0.0.1 --port 8081`; тот же тестовый DB_PATH/BOT_TOKEN; подробности в [runbook](docs/miniapp-deployment-qa.md) |
 | Format / lint / typecheck | N/A: отдельных команд текущий проект не задаёт; whitespace проверяет `git diff --check` |

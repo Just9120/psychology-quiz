@@ -53,6 +53,12 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 
 ## 3) Configuration checklist
 
+### Trusted frontend API configuration
+
+[miniapp/api-config.js](../miniapp/api-config.js) — deployment-owned API destination. URL context (`api_base_url`) не является доверенной конфигурацией; его значение не используется для отправки initData. Все API fetch проходят общий origin/path guard, credentials-in-URL запрещены, redirects отклоняются. Для другого development/staging backend нужен явный deployment config change, не параметр ссылки. Legacy context продолжает передавать темы/runner bootstrap и sendData fallback; credentials в docs/fixtures не добавлять.
+
+После frontend delivery проверить опубликованные index.html и api-config.js, provider check и UI load. Синтетический Node test проверяет фактический fetch boundary без network. Browser smoke без Telegram проверяет rendering/diagnostics; это не authenticated mobile roundtrip.
+
 ### Cloudflare Workers Static Assets (GitHub deployment flow)
 - Build command: empty
 - Deploy command: `npx wrangler deploy`

@@ -255,11 +255,9 @@ class MiniAppFastApiTests(unittest.TestCase):
     def test_slow_request_logging_warning(self):
         app = create_app(db_path=self.db, bot_token=self.bot_token, slow_request_ms=1, allowed_origin="https://miniapp.example.com")
         client = TestClient(app)
-        with patch("app.miniapp_fastapi.verify_telegram_init_data") as verify_mock:
-            verify_mock.return_value.telegram_user_id = 42
-            with patch("app.miniapp_fastapi._duration_ms", return_value=10):
-                with self.assertLogs("uvicorn.error", level="WARNING") as logs:
-                    response = client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})
+        with patch("app.miniapp_fastapi._duration_ms", return_value=10):
+            with self.assertLogs("uvicorn.error", level="WARNING") as logs:
+                response = client.get("/miniapp/state", headers={"Authorization": f"tma {self.init_data}"})
         self.assertEqual(200, response.status_code)
         self.assertTrue(any("miniapp_api_slow endpoint=/miniapp/state" in line for line in logs.output))
 
