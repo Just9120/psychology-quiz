@@ -95,7 +95,7 @@ def get_current_miniapp_question_snapshot(
             "option_index": int(opt["option_index"]),
             "option_text": str(opt["option_text"]),
         }
-        for opt in get_question_options(conn, question_id)
+        for opt in get_question_options(conn, question_id, session_id=resolved_session_id)
     )
     return MiniAppQuestionSnapshotResult(
         status="ok",
@@ -141,7 +141,7 @@ def submit_miniapp_answer_event(
             expected_question_id=expected_question_id,
         )
 
-    allowed_options = {int(opt["option_index"]) for opt in get_question_options(conn, question_id)}
+    allowed_options = {int(opt["option_index"]) for opt in get_question_options(conn, question_id, session_id=session_id)}
     if selected_option_index not in allowed_options:
         return MiniAppAnswerSubmissionResult(
             status="invalid_option",

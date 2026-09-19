@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import closing
 import json
 import os
 import sqlite3
@@ -126,11 +127,11 @@ def main() -> int:
     approved_total = sum(1 for question in questions if question.get("status") == "approved")
 
     try:
-        with sqlite3.connect(db_path) as conn:
+        with closing(sqlite3.connect(db_path)) as conn, conn:
             conn.row_factory = sqlite3.Row
             conn.execute("PRAGMA foreign_keys = ON;")
-            stats = upsert_approved_questions(conn, questions)
-    except sqlite3.Error as exc:
+            stats = upsert_approved_questions(conn, questions, authoritative=True)
+    except (sqlite3.Error, ValueError) as exc:
         print(f"[ERROR] Ошибка SQLite при загрузке вопросов: {exc}")
         return 1
 

@@ -4,6 +4,12 @@ import os
 import sqlite3
 import sys
 from pathlib import Path
+from contextlib import closing
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+from app.attempt_content import ensure_attempt_snapshots
 
 from dotenv import load_dotenv
 
@@ -82,11 +88,12 @@ def main() -> int:
 
     try:
         schema_sql = schema_path.read_text(encoding="utf-8")
-        with sqlite3.connect(db_path) as conn:
+        with closing(sqlite3.connect(db_path)) as conn, conn:
             conn.executescript(schema_sql)
             ensure_users_reading_mode_column(conn)
             ensure_quiz_sessions_difficulty_mode_column(conn)
             ensure_user_literature_progress_table(conn)
+            ensure_attempt_snapshots(conn)
         print(f"[OK] База данных инициализирована: {db_path}")
         print("[OK] SQL-схема успешно применена.")
         return 0

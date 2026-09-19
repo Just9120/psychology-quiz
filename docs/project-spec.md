@@ -77,6 +77,9 @@ PsychologyAtlas — личная учебная платформа владел�
 | R-QUIZ-06 / AC-QUIZ-06 | Аудит существующих questions и glossary → проверены смысл, ответы, объяснения, неоднозначность, дубли и sources; спорное/неподтверждённое явно отмечено, source_ref/approved не считаются доказательством сами по себе. Проверка: source-backed review ledger и regression cases. |
 | R-QUIZ-07 / AC-QUIZ-07 | Исправляется банк → рабочий legacy контент сохраняется до контролируемой замены; практические вопросы остаются в своей предметной теме, учебная история не искажается. Проверка: rollout/parity tests совместно с AC-PROG-04. |
 
+**Решение PLATFORM-STABILIZATION-001 / Q-02, 19.09.2026:** при включении вопроса в попытку SQLite сохраняет immutable JSON snapshot формата v1 (external ID, текст, объяснение, источник, категория, difficulty, порядок/тексты вариантов и correctness), SHA-256 и provenance `captured`. Все quiz clients оценивают и показывают feedback по этой редакции; повторный seed её не переписывает. Additive migration до изменения serving content заполняет старые attempts доступной текущей редакцией с provenance `legacy_backfill_current`: это не доказательство первоначально показанного текста; прежние answers/score остаются без пересчёта. Доступные редакции не восстанавливают уже утраченные до миграции данные. Полный seed синхронизирует статусы; отсутствующие canonical IDs помечаются retired, physical delete attempts/questions не выполняется. Non-approved вопросы не входят в новые attempts, существующие продолжаются по snapshot. Repetition learning/relearning и PostgreSQL остаются вне этого решения.
+
+
 ### E04 — Повторение и личный прогресс
 
 Источник SRC-01: «Интервальное повторение», «Прогресс».
@@ -232,7 +235,7 @@ E04 зависит от user identity и content versioning. E06/E07 требу�
 | ID | Решение и зависимый scope |
 | --- | --- |
 | Q-01 | Правила student/guest sharing, доступ к knowledge, linking e-mail/Telegram/Google и ownership конфликтов; E01/E11. Owner-only граница уже обязательна. |
-| Q-02 | Versioned content/attempt representation, migration SQLite → PostgreSQL и сохранение legacy progress; E01/E04/E13. |
+| Q-02 | SQLite attempt snapshot representation принято 19.09 (ниже); migration SQLite → PostgreSQL, linking legacy progress и repetition version policy остаются открытыми; E01/E04/E13. |
 | Q-03 | Алгоритм intervals/adaptive sampling, достаточность истории и mastery/global difficulty policy; E03/E04. |
 | Q-04 | Mapping legacy not_started/in_progress/read/revisit/skipped в согласованные «читаю/слушаю/отложено», progress units и дедупликация библиографии; E09. |
 | Q-05 | Условия включения optional RAG/direct API/voice; provider/token budget и возврат transcript не определены; E07/E10. |

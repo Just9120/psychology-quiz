@@ -122,7 +122,7 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
   - `content/questions/module2/`
   - `content/questions/module3/`
 - SQLite **не** является source of truth; это runtime layer хранения и выдачи данных.
-- Заполнение и обновление SQLite выполняется сидером `scripts/seed_questions.py`.
+- Заполнение и обновление SQLite выполняется сидером `scripts/seed_questions.py`: полный sync снимает approval с non-approved/отсутствующих IDs без удаления истории. Quiz attempts сохраняют immutable question/options snapshot; legacy backfill явно помечен как доступная текущая редакция. Контракт и recovery — в [content rollout](docs/question_bank_content_rollout.md).
 
 Runtime sync for JSON/content changes is deployment-environment-specific. Repository-visible CI validates question-bank syntax and seedability, but does not deploy or mutate runtime SQLite. When deployment matters, verify deployed commit/runtime state in the target environment after merge; docs-only changes do not require runtime sync.
 

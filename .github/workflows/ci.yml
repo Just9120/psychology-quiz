@@ -94,6 +94,9 @@ jobs:
       - name: Seed questions into temporary database
         run: python scripts/seed_questions.py
 
+      - name: Verify serving content parity
+        run: python scripts/audit_question_bank.py --db-path "$DB_PATH"
+
       - name: Write CI summary
         shell: bash
         run: |

@@ -44,6 +44,9 @@ class _RecordingConnection:
     def close(self):
         self.closed = True
 
+    def commit(self):
+        self.statements.append("COMMIT")
+
 
 def _make_init_data(bot_token: str, user: dict, auth_date: int | None = None):
     auth_date = auth_date or int(time.time())
@@ -309,6 +312,7 @@ class MiniAppApiTests(unittest.TestCase):
             patch("app.db.ensure_quiz_sessions_difficulty_mode_column"),
             patch("app.db.ensure_quiz_session_selected_categories_table"),
             patch("app.db.ensure_performance_indexes"),
+            patch("app.db.ensure_attempt_snapshots"),
         ):
             init_db_connection(":memory:")
 

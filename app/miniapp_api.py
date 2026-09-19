@@ -17,6 +17,7 @@ from typing import Any
 from app.payload_validation import is_sqlite_integer, valid_quiz_setup
 
 from app.db import USER_LITERATURE_READING_STATUSES, create_or_load_user, finalize_quiz_session, get_connection
+from app.attempt_content import get_attempt_content
 from app.db import (
     abandon_in_progress_sessions_for_user,
     get_active_categories,
@@ -627,7 +628,7 @@ def _build_recent_answer_feedback(conn, *, actor_user_id: int) -> dict[str, Any]
     question_id = int(row["question_id"])
     selected_option_index = int(row["selected_option_index"])
     is_correct = bool(int(row["is_correct"]))
-    feedback = _build_answer_feedback(conn, question_id, selected_option_index, is_correct)
+    feedback = _build_answer_feedback(conn, session_id, question_id, selected_option_index, is_correct)
     feedback["question_id"] = question_id
     return feedback
 
@@ -670,16 +671,23 @@ def build_state_response(
 
 
 
-def _build_answer_feedback(conn, question_id: int, selected_option_index: int, is_correct: bool) -> dict[str, Any]:
-    feedback = {
+def _build_answer_feedback(conn, session_id: int, question_id: int, selected_option_index: int, is_correct: bool) -> dict[str, Any]:
+    content = get_attempt_content(conn, session_id, question_id)
+    if content is None:
+        raise ValueError("Question is not part of this attempt")
+    options = content["options"]
+    selected = next((opt for opt in options if opt["option_index"] == selected_option_index), None)
+    correct = next((opt for opt in options if opt["is_correct"]), None)
+    return {
         "selected_option_index": selected_option_index,
-        "selected_option_text": _get_option_text(conn, question_id, selected_option_index),
+        "selected_option_text": selected["option_text"] if selected else None,
         "is_correct": bool(is_correct),
-        "correct_option_index": _find_correct_option_index(conn, question_id),
-        "explanation": _get_question_explanation(conn, question_id),
+        "correct_option_index": correct["option_index"] if correct else None,
+        "correct_option_text": correct["option_text"] if correct else None,
+        "explanation": content["explanation"],
+        "content_sha256": content["content_sha256"],
+        "snapshot_provenance": content["snapshot_provenance"],
     }
-    feedback["correct_option_text"] = _get_option_text(conn, question_id, feedback["correct_option_index"])
-    return feedback
 
 
 def build_answer_response(
@@ -725,10 +733,7 @@ def build_answer_response(
                         finalized = finalize_quiz_session(conn, req[0])
                         if finalized is not None:
                             state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
-                    is_correct = bool(submission.is_correct) if submission.is_correct is not None else (
-                        submission.selected_option_index == _find_correct_option_index(conn, req[1])
-                    )
-                    feedback = _build_answer_feedback(conn, req[1], int(submission.selected_option_index), is_correct)
+                    feedback = _build_answer_feedback(conn, req[0], req[1], int(submission.selected_option_index), bool(submission.is_correct))
                     return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "feedback": feedback, "runner_state": state})
                 response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
                 if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
@@ -739,35 +744,6 @@ def build_answer_response(
             _log_locked_db("/miniapp/answer", started_at)
             return _database_busy_response()
         raise
-
-
-def _find_correct_option_index(conn, question_id: int) -> int | None:
-    row = conn.execute(
-        "SELECT option_index FROM question_options WHERE question_id = ? AND is_correct = 1 LIMIT 1",
-        (question_id,),
-    ).fetchone()
-    return int(row["option_index"]) if row is not None else None
-
-
-def _get_question_explanation(conn, question_id: int) -> str | None:
-    row = conn.execute("SELECT explanation FROM questions WHERE id = ? LIMIT 1", (question_id,)).fetchone()
-    if row is None:
-        return None
-    value = row["explanation"]
-    return str(value) if isinstance(value, str) else None
-
-
-def _get_option_text(conn, question_id: int, option_index: int | None) -> str | None:
-    if not isinstance(option_index, int):
-        return None
-    row = conn.execute(
-        "SELECT option_text FROM question_options WHERE question_id = ? AND option_index = ? LIMIT 1",
-        (question_id, option_index),
-    ).fetchone()
-    if row is None:
-        return None
-    value = row["option_text"]
-    return str(value) if isinstance(value, str) else None
 
 
 def build_setup_response(db_path: str, bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):

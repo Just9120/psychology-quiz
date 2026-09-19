@@ -78,6 +78,7 @@ git() {
     'diff --name-only '*)
       if [[ "$FAULT" == docs ]]; then echo README.md;
       elif [[ "$FAULT" == first_adoption ]]; then echo app/main.py;
+      elif [[ "$FAULT" == snapshot_change ]]; then echo app/attempt_content.py;
       else echo app/db.py; fi ;;
     'merge --ff-only '*) FAKE_HEAD="$EXPECTED" ;;
     *) return 0 ;;
@@ -107,6 +108,7 @@ docker() {
     *deployment_db.py\ backup) [[ "$FAULT" != backup ]] || return 2; echo /data/backups/release-test/quiz.sqlite3 ;;
     *scripts/init_db.py) [[ "$FAULT" != migration ]] ;;
     *deployment_db.py\ verify*) [[ "$FAULT" != preservation ]] ;;
+    *deployment_db.py\ smoke) [[ "$FAULT" != content_parity ]] ;;
     up*) DEPLOY_STARTED=1 ;;
     *deployment_http_smoke.py) [[ "$FAULT" != health ]] ;;
     *) return 0 ;;
@@ -139,8 +141,9 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
     return result, log.read_text() if log.exists() else ""
 
 
-def test_deployment_builds_before_backup_migration_and_checks_running_revision(tmp_path):
-    result, log = run_deploy(tmp_path)
+@pytest.mark.parametrize("change", ["", "snapshot_change"])
+def test_deployment_builds_before_backup_migration_and_checks_running_revision(tmp_path, change):
+    result, log = run_deploy(tmp_path, change)
     assert result.returncode == 0, result.stderr + result.stdout
     ordered = ["build psych_quiz_bot psych_quiz_miniapp_api", "deployment_db.py preflight", "stop psych_quiz_bot",
                "deployment_db.py backup", "scripts/init_db.py", "scripts/seed_questions.py", "deployment_db.py verify",
@@ -154,7 +157,7 @@ def test_deployment_builds_before_backup_migration_and_checks_running_revision(t
 @pytest.mark.parametrize("fault,forbidden", [("lock", "git fetch"), ("dirty", "git fetch"),
         ("stale", "git merge --ff-only"), ("project", "git merge --ff-only"),
         ("build", "deployment_db.py backup"), ("backup", "scripts/init_db.py"),
-        ("migration", "up -d"), ("preservation", "up -d")])
+        ("migration", "up -d"), ("preservation", "up -d"), ("content_parity", "up -d")])
 def test_failure_stops_before_dependent_operation(tmp_path, fault, forbidden):
     result, log = run_deploy(tmp_path, fault)
     assert result.returncode != 0

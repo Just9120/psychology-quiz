@@ -14,6 +14,7 @@ from fastapi.testclient import TestClient
 import pytest
 
 from app.handler_latency import HandlerLatency
+from app.db import store_session_questions
 from app.main import update_ingress_logger
 from app.classic_quiz_handlers import _safe_classic_text_log_fields
 from app.miniapp_api import MiniAppApiHandler, _sanitize_request_id, build_setup_response, verify_telegram_init_data, InitDataValidationError, start_miniapp_api_server
@@ -34,7 +35,7 @@ def api(tmp_path):
         conn.execute("INSERT INTO question_options (question_id, option_index, option_text, is_correct) VALUES (1, 0, 'A', 1), (1, 1, 'B', 0)")
         conn.execute("INSERT INTO users (telegram_user_id, first_name) VALUES (?, 'Original name')", (USER_ID,))
         conn.execute("INSERT INTO quiz_sessions (user_id, category_id) VALUES (1, 1)")
-        conn.execute("INSERT INTO quiz_session_questions (session_id, question_id, order_index) VALUES (1, 1, 0)")
+        store_session_questions(conn, 1, [1])
     signed = _make_init_data(TOKEN, {"id": USER_ID, "first_name": "Changed name"})
     client = TestClient(create_app(db_path=str(path), bot_token=TOKEN, allowed_origin="https://miniapp.example.com"))
     return path, client, signed
