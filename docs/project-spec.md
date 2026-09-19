@@ -229,17 +229,21 @@ E04 зависит от user identity и content versioning. E06/E07 требу�
 - D-05: исторические RFC о /next, reminders/reading plans и private-note UI не создают обязательств SRC-01; они требуют отдельного решения. Reader, OAuth, voice и direct LLM API сохраняют свой поздний/опциональный характер.
 - D-06: старые продуктовые AC ID отсутствовали; новые ID введены здесь впервые. Идентификаторы прежних delivery items сохранены в плане/архиве, не переиспользованы как новые AC.
 - D-07: implementation/code baseline и content counts хранятся в плане, команды — в README, workflow — в AGENTS.md. Дубли статусов и старый процесс «сначала merge, затем CI» не являются нормативными.
+- D-09 (явный выбор пользователя 19.09.2026): первый самостоятельный PWA-срез — рабочий quiz вне Telegram, вход владельца по e-mail/паролю и подтверждённое связывание с его текущим прогрессом. Для этой Goal сохраняется SQLite; PostgreSQL migration — следующая Goal. Target PostgreSQL/pgvector и AC-FND-05 не отменены. PWA использует React/TypeScript/Vite и общий FastAPI/domain/state; старые Mini App/classic сохраняются как совместимые клиенты. Перенос Mini App на React не является условием запуска первой PWA.
+- D-10 (декомпозиция D-09, без расширения scope): первый доступ PWA — владельцу; публичный self-signup для студентов/гостей, OAuth, sharing и новая role policy не включаются. E-mail verification/recovery используют предусмотренный Яндекс 360. PWA login после onboarding не требует Telegram initData или открытого Telegram; Telegram нужен только при добровольном подтверждении связи с существующей legacy identity. Связь подтверждает владение обеими identities; совпадение имени/e-mail или введённый Telegram ID не доказывают ownership. Уже занятая identity/конфликт истории отклоняются без автоматического merge, удаления или переназначения чужого state.
+- D-11 (граница PWA-FIRST-001): самостоятельный клиент покрывает текущий random quiz (темы/микс/все, количество/все доступные, необязательная difficulty, ответ/feedback/результат/resume). Доступный уже сейчас quiz state общий с Telegram. Offline обучение, новые learning contours и полная analytics/history UI не входят в первый срез. Потеря связи не оценивается как ошибка ответа; installability не означает обязательное offline хранение content/user data.
+
 
 ## Открытые решения / SPEC gaps
 
 | ID | Решение и зависимый scope |
 | --- | --- |
-| Q-01 | Правила student/guest sharing, доступ к knowledge, linking e-mail/Telegram/Google и ownership конфликтов; E01/E11. Owner-only граница уже обязательна. |
-| Q-02 | SQLite attempt snapshot representation принято 19.09 (ниже); migration SQLite → PostgreSQL, linking legacy progress и repetition version policy остаются открытыми; E01/E04/E13. |
+| Q-01 | Первый PWA owner-only и proof-of-both-identities/no-auto-merge для e-mail/Telegram определены D-09/10. Student/guest sharing, knowledge access, OAuth и сложные объединения уже существующих accounts остаются открытыми; E01/E11. |
+| Q-02 | SQLite attempt snapshot representation принято 19.09; D-09 сохраняет SQLite для первого PWA. До identity migration определить versioned schema/rollback compatibility и reconciliation существующих user IDs; PostgreSQL cutover следующей Goal, repetition version policy остаётся открытой; E01/E04/E13. |
 | Q-03 | Алгоритм intervals/adaptive sampling, достаточность истории и mastery/global difficulty policy; E03/E04. |
 | Q-04 | Mapping legacy not_started/in_progress/read/revisit/skipped в согласованные «читаю/слушаю/отложено», progress units и дедупликация библиографии; E09. |
 | Q-05 | Условия включения optional RAG/direct API/voice; provider/token budget и возврат transcript не определены; E07/E10. |
-| Q-06 | Mail configuration owner, account token/session policy и recovery flow; E11. Секреты здесь не фиксируются. |
+| Q-06 | PWA-FIRST-001 требует owner e-mail allowlist, конфигурацию Яндекс 360 (sender/SMTP secret owner), session/one-time token expiry/revocation и recovery policy до включения login. Конкретные значения/владельцы пока UNSET; секреты здесь не фиксируются. Это gate auth/mail delivery, не причина откладывать независимый frontend/domain код. |
 | Q-07 | Coverage taxonomy/пороги и полный рекурсивный Drive inventory; root ID установлен выше, revision mapping производных материалов ещё не установлен; E02/E12. |
 | Q-08 | Фактические production config owners, artifact/version identity и recovery procedure для target stack; E13. SLO, RPO/RTO — UNSET до решения. |
 
