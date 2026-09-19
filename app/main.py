@@ -33,6 +33,7 @@ from telegram.ext import (
 )
 
 from app.config import load_settings
+from app.web_link_handlers import link_command, confirm_link_callback
 from app.logging_config import configure_app_logging
 from app.handler_latency import HandlerLatency as _HandlerLatency
 from app.miniapp_entrypoint_handlers import (
@@ -962,6 +963,8 @@ def main() -> None:
     register_update_ingress_handler(application)
 
     application.add_handler(CommandHandler("start", start_command))
+    application.add_handler(CommandHandler("link", link_command))
+    application.add_handler(CallbackQueryHandler(confirm_link_callback, pattern=r"^pwa_link:"))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))

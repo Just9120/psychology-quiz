@@ -9,6 +9,7 @@ from typing import Any
 
 from fastapi import FastAPI, Request
 from fastapi.responses import Response
+from app.web_config import WebSettings
 
 from app.logging_config import configure_noisy_http_client_loggers, install_telegram_url_redaction
 from app.miniapp_api import (
@@ -104,6 +105,7 @@ def create_app_from_env() -> FastAPI:
         slow_request_ms=int(os.getenv("MINIAPP_API_SLOW_REQUEST_MS", "500")),
         allowed_origin=os.getenv("MINIAPP_API_ALLOWED_ORIGIN", "").strip() or None,
         revision=os.getenv("APP_REVISION", "UNSET"),
+        web_settings=WebSettings.from_env(),
     )
 
 
@@ -115,6 +117,9 @@ def create_app(
     slow_request_ms: int = 500,
     allowed_origin: str | None = None,
     revision: str = "UNSET",
+    web_settings: WebSettings | None = None,
+    web_mailer=None,
+    web_clock=time.time,
 ) -> FastAPI:
     app = FastAPI(redirect_slashes=False)
 
@@ -329,4 +334,11 @@ def create_app(
     async def post_glossary_restart(request: Request) -> Response:
         return await _post_glossary(request, "/miniapp/glossary/restart", build_glossary_restart_response)
 
+    if web_settings is not None:
+        from app.web_auth import WebAuth
+        from app.web_api import install_web_api
+        from app.web_mail import SmtpMailer
+        auth = WebAuth(db_path, web_settings, web_mailer if web_mailer is not None else SmtpMailer(web_settings), clock=web_clock)
+        install_web_api(app, auth)
+        app.state.web_auth = auth
     return app

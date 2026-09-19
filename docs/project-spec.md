@@ -175,6 +175,8 @@ Glossary retry contract (PLATFORM-STABILIZATION-001): вопрос/порядо�
 | R-AUTH-04 / AC-AUTH-04 | Позже добавлен Google OAuth → связывание с существующим аккаунтом не создаёт отдельный прогресс и не позволяет захватить чужую identity. Проверка: linking/conflict cases; Q-01. |
 | R-AUTH-05 / AC-AUTH-05 | Telegram аккаунт связывается с платформенным → принадлежность подтверждается, состояние не смешивается/не теряется. Проверка: identity migration и ownership tests; точный linking flow — Q-01. |
 
+**Решение PWA-FIRST-001 / D-13:** owner-only e-mail registration подтверждает владение адресом до задания пароля; verification/recovery одноразовые, session серверная и отзываемая. Связывание начинается в PWA, подтверждается владельцем в private Telegram chat с видимым destination e-mail, затем явно завершается в той же PWA session с видимым Telegram target. До начала обучения можно выбрать legacy actor либо новый независимый actor; merge уже выбранных identities/историй не поддерживается. Конкретный auth/API/config/migration contract — [PWA auth](pwa-auth.md). Default-off code не означает включённую production PWA.
+
 ### E12 — Owner content dashboard
 
 Источник SRC-01: «Owner dashboard», «Обновление контента».
@@ -244,7 +246,7 @@ E04 зависит от user identity и content versioning. E06/E07 требу�
 | Q-03 | Алгоритм intervals/adaptive sampling, достаточность истории и mastery/global difficulty policy; E03/E04. |
 | Q-04 | Mapping legacy not_started/in_progress/read/revisit/skipped в согласованные «читаю/слушаю/отложено», progress units и дедупликация библиографии; E09. |
 | Q-05 | Условия включения optional RAG/direct API/voice; provider/token budget и возврат transcript не определены; E07/E10. |
-| Q-06 | PWA-FIRST-001 требует owner e-mail allowlist, конфигурацию Яндекс 360 (sender/SMTP secret owner), session/one-time token expiry/revocation и recovery policy до включения login. Конкретные значения/владельцы пока UNSET; секреты здесь не фиксируются. Это gate auth/mail delivery, не причина откладывать независимый frontend/domain код. |
+| Q-06 | Owner auth token/session/password policy и proof flow определены [PWA auth](pwa-auth.md). Production owner e-mail, sender/credentials, hostname и config owners отложены пользователем до подготовки кода; student/public policy не выбиралась. |
 | Q-07 | Coverage taxonomy/пороги и полный рекурсивный Drive inventory; root ID установлен выше, revision mapping производных материалов ещё не установлен; E02/E12. |
 | Q-08 | Фактические production config owners, artifact/version identity и recovery procedure для target stack; E13. SLO, RPO/RTO — UNSET до решения. |
 
