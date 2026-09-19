@@ -582,7 +582,7 @@ class MiniAppApiTests(unittest.TestCase):
                 '/tmp/unused.sqlite3',
                 self.bot_token,
                 self.init_data,
-                json.dumps({'mode': 'glossary', 'action': 'answer', 'session_id': session_id, 'selected_option_index': selected}).encode(),
+                json.dumps({'mode': 'glossary', 'action': 'answer', 'session_id': session_id, 'step_id': question['step_id'], 'selected_option_index': selected}).encode(),
             )
             self.assertEqual(200, code)
             feedback_state = json.loads(body.decode('utf-8'))['glossary_state']
@@ -592,7 +592,7 @@ class MiniAppApiTests(unittest.TestCase):
                 '/tmp/unused.sqlite3',
                 self.bot_token,
                 self.init_data,
-                json.dumps({'mode': 'glossary', 'action': 'next', 'session_id': session_id}).encode(),
+                json.dumps({'mode': 'glossary', 'action': 'next', 'session_id': session_id, 'step_id': question['step_id']}).encode(),
             )
             self.assertEqual(200, code)
             next_state = json.loads(body.decode('utf-8'))['glossary_state']
@@ -671,7 +671,7 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
             code, _, body = build_glossary_answer_response(
                 self.bot_token,
                 self.init_data,
-                json.dumps({'session_id': session_id, 'selected_option_index': selected}).encode(),
+                json.dumps({'session_id': session_id, 'step_id': q['step_id'], 'selected_option_index': selected}).encode(),
             )
             self.assertEqual(200, code)
             feedback = json.loads(body.decode('utf-8'))['glossary_state']['feedback']
@@ -686,7 +686,7 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
                 code, _, body = build_glossary_next_response(
                     self.bot_token,
                     self.init_data,
-                    json.dumps({'session_id': session_id}).encode(),
+                    json.dumps({'session_id': session_id, 'step_id': q['step_id']}).encode(),
                 )
                 self.assertEqual(200, code)
                 state = json.loads(body.decode('utf-8'))['glossary_state']
@@ -697,7 +697,7 @@ class MiniAppGlossaryApiTests(unittest.TestCase):
                 build_glossary_answer_response(
                     self.bot_token,
                     self.init_data,
-                    json.dumps({'session_id': session_id, 'selected_option_index': q['options'][0]['option_index']}).encode(),
+                    json.dumps({'session_id': session_id, 'step_id': q['step_id'], 'selected_option_index': q['options'][0]['option_index']}).encode(),
                 )
             self.assertIsNotNone(final)
             self.assertIn('score', final)

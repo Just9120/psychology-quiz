@@ -122,10 +122,11 @@ def test_logs_exclude_identifiers_auth_and_untrusted_correlation_data(api, caplo
     MiniAppApiHandler.log_message(None, "%s", f"GET /?initData={signed}")
 
 
-def test_frontend_rejects_untrusted_destination_before_fetch():
+@pytest.mark.parametrize("script", ["frontend_api_destination.cjs", "frontend_glossary_retries.cjs"])
+def test_frontend_behavior_regressions(script):
     node = shutil.which("node")
     assert node, "Node.js is required for the dependency-free frontend security regression"
-    subprocess.run([node, "tests/frontend_api_destination.cjs"], check=True, capture_output=True, text=True)
+    subprocess.run([node, str(Path("tests") / script)], check=True, capture_output=True, text=True)
 
 
 def test_legacy_http_logs_exclude_user_and_raw_query(api, caplog, capsys):

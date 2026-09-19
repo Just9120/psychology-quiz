@@ -238,7 +238,10 @@ def build_glossary_answer_response(bot_token: str, init_data: str, body: bytes, 
     selected = payload.get("selected_option_index")
     if not isinstance(session_id, str) or not is_sqlite_integer(selected):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
-    state = answer_glossary_session(verified.telegram_user_id, session_id, selected)
+    step_id = payload.get("step_id")
+    if not is_sqlite_integer(step_id, minimum=1):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "glossary_step_required"})
+    state = answer_glossary_session(verified.telegram_user_id, session_id, selected, step_id)
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_answer"})
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
@@ -253,7 +256,10 @@ def build_glossary_next_response(bot_token: str, init_data: str, body: bytes, *,
     session_id = payload.get("session_id")
     if not isinstance(session_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_session"})
-    state = next_glossary_session(verified.telegram_user_id, session_id)
+    step_id = payload.get("step_id")
+    if not is_sqlite_integer(step_id, minimum=1):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "glossary_step_required"})
+    state = next_glossary_session(verified.telegram_user_id, session_id, step_id)
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_session"})
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
@@ -564,14 +570,17 @@ def _build_existing_endpoint_glossary_answer_response(verified: VerifiedInitData
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_action"})
     if not isinstance(session_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_session"})
+    step_id = payload.get("step_id")
+    if action in {"answer", "next"} and not is_sqlite_integer(step_id, minimum=1):
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "glossary_step_required"})
     if action == "answer":
         selected = payload.get("selected_option_index")
         if not is_sqlite_integer(selected):
             return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
-        state = answer_glossary_session(verified.telegram_user_id, session_id, selected)
+        state = answer_glossary_session(verified.telegram_user_id, session_id, selected, step_id)
         error = "invalid_glossary_answer"
     elif action == "next":
-        state = next_glossary_session(verified.telegram_user_id, session_id)
+        state = next_glossary_session(verified.telegram_user_id, session_id, step_id)
         error = "invalid_glossary_session"
     else:
         state = restart_glossary_session(verified.telegram_user_id, session_id)

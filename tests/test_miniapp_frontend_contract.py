@@ -385,9 +385,10 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
     def test_glossary_primary_flow_uses_existing_endpoints_only(self):
         self.assertIn("glossaryFetch('/miniapp/setup', { mode: 'glossary'", self.content)
-        self.assertIn("glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'answer'", self.content)
-        self.assertIn("glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'next'", self.content)
-        self.assertIn("glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'restart'", self.content)
+        self.assertIn("glossaryFetch('/miniapp/answer', payload)", self.content)
+        for action in ('answer', 'next', 'restart'):
+            self.assertIn(f"mode: 'glossary', action: '{action}'", self.content)
+        self.assertIn("async function runGlossaryAction(button, payload, onSuccess)", self.content)
         for endpoint in ("/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/glossary/topics"):
             self.assertNotIn(endpoint, self.content)
 
