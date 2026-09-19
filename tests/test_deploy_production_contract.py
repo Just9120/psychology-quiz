@@ -75,7 +75,10 @@ git() {
     'diff --quiet') [[ "$FAULT" != dirty ]] ;;
     'rev-parse HEAD') echo "$FAKE_HEAD" ;;
     'rev-parse origin/main') if [[ "$FAULT" == stale ]]; then echo "$OLD"; else echo "$EXPECTED"; fi ;;
-    'diff --name-only '*) if [[ "$FAULT" == docs ]]; then echo README.md; else echo app/db.py; fi ;;
+    'diff --name-only '*)
+      if [[ "$FAULT" == docs ]]; then echo README.md;
+      elif [[ "$FAULT" == first_adoption ]]; then echo app/main.py;
+      else echo app/db.py; fi ;;
     'merge --ff-only '*) FAKE_HEAD="$EXPECTED" ;;
     *) return 0 ;;
   esac
@@ -89,7 +92,9 @@ docker() {
       *com.docker.compose.project*) if [[ "$FAULT" == project ]]; then echo foreign; else echo psychology-quiz; fi ;;
       *com.docker.compose.service*) echo "${@: -1}" ;;
       *org.opencontainers.image.revision*)
-        if [[ "$DEPLOY_STARTED" == 1 && "$FAULT" != image ]]; then echo "$EXPECTED"; else echo "$OLD"; fi ;;
+        if [[ "$DEPLOY_STARTED" == 1 && "$FAULT" != image ]]; then echo "$EXPECTED";
+        elif [[ "$FAULT" == first_adoption ]]; then echo '<no value>';
+        else echo "$OLD"; fi ;;
       *Image*) echo sha256:test-image ;;
     esac
     return
@@ -174,6 +179,15 @@ def test_documentation_change_only_syncs_source(tmp_path):
     assert result.returncode == 0, result.stderr
     assert "SOURCE_SYNC_OK" in result.stdout
     assert "build psych_quiz_bot" not in log
+
+
+def test_first_versioned_image_rehearses_backup_without_unneeded_seed(tmp_path):
+    result, log = run_deploy(tmp_path, "first_adoption")
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert "deployment_db.py backup" in log
+    assert "deployment_db.py verify" in log
+    assert "scripts/init_db.py" not in log
+    assert "scripts/seed_questions.py" not in log
 
 
 def test_ssh_transport_cannot_lose_script_to_a_child_reading_stdin(tmp_path):
