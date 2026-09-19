@@ -64,6 +64,8 @@ Repository-visible GitHub Actions are split by responsibility:
 
 Карта: [app](app/) — bot/API/domain code, [miniapp](miniapp/) — текущая статика, [content](content/) — производный учебный контент, [sql](sql/) — SQLite schema, [scripts](scripts/) — init/seed/validators, [tests](tests/) — pytest suite (включая unittest cases). Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
 
+Общий quiz backend: [quiz_service](app/quiz_service.py) задаёт setup/state/answer/feedback для проверенного `users.id`; [quiz_runner](app/quiz_runner.py) — переходы попытки. Telegram API проверяет initData отдельно; `miniapp_runner` сохраняет совместимые imports для bot. [Identity migration](app/identity_schema.py) выполняется через canonical init command, сохраняет legacy данные и допускает пользователей без Telegram. Процедура production migration — в [runbook](docs/miniapp-deployment-qa.md#identity-v1-для-pwa).
+
 ```bash
 pip install -r requirements.txt
 python -m compileall app scripts

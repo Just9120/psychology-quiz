@@ -23,7 +23,6 @@ from app.miniapp_api import (
     start_miniapp_api_server,
     verify_telegram_init_data,
 )
-from app.miniapp_runner import MiniAppAnswerSubmissionResult
 
 
 def _setup_schema(conn):
@@ -183,22 +182,9 @@ class MiniAppApiTests(unittest.TestCase):
 
 
     def test_duplicate_answer_returns_full_feedback(self):
-        with patch(
-            'app.miniapp_api.submit_miniapp_answer_event',
-            return_value=MiniAppAnswerSubmissionResult(
-                status='duplicate',
-                session_id=self.session_id,
-                selected_option_index=0,
-                is_correct=True,
-                resolved_question_id=1,
-            ),
-        ):
-            code, _, body = build_answer_response(
-                self.db,
-                self.bot_token,
-                self.init_data,
-                json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode(),
-            )
+        request = json.dumps({'session_id': self.session_id, 'question_id': 1, 'selected_option_index': 0}).encode()
+        build_answer_response(self.db, self.bot_token, self.init_data, request)
+        code, _, body = build_answer_response(self.db, self.bot_token, self.init_data, request)
         self.assertEqual(200, code)
         payload = json.loads(body)
         self.assertTrue(payload['ok'])

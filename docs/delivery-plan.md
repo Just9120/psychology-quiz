@@ -2,11 +2,13 @@
 
 ## Current Goal — PWA-FIRST-001
 
-**Статус: подготовлена; реализация BACKLOG.** Поручение 19.09.2026 — «формируй Goal». Пользователь выбрал «PWA сначала, PostgreSQL следующей Goal». Текущая работа разрешает подготовку spec/plan и docs PR; разработка приложения, provisioning, отправка писем и изменение production settings этим planning request не запускаются. Implementation Goal активируется после поручения выполнить её.
+**Статус: ACTIVE / IN_PROGRESS.** Поручение 19.09.2026 — «Я думал ты начнешь реализацию. А ты только план сделал?» — подтверждает выполнение PWA-FIRST-001. Пользователь выбрал «PWA сначала, PostgreSQL следующей Goal». Встроенная implementation Goal активирована. Неизвестные owner/mail/hostname настройки блокируют только зависимые внешние действия; code/tests продолжаются.
+
+**Порядок по уточнению пользователя:** «потом, подготовь сначала весь код». Завершить code/tests/PR подготовки до запроса production owner/mail/hostname settings; новый PWA доступ остаётся fail-closed. Публикация PWA и real-mail acceptance отложены до настройки. Existing backend delivery выполняется по текущей процедуре без изменения secrets/DNS.
 
 **Результат:** владелец открывает PsychologyAtlas в обычном desktop/mobile browser, входит по e-mail/паролю, подтверждённо связывает существующую Telegram identity и проходит quiz с тем же банком и сохранённым состоянием. PWA устанавливается в поддерживаемом браузере, запускается вне Telegram и возобновляет попытку после закрытия клиента/перезапуска API. Контур работает на общем FastAPI backend и текущей SQLite; модель не требует подставных Telegram IDs для web accounts.
 
-**Baseline:** `bd2a5c59beaf3966539b75ebd23ee76638ca2109`, verified origin/main 19.09.2026. Stabilization #284–288 DONE; финальный CI 35449928502 и stateful CD 35449955313 PASS. Main чистый, один worktree, open PR нет; protections/rulesets отсутствуют. Planning branch `codex/plan-pwa-first-goal`, base тот же SHA. Implementation branches/PR — UNSET до старта, создаются отдельно от свежего main по [AGENTS](../AGENTS.md).
+**Baseline:** `78edfb0bf1e749cd15366fee146e6916a2a0c708`, freshly fetched origin/main 19.09.2026. Planning #289 merged, CI 35451459318 и source-sync CD 35451491475 PASS; runtime остаётся `bd2a5c5` после stabilization #284–288. Main чистый, один worktree, open PR нет; main/rulesets и production Environment protections отсутствуют. Первый implementation branch `codex/pwa-shared-identity`, base `78edfb0bf1e749cd15366fee146e6916a2a0c708`; PR UNSET до validation.
 
 ### Scope и трассировка
 
@@ -40,6 +42,7 @@
 
 - Общая quiz domain logic принимает проверенный internal actor; PWA session и Telegram initData — auth adapters. Бизнес-логика/банк не копируются во второй API или клиент. Сохранить текущие `/miniapp/*` contracts и stable content IDs.
 - Web account не аутентифицируется произвольным Telegram ID. Email/Telegram identity mapping и schema migration разрабатываются до изменения DB, с неизменными learning identities и regression на ownership. Никаких synthetic Telegram IDs, обнуления прогресса или автоматического объединения конфликтующих историй.
+- PR1 schema decision: `users.id` остаётся learning actor; `telegram_user_id` становится nullable UNIQUE. Legacy values/IDs/связанные строки не изменяются. Versioned migration `identity-v1` выполняется отдельной транзакцией init script после verified backup: copy/rebuild users с сохранением columns/indexes/triggers/autoincrement high-water mark, foreign-key check до commit; ошибка откатывает транзакцию. Runtime requests не перестраивают schema. Отдельные web credentials/session tables и verified identity linking добавляются в PR2, открытых web auth routes в PR1 нет. После появления web users rollback на старый Telegram-only schema не допускается; recovery — остановка и forward-fix по existing runbook.
 - Linking требует авторизованной PWA session и одноразового подтверждения со стороны проверенного Telegram владельца. Token binding/expiry/replay protection и поведение conflicts фиксируются до реализации; owner e-mail и старую identity не угадывать.
 - Password hashing, server-controlled sessions, protected cookie settings, CSRF/Origin guards, revocation, auth attempt limiting и bounded one-time tokens входят в auth implementation. Конкретные TTL/лимиты/secret owners определить и документировать в PR до публичного включения; числовые policy сейчас UNSET. Credentials не хранятся в localStorage или query configuration.
 - PWA доступна только предусмотренному owner. Полный public student/guest signup/sharing и Google OAuth отложены; isolation проверяется на двух synthetic identities даже при закрытом production доступе.
@@ -64,7 +67,7 @@
 | PWA-D1 | Owner login e-mail и кто управляет allowlist/bootstrap; подтверждение конкретной legacy identity через пользовательский flow | UNSET; блокирует реальный onboarding/linking, не synthetic implementation. Secrets/owner identifiers не публиковать в docs/artifacts |
 | PWA-D2 | Яндекс 360 sender/SMTP configuration, secret location/owner, доступ к bounded verification/recovery test на адресе владельца | UNSET; блокирует real-mail/auth delivery. В тестах stub/test mailbox, реальные письма не отправлять неизвестному получателю |
 | PWA-D3 | PWA hostname, DNS/TLS, Nginx config owner/access и deployment unit | UNSET; known runtime `/opt/psychology-quiz`, Compose `psychology-quiz`, bot/API unit уже подтверждены. В spec целевой PWA hosting — VPS/Nginx; новый hostname не выдумывать, existing Cloudflare Mini App не заменять автоматически |
-| PWA-D4 | Session/token policy и versioned identity schema/reconciliation/recovery | Q-01/02/06, определить до соответствующих PR. Existing snapshots/backup rehearsal — prerequisite уже PASS; PostgreSQL target design не блокирует первый PWA |
+| PWA-D4 | Session/token policy и versioned identity schema/reconciliation/recovery | Identity v1 определена в PR1 и проверяется migration/reconciliation tests; session/token policy определить в PR2. Existing snapshots/backup rehearsal — prerequisite уже PASS; PostgreSQL target design не блокирует первый PWA |
 | PWA-D5 | Новые build/test commands, Node/package manager/lockfile и frontend test runtime | Сейчас N/A для отсутствующего package; при PR3 стать конкретными canonical scripts/README commands, не угадывать npm scripts до manifest. Python commands уже в README |
 | PWA-D6 | Известные dependency findings F-023 и новые auth/runtime inputs | До открытия auth routes проверить reachability и закрыть затрагивающие их риски совместимыми upgrades/tests. Не включать несвязанную модернизацию всего проекта; выявленный существенный блокер фиксировать отдельно |
 
@@ -82,7 +85,7 @@
 | G-PWA-01/04, FND-04/09 | Typecheck/build и UI состояний; реальные desktop/mobile layouts, keyboard/errors и standalone/installation smoke без Telegram | Frontend scripts REQUIRED после создания; browser checks на synthetic account, manifest/icons/HTTPS assets | PR3/4 REQUIRED; владельческий ad-hoc на физическом телефоне RECOMMENDED, не замена suite |
 | G-PWA-07, E14 | Сохранены классический quiz/Mini App routes/setup/answer/privacy и approved-content/history semantics | Affected canonical pytest; полный existing suite при общем DB/auth/domain impact, без лишних повторов после PASS | По impact каждого PR, REQUIRED local+CI |
 | G-PWA-08, OPS-01/02/03/05 | Проверенные revision/artifact/config, migration preconditions, health и bounded authenticated flow на разрешённых test data; no direct DB/API exposure | Existing GitHub CI/CD + согласованный PWA deploy unit; source/version/health и post-check primary records | Каждый applicable CD REQUIRED; real mail/owner operations только по установленному target и полномочиям |
-| Planning/docs | Stable AC/finding IDs, неизменённый audit snapshot, существующие relative links, diff/self-review и scope без code/settings edits | Git/docs readback; `git diff --check` | Этот docs PR REQUIRED; runtime migration/build N/A, code не меняется |
+| PR1 shared identity/domain | Legacy schema rollback/retry/backup preservation, independent actors, concurrent conflicting answers и Telegram regression | `python -m pytest -q`; `tests/test_identity_schema.py`, `tests/test_quiz_service.py`, affected existing suites; init/seed/parity + compileall | Local/CI REQUIRED; Docker compose local N/A при отсутствии CLI, CI REQUIRED |
 
 **DoD:** G-PWA-01–08 выполнены в указанном scope и подтверждены подходящими автоматическими checks + применимыми browser/delivery checks; все implementation PR merged/delivered; identity/data сохранены; actual commands/config owners и recovery доступны из repo/primary records. Whole-epic readiness не присваивается за частичный срез. После DoD остановиться; следующая предложенная Goal — PostgreSQL migration, scope отдельно выбирает пользователь.
 
@@ -120,6 +123,8 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | E14 — Telegram compatibility | 5 / 6 | 83,3% | 0 |
 
 ## Evidence
+
+**E-PWA-01 (19.09.2026, PR1 worktree `codex/pwa-shared-identity`, base `78edfb0`):** `quiz_runner`/`quiz_service` общие для authenticated adapters; Mini App contract и classic imports сохранены. `identity-v1` допускает web-only actors без изменения legacy IDs/data; automated backup restore/preservation, migration retry/failure rollback, unique Telegram identity и sequence/index/trigger checks PASS. Auth/browser/installability ещё не реализованы; G-PWA-03/05/07 IN_PROGRESS, остальные G-PWA BACKLOG. Полная local suite: 373 PASS/24 subtests, 5 failures исправлены (перенесённый mock target, Windows command-length в shell harness); corrective suite 59 PASS/8 subtests. Совокупно 378 cases PASS; Docker CLI local недоступен (1 skip), CI обязан выполнить этот contract. Final affected suite 49 PASS/8 subtests; compileall, Bash syntax, diff check и fresh init/seed (575 questions/8 categories)/parity PASS. Self-review: auth boundary, migration atomicity/preservation и compatibility проверены; код не активирует PWA. CI/merge/CD PENDING до push; их результат не предсказывается.
 
 Аудиторские E-CODE/E-TEST/E-REPRO и связанные записи — на audit baseline. E-STAB records относятся к указанным revision/worktree текущей Goal; они обновляют Evidence затронутых AC, не аудиторские проценты. Диагностические scripts/logs/SQLite/venv находятся вне repo; в план включены результаты и воспроизводимые сценарии, не raw logs.
 
@@ -167,7 +172,7 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | AC-FND-04 | BACKLOG | MANDATORY | Нет React/TypeScript/Vite manifests/build и общего PWA клиента; E-CODE, F-026. |
 | AC-FND-05 | BACKLOG | MANDATORY | Runtime — SQLite; PostgreSQL migration/recovery fixtures отсутствуют; Q-02, F-026. |
 | AC-FND-06 | IN_PROGRESS | MANDATORY | SQLite content sync сохраняет versioned attempts, answers/users/literature (E-STAB-05); target indexes/embeddings и остальные learning subsystems ещё не реализованы. |
-| AC-FND-07 | IN_PROGRESS | MANDATORY | Quiz duplicate guard/API feedback и glossary step/answer recovery проверены (E-STAB-04); общий multi-client backend вне Telegram ещё не реализован. |
+| AC-FND-07 | IN_PROGRESS | MANDATORY | Quiz duplicate guard/API feedback и glossary step/answer recovery проверены (E-STAB-04); PR1 выделяет verified-actor quiz service, original-outcome replay и cross-client concurrency/restart tests (E-PWA-01); PWA auth/UI ещё не реализованы. |
 | AC-FND-08 | IN_PROGRESS | MANDATORY | Quiz/literature сохраняются в SQLite; glossary state теряется при restart и не разделяется между процессами; F-018. |
 | AC-FND-09 | BACKLOG | MANDATORY | Нет независимого PWA; опубликованная статика без Telegram показывает инструкцию /ui; E-HTTP, F-026. |
 | AC-FND-10 | IN_PROGRESS | MANDATORY | Bot/Mini App используют quiz DB; PWA и общее состояние всех контуров отсутствуют; F-026. |
@@ -222,7 +227,7 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | AC-AUTH-02 | BACKLOG | MANDATORY | Нет verification/recovery mail через Яндекс 360; Q-06, F-026. |
 | AC-AUTH-03 | IN_PROGRESS | MANDATORY | /stats и Mini App ownership gates проверены; platform roles/sharing matrix отсутствует; Q-01, F-026. |
 | AC-AUTH-04 | BACKLOG | CONDITIONAL | Условный scope; Google OAuth/linking не выбран и не реализован, Q-01. |
-| AC-AUTH-05 | BACKLOG | MANDATORY | Нет Telegram ↔ platform identity linking/migration; Q-01/Q-02, F-026. |
+| AC-AUTH-05 | IN_PROGRESS | MANDATORY | PR1: nullable Telegram identity и versioned learning-user preservation; actual credentials/linking proof ещё PR2. E-PWA-01 (worktree), Q-01/Q-02, F-026. |
 | AC-OWN-01 | BACKLOG | MANDATORY | Есть скрытая агрегированная /stats; нет source coverage/pipeline dashboard; F-026. |
 | AC-OWN-02 | BACKLOG | MANDATORY | Нет source-to-derivative inventory/gap detection; Q-07, F-026. |
 | AC-OWN-03 | BACKLOG | MANDATORY | Нового owner dashboard нет; существующий /stats gate READY только в AC-LEG-04; F-026. |
@@ -334,8 +339,6 @@ False-positive review: 16 test failures — Windows fixture/lifecycle, не 16 �
 
 ## Checkpoint и следующий шаг
 
-19.09.2026: stabilization закрыта по #288/CI/CD primary records (E-STAB-05), repeat deployment не запускался. Next Goal PWA-FIRST-001 сформирована по выбору пользователя: owner PWA quiz сначала, PostgreSQL следующей Goal. Spec D-09–11 и Q-01/02/06 уточнены; существующие 76 project AC/28 findings и аудиторская оценка сохранены без пересчёта.
+19.09.2026: PWA-FIRST-001 implementation ACTIVE по явному уточнению пользователя. Приоритет — весь code/tests, production owner/mail/hostname позже. PR1 branch `codex/pwa-shared-identity`, base `78edfb0bf1e749cd15366fee146e6916a2a0c708`; shared quiz actor/domain, idempotent answer outcome и identity-v1 migration подготовлены. E-PWA-01 содержит local evidence; CI/PR/merge/CD пока PENDING, records искать по этой ветке/merge SHA.
 
-Planning branch `codex/plan-pwa-first-goal`, base `bd2a5c59beaf3966539b75ebd23ee76638ca2109`; изменения только spec/plan. До последнего push обязательны docs/diff/self-review, затем published checks/review и docs PR merge. Для этого docs-only scope runtime CD N/A; существующий auto CD может выполнить только SOURCE_SYNC_OK с runtime_unchanged=bd2a5c5, deploy вручную не запускать. PR/check/merge records определяются по этой ветке без metadata-only follow-up PR.
-
-Следующий implementation шаг после поручения — проверить fresh main, установить PWA-D1–D6 и закрепить конкретный shared actor/identity migration contract до кода PR1. Вопросы owner e-mail/mail/hostname не блокируют подготовку synthetic fixtures и минимального domain slice, но блокируют соответствующее внешнее включение. Не выбирать значения за пользователя и не расширять Goal до PostgreSQL, других learning contours или public sharing. Проценты готовности не пересчитывать.
+Local validation/self-review завершены (E-PWA-01). После push — все published checks/review и merge. После merge обязательна текущая stateful VPS процедура: backup/isolated restore, migration, full prior-user fingerprint/FK/snapshot/parity, exact image/HTTP smoke. Schema change backward compatible для текущих Telegram клиентов; web routes PR1 не включает. При failure — stop/forward-fix, никакого automatic production restore. После applicable delivery и cleanup — PR2 owner auth/mail/linking на fresh main; настройки пользователя не угадывать. Полный project readiness не пересчитывался.

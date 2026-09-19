@@ -16,19 +16,10 @@ from dataclasses import dataclass
 from typing import Any
 from app.payload_validation import is_sqlite_integer, valid_quiz_setup
 
-from app.db import USER_LITERATURE_READING_STATUSES, create_or_load_user, finalize_quiz_session, get_connection
-from app.attempt_content import get_attempt_content
-from app.db import (
-    abandon_in_progress_sessions_for_user,
-    get_active_categories,
-    select_random_approved_question_ids_across_active_categories,
-    select_random_approved_question_ids_by_categories,
-    select_random_approved_question_ids_by_category,
-    set_selected_categories_for_session,
-    start_quiz_session,
-    store_session_questions,
+from app.db import USER_LITERATURE_READING_STATUSES, create_or_load_user, get_connection
+from app.quiz_service import (
+    QuizSetupError, prepare_quiz, start_prepared_quiz, quiz_setup_options, quiz_state, answer_quiz,
 )
-from app.miniapp_runner import build_miniapp_runner_state, submit_miniapp_answer_event
 from app.literature import (
     list_literature_topic_payloads,
     load_literature_items,
@@ -590,48 +581,6 @@ def _build_existing_endpoint_glossary_answer_response(verified: VerifiedInitData
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": error})
     return _json(HTTPStatus.OK, {"ok": True, "mode": "glossary", "glossary_state": state})
 
-def _find_latest_session_id_for_feedback(conn, actor_user_id: int) -> int | None:
-    row = conn.execute(
-        """
-        SELECT id
-        FROM quiz_sessions
-        WHERE user_id = ?
-          AND status IN ('in_progress', 'finished')
-        ORDER BY
-          CASE WHEN status = 'in_progress' THEN 0 ELSE 1 END,
-          COALESCE(finished_at, started_at) DESC,
-          started_at DESC,
-          id DESC
-        LIMIT 1
-        """,
-        (actor_user_id,),
-    ).fetchone()
-    return int(row["id"]) if row is not None else None
-
-
-def _build_recent_answer_feedback(conn, *, actor_user_id: int) -> dict[str, Any] | None:
-    session_id = _find_latest_session_id_for_feedback(conn, actor_user_id)
-    if session_id is None:
-        return None
-    row = conn.execute(
-        """
-        SELECT question_id, selected_option_index, is_correct
-        FROM quiz_answers
-        WHERE session_id = ?
-        ORDER BY answered_at DESC, id DESC
-        LIMIT 1
-        """,
-        (session_id,),
-    ).fetchone()
-    if row is None:
-        return None
-    question_id = int(row["question_id"])
-    selected_option_index = int(row["selected_option_index"])
-    is_correct = bool(int(row["is_correct"]))
-    feedback = _build_answer_feedback(conn, session_id, question_id, selected_option_index, is_correct)
-    feedback["question_id"] = question_id
-    return feedback
-
 def build_state_response(
     db_path: str,
     bot_token: str,
@@ -655,39 +604,15 @@ def build_state_response(
                     verified.first_name,
                     verified.last_name,
                 )
-                actor_user_id = int(user_row["id"])
-                state = build_miniapp_runner_state(conn, actor_user_id=actor_user_id)
-                recent_answer_feedback = _build_recent_answer_feedback(conn, actor_user_id=actor_user_id)
+                payload = quiz_state(conn, actor_user_id=int(user_row["id"]))
     except sqlite3.OperationalError as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/state", started_at)
             return _database_busy_response()
         raise
-    payload: dict[str, Any] = {"ok": True, "runner_state": state}
-    if recent_answer_feedback is not None:
-        payload["recent_answer_feedback"] = recent_answer_feedback
     return _json(HTTPStatus.OK, payload)
 
 
-
-
-def _build_answer_feedback(conn, session_id: int, question_id: int, selected_option_index: int, is_correct: bool) -> dict[str, Any]:
-    content = get_attempt_content(conn, session_id, question_id)
-    if content is None:
-        raise ValueError("Question is not part of this attempt")
-    options = content["options"]
-    selected = next((opt for opt in options if opt["option_index"] == selected_option_index), None)
-    correct = next((opt for opt in options if opt["is_correct"]), None)
-    return {
-        "selected_option_index": selected_option_index,
-        "selected_option_text": selected["option_text"] if selected else None,
-        "is_correct": bool(is_correct),
-        "correct_option_index": correct["option_index"] if correct else None,
-        "correct_option_text": correct["option_text"] if correct else None,
-        "explanation": content["explanation"],
-        "content_sha256": content["content_sha256"],
-        "snapshot_provenance": content["snapshot_provenance"],
-    }
 
 
 def build_answer_response(
@@ -720,25 +645,9 @@ def build_answer_response(
         with closing(get_connection(db_path)) as conn:
             with conn:
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
-                submission = submit_miniapp_answer_event(
-                    conn,
-                    session_id=req[0],
-                    actor_user_id=int(user_row["id"]),
-                    question_id=req[1],
-                    selected_option_index=req[2],
-                )
-                if submission.status in {"accepted", "duplicate"}:
-                    state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
-                    if state.get("state") == "in_progress" and state.get("status") == "no_current_question":
-                        finalized = finalize_quiz_session(conn, req[0])
-                        if finalized is not None:
-                            state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=req[0])
-                    feedback = _build_answer_feedback(conn, req[0], req[1], int(submission.selected_option_index), bool(submission.is_correct))
-                    return _json(HTTPStatus.OK, {"ok": True, "submission_status": submission.status, "feedback": feedback, "runner_state": state})
-                response_payload: dict[str, Any] = {"ok": True, "submission_status": submission.status}
-                if submission.status in {"duplicate", "stale_question", "invalid_option", "session_not_found", "invalid_question"}:
-                    response_payload["runner_state"] = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]))
-                return _json(HTTPStatus.OK, response_payload)
+                result = answer_quiz(conn, actor_user_id=int(user_row["id"]), session_id=req[0],
+                                     question_id=req[1], selected_option_index=req[2])
+                return _json(HTTPStatus.OK, result)
     except sqlite3.OperationalError as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/answer", started_at)
@@ -761,48 +670,20 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
     if _is_glossary_setup_payload(payload):
         return _build_existing_endpoint_glossary_setup_response(verified, payload)
 
-    quiz_mode = payload.get("quiz_mode")
-    question_count = payload.get("question_count")
-    difficulty = payload.get("difficulty")
-    category_ids = payload.get("category_ids")
     if not valid_quiz_setup(payload):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
 
     try:
         with closing(get_connection(db_path)) as conn:
             with conn:
-                active_categories = get_active_categories(conn)
-                active_ids = {int(row["id"]) for row in active_categories}
-                if not active_ids:
-                    return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_categories"})
-                if any(category_id not in active_ids for category_id in category_ids):
-                    return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
-                difficulty_filter = None if difficulty == "any" else difficulty
-                if quiz_mode == "single":
-                    if len(category_ids) != 1 or int(category_ids[0]) not in active_ids:
-                        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
-                    session_category_id = int(category_ids[0])
-                    selected_ids = None
-                    question_ids = select_random_approved_question_ids_by_category(conn, session_category_id, question_count, difficulty_filter)
-                elif quiz_mode == "selected_mix":
-                    if not category_ids or any(int(cid) not in active_ids for cid in category_ids):
-                        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
-                    session_category_id = None
-                    selected_ids = [int(cid) for cid in category_ids]
-                    question_ids = select_random_approved_question_ids_by_categories(conn, selected_ids, question_count, difficulty_filter)
-                else:
-                    session_category_id = None
-                    selected_ids = None
-                    question_ids = select_random_approved_question_ids_across_active_categories(conn, question_count, difficulty_filter)
-                if not question_ids:
-                    return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "no_questions"})
+                # Validate before profile/session writes; malformed setup is read-only.
+                try:
+                    prepared = prepare_quiz(conn, payload)
+                except QuizSetupError as exc:
+                    status = HTTPStatus.BAD_REQUEST if str(exc) == "invalid_setup" else HTTPStatus.CONFLICT
+                    return _json(status, {"ok": False, "error": str(exc)})
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
-                abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
-                session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
-                if selected_ids:
-                    set_selected_categories_for_session(conn, session_id, selected_ids)
-                store_session_questions(conn, session_id, question_ids)
-                state = build_miniapp_runner_state(conn, actor_user_id=int(user_row["id"]), session_id=session_id)
+                state = start_prepared_quiz(conn, actor_user_id=int(user_row["id"]), prepared=prepared)
     except sqlite3.OperationalError as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/setup", started_at)
@@ -828,7 +709,7 @@ def build_setup_options_response(
         with closing(get_connection(db_path)) as conn:
             with conn:
                 create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
-                categories = [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)]
+                options = quiz_setup_options(conn)
     except sqlite3.OperationalError as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/setup-options", started_at)
@@ -840,9 +721,7 @@ def build_setup_options_response(
         {
             "ok": True,
             "setup_options": {
-                "categories": categories,
-                "question_count_choices": [5, 10, 15, "all"],
-                "difficulty_choices": ["any", "easy", "medium", "hard"],
+                **options,
                 "modes": [{"mode": "topics", "title": "Тесты по темам"}, {"mode": "glossary", "title": "Глоссарий"}],
                 "glossary": glossary,
             },

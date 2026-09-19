@@ -79,6 +79,7 @@ git() {
       if [[ "$FAULT" == docs ]]; then echo README.md;
       elif [[ "$FAULT" == first_adoption ]]; then echo app/main.py;
       elif [[ "$FAULT" == snapshot_change ]]; then echo app/attempt_content.py;
+      elif [[ "$FAULT" == identity_change ]]; then echo app/identity_schema.py;
       else echo app/db.py; fi ;;
     'merge --ff-only '*) FAKE_HEAD="$EXPECTED" ;;
     *) return 0 ;;
@@ -136,12 +137,15 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
         step = step.split("run: |", 1)[1].split("\n      - name:", 1)[0]
         code = 'ssh() { bash -c "${@: -1}"; }\n' + textwrap.dedent(step)
         env.update(EXPECTED_SHA=SHA, DEPLOY_USER="test", DEPLOY_HOST="localhost", RUNNER_TEMP=tmp_path.as_posix())
-    result = subprocess.run([bash, "-c", code, "deploy-test", SHA], input="",
+    # Windows truncates a long bash -c command at the process argument limit.
+    test_script = tmp_path / "deployment-test.sh"
+    test_script.write_text(code, encoding="utf-8", newline="\n")
+    result = subprocess.run([bash, test_script.as_posix(), SHA], input="",
                             cwd=tmp_path, env=env, capture_output=True, text=True, timeout=20)
     return result, log.read_text() if log.exists() else ""
 
 
-@pytest.mark.parametrize("change", ["", "snapshot_change"])
+@pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change"])
 def test_deployment_builds_before_backup_migration_and_checks_running_revision(tmp_path, change):
     result, log = run_deploy(tmp_path, change)
     assert result.returncode == 0, result.stderr + result.stdout
