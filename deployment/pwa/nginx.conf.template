@@ -1,0 +1,44 @@
+# Render placeholders only after establishing the target/config owner.
+# Include this server block inside the existing nginx http context.
+server {
+    listen __HTTPS_BIND__ ssl;
+    server_name __PWA_HOST__;
+    ssl_certificate __TLS_CERTIFICATE__;
+    ssl_certificate_key __TLS_KEY__;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    root __PWA_RELEASE_ROOT__/current;
+    index index.html;
+    server_tokens off;
+    access_log off;
+    client_max_body_size 16k;
+
+    # No child add_header directives: all locations inherit these headers.
+    add_header Cache-Control "no-store" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "no-referrer" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+
+    location ^~ /web/ {
+        proxy_pass http://127.0.0.1:__API_PORT__;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header Connection "";
+        proxy_cache off;
+        proxy_buffering off;
+        proxy_read_timeout 15s;
+        # API emits sanitized action/status records; avoid raw request URI diagnostics.
+        error_log /dev/null;
+    }
+    location ~ /\. { return 404; }
+    location = /web { return 404; }
+    location /assets/ { try_files $uri =404; }
+    location /icons/ { try_files $uri =404; }
+    location = /manifest.webmanifest {
+        types { application/manifest+json webmanifest; }
+        try_files $uri =404;
+    }
+    location / { try_files $uri $uri/ /index.html; }
+}
