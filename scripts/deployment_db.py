@@ -16,6 +16,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 from app.attempt_content import get_attempt_content
 from app.auth_schema import AUTH_TABLES
+from app.web_config import WebSettings
 from scripts.audit_question_bank import build_report, has_blockers
 
 USER_TABLES = (
@@ -112,6 +113,21 @@ def check_content_parity(db_path: Path) -> None:
         raise RuntimeError("Serving content differs from canonical approved bank")
 
 
+def check_runtime_config() -> None:
+    """Validate the candidate before stopping writers; never print secret values."""
+    token = os.environ.get("BOT_TOKEN", "")
+    if not token or "__REQUIRED_SECRET__" in token:
+        raise RuntimeError("Required runtime configuration is missing")
+    if os.environ.get("TELEGRAM_UPDATE_MODE", "polling").strip().lower() == "webhook":
+        for name in ("TELEGRAM_WEBHOOK_URL", "TELEGRAM_WEBHOOK_LISTEN",
+                     "TELEGRAM_WEBHOOK_PORT", "TELEGRAM_WEBHOOK_SECRET_TOKEN"):
+            if not os.environ.get(name, "").strip():
+                raise RuntimeError(f"Required configuration is missing: {name}")
+        if not 1 <= int(os.environ["TELEGRAM_WEBHOOK_PORT"]) <= 65535:
+            raise RuntimeError("Invalid webhook port")
+    WebSettings.from_env()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("action", choices=("preflight", "backup", "verify", "smoke"))
@@ -124,16 +140,7 @@ def main() -> None:
     if not raw_path or not db_path.is_relative_to(Path("/data")) or not db_path.is_file():
         raise RuntimeError("DB_PATH must identify an existing database under /data")
     if args.action == "preflight":
-        token = os.environ.get("BOT_TOKEN", "")
-        if not token or "__REQUIRED_SECRET__" in token:
-            raise RuntimeError("Required runtime configuration is missing")
-        if os.environ.get("TELEGRAM_UPDATE_MODE", "polling").strip().lower() == "webhook":
-            for name in ("TELEGRAM_WEBHOOK_URL", "TELEGRAM_WEBHOOK_LISTEN",
-                         "TELEGRAM_WEBHOOK_PORT", "TELEGRAM_WEBHOOK_SECRET_TOKEN"):
-                if not os.environ.get(name, "").strip():
-                    raise RuntimeError(f"Required configuration is missing: {name}")
-            if not 1 <= int(os.environ["TELEGRAM_WEBHOOK_PORT"]) <= 65535:
-                raise RuntimeError("Invalid webhook port")
+        check_runtime_config()
         with closing(read_connection(db_path)) as conn:
             check_integrity(conn)
             user_state(conn)

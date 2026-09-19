@@ -2,7 +2,7 @@
 
 `psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами, повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md).
 
-Текущая реализация — Telegram-бот и Mini App на Python/FastAPI, SQLite и статическом HTML/JavaScript. Целевые PostgreSQL/pgvector и React/TypeScript/Vite ещё не следует считать действующим stack. Расширение продукта выполняется только в выбранной Goal.
+Текущая реализация — Telegram-бот и Mini App на Python/FastAPI/SQLite, а также самостоятельный PWA quiz client на React/TypeScript/Vite. PWA доступ выключен до настройки владельца, почты и HTTPS; PostgreSQL/pgvector остаются следующим отдельным scope.
 
 Текущее состояние продукта:
 - **Module 1** — стабильный baseline, 296 approved questions across five active topics.
@@ -10,7 +10,7 @@
 - **Module 3** — первая активная категория `Психологическое консультирование`, 108 approved questions.
 - Активный банк вопросов: 575 approved questions в JSON source-of-truth under `content/questions/**/*.json`.
 
-Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. **Standalone Web UI отсутствует**; Telegram Mini App является opt-in UX внутри Telegram. Внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
+Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. Самостоятельный Web UI находится в [pwa](pwa/); Telegram Mini App остаётся opt-in UX внутри Telegram. Внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
 ## Переменные окружения
 
@@ -88,12 +88,32 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 | Behavioral suite | `python -m pip install -r requirements-dev.txt`, затем `python -m pytest -q`; временные/in-memory DB внутри tests. Frontend security regression требует Node.js без npm dependencies; Docker compose contract требует Docker CLI (локально иначе skip; в CI обязателен) |
 | Выбранная suite | `python -m pytest tests/test_miniapp_frontend_contract.py -q` для frontend/docs contracts; выбирайте другие существующие test modules по diff |
 | FastAPI local run | `python -m uvicorn app.miniapp_fastapi_runtime:app --host 127.0.0.1 --port 8081`; тот же тестовый DB_PATH/BOT_TOKEN; подробности в [runbook](docs/miniapp-deployment-qa.md) |
-| Format / lint / typecheck | N/A: отдельных команд текущий проект не задаёт; whitespace проверяет `git diff --check` |
-| Build | N/A для текущих Python/статических исходников; runtime image собирается Docker в разрешённой delivery Goal. Vite build появится при реализации target frontend |
+| Python format / lint / typecheck | N/A: отдельных команд нет; whitespace проверяет `git diff --check`. Frontend typecheck — ниже |
+| Python build | N/A отдельная компиляция; runtime image собирает действующая Docker delivery procedure |
 
-Базовые local services — SQLite и, для Mini App, FastAPI; live Telegram smoke требует тестовый bot/client. PostgreSQL/pgvector и Яндекс 360 — целевые зависимости, пока не условия существующих локальных команд. Требуемые CI проверки и ограничения текущего pipeline — в [плане](docs/delivery-plan.md); зелёный CI пока не означает запуск behavioral suite.
+Базовые local services — SQLite и FastAPI; live Telegram smoke требует тестовый bot/client. PostgreSQL/pgvector — следующий scope. Яндекс 360 требуется для реального PWA onboarding; synthetic suite использует test mailbox. CI запускает Python behavioral suite и frontend checks; ограничения — в [плане](docs/delivery-plan.md).
 
 Owner PWA auth backend поставляется выключенным по умолчанию. Переменные, API contract, mail/session/linking policy и условия включения — в [PWA auth](docs/pwa-auth.md). Новые credentials не заменяют Telegram initData в прежних routes.
+
+## PWA local run и проверки
+
+Рабочий каталог `pwa/`; Node **22.23.1**, npm **12.0.2**, [package-lock.json](pwa/package-lock.json). Установите Python dependencies в отдельное окружение по командам выше.
+
+```bash
+npm ci --ignore-scripts
+npm test
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+`build` включает `typecheck`; отдельно доступны `npm run typecheck` и `npm run icons` (SVG → checked-in PNG). Format/lint scripts пока N/A, whitespace — корневой `git diff --check`. Linux без browser dependencies: `npx playwright install --with-deps chromium`.
+
+Browser tests сами поднимают изолированный backend на loopback 8085 и production preview на 4173; оба порта должны быть свободны. `python` должен указывать на выбранное окружение; иначе задайте `PWA_TEST_PYTHON` абсолютным путём к interpreter (PowerShell: `$env:PWA_TEST_PYTHON = '...'`). Используются только synthetic DB/mail/owner; внешние сервисы не нужны.
+
+Для ручного preview: из `pwa/` запустите `python tests/backend.py`, во втором терминале `npm run preview`. Synthetic owner `owner@example.test`, пароль `A synthetic browser passphrase`; это публичные тестовые данные, не production credentials. Открывайте loopback 127.0.0.1, порт 4173. Backend не сохраняет данные между запусками. Для разработки исходников `npm run dev` использует 5173; реальному dev API задайте matching `PWA_ORIGIN`, loopback exception и отдельную DB согласно [PWA auth](docs/pwa-auth.md), порт API 8085. Synthetic harness намеренно разрешает origin только preview 4173.
+
+[Клиент, caching и artifact identity](docs/pwa-client.md); [auth/API и конфигурация](docs/pwa-auth.md). Existing Mini App и его Cloudflare target не заменяются новой PWA.
 
 ## Текущий продуктовый контур
 
