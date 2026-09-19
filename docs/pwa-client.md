@@ -17,7 +17,7 @@
 
 CI `pwa-client` выполняет component tests, typecheck/build и Playwright Chromium desktop/mobile against real FastAPI/temporary SQLite. Нет production secrets, Telegram calls или реальных писем. [Test harness](../pwa/tests/backend.py) существует только в test process на loopback, не импортируется production runtime и не имеет switch в production API. Telegram часть E2E linking использует synthetic trusted adapter; bot handlers/private-user checks отдельно проверяются Python suite.
 
-Artifact `pwa-<tested-SHA>` публикуется после успешных frontend checks на 7 дней. PR artifact относится к GitHub test merge revision; main artifact — к merge commit. Для будущей поставки использовать успешный trusted main CI и проверить identity/hashes; PR artifact не подменяет production release. CI не выполняет deploy.
+Artifact `pwa-<tested-SHA>` публикуется после успешных frontend/Nginx checks на 7 дней. PR artifact относится к GitHub test merge revision; main artifact — к merge commit. Для будущей поставки использовать успешный trusted main CI и проверить identity/hashes; PR artifact не подменяет production release. CI не выполняет deploy. [Release tooling и target preconditions](pwa-delivery.md) подготовлены, применение отложено.
 
 ## Локальные данные
 

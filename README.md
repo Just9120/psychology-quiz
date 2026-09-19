@@ -113,7 +113,7 @@ Browser tests сами поднимают изолированный backend н�
 
 Для ручного preview: из `pwa/` запустите `python tests/backend.py`, во втором терминале `npm run preview`. Synthetic owner `owner@example.test`, пароль `A synthetic browser passphrase`; это публичные тестовые данные, не production credentials. Открывайте loopback 127.0.0.1, порт 4173. Backend не сохраняет данные между запусками. Для разработки исходников `npm run dev` использует 5173; реальному dev API задайте matching `PWA_ORIGIN`, loopback exception и отдельную DB согласно [PWA auth](docs/pwa-auth.md), порт API 8085. Synthetic harness намеренно разрешает origin только preview 4173.
 
-[Клиент, caching и artifact identity](docs/pwa-client.md); [auth/API и конфигурация](docs/pwa-auth.md). Existing Mini App и его Cloudflare target не заменяются новой PWA.
+[Клиент, caching и artifact identity](docs/pwa-client.md); [auth/API и конфигурация](docs/pwa-auth.md); [подготовленные static release/Nginx/smoke процедуры](docs/pwa-delivery.md). Existing Mini App и его Cloudflare target не заменяются новой PWA.
 
 ## Текущий продуктовый контур
 
