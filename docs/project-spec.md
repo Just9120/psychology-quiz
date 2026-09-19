@@ -98,6 +98,8 @@ PsychologyAtlas — личная учебная платформа владел�
 | --- | --- |
 | R-GLO-01 / AC-GLO-01 | Открыт glossary contour → доступен quiz терминов/определений по теме с персональным результатом. Проверка: glossary runtime/API и cross-user tests. |
 | R-GLO-02 / AC-GLO-02 | Термин связан с knowledge → доступны переходы к atomic notes/темам; его история участвует в общей системе повторения. Проверка: link integrity и integration с E04/E06. |
+
+Glossary retry contract (PLATFORM-STABILIZATION-001): вопрос/порядок вариантов фиксируется на `(session_id, step_id)`. API answer/next передают положительный целочисленный step_id из current_question; повтор того же answer возвращает сохранённый feedback без повторного score, другой answer уже отвеченного шага отклоняется. Next продвигает только названный отвеченный шаг один раз; поздние запросы не изменяют другой шаг. Dedicated routes и existing `/miniapp/setup`/`answer` adapter имеют одинаковый контракт. Запрос answer/next без step_id получает `glossary_step_required` и требует переоткрыть актуальную Mini App; это безопасная граница совместимости старого неоднозначного формата. Chat glossary и normal quiz protocol сохраняются. In-memory sessions/restart lifetime остаются ограничением F-018; durable persistence в эту Goal не входит.
 | R-GLO-03 / AC-GLO-03 | Если выбран дополнительный PWA term-card scope → видны definition, связанные понятия и разрешённые source references. Проверка: browser/access cases. Карточка — опциональное дополнение к quiz. |
 
 ### E06 — Knowledge layer и Obsidian

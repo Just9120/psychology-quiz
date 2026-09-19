@@ -1764,6 +1764,7 @@
 
       let glossaryTopicsCache = [];
       let glossaryLastSessionId = '';
+      let glossaryRenderRevision = 0;
 
 
 
@@ -2220,7 +2221,32 @@
         runnerState.textContent = 'Выберите количество вопросов.';
       }
 
+      async function runGlossaryAction(button, payload, onSuccess) {
+        if (button.disabled) return;
+        const revision = glossaryRenderRevision;
+        button.disabled = true;
+        try {
+          const { resp, data } = await glossaryFetch('/miniapp/answer', payload);
+          if (revision !== glossaryRenderRevision || !button.isConnected || glossaryView.hidden) return;
+          if (resp.ok && data?.ok) {
+            onSuccess(data.glossary_state);
+          } else {
+            runnerState.textContent = 'Сессия недоступна. Закройте окно и откройте /ui заново.';
+          }
+        } catch (_) {
+          if (revision === glossaryRenderRevision && button.isConnected && !glossaryView.hidden) {
+            runnerState.textContent = 'Нет подтверждения от сервера. Нажмите ту же кнопку ещё раз.';
+          }
+        } finally {
+          if (revision === glossaryRenderRevision && button.isConnected) {
+            button.disabled = false;
+            button.classList.remove('answer-pending');
+          }
+        }
+      }
+
       function renderGlossaryState(state) {
+        glossaryRenderRevision += 1;
         hideSetupWarning();
         if (state?.state === 'completed') return renderGlossaryResult(state.result || {});
         const q = state?.current_question;
@@ -2251,9 +2277,11 @@
           btn.textContent = opt.option_text;
           btn.setAttribute('data-option-index', String(idx));
           btn.addEventListener('click', async () => {
+            list.querySelectorAll('button').forEach((other) => { if (other !== btn) other.disabled = true; });
             btn.classList.add('answer-pending');
-            const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'answer', session_id: q.session_id, selected_option_index: idx });
-            if (resp.ok && data?.ok) renderGlossaryFeedback(q, data.glossary_state.feedback);
+            await runGlossaryAction(btn,
+              { mode: 'glossary', action: 'answer', session_id: q.session_id, step_id: q.step_id || q.order_index, selected_option_index: idx },
+              (state) => renderGlossaryFeedback(q, state.feedback));
           });
           li.appendChild(btn);
           list.appendChild(li);
@@ -2264,6 +2292,7 @@
       }
 
       function renderGlossaryFeedback(question, feedback) {
+        glossaryRenderRevision += 1;
         showGlossaryView();
         hideSetupWarning();
         const optionButtons = [...glossaryView.querySelectorAll('ol button')];
@@ -2305,8 +2334,9 @@
         next.textContent = 'Далее';
         next.className = 'answer-next';
         next.addEventListener('click', async () => {
-          const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'next', session_id: question.session_id });
-          if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
+          await runGlossaryAction(next,
+            { mode: 'glossary', action: 'next', session_id: question.session_id, step_id: question.step_id || question.order_index },
+            renderGlossaryState);
         });
         wrap.appendChild(next);
         glossaryView.appendChild(wrap);
@@ -2331,8 +2361,7 @@
         retry.className = 'miniapp-choice-button glossary-choice-button';
         retry.textContent = 'Пройти ещё раз';
         retry.addEventListener('click', async () => {
-          const { resp, data } = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'restart', session_id: glossaryLastSessionId });
-          if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
+          await runGlossaryAction(retry, { mode: 'glossary', action: 'restart', session_id: glossaryLastSessionId }, renderGlossaryState);
         });
         card.appendChild(retry);
         const topics = document.createElement('button');
