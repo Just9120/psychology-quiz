@@ -71,7 +71,8 @@ jobs:
           [[ "$DEPLOY_HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15 \
             -i ~/.ssh/id_ed25519 "$DEPLOY_USER@$DEPLOY_HOST" \
-            "bash -s -- $EXPECTED_SHA" < deploy.sh
+            "bash -c \"\$(cat)\" -- $EXPECTED_SHA" < deploy.sh | tee "$RUNNER_TEMP/deployment.log"
+          grep -Eq "^\\[deploy\\] (DEPLOY_OK revision=$EXPECTED_SHA|SOURCE_SYNC_OK revision=$EXPECTED_SHA runtime_unchanged=[0-9a-f]{40})$" "$RUNNER_TEMP/deployment.log"
 
       - name: Remove ephemeral SSH identity
         if: always()
