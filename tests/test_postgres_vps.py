@@ -1,6 +1,7 @@
 """Cutover failure/resume behavior with isolated filesystem/system boundaries."""
 import json
 from pathlib import Path
+import stat
 import subprocess
 import sys
 from types import SimpleNamespace
@@ -12,6 +13,47 @@ from scripts import postgres_vps as vps
 from scripts.postgres_backup import backup_and_rehearse
 
 SHA = 'a' * 40
+
+
+@pytest.mark.parametrize('owner,phase,mode,allowed', [
+    (0, 'allocated', stat.S_IFDIR | 0o700, True),
+    (999, 'allocated', stat.S_IFDIR | 0o700, True),
+    (999, 'database_started', stat.S_IFDIR | 0o700, True),
+    (0, 'database_started', stat.S_IFDIR | 0o700, False),
+    (1234, 'allocated', stat.S_IFDIR | 0o700, False),
+    (0, 'allocated', stat.S_IFDIR | 0o755, False),
+    (0, 'allocated', stat.S_IFLNK | 0o700, False),
+])
+def test_prepare_preserves_private_storage_and_refuses_unknown_ownership(
+        tmp_path, monkeypatch, owner, phase, mode, allowed):
+    state = tmp_path / 'state'
+    data = state / 'data'
+    data.mkdir(parents=True)
+    nested = data / 'existing-data'
+    nested.write_bytes(b'preserved database bytes')
+    monkeypatch.setattr(vps, 'STATE', state)
+    # Unix ownership boundary is simulated locally on Windows; the actual
+    # root -> uid999 handoff and PG18 startup are exercised by the CI test.
+    info = SimpleNamespace(st_uid=owner, st_mode=mode)
+    original_stat = Path.lstat
+    monkeypatch.setattr(Path, 'lstat', lambda path, *a, **kw:
+                        info if path == data else original_stat(path, *a, **kw))
+    changes = []
+    def chown(path, uid, gid, *, follow_symlinks):
+        changes.append((path, uid, gid, follow_symlinks))
+        info.st_uid = uid
+    monkeypatch.setattr(vps.os, 'chown', chown, raising=False)
+    if allowed:
+        vps.prepare_data_directory({'phase': phase})
+        assert info.st_uid == 999 and stat.S_IMODE(info.st_mode) == 0o700
+        # Retry does not mutate ownership again or recurse into existing files.
+        vps.prepare_data_directory({'phase': phase})
+        assert changes == ([(data, 999, 999, False)] if owner == 0 else [])
+    else:
+        with pytest.raises(vps.OperationError):
+            vps.prepare_data_directory({'phase': phase})
+        assert changes == []
+    assert nested.read_bytes() == b'preserved database bytes'
 
 
 @pytest.mark.parametrize('input_kind', ['none', 'empty', 'bytes', 'file'])

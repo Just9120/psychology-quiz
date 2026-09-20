@@ -305,6 +305,23 @@ def preflight(runtime):
     return {"sqlite_bytes": source.stat().st_size, "free_bytes": free, "reserve_bytes": required}
 
 
+def prepare_data_directory(record):
+    data = STATE / "data"
+    info = data.lstat()
+    if not stat.S_ISDIR(info.st_mode) or stat.S_IMODE(info.st_mode) != 0o700:
+        raise OperationError("private_postgres_data_directory_required")
+    if info.st_uid != 999:
+        if info.st_uid != 0 or record["phase"] != "allocated":
+            raise OperationError("unexpected_postgres_data_owner")
+        # PG18 drops to uid 999 and uses a nested PGDATA. Its entrypoint only
+        # chowns PGDATA, so a root-owned 0700 mount root cannot be traversed.
+        # Repair only our allocation's mount root; never recurse into DB files.
+        os.chown(data, 999, 999, follow_symlinks=False)
+    info = data.lstat()
+    if not stat.S_ISDIR(info.st_mode) or info.st_uid != 999 or stat.S_IMODE(info.st_mode) != 0o700:
+        raise OperationError("postgres_data_owner_not_applied")
+
+
 def prepare(runtime):
     capacity = preflight(runtime)
     if not STATE.exists():
@@ -323,8 +340,7 @@ def prepare(runtime):
         record = {"format": FORMAT, "project": str(PROJECT), "revision": runtime.revision}
         phase(record, "allocated", capacity=capacity)
     record = load_state()
-    if (STATE / "data").is_symlink() or not (STATE / "data").is_dir():
-        raise OperationError("owned_data_directory_required")
+    prepare_data_directory(record)
     compose(["up", "-d", "--no-deps", PG_SERVICE], timeout=600)
     for attempt in range(30):
         try:

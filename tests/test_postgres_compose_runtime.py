@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import time
 import uuid
 
@@ -21,7 +22,8 @@ def test_private_compose_service_initializes_with_mounted_secret_and_checksums(t
     (tmp_path / '.env').write_text('BOT_TOKEN=synthetic\n', encoding='utf-8')
     state = tmp_path / '.postgres'
     state.mkdir(mode=0o700)
-    (state / 'data').mkdir()
+    data_root = state / 'data'
+    data_root.mkdir(mode=0o700)
     password = state / 'admin.password'
     password.write_text('synthetic-compose-only\n', encoding='utf-8')
     password.chmod(0o400)
@@ -31,13 +33,25 @@ def test_private_compose_service_initializes_with_mounted_secret_and_checksums(t
         assert result.returncode == 0, 'Isolated Compose test command failed: ' + result.stderr.decode(errors='replace')[-2000:]
         return result.stdout
     # Only this temporary file is mounted; the real VPS uses the same uid/mode.
-    def secret_owner(uid):
-        command(['docker','run','--rm','--network','none','--mount',f'type=bind,source={password},target=/owned-secret',
-                 '--entrypoint','chown',PG_IMAGE,str(uid),'/owned-secret'])
+    def path_owner(path, uid):
+        command(['docker','run','--rm','--network','none','--mount',f'type=bind,source={path},target=/owned-path',
+                 '--entrypoint','chown',PG_IMAGE,str(uid),'/owned-path'])
     started = False
     try:
         assert command(['docker','run','--rm','--network','none','--entrypoint','id',PG_IMAGE,'-u','postgres']).strip() == b'999'
-        secret_owner(999)
+        path_owner(password, 999)
+        # Match the VPS allocation: private mount root owned by root, then the
+        # actual operator helper makes it traversable by PostgreSQL uid 999.
+        path_owner(data_root, '0:0')
+        initial = data_root.stat()
+        assert (initial.st_uid, initial.st_gid, initial.st_mode & 0o777) == (0, 0, 0o700)
+        helper = ('from pathlib import Path; import sys; from scripts import postgres_vps as vps; '
+                  'vps.STATE=Path(sys.argv[1]); vps.prepare_data_directory({"phase":"allocated"})')
+        result = subprocess.run(['sudo','-n',sys.executable,'-c',helper,str(state)],
+                                cwd=Path(__file__).resolve().parents[1], capture_output=True, timeout=20)
+        assert result.returncode == 0, result.stderr.decode(errors='replace')
+        prepared = data_root.stat()
+        assert (prepared.st_uid, prepared.st_gid, prepared.st_mode & 0o777) == (999, 999, 0o700)
         default = json.loads(command(base + ['config','--format','json']))
         assert PG_SERVICE not in default['services']
         started = True  # Cleanup even if up starts only partially.
@@ -63,7 +77,7 @@ def test_private_compose_service_initializes_with_mounted_secret_and_checksums(t
     finally:
         if started:
             command(base + ['--profile','postgres','down'])
-        secret_owner(os.getuid())
+        path_owner(password, os.getuid())
         # PG owns only this disposable bind directory, not arbitrary host paths.
         command(['docker','run','--rm','--network','none','--mount',f'type=bind,source={state / "data"},target=/owned-data',
                  '--entrypoint','chown',PG_IMAGE,'-R',str(os.getuid()),'/owned-data'])
