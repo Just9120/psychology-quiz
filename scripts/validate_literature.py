@@ -7,6 +7,10 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from app.content_publication import validate_publications
 
 LITERATURE_FILES_GLOB = "content/literature/*.json"
 TOPICS_FILE = Path("content/topics.json")
@@ -265,7 +269,7 @@ def validate() -> list[str]:
 
 
 def main() -> int:
-    errors = validate()
+    errors = validate() + validate_publications("literature")
     if errors:
         print("Literature validation failed:")
         for err in errors:

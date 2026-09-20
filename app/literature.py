@@ -4,6 +4,7 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
+from app.content_publication import load_policy
 
 LITERATURE_DIR = Path("content/literature")
 TOPICS_FILE = Path("content/topics.json")
@@ -60,12 +61,15 @@ def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
 
 def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
+    publication = load_policy()
     for path in sorted(LITERATURE_DIR.glob("*.json")):
         raw_items = _load_json_file(path)
         if not isinstance(raw_items, list):
             continue
         for entry in raw_items:
             if not isinstance(entry, dict):
+                continue
+            if not publication.can_publish("literature", entry):
                 continue
             if topic_id is not None and entry.get("topic_id") != topic_id:
                 continue

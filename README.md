@@ -147,6 +147,7 @@ Browser tests сами поднимают изолированный backend н�
 ## Поток данных: JSON → seed → SQLite
 
 - Первичные учебные знания — согласованный Drive corpus; JSON в репозитории — canonical approved derivative для runtime банка.
+- Новый/изменённый published derivative требует review точного content/source fingerprint. Библиография не подтверждает содержание книги; legacy baseline не объявляется source-certified. [Контракт публикации](docs/question_bank_content_rollout.md#проверка-происхождения-и-публикация) действует для quiz, glossary и literature.
 - Рабочие директории банка:
   - `content/questions/module1/`
   - `content/questions/module2/`

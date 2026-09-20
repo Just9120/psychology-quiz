@@ -9,6 +9,7 @@ import unicodedata
 from typing import Any
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
+from app.content_publication import load_policy
 
 GLOSSARY_UNAVAILABLE_TEXT = "Глоссарий временно недоступен. Попробуйте позже."
 GLOSSARY_TOPICS: tuple[tuple[str, str], ...] = (
@@ -77,7 +78,8 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
 
     try:
         raw = json.loads((_GLOSSARY_DIR / f"{topic_id}.json").read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
+        publication = load_policy()
+    except (OSError, ValueError, KeyError, TypeError):
         return None
     if not isinstance(raw, list):
         return None
@@ -100,6 +102,8 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
             return None
         if entry_topic_id != topic_id or aliases is None or examples is None or source_refs is None or confusable_with is None:
             return None
+        if not publication.can_publish("glossary", item):
+            continue
         entries.append(
             GlossaryEntry(
                 id=entry_id.strip(),
