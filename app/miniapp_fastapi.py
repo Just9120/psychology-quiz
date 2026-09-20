@@ -349,7 +349,7 @@ def create_app(
         return await _post_builder_response("/miniapp/literature/progress", request, build_literature_progress_response, db_path, bot_token)
 
     async def _post_glossary(request: Request, endpoint: str, builder: Any) -> Response:
-        return await _post_builder_response(endpoint, request, builder, bot_token)
+        return await _post_builder_response(endpoint, request, builder, db_path, bot_token)
 
     @app.post("/miniapp/glossary/start")
     async def post_glossary_start(request: Request) -> Response:

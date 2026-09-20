@@ -12,7 +12,7 @@ from pathlib import Path
 import sqlite3
 
 from app.database import Connection, begin_write, connect_database, is_postgres_target
-from app.postgres_schema import IDENTITY_TABLES, TABLES, initialize_schema, table_columns, verify_schema
+from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, initialize_schema, table_columns, verify_schema
 
 
 def quote_identifier(name: str) -> str:
@@ -21,7 +21,7 @@ def quote_identifier(name: str) -> str:
 
 def projection(conn, columns: dict[str, tuple[str, ...]]) -> dict:
     result = {}
-    for table in TABLES:
+    for table in columns:
         fields = ",".join(map(quote_identifier, columns[table]))
         hashes = []
         for row in conn.execute(f"SELECT {fields} FROM {quote_identifier(table)}"):
@@ -46,14 +46,15 @@ def validate_source(source, columns: dict[str, tuple[str, ...]]) -> None:
     if list(source.execute("PRAGMA integrity_check")) != [("ok",)] or source.execute("PRAGMA foreign_key_check").fetchone():
         raise ValueError("SQLite integrity/foreign key check failed")
     tables = {row[0] for row in source.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-    if tables != set(TABLES) | {"sqlite_sequence"}:
+    if tables != set(columns) | {"sqlite_sequence"}:
         raise ValueError("Unknown or incomplete SQLite source schema")
-    for table in TABLES:
+    for table in columns:
         info = list(source.execute(f"PRAGMA table_info({quote_identifier(table)})"))
         if set(row[1] for row in info) != set(columns[table]) or any(row[2].upper() not in {"INTEGER", "TEXT"} for row in info):
             raise ValueError("Unsupported SQLite columns/types")
     versions = {row[0] for row in source.execute("SELECT version FROM schema_migrations")}
-    if versions != {"identity-v1", "auth-v1"}:
+    required = {"identity-v1", "auth-v1"} | ({"glossary-v1"} if "glossary_sessions" in columns else set())
+    if versions != required:
         raise ValueError("SQLite schema must be upgraded before creating the cutover snapshot")
     for encoded, digest, provenance in source.execute(
         "SELECT content_snapshot,content_sha256,snapshot_provenance FROM quiz_session_questions"
@@ -85,13 +86,16 @@ def import_snapshot(source_path: Path, target: str) -> dict:
     # mode=ro preserves the source. A read transaction fixes the view for all checks.
     with closing(sqlite3.connect(source_path.resolve().as_uri() + "?mode=ro", uri=True)) as source:
         source.execute("BEGIN")
+        source_tables = {row[0] for row in source.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        tables = TABLES if "glossary_sessions" in source_tables else BASE_TABLES
+        version = "postgres-v2" if "glossary_sessions" in source_tables else "postgres-v1"
         with closing(connect_database(target)) as conn, conn:
             begin_write(conn, "schema")
-            initialize_schema(conn)
+            initialize_schema(conn, version=version)
             # An accidentally running target writer must not interleave with the
             # empty-target check, reconciliation or sequence reset.
-            conn.execute("LOCK TABLE " + ",".join(TABLES) + " IN ACCESS EXCLUSIVE MODE")
-            columns = {table: fields for table, fields in table_columns(conn).items() if table in TABLES}
+            conn.execute("LOCK TABLE " + ",".join(tables) + " IN ACCESS EXCLUSIVE MODE")
+            columns = {table: fields for table, fields in table_columns(conn).items() if table in tables}
             validate_source(source, columns)
             manifest = {"version": 1, "tables": projection(source, columns), "sequences": source_sequences(source)}
             encoded = json.dumps(manifest, sort_keys=True, separators=(",", ":"))
@@ -100,9 +104,9 @@ def import_snapshot(source_path: Path, target: str) -> dict:
                 if prior != encoded or projection(conn, columns) != manifest["tables"] or target_sequences(conn) != manifest["sequences"]:
                     raise ValueError("Import was already performed and source/target has changed; refusing overwrite")
                 return {"result": "already_verified", **manifest}
-            if any(conn.execute(f"SELECT 1 FROM {quote_identifier(table)} LIMIT 1").fetchone() for table in TABLES):
+            if any(conn.execute(f"SELECT 1 FROM {quote_identifier(table)} LIMIT 1").fetchone() for table in tables):
                 raise ValueError("Import requires an empty target")
-            for table in TABLES:
+            for table in tables:
                 fields = ",".join(map(quote_identifier, columns[table]))
                 query = f"INSERT INTO {quote_identifier(table)} ({fields}) VALUES ({','.join('?' for _ in columns[table])})"
                 cursor = source.execute(f"SELECT {fields} FROM {quote_identifier(table)}")
@@ -116,5 +120,5 @@ def import_snapshot(source_path: Path, target: str) -> dict:
             if target_sequences(conn) != manifest["sequences"]:
                 raise ValueError("Import sequence reconciliation failed")
             conn.execute("UPDATE postgres_storage SET import_manifest=? WHERE singleton=1", (encoded,))
-            verify_schema(conn)
+            verify_schema(conn, allow_legacy=True)
             return {"result": "imported", **manifest}

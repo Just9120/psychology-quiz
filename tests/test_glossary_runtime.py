@@ -214,7 +214,17 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertIn('glossary_reply_text_next_handler,', source)
         self.assertGreaterEqual(source.count('group=1'), 2)
         self.assertIn("CallbackQueryHandler(\n            glossary_callback,", source)
-        self.assertIn(r'pattern=r"^(gls:(topics|main|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|retry))$"', source)
+        import ast
+        import re
+        calls = [node for node in ast.walk(ast.parse(source)) if isinstance(node, ast.Call)
+                 and node.args and isinstance(node.args[0], ast.Name) and node.args[0].id == 'glossary_callback']
+        pattern = next(item.value.value for item in calls[0].keywords if item.arg == 'pattern')
+        for callback in ('gls:topics', 'gls:resume', 'gls:main', 'gls:topic:oep', 'glsq:count:oep:5',
+                         'glsq:replace:abcdefghijklmnopqrstuv:oep:all', 'glsq:retry:abcdefghijklmnopqrstuv'):
+            self.assertIsNotNone(re.fullmatch(pattern, callback), callback)
+            self.assertLessEqual(len(callback), 64)
+        for callback in ('glsq:replace:foreign', 'glsq:count:oep:99', 'glsq:ans:1'):
+            self.assertIsNone(re.fullmatch(pattern, callback), callback)
 
     def test_invalid_glossary_reply_numbers_are_rejected(self):
         self.assertIsNone(parse_glossary_reply_answer_number("", 4))

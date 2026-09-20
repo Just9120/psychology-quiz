@@ -14,6 +14,7 @@ import uvicorn
 from app.db import get_connection, upsert_approved_questions
 from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
+from app.glossary_schema import migrate_glossary_schema
 from app.miniapp_fastapi import create_app
 from app.web_config import WebSettings
 from app.postgres_import import import_snapshot
@@ -58,6 +59,8 @@ def main():
             with closing(get_connection(path)) as conn:
                 migrate_identity_schema(conn)
                 migrate_auth_schema(conn)
+                with conn:
+                    migrate_glossary_schema(conn)
             if postgres_path:
                 with closing(get_connection(postgres_path)) as conn, conn:
                     if conn.execute("SELECT to_regclass('postgres_storage')").fetchone()[0] is not None:

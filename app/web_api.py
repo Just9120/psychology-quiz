@@ -3,7 +3,7 @@ import asyncio
 import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
-from app import learning_reset, progress_service
+from app import glossary_service, learning_reset, progress_service
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -14,11 +14,11 @@ from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_set
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview"}
+GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "glossary/state", "glossary/options"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
                 "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
-                "progress/reset-preview", "progress/reset-confirm"}
+                "progress/reset-preview", "progress/reset-confirm", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
 logger = logging.getLogger(__name__)
 
 
@@ -60,6 +60,24 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         actor = account["user_id"]
         if actor is None:
             raise AuthError("identity_required", 409)
+        if action.startswith('glossary/'):
+            try:
+                if action == 'glossary/options':
+                    return {'ok': True, **glossary_service.topics()}, None
+                if action == 'glossary/state':
+                    result = glossary_service.state(conn, actor)
+                elif action == 'glossary/setup':
+                    result = glossary_service.start(conn, actor, payload.get('topic_id'), payload.get('question_count'),
+                        expected_session_id=payload.get('expected_session_id'), replace_active=payload.get('replace_active'))
+                elif action == 'glossary/answer':
+                    result = glossary_service.answer(conn, actor, payload.get('session_id'), payload.get('selected_option_index'), payload.get('step_id'))
+                elif action == 'glossary/next':
+                    result = glossary_service.advance(conn, actor, payload.get('session_id'), payload.get('step_id'))
+                else:
+                    result = glossary_service.restart(conn, actor, payload.get('session_id'))
+                return {'ok': True, 'glossary_state': result}, None
+            except glossary_service.GlossaryError as exc:
+                raise AuthError(exc.code, exc.status) from None
         if action.startswith("progress/"):
             begin_write(conn, f"actor:{actor}")
             try:

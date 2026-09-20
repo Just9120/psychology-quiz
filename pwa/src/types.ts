@@ -82,6 +82,25 @@ export interface ResetPreview {
   answers: number
   attempts: number
   active_attempts: number
+  glossary_attempts: number
+  glossary_answers: number
+}
+export interface GlossaryTopic { topic_id: string; title: string; available_count: number }
+export interface GlossaryQuestion {
+  session_id: string; step_id: number; topic_id: string; topic_title: string
+  order_index: number; total_questions: number; term: string
+  options: { option_index: number; option_text: string }[]
+}
+export interface GlossaryFeedback {
+  step_id: number; is_correct: boolean; selected_option_index: number; selected_option_text: string
+  correct_option_index: number; correct_option_text: string; explanation: string
+  answered_count: number; total_questions: number; has_next: boolean
+}
+export interface GlossaryState {
+  state: 'idle' | 'in_progress' | 'feedback' | 'completed'
+  session_id?: string; topic_id?: string; topic_title?: string
+  current_question?: GlossaryQuestion; feedback?: GlossaryFeedback
+  result?: { score: number; total_questions: number }
 }
 export interface PracticeDay extends PracticeCounts { day: string }
 export interface TopicProgress extends PracticeCounts { topic: string; days: PracticeDay[] }

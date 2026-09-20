@@ -8,6 +8,7 @@ import pytest
 
 from scripts.postgres_test_support import isolated_postgres_target
 from app.auth_schema import migrate_auth_schema
+from app.glossary_schema import migrate_glossary_schema
 from app.identity_schema import migrate_identity_schema
 from app.db import get_connection
 from app.miniapp_fastapi import create_app
@@ -29,9 +30,10 @@ def pg_target():
 
 @pytest.fixture
 def source(sqlite_bank):
-    with closing(get_connection(str(sqlite_bank))) as conn:
+    with closing(get_connection(str(sqlite_bank))) as conn, conn:
         migrate_identity_schema(conn)
         migrate_auth_schema(conn)
+        migrate_glossary_schema(conn)
     return sqlite_bank
 
 

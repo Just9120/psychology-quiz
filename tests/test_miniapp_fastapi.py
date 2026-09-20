@@ -119,10 +119,10 @@ class MiniAppFastApiTests(unittest.TestCase):
         endpoints = (
             ("/miniapp/setup", "build_setup_response", (self.db, self.bot_token)),
             ("/miniapp/answer", "build_answer_response", (self.db, self.bot_token)),
-            ("/miniapp/glossary/start", "build_glossary_start_response", (self.bot_token,)),
-            ("/miniapp/glossary/answer", "build_glossary_answer_response", (self.bot_token,)),
-            ("/miniapp/glossary/next", "build_glossary_next_response", (self.bot_token,)),
-            ("/miniapp/glossary/restart", "build_glossary_restart_response", (self.bot_token,)),
+            ("/miniapp/glossary/start", "build_glossary_start_response", (self.db, self.bot_token)),
+            ("/miniapp/glossary/answer", "build_glossary_answer_response", (self.db, self.bot_token)),
+            ("/miniapp/glossary/next", "build_glossary_next_response", (self.db, self.bot_token)),
+            ("/miniapp/glossary/restart", "build_glossary_restart_response", (self.db, self.bot_token)),
         )
         for path, builder_name, leading_args in endpoints:
             with self.subTest(path=path):

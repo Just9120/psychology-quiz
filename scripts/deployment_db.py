@@ -29,9 +29,9 @@ def read_connection(path: Path) -> sqlite3.Connection:
     return sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
 
 
-def check_integrity(conn: sqlite3.Connection) -> None:
+def check_integrity(conn: sqlite3.Connection, *, allow_legacy=False) -> None:
     if is_postgres(conn):
-        verify_schema(conn)
+        verify_schema(conn, allow_legacy=allow_legacy)
         return
     if [row[0] for row in conn.execute("PRAGMA integrity_check")] != ["ok"]:
         raise RuntimeError("Database integrity check failed")
@@ -45,7 +45,7 @@ def user_state(conn: sqlite3.Connection, columns: dict | None = None) -> dict:
     existing = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
     # Old backups lack auth tables. Preserve every table present in that backup,
     # while newly introduced empty auth tables are allowed by an additive migration.
-    tables = tuple(columns) if columns is not None else USER_TABLES + tuple(name for name in AUTH_TABLES if name in existing)
+    tables = tuple(columns) if columns is not None else tuple(name for name in USER_TABLES + AUTH_TABLES if name in existing)
     for table in tables:
         if table not in USER_TABLES + AUTH_TABLES:
             raise RuntimeError("Unexpected user-state table")
@@ -95,8 +95,8 @@ def verify_preserved(db_path: Path, backup_path: Path) -> None:
             raise RuntimeError("Migration changed pre-existing user state")
 
 
-def check_business(conn: sqlite3.Connection) -> None:
-    check_integrity(conn)
+def check_business(conn: sqlite3.Connection, *, allow_legacy=False) -> None:
+    check_integrity(conn, allow_legacy=allow_legacy)
     count = conn.execute("SELECT count(*) FROM questions WHERE status='approved'").fetchone()[0]
     if count == 0:
         raise RuntimeError("No approved questions available")
@@ -149,7 +149,7 @@ def main() -> None:
         check_runtime_config()
         with closing(connect_database(target)) as conn:
             conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
-            check_business(conn)
+            check_business(conn, allow_legacy=args.action == "preflight")
         if args.action == "smoke" and has_blockers(build_report(target)):
             raise RuntimeError("PostgreSQL serving content differs from canonical bank")
         print("POSTGRES_" + args.action.upper() + "_OK")

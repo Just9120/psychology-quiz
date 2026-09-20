@@ -76,8 +76,8 @@ class NativeRuntime:
         self.created.remove(name)
 
 
-@pytest.fixture
-def native_runtime(source):
+@pytest.fixture(params=['postgres-v1', 'postgres-v2'])
+def native_runtime(source, request):
     admin, target = os.environ.get('POSTGRES_TEST_ADMIN_DSN'), os.environ.get('POSTGRES_TEST_DSN')
     native_bin, container = os.environ.get('POSTGRES_TEST_NATIVE_BIN'), os.environ.get('POSTGRES_TEST_CONTAINER')
     if not admin or not target or not (native_bin or container):
@@ -97,6 +97,11 @@ def native_runtime(source):
             conn.execute("INSERT INTO web_accounts(email,password_hash,user_id,verified_at,created_at) VALUES('test@example.invalid','synthetic-hash',1,1,1)")
             conn.execute("INSERT INTO web_sessions VALUES('session',1,1,9999999999,1)")
             conn.execute("INSERT INTO web_mail_tokens VALUES('mail','test@example.invalid','recover',1,9999999999)")
+            if request.param == 'postgres-v1':
+                conn.execute('DROP TABLE glossary_sessions')
+                conn.execute("DELETE FROM schema_migrations WHERE version='glossary-v1'")
+            else:
+                conn.execute("INSERT INTO glossary_sessions VALUES('session',1,'topic','Title','in_progress','{}','{}','now','now')")
         import_snapshot(source, runtime.target)
         yield runtime
     finally:

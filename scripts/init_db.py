@@ -12,7 +12,8 @@ from app.attempt_content import ensure_attempt_snapshots
 from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.database import connect_database, is_postgres_target, resolve_database_target
-from app.postgres_schema import verify_schema
+from app.postgres_schema import upgrade_schema
+from app.glossary_schema import migrate_glossary_schema
 
 from dotenv import load_dotenv
 
@@ -88,11 +89,11 @@ def main() -> int:
 
     target = resolve_db_path()
     if is_postgres_target(target):
-        # Runtime init only verifies; bootstrap/import is an explicit operation.
+        # Canonical deployment invokes init only after backup and stopped writers.
         try:
-            with closing(connect_database(target)) as conn:
-                verify_schema(conn)
-            print("[OK] PostgreSQL schema verified; no migration performed.")
+            with closing(connect_database(target)) as conn, conn:
+                upgrade_schema(conn)
+            print("[OK] PostgreSQL schema upgraded/verified.")
             return 0
         except Exception as error:
             print("[ERROR] PostgreSQL verification failed: " + type(error).__name__)
@@ -106,6 +107,7 @@ def main() -> int:
             conn.executescript(schema_sql)
             migrate_identity_schema(conn)
             migrate_auth_schema(conn)
+            migrate_glossary_schema(conn)
             ensure_users_reading_mode_column(conn)
             ensure_quiz_sessions_difficulty_mode_column(conn)
             ensure_user_literature_progress_table(conn)

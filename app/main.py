@@ -1043,7 +1043,7 @@ def main() -> None:
     application.add_handler(
         CallbackQueryHandler(
             glossary_callback,
-            pattern=r"^(gls:(topics|main|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|retry))$",
+            pattern=r"^(gls:(topics|main|resume|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|replace:[A-Za-z0-9_-]{22}:[a-z0-9_]+:(5|10|all)|retry(?::[A-Za-z0-9_-]{22})?))$",
         )
     )
     application.add_handler(
