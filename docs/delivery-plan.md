@@ -1,6 +1,47 @@
 # Delivery Plan
 
-## Current Goal — PROGRESS-001
+## Current Goal — LEARNING-CONTENT-001
+
+**Статус: ACTIVE / IN_PROGRESS, 20.09.2026.** Основание — прямое поручение пользователя взять AC-FND-08/09, PROG-05, QUIZ-04, SRC-06/07 и LIT-01 как Goal и выполнить реализацию. Встроенная Goal активирована. Уточнение пользователя: FND-09 охватывается только текущими разделами, глоссарием, литературой и сбросом; полный FND-09 остаётся частично выполненным. Вопрос о включении статистической калибровки QUIZ-04 ожидает ответа; независимая реализация продолжается.
+
+**Результат:** самостоятельная PWA получает существующие учебные контуры терминов и литературы; glossary answers/progress переживают перезапуск и согласованы между связанными клиентами; пользователь может явно сбросить своё обучение по теме/целиком. Сложность перестаёт быть обязательным шагом оставшегося quiz UX. Каталог литературы консолидируется по доступному согласованному Drive corpus, а публикация производных материалов сохраняет проверяемое происхождение и отделяет библиографию от доступного знания.
+
+**Baseline:** main/origin/main `2c324bd6c8388f125b596a10e8710b0af3d18cdc`; clean single worktree, branch `codex/learning-reset`, base тот же SHA. GitHub: открытых PR, branch protection и rulesets нет; admin/push доступны. Production: PostgreSQL 18.6, общая actor identity, PWA и backend на baseline, exact-revision CD `35512024023` success. Прямого SSH агента нет; штатная поставка идёт через existing CD.
+
+### Scope, DoD и последовательность PR
+
+| ID | Проверяемый результат / AC | Состояние |
+| --- | --- | --- |
+| G-LC-01 | Сброс выбранной темы/всего quiz learning требует preview и явного подтверждения актуального состояния. Чужие данные, accounts/linking, literature/private notes и банк сохраняются. Смешанные попытки сохраняют ответы других тем; затронутая активная попытка прекращается, поздний answer/reset не восстанавливает сброшенное и не удаляет новое обучение. PROG-05 | IN_PROGRESS |
+| G-LC-02 | Glossary sessions, фиксированные варианты, ответы и результат хранятся в БД, общий actor доступен PWA/Telegram; restart/retry/concurrency/foreign-access проверены. После внедрения glossary общий learning reset охватывает и его. FND-08/10, PROG-05, F-018 | BACKLOG |
+| G-LC-03 | PWA desktop/mobile без Telegram открывает glossary quiz и существующий Reading Tracker; empty/error/resume и navigation доступны. Новая литература сохраняет module/topic/source связи и старые user-state IDs. FND-09 (выбранная часть), LIT-01 | BACKLOG |
+| G-LC-04 | Текущий quiz можно запустить без обязательного выбора сложности, необязательный фильтр сохраняется; существующие setup/reply/callback contracts проверены. QUIZ-04; statistical calibration — ожидается решение | BACKLOG |
+| G-LC-05 | Рекурсивно установлен корпус и библиографические источники с pagination/revision evidence; единый каталог связывает повторные упоминания с их источниками, неоднозначные дубли не сливаются автоматически. Только библиографическое присутствие не означает доступность текста/знания. LIT-01, SRC-06 | BACKLOG |
+| G-LC-06 | Новые/изменённые derivative items проходят проверку доступного source и repository approval; новый Drive файл сам не публикуется. Legacy review не объявляется source-certified задним числом; ограничения/спорные записи видимы. SRC-06/07 | BACKLOG |
+| G-LC-07 | Все содержательные PR проходят applicable local/CI checks, self-review, merge и штатный exact-revision CD с bounded post-checks. Plan/spec/contracts актуальны, свои merged ветки очищены; READY выставляется только в выполненной части | BACKLOG |
+
+**Порядок:** PR1 — безопасный quiz reset и его PWA UI; PR2 — durable glossary и PWA, включение терминов в общий reset; PR3 — необязательная difficulty и совместимость Telegram; PR4 — source/publication contract и консолидированный литературный каталог, затем связанный PWA Reading Tracker (может быть отдельным PR по связности). Каждый следующий PR начинается после applicable delivery предыдущего. Первый reset явно относится к quiz; полное закрытие PROG-05 требует G-LC-02. Dependencies могут менять границы PR без расширения согласованного scope.
+
+**DoD:** G-LC-01–07 выполнены с учётом явного решения по калибровке; оба supported DB backend проверены, stateful migrations имеют backup/preservation/recovery gates; реальные источники проверены, отсутствие доступа не подменено N/A. Каждый PR merged/delivered; полный FND-09 не объявляется READY из-за этого ограниченного среза. Проценты не пересчитываются.
+
+**Non-goals:** knowledge/search/pgvector, homework/practice, интервальное расписание/mastery, term cards, OAuth/sharing/new roles, reader/audio capabilities, новая taxonomy статусов literature (LIT-02/Q-04), переписывание Mini App на React, новые infrastructure resources, реальные сбросы или новые ответы production owner во время проверки. Исходники Drive читаются, не изменяются. Источники не заменяются web/LLM или библиографическими названиями книг.
+
+### Validation Plan
+
+| AC/риск | Проверка / ожидаемый результат | Команда/tool, каталог, environment | Этап / обязательность |
+| --- | --- | --- | --- |
+| PROG-05, integrity | Preview/cancel не меняют learning; confirm очищает только actor/scope; mixed history, stale/retry/concurrent requests, auth/CSRF и rollback сохраняют invariants | `python -m pytest tests/test_progress.py tests/test_web_progress.py tests/test_quiz_service.py tests/postgres/test_progress_contract.py -q`, root, synthetic SQLite + real local PostgreSQL; новые reset cases включаются в те же suites | REQUIRED local до push и CI |
+| FND-08/09, glossary | Restart в новом процессе/connection, stable options/feedback, replay/next, actor linking и cross-client isolation | Existing glossary/runtime/API suites и новые real DB contracts; canonical `python -m pytest -q`, root, synthetic state, real PostgreSQL | REQUIRED affected local; полный CI |
+| FND-09/PROG-05/LIT-01, UI | Desktop/mobile navigation, glossary/reading/reset, cancel/confirm/empty/error/reload, no private cache | `npm test`, `npm run build`, `npm run test:e2e`, pwa, existing synthetic backend; SQLite и PostgreSQL | REQUIRED affected local и CI; реальный owner smoke только чтение/cancel |
+| QUIZ-04, compatibility | Quiz без обязательного difficulty; опциональный выбор и отрицательные setup/reply/callback cases | Existing classic/runner/API tests, root; команды выбранных suites уточняются в содержательном commit | REQUIRED local + CI |
+| SRC-06/07/LIT-01 | Полный folder inventory с pagination, чтение source revisions, bibliographic dedup/provenance review; unknown/absent source не получает approval; стабильные IDs | Google Drive connector (read-only), canonical content validators README и новые negative/multi-source fixtures; root | REQUIRED перед публикацией контента; недоступный source блокирует только зависимую запись |
+| G-LC-07, delivery | Diff/self-review, required актуальные CI/review, exact main artifact/runtime, preserved data, health/auth/public smoke | README, [VPS runbook](miniapp-deployment-qa.md), [PWA delivery](pwa-delivery.md), GitHub records; production existing target | REQUIRED каждый PR; новые production answers/reset не выполняются |
+
+**Checkpoint:** preparation complete: fresh main, permissions/gates, branch/base и доступ Drive подтверждены; root corpus содержит восемь папок (connector read 20.09.2026), вложенные источники ещё не инвентаризированы. Следующий шаг — реализация G-LC-01 и её tests. Решение FND-09 получено; statistical calibration clarification pending.
+
+## Завершённая Goal — PROGRESS-001
+
+**Итог: DONE, 20.09.2026.** #299 product и #300 automatic PWA CD merged; final main `2c324bd6c8388f125b596a10e8710b0af3d18cdc`, main CI `35511910042` PASS (624 tests + 24 subtests; 12 components, 16 SQLite + 16 PostgreSQL browser cases), CD `35512024023` / job `106081462696` success 12:57:17 UTC. Trusted artifact `10605496749`, SHA-256 `65c01c6858ec34a28b366c2dd753fe12ec092a229e7bf8313f512b241d0262fa`; backend/PostgreSQL readiness и 11 public assets exact-revision PASS. Signed-in owner read-only smoke: history/statistics/errors/detail, training confirmation cancel и прежний quiz resume PASS; новых production answers/reset/mail не было. F-031 закрыт фактической automatic delivery. Встроенная Goal завершена, свои local/remote branches удалены, main синхронизирован. Ниже — исторические checkpoints до поставки, не текущая незавершённая работа.
 
 **Статус: ACTIVE / IN_PROGRESS, 20.09.2026.** Пользователь ответил «Да, давай» на предложение реализовать личный прогресс и ошибки в PWA после PostgreSQL cutover. Встроенная Goal активирована; это поручение реализации и поставки, не только подготовки плана.
 
