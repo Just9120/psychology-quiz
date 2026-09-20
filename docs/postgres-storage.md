@@ -1,6 +1,6 @@
 # PostgreSQL storage
 
-Процедура [POSTGRES-MIGRATION-001](delivery-plan.md#current-goal--postgres-migration-001). PostgreSQL 18.6, psycopg 3.3.6. Production остаётся на SQLite до отдельного operator cutover; наличие кода и успешный обычный CD не означают, что PostgreSQL уже включён. Фактическая поставка восстанавливается по CI/CD records и host phase record.
+PostgreSQL 18.6, psycopg 3.3.6. Production cutover выполнен 20.09.2026; его Evidence и первичные records — в [delivery plan](delivery-plan.md). Раздел подготовки ниже нужен только для нового согласованного cutover; для последующих изменений используется обычный CD. Фактическая версия восстанавливается по CI/CD records и host phase record.
 
 ## Выбор БД и контракт
 
@@ -8,7 +8,7 @@
 
 Имя поля `Settings.db_path` сохранено для совместимости вызывающего кода; оно может содержать PostgreSQL target и исключено из repr. Лог старта не выводит target. [DB boundary](../app/database.py) адаптирует параметры, rows и транзакции; dialect SQL расположен в domain/schema call sites. PostgreSQL driver exceptions заменяются безопасным SQLSTATE без SQL, values или credentials.
 
-Схема [postgres-v1](../sql/postgres-v1.sql) сохраняет integer flags, UTC TEXT timestamps, IDs, FK/unique constraints и immutable snapshots. Это перенос хранения, а не изменение API или формата данных. PostgreSQL DDL выполняется только явно. Runtime startup проверяет marker, hash canonical DDL и catalog signature колонок, constraints, indexes, trigger/function и sequence settings. SQLite additive migrations продолжают действовать только на SQLite.
+Текущая `postgres-v2` состоит из неизменённой [postgres-v1](../sql/postgres-v1.sql) и additive [glossary-v1](../sql/glossary-v1.sql). Сохраняются integer flags, UTC TEXT timestamps, IDs, FK/unique constraints и immutable snapshots. `glossary_sessions` хранит фиксированные вопросы/варианты/definitions и личные ответы/результат; один actor имеет не более одной активной glossary attempt. Старые завершённые/заменённые attempts сохраняются до явного learning reset; автоматическая retention policy не вводится. Runtime startup проверяет marker, hash canonical DDL и catalog signature, но не выполняет DDL.
 
 Auth transactions сериализуются scope `auth`; setup/answer — `actor:<users.id>`. Порядок при совмещении: auth → actor → content. Content publication и capture вопроса вместе с options используют `content`, чтобы попытка не смешивала две редакции. Locks транзакционные; commit/rollback освобождает их. PostgreSQL isolation — READ COMMITTED, lock timeout 10 seconds; read-only content audit использует REPEATABLE READ. SQLite сохраняет BEGIN IMMEDIATE. Нет connection pool или нового throughput/SLO обещания.
 
@@ -18,10 +18,10 @@ Auth transactions сериализуются scope `auth`; setup/answer — `act
 
 | Операция | Команда и результат |
 | --- | --- |
-| Пустая схема | `python scripts/postgres_storage.py init` — создаёт schema v1 только в пустом namespace; известную проверяет; чужую не принимает |
+| Пустая схема | `python scripts/postgres_storage.py init` — создаёт текущую schema v2 только в пустом namespace; текущую проверяет; v1 требует canonical upgrade, чужую не принимает |
 | Проверка | `python scripts/postgres_storage.py check` — read-only version/catalog drift verification |
 | Импорт | `python scripts/postgres_storage.py import --source <offline-snapshot.sqlite3> --report <new-report.json>` — атомарный импорт в пустой target, row/sequence reconciliation; report содержит counts/hashes, без содержимого user rows |
-| Init/seed | Canonical команды в [README](../README.md#быстрый-старт-и-проверки). На PostgreSQL init только проверяет schema; seed обновляет canonical content с сохранением snapshots |
+| Init/seed | Canonical команды в [README](../README.md#быстрый-старт-и-проверки). PostgreSQL init проверяет v2 либо транзакционно обновляет проверенную v1 до v2; seed обновляет canonical content с сохранением snapshots. На SQLite init применяет явную glossary-v1 migration после identity/auth |
 | Content parity | `python scripts/audit_question_bank.py --configured-database` — read-only audit выбранной БД. Legacy JSON key `sqlite` сохранён для consumers, поле `backend` определяет БД. PostgreSQL catalog check не выдаётся за SQLite physical integrity check |
 
 Источник импорта: отдельный завершённый SQLite snapshot после остановки writers, с `identity-v1`/`auth-v1` и полными snapshots. Импорт не выполняет upgrade исходника. Проверяются integrity/FK, полный набор таблиц/колонок, snapshot digest/provenance и версии. Неизвестные таблицы/колонки, пропущенные migrations или повреждённые данные — отказ. Source открыт read-only в одной read transaction.
@@ -106,6 +106,8 @@ Backup record `.postgres/backups/release-*/record.json`: cluster/database/revisi
 ## Обычный CD после переключения
 
 [deploy.sh](../deploy.sh) получает backend из candidate config; неизвестный/внешний PostgreSQL target отклоняется. Перед stateful migration останавливает оба writers, вызывает host `postgres_vps.py backup --lock-held`, затем init/seed и `verify --record ...` под унаследованной lock. Последняя команда сверяет cluster/revision/dump identity и весь прежний user/auth state; content changes допустимы отдельно. Для SQLite остаётся прежняя backup API procedure. После начала migrations нет автоматического data restore/app rollback.
+
+Переход v1 → v2 выполняется в этом же flow: preflight и native backup/isolated restore принимают только проверенную v1 либо v2, canonical init под schema lock добавляет пустую glossary table и обновляет version/hash/catalog атомарно. После миграции readiness и smoke требуют v2. Preservation сверяет все прежние user/auth rows и sequences; отсутствие glossary в старом backup допустимо только при пустой новой таблице. Последующие backups включают glossary snapshots/answers. Drift/unknown schema, failed backup/restore или preservation останавливают поставку. Импорт legacy SQLite сохраняет соответствующую v1 до явного init upgrade; повторный import после последующих изменений target не используется как миграция или recovery.
 
 `/readyz` проверяет существующий SQLite или version/catalog PostgreSQL и выполняет реальное чтение; unavailable/schema drift → 503 без DSN/raw errors. `/healthz` остаётся лёгкой process/version проверкой. Stateful classifier охватывает DB boundary/schema/import changes и canonical content; `.dockerignore` считается runtime input. SQL/schema compatibility для последующих schema versions всё равно требует отдельного reviewed migration — автоматического неизвестного DDL нет.
 

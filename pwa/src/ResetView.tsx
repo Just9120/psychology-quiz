@@ -24,13 +24,13 @@ export function ResetView({ initial, busy, run, onCancel, onComplete }: {
     catch (failure) { setTopic(null); throw failure }
     await onComplete()
   }
-  return <section className="page-width progress-page"><span className="eyebrow">УПРАВЛЕНИЕ ОБУЧЕНИЕМ</span><h1>Сброс прогресса квиза</h1>
-    <p className="lead">Начните выбранную тему заново или очистите всю историю квизов в PWA и связанном Telegram.</p>
+  return <section className="page-width progress-page"><span className="eyebrow">УПРАВЛЕНИЕ ОБУЧЕНИЕМ</span><h1>Сброс учебного прогресса</h1>
+    <p className="lead">Начните выбранную тему заново или очистите историю квизов и тестов по терминам в PWA и связанном Telegram.</p>
     <div className="panel practice-section">
-      <label className="field">Что сбросить?<select value={topic === null ? 'all' : `topic:${topic}`} disabled={busy} onChange={event => { const value = event.target.value === 'all' ? null : event.target.value.slice(6); setTopic(value); void run(() => refresh(value)) }}><option value="all">Все темы квиза</option>{topics.map(value => <option key={value} value={`topic:${value}`}>{value}</option>)}</select></label>
-      <p>Литература, личные заметки, аккаунт и связь с Telegram сохранятся. Этот сброс относится к квизу вопросов.</p>
+      <label className="field">Что сбросить?<select value={topic === null ? 'all' : `topic:${topic}`} disabled={busy} onChange={event => { const value = event.target.value === 'all' ? null : event.target.value.slice(6); setTopic(value); void run(() => refresh(value)) }}><option value="all">Все темы обучения</option>{topics.map(value => <option key={value} value={`topic:${value}`}>{value}</option>)}</select></label>
+      <p>Литература, личные заметки, аккаунт и связь с Telegram сохранятся. Сброс охватывает квизы вопросов и тесты глоссария.</p>
       {preview ? <>
-        <h2>Предварительный просмотр</h2><p>Будет удалено ответов: <strong>{preview.answers}</strong>. Затронуто попыток: <strong>{preview.attempts}</strong>.</p>
+        <h2>Предварительный просмотр</h2><p>Ответов глоссария: <strong>{preview.glossary_answers}</strong>; попыток глоссария: <strong>{preview.glossary_attempts}</strong>.</p><p>Будет удалено ответов: <strong>{preview.answers}</strong>. Затронуто попыток: <strong>{preview.attempts}</strong>.</p>
         {preview.scope === 'topic' && <p className="notice">Тема определяется по сохранённой редакции вопроса. Ответы других тем в смешанных попытках останутся в истории.</p>}
         {preview.active_attempts > 0 && <p className="notice warning-text">Затронутые незавершённые попытки будут прекращены: {preview.active_attempts}.</p>}
         {preview.attempts > 0 ? <label className="reset-confirm"><input type="checkbox" checked={confirmed} disabled={busy} onChange={event => setConfirmed(event.target.checked)} /><span>Понимаю, что выбранные ответы и ошибки будут удалены без возможности отмены.</span></label> : <p role="status">В выбранном разделе нет попыток для сброса.</p>}

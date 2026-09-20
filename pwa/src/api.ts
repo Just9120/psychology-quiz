@@ -1,4 +1,5 @@
 import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, ResetPreview } from './types'
+import type { GlossaryState, GlossaryTopic } from './types'
 
 export class ApiError extends Error {
   constructor(public code: string, public status = 0) { super(code) }
@@ -6,7 +7,8 @@ export class ApiError extends Error {
 
 const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
   'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
-  'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm'])
+  'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
+  'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart'])
 let csrf: string | null = null
 
 export async function request<T>(action: string, payload?: unknown, signal?: AbortSignal): Promise<T> {
@@ -58,6 +60,11 @@ export const api = {
   setup: (setup: Setup) => request<QuizState>('quiz/setup', setup),
   answer: (answer: Answer) => request<AnswerResult>('quiz/answer', answer),
   progress: () => request<ProgressOverview>('progress/overview'),
+  glossaryOptions: () => request<{ ok: true; topics: GlossaryTopic[] }>('glossary/options'),
+  glossaryState: () => request<{ ok: true; glossary_state: GlossaryState }>('glossary/state'),
+  glossaryStart: (topic_id: string, question_count: number | 'all', expected_session_id: string | null, replace_active: boolean) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/setup', { topic_id, question_count, expected_session_id, replace_active }),
+  glossaryAnswer: (session_id: string, step_id: number, selected_option_index: number) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/answer', { session_id, step_id, selected_option_index }),
+  glossaryNext: (session_id: string, step_id: number) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/next', { session_id, step_id }),
   resetPreview: (topic: string | null = null) => request<ResetPreview>('progress/reset-preview', { scope: topic === null ? 'all' : 'topic', topic }),
   resetLearning: (preview: ResetPreview) => request('progress/reset-confirm', { scope: preview.scope, topic: preview.topic, expected_revision: preview.revision, confirm: true }),
   history: (before: number | null = null) => request<HistoryPage>('progress/history', { before }),
@@ -86,6 +93,10 @@ const messages: Record<string, string> = {
   active_attempt: 'У вас есть незавершённый квиз. Обновите список и подтвердите замену попытки.',
   attempt_not_found: 'Эта попытка недоступна. Обновите историю.',
   invalid_setup: 'Эти параметры недоступны. Обновите список тем и выберите заново.',
+  invalid_glossary_setup: 'Эти параметры глоссария недоступны. Обновите список тем.',
+  glossary_unavailable: 'Для этой темы пока недостаточно доступных терминов.',
+  glossary_changed: 'Глоссарий изменился в другом окне. Восстановите сохранённое состояние.',
+  active_glossary: 'Подтвердите замену незавершённого теста по терминам.',
   csrf_failed: 'Не удалось подтвердить запрос. Обновите страницу и повторите действие.',
   origin_forbidden: 'Этот адрес приложения пока не настроен. Обратитесь к владельцу.',
   network: 'Нет подтверждения от сервера. Проверьте подключение и повторите запрос.',

@@ -1764,6 +1764,7 @@
 
       let glossaryTopicsCache = [];
       let glossaryLastSessionId = '';
+      let glossarySavedState = { state: 'idle' };
       let glossaryRenderRevision = 0;
 
 
@@ -2111,6 +2112,7 @@
       }
 
       function renderGlossaryTopics(topics) {
+        glossaryRenderRevision += 1;
         showGlossaryView();
         hideSetupWarning();
         glossaryView.replaceChildren();
@@ -2177,7 +2179,41 @@
         if (debugMode) console.info('miniapp_glossary_start_failed', { http_status: httpStatus, error_code: errorCode, request_id: apiDiagState.setupRequestId || '' });
       }
 
+      function addGlossaryTopicsButton() {
+        const button = document.createElement('button'); button.type = 'button';
+        button.className = 'miniapp-choice-button'; button.textContent = 'К темам глоссария';
+        button.addEventListener('click', async () => {
+          if (button.disabled) return;
+          button.disabled = true;
+          const revision = glossaryRenderRevision;
+          try {
+            const {resp, data} = await glossaryFetch('/miniapp/setup-options', null, buildMiniappRequestId());
+            if (revision !== glossaryRenderRevision || !button.isConnected || glossaryView.hidden) return;
+            if (!resp.ok || !data?.ok) throw new Error('topics unavailable');
+            glossaryTopicsCache = getGlossaryTopicsFromSetupPayload(data);
+            renderGlossaryTopics(glossaryTopicsCache);
+          } catch (_) {
+            if (revision === glossaryRenderRevision && button.isConnected && !glossaryView.hidden) runnerState.textContent = 'Не удалось загрузить темы. Попробуйте снова.';
+          } finally { if (button.isConnected) button.disabled = false; }
+        });
+        glossaryView.appendChild(button);
+      }
+
+      function addGlossaryRecovery() {
+        const recover = document.createElement('button');
+        recover.type = 'button'; recover.className = 'miniapp-choice-button';
+        recover.textContent = 'Восстановить сохранённый тест';
+        recover.addEventListener('click', async () => {
+          await runGlossaryAction(recover, {mode: 'glossary', action: 'state'}, state => {
+            if (state.state === 'idle') { glossarySavedState = state; renderGlossaryTopics(glossaryTopicsCache); }
+            else renderGlossaryState(state);
+          });
+        });
+        glossaryView.appendChild(recover);
+      }
+
       function renderGlossaryCounts(topic) {
+        glossaryRenderRevision += 1;
         showGlossaryView();
         hideSetupWarning();
         glossaryView.replaceChildren();
@@ -2190,22 +2226,36 @@
         card.appendChild(title);
         const choices = document.createElement('div');
         choices.className = 'miniapp-choice-list';
+        const activeId = ['in_progress', 'feedback'].includes(glossarySavedState?.state) ? glossaryLastSessionId : null;
+        let confirmation = null;
+        if (activeId) {
+          const label = document.createElement('label');
+          confirmation = document.createElement('input'); confirmation.type = 'checkbox';
+          label.append(confirmation, ' Прервать сохранённый тест по терминам и начать новый');
+          card.appendChild(label);
+        }
         [5, 10, 'all'].forEach((count) => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'miniapp-choice-button glossary-choice-button';
           btn.textContent = count === 'all' ? 'Все доступные' : String(count);
           btn.addEventListener('click', async () => {
+            if (btn.disabled) return;
+            if (activeId && !confirmation?.checked) { runnerState.textContent = 'Подтвердите замену сохранённого теста.'; return; }
+            const revision = glossaryRenderRevision;
+            choices.querySelectorAll('button').forEach(button => { button.disabled = true; });
             runnerState.textContent = 'Запуск теста по глоссарию...';
             err.textContent = '';
             const requestId = buildMiniappRequestId();
             const payloadCount = normalizeGlossaryCountForPayload(count);
             try {
-              const { resp, data } = await glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: payloadCount }, requestId);
+              const { resp, data } = await glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: payloadCount, expected_session_id: activeId, replace_active: Boolean(confirmation?.checked) }, requestId);
+              if (revision !== glossaryRenderRevision || !btn.isConnected || glossaryView.hidden) return;
               if (resp.ok && data?.ok) renderGlossaryState(data.glossary_state);
-              else showGlossaryStartError({ http_status: resp.status, error_code: data?.error || '', request_id: requestId });
+              else { showGlossaryStartError({ http_status: resp.status, error_code: data?.error || '', request_id: requestId }); addGlossaryRecovery(); }
             } catch (_) {
-              showGlossaryStartError({ http_status: '', error_code: 'request_failed', request_id: requestId });
+              if (revision !== glossaryRenderRevision || !btn.isConnected || glossaryView.hidden) return;
+              showGlossaryStartError({ http_status: '', error_code: 'request_failed', request_id: requestId }); addGlossaryRecovery();
             }
           });
           choices.appendChild(btn);
@@ -2248,7 +2298,10 @@
       function renderGlossaryState(state) {
         glossaryRenderRevision += 1;
         hideSetupWarning();
+        glossarySavedState = state;
+        if (state?.session_id) glossaryLastSessionId = state.session_id;
         if (state?.state === 'completed') return renderGlossaryResult(state.result || {});
+        if (state?.state === 'feedback' && state.current_question) return renderGlossaryFeedback(state.current_question, state.feedback);
         const q = state?.current_question;
         if (!q) return;
         glossaryLastSessionId = q.session_id;
@@ -2288,10 +2341,14 @@
         });
         card.appendChild(list);
         glossaryView.appendChild(card);
+        addGlossaryTopicsButton();
         runnerState.textContent = 'Выберите определение термина.';
       }
 
       function renderGlossaryFeedback(question, feedback) {
+        // Resume can enter feedback directly, without a previously rendered term.
+        renderGlossaryState({state: 'in_progress', session_id: question.session_id, current_question: question});
+        glossarySavedState = { state: 'feedback', session_id: question.session_id, current_question: question, feedback };
         glossaryRenderRevision += 1;
         showGlossaryView();
         hideSetupWarning();
@@ -2364,12 +2421,6 @@
           await runGlossaryAction(retry, { mode: 'glossary', action: 'restart', session_id: glossaryLastSessionId }, renderGlossaryState);
         });
         card.appendChild(retry);
-        const topics = document.createElement('button');
-        topics.type = 'button';
-        topics.className = 'miniapp-choice-button glossary-choice-button';
-        topics.textContent = 'К темам глоссария';
-        topics.addEventListener('click', () => renderGlossaryTopics(glossaryTopicsCache));
-        card.appendChild(topics);
         const modes = document.createElement('button');
         modes.type = 'button';
         modes.className = 'miniapp-choice-button glossary-choice-button';
@@ -2377,12 +2428,23 @@
         modes.addEventListener('click', showModeSelection);
         card.appendChild(modes);
         glossaryView.appendChild(card);
+        addGlossaryTopicsButton();
         runnerState.textContent = 'Тест по глоссарию завершён.';
       }
 
       modeTopics.addEventListener('click', () => showSetupMode());
       modeGlossary.addEventListener('click', async () => {
         showGlossaryLoading();
+        try {
+          const saved = await glossaryFetch('/miniapp/answer', {mode: 'glossary', action: 'state'}, buildMiniappRequestId());
+          if (!saved.resp.ok || !saved.data?.ok) throw new Error('state unavailable');
+          glossarySavedState = saved.data.glossary_state;
+          if (glossarySavedState?.state !== 'idle') { renderGlossaryState(glossarySavedState); return; }
+        } catch (_) {
+          runnerState.textContent = 'Не удалось восстановить глоссарий. Попробуйте снова.';
+          addGlossaryRecovery(); return;
+        }
+
         const attemptedSources = ['cache'];
         const cachedTopics = getGlossaryTopicsFromSetupCache();
         if (hasUsableGlossaryTopics(cachedTopics)) {

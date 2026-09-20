@@ -5,7 +5,7 @@ import { ResetView } from '../src/ResetView'
 import { api, ApiError } from '../src/api'
 import type { ResetPreview } from '../src/types'
 
-const preview: ResetPreview = { ok: true, scope: 'all', topic: null, topics: ['Память'], revision: 'first', questions: 5, answers: 2, attempts: 1, active_attempts: 1 }
+const preview: ResetPreview = { ok: true, scope: 'all', topic: null, topics: ['Память'], revision: 'first', questions: 5, answers: 2, attempts: 1, active_attempts: 1, glossary_answers: 0, glossary_attempts: 0 }
 const run = async (operation: () => Promise<void>) => { try { await operation() } catch { /* App displays the error. */ } }
 
 it('requires explicit confirmation, cancels without mutation, and disarms a lost response', async () => {

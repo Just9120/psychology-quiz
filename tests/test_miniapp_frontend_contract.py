@@ -394,7 +394,7 @@ class MiniAppFrontendContractTests(unittest.TestCase):
 
 
     def test_glossary_start_normalizes_count_and_maps_safe_errors(self):
-        self.assertIn("glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: payloadCount }, requestId)", self.content)
+        self.assertIn("glossaryFetch('/miniapp/setup', { mode: 'glossary', topic_id: topic.topic_id, question_count: payloadCount, expected_session_id: activeId, replace_active: Boolean(confirmation?.checked) }, requestId)", self.content)
         self.assertIn("function normalizeGlossaryCountForPayload(count)", self.content)
         self.assertIn("return numeric === 5 || numeric === 10 ? numeric : count;", self.content)
         self.assertIn("function getGlossaryStartErrorMessage(errorCode, httpStatus)", self.content)
