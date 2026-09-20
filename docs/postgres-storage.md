@@ -69,13 +69,15 @@ Actual host resources, свободное место и ownership до preflight
 
 ```bash
 cd /opt/psychology-quiz
-python3 scripts/postgres_vps.py preflight --expected-sha "$EXPECTED_SHA"
-python3 scripts/postgres_vps.py prepare --expected-sha "$EXPECTED_SHA"
-python3 scripts/postgres_vps.py cutover --expected-sha "$EXPECTED_SHA"
-python3 scripts/postgres_vps.py status --expected-sha "$EXPECTED_SHA"
+python3 scripts/postgres_vps.py preflight --expected-sha "$EXPECTED_SHA" </dev/null
+python3 scripts/postgres_vps.py prepare --expected-sha "$EXPECTED_SHA" </dev/null
+python3 scripts/postgres_vps.py cutover --expected-sha "$EXPECTED_SHA" </dev/null
+python3 scripts/postgres_vps.py status --expected-sha "$EXPECTED_SHA" </dev/null
 ```
 
 Запускать последовательно с `set -Eeuo pipefail`, останавливаясь на первой ошибке. Перед первой командой обновить только remote refs и проверить, что HEAD, origin/main и `EXPECTED_SHA` совпадают; checkout уже синхронизирует штатный CD. Не делать reset/clean/pull поверх неизвестных изменений. Проверить account/host, окончание текущего CD и root identity. Будущему CD тоже нужен root для private PostgreSQL records; фактический SSH account подтвердить по job/operator evidence до переключения, не раскрывая credentials.
+
+Operator CLI не принимает stdin; `</dev/null` явно отделяет его от следующих строк при запуске через Bash heredoc. Внутри скрипта обычные subprocess также получают EOF; SQL/manifest bytes и archive file stream передаются только явно. `POSTGRES_PREFLIGHT_OK` подтверждает только preflight: без `POSTGRES_PREPARED`/`POSTGRES_CUTOVER_OK` следующие этапы не считаются выполненными. После неоднозначного прерывания сначала проверить наличие state record и выполнить `status`, не повторять запись вслепую.
 
 `prepare` проверяет действующие SQLite containers, их revision/data mounts и private config, создаёт только новые `.postgres` resources, поднимает pinned profile и проверяет network/storage/checksums/version. Создаёт отдельную role/DB и пустую schema. SQLite writer containers и `.env` пока прежние. Неизвестный существующий container/path/cluster/schema не принимается за результат этой работы; несовместимое состояние требует разбора.
 
