@@ -1,6 +1,42 @@
 # Delivery Plan
 
-## Current Goal — LEARNING-CONTENT-001
+## Current Goal — QUIZ-QUALITY-ANALYTICS-001
+
+**Статус: ACTIVE / IN_PROGRESS, 20.09.2026.** Прямое поручение пользователя: взять AC-QUIZ-06, AC-PROG-03 и AC-QUIZ-04 как Goal. Встроенная Goal активирована. Реализация, проверки, PR/merge и штатная поставка входят в поручение. Пользователь подтвердил иерархию дисциплин и тем по исходным учебным материалам с сохранением существующих IDs и отдельно обозначенной историей без подтверждённой привязки. Для statistical difficulty ожидается решение по предложенному варианту: первый ответ каждого независимого actor на редакцию, размер выборки/неопределённость, ручная проверка без автоматической смены metadata; зависимое поведение до ответа не реализуется.
+
+**Результат:** существующие 575 вопросов и 99 терминов получают содержательный source-backed review с точными границами подтверждения; личный прогресс показывает дисциплины и темы с явным знаменателем и ограничениями истории; difficulty не выводится из ошибок одного человека. Сохранённые ответы/редакции и IDs не переписываются.
+
+**Baseline:** проверенный main/origin/main `6be000ed3f832f3a3def2288a5e54ae3ab917b42`, clean single worktree, open PR отсутствуют, protections/rulesets не заданы. Первая ветка `codex/quiz-source-review`, base тот же SHA. Предыдущая Goal завершена: #305 merged, main CI `35531400757` PASS, CD `35531586839` / job `106133031478` success; exact backend и 11 public PWA assets, PostgreSQL readiness/auth PASS. Artifact `10610874662`, SHA-256 `ef6b9f0f74bba044967eb2ca4fb8f5bca375d6608c209404590ad9ababc5c893`. Прямого SSH агента нет; delivery через existing CD.
+
+### Scope, DoD и порядок
+
+| ID | Результат / критерий закрытия | Состояние |
+| --- | --- | --- |
+| G-QA-01 | Каждый существующий question/glossary item рассмотрен по смыслу, ключу/определению, explanation, ambiguity, duplicates и источникам. Компактный ledger связывает exact item revision с доступными source revisions/locators либо явно фиксирует unsupported/disputed. Автоматическая эвристика не подменяет содержательный review. QUIZ-06, F-007/008 | IN_PROGRESS |
+| G-QA-02 | Подтверждённые ошибки исправлены в пределах проверенного материала либо явно отмечены как спорные; publication gate, stable IDs и snapshots сохранены. Ни один unread/недоступный source не выдаётся за подтверждённый. Regression cases проверяют выявленные ошибки и stale/missing review | BACKLOG |
+| G-QA-03 | История, accuracy и дневная динамика доступны по дисциплинам/темам из корпуса; неподтверждённая историческая классификация отделена. Actor isolation, partial attempts, переиздание и недостаток истории не искажают знаменатель и не объявляют mastery. PROG-03 | BACKLOG |
+| G-QA-04 | Согласованная policy сложности реализована и воспроизводимо проверена; повторные ответы одного actor и разные редакции не смешиваются в независимую выборку. Optional UX сохраняется. QUIZ-04 | PENDING пользовательского решения по policy |
+| G-QA-05 | Все содержательные PR прошли applicable checks/review, merge и exact-revision CD с preservation/health/public checks; свои ветки очищены, plan/spec актуальны | IN_PROGRESS |
+
+Предварительный порядок: PR1 source review/ledger и подтверждённые content corrections; PR2 иерархия и personal progress; PR3 согласованная difficulty analytics. Границы могут уточняться по связности без расширения scope; следующий PR — после delivery предыдущего. DoD: G-QA-01–05 выполнены в согласованной policy, неподтверждённые материалы явно перечислены с причиной и необходимым действием, AC не получают READY по одной структуре JSON. Проценты проекта/эпиков не пересчитываются.
+
+**Non-goals:** полный аудит проекта, новые вопросы для расширения покрытия, полный incremental source pipeline, knowledge/search/pgvector, intervals/adaptive scheduling/mastery, новые роли/OAuth, изменение Drive originals, реальные answers/reset/mail и пользовательские данные production во время тестирования. Документальная классификация uncertainty не разрешает массовое удаление банка/истории. Frozen legacy baseline не расширяется.
+
+### Validation Plan
+
+| AC/риск | Проверка / ожидаемый результат | Команда/tool, cwd, environment | Этап / обязательность |
+| --- | --- | --- | --- |
+| QUIZ-06, truth/provenance | Прямое чтение источников, item-by-item смысл/ключ/объяснение/ambiguity/duplicate review; доступность, revision и locator фиксируются, спорное не скрывается | Google Drive connector, PDF/text review; research вне repository; canonical content validators из README, root | REQUIRED до content approval; unread source блокирует подтверждение зависимого item |
+| QUIZ-06, regression/integrity | Exact coverage/fingerprints, missing/stale review, source-vs-bibliography и выявленные семантические дефекты; сохранность IDs/snapshots | `python -m pytest tests/test_content_publication.py tests/test_question_quality_calibration.py tests/test_attempt_content.py -q`, root, synthetic SQLite; новые review cases в affected suites | REQUIRED local и CI |
+| PROG-03/QUIZ-04 | Actor isolation, partial/history, per-edition independent evidence, verified/unmapped classification, insufficient evidence и denominator | `python -m pytest tests/test_progress.py tests/test_web_progress.py tests/postgres/test_progress_contract.py -q`, root, synthetic SQLite + PostgreSQL 18.6; новые analytics cases | REQUIRED affected local и полный CI |
+| PROG-03/QUIZ-04 UI | Desktop/mobile пустая/короткая история, дисциплина/тема, loading/error/reload; optional quiz UX без regressions | `npm test`, `npm run build`, `npm run test:e2e`, pwa, synthetic backend SQLite + PostgreSQL | REQUIRED affected local и CI; production только bounded read-only smoke |
+| G-QA-05, delivery | Self-review/diff, актуальные CI/review; exact trusted artifact/runtime, backup/user-state preservation по impact, health/readiness/auth/public smoke | [VPS runbook](miniapp-deployment-qa.md), [PWA delivery](pwa-delivery.md), GitHub primary records | REQUIRED каждый PR; без speculative reruns и реальных progress writes |
+
+**Checkpoint:** ветка подготовлена от свежего main; исходные selected AC и source publication contract прочитаны; discovery существующего Drive inventory/learning sources начат. Следующий шаг — чтение материалов и независимый source review; policy clarification не блокирует эту часть. Полный отчёт/raw source snapshots хранятся вне repository, в repo остаются компактные ledgers и findings.
+
+## Завершённая Goal — LEARNING-CONTENT-001
+
+**Итог: DONE, 20.09.2026 19:14:55 UTC.** PR #301–305 merged/delivered. Итоговый main `6be000ed3f832f3a3def2288a5e54ae3ab917b42`, CI `35531400757` и CD `35531586839` success; exact runtime/PostgreSQL/auth/public assets PASS, artifact/digest указаны в baseline следующей Goal выше. G-LC-01–07 выполнены в согласованных границах; FND-09 остаётся частичным, statistical QUIZ-04 передан новой явно выбранной Goal. Свои ветки удалены, main синхронизирован, отдельный synthetic PostgreSQL остановлен. Далее сохранены исторические checkpoints до поставки, не текущие blockers.
 
 **Статус: ACTIVE / IN_PROGRESS, 20.09.2026.** Основание — прямое поручение пользователя взять AC-FND-08/09, PROG-05, QUIZ-04, SRC-06/07 и LIT-01 как Goal и выполнить реализацию. Встроенная Goal активирована. Уточнение пользователя: FND-09 охватывается только текущими разделами, глоссарием, литературой и сбросом; полный FND-09 остаётся частично выполненным. Поздняя статистическая калибровка QUIZ-04 остаётся Q-03: алгоритм не придумывается; текущий scope закрывает необязательный UX и сохранение difficulty metadata.
 
