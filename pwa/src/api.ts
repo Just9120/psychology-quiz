@@ -1,5 +1,6 @@
 import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, ResetPreview } from './types'
 import type { GlossaryState, GlossaryTopic } from './types'
+import type { LiteratureCatalog, ReadingState, ReadingStatus } from './types'
 
 export class ApiError extends Error {
   constructor(public code: string, public status = 0) { super(code) }
@@ -8,7 +9,7 @@ export class ApiError extends Error {
 const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
   'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
   'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
-  'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart'])
+  'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart', 'literature/catalog', 'literature/progress'])
 let csrf: string | null = null
 
 export async function request<T>(action: string, payload?: unknown, signal?: AbortSignal): Promise<T> {
@@ -60,6 +61,8 @@ export const api = {
   setup: (setup: Setup) => request<QuizState>('quiz/setup', setup),
   answer: (answer: Answer) => request<AnswerResult>('quiz/answer', answer),
   progress: () => request<ProgressOverview>('progress/overview'),
+  literature: () => request<LiteratureCatalog>('literature/catalog'),
+  readingProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) => request<{ ok: true; literature_progress: ReadingState }>('literature/progress', { literature_id, reading_status, progress_percent }),
   glossaryOptions: () => request<{ ok: true; topics: GlossaryTopic[] }>('glossary/options'),
   glossaryState: () => request<{ ok: true; glossary_state: GlossaryState }>('glossary/state'),
   glossaryStart: (topic_id: string, question_count: number | 'all', expected_session_id: string | null, replace_active: boolean) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/setup', { topic_id, question_count, expected_session_id, replace_active }),

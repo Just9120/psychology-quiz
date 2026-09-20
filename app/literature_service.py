@@ -168,5 +168,3 @@ def save_progress(conn, actor_user_id: int, literature_id: str, reading_status: 
         (actor_user_id, literature_id),
     ).fetchone()
     return state_row_to_payload(row)
-
-
