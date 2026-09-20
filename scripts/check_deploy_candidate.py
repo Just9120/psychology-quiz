@@ -53,6 +53,7 @@ def main() -> None:
     validate_records(sha, branch, runs)
     with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
         stream.write(f"sha={sha}\n")
+        stream.write(f"run_id={runs['workflow_runs'][0]['id']}\n")
     print(f"CANDIDATE_VALIDATED revision={sha} ci_run={runs['workflow_runs'][0]['id']}")
 
 

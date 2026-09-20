@@ -56,6 +56,7 @@ Repository-visible GitHub Actions are split by responsibility:
 - routine delivery follows [AGENTS.md](AGENTS.md) and [project procedures](docs/miniapp-deployment-qa.md); workflow/settings changes require their own authorized scope;
 - CI must not deploy, access production SSH, or mutate production runtime state;
 - deployment/CD uses Repository Secrets and the configured target environment; after merge, verify deployed commit/runtime state when deployment matters;
+- тот же production CD публикует PWA из проверенного main CI artifact: общий VPS lock, backend checks, atomic static activation и public smoke; порядок, selection и recovery — в [PWA procedure](docs/pwa-delivery.md);
 - docs-only changes do not require runtime sync. The existing CD workflow still triggers on every push to `main`; this is observed behavior, not a requirement to deploy documentation.
 
 

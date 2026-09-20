@@ -46,6 +46,16 @@ jobs:
           ref: ${{ steps.candidate.outputs.sha }}
           persist-credentials: false
 
+      - name: Download and verify trusted PWA artifact
+        id: artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SHA: ${{ steps.candidate.outputs.sha }}
+          CI_RUN_ID: ${{ steps.candidate.outputs.run_id }}
+        run: |
+          python scripts/pwa_artifact.py download --sha "$EXPECTED_SHA" \
+            --run-id "$CI_RUN_ID" --archive "$RUNNER_TEMP/pwa-artifact.zip"
+
       - name: Prepare SSH
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -59,20 +69,74 @@ jobs:
           printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
+      - name: Allocate private incoming artifact directory
+        id: incoming
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          set -Eeuo pipefail
+          [[ "$DEPLOY_USER" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]*$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]
+          directory="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15 \
+            -i ~/.ssh/id_ed25519 "$DEPLOY_USER@$DEPLOY_HOST" \
+            'umask 077; mktemp -d /tmp/psychology-pwa.XXXXXXXX')"
+          [[ "$directory" =~ ^/tmp/psychology-pwa\.[A-Za-z0-9]{8}$ ]]
+          printf 'directory=%s\n' "$directory" >> "$GITHUB_OUTPUT"
+
+      - name: Transfer public artifact over verified SSH
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          REMOTE_DIR: ${{ steps.incoming.outputs.directory }}
+        run: |
+          set -Eeuo pipefail
+          [[ "$REMOTE_DIR" =~ ^/tmp/psychology-pwa\.[A-Za-z0-9]{8}$ ]]
+          scp -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15 \
+            -i ~/.ssh/id_ed25519 "$RUNNER_TEMP/pwa-artifact.zip" \
+            "$DEPLOY_USER@$DEPLOY_HOST:$REMOTE_DIR/artifact.zip"
+
+      - name: Revalidate candidate and artifact after queue and transfer
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SHA: ${{ steps.candidate.outputs.sha }}
+          CI_RUN_ID: ${{ steps.candidate.outputs.run_id }}
+        run: |
+          python scripts/pwa_artifact.py check --sha "$EXPECTED_SHA" \
+            --run-id "$CI_RUN_ID" --archive "$RUNNER_TEMP/pwa-artifact.zip"
+
       - name: Deploy exact revision over verified SSH
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           EXPECTED_SHA: ${{ steps.candidate.outputs.sha }}
+          REMOTE_DIR: ${{ steps.incoming.outputs.directory }}
+          ARTIFACT_DIGEST: ${{ steps.artifact.outputs.digest }}
         run: |
           set -Eeuo pipefail
           [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$DEPLOY_USER" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]*$ ]]
           [[ "$DEPLOY_HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]
+          [[ "$REMOTE_DIR" =~ ^/tmp/psychology-pwa\.[A-Za-z0-9]{8}$ ]]
+          [[ "$ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15 \
             -i ~/.ssh/id_ed25519 "$DEPLOY_USER@$DEPLOY_HOST" \
-            "bash -c \"\$(cat)\" -- $EXPECTED_SHA" < deploy.sh | tee "$RUNNER_TEMP/deployment.log"
+            "bash -c \"\$(cat)\" -- $EXPECTED_SHA $REMOTE_DIR/artifact.zip $ARTIFACT_DIGEST" < deploy.sh | tee "$RUNNER_TEMP/deployment.log"
           grep -Eq "^\\[deploy\\] (DEPLOY_OK revision=$EXPECTED_SHA|SOURCE_SYNC_OK revision=$EXPECTED_SHA runtime_unchanged=[0-9a-f]{40})$" "$RUNNER_TEMP/deployment.log"
+          grep -Eq "^PWA_DELIVERY_OK revision=[0-9a-f]{40} source=$EXPECTED_SHA previous=[0-9a-f]{40}$" "$RUNNER_TEMP/deployment.log"
+
+      - name: Remove this delivery's incoming public archive
+        if: always() && steps.incoming.outputs.directory != ''
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          REMOTE_DIR: ${{ steps.incoming.outputs.directory }}
+        run: |
+          set -Eeuo pipefail
+          [[ "$REMOTE_DIR" =~ ^/tmp/psychology-pwa\.[A-Za-z0-9]{8}$ ]]
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15 \
+            -i ~/.ssh/id_ed25519 "$DEPLOY_USER@$DEPLOY_HOST" \
+            "rm -f -- '$REMOTE_DIR/artifact.zip' && rmdir -- '$REMOTE_DIR'"
 
       - name: Remove ephemeral SSH identity
         if: always()

@@ -21,8 +21,15 @@ def test_http_smoke_requires_correct_web_auth_gate(monkeypatch, enabled, status)
         code = status if '/web/' in url else 401
         raise urllib.error.HTTPError(url,code,'',{},BytesIO(b'{"error":"unauthorized"}'))
     monkeypatch.setattr(deployment_http_smoke.urllib.request,'urlopen',response)
-    deployment_http_smoke.main()
+    deployment_http_smoke.main(require_pwa=enabled == 'true')
     assert calls[-1].endswith('/web/auth/me')
+
+
+def test_static_delivery_cannot_accept_disabled_web_runtime(monkeypatch):
+    monkeypatch.setenv('PWA_ENABLED', 'false')
+    monkeypatch.setattr(deployment_http_smoke.urllib.request, 'urlopen', lambda *a, **k: pytest.fail('No network before config gate'))
+    with pytest.raises(RuntimeError, match='Enabled PWA required'):
+        deployment_http_smoke.main(require_pwa=True)
 
 
 def test_http_smoke_rejects_accidentally_open_web_gate(monkeypatch):
