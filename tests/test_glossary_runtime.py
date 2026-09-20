@@ -5,6 +5,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from app.content_publication import load_policy
+
 from app.glossary import (
     GLOSSARY_TOPICS,
     GLOSSARY_TOPIC_CALLBACK_TOKENS,
@@ -368,7 +370,12 @@ class GlossaryRuntimeTests(unittest.TestCase):
                 self.assertTrue(item["examples"], (topic_id, item["id"]))
                 self.assertEqual("approved", item["status"])
                 for source_ref in item["source_refs"]:
-                    self.assertTrue(source_ref.startswith(("question:", "supplied_snippet:")), source_ref)
+                    self.assertTrue(source_ref.startswith(("question:", "supplied_snippet:", "drive:")), source_ref)
+                    if source_ref.startswith("drive:"):
+                        # Direct primary references require exact publication evidence,
+                        # not merely a newly allowed prefix.
+                        self.assertTrue(load_policy().can_publish("glossary", item), item["id"])
+                        self.assertFalse(load_policy().is_legacy("glossary", item), item["id"])
                     if source_ref.startswith("question:"):
                         question_id = source_ref.removeprefix("question:")
                         self.assertIn(question_id, approved_questions)

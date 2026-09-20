@@ -93,9 +93,12 @@ def test_preparation_can_validate_without_becoming_public(kind, status):
 def test_current_legacy_counts_preserved_without_source_certification():
     policy = publication.load_policy()
     assert len(policy.legacy) == 716
-    assert len(policy.reviews) == 130  # Reviewed bibliography, never book contents.
-    assert all(review["purpose"] == "bibliographic_metadata" for review in policy.reviews.values())
-    assert all(source["kind"] == "bibliography" for source in policy.sources.values())
+    assert sum(review["purpose"] == "bibliographic_metadata" for review in policy.reviews.values()) == 130
+    learning_reviews = {key for key, review in policy.reviews.items() if review["purpose"] == "learning_content"}
+    assert learning_reviews == {"questions:m1_vnd_002", "questions:m2_exp_040", "glossary:dopamine"}
+    assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 14
+    # Reading learning sources for an audit must not silently approve derivatives.
+    assert any(source["kind"] == "learning_material" for source in policy.sources.values())
     for kind, expected in [("questions", 575), ("glossary", 99), ("literature", 130)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
