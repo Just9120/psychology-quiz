@@ -2,7 +2,8 @@
 import asyncio
 import json
 import logging
-from app.database import OPERATIONAL_ERRORS
+from app.database import OPERATIONAL_ERRORS, begin_write
+from app import progress_service
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -13,9 +14,10 @@ from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_set
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options"}
+GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
-                "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer"}
+                "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer",
+                "progress/history", "progress/attempt", "progress/errors", "progress/train"}
 logger = logging.getLogger(__name__)
 
 
@@ -57,6 +59,20 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         actor = account["user_id"]
         if actor is None:
             raise AuthError("identity_required", 409)
+        if action.startswith("progress/"):
+            begin_write(conn, f"actor:{actor}")
+            try:
+                if action == "progress/overview":
+                    return progress_service.overview(conn, actor), None
+                if action == "progress/history":
+                    return progress_service.history(conn, actor, payload.get("before")), None
+                if action == "progress/attempt":
+                    return progress_service.attempt(conn, actor, payload.get("session_id"), payload.get("after")), None
+                if action == "progress/errors":
+                    return progress_service.errors(conn, actor, payload.get("before")), None
+                return progress_service.train_errors(conn, actor, payload), None
+            except progress_service.ProgressError as exc:
+                raise AuthError(exc.code, exc.status) from None
         if action == "quiz/options":
             return {"ok": True, "setup_options": quiz_setup_options(conn)}, None
         if action == "quiz/state":
