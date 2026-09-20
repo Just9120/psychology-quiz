@@ -1,0 +1,17 @@
+from tests.test_glossary_retries import (
+    session, test_repeat_next_preserves_displayed_options_and_scoring,
+    test_concurrent_answer_and_next_commit_only_once,
+    test_delayed_old_operations_do_not_change_another_answered_step,
+    test_conflicting_answer_wrong_owner_and_future_step_are_rejected,
+    test_complete_result_and_restart_retries_are_stable,
+    test_saved_snapshot_survives_new_process_and_content_unavailable,
+    test_confirmed_replacement_reset_and_lost_operations_preserve_other_data,
+    test_transaction_failure_rolls_back_answer,
+    test_topic_and_all_reset_preserve_foreign_glossary_and_rollback,
+    test_api_retries_and_missing_step_are_consistent,
+)
+from tests.test_web_glossary import test_shared_glossary_actor_and_web_auth_guards
+from tests.test_glossary_chat import (
+    test_new_chat_context_resumes_web_attempt_and_answer_survives_another_restart,
+    test_chat_old_confirmation_does_not_replace_a_newer_attempt,
+)

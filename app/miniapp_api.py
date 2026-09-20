@@ -13,6 +13,9 @@ from contextlib import closing
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from dataclasses import dataclass
+from functools import wraps
+from app import glossary_service
+from app.miniapp_glossary import run as run_glossary
 from typing import Any
 from app.payload_validation import is_sqlite_integer, valid_quiz_setup
 
@@ -202,7 +205,20 @@ def _normalize_glossary_question_count(value: Any) -> int | str | None:
     raise ValueError("invalid_glossary_setup")
 
 
-def build_glossary_start_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+def _glossary_errors(builder):
+    @wraps(builder)
+    def wrapped(*args, **kwargs):
+        try:
+            return builder(*args, **kwargs)
+        except glossary_service.GlossaryError as error:
+            return _json(HTTPStatus(error.status), {"ok": False, "error": error.code})
+        except OPERATIONAL_ERRORS:
+            return _database_busy_response()
+    return wrapped
+
+
+@_glossary_errors
+def build_glossary_start_response(db_path: str, bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
     verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
     if not isinstance(verified, VerifiedInitData):
         return verified
@@ -216,12 +232,14 @@ def build_glossary_start_response(bot_token: str, init_data: str, body: bytes, *
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
     if not isinstance(topic_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
-    state = start_glossary_session(verified.telegram_user_id, topic_id, count)
+    state = start_glossary_session(verified.telegram_user_id, topic_id, count, db_path=db_path,
+        expected_session_id=payload.get("expected_session_id"), replace_active=payload.get("replace_active"))
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "glossary_unavailable"})
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
 
-def build_glossary_answer_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+@_glossary_errors
+def build_glossary_answer_response(db_path: str, bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
     verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
     if not isinstance(verified, VerifiedInitData):
         return verified
@@ -235,12 +253,13 @@ def build_glossary_answer_response(bot_token: str, init_data: str, body: bytes, 
     step_id = payload.get("step_id")
     if not is_sqlite_integer(step_id, minimum=1):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "glossary_step_required"})
-    state = answer_glossary_session(verified.telegram_user_id, session_id, selected, step_id)
+    state = answer_glossary_session(verified.telegram_user_id, session_id, selected, step_id, db_path=db_path)
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_answer"})
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
 
-def build_glossary_next_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+@_glossary_errors
+def build_glossary_next_response(db_path: str, bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
     verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
     if not isinstance(verified, VerifiedInitData):
         return verified
@@ -253,12 +272,13 @@ def build_glossary_next_response(bot_token: str, init_data: str, body: bytes, *,
     step_id = payload.get("step_id")
     if not is_sqlite_integer(step_id, minimum=1):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "glossary_step_required"})
-    state = next_glossary_session(verified.telegram_user_id, session_id, step_id)
+    state = next_glossary_session(verified.telegram_user_id, session_id, step_id, db_path=db_path)
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_session"})
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
 
-def build_glossary_restart_response(bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
+@_glossary_errors
+def build_glossary_restart_response(db_path: str, bot_token: str, init_data: str, body: bytes, *, max_age_seconds: int = 3600):
     verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
     if not isinstance(verified, VerifiedInitData):
         return verified
@@ -268,7 +288,7 @@ def build_glossary_restart_response(bot_token: str, init_data: str, body: bytes,
     session_id = payload.get("session_id")
     if not isinstance(session_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_session"})
-    state = restart_glossary_session(verified.telegram_user_id, session_id)
+    state = restart_glossary_session(verified.telegram_user_id, session_id, db_path=db_path)
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "invalid_glossary_session"})
     return _json(HTTPStatus.OK, {"ok": True, "glossary_state": state})
@@ -543,7 +563,8 @@ def _is_glossary_setup_payload(payload: dict[str, Any]) -> bool:
     return payload.get("mode") == "glossary" or payload.get("quiz_mode") == "glossary"
 
 
-def _build_existing_endpoint_glossary_setup_response(verified: VerifiedInitData, payload: dict[str, Any]):
+@_glossary_errors
+def _build_existing_endpoint_glossary_setup_response(db_path: str, verified: VerifiedInitData, payload: dict[str, Any]):
     topic_id = payload.get("topic_id")
     try:
         count = _normalize_glossary_question_count(payload.get("question_count"))
@@ -551,14 +572,19 @@ def _build_existing_endpoint_glossary_setup_response(verified: VerifiedInitData,
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
     if not isinstance(topic_id, str):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
-    state = start_glossary_session(verified.telegram_user_id, topic_id, count)
+    state = start_glossary_session(verified.telegram_user_id, topic_id, count, db_path=db_path,
+        expected_session_id=payload.get("expected_session_id"), replace_active=payload.get("replace_active"))
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": "glossary_unavailable"})
     return _json(HTTPStatus.OK, {"ok": True, "mode": "glossary", "glossary_state": state})
 
 
-def _build_existing_endpoint_glossary_answer_response(verified: VerifiedInitData, payload: dict[str, Any]):
+@_glossary_errors
+def _build_existing_endpoint_glossary_answer_response(db_path: str, verified: VerifiedInitData, payload: dict[str, Any]):
     action = payload.get("action")
+    if action == "state":
+        state = run_glossary(db_path, verified.telegram_user_id, glossary_service.state)
+        return _json(HTTPStatus.OK, {"ok": True, "mode": "glossary", "glossary_state": state})
     session_id = payload.get("session_id")
     if not isinstance(action, str) or action not in {"answer", "next", "restart"}:
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_action"})
@@ -571,13 +597,13 @@ def _build_existing_endpoint_glossary_answer_response(verified: VerifiedInitData
         selected = payload.get("selected_option_index")
         if not is_sqlite_integer(selected):
             return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
-        state = answer_glossary_session(verified.telegram_user_id, session_id, selected, step_id)
+        state = answer_glossary_session(verified.telegram_user_id, session_id, selected, step_id, db_path=db_path)
         error = "invalid_glossary_answer"
     elif action == "next":
-        state = next_glossary_session(verified.telegram_user_id, session_id, step_id)
+        state = next_glossary_session(verified.telegram_user_id, session_id, step_id, db_path=db_path)
         error = "invalid_glossary_session"
     else:
-        state = restart_glossary_session(verified.telegram_user_id, session_id)
+        state = restart_glossary_session(verified.telegram_user_id, session_id, db_path=db_path)
         error = "invalid_glossary_session"
     if state is None:
         return _json(HTTPStatus.CONFLICT, {"ok": False, "error": error})
@@ -637,7 +663,7 @@ def build_answer_response(
     if not isinstance(payload, dict):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
     if payload.get("mode") == "glossary":
-        return _build_existing_endpoint_glossary_answer_response(verified, payload)
+        return _build_existing_endpoint_glossary_answer_response(db_path, verified, payload)
     req = (payload.get("session_id"), payload.get("question_id"), payload.get("selected_option_index"))
     if not (is_sqlite_integer(req[0], minimum=1) and is_sqlite_integer(req[1], minimum=1)
             and is_sqlite_integer(req[2])):
@@ -670,7 +696,7 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
     if not isinstance(payload, dict):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
     if _is_glossary_setup_payload(payload):
-        return _build_existing_endpoint_glossary_setup_response(verified, payload)
+        return _build_existing_endpoint_glossary_setup_response(db_path, verified, payload)
 
     if not valid_quiz_setup(payload):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_setup"})
@@ -876,13 +902,13 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     self.db_path, self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds
                 )
             elif endpoint == "/miniapp/glossary/start":
-                status, headers, data = build_glossary_start_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
+                status, headers, data = build_glossary_start_response(self.db_path, self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
             elif endpoint == "/miniapp/glossary/answer":
-                status, headers, data = build_glossary_answer_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
+                status, headers, data = build_glossary_answer_response(self.db_path, self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
             elif endpoint == "/miniapp/glossary/next":
-                status, headers, data = build_glossary_next_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
+                status, headers, data = build_glossary_next_response(self.db_path, self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
             else:
-                status, headers, data = build_glossary_restart_response(self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
+                status, headers, data = build_glossary_restart_response(self.db_path, self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds)
         except OPERATIONAL_ERRORS as exc:
             if not _is_sqlite_locked_error(exc):
                 raise

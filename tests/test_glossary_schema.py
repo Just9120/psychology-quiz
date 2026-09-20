@@ -5,7 +5,15 @@ import pytest
 
 from app.glossary_schema import migrate_glossary_schema
 from app.identity_schema import migrate_identity_schema
-from tests.test_attempt_content import bank
+from tests.test_attempt_content import bank as current_bank
+
+
+@pytest.fixture
+def bank(current_bank):
+    with closing(sqlite3.connect(current_bank)) as conn, conn:
+        conn.execute('DROP TABLE glossary_sessions')
+        conn.execute("DELETE FROM schema_migrations WHERE version='glossary-v1'")
+    return current_bank
 
 
 def test_sqlite_upgrade_replay_and_unknown_schema(bank):
