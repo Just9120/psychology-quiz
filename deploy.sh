@@ -58,10 +58,10 @@ CHANGED_FILES="$(git diff --name-only "$BASE_SHA" "$EXPECTED_SHA")"
 NEEDS_RUNTIME=0
 while IFS= read -r file; do
   case "$file" in
-    Dockerfile|docker-compose.yml|requirements.txt|app/*|scripts/*|sql/*|content/*|deploy.sh|.github/workflows/deploy-production.yml) NEEDS_RUNTIME=1 ;;
+    Dockerfile|.dockerignore|docker-compose.yml|requirements.txt|app/*|scripts/*|sql/*|content/*|deploy.sh|.github/workflows/deploy-production.yml) NEEDS_RUNTIME=1 ;;
   esac
   case "$file" in
-    app/db.py|app/attempt_content.py|app/identity_schema.py|app/auth_schema.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*) STATEFUL=1; MIGRATE=1 ;;
+    app/db.py|app/database.py|app/postgres_*.py|app/attempt_content.py|app/identity_schema.py|app/auth_schema.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*) STATEFUL=1; MIGRATE=1 ;;
   esac
 done <<< "$CHANGED_FILES"
 git merge --ff-only "$EXPECTED_SHA"
@@ -75,6 +75,8 @@ export APP_REVISION="$EXPECTED_SHA"
 log "Building candidate revision=$EXPECTED_SHA stateful=$STATEFUL migrate=$MIGRATE"
 # Build both images before any candidate migration. Runtime .env remains untouched.
 compose build "${SERVICES[@]}"
+DATABASE_BACKEND="$(compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py backend)"
+[[ "$DATABASE_BACKEND" == sqlite || "$DATABASE_BACKEND" == postgresql ]] || fail 'Unknown database backend'
 compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py preflight
 
 STOPPED=0
@@ -92,15 +94,24 @@ trap recover_pre_migration ERR
 if [[ "$STATEFUL" == 1 ]]; then
   compose stop "${SERVICES[@]}"
   STOPPED=1
-  BACKUP_PATH="$(compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py backup)"
-  [[ "$BACKUP_PATH" == /data/backups/release-*/quiz.sqlite3 ]] || fail 'Invalid backup record'
+  if [[ "$DATABASE_BACKEND" == postgresql ]]; then
+    BACKUP_PATH="$(python3 scripts/postgres_vps.py backup --expected-sha "$EXPECTED_SHA" --lock-held)"
+    [[ "$BACKUP_PATH" == "$PROJECT_DIR"/.postgres/backups/release-*/record.json ]] || fail 'Invalid PostgreSQL backup record'
+  else
+    BACKUP_PATH="$(compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py backup)"
+    [[ "$BACKUP_PATH" == /data/backups/release-*/quiz.sqlite3 ]] || fail 'Invalid backup record'
+  fi
   log "BACKUP_RESTORE_OK backup=$BACKUP_PATH"
   if [[ "$MIGRATE" == 1 ]]; then
     MIGRATION_STARTED=1
     compose run --rm --no-deps psych_quiz_bot python scripts/init_db.py
     compose run --rm --no-deps psych_quiz_bot python scripts/seed_questions.py
   fi
-  compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py verify --backup "$BACKUP_PATH"
+  if [[ "$DATABASE_BACKEND" == postgresql ]]; then
+    python3 scripts/postgres_vps.py verify --expected-sha "$EXPECTED_SHA" --lock-held --record "$BACKUP_PATH"
+  else
+    compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py verify --backup "$BACKUP_PATH"
+  fi
 fi
 compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py smoke
 compose up -d --no-build --force-recreate --no-deps "${SERVICES[@]}"

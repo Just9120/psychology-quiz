@@ -4,16 +4,29 @@ import os
 import time
 import urllib.error
 import urllib.request
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from app.database import is_postgres_target, resolve_database_target
 
 
 def main() -> None:
     expected = os.environ["APP_REVISION"]
+    expected_backend = "postgresql" if is_postgres_target(resolve_database_target()) else "sqlite"
     for attempt in range(30):
         try:
             with urllib.request.urlopen("http://127.0.0.1:8081/healthz", timeout=3) as response:
                 health = json.load(response)
             if health.get("ok") is not True or health.get("revision") != expected:
                 raise RuntimeError("Health/version mismatch")
+            with urllib.request.urlopen("http://127.0.0.1:8081/readyz", timeout=5) as response:
+                readiness = json.load(response)
+            if (readiness.get("ok") is not True or readiness.get("revision") != expected
+                    or readiness.get("database_backend") != expected_backend or not readiness.get("database_version")):
+                raise RuntimeError("Runtime database readiness/backend mismatch")
             break
         except (OSError, ValueError, RuntimeError):
             if attempt == 29:
@@ -35,6 +48,7 @@ def main() -> None:
     else:
         raise RuntimeError("Unauthenticated PWA request was accepted")
     print(f"PWA_AUTH_BOUNDARY_OK status={expected_web_status}")
+    print(f"DATABASE_READINESS_OK backend={expected_backend} version={readiness['database_version']}")
     print(f"HTTP_SMOKE_OK revision={expected}")
 
 

@@ -19,7 +19,7 @@ def test_target(value: str):
 def isolated_postgres_target(target: str):
     parsed = test_target(target)
     schema = "test_" + uuid.uuid4().hex
-    with psycopg.connect(target, autocommit=True) as admin:
+    with psycopg.connect(target, autocommit=True, connect_timeout=10) as admin:
         if admin.execute("SELECT rolsuper FROM pg_roles WHERE rolname=current_user").fetchone()[0]:
             raise ValueError("Run PostgreSQL behavioral tests as a non-superuser")
         admin.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(schema)))
@@ -35,7 +35,7 @@ def prepare_ci_role():
     parsed = test_target(target)
     if parsed.hostname not in {"localhost", "127.0.0.1"} or parsed.path != "/psychology_test":
         raise ValueError("CI fixture provisioning requires loopback psychology_test")
-    with psycopg.connect(target, autocommit=True) as conn:
+    with psycopg.connect(target, autocommit=True, connect_timeout=10) as conn:
         if conn.execute("SELECT 1 FROM pg_roles WHERE rolname='psychology_test_app'").fetchone():
             raise ValueError("CI fixture role already exists; refusing to modify it")
         conn.execute("CREATE ROLE psychology_test_app LOGIN PASSWORD 'synthetic-test-only' NOSUPERUSER NOCREATEDB NOCREATEROLE")

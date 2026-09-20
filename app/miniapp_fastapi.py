@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from app.database import is_postgres_target, resolve_database_target
+from app.database import DATABASE_ERRORS, is_postgres, is_postgres_target, resolve_database_target
+from contextlib import closing
+from pathlib import Path
 
 import json
 import logging
@@ -10,7 +12,7 @@ import asyncio
 from typing import Any
 
 from fastapi import FastAPI, Request
-from fastapi.responses import Response
+from fastapi.responses import JSONResponse, Response
 from app.web_config import WebSettings
 
 from app.logging_config import configure_noisy_http_client_loggers, install_telegram_url_redaction
@@ -139,6 +141,31 @@ def create_app(
     @app.get("/healthz")
     async def healthz() -> dict[str, Any]:
         return {"ok": True, "service": "miniapp_api", "revision": revision}
+
+    def database_readiness():
+        from app.db import get_connection
+        from app.postgres_schema import verify_schema
+        if not is_postgres_target(db_path) and not Path(db_path).is_file():
+            raise ValueError("SQLite runtime database is missing")
+        with closing(get_connection(db_path)) as conn:
+            if is_postgres(conn):
+                verify_schema(conn)
+                backend, version = "postgresql", conn.execute("SHOW server_version").fetchone()[0]
+            else:
+                conn.execute("SELECT id FROM users LIMIT 1").fetchone()
+                backend, version = "sqlite", conn.execute("SELECT sqlite_version()").fetchone()[0]
+        return {"ok": True, "service": "miniapp_api", "revision": revision,
+                "database_backend": backend, "database_version": version}
+
+    @app.get("/readyz")
+    async def readyz():
+        try:
+            payload = await asyncio.to_thread(database_readiness)
+            return JSONResponse(payload, headers={"Cache-Control": "no-store"})
+        except (*DATABASE_ERRORS, OSError, ValueError) as error:
+            logger.warning("database_readiness_failed type=%s", type(error).__name__)
+            return JSONResponse({"ok": False, "error": "database_unavailable", "revision": revision},
+                                status_code=503, headers={"Cache-Control": "no-store"})
 
     async def _options_response(endpoint: str, request: Request) -> Response:
         started_at = time.perf_counter()
