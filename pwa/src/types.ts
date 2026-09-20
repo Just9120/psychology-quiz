@@ -72,6 +72,17 @@ export interface AnswerResult {
 export interface MailProof { purpose: 'verify' | 'recover'; token: string }
 
 export interface PracticeCounts { answered: number; correct: number; accuracy: number | null }
+export interface ResetPreview {
+  ok: true
+  scope: 'all' | 'topic'
+  topic: string | null
+  topics: string[]
+  revision: string
+  questions: number
+  answers: number
+  attempts: number
+  active_attempts: number
+}
 export interface PracticeDay extends PracticeCounts { day: string }
 export interface TopicProgress extends PracticeCounts { topic: string; days: PracticeDay[] }
 export interface ProgressOverview {

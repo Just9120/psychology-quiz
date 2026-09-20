@@ -3,7 +3,7 @@ import asyncio
 import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
-from app import progress_service
+from app import learning_reset, progress_service
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -17,7 +17,8 @@ from app.logging_config import configure_noisy_http_client_loggers
 GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
                 "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer",
-                "progress/history", "progress/attempt", "progress/errors", "progress/train"}
+                "progress/history", "progress/attempt", "progress/errors", "progress/train",
+                "progress/reset-preview", "progress/reset-confirm"}
 logger = logging.getLogger(__name__)
 
 
@@ -70,6 +71,10 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
                     return progress_service.attempt(conn, actor, payload.get("session_id"), payload.get("after")), None
                 if action == "progress/errors":
                     return progress_service.errors(conn, actor, payload.get("before")), None
+                if action == "progress/reset-preview":
+                    return learning_reset.preview(conn, actor, payload), None
+                if action == "progress/reset-confirm":
+                    return learning_reset.confirm(conn, actor, payload), None
                 return progress_service.train_errors(conn, actor, payload), None
             except progress_service.ProgressError as exc:
                 raise AuthError(exc.code, exc.status) from None

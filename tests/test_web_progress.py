@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 from app.db import create_or_load_user, get_connection
 from tests.test_attempt_content import bank
-from tests.test_progress import record
+from tests.test_progress import record, reset_payload
 from tests.test_web_auth import web, post, register, login
 
 
@@ -60,3 +60,29 @@ def test_empty_training_and_bad_payload_do_not_create_attempt(web):
     result = post(web, 'progress/train', {'expected_session_id': None, 'replace_active': False}, csrf=csrf)
     assert result.status_code == 409 and result.json()['error'] == 'no_errors'
     assert post(web, 'progress/history', csrf=csrf).json()['items'] == []
+
+
+def test_reset_api_auth_csrf_actor_binding_and_readback(web):
+    assert post(web, 'progress/reset-preview', {'scope': 'all'}).status_code == 401
+    register(web)
+    csrf = login(web)
+    assert post(web, 'identity/new', csrf=csrf).status_code == 200
+    with closing(get_connection(str(web.db))) as conn, conn:
+        actor = conn.execute('SELECT user_id FROM web_accounts').fetchone()[0]
+        own = record(conn, actor=actor)
+        foreign = record(conn, actor=1)
+    before = post(web, 'progress/reset-preview', {'scope': 'all', 'user_id': 1}, csrf=csrf)
+    assert before.status_code == 200 and before.headers['cache-control'] == 'no-store'
+    assert before.json()['answers'] == 1
+    payload = {**reset_payload(before.json()), 'user_id': 1}
+    assert post(web, 'progress/reset-confirm', payload).status_code == 403
+    assert web.client.post('/web/progress/reset-confirm', json=payload, headers={'Origin': 'https://foreign.test', 'X-CSRF-Token': csrf}).status_code == 403
+    assert post(web, 'progress/reset-confirm', {**payload, 'confirm': False}, csrf=csrf).status_code == 400
+    assert post(web, 'progress/attempt', {'session_id': own}, csrf=csrf).status_code == 200
+    assert post(web, 'progress/reset-confirm', payload, csrf=csrf).status_code == 200
+    assert post(web, 'progress/reset-confirm', payload, csrf=csrf).status_code == 409
+    assert post(web, 'progress/history', csrf=csrf).json()['items'] == []
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute('SELECT count(*) FROM quiz_answers WHERE session_id=?', (foreign,)).fetchone()[0] == 1
+        assert conn.execute('SELECT count(*) FROM web_accounts').fetchone()[0] == 1
+    assert web.client.get('/web/auth/me').status_code == 200

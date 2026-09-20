@@ -20,9 +20,10 @@ export function AnswerReview({ item }: { item: SavedAnswer }) {
   </div>
 }
 
-export function ProgressView({ data, history, detail, busy, onRefresh, onMore, onOpen, onBack, onMoreAnswers }: {
+export function ProgressView({ data, history, detail, busy, onRefresh, onMore, onOpen, onBack, onMoreAnswers, onReset }: {
   data: ProgressOverview; history: HistoryPage; detail: AttemptPage | null; busy: boolean
   onRefresh: () => void; onMore: () => void; onOpen: (id: number) => void; onBack: () => void; onMoreAnswers: () => void
+  onReset?: () => void
 }) {
   const [topic, setTopic] = useState('')
   const days = data.topics.find(item => item.topic === topic)?.days ?? data.days
@@ -33,6 +34,7 @@ export function ProgressView({ data, history, detail, busy, onRefresh, onMore, o
   </section>
   return <section className="page-width progress-page"><div className="practice-heading"><div><span className="eyebrow">ВАША ПРАКТИКА</span><h1>Мой прогресс</h1></div><button className="button secondary" disabled={busy} onClick={onRefresh}><Icon name="refresh" />Обновить</button></div>
     <p className="lead">Каждый ответ — часть пути. Здесь результаты ваших квизов в приложении и связанном Telegram.</p>
+    {onReset && <button className="text-button warning-text" disabled={busy} onClick={onReset}>Сбросить прогресс квиза</button>}
     <div className="practice-metrics"><div className="panel"><span>Верных ответов</span><strong>{percent(data.summary.accuracy)}</strong><small>{data.summary.correct} из {data.summary.answered} ответов</small></div><div className="panel"><span>Завершённых квизов</span><strong>{data.summary.finished}</strong><small>Всего попыток: {data.summary.attempts}</small></div></div>
     <p className="hint">Учитываются все сохранённые ответы, в том числе из незавершённых и прерванных попыток. Процент отражает результат практики, а не уровень освоения темы.</p>
     {!data.summary.answered ? <div className="panel empty-state"><h2>История начинается с первого ответа</h2><p className="muted">Пройдите квиз — здесь появятся результаты и темы для повторения.</p></div> : <>
