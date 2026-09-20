@@ -57,6 +57,7 @@ class DockerComposeContractTests(unittest.TestCase):
         services = {line.strip() for line in result.stdout.splitlines() if line.strip()}
         self.assertIn("psych_quiz_bot", services)
         self.assertIn("psych_quiz_miniapp_api", services)
+        self.assertNotIn("psych_quiz_postgres", services)
 
 
 if __name__ == "__main__":

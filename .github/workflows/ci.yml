@@ -111,6 +111,8 @@ jobs:
         run: pip install -r requirements-dev.txt
 
       - name: Behavioral regression suite
+        env:
+          POSTGRES_TEST_CONTAINER: ${{ job.services.postgres.id }}
         run: |
           docker compose version
           python scripts/postgres_test_support.py

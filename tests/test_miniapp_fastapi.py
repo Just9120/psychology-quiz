@@ -46,6 +46,16 @@ class MiniAppFastApiTests(unittest.TestCase):
         if os.path.exists(self.db):
             os.remove(self.db)
 
+    def test_readiness_requires_existing_database_and_queries_backend(self):
+        response = self.client.get('/readyz')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['database_backend'], 'sqlite')
+        self.assertEqual(response.headers['cache-control'], 'no-store')
+        os.remove(self.db)
+        response = self.client.get('/readyz')
+        self.assertEqual(response.status_code, 503)
+        self.assertFalse(os.path.exists(self.db))
+
 
     def test_all_miniapp_api_routes_keep_methods_and_paths(self):
         app = create_app(db_path=self.db, bot_token=self.bot_token)

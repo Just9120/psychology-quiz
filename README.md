@@ -2,7 +2,7 @@
 
 `psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами, повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md).
 
-Текущая реализация — Telegram-бот и Mini App на Python/FastAPI/SQLite, а также самостоятельный PWA quiz client на React/TypeScript/Vite. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#завершённая-goal--pwa-first-001). PostgreSQL/pgvector остаются следующим отдельным scope.
+Текущая реализация — Telegram-бот и Mini App на Python/FastAPI, а также самостоятельный PWA quiz client на React/TypeScript/Vite. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#завершённая-goal--pwa-first-001). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. pgvector/search остаются отдельным scope.
 
 Текущее состояние продукта:
 - **Module 1** — стабильный baseline, 296 approved questions across five active topics.
@@ -20,6 +20,7 @@
 - `APP_ENV` (по умолчанию `dev`)
 - `LOG_LEVEL` (по умолчанию `INFO`)
 - `DB_PATH` (по умолчанию `/data/quiz.sqlite3`)
+- `DATABASE_URL` — приватный PostgreSQL URI; непустое значение имеет приоритет над `DB_PATH`, без fallback при ошибке. Commands/ownership/cutover — в [storage procedure](docs/postgres-storage.md).
 
 Telegram update delivery mode:
 - `TELEGRAM_UPDATE_MODE` — `polling` или `webhook`; по умолчанию `polling`.

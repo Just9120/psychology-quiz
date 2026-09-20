@@ -2,7 +2,7 @@
 
 ## Действующие правила и delivery snapshot
 
-[AGENTS.md](../AGENTS.md) задаёт routine Git/PR/delivery flow; [ci-cd-rules.md](../ci-cd-rules.md) — настройку и исправление pipeline. Продуктовый target — [spec](project-spec.md); AC/findings/checkpoint — [план](delivery-plan.md). Этот runbook сохраняет процедуры существующего Telegram/SQLite deployment, не объявляет целевые PWA/PostgreSQL уже развёрнутыми.
+[AGENTS.md](../AGENTS.md) задаёт routine Git/PR/delivery flow; [ci-cd-rules.md](../ci-cd-rules.md) — настройку и исправление pipeline. Продуктовый target — [spec](project-spec.md); AC/findings/checkpoint — [план](delivery-plan.md). Этот runbook сохраняет процедуры Telegram/SQLite deployment. [PostgreSQL storage](postgres-storage.md) задаёт private service, native backup/isolated restore, operator cutover/retry и ветку обычного CD после переключения; наличие процедуры не подтверждает фактический cutover. Поставка PWA — в [PWA procedure](pwa-delivery.md).
 
 Текущая процедура введена в PLATFORM-STABILIZATION-001 на base `df383200fd0e6c389038f5b080ec23310a26be07`. До merge/live checks её runtime результат PENDING; первичные records искать по PR и expected merge SHA. Исторические результаты ниже действуют только для названных ими версий.
 

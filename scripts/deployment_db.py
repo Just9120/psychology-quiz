@@ -15,15 +15,14 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 from app.attempt_content import get_attempt_content
-from app.database import is_postgres_target, resolve_database_target
+from app.database import connect_database, is_postgres, is_postgres_target, resolve_database_target
+from app.postgres_config import validate_delivery_target
+from app.postgres_schema import verify_schema
 from app.auth_schema import AUTH_TABLES
 from app.web_config import WebSettings
+from app.postgres_recovery import USER_TABLES
 from scripts.audit_question_bank import build_report, has_blockers
 
-USER_TABLES = (
-    "users", "quiz_sessions", "quiz_session_selected_categories",
-    "quiz_session_questions", "quiz_answers", "user_literature_progress",
-)
 
 
 def read_connection(path: Path) -> sqlite3.Connection:
@@ -31,6 +30,9 @@ def read_connection(path: Path) -> sqlite3.Connection:
 
 
 def check_integrity(conn: sqlite3.Connection) -> None:
+    if is_postgres(conn):
+        verify_schema(conn)
+        return
     if [row[0] for row in conn.execute("PRAGMA integrity_check")] != ["ok"]:
         raise RuntimeError("Database integrity check failed")
     if conn.execute("PRAGMA foreign_key_check").fetchone() is not None:
@@ -131,11 +133,27 @@ def check_runtime_config() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=("preflight", "backup", "verify", "smoke"))
+    parser.add_argument("action", choices=("backend", "preflight", "backup", "verify", "smoke"))
     parser.add_argument("--backup", type=Path)
     args = parser.parse_args()
-    if is_postgres_target(resolve_database_target()):
-        raise RuntimeError("PostgreSQL cutover/delivery is not enabled in this preparatory release")
+    target = resolve_database_target()
+    postgres = is_postgres_target(target)
+    if postgres:
+        validate_delivery_target(target)
+    if args.action == "backend":
+        print("postgresql" if postgres else "sqlite")
+        return
+    if postgres:
+        if args.action not in {"preflight", "smoke"}:
+            raise RuntimeError("Use host PostgreSQL backup/recovery procedure")
+        check_runtime_config()
+        with closing(connect_database(target)) as conn:
+            conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
+            check_business(conn)
+        if args.action == "smoke" and has_blockers(build_report(target)):
+            raise RuntimeError("PostgreSQL serving content differs from canonical bank")
+        print("POSTGRES_" + args.action.upper() + "_OK")
+        return
     os.umask(0o077)
     # The runtime's database must live in the existing persistent bind mount.
     raw_path = os.environ.get("DB_PATH", "")

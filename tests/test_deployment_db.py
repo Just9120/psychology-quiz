@@ -84,12 +84,12 @@ def test_business_smoke_rejects_invalid_serving_options(database):
             check_business(conn)
 
 
-def test_preparatory_release_blocks_postgres_delivery_before_touching_sqlite(monkeypatch, tmp_path):
+def test_foreign_postgres_delivery_refused_before_touching_sqlite(monkeypatch, tmp_path):
     from scripts.deployment_db import main
     missing = tmp_path / 'untouched.sqlite3'
     monkeypatch.setenv('DATABASE_URL', 'postgresql://synthetic:private@localhost/psychology_test')
     monkeypatch.setenv('DB_PATH', str(missing))
     monkeypatch.setattr('sys.argv', ['deployment_db.py', 'preflight'])
-    with pytest.raises(RuntimeError, match='PostgreSQL cutover/delivery'):
+    with pytest.raises(ValueError, match='private project database'):
         main()
     assert not missing.exists()

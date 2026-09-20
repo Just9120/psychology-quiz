@@ -106,6 +106,7 @@ docker() {
   if [[ "$1 $2" == 'ps -q' ]]; then echo "$3"; return; fi
   case "$*" in
     build*) [[ "$FAULT" != build ]] ;;
+    *deployment_db.py\ backend) if [[ "$FAULT" == pg* ]]; then echo postgresql; else echo sqlite; fi ;;
     *deployment_db.py\ preflight) cat >/dev/null ;;
     *deployment_db.py\ backup) [[ "$FAULT" != backup ]] || return 2; echo /data/backups/release-test/quiz.sqlite3 ;;
     *scripts/init_db.py) [[ "$FAULT" != migration ]] ;;
@@ -114,6 +115,14 @@ docker() {
     up*) DEPLOY_STARTED=1 ;;
     *deployment_http_smoke.py) [[ "$FAULT" != health ]] ;;
     *) return 0 ;;
+  esac
+}
+python3() {
+  printf 'python3 %s\n' "$*" >> "$COMMAND_LOG"
+  case "$*" in
+    *postgres_vps.py\ backup*) [[ "$FAULT" != pg_backup ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
+    *postgres_vps.py\ verify*) [[ "$FAULT" != pg_preservation ]] ;;
+    *) return 99 ;;
   esac
 }
 '''
@@ -157,6 +166,22 @@ def test_deployment_builds_before_backup_migration_and_checks_running_revision(t
     assert positions == sorted(positions)
     assert f"DEPLOY_OK revision={SHA}" in result.stdout
     assert (tmp_path / ".env").read_text() == "BOT_TOKEN=synthetic\n"
+
+
+@pytest.mark.parametrize('fault', ['pg', 'pg_backup', 'pg_preservation'])
+def test_postgres_delivery_requires_native_restore_and_preservation(tmp_path, fault):
+    result, log = run_deploy(tmp_path, fault)
+    assert 'deployment_db.py backup' not in log
+    assert 'postgres_vps.py backup' in log
+    if fault == 'pg':
+        assert result.returncode == 0, result.stdout + result.stderr
+        commands = ['stop psych_quiz_bot', 'postgres_vps.py backup', 'scripts/init_db.py', 'postgres_vps.py verify', 'up -d', 'deployment_http_smoke.py']
+        positions = [log.index(value) for value in commands]
+        assert positions == sorted(positions)
+    else:
+        assert result.returncode != 0
+        assert 'up -d' not in log and 'DEPLOY_OK' not in result.stdout
+        if fault == 'pg_backup': assert 'scripts/init_db.py' not in log
 
 
 @pytest.mark.parametrize("fault,forbidden", [("lock", "git fetch"), ("dirty", "git fetch"),

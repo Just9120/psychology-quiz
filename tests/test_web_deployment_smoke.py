@@ -16,6 +16,8 @@ def test_http_smoke_requires_correct_web_auth_gate(monkeypatch, enabled, status)
         calls.append(url)
         if url.endswith('/healthz'):
             return BytesIO(json.dumps({'ok':True,'revision':'synthetic-sha'}).encode())
+        if url.endswith('/readyz'):
+            return BytesIO(json.dumps({'ok':True,'revision':'synthetic-sha','database_backend':'sqlite','database_version':'3.test'}).encode())
         code = status if '/web/' in url else 401
         raise urllib.error.HTTPError(url,code,'',{},BytesIO(b'{"error":"unauthorized"}'))
     monkeypatch.setattr(deployment_http_smoke.urllib.request,'urlopen',response)
@@ -29,7 +31,21 @@ def test_http_smoke_rejects_accidentally_open_web_gate(monkeypatch):
     def response(url, timeout):
         if url.endswith('/miniapp/state'):
             raise urllib.error.HTTPError(url,401,'',{},BytesIO(b'{"error":"unauthorized"}'))
-        return BytesIO(json.dumps({'ok':True,'revision':'synthetic-sha'}).encode())
+        return BytesIO(json.dumps({'ok':True,'revision':'synthetic-sha','database_backend':'sqlite','database_version':'3.test'}).encode())
     monkeypatch.setattr(deployment_http_smoke.urllib.request,'urlopen',response)
     with pytest.raises(RuntimeError,match='Unauthenticated PWA'):
+        deployment_http_smoke.main()
+
+
+@pytest.mark.parametrize('field,value', [('revision','old'),('database_backend','postgresql'),('ok',False),('database_version','')])
+def test_readiness_failure_cannot_pass_health_only(monkeypatch, field, value):
+    monkeypatch.setenv('APP_REVISION','synthetic-sha')
+    monkeypatch.delenv('DATABASE_URL', raising=False)
+    monkeypatch.setattr(deployment_http_smoke.time, 'sleep', lambda _: None)
+    def response(url, timeout):
+        payload = {'ok':True,'revision':'synthetic-sha','database_backend':'sqlite','database_version':'3.test'}
+        if url.endswith('/readyz'): payload[field] = value
+        return BytesIO(json.dumps(payload).encode())
+    monkeypatch.setattr(deployment_http_smoke.urllib.request,'urlopen',response)
+    with pytest.raises(RuntimeError, match='readiness'):
         deployment_http_smoke.main()
