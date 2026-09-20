@@ -3,7 +3,7 @@ import asyncio
 import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
-from app import glossary_service, learning_reset, progress_service
+from app import glossary_service, learning_reset, progress_service, literature_service
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -14,9 +14,9 @@ from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_set
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "glossary/state", "glossary/options"}
+GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "glossary/state", "glossary/options", "literature/catalog"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
-                "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer",
+                "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
                 "progress/reset-preview", "progress/reset-confirm", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
 logger = logging.getLogger(__name__)
@@ -60,6 +60,14 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         actor = account["user_id"]
         if actor is None:
             raise AuthError("identity_required", 409)
+        if action == "literature/catalog":
+            return literature_service.catalog(conn, actor), None
+        if action == "literature/progress":
+            validated = literature_service.validate_progress(payload)
+            if isinstance(validated, str):
+                raise AuthError(validated, 400)
+            state = literature_service.save_progress(conn, actor, *validated)
+            return {"ok": True, "literature_progress": state}, None
         if action.startswith('glossary/'):
             try:
                 if action == 'glossary/options':

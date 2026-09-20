@@ -6,9 +6,11 @@ from pathlib import Path
 from typing import Any
 from app.content_publication import load_policy
 
-LITERATURE_DIR = Path("content/literature")
-TOPICS_FILE = Path("content/topics.json")
+ROOT = Path(__file__).resolve().parents[1]
+LITERATURE_DIR = ROOT / "content/literature"
+TOPICS_FILE = ROOT / "content/topics.json"
 PUBLIC_ITEM_FIELDS = (
+    "work_id", "module", "source", "content_access", "metadata_warnings",
     "id",
     "topic_id",
     "title",

@@ -1,0 +1,327 @@
+[
+  {
+    "id": "lit_12ca0a14d27fe4f9",
+    "work_id": "lit_12ca0a14d27fe4f9",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Психологическое консультирование: настольная книга для начинающих",
+    "authors": [
+      "Азарнова А. Н."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 10,
+    "global_order": 310010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 1: Психологическое консультирование: настольная книга для начинающих",
+      "citation": "Азарнова, А. Н. Психологическое консультирование: настольная книга для начинающих"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_16a62202b82667da",
+    "work_id": "lit_16a62202b82667da",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Практическая психология: психологическое консультирование",
+    "authors": [
+      "Абрамова Г. С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 20,
+    "global_order": 310020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 2: Практическая психология: психологическое консультирование",
+      "citation": "Абрамова, Г. С. Практическая психология: психологическое консультирование"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_6d7bc0cc3c9ce6eb",
+    "work_id": "lit_6d7bc0cc3c9ce6eb",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Индивидуальное и семейное психологическое консультирование",
+    "authors": [
+      "Алешина Ю. Е."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 30,
+    "global_order": 310030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 3: Индивидуальное и семейное психологическое консультирование",
+      "citation": "Алешина, Ю. Е. Индивидуальное и семейное психологическое консультирование"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку.",
+      "Совпали работа и автор; список консультирования без года, семейная психология указывает 1999. Это связь работы, не доказательство одинакового издания."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_e5921321564edbc4",
+    "work_id": "lit_e5921321564edbc4",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Психологическое консультирование: теория и практика",
+    "authors": [
+      "Бурлачук Л. Ф."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 40,
+    "global_order": 310040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 4: Психологическое консультирование: теория и практика",
+      "citation": "Бурлачук, Л. Ф. Психологическое консультирование: теория и практика"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_f207603bd416c4be",
+    "work_id": "lit_f207603bd416c4be",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Основы психологического консультирования",
+    "authors": [
+      "Кочюнас Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 50,
+    "global_order": 310050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 5: Основы психологического консультирования",
+      "citation": "Кочюнас, Р. Основы психологического консультирования"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_5568f7c20141100f",
+    "work_id": "lit_5568f7c20141100f",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Психологическое консультирование",
+    "authors": [
+      "Линде Н. Д."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 60,
+    "global_order": 310060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 6: Психологическое консультирование",
+      "citation": "Линде, Н. Д. Психологическое консультирование"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_ae000be9a73115a6",
+    "work_id": "lit_ae000be9a73115a6",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Индивидуальное психологическое консультирование: теория, практика, обучение",
+    "authors": [
+      "Мартынова Е. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 70,
+    "global_order": 310070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 7: Индивидуальное психологическое консультирование: теория, практика, обучение",
+      "citation": "Мартынова, Е. А. Индивидуальное психологическое консультирование: теория, практика, обучение"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_e397986f81e37d22",
+    "work_id": "lit_e397986f81e37d22",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Введение в психологическое консультирование",
+    "authors": [
+      "Меновщиков В. Ю."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 80,
+    "global_order": 310080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 8: Введение в психологическое консультирование",
+      "citation": "Меновщиков, В. Ю. Введение в психологическое консультирование"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_7b4d2c2bdc54b178",
+    "work_id": "lit_7b4d2c2bdc54b178",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Психологическое консультирование: учебник для вузов",
+    "authors": [
+      "Немов Р. С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 90,
+    "global_order": 310090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психологическое консультирование».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj"
+    ],
+    "source": {
+      "id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+      "title": "Список рекомендованной литературы.pdf",
+      "locator": "Позиция 9: Психологическое консультирование: учебник для вузов",
+      "citation": "Немов, Р. С. Психологическое консультирование: учебник для вузов"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  }
+]

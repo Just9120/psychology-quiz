@@ -1,189 +1,218 @@
 [
   {
     "id": "psf_danilova_psihofiziologiya",
+    "work_id": "psf_danilova_psihofiziologiya",
     "topic_id": "psihofiziologiya",
+    "module": "module1",
     "title": "Психофизиология: учебник для вузов",
     "authors": [
       "Данилова Н. Н."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "core",
-    "status": "review",
-    "priority": "high",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 10,
     "global_order": 150010,
     "estimated_minutes": null,
-    "tags": [
-      "psychophysiology",
-      "textbook"
-    ],
-    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по психофизиологии.",
-      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психофизиология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
-      "source_list:spisok_literatury_psihofiziologiya"
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni"
     ],
-    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+    "source": {
+      "id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 1",
+      "citation": "Данилова, Н. Н. Психофизиология: Учебник для вузов."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "psf_ilyin_psihofiziologiya_sostoyaniy",
+    "work_id": "psf_ilyin_psihofiziologiya_sostoyaniy",
     "topic_id": "psihofiziologiya",
+    "module": "module1",
     "title": "Психофизиология состояний человека",
     "authors": [
       "Ильин Е. П."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "core",
-    "status": "review",
-    "priority": "high",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 20,
     "global_order": 150020,
     "estimated_minutes": null,
-    "tags": [
-      "psychophysiology",
-      "stress"
-    ],
-    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по психофизиологии.",
-      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психофизиология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
-      "source_list:spisok_literatury_psihofiziologiya"
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni"
     ],
-    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+    "source": {
+      "id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 2",
+      "citation": "Ильин, Е. П. Психофизиология состояний человека."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "psf_aleksandrov_psihofiziologiya",
+    "work_id": "psf_aleksandrov_psihofiziologiya",
     "topic_id": "psihofiziologiya",
+    "module": "module1",
     "title": "Психофизиология: учебник для вузов",
     "authors": [
       "Александров Ю. И."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "core",
-    "status": "review",
-    "priority": "high",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 30,
     "global_order": 150030,
     "estimated_minutes": null,
-    "tags": [
-      "psychophysiology",
-      "textbook"
-    ],
-    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по психофизиологии.",
-      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психофизиология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
-      "source_list:spisok_literatury_psihofiziologiya"
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni"
     ],
-    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+    "source": {
+      "id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 3",
+      "citation": "Александров, Ю. И. (ред.) Психофизиология: Учебник для вузов."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "psf_van_der_kolk_telo_pomnit_vse",
+    "work_id": "psf_van_der_kolk_telo_pomnit_vse",
     "topic_id": "psihofiziologiya",
+    "module": "module1",
     "title": "Тело помнит все: какую роль психологическая травма играет в жизни человека и какие техники помогают ее преодолеть",
     "authors": [
       "Ван дер Колк Б."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "applied",
-    "status": "review",
-    "priority": "medium",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 40,
     "global_order": 150040,
     "estimated_minutes": null,
-    "tags": [
-      "psychophysiology",
-      "stress"
-    ],
-    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по психофизиологии.",
-      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психофизиология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
-      "source_list:spisok_literatury_psihofiziologiya"
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni"
     ],
-    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+    "source": {
+      "id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 4",
+      "citation": "Ван дер Колк, Б. Тело помнит все: какую роль психологическая травма играет в жизни человека и какие техники помогают ее преодолеть."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "psf_sapolsky_psihologiya_stressa",
+    "work_id": "psf_sapolsky_psihologiya_stressa",
     "topic_id": "psihofiziologiya",
+    "module": "module1",
     "title": "Психология стресса",
     "authors": [
       "Сапольски Р."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "foundation",
-    "status": "review",
-    "priority": "medium",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 50,
     "global_order": 150050,
     "estimated_minutes": null,
-    "tags": [
-      "psychophysiology",
-      "foundation",
-      "stress"
-    ],
-    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по психофизиологии.",
-      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психофизиология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
-      "source_list:spisok_literatury_psihofiziologiya"
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni"
     ],
-    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+    "source": {
+      "id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 5",
+      "citation": "Сапольски, Р. Психология стресса."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "psf_kabat_zinn_kuda_by_ty_ni_shel",
+    "work_id": "psf_kabat_zinn_kuda_by_ty_ni_shel",
     "topic_id": "psihofiziologiya",
+    "module": "module1",
     "title": "Куда бы ты ни шел — ты уже там",
     "authors": [
       "Кабат-Зинн Дж."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "applied",
-    "status": "review",
-    "priority": "medium",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 60,
     "global_order": 150060,
     "estimated_minutes": null,
-    "tags": [
-      "psychophysiology",
-      "mindfulness"
-    ],
-    "why_read": "Помогает связать чтение с базовыми вопросами психофизиологии и учебной темой.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по психофизиологии.",
-      "Связать материал чтения с ключевыми понятиями темы психофизиологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психофизиология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
-      "source_list:spisok_literatury_psihofiziologiya"
+      "drive:1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni"
     ],
-    "notes": "Источник «Список литературы. Психофизиология» содержит эту запись в видимом 6-пунктном списке rendered PDF; год и библиографические детали требуют ручной проверки."
+    "source": {
+      "id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 6",
+      "citation": "Кабат-Зинн, Дж. Куда бы ты ни шел - ты уже там."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   }
 ]

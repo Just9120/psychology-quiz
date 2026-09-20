@@ -21,7 +21,8 @@
     "order": 120,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
@@ -34,7 +35,8 @@
     "order": 130,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
@@ -47,7 +49,8 @@
     "order": 140,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
@@ -60,7 +63,8 @@
     "order": 150,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
@@ -86,7 +90,8 @@
     "order": 220,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from static content/glossary JSON."
   },
@@ -99,8 +104,81 @@
     "order": 310,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
+  },
+  {
+    "id": "personality_psychology",
+    "title": "Психология личности и индивидуальных различий",
+    "module": "module4",
+    "question_file": null,
+    "status": "active",
+    "order": 410,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "developmental_psychology",
+    "title": "Возрастная психология",
+    "module": "module4",
+    "question_file": null,
+    "status": "active",
+    "order": 420,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "social_psychology",
+    "title": "Социальная психология",
+    "module": "module6",
+    "question_file": null,
+    "status": "active",
+    "order": 610,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "family_psychology",
+    "title": "Семейная психология",
+    "module": "module6",
+    "question_file": null,
+    "status": "active",
+    "order": 620,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "organizational_psychology",
+    "title": "Организационная психология",
+    "module": "module6",
+    "question_file": null,
+    "status": "active",
+    "order": 630,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "psycholinguistics",
+    "title": "Психолингвистика",
+    "module": "module6",
+    "question_file": null,
+    "status": "active",
+    "order": 640,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
   }
 ]

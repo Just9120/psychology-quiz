@@ -1,0 +1,520 @@
+[
+  {
+    "id": "lit_7ff4b50c4911b5f7",
+    "work_id": "lit_6d7bc0cc3c9ce6eb",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Индивидуальное и семейное психологическое консультирование",
+    "authors": [
+      "Алешина Ю. Е."
+    ],
+    "year": 1999,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 10,
+    "global_order": 620010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 1: Индивидуальное и семейное психологическое консультирование",
+      "citation": "Алѐшина, Ю.Е. Индивидуальное и семейное психологическое консультирование / Ю. Е. Алешина. – М.: Класс, 1999.– 208с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Совпали работа и автор; список консультирования без года, семейная психология указывает 1999. Это связь работы, не доказательство одинакового издания."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_98bfb98e25b39800",
+    "work_id": "lit_98bfb98e25b39800",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Социальная психология семейных отношений",
+    "authors": [
+      "Андреева Т. В."
+    ],
+    "year": 1998,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 20,
+    "global_order": 620020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 2: Социальная психология семейных отношений",
+      "citation": "Андреева, Т.В. Социальная психология семейных отношений / Т.В. Андреева. – СПб: Санкт-Петербургский гос. ун-т, 1998. – 100 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_802f13c56eea6319",
+    "work_id": "lit_802f13c56eea6319",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Ребенок из неблагополучной семьи",
+    "authors": [
+      "Буянов М. И."
+    ],
+    "year": 1988,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 30,
+    "global_order": 620030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 3: Ребенок из неблагополучной семьи",
+      "citation": "Буянов, М.И. Ребенок из неблагополучной семьи: кн. для учителей и родителей / М.И. Буянов. – М.: Просвещение, 1988. – 207 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_4c4514f492edb1c6",
+    "work_id": "lit_4c4514f492edb1c6",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Системная семейная психотерапия: краткий лекционный курс",
+    "authors": [
+      "Варга А. Я."
+    ],
+    "year": 2001,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 40,
+    "global_order": 620040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 4: Системная семейная психотерапия: краткий лекционный курс",
+      "citation": "Варга, А..Я. Системная семейная психотерапия: краткий лекционный курс / А.Я. Варга. – СПб.: Речь, 2001. – 144 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_40f4eacd15ed570b",
+    "work_id": "lit_40f4eacd15ed570b",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Танцы с семьей: семейная терапия",
+    "authors": [
+      "Витакер К.",
+      "Бамберри В."
+    ],
+    "year": 1999,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 50,
+    "global_order": 620050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 5: Танцы с семьей: семейная терапия",
+      "citation": "Витакер, К.Танцы с семьей: семейная терапия / К. Витакер, В. Бамберри; пер. с анл. А.З.Шапиро. – М.: Класс, 1999. – 176 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_bd48225c86c8de17",
+    "work_id": "lit_bd48225c86c8de17",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "От младенчества до отрочества",
+    "authors": [
+      "Гарбузов В. И."
+    ],
+    "year": 1989,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 60,
+    "global_order": 620060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 6: От младенчества до отрочества",
+      "citation": "Гарбузов, В.И. От младенчества до отрочества / В.И. Гарбузов. – М.: Педагогика, 1989. – 276 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_0199865ad8d23ecb",
+    "work_id": "lit_0199865ad8d23ecb",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Общаться с ребенком. Как?",
+    "authors": [
+      "Гиппенрейтер Ю. Б."
+    ],
+    "year": 2002,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 70,
+    "global_order": 620070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 7: Общаться с ребенком. Как?",
+      "citation": "Гиппенрейтер, Ю. Б. Общаться с ребенком. Как?/ Ю.Б. Гиппенрейтер. – М.: ЧеРо, 2002. – 240 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_819808cf97ad8eb5",
+    "work_id": "lit_819808cf97ad8eb5",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Продолжаем общаться с ребенком. Так?",
+    "authors": [
+      "Гиппенрейтер Ю. Б."
+    ],
+    "year": 2009,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 80,
+    "global_order": 620080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 8: Продолжаем общаться с ребенком. Так?",
+      "citation": "Гиппенрейтер, Ю. Б. Продолжаем общаться с ребенком. Так?/ Ю.Б. Гиппенрейтер. – М.: АСТ: Астрель; Владимир: ВКТ, 2009. – 256 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_ee1fe3562df0c482",
+    "work_id": "lit_ee1fe3562df0c482",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Основы семейной жизни",
+    "authors": [
+      "Гребенников И. В."
+    ],
+    "year": 1991,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 90,
+    "global_order": 620090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 9: Основы семейной жизни",
+      "citation": "Гребенников, И.В. Основы семейной жизни / И.В. Гребенников. – М.: Просвещение,1991. – 256 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_a172ffe221539480",
+    "work_id": "lit_a172ffe221539480",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Психология семьи",
+    "authors": [
+      "Дружинин В. Н."
+    ],
+    "year": 2000,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 100,
+    "global_order": 620100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 10: Психология семьи",
+      "citation": "Дружинин, В.Н. Психология семьи / В.Н. Дружинин. – Екатеринбург: Деловая книга, 2000. – 208 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_e8a91d867727899b",
+    "work_id": "lit_e8a91d867727899b",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Зависимость характеристик супружеской семьи от родительской",
+    "authors": [
+      "Дымнова Т. Н."
+    ],
+    "year": 1998,
+    "type": "article",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 110,
+    "global_order": 620110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 11: Зависимость характеристик супружеской семьи от родительской",
+      "citation": "Дымнова, Т. Н. Зависимость характеристик супружеской семьи от родительской / Т. Н. Дымнова // Вопросы психологии. – 1998. – № 2. – С. 19 - 27"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_4bad7531005a5e23",
+    "work_id": "lit_4bad7531005a5e23",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Родители и дети: взаимопонимание или отчуждение?",
+    "authors": [
+      "Заслуженюк В. С.",
+      "Семиченко В. А."
+    ],
+    "year": 1996,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 120,
+    "global_order": 620120,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 12: Родители и дети: взаимопонимание или отчуждение?",
+      "citation": "Заслуженюк, В.С. Родители и дети: взаимопонимание или отчуждение?: кн. для родителей / В.С. Заслуженюк, В.А. Семиченко. – М.: Просвещение: АО «Учеб. лит.», 1996. – 191 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_ce87499b1e725a4d",
+    "work_id": "lit_ce87499b1e725a4d",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Психология семейных отношений",
+    "authors": [
+      "Захарова Г. И."
+    ],
+    "year": 2009,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 130,
+    "global_order": 620130,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 13: Психология семейных отношений",
+      "citation": "Захарова Г.И. Психология семейных отношений: Учебное пособие. – Челябинск: Изд-во ЮУрГУ, 2009.– 63"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_319ec2108977ce66",
+    "work_id": "lit_319ec2108977ce66",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Основные направления консультативной работы с семьей",
+    "authors": [
+      "Ершова И. А.",
+      "Пермякова М. Е.",
+      "Вильгельм А. М."
+    ],
+    "year": 2018,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 140,
+    "global_order": 620140,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 14: Основные направления консультативной работы с семьей",
+      "citation": "Основные направления консультативной работы с семьей : учеб. пособие / И. А. Ершова, М. Е. Пермякова, А. М. Вильгельм ; М-во образования и науки Рос. Федерации, Урал. федер. ун-т. — Екатеринбург : Изд-во Урал. ун-та, 2018. — 150 с"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_3c68e7fa4c7ec0ba",
+    "work_id": "lit_3c68e7fa4c7ec0ba",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "С тобой я дома",
+    "authors": [
+      "Примаченко О."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 150,
+    "global_order": 620150,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Семейная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
+    ],
+    "source": {
+      "id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СЕМЕЙНАЯ ПСИХОЛОГИЯ».pdf",
+      "locator": "Позиция 15: С тобой я дома",
+      "citation": "О. Примаченко «С тобой я дома»…"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  }
+]

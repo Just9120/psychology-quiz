@@ -1,0 +1,277 @@
+[
+  {
+    "id": "lit_8c4dd1a3c39ecbcf",
+    "work_id": "lit_8c4dd1a3c39ecbcf",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Социальная психология",
+    "authors": [
+      "Андреева Г. М."
+    ],
+    "year": 2017,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 10,
+    "global_order": 410010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 1: Социальная психология",
+      "citation": "Андреева Г. М. Социальная психология. — М.: Аспект Пресс, 2017"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_00a7af60c24a8221",
+    "work_id": "lit_00a7af60c24a8221",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Психология личности",
+    "authors": [
+      "Слотина Т. В."
+    ],
+    "year": 2017,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 20,
+    "global_order": 410020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 2: Психология личности",
+      "citation": "Слотина Т. В. Психология личности. — СПб.: Питер, 2017"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_917071a82ba4c6db",
+    "work_id": "lit_917071a82ba4c6db",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Психология личности",
+    "authors": [
+      "Столяренко Л. Д.",
+      "Самыгин С. И."
+    ],
+    "year": 2016,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 30,
+    "global_order": 410030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 3: Психология личности",
+      "citation": "Столяренко Л. Д., Самыгин С. И. Психология личности. — М.: Феникс, 2016"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_5505760c8ef8c4b8",
+    "work_id": "lit_5505760c8ef8c4b8",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Психология личности. Культурно-историческое понимание развития человека",
+    "authors": [
+      "Асмолов А. Г."
+    ],
+    "year": 2007,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 40,
+    "global_order": 410040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 4: Психология личности. Культурно-историческое понимание развития человека",
+      "citation": "Асмолов А. Г. Психология личности. Культурно-историческое понимание развития человека. — М.: Смысл, 2007"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_2055c41e007c80b8",
+    "work_id": "lit_2055c41e007c80b8",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Психология эмоций",
+    "authors": [
+      "Бреслав Г."
+    ],
+    "year": 2004,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 50,
+    "global_order": 410050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 5: Психология эмоций",
+      "citation": "Бреслав Г. Психология эмоций. — М.: Смысл; Академия, 2004"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_4bfaf8e48c20ad8b",
+    "work_id": "lit_4bfaf8e48c20ad8b",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Социальная психология",
+    "authors": [
+      "Веракса Н. Е.",
+      "Веракса А. Н."
+    ],
+    "year": 2011,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 60,
+    "global_order": 410060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 6: Социальная психология",
+      "citation": "Веракса Н. Е., Веракса А. Н. Социальная психология. — М.: Академия, 2011"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_09470e6d0794b19a",
+    "work_id": "lit_09470e6d0794b19a",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Психология индивидуальных различий",
+    "authors": [
+      "Гиппенрейтер Ю. Б.",
+      "Романов В. Я."
+    ],
+    "year": 2008,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 70,
+    "global_order": 410070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 7: Психология индивидуальных различий",
+      "citation": "Гиппенрейтер Ю. Б., Романов В. Я. Психология индивидуальных различий. — М.: АСТ, 2008"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_1e9a50757f2caf6e",
+    "work_id": "lit_1e9a50757f2caf6e",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Психология мотивации достижения",
+    "authors": [
+      "Гордеева Т. О."
+    ],
+    "year": 2006,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 80,
+    "global_order": 410080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Психология личности и индивидуальных различий».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS"
+    ],
+    "source": {
+      "id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 8: Психология мотивации достижения",
+      "citation": "Гордеева Т. О. Психология мотивации достижения. — М.: Смысл; Академия, 2006"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  }
+]

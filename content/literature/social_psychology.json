@@ -1,0 +1,280 @@
+[
+  {
+    "id": "lit_caa8d94a943aae0d",
+    "work_id": "lit_caa8d94a943aae0d",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Социальная психология личности",
+    "authors": [
+      "Белинская Е. П.",
+      "Тихомандрицкая О. А."
+    ],
+    "year": 2001,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 10,
+    "global_order": 610010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 1: Социальная психология личности",
+      "citation": "Белинская Е. П., Тихомандрицкая О. А. Социальная психология личности. — М., 2001"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_a851d2e2d491dfed",
+    "work_id": "lit_a851d2e2d491dfed",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Игры, в которые играют люди. Люди, которые играют в игры",
+    "authors": [
+      "Берн Э."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 20,
+    "global_order": 610020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 2: Игры, в которые играют люди. Люди, которые играют в игры",
+      "citation": "Берн Э. Игры, в которые играют люди. Люди, которые играют в игры. — М., 20211"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку.",
+      "В источнике напечатано «20211»; год не исправлен догадкой."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_28136036489db778",
+    "work_id": "lit_28136036489db778",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Психология самосознания: Хрестоматия",
+    "authors": [
+      "Иванова Н. Л."
+    ],
+    "year": 2000,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 30,
+    "global_order": 610030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 3: Психология самосознания: Хрестоматия",
+      "citation": "Иванова Н. Л., Психология самосознания: Хрестоматия. — Самара, 2000"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_88dee04d51aa3119",
+    "work_id": "lit_88dee04d51aa3119",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "В поисках себя: личность и самосознание",
+    "authors": [
+      "Кон И. С."
+    ],
+    "year": 1984,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 40,
+    "global_order": 610040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 4: В поисках себя: личность и самосознание",
+      "citation": "Кон И. С. В поисках себя: личность и самосознание. М., 1984"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_6968d12a30949ae7",
+    "work_id": "lit_6968d12a30949ae7",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Межличностное общение",
+    "authors": [
+      "Куницына В. Н.",
+      "Казаринова Н. В.",
+      "Погольша В. М."
+    ],
+    "year": 2003,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 50,
+    "global_order": 610050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 5: Межличностное общение",
+      "citation": "Куницына В. Н., Казаринова Н. В., Погольша В. М. Межличностное общение. — СПБ, 2003"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_4ac5113ca33225a9",
+    "work_id": "lit_4ac5113ca33225a9",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Социальная идентичность: теория и практика",
+    "authors": [
+      "Румянцева Т. В."
+    ],
+    "year": 2009,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 60,
+    "global_order": 610060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 6: Социальная идентичность: теория и практика",
+      "citation": "Румянцева Т. В. Социальная идентичность: теория и практика. — М., 2009"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_7bcfce2256481407",
+    "work_id": "lit_7bcfce2256481407",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Тренинг влияния и противостояния влиянию",
+    "authors": [
+      "Сидоренко Е. В."
+    ],
+    "year": 2017,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 70,
+    "global_order": 610070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 7: Тренинг влияния и противостояния влиянию",
+      "citation": "Сидоренко Е. В. Тренинг влияния и противостояния влиянию. — М, 2017"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_89d363ca5a33cb7d",
+    "work_id": "lit_89d363ca5a33cb7d",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Анти-Карнеги или Человек-манипулятор",
+    "authors": [
+      "Шостром Э."
+    ],
+    "year": 2005,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 80,
+    "global_order": 610080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Социальная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
+    ],
+    "source": {
+      "id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+      "title": "ЛИТЕРАТУРА К БЛОКУ «СОЦИАЛЬНАЯ ПСИХОЛОГИЯ»",
+      "locator": "Позиция 8: Анти-Карнеги или Человек-манипулятор",
+      "citation": "Шостром Э. Анти-Карнеги или Человек-манипулятор. — М., 2005"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  }
+]

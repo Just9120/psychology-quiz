@@ -21,7 +21,7 @@ REQUIRED_FIELDS = {
     "source_notes",
 }
 VALID_STATUSES = {"active", "draft", "deprecated", "placeholder"}
-VALID_CONTOURS = {"questions", "glossary"}
+VALID_CONTOURS = {"questions", "glossary", "literature"}
 TOPIC_ID_RE = re.compile(r"^[a-z0-9_]+$")
 
 
@@ -125,7 +125,7 @@ def validate() -> list[str]:
             else:
                 seen_ids[topic_id] = idx
 
-        for field in ("title", "module", "question_file", "source_notes"):
+        for field in ("title", "module", "source_notes"):
             if field in topic and not is_non_empty_string(topic.get(field)):
                 errors.append(f"{label}: {field} must be a non-empty string")
 
@@ -152,9 +152,13 @@ def validate() -> list[str]:
             for contour in contours:
                 if contour not in VALID_CONTOURS:
                     errors.append(
-                        f"{label}: unsupported available_contours value '{contour}'; allowed values: glossary, questions"
+                        f"{label}: unsupported available_contours value '{contour}'; allowed values: glossary, questions, literature"
                     )
 
+        if "questions" in contours and not is_non_empty_string(topic.get("question_file")):
+            errors.append(f"{label}: question_file is required for questions")
+        if "questions" not in contours and topic.get("question_file") is not None:
+            errors.append(f"{label}: question_file must be null without questions contour")
         if "questions" in contours:
             question_path = validate_question_file(topic, label, errors)
             if question_path is not None:

@@ -93,9 +93,10 @@ def test_preparation_can_validate_without_becoming_public(kind, status):
 def test_current_legacy_counts_preserved_without_source_certification():
     policy = publication.load_policy()
     assert len(policy.legacy) == 716
-    assert not policy.reviews  # No existing content has been re-approved by this feature.
+    assert len(policy.reviews) == 130  # Reviewed bibliography, never book contents.
+    assert all(review["purpose"] == "bibliographic_metadata" for review in policy.reviews.values())
     assert all(source["kind"] == "bibliography" for source in policy.sources.values())
-    for kind, expected in [("questions", 575), ("glossary", 99), ("literature", 42)]:
+    for kind, expected in [("questions", 575), ("glossary", 99), ("literature", 130)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected

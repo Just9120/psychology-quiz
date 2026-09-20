@@ -64,7 +64,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .auth-note svg { margin-top: 3px; }
 .auth-mobile-brand { display: none; }
 .app-layout { display: flex; min-height: 100dvh; }
-.sidebar { width: 246px; flex-shrink: 0; background: #fff; border-right: 1px solid var(--line); padding: 32px 19px 23px; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; z-index: 3; }
+.sidebar { width: 246px; flex-shrink: 0; background: #fff; border-right: 1px solid var(--line); padding: 32px 19px 23px; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; z-index: 3; overflow-y: auto; }
+.sidebar > * { flex-shrink: 0; }
 .sidebar > .brand { margin: 0 7px 49px; font-size: 18px; gap: 9px; }
 .sidebar .brand-mark { width: 33px; height: 36px; border-radius: 10px; }
 .nav-heading { font-size: 9px; letter-spacing: 1.6px; color: var(--muted); margin: 0 15px 14px; font-weight: 650; }
@@ -155,3 +156,16 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .reset-confirm input { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: .2rem; }
 .button.danger { background: #943b36; color: #fff; border: 1px solid #943b36; }
 .button.danger:hover:not(:disabled) { background: #7a2f2b; }
+.literature-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.literature-card, .literature-detail { min-width: 0; overflow-wrap: anywhere; }
+.literature-card h2 { margin: 0 0 10px; font-size: 1.1rem; }
+.literature-title { text-align: left; line-height: 1.45; font: inherit; }
+.literature-filter { max-width: 100%; margin-top: 24px; }
+.literature-detail { margin-top: 20px; }
+.literature-detail select { width: 100%; min-width: 0; text-overflow: ellipsis; }
+.reading-association { font-size: .85rem; }
+.reading-form { margin-top: 24px; max-width: 420px; }
+.source-details { padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.source-details summary { cursor: pointer; }
+.source-details blockquote { margin: 16px 0; padding-left: 16px; border-left: 3px solid var(--line); }
+@media (max-width: 700px) { .literature-list { grid-template-columns: 1fr; } }

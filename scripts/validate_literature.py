@@ -15,7 +15,7 @@ from app.content_publication import validate_publications
 LITERATURE_FILES_GLOB = "content/literature/*.json"
 TOPICS_FILE = Path("content/topics.json")
 REQUIRED_FIELDS = {
-    "id",
+    "id", "work_id", "module", "source", "content_access", "metadata_warnings",
     "topic_id",
     "title",
     "authors",
@@ -129,7 +129,23 @@ def validate_entry(
         if field in entry and not isinstance(entry.get(field), str):
             errors.append(f"{label}: {field} must be a string")
 
-    validate_string_list(entry.get("authors"), "authors", label, errors, require_non_empty=True)
+    validate_string_list(entry.get("authors"), "authors", label, errors, require_non_empty=False)
+
+    if not is_non_empty_string(entry.get("title")):
+        errors.append(f"{label}: title must be non-empty")
+    warnings = entry.get("metadata_warnings")
+    validate_string_list(warnings, "metadata_warnings", label, errors, require_non_empty=False)
+    if not entry.get("authors") and not warnings:
+        errors.append(f"{label}: unknown authors require an explicit metadata warning")
+    if not is_non_empty_string(entry.get("work_id")):
+        errors.append(f"{label}: work_id must be non-empty")
+    if entry.get("content_access") != "not_verified":
+        errors.append(f"{label}: only reviewed bibliographic metadata is supported")
+    source = entry.get("source")
+    if not isinstance(source, dict) or not all(is_non_empty_string(source.get(key)) for key in ("id", "title", "locator", "citation")):
+        errors.append(f"{label}: complete bibliographic source required")
+    elif f"drive:{source['id']}" not in entry.get("source_refs", []):
+        errors.append(f"{label}: source must match source_refs")
 
     year = entry.get("year")
     if year is not None and (type(year) is not int or year < 1800 or year > 2100):
@@ -140,7 +156,7 @@ def validate_entry(
         errors.append(f"{label}: type must be one of {', '.join(sorted(VALID_TYPES))}")
 
     reading_level = entry.get("reading_level")
-    if reading_level not in VALID_READING_LEVELS:
+    if reading_level is not None and reading_level not in VALID_READING_LEVELS:
         errors.append(f"{label}: reading_level must be one of {', '.join(sorted(VALID_READING_LEVELS))}")
 
     status = entry.get("status")
@@ -153,7 +169,7 @@ def validate_entry(
         errors.append(f"{label}: status must be one of {', '.join(sorted(VALID_STATUSES))}")
 
     priority = entry.get("priority")
-    if priority not in VALID_PRIORITIES:
+    if priority is not None and priority not in VALID_PRIORITIES:
         errors.append(f"{label}: priority must be one of {', '.join(sorted(VALID_PRIORITIES))}")
 
     validate_positive_int(entry.get("topic_order"), "topic_order", label, errors)
@@ -181,7 +197,7 @@ def validate_entry(
         "learning_outcomes",
         label,
         errors,
-        require_non_empty=True,
+        require_non_empty=False,
     )
 
     prerequisites = entry.get("prerequisites")
@@ -216,6 +232,9 @@ def validate() -> list[str]:
     seen_ids: dict[str, str] = {}
     seen_global_orders: dict[int, str] = {}
     prerequisite_refs: list[tuple[str, str]] = []
+    entries: dict[str, dict] = {}
+    topics = load_json(TOPICS_FILE, errors, str(TOPICS_FILE)) or []
+    topic_map = {t["id"]: t for t in topics if isinstance(t, dict) and "id" in t}
     for path in literature_files:
         raw_data = load_json(path, errors, str(path))
         if raw_data is None:
@@ -236,6 +255,11 @@ def validate() -> list[str]:
                 continue
             validate_entry(entry, label, file_topic_id, active_topic_ids, seen_ids, errors)
 
+            if isinstance(entry.get("id"), str):
+                entries[entry["id"]] = entry
+            topic = topic_map.get(file_topic_id, {})
+            if entry.get("module") != topic.get("module") or "literature" not in topic.get("available_contours", []):
+                errors.append(f"{label}: module/literature contour must match topic registry")
             topic_order = entry.get("topic_order")
             if type(topic_order) is int:
                 if topic_order in seen_topic_orders:
@@ -261,6 +285,12 @@ def validate() -> list[str]:
                     if is_non_empty_string(prerequisite):
                         prerequisite_refs.append((label, prerequisite))
 
+    for entry_id, entry in entries.items():
+        canonical = entries.get(entry.get("work_id")) if isinstance(entry.get("work_id"), str) else None
+        if canonical is None or canonical.get("work_id") != canonical.get("id"):
+            errors.append(f"{entry_id}: work_id must reference a canonical entry, without chains")
+        elif entry_id != entry.get("work_id") and not entry.get("metadata_warnings"):
+            errors.append(f"{entry_id}: grouping requires an explicit review note")
     for label, prerequisite in prerequisite_refs:
         if prerequisite not in seen_ids:
             errors.append(f"{label}: prerequisite '{prerequisite}' does not match any literature entry id")

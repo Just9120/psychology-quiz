@@ -1,1 +1,605 @@
-[]
+[
+  {
+    "id": "lit_4f9768a778fe2a01",
+    "work_id": "lit_4f9768a778fe2a01",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Маленькая книжка о большой памяти",
+    "authors": [
+      "Лурия А. Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 10,
+    "global_order": 220010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
+    ],
+    "source": {
+      "id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+      "title": "Рекомендуемая литература — встреча 1.docx",
+      "locator": "Пункт 1: Маленькая книжка о большой памяти",
+      "citation": "А.Р. Лурия «Маленькая книжка о большой памяти» и «Потерянный и возвращенный мир» – примеры кейс-стади, описанные в отечественной психологии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_25a5d2f1c7ba76e1",
+    "work_id": "lit_25a5d2f1c7ba76e1",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Потерянный и возвращенный мир",
+    "authors": [
+      "Лурия А. Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 20,
+    "global_order": 220020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
+    ],
+    "source": {
+      "id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+      "title": "Рекомендуемая литература — встреча 1.docx",
+      "locator": "Пункт 1: Потерянный и возвращенный мир",
+      "citation": "А.Р. Лурия «Маленькая книжка о большой памяти» и «Потерянный и возвращенный мир» – примеры кейс-стади, описанные в отечественной психологии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_a29dd1990e36a236",
+    "work_id": "lit_a29dd1990e36a236",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Две улыбки (из книги «Лечение от любви и другие психотерапевтические новеллы»)",
+    "authors": [
+      "Ялом И."
+    ],
+    "year": null,
+    "type": "chapter",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 30,
+    "global_order": 220030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
+    ],
+    "source": {
+      "id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+      "title": "Рекомендуемая литература — встреча 1.docx",
+      "locator": "Пункт 2: Две улыбки (из книги «Лечение от любви и другие психотерапевтические новеллы»)",
+      "citation": "И. Ялом «Две улыбки» (из книги «Лечение от любви и другие психотерапевтические новеллы»); например, здесь [ссылка в исходном списке] – про разные грани восприятия одного и того же события (как иллюстрация социального конструирования психики)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_ca9234874710e30d",
+    "work_id": "lit_ca9234874710e30d",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Пора подумать о душе? (в «Смыслы психотерапии» и альтернативных публикациях)",
+    "authors": [
+      "Каган В."
+    ],
+    "year": 2018,
+    "type": "chapter",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 40,
+    "global_order": 220040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
+    ],
+    "source": {
+      "id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+      "title": "Рекомендуемая литература — встреча 1.docx",
+      "locator": "Пункт 3: Пора подумать о душе? (в «Смыслы психотерапии» и альтернативных публикациях)",
+      "citation": "Каган В. Пора подумать о душе? // Каган В. Смыслы психотерапии. – М.: Смысл, 2018. – С. 112-128 ИЛИ Час пик. – 1997. - №167; EXISTENTIA: психология и психотерапия. – 2010. - №3. – С. 6-21 – о соотношении психотерапии и религии, состоянии психотерапии в России и за рубежом в конце XX века (к вопросу о возможности «христианской психологии»)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_08357e2b580707a7",
+    "work_id": "lit_08357e2b580707a7",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Думая о душе (в «Смыслы психотерапии»; альтернативное интервью «Заново думая о душе»)",
+    "authors": [
+      "Каган В."
+    ],
+    "year": 2018,
+    "type": "chapter",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 50,
+    "global_order": 220050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
+    ],
+    "source": {
+      "id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+      "title": "Рекомендуемая литература — встреча 1.docx",
+      "locator": "Пункт 4: Думая о душе (в «Смыслы психотерапии»; альтернативное интервью «Заново думая о душе»)",
+      "citation": "Каган В. Думая о душе // Каган В. Смыслы психотерапии. – М.: Смысл, 2018. – С. 251-271 ИЛИ Васильева О. Заново думая о душе (интервью 12 лет спустя) // EXISTENTIA: психология и психотерапия. – 2010. - №3. – С. 22-44 – аналогичный разговор о состоянии и ключевых вопросах психотерапии в России и за рубежом в начале XXI века (12 лет спустя первого интервью)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_d4fe5859f2ce2c33",
+    "work_id": "lit_d4fe5859f2ce2c33",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "«Закрытый перелом» 1970-х как веха в истории научной психологии",
+    "authors": [
+      "Леонтьев Д. А."
+    ],
+    "year": 2018,
+    "type": "article",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 60,
+    "global_order": 220060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
+    ],
+    "source": {
+      "id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+      "title": "Рекомендуемая литература — встреча 1.docx",
+      "locator": "Пункт 5: «Закрытый перелом» 1970-х как веха в истории научной психологии",
+      "citation": "Д.А. Леонтьев. «Закрытый перелом» 1970-х как веха в истории научной психологии // История и философия науки в эпоху перемен: сборник научных статей / Научн. ред. и сост. И.Т. Касавина и др.: В 6 томах. Т. 3. [Электронный ресурс]. – М.: Изд-во «Русское общество истории и философии наук», 2018. – С. 56-59 (В ПРИКРЕПЛЕННОМ ФАЙЛЕ) – о выработке понятийного консенсуса в научной психологии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_d9803abbb663e67c",
+    "work_id": "lit_d9803abbb663e67c",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Видеокурс по общей психологии",
+    "authors": [
+      "Петухов В. В."
+    ],
+    "year": null,
+    "type": "video",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 70,
+    "global_order": 220070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
+    ],
+    "source": {
+      "id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+      "title": "Рекомендуемая литература — встреча 1.docx",
+      "locator": "Пункт 6: Видеокурс по общей психологии",
+      "citation": "Видеокурс по общей психологии В.В. Петухова: [ссылка в исходном списке] (нужен VPN для просмотра) ИЛИ [ссылка в исходном списке] (в аудиоформате) – классические лекции по общей психологии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_c0537b6dc885ea1f",
+    "work_id": "lit_c0537b6dc885ea1f",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Толстуха (из книги «Лечение от любви и другие психотерапевтические новеллы»)",
+    "authors": [
+      "Ялом И."
+    ],
+    "year": null,
+    "type": "chapter",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 80,
+    "global_order": 220080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5"
+    ],
+    "source": {
+      "id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+      "title": "Рекомендуемая литература — встреча 2.docx",
+      "locator": "Позиция 1: Толстуха (из книги «Лечение от любви и другие психотерапевтические новеллы»)",
+      "citation": "И. Ялом «Толстуха» (из книги «Лечение от любви и другие психотерапевтические новеллы»); например, здесь [ссылка в исходном списке] – про обработку собственного контрпереноса в процессе психотерапии (как иллюстрация важности работы с собственными ценностно-целевыми установками и рефлексии личного опыта психологом)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_6190d3b37fdeeab5",
+    "work_id": "lit_6190d3b37fdeeab5",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Научный статус методологии исследования случаев",
+    "authors": [
+      "Бусыгина Н. П."
+    ],
+    "year": 2009,
+    "type": "article",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 90,
+    "global_order": 220090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5"
+    ],
+    "source": {
+      "id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+      "title": "Рекомендуемая литература — встреча 2.docx",
+      "locator": "Позиция 2: Научный статус методологии исследования случаев",
+      "citation": "Н.П. Бусыгина. Научный статус методологии исследования случаев // Московский психотерапевтический журнал. 2009. – №1. – С. 9-34: [ссылка в исходном списке] - о кейс-стади и смысле подобного рода исследований для психологической науки и практики (как воплощении «качественного» подхода к познанию)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_93082f75dd37021b",
+    "work_id": "lit_93082f75dd37021b",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Сборник тезисов II Международной научно-практической конференции «Кейс-стади в психотерапии и психологическом консультировании»",
+    "authors": [],
+    "year": null,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 100,
+    "global_order": 220100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5"
+    ],
+    "source": {
+      "id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+      "title": "Рекомендуемая литература — встреча 2.docx",
+      "locator": "Позиция 3: Сборник тезисов II Международной научно-практической конференции «Кейс-стади в психотерапии и психологическом консультировании»",
+      "citation": "Сборников тезисов II Международной научно-практической конференции «Кейс-стади в психотерапии и психологическом консультировании»: [ссылка в исходном списке] - примеры кейс-стади"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Автор не указан в исходном списке.",
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_2d2ab1a9e58aaa66",
+    "work_id": "lit_2d2ab1a9e58aaa66",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Основы психологического эксперимента",
+    "authors": [
+      "Готтсданкер Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 110,
+    "global_order": 220110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5"
+    ],
+    "source": {
+      "id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+      "title": "Рекомендуемая литература — встреча 2.docx",
+      "locator": "Позиция 4: Основы психологического эксперимента",
+      "citation": "Р. Готтсданкер. Основы психологического эксперимента: [ссылка в исходном списке] – о сути психологических экспериментов, их принципах и разновидностях (как воплощении «количественного» подхода к познанию)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_510a576872873c35",
+    "work_id": "lit_510a576872873c35",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Феноменологическая психиатрия и психотерапия (из книги «Болевые точки психотерапии»)",
+    "authors": [
+      "Моховиков А."
+    ],
+    "year": null,
+    "type": "chapter",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 120,
+    "global_order": 220120,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-"
+    ],
+    "source": {
+      "id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+      "title": "Рекомендуемая литература — встреча 3.docx",
+      "locator": "Позиция 1: Феноменологическая психиатрия и психотерапия (из книги «Болевые точки психотерапии»)",
+      "citation": "А. Моховиков. «Феноменологическая психиатрия и психотерапия» (из книги «Болевые точки психотерапии»): [ссылка в исходном списке] - о разных методологических и ценностных подходах к работе с человеком"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_cd5ce1720bc8bc2b",
+    "work_id": "lit_cd5ce1720bc8bc2b",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Феномен и симптом (из книги «Болевые точки психотерапии»)",
+    "authors": [
+      "Моховиков А."
+    ],
+    "year": null,
+    "type": "chapter",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 130,
+    "global_order": 220130,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-"
+    ],
+    "source": {
+      "id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+      "title": "Рекомендуемая литература — встреча 3.docx",
+      "locator": "Позиция 2: Феномен и симптом (из книги «Болевые точки психотерапии»)",
+      "citation": "А. Моховиков. «Феномен и симптом» (из книги «Болевые точки психотерапии): [ссылка в исходном списке] - о фокусе внимания в феноменологических и «медицинских» подходах терапии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_398a49d30e4ed132",
+    "work_id": "lit_398a49d30e4ed132",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Психопатология и экзистенциальные темы в шизофрении",
+    "authors": [
+      "Лэнгле А."
+    ],
+    "year": null,
+    "type": "article",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 140,
+    "global_order": 220140,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-"
+    ],
+    "source": {
+      "id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+      "title": "Рекомендуемая литература — встреча 3.docx",
+      "locator": "Позиция 3: Психопатология и экзистенциальные темы в шизофрении",
+      "citation": "А. Лэнгле. «Психопатология и экзистенциальные темы в шизофрении»: [ссылка в исходном списке] - о жизни с шизофренией изнутри переживания этого опыта"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_2bc65fc1b8868a95",
+    "work_id": "lit_2bc65fc1b8868a95",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Отец (The Father)",
+    "authors": [],
+    "year": 2020,
+    "type": "video",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 150,
+    "global_order": 220150,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-"
+    ],
+    "source": {
+      "id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+      "title": "Рекомендуемая литература — встреча 3.docx",
+      "locator": "Позиция 4: Отец (The Father)",
+      "citation": "Фильм «Отец» (“The Father”) 2020 г.; например, здесь: [ссылка в исходном списке] - о восприятии мира пожилым человеком с деменцией (= феноменологический взгляд на проблему)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Автор не указан в исходном списке."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_7e152869797af503",
+    "work_id": "lit_7e152869797af503",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Феноменологический анализ динамики переживаний клиентов в процессе психотерапии: изучение отдельных случаев. Часть 1",
+    "authors": [
+      "Кисельникова Н. В.",
+      "Лаврова Е. В.",
+      "Альмухаметова Т. А.",
+      "Куминская Е. А.",
+      "Рзаева Ф. Р."
+    ],
+    "year": 2019,
+    "type": "article",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 160,
+    "global_order": 220160,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-"
+    ],
+    "source": {
+      "id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+      "title": "Рекомендуемая литература — встреча 3.docx",
+      "locator": "Позиция 5: Феноменологический анализ динамики переживаний клиентов в процессе психотерапии: изучение отдельных случаев. Часть 1",
+      "citation": "Кисельникова Н.В., Лаврова Е.В., Альмухаметова Т.А., Куминская Е.А., Рзаева Ф.Р. Феноменологический анализ динамики переживаний клиентов в процессе психотерапии: изучение отдельных случаев. Часть 1 // Консультативная психология и психотерапия. – 2019. – Т. 27. – № 2. – С. 114—128: [ссылка в исходном списке] - о трансформации переживаний клиентов"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_13f7ecd9b94275d0",
+    "work_id": "lit_13f7ecd9b94275d0",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Введение в психологию, лекция 1",
+    "authors": [
+      "Гиппенрейтер Ю. Б."
+    ],
+    "year": null,
+    "type": "chapter",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 170,
+    "global_order": 220170,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-"
+    ],
+    "source": {
+      "id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+      "title": "Рекомендуемая литература — встреча 3.docx",
+      "locator": "Позиция 6: Введение в психологию, лекция 1",
+      "citation": "Ю.Б. Гиппенрейтер «Введение в психологию», лекция 1: [ссылка в исходном списке] – общее представление о психологии как науке"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  }
+]

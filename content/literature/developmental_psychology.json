@@ -1,0 +1,429 @@
+[
+  {
+    "id": "lit_634fbb9e1e821b8a",
+    "work_id": "lit_634fbb9e1e821b8a",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Собрание сочинений в 6 томах",
+    "authors": [
+      "Выготский Л. С."
+    ],
+    "year": 1984,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 10,
+    "global_order": 420010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 1: Собрание сочинений в 6 томах",
+      "citation": "Выготский Л. С. Собр. соч. в 6 т. — М., 1984"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_8c7e7daa0a5aa779",
+    "work_id": "lit_8c7e7daa0a5aa779",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Возрастная психология: конспект лекций",
+    "authors": [
+      "Карабанова О. А."
+    ],
+    "year": 2005,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 20,
+    "global_order": 420020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 2: Возрастная психология: конспект лекций",
+      "citation": "Карабанова О. А. Возрастная психология: конспект лекций. — М., 2005"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_d5aee85ddf3b94c4",
+    "work_id": "lit_d5aee85ddf3b94c4",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Психология развития",
+    "authors": [
+      "Марцинковская Т. Д. (ред.)"
+    ],
+    "year": 2007,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 30,
+    "global_order": 420030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 3: Психология развития",
+      "citation": "Психология развития: учебник для студ. высш. психол. учеб.заведений / под ред. Т. Д. Марцинковской. 3-е изд., стер. — М.: Издательский центр «Академия». 2007."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_c9f5f2a72f8ab645",
+    "work_id": "lit_c9f5f2a72f8ab645",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Психология развития",
+    "authors": [
+      "Крайг Г.",
+      "Бокум Д."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 40,
+    "global_order": 420040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 4: Психология развития",
+      "citation": "Крайг Г., Бокум Д. Психология развития"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_5c4001030a94d65d",
+    "work_id": "lit_5c4001030a94d65d",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Выход из детской травмы. Обнять внутреннего ребёнка",
+    "authors": [
+      "Осипова М. С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 50,
+    "global_order": 420050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 5: Выход из детской травмы. Обнять внутреннего ребёнка",
+      "citation": "Осипова М. С. Выход из детской травмы. Обнять внутреннего ребёнка"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_677867857cce3e89",
+    "work_id": "lit_677867857cce3e89",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Тайная опора: привязанность в жизни ребёнка",
+    "authors": [
+      "Петрановская Людмила"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 60,
+    "global_order": 420060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 6: Тайная опора: привязанность в жизни ребёнка",
+      "citation": "Петрановская Людмила. Тайная опора: привязанность в жизни ребёнка"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_702e5c3a28977b88",
+    "work_id": "lit_702e5c3a28977b88",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Психология подросткового и юношеского возраста",
+    "authors": [
+      "Райс Ф.",
+      "Долджин К. Г."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 70,
+    "global_order": 420070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 7: Психология подросткового и юношеского возраста",
+      "citation": "Райс Ф., Долджин К. Г. Психология подросткового и юношеского возраста"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_57ba3a9bf5d4ff18",
+    "work_id": "lit_57ba3a9bf5d4ff18",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Привязанность",
+    "authors": [
+      "Боулби Джон"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 80,
+    "global_order": 420080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 8: Привязанность",
+      "citation": "Боулби Джон. Привязанность"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_b76317a4d7bec59d",
+    "work_id": "lit_b76317a4d7bec59d",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Создание и разрушение эмоциональных связей",
+    "authors": [
+      "Боулби Джон"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 90,
+    "global_order": 420090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 9: Создание и разрушение эмоциональных связей",
+      "citation": "Боулби Джон. Создание и разрушение эмоциональных связей."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_d679ea65152d4922",
+    "work_id": "lit_d679ea65152d4922",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Руководство практического психолога",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 100,
+    "global_order": 420100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 10: Руководство практического психолога",
+      "citation": "Руководство практического психолога"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Автор не указан в исходном списке.",
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_3ecf3ffbaa287019",
+    "work_id": "lit_3ecf3ffbaa287019",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "Ребёнок, семья и внешний мир",
+    "authors": [
+      "Винникотт Д."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 110,
+    "global_order": 420110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 11: Ребёнок, семья и внешний мир",
+      "citation": "Винникотт Д. Ребёнок, семья и внешний мир"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_6f18559891d319c1",
+    "work_id": "lit_6f18559891d319c1",
+    "topic_id": "developmental_psychology",
+    "module": "module4",
+    "title": "От педиатрии к психоанализу",
+    "authors": [
+      "Винникотт Д."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 120,
+    "global_order": 420120,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
+    ],
+    "source": {
+      "id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+      "title": "Список литературы.pdf",
+      "locator": "Позиция 12: От педиатрии к психоанализу",
+      "citation": "Винникотт Д. От педиатрии к психоанализу."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  }
+]
