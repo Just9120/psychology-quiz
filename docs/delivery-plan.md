@@ -32,12 +32,21 @@
 
 | AC/риск | Проверка / ожидаемый результат | Команда/tool, каталог, environment | Этап / обязательность |
 | --- | --- | --- | --- |
-| G-PROG-01–04 | Два actors, пустые/частичные/finished/abandoned attempts, pagination, точные aggregates, original/backfilled/changed/retired snapshots, selection и retry/concurrency | `python -m pytest tests/test_progress.py tests/test_web_progress.py tests/test_quiz_service.py tests/test_web_integration.py tests/test_attempt_content.py tests/postgres/test_progress.py -q`, root, synthetic SQLite и real local PostgreSQL | REQUIRED до push; CI full suite |
+| G-PROG-01–04 | Два actors, пустые/частичные/finished/abandoned attempts, pagination, точные aggregates, original/backfilled/changed/retired snapshots, selection и retry/concurrency | `python -m pytest tests/test_progress.py tests/test_web_progress.py tests/test_quiz_service.py tests/test_web_integration.py tests/test_attempt_content.py tests/postgres/test_progress_contract.py -q`, root, synthetic SQLite и real local PostgreSQL | REQUIRED до push; CI full suite |
 | G-PROG-01–04, UI/privacy | Loading/error/empty/detail/retry, navigation и confirmation; no private persistent cache | `npm test`, `npm run build`, `npm run test:e2e`, pwa, existing fixture / desktop+mobile / SQLite+PostgreSQL | REQUIRED local affected suites и CI |
 | G-PROG-05 | Whitespace, syntax, self-review, актуальные PR checks/review; exact main CI/artifact и compatible backend | Canonical commands README, GitHub primary records | REQUIRED до merge; без speculative reruns |
 | G-PROG-05, stateful runtime | Existing PostgreSQL backup/preservation/health gates, exact runtime revision; static integrity/HTTPS/auth boundaries и bounded signed-in чтение | Existing CD; [static procedure](pwa-delivery.md); production VPS/operator и внутренний browser | REQUIRED после merge; отсутствие доступа не N/A |
 
-**Checkpoint:** scope закреплён до кода; реализация и validation впереди. E-PROG records добавляются по фактическому результату.
+### Состояние и Evidence
+
+| Критерии | Статус / оставшееся |
+| --- | --- |
+| G-PROG-01–04 | READY в branch diff: shared history, answered-only detail, accurate totals/daily window, edition/provenance-aware errors, confirmed replacement и replay/CAS protection. E-PROG-01 |
+| G-PROG-05 | IN_PROGRESS: local validation/self-review PASS; PR CI/review/merge, backend CD и trusted static activation/public/owner smoke впереди |
+
+**E-PROG-01, local PASS, 20.09.2026 07:25 UTC.** Branch `codex/pwa-progress`, base `51cecf8`, backend commit `17a7c36` и frontend diff. Python 3.12/psycopg 3.3.6, synthetic SQLite и отдельная PostgreSQL 18.6 DB с limited role: финальный affected suite 90 PASS (plan commands плюс existing PG business regression), без skips. Проверены isolation/CSRF, partial/abandoned/finished/empty counts, pagination, UTC window без усечения totals, original/changed/retired/backfill semantics, actual proof-based linking, concurrent training/replay, restart-style new request/state и сохранённые ответы. PWA: 12 component tests, typecheck/build PASS; полные desktop/mobile browser suites 16 SQLite + 16 PostgreSQL PASS. После удаления duplicate CSS-rule повторены build/components и 6 affected UI/keyboard scenarios PASS; backend/DB code после PG проверки не менялся. Desktop/mobile screenshots просмотрены; новой таблицы, миграции, dependency или workflow нет. Исправлены до push: planned count для незавершённых attempts (session aggregate заполняется только при finalize), mobile navigation overflow и pytest module-name collision. Syntax/docs links/whitespace/self-review PASS. Browser использует synthetic data/mail; production writes/нагрузку/физическую установку эти checks не подтверждают.
+
+**Оставшиеся gates:** все published checks актуального PR; merge только после success, затем штатный backend CD на exact main SHA. Frontend публиковать только artifact из успешного main/push CI после проверки identity/manifest; observed previous static `1963e76` перечитать перед activation. VPS lock/main/target/health и обязательные public/owner checks сохраняются. Прямого SSH агента нет, операторский шаг необходим; metadata-only follow-up PR не требуется.
 
 ## Завершённая Goal — POSTGRES-MIGRATION-001
 
@@ -353,9 +362,9 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | AC-QUIZ-06 | IN_PROGRESS | MANDATORY | Structural/quality audit PASS; 21 сильный length cue, полного source-backed review нет; E-CONTENT, F-007/008. |
 | AC-QUIZ-07 | READY | MANDATORY | 575 legacy вопросов/IDs и предметные темы сохранены; immutable attempt editions выдерживают content edits/reorder/demotion/removal. Legacy uncertainty явно отмечена; E-STAB-05 и rollout procedure. |
 | AC-PROG-01 | BACKLOG | MANDATORY | Нет persisted schedule/due-list для questions и terms; Q-03, F-026. |
-| AC-PROG-02 | IN_PROGRESS | MANDATORY | Errors slice выбран в PROGRESS-001; реализация/проверки впереди. Today queue остаётся BACKLOG, Q-03. |
-| AC-PROG-03 | IN_PROGRESS | MANDATORY | Личная история/статистика/динамика существующих тем выбраны в PROGRESS-001. Новая discipline hierarchy не входит; полное закрытие требует покрытия всего AC. |
-| AC-PROG-04 | IN_PROGRESS | MANDATORY | Immutable attempt edition и сохранение исходных answers/score выполнены (E-STAB-05). Personal repetition/version-aware relearning пока отсутствует; Q-02 остаётся частично открытым. |
+| AC-PROG-02 | IN_PROGRESS | MANDATORY | Errors slice READY в PROGRESS-001 branch (E-PROG-01): personal review/empty state/training и D-14. Today queue остаётся BACKLOG, Q-03; code ещё не merged. |
+| AC-PROG-03 | IN_PROGRESS | MANDATORY | History/statistics/daily dynamics существующих тем READY в PROGRESS-001 branch, E-PROG-01. Отдельная discipline hierarchy не задана/не реализована; это оставшаяся часть полного AC, F-026. |
+| AC-PROG-04 | IN_PROGRESS | MANDATORY | Immutable edition/answers/score (E-STAB-05); version-aware error training и captured/backfilled distinction готовы в PROGRESS-001 branch (E-PROG-01). Scheduled relearning новых редакций остаётся вне Goal, Q-03. |
 | AC-PROG-05 | BACKLOG | MANDATORY | Нет подтверждаемого selective learning reset с user-data invariants; F-026. |
 | AC-PROG-06 | BACKLOG | CONDITIONAL | Условный scope; mastery policy Q-03 и temporal fixtures отсутствуют. |
 | AC-GLO-01 | READY | MANDATORY | Topic quiz, owner isolation, stable step/options и персональный score; retry/concurrency/API tests E-STAB-04. Durable persistence относится к F-018. |
@@ -504,4 +513,4 @@ False-positive review: 16 test failures — Windows fixture/lifecycle, не 16 �
 
 20.09.2026: PWA-FIRST-001 и POSTGRES-MIGRATION-001 DONE. Main `51cecf8ea04062bfdb3f7ff8bfd30b2d813e4e39`, #298 CI/CD success; operator PostgreSQL cutover phase complete / cluster `7687501745789132848`, bounded signed-in smoke PASS. Source SQLite/backups сохранены. E-PG-09 обновляет исторические pre-cutover checkpoints без повторного deploy.
 
-Начата PROGRESS-001 по явному поручению пользователя. Branch `codex/pwa-progress`, base `51cecf8`, один worktree; scope/DoD/Validation Plan выше. D-14 подтверждена: latest answer per edition. Следующий шаг — реализация, SQLite/PG/API/component/E2E validation и один содержательный PR; backend CD и frontend artifact activation обязательны после merge. Прямого SSH нет: оператор выполнит static activation по проверенным artifact/previous SHA. Проценты не пересчитывались.
+Начата PROGRESS-001 по явному поручению пользователя. Branch `codex/pwa-progress`, base `51cecf8`, один worktree; scope/DoD/Validation Plan выше. D-14 подтверждена: latest answer per edition. Реализация и local validation завершены (E-PROG-01), self-review PASS. Следующий шаг — initial push/PR, required CI/review/merge; backend CD и frontend artifact activation обязательны после merge. Прямого SSH нет: оператор выполнит static activation по проверенным artifact/previous SHA. Проценты не пересчитывались.

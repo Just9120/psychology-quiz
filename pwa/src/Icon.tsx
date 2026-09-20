@@ -8,6 +8,7 @@ const paths: Record<string, string> = {
   logout: 'M10 4H4v16h6m4-13 5 5-5 5m-6-5h11',
   spark: 'm12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3',
   refresh: 'M20 10a8 8 0 0 0-14-5L3 8m0-5v5h5m-4 6a8 8 0 0 0 14 5l3-3m0 5v-5h-5',
+  chart: 'M4 3v17h17M8 15v-4m5 4V6m5 9V9',
 }
 
 export function Icon({ name, size = 20 }: { name: string; size?: number }) {

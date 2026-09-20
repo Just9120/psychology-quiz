@@ -1,11 +1,12 @@
-import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions } from './types'
+import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage } from './types'
 
 export class ApiError extends Error {
   constructor(public code: string, public status = 0) { super(code) }
 }
 
 const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
-  'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer'])
+  'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
+  'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train'])
 let csrf: string | null = null
 
 export async function request<T>(action: string, payload?: unknown, signal?: AbortSignal): Promise<T> {
@@ -56,6 +57,11 @@ export const api = {
   state: () => request<QuizState>('quiz/state'),
   setup: (setup: Setup) => request<QuizState>('quiz/setup', setup),
   answer: (answer: Answer) => request<AnswerResult>('quiz/answer', answer),
+  progress: () => request<ProgressOverview>('progress/overview'),
+  history: (before: number | null = null) => request<HistoryPage>('progress/history', { before }),
+  attempt: (session_id: number, after: number | null = null) => request<AttemptPage>('progress/attempt', { session_id, after }),
+  errors: (before: number | null = null) => request<ErrorsPage>('progress/errors', { before }),
+  trainErrors: (expected_session_id: number | null, replace_active: boolean, question_count: number | null) => request<QuizState>('progress/train', { expected_session_id, replace_active, question_count }),
 }
 
 const messages: Record<string, string> = {
@@ -70,6 +76,10 @@ const messages: Record<string, string> = {
   identity_already_chosen: 'Прогресс уже выбран. Объединение двух историй пока не поддерживается.',
   no_categories: 'Темы пока недоступны. Попробуйте обновить страницу позже.',
   no_questions: 'Для этих условий пока нет вопросов. Измените настройки.',
+  no_errors: 'Доступных ошибок уже нет. Обновите список — сохранённая история осталась на месте.',
+  practice_changed: 'Квиз изменился в другом окне. Восстановите актуальную попытку.',
+  active_attempt: 'У вас есть незавершённый квиз. Обновите список и подтвердите замену попытки.',
+  attempt_not_found: 'Эта попытка недоступна. Обновите историю.',
   invalid_setup: 'Эти параметры недоступны. Обновите список тем и выберите заново.',
   csrf_failed: 'Не удалось подтвердить запрос. Обновите страницу и повторите действие.',
   origin_forbidden: 'Этот адрес приложения пока не настроен. Обратитесь к владельцу.',
@@ -80,7 +90,7 @@ const messages: Record<string, string> = {
 
 export function errorMessage(error: unknown): string {
   if (error instanceof ApiError) {
-    if (error.status === 404) return 'Вход в приложение пока не включён. Попробуйте позже.'
+    if (error.status === 404 && !messages[error.code]) return 'Этот раздел пока недоступен. Попробуйте позже.'
     return messages[error.code] ?? 'Не удалось выполнить действие. Попробуйте ещё раз.'
   }
   return 'Не удалось выполнить действие. Попробуйте ещё раз.'
