@@ -39,8 +39,12 @@ class OperationError(RuntimeError):
 
 
 def run(command, *, data=None, input_file=None, environment=None, output=None, timeout=120):
+    # Docker otherwise inherits stdin and can consume the remaining commands in
+    # an operator's `bash <<'BASH'` block. Only explicit SQL/manifest/dump input
+    # belongs to a child process; all other commands must receive EOF.
+    stdin = input_file if input_file is not None or data is not None else subprocess.DEVNULL
     try:
-        result = subprocess.run(command, input=data, stdin=input_file, env=environment, stdout=output or subprocess.PIPE,
+        result = subprocess.run(command, input=data, stdin=stdin, env=environment, stdout=output or subprocess.PIPE,
                                 stderr=subprocess.PIPE, timeout=timeout, cwd=PROJECT)
     except (OSError, subprocess.TimeoutExpired):
         raise OperationError("command_unavailable_or_timeout") from None

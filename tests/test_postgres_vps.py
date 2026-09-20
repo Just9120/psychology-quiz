@@ -1,6 +1,8 @@
 """Cutover failure/resume behavior with isolated filesystem/system boundaries."""
 import json
 from pathlib import Path
+import subprocess
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -10,6 +12,44 @@ from scripts import postgres_vps as vps
 from scripts.postgres_backup import backup_and_rehearse
 
 SHA = 'a' * 40
+
+
+@pytest.mark.parametrize('input_kind', ['none', 'empty', 'bytes', 'file'])
+def test_subprocess_keeps_operator_input_and_accepts_explicit_payload(tmp_path, input_kind):
+    """Docker-like stdin readers must not swallow the caller's remaining commands."""
+    caller_input = b'prepare\ncutover\nstatus\n'
+    payload = b'synthetic SQL or archive\x00\xff\n'
+    source = tmp_path / 'input.bin'
+    source.write_bytes(payload)
+    driver = '''
+import json
+from pathlib import Path
+import sys
+from scripts import postgres_vps as vps
+
+vps.PROJECT = Path.cwd()
+kind, source = sys.argv[1:]
+command = [sys.executable, '-c', 'import sys; sys.stdout.buffer.write(sys.stdin.buffer.read())']
+if kind == 'file':
+    with open(source, 'rb') as stream:
+        output = vps.run(command, input_file=stream)
+elif kind == 'bytes':
+    output = vps.run(command, data=Path(source).read_bytes())
+elif kind == 'empty':
+    output = vps.run(command, data=b'')
+else:
+    output = vps.run(command)
+print(json.dumps({'child': output.hex(), 'caller': sys.stdin.buffer.read().hex()}))
+'''
+    result = subprocess.run(
+        [sys.executable, '-c', driver, input_kind, str(source)],
+        cwd=Path(__file__).resolve().parents[1], input=caller_input,
+        capture_output=True, timeout=20, check=True,
+    )
+    assert json.loads(result.stdout) == {
+        'child': (b'' if input_kind in {'none', 'empty'} else payload).hex(),
+        'caller': caller_input.hex(),
+    }
 
 
 @pytest.mark.parametrize('source', [b'A=one\nDATABASE_URL=\nB=two\n', b'A=one\r\nexport DATABASE_URL=""\r\nB=two', b'A=one'])
