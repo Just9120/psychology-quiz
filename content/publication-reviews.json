@@ -1950,6 +1950,54 @@
           "locator": "Позиция 8: Психолингвистика"
         }
       ]
+    },
+    "questions:m1_vnd_002": {
+      "decision": "approved",
+      "item_sha256": "9214ba60717588c819ebd0fdea2f93a4069e8d1fed2f74699901710a48b38a01",
+      "purpose": "learning_content",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "locator": "characters-9800-11600"
+        }
+      ],
+      "rationale": "Уточнён stem: спрашивается классическое учение об условных рефлексах, а не любой ключевой вклад в ВНД. Ключ Павлов и другие варианты сохранены."
+    },
+    "glossary:dopamine": {
+      "decision": "approved",
+      "item_sha256": "c67b8b0f90b4c3ccc9fc878365108cfb2531022e19a48296e47096ac5401794a",
+      "purpose": "learning_content",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "modified_time": "2026-04-16T15:32:40.272Z",
+          "snapshot_sha256": "7ab85f051a13bfe77a5a1bee02e7d634fe899fa2557f288b43e7d8378d6989cf",
+          "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
+          "locator": "characters-2793-3503-and-12400-14300"
+        }
+      ],
+      "rationale": "Исправлена категориальная ошибка: дофамин — медиатор, а не система. Указаны разные пути/функции из лекции, убрано не подтверждённое выбранным фрагментом упоминание ошибки прогноза; дан самостоятельный пример."
+    },
+    "questions:m2_exp_040": {
+      "decision": "approved",
+      "item_sha256": "b33ac9069012c8fb79eaaafc6cc47fabd45d5bc60ce2c71145bc3613732c2dd4",
+      "purpose": "learning_content",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "modified_time": "2026-04-22T20:12:28.380Z",
+          "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
+          "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
+          "locator": "characters-7700-9300-and-10500-12200"
+        }
+      ],
+      "rationale": "Убран ошибочный универсальный критерий обязательных групп/статистики: вопрос теперь проверяет границы обобщения конкретного исторического случая, не исключая контролируемые single-case designs."
     }
   }
 }

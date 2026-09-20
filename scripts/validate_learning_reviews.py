@@ -30,7 +30,7 @@ def inventory(root=ROOT):
 
 def validate(ledger, items, sources):
     errors = []
-    if ledger.get("schema_version") != 1 or not isinstance(ledger.get("items"), dict):
+    if not isinstance(ledger, dict) or ledger.get("schema_version") != 1 or not isinstance(ledger.get("items"), dict):
         return ["Invalid learning review schema"]
     reviews = ledger["items"]
     for key in sorted(items.keys() - reviews.keys()):
@@ -59,7 +59,9 @@ def validate(ledger, items, sources):
         required = {"meaning", "answer", "explanation", "ambiguity", "duplicates", "sources"}
         if key.startswith("glossary:"):
             required = {"meaning", "definition", "examples", "ambiguity", "duplicates", "sources"}
-        if not isinstance(r.get("checks"), list) or set(r["checks"]) != required:
+        checks = r.get("checks")
+        if (not isinstance(checks, list) or any(not isinstance(x, str) for x in checks)
+                or len(checks) != len(required) or set(checks) != required):
             errors.append(f"{key}: incomplete review aspects")
         if not isinstance(r.get("issues"), list) or any(not isinstance(x, str) or not x.strip() for x in r["issues"]):
             errors.append(f"{key}: invalid issues")
@@ -71,6 +73,8 @@ def validate(ledger, items, sources):
             errors.append(f"{key}: supported requires primary evidence")
         if r.get("source_support") != "supported" and not r.get("issues"):
             errors.append(f"{key}: uncertainty requires explicit issue")
+        if r.get("meaning") != "consistent" and not r.get("issues"):
+            errors.append(f"{key}: semantic concern requires explicit issue")
         seen = set()
         for e in evidence:
             if not isinstance(e, dict):

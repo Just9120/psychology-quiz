@@ -75,6 +75,7 @@ python scripts/validate_questions.py
 python scripts/validate_topics.py
 python scripts/validate_glossary.py
 python scripts/validate_literature.py
+python scripts/validate_learning_reviews.py
 # Bash: один временный DB_PATH для init, seed и локального запуска
 export DB_PATH=/tmp/quiz-local.sqlite3
 python scripts/init_db.py

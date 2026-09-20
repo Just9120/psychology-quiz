@@ -18,6 +18,14 @@ Legacy исключение ограничено [frozen baseline](../content/le
 
 Canonical validators из [README](../README.md#быстрый-старт-и-проверки) проверяют publication ledger дополнительно к структуре JSON. Seed проверяет его до DB writes; glossary/literature loaders показывают только точный legacy либо approved derivative с валидным review. Новые `draft`, `review`, `deprecated`, `placeholder` не видны пользователю. Политика кэшируется в процессе как часть immutable release: после content/review обновления нужен штатный runtime restart через CD. Legacy literature `review` — явно ограниченное исключение, а не разрешение автоматически показывать новые review entries.
 
+## Содержательный review учебного банка
+
+[Learning quality ledger](../content/learning-quality-reviews.json) охватывает 575 вопросов и 99 терминов восьми дисциплин. Он фиксирует review смысла, ключа/определения, объяснения/примера, неоднозначности, повторов и источников на точном fingerprint item. Primary fragments связаны с revision/fingerprint из source registry и locator; `partial`/`disputed` сохраняют причины ограничения. Discipline summaries описывают смысловые повторы; они не дают основания автоматически удалять IDs или историю.
+
+Ledger не является publication approval, SME certification или заявлением о прочтении всех материалов корпуса. `supported` означает соответствие указанному фрагменту, а не универсальную истинность каждого клинического/методологического обобщения. Known issues сохранены и у поддержанных источником items. Подтверждённые исправления проходят отдельный publication review; старые ответы продолжают использовать snapshots. Полная сертификация legacy и устранение всех замечаний остаются F-007/008 в [плане](delivery-plan.md).
+
+`validate_learning_reviews.py` из canonical commands [README](../README.md#быстрый-старт-и-проверки) обнаруживает пропущенные/лишние/stale items, изменившиеся sources, неполные review aspects и скрытую неопределённость. Repository regression выполняется общей pytest suite. Добавление или изменение content/source требует нового содержательного review; обновление hash без проверки источника не закрывает замечание. Raw snapshots и исследовательские заметки хранятся вне repository.
+
 ## Каталог литературы
 
 [Литературные записи](../content/literature/) хранят отдельно библиографические связи и группировку работ. `id` — стабильный ключ записи учебного списка и существующего `user_literature_progress`; `work_id` ссылается на canonical запись той же работы. Повторные упоминания объединяются только после review автора/названия/гранулярности; совпадение названий не доказывает одинаковое произведение или издание. `module`/`topic_id` соответствуют [registry](../content/topics.json); `source` содержит ID списка, title, locator и исходную citation. Source revision/fingerprint и review находятся в едином publication ledger. Новые literature-only topics имеют `question_file: null` и не создают пустых quiz/glossary разделов.
