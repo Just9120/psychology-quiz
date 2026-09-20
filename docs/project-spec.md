@@ -61,6 +61,8 @@ PsychologyAtlas — личная учебная платформа владел�
 | R-SRC-05 / AC-SRC-05 | Источники противоречат друг другу → сведения не объединяются автоматически; материал направляется на проверку источника. Проверка: conflict fixture и review record. |
 | R-SRC-06 / AC-SRC-06 | Книга присутствует только в библиографии → её содержание не используется как знание без доступного source corpus; интернет, LLM, Obsidian и старые вопросы не подменяют corpus. Проверка: source review и negative approval cases. |
 | R-SRC-07 / AC-SRC-07 | Новый файл появился в Drive → он не публикуется автоматически; coding/reasoning agent подготавливает и проверяет derivative content до approval через repository/content pipeline. Проверка: publication-state tests и review trail. |
+
+Контракт SRC-06/07: reviewed bibliography подтверждает только библиографические metadata. Новый/изменённый published question или glossary item требует прочитанного learning source, точной source revision/fingerprint, locator и repository review точной редакции derivative. Existing legacy items сохраняются по frozen fingerprints с явным `legacy_unverified`; это совместимость, а не выполнение полной сертификации SRC-05. Draft/review новых items не публикуются. Canonical procedure и форматы — [content publication](question_bank_content_rollout.md#проверка-происхождения-и-публикация).
 | R-SRC-08 / AC-SRC-08 | Пользователь проходит тест либо редактируется контент → runtime не генерирует вопросы через LLM; публичного editor UI и ручной DB-правки как пути публикации нет. Проверка: runtime dependencies/routes и publication tests. |
 
 ### E03 — Тесты и качество банка

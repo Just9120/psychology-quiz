@@ -8,6 +8,10 @@ import re
 import unicodedata
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from app.content_publication import validate_publications
 
 GLOSSARY_FILES_GLOB = "content/glossary/*.json"
 TOPICS_FILE = Path("content/topics.json")
@@ -19,7 +23,7 @@ VALID_DIFFICULTIES = {"easy", "medium", "hard"}
 VALID_STATUSES = {"approved", "draft", "review", "deprecated", "placeholder"}
 ID_RE = re.compile(r"^[a-z0-9_]+$")
 QUESTION_REF_PREFIX = "question:"
-SUPPORTED_SOURCE_REF_PREFIXES = (QUESTION_REF_PREFIX, "supplied_snippet:")
+SUPPORTED_SOURCE_REF_PREFIXES = (QUESTION_REF_PREFIX, "supplied_snippet:", "drive:")
 MIN_APPROVED_ENTRIES_PER_ACTIVE_TOPIC = 10
 
 
@@ -245,7 +249,7 @@ def validate() -> list[str]:
 
 
 def main() -> int:
-    errors = validate()
+    errors = validate() + validate_publications("glossary")
     if errors:
         print("Glossary validation failed:")
         for err in errors:

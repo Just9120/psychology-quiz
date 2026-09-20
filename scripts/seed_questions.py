@@ -15,6 +15,7 @@ if str(REPO_ROOT) not in sys.path:
 from app.db import upsert_approved_questions, get_connection
 from app.database import DATABASE_ERRORS, is_postgres, is_postgres_target, resolve_database_target
 from app.postgres_schema import verify_schema
+from app.content_publication import validate_publications
 
 
 def resolve_db_path() -> str:
@@ -124,6 +125,10 @@ def main() -> int:
         print(f"[ERROR] Ошибка загрузки вопросов: {exc}")
         return 1
 
+    publication_errors = validate_publications("questions")
+    if publication_errors:
+        print("[ERROR] Publication review failed: " + "; ".join(publication_errors))
+        return 1
     approved_total = sum(1 for question in questions if question.get("status") == "approved")
 
     try:

@@ -8,6 +8,10 @@ import re
 import unicodedata
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from app.content_publication import validate_publications
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TOPICS_PATH = REPO_ROOT / "content" / "topics.json"
@@ -146,7 +150,7 @@ def validate() -> list[str]:
 
 
 def main() -> int:
-    errors = validate()
+    errors = validate() + validate_publications("questions")
     if errors:
         print("Question validation failed:")
         for err in errors:
