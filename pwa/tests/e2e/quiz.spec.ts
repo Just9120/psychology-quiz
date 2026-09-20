@@ -3,6 +3,74 @@ import { expect, test, type Page } from '@playwright/test'
 const backend = 'http://127.0.0.1:8085'
 const email = 'owner@example.test', password = 'A synthetic browser passphrase'
 
+async function syntheticPost(page: Page, action: string, payload: unknown) {
+  const account = await (await page.request.get('/web/auth/me')).json()
+  const response = await page.request.post(`/web/${action}`, { data: payload, headers: { Origin: 'http://127.0.0.1:4173', 'X-CSRF-Token': account.csrf_token } })
+  expect(response.ok()).toBeTruthy()
+  return response.json()
+}
+
+test('reset previews, cancels, clears one historical topic then all, and survives reload', async ({ page }, testInfo) => {
+  await fresh(page)
+  let quiz = await syntheticPost(page, 'quiz/setup', { quiz_mode: 'all', category_ids: [], question_count: null, difficulty: 'any' })
+  while (quiz.runner_state.state === 'in_progress') {
+    const question = quiz.runner_state.current_question
+    quiz = await syntheticPost(page, 'quiz/answer', { session_id: question.session_id, question_id: question.question_id, selected_option_index: 0 })
+  }
+  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Сбросить прогресс квиза' }).click()
+  await expect(page.getByRole('button', { name: 'Подтвердить сброс' })).toBeDisabled()
+  await page.getByRole('button', { name: 'Отмена', exact: true }).click()
+  await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Сбросить прогресс квиза' }).click()
+  await page.getByRole('combobox').selectOption('topic:Основы психологии')
+  await expect(page.getByText(/Ответы других тем/)).toBeVisible()
+  await page.getByRole('checkbox').check()
+  await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-reset.png`, fullPage: true })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+  await page.getByRole('button', { name: 'Подтвердить сброс' }).click()
+  await expect(page.getByText('Прогресс квиза сброшен.')).toBeVisible()
+  await expect(page.getByText('2 из 2 ответов', { exact: true })).toBeVisible()
+  await page.reload()
+  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await expect(page.getByText('2 из 2 ответов', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Сбросить прогресс квиза' }).click()
+  await page.getByRole('checkbox').check()
+  await page.getByRole('button', { name: 'Подтвердить сброс' }).click()
+  await expect(page.getByText('История начинается с первого ответа')).toBeVisible()
+  await page.getByRole('button', { name: 'Сбросить прогресс квиза' }).click()
+  await expect(page.getByText('В выбранном разделе нет попыток для сброса.')).toBeVisible()
+  expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
+})
+
+test('stale reset and lost response require a new preview without deleting new learning', async ({ page }) => {
+  await fresh(page)
+  await start(page)
+  await page.getByRole('radio', { name: 'Только скорость' }).check()
+  await page.getByRole('button', { name: 'Проверить ответ' }).click()
+  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await page.getByRole('button', { name: 'Сбросить прогресс квиза' }).click()
+  await page.getByRole('checkbox').check()
+  const state = await (await page.request.get('/web/quiz/state')).json()
+  const question = state.runner_state.current_question
+  await syntheticPost(page, 'quiz/answer', { session_id: question.session_id, question_id: question.question_id, selected_option_index: 0 })
+  await page.getByRole('button', { name: 'Подтвердить сброс' }).click()
+  await expect(page.getByRole('alert')).toContainText('Прогресс изменился')
+  await expect(page.getByRole('button', { name: 'Подтвердить сброс' })).toBeDisabled()
+  await page.getByRole('button', { name: 'Обновить просмотр' }).click()
+  await page.getByRole('checkbox').check()
+  await page.route('**/web/progress/reset-confirm', async route => { await route.fetch(); await route.abort('failed') }, { times: 1 })
+  await page.getByRole('button', { name: 'Подтвердить сброс' }).click()
+  await expect(page.getByRole('alert')).toBeVisible()
+  await syntheticPost(page, 'quiz/setup', { quiz_mode: 'all', category_ids: [], question_count: 5, difficulty: 'any' })
+  await page.getByRole('button', { name: 'Обновить просмотр' }).click()
+  await expect(page.getByRole('checkbox')).not.toBeChecked()
+  await expect(page.getByRole('button', { name: 'Подтвердить сброс' })).toBeDisabled()
+  await page.getByRole('button', { name: 'Отмена', exact: true }).click()
+  await expect(page.getByText('Всего попыток: 1')).toBeVisible()
+})
+
 test.beforeEach(async ({ request }) => {
   expect((await request.post(backend + '/__test/reset', { data: { seed: true } })).ok()).toBeTruthy()
 })

@@ -1,5 +1,10 @@
 """The same user-level progress contracts on a real migrated PostgreSQL DB."""
 from tests.test_progress import (
+    test_reset_topic_preserves_mixed_answers_snapshots_foreign_and_literature,
+    test_reset_all_and_old_confirmation_cannot_remove_new_learning,
+    test_reset_confirmation_rejects_changed_answer_and_other_actor,
+    test_reset_transaction_failure_rolls_back_all_learning,
+    test_concurrent_resets_commit_once,
     test_empty_counts_and_partial_history_isolation,
     test_history_pagination_and_historical_topic_daily_aggregates,
     test_last_answer_per_edition_and_retired_content,
@@ -12,6 +17,7 @@ from tests.test_progress import (
     test_legacy_correct_answer_cannot_resolve_captured_mistake,
 )
 from tests.test_web_progress import (
+    test_reset_api_auth_csrf_actor_binding_and_readback,
     test_progress_api_shared_telegram_history_and_guards,
     test_empty_training_and_bad_payload_do_not_create_attempt,
 )

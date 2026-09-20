@@ -366,6 +366,7 @@ def start_quiz_session(
     category_id: int | None,
     difficulty_mode: str | None = None,
 ) -> int:
+    begin_write(conn, f"actor:{user_id}")
     normalized_difficulty_mode = _normalize_difficulty_mode(difficulty_mode)
     cursor = conn.execute(
         """
@@ -378,6 +379,7 @@ def start_quiz_session(
 
 
 def abandon_in_progress_sessions_for_user(conn: Connection, user_id: int) -> int:
+    begin_write(conn, f"actor:{user_id}")
     cursor = conn.execute(
         f"""
         UPDATE quiz_sessions
@@ -605,6 +607,15 @@ def get_answered_questions_count(conn: Connection, session_id: int) -> int:
 
 
 def finalize_quiz_session(conn: Connection, session_id: int) -> Row | None:
+    session = get_quiz_session(conn, session_id)
+    if session is None:
+        return None
+    begin_write(conn, f"actor:{session['user_id']}")
+    session = get_quiz_session(conn, session_id)
+    if session is None or session['status'] == 'abandoned':
+        return None
+    if session['status'] == 'finished':
+        return session
     stats = conn.execute(
         """
         SELECT

@@ -39,6 +39,10 @@ POST: JSON до 16 KiB, exact Origin; query parameters запрещены. Authe
 | `GET /web/quiz/options`, `GET /web/quiz/state` | Общие backend-derived options/state выбранного actor |
 | `POST /web/quiz/setup` | `quiz_mode=single/selected_mix/all`, `category_ids`, `question_count=5/10/15/null` (`null` — все), `difficulty=any/easy/medium/hard` → runner state |
 | `POST /web/quiz/answer` | `session_id`, `question_id`, `selected_option_index` → общий authoritative feedback/state. Retry возвращает исходный choice/result, чужой actor → 403 |
+| `POST /web/progress/reset-preview` | `{scope:"all",topic:null}` либо `{scope:"topic",topic:<saved-topic>}` → personal topics, counts, active attempts и `revision`. Читает состояние, не удаляет данные |
+| `POST /web/progress/reset-confirm` | Тот же scope/topic, `expected_revision`, `confirm:true` → удаление только выбранного quiz learning actor. Изменившийся прогресс или replay → `reset_changed`/409; без confirmation → 400. User ID из payload не задаёт actor |
+
+Сброс доступен из «Мой прогресс» и требует preview + отдельного checkbox/button. После ошибки или неопределённого network outcome прежнее подтверждение снимается; для следующего действия нужен новый preview. Тема берётся из immutable snapshot: ответы других тем смешанной попытки сохраняются, затронутая активная попытка прекращается. All-reset удаляет только quiz attempts и зависимые questions/answers/selected categories; литература, private notes, аккаунт и linking сохраняются. Glossary пока не относится к этому первому reset endpoint. Общая actor lock сериализует reset с setup/answer/finalize всех quiz клиентов; транзакционный rollback не оставляет частичного сброса. Новых migrations или runtime settings нет.
 
 Verification/recovery links передают token в fragment, который не поступает в HTTP access log/Referer. Frontend обязан сразу удалить fragment из address bar, хранить token только в памяти формы и передать JSON. Нельзя сохранять passwords/tokens/private responses в localStorage, service-worker cache или analytics. Ссылка сама не устанавливает пароль; владелец задаёт его после proof. Linking confirmation нельзя выполнять автоматически.
 

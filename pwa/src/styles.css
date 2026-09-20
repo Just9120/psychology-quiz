@@ -151,3 +151,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
   .practice-table th, .practice-table td { padding: 10px 3px; }.practice-table { font-size: 11px; }.practice-heading .field { width: 100%; min-width: 0; }.practice-heading select { max-width: 100%; }
 }
 @media (max-width: 800px) { .mobile-install { display: block; margin-top: 24px; } }
+.reset-confirm { display: flex; gap: .75rem; align-items: flex-start; margin: 1.5rem 0; cursor: pointer; }
+.reset-confirm input { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: .2rem; }
+.button.danger { background: #943b36; color: #fff; border: 1px solid #943b36; }
+.button.danger:hover:not(:disabled) { background: #7a2f2b; }

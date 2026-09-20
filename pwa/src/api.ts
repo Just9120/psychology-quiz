@@ -1,4 +1,4 @@
-import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage } from './types'
+import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, ResetPreview } from './types'
 
 export class ApiError extends Error {
   constructor(public code: string, public status = 0) { super(code) }
@@ -6,7 +6,7 @@ export class ApiError extends Error {
 
 const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
   'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
-  'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train'])
+  'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm'])
 let csrf: string | null = null
 
 export async function request<T>(action: string, payload?: unknown, signal?: AbortSignal): Promise<T> {
@@ -58,6 +58,8 @@ export const api = {
   setup: (setup: Setup) => request<QuizState>('quiz/setup', setup),
   answer: (answer: Answer) => request<AnswerResult>('quiz/answer', answer),
   progress: () => request<ProgressOverview>('progress/overview'),
+  resetPreview: (topic: string | null = null) => request<ResetPreview>('progress/reset-preview', { scope: topic === null ? 'all' : 'topic', topic }),
+  resetLearning: (preview: ResetPreview) => request('progress/reset-confirm', { scope: preview.scope, topic: preview.topic, expected_revision: preview.revision, confirm: true }),
   history: (before: number | null = null) => request<HistoryPage>('progress/history', { before }),
   attempt: (session_id: number, after: number | null = null) => request<AttemptPage>('progress/attempt', { session_id, after }),
   errors: (before: number | null = null) => request<ErrorsPage>('progress/errors', { before }),
@@ -78,6 +80,9 @@ const messages: Record<string, string> = {
   no_questions: 'Для этих условий пока нет вопросов. Измените настройки.',
   no_errors: 'Доступных ошибок уже нет. Обновите список — сохранённая история осталась на месте.',
   practice_changed: 'Квиз изменился в другом окне. Восстановите актуальную попытку.',
+  reset_changed: 'Прогресс изменился. Загрузите новый предварительный просмотр и подтвердите сброс заново.',
+  nothing_to_reset: 'Нет попыток для сброса. Обновите предварительный просмотр.',
+  reset_confirmation_required: 'Для сброса требуется явное подтверждение.',
   active_attempt: 'У вас есть незавершённый квиз. Обновите список и подтвердите замену попытки.',
   attempt_not_found: 'Эта попытка недоступна. Обновите историю.',
   invalid_setup: 'Эти параметры недоступны. Обновите список тем и выберите заново.',

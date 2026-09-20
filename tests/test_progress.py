@@ -3,10 +3,11 @@ from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
-from app.db import get_connection, create_or_load_user, start_quiz_session, store_session_questions, upsert_approved_questions
+from app.db import get_connection, create_or_load_user, start_quiz_session, store_session_questions, upsert_approved_questions, finalize_quiz_session
 from app.attempt_content import capture_question
 from app.quiz_service import answer_quiz
 from app import progress_service as progress
+from app import learning_reset
 from tests.test_attempt_content import bank, OLD, OTHER, NEW
 
 
@@ -16,6 +17,108 @@ def record(conn, actor=1, qids=(1,), choices=(1,)):
     for qid, choice in zip(qids, choices):
         answer_quiz(conn, actor_user_id=actor, session_id=sid, question_id=qid, selected_option_index=choice)
     return sid
+
+
+def reset_payload(preview):
+    return {"scope": preview["scope"], "topic": preview["topic"], "confirm": True,
+            "expected_revision": preview["revision"]}
+
+
+def test_reset_topic_preserves_mixed_answers_snapshots_foreign_and_literature(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        completed = record(conn, qids=(1, 2), choices=(0, 1))
+        active = record(conn, qids=(2, 1), choices=(0,))
+        stranger = create_or_load_user(conn, 98, None, None, None)['id']
+        foreign = record(conn, actor=stranger)
+        kept = [tuple(row) for row in conn.execute('SELECT * FROM quiz_answers WHERE question_id=2 OR session_id=? ORDER BY id', (foreign,))]
+        snapshots = [tuple(row) for row in conn.execute('SELECT * FROM quiz_session_questions WHERE question_id=2 ORDER BY id')]
+        literature = [tuple(row) for row in conn.execute('SELECT * FROM user_literature_progress')]
+        users = [tuple(row) for row in conn.execute('SELECT * FROM users ORDER BY id')]
+        upsert_approved_questions(conn, [{**NEW, 'category': 'New category'}])
+        bank_rows = [tuple(row) for row in conn.execute('SELECT * FROM questions ORDER BY id')]
+        preview = learning_reset.preview(conn, 1, {'scope': 'topic', 'topic': OLD['category']})
+        assert (preview['answers'], preview['questions'], preview['attempts'], preview['active_attempts']) == (1, 2, 2, 1)
+        assert progress.overview(conn, 1)['summary']['answered'] == 3  # preview/cancel is read-only
+        assert learning_reset.confirm(conn, 1, reset_payload(preview))['deleted_answers'] == 1
+        assert [tuple(row) for row in conn.execute('SELECT * FROM quiz_answers ORDER BY id')] == kept
+        assert [tuple(row) for row in conn.execute('SELECT * FROM quiz_session_questions WHERE question_id=2 ORDER BY id')] == snapshots
+        assert [tuple(row) for row in conn.execute('SELECT * FROM user_literature_progress')] == literature
+        assert [tuple(row) for row in conn.execute('SELECT * FROM users ORDER BY id')] == users
+        assert [tuple(row) for row in conn.execute('SELECT * FROM questions ORDER BY id')] == bank_rows
+        assert tuple(conn.execute('SELECT status,score,total_questions FROM quiz_sessions WHERE id=?', (completed,)).fetchone()) == ('finished', 0, 1)
+        assert conn.execute('SELECT status FROM quiz_sessions WHERE id=?', (active,)).fetchone()[0] == 'abandoned'
+        late = answer_quiz(conn, actor_user_id=1, session_id=active, question_id=1, selected_option_index=0)
+        assert late['submission_status'] != 'accepted'
+        assert finalize_quiz_session(conn, active) is None
+        assert conn.execute('SELECT status FROM quiz_sessions WHERE id=?', (active,)).fetchone()[0] == 'abandoned'
+        assert progress.overview(conn, 1)['summary']['answered'] == 2
+        assert progress.attempt(conn, 1, completed)['items'][0]['topic'] == OTHER['category']
+
+
+def test_reset_all_and_old_confirmation_cannot_remove_new_learning(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        sid = record(conn)
+        preview = learning_reset.preview(conn, 1, {'scope': 'all'})
+        for confirm in (False, 'true', 1, None):
+            with pytest.raises(progress.ProgressError, match='reset_confirmation_required'):
+                learning_reset.confirm(conn, 1, {**reset_payload(preview), 'confirm': confirm})
+        with pytest.raises(progress.ProgressError, match='reset_confirmation_required'):
+            learning_reset.confirm(conn, 1, {**reset_payload(preview), 'expected_revision': 'я' * 64})
+        assert len(progress.history(conn, 1)['items']) == 1
+        learning_reset.confirm(conn, 1, reset_payload(preview))
+        assert progress.history(conn, 1)['items'] == []
+        assert progress.errors(conn, 1)['total'] == 0
+        for table in ('quiz_answers', 'quiz_session_questions', 'quiz_session_selected_categories'):
+            assert conn.execute(f'SELECT count(*) FROM {table} WHERE session_id=?', (sid,)).fetchone()[0] == 0
+        assert conn.execute('SELECT private_note FROM user_literature_progress WHERE user_id=1').fetchone()[0] == 'Private note'
+        new_sid = record(conn)
+        assert new_sid > sid
+        with pytest.raises(progress.ProgressError, match='reset_changed'):
+            learning_reset.confirm(conn, 1, reset_payload(preview))
+        assert progress.history(conn, 1)['items'][0]['session_id'] == new_sid
+
+
+def test_reset_confirmation_rejects_changed_answer_and_other_actor(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        sid = record(conn, qids=(1, 2), choices=(1,))
+        preview = learning_reset.preview(conn, 1, {'scope': 'all'})
+        answer_quiz(conn, actor_user_id=1, session_id=sid, question_id=2, selected_option_index=0)
+        with pytest.raises(progress.ProgressError, match='reset_changed'):
+            learning_reset.confirm(conn, 1, reset_payload(preview))
+        stranger = create_or_load_user(conn, 98, None, None, None)['id']
+        with pytest.raises(progress.ProgressError, match='reset_changed'):
+            learning_reset.confirm(conn, stranger, reset_payload(preview))
+        assert progress.overview(conn, 1)['summary']['answered'] == 2
+        for payload in ({}, {'scope': 'all', 'topic': OLD['category']}, {'scope': 'topic', 'topic': []}):
+            with pytest.raises(progress.ProgressError, match='invalid_reset_scope'):
+                learning_reset.preview(conn, 1, payload)
+
+
+def test_reset_transaction_failure_rolls_back_all_learning(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        sid = record(conn, qids=(1, 2), choices=(0, 1))
+    with closing(get_connection(str(bank))) as conn:
+        with pytest.raises(RuntimeError, match='interrupted'):
+            with conn:
+                preview = learning_reset.preview(conn, 1, {'scope': 'all'})
+                learning_reset.confirm(conn, 1, reset_payload(preview))
+                raise RuntimeError('interrupted')
+        assert progress.attempt(conn, 1, sid)['attempt']['answered'] == 2
+
+
+def test_concurrent_resets_commit_once(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        record(conn)
+        preview = learning_reset.preview(conn, 1, {'scope': 'all'})
+    def reset():
+        try:
+            with closing(get_connection(str(bank))) as conn, conn:
+                learning_reset.confirm(conn, 1, reset_payload(preview))
+                return 'reset'
+        except progress.ProgressError as exc:
+            return exc.code
+    with ThreadPoolExecutor(max_workers=2) as workers:
+        assert sorted(workers.map(lambda _: reset(), range(2))) == ['reset', 'reset_changed']
 
 
 def test_empty_counts_and_partial_history_isolation(bank):
