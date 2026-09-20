@@ -4,6 +4,8 @@ umask 077
 
 # Invoked from the validated candidate, never from an older host checkout.
 EXPECTED_SHA="${1:-}"
+PWA_ARCHIVE="${2:-}"
+PWA_DIGEST="${3:-}"
 PROJECT_DIR=/opt/psychology-quiz
 SERVICES=(psych_quiz_bot psych_quiz_miniapp_api)
 log() { printf '[deploy] %s\n' "$*"; }
@@ -11,6 +13,8 @@ fail() { log "ERROR: $*" >&2; return 1; }
 compose() { docker compose --project-directory "$PROJECT_DIR" -f "$PROJECT_DIR/docker-compose.yml" -p psychology-quiz "$@"; }
 
 [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]] || fail 'Exact validated main SHA required'
+[[ "$PWA_ARCHIVE" =~ ^/tmp/psychology-pwa\.[A-Za-z0-9]{8}/artifact\.zip$ ]] || fail 'Private incoming PWA archive required'
+[[ "$PWA_DIGEST" =~ ^[0-9a-f]{64}$ ]] || fail 'Verified PWA archive digest required'
 exec 200>/tmp/psychology-quiz-deploy.lock
 flock -w 60 200 || fail 'Another deployment holds the lock'
 cd "$PROJECT_DIR"
@@ -66,7 +70,20 @@ while IFS= read -r file; do
 done <<< "$CHANGED_FILES"
 git merge --ff-only "$EXPECTED_SHA"
 [[ "$(git rev-parse HEAD)" == "$EXPECTED_SHA" ]] || fail 'Checkout revision mismatch'
+# Validate/stage static before changing services; the shared lock remains held.
+PWA_PLAN="$(python3 scripts/pwa_cd.py prepare --sha "$EXPECTED_SHA" --archive "$PWA_ARCHIVE" --digest "$PWA_DIGEST")"
+read -r PWA_PREVIOUS PWA_TARGET <<< "$PWA_PLAN"
+[[ "$PWA_PREVIOUS" =~ ^[0-9a-f]{40}$ && "$PWA_TARGET" =~ ^[0-9a-f]{40}$ ]] || fail 'Invalid PWA delivery plan'
+deliver_pwa() {
+  # Queue/lock alone does not prevent a newer main appearing during image build.
+  git fetch origin main </dev/null
+  [[ "$(git rev-parse origin/main)" == "$EXPECTED_SHA" ]] || fail 'Main advanced before static activation'
+  nginx -t
+  python3 scripts/pwa_cd.py publish --sha "$EXPECTED_SHA" --previous "$PWA_PREVIOUS" --target "$PWA_TARGET"
+}
 if [[ "$NEEDS_RUNTIME" == 0 && "$DEPLOYED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+  compose exec -T psych_quiz_miniapp_api python scripts/deployment_http_smoke.py --require-pwa
+  deliver_pwa
   log "SOURCE_SYNC_OK revision=$EXPECTED_SHA runtime_unchanged=$DEPLOYED_SHA"
   exit 0
 fi
@@ -116,7 +133,7 @@ fi
 compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py smoke
 compose up -d --no-build --force-recreate --no-deps "${SERVICES[@]}"
 STOPPED=0
-compose exec -T psych_quiz_miniapp_api python scripts/deployment_http_smoke.py
+compose exec -T psych_quiz_miniapp_api python scripts/deployment_http_smoke.py --require-pwa
 for service in "${SERVICES[@]}"; do
   container_id="$(compose ps -q "$service")"
   [[ -n "$container_id" ]] || fail "Missing deployed service: $service"
@@ -125,5 +142,6 @@ for service in "${SERVICES[@]}"; do
   image_id="$(docker inspect -f '{{.Image}}' "$container_id")"
   log "RUNTIME_OK service=$service revision=$EXPECTED_SHA image=$image_id"
 done
+deliver_pwa
 trap - ERR
 log "DEPLOY_OK revision=$EXPECTED_SHA"

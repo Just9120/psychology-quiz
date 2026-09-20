@@ -31,7 +31,9 @@ def smoke(origin, artifact, expected, *, ca_file=None):
 
     def read(path):
         try:
-            response = opener.open(Request(origin + path, headers={"Cache-Control": "no-cache"}), timeout=5)
+            response = opener.open(Request(origin + path, headers={
+                "Cache-Control": "no-cache", "User-Agent": "PsychologyAtlas-Deployment-Check/1.0",
+            }), timeout=5)
         except HTTPError as error:
             response = error
         with closing(response):

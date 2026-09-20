@@ -1,4 +1,5 @@
 """Internal health/version and unauthenticated API boundary, without user writes."""
+import argparse
 import json
 import os
 import time
@@ -13,7 +14,9 @@ if str(ROOT) not in sys.path:
 from app.database import is_postgres_target, resolve_database_target
 
 
-def main() -> None:
+def main(*, require_pwa=False) -> None:
+    if require_pwa and os.getenv("PWA_ENABLED", "false").strip().lower() != "true":
+        raise RuntimeError("Enabled PWA required before static activation")
     expected = os.environ["APP_REVISION"]
     expected_backend = "postgresql" if is_postgres_target(resolve_database_target()) else "sqlite"
     for attempt in range(30):
@@ -53,4 +56,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--require-pwa", action="store_true")
+    main(require_pwa=parser.parse_args().require_pwa)

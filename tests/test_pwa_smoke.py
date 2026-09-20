@@ -22,6 +22,7 @@ def test_smoke_checks_every_public_byte_headers_and_actual_auth_route(tmp_path, 
 
     class Opener:
         def open(self, request, timeout):
+            assert request.get_header("User-agent") == "PsychologyAtlas-Deployment-Check/1.0"
             path = urlsplit(request.full_url).path
             calls.append(path)
             if path == "/web/auth/me":
