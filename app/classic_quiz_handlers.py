@@ -191,12 +191,31 @@ def _mark_stale_callback(latency: _HandlerLatency) -> None:
     latency.add_field("stale_callback", True)
 
 
-def build_question_count_keyboard(callback_prefix: str, category_id: int | None = None) -> InlineKeyboardMarkup:
+def _question_limit(value: str) -> int | None:
+    if value == "all":
+        return None
+    if value not in {"5", "10", "15"}:
+        raise ValueError("Unknown question count")
+    return int(value)
+
+
+def build_question_count_keyboard(
+    callback_prefix: str, category_id: int | None = None, *, difficulty: str | None = None,
+) -> InlineKeyboardMarkup:
+    mode_prefix = {"qcnt": "qmode", "qcntall": "qmodeall", "qcntselmix": "qmodeselmix"}[callback_prefix]
+    mode = difficulty or "any"
+    if mode not in {"any", "easy", "medium", "hard"}:
+        raise ValueError("Unknown difficulty")
+    scope = "" if category_id is None else f"{category_id}:"
     keyboard = []
     for count, label in QUESTION_COUNT_CHOICES:
         count_value = "all" if count is None else str(count)
-        callback_data = f"{callback_prefix}:{count_value}" if category_id is None else f"{callback_prefix}:{category_id}:{count_value}"
+        callback_data = f"{mode_prefix}:{scope}{count_value}:{mode}"
         keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
+    keyboard.append([InlineKeyboardButton(
+        "Настроить сложность (необязательно)" if difficulty is None else "Изменить сложность",
+        callback_data=f"{callback_prefix}:{scope}choose",
+    )])
     return InlineKeyboardMarkup(keyboard)
 
 
@@ -206,6 +225,20 @@ def build_difficulty_keyboard(callback_prefix: str, category_id: int | None = No
         callback_data = f"{callback_prefix}:{count_raw}:{mode}" if category_id is None else f"{callback_prefix}:{category_id}:{count_raw}:{mode}"
         keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
     return InlineKeyboardMarkup(keyboard)
+
+
+async def _show_count_for_difficulty(query, latency, callback_prefix, count_raw, mode, category_id=None):
+    if mode not in {"any", "easy", "medium", "hard"}:
+        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный режим сложности."))
+        return True
+    if count_raw != "choose":
+        return False
+    label = dict(DIFFICULTY_CHOICES)[mode]
+    await _timed_telegram_api_call(latency, query.edit_message_text(
+        f"Сложность: {label.lower()}. Выберите количество вопросов:",
+        reply_markup=build_question_count_keyboard(callback_prefix, category_id, difficulty=mode),
+    ))
+    return True
 
 
 def build_category_keyboard(categories) -> InlineKeyboardMarkup:
@@ -870,9 +903,9 @@ async def question_count_callback(update: Update, context: ContextTypes.DEFAULT_
         latency.summary()
         return
 
-    if count_raw != "all":
+    if count_raw not in {"all", "choose"}:
         try:
-            int(count_raw)
+            _question_limit(count_raw)
         except ValueError:
             await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
             latency.summary()
@@ -915,8 +948,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         latency.summary()
         return
 
-    if mode not in {"any", "easy", "medium", "hard"}:
-        await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный режим сложности."))
+    if await _show_count_for_difficulty(query, latency, "qcnt", count_raw, mode, category_id):
         latency.summary()
         return
 
@@ -925,7 +957,7 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         selected_limit = None
     else:
         try:
-            selected_limit = int(count_raw)
+            selected_limit = _question_limit(count_raw)
         except ValueError:
             await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
             latency.summary()
@@ -982,9 +1014,9 @@ async def question_count_mix_callback(update: Update, context: ContextTypes.DEFA
     await _timed_telegram_api_call(latency, query.answer())
 
     _, count_raw = data.split(":", 1)
-    if count_raw != "all":
+    if count_raw not in {"all", "choose"}:
         try:
-            int(count_raw)
+            _question_limit(count_raw)
         except ValueError:
             await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
             latency.summary()
@@ -1020,6 +1052,9 @@ async def difficulty_mode_all_callback(update: Update, context: ContextTypes.DEF
         return
 
     _, count_raw, mode = parts
+    if await _show_count_for_difficulty(query, latency, "qcntall", count_raw, mode):
+        latency.summary()
+        return
     await start_mix_quiz(
         query=query,
         context=context,
@@ -1125,9 +1160,9 @@ async def question_count_selected_mix_callback(update: Update, context: ContextT
         return
 
     _, count_raw = parts
-    if count_raw != "all":
+    if count_raw not in {"all", "choose"}:
         try:
-            int(count_raw)
+            _question_limit(count_raw)
         except ValueError:
             await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
             latency.summary()
@@ -1167,6 +1202,10 @@ async def difficulty_mode_selected_mix_callback(update: Update, context: Context
         await _timed_telegram_api_call(latency, query.edit_message_text("Сначала выберите темы для микса."))
         return
 
+    if await _show_count_for_difficulty(query, latency, "qcntselmix", count_raw, mode):
+        latency.summary()
+        return
+
     await start_mix_quiz(
         query=query,
         context=context,
@@ -1197,7 +1236,7 @@ async def start_mix_quiz(
         selected_limit = None
     else:
         try:
-            selected_limit = int(count_raw)
+            selected_limit = _question_limit(count_raw)
         except ValueError:
             await _timed_telegram_api_call(latency, query.edit_message_text("Некорректное количество вопросов."))
             return

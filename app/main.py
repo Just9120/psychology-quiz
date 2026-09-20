@@ -1050,30 +1050,30 @@ def main() -> None:
         CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|selected_mix|all)$")
     )
     application.add_handler(CallbackQueryHandler(category_callback, pattern=r"^cat:\d+$"))
-    application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all)$"))
+    application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all|choose)$"))
     application.add_handler(
         CallbackQueryHandler(
             difficulty_mode_callback,
-            pattern=r"^qmode:\d+:(5|10|15|all):(any|easy|medium|hard)$",
+            pattern=r"^qmode:\d+:(5|10|15|all|choose):(any|easy|medium|hard)$",
         )
     )
     application.add_handler(
-        CallbackQueryHandler(question_count_mix_callback, pattern=r"^qcntall:(5|10|15|all)$")
+        CallbackQueryHandler(question_count_mix_callback, pattern=r"^qcntall:(5|10|15|all|choose)$")
     )
     application.add_handler(
         CallbackQueryHandler(
             difficulty_mode_all_callback,
-            pattern=r"^qmodeall:(5|10|15|all):(any|easy|medium|hard)$",
+            pattern=r"^qmodeall:(5|10|15|all|choose):(any|easy|medium|hard)$",
         )
     )
     application.add_handler(CallbackQueryHandler(mix_selection_callback, pattern=r"^mixsel:(toggle:\d+|done|reset)$"))
     application.add_handler(
-        CallbackQueryHandler(question_count_selected_mix_callback, pattern=r"^qcntselmix:(5|10|15|all)$")
+        CallbackQueryHandler(question_count_selected_mix_callback, pattern=r"^qcntselmix:(5|10|15|all|choose)$")
     )
     application.add_handler(
         CallbackQueryHandler(
             difficulty_mode_selected_mix_callback,
-            pattern=r"^qmodeselmix:(5|10|15|all):(any|easy|medium|hard)$",
+            pattern=r"^qmodeselmix:(5|10|15|all|choose):(any|easy|medium|hard)$",
         )
     )
     application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))
