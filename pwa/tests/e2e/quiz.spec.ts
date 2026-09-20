@@ -3,6 +3,19 @@ import { expect, test, type Page } from '@playwright/test'
 const backend = 'http://127.0.0.1:8085'
 const email = 'owner@example.test', password = 'A synthetic browser passphrase'
 
+test('short desktop viewport keeps sidebar navigation and logout reachable', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 480 })
+  await fresh(page)
+  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await expect(page.getByText('Работ: 114')).toBeVisible()
+  await page.getByRole('button', { name: 'Мой аккаунт' }).click()
+  await page.getByRole('button', { name: 'Установить приложение' }).filter({ visible: true }).click()
+  await expect(page.getByRole('status')).toBeVisible()
+  await page.getByRole('button', { name: 'Выйти', exact: true }).click({ timeout: 3000 })
+  await expect(page.getByRole('button', { name: 'Войти в пространство' })).toBeVisible()
+  expect((await page.request.get('/web/quiz/state')).status()).toBe(401)
+})
+
 test('reading catalog preserves separate lists, lost save and reload', async ({ page }, testInfo) => {
   await fresh(page)
   await page.getByRole('button', { name: 'Литература', exact: true }).click()

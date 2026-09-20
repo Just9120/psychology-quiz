@@ -64,7 +64,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .auth-note svg { margin-top: 3px; }
 .auth-mobile-brand { display: none; }
 .app-layout { display: flex; min-height: 100dvh; }
-.sidebar { width: 246px; flex-shrink: 0; background: #fff; border-right: 1px solid var(--line); padding: 32px 19px 23px; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; z-index: 3; }
+.sidebar { width: 246px; flex-shrink: 0; background: #fff; border-right: 1px solid var(--line); padding: 32px 19px 23px; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; z-index: 3; overflow-y: auto; }
+.sidebar > * { flex-shrink: 0; }
 .sidebar > .brand { margin: 0 7px 49px; font-size: 18px; gap: 9px; }
 .sidebar .brand-mark { width: 33px; height: 36px; border-radius: 10px; }
 .nav-heading { font-size: 9px; letter-spacing: 1.6px; color: var(--muted); margin: 0 15px 14px; font-weight: 650; }
