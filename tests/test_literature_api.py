@@ -70,7 +70,7 @@ class LiteratureApiTests(unittest.TestCase):
         topic = next(item for item in topics if item["topic_id"] == self.first_item["topic_id"])
         self.assertIn("title", topic)
         self.assertGreater(topic["item_count"], 0)
-        self.assertIn("review", topic["status_counts"])
+        self.assertIn("approved", topic["status_counts"])
         self.assertEqual({"in_progress": 1}, topic["user_reading_status_counts"])
 
     def test_items_endpoint_returns_all_items_ordered_by_global_order_without_internal_fields(self):

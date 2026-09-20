@@ -1,4 +1,1955 @@
 {
   "schema_version": 1,
-  "items": {}
+  "items": {
+    "literature:gippenreiter_vvedenie_v_obschuyu_psihologiyu": {
+      "decision": "approved",
+      "item_sha256": "102646dababcf25e691b63b212550a1b94b561cd279dad8f288f68fce674d081",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+          "modified_time": "2026-08-30T19:31:59.371Z",
+          "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
+          "locator": "Страница 1, позиция 1"
+        }
+      ]
+    },
+    "literature:nurkova_berezanskaya_obschaya_psihologiya": {
+      "decision": "approved",
+      "item_sha256": "9fc0c872058f8ff183faca93bb72b6b817c10b3ef16155d2185e5b8c921e47b4",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+          "modified_time": "2026-08-30T19:31:59.371Z",
+          "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
+          "locator": "Страница 1, позиция 2"
+        }
+      ]
+    },
+    "literature:vygotsky_myshlenie_i_rech": {
+      "decision": "approved",
+      "item_sha256": "040b6aa2ff9361283c27083fe3422625f339713a4ac5d67ff140c218f6c5f4e3",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+          "modified_time": "2026-08-30T19:31:59.371Z",
+          "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
+          "locator": "Страница 1, позиция 3"
+        }
+      ]
+    },
+    "literature:zhdan_istoriya_psihologii": {
+      "decision": "approved",
+      "item_sha256": "d12c0dc7fb652c9d5694c6dafd36b5e354c0a8262b605113eb01c08b00fc71e5",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+          "modified_time": "2026-08-30T19:31:59.371Z",
+          "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
+          "locator": "Страница 1, позиция 4"
+        }
+      ]
+    },
+    "literature:myers_psihologiya": {
+      "decision": "approved",
+      "item_sha256": "30cadf6de638bec3ee02fa31c0b1c818bbaa5dbc4a91ff40a8aedd15fd61eba2",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+          "modified_time": "2026-08-30T19:31:59.371Z",
+          "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
+          "locator": "Страница 1, позиция 5"
+        }
+      ]
+    },
+    "literature:rubinstein_osnovy_obschey_psihologii": {
+      "decision": "approved",
+      "item_sha256": "b9a54265ad20a498e4b42a7c5ac65163230587fe582c0001fe08527d183c539a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+          "modified_time": "2026-08-30T19:31:59.371Z",
+          "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
+          "locator": "Страница 1, позиция 6"
+        }
+      ]
+    },
+    "literature:fch_gazzaniga_kto_za_glavnogo": {
+      "decision": "approved",
+      "item_sha256": "404f3bf3007b828af63143c3ecbf6bb6c490767c622a152441b75ee26dc61c8a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 1"
+        }
+      ]
+    },
+    "literature:fch_dubynin_mozg_i_ego_potrebnosti": {
+      "decision": "approved",
+      "item_sha256": "9344e224795e0bc811cfa9055dbf581e64b9551218991843fef2304754083f65",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 2"
+        }
+      ]
+    },
+    "literature:fch_kandel_v_poiskah_pamyati": {
+      "decision": "approved",
+      "item_sha256": "d1c323b4a777056bfd6f38d1cb8cb6151191c8efa94b669ab33c9e58a4195606",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 3"
+        }
+      ]
+    },
+    "literature:fch_carter_kak_rabotaet_mozg": {
+      "decision": "approved",
+      "item_sha256": "26b75508a6cc05507a0186352486a97725e60db5eb9c6512b1d09c8b38a78c14",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 4"
+        }
+      ]
+    },
+    "literature:fch_martynov_mozg": {
+      "decision": "approved",
+      "item_sha256": "23aa2c8b25a69ff11e397fc36b0f02156088fdb027e26e36a303e7bd3b2c46e7",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 5"
+        }
+      ]
+    },
+    "literature:fch_nicholls_martin_ot_neirona_k_mozgu": {
+      "decision": "approved",
+      "item_sha256": "8ceee911caf577f6a98d31ed42057125ebed0cad985d45901f74e5d70d2c00d9",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 6"
+        }
+      ]
+    },
+    "literature:fch_pavlov_dvadtsatiletniy_opyt": {
+      "decision": "approved",
+      "item_sha256": "624f91ce767337ebda4d0ee3d7bc1ba3bdaf62efe1d42405cd4d1b678b75d510",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 7"
+        }
+      ]
+    },
+    "literature:fch_ramachandran_mozg_rasskazyvaet": {
+      "decision": "approved",
+      "item_sha256": "3a8c897882cd23c5cbbce25c4cb14c05ba31d9f32cdd3b73cf0c5095387fe0b3",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 8"
+        }
+      ]
+    },
+    "literature:fch_swaab_my_eto_nash_mozg": {
+      "decision": "approved",
+      "item_sha256": "5679524f751ad315af29966faa5bdacf782138089c8c9366470076bdaf4fd3c0",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 9"
+        }
+      ]
+    },
+    "literature:fch_sergeev_dubynin_telo_cheloveka": {
+      "decision": "approved",
+      "item_sha256": "389cc00f012fc8eb1150e5ee6c2e2c961fafa148c3028873733d7d7ecfe08d74",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 10"
+        }
+      ]
+    },
+    "literature:fch_simonov_motivirovanny_mozg": {
+      "decision": "approved",
+      "item_sha256": "1dc45d9b70b4a81494f90a5ab14bd7dcc6b6e7e5b5ada5163923ed216048f242",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 11"
+        }
+      ]
+    },
+    "literature:fch_simonov_emotsionalny_mozg": {
+      "decision": "approved",
+      "item_sha256": "65e313443b6ec421dae1ec8a725b93d7ff8b1135ae09cf807b4fcd3e398b73f3",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 12"
+        }
+      ]
+    },
+    "literature:fch_ukhtomsky_dominanta": {
+      "decision": "approved",
+      "item_sha256": "1759ea021e9a2fe77c0a5c98a4955b4d94cb30071809811f3e9506b4af9d3e18",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 13"
+        }
+      ]
+    },
+    "literature:fch_shulgovsky_neirofiziologiya": {
+      "decision": "approved",
+      "item_sha256": "19b3e738569032519dbf060f49b1f6ecec7d84004b32ca7b513423abd54d12a3",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 14"
+        }
+      ]
+    },
+    "literature:fch_yakutenko_volya_i_samokontrol": {
+      "decision": "approved",
+      "item_sha256": "e3690f1e3931404506387c68739c20377dc0c0a3cd9ff4228d71db7a86646938",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
+          "modified_time": "2026-08-30T19:32:07.674Z",
+          "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
+          "locator": "Страница 1, позиция 15"
+        }
+      ]
+    },
+    "literature:fvnd_gazzaniga_kto_za_glavnogo": {
+      "decision": "approved",
+      "item_sha256": "7e2e2d7f98f7f1fa6be92997af70c05eb97832176ebaf6c272163ab28a44167f",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 1"
+        }
+      ]
+    },
+    "literature:fvnd_dubynin_mozg_i_ego_potrebnosti": {
+      "decision": "approved",
+      "item_sha256": "a35b467c1fddb63df0412fc83db9f9795954317ff57a1c957fd448a0b69d7fd2",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 2"
+        }
+      ]
+    },
+    "literature:fvnd_kandel_v_poiskah_pamyati": {
+      "decision": "approved",
+      "item_sha256": "014582bd9c9167f188c6c6e130ac5dd201e1a9bd464675eeb37246b0e55858b0",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 3"
+        }
+      ]
+    },
+    "literature:fvnd_carter_kak_rabotaet_mozg": {
+      "decision": "approved",
+      "item_sha256": "995af9bb828416ba973e27ea4979a0226a3a757b07cc98d1f855d43017d01ca9",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 4"
+        }
+      ]
+    },
+    "literature:fvnd_martynov_mozg": {
+      "decision": "approved",
+      "item_sha256": "ea12cf18c5b6df6044809325c5ca576f1feb94234dcd78734f3e7e2c5e631224",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 5"
+        }
+      ]
+    },
+    "literature:fvnd_nicholls_martin_ot_neirona_k_mozgu": {
+      "decision": "approved",
+      "item_sha256": "7278c928ff2b070ac5207c4c50cf9d755633a112a0927aca31f933cefa96c0da",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 6"
+        }
+      ]
+    },
+    "literature:fvnd_pavlov_dvadtsatiletniy_opyt": {
+      "decision": "approved",
+      "item_sha256": "661aff67d4b08a28ba5f82728e36e030b13742dc11ba8c7b8bf3a4f2c8684104",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 7"
+        }
+      ]
+    },
+    "literature:fvnd_ramachandran_mozg_rasskazyvaet": {
+      "decision": "approved",
+      "item_sha256": "706d2cd19038b28f353ae7bb035c47ca94842b546616c45b1c190b9fa1a56e6a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 8"
+        }
+      ]
+    },
+    "literature:fvnd_swaab_my_eto_nash_mozg": {
+      "decision": "approved",
+      "item_sha256": "b9d905e9c2b34f240803189ec78ef56e8d1b10689969c058b869e10893ab5afc",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 9"
+        }
+      ]
+    },
+    "literature:fvnd_sergeev_dubynin_telo_cheloveka": {
+      "decision": "approved",
+      "item_sha256": "5bfc794aee149141e7bea8fd608477bd757825498820ce966e330b5da3276155",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 10"
+        }
+      ]
+    },
+    "literature:fvnd_simonov_motivirovanny_mozg": {
+      "decision": "approved",
+      "item_sha256": "1b3f2213340a861c47b2c1a7f369d4dd162648fe8aea58428354aee4b0fff141",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 11"
+        }
+      ]
+    },
+    "literature:fvnd_simonov_emotsionalny_mozg": {
+      "decision": "approved",
+      "item_sha256": "ea8b712a10248230324066b317401c3dbce2261b02d8994ad73aec5179372884",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 12"
+        }
+      ]
+    },
+    "literature:fvnd_ukhtomsky_dominanta": {
+      "decision": "approved",
+      "item_sha256": "027f762803de7bae02dbdb7be2ae78ad0d7e37caea196e4d4183ef150730b66d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 13"
+        }
+      ]
+    },
+    "literature:fvnd_shulgovsky_neirofiziologiya": {
+      "decision": "approved",
+      "item_sha256": "941e0880940b855083fb63a976f65f7df02a70cf2550be5aa9e530f49d94be62",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 14"
+        }
+      ]
+    },
+    "literature:fvnd_yakutenko_volya_i_samokontrol": {
+      "decision": "approved",
+      "item_sha256": "471df71913acfab8c8a82b093e63395e3c27da524175127fc2bbb0bdc5779094",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
+          "modified_time": "2026-08-30T19:32:13.420Z",
+          "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
+          "locator": "Страница 1, позиция 15"
+        }
+      ]
+    },
+    "literature:psf_danilova_psihofiziologiya": {
+      "decision": "approved",
+      "item_sha256": "6e4efda91338c6de2c10c3d9f72fd7b2a161997369a2b4b74518fdb569d02d6c",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+          "modified_time": "2026-08-30T19:31:46.490Z",
+          "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
+          "locator": "Страница 1, позиция 1"
+        }
+      ]
+    },
+    "literature:psf_ilyin_psihofiziologiya_sostoyaniy": {
+      "decision": "approved",
+      "item_sha256": "b0250ec627e3047190cf0b0d98fe0d9a3b033406b058be1d8cd3150f2682b3bd",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+          "modified_time": "2026-08-30T19:31:46.490Z",
+          "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
+          "locator": "Страница 1, позиция 2"
+        }
+      ]
+    },
+    "literature:psf_aleksandrov_psihofiziologiya": {
+      "decision": "approved",
+      "item_sha256": "bd473d5fd12c99a647aacb6f5c73f9ce95fa343ca53d32003b4aef45d65cad48",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+          "modified_time": "2026-08-30T19:31:46.490Z",
+          "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
+          "locator": "Страница 1, позиция 3"
+        }
+      ]
+    },
+    "literature:psf_van_der_kolk_telo_pomnit_vse": {
+      "decision": "approved",
+      "item_sha256": "9d2a690f20422b030192faa73ae5614ae3821ac4c20561ca56712e4fc01cd772",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+          "modified_time": "2026-08-30T19:31:46.490Z",
+          "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
+          "locator": "Страница 1, позиция 4"
+        }
+      ]
+    },
+    "literature:psf_sapolsky_psihologiya_stressa": {
+      "decision": "approved",
+      "item_sha256": "b3759328102b27e53ce83ef198ac6a22d2d13ffc0737a0d1bd25ea715a9f4d87",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+          "modified_time": "2026-08-30T19:31:46.490Z",
+          "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
+          "locator": "Страница 1, позиция 5"
+        }
+      ]
+    },
+    "literature:psf_kabat_zinn_kuda_by_ty_ni_shel": {
+      "decision": "approved",
+      "item_sha256": "ca35857cb3082e70b3c1e9978d6e49a4cb7d3197ca66bd4ba1f9a3982bfd5a55",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
+          "modified_time": "2026-08-30T19:31:46.490Z",
+          "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
+          "locator": "Страница 1, позиция 6"
+        }
+      ]
+    },
+    "literature:lit_4f9768a778fe2a01": {
+      "decision": "approved",
+      "item_sha256": "f51720509a9fb9a6b20a697b555fb494c6ff0ddb39b062b2fa7de94408ae6b52",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+          "modified_time": "2026-08-30T19:31:55.381Z",
+          "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
+          "locator": "Пункт 1: Маленькая книжка о большой памяти"
+        }
+      ]
+    },
+    "literature:lit_25a5d2f1c7ba76e1": {
+      "decision": "approved",
+      "item_sha256": "b272b789fc0820db0404bf1e96bfc8be75c472521a1dc3bd1b2fb542f5d29500",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+          "modified_time": "2026-08-30T19:31:55.381Z",
+          "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
+          "locator": "Пункт 1: Потерянный и возвращенный мир"
+        }
+      ]
+    },
+    "literature:lit_a29dd1990e36a236": {
+      "decision": "approved",
+      "item_sha256": "f2f5534420cb6a15028dc710a406ec82a414518b99a3aa0c797db9ef493eaba2",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+          "modified_time": "2026-08-30T19:31:55.381Z",
+          "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
+          "locator": "Пункт 2: Две улыбки (из книги «Лечение от любви и другие психотерапевтические новеллы»)"
+        }
+      ]
+    },
+    "literature:lit_ca9234874710e30d": {
+      "decision": "approved",
+      "item_sha256": "e503e9a2594426ec74659bddf20eaa5604dc1ca33c6c994288b044788099a007",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+          "modified_time": "2026-08-30T19:31:55.381Z",
+          "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
+          "locator": "Пункт 3: Пора подумать о душе? (в «Смыслы психотерапии» и альтернативных публикациях)"
+        }
+      ]
+    },
+    "literature:lit_08357e2b580707a7": {
+      "decision": "approved",
+      "item_sha256": "37b760427e08425b818104dc7ca8445d4b36e452c2317a2aa0dfc0b5e08ef4dc",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+          "modified_time": "2026-08-30T19:31:55.381Z",
+          "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
+          "locator": "Пункт 4: Думая о душе (в «Смыслы психотерапии»; альтернативное интервью «Заново думая о душе»)"
+        }
+      ]
+    },
+    "literature:lit_d4fe5859f2ce2c33": {
+      "decision": "approved",
+      "item_sha256": "5be8e72125708c4a8072c958ac6acf15a6f2c195d319feb40fa7e1ead70efc97",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+          "modified_time": "2026-08-30T19:31:55.381Z",
+          "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
+          "locator": "Пункт 5: «Закрытый перелом» 1970-х как веха в истории научной психологии"
+        }
+      ]
+    },
+    "literature:lit_d9803abbb663e67c": {
+      "decision": "approved",
+      "item_sha256": "20f37dd3e95f2de58a0c904780af675cee8d680bb464a125d1f9f1cbac9f27de",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
+          "modified_time": "2026-08-30T19:31:55.381Z",
+          "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
+          "locator": "Пункт 6: Видеокурс по общей психологии"
+        }
+      ]
+    },
+    "literature:lit_c0537b6dc885ea1f": {
+      "decision": "approved",
+      "item_sha256": "31881a8496fe707b847a0dd3f7437c4148f9ec420d6b68c46a3694b21920a4a5",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+          "modified_time": "2026-08-30T19:32:03.425Z",
+          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "locator": "Позиция 1: Толстуха (из книги «Лечение от любви и другие психотерапевтические новеллы»)"
+        }
+      ]
+    },
+    "literature:lit_6190d3b37fdeeab5": {
+      "decision": "approved",
+      "item_sha256": "2f010adaec1644ae992966c3bd2c4482ec86af8cfe3887d143196b634c33d375",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+          "modified_time": "2026-08-30T19:32:03.425Z",
+          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "locator": "Позиция 2: Научный статус методологии исследования случаев"
+        }
+      ]
+    },
+    "literature:lit_93082f75dd37021b": {
+      "decision": "approved",
+      "item_sha256": "c874a8a138c47100d0d7a733730cf97cb005773505db6dea4f626ec1e9f9b432",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+          "modified_time": "2026-08-30T19:32:03.425Z",
+          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "locator": "Позиция 3: Сборник тезисов II Международной научно-практической конференции «Кейс-стади в психотерапии и психологическом консультировании»"
+        }
+      ]
+    },
+    "literature:lit_2d2ab1a9e58aaa66": {
+      "decision": "approved",
+      "item_sha256": "86fd7917b9d6dff51f1b5320871b7b6ea13b9b8fd5aa01a84a7aeb350a2cdaff",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
+          "modified_time": "2026-08-30T19:32:03.425Z",
+          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "locator": "Позиция 4: Основы психологического эксперимента"
+        }
+      ]
+    },
+    "literature:lit_510a576872873c35": {
+      "decision": "approved",
+      "item_sha256": "c6009eca1881a66e29cbe611ffc9ba06a1e26e62f59f3ce9c7f18873b2c84fb9",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+          "modified_time": "2026-08-30T19:32:18.232Z",
+          "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
+          "locator": "Позиция 1: Феноменологическая психиатрия и психотерапия (из книги «Болевые точки психотерапии»)"
+        }
+      ]
+    },
+    "literature:lit_cd5ce1720bc8bc2b": {
+      "decision": "approved",
+      "item_sha256": "b2e1ab6d5756fc9c562faee91372029ac67daca7bda226cd339b3e6ca41db532",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+          "modified_time": "2026-08-30T19:32:18.232Z",
+          "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
+          "locator": "Позиция 2: Феномен и симптом (из книги «Болевые точки психотерапии»)"
+        }
+      ]
+    },
+    "literature:lit_398a49d30e4ed132": {
+      "decision": "approved",
+      "item_sha256": "0e418160a326528c00d90b4836e462537126599431c7953e32cee26df4a69731",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+          "modified_time": "2026-08-30T19:32:18.232Z",
+          "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
+          "locator": "Позиция 3: Психопатология и экзистенциальные темы в шизофрении"
+        }
+      ]
+    },
+    "literature:lit_2bc65fc1b8868a95": {
+      "decision": "approved",
+      "item_sha256": "a48c1c9db8488e4fc2e5dd1892e2eba70c0a24a1a67a0581e7ed3711185a343e",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+          "modified_time": "2026-08-30T19:32:18.232Z",
+          "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
+          "locator": "Позиция 4: Отец (The Father)"
+        }
+      ]
+    },
+    "literature:lit_7e152869797af503": {
+      "decision": "approved",
+      "item_sha256": "7cff44957dc215315883e0f1aa5cd996f1fcfbef117b63d6efcf54ecca45e6c4",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+          "modified_time": "2026-08-30T19:32:18.232Z",
+          "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
+          "locator": "Позиция 5: Феноменологический анализ динамики переживаний клиентов в процессе психотерапии: изучение отдельных случаев. Часть 1"
+        }
+      ]
+    },
+    "literature:lit_13f7ecd9b94275d0": {
+      "decision": "approved",
+      "item_sha256": "86a46376c77561d26318dfb50fc9c51340037c51c60edb82410e9e9a38aa599e",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
+          "modified_time": "2026-08-30T19:32:18.232Z",
+          "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
+          "locator": "Позиция 6: Введение в психологию, лекция 1"
+        }
+      ]
+    },
+    "literature:lit_12ca0a14d27fe4f9": {
+      "decision": "approved",
+      "item_sha256": "c1b35eda85d60ade26b3a9b7ca25e1a9471ae46177d381f0dd59cdb36738a5a8",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 1: Психологическое консультирование: настольная книга для начинающих"
+        }
+      ]
+    },
+    "literature:lit_16a62202b82667da": {
+      "decision": "approved",
+      "item_sha256": "d45d125af425c237ce40bb18080b63abf9c6c4184fcd70ac1cad1e5e888be45d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 2: Практическая психология: психологическое консультирование"
+        }
+      ]
+    },
+    "literature:lit_6d7bc0cc3c9ce6eb": {
+      "decision": "approved",
+      "item_sha256": "c92a96ff2f34df8041894ac5d9b80c55ce435b7721bc0b93d2252d4b53b09d63",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 3: Индивидуальное и семейное психологическое консультирование"
+        }
+      ]
+    },
+    "literature:lit_e5921321564edbc4": {
+      "decision": "approved",
+      "item_sha256": "9be36388304db297d623d19dd0c1c7c46f10cc107172a347a19e26be3f034d82",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 4: Психологическое консультирование: теория и практика"
+        }
+      ]
+    },
+    "literature:lit_f207603bd416c4be": {
+      "decision": "approved",
+      "item_sha256": "675cb33c5b684b7002724bd8a14cc1fc2a82902d3bbd4d18facbcbf595f603ef",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 5: Основы психологического консультирования"
+        }
+      ]
+    },
+    "literature:lit_5568f7c20141100f": {
+      "decision": "approved",
+      "item_sha256": "6f72b0f2d85bc4492a4f6eab9160e58be6c34ce80ba7593e2259e3dd4aed9c68",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 6: Психологическое консультирование"
+        }
+      ]
+    },
+    "literature:lit_ae000be9a73115a6": {
+      "decision": "approved",
+      "item_sha256": "9b3a517bf44af72f1721175ae0a398dd744f115b8f3fdf22d6b28b54717b2c74",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 7: Индивидуальное психологическое консультирование: теория, практика, обучение"
+        }
+      ]
+    },
+    "literature:lit_e397986f81e37d22": {
+      "decision": "approved",
+      "item_sha256": "ec0c9b4e255a8fbc892212d073172fea1ed45cf7bad8bb1c927328b1459df0c9",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 8: Введение в психологическое консультирование"
+        }
+      ]
+    },
+    "literature:lit_7b4d2c2bdc54b178": {
+      "decision": "approved",
+      "item_sha256": "55e65b8de8512e37aad194b33ecf70d57d5e465e27f42d25f3d60c1f55b6602c",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
+          "modified_time": "2026-08-30T19:31:51.248Z",
+          "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
+          "locator": "Позиция 9: Психологическое консультирование: учебник для вузов"
+        }
+      ]
+    },
+    "literature:lit_8c4dd1a3c39ecbcf": {
+      "decision": "approved",
+      "item_sha256": "70234d074347417ebdb5df5c68074b671f3f48e065b51737b6dec6082a958eef",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 1: Социальная психология"
+        }
+      ]
+    },
+    "literature:lit_00a7af60c24a8221": {
+      "decision": "approved",
+      "item_sha256": "ea51bee878e3461595e3a8e71f4f99dc995d827cbed767e50a8d6b6ff99c00b4",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 2: Психология личности"
+        }
+      ]
+    },
+    "literature:lit_917071a82ba4c6db": {
+      "decision": "approved",
+      "item_sha256": "27cd56c4828da8304ebb09e6faea522e834a8c6938e85ed85698686954de684f",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 3: Психология личности"
+        }
+      ]
+    },
+    "literature:lit_5505760c8ef8c4b8": {
+      "decision": "approved",
+      "item_sha256": "6d478d551028d44c03aba9b22229ec531765915ef3f1b0afb285b113609941c0",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 4: Психология личности. Культурно-историческое понимание развития человека"
+        }
+      ]
+    },
+    "literature:lit_2055c41e007c80b8": {
+      "decision": "approved",
+      "item_sha256": "c51fcca406bb1736e81a224a28db3bb4f38908773735acba81f04ac2c28c5042",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 5: Психология эмоций"
+        }
+      ]
+    },
+    "literature:lit_4bfaf8e48c20ad8b": {
+      "decision": "approved",
+      "item_sha256": "b6d273f1ae8f07b17811cb32ca61a8e9b201abb00b4ca3174cd44b42c2e7f7f2",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 6: Социальная психология"
+        }
+      ]
+    },
+    "literature:lit_09470e6d0794b19a": {
+      "decision": "approved",
+      "item_sha256": "3cc81b19887299146cf99840210ef4ae355842b14d5dbe2927512ada8352bdaa",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 7: Психология индивидуальных различий"
+        }
+      ]
+    },
+    "literature:lit_1e9a50757f2caf6e": {
+      "decision": "approved",
+      "item_sha256": "4f2ef5c751cb0166741e49bab081b5247f4d051dd3c90456e5dcc9f6748abb0a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
+          "modified_time": "2026-08-30T19:32:24.011Z",
+          "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
+          "locator": "Позиция 8: Психология мотивации достижения"
+        }
+      ]
+    },
+    "literature:lit_634fbb9e1e821b8a": {
+      "decision": "approved",
+      "item_sha256": "2de4846c97feaefd5b4531927ec09cb125ec999b1ba0266493c15a5f422e2d5d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 1: Собрание сочинений в 6 томах"
+        }
+      ]
+    },
+    "literature:lit_8c7e7daa0a5aa779": {
+      "decision": "approved",
+      "item_sha256": "925a4160d38e60e75d803387a1d8a5cad60ccf635103f4160b78160ef18b502b",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 2: Возрастная психология: конспект лекций"
+        }
+      ]
+    },
+    "literature:lit_d5aee85ddf3b94c4": {
+      "decision": "approved",
+      "item_sha256": "ad2156bdf6dfa134d83b708872144901a3319eb7bab71b69869f08db0c848fb9",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 3: Психология развития"
+        }
+      ]
+    },
+    "literature:lit_c9f5f2a72f8ab645": {
+      "decision": "approved",
+      "item_sha256": "85d7b2c93c4ebee95da713978a5966880d3eb7a4903f94422bb2666af161fff2",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 4: Психология развития"
+        }
+      ]
+    },
+    "literature:lit_5c4001030a94d65d": {
+      "decision": "approved",
+      "item_sha256": "0779f7543ea0488bc2238bc9fa192abf7e8fdaa4f321e1a5c1fa0b300058a6ea",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 5: Выход из детской травмы. Обнять внутреннего ребёнка"
+        }
+      ]
+    },
+    "literature:lit_677867857cce3e89": {
+      "decision": "approved",
+      "item_sha256": "91b5da0c45884fddab7f742074457034d1dd785f671e0591c7da108b2e9d9280",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 6: Тайная опора: привязанность в жизни ребёнка"
+        }
+      ]
+    },
+    "literature:lit_702e5c3a28977b88": {
+      "decision": "approved",
+      "item_sha256": "cd1236635ebcfe02ccf88fa1c71bbbcd860021b0b45823ec1d494261faad8c37",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 7: Психология подросткового и юношеского возраста"
+        }
+      ]
+    },
+    "literature:lit_57ba3a9bf5d4ff18": {
+      "decision": "approved",
+      "item_sha256": "bcbfbbd05c839c9a3ee748e9e317febe4453b4f83a3a2886dab1931b43c37e5a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 8: Привязанность"
+        }
+      ]
+    },
+    "literature:lit_b76317a4d7bec59d": {
+      "decision": "approved",
+      "item_sha256": "f11f1aaf5df866e06b108accf60dfad3e9fbe2aba96e4ecac8de60967ebd9ae0",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 9: Создание и разрушение эмоциональных связей"
+        }
+      ]
+    },
+    "literature:lit_d679ea65152d4922": {
+      "decision": "approved",
+      "item_sha256": "71860eb2b7d300b357a37675ba1cee9c2ca1eb7b70bceab57c2f56f661b718d6",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 10: Руководство практического психолога"
+        }
+      ]
+    },
+    "literature:lit_3ecf3ffbaa287019": {
+      "decision": "approved",
+      "item_sha256": "f89ed0e95ca690b3a5f69eb920744f874ec542e37129d00e166b58728d45e69b",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 11: Ребёнок, семья и внешний мир"
+        }
+      ]
+    },
+    "literature:lit_6f18559891d319c1": {
+      "decision": "approved",
+      "item_sha256": "a74efd76f9ea620679d75ee00e241a07f055319e93b82dcfb0a66ad876d8ebc7",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r",
+          "modified_time": "2026-08-30T19:32:28.269Z",
+          "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
+          "locator": "Позиция 12: От педиатрии к психоанализу"
+        }
+      ]
+    },
+    "literature:lit_caa8d94a943aae0d": {
+      "decision": "approved",
+      "item_sha256": "db1a5e772fb3a87a333e3f93681f2ce18b765c9bac80d7f042afff6c8cbe1210",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 1: Социальная психология личности"
+        }
+      ]
+    },
+    "literature:lit_a851d2e2d491dfed": {
+      "decision": "approved",
+      "item_sha256": "249d86ebbcc12c4c2b732faa609a4c79ef91b0f09fd7f723bab29efda9a9390a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 2: Игры, в которые играют люди. Люди, которые играют в игры"
+        }
+      ]
+    },
+    "literature:lit_28136036489db778": {
+      "decision": "approved",
+      "item_sha256": "58abf4f1eba3f038401ff0638e7bf5047bbedeb69909f09e365080832ce94de2",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 3: Психология самосознания: Хрестоматия"
+        }
+      ]
+    },
+    "literature:lit_88dee04d51aa3119": {
+      "decision": "approved",
+      "item_sha256": "cd490684cb6c54e3dd26181e547a4edd4ef646a8b651c9a2fee82a013d6b5721",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 4: В поисках себя: личность и самосознание"
+        }
+      ]
+    },
+    "literature:lit_6968d12a30949ae7": {
+      "decision": "approved",
+      "item_sha256": "8607514c65eea6f70d6825e182e3711c05cc08b083148638a21a992f404df62a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 5: Межличностное общение"
+        }
+      ]
+    },
+    "literature:lit_4ac5113ca33225a9": {
+      "decision": "approved",
+      "item_sha256": "e9b1179d6e524ec02b5e73a1a86cfe99e007bdf59a3b0dcf2936e066ea319f20",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 6: Социальная идентичность: теория и практика"
+        }
+      ]
+    },
+    "literature:lit_7bcfce2256481407": {
+      "decision": "approved",
+      "item_sha256": "e8aa5c62c1e9e618a345ef94e0e9d205b6b551d4099a0f60b55ff69f57ab3004",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 7: Тренинг влияния и противостояния влиянию"
+        }
+      ]
+    },
+    "literature:lit_89d363ca5a33cb7d": {
+      "decision": "approved",
+      "item_sha256": "20c1989dfe5edfba9c0f4dbc9de7f2cb5d77c1acd64ba9c51804fc62fba2b011",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
+          "modified_time": "2026-09-08T12:06:11.753Z",
+          "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
+          "locator": "Позиция 8: Анти-Карнеги или Человек-манипулятор"
+        }
+      ]
+    },
+    "literature:lit_7ff4b50c4911b5f7": {
+      "decision": "approved",
+      "item_sha256": "fce5e2ab1157533398d4843efdc98341da3ff3c2bf93654d6ac7f2c3b140b0eb",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 1: Индивидуальное и семейное психологическое консультирование"
+        }
+      ]
+    },
+    "literature:lit_98bfb98e25b39800": {
+      "decision": "approved",
+      "item_sha256": "52cef229f14d28968aa42ba0797fc493d967dd69459f3b6302efe6248f8fb310",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 2: Социальная психология семейных отношений"
+        }
+      ]
+    },
+    "literature:lit_802f13c56eea6319": {
+      "decision": "approved",
+      "item_sha256": "88a8c7586f476a138ad736d5bcb441247dc7cb6e3a537488d66bd30fcdb09969",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 3: Ребенок из неблагополучной семьи"
+        }
+      ]
+    },
+    "literature:lit_4c4514f492edb1c6": {
+      "decision": "approved",
+      "item_sha256": "cc64c06cc7ec1d2f6ac2d0cdfb90f8935512233ed830b3357bdd98529027510d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 4: Системная семейная психотерапия: краткий лекционный курс"
+        }
+      ]
+    },
+    "literature:lit_40f4eacd15ed570b": {
+      "decision": "approved",
+      "item_sha256": "979b591ff2d5a83c40f8eef9a0820169f9500b061b8b2b8e1e684d7254cc1d1c",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 5: Танцы с семьей: семейная терапия"
+        }
+      ]
+    },
+    "literature:lit_bd48225c86c8de17": {
+      "decision": "approved",
+      "item_sha256": "410ceb4441d545b5067c55804ee0f19b500258728b3d1444a31f994185bf2c0f",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 6: От младенчества до отрочества"
+        }
+      ]
+    },
+    "literature:lit_0199865ad8d23ecb": {
+      "decision": "approved",
+      "item_sha256": "b25156222c261cb99161eb4ce67af7359ec809e9c8218397c617d947dd915f4a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 7: Общаться с ребенком. Как?"
+        }
+      ]
+    },
+    "literature:lit_819808cf97ad8eb5": {
+      "decision": "approved",
+      "item_sha256": "9f702c3f9b812a4f210963b213311c491307ffc2d1ba4a17ab8f4bb8c959e97d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 8: Продолжаем общаться с ребенком. Так?"
+        }
+      ]
+    },
+    "literature:lit_ee1fe3562df0c482": {
+      "decision": "approved",
+      "item_sha256": "b23ae1923937f014fbe3186f092fef3861fd125ac7b0beefa1b634714c26697a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 9: Основы семейной жизни"
+        }
+      ]
+    },
+    "literature:lit_a172ffe221539480": {
+      "decision": "approved",
+      "item_sha256": "60743af548e3d1fbc87a447caaf693364eec35662b8e38203c8b03479ded8c42",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 10: Психология семьи"
+        }
+      ]
+    },
+    "literature:lit_e8a91d867727899b": {
+      "decision": "approved",
+      "item_sha256": "5e9017eb834bad99ed6eec955f0fdb813df8b8283dc61ff6ac7bdb42a94e0d1e",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 11: Зависимость характеристик супружеской семьи от родительской"
+        }
+      ]
+    },
+    "literature:lit_4bad7531005a5e23": {
+      "decision": "approved",
+      "item_sha256": "6f67e6e6dc1fdb6c81a4ae8e43f8a57d793120896820cb8fd670f80e816f6fb8",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 12: Родители и дети: взаимопонимание или отчуждение?"
+        }
+      ]
+    },
+    "literature:lit_ce87499b1e725a4d": {
+      "decision": "approved",
+      "item_sha256": "e32a48b502bcccbc1f72aadc30a22f3db025aeb023c2f002ac8e89c132667560",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 13: Психология семейных отношений"
+        }
+      ]
+    },
+    "literature:lit_319ec2108977ce66": {
+      "decision": "approved",
+      "item_sha256": "c37d5288a0dfab899ad8783e2efc8fae7d5058cbd18d7cc2a5d3eca08ef005ac",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 14: Основные направления консультативной работы с семьей"
+        }
+      ]
+    },
+    "literature:lit_3c68e7fa4c7ec0ba": {
+      "decision": "approved",
+      "item_sha256": "b14f5cb6d00fce6c69b17993d49fb4eb38a35dbbd9637c45eb1c55e241200b48",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
+          "modified_time": "2026-09-08T15:34:36.601Z",
+          "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
+          "locator": "Позиция 15: С тобой я дома"
+        }
+      ]
+    },
+    "literature:lit_d326f6da3f94e03b": {
+      "decision": "approved",
+      "item_sha256": "77233227b25672c852639c774bb05efb73e60792b2b762563df9d481c2d8e60e",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 1: Организационная психология"
+        }
+      ]
+    },
+    "literature:lit_925e5ff861131189": {
+      "decision": "approved",
+      "item_sha256": "90dd78fcca7167c9a1b8777de63edda3fc4a7726d4751c064f0474b2f3b01d3e",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 2: Организационная психология"
+        }
+      ]
+    },
+    "literature:lit_f0436ade24a5adb3": {
+      "decision": "approved",
+      "item_sha256": "281d874976d5c8630b100858c2dbac8e153b6dd2ab7b0aa60458706fe8f62cae",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 3: Организационная психология"
+        }
+      ]
+    },
+    "literature:lit_7a7c03e9f990308e": {
+      "decision": "approved",
+      "item_sha256": "c57065a5e157522b9c4a12f0b25063333ee701fbf1259110aa961d282d1272a7",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 4: Организационное поведение"
+        }
+      ]
+    },
+    "literature:lit_909b215a9fece3cc": {
+      "decision": "approved",
+      "item_sha256": "97afdd8cec35f05a5c19d73ebea349dfa69768e95d0aa17743f0eef87f6defff",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 5: Психология убеждения"
+        }
+      ]
+    },
+    "literature:lit_543dcd562c0460c5": {
+      "decision": "approved",
+      "item_sha256": "02a381e2b12c9fd8d20f6701d09369434982489f03ec829f3f68d7a50a8ece0b",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 6: Психология влияния"
+        }
+      ]
+    },
+    "literature:lit_b31bb7b1dc37d79d": {
+      "decision": "approved",
+      "item_sha256": "dc4cad9674378e039959e508ea1e34af39413742a35a70b25544c9475881b1ef",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 7: Лидер на кушетке"
+        }
+      ]
+    },
+    "literature:lit_4bbfe78685eb81c2": {
+      "decision": "approved",
+      "item_sha256": "091d8868c867b4141ed65c6e8a580e91b1fd04e9a1e3c6447fab072048f3947c",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 8: Организационная психология"
+        }
+      ]
+    },
+    "literature:lit_5643db88a7fa06b2": {
+      "decision": "approved",
+      "item_sha256": "caccbd8ad8c233dd7934e6bd6ac5b3274ba057226abb0852ed4d6b4df8c65014",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 9: Организационная социальная психология"
+        }
+      ]
+    },
+    "literature:lit_4326336ddc0d7a05": {
+      "decision": "approved",
+      "item_sha256": "9a8c7908e959c7c98c10f3eb7b69b9d74ec9ae9b21b731fa22db47836570f36d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 10: Психология управления персоналом"
+        }
+      ]
+    },
+    "literature:lit_e29fc4e37d6eef9b": {
+      "decision": "approved",
+      "item_sha256": "5b791a28a39a383b83029560cf76118ffbbcae5aed85da9edb85693b636f852d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
+          "modified_time": "2026-09-08T19:47:53.199Z",
+          "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
+          "locator": "Позиция 11: Организационная психология"
+        }
+      ]
+    },
+    "literature:lit_1febe2b9612a7668": {
+      "decision": "approved",
+      "item_sha256": "677c4173d78f3d072f2c380b07d0331422c31c8c5d3ccb6c1afeccb4ad1dd71b",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 1: Психолингвистика"
+        }
+      ]
+    },
+    "literature:lit_7d6fbb6d57ed5a71": {
+      "decision": "approved",
+      "item_sha256": "de9efab729858a07a7ebec1656ac23a469889faf26028747299e863a15a6dee2",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 2: Психолингвистика"
+        }
+      ]
+    },
+    "literature:lit_97e355592d42be46": {
+      "decision": "approved",
+      "item_sha256": "939418c3887e95da92a0798e13ca575a6d5d7e2de76ebe2cb17dd3431369559a",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 3: Основы психолингвистики"
+        }
+      ]
+    },
+    "literature:lit_3fe49ed705cbf4cc": {
+      "decision": "approved",
+      "item_sha256": "7d105bafa4f69d97dc5b7f8455ba51c8248ab8752ddc961fdd4386c646ba4892",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 4: Введение в психолингвистику"
+        }
+      ]
+    },
+    "literature:lit_6491072220dbf2cb": {
+      "decision": "approved",
+      "item_sha256": "0a3196fc4ce9c96843490b0376c61054383a3a410a46976c01003316021e7f8d",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 5: Основы психолингвистики"
+        }
+      ]
+    },
+    "literature:lit_cefdc62fe30c6d9d": {
+      "decision": "approved",
+      "item_sha256": "9c7c84f696c8fef161b66e5e08ded7f25e71eda22a5d3869319198835850024f",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 6: Основы психолингвистики"
+        }
+      ]
+    },
+    "literature:lit_5852670b2e030af5": {
+      "decision": "approved",
+      "item_sha256": "f827619191bc27dfa155b093a822a839e893077cb7f8c52ac0865acc285ea67b",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 7: Психолингвистика"
+        }
+      ]
+    },
+    "literature:lit_79347303885d264c": {
+      "decision": "approved",
+      "item_sha256": "b4ae79dad88115f19a98cf8015dce052490e7683003f0f8d6234d2592c7bbbae",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-20",
+      "sources": [
+        {
+          "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
+          "modified_time": "2026-09-10T06:47:57.268Z",
+          "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
+          "locator": "Позиция 8: Психолингвистика"
+        }
+      ]
+    }
+  }
 }

@@ -1,39 +1,46 @@
 [
   {
     "id": "gippenreiter_vvedenie_v_obschuyu_psihologiyu",
+    "work_id": "gippenreiter_vvedenie_v_obschuyu_psihologiyu",
     "topic_id": "obschaya_psihologiya",
+    "module": "module1",
     "title": "Введение в общую психологию: курс лекций",
     "authors": [
       "Гиппенрейтер Ю. Б."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "foundation",
-    "status": "review",
-    "priority": "high",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 10,
     "global_order": 120010,
     "estimated_minutes": null,
-    "tags": [
-      "general_psychology",
-      "foundation",
-      "textbook"
-    ],
-    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по общей психологии.",
-      "Связать материал чтения с ключевыми понятиями темы общей психологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Общая психология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
-      "source_list:spisok_literatury_obschaya_psihologiya"
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ"
     ],
-    "notes": "Источник «Список литературы. Общая психология» указывает работу в основном списке литературы и допускает любое издание; библиографическая нормализация требует проверки из-за OCR-артефактов."
+    "source": {
+      "id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 1",
+      "citation": "Основная: Гиппенрейтер Ю. Б. Введение в общую психологию: курс лекций / Ю. Б. Гиппенрейтер. — М.: Издательство АСТ. 202 с (или любое издание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку.",
+      "В источнике спорные данные «202 с.», «206 с.» или «2069 с.»; они не приняты за год издания."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "nurkova_berezanskaya_obschaya_psihologiya",
+    "work_id": "nurkova_berezanskaya_obschaya_psihologiya",
     "topic_id": "obschaya_psihologiya",
+    "module": "module1",
     "title": "Общая психология: учебник",
     "authors": [
       "Нуркова В. В.",
@@ -41,149 +48,169 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": "foundation",
-    "status": "review",
-    "priority": "high",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 20,
     "global_order": 120020,
     "estimated_minutes": null,
-    "tags": [
-      "general_psychology",
-      "foundation",
-      "textbook"
-    ],
-    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по общей психологии.",
-      "Связать материал чтения с ключевыми понятиями темы общей психологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Общая психология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
-      "source_list:spisok_literatury_obschaya_psihologiya"
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ"
     ],
-    "notes": "Источник «Список литературы. Общая психология» указывает работу в основном списке литературы; год оставлен пустым до ручной проверки библиографических данных из-за OCR-артефактов."
+    "source": {
+      "id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 2",
+      "citation": "Основная: Нуркова, В. В. Общая психология: Учебник / В. В. Нуркова, Н. Б. Березанская. — Люберцы: Юрайт. 206 с."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку.",
+      "В источнике спорные данные «202 с.», «206 с.» или «2069 с.»; они не приняты за год издания."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "vygotsky_myshlenie_i_rech",
+    "work_id": "vygotsky_myshlenie_i_rech",
     "topic_id": "obschaya_psihologiya",
+    "module": "module1",
     "title": "Мышление и речь",
     "authors": [
       "Выготский Л. С."
     ],
     "year": null,
     "type": "book",
-    "reading_level": "core",
-    "status": "review",
-    "priority": "medium",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 30,
     "global_order": 120030,
     "estimated_minutes": null,
-    "tags": [
-      "general_psychology"
-    ],
-    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по общей психологии.",
-      "Связать материал чтения с ключевыми понятиями темы общей психологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Общая психология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
-      "source_list:spisok_literatury_obschaya_psihologiya"
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ"
     ],
-    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; год и издание требуют проверки из-за OCR-артефактов."
+    "source": {
+      "id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 3",
+      "citation": "Дополнительная: Выготский Л. С. Мышление и речь. — М.: Национальное образование. 2069 с."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку.",
+      "В источнике спорные данные «202 с.», «206 с.» или «2069 с.»; они не приняты за год издания."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "zhdan_istoriya_psihologii",
+    "work_id": "zhdan_istoriya_psihologii",
     "topic_id": "obschaya_psihologiya",
+    "module": "module1",
     "title": "История психологии: от античности до наших дней",
     "authors": [
       "Ждан А. Н."
     ],
     "year": 2008,
     "type": "book",
-    "reading_level": "deepening",
-    "status": "review",
-    "priority": "medium",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 40,
     "global_order": 120040,
     "estimated_minutes": null,
-    "tags": [
-      "general_psychology",
-      "history"
-    ],
-    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по общей психологии.",
-      "Связать материал чтения с ключевыми понятиями темы общей психологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Общая психология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
-      "source_list:spisok_literatury_obschaya_psihologiya"
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ"
     ],
-    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; извлеченный год 2008 сохранен, но запись остается на проверке из-за OCR-артефактов."
+    "source": {
+      "id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 4",
+      "citation": "Дополнительная: Ждан А. Н. История психологии: от античности до наших дней, 2008."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "myers_psihologiya",
+    "work_id": "myers_psihologiya",
     "topic_id": "obschaya_psihologiya",
+    "module": "module1",
     "title": "Психология",
     "authors": [
       "Майерс Д."
     ],
     "year": 2008,
     "type": "book",
-    "reading_level": "reference",
-    "status": "review",
-    "priority": "medium",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 50,
     "global_order": 120050,
     "estimated_minutes": null,
-    "tags": [
-      "general_psychology",
-      "reference"
-    ],
-    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по общей психологии.",
-      "Связать материал чтения с ключевыми понятиями темы общей психологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Общая психология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
-      "source_list:spisok_literatury_obschaya_psihologiya"
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ"
     ],
-    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; извлеченный год 2008 сохранен, но запись остается на проверке из-за OCR-артефактов."
+    "source": {
+      "id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 5",
+      "citation": "Дополнительная: Майерс Дэвид, Психология. — Попурри, 2008."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
     "id": "rubinstein_osnovy_obschey_psihologii",
+    "work_id": "rubinstein_osnovy_obschey_psihologii",
     "topic_id": "obschaya_psihologiya",
+    "module": "module1",
     "title": "Основы общей психологии",
     "authors": [
       "Рубинштейн С. Л."
     ],
     "year": 2002,
     "type": "book",
-    "reading_level": "core",
-    "status": "review",
-    "priority": "medium",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
     "topic_order": 60,
     "global_order": 120060,
     "estimated_minutes": null,
-    "tags": [
-      "general_psychology"
-    ],
-    "why_read": "Помогает получить базовую ориентацию в теме общей психологии и связать чтение с учебным контекстом.",
-    "learning_outcomes": [
-      "Объяснить, зачем это чтение включено в список по общей психологии.",
-      "Связать материал чтения с ключевыми понятиями темы общей психологии."
-    ],
+    "tags": [],
+    "why_read": "Указано в учебном списке «Общая психология».",
+    "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
-      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
-      "source_list:spisok_literatury_obschaya_psihologiya"
+      "drive:1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ"
     ],
-    "notes": "Источник «Список литературы. Общая психология» указывает работу в дополнительном списке литературы; извлеченный год 2002 сохранен, но запись остается на проверке из-за OCR-артефактов."
+    "source": {
+      "id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
+      "title": "Список литературы.pdf",
+      "locator": "Страница 1, позиция 6",
+      "citation": "Дополнительная: Рубинштейн С. Л. Основы общей психологии. — СПб: Питер, 2002."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   }
 ]
