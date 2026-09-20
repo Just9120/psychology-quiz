@@ -5,8 +5,9 @@ import { Brand, Icon } from './Icon'
 import { Onboarding } from './Onboarding'
 import { QuizSetup } from './QuizSetup'
 import { QuizView } from './QuizView'
+import { ErrorsView, ProgressView } from './ProgressView'
 import { InstallButton } from './install'
-import type { Account, Answer, Feedback, MailProof, Question, QuizState, RunnerState, Setup, SetupOptions } from './types'
+import type { Account, Answer, Feedback, MailProof, Question, QuizState, RunnerState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage } from './types'
 
 export function App({ initialProof = null }: { initialProof?: MailProof | null }) {
   const [proof, setProof] = useState(initialProof)
@@ -18,7 +19,11 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [selected, setSelected] = useState<number | null>(null)
   const [pending, setPending] = useState<Answer | null>(null)
   const [uncertainSetup, setUncertainSetup] = useState(false)
-  const [view, setView] = useState<'quiz' | 'setup' | 'account'>('setup')
+  const [view, setView] = useState<'quiz' | 'setup' | 'account' | 'progress' | 'errors'>('setup')
+  const [progress, setProgress] = useState<ProgressOverview | null>(null)
+  const [history, setHistory] = useState<HistoryPage | null>(null)
+  const [detail, setDetail] = useState<AttemptPage | null>(null)
+  const [mistakes, setMistakes] = useState<ErrorsPage | null>(null)
   const [booting, setBooting] = useState(!initialProof)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -29,6 +34,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   function clearPrivateState() {
     setAccount(null); setOptions(null); setState(null); setFeedback(null); setFeedbackQuestion(null)
     setSelected(null); setPending(null); setUncertainSetup(false); setView('setup')
+    setProgress(null); setHistory(null); setDetail(null); setMistakes(null)
   }
 
   function applyState(result: QuizState, resume = false) {
@@ -84,6 +90,21 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   useEffect(() => { if (error) alertRef.current?.focus() }, [error])
 
   async function refreshState() { applyState(await api.state(), true) }
+  async function loadProgress() {
+    const [summary, attempts] = await Promise.all([api.progress(), api.history()])
+    setProgress(summary); setHistory(attempts); setDetail(null); setView('progress')
+  }
+  async function loadErrors() { setMistakes(await api.errors()); setView('errors') }
+  async function trainErrors(replace: boolean, count: number | null) {
+    if (!mistakes) return
+    try { applyState(await api.trainErrors(mistakes.latest_session_id, replace, count)) }
+    catch (failure) {
+      if (failure instanceof ApiError && (!failure.status || failure.code === 'practice_changed')) {
+        setUncertainSetup(true); setView('setup')
+      }
+      throw failure
+    }
+  }
   async function start(setup: Setup) {
     try { applyState(await api.setup(setup)) }
     catch (failure) { if (failure instanceof ApiError && !failure.status) setUncertainSetup(true); throw failure }
@@ -107,11 +128,13 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   if (!account || proof) return <>{alert}<AuthScreen busy={busy} run={run} proof={proof} consumeProof={() => setProof(null)} onLogin={loadAccount} /></>
 
   return <div className="app-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
-    <aside className="sidebar"><Brand /><div className="nav-heading">МОЁ ОБУЧЕНИЕ</div><nav aria-label="Основная навигация"><button className={view !== 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}><Icon name="book" />Квиз по психологии<span className="nav-dot" /></button><button className={view === 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView('account')}><Icon name="user" />Мой аккаунт</button></nav><div className="sidebar-note"><Icon name="spark" /><p>Небольшие шаги.<br />Большое понимание.</p></div><InstallButton /><button className="logout" disabled={busy} onClick={() => void run(async () => { try { await api.logout() } finally { clearPrivateState() } })}><Icon name="logout" />Выйти</button></aside>
+    <aside className="sidebar"><Brand /><div className="nav-heading">МОЁ ОБУЧЕНИЕ</div><nav aria-label="Основная навигация"><button className={view === 'quiz' || view === 'setup' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}><Icon name="book" />Квиз по психологии<span className="nav-dot" /></button><button className={view === 'progress' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadProgress)}><Icon name="chart" />Мой прогресс</button><button className={view === 'errors' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadErrors)}><Icon name="refresh" />Мои ошибки</button><button className={view === 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView('account')}><Icon name="user" />Мой аккаунт</button></nav><div className="sidebar-note"><Icon name="spark" /><p>Небольшие шаги.<br />Большое понимание.</p></div><InstallButton /><button className="logout" disabled={busy} onClick={() => void run(async () => { try { await api.logout() } finally { clearPrivateState() } })}><Icon name="logout" />Выйти</button></aside>
     <div className="workspace"><header className="topbar"><span>Ваше пространство обучения</span><div className="profile-badge"><span className="avatar">{account.email[0].toUpperCase()}</span><span>Личный аккаунт</span></div></header><main id="main-content" tabIndex={-1} className="workspace-main">
       {alert}{offline && <div className="offline-banner" role="status">Вы не в сети. Новые ответы требуют подтверждения сервера.</div>}
       {view === 'account' ? <section className="page-width account-page"><span className="eyebrow">ВАШ ПРОФИЛЬ</span><h1>Мой аккаунт</h1><div className="panel"><h2>{account.email}</h2><p className="muted">Почта подтверждена</p><hr /><p>{account.needs_identity ? 'Выберите, с каким прогрессом продолжить обучение.' : account.telegram_linked ? 'Прогресс связан с вашим Telegram-аккаунтом.' : 'Самостоятельный аккаунт с отдельным прогрессом.'}</p><button className="button secondary" disabled={busy} onClick={() => setView('setup')}>К обучению<Icon name="arrow" /></button></div><div className="mobile-install"><InstallButton /></div></section>
         : account.needs_identity ? <Onboarding account={account} busy={busy} run={run} refresh={loadAccount} />
+          : view === 'progress' && progress && history ? <ProgressView data={progress} history={history} detail={detail} busy={busy} onRefresh={() => void run(loadProgress)} onBack={() => setDetail(null)} onOpen={id => void run(async () => setDetail(await api.attempt(id)))} onMore={() => void run(async () => { const page = await api.history(history.next_before); setHistory({ ...page, items: [...history.items, ...page.items] }) })} onMoreAnswers={() => void run(async () => { if (detail) { const page = await api.attempt(detail.attempt.session_id, detail.next_after); setDetail({ ...page, items: [...detail.items, ...page.items] }) } })} />
+          : view === 'errors' && mistakes ? <ErrorsView data={mistakes} busy={busy} onRefresh={() => void run(loadErrors)} onResume={() => void run(refreshState)} onTrain={(replace, count) => void run(() => trainErrors(replace, count))} onMore={() => void run(async () => { const page = await api.errors(mistakes.next_before); setMistakes({ ...page, items: [...mistakes.items, ...page.items] }) })} />
           : uncertainSetup ? <section className="page-width panel empty-state"><h1>Проверим, создался ли квиз</h1><p className="muted">Ответ сервера не дошёл. Сначала восстановим состояние, чтобы не начинать две попытки.</p><button className="button primary" disabled={busy} onClick={() => void run(refreshState)}>Восстановить квиз<Icon name="refresh" /></button></section>
             : !options || !state ? <section className="page-width panel empty-state"><h1>Подключимся к вашему прогрессу</h1><button className="button primary" disabled={busy} onClick={() => void run(loadAccount)}>Повторить загрузку</button></section>
               : view === 'setup' || state.state === 'setup' ? <QuizSetup options={options} busy={busy} hasAttempt={state.state === 'in_progress'} onStart={setup => void run(() => start(setup))} onResume={() => void run(refreshState)} />

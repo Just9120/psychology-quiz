@@ -94,7 +94,7 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 | Python format / lint / typecheck | N/A: отдельных команд нет; whitespace проверяет `git diff --check`. Frontend typecheck — ниже |
 | Python build | N/A отдельная компиляция; runtime image собирает действующая Docker delivery procedure |
 
-Базовые local services — SQLite и FastAPI; live Telegram smoke требует тестовый bot/client. Подготовительная PostgreSQL storage foundation и проверки описаны в [PostgreSQL storage](docs/postgres-storage.md); production cutover — оставшаяся часть текущей Goal. pgvector остаётся отдельным optional scope. Яндекс 360 требуется для реального PWA onboarding; synthetic suite использует test mailbox. CI запускает Python behavioral suite и frontend checks; ограничения — в [плане](docs/delivery-plan.md).
+Базовые local services — SQLite и FastAPI; live Telegram smoke требует тестовый bot/client. PostgreSQL runtime и проверки описаны в [PostgreSQL storage](docs/postgres-storage.md); production cutover подтверждён в E-PG-09 [плана](docs/delivery-plan.md). pgvector остаётся отдельным optional scope. Яндекс 360 требуется для реального PWA onboarding; synthetic suite использует test mailbox. CI запускает Python behavioral suite и frontend checks; ограничения — в плане.
 
 Owner PWA auth backend поставляется выключенным по умолчанию. Переменные, API contract, mail/session/linking policy и условия включения — в [PWA auth](docs/pwa-auth.md). Новые credentials не заменяют Telegram initData в прежних routes.
 
