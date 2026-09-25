@@ -5,8 +5,10 @@ from app.db import get_connection, start_quiz_session, store_session_questions, 
 from app.quiz_service import build_answer_feedback, prepare_quiz
 from app.quiz_runner import get_current_question_snapshot
 from contextlib import closing
+from types import SimpleNamespace
 from tests.test_attempt_content import bank
 from scripts.seed_questions import validate_question
+from app.classic_quiz_handlers import _handle_classic_text_answer_db, build_classic_reply_feedback_text, format_case_review_html
 
 
 CASE = {
@@ -63,3 +65,20 @@ def test_case_context_is_immutable_with_each_attempt_edition(bank):
         assert get_attempt_content(conn, first, question_id) == original
         assert get_attempt_content(conn, second, question_id)["case"] == revised["case"]
         assert get_attempt_content(conn, second, question_id)["content_sha256"] != original["content_sha256"]
+
+
+def test_classic_quiz_returns_case_alternative_rationales_without_source_refs(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, [{**CASE, "source_ref": "drive:synthetic-private-id#page-1"}])
+        question_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (CASE["id"],)).fetchone()[0]
+        sid = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, sid, [question_id])
+    actor = SimpleNamespace(id=42, username=None, first_name="Owner", last_name=None)
+    result = _handle_classic_text_answer_db(SimpleNamespace(db_path=str(bank)), actor,
+                                            session_id=sid, question_id=question_id, selected_option_index=0)
+    assert result["case_review"] == CASE["case"]
+    html = build_classic_reply_feedback_text(result)
+    assert "Разбор кейса" in html and "Техника может понадобиться позже" in html
+    assert "Неоднозначность" in html and "synthetic-private-id" not in html
+    assert "&lt;script&gt;" in format_case_review_html({**CASE["case"],
+        "ambiguity": "<script>"}, "normal")
