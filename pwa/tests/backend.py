@@ -17,6 +17,7 @@ from app.attempt_content import capture_question
 from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.glossary_schema import migrate_glossary_schema
+from app.learning_schema import migrate_learning_schema
 from app.miniapp_fastapi import create_app
 from app.web_config import WebSettings
 from app.postgres_import import import_snapshot
@@ -50,6 +51,8 @@ def main():
             mailbox.messages.clear()
             with closing(get_connection(path)) as conn, conn:
                 conn.executescript((ROOT / "sql/schema.sql").read_text(encoding="utf-8"))
+                migrate_identity_schema(conn)
+                migrate_learning_schema(conn)
                 upsert_approved_questions(conn, [
                     {"id": f"test-{i}", "category": "Основы психологии" if i < 5 else "Психология развития",
                      "source_ref": "synthetic", "difficulty": "easy", "status": "approved",
@@ -59,7 +62,6 @@ def main():
                      "correct_option_index": 0} for i in range(7)
                 ], authoritative=True)
             with closing(get_connection(path)) as conn:
-                migrate_identity_schema(conn)
                 migrate_auth_schema(conn)
                 with conn:
                     migrate_glossary_schema(conn)
