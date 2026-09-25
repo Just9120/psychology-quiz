@@ -43,6 +43,8 @@ PASS local: canonical questions/topics/glossary/literature/learning-review valid
 
 **Checkpoint IMPLEMENT, 25.09.2026:** явное возобновление Goal после UPDATE; base PR2 `2d90525`, `codex/quiz-analytics-final` в отдельном worktree. 14 файлов незавершённого PROG-03 перенесены из сохранённой ветки с SHA-256 readback; исходный dirty worktree не изменён. D-19 утверждена. Локально PASS: Python `tests/test_curriculum.py`, `tests/test_progress.py`, `tests/test_web_progress.py` (29), затем `tests/test_difficulty_calibration.py` и `tests/test_curriculum.py` (7); PWA `npm test` (22), typecheck/build, desktop/mobile curriculum E2E (2). Mobile visual review выявил flex-компоновку блока неизвестной темы, исправлено и повторно проверено E2E. Изолированная Python `.venv` использует `requirements-dev.txt`; глобальный Python имел несовместимый `pydantic-core`, его результат не использован. PostgreSQL локально недоступен (`POSTGRES_TEST_DSN` и Docker отсутствуют), required contract — в CI. Следующий шаг: self-review, актуальный diff/validation, commit/PR2, CI включая PostgreSQL, затем merge/CD exact revision и очистка своих веток. Проценты не пересчитываются.
 
+**PR2 CI cycle, 25.09.2026:** #309, head `60a5fad`, CI `36160437517`: backend/real PostgreSQL PASS; PWA SQLite browser 31/32 PASS, один старый mobile assertion выбрал два элемента после появления новой сводки. Селектор уточнён до exact text без ослабления проверки; затронутый desktop/mobile E2E локально 2/2 PASS. Следующий шаг — один сгруппированный push исправления и ожидание актуальных CI/review; первоначальный CI не считается gate нового head.
+
 ### UPDATE-10 — влияние новой редакции требований
 
 | Область | Изменение AC и действие до реализации |

@@ -279,7 +279,7 @@ test('personal progress, historical mistakes and retry-safe training share the q
   await expect(page.getByText('Сейчас нет вопросов для тренировки')).toBeVisible()
   await expect(page.getByText('Разобрать ответ', { exact: true })).toHaveCount(0)
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
-  await expect(page.getByText('1 из 2 ответов')).toBeVisible()
+  await expect(page.getByText('1 из 2 ответов', { exact: true })).toBeVisible()
   await expect(page.getByText('Прервана', { exact: true })).toBeVisible()
   await expect(page.getByText('Завершена', { exact: true })).toBeVisible()
   await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-progress.png`, fullPage: true })
