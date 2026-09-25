@@ -1,6 +1,6 @@
 import pytest
 
-from app.source_inventory import InventoryError, reconcile, scan
+from app.source_inventory import InventoryError, link_lessons, processing_status, reconcile, scan
 
 
 def item(file_id, parent, *, title="Lesson", changed="2026-09-25T00:00:00Z"):
@@ -33,3 +33,19 @@ def test_missing_is_not_deletion_and_conflicting_metadata_fails_closed():
     with pytest.raises(InventoryError, match="parent_mismatch"):
         scan("root", {"root": {"complete": True, "children": [
             {**item("one", "root"), "parent_ids": None}]}})
+
+
+def test_processing_requires_same_revision_and_explicit_lesson_links():
+    snapshot = scan("root", {"root": {"complete": True, "children": [
+        item("lecture", "root"), item("slides", "root")]}})
+    revision = ("2026-09-25T00:00:00Z", "Lesson", "application/pdf")
+    states = processing_status(snapshot, {
+        "lecture": {"revision": revision, "review_state": "processed"},
+        "slides": {"revision": revision, "review_state": "conflict"}})
+    assert states == {"lecture": "processed", "slides": "conflict_review"}
+    assert processing_status(snapshot, {"lecture": {"revision": ("old", "Lesson", "application/pdf")}})["lecture"] == "changed_unprocessed"
+    links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic", "format": "transcript"},
+             {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic", "format": "slides"}]
+    assert len(link_lessons(snapshot, links)["l1"]["sources"]) == 2
+    with pytest.raises(InventoryError, match="conflicting_lesson_topic"):
+        link_lessons(snapshot, [links[0], {**links[1], "topic_id": "other"}])

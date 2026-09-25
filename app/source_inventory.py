@@ -68,3 +68,44 @@ def reconcile(previous: dict, current: dict) -> dict:
             changes["unchanged"].append(file_id)
     changes["missing"] = sorted(old.keys() - new.keys())
     return {name: sorted(ids) for name, ids in changes.items()}
+
+
+def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, str]:
+    """Discovery and successful content processing are different records."""
+    result = {}
+    for file_id, item in snapshot["files"].items():
+        record = processed.get(file_id)
+        if record is None:
+            result[file_id] = "new_unprocessed"
+        elif tuple(record.get("revision", ())) != _revision(item):
+            result[file_id] = "changed_unprocessed"
+        elif record.get("review_state") == "conflict":
+            result[file_id] = "conflict_review"
+        elif record.get("review_state") == "processed":
+            result[file_id] = "processed"
+        else:
+            result[file_id] = "pending_review"
+    return result
+
+
+def link_lessons(snapshot: dict, links: list[dict]) -> dict:
+    """Group formats only by explicit editor-confirmed lesson IDs."""
+    lessons, seen = {}, set()
+    for link in links:
+        if not isinstance(link, dict):
+            raise InventoryError("invalid_lesson_link")
+        source_id, lesson_id, topic_id, format_name = (
+            link.get(key) for key in ("source_id", "lesson_id", "topic_id", "format"))
+        if (source_id not in snapshot["files"] or any(
+                not isinstance(value, str) or not value.strip()
+                for value in (lesson_id, topic_id, format_name))):
+            raise InventoryError("invalid_lesson_link")
+        key = (source_id, lesson_id, format_name)
+        if key in seen:
+            raise InventoryError("duplicate_lesson_link")
+        seen.add(key)
+        lesson = lessons.setdefault(lesson_id, {"topic_id": topic_id, "sources": []})
+        if lesson["topic_id"] != topic_id:
+            raise InventoryError("conflicting_lesson_topic")
+        lesson["sources"].append({"source_id": source_id, "format": format_name})
+    return lessons
