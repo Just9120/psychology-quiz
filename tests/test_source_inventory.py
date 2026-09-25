@@ -1,6 +1,6 @@
 import pytest
 
-from app.source_inventory import InventoryError, link_lessons, processing_status, reconcile, scan
+from app.source_inventory import InventoryError, complete_listing, link_lessons, processing_status, reconcile, scan
 
 
 def item(file_id, parent, *, title="Lesson", changed="2026-09-25T00:00:00Z"):
@@ -21,6 +21,22 @@ def test_recursive_snapshot_requires_complete_children_and_detects_changes():
         item("second", child, changed="2026-09-26T00:00:00Z"), item("third", child)]}}
     assert reconcile(first, scan(root, later)) == {
         "new": ["third"], "changed": ["second"], "unchanged": ["first"], "missing": []}
+
+
+def test_page_chain_must_finish_before_recursive_inventory():
+    pages = [
+        {"page_token": None, "next_page_token": "cursor-2", "children": [item("first", "root")]},
+        {"page_token": "cursor-2", "next_page_token": None, "children": [item("second", "root")]},
+    ]
+    assert len(scan("root", {"root": complete_listing(pages)})["files"]) == 2
+    with pytest.raises(InventoryError, match="incomplete_folder_listing"):
+        complete_listing(pages[:1])
+    with pytest.raises(InventoryError, match="invalid_page_chain"):
+        complete_listing([pages[0], {**pages[1], "page_token": "stale"}])
+    with pytest.raises(InventoryError, match="invalid_page_chain"):
+        complete_listing([*pages, pages[1]])
+    with pytest.raises(InventoryError, match="duplicate_page_child"):
+        complete_listing([pages[0], {**pages[1], "children": [item("first", "root")]}])
 
 
 def test_missing_is_not_deletion_and_conflicting_metadata_fails_closed():

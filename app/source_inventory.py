@@ -13,6 +13,37 @@ class InventoryError(ValueError):
     pass
 
 
+def complete_listing(pages: list[dict]) -> dict:
+    """Join one folder's direct-child pages only when the token chain ends.
+
+    A truncated page sequence must never be interpreted as a complete folder.
+    Page tokens are connector cursors, not content identities or revisions.
+    """
+    if not isinstance(pages, list) or not pages:
+        raise InventoryError("incomplete_folder_listing")
+    expected, children, tokens, child_ids = None, [], set(), set()
+    for index, page in enumerate(pages):
+        if (not isinstance(page, dict) or page.get("page_token") != expected
+                or not isinstance(page.get("children"), list)):
+            raise InventoryError("invalid_page_chain")
+        for child in page["children"]:
+            child_id = child.get("id") if isinstance(child, dict) else None
+            if child_id in child_ids:
+                raise InventoryError("duplicate_page_child")
+            child_ids.add(child_id)
+            children.append(child)
+        token = page.get("next_page_token")
+        if token is None:
+            if index != len(pages) - 1:
+                raise InventoryError("invalid_page_chain")
+            return {"complete": True, "children": children}
+        if not isinstance(token, str) or not token or token in tokens:
+            raise InventoryError("invalid_page_chain")
+        tokens.add(token)
+        expected = token
+    raise InventoryError("incomplete_folder_listing")
+
+
 def _revision(item: dict) -> tuple[str, str, str]:
     return item["modified_time"], item["title"], item["mime_type"]
 
