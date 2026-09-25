@@ -149,6 +149,10 @@ def test_transaction_failure_rolls_back_answer(bank, session):
 
 def test_topic_and_all_reset_preserve_foreign_glossary_and_rollback(bank, session, monkeypatch):
     monkeypatch.setattr(glossary, 'GLOSSARY_TOPICS', [('fixture_topic', 'Fixture'), ('second_topic', 'Second')])
+    entries = [make_glossary_entry(str(i), f'Meaning {i}', topic_id='second_topic') for i in range(5)]
+    original = glossary.load_glossary_entries
+    monkeypatch.setattr(glossary, 'load_glossary_entries',
+                        lambda topic_id: entries if topic_id == 'second_topic' else original(topic_id))
     with closing(get_connection(str(bank))) as conn, conn:
         other = create_or_load_user(conn, 43, None, None, None)['id']
     foreign = call(bank, glossary.start, 'fixture_topic', 5, actor=other)
@@ -169,6 +173,66 @@ def test_topic_and_all_reset_preserve_foreign_glossary_and_rollback(bank, sessio
     assert call(bank, glossary.state, actor=other) == foreign
     with closing(get_connection(str(bank))) as conn:
         assert conn.execute('SELECT private_note FROM user_literature_progress').fetchone()[0] == 'Private note'
+
+
+def test_mixed_glossary_reset_erases_only_selected_topic_and_rejects_stale_attempt(bank, monkeypatch):
+    monkeypatch.setattr(glossary, 'GLOSSARY_TOPICS', [('fixture_topic', 'Fixture'), ('second_topic', 'Second')])
+    entries = {topic: [make_glossary_entry(f'{topic}-{i}', f'Meaning {topic}-{i}', topic_id=topic)
+                       for i in range(5)] for topic in ('fixture_topic', 'second_topic')}
+    monkeypatch.setattr(glossary, 'load_glossary_entries', entries.get)
+    started = call(bank, glossary.start, ['fixture_topic', 'second_topic'], 'all')
+    assert started['topic_ids'] == ['fixture_topic', 'second_topic']
+    sid = started['session_id']
+    question = started['current_question']
+    for step in range(1, 11):
+        assert question['topic_title'] in ('Fixture', 'Second')
+        call(bank, glossary.answer, sid, correct_index(question), step)
+        advanced = call(bank, glossary.advance, sid, step)
+        question = advanced.get('current_question')
+    assert advanced['result'] == {'score': 10, 'total_questions': 10}
+    preview = call(bank, learning_reset.preview, {'scope': 'topic', 'topic': 'Fixture'})
+    assert preview['glossary_answers'] == 5 and preview['glossary_attempts'] == 1
+    call(bank, learning_reset.confirm, reset_payload(preview))
+    with closing(get_connection(str(bank))) as conn:
+        row = conn.execute('SELECT snapshot,state,status FROM glossary_sessions WHERE id=?', (sid,)).fetchone()
+        snapshot, saved = json.loads(row['snapshot']), json.loads(row['state'])
+        assert row['status'] == 'abandoned' and saved['score'] == 5
+        assert {snapshot['questions'][int(step)-1]['entry']['topic_id'] for step in saved['answers']} == {'second_topic'}
+    with pytest.raises(glossary.GlossaryError):
+        call(bank, glossary.restart, sid)
+    remaining = call(bank, learning_reset.preview, {'scope': 'topic', 'topic': 'Second'})
+    assert remaining['glossary_answers'] == 5
+    call(bank, learning_reset.confirm, reset_payload(remaining))
+    with closing(get_connection(str(bank))) as conn:
+        assert conn.execute('SELECT count(*) FROM glossary_sessions WHERE id=?', (sid,)).fetchone()[0] == 0
+
+
+@pytest.mark.parametrize('selection', [[], ['fixture_topic', 'fixture_topic'], ['unknown'], [True]])
+def test_mixed_glossary_rejects_invalid_topic_selection(bank, monkeypatch, selection):
+    monkeypatch.setattr(glossary, 'GLOSSARY_TOPICS', [('fixture_topic', 'Fixture')])
+    with pytest.raises(glossary.GlossaryError, match='invalid_glossary_setup'):
+        call(bank, glossary.start, selection, 5)
+
+
+def test_miniapp_mixed_glossary_setup_requires_verified_actor(bank, monkeypatch):
+    monkeypatch.setattr(glossary, 'GLOSSARY_TOPICS', [('fixture_topic', 'Fixture'), ('second_topic', 'Second')])
+    entries = {topic: [make_glossary_entry(f'{topic}-{i}', f'Meaning {topic}-{i}', topic_id=topic)
+                       for i in range(5)] for topic in ('fixture_topic', 'second_topic')}
+    monkeypatch.setattr(glossary, 'load_glossary_entries', entries.get)
+    client = TestClient(create_app(db_path=str(bank), bot_token='123:synthetic'))
+    payload = {'topic_id': ['fixture_topic', 'second_topic'], 'question_count': 5,
+               'expected_session_id': None, 'replace_active': False}
+    assert client.post('/miniapp/glossary/start', json=payload).status_code == 401
+    headers = {'Authorization': 'tma ' + _make_init_data('123:synthetic', {'id': 42})}
+    started = client.post('/miniapp/glossary/start', headers=headers, json=payload)
+    assert started.status_code == 200
+    saved = started.json()['glossary_state']
+    assert saved['topic_ids'] == payload['topic_id']
+    assert saved['current_question']['topic_title'] in ('Fixture', 'Second')
+    with closing(get_connection(str(bank))) as conn:
+        snapshot = json.loads(conn.execute('SELECT snapshot FROM glossary_sessions WHERE id=?',
+            (saved['session_id'],)).fetchone()[0])
+        assert {item['entry']['topic_id'] for item in snapshot['questions']} == set(payload['topic_id'])
 
 
 @pytest.mark.parametrize('dedicated', [False, True])

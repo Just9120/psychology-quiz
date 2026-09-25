@@ -44,13 +44,17 @@ def _load(conn, actor, sid, *, allow_abandoned=False):
 
 def _question(row, snapshot, step):
     item = snapshot['questions'][step - 1]
-    return {'session_id': row['id'], 'step_id': step, 'topic_id': row['topic_id'], 'topic_title': row['topic_title'],
+    topic_id = item['entry']['topic_id']
+    return {'session_id': row['id'], 'step_id': step, 'topic_id': topic_id,
+            'topic_title': snapshot.get('topic_titles', {}).get(topic_id, row['topic_title']),
             'order_index': step, 'total_questions': len(snapshot['questions']), 'term': item['entry']['term'],
             'options': [{'option_index': index, 'option_text': text} for index, text in enumerate(item['options'])]}
 
 
 def _public(row, snapshot, state):
     common = {'session_id': row['id'], 'topic_id': row['topic_id'], 'topic_title': row['topic_title']}
+    if snapshot.get('topics'):
+        common['topic_ids'] = snapshot['topics']
     if row['status'] == 'completed':
         return {**common, 'state': 'completed', 'result': {'score': state['score'], 'total_questions': len(snapshot['questions'])}}
     step = state['step']
@@ -78,7 +82,12 @@ def _save(conn, row, value, status=None):
 
 def start(conn, actor, topic_id, count, *, expected_session_id=None, replace_active=False,
           selected_entry_ids=None):
-    if not isinstance(topic_id, str) or topic_id not in dict(GLOSSARY_TOPICS):
+    known = dict(GLOSSARY_TOPICS)
+    topic_ids = [topic_id] if isinstance(topic_id, str) else topic_id
+    if (not isinstance(topic_ids, list) or not 1 <= len(topic_ids) <= len(known)
+            or any(not isinstance(item, str) or item not in known for item in topic_ids)
+            or len(set(topic_ids)) != len(topic_ids)
+            or (selected_entry_ids is not None and len(topic_ids) != 1)):
         raise GlossaryError('invalid_glossary_setup', 400)
     if count not in (None, 'all') and (type(count) is not int or count not in (5, 10)):
         raise GlossaryError('invalid_glossary_setup', 400)
@@ -88,28 +97,40 @@ def start(conn, actor, topic_id, count, *, expected_session_id=None, replace_act
         raise GlossaryError('glossary_changed')
     if active and replace_active is not True:
         raise GlossaryError('active_glossary')
-    entries = load_glossary_entries(topic_id)
-    if not entries or len(entries) < 4:
+    by_topic = {item: load_glossary_entries(item) for item in topic_ids}
+    if any(not by_topic[item] or len(by_topic[item]) < 4 or
+           any(entry.topic_id != item for entry in by_topic[item]) for item in topic_ids):
         raise GlossaryError('glossary_unavailable')
+    entries = [entry for item in topic_ids for entry in (by_topic[item] or [])]
     if selected_entry_ids is None:
         limit = len(entries) if count in (None, 'all') else min(count, len(entries))
-        selected = random.sample(entries, limit)
+        if len(topic_ids) > 1 and limit < len(entries):
+            # A mixed attempt always shows more than one selected topic even
+            # when a small sample is drawn from a much larger corpus.
+            guaranteed = [random.choice(by_topic[item]) for item in random.sample(topic_ids, 2)]
+            selected = guaranteed + random.sample([entry for entry in entries if entry not in guaranteed], limit - 2)
+            random.shuffle(selected)
+        else:
+            selected = random.sample(entries, limit)
     else:
         requested = set(selected_entry_ids)
         selected = [entry for entry in entries if entry.id in requested]
         if not selected or len(selected) != len(requested):
             raise GlossaryError('glossary_changed')
         random.shuffle(selected)
-    questions = [build_glossary_quiz_question(entries, entry) for entry in selected]
+    questions = [build_glossary_quiz_question(by_topic[entry.topic_id], entry) for entry in selected]
     if any(item is None for item in questions):
         raise GlossaryError('glossary_unavailable')
-    snapshot = {'version': 1, 'questions': [asdict(item) for item in questions]}
+    snapshot = {'version': 2, 'topics': topic_ids, 'topic_titles': {item: known[item] for item in topic_ids},
+                'questions': [asdict(item) for item in questions]}
     value = {'version': 1, 'step': 1, 'score': 0, 'answers': {}, 'advances': {}, 'restarted': None}
     sid, now = secrets.token_urlsafe(16), _now()
     if active:
         conn.execute("UPDATE glossary_sessions SET status='abandoned',updated_at=? WHERE id=?", (now, active['id']))
+    stored_topic = topic_ids[0] if len(topic_ids) == 1 else '__mixed__'
+    stored_title = known[stored_topic] if len(topic_ids) == 1 else 'Несколько тем'
     conn.execute("INSERT INTO glossary_sessions VALUES(?,?,?,?,?,?,?,?,?)",
-                 (sid, actor, topic_id, dict(GLOSSARY_TOPICS)[topic_id], 'in_progress', _encode(snapshot), _encode(value), now, now))
+                 (sid, actor, stored_topic, stored_title, 'in_progress', _encode(snapshot), _encode(value), now, now))
     return state(conn, actor, sid)
 
 
@@ -177,7 +198,7 @@ def restart(conn, actor, sid):
     if active and active['id'] != sid:
         raise GlossaryError('glossary_changed')
     count = len(snapshot['questions'])
-    result = start(conn, actor, row['topic_id'], count if count in (5, 10) else 'all',
+    result = start(conn, actor, snapshot.get('topics', [row['topic_id']]), count if count in (5, 10) else 'all',
                    expected_session_id=active['id'] if active else None, replace_active=True)
     value['restarted'] = result['session_id']
     _save(conn, row, value, 'completed' if row['status'] == 'completed' else 'abandoned')

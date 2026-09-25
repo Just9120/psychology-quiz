@@ -284,7 +284,7 @@ def build_glossary_start_response(db_path: str, bot_token: str, init_data: str, 
         count = _normalize_glossary_question_count(payload.get("question_count"))
     except ValueError:
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
-    if not isinstance(topic_id, str):
+    if not isinstance(topic_id, (str, list)):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_setup"})
     state = start_glossary_session(verified.telegram_user_id, topic_id, count, db_path=db_path,
         expected_session_id=payload.get("expected_session_id"), replace_active=payload.get("replace_active"))

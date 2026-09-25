@@ -119,7 +119,7 @@ export interface GlossaryFeedback {
 }
 export interface GlossaryState {
   state: 'idle' | 'in_progress' | 'feedback' | 'completed'
-  session_id?: string; topic_id?: string; topic_title?: string
+  session_id?: string; topic_id?: string; topic_title?: string; topic_ids?: string[]
   current_question?: GlossaryQuestion; feedback?: GlossaryFeedback
   result?: { score: number; total_questions: number }
 }

@@ -55,7 +55,7 @@ export const miniApi = {
     const result = await miniRequest<{ ok: true; glossary_state: GlossaryState }>('answer', { mode: 'glossary', action: 'state' })
     return { ok: true as const, glossary_state: result.glossary_state }
   },
-  glossaryStart: (topic_id: string, question_count: number | 'all', expected_session_id: string | null, replace_active: boolean) =>
+  glossaryStart: (topic_id: string | string[], question_count: number | 'all', expected_session_id: string | null, replace_active: boolean) =>
     miniRequest<{ ok: true; glossary_state: GlossaryState }>('glossary/start', { topic_id, question_count, expected_session_id, replace_active }),
   glossaryAnswer: (session_id: string, step_id: number, selected_option_index: number) =>
     miniRequest<{ ok: true; glossary_state: GlossaryState }>('glossary/answer', { session_id, step_id, selected_option_index }),
