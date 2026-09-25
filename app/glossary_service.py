@@ -125,7 +125,7 @@ def answer(conn, actor, sid, selected, step):
                 'correct_option_text': question['options'][correct], 'explanation': question['entry']['definition'],
                 'answered_count': step, 'total_questions': len(snapshot['questions']), 'has_next': step < len(snapshot['questions'])}
     result = {'state': 'feedback', 'feedback': feedback}
-    value['answers'][str(step)] = {'selected': selected, 'response': result}
+    value['answers'][str(step)] = {'selected': selected, 'response': result, 'answered_at': _now()}
     value['score'] += int(selected == correct)
     _save(conn, row, value)
     return result

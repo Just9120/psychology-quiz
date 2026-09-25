@@ -26,8 +26,9 @@ def test_progress_api_shared_telegram_history_and_guards(web):
     assert overview.status_code == 200 and overview.json()['summary']['answered'] == 1
     mastery = web.client.get('/web/progress/mastery')
     assert mastery.status_code == 200
-    assert mastery.json()['assessed_count'] == 1
-    assert mastery.json()['items'][0]['status'] == 'insufficient_data'
+    assert mastery.json()['questions']['assessed_count'] == 1
+    assert mastery.json()['questions']['items'][0]['status'] == 'insufficient_data'
+    assert mastery.json()['terms']['assessed_count'] == 0
     assert mastery.headers['cache-control'] == 'no-store'
     assert overview.headers['cache-control'] == 'no-store'
     assert post(web, 'progress/history').status_code == 403

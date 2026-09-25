@@ -4,7 +4,7 @@ import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
 from app import glossary_service, learning_reset, progress_service, literature_service
-from app.mastery import quiz_states
+from app.mastery import overview as mastery_overview
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -93,7 +93,7 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
                 if action == "progress/overview":
                     return progress_service.overview(conn, actor), None
                 if action == "progress/mastery":
-                    return quiz_states(conn, actor), None
+                    return mastery_overview(conn, actor), None
                 if action == "progress/history":
                     return progress_service.history(conn, actor, payload.get("before"), payload.get("scope")), None
                 if action == "progress/attempt":
