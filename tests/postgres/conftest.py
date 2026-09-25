@@ -17,6 +17,15 @@ from tests.test_attempt_content import bank as sqlite_bank, TOKEN
 from tests.test_web_auth import Mailbox, SETTINGS, ORIGIN
 
 
+def remove_learning_schema(conn):
+    """Build an actual v1/v2 SQLite source for upgrade/recovery tests."""
+    for table in ("user_review_events", "user_achievements", "user_learning_goals"):
+        conn.execute(f"DROP TABLE {table}")
+    conn.execute("ALTER TABLE questions DROP COLUMN case_content")
+    conn.execute("ALTER TABLE questions DROP COLUMN kind")
+    conn.execute("DELETE FROM schema_migrations WHERE version='learning-v1'")
+
+
 @pytest.fixture
 def pg_target():
     target = os.environ.get("POSTGRES_TEST_DSN")

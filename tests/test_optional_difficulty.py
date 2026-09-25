@@ -9,6 +9,8 @@ from unittest.mock import AsyncMock
 import pytest
 
 from app import classic_quiz_handlers as classic, main
+from app.identity_schema import migrate_identity_schema
+from app.learning_schema import migrate_learning_schema
 
 
 SCOPES = [
@@ -23,6 +25,8 @@ def quiz(tmp_path, monkeypatch):
     path = tmp_path / "quiz.sqlite3"
     with closing(sqlite3.connect(path)) as conn, conn:
         conn.executescript(Path("sql/schema.sql").read_text(encoding="utf-8"))
+        migrate_identity_schema(conn)
+        migrate_learning_schema(conn)
         for category in (1, 2):
             conn.execute("INSERT INTO categories(id,slug,name) VALUES(?,?,?)", (category, f"c{category}", f"Category {category}"))
             for mode in ("easy", "medium", "hard"):

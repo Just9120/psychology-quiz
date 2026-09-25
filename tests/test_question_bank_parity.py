@@ -7,6 +7,8 @@ from pathlib import Path
 import pytest
 
 from app.db import upsert_approved_questions
+from app.learning_schema import migrate_learning_schema
+from app.identity_schema import migrate_identity_schema
 from scripts import audit_question_bank
 from scripts.audit_question_bank import build_report, load_canonical, load_canonical_inventory
 from scripts.deployment_db import check_content_parity
@@ -33,6 +35,8 @@ def _init_seeded_db(tmp_path: Path) -> Path:
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = sqlite3.Row
         conn.executescript((REPO_ROOT / "sql" / "schema.sql").read_text(encoding="utf-8"))
+        migrate_identity_schema(conn)
+        migrate_learning_schema(conn)
         upsert_approved_questions(conn, [_question_payload(row) for row in load_canonical()[0]])
     return db_path
 

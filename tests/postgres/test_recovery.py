@@ -17,6 +17,7 @@ from app.postgres_recovery import manifest, verify_user_state
 from scripts.postgres_backup import backup_and_rehearse, read_verified_record
 from scripts.postgres_test_support import test_target as validate_test_target
 from tests.test_attempt_content import make_attempt
+from tests.postgres.conftest import remove_learning_schema
 
 
 class NativeRuntime:
@@ -97,6 +98,7 @@ def native_runtime(source, request):
             conn.execute("INSERT INTO web_accounts(email,password_hash,user_id,verified_at,created_at) VALUES('test@example.invalid','synthetic-hash',1,1,1)")
             conn.execute("INSERT INTO web_sessions VALUES('session',1,1,9999999999,1)")
             conn.execute("INSERT INTO web_mail_tokens VALUES('mail','test@example.invalid','recover',1,9999999999)")
+            remove_learning_schema(conn)
             if request.param == 'postgres-v1':
                 conn.execute('DROP TABLE glossary_sessions')
                 conn.execute("DELETE FROM schema_migrations WHERE version='glossary-v1'")

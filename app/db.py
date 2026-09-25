@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import json
 from typing import Any
 
 from app.attempt_content import capture_question, ensure_attempt_snapshots, get_attempt_content
+from app.case_content import case_error
 from app.database import Connection, Row, begin_write, connect_database, is_postgres, timestamp_sql
 
 
@@ -210,6 +212,9 @@ def upsert_approved_questions(
     inserted_or_updated = 0
 
     for item in approved:
+        invalid_case = case_error(item)
+        if invalid_case:
+            raise ValueError(invalid_case)
         category_name = str(item["category"]).strip()
         category_id = category_ids.get(category_name)
         if not category_id:
@@ -220,13 +225,16 @@ def upsert_approved_questions(
         difficulty = str(item.get("difficulty", "easy")).strip() or "easy"
         question_text = str(item["question"]).strip()
         explanation = item.get("explanation")
+        kind = item.get("kind", "theory")
+        case_content = (json.dumps(item["case"], ensure_ascii=False, sort_keys=True,
+                                   separators=(",", ":")) if kind == "case" else None)
 
         conn.execute(
             f"""
             INSERT INTO questions (
-                external_id, category_id, source_ref, difficulty, status, question_text, explanation
+                external_id, category_id, source_ref, difficulty, status, question_text, explanation, kind, case_content
             )
-            VALUES (?, ?, ?, ?, 'approved', ?, ?)
+            VALUES (?, ?, ?, ?, 'approved', ?, ?, ?, ?)
             ON CONFLICT(external_id) DO UPDATE SET
                 category_id = excluded.category_id,
                 source_ref = excluded.source_ref,
@@ -234,9 +242,11 @@ def upsert_approved_questions(
                 status = excluded.status,
                 question_text = excluded.question_text,
                 explanation = excluded.explanation,
+                kind = excluded.kind,
+                case_content = excluded.case_content,
                 updated_at = {timestamp_sql(conn)}
             """,
-            (external_id, category_id, source_ref, difficulty, question_text, explanation),
+            (external_id, category_id, source_ref, difficulty, question_text, explanation, kind, case_content),
         )
 
         question_row = conn.execute(

@@ -15,7 +15,7 @@ RESTORE_NAME = re.compile(r"psychology_restore_[0-9a-f]{32}")
 USER_TABLES = (
     "users", "quiz_sessions", "quiz_session_selected_categories",
     "quiz_session_questions", "quiz_answers", "user_literature_progress",
-    "glossary_sessions",
+    "glossary_sessions", "user_learning_goals", "user_achievements", "user_review_events",
 )
 
 
@@ -43,9 +43,9 @@ def verify_user_state(before: dict, after: dict) -> None:
     if before.get("format") != "psychology-postgres-backup-v1" or after.get("format") != before["format"]:
         raise ValueError("Unknown PostgreSQL preservation manifest")
     for table in USER_TABLES + AUTH_TABLES:
-        if table == "glossary_sessions" and table not in before["columns"]:
+        if table in {"glossary_sessions", "user_learning_goals", "user_achievements", "user_review_events"} and table not in before["columns"]:
             if table in after["tables"] and after["tables"][table]["rows"] != 0:
-                raise ValueError("New glossary table must be empty during migration")
+                raise ValueError("New user-state table must be empty during migration")
             continue
         if before["columns"][table] != after["columns"][table] or before["tables"][table] != after["tables"][table]:
             raise ValueError("PostgreSQL migration changed pre-existing user state")

@@ -16,6 +16,7 @@ from unittest.mock import patch
 from app.db import create_or_load_user, get_connection, init_db_connection, start_quiz_session, store_session_questions
 from app.identity_schema import migrate_identity_schema
 from app.glossary_schema import migrate_glossary_schema
+from app.learning_schema import migrate_learning_schema
 from app.miniapp_api import (
     MiniAppApiHandler,
     build_setup_options_response,
@@ -33,6 +34,7 @@ def _setup_schema(conn):
         conn.executescript(f.read())
     migrate_identity_schema(conn)
     migrate_glossary_schema(conn)
+    migrate_learning_schema(conn)
     conn.commit()
 
 

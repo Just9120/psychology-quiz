@@ -7,10 +7,12 @@ from app.db import get_connection
 from app.postgres_import import import_snapshot
 from app.postgres_recovery import manifest, verify_user_state
 from app.postgres_schema import initialize_schema, upgrade_schema, verify_schema
+from tests.postgres.conftest import remove_learning_schema
 
 
 def test_versioned_upgrade_preserves_legacy_data_and_is_idempotent(source, pg_target):
     with closing(get_connection(str(source))) as conn, conn:
+        remove_learning_schema(conn)
         conn.execute("DROP TABLE glossary_sessions")
         conn.execute("DELETE FROM schema_migrations WHERE version='glossary-v1'")
     import_snapshot(source, pg_target)
@@ -24,7 +26,7 @@ def test_versioned_upgrade_preserves_legacy_data_and_is_idempotent(source, pg_ta
         verify_user_state(before, after)
         assert after['tables']['glossary_sessions']['rows'] == 0
         assert after['sequences'] == before['sequences']
-        assert verify_schema(conn) == 'postgres-v2'
+        assert verify_schema(conn) == 'postgres-v3'
         upgrade_schema(conn)
         assert manifest(conn) == after
         conn.execute("INSERT INTO glossary_sessions VALUES('session',1,'topic','Title','in_progress','{}','{}','now','now')")
@@ -54,6 +56,21 @@ def test_upgrade_failure_is_atomic_and_rejects_drift(pg_target, monkeypatch):
         with pytest.raises(ValueError, match='drift'):
             upgrade_schema(conn)
         assert conn.execute("SELECT to_regclass('glossary_sessions')").fetchone()[0] is None
+
+
+def test_v2_learning_upgrade_preserves_user_rows_and_is_idempotent(pg_target):
+    with closing(get_connection(pg_target)) as conn, conn:
+        initialize_schema(conn, version='postgres-v2')
+        conn.execute("INSERT INTO users(first_name) VALUES('legacy learner')")
+        before = manifest(conn)
+        upgrade_schema(conn)
+        after = manifest(conn)
+        verify_user_state(before, after)
+        assert verify_schema(conn) == 'postgres-v3'
+        assert conn.execute("SELECT count(*) FROM user_learning_goals").fetchone()[0] == 0
+        assert conn.execute("SELECT first_name FROM users").fetchone()[0] == 'legacy learner'
+        upgrade_schema(conn)
+        assert manifest(conn) == after
 
 
 def test_existing_glossary_data_is_part_of_preservation_contract(bank):

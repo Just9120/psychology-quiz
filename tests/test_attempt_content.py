@@ -9,6 +9,7 @@ import pytest
 from app.attempt_content import ensure_attempt_snapshots, get_attempt_content
 from app.identity_schema import migrate_identity_schema
 from app.glossary_schema import migrate_glossary_schema
+from app.learning_schema import migrate_learning_schema
 from app.classic_quiz_handlers import _handle_classic_text_answer_db
 from app.db import (
     create_or_load_user, finalize_quiz_session, get_active_categories, get_connection,
@@ -48,6 +49,7 @@ def bank(tmp_path):
         conn.executescript(Path("sql/schema.sql").read_text(encoding="utf-8"))
         migrate_identity_schema(conn)
         migrate_glossary_schema(conn)
+        migrate_learning_schema(conn)
         upsert_approved_questions(conn, [OLD, OTHER], authoritative=True)
         create_or_load_user(conn, 42, None, "Original user", None)
         conn.execute("INSERT INTO user_literature_progress (user_id,literature_id,reading_status,updated_at,private_note) VALUES (1,'lit','read','today','Private note')")
