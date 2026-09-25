@@ -1,0 +1,2150 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-21",
+  "method": "D-17: exact captured editions; topics from reviewed primary lectures/practices. Partial support and glossary-only evidence remain without a lecture assignment. This mapping does not certify all content.",
+  "disciplines": {
+    "vvedenie_v_professiyu": {
+      "title": "Введение в профессию"
+    },
+    "obschaya_psihologiya": {
+      "title": "Общая психология"
+    },
+    "fiziologiya_cheloveka": {
+      "title": "Физиология человека"
+    },
+    "fiziologiya_vnd": {
+      "title": "Физиология ВНД"
+    },
+    "psihofiziologiya": {
+      "title": "Психофизиология"
+    },
+    "osnovy_eksperimentalnoy_psihologii": {
+      "title": "Основы экспериментальной психологии"
+    },
+    "kachestvennye_metody_issledovaniya": {
+      "title": "Качественные методы исследования"
+    },
+    "psychological_consulting": {
+      "title": "Психологическое консультирование"
+    }
+  },
+  "topics": {
+    "t_760b622ba9f6": {
+      "title": "Тема 1. Кто такой психолог-консультант",
+      "discipline_id": "vvedenie_v_professiyu",
+      "source": {
+        "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
+        "modified_time": "2026-04-05T22:24:03.847Z",
+        "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1"
+      }
+    },
+    "t_6f07f36a8251": {
+      "title": "Тема 4. Основы психологической помощи границы, роли и ответственность",
+      "discipline_id": "vvedenie_v_professiyu",
+      "source": {
+        "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
+        "modified_time": "2026-04-05T22:48:11.869Z",
+        "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756"
+      }
+    },
+    "t_c17d1ae57018": {
+      "title": "Тема 2. Кто я в профессии личность консультанта",
+      "discipline_id": "vvedenie_v_professiyu",
+      "source": {
+        "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
+        "modified_time": "2026-04-05T22:13:17.690Z",
+        "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017"
+      }
+    },
+    "t_5f1cca01d535": {
+      "title": "Тема 3. Навыки, которые развивает психолог-консультант",
+      "discipline_id": "vvedenie_v_professiyu",
+      "source": {
+        "source_id": "14lnAmWm0bN-XHtiDAg4_qFQ5-cka4HUZ6K3kxKWSGUc",
+        "modified_time": "2026-04-05T22:23:50.149Z",
+        "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0"
+      }
+    },
+    "t_ab1e7408a209": {
+      "title": "Тема 5. Как проходит психологическая консультация этапы и структура",
+      "discipline_id": "vvedenie_v_professiyu",
+      "source": {
+        "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
+        "modified_time": "2026-04-05T22:50:22.529Z",
+        "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae"
+      }
+    },
+    "t_bc927cd2edda": {
+      "title": "Тема 6. Введение в клиентский запрос и типы клиентов",
+      "discipline_id": "vvedenie_v_professiyu",
+      "source": {
+        "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
+        "modified_time": "2026-04-05T22:53:25.427Z",
+        "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87"
+      }
+    },
+    "t_a6c516bbe92a": {
+      "title": "Лекция 1. Психология как Наука",
+      "discipline_id": "obschaya_psihologiya",
+      "source": {
+        "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
+        "modified_time": "2026-03-20T13:55:22.021Z",
+        "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58"
+      }
+    },
+    "t_8416412afc7d": {
+      "title": "Лекция 2. Психические процессы",
+      "discipline_id": "obschaya_psihologiya",
+      "source": {
+        "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
+        "modified_time": "2026-03-20T14:49:22.978Z",
+        "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca"
+      }
+    },
+    "t_4451554cf717": {
+      "title": "Практика №1",
+      "discipline_id": "obschaya_psihologiya",
+      "source": {
+        "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
+        "modified_time": "2026-04-08T10:01:12.380Z",
+        "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24"
+      }
+    },
+    "t_2476fabb75f8": {
+      "title": "Лекция 1. Нервная система",
+      "discipline_id": "fiziologiya_cheloveka",
+      "source": {
+        "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
+        "modified_time": "2026-04-06T14:46:17.530Z",
+        "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd"
+      }
+    },
+    "t_32c45a18e1bf": {
+      "title": "Лекция 3. Имунная система",
+      "discipline_id": "fiziologiya_cheloveka",
+      "source": {
+        "source_id": "1EMJFu79Uh7iBGWbHD3tT6uzbK8K8noOPyqGqaKiaQao",
+        "modified_time": "2026-04-06T14:48:45.485Z",
+        "snapshot_sha256": "dba8cc929d3e30e7393ccd09904fc8401315ac8a6a671b076b0690853872271a"
+      }
+    },
+    "t_e8545fea4531": {
+      "title": "Лекция 4. Кровеносная система",
+      "discipline_id": "fiziologiya_cheloveka",
+      "source": {
+        "source_id": "1PJ26qFrCsejtxljlXhcOZS6iyQAEJ1vvaVL2wcLARao",
+        "modified_time": "2026-04-06T14:49:49.208Z",
+        "snapshot_sha256": "0d32a19d40d64b597fc7358576de26ff8ffc1aaea9c0785727bcd3d4175c49ee"
+      }
+    },
+    "t_c8fdaba2064a": {
+      "title": "Лекция 6. Дыхательная система",
+      "discipline_id": "fiziologiya_cheloveka",
+      "source": {
+        "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
+        "modified_time": "2026-04-06T14:52:00.573Z",
+        "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002"
+      }
+    },
+    "t_3ec476ff48e7": {
+      "title": "Лекция 7. Пищеварительная система",
+      "discipline_id": "fiziologiya_cheloveka",
+      "source": {
+        "source_id": "1Y4ll-SXmAKMsZvBw8m7keLukQ9I5vK_85h3JebMe8Lk",
+        "modified_time": "2026-04-06T14:53:23.072Z",
+        "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39"
+      }
+    },
+    "t_033b84e9a10e": {
+      "title": "Лекция 2. Эндокринная система",
+      "discipline_id": "fiziologiya_cheloveka",
+      "source": {
+        "source_id": "1rkvQhtvLygM2ZsmsM7xN6rQPCI1GGh3mn2R6P1CUrmw",
+        "modified_time": "2026-04-06T14:47:58.092Z",
+        "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6"
+      }
+    },
+    "t_e9dd359706e6": {
+      "title": "Лекция 1. Основные понятия физиологии ВНД",
+      "discipline_id": "fiziologiya_vnd",
+      "source": {
+        "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+        "modified_time": "2026-04-07T09:56:48.714Z",
+        "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068"
+      }
+    },
+    "t_17a20a4fb08e": {
+      "title": "Лекция 4. Эмоции, принятие решений, воля",
+      "discipline_id": "fiziologiya_vnd",
+      "source": {
+        "source_id": "1SqvFpDhIdbcZ3UjZNr4s0pGxBQSVHAOAn4UiYG8JQHo",
+        "modified_time": "2026-04-07T09:58:03.450Z",
+        "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91"
+      }
+    },
+    "t_1db07b61e05b": {
+      "title": "Лекция 3. Нейромедиаторы бодрствования и мотивации",
+      "discipline_id": "psihofiziologiya",
+      "source": {
+        "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
+        "modified_time": "2026-04-16T15:32:40.272Z",
+        "snapshot_sha256": "7ab85f051a13bfe77a5a1bee02e7d634fe899fa2557f288b43e7d8378d6989cf"
+      }
+    },
+    "t_a5bd6646dc05": {
+      "title": "Лекция 10. Фильтрация информации и теории внимания",
+      "discipline_id": "psihofiziologiya",
+      "source": {
+        "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
+        "modified_time": "2026-04-20T15:33:01.800Z",
+        "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e"
+      }
+    },
+    "t_43f9e7d785af": {
+      "title": "Лекция 11. Восприятие и нейросети внимания",
+      "discipline_id": "psihofiziologiya",
+      "source": {
+        "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
+        "modified_time": "2026-04-20T15:34:30.028Z",
+        "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3"
+      }
+    },
+    "t_6f9edd8074a3": {
+      "title": "Лекция 9. Свойства внимания",
+      "discipline_id": "psihofiziologiya",
+      "source": {
+        "source_id": "1znCyGf9RhkhkbsCKGmWQHGhcliY9kfekglchDlWp9As",
+        "modified_time": "2026-04-20T15:42:20.698Z",
+        "snapshot_sha256": "69d87f72192866c1929553a8c26711b6e992c3254e4870ea8c068ab51b16fb37"
+      }
+    },
+    "t_7a8e0286a42d": {
+      "title": "Предмет и метод психологии",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "source": {
+        "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+        "modified_time": "2026-04-22T20:21:51.036Z",
+        "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847"
+      }
+    },
+    "t_219d66e8496a": {
+      "title": "Экспериментальные планы исследований",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "source": {
+        "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
+        "modified_time": "2026-04-22T20:23:09.227Z",
+        "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f"
+      }
+    },
+    "t_517448740f11": {
+      "title": "Практика №8",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "source": {
+        "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
+        "modified_time": "2026-04-22T20:18:51.271Z",
+        "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170"
+      }
+    },
+    "t_177f292cc47a": {
+      "title": "Практика №7",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "source": {
+        "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
+        "modified_time": "2026-04-22T20:12:28.380Z",
+        "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be"
+      }
+    },
+    "t_a4cdbc5015b0": {
+      "title": "Практика №9",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "source": {
+        "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
+        "modified_time": "2026-05-14T11:25:02.862Z",
+        "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c"
+      }
+    },
+    "t_3bb3423d5435": {
+      "title": "Качественные методы 1",
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "source": {
+        "source_id": "19N0i2gCoy7Y9LkimwPA-C2x1m6gSpHXo",
+        "modified_time": "2026-05-16T13:55:50.170Z",
+        "snapshot_sha256": "30addfabe7c84fc06293a61eed0d7570217eea53d8ffb852111a9e2794f02574"
+      }
+    },
+    "t_03a33ddcf539": {
+      "title": "Практика №11",
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "source": {
+        "source_id": "1-2cpVVR8XqRC5VfhSKAb3DUgsFkRHlfWrnIX9DGeqvw",
+        "modified_time": "2026-05-14T11:45:40.351Z",
+        "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e"
+      }
+    },
+    "t_6be3cecd6596": {
+      "title": "Практика №12",
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "source": {
+        "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
+        "modified_time": "2026-05-16T14:38:37.594Z",
+        "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2"
+      }
+    },
+    "t_059cbac41979": {
+      "title": "Качественные методы исследования 2",
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "source": {
+        "source_id": "1JcLSq8ZJ7DeuKJ9HPaHLhGugpjuLDXTv",
+        "modified_time": "2026-05-16T13:58:40.660Z",
+        "snapshot_sha256": "69bc1f37acb05e20f4f558c96bd71f9c9106d4d909caadb84eea5df815243ed1"
+      }
+    },
+    "t_09efb9aedb46": {
+      "title": "Урок 1. Введение в психологическое консультирование",
+      "discipline_id": "psychological_consulting",
+      "source": {
+        "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
+        "modified_time": "2026-06-07T20:48:25.702Z",
+        "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef"
+      }
+    },
+    "t_7246705017fc": {
+      "title": "Урок 2. Структура и процесс консультирования. Навыки первичной консультации",
+      "discipline_id": "psychological_consulting",
+      "source": {
+        "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
+        "modified_time": "2026-06-07T20:50:34.245Z",
+        "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5"
+      }
+    },
+    "t_89b592be8732": {
+      "title": "Урок 3. Структура и процесс консультирования. Навыки первичной консультации",
+      "discipline_id": "psychological_consulting",
+      "source": {
+        "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
+        "modified_time": "2026-06-07T20:52:52.371Z",
+        "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9"
+      }
+    },
+    "t_84bd9f531980": {
+      "title": "Урок 4. Структура и процесс консультирования. Навыки первичной консультации",
+      "discipline_id": "psychological_consulting",
+      "source": {
+        "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
+        "modified_time": "2026-06-07T20:55:38.540Z",
+        "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2"
+      }
+    },
+    "t_34b2eed9d99a": {
+      "title": "Урок 5. Работа с проблемой и целями. Стратегии и методы консультирования",
+      "discipline_id": "psychological_consulting",
+      "source": {
+        "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
+        "modified_time": "2026-06-07T20:57:37.236Z",
+        "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1"
+      }
+    },
+    "t_944c292b1d23": {
+      "title": "Урок 6. Работа с проблемой и целями. Стратегии и методы консультирования",
+      "discipline_id": "psychological_consulting",
+      "source": {
+        "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
+        "modified_time": "2026-06-07T20:59:38.927Z",
+        "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4"
+      }
+    },
+    "t_350cf495eee7": {
+      "title": "Урок 7. Работа с проблемой и целями. Стратегии и методы консультирования",
+      "discipline_id": "psychological_consulting",
+      "source": {
+        "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
+        "modified_time": "2026-06-07T21:02:49.961Z",
+        "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266"
+      }
+    }
+  },
+  "editions": {
+    "5015d15268a59023e6851331b38cf752ae8b5487996e40dec1b70183990e7147": {
+      "external_id": "m1_intro_001",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "6560ff01e50d9e37986880805472a65e13cce08a43dd734a5e67be70cb378cdd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "8ce91eddd2fa53decb807361f5495092f242d8d1ee7a67c8eda4d9e7117188d4": {
+      "external_id": "m1_intro_002",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "e89d66e9feaa5bfd3515849c96ecc35fdbff20f37186b4d5f712ca0947d334b7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "41e29cc903b40a8ce91a647efc67bf91444f4be8bc675f2e7ab740e8340a0dba": {
+      "external_id": "m1_intro_003",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "f5135966fc5d95258e2ac25404490fbd2b0062ecec254d6b8f3ea0b7721d5507",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "27b9991c0e886952f31f81e4544b7eef2b86a648cbb658685171d91ccc0ce769": {
+      "external_id": "m1_intro_004",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "124a00ba849e7490b9309d56620472823f83173214f9c57db8f440c5089a2d43",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "3dd912cfc353051c1704ba72c51df084b8cf381c61b89cc0864a1671038e8c40": {
+      "external_id": "m1_intro_005",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "53607f771cbc65b585ae1d1ad8b4b58bcd0e898aafe93ef79ae81002bb67143f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "390029f964e69ee24accd20e7b2b2ff1cc435017a0bea706e25ef50de05e6800": {
+      "external_id": "m1_intro_006",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "8287188e0adeb862f9170d669a3709d99f7fefe64b5758ae798b40fefb0f3f9c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "103f531f744b663baccda24e661036a77b2104e8d52ae92b40be2b1c4a2211d2": {
+      "external_id": "m1_intro_007",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "9de16367564dbb81e8d3fc34b7364bbd587a3bcf026abc069511ab4e3e09caa2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+    },
+    "845a48ce629698b02e59e8155373fbd2a2d3d708b82e20f71ae4b09a2b6c961d": {
+      "external_id": "m1_intro_008",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "b33309810edabc7f2f431e89b92af50a65fe408016e92cd0c6c01ca5334d1c87",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "a55435f05c612ba5c415577a9dfc8a2c2b31b77cbb82659a458a918c72fef505": {
+      "external_id": "m1_intro_009",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "0469e2a9ed849ea4ed57815ea7f9cb311fd9f6a1b35eb6e0a6cf45a3e2201c59",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+    },
+    "229873b8a09e75e2ac38450f5316c05d42011dc098463a2f438054215914adaa": {
+      "external_id": "m1_intro_010",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "386631242ee744868200b5b1908ed57fdef31c59294ccf9016959b502aff0bf2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+    },
+    "b9d100b894be15432ae11e041046aaee43bf5e8f56a91197ace4ad8d82150986": {
+      "external_id": "m1_intro_011",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "05e2c137bf3b72e1fbfaa34337fd5c79062998d701632165670cfc1e451ccac1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
+    },
+    "920c28503ed787fa2d07e7ce9756ebf7380aeb69f50ca8de2ed1cf0176a1074d": {
+      "external_id": "m1_intro_012",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "5becb8bc9b72880961f6342480ad98064fdd3073a249bc04be97e13100c453ac",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "81275f28058ef481d02bc5229e998e32ffa1aff50071330f6f9bff39464d0691": {
+      "external_id": "m1_intro_013",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "1226a3e9109a9042602c3248a06244e7466fef82e200b294d917af21ace655fa",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "e2c49246865a0bfab2a6e2cf47ee22e16c64ecab68dc12c19be5a438ccc86966": {
+      "external_id": "m1_intro_014",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "e29d4f8e235448c230ed5f9d57d4a8b2b4dce94a390e0d410b00b0c43be27e13",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "af188265d65b4a217dce7ff7ef8652e3a1dff041c0a69653e8184a61251c9431": {
+      "external_id": "m1_intro_015",
+      "topic_id": "t_ab1e7408a209",
+      "item_sha256": "8c03273f1a5b163b1c22aaa80e72b5168af58e16dfae6a56293e74b93592ab5a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
+    },
+    "a69b1ddb6a65779278fb845ed66721206acf8a0482125980f0774db84e078d5e": {
+      "external_id": "m1_intro_016",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "6ddf6043013b6f0f49c05faf724a48741350532f104f259f71b48330997d3c1c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "45044afe8fd159572ae230825b9d9206bbe5d1f55bc406a0935dfd0be700fa52": {
+      "external_id": "m1_intro_017",
+      "topic_id": "t_ab1e7408a209",
+      "item_sha256": "dfe1da5f66f085c8cbc5d0ad622ebe1a7ec96211cc1f75a1484a0e6d65964520",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
+    },
+    "8ba6acfb0a0fefa6b292018bc3d3fb5be3b0329ca780efb2ce474272e9f17044": {
+      "external_id": "m1_intro_018",
+      "topic_id": "t_ab1e7408a209",
+      "item_sha256": "f46cd0fdbc9bdb9b52fd6a5e95cd747a95512a95675dfdc6bf9689087e00c0f2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
+    },
+    "ac3a7c32207148798ab623638a03023ae9b2190ad089f4901786fbba0143ec25": {
+      "external_id": "m1_intro_019",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "d9f64ea0b55b0bf2c41923ba53f0d9c697758f245b1badbf954c5972ba646370",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "1f57ac36021c1f6ce203f732fc5973cb064cd39ebf46bc995eecaf8e89bde049": {
+      "external_id": "m1_intro_020",
+      "topic_id": "t_ab1e7408a209",
+      "item_sha256": "a8c746b92d4e1dab8999d310cddc9e1082d8eecd2c8dfeaca4691bd34c84d117",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
+    },
+    "fb66eb8c0a4676c2303c6f5bfcca0a73424ec3f701daf4e4eb8d37e0fd095faa": {
+      "external_id": "m1_intro_021",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "33ec8e7b565f46e3d0c6a1853e4a48d5c97e22c2511c73d72c41838ee658959c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
+    },
+    "55e9f06857527c0ef612c512ce8a10d2fdf4787f069b461b5eede23e46a01bb0": {
+      "external_id": "m1_intro_022",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "35b3e41ece8ae7abee541a49ada800010557f8dc00eb732e5770b39cf2ea34b2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "07bd24462f95893393b9eb4ca353098de215d4410fd028e2fff841b5bf6e6cc0": {
+      "external_id": "m1_intro_024",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "1b7d7acf51927310d39afbd19a24749c8e276ba27feabd81ca646addd63719fe",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "b08dcf5ff8950b1327c92fc0fb89acabc877a2d446ca5dd4bc978c5ace536152": {
+      "external_id": "m1_intro_025",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "1f33dd13ae3a697b13ee88d070199c6e7d6fe2bf4ba4952fcb146fe972712ccb",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+    },
+    "74ce33e5b686f971474c0a41700e07d81e3e749704e9f0116c6b40530b866551": {
+      "external_id": "m1_intro_026",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "59f16dd83ad141dd0ef21ae82af4970ea320257580f67ab27d7e2be7c18af9f8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "d959cfd49a6291165361c793e3f8c0ff07da1aa4348bce2b4360eaeef4e97e16": {
+      "external_id": "m1_intro_027",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "613b3a8177ae564dbb14cacae2fbb174f18af761e0831814b70e25a4e11ca5ae",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "0454f086550424f3bfc60edd622b5dabb12a1a6e07be6117eb7c4f5cdac21b3b": {
+      "external_id": "m1_intro_028",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "8fcf8a6a3efb2f778503973fee1a99ada01b248fa8f503fb90f18bc29a1f59b4",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
+    },
+    "ac72ccd0a70e8f59d6ae5827e70e52a7c28e01f9cf2b9ca9b22bc5e0e6cf1424": {
+      "external_id": "m1_intro_029",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "870be7d33b9c54befd86b2aa00ba2beded571add2969679253cc6cde975ca0ee",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
+    },
+    "ccf230007e821e9b640c912c29308ee5748b4f3d2d05ce4a8507fc584ed9ff47": {
+      "external_id": "m1_intro_030",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "c6797063cf9df6819790ea23efc9698a2ad7902fa8c320ffd429a55b01889867",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "a391a12dc94066ae6db8d9e3eb3872f5d29962bb94eea341c76bd1f0f03206b4": {
+      "external_id": "m1_intro_033",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "978505f268774ab4a8e40b879877b10bfec9091cf9a68c928ceb6f7110a3774f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
+    },
+    "1ae705759314f4fcd1efa7bfaa6096b830efaca42f2c98853c0bf5fec2e05ace": {
+      "external_id": "m1_intro_034",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "765cbb9929e94d9d61c5f540c18cb806a78a37d4db6ed692cd267e9d51e31e36",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "f0ed7f921bb5c1dbc8534490982396654769d1a9fa8cd1c16a4f1cbeb420ce67": {
+      "external_id": "m1_intro_035",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "5781acd922adcf4951bbd4f609281a39905ae8775dabc19bddcf741477612b0c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+    },
+    "b8ece45f6a28d35d5dd4b9cb4a59aeedf92e906e720b163e18e65ed9fb0bb983": {
+      "external_id": "m1_intro_037",
+      "topic_id": "t_760b622ba9f6",
+      "item_sha256": "ca1eea08b96d5ec83b6efc7a311275a68ad7e70ea299c932fe923d0c9ccb9f76",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+    },
+    "6b41f04bcabd0f0130cd41f4f2e8e42fab03da8d42afcd418ee9b6ac457cbf11": {
+      "external_id": "m1_intro_038",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "68bc2ed923396a4a22228f14487dd3d4ce77338250d62a6c8af5886533012f0e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
+    },
+    "d357b8359219449164fcd45c65389da886a20ff9dca3b4bec0f2cae2513eb50f": {
+      "external_id": "m1_intro_042",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "2143d5a716d9b5d7fa4ab856a08bf73ceb6e7de13be0ccd0c73e498a271fe2ac",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
+    },
+    "00b075e680e522cb5c8cb9371fb78ab4dadbd99dffc39c908f6904d0d85663a8": {
+      "external_id": "m1_intro_044",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "7c0eb685305625b6357a51b62c7910e79c3492460e38d7ae7cb5f52f554f6735",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
+    },
+    "2f44620fad0a63bd0e3083cb56eb9106cf015f968452563096ce50ae3e2eccb5": {
+      "external_id": "m1_intro_046",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "b0746ab3656dc3eacde9768f8e75d60f9c9d382ea0658275fffcbbcde46d2db2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+    },
+    "57d0445ade9ee278a32588d53ef88b8f1499f6c0d3b7b92c080c5d81643863a4": {
+      "external_id": "m1_intro_047",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "569fa0ee58187ab202551ff9bc1f2f8b8b7bff4728522c018ac9045915ef669e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+    },
+    "435b60990b991583a11ef51ccb63e1d4c71d331e927c6a19adaf39703f0a4913": {
+      "external_id": "m1_intro_048",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "2d27ed84319e2a57fea2e75de0994fd2b19e2b72c0621599c4f37ab440d46c60",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
+    },
+    "1457bff143bba22befbb4f76baef3611dd5ee1f4227346f5db4003de73532f86": {
+      "external_id": "m1_intro_054",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "b96f8a58febe8f3139623ecba66d992eafbb8b084819f54cb758e0232a312463",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
+    },
+    "bca78a95ec215718f68954885ec2f63d51b313b4fce0018868e09f7b61263358": {
+      "external_id": "m1_gp_001",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "3505b98265e6cce948a0d1197e3bea65c45c5c7e208358227a7beaf91da328af",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "3a14e0dbc690e9ac15417daddfeca89eecc0636f5a7520294a17413ce6baa819": {
+      "external_id": "m1_gp_002",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "f3eee52a772bd8110d07ffcd15b03beb2e7d383c52f39c85f298bc0ee6d54f45",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "c95e238f4c7506809ec150aba982ca95ef766136d02ab8061ff8c3e1b162ee60": {
+      "external_id": "m1_gp_004",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "2e15db3d9eee48f3ac3cccf1fd1d6f59d9c02bf47f477d770889fca9100e27d9",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "ece8260ed73d4b6e721c0e95d2dd75e7e973543b3633bc9a65f43ceb55a088ac": {
+      "external_id": "m1_gp_005",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "69d0a8370279bb11faf5f5c54eff07015446ddeb5958fc0e0016edd11fd6e43e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "536f29133135cad9ba36b49d9f85b6be1f3c99abec83b4993d289d9245c940c9": {
+      "external_id": "m1_gp_006",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "2ef9349ef4ce044bdd1aa39cf56fcfd4193759f8c2c487a111a6957756dac591",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "9c575858d046a2a7530e00ef8234026c4c62f27d2bd77bb7d547216c622163f0": {
+      "external_id": "m1_gp_008",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "b1ede88219b7c18967c1c6b51bf5607b99a269355e881f6a9ed37164c71639c5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "2b0670423aa2a92e85dbf4a47accc305d6780b31fc764a17e51e00a77dfcaaf6": {
+      "external_id": "m1_gp_009",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "05b7f4ed3d679535d7546849cf57ab80e3b77b6ecd1a6794f7fbc8ebd149428d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "5581006c4f431f1e63028319e712290a08249c6938aa882dcd5c43dc20cb9eaf": {
+      "external_id": "m1_gp_010",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "3319cf1f808fbae99d4d2d4a819b07a83ff2f70318def08808e621884af148b3",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "b0efc5b22bc3301e052e050d9417beb20dd7208ac653e36f160f84666798ee8a": {
+      "external_id": "m1_gp_011",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "9f154a4bf146eb714fea1ce6b666b261137e732264ec3d24b319fd13c8be3fd7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "ac0b94d5b5f5d68933b2e92e311e729555334e21093b45439324cd60b5cba78c": {
+      "external_id": "m1_gp_012",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "c404205921d323ab5438aeac8ebab922f7546e15a9457f0d044f992506d3c56a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "a09eac334787abad655999adf61ab0fdd707a4e8cbad5b5e983571cb07c4dcec": {
+      "external_id": "m1_gp_023",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "ad4b075c387d91068774fc28dcb85979ae970c28f0a3ab2696ceef5786e84f0e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "7f932b6841adbeda212c64cdbc0bbf9ae7892e7ffdede8c3872741d7d0a518de": {
+      "external_id": "m1_gp_024",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "e3602d45655f5ba8e6ad5b069e7de51d83b1e628ccf2c3cc19d9447f90828db1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "f8703425622c9bd7a42628fa633299d6072aa9387026f3944ecec5eb842dba50": {
+      "external_id": "m1_gp_025",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "8c20c5e1a23fc91e6e737e80988c718f0f7ed9a0deff531150c269a03a93a621",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "6bd4c87922699618e998387771116d59602f55ee3f07487ea32e758430198c23": {
+      "external_id": "m1_gp_031",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "175cca2a99060d97ace57e927eda46dfc4035212d493f32f8e0ffdd7be6d39ab",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "b350b36ad3ac5323975fcb3aacd7bea61f57ce06ee7868474cd48861ca9fe98e": {
+      "external_id": "m1_gp_032",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "330075b7d436991185ef20d98a7f1659822a354c1a33644d8e666d6e864504fd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
+    },
+    "c62277d68292ad5231a8a7d65c33e03f2dc8d95fff10cfb19a369b81726d2135": {
+      "external_id": "m1_gp_033",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "043c76a7b3ffffc29a78296f93c1373465b2dcd22c782bd6d1dc37eb731a0c70",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "9e5068b424deb8d5a64fd7458ec0921caf9cd353468a69530d0851436911c49f": {
+      "external_id": "m1_gp_035",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "c1748f62fb46ca2a9e32f79b40ff3e114bb3af75c36aa1dc4a03f77d4a625ed0",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "d5ce28cba54242665551722201cbd016261bc101eaeb32f8f731b170df57181b": {
+      "external_id": "m1_gp_036",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "ad4fe716f6b812ba166206e26f1feff95ee2ce6b521029d07e2d41979458ccec",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "ccd05e06655f1a24840e4d8c10454d76f1a407fbf5617ac895e96ee4c6d88ca3": {
+      "external_id": "m1_gp_037",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "56c68d463f59de99a5da1facf951a214965e8f1260df35379e128a7a9073fab8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "5828de8daceb46798864541e85d55789c368c8f7907ee81ada2dd7b9de950af3": {
+      "external_id": "m1_gp_038",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "c44f694c73a5a00ba81dcfc474035cae522278d74e57587458d3102dc7598d87",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "9e8985b67a74baedf0aaaff65ce61ad45ad5d995e7b4b9624180d745f2389131": {
+      "external_id": "m1_gp_041",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "cb69f131580f2cf49e455dc9baa0e5d04651c425259d56cbe998e7fd55b89571",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "1731b33ede46972bd4dee61429579741221f0e3a5b9e8090bd7ede949933760a": {
+      "external_id": "m1_gp_042",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "c571c0c8df1580bc8cc5239fc0828bb7b3204205557ada1716dbee1c3f867502",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
+    },
+    "8469872ae6afadfeff24c6f6bae0025167a665dc5cf80983e160db1510a59120": {
+      "external_id": "m1_gp_044",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "cb5bde462bd4018a5febcf2aa01c5faa54ee3b419d823b7cdad4472d6d3abf81",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
+    },
+    "d88d4a259445ece5ddf3e41101fabca628b6ec1285bcd77ca908026e1b798cdf": {
+      "external_id": "m1_gp_045",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "5afd20d3133b944fd608e86230ce8cb6899b248897a1e047eb7b2f009e34da12",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
+    },
+    "6444df48656a47e6df9af327f0aba269405b19a6b69201f54326887b1f79e21b": {
+      "external_id": "m1_gp_047",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "18caadf83e3ac6b9c429f74791fd0ef7b641f51043d96a08302ee2e51420f2eb",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
+    },
+    "ed1e27b801beaa459f48d354899020f179c982d340b073dc6b6c26e55090489f": {
+      "external_id": "m1_gp_048",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "9fdd95579c66f2b7124cf113deef0e7cdd8bc5e8d614d67f761b3c60e946a9fc",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "56d241fa0d0d2c7f068ed82f7b011eb8a02d607d90d0382c40743be2165502ec": {
+      "external_id": "m1_gp_050",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "54214e01a99b3a84e51189369f0d2f806d7496b4f3fad4f53310dd7ed439f118",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
+    },
+    "620a08591764d6fbca5646dd49d4692b35193da3e0e0b0173154d85e857a5041": {
+      "external_id": "m1_gp_051",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "a2cb736ac61e139f37bf7e32ac525b5249bbee24a6b6e0d65e7f84ae668a7f7e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "a5c1303af8153f4e86d1aed79d4ea85c8ca7b09d5813c84be3a7e63a9db27c91": {
+      "external_id": "m1_gp_052",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "35d77c43232ed67dc5cb9a2d0c638dbda41c5f87660fe1cd89a5692bc44a955c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+    },
+    "51a236b7a7f5edcd8c0a2342389505c7de696c3f91ce57c9401520d11edec386": {
+      "external_id": "m1_gp_056",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "197c2e4356ccf9e8608370db0fd48e16d7c50526744b83fbbc5e4075630c6e69",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+    },
+    "4623e70a97f264b810d09b4da40138be3889fcd03f8bf2e430a8d0285c91b493": {
+      "external_id": "m1_phys_002",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "1f16c1fc87d69dcf3bc34968d3c185c075cf402eaa7f0a406e6effcf80eb5d48",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "da61075a9750b493e69fe3ffd77003525af8cea12a77ad74e3d0127d9f23d631": {
+      "external_id": "m1_phys_003",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "83cf46ed129bd73d940e9ac13bdd8e080b32984b23dfd20fd72f8171d7fa8485",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "46690eb45bb2b940d05a86c99c2c7e9b7cbfb5711ac774e3e20d666c4981fa3a": {
+      "external_id": "m1_phys_004",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "586bcde715f2f3aa6c472d44a060031ecefd87e68cd946b313a9e646fe61240f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "7856d467cea8fa965fb25b179643695e37bb5c042a245ff1b46a28f3ff7ce1f0": {
+      "external_id": "m1_phys_006",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "c6fd1d50c9fbc56374f0d2a84d07e4e3b9c886097cecef5234e69eb30925b6cf",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "83df04e66c5ba0ec318853481af425cfa643e51f1c3f045e76ad77bcaffc5549": {
+      "external_id": "m1_phys_009",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "99ef956797e335956c276f01fd950bda98643dad040f7d5f4bb41a1d5bc7c267",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "bac22619b42418d501891fa453567b3571ecf8807a916f31908b5e0208ce0c3f": {
+      "external_id": "m1_phys_010",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "aef2774cc2badce90a9b9cb52bed4f6ce27929f0cc3e720d3f422e88e7b76ee2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "0b7d0326d69e83df066e5b71e59ef9c84cdd24017ecc98a5163c8ee5e3a9709b": {
+      "external_id": "m1_phys_014",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "c5ebc0d0b74bcdf296718587aac048674ed00bf28df8f4210c71f71fdd9190d4",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "285777826b4b18ae91baf9e4720298779622aec61b67b915175e0c6f814d9853": {
+      "external_id": "m1_phys_015",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "210ee5154a5417a1f33b2e9bd2deb51b30333e59ae5dbae2d560e76f0a044d04",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "f220c453bd5bfb5b8d4bbddd8876be1d8316d641dfb0801f5b270d4ec453c579": {
+      "external_id": "m1_phys_019",
+      "topic_id": "t_32c45a18e1bf",
+      "item_sha256": "3bcbe0ee09b51bff9471f05f889f5ccbe807ab09b4643277a815c2c353f53fcd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16569:17249"
+    },
+    "5c8ca94add333b8a67e0fd2b7bc2adc73fb0b7aee222082f2324c3042a62e4aa": {
+      "external_id": "m1_phys_020",
+      "topic_id": "t_e8545fea4531",
+      "item_sha256": "fd6b5d41bdc9403d6d0b809329f0eb1eeb5d23557bd6c2983fe3016533a1b2d9",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 651:1451"
+    },
+    "3291671a7bca6a4db5827c29138af48cf0a2f91df2355baa684d939d3917ff19": {
+      "external_id": "m1_phys_022",
+      "topic_id": "t_c8fdaba2064a",
+      "item_sha256": "8b265c0f4d7cc6f16ee7f8d75336c025494bf0a81359c93e9868a79f107dd0f9",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+    },
+    "d36032f17200d6154b51e2aaa840d214c955eac52b2c1e01744613237556f6d9": {
+      "external_id": "m1_phys_025",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "0b4ee0166f2e8d3663fffdd1c4dabc5df904fe6a8cf26399ec26c810fe4af23d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "ed99db2876f032329871d3fb72679b544121fc2abe7a5357a131f380c7f13951": {
+      "external_id": "m1_phys_026",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "5cf2fc44dec590991313b9f888fe00a8eaec174acf55277afe16712b8c75da95",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "6a8d04ab93acaeda8b855c17f6ca0fba217280f40cbb38e4e453bee5ad594d01": {
+      "external_id": "m1_phys_027",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "6872eede4582d7338f1aeb6fd9650fc572836d54c870e559556eefcc3366f547",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1361:2041, 29219:31000"
+    },
+    "79f6fcca7ce05c8a364e34d79581da1f0c47808744a01d00adb95d906849a29d": {
+      "external_id": "m1_phys_028",
+      "topic_id": "t_033b84e9a10e",
+      "item_sha256": "c4fa49314174afeccce478766133fa67ddf809cc9a9462d28bc2a3b7e2aab723",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6240:6920, 11574:12254, 28233:30300, 37800:39300"
+    },
+    "5256d9e200af3b4b6ccf51b146e5217b0bb20a304959b46ca0b03c169c0a21c8": {
+      "external_id": "m1_phys_031",
+      "topic_id": "t_c8fdaba2064a",
+      "item_sha256": "d98641a92843794242cf32fa1acdf1a1a41ae4ca155cb053ef443eed39ed68dc",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+    },
+    "e33c3820d936caa1c5ea88265517447f269fdead1e1ef33c3fc51c18b23c0408": {
+      "external_id": "m1_phys_032",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "bbdbae8a93220c361dae2c4c32bff4d1e99b9b2ef339e80ff34b2649efc5f5a2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "956459c8dcc55b6afaf009c04a1fc50defc956801f65cef74e2358622c6aa02f": {
+      "external_id": "m1_phys_038",
+      "topic_id": "t_c8fdaba2064a",
+      "item_sha256": "2ba91fcdf64a08af780f926394041f3834e9d9fd529c1a2741e75f3e9da75a19",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+    },
+    "84ef8113fd6b5804e6d9a6c5aac5f8e48ffd04f7d31a417f5a8b9741667215fa": {
+      "external_id": "m1_phys_039",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "1795830a7123c4abd458cd0de309c14ac10fd1cd7c01af0a676f74e8ebb6e05f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1361:2041, 29219:31000"
+    },
+    "644796217b3107eb198d1810a761e073348f48c6040e1fd212371e42bf08aca4": {
+      "external_id": "m1_phys_044",
+      "topic_id": "t_2476fabb75f8",
+      "item_sha256": "cfc83a67b5a8bfc850c7c60771eab607b2c8edfee42b8c557e5427a06fcd87f8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+    },
+    "1aff8598b308ed3782fcd56b4f5ea38f90efbd3227ba92bfecf26c4c7981490c": {
+      "external_id": "m1_phys_050",
+      "topic_id": "t_033b84e9a10e",
+      "item_sha256": "17ca76a271b07c7955ee46f34c48e58a75741d222c6032e7cee1e11fd4fe7531",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6240:6920, 11574:12254, 28233:30300, 37800:39300"
+    },
+    "9e3aa234c998a1e85bee7b9e0e45075d16f85b0797bbfa74cfb072937684dfd2": {
+      "external_id": "m1_phys_053",
+      "topic_id": "t_c8fdaba2064a",
+      "item_sha256": "d62e91071dc5efdf79ec136f5c7d4fc9f8f4282ea20334546ae3a42c00bbdcc1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+    },
+    "b5a11e4fd10397b9860d240b20deb39c746c2ce1ed02d2b5d9b9c83150217b26": {
+      "external_id": "m1_phys_054",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "2ee33cea427ffed9f5cdf333851e2787be4bef219c1a9a8e1ba28c33637b5f1c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1361:2041, 29219:31000"
+    },
+    "e814ff20f250beb3f1e0f02d6c2c89814fc3b097f376269853c8a38fddb56bfc": {
+      "external_id": "m1_vnd_002",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "9214ba60717588c819ebd0fdea2f93a4069e8d1fed2f74699901710a48b38a01",
+      "locator": "characters-9800-11600"
+    },
+    "a1258ab1e3c4916ee851329ee8de4c875efd4a96e03d5c4a9035d2a1a7b08545": {
+      "external_id": "m1_vnd_006",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "921a0c8727241141e7bcbe5e598a624c2e415fc1b4dbd4b817b0ae985070a16c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "c06893e7f9a5d91380c5d8a0733f182153d7e7be03edd73f5ab89741bf4dcd3a": {
+      "external_id": "m1_vnd_007",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "9db7a4f8680f8c3e3643e1ccb4a20188af68b46efee781505abe442f0263aae7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "c7ee80821fd1b2cdb27e81dba2e0f79eeeea6aa235d1166c600ef2dd7b892057": {
+      "external_id": "m1_vnd_009",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "524632e5203e5e4334eef9522fc37370ba1554090577aa011ee4bfad9e9d97be",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "da3c2ea804c761e3336f1950e461edc363bfde46855593f4328f530ae86c197a": {
+      "external_id": "m1_vnd_010",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "8c456b19d4eaab229141be5f01ce3afee0f9ea6e310a183c5596cc038ad6c33a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "c22da765df7dbdceac67220357afcac653c66a9002a00a7ad04087194dbb3f31": {
+      "external_id": "m1_vnd_012",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "84e6f25b0db58293f42cd082ff2f57829b6f48b5858595b5656ecc8cb3daf36a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "ca279a060b04b77ea36a572a2fe027a6b9ff4000c4a939112ebd64ff41d13b2c": {
+      "external_id": "m1_vnd_013",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "5941e8cf324bb531b0f374ded9aa9e5c1ed86292f606740a9b0101e67c9a0ddb",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "06692659fc5a89e09f64e2870fa9c88767cc06690ac313c7c3239a8c1d05ab7f": {
+      "external_id": "m1_vnd_014",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "19bd76ad4a8d3d3516aa10dcc7b814e5cb037c32a8e154200296d101fd311007",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "f1790c0f1f60f5345558e9a87ee6938fafb47ffcefec297afb531b8be8ca5a52": {
+      "external_id": "m1_vnd_016",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "125e9978b23de2751b1076f7a1ba7c9e36cf1d36260e869d8dcd96e9297ad4f1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "3dc682543c0857bca52e96f7b55d04907a3f50c810baa9a9468b3f7af4da7414": {
+      "external_id": "m1_vnd_017",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "0c61e67f67bab5c844bf865d38aaa76ab1b2533b54ed47acf4492f0d83f974d2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "743dd1668ae8c5bf997421d596fcac02a30e2fe5114042d3230f846f9ea6c1e4": {
+      "external_id": "m1_vnd_021",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "e8eb96ed1f7b5926e2a08b897044c72f238bfbc8c3759da0a58a8da28c016ff6",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "2c75fb2bc67558e7c256cf92939e8ad19a103f8937d38922b0c71829c00ec9e8": {
+      "external_id": "m1_vnd_022",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "5c3ada0068e5b76e145a31a1a3e2201cde007cd0ead9cf66e119ecf38e403f3f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "37a7c298bfdd3dd6f9b1a0ea215f3058139faf87c67987212a525bb52a5e0f9c": {
+      "external_id": "m1_vnd_024",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "b951ece551e9ec6b97c5e307bf3aa9bcb0900d407f3f58913845fb05d6259506",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "6667e864c64614c91a004696a3d2f488d9274f17aeb6088be774168a103f577b": {
+      "external_id": "m1_vnd_027",
+      "topic_id": "t_17a20a4fb08e",
+      "item_sha256": "162547f3df3c77cb2b75431ecb091127fcfc9ef4a5f9665ae0163fa6545b54b8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2306:3006, 15655:16355"
+    },
+    "e916edbf98feef778f12f7f3dea25348b70ae22d491d8ee729802142cad3fafd": {
+      "external_id": "m1_vnd_034",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "4804bc8d240772bb84ac1af9d28f4a3a5f3597438cddc536dc5a5c2941fad42d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "f7dbdb8ab4153809e8a822780c742d31fcbc2cf260ce77731bbe3b26babd8b39": {
+      "external_id": "m1_vnd_035",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "aa88095ee4399fb038ff9eafb4a8e67d761334def9e1ba1e0ac7053f08a92e14",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "1833fa4163c410c12c9d034ba6876881454c5c448f8ece7b3868b9a5b6b6ef77": {
+      "external_id": "m1_vnd_039",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "71427beb34b8d17d331214bc7b204fcb89c07ccb44f68de1e94e6988227cfaf5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "a6be5dc0a03d60b4ecc868b2550c1db10ce5e322b04cf336161ddb18cd5ff525": {
+      "external_id": "m1_vnd_041",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "4db6d5e99da6335325a9e17e606dd3b3a20e65ef162e79fb718042a086404997",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "724ac0c245e6a7fc0e4e29752e660a8e9c5fd408a11472771744d6fddb43316d": {
+      "external_id": "m1_vnd_042",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "99af2bc821abdf9c6f3da91c35a85e1c9235a00dba6861b85faf78ca9f2cb8bc",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "defd9f21b6294d0c65a493c06b4c9f83504ae35f0bc04b847e3d8c406d0b0960": {
+      "external_id": "m1_vnd_044",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "188baf18b44d14521fa1217e49640bf8849ef451a8baeb9a566dfbe44b442999",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "99d7562c781bda3f322d3babcf581d6d25c86c0894241a12a4e56809b75b5987": {
+      "external_id": "m1_vnd_045",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "ea3a985eff8869885f86368f4e077a98a088dbae024d70f6acc98d35307089a8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "0cea00443abad2041536895e5a211ead428e8cc1cd50c27546f2f173b0a22aaf": {
+      "external_id": "m1_vnd_047",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "b3f86351bf11abac079d9e659eaf308cbbd55cc2aba3a6a4d5be414fe34a70cf",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "e9300657611d1a94875873763452110c16c1120f3bcae1a9b7987fa6751439c1": {
+      "external_id": "m1_vnd_048",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "6d8bac514e0856c9b347b7a1f3e2c862edb470fd95262da0c562caad02adfe20",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "db1c179ea84a087a75c16673077e32d8031b87854ae0c6649ab950aad587d2f9": {
+      "external_id": "m1_vnd_049",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "843ae279c52c30cb3bafff0ad8e98ce238d0bf72279a570558a88d6fad9fa52a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+    },
+    "6bf637641b71a1154e975c49095b826ab0f452e9c8698a66623a50a102f63187": {
+      "external_id": "m1_psyf_007",
+      "topic_id": "t_1db07b61e05b",
+      "item_sha256": "f1d50e6e8145abd76cab441cfee596f4ffaef5885c47a35df05ba16f84100c7d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2793:3503, 6430:7140, 12400:14300, 17900:20400"
+    },
+    "cce1a383b2537abebb5f0aa1120b5a815bb73a5b74b5eaff2cafa747964717de": {
+      "external_id": "m1_psyf_011",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "2ea1737853f0ffb51c3282433df1267735858e04595e5edd46a51030ba0473af",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "7ea43de444375c5ab910ce6bf9bfa4bb9633def9af06df6fd3d0a325b996b920": {
+      "external_id": "m1_psyf_013",
+      "topic_id": "t_43f9e7d785af",
+      "item_sha256": "19d778ad91e96f8130c02c756a25037528d0402908b5e02669d3190aea30c9e1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6000:8500"
+    },
+    "0f09b2a93b1098fd1135a9ff4d616efc763077fd7bf2b7631831be4a23597a7a": {
+      "external_id": "m1_psyf_021",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "2d9abeb689ff03ce5b91971266f3b871f43130b51623e6abcae4c0af8fac6522",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "efccce7c933e8c4cd9228b106914a8b4f2ff610018ba282ee95cbb6047bb9816": {
+      "external_id": "m1_psyf_026",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "cd0439eada7ea7a6b02a6597f88c444fa06e1c020fa77bc1a79fab6fcb5935b8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "f855186a41b42f060f3fd2441d6fa1cea8f5ea0a8a1a1e1914f25d3e03620013": {
+      "external_id": "m1_psyf_027",
+      "topic_id": "t_43f9e7d785af",
+      "item_sha256": "f23282bd0f971df92e4ce286e7a0134f582402a1414279a48033df1bfd6ec015",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6000:8500"
+    },
+    "16bab673661dc2c81832640ece0b19b7932be738c0bc4eaf9141522faf707b7e": {
+      "external_id": "m1_psyf_031",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "c0cfdc5180a0a3ed700139ab147ab7f9c7bd628e22ef7131411e5e0de01b5fb5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "330881941c87e757a1dcac984da56ee23937fcc77df01a1683415c5f7774a8a3": {
+      "external_id": "m1_psyf_033",
+      "topic_id": "t_1db07b61e05b",
+      "item_sha256": "65aff8db5ffdb7c11fc659120e42851871685bbd08ff32621ca13c7c138cb615",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2793:3503, 6430:7140, 12400:14300, 17900:20400"
+    },
+    "3dd488c4f6ff05e9e5acea09afa2681438e448e611c77b634c15af824ab717e8": {
+      "external_id": "m1_psyf_034",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "8cba14a9a529f2fd63c2839e79972a5ea5bf3c4938b892c86135977f1ab9fbb5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "e7dfb6b3543b86bcd5634cc648465c4b97fce5ab35242e05e955c28c098279cf": {
+      "external_id": "m1_psyf_045",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "4523d5055488c2be88867021113d54afa21379be130221d3dc11cd8f179685ba",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "08a3747265933c9feb6e803ba15327191dc7dc03ad1820580e375997071dd59a": {
+      "external_id": "m1_psyf_055",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "f6afcf1de7dc9b3b03f228157477e6430720709b1644f1570b7f032e4b38a17f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "7aa46fe2a7db3b317dbe5661a264eaf9f868e9aa532494050529cc6e2f4ed920": {
+      "external_id": "m1_psyf_061",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "bd91d746e65319fb297d6c1468e6f768907ac7838e85cb64f5ed9fac4268bfb7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
+    },
+    "759a4d88cd34cc410dec50cfa0fc5253cad1b9127deb2f199cc4653e56844728": {
+      "external_id": "m1_psyf_064",
+      "topic_id": "t_6f9edd8074a3",
+      "item_sha256": "a71ec9cc419a18b01db39da12d3bd378cc2caf0a47619e04cb25977bbf1d1638",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 473:1183"
+    },
+    "11c9989350d7c353f2c918f60bf1963d335c1258d01c879688f80dbeb33be313": {
+      "external_id": "m2_exp_002",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "11fa3461c1c2495d691b2eaf567fed77479613a0c40e4e8e9d56a28969d1b84d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "a391297b0d983608aa2372366545896b797465ddbb3f95f7f5726b5d1f829c5e": {
+      "external_id": "m2_exp_003",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "acc31195c97c75cdf858056b1dca4cd2cbab178d59f17638b494f7e2d2295e0a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "f045957b27f720ed1a404e65e261409582fcd2df6d24ea93164f9ab32751206c": {
+      "external_id": "m2_exp_006",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "a054d839f608758875a82e83d378dd39e94299db78dd03b3dcd2a9e1076003a0",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "0868a38faac6161cb9fb09953e4d294d38f123cce94854f2528ed1b2f4f513bc": {
+      "external_id": "m2_exp_007",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "b1d17fb475ed9f5ad10a265a5aa735e86e9cddea9fa52ac081ae29febd5b90ce",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "79d724e28d147d92c16a7b0c52d173a7652ccd9b78615cae81ac29afc67548a1": {
+      "external_id": "m2_exp_008",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "e0148db4cea7214981326ec7f747a8d6b202b5fcc2f0e9e74459954e0a477eb3",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "c06eef7531a765bfa742321ca25d4971aea6442e348a2f8601eb6b9b599c9188": {
+      "external_id": "m2_exp_009",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "a0ecba430300cf4945ddaa1cce67837370a5f17a9d6185054a59a93af46b51db",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "00fce0e72be07d1ec54f83f04ede2caebaeb2e8e94e3daee88e6801da6c9b530": {
+      "external_id": "m2_exp_010",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "9a454fbef3ce41f626cd29ab4e630fb15fb07e657c2ebe47ce9dbcf5f32f7dd5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "9aa097fc4e4df2ca463972fefc4e078526e662989d0813b225336e2767b61990": {
+      "external_id": "m2_exp_011",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "cfbd6c546b951f532b63e1008169ae3f22d134b403b1f9c415bc126c2b4ee947",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "76430ff8ca532e30fa2f77f2b3c0acbea3bff1160b3d8785577ff2615f7886fb": {
+      "external_id": "m2_exp_012",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "8181f7d1fc9683451abc2b6fbb60885fdc7a722650c631a279a542ea13cae30f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "7aec2a4476ebd086fd5f23f6810ffffed782ee8e3d0d4e821ee437af1207c61c": {
+      "external_id": "m2_exp_013",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "afa871d714cf119fb09d0d2ace750f65da4826e0180fae12660ac98f45404ac4",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "c478252cf9f3d370bfee63f094aa92188c1e0ac1ef4442708224e652f9e8af09": {
+      "external_id": "m2_exp_014",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "2e19aacb9f9fa53a0ae33c2aaa0915a3b8c3a452b614f2e81503687c633f2fd5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "b3600e7824f580124eb51374decf515f3ab7992826a0cca0d3570c6a4b22e0c2": {
+      "external_id": "m2_exp_015",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "ff23c927065ded109eff8e9501902c0fca4e7f004cc363919add57c75e26fda1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "3be29046539bb825144d160d337449f25a4083d92af4423e5de32b93f26813ff": {
+      "external_id": "m2_exp_016",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "f88800eb55a33ef23f70fe46afc2d1bcfb291ff845fdca3feafcd58c5494fd18",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "9bc8acbaa5e4e177b48ec6ee00ec384445020df2195c03844820ffaed2fe23c9": {
+      "external_id": "m2_exp_017",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "173bcbc675401e5e77d661c5d98390daf35de6169716ec5bee69e4f293f3d757",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "b6ed080411d1d94d350f2d4d5e26198a50c530f61ef2aca6cab5c9a6a95f93ff": {
+      "external_id": "m2_exp_020",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "bb9d0b6978d1c5c8d34081e53f5de7b4097ed8f60485afc8d61b97a192e002d4",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "1f87d42c37c04ac1002c56a7e6d1c0f49b1388d4f34a132f923b10909ecf9f52": {
+      "external_id": "m2_exp_021",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "8289d614d717c614d0e93b06b98cd4279df0c5a9285750d062260285755d909d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "42352c1f9cf87d1efca3945185052fb3f1b8f618ab3eca08415ec2009c2f66c5": {
+      "external_id": "m2_exp_022",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "65e892a1a43233f23d7b521be83f2d89fcc48fe76dabee2c7b73693937b0e29a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "9c6cb891fa579a5423604a90e3f343bda4f36be75c761e03b3a7108f5d28e9c8": {
+      "external_id": "m2_exp_023",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "0b219191245be019f2a2d1cfc811a8ba1d01f31c95f1d00b6a64b34e32ae610e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "543d432bf1208a9535cbedcf3aa90116b28397298b81ce4211951def7ccf870b": {
+      "external_id": "m2_exp_024",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "8dea1268f7c7cd61743f47ed8e099bc1f62558ff1da5cd36a5082b7574c33473",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "f6b359fc3822f68942d8e00611908716d4ce58aab35fef223fcd91b26f0189a9": {
+      "external_id": "m2_exp_026",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "4df0630fbbb2f89d2869a0eedcdb83be46d05058801f78525cbd051c24a69ae8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+    },
+    "553d2ee2295bc3af499075bc7311a12c157b292aff7dd37edfdc91e898d03987": {
+      "external_id": "m2_exp_029",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "450fbdbb7a5067dbf7f74aedb1157602eeabd1d8b95fbae33805f6650529af19",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+    },
+    "dc10ad069d4c7bf7c98197225ed31dc366f73b482443d8b6bc2dc79999feab03": {
+      "external_id": "m2_exp_034",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "5df76ded82ffe20367ee09d2d792c418dc9773b170be3e822d285cd039fee5ea",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+    },
+    "4ea8d2cb89f4440f28ed7803c7c0f7fb457017a6699ffb7aa5b3a2be8ab5937d": {
+      "external_id": "m2_exp_035",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "acb35f8cd4349e52cc78e2e6a80e9ac4f2395eb103d557fb58f3da8b3f069f7b",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+    },
+    "ebc21edab088f36c725578a97f707c3ac3ed1cfc6d1b6818f5d4354cb27d544b": {
+      "external_id": "m2_exp_038",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "18d7fc062111b75d92d0db6743c7e21e59c879dfaaa4d516d12ad5bef0b878d1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+    },
+    "82beb9b3c66622eae2529023dd8396ee3668d99c67b4d583b27ce113f7b93c70": {
+      "external_id": "m2_exp_040",
+      "topic_id": "t_177f292cc47a",
+      "item_sha256": "b33ac9069012c8fb79eaaafc6cc47fabd45d5bc60ce2c71145bc3613732c2dd4",
+      "locator": "characters-7700-9300-and-10500-12200"
+    },
+    "068a437b9c0137d2005ddfc39914f399d0e788ef0370997db7fbdaeb1b6542ed": {
+      "external_id": "m2_exp_041",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "07591af2d331ad26502888d07337a28ac5ac9fa227cc4922434b3a6aee131f5c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "795b2fbf576f44e75b426948e03cb178c7317ba15b6c0e29f999e91a6f505715": {
+      "external_id": "m2_exp_042",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "924ff6fc175058447390f9ec1975cbb88def6767f31cc22b242cefe844ad0a37",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "3d291308306c6c18aa51cedad1698c084526ac206e32274888b7abd73ca75223": {
+      "external_id": "m2_exp_043",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "a9621ea69b6641d0ede6b4e3e6341d6a3e4fca26f21b6eb3d4759da44004a758",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "8035f1a5986b09b122963a14de05bf5cfc28fbfc1bb24bd1912059a9b2152235": {
+      "external_id": "m2_exp_044",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "230c5de09391958f739ae798d1e0d40621cbf65799bff381ee27ee0c5a1a3dbf",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "b20ab578cf71b11c8515723de50b4b0b8d68c98a246fd87415278ad80a19bf76": {
+      "external_id": "m2_exp_045",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "eb69cb12e9c527b7fca94a6cb43c08c0b5727f9b485dee7831001cc85d21b7cc",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "f75bf27291ffcf36efadb5371ae65e4c2a425f0b057c542cb3ec015afe0e9f7d": {
+      "external_id": "m2_exp_046",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "db79b4280fc9e98d08186787cfe37b20b328256f1f37eed256212bdd83676b7e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "c728b2c46abf3e591b4710c82cb166e0d04fbb4b194a6ccfbdb23602bd4fcc4b": {
+      "external_id": "m2_exp_047",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "b9d198d4f3e1c00ed36cfd056df42f0124da9dd2948d6fa7e723dd94339a62f1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "b18d67d990d2969e82f3e425d4122ba9357bf62f70c08627e77070fde46ebcb8": {
+      "external_id": "m2_exp_048",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "b7137eba481f2b4b95a253f68efb35b470eb9ba02f19f19b7b56080b77cf3592",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "62afd4d1ecc8bc3feb4fc5809f2c15abc0a86d0255cc7e7b3153323e82b8da42": {
+      "external_id": "m2_exp_049",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "472fe9ea44f8d19d788b72b4f8d27fb062c64d714f0831df41cb327a8c443996",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "842c685ad14df774beb7cff938b9486988398262d1d04b3e0c1e12ca6858afd7": {
+      "external_id": "m2_exp_055",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "a3593fce6ae2dc82e10bd043951ec072f57e5e1161be5bc9760ba117e4c5b76f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "9b502e15da75dc51bb517bafbcae805efc74764f6d52d8084103d2a980abaac2": {
+      "external_id": "m2_exp_056",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "503a17e4018a914c9e725c6b702b39561682acdae0da98a814d1b0f5016ff453",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "685945c5b67448da33eb4ebc2d9f1077ae011e5be53b3976cb230e41fa35513e": {
+      "external_id": "m2_exp_057",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "a5b9ab0ecc3aea86ff2473ed4564af26d62776fb7cb7baea450bc4d2a38625a3",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "25b5e92ae283af2d29dc56a32f71b0a88253f5573306c1884f349686d7e51ef4": {
+      "external_id": "m2_exp_058",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "26265ee197b78a244601f8f2e8e112283fdad491db1a6ff80ce2416db29bea1e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "19611a4092254e7b54984ab667c780a5a9204f33cda31318f44d254acc77fb2c": {
+      "external_id": "m2_exp_059",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "178fe8ba909c94e60157556e70c5081b3a1be6ca1fd197738260718d263c9842",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "b0b9799514b56ef690a9089531f9ccdd088e194024cea3ba4d903d89d59bd79f": {
+      "external_id": "m2_exp_060",
+      "topic_id": "t_177f292cc47a",
+      "item_sha256": "129ead2c5f93edb7984e768e6d3029fa63f917ce55d89629704aa9dca5441bbe",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7700:9300, 10500:12200, 25000:26700, 36300:38200"
+    },
+    "97d6655947d50139ff55bf374f5fc6a8df601f49378b0bc62d097eddfeaec940": {
+      "external_id": "m2_exp_061",
+      "topic_id": "t_177f292cc47a",
+      "item_sha256": "0fea441a80e5d10910660394d2ae3b8b06a82064eccec4009203e3fb8b322e75",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7700:9300, 10500:12200, 25000:26700, 36300:38200"
+    },
+    "c98728aff93c71c5bfe86b00d1d7ce3715df1b07fd646462513ea09676535400": {
+      "external_id": "m2_exp_062",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "1d998da6acab2599c09cc25856965c2919fa6bd37a2da02dd67b80f85e45ab8d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "70eefb92fd034f17b3d56254a67660a55f4b33ebe7c0f892c9270581ad3a5874": {
+      "external_id": "m2_exp_063",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "56b559b846cc6c86fb9288bcda55e1515ea6db1286f1766666f6bd62f3bcc93f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "0400ace7708adb6f566bd55452c8c98772171251c31a8ba042a8da3976b1103c": {
+      "external_id": "m2_exp_064",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "016e6f5e39d37763dd4a74bba8714c105ccdd2e0b4d5eb14054cbd974218ea4e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "4426eaa200a01c7df7b1df6c51153d90a83b6f36747c4ee9bc9401736b5efadd": {
+      "external_id": "m2_exp_065",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "0c55387187910e77be6c82777744fb70205b53ea21da4e46661d4ff3315dd4ed",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "990cb60e07ef858b2ec8ecbe683ebd6873245e3f5da928dc3ad926eab751e91d": {
+      "external_id": "m2_exp_066",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "bd3edef23453b778587db0a9a9664d9a1a6b8e7c801d4823aa54668468fbc75b",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "8d29a9a352b59ecfebcf8064d01e7b0908e2b48a8a5f80896e17d30c4989503b": {
+      "external_id": "m2_exp_067",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "bc1facbd59b21533e3e20cd5f8f99a80417c0c269060ebbcc621dbdf7888ea28",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "8875528cde0b8e863dda8657cefd289a6ad0fa4ebaa3b321ffd916b20a07c79a": {
+      "external_id": "m2_exp_068",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "3e82a7a7275c94b7099799a32607083e008aa5836e82bf93535764b4984645aa",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "9663b3eedef0e5d06c5bd30eaa4ebcb6904ce2a6656bd707cd0ab486a3ea3f97": {
+      "external_id": "m2_exp_069",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "cfe3b51a5a698b1ed68b12d80f7d87d77122490c3efad7e1e317bb4ee9b782b5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "965c313078615813cea5914a3b4827d0883be61c02862b145d12c674cd905fd1": {
+      "external_id": "m2_exp_070",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "3547add54cd0fcb1015969f7136ba4b7fc5b60a194711cb8b8df98d63a29df64",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "9b1648ec405382ff3b397074dd41f06287a591984d91d51c3370ef8b16743ab4": {
+      "external_id": "m2_exp_071",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "ef8b415c18e84fcf6312e3ba60502b70922cdcf121f22a1b89da6c2ca8c9cb01",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "b89aa9ef978d72324a6c05be35cb3f06c16e5dd962822477a2f0a65037c0c955": {
+      "external_id": "m2_exp_072",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "20709644f377ed1fcae8bd5b1b816c7c649e398e5f9a09fcebcf1ede7c57698b",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "9e93b7053b0162f126fe9b36d2682fe558cab5c0c1973942dbe24ada8b1bde17": {
+      "external_id": "m2_exp_073",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "b1da39f4e00984d65af139c24fe774b5521b60601bde098f6af5b8d39485c8ae",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "0b90a257c78d274f2b6daff77f01a6541d442445c99cd4996240e3bd1b1c98e4": {
+      "external_id": "m2_exp_074",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "ce3d50ef2cae5b56c08238b8c904f49263f7a0c36dccbbeaeea93b2a8d5543e2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "979429aca1c2dbae5f5ea5ac8685816a0e2100282817c3e9d201a4e1189b7fac": {
+      "external_id": "m2_exp_075",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "7abe5b57bc8a73e0117626e37c1cb9fa63b788710bd168e777f380d3bff9178c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "514a6293d919e7ad0e6971d099b214f99eb1aa253051c63fc7dac31af113ddb4": {
+      "external_id": "m2_exp_076",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "fe5e09c2b0545587e8a7cdfc11eba7e29fad13182d7851513b49df9b1e18c56c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "f67f89ad500b1427c68c3b60d0ce547824eb87d0f40ca69e581f0f7bb298a8a2": {
+      "external_id": "m2_exp_077",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "a6f777e1e95735cdd4bcebc07c0021d44d9e472c0ece45be3dcc55bca5490662",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "fe9afd8b65313c92e8d766a244281b8eaeae51ee19e5537f05a49e0c83b59ff1": {
+      "external_id": "m2_exp_078",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "e1b4c9c2fea85755382ce946b5200dade7a499de7ed3331a193ee6a87147e5af",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "9448628d3ebca388e3618955d81f5a8109c83c0321b772643e864a5caa612fe2": {
+      "external_id": "m2_exp_079",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "20743dd7fa7f0372d2f5f18cc2b2794a3980e9f79e3c5f1123f42ed87efbc21d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "9807c8e279a033f835b97ad6460613838a3e24b189b56a0276f044adc42f57b2": {
+      "external_id": "m2_exp_080",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "803df9686f03e54478e4fadfd0232231dac13391a0c373efbbb57f3082cb302b",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "93df05c51330aa53b6e48f775e81bddf94eed35814b8af126847ceff034e153d": {
+      "external_id": "m2_exp_081",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "8cb597bc9f8738754d8afa92d37fba8f936a3ddea6cf4da587546267de64c0d1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "569d0973273c0a3ee0490a42ecd8819cd0614cb5bd06549e4a3a4874a817fa35": {
+      "external_id": "m2_exp_082",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "81ba56d03cf4ec1efed1d0a6d0d5194a6bb49a6351aa9ba577fffed067fca0c9",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "f72cb722d70e0f9935ad5eacf1af219730a1db53fc90ba81aa57131308dc9a31": {
+      "external_id": "m2_exp_083",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "14ede9734cbe8110a234987910751a423293884d62c15c7b71730e338c426b1e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "21bdb4ba92b330798a612a39a6602ea8008f6a61dcadc7801fc90adff085f7ce": {
+      "external_id": "m2_exp_084",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "fdff6501fdc92f882322afd469e159e6e5170fe236d6a20f38556aab4182f694",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "56d833336f283a64de921d7cb10c7beb3853d99ac387ce723cb477bfb872c032": {
+      "external_id": "m2_exp_085",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "60a67f9cd0f4195b00c49817219de1b00b0114284073304992e2f74432aa0e25",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "0c31966f2e206e7bf1aed13bf5faf1550925a1fc254eb7b295a8b58a057ef230": {
+      "external_id": "m2_exp_086",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "34ca6fa2004e8e10e197c9bfef136c73d68dc9ca01c8fb7d54eea67cbb099ce4",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "931ac1633dc82884fd58caf5b4500529f753e64efb36582555d1ed6748703215": {
+      "external_id": "m2_exp_087",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "ef061e988457815a3a0287207a9db30323a575493a74667ecaf15f41369e8492",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "4f89d0d788abcda4728578e8255cf3daa8f02d5f74015b639e7e2ad6ed4d2b38": {
+      "external_id": "m2_exp_089",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "6ef9b6a32cfd17d22b97b9179a2119cd5a21d6fc24c9411bbcb9bba6e3a216d6",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "14164ca267a45a7e874d3f87bbd5cf33a13a254fe47902f5032f2a4bad76c144": {
+      "external_id": "m2_exp_090",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "0521dd6c4e339c09f98cbfb0962f9449c621dcdb45721e8f0d7d34da9ee2fb55",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "5bb894667004c93ff2d233f3741e04d1661559aa7035195547577d8b665cb0b5": {
+      "external_id": "m2_exp_091",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "c505e91981ae2af01b337a98a10e9ceb7c6f664a149b22ab801a8feeb0cdf36f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "18ea236b98e3a89f8b877079e5f29a359ab30257a786d06315b4ba80c19fe194": {
+      "external_id": "m2_exp_092",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "ef22e3a2a0894033f2dfb91ba64c233b089d8f2f04ac910daeee0a21b109d44a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "8a4892c0722ac83e08c90025c7bf5d186b899935a650b051b5778468aac37c78": {
+      "external_id": "m2_exp_093",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "bca67b9e13a38248f3ec3ee6bb3d760ee28dec4e046386da73534c4789769c87",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "842c91f47c93f55d5a57ce9ff24586f13df919f23192d6bafb5ab4b772487739": {
+      "external_id": "m2_exp_094",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "deed02b85fc73e6cfc6843db370df7067731b093066df8f22796c4bcb2103538",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "300a00c6281dd03eedd3a8339e978ad299c3b8372d3507523461e61742e7f1bb": {
+      "external_id": "m2_exp_095",
+      "topic_id": "t_a4cdbc5015b0",
+      "item_sha256": "28a2cff4bb7888de622832cf50792e192c94f26334e0a26577fcdc6869455b6e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+    },
+    "59c1417099b71958a44c1a7af27c0dad77d740b69142da8b3b4bf822026281b7": {
+      "external_id": "m2_exp_098",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "8524949e2191c425e6d054dddb37ac5e43f88d29d40c5260e930efc6cbbdfc19",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "3eb1f3a86e5e57f4c92309546e71f71c1356a3a5e8b11771e47278dca20f312f": {
+      "external_id": "m2_exp_100",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "d365d7ba77dedbe5d19373e58259496129b1c16f672e90b5d4896fa5b004dd5a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "855088473671c811bb0d80216be56ceff59d4ce6402cfdb1d103faf07648caf6": {
+      "external_id": "m2_exp_101",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "91f491e22be509c32923a7dc1eaec0b9a1193919974c77371c5a0b9dcc29af08",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "5429dc8ffcac2a7d70e723bec4733f4a1219d98adc520c1270e00320be1dc625": {
+      "external_id": "m2_exp_102",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "6b5c7a790e9327e79fbb598bb50358a2cfe68bff2bc2d0d7ebba3e27c24ce282",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "a5b55a861bca879d4200cff885868ec5062eb8165bc7ce295ec36fdea2570491": {
+      "external_id": "m2_exp_103",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "667111392e8ab6e4d33fab6c251fd807ebbae18a5c9b5061f61c5b0e9229cebf",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "062e89ec82564cf031b4b485ed03734759650b87d9add3c0f645d8e4cb41397b": {
+      "external_id": "m2_exp_104",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "cdac6812acd581084d351134a0b57083ebb2cbd923448100372e67c66c97b97a",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "2c27920a13295f6a962e3b6c5885919c04bd909a234dfe6deda87706f0c83fa5": {
+      "external_id": "m2_exp_106",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "ed2426270ba5f9d38b5a4208604ce820b52e1424f8bbc34f850fb1062126b0ea",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "e3c7a264b14dd1f10288b4c526fee3be3bee9c82437a7ec75a6ef718eb10899f": {
+      "external_id": "m2_exp_107",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "5c374a0bdadb59ec16c213a92f9bd964ab4e9cf1aa6c920bde2fa5d6e9320c39",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "e0fb4cbb2cb2b0049752610186efc26f26c392c7f1b05d16c8454519ea63480b": {
+      "external_id": "m2_exp_108",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "1a63bdd8e1a69d5159481e9d123521e1400f27e6a09b7a377faafa7e7b8bb7ce",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+    },
+    "36daa839cb8b22035b14883b215ad425e0a921972f4816cb1142cdfb57d3a0ed": {
+      "external_id": "m2_exp_110",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "1db91d91bf58dadbe76f8bb26e9257e5fb50f3d93733bec2eca4b0fd08abb8b3",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "f8bfa71901ce08c13cf02a7a8e0ddf474755b314c827077682e795bf06639acb": {
+      "external_id": "m2_exp_112",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "fd366b955dff0fef8c1520a2170b91a2f4e1a19ba2c04d22168a184350c06db9",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "5e1db650e382619f165947caa12a0b09e2b845b4c4704846c667eb1ff99bac09": {
+      "external_id": "m2_exp_113",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "687f261de59a2877eda896c0d36108a279b3ce46cc9b5a2b1f0504c992d9bdf0",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "f6259fbf9310e13b72c7bd266e6c71cbb036d6937505beeb0adb6ac545555491": {
+      "external_id": "m2_exp_114",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "988b3dff8a1b8348d0159a37100d5bfde20281e532ab39a0182a89f860619800",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "dc775347427ca03378e5fd153ec0126d3e40bf5c5ab96acc1d1071584f35b638": {
+      "external_id": "m2_exp_116",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "82b739ce2b38db649318bafce709e7c9206d6e1ae1c0e57b00bd502e6974419f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "36ea0cd9131dac12e8250ae3d8c713e8aae127661c2a7d43147dbb6faf67daef": {
+      "external_id": "m2_exp_117",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "19152155707c2e1f1aa9958d08a6f857257614d16c270c4170d0cfaf4f6f1690",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "9d473dabe405647876a5f13149710f6d8658d28e9a6b004aae75e999d9762edf": {
+      "external_id": "m2_exp_118",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "970b46ab6579284f75e33421a24ea3f372d4bb8497b7e594d69e60177d8f47e0",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+    },
+    "40f0b13fcb87dfb671bc1db85679f8b516216be011592a0d78b1ee3c9f68fc08": {
+      "external_id": "m2_qual_001",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "c98e388367b5e45f8150c75bbb8d89610dd97df6e360f58ff46b03ebc44b282d",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "bff454e3a7354bed4ef1f352dd7c89b849af7060c13d2deb234c8cd5e55da783": {
+      "external_id": "m2_qual_002",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "8ed843ff012be2f638b3597f74e6135d75cafd38863f61820490ba5b26e81c1c",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "2776ac7d06d9437312d76fb53793e0862d15a5e7932182e16b52a2bcef2cc086": {
+      "external_id": "m2_qual_003",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "c20f77abdd53a7ec67ab399e72b97611b6eae28d7aed593139a40622feda84c0",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "9ecbddb596ef80036cbea94f50b9500099a94650df7c20531f614981b821e612": {
+      "external_id": "m2_qual_004",
+      "topic_id": "t_03a33ddcf539",
+      "item_sha256": "149a62eb8ac0bd99d315b6ab986c5c19cfcc7cd7df73c2d093eae5a54ef15d02",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6300:7600"
+    },
+    "c429e1db2e35e0c70a8ed18ead53293bb38ac710e68e600acef8464450db0fac": {
+      "external_id": "m2_qual_006",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "49062fd1afd985e1f9ccb4368e29ddc03dc64be41c88812ad7ee76bb8053a54f",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "759529af666ae2667b72db7043a717cde5cb542c70d9f8f42da3caf67ece7621": {
+      "external_id": "m2_qual_008",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "6a43bbc2c3b8b2c55c60bc17960071e8d5c682df5fdb6ddfe19b8ff3a3856a61",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+    },
+    "67f98473a75387dc19607295ac607a82ace11bc8c2160bdae320bd80c05f3c5d": {
+      "external_id": "m2_qual_009",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "64409f0a73a9a50476666288d19148079e483f5463a0bf68d7734e40e4b4ac86",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+    },
+    "603810202aa134d3f08a453ea2ce9c53fa5ba1df3f79ca761a11e64242219a93": {
+      "external_id": "m2_qual_010",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "98045b6618b42eecebfafb85b0030425daf8913ba149e7d1499a995f2fa3b046",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "94582df731879034c9bb807474ba3d41a10d9f7cdb8c832ddf2a57626b613b47": {
+      "external_id": "m2_qual_013",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "9ece66744f69e166a4f3a008e5b3aa135f924a6d570e7bb46f932346f2fecb7e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+    },
+    "c753bd523d778192036b078b011891d6939c8b82b72e3e1d9f525976650c2491": {
+      "external_id": "m2_qual_014",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "0973898a5b0e5f312f25a6e6560295a1f6a4f06bd2e71c3aba0b1d6d4adaaeeb",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+    },
+    "2e9c1244c454e7909438e472a4cf4f536e4f4a8f87d3b07659f6cf80fce7c204": {
+      "external_id": "m2_qual_017",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "c5ff2afbd5f67a7355d20d09030b5e10cb68c500efec1e395f35b3f60b34e3e9",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "e0cb0533c67a77bc77adc6853695cc145ee33ffede6b16cf77683150b391fb0e": {
+      "external_id": "m2_qual_018",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "01c690b51374046ffac5c71e42aee9d2971ba51d667259759ef1fba53937d0b4",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "3da9c0361b1e1851710785a0337341592d9327964978947630c542689d178a99": {
+      "external_id": "m2_qual_024",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "308b5fb6e5093dc3751ea9f0e8d2103b68fd578e40d60beafcf45560f6ef09e7",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "d86ceb9f3edeb7d0c6aec0c5b175bb86d923d9e218fbbdaa797217578225a334": {
+      "external_id": "m2_qual_025",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "d59fba95de6b13255d0a12c8e303bbd6063205ca6002a9e1d152781f1a544717",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "258bcdb60a8eaa04a4af33d15a9c9e75d9485b505bc109d91ee07a4954650410": {
+      "external_id": "m2_qual_026",
+      "topic_id": "t_059cbac41979",
+      "item_sha256": "1417fd33364c927f248b614e4e0c76a8f4577041ea75069df5e93a9d29c7472a",
+      "locator": "PDF pages (one-based): 3, 4, 5, 6, 7, 8, 9, 10, 11"
+    },
+    "2bb63f16e5845760a36d8a1633b81f7903037947682735e588ce9eeb160bebbe": {
+      "external_id": "m2_qual_028",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "525ad6528a9c2460776e8ba2d0bd5dc0f54fa1caba24de9e056e647da67afa05",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+    },
+    "67a1f78caf065e7963127e4a214eea380eeb56c27902e4bd1a11c5d7baa95426": {
+      "external_id": "m2_qual_029",
+      "topic_id": "t_3bb3423d5435",
+      "item_sha256": "6714e627663fa0821ea42fb6770bc4649e7e78b5bfe27d9c3c9e01afe3041c7b",
+      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+    },
+    "0910bcb2c3ef15bfed569fa4735e3cbe07522b49dec251745c580cac83d698e2": {
+      "external_id": "m2_qual_034",
+      "topic_id": "t_03a33ddcf539",
+      "item_sha256": "be0bcb54c755a7ff685845de3121770c07fda4ee081ed44953f05a2e9572292d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6300:7600"
+    },
+    "f81d0395cb4efd3eb5724aa72ddd8d3ddb5dd8fa4f6d702c987dfda4d6378300": {
+      "external_id": "m2_qual_040",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "4d38c93cadffa6c44da947c3bfc9c68e3293038223a33f0d3e9f4c92ff78a38d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+    },
+    "782fc08766da686c2261c24e2880d231c0def94ddf5458d3649c22554a8bf1ac": {
+      "external_id": "m2_qual_042",
+      "topic_id": "t_059cbac41979",
+      "item_sha256": "b850ddb4950e760552e9056cd741e19034572a02f563eb0b30f3ff45f7998d35",
+      "locator": "PDF pages (one-based): 3, 4, 5, 6, 7, 8, 9, 10, 11"
+    },
+    "264a2aadff658ccb5fcfcdee7f66a43c3b243cfb75485119f2ce6a5be14f1aba": {
+      "external_id": "m2_qual_043",
+      "topic_id": "t_03a33ddcf539",
+      "item_sha256": "2accc518ac29ff6ddc477f8c5eec6f4b295c60cc895dc0139f0eaafafe6391fa",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6300:7600"
+    },
+    "e6e4bc76b3a1600522f0e85f8a42bc00cc58a15262d53c06e4ae188dc79cd4db": {
+      "external_id": "m2_qual_053",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "706ae518a254ff0f699805757314b85c0d3f7e236480232baf89bb2f77d50edd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+    },
+    "cf02f6c4b29746a2950e7c7accf1882f24739f77bc34f0f661bdc83180222a79": {
+      "external_id": "m3_psychological_consulting_002",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "dca8c7955e57673a29d6b459d378214d81b455be4aeeb1a3f7fefc48c7bae2d7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+    },
+    "42d3cc4376113baa02a4c4a7fca53a837abacb4d05bc360f5d8e18f5a60fd7be": {
+      "external_id": "m3_psychological_consulting_003",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "b3a14c9b1c02febd432cd0caf323388a4b4dddd94968054317d233a510656012",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+    },
+    "89d3a4ea6ffb67f64748edd9b6c4a4d86ff0785ecfec2105ea72bffcf43c827f": {
+      "external_id": "m3_psychological_consulting_010",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "f91e2e7abc516c9b520dbb94c841a92823421187591e12b5b7a6d1a45be1bc8d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+    },
+    "fb77408f7677fe516d9bcadf36194f3b53fdf4ae28ea06f3cb389a61bf3a9b8d": {
+      "external_id": "m3_psychological_consulting_012",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "a6b9a1b95874d2e87c6b096a7d4e280a0d9903c612d700ff2156e13a28e2666f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+    },
+    "a4099b6e65122441b4c970f34e81a9dd10a171d71d6b63bfc47a3f2944cc49ea": {
+      "external_id": "m3_psychological_consulting_020",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "7cceb85eba7762aab4822c77e2f6260904a60a6bc5920788b06ad7262527e14f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+    },
+    "48e2cf50b763eb874c2f0ef5e1777c3a84e54caad1ee5084d1938180eb0b2d0c": {
+      "external_id": "m3_psychological_consulting_021",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "d0ebc519787c54bc9088ac55a428e5836fe22d2874393ed13b640f8514081bd2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+    },
+    "8e6f9e0c3e776a042cfb2a25e2ee3f8303b5992e1305148ef9f53f876b6ced38": {
+      "external_id": "m3_psychological_consulting_023",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "1642da828fab7554f74bfe7d84dd8fc8039786fce872884b853c26ccfc45ee24",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+    },
+    "74a53a35435add1dd47c97f866c3a18dc5ace54490cd2c34aab3d227b8be33e0": {
+      "external_id": "m3_psychological_consulting_026",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "f528d73750fdec04c0091251dc8bc2bbde3732caa3d04ef4875ffe5d0cb68e11",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "e5ff5644eb14979efedd6d282cfb7e7eb6e3e79ac13b2f09878cc49b7a1ad7d3": {
+      "external_id": "m3_psychological_consulting_027",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "2f97ce6f8fd0093ff8bafd10c492f9709187f22097ef3dcf93e75ca79881f684",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "a2a5a3dbdf507fbae7b8b35d4d294157e56fcd94b2379657ec09c2970fea1e6b": {
+      "external_id": "m3_psychological_consulting_028",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "f4ba48594b9659c670aee437ed67d18cf7c6ec4020124caf9c40d8f6939d03d8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "13b1671026d44f4a7481b7570a18c2b68b7d746547622429e4d7c927dfef4010": {
+      "external_id": "m3_psychological_consulting_029",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "671c8296b9ae44bbc25c547f57335311e2f7bf589b43077286f15d2d57fc108f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "b2b051671be500a1ea10561842f14ce0e9caac6d11987e80357adcdb1e4a64eb": {
+      "external_id": "m3_psychological_consulting_031",
+      "topic_id": "t_84bd9f531980",
+      "item_sha256": "f02b06fbd26ec3647ecdc914fef6ce26fc7146e312c3bc8d006c285f8f59f7d8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+    },
+    "1bd30b9b95eedfb3b16fc690623d5b6e9f9936b4337469b7f5ef65d6586e9706": {
+      "external_id": "m3_psychological_consulting_032",
+      "topic_id": "t_84bd9f531980",
+      "item_sha256": "659f388d2bc8a67af2875a1c9e486bc6644b755471b8d220e63a24232e3c8acd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+    },
+    "4f8df82cdb474dd01a1ffa40d0a37294d8509205be421b422e731c8d409d293a": {
+      "external_id": "m3_psychological_consulting_033",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "6070f2b36395c7bba27f1bc927d40d8aa218396d16e61be67440a24e224fd2ef",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "2b9b7edca39592fd2b4860ae0d163c681053967a6770c6e01f7779f06c33027d": {
+      "external_id": "m3_psychological_consulting_035",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "191f5c8a4a1fe4db5a59883f86bd0dd82a692fa2a6c66839321b588681b03578",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "7ec1a872de8b58c63500790bd37a11d867b0b2f5b141b63526cc38c622bf0089": {
+      "external_id": "m3_psychological_consulting_036",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "70ed3f5e5f4a64de84517dd0ed88352751e65de307ef888d2c9278b0675533fd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "638d82a7c0f9a78e8b23955e84f5db5207dac7ad57b1ff8acd2c533616ec3d89": {
+      "external_id": "m3_psychological_consulting_037",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "8039393c54a484190898bcba010c48da25ad42d284c0cfc8d0d74874e65911bd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "562cff1a1eb0cb26ff938a2daf77de24e0f77ef27056cf45fe4acf18128504ed": {
+      "external_id": "m3_psychological_consulting_038",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "34717b4074a68ade47c8b5d3c1265005e33dee948acb057a39135704947db193",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "21eb666e04e5a424db8d0b38880ee48634da73d7447482dab471627d0b1b8b42": {
+      "external_id": "m3_psychological_consulting_039",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "87db90be09ce11ebc6900154c013f5026a6ae1bed615894d6c1d6347014e0f71",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "8900cf29729b2dc39cfff52644e9af52b4edeee632901592eaf0fe6907060b7f": {
+      "external_id": "m3_psychological_consulting_040",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "4322143d40a1db1b6830a02abecfa1a8c77bb5aa56e62fda49965a8a755460fd",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "a7404dd56cc5c417c8341f83c7e4c6fd93dc7857097dec3d08a9344b655c3bb6": {
+      "external_id": "m3_psychological_consulting_041",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "6964fe7484b47c59a60c959d2a230db3b7a20426d941f0b1581bde195d1e05ba",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "8f1f28257c24e95a76b7327e7a6b113c72d58d62211c6a874553f25549304fb3": {
+      "external_id": "m3_psychological_consulting_042",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "d45466bde3a9880cf5c02675f5cb88d5603fc932eeb09f79386d4bf151338c1e",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "5122fcfaa4fe6759eec3c6f178e34385d338248537642c890cbadd1d69bfdced": {
+      "external_id": "m3_psychological_consulting_043",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "2ba55d97751c7379171ea36ee40a0693d1dd8bc7ccc839d57ffa2c0864c0694c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "23a3400d521ae67ca99165e28e2fe1ad8d33f5dae6999e7a09cf95d724eb5cb3": {
+      "external_id": "m3_psychological_consulting_044",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "ca79548759caaddb4536092226151414f8bb59c1a99618d18072c30eb9638dd2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "7c39d519e58462c5c1f2f7d543c7ad7d0fc2acc5ead98a0986d68bb977681593": {
+      "external_id": "m3_psychological_consulting_046",
+      "topic_id": "t_84bd9f531980",
+      "item_sha256": "c4e68a85047a4cc43b71ab26d9e800b2103ea44d427874a3a2b9026fe20b6fd1",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+    },
+    "ada65aec2aac76dde89a3806b22cafd2db7321b04e942ea8f4422a613ff7c0c6": {
+      "external_id": "m3_psychological_consulting_047",
+      "topic_id": "t_84bd9f531980",
+      "item_sha256": "73e3189dc865b06b0cb7c44a5fec93e10bcfc8f0e27323d18faaaeb537a2abd6",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+    },
+    "ea68c301f9618ce8139a04b885f567e44a7e6e0e896e9d8dc9f9cafc8a23be83": {
+      "external_id": "m3_psychological_consulting_048",
+      "topic_id": "t_84bd9f531980",
+      "item_sha256": "f0d8f4a4f91f4cc5a1e9fc3455f32a8c1f34c31733ab13c60699ccda7b31f4b9",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+    },
+    "000e23d1fb9f157109f1f18138d2c05aa90efa36ae12cd65c9398c5b52adb6be": {
+      "external_id": "m3_psychological_consulting_049",
+      "topic_id": "t_84bd9f531980",
+      "item_sha256": "a68877297e5030d91b1f3d0c5ddfdd6af3038ca77260f2eeb772c63aab432e04",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+    },
+    "c55a5a768820da1f9af42a240117b9d58e707752a0dd8422a4fee4940ff74642": {
+      "external_id": "m3_psychological_consulting_050",
+      "topic_id": "t_84bd9f531980",
+      "item_sha256": "ee59191ee7de90b419ea0d2290e4224450e071de2f8da3998bb7e045a4612a8d",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+    },
+    "a7ce8eeb8021fca58b5d92b89e033f944195ee6c446deb60f478e1b6e66d4afd": {
+      "external_id": "m3_psychological_consulting_052",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "8ef4b44f684b9110071d829fee7ec0863c1abd4a24245a38e9e70985774c7919",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+    },
+    "5a70d66896db8d3b8e89a86de15a5269c15c141bb24ebe9e882425e72431bdc1": {
+      "external_id": "m3_psychological_consulting_054",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "e3669749ef47dfeed5637e95ef1da39c63c19cfa33aaa10cea35737f57d585a3",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "2808672006ffb0f3c89e6c93d5df9d436c2f4442d2953b7b40545d301deff39e": {
+      "external_id": "m3_psychological_consulting_055",
+      "topic_id": "t_944c292b1d23",
+      "item_sha256": "f5a53ed15673d10d76b09a3645a622d07545f9e4a040e97ed07a8fe7dc825700",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
+    },
+    "c6d200a8e0ec08da69f037cb24bd8e3d0c6be2061abd727784c16dd2b2a8b940": {
+      "external_id": "m3_psychological_consulting_056",
+      "topic_id": "t_944c292b1d23",
+      "item_sha256": "352b4adb6e01e3cc79ac025caeb1d1cd7a412f4213e593aae02f8dc38c74feb2",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
+    },
+    "467a8e2bb4988e09e1dd70a447250c1b90e19b25bb9c660423009461add6f5b3": {
+      "external_id": "m3_psychological_consulting_057",
+      "topic_id": "t_350cf495eee7",
+      "item_sha256": "7b32463d01c5a4586bea95083c625285767dbe6c8528e316c71086dd3dd67220",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
+    },
+    "e5277adaee54f37d65af372ebae7a375f217a485ebd95856b8e47b8a0ec4b537": {
+      "external_id": "m3_psychological_consulting_061",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "ab4b9e927451ccc7bb3b041c7ddff30b703bcedca12726f6a89c028662dd1a14",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "f5f1a07b64bf320fc45a8ce136be32984511a82c66a701d53e1519f585c0cad6": {
+      "external_id": "m3_psychological_consulting_062",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "2462de81f7078f2de769bf1b114484c8bd90bb46f83d08113c639942de196483",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "de6db5a84fea77b7b2850901c0f57f9d188b4dd44bd7a5d3ab9b59564881250e": {
+      "external_id": "m3_psychological_consulting_063",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "e18d8efa948c82e649c0188991e8c0053ee0b502f4abceadca540ed3d990dcd7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "ec5b54ce4de4fd095c558868071cb4fca5105f8f2d79e8b6a38c0502d19686ad": {
+      "external_id": "m3_psychological_consulting_065",
+      "topic_id": "t_944c292b1d23",
+      "item_sha256": "6f3f44b1d6a9e098c4b50b6deaa36542cff782de22d783fc7a309441c88e48f7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
+    },
+    "54c11927aaa72eeeb587544947b319a553e2807c151588e1cb84dd570d6aa0b4": {
+      "external_id": "m3_psychological_consulting_066",
+      "topic_id": "t_944c292b1d23",
+      "item_sha256": "e57f7d224c74389b7ee74c0f9fd5f74f93b82f16c06400a8ff6aa382bcaba468",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
+    },
+    "04b34be4f510e2b6ea9130964829992f04d0e50cba0e722147e960c11f3a786f": {
+      "external_id": "m3_psychological_consulting_067",
+      "topic_id": "t_944c292b1d23",
+      "item_sha256": "251b6e0c707ca802556b014d05824769963323592909828706d705ebbb64787b",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
+    },
+    "b197456957e00ddc3394c9a92646056ee3bacdd7abfefe31aef38733746983ea": {
+      "external_id": "m3_psychological_consulting_069",
+      "topic_id": "t_350cf495eee7",
+      "item_sha256": "94c66c9ceca92e95907fad353469cf6d09f761db80571cfc75d98478ea1b742b",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
+    },
+    "ae8a958dd360c0a108127eb080c3ebfd8a6dbe52874a184a8ff3f4e69bb79a0d": {
+      "external_id": "m3_psychological_consulting_070",
+      "topic_id": "t_350cf495eee7",
+      "item_sha256": "0811614820d4824e2e0c908442c1a6401413661bf262c389390b8dc13c200ff4",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
+    },
+    "f8cb5a55bd5a61b7b36d24511f52b500d3e1499699f2181b521cc3601771c5e2": {
+      "external_id": "m3_psychological_consulting_071",
+      "topic_id": "t_350cf495eee7",
+      "item_sha256": "dd098177b5bdb0d384c1342163996256e6ba020e8bd09f9d3bbfd3bf7c4026e4",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
+    },
+    "43c8da205df3f5449a2465dad92c636a9a5950deb6199aeaafd543fac1b33fcd": {
+      "external_id": "m3_psychological_consulting_072",
+      "topic_id": "t_350cf495eee7",
+      "item_sha256": "753ea9d1ea7d260e29581b118e30420e26b2beb4dbc2207121510c5a2a7f924f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
+    },
+    "2140e14af5758f70b1c1da6cb761b1320059c8de0a3d6aaecfc70f25f261feeb": {
+      "external_id": "m3_psychological_consulting_077",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "800725c88e64867f5e780bffa4a0184a823c4e93d2d48a5e6635c47c041566eb",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "bcc7ccff7a3cb8acd3aceee044dbcddc58c23e3b92d2432d012d38cdbb04c232": {
+      "external_id": "m3_psychological_consulting_078",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "3a4fabda696e85963fc4c5adb45d685071653aee710492e11881b5c471d9caa8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "29750410bec136ff41f97a6bca5596689f38116b73c81cc2e0266720c6141a44": {
+      "external_id": "m3_psychological_consulting_080",
+      "topic_id": "t_944c292b1d23",
+      "item_sha256": "c82897ee1a318eedea664271fe52e7da478861616902c6851a73fab9f27384e7",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
+    },
+    "10a0777a3a97763ef536176eccd0e335165d0c7ed345a97b698c55d2cb42fce4": {
+      "external_id": "m3_psychological_consulting_081",
+      "topic_id": "t_350cf495eee7",
+      "item_sha256": "3ede21bfd2de2e725f21df170fe96e99d386f79bfeddf58563ea7ad614de27c8",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
+    },
+    "2dfd5328de7bcfa4298c94389537ceb86f616f4ed8fd70f83aed68b57be8ba0d": {
+      "external_id": "m3_psychological_consulting_085",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "c9426e4f74242171601810711c0b68ef16abf7992bb4c6338a885a91f33e61b6",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "af5e77c1d5632e256677c3b04c247bad4158020e55a045084da95f04505c8b73": {
+      "external_id": "m3_psychological_consulting_086",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "66187ca40567def5563a6e88abddaa69ec326eff9a53f1adb33c38d84c479c6f",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "e2dbcc35918f4a79e46cacc9608b5bc17bbef50a7461b038e4555265865ad375": {
+      "external_id": "m3_psychological_consulting_089",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "3efa980541af8fce8a1ddbaeb6555499b34cea953df1c1acfc70cd0eb3625e89",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+    },
+    "d7f4aeea821c11dc28c0e3da909bc2e1db59bd0c98194ddf654605becfdcbe6e": {
+      "external_id": "m3_psychological_consulting_097",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "b76dd13f9d7ac4b34a4f56d31a46d5b853cdafd0b2eb528fffd11682b25a9b60",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "aa82606ea019a0be71d224bbd5a45fe6b7378f8104a4c6bb40a1bc946f67c2b1": {
+      "external_id": "m3_psychological_consulting_098",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "16525492f261db5c0c8bd94022d1fd15c099f97a530b1d1f9755c1b21c5f670b",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "e94b7e90f5510d9ef190551fd16efdefb7c5114824a5a481cc664a2b3d150c40": {
+      "external_id": "m3_psychological_consulting_101",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "7088a4abdbfd7a19642918ae506a97a19adeaf40175e466446d1701727e53b5c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "09f58e6ba43e04d5757439315061f788fd0f159d78c268c6fd1ecb5e7d8e8d2e": {
+      "external_id": "m3_psychological_consulting_102",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "ffc9a01f40c618c8fe32a94fa35bdba774dab4949cef724c7715e0d09c4e0feb",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    }
+  }
+}

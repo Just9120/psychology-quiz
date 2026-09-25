@@ -70,7 +70,7 @@ export const api = {
   glossaryNext: (session_id: string, step_id: number) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/next', { session_id, step_id }),
   resetPreview: (topic: string | null = null) => request<ResetPreview>('progress/reset-preview', { scope: topic === null ? 'all' : 'topic', topic }),
   resetLearning: (preview: ResetPreview) => request('progress/reset-confirm', { scope: preview.scope, topic: preview.topic, expected_revision: preview.revision, confirm: true }),
-  history: (before: number | null = null) => request<HistoryPage>('progress/history', { before }),
+  history: (before: number | null = null, scope: string | null = null) => request<HistoryPage>('progress/history', { before, scope }),
   attempt: (session_id: number, after: number | null = null) => request<AttemptPage>('progress/attempt', { session_id, after }),
   errors: (before: number | null = null) => request<ErrorsPage>('progress/errors', { before }),
   trainErrors: (expected_session_id: number | null, replace_active: boolean, question_count: number | null) => request<QuizState>('progress/train', { expected_session_id, replace_active, question_count }),

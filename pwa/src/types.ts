@@ -104,11 +104,14 @@ export interface GlossaryState {
 }
 export interface PracticeDay extends PracticeCounts { day: string }
 export interface TopicProgress extends PracticeCounts { topic: string; days: PracticeDay[] }
+export interface CurriculumProgress extends PracticeCounts { scope: string; title: string; days: PracticeDay[] }
+export interface DisciplineProgress extends CurriculumProgress { topics: CurriculumProgress[]; unmapped_answers: number }
 export interface ProgressOverview {
   ok: true
   summary: PracticeCounts & { attempts: number; finished: number }
   topics: TopicProgress[]
   days: PracticeDay[]
+  curriculum?: { disciplines: DisciplineProgress[]; unmapped: CurriculumProgress }
 }
 export interface HistoryAttempt extends PracticeCounts {
   session_id: number
@@ -130,6 +133,7 @@ export interface SavedAnswer {
   explanation: string | null
   snapshot_provenance: string
   content_sha256: string
+  curriculum?: { discipline_id: string | null; discipline_title: string | null; topic_id: string | null; topic_title: string | null }
 }
 export interface HistoryPage { ok: true; items: HistoryAttempt[]; next_before: number | null }
 export interface AttemptPage { ok: true; attempt: HistoryAttempt; items: SavedAnswer[]; next_after: number | null }

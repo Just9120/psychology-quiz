@@ -20,16 +20,21 @@ export function AnswerReview({ item }: { item: SavedAnswer }) {
   </div>
 }
 
-export function ProgressView({ data, history, detail, busy, onRefresh, onMore, onOpen, onBack, onMoreAnswers, onReset }: {
+export function ProgressView({ data, history, detail, busy, onRefresh, onMore, onOpen, onBack, onMoreAnswers, onReset, scope = null, onScope }: {
   data: ProgressOverview; history: HistoryPage; detail: AttemptPage | null; busy: boolean
   onRefresh: () => void; onMore: () => void; onOpen: (id: number) => void; onBack: () => void; onMoreAnswers: () => void
   onReset?: () => void
+  scope?: string | null; onScope?: (scope: string | null) => void
 }) {
   const [topic, setTopic] = useState('')
-  const days = data.topics.find(item => item.topic === topic)?.days ?? data.days
+  const curriculum = data.curriculum
+  const groups = curriculum ? [...curriculum.disciplines.flatMap(item => [item, ...item.topics]), curriculum.unmapped] : []
+  const selected = groups.find(item => item.scope === scope)
+  const days = selected?.days ?? (curriculum ? data.days : data.topics.find(item => item.topic === topic)?.days ?? data.days)
   if (detail) return <section className="page-width progress-page"><button className="text-button" disabled={busy} onClick={onBack}>← К прогрессу</button><h1>Разбор попытки</h1><div className="panel attempt-summary"><AttemptSummary item={detail.attempt} /></div>
     {detail.items.length === 0 && <p className="panel">В этой попытке пока нет сохранённых ответов.</p>}
-    {detail.items.map(item => <article className="panel review-card" key={item.answer_id}><span className="eyebrow">{item.topic}</span><h2>{item.question_text}</h2><AnswerReview item={item} /></article>)}
+    <p className="hint">Показана вся попытка, включая ответы по другим темам.</p>
+    {detail.items.map(item => <article className="panel review-card" key={item.answer_id}><span className="eyebrow">{item.curriculum?.discipline_title ?? item.topic}</span><p className="hint">{item.curriculum?.topic_title ?? 'Вложенная тема этой редакции не подтверждена'}</p><h2>{item.question_text}</h2><AnswerReview item={item} /></article>)}
     {detail.next_after !== null && <button className="button secondary" disabled={busy} onClick={onMoreAnswers}>Ещё ответы</button>}
   </section>
   return <section className="page-width progress-page"><div className="practice-heading"><div><span className="eyebrow">ВАША ПРАКТИКА</span><h1>Мой прогресс</h1></div><button className="button secondary" disabled={busy} onClick={onRefresh}><Icon name="refresh" />Обновить</button></div>
@@ -38,14 +43,23 @@ export function ProgressView({ data, history, detail, busy, onRefresh, onMore, o
     <div className="practice-metrics"><div className="panel"><span>Верных ответов</span><strong>{percent(data.summary.accuracy)}</strong><small>{data.summary.correct} из {data.summary.answered} ответов</small></div><div className="panel"><span>Завершённых квизов</span><strong>{data.summary.finished}</strong><small>Всего попыток: {data.summary.attempts}</small></div></div>
     <p className="hint">Учитываются все сохранённые ответы, в том числе из незавершённых и прерванных попыток. Процент отражает результат практики, а не уровень освоения темы.</p>
     {!data.summary.answered ? <div className="panel empty-state"><h2>История начинается с первого ответа</h2><p className="muted">Пройдите квиз — здесь появятся результаты и темы для повторения.</p></div> : <>
-      <section className="panel practice-section"><h2>По темам</h2><p className="hint">Сначала темы с меньшей долей верных ответов. Количество ответов помогает оценить, сколько практики за результатом.</p><ul className="topic-results">{data.topics.map(item => <li key={item.topic}><button disabled={busy} onClick={() => setTopic(item.topic)} aria-label={`Динамика: ${item.topic}`}><span>{item.topic}</span><span><strong>{percent(item.accuracy)}</strong><small>{item.correct} из {item.answered} · ошибок {item.answered - item.correct}</small></span></button></li>)}</ul></section>
-      <section className="panel practice-section"><div className="practice-heading"><h2>Динамика практики</h2><label className="field">Тема для динамики<select value={topic} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{data.topics.map(item => <option key={item.topic}>{item.topic}</option>)}</select></label></div>
+      {curriculum ? <section className="panel practice-section"><h2>Дисциплины и темы</h2>
+        <p className="hint">Темы взяты из лекций и практик учебного курса. Внутри дисциплины сначала показаны темы с меньшей долей верных ответов. Малая выборка не даёт уверенной оценки знаний.</p>
+        {curriculum.disciplines.map(item => <details className="curriculum-discipline" key={item.scope}><summary>{item.title} · {percent(item.accuracy)} · {item.answered} ответов</summary>
+          <button className="text-button" disabled={busy} onClick={() => onScope?.(item.scope)}>История и динамика: {item.title}</button>
+          {!item.answered && <p className="notice">Пока нет ответов с подтверждённой дисциплиной.</p>}
+          {item.unmapped_answers > 0 && <p className="hint">Без подтверждённой вложенной темы: {item.unmapped_answers} ответов.</p>}
+          <ul className="topic-results">{item.topics.map(part => <li key={part.scope}><button disabled={busy} onClick={() => onScope?.(part.scope)} aria-label={`История и динамика: ${part.title}`}><span>{part.title}</span><span><strong>{percent(part.accuracy)}</strong><small>{part.correct} из {part.answered} · ошибок {part.answered - part.correct}</small></span></button></li>)}</ul>
+        </details>)}
+        <div className="notice curriculum-unmapped"><h3>Без подтверждённой темы</h3><p>{curriculum.unmapped.correct} из {curriculum.unmapped.answered} ответов · {percent(curriculum.unmapped.accuracy)}</p><p>Здесь восстановленные редакции и ответы без проверенной привязки к лекции. Они входят в общий результат, но не приписываются вложенной теме нового банка.</p><button className="text-button" disabled={busy} onClick={() => onScope?.('unmapped')}>Показать историю без темы</button></div>
+      </section> : <section className="panel practice-section"><h2>По темам</h2><ul className="topic-results">{data.topics.map(item => <li key={item.topic}><button disabled={busy} onClick={() => setTopic(item.topic)}><span>{item.topic}</span><strong>{percent(item.accuracy)}</strong></button></li>)}</ul></section>}
+      <section className="panel practice-section"><div className="practice-heading"><h2>Динамика практики</h2>{curriculum ? <label className="field">Дисциплина или тема<select disabled={busy} value={scope ?? ''} onChange={event => onScope?.(event.target.value || null)}><option value="">Вся практика</option>{curriculum.disciplines.map(item => <optgroup key={item.scope} label={item.title}><option value={item.scope}>Вся дисциплина: {item.title}</option>{item.topics.map(part => <option key={part.scope} value={part.scope}>{part.title}</option>)}</optgroup>)}<option value="unmapped">Без подтверждённой темы</option></select></label> : <label className="field">Тема для динамики<select value={topic} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{data.topics.map(item => <option key={item.topic}>{item.topic}</option>)}</select></label>}</div>
         <p className="hint">Последние 14 дней с ответами, даты по UTC. Состав и сложность вопросов могут отличаться.</p>
-        {days.length < 2 && <p className="notice">Для сравнения нужны ответы хотя бы в два разных дня. Пока показан результат одного дня.</p>}
+        {days.length === 0 ? <p className="notice">В выбранной группе пока нет ответов.</p> : days.length < 2 && <p className="notice">Для сравнения нужны ответы хотя бы в два разных дня. Пока показан результат одного дня.</p>}
         <table className="practice-table"><caption className="sr-only">Доля верных ответов по дням</caption><thead><tr><th>День</th><th>Верно</th><th>Ответов</th></tr></thead><tbody>{days.map(item => <tr key={item.day}><th scope="row">{day(item.day)}</th><td><span>{percent(item.accuracy)}</span><progress aria-label={`Верных ответов за ${day(item.day)}`} max={100} value={item.accuracy ?? 0} /></td><td>{item.correct} / {item.answered}</td></tr>)}</tbody></table>
       </section>
     </>}
-    <section className="practice-section"><h2>История попыток</h2>{history.items.length === 0 ? <p className="muted">Пока нет попыток.</p> : <ul className="attempt-list">{history.items.map(item => <li className="panel" key={item.session_id}><div className="attempt-summary"><AttemptSummary item={item} /></div><button className="button secondary" disabled={busy} aria-label={`Открыть попытку ${item.session_id}`} onClick={() => onOpen(item.session_id)}>Разобрать ответы<Icon name="arrow" /></button></li>)}</ul>}{history.next_before !== null && <button className="button secondary" disabled={busy} onClick={onMore}>Ещё попытки</button>}</section>
+    <section className="practice-section"><h2>История попыток</h2>{selected && <p className="notice">Фильтр: {selected.title}. Показаны попытки с ответами в этой группе; результат карточки относится ко всей попытке. <button className="text-button" disabled={busy} onClick={() => onScope?.(null)}>Все попытки</button></p>}{history.items.length === 0 ? <p className="muted">{selected ? 'В этой группе пока нет попыток с ответами.' : 'Пока нет попыток.'}</p> : <ul className="attempt-list">{history.items.map(item => <li className="panel" key={item.session_id}><div className="attempt-summary"><AttemptSummary item={item} /></div><button className="button secondary" disabled={busy} aria-label={`Открыть попытку ${item.session_id}`} onClick={() => onOpen(item.session_id)}>Разобрать ответы<Icon name="arrow" /></button></li>)}</ul>}{history.next_before !== null && <button className="button secondary" disabled={busy} onClick={onMore}>Ещё попытки</button>}</section>
   </section>
 }
 

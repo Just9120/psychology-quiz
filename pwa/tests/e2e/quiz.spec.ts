@@ -218,6 +218,35 @@ async function start(page: Page) {
   await expect(page.getByRole('radio', { name: 'Осмысленное повторение' })).toBeVisible()
 }
 
+test('curriculum filters history and preserves unmapped evidence on reload', async ({ page }, testInfo) => {
+  await fresh(page)
+  let quiz = await syntheticPost(page, 'quiz/setup', { quiz_mode: 'all', category_ids: [], question_count: null, difficulty: 'any' })
+  while (quiz.runner_state.state === 'in_progress') {
+    const question = quiz.runner_state.current_question
+    quiz = await syntheticPost(page, 'quiz/answer', { session_id: question.session_id, question_id: question.question_id, selected_option_index: 0 })
+  }
+  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Дисциплины и темы' })).toBeVisible()
+  await page.getByText('Основы психологии · 100% · 5 ответов', { exact: true }).click()
+  await page.getByRole('button', { name: 'История и динамика: Память и повторение', exact: true }).click()
+  await expect(page.getByRole('combobox', { name: 'Дисциплина или тема' })).toHaveValue('topic:t_111111111111')
+  await expect(page.getByText(/Фильтр: Память и повторение/)).toBeVisible()
+  await expect(page.getByRole('button', { name: /Открыть попытку/ })).toHaveCount(1)
+  await page.getByRole('button', { name: /Открыть попытку/ }).click()
+  await expect(page.getByText('Показана вся попытка, включая ответы по другим темам.')).toBeVisible()
+  await expect(page.getByRole('article')).toHaveCount(7)
+  await page.getByRole('button', { name: '← К прогрессу' }).click()
+  await page.getByRole('button', { name: 'Показать историю без темы' }).click()
+  await expect(page.getByText(/Фильтр: Без подтверждённой темы/)).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+  await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-curriculum.png`, fullPage: true })
+  await page.reload()
+  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
+  await expect(page.getByRole('combobox', { name: 'Дисциплина или тема' })).toHaveValue('')
+})
+
 test('personal progress, historical mistakes and retry-safe training share the quiz state', async ({ page }, testInfo) => {
   await fresh(page)
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
