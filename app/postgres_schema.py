@@ -18,7 +18,7 @@ BASE_TABLES = (
     "web_mail_tokens", "web_link_tokens", "web_auth_limits",
 )
 V2_TABLES = BASE_TABLES + ("glossary_sessions",)
-TABLES = V2_TABLES + ("user_learning_goals", "user_achievements", "user_review_events")
+TABLES = V2_TABLES + ("user_learning_goals", "user_achievements", "user_review_events", "user_review_sessions")
 IDENTITY_TABLES = (
     "users", "categories", "questions", "question_options", "quiz_sessions",
     "quiz_session_questions", "quiz_answers", "user_literature_progress", "web_accounts",

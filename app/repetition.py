@@ -67,20 +67,21 @@ def glossary_queue(conn, actor: int, *, today: date) -> list[dict]:
         for entry in load_glossary_entries(topic_id) or []:
             current[(topic_id, entry.id)] = (topic, fingerprint(asdict(entry)))
     grouped = defaultdict(list)
-    sessions = conn.execute("""SELECT snapshot,state FROM glossary_sessions
+    sessions = conn.execute("""SELECT snapshot,state,updated_at FROM glossary_sessions
         WHERE user_id=? ORDER BY created_at,id""", (actor,)).fetchall()
-    for snapshot_json, state_json in sessions:
+    for snapshot_json, state_json, updated_at in sessions:
         snapshot, state = json.loads(snapshot_json), json.loads(state_json)
         for step, answer in state.get("answers", {}).items():
             try:
                 entry = snapshot["questions"][int(step) - 1]["entry"]
                 key = (entry["topic_id"], entry["id"])
-                timestamp = answer["answered_at"]
+                timestamp = answer.get("answered_at") or updated_at
                 correct = bool(answer["response"]["feedback"]["is_correct"])
             except (IndexError, KeyError, TypeError, ValueError):
                 continue
             if key in current:
-                grouped[key].append((timestamp, correct, fingerprint(entry), "captured"))
+                grouped[key].append((timestamp, correct, fingerprint(entry),
+                                     "captured" if answer.get("answered_at") else "legacy_backfill_current"))
     items = []
     for (topic_id, term_id), events in grouped.items():
         events.sort(key=lambda event: event[0])

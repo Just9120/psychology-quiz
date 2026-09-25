@@ -6,7 +6,12 @@ from app.db import create_or_load_user, get_connection, start_quiz_session, stor
 from app.quiz_service import answer_quiz
 from app.repetition import adaptive_questions, queue, schedule
 from app.miniapp_api import build_setup_response
-from tests.test_attempt_content import bank, NEW, TOKEN
+from app.progress_service import review_today, review_glossary_today, ProgressError
+from app import glossary_service
+from app import learning_reset
+from app.glossary import GLOSSARY_TOPICS
+import pytest
+from tests.test_attempt_content import bank, NEW, OLD, TOKEN
 from tests.test_miniapp_api import _make_init_data
 from tests.test_web_auth import web, post, register, login
 
@@ -68,3 +73,73 @@ def test_adaptive_setup_uses_verified_actor_in_web_and_telegram(web):
     with closing(get_connection(str(web.db))) as conn:
         owners = [row[0] for row in conn.execute("SELECT DISTINCT user_id FROM quiz_sessions WHERE status='in_progress'")]
         assert len(owners) == 2
+
+
+def test_review_attempt_counts_only_accepted_queue_answers_once(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        sid = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, sid, [1, 2])
+        answer_quiz(conn, actor_user_id=1, session_id=sid, question_id=1, selected_option_index=1)
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-01T10:00:00Z' WHERE session_id=?", (sid,))
+        with pytest.raises(ProgressError, match="active_attempt"):
+            review_today(conn, 1, {"expected_session_id": sid, "replace_active": False})
+        review = review_today(conn, 1, {"expected_session_id": sid, "replace_active": True})
+        review_sid = review["runner_state"]["session"]["session_id"]
+        assert review["runner_state"]["current_question"]["question_id"] == 1
+        with pytest.raises(ProgressError, match="practice_changed"):
+            review_today(conn, 1, {"expected_session_id": sid, "replace_active": True})
+        assert answer_quiz(conn, actor_user_id=1, session_id=review_sid, question_id=1,
+                           selected_option_index=0)["submission_status"] == "accepted"
+        assert answer_quiz(conn, actor_user_id=1, session_id=review_sid, question_id=1,
+                           selected_option_index=0)["submission_status"] == "duplicate"
+        assert conn.execute("SELECT count(*) FROM user_review_events WHERE user_id=1").fetchone()[0] == 1
+        assert conn.execute("SELECT count(*) FROM user_review_events WHERE user_id=2").fetchone()[0] == 0
+        preview = learning_reset.preview(conn, 1, {"scope": "all"})
+        learning_reset.confirm(conn, 1, {"scope": "all", "confirm": True,
+                                        "expected_revision": preview["revision"]})
+        assert conn.execute("SELECT count(*) FROM user_review_events WHERE user_id=1").fetchone()[0] == 0
+        assert conn.execute("SELECT count(*) FROM user_review_sessions WHERE user_id=1").fetchone()[0] == 0
+
+
+def test_glossary_due_review_counts_one_answer_and_keeps_other_actors_private(bank):
+    topic = GLOSSARY_TOPICS[0][0]
+    with closing(get_connection(str(bank))) as conn, conn:
+        first = glossary_service.start(conn, 1, topic, 5)
+        first_sid = first["session_id"]
+        snapshot = json.loads(conn.execute("SELECT snapshot FROM glossary_sessions WHERE id=?", (first_sid,)).fetchone()[0])
+        correct = snapshot["questions"][0]["correct_option_index"]
+        glossary_service.answer(conn, 1, first_sid, correct, 1)
+        state = json.loads(conn.execute("SELECT state FROM glossary_sessions WHERE id=?", (first_sid,)).fetchone()[0])
+        state["answers"]["1"]["answered_at"] = "2026-09-01T10:00:00Z"
+        conn.execute("UPDATE glossary_sessions SET state=? WHERE id=?", (json.dumps(state), first_sid))
+        due = [item for item in queue(conn, 1, today=date(2026, 9, 25))["items"] if item["kind"] == "glossary"]
+        assert len(due) == 1 and due[0]["is_due"]
+        assert not [item for item in queue(conn, 2, today=date(2026, 9, 25))["items"] if item["kind"] == "glossary"]
+        review = review_glossary_today(conn, 1, {"topic_id": topic, "question_count": 5,
+            "expected_session_id": first_sid, "replace_active": True})
+        sid = review["glossary_state"]["session_id"]
+        selected = json.loads(conn.execute("SELECT snapshot FROM glossary_sessions WHERE id=?", (sid,)).fetchone()[0])
+        choice = selected["questions"][0]["correct_option_index"]
+        glossary_service.answer(conn, 1, sid, choice, 1)
+        glossary_service.answer(conn, 1, sid, choice, 1)
+        assert conn.execute("SELECT count(*) FROM user_review_events WHERE user_id=1 AND answer_kind='glossary'").fetchone()[0] == 1
+
+
+def test_topic_reset_removes_only_review_events_for_deleted_answers(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        sid = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, sid, [1, 2])
+        for question_id, choice in ((1, 0), (2, 0)):
+            answer_quiz(conn, actor_user_id=1, session_id=sid, question_id=question_id,
+                        selected_option_index=choice)
+        rows = conn.execute("SELECT id,question_id,answered_at FROM quiz_answers WHERE session_id=?", (sid,)).fetchall()
+        conn.execute("INSERT INTO user_review_sessions VALUES(1,'quiz',?,'2026-09-25')", (str(sid),))
+        for row in rows:
+            conn.execute("INSERT INTO user_review_events VALUES(1,'quiz',?,?)",
+                         (str(row["id"]), row["answered_at"]))
+        preview = learning_reset.preview(conn, 1, {"scope": "topic", "topic": OLD["category"]})
+        learning_reset.confirm(conn, 1, {"scope": "topic", "topic": OLD["category"],
+                                        "confirm": True, "expected_revision": preview["revision"]})
+        assert [row[0] for row in conn.execute("SELECT answer_key FROM user_review_events WHERE user_id=1")] == [
+            str(next(row["id"] for row in rows if row["question_id"] == 2))]
+        assert conn.execute("SELECT count(*) FROM user_review_sessions WHERE user_id=1").fetchone()[0] == 0

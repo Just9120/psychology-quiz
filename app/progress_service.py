@@ -6,10 +6,12 @@ payloads never accept an actor. All detail pages expose answered questions only.
 from __future__ import annotations
 
 import random
+from datetime import datetime, timezone
 
 from app import curriculum
 from app.attempt_content import capture_question, get_attempt_content
-from app.database import begin_write, is_postgres
+from app.database import begin_write, is_postgres, timestamp_sql
+from app import repetition, glossary_service
 from app.quiz_service import PreparedQuiz, start_prepared_quiz
 
 PAGE_SIZE = 20
@@ -195,3 +197,59 @@ def train_errors(conn, actor: int, payload: dict) -> dict:
         questions = questions[:count]
     prepared = PreparedQuiz(None, (), None, tuple(questions))
     return {"ok": True, "runner_state": start_prepared_quiz(conn, actor_user_id=actor, prepared=prepared)}
+
+
+def review_today(conn, actor: int, payload: dict) -> dict:
+    if "expected_session_id" not in payload or type(payload.get("replace_active")) is not bool:
+        raise ProgressError("invalid_payload")
+    expected = positive_id(payload["expected_session_id"], nullable=True)
+    count = payload.get("question_count")
+    if count is not None and (type(count) is not int or count not in (5, 10, 15)):
+        raise ProgressError("invalid_payload")
+    begin_write(conn, f"actor:{actor}")
+    latest = conn.execute("SELECT id,status FROM quiz_sessions WHERE user_id=? ORDER BY id DESC LIMIT 1", (actor,)).fetchone()
+    if (latest["id"] if latest else None) != expected:
+        raise ProgressError("practice_changed", 409)
+    if latest and latest["status"] == "in_progress" and not payload["replace_active"]:
+        raise ProgressError("active_attempt", 409)
+    begin_write(conn, "content")
+    due = [item["question_id"] for item in repetition.quiz_queue(conn, actor,
+           today=datetime.now(timezone.utc).date()) if item["is_due"]]
+    if not due:
+        raise ProgressError("no_reviews", 409)
+    if count is not None:
+        due = due[:count]
+    state = start_prepared_quiz(conn, actor_user_id=actor,
+                                prepared=PreparedQuiz(None, (), None, tuple(due)))
+    session_id = state["session"]["session_id"]
+    conn.execute(f"""INSERT INTO user_review_sessions(user_id,session_kind,session_key,started_at)
+        VALUES(?,'quiz',?,{timestamp_sql(conn)})""", (actor, str(session_id)))
+    return {"ok": True, "runner_state": state}
+
+
+def review_glossary_today(conn, actor: int, payload: dict) -> dict:
+    topic_id = payload.get("topic_id")
+    expected = payload.get("expected_session_id")
+    replace_active = payload.get("replace_active")
+    count = payload.get("question_count")
+    if (not isinstance(topic_id, str) or topic_id not in dict(glossary_service.GLOSSARY_TOPICS)
+            or "expected_session_id" not in payload or
+            (expected is not None and (not isinstance(expected, str) or not 1 <= len(expected) <= 64))
+            or type(replace_active) is not bool or
+            (count is not None and (type(count) is not int or count not in (5, 10)))):
+        raise ProgressError("invalid_payload")
+    begin_write(conn, f"actor:{actor}")
+    due = [item["term_id"] for item in repetition.glossary_queue(conn, actor,
+           today=datetime.now(timezone.utc).date()) if item["is_due"] and item["topic_id"] == topic_id]
+    if not due:
+        raise ProgressError("no_reviews", 409)
+    if count is not None:
+        due = due[:count]
+    try:
+        state = glossary_service.start(conn, actor, topic_id, count,
+            expected_session_id=expected, replace_active=replace_active, selected_entry_ids=due)
+    except glossary_service.GlossaryError as error:
+        raise ProgressError(error.code, error.status) from None
+    conn.execute(f"""INSERT INTO user_review_sessions(user_id,session_kind,session_key,started_at)
+        VALUES(?,'glossary',?,{timestamp_sql(conn)})""", (actor, state["session_id"]))
+    return {"ok": True, "glossary_state": state}

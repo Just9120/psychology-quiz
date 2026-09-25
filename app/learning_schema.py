@@ -29,6 +29,14 @@ DDL = (
         PRIMARY KEY(user_id,answer_kind,answer_key)
     )""",
     "CREATE INDEX user_review_events_owner_time ON user_review_events(user_id,answered_at)",
+    """CREATE TABLE user_review_sessions (
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        session_kind TEXT NOT NULL CHECK(session_kind IN ('quiz','glossary')),
+        session_key TEXT NOT NULL,
+        started_at TEXT NOT NULL,
+        PRIMARY KEY(session_kind,session_key)
+    )""",
+    "CREATE INDEX user_review_sessions_owner ON user_review_sessions(user_id,session_kind)",
 )
 
 
@@ -41,7 +49,8 @@ def migrate_learning_schema(conn) -> None:
     present = ("kind" in columns["questions"], "case_content" in columns["questions"],
                "user_learning_goals" in tables, "user_achievements" in tables,
                "user_achievements_owner" in indexes, "user_review_events" in tables,
-               "user_review_events_owner_time" in indexes)
+               "user_review_events_owner_time" in indexes, "user_review_sessions" in tables,
+               "user_review_sessions_owner" in indexes)
     if marker:
         if not all(present):
             raise ValueError("Learning schema is incomplete")

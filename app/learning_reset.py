@@ -68,9 +68,32 @@ def confirm(conn, actor, payload):
         raise ProgressError("nothing_to_reset", 409)
     if current["scope"] == "all":
         # FK cascades are restricted to this actor's learning attempts.
+        conn.execute("DELETE FROM user_achievements WHERE user_id=?", (actor,))
+        conn.execute("DELETE FROM user_review_events WHERE user_id=?", (actor,))
+        conn.execute("DELETE FROM user_review_sessions WHERE user_id=?", (actor,))
         conn.execute("DELETE FROM quiz_sessions WHERE user_id=?", (actor,))
         conn.execute('DELETE FROM glossary_sessions WHERE user_id=?', (actor,))
     else:
+        # Awards are evidence-derived. Reconcile them from surviving attempts
+        # on the next read instead of keeping awards for deliberately erased work.
+        conn.execute("DELETE FROM user_achievements WHERE user_id=?", (actor,))
+        selected_pairs = {(row["session_id"], row["question_id"]) for row in selected}
+        for answer_id, session_id, question_id in conn.execute("""SELECT a.id,a.session_id,a.question_id
+            FROM quiz_answers a JOIN quiz_sessions s ON s.id=a.session_id WHERE s.user_id=?""", (actor,)):
+            if (session_id, question_id) in selected_pairs:
+                conn.execute("""DELETE FROM user_review_events WHERE user_id=?
+                    AND answer_kind='quiz' AND answer_key=?""", (actor, str(answer_id)))
+        for session_id in affected:
+            conn.execute("""DELETE FROM user_review_sessions WHERE user_id=?
+                AND session_kind='quiz' AND session_key=?""", (actor, str(session_id)))
+        for row in conn.execute("SELECT id FROM glossary_sessions WHERE user_id=? AND topic_title=?",
+                                (actor, current['topic'])):
+            session_id = row[0]
+            prefix = session_id + ':'
+            conn.execute("""DELETE FROM user_review_events WHERE user_id=? AND answer_kind='glossary'
+                AND substr(answer_key,1,length(?))=?""", (actor, prefix, prefix))
+            conn.execute("""DELETE FROM user_review_sessions WHERE user_id=?
+                AND session_kind='glossary' AND session_key=?""", (actor, session_id))
         conn.execute('DELETE FROM glossary_sessions WHERE user_id=? AND topic_title=?', (actor, current['topic']))
         by_session = defaultdict(list)
         for row in selected:

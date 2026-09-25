@@ -111,6 +111,14 @@ def quiz_state(conn, *, actor_user_id: int) -> dict:
 def answer_quiz(conn, *, actor_user_id: int, session_id: int, question_id: int, selected_option_index: int) -> dict:
     submission = submit_answer_event(conn, actor_user_id=actor_user_id, session_id=session_id,
                                      question_id=question_id, selected_option_index=selected_option_index)
+    if submission.status == "accepted" and conn.execute("""SELECT 1 FROM user_review_sessions
+            WHERE user_id=? AND session_kind='quiz' AND session_key=?""",
+            (actor_user_id, str(session_id))).fetchone():
+        saved = conn.execute("SELECT id,answered_at FROM quiz_answers WHERE session_id=? AND question_id=?",
+                             (session_id, question_id)).fetchone()
+        conn.execute("""INSERT INTO user_review_events(user_id,answer_kind,answer_key,answered_at)
+            VALUES(?,'quiz',?,?) ON CONFLICT(user_id,answer_kind,answer_key) DO NOTHING""",
+            (actor_user_id, str(saved[0]), saved[1]))
     result = {"ok": True, "submission_status": submission.status}
     if submission.status in {"accepted", "duplicate"}:
         state = build_runner_state(conn, actor_user_id=actor_user_id, session_id=session_id)
