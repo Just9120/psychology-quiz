@@ -71,7 +71,7 @@ def load_active_question_topics():
     return [
         topic
         for topic in topics
-        if topic.get("status") == "active" and "questions" in topic.get("available_contours", [])
+        if topic.get("status") == "active" and "glossary" in topic.get("available_contours", [])
     ]
 
 

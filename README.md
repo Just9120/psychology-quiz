@@ -7,8 +7,8 @@
 Текущее состояние продукта:
 - **Module 1** — стабильный baseline, 296 approved questions across five active topics.
 - **Module 2** — ограниченный рабочий scope, 171 approved questions across two active topics.
-- **Module 3** — первая активная категория `Психологическое консультирование`, 108 approved questions.
-- Активный банк вопросов: 575 approved questions в JSON source-of-truth under `content/questions/**/*.json`.
+- **Module 3** — `Психологическое консультирование` (108 вопросов) и отдельная тема `Кейсы` (1 авторский вымышленный кейс с разбором).
+- Активный банк вопросов: 576 approved questions в JSON source-of-truth under `content/questions/**/*.json`.
 
 Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. Самостоятельный Web UI находится в [pwa](pwa/); Telegram Mini App остаётся opt-in UX внутри Telegram. Внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 

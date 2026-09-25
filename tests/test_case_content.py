@@ -2,9 +2,11 @@ from app.case_content import case_error
 from app.content_publication import PublicationPolicy
 from app.attempt_content import get_attempt_content
 from app.db import get_connection, start_quiz_session, store_session_questions, upsert_approved_questions
-from app.quiz_service import build_answer_feedback, prepare_quiz
+from app.quiz_service import build_answer_feedback, prepare_quiz, quiz_setup_options
 from app.quiz_runner import get_current_question_snapshot
 from contextlib import closing
+import json
+from pathlib import Path
 from types import SimpleNamespace
 from tests.test_attempt_content import bank
 from scripts.seed_questions import validate_question
@@ -33,6 +35,34 @@ def test_case_requires_context_and_alternative_review_before_publication():
     assert case_error({**CASE, "case": {**CASE["case"], "ambiguity": ""}}) == "case_ambiguity_required"
     assert case_error({**CASE, "case": {**CASE["case"], "option_rationales": ["only one"]}}) == "case_alternative_rationales_required"
     assert case_error({**CASE, "correct_option_index": 9}) == "case_contextual_choice_required"
+
+
+def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
+    item = json.loads(Path("content/questions/module3/cases.json").read_text(encoding="utf-8"))[0]
+    registry = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
+    topic = next(topic for topic in registry if topic["id"] == "cases")
+    assert topic["title"] == item["category"] == "Кейсы"
+    assert topic["question_file"] == "content/questions/module3/cases.json"
+    assert item["kind"] == "case"
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, [item])
+        case_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (item["id"],)).fetchone()[0]
+        categories = quiz_setup_options(conn)["categories"]
+        cases_category = next(category for category in categories if category["name"] == "Кейсы")
+        other_category = next(category for category in categories if category["name"] == "Original category")
+        setup = {"question_count": 5, "difficulty": "any", "content_kinds": ["case"]}
+        single = prepare_quiz(conn, {**setup, "quiz_mode": "single",
+                                     "category_ids": [cases_category["id"]]})
+        assert single.question_ids == (case_id,)
+        mixed = prepare_quiz(conn, {**setup, "quiz_mode": "selected_mix",
+                                    "category_ids": [cases_category["id"], other_category["id"]]})
+        assert mixed.question_ids == (case_id,)
+        session = start_quiz_session(conn, 1, cases_category["id"])
+        store_session_questions(conn, session, [case_id])
+        feedback = build_answer_feedback(conn, session, case_id, 0, True)
+        assert len(feedback["case_review"]["option_rationales"]) == 4
+        assert "source_ref" not in feedback
+        assert "drive:" not in json.dumps(feedback, ensure_ascii=False)
 
 
 def test_existing_theory_content_remains_compatible():
