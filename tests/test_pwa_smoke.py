@@ -1,5 +1,6 @@
 import io
 import json
+from urllib.error import URLError
 from urllib.parse import urlsplit
 
 import pytest
@@ -58,3 +59,54 @@ def test_smoke_rejects_unsafe_origin_without_network(tmp_path, monkeypatch, orig
     monkeypatch.setattr(pwa_smoke, "build_opener", lambda *args: pytest.fail("Unexpected network"))
     with pytest.raises(ValueError, match="HTTPS origin"):
         pwa_smoke.smoke(origin, artifact, FIRST)
+
+
+@pytest.mark.parametrize("recover", [True, False])
+def test_smoke_retries_only_bounded_transport_failures(tmp_path, monkeypatch, recover):
+    artifact = make_artifact(tmp_path / "artifact")
+    calls = []
+    delays = []
+
+    class Response(io.BytesIO):
+        status = 200
+        headers = {"Content-Type": "application/javascript", "Cache-Control": "no-store",
+                   "Content-Security-Policy": "frame-ancestors 'none'"}
+
+    class Opener:
+        def open(self, request, timeout):
+            path = urlsplit(request.full_url).path
+            calls.append(path)
+            if path == "/build.json" and (not recover or calls.count(path) == 1):
+                raise URLError(ConnectionResetError(104, "Connection reset by peer"))
+            if path == "/web/auth/me":
+                response = Response(b'{"ok":false,"error":"unauthorized"}')
+                response.status = 401
+                return response
+            return Response((artifact / path[1:]).read_bytes())
+
+    monkeypatch.setattr(pwa_smoke, "build_opener", lambda *args: Opener())
+    monkeypatch.setattr(pwa_smoke.time, "sleep", delays.append)
+    if recover:
+        pwa_smoke.smoke("https://pwa.example.test", artifact, FIRST)
+        assert calls.count("/build.json") == 2
+        assert delays == [1]
+    else:
+        with pytest.raises(URLError):
+            pwa_smoke.smoke("https://pwa.example.test", artifact, FIRST)
+        assert calls == ["/build.json"] * 3
+        assert delays == [1, 2]
+
+
+def test_smoke_does_not_retry_certificate_error(tmp_path, monkeypatch):
+    artifact = make_artifact(tmp_path / "artifact")
+    calls = []
+
+    class Opener:
+        def open(self, request, timeout):
+            calls.append(request.full_url)
+            raise URLError("certificate verify failed")
+
+    monkeypatch.setattr(pwa_smoke, "build_opener", lambda *args: Opener())
+    with pytest.raises(URLError):
+        pwa_smoke.smoke("https://pwa.example.test", artifact, FIRST)
+    assert calls == ["https://pwa.example.test/build.json"]
