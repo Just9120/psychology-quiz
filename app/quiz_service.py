@@ -154,7 +154,7 @@ def build_answer_feedback(conn, session_id: int, question_id: int, selected_opti
     options = content["options"]
     selected = next((opt for opt in options if opt["option_index"] == selected_option_index), None)
     correct = next((opt for opt in options if opt["is_correct"]), None)
-    return {
+    feedback = {
         "selected_option_index": selected_option_index,
         "selected_option_text": selected["option_text"] if selected else None,
         "is_correct": bool(is_correct),
@@ -164,3 +164,7 @@ def build_answer_feedback(conn, session_id: int, question_id: int, selected_opti
         "content_sha256": content["content_sha256"],
         "snapshot_provenance": content["snapshot_provenance"],
     }
+    if content.get("kind") == "case":
+        feedback["case_review"] = {key: content["case"][key] for key in
+                                   ("approach", "conditions", "ambiguity", "option_rationales")}
+    return feedback

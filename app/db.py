@@ -548,7 +548,10 @@ def get_current_unanswered_question(conn: Connection, session_id: int) -> dict |
     if row is None:
         return None
     content = get_attempt_content(conn, session_id, int(row["question_id"]))
-    return {**dict(row), "question_text": content["question_text"], "explanation": content["explanation"]}
+    question_text = content["question_text"]
+    if content.get("kind") == "case":
+        question_text = content["case"]["situation"] + "\n\n" + question_text
+    return {**dict(row), "question_text": question_text, "explanation": content["explanation"]}
 
 
 def get_question_options(conn: Connection, question_id: int, *, session_id: int) -> list[dict]:

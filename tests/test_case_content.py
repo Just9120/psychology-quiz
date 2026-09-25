@@ -2,6 +2,8 @@ from app.case_content import case_error
 from app.content_publication import PublicationPolicy
 from app.attempt_content import get_attempt_content
 from app.db import get_connection, start_quiz_session, store_session_questions, upsert_approved_questions
+from app.quiz_service import build_answer_feedback
+from app.quiz_runner import get_current_question_snapshot
 from contextlib import closing
 from tests.test_attempt_content import bank
 from scripts.seed_questions import validate_question
@@ -45,6 +47,11 @@ def test_case_context_is_immutable_with_each_attempt_edition(bank):
         original = get_attempt_content(conn, first, question_id)
         assert original["case"] == CASE["case"]
         assert original["kind"] == "case"
+        shown = get_current_question_snapshot(conn, actor_user_id=1, session_id=first)
+        assert CASE["case"]["situation"] in shown.question_text
+        assert CASE["question"] in shown.question_text
+        review = build_answer_feedback(conn, first, question_id, 0, True)["case_review"]
+        assert review["option_rationales"] == CASE["case"]["option_rationales"]
         revised = {**CASE, "case": {**CASE["case"], "conditions": ["Изменённое условие"]}}
         upsert_approved_questions(conn, [revised])
         second = start_quiz_session(conn, 1, None)
