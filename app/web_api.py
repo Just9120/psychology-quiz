@@ -115,7 +115,7 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
             return quiz_state(conn, actor_user_id=actor), None
         if action == "quiz/setup":
             try:
-                prepared = prepare_quiz(conn, payload)
+                prepared = prepare_quiz(conn, payload, actor_user_id=actor)
             except QuizSetupError as exc:
                 raise AuthError(str(exc), 400 if str(exc) == "invalid_setup" else 409) from None
             return {"ok": True, "runner_state": start_prepared_quiz(conn, actor_user_id=actor, prepared=prepared)}, None

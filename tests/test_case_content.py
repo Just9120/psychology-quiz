@@ -2,7 +2,7 @@ from app.case_content import case_error
 from app.content_publication import PublicationPolicy
 from app.attempt_content import get_attempt_content
 from app.db import get_connection, start_quiz_session, store_session_questions, upsert_approved_questions
-from app.quiz_service import build_answer_feedback
+from app.quiz_service import build_answer_feedback, prepare_quiz
 from app.quiz_runner import get_current_question_snapshot
 from contextlib import closing
 from tests.test_attempt_content import bank
@@ -42,6 +42,10 @@ def test_case_context_is_immutable_with_each_attempt_edition(bank):
     with closing(get_connection(str(bank))) as conn, conn:
         upsert_approved_questions(conn, [CASE])
         question_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (CASE["id"],)).fetchone()[0]
+        setup = {"quiz_mode": "all", "question_count": 5, "difficulty": "any", "category_ids": []}
+        assert prepare_quiz(conn, {**setup, "content_kinds": ["case"]}).question_ids == (question_id,)
+        assert question_id not in prepare_quiz(conn, {**setup, "content_kinds": ["theory"]}).question_ids
+        assert question_id in prepare_quiz(conn, {**setup, "content_kinds": ["theory", "case"]}).question_ids
         first = start_quiz_session(conn, 1, None)
         store_session_questions(conn, first, [question_id])
         original = get_attempt_content(conn, first, question_id)

@@ -97,3 +97,48 @@ def queue(conn, actor: int, *, today: date | None = None) -> dict:
                                  str(item.get("question_id", item.get("term_id")))))
     return {"ok": True, "today": today.isoformat(), "due_count": sum(item["is_due"] for item in items),
             "items": items}
+
+
+def adaptive_questions(conn, actor: int | None, candidates: list[int], count: int | None,
+                       *, today: date | None = None) -> list[int]:
+    """Select due/weak material while reserving room for unseen questions.
+
+    The caller supplies only eligible approved IDs in a randomized order;
+    this function never broadens that scope or changes the regular random mode.
+    """
+    if not candidates or actor is None:
+        return candidates[:count]
+    due_ids = {item["question_id"] for item in quiz_queue(conn, actor,
+               today=today or datetime.now(timezone.utc).date()) if item["is_due"]}
+    seen = set()
+    weakness = defaultdict(lambda: [0, 0])
+    for question_id, correct, snapshot in conn.execute("""SELECT a.question_id,a.is_correct,sq.content_snapshot
+        FROM quiz_sessions s JOIN quiz_answers a ON a.session_id=s.id
+        JOIN quiz_session_questions sq ON sq.session_id=a.session_id AND sq.question_id=a.question_id
+        WHERE s.user_id=?""", (actor,)):
+        seen.add(int(question_id))
+        topic = json.loads(snapshot).get("category")
+        if isinstance(topic, str):
+            weakness[topic][0] += int(not correct)
+            weakness[topic][1] += 1
+    ids = sorted(set(candidates))
+    metadata = {int(row[0]): row[1] for row in conn.execute(
+        f"SELECT q.id,c.name FROM questions q JOIN categories c ON c.id=q.category_id WHERE q.id IN ({','.join('?' for _ in ids)})", ids)}
+    position = {question_id: index for index, question_id in enumerate(candidates)}
+
+    def rank(question_id):
+        wrong, total = weakness[metadata[question_id]]
+        return (-(wrong / total if total else -1), position[question_id])
+
+    due = sorted((qid for qid in candidates if qid in due_ids), key=rank)
+    new = sorted((qid for qid in candidates if qid not in seen), key=rank)
+    other = sorted((qid for qid in candidates if qid not in due_ids and qid in seen), key=rank)
+    if count is None:
+        return due + new + other
+    reserve_new = min(len(new), max(1, count // 4)) if due and count > 1 else (min(len(new), count) if not due else 0)
+    chosen = due[:count - reserve_new] + new[:reserve_new]
+    for question_id in due[count - reserve_new:] + new[reserve_new:] + other:
+        if len(chosen) >= count:
+            break
+        chosen.append(question_id)
+    return chosen

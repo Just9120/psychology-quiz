@@ -549,9 +549,14 @@ def get_current_unanswered_question(conn: Connection, session_id: int) -> dict |
         return None
     content = get_attempt_content(conn, session_id, int(row["question_id"]))
     question_text = content["question_text"]
+    explanation = content["explanation"]
     if content.get("kind") == "case":
         question_text = content["case"]["situation"] + "\n\n" + question_text
-    return {**dict(row), "question_text": question_text, "explanation": content["explanation"]}
+        rationales = content["case"]["option_rationales"]
+        explanation = (explanation or "") + "\n\nРазбор вариантов:\n" + "\n".join(
+            f"{index + 1}. {rationale}" for index, rationale in enumerate(rationales))
+        explanation += "\n\n" + content["case"]["ambiguity"]
+    return {**dict(row), "question_text": question_text, "explanation": explanation}
 
 
 def get_question_options(conn: Connection, question_id: int, *, session_id: int) -> list[dict]:

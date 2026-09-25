@@ -1,10 +1,14 @@
 from contextlib import closing
 from datetime import date
+import json
 
 from app.db import create_or_load_user, get_connection, start_quiz_session, store_session_questions, upsert_approved_questions
 from app.quiz_service import answer_quiz
-from app.repetition import queue, schedule
-from tests.test_attempt_content import bank, NEW
+from app.repetition import adaptive_questions, queue, schedule
+from app.miniapp_api import build_setup_response
+from tests.test_attempt_content import bank, NEW, TOKEN
+from tests.test_miniapp_api import _make_init_data
+from tests.test_web_auth import web, post, register, login
 
 
 EDITION = "a" * 64
@@ -37,3 +41,30 @@ def test_due_queue_is_personal_and_resets_after_question_edit(bank):
         revised = queue(conn, 1, today=date(2026, 9, 2))
         assert revised["due_count"] == 1
         assert revised["items"][0]["reason"] == "new_edition"
+
+
+def test_adaptive_keeps_random_candidate_scope_and_reserves_new_material(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        sid = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, sid, [1])
+        answer_quiz(conn, actor_user_id=1, session_id=sid, question_id=1, selected_option_index=1)
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-01T10:00:00Z' WHERE session_id=?", (sid,))
+        assert adaptive_questions(conn, 1, [2, 1], 1, today=date(2026, 9, 3)) == [1]
+        assert adaptive_questions(conn, 1, [2, 1], 2, today=date(2026, 9, 3)) == [1, 2]
+        assert adaptive_questions(conn, 1, [2], 5, today=date(2026, 9, 3)) == [2]
+        assert adaptive_questions(conn, None, [2, 1], 1, today=date(2026, 9, 3)) == [2]
+
+
+def test_adaptive_setup_uses_verified_actor_in_web_and_telegram(web):
+    payload = {"quiz_mode": "adaptive", "question_count": 5, "difficulty": "any", "category_ids": []}
+    register(web)
+    csrf = login(web)
+    assert post(web, "identity/new", csrf=csrf).status_code == 200
+    own = post(web, "quiz/setup", payload, csrf=csrf)
+    assert own.status_code == 200 and own.json()["runner_state"]["state"] == "in_progress"
+    signed = _make_init_data(TOKEN, {"id": 42, "first_name": "Original user"})
+    status, _, body = build_setup_response(str(web.db), TOKEN, signed, json.dumps(payload).encode())
+    assert status == 200 and json.loads(body)["runner_state"]["state"] == "in_progress"
+    with closing(get_connection(str(web.db))) as conn:
+        owners = [row[0] for row in conn.execute("SELECT DISTINCT user_id FROM quiz_sessions WHERE status='in_progress'")]
+        assert len(owners) == 2

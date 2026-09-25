@@ -11,10 +11,15 @@ def valid_quiz_setup(payload: dict) -> bool:
     count = payload.get("question_count")
     difficulty = payload.get("difficulty")
     categories = payload.get("category_ids")
+    kinds = payload.get("content_kinds")
     return (
-        isinstance(mode, str) and mode in {"single", "selected_mix", "all"}
+        isinstance(mode, str) and mode in {"single", "selected_mix", "all", "adaptive"}
         and (count is None or (type(count) is int and count in {5, 10, 15}))
         and isinstance(difficulty, str) and difficulty in {"any", "easy", "medium", "hard"}
         and isinstance(categories, list)
         and all(is_sqlite_integer(item, minimum=1) for item in categories)
+        and ("content_kinds" not in payload or
+             isinstance(kinds, list) and bool(kinds)
+             and all(type(kind) is str and kind in {"theory", "glossary", "case"} for kind in kinds)
+             and len(kinds) == len(set(kinds)))
     )

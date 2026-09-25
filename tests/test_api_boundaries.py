@@ -56,6 +56,8 @@ def dump(path):
     ("question_count", []), ("question_count", {}), ("question_count", True), ("question_count", 5.0),
     ("category_ids", [True]), ("category_ids", [1.0]), ("category_ids", [2**64]),
     ("category_ids", [-1]), ("category_ids", [0]), ("category_ids", [999]), ("category_ids", []),
+    ("content_kinds", []), ("content_kinds", ["case", "case"]),
+    ("content_kinds", [{"unexpected": True}]), ("content_kinds", ["unknown"]),
 ])
 def test_invalid_setup_is_4xx_without_any_database_mutation(api, field, value):
     path, client, signed = api
