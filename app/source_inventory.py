@@ -35,7 +35,8 @@ def scan(root_id: str, listings: dict[str, dict]) -> dict:
         for item in children:
             if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not item["id"]:
                 raise InventoryError("invalid_child")
-            if parent not in item.get("parent_ids", []):
+            parents = item.get("parent_ids")
+            if not isinstance(parents, list) or parent not in parents:
                 raise InventoryError("parent_mismatch")
             if item.get("file_or_folder") == "folder":
                 queue.append(item["id"])

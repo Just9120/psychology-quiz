@@ -30,3 +30,6 @@ def test_missing_is_not_deletion_and_conflicting_metadata_fails_closed():
     with pytest.raises(InventoryError, match="conflicting_file_metadata"):
         scan("root", {"root": {"complete": True, "children": [
             item("one", "root"), item("one", "root", title="Conflicting")]}})
+    with pytest.raises(InventoryError, match="parent_mismatch"):
+        scan("root", {"root": {"complete": True, "children": [
+            {**item("one", "root"), "parent_ids": None}]}})
