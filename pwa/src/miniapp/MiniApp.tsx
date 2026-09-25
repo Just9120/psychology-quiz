@@ -88,7 +88,8 @@ export function MiniApp() {
       if (failure instanceof MiniAppError && !failure.status) {
         try {
           const saved = await miniApi.state()
-          if (saved.recent_answer_feedback?.question_id === payload.question_id) {
+          if (saved.runner_state.session?.session_id === payload.session_id &&
+              saved.recent_answer_feedback?.question_id === payload.question_id) {
             setState(saved.runner_state); setFeedback(saved.recent_answer_feedback)
             setFeedbackQuestion(question ?? null); setPending(null)
             return
