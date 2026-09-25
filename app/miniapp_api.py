@@ -47,12 +47,12 @@ LEARNING_WRITE_ACTIONS = {"goal-set", "review-start", "review-glossary-start"}
 
 
 def build_learning_response(db_path: str, bot_token: str, action: str,
-                            owner_email: str | None, init_data: str, body: bytes = b"",
+                            init_data: str, body: bytes = b"",
                             *, max_age_seconds: int = 3600):
-    """New learning routes remain owner-only until student launch is authorized.
+    """Telegram learning follows the existing verified-initData access model.
 
-    Telegram initData proves the external identity; the existing confirmed web
-    link proves that it is the enabled owner. No unknown Telegram user is created.
+    A linked PWA account resolves to the same actor; another Telegram user has
+    a separate actor. Public PWA student registration remains disabled.
     """
     if action not in LEARNING_READ_ACTIONS | LEARNING_WRITE_ACTIONS:
         return _json(HTTPStatus.NOT_FOUND, {"ok": False, "error": "not_found"})
@@ -64,14 +64,9 @@ def build_learning_response(db_path: str, bot_token: str, action: str,
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
     try:
         with closing(get_connection(db_path)) as conn, conn:
-            if not owner_email:
-                return _json(HTTPStatus.FORBIDDEN, {"ok": False, "error": "student_access_disabled"})
-            row = conn.execute("""SELECT u.id FROM users u JOIN web_accounts a ON a.user_id=u.id
-                WHERE u.telegram_user_id=? AND a.email=? AND a.enabled=1""",
-                (verified.telegram_user_id, owner_email)).fetchone()
-            if row is None:
-                return _json(HTTPStatus.FORBIDDEN, {"ok": False, "error": "student_access_disabled"})
-            actor = int(row[0])
+            user = create_or_load_user(conn, verified.telegram_user_id, verified.username,
+                                       verified.first_name, verified.last_name)
+            actor = int(user["id"])
             if action == "overview":
                 result = progress_service.overview(conn, actor)
             elif action == "review":

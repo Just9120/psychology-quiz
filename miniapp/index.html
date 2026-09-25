@@ -2517,14 +2517,11 @@
         try {
           const actions = ['review', 'mastery', 'goals', 'achievements'];
           const replies = await Promise.all(actions.map(action => glossaryFetch(`/miniapp/learning/${action}`, null, buildMiniappRequestId())));
-          if (replies.some(reply => !reply.resp.ok || reply.data?.ok !== true)) {
-            const forbidden = replies.some(reply => reply.resp.status === 403);
-            throw new Error(forbidden ? 'student_access_disabled' : 'unavailable');
-          }
+          if (replies.some(reply => !reply.resp.ok || reply.data?.ok !== true)) throw new Error('unavailable');
           const [review, mastery, goals, achievements] = replies.map(reply => reply.data);
           renderLearningView(review, mastery, goals, achievements);
         } catch (failure) {
-          showLearningView(failure?.message === 'student_access_disabled' ? 'Личный раздел пока доступен только связанному аккаунту владельца.' : 'Не удалось загрузить личный раздел.');
+          showLearningView('Не удалось загрузить личный раздел.');
           learningLine(learningView, 'p', runnerState.textContent);
           learningButton(learningView, 'Повторить загрузку', () => void loadLearningView());
         }

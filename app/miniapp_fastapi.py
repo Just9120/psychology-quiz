@@ -315,7 +315,7 @@ def create_app(
             return JSONResponse({"ok": False, "error": "not_found"}, status_code=404)
         endpoint = f"/miniapp/learning/{action}"
         return await _get_builder_response(endpoint, request, build_learning_response,
-            db_path, bot_token, action, web_settings.owner_email if web_settings else None)
+            db_path, bot_token, action)
 
     @app.post("/miniapp/learning/{action}")
     async def post_learning(action: str, request: Request) -> Response:
@@ -323,7 +323,7 @@ def create_app(
             return JSONResponse({"ok": False, "error": "not_found"}, status_code=404)
         endpoint = f"/miniapp/learning/{action}"
         return await _post_builder_response(endpoint, request, build_learning_response,
-            db_path, bot_token, action, web_settings.owner_email if web_settings else None)
+            db_path, bot_token, action)
 
     @app.post("/miniapp/setup")
     async def post_setup(request: Request) -> Response:
