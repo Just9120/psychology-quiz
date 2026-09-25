@@ -290,7 +290,7 @@ test('personal progress, historical mistakes and retry-safe training share the q
   await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-history.png`, fullPage: true })
   await page.reload()
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
-  await expect(page.getByText('1 из 2 ответов')).toBeVisible()
+  await expect(page.getByText('1 из 2 ответов', { exact: true })).toBeVisible()
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })
 

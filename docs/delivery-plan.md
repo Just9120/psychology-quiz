@@ -45,6 +45,8 @@ PASS local: canonical questions/topics/glossary/literature/learning-review valid
 
 **PR2 CI cycle, 25.09.2026:** #309, head `60a5fad`, CI `36160437517`: backend/real PostgreSQL PASS; PWA SQLite browser 31/32 PASS, один старый mobile assertion выбрал два элемента после появления новой сводки. Селектор уточнён до exact text без ослабления проверки; затронутый desktop/mobile E2E локально 2/2 PASS. Следующий шаг — один сгруппированный push исправления и ожидание актуальных CI/review; первоначальный CI не считается gate нового head.
 
+**PR2 CI correction, 25.09.2026:** head `9b74cc0`, CI `36160917908`: backend/real PostgreSQL снова PASS, PWA SQLite 31/32 — второе ожидание той же подстроки в конце старого mobile test требовало того же exact match. Оба селектора уточнены. Полный локальный SQLite E2E дал 31/32: не связанный с diff glossary click один раз ожидал нестабильный элемент до timeout; последующий точечный повтор glossary и progress на desktop/mobile 4/4 PASS. Повторный CI актуального head должен подтвердить полный контур; без него merge запрещён. PostgreSQL browser stage в обоих failed runs был skipped по зависимости, не N/A.
+
 ### UPDATE-10 — влияние новой редакции требований
 
 | Область | Изменение AC и действие до реализации |
