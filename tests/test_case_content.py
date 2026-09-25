@@ -47,7 +47,9 @@ def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
     with closing(get_connection(str(bank))) as conn, conn:
         upsert_approved_questions(conn, [item])
         case_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (item["id"],)).fetchone()[0]
-        categories = quiz_setup_options(conn)["categories"]
+        options = quiz_setup_options(conn)
+        categories = options["categories"]
+        assert options["content_kind_choices"] == ["theory", "case"]
         cases_category = next(category for category in categories if category["name"] == "Кейсы")
         other_category = next(category for category in categories if category["name"] == "Original category")
         setup = {"question_count": 5, "difficulty": "any", "content_kinds": ["case"]}

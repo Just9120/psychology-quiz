@@ -11,7 +11,7 @@ export function QuizSetup({ options, busy, hasAttempt, onStart, onResume }: {
   const [categories, setCategories] = useState<number[]>([])
   const [count, setCount] = useState<Setup['question_count']>(10)
   const [difficulty, setDifficulty] = useState<Setup['difficulty']>('any')
-  const [kinds, setKinds] = useState<NonNullable<Setup['content_kinds']>>(['theory', 'glossary', 'case'])
+  const [kinds, setKinds] = useState<NonNullable<Setup['content_kinds']>>(options.content_kind_choices ?? ['theory', 'glossary', 'case'])
   const [confirmReplace, setConfirmReplace] = useState(false)
   const canStart = options.categories.length > 0 && kinds.length > 0 && (mode === 'all' || mode === 'adaptive' || categories.length > 0)
   function start() {

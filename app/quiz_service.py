@@ -92,11 +92,12 @@ def start_prepared_quiz(conn, *, actor_user_id: int, prepared: PreparedQuiz) -> 
 
 
 def quiz_setup_options(conn) -> dict:
+    available_kinds = {row[0] for row in conn.execute("SELECT DISTINCT kind FROM questions WHERE status='approved'")}
     return {
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)],
         "question_count_choices": [5, 10, 15, "all"],
         "difficulty_choices": ["any", "easy", "medium", "hard"],
-        "content_kind_choices": ["theory", "glossary", "case"],
+        "content_kind_choices": [kind for kind in ("theory", "glossary", "case") if kind in available_kinds],
     }
 
 
