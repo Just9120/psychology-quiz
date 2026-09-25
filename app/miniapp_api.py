@@ -18,7 +18,8 @@ from app.literature_service import (
     load_progress as _load_literature_progress_by_user, load_item_states as _load_literature_item_states_by_user,
     validate_progress as _validate_literature_progress_payload, save_progress as _upsert_literature_progress,
 )
-from app import glossary_service
+from app import glossary_service, progress_service, repetition, learning_goals, achievements
+from app.mastery import overview as mastery_overview
 from app.miniapp_glossary import run as run_glossary
 from typing import Any
 from app.payload_validation import is_sqlite_integer, valid_quiz_setup
@@ -40,6 +41,62 @@ from app.miniapp_glossary import (
 )
 
 logger = logging.getLogger(__name__)
+
+LEARNING_READ_ACTIONS = {"overview", "review", "mastery", "goals", "achievements"}
+LEARNING_WRITE_ACTIONS = {"goal-set", "review-start", "review-glossary-start"}
+
+
+def build_learning_response(db_path: str, bot_token: str, action: str,
+                            owner_email: str | None, init_data: str, body: bytes = b"",
+                            *, max_age_seconds: int = 3600):
+    """New learning routes remain owner-only until student launch is authorized.
+
+    Telegram initData proves the external identity; the existing confirmed web
+    link proves that it is the enabled owner. No unknown Telegram user is created.
+    """
+    if action not in LEARNING_READ_ACTIONS | LEARNING_WRITE_ACTIONS:
+        return _json(HTTPStatus.NOT_FOUND, {"ok": False, "error": "not_found"})
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    payload = _parse_json_payload(body) if action in LEARNING_WRITE_ACTIONS else {}
+    if payload is None:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    try:
+        with closing(get_connection(db_path)) as conn, conn:
+            if not owner_email:
+                return _json(HTTPStatus.FORBIDDEN, {"ok": False, "error": "student_access_disabled"})
+            row = conn.execute("""SELECT u.id FROM users u JOIN web_accounts a ON a.user_id=u.id
+                WHERE u.telegram_user_id=? AND a.email=? AND a.enabled=1""",
+                (verified.telegram_user_id, owner_email)).fetchone()
+            if row is None:
+                return _json(HTTPStatus.FORBIDDEN, {"ok": False, "error": "student_access_disabled"})
+            actor = int(row[0])
+            if action == "overview":
+                result = progress_service.overview(conn, actor)
+            elif action == "review":
+                result = repetition.queue(conn, actor)
+            elif action == "mastery":
+                result = mastery_overview(conn, actor)
+            elif action == "goals":
+                result = learning_goals.overview(conn, actor)
+            elif action == "achievements":
+                result = achievements.refresh(conn, actor)
+            elif action == "goal-set":
+                result = learning_goals.set_target(conn, actor, payload)
+            elif action == "review-start":
+                result = progress_service.review_today(conn, actor, payload)
+            else:
+                result = progress_service.review_glossary_today(conn, actor, payload)
+        return _json(HTTPStatus.OK, result)
+    except (progress_service.ProgressError, glossary_service.GlossaryError) as error:
+        return _json(HTTPStatus(error.status), {"ok": False, "error": error.code})
+    except learning_goals.GoalError as error:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": error.code})
+    except OPERATIONAL_ERRORS as error:
+        if _is_sqlite_locked_error(error):
+            return _database_busy_response()
+        raise
 
 
 def _log_locked_db(endpoint: str, started_at: float) -> None:

@@ -259,10 +259,12 @@
         <button type="button" id="mode_topics" class="miniapp-choice-button mode-choice-button">Тесты по темам</button>
         <button type="button" id="mode_glossary" class="miniapp-choice-button mode-choice-button">Глоссарий</button>
         <button type="button" id="mode_literature" class="miniapp-choice-button mode-choice-button">Литература</button>
+        <button type="button" id="mode_learning" class="miniapp-choice-button mode-choice-button">Повторение и цели</button>
       </div>
     </div>
     <div id="glossary_view" hidden></div>
     <div id="literature_view" hidden></div>
+    <div id="learning_view" hidden></div>
     <div id="setup_warning" class="warn" hidden></div>
 
     <form id="f" class="setup-form" hidden>
@@ -271,6 +273,7 @@
         <label><input type="radio" name="quiz_mode" value="single" checked /> Конкретная тема</label>
         <label><input type="radio" name="quiz_mode" value="selected_mix" /> Микс из выбранных тем</label>
         <label><input type="radio" name="quiz_mode" value="all" /> Все темы</label>
+        <label><input type="radio" name="quiz_mode" value="adaptive" /> Адаптивный квиз</label>
       </fieldset>
 
       <fieldset id="cats_fieldset" class="setup-section">
@@ -293,6 +296,12 @@
         <label><input type="radio" name="difficulty" value="medium" /> Средние</label>
         <label><input type="radio" name="difficulty" value="hard" /> Сложные</label>
       </fieldset>
+      <fieldset class="setup-section">
+        <legend>Виды заданий</legend>
+        <label><input type="checkbox" name="content_kind" value="theory" checked /> Теория</label>
+        <label><input type="checkbox" name="content_kind" value="glossary" checked /> Термины</label>
+        <label><input type="checkbox" name="content_kind" value="case" checked /> Кейсы</label>
+      </fieldset>
 
       <p id="setup_hint" class="meta"></p>
       <button type="submit" id="go" disabled>Начать викторину</button>
@@ -313,9 +322,11 @@
       const modeView = document.getElementById('mode_view');
       const glossaryView = document.getElementById('glossary_view');
       const literatureView = document.getElementById('literature_view');
+      const learningView = document.getElementById('learning_view');
       const modeTopics = document.getElementById('mode_topics');
       const modeGlossary = document.getElementById('mode_glossary');
       const modeLiterature = document.getElementById('mode_literature');
+      const modeLearning = document.getElementById('mode_learning');
       const catsFieldset = document.getElementById('cats_fieldset');
       const setupWarning = document.getElementById('setup_warning');
       const runnerState = document.getElementById('runner_state');
@@ -436,6 +447,8 @@
         glossaryView.hidden = true;
         literatureView.replaceChildren();
         literatureView.hidden = true;
+        learningView.replaceChildren();
+        learningView.hidden = true;
       }
 
       function showSetupWarningIfNeeded() {
@@ -457,7 +470,7 @@
         setupIntro.hidden = false;
         modeView.hidden = false;
         showSetupWarningIfNeeded();
-        runnerState.textContent = 'Выберите режим: тесты по темам, глоссарий или литература.';
+        runnerState.textContent = 'Выберите режим: тесты, глоссарий, литература или повторение.';
       }
 
       function showSetupMode({ message = 'Выберите формат, темы и сложность.', clearError = true } = {}) {
@@ -482,6 +495,7 @@
         hideSetupWarning();
         glossaryView.hidden = true;
         literatureView.hidden = true;
+        learningView.hidden = true;
         questionView.hidden = false;
       }
 
@@ -493,6 +507,7 @@
         hideSetupWarning();
         glossaryView.hidden = true;
         literatureView.hidden = true;
+        learningView.hidden = true;
         questionView.hidden = false;
       }
 
@@ -749,7 +764,7 @@
         setupRenderCategories = () => {
           const activeCategories = Array.isArray(setupOptionsCache.categories) ? setupOptionsCache.categories : [];
           const mode = form.quiz_mode?.value || 'single';
-          const inputType = mode === 'selected_mix' ? 'checkbox' : 'radio';
+          const inputType = mode === 'selected_mix' || mode === 'adaptive' ? 'checkbox' : 'radio';
           const selectedIds = selectedCategoryIds();
           const selectedSet = new Set(mode === 'single' ? selectedIds.slice(0, 1) : selectedIds);
           cats.replaceChildren();
@@ -796,7 +811,7 @@
       function syncCategoryUi() {
         const mode = form.quiz_mode.value;
         const allMode = mode === 'all';
-        const expectedInputType = mode === 'selected_mix' ? 'checkbox' : 'radio';
+        const expectedInputType = mode === 'selected_mix' || mode === 'adaptive' ? 'checkbox' : 'radio';
         if (!allMode && currentCategoryInputType !== expectedInputType && typeof setupRenderCategories === 'function') {
           setupRenderCategories();
         }
@@ -829,6 +844,10 @@
           if (!ok) hint = 'Выберите хотя бы одну тему.';
         } else {
           ok = true;
+        }
+        if (![...form.querySelectorAll('input[name="content_kind"]:checked')].length) {
+          ok = false;
+          hint = 'Выберите хотя бы один вид заданий.';
         }
         go.disabled = !ok;
         setupHint.textContent = hint;
@@ -1656,6 +1675,30 @@
           ex.textContent = `Пояснение: ${feedback.explanation}`;
           feedbackWrap.appendChild(ex);
         }
+        if (feedback?.case_review) {
+          const review = feedback.case_review;
+          const heading = document.createElement('h4');
+          heading.textContent = 'Разбор кейса';
+          feedbackWrap.appendChild(heading);
+          const approach = document.createElement('p');
+          approach.textContent = `Подход: ${review.approach || ''}`;
+          feedbackWrap.appendChild(approach);
+          for (const [title, values] of [['Условия', review.conditions], ['Варианты действий', review.option_rationales]]) {
+            const subheading = document.createElement('h5');
+            subheading.textContent = title;
+            feedbackWrap.appendChild(subheading);
+            const list = document.createElement('ul');
+            (Array.isArray(values) ? values : []).forEach(value => {
+              const row = document.createElement('li');
+              row.textContent = String(value);
+              list.appendChild(row);
+            });
+            feedbackWrap.appendChild(list);
+          }
+          const limitation = document.createElement('p');
+          limitation.textContent = review.ambiguity || '';
+          feedbackWrap.appendChild(limitation);
+        }
         questionView.appendChild(feedbackWrap);
         const next = document.createElement('button');
         next.type = 'button';
@@ -1802,6 +1845,7 @@
         hideSetupWarning();
         questionView.hidden = true;
         glossaryView.hidden = true;
+        learningView.hidden = true;
         literatureView.hidden = false;
       }
 
@@ -2108,6 +2152,8 @@
         setupIntro.hidden = true;
         hideSetupWarning();
         questionView.hidden = true;
+        literatureView.hidden = true;
+        learningView.hidden = true;
         glossaryView.hidden = false;
       }
 
@@ -2432,6 +2478,164 @@
         runnerState.textContent = 'Тест по глоссарию завершён.';
       }
 
+      function showLearningView(message = 'Загружаем повторение...') {
+        modeView.hidden = true;
+        form.hidden = true;
+        setupIntro.hidden = true;
+        hideSetupWarning();
+        questionView.hidden = true;
+        glossaryView.hidden = true;
+        literatureView.hidden = true;
+        learningView.hidden = false;
+        learningView.replaceChildren();
+        runnerState.textContent = message;
+      }
+
+      function learningLine(parent, tag, value) {
+        const node = document.createElement(tag);
+        node.textContent = value;
+        parent.appendChild(node);
+        return node;
+      }
+
+      function learningButton(parent, label, action) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'miniapp-choice-button';
+        button.textContent = label;
+        button.addEventListener('click', action);
+        parent.appendChild(button);
+        return button;
+      }
+
+      async function loadLearningView() {
+        showLearningView();
+        if (!apiBase || !tg?.initData) {
+          learningLine(learningView, 'p', 'Откройте Mini App из Telegram для доступа к личному прогрессу.');
+          return;
+        }
+        try {
+          const actions = ['review', 'mastery', 'goals', 'achievements'];
+          const replies = await Promise.all(actions.map(action => glossaryFetch(`/miniapp/learning/${action}`, null, buildMiniappRequestId())));
+          if (replies.some(reply => !reply.resp.ok || reply.data?.ok !== true)) {
+            const forbidden = replies.some(reply => reply.resp.status === 403);
+            throw new Error(forbidden ? 'student_access_disabled' : 'unavailable');
+          }
+          const [review, mastery, goals, achievements] = replies.map(reply => reply.data);
+          renderLearningView(review, mastery, goals, achievements);
+        } catch (failure) {
+          showLearningView(failure?.message === 'student_access_disabled' ? 'Личный раздел пока доступен только связанному аккаунту владельца.' : 'Не удалось загрузить личный раздел.');
+          learningLine(learningView, 'p', runnerState.textContent);
+          learningButton(learningView, 'Повторить загрузку', () => void loadLearningView());
+        }
+      }
+
+      async function startLearningQuiz(replaceActive) {
+        try {
+          const saved = await glossaryFetch('/miniapp/state', null, buildMiniappRequestId());
+          if (!saved.resp.ok || !saved.data?.runner_state) throw new Error('state_unavailable');
+          const expected = saved.data.runner_state.session?.session_id ?? null;
+          const result = await glossaryFetch('/miniapp/learning/review-start', {
+            expected_session_id: expected, replace_active: replaceActive, question_count: 5,
+          }, buildMiniappRequestId());
+          if (result.resp.status === 409 && result.data?.error === 'active_attempt' && !replaceActive) {
+            learningLine(learningView, 'p', 'Новая тренировка завершит незавершённую попытку. Сохранённые ответы останутся в истории.');
+            learningButton(learningView, 'Подтвердить замену', () => void startLearningQuiz(true));
+            return;
+          }
+          if (!result.resp.ok || !result.data?.runner_state) throw new Error('start_unconfirmed');
+          renderRunnerState(result.data.runner_state, { preferLaunchCompact: false });
+        } catch (_) {
+          runnerState.textContent = 'Ответ о запуске не получен. Проверьте сохранённую попытку, прежде чем повторять.';
+          learningButton(learningView, 'Проверить попытку', async () => {
+            const saved = await glossaryFetch('/miniapp/state', null, buildMiniappRequestId());
+            if (saved.resp.ok && saved.data?.runner_state) renderRunnerState(saved.data.runner_state, { preferLaunchCompact: false });
+          });
+        }
+      }
+
+      async function startLearningGlossary(topicId, replaceActive) {
+        try {
+          const saved = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'state' }, buildMiniappRequestId());
+          if (!saved.resp.ok || !saved.data?.glossary_state) throw new Error('state_unavailable');
+          const expected = saved.data.glossary_state.session_id ?? null;
+          const result = await glossaryFetch('/miniapp/learning/review-glossary-start', {
+            topic_id: topicId, expected_session_id: expected, replace_active: replaceActive, question_count: 5,
+          }, buildMiniappRequestId());
+          if (result.resp.status === 409 && result.data?.error === 'active_glossary' && !replaceActive) {
+            learningLine(learningView, 'p', 'Новая тренировка завершит незавершённый тест терминов.');
+            learningButton(learningView, 'Подтвердить замену терминов', () => void startLearningGlossary(topicId, true));
+            return;
+          }
+          if (!result.resp.ok || !result.data?.glossary_state) throw new Error('start_unconfirmed');
+          glossarySavedState = result.data.glossary_state;
+          renderGlossaryState(glossarySavedState);
+        } catch (_) {
+          runnerState.textContent = 'Ответ о запуске терминов не получен. Проверьте сохранённое состояние.';
+          learningButton(learningView, 'Проверить термины', async () => {
+            const saved = await glossaryFetch('/miniapp/answer', { mode: 'glossary', action: 'state' }, buildMiniappRequestId());
+            if (saved.resp.ok && saved.data?.glossary_state) renderGlossaryState(saved.data.glossary_state);
+          });
+        }
+      }
+
+      function renderLearningView(review, mastery, goals, achievements) {
+        showLearningView('Личные повторения и цели.');
+        const card = document.createElement('section');
+        card.className = 'question-card';
+        learningLine(card, 'h4', `Сегодня к повторению: ${review.due_count}`);
+        const dueQuiz = review.items.filter(item => item.kind === 'quiz' && item.is_due);
+        const dueGlossary = review.items.filter(item => item.kind === 'glossary' && item.is_due);
+        learningLine(card, 'p', review.items.length === 0 ? 'Пока нет ответов для очереди. Начните квиз или глоссарий.' : !review.due_count ? 'На сегодня всё повторено.' : `${dueQuiz.length} вопросов · ${dueGlossary.length} терминов`);
+        if (dueQuiz.length) learningButton(card, 'Повторить вопросы', () => void startLearningQuiz(false));
+        const topics = new Map(dueGlossary.map(item => [item.topic_id, item.topic]));
+        for (const [id, title] of topics) learningButton(card, `Термины: ${title}`, () => void startLearningGlossary(id, false));
+        learningView.appendChild(card);
+
+        const masteryCard = document.createElement('section');
+        masteryCard.className = 'question-card';
+        learningLine(masteryCard, 'h4', 'Освоение');
+        learningLine(masteryCard, 'p', `${mastery.questions.mastered_count} из ${mastery.questions.assessed_count} вопросов · ${mastery.terms.mastered_count} из ${mastery.terms.assessed_count} терминов.`);
+        learningLine(masteryCard, 'p', 'Освоено — три верных ответа на одну редакцию с интервалами от 1 и 3 дней за период от 7 дней. Иначе данных недостаточно.');
+        learningView.appendChild(masteryCard);
+
+        const goalCard = document.createElement('section');
+        goalCard.className = 'question-card';
+        learningLine(goalCard, 'h4', `Цели на неделю с ${goals.week_start} (UTC)`);
+        const names = { study: 'Завершённые попытки', review: 'Ответы в очереди', reading: 'Прочитанные материалы' };
+        for (const item of goals.goals) {
+          const form = document.createElement('form');
+          const label = learningLine(form, 'label', `${names[item.goal_kind]} · выполнено ${item.completed}`);
+          const input = document.createElement('input');
+          input.type = 'number'; input.min = '1'; input.step = '1';
+          input.value = item.weekly_target ?? '';
+          label.appendChild(input);
+          const save = learningLine(form, 'button', 'Сохранить цель');
+          save.type = 'submit';
+          form.addEventListener('submit', async event => {
+            event.preventDefault();
+            const target = Number(input.value);
+            if (!Number.isSafeInteger(target) || target < 1) { runnerState.textContent = 'Укажите положительное целое число.'; return; }
+            save.disabled = true;
+            try {
+              const response = await glossaryFetch('/miniapp/learning/goal-set', { goal_kind: item.goal_kind, weekly_target: target }, buildMiniappRequestId());
+              if (!response.resp.ok || !response.data?.ok) throw new Error('save_unconfirmed');
+              await loadLearningView();
+            } catch (_) { runnerState.textContent = 'Цель не подтверждена. Обновите раздел перед повтором.'; save.disabled = false; }
+          });
+          goalCard.appendChild(form);
+        }
+        learningView.appendChild(goalCard);
+        const achievementCard = document.createElement('section');
+        achievementCard.className = 'question-card';
+        learningLine(achievementCard, 'h4', 'Достижения');
+        if (!achievements.achievements.length) learningLine(achievementCard, 'p', 'Пока нет достижений. Они личные, без рейтинга.');
+        const labels = { new_topic: 'Новая тема', corrected_error: 'Исправленная ошибка', regularity: 'Регулярно занимаюсь' };
+        for (const item of achievements.achievements) learningLine(achievementCard, 'p', `${labels[item.kind] || item.kind} · ${item.earned_at.slice(0, 10)}`);
+        learningView.appendChild(achievementCard);
+      }
+
+      modeLearning.addEventListener('click', () => void loadLearningView());
       modeTopics.addEventListener('click', () => showSetupMode());
       modeGlossary.addEventListener('click', async () => {
         showGlossaryLoading();
@@ -2490,6 +2694,7 @@
           category_ids: mode === 'all' ? [] : selected,
           question_count: rawCount === 'all' ? null : Number(rawCount),
           difficulty: form.difficulty.value,
+          content_kinds: [...form.querySelectorAll('input[name="content_kind"]:checked')].map(input => input.value),
         };
 
         if (apiBase && tg?.initData) {
