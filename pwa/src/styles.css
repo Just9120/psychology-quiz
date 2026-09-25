@@ -21,9 +21,9 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .brand { display: flex; align-items: center; gap: 11px; white-space: nowrap; font-size: 19px; font-weight: 650; letter-spacing: -.6px; }
 .brand-light { font-weight: 400; }
 .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; background: var(--green); color: #fff; border-radius: 12px; }
-.button { border: 1px solid transparent; border-radius: 9px; padding: 12px 20px; min-height: 47px; display: inline-flex; justify-content: center; align-items: center; gap: 18px; font-size: 14px; font-weight: 600; transition: background .15s, transform .15s; }
+.button { border: 1px solid transparent; border-radius: 9px; padding: 12px 20px; min-height: 47px; display: inline-flex; justify-content: center; align-items: center; gap: 18px; font-size: 14px; font-weight: 600; transition: background .15s; }
 .button.primary { background: var(--green); color: #fff; box-shadow: 0 3px 8px #164d4712; }
-.button.primary:hover:not(:disabled) { background: var(--green-hover); transform: translateY(-1px); }
+.button.primary:hover:not(:disabled) { background: var(--green-hover); }
 .button.secondary { background: #fff; color: var(--green); border-color: var(--line); }
 .button.secondary:hover:not(:disabled) { background: var(--soft-green); }
 .button.quiet, .text-button { border: 0; background: transparent; color: var(--green); }
