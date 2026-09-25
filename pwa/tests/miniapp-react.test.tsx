@@ -57,6 +57,7 @@ test('verified Telegram actor can open review, glossary and literature without P
       '/miniapp/setup-options': { setup_options: setupOptions },
       '/miniapp/state': { runner_state: idle },
       '/miniapp/learning/review': { today: '2026-09-25', due_count: 0, items: [] },
+      '/miniapp/learning/overview': { summary: { attempts: 0, finished: 0, answered: 0, correct: 0, accuracy: null }, topics: [], days: [] },
       '/miniapp/learning/mastery': { questions: { items: [], mastered_count: 0, assessed_count: 0 }, terms: { items: [], mastered_count: 0, assessed_count: 0 } },
       '/miniapp/learning/goals': { week_start: '2026-09-21', week_end_exclusive: '2026-09-28', goals: [{ goal_kind: 'study', weekly_target: null, completed: 0, reached: null }] },
       '/miniapp/learning/achievements': { achievements: [] },
@@ -78,6 +79,9 @@ test('verified Telegram actor can open review, glossary and literature without P
   fireEvent.click(screen.getByRole('button', { name: 'Литература' }))
   await screen.findByRole('heading', { name: 'Литература' })
   expect(screen.getByText('Учебный список')).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: 'Мой прогресс' }))
+  await screen.findByRole('heading', { name: 'Мой прогресс' })
+  expect(screen.getByText(/Истории ответов пока нет/)).toBeInTheDocument()
   expect(seen).toContain('/miniapp/glossary/topics')
   expect(seen).toContain('/miniapp/literature/items')
 })

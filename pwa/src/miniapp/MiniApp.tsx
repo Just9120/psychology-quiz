@@ -7,8 +7,10 @@ import { LearningView } from '../LearningView'
 import type { Answer, Feedback, GlossaryState, GlossaryTopic, GoalKind, Question, RunnerState, Setup, SetupOptions } from '../types'
 import { miniApi, MiniAppError, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 import { MiniLiterature } from './MiniLiterature'
+import { MiniProgress } from './MiniProgress'
+import type { ProgressOverview } from '../types'
 
-type Page = 'quiz' | 'setup' | 'glossary' | 'literature' | 'learning'
+type Page = 'quiz' | 'setup' | 'glossary' | 'literature' | 'learning' | 'progress'
 type Learning = { review: Awaited<ReturnType<typeof miniApi.review>>; mastery: Awaited<ReturnType<typeof miniApi.mastery>>; goals: Awaited<ReturnType<typeof miniApi.goals>>; achievements: Awaited<ReturnType<typeof miniApi.achievements>> }
 
 const errors: Record<string, string> = {
@@ -36,6 +38,7 @@ export function MiniApp() {
   const [literatureItems, setLiteratureItems] = useState<MiniLiteratureItem[] | null>(null)
   const [literatureTopics, setLiteratureTopics] = useState<MiniLiteratureTopic[]>([])
   const [learning, setLearning] = useState<Learning | null>(null)
+  const [progress, setProgress] = useState<ProgressOverview | null>(null)
   const [busy, setBusy] = useState(false)
   const [booting, setBooting] = useState(true)
   const [error, setError] = useState('')
@@ -113,6 +116,7 @@ export function MiniApp() {
     const [review, mastery, goals, achievements] = await Promise.all([miniApi.review(), miniApi.mastery(), miniApi.goals(), miniApi.achievements()])
     setLearning({ review, mastery, goals, achievements }); setPage('learning')
   }
+  async function loadProgress() { setProgress(await miniApi.overview()); setPage('progress') }
   async function startReviewQuiz(replace: boolean) {
     const saved = await miniApi.state()
     try { applyState((await miniApi.startReviewQuiz(saved.runner_state.session?.session_id ?? null, replace)).runner_state) }
@@ -133,11 +137,13 @@ export function MiniApp() {
       <button className="nav-item" onClick={() => setPage(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}>Квиз</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadGlossary)}>Глоссарий</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadLiterature)}>Литература</button>
+      <button className="nav-item" disabled={busy} onClick={() => void run(loadProgress)}>Мой прогресс</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadLearning)}>Повторение и цели</button>
     </nav></aside>
     <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram</header><main id="main-content" className="workspace-main" tabIndex={-1}>
       {error && <div role="alert" className="app-alert">{error} <button type="button" onClick={() => setError('')} aria-label="Закрыть сообщение">×</button></div>}
       {page === 'literature' && literatureItems ? <MiniLiterature initial={literatureItems} topics={literatureTopics} busy={busy} run={run} />
+        : page === 'progress' && progress ? <MiniProgress data={progress} busy={busy} onRefresh={() => void run(loadProgress)} />
         : page === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} client={miniApi} />
         : page === 'learning' && learning ? <LearningView {...learning} busy={busy} onRefresh={() => void run(loadLearning)} onSaveGoal={(kind: GoalKind, target: number) => void run(async () => { await miniApi.setGoal(kind, target); await loadLearning() })} onStartQuiz={replace => void run(() => startReviewQuiz(replace))} onStartGlossary={(topic, replace) => void run(() => startReviewGlossary(topic, replace))} />
         : uncertain ? <section className="page-width panel empty-state"><h1>Проверим сохранённое состояние</h1><p>Ответ сервера не получен. Перед новым квизом восстановите текущую попытку.</p><button className="button primary" disabled={busy} onClick={() => void run(refreshQuiz)}>Восстановить квиз</button></section>

@@ -1,4 +1,4 @@
-import type { AchievementsOverview, Answer, AnswerResult, GlossaryState, GlossaryTopic, GoalKind, GoalsOverview, MasteryOverview, QuizState, ReadingStatus, ReviewQueue, Setup, SetupOptions } from '../types'
+import type { AchievementsOverview, Answer, AnswerResult, GlossaryState, GlossaryTopic, GoalKind, GoalsOverview, MasteryOverview, ProgressOverview, QuizState, ReadingStatus, ReviewQueue, Setup, SetupOptions } from '../types'
 
 // Static deployment-owned API target; launch parameters cannot redirect initData.
 const origin = 'https://quiz-api.librechat.online'
@@ -6,7 +6,7 @@ const routes = new Set([
   'state', 'setup-options', 'setup', 'answer',
   'glossary/topics', 'glossary/start', 'glossary/answer', 'glossary/next',
   'literature/topics', 'literature/items', 'literature/progress',
-  'learning/review', 'learning/mastery', 'learning/goals', 'learning/achievements',
+  'learning/overview', 'learning/review', 'learning/mastery', 'learning/goals', 'learning/achievements',
   'learning/goal-set', 'learning/review-start', 'learning/review-glossary-start',
 ])
 
@@ -66,6 +66,7 @@ export const miniApi = {
   literatureProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) =>
     miniRequest<{ ok: true; literature_progress: unknown }>('literature/progress', { literature_id, reading_status, progress_percent }),
   review: () => miniRequest<ReviewQueue>('learning/review'),
+  overview: () => miniRequest<ProgressOverview>('learning/overview'),
   mastery: () => miniRequest<MasteryOverview>('learning/mastery'),
   goals: () => miniRequest<GoalsOverview>('learning/goals'),
   achievements: () => miniRequest<AchievementsOverview>('learning/achievements'),
