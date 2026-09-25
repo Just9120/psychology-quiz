@@ -12,6 +12,8 @@ sys.path.insert(0, str(ROOT))
 from fastapi import Request
 import uvicorn
 from app.db import get_connection, upsert_approved_questions
+from app import curriculum
+from app.attempt_content import capture_question
 from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.glossary_schema import migrate_glossary_schema
@@ -61,6 +63,18 @@ def main():
                 migrate_auth_schema(conn)
                 with conn:
                     migrate_glossary_schema(conn)
+                # The harness supplies its own reviewed taxonomy for synthetic
+                # editions; production catalog and user data are never changed.
+                data = {"schema_version": 1,
+                        "disciplines": {"basics": {"title": "Основы психологии"}, "development": {"title": "Психология развития"}},
+                        "topics": {"t_111111111111": {"title": "Память и повторение", "discipline_id": "basics"},
+                                   "t_222222222222": {"title": "Учебная практика", "discipline_id": "development"}}, "editions": {}}
+                for row in conn.execute('SELECT id,external_id FROM questions'):
+                    _, digest = capture_question(conn, row['id'])
+                    index = int(row['external_id'].split('-')[1])
+                    if index != 4:  # One deliberate source gap, visible in UI.
+                        data['editions'][digest] = {'topic_id': 't_111111111111' if index < 5 else 't_222222222222'}
+                curriculum.load_catalog = lambda: data
             if postgres_path:
                 with closing(get_connection(postgres_path)) as conn, conn:
                     if conn.execute("SELECT to_regclass('postgres_storage')").fetchone()[0] is not None:

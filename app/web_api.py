@@ -92,7 +92,7 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
                 if action == "progress/overview":
                     return progress_service.overview(conn, actor), None
                 if action == "progress/history":
-                    return progress_service.history(conn, actor, payload.get("before")), None
+                    return progress_service.history(conn, actor, payload.get("before"), payload.get("scope")), None
                 if action == "progress/attempt":
                     return progress_service.attempt(conn, actor, payload.get("session_id"), payload.get("after")), None
                 if action == "progress/errors":

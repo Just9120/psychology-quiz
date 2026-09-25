@@ -33,6 +33,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [literatureLoad, setLiteratureLoad] = useState(0)
   const [notice, setNotice] = useState('')
   const [progress, setProgress] = useState<ProgressOverview | null>(null)
+  const [progressScope, setProgressScope] = useState<string | null>(null)
   const [history, setHistory] = useState<HistoryPage | null>(null)
   const [detail, setDetail] = useState<AttemptPage | null>(null)
   const [mistakes, setMistakes] = useState<ErrorsPage | null>(null)
@@ -46,7 +47,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   function clearPrivateState() {
     setAccount(null); setOptions(null); setState(null); setFeedback(null); setFeedbackQuestion(null)
     setSelected(null); setPending(null); setUncertainSetup(false); setView('setup')
-    setProgress(null); setHistory(null); setDetail(null); setMistakes(null)
+    setProgress(null); setProgressScope(null); setHistory(null); setDetail(null); setMistakes(null)
     setResetPreview(null); setNotice(''); setGlossary(null); setGlossaryTopics([]); setLiterature(null)
   }
 
@@ -103,9 +104,9 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   useEffect(() => { if (error) alertRef.current?.focus() }, [error])
 
   async function refreshState() { applyState(await api.state(), true) }
-  async function loadProgress() {
-    const [summary, attempts] = await Promise.all([api.progress(), api.history()])
-    setProgress(summary); setHistory(attempts); setDetail(null); setView('progress')
+  async function loadProgress(scope: string | null = null) {
+    const [summary, attempts] = await Promise.all([api.progress(), api.history(null, scope)])
+    setProgress(summary); setHistory(attempts); setProgressScope(scope); setDetail(null); setView('progress')
   }
   async function loadErrors() { setMistakes(await api.errors()); setView('errors') }
   async function loadGlossary() {
@@ -163,7 +164,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
           : view === 'literature' && literature ? <LiteratureView key={literatureLoad} initial={literature} busy={busy} run={run} />
           : view === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} />
           : view === 'reset' && resetPreview ? <ResetView initial={resetPreview} busy={busy} run={run} onCancel={() => void run(loadProgress)} onComplete={afterReset} />
-          : view === 'progress' && progress && history ? <ProgressView onReset={() => void run(loadReset)} data={progress} history={history} detail={detail} busy={busy} onRefresh={() => void run(loadProgress)} onBack={() => setDetail(null)} onOpen={id => void run(async () => setDetail(await api.attempt(id)))} onMore={() => void run(async () => { const page = await api.history(history.next_before); setHistory({ ...page, items: [...history.items, ...page.items] }) })} onMoreAnswers={() => void run(async () => { if (detail) { const page = await api.attempt(detail.attempt.session_id, detail.next_after); setDetail({ ...page, items: [...detail.items, ...page.items] }) } })} />
+          : view === 'progress' && progress && history ? <ProgressView scope={progressScope} onScope={scope => void run(async () => { const page = await api.history(null, scope); setHistory(page); setProgressScope(scope) })} onReset={() => void run(loadReset)} data={progress} history={history} detail={detail} busy={busy} onRefresh={() => void run(() => loadProgress(progressScope))} onBack={() => setDetail(null)} onOpen={id => void run(async () => setDetail(await api.attempt(id)))} onMore={() => void run(async () => { const page = await api.history(history.next_before, progressScope); setHistory({ ...page, items: [...history.items, ...page.items] }) })} onMoreAnswers={() => void run(async () => { if (detail) { const page = await api.attempt(detail.attempt.session_id, detail.next_after); setDetail({ ...page, items: [...detail.items, ...page.items] }) } })} />
           : view === 'errors' && mistakes ? <ErrorsView data={mistakes} busy={busy} onRefresh={() => void run(loadErrors)} onResume={() => void run(refreshState)} onTrain={(replace, count) => void run(() => trainErrors(replace, count))} onMore={() => void run(async () => { const page = await api.errors(mistakes.next_before); setMistakes({ ...page, items: [...mistakes.items, ...page.items] }) })} />
           : uncertainSetup ? <section className="page-width panel empty-state"><h1>Проверим, создался ли квиз</h1><p className="muted">Ответ сервера не дошёл. Сначала восстановим состояние, чтобы не начинать две попытки.</p><button className="button primary" disabled={busy} onClick={() => void run(refreshState)}>Восстановить квиз<Icon name="refresh" /></button></section>
             : !options || !state ? <section className="page-width panel empty-state"><h1>Подключимся к вашему прогрессу</h1><button className="button primary" disabled={busy} onClick={() => void run(loadAccount)}>Повторить загрузку</button></section>

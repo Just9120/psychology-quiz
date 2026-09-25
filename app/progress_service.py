@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import random
 
+from app import curriculum
 from app.attempt_content import capture_question, get_attempt_content
 from app.database import begin_write, is_postgres
 from app.quiz_service import PreparedQuiz, start_prepared_quiz
@@ -61,7 +62,8 @@ def overview(conn, actor: int) -> dict:
         GROUP BY day ORDER BY day DESC LIMIT ?""", (actor, DAY_COUNT))]
     topics.sort(key=lambda item: (item["accuracy"], -item["answered"], item["topic"]))
     return {"ok": True, "summary": {**counts(*summary), "attempts": int(attempts[0]),
-            "finished": int(attempts[1] or 0)}, "topics": topics, "days": list(reversed(days))}
+            "finished": int(attempts[1] or 0)}, "topics": topics, "days": list(reversed(days)),
+            "curriculum": curriculum.overview(conn, actor)}
 
 
 def _session(row) -> dict:
@@ -76,11 +78,20 @@ SESSION_SELECT = """SELECT s.*,
                     FROM quiz_sessions s LEFT JOIN quiz_answers a ON a.session_id=s.id"""
 
 
-def history(conn, actor: int, before=None) -> dict:
+def history(conn, actor: int, before=None, scope=None) -> dict:
     before = positive_id(before, nullable=True)
     condition = " AND s.id<?" if before is not None else ""
     params = (actor, before, PAGE_SIZE + 1) if before is not None else (actor, PAGE_SIZE + 1)
-    rows = conn.execute(f"""{SESSION_SELECT} WHERE s.user_id=?{condition}
+    prefix, selected = "", ""
+    if scope is not None:
+        try:
+            where, scope_params = curriculum.scope_condition(scope)
+        except ValueError:
+            raise ProgressError("invalid_curriculum_scope") from None
+        prefix, prefix_params = curriculum.evidence_cte(conn, actor)
+        selected = f" AND EXISTS (SELECT 1 FROM evidence e WHERE e.session_id=s.id AND {where})"
+        params = (*prefix_params, actor, *((before,) if before is not None else ()), *scope_params, PAGE_SIZE + 1)
+    rows = conn.execute(f"""{prefix} {SESSION_SELECT} WHERE s.user_id=?{condition}{selected}
                             GROUP BY s.id ORDER BY s.id DESC LIMIT ?""", params).fetchall()
     return {"ok": True, "items": [_session(row) for row in rows[:PAGE_SIZE]],
             "next_before": rows[PAGE_SIZE - 1]["id"] if len(rows) > PAGE_SIZE else None}
@@ -98,7 +109,7 @@ def answer_detail(conn, row) -> dict:
             "question_text": content["question_text"], "topic": content["category"],
             "selected_option_text": selected, "correct_option_text": correct,
             "explanation": content["explanation"], "snapshot_provenance": content["snapshot_provenance"],
-            "content_sha256": content["content_sha256"]}
+            "content_sha256": content["content_sha256"], "curriculum": curriculum.classification(content)}
 
 
 def attempt(conn, actor: int, session_id, after=None) -> dict:

@@ -17,6 +17,20 @@ it('explains small-sample evidence and does not present accuracy as mastery', ()
   expect(screen.getByText('0 из 1 ответов')).toBeVisible()
 })
 
+it('keeps unmapped evidence visible and filters history with the chosen curriculum scope', async () => {
+  const scope = vi.fn()
+  const part = { scope: 'topic:t_111111111111', title: 'Внимание', answered: 1, correct: 0, accuracy: 0, days: overview.days }
+  const unmapped = { ...part, scope: 'unmapped', title: 'Без подтверждённой темы' }
+  const data = { ...overview, curriculum: { disciplines: [{ ...part, scope: 'discipline:general', title: 'Общая психология', topics: [part], unmapped_answers: 0 }], unmapped } }
+  render(<ProgressView data={data} history={{ ok: true, items: [], next_before: null }} detail={null} busy={false} scope="unmapped" onScope={scope} onRefresh={vi.fn()} onMore={vi.fn()} onOpen={vi.fn()} onBack={vi.fn()} onMoreAnswers={vi.fn()} />)
+  expect(screen.getByText(/не приписываются вложенной теме нового банка/)).toBeVisible()
+  expect(screen.getByText(/результат карточки относится ко всей попытке/)).toBeVisible()
+  await userEvent.selectOptions(screen.getByRole('combobox'), 'topic:t_111111111111')
+  expect(scope).toHaveBeenCalledWith('topic:t_111111111111')
+  await userEvent.click(screen.getByRole('button', { name: 'Все попытки' }))
+  expect(scope).toHaveBeenCalledWith(null)
+})
+
 it('requires explicit active-attempt replacement and clears confirmation when the attempt changes', async () => {
   const train = vi.fn(), user = userEvent.setup()
   const props = { data: errors, busy: false, onRefresh: vi.fn(), onMore: vi.fn(), onTrain: train, onResume: vi.fn() }
