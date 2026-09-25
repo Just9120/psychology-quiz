@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 import ssl
 import sys
-from urllib.error import HTTPError
+import time
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import build_opener, HTTPRedirectHandler, HTTPSHandler, Request
 
@@ -30,12 +31,20 @@ def smoke(origin, artifact, expected, *, ca_file=None):
     opener = build_opener(NoRedirect(), HTTPSHandler(context=ssl.create_default_context(cafile=ca_file)))
 
     def read(path):
-        try:
-            response = opener.open(Request(origin + path, headers={
-                "Cache-Control": "no-cache", "User-Agent": "PsychologyAtlas-Deployment-Check/1.0",
-            }), timeout=5)
-        except HTTPError as error:
-            response = error
+        request = Request(origin + path, headers={
+            "Cache-Control": "no-cache", "User-Agent": "PsychologyAtlas-Deployment-Check/1.0",
+        })
+        for attempt in range(3):
+            try:
+                response = opener.open(request, timeout=5)
+                break
+            except HTTPError as error:
+                response = error
+                break
+            except URLError as error:
+                if not isinstance(error.reason, (ConnectionResetError, ConnectionAbortedError, TimeoutError)) or attempt == 2:
+                    raise
+                time.sleep(attempt + 1)
         with closing(response):
             body = response.read(20 * 1024 * 1024 + 1)
             if len(body) > 20 * 1024 * 1024:

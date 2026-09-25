@@ -25,7 +25,7 @@ Initial setup не является обычным CD. Для него влад�
 
 Nginx reload завершается раньше, чем все workers переключатся: после reload проверять точный контрольный ответ ограниченными повторными GET, а не повторять создание файлов после первого 404. Во время setup Certbot один раз получил reset на ACME directory; последующая проверка IPv4/IPv6 дала 200, а одна повторная попытка успешно выдала сертификат. Это Evidence восстановленного запроса, не основание менять Cloudflare proxy или отключать IPv6.
 
-Для Cloudflare public probes `scripts/pwa_smoke.py` задаёт идентификатор клиента `PsychologyAtlas-Deployment-Check/1.0`. В этой зоне default Python-urllib получил 403/1010; именованный probe получил контрольный файл с 200. Все проверки TLS, запрета redirects, revision, hashes, MIME, headers и actual 401 остаются обязательными. Логи не должны содержать auth query/body/cookie values. Public smoke не выполняет регистрацию и не отправляет real mail.
+Для Cloudflare public probes `scripts/pwa_smoke.py` задаёт идентификатор клиента `PsychologyAtlas-Deployment-Check/1.0`. В этой зоне default Python-urllib получил 403/1010; именованный probe получил контрольный файл с 200. При сбросе соединения, обрыве или timeout каждого GET выполняются не более двух дополнительных попыток с короткой паузой; исчерпание попыток завершает CD ошибкой. HTTP/содержательные несоответствия и ошибка сертификата не повторяются и не маскируются. Все проверки TLS, запрета redirects, revision, hashes, MIME, headers и actual 401 остаются обязательными. Логи не должны содержать auth query/body/cookie values. Public smoke не выполняет регистрацию и не отправляет real mail.
 
 ## Deployment unit и доступы
 
