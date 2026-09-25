@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing
+from datetime import date
 import json
 import subprocess
 import sys
@@ -7,7 +8,7 @@ import sys
 from fastapi.testclient import TestClient
 import pytest
 
-from app import glossary_service as glossary, learning_reset
+from app import glossary_service as glossary, learning_reset, repetition
 from app.db import get_connection, create_or_load_user
 from app.miniapp_fastapi import create_app
 from tests.test_attempt_content import bank
@@ -180,6 +181,8 @@ def test_mixed_glossary_reset_erases_only_selected_topic_and_rejects_stale_attem
     entries = {topic: [make_glossary_entry(f'{topic}-{i}', f'Meaning {topic}-{i}', topic_id=topic)
                        for i in range(5)] for topic in ('fixture_topic', 'second_topic')}
     monkeypatch.setattr(glossary, 'load_glossary_entries', entries.get)
+    monkeypatch.setattr(repetition, 'GLOSSARY_TOPICS', glossary.GLOSSARY_TOPICS)
+    monkeypatch.setattr(repetition, 'load_glossary_entries', entries.get)
     started = call(bank, glossary.start, ['fixture_topic', 'second_topic'], 'all')
     assert started['topic_ids'] == ['fixture_topic', 'second_topic']
     sid = started['session_id']
@@ -198,6 +201,7 @@ def test_mixed_glossary_reset_erases_only_selected_topic_and_rejects_stale_attem
         snapshot, saved = json.loads(row['snapshot']), json.loads(row['state'])
         assert row['status'] == 'abandoned' and saved['score'] == 5
         assert {snapshot['questions'][int(step)-1]['entry']['topic_id'] for step in saved['answers']} == {'second_topic'}
+        assert {item['topic_id'] for item in repetition.glossary_queue(conn, 1, today=date.today())} == {'second_topic'}
     with pytest.raises(glossary.GlossaryError):
         call(bank, glossary.restart, sid)
     remaining = call(bank, learning_reset.preview, {'scope': 'topic', 'topic': 'Second'})
