@@ -565,7 +565,9 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
             with conn:
                 # Validate before profile/session writes; malformed setup is read-only.
                 try:
-                    prepared = prepare_quiz(conn, payload)
+                    existing = conn.execute("SELECT id FROM users WHERE telegram_user_id=?",
+                                            (verified.telegram_user_id,)).fetchone()
+                    prepared = prepare_quiz(conn, payload, actor_user_id=int(existing[0]) if existing else None)
                 except QuizSetupError as exc:
                     status = HTTPStatus.BAD_REQUEST if str(exc) == "invalid_setup" else HTTPStatus.CONFLICT
                     return _json(status, {"ok": False, "error": str(exc)})

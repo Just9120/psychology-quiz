@@ -9,15 +9,19 @@ from app.database import Connection, begin_write, is_postgres
 def capture_question(conn: Connection, question_id: int) -> tuple[str, str]:
     row = conn.execute(
         """SELECT q.external_id, q.question_text, q.explanation, q.source_ref,
-                  c.name, q.difficulty
+                  c.name, q.difficulty, q.kind, q.case_content
            FROM questions q JOIN categories c ON c.id=q.category_id WHERE q.id=?""",
         (question_id,),
     ).fetchone()
     if row is None:
         raise ValueError("Cannot snapshot a missing question")
     content = dict(zip(
-        ("external_id", "question_text", "explanation", "source_ref", "category", "difficulty"), row
+        ("external_id", "question_text", "explanation", "source_ref", "category", "difficulty"), row[:6]
     ))
+    if row[6] != "theory":
+        content["kind"] = row[6]
+    if row[7] is not None:
+        content["case"] = json.loads(row[7])
     content["version"] = 1
     content["options"] = [
         {"option_index": option[0], "option_text": option[1], "is_correct": option[2]}

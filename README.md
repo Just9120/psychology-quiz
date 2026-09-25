@@ -7,8 +7,8 @@
 Текущее состояние продукта:
 - **Module 1** — стабильный baseline, 296 approved questions across five active topics.
 - **Module 2** — ограниченный рабочий scope, 171 approved questions across two active topics.
-- **Module 3** — первая активная категория `Психологическое консультирование`, 108 approved questions.
-- Активный банк вопросов: 575 approved questions в JSON source-of-truth under `content/questions/**/*.json`.
+- **Module 3** — `Психологическое консультирование` (108 вопросов) и отдельная тема `Кейсы` (1 авторский вымышленный кейс с разбором).
+- Активный банк вопросов: 576 approved questions в JSON source-of-truth under `content/questions/**/*.json`.
 
 Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. Самостоятельный Web UI находится в [pwa](pwa/); Telegram Mini App остаётся opt-in UX внутри Telegram. Внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
@@ -95,6 +95,8 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 | FastAPI local run | `python -m uvicorn app.miniapp_fastapi_runtime:app --host 127.0.0.1 --port 8081`; тот же тестовый DB_PATH/BOT_TOKEN; подробности в [runbook](docs/miniapp-deployment-qa.md) |
 | Python format / lint / typecheck | N/A: отдельных команд нет; whitespace проверяет `git diff --check`. Frontend typecheck — ниже |
 | Python build | N/A отдельная компиляция; runtime image собирает действующая Docker delivery procedure |
+
+Для приватного рекурсивного metadata export Drive используйте `python scripts/source_inventory_report.py --current data/source-inventory-current.json` из корня репозитория. Опциональные `--previous`, `--processed` и `--links` принимают приватные JSON snapshots того же обхода, обработанных редакций и подтверждённых связей занятий; формат и границы публикации описаны в [content rollout](docs/question_bank_content_rollout.md#проверка-происхождения-и-публикация). Держите входные файлы в ignored `data/`: команда только читает их и выводит агрегаты без file IDs, названий и путей. Неполную pagination chain она отвергает.
 
 Для ручной проверки сложности есть приватный **read-only** отчёт `python -m scripts.report_difficulty_evidence` из корня репозитория. До запуска задайте `DATABASE_URL` либо `DB_PATH` для известной БД в process environment; если указан PostgreSQL URI, он имеет приоритет. Команда не создаёт SQLite-файл, не меняет `difficulty` и выводит только агрегаты по редакциям: число первых ответов независимых пользователей, долю ошибок и 95% интервал Уилсона. Повторные ответы одного пользователя и неподтверждённые legacy snapshots исключены; интервал не устраняет смещение состава обучающихся. Для production отчёт содержит историю пользователей в агрегированном виде и должен оставаться приватным operator output, без публикации raw JSON в CI/artifacts.
 

@@ -12,6 +12,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from app.content_publication import validate_publications
+from app.case_content import case_error
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TOPICS_PATH = REPO_ROOT / "content" / "topics.json"
@@ -94,6 +95,10 @@ def validate() -> list[str]:
 
             if status != "approved":
                 continue
+
+            invalid_case = case_error(question)
+            if invalid_case:
+                errors.append(f"{label}: {invalid_case}")
 
             text = question.get("question")
             if not isinstance(text, str) or not text.strip():

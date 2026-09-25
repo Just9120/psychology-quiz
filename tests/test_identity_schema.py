@@ -1,14 +1,16 @@
 from contextlib import closing
 from pathlib import Path
+import hashlib
+import json
 import sqlite3
 
 import pytest
 
-from app.db import create_or_load_user, get_connection, upsert_approved_questions, save_quiz_answer
+from app.db import create_or_load_user, get_connection
 from app.identity_schema import migrate_identity_schema
 from scripts.deployment_db import backup_and_rehearse, verify_preserved, user_state
 from scripts import init_db
-from tests.test_attempt_content import OLD, make_attempt
+from tests.test_attempt_content import OLD
 
 
 def legacy_db(path):
@@ -17,9 +19,23 @@ def legacy_db(path):
             'telegram_user_id INTEGER UNIQUE', 'telegram_user_id INTEGER NOT NULL UNIQUE')
         conn.executescript(schema)
         create_or_load_user(conn, 42, 'legacy', 'Name', 'Surname')
-        upsert_approved_questions(conn, [OLD])
-        sid = make_attempt(conn, questions=(1,))
-        save_quiz_answer(conn, sid, 1, 0)
+        conn.execute("INSERT INTO categories(slug,name) VALUES('original','Original category')")
+        conn.execute("INSERT INTO questions(external_id,category_id,source_ref,difficulty,status,question_text,explanation) VALUES(?,1,?,?,'approved',?,?)",
+                     (OLD['id'], OLD['source_ref'], OLD['difficulty'], OLD['question'], OLD['explanation']))
+        for index, option in enumerate(OLD['options']):
+            conn.execute("INSERT INTO question_options(question_id,option_index,option_text,is_correct) VALUES(1,?,?,?)",
+                         (index, option, int(index == OLD['correct_option_index'])))
+        snapshot = json.dumps({"external_id": OLD['id'], "question_text": OLD['question'],
+                               "explanation": OLD['explanation'], "source_ref": OLD['source_ref'],
+                               "category": OLD['category'], "difficulty": OLD['difficulty'], "version": 1,
+                               "options": [{"option_index": index, "option_text": option,
+                                            "is_correct": int(index == OLD['correct_option_index'])}
+                                           for index, option in enumerate(OLD['options'])]},
+                              ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        conn.execute("INSERT INTO quiz_sessions(user_id,status,score,total_questions) VALUES(1,'finished',1,1)")
+        conn.execute("INSERT INTO quiz_session_questions(session_id,question_id,order_index,content_snapshot,content_sha256,snapshot_provenance) VALUES(1,1,1,?,?,'captured')",
+                     (snapshot, hashlib.sha256(snapshot.encode()).hexdigest()))
+        conn.execute("INSERT INTO quiz_answers(session_id,question_id,selected_option_index,is_correct) VALUES(1,1,0,1)")
         conn.execute("INSERT INTO user_literature_progress(user_id,literature_id,reading_status,updated_at,private_note) VALUES(1,'book','read','then','private')")
         conn.execute("UPDATE sqlite_sequence SET seq=90 WHERE name='users'")
         conn.execute("CREATE INDEX custom_user_name ON users(username)")

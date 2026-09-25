@@ -7,6 +7,8 @@ import json
 from pathlib import Path
 import re
 
+from app.case_content import case_error
+
 ROOT = Path(__file__).resolve().parent.parent
 CORPUS_ROOT_ID = "119DpAwq3T_9JzlTRMPeB7LX7-vpeO95U"
 # Frozen existing publication, not a claim of source certification. Do not extend.
@@ -44,6 +46,10 @@ class PublicationPolicy:
     def error(self, kind, item):
         if kind not in KINDS:
             return "unknown_derivative_kind"
+        if kind == "questions":
+            invalid_case = case_error(item)
+            if invalid_case:
+                return invalid_case
         if self.is_legacy(kind, item):
             return None
         if item.get("status") != "approved":

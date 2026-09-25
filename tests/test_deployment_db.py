@@ -6,6 +6,8 @@ import pytest
 
 from scripts.deployment_db import backup_and_rehearse, check_business, read_connection, verify_preserved
 from app.attempt_content import ensure_attempt_snapshots
+from app.identity_schema import migrate_identity_schema
+from app.learning_schema import migrate_learning_schema
 from scripts.deployment_db import check_runtime_config
 
 
@@ -25,6 +27,8 @@ def database(tmp_path):
     path = tmp_path / "source.sqlite3"
     with closing(sqlite3.connect(path)) as conn, conn:
         conn.executescript(Path("sql/schema.sql").read_text(encoding="utf-8"))
+        migrate_identity_schema(conn)
+        migrate_learning_schema(conn)
         conn.execute("INSERT INTO users (telegram_user_id, first_name) VALUES (42, 'Private test name')")
         conn.execute("INSERT INTO categories (slug, name) VALUES ('test', 'Test')")
         conn.execute("INSERT INTO questions (external_id, category_id, question_text) VALUES ('q1', 1, 'Question')")

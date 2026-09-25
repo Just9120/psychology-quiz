@@ -8,6 +8,8 @@ from app import curriculum, progress_service as progress
 from app.attempt_content import capture_question
 from app.content_publication import fingerprint, load_policy
 from app.db import get_connection, start_quiz_session, upsert_approved_questions, create_or_load_user
+from app.learning_schema import migrate_learning_schema
+from app.identity_schema import migrate_identity_schema
 from app.quiz_service import answer_quiz
 from scripts.validate_learning_reviews import inventory
 from tests.test_attempt_content import bank, OLD, OTHER, NEW
@@ -88,9 +90,14 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     assert len(catalog['disciplines']) == 8 and len(catalog['editions']) == 297
-    assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {k: v['title'] for k, v in registry.items() if v['question_file']}
+    assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
+        k: v['title'] for k, v in registry.items() if 'glossary' in v['available_contours']
+    }
+    assert registry['cases']['title'] == 'Кейсы' and 'cases' not in catalog['disciplines']
     with closing(get_connection(str(tmp_path / 'catalog.sqlite3'))) as conn, conn:
         conn.executescript((curriculum.ROOT / 'sql/schema.sql').read_text(encoding='utf-8'))
+        migrate_identity_schema(conn)
+        migrate_learning_schema(conn)
         upsert_approved_questions(conn, [v for k, v in items.items() if k.startswith('questions:')], authoritative=True)
         actual = {row['external_id']: capture_question(conn, row['id'])[1] for row in conn.execute('SELECT id,external_id FROM questions')}
         for sha, item in catalog['editions'].items():

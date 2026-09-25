@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from typing import Any
 from app.attempt_content import get_attempt_content
 from app.payload_validation import valid_quiz_setup
+from app.repetition import adaptive_questions
 from app.db import (
     abandon_in_progress_sessions_for_user, get_active_categories,
     select_random_approved_question_ids_across_active_categories,
@@ -33,7 +34,7 @@ class PreparedQuiz:
     question_ids: tuple[int, ...]
 
 
-def prepare_quiz(conn, payload: dict) -> PreparedQuiz:
+def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> PreparedQuiz:
     if not valid_quiz_setup(payload):
         raise QuizSetupError("invalid_setup")
     active_ids = {int(row["id"]) for row in get_active_categories(conn)}
@@ -43,20 +44,37 @@ def prepare_quiz(conn, payload: dict) -> PreparedQuiz:
     if any(category_id not in active_ids for category_id in category_ids):
         raise QuizSetupError("invalid_setup")
     mode, count = payload["quiz_mode"], payload["question_count"]
+    kinds = payload.get("content_kinds")
+    pool_limit = None if kinds is not None or mode == "adaptive" else count
     difficulty = None if payload["difficulty"] == "any" else payload["difficulty"]
     category_id, selected = None, ()
     if mode == "single":
         if len(category_ids) != 1:
             raise QuizSetupError("invalid_setup")
         category_id = category_ids[0]
-        questions = select_random_approved_question_ids_by_category(conn, category_id, count, difficulty)
+        questions = select_random_approved_question_ids_by_category(conn, category_id, pool_limit, difficulty)
     elif mode == "selected_mix":
         if not category_ids:
             raise QuizSetupError("invalid_setup")
         selected = tuple(category_ids)
-        questions = select_random_approved_question_ids_by_categories(conn, list(selected), count, difficulty)
+        questions = select_random_approved_question_ids_by_categories(conn, list(selected), pool_limit, difficulty)
+    elif mode == "adaptive":
+        candidates = (select_random_approved_question_ids_by_categories(conn, category_ids, None, difficulty)
+                      if category_ids else select_random_approved_question_ids_across_active_categories(conn, None, difficulty))
+        questions = candidates
+        selected = tuple(category_ids)
     else:
-        questions = select_random_approved_question_ids_across_active_categories(conn, count, difficulty)
+        questions = select_random_approved_question_ids_across_active_categories(conn, pool_limit, difficulty)
+    if kinds is not None and questions:
+        requested = set(kinds)
+        ids = sorted(set(questions))
+        kind_by_id = {int(row[0]): row[1] for row in conn.execute(
+            f"SELECT id,kind FROM questions WHERE id IN ({','.join('?' for _ in ids)})", ids)}
+        questions = [question_id for question_id in questions if kind_by_id.get(question_id) in requested]
+    if mode == "adaptive":
+        questions = adaptive_questions(conn, actor_user_id, questions, count)
+    elif kinds is not None and count is not None:
+        questions = questions[:count]
     if not questions:
         raise QuizSetupError("no_questions")
     return PreparedQuiz(category_id, selected, difficulty, tuple(questions))
@@ -78,6 +96,7 @@ def quiz_setup_options(conn) -> dict:
         "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)],
         "question_count_choices": [5, 10, 15, "all"],
         "difficulty_choices": ["any", "easy", "medium", "hard"],
+        "content_kind_choices": ["theory", "glossary", "case"],
     }
 
 
@@ -92,6 +111,14 @@ def quiz_state(conn, *, actor_user_id: int) -> dict:
 def answer_quiz(conn, *, actor_user_id: int, session_id: int, question_id: int, selected_option_index: int) -> dict:
     submission = submit_answer_event(conn, actor_user_id=actor_user_id, session_id=session_id,
                                      question_id=question_id, selected_option_index=selected_option_index)
+    if submission.status == "accepted" and conn.execute("""SELECT 1 FROM user_review_sessions
+            WHERE user_id=? AND session_kind='quiz' AND session_key=?""",
+            (actor_user_id, str(session_id))).fetchone():
+        saved = conn.execute("SELECT id,answered_at FROM quiz_answers WHERE session_id=? AND question_id=?",
+                             (session_id, question_id)).fetchone()
+        conn.execute("""INSERT INTO user_review_events(user_id,answer_kind,answer_key,answered_at)
+            VALUES(?,'quiz',?,?) ON CONFLICT(user_id,answer_kind,answer_key) DO NOTHING""",
+            (actor_user_id, str(saved[0]), saved[1]))
     result = {"ok": True, "submission_status": submission.status}
     if submission.status in {"accepted", "duplicate"}:
         state = build_runner_state(conn, actor_user_id=actor_user_id, session_id=session_id)
@@ -154,7 +181,7 @@ def build_answer_feedback(conn, session_id: int, question_id: int, selected_opti
     options = content["options"]
     selected = next((opt for opt in options if opt["option_index"] == selected_option_index), None)
     correct = next((opt for opt in options if opt["is_correct"]), None)
-    return {
+    feedback = {
         "selected_option_index": selected_option_index,
         "selected_option_text": selected["option_text"] if selected else None,
         "is_correct": bool(is_correct),
@@ -164,3 +191,7 @@ def build_answer_feedback(conn, session_id: int, question_id: int, selected_opti
         "content_sha256": content["content_sha256"],
         "snapshot_provenance": content["snapshot_provenance"],
     }
+    if content.get("kind") == "case":
+        feedback["case_review"] = {key: content["case"][key] for key in
+                                   ("approach", "conditions", "ambiguity", "option_rationales")}
+    return feedback

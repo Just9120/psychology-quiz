@@ -2,11 +2,11 @@
   "schema_version": 1,
   "corpus_root_id": "119DpAwq3T_9JzlTRMPeB7LX7-vpeO95U",
   "inventory": {
-    "date": "2026-09-20",
-    "folders_read": 89,
-    "files": 391,
+    "date": "2026-09-25",
+    "folders_read": 92,
+    "files": 413,
     "explicit_bibliographies_reviewed": 14,
-    "scope": "Рекурсивная инвентаризация и чтение явных библиографических списков; embedded lecture bibliographies не проверены."
+    "scope": "Рекурсивная metadata-инвентаризация 25.09.2026 17:36 UTC; 14 явных библиографических списков прочитаны ранее. Новые/изменённые файлы и embedded lecture bibliographies по содержанию не проверены."
   },
   "sources": [
     {

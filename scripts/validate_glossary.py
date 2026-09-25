@@ -65,10 +65,10 @@ def load_active_topics(errors: list[str]) -> dict[str, dict[str, Any]]:
         if not is_non_empty_string(topic_id):
             errors.append(f"{label}: active topic id must be a non-empty string")
             continue
-        if "questions" not in topic.get("available_contours", []):
-            continue
         if "glossary" not in topic.get("available_contours", []):
-            errors.append(f"{label}: active question topic must include 'glossary' in available_contours")
+            continue
+        if "questions" not in topic.get("available_contours", []):
+            errors.append(f"{label}: glossary topic must include 'questions' in available_contours")
         active_topics[topic_id] = topic
     return active_topics
 

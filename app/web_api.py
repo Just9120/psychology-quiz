@@ -3,7 +3,8 @@ import asyncio
 import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
-from app import glossary_service, learning_reset, progress_service, literature_service
+from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements
+from app.mastery import overview as mastery_overview
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -14,11 +15,11 @@ from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_set
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "glossary/state", "glossary/options", "literature/catalog"}
+GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
                 "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
-                "progress/reset-preview", "progress/reset-confirm", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
+                "progress/reset-preview", "progress/reset-confirm", "progress/review-start", "progress/review-glossary-start", "progress/goal-set", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
 logger = logging.getLogger(__name__)
 
 
@@ -91,12 +92,29 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
             try:
                 if action == "progress/overview":
                     return progress_service.overview(conn, actor), None
+                if action == "progress/mastery":
+                    return mastery_overview(conn, actor), None
+                if action == "progress/review":
+                    return repetition.queue(conn, actor), None
+                if action == "progress/goals":
+                    return learning_goals.overview(conn, actor), None
+                if action == "progress/achievements":
+                    return achievements.refresh(conn, actor), None
+                if action == "progress/goal-set":
+                    try:
+                        return learning_goals.set_target(conn, actor, payload), None
+                    except learning_goals.GoalError as error:
+                        raise AuthError(error.code, 400) from None
                 if action == "progress/history":
                     return progress_service.history(conn, actor, payload.get("before"), payload.get("scope")), None
                 if action == "progress/attempt":
                     return progress_service.attempt(conn, actor, payload.get("session_id"), payload.get("after")), None
                 if action == "progress/errors":
                     return progress_service.errors(conn, actor, payload.get("before")), None
+                if action == "progress/review-start":
+                    return progress_service.review_today(conn, actor, payload), None
+                if action == "progress/review-glossary-start":
+                    return progress_service.review_glossary_today(conn, actor, payload), None
                 if action == "progress/reset-preview":
                     return learning_reset.preview(conn, actor, payload), None
                 if action == "progress/reset-confirm":
@@ -110,7 +128,7 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
             return quiz_state(conn, actor_user_id=actor), None
         if action == "quiz/setup":
             try:
-                prepared = prepare_quiz(conn, payload)
+                prepared = prepare_quiz(conn, payload, actor_user_id=actor)
             except QuizSetupError as exc:
                 raise AuthError(str(exc), 400 if str(exc) == "invalid_setup" else 409) from None
             return {"ok": True, "runner_state": start_prepared_quiz(conn, actor_user_id=actor, prepared=prepared)}, None

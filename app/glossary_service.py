@@ -76,7 +76,8 @@ def _save(conn, row, value, status=None):
                  (_encode(value), status or row['status'], _now(), row['id'], row['user_id']))
 
 
-def start(conn, actor, topic_id, count, *, expected_session_id=None, replace_active=False):
+def start(conn, actor, topic_id, count, *, expected_session_id=None, replace_active=False,
+          selected_entry_ids=None):
     if not isinstance(topic_id, str) or topic_id not in dict(GLOSSARY_TOPICS):
         raise GlossaryError('invalid_glossary_setup', 400)
     if count not in (None, 'all') and (type(count) is not int or count not in (5, 10)):
@@ -90,8 +91,16 @@ def start(conn, actor, topic_id, count, *, expected_session_id=None, replace_act
     entries = load_glossary_entries(topic_id)
     if not entries or len(entries) < 4:
         raise GlossaryError('glossary_unavailable')
-    limit = len(entries) if count in (None, 'all') else min(count, len(entries))
-    questions = [build_glossary_quiz_question(entries, entry) for entry in random.sample(entries, limit)]
+    if selected_entry_ids is None:
+        limit = len(entries) if count in (None, 'all') else min(count, len(entries))
+        selected = random.sample(entries, limit)
+    else:
+        requested = set(selected_entry_ids)
+        selected = [entry for entry in entries if entry.id in requested]
+        if not selected or len(selected) != len(requested):
+            raise GlossaryError('glossary_changed')
+        random.shuffle(selected)
+    questions = [build_glossary_quiz_question(entries, entry) for entry in selected]
     if any(item is None for item in questions):
         raise GlossaryError('glossary_unavailable')
     snapshot = {'version': 1, 'questions': [asdict(item) for item in questions]}
@@ -125,9 +134,15 @@ def answer(conn, actor, sid, selected, step):
                 'correct_option_text': question['options'][correct], 'explanation': question['entry']['definition'],
                 'answered_count': step, 'total_questions': len(snapshot['questions']), 'has_next': step < len(snapshot['questions'])}
     result = {'state': 'feedback', 'feedback': feedback}
-    value['answers'][str(step)] = {'selected': selected, 'response': result}
+    answered_at = _now()
+    value['answers'][str(step)] = {'selected': selected, 'response': result, 'answered_at': answered_at}
     value['score'] += int(selected == correct)
     _save(conn, row, value)
+    if conn.execute("""SELECT 1 FROM user_review_sessions
+            WHERE user_id=? AND session_kind='glossary' AND session_key=?""", (actor, sid)).fetchone():
+        conn.execute("""INSERT INTO user_review_events(user_id,answer_kind,answer_key,answered_at)
+            VALUES(?,'glossary',?,?) ON CONFLICT(user_id,answer_kind,answer_key) DO NOTHING""",
+            (actor, f'{sid}:{step}', answered_at))
     return result
 
 

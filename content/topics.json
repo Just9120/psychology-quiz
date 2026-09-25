@@ -110,6 +110,18 @@
     "source_notes": "Existing approved question topic; glossary contour is available from repository-backed static content/glossary JSON; external source-pack certification remains separate."
   },
   {
+    "id": "cases",
+    "title": "Кейсы",
+    "module": "module3",
+    "question_file": "content/questions/module3/cases.json",
+    "status": "active",
+    "order": 320,
+    "available_contours": [
+      "questions"
+    ],
+    "source_notes": "Авторский вымышленный учебный кейс с проверенным источником и отдельным разбором альтернатив; не является самостоятельной дисциплиной."
+  },
+  {
     "id": "personality_psychology",
     "title": "Психология личности и индивидуальных различий",
     "module": "module4",

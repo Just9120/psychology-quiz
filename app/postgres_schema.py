@@ -7,16 +7,18 @@ from pathlib import Path
 
 from app.database import Connection, begin_write, is_postgres
 
-VERSION = "postgres-v2"
+VERSION = "postgres-v3"
 SCHEMA_PATH = Path(__file__).resolve().parent.parent / "sql" / "postgres-v1.sql"
 GLOSSARY_PATH = SCHEMA_PATH.with_name("glossary-v1.sql")
+LEARNING_PATH = SCHEMA_PATH.with_name("learning-v1.sql")
 BASE_TABLES = (
     "users", "categories", "questions", "question_options", "quiz_sessions",
     "quiz_session_selected_categories", "quiz_session_questions", "quiz_answers",
     "user_literature_progress", "schema_migrations", "web_accounts", "web_sessions",
     "web_mail_tokens", "web_link_tokens", "web_auth_limits",
 )
-TABLES = BASE_TABLES + ("glossary_sessions",)
+V2_TABLES = BASE_TABLES + ("glossary_sessions",)
+TABLES = V2_TABLES + ("user_learning_goals", "user_achievements", "user_review_events", "user_review_sessions")
 IDENTITY_TABLES = (
     "users", "categories", "questions", "question_options", "quiz_sessions",
     "quiz_session_questions", "quiz_answers", "user_literature_progress", "web_accounts",
@@ -56,11 +58,13 @@ def catalog_digest(conn: Connection) -> str:
 
 
 def ddl_digest(version):
-    if version not in {"postgres-v1", VERSION}:
+    if version not in {"postgres-v1", "postgres-v2", VERSION}:
         raise ValueError("Unsupported PostgreSQL schema version")
     text = SCHEMA_PATH.read_text(encoding="utf-8")
-    if version == VERSION:
+    if version in {"postgres-v2", VERSION}:
         text += GLOSSARY_PATH.read_text(encoding="utf-8").replace("user_id INTEGER", "user_id BIGINT")
+    if version == VERSION:
+        text += LEARNING_PATH.read_text(encoding="utf-8")
     return hashlib.sha256(text.encode()).hexdigest()
 
 
@@ -71,9 +75,9 @@ def verify_schema(conn: Connection, *, allow_legacy=False) -> str:
     if "postgres_storage" not in columns:
         raise ValueError("Unknown or incomplete PostgreSQL schema; explicit migration required")
     row = conn.execute("SELECT version,ddl_sha256,catalog_sha256 FROM postgres_storage WHERE singleton=1").fetchone()
-    if row is None or row[0] not in ({VERSION, "postgres-v1"} if allow_legacy else {VERSION}):
+    if row is None or row[0] not in ({VERSION, "postgres-v1", "postgres-v2"} if allow_legacy else {VERSION}):
         raise ValueError("PostgreSQL schema version/drift check failed")
-    tables = BASE_TABLES if row[0] == "postgres-v1" else TABLES
+    tables = BASE_TABLES if row[0] == "postgres-v1" else V2_TABLES if row[0] == "postgres-v2" else TABLES
     if columns != set(tables) | {"postgres_storage"}:
         raise ValueError("Unknown or incomplete PostgreSQL schema; explicit migration required")
     if row[1] != ddl_digest(row[0]) or row[2] != catalog_digest(conn):
@@ -97,8 +101,10 @@ def initialize_schema(conn: Connection, *, version=VERSION) -> None:
             WHERE n.nspname=current_schema() LIMIT 1""").fetchone():
         raise ValueError("PostgreSQL target namespace is not empty")
     conn.execute(SCHEMA_PATH.read_text(encoding="utf-8"))
-    if version == VERSION:
+    if version in {"postgres-v2", VERSION}:
         conn.execute(GLOSSARY_PATH.read_text(encoding="utf-8").replace("user_id INTEGER", "user_id BIGINT"))
+    if version == VERSION:
+        conn.execute(LEARNING_PATH.read_text(encoding="utf-8"))
     conn.execute("INSERT INTO postgres_storage VALUES(1,?,?,?,NULL)",
                  (version, ddl_digest(version), catalog_digest(conn)))
     verify_schema(conn, allow_legacy=True)
@@ -110,9 +116,12 @@ def upgrade_schema(conn: Connection) -> None:
     previous = verify_schema(conn, allow_legacy=True)
     if previous == VERSION:
         return
-    conn.execute("LOCK TABLE " + ",".join(BASE_TABLES) + ",postgres_storage IN ACCESS EXCLUSIVE MODE")
+    existing_tables = BASE_TABLES if previous == "postgres-v1" else V2_TABLES
+    conn.execute("LOCK TABLE " + ",".join(existing_tables) + ",postgres_storage IN ACCESS EXCLUSIVE MODE")
     verify_schema(conn, allow_legacy=True)
-    conn.execute(GLOSSARY_PATH.read_text(encoding="utf-8").replace("user_id INTEGER", "user_id BIGINT"))
+    if previous == "postgres-v1":
+        conn.execute(GLOSSARY_PATH.read_text(encoding="utf-8").replace("user_id INTEGER", "user_id BIGINT"))
+    conn.execute(LEARNING_PATH.read_text(encoding="utf-8"))
     conn.execute("UPDATE postgres_storage SET version=?,ddl_sha256=?,catalog_sha256=? WHERE singleton=1",
                  (VERSION, ddl_digest(VERSION), catalog_digest(conn)))
     verify_schema(conn)

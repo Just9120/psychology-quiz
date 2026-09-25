@@ -14,6 +14,8 @@ from fastapi.testclient import TestClient
 import pytest
 
 from app.handler_latency import HandlerLatency
+from app.identity_schema import migrate_identity_schema
+from app.learning_schema import migrate_learning_schema
 from app.db import store_session_questions
 from app.main import update_ingress_logger
 from app.classic_quiz_handlers import _safe_classic_text_log_fields
@@ -30,6 +32,8 @@ def api(tmp_path):
     path = tmp_path / "quiz.sqlite3"
     with closing(sqlite3.connect(path)) as conn, conn:
         conn.executescript(Path("sql/schema.sql").read_text(encoding="utf-8"))
+        migrate_identity_schema(conn)
+        migrate_learning_schema(conn)
         conn.execute("INSERT INTO categories (slug, name) VALUES ('c', 'Category')")
         conn.execute("INSERT INTO questions (external_id, category_id, question_text) VALUES ('q', 1, 'Question')")
         conn.execute("INSERT INTO question_options (question_id, option_index, option_text, is_correct) VALUES (1, 0, 'A', 1), (1, 1, 'B', 0)")
@@ -52,6 +56,8 @@ def dump(path):
     ("question_count", []), ("question_count", {}), ("question_count", True), ("question_count", 5.0),
     ("category_ids", [True]), ("category_ids", [1.0]), ("category_ids", [2**64]),
     ("category_ids", [-1]), ("category_ids", [0]), ("category_ids", [999]), ("category_ids", []),
+    ("content_kinds", []), ("content_kinds", ["case", "case"]),
+    ("content_kinds", [{"unexpected": True}]), ("content_kinds", ["unknown"]),
 ])
 def test_invalid_setup_is_4xx_without_any_database_mutation(api, field, value):
     path, client, signed = api

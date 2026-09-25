@@ -8,6 +8,8 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
 from app.db import create_or_load_user, start_quiz_session, store_session_questions
+from app.identity_schema import migrate_identity_schema
+from app.learning_schema import migrate_learning_schema
 from app.classic_quiz_handlers import (
     CLASSIC_REPLY_NEXT_TEXT,
     CLASSIC_REPLY_STATE_KEY,
@@ -28,6 +30,8 @@ from app.classic_quiz_handlers import (
 def _setup_schema(conn: sqlite3.Connection) -> None:
     with open("sql/schema.sql", "r", encoding="utf-8") as f:
         conn.executescript(f.read())
+    migrate_identity_schema(conn)
+    migrate_learning_schema(conn)
 
 
 class ClassicReplyKeyboardModeTests(unittest.TestCase):

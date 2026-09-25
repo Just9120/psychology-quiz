@@ -11,6 +11,8 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
 from app.db import abandon_in_progress_sessions_for_user, create_or_load_user, start_quiz_session, store_session_questions
+from app.identity_schema import migrate_identity_schema
+from app.learning_schema import migrate_learning_schema
 from app.main import (
     HELP_TEXT,
     MINI_APP_BUTTON_TEXT,
@@ -53,6 +55,8 @@ def _decode_context_from_url(url: str) -> dict:
 def _setup_schema(conn: sqlite3.Connection) -> None:
     with open("sql/schema.sql", "r", encoding="utf-8") as f:
         conn.executescript(f.read())
+    migrate_identity_schema(conn)
+    migrate_learning_schema(conn)
 
 
 class MiniAppRunnerContractTests(unittest.TestCase):

@@ -31,6 +31,7 @@ from app.db import (
     store_session_questions,
 )
 from app.glossary import GLOSSARY_QUIZ_SESSION_KEY
+from app.attempt_content import get_attempt_content
 from app.handler_latency import HandlerLatency as _HandlerLatency
 from app.miniapp_entrypoint_handlers import MINI_APP_BUTTON_TEXT
 from app.miniapp_runner import submit_miniapp_answer_event
@@ -300,7 +301,25 @@ def build_classic_reply_feedback_text(result: dict) -> str:
         answer_lines.append(build_classic_reply_answer_detail_line("Правильный ответ", option_position_label=str(result["correct_option_label"]), option_text=str(result["correct_option_text"]), reading_mode=str(result["reading_mode"])))
     rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
     answer_lines_text = "\n".join(answer_lines)
-    return f"{result_line}\n\n{answer_lines_text}\n\n<b>Пояснение:</b>\n{rendered_explanation}\n\n<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']}"
+    review = format_case_review_html(result.get("case_review"), result["reading_mode"])
+    return f"{result_line}\n\n{answer_lines_text}\n\n<b>Пояснение:</b>\n{rendered_explanation}{review}\n\n<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']}"
+
+
+def case_review_for_attempt(conn, session_id: int, question_id: int) -> dict | None:
+    content = get_attempt_content(conn, session_id, question_id)
+    return content.get("case") if content and content.get("kind") == "case" else None
+
+
+def format_case_review_html(case: dict | None, reading_mode: str) -> str:
+    if not case:
+        return ""
+    render = lambda value: render_reading_mode_text(value, reading_mode)
+    conditions = "\n".join("• " + render(value) for value in case["conditions"])
+    alternatives = "\n".join(f"{index}. {render(value)}" for index, value in enumerate(case["option_rationales"], 1))
+    return (f"\n\n<b>Разбор кейса:</b> {render(case['approach'])}"
+            f"\n<b>Условия:</b>\n{conditions}"
+            f"\n<b>Варианты действий:</b>\n{alternatives}"
+            f"\n<b>Неоднозначность:</b> {render(case['ambiguity'])}")
 
 
 def parse_classic_reply_answer_number(text: str, option_count: int) -> int | None:
@@ -1377,6 +1396,7 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
             "correct_option_label": numeric_answer_label_for_option(options, correct_option_index),
             "correct_option_text": str(correct_option["option_text"]),
             "explanation": str(current["explanation"] or ""),
+            "case_review": case_review_for_attempt(conn, session_id, question_id),
             "answered_questions": answered_questions,
             "total_questions": total_questions,
             "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
@@ -1653,6 +1673,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                     "status": "accepted",
                     "is_correct": bool(submission.is_correct),
                     "explanation": str(current["explanation"] or ""),
+                    "case_review": case_review_for_attempt(conn, session_id, question_id),
                     "answered_questions": answered_questions,
                     "total_questions": total_questions,
                     "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
@@ -1706,6 +1727,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         is_correct = result["is_correct"]
         result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
         rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
+        rendered_explanation += format_case_review_html(result.get("case_review"), result["reading_mode"])
 
         if result["is_last_question"]:
             finalized = result["finalized"]

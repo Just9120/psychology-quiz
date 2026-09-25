@@ -16,6 +16,7 @@ from app.db import upsert_approved_questions, get_connection
 from app.database import DATABASE_ERRORS, is_postgres, is_postgres_target, resolve_database_target
 from app.postgres_schema import verify_schema
 from app.content_publication import validate_publications
+from app.case_content import case_error
 
 
 def resolve_db_path() -> str:
@@ -24,6 +25,9 @@ def resolve_db_path() -> str:
 
 
 def validate_question(item: dict[str, Any], index: int, source_name: str) -> tuple[bool, str | None]:
+    invalid_case = case_error(item)
+    if invalid_case:
+        return False, f"{source_name} элемент #{index}: {invalid_case}"
     required = ["id", "category", "question", "options", "correct_option_index", "status"]
     for field in required:
         if field not in item:

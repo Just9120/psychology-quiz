@@ -9,6 +9,8 @@ from tests.test_web_auth import web, post, register, login
 
 def test_progress_api_shared_telegram_history_and_guards(web):
     assert web.client.get('/web/progress/overview').status_code == 401
+    assert web.client.get('/web/progress/mastery').status_code == 401
+    assert web.client.get('/web/progress/review').status_code == 401
     register(web)
     csrf = login(web)
     assert post(web, 'progress/history', csrf=csrf).status_code == 409
@@ -23,6 +25,15 @@ def test_progress_api_shared_telegram_history_and_guards(web):
         foreign = record(conn, actor=other)
     overview = web.client.get('/web/progress/overview')
     assert overview.status_code == 200 and overview.json()['summary']['answered'] == 1
+    mastery = web.client.get('/web/progress/mastery')
+    assert mastery.status_code == 200
+    assert mastery.json()['questions']['assessed_count'] == 1
+    assert mastery.json()['questions']['items'][0]['status'] == 'insufficient_data'
+    assert mastery.json()['terms']['assessed_count'] == 0
+    review = web.client.get('/web/progress/review')
+    assert review.status_code == 200 and review.json()['items'][0]['question_id'] == 1
+    assert review.headers['cache-control'] == 'no-store'
+    assert mastery.headers['cache-control'] == 'no-store'
     assert overview.headers['cache-control'] == 'no-store'
     assert post(web, 'progress/history').status_code == 403
     assert web.client.get('/web/progress/overview?user_id=2').status_code == 400
@@ -60,6 +71,48 @@ def test_empty_training_and_bad_payload_do_not_create_attempt(web):
     result = post(web, 'progress/train', {'expected_session_id': None, 'replace_active': False}, csrf=csrf)
     assert result.status_code == 409 and result.json()['error'] == 'no_errors'
     assert post(web, 'progress/history', csrf=csrf).json()['items'] == []
+
+
+def test_review_start_requires_actor_and_csrf_and_counts_once(web):
+    assert post(web, 'progress/review-start', {}).status_code == 401
+    assert post(web, 'progress/review-glossary-start', {}).status_code == 401
+    register(web)
+    csrf = login(web)
+    assert post(web, 'identity/new', csrf=csrf).status_code == 200
+    assert post(web, 'progress/review-glossary-start', {'topic_id': 'missing'}, csrf=csrf).status_code == 400
+    with closing(get_connection(str(web.db))) as conn, conn:
+        actor = conn.execute('SELECT user_id FROM web_accounts').fetchone()[0]
+        sid = record(conn, actor=actor, choices=(1,))
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-01T10:00:00Z' WHERE session_id=?", (sid,))
+    payload = {'expected_session_id': sid, 'replace_active': False, 'question_count': 5}
+    assert post(web, 'progress/review-start', payload).status_code == 403
+    started = post(web, 'progress/review-start', payload, csrf=csrf)
+    assert started.status_code == 200
+    question = started.json()['runner_state']['current_question']
+    assert post(web, 'progress/review-start', payload, csrf=csrf).status_code == 409
+    answer = {'session_id': question['session_id'], 'question_id': question['question_id'],
+              'selected_option_index': 0}
+    assert post(web, 'quiz/answer', answer, csrf=csrf).status_code == 200
+    assert post(web, 'quiz/answer', answer, csrf=csrf).json()['submission_status'] == 'duplicate'
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute('SELECT count(*) FROM user_review_events WHERE user_id=?', (actor,)).fetchone()[0] == 1
+
+
+def test_weekly_goals_api_requires_identity_and_never_accepts_foreign_actor(web):
+    assert web.client.get('/web/progress/goals').status_code == 401
+    register(web)
+    csrf = login(web)
+    assert web.client.get('/web/progress/goals').status_code == 409
+    assert post(web, 'identity/new', csrf=csrf).status_code == 200
+    assert post(web, 'progress/goal-set', {'goal_kind': 'study', 'weekly_target': 2}).status_code == 403
+    result = post(web, 'progress/goal-set', {'goal_kind': 'study', 'weekly_target': 2, 'user_id': 1}, csrf=csrf)
+    assert result.status_code == 200 and result.json()['goals'][0]['weekly_target'] == 2
+    assert web.client.get('/web/progress/goals').json()['goals'][0]['weekly_target'] == 2
+    assert post(web, 'progress/goal-set', {'goal_kind': 'reading', 'weekly_target': True}, csrf=csrf).status_code == 400
+    with closing(get_connection(str(web.db))) as conn:
+        actor = conn.execute('SELECT user_id FROM web_accounts').fetchone()[0]
+        assert conn.execute('SELECT count(*) FROM user_learning_goals WHERE user_id=?', (actor,)).fetchone()[0] == 1
+        assert conn.execute('SELECT count(*) FROM user_learning_goals WHERE user_id!=?', (actor,)).fetchone()[0] == 0
 
 
 def test_reset_api_auth_csrf_actor_binding_and_readback(web):

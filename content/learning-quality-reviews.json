@@ -18202,6 +18202,32 @@
         }
       ]
     },
+    "questions:case_first_consultation_001": {
+      "item_sha256": "1c935c0a6d004d22683fb97a9264b23b7ce661e6056ed32e8e40c847fa08ee71",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Авторская вымышленная ситуация: при неясном запросе и отсутствии описанной срочной опасности первым шагом является прояснение контекста, ожиданий и цели. Совет об увольнении, выбор техники и диагноз третьему лицу не обоснованы этими данными. Все четыре варианта разобраны; при новой информации последовательность может измениться. Учебный принцип первой встречи сопоставлен с указанным фрагментом исходного материала; clinical/SME certification не заявлена.",
+      "sources": [
+        {
+          "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
+          "modified_time": "2026-04-05T22:50:22.529Z",
+          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
+          "locator": "Тема 5: первая встреча, контакт, прояснение запроса и согласование цели"
+        }
+      ]
+    },
     "glossary:case_conceptualization": {
       "item_sha256": "1c268cd75596fde7e0167dc4dea70e1e2e27646e44d0f085572605087761de53",
       "discipline_id": "psychological_consulting",
