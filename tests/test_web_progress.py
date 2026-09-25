@@ -9,6 +9,7 @@ from tests.test_web_auth import web, post, register, login
 
 def test_progress_api_shared_telegram_history_and_guards(web):
     assert web.client.get('/web/progress/overview').status_code == 401
+    assert web.client.get('/web/progress/mastery').status_code == 401
     register(web)
     csrf = login(web)
     assert post(web, 'progress/history', csrf=csrf).status_code == 409
@@ -23,6 +24,11 @@ def test_progress_api_shared_telegram_history_and_guards(web):
         foreign = record(conn, actor=other)
     overview = web.client.get('/web/progress/overview')
     assert overview.status_code == 200 and overview.json()['summary']['answered'] == 1
+    mastery = web.client.get('/web/progress/mastery')
+    assert mastery.status_code == 200
+    assert mastery.json()['assessed_count'] == 1
+    assert mastery.json()['items'][0]['status'] == 'insufficient_data'
+    assert mastery.headers['cache-control'] == 'no-store'
     assert overview.headers['cache-control'] == 'no-store'
     assert post(web, 'progress/history').status_code == 403
     assert web.client.get('/web/progress/overview?user_id=2').status_code == 400

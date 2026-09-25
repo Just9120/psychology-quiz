@@ -4,6 +4,7 @@ import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
 from app import glossary_service, learning_reset, progress_service, literature_service
+from app.mastery import quiz_states
 from urllib.parse import unquote
 
 from fastapi import Request
@@ -14,7 +15,7 @@ from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_set
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "glossary/state", "glossary/options", "literature/catalog"}
+GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "progress/mastery", "glossary/state", "glossary/options", "literature/catalog"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
                 "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
@@ -91,6 +92,8 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
             try:
                 if action == "progress/overview":
                     return progress_service.overview(conn, actor), None
+                if action == "progress/mastery":
+                    return quiz_states(conn, actor), None
                 if action == "progress/history":
                     return progress_service.history(conn, actor, payload.get("before"), payload.get("scope")), None
                 if action == "progress/attempt":
