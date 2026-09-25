@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { api } from './api'
 import type { GlossaryState, GlossaryTopic } from './types'
 
-export function GlossaryView({ initial, topics, busy, run }: {
+export function GlossaryView({ initial, topics, busy, run, client = api }: {
   initial: GlossaryState; topics: GlossaryTopic[]; busy: boolean
   run: (operation: () => Promise<void>) => Promise<void>
+  client?: Pick<typeof api, 'glossaryState' | 'glossaryStart' | 'glossaryAnswer' | 'glossaryNext'>
 }) {
   const [saved, setSaved] = useState(initial)
   const [setup, setSetup] = useState(initial.state === 'idle')
@@ -21,20 +22,20 @@ export function GlossaryView({ initial, topics, busy, run }: {
     setSaved(state); setSetup(state.state === 'idle'); setSelected(null); setPending(null)
     setReplace(false); setUncertain(false)
   }
-  async function refresh() { apply((await api.glossaryState()).glossary_state) }
+  async function refresh() { apply((await client.glossaryState()).glossary_state) }
   async function start() {
     setUncertain(true); setReplace(false)
-    apply((await api.glossaryStart(topic, count, active ? saved.session_id! : null, replace)).glossary_state)
+    apply((await client.glossaryStart(topic, count, active ? saved.session_id! : null, replace)).glossary_state)
   }
   async function answer() {
     if (!q || selected === null) return
     const choice = pending ?? selected
     setPending(choice)
-    const result = await api.glossaryAnswer(q.session_id, q.step_id, choice)
+    const result = await client.glossaryAnswer(q.session_id, q.step_id, choice)
     apply({ ...saved, ...result.glossary_state })
   }
   return <section className="page-width glossary-page"><span className="eyebrow">ТЕРМИНЫ И СМЫСЛЫ</span><h1>Глоссарий</h1>
-    <p className="lead">Вспоминайте определения и разбирайте ответы. Сохранённый тест доступен и в связанном Telegram.</p>
+    <p className="lead">Вспоминайте определения и разбирайте ответы. Сохранённый тест привязан к вашему учебному профилю.</p>
     {uncertain ? <div className="panel"><h2>Проверим сохранённое состояние</h2><p>Ответ сервера не получен. Восстановите тест перед новым запуском.</p><button className="button primary" disabled={busy} onClick={() => void run(refresh)}>Восстановить глоссарий</button></div>
       : setup ? <div className="panel practice-section"><h2>Тест по терминам</h2>
         {topics.length ? <><label className="field">Тема глоссария<select value={topic} disabled={busy} onChange={e => { setTopic(e.target.value); setReplace(false) }}>{topics.map(item => <option value={item.topic_id} key={item.topic_id} disabled={item.available_count < 4}>{item.title} · {item.available_count} терминов</option>)}</select></label>
@@ -46,7 +47,7 @@ export function GlossaryView({ initial, topics, busy, run }: {
         : saved.state === 'completed' && saved.result ? <div className="panel result-card"><h2>Тест по терминам завершён</h2><p className="lead">{saved.result.score} из {saved.result.total_questions} верных ответов</p><p className="muted">Результат сохранён в вашем аккаунте.</p><button className="button primary" disabled={busy} onClick={() => setSetup(true)}>Выбрать следующий тест</button></div>
           : q ? <article className="panel question-card"><div className="quiz-toolbar"><button className="text-button" disabled={busy} onClick={() => { setSetup(true); setReplace(false) }}>← К темам глоссария</button><span>{q.order_index} из {q.total_questions}</span></div>
             <p className="eyebrow">{q.topic_title}</p><h2>Что означает «{q.term}»?</h2>
-            {f && saved.state === 'feedback' ? <div className="answer-feedback"><h3>{f.is_correct ? 'Верно' : 'Разберём этот ответ'}</h3><dl className="answer-review"><dt>Ваш ответ</dt><dd>{f.selected_option_text}</dd>{!f.is_correct && <><dt>Правильный ответ</dt><dd>{f.correct_option_text}</dd></>}<dt>Объяснение</dt><dd>{f.explanation}</dd></dl><p className="muted">Ответ сохранён · {f.answered_count} из {f.total_questions}</p><button className="button primary" disabled={busy} onClick={() => void run(async () => apply((await api.glossaryNext(q.session_id, f.step_id)).glossary_state))}>{f.has_next ? 'Следующий термин' : 'Показать результат'}</button></div>
+            {f && saved.state === 'feedback' ? <div className="answer-feedback"><h3>{f.is_correct ? 'Верно' : 'Разберём этот ответ'}</h3><dl className="answer-review"><dt>Ваш ответ</dt><dd>{f.selected_option_text}</dd>{!f.is_correct && <><dt>Правильный ответ</dt><dd>{f.correct_option_text}</dd></>}<dt>Объяснение</dt><dd>{f.explanation}</dd></dl><p className="muted">Ответ сохранён · {f.answered_count} из {f.total_questions}</p><button className="button primary" disabled={busy} onClick={() => void run(async () => apply((await client.glossaryNext(q.session_id, f.step_id)).glossary_state))}>{f.has_next ? 'Следующий термин' : 'Показать результат'}</button></div>
               : <><fieldset className="answer-options"><legend className="sr-only">Определение термина</legend>{q.options.map((option, index) => <label className={`answer-option ${selected === option.option_index ? 'selected' : ''}`} key={option.option_index}><input type="radio" name="term-answer" checked={selected === option.option_index} disabled={busy || pending !== null} onChange={() => setSelected(option.option_index)} /><span className="answer-letter">{index + 1}</span><span>{option.option_text}</span></label>)}</fieldset>
                 {pending !== null && <p className="notice" role="status">Подтверждение не получено. Можно повторить тот же ответ или восстановить состояние.</p>}
                 <button className="button primary" disabled={busy || selected === null} onClick={() => void run(answer)}>{pending !== null ? 'Повторить тот же ответ' : 'Проверить определение'}</button></>}

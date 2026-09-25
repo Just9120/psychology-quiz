@@ -9,7 +9,9 @@
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build && node scripts/build-metadata.mjs",
+    "build:miniapp": "npm run typecheck && vite build --config vite.miniapp.config.ts",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "preview:miniapp": "vite preview --config vite.miniapp.config.ts --host 127.0.0.1 --port 4174",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "icons": "node scripts/generate-icons.mjs"

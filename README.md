@@ -2,7 +2,7 @@
 
 `psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами, повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md).
 
-Текущая реализация — Telegram-бот и Mini App на Python/FastAPI, а также самостоятельный PWA quiz client на React/TypeScript/Vite. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#завершённая-goal--pwa-first-001). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. pgvector/search остаются отдельным scope.
+Текущая реализация — Telegram-бот на Python/FastAPI, Mini App и самостоятельный PWA quiz client на React/TypeScript/Vite. Клиенты используют общий backend и банк. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#завершённая-goal--pwa-first-001). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. pgvector/search остаются отдельным scope.
 
 Текущее состояние продукта:
 - **Module 1** — стабильный baseline, 296 approved questions across five active topics.
@@ -112,6 +112,7 @@ Owner PWA auth backend поставляется выключенным по ум
 npm ci --ignore-scripts
 npm test
 npm run build
+npm run build:miniapp
 npx playwright install chromium
 npm run test:e2e
 ```
@@ -206,9 +207,9 @@ Runtime sync for JSON/content changes is deployment-environment-specific. Reposi
 Для ручной deployment-валидации Mini App runner используйте чеклист:
 - [`docs/miniapp-deployment-qa.md`](docs/miniapp-deployment-qa.md)
 
-Важно: в текущем репозитории hosting `miniapp/index.html` не автоматизирован runtime/deploy-скриптами и остаётся операторской инфраструктурной задачей.
+Важно: Mini App собирается из `pwa/miniapp-app` и `pwa/src/miniapp` командой `cd pwa && npm run build:miniapp` в `miniapp-react/`; этот проверяемый статический каталог публикует отдельная Cloudflare Git integration. VPS runtime/deploy-скрипты не публикуют Mini App assets.
 
-Важно: для Cloudflare Workers Static Assets добавлен root `wrangler.toml` с публикацией статики из `./miniapp` через `npx wrangler deploy`.
+Важно: root `wrangler.toml` публикует проверенную сборку из `./miniapp-react` через `npx wrangler deploy`.
 
 ## Документация
 
@@ -235,4 +236,4 @@ Source-of-truth модель:
 ## Mini App setup (MVP)
 
 - `MINI_APP_URL` (optional): URL статического Telegram Mini App runner для opt-in команды `/ui`; при отсутствии переменной бот продолжает работать только в classic chat UX режиме.
-- `miniapp/index.html` публикуется отдельно на стороне deploy/infrastructure; runtime-секреты и Telegram токены в frontend не размещаются.
+- `miniapp-react/index.html` публикуется отдельно Cloudflare Git integration; runtime-секреты и Telegram токены в frontend не размещаются. Старый `miniapp/index.html` сохранён как legacy reference до завершения cross-client миграции.
