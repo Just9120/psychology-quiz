@@ -5,13 +5,13 @@ import { fireEvent, waitFor, within } from '@testing-library/dom'
 // Exercise the shipped Mini App renderer in a real DOM, including entry by resume.
 function renderer(fetch: ReturnType<typeof vi.fn>) {
   const html = readFileSync('../miniapp/index.html', 'utf8')
-  const code = html.slice(html.indexOf('function showGlossaryView()'), html.indexOf("modeTopics.addEventListener('click'"))
+  const code = html.slice(html.indexOf('function showGlossaryView()'), html.indexOf('function showLearningView('))
   const parseTopics = html.slice(html.indexOf('function hasUsableGlossaryTopics('), html.indexOf('function getGlossaryTopicsFromSetupCache('))
   const host = document.createElement('section'); document.body.appendChild(host)
   return new Function('document', 'glossaryFetch', 'host', `
     let glossaryRenderRevision = 0, glossarySavedState = null, glossaryLastSessionId = null, glossaryTopicsCache = [];
     const glossaryView = host, runnerState = document.createElement('p'), err = document.createElement('p');
-    const modeView = {}, form = {}, setupIntro = {}, questionView = {};
+    const modeView = {}, form = {}, setupIntro = {}, questionView = {}, literatureView = {}, learningView = {};
     const hideSetupWarning = () => {}, showModeSelection = () => {}, buildMiniappRequestId = () => 'synthetic';
     ${parseTopics}
     ${code}

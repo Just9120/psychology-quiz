@@ -2,5 +2,5 @@ name = "psychology-quiz-miniapp"
 compatibility_date = "2026-05-21"
 
 [assets]
-directory = "./miniapp"
+directory = "./miniapp-react"
 not_found_handling = "404-page"

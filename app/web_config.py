@@ -25,6 +25,9 @@ class WebSettings:
     smtp_password: str
     sender: str
     secure_cookie: bool = True
+    # Synthetic tests can exercise student account flows. Production config
+    # deliberately cannot enable them before age/privacy decisions are approved.
+    student_access_enabled: bool = False
 
     @property
     def cookie_name(self) -> str:
@@ -37,6 +40,11 @@ class WebSettings:
             raise RuntimeError("Invalid PWA_ENABLED")
         if enabled != "true":
             return None
+        student = os.getenv("PWA_STUDENT_ACCESS_ENABLED", "false").strip().lower()
+        if student not in {"true", "false"}:
+            raise RuntimeError("Invalid PWA_STUDENT_ACCESS_ENABLED")
+        if student == "true":
+            raise RuntimeError("Student PWA access requires approved age/privacy policy; this release keeps it disabled")
         def required(name):
             value = os.getenv(name, "").strip()
             if not value:

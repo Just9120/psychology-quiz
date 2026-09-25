@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing
+from dataclasses import replace
 import json
 import logging
 import secrets
@@ -127,6 +128,46 @@ def test_non_owner_unknown_login_and_disabled_account_are_denied(web):
         conn.execute('UPDATE web_accounts SET enabled=0')
     assert web.client.get('/web/auth/me').status_code == 401
     assert post(web, 'auth/login', {'email': EMAIL, 'password': PASSWORD}).status_code == 401
+
+
+def test_student_pwa_flows_are_dormant_in_production_but_isolated_in_synthetic_policy(web):
+    student = 'student@example.test'
+    with closing(get_connection(str(web.db))) as conn, conn:
+        owner_session = make_attempt(conn)
+    assert post(web, 'auth/register', {'email': student}).status_code == 200
+    assert web.mailbox.messages == []
+    synthetic = create_app(db_path=str(web.db), bot_token=TOKEN,
+        web_settings=replace(SETTINGS, student_access_enabled=True), web_mailer=web.mailbox,
+        web_clock=lambda: web.now[0])
+    with TestClient(synthetic, base_url=ORIGIN) as client:
+        student_web = SimpleNamespace(db=web.db, client=client, mailbox=web.mailbox)
+        assert post(student_web, 'auth/register', {'email': student}).status_code == 200
+        token = web.mailbox.messages[-1][2]
+        assert post(student_web, 'auth/verify', {'token': token, 'password': PASSWORD}).status_code == 200
+        assert post(student_web, 'auth/login', {'email': student, 'password': PASSWORD}).status_code == 200
+        me = client.get('/web/auth/me').json()
+        assert me['role'] == 'student' and me['needs_identity'] is True
+        assert post(student_web, 'identity/new', csrf=me['csrf_token']).status_code == 200
+        assert client.get('/web/quiz/state').status_code == 200
+        denied = post(student_web, 'quiz/answer', {'session_id': owner_session, 'question_id': 1, 'selected_option_index': 0}, csrf=me['csrf_token'])
+        assert denied.status_code == 403
+        assert client.get('/web/quiz/state').json()['runner_state']['state'] == 'setup'
+        student_actor = client.get('/web/auth/me').json()['email']
+        assert student_actor == student
+        issued_cookie = client.cookies.get(SETTINGS.cookie_name)
+    # A student session cannot be used after the production gate is closed.
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute('SELECT count(*) FROM web_accounts WHERE email=?', (student,)).fetchone()[0] == 1
+    web.client.cookies.set(SETTINGS.cookie_name, issued_cookie)
+    assert web.client.get('/web/auth/me').status_code == 401
+    assert post(web, 'auth/login', {'email': student, 'password': PASSWORD}).status_code == 401
+
+
+def test_runtime_config_rejects_enabling_student_pwa_without_approved_policy(monkeypatch):
+    monkeypatch.setenv('PWA_ENABLED', 'true')
+    monkeypatch.setenv('PWA_STUDENT_ACCESS_ENABLED', 'true')
+    with pytest.raises(RuntimeError, match='approved age/privacy policy'):
+        WebSettings.from_env()
 
 
 @pytest.mark.parametrize('kind', ['missing-origin', 'wrong-origin', 'no-csrf', 'bad-csrf', 'unicode-csrf', 'form', 'cross-site'])

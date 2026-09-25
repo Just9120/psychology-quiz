@@ -3,7 +3,7 @@ import asyncio
 import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
-from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements
+from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements, demo
 from app.mastery import overview as mastery_overview
 from urllib.parse import unquote
 
@@ -15,8 +15,8 @@ from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_set
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
-POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
+GET_ACTIONS = {"auth/me", "demo/items", "quiz/state", "quiz/options", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
+POST_ACTIONS = {"demo/answer", "auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
                 "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
                 "progress/reset-preview", "progress/reset-confirm", "progress/review-start", "progress/review-glossary-start", "progress/goal-set", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
@@ -34,6 +34,13 @@ class WebAccessLogFilter(logging.Filter):
 
 
 def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf: str | None):
+    if action in {"demo/items", "demo/answer"}:
+        try:
+            return (demo.list_items() if action == "demo/items" else demo.answer(payload.get("item_id"), payload.get("option_index"))), None
+        except demo.DemoUnavailable:
+            raise AuthError("demo_unavailable", 503) from None
+        except (ValueError, OSError, TypeError, KeyError):
+            raise AuthError("invalid_payload", 400) from None
     if action in {"auth/register", "auth/recover"}:
         auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover")
         return {"ok": True}, None

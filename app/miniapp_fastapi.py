@@ -30,6 +30,7 @@ from app.miniapp_api import (
     build_literature_progress_response,
     build_literature_state_response,
     build_literature_topics_response,
+    build_learning_response, LEARNING_READ_ACTIONS, LEARNING_WRITE_ACTIONS,
     build_setup_options_response,
     build_setup_response,
     build_state_response,
@@ -37,7 +38,7 @@ from app.miniapp_api import (
 
 logger = logging.getLogger("uvicorn.error")
 
-_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}
+_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"} | {f"/miniapp/learning/{action}" for action in LEARNING_READ_ACTIONS | LEARNING_WRITE_ACTIONS}
 
 
 def _to_response(status: int, headers: dict[str, str], body: bytes) -> Response:
@@ -303,6 +304,26 @@ def create_app(
     @app.get("/miniapp/setup-options")
     async def get_setup_options(request: Request) -> Response:
         return await _get_builder_response("/miniapp/setup-options", request, build_setup_options_response, db_path, bot_token)
+
+    @app.options("/miniapp/learning/{action}")
+    async def options_learning(action: str, request: Request) -> Response:
+        return await _options_response(f"/miniapp/learning/{action}", request)
+
+    @app.get("/miniapp/learning/{action}")
+    async def get_learning(action: str, request: Request) -> Response:
+        if action not in LEARNING_READ_ACTIONS:
+            return JSONResponse({"ok": False, "error": "not_found"}, status_code=404)
+        endpoint = f"/miniapp/learning/{action}"
+        return await _get_builder_response(endpoint, request, build_learning_response,
+            db_path, bot_token, action)
+
+    @app.post("/miniapp/learning/{action}")
+    async def post_learning(action: str, request: Request) -> Response:
+        if action not in LEARNING_WRITE_ACTIONS:
+            return JSONResponse({"ok": False, "error": "not_found"}, status_code=404)
+        endpoint = f"/miniapp/learning/{action}"
+        return await _post_builder_response(endpoint, request, build_learning_response,
+            db_path, bot_token, action)
 
     @app.post("/miniapp/setup")
     async def post_setup(request: Request) -> Response:

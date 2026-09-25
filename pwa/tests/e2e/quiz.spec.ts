@@ -3,6 +3,35 @@ import { expect, test, type Page } from '@playwright/test'
 const backend = 'http://127.0.0.1:8085'
 const email = 'owner@example.test', password = 'A synthetic browser passphrase'
 
+test('guest demo has exactly theory, term and case without account state', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Посмотреть демонстрацию' }).click()
+  await expect(page.getByRole('heading', { name: 'Три задания' })).toBeVisible()
+  for (const heading of ['Теория', 'Термин', 'Кейс']) {
+    await expect(page.locator('.quiz-card .eyebrow')).toContainText(heading)
+    await page.getByRole('radio').first().check()
+    await page.getByRole('button', { name: 'Проверить ответ' }).click()
+    await expect(page.getByText('Верный вариант:', { exact: false })).toBeVisible()
+    await page.getByRole('button', { name: heading === 'Кейс' ? 'Завершить' : 'Следующее задание' }).click()
+  }
+  await expect(page.getByRole('heading', { name: 'Демонстрация завершена' })).toBeVisible()
+  expect((await page.request.get('/web/progress/overview')).status()).toBe(401)
+  expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
+})
+
+test('personal learning shows empty queue and persists a weekly target', async ({ page }) => {
+  await fresh(page)
+  await page.getByRole('button', { name: 'Повторение и цели' }).click()
+  await expect(page.getByRole('heading', { name: 'Повторение и цели' })).toBeVisible()
+  await expect(page.getByText(/Пока нет ответов, по которым можно составить очередь/)).toBeVisible()
+  await page.getByLabel('Завершённые попытки').fill('2')
+  await page.getByRole('button', { name: 'Сохранить цель' }).first().click()
+  await expect(page.getByText('Недельная цель сохранена.')).toBeVisible()
+  await page.reload()
+  await page.getByRole('button', { name: 'Повторение и цели' }).click()
+  await expect(page.getByLabel('Завершённые попытки')).toHaveValue('2')
+})
+
 test('short desktop viewport keeps sidebar navigation and logout reachable', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 480 })
   await fresh(page)

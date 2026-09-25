@@ -54,6 +54,9 @@ jobs:
         run: |
           npm test
           npm run build
+          npm run build:miniapp
+          git diff --exit-code -- ../miniapp-react
+          test -z "$(git ls-files --others --exclude-standard ../miniapp-react)"
       - name: Browser regression with temporary SQLite and synthetic mail
         run: |
           npx playwright install --with-deps chromium

@@ -1,6 +1,6 @@
 # Owner PWA: auth contract и эксплуатация
 
-Границы первого owner-only среза — [spec](project-spec.md), состояние/Evidence — [план](delivery-plan.md). Общий quiz service принимает проверенный `users.id`; web request не задаёт actor. Старые Telegram routes продолжают проверять initData. Public signup/sharing и merge двух историй не входят в этот этап.
+Границы первого owner-only среза — [spec](project-spec.md), состояние/Evidence — [план](delivery-plan.md). Общий quiz service принимает проверенный `users.id`; web request не задаёт actor. Telegram routes продолжают проверять initData и доступны всем проверенным Telegram users. По D-20 student PWA flow подготовлен только в коде: production registration/login остаются выключенными до Q-09/11; merge двух историй не поддерживается.
 
 ## Конфигурация
 
@@ -11,13 +11,16 @@ Enabled API и bot требуют:
 | Переменная | Правило |
 | --- | --- |
 | `PWA_ENABLED` | `true` / `false`; неизвестное значение — startup error |
+| `PWA_STUDENT_ACCESS_ENABLED` | Только `false` для действующего production release. `true` отклоняется при startup до подключения к DB: нет утверждённого age/privacy policy. Synthetic tests инъектируют enabled settings напрямую, не через runtime env. |
 | `PWA_ORIGIN` | Единственный HTTPS origin без path/query/fragment/credentials. PWA вызывает same-origin `/web/*`, Nginx направляет его в existing loopback API; PWA CORS не включается |
-| `PWA_OWNER_EMAIL` | Единственный allowlisted owner, lowercase/trim; реальный адрес в repository не публиковать |
+| `PWA_OWNER_EMAIL` | Allowlisted owner, lowercase/trim; реальный адрес в repository не публиковать. Другие PWA accounts в production выключены |
 | `PWA_SMTP_HOST`, `PWA_SMTP_PORT` | По документации Яндекс 360, проверенной 19.09.2026: `smtp.yandex.ru`, SSL 465 или STARTTLS 587. Фактический mailbox устанавливает владелец; certificate verification обязательно |
 | `PWA_SMTP_USERNAME`, `PWA_SMTP_PASSWORD`, `PWA_SMTP_FROM` | Account/app password и sender только runtime, не в CLI arguments/logs/artifacts |
 | `PWA_ALLOW_HTTP_LOCALHOST` | Явное local development исключение: HTTP localhost/127.0.0.1/::1 и отдельная dev cookie без Secure. Public HTTP всегда запрещён |
 
 Install/init/run/tests — canonical команды в [README](../README.md#быстрый-старт-и-проверки). Tests inject synthetic mailer; runtime не имеет bypass e-mail proof и не возвращает mail tokens в API. SMTP timeout 10 секунд, до двух отправок на процесс. Ошибка удаляет выданный token и возвращает только `mail_unavailable`.
+
+В synthetic test configuration общий e-mail/password/proof flow допускает `student` account с независимым actor либо подтверждённой Telegram-связью; роль в `auth/me` выводится сервером из подтверждённого e-mail. При выключении gate ранее созданная student session не проходит `authenticate`, а login и новые письма не дают доступа. Это подготовка технического пути, не одобрение или включение публичной регистрации: проверяемое правило 18+, тексты и основания обработки, удаление/retention и размещение данных остаются Q-09/11.
 
 ## API и пользовательский flow
 

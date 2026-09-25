@@ -221,7 +221,9 @@ class MiniAppFrontendContractTests(unittest.TestCase):
     def test_setup_topic_selection_modes_and_disabled_reasons(self):
         self.assertIn('id="setup_hint" class="meta"', self.content)
         self.assertIn("const setupHint = document.getElementById('setup_hint');", self.content)
-        self.assertIn("const inputType = mode === 'selected_mix' ? 'checkbox' : 'radio';", self.content)
+        self.assertIn("const inputType = mode === 'selected_mix' || mode === 'adaptive' ? 'checkbox' : 'radio';", self.content)
+        self.assertIn('value="adaptive"', self.content)
+        self.assertIn('content_kinds: [...form.querySelectorAll', self.content)
         self.assertIn("input.type = inputType;", self.content)
         self.assertIn("input.name = inputType === 'radio' ? 'category_id' : 'category_ids';", self.content)
         self.assertIn("const selectedSet = new Set(mode === 'single' ? selectedIds.slice(0, 1) : selectedIds);", self.content)

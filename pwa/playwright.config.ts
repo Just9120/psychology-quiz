@@ -15,5 +15,6 @@ export default defineConfig({
   webServer: [
     { command: `"${process.env.PWA_TEST_PYTHON || 'python'}" tests/backend.py`, url: 'http://127.0.0.1:8085/__test/health', reuseExistingServer: false, timeout: 30000 },
     { command: 'npm run preview', url: 'http://127.0.0.1:4173', reuseExistingServer: false, timeout: 30000 },
+    { command: 'npm run preview:miniapp', url: 'http://127.0.0.1:4174', reuseExistingServer: false, timeout: 30000 },
   ],
 })

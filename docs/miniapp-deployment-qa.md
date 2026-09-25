@@ -16,7 +16,7 @@
 | Config owner | Runtime host `.env` обслуживает владелец VPS; routine CD не добавляет keys и не заменяет values. Repository Secrets DEPLOY_SSH_KEY/DEPLOY_KNOWN_HOSTS задают доступ/host identity. Ответственный за rotation персонально UNSET. Compose задаёт revision и выключает legacy API в bot. |
 | Очередь / выбор версии | production-deploy concurrency без cancel; host flock ждёт до 60 s, затем FAIL. Только 40-character SHA, совпадающий с origin/main на момент fetch; stale candidate завершается без поставки. Host checkout clean, merge только ff-only. Никогда reset --hard/down/remove-orphans/prune. |
 | Artifact identity | VPS пересобирает оба image из точного source SHA перед init/seed. Это отдельные binary artifacts, не CI-built image. Build label, APP_REVISION, running image IDs и API health revision сверяются/записываются в CD logs. Transitive/base-image lock отсутствует (F-015): полной воспроизводимости binary не заявлять. |
-| Static frontend | Telegram Mini App: отдельная Cloudflare Git integration/Worker psychology-quiz-miniapp, после PR нужны asset/provider check. Самостоятельная PWA: тот же production CD, trusted main CI artifact и atomic release на VPS по [PWA procedure](pwa-delivery.md); Mini App hosting не меняется. |
+| Static frontend | Telegram Mini App: React/TS/Vite source `pwa/miniapp-app` + `pwa/src/miniapp`, проверенная сборка `miniapp-react/` и отдельная Cloudflare Git integration/Worker psychology-quiz-miniapp; после PR нужны asset/provider check. Самостоятельная PWA: тот же production CD, trusted main CI artifact и atomic release на VPS по [PWA procedure](pwa-delivery.md). |
 | Stateful class | Обычный code-only release — NONE. Schema/seed/content DB release этой Goal — BACKWARD_COMPATIBLE_AUTOMATED; Для первой поставки без прежнего image SHA обязательны backup rehearsal/user preservation; init/seed выполняются только при соответствующем source diff, не из-за отсутствия label. Stateful script останавливает оба writer services, создаёт backup, репетирует restore отдельно, затем init/seed и проверяет сохранность всех прежних user fields. |
 | Backup / recovery | [deployment_db.py](../scripts/deployment_db.py): SQLite backup API в private `/data/backups/release-*/quiz.sqlite3`; restore во временный файл, integrity/FK и fingerprint users/sessions/answers/literature. До migrations failure запускает только прежние containers. После начала migration/post-check failure — stop продвижения и forward-fix; production restore/volume cleanup не автоматизированы. Retention/удаление backups — отдельная maintenance задача. |
 | Обязательные post-checks | Проверка DB serving questions/options, всех attempt snapshot hashes и canonical parity, неизменности user state для stateful release, [internal HTTP smoke](../scripts/deployment_http_smoke.py) `/healthz` с expected SHA и unauthenticated `/miniapp/state` → 401; затем обе службы Running и image revision. `DEPLOY_OK revision=...` допустим только после всех checks. Bot Telegram roundtrip не входит в read-only smoke. |
@@ -32,7 +32,7 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 
 ## 1) Current state
 - Mini App MVP код уже в репозитории и включает post-UX-polish product-facing setup/question/result screens.
-- Статический frontend runner расположен в `miniapp/index.html`.
+- Статический React frontend собирается в `miniapp-react/index.html`; прежний `miniapp/index.html` остаётся legacy reference, не является активным Cloudflare assets directory.
 - UX polish loop #207–#211 completed; current delivery posture is observation/manual QA when no reproducible bugs are present.
 - Бот открывает Mini App URL через `MINI_APP_URL` (опциональная env-переменная).
 - Классический `/quiz` остаётся дефолтным UX.
@@ -45,27 +45,27 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 - `/stats` остаётся скрытой owner-only командой только для private chat.
 
 ## 2) Hosting requirement
-- `miniapp/index.html` должен быть опубликован по **HTTPS**.
+- `miniapp-react/index.html` должен быть опубликован по **HTTPS**.
 - URL должен быть доступен из Telegram-клиентов (mobile/desktop).
 - Production URL задаётся в `MINI_APP_URL` окружении бота.
 - `MINI_APP_URL` не должен содержать секретов.
-- На текущем состоянии репозитория автоматический production-hosting для `miniapp/index.html` **не реализован** в составе `deploy.sh`/`docker-compose.yml` (операторская задача инфраструктуры).
+- Production hosting для Mini App assets выполняет отдельная Cloudflare Git integration, а не `deploy.sh`/`docker-compose.yml`.
 
 ## 3) Configuration checklist
 
 ### Trusted frontend API configuration
 
-[miniapp/api-config.js](../miniapp/api-config.js) — deployment-owned API destination. URL context (`api_base_url`) не является доверенной конфигурацией; его значение не используется для отправки initData. Все API fetch проходят общий origin/path guard, credentials-in-URL запрещены, redirects отклоняются. Для другого development/staging backend нужен явный deployment config change, не параметр ссылки. Legacy context продолжает передавать темы/runner bootstrap и sendData fallback; credentials в docs/fixtures не добавлять.
+[React Mini App API client](../pwa/src/miniapp/api.ts) фиксирует deployment-owned API destination. URL context (`api_base_url`) не является доверенной конфигурацией и не используется для отправки initData. API routes ограничены allowlist, credentials-in-URL не передаются, redirects отклоняются. Для другого development/staging backend нужен явный deployment config change, не параметр ссылки. [Старый config](../miniapp/api-config.js) относится только к legacy frontend. Credentials в docs/fixtures не добавлять.
 
-После frontend delivery проверить опубликованные index.html и api-config.js, provider check и UI load. Синтетический Node test проверяет фактический fetch boundary без network. Browser smoke без Telegram проверяет rendering/diagnostics; это не authenticated mobile roundtrip.
+После frontend delivery проверить опубликованный `miniapp-react/index.html`, его versioned JS/CSS assets, provider check и UI load. Component/API tests проверяют trusted fetch boundary без network. Browser smoke без Telegram показывает экран запуска; это не authenticated mobile roundtrip.
 
 ### Cloudflare Workers Static Assets (GitHub deployment flow)
-- Build command: empty
+- Build command: empty; `miniapp-react/` собирается из pinned frontend dependencies и сверяется с tracked assets в CI до merge
 - Deploy command: `npx wrangler deploy`
 - Path: `/`
-- Static assets directory in `wrangler.toml`: `./miniapp`
+- Static assets directory in `wrangler.toml`: `./miniapp-react`
 
-1. Опубликовать `miniapp/index.html` на HTTPS static hosting в deployment environment.
+1. Опубликовать `miniapp-react/index.html` и его assets на HTTPS static hosting в deployment environment.
 2. После готовности Cloudflare custom domain установить `MINI_APP_URL` на этот HTTPS URL в runtime `.env` на VPS.
 3. Перезапустить/передеплоить intended runtime service set (`psych_quiz_bot` и `psych_quiz_miniapp_api`), чтобы env/код подхватились где применимо.
 4. Проверить в Telegram, что `/ui` показывает кнопку открытия Mini App (при наличии активных категорий).

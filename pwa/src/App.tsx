@@ -8,6 +8,9 @@ import { QuizView } from './QuizView'
 import { ErrorsView, ProgressView } from './ProgressView'
 import { ResetView } from './ResetView'
 import { LiteratureView } from './LiteratureView'
+import { LearningView, loadLearning } from './LearningView'
+import { DemoView } from './DemoView'
+import type { GoalKind } from './types'
 import type { LiteratureCatalog } from './types'
 import { GlossaryView } from './GlossaryView'
 import type { GlossaryState, GlossaryTopic } from './types'
@@ -17,6 +20,7 @@ import type { Account, Answer, Feedback, MailProof, Question, QuizState, RunnerS
 
 export function App({ initialProof = null }: { initialProof?: MailProof | null }) {
   const [proof, setProof] = useState(initialProof)
+  const [demoOpen, setDemoOpen] = useState(false)
   const [account, setAccount] = useState<Account | null>(null)
   const [options, setOptions] = useState<SetupOptions | null>(null)
   const [state, setState] = useState<RunnerState | null>(null)
@@ -25,12 +29,13 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [selected, setSelected] = useState<number | null>(null)
   const [pending, setPending] = useState<Answer | null>(null)
   const [uncertainSetup, setUncertainSetup] = useState(false)
-  const [view, setView] = useState<'quiz' | 'setup' | 'account' | 'progress' | 'errors' | 'reset' | 'glossary' | 'literature'>('setup')
+  const [view, setView] = useState<'quiz' | 'setup' | 'account' | 'progress' | 'errors' | 'reset' | 'glossary' | 'literature' | 'learning'>('setup')
   const [resetPreview, setResetPreview] = useState<ResetPreview | null>(null)
   const [glossary, setGlossary] = useState<GlossaryState | null>(null)
   const [glossaryTopics, setGlossaryTopics] = useState<GlossaryTopic[]>([])
   const [literature, setLiterature] = useState<LiteratureCatalog | null>(null)
   const [literatureLoad, setLiteratureLoad] = useState(0)
+  const [learning, setLearning] = useState<Awaited<ReturnType<typeof loadLearning>> | null>(null)
   const [notice, setNotice] = useState('')
   const [progress, setProgress] = useState<ProgressOverview | null>(null)
   const [progressScope, setProgressScope] = useState<string | null>(null)
@@ -45,10 +50,10 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const alertRef = useRef<HTMLDivElement>(null)
 
   function clearPrivateState() {
-    setAccount(null); setOptions(null); setState(null); setFeedback(null); setFeedbackQuestion(null)
+    setAccount(null); setDemoOpen(false); setOptions(null); setState(null); setFeedback(null); setFeedbackQuestion(null)
     setSelected(null); setPending(null); setUncertainSetup(false); setView('setup')
     setProgress(null); setProgressScope(null); setHistory(null); setDetail(null); setMistakes(null)
-    setResetPreview(null); setNotice(''); setGlossary(null); setGlossaryTopics([]); setLiterature(null)
+    setResetPreview(null); setNotice(''); setGlossary(null); setGlossaryTopics([]); setLiterature(null); setLearning(null)
   }
 
   function applyState(result: QuizState, resume = false) {
@@ -114,9 +119,26 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
     setGlossaryTopics(available.topics); setGlossary(current.glossary_state); setView('glossary')
   }
   async function loadLiterature() { setLiterature(await api.literature()); setLiteratureLoad(value => value + 1); setView('literature') }
+  async function loadLearningView() { setLearning(await loadLearning()); setView('learning') }
+  async function saveGoal(kind: GoalKind, target: number) { await api.setGoal(kind, target); await loadLearningView(); setNotice('Недельная цель сохранена.') }
+  async function startReviewQuiz(replace: boolean) {
+    const current = await api.state()
+    const latest = current.runner_state.session?.session_id ?? null
+    try { applyState(await api.startReviewQuiz(latest, replace)) }
+    catch (failure) { if (failure instanceof ApiError && !failure.status) { await refreshState(); setError('Ответ не получен. Проверьте сохранённую попытку перед повтором.') } throw failure }
+  }
+  async function startReviewGlossary(topic: string, replace: boolean) {
+    const current = await api.glossaryState()
+    const latest = current.glossary_state.session_id ?? null
+    try {
+      const result = await api.startReviewGlossary(topic, latest, replace)
+      const available = await api.glossaryOptions()
+      setGlossaryTopics(available.topics); setGlossary(result.glossary_state); setView('glossary')
+    } catch (failure) { if (failure instanceof ApiError && !failure.status) { await loadGlossary(); setError('Ответ не получен. Восстановлено состояние терминов.') } throw failure }
+  }
   async function loadReset() { setResetPreview(await api.resetPreview()); setView('reset') }
   async function afterReset() {
-    setProgress(null); setHistory(null); setDetail(null); setMistakes(null); setResetPreview(null)
+    setProgress(null); setHistory(null); setDetail(null); setMistakes(null); setResetPreview(null); setLearning(null)
     setState(null); setFeedback(null); setFeedbackQuestion(null); setPending(null); setSelected(null)
     setUncertainSetup(false); setView('progress')
     applyState(await api.state())
@@ -153,16 +175,18 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
 
   const alert = error && <div className="app-alert" role="alert" tabIndex={-1} ref={alertRef}><Icon name="close" /><span>{error}</span><button aria-label="Скрыть сообщение" onClick={() => setError('')}><Icon name="close" size={16} /></button></div>
   if (booting) return <main className="loading-screen"><Brand /><span className="spinner" aria-hidden="true" /><p role="status">Открываем ваше пространство…</p></main>
-  if (!account || proof) return <>{alert}<AuthScreen busy={busy} run={run} proof={proof} consumeProof={() => setProof(null)} onLogin={loadAccount} /></>
+  if ((!account || proof) && demoOpen && !proof) return <DemoView onExit={() => setDemoOpen(false)} />
+  if (!account || proof) return <>{alert}<AuthScreen busy={busy} run={run} proof={proof} consumeProof={() => setProof(null)} onLogin={loadAccount} onDemo={() => setDemoOpen(true)} /></>
 
   return <div className="app-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
-    <aside className="sidebar"><Brand /><div className="nav-heading">МОЁ ОБУЧЕНИЕ</div><nav aria-label="Основная навигация"><button className={view === 'quiz' || view === 'setup' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}><Icon name="book" />Квиз по психологии<span className="nav-dot" /></button><button className={view === 'glossary' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadGlossary)}><Icon name="book" />Глоссарий</button><button className={view === 'literature' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLiterature)}><Icon name="book" />Литература</button><button className={view === 'progress' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadProgress)}><Icon name="chart" />Мой прогресс</button><button className={view === 'errors' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadErrors)}><Icon name="refresh" />Мои ошибки</button><button className={view === 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView('account')}><Icon name="user" />Мой аккаунт</button></nav><div className="sidebar-note"><Icon name="spark" /><p>Небольшие шаги.<br />Большое понимание.</p></div><InstallButton /><button className="logout" disabled={busy} onClick={() => void run(async () => { try { await api.logout() } finally { clearPrivateState() } })}><Icon name="logout" />Выйти</button></aside>
+    <aside className="sidebar"><Brand /><div className="nav-heading">МОЁ ОБУЧЕНИЕ</div><nav aria-label="Основная навигация"><button className={view === 'quiz' || view === 'setup' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}><Icon name="book" />Квиз по психологии<span className="nav-dot" /></button><button className={view === 'glossary' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadGlossary)}><Icon name="book" />Глоссарий</button><button className={view === 'literature' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLiterature)}><Icon name="book" />Литература</button><button className={view === 'progress' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadProgress)}><Icon name="chart" />Мой прогресс</button><button className={view === 'learning' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLearningView)}><Icon name="refresh" />Повторение и цели</button><button className={view === 'errors' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadErrors)}><Icon name="refresh" />Мои ошибки</button><button className={view === 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView('account')}><Icon name="user" />Мой аккаунт</button></nav><div className="sidebar-note"><Icon name="spark" /><p>Небольшие шаги.<br />Большое понимание.</p></div><InstallButton /><button className="logout" disabled={busy} onClick={() => void run(async () => { try { await api.logout() } finally { clearPrivateState() } })}><Icon name="logout" />Выйти</button></aside>
     <div className="workspace"><header className="topbar"><span>Ваше пространство обучения</span><div className="profile-badge"><span className="avatar">{account.email[0].toUpperCase()}</span><span>Личный аккаунт</span></div></header><main id="main-content" tabIndex={-1} className="workspace-main">
       {alert}{notice && <p className="notice" role="status">{notice}</p>}{offline && <div className="offline-banner" role="status">Вы не в сети. Новые ответы требуют подтверждения сервера.</div>}
       {view === 'account' ? <section className="page-width account-page"><span className="eyebrow">ВАШ ПРОФИЛЬ</span><h1>Мой аккаунт</h1><div className="panel"><h2>{account.email}</h2><p className="muted">Почта подтверждена</p><hr /><p>{account.needs_identity ? 'Выберите, с каким прогрессом продолжить обучение.' : account.telegram_linked ? 'Прогресс связан с вашим Telegram-аккаунтом.' : 'Самостоятельный аккаунт с отдельным прогрессом.'}</p><button className="button secondary" disabled={busy} onClick={() => setView('setup')}>К обучению<Icon name="arrow" /></button></div><div className="mobile-install"><InstallButton /></div></section>
         : account.needs_identity ? <Onboarding account={account} busy={busy} run={run} refresh={loadAccount} />
           : view === 'literature' && literature ? <LiteratureView key={literatureLoad} initial={literature} busy={busy} run={run} />
           : view === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} />
+          : view === 'learning' && learning ? <LearningView {...learning} busy={busy} onRefresh={() => void run(loadLearningView)} onSaveGoal={(kind, target) => void run(() => saveGoal(kind, target))} onStartQuiz={replace => void run(() => startReviewQuiz(replace))} onStartGlossary={(topic, replace) => void run(() => startReviewGlossary(topic, replace))} />
           : view === 'reset' && resetPreview ? <ResetView initial={resetPreview} busy={busy} run={run} onCancel={() => void run(loadProgress)} onComplete={afterReset} />
           : view === 'progress' && progress && history ? <ProgressView scope={progressScope} onScope={scope => void run(async () => { const page = await api.history(null, scope); setHistory(page); setProgressScope(scope) })} onReset={() => void run(loadReset)} data={progress} history={history} detail={detail} busy={busy} onRefresh={() => void run(() => loadProgress(progressScope))} onBack={() => setDetail(null)} onOpen={id => void run(async () => setDetail(await api.attempt(id)))} onMore={() => void run(async () => { const page = await api.history(history.next_before, progressScope); setHistory({ ...page, items: [...history.items, ...page.items] }) })} onMoreAnswers={() => void run(async () => { if (detail) { const page = await api.attempt(detail.attempt.session_id, detail.next_after); setDetail({ ...page, items: [...detail.items, ...page.items] }) } })} />
           : view === 'errors' && mistakes ? <ErrorsView data={mistakes} busy={busy} onRefresh={() => void run(loadErrors)} onResume={() => void run(refreshState)} onTrain={(replace, count) => void run(() => trainErrors(replace, count))} onMore={() => void run(async () => { const page = await api.errors(mistakes.next_before); setMistakes({ ...page, items: [...mistakes.items, ...page.items] }) })} />
