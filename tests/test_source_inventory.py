@@ -37,6 +37,8 @@ def test_page_chain_must_finish_before_recursive_inventory():
         complete_listing([*pages, pages[1]])
     with pytest.raises(InventoryError, match="duplicate_page_child"):
         complete_listing([pages[0], {**pages[1], "children": [item("first", "root")]}])
+    with pytest.raises(InventoryError, match="invalid_child"):
+        complete_listing([{**pages[1], "page_token": None, "children": [{"id": ["invalid"]}]}])
 
 
 def test_missing_is_not_deletion_and_conflicting_metadata_fails_closed():
@@ -60,8 +62,12 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
         "slides": {"revision": revision, "review_state": "conflict"}})
     assert states == {"lecture": "processed", "slides": "conflict_review"}
     assert processing_status(snapshot, {"lecture": {"revision": ("old", "Lesson", "application/pdf")}})["lecture"] == "changed_unprocessed"
+    with pytest.raises(InventoryError, match="invalid_processing_record"):
+        processing_status(snapshot, {"lecture": []})
     links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic", "format": "transcript"},
              {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic", "format": "slides"}]
     assert len(link_lessons(snapshot, links)["l1"]["sources"]) == 2
     with pytest.raises(InventoryError, match="conflicting_lesson_topic"):
         link_lessons(snapshot, [links[0], {**links[1], "topic_id": "other"}])
+    with pytest.raises(InventoryError, match="invalid_lesson_link"):
+        link_lessons(snapshot, [{**links[0], "source_id": ["not-a-file"]}])

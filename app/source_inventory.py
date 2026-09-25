@@ -28,6 +28,8 @@ def complete_listing(pages: list[dict]) -> dict:
             raise InventoryError("invalid_page_chain")
         for child in page["children"]:
             child_id = child.get("id") if isinstance(child, dict) else None
+            if not isinstance(child_id, str) or not child_id:
+                raise InventoryError("invalid_child")
             if child_id in child_ids:
                 raise InventoryError("duplicate_page_child")
             child_ids.add(child_id)
@@ -108,6 +110,8 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
         record = processed.get(file_id)
         if record is None:
             result[file_id] = "new_unprocessed"
+        elif not isinstance(record, dict):
+            raise InventoryError("invalid_processing_record")
         elif tuple(record.get("revision", ())) != _revision(item):
             result[file_id] = "changed_unprocessed"
         elif record.get("review_state") == "conflict":
@@ -127,7 +131,7 @@ def link_lessons(snapshot: dict, links: list[dict]) -> dict:
             raise InventoryError("invalid_lesson_link")
         source_id, lesson_id, topic_id, format_name = (
             link.get(key) for key in ("source_id", "lesson_id", "topic_id", "format"))
-        if (source_id not in snapshot["files"] or any(
+        if (not isinstance(source_id, str) or source_id not in snapshot["files"] or any(
                 not isinstance(value, str) or not value.strip()
                 for value in (lesson_id, topic_id, format_name))):
             raise InventoryError("invalid_lesson_link")
