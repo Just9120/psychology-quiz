@@ -1,8 +1,43 @@
 # Delivery Plan
 
-## Current Goal — QUIZ-QUALITY-ANALYTICS-001
+## Current Goal — PLATFORM-LEARNING-001
 
-**Статус: ACTIVE / IN_PROGRESS, 25.09.2026.** Пользователь явно поручил продолжить AC-QUIZ-06, AC-PROG-03 и AC-QUIZ-04 по новым правилам после паузы. UPDATE revision 10 Google Doc не расширяет эту Goal. Иерархия дисциплин/тем подтверждена D-17; статистическая policy сложности подтверждена D-19: первый ответ независимого actor на captured редакцию, размер выборки/неопределённость, ручная проверка без автоматической смены metadata.
+**Статус: ACTIVE / IN_PROGRESS, 25.09.2026.** Пользователь выбрал целиком «Платформа и клиенты», «Источники и публикация», «Квиз и кейсы», «Глоссарий», «Повторение и прогресс», затем явно включил зависимости AUTH/GAM/PRIV и условный AC-PROG-06. Это 38 ранее незавершённых AC в выбранных областях и зависимостях; уже READY части сохраняются, процент проекта/эпиков в IMPLEMENT не пересчитывается. Основание: поручение в текущем чате, D-18/20/21 в spec.
+
+**Результат:** общий проверяемый учебный контур для действующего владельца во всех клиентах: рекурсивно учитываемый приватный корпус с versioned provenance/review; утверждённые теория, термины и кейсы с пояснениями; тематические/random/adaptive попытки и персональное повторение, mastery, прогресс, цели и достижения. Студенческий код/UI и ограниченный demo подготавливаются, но доступ студентов в production остаётся DISABLED до отдельного решения Q-09/11. Raw Drive материалы и их полный инвентарь не публикуются в открытом repository или клиентских assets.
+
+**Scope AC:** FND-01/02/03/04/06/07/09/10; SRC-01/02/03/04/05/07/09; QUIZ-02/03/05/08/09; GLO-01/02; PROG-01/02/04/06; AUTH-01/03/05/06/07; GAM-01/02/03; PRIV-01/02/03/04. Существующие READY AC/FND-05/08, SRC-06/08, QUIZ-01/04/06/07, PROG-03/05 и прочие зависимости сохраняются как regression contracts. PRIV-02/03/04 нельзя закрыть готовностью кода: нужны внешние утверждённые решения; actual student launch — non-goal по D-20.
+
+**Baseline PR1:** `origin/main` `8b0909a321314eb4c42c54253df31c796e07351f`, проверен 25.09.2026; GitHub open PR: 0. Отдельный worktree `C:/Users/wait9/.codex/worktrees/platform-learning-scope/psychology-quiz`, ветка `codex/platform-learning-part1`, base тот же SHA. Исходный dirty worktree `codex/curriculum-progress` сохранён без изменений. Последняя поставка прежней Goal: main CI `36164570260`, CD `36164926961` PASS; новая delivery ждёт PR. Прямой SSH агента UNSET; штатный CD через GitHub Actions.
+
+### Scope, DoD и порядок
+
+| Часть | Самостоятельно поставляемый результат | Gates |
+| --- | --- | --- |
+| PR1 — source/content и общий backend | Приватный recursive/incremental source inventory с revision/locator и review gate без раскрытия originals; versioned approved case bank; quiz/glossary mixing, объяснения, due-list/adaptive/mastery и immutable progress contracts. Новые маршруты/схемы additive, текущие owner/Telegram flows не ломаются. | Source review только по прочитанным материалам; SQLite + PostgreSQL tests, migrations/rollback, actor isolation; CI/merge/exact CD до PR2. |
+| PR2 — клиенты и отключённый student slice | PWA и Mini App получают доступ к готовому общему API: состояния loading/empty/error, кейсы/повторение/mastery, цели/достижения; React/TS/Vite общий клиентский путь. Student registration/linking/demo/age/privacy code/UI за выключенным production gate, negative access checks. | Client/API/auth/security E2E и browser checks; CI/merge/exact CD, публичный student gate остаётся OFF. |
+
+**Основание разбиения:** Goal затрагивает private source corpus, versioned content, PostgreSQL state, два frontend-клиента и auth/privacy. Две части имеют независимые проверяемые и безопасно поставляемые границы; основной PR1 должен оставить существующий продукт рабочим, PR2 использует уже доставленный API. Узкие задачи оформляются commits; исправления до merge остаются в текущем PR. При необходимости исправимый CD failure допускает hotfix по AGENTS.md.
+
+**DoD:** выбранные AC получают READY только по реализованному поведению и подходящим автоматическим проверкам; частично выполненные или заблокированные AC остаются IN_PROGRESS/BLOCKED с причиной и Evidence. Каждый основной PR проходит local validation, self-review, required CI/review, merge и applicable exact-revision CD с сохранением PostgreSQL/user state. Проверены обе поверхности клиента и закрытый student gate. Goal не объявляется DONE при незакрытых обязательных AC; для Q-09/11 фиксируются внешние blockers без имитации правового решения. После поставки очистить только свои безопасно удаляемые ветки/worktree.
+
+**Non-goals:** фактическое открытие student access, публикация raw Drive files, изменение Drive originals, автоматическое утверждение источников/кейсов, runtime LLM generation, личный Obsidian/RAG/search/pgvector, новые книжные provider integrations и внешний voice-контур. Не выполнять реальные production quiz/reset/mail или изменение пользовательского state ради тестирования. SLO и юридическую policy не выдумывать.
+
+### Validation Plan
+
+| AC/риск | Проверка / ожидаемый результат | Команда/tool, cwd, environment | Этап / обязательность |
+| --- | --- | --- | --- |
+| SRC-01–09, provenance/privacy | Рекурсивный Drive snapshot с pagination/count/revision и representative readback; new/changed/unchanged, conflict и stale approval fail-closed. Клиентский API/assets не раскрывают originals. | Google Drive connector read-only для private inventory; canonical `python -m app.content_publication validate` и content validators из README, root; synthetic corpus fixtures | REQUIRED PR1; недоступный источник не объявлять утверждённым |
+| QUIZ/GLO/PROG, versioned state | Separate/mixed/random/adaptive, explanation, due/empty/edition/reset, mastery 1/3/7 дней, retry/conflict/concurrency/actor isolation; legacy compatibility и сохранность user state. | `python -m pytest -q` для affected suites, root, synthetic SQLite; `tests/postgres` в CI с PostgreSQL 18.6; targeted local tests по diff | REQUIRED PR1 CI; локально affected tests и migration rehearsal по риску |
+| AUTH/GAM/PRIV, student gate | Owner/student/anonymous/Telegram access matrix, proof-of-both linking, replay/conflicts, goals/achievements persistence, deletion preview; student gate OFF по default и в deployed config. | Auth/API/integration tests в `python -m pytest -q`, root, synthetic SQLite/PostgreSQL; read-only production gate check | REQUIRED PR2; внешние Q-09/11 остаются BLOCKED для launch |
+| FND-04/09/10, клиенты | PWA/Mini App desktop/mobile: теория/термины/кейсы, объяснения, repetition, progress, goals, empty/loading/error/reload; общая actor identity, demo без user-state writes. | `npm test`, `npm run build`, `npm run test:e2e` в `pwa`; применимые Mini App tests; browser на synthetic owner/student с gate OFF | REQUIRED PR2 CI и targeted local/browser checks |
+| PR delivery / recovery | Diff/self-review, exact artifact, migration/backup/isolated restore при изменении state, auth/health/readiness/public smoke и запрещённый student access. | GitHub primary CI/CD records и [VPS runbook](miniapp-deployment-qa.md), [PWA delivery](pwa-delivery.md); production read-only smoke | REQUIRED после каждого merge; без speculative rerun |
+
+**Checkpoint 25.09.2026:** план и D-20/21 фиксируются в PR1 branch до реализации. Действующих PR этой Goal нет, student production gate должен остаться OFF. Следующий шаг — source/content/backend boundary, затем targeted tests, commit, PR1 local validation/self-review/push/CI/merge/CD. Q-03 interval/adaptive и Q-09 demo policy ожидают ответы; зависимые детали не реализовывать на догадке.
+
+## Завершённая Goal — QUIZ-QUALITY-ANALYTICS-001
+
+**Статус: DONE, 25.09.2026.** Исторический план ниже описывает промежуточные checkpoints; окончательный результат: PR #306/#309/#310 merged, main `8b0909a321314eb4c42c54253df31c796e07351f`, main CI `36164570260` и CD `36164926961` PASS. QUIZ-06, PROG-03 и QUIZ-04 доставлены; связанные прежние PENDING/IN_PROGRESS ниже относятся к состоянию до финального hotfix и не задают текущую работу. Иерархия дисциплин/тем подтверждена D-17; статистическая policy сложности — D-19.
 
 **Результат:** существующие 575 вопросов и 99 терминов получают содержательный source-backed review с точными границами подтверждения; личный прогресс показывает дисциплины и темы с явным знаменателем и ограничениями истории; difficulty не выводится из ошибок одного человека. Сохранённые ответы/редакции и IDs не переписываются.
 
@@ -516,7 +551,7 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | AC-PROG-03 | READY | MANDATORY | Первая history/statistics/daily dynamics поставлена PROGRESS-001; D-17 hierarchy/unmapped history и фильтры в PR2 прошли local SQLite/PWA и real PostgreSQL CI browser/contract checks, E-QA-04. Merge/CD ожидаются; освоение не объявляется по короткой истории. |
 | AC-PROG-04 | IN_PROGRESS | MANDATORY | Immutable edition/answers/score (E-STAB-05); version-aware error training и captured/backfilled distinction готовы в PROGRESS-001 branch (E-PROG-01). Scheduled relearning новых редакций остаётся вне Goal, Q-03. |
 | AC-PROG-05 | READY | MANDATORY | Quiz и glossary reset поставлены #301/302, E-LC-01–04. Preview/cancel, topic/all, чужие данные/другие темы/литература, auth/CSRF, stale/replay/rollback и обе БД проверены. Реальный owner progress не сбрасывался. |
-| AC-PROG-06 | BACKLOG | CONDITIONAL | Условный scope; mastery policy Q-03 и temporal fixtures отсутствуют. |
+| AC-PROG-06 | IN_PROGRESS | CONDITIONAL / ACTIVATED D-21 | Критерий mastery принят: 3 верных ответа на одну captured редакцию, интервалы 1/3 дня, охват 7 дней; ошибка/новая редакция сбрасывает. В PR1 добавлены read-only quiz evaluator/API и temporal/actor/edition tests (local 28 PASS, 25.09.2026, branch `codex/platform-learning-part1`); glossary и PWA/Mini App UX, CI/merge/CD PENDING. Старые данные без подтверждённой редакции не доказывают освоение. |
 | AC-GLO-01 | IN_PROGRESS | MANDATORY | Topic quiz, durable actor state, stable step/options и PWA/Telegram доступны; выбор микса/случайного набора по glossary типу и одинаковые post-answer определения во всех клиентах по revision 10 не подтверждены. |
 | AC-GLO-02 | BACKLOG | MANDATORY | Общей scheduled repetition для терминов нет; прежнее требование knowledge links исключено D-18. |
 | AC-KNW-01 | BACKLOG | MANDATORY | Нет source-backed summaries/atomic-note pipeline и validators; F-007/026. |
@@ -654,7 +689,7 @@ Mandatory statuses: **6 READY, 28 IN_PROGRESS, 32 BACKLOG, 1 BLOCKED**. Ката
 | 1a — DELIVERY-FOUNDATION-001 | F-003/004/014/015/023: CI→merge→CD exact revision, behavioral suite, воспроизводимые deps/build, controlled migration, version+health/business post-checks и безопасный recovery rehearsal. | Явный pipeline/settings scope и config owner/target; Q-08. Non-goals: продакт-функции и необязательный redesign инфраструктуры. Может быть подготовительным PR в выбранной foundation Goal. |
 | DONE — PWA-FIRST-001 | Самостоятельный owner PWA quiz, e-mail auth/linking и общий backend/state; исторический первый срез | Студенческий доступ/demo не входили в эту Goal и остаются AC-AUTH-03/05/06/07 |
 | После первого PWA — POSTGRES-MIGRATION-001 (DONE) | PostgreSQL cutover с сохранением identities/attempts/progress, rehearsed migration/reconciliation/recovery; AC-FND-05 | D-09/D-13 и Current Goal: scope/DoD G-PG-01–07 закреплены. Optional pgvector/search не включены |
-| ACTIVE — QUIZ-QUALITY-ANALYTICS-001 | Доставлен QUIZ-06 (#306); завершить PROG-03/QUIZ-04 одним оставшимся основным PR | D-17/19; исходная dirty branch сохранена, новый PR2 base `2d90525`. Новые кейсы/геймификация/студенческий доступ не входят |
+| ACTIVE — PLATFORM-LEARNING-001 | Выбранные E01/E02/E03/E04/E05 плюс AUTH/GAM/PRIV и активированный PROG-06; два самостоятельно поставляемых PR | Scope/DoD/Validation Plan в начале плана; D-20 закрывает student production access, Q-09/11 остаются launch blockers. Прежняя QUIZ-QUALITY-ANALYTICS-001 DONE (#306/#309/#310). |
 | Следующий выбор — STUDENT-ACCESS | AC-AUTH-03/05/06/07 и AC-PRIV-01–04: 18+, demo, student registration/linking, политика данных и launch gates | Q-09/11, проверка фактической топологии/прав; не открывать регистрацию до выполнения gates |
 | Следующий выбор — CASES-AND-LEARNING | AC-QUIZ-02/05/08/09, AC-GLO-01/02, E04/E15: тематические кейсы, обязательные пояснения, повторение и личные цели/достижения | Source review/publication E02, D-18; без runtime LLM-генерации и публичного рейтинга |
 | Следующий выбор — OWNER-SOURCE-TOOLS | E02/E06/E07/E12: recursive inventory, revision provenance, личный Obsidian Vault, внутренний поиск, owner coverage | Q-07, source access/review, owner isolation; без публичного knowledge/search/homework section |
@@ -674,7 +709,7 @@ False-positive review: 16 test failures — Windows fixture/lifecycle, не 16 �
 
 ## Checkpoint и следующий шаг
 
-Текущий UPDATE/checkpoint по Goal — в начале плана; следующий шаг после этого docs PR — решение пользователя о возобновлении Goal и Q-03 либо выборе другого scope. Ни реализация, ни полный AUDIT не запускались.
+Текущий implementation checkpoint по PLATFORM-LEARNING-001 — в начале плана. Исторические UPDATE и Goal records ниже не являются очередью текущих действий. Полный AUDIT в этой Goal не запускался; проценты не пересчитывались.
 
 Исторический checkpoint 20.09.2026: PWA-FIRST-001 и POSTGRES-MIGRATION-001 DONE. Main `51cecf8ea04062bfdb3f7ff8bfd30b2d813e4e39`, #298 CI/CD success; operator PostgreSQL cutover phase complete / cluster `7687501745789132848`, bounded signed-in smoke PASS. Source SQLite/backups сохранены. E-PG-09 обновляет исторические pre-cutover checkpoints без повторного deploy.
 
