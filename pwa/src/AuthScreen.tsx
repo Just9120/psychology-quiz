@@ -8,8 +8,8 @@ export interface TaskProps {
   run: (operation: () => Promise<void>) => Promise<void>
 }
 
-export function AuthScreen({ busy, run, proof, consumeProof, onLogin }: TaskProps & {
-  proof: MailProof | null; consumeProof: () => void; onLogin: () => Promise<void>
+export function AuthScreen({ busy, run, proof, consumeProof, onLogin, onDemo }: TaskProps & {
+  proof: MailProof | null; consumeProof: () => void; onLogin: () => Promise<void>; onDemo?: () => void
 }) {
   const [mode, setMode] = useState<'login' | 'register' | 'recover'>(proof?.purpose === 'recover' ? 'recover' : 'login')
   const [email, setEmail] = useState('')
@@ -63,6 +63,7 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin }: TaskProp
             : mode === 'login' ? <><button disabled={busy} onClick={() => { setMode('recover'); setNotice(''); setPassword('') }}>Забыли пароль?</button><button disabled={busy} onClick={() => { setMode('register'); setNotice(''); setPassword('') }}>Первый вход</button></>
               : <button disabled={busy} onClick={() => { setMode('login'); setNotice('') }}>Вернуться ко входу</button>}
         </div>
+        {!settingPassword && onDemo && <button className="button secondary full" disabled={busy} onClick={onDemo}>Посмотреть демонстрацию</button>}
         <p className="auth-note"><Icon name="book" size={16} />Ваш прогресс хранится в аккаунте — можно продолжить на другом устройстве.</p>
       </div>
     </main>

@@ -1,14 +1,17 @@
 import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, ResetPreview } from './types'
 import type { GlossaryState, GlossaryTopic } from './types'
 import type { LiteratureCatalog, ReadingState, ReadingStatus } from './types'
+import type { ReviewQueue, MasteryOverview, GoalsOverview, AchievementsOverview, GoalKind } from './types'
+import type { DemoItems, DemoAnswer } from './types'
 
 export class ApiError extends Error {
   constructor(public code: string, public status = 0) { super(code) }
 }
 
-const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
+const actions = new Set(['demo/items', 'demo/answer', 'auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
   'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
   'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
+  'progress/review', 'progress/mastery', 'progress/goals', 'progress/achievements', 'progress/review-start', 'progress/review-glossary-start', 'progress/goal-set',
   'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart', 'literature/catalog', 'literature/progress'])
 let csrf: string | null = null
 
@@ -42,6 +45,8 @@ export async function request<T>(action: string, payload?: unknown, signal?: Abo
 }
 
 export const api = {
+  demoItems: () => request<DemoItems>('demo/items'),
+  demoAnswer: (item_id: string, option_index: number) => request<DemoAnswer>('demo/answer', { item_id, option_index }),
   async me(signal?: AbortSignal) {
     const result = await request<Account>('auth/me', undefined, signal)
     csrf = result.csrf_token
@@ -61,6 +66,13 @@ export const api = {
   setup: (setup: Setup) => request<QuizState>('quiz/setup', setup),
   answer: (answer: Answer) => request<AnswerResult>('quiz/answer', answer),
   progress: () => request<ProgressOverview>('progress/overview'),
+  review: () => request<ReviewQueue>('progress/review'),
+  mastery: () => request<MasteryOverview>('progress/mastery'),
+  goals: () => request<GoalsOverview>('progress/goals'),
+  achievements: () => request<AchievementsOverview>('progress/achievements'),
+  setGoal: (goal_kind: GoalKind, weekly_target: number) => request<GoalsOverview>('progress/goal-set', { goal_kind, weekly_target }),
+  startReviewQuiz: (expected_session_id: number | null, replace_active: boolean, question_count: number | null = 5) => request<QuizState>('progress/review-start', { expected_session_id, replace_active, question_count }),
+  startReviewGlossary: (topic_id: string, expected_session_id: string | null, replace_active: boolean, question_count: number | null = 5) => request<{ ok: true; glossary_state: GlossaryState }>('progress/review-glossary-start', { topic_id, expected_session_id, replace_active, question_count }),
   literature: () => request<LiteratureCatalog>('literature/catalog'),
   readingProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) => request<{ ok: true; literature_progress: ReadingState }>('literature/progress', { literature_id, reading_status, progress_percent }),
   glossaryOptions: () => request<{ ok: true; topics: GlossaryTopic[] }>('glossary/options'),
@@ -89,6 +101,9 @@ const messages: Record<string, string> = {
   no_categories: 'Темы пока недоступны. Попробуйте обновить страницу позже.',
   no_questions: 'Для этих условий пока нет вопросов. Измените настройки.',
   no_errors: 'Доступных ошибок уже нет. Обновите список — сохранённая история осталась на месте.',
+  no_reviews: 'Сегодня нет материалов для повторения. Обновите список позже.',
+  invalid_goal: 'Укажите цель целым положительным числом.',
+  demo_unavailable: 'Демонстрация временно недоступна. Попробуйте позже.',
   practice_changed: 'Квиз изменился в другом окне. Восстановите актуальную попытку.',
   reset_changed: 'Прогресс изменился. Загрузите новый предварительный просмотр и подтвердите сброс заново.',
   nothing_to_reset: 'Нет попыток для сброса. Обновите предварительный просмотр.',
