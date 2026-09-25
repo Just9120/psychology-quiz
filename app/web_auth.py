@@ -72,6 +72,9 @@ class WebAuth:
         with hash_slot():
             self.dummy_hash = PASSWORDS.hash(secrets.token_urlsafe(32))
 
+    def _allowed_email(self, email: str) -> bool:
+        return email == self.settings.owner_email or self.settings.student_access_enabled
+
     @contextmanager
     def transaction(self):
         with closing(get_connection(self.db_path)) as conn, conn:
@@ -99,7 +102,7 @@ class WebAuth:
             email = normalize_email(email)
         except ValueError:
             return
-        if email != self.settings.owner_email or purpose not in {"register", "recover"}:
+        if not self._allowed_email(email) or purpose not in {"register", "recover"}:
             return
         if not MAIL_SLOTS.acquire(blocking=False):
             raise AuthError("mail_unavailable", 503)
@@ -132,7 +135,7 @@ class WebAuth:
             raise AuthError("invalid_token")
         row = conn.execute("SELECT * FROM web_mail_tokens WHERE digest=? AND purpose=? AND expires_at>?",
                            (digest(token), purpose, int(self.clock()))).fetchone()
-        if row is None or row["email"] != self.settings.owner_email:
+        if row is None or not self._allowed_email(row["email"]):
             raise AuthError("invalid_token")
         return row
 
@@ -182,7 +185,7 @@ class WebAuth:
                 verified = PASSWORDS.verify(encoded, password)
             except (VerificationError, InvalidHashError):
                 verified = False
-        if not verified or row is None or not row["enabled"] or email != self.settings.owner_email:
+        if not verified or row is None or not row["enabled"] or not self._allowed_email(email):
             raise AuthError("invalid_credentials", 401)
         now, token = int(self.clock()), secrets.token_urlsafe(32)
         with self.transaction() as conn:
@@ -206,9 +209,9 @@ class WebAuth:
         now = int(self.clock())
         row = conn.execute("""SELECT a.*,s.digest AS session_digest FROM web_sessions s
             JOIN web_accounts a ON a.id=s.account_id WHERE s.digest=? AND s.expires_at>?
-            AND s.last_seen_at>? AND a.enabled=1 AND a.email=?""",
-            (digest(token), now, now-IDLE_TTL, self.settings.owner_email)).fetchone()
-        if row is None:
+            AND s.last_seen_at>? AND a.enabled=1""",
+            (digest(token), now, now-IDLE_TTL)).fetchone()
+        if row is None or not self._allowed_email(row["email"]):
             raise AuthError("unauthorized", 401)
         if mutation and (not isinstance(csrf, str) or re.fullmatch(r"[0-9a-f]{64}", csrf) is None or not hmac.compare_digest(csrf_token(token), csrf)):
             raise AuthError("csrf_failed", 403)
@@ -225,7 +228,8 @@ class WebAuth:
             if target_user is not None:
                 target = {"telegram_id": target_user["telegram_user_id"], "username": target_user["username"],
                           "display_name": " ".join(str(target_user[key]) for key in ("first_name", "last_name") if target_user[key])}
-        return {"ok": True, "email": account["email"], "needs_identity": account["user_id"] is None,
+        return {"ok": True, "email": account["email"], "role": "owner" if account["email"] == self.settings.owner_email else "student",
+                "needs_identity": account["user_id"] is None,
                 "telegram_linked": actor is not None and actor[0] is not None, "csrf_token": csrf_token(session),
                 "link_pending": bool(pending), "link_confirmed": bool(pending and pending["telegram_confirmed"]), "link_target": target}
 
@@ -252,8 +256,8 @@ class WebAuth:
         row = conn.execute("""SELECT l.*,a.email,a.user_id FROM web_link_tokens l
             JOIN web_accounts a ON a.id=l.account_id JOIN web_sessions s ON s.digest=l.session_digest
             WHERE l.digest=? AND l.expires_at>? AND s.expires_at>? AND s.last_seen_at>?
-            AND a.enabled=1 AND a.email=?""", (digest(token), now, now, now-IDLE_TTL, self.settings.owner_email)).fetchone()
-        if row is None or row["user_id"] is not None:
+            AND a.enabled=1""", (digest(token), now, now, now-IDLE_TTL)).fetchone()
+        if row is None or not self._allowed_email(row["email"]) or row["user_id"] is not None:
             raise AuthError("invalid_link")
         return row
 

@@ -1,6 +1,7 @@
 export interface Account {
   ok: true
   email: string
+  role?: 'owner' | 'student'
   csrf_token: string
   needs_identity: boolean
   telegram_linked: boolean

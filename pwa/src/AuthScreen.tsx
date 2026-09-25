@@ -64,6 +64,7 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin, onDemo }: 
               : <button disabled={busy} onClick={() => { setMode('login'); setNotice('') }}>Вернуться ко входу</button>}
         </div>
         {!settingPassword && onDemo && <button className="button secondary full" disabled={busy} onClick={onDemo}>Посмотреть демонстрацию</button>}
+        {!settingPassword && <p className="muted">Новые студенческие аккаунты PWA пока не открыты. Демонстрация доступна без регистрации; Telegram-квиз доступен из Telegram.</p>}
         <p className="auth-note"><Icon name="book" size={16} />Ваш прогресс хранится в аккаунте — можно продолжить на другом устройстве.</p>
       </div>
     </main>
