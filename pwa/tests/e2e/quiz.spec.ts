@@ -133,6 +133,35 @@ test('glossary survives lost setup, repeated answer, reload and completion', asy
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })
 
+test('mixed glossary keeps two topics and preserves the other topic after reset', async ({ page }) => {
+  await fresh(page)
+  const options = await (await page.request.get('/web/glossary/options')).json()
+  const chosen = options.topics.filter((item: { available_count: number }) => item.available_count >= 4).slice(0, 2)
+  expect(chosen).toHaveLength(2)
+  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await page.getByRole('combobox', { name: 'Режим', exact: true }).selectOption('mix')
+  for (const item of chosen) await page.getByRole('checkbox', { name: new RegExp(item.title) }).check()
+  await page.getByRole('button', { name: 'Начать тест по терминам' }).click()
+  const started = (await (await page.request.get('/web/glossary/state')).json()).glossary_state
+  expect(started.topic_ids).toEqual(chosen.map((item: { topic_id: string }) => item.topic_id))
+  const seen = new Set<string>()
+  for (let step = 1; step <= 5; step++) {
+    const state = (await (await page.request.get('/web/glossary/state')).json()).glossary_state
+    seen.add(state.current_question.topic_id)
+    await page.getByRole('radio').first().check()
+    await page.getByRole('button', { name: 'Проверить определение' }).click()
+    await expect(page.getByText(`Ответ сохранён · ${step} из 5`)).toBeVisible()
+    await page.getByRole('button', { name: step === 5 ? 'Показать результат' : 'Следующий термин' }).click()
+  }
+  expect(seen).toEqual(new Set(chosen.map((item: { topic_id: string }) => item.topic_id)))
+  const preview = await syntheticPost(page, 'progress/reset-preview', { scope: 'topic', topic: chosen[0].title })
+  expect(preview.glossary_answers).toBeGreaterThan(0)
+  await syntheticPost(page, 'progress/reset-confirm', { scope: 'topic', topic: chosen[0].title,
+    expected_revision: preview.revision, confirm: true })
+  const remaining = await syntheticPost(page, 'progress/reset-preview', { scope: 'topic', topic: chosen[1].title })
+  expect(remaining.glossary_answers).toBeGreaterThan(0)
+})
+
 test('glossary replacement needs confirmation and topic reset preserves another quiz', async ({ page }) => {
   await fresh(page)
   const quiz = await syntheticPost(page, 'quiz/setup', { quiz_mode: 'all', category_ids: [], question_count: null, difficulty: 'any' })
