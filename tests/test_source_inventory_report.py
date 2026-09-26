@@ -101,6 +101,32 @@ def test_conflict_holds_derivatives_of_both_related_sources_until_review():
     assert entries(current)["slides"]["related_conflict_review_required"] is False
 
 
+def test_private_queue_distinguishes_reviewed_format_links_from_candidates():
+    current = export(["doc", "pdf"])
+    doc, pdf = current["folders"]["root"][0]["children"]
+    doc.update(title="Lecture", mime_type="application/vnd.google-apps.document")
+    pdf["title"] = "Lecture.pdf"
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": []}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    links = [{"source_id": entry["id"], "lesson_id": "lesson", "topic_id": "topic",
+              "format": format_name,
+              "revision": [entry["modified_time"], entry["title"], entry["mime_type"]],
+              "corpus_path": entry["title"], **REVIEW_EVIDENCE}
+             for entry, format_name in ((doc, "transcript"), (pdf, "slides"))]
+
+    def queue(selected):
+        return inventory_report.private_review_queue(
+            inventory_report._snapshot(current), registry, curriculum, links=selected)
+
+    assert queue([])["format_variant_candidates"][0]["link_state"] == "candidate"
+    assert queue(links[:1])["format_variant_candidates"][0]["link_state"] == "candidate"
+    reviewed = queue(links)
+    assert reviewed["format_variant_candidates"][0]["link_state"] == "linked"
+    assert all(entry["linked_lesson_ids"] == ["lesson"] for entry in reviewed["files"])
+    with pytest.raises(InventoryError, match="stale_lesson_link"):
+        queue([{**links[0], "revision": ["old", *links[0]["revision"][1:]]}])
+
+
 def test_reviewed_graph_counts_exact_lesson_edges_and_stale_metadata_without_ids():
     current = export(["private-lesson", "private-bibliography", "unreviewed"])
     registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [

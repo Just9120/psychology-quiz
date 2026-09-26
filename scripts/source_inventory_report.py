@@ -108,7 +108,8 @@ def main(argv=None) -> int:
             queue = private_review_queue(_snapshot(current), registry, curriculum,
                                          processed=processed,
                                          previous=_snapshot(previous) if previous is not None else None,
-                                         reviews=reviews, quality_reviews=quality_reviews)
+                                         reviews=reviews, quality_reviews=quality_reviews,
+                                         links=links)
             descriptor = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
             with os.fdopen(descriptor, "w", encoding="utf-8") as output:
                 json.dump(queue, output, ensure_ascii=False, indent=2)

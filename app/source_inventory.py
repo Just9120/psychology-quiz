@@ -299,11 +299,19 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
 def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                          processed: dict | None = None, previous: dict | None = None,
                          reviews: dict | None = None,
-                         quality_reviews: dict | None = None) -> dict:
+                         quality_reviews: dict | None = None,
+                         links: list[dict] | None = None) -> dict:
     """Operator-only file-level queue; never return this from a public route."""
     reviewed_graph(snapshot, registry, curriculum)
     if processed is not None and not isinstance(processed, dict):
         raise InventoryError("invalid_processing_records")
+    if links is not None and not isinstance(links, list):
+        raise InventoryError("invalid_lesson_links")
+    lessons = link_lessons(snapshot, links or [])
+    lesson_ids_by_file: dict[str, set[str]] = {}
+    for lesson_id, lesson in lessons.items():
+        for linked in lesson["sources"]:
+            lesson_ids_by_file.setdefault(linked["source_id"], set()).add(lesson_id)
     sources = {source["id"]: source for source in registry["sources"]}
     derivatives: dict[str, set[str]] = {}
     stale_derivatives: dict[str, set[str]] = {}
@@ -423,6 +431,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                                 else "unknown_no_processing_snapshot",
             "related_conflict_review_required": file_id in related_conflicts,
             "linked_topic_ids": sorted(topics.get(file_id, [])),
+            "linked_lesson_ids": sorted(lesson_ids_by_file.get(file_id, [])),
             "linked_derivative_ids": sorted(linked_derivatives),
             "derivative_ids_requiring_review": sorted(affected_derivatives),
             "derivative_review_required": bool(affected_derivatives),
@@ -462,7 +471,11 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                                     else "previously_" + prior_processing[file_id],
                 "review_action": "verify_access_or_removal",
             })
+    variants = format_variant_candidates(snapshot)
+    for variant in variants:
+        linked = [lesson_ids_by_file.get(file_id, set()) for file_id in variant["file_ids"]]
+        variant["link_state"] = "linked" if linked and set.intersection(*linked) else "candidate"
     return {"schema_version": 1, "root_id": snapshot["root_id"],
             "files": entries, "missing_tracked_sources": missing,
             "missing_untracked_files": missing_untracked,
-            "format_variant_candidates": format_variant_candidates(snapshot)}
+            "format_variant_candidates": variants}
