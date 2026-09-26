@@ -7,7 +7,7 @@ import subprocess
 import pytest
 
 from app.source_inventory import InventoryError, processing_status
-from scripts import source_capture
+from scripts import source_batch_capture, source_capture
 from tests.test_source_inventory import REVIEW_EVIDENCE
 from tests.test_source_inventory_report import export
 
@@ -90,3 +90,37 @@ def test_capture_cli_writes_only_new_ignored_private_record(tmp_path, monkeypatc
     outside = tmp_path / "unsafe.json"
     assert source_capture.main([*args[:-1], str(outside)]) == 1
     assert not outside.exists()
+
+
+def test_batch_capture_is_atomic_and_keeps_private_paths(tmp_path, monkeypatch, capsys):
+    data = tmp_path / "data"
+    data.mkdir()
+    (tmp_path / ".gitignore").write_text("data/\n", encoding="utf-8")
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, capture_output=True)
+    current = data / "current.json"
+    current.write_text(json.dumps(export(["first", "second"])), encoding="utf-8")
+    (data / "first.txt").write_text("Первый текст", encoding="utf-8")
+    (data / "second.txt").write_text("Второй текст", encoding="utf-8")
+    manifest = data / "batch.json"
+    output = data / "processed.json"
+    monkeypatch.setattr(source_batch_capture, "REPO_ROOT", tmp_path)
+    entries = [
+        {"source_id": source, "content": f"data/{source}.txt",
+         "snapshot_kind": "extracted_text"}
+        for source in ("first", "second")
+    ]
+    args = ["--current", str(current), "--manifest", str(manifest), "--output", str(output)]
+    manifest.write_text(json.dumps({"schema_version": 1, "sources": entries}), encoding="utf-8")
+    assert source_batch_capture.main(args) == 0
+    assert capsys.readouterr().out.strip() == "SOURCE_BATCH_CAPTURE_PENDING_REVIEW"
+    records = json.loads(output.read_text(encoding="utf-8"))
+    assert set(records) == {"first", "second"}
+    assert {item["review_state"] for item in records.values()} == {"pending_review"}
+    if os.name == "posix":
+        assert stat.S_IMODE(output.stat().st_mode) == 0o600
+
+    output.unlink()
+    manifest.write_text(json.dumps({"schema_version": 1, "sources": [entries[0],
+        {**entries[1], "content": "../outside.txt"}]}), encoding="utf-8")
+    assert source_batch_capture.main(args) == 1
+    assert not output.exists()
