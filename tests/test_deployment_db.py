@@ -66,6 +66,18 @@ def test_additive_migration_passes_but_changed_historical_answer_fails(database,
         verify_preserved(database, backup)
 
 
+def test_backup_includes_new_personal_table_without_manual_allowlist(database, tmp_path):
+    with closing(sqlite3.connect(database)) as conn, conn:
+        conn.execute("CREATE TABLE future_activity (user_id INTEGER, private_value TEXT)")
+        conn.execute("INSERT INTO future_activity VALUES (1, 'private')")
+    backup = backup_and_rehearse(database, tmp_path / "backups")
+    verify_preserved(database, backup)
+    with closing(sqlite3.connect(database)) as conn, conn:
+        conn.execute("UPDATE future_activity SET private_value='changed'")
+    with pytest.raises(RuntimeError, match="user state"):
+        verify_preserved(database, backup)
+
+
 def test_backup_rejects_foreign_key_corruption(database, tmp_path):
     with closing(sqlite3.connect(database)) as conn, conn:
         conn.execute("PRAGMA foreign_keys=OFF")
