@@ -244,6 +244,31 @@ def format_variant_candidates(snapshot: dict) -> list[dict]:
     return sorted(candidates, key=lambda item: (item["parent_path"], item["normalized_stem"]))
 
 
+def mixed_format_folder_review_candidates(snapshot: dict) -> list[dict]:
+    """Queue small nested folders with mixed formats for human review only.
+
+    Different names in one folder do not establish a common lesson. Large
+    discipline folders are omitted so they do not obscure actionable folders.
+    """
+    folders: dict[tuple[str, ...], set[str]] = {}
+    for file_id, paths in snapshot["paths"].items():
+        for path in paths:
+            parent = tuple(path[:-1])
+            if len(parent) >= 2:
+                folders.setdefault(parent, set()).add(file_id)
+    candidates = []
+    for parent, ids in folders.items():
+        if not 2 <= len(ids) <= 5:
+            continue
+        formats = {snapshot["files"][file_id]["mime_type"] for file_id in ids}
+        if len(formats) < 2 or any(
+                other != parent and other[:len(parent)] == parent for other in folders):
+            continue
+        candidates.append({"parent_path": list(parent), "file_ids": sorted(ids),
+                           "mime_types": sorted(formats)})
+    return sorted(candidates, key=lambda item: item["parent_path"])
+
+
 def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
     """Aggregate exact metadata and reviewed lesson edges without exposing sources.
 
@@ -519,8 +544,13 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     for variant in variants:
         linked = [lesson_ids_by_file.get(file_id, set()) for file_id in variant["file_ids"]]
         variant["link_state"] = "linked" if linked and set.intersection(*linked) else "candidate"
+    folder_reviews = mixed_format_folder_review_candidates(snapshot)
+    for folder in folder_reviews:
+        linked = [lesson_ids_by_file.get(file_id, set()) for file_id in folder["file_ids"]]
+        folder["link_state"] = "linked" if linked and set.intersection(*linked) else "candidate"
     return {"schema_version": 1, "root_id": snapshot["root_id"],
             "files": entries, "missing_tracked_sources": missing,
             "missing_untracked_files": missing_untracked,
             "unmapped_legacy_derivative_ids": sorted(unmapped_legacy_derivatives or []),
-            "format_variant_candidates": variants}
+            "format_variant_candidates": variants,
+            "mixed_format_folder_review_candidates": folder_reviews}

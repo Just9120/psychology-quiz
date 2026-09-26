@@ -1,7 +1,8 @@
 import pytest
 
 from app.source_inventory import (InventoryError, complete_listing, format_variant_candidates,
-                                  link_lessons, processing_status, reconcile, scan)
+                                  link_lessons, mixed_format_folder_review_candidates,
+                                  processing_status, reconcile, scan)
 
 REVIEW_EVIDENCE = {"reviewer": "editor", "review_note": "Reviewed exact source revision",
                    "reviewed_at": "2026-09-26T12:00:00Z"}
@@ -26,6 +27,28 @@ def test_format_variants_are_private_candidates_not_cross_folder_merges():
     assert format_variant_candidates(snapshot) == [{
         "parent_path": [first], "normalized_stem": "лекция 1",
         "file_ids": ["doc", "pdf"],
+        "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
+    }]
+
+
+def test_mixed_format_nested_folder_is_queued_without_inferred_lesson_link():
+    module = {"id": "module", "title": "Module", "parent_ids": ["root"],
+              "file_or_folder": "folder"}
+    lesson = {"id": "lesson", "title": "Lesson", "parent_ids": ["module"],
+              "file_or_folder": "folder"}
+    document = {**item("doc", "lesson", title="Transcript"),
+                "mime_type": "application/vnd.google-apps.document"}
+    snapshot = scan("root", {
+        "root": {"complete": True, "children": [module]},
+        "module": {"complete": True, "children": [lesson]},
+        "lesson": {"complete": True, "children": [
+            document, item("slides", "lesson", title="Slides"),
+            item("task", "lesson", title="Homework")]},
+    })
+    assert format_variant_candidates(snapshot) == []
+    assert mixed_format_folder_review_candidates(snapshot) == [{
+        "parent_path": ["Module", "Lesson"],
+        "file_ids": ["doc", "slides", "task"],
         "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
     }]
 
