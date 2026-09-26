@@ -271,6 +271,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     stale_derivatives: dict[str, set[str]] = {}
     quality_items: dict[str, set[str]] = {}
     quality_priority: dict[str, set[str]] = {}
+    quality_evidence: dict[str, dict[str, dict]] = {}
     if quality_reviews is not None:
         if (not isinstance(quality_reviews, dict)
                 or quality_reviews.get("schema_version") != 1
@@ -279,19 +280,28 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
         for derivative_id, review in quality_reviews["items"].items():
             if (not isinstance(derivative_id, str) or not derivative_id
                     or not isinstance(review, dict)
-                    or not isinstance(review.get("source_support"), str)
+                    or review.get("source_support") not in
+                    {"supported", "partial", "unconfirmed", "disputed"}
                     or not isinstance(review.get("sources"), list)
                     or not review["sources"]):
                 raise InventoryError("invalid_quality_review")
             for ref in review["sources"]:
                 source_id = ref.get("source_id") if isinstance(ref, dict) else None
-                if not isinstance(source_id, str) or source_id not in sources:
+                if (not isinstance(source_id, str) or source_id not in sources
+                        or not isinstance(ref.get("locator"), str)
+                        or not ref["locator"].strip()):
                     raise InventoryError("invalid_quality_review_source")
                 quality_items.setdefault(source_id, set()).add(derivative_id)
                 source = sources[source_id]
+                revision_current = (ref.get("modified_time") == source["modified_time"]
+                                    and ref.get("snapshot_sha256") == source["snapshot_sha256"])
+                quality_evidence.setdefault(source_id, {})[derivative_id] = {
+                    "locator": ref["locator"],
+                    "source_support": review["source_support"],
+                    "revision_current": revision_current,
+                }
                 if (review["source_support"] != "supported"
-                        or ref.get("modified_time") != source["modified_time"]
-                        or ref.get("snapshot_sha256") != source["snapshot_sha256"]):
+                        or not revision_current):
                     quality_priority.setdefault(source_id, set()).add(derivative_id)
     if reviews is not None:
         if (not isinstance(reviews, dict) or reviews.get("schema_version") != 1
@@ -354,6 +364,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
             "derivative_review_required": bool(affected_derivatives),
             "quality_review_item_ids": sorted(quality_items.get(file_id, set())),
             "quality_review_priority_ids": sorted(priority_quality),
+            "quality_review_evidence": quality_evidence.get(file_id, {}),
         })
     entries.sort(key=lambda item: (item["paths"], item["file_id"]))
     missing = [{"file_id": file_id, "title": source["title"],
@@ -362,7 +373,8 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                 "derivative_ids_requiring_review": sorted(derivatives.get(file_id, set())),
                 "derivative_review_required": bool(derivatives.get(file_id)),
                 "quality_review_item_ids": sorted(quality_items.get(file_id, set())),
-                "quality_review_priority_ids": sorted(quality_items.get(file_id, set()))}
+                "quality_review_priority_ids": sorted(quality_items.get(file_id, set())),
+                "quality_review_evidence": quality_evidence.get(file_id, {})}
                for file_id, source in sorted(sources.items()) if file_id not in snapshot["files"]]
     # An unreviewed file can disappear before it reaches the canonical registry.
     # Keep its last-seen metadata in the private queue so a missing listing is

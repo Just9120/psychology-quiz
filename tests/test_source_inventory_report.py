@@ -161,6 +161,13 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
         "questions:legacy-partial", "questions:legacy-supported"]
     assert entries["reviewed-private"]["quality_review_priority_ids"] == [
         "questions:legacy-partial"]
+    assert entries["reviewed-private"]["quality_review_evidence"] == {
+        "questions:legacy-supported": {"locator": "slide 1", "source_support": "supported",
+                                       "revision_current": True},
+        "questions:legacy-partial": {"locator": "slide 2", "source_support": "partial",
+                                     "revision_current": True},
+    }
+    assert entries["unreviewed-private"]["quality_review_evidence"] == {}
     assert entries["unreviewed-private"]["registry_state"] == "untracked"
     assert all(item["processing_state"] == "unknown_no_processing_snapshot" for item in entries.values())
     assert all(item["paths"] == [["Lesson"]] for item in entries.values())
@@ -178,6 +185,23 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
         inventory_report._snapshot(changed), registry, curriculum, reviews=reviews,
         quality_reviews=quality)["files"][0]["quality_review_priority_ids"] == [
             "questions:legacy-partial", "questions:legacy-supported"]
+    stale_quality = {"schema_version": 1, "items": {"questions:old": {
+        "source_support": "supported", "sources": [{"source_id": source["id"],
+            "modified_time": source["modified_time"], "snapshot_sha256": "b" * 64,
+            "locator": "slide 3"}]}}}
+    stale_entry = inventory_report.private_review_queue(
+        inventory_report._snapshot(current), registry, curriculum,
+        quality_reviews=stale_quality)["files"][0]
+    assert stale_entry["quality_review_priority_ids"] == ["questions:old"]
+    assert stale_entry["quality_review_evidence"]["questions:old"] == {
+        "locator": "slide 3", "source_support": "supported", "revision_current": False}
+    with pytest.raises(InventoryError, match="invalid_quality_review_source"):
+        inventory_report.private_review_queue(
+            inventory_report._snapshot(current), registry, curriculum,
+            quality_reviews={"schema_version": 1, "items": {"questions:missing-locator": {
+                "source_support": "partial", "sources": [{"source_id": source["id"],
+                "modified_time": source["modified_time"],
+                "snapshot_sha256": source["snapshot_sha256"]}]}}})
     missing_queue = inventory_report.private_review_queue(
         inventory_report._snapshot(export([])), registry, curriculum, reviews=reviews)
     assert missing_queue["missing_tracked_sources"][0]["derivative_review_required"] is True
