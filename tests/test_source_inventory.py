@@ -126,10 +126,20 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
         processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "conflict"}})
     assert processing_status(snapshot, {"lecture": {"revision": revision,
         "review_state": "pending_review"}})["lecture"] == "pending_review"
-    links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic", "format": "transcript"},
-             {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic", "format": "slides"}]
+    evidence = {"revision": list(revision), "corpus_path": "Lesson", "reviewer": "editor",
+                "review_note": "Compared the two lesson formats", "reviewed_at": "2026-09-26T10:32:54Z"}
+    links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic",
+              "format": "transcript", **evidence},
+             {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic",
+              "format": "slides", **evidence}]
     assert len(link_lessons(snapshot, links)["l1"]["sources"]) == 2
     with pytest.raises(InventoryError, match="conflicting_lesson_topic"):
         link_lessons(snapshot, [links[0], {**links[1], "topic_id": "other"}])
     with pytest.raises(InventoryError, match="invalid_lesson_link"):
         link_lessons(snapshot, [{**links[0], "source_id": ["not-a-file"]}])
+    with pytest.raises(InventoryError, match="stale_lesson_link"):
+        link_lessons(snapshot, [{**links[0], "revision": ["old", *revision[1:]]}])
+    with pytest.raises(InventoryError, match="stale_lesson_link"):
+        link_lessons(snapshot, [{**links[0], "corpus_path": "Other/Lesson"}])
+    with pytest.raises(InventoryError, match="invalid_lesson_link"):
+        link_lessons(snapshot, [{**links[0], "reviewer": ""}])

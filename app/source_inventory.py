@@ -181,6 +181,18 @@ def link_lessons(snapshot: dict, links: list[dict]) -> dict:
                 not isinstance(value, str) or not value.strip()
                 for value in (lesson_id, topic_id, format_name))):
             raise InventoryError("invalid_lesson_link")
+        revision = link.get("revision")
+        corpus_path = link.get("corpus_path")
+        if (not isinstance(revision, list) or len(revision) != 3
+                or any(not isinstance(part, str) or not part for part in revision)
+                or not isinstance(corpus_path, str) or not corpus_path
+                or not isinstance(link.get("reviewer"), str) or not link["reviewer"].strip()
+                or not isinstance(link.get("review_note"), str) or not link["review_note"].strip()
+                or not valid_review_timestamp(link.get("reviewed_at"))):
+            raise InventoryError("invalid_lesson_link")
+        if (tuple(revision) != _revision(snapshot["files"][source_id])
+                or corpus_path not in ("/".join(path) for path in snapshot["paths"][source_id])):
+            raise InventoryError("stale_lesson_link")
         key = (source_id, lesson_id, format_name)
         if key in seen:
             raise InventoryError("duplicate_lesson_link")
