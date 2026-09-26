@@ -184,6 +184,15 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert stale_queue["files"][0]["registry_state"] == "current"
     assert stale_queue["files"][0]["derivative_ids_requiring_review"] == ["questions:example"]
 
+    conflict_queue = inventory_report.private_review_queue(
+        inventory_report._snapshot(current), registry, curriculum, reviews=reviews,
+        processed={source["id"]: {"revision": [source["modified_time"], source["title"],
+                                  "application/pdf"], "review_state": "conflict",
+                                  "reason": "Same-lesson sources disagree"}})
+    assert conflict_queue["files"][0]["registry_state"] == "current"
+    assert conflict_queue["files"][0]["processing_state"] == "conflict_review"
+    assert conflict_queue["files"][0]["derivative_ids_requiring_review"] == ["questions:example"]
+
     original = target.read_bytes()
     assert main(args) == 1
     assert "SOURCE_INVENTORY_STOP: FileExistsError" in capsys.readouterr().err

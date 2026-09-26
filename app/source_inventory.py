@@ -289,7 +289,10 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                           source["corpus_path"] not in
                           ("/".join(path) for path in snapshot["paths"][file_id]) else "current")
         linked_derivatives = derivatives.get(file_id, set())
+        explicit_review_problem = (processing is not None and processing[file_id] in
+                                   {"pending_review", "conflict_review", "changed_unprocessed"})
         affected_derivatives = (linked_derivatives if registry_state in {"changed", "relocated"}
+                                or explicit_review_problem
                                 else stale_derivatives.get(file_id, set()))
         entries.append({
             "file_id": file_id,
