@@ -42,6 +42,8 @@
 
 **E-PL-82 / SQLite identity sequence preservation, 27.09.2026:** локальный backup manifest для content sync теперь включает digest `sqlite_sequence` только для существовавших non-content tables. До этого сравнение строк могло пропустить сброс AUTOINCREMENT-счётчика пользователя при неизменных строках. Добавлен negative regression: изменение `questions` sequence допускается при пересборке банка, изменение `users` sequence отвергается. Старые manifest без нового поля читаются по прежним правилам; новую гарантию даёт только backup, созданный обновлённым кодом. AST/diff check выполнены, test suite/real SQLite, CI/merge/CD PENDING; AC-FND-06 остаётся IN_PROGRESS.
 
+**E-PL-83 / физиологический источник, 27.09.2026:** все 15 связанных questions/glossary records сверены с exact извлечением короткого глоссария физиологии человека. Приватная таблица digest, фрагментов и ограничений расширена в ignored `data/private-source-review-humanphys1.json` и сверена с копией исходного workspace. Семь прежних `supported` claims понижены до `partial`: материал описывает базовые определения, но не подтверждает целиком выводы об обучении, скорости осознания, привычности реакции или конкретные прикладные примеры. Ранее исправленный `m1_phys_029` и два уже partial glossary records остаются partial; остальные определения оценены в пределах источника. В tracked ledger добавлены причины без изменения вопросов и публичных source refs. Это не publication approval или полная научная сертификация; требуется другой проверенный материал либо точечное исправление утверждений. CI/CD PENDING.
+
 ### Scope, DoD и порядок
 
 | Часть | Самостоятельно поставляемый результат | Gates |

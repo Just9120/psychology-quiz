@@ -3769,7 +3769,7 @@
       "item_sha256": "8945b9db02cd72c918e6dae368b355d07b8c37169e61960d5c93a3d1c419c17c",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3779,9 +3779,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Передача нервных сигналов описана; связь нейросетей с восприятием, эмоциями и поведением здесь не раскрыта.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -3873,7 +3875,7 @@
       "item_sha256": "ea29b0086959f6e13745d8fb9a25a085a4b56b0fc33e3f0e84d394ed3af1fc2c",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3883,9 +3885,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Передача сигнала в синапсе описана; механизм обучения и опыта здесь не объяснён.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -3925,7 +3929,7 @@
       "item_sha256": "ffe683559e69acbce1f22fd41d4209c4a22b9ab99ef5be4d1275980cde0820ff",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3935,9 +3939,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Автоматическая реакция описана; привычность и скорость закреплённых реакций здесь не раскрыты.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -4083,7 +4089,7 @@
       "item_sha256": "80a82aa15dc8dadbd6787a34be754932ab882e46cbf71428b3ee8ed6fb9cb762",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -4093,9 +4099,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Регуляция органов и гомеостаз определены отдельно; роль ВНС в поддержании гомеостаза не сформулирована.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -4347,7 +4355,7 @@
       "item_sha256": "4104eae19e43784b98979517c0fe8deedbd894d2589f64d178abdaedcaa5256a",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -4357,9 +4365,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Рефлекторный ответ описан; горячая кружка и временное отношение к осознанию боли здесь не разобраны.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5251,7 +5261,7 @@
       "item_sha256": "d0766a5f675187e70c741bc0dcaa20f647c92df284f000ab46cd5ad37be5442d",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "definition",
@@ -5261,12 +5271,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
         "question_reference_is_not_primary_source",
-        "example_is_question_reference"
+        "example_is_question_reference",
+        "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Приём, обработка и передача импульсов даны; утверждение о восприятии, эмоциях и поведении в определении не подтверждено.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5367,7 +5378,7 @@
       "item_sha256": "c88b3024539b7ebf768904c0ac1d4e505bbd93c5d40249a322f35e44a1e4efba",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "definition",
@@ -5377,12 +5388,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
         "question_reference_is_not_primary_source",
-        "example_is_question_reference"
+        "example_is_question_reference",
+        "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Контакт и химическая/электрическая передача даны; регуляция и медиатор в определении не названы.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
