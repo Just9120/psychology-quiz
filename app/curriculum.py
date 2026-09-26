@@ -102,8 +102,10 @@ def classification(content):
 
 def overview(conn, actor):
     from app.progress_service import counts, DAY_COUNT
+    from app.literature import load_topic_registry
 
     catalog = load_catalog()
+    topic_registry = load_topic_registry()
     cte, params = evidence_cte(conn, actor)
     cte += """, groups AS (
         SELECT 'discipline:' || discipline_id AS scope,day,is_correct FROM evidence WHERE discipline_id IS NOT NULL
@@ -126,6 +128,7 @@ def overview(conn, actor):
         topics = [result("topic:" + t, item["title"]) for t, item in catalog["topics"].items() if item["discipline_id"] == key]
         topics.sort(key=lambda x: (x["accuracy"] is None, x["accuracy"] or 0, -x["answered"], x["title"]))
         item = result("discipline:" + key, value["title"])
+        item["module"] = topic_registry.get(key, {}).get("module")
         item["topics"] = topics
         item["unmapped_answers"] = item["answered"] - sum(t["answered"] for t in topics)
         result_disciplines.append(item)

@@ -58,6 +58,8 @@ def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
         assert options["content_kind_choices"] == ["theory", "case"]
         cases_category = next(category for category in categories if category["name"] == "Кейсы")
         other_category = next(category for category in categories if category["name"] == "Original category")
+        assert (cases_category["topic_id"], cases_category["module"]) == ("cases", "module3")
+        assert (other_category["topic_id"], other_category["module"]) == (None, None)
         setup = {"question_count": 5, "difficulty": "any", "content_kinds": ["case"]}
         single = prepare_quiz(conn, {**setup, "quiz_mode": "single",
                                      "category_ids": [cases_category["id"]]})

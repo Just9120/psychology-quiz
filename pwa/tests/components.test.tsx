@@ -47,6 +47,18 @@ it('clears private account UI if the session expires during initial quiz hydrati
   expect(screen.queryByText('Мой аккаунт')).not.toBeInTheDocument()
 })
 
+it('groups exact curriculum topics by module without hiding unmapped categories', () => {
+  render(<QuizSetup options={{ categories: [
+    { id: 1, name: 'Теория', module: 'module1', topic_id: 'theory' },
+    { id: 2, name: 'Кейсы', module: 'module3', topic_id: 'cases' },
+    { id: 3, name: 'Новая категория', module: null, topic_id: null },
+  ], question_count_choices: [5], difficulty_choices: ['any'] }} busy={false} hasAttempt={false} onStart={vi.fn()} onResume={vi.fn()} />)
+  expect(screen.getByRole('heading', { name: 'Модуль 1' })).toBeVisible()
+  expect(screen.getByRole('heading', { name: 'Модуль 3' })).toBeVisible()
+  expect(screen.getByRole('heading', { name: 'Без подтверждённого модуля' })).toBeVisible()
+  expect(screen.getByRole('radio', { name: 'Новая категория' })).toBeVisible()
+})
+
 it('restores the answered question instead of labeling its feedback with the next question', async () => {
   vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', csrf_token: 'test', needs_identity: false, telegram_linked: false, link_pending: false, link_confirmed: false, link_target: null })
   vi.spyOn(api, 'options').mockResolvedValue({ ok: true, setup_options: { categories: [{ id: 1, name: 'Тема' }], question_count_choices: [5], difficulty_choices: ['any'] } })

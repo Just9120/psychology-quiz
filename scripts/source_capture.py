@@ -37,6 +37,9 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
     if (isinstance(previous, dict) and previous.get("review_state") == "processed"
             and tuple(previous.get("revision", ())) == tuple(revision)):
         raise InventoryError("source_revision_already_processed")
+    if (isinstance(previous, dict) and previous.get("review_state") == "conflict"
+            and tuple(previous.get("revision", ())) == tuple(revision)):
+        raise InventoryError("source_revision_has_unresolved_conflict")
     if snapshot_kind not in {"file_bytes", "extracted_text"}:
         raise InventoryError("invalid_snapshot_kind")
     digest = hashlib.sha256()
