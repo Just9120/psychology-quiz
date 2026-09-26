@@ -360,7 +360,10 @@ class MiniAppApiTests(unittest.TestCase):
         self.assertIn("categories", payload["setup_options"])
         self.assertIn("question_count_choices", payload["setup_options"])
         self.assertIn("difficulty_choices", payload["setup_options"])
-        self.assertEqual([{"id": 1, "name": "C"}], payload["setup_options"]["categories"])
+        self.assertEqual(
+            [{"id": 1, "name": "C", "topic_id": None, "module": None}],
+            payload["setup_options"]["categories"],
+        )
         titles = [topic["title"] for topic in payload["setup_options"]["glossary"]["topics"]]
         self.assertEqual(8, len(titles))
         self.assertIn("Качественные методы исследования", titles)
