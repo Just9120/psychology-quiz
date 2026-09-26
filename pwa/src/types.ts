@@ -174,7 +174,6 @@ export type ReadingState = { literature_id: string; reading_status: ReadingStatu
 export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
   topic_order: number | null; priority: string | null;
-  outbound_links?: { format: 'text' | 'audio'; access: 'free' | 'paid' | 'subscription' | 'catalog'; label: string; url: string; rights_note: string; verified_at: string }[];
   source: { id: string; title: string; locator: string; citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
 }

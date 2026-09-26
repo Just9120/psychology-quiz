@@ -10,7 +10,7 @@ from typing import Any
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from app.content_publication import outbound_links_error, validate_publications
+from app.content_publication import validate_publications
 
 LITERATURE_FILES_GLOB = "content/literature/*.json"
 TOPICS_FILE = Path("content/topics.json")
@@ -141,9 +141,6 @@ def validate_entry(
         errors.append(f"{label}: work_id must be non-empty")
     if entry.get("content_access") != "not_verified":
         errors.append(f"{label}: only reviewed bibliographic metadata is supported")
-    link_error = outbound_links_error(entry)
-    if link_error:
-        errors.append(f"{label}: {link_error}")
     source = entry.get("source")
     if not isinstance(source, dict) or not all(is_non_empty_string(source.get(key)) for key in ("id", "title", "locator", "citation")):
         errors.append(f"{label}: complete bibliographic source required")

@@ -44,27 +44,6 @@ def test_read_bibliography_supports_only_its_catalog_metadata():
     assert not policy.can_publish("glossary", item)
 
 
-def test_outbound_book_links_require_reviewed_safe_metadata_and_never_imply_content_access():
-    item, _, review, policy = reviewed("literature", "bibliography")
-    link = {"format": "audio", "access": "subscription", "label": "Каталог издателя",
-            "url": "https://books.example.test/item", "rights_note": "Доступ по условиям сервиса",
-            "verified_at": "2026-09-26"}
-    item["outbound_links"] = [link]
-    assert policy.error("literature", item) == "derivative_changed_since_review"
-    review["item_sha256"] = publication.fingerprint(item)
-    assert policy.can_publish("literature", item)
-    assert literature._public_literature_item(item)["outbound_links"] == [link]
-    for url in ("javascript:alert(1)", "http://books.example.test/item",
-                "https://user:secret@books.example.test/item", "https://books.example.test:8080/item",
-                "https://books.example.test\\@evil.test/item"):
-        item["outbound_links"] = [{**link, "url": url}]
-        review["item_sha256"] = publication.fingerprint(item)
-        assert policy.error("literature", item) == "invalid_outbound_link_url"
-    item["outbound_links"] = [{**link, "rights_note": ""}]
-    review["item_sha256"] = publication.fingerprint(item)
-    assert policy.error("literature", item) == "unverified_outbound_link"
-
-
 @pytest.mark.parametrize("kind", ["questions", "glossary"])
 def test_exact_review_of_readable_learning_material_allows_publication(kind):
     item, _, _, policy = reviewed(kind)

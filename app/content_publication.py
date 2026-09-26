@@ -6,7 +6,6 @@ import hashlib
 import json
 from pathlib import Path
 import re
-from urllib.parse import urlsplit
 
 from app.case_content import case_error
 
@@ -17,38 +16,6 @@ LEGACY_SHA256 = "e03468c43558450105c8b3fddd30ed5db432b379e3b49f63b85b4370235dcc1
 KINDS = {"questions", "glossary", "literature"}
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 DRIVE_REF = re.compile(r"^drive:([A-Za-z0-9_-]+)(?:#.+)?$")
-EXTERNAL_FORMATS = {"text", "audio"}
-EXTERNAL_ACCESS = {"free", "paid", "subscription", "catalog"}
-
-
-def outbound_links_error(item):
-    """A link is reviewed metadata, never evidence of access to book content."""
-    links = item.get("outbound_links", [])
-    if not isinstance(links, list):
-        return "invalid_outbound_links"
-    seen = set()
-    for link in links:
-        if not isinstance(link, dict) or link.get("format") not in EXTERNAL_FORMATS or link.get("access") not in EXTERNAL_ACCESS:
-            return "invalid_outbound_link"
-        if not _text(link.get("label")) or not _text(link.get("rights_note")) or not _date(link.get("verified_at")):
-            return "unverified_outbound_link"
-        url = link.get("url")
-        if not isinstance(url, str) or any(character.isspace() or character == "\\" for character in url):
-            return "invalid_outbound_link_url"
-        try:
-            parsed = urlsplit(url)
-            valid_host = (parsed.hostname is not None and "." in parsed.hostname
-                          and parsed.hostname not in {"localhost", "127.0.0.1"})
-            invalid = (parsed.scheme != "https" or not valid_host or parsed.username
-                       or parsed.password or parsed.port is not None)
-        except ValueError:
-            invalid = True
-        if invalid:
-            return "invalid_outbound_link_url"
-        if url in seen:
-            return "duplicate_outbound_link"
-        seen.add(url)
-    return None
 
 
 def fingerprint(item):
@@ -79,10 +46,6 @@ class PublicationPolicy:
     def error(self, kind, item):
         if kind not in KINDS:
             return "unknown_derivative_kind"
-        if kind == "literature":
-            invalid_links = outbound_links_error(item)
-            if invalid_links:
-                return invalid_links
         if kind == "questions":
             invalid_case = case_error(item)
             if invalid_case:

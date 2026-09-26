@@ -27,7 +27,6 @@ PUBLIC_ITEM_FIELDS = (
     "why_read",
     "learning_outcomes",
     "prerequisites",
-    "outbound_links",
 )
 USER_STATE_FIELDS = (
     "reading_status",
@@ -59,9 +58,7 @@ def load_topic_registry() -> dict[str, dict[str, Any]]:
 
 
 def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
-    payload = {field: entry.get(field) for field in PUBLIC_ITEM_FIELDS}
-    payload["outbound_links"] = entry.get("outbound_links", [])
-    return payload
+    return {field: entry.get(field) for field in PUBLIC_ITEM_FIELDS}
 
 
 def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:
