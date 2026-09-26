@@ -243,12 +243,31 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
 
 
 def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
-                         processed: dict | None = None, previous: dict | None = None) -> dict:
+                         processed: dict | None = None, previous: dict | None = None,
+                         reviews: dict | None = None) -> dict:
     """Operator-only file-level queue; never return this from a public route."""
     reviewed_graph(snapshot, registry, curriculum)
     if processed is not None and not isinstance(processed, dict):
         raise InventoryError("invalid_processing_records")
     sources = {source["id"]: source for source in registry["sources"]}
+    derivatives: dict[str, set[str]] = {}
+    if reviews is not None:
+        if (not isinstance(reviews, dict) or reviews.get("schema_version") != 1
+                or not isinstance(reviews.get("items"), dict)):
+            raise InventoryError("invalid_derivative_reviews")
+        for derivative_id, review in reviews["items"].items():
+            if (not isinstance(derivative_id, str) or not derivative_id
+                    or not isinstance(review, dict)):
+                raise InventoryError("invalid_derivative_review")
+            if review.get("decision") != "approved":
+                continue
+            if not isinstance(review.get("sources"), list) or not review["sources"]:
+                raise InventoryError("invalid_derivative_review")
+            for ref in review["sources"]:
+                source_id = ref.get("source_id") if isinstance(ref, dict) else None
+                if not isinstance(source_id, str) or source_id not in sources:
+                    raise InventoryError("invalid_derivative_source")
+                derivatives.setdefault(source_id, set()).add(derivative_id)
     topics = {}
     for topic_id, topic in curriculum["topics"].items():
         topics.setdefault(topic["source"]["source_id"], []).append(topic_id)
@@ -275,10 +294,15 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
             "processing_state": processing[file_id] if processing is not None
                                 else "unknown_no_processing_snapshot",
             "linked_topic_ids": sorted(topics.get(file_id, [])),
+            "linked_derivative_ids": sorted(derivatives.get(file_id, set())),
+            "derivative_review_required": bool(derivatives.get(file_id)) and
+                                          registry_state in {"changed", "relocated"},
         })
     entries.sort(key=lambda item: (item["paths"], item["file_id"]))
     missing = [{"file_id": file_id, "title": source["title"],
-                "linked_topic_ids": sorted(topics.get(file_id, []))}
+                "linked_topic_ids": sorted(topics.get(file_id, [])),
+                "linked_derivative_ids": sorted(derivatives.get(file_id, set())),
+                "derivative_review_required": bool(derivatives.get(file_id))}
                for file_id, source in sorted(sources.items()) if file_id not in snapshot["files"]]
     return {"schema_version": 1, "root_id": snapshot["root_id"],
             "files": entries, "missing_tracked_sources": missing}

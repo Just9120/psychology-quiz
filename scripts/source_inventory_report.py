@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -81,6 +82,7 @@ def main(argv=None) -> int:
         links = _read(args.links) if args.links else None
         registry = _read(REPO_ROOT / "content/source-corpus.json") if args.reviewed else None
         curriculum = _read(REPO_ROOT / "content/curriculum.json") if args.reviewed else None
+        reviews = _read(REPO_ROOT / "content/publication-reviews.json") if args.private_queue else None
         value = report(current, previous=previous, processed=processed, links=links,
                        registry=registry, curriculum=curriculum)
         if args.private_queue:
@@ -98,8 +100,10 @@ def main(argv=None) -> int:
                 raise InventoryError("private_queue_requires_ignored_data_json")
             queue = private_review_queue(_snapshot(current), registry, curriculum,
                                          processed=processed,
-                                         previous=_snapshot(previous) if previous is not None else None)
-            with target.open("x", encoding="utf-8") as output:
+                                         previous=_snapshot(previous) if previous is not None else None,
+                                         reviews=reviews)
+            descriptor = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+            with os.fdopen(descriptor, "w", encoding="utf-8") as output:
                 json.dump(queue, output, ensure_ascii=False, indent=2)
                 output.write("\n")
     except (InventoryError, OSError, UnicodeError, json.JSONDecodeError, TypeError, KeyError) as error:

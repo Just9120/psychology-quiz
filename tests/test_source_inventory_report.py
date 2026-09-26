@@ -127,6 +127,10 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, capture_output=True)
     (tmp_path / "content/source-corpus.json").write_text(json.dumps(registry), encoding="utf-8")
     (tmp_path / "content/curriculum.json").write_text(json.dumps(curriculum), encoding="utf-8")
+    reviews = {"schema_version": 1, "items": {"questions:example": {"decision": "approved",
+        "sources": [{"source_id": source["id"]}]}}}
+    (tmp_path / "content/publication-reviews.json").write_text(
+        json.dumps(reviews), encoding="utf-8")
     current_path = tmp_path / "data/current.json"
     current_path.write_text(json.dumps(current), encoding="utf-8")
     target = tmp_path / "data/private-queue.json"
@@ -139,9 +143,23 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     entries = {item["file_id"]: item for item in queue["files"]}
     assert entries["reviewed-private"]["registry_state"] == "current"
     assert entries["reviewed-private"]["linked_topic_ids"] == ["topic"]
+    assert entries["reviewed-private"]["linked_derivative_ids"] == ["questions:example"]
+    assert entries["reviewed-private"]["derivative_review_required"] is False
     assert entries["unreviewed-private"]["registry_state"] == "untracked"
     assert all(item["processing_state"] == "unknown_no_processing_snapshot" for item in entries.values())
     assert all(item["paths"] == [["Lesson"]] for item in entries.values())
+
+    changed = export(["reviewed-private"])
+    changed["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
+    changed_queue = inventory_report.private_review_queue(
+        inventory_report._snapshot(changed), registry, curriculum, reviews=reviews)
+    changed_entry = changed_queue["files"][0]
+    assert changed_entry["registry_state"] == "changed"
+    assert changed_entry["linked_derivative_ids"] == ["questions:example"]
+    assert changed_entry["derivative_review_required"] is True
+    missing_queue = inventory_report.private_review_queue(
+        inventory_report._snapshot(export([])), registry, curriculum, reviews=reviews)
+    assert missing_queue["missing_tracked_sources"][0]["derivative_review_required"] is True
 
     original = target.read_bytes()
     assert main(args) == 1
