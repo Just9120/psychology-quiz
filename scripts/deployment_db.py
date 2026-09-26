@@ -22,6 +22,8 @@ from app.web_config import WebSettings
 from app.postgres_recovery import REBUILDABLE_TABLES
 from scripts.audit_question_bank import build_report, has_blockers
 
+SEQUENCE_STATE = "__sqlite_user_sequences__"
+
 
 
 def read_connection(path: Path) -> sqlite3.Connection:
@@ -43,9 +45,12 @@ def user_state(conn: sqlite3.Connection, columns: dict | None = None) -> dict:
     result = {}
     existing = {row[0] for row in conn.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
+    if SEQUENCE_STATE in existing:
+        raise RuntimeError("Reserved user-state manifest name is a table")
     # Preserve every runtime table present in a backup. Additive tables absent
     # from an older backup enter the preservation manifest at the next backup.
-    tables = tuple(columns) if columns is not None else tuple(sorted(existing - REBUILDABLE_TABLES))
+    tables = (tuple(table for table in columns if table != SEQUENCE_STATE)
+              if columns is not None else tuple(sorted(existing - REBUILDABLE_TABLES)))
     for table in tables:
         if table not in existing or table in REBUILDABLE_TABLES or not table.replace("_", "").isalnum():
             raise RuntimeError("Unexpected user-state table")
@@ -61,6 +66,22 @@ def user_state(conn: sqlite3.Connection, columns: dict | None = None) -> dict:
             digest.update(b"\n")
             count += 1
         result[table] = {"columns": names, "rows": count, "sha256": digest.hexdigest()}
+    # AUTOINCREMENT counters are persistent identity state too. Content tables
+    # may be rebuilt; only pre-existing non-content counters must stay exact.
+    if columns is None or SEQUENCE_STATE in columns:
+        digest = hashlib.sha256()
+        count = 0
+        if conn.execute("SELECT 1 FROM sqlite_master WHERE name='sqlite_sequence'").fetchone():
+            placeholders = ",".join("?" for _ in tables)
+            if placeholders:
+                for name, sequence in conn.execute(
+                    f"SELECT name, seq FROM sqlite_sequence WHERE name IN ({placeholders}) ORDER BY name",
+                    tables,
+                ):
+                    digest.update(json.dumps((name, sequence), separators=(",", ":")).encode())
+                    digest.update(b"\n")
+                    count += 1
+        result[SEQUENCE_STATE] = {"rows": count, "sha256": digest.hexdigest()}
     return result
 
 

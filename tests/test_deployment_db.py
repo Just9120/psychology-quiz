@@ -78,6 +78,17 @@ def test_backup_includes_new_personal_table_without_manual_allowlist(database, t
         verify_preserved(database, backup)
 
 
+def test_backup_preserves_user_identity_sequence_but_allows_content_sequence(database, tmp_path):
+    backup = backup_and_rehearse(database, tmp_path / "backups")
+    with closing(sqlite3.connect(database)) as conn, conn:
+        conn.execute("UPDATE sqlite_sequence SET seq=seq+10 WHERE name='questions'")
+    verify_preserved(database, backup)
+    with closing(sqlite3.connect(database)) as conn, conn:
+        conn.execute("UPDATE sqlite_sequence SET seq=seq+10 WHERE name='users'")
+    with pytest.raises(RuntimeError, match="user state"):
+        verify_preserved(database, backup)
+
+
 def test_backup_rejects_foreign_key_corruption(database, tmp_path):
     with closing(sqlite3.connect(database)) as conn, conn:
         conn.execute("PRAGMA foreign_keys=OFF")
