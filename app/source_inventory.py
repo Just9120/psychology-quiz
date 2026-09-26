@@ -54,10 +54,12 @@ def _revision(item: dict) -> tuple[str, str, str]:
 def scan(root_id: str, listings: dict[str, dict]) -> dict:
     if not isinstance(root_id, str) or not root_id:
         raise InventoryError("root_required")
-    queue, seen_folders, files = deque([root_id]), set(), {}
+    queue, seen_folders, files, paths = deque([(root_id, ())]), {}, {}, {}
     while queue:
-        parent = queue.popleft()
+        parent, breadcrumb = queue.popleft()
         if parent in seen_folders:
+            if seen_folders[parent] != breadcrumb:
+                raise InventoryError("ambiguous_folder_paths")
             continue
         listing = listings.get(parent)
         if not isinstance(listing, dict) or listing.get("complete") is not True:
@@ -65,7 +67,7 @@ def scan(root_id: str, listings: dict[str, dict]) -> dict:
         children = listing.get("children")
         if not isinstance(children, list):
             raise InventoryError("invalid_folder_listing")
-        seen_folders.add(parent)
+        seen_folders[parent] = breadcrumb
         for item in children:
             if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not item["id"]:
                 raise InventoryError("invalid_child")
@@ -73,7 +75,9 @@ def scan(root_id: str, listings: dict[str, dict]) -> dict:
             if not isinstance(parents, list) or parent not in parents:
                 raise InventoryError("parent_mismatch")
             if item.get("file_or_folder") == "folder":
-                queue.append(item["id"])
+                if not isinstance(item.get("title"), str) or not item["title"]:
+                    raise InventoryError("incomplete_folder_metadata")
+                queue.append((item["id"], (*breadcrumb, item["title"])))
                 continue
             if item.get("file_or_folder") != "file":
                 raise InventoryError("unknown_child_kind")
@@ -85,19 +89,24 @@ def scan(root_id: str, listings: dict[str, dict]) -> dict:
                 raise InventoryError("conflicting_file_metadata")
             files[item["id"]] = {key: item[key] for key in
                                   ("id", "title", "mime_type", "modified_time")}
-    return {"root_id": root_id, "folders": len(seen_folders), "files": files}
+            paths.setdefault(item["id"], set()).add((*breadcrumb, item["title"]))
+    return {"root_id": root_id, "folders": len(seen_folders), "files": files,
+            "paths": {file_id: [list(path) for path in sorted(found)]
+                      for file_id, found in paths.items()}}
 
 
 def reconcile(previous: dict, current: dict) -> dict:
     if previous.get("root_id") != current.get("root_id"):
         raise InventoryError("root_changed")
     old, new = previous["files"], current["files"]
-    changes = {"new": [], "changed": [], "unchanged": [], "missing": []}
+    changes = {"new": [], "changed": [], "relocated": [], "unchanged": [], "missing": []}
     for file_id, item in new.items():
         if file_id not in old:
             changes["new"].append(file_id)
         elif _revision(old[file_id]) != _revision(item):
             changes["changed"].append(file_id)
+        elif previous["paths"].get(file_id) != current["paths"].get(file_id):
+            changes["relocated"].append(file_id)
         else:
             changes["unchanged"].append(file_id)
     changes["missing"] = sorted(old.keys() - new.keys())
@@ -168,6 +177,7 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
                 or source.get("kind") not in {"learning_material", "bibliography"}
                 or source.get("readable") is not True
                 or source.get("snapshot_kind") not in {"file_bytes", "extracted_text"}
+                or not isinstance(source.get("corpus_path"), str) or not source["corpus_path"]
                 or not all(isinstance(source.get(key), str) and source[key]
                            for key in ("title", "modified_time", "snapshot_sha256", "reviewed_at", "reviewer"))
                 or re.fullmatch(r"[0-9a-f]{64}", source["snapshot_sha256"]) is None):
@@ -179,7 +189,9 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
         live = snapshot["files"].get(source_id)
         state = ("missing" if live is None else "changed" if
                  (source["title"], source["modified_time"]) !=
-                 (live["title"], live["modified_time"]) else "current")
+                 (live["title"], live["modified_time"]) else "relocated" if
+                 source["corpus_path"] not in
+                 ("/".join(path) for path in snapshot["paths"][source_id]) else "current")
         states[source_id] = state
         if state == "current":
             formats[live["mime_type"]] += 1
@@ -211,3 +223,45 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
         "reviewed_learning_without_lesson": sum(source["kind"] == "learning_material" and
                                                 source["id"] not in linked_ids for source in sources.values()),
     }
+
+
+def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
+                         processed: dict | None = None, previous: dict | None = None) -> dict:
+    """Operator-only file-level queue; never return this from a public route."""
+    reviewed_graph(snapshot, registry, curriculum)
+    if processed is not None and not isinstance(processed, dict):
+        raise InventoryError("invalid_processing_records")
+    sources = {source["id"]: source for source in registry["sources"]}
+    topics = {}
+    for topic_id, topic in curriculum["topics"].items():
+        topics.setdefault(topic["source"]["source_id"], []).append(topic_id)
+    processing = processing_status(snapshot, processed) if processed is not None else None
+    changes = reconcile(previous, snapshot) if previous is not None else None
+    changed = ({file_id: name for name, ids in changes.items() for file_id in ids}
+               if changes is not None else {})
+    entries = []
+    for file_id, item in snapshot["files"].items():
+        source = sources.get(file_id)
+        registry_state = ("untracked" if source is None else "changed" if
+                          (source["title"], source["modified_time"]) !=
+                          (item["title"], item["modified_time"]) else "relocated" if
+                          source["corpus_path"] not in
+                          ("/".join(path) for path in snapshot["paths"][file_id]) else "current")
+        entries.append({
+            "file_id": file_id,
+            "title": item["title"],
+            "mime_type": item["mime_type"],
+            "modified_time": item["modified_time"],
+            "paths": snapshot["paths"][file_id],
+            "registry_state": registry_state,
+            "inventory_change": changed.get(file_id, "unknown_no_previous_snapshot"),
+            "processing_state": processing[file_id] if processing is not None
+                                else "unknown_no_processing_snapshot",
+            "linked_topic_ids": sorted(topics.get(file_id, [])),
+        })
+    entries.sort(key=lambda item: (item["paths"], item["file_id"]))
+    missing = [{"file_id": file_id, "title": source["title"],
+                "linked_topic_ids": sorted(topics.get(file_id, []))}
+               for file_id, source in sorted(sources.items()) if file_id not in snapshot["files"]]
+    return {"schema_version": 1, "root_id": snapshot["root_id"],
+            "files": entries, "missing_tracked_sources": missing}

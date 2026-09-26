@@ -10,7 +10,7 @@ def item(file_id, parent, *, title="Lesson", changed="2026-09-25T00:00:00Z"):
 
 def test_recursive_snapshot_requires_complete_children_and_detects_changes():
     root, child = "root", "nested"
-    folder = {"id": child, "parent_ids": [root], "file_or_folder": "folder"}
+    folder = {"id": child, "title": "Nested", "parent_ids": [root], "file_or_folder": "folder"}
     listings = {root: {"complete": True, "children": [folder, item("first", root)]},
                 child: {"complete": True, "children": [item("second", child)]}}
     first = scan(root, listings)
@@ -20,7 +20,8 @@ def test_recursive_snapshot_requires_complete_children_and_detects_changes():
     later = {**listings, child: {"complete": True, "children": [
         item("second", child, changed="2026-09-26T00:00:00Z"), item("third", child)]}}
     assert reconcile(first, scan(root, later)) == {
-        "new": ["third"], "changed": ["second"], "unchanged": ["first"], "missing": []}
+        "new": ["third"], "changed": ["second"], "relocated": [],
+        "unchanged": ["first"], "missing": []}
 
 
 def test_page_chain_must_finish_before_recursive_inventory():
@@ -51,6 +52,25 @@ def test_missing_is_not_deletion_and_conflicting_metadata_fails_closed():
     with pytest.raises(InventoryError, match="parent_mismatch"):
         scan("root", {"root": {"complete": True, "children": [
             {**item("one", "root"), "parent_ids": None}]}})
+
+
+def test_folder_move_requires_link_review_without_claiming_content_change():
+    folder_a = {"id": "a", "title": "Lesson A", "parent_ids": ["root"],
+                "file_or_folder": "folder"}
+    folder_b = {**folder_a, "id": "b", "title": "Lesson B"}
+    base = {"root": {"complete": True, "children": [folder_a, folder_b]},
+            "a": {"complete": True, "children": [item("same", "a")]},
+            "b": {"complete": True, "children": []}}
+    before = scan("root", base)
+    after = scan("root", {**base, "a": {"complete": True, "children": []},
+                          "b": {"complete": True, "children": [item("same", "b")]}})
+    assert before["paths"]["same"] == [["Lesson A", "Lesson"]]
+    assert after["paths"]["same"] == [["Lesson B", "Lesson"]]
+    assert reconcile(before, after) == {
+        "new": [], "changed": [], "relocated": ["same"], "unchanged": [], "missing": []}
+    assert processing_status(after, {"same": {"revision": (
+        "2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
+        "review_state": "processed"}}) == {"same": "processed"}
 
 
 def test_processing_requires_same_revision_and_explicit_lesson_links():
