@@ -213,8 +213,9 @@ def review_today(conn, actor: int, payload: dict) -> dict:
     if latest and latest["status"] == "in_progress" and not payload["replace_active"]:
         raise ProgressError("active_attempt", 409)
     begin_write(conn, "content")
-    due = [item["question_id"] for item in repetition.quiz_queue(conn, actor,
-           today=datetime.now(timezone.utc).date()) if item["is_due"]]
+    due = [item["question_id"] for item in repetition.queue(conn, actor,
+           today=datetime.now(timezone.utc).date())["items"]
+           if item["is_due"] and item.get("question_id") is not None]
     if not due:
         raise ProgressError("no_reviews", 409)
     if count is not None:

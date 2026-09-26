@@ -11,11 +11,15 @@ from app.content_publication import fingerprint
 from app.glossary import GLOSSARY_TOPICS, load_glossary_entries
 
 
-def _day(value: str) -> date:
+def _instant(value: str) -> datetime:
     parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=timezone.utc)
-    return parsed.astimezone(timezone.utc).date()
+    return parsed.astimezone(timezone.utc)
+
+
+def _day(value: str) -> date:
+    return _instant(value).date()
 
 
 def schedule(events: list[tuple[str, bool, str, str]], edition: str, *, today: date) -> dict:
@@ -52,7 +56,8 @@ def quiz_queue(conn, actor: int, *, today: date) -> list[dict]:
     ids = sorted(grouped)
     placeholders = ",".join("?" for _ in ids)
     approved = conn.execute(f"""SELECT q.id,c.name FROM questions q
-        JOIN categories c ON c.id=q.category_id WHERE q.status='approved' AND q.id IN ({placeholders})""", ids)
+        JOIN categories c ON c.id=q.category_id WHERE q.status='approved'
+        AND q.kind!='glossary' AND q.id IN ({placeholders})""", ids)
     items = []
     for question_id, topic in approved:
         current = capture_question(conn, int(question_id))[1]
@@ -61,11 +66,25 @@ def quiz_queue(conn, actor: int, *, today: date) -> list[dict]:
     return items
 
 
-def glossary_queue(conn, actor: int, *, today: date) -> list[dict]:
+def glossary_history(conn, actor: int) -> dict[tuple[str, str], dict]:
+    """Merge captured term answers from both attempt formats for one actor."""
     current = {}
     for topic_id, topic in GLOSSARY_TOPICS:
         for entry in load_glossary_entries(topic_id) or []:
-            current[(topic_id, entry.id)] = (topic, fingerprint(asdict(entry)))
+            current[(topic_id, entry.id)] = {
+                "topic": topic, "edition": fingerprint(asdict(entry)),
+                "question_id": None, "events": [],
+            }
+    question_keys = {}
+    for question_id, external_id in conn.execute(
+            "SELECT id,external_id FROM questions WHERE kind='glossary' AND status='approved'"):
+        parts = str(external_id).split(":", 2)
+        if len(parts) != 3 or parts[0] != "glossary":
+            continue
+        key = (parts[1], parts[2])
+        if key in current:
+            current[key]["question_id"] = int(question_id)
+            question_keys[int(question_id)] = key
     grouped = defaultdict(list)
     sessions = conn.execute("""SELECT snapshot,state,updated_at FROM glossary_sessions
         WHERE user_id=? ORDER BY created_at,id""", (actor,)).fetchall()
@@ -80,14 +99,38 @@ def glossary_queue(conn, actor: int, *, today: date) -> list[dict]:
             except (IndexError, KeyError, TypeError, ValueError):
                 continue
             if key in current:
-                grouped[key].append((timestamp, correct, fingerprint(entry),
+                grouped[key].append((timestamp, correct,
+                                     "current" if fingerprint(entry) == current[key]["edition"] else "stale",
                                      "captured" if answer.get("answered_at") else "legacy_backfill_current"))
+    rows = conn.execute("""SELECT a.question_id,a.answered_at,a.is_correct,
+                                  sq.content_sha256,sq.snapshot_provenance
+        FROM quiz_sessions s JOIN quiz_answers a ON a.session_id=s.id
+        JOIN quiz_session_questions sq ON sq.session_id=a.session_id AND sq.question_id=a.question_id
+        JOIN questions q ON q.id=a.question_id
+        WHERE s.user_id=? AND q.kind='glossary' AND q.status='approved'""", (actor,)).fetchall()
+    for question_id, timestamp, correct, edition, provenance in rows:
+        key = question_keys.get(int(question_id))
+        if key is not None:
+            if "quiz_edition" not in current[key]:
+                current[key]["quiz_edition"] = capture_question(conn, int(question_id))[1]
+            grouped[key].append((timestamp, bool(correct),
+                                 "current" if edition == current[key]["quiz_edition"] else "stale",
+                                 provenance))
+    for key, events in grouped.items():
+        events.sort(key=lambda event: _instant(event[0]))
+        current[key]["events"] = events
+    return {key: current[key] for key in grouped}
+
+
+def glossary_queue(conn, actor: int, *, today: date) -> list[dict]:
     items = []
-    for (topic_id, term_id), events in grouped.items():
-        events.sort(key=lambda event: event[0])
-        topic, edition = current[(topic_id, term_id)]
-        items.append({"kind": "glossary", "topic_id": topic_id, "term_id": term_id,
-                      "topic": topic, **schedule(events, edition, today=today)})
+    for (topic_id, term_id), record in glossary_history(conn, actor).items():
+        item = {"kind": "glossary", "topic_id": topic_id, "term_id": term_id,
+                "topic": record["topic"],
+                **schedule(record["events"], "current", today=today)}
+        if record["question_id"] is not None:
+            item["question_id"] = record["question_id"]
+        items.append(item)
     return items
 
 
@@ -109,8 +152,9 @@ def adaptive_questions(conn, actor: int | None, candidates: list[int], count: in
     """
     if not candidates or actor is None:
         return candidates[:count]
-    due_ids = {item["question_id"] for item in quiz_queue(conn, actor,
-               today=today or datetime.now(timezone.utc).date()) if item["is_due"]}
+    due_ids = {item["question_id"] for item in queue(conn, actor,
+               today=today or datetime.now(timezone.utc).date())["items"]
+               if item["is_due"] and item.get("question_id") is not None}
     seen = set()
     weakness = defaultdict(lambda: [0, 0])
     for question_id, correct, snapshot in conn.execute("""SELECT a.question_id,a.is_correct,sq.content_snapshot
