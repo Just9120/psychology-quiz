@@ -75,6 +75,7 @@ export interface QuizState {
   ok: true
   runner_state: RunnerState
   recent_answer_feedback?: Feedback
+  recent_answer_question?: Question
 }
 
 export interface Answer {

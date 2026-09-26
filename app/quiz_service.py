@@ -132,7 +132,28 @@ def quiz_state(conn, *, actor_user_id: int) -> dict:
     result = {"ok": True, "runner_state": build_runner_state(conn, actor_user_id=actor_user_id)}
     feedback = build_recent_answer_feedback(conn, actor_user_id=actor_user_id)
     if feedback is not None:
-        result["recent_answer_feedback"] = feedback
+        session = result["runner_state"].get("session")
+        if session is not None:
+            session_id = int(session["session_id"])
+            question_id = int(feedback["question_id"])
+            row = conn.execute("""SELECT order_index,
+                    (SELECT COUNT(*) FROM quiz_session_questions WHERE session_id=?)
+                FROM quiz_session_questions WHERE session_id=? AND question_id=?""",
+                (session_id, session_id, question_id)).fetchone()
+            if row is not None:
+                content = get_attempt_content(conn, session_id, question_id)
+                question_text = content["question_text"]
+                if content.get("kind") == "case":
+                    question_text = content["case"]["situation"] + "\n\n" + question_text
+                result["recent_answer_feedback"] = feedback
+                result["recent_answer_question"] = {
+                    "session_id": session_id, "question_id": question_id,
+                    "question_text": question_text, "order_index": int(row[0]),
+                    "total_questions": int(row[1]),
+                    "options": [{"option_index": option["option_index"],
+                                 "option_text": option["option_text"]}
+                                for option in content["options"]],
+                }
     return result
 
 

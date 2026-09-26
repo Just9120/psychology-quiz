@@ -3,8 +3,9 @@ from contextlib import closing
 from types import SimpleNamespace
 
 from app.classic_quiz_handlers import _handle_classic_text_answer_db
-from app.db import get_connection
-from tests.test_attempt_content import bank, TOKEN
+from app.db import get_connection, start_quiz_session, store_session_questions, upsert_approved_questions
+from tests.test_attempt_content import bank, OLD, OTHER, TOKEN
+from tests.test_case_content import CASE
 from tests.test_miniapp_api import _make_init_data
 from tests.test_web_auth import EMAIL, post, web
 from tests.test_web_literature import linked
@@ -129,3 +130,53 @@ def test_chat_answer_on_linked_attempt_recovers_in_pwa_and_miniapp_once(web):
     with closing(get_connection(str(web.db))) as conn:
         assert conn.execute("SELECT count(*) FROM quiz_answers WHERE session_id=?",
                             (question["session_id"],)).fetchone()[0] == 1
+
+
+def test_recovered_feedback_uses_answered_captured_question_not_next_question(web):
+    csrf = linked(web)
+    with closing(get_connection(str(web.db))) as conn, conn:
+        upsert_approved_questions(conn, [{**OTHER, "question": "Other question?"}])
+    started = post(web, "quiz/setup", {
+        "quiz_mode": "all", "category_ids": [], "question_count": None, "difficulty": "any",
+    }, csrf=csrf)
+    assert started.status_code == 200
+    answered = started.json()["runner_state"]["current_question"]
+    response = post(web, "quiz/answer", {
+        "session_id": answered["session_id"], "question_id": answered["question_id"],
+        "selected_option_index": 0,
+    }, csrf=csrf)
+    assert response.status_code == 200
+    following = response.json()["runner_state"]["current_question"]
+    assert following["question_id"] != answered["question_id"]
+    with closing(get_connection(str(web.db))) as conn, conn:
+        original = OLD if answered["question_text"] == OLD["question"] else OTHER
+        upsert_approved_questions(conn, [{**original, "question": "A newer edition?"}])
+    owner = web.client.get("/web/quiz/state").json()
+    mini = web.client.get("/miniapp/state", headers=_headers()).json()
+    assert mini["recent_answer_question"] == owner["recent_answer_question"]
+    assert owner["recent_answer_question"] == {
+        key: answered[key] for key in ("session_id", "question_id", "question_text",
+                                  "order_index", "total_questions", "options")
+    }
+    assert owner["recent_answer_question"]["question_text"] != following["question_text"]
+    assert "source_ref" not in owner["recent_answer_question"]
+
+
+def test_recovered_case_keeps_captured_situation_without_private_source_ref(web):
+    csrf = linked(web)
+    with closing(get_connection(str(web.db))) as conn, conn:
+        upsert_approved_questions(conn, [{**CASE, "source_ref": "private-case-source"}])
+        case_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (CASE["id"],)).fetchone()[0]
+        theory_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (OLD["id"],)).fetchone()[0]
+        session_id = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, session_id, [case_id, theory_id])
+    saved = post(web, "quiz/answer", {
+        "session_id": session_id, "question_id": case_id, "selected_option_index": 0,
+    }, csrf=csrf)
+    assert saved.status_code == 200
+    state = web.client.get("/miniapp/state", headers=_headers()).json()
+    question = state["recent_answer_question"]
+    assert question["question_id"] == case_id
+    assert question["question_text"] == CASE["case"]["situation"] + "\n\n" + CASE["question"]
+    assert state["recent_answer_feedback"]["case_review"]["option_rationales"] == CASE["case"]["option_rationales"]
+    assert "private-case-source" not in str(state)
