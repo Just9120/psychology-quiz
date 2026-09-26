@@ -145,6 +145,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .review-card summary { cursor: pointer; color: var(--green); padding: 8px 0; }
 .answer-review { margin-top: 16px; }
 .curriculum-discipline { padding: 14px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.topic-module-heading { grid-column: 1 / -1; margin: 12px 0 0; font-size: 1rem; }
 .curriculum-discipline summary { cursor: pointer; font-weight: 600; line-height: 1.6; }
 .curriculum-unmapped { display: block; overflow-wrap: anywhere; }
 .curriculum-unmapped h3 { margin: 0 0 8px; }

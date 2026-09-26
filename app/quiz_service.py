@@ -10,6 +10,7 @@ from app.database import begin_write
 from dataclasses import dataclass
 from typing import Any
 from app.attempt_content import get_attempt_content
+from app.literature import load_topic_registry
 from app.payload_validation import valid_quiz_setup
 from app.repetition import adaptive_questions
 from app.db import (
@@ -120,8 +121,23 @@ def start_prepared_quiz(conn, *, actor_user_id: int, prepared: PreparedQuiz) -> 
 
 def quiz_setup_options(conn) -> dict:
     available_kinds = {row[0] for row in conn.execute("SELECT DISTINCT kind FROM questions WHERE status='approved'")}
+    # An exact title match is required: a DB category alone does not prove a
+    # discipline/module assignment. Never infer one from a similar name.
+    known = {}
+    ambiguous = set()
+    for topic_id, topic in load_topic_registry().items():
+        title = topic.get("title")
+        if title in known:
+            ambiguous.add(title)
+        known[title] = (topic_id, topic.get("module"))
+    categories = []
+    for row in get_active_categories(conn):
+        mapping = known.get(str(row["name"])) if row["name"] not in ambiguous else None
+        categories.append({"id": int(row["id"]), "name": str(row["name"]),
+                           "topic_id": mapping[0] if mapping else None,
+                           "module": mapping[1] if mapping else None})
     return {
-        "categories": [{"id": int(row["id"]), "name": str(row["name"])} for row in get_active_categories(conn)],
+        "categories": categories,
         "question_count_choices": [5, 10, 15, "all"],
         "difficulty_choices": ["any", "easy", "medium", "hard"],
         "content_kind_choices": [kind for kind in ("theory", "glossary", "case") if kind in available_kinds],

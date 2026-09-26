@@ -45,7 +45,7 @@ export function ProgressView({ data, history, detail, busy, onRefresh, onMore, o
     {!data.summary.answered ? <div className="panel empty-state"><h2>История начинается с первого ответа</h2><p className="muted">Пройдите квиз — здесь появятся результаты и темы для повторения.</p></div> : <>
       {curriculum ? <section className="panel practice-section"><h2>Дисциплины и темы</h2>
         <p className="hint">Темы взяты из лекций и практик учебного курса. Внутри дисциплины сначала показаны темы с меньшей долей верных ответов. Малая выборка не даёт уверенной оценки знаний.</p>
-        {curriculum.disciplines.map(item => <details className="curriculum-discipline" key={item.scope}><summary>{item.title} · {percent(item.accuracy)} · {item.answered} ответов</summary>
+        {curriculum.disciplines.map(item => <details className="curriculum-discipline" key={item.scope}><summary>{item.module ? `${item.module.replace(/^module/, 'Модуль ')} · ` : ''}{item.title} · {percent(item.accuracy)} · {item.answered} ответов</summary>
           <button className="text-button" disabled={busy} onClick={() => onScope?.(item.scope)}>История и динамика: {item.title}</button>
           {!item.answered && <p className="notice">Пока нет ответов с подтверждённой дисциплиной.</p>}
           {item.unmapped_answers > 0 && <p className="hint">Без подтверждённой вложенной темы: {item.unmapped_answers} ответов.</p>}

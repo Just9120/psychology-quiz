@@ -11,7 +11,7 @@ export interface Account {
 }
 
 export interface SetupOptions {
-  categories: { id: number; name: string }[]
+  categories: { id: number; name: string; topic_id?: string | null; module?: string | null }[]
   question_count_choices: (5 | 10 | 15 | 'all')[]
   difficulty_choices: ('any' | 'easy' | 'medium' | 'hard')[]
   content_kind_choices?: ('theory' | 'glossary' | 'case')[]
@@ -127,7 +127,7 @@ export interface GlossaryState {
 export interface PracticeDay extends PracticeCounts { day: string }
 export interface TopicProgress extends PracticeCounts { topic: string; days: PracticeDay[] }
 export interface CurriculumProgress extends PracticeCounts { scope: string; title: string; days: PracticeDay[] }
-export interface DisciplineProgress extends CurriculumProgress { topics: CurriculumProgress[]; unmapped_answers: number }
+export interface DisciplineProgress extends CurriculumProgress { topics: CurriculumProgress[]; unmapped_answers: number; module?: string | null }
 export interface ProgressOverview {
   ok: true
   summary: PracticeCounts & { attempts: number; finished: number }
