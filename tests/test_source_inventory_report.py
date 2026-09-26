@@ -6,7 +6,7 @@ import pytest
 from app.source_inventory import InventoryError
 from scripts import source_inventory_report as inventory_report
 from scripts.source_inventory_report import main, report
-from tests.test_source_inventory import item
+from tests.test_source_inventory import REVIEW_EVIDENCE, item
 
 
 def export(file_ids):
@@ -31,10 +31,10 @@ def test_private_inventory_report_reconciles_without_exposing_ids(tmp_path, caps
         "changes": {"new": 1, "changed": 0, "relocated": 0, "unchanged": 1, "missing": 0}}
     assert report(current, processed={"first": {"revision": ("2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
         "review_state": "processed", "snapshot_kind": "file_bytes",
-        "snapshot_sha256": "a" * 64}})["processing"] == {"new_unprocessed": 1, "processed": 1}
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}})["processing"] == {"new_unprocessed": 1, "processed": 1}
     assert report(current, processed={"first": {"revision": ("2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
         "review_state": "processed", "snapshot_kind": "file_bytes",
-        "snapshot_sha256": "a" * 64}})["processing_by_format"] == {
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}})["processing_by_format"] == {
             "application/pdf": {"new_unprocessed": 1, "processed": 1}}
 
 

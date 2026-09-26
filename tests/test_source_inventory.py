@@ -2,6 +2,9 @@ import pytest
 
 from app.source_inventory import InventoryError, complete_listing, link_lessons, processing_status, reconcile, scan
 
+REVIEW_EVIDENCE = {"reviewer": "editor", "review_note": "Reviewed exact source revision",
+                   "reviewed_at": "2026-09-26T12:00:00Z"}
+
 
 def item(file_id, parent, *, title="Lesson", changed="2026-09-25T00:00:00Z"):
     return {"id": file_id, "parent_ids": [parent], "file_or_folder": "file",
@@ -71,7 +74,7 @@ def test_folder_move_requires_link_review_without_claiming_content_change():
     assert processing_status(after, {"same": {"revision": (
         "2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
         "review_state": "processed", "snapshot_kind": "file_bytes",
-        "snapshot_sha256": "a" * 64}}) == {"same": "processed"}
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}}) == {"same": "processed"}
 
 
 def test_processing_requires_same_revision_and_explicit_lesson_links():
@@ -80,7 +83,8 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
     revision = ("2026-09-25T00:00:00Z", "Lesson", "application/pdf")
     states = processing_status(snapshot, {
         "lecture": {"revision": revision, "review_state": "processed",
-                    "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64},
+                    "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64,
+                    **REVIEW_EVIDENCE},
         "slides": {"revision": revision, "review_state": "conflict", "reason": "competing editions"}})
     assert states == {"lecture": "processed", "slides": "conflict_review"}
     assert processing_status(snapshot, {"lecture": {"revision": ("old", "Lesson", "application/pdf"),
@@ -92,6 +96,13 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
     with pytest.raises(InventoryError, match="unverified_processing_record"):
         processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed",
             "snapshot_kind": "extracted_text", "snapshot_sha256": "not-a-sha256"}})
+    with pytest.raises(InventoryError, match="unverified_processing_record"):
+        processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed",
+            "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64}})
+    with pytest.raises(InventoryError, match="unverified_processing_record"):
+        processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed",
+            "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64,
+            **REVIEW_EVIDENCE, "reviewed_at": "yesterday"}})
     with pytest.raises(InventoryError, match="invalid_processing_record"):
         processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "conflict"}})
     assert processing_status(snapshot, {"lecture": {"revision": revision,

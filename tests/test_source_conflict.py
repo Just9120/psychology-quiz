@@ -3,6 +3,7 @@ import pytest
 from app.source_inventory import InventoryError, processing_status
 from scripts.source_conflict import record_conflict
 from scripts.source_inventory_report import _snapshot
+from tests.test_source_inventory import REVIEW_EVIDENCE
 from tests.test_source_inventory_report import export
 
 
@@ -11,7 +12,7 @@ def test_conflict_holds_exact_source_revision_without_overwriting_prior_review()
     prior = {"already-reviewed": {
         "revision": ["2026-09-25T00:00:00Z", "Lesson", "application/pdf"],
         "review_state": "processed", "snapshot_kind": "file_bytes",
-        "snapshot_sha256": "a" * 64}}
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}}
     updated = record_conflict(
         inventory, prior, "transcript", reason="  Transcript differs from slides  ",
         locator="  Membrane potential section  ", related_source_ids=["slides"],

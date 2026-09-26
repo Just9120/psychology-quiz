@@ -7,6 +7,7 @@ operator storage, never among public content or static assets.
 from __future__ import annotations
 
 from collections import Counter, deque
+from datetime import datetime
 import re
 
 
@@ -49,6 +50,16 @@ def complete_listing(pages: list[dict]) -> dict:
 
 def _revision(item: dict) -> tuple[str, str, str]:
     return item["modified_time"], item["title"], item["mime_type"]
+
+
+def valid_review_timestamp(value: object) -> bool:
+    if not isinstance(value, str):
+        return False
+    try:
+        timestamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return timestamp.tzinfo is not None and timestamp.utcoffset() is not None
 
 
 def scan(root_id: str, listings: dict[str, dict]) -> dict:
@@ -134,7 +145,12 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
                     not isinstance(record.get("snapshot_kind"), str)
                     or record["snapshot_kind"] not in {"file_bytes", "extracted_text"}
                     or not isinstance(record.get("snapshot_sha256"), str)
-                    or re.fullmatch(r"[0-9a-f]{64}", record["snapshot_sha256"]) is None):
+                    or re.fullmatch(r"[0-9a-f]{64}", record["snapshot_sha256"]) is None
+                    or not isinstance(record.get("reviewer"), str)
+                    or not record["reviewer"].strip()
+                    or not isinstance(record.get("review_note"), str)
+                    or not record["review_note"].strip()
+                    or not valid_review_timestamp(record.get("reviewed_at"))):
                 raise InventoryError("unverified_processing_record")
             if state == "conflict" and (not isinstance(record.get("reason"), str)
                                          or not record["reason"].strip()):

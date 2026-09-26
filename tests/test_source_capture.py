@@ -8,6 +8,7 @@ import pytest
 
 from app.source_inventory import InventoryError, processing_status
 from scripts import source_capture
+from tests.test_source_inventory import REVIEW_EVIDENCE
 from tests.test_source_inventory_report import export
 
 
@@ -23,7 +24,8 @@ def test_capture_hashes_private_bytes_and_preserves_other_records(tmp_path):
     assert updated["private"]["review_state"] == "pending_review"
     assert updated["private"]["snapshot_sha256"] == hashlib.sha256(raw).hexdigest()
     assert processing_status(source_capture._snapshot(export(["private"])), updated)["private"] == "pending_review"
-    processed = {"private": {**updated["private"], "review_state": "processed"}}
+    processed = {"private": {**updated["private"], "review_state": "processed",
+                             **REVIEW_EVIDENCE}}
     with pytest.raises(InventoryError, match="source_revision_already_processed"):
         source_capture.capture(export(["private"]), processed, "private", content,
                                "extracted_text")

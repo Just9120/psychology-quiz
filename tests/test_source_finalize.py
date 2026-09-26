@@ -24,10 +24,13 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
     content.write_text("Изменённый текст", encoding="utf-8")
     with pytest.raises(InventoryError, match="captured_content_changed"):
         source_finalize.finalize(inventory, pending, "private", content,
-                                 reviewer="editor", review_note="review", reviewed_at="now")
+                                 reviewer="editor", review_note="review", reviewed_at="2026-09-26T12:00:00Z")
     with pytest.raises(InventoryError, match="review_evidence_required"):
         source_finalize.finalize(inventory, pending, "private", content,
                                  reviewer="", review_note="review", reviewed_at="now")
+    with pytest.raises(InventoryError, match="review_evidence_required"):
+        source_finalize.finalize(inventory, pending, "private", content,
+                                 reviewer="editor", review_note="review", reviewed_at="2026-09-26T12:00:00")
     with pytest.raises(InventoryError, match="source_not_pending_review"):
         source_finalize.finalize(inventory, completed, "private", content,
                                  reviewer="editor", review_note="review", reviewed_at="now")

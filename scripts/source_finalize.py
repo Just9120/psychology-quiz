@@ -18,7 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from app.source_inventory import InventoryError, processing_status
+from app.source_inventory import InventoryError, processing_status, valid_review_timestamp
 from scripts.source_capture import capture
 from scripts.source_inventory_report import _read, _snapshot, private_json_target
 
@@ -33,7 +33,9 @@ def finalize(current: dict, prior: dict, source_id: str, content_path: Path,
         raise InventoryError("source_not_in_current_inventory")
     if states[source_id] != "pending_review":
         raise InventoryError("source_not_pending_review")
-    if not isinstance(reviewer, str) or not reviewer.strip() or not isinstance(review_note, str) or not review_note.strip():
+    if (not isinstance(reviewer, str) or not reviewer.strip()
+            or not isinstance(review_note, str) or not review_note.strip()
+            or not valid_review_timestamp(reviewed_at)):
         raise InventoryError("review_evidence_required")
     pending = prior[source_id]
     if pending.get("snapshot_kind") not in {"file_bytes", "extracted_text"}:
