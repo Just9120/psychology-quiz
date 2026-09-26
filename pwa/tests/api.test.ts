@@ -23,6 +23,12 @@ describe('private transport', () => {
 })
 
 describe('mail proof', () => {
+  it('discards a legacy invitation fragment without storage or query transport', () => {
+    history.replaceState(null, '', '/?tracking=unwanted#invite=' + 'b'.repeat(43))
+    expect(takeMailProof()).toBeNull()
+    expect(location.hash + location.search).toBe('')
+    expect(localStorage.length + sessionStorage.length).toBe(0)
+  })
   it('removes fragment and query before consuming it, without persistent storage', () => {
     history.replaceState(null, '', '/?tracking=unwanted#verify=' + 'a'.repeat(43))
     expect(takeMailProof()).toEqual({ purpose: 'verify', token: 'a'.repeat(43) })

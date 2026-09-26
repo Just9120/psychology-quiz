@@ -157,6 +157,47 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
         self.assertIn("<b>Пояснение:</b>", feedback)
         self.assertIn("<b>Прогресс:</b> 1 из 2", feedback)
 
+    def test_retry_uses_saved_choice_and_edition_after_question_advances(self):
+        first = _handle_classic_text_answer_db(
+            self.settings, self.tg_user, session_id=self.session_id,
+            question_id=1, selected_option_index=1,
+        )
+        self.assertEqual("accepted", first["status"])
+        context = _load_classic_text_answer_context(self.settings, self.tg_user, self.state)
+        self.assertEqual("ok", context["status"])
+        retry = _handle_classic_text_answer_db(
+            self.settings, self.tg_user, session_id=self.session_id,
+            question_id=1, selected_option_index=0,
+        )
+        self.assertEqual("duplicate", retry["status"])
+        self.assertFalse(retry["is_correct"])
+        self.assertEqual("B", retry["selected_option_text"])
+        self.assertEqual("A", retry["correct_option_text"])
+        self.assertEqual("E1", retry["explanation"])
+        self.assertEqual(1, retry["answered_questions"])
+
+    def test_finished_attempt_retry_recovers_last_feedback(self):
+        _handle_classic_text_answer_db(
+            self.settings, self.tg_user, session_id=self.session_id,
+            question_id=1, selected_option_index=0,
+        )
+        _handle_classic_text_answer_db(
+            self.settings, self.tg_user, session_id=self.session_id,
+            question_id=2, selected_option_index=0,
+        )
+        state = {"status": "awaiting_answer", "session_id": self.session_id, "question_id": 2}
+        self.assertEqual("ok", _load_classic_text_answer_context(self.settings, self.tg_user, state)["status"])
+        retry = _handle_classic_text_answer_db(
+            self.settings, self.tg_user, session_id=self.session_id,
+            question_id=2, selected_option_index=1,
+        )
+        self.assertEqual("duplicate", retry["status"])
+        self.assertFalse(retry["is_correct"])
+        self.assertEqual("C", retry["selected_option_text"])
+        self.assertEqual("E2", retry["explanation"])
+        self.assertTrue(retry["is_last_question"])
+        self.assertEqual("finished", retry["finalized"]["status"])
+
     def test_last_answer_feedback_details_and_neutral_final_text(self):
         first = _handle_classic_text_answer_db(
             self.settings, self.tg_user, session_id=self.session_id, question_id=1, selected_option_index=0

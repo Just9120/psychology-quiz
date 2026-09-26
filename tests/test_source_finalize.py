@@ -24,15 +24,19 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
     content.write_text("Изменённый текст", encoding="utf-8")
     with pytest.raises(InventoryError, match="captured_content_changed"):
         source_finalize.finalize(inventory, pending, "private", content,
-                                 reviewer="editor", review_note="review", reviewed_at="now")
+                                 reviewer="editor", review_note="review", reviewed_at="2026-09-26T12:00:00Z")
     with pytest.raises(InventoryError, match="review_evidence_required"):
         source_finalize.finalize(inventory, pending, "private", content,
                                  reviewer="", review_note="review", reviewed_at="now")
+    with pytest.raises(InventoryError, match="review_evidence_required"):
+        source_finalize.finalize(inventory, pending, "private", content,
+                                 reviewer="editor", review_note="review", reviewed_at="2026-09-26T12:00:00")
     with pytest.raises(InventoryError, match="source_not_pending_review"):
         source_finalize.finalize(inventory, completed, "private", content,
                                  reviewer="editor", review_note="review", reviewed_at="now")
     conflicted = {"private": {"revision": pending["private"]["revision"],
-                              "review_state": "conflict", "reason": "Disagreement"}}
+                              "review_state": "conflict", "reason": "Disagreement",
+                              "locator": "paragraph 2", "related_source_ids": []}}
     with pytest.raises(InventoryError, match="source_not_pending_review"):
         source_finalize.finalize(inventory, conflicted, "private", content,
                                  reviewer="editor", review_note="review", reviewed_at="now")
@@ -42,3 +46,18 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
     with pytest.raises(InventoryError, match="source_not_pending_review"):
         source_finalize.finalize(newer, pending, "private", content,
                                  reviewer="editor", review_note="review", reviewed_at="now")
+
+    captured_conflict = source_capture.capture(newer, conflicted, "private", content,
+                                               "extracted_text")
+    with pytest.raises(InventoryError, match="conflict_resolution_required"):
+        source_finalize.finalize(newer, captured_conflict, "private", content,
+                                 reviewer="editor", review_note="Checked new revision",
+                                 reviewed_at="2026-09-27T12:00:00Z")
+    resolved = source_finalize.finalize(
+        newer, captured_conflict, "private", content,
+        reviewer="editor", review_note="Checked new revision",
+        conflict_resolution_note="Compared the changed claim with the related source",
+        reviewed_at="2026-09-27T12:00:00Z")
+    assert resolved["private"]["review_state"] == "processed"
+    assert "conflict_hold" not in resolved["private"]
+    assert resolved["private"]["conflict_resolution_note"].startswith("Compared")

@@ -18,10 +18,11 @@ from app.attempt_content import get_attempt_content
 from app.database import connect_database, is_postgres, is_postgres_target, resolve_database_target
 from app.postgres_config import validate_delivery_target
 from app.postgres_schema import verify_schema
-from app.auth_schema import AUTH_TABLES
 from app.web_config import WebSettings
-from app.postgres_recovery import USER_TABLES
+from app.postgres_recovery import REBUILDABLE_TABLES
 from scripts.audit_question_bank import build_report, has_blockers
+
+SEQUENCE_STATE = "__sqlite_user_sequences__"
 
 
 
@@ -42,12 +43,16 @@ def check_integrity(conn: sqlite3.Connection, *, allow_legacy=False) -> None:
 def user_state(conn: sqlite3.Connection, columns: dict | None = None) -> dict:
     """Compare all pre-existing user fields; additive columns are permitted."""
     result = {}
-    existing = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-    # Old backups lack auth tables. Preserve every table present in that backup,
-    # while newly introduced empty auth tables are allowed by an additive migration.
-    tables = tuple(columns) if columns is not None else tuple(name for name in USER_TABLES + AUTH_TABLES if name in existing)
+    existing = {row[0] for row in conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
+    if SEQUENCE_STATE in existing:
+        raise RuntimeError("Reserved user-state manifest name is a table")
+    # Preserve every runtime table present in a backup. Additive tables absent
+    # from an older backup enter the preservation manifest at the next backup.
+    tables = (tuple(table for table in columns if table != SEQUENCE_STATE)
+              if columns is not None else tuple(sorted(existing - REBUILDABLE_TABLES)))
     for table in tables:
-        if table not in USER_TABLES + AUTH_TABLES:
+        if table not in existing or table in REBUILDABLE_TABLES or not table.replace("_", "").isalnum():
             raise RuntimeError("Unexpected user-state table")
         names = (columns[table]["columns"] if columns else
                  [row[1] for row in conn.execute(f'PRAGMA table_info("{table}")')])
@@ -61,6 +66,22 @@ def user_state(conn: sqlite3.Connection, columns: dict | None = None) -> dict:
             digest.update(b"\n")
             count += 1
         result[table] = {"columns": names, "rows": count, "sha256": digest.hexdigest()}
+    # AUTOINCREMENT counters are persistent identity state too. Content tables
+    # may be rebuilt; only pre-existing non-content counters must stay exact.
+    if columns is None or SEQUENCE_STATE in columns:
+        digest = hashlib.sha256()
+        count = 0
+        if conn.execute("SELECT 1 FROM sqlite_master WHERE name='sqlite_sequence'").fetchone():
+            placeholders = ",".join("?" for _ in tables)
+            if placeholders:
+                for name, sequence in conn.execute(
+                    f"SELECT name, seq FROM sqlite_sequence WHERE name IN ({placeholders}) ORDER BY name",
+                    tables,
+                ):
+                    digest.update(json.dumps((name, sequence), separators=(",", ":")).encode())
+                    digest.update(b"\n")
+                    count += 1
+        result[SEQUENCE_STATE] = {"rows": count, "sha256": digest.hexdigest()}
     return result
 
 

@@ -393,6 +393,29 @@ class BotDbOffloadTests(unittest.TestCase):
             asyncio.run(main.next_callback(normal_next_update, context))
             normal_next_query.answer.assert_awaited_once_with(cache_time=1)
 
+    def test_duplicate_callback_renders_saved_feedback(self):
+        context = self._context()
+        user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')
+        query = SimpleNamespace(data='ans:1:1:0', answer=AsyncMock(), edit_message_text=AsyncMock())
+        update = SimpleNamespace(callback_query=query, effective_user=user)
+
+        async def fake_run_db_task(func, *args, **kwargs):
+            self.assertEqual('_handle_answer_db', func.__name__)
+            return {'status': 'duplicate', 'is_correct': False,
+                    'selected_option_text': 'Сохранённый выбранный вариант',
+                    'correct_option_text': 'Сохранённый правильный вариант',
+                    'explanation': 'Сохранённое пояснение', 'case_review': None,
+                    'answered_questions': 1, 'total_questions': 2,
+                    'reading_mode': 'normal', 'is_last_question': False,
+                    'finalized': None}
+
+        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+            asyncio.run(main.answer_callback(update, context))
+        self.assertIn('Сохранённое пояснение', query.edit_message_text.call_args.args[0])
+        self.assertIn('Сохранённый выбранный вариант', query.edit_message_text.call_args.args[0])
+        self.assertIn('Сохранённый правильный вариант', query.edit_message_text.call_args.args[0])
+        self.assertIn('Неверно', query.edit_message_text.call_args.args[0])
+
     def test_callback_in_progress_guard_is_cleared_on_error_paths(self):
         context = self._context()
         user = SimpleNamespace(id=1, username='u', first_name='f', last_name='l')

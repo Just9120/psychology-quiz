@@ -67,10 +67,6 @@ export interface WeeklyGoal { goal_kind: GoalKind; weekly_target: number | null;
 export interface GoalsOverview { ok: true; week_start: string; week_end_exclusive: string; goals: WeeklyGoal[] }
 export interface Achievement { kind: 'new_topic' | 'corrected_error' | 'regularity'; evidence_key: string; earned_at: string }
 export interface AchievementsOverview { ok: true; achievements: Achievement[] }
-export interface DemoItem { id: 'theory' | 'term' | 'case'; kind: 'theory' | 'glossary' | 'case'; prompt: string; options: string[] }
-export interface DemoItems { ok: true; items: DemoItem[] }
-export interface DemoAnswer { ok: true; is_correct: boolean; correct_option_index: number; explanation: string; case_review?: NonNullable<Feedback['case_review']> }
-
 export interface QuizState {
   ok: true
   runner_state: RunnerState
@@ -173,7 +169,7 @@ export type ReadingStatus = 'not_started' | 'in_progress' | 'read' | 'revisit' |
 export type ReadingState = { literature_id: string; reading_status: ReadingStatus; progress_percent: number | null; updated_at: string }
 export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
-  source: { id: string; title: string; locator: string; citation: string };
+  source: { title: string; locator: string; citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
 }
 export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; entries: LiteratureEntry[] }

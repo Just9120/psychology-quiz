@@ -1,11 +1,56 @@
 import pytest
 
-from app.source_inventory import InventoryError, complete_listing, link_lessons, processing_status, reconcile, scan
+from app.source_inventory import (InventoryError, complete_listing, format_variant_candidates,
+                                  link_lessons, mixed_format_folder_review_candidates,
+                                  processing_status, reconcile, scan)
+
+REVIEW_EVIDENCE = {"reviewer": "editor", "review_note": "Reviewed exact source revision",
+                   "reviewed_at": "2026-09-26T12:00:00Z"}
 
 
 def item(file_id, parent, *, title="Lesson", changed="2026-09-25T00:00:00Z"):
     return {"id": file_id, "parent_ids": [parent], "file_or_folder": "file",
             "title": title, "mime_type": "application/pdf", "modified_time": changed}
+
+
+def test_format_variants_are_private_candidates_not_cross_folder_merges():
+    root, first, second = "root", "first-folder", "second-folder"
+    folders = [{"id": folder, "title": folder, "parent_ids": [root],
+                "file_or_folder": "folder"} for folder in (first, second)]
+    native = {**item("doc", first, title="Лекция 1"),
+              "mime_type": "application/vnd.google-apps.document"}
+    snapshot = scan(root, {root: {"complete": True, "children": folders},
+                           first: {"complete": True, "children": [
+                               item("pdf", first, title="Лекция 1.PDF"), native]},
+                           second: {"complete": True, "children": [
+                               item("other", second, title="Лекция 1.pdf")]}})
+    assert format_variant_candidates(snapshot) == [{
+        "parent_path": [first], "normalized_stem": "лекция 1",
+        "file_ids": ["doc", "pdf"],
+        "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
+    }]
+
+
+def test_mixed_format_nested_folder_is_queued_without_inferred_lesson_link():
+    module = {"id": "module", "title": "Module", "parent_ids": ["root"],
+              "file_or_folder": "folder"}
+    lesson = {"id": "lesson", "title": "Lesson", "parent_ids": ["module"],
+              "file_or_folder": "folder"}
+    document = {**item("doc", "lesson", title="Transcript"),
+                "mime_type": "application/vnd.google-apps.document"}
+    snapshot = scan("root", {
+        "root": {"complete": True, "children": [module]},
+        "module": {"complete": True, "children": [lesson]},
+        "lesson": {"complete": True, "children": [
+            document, item("slides", "lesson", title="Slides"),
+            item("task", "lesson", title="Homework")]},
+    })
+    assert format_variant_candidates(snapshot) == []
+    assert mixed_format_folder_review_candidates(snapshot) == [{
+        "parent_path": ["Module", "Lesson"],
+        "file_ids": ["doc", "slides", "task"],
+        "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
+    }]
 
 
 def test_recursive_snapshot_requires_complete_children_and_detects_changes():
@@ -71,7 +116,7 @@ def test_folder_move_requires_link_review_without_claiming_content_change():
     assert processing_status(after, {"same": {"revision": (
         "2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
         "review_state": "processed", "snapshot_kind": "file_bytes",
-        "snapshot_sha256": "a" * 64}}) == {"same": "processed"}
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}}) == {"same": "processed"}
 
 
 def test_processing_requires_same_revision_and_explicit_lesson_links():
@@ -80,7 +125,8 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
     revision = ("2026-09-25T00:00:00Z", "Lesson", "application/pdf")
     states = processing_status(snapshot, {
         "lecture": {"revision": revision, "review_state": "processed",
-                    "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64},
+                    "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64,
+                    **REVIEW_EVIDENCE},
         "slides": {"revision": revision, "review_state": "conflict", "reason": "competing editions"}})
     assert states == {"lecture": "processed", "slides": "conflict_review"}
     assert processing_status(snapshot, {"lecture": {"revision": ("old", "Lesson", "application/pdf"),
@@ -92,14 +138,47 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
     with pytest.raises(InventoryError, match="unverified_processing_record"):
         processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed",
             "snapshot_kind": "extracted_text", "snapshot_sha256": "not-a-sha256"}})
+    with pytest.raises(InventoryError, match="unverified_processing_record"):
+        processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed",
+            "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64}})
+    with pytest.raises(InventoryError, match="unverified_processing_record"):
+        processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed",
+            "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64,
+            **REVIEW_EVIDENCE, "reviewed_at": "yesterday"}})
     with pytest.raises(InventoryError, match="invalid_processing_record"):
         processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "conflict"}})
     assert processing_status(snapshot, {"lecture": {"revision": revision,
         "review_state": "pending_review"}})["lecture"] == "pending_review"
-    links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic", "format": "transcript"},
-             {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic", "format": "slides"}]
+    valid_hold = {"reason": "Transcript and slides disagree", "locator": "slide 4",
+                  "related_source_ids": ["slides"]}
+    assert processing_status(snapshot, {"lecture": {"revision": revision,
+        "review_state": "pending_review", "conflict_hold": valid_hold}})["lecture"] == "pending_review"
+    for invalid in ({**valid_hold, "reason": ""}, {**valid_hold, "locator": None},
+                    {**valid_hold, "related_source_ids": ["lecture"]},
+                    {**valid_hold, "related_source_ids": ["slides", "slides"]}):
+        with pytest.raises(InventoryError, match="invalid_conflict_hold"):
+            processing_status(snapshot, {"lecture": {"revision": revision,
+                "review_state": "pending_review", "conflict_hold": invalid}})
+    with pytest.raises(InventoryError, match="invalid_conflict_hold"):
+        processing_status(snapshot, {"lecture": {"revision": revision,
+            "review_state": "processed", "snapshot_kind": "extracted_text",
+            "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE, "conflict_hold": valid_hold}})
+    evidence = {"revision": list(revision), "corpus_path": "Lesson", "reviewer": "editor",
+                "review_note": "Compared the two lesson formats", "reviewed_at": "2026-09-26T10:32:54Z"}
+    links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic",
+              "format": "transcript", **evidence},
+             {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic",
+              "format": "slides", **evidence}]
     assert len(link_lessons(snapshot, links)["l1"]["sources"]) == 2
+    with pytest.raises(InventoryError, match="duplicate_lesson_link"):
+        link_lessons(snapshot, [links[0], {**links[0], "format": "slides"}])
     with pytest.raises(InventoryError, match="conflicting_lesson_topic"):
         link_lessons(snapshot, [links[0], {**links[1], "topic_id": "other"}])
     with pytest.raises(InventoryError, match="invalid_lesson_link"):
         link_lessons(snapshot, [{**links[0], "source_id": ["not-a-file"]}])
+    with pytest.raises(InventoryError, match="stale_lesson_link"):
+        link_lessons(snapshot, [{**links[0], "revision": ["old", *revision[1:]]}])
+    with pytest.raises(InventoryError, match="stale_lesson_link"):
+        link_lessons(snapshot, [{**links[0], "corpus_path": "Other/Lesson"}])
+    with pytest.raises(InventoryError, match="invalid_lesson_link"):
+        link_lessons(snapshot, [{**links[0], "reviewer": ""}])

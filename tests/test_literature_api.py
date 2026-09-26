@@ -81,6 +81,7 @@ class LiteratureApiTests(unittest.TestCase):
         self.assertNotIn("source_refs", dumped)
         self.assertNotIn("notes", dumped)
         self.assertNotIn("private text", dumped)
+        self.assertTrue(all(set(item["source"]) == {"title", "locator", "citation"} for item in items))
         first = next(item for item in items if item["id"] == self.first_item["id"])
         self.assertEqual("in_progress", first["user_state"]["reading_status"])
         self.assertNotIn("private_note", first["user_state"])

@@ -365,6 +365,7 @@ async def post_init(application: Application) -> None:
             BotCommand("ui", "Открыть викторину в окне"),
             BotCommand("glossary", "Открыть глоссарий"),
             BotCommand("literature", "Список чтения"),
+            BotCommand("pwa", "Веб-приложение"),
         ]
     )
 
@@ -440,6 +441,14 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     await update.message.reply_text(
         message_text,
         reply_markup=get_main_menu_keyboard() if is_private_chat(update) else None,
+    )
+
+
+async def pwa_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if update.message is None:
+        return
+    await update.message.reply_text(
+        "Веб-приложение сейчас доступно только владельцу. Для обучения используйте викторину в чате или Mini App."
     )
 
 
@@ -970,6 +979,7 @@ def main() -> None:
     register_update_ingress_handler(application)
 
     application.add_handler(CommandHandler("start", start_command))
+    application.add_handler(CommandHandler("pwa", pwa_command))
     application.add_handler(CommandHandler("link", link_command))
     application.add_handler(CallbackQueryHandler(confirm_link_callback, pattern=r"^pwa_link:"))
     application.add_handler(CommandHandler("help", help_command))
@@ -978,6 +988,7 @@ def main() -> None:
     application.add_handler(CommandHandler("ui", ui_command))
     application.add_handler(CommandHandler("glossary", glossary_command))
     application.add_handler(CommandHandler("literature", literature_command))
+    application.add_handler(MessageHandler(filters.ChatType.PRIVATE & filters.Regex(r"^🌐 Веб-приложение$"), pwa_command))
     application.add_handler(CommandHandler("stats", stats_command))
     application.add_handler(
         MessageHandler(

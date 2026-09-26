@@ -2232,7 +2232,7 @@
       "item_sha256": "e5e348a2505acb2751337eaa733e63a9643aa44484c494c404f57ec3c8d43125",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2242,9 +2242,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Утомление как пример состояния отсутствует в определении; различение временного и устойчивого дано.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2284,7 +2286,7 @@
       "item_sha256": "8a743e733ebf1042fbc052ab3b64bfa0183b6f094cfb5776cf58a2980b15e617",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2294,9 +2296,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Биологическая основа и психодинамика даны; скорость и интенсивность не названы.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2364,7 +2368,7 @@
       "item_sha256": "0f382a7448386ca22cb46ec2b7942ba8dfb68db52fa7af1846c6a3bbd2be0efc",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2374,9 +2378,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Социальная обусловленность и устойчивость даны; формирование в деятельности и общении здесь не описано.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2419,7 +2425,7 @@
       "item_sha256": "d67bc96e76020e287df8b8a0351f3853ef393cdb6d808883e77faa43d158da1b",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2429,9 +2435,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Три класса различаются по функции, состоянию и устойчивости; формулировка вопроса является учебным обобщением.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2579,7 +2587,7 @@
       "item_sha256": "bff138710afdbcac28191c998994d21dee4fce3f081150ba8834e5374ffdd158",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2589,9 +2597,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Определения позволяют различить состояние и свойство, но раздражительность, усталость и работоспособность не разобраны.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2605,7 +2615,7 @@
       "item_sha256": "2eeed98f8f49a2d115d2a3f3891e8f40b6c0ef0cff59a082fc171d80e478e41b",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2615,9 +2625,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Психодинамические особенности названы; быстрые и импульсивные реакции прямо не разобраны.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2631,7 +2643,7 @@
       "item_sha256": "8f84fdc0e963d59136a1f14383fce6c8bf54e72822b709d608fd3cd8df964f13",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2641,9 +2653,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Отношение к делу и людям названо; ответственность и надёжность не приведены как конкретные примеры.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2685,7 +2699,7 @@
       "item_sha256": "1261434c3a28e878eff277efb25737e6588ea5be7877e3b3ae347e47dd9da6c0",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2695,9 +2709,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Память названа процессом, тревожность — состоянием, устойчивые отношения — свойством; внимание как процесс здесь не перечислено.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -3106,7 +3122,7 @@
       "item_sha256": "ac683b4f699651681fb1b4f430adbb2492569e7bb6ceeb65173bad95c8623fdf",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3116,9 +3132,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Различие состояния и свойства дано, но утомление после нагрузки как пример не разобрано.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -3318,7 +3336,7 @@
       "item_sha256": "07be3b493bfc3c314af9c61a333cb4f1c970594e064b8d352cb93ed5bd818ace",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3328,9 +3346,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Из изменчивости состояния и устойчивости свойства следует ограничение вывода о свойстве из разных ситуаций.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -3749,7 +3769,7 @@
       "item_sha256": "8945b9db02cd72c918e6dae368b355d07b8c37169e61960d5c93a3d1c419c17c",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3759,9 +3779,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Передача нервных сигналов описана; связь нейросетей с восприятием, эмоциями и поведением здесь не раскрыта.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -3853,7 +3875,7 @@
       "item_sha256": "ea29b0086959f6e13745d8fb9a25a085a4b56b0fc33e3f0e84d394ed3af1fc2c",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3863,9 +3885,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Передача сигнала в синапсе описана; механизм обучения и опыта здесь не объяснён.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -3905,7 +3929,7 @@
       "item_sha256": "ffe683559e69acbce1f22fd41d4209c4a22b9ab99ef5be4d1275980cde0820ff",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3915,9 +3939,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Автоматическая реакция описана; привычность и скорость закреплённых реакций здесь не раскрыты.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -4063,7 +4089,7 @@
       "item_sha256": "80a82aa15dc8dadbd6787a34be754932ab882e46cbf71428b3ee8ed6fb9cb762",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -4073,9 +4099,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Регуляция органов и гомеостаз определены отдельно; роль ВНС в поддержании гомеостаза не сформулирована.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -4327,7 +4355,7 @@
       "item_sha256": "4104eae19e43784b98979517c0fe8deedbd894d2589f64d178abdaedcaa5256a",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -4337,9 +4365,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: Рефлекторный ответ описан; горячая кружка и временное отношение к осознанию боли здесь не разобраны.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -4486,7 +4516,7 @@
       "item_sha256": "cc234f355239c493f3e939a3f33252fdadba9bf075d200fccc49fb375156fdd9",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -4496,9 +4526,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением. Точечная сверка 27.09.2026: определение рефлекса и стресс-реакции допускает автоматический ответ на раздражитель, но не объясняет вздрагивание и скорость ответа относительно осознания.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5229,7 +5261,7 @@
       "item_sha256": "d0766a5f675187e70c741bc0dcaa20f647c92df284f000ab46cd5ad37be5442d",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "definition",
@@ -5239,12 +5271,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
         "question_reference_is_not_primary_source",
-        "example_is_question_reference"
+        "example_is_question_reference",
+        "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Приём, обработка и передача импульсов даны; утверждение о восприятии, эмоциях и поведении в определении не подтверждено.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5345,7 +5378,7 @@
       "item_sha256": "c88b3024539b7ebf768904c0ac1d4e505bbd93c5d40249a322f35e44a1e4efba",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "definition",
@@ -5355,12 +5388,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
         "question_reference_is_not_primary_source",
-        "example_is_question_reference"
+        "example_is_question_reference",
+        "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Контакт и химическая/электрическая передача даны; регуляция и медиатор в определении не названы.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -7753,7 +7787,7 @@
       "item_sha256": "3a60eeaa7516a8304b966ec10a33807746f23b523a7528bf208305719513928b",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -7763,9 +7797,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает фильтр и ограничение ресурсов, но не связывает фильтрацию с целью деятельности.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -7805,7 +7841,7 @@
       "item_sha256": "f570f12ae9b16fd7b60958300ec5998294e4aed9cc653d42a3f0e9fc325cbd55",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -7815,9 +7851,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий перечисляет три сети внимания, но не объясняет их координацию как механизм.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -7831,7 +7869,7 @@
       "item_sha256": "2520907b060ce8057e1cae25e8bc71615c9bba3432bf912c4d7710ee9c7d3706",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -7845,7 +7883,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Общие сети/контроль описаны, но причинное объяснение конкретной ситуации и переключения между сетями требует более точного фрагмента, чем словарное определение.",
+      "note": "Глоссарий не даёт определения организации поведения. В прочитанном транскрипте лекции 12 (символы 22000:24700) перечислены приобретённые реакции, мышление, состояние и мотивация как факторы поведения; формула вопроса о согласовании уровней требует адресной редакторской проверки этого фрагмента. Source support остаётся частичным.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -7859,7 +7897,7 @@
       "item_sha256": "475dd912b5fa972802a3e0fbfbc1b4c8449abe19d6834c35b88581214e3fb644",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -7873,7 +7911,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Общие сети/контроль описаны, но причинное объяснение конкретной ситуации и переключения между сетями требует более точного фрагмента, чем словарное определение.",
+      "note": "Транскрипт лекции 12 (символы 27600:30700) описывает неопределённость, сравнение альтернатив и выбор; словарный источник не подтверждает эту формулировку, а роль ценности и аффективных механизмов в пояснении требует отдельного точного source review. Source support остаётся частичным.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -7887,7 +7925,7 @@
       "item_sha256": "f2cd7d1b8ef9ba2aca8a8b45d7ddf9dc0a8107851d2b3fc66e4693edaa9b8659",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -7897,9 +7935,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает внутреннюю и самореферентную активность DMN, но не переключение режимов при смене задач.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -7913,7 +7953,7 @@
       "item_sha256": "3b0309645bd9ee4c7f55eeb081b44718965e4220914180e34560a68601700571",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -7927,7 +7967,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Общие сети/контроль описаны, но причинное объяснение конкретной ситуации и переключения между сетями требует более точного фрагмента, чем словарное определение.",
+      "note": "Глоссарий даёт только общие определения сетей. Лекция 13 содержит спорное категоричное утверждение об их несовместной работе (E-PL-24); независимые fMRI-работы PMID 17329432 и 18723676 требуют различать коактивацию и переключение. Пояснение вопроса и точная corpus support ожидают редакторского решения; source support остаётся частичным.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -7941,7 +7981,7 @@
       "item_sha256": "6dd6c23d168c44d8c83f10ea8a0e3aad5ce0f54718288a99eb1b267acb98a237",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -7951,9 +7991,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает подстройку поведения под мнение большинства, но не раскрывает полностью изменение суждения и давление группы.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -7967,7 +8009,7 @@
       "item_sha256": "c65f9488e87bf8376f021ea25c2b8e0516437ccfbb2ed4ceddc3c57a7814e103",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -7977,9 +8019,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает механизмы решений и риск, но не определяет оценку ценности альтернатив.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8016,10 +8060,10 @@
       ]
     },
     "questions:m1_psyf_022": {
-      "item_sha256": "07ea6bdeb22eb7467294e496fdb3c8105fa8198abdc21b200662fbca7dec7c1a",
+      "item_sha256": "f83158108ca327ab8a60cdc6bf368d939323170afe9c0fca895c569565a04ce7",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8029,11 +8073,12 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
-        "high_severity_length_cue"
+        "high_severity_length_cue",
+        "source_support_incomplete"
       ],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "note": "Запись выведена из новых попыток до переработки: выраженная подсказка длиной правильного варианта и неполная поддержка источником. Глоссарий описывает парадигму Dot Probe и сети внимания, но не выводит из них механизм «захвата угрозой» и потерю устойчивого целевого фокуса в данной ситуации. Нужен адресный учебный фрагмент; поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8047,7 +8092,7 @@
       "item_sha256": "c533eebb1d882dd8b13dbb638a8661917af9087838e14d7dc74cd2a5db7b2552",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8057,9 +8102,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение автоматического процесса говорит о непроизвольности и малом усилии, но не объясняет формирование повторением «автоматических дорожек» в консультативной практике. Нужен прямой источник для прикладной формулировки.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8073,7 +8120,7 @@
       "item_sha256": "4f202842ed9746ec068e13e98c8cd33a41e1688706eb13e75ae6ef6f4d9473e1",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8083,9 +8130,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение конформизма и замечание о социальном подкреплении есть, но механизм изменения оценки допустимости и ценности вариантов под давлением группы не раскрыт. Поддержка вывода частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8099,7 +8148,7 @@
       "item_sha256": "611d17603a22433535141c3afecf11339118a3e7ee9fa96db11e17ee6477950b",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -8109,9 +8158,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает фильтр и ресурс внимания, но не приводит конкретный пример чтения на фоне шума.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8177,7 +8228,7 @@
       "item_sha256": "0cab3b72ab380aa459864250044c4ab1485b3fb9555a51c99857197f8bfa9da4",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8187,9 +8238,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Глоссарий перечисляет отдельные области и сети, связанные с выбором, но не устанавливает их взаимодействие как достаточное объяснение конкретного решения. Нужен прямой фрагмент о координации оценки, контроля и эмоций.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8229,7 +8282,7 @@
       "item_sha256": "a181ad88e506ab5af024cb4fc5dfbe131959cc5b5e869fd98c17e9ecbdba96ad",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8239,9 +8292,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Исполнительный контроль описан как подавление рефлекторных реакций, но связь его недостаточной эффективности с импульсивными переключениями и отвлекаемостью здесь не проверена. Поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8281,7 +8336,7 @@
       "item_sha256": "b8e7cbd9de7777ca9066c515007ddeca6c7b679914cac11ab787d024a1fae2b1",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -8291,9 +8346,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает подстройку под большинство, но не подтверждает исходную уверенность в ответе.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8359,7 +8416,7 @@
       "item_sha256": "a546b3084e4b00c825d147970303c0bee63862b60d38dc9159c5f4927d1d5963",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8369,9 +8426,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение конформизма не содержит алгоритма консультационной работы с триггерами, вниманием и осознанным контролем выбора. Прикладной ответ требует отдельного учебного источника; глоссарий подтверждает только тему влияния группы.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8719,7 +8778,7 @@
       "item_sha256": "1ccefcd364be8ff876243d5b2255ec93f3ee748e76e5fbcf49975eac09529f9b",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8729,9 +8788,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Глоссарий различает контроль и автоматические процессы, но не подтверждает вывод о сохранной мотивации при утомлении или перегрузке и ослаблении торможения. Нужен адресный материал об этих условиях.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8801,7 +8862,7 @@
       "item_sha256": "633c16eca3c5f3b6f843d9f3744a0d5d5d3960cde08815490a7defb099d0e58e",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8811,9 +8872,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение исполнительного контроля не позволяет по описанному поведению заключить о временном ослаблении активного торможения при сохранном намерении. Это гипотеза, требующая отдельного учебного основания.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8991,7 +9054,7 @@
       "item_sha256": "20a03a101c4e75b323bacb89f19ed66bf74bb054a45baa302c6f386efa52ccc8",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9001,9 +9064,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Автоматический процесс и исполнительный контроль определены по отдельности; конкуренция привычного паттерна с целевым контролем и её влияние на выбор в прикладной ситуации прямо не описаны. Поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -9017,7 +9082,7 @@
       "item_sha256": "d576cc77feb8c46ec7c5d578edbad8a13798fae11e0b203a4be79aabffcca581",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9027,9 +9092,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Глоссарий перечисляет сети и эвристический выбор, но не даёт прямого объяснения согласованной работы оценки значимости, контроля и мониторинга последствий при неопределённости. Нужен точный source fragment.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -9207,7 +9274,7 @@
       "item_sha256": "d629ab1adaf9a6b4f83461509cd1f13fcb0e5d882890b346978382931026aaa2",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9217,9 +9284,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Модели фильтрации и аттенюатора описаны, но прикладной вывод о роли перегруза и значимости конкурирующих стимулов в ошибке отбора здесь не проверен. Поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -9695,7 +9764,7 @@
       "item_sha256": "c4c8116bad6b8eb1d0a0ff64cebfe586d2d3ba969f47d2e26d19224a02b98575",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "definition",
@@ -9705,12 +9774,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
         "question_reference_is_not_primary_source",
-        "example_is_question_reference"
+        "example_is_question_reference",
+        "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики. Точечная сверка 27.09.2026: Глоссарий описывает модель раннего фильтра; опубликованные определение и пример со ссылкой на вопрос не подтверждены целиком.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -9721,10 +9791,10 @@
       ]
     },
     "questions:m2_exp_001": {
-      "item_sha256": "3820164db3976274bc30fc938070acf2a588cca52eeba1d954e1d925d5c839ae",
+      "item_sha256": "7a9a1888f77498a5bb93b1047b8307109930eb62098cb3ae507de3d528cbf769",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9734,25 +9804,23 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Источник использует операциональное определение как рабочее определение конкретного исследования, но точная связь с процедурой измерения требует более прямого первичного фрагмента.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Извлечённая редакция источника совпала с SHA-256 реестра. Лекция определяет операциональные определения как рабочие для конкретного исследования; прежнее требование измерительной процедуры в вопросе и ключе выходило за этот фрагмент и заменено.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6030:6300"
         }
       ]
     },
     "questions:m2_exp_002": {
       "item_sha256": "11fa3461c1c2495d691b2eaf567fed77479613a0c40e4e8e9d56a28969d1b84d",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9764,21 +9832,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. История определения предмета и психика как регуляция поведения прямо изложены в указанном фрагменте; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5050:5900"
         }
       ]
     },
     "questions:m2_exp_003": {
       "item_sha256": "acc31195c97c75cdf858056b1dca4cd2cbab178d59f17638b494f7e2d2295e0a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9790,13 +9858,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция отдельно называет сосуществование разных школ и направлений полипарадигмальной трактовкой; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20932:21389"
         }
       ]
     },
@@ -9937,8 +10005,8 @@
     "questions:m2_exp_009": {
       "item_sha256": "a0ecba430300cf4945ddaa1cce67837370a5f17a9d6185054a59a93af46b51db",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9950,21 +10018,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент прямо определяет номотетический подход через общие законы и прогнозирование поведения; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26180:26469"
         }
       ]
     },
     "questions:m2_exp_010": {
       "item_sha256": "9a454fbef3ce41f626cd29ab4e630fb15fb07e657c2ebe47ce9dbcf5f32f7dd5",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9976,21 +10044,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент прямо определяет идеографический подход через уникальный случай, контекст и переживания; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26469:26710"
         }
       ]
     },
     "questions:m2_exp_011": {
       "item_sha256": "cfbd6c546b951f532b63e1008169ae3f22d134b403b1f9c415bc126c2b4ee947",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10002,21 +10070,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Подходы не образуют жёсткой дихотомии: лекция прямо допускает качественное построение модели с последующей количественной проверкой и обратный порядок.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26600:27150"
         }
       ]
     },
     "questions:m2_exp_012": {
-      "item_sha256": "8181f7d1fc9683451abc2b6fbb60885fdc7a722650c631a279a542ea13cae30f",
+      "item_sha256": "58793a62db0d5cac305b1118d24211461627333fafbac865615fb6a2f9a0cb7c",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10028,21 +10096,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция прямо задаёт качественное движение от частного к общему и количественное применение общей закономерности к единичному случаю; вариант о движении от гипотез к проверке заменён.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26930:27500"
         }
       ]
     },
     "questions:m2_exp_013": {
       "item_sha256": "afa871d714cf119fb09d0d2ace750f65da4826e0180fae12660ac98f45404ac4",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10054,21 +10122,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. В разборе Милгрэма указаны зафиксированная закономерность и варьирование условий для выявления факторов подчинения.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 29700:30185"
         }
       ]
     },
     "questions:m2_exp_014": {
       "item_sha256": "2e19aacb9f9fa53a0ae33c2aaa0915a3b8c3a452b614f2e81503687c633f2fd5",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10080,21 +10148,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Разбор Милгрэма прямо отличает наблюдаемое подчинение от нераскрытых мотивов и переживаний участников.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 30150:30700"
         }
       ]
     },
     "questions:m2_exp_015": {
       "item_sha256": "ff23c927065ded109eff8e9501902c0fca4e7f004cc363919add57c75e26fda1",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10106,21 +10174,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция перечисляет независимые, зависимые и побочные переменные и контроль последних.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31000:31350"
         }
       ]
     },
     "questions:m2_exp_016": {
       "item_sha256": "f88800eb55a33ef23f70fe46afc2d1bcfb291ff845fdca3feafcd58c5494fd18",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10132,13 +10200,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция прямо противопоставляет классическое исключение субъективных факторов и неклассический их учёт.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31880:32350"
         }
       ]
     },
@@ -10385,8 +10453,8 @@
     "questions:m2_exp_026": {
       "item_sha256": "4df0630fbbb2f89d2869a0eedcdb83be46d05058801f78525cbd051c24a69ae8",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10398,13 +10466,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены waitlist/активный контроль и неоднородность среднего. Это иллюстрации курса; выбор неэффективного контроля требует этического обоснования, а анализ подгрупп — учёта exploratory характера и множественных сравнений.",
+      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика объясняет waitlist: контроль пока не проходит интервенцию, но получает её после исследования; этическое обоснование обсуждается в том же фрагменте.",
       "sources": [
         {
           "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18580:19600"
         }
       ]
     },
@@ -10468,8 +10536,8 @@
     "questions:m2_exp_029": {
       "item_sha256": "450fbdbb7a5067dbf7f74aedb1157602eeabd1d8b95fbae33805f6650529af19",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10481,13 +10549,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены waitlist/активный контроль и неоднородность среднего. Это иллюстрации курса; выбор неэффективного контроля требует этического обоснования, а анализ подгрупп — учёта exploratory характера и множественных сравнений.",
+      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика описывает групповое среднее как первый шаг и предлагает затем исследовать различия отклика участников и подгрупп.",
       "sources": [
         {
           "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 15300:16650"
         }
       ]
     },
@@ -10607,8 +10675,8 @@
     "questions:m2_exp_034": {
       "item_sha256": "5df76ded82ffe20367ee09d2d792c418dc9773b170be3e822d285cd039fee5ea",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10620,21 +10688,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены waitlist/активный контроль и неоднородность среднего. Это иллюстрации курса; выбор неэффективного контроля требует этического обоснования, а анализ подгрупп — учёта exploratory характера и множественных сравнений.",
+      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. В обсуждении этической обязанности помочь участникам waitlist назван вариантом, при котором контрольная группа получает помощь после сравнения.",
       "sources": [
         {
           "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18580:19600"
         }
       ]
     },
     "questions:m2_exp_035": {
       "item_sha256": "acb35f8cd4349e52cc78e2e6a80e9ac4f2395eb103d557fb58f3da8b3f069f7b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10646,21 +10714,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены waitlist/активный контроль и неоднородность среднего. Это иллюстрации курса; выбор неэффективного контроля требует этического обоснования, а анализ подгрупп — учёта exploratory характера и множественных сравнений.",
+      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика приводит пример тренинга креативности в контроле при исследовании помощи с тревогой; вывод о роли другой активности является объяснением дизайна, а не доказанным эффектом.",
       "sources": [
         {
           "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20460:21300"
         }
       ]
     },
     "questions:m2_exp_036": {
-      "item_sha256": "1d796a163c2476703181925a56b9658d11b6a49041d929bb9c9b4192b1c6c907",
+      "item_sha256": "1016b29d49101acf7a972058bb34691b3ae6c7c927922cc1cd84a876a3e7f3a2",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10670,17 +10738,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Воспроизводимость — явный принцип лекции; ссылка объяснения именно на практику требует уточнения.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Извлечённая редакция источника совпала с SHA-256 реестра. Практика №8 прямо обсуждает воспроизводимость результата на других группах и называет повторение репликацией. Вопрос и ключ остались прежними; source claim переведён на фактическую практику.",
       "sources": [
         {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
+          "modified_time": "2026-04-22T20:18:51.271Z",
+          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12380:12900"
         }
       ]
     },
@@ -10715,8 +10781,8 @@
     "questions:m2_exp_038": {
       "item_sha256": "18d7fc062111b75d92d0db6743c7e21e59c879dfaaa4d516d12ad5bef0b878d1",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -10728,13 +10794,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены waitlist/активный контроль и неоднородность среднего. Это иллюстрации курса; выбор неэффективного контроля требует этического обоснования, а анализ подгрупп — учёта exploratory характера и множественных сравнений.",
+      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика прямо связывает степень искажения группового среднего с вариативностью признака и называет некоторые когнитивные показатели примером меньшей вариативности.",
       "sources": [
         {
           "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18000:20500, 20800:23700, 25800:28500"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 21650:22600"
         }
       ]
     },
@@ -11009,8 +11075,8 @@
     "questions:m2_exp_049": {
       "item_sha256": "472fe9ea44f8d19d788b72b4f8d27fb062c64d714f0831df41cb327a8c443996",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11022,21 +11088,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция описывает экспериментально организованную интроспекцию Вундта в контролируемых условиях.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1250:1700"
         }
       ]
     },
     "questions:m2_exp_050": {
-      "item_sha256": "28882d892d50cc02fb34949c3330c42d439241195e820ff8a04acd38a83511ae",
+      "item_sha256": "6c22063738a43ada5cda779474e30c68ef0fd1a07e7d8cc780b7324df421a7a9",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11046,25 +11112,23 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. В лекции указан интерес гештальтпсихологов к законам организации восприятия, мышления и решения задач. Прежний пример ошибки фигуры на фоне не был изложен и заменён прямым вопросом по этому фрагменту.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1660:2240"
         }
       ]
     },
     "questions:m2_exp_051": {
       "item_sha256": "8a687e7fe01a8f049bdc1f115816c1a5a65738d7a0ed7d19326efc8a6fc4c806",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11074,25 +11138,23 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент сопоставляет структуралистское разложение на элементы с гештальт-подходом и прямо формулирует целостность как несводимую к сумме частей.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1674:2260"
         }
       ]
     },
     "questions:m2_exp_052": {
-      "item_sha256": "76b68cfe77dfd1bdf33c93f4fadc9fa5885c82fae211e591408e337f1d818708",
+      "item_sha256": "f1c7c12936b70da386807549539bdf07630e7071459d30979986cadc2d86ad17",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11102,25 +11164,23 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция прямо определяет бихевиористский предмет через наблюдаемое поведение, связи стимулов и реакций и закономерности научения. Не подтверждённое этим фрагментом требование контроля условий убрано.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2780:3330"
         }
       ]
     },
     "questions:m2_exp_053": {
-      "item_sha256": "487c88eb6eec88d84bc0638b0f6eb1e26b9aa561639c7001e0dd1009cfe13252",
+      "item_sha256": "91ae5880e7a5306efe221f095ac44ca283e5d12d808d52a52d614b33d26820f3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11130,25 +11190,23 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция описывает клетки-головоломки Торндайка, награду, ускорение успешного действия и вывод о научении пробами и ошибками. Упоминание закона эффекта удалено как не изложенное в этом фрагменте.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3270:4200"
         }
       ]
     },
     "questions:m2_exp_054": {
-      "item_sha256": "6ac55c745c37790e9e48322f6a7f0cb6faea3e9541b4ff6b653f6629739fe1a6",
+      "item_sha256": "7ce1f07ff7c80f18280cad3c573a40bfdfcd51d946f213ba223b0599b6ede387",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11158,17 +11216,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагменты противопоставляют наблюдаемые стимулы/реакции бихевиоризма бессознательным конфликтам и глубинным мотивационным механизмам психоанализа; формулировка ответа согласована с ними.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2790:3250, 4171:4600"
         }
       ]
     },
@@ -11201,8 +11257,8 @@
     "questions:m2_exp_056": {
       "item_sha256": "503a17e4018a914c9e725c6b702b39561682acdae0da98a814d1b0f5016ff453",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11214,21 +11270,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция перечисляет факты, индукцию, верификацию и ценностную нейтральность позитивистского идеала.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16050:16580"
         }
       ]
     },
     "questions:m2_exp_057": {
       "item_sha256": "a5b9ab0ecc3aea86ff2473ed4564af26d62776fb7cb7baea450bc4d2a38625a3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11240,21 +11296,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент 16852:17401 прямо описывает принцип фальсифицируемости и невозможность окончательно доказать теорию конечным числом подтверждений; ключ и пояснение адресно сверены, исходный вопрос не менялся.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16852:17401"
         }
       ]
     },
     "questions:m2_exp_058": {
-      "item_sha256": "26265ee197b78a244601f8f2e8e112283fdad491db1a6ff80ce2416db29bea1e",
+      "item_sha256": "1a4434b6c3cdb0a1953b675705e04cf8a3adf3fe3d8f86bf851a0aae7cacde28",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11266,21 +11322,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "Полная извлечённая редакция Doc совпала с SHA-256 реестра. Фрагмент 20932:21389 прямо отделяет позицию самого Куна (допарадигмальность) от других трактовок — полипарадигмальности и внепарадигмальности. Вопрос, ключ, дистракторы и пояснение сверены с этим различием; прежнее объединение двух позиций устранено.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20932:21389"
         }
       ]
     },
     "questions:m2_exp_059": {
       "item_sha256": "178fe8ba909c94e60157556e70c5081b3a1be6ca1fd197738260718d263c9842",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11292,13 +11348,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент 21390:22345 описывает исследовательскую программу Лакатоша как жёсткое ядро и изменяемый защитный пояс гипотез; ключ и пояснение адресно сверены, исходный вопрос не менялся.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 21390:22345"
         }
       ]
     },
@@ -11435,8 +11491,8 @@
     "questions:m2_exp_065": {
       "item_sha256": "0c55387187910e77be6c82777744fb70205b53ea21da4e46661d4ff3315dd4ed",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11448,13 +11504,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Общее определение зависимой переменной как измеряемого исхода поддерживает применение к настойчивости в данном учебном примере; сам пример в лекции не приводится.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31100:31350"
         }
       ]
     },
@@ -11877,8 +11933,8 @@
     "questions:m2_exp_082": {
       "item_sha256": "81ba56d03cf4ec1efed1d0a6d0d5194a6bb49a6351aa9ba577fffed067fca0c9",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11890,21 +11946,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Обсуждение прямо различает условия плавания, наблюдения и VR как независимую переменную исследования.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 19000:20000"
         }
       ]
     },
     "questions:m2_exp_083": {
       "item_sha256": "14ede9734cbe8110a234987910751a423293884d62c15c7b71730e338c426b1e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11916,13 +11972,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Описание групп и пред-/постизмерений включает опросник самочувствия, активности и настроения; это измеряемый результат воздействия.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16500:17800"
         }
       ]
     },
@@ -11981,8 +12037,8 @@
     "questions:m2_exp_086": {
       "item_sha256": "34ca6fa2004e8e10e197c9bfef136c73d68dc9ca01c8fb7d54eea67cbb099ce4",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11994,21 +12050,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Разбор указывает узкий возраст VR-группы и прямо ограничивает вывод для людей старше участников этой группы.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 22650:24000"
         }
       ]
     },
     "questions:m2_exp_087": {
       "item_sha256": "ef061e988457815a3a0287207a9db30323a575493a74667ecaf15f41369e8492",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12020,13 +12076,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Практика описывает waitlist в исследовании медитации: группа пока не получает курс, но участвует в тех же замерах и позже получает вмешательство.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 43050:44000"
         }
       ]
     },
@@ -12061,8 +12117,8 @@
     "questions:m2_exp_089": {
       "item_sha256": "6ef9b6a32cfd17d22b97b9179a2119cd5a21d6fc24c9411bbcb9bba6e3a216d6",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12074,21 +12130,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Обсуждение эффекта отсева указывает, что в финальной выборке могут преобладать люди с большей предрасположенностью к медитации; это ограничивает вывод об исходной совокупности.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 58200:59150"
         }
       ]
     },
     "questions:m2_exp_090": {
       "item_sha256": "0521dd6c4e339c09f98cbfb0962f9449c621dcdb45721e8f0d7d34da9ee2fb55",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12100,21 +12156,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Практика отдельно обсуждает повторное применение тех же опросников до и после воздействия и возможность воспроизведения прежних ответов вместо текущего состояния.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 28950:29750"
         }
       ]
     },
     "questions:m2_exp_091": {
       "item_sha256": "c505e91981ae2af01b337a98a10e9ceb7c6f664a149b22ab801a8feeb0cdf36f",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12126,21 +12182,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В исследовании одну группу студентов знакомили с негативным стереотипом об их математических способностях, другую — нет; это манипулируемое условие.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 80000:81300"
         }
       ]
     },
     "questions:m2_exp_092": {
       "item_sha256": "ef22e3a2a0894033f2dfb91ba64c233b089d8f2f04ac910daeee0a21b109d44a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12152,21 +12208,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В дискуссии сказано, что установка авторитетной фигуры может действовать сильнее; перенос этого принципа на преподавателя является возможным выводом, не отдельным измеренным эффектом.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 92900:93800"
         }
       ]
     },
     "questions:m2_exp_093": {
       "item_sha256": "bca67b9e13a38248f3ec3ee6bb3d760ee28dec4e046386da73534c4789769c87",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12178,13 +12234,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В дискуссии рассматриваются низкая самоэффективность и вовлечённость, а также прежний успешный опыт как возможные условия изменения эффекта. Это гипотеза о модераторе, не подтверждённая отдельной проверкой в данной практике.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 88500:90400"
         }
       ]
     },
@@ -12563,8 +12619,8 @@
     "questions:m2_exp_108": {
       "item_sha256": "1a63bdd8e1a69d5159481e9d123521e1400f27e6a09b7a377faafa7e7b8bb7ce",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12576,21 +12632,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Общее определение независимой переменной как фактора воздействия поддерживает применение к формату обучения в данном учебном примере; сам пример в лекции не приводится.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31100:31350"
         }
       ]
     },
     "questions:m2_exp_109": {
-      "item_sha256": "afb33673f3a7cb0ca030900c6459eddf6368b01573656174f69a2e60a233b312",
+      "item_sha256": "66851265d067e44097a39fbebbddc3a1c7f583747408700ece7a6c5c7a495d28",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12600,17 +12656,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Показатель внимания является возможной зависимой переменной, однако stem не сообщает, что именно его измеряют; результат подсказывается единственным измерением среди вариантов.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Извлечённая редакция источника совпала с SHA-256 реестра. Практика №9 обсуждает зависимые переменные как измеряемые показатели. Школьная разминка — авторский учебный пример, не случай из источника; stem теперь явно сообщает, что после урока измеряют внимание.",
       "sources": [
         {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 44300:45200"
         }
       ]
     },
@@ -17974,7 +18028,7 @@
       "item_sha256": "64da4595016dea724b95d57d75afa65aeedc6a91de58f95016e661750825e0cb",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -17989,13 +18043,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 8 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1227:1368"
         }
       ]
     },
@@ -18003,7 +18057,7 @@
       "item_sha256": "31fc91093f0bb24403fa16ed4f60fe788f1da46ee195cc3b367e9ba04b93e8b6",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18018,13 +18072,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 9 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1370:1491"
         }
       ]
     },
@@ -18032,7 +18086,7 @@
       "item_sha256": "6e5845ee40431c43e72757bd10fb648e35cceeabb305303d0cd6ad6fe53c7b14",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18047,13 +18101,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 1 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1:253"
         }
       ]
     },
@@ -18061,7 +18115,7 @@
       "item_sha256": "65b713a24b5957c34abf59c1ec87e2470f838633f42c0748a844403d95ac8a62",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18076,13 +18130,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 25 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4131:4284"
         }
       ]
     },
@@ -18090,7 +18144,7 @@
       "item_sha256": "eef68579e3db9d07d369a6fcf8e2494a76633edc9c8f2c2e5baebbc284f2a833",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18105,13 +18159,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 18 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2855:3037"
         }
       ]
     },
@@ -18119,7 +18173,7 @@
       "item_sha256": "7eb5b8667d11de63b3ad937917ec4f399b426f113cf745be64cdb4d92a49f88c",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18134,13 +18188,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 37 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6311:6489"
         }
       ]
     },
@@ -18177,7 +18231,7 @@
       "item_sha256": "aa1d8986911ee5207f2a808537d5898278a1ad5333ba64c0c884533b435094b0",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18192,13 +18246,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 27 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4428:4601"
         }
       ]
     },
@@ -18232,7 +18286,7 @@
       "item_sha256": "1c268cd75596fde7e0167dc4dea70e1e2e27646e44d0f085572605087761de53",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18247,13 +18301,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 21 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3333:3538"
         }
       ]
     }

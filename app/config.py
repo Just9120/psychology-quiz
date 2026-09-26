@@ -19,6 +19,9 @@ class Settings:
     log_level: str
     db_path: str = field(repr=False)
     mini_app_url: str | None
+    pwa_origin: str | None
+    pwa_student_access_enabled: bool
+    pwa_student_invitee_ids: frozenset[int]
     admin_telegram_ids: frozenset[int]
     miniapp_api_bind: str
     miniapp_api_port: int
@@ -61,6 +64,10 @@ def load_settings() -> Settings:
     log_level = os.getenv("LOG_LEVEL", "INFO").strip() or "INFO"
     db_path = resolve_database_target()
     mini_app_url = os.getenv("MINI_APP_URL", "").strip() or None
+    from app.pwa_promotion import parse_invitee_ids, public_pwa_origin
+    pwa_origin = public_pwa_origin(os.getenv("PWA_ORIGIN", "").strip())
+    pwa_student_access_enabled = os.getenv("PWA_STUDENT_ACCESS_ENABLED", "false").strip().lower() == "true"
+    pwa_student_invitee_ids = parse_invitee_ids(os.getenv("PWA_STUDENT_INVITEE_IDS", ""))
     admin_telegram_ids = _parse_admin_telegram_ids(os.getenv("ADMIN_TELEGRAM_IDS", ""))
     miniapp_api_bind = os.getenv("MINIAPP_API_BIND", "127.0.0.1").strip() or "127.0.0.1"
     miniapp_api_port = int(os.getenv("MINIAPP_API_PORT", "8081"))
@@ -115,6 +122,9 @@ def load_settings() -> Settings:
         log_level=log_level,
         db_path=db_path,
         mini_app_url=mini_app_url,
+        pwa_origin=pwa_origin,
+        pwa_student_access_enabled=pwa_student_access_enabled,
+        pwa_student_invitee_ids=pwa_student_invitee_ids,
         admin_telegram_ids=admin_telegram_ids,
         miniapp_api_bind=miniapp_api_bind,
         miniapp_api_port=miniapp_api_port,

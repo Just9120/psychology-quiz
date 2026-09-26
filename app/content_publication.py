@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 
 from app.case_content import case_error
+from app.source_evidence import locator_precision_review_required
 
 ROOT = Path(__file__).resolve().parent.parent
 CORPUS_ROOT_ID = "119DpAwq3T_9JzlTRMPeB7LX7-vpeO95U"
@@ -16,6 +17,7 @@ LEGACY_SHA256 = "e03468c43558450105c8b3fddd30ed5db432b379e3b49f63b85b4370235dcc1
 KINDS = {"questions", "glossary", "literature"}
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 DRIVE_REF = re.compile(r"^drive:([A-Za-z0-9_-]+)(?:#.+)?$")
+PUBLIC_DRIVE_LINK = re.compile(r"(?i)(?:drive:|https?://(?:www\.)?(?:drive|docs)\.google\.com/)")
 
 
 def fingerprint(item):
@@ -34,11 +36,35 @@ def _date(value):
         return False
 
 
+def _public_text_contains_private_source(kind, item, sources):
+    # Provenance is reviewed in source_ref(s), but those fields are never
+    # projected to clients. Scan the content that may actually be displayed.
+    visible = {key: value for key, value in item.items()
+               if key not in {"source_ref", "source_refs", "source"}}
+    if kind == "literature" and isinstance(item.get("source"), dict):
+        visible["source"] = {key: item["source"].get(key)
+                             for key in ("title", "locator", "citation")}
+    known_ids = {source_id for source_id in sources if len(source_id) >= 20}
+    known_ids.add(CORPUS_ROOT_ID)
+    pending = [visible]
+    while pending:
+        value = pending.pop()
+        if isinstance(value, dict):
+            pending.extend(value.values())
+        elif isinstance(value, list):
+            pending.extend(value)
+        elif isinstance(value, str) and (PUBLIC_DRIVE_LINK.search(value)
+                                         or any(source_id in value for source_id in known_ids)):
+            return True
+    return False
+
+
 @dataclass(frozen=True)
 class PublicationPolicy:
     legacy: dict
     sources: dict
     reviews: dict
+    quality_reviews: dict | None = None
 
     def is_legacy(self, kind, item):
         return self.legacy.get(f"{kind}:{item.get('id')}") == fingerprint(item)
@@ -46,11 +72,34 @@ class PublicationPolicy:
     def error(self, kind, item):
         if kind not in KINDS:
             return "unknown_derivative_kind"
+        if item.get("status") == "approved" and _public_text_contains_private_source(kind, item, self.sources):
+            return "private_source_in_public_content"
         if kind == "questions":
             invalid_case = case_error(item)
             if invalid_case:
                 return invalid_case
+            if item.get("status") == "approved" and not _text(item.get("explanation")):
+                return "explanation_required"
         if self.is_legacy(kind, item):
+            if kind in {"questions", "glossary"}:
+                # The frozen fingerprint preserves the old publication, but
+                # cannot certify it against a later corpus revision.
+                quality = (self.quality_reviews or {}).get(f"{kind}:{item.get('id')}")
+                if (not isinstance(quality, dict)
+                        or quality.get("item_sha256") != fingerprint(item)
+                        or not isinstance(quality.get("sources"), list)
+                        or not quality["sources"]):
+                    return "legacy_source_review_required"
+                for ref in quality["sources"]:
+                    if not isinstance(ref, dict) or not _text(ref.get("source_id")):
+                        return "legacy_source_review_required"
+                    source = self.sources.get(ref.get("source_id"))
+                    if (not isinstance(source, dict) or source.get("readable") is not True
+                            or source.get("kind") != "learning_material"):
+                        return "legacy_source_review_required"
+                    if (ref.get("modified_time") != source.get("modified_time")
+                            or ref.get("snapshot_sha256") != source.get("snapshot_sha256")):
+                        return "legacy_source_revision_changed_since_review"
             return None
         if item.get("status") != "approved":
             return None  # Preparation is permitted; the loader does not publish it.
@@ -83,6 +132,8 @@ class PublicationPolicy:
                 return "source_revision_changed_since_review"
             if not _text(ref.get("locator")):
                 return "source_locator_required"
+            if purpose == "learning_content" and locator_precision_review_required(ref["locator"]):
+                return "source_locator_needs_precision"
         refs = [item.get("source_ref")] if kind == "questions" else item.get("source_refs")
         if not isinstance(refs, list) or not refs:
             return "direct_corpus_sources_required"
@@ -94,10 +145,46 @@ class PublicationPolicy:
             claimed_ids.add(match.group(1))
         if claimed_ids != reviewed_ids:
             return "unreviewed_source_reference"
+        if purpose == "learning_content":
+            quality = (self.quality_reviews or {}).get(f"{kind}:{item.get('id')}")
+            if not isinstance(quality, dict):
+                return "learning_quality_review_required"
+            if quality.get("item_sha256") != fingerprint(item):
+                return "learning_quality_changed_since_review"
+            required_checks = ({"meaning", "definition", "examples", "ambiguity", "duplicates", "sources"}
+                               if kind == "glossary" else
+                               {"meaning", "answer", "explanation", "ambiguity", "duplicates", "sources"})
+            checks = quality.get("checks")
+            if (quality.get("source_support") != "supported"
+                    or quality.get("meaning") != "consistent"
+                    or quality.get("issues") != []
+                    or not _text(quality.get("note"))
+                    or not _text(quality.get("reviewer"))
+                    or not _date(quality.get("reviewed_at"))
+                    or not isinstance(checks, list)
+                    or len(checks) != len(required_checks)
+                    or any(not isinstance(check, str) for check in checks)
+                    or set(checks) != required_checks):
+                return "learning_quality_not_approved"
+            quality_sources = quality.get("sources")
+            if (not isinstance(quality_sources, list)
+                    or len(quality_sources) != len(reviewed_ids)
+                    or any(not isinstance(ref, dict) or not _text(ref.get("source_id"))
+                           for ref in quality_sources)
+                    or {ref["source_id"] for ref in quality_sources} != reviewed_ids):
+                return "learning_quality_sources_mismatch"
+            for ref in quality_sources:
+                source = self.sources[ref["source_id"]]
+                if (ref.get("snapshot_sha256") != source.get("snapshot_sha256")
+                        or ref.get("modified_time") != source.get("modified_time")
+                        or not _text(ref.get("locator"))):
+                    return "learning_quality_source_stale"
+                if locator_precision_review_required(ref["locator"]):
+                    return "learning_quality_locator_needs_precision"
         return None
 
     def can_publish(self, kind, item):
-        return self.is_legacy(kind, item) or (item.get("status") == "approved" and self.error(kind, item) is None)
+        return item.get("status") == "approved" and self.error(kind, item) is None
 
 
 @lru_cache(maxsize=1)
@@ -109,9 +196,12 @@ def load_policy():
     legacy = baseline["items"]
     registry = json.loads((ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
     reviews = json.loads((ROOT / "content/publication-reviews.json").read_text(encoding="utf-8"))
+    quality = json.loads((ROOT / "content/learning-quality-reviews.json").read_text(encoding="utf-8"))
     if (not isinstance(registry, dict) or not isinstance(reviews, dict)
+            or not isinstance(quality, dict)
             or registry.get("schema_version") != 1 or registry.get("corpus_root_id") != CORPUS_ROOT_ID
-            or reviews.get("schema_version") != 1 or not isinstance(reviews.get("items"), dict)):
+            or reviews.get("schema_version") != 1 or not isinstance(reviews.get("items"), dict)
+            or quality.get("schema_version") != 1 or not isinstance(quality.get("items"), dict)):
         raise ValueError("Invalid publication registry")
     sources = {}
     for source in registry.get("sources", []):
@@ -126,7 +216,7 @@ def load_policy():
                 or SHA256.fullmatch(source["snapshot_sha256"]) is None):
             raise ValueError("Incomplete corpus source review")
         sources[source["id"]] = source
-    return PublicationPolicy(legacy, sources, reviews["items"])
+    return PublicationPolicy(legacy, sources, reviews["items"], quality["items"])
 
 
 def validate_publications(kind):

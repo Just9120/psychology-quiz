@@ -13,7 +13,8 @@ def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     assert len(items) == 130
     assert len({item['work_id'] for item in items}) == 114
     assert len({item['topic_id'] for item in items}) == 12
-    assert len({item['source']['id'] for item in items}) == 14
+    assert all(set(item['source']) == {'title', 'locator', 'citation'} for item in items)
+    assert all(item['source']['title'] and item['source']['citation'] for item in items)
     legacy_ids = {key.split(':', 1)[1] for key in load_policy().legacy if key.startswith('literature:')}
     assert len(legacy_ids) == 42
     assert legacy_ids <= {item['id'] for item in items}

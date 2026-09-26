@@ -2014,6 +2014,150 @@
         }
       ],
       "rationale": "Авторский вымышленный сценарий, а не пересказ клиента или копия исходника. В рамках заданных условий первичным действием выбрано прояснение запроса; срочные и неизвестные обстоятельства прямо ограничивают вывод. Разобраны все четыре варианта. Публикация одного кейса и точного source locator отдельно разрешена пользователем 25.09.2026; клиническая/SME сертификация не заявлена."
+    },
+    "questions:m2_exp_058": {
+      "decision": "approved",
+      "item_sha256": "1a4434b6c3cdb0a1953b675705e04cf8a3adf3fe3d8f86bf851a0aae7cacde28",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20932:21389"
+        }
+      ],
+      "rationale": "Исправлена смешанная атрибуция: сам Кун называл психологию допарадигмальной, тогда как полипарадигмальность и внепарадигмальность в этой лекции приведены как другие позиции. Новый вопрос и пояснение проверены по точному фрагменту Doc, SHA-256 текущего извлечённого текста совпал с реестром."
+    },
+    "questions:m2_exp_012": {
+      "decision": "approved",
+      "item_sha256": "58793a62db0d5cac305b1118d24211461627333fafbac865615fb6a2f9a0cb7c",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26930:27500"
+        }
+      ],
+      "rationale": "Исправлен ключ о направлении вывода в качественном и количественном подходах по адресному фрагменту лекции; прежний вариант не соответствовал объяснению. Старая edition для истории сохранена."
+    },
+    "questions:m2_exp_053": {
+      "decision": "approved",
+      "item_sha256": "91ae5880e7a5306efe221f095ac44ca283e5d12d808d52a52d614b33d26820f3",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3270:4200"
+        }
+      ],
+      "rationale": "Лекция описывает клетки-головоломки Торндайка, награду, ускорение успешного действия и вывод о научении пробами и ошибками. Упоминание закона эффекта удалено как не изложенное в этом фрагменте. Прежняя edition и ответы остаются неизменными."
+    },
+    "questions:m2_exp_054": {
+      "decision": "approved",
+      "item_sha256": "7ce1f07ff7c80f18280cad3c573a40bfdfcd51d946f213ba223b0599b6ede387",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2790:3250, 4171:4600"
+        }
+      ],
+      "rationale": "Фрагменты противопоставляют наблюдаемые стимулы/реакции бихевиоризма бессознательным конфликтам и глубинным мотивационным механизмам психоанализа; формулировка ответа согласована с ними. Прежняя edition и ответы остаются неизменными."
+    },
+    "questions:m2_exp_050": {
+      "decision": "approved",
+      "item_sha256": "6c22063738a43ada5cda779474e30c68ef0fd1a07e7d8cc780b7324df421a7a9",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1660:2240"
+        }
+      ],
+      "rationale": "В лекции указан интерес гештальтпсихологов к законам организации восприятия, мышления и решения задач. Прежний пример ошибки фигуры на фоне не был изложен и заменён прямым вопросом по этому фрагменту. Прежние ответы и snapshots не изменяются."
+    },
+    "questions:m2_exp_052": {
+      "decision": "approved",
+      "item_sha256": "f1c7c12936b70da386807549539bdf07630e7071459d30979986cadc2d86ad17",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2780:3330"
+        }
+      ],
+      "rationale": "Лекция прямо определяет бихевиористский предмет через наблюдаемое поведение, связи стимулов и реакций и закономерности научения. Не подтверждённое этим фрагментом требование контроля условий убрано. Прежние ответы и snapshots не изменяются."
+    },
+    "questions:m2_exp_001": {
+      "decision": "approved",
+      "item_sha256": "7a9a1888f77498a5bb93b1047b8307109930eb62098cb3ae507de3d528cbf769",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6030:6300"
+        }
+      ],
+      "rationale": "Лекция определяет операциональные определения как рабочие для конкретного исследования; прежнее требование измерительной процедуры в вопросе и ключе выходило за этот фрагмент и заменено. Сохранённые попытки не переписываются."
+    },
+    "questions:m2_exp_036": {
+      "decision": "approved",
+      "item_sha256": "1016b29d49101acf7a972058bb34691b3ae6c7c927922cc1cd84a876a3e7f3a2",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
+          "modified_time": "2026-04-22T20:18:51.271Z",
+          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12380:12900"
+        }
+      ],
+      "rationale": "Практика №8 прямо обсуждает воспроизводимость результата на других группах и называет повторение репликацией. Вопрос и ключ остались прежними; source claim переведён на фактическую практику. Сохранённые попытки не переписываются."
+    },
+    "questions:m2_exp_109": {
+      "decision": "approved",
+      "item_sha256": "66851265d067e44097a39fbebbddc3a1c7f583747408700ece7a6c5c7a495d28",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 44300:45200"
+        }
+      ],
+      "rationale": "Практика №9 обсуждает зависимые переменные как измеряемые показатели. Школьная разминка — авторский учебный пример, не случай из источника; stem теперь явно сообщает, что после урока измеряют внимание. Сохранённые попытки не переписываются."
     }
   }
 }

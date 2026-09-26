@@ -34,9 +34,6 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
         raise InventoryError("source_not_in_current_inventory")
     revision = [item["modified_time"], item["title"], item["mime_type"]]
     previous = prior.get(source_id)
-    if (isinstance(previous, dict) and previous.get("review_state") == "processed"
-            and tuple(previous.get("revision", ())) == tuple(revision)):
-        raise InventoryError("source_revision_already_processed")
     if (isinstance(previous, dict) and previous.get("review_state") == "conflict"
             and tuple(previous.get("revision", ())) == tuple(revision)):
         raise InventoryError("source_revision_has_unresolved_conflict")
@@ -60,13 +57,32 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
     if (bytes_read != before.st_size or before.st_size != after.st_size
             or before.st_mtime_ns != after.st_mtime_ns):
         raise InventoryError("source_content_changed_during_capture")
+    captured_digest = digest.hexdigest()
+    if (isinstance(previous, dict) and previous.get("review_state") == "processed"
+            and tuple(previous.get("revision", ())) == tuple(revision)
+            and previous.get("snapshot_kind") == snapshot_kind
+            and previous.get("snapshot_sha256") == captured_digest):
+        raise InventoryError("source_revision_already_processed")
     updated = dict(prior)
-    updated[source_id] = {
+    record = {
         "revision": revision,
         "review_state": "pending_review",
         "snapshot_kind": snapshot_kind,
-        "snapshot_sha256": digest.hexdigest(),
+        "snapshot_sha256": captured_digest,
     }
+    if isinstance(previous, dict):
+        if previous.get("review_state") == "conflict":
+            record["conflict_hold"] = {
+                "reason": previous["reason"],
+                "locator": previous.get("locator"),
+                "related_source_ids": previous.get("related_source_ids", []),
+            }
+        elif previous.get("review_state") == "pending_review" and "conflict_hold" in previous:
+            record["conflict_hold"] = previous["conflict_hold"]
+    updated[source_id] = record
+    # A legacy/incomplete conflict record must not become a pending review
+    # whose hold can later be cleared without its original evidence.
+    processing_status(snapshot, updated)
     return updated
 
 

@@ -11,6 +11,8 @@ from scripts import seed_questions
 
 def reviewed(kind="questions", source_kind="learning_material"):
     item = {"id": "fixture", "status": "approved", "question": "Synthetic material"}
+    if kind == "questions":
+        item["explanation"] = "Synthetic explanation"
     item["source_ref" if kind == "questions" else "source_refs"] = "drive:fixture#page-1" if kind == "questions" else ["drive:fixture#page-1"]
     source = {"id": "fixture", "kind": source_kind, "readable": True,
               "snapshot_sha256": "a" * 64, "modified_time": "2026-09-20T00:00:00Z"}
@@ -19,7 +21,16 @@ def reviewed(kind="questions", source_kind="learning_material"):
               "reviewer": "fixture-reviewer", "reviewed_at": "2026-09-20",
               "sources": [{"source_id": "fixture", "snapshot_sha256": "a" * 64,
                            "modified_time": source["modified_time"], "locator": "page 1"}]}
-    policy = publication.PublicationPolicy({}, {"fixture": source}, {f"{kind}:fixture": review})
+    quality = {"item_sha256": publication.fingerprint(item), "source_support": "supported",
+               "meaning": "consistent", "issues": [], "note": "Synthetic item matches the source",
+               "reviewer": "fixture-reviewer", "reviewed_at": "2026-09-20",
+               "checks": (["meaning", "definition", "examples", "ambiguity", "duplicates", "sources"]
+                          if kind == "glossary" else
+                          ["meaning", "answer", "explanation", "ambiguity", "duplicates", "sources"]),
+               "sources": copy.deepcopy(review["sources"])}
+    policy = publication.PublicationPolicy({}, {"fixture": source},
+                                           {f"{kind}:fixture": review},
+                                           {f"{kind}:fixture": quality})
     return item, source, review, policy
 
 
@@ -52,8 +63,106 @@ def test_exact_review_of_readable_learning_material_allows_publication(kind):
     assert policy.can_publish(kind, dict(reversed(list(item.items()))))
 
 
+@pytest.mark.parametrize("explanation", [None, "", "  "])
+def test_new_approved_question_requires_an_explanation_at_publication_boundary(explanation):
+    item, _, review, policy = reviewed()
+    item["explanation"] = explanation
+    review["item_sha256"] = publication.fingerprint(item)
+    policy.quality_reviews["questions:fixture"]["item_sha256"] = review["item_sha256"]
+    assert policy.error("questions", item) == "explanation_required"
+    assert not policy.can_publish("questions", item)
+
+
+@pytest.mark.parametrize("kind,field,text", [
+    ("questions", "explanation", "Source: drive:private-file-id"),
+    ("glossary", "definition", "See https://docs.google.com/document/d/private-file-id"),
+    ("literature", "citation", "https://drive.google.com/file/d/private-file-id"),
+])
+def test_approved_public_text_cannot_expose_a_drive_location(kind, field, text):
+    item, _, review, policy = reviewed(kind)
+    if kind == "literature":
+        item["source"] = {"id": "private-file-id", "title": "Reading list",
+                          "locator": "Entry 1", "citation": text}
+    else:
+        item[field] = text
+    digest = publication.fingerprint(item)
+    review["item_sha256"] = digest
+    policy.quality_reviews[f"{kind}:fixture"]["item_sha256"] = digest
+    assert policy.error(kind, item) == "private_source_in_public_content"
+    assert not policy.can_publish(kind, item)
+
+
+def test_frozen_legacy_fingerprint_cannot_bypass_public_source_boundary():
+    item, _, _, policy = reviewed()
+    item["question"] = "Read source 1PrivateDriveFileIdentifier2345678"
+    policy.sources["1PrivateDriveFileIdentifier2345678"] = policy.sources["fixture"]
+    policy.legacy["questions:fixture"] = publication.fingerprint(item)
+    assert policy.error("questions", item) == "private_source_in_public_content"
+    assert not policy.can_publish("questions", item)
+
+
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
+@pytest.mark.parametrize("failure", ["missing_quality", "changed_item_review", "changed_source", "missing_source"])
+def test_frozen_legacy_learning_item_stops_when_source_evidence_is_stale(kind, failure):
+    item, source, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    assert policy.can_publish(kind, item)
+    quality = policy.quality_reviews[f"{kind}:fixture"]
+    if failure == "missing_quality":
+        policy.quality_reviews.clear()
+        expected = "legacy_source_review_required"
+    elif failure == "changed_item_review":
+        quality["item_sha256"] = "b" * 64
+        expected = "legacy_source_review_required"
+    elif failure == "changed_source":
+        source["snapshot_sha256"] = "b" * 64
+        expected = "legacy_source_revision_changed_since_review"
+    else:
+        del policy.sources["fixture"]
+        expected = "legacy_source_review_required"
+    assert policy.error(kind, item) == expected
+    assert not policy.can_publish(kind, item)
+
+
+def test_private_bibliography_source_id_is_not_treated_as_display_text():
+    item, _, review, policy = reviewed("literature", "bibliography")
+    item["source"] = {"id": "1PrivateDriveFileIdentifier2345678",
+                      "title": "Reading list", "locator": "Entry 1", "citation": "Book entry"}
+    policy.sources[item["source"]["id"]] = policy.sources["fixture"]
+    review["item_sha256"] = publication.fingerprint(item)
+    assert policy.can_publish("literature", item)
+
+
+@pytest.mark.parametrize("failure", ["missing", "partial", "ambiguous", "stale_item",
+                                      "stale_source", "wrong_source", "missing_checks",
+                                      "broad_locator"])
+def test_new_learning_content_requires_current_supported_quality_review(failure):
+    item, _, _, policy = reviewed()
+    quality = policy.quality_reviews["questions:fixture"]
+    if failure == "missing":
+        policy.quality_reviews.clear()
+    elif failure == "partial":
+        quality["source_support"] = "partial"
+    elif failure == "ambiguous":
+        quality["meaning"] = "ambiguous"
+    elif failure == "stale_item":
+        quality["item_sha256"] = "b" * 64
+    elif failure == "stale_source":
+        quality["sources"][0]["snapshot_sha256"] = "b" * 64
+    elif failure == "wrong_source":
+        quality["sources"][0]["source_id"] = "other"
+    elif failure == "broad_locator":
+        quality["sources"][0]["locator"] = (
+            "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
+        )
+    else:
+        quality["checks"].remove("sources")
+    assert policy.error("questions", item)
+    assert not policy.can_publish("questions", item)
+
+
 @pytest.mark.parametrize("failure", ["changed_item", "changed_source", "changed_revision", "unreadable", "missing_source",
-                                      "no_locator", "no_reviewer", "no_date", "wrong_purpose", "rejected", "duplicate", "empty"])
+                                      "no_locator", "broad_locator", "no_reviewer", "no_date", "wrong_purpose", "rejected", "duplicate", "empty"])
 def test_review_does_not_survive_missing_or_changed_evidence(failure):
     item, source, review, policy = reviewed()
     if failure == "changed_item": item["question"] = "Different material"
@@ -62,6 +171,8 @@ def test_review_does_not_survive_missing_or_changed_evidence(failure):
     if failure == "unreadable": source["readable"] = False
     if failure == "missing_source": policy.sources.clear()
     if failure == "no_locator": review["sources"][0]["locator"] = ""
+    if failure == "broad_locator":
+        review["sources"][0]["locator"] = "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
     if failure == "no_reviewer": review["reviewer"] = ""
     if failure == "no_date": review["reviewed_at"] = ""
     if failure == "wrong_purpose": review["purpose"] = "bibliographic_metadata"
@@ -95,12 +206,17 @@ def test_current_legacy_counts_preserved_without_source_certification():
     assert len(policy.legacy) == 716
     assert sum(review["purpose"] == "bibliographic_metadata" for review in policy.reviews.values()) == 130
     learning_reviews = {key for key, review in policy.reviews.items() if review["purpose"] == "learning_content"}
-    assert learning_reviews == {"questions:m1_vnd_002", "questions:m2_exp_040", "glossary:dopamine",
-                                "questions:case_first_consultation_001"}
+    assert learning_reviews == {
+        "questions:m1_vnd_002", "questions:m2_exp_040", "glossary:dopamine",
+        "questions:case_first_consultation_001",
+        "questions:m2_exp_001", "questions:m2_exp_012", "questions:m2_exp_036",
+        "questions:m2_exp_050", "questions:m2_exp_052", "questions:m2_exp_053",
+        "questions:m2_exp_054", "questions:m2_exp_058", "questions:m2_exp_109",
+    }
     assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 14
     # Reading learning sources for an audit must not silently approve derivatives.
     assert any(source["kind"] == "learning_material" for source in policy.sources.values())
-    for kind, expected in [("questions", 576), ("glossary", 99), ("literature", 130)]:
+    for kind, expected in [("questions", 575), ("glossary", 99), ("literature", 130)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected
@@ -133,7 +249,8 @@ def test_actual_runtime_loader_excludes_unreviewed_new_content(tmp_path, monkeyp
 def test_registry_corruption_fails_closed(tmp_path, monkeypatch, failure):
     target = tmp_path / "content"
     target.mkdir()
-    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json"):
+    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json",
+                     "learning-quality-reviews.json"):
         shutil.copyfile(publication.ROOT / "content" / filename, target / filename)
     filename = "legacy-publication-baseline.json" if failure == "legacy_append" else "source-corpus.json"
     path = target / filename
@@ -156,7 +273,8 @@ def test_checkout_line_endings_do_not_change_frozen_baseline(tmp_path, monkeypat
     expected = publication.load_policy().legacy
     target = tmp_path / "content"
     target.mkdir()
-    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json"):
+    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json",
+                     "learning-quality-reviews.json"):
         original = (publication.ROOT / "content" / filename).read_text(encoding="utf-8")
         (target / filename).write_bytes(original.replace("\n", "\r\n").encode("utf-8"))
     monkeypatch.setattr(publication, "ROOT", tmp_path)

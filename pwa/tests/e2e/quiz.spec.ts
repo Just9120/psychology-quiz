@@ -3,18 +3,12 @@ import { expect, test, type Page } from '@playwright/test'
 const backend = 'http://127.0.0.1:8085'
 const email = 'owner@example.test', password = 'A synthetic browser passphrase'
 
-test('guest demo has exactly theory, term and case without account state', async ({ page }) => {
+test('owner-only PWA offers no guest demo or learning state', async ({ page }) => {
   await page.goto('/')
-  await page.getByRole('button', { name: 'Посмотреть демонстрацию' }).click()
-  await expect(page.getByRole('heading', { name: 'Три задания' })).toBeVisible()
-  for (const heading of ['Теория', 'Термин', 'Кейс']) {
-    await expect(page.locator('.quiz-card .eyebrow')).toContainText(heading)
-    await page.getByRole('radio').first().check()
-    await page.getByRole('button', { name: 'Проверить ответ' }).click()
-    await expect(page.getByText('Верный вариант:', { exact: false })).toBeVisible()
-    await page.getByRole('button', { name: heading === 'Кейс' ? 'Завершить' : 'Следующее задание' }).click()
-  }
-  await expect(page.getByRole('heading', { name: 'Демонстрация завершена' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Войти в пространство' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Посмотреть демонстрацию' })).toHaveCount(0)
+  await expect(page.getByText('Веб-приложение доступно только владельцу.')).toBeVisible()
+  expect((await page.request.get('/web/demo/items')).status()).toBe(404)
   expect((await page.request.get('/web/progress/overview')).status()).toBe(401)
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })

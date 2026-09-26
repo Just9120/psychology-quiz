@@ -88,6 +88,12 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
     for item in raw:
         if not isinstance(item, dict):
             return None
+        # Drafts may keep their provenance in the private review workspace.
+        # Only an approved item that passes the publication gate is loaded.
+        if item.get("status") != "approved":
+            continue
+        if not publication.can_publish("glossary", item):
+            continue
         entry_id = item.get("id")
         entry_topic_id = item.get("topic_id")
         term = item.get("term")
@@ -102,8 +108,6 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
             return None
         if entry_topic_id != topic_id or aliases is None or examples is None or source_refs is None or confusable_with is None:
             return None
-        if not publication.can_publish("glossary", item):
-            continue
         entries.append(
             GlossaryEntry(
                 id=entry_id.strip(),

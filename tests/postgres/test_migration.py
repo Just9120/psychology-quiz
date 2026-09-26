@@ -10,10 +10,11 @@ import pytest
 from app.database import IntegrityError, OperationalError, PostgresConnection
 from app.db import get_connection, create_or_load_user, get_owner_stats, upsert_approved_questions
 from app.postgres_import import import_snapshot
+from app.postgres_recovery import manifest, verify_user_state
 from app.postgres_schema import initialize_schema, verify_schema, table_columns
 from app.quiz_service import answer_quiz, prepare_quiz, start_prepared_quiz
 from app.web_auth import AuthError, WebAuth, digest
-from tests.test_attempt_content import make_attempt, NEW
+from tests.test_attempt_content import make_attempt, populate_extended_user_state, NEW, OTHER
 from tests.test_web_auth import EMAIL, PASSWORD, SETTINGS, Mailbox, post, login
 
 
@@ -47,6 +48,14 @@ def test_every_row_identity_sequence_and_snapshot_survive_import(source, pg_targ
         assert 'Original question?' in original
     with pytest.raises(ValueError, match='changed'):
         import_snapshot(source, pg_target)
+
+
+def test_rebuilding_approved_content_preserves_all_current_user_state(bank):
+    with closing(get_connection(bank)) as conn, conn:
+        populate_extended_user_state(conn)
+        before = manifest(conn)
+        upsert_approved_questions(conn, [NEW, OTHER], authoritative=True)
+        verify_user_state(before, manifest(conn))
 
 
 @pytest.mark.parametrize('damage', ['extra-column', 'missing-table', 'corrupt-snapshot', 'foreign-key'])

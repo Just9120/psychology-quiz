@@ -10,8 +10,10 @@ from fastapi.testclient import TestClient
 import pytest
 
 from app.auth_schema import migrate_auth_schema
+from app.invitation_schema import migrate_invitation_schema
+from app.pwa_promotion import INVITATION_TTL, claim_first_offer, issue_invitation
 from app.identity_schema import migrate_identity_schema
-from app.db import get_connection
+from app.db import create_or_load_user, get_connection
 from app.miniapp_fastapi import create_app
 from app.quiz_service import answer_quiz
 from app.web_auth import AuthError, WebAuth, IDLE_TTL, SESSION_TTL
@@ -39,9 +41,10 @@ class Mailbox:
 
 @pytest.fixture
 def web(bank):
-    with closing(get_connection(str(bank))) as conn:
+    with closing(get_connection(str(bank))) as conn, conn:
         migrate_identity_schema(conn)
         migrate_auth_schema(conn)
+        migrate_invitation_schema(conn)
     now = [1800000000]
     mailbox = Mailbox()
     app = create_app(db_path=str(bank), bot_token=TOKEN, web_settings=SETTINGS, web_mailer=mailbox, web_clock=lambda: now[0])
@@ -67,6 +70,69 @@ def login(web):
     response = post(web, 'auth/login', {'email': EMAIL, 'password': PASSWORD})
     assert response.status_code == 200
     return web.client.get('/web/auth/me').json()['csrf_token']
+
+
+def test_invited_student_requires_both_email_and_invited_telegram_actor(web):
+    student_email = 'student@example.test'
+    student_settings = replace(SETTINGS, student_access_enabled=True)
+    app = create_app(db_path=str(web.db), bot_token=TOKEN, web_settings=student_settings,
+                     web_mailer=web.mailbox, web_clock=lambda: web.now[0])
+    with closing(get_connection(str(web.db))) as conn, conn:
+        assert claim_first_offer(conn, 42, now=web.now[0])
+        assert not claim_first_offer(conn, 42, now=web.now[0])
+        invitation = issue_invitation(conn, 42, now=web.now[0])
+        assert invitation and invitation not in '\n'.join(conn.iterdump())
+    with TestClient(app, base_url=ORIGIN) as client:
+        student = SimpleNamespace(client=client)
+        assert post(student, 'auth/register', {'email': student_email}).status_code == 200
+        assert web.mailbox.messages == []
+        assert post(student, 'auth/register', {'email': student_email, 'invitation': invitation}).status_code == 200
+        proof = web.mailbox.messages[-1][2]
+        assert post(student, 'auth/verify', {'token': proof, 'password': PASSWORD}).status_code == 200
+        assert post(student, 'auth/verify', {'token': proof, 'password': PASSWORD}).status_code == 400
+        assert post(student, 'auth/register', {'email': 'other@example.test', 'invitation': invitation}).status_code == 200
+        assert len(web.mailbox.messages) == 1
+        assert post(student, 'auth/login', {'email': student_email, 'password': PASSWORD}).status_code == 200
+        account = client.get('/web/auth/me').json()
+        assert account['role'] == 'student' and account['needs_identity']
+        csrf = account['csrf_token']
+        assert post(student, 'identity/new', csrf=csrf).status_code == 403
+        code = post(student, 'link/start', csrf=csrf).json()['code']
+        with pytest.raises(AuthError, match='identity_unavailable'):
+            app.state.web_auth.propose_telegram_link(code, SimpleNamespace(id=999, username=None, first_name=None, last_name=None))
+        app.state.web_auth.propose_telegram_link(code, SimpleNamespace(id=42, username=None, first_name='Original user', last_name=None))
+        app.state.web_auth.confirm_telegram_link(code, 42)
+        assert post(student, 'link/complete', csrf=csrf).status_code == 200
+        assert client.get('/web/auth/me').json()['needs_identity'] is False
+
+
+def test_expired_invitation_does_not_send_registration_mail(web):
+    settings = replace(SETTINGS, student_access_enabled=True)
+    app = create_app(db_path=str(web.db), bot_token=TOKEN, web_settings=settings,
+                     web_mailer=web.mailbox, web_clock=lambda: web.now[0])
+    with closing(get_connection(str(web.db))) as conn, conn:
+        invitation = issue_invitation(conn, 42, now=web.now[0])
+    web.now[0] += INVITATION_TTL + 1
+    with TestClient(app, base_url=ORIGIN) as client:
+        assert post(SimpleNamespace(client=client), 'auth/register',
+                    {'email': 'student@example.test', 'invitation': invitation}).status_code == 200
+    assert web.mailbox.messages == []
+
+
+def test_one_email_cannot_be_reserved_by_two_telegram_invitations(web):
+    student_email = 'student@example.test'
+    with closing(get_connection(str(web.db))) as conn, conn:
+        create_or_load_user(conn, 43, None, 'Other student', None)
+        first = issue_invitation(conn, 42, now=web.now[0])
+        second = issue_invitation(conn, 43, now=web.now[0])
+    student_app = create_app(db_path=str(web.db), bot_token=TOKEN,
+                             web_settings=replace(SETTINGS, student_access_enabled=True),
+                             web_mailer=web.mailbox, web_clock=lambda: web.now[0])
+    with TestClient(student_app, base_url=ORIGIN) as client:
+        student = SimpleNamespace(client=client)
+        assert post(student, 'auth/register', {'email': student_email, 'invitation': first}).status_code == 200
+        assert post(student, 'auth/register', {'email': student_email, 'invitation': second}).status_code == 200
+    assert len(web.mailbox.messages) == 1
 
 
 def test_email_proof_precedes_account_password_and_login_cookie(web):
@@ -134,6 +200,8 @@ def test_student_pwa_flows_are_dormant_in_production_but_isolated_in_synthetic_p
     student = 'student@example.test'
     with closing(get_connection(str(web.db))) as conn, conn:
         owner_session = make_attempt(conn)
+        create_or_load_user(conn, 43, None, 'Student', None)
+        invitation = issue_invitation(conn, 43, now=web.now[0])
     assert post(web, 'auth/register', {'email': student}).status_code == 200
     assert web.mailbox.messages == []
     synthetic = create_app(db_path=str(web.db), bot_token=TOKEN,
@@ -141,13 +209,17 @@ def test_student_pwa_flows_are_dormant_in_production_but_isolated_in_synthetic_p
         web_clock=lambda: web.now[0])
     with TestClient(synthetic, base_url=ORIGIN) as client:
         student_web = SimpleNamespace(db=web.db, client=client, mailbox=web.mailbox)
-        assert post(student_web, 'auth/register', {'email': student}).status_code == 200
+        assert post(student_web, 'auth/register', {'email': student, 'invitation': invitation}).status_code == 200
         token = web.mailbox.messages[-1][2]
         assert post(student_web, 'auth/verify', {'token': token, 'password': PASSWORD}).status_code == 200
         assert post(student_web, 'auth/login', {'email': student, 'password': PASSWORD}).status_code == 200
         me = client.get('/web/auth/me').json()
         assert me['role'] == 'student' and me['needs_identity'] is True
-        assert post(student_web, 'identity/new', csrf=me['csrf_token']).status_code == 200
+        assert post(student_web, 'identity/new', csrf=me['csrf_token']).status_code == 403
+        code = post(student_web, 'link/start', csrf=me['csrf_token']).json()['code']
+        synthetic.state.web_auth.propose_telegram_link(code, SimpleNamespace(id=43, username=None, first_name='Student', last_name=None))
+        synthetic.state.web_auth.confirm_telegram_link(code, 43)
+        assert post(student_web, 'link/complete', csrf=me['csrf_token']).status_code == 200
         assert client.get('/web/quiz/state').status_code == 200
         denied = post(student_web, 'quiz/answer', {'session_id': owner_session, 'question_id': 1, 'selected_option_index': 0}, csrf=me['csrf_token'])
         assert denied.status_code == 403
@@ -248,7 +320,7 @@ def test_link_requires_both_confirmations_preserves_history_and_blocks_replay(we
     with closing(get_connection(str(web.db))) as conn, conn:
         sid = make_attempt(conn)
         answer_quiz(conn, actor_user_id=1, session_id=sid, question_id=1, selected_option_index=0)
-        before = {k: v for k,v in user_state(conn).items() if not k.startswith('web_')}
+        before = user_state(conn, {k: v for k, v in user_state(conn).items() if not k.startswith('web_')})
     register(web)
     csrf = login(web)
     token = post(web, 'link/start', csrf=csrf).json()['code']
@@ -273,7 +345,7 @@ def test_link_requires_both_confirmations_preserves_history_and_blocks_replay(we
     assert state['recent_answer_feedback']['selected_option_index'] == 0
     with closing(get_connection(str(web.db))) as conn:
         assert conn.execute('SELECT user_id FROM web_accounts').fetchone()[0] == 1
-        assert {k: v for k,v in user_state(conn).items() if not k.startswith('web_')} == before
+        assert user_state(conn, {k: v for k, v in user_state(conn).items() if not k.startswith('web_')}) == before
 
 
 @pytest.mark.parametrize('invalidate', ['expiry', 'logout', 'recovery', 'different-session', 'fresh-actor'])

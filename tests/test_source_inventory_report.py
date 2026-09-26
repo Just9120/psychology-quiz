@@ -6,7 +6,7 @@ import pytest
 from app.source_inventory import InventoryError
 from scripts import source_inventory_report as inventory_report
 from scripts.source_inventory_report import main, report
-from tests.test_source_inventory import item
+from tests.test_source_inventory import REVIEW_EVIDENCE, item
 
 
 def export(file_ids):
@@ -31,11 +31,13 @@ def test_private_inventory_report_reconciles_without_exposing_ids(tmp_path, caps
         "changes": {"new": 1, "changed": 0, "relocated": 0, "unchanged": 1, "missing": 0}}
     assert report(current, processed={"first": {"revision": ("2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
         "review_state": "processed", "snapshot_kind": "file_bytes",
-        "snapshot_sha256": "a" * 64}})["processing"] == {"new_unprocessed": 1, "processed": 1}
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}})["processing"] == {"new_unprocessed": 1, "processed": 1}
     assert report(current, processed={"first": {"revision": ("2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
         "review_state": "processed", "snapshot_kind": "file_bytes",
-        "snapshot_sha256": "a" * 64}})["processing_by_format"] == {
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}})["processing_by_format"] == {
             "application/pdf": {"new_unprocessed": 1, "processed": 1}}
+    assert main(["--current", str(current_file), "--require-current-reviewed"]) == 1
+    assert "current_review_gate_requires_reviewed" in capsys.readouterr().err
 
 
 def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path, capsys):
@@ -47,6 +49,143 @@ def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path
     output = capsys.readouterr()
     assert output.out == ""
     assert output.err.strip() == "SOURCE_INVENTORY_STOP: incomplete_folder_listing"
+
+
+def test_conflict_holds_derivatives_of_both_related_sources_until_review():
+    current = export(["transcript", "slides"])
+    sources = [{"id": source_id, "kind": "learning_material", "title": "Lesson",
+                "corpus_path": "Lesson", "modified_time": "2026-09-25T00:00:00Z",
+                "snapshot_sha256": "a" * 64, "readable": True,
+                "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-25",
+                "reviewer": "agent"} for source_id in ("transcript", "slides")]
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": sources}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    reviews = {"schema_version": 1, "items": {
+        f"questions:{source_id}": {"decision": "approved", "sources": [{
+            "source_id": source_id, "modified_time": source["modified_time"],
+            "snapshot_sha256": source["snapshot_sha256"]}]}
+        for source_id, source in zip(("transcript", "slides"), sources)}}
+    processed = {"transcript": {
+        "revision": ["2026-09-25T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "conflict", "reason": "Statements disagree",
+        "related_source_ids": ["slides"]}}
+
+    def entries(inventory):
+        queue = inventory_report.private_review_queue(
+            inventory_report._snapshot(inventory), registry, curriculum,
+            processed=processed, reviews=reviews)
+        return {entry["file_id"]: entry for entry in queue["files"]}
+
+    initial = entries(current)
+    # A partial processing snapshot must still yield the complete review queue.
+    assert set(initial) == {"transcript", "slides"}
+    assert initial["transcript"]["derivative_ids_requiring_review"] == ["questions:transcript"]
+    assert initial["slides"]["processing_state"] == "new_unprocessed"
+    assert initial["slides"]["related_conflict_review_required"] is True
+    assert initial["slides"]["derivative_ids_requiring_review"] == ["questions:slides"]
+
+    current["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
+    changed = entries(current)
+    assert changed["transcript"]["processing_state"] == "changed_unprocessed"
+    assert changed["slides"]["derivative_ids_requiring_review"] == ["questions:slides"]
+
+    processed["transcript"] = {
+        "revision": ["2026-09-26T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "pending_review", "snapshot_kind": "extracted_text",
+        "snapshot_sha256": "b" * 64,
+        "conflict_hold": {"reason": "Statements disagree", "locator": "slide 4",
+                          "related_source_ids": ["slides"]}}
+    assert entries(current)["slides"]["derivative_ids_requiring_review"] == ["questions:slides"]
+
+    processed["transcript"] = {"revision": ["2026-09-26T00:00:00Z", "Lesson", "application/pdf"],
+                               "review_state": "processed", "snapshot_kind": "extracted_text",
+                               "snapshot_sha256": "b" * 64, **REVIEW_EVIDENCE}
+    assert entries(current)["slides"]["related_conflict_review_required"] is False
+
+
+def test_private_queue_distinguishes_reviewed_format_links_from_candidates():
+    current = export(["doc", "pdf"])
+    doc, pdf = current["folders"]["root"][0]["children"]
+    doc.update(title="Lecture", mime_type="application/vnd.google-apps.document")
+    pdf["title"] = "Lecture.pdf"
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [{
+        "id": "doc", "kind": "learning_material", "title": "Lecture",
+        "corpus_path": "Lecture", "modified_time": doc["modified_time"],
+        "snapshot_sha256": "a" * 64, "readable": True,
+        "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-25",
+        "reviewer": "editor"}]}
+    curriculum = {"schema_version": 1, "disciplines": {"d": {"title": "Discipline"}},
+                  "topics": {"topic": {"title": "Lecture", "discipline_id": "d",
+                     "source": {"source_id": "doc", "modified_time": doc["modified_time"],
+                                "snapshot_sha256": "a" * 64}}}}
+    links = [{"source_id": entry["id"], "lesson_id": "lesson", "topic_id": "topic",
+              "format": format_name,
+              "revision": [entry["modified_time"], entry["title"], entry["mime_type"]],
+              "corpus_path": entry["title"], **REVIEW_EVIDENCE}
+             for entry, format_name in ((doc, "transcript"), (pdf, "slides"))]
+
+    def queue(selected):
+        return inventory_report.private_review_queue(
+            inventory_report._snapshot(current), registry, curriculum, links=selected)
+
+    assert queue([])["format_variant_candidates"][0]["link_state"] == "candidate"
+    assert queue(links[:1])["format_variant_candidates"][0]["link_state"] == "candidate"
+    reviewed = queue(links)
+    assert reviewed["format_variant_candidates"][0]["link_state"] == "linked"
+    assert all(entry["linked_lesson_ids"] == ["lesson"] for entry in reviewed["files"])
+    with pytest.raises(InventoryError, match="unknown_lesson_topic"):
+        queue([{**links[0], "topic_id": "invented"}])
+    with pytest.raises(InventoryError, match="stale_lesson_link"):
+        queue([{**links[0], "revision": ["old", *links[0]["revision"][1:]]}])
+
+
+def test_frozen_legacy_derivatives_stay_in_private_source_review_queue(tmp_path):
+    question = {"id": "old", "status": "approved", "source_ref": "drive:private#slide-2"}
+    altered = {"id": "altered", "status": "approved", "source_ref": "drive:private",
+               "question": "Changed since frozen baseline"}
+    unmapped = {"id": "unmapped", "status": "approved", "source_ref": "old-course-lecture"}
+    quality_mapped = {"id": "quality", "status": "approved", "source_ref": "old-lecture"}
+    (tmp_path / "content/questions").mkdir(parents=True)
+    (tmp_path / "content/questions/bank.json").write_text(
+        json.dumps([question, altered, unmapped, quality_mapped]), encoding="utf-8")
+    baseline = {"items": {"questions:old": inventory_report.fingerprint(question),
+                          "questions:altered": "0" * 64,
+                          "questions:unmapped": inventory_report.fingerprint(unmapped),
+                          "questions:quality": inventory_report.fingerprint(quality_mapped)}}
+    quality = {"questions:quality": {
+        "item_sha256": inventory_report.fingerprint(quality_mapped),
+        "sources": [{"source_id": "private"}]},
+        "questions:unmapped": {"item_sha256": "0" * 64,
+                               "sources": [{"source_id": "private"}]}}
+    links, unresolved = inventory_report.legacy_derivative_links(
+        tmp_path, baseline, quality, expected_sha256=inventory_report.fingerprint(baseline))
+    assert links == {"questions:old": ["private"], "questions:quality": ["private"]}
+    assert unresolved == ["questions:unmapped"]
+    with pytest.raises(InventoryError, match="invalid_legacy_baseline"):
+        inventory_report.legacy_derivative_links(tmp_path, baseline, quality,
+                                                 expected_sha256="0" * 64)
+    source = {"id": "private", "kind": "learning_material", "title": "Lesson",
+              "corpus_path": "Lesson", "modified_time": "2026-09-25T00:00:00Z",
+              "snapshot_sha256": "a" * 64, "readable": True,
+              "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-25", "reviewer": "agent"}
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [source]}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    queue = inventory_report.private_review_queue(
+        inventory_report._snapshot(export(["private"])), registry, curriculum,
+        legacy_derivatives=links, unmapped_legacy_derivatives=unresolved)
+    entry = queue["files"][0]
+    assert entry["legacy_derivative_ids"] == ["questions:old", "questions:quality"]
+    assert entry["linked_derivative_ids"] == ["questions:old", "questions:quality"]
+    assert entry["derivative_ids_requiring_review"] == ["questions:old", "questions:quality"]
+    assert queue["unmapped_legacy_derivative_ids"] == ["questions:unmapped"]
+    missing = inventory_report.private_review_queue(
+        inventory_report._snapshot(export([])), registry, curriculum,
+        legacy_derivatives=links)["missing_tracked_sources"][0]
+    assert missing["legacy_derivative_ids"] == ["questions:old", "questions:quality"]
+    with pytest.raises(InventoryError, match="invalid_legacy_derivatives"):
+        inventory_report.private_review_queue(
+            inventory_report._snapshot(export(["private"])), registry, curriculum,
+            legacy_derivatives={"questions:old": ["unknown"]})
 
 
 def test_reviewed_graph_counts_exact_lesson_edges_and_stale_metadata_without_ids():
@@ -139,9 +278,17 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
         "questions:legacy-partial": {"source_support": "partial", "sources": [
             {"source_id": source["id"], "modified_time": source["modified_time"],
              "snapshot_sha256": source["snapshot_sha256"], "locator": "slide 2"}]},
+        "questions:wide-locator": {"source_support": "supported", "sources": [
+            {"source_id": source["id"], "modified_time": source["modified_time"],
+             "snapshot_sha256": source["snapshot_sha256"],
+             "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"}]},
     }}
     (tmp_path / "content/learning-quality-reviews.json").write_text(
         json.dumps(quality), encoding="utf-8")
+    baseline = {"items": {}}
+    (tmp_path / "content/legacy-publication-baseline.json").write_text(
+        json.dumps(baseline), encoding="utf-8")
+    monkeypatch.setattr(inventory_report, "LEGACY_SHA256", inventory_report.fingerprint(baseline))
     current_path = tmp_path / "data/current.json"
     current_path.write_text(json.dumps(current), encoding="utf-8")
     target = tmp_path / "data/private-queue.json"
@@ -155,18 +302,43 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert entries["reviewed-private"]["registry_state"] == "current"
     assert entries["reviewed-private"]["linked_topic_ids"] == ["topic"]
     assert entries["reviewed-private"]["linked_derivative_ids"] == ["questions:example"]
+    assert entries["reviewed-private"]["legacy_derivative_ids"] == []
     assert entries["reviewed-private"]["derivative_ids_requiring_review"] == []
     assert entries["reviewed-private"]["derivative_review_required"] is False
     assert entries["reviewed-private"]["quality_review_item_ids"] == [
-        "questions:legacy-partial", "questions:legacy-supported"]
+        "questions:legacy-partial", "questions:legacy-supported", "questions:wide-locator"]
     assert entries["reviewed-private"]["quality_review_priority_ids"] == [
-        "questions:legacy-partial"]
+        "questions:legacy-partial", "questions:wide-locator"]
+    assert entries["reviewed-private"]["quality_review_evidence"] == {
+        "questions:legacy-supported": {"locator": "slide 1", "source_support": "supported",
+                                       "revision_current": True,
+                                       "locator_precision_review_required": False},
+        "questions:legacy-partial": {"locator": "slide 2", "source_support": "partial",
+                                     "revision_current": True,
+                                     "locator_precision_review_required": False},
+        "questions:wide-locator": {
+            "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564",
+            "source_support": "supported", "revision_current": True,
+            "locator_precision_review_required": True},
+    }
+    assert entries["unreviewed-private"]["quality_review_evidence"] == {}
     assert entries["unreviewed-private"]["registry_state"] == "untracked"
     assert all(item["processing_state"] == "unknown_no_processing_snapshot" for item in entries.values())
     assert all(item["paths"] == [["Lesson"]] for item in entries.values())
+    assert main(["--current", str(current_path), "--reviewed",
+                 "--require-current-reviewed"]) == 0
+    capsys.readouterr()
 
     changed = export(["reviewed-private"])
     changed["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
+    changed_path = tmp_path / "data/changed.json"
+    changed_path.write_text(json.dumps(changed), encoding="utf-8")
+    assert main(["--current", str(changed_path), "--reviewed",
+                 "--require-current-reviewed"]) == 1
+    gate_output = capsys.readouterr()
+    assert gate_output.out == ""
+    assert "reviewed_source_revision_not_current" in gate_output.err
+    assert "reviewed-private" not in gate_output.err
     changed_queue = inventory_report.private_review_queue(
         inventory_report._snapshot(changed), registry, curriculum, reviews=reviews)
     changed_entry = changed_queue["files"][0]
@@ -177,7 +349,25 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert inventory_report.private_review_queue(
         inventory_report._snapshot(changed), registry, curriculum, reviews=reviews,
         quality_reviews=quality)["files"][0]["quality_review_priority_ids"] == [
-            "questions:legacy-partial", "questions:legacy-supported"]
+            "questions:legacy-partial", "questions:legacy-supported", "questions:wide-locator"]
+    stale_quality = {"schema_version": 1, "items": {"questions:old": {
+        "source_support": "supported", "sources": [{"source_id": source["id"],
+            "modified_time": source["modified_time"], "snapshot_sha256": "b" * 64,
+            "locator": "slide 3"}]}}}
+    stale_entry = inventory_report.private_review_queue(
+        inventory_report._snapshot(current), registry, curriculum,
+        quality_reviews=stale_quality)["files"][0]
+    assert stale_entry["quality_review_priority_ids"] == ["questions:old"]
+    assert stale_entry["quality_review_evidence"]["questions:old"] == {
+        "locator": "slide 3", "source_support": "supported", "revision_current": False,
+        "locator_precision_review_required": False}
+    with pytest.raises(InventoryError, match="invalid_quality_review_source"):
+        inventory_report.private_review_queue(
+            inventory_report._snapshot(current), registry, curriculum,
+            quality_reviews={"schema_version": 1, "items": {"questions:missing-locator": {
+                "source_support": "partial", "sources": [{"source_id": source["id"],
+                "modified_time": source["modified_time"],
+                "snapshot_sha256": source["snapshot_sha256"]}]}}})
     missing_queue = inventory_report.private_review_queue(
         inventory_report._snapshot(export([])), registry, curriculum, reviews=reviews)
     assert missing_queue["missing_tracked_sources"][0]["derivative_review_required"] is True
@@ -216,7 +406,7 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
             "revision": [source["modified_time"], source["title"], "application/pdf"],
             "review_state": "conflict", "reason": "Same-lesson sources disagree"}}
     )["files"][0]["quality_review_priority_ids"] == [
-        "questions:legacy-partial", "questions:legacy-supported"]
+        "questions:legacy-partial", "questions:legacy-supported", "questions:wide-locator"]
 
     original = target.read_bytes()
     assert main(args) == 1

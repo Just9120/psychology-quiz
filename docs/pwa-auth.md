@@ -1,6 +1,6 @@
 # Owner PWA: auth contract и эксплуатация
 
-Границы первого owner-only среза — [spec](project-spec.md), состояние/Evidence — [план](delivery-plan.md). Общий quiz service принимает проверенный `users.id`; web request не задаёт actor. Telegram routes продолжают проверять initData и доступны всем проверенным Telegram users. По D-20 student PWA flow подготовлен только в коде: production registration/login остаются выключенными до Q-09/11; merge двух историй не поддерживается.
+Действующая граница owner-only PWA — [spec](project-spec.md), состояние/Evidence — [план](delivery-plan.md). Общий quiz service принимает проверенный `users.id`; web request не задаёт actor. Telegram routes продолжают проверять initData и доступны всем проверенным Telegram users. По D-29 student PWA и публичная demo исключены из текущих требований; сохранённые схемы приглашений не означают разрешённый запуск. Merge двух историй не поддерживается.
 
 ## Конфигурация
 
@@ -12,6 +12,7 @@ Enabled API и bot требуют:
 | --- | --- |
 | `PWA_ENABLED` | `true` / `false`; неизвестное значение — startup error |
 | `PWA_STUDENT_ACCESS_ENABLED` | Только `false` для действующего production release. `true` отклоняется при startup до подключения к DB: нет утверждённого age/privacy policy. Synthetic tests инъектируют enabled settings напрямую, не через runtime env. |
+| `PWA_STUDENT_INVITEE_IDS` | Неиспользуемый совместимый параметр прежнего draft flow; бот больше не выдаёт приглашения. Пустой по умолчанию; неизвестный/нечисловой ID отклоняется при startup. |
 | `PWA_ORIGIN` | Единственный HTTPS origin без path/query/fragment/credentials. PWA вызывает same-origin `/web/*`, Nginx направляет его в existing loopback API; PWA CORS не включается |
 | `PWA_OWNER_EMAIL` | Allowlisted owner, lowercase/trim; реальный адрес в repository не публиковать. Другие PWA accounts в production выключены |
 | `PWA_SMTP_HOST`, `PWA_SMTP_PORT` | По документации Яндекс 360, проверенной 19.09.2026: `smtp.yandex.ru`, SSL 465 или STARTTLS 587. Фактический mailbox устанавливает владелец; certificate verification обязательно |
@@ -20,7 +21,7 @@ Enabled API и bot требуют:
 
 Install/init/run/tests — canonical команды в [README](../README.md#быстрый-старт-и-проверки). Tests inject synthetic mailer; runtime не имеет bypass e-mail proof и не возвращает mail tokens в API. SMTP timeout 10 секунд, до двух отправок на процесс. Ошибка удаляет выданный token и возвращает только `mail_unavailable`.
 
-В synthetic test configuration общий e-mail/password/proof flow допускает `student` account с независимым actor либо подтверждённой Telegram-связью; роль в `auth/me` выводится сервером из подтверждённого e-mail. При выключении gate ранее созданная student session не проходит `authenticate`, а login и новые письма не дают доступа. Это подготовка технического пути, не одобрение или включение публичной регистрации: проверяемое правило 18+, тексты и основания обработки, удаление/retention и размещение данных остаются Q-09/11.
+Исторический synthetic student flow содержит одноразовые приглашения и таблицу digest; он не является действующим продуктовым путём D-29. В production `PWA_STUDENT_ACCESS_ENABLED=true` отклоняется, бот не предлагает PWA и не выдаёт приглашений, а анонимные demo routes закрыты. При выключенном gate student session не проходит `authenticate`, login и новые письма не дают доступа. Проект политики, правила возраста Telegram-доступа, удаления/retention, фактическое размещение и уведомления остаются Q-09/11.
 
 ## API и пользовательский flow
 
@@ -28,7 +29,7 @@ POST: JSON до 16 KiB, exact Origin; query parameters запрещены. Authe
 
 | Endpoint | Payload / результат |
 | --- | --- |
-| `POST /web/auth/register` | `{email}` → generic `{ok:true}`. Verification link только разрешённому новому owner; пароль до proof не сохраняется |
+| `POST /web/auth/register` | `{email}` → generic `{ok:true}` для owner allowlist. Legacy поле `invitation` поддержано только в закрытом synthetic flow; production student gate OFF. Пароль до e-mail proof не сохраняется |
 | `POST /web/auth/verify` | `{token,password}` → verified account. Expired/replayed/wrong-purpose proof отклоняется; все register tokens адреса отзываются. Затем обычный login |
 | `POST /web/auth/login` | `{email,password}` → `{ok:true}` + HttpOnly cookie. Unknown/disabled/not-allowlisted/wrong credentials → одинаковый 401; неизвестный account также проходит password hash workload |
 | `GET /web/auth/me` | E-mail, CSRF, `needs_identity`, `telegram_linked`, `link_pending`, `link_confirmed`, `link_target` (подтверждённые имя/username/Telegram ID) только инициировавшей session |

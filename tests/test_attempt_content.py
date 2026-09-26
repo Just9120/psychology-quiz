@@ -8,6 +8,7 @@ import pytest
 
 from app.attempt_content import ensure_attempt_snapshots, get_attempt_content
 from app.identity_schema import migrate_identity_schema
+from app.auth_schema import migrate_auth_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
 from app.classic_quiz_handlers import _handle_classic_text_answer_db
@@ -54,6 +55,43 @@ def bank(tmp_path):
         create_or_load_user(conn, 42, None, "Original user", None)
         conn.execute("INSERT INTO user_literature_progress (user_id,literature_id,reading_status,updated_at,private_note) VALUES (1,'lit','read','today','Private note')")
     return path
+
+
+def populate_extended_user_state(conn):
+    """Synthetic rows for every current learning/auth ownership boundary."""
+    session = make_attempt(conn, questions=(1,))
+    save_quiz_answer(conn, session, 1, 0)
+    conn.execute("""INSERT INTO glossary_sessions
+        (id,user_id,topic_id,topic_title,status,snapshot,state,created_at,updated_at)
+        VALUES ('synthetic-glossary',1,'topic','Topic','completed','{}','{}','today','today')""")
+    conn.execute("""INSERT INTO user_learning_goals(user_id,goal_kind,weekly_target,updated_at)
+        VALUES (1,'study',2,'today')""")
+    conn.execute("""INSERT INTO user_achievements(user_id,achievement_kind,evidence_key,earned_at)
+        VALUES (1,'new_topic','synthetic','today')""")
+    conn.execute("""INSERT INTO user_review_events(user_id,answer_kind,answer_key,answered_at)
+        VALUES (1,'quiz','synthetic-answer','today')""")
+    conn.execute("""INSERT INTO user_review_sessions(user_id,session_kind,session_key,started_at)
+        VALUES (1,'quiz','synthetic-session','today')""")
+    conn.execute("""INSERT INTO web_accounts(email,password_hash,user_id,verified_at,created_at)
+        VALUES ('synthetic@example.test','synthetic-hash',1,1,1)""")
+    conn.execute("""INSERT INTO web_sessions(digest,account_id,created_at,expires_at,last_seen_at)
+        VALUES ('synthetic-session',1,1,2,1)""")
+    conn.execute("""INSERT INTO web_mail_tokens(digest,email,purpose,account_id,expires_at)
+        VALUES ('synthetic-mail','synthetic@example.test','recover',1,2)""")
+    conn.execute("""INSERT INTO web_link_tokens(digest,account_id,session_digest,proposed_user_id,expires_at)
+        VALUES ('synthetic-link',1,'synthetic-session',1,2)""")
+    conn.execute("""INSERT INTO web_auth_limits(bucket,started_at,count)
+        VALUES ('synthetic-bucket',1,1)""")
+
+
+def test_rebuilding_approved_content_preserves_all_current_user_state(bank):
+    with closing(get_connection(str(bank))) as conn:
+        migrate_auth_schema(conn)
+    with closing(get_connection(str(bank))) as conn, conn:
+        populate_extended_user_state(conn)
+        before = user_state(conn)
+        upsert_approved_questions(conn, [NEW, OTHER], authoritative=True)
+        assert user_state(conn) == before
 
 
 @pytest.mark.parametrize("change", ["edit", "draft", "review", "retired", "removed"])
