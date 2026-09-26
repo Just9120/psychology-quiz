@@ -16,6 +16,7 @@ from app.db import upsert_approved_questions, get_connection
 from app.database import DATABASE_ERRORS, is_postgres, is_postgres_target, resolve_database_target
 from app.postgres_schema import verify_schema
 from app.content_publication import validate_publications
+from app.glossary_projection import projected_questions
 from app.case_content import case_error
 
 
@@ -47,6 +48,11 @@ def validate_question(item: dict[str, Any], index: int, source_name: str) -> tup
             False,
             f"{source_name} элемент #{index}: 'correct_option_index' выходит за границы массива 'options'",
         )
+
+    if item.get("status") == "approved":
+        explanation = item.get("explanation")
+        if not isinstance(explanation, str) or not explanation.strip():
+            return False, f"{source_name} элемент #{index}: approved explanation required"
 
     return True, None
 
@@ -129,9 +135,14 @@ def main() -> int:
         print(f"[ERROR] Ошибка загрузки вопросов: {exc}")
         return 1
 
-    publication_errors = validate_publications("questions")
+    publication_errors = validate_publications("questions") + validate_publications("glossary")
     if publication_errors:
         print("[ERROR] Publication review failed: " + "; ".join(publication_errors))
+        return 1
+    try:
+        questions.extend(projected_questions())
+    except ValueError as exc:
+        print(f"[ERROR] Glossary quiz projection failed: {exc}")
         return 1
     approved_total = sum(1 for question in questions if question.get("status") == "approved")
 

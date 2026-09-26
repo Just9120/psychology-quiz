@@ -77,7 +77,7 @@ export const api = {
   readingProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) => request<{ ok: true; literature_progress: ReadingState }>('literature/progress', { literature_id, reading_status, progress_percent }),
   glossaryOptions: () => request<{ ok: true; topics: GlossaryTopic[] }>('glossary/options'),
   glossaryState: () => request<{ ok: true; glossary_state: GlossaryState }>('glossary/state'),
-  glossaryStart: (topic_id: string, question_count: number | 'all', expected_session_id: string | null, replace_active: boolean) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/setup', { topic_id, question_count, expected_session_id, replace_active }),
+  glossaryStart: (topic_id: string | string[], question_count: number | 'all', expected_session_id: string | null, replace_active: boolean) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/setup', { topic_id, question_count, expected_session_id, replace_active }),
   glossaryAnswer: (session_id: string, step_id: number, selected_option_index: number) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/answer', { session_id, step_id, selected_option_index }),
   glossaryNext: (session_id: string, step_id: number) => request<{ ok: true; glossary_state: GlossaryState }>('glossary/next', { session_id, step_id }),
   resetPreview: (topic: string | null = null) => request<ResetPreview>('progress/reset-preview', { scope: topic === null ? 'all' : 'topic', topic }),

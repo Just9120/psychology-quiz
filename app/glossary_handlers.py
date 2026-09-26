@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 START_QUIZ_BUTTON_TEXT = '🎯 Начать'
 READING_MODE_BUTTON_TEXT = '👁 Чтение'
 GLOSSARY_BUTTON_TEXT = '📚 Глоссарий'
+LITERATURE_BUTTON_TEXT = '📖 Литература'
 HIDE_MENU_BUTTON_TEXT = '🙈 Скрыть меню'
 CLASSIC_REPLY_NEXT_TEXT = 'Далее'
 CLASSIC_REPLY_STATE_KEY = 'classic_reply_keyboard_state'
@@ -64,6 +65,7 @@ def get_main_menu_keyboard():
     return ReplyKeyboardMarkup([
         [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
         [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
+        [KeyboardButton(LITERATURE_BUTTON_TEXT)],
         [KeyboardButton('ℹ️ Помощь')], [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
     ], resize_keyboard=True, is_persistent=True)
 

@@ -50,6 +50,7 @@ from app.glossary_handlers import (
     glossary_reply_text_answer_handler,
     glossary_reply_text_next_handler,
 )
+from app.literature_chat import literature_command, literature_callback
 from app.db import (
     abandon_in_progress_sessions_for_user,
     create_or_load_user,
@@ -131,6 +132,7 @@ logger = logging.getLogger(__name__)
 START_QUIZ_BUTTON_TEXT = "🎯 Начать"
 READING_MODE_BUTTON_TEXT = "👁 Чтение"
 GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
+LITERATURE_BUTTON_TEXT = "📖 Литература"
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
@@ -143,12 +145,14 @@ HELP_TEXT = (
     f"{MINI_APP_BUTTON_TEXT} — открыть удобный режим внутри Telegram.\n"
     f"{READING_MODE_BUTTON_TEXT} — выбрать обычный или бионический режим.\n"
     f"{GLOSSARY_BUTTON_TEXT} — пройти тест по терминам.\n"
+    f"{LITERATURE_BUTTON_TEXT} — отметить чтение литературы.\n"
     "🙈 Скрыть меню — убрать нижнюю клавиатуру.\n"
     "\n"
     "/start — вернуть меню\n"
     "/quiz — начать викторину в чате\n"
     "/ui — открыть викторину в окне\n"
     "/glossary — открыть глоссарий-тест\n"
+    "/literature — открыть личный список чтения\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
@@ -196,6 +200,7 @@ def _safe_message_kind(message: object | None) -> str | None:
         "ℹ️ Помощь",
         *READING_MODE_BUTTON_ALIASES,
         *GLOSSARY_BUTTON_ALIASES,
+        LITERATURE_BUTTON_TEXT,
         HIDE_MENU_BUTTON_TEXT,
     }:
         return "text_button"
@@ -359,6 +364,7 @@ async def post_init(application: Application) -> None:
             BotCommand("quiz", "Начать викторину"),
             BotCommand("ui", "Открыть викторину в окне"),
             BotCommand("glossary", "Открыть глоссарий"),
+            BotCommand("literature", "Список чтения"),
         ]
     )
 
@@ -406,6 +412,7 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
         keyboard=[
             [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
             [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
+            [KeyboardButton(LITERATURE_BUTTON_TEXT)],
             [KeyboardButton("ℹ️ Помощь")],
             [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
         ],
@@ -970,6 +977,7 @@ def main() -> None:
     application.add_handler(CommandHandler("quiz", quiz_command))
     application.add_handler(CommandHandler("ui", ui_command))
     application.add_handler(CommandHandler("glossary", glossary_command))
+    application.add_handler(CommandHandler("literature", literature_command))
     application.add_handler(CommandHandler("stats", stats_command))
     application.add_handler(
         MessageHandler(
@@ -999,6 +1007,12 @@ def main() -> None:
         MessageHandler(
             filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(*GLOSSARY_BUTTON_ALIASES)),
             glossary_button_handler,
+        )
+    )
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(LITERATURE_BUTTON_TEXT)),
+            literature_command,
         )
     )
     application.add_handler(
@@ -1046,6 +1060,7 @@ def main() -> None:
             pattern=r"^(gls:(topics|main|resume|topic:[a-z0-9_]+)|glsq:(count:[a-z0-9_]+:(5|10|all)|replace:[A-Za-z0-9_-]{22}:[a-z0-9_]+:(5|10|all)|retry(?::[A-Za-z0-9_-]{22})?))$",
         )
     )
+    application.add_handler(CallbackQueryHandler(literature_callback, pattern=r"^lit:"))
     application.add_handler(
         CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|selected_mix|all)$")
     )

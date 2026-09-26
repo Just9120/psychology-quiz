@@ -46,3 +46,19 @@ it('clears private account UI if the session expires during initial quiz hydrati
   expect(await screen.findByRole('button', { name: 'Войти в пространство' })).toBeVisible()
   expect(screen.queryByText('Мой аккаунт')).not.toBeInTheDocument()
 })
+
+it('restores the answered question instead of labeling its feedback with the next question', async () => {
+  vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', csrf_token: 'test', needs_identity: false, telegram_linked: false, link_pending: false, link_confirmed: false, link_target: null })
+  vi.spyOn(api, 'options').mockResolvedValue({ ok: true, setup_options: { categories: [{ id: 1, name: 'Тема' }], question_count_choices: [5], difficulty_choices: ['any'] } })
+  vi.spyOn(api, 'state').mockResolvedValue({ ok: true,
+    runner_state: { state: 'in_progress', status: 'ok', session: { session_id: 10 },
+      current_question: { session_id: 10, question_id: 21, question_text: 'Следующий вопрос?', order_index: 2, total_questions: 2, options: [] },
+      progress: { current_question_number: 2, total_questions: 2, answered_count: 1 } },
+    recent_answer_feedback: { question_id: 20, selected_option_index: 0, selected_option_text: 'Ответ',
+      is_correct: true, correct_option_index: 0, correct_option_text: 'Ответ', explanation: 'Пояснение' },
+    recent_answer_question: { session_id: 10, question_id: 20, question_text: 'Сохранённый вопрос?',
+      order_index: 1, total_questions: 2, options: [] } })
+  render(<App />)
+  expect(await screen.findByRole('heading', { name: 'Сохранённый вопрос?' })).toBeVisible()
+  expect(screen.queryByRole('heading', { name: 'Следующий вопрос?' })).not.toBeInTheDocument()
+})

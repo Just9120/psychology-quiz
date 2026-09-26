@@ -9,13 +9,20 @@ export function GlossaryView({ initial, topics, busy, run, client = api }: {
 }) {
   const [saved, setSaved] = useState(initial)
   const [setup, setSetup] = useState(initial.state === 'idle')
-  const [topic, setTopic] = useState(initial.topic_id ?? topics[0]?.topic_id ?? '')
+  const [mode, setMode] = useState<'single' | 'mix' | 'all'>('single')
+  const [topic, setTopic] = useState(topics.some(item => item.topic_id === initial.topic_id)
+    ? initial.topic_id! : topics.find(item => item.available_count >= 4)?.topic_id ?? topics[0]?.topic_id ?? '')
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const [count, setCount] = useState<number | 'all'>(5)
   const [replace, setReplace] = useState(false)
   const [selected, setSelected] = useState<number | null>(null)
   const [pending, setPending] = useState<number | null>(null)
   const [uncertain, setUncertain] = useState(false)
   const active = saved.state === 'in_progress' || saved.state === 'feedback'
+  const eligible = topics.filter(item => item.available_count >= 4)
+  const setupTopics = mode === 'single' ? topic : mode === 'all' ? eligible.map(item => item.topic_id) : selectedTopics
+  const validSelection = mode === 'single' ? eligible.some(item => item.topic_id === topic)
+    : mode === 'all' ? eligible.length >= 1 : selectedTopics.length >= 2
   const q = saved.current_question, f = saved.feedback
 
   function apply(state: GlossaryState) {
@@ -25,7 +32,7 @@ export function GlossaryView({ initial, topics, busy, run, client = api }: {
   async function refresh() { apply((await client.glossaryState()).glossary_state) }
   async function start() {
     setUncertain(true); setReplace(false)
-    apply((await client.glossaryStart(topic, count, active ? saved.session_id! : null, replace)).glossary_state)
+    apply((await client.glossaryStart(setupTopics, count, active ? saved.session_id! : null, replace)).glossary_state)
   }
   async function answer() {
     if (!q || selected === null) return
@@ -38,10 +45,13 @@ export function GlossaryView({ initial, topics, busy, run, client = api }: {
     <p className="lead">Вспоминайте определения и разбирайте ответы. Сохранённый тест привязан к вашему учебному профилю.</p>
     {uncertain ? <div className="panel"><h2>Проверим сохранённое состояние</h2><p>Ответ сервера не получен. Восстановите тест перед новым запуском.</p><button className="button primary" disabled={busy} onClick={() => void run(refresh)}>Восстановить глоссарий</button></div>
       : setup ? <div className="panel practice-section"><h2>Тест по терминам</h2>
-        {topics.length ? <><label className="field">Тема глоссария<select value={topic} disabled={busy} onChange={e => { setTopic(e.target.value); setReplace(false) }}>{topics.map(item => <option value={item.topic_id} key={item.topic_id} disabled={item.available_count < 4}>{item.title} · {item.available_count} терминов</option>)}</select></label>
+        {topics.length ? <><label className="field">Режим<select value={mode} disabled={busy} onChange={e => { setMode(e.target.value as 'single' | 'mix' | 'all'); setReplace(false) }}><option value="single">Одна тема</option><option value="mix">Несколько тем</option><option value="all">Случайно из всех тем</option></select></label>
+          {mode === 'single' ? <label className="field">Тема глоссария<select value={topic} disabled={busy} onChange={e => { setTopic(e.target.value); setReplace(false) }}>{topics.map(item => <option value={item.topic_id} key={item.topic_id} disabled={item.available_count < 4}>{item.title} · {item.available_count} терминов</option>)}</select></label>
+            : mode === 'mix' ? <fieldset className="practice-section"><legend>Выберите не меньше двух тем</legend>{topics.map(item => <label className="reset-confirm" key={item.topic_id}><input type="checkbox" disabled={busy || item.available_count < 4} checked={selectedTopics.includes(item.topic_id)} onChange={e => { setSelectedTopics(previous => e.target.checked ? [...previous, item.topic_id] : previous.filter(id => id !== item.topic_id)); setReplace(false) }} /><span>{item.title} · {item.available_count} терминов</span></label>)}</fieldset>
+              : <p className="muted">Случайные термины из всех доступных тем ({eligible.length}).</p>}
           <label className="field">Количество терминов<select value={count} disabled={busy} onChange={e => { setCount(e.target.value === 'all' ? 'all' : Number(e.target.value)); setReplace(false) }}><option value={5}>5</option><option value={10}>10</option><option value="all">Все доступные</option></select></label>
           {active && <label className="reset-confirm"><input type="checkbox" checked={replace} disabled={busy} onChange={e => setReplace(e.target.checked)} /><span>Прервать незавершённый тест по терминам и начать новый. Уже сохранённые ответы останутся.</span></label>}
-          <div className="button-row"><button className="button primary" disabled={busy || !topic || (active && !replace) || !topics.some(item => item.topic_id === topic && item.available_count >= 4)} onClick={() => void run(start)}>Начать тест по терминам</button>{saved.state !== 'idle' && <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>К сохранённому тесту</button>}</div>
+          <div className="button-row"><button className="button primary" disabled={busy || !validSelection || (active && !replace)} onClick={() => void run(start)}>Начать тест по терминам</button>{saved.state !== 'idle' && <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>К сохранённому тесту</button>}</div>
         </> : <p role="status">Темы глоссария пока недоступны.</p>}
       </div>
         : saved.state === 'completed' && saved.result ? <div className="panel result-card"><h2>Тест по терминам завершён</h2><p className="lead">{saved.result.score} из {saved.result.total_questions} верных ответов</p><p className="muted">Результат сохранён в вашем аккаунте.</p><button className="button primary" disabled={busy} onClick={() => setSetup(true)}>Выбрать следующий тест</button></div>

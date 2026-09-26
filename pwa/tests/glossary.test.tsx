@@ -44,3 +44,17 @@ it('requires replacement confirmation and disarms uncertain setup until readback
   expect(screen.getByRole('button', { name: 'Проверить определение' })).toBeVisible()
   vi.restoreAllMocks()
 })
+
+it('starts a mixed topic attempt with the selected topic IDs', async () => {
+  const user = userEvent.setup()
+  const start = vi.spyOn(api, 'glossaryStart').mockResolvedValue({ ok: true, glossary_state: initial })
+  render(<GlossaryView initial={{ state: 'idle' }} topics={[...topics,
+    { topic_id: 'attention', title: 'Внимание', available_count: 5 }]} busy={false} run={run} />)
+  await user.selectOptions(screen.getByLabelText('Режим'), 'mix')
+  expect(screen.getByRole('button', { name: 'Начать тест по терминам' })).toBeDisabled()
+  await user.click(screen.getByRole('checkbox', { name: /Память/ }))
+  await user.click(screen.getByRole('checkbox', { name: /Внимание/ }))
+  await user.click(screen.getByRole('button', { name: 'Начать тест по терминам' }))
+  expect(start).toHaveBeenCalledWith(['memory', 'attention'], 5, null, false)
+  vi.restoreAllMocks()
+})

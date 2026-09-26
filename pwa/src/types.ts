@@ -56,7 +56,7 @@ export interface Feedback {
 
 export interface ReviewItem {
   kind: 'quiz' | 'glossary'; question_id?: number; topic_id?: string; term_id?: string
-  topic: string; due_on: string; is_due: boolean; correct_streak: number; reason: 'error' | 'scheduled' | 'new_edition'
+  topic: string; due_on: string; is_due: boolean; correct_streak: number; reason: 'error' | 'scheduled' | 'new_edition' | 'unverified_order'
 }
 export interface ReviewQueue { ok: true; today: string; due_count: number; items: ReviewItem[] }
 export interface MasteryItem { status: 'mastered' | 'insufficient_data'; correct_streak: number; question_id?: number; topic_id?: string; term_id?: string }
@@ -75,6 +75,7 @@ export interface QuizState {
   ok: true
   runner_state: RunnerState
   recent_answer_feedback?: Feedback
+  recent_answer_question?: Question
 }
 
 export interface Answer {
@@ -119,7 +120,7 @@ export interface GlossaryFeedback {
 }
 export interface GlossaryState {
   state: 'idle' | 'in_progress' | 'feedback' | 'completed'
-  session_id?: string; topic_id?: string; topic_title?: string
+  session_id?: string; topic_id?: string; topic_title?: string; topic_ids?: string[]
   current_question?: GlossaryQuestion; feedback?: GlossaryFeedback
   result?: { score: number; total_questions: number }
 }

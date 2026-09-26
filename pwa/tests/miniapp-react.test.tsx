@@ -38,6 +38,23 @@ test('Telegram Mini App loads shared quiz, checks a case and shows its rationale
   expect(calls.every(call => call.initData.includes('verified-test-payload'))).toBe(true)
 })
 
+test('Telegram Mini App restores feedback for the answered edition rather than the next question', async () => {
+  const next = { ...question, question_id: 21, question_text: 'Следующий вопрос?', order_index: 2, total_questions: 2 }
+  const answered = { ...question, question_text: 'Сохранённый вопрос?', total_questions: 2 }
+  vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+    const path = new URL(String(input)).pathname
+    if (path.endsWith('/setup-options')) return reply({ ok: true, setup_options: setupOptions })
+    if (path.endsWith('/state')) return reply({ ok: true,
+      runner_state: { ...running, current_question: next },
+      recent_answer_feedback: feedback, recent_answer_question: answered })
+    throw Error(`unexpected route ${path}`)
+  }))
+  render(<MiniApp />)
+  expect(await screen.findByRole('heading', { name: 'Сохранённый вопрос?' })).toBeVisible()
+  expect(screen.queryByRole('heading', { name: 'Следующий вопрос?' })).not.toBeInTheDocument()
+  expect(screen.getByText('Нужно уточнить запрос.')).toBeVisible()
+})
+
 test('missing Telegram initData does not make a network request', async () => {
   delete window.Telegram
   const fetch = vi.fn()

@@ -44,7 +44,7 @@ def main():
                                EMAIL, "synthetic-only", EMAIL, False)
         app = create_app(db_path=postgres_path or path, bot_token="123:synthetic-e2e", web_settings=settings, web_mailer=mailbox)
 
-        def reset(seed=True):
+        def reset(seed=True, mixed=False):
             nonlocal path
             path = str(Path(directory) / "synthetic.sqlite3")
             Path(path).unlink(missing_ok=True)
@@ -77,6 +77,25 @@ def main():
                     if index != 4:  # One deliberate source gap, visible in UI.
                         data['editions'][digest] = {'topic_id': 't_111111111111' if index < 5 else 't_222222222222'}
                 curriculum.load_catalog = lambda: data
+                if mixed:
+                    with conn:
+                        upsert_approved_questions(conn, [
+                            {"id": "synthetic-term", "category": "Термины", "kind": "glossary",
+                             "source_ref": "synthetic", "difficulty": "easy", "status": "approved",
+                             "question": "Что означает учебный термин?", "explanation": "Учебное определение термина.",
+                             "options": ["Учебное определение", "Случайный ответ", "Неизвестно", "Другое"],
+                             "correct_option_index": 0},
+                            {"id": "synthetic-case", "category": "Кейсы", "kind": "case",
+                             "source_ref": "synthetic", "difficulty": "easy", "status": "approved",
+                             "question": "Какой первый шаг уместен?", "explanation": "Сначала уточняют запрос.",
+                             "options": ["Уточнить запрос", "Дать диагноз", "Сразу выбрать метод", "Прервать встречу"],
+                             "correct_option_index": 0,
+                             "case": {"situation": "Вымышленный клиент впервые описывает запрос.",
+                                      "approach": "Первичная консультация", "conditions": ["Нет срочной опасности"],
+                                      "ambiguity": "При новых обстоятельствах действия пересматривают.",
+                                      "option_rationales": ["Уточнить полезно", "Данных недостаточно",
+                                                            "Выбор преждевременен", "Нет оснований"]}},
+                        ])
             if postgres_path:
                 with closing(get_connection(postgres_path)) as conn, conn:
                     if conn.execute("SELECT to_regclass('postgres_storage')").fetchone()[0] is not None:
@@ -94,7 +113,8 @@ def main():
         # Controls exist only in this test process, bound to loopback; no runtime flag.
         @app.post("/__test/reset")
         async def reset_fixture(request: Request):
-            reset((await request.json()).get("seed", True))
+            payload = await request.json()
+            reset(payload.get("seed", True), payload.get("mixed", False))
             return {"ok": True}
 
         @app.get("/__test/mail")

@@ -51,19 +51,23 @@ export function MiniApp() {
     try { await action() } catch (failure) { setError(message(failure)) }
     finally { lock.current = false; setBusy(false); setBooting(false) }
   }, [])
-  function applyState(next: RunnerState, recoveredFeedback: Feedback | null = null) {
-    setState(next); setFeedback(recoveredFeedback); setFeedbackQuestion(null)
+  function applyState(next: RunnerState, recoveredFeedback: Feedback | null = null,
+                      recoveredQuestion: Question | null = null) {
+    setState(next); setFeedback(recoveredFeedback)
+    setFeedbackQuestion(recoveredQuestion?.question_id === recoveredFeedback?.question_id ? recoveredQuestion : null)
     setSelected(null); setPending(null); setUncertain(false)
     setPage(next.state === 'setup' ? 'setup' : 'quiz')
   }
   async function refreshQuiz() {
     const saved = await miniApi.state()
-    applyState(saved.runner_state, saved.runner_state.state === 'in_progress' ? saved.recent_answer_feedback ?? null : null)
+    applyState(saved.runner_state, saved.runner_state.state === 'in_progress' ? saved.recent_answer_feedback ?? null : null,
+      saved.runner_state.state === 'in_progress' ? saved.recent_answer_question ?? null : null)
   }
   async function loadInitial() {
     const [available, saved] = await Promise.all([miniApi.options(), miniApi.state()])
     setOptions(available.setup_options)
-    applyState(saved.runner_state, saved.runner_state.state === 'in_progress' ? saved.recent_answer_feedback ?? null : null)
+    applyState(saved.runner_state, saved.runner_state.state === 'in_progress' ? saved.recent_answer_feedback ?? null : null,
+      saved.runner_state.state === 'in_progress' ? saved.recent_answer_question ?? null : null)
   }
   useEffect(() => {
     window.Telegram?.WebApp?.ready?.(); window.Telegram?.WebApp?.expand?.()
@@ -88,9 +92,10 @@ export function MiniApp() {
       if (failure instanceof MiniAppError && !failure.status) {
         try {
           const saved = await miniApi.state()
-          if (saved.recent_answer_feedback?.question_id === payload.question_id) {
+          if (saved.runner_state.session?.session_id === payload.session_id &&
+              saved.recent_answer_feedback?.question_id === payload.question_id) {
             setState(saved.runner_state); setFeedback(saved.recent_answer_feedback)
-            setFeedbackQuestion(question ?? null); setPending(null)
+            setFeedbackQuestion(saved.recent_answer_question ?? question ?? null); setPending(null)
             return
           }
         } catch { /* Uncertain write: keep the exact payload for an idempotent retry. */ }

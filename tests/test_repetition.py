@@ -4,7 +4,7 @@ import json
 
 from app.db import create_or_load_user, get_connection, start_quiz_session, store_session_questions, upsert_approved_questions
 from app.quiz_service import answer_quiz
-from app.repetition import adaptive_questions, queue, schedule
+from app.repetition import _ordered_term_events, adaptive_questions, queue, schedule
 from app.miniapp_api import build_setup_response
 from app.progress_service import review_today, review_glossary_today, ProgressError
 from app import glossary_service
@@ -17,6 +17,21 @@ from tests.test_web_auth import web, post, register, login
 
 
 EDITION = "a" * 64
+
+
+def test_equal_time_term_answers_cannot_prove_corrected_error_or_mastery():
+    at = "2026-09-20T10:00:00Z"
+    events = _ordered_term_events([
+        (at, True, "current", "captured", "quiz", "12"),
+        (at, False, "current", "captured", "glossary", "session:1"),
+    ])
+    assert all(event[2] == "ambiguous" for event in events)
+    assert schedule([event[:4] for event in events], "current", today=date(2026, 9, 20)) == {
+        "due_on": "2026-09-20", "is_due": True, "correct_streak": 0,
+        "reason": "unverified_order"}
+    later = ("2026-09-21T10:00:00Z", True, "current", "captured", "quiz", "13")
+    assert schedule([event[:4] for event in [*events, later]], "current",
+                    today=date(2026, 9, 21))["correct_streak"] == 1
 
 
 def test_review_intervals_error_reset_and_changed_edition():

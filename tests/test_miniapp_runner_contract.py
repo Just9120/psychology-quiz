@@ -709,6 +709,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
             [
                 [START_QUIZ_BUTTON_TEXT, MINI_APP_BUTTON_TEXT],
                 [READING_MODE_BUTTON_TEXT, "📚 Глоссарий"],
+                ["📖 Литература"],
                 ["ℹ️ Помощь"],
                 ["🙈 Скрыть меню"],
             ],

@@ -133,6 +133,35 @@ test('glossary survives lost setup, repeated answer, reload and completion', asy
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })
 
+test('mixed glossary keeps two topics and preserves the other topic after reset', async ({ page }) => {
+  await fresh(page)
+  const options = await (await page.request.get('/web/glossary/options')).json()
+  const chosen = options.topics.filter((item: { available_count: number }) => item.available_count >= 4).slice(0, 2)
+  expect(chosen).toHaveLength(2)
+  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await page.getByRole('combobox', { name: 'Режим', exact: true }).selectOption('mix')
+  for (const item of chosen) await page.getByRole('checkbox', { name: new RegExp(item.title) }).check()
+  await page.getByRole('button', { name: 'Начать тест по терминам' }).click()
+  const started = (await (await page.request.get('/web/glossary/state')).json()).glossary_state
+  expect(started.topic_ids).toEqual(chosen.map((item: { topic_id: string }) => item.topic_id))
+  const seen = new Set<string>()
+  for (let step = 1; step <= 5; step++) {
+    const state = (await (await page.request.get('/web/glossary/state')).json()).glossary_state
+    seen.add(state.current_question.topic_id)
+    await page.getByRole('radio').first().check()
+    await page.getByRole('button', { name: 'Проверить определение' }).click()
+    await expect(page.getByText(`Ответ сохранён · ${step} из 5`)).toBeVisible()
+    await page.getByRole('button', { name: step === 5 ? 'Показать результат' : 'Следующий термин' }).click()
+  }
+  expect(seen).toEqual(new Set(chosen.map((item: { topic_id: string }) => item.topic_id)))
+  const preview = await syntheticPost(page, 'progress/reset-preview', { scope: 'topic', topic: chosen[0].title })
+  expect(preview.glossary_answers).toBeGreaterThan(0)
+  await syntheticPost(page, 'progress/reset-confirm', { scope: 'topic', topic: chosen[0].title,
+    expected_revision: preview.revision, confirm: true })
+  const remaining = await syntheticPost(page, 'progress/reset-preview', { scope: 'topic', topic: chosen[1].title })
+  expect(remaining.glossary_answers).toBeGreaterThan(0)
+})
+
 test('glossary replacement needs confirmation and topic reset preserves another quiz', async ({ page }) => {
   await fresh(page)
   const quiz = await syntheticPost(page, 'quiz/setup', { quiz_mode: 'all', category_ids: [], question_count: null, difficulty: 'any' })
@@ -246,6 +275,50 @@ async function start(page: Page) {
   await page.getByRole('button', { name: 'Начать квиз', exact: true }).click()
   await expect(page.getByRole('radio', { name: 'Осмысленное повторение' })).toBeVisible()
 }
+
+test('published theory, term and case work together and each kind can be selected alone', async ({ page, request }) => {
+  expect((await request.post(backend + '/__test/reset', { data: { mixed: true } })).ok()).toBeTruthy()
+  await fresh(page)
+  await page.getByRole('button', { name: 'Все темы' }).click()
+  await page.getByText('Дополнительные настройки').click()
+  for (const kind of ['Теория', 'Термины', 'Кейсы']) {
+    await expect(page.getByRole('group', { name: 'Виды заданий' }).getByRole('checkbox', { name: kind, exact: true })).toBeChecked()
+  }
+  await page.getByRole('button', { name: '5', exact: true }).click()
+  await page.getByRole('button', { name: 'Начать квиз', exact: true }).click()
+  const kinds = new Set<string>()
+  for (let step = 1; step <= 5; step++) {
+    const text = await page.locator('.question-heading').innerText()
+    kinds.add(text.includes('учебный термин') ? 'glossary' : text.includes('Вымышленный клиент') ? 'case' : 'theory')
+    await page.getByRole('radio').first().check()
+    await page.getByRole('button', { name: 'Проверить ответ' }).click()
+    await expect(page.getByText('Ответ сохранён', { exact: true })).toBeVisible()
+    if (text.includes('учебный термин')) await expect(page.getByText('Учебное определение термина.')).toBeVisible()
+    if (text.includes('Вымышленный клиент')) await expect(page.getByRole('heading', { name: 'Разбор кейса' })).toBeVisible()
+    await page.getByRole('button', { name: step === 5 ? 'Посмотреть результат' : 'Следующий вопрос' }).click()
+  }
+  expect(kinds).toEqual(new Set(['theory', 'glossary', 'case']))
+  await expect(page.getByRole('heading', { name: 'Квиз завершён' })).toBeVisible()
+  expect((await (await page.request.get('/web/progress/overview')).json()).summary.answered).toBe(5)
+
+  for (const [label, expected] of [['Термины', 'Что означает учебный термин?'],
+                                   ['Кейсы', 'Вымышленный клиент впервые описывает запрос.']] as const) {
+    await page.getByRole('button', { name: 'Выбрать следующий квиз' }).click()
+    await page.getByRole('button', { name: 'Все темы' }).click()
+    await page.getByText('Дополнительные настройки').click()
+    for (const kind of ['Теория', 'Термины', 'Кейсы']) {
+      if (kind !== label) await page.getByRole('group', { name: 'Виды заданий' }).getByRole('checkbox', { name: kind, exact: true }).uncheck()
+    }
+    await page.getByRole('button', { name: 'Все', exact: true }).click()
+    await page.getByRole('button', { name: 'Начать квиз', exact: true }).click()
+    await expect(page.locator('.question-heading')).toContainText(expected)
+    const state = (await (await page.request.get('/web/quiz/state')).json()).runner_state
+    expect(state.progress.total_questions).toBe(1)
+    await page.getByRole('radio').first().check()
+    await page.getByRole('button', { name: 'Проверить ответ' }).click()
+    await page.getByRole('button', { name: 'Посмотреть результат' }).click()
+  }
+})
 
 test('curriculum filters history and preserves unmapped evidence on reload', async ({ page }, testInfo) => {
   await fresh(page)

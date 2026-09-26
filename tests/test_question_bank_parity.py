@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from app.db import upsert_approved_questions
+from app.glossary_projection import projected_questions
 from app.learning_schema import migrate_learning_schema
 from app.identity_schema import migrate_identity_schema
 from scripts import audit_question_bank
@@ -25,6 +26,8 @@ def _question_payload(row: dict) -> dict:
         "status": row["status"],
         "question": row["question_text"],
         "explanation": row["explanation"],
+        "kind": row["kind"],
+        **({"case": row["case"]} if row["case"] is not None else {}),
         "options": row["options"],
         "correct_option_index": row["correct_option_index"],
     }
@@ -37,7 +40,7 @@ def _init_seeded_db(tmp_path: Path) -> Path:
         conn.executescript((REPO_ROOT / "sql" / "schema.sql").read_text(encoding="utf-8"))
         migrate_identity_schema(conn)
         migrate_learning_schema(conn)
-        upsert_approved_questions(conn, [_question_payload(row) for row in load_canonical()[0]])
+        upsert_approved_questions(conn, [_question_payload(row) for row in load_canonical()[0]] + projected_questions())
     return db_path
 
 

@@ -6,7 +6,8 @@ operator storage, never among public content or static assets.
 """
 from __future__ import annotations
 
-from collections import deque
+from collections import Counter, deque
+import re
 
 
 class InventoryError(ValueError):
@@ -53,10 +54,12 @@ def _revision(item: dict) -> tuple[str, str, str]:
 def scan(root_id: str, listings: dict[str, dict]) -> dict:
     if not isinstance(root_id, str) or not root_id:
         raise InventoryError("root_required")
-    queue, seen_folders, files = deque([root_id]), set(), {}
+    queue, seen_folders, files, paths = deque([(root_id, ())]), {}, {}, {}
     while queue:
-        parent = queue.popleft()
+        parent, breadcrumb = queue.popleft()
         if parent in seen_folders:
+            if seen_folders[parent] != breadcrumb:
+                raise InventoryError("ambiguous_folder_paths")
             continue
         listing = listings.get(parent)
         if not isinstance(listing, dict) or listing.get("complete") is not True:
@@ -64,7 +67,7 @@ def scan(root_id: str, listings: dict[str, dict]) -> dict:
         children = listing.get("children")
         if not isinstance(children, list):
             raise InventoryError("invalid_folder_listing")
-        seen_folders.add(parent)
+        seen_folders[parent] = breadcrumb
         for item in children:
             if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not item["id"]:
                 raise InventoryError("invalid_child")
@@ -72,7 +75,9 @@ def scan(root_id: str, listings: dict[str, dict]) -> dict:
             if not isinstance(parents, list) or parent not in parents:
                 raise InventoryError("parent_mismatch")
             if item.get("file_or_folder") == "folder":
-                queue.append(item["id"])
+                if not isinstance(item.get("title"), str) or not item["title"]:
+                    raise InventoryError("incomplete_folder_metadata")
+                queue.append((item["id"], (*breadcrumb, item["title"])))
                 continue
             if item.get("file_or_folder") != "file":
                 raise InventoryError("unknown_child_kind")
@@ -84,19 +89,24 @@ def scan(root_id: str, listings: dict[str, dict]) -> dict:
                 raise InventoryError("conflicting_file_metadata")
             files[item["id"]] = {key: item[key] for key in
                                   ("id", "title", "mime_type", "modified_time")}
-    return {"root_id": root_id, "folders": len(seen_folders), "files": files}
+            paths.setdefault(item["id"], set()).add((*breadcrumb, item["title"]))
+    return {"root_id": root_id, "folders": len(seen_folders), "files": files,
+            "paths": {file_id: [list(path) for path in sorted(found)]
+                      for file_id, found in paths.items()}}
 
 
 def reconcile(previous: dict, current: dict) -> dict:
     if previous.get("root_id") != current.get("root_id"):
         raise InventoryError("root_changed")
     old, new = previous["files"], current["files"]
-    changes = {"new": [], "changed": [], "unchanged": [], "missing": []}
+    changes = {"new": [], "changed": [], "relocated": [], "unchanged": [], "missing": []}
     for file_id, item in new.items():
         if file_id not in old:
             changes["new"].append(file_id)
         elif _revision(old[file_id]) != _revision(item):
             changes["changed"].append(file_id)
+        elif previous["paths"].get(file_id) != current["paths"].get(file_id):
+            changes["relocated"].append(file_id)
         else:
             changes["unchanged"].append(file_id)
     changes["missing"] = sorted(old.keys() - new.keys())
@@ -112,14 +122,31 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
             result[file_id] = "new_unprocessed"
         elif not isinstance(record, dict):
             raise InventoryError("invalid_processing_record")
-        elif tuple(record.get("revision", ())) != _revision(item):
-            result[file_id] = "changed_unprocessed"
-        elif record.get("review_state") == "conflict":
-            result[file_id] = "conflict_review"
-        elif record.get("review_state") == "processed":
-            result[file_id] = "processed"
         else:
-            result[file_id] = "pending_review"
+            revision = record.get("revision")
+            state = record.get("review_state")
+            if (not isinstance(revision, (list, tuple)) or len(revision) != 3
+                    or any(not isinstance(value, str) or not value for value in revision)
+                    or not isinstance(state, str)
+                    or state not in {"pending_review", "conflict", "processed"}):
+                raise InventoryError("invalid_processing_record")
+            if state == "processed" and (
+                    not isinstance(record.get("snapshot_kind"), str)
+                    or record["snapshot_kind"] not in {"file_bytes", "extracted_text"}
+                    or not isinstance(record.get("snapshot_sha256"), str)
+                    or re.fullmatch(r"[0-9a-f]{64}", record["snapshot_sha256"]) is None):
+                raise InventoryError("unverified_processing_record")
+            if state == "conflict" and (not isinstance(record.get("reason"), str)
+                                         or not record["reason"].strip()):
+                raise InventoryError("invalid_processing_record")
+            if tuple(revision) != _revision(item):
+                result[file_id] = "changed_unprocessed"
+            elif state == "conflict":
+                result[file_id] = "conflict_review"
+            elif state == "processed":
+                result[file_id] = "processed"
+            else:
+                result[file_id] = "pending_review"
     return result
 
 
@@ -144,3 +171,147 @@ def link_lessons(snapshot: dict, links: list[dict]) -> dict:
             raise InventoryError("conflicting_lesson_topic")
         lesson["sources"].append({"source_id": source_id, "format": format_name})
     return lessons
+
+
+def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
+    """Aggregate exact metadata and reviewed lesson edges without exposing sources.
+
+    A current Drive timestamp/title does not prove that a source was fully read;
+    snapshot hashes belong to the separate content review record. A stale or
+    missing Drive file cannot support a *current* lesson edge.
+    """
+    if (not isinstance(registry, dict) or registry.get("schema_version") != 1
+            or registry.get("corpus_root_id") != snapshot.get("root_id")
+            or not isinstance(registry.get("sources"), list)
+            or not isinstance(curriculum, dict) or curriculum.get("schema_version") != 1
+            or not isinstance(curriculum.get("topics"), dict)
+            or not isinstance(curriculum.get("disciplines"), dict)):
+        raise InventoryError("invalid_reviewed_graph")
+    sources = {}
+    for source in registry["sources"]:
+        if (not isinstance(source, dict) or not isinstance(source.get("id"), str)
+                or not source["id"] or source["id"] in sources
+                or source.get("kind") not in {"learning_material", "bibliography"}
+                or source.get("readable") is not True
+                or source.get("snapshot_kind") not in {"file_bytes", "extracted_text"}
+                or not isinstance(source.get("corpus_path"), str) or not source["corpus_path"]
+                or not all(isinstance(source.get(key), str) and source[key]
+                           for key in ("title", "modified_time", "snapshot_sha256", "reviewed_at", "reviewer"))
+                or re.fullmatch(r"[0-9a-f]{64}", source["snapshot_sha256"]) is None):
+            raise InventoryError("invalid_reviewed_source")
+        sources[source["id"]] = source
+    states = {}
+    formats = Counter()
+    for source_id, source in sources.items():
+        live = snapshot["files"].get(source_id)
+        state = ("missing" if live is None else "changed" if
+                 (source["title"], source["modified_time"]) !=
+                 (live["title"], live["modified_time"]) else "relocated" if
+                 source["corpus_path"] not in
+                 ("/".join(path) for path in snapshot["paths"][source_id]) else "current")
+        states[source_id] = state
+        if state == "current":
+            formats[live["mime_type"]] += 1
+    linked_ids = Counter()
+    link_states = Counter()
+    for topic in curriculum["topics"].values():
+        if (not isinstance(topic, dict) or topic.get("discipline_id") not in curriculum["disciplines"]
+                or not isinstance(topic.get("title"), str) or not topic["title"]
+                or not isinstance(topic.get("source"), dict)):
+            raise InventoryError("invalid_reviewed_lesson")
+        ref = topic["source"]
+        source = sources.get(ref.get("source_id"))
+        if (source is None or source["kind"] != "learning_material"
+                or ref.get("modified_time") != source["modified_time"]
+                or ref.get("snapshot_sha256") != source["snapshot_sha256"]):
+            raise InventoryError("invalid_reviewed_lesson")
+        linked_ids[source["id"]] += 1
+        link_states[states[source["id"]]] += 1
+    return {
+        "tracked_sources": len(sources),
+        "source_kinds": dict(sorted(Counter(source["kind"] for source in sources.values()).items())),
+        "source_metadata": dict(sorted(Counter(states.values()).items())),
+        "current_by_format": dict(sorted(formats.items())),
+        "untracked_inventory_files": len(snapshot["files"]) - sum(state != "missing" for state in states.values()),
+        "reviewed_lesson_edges": len(curriculum["topics"]),
+        "lesson_metadata": dict(sorted(link_states.items())),
+        "unique_lesson_files": len(linked_ids),
+        "multi_lesson_files": sum(count > 1 for count in linked_ids.values()),
+        "reviewed_learning_without_lesson": sum(source["kind"] == "learning_material" and
+                                                source["id"] not in linked_ids for source in sources.values()),
+    }
+
+
+def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
+                         processed: dict | None = None, previous: dict | None = None,
+                         reviews: dict | None = None) -> dict:
+    """Operator-only file-level queue; never return this from a public route."""
+    reviewed_graph(snapshot, registry, curriculum)
+    if processed is not None and not isinstance(processed, dict):
+        raise InventoryError("invalid_processing_records")
+    sources = {source["id"]: source for source in registry["sources"]}
+    derivatives: dict[str, set[str]] = {}
+    stale_derivatives: dict[str, set[str]] = {}
+    if reviews is not None:
+        if (not isinstance(reviews, dict) or reviews.get("schema_version") != 1
+                or not isinstance(reviews.get("items"), dict)):
+            raise InventoryError("invalid_derivative_reviews")
+        for derivative_id, review in reviews["items"].items():
+            if (not isinstance(derivative_id, str) or not derivative_id
+                    or not isinstance(review, dict)):
+                raise InventoryError("invalid_derivative_review")
+            if review.get("decision") != "approved":
+                continue
+            if not isinstance(review.get("sources"), list) or not review["sources"]:
+                raise InventoryError("invalid_derivative_review")
+            for ref in review["sources"]:
+                source_id = ref.get("source_id") if isinstance(ref, dict) else None
+                if not isinstance(source_id, str) or source_id not in sources:
+                    raise InventoryError("invalid_derivative_source")
+                derivatives.setdefault(source_id, set()).add(derivative_id)
+                source = sources[source_id]
+                if (ref.get("modified_time") != source["modified_time"]
+                        or ref.get("snapshot_sha256") != source["snapshot_sha256"]):
+                    stale_derivatives.setdefault(source_id, set()).add(derivative_id)
+    topics = {}
+    for topic_id, topic in curriculum["topics"].items():
+        topics.setdefault(topic["source"]["source_id"], []).append(topic_id)
+    processing = processing_status(snapshot, processed) if processed is not None else None
+    changes = reconcile(previous, snapshot) if previous is not None else None
+    changed = ({file_id: name for name, ids in changes.items() for file_id in ids}
+               if changes is not None else {})
+    entries = []
+    for file_id, item in snapshot["files"].items():
+        source = sources.get(file_id)
+        registry_state = ("untracked" if source is None else "changed" if
+                          (source["title"], source["modified_time"]) !=
+                          (item["title"], item["modified_time"]) else "relocated" if
+                          source["corpus_path"] not in
+                          ("/".join(path) for path in snapshot["paths"][file_id]) else "current")
+        linked_derivatives = derivatives.get(file_id, set())
+        affected_derivatives = (linked_derivatives if registry_state in {"changed", "relocated"}
+                                else stale_derivatives.get(file_id, set()))
+        entries.append({
+            "file_id": file_id,
+            "title": item["title"],
+            "mime_type": item["mime_type"],
+            "modified_time": item["modified_time"],
+            "paths": snapshot["paths"][file_id],
+            "registry_state": registry_state,
+            "inventory_change": changed.get(file_id, "unknown_no_previous_snapshot"),
+            "processing_state": processing[file_id] if processing is not None
+                                else "unknown_no_processing_snapshot",
+            "linked_topic_ids": sorted(topics.get(file_id, [])),
+            "linked_derivative_ids": sorted(linked_derivatives),
+            "derivative_ids_requiring_review": sorted(affected_derivatives),
+            "derivative_review_required": bool(affected_derivatives),
+        })
+    entries.sort(key=lambda item: (item["paths"], item["file_id"]))
+    missing = [{"file_id": file_id, "title": source["title"],
+                "linked_topic_ids": sorted(topics.get(file_id, [])),
+                "linked_derivative_ids": sorted(derivatives.get(file_id, set())),
+                "derivative_ids_requiring_review": sorted(derivatives.get(file_id, set())),
+                "derivative_review_required": bool(derivatives.get(file_id))}
+               for file_id, source in sorted(sources.items()) if file_id not in snapshot["files"]]
+    return {"schema_version": 1, "root_id": snapshot["root_id"],
+            "files": entries, "missing_tracked_sources": missing}

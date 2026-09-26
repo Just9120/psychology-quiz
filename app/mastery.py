@@ -6,12 +6,8 @@ must pass a verified actor; legacy backfills cannot prove a captured edition.
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
-from dataclasses import asdict
-import json
-
 from app.attempt_content import capture_question
-from app.content_publication import fingerprint
-from app.glossary import GLOSSARY_TOPICS, load_glossary_entries
+from app.repetition import glossary_history
 
 
 FIRST_INTERVAL = timedelta(days=1)
@@ -73,7 +69,8 @@ def quiz_states(conn, actor: int) -> dict:
         FROM quiz_sessions s JOIN quiz_answers a ON a.session_id=s.id
         JOIN quiz_session_questions sq ON sq.session_id=a.session_id AND sq.question_id=a.question_id
         WHERE s.user_id=? ORDER BY a.question_id,a.answered_at,a.id""", (actor,)).fetchall()
-    approved = {int(row[0]) for row in conn.execute("SELECT id FROM questions WHERE status='approved'")}
+    approved = {int(row[0]) for row in conn.execute(
+        "SELECT id FROM questions WHERE status='approved' AND kind!='glossary'")}
     by_question = {}
     for row in rows:
         by_question.setdefault(int(row[0]), []).append(row)
@@ -94,42 +91,16 @@ def quiz_states(conn, actor: int) -> dict:
 
 
 def glossary_states(conn, actor: int) -> dict:
-    """Assess timestamped glossary answers against today's approved entries.
-
-    The original glossary JSON state has no answer timestamp. Those older
-    answers remain available as history but cannot prove spaced repetition.
-    """
-    current = {}
-    for topic_id, _ in GLOSSARY_TOPICS:
-        for entry in load_glossary_entries(topic_id) or []:
-            current[(topic_id, entry.id)] = fingerprint(asdict(entry))
-    by_entry = {}
-    sessions = conn.execute("""SELECT snapshot,state FROM glossary_sessions
-        WHERE user_id=? ORDER BY created_at,id""", (actor,)).fetchall()
-    for row in sessions:
-        snapshot, state = json.loads(row[0]), json.loads(row[1])
-        for step, answer in state.get("answers", {}).items():
-            try:
-                entry = snapshot["questions"][int(step) - 1]["entry"]
-                key = (entry["topic_id"], entry["id"])
-                timestamp = answer.get("answered_at")
-                correct = answer["response"]["feedback"]["is_correct"]
-            except (KeyError, IndexError, TypeError, ValueError):
-                continue
-            if key not in current or not timestamp:
-                continue
-            by_entry.setdefault(key, []).append((timestamp, fingerprint(entry), bool(correct)))
+    """Assess one term across captured glossary and quiz answers."""
     items = []
-    for key, events in sorted(by_entry.items()):
-        events.sort(key=lambda event: event[0])
-        current_sha = current[key]
+    for key, record in sorted(glossary_history(conn, actor).items()):
         matching = []
-        for timestamp, edition, correct in events:
-            if edition != current_sha:
+        for timestamp, correct, edition, provenance in record["events"]:
+            if edition != "current" or provenance != "captured":
                 matching.clear()
             else:
                 matching.append((timestamp, correct))
-        items.append({"topic_id": key[0], "term_id": key[1], "content_sha256": current_sha,
+        items.append({"topic_id": key[0], "term_id": key[1], "content_sha256": record["edition"],
                       **evaluate(matching)})
     return {"ok": True, "items": items,
             "mastered_count": sum(item["status"] == "mastered" for item in items),

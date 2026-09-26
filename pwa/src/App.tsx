@@ -59,7 +59,9 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   function applyState(result: QuizState, resume = false) {
     setState(result.runner_state); setSelected(null); setPending(null); setUncertainSetup(false)
     setFeedback(resume && result.runner_state.state === 'in_progress' ? result.recent_answer_feedback ?? null : null)
-    setFeedbackQuestion(null)
+    setFeedbackQuestion(resume && result.runner_state.state === 'in_progress' &&
+      result.recent_answer_question?.question_id === result.recent_answer_feedback?.question_id
+      ? result.recent_answer_question ?? null : null)
     setView(result.runner_state.state === 'setup' ? 'setup' : 'quiz')
   }
 
