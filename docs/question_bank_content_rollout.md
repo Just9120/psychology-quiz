@@ -30,6 +30,8 @@ Legacy исключение ограничено [frozen baseline](../content/le
 
 Canonical validators из [README](../README.md#быстрый-старт-и-проверки) проверяют publication ledger дополнительно к структуре JSON. Seed проверяет его до DB writes; glossary/literature loaders показывают только точный legacy либо approved derivative с валидным review. Новые `draft`, `review`, `deprecated`, `placeholder` не видны пользователю. Политика кэшируется в процессе как часть immutable release: после content/review обновления нужен штатный runtime restart через CD. Legacy literature `review` — явно ограниченное исключение, а не разрешение автоматически показывать новые review entries.
 
+Изменение `learning-quality-reviews.json` может снять approval нового учебного derivative. Поэтому штатный CD классифицирует его вместе с правилами publication/evidence как stateful content sync: до `init_db.py` и `seed_questions.py` выполняется проверенный backup, после — сохранность user state и serving parity. Простого перезапуска runtime для такой редакции недостаточно.
+
 ## Содержательный review учебного банка
 
 [Learning quality ledger](../content/learning-quality-reviews.json) охватывает 575 вопросов и 99 терминов восьми дисциплин. Он фиксирует review смысла, ключа/определения, объяснения/примера, неоднозначности, повторов и источников на точном fingerprint item. Primary fragments связаны с revision/fingerprint из source registry и locator; `partial`/`disputed` сохраняют причины ограничения. Discipline summaries описывают смысловые повторы; они не дают основания автоматически удалять IDs или историю.
