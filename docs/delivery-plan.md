@@ -20,6 +20,8 @@
 
 **E-PL-71 / локальные content gates, 26.09.2026:** на branch head `d8b7e65` пять canonical validators (`validate_questions.py`, `validate_topics.py`, `validate_glossary.py`, `validate_literature.py`, `validate_learning_reviews.py`) PASS; ledger содержит 675 items. Это проверка структуры, связей и правил публикации в локальном дереве, не доказательство научной точности, полной обработки 413 источников или работы PostgreSQL/production. Штатный CI на PR head и CD PENDING.
 
+**E-PL-72 / client asset boundary, 26.09.2026:** на `e878615` локально прошли `cd pwa && npm run build` (PWA build metadata: 11 assets) и `npm run build:miniapp` (3 статических файла). Бинарный scan 12 файлов `pwa/dist` и 3 файлов `miniapp-react` по всем 505 текущим Drive file/folder IDs и маркерам `drive:`/`source_ref(s)` дал 0 совпадений. Это доказывает только отсутствие известных строк в проверенных локальных artifacts; динамические API ответы, unknown IDs и опубликованные Cloudflare assets отдельно не проверены. Canonical Mini App output обновлён локально; PR CI/merge/CD PENDING.
+
 ### Scope, DoD и порядок
 
 | Часть | Самостоятельно поставляемый результат | Gates |
