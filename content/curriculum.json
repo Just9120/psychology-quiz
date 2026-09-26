@@ -101,6 +101,15 @@
         "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca"
       }
     },
+    "t_2be8cec234c0": {
+      "title": "Лекция 3. Психические состояния и личность",
+      "discipline_id": "obschaya_psihologiya",
+      "source": {
+        "source_id": "1y0jj5x9z96g7umRni_xRdYywzgGEc5qDfd0V6chYJW4",
+        "modified_time": "2026-03-20T16:06:27.409Z",
+        "snapshot_sha256": "9740f8a0589cda84653431f26175887d93a448aacc4c0709c3ad3fc08648db91"
+      }
+    },
     "t_4451554cf717": {
       "title": "Практика №1",
       "discipline_id": "obschaya_psihologiya",
