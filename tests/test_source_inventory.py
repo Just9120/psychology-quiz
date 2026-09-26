@@ -70,7 +70,8 @@ def test_folder_move_requires_link_review_without_claiming_content_change():
         "new": [], "changed": [], "relocated": ["same"], "unchanged": [], "missing": []}
     assert processing_status(after, {"same": {"revision": (
         "2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
-        "review_state": "processed"}}) == {"same": "processed"}
+        "review_state": "processed", "snapshot_kind": "file_bytes",
+        "snapshot_sha256": "a" * 64}}) == {"same": "processed"}
 
 
 def test_processing_requires_same_revision_and_explicit_lesson_links():
@@ -78,12 +79,23 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
         item("lecture", "root"), item("slides", "root")]}})
     revision = ("2026-09-25T00:00:00Z", "Lesson", "application/pdf")
     states = processing_status(snapshot, {
-        "lecture": {"revision": revision, "review_state": "processed"},
-        "slides": {"revision": revision, "review_state": "conflict"}})
+        "lecture": {"revision": revision, "review_state": "processed",
+                    "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64},
+        "slides": {"revision": revision, "review_state": "conflict", "reason": "competing editions"}})
     assert states == {"lecture": "processed", "slides": "conflict_review"}
-    assert processing_status(snapshot, {"lecture": {"revision": ("old", "Lesson", "application/pdf")}})["lecture"] == "changed_unprocessed"
+    assert processing_status(snapshot, {"lecture": {"revision": ("old", "Lesson", "application/pdf"),
+        "review_state": "pending_review"}})["lecture"] == "changed_unprocessed"
     with pytest.raises(InventoryError, match="invalid_processing_record"):
         processing_status(snapshot, {"lecture": []})
+    with pytest.raises(InventoryError, match="unverified_processing_record"):
+        processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed"}})
+    with pytest.raises(InventoryError, match="unverified_processing_record"):
+        processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "processed",
+            "snapshot_kind": "extracted_text", "snapshot_sha256": "not-a-sha256"}})
+    with pytest.raises(InventoryError, match="invalid_processing_record"):
+        processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "conflict"}})
+    assert processing_status(snapshot, {"lecture": {"revision": revision,
+        "review_state": "pending_review"}})["lecture"] == "pending_review"
     links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic", "format": "transcript"},
              {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic", "format": "slides"}]
     assert len(link_lessons(snapshot, links)["l1"]["sources"]) == 2

@@ -122,14 +122,31 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
             result[file_id] = "new_unprocessed"
         elif not isinstance(record, dict):
             raise InventoryError("invalid_processing_record")
-        elif tuple(record.get("revision", ())) != _revision(item):
-            result[file_id] = "changed_unprocessed"
-        elif record.get("review_state") == "conflict":
-            result[file_id] = "conflict_review"
-        elif record.get("review_state") == "processed":
-            result[file_id] = "processed"
         else:
-            result[file_id] = "pending_review"
+            revision = record.get("revision")
+            state = record.get("review_state")
+            if (not isinstance(revision, (list, tuple)) or len(revision) != 3
+                    or any(not isinstance(value, str) or not value for value in revision)
+                    or not isinstance(state, str)
+                    or state not in {"pending_review", "conflict", "processed"}):
+                raise InventoryError("invalid_processing_record")
+            if state == "processed" and (
+                    not isinstance(record.get("snapshot_kind"), str)
+                    or record["snapshot_kind"] not in {"file_bytes", "extracted_text"}
+                    or not isinstance(record.get("snapshot_sha256"), str)
+                    or re.fullmatch(r"[0-9a-f]{64}", record["snapshot_sha256"]) is None):
+                raise InventoryError("unverified_processing_record")
+            if state == "conflict" and (not isinstance(record.get("reason"), str)
+                                         or not record["reason"].strip()):
+                raise InventoryError("invalid_processing_record")
+            if tuple(revision) != _revision(item):
+                result[file_id] = "changed_unprocessed"
+            elif state == "conflict":
+                result[file_id] = "conflict_review"
+            elif state == "processed":
+                result[file_id] = "processed"
+            else:
+                result[file_id] = "pending_review"
     return result
 
 
