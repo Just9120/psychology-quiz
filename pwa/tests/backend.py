@@ -16,6 +16,7 @@ from app import curriculum
 from app.attempt_content import capture_question
 from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
+from app.invitation_schema import migrate_invitation_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
 from app.miniapp_fastapi import create_app
@@ -64,6 +65,7 @@ def main():
             with closing(get_connection(path)) as conn:
                 migrate_auth_schema(conn)
                 with conn:
+                    migrate_invitation_schema(conn)
                     migrate_glossary_schema(conn)
                 # The harness supplies its own reviewed taxonomy for synthetic
                 # editions; production catalog and user data are never changed.

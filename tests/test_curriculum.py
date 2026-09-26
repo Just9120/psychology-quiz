@@ -100,11 +100,18 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
         migrate_learning_schema(conn)
         upsert_approved_questions(conn, [v for k, v in items.items() if k.startswith('questions:')], authoritative=True)
         actual = {row['external_id']: capture_question(conn, row['id'])[1] for row in conn.execute('SELECT id,external_id FROM questions')}
+        historical = set()
         for sha, item in catalog['editions'].items():
             key = 'questions:' + item['external_id']
             review = reviews[key]
             topic = catalog['topics'][item['topic_id']]
             source = load_policy().sources[topic['source']['source_id']]
+            if item['item_sha256'] != fingerprint(items[key]):
+                # Prior immutable editions remain mapped for historical attempts.
+                historical.add(item['external_id'])
+                assert actual[item['external_id']] != sha
+                assert item['locator']
+                continue
             assert actual[item['external_id']] == sha
             assert fingerprint(items[key]) == item['item_sha256'] == review['item_sha256']
             assert review['source_support'] == 'supported'
@@ -112,6 +119,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert source['kind'] == 'learning_material' and source['readable'] is True
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
+        assert historical == {'m2_exp_012', 'm2_exp_058'}
 
 
 def test_catalog_rejects_orphan_and_ambiguous_identities(mapped):
