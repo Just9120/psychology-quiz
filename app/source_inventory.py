@@ -244,7 +244,8 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
 
 def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                          processed: dict | None = None, previous: dict | None = None,
-                         reviews: dict | None = None) -> dict:
+                         reviews: dict | None = None,
+                         quality_reviews: dict | None = None) -> dict:
     """Operator-only file-level queue; never return this from a public route."""
     reviewed_graph(snapshot, registry, curriculum)
     if processed is not None and not isinstance(processed, dict):
@@ -252,6 +253,30 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     sources = {source["id"]: source for source in registry["sources"]}
     derivatives: dict[str, set[str]] = {}
     stale_derivatives: dict[str, set[str]] = {}
+    quality_items: dict[str, set[str]] = {}
+    quality_priority: dict[str, set[str]] = {}
+    if quality_reviews is not None:
+        if (not isinstance(quality_reviews, dict)
+                or quality_reviews.get("schema_version") != 1
+                or not isinstance(quality_reviews.get("items"), dict)):
+            raise InventoryError("invalid_quality_reviews")
+        for derivative_id, review in quality_reviews["items"].items():
+            if (not isinstance(derivative_id, str) or not derivative_id
+                    or not isinstance(review, dict)
+                    or not isinstance(review.get("source_support"), str)
+                    or not isinstance(review.get("sources"), list)
+                    or not review["sources"]):
+                raise InventoryError("invalid_quality_review")
+            for ref in review["sources"]:
+                source_id = ref.get("source_id") if isinstance(ref, dict) else None
+                if not isinstance(source_id, str) or source_id not in sources:
+                    raise InventoryError("invalid_quality_review_source")
+                quality_items.setdefault(source_id, set()).add(derivative_id)
+                source = sources[source_id]
+                if (review["source_support"] != "supported"
+                        or ref.get("modified_time") != source["modified_time"]
+                        or ref.get("snapshot_sha256") != source["snapshot_sha256"]):
+                    quality_priority.setdefault(source_id, set()).add(derivative_id)
     if reviews is not None:
         if (not isinstance(reviews, dict) or reviews.get("schema_version") != 1
                 or not isinstance(reviews.get("items"), dict)):
@@ -291,6 +316,9 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
         linked_derivatives = derivatives.get(file_id, set())
         explicit_review_problem = (processing is not None and processing[file_id] in
                                    {"pending_review", "conflict_review", "changed_unprocessed"})
+        priority_quality = (quality_items.get(file_id, set()) if
+                            registry_state in {"changed", "relocated"} or explicit_review_problem
+                            else quality_priority.get(file_id, set()))
         affected_derivatives = (linked_derivatives if registry_state in {"changed", "relocated"}
                                 or explicit_review_problem
                                 else stale_derivatives.get(file_id, set()))
@@ -308,13 +336,17 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
             "linked_derivative_ids": sorted(linked_derivatives),
             "derivative_ids_requiring_review": sorted(affected_derivatives),
             "derivative_review_required": bool(affected_derivatives),
+            "quality_review_item_ids": sorted(quality_items.get(file_id, set())),
+            "quality_review_priority_ids": sorted(priority_quality),
         })
     entries.sort(key=lambda item: (item["paths"], item["file_id"]))
     missing = [{"file_id": file_id, "title": source["title"],
                 "linked_topic_ids": sorted(topics.get(file_id, [])),
                 "linked_derivative_ids": sorted(derivatives.get(file_id, set())),
                 "derivative_ids_requiring_review": sorted(derivatives.get(file_id, set())),
-                "derivative_review_required": bool(derivatives.get(file_id))}
+                "derivative_review_required": bool(derivatives.get(file_id)),
+                "quality_review_item_ids": sorted(quality_items.get(file_id, set())),
+                "quality_review_priority_ids": sorted(quality_items.get(file_id, set()))}
                for file_id, source in sorted(sources.items()) if file_id not in snapshot["files"]]
     # An unreviewed file can disappear before it reaches the canonical registry.
     # Keep its last-seen metadata in the private queue so a missing listing is

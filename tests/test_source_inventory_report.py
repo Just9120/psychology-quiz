@@ -132,6 +132,16 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
                      "snapshot_sha256": source["snapshot_sha256"]}]}}}
     (tmp_path / "content/publication-reviews.json").write_text(
         json.dumps(reviews), encoding="utf-8")
+    quality = {"schema_version": 1, "items": {
+        "questions:legacy-supported": {"source_support": "supported", "sources": [
+            {"source_id": source["id"], "modified_time": source["modified_time"],
+             "snapshot_sha256": source["snapshot_sha256"], "locator": "slide 1"}]},
+        "questions:legacy-partial": {"source_support": "partial", "sources": [
+            {"source_id": source["id"], "modified_time": source["modified_time"],
+             "snapshot_sha256": source["snapshot_sha256"], "locator": "slide 2"}]},
+    }}
+    (tmp_path / "content/learning-quality-reviews.json").write_text(
+        json.dumps(quality), encoding="utf-8")
     current_path = tmp_path / "data/current.json"
     current_path.write_text(json.dumps(current), encoding="utf-8")
     target = tmp_path / "data/private-queue.json"
@@ -147,6 +157,10 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert entries["reviewed-private"]["linked_derivative_ids"] == ["questions:example"]
     assert entries["reviewed-private"]["derivative_ids_requiring_review"] == []
     assert entries["reviewed-private"]["derivative_review_required"] is False
+    assert entries["reviewed-private"]["quality_review_item_ids"] == [
+        "questions:legacy-partial", "questions:legacy-supported"]
+    assert entries["reviewed-private"]["quality_review_priority_ids"] == [
+        "questions:legacy-partial"]
     assert entries["unreviewed-private"]["registry_state"] == "untracked"
     assert all(item["processing_state"] == "unknown_no_processing_snapshot" for item in entries.values())
     assert all(item["paths"] == [["Lesson"]] for item in entries.values())
@@ -160,6 +174,10 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert changed_entry["linked_derivative_ids"] == ["questions:example"]
     assert changed_entry["derivative_ids_requiring_review"] == ["questions:example"]
     assert changed_entry["derivative_review_required"] is True
+    assert inventory_report.private_review_queue(
+        inventory_report._snapshot(changed), registry, curriculum, reviews=reviews,
+        quality_reviews=quality)["files"][0]["quality_review_priority_ids"] == [
+            "questions:legacy-partial", "questions:legacy-supported"]
     missing_queue = inventory_report.private_review_queue(
         inventory_report._snapshot(export([])), registry, curriculum, reviews=reviews)
     assert missing_queue["missing_tracked_sources"][0]["derivative_review_required"] is True
@@ -192,6 +210,13 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert conflict_queue["files"][0]["registry_state"] == "current"
     assert conflict_queue["files"][0]["processing_state"] == "conflict_review"
     assert conflict_queue["files"][0]["derivative_ids_requiring_review"] == ["questions:example"]
+    assert inventory_report.private_review_queue(
+        inventory_report._snapshot(current), registry, curriculum, reviews=reviews,
+        quality_reviews=quality, processed={source["id"]: {
+            "revision": [source["modified_time"], source["title"], "application/pdf"],
+            "review_state": "conflict", "reason": "Same-lesson sources disagree"}}
+    )["files"][0]["quality_review_priority_ids"] == [
+        "questions:legacy-partial", "questions:legacy-supported"]
 
     original = target.read_bytes()
     assert main(args) == 1
