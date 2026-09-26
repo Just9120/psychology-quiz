@@ -1193,13 +1193,13 @@
       "external_id": "m2_exp_002",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "11fa3461c1c2495d691b2eaf567fed77479613a0c40e4e8e9d56a28969d1b84d",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5050:5900"
     },
     "a391297b0d983608aa2372366545896b797465ddbb3f95f7f5726b5d1f829c5e": {
       "external_id": "m2_exp_003",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "acc31195c97c75cdf858056b1dca4cd2cbab178d59f17638b494f7e2d2295e0a",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20932:21389"
     },
     "f045957b27f720ed1a404e65e261409582fcd2df6d24ea93164f9ab32751206c": {
       "external_id": "m2_exp_006",
@@ -1223,13 +1223,13 @@
       "external_id": "m2_exp_009",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "a0ecba430300cf4945ddaa1cce67837370a5f17a9d6185054a59a93af46b51db",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26180:26469"
     },
     "00fce0e72be07d1ec54f83f04ede2caebaeb2e8e94e3daee88e6801da6c9b530": {
       "external_id": "m2_exp_010",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "9a454fbef3ce41f626cd29ab4e630fb15fb07e657c2ebe47ce9dbcf5f32f7dd5",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26469:26710"
     },
     "9aa097fc4e4df2ca463972fefc4e078526e662989d0813b225336e2767b61990": {
       "external_id": "m2_exp_011",
