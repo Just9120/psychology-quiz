@@ -17,6 +17,7 @@ LEGACY_SHA256 = "e03468c43558450105c8b3fddd30ed5db432b379e3b49f63b85b4370235dcc1
 KINDS = {"questions", "glossary", "literature"}
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 DRIVE_REF = re.compile(r"^drive:([A-Za-z0-9_-]+)(?:#.+)?$")
+PUBLIC_DRIVE_LINK = re.compile(r"(?i)(?:drive:|https?://(?:www\.)?(?:drive|docs)\.google\.com/)")
 
 
 def fingerprint(item):
@@ -35,6 +36,29 @@ def _date(value):
         return False
 
 
+def _public_text_contains_private_source(kind, item, sources):
+    # Provenance is reviewed in source_ref(s), but those fields are never
+    # projected to clients. Scan the content that may actually be displayed.
+    visible = {key: value for key, value in item.items()
+               if key not in {"source_ref", "source_refs", "source"}}
+    if kind == "literature" and isinstance(item.get("source"), dict):
+        visible["source"] = {key: item["source"].get(key)
+                             for key in ("title", "locator", "citation")}
+    known_ids = {source_id for source_id in sources if len(source_id) >= 20}
+    known_ids.add(CORPUS_ROOT_ID)
+    pending = [visible]
+    while pending:
+        value = pending.pop()
+        if isinstance(value, dict):
+            pending.extend(value.values())
+        elif isinstance(value, list):
+            pending.extend(value)
+        elif isinstance(value, str) and (PUBLIC_DRIVE_LINK.search(value)
+                                         or any(source_id in value for source_id in known_ids)):
+            return True
+    return False
+
+
 @dataclass(frozen=True)
 class PublicationPolicy:
     legacy: dict
@@ -48,6 +72,8 @@ class PublicationPolicy:
     def error(self, kind, item):
         if kind not in KINDS:
             return "unknown_derivative_kind"
+        if item.get("status") == "approved" and _public_text_contains_private_source(kind, item, self.sources):
+            return "private_source_in_public_content"
         if kind == "questions":
             invalid_case = case_error(item)
             if invalid_case:
@@ -139,7 +165,7 @@ class PublicationPolicy:
         return None
 
     def can_publish(self, kind, item):
-        return self.is_legacy(kind, item) or (item.get("status") == "approved" and self.error(kind, item) is None)
+        return item.get("status") == "approved" and self.error(kind, item) is None
 
 
 @lru_cache(maxsize=1)

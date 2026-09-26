@@ -73,6 +73,43 @@ def test_new_approved_question_requires_an_explanation_at_publication_boundary(e
     assert not policy.can_publish("questions", item)
 
 
+@pytest.mark.parametrize("kind,field,text", [
+    ("questions", "explanation", "Source: drive:private-file-id"),
+    ("glossary", "definition", "See https://docs.google.com/document/d/private-file-id"),
+    ("literature", "citation", "https://drive.google.com/file/d/private-file-id"),
+])
+def test_approved_public_text_cannot_expose_a_drive_location(kind, field, text):
+    item, _, review, policy = reviewed(kind)
+    if kind == "literature":
+        item["source"] = {"id": "private-file-id", "title": "Reading list",
+                          "locator": "Entry 1", "citation": text}
+    else:
+        item[field] = text
+    digest = publication.fingerprint(item)
+    review["item_sha256"] = digest
+    policy.quality_reviews[f"{kind}:fixture"]["item_sha256"] = digest
+    assert policy.error(kind, item) == "private_source_in_public_content"
+    assert not policy.can_publish(kind, item)
+
+
+def test_frozen_legacy_fingerprint_cannot_bypass_public_source_boundary():
+    item, _, _, policy = reviewed()
+    item["question"] = "Read source 1PrivateDriveFileIdentifier2345678"
+    policy.sources["1PrivateDriveFileIdentifier2345678"] = policy.sources["fixture"]
+    policy.legacy["questions:fixture"] = publication.fingerprint(item)
+    assert policy.error("questions", item) == "private_source_in_public_content"
+    assert not policy.can_publish("questions", item)
+
+
+def test_private_bibliography_source_id_is_not_treated_as_display_text():
+    item, _, review, policy = reviewed("literature", "bibliography")
+    item["source"] = {"id": "1PrivateDriveFileIdentifier2345678",
+                      "title": "Reading list", "locator": "Entry 1", "citation": "Book entry"}
+    policy.sources[item["source"]["id"]] = policy.sources["fixture"]
+    review["item_sha256"] = publication.fingerprint(item)
+    assert policy.can_publish("literature", item)
+
+
 @pytest.mark.parametrize("failure", ["missing", "partial", "ambiguous", "stale_item",
                                       "stale_source", "wrong_source", "missing_checks",
                                       "broad_locator"])
