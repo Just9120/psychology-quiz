@@ -117,11 +117,13 @@ def report(current: dict, *, previous: dict | None = None,
         raise InventoryError("invalid_processing_records")
     if links is not None and not isinstance(links, list):
         raise InventoryError("invalid_lesson_links")
-    states = processing_status(snapshot, processed or {})
-    lessons = link_lessons(snapshot, links or [])
-    changes = reconcile(_snapshot(previous), snapshot) if previous is not None else None
     if (registry is None) != (curriculum is None):
         raise InventoryError("reviewed_graph_inputs_required")
+    reviewed = reviewed_graph(snapshot, registry, curriculum) if registry is not None else None
+    states = processing_status(snapshot, processed or {})
+    lessons = link_lessons(snapshot, links or [],
+                           curriculum_topics=curriculum["topics"] if curriculum is not None else None)
+    changes = reconcile(_snapshot(previous), snapshot) if previous is not None else None
     by_format: dict[str, Counter] = {}
     for file_id, item in snapshot["files"].items():
         by_format.setdefault(item["mime_type"], Counter())[states[file_id]] += 1
@@ -131,8 +133,8 @@ def report(current: dict, *, previous: dict | None = None,
                                      for mime, counts in sorted(by_format.items())},
             "linked_lessons": len(lessons),
             "changes": ({kind: len(ids) for kind, ids in changes.items()} if changes else None)}
-    if registry is not None:
-        result["reviewed_graph"] = reviewed_graph(snapshot, registry, curriculum)
+    if reviewed is not None:
+        result["reviewed_graph"] = reviewed
     return result
 
 

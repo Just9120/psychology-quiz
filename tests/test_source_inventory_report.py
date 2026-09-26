@@ -106,8 +106,16 @@ def test_private_queue_distinguishes_reviewed_format_links_from_candidates():
     doc, pdf = current["folders"]["root"][0]["children"]
     doc.update(title="Lecture", mime_type="application/vnd.google-apps.document")
     pdf["title"] = "Lecture.pdf"
-    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": []}
-    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [{
+        "id": "doc", "kind": "learning_material", "title": "Lecture",
+        "corpus_path": "Lecture", "modified_time": doc["modified_time"],
+        "snapshot_sha256": "a" * 64, "readable": True,
+        "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-25",
+        "reviewer": "editor"}]}
+    curriculum = {"schema_version": 1, "disciplines": {"d": {"title": "Discipline"}},
+                  "topics": {"topic": {"title": "Lecture", "discipline_id": "d",
+                     "source": {"source_id": "doc", "modified_time": doc["modified_time"],
+                                "snapshot_sha256": "a" * 64}}}}
     links = [{"source_id": entry["id"], "lesson_id": "lesson", "topic_id": "topic",
               "format": format_name,
               "revision": [entry["modified_time"], entry["title"], entry["mime_type"]],
@@ -123,6 +131,8 @@ def test_private_queue_distinguishes_reviewed_format_links_from_candidates():
     reviewed = queue(links)
     assert reviewed["format_variant_candidates"][0]["link_state"] == "linked"
     assert all(entry["linked_lesson_ids"] == ["lesson"] for entry in reviewed["files"])
+    with pytest.raises(InventoryError, match="unknown_lesson_topic"):
+        queue([{**links[0], "topic_id": "invented"}])
     with pytest.raises(InventoryError, match="stale_lesson_link"):
         queue([{**links[0], "revision": ["old", *links[0]["revision"][1:]]}])
 

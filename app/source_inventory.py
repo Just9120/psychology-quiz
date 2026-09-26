@@ -180,8 +180,10 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
     return result
 
 
-def link_lessons(snapshot: dict, links: list[dict]) -> dict:
+def link_lessons(snapshot: dict, links: list[dict], *, curriculum_topics: dict | None = None) -> dict:
     """Group formats only by explicit editor-confirmed lesson IDs."""
+    if curriculum_topics is not None and not isinstance(curriculum_topics, dict):
+        raise InventoryError("invalid_curriculum_topics")
     lessons, seen = {}, set()
     for link in links:
         if not isinstance(link, dict):
@@ -192,6 +194,8 @@ def link_lessons(snapshot: dict, links: list[dict]) -> dict:
                 not isinstance(value, str) or not value.strip()
                 for value in (lesson_id, topic_id, format_name))):
             raise InventoryError("invalid_lesson_link")
+        if curriculum_topics is not None and topic_id not in curriculum_topics:
+            raise InventoryError("unknown_lesson_topic")
         revision = link.get("revision")
         corpus_path = link.get("corpus_path")
         if (not isinstance(revision, list) or len(revision) != 3
@@ -328,7 +332,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                         for item_id in unmapped_legacy_derivatives)
                  or len(set(unmapped_legacy_derivatives)) != len(unmapped_legacy_derivatives))):
         raise InventoryError("invalid_unmapped_legacy_derivatives")
-    lessons = link_lessons(snapshot, links or [])
+    lessons = link_lessons(snapshot, links or [], curriculum_topics=curriculum["topics"])
     lesson_ids_by_file: dict[str, set[str]] = {}
     for lesson_id, lesson in lessons.items():
         for linked in lesson["sources"]:
