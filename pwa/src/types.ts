@@ -56,7 +56,7 @@ export interface Feedback {
 
 export interface ReviewItem {
   kind: 'quiz' | 'glossary'; question_id?: number; topic_id?: string; term_id?: string
-  topic: string; due_on: string; is_due: boolean; correct_streak: number; reason: 'error' | 'scheduled' | 'new_edition'
+  topic: string; due_on: string; is_due: boolean; correct_streak: number; reason: 'error' | 'scheduled' | 'new_edition' | 'unverified_order'
 }
 export interface ReviewQueue { ok: true; today: string; due_count: number; items: ReviewItem[] }
 export interface MasteryItem { status: 'mastered' | 'insufficient_data'; correct_streak: number; question_id?: number; topic_id?: string; term_id?: string }

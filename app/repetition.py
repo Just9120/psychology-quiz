@@ -39,14 +39,16 @@ def _day(value: str) -> date:
 def schedule(events: list[tuple[str, bool, str, str]], edition: str, *, today: date) -> dict:
     """events are chronological (timestamp, correct, edition, provenance)."""
     matching: list[tuple[str, bool]] = []
+    reset_reason = "new_edition"
     for timestamp, correct, answered_edition, provenance in events:
         if answered_edition != edition or provenance != "captured":
             matching.clear()
+            reset_reason = "unverified_order" if answered_edition == "ambiguous" else "new_edition"
         else:
             matching.append((timestamp, bool(correct)))
     if not matching:
         return {"due_on": today.isoformat(), "is_due": True,
-                "correct_streak": 0, "reason": "new_edition"}
+                "correct_streak": 0, "reason": reset_reason}
     streak = 0
     for _, correct in matching:
         streak = streak + 1 if correct else 0
@@ -78,6 +80,17 @@ def quiz_queue(conn, actor: int, *, today: date) -> list[dict]:
         items.append({"kind": "quiz", "question_id": int(question_id), "topic": topic,
                       **schedule(grouped[int(question_id)], current, today=today)})
     return items
+
+
+def _ordered_term_events(events: list[tuple]) -> list[tuple]:
+    """Equal timestamps cannot prove answer order across durable formats."""
+    ordered = sorted(events, key=lambda event: (_instant(event[0]), event[4], event[5]))
+    for index, event in enumerate(ordered):
+        instant = _instant(event[0])
+        if ((index > 0 and _instant(ordered[index - 1][0]) == instant)
+                or (index + 1 < len(ordered) and _instant(ordered[index + 1][0]) == instant)):
+            ordered[index] = (event[0], event[1], "ambiguous", event[3], event[4], event[5])
+    return ordered
 
 
 def glossary_history(conn, actor: int) -> dict[tuple[str, str], dict]:
@@ -142,9 +155,9 @@ def glossary_history(conn, actor: int) -> dict[tuple[str, str], dict]:
                                      edition == current[key]["quiz_edition"] else "stale",
                                  provenance, "quiz", str(answer_id)))
     for key, events in grouped.items():
-        events.sort(key=lambda event: _instant(event[0]))
-        current[key]["events"] = [event[:4] for event in events]
-        current[key]["answer_refs"] = [event[4:] for event in events]
+        ordered = _ordered_term_events(events)
+        current[key]["events"] = [event[:4] for event in ordered]
+        current[key]["answer_refs"] = [event[4:] for event in ordered]
     return {key: current[key] for key in grouped}
 
 
