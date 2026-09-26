@@ -39,6 +39,7 @@ class PublicationPolicy:
     legacy: dict
     sources: dict
     reviews: dict
+    quality_reviews: dict | None = None
 
     def is_legacy(self, kind, item):
         return self.legacy.get(f"{kind}:{item.get('id')}") == fingerprint(item)
@@ -94,6 +95,40 @@ class PublicationPolicy:
             claimed_ids.add(match.group(1))
         if claimed_ids != reviewed_ids:
             return "unreviewed_source_reference"
+        if purpose == "learning_content":
+            quality = (self.quality_reviews or {}).get(f"{kind}:{item.get('id')}")
+            if not isinstance(quality, dict):
+                return "learning_quality_review_required"
+            if quality.get("item_sha256") != fingerprint(item):
+                return "learning_quality_changed_since_review"
+            required_checks = ({"meaning", "definition", "examples", "ambiguity", "duplicates", "sources"}
+                               if kind == "glossary" else
+                               {"meaning", "answer", "explanation", "ambiguity", "duplicates", "sources"})
+            checks = quality.get("checks")
+            if (quality.get("source_support") != "supported"
+                    or quality.get("meaning") != "consistent"
+                    or quality.get("issues") != []
+                    or not _text(quality.get("note"))
+                    or not _text(quality.get("reviewer"))
+                    or not _date(quality.get("reviewed_at"))
+                    or not isinstance(checks, list)
+                    or len(checks) != len(required_checks)
+                    or any(not isinstance(check, str) for check in checks)
+                    or set(checks) != required_checks):
+                return "learning_quality_not_approved"
+            quality_sources = quality.get("sources")
+            if (not isinstance(quality_sources, list)
+                    or len(quality_sources) != len(reviewed_ids)
+                    or any(not isinstance(ref, dict) or not _text(ref.get("source_id"))
+                           for ref in quality_sources)
+                    or {ref["source_id"] for ref in quality_sources} != reviewed_ids):
+                return "learning_quality_sources_mismatch"
+            for ref in quality_sources:
+                source = self.sources[ref["source_id"]]
+                if (ref.get("snapshot_sha256") != source.get("snapshot_sha256")
+                        or ref.get("modified_time") != source.get("modified_time")
+                        or not _text(ref.get("locator"))):
+                    return "learning_quality_source_stale"
         return None
 
     def can_publish(self, kind, item):
@@ -109,9 +144,12 @@ def load_policy():
     legacy = baseline["items"]
     registry = json.loads((ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
     reviews = json.loads((ROOT / "content/publication-reviews.json").read_text(encoding="utf-8"))
+    quality = json.loads((ROOT / "content/learning-quality-reviews.json").read_text(encoding="utf-8"))
     if (not isinstance(registry, dict) or not isinstance(reviews, dict)
+            or not isinstance(quality, dict)
             or registry.get("schema_version") != 1 or registry.get("corpus_root_id") != CORPUS_ROOT_ID
-            or reviews.get("schema_version") != 1 or not isinstance(reviews.get("items"), dict)):
+            or reviews.get("schema_version") != 1 or not isinstance(reviews.get("items"), dict)
+            or quality.get("schema_version") != 1 or not isinstance(quality.get("items"), dict)):
         raise ValueError("Invalid publication registry")
     sources = {}
     for source in registry.get("sources", []):
@@ -126,7 +164,7 @@ def load_policy():
                 or SHA256.fullmatch(source["snapshot_sha256"]) is None):
             raise ValueError("Incomplete corpus source review")
         sources[source["id"]] = source
-    return PublicationPolicy(legacy, sources, reviews["items"])
+    return PublicationPolicy(legacy, sources, reviews["items"], quality["items"])
 
 
 def validate_publications(kind):

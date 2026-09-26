@@ -19,7 +19,16 @@ def reviewed(kind="questions", source_kind="learning_material"):
               "reviewer": "fixture-reviewer", "reviewed_at": "2026-09-20",
               "sources": [{"source_id": "fixture", "snapshot_sha256": "a" * 64,
                            "modified_time": source["modified_time"], "locator": "page 1"}]}
-    policy = publication.PublicationPolicy({}, {"fixture": source}, {f"{kind}:fixture": review})
+    quality = {"item_sha256": publication.fingerprint(item), "source_support": "supported",
+               "meaning": "consistent", "issues": [], "note": "Synthetic item matches the source",
+               "reviewer": "fixture-reviewer", "reviewed_at": "2026-09-20",
+               "checks": (["meaning", "definition", "examples", "ambiguity", "duplicates", "sources"]
+                          if kind == "glossary" else
+                          ["meaning", "answer", "explanation", "ambiguity", "duplicates", "sources"]),
+               "sources": copy.deepcopy(review["sources"])}
+    policy = publication.PublicationPolicy({}, {"fixture": source},
+                                           {f"{kind}:fixture": review},
+                                           {f"{kind}:fixture": quality})
     return item, source, review, policy
 
 
@@ -50,6 +59,29 @@ def test_exact_review_of_readable_learning_material_allows_publication(kind):
     assert policy.can_publish(kind, item)
     # Content fingerprints ignore JSON formatting/key order, not content changes.
     assert policy.can_publish(kind, dict(reversed(list(item.items()))))
+
+
+@pytest.mark.parametrize("failure", ["missing", "partial", "ambiguous", "stale_item",
+                                      "stale_source", "wrong_source", "missing_checks"])
+def test_new_learning_content_requires_current_supported_quality_review(failure):
+    item, _, _, policy = reviewed()
+    quality = policy.quality_reviews["questions:fixture"]
+    if failure == "missing":
+        policy.quality_reviews.clear()
+    elif failure == "partial":
+        quality["source_support"] = "partial"
+    elif failure == "ambiguous":
+        quality["meaning"] = "ambiguous"
+    elif failure == "stale_item":
+        quality["item_sha256"] = "b" * 64
+    elif failure == "stale_source":
+        quality["sources"][0]["snapshot_sha256"] = "b" * 64
+    elif failure == "wrong_source":
+        quality["sources"][0]["source_id"] = "other"
+    else:
+        quality["checks"].remove("sources")
+    assert policy.error("questions", item)
+    assert not policy.can_publish("questions", item)
 
 
 @pytest.mark.parametrize("failure", ["changed_item", "changed_source", "changed_revision", "unreadable", "missing_source",
@@ -133,7 +165,8 @@ def test_actual_runtime_loader_excludes_unreviewed_new_content(tmp_path, monkeyp
 def test_registry_corruption_fails_closed(tmp_path, monkeypatch, failure):
     target = tmp_path / "content"
     target.mkdir()
-    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json"):
+    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json",
+                     "learning-quality-reviews.json"):
         shutil.copyfile(publication.ROOT / "content" / filename, target / filename)
     filename = "legacy-publication-baseline.json" if failure == "legacy_append" else "source-corpus.json"
     path = target / filename
@@ -156,7 +189,8 @@ def test_checkout_line_endings_do_not_change_frozen_baseline(tmp_path, monkeypat
     expected = publication.load_policy().legacy
     target = tmp_path / "content"
     target.mkdir()
-    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json"):
+    for filename in ("legacy-publication-baseline.json", "source-corpus.json", "publication-reviews.json",
+                     "learning-quality-reviews.json"):
         original = (publication.ROOT / "content" / filename).read_text(encoding="utf-8")
         (target / filename).write_bytes(original.replace("\n", "\r\n").encode("utf-8"))
     monkeypatch.setattr(publication, "ROOT", tmp_path)
