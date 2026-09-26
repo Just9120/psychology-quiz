@@ -297,7 +297,7 @@ E04/E15 зависят от user identity, immutable content editions и лич�
 
 | ID | Решение и зависимый scope |
 | --- | --- |
-| Q-01 | Первый PWA owner-only и proof-of-both-identities/no-auto-merge определены D-09/10. Revision 10 включает общий студенческий доступ и demo, но расширение linking при конфликтах histories и OAuth остаются открытыми; E01/E11, Q-09. |
+| Q-01 | PWA owner-only и proof-of-both-identities/no-auto-merge определены D-09/10 и сохранены revision 12/D-29. Student PWA/demo исключены; OAuth остаётся условной будущей возможностью E11. Возрастной допуск Telegram — Q-09. |
 | Q-02 | Immutable attempt snapshot representation принято 19.09; identity-v1 определена D-12, PostgreSQL cutover выполнен D-13. Repetition version policy и совместимость будущих case/goals schemas остаются открытыми; E01/E04/E15. |
 | Q-03 | Закрыт D-19/D-21/D-23: global difficulty, mastery и базовые intervals/adaptive sampling определены; E03/E04. |
 | Q-04 | Mapping legacy not_started/in_progress/read/revisit/skipped в согласованные «читаю/слушаю/отложено», progress units и дедупликация библиографии; E09. |

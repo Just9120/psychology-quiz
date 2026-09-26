@@ -50,7 +50,7 @@ export const api = {
     return result
   },
   login: (email: string, password: string) => request('auth/login', { email, password }),
-  register: (email: string, invitation: string | null = null) => request('auth/register', { email, invitation }),
+  register: (email: string) => request('auth/register', { email }),
   verify: (token: string, password: string) => request('auth/verify', { token, password }),
   recover: (email: string) => request('auth/recover', { email }),
   reset: (token: string, password: string) => request('auth/reset', { token, password }),
