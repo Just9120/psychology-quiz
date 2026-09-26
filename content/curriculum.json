@@ -83,6 +83,15 @@
         "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87"
       }
     },
+    "t_ae68a82010f9": {
+      "title": "Тема 7. Как учиться на психолога и не сгореть внутренние опоры и поддержка",
+      "discipline_id": "vvedenie_v_professiyu",
+      "source": {
+        "source_id": "17cRf5sw25ROGoRyzxRBv5kDoGT5B1TOfqz_5Zhj7ugA",
+        "modified_time": "2026-04-05T22:57:49.497Z",
+        "snapshot_sha256": "7be70a070add6c43e1f82f3bef996ee1e7be7d4fd71ff497467f514270f4c033"
+      }
+    },
     "t_a6c516bbe92a": {
       "title": "Лекция 1. Психология как Наука",
       "discipline_id": "obschaya_psihologiya",
@@ -146,6 +155,15 @@
         "snapshot_sha256": "0d32a19d40d64b597fc7358576de26ff8ffc1aaea9c0785727bcd3d4175c49ee"
       }
     },
+    "t_f2b92ac4b2ef": {
+      "title": "Лекция 5. Сердечно-сосудистая система",
+      "discipline_id": "fiziologiya_cheloveka",
+      "source": {
+        "source_id": "1manMKgE7vEbTRpQ92hK0SHpPy6nzhaoLr6blXc9H2U0",
+        "modified_time": "2026-04-06T14:50:56.192Z",
+        "snapshot_sha256": "a0e8350b9f626c27113cd30ceeb82d79ed065457d081f7283305c1a5cbce47d0"
+      }
+    },
     "t_c8fdaba2064a": {
       "title": "Лекция 6. Дыхательная система",
       "discipline_id": "fiziologiya_cheloveka",
@@ -182,6 +200,15 @@
         "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068"
       }
     },
+    "t_27f468335f64": {
+      "title": "Лекция 3. Обучение и память",
+      "discipline_id": "fiziologiya_vnd",
+      "source": {
+        "source_id": "1zms8Lj6MHRH_LlaSvdGL912ySXawPHCJ9cFJ3kh_vIE",
+        "modified_time": "2026-04-07T09:57:49.509Z",
+        "snapshot_sha256": "a9c5335d6c21ba59f2aea2fc4d565ea777c854b96cb768333bd6791ab0e46dc3"
+      }
+    },
     "t_17a20a4fb08e": {
       "title": "Лекция 4. Эмоции, принятие решений, воля",
       "discipline_id": "fiziologiya_vnd",
@@ -216,6 +243,15 @@
         "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
         "modified_time": "2026-04-20T15:34:30.028Z",
         "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3"
+      }
+    },
+    "t_05aeac347c73": {
+      "title": "Лекция 14. Свобода воли и мозг",
+      "discipline_id": "psihofiziologiya",
+      "source": {
+        "source_id": "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264",
+        "modified_time": "2026-04-20T15:38:36.917Z",
+        "snapshot_sha256": "2b6c44d6b7e3ba0511b16b4d8d5884e19812e0bbdba5ffbf8a06b14483e45a5c"
       }
     },
     "t_6f9edd8074a3": {
