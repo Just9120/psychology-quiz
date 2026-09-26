@@ -29,6 +29,15 @@ def test_capture_hashes_private_bytes_and_preserves_other_records(tmp_path):
     with pytest.raises(InventoryError, match="source_revision_already_processed"):
         source_capture.capture(export(["private"]), processed, "private", content,
                                "extracted_text")
+    content.write_bytes(raw + b" revised extraction")
+    recheck = source_capture.capture(export(["private"]), processed, "private", content,
+                                    "extracted_text")
+    assert recheck["private"]["review_state"] == "pending_review"
+    assert recheck["private"]["snapshot_sha256"] != processed["private"]["snapshot_sha256"]
+    assert processed["private"]["review_state"] == "processed"
+    assert source_capture.capture(export(["private"]), processed, "private", content,
+                                  "file_bytes")["private"]["review_state"] == "pending_review"
+    content.write_bytes(raw)
     conflicted = {"private": {"revision": updated["private"]["revision"],
                               "review_state": "conflict",
                               "reason": "Transcript and slides disagree",
