@@ -49,6 +49,11 @@ def validate_question(item: dict[str, Any], index: int, source_name: str) -> tup
             f"{source_name} элемент #{index}: 'correct_option_index' выходит за границы массива 'options'",
         )
 
+    if item.get("status") == "approved":
+        explanation = item.get("explanation")
+        if not isinstance(explanation, str) or not explanation.strip():
+            return False, f"{source_name} элемент #{index}: approved explanation required"
+
     return True, None
 
 

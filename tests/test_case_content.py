@@ -37,6 +37,12 @@ def test_case_requires_context_and_alternative_review_before_publication():
     assert case_error({**CASE, "correct_option_index": 9}) == "case_contextual_choice_required"
 
 
+def test_approved_theory_without_explanation_cannot_be_seeded():
+    theory = {**CASE, "kind": "theory", "case": None, "explanation": "  "}
+    assert validate_question(theory, 1, "theory.json") == (
+        False, "theory.json элемент #1: approved explanation required")
+
+
 def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
     item = json.loads(Path("content/questions/module3/cases.json").read_text(encoding="utf-8"))[0]
     registry = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
