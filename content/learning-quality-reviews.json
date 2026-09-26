@@ -17979,7 +17979,7 @@
       "item_sha256": "64da4595016dea724b95d57d75afa65aeedc6a91de58f95016e661750825e0cb",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -17994,13 +17994,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 8 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1227:1368"
         }
       ]
     },
@@ -18008,7 +18008,7 @@
       "item_sha256": "31fc91093f0bb24403fa16ed4f60fe788f1da46ee195cc3b367e9ba04b93e8b6",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18023,13 +18023,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 9 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1370:1491"
         }
       ]
     },
@@ -18037,7 +18037,7 @@
       "item_sha256": "6e5845ee40431c43e72757bd10fb648e35cceeabb305303d0cd6ad6fe53c7b14",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18052,13 +18052,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 1 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1:253"
         }
       ]
     },
@@ -18066,7 +18066,7 @@
       "item_sha256": "65b713a24b5957c34abf59c1ec87e2470f838633f42c0748a844403d95ac8a62",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18081,13 +18081,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 25 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4131:4284"
         }
       ]
     },
@@ -18095,7 +18095,7 @@
       "item_sha256": "eef68579e3db9d07d369a6fcf8e2494a76633edc9c8f2c2e5baebbc284f2a833",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18110,13 +18110,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 18 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2855:3037"
         }
       ]
     },
@@ -18124,7 +18124,7 @@
       "item_sha256": "7eb5b8667d11de63b3ad937917ec4f399b426f113cf745be64cdb4d92a49f88c",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18139,13 +18139,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 37 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6311:6489"
         }
       ]
     },
@@ -18182,7 +18182,7 @@
       "item_sha256": "aa1d8986911ee5207f2a808537d5898278a1ad5333ba64c0c884533b435094b0",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18197,13 +18197,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 27 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4428:4601"
         }
       ]
     },
@@ -18237,7 +18237,7 @@
       "item_sha256": "1c268cd75596fde7e0167dc4dea70e1e2e27646e44d0f085572605087761de53",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "definition",
@@ -18252,13 +18252,13 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Адресное соответствие определения пункту 21 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3333:3538"
         }
       ]
     }

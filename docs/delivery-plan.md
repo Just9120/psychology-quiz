@@ -24,6 +24,8 @@
 
 **E-PL-73 / privacy schema inventory, 26.09.2026:** canonical `scripts/init_db.py` и read-only `scripts/privacy_db_inventory.py` на временной синтетической SQLite базе локально PASS: 17 personal-data/related tables, включая `pwa_invitations`, без unclassified tables или missing expected columns. Временная база после проверки удалена. Это подтверждает классификацию схемы текущего кода, но не фактический production PostgreSQL state, сроки хранения, резервные копии, журналы или страны обработки; Q-11 и AC-PRIV-01–04 остаются открытыми.
 
+**E-PL-74 / адресная сверка глоссария консультирования, 26.09.2026:** текущий первичный Google Doc содержит 53 пункта; connector text extraction имеет 9 482 Unicode characters и SHA-256 `7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8`, совпадающий с tracked source snapshot. Восемь имеющихся `glossary` quality records получили точные locators соответствующих пунктов вместо диапазона всего документа; прежние редакторские оговорки и issues сохранены, `validate_learning_reviews.py` PASS (675 records). Сам glossary content и publication approval не менялись: технические examples и косвенные `question:` source refs остаются, AC-SRC-04/GLO-01 не закрыты этим уточнением. Запись Drive ID в публичные glossary entries остановлена автоматической проверкой полномочий; для такого изменения нужно отдельное разрешение владельца, поэтому пакет ограничен уже существующими evidence records.
+
 ### Scope, DoD и порядок
 
 | Часть | Самостоятельно поставляемый результат | Gates |
