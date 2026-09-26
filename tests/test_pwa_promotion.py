@@ -1,34 +1,21 @@
+"""Telegram clients no longer promote the owner-only PWA to students."""
 import asyncio
-from contextlib import closing
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
-from app.auth_schema import migrate_auth_schema
-from app.classic_quiz_handlers import maybe_send_pwa_offer
-from app.db import get_connection
-from app.invitation_schema import migrate_invitation_schema
-from tests.test_attempt_content import bank
+from app.main import HELP_TEXT, get_main_menu_keyboard, pwa_command
 
 
-def test_private_quiz_offer_is_sent_once_without_student_launch(bank):
-    with closing(get_connection(str(bank))) as conn, conn:
-        migrate_auth_schema(conn)
-        migrate_invitation_schema(conn)
-    private_chat = SimpleNamespace(type="private", send_message=AsyncMock())
-    group_chat = SimpleNamespace(type="group", send_message=AsyncMock())
+def test_student_menu_does_not_advertise_owner_pwa():
+    labels = [button.text for row in get_main_menu_keyboard().keyboard for button in row]
+    assert "🌐 Веб-приложение" not in labels
+    assert "/pwa" not in HELP_TEXT
 
-    async def offer():
-        await maybe_send_pwa_offer(group_chat, 42, db_path=str(bank), origin="https://pwa.example.test", enabled=False)
-        await maybe_send_pwa_offer(private_chat, 42, db_path=str(bank), origin="https://pwa.example.test", enabled=False)
-        await maybe_send_pwa_offer(private_chat, 42, db_path=str(bank), origin="https://pwa.example.test", enabled=False)
 
-    asyncio.run(offer())
-
-    group_chat.send_message.assert_not_awaited()
-    private_chat.send_message.assert_awaited_once()
-    message = private_chat.send_message.await_args
-    assert "демо-задания" in message.args[0]
-    assert message.kwargs["reply_markup"].inline_keyboard[0][0].url == "https://pwa.example.test"
-    with closing(get_connection(str(bank))) as conn:
-        row = conn.execute("SELECT promo_shown_at, token_digest FROM pwa_invitations WHERE user_id=1").fetchone()
-        assert row[0] is not None and row[1] is None
+def test_legacy_pwa_command_returns_owner_only_notice_without_link():
+    reply = AsyncMock()
+    update = SimpleNamespace(message=SimpleNamespace(reply_text=reply))
+    asyncio.run(pwa_command(update, SimpleNamespace()))
+    reply.assert_awaited_once()
+    assert "только владельцу" in reply.await_args.args[0]
+    assert "reply_markup" not in reply.await_args.kwargs

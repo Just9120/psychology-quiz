@@ -2,13 +2,12 @@ import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, Pro
 import type { GlossaryState, GlossaryTopic } from './types'
 import type { LiteratureCatalog, ReadingState, ReadingStatus } from './types'
 import type { ReviewQueue, MasteryOverview, GoalsOverview, AchievementsOverview, GoalKind } from './types'
-import type { DemoItems, DemoAnswer } from './types'
 
 export class ApiError extends Error {
   constructor(public code: string, public status = 0) { super(code) }
 }
 
-const actions = new Set(['demo/items', 'demo/answer', 'auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
+const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
   'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
   'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
   'progress/review', 'progress/mastery', 'progress/goals', 'progress/achievements', 'progress/review-start', 'progress/review-glossary-start', 'progress/goal-set',
@@ -45,8 +44,6 @@ export async function request<T>(action: string, payload?: unknown, signal?: Abo
 }
 
 export const api = {
-  demoItems: () => request<DemoItems>('demo/items'),
-  demoAnswer: (item_id: string, option_index: number) => request<DemoAnswer>('demo/answer', { item_id, option_index }),
   async me(signal?: AbortSignal) {
     const result = await request<Account>('auth/me', undefined, signal)
     csrf = result.csrf_token

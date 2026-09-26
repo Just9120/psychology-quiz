@@ -33,7 +33,6 @@ from telegram.ext import (
 )
 
 from app.config import load_settings
-from app.pwa_promotion import issue_invitation, public_pwa_origin
 from app.web_link_handlers import link_command, confirm_link_callback
 from app.logging_config import configure_app_logging
 from app.handler_latency import HandlerLatency as _HandlerLatency
@@ -88,7 +87,6 @@ from app.classic_quiz_handlers import (
     build_difficulty_keyboard,
     build_category_keyboard,
     build_quiz_finished_text,
-    maybe_send_pwa_offer,
     build_selected_mix_keyboard,
     build_question_count_keyboard,
     _classic_reply_mode_enabled,
@@ -148,7 +146,6 @@ HELP_TEXT = (
     f"{READING_MODE_BUTTON_TEXT} — выбрать обычный или бионический режим.\n"
     f"{GLOSSARY_BUTTON_TEXT} — пройти тест по терминам.\n"
     f"{LITERATURE_BUTTON_TEXT} — отметить чтение литературы.\n"
-    "🌐 Веб-приложение — открыть PWA в браузере.\n"
     "🙈 Скрыть меню — убрать нижнюю клавиатуру.\n"
     "\n"
     "/start — вернуть меню\n"
@@ -156,7 +153,6 @@ HELP_TEXT = (
     "/ui — открыть викторину в окне\n"
     "/glossary — открыть глоссарий-тест\n"
     "/literature — открыть личный список чтения\n"
-    "/pwa — открыть веб-приложение или получить личное приглашение, когда доступ разрешён\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
@@ -418,7 +414,6 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
             [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
             [KeyboardButton(LITERATURE_BUTTON_TEXT)],
-            [KeyboardButton("🌐 Веб-приложение")],
             [KeyboardButton("ℹ️ Помощь")],
             [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
         ],
@@ -452,32 +447,9 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def pwa_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.message is None:
         return
-    if not is_private_chat(update):
-        await update.message.reply_text("Веб-приложение открывается из личного чата с ботом.")
-        return
-    settings = context.application.bot_data["settings"]
-    origin = public_pwa_origin(settings.pwa_origin)
-    if origin is None:
-        await update.message.reply_text("Веб-приложение пока недоступно. Викторина в Telegram работает как обычно.")
-        return
-    invitation = None
-    if (settings.pwa_student_access_enabled and update.effective_user is not None
-            and update.effective_user.id in settings.pwa_student_invitee_ids):
-        tg_user = update.effective_user
-        def _issue():
-            with closing(get_connection(settings.db_path)) as conn, conn:
-                create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-                return issue_invitation(conn, tg_user.id)
-        invitation = await _run_db_task(_issue)
-    if invitation:
-        url = f"{origin}/#invite={invitation}"
-        message = "Откройте личное приглашение в PsychologyAtlas. Оно действует 24 часа и предназначено только для вашего Telegram-аккаунта."
-    else:
-        url = origin
-        message = ("Попробуйте PsychologyAtlas в браузере. Сейчас без аккаунта доступны три демо-задания: теория, термин и кейс. "
-                   "Вход студентов по приглашению пока закрыт." if not settings.pwa_student_access_enabled else
-                   "Веб-приложение доступно. Если ваш аккаунт уже связан с Telegram, войдите с подтверждённой почтой.")
-    await update.message.reply_text(message, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Открыть веб-приложение", url=url)]]))
+    await update.message.reply_text(
+        "Веб-приложение сейчас доступно только владельцу. Для обучения используйте викторину в чате или Mini App."
+    )
 
 
 async def help_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -721,10 +693,6 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
                 f"Ответ получен. Сессия завершена: {result['score']} из {result['total_questions']}.",
                 reply_markup=build_miniapp_launch_inline_keyboard(result["result_url"], reopen_result=True) if result["result_url"] else None,
             )
-            await maybe_send_pwa_offer(message.chat, tg_user.id, db_path=settings.db_path,
-                                       origin=getattr(settings, "pwa_origin", None),
-                                       enabled=getattr(settings, "pwa_student_access_enabled", False),
-                                       invitees=getattr(settings, "pwa_student_invitee_ids", frozenset()))
             return
         if result["status"] == "accepted_next":
             await message.chat.send_message(
