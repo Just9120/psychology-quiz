@@ -18,6 +18,8 @@
 
 **Private snapshot retention:** обе новые JSON-копии дополнительно сохранены в ignored `data/` исходного workspace `C:/Users/wait9/OneDrive/Документы/GitHub/psychology-quiz`; SHA-256 копий сверен с восстановленным worktree. Это защита от потери ignored файлов при архивировании worktree, не публикация и не подтверждение обработки содержимого.
 
+**E-PL-71 / локальные content gates, 26.09.2026:** на branch head `d8b7e65` пять canonical validators (`validate_questions.py`, `validate_topics.py`, `validate_glossary.py`, `validate_literature.py`, `validate_learning_reviews.py`) PASS; ledger содержит 675 items. Это проверка структуры, связей и правил публикации в локальном дереве, не доказательство научной точности, полной обработки 413 источников или работы PostgreSQL/production. Штатный CI на PR head и CD PENDING.
+
 ### Scope, DoD и порядок
 
 | Часть | Самостоятельно поставляемый результат | Gates |
