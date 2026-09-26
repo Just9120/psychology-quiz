@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 
 from app.case_content import case_error
+from app.source_evidence import locator_precision_review_required
 
 ROOT = Path(__file__).resolve().parent.parent
 CORPUS_ROOT_ID = "119DpAwq3T_9JzlTRMPeB7LX7-vpeO95U"
@@ -84,6 +85,8 @@ class PublicationPolicy:
                 return "source_revision_changed_since_review"
             if not _text(ref.get("locator")):
                 return "source_locator_required"
+            if purpose == "learning_content" and locator_precision_review_required(ref["locator"]):
+                return "source_locator_needs_precision"
         refs = [item.get("source_ref")] if kind == "questions" else item.get("source_refs")
         if not isinstance(refs, list) or not refs:
             return "direct_corpus_sources_required"
@@ -129,6 +132,8 @@ class PublicationPolicy:
                         or ref.get("modified_time") != source.get("modified_time")
                         or not _text(ref.get("locator"))):
                     return "learning_quality_source_stale"
+                if locator_precision_review_required(ref["locator"]):
+                    return "learning_quality_locator_needs_precision"
         return None
 
     def can_publish(self, kind, item):

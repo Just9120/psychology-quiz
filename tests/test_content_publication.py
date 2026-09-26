@@ -62,7 +62,8 @@ def test_exact_review_of_readable_learning_material_allows_publication(kind):
 
 
 @pytest.mark.parametrize("failure", ["missing", "partial", "ambiguous", "stale_item",
-                                      "stale_source", "wrong_source", "missing_checks"])
+                                      "stale_source", "wrong_source", "missing_checks",
+                                      "broad_locator"])
 def test_new_learning_content_requires_current_supported_quality_review(failure):
     item, _, _, policy = reviewed()
     quality = policy.quality_reviews["questions:fixture"]
@@ -78,6 +79,10 @@ def test_new_learning_content_requires_current_supported_quality_review(failure)
         quality["sources"][0]["snapshot_sha256"] = "b" * 64
     elif failure == "wrong_source":
         quality["sources"][0]["source_id"] = "other"
+    elif failure == "broad_locator":
+        quality["sources"][0]["locator"] = (
+            "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
+        )
     else:
         quality["checks"].remove("sources")
     assert policy.error("questions", item)
@@ -85,7 +90,7 @@ def test_new_learning_content_requires_current_supported_quality_review(failure)
 
 
 @pytest.mark.parametrize("failure", ["changed_item", "changed_source", "changed_revision", "unreadable", "missing_source",
-                                      "no_locator", "no_reviewer", "no_date", "wrong_purpose", "rejected", "duplicate", "empty"])
+                                      "no_locator", "broad_locator", "no_reviewer", "no_date", "wrong_purpose", "rejected", "duplicate", "empty"])
 def test_review_does_not_survive_missing_or_changed_evidence(failure):
     item, source, review, policy = reviewed()
     if failure == "changed_item": item["question"] = "Different material"
@@ -94,6 +99,8 @@ def test_review_does_not_survive_missing_or_changed_evidence(failure):
     if failure == "unreadable": source["readable"] = False
     if failure == "missing_source": policy.sources.clear()
     if failure == "no_locator": review["sources"][0]["locator"] = ""
+    if failure == "broad_locator":
+        review["sources"][0]["locator"] = "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
     if failure == "no_reviewer": review["reviewer"] = ""
     if failure == "no_date": review["reviewed_at"] = ""
     if failure == "wrong_purpose": review["purpose"] = "bibliographic_metadata"
