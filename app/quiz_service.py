@@ -34,6 +34,29 @@ class PreparedQuiz:
     question_ids: tuple[int, ...]
 
 
+def _include_available_kinds(questions: list[int], chosen: list[int],
+                             kind_by_id: dict[int, str], requested: list[str],
+                             count: int) -> list[int]:
+    """Keep a requested kind visible when a small mixed quiz can contain it."""
+    available = [kind for kind in requested if any(kind_by_id[qid] == kind for qid in questions)]
+    if count < len(available):
+        return chosen
+    result = list(chosen)
+    for kind in available:
+        if any(kind_by_id[qid] == kind for qid in result):
+            continue
+        candidate = next(qid for qid in questions if kind_by_id[qid] == kind)
+        for index in range(len(result) - 1, -1, -1):
+            displaced_kind = kind_by_id[result[index]]
+            if sum(kind_by_id[qid] == displaced_kind for qid in result) > 1:
+                result[index] = candidate
+                break
+        else:
+            if len(result) < count:
+                result.append(candidate)
+    return result
+
+
 def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> PreparedQuiz:
     if not valid_quiz_setup(payload):
         raise QuizSetupError("invalid_setup")
@@ -65,6 +88,7 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
         selected = tuple(category_ids)
     else:
         questions = select_random_approved_question_ids_across_active_categories(conn, pool_limit, difficulty)
+    kind_by_id = {}
     if kinds is not None and questions:
         requested = set(kinds)
         ids = sorted(set(questions))
@@ -72,9 +96,12 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
             f"SELECT id,kind FROM questions WHERE id IN ({','.join('?' for _ in ids)})", ids)}
         questions = [question_id for question_id in questions if kind_by_id.get(question_id) in requested]
     if mode == "adaptive":
+        candidates = questions
         questions = adaptive_questions(conn, actor_user_id, questions, count)
+        if kinds is not None and count is not None:
+            questions = _include_available_kinds(candidates, questions, kind_by_id, kinds, count)
     elif kinds is not None and count is not None:
-        questions = questions[:count]
+        questions = _include_available_kinds(questions, questions[:count], kind_by_id, kinds, count)
     if not questions:
         raise QuizSetupError("no_questions")
     return PreparedQuiz(category_id, selected, difficulty, tuple(questions))

@@ -17,11 +17,13 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.validate_questions import validate
+from app.content_publication import validate_publications
+from app.glossary_projection import projected_questions
 from app.database import connect_database, is_postgres, is_postgres_target, resolve_database_target
 from app.postgres_schema import verify_schema
 
 TOPICS_PATH = REPO_ROOT / "content" / "topics.json"
-COMPARE_FIELDS = ["external_id", "category", "difficulty", "status", "source_ref", "question_text", "explanation", "options"]
+COMPARE_FIELDS = ["external_id", "category", "difficulty", "status", "source_ref", "question_text", "explanation", "kind", "case", "options"]
 
 
 def active_topics() -> list[dict[str, Any]]:
@@ -40,6 +42,8 @@ def _canonical_row(topic: dict[str, Any], q: dict[str, Any], order: int) -> dict
         "source_ref": str(q.get("source_ref", "")).strip(),
         "question_text": str(q.get("question", "")).strip(),
         "explanation": str(q.get("explanation", "")).strip(),
+        "kind": str(q.get("kind", "theory")),
+        "case": q.get("case"),
         "options": [str(o) for o in q.get("options", [])],
         "correct_option_index": q.get("correct_option_index"),
     }
@@ -83,7 +87,7 @@ def db_projection(conn: sqlite3.Connection) -> tuple[dict[str, Any], dict[str, A
     qrows = conn.execute(
         """
         SELECT q.id, q.external_id, c.name AS category, q.difficulty, q.status,
-               q.source_ref, q.question_text, q.explanation
+               q.source_ref, q.question_text, q.explanation, q.kind, q.case_content
         FROM questions q JOIN categories c ON c.id = q.category_id
         ORDER BY q.id
         """
@@ -103,6 +107,8 @@ def db_projection(conn: sqlite3.Connection) -> tuple[dict[str, Any], dict[str, A
             "source_ref": "" if row["source_ref"] is None else str(row["source_ref"]),
             "question_text": str(row["question_text"]),
             "explanation": "" if row["explanation"] is None else str(row["explanation"]),
+            "kind": str(row["kind"]),
+            "case": json.loads(row["case_content"]) if row["case_content"] else None,
             "options": [str(o["option_text"]) for o in options],
             "correct_option_indices": [int(o["option_index"]) for o in options if int(o["is_correct"]) == 1],
         }
@@ -187,8 +193,13 @@ def has_blockers(report: dict[str, Any]) -> bool:
 
 
 def build_report(db_path: str | None = None) -> dict[str, Any]:
-    errors = validate()
+    errors = validate() + validate_publications("glossary")
     canonical_inventory, topics = load_canonical_inventory()
+    try:
+        glossary_questions = projected_questions()
+    except ValueError as exc:
+        glossary_questions = []
+        errors.append(str(exc))
     approved_count = sum(1 for row in canonical_inventory if row["status"] == "approved")
     report: dict[str, Any] = {
         "canonical_source": "content/topics.json active questions contours and referenced JSON question files",
@@ -200,7 +211,9 @@ def build_report(db_path: str | None = None) -> dict[str, Any]:
         "sqlite": None,
     }
     if db_path:
-        report["sqlite"] = compare_db(db_path, canonical_inventory)
+        projection = [_canonical_row({"id": item["id"].split(":")[1], "title": item["category"]}, item, index)
+                      for index, item in enumerate(glossary_questions)]
+        report["sqlite"] = compare_db(db_path, canonical_inventory + projection)
     return report
 
 
