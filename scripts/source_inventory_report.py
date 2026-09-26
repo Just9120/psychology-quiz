@@ -22,6 +22,7 @@ from app.source_inventory import (
     InventoryError, complete_listing, link_lessons, private_review_queue,
     processing_status, reconcile, reviewed_graph, scan,
 )
+from app.content_publication import DRIVE_REF, LEGACY_SHA256, fingerprint
 
 
 def _read(path: Path):
@@ -33,6 +34,62 @@ def _snapshot(value: dict) -> dict:
         raise InventoryError("invalid_inventory_export")
     return scan(value.get("root_id"), {folder: complete_listing(pages)
                                        for folder, pages in value["folders"].items()})
+
+
+def legacy_derivative_links(repo_root: Path, baseline: dict, quality_reviews: dict, *,
+                            expected_sha256: str | None = None) -> tuple[dict[str, list[str]], list[str]]:
+    """Map unchanged legacy items using direct refs or explicit quality evidence."""
+    if (not isinstance(baseline, dict) or not isinstance(baseline.get("items"), dict)
+            or fingerprint(baseline) != (expected_sha256 or LEGACY_SHA256)):
+        raise InventoryError("invalid_legacy_baseline")
+    if not isinstance(quality_reviews, dict):
+        raise InventoryError("invalid_quality_reviews")
+    linked, unmapped, seen = {}, [], set()
+    for kind, pattern in (("questions", "**/*.json"), ("glossary", "*.json"),
+                          ("literature", "*.json")):
+        for path in sorted((repo_root / "content" / kind).glob(pattern)):
+            entries = _read(path)
+            if not isinstance(entries, list):
+                raise InventoryError("invalid_derivative_file")
+            for item in entries:
+                if not isinstance(item, dict) or not isinstance(item.get("id"), str):
+                    raise InventoryError("invalid_derivative_file")
+                derivative_id = f"{kind}:{item['id']}"
+                if (item.get("status") != "approved"
+                        or baseline["items"].get(derivative_id) != fingerprint(item)):
+                    continue
+                refs = [item.get("source_ref")] if kind == "questions" else item.get("source_refs")
+                if refs is None or refs == [None]:
+                    refs = []
+                if not isinstance(refs, list):
+                    raise InventoryError("invalid_legacy_source_refs")
+                source_ids = set()
+                for ref in refs:
+                    match = DRIVE_REF.fullmatch(ref) if isinstance(ref, str) else None
+                    if not isinstance(ref, str):
+                        raise InventoryError("invalid_legacy_source_refs")
+                    if match is not None:
+                        source_ids.add(match.group(1))
+                quality = quality_reviews.get(derivative_id)
+                quality_ids = set()
+                if (isinstance(quality, dict)
+                        and quality.get("item_sha256") == fingerprint(item)):
+                    evidence = quality.get("sources")
+                    if (not isinstance(evidence, list) or not evidence
+                            or any(not isinstance(ref, dict)
+                                   or not isinstance(ref.get("source_id"), str)
+                                   or not ref["source_id"] for ref in evidence)):
+                        raise InventoryError("invalid_legacy_quality_sources")
+                    quality_ids = {ref["source_id"] for ref in evidence}
+                if derivative_id in seen:
+                    raise InventoryError("duplicate_legacy_derivative")
+                seen.add(derivative_id)
+                all_ids = source_ids | quality_ids
+                if all_ids:
+                    linked[derivative_id] = sorted(all_ids)
+                if not all_ids or (source_ids and quality_ids and source_ids != quality_ids):
+                    unmapped.append(derivative_id)
+    return linked, sorted(unmapped)
 
 
 def private_json_target(raw_target: Path, repo_root: Path, *,
@@ -101,6 +158,9 @@ def main(argv=None) -> int:
         curriculum = _read(REPO_ROOT / "content/curriculum.json") if args.reviewed else None
         reviews = _read(REPO_ROOT / "content/publication-reviews.json") if args.private_queue else None
         quality_reviews = _read(REPO_ROOT / "content/learning-quality-reviews.json") if args.private_queue else None
+        legacy, unmapped_legacy = legacy_derivative_links(
+            REPO_ROOT, _read(REPO_ROOT / "content/legacy-publication-baseline.json"),
+            quality_reviews["items"]) if args.private_queue else ({}, [])
         value = report(current, previous=previous, processed=processed, links=links,
                        registry=registry, curriculum=curriculum)
         if args.private_queue:
@@ -109,7 +169,10 @@ def main(argv=None) -> int:
                                          processed=processed,
                                          previous=_snapshot(previous) if previous is not None else None,
                                          reviews=reviews, quality_reviews=quality_reviews,
-                                         links=links)
+                                         links=links, legacy_derivatives=legacy,
+                                         unmapped_legacy_derivatives=unmapped_legacy)
+            value["legacy_derivatives"] = {"linked": len(legacy),
+                                           "unmapped": len(unmapped_legacy)}
             descriptor = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
             with os.fdopen(descriptor, "w", encoding="utf-8") as output:
                 json.dump(queue, output, ensure_ascii=False, indent=2)

@@ -127,6 +127,55 @@ def test_private_queue_distinguishes_reviewed_format_links_from_candidates():
         queue([{**links[0], "revision": ["old", *links[0]["revision"][1:]]}])
 
 
+def test_frozen_legacy_derivatives_stay_in_private_source_review_queue(tmp_path):
+    question = {"id": "old", "status": "approved", "source_ref": "drive:private#slide-2"}
+    altered = {"id": "altered", "status": "approved", "source_ref": "drive:private",
+               "question": "Changed since frozen baseline"}
+    unmapped = {"id": "unmapped", "status": "approved", "source_ref": "old-course-lecture"}
+    quality_mapped = {"id": "quality", "status": "approved", "source_ref": "old-lecture"}
+    (tmp_path / "content/questions").mkdir(parents=True)
+    (tmp_path / "content/questions/bank.json").write_text(
+        json.dumps([question, altered, unmapped, quality_mapped]), encoding="utf-8")
+    baseline = {"items": {"questions:old": inventory_report.fingerprint(question),
+                          "questions:altered": "0" * 64,
+                          "questions:unmapped": inventory_report.fingerprint(unmapped),
+                          "questions:quality": inventory_report.fingerprint(quality_mapped)}}
+    quality = {"questions:quality": {
+        "item_sha256": inventory_report.fingerprint(quality_mapped),
+        "sources": [{"source_id": "private"}]},
+        "questions:unmapped": {"item_sha256": "0" * 64,
+                               "sources": [{"source_id": "private"}]}}
+    links, unresolved = inventory_report.legacy_derivative_links(
+        tmp_path, baseline, quality, expected_sha256=inventory_report.fingerprint(baseline))
+    assert links == {"questions:old": ["private"], "questions:quality": ["private"]}
+    assert unresolved == ["questions:unmapped"]
+    with pytest.raises(InventoryError, match="invalid_legacy_baseline"):
+        inventory_report.legacy_derivative_links(tmp_path, baseline, quality,
+                                                 expected_sha256="0" * 64)
+    source = {"id": "private", "kind": "learning_material", "title": "Lesson",
+              "corpus_path": "Lesson", "modified_time": "2026-09-25T00:00:00Z",
+              "snapshot_sha256": "a" * 64, "readable": True,
+              "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-25", "reviewer": "agent"}
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [source]}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    queue = inventory_report.private_review_queue(
+        inventory_report._snapshot(export(["private"])), registry, curriculum,
+        legacy_derivatives=links, unmapped_legacy_derivatives=unresolved)
+    entry = queue["files"][0]
+    assert entry["legacy_derivative_ids"] == ["questions:old", "questions:quality"]
+    assert entry["linked_derivative_ids"] == ["questions:old", "questions:quality"]
+    assert entry["derivative_ids_requiring_review"] == ["questions:old", "questions:quality"]
+    assert queue["unmapped_legacy_derivative_ids"] == ["questions:unmapped"]
+    missing = inventory_report.private_review_queue(
+        inventory_report._snapshot(export([])), registry, curriculum,
+        legacy_derivatives=links)["missing_tracked_sources"][0]
+    assert missing["legacy_derivative_ids"] == ["questions:old", "questions:quality"]
+    with pytest.raises(InventoryError, match="invalid_legacy_derivatives"):
+        inventory_report.private_review_queue(
+            inventory_report._snapshot(export(["private"])), registry, curriculum,
+            legacy_derivatives={"questions:old": ["unknown"]})
+
+
 def test_reviewed_graph_counts_exact_lesson_edges_and_stale_metadata_without_ids():
     current = export(["private-lesson", "private-bibliography", "unreviewed"])
     registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [
@@ -224,6 +273,10 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     }}
     (tmp_path / "content/learning-quality-reviews.json").write_text(
         json.dumps(quality), encoding="utf-8")
+    baseline = {"items": {}}
+    (tmp_path / "content/legacy-publication-baseline.json").write_text(
+        json.dumps(baseline), encoding="utf-8")
+    monkeypatch.setattr(inventory_report, "LEGACY_SHA256", inventory_report.fingerprint(baseline))
     current_path = tmp_path / "data/current.json"
     current_path.write_text(json.dumps(current), encoding="utf-8")
     target = tmp_path / "data/private-queue.json"
@@ -237,6 +290,7 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert entries["reviewed-private"]["registry_state"] == "current"
     assert entries["reviewed-private"]["linked_topic_ids"] == ["topic"]
     assert entries["reviewed-private"]["linked_derivative_ids"] == ["questions:example"]
+    assert entries["reviewed-private"]["legacy_derivative_ids"] == []
     assert entries["reviewed-private"]["derivative_ids_requiring_review"] == []
     assert entries["reviewed-private"]["derivative_review_required"] is False
     assert entries["reviewed-private"]["quality_review_item_ids"] == [

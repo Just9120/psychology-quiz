@@ -311,13 +311,21 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                          processed: dict | None = None, previous: dict | None = None,
                          reviews: dict | None = None,
                          quality_reviews: dict | None = None,
-                         links: list[dict] | None = None) -> dict:
+                         links: list[dict] | None = None,
+                         legacy_derivatives: dict[str, list[str]] | None = None,
+                         unmapped_legacy_derivatives: list[str] | None = None) -> dict:
     """Operator-only file-level queue; never return this from a public route."""
     reviewed_graph(snapshot, registry, curriculum)
     if processed is not None and not isinstance(processed, dict):
         raise InventoryError("invalid_processing_records")
     if links is not None and not isinstance(links, list):
         raise InventoryError("invalid_lesson_links")
+    if (unmapped_legacy_derivatives is not None
+            and (not isinstance(unmapped_legacy_derivatives, list)
+                 or any(not isinstance(item_id, str) or not item_id
+                        for item_id in unmapped_legacy_derivatives)
+                 or len(set(unmapped_legacy_derivatives)) != len(unmapped_legacy_derivatives))):
+        raise InventoryError("invalid_unmapped_legacy_derivatives")
     lessons = link_lessons(snapshot, links or [])
     lesson_ids_by_file: dict[str, set[str]] = {}
     for lesson_id, lesson in lessons.items():
@@ -326,6 +334,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     sources = {source["id"]: source for source in registry["sources"]}
     derivatives: dict[str, set[str]] = {}
     stale_derivatives: dict[str, set[str]] = {}
+    legacy_by_source: dict[str, set[str]] = {}
     quality_items: dict[str, set[str]] = {}
     quality_priority: dict[str, set[str]] = {}
     quality_evidence: dict[str, dict[str, dict]] = {}
@@ -383,6 +392,22 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                 if (ref.get("modified_time") != source["modified_time"]
                         or ref.get("snapshot_sha256") != source["snapshot_sha256"]):
                     stale_derivatives.setdefault(source_id, set()).add(derivative_id)
+    if legacy_derivatives is not None:
+        if not isinstance(legacy_derivatives, dict):
+            raise InventoryError("invalid_legacy_derivatives")
+        for derivative_id, source_ids in legacy_derivatives.items():
+            if (not isinstance(derivative_id, str) or not derivative_id
+                    or not isinstance(source_ids, list) or not source_ids
+                    or any(not isinstance(source_id, str) or source_id not in sources
+                           for source_id in source_ids)
+                    or len(set(source_ids)) != len(source_ids)):
+                raise InventoryError("invalid_legacy_derivatives")
+            for source_id in source_ids:
+                derivatives.setdefault(source_id, set()).add(derivative_id)
+                # Frozen publication preserves old content, not evidence of the
+                # source revision. Keep it in review even if metadata is current.
+                stale_derivatives.setdefault(source_id, set()).add(derivative_id)
+                legacy_by_source.setdefault(source_id, set()).add(derivative_id)
     topics = {}
     for topic_id, topic in curriculum["topics"].items():
         topics.setdefault(topic["source"]["source_id"], []).append(topic_id)
@@ -444,6 +469,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
             "linked_topic_ids": sorted(topics.get(file_id, [])),
             "linked_lesson_ids": sorted(lesson_ids_by_file.get(file_id, [])),
             "linked_derivative_ids": sorted(linked_derivatives),
+            "legacy_derivative_ids": sorted(legacy_by_source.get(file_id, set())),
             "derivative_ids_requiring_review": sorted(affected_derivatives),
             "derivative_review_required": bool(affected_derivatives),
             "quality_review_item_ids": sorted(quality_items.get(file_id, set())),
@@ -454,6 +480,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     missing = [{"file_id": file_id, "title": source["title"],
                 "linked_topic_ids": sorted(topics.get(file_id, [])),
                 "linked_derivative_ids": sorted(derivatives.get(file_id, set())),
+                "legacy_derivative_ids": sorted(legacy_by_source.get(file_id, set())),
                 "derivative_ids_requiring_review": sorted(derivatives.get(file_id, set())),
                 "derivative_review_required": bool(derivatives.get(file_id)),
                 "related_conflict_review_required": file_id in related_conflicts,
@@ -489,4 +516,5 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     return {"schema_version": 1, "root_id": snapshot["root_id"],
             "files": entries, "missing_tracked_sources": missing,
             "missing_untracked_files": missing_untracked,
+            "unmapped_legacy_derivative_ids": sorted(unmapped_legacy_derivatives or []),
             "format_variant_candidates": variants}
