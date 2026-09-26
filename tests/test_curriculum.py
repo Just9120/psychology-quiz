@@ -89,7 +89,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     reviews = json.loads((curriculum.ROOT / 'content/learning-quality-reviews.json').read_text(encoding='utf-8'))['items']
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
-    assert len(catalog['disciplines']) == 8 and len(catalog['editions']) == 297
+    assert len(catalog['disciplines']) == 8 and len(catalog['editions']) == 307
     assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
         k: v['title'] for k, v in registry.items() if 'glossary' in v['available_contours']
     }

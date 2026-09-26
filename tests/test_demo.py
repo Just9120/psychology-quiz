@@ -2,6 +2,7 @@
 from contextlib import closing
 
 from app.db import get_connection
+from tests.test_attempt_content import bank
 from tests.test_web_auth import post, web
 
 

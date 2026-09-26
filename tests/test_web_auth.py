@@ -320,7 +320,7 @@ def test_link_requires_both_confirmations_preserves_history_and_blocks_replay(we
     with closing(get_connection(str(web.db))) as conn, conn:
         sid = make_attempt(conn)
         answer_quiz(conn, actor_user_id=1, session_id=sid, question_id=1, selected_option_index=0)
-        before = {k: v for k,v in user_state(conn).items() if not k.startswith('web_')}
+        before = user_state(conn, {k: v for k, v in user_state(conn).items() if not k.startswith('web_')})
     register(web)
     csrf = login(web)
     token = post(web, 'link/start', csrf=csrf).json()['code']
@@ -345,7 +345,7 @@ def test_link_requires_both_confirmations_preserves_history_and_blocks_replay(we
     assert state['recent_answer_feedback']['selected_option_index'] == 0
     with closing(get_connection(str(web.db))) as conn:
         assert conn.execute('SELECT user_id FROM web_accounts').fetchone()[0] == 1
-        assert {k: v for k,v in user_state(conn).items() if not k.startswith('web_')} == before
+        assert user_state(conn, {k: v for k, v in user_state(conn).items() if not k.startswith('web_')}) == before
 
 
 @pytest.mark.parametrize('invalidate', ['expiry', 'logout', 'recovery', 'different-session', 'fresh-actor'])

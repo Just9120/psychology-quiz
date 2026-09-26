@@ -267,10 +267,13 @@ class GlossaryRuntimeTests(unittest.TestCase):
 
     def test_loader_rejects_malformed_confusable_metadata(self):
         raw_entries = json.loads(Path(f"content/glossary/{EXP_TOPIC_ID}.json").read_text(encoding="utf-8"))
-        raw_entries[0]["confusable_with"] = "not-a-list"
+        malformed = next(item for item in raw_entries if item["status"] == "approved")
+        malformed["confusable_with"] = "not-a-list"
 
         with patch("app.glossary.Path.read_text", return_value=json.dumps(raw_entries, ensure_ascii=False)):
-            self.assertIsNone(load_glossary_entries(EXP_TOPIC_ID))
+            entries = load_glossary_entries(EXP_TOPIC_ID)
+        self.assertIsNotNone(entries)
+        self.assertNotIn(malformed["id"], {entry.id for entry in entries})
 
     def test_direct_confusables_fill_all_distractor_slots(self):
         entries = [
