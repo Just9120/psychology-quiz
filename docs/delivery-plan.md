@@ -22,6 +22,8 @@
 
 **E-PL-72 / client asset boundary, 26.09.2026:** на `e878615` локально прошли `cd pwa && npm run build` (PWA build metadata: 11 assets) и `npm run build:miniapp` (3 статических файла). Бинарный scan 12 файлов `pwa/dist` и 3 файлов `miniapp-react` по всем 505 текущим Drive file/folder IDs и маркерам `drive:`/`source_ref(s)` дал 0 совпадений. Это доказывает только отсутствие известных строк в проверенных локальных artifacts; динамические API ответы, unknown IDs и опубликованные Cloudflare assets отдельно не проверены. Canonical Mini App output обновлён локально; PR CI/merge/CD PENDING.
 
+**E-PL-73 / privacy schema inventory, 26.09.2026:** canonical `scripts/init_db.py` и read-only `scripts/privacy_db_inventory.py` на временной синтетической SQLite базе локально PASS: 17 personal-data/related tables, включая `pwa_invitations`, без unclassified tables или missing expected columns. Временная база после проверки удалена. Это подтверждает классификацию схемы текущего кода, но не фактический production PostgreSQL state, сроки хранения, резервные копии, журналы или страны обработки; Q-11 и AC-PRIV-01–04 остаются открытыми.
+
 ### Scope, DoD и порядок
 
 | Часть | Самостоятельно поставляемый результат | Gates |
