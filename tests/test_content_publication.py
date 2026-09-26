@@ -101,6 +101,29 @@ def test_frozen_legacy_fingerprint_cannot_bypass_public_source_boundary():
     assert not policy.can_publish("questions", item)
 
 
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
+@pytest.mark.parametrize("failure", ["missing_quality", "changed_item_review", "changed_source", "missing_source"])
+def test_frozen_legacy_learning_item_stops_when_source_evidence_is_stale(kind, failure):
+    item, source, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    assert policy.can_publish(kind, item)
+    quality = policy.quality_reviews[f"{kind}:fixture"]
+    if failure == "missing_quality":
+        policy.quality_reviews.clear()
+        expected = "legacy_source_review_required"
+    elif failure == "changed_item_review":
+        quality["item_sha256"] = "b" * 64
+        expected = "legacy_source_review_required"
+    elif failure == "changed_source":
+        source["snapshot_sha256"] = "b" * 64
+        expected = "legacy_source_revision_changed_since_review"
+    else:
+        del policy.sources["fixture"]
+        expected = "legacy_source_review_required"
+    assert policy.error(kind, item) == expected
+    assert not policy.can_publish(kind, item)
+
+
 def test_private_bibliography_source_id_is_not_treated_as_display_text():
     item, _, review, policy = reviewed("literature", "bibliography")
     item["source"] = {"id": "1PrivateDriveFileIdentifier2345678",

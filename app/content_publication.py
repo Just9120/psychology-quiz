@@ -81,6 +81,25 @@ class PublicationPolicy:
             if item.get("status") == "approved" and not _text(item.get("explanation")):
                 return "explanation_required"
         if self.is_legacy(kind, item):
+            if kind in {"questions", "glossary"}:
+                # The frozen fingerprint preserves the old publication, but
+                # cannot certify it against a later corpus revision.
+                quality = (self.quality_reviews or {}).get(f"{kind}:{item.get('id')}")
+                if (not isinstance(quality, dict)
+                        or quality.get("item_sha256") != fingerprint(item)
+                        or not isinstance(quality.get("sources"), list)
+                        or not quality["sources"]):
+                    return "legacy_source_review_required"
+                for ref in quality["sources"]:
+                    if not isinstance(ref, dict) or not _text(ref.get("source_id")):
+                        return "legacy_source_review_required"
+                    source = self.sources.get(ref.get("source_id"))
+                    if (not isinstance(source, dict) or source.get("readable") is not True
+                            or source.get("kind") != "learning_material"):
+                        return "legacy_source_review_required"
+                    if (ref.get("modified_time") != source.get("modified_time")
+                            or ref.get("snapshot_sha256") != source.get("snapshot_sha256")):
+                        return "legacy_source_revision_changed_since_review"
             return None
         if item.get("status") != "approved":
             return None  # Preparation is permitted; the loader does not publish it.
