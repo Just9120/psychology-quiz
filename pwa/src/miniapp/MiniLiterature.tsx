@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { ReadingStatus } from '../types'
+import { readingChecklistLabel, suggestedReadingOrder } from '../readingPlan'
 import { miniApi, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 
 const labels: Record<ReadingStatus, string> = { not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', revisit: 'Вернуться', skipped: 'Пропущено' }
@@ -16,7 +17,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
   const [uncertain, setUncertain] = useState(false)
   const [saved, setSaved] = useState(false)
   const item = items.find(entry => entry.id === selected)
-  const visible = items.filter(entry => !topic || entry.topic_id === topic)
+  const visible = topic ? suggestedReadingOrder(items.filter(entry => entry.topic_id === topic)) : items
   function choose(entry: MiniLiteratureItem) {
     setSelected(entry.id); setStatus(entry.user_state?.reading_status ?? 'not_started')
     setPercent(entry.user_state?.progress_percent == null ? '' : String(entry.user_state.progress_percent))
@@ -42,6 +43,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
     <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог</button>
     {item ? <article className="panel literature-detail"><button className="text-button" onClick={() => setSelected(null)}>← К списку</button>
       <h2>{item.title}</h2><p>{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p>
+      <p className="muted">Приоритет преподавателя: {item.priority || 'не указан в доступном источнике'}.</p>
       <p>{item.why_read}</p>{item.source?.citation && <details><summary>Библиографическая запись</summary><blockquote>{item.source.citation}</blockquote></details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (valid && !uncertain) void run(save) }}>
         <label className="field">Статус<select value={status} disabled={busy || uncertain} onChange={event => { setStatus(event.target.value as ReadingStatus); setSaved(false) }}>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
@@ -50,7 +52,8 @@ export function MiniLiterature({ initial, topics, busy, run }: {
         <button className="button primary" type="submit" disabled={busy || uncertain || !valid}>Сохранить чтение</button>{saved && <p role="status">Отметка сохранена.</p>}
       </form></article> : <>
       <label className="field">Тема<select value={topic} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{topics.map(entry => <option key={entry.topic_id} value={entry.topic_id}>{entry.title}</option>)}</select></label>
-      {visible.length ? <div className="literature-list">{visible.map(entry => <article className="panel literature-card" key={entry.id}><h2><button className="text-button literature-title" onClick={() => choose(entry)}>{entry.title}</button></h2><p>{entry.authors?.join(', ') || 'Автор не указан'}</p><p className="muted">{labels[entry.user_state?.reading_status ?? 'not_started']}</p></article>)}</div> : <p role="status">По этой теме список пока пуст.</p>}
+      {topic && <p className="muted">Личный чек-лист в предложенном приложением порядке: сначала незавершённое по учебному списку, затем прочитанное. Это не приоритет преподавателя.</p>}
+      {visible.length ? <div className="literature-list">{visible.map(entry => <article className="panel literature-card" key={entry.id}><h2><button className="text-button literature-title" onClick={() => choose(entry)}>{entry.title}</button></h2><p>{entry.authors?.join(', ') || 'Автор не указан'}</p><p className="muted">{labels[entry.user_state?.reading_status ?? 'not_started']}{topic ? ` · ${readingChecklistLabel(entry)}` : ''}{entry.priority ? ` · Приоритет преподавателя: ${entry.priority}` : ''}</p></article>)}</div> : <p role="status">По этой теме список пока пуст.</p>}
     </>}
   </section>
 }
