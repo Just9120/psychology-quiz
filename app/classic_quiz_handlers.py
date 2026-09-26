@@ -1344,30 +1344,33 @@ def _load_classic_text_answer_context(settings, tg_user, state: dict) -> dict:
 
     with closing(get_connection(settings.db_path)) as conn, conn:
         session = get_quiz_session(conn, session_id)
-        if session is None or str(session["status"]) != "in_progress":
+        if session is None or str(session["status"]) not in {"in_progress", "finished"}:
             return {"status": "session_missing", "session_id": session_id, "question_id": expected_question_id}
         user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
         if int(session["user_id"]) != int(user_row["id"]):
             return {"status": "forbidden", "session_id": session_id, "question_id": expected_question_id}
-        current = get_current_unanswered_question(conn, session_id)
-        if current is None:
-            return {"status": "no_current_question", "session_id": session_id, "question_id": expected_question_id}
-        question_id = int(current["question_id"])
-        if question_id != expected_question_id:
-            return {"status": "stale_question", "session_id": session_id, "question_id": expected_question_id}
-        options = get_question_options(conn, question_id, session_id=session_id)
-        return {"status": "ok", "session_id": session_id, "question_id": question_id, "options": options}
+        current = (get_current_unanswered_question(conn, session_id)
+                   if str(session["status"]) == "in_progress" else None)
+        if current is None or int(current["question_id"]) != expected_question_id:
+            saved = conn.execute(
+                "SELECT 1 FROM quiz_answers WHERE session_id=? AND question_id=?",
+                (session_id, expected_question_id),
+            ).fetchone()
+            if saved is None:
+                status = "no_current_question" if current is None else "stale_question"
+                return {"status": status, "session_id": session_id, "question_id": expected_question_id}
+        options = get_question_options(conn, expected_question_id, session_id=session_id)
+        return {"status": "ok", "session_id": session_id, "question_id": expected_question_id, "options": options}
 
 
 def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, question_id: int, selected_option_index: int) -> dict:
     with closing(get_connection(settings.db_path)) as conn, conn:
         session = get_quiz_session(conn, session_id)
-        if session is None or str(session["status"]) != "in_progress":
+        if session is None or str(session["status"]) not in {"in_progress", "finished"}:
             return {"status": "session_missing"}
         user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
         if int(session["user_id"]) != int(user_row["id"]):
             return {"status": "forbidden"}
-        current = get_current_unanswered_question(conn, session_id)
         options = get_question_options(conn, question_id, session_id=session_id)
         submission = submit_miniapp_answer_event(
             conn,
@@ -1379,25 +1382,30 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
         if submission.status == "stale_question" and submission.expected_question_id is None:
             finalized = finalize_quiz_session(conn, session_id)
             return {"status": "stale_finished", "finalized": finalized}
-        if submission.status != "accepted":
+        if submission.status not in {"accepted", "duplicate"}:
             return {"status": submission.status}
-        selected_option = _find_option_by_index(options, selected_option_index)
+        saved_option_index = int(submission.selected_option_index)
+        selected_option = _find_option_by_index(options, saved_option_index)
         correct_option = next((opt for opt in options if bool(int(opt["is_correct"]))), None)
         if selected_option is None or correct_option is None:
             return {"status": "invalid_option"}
         answered_questions = get_answered_questions_count(conn, session_id)
-        total_questions = int(current["total_questions"])
-        is_last_question = answered_questions >= total_questions
-        finalized = finalize_quiz_session(conn, session_id) if is_last_question else None
+        total_questions = int(conn.execute(
+            "SELECT COUNT(*) FROM quiz_session_questions WHERE session_id=?",
+            (session_id,),
+        ).fetchone()[0])
+        is_last_question = str(session["status"]) == "finished" or answered_questions >= total_questions
+        finalized = (finalize_quiz_session(conn, session_id) if is_last_question else None)
         correct_option_index = int(correct_option["option_index"])
+        content = get_attempt_content(conn, session_id, question_id)
         return {
-            "status": "accepted",
+            "status": submission.status,
             "is_correct": bool(submission.is_correct),
-            "selected_option_label": numeric_answer_label_for_option(options, selected_option_index),
+            "selected_option_label": numeric_answer_label_for_option(options, saved_option_index),
             "selected_option_text": str(selected_option["option_text"]),
             "correct_option_label": numeric_answer_label_for_option(options, correct_option_index),
             "correct_option_text": str(correct_option["option_text"]),
-            "explanation": str(current["explanation"] or ""),
+            "explanation": str(content["explanation"] or ""),
             "case_review": case_review_for_attempt(conn, session_id, question_id),
             "answered_questions": answered_questions,
             "total_questions": total_questions,
@@ -1501,7 +1509,7 @@ async def classic_reply_text_answer_handler(update: Update, context: ContextType
         latency.add_db(db_started_at)
 
         status = result["status"]
-        if status == "accepted":
+        if status in {"accepted", "duplicate"}:
             feedback_text = build_classic_reply_feedback_text(result)
             if result["is_last_question"]:
                 finalized = result["finalized"]
@@ -1527,7 +1535,7 @@ async def classic_reply_text_answer_handler(update: Update, context: ContextType
                     ),
                     api_kind="message_send",
                 )
-        elif status in {"stale_question", "duplicate"}:
+        elif status == "stale_question":
             _set_classic_reply_state(context, {"status": "awaiting_next", "session_id": session_id})
             await _timed_telegram_api_call(
                 latency,
@@ -1649,12 +1657,11 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         def _handle_answer_db():
             with closing(get_connection(settings.db_path)) as conn, conn:
                 session = get_quiz_session(conn, session_id)
-                if session is None or str(session["status"]) != "in_progress":
+                if session is None or str(session["status"]) not in {"in_progress", "finished"}:
                     return {"status": "session_missing"}
                 user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
                 if int(session["user_id"]) != int(user_row["id"]):
                     return {"status": "forbidden"}
-                current = get_current_unanswered_question(conn, session_id)
                 submission = submit_miniapp_answer_event(
                     conn,
                     session_id=session_id,
@@ -1665,16 +1672,28 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 if submission.status == "stale_question" and submission.expected_question_id is None:
                     finalized = finalize_quiz_session(conn, session_id)
                     return {"status": "stale_finished", "finalized": finalized}
-                if submission.status != "accepted":
+                if submission.status not in {"accepted", "duplicate"}:
                     return {"status": submission.status}
                 answered_questions = get_answered_questions_count(conn, session_id)
-                total_questions = int(current["total_questions"])
-                is_last_question = answered_questions >= total_questions
+                total_questions = int(conn.execute(
+                    "SELECT COUNT(*) FROM quiz_session_questions WHERE session_id=?",
+                    (session_id,),
+                ).fetchone()[0])
+                is_last_question = str(session["status"]) == "finished" or answered_questions >= total_questions
                 finalized = finalize_quiz_session(conn, session_id) if is_last_question else None
+                content = get_attempt_content(conn, session_id, question_id)
+                selected_option = next((option for option in content["options"]
+                                        if option["option_index"] == submission.selected_option_index), None)
+                correct_option = next((option for option in content["options"]
+                                       if bool(option["is_correct"])), None)
+                if selected_option is None or correct_option is None:
+                    return {"status": "invalid_option"}
                 return {
-                    "status": "accepted",
+                    "status": submission.status,
                     "is_correct": bool(submission.is_correct),
-                    "explanation": str(current["explanation"] or ""),
+                    "selected_option_text": str(selected_option["option_text"]),
+                    "correct_option_text": str(correct_option["option_text"]),
+                    "explanation": str(content["explanation"] or ""),
                     "case_review": case_review_for_attempt(conn, session_id, question_id),
                     "answered_questions": answered_questions,
                     "total_questions": total_questions,
@@ -1716,18 +1735,23 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             await _timed_telegram_api_call(latency, query.edit_message_text("Выбран некорректный вариант ответа."), api_kind="message_edit")
             latency.summary()
             return
-        if result["status"] == "duplicate":
-            _mark_repeated_tap(latency)
-            await _timed_telegram_api_call(latency, query.edit_message_text("На этот вопрос уже дан ответ."), api_kind="message_edit")
-            latency.summary()
-            return
-        if result["status"] != "accepted":
+        if result["status"] not in {"accepted", "duplicate"}:
             await _timed_telegram_api_call(latency, query.edit_message_text("Не удалось обработать ответ. Обновите состояние викторины."), api_kind="message_edit")
             latency.summary()
             return
+        if result["status"] == "duplicate":
+            _mark_repeated_tap(latency)
 
         is_correct = result["is_correct"]
         result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
+        selected_text = result.get("selected_option_text")
+        selected_line = (f"<b>Ваш ответ:</b> "
+                         f"{render_reading_mode_text(selected_text, result['reading_mode'])}\n"
+                         if selected_text is not None else "")
+        correct_text = result.get("correct_option_text")
+        correct_line = (f"<b>Правильный ответ:</b> "
+                        f"{render_reading_mode_text(correct_text, result['reading_mode'])}\n\n"
+                        if correct_text is not None else "")
         rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
         rendered_explanation += format_case_review_html(result.get("case_review"), result["reading_mode"])
 
@@ -1735,6 +1759,8 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             finalized = result["finalized"]
             message = (
                 f"{result_line}\n\n"
+                f"{selected_line}"
+                f"{correct_line}"
                 f"<b>Пояснение:</b> {rendered_explanation}\n\n"
                 f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}"
             )
@@ -1745,6 +1771,8 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         next_number = result["answered_questions"] + 1
         message = (
             f"{result_line}\n\n"
+            f"{selected_line}"
+            f"{correct_line}"
             f"<b>Пояснение:</b> {rendered_explanation}\n\n"
             f"<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']} отвечено"
         )
