@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LITERATURE_DIR = ROOT / "content/literature"
 TOPICS_FILE = ROOT / "content/topics.json"
 PUBLIC_ITEM_FIELDS = (
-    "work_id", "module", "source", "content_access", "metadata_warnings",
+    "work_id", "module", "content_access", "metadata_warnings",
     "id",
     "topic_id",
     "title",
@@ -28,6 +28,7 @@ PUBLIC_ITEM_FIELDS = (
     "learning_outcomes",
     "prerequisites",
 )
+PUBLIC_SOURCE_FIELDS = ("title", "locator", "citation")
 USER_STATE_FIELDS = (
     "reading_status",
     "progress_percent",
@@ -58,7 +59,13 @@ def load_topic_registry() -> dict[str, dict[str, Any]]:
 
 
 def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
-    return {field: entry.get(field) for field in PUBLIC_ITEM_FIELDS}
+    item = {field: entry.get(field) for field in PUBLIC_ITEM_FIELDS}
+    source = entry.get("source")
+    item["source"] = (
+        {field: source.get(field) for field in PUBLIC_SOURCE_FIELDS}
+        if isinstance(source, dict) else None
+    )
+    return item
 
 
 def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:

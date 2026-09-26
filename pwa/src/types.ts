@@ -173,7 +173,7 @@ export type ReadingStatus = 'not_started' | 'in_progress' | 'read' | 'revisit' |
 export type ReadingState = { literature_id: string; reading_status: ReadingStatus; progress_percent: number | null; updated_at: string }
 export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
-  source: { id: string; title: string; locator: string; citation: string };
+  source: { title: string; locator: string; citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
 }
 export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; entries: LiteratureEntry[] }

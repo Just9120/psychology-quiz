@@ -33,6 +33,8 @@ def test_reading_shared_actor_preserves_distinct_lists_private_notes_and_other_a
     assert catalog.status_code == 200 and catalog.headers['cache-control'] == 'no-store'
     works = catalog.json()['works']
     assert len(works) == 114
+    assert all(set(entry['source']) == {'title', 'locator', 'citation'}
+               for work in works for entry in work['entries'])
     pair = next(work['entries'] for work in works if len(work['entries']) == 2)
     first, second = pair[0]['id'], pair[1]['id']
     body = {'literature_id': first, 'reading_status': 'in_progress', 'progress_percent': 37, 'actor': 999}
