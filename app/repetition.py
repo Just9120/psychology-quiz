@@ -9,6 +9,20 @@ import json
 from app.attempt_content import capture_question
 from app.content_publication import fingerprint
 from app.glossary import GLOSSARY_TOPICS, load_glossary_entries
+from app.glossary_projection import projected_questions
+
+
+def _matches_published_projection(snapshot: dict, projected: dict) -> bool:
+    """A quiz edition shares term history only while it is the exact published projection."""
+    fields = {"external_id": "id", "question_text": "question", "category": "category",
+              "explanation": "explanation", "source_ref": "source_ref",
+              "difficulty": "difficulty", "kind": "kind"}
+    if any(snapshot.get(field) != projected.get(source) for field, source in fields.items()):
+        return False
+    expected = [{"option_index": index, "option_text": text,
+                 "is_correct": int(index == projected["correct_option_index"])}
+                for index, text in enumerate(projected["options"])]
+    return snapshot.get("options") == expected
 
 
 def _instant(value: str) -> datetime:
@@ -75,20 +89,10 @@ def glossary_history(conn, actor: int) -> dict[tuple[str, str], dict]:
                 "topic": topic, "edition": fingerprint(asdict(entry)),
                 "question_id": None, "events": [],
             }
-    question_keys = {}
-    for question_id, external_id in conn.execute(
-            "SELECT id,external_id FROM questions WHERE kind='glossary' AND status='approved'"):
-        parts = str(external_id).split(":", 2)
-        if len(parts) != 3 or parts[0] != "glossary":
-            continue
-        key = (parts[1], parts[2])
-        if key in current:
-            current[key]["question_id"] = int(question_id)
-            question_keys[int(question_id)] = key
     grouped = defaultdict(list)
-    sessions = conn.execute("""SELECT snapshot,state,updated_at FROM glossary_sessions
+    sessions = conn.execute("""SELECT id,snapshot,state,updated_at FROM glossary_sessions
         WHERE user_id=? ORDER BY created_at,id""", (actor,)).fetchall()
-    for snapshot_json, state_json, updated_at in sessions:
+    for session_id, snapshot_json, state_json, updated_at in sessions:
         snapshot, state = json.loads(snapshot_json), json.loads(state_json)
         for step, answer in state.get("answers", {}).items():
             try:
@@ -101,24 +105,46 @@ def glossary_history(conn, actor: int) -> dict[tuple[str, str], dict]:
             if key in current:
                 grouped[key].append((timestamp, correct,
                                      "current" if fingerprint(entry) == current[key]["edition"] else "stale",
-                                     "captured" if answer.get("answered_at") else "legacy_backfill_current"))
-    rows = conn.execute("""SELECT a.question_id,a.answered_at,a.is_correct,
+                                     "captured" if answer.get("answered_at") else "legacy_backfill_current",
+                                     "glossary", f"{session_id}:{step}"))
+    rows = conn.execute("""SELECT a.id,a.question_id,a.answered_at,a.is_correct,
                                   sq.content_sha256,sq.snapshot_provenance
         FROM quiz_sessions s JOIN quiz_answers a ON a.session_id=s.id
         JOIN quiz_session_questions sq ON sq.session_id=a.session_id AND sq.question_id=a.question_id
         JOIN questions q ON q.id=a.question_id
         WHERE s.user_id=? AND q.kind='glossary' AND q.status='approved'""", (actor,)).fetchall()
-    for question_id, timestamp, correct, edition, provenance in rows:
+    answered_question_ids = {int(row[1]) for row in rows}
+    if not grouped and not answered_question_ids:
+        return {}
+    question_keys = {}
+    projections = {item["id"]: item for item in projected_questions()}
+    for question_id, external_id in conn.execute(
+            "SELECT id,external_id FROM questions WHERE kind='glossary' AND status='approved'"):
+        parts = str(external_id).split(":", 2)
+        if len(parts) != 3 or parts[0] != "glossary":
+            continue
+        key = (parts[1], parts[2])
+        if key not in current or (key not in grouped and int(question_id) not in answered_question_ids):
+            continue
+        captured, edition = capture_question(conn, int(question_id))
+        expected = projections.get(str(external_id))
+        projection_valid = expected is not None and _matches_published_projection(json.loads(captured), expected)
+        if projection_valid:
+            current[key]["question_id"] = int(question_id)
+        current[key]["projection_valid"] = projection_valid
+        current[key]["quiz_edition"] = edition
+        question_keys[int(question_id)] = key
+    for answer_id, question_id, timestamp, correct, edition, provenance in rows:
         key = question_keys.get(int(question_id))
         if key is not None:
-            if "quiz_edition" not in current[key]:
-                current[key]["quiz_edition"] = capture_question(conn, int(question_id))[1]
             grouped[key].append((timestamp, bool(correct),
-                                 "current" if edition == current[key]["quiz_edition"] else "stale",
-                                 provenance))
+                                 "current" if current[key]["projection_valid"] and
+                                     edition == current[key]["quiz_edition"] else "stale",
+                                 provenance, "quiz", str(answer_id)))
     for key, events in grouped.items():
         events.sort(key=lambda event: _instant(event[0]))
-        current[key]["events"] = events
+        current[key]["events"] = [event[:4] for event in events]
+        current[key]["answer_refs"] = [event[4:] for event in events]
     return {key: current[key] for key in grouped}
 
 

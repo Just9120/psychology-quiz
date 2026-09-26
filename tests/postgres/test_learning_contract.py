@@ -3,6 +3,9 @@
 from tests.test_achievements import (
     test_private_achievements_from_completed_editions_and_review_events,
     test_corrected_glossary_error_requires_answer_from_due_queue,
+    test_glossary_error_corrected_in_shared_quiz_review_awards_once,
+    test_shared_quiz_glossary_error_corrected_in_glossary_review_awards_once,
+    test_unmatched_glossary_projection_never_awards_cross_kind_correction,
     test_achievements_api_requires_personal_identity,
 )
 from tests.test_learning_goals import (

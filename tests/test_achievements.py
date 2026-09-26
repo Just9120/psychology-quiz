@@ -2,10 +2,11 @@ from contextlib import closing
 
 import json
 
-from app import achievements, curriculum, glossary_service, learning_reset
-from app.db import create_or_load_user, get_connection
+from app import achievements, curriculum, glossary_service, learning_reset, quiz_service
+from app.db import create_or_load_user, get_connection, upsert_approved_questions
 from app.glossary import GLOSSARY_TOPICS
-from app.progress_service import review_glossary_today
+from app.glossary_projection import projected_questions
+from app.progress_service import review_glossary_today, review_today
 from tests.test_attempt_content import OLD, bank
 from tests.test_progress import record, reset_payload
 from tests.test_web_auth import web, post, register, login
@@ -60,6 +61,93 @@ def test_corrected_glossary_error_requires_answer_from_due_queue(bank):
         reviewed = json.loads(conn.execute("SELECT snapshot FROM glossary_sessions WHERE id=?", (review_sid,)).fetchone()[0])
         glossary_service.answer(conn, 1, review_sid, reviewed["questions"][0]["correct_option_index"], 1)
         assert [item["kind"] for item in achievements.refresh(conn, 1)["achievements"]] == ["corrected_error"]
+
+
+def test_glossary_error_corrected_in_shared_quiz_review_awards_once(bank):
+    question = projected_questions()[0]
+    _, topic, term = question["id"].split(":", 2)
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, [question], authoritative=False)
+        first = glossary_service.start(conn, 1, topic, 5, selected_entry_ids=[term])
+        sid = first["session_id"]
+        snapshot = json.loads(conn.execute("SELECT snapshot FROM glossary_sessions WHERE id=?", (sid,)).fetchone()[0])
+        wrong = (snapshot["questions"][0]["correct_option_index"] + 1) % len(snapshot["questions"][0]["options"])
+        glossary_service.answer(conn, 1, sid, wrong, 1)
+        state = json.loads(conn.execute("SELECT state FROM glossary_sessions WHERE id=?", (sid,)).fetchone()[0])
+        state["answers"]["1"]["answered_at"] = "2026-09-01T10:00:00Z"
+        conn.execute("UPDATE glossary_sessions SET state=? WHERE id=?", (json.dumps(state), sid))
+
+        review = review_today(conn, 1, {"expected_session_id": None, "replace_active": False})
+        runner = review["runner_state"]
+        question_id = runner["current_question"]["question_id"]
+        assert question_id == conn.execute("SELECT id FROM questions WHERE external_id=?", (question["id"],)).fetchone()[0]
+        result = quiz_service.answer_quiz(conn, actor_user_id=1,
+                                          session_id=runner["session"]["session_id"],
+                                          question_id=question_id,
+                                          selected_option_index=question["correct_option_index"])
+        assert result["feedback"]["is_correct"]
+        first_awards = [item for item in achievements.refresh(conn, 1)["achievements"]
+                        if item["kind"] == "corrected_error"]
+        assert len(first_awards) == 1
+        assert [item for item in achievements.refresh(conn, 1)["achievements"]
+                if item["kind"] == "corrected_error"] == first_awards
+
+
+def test_shared_quiz_glossary_error_corrected_in_glossary_review_awards_once(bank):
+    question = projected_questions()[0]
+    _, topic, term = question["id"].split(":", 2)
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, [question], authoritative=False)
+        question_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (question["id"],)).fetchone()[0]
+        initial = quiz_service.start_prepared_quiz(conn, actor_user_id=1,
+            prepared=quiz_service.PreparedQuiz(None, (), None, (question_id,)))
+        wrong = (question["correct_option_index"] + 1) % len(question["options"])
+        quiz_service.answer_quiz(conn, actor_user_id=1,
+                                 session_id=initial["session"]["session_id"],
+                                 question_id=question_id, selected_option_index=wrong)
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-01T10:00:00Z' WHERE question_id=?", (question_id,))
+        assert not [item for item in achievements.refresh(conn, 1)["achievements"]
+                    if item["kind"] == "corrected_error"]
+
+        review = review_glossary_today(conn, 1, {"topic_id": topic, "question_count": 5,
+            "expected_session_id": None, "replace_active": False})
+        snapshot = json.loads(conn.execute("SELECT snapshot FROM glossary_sessions WHERE id=?",
+            (review["glossary_state"]["session_id"],)).fetchone()[0])
+        assert snapshot["questions"][0]["entry"]["id"] == term
+        glossary_service.answer(conn, 1, review["glossary_state"]["session_id"],
+                                snapshot["questions"][0]["correct_option_index"], 1)
+        awards = [item for item in achievements.refresh(conn, 1)["achievements"]
+                  if item["kind"] == "corrected_error"]
+        assert len(awards) == 1
+        assert [item for item in achievements.refresh(conn, 1)["achievements"]
+                if item["kind"] == "corrected_error"] == awards
+
+
+def test_unmatched_glossary_projection_never_awards_cross_kind_correction(bank):
+    question = projected_questions()[0]
+    _, topic, term = question["id"].split(":", 2)
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, [question], authoritative=False)
+        first = glossary_service.start(conn, 1, topic, 5, selected_entry_ids=[term])
+        sid = first["session_id"]
+        snapshot = json.loads(conn.execute("SELECT snapshot FROM glossary_sessions WHERE id=?", (sid,)).fetchone()[0])
+        wrong = (snapshot["questions"][0]["correct_option_index"] + 1) % len(snapshot["questions"][0]["options"])
+        glossary_service.answer(conn, 1, sid, wrong, 1)
+        state = json.loads(conn.execute("SELECT state FROM glossary_sessions WHERE id=?", (sid,)).fetchone()[0])
+        state["answers"]["1"]["answered_at"] = "2026-09-01T10:00:00Z"
+        conn.execute("UPDATE glossary_sessions SET state=? WHERE id=?", (json.dumps(state), sid))
+        upsert_approved_questions(conn, [{**question, "explanation": "Unmatched revision"}], authoritative=False)
+        question_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (question["id"],)).fetchone()[0]
+        attempted = quiz_service.start_prepared_quiz(conn, actor_user_id=1,
+            prepared=quiz_service.PreparedQuiz(None, (), None, (question_id,)))
+        quiz_sid = attempted["session"]["session_id"]
+        conn.execute("""INSERT INTO user_review_sessions(user_id,session_kind,session_key,started_at)
+            VALUES(1,'quiz',?,'2026-09-02T10:00:00Z')""", (str(quiz_sid),))
+        quiz_service.answer_quiz(conn, actor_user_id=1, session_id=quiz_sid,
+                                 question_id=question_id,
+                                 selected_option_index=question["correct_option_index"])
+        assert not [item for item in achievements.refresh(conn, 1)["achievements"]
+                    if item["kind"] == "corrected_error"]
 
 
 def test_achievements_api_requires_personal_identity(web):
