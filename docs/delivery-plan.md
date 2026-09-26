@@ -16,6 +16,8 @@
 
 **E-PL-70 / восстановленный приватный Drive metadata snapshot, 26.09.2026:** read-only полный обход первичного Drive root повторно дал 92 папки и 413 уникальных файлов (230 PDF, 180 Google Docs, 3 DOCX); 92 direct-child listings имеют завершённую pagination chain. Штатный `scripts/source_inventory_report.py --current data/source-inventory-current.json --reviewed --private-queue data/source-review-queue.json` PASS: 63/63 tracked source metadata current, 42 lesson edges current, 350 файлов вне reviewed registry, 7 reviewed learning sources без lesson. Snapshot и очередь находятся только в ignored `data/` восстановленного worktree, не входят в Git/PR. Прежние private processing/lesson-link snapshots не восстановлены; `processing: new_unprocessed 413` означает отсутствие переданного processing record, а не доказательство отсутствия прошлой ручной работы. Текущая проверка metadata не подтверждает содержимое/полноту PDF-изображений, точность derivative evidence, конфликтные решения или publication approval. AC-SRC-01–05/07 остаются IN_PROGRESS; следующая работа — повторное чтение и содержательный review приоритетных источников и восстановление проверенных связей из первичных records без автоматического approval.
 
+**Private snapshot retention:** обе новые JSON-копии дополнительно сохранены в ignored `data/` исходного workspace `C:/Users/wait9/OneDrive/Документы/GitHub/psychology-quiz`; SHA-256 копий сверен с восстановленным worktree. Это защита от потери ignored файлов при архивировании worktree, не публикация и не подтверждение обработки содержимого.
+
 ### Scope, DoD и порядок
 
 | Часть | Самостоятельно поставляемый результат | Gates |
