@@ -8,7 +8,7 @@
 
 **Scope AC:** FND-01/02/03/04/06/07/09/10; SRC-01/02/03/04/05/07/09; QUIZ-02/03/05/08/09; GLO-01/02; PROG-01/02/04/06; AUTH-01/03/05/06/07; GAM-01/02/03; PRIV-01/02/03/04. Существующие READY AC/FND-05/08, SRC-06/08, QUIZ-01/04/06/07, PROG-03/05 и прочие зависимости сохраняются как regression contracts. PRIV-02/03/04 нельзя закрыть готовностью кода: нужны внешние утверждённые решения; actual student launch — non-goal по D-20.
 
-**Baseline локальной работы:** `origin/main` `3028003742b4eccbe52b7041c5e722eb7ceee91f`, проверен 26.09.2026 после delivery PR1 #311, PR2 #312, разрешённых PR3 #313 и PR4 #314. Отдельный worktree `C:/Users/wait9/.codex/worktrees/platform-learning-scope/psychology-quiz`, локальная ветка `codex/source-review-followup` от этого SHA; исходный dirty worktree `codex/curriculum-progress` сохранён без изменений. Прямой SSH агента UNSET; штатный CD через GitHub Actions. Исключения пользователя разрешали только PR3 и PR4; следующий основной PR не разрешён действующим лимитом.
+**Baseline локальной работы:** `origin/main` `3028003742b4eccbe52b7041c5e722eb7ceee91f`, проверен 26.09.2026 после delivery PR1 #311, PR2 #312, разрешённых PR3 #313 и PR4 #314. Отдельный worktree `C:/Users/wait9/.codex/worktrees/platform-learning-scope/psychology-quiz`, локальная ветка `codex/source-review-followup` от этого SHA; исходный dirty worktree `codex/curriculum-progress` сохранён без изменений. Прямой SSH агента UNSET; штатный CD через GitHub Actions. Пользователь 26.09 явно выбрал оставить подготовленный следующий пакет локально; push/PR/CD для него не выполнять. Лимит двух основных PR по AGENTS.md и разовые исключения только для PR3/PR4 сохраняются.
 
 ### Scope, DoD и порядок
 
