@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import Counter, deque
 from datetime import datetime
 import re
+import unicodedata
 
 
 class InventoryError(ValueError):
@@ -187,6 +188,29 @@ def link_lessons(snapshot: dict, links: list[dict]) -> dict:
             raise InventoryError("conflicting_lesson_topic")
         lesson["sources"].append({"source_id": source_id, "format": format_name})
     return lessons
+
+
+def format_variant_candidates(snapshot: dict) -> list[dict]:
+    """Suggest same-folder format variants without merging or approving them."""
+    groups: dict[tuple[tuple[str, ...], str], set[str]] = {}
+    for file_id, item in snapshot["files"].items():
+        title = item["title"]
+        if item["mime_type"] == "application/pdf" and title.lower().endswith(".pdf"):
+            title = title[:-4]
+        elif (item["mime_type"] ==
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              and title.lower().endswith(".docx")):
+            title = title[:-5]
+        stem = " ".join(unicodedata.normalize("NFKC", title).casefold().split())
+        for path in snapshot["paths"][file_id]:
+            groups.setdefault((tuple(path[:-1]), stem), set()).add(file_id)
+    candidates = []
+    for (parent_path, stem), ids in groups.items():
+        formats = {snapshot["files"][file_id]["mime_type"] for file_id in ids}
+        if len(ids) > 1 and len(formats) > 1:
+            candidates.append({"parent_path": list(parent_path), "normalized_stem": stem,
+                               "file_ids": sorted(ids), "mime_types": sorted(formats)})
+    return sorted(candidates, key=lambda item: (item["parent_path"], item["normalized_stem"]))
 
 
 def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
@@ -408,4 +432,5 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
             })
     return {"schema_version": 1, "root_id": snapshot["root_id"],
             "files": entries, "missing_tracked_sources": missing,
-            "missing_untracked_files": missing_untracked}
+            "missing_untracked_files": missing_untracked,
+            "format_variant_candidates": format_variant_candidates(snapshot)}

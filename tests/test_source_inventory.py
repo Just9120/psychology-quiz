@@ -1,6 +1,7 @@
 import pytest
 
-from app.source_inventory import InventoryError, complete_listing, link_lessons, processing_status, reconcile, scan
+from app.source_inventory import (InventoryError, complete_listing, format_variant_candidates,
+                                  link_lessons, processing_status, reconcile, scan)
 
 REVIEW_EVIDENCE = {"reviewer": "editor", "review_note": "Reviewed exact source revision",
                    "reviewed_at": "2026-09-26T12:00:00Z"}
@@ -9,6 +10,24 @@ REVIEW_EVIDENCE = {"reviewer": "editor", "review_note": "Reviewed exact source r
 def item(file_id, parent, *, title="Lesson", changed="2026-09-25T00:00:00Z"):
     return {"id": file_id, "parent_ids": [parent], "file_or_folder": "file",
             "title": title, "mime_type": "application/pdf", "modified_time": changed}
+
+
+def test_format_variants_are_private_candidates_not_cross_folder_merges():
+    root, first, second = "root", "first-folder", "second-folder"
+    folders = [{"id": folder, "title": folder, "parent_ids": [root],
+                "file_or_folder": "folder"} for folder in (first, second)]
+    native = {**item("doc", first, title="Лекция 1"),
+              "mime_type": "application/vnd.google-apps.document"}
+    snapshot = scan(root, {root: {"complete": True, "children": folders},
+                           first: {"complete": True, "children": [
+                               item("pdf", first, title="Лекция 1.PDF"), native]},
+                           second: {"complete": True, "children": [
+                               item("other", second, title="Лекция 1.pdf")]}})
+    assert format_variant_candidates(snapshot) == [{
+        "parent_path": [first], "normalized_stem": "лекция 1",
+        "file_ids": ["doc", "pdf"],
+        "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
+    }]
 
 
 def test_recursive_snapshot_requires_complete_children_and_detects_changes():
