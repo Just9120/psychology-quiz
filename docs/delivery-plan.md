@@ -1,5 +1,7 @@
 # Delivery Plan
 
+**UPDATE D-30, 27.09.2026:** пользователь уточнил модель контента: единственный первичный учебный источник — папка «Психология» на Google Drive; «Кейсы» в квизе означают отдельную категорию производных вопросов и ответов о ситуациях консультирования, а не перенос целого кейса. Уточнены AC-SRC-07/QUIZ-08/09 в spec без новых ID и без расширения реализации. На `origin/main` `5588b4c` уже хранится один авторский ситуационный question с четырьмя вариантами, ответом и разбором в категории «Кейсы»; полный исходный Drive-файл не импортирован. Статусы QUIZ-08/09 остаются READY только в этом проверенном объёме; для новых вопросов требуются source review и publication gate по AC-SRC-04/07. Пересчёт процента не выполнялся. Это UPDATE документации, не новая implementation Goal.
+
 ## Current Goal — PLATFORM-LEARNING-001
 
 **E-PL-85 / приватные refs для новых терминов, 27.09.2026:** локально подготовлено разделение черновика и публикации: `validate_glossary.py` допускает draft без `source_refs`, `load_glossary_entries` пропускает неопубликованные записи до создания runtime entry. Approved entries по-прежнему требуют provenance и проходят неизменённый `content_publication` gate; новых `drive:` refs или терминов не добавлено. Python AST, glossary validator и `git diff --check` PASS; regression test добавлен, но suite по просьбе пользователя не запускалась. Новая схема приватного provenance для approval, CI/merge/CD PENDING; F-061 остаётся OPEN, по коду Goal 19/38 AC.
