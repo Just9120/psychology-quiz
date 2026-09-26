@@ -75,6 +75,8 @@ def test_conflict_holds_derivatives_of_both_related_sources_until_review():
         return {entry["file_id"]: entry for entry in queue["files"]}
 
     initial = entries(current)
+    # A partial processing snapshot must still yield the complete review queue.
+    assert set(initial) == {"transcript", "slides"}
     assert initial["transcript"]["derivative_ids_requiring_review"] == ["questions:transcript"]
     assert initial["slides"]["processing_state"] == "new_unprocessed"
     assert initial["slides"]["related_conflict_review_required"] is True

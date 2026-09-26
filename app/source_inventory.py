@@ -371,7 +371,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     related_conflicts = set()
     if processing is not None:
         for file_id in processing:
-            record = processed[file_id]
+            record = processed.get(file_id)
             if not isinstance(record, dict):
                 continue
             # A newer Drive revision does not by itself resolve the earlier
