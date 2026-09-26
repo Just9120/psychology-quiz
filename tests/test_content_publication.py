@@ -11,6 +11,8 @@ from scripts import seed_questions
 
 def reviewed(kind="questions", source_kind="learning_material"):
     item = {"id": "fixture", "status": "approved", "question": "Synthetic material"}
+    if kind == "questions":
+        item["explanation"] = "Synthetic explanation"
     item["source_ref" if kind == "questions" else "source_refs"] = "drive:fixture#page-1" if kind == "questions" else ["drive:fixture#page-1"]
     source = {"id": "fixture", "kind": source_kind, "readable": True,
               "snapshot_sha256": "a" * 64, "modified_time": "2026-09-20T00:00:00Z"}
@@ -59,6 +61,16 @@ def test_exact_review_of_readable_learning_material_allows_publication(kind):
     assert policy.can_publish(kind, item)
     # Content fingerprints ignore JSON formatting/key order, not content changes.
     assert policy.can_publish(kind, dict(reversed(list(item.items()))))
+
+
+@pytest.mark.parametrize("explanation", [None, "", "  "])
+def test_new_approved_question_requires_an_explanation_at_publication_boundary(explanation):
+    item, _, review, policy = reviewed()
+    item["explanation"] = explanation
+    review["item_sha256"] = publication.fingerprint(item)
+    policy.quality_reviews["questions:fixture"]["item_sha256"] = review["item_sha256"]
+    assert policy.error("questions", item) == "explanation_required"
+    assert not policy.can_publish("questions", item)
 
 
 @pytest.mark.parametrize("failure", ["missing", "partial", "ambiguous", "stale_item",

@@ -52,6 +52,8 @@ class PublicationPolicy:
             invalid_case = case_error(item)
             if invalid_case:
                 return invalid_case
+            if item.get("status") == "approved" and not _text(item.get("explanation")):
+                return "explanation_required"
         if self.is_legacy(kind, item):
             return None
         if item.get("status") != "approved":
