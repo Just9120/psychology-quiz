@@ -63,6 +63,13 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>
       <p className="muted">Приоритет преподавателя: {entry.priority || 'не указан в доступном источнике'}.</p>
+      <section aria-label="Внешние ссылки на книгу"><h3>Где искать книгу</h3>
+        <p className="muted">Внешняя ссылка не подтверждает доступ к полному тексту или аудио: может потребоваться покупка или подписка.</p>
+        {entry.outbound_links?.length ? <ul>{entry.outbound_links.map(link => <li key={link.url}>
+          <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label} ({link.format === 'audio' ? 'аудио' : 'текст'})</a>
+          {' · '}{link.rights_note}
+        </li>)}</ul> : <p className="muted">Проверенных внешних ссылок пока нет.</p>}
+      </section>
       <details className="source-details"><summary>Источник и библиографическая запись</summary><p>{entry.source.title}</p><p>{entry.source.locator}</p><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>

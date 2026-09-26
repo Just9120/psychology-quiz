@@ -30,6 +30,7 @@ def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
         assert len(named) == expected
         assert len({item['work_id'] for item in named}) == expected
     assert all(item['content_access'] == 'not_verified' for item in items)
+    assert all(item['outbound_links'] == [] for item in items)
     assert all(item['learning_outcomes'] == [] and item['estimated_minutes'] is None for item in items)
     assert any(not item['authors'] and item['metadata_warnings'] for item in items)
     assert validate_topics.validate() == []

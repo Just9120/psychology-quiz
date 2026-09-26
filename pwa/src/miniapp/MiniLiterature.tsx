@@ -44,6 +44,13 @@ export function MiniLiterature({ initial, topics, busy, run }: {
     {item ? <article className="panel literature-detail"><button className="text-button" onClick={() => setSelected(null)}>← К списку</button>
       <h2>{item.title}</h2><p>{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p>
       <p className="muted">Приоритет преподавателя: {item.priority || 'не указан в доступном источнике'}.</p>
+      <section aria-label="Внешние ссылки на книгу"><h3>Где искать книгу</h3>
+        <p className="muted">Внешняя ссылка не гарантирует доступ к тексту или аудио; может потребоваться покупка или подписка.</p>
+        {item.outbound_links?.length ? <ul>{item.outbound_links.map(link => <li key={link.url}>
+          <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label} ({link.format === 'audio' ? 'аудио' : 'текст'})</a>
+          {' · '}{link.rights_note}
+        </li>)}</ul> : <p className="muted">Проверенных внешних ссылок пока нет.</p>}
+      </section>
       <p>{item.why_read}</p>{item.source?.citation && <details><summary>Библиографическая запись</summary><blockquote>{item.source.citation}</blockquote></details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (valid && !uncertain) void run(save) }}>
         <label className="field">Статус<select value={status} disabled={busy || uncertain} onChange={event => { setStatus(event.target.value as ReadingStatus); setSaved(false) }}>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
