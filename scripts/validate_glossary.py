@@ -17,7 +17,7 @@ GLOSSARY_FILES_GLOB = "content/glossary/*.json"
 TOPICS_FILE = Path("content/topics.json")
 REQUIRED_FIELDS = {
     "id", "topic_id", "term", "aliases", "definition", "short_definition",
-    "examples", "confusable_with", "source_refs", "difficulty", "status",
+    "examples", "confusable_with", "difficulty", "status",
 }
 VALID_DIFFICULTIES = {"easy", "medium", "hard"}
 VALID_STATUSES = {"approved", "draft", "review", "deprecated", "placeholder"}
@@ -146,19 +146,21 @@ def validate_entry(entry: dict[str, Any], label: str, file_topic_id: str, active
     validate_string_list(entry.get("aliases"), "aliases", label, errors, require_non_empty=False)
     validate_string_list(entry.get("examples"), "examples", label, errors, require_non_empty=True)
     validate_string_list(entry.get("confusable_with"), "confusable_with", label, errors, require_non_empty=False)
-    validate_string_list(entry.get("source_refs"), "source_refs", label, errors, require_non_empty=True)
+    status = entry.get("status")
+    if status == "approved" or "source_refs" in entry:
+        validate_string_list(entry.get("source_refs"), "source_refs", label, errors,
+                             require_non_empty=status == "approved")
 
     difficulty = entry.get("difficulty")
     if difficulty not in VALID_DIFFICULTIES:
         errors.append(f"{label}: difficulty must be one of {', '.join(sorted(VALID_DIFFICULTIES))}")
 
-    status = entry.get("status")
     if status not in VALID_STATUSES:
         errors.append(f"{label}: status must be one of {', '.join(sorted(VALID_STATUSES))}")
     elif status == "approved" and not entry.get("source_refs"):
         errors.append(f"{label}: approved entries must include at least one source_ref")
 
-    for source_ref in entry.get("source_refs", []):
+    for source_ref in entry.get("source_refs") or []:
         if not isinstance(source_ref, str):
             continue
         if not source_ref.startswith(SUPPORTED_SOURCE_REF_PREFIXES):

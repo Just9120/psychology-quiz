@@ -1,5 +1,6 @@
 import json
 import random
+import tempfile
 import unicodedata
 import unittest
 from pathlib import Path
@@ -31,6 +32,7 @@ from app.glossary_handlers import (
     parse_glossary_reply_answer_number,
 )
 from app.main import GLOSSARY_BUTTON_TEXT, HELP_TEXT, get_main_menu_keyboard
+from scripts.validate_glossary import validate_entry
 
 
 TOPIC_ID = "kachestvennye_metody_issledovaniya"
@@ -88,6 +90,26 @@ def load_approved_questions_by_id(active_topics):
 
 
 class GlossaryRuntimeTests(unittest.TestCase):
+    def test_private_provenance_draft_does_not_publish_or_disable_topic(self):
+        source = Path('content/glossary') / f'{TOPIC_ID}.json'
+        published = load_glossary_entries(TOPIC_ID)
+        raw = json.loads(source.read_text(encoding='utf-8'))
+        draft = {**raw[0], 'id': 'private_provenance_draft', 'status': 'draft',
+                 'term': 'Черновик с приватным источником',
+                 'short_definition': 'Неопубликованное определение'}
+        draft.pop('source_refs')
+        errors: list[str] = []
+        validate_entry(draft, 'draft', TOPIC_ID, {TOPIC_ID: {}}, {}, {}, errors)
+        self.assertEqual([], errors)
+        approved = {**draft, 'status': 'approved'}
+        validate_entry(approved, 'approved', TOPIC_ID, {TOPIC_ID: {}}, {}, {}, errors)
+        self.assertTrue(any('source_refs' in error for error in errors))
+        with tempfile.TemporaryDirectory() as directory:
+            (Path(directory) / source.name).write_text(
+                json.dumps([*raw, draft], ensure_ascii=False), encoding='utf-8')
+            with patch('app.glossary._GLOSSARY_DIR', Path(directory)):
+                self.assertEqual(published, load_glossary_entries(TOPIC_ID))
+
     def test_static_glossary_topics_load_from_json(self):
         entries = load_glossary_entries(TOPIC_ID)
         exp_entries = load_glossary_entries(EXP_TOPIC_ID)
