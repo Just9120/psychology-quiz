@@ -2232,7 +2232,7 @@
       "item_sha256": "e5e348a2505acb2751337eaa733e63a9643aa44484c494c404f57ec3c8d43125",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2242,9 +2242,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Утомление как пример состояния отсутствует в определении; различение временного и устойчивого дано.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2284,7 +2286,7 @@
       "item_sha256": "8a743e733ebf1042fbc052ab3b64bfa0183b6f094cfb5776cf58a2980b15e617",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2294,9 +2296,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Биологическая основа и психодинамика даны; скорость и интенсивность не названы.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2364,7 +2368,7 @@
       "item_sha256": "0f382a7448386ca22cb46ec2b7942ba8dfb68db52fa7af1846c6a3bbd2be0efc",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2374,9 +2378,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Социальная обусловленность и устойчивость даны; формирование в деятельности и общении здесь не описано.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2419,7 +2425,7 @@
       "item_sha256": "d67bc96e76020e287df8b8a0351f3853ef393cdb6d808883e77faa43d158da1b",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2429,9 +2435,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Три класса различаются по функции, состоянию и устойчивости; формулировка вопроса является учебным обобщением.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2579,7 +2587,7 @@
       "item_sha256": "bff138710afdbcac28191c998994d21dee4fce3f081150ba8834e5374ffdd158",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2589,9 +2597,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Определения позволяют различить состояние и свойство, но раздражительность, усталость и работоспособность не разобраны.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2605,7 +2615,7 @@
       "item_sha256": "2eeed98f8f49a2d115d2a3f3891e8f40b6c0ef0cff59a082fc171d80e478e41b",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2615,9 +2625,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Психодинамические особенности названы; быстрые и импульсивные реакции прямо не разобраны.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2631,7 +2643,7 @@
       "item_sha256": "8f84fdc0e963d59136a1f14383fce6c8bf54e72822b709d608fd3cd8df964f13",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2641,9 +2653,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Отношение к делу и людям названо; ответственность и надёжность не приведены как конкретные примеры.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -2685,7 +2699,7 @@
       "item_sha256": "1261434c3a28e878eff277efb25737e6588ea5be7877e3b3ae347e47dd9da6c0",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -2695,9 +2709,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Память названа процессом, тревожность — состоянием, устойчивые отношения — свойством; внимание как процесс здесь не перечислено.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -3106,7 +3122,7 @@
       "item_sha256": "ac683b4f699651681fb1b4f430adbb2492569e7bb6ceeb65173bad95c8623fdf",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3116,9 +3132,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Различие состояния и свойства дано, но утомление после нагрузки как пример не разобрано.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
@@ -3318,7 +3336,7 @@
       "item_sha256": "07be3b493bfc3c314af9c61a333cb4f1c970594e064b8d352cb93ed5bd818ace",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -3328,9 +3346,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
+      "source_support": "partial",
+      "issues": [
+        "source_claim_partially_supported"
+      ],
+      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой. Точечная сверка 27.09.2026: Из изменчивости состояния и устойчивости свойства следует ограничение вывода о свойстве из разных ситуаций.",
       "sources": [
         {
           "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
