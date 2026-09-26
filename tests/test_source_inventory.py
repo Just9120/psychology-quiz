@@ -147,6 +147,8 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
              {"source_id": "slides", "lesson_id": "l1", "topic_id": "topic",
               "format": "slides", **evidence}]
     assert len(link_lessons(snapshot, links)["l1"]["sources"]) == 2
+    with pytest.raises(InventoryError, match="duplicate_lesson_link"):
+        link_lessons(snapshot, [links[0], {**links[0], "format": "slides"}])
     with pytest.raises(InventoryError, match="conflicting_lesson_topic"):
         link_lessons(snapshot, [links[0], {**links[1], "topic_id": "other"}])
     with pytest.raises(InventoryError, match="invalid_lesson_link"):

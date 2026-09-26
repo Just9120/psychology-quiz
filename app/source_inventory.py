@@ -204,7 +204,9 @@ def link_lessons(snapshot: dict, links: list[dict]) -> dict:
         if (tuple(revision) != _revision(snapshot["files"][source_id])
                 or corpus_path not in ("/".join(path) for path in snapshot["paths"][source_id])):
             raise InventoryError("stale_lesson_link")
-        key = (source_id, lesson_id, format_name)
+        # One source file can contribute to a lesson only once. A second label
+        # must not turn the same file into another format variant.
+        key = (source_id, lesson_id)
         if key in seen:
             raise InventoryError("duplicate_lesson_link")
         seen.add(key)
