@@ -139,6 +139,10 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
         "questions:legacy-partial": {"source_support": "partial", "sources": [
             {"source_id": source["id"], "modified_time": source["modified_time"],
              "snapshot_sha256": source["snapshot_sha256"], "locator": "slide 2"}]},
+        "questions:wide-locator": {"source_support": "supported", "sources": [
+            {"source_id": source["id"], "modified_time": source["modified_time"],
+             "snapshot_sha256": source["snapshot_sha256"],
+             "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"}]},
     }}
     (tmp_path / "content/learning-quality-reviews.json").write_text(
         json.dumps(quality), encoding="utf-8")
@@ -158,14 +162,20 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert entries["reviewed-private"]["derivative_ids_requiring_review"] == []
     assert entries["reviewed-private"]["derivative_review_required"] is False
     assert entries["reviewed-private"]["quality_review_item_ids"] == [
-        "questions:legacy-partial", "questions:legacy-supported"]
+        "questions:legacy-partial", "questions:legacy-supported", "questions:wide-locator"]
     assert entries["reviewed-private"]["quality_review_priority_ids"] == [
-        "questions:legacy-partial"]
+        "questions:legacy-partial", "questions:wide-locator"]
     assert entries["reviewed-private"]["quality_review_evidence"] == {
         "questions:legacy-supported": {"locator": "slide 1", "source_support": "supported",
-                                       "revision_current": True},
+                                       "revision_current": True,
+                                       "locator_precision_review_required": False},
         "questions:legacy-partial": {"locator": "slide 2", "source_support": "partial",
-                                     "revision_current": True},
+                                     "revision_current": True,
+                                     "locator_precision_review_required": False},
+        "questions:wide-locator": {
+            "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564",
+            "source_support": "supported", "revision_current": True,
+            "locator_precision_review_required": True},
     }
     assert entries["unreviewed-private"]["quality_review_evidence"] == {}
     assert entries["unreviewed-private"]["registry_state"] == "untracked"
@@ -184,7 +194,7 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert inventory_report.private_review_queue(
         inventory_report._snapshot(changed), registry, curriculum, reviews=reviews,
         quality_reviews=quality)["files"][0]["quality_review_priority_ids"] == [
-            "questions:legacy-partial", "questions:legacy-supported"]
+            "questions:legacy-partial", "questions:legacy-supported", "questions:wide-locator"]
     stale_quality = {"schema_version": 1, "items": {"questions:old": {
         "source_support": "supported", "sources": [{"source_id": source["id"],
             "modified_time": source["modified_time"], "snapshot_sha256": "b" * 64,
@@ -194,7 +204,8 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
         quality_reviews=stale_quality)["files"][0]
     assert stale_entry["quality_review_priority_ids"] == ["questions:old"]
     assert stale_entry["quality_review_evidence"]["questions:old"] == {
-        "locator": "slide 3", "source_support": "supported", "revision_current": False}
+        "locator": "slide 3", "source_support": "supported", "revision_current": False,
+        "locator_precision_review_required": False}
     with pytest.raises(InventoryError, match="invalid_quality_review_source"):
         inventory_report.private_review_queue(
             inventory_report._snapshot(current), registry, curriculum,
@@ -240,7 +251,7 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
             "revision": [source["modified_time"], source["title"], "application/pdf"],
             "review_state": "conflict", "reason": "Same-lesson sources disagree"}}
     )["files"][0]["quality_review_priority_ids"] == [
-        "questions:legacy-partial", "questions:legacy-supported"]
+        "questions:legacy-partial", "questions:legacy-supported", "questions:wide-locator"]
 
     original = target.read_bytes()
     assert main(args) == 1

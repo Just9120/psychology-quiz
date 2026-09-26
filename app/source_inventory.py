@@ -272,6 +272,11 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     quality_items: dict[str, set[str]] = {}
     quality_priority: dict[str, set[str]] = {}
     quality_evidence: dict[str, dict[str, dict]] = {}
+    # A 0:end extracted-text locator may point at an entire document. Flag it
+    # for item-level review without claiming that the cited fact is wrong.
+    whole_text_locator = re.compile(
+        r"extracted text, Unicode characters \(zero-based, end exclusive\): 0:\d+"
+    )
     if quality_reviews is not None:
         if (not isinstance(quality_reviews, dict)
                 or quality_reviews.get("schema_version") != 1
@@ -295,13 +300,17 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                 source = sources[source_id]
                 revision_current = (ref.get("modified_time") == source["modified_time"]
                                     and ref.get("snapshot_sha256") == source["snapshot_sha256"])
+                locator_precision_review_required = bool(
+                    whole_text_locator.fullmatch(ref["locator"].strip())
+                )
                 quality_evidence.setdefault(source_id, {})[derivative_id] = {
                     "locator": ref["locator"],
                     "source_support": review["source_support"],
                     "revision_current": revision_current,
+                    "locator_precision_review_required": locator_precision_review_required,
                 }
                 if (review["source_support"] != "supported"
-                        or not revision_current):
+                        or not revision_current or locator_precision_review_required):
                     quality_priority.setdefault(source_id, set()).add(derivative_id)
     if reviews is not None:
         if (not isinstance(reviews, dict) or reviews.get("schema_version") != 1
