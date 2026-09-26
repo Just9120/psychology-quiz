@@ -1235,7 +1235,7 @@
       "external_id": "m2_exp_011",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "cfbd6c546b951f532b63e1008169ae3f22d134b403b1f9c415bc126c2b4ee947",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26600:27150"
     },
     "76430ff8ca532e30fa2f77f2b3c0acbea3bff1160b3d8785577ff2615f7886fb": {
       "external_id": "m2_exp_012",
@@ -1247,25 +1247,25 @@
       "external_id": "m2_exp_013",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "afa871d714cf119fb09d0d2ace750f65da4826e0180fae12660ac98f45404ac4",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 29700:30185"
     },
     "c478252cf9f3d370bfee63f094aa92188c1e0ac1ef4442708224e652f9e8af09": {
       "external_id": "m2_exp_014",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "2e19aacb9f9fa53a0ae33c2aaa0915a3b8c3a452b614f2e81503687c633f2fd5",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 30150:30700"
     },
     "b3600e7824f580124eb51374decf515f3ab7992826a0cca0d3570c6a4b22e0c2": {
       "external_id": "m2_exp_015",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "ff23c927065ded109eff8e9501902c0fca4e7f004cc363919add57c75e26fda1",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31000:31350"
     },
     "3be29046539bb825144d160d337449f25a4083d92af4423e5de32b93f26813ff": {
       "external_id": "m2_exp_016",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "f88800eb55a33ef23f70fe46afc2d1bcfb291ff845fdca3feafcd58c5494fd18",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31880:32350"
     },
     "9bc8acbaa5e4e177b48ec6ee00ec384445020df2195c03844820ffaed2fe23c9": {
       "external_id": "m2_exp_017",
@@ -1391,7 +1391,7 @@
       "external_id": "m2_exp_049",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "472fe9ea44f8d19d788b72b4f8d27fb062c64d714f0831df41cb327a8c443996",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1250:1700"
     },
     "842c685ad14df774beb7cff938b9486988398262d1d04b3e0c1e12ca6858afd7": {
       "external_id": "m2_exp_055",
@@ -1403,7 +1403,7 @@
       "external_id": "m2_exp_056",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "503a17e4018a914c9e725c6b702b39561682acdae0da98a814d1b0f5016ff453",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16050:16580"
     },
     "685945c5b67448da33eb4ebc2d9f1077ae011e5be53b3976cb230e41fa35513e": {
       "external_id": "m2_exp_057",
@@ -1463,7 +1463,7 @@
       "external_id": "m2_exp_065",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "0c55387187910e77be6c82777744fb70205b53ea21da4e46661d4ff3315dd4ed",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31100:31350"
     },
     "990cb60e07ef858b2ec8ecbe683ebd6873245e3f5da928dc3ad926eab751e91d": {
       "external_id": "m2_exp_066",
@@ -1691,7 +1691,7 @@
       "external_id": "m2_exp_108",
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "1a63bdd8e1a69d5159481e9d123521e1400f27e6a09b7a377faafa7e7b8bb7ce",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31100:31350"
     },
     "36daa839cb8b22035b14883b215ad425e0a921972f4816cb1142cdfb57d3a0ed": {
       "external_id": "m2_exp_110",
@@ -2196,6 +2196,12 @@
       "topic_id": "t_34b2eed9d99a",
       "item_sha256": "ffc9a01f40c618c8fe32a94fa35bdba774dab4949cef724c7715e0d09c4e0feb",
       "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
+    },
+    "b2aedce310542f54debba4b25ba8fbd2ab510bab40840b169313088faf0a89c9": {
+      "external_id": "m2_exp_012",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "58793a62db0d5cac305b1118d24211461627333fafbac865615fb6a2f9a0cb7c",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26930:27500"
     }
   }
 }
