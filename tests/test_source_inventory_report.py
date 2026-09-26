@@ -36,6 +36,8 @@ def test_private_inventory_report_reconciles_without_exposing_ids(tmp_path, caps
         "review_state": "processed", "snapshot_kind": "file_bytes",
         "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE}})["processing_by_format"] == {
             "application/pdf": {"new_unprocessed": 1, "processed": 1}}
+    assert main(["--current", str(current_file), "--require-current-reviewed"]) == 1
+    assert "current_review_gate_requires_reviewed" in capsys.readouterr().err
 
 
 def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path, capsys):
@@ -323,9 +325,20 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert entries["unreviewed-private"]["registry_state"] == "untracked"
     assert all(item["processing_state"] == "unknown_no_processing_snapshot" for item in entries.values())
     assert all(item["paths"] == [["Lesson"]] for item in entries.values())
+    assert main(["--current", str(current_path), "--reviewed",
+                 "--require-current-reviewed"]) == 0
+    capsys.readouterr()
 
     changed = export(["reviewed-private"])
     changed["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
+    changed_path = tmp_path / "data/changed.json"
+    changed_path.write_text(json.dumps(changed), encoding="utf-8")
+    assert main(["--current", str(changed_path), "--reviewed",
+                 "--require-current-reviewed"]) == 1
+    gate_output = capsys.readouterr()
+    assert gate_output.out == ""
+    assert "reviewed_source_revision_not_current" in gate_output.err
+    assert "reviewed-private" not in gate_output.err
     changed_queue = inventory_report.private_review_queue(
         inventory_report._snapshot(changed), registry, curriculum, reviews=reviews)
     changed_entry = changed_queue["files"][0]

@@ -146,12 +146,16 @@ def main(argv=None) -> int:
     parser.add_argument("--links", type=Path)
     parser.add_argument("--reviewed", action="store_true",
                         help="compare live metadata to repository source and curriculum reviews")
+    parser.add_argument("--require-current-reviewed", action="store_true",
+                        help="stop if a reviewed source is changed, relocated or missing; requires --reviewed")
     parser.add_argument("--private-queue", type=Path,
                         help="write a new per-file review queue only in ignored data/; requires --reviewed")
     args = parser.parse_args(argv)
     try:
         if args.private_queue and not args.reviewed:
             raise InventoryError("private_queue_requires_reviewed")
+        if args.require_current_reviewed and not args.reviewed:
+            raise InventoryError("current_review_gate_requires_reviewed")
         current = _read(args.current)
         previous = _read(args.previous) if args.previous else None
         processed = _read(args.processed) if args.processed else None
@@ -165,6 +169,10 @@ def main(argv=None) -> int:
             quality_reviews["items"]) if args.private_queue else ({}, [])
         value = report(current, previous=previous, processed=processed, links=links,
                        registry=registry, curriculum=curriculum)
+        if args.require_current_reviewed and any(
+                state != "current" and count
+                for state, count in value["reviewed_graph"]["source_metadata"].items()):
+            raise InventoryError("reviewed_source_revision_not_current")
         if args.private_queue:
             target = private_json_target(args.private_queue, REPO_ROOT)
             queue = private_review_queue(_snapshot(current), registry, curriculum,
