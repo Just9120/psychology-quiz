@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { api, ApiError, errorMessage, request } from '../src/api'
-import { takeMailProof } from '../src/proof'
+import { takeInvitation, takeMailProof } from '../src/proof'
 
 describe('private transport', () => {
   it('pins destination/credentials, rejects redirects and forwards only in-memory CSRF', async () => {
@@ -23,6 +23,12 @@ describe('private transport', () => {
 })
 
 describe('mail proof', () => {
+  it('takes a private invitation from the fragment without storage or query transport', () => {
+    history.replaceState(null, '', '/?tracking=unwanted#invite=' + 'b'.repeat(43))
+    expect(takeInvitation()).toBe('b'.repeat(43))
+    expect(location.hash + location.search).toBe('')
+    expect(localStorage.length + sessionStorage.length).toBe(0)
+  })
   it('removes fragment and query before consuming it, without persistent storage', () => {
     history.replaceState(null, '', '/?tracking=unwanted#verify=' + 'a'.repeat(43))
     expect(takeMailProof()).toEqual({ purpose: 'verify', token: 'a'.repeat(43) })

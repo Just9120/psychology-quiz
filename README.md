@@ -230,6 +230,7 @@ README is the repository entrypoint and navigation layer, not the full product s
 | [AGENTS.md](AGENTS.md) | Постоянный router, Goal, AC/Evidence, проверки, Git/PR и поставка | При старте и восстановлении контекста |
 | [Project Specification](docs/project-spec.md) | Каноническая продуктовая/проектная спецификация | Нужно проверить scope, продуктовые правила, модель контента и runtime-ограничения |
 | [Delivery Plan](docs/delivery-plan.md) | Операционное состояние delivery | Нужно понять текущие checkpoints, активный фокус и следующий рекомендуемый шаг |
+| [Student access draft](docs/student-access-draft.md) | Черновик условий и инвентаризации данных; не утверждён и не опубликован для принятия | Перед решением о включении приглашений и студенческого входа |
 | [Delivery Plan Archive](docs/delivery-plan-archive.md) | Исторический архив delivery | Только для явных history/archive/reconciliation tasks |
 | [CI/CD Rules](ci-cd-rules.md) | Правила настройки workflows, gates, artifacts, окружений и recovery | При настройке CI/CD и исправлении pipeline |
 | [Workflow adoption record](docs/ai-delivery-infrastructure-plan.md) | Происхождение принятых документов и прежнее решение по Context Bundle Builder | При проверке истории workflow; текущие задачи находятся в Delivery Plan |
@@ -239,7 +240,7 @@ Source-of-truth модель:
 - Product scope хранится в `docs/project-spec.md`.
 - Текущее delivery-состояние хранится в `docs/delivery-plan.md`.
 - Source of truth банка вопросов — JSON-файлы в `content/questions/`.
-- SQLite — только runtime layer.
+- PostgreSQL — действующее production-хранилище; SQLite остаётся для локальных и совместимых проверочных сценариев.
 
 
 ## Mini App setup (MVP)

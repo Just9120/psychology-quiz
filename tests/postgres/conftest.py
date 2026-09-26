@@ -8,6 +8,7 @@ import pytest
 
 from scripts.postgres_test_support import isolated_postgres_target
 from app.auth_schema import migrate_auth_schema
+from app.invitation_schema import migrate_invitation_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.identity_schema import migrate_identity_schema
 from app.db import get_connection
@@ -19,6 +20,8 @@ from tests.test_web_auth import Mailbox, SETTINGS, ORIGIN
 
 def remove_learning_schema(conn):
     """Build an actual v1/v2 SQLite source for upgrade/recovery tests."""
+    conn.execute("DROP TABLE IF EXISTS pwa_invitations")
+    conn.execute("DELETE FROM schema_migrations WHERE version='invitations-v1'")
     for table in ("user_review_sessions", "user_review_events", "user_achievements", "user_learning_goals"):
         conn.execute(f"DROP TABLE {table}")
     conn.execute("ALTER TABLE questions DROP COLUMN case_content")
@@ -42,6 +45,7 @@ def source(sqlite_bank):
     with closing(get_connection(str(sqlite_bank))) as conn, conn:
         migrate_identity_schema(conn)
         migrate_auth_schema(conn)
+        migrate_invitation_schema(conn)
         migrate_glossary_schema(conn)
     return sqlite_bank
 

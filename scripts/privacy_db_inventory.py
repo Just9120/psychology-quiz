@@ -28,6 +28,7 @@ PERSONAL_TABLES = {
     "web_mail_tokens": ("email/account_id", {"digest", "email", "account_id"}),
     "web_link_tokens": ("account_id/proposed_user_id", {"digest", "account_id", "proposed_user_id"}),
     "web_auth_limits": ("bucket; currently global, review before per-user limits", {"bucket"}),
+    "pwa_invitations": ("user_id/account_id", {"user_id", "token_digest", "invited_email", "account_id"}),
     "quiz_sessions": ("user_id", {"user_id"}),
     "quiz_session_selected_categories": ("session_id", {"session_id"}),
     "quiz_session_questions": ("session_id", {"session_id", "content_snapshot"}),

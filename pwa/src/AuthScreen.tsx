@@ -8,10 +8,10 @@ export interface TaskProps {
   run: (operation: () => Promise<void>) => Promise<void>
 }
 
-export function AuthScreen({ busy, run, proof, consumeProof, onLogin, onDemo }: TaskProps & {
-  proof: MailProof | null; consumeProof: () => void; onLogin: () => Promise<void>; onDemo?: () => void
+export function AuthScreen({ busy, run, proof, invitation, consumeProof, consumeInvitation, onLogin, onDemo }: TaskProps & {
+  proof: MailProof | null; invitation: string | null; consumeProof: () => void; consumeInvitation: () => void; onLogin: () => Promise<void>; onDemo?: () => void
 }) {
-  const [mode, setMode] = useState<'login' | 'register' | 'recover'>(proof?.purpose === 'recover' ? 'recover' : 'login')
+  const [mode, setMode] = useState<'login' | 'register' | 'recover'>(proof?.purpose === 'recover' ? 'recover' : invitation ? 'register' : 'login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [notice, setNotice] = useState('')
@@ -19,7 +19,7 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin, onDemo }: 
   const title = settingPassword ? (proof.purpose === 'verify' ? 'Создайте свой пароль' : 'Новый пароль')
     : mode === 'register' ? 'Начнём с вашей почты' : mode === 'recover' ? 'Восстановить доступ' : 'Рады видеть вас снова'
   const description = settingPassword ? 'Длинная фраза из 15–128 символов поможет защитить ваш прогресс.'
-    : mode === 'register' ? 'Отправим ссылку для подтверждения. Доступ пока открыт владельцу пространства.'
+    : mode === 'register' ? invitation ? 'Личное приглашение получено. Подтвердите почту; доступ появится только после подтверждения Telegram и открытия студенческого входа.' : 'Отправим ссылку для подтверждения. Доступ пока открыт владельцу пространства.'
       : mode === 'recover' ? 'Отправим ссылку на почту, если для неё доступно восстановление.'
         : 'Войдите, чтобы продолжить обучение с того места, где остановились.'
 
@@ -33,7 +33,7 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin, onDemo }: 
       setPassword('')
       await onLogin()
     } else {
-      if (mode === 'register') await api.register(email)
+      if (mode === 'register') { await api.register(email, invitation); consumeInvitation() }
       else await api.recover(email)
       setNotice('Если для этой почты доступно действие, письмо уже отправлено. Проверьте входящие и папку «Спам».')
     }
@@ -64,7 +64,7 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin, onDemo }: 
               : <button disabled={busy} onClick={() => { setMode('login'); setNotice('') }}>Вернуться ко входу</button>}
         </div>
         {!settingPassword && onDemo && <button className="button secondary full" disabled={busy} onClick={onDemo}>Посмотреть демонстрацию</button>}
-        {!settingPassword && <p className="muted">Новые студенческие аккаунты PWA пока не открыты. Демонстрация доступна без регистрации; Telegram-квиз доступен из Telegram.</p>}
+        {!settingPassword && <p className="muted">{invitation ? 'Если доступ для приглашённых ещё закрыт, аккаунт не будет создан. Демонстрация доступна без регистрации.' : 'Новые студенческие аккаунты PWA пока не открыты. Демонстрация доступна без регистрации; Telegram-квиз доступен из Telegram.'}</p>}
         <p className="auth-note"><Icon name="book" size={16} />Ваш прогресс хранится в аккаунте — можно продолжить на другом устройстве.</p>
       </div>
     </main>

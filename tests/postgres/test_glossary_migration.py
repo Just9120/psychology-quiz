@@ -26,7 +26,7 @@ def test_versioned_upgrade_preserves_legacy_data_and_is_idempotent(source, pg_ta
         verify_user_state(before, after)
         assert after['tables']['glossary_sessions']['rows'] == 0
         assert after['sequences'] == before['sequences']
-        assert verify_schema(conn) == 'postgres-v3'
+        assert verify_schema(conn) == 'postgres-v4'
         upgrade_schema(conn)
         assert manifest(conn) == after
         conn.execute("INSERT INTO glossary_sessions VALUES('session',1,'topic','Title','in_progress','{}','{}','now','now')")
@@ -66,7 +66,7 @@ def test_v2_learning_upgrade_preserves_user_rows_and_is_idempotent(pg_target):
         upgrade_schema(conn)
         after = manifest(conn)
         verify_user_state(before, after)
-        assert verify_schema(conn) == 'postgres-v3'
+        assert verify_schema(conn) == 'postgres-v4'
         assert conn.execute("SELECT count(*) FROM user_learning_goals").fetchone()[0] == 0
         assert conn.execute("SELECT first_name FROM users").fetchone()[0] == 'legacy learner'
         upgrade_schema(conn)

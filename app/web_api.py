@@ -42,7 +42,7 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         except (ValueError, OSError, TypeError, KeyError):
             raise AuthError("invalid_payload", 400) from None
     if action in {"auth/register", "auth/recover"}:
-        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover")
+        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover", payload.get("invitation"))
         return {"ok": True}, None
     if action in {"auth/verify", "auth/reset"}:
         auth.set_password(payload.get("token"), payload.get("password"), "register" if action == "auth/verify" else "recover")

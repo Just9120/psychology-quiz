@@ -12,7 +12,7 @@ from pathlib import Path
 import sqlite3
 
 from app.database import Connection, begin_write, connect_database, is_postgres_target
-from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, V2_TABLES, initialize_schema, table_columns, verify_schema
+from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, V2_TABLES, V3_TABLES, initialize_schema, table_columns, verify_schema
 
 
 def quote_identifier(name: str) -> str:
@@ -55,7 +55,8 @@ def validate_source(source, columns: dict[str, tuple[str, ...]]) -> None:
     versions = {row[0] for row in source.execute("SELECT version FROM schema_migrations")}
     required = ({"identity-v1", "auth-v1"}
                 | ({"glossary-v1"} if "glossary_sessions" in columns else set())
-                | ({"learning-v1"} if "user_learning_goals" in columns else set()))
+                | ({"learning-v1"} if "user_learning_goals" in columns else set())
+                | ({"invitations-v1"} if "pwa_invitations" in columns else set()))
     if versions != required:
         raise ValueError("SQLite schema must be upgraded before creating the cutover snapshot")
     for encoded, digest, provenance in source.execute(
@@ -89,8 +90,10 @@ def import_snapshot(source_path: Path, target: str) -> dict:
     with closing(sqlite3.connect(source_path.resolve().as_uri() + "?mode=ro", uri=True)) as source:
         source.execute("BEGIN")
         source_tables = {row[0] for row in source.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        if "user_learning_goals" in source_tables:
-            tables, version = TABLES, "postgres-v3"
+        if "pwa_invitations" in source_tables:
+            tables, version = TABLES, "postgres-v4"
+        elif "user_learning_goals" in source_tables:
+            tables, version = V3_TABLES, "postgres-v3"
         elif "glossary_sessions" in source_tables:
             tables, version = V2_TABLES, "postgres-v2"
         else:

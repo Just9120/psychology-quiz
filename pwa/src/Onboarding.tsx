@@ -8,7 +8,7 @@ export function Onboarding({ account, busy, run, refresh }: TaskProps & { accoun
   const [code, setCode] = useState('')
   const [newWarning, setNewWarning] = useState(false)
   return <section className="onboarding page-width"><span className="eyebrow">ПЕРЕД ПЕРВЫМ КВИЗОМ</span><h1>Ваш прогресс — с вами</h1>
-    <p className="lead">Уже занимались в Telegram? Подключите прежнюю историю, чтобы продолжить здесь.</p>
+    <p className="lead">{account.role === 'student' ? 'Подтвердите Telegram-аккаунт, которому адресовано приглашение. Его история станет доступна и здесь.' : 'Уже занимались в Telegram? Подключите прежнюю историю, чтобы продолжить здесь.'}</p>
     <div className="panel connect-panel"><span className="tile-icon"><Icon name="refresh" size={26} /></span><h2>Подключить Telegram</h2><p className="muted">Понадобится подтверждение в личном чате с вашим учебным ботом. Пароль Telegram вводить не нужно.</p>
       {!code && !account.link_confirmed && <button className="button primary" disabled={busy} onClick={() => void run(async () => { setCode((await api.linkStart()).code); await refresh() })}>{account.link_pending ? 'Получить новый код' : 'Получить код'}<Icon name="arrow" /></button>}
       {code && !account.link_confirmed && <div className="link-instructions"><ol><li>Скопируйте команду ниже.</li><li>Отправьте её учебному боту в личном чате.</li><li>Проверьте почту аккаунта в сообщении бота и подтвердите связь.</li></ol>
@@ -19,9 +19,9 @@ export function Onboarding({ account, busy, run, refresh }: TaskProps & { accoun
       {account.link_confirmed && account.link_target && <div className="notice-stack"><div className="notice"><Icon name="check" /><span>Telegram подтверждён: <strong>{account.link_target.display_name || account.link_target.username || 'Учебный аккаунт'}</strong>{account.link_target.username && ` (@${account.link_target.username})`}<br /><small>ID {account.link_target.telegram_id}</small></span></div>
         <button className="button primary" disabled={busy} onClick={() => void run(async () => { await api.linkComplete(); setCode(''); await refresh() })}>Подключить этот прогресс<Icon name="arrow" /></button></div>}
     </div>
-    <div className="panel independent-panel"><h2>Начать без Telegram</h2><p className="muted">Создадим отдельный прогресс для этого аккаунта.</p>
+    {account.role !== 'student' && <div className="panel independent-panel"><h2>Начать без Telegram</h2><p className="muted">Создадим отдельный прогресс для этого аккаунта.</p>
       {!newWarning ? <button className="button secondary" disabled={busy} onClick={() => setNewWarning(true)}>Создать новый прогресс</button>
         : <><p className="warning-text">После этого объединить историю с прежним Telegram-прогрессом не получится. Если он вам нужен, подключите его выше.</p><div className="button-row"><button className="button primary" disabled={busy} onClick={() => void run(async () => { await api.newIdentity(); await refresh() })}>Начать с чистого листа</button><button className="button quiet" disabled={busy} onClick={() => setNewWarning(false)}>Назад</button></div></>}
-    </div>
+    </div>}
   </section>
 }

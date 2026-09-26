@@ -23,12 +23,12 @@ it('requires topics, confirms replacement and sends actual mix/all settings', as
 
 it('registration requests proof before password entry', async () => {
   const user = userEvent.setup(), register = vi.spyOn(api, 'register').mockResolvedValue({ ok: true })
-  render(<AuthScreen busy={false} run={async action => action()} proof={null} consumeProof={vi.fn()} onLogin={vi.fn()} />)
+  render(<AuthScreen busy={false} run={async action => action()} proof={null} invitation={null} consumeProof={vi.fn()} consumeInvitation={vi.fn()} onLogin={vi.fn()} />)
   await user.click(screen.getByRole('button', { name: 'Первый вход' }))
   expect(screen.queryByLabelText('Пароль')).not.toBeInTheDocument()
   await user.type(screen.getByLabelText('Электронная почта'), 'owner@example.test')
   await user.click(screen.getByRole('button', { name: 'Получить письмо' }))
-  expect(register).toHaveBeenCalledWith('owner@example.test')
+  expect(register).toHaveBeenCalledWith('owner@example.test', null)
   expect(await screen.findByRole('status')).toHaveTextContent('Если для этой почты')
 })
 

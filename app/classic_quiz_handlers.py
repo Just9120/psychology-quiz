@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from contextlib import closing
+import os
 
 import asyncio
 import logging
@@ -35,6 +36,8 @@ from app.attempt_content import get_attempt_content
 from app.handler_latency import HandlerLatency as _HandlerLatency
 from app.miniapp_entrypoint_handlers import MINI_APP_BUTTON_TEXT
 from app.miniapp_runner import submit_miniapp_answer_event
+from app.database import resolve_database_target
+from app.pwa_promotion import claim_first_offer, issue_invitation, parse_invitee_ids, public_pwa_origin
 
 logger = logging.getLogger(__name__)
 
@@ -558,6 +561,41 @@ async def restore_main_menu_after_quiz(query) -> None:
     )
 
 
+async def maybe_send_pwa_offer(chat, telegram_user_id: int | None, *, db_path: str | None = None,
+                               origin: str | None = None, enabled: bool | None = None,
+                               invitees: frozenset[int] | None = None,
+                               latency: _HandlerLatency | None = None) -> None:
+    """Offer once after a completed private-chat attempt, without affecting its result."""
+    target = public_pwa_origin(origin if origin is not None else os.getenv("PWA_ORIGIN"))
+    if chat.type != "private" or target is None or telegram_user_id is None:
+        return
+    student_gate = enabled if enabled is not None else os.getenv("PWA_STUDENT_ACCESS_ENABLED", "false").strip().lower() == "true"
+    allowed = invitees if invitees is not None else parse_invitee_ids(os.getenv("PWA_STUDENT_INVITEE_IDS", ""))
+    def _claim() -> tuple[bool, str | None]:
+        with closing(get_connection(db_path or resolve_database_target())) as conn, conn:
+            if not claim_first_offer(conn, telegram_user_id):
+                return False, None
+            return True, issue_invitation(conn, telegram_user_id) if student_gate and telegram_user_id in allowed else None
+    try:
+        should_offer, invitation = await asyncio.to_thread(_claim)
+    except Exception:
+        logger.warning("Не удалось сохранить однократное предложение PWA; результат квиза сохранён.")
+        return
+    if should_offer:
+        try:
+            url = f"{target}/#invite={invitation}" if invitation else target
+            message = ("Если удобно заниматься в браузере, попробуйте веб-приложение. Личное приглашение действует 24 часа; "
+                       "ссылка также есть в личном меню." if invitation else
+                       "Если удобно заниматься в браузере, попробуйте веб-приложение: три демо-задания доступны без аккаунта. "
+                       "Вход студентов по приглашению пока закрыт. Ссылка также есть в личном меню.")
+            await _timed_telegram_api_call(latency, chat.send_message(
+                message,
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Попробовать веб-приложение", url=url)]]),
+            ), api_kind="message_send")
+        except Exception:
+            logger.warning("Не удалось отправить однократное предложение PWA; ссылка доступна через /pwa.")
+
+
 async def send_quiz_result_with_main_menu(query, text: str, latency: _HandlerLatency | None = None) -> None:
     """Single completion sink: disable stale quiz inline controls, then send final result."""
     if query.message is None:
@@ -573,6 +611,8 @@ async def send_quiz_result_with_main_menu(query, text: str, latency: _HandlerLat
         reply_markup=get_main_menu_keyboard() if query.message.chat.type == "private" else None,
         parse_mode="HTML",
     ), api_kind="message_send")
+    user = getattr(query, "from_user", None)
+    await maybe_send_pwa_offer(query.message.chat, getattr(user, "id", None), latency=latency)
 
 
 async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int, latency: _HandlerLatency | None = None) -> None:
@@ -1524,6 +1564,11 @@ async def classic_reply_text_answer_handler(update: Update, context: ContextType
                     ),
                     api_kind="message_send",
                 )
+                await maybe_send_pwa_offer(message.chat, tg_user.id, db_path=settings.db_path,
+                                           origin=getattr(settings, "pwa_origin", None),
+                                           enabled=getattr(settings, "pwa_student_access_enabled", False),
+                                           invitees=getattr(settings, "pwa_student_invitee_ids", frozenset()),
+                                           latency=latency)
             else:
                 _set_classic_reply_state(context, {"status": "awaiting_next", "session_id": session_id})
                 await _timed_telegram_api_call(

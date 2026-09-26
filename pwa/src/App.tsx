@@ -18,8 +18,9 @@ import type { ResetPreview } from './types'
 import { InstallButton } from './install'
 import type { Account, Answer, Feedback, MailProof, Question, QuizState, RunnerState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage } from './types'
 
-export function App({ initialProof = null }: { initialProof?: MailProof | null }) {
+export function App({ initialProof = null, initialInvitation = null }: { initialProof?: MailProof | null; initialInvitation?: string | null }) {
   const [proof, setProof] = useState(initialProof)
+  const [invitation, setInvitation] = useState(initialInvitation)
   const [demoOpen, setDemoOpen] = useState(false)
   const [account, setAccount] = useState<Account | null>(null)
   const [options, setOptions] = useState<SetupOptions | null>(null)
@@ -178,7 +179,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const alert = error && <div className="app-alert" role="alert" tabIndex={-1} ref={alertRef}><Icon name="close" /><span>{error}</span><button aria-label="Скрыть сообщение" onClick={() => setError('')}><Icon name="close" size={16} /></button></div>
   if (booting) return <main className="loading-screen"><Brand /><span className="spinner" aria-hidden="true" /><p role="status">Открываем ваше пространство…</p></main>
   if ((!account || proof) && demoOpen && !proof) return <DemoView onExit={() => setDemoOpen(false)} />
-  if (!account || proof) return <>{alert}<AuthScreen busy={busy} run={run} proof={proof} consumeProof={() => setProof(null)} onLogin={loadAccount} onDemo={() => setDemoOpen(true)} /></>
+  if (!account || proof) return <>{alert}<AuthScreen busy={busy} run={run} proof={proof} invitation={invitation} consumeProof={() => setProof(null)} consumeInvitation={() => setInvitation(null)} onLogin={loadAccount} onDemo={() => setDemoOpen(true)} /></>
 
   return <div className="app-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
     <aside className="sidebar"><Brand /><div className="nav-heading">МОЁ ОБУЧЕНИЕ</div><nav aria-label="Основная навигация"><button className={view === 'quiz' || view === 'setup' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}><Icon name="book" />Квиз по психологии<span className="nav-dot" /></button><button className={view === 'glossary' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadGlossary)}><Icon name="book" />Глоссарий</button><button className={view === 'literature' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLiterature)}><Icon name="book" />Литература</button><button className={view === 'progress' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadProgress)}><Icon name="chart" />Мой прогресс</button><button className={view === 'learning' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLearningView)}><Icon name="refresh" />Повторение и цели</button><button className={view === 'errors' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadErrors)}><Icon name="refresh" />Мои ошибки</button><button className={view === 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView('account')}><Icon name="user" />Мой аккаунт</button></nav><div className="sidebar-note"><Icon name="spark" /><p>Небольшие шаги.<br />Большое понимание.</p></div><InstallButton /><button className="logout" disabled={busy} onClick={() => void run(async () => { try { await api.logout() } finally { clearPrivateState() } })}><Icon name="logout" />Выйти</button></aside>

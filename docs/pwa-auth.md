@@ -12,6 +12,7 @@ Enabled API и bot требуют:
 | --- | --- |
 | `PWA_ENABLED` | `true` / `false`; неизвестное значение — startup error |
 | `PWA_STUDENT_ACCESS_ENABLED` | Только `false` для действующего production release. `true` отклоняется при startup до подключения к DB: нет утверждённого age/privacy policy. Synthetic tests инъектируют enabled settings напрямую, не через runtime env. |
+| `PWA_STUDENT_INVITEE_IDS` | Пустой по умолчанию allowlist Telegram IDs для выдачи личных приглашений ботом при разрешённом student gate; неизвестный/нечисловой ID отклоняется при startup. Не является проверкой возраста или заменой Q-09/11. |
 | `PWA_ORIGIN` | Единственный HTTPS origin без path/query/fragment/credentials. PWA вызывает same-origin `/web/*`, Nginx направляет его в existing loopback API; PWA CORS не включается |
 | `PWA_OWNER_EMAIL` | Allowlisted owner, lowercase/trim; реальный адрес в repository не публиковать. Другие PWA accounts в production выключены |
 | `PWA_SMTP_HOST`, `PWA_SMTP_PORT` | По документации Яндекс 360, проверенной 19.09.2026: `smtp.yandex.ru`, SSL 465 или STARTTLS 587. Фактический mailbox устанавливает владелец; certificate verification обязательно |
@@ -20,7 +21,7 @@ Enabled API и bot требуют:
 
 Install/init/run/tests — canonical команды в [README](../README.md#быстрый-старт-и-проверки). Tests inject synthetic mailer; runtime не имеет bypass e-mail proof и не возвращает mail tokens в API. SMTP timeout 10 секунд, до двух отправок на процесс. Ошибка удаляет выданный token и возвращает только `mail_unavailable`.
 
-В synthetic test configuration общий e-mail/password/proof flow допускает `student` account с независимым actor либо подтверждённой Telegram-связью; роль в `auth/me` выводится сервером из подтверждённого e-mail. При выключении gate ранее созданная student session не проходит `authenticate`, а login и новые письма не дают доступа. Это подготовка технического пути, не одобрение или включение публичной регистрации: проверяемое правило 18+, тексты и основания обработки, удаление/retention и размещение данных остаются Q-09/11.
+В synthetic test configuration student registration требует одноразовое приглашение, выданное в личном чате проверенному Telegram actor: token хранится в базе только как SHA-256 digest, действует 24 часа и связывается с e-mail до почтовой проверки. После подтверждения e-mail аккаунт не получает самостоятельный actor; связывание допускает только исходный Telegram user с proof в обоих клиентах. Чужой, повторный и истёкший token закрыты. В production `PWA_STUDENT_ACCESS_ENABLED=true` по-прежнему отклоняется до Q-09/11; бот пока даёт ссылку на stateless demo и не выдаёт приглашений. При выключении gate student session не проходит `authenticate`, login и новые письма не дают доступа. Проект согласия/политики, правила возраста, удаления/retention, фактическое размещение и уведомления остаются Q-09/11.
 
 ## API и пользовательский flow
 
@@ -28,7 +29,7 @@ POST: JSON до 16 KiB, exact Origin; query parameters запрещены. Authe
 
 | Endpoint | Payload / результат |
 | --- | --- |
-| `POST /web/auth/register` | `{email}` → generic `{ok:true}`. Verification link только разрешённому новому owner; пароль до proof не сохраняется |
+| `POST /web/auth/register` | `{email,invitation?}` → generic `{ok:true}`. Owner не требует invitation; synthetic student flow требует личный действующий token. Пароль до e-mail proof не сохраняется; production student gate остаётся OFF |
 | `POST /web/auth/verify` | `{token,password}` → verified account. Expired/replayed/wrong-purpose proof отклоняется; все register tokens адреса отзываются. Затем обычный login |
 | `POST /web/auth/login` | `{email,password}` → `{ok:true}` + HttpOnly cookie. Unknown/disabled/not-allowlisted/wrong credentials → одинаковый 401; неизвестный account также проходит password hash workload |
 | `GET /web/auth/me` | E-mail, CSRF, `needs_identity`, `telegram_linked`, `link_pending`, `link_confirmed`, `link_target` (подтверждённые имя/username/Telegram ID) только инициировавшей session |
