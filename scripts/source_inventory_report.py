@@ -35,6 +35,23 @@ def _snapshot(value: dict) -> dict:
                                        for folder, pages in value["folders"].items()})
 
 
+def private_json_target(raw_target: Path, repo_root: Path, *,
+                        error_code: str = "private_queue_requires_ignored_data_json") -> Path:
+    data_root = (repo_root / "data").resolve()
+    target = raw_target.resolve()
+    if target.parent != data_root or target.suffix.lower() != ".json" or not data_root.is_dir():
+        raise InventoryError(error_code)
+    ignored = subprocess.run(
+        ["git", "check-ignore", "-q", "--",
+         target.relative_to(repo_root.resolve()).as_posix()],
+        cwd=repo_root, stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+    )
+    if ignored.returncode != 0:
+        raise InventoryError(error_code)
+    return target
+
+
 def report(current: dict, *, previous: dict | None = None,
            processed: dict | None = None, links: list | None = None,
            registry: dict | None = None, curriculum: dict | None = None) -> dict:
@@ -86,18 +103,7 @@ def main(argv=None) -> int:
         value = report(current, previous=previous, processed=processed, links=links,
                        registry=registry, curriculum=curriculum)
         if args.private_queue:
-            data_root = (REPO_ROOT / "data").resolve()
-            target = args.private_queue.resolve()
-            if target.parent != data_root or target.suffix.lower() != ".json" or not data_root.is_dir():
-                raise InventoryError("private_queue_requires_ignored_data_json")
-            ignored = subprocess.run(
-                ["git", "check-ignore", "-q", "--",
-                 target.relative_to(REPO_ROOT.resolve()).as_posix()],
-                cwd=REPO_ROOT, stdin=subprocess.DEVNULL,
-                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-            )
-            if ignored.returncode != 0:
-                raise InventoryError("private_queue_requires_ignored_data_json")
+            target = private_json_target(args.private_queue, REPO_ROOT)
             queue = private_review_queue(_snapshot(current), registry, curriculum,
                                          processed=processed,
                                          previous=_snapshot(previous) if previous is not None else None,
