@@ -128,7 +128,8 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     (tmp_path / "content/source-corpus.json").write_text(json.dumps(registry), encoding="utf-8")
     (tmp_path / "content/curriculum.json").write_text(json.dumps(curriculum), encoding="utf-8")
     reviews = {"schema_version": 1, "items": {"questions:example": {"decision": "approved",
-        "sources": [{"source_id": source["id"]}]}}}
+        "sources": [{"source_id": source["id"], "modified_time": source["modified_time"],
+                     "snapshot_sha256": source["snapshot_sha256"]}]}}}
     (tmp_path / "content/publication-reviews.json").write_text(
         json.dumps(reviews), encoding="utf-8")
     current_path = tmp_path / "data/current.json"
@@ -144,6 +145,7 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     assert entries["reviewed-private"]["registry_state"] == "current"
     assert entries["reviewed-private"]["linked_topic_ids"] == ["topic"]
     assert entries["reviewed-private"]["linked_derivative_ids"] == ["questions:example"]
+    assert entries["reviewed-private"]["derivative_ids_requiring_review"] == []
     assert entries["reviewed-private"]["derivative_review_required"] is False
     assert entries["unreviewed-private"]["registry_state"] == "untracked"
     assert all(item["processing_state"] == "unknown_no_processing_snapshot" for item in entries.values())
@@ -156,10 +158,18 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     changed_entry = changed_queue["files"][0]
     assert changed_entry["registry_state"] == "changed"
     assert changed_entry["linked_derivative_ids"] == ["questions:example"]
+    assert changed_entry["derivative_ids_requiring_review"] == ["questions:example"]
     assert changed_entry["derivative_review_required"] is True
     missing_queue = inventory_report.private_review_queue(
         inventory_report._snapshot(export([])), registry, curriculum, reviews=reviews)
     assert missing_queue["missing_tracked_sources"][0]["derivative_review_required"] is True
+    stale_reviews = {"schema_version": 1, "items": {"questions:example": {
+        "decision": "approved", "sources": [{"source_id": source["id"],
+            "modified_time": source["modified_time"], "snapshot_sha256": "b" * 64}]}}}
+    stale_queue = inventory_report.private_review_queue(
+        inventory_report._snapshot(current), registry, curriculum, reviews=stale_reviews)
+    assert stale_queue["files"][0]["registry_state"] == "current"
+    assert stale_queue["files"][0]["derivative_ids_requiring_review"] == ["questions:example"]
 
     original = target.read_bytes()
     assert main(args) == 1
