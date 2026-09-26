@@ -30,6 +30,8 @@
 
 **E-PL-76 / локальное исключение спорного вопроса, 26.09.2026:** `m1_psyf_022` переведён из `approved` в `retired`: quality review уже фиксировал неполную поддержку прикладного вывода глоссарием и выраженную подсказку длиной правильного ответа. Fingerprint review обновлён без смены source evidence; `validate_questions.py`, `validate_learning_reviews.py` (675 identities) и `git diff --check` PASS. Content sync исключает retired ID из новых попыток, а существующие attempt snapshots остаются immutable по контракту кода; фактическая миграция пользовательской PostgreSQL и CI/CD PENDING. Это не закрывает SRC-04/QUIZ-05 и не меняет счётчик завершённых по коду AC Goal (19/38).
 
+**E-PL-77 / восстановленный private source capture, 26.09.2026:** извлечённый текст второго глоссария (E-PL-75, SHA-256 `f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8`) сохранён в ignored `data/`, `source_capture.py` создал отдельную revision-bound запись `pending_review` без publication approval. `source_inventory_report.py --processed ... --reviewed` PASS: 92 папки/413 файлов, 63/63 tracked metadata current, 42 current lesson edges, processing 412 new_unprocessed / 1 pending_review только для восстановленного record. Копии текста и processing record сохранены в ignored `data/` исходного workspace с одинаковыми SHA-256; прежние потерянные processing records этим не восстановлены. Полное чтение/смысловая проверка 49 абзацев и 40 derivative claims, конфликты и решение публикации PENDING; AC-SRC-01–05 остаются IN_PROGRESS.
+
 ### Scope, DoD и порядок
 
 | Часть | Самостоятельно поставляемый результат | Gates |
