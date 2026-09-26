@@ -32,6 +32,11 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
     item = snapshot["files"].get(source_id)
     if item is None:
         raise InventoryError("source_not_in_current_inventory")
+    revision = [item["modified_time"], item["title"], item["mime_type"]]
+    previous = prior.get(source_id)
+    if (isinstance(previous, dict) and previous.get("review_state") == "processed"
+            and tuple(previous.get("revision", ())) == tuple(revision)):
+        raise InventoryError("source_revision_already_processed")
     if snapshot_kind not in {"file_bytes", "extracted_text"}:
         raise InventoryError("invalid_snapshot_kind")
     digest = hashlib.sha256()
@@ -54,7 +59,7 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
         raise InventoryError("source_content_changed_during_capture")
     updated = dict(prior)
     updated[source_id] = {
-        "revision": [item["modified_time"], item["title"], item["mime_type"]],
+        "revision": revision,
         "review_state": "pending_review",
         "snapshot_kind": snapshot_kind,
         "snapshot_sha256": digest.hexdigest(),
