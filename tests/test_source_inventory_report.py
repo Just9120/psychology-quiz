@@ -22,9 +22,13 @@ def test_private_inventory_report_reconciles_without_exposing_ids(tmp_path, caps
     assert "root" not in output.out
     assert json.loads(output.out) == {"folders": 1, "files": 2, "linked_lessons": 0,
         "processing": {"new_unprocessed": 2},
+        "processing_by_format": {"application/pdf": {"new_unprocessed": 2}},
         "changes": {"new": 1, "changed": 0, "unchanged": 1, "missing": 0}}
     assert report(current, processed={"first": {"revision": ("2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
         "review_state": "processed"}})["processing"] == {"new_unprocessed": 1, "processed": 1}
+    assert report(current, processed={"first": {"revision": ("2026-09-25T00:00:00Z", "Lesson", "application/pdf"),
+        "review_state": "processed"}})["processing_by_format"] == {
+            "application/pdf": {"new_unprocessed": 1, "processed": 1}}
 
 
 def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path, capsys):

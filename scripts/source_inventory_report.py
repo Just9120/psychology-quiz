@@ -39,8 +39,13 @@ def report(current: dict, *, previous: dict | None = None,
     states = processing_status(snapshot, processed or {})
     lessons = link_lessons(snapshot, links or [])
     changes = reconcile(_snapshot(previous), snapshot) if previous is not None else None
+    by_format: dict[str, Counter] = {}
+    for file_id, item in snapshot["files"].items():
+        by_format.setdefault(item["mime_type"], Counter())[states[file_id]] += 1
     return {"folders": snapshot["folders"], "files": len(snapshot["files"]),
             "processing": dict(sorted(Counter(states.values()).items())),
+            "processing_by_format": {mime: dict(sorted(counts.items()))
+                                     for mime, counts in sorted(by_format.items())},
             "linked_lessons": len(lessons),
             "changes": ({kind: len(ids) for kind, ids in changes.items()} if changes else None)}
 
