@@ -8019,7 +8019,7 @@
       "item_sha256": "07ea6bdeb22eb7467294e496fdb3c8105fa8198abdc21b200662fbca7dec7c1a",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8029,11 +8029,12 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
-        "high_severity_length_cue"
+        "high_severity_length_cue",
+        "source_support_incomplete"
       ],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "note": "Глоссарий описывает парадигму Dot Probe и сети внимания, но не выводит из них механизм «захвата угрозой» и потерю устойчивого целевого фокуса в данной ситуации. Нужен адресный учебный фрагмент; поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8047,7 +8048,7 @@
       "item_sha256": "c533eebb1d882dd8b13dbb638a8661917af9087838e14d7dc74cd2a5db7b2552",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8057,9 +8058,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение автоматического процесса говорит о непроизвольности и малом усилии, но не объясняет формирование повторением «автоматических дорожек» в консультативной практике. Нужен прямой источник для прикладной формулировки.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8073,7 +8076,7 @@
       "item_sha256": "4f202842ed9746ec068e13e98c8cd33a41e1688706eb13e75ae6ef6f4d9473e1",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8083,9 +8086,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение конформизма и замечание о социальном подкреплении есть, но механизм изменения оценки допустимости и ценности вариантов под давлением группы не раскрыт. Поддержка вывода частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8177,7 +8182,7 @@
       "item_sha256": "0cab3b72ab380aa459864250044c4ab1485b3fb9555a51c99857197f8bfa9da4",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8187,9 +8192,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Глоссарий перечисляет отдельные области и сети, связанные с выбором, но не устанавливает их взаимодействие как достаточное объяснение конкретного решения. Нужен прямой фрагмент о координации оценки, контроля и эмоций.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8229,7 +8236,7 @@
       "item_sha256": "a181ad88e506ab5af024cb4fc5dfbe131959cc5b5e869fd98c17e9ecbdba96ad",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8239,9 +8246,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Исполнительный контроль описан как подавление рефлекторных реакций, но связь его недостаточной эффективности с импульсивными переключениями и отвлекаемостью здесь не проверена. Поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8359,7 +8368,7 @@
       "item_sha256": "a546b3084e4b00c825d147970303c0bee63862b60d38dc9159c5f4927d1d5963",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8369,9 +8378,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение конформизма не содержит алгоритма консультационной работы с триггерами, вниманием и осознанным контролем выбора. Прикладной ответ требует отдельного учебного источника; глоссарий подтверждает только тему влияния группы.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8719,7 +8730,7 @@
       "item_sha256": "1ccefcd364be8ff876243d5b2255ec93f3ee748e76e5fbcf49975eac09529f9b",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8729,9 +8740,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Глоссарий различает контроль и автоматические процессы, но не подтверждает вывод о сохранной мотивации при утомлении или перегрузке и ослаблении торможения. Нужен адресный материал об этих условиях.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8801,7 +8814,7 @@
       "item_sha256": "633c16eca3c5f3b6f843d9f3744a0d5d5d3960cde08815490a7defb099d0e58e",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -8811,9 +8824,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Определение исполнительного контроля не позволяет по описанному поведению заключить о временном ослаблении активного торможения при сохранном намерении. Это гипотеза, требующая отдельного учебного основания.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -8991,7 +9006,7 @@
       "item_sha256": "20a03a101c4e75b323bacb89f19ed66bf74bb054a45baa302c6f386efa52ccc8",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9001,9 +9016,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Автоматический процесс и исполнительный контроль определены по отдельности; конкуренция привычного паттерна с целевым контролем и её влияние на выбор в прикладной ситуации прямо не описаны. Поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -9017,7 +9034,7 @@
       "item_sha256": "d576cc77feb8c46ec7c5d578edbad8a13798fae11e0b203a4be79aabffcca581",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9027,9 +9044,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Глоссарий перечисляет сети и эвристический выбор, но не даёт прямого объяснения согласованной работы оценки значимости, контроля и мониторинга последствий при неопределённости. Нужен точный source fragment.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -9207,7 +9226,7 @@
       "item_sha256": "d629ab1adaf9a6b4f83461509cd1f13fcb0e5d882890b346978382931026aaa2",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -9217,9 +9236,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Модели фильтрации и аттенюатора описаны, но прикладной вывод о роли перегруза и значимости конкурирующих стимулов в ошибке отбора здесь не проверен. Поддержка частичная.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
