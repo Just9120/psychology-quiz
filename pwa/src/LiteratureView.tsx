@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { api, ApiError } from './api'
-import { readingChecklistLabel, suggestedReadingOrder } from './readingPlan'
 import type { LiteratureCatalog, LiteratureEntry, ReadingStatus } from './types'
 
 const statuses: Record<ReadingStatus, string> = {
@@ -19,8 +18,6 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
   const work = catalog.works.find(item => item.work_id === workId)
   const entry = work?.entries.find(item => item.id === entryId)
   const visible = catalog.works.filter(item => !topic || item.entries.some(link => link.topic_id === topic))
-  const readingPlan = topic ? suggestedReadingOrder(catalog.works.flatMap(item =>
-    item.entries.filter(link => link.topic_id === topic).map(link => ({ ...link, work_id: item.work_id, work_title: item.title })))) : []
 
   function select(link: LiteratureEntry) {
     setEntryId(link.id); setStatus(link.user_state?.reading_status ?? 'not_started')
@@ -62,7 +59,6 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       {work.entries.length > 1 && <p className="muted">Эта работа встречается в нескольких списках. Отметки чтения сохраняются отдельно для выбранного списка.</p>}
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>
-      <p className="muted">Приоритет преподавателя: {entry.priority || 'не указан в доступном источнике'}.</p>
       <details className="source-details"><summary>Источник и библиографическая запись</summary><p>{entry.source.title}</p><p>{entry.source.locator}</p><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>
@@ -77,13 +73,6 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       </form>
     </article> : <>
       <label className="field literature-filter">Тема литературы<select value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{catalog.topics.map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
-      {topic && <section className="panel" aria-label="Личный план чтения"><h2>Мой план чтения</h2>
-        <p className="muted">Порядок предложен приложением: сначала незавершённое в порядке учебного списка, затем прочитанное. Это не приоритет преподавателя.</p>
-        {readingPlan.length ? <ol>{readingPlan.map(link => <li key={link.id}>
-          <button className="text-button" disabled={busy} onClick={() => { setWorkId(link.work_id); select(link) }}>{link.work_title}</button>
-          {' · '}{readingChecklistLabel(link)}{link.priority ? ` · Приоритет преподавателя: ${link.priority}` : ''}
-        </li>)}</ol> : <p role="status">В этой теме пока нет материалов.</p>}
-      </section>}
       <p className="muted" role="status">Работ: {visible.length}</p>
       {visible.length ? <div className="literature-list">{visible.map(item => {
         const links = item.entries.filter(link => !topic || link.topic_id === topic)
