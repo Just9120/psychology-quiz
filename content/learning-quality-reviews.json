@@ -11084,8 +11084,8 @@
     "questions:m2_exp_051": {
       "item_sha256": "8a687e7fe01a8f049bdc1f115816c1a5a65738d7a0ed7d19326efc8a6fc4c806",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11095,17 +11095,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент сопоставляет структуралистское разложение на элементы с гештальт-подходом и прямо формулирует целостность как несводимую к сумме частей.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1674:2260"
         }
       ]
     },
@@ -11138,10 +11136,10 @@
       ]
     },
     "questions:m2_exp_053": {
-      "item_sha256": "487c88eb6eec88d84bc0638b0f6eb1e26b9aa561639c7001e0dd1009cfe13252",
+      "item_sha256": "91ae5880e7a5306efe221f095ac44ca283e5d12d808d52a52d614b33d26820f3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11151,25 +11149,23 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция описывает клетки-головоломки Торндайка, награду, ускорение успешного действия и вывод о научении пробами и ошибками. Упоминание закона эффекта удалено как не изложенное в этом фрагменте.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3270:4200"
         }
       ]
     },
     "questions:m2_exp_054": {
-      "item_sha256": "6ac55c745c37790e9e48322f6a7f0cb6faea3e9541b4ff6b653f6629739fe1a6",
+      "item_sha256": "7ce1f07ff7c80f18280cad3c573a40bfdfcd51d946f213ba223b0599b6ede387",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11179,17 +11175,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагменты противопоставляют наблюдаемые стимулы/реакции бихевиоризма бессознательным конфликтам и глубинным мотивационным механизмам психоанализа; формулировка ответа согласована с ними.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2790:3250, 4171:4600"
         }
       ]
     },

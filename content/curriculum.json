@@ -2202,6 +2202,24 @@
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "58793a62db0d5cac305b1118d24211461627333fafbac865615fb6a2f9a0cb7c",
       "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26930:27500"
+    },
+    "089a9cf18a4da1c76fe49f442bbb19b1ca7ed6171b38de297b3ce13d29d8c48e": {
+      "external_id": "m2_exp_051",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "8a687e7fe01a8f049bdc1f115816c1a5a65738d7a0ed7d19326efc8a6fc4c806",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1674:2260"
+    },
+    "a806f7a7339a9193abab771d0db5edfd9c86aba06449df3434c4f13e329df72c": {
+      "external_id": "m2_exp_053",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "91ae5880e7a5306efe221f095ac44ca283e5d12d808d52a52d614b33d26820f3",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3270:4200"
+    },
+    "ec07f9f5fe2ac1cc0ae1ccfaac4d7d8bf2266839c3a3e7f98d02e968db3dbc58": {
+      "external_id": "m2_exp_054",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "7ce1f07ff7c80f18280cad3c573a40bfdfcd51d946f213ba223b0599b6ede387",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2790:3250, 4171:4600"
     }
   }
 }
