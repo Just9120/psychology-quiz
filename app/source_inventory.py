@@ -6,7 +6,8 @@ operator storage, never among public content or static assets.
 """
 from __future__ import annotations
 
-from collections import deque
+from collections import Counter, deque
+import re
 
 
 class InventoryError(ValueError):
@@ -144,3 +145,69 @@ def link_lessons(snapshot: dict, links: list[dict]) -> dict:
             raise InventoryError("conflicting_lesson_topic")
         lesson["sources"].append({"source_id": source_id, "format": format_name})
     return lessons
+
+
+def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
+    """Aggregate exact metadata and reviewed lesson edges without exposing sources.
+
+    A current Drive timestamp/title does not prove that a source was fully read;
+    snapshot hashes belong to the separate content review record. A stale or
+    missing Drive file cannot support a *current* lesson edge.
+    """
+    if (not isinstance(registry, dict) or registry.get("schema_version") != 1
+            or registry.get("corpus_root_id") != snapshot.get("root_id")
+            or not isinstance(registry.get("sources"), list)
+            or not isinstance(curriculum, dict) or curriculum.get("schema_version") != 1
+            or not isinstance(curriculum.get("topics"), dict)
+            or not isinstance(curriculum.get("disciplines"), dict)):
+        raise InventoryError("invalid_reviewed_graph")
+    sources = {}
+    for source in registry["sources"]:
+        if (not isinstance(source, dict) or not isinstance(source.get("id"), str)
+                or not source["id"] or source["id"] in sources
+                or source.get("kind") not in {"learning_material", "bibliography"}
+                or source.get("readable") is not True
+                or source.get("snapshot_kind") not in {"file_bytes", "extracted_text"}
+                or not all(isinstance(source.get(key), str) and source[key]
+                           for key in ("title", "modified_time", "snapshot_sha256", "reviewed_at", "reviewer"))
+                or re.fullmatch(r"[0-9a-f]{64}", source["snapshot_sha256"]) is None):
+            raise InventoryError("invalid_reviewed_source")
+        sources[source["id"]] = source
+    states = {}
+    formats = Counter()
+    for source_id, source in sources.items():
+        live = snapshot["files"].get(source_id)
+        state = ("missing" if live is None else "changed" if
+                 (source["title"], source["modified_time"]) !=
+                 (live["title"], live["modified_time"]) else "current")
+        states[source_id] = state
+        if state == "current":
+            formats[live["mime_type"]] += 1
+    linked_ids = Counter()
+    link_states = Counter()
+    for topic in curriculum["topics"].values():
+        if (not isinstance(topic, dict) or topic.get("discipline_id") not in curriculum["disciplines"]
+                or not isinstance(topic.get("title"), str) or not topic["title"]
+                or not isinstance(topic.get("source"), dict)):
+            raise InventoryError("invalid_reviewed_lesson")
+        ref = topic["source"]
+        source = sources.get(ref.get("source_id"))
+        if (source is None or source["kind"] != "learning_material"
+                or ref.get("modified_time") != source["modified_time"]
+                or ref.get("snapshot_sha256") != source["snapshot_sha256"]):
+            raise InventoryError("invalid_reviewed_lesson")
+        linked_ids[source["id"]] += 1
+        link_states[states[source["id"]]] += 1
+    return {
+        "tracked_sources": len(sources),
+        "source_kinds": dict(sorted(Counter(source["kind"] for source in sources.values()).items())),
+        "source_metadata": dict(sorted(Counter(states.values()).items())),
+        "current_by_format": dict(sorted(formats.items())),
+        "untracked_inventory_files": len(snapshot["files"]) - sum(state != "missing" for state in states.values()),
+        "reviewed_lesson_edges": len(curriculum["topics"]),
+        "lesson_metadata": dict(sorted(link_states.items())),
+        "unique_lesson_files": len(linked_ids),
+        "multi_lesson_files": sum(count > 1 for count in linked_ids.values()),
+        "reviewed_learning_without_lesson": sum(source["kind"] == "learning_material" and
+                                                source["id"] not in linked_ids for source in sources.values()),
+    }

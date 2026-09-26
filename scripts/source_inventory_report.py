@@ -15,7 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from app.source_inventory import InventoryError, complete_listing, link_lessons, processing_status, reconcile, scan
+from app.source_inventory import InventoryError, complete_listing, link_lessons, processing_status, reconcile, reviewed_graph, scan
 
 
 def _read(path: Path):
@@ -30,7 +30,8 @@ def _snapshot(value: dict) -> dict:
 
 
 def report(current: dict, *, previous: dict | None = None,
-           processed: dict | None = None, links: list | None = None) -> dict:
+           processed: dict | None = None, links: list | None = None,
+           registry: dict | None = None, curriculum: dict | None = None) -> dict:
     snapshot = _snapshot(current)
     if processed is not None and not isinstance(processed, dict):
         raise InventoryError("invalid_processing_records")
@@ -39,15 +40,20 @@ def report(current: dict, *, previous: dict | None = None,
     states = processing_status(snapshot, processed or {})
     lessons = link_lessons(snapshot, links or [])
     changes = reconcile(_snapshot(previous), snapshot) if previous is not None else None
+    if (registry is None) != (curriculum is None):
+        raise InventoryError("reviewed_graph_inputs_required")
     by_format: dict[str, Counter] = {}
     for file_id, item in snapshot["files"].items():
         by_format.setdefault(item["mime_type"], Counter())[states[file_id]] += 1
-    return {"folders": snapshot["folders"], "files": len(snapshot["files"]),
+    result = {"folders": snapshot["folders"], "files": len(snapshot["files"]),
             "processing": dict(sorted(Counter(states.values()).items())),
             "processing_by_format": {mime: dict(sorted(counts.items()))
                                      for mime, counts in sorted(by_format.items())},
             "linked_lessons": len(lessons),
             "changes": ({kind: len(ids) for kind, ids in changes.items()} if changes else None)}
+    if registry is not None:
+        result["reviewed_graph"] = reviewed_graph(snapshot, registry, curriculum)
+    return result
 
 
 def main(argv=None) -> int:
@@ -56,12 +62,16 @@ def main(argv=None) -> int:
     parser.add_argument("--previous", type=Path)
     parser.add_argument("--processed", type=Path)
     parser.add_argument("--links", type=Path)
+    parser.add_argument("--reviewed", action="store_true",
+                        help="compare live metadata to repository source and curriculum reviews")
     args = parser.parse_args(argv)
     try:
         value = report(_read(args.current),
                        previous=_read(args.previous) if args.previous else None,
                        processed=_read(args.processed) if args.processed else None,
-                       links=_read(args.links) if args.links else None)
+                       links=_read(args.links) if args.links else None,
+                       registry=_read(REPO_ROOT / "content/source-corpus.json") if args.reviewed else None,
+                       curriculum=_read(REPO_ROOT / "content/curriculum.json") if args.reviewed else None)
     except (InventoryError, OSError, UnicodeError, json.JSONDecodeError, TypeError, KeyError) as error:
         print("SOURCE_INVENTORY_STOP: " + (str(error) if isinstance(error, InventoryError)
                                              else type(error).__name__), file=sys.stderr)
