@@ -313,5 +313,27 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                 "derivative_ids_requiring_review": sorted(derivatives.get(file_id, set())),
                 "derivative_review_required": bool(derivatives.get(file_id))}
                for file_id, source in sorted(sources.items()) if file_id not in snapshot["files"]]
+    # An unreviewed file can disappear before it reaches the canonical registry.
+    # Keep its last-seen metadata in the private queue so a missing listing is
+    # investigated rather than silently dropping that source from review.
+    missing_untracked = []
+    if previous is not None:
+        prior_processing = processing_status(previous, processed) if processed is not None else None
+        for file_id in changes["missing"]:
+            if file_id in sources:
+                continue  # Already represented in missing_tracked_sources.
+            item = previous["files"][file_id]
+            missing_untracked.append({
+                "file_id": file_id,
+                "title": item["title"],
+                "mime_type": item["mime_type"],
+                "modified_time": item["modified_time"],
+                "last_seen_paths": previous["paths"][file_id],
+                "inventory_change": "missing",
+                "processing_state": "unknown_no_processing_snapshot" if prior_processing is None
+                                    else "previously_" + prior_processing[file_id],
+                "review_action": "verify_access_or_removal",
+            })
     return {"schema_version": 1, "root_id": snapshot["root_id"],
-            "files": entries, "missing_tracked_sources": missing}
+            "files": entries, "missing_tracked_sources": missing,
+            "missing_untracked_files": missing_untracked}

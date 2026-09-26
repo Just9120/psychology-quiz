@@ -163,6 +163,19 @@ def test_private_queue_keeps_file_level_work_ignored_and_aggregate_stdout_safe(t
     missing_queue = inventory_report.private_review_queue(
         inventory_report._snapshot(export([])), registry, curriculum, reviews=reviews)
     assert missing_queue["missing_tracked_sources"][0]["derivative_review_required"] is True
+
+    # A discovered file must remain in the private work queue if it vanishes
+    # before editorial review. Absence alone is not approval for deletion.
+    vanished = inventory_report.private_review_queue(
+        inventory_report._snapshot(export(["reviewed-private"])), registry, curriculum,
+        previous=inventory_report._snapshot(current), reviews=reviews)
+    assert vanished["missing_tracked_sources"] == []
+    assert vanished["missing_untracked_files"] == [{
+        "file_id": "unreviewed-private", "title": "Lesson",
+        "mime_type": "application/pdf", "modified_time": "2026-09-25T00:00:00Z",
+        "last_seen_paths": [["Lesson"]], "inventory_change": "missing",
+        "processing_state": "unknown_no_processing_snapshot",
+        "review_action": "verify_access_or_removal"}]
     stale_reviews = {"schema_version": 1, "items": {"questions:example": {
         "decision": "approved", "sources": [{"source_id": source["id"],
             "modified_time": source["modified_time"], "snapshot_sha256": "b" * 64}]}}}
