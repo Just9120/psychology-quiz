@@ -12068,8 +12068,8 @@
     "questions:m2_exp_089": {
       "item_sha256": "6ef9b6a32cfd17d22b97b9179a2119cd5a21d6fc24c9411bbcb9bba6e3a216d6",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12081,21 +12081,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Обсуждение эффекта отсева указывает, что в финальной выборке могут преобладать люди с большей предрасположенностью к медитации; это ограничивает вывод об исходной совокупности.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 58200:59150"
         }
       ]
     },
     "questions:m2_exp_090": {
       "item_sha256": "0521dd6c4e339c09f98cbfb0962f9449c621dcdb45721e8f0d7d34da9ee2fb55",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12107,21 +12107,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Практика отдельно обсуждает повторное применение тех же опросников до и после воздействия и возможность воспроизведения прежних ответов вместо текущего состояния.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 28950:29750"
         }
       ]
     },
     "questions:m2_exp_091": {
       "item_sha256": "c505e91981ae2af01b337a98a10e9ceb7c6f664a149b22ab801a8feeb0cdf36f",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12133,21 +12133,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В исследовании одну группу студентов знакомили с негативным стереотипом об их математических способностях, другую — нет; это манипулируемое условие.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 80000:81300"
         }
       ]
     },
     "questions:m2_exp_092": {
       "item_sha256": "ef22e3a2a0894033f2dfb91ba64c233b089d8f2f04ac910daeee0a21b109d44a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12159,21 +12159,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В дискуссии сказано, что установка авторитетной фигуры может действовать сильнее; перенос этого принципа на преподавателя является возможным выводом, не отдельным измеренным эффектом.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 92900:93800"
         }
       ]
     },
     "questions:m2_exp_093": {
       "item_sha256": "bca67b9e13a38248f3ec3ee6bb3d760ee28dec4e046386da73534c4789769c87",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -12185,13 +12185,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
+      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В дискуссии рассматриваются низкая самоэффективность и вовлечённость, а также прежний успешный опыт как возможные условия изменения эффекта. Это гипотеза о модераторе, не подтверждённая отдельной проверкой в данной практике.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 88500:90400"
         }
       ]
     },

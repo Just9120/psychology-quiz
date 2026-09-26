@@ -1601,31 +1601,31 @@
       "external_id": "m2_exp_089",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "6ef9b6a32cfd17d22b97b9179a2119cd5a21d6fc24c9411bbcb9bba6e3a216d6",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 58200:59150"
     },
     "14164ca267a45a7e874d3f87bbd5cf33a13a254fe47902f5032f2a4bad76c144": {
       "external_id": "m2_exp_090",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "0521dd6c4e339c09f98cbfb0962f9449c621dcdb45721e8f0d7d34da9ee2fb55",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 28950:29750"
     },
     "5bb894667004c93ff2d233f3741e04d1661559aa7035195547577d8b665cb0b5": {
       "external_id": "m2_exp_091",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "c505e91981ae2af01b337a98a10e9ceb7c6f664a149b22ab801a8feeb0cdf36f",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 80000:81300"
     },
     "18ea236b98e3a89f8b877079e5f29a359ab30257a786d06315b4ba80c19fe194": {
       "external_id": "m2_exp_092",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "ef22e3a2a0894033f2dfb91ba64c233b089d8f2f04ac910daeee0a21b109d44a",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 92900:93800"
     },
     "8a4892c0722ac83e08c90025c7bf5d186b899935a650b051b5778468aac37c78": {
       "external_id": "m2_exp_093",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "bca67b9e13a38248f3ec3ee6bb3d760ee28dec4e046386da73534c4789769c87",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 88500:90400"
     },
     "842c91f47c93f55d5a57ce9ff24586f13df919f23192d6bafb5ab4b772487739": {
       "external_id": "m2_exp_094",
