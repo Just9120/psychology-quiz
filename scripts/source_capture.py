@@ -77,6 +77,9 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
         elif previous.get("review_state") == "pending_review" and "conflict_hold" in previous:
             record["conflict_hold"] = previous["conflict_hold"]
     updated[source_id] = record
+    # A legacy/incomplete conflict record must not become a pending review
+    # whose hold can later be cleared without its original evidence.
+    processing_status(snapshot, updated)
     return updated
 
 

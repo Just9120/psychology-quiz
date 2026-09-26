@@ -126,6 +126,20 @@ def test_processing_requires_same_revision_and_explicit_lesson_links():
         processing_status(snapshot, {"lecture": {"revision": revision, "review_state": "conflict"}})
     assert processing_status(snapshot, {"lecture": {"revision": revision,
         "review_state": "pending_review"}})["lecture"] == "pending_review"
+    valid_hold = {"reason": "Transcript and slides disagree", "locator": "slide 4",
+                  "related_source_ids": ["slides"]}
+    assert processing_status(snapshot, {"lecture": {"revision": revision,
+        "review_state": "pending_review", "conflict_hold": valid_hold}})["lecture"] == "pending_review"
+    for invalid in ({**valid_hold, "reason": ""}, {**valid_hold, "locator": None},
+                    {**valid_hold, "related_source_ids": ["lecture"]},
+                    {**valid_hold, "related_source_ids": ["slides", "slides"]}):
+        with pytest.raises(InventoryError, match="invalid_conflict_hold"):
+            processing_status(snapshot, {"lecture": {"revision": revision,
+                "review_state": "pending_review", "conflict_hold": invalid}})
+    with pytest.raises(InventoryError, match="invalid_conflict_hold"):
+        processing_status(snapshot, {"lecture": {"revision": revision,
+            "review_state": "processed", "snapshot_kind": "extracted_text",
+            "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE, "conflict_hold": valid_hold}})
     evidence = {"revision": list(revision), "corpus_path": "Lesson", "reviewer": "editor",
                 "review_note": "Compared the two lesson formats", "reviewed_at": "2026-09-26T10:32:54Z"}
     links = [{"source_id": "lecture", "lesson_id": "l1", "topic_id": "topic",

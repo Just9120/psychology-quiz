@@ -60,6 +60,7 @@ def finalize(current: dict, prior: dict, source_id: str, content_path: Path,
     if conflict_resolution_note is not None:
         completed["conflict_resolution_note"] = conflict_resolution_note.strip()
     updated[source_id] = completed
+    processing_status(snapshot, updated)
     return updated
 
 

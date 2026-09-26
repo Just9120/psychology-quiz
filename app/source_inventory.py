@@ -158,6 +158,17 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
             if state == "conflict" and (not isinstance(record.get("reason"), str)
                                          or not record["reason"].strip()):
                 raise InventoryError("invalid_processing_record")
+            if "conflict_hold" in record:
+                hold = record["conflict_hold"]
+                related = hold.get("related_source_ids") if isinstance(hold, dict) else None
+                if (state != "pending_review" or not isinstance(hold, dict)
+                        or not isinstance(hold.get("reason"), str) or not hold["reason"].strip()
+                        or not isinstance(hold.get("locator"), str) or not hold["locator"].strip()
+                        or not isinstance(related, list)
+                        or any(not isinstance(source_id, str) or not source_id
+                               or source_id == file_id for source_id in related)
+                        or len(set(related)) != len(related)):
+                    raise InventoryError("invalid_conflict_hold")
             if tuple(revision) != _revision(item):
                 result[file_id] = "changed_unprocessed"
             elif state == "conflict":

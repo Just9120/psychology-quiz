@@ -35,7 +35,8 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
         source_finalize.finalize(inventory, completed, "private", content,
                                  reviewer="editor", review_note="review", reviewed_at="now")
     conflicted = {"private": {"revision": pending["private"]["revision"],
-                              "review_state": "conflict", "reason": "Disagreement"}}
+                              "review_state": "conflict", "reason": "Disagreement",
+                              "locator": "paragraph 2", "related_source_ids": []}}
     with pytest.raises(InventoryError, match="source_not_pending_review"):
         source_finalize.finalize(inventory, conflicted, "private", content,
                                  reviewer="editor", review_note="review", reviewed_at="now")

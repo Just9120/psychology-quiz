@@ -31,7 +31,8 @@ def test_capture_hashes_private_bytes_and_preserves_other_records(tmp_path):
                                "extracted_text")
     conflicted = {"private": {"revision": updated["private"]["revision"],
                               "review_state": "conflict",
-                              "reason": "Transcript and slides disagree"}}
+                              "reason": "Transcript and slides disagree",
+                              "locator": "slide 4", "related_source_ids": []}}
     with pytest.raises(InventoryError, match="source_revision_has_unresolved_conflict"):
         source_capture.capture(export(["private"]), conflicted, "private", content,
                                "extracted_text")
@@ -45,6 +46,9 @@ def test_capture_hashes_private_bytes_and_preserves_other_records(tmp_path):
     assert from_conflict["conflict_hold"]["reason"] == "Transcript and slides disagree"
     assert source_capture.capture(newer, {"private": from_conflict}, "private", content,
                                   "extracted_text")["private"]["conflict_hold"] == from_conflict["conflict_hold"]
+    with pytest.raises(InventoryError, match="invalid_conflict_hold"):
+        source_capture.capture(newer, {"private": {**conflicted["private"], "locator": None}},
+                               "private", content, "extracted_text")
     with pytest.raises(InventoryError, match="source_not_in_current_inventory"):
         source_capture.capture(export(["private"]), {}, "absent", content, "extracted_text")
     content.write_bytes(b"\xff")
