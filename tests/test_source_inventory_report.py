@@ -49,6 +49,56 @@ def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path
     assert output.err.strip() == "SOURCE_INVENTORY_STOP: incomplete_folder_listing"
 
 
+def test_conflict_holds_derivatives_of_both_related_sources_until_review():
+    current = export(["transcript", "slides"])
+    sources = [{"id": source_id, "kind": "learning_material", "title": "Lesson",
+                "corpus_path": "Lesson", "modified_time": "2026-09-25T00:00:00Z",
+                "snapshot_sha256": "a" * 64, "readable": True,
+                "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-25",
+                "reviewer": "agent"} for source_id in ("transcript", "slides")]
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": sources}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    reviews = {"schema_version": 1, "items": {
+        f"questions:{source_id}": {"decision": "approved", "sources": [{
+            "source_id": source_id, "modified_time": source["modified_time"],
+            "snapshot_sha256": source["snapshot_sha256"]}]}
+        for source_id, source in zip(("transcript", "slides"), sources)}}
+    processed = {"transcript": {
+        "revision": ["2026-09-25T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "conflict", "reason": "Statements disagree",
+        "related_source_ids": ["slides"]}}
+
+    def entries(inventory):
+        queue = inventory_report.private_review_queue(
+            inventory_report._snapshot(inventory), registry, curriculum,
+            processed=processed, reviews=reviews)
+        return {entry["file_id"]: entry for entry in queue["files"]}
+
+    initial = entries(current)
+    assert initial["transcript"]["derivative_ids_requiring_review"] == ["questions:transcript"]
+    assert initial["slides"]["processing_state"] == "new_unprocessed"
+    assert initial["slides"]["related_conflict_review_required"] is True
+    assert initial["slides"]["derivative_ids_requiring_review"] == ["questions:slides"]
+
+    current["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
+    changed = entries(current)
+    assert changed["transcript"]["processing_state"] == "changed_unprocessed"
+    assert changed["slides"]["derivative_ids_requiring_review"] == ["questions:slides"]
+
+    processed["transcript"] = {
+        "revision": ["2026-09-26T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "pending_review", "snapshot_kind": "extracted_text",
+        "snapshot_sha256": "b" * 64,
+        "conflict_hold": {"reason": "Statements disagree", "locator": "slide 4",
+                          "related_source_ids": ["slides"]}}
+    assert entries(current)["slides"]["derivative_ids_requiring_review"] == ["questions:slides"]
+
+    processed["transcript"] = {"revision": ["2026-09-26T00:00:00Z", "Lesson", "application/pdf"],
+                               "review_state": "processed", "snapshot_kind": "extracted_text",
+                               "snapshot_sha256": "b" * 64, **REVIEW_EVIDENCE}
+    assert entries(current)["slides"]["related_conflict_review_required"] is False
+
+
 def test_reviewed_graph_counts_exact_lesson_edges_and_stale_metadata_without_ids():
     current = export(["private-lesson", "private-bibliography", "unreviewed"])
     registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [

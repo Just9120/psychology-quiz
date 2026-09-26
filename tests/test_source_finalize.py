@@ -45,3 +45,18 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
     with pytest.raises(InventoryError, match="source_not_pending_review"):
         source_finalize.finalize(newer, pending, "private", content,
                                  reviewer="editor", review_note="review", reviewed_at="now")
+
+    captured_conflict = source_capture.capture(newer, conflicted, "private", content,
+                                               "extracted_text")
+    with pytest.raises(InventoryError, match="conflict_resolution_required"):
+        source_finalize.finalize(newer, captured_conflict, "private", content,
+                                 reviewer="editor", review_note="Checked new revision",
+                                 reviewed_at="2026-09-27T12:00:00Z")
+    resolved = source_finalize.finalize(
+        newer, captured_conflict, "private", content,
+        reviewer="editor", review_note="Checked new revision",
+        conflict_resolution_note="Compared the changed claim with the related source",
+        reviewed_at="2026-09-27T12:00:00Z")
+    assert resolved["private"]["review_state"] == "processed"
+    assert "conflict_hold" not in resolved["private"]
+    assert resolved["private"]["conflict_resolution_note"].startswith("Compared")

@@ -39,8 +39,12 @@ def test_capture_hashes_private_bytes_and_preserves_other_records(tmp_path):
     newer["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
     assert source_capture.capture(newer, processed, "private", content,
                                   "extracted_text")["private"]["review_state"] == "pending_review"
-    assert source_capture.capture(newer, conflicted, "private", content,
-                                  "extracted_text")["private"]["review_state"] == "pending_review"
+    from_conflict = source_capture.capture(newer, conflicted, "private", content,
+                                           "extracted_text")["private"]
+    assert from_conflict["review_state"] == "pending_review"
+    assert from_conflict["conflict_hold"]["reason"] == "Transcript and slides disagree"
+    assert source_capture.capture(newer, {"private": from_conflict}, "private", content,
+                                  "extracted_text")["private"]["conflict_hold"] == from_conflict["conflict_hold"]
     with pytest.raises(InventoryError, match="source_not_in_current_inventory"):
         source_capture.capture(export(["private"]), {}, "absent", content, "extracted_text")
     content.write_bytes(b"\xff")

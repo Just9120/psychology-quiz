@@ -61,12 +61,22 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
             or before.st_mtime_ns != after.st_mtime_ns):
         raise InventoryError("source_content_changed_during_capture")
     updated = dict(prior)
-    updated[source_id] = {
+    record = {
         "revision": revision,
         "review_state": "pending_review",
         "snapshot_kind": snapshot_kind,
         "snapshot_sha256": digest.hexdigest(),
     }
+    if isinstance(previous, dict):
+        if previous.get("review_state") == "conflict":
+            record["conflict_hold"] = {
+                "reason": previous["reason"],
+                "locator": previous.get("locator"),
+                "related_source_ids": previous.get("related_source_ids", []),
+            }
+        elif previous.get("review_state") == "pending_review" and "conflict_hold" in previous:
+            record["conflict_hold"] = previous["conflict_hold"]
+    updated[source_id] = record
     return updated
 
 

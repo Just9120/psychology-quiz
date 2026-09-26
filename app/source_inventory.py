@@ -356,6 +356,28 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     for topic_id, topic in curriculum["topics"].items():
         topics.setdefault(topic["source"]["source_id"], []).append(topic_id)
     processing = processing_status(snapshot, processed) if processed is not None else None
+    related_conflicts = set()
+    if processing is not None:
+        for file_id in processing:
+            record = processed[file_id]
+            if not isinstance(record, dict):
+                continue
+            # A newer Drive revision does not by itself resolve the earlier
+            # disagreement. Hold both sides until an explicit review replaces
+            # the conflict record.
+            hold = record.get("conflict_hold") if record.get("review_state") == "pending_review" else None
+            if record.get("review_state") == "conflict":
+                related = record.get("related_source_ids", [])
+            elif isinstance(hold, dict):
+                related = hold.get("related_source_ids", [])
+            elif hold is not None:
+                raise InventoryError("invalid_processing_record")
+            else:
+                continue
+            if (not isinstance(related, list)
+                    or any(not isinstance(source_id, str) or not source_id for source_id in related)):
+                raise InventoryError("invalid_processing_record")
+            related_conflicts.update(related)
     changes = reconcile(previous, snapshot) if previous is not None else None
     changed = ({file_id: name for name, ids in changes.items() for file_id in ids}
                if changes is not None else {})
@@ -368,7 +390,8 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                           source["corpus_path"] not in
                           ("/".join(path) for path in snapshot["paths"][file_id]) else "current")
         linked_derivatives = derivatives.get(file_id, set())
-        explicit_review_problem = (processing is not None and processing[file_id] in
+        explicit_review_problem = (file_id in related_conflicts or processing is not None and
+                                   processing[file_id] in
                                    {"pending_review", "conflict_review", "changed_unprocessed"})
         priority_quality = (quality_items.get(file_id, set()) if
                             registry_state in {"changed", "relocated"} or explicit_review_problem
@@ -386,6 +409,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
             "inventory_change": changed.get(file_id, "unknown_no_previous_snapshot"),
             "processing_state": processing[file_id] if processing is not None
                                 else "unknown_no_processing_snapshot",
+            "related_conflict_review_required": file_id in related_conflicts,
             "linked_topic_ids": sorted(topics.get(file_id, [])),
             "linked_derivative_ids": sorted(linked_derivatives),
             "derivative_ids_requiring_review": sorted(affected_derivatives),
@@ -400,6 +424,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                 "linked_derivative_ids": sorted(derivatives.get(file_id, set())),
                 "derivative_ids_requiring_review": sorted(derivatives.get(file_id, set())),
                 "derivative_review_required": bool(derivatives.get(file_id)),
+                "related_conflict_review_required": file_id in related_conflicts,
                 "quality_review_item_ids": sorted(quality_items.get(file_id, set())),
                 "quality_review_priority_ids": sorted(quality_items.get(file_id, set())),
                 "quality_review_evidence": quality_evidence.get(file_id, {})}
