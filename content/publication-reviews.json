@@ -2078,6 +2078,38 @@
         }
       ],
       "rationale": "Фрагменты противопоставляют наблюдаемые стимулы/реакции бихевиоризма бессознательным конфликтам и глубинным мотивационным механизмам психоанализа; формулировка ответа согласована с ними. Прежняя edition и ответы остаются неизменными."
+    },
+    "questions:m2_exp_050": {
+      "decision": "approved",
+      "item_sha256": "6c22063738a43ada5cda779474e30c68ef0fd1a07e7d8cc780b7324df421a7a9",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1660:2240"
+        }
+      ],
+      "rationale": "В лекции указан интерес гештальтпсихологов к законам организации восприятия, мышления и решения задач. Прежний пример ошибки фигуры на фоне не был изложен и заменён прямым вопросом по этому фрагменту. Прежние ответы и snapshots не изменяются."
+    },
+    "questions:m2_exp_052": {
+      "decision": "approved",
+      "item_sha256": "f1c7c12936b70da386807549539bdf07630e7071459d30979986cadc2d86ad17",
+      "purpose": "learning_content",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
+      "sources": [
+        {
+          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2780:3330"
+        }
+      ],
+      "rationale": "Лекция прямо определяет бихевиористский предмет через наблюдаемое поведение, связи стимулов и реакций и закономерности научения. Не подтверждённое этим фрагментом требование контроля условий убрано. Прежние ответы и snapshots не изменяются."
     }
   }
 }

@@ -11054,10 +11054,10 @@
       ]
     },
     "questions:m2_exp_050": {
-      "item_sha256": "28882d892d50cc02fb34949c3330c42d439241195e820ff8a04acd38a83511ae",
+      "item_sha256": "6c22063738a43ada5cda779474e30c68ef0fd1a07e7d8cc780b7324df421a7a9",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11067,17 +11067,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. В лекции указан интерес гештальтпсихологов к законам организации восприятия, мышления и решения задач. Прежний пример ошибки фигуры на фоне не был изложен и заменён прямым вопросом по этому фрагменту.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1660:2240"
         }
       ]
     },
@@ -11108,10 +11106,10 @@
       ]
     },
     "questions:m2_exp_052": {
-      "item_sha256": "76b68cfe77dfd1bdf33c93f4fadc9fa5885c82fae211e591408e337f1d818708",
+      "item_sha256": "f1c7c12936b70da386807549539bdf07630e7071459d30979986cadc2d86ad17",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "Codex",
+      "reviewed_at": "2026-09-26",
       "checks": [
         "meaning",
         "answer",
@@ -11121,17 +11119,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Общий контраст школ присутствует, но конкретные гештальт-примеры, проблемные ящики и формулировки ключей не подтверждены выбранным фрагментом истории метода.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция прямо определяет бихевиористский предмет через наблюдаемое поведение, связи стимулов и реакций и закономерности научения. Не подтверждённое этим фрагментом требование контроля условий убрано.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2780:3330"
         }
       ]
     },

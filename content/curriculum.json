@@ -2220,6 +2220,18 @@
       "topic_id": "t_7a8e0286a42d",
       "item_sha256": "7ce1f07ff7c80f18280cad3c573a40bfdfcd51d946f213ba223b0599b6ede387",
       "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2790:3250, 4171:4600"
+    },
+    "e52de440109d61d800da0bf830694e2111ed65c2173946fc7e9f2b555e05c487": {
+      "external_id": "m2_exp_050",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "6c22063738a43ada5cda779474e30c68ef0fd1a07e7d8cc780b7324df421a7a9",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1660:2240"
+    },
+    "548010f9fcbeaf4198fa1ab743ffd9a11bb162cceb79133142a0d9d18eddba57": {
+      "external_id": "m2_exp_052",
+      "topic_id": "t_7a8e0286a42d",
+      "item_sha256": "f1c7c12936b70da386807549539bdf07630e7071459d30979986cadc2d86ad17",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2780:3330"
     }
   }
 }
