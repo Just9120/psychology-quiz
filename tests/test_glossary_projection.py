@@ -29,7 +29,7 @@ def test_published_glossary_projection_is_stable_and_contains_only_approved_term
             item = by_id[f'glossary:{topic_id}:{entry.id}']
             assert item['kind'] == 'glossary' and item['status'] == 'approved'
             assert item['category'] == title and item['explanation'] == entry.definition
-            assert item['source_ref'] in entry.source_refs
+            assert item['source_ref'] == (entry.source_refs[0] if entry.source_refs else None)
             assert len(item['options']) == len(set(item['options'])) == 4
             assert item['options'][item['correct_option_index']] == entry.short_definition
 
