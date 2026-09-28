@@ -33,6 +33,21 @@ def test_reviewed_question_pairs_share_overlap_without_removing_all_mode():
         assert diverse_first([(1, first), (2, second)], None) == [1, 2]
 
 
+def test_distinct_learning_objectives_are_not_deferred_as_duplicates():
+    distinct_pairs = (
+        ("m2_exp_022", "m2_exp_023"),  # internal versus external validity
+        ("m2_exp_023", "m2_exp_048"),  # definition versus tradeoff
+        ("m2_qual_015", "m2_qual_047"),  # consent versus de-identification
+        ("m3_psychological_consulting_009", "m3_psychological_consulting_045"),
+        ("m3_psychological_consulting_055", "m3_psychological_consulting_066"),
+    )
+    for first, second in distinct_pairs:
+        assert diverse_first([(1, first), (2, second)], 2) == [1, 2]
+    assert diverse_first([
+        (1, "m2_exp_048"), (2, "m2_exp_100"), (3, "m2_exp_023")
+    ], 2) == [1, 3]
+
+
 def test_selected_mix_keeps_a_topic_with_later_distinct_concepts(monkeypatch):
     monkeypatch.setattr("app.quiz_overlap.memberships", lambda: {
         "shared": frozenset({1}), "other-a": frozenset({2}),
