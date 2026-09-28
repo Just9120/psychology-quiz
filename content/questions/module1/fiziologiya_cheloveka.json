@@ -4,7 +4,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Какое значение нейрона наиболее важно для психологии как науки о поведении и психике?",
     "options": [
       "Он переносит кислород между тканями",
@@ -68,7 +68,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему синапс принципиально важен для обучения и опыта?",
     "options": [
       "Это точка, где регулируется передача сигнала между клетками",
@@ -100,7 +100,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Зачем психологу полезно знать рефлекторный принцип работы нервной системы?",
     "options": [
       "Чтобы объяснять любые переживания только генетикой",
@@ -196,7 +196,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Какова основная задача вегетативной нервной системы?",
     "options": [
       "Управление только произвольными движениями",
@@ -356,7 +356,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Человек случайно касается горячей кружки и быстро отдергивает руку еще до осознания боли. Что это лучше всего иллюстрирует?",
     "options": [
       "Работу рефлекторной реакции",
@@ -452,7 +452,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/practice2_emotions_stress_consulting",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "На консультации клиент вздрагивает от резкого звука в коридоре, хотя почти сразу понимает, что опасности нет. Что это лучше всего иллюстрирует?",
     "options": [
       "Быструю автоматическую защитную реакцию",
