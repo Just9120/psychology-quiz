@@ -302,13 +302,21 @@ def test_scoped_claim_keeps_conflicted_source_on_hold(
         "reviewer": "test-reviewer", "reviewed_at": "2026-09-28T00:00:00Z",
         "note": "Only the first sentence supports this exact glossary claim",
     }
+    if kind == "questions":
+        monkeypatch.setattr(signer, "SCOPED_LECTURE_CLAIMS", {
+            item_id: (dossier["publication_review"]["item_sha256"], locator),
+        })
+        monkeypatch.setattr(signer, "LECTURE14_SOURCE_SHA256", source["snapshot_sha256"])
+        monkeypatch.setattr(signer, "LECTURE14_CONFLICT_SHA256", fingerprint(record))
     verify_current_sources(dossier, inventory, {source["id"]: record})
     with pytest.raises(SigningError, match="scoped_claim_review_required"):
         verify_current_sources({**dossier, "item_id": "another_term"},
                                inventory, {source["id"]: record})
     changed = {**dossier, "scoped_claim_review": {
         **dossier["scoped_claim_review"], "locator": "characters:18:25"}}
-    with pytest.raises(SigningError, match="scoped_claim_overlaps_conflict"):
+    expected_error = ("scoped_claim_review_required" if kind == "questions"
+                      else "scoped_claim_overlaps_conflict")
+    with pytest.raises(SigningError, match=expected_error):
         verify_current_sources(changed, inventory, {source["id"]: record})
     with pytest.raises(SigningError, match="scoped_claim_review_required"):
         verify_current_sources(dossier, inventory, {source["id"]: {

@@ -35,6 +35,21 @@ class SigningError(ValueError):
     pass
 
 
+# Owner-approved editions only. A changed question or conflict needs a new review decision.
+SCOPED_LECTURE_CLAIMS = {
+    "m1_psyf_070": (
+        "9d5d84b0422ddcf0df7513051d949727d455861c580742c03f47b94a950fcce3",
+        "characters:15300:15970",
+    ),
+    "m1_psyf_071": (
+        "76f30228e4a5d31da54583a58076caf0c68db3b8be9a387946b07cc7c9a70124",
+        "characters:14000:15000",
+    ),
+}
+LECTURE14_SOURCE_SHA256 = "2b6c44d6b7e3ba0511b16b4d8d5884e19812e0bbdba5ffbf8a06b14483e45a5c"
+LECTURE14_CONFLICT_SHA256 = "28e80d17983ba8747aeed407bd322b5d356e2d1ebce133206db894d5db5551d9"
+
+
 def _character_ranges(locator: object) -> list[tuple[int, int]]:
     if not isinstance(locator, str):
         raise SigningError("scoped_claim_locator_required")
@@ -73,6 +88,13 @@ def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
             or not isinstance(claim.get("reviewer"), str) or not claim["reviewer"].strip()
             or not isinstance(claim.get("note"), str) or not claim["note"].strip()):
         raise SigningError("scoped_claim_review_required")
+    if dossier.get("kind") == "questions":
+        expected_item_sha, expected_locator = SCOPED_LECTURE_CLAIMS[dossier["item_id"]]
+        if (claim.get("item_sha256") != expected_item_sha
+                or claim.get("locator") != expected_locator
+                or claim.get("snapshot_sha256") != LECTURE14_SOURCE_SHA256
+                or claim.get("conflict_sha256") != LECTURE14_CONFLICT_SHA256):
+            raise SigningError("scoped_claim_review_required")
     try:
         reviewed_at = datetime.fromisoformat(claim["reviewed_at"])
         held_at = datetime.fromisoformat(record["reviewed_at"])
