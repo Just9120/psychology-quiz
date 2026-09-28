@@ -132,7 +132,7 @@ npm run test:e2e
 
 `build` включает `typecheck`; отдельно доступны `npm run typecheck` и `npm run icons` (SVG → checked-in PNG). Format/lint scripts пока N/A, whitespace — корневой `git diff --check`. Linux без browser dependencies: `npx playwright install --with-deps chromium`.
 
-После обеих сборок из корня репозитория запустите `python scripts/audit_public_assets.py --asset-dir pwa/dist --asset-dir miniapp-react`. Он проверяет публичные файлы на прямые Drive-ссылки и ID из tracked source registry. Оператор с полным ignored Drive inventory добавляет `--private-inventory data/source-inventory-current.json`; без него проверка не охватывает источники вне registry. Команда не печатает найденный закрытый ID.
+После обеих сборок из корня репозитория запустите `python scripts/audit_public_assets.py --asset-dir pwa/dist --asset-dir miniapp-react --approved-content`. Он проверяет содержимое и имена публичных файлов, а также видимые поля approved questions/glossary/literature на прямые Drive-ссылки и ID из tracked source registry. Оператор с полным ignored Drive inventory добавляет `--private-inventory data/source-inventory-current.json`; без него проверка не охватывает источники вне registry. Команда не печатает найденный закрытый ID.
 
 Browser tests сами поднимают изолированный backend на loopback 8085 и production preview на 4173; оба порта должны быть свободны. `python` должен указывать на выбранное окружение; иначе задайте `PWA_TEST_PYTHON` абсолютным путём к interpreter (PowerShell: `$env:PWA_TEST_PYTHON = '...'`). Используются только synthetic DB/mail/owner; внешние сервисы не нужны.
 

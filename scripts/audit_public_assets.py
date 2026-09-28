@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.source_inventory import complete_listing, scan
+from app.content_publication import _public_text_contains_private_source
 
 PUBLIC_MARKERS = (b"drive:", b"drive.google.com", b"docs.google.com")
 MAX_ASSET_BYTES = 64 * 1024 * 1024
@@ -84,19 +85,50 @@ def audit_assets(directories: list[Path], source_ids: set[str]) -> tuple[int, in
     return file_count, byte_count
 
 
+def audit_approved_content(source_ids: set[str], content_root: Path = ROOT / "content") -> int:
+    # The public registry cannot enumerate untracked Drive documents. Apply
+    # the same client-visible field projection as the publication gate with
+    # the complete operator inventory when it is available.
+    sources = {source_id: None for source_id in source_ids}
+    count = 0
+    for kind in ("questions", "glossary", "literature"):
+        pattern = "**/*.json" if kind == "questions" else "*.json"
+        paths = sorted((content_root / kind).glob(pattern))
+        if not paths:
+            raise AssetAuditError("approved_content_directory_required")
+        for path in paths:
+            entries = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(entries, list):
+                raise AssetAuditError("invalid_approved_content")
+            for item in entries:
+                if not isinstance(item, dict):
+                    raise AssetAuditError("invalid_approved_content")
+                if item.get("status") != "approved":
+                    continue
+                if _public_text_contains_private_source(kind, item, sources):
+                    raise AssetAuditError("private_provenance_in_public_content")
+                count += 1
+    return count
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--asset-dir", type=Path, action="append", required=True)
     parser.add_argument("--private-inventory", type=Path)
+    parser.add_argument("--approved-content", action="store_true",
+                        help="also scan published text against every known Drive ID")
     args = parser.parse_args()
     try:
         ids = known_source_ids(args.private_inventory)
         files, size = audit_assets(args.asset_dir, ids)
+        approved = audit_approved_content(ids) if args.approved_content else None
     except (AssetAuditError, OSError, ValueError, KeyError, TypeError, UnicodeError) as error:
         # Imported validators can include the offending private ID in their
         # error text. Keep CLI output deliberately generic.
         raise SystemExit(f"PUBLIC_ASSET_AUDIT_STOP: {type(error).__name__}") from None
     print(f"PUBLIC_ASSET_AUDIT_OK files={files} bytes={size} known_sources={len(ids)}")
+    if approved is not None:
+        print(f"PUBLIC_CONTENT_AUDIT_OK approved_items={approved}")
 
 
 if __name__ == "__main__":
