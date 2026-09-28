@@ -13,6 +13,7 @@ def _manifest():
         "tables": {"users": {"rows": 1, "sha256": "user"},
                    "questions": {"rows": 1, "sha256": "content"}},
         "sequences": {"users": 1, "questions": 1},
+        "import_manifest_sha256": "original-import",
     }
 
 
@@ -55,3 +56,17 @@ def test_content_rebuild_cannot_change_preexisting_user_identity_sequence(sequen
         after["sequences"]["users"] = sequence
     with pytest.raises(ValueError, match="changed a user identity sequence"):
         verify_user_state(before, after)
+
+
+def test_content_rebuild_preserves_import_provenance():
+    before = _manifest()
+    after = deepcopy(before)
+    after["import_manifest_sha256"] = "changed-import"
+    with pytest.raises(ValueError, match="changed import provenance"):
+        verify_user_state(before, after)
+    del after["import_manifest_sha256"]
+    with pytest.raises(ValueError, match="changed import provenance"):
+        verify_user_state(before, after)
+    legacy = deepcopy(before)
+    del legacy["import_manifest_sha256"]
+    verify_user_state(legacy, before)

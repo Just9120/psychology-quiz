@@ -2,6 +2,8 @@
 
 ## Current Goal — LEARNING-FOUNDATION-001
 
+**FND-06 PostgreSQL provenance, 28.09.2026:** preservation manifest отдельно фиксирует SHA-256 `postgres_storage.import_manifest`; проверка после content/schema операций отклоняет изменение или потерю этой записи, допуская старые recovery records без нового поля. Синтетический `test_postgres_recovery_contract.py` 5 PASS; реальная PostgreSQL backup/restore, миграция и user-state post-check остаются PENDING, AC-FND-06 IN_PROGRESS.
+
 **E07 local embedding probe, 28.09.2026:** pinned `fastembed-0.8.0` / mean-pooling модель с revision `faf4aa4225822f3bc6376869cb1164e8e3feedd0` в локальной `.venv` вернула 384-мерный ненулевой вектор; запуск `python -m app.private_search probe` с локальным cache занял 969 ms, cache 252 141 277 bytes. Это один локальный прогон с тёплым cache, не измерение пикового RAM, VPS, PostgreSQL index или качества RAG. Перед включением на VPS остаются тамошние capacity/latency/quality gates D-34; AC-SRH-01–05 не повышены.
 
 **E01/E02 модуль 4, 28.09.2026:** `content/topics.json` уже знает «Возрастную психологию» как литературу модуля 4, но `content/curriculum.json` ещё не содержит этой дисциплины/темы и соответствующей проверенной source edition. Поэтому metadata лекций сами по себе не дают безопасной `lesson_link` или прогресса по теме. Новые curriculum IDs и связи добавлять после точной source review; AC-FND-01/SRC-02 остаются IN_PROGRESS.
