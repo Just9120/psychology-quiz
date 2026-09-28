@@ -361,11 +361,21 @@
       "discipline_id": "psychological_consulting",
       "question_ids": [
         "m3_psychological_consulting_005",
-        "m3_psychological_consulting_011",
+        "m3_psychological_consulting_011"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
         "m3_psychological_consulting_024",
         "m3_psychological_consulting_040",
+        "m3_psychological_consulting_094"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
         "m3_psychological_consulting_064",
-        "m3_psychological_consulting_094",
         "m3_psychological_consulting_096"
       ]
     },

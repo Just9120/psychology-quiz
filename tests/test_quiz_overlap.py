@@ -48,6 +48,19 @@ def test_distinct_learning_objectives_are_not_deferred_as_duplicates():
     ], 2) == [1, 3]
 
 
+def test_request_concepts_separate_definition_unrealistic_goal_and_case_formulation():
+    assert diverse_first([
+        (1, "m3_psychological_consulting_005"),
+        (2, "m3_psychological_consulting_094"),
+        (3, "m3_psychological_consulting_096"),
+    ], 3) == [1, 2, 3]
+    assert diverse_first([
+        (1, "m3_psychological_consulting_024"),
+        (2, "m3_psychological_consulting_040"),
+        (3, "m3_psychological_consulting_096"),
+    ], 2) == [1, 3]
+
+
 def test_selected_mix_keeps_a_topic_with_later_distinct_concepts(monkeypatch):
     monkeypatch.setattr("app.quiz_overlap.memberships", lambda: {
         "shared": frozenset({1}), "other-a": frozenset({2}),
