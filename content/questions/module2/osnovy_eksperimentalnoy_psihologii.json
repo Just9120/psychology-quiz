@@ -276,7 +276,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/lecture1_predmet_i_metod",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Что лучше всего показывает различие между наблюдением и интерпретацией в исследовательской логике?",
     "options": [
       "Наблюдение уже содержит готовое объяснение причины",
@@ -292,7 +292,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/lecture1_predmet_i_metod",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему феномен хиндсайта важен для темы методов анализа?",
     "options": [
       "Потому что он показывает, что задним числом объяснять событие легче, чем надёжно предсказывать его заранее",
@@ -1558,7 +1558,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Что наиболее точно отражает операционализацию конструкта «академический стресс» в эксперименте?",
     "options": [
       "Выбор теоретического определения стресса без указания, как он будет измеряться",

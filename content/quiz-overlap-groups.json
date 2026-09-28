@@ -232,13 +232,6 @@
     {
       "discipline_id": "psychological_consulting",
       "question_ids": [
-        "m1_intro_043",
-        "m3_psychological_consulting_030"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
         "m3_psychological_consulting_004",
         "m3_psychological_consulting_093"
       ]
