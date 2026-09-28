@@ -150,6 +150,17 @@ def test_frozen_legacy_learning_item_with_disputed_source_cannot_publish(kind):
     assert not policy.can_publish(kind, item)
 
 
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
+def test_frozen_legacy_explicit_drive_ref_must_match_quality_source(kind):
+    item, source, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    policy.sources["other"] = {**source, "id": "other"}
+    policy.quality_reviews[f"{kind}:fixture"]["sources"][0]["source_id"] = "other"
+
+    assert policy.error(kind, item) == "legacy_source_reference_mismatch"
+    assert not policy.can_publish(kind, item)
+
+
 def test_private_bibliography_source_id_is_not_treated_as_display_text():
     item, _, review, policy = reviewed("literature", "bibliography")
     item["source"] = {"id": "1PrivateDriveFileIdentifier2345678",

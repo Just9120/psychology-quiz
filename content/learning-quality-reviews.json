@@ -9401,7 +9401,7 @@
       "item_sha256": "15ee638d8f96173c6b5baa18e470a80a58748af8f28471cdcdc0e9e1d606bcf3",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -9410,18 +9410,19 @@
         "duplicates",
         "sources"
       ],
-      "meaning": "consistent",
+      "meaning": "unconfirmed",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "source_support_incomplete",
+        "meaning_requires_review"
       ],
-      "note": "Базовый механизм памяти/торможения согласуется с ответом; заявление объяснения о конкретном консультативном эпизоде или единственном механизме шире первичного определения.",
+      "note": "Прежнее evidence ошибочно ссылалось на глоссарий. Проверенный фрагмент лекции 14 описывает время потенциала готовности и простое движение в опыте Либета; он не обосновывает перечисленные в вопросе условия истощения, перегрузки и привычки. Нужны адресная редакция вопроса и повторное подтверждение ответа.",
       "sources": [
         {
-          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "source_id": "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264",
+          "modified_time": "2026-04-20T15:38:36.917Z",
+          "snapshot_sha256": "2b6c44d6b7e3ba0511b16b4d8d5884e19812e0bbdba5ffbf8a06b14483e45a5c",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13500:15300"
         }
       ]
     },

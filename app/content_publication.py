@@ -107,6 +107,17 @@ class PublicationPolicy:
                     if (ref.get("modified_time") != source.get("modified_time")
                             or ref.get("snapshot_sha256") != source.get("snapshot_sha256")):
                         return "legacy_source_revision_changed_since_review"
+                # Legacy aliases cannot be resolved automatically, but an
+                # explicit Drive ID must never disagree with its review.
+                direct_refs = ([item.get("source_ref")] if kind == "questions"
+                               else item.get("source_refs", []))
+                if isinstance(direct_refs, list):
+                    explicit_ids = {match.group(1) for value in direct_refs
+                                    if isinstance(value, str)
+                                    and (match := DRIVE_REF.fullmatch(value))}
+                    if (explicit_ids and explicit_ids !=
+                            {ref["source_id"] for ref in quality["sources"]}):
+                        return "legacy_source_reference_mismatch"
             return None
         if item.get("status") != "approved":
             return None  # Preparation is permitted; the loader does not publish it.
