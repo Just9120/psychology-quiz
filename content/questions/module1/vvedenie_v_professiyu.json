@@ -484,7 +484,7 @@
     "category": "Введение в профессию",
     "source_ref": "module1/intro/topic2",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой принцип особенно важен при проведении учебного психологического интервью?",
     "options": [
       "Давление на респондента для ускорения ответа",
@@ -724,7 +724,7 @@
     "category": "Введение в профессию",
     "source_ref": "module1/intro/topic2",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему контракт в консультировании — это рабочий инструмент, а не формальность?",
     "options": [
       "Он нужен только для юридической подстраховки и не влияет на процесс",
@@ -804,7 +804,7 @@
     "category": "Введение в профессию",
     "source_ref": "module1/intro/topic4",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Что лучше всего показывает размывание профессиональных границ?",
     "options": [
       "Ясное обсуждение правил отмены и формата контакта",
