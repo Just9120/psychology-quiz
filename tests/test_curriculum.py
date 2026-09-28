@@ -110,7 +110,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     reviews = json.loads((curriculum.ROOT / 'content/learning-quality-reviews.json').read_text(encoding='utf-8'))['items']
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
-    assert len(catalog['disciplines']) == 8 and len(catalog['editions']) == 309
+    assert len(catalog['disciplines']) == 8 and len(catalog['editions']) == 310
     assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
         k: v['title'] for k, v in registry.items() if 'glossary' in v['available_contours']
     }
@@ -136,7 +136,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             if item['locator'] == 'private certificate:' + key:
                 assert load_policy().can_publish('questions', items[key])
                 assert item['item_sha256'] == fingerprint(items[key])
-                assert topic['discipline_id'] == 'psihofiziologiya'
+                assert registry[topic['discipline_id']]['title'] == items[key]['category']
                 assert source['kind'] == 'learning_material' and source['readable'] is True
                 assert all(topic['source'][field] == source[field]
                            for field in ('modified_time', 'snapshot_sha256'))

@@ -2245,6 +2245,12 @@
       "item_sha256": "1016b29d49101acf7a972058bb34691b3ae6c7c927922cc1cd84a876a3e7f3a2",
       "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12380:12900"
     },
+    "961bcf66c280d5755f69906aec1c993a0c43b062fc881a4df02faa2dbf11cc81": {
+      "external_id": "m1_intro_054",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "26d1c5576412cac8f24882f77f784638c8a2eecf40e727c5ad4a06fa93e135ad",
+      "locator": "private certificate:questions:m1_intro_054"
+    },
     "08cc98b0640174c3720151de5bdd556494357891a850c9082c5bf423c4ad0e1c": {
       "external_id": "m1_psyf_070",
       "topic_id": "t_05aeac347c73",

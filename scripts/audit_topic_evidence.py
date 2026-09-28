@@ -40,7 +40,8 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
     for edition in curriculum["editions"].values():
         if edition["external_id"] not in approved_questions:
             continue
-        mapped_ids.add(edition["external_id"])
+        if edition.get("item_sha256") == approved_questions[edition["external_id"]]:
+            mapped_ids.add(edition["external_id"])
         topic_id = edition["topic_id"]
         if topic_id not in result:
             unmapped += 1

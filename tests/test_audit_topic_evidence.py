@@ -31,8 +31,8 @@ def test_current_edition_support_is_distinct_from_stale_and_partial():
     assert result["topics"]["two"]["partial"] == 1
     assert result["topics_without_supported_question"] == ["two"]
     assert result["unknown_topic_editions"] == 1
-    assert result["approved_questions_without_curriculum_edition"] == 1
-    assert result["unmapped_questions_by_source_support"] == {"disputed": 1}
+    assert result["approved_questions_without_curriculum_edition"] == 2
+    assert result["unmapped_questions_by_source_support"] == {"disputed": 1, "supported": 1}
 
 
 def test_stale_unmapped_review_is_not_reported_as_supported():
