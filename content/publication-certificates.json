@@ -35,6 +35,13 @@
       "review_sha256": "39412c6958cbfa09cde85e26435cdf7350f807e56b9f2ee22001c03e0818e2f6",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "e6I/hXWYhEgeQ+WagStWPwbkyF5AXrbX+oI+IwUHvxHXCkl5ZLszELrSJ1qpc7FMDT2abPMvcB2j45z8kSu8Cw=="
+    },
+    "questions:m5_clinical_001": {
+      "schema_version": 1,
+      "item_sha256": "04b88ac861ee8d13112161345059e11527b375c8860df7146bedc57227731157",
+      "review_sha256": "b92168597fcacf9ae77136aaa13cd6c11121fc171dd334392275ae826130d16f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Nfwq8iM8j/yWflDryQTaNmKcXXe4MNVfL9UnypFhySZGcMKCfOwyNqwHhaWqfiRcUf2kzux767sBOPDPBmPZBA=="
     }
   }
 }

@@ -26,6 +26,9 @@
     },
     "psychological_consulting": {
       "title": "Психологическое консультирование"
+    },
+    "klinicheskaya_psihologiya": {
+      "title": "Клиническая психология"
     }
   },
   "topics": {
