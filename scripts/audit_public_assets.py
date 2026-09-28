@@ -58,6 +58,11 @@ def audit_assets(directories: list[Path], source_ids: set[str]) -> tuple[int, in
         if not files:
             raise AssetAuditError("empty_asset_directory")
         for path in files:
+            relative_name = path.relative_to(directory).as_posix().encode("utf-8")
+            if any(marker in relative_name.lower() for marker in PUBLIC_MARKERS) or any(
+                needle in relative_name for needle in needles
+            ):
+                raise AssetAuditError("private_provenance_in_public_asset")
             if path.is_symlink():
                 raise AssetAuditError("symlink_in_public_assets")
             if path.is_dir():

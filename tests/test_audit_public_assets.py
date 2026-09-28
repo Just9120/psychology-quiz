@@ -20,3 +20,17 @@ def test_public_asset_audit_rejects_private_id_without_echoing_it(tmp_path: Path
     (assets / "app.js").write_text("const source = 'https://docs.google.com/document/d/unknown'", encoding="utf-8")
     with pytest.raises(AssetAuditError, match="private_provenance_in_public_asset"):
         audit_assets([assets], set())
+
+
+def test_public_asset_audit_rejects_private_id_in_nested_name(tmp_path: Path):
+    source_id = "private_drive_source_0123456789"
+    assets = tmp_path / "dist"
+    assets.mkdir()
+    (assets / "index.html").write_text("Public quiz", encoding="utf-8")
+    nested = assets / f"cached-{source_id}"
+    nested.mkdir()
+    (nested / "empty.css").write_text("body{}", encoding="utf-8")
+
+    with pytest.raises(AssetAuditError, match="private_provenance_in_public_asset") as caught:
+        audit_assets([assets], {source_id})
+    assert source_id not in str(caught.value)
