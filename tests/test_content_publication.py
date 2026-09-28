@@ -254,6 +254,18 @@ def test_current_legacy_counts_preserved_without_source_certification():
     assert not policy.can_publish("questions", item)
 
 
+def test_current_learning_reviews_do_not_use_bibliographies_as_knowledge():
+    policy = publication.load_policy()
+    quality = json.loads((publication.ROOT / "content" / "learning-quality-reviews.json")
+                         .read_text(encoding="utf-8"))["items"]
+    for key, review in quality.items():
+        if not key.startswith(("questions:", "glossary:")):
+            continue
+        for evidence in review["sources"]:
+            source = policy.sources[evidence["source_id"]]
+            assert source["kind"] == "learning_material", key
+
+
 @pytest.mark.parametrize("kind", ["glossary", "literature"])
 @pytest.mark.parametrize("status", ["draft", "review", "approved", "deprecated"])
 def test_actual_runtime_loader_excludes_unreviewed_new_content(tmp_path, monkeypatch, kind, status):
