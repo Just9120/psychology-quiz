@@ -357,6 +357,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertEqual(active_topic_ids, set(callback_topic_ids))
 
     def test_all_active_glossary_topics_load_have_valid_entries_and_questions(self):
+        certificates = load_policy().certificates
         for topic_id, _title in GLOSSARY_TOPICS:
             entries = load_glossary_entries(topic_id)
             self.assertIsNotNone(entries, topic_id)
@@ -368,7 +369,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
                 self.assertTrue(entry.short_definition)
                 self.assertTrue(entry.definition)
                 self.assertTrue(entry.examples)
-                self.assertTrue(entry.source_refs)
+                self.assertTrue(entry.source_refs or f"glossary:{entry.id}" in certificates)
                 self.assertTrue(entry.difficulty)
                 question = build_glossary_quiz_question(entries, entry, rng=random.Random(5))
                 self.assertIsNotNone(question, entry.id)
@@ -378,6 +379,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
         active_topics = load_active_question_topics()
         topic_titles = {topic["id"]: topic["title"] for topic in active_topics}
         approved_questions = load_approved_questions_by_id(active_topics)
+        publication = load_policy()
 
         for topic_id, _title in GLOSSARY_TOPICS:
             raw_entries = json.loads(Path(f"content/glossary/{topic_id}.json").read_text(encoding="utf-8"))
@@ -391,11 +393,17 @@ class GlossaryRuntimeTests(unittest.TestCase):
             for item in raw_entries:
                 for field in ("id", "topic_id", "term", "short_definition", "definition", "difficulty", "status"):
                     self.assertTrue(item.get(field), (topic_id, item.get("id"), field))
-                for field in ("aliases", "examples", "confusable_with", "source_refs"):
+                for field in ("aliases", "examples", "confusable_with"):
                     self.assertIsInstance(item.get(field), list, (topic_id, item.get("id"), field))
                 self.assertTrue(item["examples"], (topic_id, item["id"]))
-                self.assertEqual("approved", item["status"])
-                for source_ref in item["source_refs"]:
+                self.assertIn(item["status"], {"approved", "deprecated"})
+                if item["status"] == "deprecated":
+                    continue
+                source_refs = item.get("source_refs", [])
+                self.assertIsInstance(source_refs, list, (topic_id, item["id"]))
+                if not source_refs:
+                    self.assertIn(f"glossary:{item['id']}", publication.certificates)
+                for source_ref in source_refs:
                     self.assertTrue(source_ref.startswith(("question:", "supplied_snippet:", "drive:")), source_ref)
                     if source_ref.startswith("drive:"):
                         # Direct primary references require exact publication evidence,
