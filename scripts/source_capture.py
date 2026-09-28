@@ -106,8 +106,14 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
             }
             if "previous_processed_review" in previous:
                 record["previous_processed_review"] = previous["previous_processed_review"]
-        elif previous.get("review_state") == "pending_review" and "conflict_hold" in previous:
-            record["conflict_hold"] = previous["conflict_hold"]
+        elif previous.get("review_state") == "processed":
+            # A changed Drive revision needs a fresh decision, but the last
+            # completed review remains available for source/derivative triage.
+            record["previous_processed_review"] = previous
+        elif previous.get("review_state") == "pending_review":
+            for retained in ("conflict_hold", "previous_processed_review"):
+                if retained in previous:
+                    record[retained] = previous[retained]
     updated[source_id] = record
     # A legacy/incomplete conflict record must not become a pending review
     # whose hold can later be cleared without its original evidence.

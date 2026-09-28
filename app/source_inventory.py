@@ -197,6 +197,27 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
             if state == "conflict" and (not isinstance(record.get("reason"), str)
                                          or not record["reason"].strip()):
                 raise InventoryError("invalid_processing_record")
+            history = record.get("previous_processed_review")
+            seen_history = set()
+            while history is not None:
+                if (not isinstance(history, dict) or id(history) in seen_history
+                        or history.get("review_state") != "processed"
+                        or not isinstance(history.get("revision"), (list, tuple))
+                        or len(history["revision"]) != 3
+                        or any(not isinstance(value, str) or not value
+                               for value in history["revision"])
+                        or not isinstance(history.get("snapshot_kind"), str)
+                        or history["snapshot_kind"] not in {"file_bytes", "extracted_text"}
+                        or not isinstance(history.get("snapshot_sha256"), str)
+                        or re.fullmatch(r"[0-9a-f]{64}", history["snapshot_sha256"]) is None
+                        or not isinstance(history.get("reviewer"), str)
+                        or not history["reviewer"].strip()
+                        or not isinstance(history.get("review_note"), str)
+                        or not history["review_note"].strip()
+                        or not valid_review_timestamp(history.get("reviewed_at"))):
+                    raise InventoryError("invalid_previous_processed_review")
+                seen_history.add(id(history))
+                history = history.get("previous_processed_review")
             if "conflict_hold" in record:
                 hold = record["conflict_hold"]
                 related = hold.get("related_source_ids") if isinstance(hold, dict) else None

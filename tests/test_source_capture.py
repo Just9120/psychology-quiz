@@ -34,6 +34,15 @@ def test_capture_hashes_private_bytes_and_preserves_other_records(tmp_path):
                                     "extracted_text")
     assert recheck["private"]["review_state"] == "pending_review"
     assert recheck["private"]["snapshot_sha256"] != processed["private"]["snapshot_sha256"]
+    assert recheck["private"]["previous_processed_review"] == processed["private"]
+    repeated = source_capture.capture(export(["private"]), recheck, "private", content,
+                                     "extracted_text")
+    assert repeated["private"]["previous_processed_review"] == processed["private"]
+    invalid_history = {"private": {**recheck["private"],
+                                   "previous_processed_review": {"review_state": "processed"}}}
+    with pytest.raises(InventoryError, match="invalid_previous_processed_review"):
+        source_capture.capture(export(["private"]), invalid_history, "private", content,
+                               "extracted_text")
     assert processed["private"]["review_state"] == "processed"
     assert source_capture.capture(export(["private"]), processed, "private", content,
                                   "file_bytes")["private"]["review_state"] == "pending_review"
@@ -66,8 +75,17 @@ def test_capture_hashes_private_bytes_and_preserves_other_records(tmp_path):
                                "extracted_text", capture_conflict_evidence=True)
     newer = export(["private"])
     newer["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
-    assert source_capture.capture(newer, processed, "private", content,
-                                  "extracted_text")["private"]["review_state"] == "pending_review"
+    newer_capture = source_capture.capture(newer, processed, "private", content,
+                                          "extracted_text")["private"]
+    assert newer_capture["review_state"] == "pending_review"
+    assert newer_capture["previous_processed_review"] == processed["private"]
+    reviewed_newer = {**newer_capture, "review_state": "processed", **REVIEW_EVIDENCE}
+    newest = export(["private"])
+    newest["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-27T00:00:00Z"
+    newest_capture = source_capture.capture(newest, {"private": reviewed_newer},
+                                            "private", content, "extracted_text")["private"]
+    assert newest_capture["previous_processed_review"] == reviewed_newer
+    assert newest_capture["previous_processed_review"]["previous_processed_review"] == processed["private"]
     from_conflict = source_capture.capture(newer, conflicted, "private", content,
                                            "extracted_text")["private"]
     assert from_conflict["review_state"] == "pending_review"
