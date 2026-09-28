@@ -65,6 +65,17 @@ def test_new_question_requires_private_publication_even_after_exact_source_revie
     assert policy.error(kind, dict(reversed(list(item.items()))), private_review=True) is None
 
 
+def test_historical_direct_ref_allowance_is_bound_to_exact_question_edition(monkeypatch):
+    item, _, review, policy = reviewed("questions")
+    monkeypatch.setitem(publication.HISTORICAL_DIRECT_REF_SHA256,
+                        "questions:fixture", publication.fingerprint(item))
+    assert policy.can_publish("questions", item)
+    item["explanation"] = "A revised explanation"
+    review["item_sha256"] = publication.fingerprint(item)
+    policy.quality_reviews["questions:fixture"]["item_sha256"] = review["item_sha256"]
+    assert policy.error("questions", item) == "new_public_question_source_ref_forbidden"
+
+
 def test_new_glossary_item_cannot_publish_a_direct_drive_reference():
     item, _, _, policy = reviewed("glossary")
     assert policy.error("glossary", item) == "private_glossary_source_review_required"
