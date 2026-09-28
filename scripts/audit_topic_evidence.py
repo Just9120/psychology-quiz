@@ -21,7 +21,8 @@ from scripts.source_inventory_report import _snapshot
 
 
 def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str],
-             source_states: dict[str, str] | None = None) -> dict:
+             source_states: dict[str, str] | None = None,
+             source_registry: dict | None = None) -> dict:
     topics = curriculum["topics"]
     items = quality["items"]
     result = {topic_id: {"title": topic["title"], "supported": 0,
@@ -68,6 +69,9 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
             result[topic_id]["stale"] += 1
     without_mapping = approved_questions.keys() - mapped_ids
     support_breakdown = Counter()
+    scope_breakdown = Counter()
+    sources = ({item["id"]: item for item in source_registry["sources"]}
+               if source_registry is not None else {})
     for question_id in without_mapping:
         review = items.get(f"questions:{question_id}")
         if isinstance(review, dict) and review.get("item_sha256") != approved_questions[question_id]:
@@ -76,11 +80,25 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
             support = review.get("source_support") if isinstance(review, dict) else None
             support_breakdown[support if support in {"supported", "partial", "disputed"}
                               else "unreviewed"] += 1
-    return {"topics": result, "unknown_topic_editions": unmapped,
+            if source_registry is not None and support == "supported":
+                references = review.get("sources")
+                discipline_only = (isinstance(references, list) and bool(references)
+                    and all(isinstance(ref, dict)
+                        and (source := sources.get(ref.get("source_id"))) is not None
+                        and source.get("discipline_id") in curriculum.get("disciplines", {})
+                        and all(ref.get(key) == source.get(key)
+                                for key in ("modified_time", "snapshot_sha256"))
+                        for ref in references))
+                scope_breakdown["current_discipline_source_only" if discipline_only
+                                else "other_supported_source"] += 1
+    report = {"topics": result, "unknown_topic_editions": unmapped,
             "approved_questions_without_curriculum_edition": len(without_mapping),
             "unmapped_questions_by_source_support": dict(sorted(support_breakdown.items())),
             "topics_without_supported_question": sorted(
                 topic_id for topic_id, counts in result.items() if counts["supported"] == 0)}
+    if source_registry is not None:
+        report["unmapped_supported_source_scope"] = dict(sorted(scope_breakdown.items()))
+    return report
 
 
 def approved_questions(root: Path) -> dict[str, str]:
@@ -116,7 +134,9 @@ def main() -> int:
         for source_id in unresolved_related_conflicts(processed):
             if source_states.get(source_id) == "processed":
                 source_states[source_id] = "related_conflict_review"
-    print(json.dumps(coverage(curriculum, quality, approved_questions(ROOT), source_states),
+    registry = json.loads((ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
+    print(json.dumps(coverage(curriculum, quality, approved_questions(ROOT), source_states,
+                              registry),
                      ensure_ascii=False, sort_keys=True))
     return 0
 

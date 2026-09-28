@@ -68,3 +68,22 @@ def test_private_review_state_explains_gap_without_exposing_source_id():
     assert result["topics"]["one"]["source_review_state"] == "conflict_review"
     assert result["topics"]["two"]["source_review_state"] == "missing_from_inventory"
     assert "private-1" not in str(result)
+
+
+def test_unmapped_supported_glossary_source_is_reported_at_discipline_scope_only():
+    curriculum = {"disciplines": {"general": {"title": "General"}},
+                  "topics": {}, "editions": {}}
+    registry = {"sources": [{"id": "glossary", "discipline_id": "general",
+        "modified_time": "revision-1", "snapshot_sha256": "digest-1"}]}
+    quality = {"items": {"questions:q1": {"item_sha256": "current",
+        "source_support": "supported", "sources": [{"source_id": "glossary",
+        "modified_time": "revision-1", "snapshot_sha256": "digest-1"}]},
+        "questions:q2": {"item_sha256": "current", "source_support": "supported",
+        "sources": [{"source_id": "glossary", "modified_time": "old",
+                     "snapshot_sha256": "digest-1"}]}}}
+    report = coverage(curriculum, quality, {"q1": "current", "q2": "current"},
+                      source_registry=registry)
+    assert report["unmapped_questions_by_source_support"] == {"supported": 2}
+    assert report["unmapped_supported_source_scope"] == {
+        "current_discipline_source_only": 1, "other_supported_source": 1}
+    assert report["topics_without_supported_question"] == []
