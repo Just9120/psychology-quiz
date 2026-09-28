@@ -68,7 +68,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/lecture1_higher_nervous_activity",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какое условие критически важно для формирования условного рефлекса?",
     "options": [
       "Однократный сильный стрессор без повторений",
@@ -388,7 +388,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/lecture2_properties_of_nervous_processes",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Во время подготовки к экзамену обучающийся чередует интенсивную работу и короткие паузы, чтобы сохранять продуктивность. Почему это физиологически оправдано с позиции ВНД?",
     "options": [
       "Паузы поддерживают баланс процессов возбуждения и торможения",
@@ -452,7 +452,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/lecture6_decision_making_and_will",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "При обучении навыку саморегуляции специалист сначала использует частые напоминания, а затем постепенно их сокращает, сохраняя выполнение действия клиентом. Какой принцип ВНД лежит в основе такой стратегии?",
     "options": [
       "Постепенный перенос регуляции на сформированные условные связи",
@@ -468,7 +468,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/lecture6_decision_making_and_will",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Как психологу корректнее использовать знание о типах ВНД при обсуждении индивидуального стиля реагирования клиента?",
     "options": [
       "Как ориентир для подбора темпа и формата работы без жестких ярлыков",
@@ -564,7 +564,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/practice5_physiology_of_higher_nervous_activity",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Специалист сравнивает две гипотезы: «срыв из-за разовой перегрузки» и «устойчиво слабый тормозный контроль». Какой признак больше поддерживает гипотезу о перегрузке?",
     "options": [
       "Проблема возникла на фоне необычно высокой нагрузки и уменьшается после нормализации режима",
@@ -628,7 +628,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/hub",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему при освоении новой модели поведения возможны «откаты» к старому сценарию?",
     "options": [
       "Потому что любое обучение всегда линейно и без колебаний",
@@ -724,7 +724,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/practice5_physiology_of_higher_nervous_activity",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "После частых ночных смен, смены задач и дефицита отдыха сотрудник стал чаще делать стереотипные ошибки и возвращаться к неэффективным реакциям. Какое объяснение в рамках ВНД наиболее уместно?",
     "options": [
       "Это доказывает, что динамический стереотип не связан с повторяемыми условиями",
@@ -804,7 +804,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/practice3_nervous_system_types",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему психологу опасно вести клиента только в своем темпе?",
     "options": [
       "Потому что темп беседы вообще не влияет на контакт",
@@ -820,7 +820,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/practice3_nervous_system_types",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой стиль контакта чаще будет уместнее для клиента с более слабой нервной системой?",
     "options": [
       "Больше давления и максимально прямые вопросы с самого начала",
@@ -836,7 +836,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/practice3_nervous_system_types",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Что чаще всего полезно клиенту с более подвижной нервной системой?",
     "options": [
       "Жестко обрывать любую ассоциацию без объяснения",
@@ -868,7 +868,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/practice5_integration",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой вывод наиболее корректен, если человек в стрессовой ситуации сначала реагирует резко и импульсивно, а потом испытывает дрожь, туман в голове и стыд?",
     "options": [
       "Это автоматически доказывает слабую нервную систему",
@@ -900,7 +900,7 @@
     "category": "Физиология ВНД",
     "source_ref": "module1/vnd/practice3_nervous_system_types",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Что точнее всего показывает профессиональное использование знаний о свойствах нервной системы в консультировании?",
     "options": [
       "Психолог быстро навешивает на клиента жесткий типологический ярлык",

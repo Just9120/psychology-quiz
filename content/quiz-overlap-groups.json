@@ -106,7 +106,6 @@
       "discipline_id": "fiziologiya_vnd",
       "question_ids": [
         "m1_vnd_004",
-        "m1_vnd_005",
         "m1_vnd_048"
       ]
     },
@@ -130,27 +129,6 @@
       "question_ids": [
         "m1_vnd_033",
         "m1_vnd_056"
-      ]
-    },
-    {
-      "discipline_id": "fiziologiya_vnd",
-      "question_ids": [
-        "m1_vnd_030",
-        "m1_vnd_057"
-      ]
-    },
-    {
-      "discipline_id": "psihofiziologiya",
-      "question_ids": [
-        "m1_psyf_041",
-        "m1_psyf_052"
-      ]
-    },
-    {
-      "discipline_id": "psihofiziologiya",
-      "question_ids": [
-        "m1_psyf_047",
-        "m1_psyf_053"
       ]
     },
     {
