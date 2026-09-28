@@ -2,6 +2,8 @@
 
 ## Current Goal — LEARNING-FOUNDATION-001
 
+**E07 image transition CI rehearsal, 28.09.2026:** отдельный disposable сценарий в CI теперь поднимает закреплённый PostgreSQL 18.6, записывает синтетический user row и cluster ID, затем запускает закреплённый pgvector 0.8.6/PG18 на том же временном Docker volume и сверяет row, cluster ID и extension в `private_search`. Сценарий привязан к `app/postgres_config.py`, не использует production state и чистит только собственные контейнеры/volume. Локально Bash syntax и YAML parse PASS; реальный Docker/CI PASS и VPS backup/restore/image switch PENDING. AC-SRH-02 остаётся IN_PROGRESS.
+
 **E07 RAG draft attribution, 28.09.2026:** отключённый operator-only `draft_answer` теперь требует допустимую citation в каждом отдельном предложении; единственная ссылка в первом предложении больше не прикрывает последующий тезис. Адресный `test_private_rag.py`: 4 PASS, 1 Windows symlink skip; проверка говорит только о структуре ссылок, не о фактической поддержке тезисов источником. Модель/VPS, grounding и resource gates D-34 PENDING; AC-SRH-04/05 IN_PROGRESS.
 
 **FND-06 PostgreSQL provenance, 28.09.2026:** preservation manifest отдельно фиксирует SHA-256 `postgres_storage.import_manifest`; проверка после content/schema операций отклоняет изменение или потерю этой записи, допуская старые recovery records без нового поля. Синтетический `test_postgres_recovery_contract.py` 5 PASS; реальная PostgreSQL backup/restore, миграция и user-state post-check остаются PENDING, AC-FND-06 IN_PROGRESS.

@@ -133,7 +133,7 @@ jobs:
           base="${PR_BASE:-${PUSH_BASE:-HEAD^}}"
           if [[ "$base" == 0000000000000000000000000000000000000000 ]]; then base=HEAD^; fi
           changes=$(git diff --name-only "$base" HEAD)
-          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|Dockerfile\.search|requirements-search\.txt|requirements-dev\.txt|sql/private-search-bootstrap\.sql|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
+          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|requirements-search\.txt|requirements-dev\.txt|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
             echo "Private search unchanged; isolated pgvector check not applicable"
             exit 0
           fi
@@ -170,6 +170,7 @@ jobs:
           [[ "$(docker exec -e PGPASSWORD=synthetic-admin-only "$container" \
             psql -U postgres -d psychology_search_restore -Atqc \
             "SELECT count(*) FROM pg_namespace WHERE nspname='private_search'")" == 0 ]]
+          bash scripts/ci_pgvector_transition.sh
 
       - name: Validate deployment shell syntax
         run: bash -n deploy.sh
