@@ -87,3 +87,29 @@ def test_unmapped_supported_glossary_source_is_reported_at_discipline_scope_only
     assert report["unmapped_supported_source_scope"] == {
         "current_discipline_source_only": 1, "other_supported_source": 1}
     assert report["topics_without_supported_question"] == []
+
+
+def test_exact_private_certificate_covers_only_current_mapped_source():
+    curriculum = {"topics": {"one": {"title": "One", "source": {
+        "source_id": "source-one", "modified_time": "revision-1",
+        "snapshot_sha256": "digest-1"}}}, "editions": {"captured": {
+        "external_id": "q1", "topic_id": "one", "item_sha256": "current",
+        "locator": "private certificate:questions:q1"}}}
+    registry = {"sources": [{"id": "source-one", "modified_time": "revision-1",
+                            "snapshot_sha256": "digest-1"}]}
+    certification = {"q1": {"source_id": "source-one", "modified_time": "revision-1",
+                            "snapshot_sha256": "digest-1"}}
+    result = coverage(curriculum, {"items": {}}, {"q1": "current"},
+                      source_registry=registry, certified_questions=certification)
+    assert result["topics"]["one"]["signed_private"] == 1
+    assert result["topics_without_supported_question"] == []
+    registry["sources"][0]["snapshot_sha256"] = "changed"
+    stale = coverage(curriculum, {"items": {}}, {"q1": "current"},
+                     source_registry=registry, certified_questions=certification)
+    assert stale["topics"]["one"]["signed_private"] == 0
+    assert stale["topics_without_supported_question"] == ["one"]
+    registry["sources"][0]["snapshot_sha256"] = "digest-1"
+    changed = coverage(curriculum, {"items": {}}, {"q1": "current"},
+                       source_states={"source-one": "changed_pending_review"},
+                       source_registry=registry, certified_questions=certification)
+    assert changed["topics_without_supported_question"] == ["one"]

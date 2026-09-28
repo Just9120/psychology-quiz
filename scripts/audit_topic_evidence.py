@@ -15,17 +15,19 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.content_publication import fingerprint
+from app.content_publication import DRIVE_REF, fingerprint, load_policy
 from app.source_inventory import processing_status, unresolved_related_conflicts
+from scripts.sign_private_publication import private_path
 from scripts.source_inventory_report import _snapshot
 
 
 def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str],
              source_states: dict[str, str] | None = None,
-             source_registry: dict | None = None) -> dict:
+             source_registry: dict | None = None,
+             certified_questions: dict[str, dict] | None = None) -> dict:
     topics = curriculum["topics"]
     items = quality["items"]
-    result = {topic_id: {"title": topic["title"], "supported": 0,
+    result = {topic_id: {"title": topic["title"], "supported": 0, "signed_private": 0,
                          "partial": 0, "disputed": 0, "stale": 0,
                          "unverified_source": 0}
               for topic_id, topic in topics.items()}
@@ -42,6 +44,24 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
         topic_id = edition["topic_id"]
         if topic_id not in result:
             unmapped += 1
+            continue
+        if (question_id := edition["external_id"]) in (certified_questions or {}):
+            source = topics[topic_id].get("source", {})
+            certified_source = certified_questions[question_id]
+            registered = next((item for item in (source_registry or {}).get("sources", [])
+                               if item["id"] == source.get("source_id")), None)
+            if (edition.get("item_sha256") == approved_questions[question_id]
+                    and edition.get("locator") == f"private certificate:questions:{question_id}"
+                    and registered is not None
+                    and all(source.get(key) == certified_source.get(key)
+                            for key in ("source_id", "modified_time", "snapshot_sha256"))
+                    and (source_states is None or source_states.get(source.get("source_id"))
+                         in {"processed", "conflict_review"})
+                    and all(source.get(key) == registered.get(key)
+                            for key in ("modified_time", "snapshot_sha256"))):
+                result[topic_id]["signed_private"] += 1
+                continue
+            result[topic_id]["stale"] += 1
             continue
         review = items.get(f"questions:{edition['external_id']}")
         if (not isinstance(review, dict)
@@ -95,7 +115,8 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
             "approved_questions_without_curriculum_edition": len(without_mapping),
             "unmapped_questions_by_source_support": dict(sorted(support_breakdown.items())),
             "topics_without_supported_question": sorted(
-                topic_id for topic_id, counts in result.items() if counts["supported"] == 0)}
+                topic_id for topic_id, counts in result.items()
+                if counts["supported"] + counts["signed_private"] == 0)}
     if source_registry is not None:
         report["unmapped_supported_source_scope"] = dict(sorted(scope_breakdown.items()))
     return report
@@ -113,6 +134,36 @@ def approved_questions(root: Path) -> dict[str, str]:
     return approved
 
 
+def certified_questions(root: Path, dossier_paths: list[Path]) -> dict[str, dict]:
+    """Use exact ignored review dossiers; a public signature alone has no source ID."""
+    policy = load_policy()
+    certified = {}
+    items = {}
+    for path in (root / "content/questions").glob("**/*.json"):
+        for question in json.loads(path.read_text(encoding="utf-8")):
+            items[question["id"]] = question
+    for raw_path in dossier_paths:
+        dossier = json.loads(private_path(raw_path, suffix=".json").read_text(encoding="utf-8"))
+        if (dossier.get("kind") != "questions" or not isinstance(dossier.get("item_id"), str)
+                or dossier["item_id"] in certified):
+            raise ValueError("invalid_signed_curriculum_dossier")
+        item_id = dossier["item_id"]
+        certificate = (policy.certificates or {}).get(f"questions:{item_id}")
+        sources = dossier.get("sources")
+        if (not isinstance(certificate, dict) or certificate.get("review_sha256") != fingerprint(dossier)
+                or not isinstance(sources, list) or len(sources) != 1
+                or not isinstance(sources[0], dict)
+                or not isinstance(dossier.get("source_ref"), str)
+                or (ref := DRIVE_REF.fullmatch(dossier["source_ref"])) is None
+                or ref[1] != sources[0].get("id")
+                or item_id not in items or not policy.can_publish("questions", items[item_id])):
+            raise ValueError("invalid_signed_curriculum_dossier")
+        certified[item_id] = {"source_id": sources[0]["id"],
+                              "modified_time": sources[0].get("modified_time"),
+                              "snapshot_sha256": sources[0].get("snapshot_sha256")}
+    return certified
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--curriculum", type=Path, default=ROOT / "content/curriculum.json")
@@ -121,6 +172,8 @@ def main() -> int:
                         help="private current Drive inventory; use together with --processed")
     parser.add_argument("--processed", type=Path,
                         help="private source review snapshot; use together with --inventory")
+    parser.add_argument("--signed-dossier", type=Path, action="append", default=[],
+                        help="ignored signed private review dossier for an exact question edition")
     args = parser.parse_args()
     if (args.inventory is None) != (args.processed is None):
         parser.error("--inventory and --processed must be supplied together")
@@ -136,7 +189,7 @@ def main() -> int:
                 source_states[source_id] = "related_conflict_review"
     registry = json.loads((ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
     print(json.dumps(coverage(curriculum, quality, approved_questions(ROOT), source_states,
-                              registry),
+                              registry, certified_questions(ROOT, args.signed_dossier)),
                      ensure_ascii=False, sort_keys=True))
     return 0
 

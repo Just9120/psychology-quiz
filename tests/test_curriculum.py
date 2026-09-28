@@ -110,7 +110,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     reviews = json.loads((curriculum.ROOT / 'content/learning-quality-reviews.json').read_text(encoding='utf-8'))['items']
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
-    assert len(catalog['disciplines']) == 8 and len(catalog['editions']) == 307
+    assert len(catalog['disciplines']) == 8 and len(catalog['editions']) == 309
     assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
         k: v['title'] for k, v in registry.items() if 'glossary' in v['available_contours']
     }
@@ -124,7 +124,6 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
         historical = set()
         for sha, item in catalog['editions'].items():
             key = 'questions:' + item['external_id']
-            review = reviews[key]
             topic = catalog['topics'][item['topic_id']]
             source = load_policy().sources[topic['source']['source_id']]
             if item['item_sha256'] != fingerprint(items[key]):
@@ -134,13 +133,22 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                 assert item['locator']
                 continue
             assert actual[item['external_id']] == sha
+            if item['locator'] == 'private certificate:' + key:
+                assert load_policy().can_publish('questions', items[key])
+                assert item['item_sha256'] == fingerprint(items[key])
+                assert topic['discipline_id'] == 'psihofiziologiya'
+                assert source['kind'] == 'learning_material' and source['readable'] is True
+                assert all(topic['source'][field] == source[field]
+                           for field in ('modified_time', 'snapshot_sha256'))
+                continue
+            review = reviews[key]
             assert fingerprint(items[key]) == item['item_sha256'] == review['item_sha256']
             assert review['source_support'] == 'supported'
             assert topic['discipline_id'] == review['discipline_id']
             assert source['kind'] == 'learning_material' and source['readable'] is True
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
-        assert historical == {'m2_exp_012', 'm2_exp_058'}
+        assert historical == {'m1_intro_054', 'm2_exp_012', 'm2_exp_058'}
 
 
 def test_catalog_rejects_orphan_and_ambiguous_identities(mapped):
