@@ -38,10 +38,17 @@
     },
     "questions:m5_clinical_001": {
       "schema_version": 1,
-      "item_sha256": "04b88ac861ee8d13112161345059e11527b375c8860df7146bedc57227731157",
-      "review_sha256": "b92168597fcacf9ae77136aaa13cd6c11121fc171dd334392275ae826130d16f",
+      "item_sha256": "50a9804f484247b33933038a2758b85b455c04a3a99a828318eb6c5e48ede43d",
+      "review_sha256": "32295b3847fe6b0c85c4f026d18a9f082d2e8d3d9315b9f2a9d47e1101507250",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Nfwq8iM8j/yWflDryQTaNmKcXXe4MNVfL9UnypFhySZGcMKCfOwyNqwHhaWqfiRcUf2kzux767sBOPDPBmPZBA=="
+      "signature": "0theVg88V4wc8BJCH5ZvxOaY71Qnz9RVZBf9IsUwrQwxkL8Y++zItN1QZoJnj8W8n+p6QOXuGum1e3dEVRubBA=="
+    },
+    "questions:case_goal_method_001": {
+      "schema_version": 1,
+      "item_sha256": "470d5f35f5f80dda78c5181e6f5dca34a64a71716c112b407cb90bc076feac6b",
+      "review_sha256": "1349f5d5798ac6e89e05cad8d0eddc214038c2d3222685c60c5a2f6e4fea964e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "6ejRuXgdd2iqMLEvox8Se9WaGLqTm9LCk5YaAlyKsTl3p6bnRV6E5HrTlOH2rfgCU064tVB/uL0wD4q+0AAmCw=="
     }
   }
 }
