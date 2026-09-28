@@ -7989,7 +7989,7 @@
       "item_sha256": "c65f9488e87bf8376f021ea25c2b8e0516437ccfbb2ed4ceddc3c57a7814e103",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -7999,17 +7999,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_claim_partially_supported"
-      ],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает механизмы решений и риск, но не определяет оценку ценности альтернатив.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Словарная статья определяет нейроэкономику через мозговые механизмы решения, риск, справедливость и вознаграждение; ключ и пояснение используют эти же понятия без дополнительного причинного вывода.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
           "modified_time": "2026-04-20T11:05:23.167Z",
           "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2774:2942"
         }
       ]
     },
@@ -8316,7 +8314,7 @@
       "item_sha256": "b8e7cbd9de7777ca9066c515007ddeca6c7b679914cac11ab787d024a1fae2b1",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -8326,17 +8324,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_claim_partially_supported"
-      ],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает подстройку под большинство, но не подтверждает исходную уверенность в ответе.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Словарная статья определяет конформизм как изменение поведения под мнением большинства; ситуация смены ответа в группе и пояснение прямо применяют это определение.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
           "modified_time": "2026-04-20T11:05:23.167Z",
           "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1725:1920"
         }
       ]
     },
