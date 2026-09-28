@@ -87,14 +87,6 @@
       ]
     },
     {
-      "discipline_id": "fiziologiya_cheloveka",
-      "question_ids": [
-        "m1_phys_011",
-        "m1_phys_042",
-        "m1_phys_045"
-      ]
-    },
-    {
       "discipline_id": "fiziologiya_vnd",
       "question_ids": [
         "m1_vnd_004",
