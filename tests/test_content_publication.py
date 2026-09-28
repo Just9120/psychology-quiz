@@ -164,6 +164,17 @@ def test_frozen_legacy_learning_item_with_disputed_source_cannot_publish(kind):
 
 
 @pytest.mark.parametrize("kind", ["questions", "glossary"])
+@pytest.mark.parametrize("source_support", ["partial", "unconfirmed"])
+def test_frozen_legacy_learning_item_with_incomplete_source_cannot_publish(kind, source_support):
+    item, _, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    policy.quality_reviews[f"{kind}:fixture"]["source_support"] = source_support
+
+    assert policy.error(kind, item) == "legacy_incomplete_source_review"
+    assert not policy.can_publish(kind, item)
+
+
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
 def test_frozen_legacy_explicit_drive_ref_must_match_quality_source(kind):
     item, source, _, policy = reviewed(kind)
     policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
@@ -267,7 +278,7 @@ def test_current_legacy_counts_preserved_without_source_certification():
     assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 14
     # Reading learning sources for an audit must not silently approve derivatives.
     assert any(source["kind"] == "learning_material" for source in policy.sources.values())
-    for kind, expected in [("questions", 560), ("glossary", 96), ("literature", 130)]:
+    for kind, expected in [("questions", 546), ("glossary", 96), ("literature", 130)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected

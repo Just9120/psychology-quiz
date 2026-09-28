@@ -114,6 +114,8 @@ class PublicationPolicy:
                     return "legacy_source_review_required"
                 if item.get("status") == "approved" and quality.get("source_support") == "disputed":
                     return "legacy_disputed_source_review"
+                if item.get("status") == "approved" and quality.get("source_support") != "supported":
+                    return "legacy_incomplete_source_review"
                 for ref in quality["sources"]:
                     if not isinstance(ref, dict) or not _text(ref.get("source_id")):
                         return "legacy_source_review_required"

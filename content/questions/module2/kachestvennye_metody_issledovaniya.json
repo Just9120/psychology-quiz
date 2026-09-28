@@ -73,7 +73,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice10",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой вариант лучше описывает целенаправленный (purposive) отбор в качественном исследовании?",
     "options": [
       "Случайный набор для оценки популяционных параметров с минимальной ошибкой",
@@ -107,7 +107,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice11",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какая формулировка лучше отражает цель полуструктурированного интервью?",
     "options": [
       "Жёстко следовать списку формулировок и не реагировать на смысл ответов",
@@ -311,7 +311,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice10",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой признак указывает, что гайд интервью составлен качественно?",
     "options": [
       "Вопросы открытые, нейтральные и выстроены от общего к частному",
@@ -328,7 +328,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice10",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Для чего в интервью используют уточняющие (probing) вопросы?",
     "options": [
       "Чтобы ускорить интервью и сократить детали",
@@ -498,7 +498,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice12",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какая ошибка в качественной интерпретации является типичной?",
     "options": [
       "Сопоставлять выводы с цитатами и полевыми заметками",
@@ -515,7 +515,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice10",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Как корректнее всего различать исследовательский вопрос и вопрос интервью?",
     "options": [
       "Исследовательский вопрос и интервью-вопрос в качественном исследовании совпадают и различаются только формулировкой",
@@ -532,7 +532,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/lecture1_intro",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какая формулировка интервью-вопроса наиболее нейтральна?",
     "options": [
       "Какие стороны новой системы оценивания вы считаете наиболее полезными?",
@@ -549,7 +549,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice11",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой probing-вопрос лучше всего углубляет ответ респондента?",
     "options": [
       "Можете уточнить, что вы имеете в виду под «поддержкой» в этой ситуации?",
@@ -583,7 +583,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice10",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Как поддерживать rapport в интервью, не теряя исследовательский фокус?",
     "options": [
       "Поддерживать тёплый контакт, но при уходе в сторону мягко возвращать разговор к исследовательским темам",
@@ -736,7 +736,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice10",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Интервьюер спрашивает: «Почему вы не воспользовались поддержкой, если это был самый рациональный вариант?» Как лучше переписать вопрос?",
     "options": [
       "Почему вы снова выбрали менее эффективный путь вместо обращения за поддержкой?",
@@ -753,7 +753,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice11",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой вопрос в гайде является наводящим (leading), хотя внешне звучит как уточнение?",
     "options": [
       "Как вы воспринимали обратную связь от куратора в течение семестра?",
@@ -770,7 +770,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice12",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Респондент говорит: «После перевода в новый отдел стало спокойнее». Какой probe уместнее для углубления?",
     "options": [
       "Правильно ли я понимаю, что прежний отдел был токсичным?",
@@ -838,7 +838,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice12",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "В отчёте приведена одна яркая цитата и сделан вывод: «Все сотрудники воспринимают реформу как угрозу». Как корректнее поступить аналитически?",
     "options": [
       "Сохранить формулировку про «всех сотрудников», потому что цитата ярко иллюстрирует проблему",
@@ -855,7 +855,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice10",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Для исследования опыта первокурсников, совмещающих учёбу и ночную работу, какой sampling strategy наиболее уместен?",
     "options": [
       "Простая случайная выборка всех студентов вуза для статистической репрезентативности",
