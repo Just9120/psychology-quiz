@@ -100,7 +100,7 @@
       "item_sha256": "f5135966fc5d95258e2ac25404490fbd2b0062ecec254d6b8f3ea0b7721d5507",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -110,9 +110,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "source_support": "partial",
+      "issues": [
+        "source_support_incomplete"
+      ],
+      "note": "Текущая редакция вводной лекции подтверждает работу с жизненными трудностями, отношениями и стрессом, но не содержит утверждения о самооценке из explanation. Вопрос и правильный вариант сохраняются; для полного source support нужен отдельный точный источник или редакция пояснения. Сверка Google Docs text 28.09.2026; новый extraction profile имеет иной digest, чем прежний ledger, что само по себе не доказывает изменение документа.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
@@ -1625,7 +1627,7 @@
       "item_sha256": "36a0aedf12113cf92611cd318856a2ebed7d06127ea6c306b376c2fe975206a5",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "definition",
@@ -1635,12 +1637,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
+      "source_support": "partial",
       "issues": [
         "question_reference_is_not_primary_source",
-        "example_is_question_reference"
+        "example_is_question_reference",
+        "source_support_incomplete"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "note": "Текущая редакция вводной лекции подтверждает жизненные трудности, отношения и стресс, но не содержит утверждения о самооценке из определения. Для полного source support нужен отдельный точный источник или редакция определения. source_refs question: не первичный источник, а example ссылается на ID вопроса вместо самостоятельного примера. Сверка Google Docs text 28.09.2026; новый extraction profile имеет иной digest, чем прежний ledger, без доказательства изменения документа.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
