@@ -276,7 +276,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture2_endocrine_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему для психолога важно учитывать эндокринную регуляцию?",
     "options": [
       "Потому что психолог может сам назначать гормоны",
@@ -516,7 +516,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой принцип лучше всего описывает поддержание гомеостаза?",
     "options": [
       "Постоянное усиление всех реакций без обратной связи",
@@ -532,7 +532,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture2_endocrine_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему при длительной перегрузке важно учитывать не только нервную, но и эндокринную регуляцию?",
     "options": [
       "Потому что гормональные ответы влияют на уровень энергии, сон и восстановление",
@@ -580,7 +580,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture5_cardiovascular_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой признак в учебном контексте разумнее рассматривать как возможный сигнал перегрузки, а не как диагноз?",
     "options": [
       "Кратковременное учащение пульса перед ответом у доски",
@@ -644,7 +644,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/practice2_emotions_stress_consulting",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Клиент после нескольких недель интенсивной учебы жалуется на раздражительность, поверхностный сон и утомляемость. Какая рабочая гипотеза наиболее физиологически обоснована для первичного обсуждения?",
     "options": [
       "Это однозначно признак конкретного заболевания",
@@ -676,7 +676,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Как наиболее корректно описать взаимодействие нервной и эндокринной регуляции при длительной учебной нагрузке?",
     "options": [
       "Они работают независимо и не влияют друг на друга",
@@ -740,7 +740,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture5_cardiovascular_system",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой вариант лучше всего отражает межсистемную координацию при длительной когнитивной нагрузке?",
     "options": [
       "Работает только нервная система, остальные почти не участвуют",
@@ -756,7 +756,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture2_endocrine_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему для психолога важно помнить, что эндокринная система не запускает мгновенную реакцию так же быстро, как нервная, а чаще задаёт более длительный фон состояния?",
     "options": [
       "Потому что гормоны не влияют на психику",
@@ -772,7 +772,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture2_endocrine_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой вывод о кортизоле для психологического контекста наиболее корректен?",
     "options": [
       "Кортизол всегда вреден и не нужен организму",
