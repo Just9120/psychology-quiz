@@ -125,14 +125,15 @@ candidate image, сохранность cluster ID/записи и создан�
 
 ```bash
 python scripts/private_search_bundle.py create \
-  --manifest manifest-ready-personality1-20260928.json \
-  --cases qa-personality1-20260928.json \
-  --output .private-search/private-search-personality1-qa6-20260928.zip
+  --manifest manifest-personality1and5-search-20260928.json \
+  --cases qa-personality1and5-20260928.json \
+  --output .private-search/private-search-ready-personality1and5-20260928.zip
 ```
 
 Это пример последнего локально сверенного приватного snapshot на 28.09.2026;
-перед поставкой повторно проверьте его актуальность. Для новой обработки подставьте новые
-имена manifest/cases. Вывод содержит
+подготовленный архив уже существует локально, поэтому команду не повторяют с тем же
+output. Перед поставкой проверьте его digest и актуальность source reviews. Для новой
+обработки подставьте новые имена manifest/cases и свободное имя архива. Вывод содержит
 SHA-256 пакета без текста/Drive IDs. Передайте ZIP по SSH/SFTP владельца, не
 через публичный GitHub artifact. На VPS только после проверки точной revision
 кода установите пакет в приватный каталог; заранее задайте переменную
@@ -140,9 +141,9 @@ SHA-256 пакета без текста/Drive IDs. Передайте ZIP по 
 
 ```bash
 cd /opt/psychology-quiz
-chmod 600 /root/private-search-personality1-qa6-20260928.zip
+chmod 600 /root/private-search-ready-personality1and5-20260928.zip
 python3 scripts/private_search_bundle.py install \
-  --archive /root/private-search-personality1-qa6-20260928.zip --sha256 "$BUNDLE_SHA256"
+  --archive /root/private-search-ready-personality1and5-20260928.zip --sha256 "$BUNDLE_SHA256"
 ```
 
 Импорт сверяет digest и состав, отклоняет symlink/выход из каталога и
