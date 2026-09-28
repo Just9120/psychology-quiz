@@ -295,33 +295,9 @@
     {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "question_ids": [
-        "m2_qual_021",
-        "m2_qual_036",
-        "m2_qual_048"
-      ]
-    },
-    {
-      "discipline_id": "kachestvennye_metody_issledovaniya",
-      "question_ids": [
-        "m2_qual_022",
-        "m2_qual_038",
-        "m2_qual_052"
-      ]
-    },
-    {
-      "discipline_id": "kachestvennye_metody_issledovaniya",
-      "question_ids": [
         "m2_qual_014",
         "m2_qual_028",
         "m2_qual_053"
-      ]
-    },
-    {
-      "discipline_id": "kachestvennye_metody_issledovaniya",
-      "question_ids": [
-        "m2_qual_027",
-        "m2_qual_039",
-        "m2_qual_047"
       ]
     },
     {

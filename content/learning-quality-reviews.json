@@ -13465,10 +13465,10 @@
       ]
     },
     "questions:m2_qual_015": {
-      "item_sha256": "62ed79a06545c2d39a6b13e83cfddef5b28c2fa6f7f8836b3ee9086aea6300b1",
+      "item_sha256": "71363f425697b6aafc024612e2a1b7130a12bc3b06e74a707b2eb325bb5ef3b2",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13480,9 +13480,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Бережность и безопасность прямо поддержаны; конкретные процедуры согласия/обезличивания/косвенной идентификации требуют точного источника. Наличие псевдонима само по себе не гарантирует анонимность.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -13493,10 +13493,10 @@
       ]
     },
     "questions:m2_qual_016": {
-      "item_sha256": "7853c0942a776c3e6a57376e085ebfe04d926dff61f15115a21b197771036fb9",
+      "item_sha256": "fd0054cd1f75384822f5cb2efaa58694a9d27164ce0ac41e947e5e6345f7a619",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13508,9 +13508,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "В рассмотренном курсе есть глубокая интерпретация текста, но нет подтверждения конкретной последовательности код—категория—тема. Она зависит от метода анализа и не должна объявляться универсальной.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -13629,10 +13629,10 @@
       ]
     },
     "questions:m2_qual_021": {
-      "item_sha256": "4357956625e4e0d6e25b7933b5a0d7b6c4b01a8950ff26ad65cacf3d865ed5cf",
+      "item_sha256": "ad81b2c73e2839723497bcbe599c39a19da3f810a61ec244039b64e77c8de825",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13644,9 +13644,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Контекст и включённое наблюдение описаны; точная классификация полевых заметок и невключённого наблюдения не подтверждена выбранными фрагментами. Примеры не смешивают запись событий с гипотезой.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -13657,10 +13657,10 @@
       ]
     },
     "questions:m2_qual_022": {
-      "item_sha256": "83647509b6136adb47196b1ad5c7a6758fcecd4328610265a4d04f410f4cf4ec",
+      "item_sha256": "3ec79502bade5bab3a4168e2d841031e4e6d962bd5257cb4e20a7c727d51143a",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13672,9 +13672,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Групповой метод представлен, но конкретные обязанности модератора по очередности/доминированию не подтверждены прямым фрагментом.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -13685,10 +13685,10 @@
       ]
     },
     "questions:m2_qual_023": {
-      "item_sha256": "a9d7390b7e62264e4d724fb19abf51f9e7e16234c5810699a3d6947b99870317",
+      "item_sha256": "fc215397622de579e906c9d21800f6ad2e4284f28b462016bb8c2c5141e8c5dc",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13700,9 +13700,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "В рассмотренном курсе есть глубокая интерпретация текста, но нет подтверждения конкретной последовательности код—категория—тема. Она зависит от метода анализа и не должна объявляться универсальной.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -13791,10 +13791,10 @@
       ]
     },
     "questions:m2_qual_027": {
-      "item_sha256": "ef1c63ebfef1d09867ee55a34c7a051415c0c7aa6d88225a225e7709871b04b2",
+      "item_sha256": "80b4c2a3329f5fc196663815d5a3900793154f078d34e0a954b98f4cf217fa22",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13806,9 +13806,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Бережность и безопасность прямо поддержаны; конкретные процедуры согласия/обезличивания/косвенной идентификации требуют точного источника. Наличие псевдонима само по себе не гарантирует анонимность.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14037,10 +14037,10 @@
       ]
     },
     "questions:m2_qual_036": {
-      "item_sha256": "1b3566e6ee9614033641227aaf5e1e9487fc6888c5886d4bc65d49852fd3ec79",
+      "item_sha256": "5f76d5af75efc6bdf7c47afcaa708af177698dcd9fdab2d83f446db1674a1546",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14052,9 +14052,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Контекст и включённое наблюдение описаны; точная классификация полевых заметок и невключённого наблюдения не подтверждена выбранными фрагментами. Примеры не смешивают запись событий с гипотезой.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14065,10 +14065,10 @@
       ]
     },
     "questions:m2_qual_037": {
-      "item_sha256": "21b6df16d5450d0a5499348110fca012d80403e53e1a0881bf05788b94c92081",
+      "item_sha256": "19b297616c71f1d8c0703c219f6e4e8cd5e3a664d68ef3cafa0ca14a96cd5624",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14080,9 +14080,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Контекст и включённое наблюдение описаны; точная классификация полевых заметок и невключённого наблюдения не подтверждена выбранными фрагментами. Примеры не смешивают запись событий с гипотезой.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14093,10 +14093,10 @@
       ]
     },
     "questions:m2_qual_038": {
-      "item_sha256": "69271cc1888a43624f9d2125e057f2d013fa2a72a5ee4db0ec65c8413f4486df",
+      "item_sha256": "40ba229cf841bf65b90101d424812948e387cf37a3bedd6127b5b66ad1694a4d",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14108,9 +14108,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Групповой метод представлен, но конкретные обязанности модератора по очередности/доминированию не подтверждены прямым фрагментом.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14121,10 +14121,10 @@
       ]
     },
     "questions:m2_qual_039": {
-      "item_sha256": "abd1f39eaa0e7eb9f166885809e6358bd047c66db44928f27db4fbb76473330a",
+      "item_sha256": "9edbc69de05c4b3fc08923d6bbcf7c22c43cebd83c9025eb410fbae2ceff0cf1",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14136,9 +14136,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Бережность и безопасность прямо поддержаны; конкретные процедуры согласия/обезличивания/косвенной идентификации требуют точного источника. Наличие псевдонима само по себе не гарантирует анонимность.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14175,10 +14175,10 @@
       ]
     },
     "questions:m2_qual_041": {
-      "item_sha256": "489966b181817b9d571f9d6dd5de8892825ee5b2a7807aa01a80db61f0ec6c0d",
+      "item_sha256": "bbc852fe66eea5bd09bd2763cde633f98ceac4b03d4a00e7142352a9b1eb7d4d",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14190,9 +14190,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "В рассмотренном курсе есть глубокая интерпретация текста, но нет подтверждения конкретной последовательности код—категория—тема. Она зависит от метода анализа и не должна объявляться универсальной.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14340,10 +14340,10 @@
       ]
     },
     "questions:m2_qual_047": {
-      "item_sha256": "b17be374107d10f64682561d9068584358d39b12328c6eb0de2d8beacf7bdbce",
+      "item_sha256": "488fe2f7aa726e6e19f05badd09494e1092a5af29f429b37357b5dcdcb92640c",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14355,9 +14355,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Бережность и безопасность прямо поддержаны; конкретные процедуры согласия/обезличивания/косвенной идентификации требуют точного источника. Наличие псевдонима само по себе не гарантирует анонимность.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14368,10 +14368,10 @@
       ]
     },
     "questions:m2_qual_048": {
-      "item_sha256": "46910339435f9b6b0d71e3ae532474107fe9e18f56e83b54e3f6ad9958e91fd5",
+      "item_sha256": "183cc2ecce2abc8ba5f186d0a5730acaa725af394756e0cb0f3e79cae03dc4f8",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14383,9 +14383,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Контекст и включённое наблюдение описаны; точная классификация полевых заметок и невключённого наблюдения не подтверждена выбранными фрагментами. Примеры не смешивают запись событий с гипотезой.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14396,10 +14396,10 @@
       ]
     },
     "questions:m2_qual_049": {
-      "item_sha256": "4534266139ce89d7697be095192a396bcdae844affa520f33a507122b0e805a0",
+      "item_sha256": "73a6a705f92cd0ea4af98fee8bad1a46070f6323b45125df56130e0f5df0da5f",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14411,9 +14411,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Контекст и включённое наблюдение описаны; точная классификация полевых заметок и невключённого наблюдения не подтверждена выбранными фрагментами. Примеры не смешивают запись событий с гипотезой.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -14480,10 +14480,10 @@
       ]
     },
     "questions:m2_qual_052": {
-      "item_sha256": "7d160ce600b12cbc175cc7d5ab9c2d7daad31f7f5cc166344fefecae74260b94",
+      "item_sha256": "ee964e8d873ab01e29da85a5ad0e56f816cf4d913b9c447d96caba7653c8867f",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -14495,9 +14495,9 @@
       "meaning": "consistent",
       "source_support": "partial",
       "issues": [
-        "source_support_incomplete"
+        "Указанная редакция практики №12 не подтверждает полный правильный ответ и пояснение; требуется точная сверка с другим материалом учебного корпуса."
       ],
-      "note": "Групповой метод представлен, но конкретные обязанности модератора по очередности/доминированию не подтверждены прямым фрагментом.",
+      "note": "Предыдущее partial review не даёт основания для approved-публикации. Текущая редакция снята с выдачи; ID и история сохранены до точного review или проверенной новой редакции.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
