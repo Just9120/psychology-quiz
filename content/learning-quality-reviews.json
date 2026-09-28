@@ -13294,21 +13294,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны описание наблюдения в контексте, фокус-группы, транскрипции и прозрачности пути интерпретации/переносимости. Переносимость не приравнена к статистической репрезентативности.",
+      "note": "Описание включённого наблюдения показывает, зачем исследователю доступ к повседневным практикам и контексту поведения; это подтверждает ключ и пояснение именно этого вопроса.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 34000:36100"
         }
       ]
     },
     "questions:m2_qual_009": {
-      "item_sha256": "64409f0a73a9a50476666288d19148079e483f5463a0bf68d7734e40e4b4ac86",
+      "item_sha256": "3d7da697913be0ea052f2d3d0655c0493eafaf768953c720707409142fd97b98",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13318,15 +13318,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Прочитаны описание наблюдения в контексте, фокус-группы, транскрипции и прозрачности пути интерпретации/переносимости. Переносимость не приравнена к статистической репрезентативности.",
+      "source_support": "partial",
+      "issues": ["Указанный фрагмент называет фокус-группу групповым интервью для обсуждения темы, но не подтверждает тезис ответа и пояснения о значимости динамики и анализе взаимодействий; материал практики №11 этого тезиса также не содержит."],
+      "note": "Текущая редакция вопроса снята с выдачи до проверки точного подтверждения групповой динамики в другом учебном материале либо новой редакции с приватным review.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:13800"
         }
       ]
     },
@@ -13413,10 +13413,10 @@
       ]
     },
     "questions:m2_qual_013": {
-      "item_sha256": "9ece66744f69e166a4f3a008e5b3aa135f924a6d570e7bb46f932346f2fecb7e",
+      "item_sha256": "46e3546a81ea482806924801a624c2e392162a56ceca7c0630c61dd85482d813",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -13426,15 +13426,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Прочитаны описание наблюдения в контексте, фокус-группы, транскрипции и прозрачности пути интерпретации/переносимости. Переносимость не приравнена к статистической репрезентативности.",
+      "source_support": "partial",
+      "issues": ["Указанный фрагмент обсуждает подтверждаемость (confirmability) и прозрачность исследовательского пути, но не предъявляет достоверность (credibility) как сформулированный в правильном варианте критерий."],
+      "note": "Ключ о прозрачности согласуется с фрагментом; термин в том же варианте требует точного подтверждения другим материалом либо пересмотра ответа. До этого вопрос снят с выдачи.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 92000:95000"
         }
       ]
     },
@@ -13454,13 +13454,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны описание наблюдения в контексте, фокус-группы, транскрипции и прозрачности пути интерпретации/переносимости. Переносимость не приравнена к статистической репрезентативности.",
+      "note": "Фрагмент прямо отличает переносимость качественного результата в сходные контексты от статистической репрезентативности и подчёркивает описание исходного контекста.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 94800:96300"
         }
       ]
     },

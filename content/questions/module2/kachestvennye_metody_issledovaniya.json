@@ -141,7 +141,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/practice11",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Что отличает фокус-группу от индивидуального интервью?",
     "options": [
       "Фокус-группа по сути эквивалентна серии независимых индивидуальных интервью",
@@ -209,7 +209,7 @@
     "category": "Качественные методы исследования",
     "source_ref": "module2/qualitative/lecture1_intro",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой критерий качества ближе к логике качественного исследования, чем классическая статистическая валидность?",
     "options": [
       "Достоверность (credibility) интерпретации и прозрачность аналитического процесса",
