@@ -7767,7 +7767,7 @@
       "item_sha256": "3a60eeaa7516a8304b966ec10a33807746f23b523a7528bf208305719513928b",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -7777,17 +7777,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_claim_partially_supported"
-      ],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает фильтр и ограничение ресурсов, но не связывает фильтрацию с целью деятельности.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Модель раннего фильтра описывает ограничение входящего канала, теория ресурсов — приоритет более важной задачи при ограниченном усилии. Ключ и пояснение применяют это различие без клинического причинного утверждения.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
           "modified_time": "2026-04-20T11:05:23.167Z",
           "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2213:2346, 6248:6426"
         }
       ]
     },
@@ -8126,7 +8124,7 @@
       "item_sha256": "611d17603a22433535141c3afecf11339118a3e7ee9fa96db11e17ee6477950b",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-09-28",
       "checks": [
         "meaning",
         "answer",
@@ -8136,17 +8134,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_claim_partially_supported"
-      ],
-      "note": "Проверены различия фильтрации, ориентирования, исполнительного контроля, автоматизмов, сетей и социального влияния. Пример допускает учебное объяснение, но не доказывает единственную причину поведения. Точечная сверка 27.09.2026: Глоссарий описывает фильтр и ресурс внимания, но не приводит конкретный пример чтения на фоне шума.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "При чтении удержание текста при фоновом шуме является учебным примером приоритета более важной задачи при ограниченном ресурсе и фильтрации конкурирующего сигнала; остальные варианты исключают избирательность или добавляют абсолютные утверждения.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
           "modified_time": "2026-04-20T11:05:23.167Z",
           "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:8564"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2213:2346, 6248:6426"
         }
       ]
     },
