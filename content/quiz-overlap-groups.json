@@ -51,16 +51,6 @@
     {
       "discipline_id": "obschaya_psihologiya",
       "question_ids": [
-        "m1_gp_013",
-        "m1_gp_026",
-        "m1_gp_039",
-        "m1_gp_046",
-        "m1_gp_054"
-      ]
-    },
-    {
-      "discipline_id": "obschaya_psihologiya",
-      "question_ids": [
         "m1_gp_032",
         "m1_gp_045",
         "m1_gp_050"
