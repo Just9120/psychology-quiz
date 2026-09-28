@@ -258,6 +258,13 @@ def test_current_learning_reviews_do_not_use_bibliographies_as_knowledge():
     policy = publication.load_policy()
     quality = json.loads((publication.ROOT / "content" / "learning-quality-reviews.json")
                          .read_text(encoding="utf-8"))["items"]
+    published = set()
+    for kind in ("questions", "glossary"):
+        for path in (publication.ROOT / "content" / kind).rglob("*.json"):
+            for item in json.loads(path.read_text(encoding="utf-8")):
+                if policy.can_publish(kind, item):
+                    published.add(f"{kind}:{item['id']}")
+    assert published <= quality.keys() | policy.certificates.keys()
     for key, review in quality.items():
         if not key.startswith(("questions:", "glossary:")):
             continue
