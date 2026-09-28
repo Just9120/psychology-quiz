@@ -110,17 +110,21 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Текущая редакция вводной лекции подтверждает работу с жизненными трудностями, отношениями и стрессом, но не содержит утверждения о самооценке из explanation. Вопрос и правильный вариант сохраняются; для полного source support нужен отдельный точный источник или редакция пояснения. Сверка Google Docs text 28.09.2026; новый extraction profile имеет иной digest, чем прежний ledger, что само по себе не доказывает изменение документа.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Тема 1 подтверждает психологические и жизненные запросы вне медицинских назначений; тема 6 прямо перечисляет отношения, самооценку и тревожность среди типичных для курса запросов и приводит примеры. Слова о частоте не являются популяционной оценкой. Точные прежние extract SHA-256 обеих текущих Drive revisions воспроизведены 28.09.2026 с BOM и CRLF-разделителем абзацев; публичный вопрос не менялся.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+        },
+        {
+          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
+          "modified_time": "2026-04-05T22:53:25.427Z",
+          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5750:7350"
         }
       ]
     },
@@ -1639,19 +1643,24 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
+      "source_support": "supported",
       "issues": [
         "question_reference_is_not_primary_source",
-        "example_is_question_reference",
-        "source_support_incomplete"
+        "example_is_question_reference"
       ],
-      "note": "Текущая редакция вводной лекции подтверждает жизненные трудности, отношения и стресс, но не содержит утверждения о самооценке из определения. Для полного source support нужен отдельный точный источник или редакция определения. source_refs question: не первичный источник, а example ссылается на ID вопроса вместо самостоятельного примера. Сверка Google Docs text 28.09.2026; новый extraction profile имеет иной digest, чем прежний ledger, без доказательства изменения документа.",
+      "note": "Тема 1 подтверждает жизненные трудности и отношения; тема 6 прямо перечисляет отношения, самооценку и тревожность среди типичных для курса запросов. Точные прежние extract SHA-256 обеих текущих Drive revisions воспроизведены 28.09.2026 с BOM и CRLF-разделителем абзацев. source_refs question: не первичный источник, а example ссылается на ID вопроса вместо самостоятельного примера; публичный термин не менялся.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+        },
+        {
+          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
+          "modified_time": "2026-04-05T22:53:25.427Z",
+          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5750:7350"
         }
       ]
     },
