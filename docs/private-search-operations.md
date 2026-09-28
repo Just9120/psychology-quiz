@@ -174,6 +174,13 @@ docker compose --profile search run --rm psych_quiz_private_search \
   --query 'формулировка учебного вопроса' --limit 5
 ```
 
+`rebuild` использует до 600 секунд на каждый SQL statement; оператор может
+задать `--statement-timeout-seconds` от 30 до 3600 после оценки объёма
+индекса. Это ограничение одного запроса, не обещание длительности всей
+пересборки. Для `search`, `qa`, `rag` и `status` остаётся 30 секунд;
+изменение timeout не обходит проверку manifest, транзакционную замену индекса
+или обязательный retrieval QA.
+
 `qa.json` — приватный файл `schema_version: 1` с 1–20 записями `cases`:
 `query`, ожидаемые `source_id` и `snapshot_sha256`. После rebuild команда
 проверяет первый результат фактического hybrid-поиска и точную редакцию

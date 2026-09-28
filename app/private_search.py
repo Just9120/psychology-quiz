@@ -43,6 +43,9 @@ OVERLAP = 32
 MAX_QUERY = 500
 MAX_RESULTS = 20
 MAX_QA_CASES = 20
+READ_STATEMENT_TIMEOUT_SECONDS = 30
+REBUILD_STATEMENT_TIMEOUT_SECONDS = 600
+MAX_REBUILD_STATEMENT_TIMEOUT_SECONDS = 3600
 SOURCE_ID = re.compile(r"^[A-Za-z0-9_-]{20,}$")
 NOTE_ID = re.compile(r"^[a-z0-9][a-z0-9_-]{0,79}$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
@@ -50,6 +53,20 @@ SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 class SearchError(ValueError):
     pass
+
+
+def statement_timeout_seconds(action: str, requested: int | None) -> int:
+    """Keep reads short while allowing a bounded operator rebuild window."""
+    if action != "rebuild":
+        if requested is not None:
+            raise SearchError("rebuild_timeout_only")
+        return READ_STATEMENT_TIMEOUT_SECONDS
+    if requested is None:
+        return REBUILD_STATEMENT_TIMEOUT_SECONDS
+    if (type(requested) is not int
+            or not READ_STATEMENT_TIMEOUT_SECONDS <= requested <= MAX_REBUILD_STATEMENT_TIMEOUT_SECONDS):
+        raise SearchError("invalid_rebuild_timeout")
+    return requested
 
 
 def private_file(path: Path, root: Path) -> bytes:
@@ -444,8 +461,11 @@ def main(argv=None):
     parser.add_argument("--cases", type=Path)
     parser.add_argument("--query")
     parser.add_argument("--limit", type=int, default=5)
+    parser.add_argument("--statement-timeout-seconds", type=int,
+                        help="operator rebuild only; 30–3600 seconds per SQL statement")
     args = parser.parse_args(argv)
     try:
+        timeout = statement_timeout_seconds(args.action, args.statement_timeout_seconds)
         if args.action == "rag" and os.environ.get("PRIVATE_RAG_ENABLED") != "1":
             raise SearchError("private_rag_disabled")
         if args.action in {"search", "qa", "rag"} and args.manifest is None:
@@ -469,7 +489,8 @@ def main(argv=None):
             identity = conn.execute("SELECT current_database(),current_user,current_setting('server_version')").fetchone()
             if identity[:2] != ("psychology_atlas", "psychology_app") or identity[2].split()[0] != "18.6":
                 raise SearchError("unexpected_private_postgres_identity")
-            conn.execute("SET LOCAL statement_timeout = '30s'")
+            conn.execute("SELECT set_config('statement_timeout', %s, true)",
+                         (f"{timeout}s",))
             if args.action in {"search", "qa", "rag"}:
                 require_current_reviewed_index(conn, args.manifest)
             if args.action == "rebuild":

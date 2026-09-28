@@ -4,7 +4,19 @@ from pathlib import Path
 
 import pytest
 
-from app.private_search import MAX_CHARS, SearchError, capacity_estimate, chunks, load_private_chunks, load_qa_cases, model_probe, require_current_reviewed_index, reviewed_chunks, search, vector_text, verify_retrieval
+from app.private_search import MAX_CHARS, SearchError, capacity_estimate, chunks, load_private_chunks, load_qa_cases, model_probe, require_current_reviewed_index, reviewed_chunks, search, statement_timeout_seconds, vector_text, verify_retrieval
+
+
+def test_operator_rebuild_has_bounded_timeout_without_weakening_reads():
+    assert statement_timeout_seconds("search", None) == 30
+    assert statement_timeout_seconds("qa", None) == 30
+    assert statement_timeout_seconds("rebuild", None) == 600
+    assert statement_timeout_seconds("rebuild", 3600) == 3600
+    for invalid in (0, 29, 3601, True):
+        with pytest.raises(SearchError, match="invalid_rebuild_timeout"):
+            statement_timeout_seconds("rebuild", invalid)
+    with pytest.raises(SearchError, match="rebuild_timeout_only"):
+        statement_timeout_seconds("search", 600)
 
 
 def test_private_search_requires_exact_reviewed_extract_and_preserves_locators(tmp_path):
