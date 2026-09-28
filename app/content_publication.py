@@ -21,6 +21,23 @@ KINDS = {"questions", "glossary", "literature"}
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 DRIVE_REF = re.compile(r"^drive:([A-Za-z0-9_-]+)(?:#.+)?$")
 PUBLIC_DRIVE_LINK = re.compile(r"(?i)(?:drive:|https?://(?:www\.)?(?:drive|docs)\.google\.com/)")
+# Exact editions published through the old repository review path before
+# private publication certificates became mandatory for new questions.
+# This allowlist is frozen: a changed edition must use a private certificate.
+HISTORICAL_DIRECT_REF_SHA256 = {
+    "questions:case_first_consultation_001": "be027c74d060426e0e635e4276a58b7e3a7381faac16fd57468346e217caaf3a",
+    "questions:m1_vnd_002": "9214ba60717588c819ebd0fdea2f93a4069e8d1fed2f74699901710a48b38a01",
+    "questions:m2_exp_001": "7a9a1888f77498a5bb93b1047b8307109930eb62098cb3ae507de3d528cbf769",
+    "questions:m2_exp_012": "58793a62db0d5cac305b1118d24211461627333fafbac865615fb6a2f9a0cb7c",
+    "questions:m2_exp_036": "1016b29d49101acf7a972058bb34691b3ae6c7c927922cc1cd84a876a3e7f3a2",
+    "questions:m2_exp_040": "b33ac9069012c8fb79eaaafc6cc47fabd45d5bc60ce2c71145bc3613732c2dd4",
+    "questions:m2_exp_050": "6c22063738a43ada5cda779474e30c68ef0fd1a07e7d8cc780b7324df421a7a9",
+    "questions:m2_exp_052": "f1c7c12936b70da386807549539bdf07630e7071459d30979986cadc2d86ad17",
+    "questions:m2_exp_053": "91ae5880e7a5306efe221f095ac44ca283e5d12d808d52a52d614b33d26820f3",
+    "questions:m2_exp_054": "7ce1f07ff7c80f18280cad3c573a40bfdfcd51d946f213ba223b0599b6ede387",
+    "questions:m2_exp_058": "1a4434b6c3cdb0a1953b675705e04cf8a3adf3fe3d8f86bf851a0aae7cacde28",
+    "questions:m2_exp_109": "66851265d067e44097a39fbebbddc3a1c7f583747408700ece7a6c5c7a495d28",
+}
 
 
 def fingerprint(item):
@@ -212,6 +229,10 @@ class PublicationPolicy:
             # Approved glossary entries need a signed public projection. The
             # source locators and claim review remain in a private dossier.
             return "private_glossary_source_review_required"
+        if (kind == "questions" and not private_review and "source_ref" in item
+                and HISTORICAL_DIRECT_REF_SHA256.get(f"questions:{item.get('id')}")
+                != fingerprint(item)):
+            return "new_public_question_source_ref_forbidden"
         return None
 
     def can_publish(self, kind, item):
