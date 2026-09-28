@@ -5,6 +5,7 @@ import pytest
 
 from app.source_inventory import InventoryError
 from scripts import source_inventory_report as inventory_report
+from scripts import source_capture, source_finalize
 from scripts.source_inventory_report import main, report
 from tests.test_source_inventory import REVIEW_EVIDENCE, item
 
@@ -38,6 +39,54 @@ def test_private_inventory_report_reconciles_without_exposing_ids(tmp_path, caps
             "application/pdf": {"new_unprocessed": 1, "processed": 1}}
     assert main(["--current", str(current_file), "--require-current-reviewed"]) == 1
     assert "current_review_gate_requires_reviewed" in capsys.readouterr().err
+
+
+def test_changed_source_keeps_derivative_held_until_new_review(tmp_path):
+    current = export(["private"])
+    content = tmp_path / "source.txt"
+    content.write_text("first edition", encoding="utf-8")
+    first = source_capture.capture(current, {}, "private", content, "extracted_text")
+    reviewed = source_finalize.finalize(
+        current, first, "private", content, reviewer="editor",
+        review_note="Checked first edition", reviewed_at="2026-09-26T12:00:00Z",
+        source_kind="learning_material")
+    first_record = reviewed["private"]
+    source = {"id": "private", "kind": "learning_material", "title": "Lesson",
+              "corpus_path": "Lesson", "modified_time": first_record["revision"][0],
+              "snapshot_sha256": first_record["snapshot_sha256"], "readable": True,
+              "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-26",
+              "reviewer": "editor"}
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [source]}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    reviews = {"schema_version": 1, "items": {"questions:example": {
+        "decision": "approved", "sources": [{"source_id": "private",
+            "modified_time": source["modified_time"],
+            "snapshot_sha256": source["snapshot_sha256"]}]}}}
+
+    changed = export(["private"])
+    changed["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-27T00:00:00Z"
+    content.write_text("second edition", encoding="utf-8")
+    pending = source_capture.capture(changed, reviewed, "private", content, "extracted_text")
+    assert pending["private"]["previous_processed_review"] == first_record
+
+    def queued(records):
+        return inventory_report.private_review_queue(
+            inventory_report._snapshot(changed), registry, curriculum,
+            processed=records, reviews=reviews)["files"][0]
+
+    assert queued(pending)["derivative_ids_requiring_review"] == ["questions:example"]
+    completed = source_finalize.finalize(
+        changed, pending, "private", content, reviewer="editor",
+        review_note="Checked changed edition", reviewed_at="2026-09-27T12:00:00Z",
+        source_kind="learning_material")
+    assert queued(completed)["derivative_ids_requiring_review"] == ["questions:example"]
+    source["modified_time"] = completed["private"]["revision"][0]
+    source["snapshot_sha256"] = completed["private"]["snapshot_sha256"]
+    assert queued(completed)["derivative_ids_requiring_review"] == ["questions:example"]
+    reviews["items"]["questions:example"]["sources"][0].update({
+        "modified_time": source["modified_time"],
+        "snapshot_sha256": source["snapshot_sha256"]})
+    assert queued(completed)["derivative_ids_requiring_review"] == []
 
 
 def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path, capsys):
