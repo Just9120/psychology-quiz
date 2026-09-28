@@ -2,6 +2,8 @@
 
 ## Current Goal — LEARNING-FOUNDATION-001
 
+**E07 RAG draft attribution, 28.09.2026:** отключённый operator-only `draft_answer` теперь требует допустимую citation в каждом отдельном предложении; единственная ссылка в первом предложении больше не прикрывает последующий тезис. Адресный `test_private_rag.py`: 4 PASS, 1 Windows symlink skip; проверка говорит только о структуре ссылок, не о фактической поддержке тезисов источником. Модель/VPS, grounding и resource gates D-34 PENDING; AC-SRH-04/05 IN_PROGRESS.
+
 **FND-06 PostgreSQL provenance, 28.09.2026:** preservation manifest отдельно фиксирует SHA-256 `postgres_storage.import_manifest`; проверка после content/schema операций отклоняет изменение или потерю этой записи, допуская старые recovery records без нового поля. Синтетический `test_postgres_recovery_contract.py` 5 PASS; реальная PostgreSQL backup/restore, миграция и user-state post-check остаются PENDING, AC-FND-06 IN_PROGRESS.
 
 **E07 local embedding probe, 28.09.2026:** pinned `fastembed-0.8.0` / mean-pooling модель с revision `faf4aa4225822f3bc6376869cb1164e8e3feedd0` в локальной `.venv` вернула 384-мерный ненулевой вектор; запуск `python -m app.private_search probe` с локальным cache занял 969 ms, cache 252 141 277 bytes. Это один локальный прогон с тёплым cache, не измерение пикового RAM, VPS, PostgreSQL index или качества RAG. Перед включением на VPS остаются тамошние capacity/latency/quality gates D-34; AC-SRH-01–05 не повышены.

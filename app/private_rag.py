@@ -99,5 +99,11 @@ def draft_answer(query: str, results: list[dict], model_call=local_model) -> dic
     cited = {int(number) for number in CITATION.findall(answer)}
     if not cited or not cited.issubset(set(range(1, len(references) + 1))):
         raise RagError("rag_answer_citations_required")
+    # One citation somewhere in a multi-sentence draft must not make later
+    # uncited claims appear grounded. This is still only a structural check;
+    # the operator reviews whether each citation supports the actual claim.
+    sentences = re.split(r"(?<=[.!?;])\s+", answer)
+    if any(sentence.strip() and not CITATION.search(sentence) for sentence in sentences):
+        raise RagError("rag_answer_citations_required")
     return {"answer": answer, "references": references,
             "review_required": True, "abstained": False}

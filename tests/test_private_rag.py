@@ -40,6 +40,9 @@ def test_rag_abstains_without_evidence_or_rejects_fabricated_citations():
         draft_answer("Как начать?", EVIDENCE, lambda _: "Выберите вариант [2].")
     with pytest.raises(RagError, match="citations_required"):
         draft_answer("Как начать?", EVIDENCE, lambda _: "Выберите вариант.")
+    with pytest.raises(RagError, match="citations_required"):
+        draft_answer("Как начать?", EVIDENCE,
+                     lambda _: "Сначала уточните вопрос [1]. Затем поставьте диагноз.")
     with pytest.raises(RagError, match="invalid_retrieval_result"):
         draft_answer("Как начать?", [{"excerpt": "текст"}], lambda _: "[1]")
 
