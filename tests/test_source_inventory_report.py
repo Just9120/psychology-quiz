@@ -91,6 +91,69 @@ def test_private_registry_adds_reviewed_source_without_publishing_id(tmp_path, m
     assert "private_registry_requires_reviewed" in capsys.readouterr().err
 
 
+def test_private_topics_link_unreleased_formats_without_public_ids(tmp_path, monkeypatch, capsys):
+    (tmp_path / "content").mkdir()
+    (tmp_path / "data").mkdir()
+    (tmp_path / ".gitignore").write_text("data/\n", encoding="utf-8")
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, capture_output=True)
+    ids = ("private-lesson-slides-1234567890", "private-lesson-transcript-1234567890")
+    current = export(ids)
+    children = current["folders"]["root"][0]["children"]
+    children[0].update(title="Slides", mime_type="application/pdf")
+    children[1].update(title="Transcript", mime_type="application/vnd.google-apps.document")
+    (tmp_path / "content/source-corpus.json").write_text(json.dumps({
+        "schema_version": 1, "corpus_root_id": "root", "sources": []}), encoding="utf-8")
+    (tmp_path / "content/curriculum.json").write_text(json.dumps({
+        "schema_version": 1, "disciplines": {"psychology": {"title": "Psychology"}},
+        "topics": {}}), encoding="utf-8")
+    sources = [{"id": source_id, "kind": "learning_material", "title": child["title"],
+                "corpus_path": child["title"], "modified_time": child["modified_time"],
+                "snapshot_sha256": "a" * 64, "readable": True,
+                "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-28T00:00:00Z",
+                "reviewer": "editor"} for source_id, child in zip(ids, children)]
+    private_registry = {"schema_version": 1, "corpus_root_id": "root", "sources": sources}
+    topic_id = "t_123456789abc"
+    private_topics = {"schema_version": 1, "corpus_root_id": "root", "topics": {
+        topic_id: {"title": "Practice 2", "discipline_id": "psychology", "source": {
+            "source_id": ids[1], "modified_time": sources[1]["modified_time"],
+            "snapshot_sha256": sources[1]["snapshot_sha256"]}}}}
+    links = [{"source_id": source_id, "lesson_id": topic_id, "topic_id": topic_id,
+              "format": fmt, "revision": [child["modified_time"], child["title"], child["mime_type"]],
+              "corpus_path": child["title"], "reviewer": "editor",
+              "reviewed_at": "2026-09-28T00:00:00Z", "review_note": "Formats matched to one practice"}
+             for source_id, child, fmt in zip(ids, children, ("slides", "transcript"))]
+    paths = {name: tmp_path / "data" / name for name in
+             ("current.json", "registry.json", "topics.json", "links.json")}
+    for name, value in (("current.json", current), ("registry.json", private_registry),
+                        ("topics.json", private_topics), ("links.json", links)):
+        paths[name].write_text(json.dumps(value), encoding="utf-8")
+    monkeypatch.setattr(inventory_report, "REPO_ROOT", tmp_path)
+    args = ["--current", str(paths["current.json"]), "--reviewed",
+            "--private-registry", str(paths["registry.json"]),
+            "--private-topics", str(paths["topics.json"]), "--links", str(paths["links.json"]),
+            "--require-current-reviewed"]
+    assert main(args) == 0
+    output = capsys.readouterr()
+    assert not any(secret in output.out + output.err for secret in (*ids, topic_id))
+    result = json.loads(output.out)
+    assert result["linked_lessons"] == 1
+    assert result["reviewed_graph"]["registered_lesson_edges"] == 1
+    assert result["reviewed_graph"]["reviewed_lesson_edges"] == 0
+    assert result["reviewed_graph"]["private_reviewed_topics"] == 1
+    private_topics["topics"][topic_id]["source"]["source_id"] = "not-in-private-registry"
+    paths["topics.json"].write_text(json.dumps(private_topics), encoding="utf-8")
+    assert main(args) == 1
+    assert "invalid_private_topic" in capsys.readouterr().err
+    private_topics["topics"][topic_id]["source"]["source_id"] = ids[1]
+    private_topics["topics"][topic_id]["source"]["snapshot_sha256"] = "b" * 64
+    paths["topics.json"].write_text(json.dumps(private_topics), encoding="utf-8")
+    assert main(args) == 1
+    assert "invalid_reviewed_lesson" in capsys.readouterr().err
+    assert main(["--current", str(paths["current.json"]), "--reviewed",
+                 "--private-topics", str(paths["topics.json"])]) == 1
+    assert "private_topics_requires_private_registry" in capsys.readouterr().err
+
+
 def test_conflict_holds_derivatives_of_both_related_sources_until_review():
     current = export(["transcript", "slides"])
     sources = [{"id": source_id, "kind": "learning_material", "title": "Lesson",
