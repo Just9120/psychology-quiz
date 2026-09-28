@@ -108,6 +108,7 @@ from app.classic_quiz_handlers import (
     remove_main_menu_for_active_quiz,
     build_question_text_with_options,
     build_classic_next_reply_keyboard,
+    claim_quiz_replacement,
     category_callback,
     classic_reply_text_answer_handler,
     classic_reply_text_next_handler,
@@ -122,6 +123,7 @@ from app.classic_quiz_handlers import (
     question_count_selected_mix_callback,
     quiz_command,
     quiz_mode_callback,
+    quiz_resume_or_replace_callback,
     start_quiz_button_handler,
 )
 
@@ -775,7 +777,8 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             if not question_ids:
                 return {"status": "questions_not_found"}
             user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
-            abandon_in_progress_sessions_for_user(conn, int(user_row["id"]))
+            if not claim_quiz_replacement(conn, int(user_row["id"]), None):
+                return {"status": "active_attempt"}
             session_id = start_quiz_session(conn, int(user_row["id"]), session_category_id, difficulty_mode=difficulty_filter)
             if selected_ids:
                 set_selected_categories_for_session(conn, session_id, selected_ids)
@@ -787,6 +790,9 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     setup_result = await _run_db_task(_handle_webapp_setup)
     if setup_result["status"] == "invalid_payload":
         await message.chat.send_message(_invalid_miniapp_payload_text())
+        return
+    if setup_result["status"] == "active_attempt":
+        await message.chat.send_message("Есть незавершённый квиз. Откройте /quiz для продолжения или подтверждения замены.")
         return
     if setup_result["status"] == "category_unavailable":
         await message.chat.send_message("Выбранная тема больше недоступна. Откройте настройку викторины заново.")
@@ -1035,7 +1041,7 @@ def main() -> None:
     if _classic_reply_mode_enabled(settings):
         application.add_handler(
             MessageHandler(
-                filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(r"^\s*\d+\s*$"),
+                filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(r"(?i)^\s*(?:\d+|не знаю)\s*$"),
                 classic_reply_text_answer_handler,
             )
         )
@@ -1047,7 +1053,7 @@ def main() -> None:
         )
     application.add_handler(
         MessageHandler(
-            filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(r"^\s*\d+\s*$"),
+            filters.ChatType.PRIVATE & filters.TEXT & ~filters.COMMAND & filters.Regex(r"(?i)^\s*(?:\d+|не знаю)\s*$"),
             glossary_reply_text_answer_handler,
         ),
         group=1,
@@ -1075,6 +1081,8 @@ def main() -> None:
     application.add_handler(
         CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|selected_mix|all)$")
     )
+    application.add_handler(CallbackQueryHandler(quiz_resume_or_replace_callback,
+                                                 pattern=r"^quiz(?:resume|replace):\d+$"))
     application.add_handler(CallbackQueryHandler(category_callback, pattern=r"^cat:\d+$"))
     application.add_handler(CallbackQueryHandler(question_count_callback, pattern=r"^qcnt:\d+:(5|10|15|all|choose)$"))
     application.add_handler(
@@ -1102,7 +1110,7 @@ def main() -> None:
             pattern=r"^qmodeselmix:(5|10|15|all|choose):(any|easy|medium|hard)$",
         )
     )
-    application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:\d+$"))
+    application.add_handler(CallbackQueryHandler(answer_callback, pattern=r"^ans:\d+:\d+:(?:\d+|-1)$"))
     application.add_handler(CallbackQueryHandler(next_callback, pattern=r"^next:\d+$"))
     application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data_handler))
 

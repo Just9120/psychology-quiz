@@ -14,12 +14,22 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
     completed = source_finalize.finalize(
         inventory, pending, "private", content,
         reviewer="editor", review_note="Сверены разделы и спорные утверждения",
-        reviewed_at="2026-09-26T12:00:00Z",
+        reviewed_at="2026-09-26T12:00:00Z", source_kind="learning_material",
     )
     assert completed["private"]["snapshot_sha256"] == pending["private"]["snapshot_sha256"]
     assert completed["private"]["review_state"] == "processed"
+    assert completed["private"]["source_kind"] == "learning_material"
+    assert completed["private"]["source_kind_review"]["reviewer"] == "editor"
     assert pending["private"]["review_state"] == "pending_review"
     assert processing_status(source_capture._snapshot(inventory), completed)["private"] == "processed"
+    missing_kind_review = {"private": {key: value for key, value in completed["private"].items()
+                                       if key != "source_kind_review"}}
+    with pytest.raises(InventoryError, match="invalid_reviewed_source_kind"):
+        processing_status(source_capture._snapshot(inventory), missing_kind_review)
+    with pytest.raises(InventoryError, match="invalid_reviewed_source_kind"):
+        source_finalize.finalize(inventory, pending, "private", content,
+                                 reviewer="editor", review_note="review",
+                                 reviewed_at="2026-09-26T12:00:00Z", source_kind="unknown")
 
     content.write_text("Изменённый текст", encoding="utf-8")
     with pytest.raises(InventoryError, match="captured_content_changed"):
@@ -60,4 +70,5 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
         reviewed_at="2026-09-27T12:00:00Z")
     assert resolved["private"]["review_state"] == "processed"
     assert "conflict_hold" not in resolved["private"]
+    assert resolved["private"]["resolved_conflict_hold"] == captured_conflict["private"]["conflict_hold"]
     assert resolved["private"]["conflict_resolution_note"].startswith("Compared")

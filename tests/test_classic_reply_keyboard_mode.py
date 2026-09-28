@@ -352,6 +352,28 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
         self.assertNotIn("Правильный ответ", sent_text)
         self.assertEqual(CLASSIC_REPLY_NEXT_TEXT, sent_markup.keyboard[0][0].text)
 
+    def test_classic_reply_unknown_is_saved_as_gap_not_last_option(self):
+        context = SimpleNamespace(
+            application=SimpleNamespace(bot_data={"settings": self.settings}),
+            user_data={CLASSIC_REPLY_STATE_KEY: self.state},
+        )
+        message = SimpleNamespace(text="не знаю", reply_text=AsyncMock(),
+                                  chat=SimpleNamespace(type="private"))
+        update = SimpleNamespace(message=message, effective_user=self.tg_user)
+
+        async def immediate(func, *args, **kwargs):
+            return func(*args, **kwargs)
+
+        with patch("app.main._run_db_task", side_effect=immediate):
+            asyncio.run(classic_reply_text_answer_handler(update, context))
+
+        with closing(sqlite3.connect(self.db_path)) as conn:
+            saved = conn.execute("SELECT selected_option_index,is_correct FROM quiz_answers").fetchone()
+        self.assertEqual((-1, 0), saved)
+        feedback = message.reply_text.call_args.args[0]
+        self.assertIn("Не знаю", feedback)
+        self.assertIn("Правильный ответ", feedback)
+
     def test_next_text_handling_requires_awaiting_next_state(self):
         next_state = _load_classic_text_next_state(
             self.settings,

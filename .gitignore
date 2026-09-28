@@ -1,6 +1,7 @@
 .env
 .postgres/
 data/
+.private-search/
 __pycache__/
 *.pyc
 .venv/

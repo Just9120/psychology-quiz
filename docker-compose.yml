@@ -50,7 +50,7 @@ services:
 
   psych_quiz_postgres:
     profiles: ["postgres"]
-    image: postgres:18.6-bookworm@sha256:3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650
+    image: pgvector/pgvector:0.8.6-pg18-bookworm@sha256:1d50c689b0a6511b9ea0a15615281c81a59fd04a08eb35057ec8646fb3a2118a
     restart: unless-stopped
     environment:
       POSTGRES_DB: postgres
@@ -68,6 +68,20 @@ services:
       timeout: 5s
       retries: 6
       start_period: 30s
+
+  psych_quiz_private_search:
+    profiles: ["search"]
+    build:
+      context: .
+      dockerfile: Dockerfile.search
+    restart: "no"
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-}
+      SEARCH_MODEL_CACHE: /data/search-model-cache
+      PRIVATE_RAG_ENABLED: "0"
+    volumes:
+      - ./.private-search/input:/data/search-input:ro
+      - ./.private-search/model-cache:/data/search-model-cache
 
 secrets:
   postgres_admin_password:

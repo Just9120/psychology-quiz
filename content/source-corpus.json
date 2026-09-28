@@ -347,6 +347,7 @@
     },
     {
       "id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
+      "discipline_id": "obschaya_psihologiya",
       "title": "Общая психология. Глоссарий",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Общая психология/Общая психология. Глоссарий",
       "kind": "learning_material",
@@ -375,6 +376,7 @@
     },
     {
       "id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+      "discipline_id": "fiziologiya_cheloveka",
       "title": "Физиология человека. Глоссарий",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Физиология человека/Физиология человека. Глоссарий",
       "kind": "learning_material",
@@ -501,6 +503,7 @@
     },
     {
       "id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
+      "discipline_id": "fiziologiya_vnd",
       "title": "Глоссарий основных понятий",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Физиология высшей нервной деятельности/Глоссарий основных понятий",
       "kind": "learning_material",
@@ -543,6 +546,7 @@
     },
     {
       "id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
+      "discipline_id": "psihofiziologiya",
       "title": "Глоссарий основных понятий. Часть 1",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Психофизиология/Глоссарий основных понятий. Часть 1",
       "kind": "learning_material",
@@ -557,6 +561,7 @@
     },
     {
       "id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
+      "discipline_id": "psihofiziologiya",
       "title": "Глоссарий основных понятий.  Часть 2",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Психофизиология/Глоссарий основных понятий.  Часть 2",
       "kind": "learning_material",
@@ -781,6 +786,7 @@
     },
     {
       "id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+      "discipline_id": "psychological_consulting",
       "title": "Глоссарий основных понятий",
       "corpus_path": "Модуль 3. Психологическое консультирование/Психологические консультирование/Глоссарий основных понятий",
       "kind": "learning_material",

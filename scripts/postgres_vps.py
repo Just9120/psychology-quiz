@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.postgres_config import PG_DATABASE, PG_IMAGE, PG_ROLE, PG_SERVICE, private_target
+from app.postgres_config import PG_DATABASE, PG_IMAGE, PG_PREVIOUS_IMAGE, PG_ROLE, PG_SERVICE, private_target
 from scripts.postgres_backup import backup_and_rehearse, file_digest, read_verified_record, sync_directory, write_record
 
 PROJECT = Path("/opt/psychology-quiz")
@@ -106,8 +106,8 @@ def assert_checkout(expected):
 
 
 class Runtime:
-    def __init__(self, revision, *, target_override=None):
-        self.revision, self.target_override = revision, target_override
+    def __init__(self, revision, *, target_override=None, db_image=PG_IMAGE):
+        self.revision, self.target_override, self.db_image = revision, target_override, db_image
         self.owned_restore = set()
 
     def app(self, arguments, *, data=None):
@@ -130,7 +130,10 @@ class Runtime:
         ids = compose(["ps", "--all", "--quiet", service]).decode().split()
         if len(ids) != 1:
             raise OperationError("one_known_container_required")
-        item = json.loads(run(["docker", "inspect", ids[0]]))[0]
+        return self.inspect_owned_container(service, ids[0])
+
+    def inspect_owned_container(self, service, container_id):
+        item = json.loads(run(["docker", "inspect", container_id]))[0]
         labels = item["Config"].get("Labels") or {}
         if labels.get("com.docker.compose.project") != "psychology-quiz" or labels.get("com.docker.compose.service") != service:
             raise OperationError("container_target_mismatch")
@@ -140,6 +143,14 @@ class Runtime:
         for service in SERVICES:
             if self.container(service)["State"]["Running"]:
                 raise OperationError("all_runtime_writers_must_be_stopped")
+
+    def require_stopped_search_worker(self):
+        ids = compose(["--profile", "search", "ps", "--all", "--quiet",
+                       "psych_quiz_private_search"]).decode().split()
+        if len(ids) > 1:
+            raise OperationError("ambiguous_private_search_worker")
+        if ids and self.inspect_owned_container("psych_quiz_private_search", ids[0])["State"]["Running"]:
+            raise OperationError("private_search_worker_must_be_stopped")
 
     def require_running_revision(self):
         for service in SERVICES:
@@ -163,7 +174,7 @@ class Runtime:
 
     def verify_database_container(self):
         item = self.container(PG_SERVICE)
-        if not item["State"]["Running"] or item["Config"]["Image"] != PG_IMAGE:
+        if not item["State"]["Running"] or item["Config"]["Image"] != self.db_image:
             raise OperationError("unexpected_postgres_image_or_state")
         if item["HostConfig"].get("PortBindings"):
             raise OperationError("postgres_host_port_must_not_be_published")
@@ -186,9 +197,23 @@ class Runtime:
         return json.loads(self.app(arguments))
 
     def dump(self, path):
+        # The pgvector schema is a rebuildable operator index. Its extension
+        # cannot be recreated by the app role used for isolated restore, while
+        # all user state lives in public and must remain in the native dump.
+        schemas = self.pg(["psql", "-X", "-qAt", "--username", "postgres",
+                           "--dbname", PG_DATABASE, "--set", "ON_ERROR_STOP=1"],
+                          data=("SELECT string_agg(nspname, ',' ORDER BY nspname) "
+                                "FROM pg_namespace WHERE nspname !~ '^pg_' "
+                                "AND nspname <> 'information_schema';").encode()).decode().strip()
+        if schemas == "private_search,public":
+            if not vector_extension_status(self):
+                raise OperationError("private_search_extension_required_for_backup")
+        elif schemas != "public":
+            raise OperationError("unexpected_postgres_backup_schema")
         with path.open("xb") as output:
             self.pg(["pg_dump", "--username", "postgres", "--dbname", PG_DATABASE,
-                     "--format=custom", "--no-owner", "--no-acl"], output=output)
+                     "--format=custom", "--no-owner", "--no-acl",
+                     "--exclude-schema=private_search", "--exclude-extension=vector"], output=output)
             output.flush()
             os.fsync(output.fileno())
 
@@ -382,6 +407,171 @@ def configured_runtime(revision):
     return runtime, record
 
 
+VECTOR_UPGRADE_FORMAT = "psychology-pgvector-upgrade-v1"
+
+
+def vector_upgrade_path():
+    return STATE / "pgvector-upgrade.json"
+
+
+def vector_extension_status(runtime):
+    query = ("SELECT e.extversion||','||n.nspname||','||pg_get_userbyid(n.nspowner) "
+             "FROM pg_extension e JOIN pg_namespace n ON n.oid=e.extnamespace "
+             "WHERE e.extname='vector';")
+    extension = runtime.pg(["psql", "-X", "-qAt", "--username", "postgres",
+                            "--dbname", PG_DATABASE, "--set", "ON_ERROR_STOP=1"],
+                           data=query.encode()).decode().strip()
+    if extension:
+        if extension != "0.8.6,private_search,psychology_app":
+            raise OperationError("unexpected_vector_extension")
+        return True
+    namespace = runtime.pg(["psql", "-X", "-qAt", "--username", "postgres",
+                            "--dbname", PG_DATABASE, "--set", "ON_ERROR_STOP=1"],
+                           data=b"SELECT count(*) FROM pg_namespace WHERE nspname='private_search';").decode().strip()
+    if namespace != "0":
+        raise OperationError("unexpected_private_search_schema")
+    return False
+
+
+def vector_upgrade_record():
+    path = vector_upgrade_path()
+    if not path.exists() and not path.is_symlink():
+        return None
+    record = json.loads(private_file(path))
+    if (record.get("format") != VECTOR_UPGRADE_FORMAT
+            or record.get("previous_image") != PG_PREVIOUS_IMAGE
+            or record.get("candidate_image") != PG_IMAGE
+            or record.get("phase") not in {"backed_up", "switching", "database_verified", "complete"}):
+        raise OperationError("unknown_vector_upgrade_record")
+    return record
+
+
+def vector_image_state(revision):
+    state = load_state()
+    if state.get("phase") != "complete":
+        raise OperationError("completed_cutover_required_for_vector_upgrade")
+    record = vector_upgrade_record()
+    if record is not None and record.get("cluster") != state.get("cluster"):
+        raise OperationError("vector_upgrade_cluster_record_mismatch")
+    current = Runtime(revision, target_override=app_target())
+    image = current.container(PG_SERVICE)["Config"]["Image"]
+    if image == PG_PREVIOUS_IMAGE:
+        if record is not None and record["phase"] == "complete":
+            raise OperationError("completed_vector_upgrade_image_changed")
+        runtime = Runtime(revision, target_override=app_target(), db_image=PG_PREVIOUS_IMAGE)
+        runtime.verify_database_container()
+        result = "resume" if record is not None else "previous"
+    elif image == PG_IMAGE:
+        current.verify_database_container()
+        if record is None:
+            raise OperationError("unrecorded_vector_image_change")
+        result = "current" if record["phase"] == "complete" else "resume"
+        if result == "current" and not vector_extension_status(current):
+            raise OperationError("vector_extension_missing_after_upgrade")
+        runtime = current
+    else:
+        raise OperationError("unknown_postgres_image")
+    if runtime.identity()["cluster"] != state.get("cluster"):
+        raise OperationError("postgres_cluster_identity_changed")
+    return result
+
+
+def stage_vector_image(revision, *, pull=True):
+    if vector_image_state(revision) not in {"previous", "resume"}:
+        raise OperationError("vector_image_already_active")
+    # A compressed dump, isolated restore and the live cluster must coexist on
+    # the same volume. Recheck after the image pull before stopping writers.
+    database_bytes = Runtime(revision).sql(f"SELECT pg_database_size('{PG_DATABASE}');")
+    if not database_bytes.isdecimal() or int(database_bytes) <= 0:
+        raise OperationError("invalid_postgres_database_size")
+    reserve = max(1024 ** 3, 3 * int(database_bytes))
+    check_space(reserve)
+    candidate = compose(["config", "--images", PG_SERVICE]).decode().split()
+    if candidate != [PG_IMAGE]:
+        raise OperationError("unexpected_vector_compose_image")
+    running_image = Runtime(revision).container(PG_SERVICE)["Config"]["Image"]
+    if running_image == PG_PREVIOUS_IMAGE and pull:
+        run(["docker", "pull", PG_IMAGE], timeout=900)
+    else:
+        run(["docker", "image", "inspect", PG_IMAGE])
+    if run(["docker", "run", "--rm", "--network", "none", "--entrypoint", "id",
+            PG_IMAGE, "-u", "postgres"], timeout=60).strip() != b"999":
+        raise OperationError("unexpected_vector_postgres_uid")
+    version = run(["docker", "run", "--rm", "--network", "none", "--entrypoint", "postgres",
+                   PG_IMAGE, "--version"], timeout=60).decode()
+    if re.search(r"\b18\.6(?:\s|$)", version) is None:
+        raise OperationError("unexpected_vector_postgres_version")
+    run(["docker", "run", "--rm", "--network", "none", "--entrypoint", "sh",
+         PG_IMAGE, "-eu", "-c",
+         "cd /usr/share/postgresql/18/extension && "
+         "test -f vector--0.8.6.sql && "
+         "grep -Eq \"^default_version[[:space:]]*=[[:space:]]*'0[.]8[.]6'[[:space:]]*$\" vector.control"],
+        timeout=60)
+    # The pull consumes disk space. Fail while writers still run, then recheck
+    # inside upgrade_vector_image after they stop and before the native backup.
+    check_space(reserve)
+
+
+def upgrade_vector_image(revision):
+    state = vector_image_state(revision)
+    if state not in {"previous", "resume"}:
+        raise OperationError("vector_upgrade_not_required")
+    old = Runtime(revision, target_override=app_target(), db_image=PG_PREVIOUS_IMAGE)
+    new = Runtime(revision, target_override=app_target())
+    new.require_stopped_writers()
+    new.require_stopped_search_worker()
+    stage_vector_image(revision, pull=False)
+    record = vector_upgrade_record()
+    if record is None:
+        old.verify_database_container()
+        # The image was pulled and checked while application writers ran.
+        if not json.loads(run(["docker", "image", "inspect", PG_IMAGE])):
+            raise OperationError("vector_candidate_image_missing")
+        backup_path = backup(old)
+        backup_record = read_verified_record(backup_path)
+        record = {"format": VECTOR_UPGRADE_FORMAT, "phase": "backed_up",
+                  "revision": revision, "cluster": old.identity()["cluster"],
+                  "previous_image": PG_PREVIOUS_IMAGE, "candidate_image": PG_IMAGE,
+                  "backup_path": str(backup_path), "before": backup_record["before"]}
+        write_record(vector_upgrade_path(), record)
+    if record.get("revision") != revision or record.get("cluster") != load_state().get("cluster"):
+        raise OperationError("vector_upgrade_revision_or_cluster_changed")
+    backup_path = Path(record["backup_path"]).resolve(strict=True)
+    if backup_path.name != "record.json" or not backup_path.is_relative_to(STATE / "backups"):
+        raise OperationError("vector_upgrade_backup_invalid")
+    recovery = read_verified_record(backup_path)
+    if recovery.get("before") != record.get("before") or recovery.get("source") != new.identity():
+        raise OperationError("vector_upgrade_backup_invalid")
+    image = new.container(PG_SERVICE)["Config"]["Image"]
+    if image == PG_PREVIOUS_IMAGE:
+        record["phase"] = "switching"
+        write_record(vector_upgrade_path(), record)
+        compose(["up", "-d", "--no-deps", "--force-recreate", PG_SERVICE], timeout=600)
+    elif image != PG_IMAGE:
+        raise OperationError("unknown_postgres_image")
+    for attempt in range(30):
+        try:
+            new.verify_database_container()
+            break
+        except OperationError:
+            if attempt == 29:
+                raise
+            time.sleep(2)
+    if new.identity()["cluster"] != record["cluster"] or new.manifest() != record["before"]:
+        raise OperationError("vector_upgrade_user_state_mismatch")
+    record["phase"] = "database_verified"
+    write_record(vector_upgrade_path(), record)
+    if not vector_extension_status(new):
+        with (ROOT / "sql/private-search-bootstrap.sql").open("rb") as statement:
+            new.pg(["psql", "-X", "--username", "postgres",
+                    "--dbname", PG_DATABASE, "--set", "ON_ERROR_STOP=1"], input_file=statement)
+    if not vector_extension_status(new) or new.manifest() != record["before"]:
+        raise OperationError("vector_upgrade_postcheck_failed")
+    record["phase"] = "complete"
+    write_record(vector_upgrade_path(), record)
+    return backup_path
+
+
 def backup(runtime):
     size = int(runtime.sql(f"SELECT pg_database_size('{PG_DATABASE}');"))
     check_space(max(1024 ** 3, size * 3))
@@ -526,7 +716,8 @@ def post_checks(runtime):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=("preflight", "prepare", "cutover", "status", "backup", "verify"))
+    parser.add_argument("action", choices=("preflight", "prepare", "cutover", "status", "backup", "verify",
+                                           "image-state", "stage-vector-image", "upgrade-vector-image"))
     parser.add_argument("--expected-sha", required=True)
     parser.add_argument("--record", type=Path)
     parser.add_argument("--lock-held", action="store_true", help="Only deploy.sh with inherited fd 200")
@@ -551,10 +742,22 @@ def main():
             elif args.action == "status":
                 record = load_state()
                 print(json.dumps({key: record.get(key) for key in ("phase", "revision", "cluster", "updated_at", "last_error_type")}, sort_keys=True))
+            elif args.action == "image-state":
+                print(vector_image_state(args.expected_sha))
+            elif args.action == "stage-vector-image":
+                stage_vector_image(args.expected_sha)
+                print("VECTOR_IMAGE_STAGED")
+            elif args.action == "upgrade-vector-image":
+                print(upgrade_vector_image(args.expected_sha))
             else:
                 runtime, record = configured_runtime(args.expected_sha)
                 if record["phase"] != "complete":
                     raise OperationError("completed_cutover_required_for_routine_delivery")
+                upgrade = vector_upgrade_record()
+                if (upgrade is None or upgrade.get("phase") != "complete"
+                        or upgrade.get("cluster") != record.get("cluster")
+                        or not vector_extension_status(runtime)):
+                    raise OperationError("verified_vector_upgrade_required")
                 # The candidate's .env must select this exact private database.
                 if Runtime(args.expected_sha).app(["scripts/deployment_db.py", "backend"]).strip() != b"postgresql":
                     raise OperationError("postgres_runtime_config_required")

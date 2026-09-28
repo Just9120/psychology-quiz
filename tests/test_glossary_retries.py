@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 import pytest
 
 from app import glossary_service as glossary, learning_reset, repetition
+from app.progress_service import overview
 from app.db import get_connection, create_or_load_user
 from app.miniapp_fastapi import create_app
 from tests.test_attempt_content import bank
@@ -47,6 +48,26 @@ def test_repeat_next_preserves_displayed_options_and_scoring(bank, session):
     next_state = call(bank, glossary.advance, sid, step)
     assert next_state['current_question']['step_id'] == 2
     assert call(bank, glossary.advance, sid, step) == next_state
+
+
+def test_unknown_glossary_answer_is_durable_wrong_and_repeatable(bank, session):
+    sid, step = session['session_id'], session['step_id']
+    result = call(bank, glossary.answer, sid, -1, step)
+    assert result['feedback']['selected_option_text'] == 'Не знаю'
+    assert result['feedback']['knowledge_gap'] is True
+    assert result['feedback']['is_correct'] is False
+    assert result['feedback']['correct_option_text']
+    assert call(bank, glossary.answer, sid, -1, step) == result
+    with closing(get_connection(str(bank))) as conn:
+        saved = json.loads(conn.execute('SELECT state FROM glossary_sessions WHERE id=?', (sid,)).fetchone()[0])
+    assert saved['score'] == 0 and saved['answers']['1']['selected'] == -1
+    progress = call(bank, overview)
+    assert progress['summary']['knowledge_gaps'] == 1
+    assert progress['summary']['answered'] == 0  # The quiz subtotal stays distinct.
+    assert progress['glossary'] == {'answered': 1, 'correct': 0, 'accuracy': 0.0,
+                                   'knowledge_gaps': 1}
+    with pytest.raises(glossary.GlossaryError):
+        call(bank, glossary.answer, sid, correct_index(session), step)
 
 
 def test_concurrent_answer_and_next_commit_only_once(bank, session):

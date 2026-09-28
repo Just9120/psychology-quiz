@@ -15,6 +15,8 @@ from app.db import (
     save_quiz_answer,
 )
 
+UNKNOWN_ANSWER = -1
+
 SubmissionStatus = Literal[
     "accepted",
     "duplicate",
@@ -161,7 +163,7 @@ def submit_answer_event(
         )
 
     allowed_options = {int(opt["option_index"]) for opt in get_question_options(conn, question_id, session_id=session_id)}
-    if selected_option_index not in allowed_options:
+    if selected_option_index not in allowed_options and selected_option_index != UNKNOWN_ANSWER:
         return AnswerSubmissionResult(
             status="invalid_option",
             session_id=session_id,

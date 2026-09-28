@@ -63,6 +63,27 @@ def test_curriculum_preserves_editions_and_explicit_unknown_history(bank, mapped
         assert progress.attempt(conn, 1, changed)["items"][0]["curriculum"]["topic_id"] is None
 
 
+def test_unknown_answer_counts_as_topic_gap_and_daily_practice(bank, mapped):
+    with closing(get_connection(str(bank))) as conn, conn:
+        first = record(conn, choices=(-1,))
+        later = record(conn, choices=(0,))
+        foreign = create_or_load_user(conn, 91, None, None, None)["id"]
+        record(conn, actor=foreign, choices=(-1,))
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-20 12:00:00' WHERE session_id=?", (first,))
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-21 12:00:00' WHERE session_id=?", (later,))
+
+        stats = progress.overview(conn, 1)
+        assert stats["summary"]["knowledge_gaps"] == 1
+        assert (stats["summary"]["answered"], stats["summary"]["correct"]) == (2, 1)
+        topic = stats["curriculum"]["disciplines"][0]["topics"][0]
+        assert (topic["answered"], topic["correct"], topic["accuracy"]) == (2, 1, 50.0)
+        assert [(day["day"], day["correct"], day["answered"]) for day in topic["days"]] == [
+            ("2026-09-20", 0, 1), ("2026-09-21", 1, 1),
+        ]
+        assert [item["session_id"] for item in progress.history(conn, 1, scope=topic["scope"])["items"]] == [later, first]
+        assert progress.attempt(conn, 1, first)["items"][0]["selected_option_text"] == "Не знаю"
+
+
 def test_curriculum_filters_paginate_and_keep_full_denominators(bank, mapped):
     with closing(get_connection(str(bank))) as conn, conn:
         sessions = [record(conn, choices=(i % 2,)) for i in range(23)]
@@ -93,7 +114,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
         k: v['title'] for k, v in registry.items() if 'glossary' in v['available_contours']
     }
-    assert registry['cases']['title'] == 'Кейсы' and 'cases' not in catalog['disciplines']
+    assert registry['cases']['title'] == 'Кейс' and 'cases' not in catalog['disciplines']
     with closing(get_connection(str(tmp_path / 'catalog.sqlite3'))) as conn, conn:
         conn.executescript((curriculum.ROOT / 'sql/schema.sql').read_text(encoding='utf-8'))
         migrate_identity_schema(conn)

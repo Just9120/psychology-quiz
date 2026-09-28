@@ -11,7 +11,7 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 from app.payload_validation import is_sqlite_integer
-from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_setup_options, quiz_state, start_prepared_quiz
+from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_setup_options, quiz_state, start_confirmed_quiz
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
@@ -131,10 +131,15 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
                 prepared = prepare_quiz(conn, payload, actor_user_id=actor)
             except QuizSetupError as exc:
                 raise AuthError(str(exc), 400 if str(exc) == "invalid_setup" else 409) from None
-            return {"ok": True, "runner_state": start_prepared_quiz(conn, actor_user_id=actor, prepared=prepared)}, None
+            try:
+                state = start_confirmed_quiz(conn, actor_user_id=actor, prepared=prepared, payload=payload)
+            except QuizSetupError as exc:
+                raise AuthError(str(exc), 400 if str(exc) == "invalid_setup" else 409) from None
+            return {"ok": True, "runner_state": state}, None
         if action == "quiz/answer":
             sid, qid, choice = payload.get("session_id"), payload.get("question_id"), payload.get("selected_option_index")
-            if not (is_sqlite_integer(sid, minimum=1) and is_sqlite_integer(qid, minimum=1) and is_sqlite_integer(choice)):
+            if not (is_sqlite_integer(sid, minimum=1) and is_sqlite_integer(qid, minimum=1)
+                    and (is_sqlite_integer(choice) or type(choice) is int and choice == -1)):
                 raise AuthError("invalid_payload")
             result = answer_quiz(conn, actor_user_id=actor, session_id=sid, question_id=qid, selected_option_index=choice)
             if result["submission_status"] == "forbidden":

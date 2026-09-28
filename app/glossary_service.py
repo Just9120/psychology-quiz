@@ -147,11 +147,12 @@ def answer(conn, actor, sid, selected, step):
     if row['status'] != 'in_progress' or step != value['step'] or step > len(snapshot['questions']):
         raise GlossaryError('glossary_changed')
     question = snapshot['questions'][step - 1]
-    if not 0 <= selected < len(question['options']):
+    if selected != -1 and not 0 <= selected < len(question['options']):
         raise GlossaryError('invalid_glossary_answer', 400)
     correct = question['correct_option_index']
     feedback = {'step_id': step, 'is_correct': selected == correct, 'selected_option_index': selected,
-                'selected_option_text': question['options'][selected], 'correct_option_index': correct,
+                'selected_option_text': 'Не знаю' if selected == -1 else question['options'][selected],
+                'knowledge_gap': selected == -1, 'correct_option_index': correct,
                 'correct_option_text': question['options'][correct], 'explanation': question['entry']['definition'],
                 'answered_count': step, 'total_questions': len(snapshot['questions']), 'has_next': step < len(snapshot['questions'])}
     result = {'state': 'feedback', 'feedback': feedback}

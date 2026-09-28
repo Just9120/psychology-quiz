@@ -50,8 +50,9 @@ def verify_user_state(before: dict, after: dict) -> None:
                 or before_columns[table] != after_columns[table]
                 or before["tables"][table] != after["tables"][table]):
             raise ValueError("PostgreSQL migration changed pre-existing user state")
-        if table in before["sequences"] and after["sequences"][table] < before["sequences"][table]:
-            raise ValueError("PostgreSQL migration lowered a user identity sequence")
+        if table in before["sequences"] and after["sequences"].get(table) != before["sequences"][table]:
+            raise ValueError("PostgreSQL migration changed a user identity sequence")
     for table in after_columns.keys() - before_columns.keys() - REBUILDABLE_TABLES:
-        if after["tables"][table]["rows"] != 0:
+        if (after["tables"][table]["rows"] != 0
+                or after["sequences"].get(table, 0) != 0):
             raise ValueError("New user-state table must be empty during migration")

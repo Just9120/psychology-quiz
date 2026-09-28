@@ -7260,7 +7260,7 @@
       ]
     },
     "glossary:reinforcement": {
-      "item_sha256": "2e11e2c35752352169edc95afc1d3b7f23f9df5bafcb26af254591d2ed7b747b",
+      "item_sha256": "380b1c404da1102dd6d6ab2e6ecb21a2d2640c842a06fdab79437e5419a0e461",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -9583,36 +9583,6 @@
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
         }
       ]
-    },
-    "glossary:dopamine": {
-      "item_sha256": "c67b8b0f90b4c3ccc9fc878365108cfb2531022e19a48296e47096ac5401794a",
-      "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
-      "checks": [
-        "meaning",
-        "definition",
-        "examples",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Исправлена категориальная ошибка: дофамин — медиатор, а не система. Указаны разные пути/функции из лекции, убрано не подтверждённое выбранным фрагментом упоминание ошибки прогноза; дан самостоятельный пример.",
-      "sources": [
-        {
-          "modified_time": "2026-04-16T15:32:40.272Z",
-          "snapshot_sha256": "7ab85f051a13bfe77a5a1bee02e7d634fe899fa2557f288b43e7d8378d6989cf",
-          "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
-          "locator": "characters-2793-3503-and-12400-14300"
-        }
-      ],
-      "resolution": {
-        "action": "FIX",
-        "previous_item_sha256": "dff8086c2bee8f8d74b339ca30ab74b084c2b6ffa5bee24e3414b4a0b689e793"
-      }
     },
     "glossary:noradrenaline": {
       "item_sha256": "2004f9923c09f12f9d3338f9907c74c231b8fe46e71c1042c5af48bde5c43d0b",
@@ -13051,7 +13021,7 @@
       ]
     },
     "glossary:exp_psych_confounding_variable": {
-      "item_sha256": "ee453954717f2df4667ff40ddfb2de9e2bf464f1e2b84669912eb1ddd0ff9d69",
+      "item_sha256": "efbdbd0891eaf5bb5eb291adf1454d552c64a4bcfd5cad08a442b7f413463f50",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -13457,7 +13427,7 @@
       ]
     },
     "questions:m2_qual_011": {
-      "item_sha256": "f71fa9f0539663f174e3a3c5a0b70d7f869de8de443e00ef41fb080ec5ecc9c6",
+      "item_sha256": "8efa79feda9e0b5cb8db9d92ee921e9593a3ccb74649a546558ca39459b7406e",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -13485,7 +13455,7 @@
       ]
     },
     "questions:m2_qual_012": {
-      "item_sha256": "6bfa29037e134f41cebf6dfd3ab3987d8ceea26d3fa7815e24b7164cc724cf2a",
+      "item_sha256": "42ade214d24a9a439aa74b89b17dac16d118b2a5050bcf7d05b58c2a9df247a0",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -13922,7 +13892,7 @@
       "item_sha256": "525ad6528a9c2460776e8ba2d0bd5dc0f54fa1caba24de9e056e647da67afa05",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -13934,13 +13904,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны описание наблюдения в контексте, фокус-группы, транскрипции и прозрачности пути интерпретации/переносимости. Переносимость не приравнена к статистической репрезентативности.",
+      "note": "Повторно сверено по точному raw export Практики №12: подробность описания исследовательского пути и контекста позволяет оценить переносимость, без статистического обобщения на популяцию. Термин thick description в транскрипте не произнесён, но смысл ответа ограничен этим контекстом.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 25000:25900, 94000:97000"
         }
       ]
     },
@@ -14252,7 +14222,7 @@
       "item_sha256": "4d38c93cadffa6c44da947c3bfc9c68e3293038223a33f0d3e9f4c92ff78a38d",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -14264,13 +14234,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны описание наблюдения в контексте, фокус-группы, транскрипции и прозрачности пути интерпретации/переносимости. Переносимость не приравнена к статистической репрезентативности.",
+      "note": "Повторно сверено по точному raw export Практики №12: при транскрипции названы паузы, повторный старт фразы, оговорки и неверные склонения как возможные значимые особенности речи.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 35900:37400"
         }
       ]
     },
@@ -14611,7 +14581,7 @@
       "item_sha256": "706ae518a254ff0f699805757314b85c0d3f7e236480232baf89bb2f77d50edd",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -14623,13 +14593,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны описание наблюдения в контексте, фокус-группы, транскрипции и прозрачности пути интерпретации/переносимости. Переносимость не приравнена к статистической репрезентативности.",
+      "note": "Повторно сверено по точному raw export Практики №12: переносимость на иной контекст явно противопоставлена репрезентативности количественной выборки.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 94700:96900"
         }
       ]
     },
@@ -14676,7 +14646,7 @@
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
         }
       ],
-      "item_sha256": "bed33825f66d93f2c340d12fbc76ad036e6ed6b6ac1c8adca7ab0dd79a137acf",
+      "item_sha256": "98b0e902a8f5b66d93fb544ebce5e3f709cff0c2e0b0ac1ef774702bcaba9c8d",
       "checks": [
         "meaning",
         "definition",
@@ -14704,7 +14674,7 @@
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
         }
       ],
-      "item_sha256": "720a8fb8a66ef87d349bd982df87f4fc63c3a83c4e00c6f4c132e2c6baed75b7",
+      "item_sha256": "47ecd9db61faea41a97b5d833b00bdb21c4318140a43a71b777914331fcb42da",
       "checks": [
         "meaning",
         "definition",
@@ -18257,10 +18227,10 @@
       ]
     },
     "questions:case_first_consultation_001": {
-      "item_sha256": "1c935c0a6d004d22683fb97a9264b23b7ce661e6056ed32e8e40c847fa08ee71",
+      "item_sha256": "be027c74d060426e0e635e4276a58b7e3a7381faac16fd57468346e217caaf3a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-25",
+      "reviewed_at": "2026-09-27",
       "checks": [
         "meaning",
         "answer",
@@ -18272,7 +18242,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторская вымышленная ситуация: при неясном запросе и отсутствии описанной срочной опасности первым шагом является прояснение контекста, ожиданий и цели. Совет об увольнении, выбор техники и диагноз третьему лицу не обоснованы этими данными. Все четыре варианта разобраны; при новой информации последовательность может измениться. Учебный принцип первой встречи сопоставлен с указанным фрагментом исходного материала; clinical/SME certification не заявлена.",
+      "note": "Авторская вымышленная ситуация: при неясном запросе и отсутствии описанной срочной опасности первым шагом является прояснение контекста, ожиданий и цели. Совет об увольнении, выбор техники и диагноз третьему лицу не обоснованы этими данными. Все четыре варианта разобраны; при новой информации последовательность может измениться. Учебный принцип первой встречи сопоставлен с указанным фрагментом исходного материала; clinical/SME certification не заявлена. 27.09 изменено только название категории «Кейсы» → «Кейс»; смысл, ответ, варианты и источник сохранены, старые snapshots не переписаны.",
       "sources": [
         {
           "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",

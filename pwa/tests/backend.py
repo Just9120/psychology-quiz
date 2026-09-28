@@ -87,7 +87,7 @@ def main():
                              "question": "Что означает учебный термин?", "explanation": "Учебное определение термина.",
                              "options": ["Учебное определение", "Случайный ответ", "Неизвестно", "Другое"],
                              "correct_option_index": 0},
-                            {"id": "synthetic-case", "category": "Кейсы", "kind": "case",
+                            {"id": "synthetic-case", "category": "Кейс", "kind": "case",
                              "source_ref": "synthetic", "difficulty": "easy", "status": "approved",
                              "question": "Какой первый шаг уместен?", "explanation": "Сначала уточняют запрос.",
                              "options": ["Уточнить запрос", "Дать диагноз", "Сразу выбрать метод", "Прервать встречу"],

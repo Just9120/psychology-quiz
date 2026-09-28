@@ -1,4 +1,5 @@
 from contextlib import closing
+import json
 from types import SimpleNamespace
 
 from app.db import get_connection, upsert_approved_questions
@@ -25,13 +26,27 @@ def test_shared_glossary_actor_and_web_auth_guards(web):
     started = post(web, 'glossary/setup', payload, csrf=csrf)
     assert started.status_code == 200 and started.headers['cache-control'] == 'no-store'
     q = started.json()['glossary_state']['current_question']
+    private_ref = 'drive:synthetic-private-glossary-source'
+    with closing(get_connection(str(web.db))) as conn, conn:
+        row = conn.execute('SELECT snapshot FROM glossary_sessions WHERE id=?', (q['session_id'],)).fetchone()
+        snapshot = json.loads(row['snapshot'])
+        snapshot['questions'][0]['entry']['source_refs'] = [private_ref]
+        conn.execute('UPDATE glossary_sessions SET snapshot=? WHERE id=?',
+                     (json.dumps(snapshot), q['session_id']))
     headers = {'Authorization': 'tma ' + _make_init_data(TOKEN, {'id':42})}
     other = {'Authorization': 'tma ' + _make_init_data(TOKEN, {'id':99})}
+    for response in (web.client.get('/web/glossary/state'),
+                     web.client.post('/miniapp/answer', headers=headers,
+                                     json={'mode':'glossary','action':'state'})):
+        assert response.status_code == 200
+        assert private_ref not in response.text
     submit = {'mode':'glossary', 'action':'answer', 'session_id':q['session_id'], 'step_id':1, 'selected_option_index':0}
     assert web.client.post('/miniapp/answer', headers=other, json=submit).status_code == 409
     answer = web.client.post('/miniapp/answer', headers=headers, json=submit)
     assert answer.status_code == 200
+    assert private_ref not in answer.text
     restored = web.client.get('/web/glossary/state').json()['glossary_state']
+    assert private_ref not in json.dumps(restored)
     assert restored['feedback'] == answer.json()['glossary_state']['feedback']
     assert restored['current_question'] == q
     assert post(web, 'glossary/answer', submit, csrf=csrf).json()['glossary_state'] == answer.json()['glossary_state']
@@ -39,6 +54,7 @@ def test_shared_glossary_actor_and_web_auth_guards(web):
     assert before['glossary_answers'] == 1
     advanced = post(web, 'glossary/next', {'session_id':q['session_id'],'step_id':1}, csrf=csrf)
     assert advanced.status_code == 200
+    assert private_ref not in advanced.text
     saved = web.client.post('/miniapp/answer', headers=headers, json={'mode':'glossary','action':'state'}).json()['glossary_state']
     assert saved == advanced.json()['glossary_state']
     with closing(get_connection(str(web.db))) as conn:

@@ -47,10 +47,10 @@ it('does not allow zero weekly target and saves a positive one', async () => {
 
 it('offers the standalone Cases topic and adaptive selection', async () => {
   const start = vi.fn(), user = userEvent.setup()
-  render(<QuizSetup options={{ categories: [{ id: 9, name: 'Кейсы' }], question_count_choices: [5], difficulty_choices: ['any'], content_kind_choices: ['theory', 'glossary', 'case'] }} busy={false} hasAttempt={false} onStart={start} onResume={vi.fn()} />)
+  render(<QuizSetup options={{ categories: [{ id: 9, name: 'Кейсы' }], question_count_choices: [5], difficulty_choices: ['any'], content_kind_choices: ['theory', 'glossary', 'case'] }} busy={false} activeSessionId={null} onStart={start} onResume={vi.fn()} />)
   await user.click(screen.getByRole('button', { name: 'Адаптивный' }))
   await user.click(screen.getByRole('button', { name: /Начать квиз/ }))
-  expect(start).toHaveBeenCalledWith(expect.objectContaining({ quiz_mode: 'adaptive', category_ids: [], content_kinds: ['theory', 'glossary', 'case'] }))
+  expect(start).toHaveBeenCalledWith(expect.objectContaining({ quiz_mode: 'adaptive', category_ids: [], content_kinds: ['theory', 'glossary', 'case'] }), false)
 })
 
 it('explains every case alternative after an answer', () => {

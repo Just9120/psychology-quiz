@@ -12,6 +12,26 @@ const initial: GlossaryState = { state: 'in_progress', session_id: 'one', topic_
 const topics = [{ topic_id: 'memory', title: 'Память', available_count: 5 }]
 const run = async (operation: () => Promise<void>) => { try { await operation() } catch { /* App shows an error. */ } }
 
+it('submits an explicit knowledge gap and shows the saved definition', async () => {
+  const user = userEvent.setup()
+  const answer = vi.spyOn(api, 'glossaryAnswer').mockResolvedValue({ ok: true, glossary_state: {
+    state: 'feedback', feedback: {
+      step_id: 1, is_correct: false, selected_option_index: -1,
+      selected_option_text: 'Не знаю', correct_option_index: 0,
+      correct_option_text: 'Восстановление материала', explanation: 'Проверенное объяснение',
+      answered_count: 1, total_questions: 5, has_next: true,
+    },
+  } })
+  render(<GlossaryView initial={initial} topics={topics} busy={false} run={run} />)
+  expect(answer).not.toHaveBeenCalled()
+  await user.click(screen.getByRole('button', { name: 'Не знаю' }))
+  expect(answer).toHaveBeenCalledExactlyOnceWith('one', 1, -1)
+  expect(screen.getByText('Восстановление материала')).toBeVisible()
+  expect(screen.getByText('Проверенное объяснение')).toBeVisible()
+  expect(screen.getByText('Ответ сохранён · 1 из 5')).toBeVisible()
+  vi.restoreAllMocks()
+})
+
 it('locks a lost answer to the original choice and resumes persisted feedback', async () => {
   const user = userEvent.setup()
   const answer = vi.spyOn(api, 'glossaryAnswer').mockRejectedValueOnce(new ApiError('network')).mockResolvedValue({ ok: true, glossary_state: { state: 'feedback', feedback: { step_id: 1, is_correct: true, selected_option_index: 0, selected_option_text: 'Восстановление материала', correct_option_index: 0, correct_option_text: 'Восстановление материала', explanation: 'Объяснение', answered_count: 1, total_questions: 5, has_next: true } } })

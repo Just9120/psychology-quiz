@@ -4,7 +4,8 @@ from urllib.parse import quote, urlsplit
 PG_SERVICE = "psych_quiz_postgres"
 PG_DATABASE = "psychology_atlas"
 PG_ROLE = "psychology_app"
-PG_IMAGE = "postgres:18.6-bookworm@sha256:3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650"
+PG_PREVIOUS_IMAGE = "postgres:18.6-bookworm@sha256:3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650"
+PG_IMAGE = "pgvector/pgvector:0.8.6-pg18-bookworm@sha256:1d50c689b0a6511b9ea0a15615281c81a59fd04a08eb35057ec8646fb3a2118a"
 
 
 def private_target(password: str, *, database: str = PG_DATABASE) -> str:

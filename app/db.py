@@ -3,11 +3,13 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import json
+import random
 from typing import Any
 
 from app.attempt_content import capture_question, ensure_attempt_snapshots, get_attempt_content
 from app.case_content import case_error
 from app.database import Connection, Row, begin_write, connect_database, is_postgres, timestamp_sql
+from app.quiz_overlap import balanced_diverse_first, diverse_first
 
 
 SESSION_QUESTION_LIMIT = 10
@@ -417,18 +419,14 @@ def select_random_approved_question_ids_by_category(
         params.append(normalized_difficulty_mode)
 
     query = f"""
-        SELECT q.id
+        SELECT q.id,q.external_id
         FROM questions q
         WHERE {where_clause}
         ORDER BY RANDOM()
     """
 
-    if limit is not None:
-        query += "\nLIMIT ?"
-        params.append(limit)
-
     rows = conn.execute(query, params).fetchall()
-    return [int(row["id"]) for row in rows]
+    return diverse_first([(int(row["id"]), str(row["external_id"])) for row in rows], limit)
 
 
 def select_random_approved_question_ids_across_active_categories(
@@ -444,7 +442,7 @@ def select_random_approved_question_ids_across_active_categories(
         params.append(normalized_difficulty_mode)
 
     query = f"""
-        SELECT q.id
+        SELECT q.id,q.external_id
         FROM questions q
         INNER JOIN categories c ON c.id = q.category_id
         WHERE {where_clause}
@@ -457,12 +455,8 @@ def select_random_approved_question_ids_across_active_categories(
         ORDER BY RANDOM()
     """
 
-    if limit is not None:
-        query += "\nLIMIT ?"
-        params.append(limit)
-
     rows = conn.execute(query, params).fetchall()
-    return [int(row["id"]) for row in rows]
+    return diverse_first([(int(row["id"]), str(row["external_id"])) for row in rows], limit)
 
 
 def select_random_approved_question_ids_by_categories(
@@ -482,19 +476,20 @@ def select_random_approved_question_ids_by_categories(
         where_clause += " AND q.difficulty = ?"
         params.append(normalized_difficulty_mode)
 
-    query = f"""
-        SELECT q.id
+    # Shuffle inside each selected topic, then deal one question per topic in
+    # rounds. A global random LIMIT can hide smaller selected topics entirely.
+    rows = conn.execute(f"""
+        SELECT q.id, q.category_id, q.external_id
         FROM questions q
         WHERE {where_clause}
         ORDER BY RANDOM()
-    """
-
-    if limit is not None:
-        query += "\nLIMIT ?"
-        params.append(limit)
-
-    rows = conn.execute(query, params).fetchall()
-    return [int(row["id"]) for row in rows]
+    """, params).fetchall()
+    order = list(dict.fromkeys(category_ids))
+    random.shuffle(order)
+    buckets: dict[int, list[tuple[int, str]]] = {category_id: [] for category_id in order}
+    for row in rows:
+        buckets[int(row["category_id"])].append((int(row["id"]), str(row["external_id"])))
+    return balanced_diverse_first(buckets, order, limit)
 
 
 def store_session_questions(conn: Connection, session_id: int, question_ids: list[int]) -> None:
@@ -584,9 +579,9 @@ def save_quiz_answer(
 
     option_row = next((option for option in get_question_options(conn, question_id, session_id=session_id)
                        if option["option_index"] == selected_option_index), None)
-    if option_row is None:
+    if option_row is None and selected_option_index != -1:
         raise ValueError("Invalid attempt question/option")
-    is_correct = int(option_row["is_correct"])
+    is_correct = int(option_row["is_correct"]) if option_row is not None else 0
 
     inserted = conn.execute(
         """

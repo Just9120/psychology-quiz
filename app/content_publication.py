@@ -7,7 +7,10 @@ import json
 from pathlib import Path
 import re
 
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+
 from app.case_content import case_error
+from app.publication_certificate import certificate_error
 from app.source_evidence import locator_precision_review_required
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -65,11 +68,13 @@ class PublicationPolicy:
     sources: dict
     reviews: dict
     quality_reviews: dict | None = None
+    certificates: dict | None = None
+    certificate_key: Ed25519PublicKey | None = None
 
     def is_legacy(self, kind, item):
         return self.legacy.get(f"{kind}:{item.get('id')}") == fingerprint(item)
 
-    def error(self, kind, item):
+    def error(self, kind, item, *, private_review=False):
         if kind not in KINDS:
             return "unknown_derivative_kind"
         if item.get("status") == "approved" and _public_text_contains_private_source(kind, item, self.sources):
@@ -90,6 +95,8 @@ class PublicationPolicy:
                         or not isinstance(quality.get("sources"), list)
                         or not quality["sources"]):
                     return "legacy_source_review_required"
+                if item.get("status") == "approved" and quality.get("source_support") == "disputed":
+                    return "legacy_disputed_source_review"
                 for ref in quality["sources"]:
                     if not isinstance(ref, dict) or not _text(ref.get("source_id")):
                         return "legacy_source_review_required"
@@ -103,6 +110,15 @@ class PublicationPolicy:
             return None
         if item.get("status") != "approved":
             return None  # Preparation is permitted; the loader does not publish it.
+        certificate = (self.certificates or {}).get(f"{kind}:{item.get('id')}")
+        if certificate is not None:
+            if "source_ref" in item or "source_refs" in item:
+                return "mixed_public_private_source_review"
+            if "source" in item and (kind != "literature" or not isinstance(item["source"], dict)
+                                     or set(item["source"]) - {"title", "locator", "citation"}):
+                return "private_source_in_public_content"
+            return certificate_error(kind, item, certificate, self.certificate_key,
+                                     item_sha256=fingerprint(item))
         review = self.reviews.get(f"{kind}:{item.get('id')}")
         if not isinstance(review, dict) or review.get("decision") != "approved":
             return "repository_review_required"
@@ -181,6 +197,10 @@ class PublicationPolicy:
                     return "learning_quality_source_stale"
                 if locator_precision_review_required(ref["locator"]):
                     return "learning_quality_locator_needs_precision"
+        if kind == "glossary" and not private_review:
+            # Approved glossary entries need a signed public projection. The
+            # source locators and claim review remain in a private dossier.
+            return "private_glossary_source_review_required"
         return None
 
     def can_publish(self, kind, item):
@@ -216,7 +236,23 @@ def load_policy():
                 or SHA256.fullmatch(source["snapshot_sha256"]) is None):
             raise ValueError("Incomplete corpus source review")
         sources[source["id"]] = source
-    return PublicationPolicy(legacy, sources, reviews["items"], quality["items"])
+    certificate_path = ROOT / "content/publication-certificates.json"
+    certificates = {}
+    certificate_key = None
+    if certificate_path.exists():
+        certificate_file = json.loads(certificate_path.read_text(encoding="utf-8"))
+        if (not isinstance(certificate_file, dict)
+                or certificate_file.get("schema_version") != 1
+                or not isinstance(certificate_file.get("items"), dict)):
+            raise ValueError("Invalid publication certificates")
+        certificates = certificate_file["items"]
+        if certificates:
+            key_hex = (ROOT / "content/publication-review-public-key.hex").read_text(encoding="ascii").strip()
+            if re.fullmatch(r"[0-9a-f]{64}", key_hex) is None:
+                raise ValueError("Invalid publication review public key")
+            certificate_key = Ed25519PublicKey.from_public_bytes(bytes.fromhex(key_hex))
+    return PublicationPolicy(legacy, sources, reviews["items"], quality["items"],
+                             certificates, certificate_key)
 
 
 def validate_publications(kind):

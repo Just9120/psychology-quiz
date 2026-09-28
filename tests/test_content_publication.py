@@ -55,12 +55,28 @@ def test_read_bibliography_supports_only_its_catalog_metadata():
     assert not policy.can_publish("glossary", item)
 
 
-@pytest.mark.parametrize("kind", ["questions", "glossary"])
-def test_exact_review_of_readable_learning_material_allows_publication(kind):
+def test_exact_review_of_readable_learning_material_allows_question_publication():
+    kind = "questions"
     item, _, _, policy = reviewed(kind)
     assert policy.can_publish(kind, item)
     # Content fingerprints ignore JSON formatting/key order, not content changes.
     assert policy.can_publish(kind, dict(reversed(list(item.items()))))
+
+
+def test_new_glossary_item_cannot_publish_a_direct_drive_reference():
+    item, _, _, policy = reviewed("glossary")
+    assert policy.error("glossary", item) == "private_glossary_source_review_required"
+    assert not policy.can_publish("glossary", item)
+
+
+def test_existing_dopamine_glossary_uses_private_certificate():
+    item = next(item for item in json.loads(
+        (publication.ROOT / "content/glossary/psihofiziologiya.json").read_text(encoding="utf-8"))
+        if item["id"] == "dopamine")
+    policy = publication.load_policy()
+    assert policy.can_publish("glossary", item)
+    assert "source_refs" not in item
+    assert policy.certificates["glossary:dopamine"]["item_sha256"] == publication.fingerprint(item)
 
 
 @pytest.mark.parametrize("explanation", [None, "", "  "])
@@ -121,6 +137,16 @@ def test_frozen_legacy_learning_item_stops_when_source_evidence_is_stale(kind, f
         del policy.sources["fixture"]
         expected = "legacy_source_review_required"
     assert policy.error(kind, item) == expected
+    assert not policy.can_publish(kind, item)
+
+
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
+def test_frozen_legacy_learning_item_with_disputed_source_cannot_publish(kind):
+    item, _, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    policy.quality_reviews[f"{kind}:fixture"]["source_support"] = "disputed"
+
+    assert policy.error(kind, item) == "legacy_disputed_source_review"
     assert not policy.can_publish(kind, item)
 
 

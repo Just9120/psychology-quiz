@@ -251,6 +251,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
             self.assertIsNone(re.fullmatch(pattern, callback), callback)
 
     def test_invalid_glossary_reply_numbers_are_rejected(self):
+        self.assertEqual(-1, parse_glossary_reply_answer_number(" Не знаю ", 4))
         self.assertIsNone(parse_glossary_reply_answer_number("", 4))
         self.assertIsNone(parse_glossary_reply_answer_number("abc", 4))
         self.assertIsNone(parse_glossary_reply_answer_number("0", 4))

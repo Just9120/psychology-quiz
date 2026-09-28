@@ -168,11 +168,11 @@ test('glossary replacement needs confirmation and topic reset preserves another 
   await page.getByRole('radio').first().check()
   await page.getByRole('button', { name: 'Проверить определение' }).click()
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
-  await page.getByRole('button', { name: 'Сбросить учебный прогресс' }).click()
+  await openResetSettings(page)
   await page.getByRole('combobox').selectOption('topic:Общая психология')
   await page.getByRole('button', { name: 'Отмена', exact: true }).click()
   expect((await (await page.request.get('/web/glossary/state')).json()).glossary_state.state).toBe('feedback')
-  await page.getByRole('button', { name: 'Сбросить учебный прогресс' }).click()
+  await openResetSettings(page)
   await page.getByRole('combobox').selectOption('topic:Общая психология')
   await page.getByRole('checkbox').check()
   await page.getByRole('button', { name: 'Подтвердить сброс' }).click()
@@ -191,11 +191,12 @@ test('reset previews, cancels, clears one historical topic then all, and survive
   }
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
   await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
-  await page.getByRole('button', { name: 'Сбросить учебный прогресс' }).click()
+  await openResetSettings(page)
   await expect(page.getByRole('button', { name: 'Подтвердить сброс' })).toBeDisabled()
   await page.getByRole('button', { name: 'Отмена', exact: true }).click()
+  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
   await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
-  await page.getByRole('button', { name: 'Сбросить учебный прогресс' }).click()
+  await openResetSettings(page)
   await page.getByRole('combobox').selectOption('topic:Основы психологии')
   await expect(page.getByText(/Ответы других тем/)).toBeVisible()
   await page.getByRole('checkbox').check()
@@ -207,11 +208,11 @@ test('reset previews, cancels, clears one historical topic then all, and survive
   await page.reload()
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
   await expect(page.getByText('2 из 2 ответов', { exact: true })).toBeVisible()
-  await page.getByRole('button', { name: 'Сбросить учебный прогресс' }).click()
+  await openResetSettings(page)
   await page.getByRole('checkbox').check()
   await page.getByRole('button', { name: 'Подтвердить сброс' }).click()
-  await expect(page.getByText('История начинается с первого ответа')).toBeVisible()
-  await page.getByRole('button', { name: 'Сбросить учебный прогресс' }).click()
+  await expect(page.getByRole('heading', { name: 'История квизов начинается с первого ответа' })).toBeVisible()
+  await openResetSettings(page)
   await expect(page.getByText('В выбранном разделе нет попыток для сброса.')).toBeVisible()
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })
@@ -222,7 +223,7 @@ test('stale reset and lost response require a new preview without deleting new l
   await page.getByRole('radio', { name: 'Только скорость' }).check()
   await page.getByRole('button', { name: 'Проверить ответ' }).click()
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
-  await page.getByRole('button', { name: 'Сбросить учебный прогресс' }).click()
+  await openResetSettings(page)
   await page.getByRole('checkbox').check()
   const state = await (await page.request.get('/web/quiz/state')).json()
   const question = state.runner_state.current_question
@@ -240,6 +241,7 @@ test('stale reset and lost response require a new preview without deleting new l
   await expect(page.getByRole('checkbox')).not.toBeChecked()
   await expect(page.getByRole('button', { name: 'Подтвердить сброс' })).toBeDisabled()
   await page.getByRole('button', { name: 'Отмена', exact: true }).click()
+  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
   await expect(page.getByText('Всего попыток: 1')).toBeVisible()
 })
 
@@ -263,6 +265,12 @@ async function fresh(page: Page) {
   await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
 }
 
+async function openResetSettings(page: Page) {
+  await page.getByRole('button', { name: 'Мой аккаунт' }).click()
+  await expect(page.getByRole('heading', { name: 'Настройки учебного прогресса' })).toBeVisible()
+  await page.getByRole('button', { name: 'Настроить сброс' }).click()
+}
+
 async function start(page: Page) {
   await page.getByRole('radio', { name: 'Основы психологии' }).check()
   await page.getByRole('button', { name: '5', exact: true }).click()
@@ -275,7 +283,7 @@ test('published theory, term and case work together and each kind can be selecte
   await fresh(page)
   await page.getByRole('button', { name: 'Все темы' }).click()
   await page.getByText('Дополнительные настройки').click()
-  for (const kind of ['Теория', 'Термины', 'Кейсы']) {
+  for (const kind of ['Теория', 'Термины', 'Кейс']) {
     await expect(page.getByRole('group', { name: 'Виды заданий' }).getByRole('checkbox', { name: kind, exact: true })).toBeChecked()
   }
   await page.getByRole('button', { name: '5', exact: true }).click()
@@ -296,11 +304,11 @@ test('published theory, term and case work together and each kind can be selecte
   expect((await (await page.request.get('/web/progress/overview')).json()).summary.answered).toBe(5)
 
   for (const [label, expected] of [['Термины', 'Что означает учебный термин?'],
-                                   ['Кейсы', 'Вымышленный клиент впервые описывает запрос.']] as const) {
+                                   ['Кейс', 'Вымышленный клиент впервые описывает запрос.']] as const) {
     await page.getByRole('button', { name: 'Выбрать следующий квиз' }).click()
     await page.getByRole('button', { name: 'Все темы' }).click()
     await page.getByText('Дополнительные настройки').click()
-    for (const kind of ['Теория', 'Термины', 'Кейсы']) {
+    for (const kind of ['Теория', 'Термины', 'Кейс']) {
       if (kind !== label) await page.getByRole('group', { name: 'Виды заданий' }).getByRole('checkbox', { name: kind, exact: true }).uncheck()
     }
     await page.getByRole('button', { name: 'Все', exact: true }).click()
@@ -308,8 +316,15 @@ test('published theory, term and case work together and each kind can be selecte
     await expect(page.locator('.question-heading')).toContainText(expected)
     const state = (await (await page.request.get('/web/quiz/state')).json()).runner_state
     expect(state.progress.total_questions).toBe(1)
-    await page.getByRole('radio').first().check()
-    await page.getByRole('button', { name: 'Проверить ответ' }).click()
+    if (label === 'Кейс') {
+      await page.getByRole('button', { name: 'Не знаю' }).click()
+      await expect(page.getByRole('status')).toContainText('Пробел знаний сохранён')
+      await expect(page.getByText('Правильный ответ')).toBeVisible()
+      await expect(page.getByRole('heading', { name: 'Разбор кейса' })).toBeVisible()
+    } else {
+      await page.getByRole('radio').first().check()
+      await page.getByRole('button', { name: 'Проверить ответ' }).click()
+    }
     await page.getByRole('button', { name: 'Посмотреть результат' }).click()
   }
 })

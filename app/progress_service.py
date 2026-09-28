@@ -5,6 +5,7 @@ payloads never accept an actor. All detail pages expose answered questions only.
 """
 from __future__ import annotations
 
+import json
 import random
 from datetime import datetime, timezone
 
@@ -47,6 +48,35 @@ def overview(conn, actor: int) -> dict:
                    JOIN quiz_session_questions sq ON sq.session_id=a.session_id AND sq.question_id=a.question_id
                    WHERE s.user_id=?"""
     summary = conn.execute(f"SELECT count(*),sum(is_correct) FROM ({evidence}) evidence", (actor,)).fetchone()
+    quiz_gaps = conn.execute("""SELECT count(*) FROM quiz_sessions s JOIN quiz_answers a ON a.session_id=s.id
+                                   WHERE s.user_id=? AND a.selected_option_index=-1""", (actor,)).fetchone()[0]
+    glossary_answered = glossary_correct = glossary_gaps = 0
+    glossary_distinct_ids = set()
+    for row in conn.execute("SELECT snapshot,state FROM glossary_sessions WHERE user_id=?", (actor,)):
+        snapshot, state = json.loads(row[0]), json.loads(row[1])
+        for step, answer in state.get("answers", {}).items():
+            response = answer.get("response") if isinstance(answer, dict) else None
+            feedback = response.get("feedback") if isinstance(response, dict) else None
+            if not isinstance(feedback, dict):
+                continue
+            if type(feedback.get("is_correct")) is not bool:
+                continue
+            try:
+                entry = snapshot["questions"][int(step) - 1]["entry"]
+                if int(step) < 1 or not entry["topic_id"] or not entry["id"]:
+                    continue
+            except (IndexError, KeyError, TypeError, ValueError):
+                continue
+            glossary_distinct_ids.add(f"glossary:{entry['topic_id']}:{entry['id']}")
+            glossary_answered += 1
+            glossary_correct += int(feedback["is_correct"])
+            glossary_gaps += answer.get("selected") == -1
+    distinct_ids = {str(row[0]) for row in conn.execute("""SELECT DISTINCT q.external_id
+        FROM quiz_sessions s JOIN quiz_answers a ON a.session_id=s.id
+        JOIN questions q ON q.id=a.question_id WHERE s.user_id=?""", (actor,))}
+    glossary_history = repetition.glossary_history(conn, actor)
+    distinct_ids.update(glossary_distinct_ids)
+    distinct_questions = len(distinct_ids)
     attempts = conn.execute("""SELECT count(*),sum(CASE WHEN status='finished' THEN 1 ELSE 0 END)
                                 FROM quiz_sessions WHERE user_id=?""", (actor,)).fetchone()
     topics = [{"topic": row[0], **counts(row[1], row[2]), "days": []} for row in conn.execute(
@@ -63,9 +93,30 @@ def overview(conn, actor: int) -> dict:
         SELECT day,count(*),sum(is_correct) FROM ({evidence}) evidence
         GROUP BY day ORDER BY day DESC LIMIT ?""", (actor, DAY_COUNT))]
     topics.sort(key=lambda item: (item["accuracy"], -item["answered"], item["topic"]))
-    return {"ok": True, "summary": {**counts(*summary), "attempts": int(attempts[0]),
+    recommendations = {"eligible": distinct_questions >= 50, "distinct_questions": distinct_questions,
+                       "items": []}
+    if recommendations["eligible"]:
+        weak_topics = {item["topic"]: {"answered": item["answered"], "correct": item["correct"]}
+                       for item in topics}
+        for record in glossary_history.values():
+            for event, ref in zip(record["events"], record["answer_refs"]):
+                if ref[0] != "glossary":
+                    continue  # Projected glossary answers already appear in quiz topics.
+                aggregate = weak_topics.setdefault(record["topic"], {"answered": 0, "correct": 0})
+                aggregate["answered"] += 1
+                aggregate["correct"] += int(event[1])
+        recommendations["items"] = [
+            {"topic": title, "answered": item["answered"],
+             "accuracy": round(100 * item["correct"] / item["answered"], 1),
+             "reason": "Есть неверные ответы — вернитесь к этой теме"}
+            for title, item in sorted(weak_topics.items(),
+                key=lambda pair: (pair[1]["correct"] / pair[1]["answered"], -pair[1]["answered"], pair[0]))
+            if item["answered"] and item["correct"] < item["answered"]
+        ][:3]
+    return {"ok": True, "summary": {**counts(*summary), "knowledge_gaps": int(quiz_gaps) + glossary_gaps, "attempts": int(attempts[0]),
             "finished": int(attempts[1] or 0)}, "topics": topics, "days": list(reversed(days)),
-            "curriculum": curriculum.overview(conn, actor)}
+            "glossary": {**counts(glossary_answered, glossary_correct), "knowledge_gaps": glossary_gaps},
+            "curriculum": curriculum.overview(conn, actor), "recommendations": recommendations}
 
 
 def _session(row) -> dict:
@@ -109,7 +160,8 @@ def answer_detail(conn, row) -> dict:
     return {"answer_id": row["id"], "question_id": row["question_id"], "session_id": row["session_id"],
             "answered_at": row["answered_at"], "is_correct": bool(row["is_correct"]),
             "question_text": content["question_text"], "topic": content["category"],
-            "selected_option_text": selected, "correct_option_text": correct,
+            "selected_option_text": "Не знаю" if row["selected_option_index"] == -1 else selected,
+            "knowledge_gap": row["selected_option_index"] == -1, "correct_option_text": correct,
             "explanation": content["explanation"], "snapshot_provenance": content["snapshot_provenance"],
             "content_sha256": content["content_sha256"], "curriculum": curriculum.classification(content)}
 

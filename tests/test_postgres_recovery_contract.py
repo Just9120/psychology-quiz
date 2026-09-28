@@ -28,12 +28,30 @@ def test_preserves_any_existing_runtime_table_and_allows_content_rebuild():
     after["tables"]["future_user_state"]["rows"] = 1
     with pytest.raises(ValueError, match="must be empty"):
         verify_user_state(before, after)
+    after["tables"]["future_user_state"]["rows"] = 0
+    after["sequences"]["future_user_state"] = 1
+    with pytest.raises(ValueError, match="must be empty"):
+        verify_user_state(before, after)
 
     existing = deepcopy(after)
     existing["tables"]["future_user_state"]["rows"] = 0
+    existing["sequences"]["future_user_state"] = 0
     changed = deepcopy(existing)
     changed["tables"]["future_user_state"] = {"rows": 1, "sha256": "changed"}
     with pytest.raises(ValueError, match="pre-existing user state"):
         verify_user_state(existing, changed)
     with pytest.raises(ValueError, match="pre-existing user state"):
         verify_user_state(existing, before)
+
+
+@pytest.mark.parametrize("sequence", [0, 2, None])
+def test_content_rebuild_cannot_change_preexisting_user_identity_sequence(sequence):
+    before = _manifest()
+    after = deepcopy(before)
+    after["sequences"]["questions"] = 9  # Content identity may be rebuilt.
+    if sequence is None:
+        del after["sequences"]["users"]
+    else:
+        after["sequences"]["users"] = sequence
+    with pytest.raises(ValueError, match="changed a user identity sequence"):
+        verify_user_state(before, after)

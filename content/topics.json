@@ -111,7 +111,7 @@
   },
   {
     "id": "cases",
-    "title": "Кейсы",
+    "title": "Кейс",
     "module": "module3",
     "question_file": "content/questions/module3/cases.json",
     "status": "active",

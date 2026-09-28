@@ -12,6 +12,7 @@ from typing import Any
 from app.attempt_content import get_attempt_content
 from app.literature import load_topic_registry
 from app.payload_validation import valid_quiz_setup
+from app.quiz_overlap import balanced_kinds_diverse_first
 from app.repetition import adaptive_questions
 from app.db import (
     abandon_in_progress_sessions_for_user, get_active_categories,
@@ -20,7 +21,7 @@ from app.db import (
     select_random_approved_question_ids_by_category, set_selected_categories_for_session,
     start_quiz_session, store_session_questions, finalize_quiz_session,
 )
-from app.quiz_runner import build_runner_state, submit_answer_event
+from app.quiz_runner import UNKNOWN_ANSWER, build_runner_state, submit_answer_event
 
 
 class QuizSetupError(ValueError):
@@ -69,7 +70,7 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
         raise QuizSetupError("invalid_setup")
     mode, count = payload["quiz_mode"], payload["question_count"]
     kinds = payload.get("content_kinds")
-    pool_limit = None if kinds is not None or mode == "adaptive" else count
+    pool_limit = None if kinds is not None or mode in {"adaptive", "selected_mix"} else count
     difficulty = None if payload["difficulty"] == "any" else payload["difficulty"]
     category_id, selected = None, ()
     if mode == "single":
@@ -90,19 +91,32 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
     else:
         questions = select_random_approved_question_ids_across_active_categories(conn, pool_limit, difficulty)
     kind_by_id = {}
-    if kinds is not None and questions:
-        requested = set(kinds)
+    metadata_by_id = {}
+    if questions and (kinds is not None or (mode == "selected_mix" and count is not None)):
         ids = sorted(set(questions))
-        kind_by_id = {int(row[0]): row[1] for row in conn.execute(
-            f"SELECT id,kind FROM questions WHERE id IN ({','.join('?' for _ in ids)})", ids)}
-        questions = [question_id for question_id in questions if kind_by_id.get(question_id) in requested]
+        metadata_by_id = {int(row[0]): (int(row[1]), str(row[2]), str(row[3]))
+                          for row in conn.execute(
+            f"SELECT id,category_id,external_id,kind FROM questions WHERE id IN ({','.join('?' for _ in ids)})", ids)}
+        kind_by_id = {question_id: row[2] for question_id, row in metadata_by_id.items()}
+        if kinds is not None:
+            requested = set(kinds)
+            questions = [question_id for question_id in questions if kind_by_id.get(question_id) in requested]
     if mode == "adaptive":
         candidates = questions
         questions = adaptive_questions(conn, actor_user_id, questions, count)
         if kinds is not None and count is not None:
             questions = _include_available_kinds(candidates, questions, kind_by_id, kinds, count)
+    elif mode == "selected_mix" and count is not None:
+        questions = balanced_kinds_diverse_first(
+            [(qid, metadata_by_id[qid][1], metadata_by_id[qid][0], metadata_by_id[qid][2])
+             for qid in questions], list(dict.fromkeys(category_ids)), kinds or [], count)
     elif kinds is not None and count is not None:
-        questions = _include_available_kinds(questions, questions[:count], kind_by_id, kinds, count)
+        # Single-topic and bank-wide finite quizzes also need the conceptual
+        # overlap gate after kind filtering; one synthetic bucket preserves
+        # their random order without imposing a topic quota.
+        questions = balanced_kinds_diverse_first(
+            [(qid, metadata_by_id[qid][1], 0, metadata_by_id[qid][2])
+             for qid in questions], [0], kinds, count)
     if not questions:
         raise QuizSetupError("no_questions")
     return PreparedQuiz(category_id, selected, difficulty, tuple(questions))
@@ -117,6 +131,22 @@ def start_prepared_quiz(conn, *, actor_user_id: int, prepared: PreparedQuiz) -> 
         set_selected_categories_for_session(conn, session_id, list(prepared.selected_ids))
     store_session_questions(conn, session_id, list(prepared.question_ids))
     return build_runner_state(conn, actor_user_id=actor_user_id, session_id=session_id)
+
+
+def start_confirmed_quiz(conn, *, actor_user_id: int, prepared: PreparedQuiz, payload: dict) -> dict:
+    """Compare the active attempt under the actor lock before replacing it."""
+    replace = payload.get("replace_active", False)
+    expected = payload.get("expected_session_id")
+    if type(replace) is not bool or (expected is not None and (type(expected) is not int or expected < 1)):
+        raise QuizSetupError("invalid_setup")
+    begin_write(conn, f"actor:{actor_user_id}")
+    active = conn.execute("""SELECT id FROM quiz_sessions WHERE user_id=? AND status='in_progress'
+                             ORDER BY id DESC LIMIT 1""", (actor_user_id,)).fetchone()
+    if active is not None and (not replace or expected != int(active[0])):
+        raise QuizSetupError("active_attempt_confirmation_required")
+    if replace and (active is None or expected != int(active[0])):
+        raise QuizSetupError("attempt_changed")
+    return start_prepared_quiz(conn, actor_user_id=actor_user_id, prepared=prepared)
 
 
 def quiz_setup_options(conn) -> dict:
@@ -248,7 +278,8 @@ def build_answer_feedback(conn, session_id: int, question_id: int, selected_opti
     correct = next((opt for opt in options if opt["is_correct"]), None)
     feedback = {
         "selected_option_index": selected_option_index,
-        "selected_option_text": selected["option_text"] if selected else None,
+        "selected_option_text": "Не знаю" if selected_option_index == UNKNOWN_ANSWER else selected["option_text"] if selected else None,
+        "knowledge_gap": selected_option_index == UNKNOWN_ANSWER,
         "is_correct": bool(is_correct),
         "correct_option_index": correct["option_index"] if correct else None,
         "correct_option_text": correct["option_text"] if correct else None,

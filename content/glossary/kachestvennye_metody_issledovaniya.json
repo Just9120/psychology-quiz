@@ -40,7 +40,7 @@
       "supplied_snippet:practice12:reflection_dialogue"
     ],
     "difficulty": "medium",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "qual_methods_focus_group",
@@ -61,7 +61,7 @@
       "supplied_snippet:practice12:focus_group"
     ],
     "difficulty": "medium",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "qual_methods_artifact",

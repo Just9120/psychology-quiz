@@ -18,6 +18,24 @@ class InventoryError(ValueError):
     pass
 
 
+def combine_registries(public: dict, private: dict) -> dict:
+    """Extend an operator review without replacing a public source record."""
+    if (not isinstance(public, dict) or not isinstance(public.get("sources"), list)
+            or not isinstance(private, dict)
+            or set(private) != {"schema_version", "corpus_root_id", "sources"}
+            or private["schema_version"] != 1
+            or not isinstance(private["sources"], list)
+            or private["corpus_root_id"] != public.get("corpus_root_id")):
+        raise InventoryError("private_registry_root_mismatch")
+    public_ids = [item.get("id") for item in public["sources"] if isinstance(item, dict)]
+    private_ids = [item.get("id") for item in private["sources"] if isinstance(item, dict)]
+    if (len(public_ids) != len(public["sources"]) or len(private_ids) != len(private["sources"])
+            or any(not isinstance(value, str) or not value for value in public_ids + private_ids)
+            or len(set(public_ids + private_ids)) != len(public_ids) + len(private_ids)):
+        raise InventoryError("duplicate_or_invalid_private_source")
+    return {**public, "sources": [*public["sources"], *private["sources"]]}
+
+
 def complete_listing(pages: list[dict]) -> dict:
     """Join one folder's direct-child pages only when the token chain ends.
 
@@ -155,6 +173,27 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
                     or not record["review_note"].strip()
                     or not valid_review_timestamp(record.get("reviewed_at"))):
                 raise InventoryError("unverified_processing_record")
+            profile = record.get("extraction_profile")
+            if profile is not None and (
+                    record.get("snapshot_kind") != "extracted_text"
+                    or not isinstance(profile, str)
+                    or re.fullmatch(r"[a-z0-9][a-z0-9._-]{0,63}", profile) is None):
+                raise InventoryError("invalid_extraction_profile")
+            source_kind = record.get("source_kind")
+            if source_kind is not None and (
+                    state != "processed"
+                    or not isinstance(source_kind, str)
+                    or source_kind not in {"learning_material", "bibliography"}):
+                raise InventoryError("invalid_reviewed_source_kind")
+            if source_kind is not None:
+                kind_review = record.get("source_kind_review")
+                if (not isinstance(kind_review, dict)
+                        or not isinstance(kind_review.get("reviewer"), str)
+                        or not kind_review["reviewer"].strip()
+                        or not isinstance(kind_review.get("note"), str)
+                        or not kind_review["note"].strip()
+                        or not valid_review_timestamp(kind_review.get("reviewed_at"))):
+                    raise InventoryError("invalid_reviewed_source_kind")
             if state == "conflict" and (not isinstance(record.get("reason"), str)
                                          or not record["reason"].strip()):
                 raise InventoryError("invalid_processing_record")
@@ -178,6 +217,31 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
             else:
                 result[file_id] = "pending_review"
     return result
+
+
+def unresolved_related_conflicts(processed: dict[str, dict]) -> set[str]:
+    """Sources held by another review cannot be approved as independent evidence."""
+    if not isinstance(processed, dict):
+        raise InventoryError("invalid_processing_record")
+    related_conflicts = set()
+    for record in processed.values():
+        if not isinstance(record, dict):
+            raise InventoryError("invalid_processing_record")
+        state = record.get("review_state")
+        if state == "conflict":
+            related = record.get("related_source_ids", [])
+        elif state == "pending_review" and "conflict_hold" in record:
+            hold = record["conflict_hold"]
+            if not isinstance(hold, dict):
+                raise InventoryError("invalid_processing_record")
+            related = hold.get("related_source_ids", [])
+        else:
+            continue
+        if (not isinstance(related, list)
+                or any(not isinstance(source_id, str) or not source_id for source_id in related)):
+            raise InventoryError("invalid_processing_record")
+        related_conflicts.update(related)
+    return related_conflicts
 
 
 def link_lessons(snapshot: dict, links: list[dict], *, curriculum_topics: dict | None = None) -> dict:
@@ -244,6 +308,30 @@ def format_variant_candidates(snapshot: dict) -> list[dict]:
     return sorted(candidates, key=lambda item: (item["parent_path"], item["normalized_stem"]))
 
 
+def cross_folder_title_review_candidates(snapshot: dict) -> list[dict]:
+    """Flag same-titled distinct files in different folders; never infer a link."""
+    groups: dict[str, dict[str, set[tuple[str, ...]]]] = {}
+    for file_id, item in snapshot["files"].items():
+        title = item["title"]
+        if item["mime_type"] == "application/pdf" and title.lower().endswith(".pdf"):
+            title = title[:-4]
+        elif (item["mime_type"] ==
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              and title.lower().endswith(".docx")):
+            title = title[:-5]
+        stem = " ".join(unicodedata.normalize("NFKC", title).casefold().split())
+        parents = {tuple(path[:-1]) for path in snapshot["paths"][file_id]}
+        groups.setdefault(stem, {})[file_id] = parents
+    candidates = []
+    for stem, files in groups.items():
+        if len(files) < 2 or len(set().union(*files.values())) < 2:
+            continue
+        candidates.append({"normalized_stem": stem, "file_ids": sorted(files),
+                           "parent_paths": [list(path) for path in
+                                            sorted(set().union(*files.values()))]})
+    return sorted(candidates, key=lambda item: item["normalized_stem"])
+
+
 def mixed_format_folder_review_candidates(snapshot: dict) -> list[dict]:
     """Queue small nested folders with mixed formats for human review only.
 
@@ -258,14 +346,28 @@ def mixed_format_folder_review_candidates(snapshot: dict) -> list[dict]:
                 folders.setdefault(parent, set()).add(file_id)
     candidates = []
     for parent, ids in folders.items():
-        if not 2 <= len(ids) <= 5:
+        # A practical lesson in the current corpus can contain six separate
+        # handouts. Keep it in the review queue without treating the folder
+        # as proof that those files form one approved lesson.
+        if not 2 <= len(ids) <= 6:
             continue
         formats = {snapshot["files"][file_id]["mime_type"] for file_id in ids}
         if len(formats) < 2 or any(
                 other != parent and other[:len(parent)] == parent for other in folders):
             continue
+        # Practice folders can contain homework from the preceding session.
+        # The number is only a review hint, never an inferred lesson link.
+        parent_number = re.search(r"практик[а-я]*\s*№?\s*(\d{1,3})\b", parent[-1], re.I)
+        different_practice_number_file_ids = []
+        if parent_number:
+            for file_id in sorted(ids):
+                title = snapshot["files"][file_id]["title"]
+                file_number = re.search(r"практик[а-я]*\s*№?\s*(\d{1,3})\b", title, re.I)
+                if file_number and file_number.group(1) != parent_number.group(1):
+                    different_practice_number_file_ids.append(file_id)
         candidates.append({"parent_path": list(parent), "file_ids": sorted(ids),
-                           "mime_types": sorted(formats)})
+                           "mime_types": sorted(formats),
+                           "different_practice_number_file_ids": different_practice_number_file_ids})
     return sorted(candidates, key=lambda item: item["parent_path"])
 
 
@@ -318,11 +420,18 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
         ref = topic["source"]
         source = sources.get(ref.get("source_id"))
         if (source is None or source["kind"] != "learning_material"
+                or source.get("discipline_id") is not None
                 or ref.get("modified_time") != source["modified_time"]
                 or ref.get("snapshot_sha256") != source["snapshot_sha256"]):
             raise InventoryError("invalid_reviewed_lesson")
         linked_ids[source["id"]] += 1
         link_states[states[source["id"]]] += 1
+    discipline_sources = [source for source in sources.values()
+                          if source.get("discipline_id") is not None]
+    if any(source["kind"] != "learning_material"
+           or source["discipline_id"] not in curriculum["disciplines"]
+           for source in discipline_sources):
+        raise InventoryError("invalid_reviewed_discipline_source")
     return {
         "tracked_sources": len(sources),
         "source_kinds": dict(sorted(Counter(source["kind"] for source in sources.values()).items())),
@@ -333,8 +442,11 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
         "lesson_metadata": dict(sorted(link_states.items())),
         "unique_lesson_files": len(linked_ids),
         "multi_lesson_files": sum(count > 1 for count in linked_ids.values()),
+        "reviewed_discipline_sources": len(discipline_sources),
         "reviewed_learning_without_lesson": sum(source["kind"] == "learning_material" and
-                                                source["id"] not in linked_ids for source in sources.values()),
+                                                source["id"] not in linked_ids and
+                                                source.get("discipline_id") is None
+                                                for source in sources.values()),
     }
 
 
@@ -443,28 +555,9 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     for topic_id, topic in curriculum["topics"].items():
         topics.setdefault(topic["source"]["source_id"], []).append(topic_id)
     processing = processing_status(snapshot, processed) if processed is not None else None
-    related_conflicts = set()
-    if processing is not None:
-        for file_id in processing:
-            record = processed.get(file_id)
-            if not isinstance(record, dict):
-                continue
-            # A newer Drive revision does not by itself resolve the earlier
-            # disagreement. Hold both sides until an explicit review replaces
-            # the conflict record.
-            hold = record.get("conflict_hold") if record.get("review_state") == "pending_review" else None
-            if record.get("review_state") == "conflict":
-                related = record.get("related_source_ids", [])
-            elif isinstance(hold, dict):
-                related = hold.get("related_source_ids", [])
-            elif hold is not None:
-                raise InventoryError("invalid_processing_record")
-            else:
-                continue
-            if (not isinstance(related, list)
-                    or any(not isinstance(source_id, str) or not source_id for source_id in related)):
-                raise InventoryError("invalid_processing_record")
-            related_conflicts.update(related)
+    # A newer Drive revision does not resolve an earlier disagreement. Hold
+    # both sides until an explicit review replaces the conflict record.
+    related_conflicts = unresolved_related_conflicts(processed) if processing is not None else set()
     changes = reconcile(previous, snapshot) if previous is not None else None
     changed = ({file_id: name for name, ids in changes.items() for file_id in ids}
                if changes is not None else {})
@@ -544,6 +637,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     for variant in variants:
         linked = [lesson_ids_by_file.get(file_id, set()) for file_id in variant["file_ids"]]
         variant["link_state"] = "linked" if linked and set.intersection(*linked) else "candidate"
+    cross_folder_reviews = cross_folder_title_review_candidates(snapshot)
     folder_reviews = mixed_format_folder_review_candidates(snapshot)
     for folder in folder_reviews:
         linked = [lesson_ids_by_file.get(file_id, set()) for file_id in folder["file_ids"]]
@@ -553,4 +647,5 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
             "missing_untracked_files": missing_untracked,
             "unmapped_legacy_derivative_ids": sorted(unmapped_legacy_derivatives or []),
             "format_variant_candidates": variants,
+            "cross_folder_title_review_candidates": cross_folder_reviews,
             "mixed_format_folder_review_candidates": folder_reviews}

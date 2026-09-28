@@ -11,8 +11,9 @@ from typing import Any
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from app.content_publication import validate_publications
+from app.content_publication import load_policy, validate_publications
 from app.case_content import case_error
+from app.quiz_overlap import memberships
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TOPICS_PATH = REPO_ROOT / "content" / "topics.json"
@@ -50,6 +51,7 @@ def load_active_question_topics() -> list[dict[str, Any]]:
 def validate() -> list[str]:
     errors: list[str] = []
     seen_ids: dict[str, str] = {}
+    approved_ids: set[str] = set()
     seen_questions: dict[str, str] = {}
 
     try:
@@ -80,12 +82,22 @@ def validate() -> list[str]:
             if not isinstance(question, dict):
                 errors.append(f"{label}: question must be an object")
                 continue
-            missing = [field for field in REQUIRED_FIELDS if field not in question]
+            status = str(question.get("status", "")).strip()
+            qid = str(question.get("id", "")).strip()
+            signed_private = False
+            if status == "approved" and "source_ref" not in question and qid:
+                try:
+                    policy = load_policy()
+                    signed_private = (f"questions:{qid}" in (policy.certificates or {})
+                                      and policy.can_publish("questions", question))
+                except (OSError, ValueError, KeyError, TypeError):
+                    pass
+            missing = [field for field in REQUIRED_FIELDS
+                       if field not in question and not (field == "source_ref" and
+                            (signed_private or status != "approved"))]
             if missing:
                 errors.append(f"{label}: missing required fields: {', '.join(sorted(missing))}")
 
-            status = str(question.get("status", "")).strip()
-            qid = str(question.get("id", "")).strip()
             if not qid:
                 errors.append(f"{label}: id must be present and non-empty")
             elif qid in seen_ids:
@@ -95,6 +107,7 @@ def validate() -> list[str]:
 
             if status != "approved":
                 continue
+            approved_ids.add(qid)
 
             invalid_case = case_error(question)
             if invalid_case:
@@ -115,7 +128,7 @@ def validate() -> list[str]:
                 errors.append(f"{label}: approved explanation must be a non-empty string")
 
             source_ref = question.get("source_ref")
-            if not isinstance(source_ref, str) or not source_ref.strip():
+            if (not isinstance(source_ref, str) or not source_ref.strip()) and not signed_private:
                 errors.append(f"{label}: approved source_ref must be a non-empty string")
 
             difficulty = question.get("difficulty")
@@ -151,6 +164,13 @@ def validate() -> list[str]:
                 if normalized_options.count(correct_norm) != 1:
                     errors.append(f"{label}: correct option must appear exactly once after normalization")
 
+    try:
+        missing = sorted(set(memberships()) - approved_ids)
+        if missing:
+            errors.append("Quiz overlap groups reference non-approved question IDs: "
+                          + ", ".join(missing))
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        errors.append(f"Invalid quiz overlap groups: {exc}")
     return errors
 
 

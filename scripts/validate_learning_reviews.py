@@ -13,7 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from app.content_publication import SHA256, fingerprint
+from app.content_publication import SHA256, fingerprint, load_policy
 
 
 def inventory(root=ROOT):
@@ -28,12 +28,16 @@ def inventory(root=ROOT):
     return items
 
 
-def validate(ledger, items, sources):
+def validate(ledger, items, sources, policy=None):
     errors = []
     if not isinstance(ledger, dict) or ledger.get("schema_version") != 1 or not isinstance(ledger.get("items"), dict):
         return ["Invalid learning review schema"]
     reviews = ledger["items"]
     for key in sorted(items.keys() - reviews.keys()):
+        kind = key.split(":", 1)[0]
+        if (policy is not None and key in (policy.certificates or {})
+                and policy.can_publish(kind, items[key])):
+            continue  # The private dossier was checked before its signed certificate entered Git.
         errors.append(f"{key}: missing review")
     for key in sorted(reviews.keys() - items.keys()):
         errors.append(f"{key}: orphan review")
@@ -104,7 +108,7 @@ def main():
     try:
         ledger = json.loads((ROOT / "content/learning-quality-reviews.json").read_text(encoding="utf-8"))
         registry = json.loads((ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
-        errors = validate(ledger, inventory(), {s["id"]: s for s in registry["sources"]})
+        errors = validate(ledger, inventory(), {s["id"]: s for s in registry["sources"]}, load_policy())
     except (OSError, ValueError, TypeError, KeyError) as error:
         print(f"Learning review unavailable: {type(error).__name__}")
         return 1

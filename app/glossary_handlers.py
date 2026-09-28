@@ -193,6 +193,8 @@ async def glossary_callback(update, context):
 
 def parse_glossary_reply_answer_number(text, option_count=4):
     text = text.strip()
+    if text.casefold() == 'не знаю':
+        return -1
     if not text.isdigit() or not 1 <= int(text) <= option_count:
         return None
     return int(text) - 1
@@ -206,7 +208,7 @@ async def glossary_reply_text_answer_handler(update, context):
         return
     selected = parse_glossary_reply_answer_number(message.text)
     if selected is None:
-        await _reply(message, 'Выберите вариант числом от 1 до 4.')
+        await _reply(message, 'Выберите вариант числом от 1 до 4 или «Не знаю».')
         return
     result = await _operation(update, context, service.answer, display['session_id'], selected, display['step_id'])
     if result:

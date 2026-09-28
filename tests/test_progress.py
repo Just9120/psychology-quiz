@@ -123,14 +123,14 @@ def test_concurrent_resets_commit_once(bank):
 
 def test_empty_counts_and_partial_history_isolation(bank):
     with closing(get_connection(str(bank))) as conn, conn:
-        assert progress.overview(conn, 1)['summary'] == {'answered': 0, 'correct': 0, 'accuracy': None, 'attempts': 0, 'finished': 0}
+        assert progress.overview(conn, 1)['summary'] == {'answered': 0, 'correct': 0, 'accuracy': None, 'knowledge_gaps': 0, 'attempts': 0, 'finished': 0}
         assert progress.history(conn, 1)['items'] == []
         assert progress.errors(conn, 1)['trainable_count'] == 0
         sid = record(conn, qids=(1, 2), choices=(1,))
         stranger = create_or_load_user(conn, 99, None, None, None)['id']
         foreign = record(conn, actor=stranger, choices=(0,))
         summary = progress.overview(conn, 1)['summary']
-        assert summary == {'answered': 1, 'correct': 0, 'accuracy': 0, 'attempts': 1, 'finished': 0}
+        assert summary == {'answered': 1, 'correct': 0, 'accuracy': 0, 'knowledge_gaps': 0, 'attempts': 1, 'finished': 0}
         item = progress.history(conn, 1)['items'][0]
         assert item['session_id'] == sid and item['status'] == 'in_progress' and item['total_questions'] == 2
         detail = progress.attempt(conn, 1, sid)

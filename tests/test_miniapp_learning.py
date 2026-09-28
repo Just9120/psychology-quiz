@@ -1,9 +1,14 @@
 """Verified Telegram users keep independent learning state and owner linking."""
+import asyncio
 from contextlib import closing
+from datetime import date, timedelta
+import json
 from types import SimpleNamespace
+from unittest.mock import AsyncMock, patch
 
-from app.classic_quiz_handlers import _handle_classic_text_answer_db
+from app.classic_quiz_handlers import _handle_classic_text_answer_db, quiz_resume_or_replace_callback
 from app.db import get_connection, start_quiz_session, store_session_questions, upsert_approved_questions
+from app.repetition import quiz_queue
 from tests.test_attempt_content import bank, OLD, OTHER, TOKEN
 from tests.test_case_content import CASE
 from tests.test_miniapp_api import _make_init_data
@@ -132,6 +137,53 @@ def test_chat_answer_on_linked_attempt_recovers_in_pwa_and_miniapp_once(web):
                             (question["session_id"],)).fetchone()[0] == 1
 
 
+def test_linked_attempt_resumes_and_replaces_across_web_and_miniapp(web):
+    csrf = linked(web)
+    setup = {"quiz_mode": "all", "category_ids": [], "question_count": None, "difficulty": "any"}
+    first = post(web, "quiz/setup", setup, csrf=csrf)
+    assert first.status_code == 200
+    initial = first.json()["runner_state"]
+    first_id = initial["session"]["session_id"]
+    assert web.client.get("/miniapp/state", headers=_headers()).json()["runner_state"] == initial
+    assert web.client.get("/miniapp/state", headers=_headers(777)).json()["runner_state"]["state"] == "setup"
+
+    context = SimpleNamespace(application=SimpleNamespace(bot_data={"settings": SimpleNamespace(db_path=str(web.db))}),
+                              user_data={})
+    query = SimpleNamespace(data=f"quizresume:{first_id}", answer=AsyncMock(), edit_message_text=AsyncMock())
+    with patch("app.classic_quiz_handlers.send_current_question", new_callable=AsyncMock) as send:
+        asyncio.run(quiz_resume_or_replace_callback(
+            SimpleNamespace(callback_query=query, effective_user=SimpleNamespace(id=42)), context))
+        send.assert_awaited_once_with(query, context.application.bot_data["settings"], first_id, context=context)
+        asyncio.run(quiz_resume_or_replace_callback(
+            SimpleNamespace(callback_query=query, effective_user=SimpleNamespace(id=777)), context))
+        send.assert_awaited_once()
+    assert "Попытка изменилась" in query.edit_message_text.await_args.args[0]
+
+    unconfirmed = web.client.post("/miniapp/setup", json=setup, headers=_headers())
+    assert unconfirmed.status_code == 409
+    assert web.client.get("/web/quiz/state").json()["runner_state"] == initial
+    foreign = web.client.post("/miniapp/setup", json={**setup,
+        "replace_active": True, "expected_session_id": first_id}, headers=_headers(777))
+    assert foreign.status_code == 409
+
+    replaced = web.client.post("/miniapp/setup", json={**setup,
+        "replace_active": True, "expected_session_id": first_id}, headers=_headers())
+    assert replaced.status_code == 200
+    current = replaced.json()["runner_state"]
+    assert current["session"]["session_id"] != first_id
+    assert web.client.get("/web/quiz/state").json()["runner_state"] == current
+    stale = post(web, "quiz/setup", {**setup,
+        "replace_active": True, "expected_session_id": first_id}, csrf=csrf)
+    assert stale.status_code == 409
+    assert web.client.get("/miniapp/state", headers=_headers()).json()["runner_state"] == current
+    query.edit_message_text.reset_mock()
+    asyncio.run(quiz_resume_or_replace_callback(
+        SimpleNamespace(callback_query=query, effective_user=SimpleNamespace(id=42)), context))
+    assert "Попытка изменилась" in query.edit_message_text.await_args.args[0]
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute("SELECT status FROM quiz_sessions WHERE id=?", (first_id,)).fetchone()[0] == "abandoned"
+
+
 def test_recovered_feedback_uses_answered_captured_question_not_next_question(web):
     csrf = linked(web)
     with closing(get_connection(str(web.db))) as conn, conn:
@@ -174,9 +226,47 @@ def test_recovered_case_keeps_captured_situation_without_private_source_ref(web)
         "session_id": session_id, "question_id": case_id, "selected_option_index": 0,
     }, csrf=csrf)
     assert saved.status_code == 200
+    assert saved.json()["feedback"]["case_review"]["option_rationales"] == CASE["case"]["option_rationales"]
     state = web.client.get("/miniapp/state", headers=_headers()).json()
     question = state["recent_answer_question"]
     assert question["question_id"] == case_id
     assert question["question_text"] == CASE["case"]["situation"] + "\n\n" + CASE["question"]
     assert state["recent_answer_feedback"]["case_review"]["option_rationales"] == CASE["case"]["option_rationales"]
     assert "private-case-source" not in str(state)
+    for response in (
+            saved,
+            web.client.get("/web/quiz/state"),
+            post(web, "progress/attempt", {"session_id": session_id}, csrf=csrf),
+            post(web, "progress/errors", csrf=csrf),
+            web.client.get("/miniapp/learning/review", headers=_headers()),
+            web.client.get("/miniapp/learning/overview", headers=_headers()),
+    ):
+        assert response.status_code == 200
+        assert "private-case-source" not in json.dumps(response.json(), ensure_ascii=False)
+
+
+def test_case_unknown_answer_is_shared_gap_without_creating_an_exit_answer(web):
+    csrf = linked(web)
+    with closing(get_connection(str(web.db))) as conn, conn:
+        upsert_approved_questions(conn, [CASE])
+    setup = {"quiz_mode": "all", "category_ids": [], "question_count": None,
+             "difficulty": "any", "content_kinds": ["case"]}
+    first = post(web, "quiz/setup", setup, csrf=csrf).json()["runner_state"]
+    question = first["current_question"]
+    assert web.client.get("/miniapp/state", headers=_headers()).json()["runner_state"]["current_question"] == question
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute("SELECT count(*) FROM quiz_answers").fetchone()[0] == 0
+
+    result = web.client.post("/miniapp/answer", json={
+        "session_id": question["session_id"], "question_id": question["question_id"],
+        "selected_option_index": -1}, headers=_headers())
+    assert result.status_code == 200 and result.json()["submission_status"] == "accepted"
+    feedback = result.json()["feedback"]
+    assert feedback["knowledge_gap"] is True and feedback["is_correct"] is False
+    assert feedback["correct_option_text"] and feedback["explanation"]
+    assert len(feedback["case_review"]["option_rationales"]) == 4
+    assert web.client.get("/web/quiz/state").json()["recent_answer_feedback"] == {
+        **feedback, "question_id": question["question_id"]}
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute("SELECT selected_option_index FROM quiz_answers").fetchone()[0] == -1
+        assert quiz_queue(conn, 1, today=date.today() + timedelta(days=2))[0]["reason"] == "error"

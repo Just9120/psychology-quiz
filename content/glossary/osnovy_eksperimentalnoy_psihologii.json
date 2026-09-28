@@ -121,6 +121,22 @@
       "question:m2_exp_020"
     ],
     "difficulty": "medium",
+    "status": "deprecated"
+  },
+  {
+    "id": "exp_psych_extraneous_variable",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "term": "Побочная переменная",
+    "aliases": [],
+    "definition": "Побочная переменная — фактор помимо изучаемого воздействия, который может повлиять на результат эксперимента. Его учитывают или контролируют, чтобы не приписать его влияние изучаемому воздействию.",
+    "short_definition": "Фактор вне изучаемого воздействия, способный повлиять на результат эксперимента.",
+    "examples": [
+      "Температура в комнате может повлиять на выполнение задания, хотя исследователь изучает другое воздействие."
+    ],
+    "confusable_with": [
+      "exp_psych_confounding_variable"
+    ],
+    "difficulty": "medium",
     "status": "approved"
   },
   {

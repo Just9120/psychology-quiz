@@ -1,6 +1,7 @@
 import pytest
 
-from app.source_inventory import (InventoryError, complete_listing, format_variant_candidates,
+from app.source_inventory import (InventoryError, complete_listing,
+                                  cross_folder_title_review_candidates, format_variant_candidates,
                                   link_lessons, mixed_format_folder_review_candidates,
                                   processing_status, reconcile, scan)
 
@@ -29,6 +30,10 @@ def test_format_variants_are_private_candidates_not_cross_folder_merges():
         "file_ids": ["doc", "pdf"],
         "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
     }]
+    assert cross_folder_title_review_candidates(snapshot) == [{
+        "normalized_stem": "лекция 1", "file_ids": ["doc", "other", "pdf"],
+        "parent_paths": [[first], [second]],
+    }]
 
 
 def test_mixed_format_nested_folder_is_queued_without_inferred_lesson_link():
@@ -50,6 +55,30 @@ def test_mixed_format_nested_folder_is_queued_without_inferred_lesson_link():
         "parent_path": ["Module", "Lesson"],
         "file_ids": ["doc", "slides", "task"],
         "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
+        "different_practice_number_file_ids": [],
+    }]
+
+
+def test_six_file_practice_folder_remains_a_review_candidate():
+    module = {"id": "module", "title": "Module", "parent_ids": ["root"],
+              "file_or_folder": "folder"}
+    practice = {"id": "practice", "title": "Практика №32", "parent_ids": ["module"],
+                "file_or_folder": "folder"}
+    files = [item(f"handout-{number}", "practice", title=f"Handout {number}")
+             for number in range(5)]
+    files[0]["title"] = "Домашнее задание после практики 31"
+    files.append({**item("transcript", "practice", title="Transcript"),
+                  "mime_type": "application/vnd.google-apps.document"})
+    snapshot = scan("root", {
+        "root": {"complete": True, "children": [module]},
+        "module": {"complete": True, "children": [practice]},
+        "practice": {"complete": True, "children": files},
+    })
+    assert mixed_format_folder_review_candidates(snapshot) == [{
+        "parent_path": ["Module", "Практика №32"],
+        "file_ids": ["handout-0", "handout-1", "handout-2", "handout-3", "handout-4", "transcript"],
+        "mime_types": ["application/pdf", "application/vnd.google-apps.document"],
+        "different_practice_number_file_ids": ["handout-0"],
     }]
 
 

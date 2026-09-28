@@ -27,7 +27,7 @@ class BotDbOffloadTests(unittest.TestCase):
         async def fake_run_db_task(func, *args, **kwargs):
             calls.append(func.__name__)
             if func.__name__ == '_load_categories':
-                return [{'id': 1, 'name': 'Cat'}]
+                return ([{'id': 1, 'name': 'Cat'}], None)
             if func.__name__ == '_load_ui_context':
                 return ([{'id': 1, 'name': 'Cat'}], None)
             if func.__name__ == '_load_stats':
@@ -52,7 +52,7 @@ class BotDbOffloadTests(unittest.TestCase):
 
         async def fake_run_db_task(func, *args, **kwargs):
             self.assertEqual('_load_categories', func.__name__)
-            return [{'id': 1, 'name': 'Cat'}]
+            return ([{'id': 1, 'name': 'Cat'}], None)
 
         with patch('app.main._run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.quiz_command(update, context))
@@ -202,7 +202,7 @@ class BotDbOffloadTests(unittest.TestCase):
 
         async def fake_run_db_task(func, *args, **kwargs):
             if func.__name__ == '_load_categories':
-                return [{'id': 1, 'name': 'Cat'}]
+                return ([{'id': 1, 'name': 'Cat'}], None)
             if func.__name__ == '_handle_answer_db':
                 return {
                     'status': 'accepted',

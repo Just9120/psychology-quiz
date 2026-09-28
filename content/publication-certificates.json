@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "items": {
+    "glossary:dopamine": {
+      "schema_version": 1,
+      "item_sha256": "d3247f15bced957d31b4d0ca353df8f08da90132e96cd2ddc9c4acdbc598ced3",
+      "review_sha256": "89762fdceccca10fa94c3321f7173725b194cf2eb6bfed8a8ff153efc0c5d9b7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "r/C8gWEkWYADVXHUQWkyzXl1hoU7Lo9KzQnXFjMdcp2X9sd8Km9sKEEPu9RtO0ouDRwywuf/5en/PS7MDVUsBg=="
+    },
+    "glossary:exp_psych_extraneous_variable": {
+      "schema_version": 1,
+      "item_sha256": "047ecb570f5c0a5a37cadf8976a41a29fc8d3df15bfe95354dc444fe9c4c6ea4",
+      "review_sha256": "fd484f9f27d86fcc56223a957ba7d00b9f65f57999c10ce6b08a7ed8c2d84146",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "PoNvRISCoerkLCjjKC08xa0iH1FqI7dCc5BASNnZuM/j0db84Ro7Ro+42CoCXv9JjkOqonA37mK7hv856EhuBg=="
+    }
+  }
+}

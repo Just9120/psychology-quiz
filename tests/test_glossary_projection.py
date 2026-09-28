@@ -1,8 +1,12 @@
 from contextlib import closing
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import date
 import json
+from types import SimpleNamespace
 
+import pytest
+
+from app import glossary_projection
 from app.glossary import GLOSSARY_TOPICS, load_glossary_entries
 from app.glossary_projection import projected_questions
 from app.db import (create_or_load_user, get_connection, start_quiz_session,
@@ -28,6 +32,24 @@ def test_published_glossary_projection_is_stable_and_contains_only_approved_term
             assert item['source_ref'] in entry.source_refs
             assert len(item['options']) == len(set(item['options'])) == 4
             assert item['options'][item['correct_option_index']] == entry.short_definition
+
+
+def test_privately_signed_glossary_projects_without_public_source_ref(monkeypatch):
+    topic_id, title = GLOSSARY_TOPICS[0]
+    entries = load_glossary_entries(topic_id)[:4]
+    signed = replace(entries[0], source_refs=())
+    monkeypatch.setattr(glossary_projection, 'GLOSSARY_TOPICS', ((topic_id, title),))
+    monkeypatch.setattr(glossary_projection, 'load_glossary_entries',
+                        lambda _: [signed, *entries[1:]])
+    monkeypatch.setattr(glossary_projection, 'load_policy',
+                        lambda: SimpleNamespace(certificates={f'glossary:{signed.id}': {}}))
+    projected = glossary_projection.projected_questions()
+    assert len(projected) == 4
+    assert projected[0]['source_ref'] is None
+    monkeypatch.setattr(glossary_projection, 'load_policy',
+                        lambda: SimpleNamespace(certificates={}))
+    with pytest.raises(ValueError, match='Invalid published glossary entry'):
+        glossary_projection.projected_questions()
 
 
 def test_canonical_seed_serves_glossary_alongside_theory_and_case_without_parity_drift(tmp_path, monkeypatch):
