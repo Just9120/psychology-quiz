@@ -420,7 +420,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Когда старая или заведомо слабая методика может использоваться как контроль?",
     "options": [
       "Когда исследователь хочет избежать любых сравнений",
@@ -436,7 +436,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему двойной слепой контроль в исследованиях психологических интервенций часто реализовать сложнее, чем в медицинских?",
     "options": [
       "Потому что в психологии вообще не бывает контрольных групп",
@@ -500,7 +500,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему наблюдателю со стороны часто легче формулировать конкурирующие гипотезы, чем человеку, вовлечённому в ситуацию?",
     "options": [
       "Потому что наблюдатель всегда знает истинную причину",
@@ -516,7 +516,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой вариант лучше всего отражает содержание информированного согласия, если полный план исследования заранее не раскрывается во всех деталях?",
     "options": [
       "Участнику заранее сообщают абсолютно все детали процедуры без исключений, даже если это исказит результаты",
@@ -580,7 +580,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему разделение на экспериментальную и контрольную группы оправдано при проверке новой методики, но может быть избыточным, если метод уже надёжно доказал свою эффективность?",
     "options": [
       "Потому что после публикации методику больше нельзя исследовать",
@@ -612,7 +612,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой практический смысл имеет второй этап анализа, когда исследователь разбивает участников на более гомогенные подгруппы?",
     "options": [
       "Это делают только для того, чтобы сделать результаты сложнее для чтения",
@@ -1575,7 +1575,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Что является корректной проверкой манипуляции (manipulation check)?",
     "options": [
       "Проверка, различаются ли группы по любой доступной переменной, даже не связанной с манипуляцией",
@@ -1609,7 +1609,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Как правильно различать random assignment и random sampling в базовом дизайне?",
     "options": [
       "Random assignment формирует выборку из популяции, а random sampling распределяет людей по условиям",
@@ -1711,7 +1711,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Что наиболее точно различает надежность и валидность измерения?",
     "options": [
       "Надежность описывает, насколько измерение стабильно и воспроизводимо, а валидность — насколько оно действительно отражает нужный конструкт",
@@ -1813,7 +1813,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/practice9_applied_experimental_method",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Команда хочет проверить эффект нового протокола обратной связи. Какой шаг лучше всего снижает риск угрозы внутренней валидности из-за различий между участниками?",
     "options": [
       "Набрать участников только из одной школы",
@@ -1881,7 +1881,7 @@
     "category": "Основы экспериментальной психологии",
     "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Исследователь пишет: «Мы случайно отобрали 200 студентов университета, а затем случайно назначили их в две группы». Что верно по этому описанию?",
     "options": [
       "Применено только случайное распределение",

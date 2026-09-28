@@ -165,8 +165,7 @@
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "question_ids": [
         "m2_exp_029",
-        "m2_exp_030",
-        "m2_exp_039"
+        "m2_exp_030"
       ]
     },
     {
@@ -205,13 +204,6 @@
       "question_ids": [
         "m2_exp_067",
         "m2_exp_104"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_099",
-        "m2_exp_115"
       ]
     },
     {
