@@ -447,6 +447,33 @@
         "m3_psychological_consulting_074",
         "m3_psychological_consulting_107"
       ]
+    },
+    {
+      "discipline_ids": [
+        "fiziologiya_cheloveka",
+        "psihofiziologiya"
+      ],
+      "question_ids": [
+        "m1_phys_002",
+        "m1_psyf_002"
+      ]
+    },
+    {
+      "discipline_ids": [
+        "fiziologiya_cheloveka",
+        "psihofiziologiya"
+      ],
+      "question_ids": [
+        "m1_phys_006",
+        "m1_psyf_004"
+      ]
+    },
+    {
+      "discipline_id": "psihofiziologiya",
+      "question_ids": [
+        "m1_psyf_006",
+        "m1_psyf_033"
+      ]
     }
   ]
 }
