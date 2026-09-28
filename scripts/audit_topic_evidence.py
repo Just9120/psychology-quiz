@@ -16,9 +16,45 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.content_publication import DRIVE_REF, fingerprint, load_policy
-from app.source_inventory import processing_status, unresolved_related_conflicts
+from app.source_inventory import (combine_registries, link_lessons, processing_status,
+                                  unresolved_related_conflicts)
 from scripts.sign_private_publication import private_path
-from scripts.source_inventory_report import _snapshot
+from scripts.source_inventory_report import (_snapshot, combine_private_topics,
+                                             private_registry_input, private_topics_input)
+
+
+def private_topic_coverage(curriculum: dict, private_topics: dict, private_registry: dict,
+                           lessons: dict, certified_questions: dict[str, dict],
+                           source_states: dict[str, str],
+                           current_sources: dict[str, dict]) -> dict:
+    """Count exact signed editions per private lesson without exposing source IDs."""
+    combined = combine_private_topics(curriculum, private_topics, private_registry)
+    sources = {item["id"]: item for item in private_registry["sources"]}
+    source_topics: dict[str, set[str]] = {}
+    for lesson in lessons.values():
+        topic_id = lesson["topic_id"]
+        if topic_id not in combined["topics"]:
+            raise ValueError("unknown_private_lesson_topic")
+        for source in lesson["sources"]:
+            source_topics.setdefault(source["source_id"], set()).add(topic_id)
+    counts = {topic_id: {"title": topic["title"], "signed_private": 0}
+              for topic_id, topic in private_topics["topics"].items()}
+    for certified in certified_questions.values():
+        source_id = certified["source_id"]
+        registered = sources.get(source_id)
+        if (registered is None or source_states.get(source_id) != "processed"
+                or any(certified.get(field) != registered.get(field)
+                       or certified.get(field) != current_sources.get(source_id, {}).get(field)
+                       for field in ("modified_time", "snapshot_sha256"))):
+            continue
+        topic_ids = source_topics.get(source_id, set())
+        if len(topic_ids) != 1:
+            continue
+        topic_id = next(iter(topic_ids))
+        if topic_id in counts:
+            counts[topic_id]["signed_private"] += 1
+    return {"topics": counts, "topics_without_signed_question": sorted(
+        topic_id for topic_id, value in counts.items() if not value["signed_private"])}
 
 
 def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str],
@@ -175,9 +211,18 @@ def main() -> int:
                         help="private source review snapshot; use together with --inventory")
     parser.add_argument("--signed-dossier", type=Path, action="append", default=[],
                         help="ignored signed private review dossier for an exact question edition")
+    parser.add_argument("--private-registry", type=Path,
+                        help="ignored reviewed source registry for private topic coverage")
+    parser.add_argument("--private-topics", type=Path,
+                        help="ignored private topics; requires registry and lesson links")
+    parser.add_argument("--links", type=Path,
+                        help="ignored explicit lesson links for private topic coverage")
     args = parser.parse_args()
     if (args.inventory is None) != (args.processed is None):
         parser.error("--inventory and --processed must be supplied together")
+    if any((args.private_registry, args.private_topics, args.links)) and not all(
+            (args.inventory, args.processed, args.private_registry, args.private_topics, args.links)):
+        parser.error("private topic coverage requires inventory, processed, registry, topics and links")
     curriculum = json.loads(args.curriculum.read_text(encoding="utf-8"))
     quality = json.loads(args.quality.read_text(encoding="utf-8"))
     source_states = None
@@ -189,9 +234,26 @@ def main() -> int:
             if source_states.get(source_id) == "processed":
                 source_states[source_id] = "related_conflict_review"
     registry = json.loads((ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
-    print(json.dumps(coverage(curriculum, quality, approved_questions(ROOT), source_states,
-                              registry, certified_questions(ROOT, args.signed_dossier)),
-                     ensure_ascii=False, sort_keys=True))
+    certified = certified_questions(ROOT, args.signed_dossier)
+    private = None
+    if args.private_registry:
+        private_registry = private_registry_input(args.private_registry, ROOT)
+        private_topics = private_topics_input(args.private_topics, ROOT)
+        registry = combine_registries(registry, private_registry)
+        links = json.loads(private_path(args.links, suffix=".json").read_text(encoding="utf-8"))
+        combined = combine_private_topics(curriculum, private_topics, private_registry)
+        lessons = link_lessons(inventory, links, curriculum_topics=combined["topics"])
+        private = private_topic_coverage(curriculum, private_topics, private_registry,
+            lessons, certified, source_states, {source_id: {
+                "modified_time": item["modified_time"],
+                "snapshot_sha256": processed.get(source_id, {}).get("snapshot_sha256")}
+                for source_id, item in inventory["files"].items()
+                if source_states.get(source_id) == "processed"})
+    result = coverage(curriculum, quality, approved_questions(ROOT), source_states,
+                      registry, certified)
+    if private is not None:
+        result["private_topic_coverage"] = private
+    print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0
 
 

@@ -1,4 +1,4 @@
-from scripts.audit_topic_evidence import coverage
+from scripts.audit_topic_evidence import coverage, private_topic_coverage
 
 
 def test_current_edition_support_is_distinct_from_stale_and_partial():
@@ -113,3 +113,42 @@ def test_exact_private_certificate_covers_only_current_mapped_source():
                        source_states={"source-one": "changed_pending_review"},
                        source_registry=registry, certified_questions=certification)
     assert changed["topics_without_supported_question"] == ["one"]
+
+
+def test_private_topic_coverage_requires_current_unambiguous_signed_source():
+    topic_id = "t_123456789abc"
+    curriculum = {"disciplines": {"clinical": {"title": "Clinical"}},
+                  "topics": {}, "editions": {}}
+    private = {"corpus_root_id": "root", "topics": {topic_id: {
+        "title": "Practice", "discipline_id": "clinical", "source": {
+            "source_id": "primary", "modified_time": "r1", "snapshot_sha256": "a" * 64}}}}
+    registry = {"corpus_root_id": "root", "sources": [{
+        "id": "primary", "modified_time": "r1", "snapshot_sha256": "a" * 64}]}
+    lessons = {topic_id: {"topic_id": topic_id, "sources": [{
+        "source_id": "primary", "format": "preparation"}]}}
+    certified = {"question": {"source_id": "primary", "modified_time": "r1",
+                              "snapshot_sha256": "a" * 64}}
+    current_source = {"primary": {"modified_time": "r1", "snapshot_sha256": "a" * 64}}
+    current = private_topic_coverage(curriculum, private, registry, lessons,
+                                     certified, {"primary": "processed"}, current_source)
+    assert current["topics"][topic_id]["signed_private"] == 1
+    assert current["topics_without_signed_question"] == []
+    assert "primary" not in str(current)
+    held = private_topic_coverage(curriculum, private, registry, lessons,
+                                  certified, {"primary": "related_conflict_review"}, current_source)
+    assert held["topics_without_signed_question"] == [topic_id]
+    stale = private_topic_coverage(curriculum, private, registry, lessons,
+        {"question": {**certified["question"], "snapshot_sha256": "b" * 64}},
+        {"primary": "processed"}, current_source)
+    assert stale["topics_without_signed_question"] == [topic_id]
+    old_registry = private_topic_coverage(curriculum, private, registry, lessons,
+        certified, {"primary": "processed"}, {"primary": {**current_source["primary"],
+                                                     "modified_time": "r2"}})
+    assert old_registry["topics_without_signed_question"] == [topic_id]
+    ambiguous = {**lessons, "other": {"topic_id": "t_abcdef123456", "sources": [{
+        "source_id": "primary", "format": "transcript"}]}}
+    private["topics"]["t_abcdef123456"] = {**private["topics"][topic_id],
+                                              "title": "Other practice"}
+    mixed = private_topic_coverage(curriculum, private, registry, ambiguous,
+                                   certified, {"primary": "processed"}, current_source)
+    assert mixed["topics_without_signed_question"] == ["t_123456789abc", "t_abcdef123456"]
