@@ -324,7 +324,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture5_cardiovascular_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему пульс и артериальное давление особенно важны для психологического контекста?",
     "options": [
       "Потому что они полностью заменяют беседу с клиентом",
@@ -468,7 +468,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/practice2_emotions_stress_consulting",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Как психологу корректнее использовать телесные признаки клиента в работе?",
     "options": [
       "Как готовый диагноз по позе и дыханию",
@@ -564,7 +564,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture5_cardiovascular_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "После умеренной нагрузки пульс и дыхание возвращаются к исходному уровню за разумное время. О чем это чаще говорит?",
     "options": [
       "О нормальной адаптационной реакции и восстановлении",
@@ -724,7 +724,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/practice2_emotions_stress_consulting",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Клиент интерпретирует любое сердцебиение как «доказательство, что со мной что-то критично не так». Какой подход психолога физиологически наиболее корректен в первичном обсуждении?",
     "options": [
       "Подтвердить, что один симптом всегда однозначно указывает на тяжелую проблему",
@@ -820,7 +820,7 @@
     "category": "Физиология человека",
     "source_ref": "module1/human_physiology/lecture5_cardiovascular_system",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему психологу полезно замечать частоту сердцебиения и сосудистые реакции клиента, но опасно делать из них слишком прямой вывод об эмоции?",
     "options": [
       "Потому что пульс и давление не связаны с состоянием",
