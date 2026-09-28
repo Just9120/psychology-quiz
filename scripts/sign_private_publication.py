@@ -51,12 +51,17 @@ def _character_ranges(locator: object) -> list[tuple[int, int]]:
 
 
 def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
-    """Permit one reviewed glossary claim while unrelated source conflicts stay held."""
+    """Permit only named, reviewed claims outside a source's held passage."""
     claim = dossier.get("scoped_claim_review")
     source_id = source["id"]
     publication_review = dossier.get("publication_review")
     quality_review = dossier.get("quality_review")
-    if (dossier.get("kind") != "glossary" or dossier.get("item_id") != "dopamine"
+    permitted = {
+        ("glossary", "dopamine", "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w"),
+        ("questions", "m1_psyf_070", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264"),
+        ("questions", "m1_psyf_071", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264"),
+    }
+    if ((dossier.get("kind"), dossier.get("item_id"), source_id) not in permitted
             or len(dossier.get("sources", [])) != 1
             or not isinstance(claim, dict)
             or not isinstance(publication_review, dict)
@@ -77,12 +82,26 @@ def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
             or reviewed_at <= held_at):
         raise SigningError("scoped_claim_review_required")
     ranges = _character_ranges(claim.get("locator"))
-    held_ranges = _character_ranges(record.get("locator"))
+    held_locator = record.get("locator")
+    if (source_id == "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264"
+            and isinstance(held_locator, str)):
+        legacy = re.fullmatch(
+            r"extracted_text UTF-8 characters (\d+):(\d+); SHA-256 ([0-9a-f]{64})",
+            held_locator,
+        )
+        if legacy is None or legacy[3] != record.get("snapshot_sha256"):
+            raise SigningError("scoped_claim_locator_required")
+        held_locator = f"characters:{legacy[1]}:{legacy[2]}"
+    held_ranges = _character_ranges(held_locator)
     if any(start < held_end and held_start < end
            for start, end in ranges for held_start, held_end in held_ranges):
         raise SigningError("scoped_claim_overlaps_conflict")
     source_ref = f"drive:{source_id}#{claim['locator']}"
-    if (dossier.get("source_refs") != [source_ref]
+    actual_ref = (dossier.get("source_ref") if dossier.get("kind") == "questions"
+                  else dossier.get("source_refs"))
+    expected_ref = (source_ref if dossier.get("kind") == "questions"
+                    else [source_ref])
+    if (actual_ref != expected_ref
             or any(review.get("sources") != [{
                 "source_id": source_id,
                 "snapshot_sha256": source["snapshot_sha256"],

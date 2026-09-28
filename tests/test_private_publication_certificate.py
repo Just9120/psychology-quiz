@@ -240,9 +240,16 @@ def test_signer_checks_processed_private_source_against_complete_inventory():
         verify_current_sources(dossier, changed, processed)
 
 
-def test_scoped_glossary_claim_keeps_conflicted_source_on_hold(tmp_path, monkeypatch):
+@pytest.mark.parametrize("kind,item_id,source_id,legacy_locator", [
+    ("glossary", "dopamine", "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w", False),
+    ("questions", "m1_psyf_070", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", True),
+    ("questions", "m1_psyf_071", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", True),
+])
+def test_scoped_claim_keeps_conflicted_source_on_hold(
+        tmp_path, monkeypatch, kind, item_id, source_id, legacy_locator):
     _, dossier = fixture_review()
     source = dossier["sources"][0]
+    source["id"] = source_id
     extracted = "Supported sentence. Disputed medical statement."
     source["snapshot_sha256"] = hashlib.sha256(extracted.encode("utf-8")).hexdigest()
     root = tmp_path / "repo"
@@ -268,11 +275,17 @@ def test_scoped_glossary_claim_keeps_conflicted_source_on_hold(tmp_path, monkeyp
               "reviewed_at": "2026-09-27T00:00:00Z",
               "snapshot_kind": "extracted_text",
               "snapshot_sha256": source["snapshot_sha256"]}
-    dossier["kind"] = "glossary"
-    dossier["item_id"] = "dopamine"
+    if legacy_locator:
+        record["locator"] = ("extracted_text UTF-8 characters 20:45; SHA-256 "
+                             + source["snapshot_sha256"])
+    dossier["kind"] = kind
+    dossier["item_id"] = item_id
     locator = "characters:0:19"
-    dossier.pop("source_ref")
-    dossier["source_refs"] = [f"drive:{source['id']}#{locator}"]
+    if kind == "glossary":
+        dossier.pop("source_ref")
+        dossier["source_refs"] = [f"drive:{source['id']}#{locator}"]
+    else:
+        dossier["source_ref"] = f"drive:{source['id']}#{locator}"
     evidence = {"source_id": source["id"], "snapshot_sha256": source["snapshot_sha256"],
                 "modified_time": source["modified_time"], "locator": locator}
     dossier["publication_review"]["sources"] = [evidence]

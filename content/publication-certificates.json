@@ -21,6 +21,20 @@
       "review_sha256": "0d5a354e7ea2742238ee1e7bb56e4cdc09c7027b86417465d0c36d803082ec24",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "uOEBOluYocMazcIp1QlJWFrv0uox7TOviYRzd1KaG1XIitGI4wuy8IpC/WsGw29jE/RLO/WyNOgDa4H3lGGZCw=="
+    },
+    "questions:m1_psyf_070": {
+      "schema_version": 1,
+      "item_sha256": "6de41630ee94b4e255862c4b9e8a777198b0473cadcab1061a3c9bdc671595db",
+      "review_sha256": "de5322516b3b64b05d8c7d51c99d4d6778ad691dabede507cf685ebba141b0b1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "FN7C7RgCnCgYVGh95s4iloxO+xz0oqEhVgqXZZ7Zl4/3OF2aSeXwqoYTk7wXLDpUdBCpo2eYhCZ32m7BBCgXDA=="
+    },
+    "questions:m1_psyf_071": {
+      "schema_version": 1,
+      "item_sha256": "29f557d84b57b2a2c1deca2de4a81bcdecaa42e617ccb74059659872de7f9fe2",
+      "review_sha256": "39412c6958cbfa09cde85e26435cdf7350f807e56b9f2ee22001c03e0818e2f6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "e6I/hXWYhEgeQ+WagStWPwbkyF5AXrbX+oI+IwUHvxHXCkl5ZLszELrSJ1qpc7FMDT2abPMvcB2j45z8kSu8Cw=="
     }
   }
 }

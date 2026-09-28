@@ -9369,63 +9369,6 @@
         }
       ]
     },
-    "questions:m1_psyf_070": {
-      "item_sha256": "1cf356c730d59d73297ad191e3c5936b53782ed8d52dad67bd8b2c9d9749e37f",
-      "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Лекция обсуждает временной зазор для отмены движения; перенос на паузу, ценности и практическую свободу выбора не доказан одним опытом. Не выдавать спорные нейрофилософские трактовки за установленный общий факт.",
-      "sources": [
-        {
-          "source_id": "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264",
-          "modified_time": "2026-04-20T15:38:36.917Z",
-          "snapshot_sha256": "2b6c44d6b7e3ba0511b16b4d8d5884e19812e0bbdba5ffbf8a06b14483e45a5c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13500:15300"
-        }
-      ]
-    },
-    "questions:m1_psyf_071": {
-      "item_sha256": "15ee638d8f96173c6b5baa18e470a80a58748af8f28471cdcdc0e9e1d606bcf3",
-      "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "unconfirmed",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete",
-        "meaning_requires_review"
-      ],
-      "note": "Прежнее evidence ошибочно ссылалось на глоссарий. Проверенный фрагмент лекции 14 описывает время потенциала готовности и простое движение в опыте Либета; он не обосновывает перечисленные в вопросе условия истощения, перегрузки и привычки. Нужны адресная редакция вопроса и повторное подтверждение ответа.",
-      "sources": [
-        {
-          "source_id": "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264",
-          "modified_time": "2026-04-20T15:38:36.917Z",
-          "snapshot_sha256": "2b6c44d6b7e3ba0511b16b4d8d5884e19812e0bbdba5ffbf8a06b14483e45a5c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13500:15300"
-        }
-      ]
-    },
     "glossary:psyf_neuron": {
       "item_sha256": "97b4cbbb0b08517a77055c71064a0077b62d4ef781b3ede53b742562a6d4aa94",
       "discipline_id": "psihofiziologiya",
