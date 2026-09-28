@@ -49,6 +49,13 @@
       "review_sha256": "1349f5d5798ac6e89e05cad8d0eddc214038c2d3222685c60c5a2f6e4fea964e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "6ejRuXgdd2iqMLEvox8Se9WaGLqTm9LCk5YaAlyKsTl3p6bnRV6E5HrTlOH2rfgCU064tVB/uL0wD4q+0AAmCw=="
+    },
+    "questions:case_ambivalence_001": {
+      "schema_version": 1,
+      "item_sha256": "ba42a15478557366e58ea6c456c76446374c09fa875b2511cbcf9397be1c87a4",
+      "review_sha256": "72301497a4aa1c19ecae6364908811df8756fd6304f3a8fc95f9225c7cade93c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "sPEGy5ncV/ykclapp4YjREWOuHWpz0DMvGVYbaFyeZWS38f9Yhtb+rVmMGb2GEaB0zlIh9lLvcvZjc7hRZYmAg=="
     }
   }
 }
