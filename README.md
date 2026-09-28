@@ -5,9 +5,10 @@
 Текущая реализация — Telegram-бот на Python/FastAPI, Mini App и самостоятельный PWA quiz client на React/TypeScript/Vite. Клиенты используют общий backend и банк. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#завершённая-goal--pwa-first-001). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. Внутренний pgvector/search готовится отдельно от публичного приложения; его включение требует stateful gates из [операторской процедуры](docs/private-search-operations.md).
 
 Текущее состояние продукта:
-- **Module 1** — стабильный baseline, 296 approved questions across five active topics.
-- **Module 2** — ограниченный рабочий scope, 171 approved questions across two active topics.
+- **Module 1** — стабильный baseline, 295 approved questions across five active topics.
+- **Module 2** — ограниченный рабочий scope, 169 approved questions across two active topics.
 - **Module 3** — `Психологическое консультирование` (108 вопросов) и отдельная тема `Кейсы` (1 авторский вымышленный кейс с разбором).
+- **Module 5** — «Клиническая психология» (1 проверенный авторский вопрос); дальнейшее наполнение остаётся в работе.
 - Активный банк вопросов: 574 approved questions в JSON source-of-truth under `content/questions/**/*.json`, включая первый вопрос «Клинической психологии»; два ранее неподтверждённых вопроса сняты с публикации.
 
 Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. Самостоятельный Web UI находится в [pwa](pwa/); Telegram Mini App остаётся opt-in UX внутри Telegram. В чате команда `/literature` открывает тот же личный список чтения и позволяет отметить статус материала; связанная PWA и Mini App видят это состояние. Внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
