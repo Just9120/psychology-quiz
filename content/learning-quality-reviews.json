@@ -1487,34 +1487,6 @@
         }
       ]
     },
-    "questions:m1_intro_054": {
-      "item_sha256": "b96f8a58febe8f3139623ecba66d992eafbb8b084819f54cb758e0232a312463",
-      "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "safety_context_missing"
-      ],
-      "note": "Лекция поддерживает стабилизацию раньше глубокого анализа, но вопрос спрашивает универсальный первый шаг для кризисного клиента без условия об оценке немедленной безопасности и необходимости профильной помощи. В руководстве WHO Psychological First Aid проверка безопасности и срочных потребностей предшествует поддержке; это внешняя проверка риска, а не новый первичный источник правильного ответа по D-30. Нужна редакция вопроса на проверенной опоре Drive либо его удержание; публичная редакция пока не менялась.",
-      "sources": [
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
-        }
-      ]
-    },
     "questions:m1_intro_055": {
       "item_sha256": "30dfb90ba5f621ed0da43ff9c719f33fb3e239bc40b7158cdbaa6ed2746537e7",
       "discipline_id": "vvedenie_v_professiyu",
