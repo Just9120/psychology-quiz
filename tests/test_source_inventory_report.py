@@ -154,6 +154,25 @@ def test_private_topics_link_unreleased_formats_without_public_ids(tmp_path, mon
     assert "private_topics_requires_private_registry" in capsys.readouterr().err
 
 
+def test_private_topics_can_hold_unpublished_discipline_without_overriding_public_one():
+    curriculum = {"disciplines": {"published": {"title": "Published"}}, "topics": {}}
+    private_registry = {"corpus_root_id": "root", "sources": [{"id": "lesson"}]}
+    private = {"corpus_root_id": "root",
+               "disciplines": {"clinical_psychology": {"title": "Clinical psychology"}},
+               "topics": {"t_123456789abc": {"title": "First consultation",
+                   "discipline_id": "clinical_psychology", "source": {
+                       "source_id": "lesson", "modified_time": "revision",
+                       "snapshot_sha256": "a" * 64}}}}
+    combined = inventory_report.combine_private_topics(curriculum, private, private_registry)
+    assert "clinical_psychology" in combined["disciplines"]
+    assert "clinical_psychology" not in curriculum["disciplines"]
+    assert combined["topics"]["t_123456789abc"]["discipline_id"] == "clinical_psychology"
+
+    private["disciplines"] = {"published": {"title": "Changed"}}
+    with pytest.raises(InventoryError, match="invalid_private_discipline"):
+        inventory_report.combine_private_topics(curriculum, private, private_registry)
+
+
 def test_conflict_holds_derivatives_of_both_related_sources_until_review():
     current = export(["transcript", "slides"])
     sources = [{"id": source_id, "kind": "learning_material", "title": "Lesson",

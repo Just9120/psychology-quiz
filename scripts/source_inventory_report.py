@@ -141,8 +141,11 @@ def private_topics_input(raw_path: Path, repo_root: Path) -> dict:
                 (info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) & 0o077))):
         raise InventoryError("private_topics_requires_owned_regular_file")
     value = _read(path)
-    if (not isinstance(value, dict) or set(value) != {"schema_version", "corpus_root_id", "topics"}
-            or value["schema_version"] != 1 or not isinstance(value["topics"], dict)):
+    if (not isinstance(value, dict)
+            or not {"schema_version", "corpus_root_id", "topics"} <= set(value)
+            or set(value) - {"schema_version", "corpus_root_id", "topics", "disciplines"}
+            or value["schema_version"] != 1 or not isinstance(value["topics"], dict)
+            or not isinstance(value.get("disciplines", {}), dict)):
         raise InventoryError("invalid_private_topics")
     return value
 
@@ -156,19 +159,29 @@ def combine_private_topics(curriculum: dict, private: dict,
             or not isinstance(curriculum.get("disciplines"), dict)):
         raise InventoryError("invalid_private_topics")
     allowed_sources = {source["id"] for source in private_registry["sources"]}
+    disciplines = dict(curriculum["disciplines"])
+    for discipline_id, discipline in private.get("disciplines", {}).items():
+        if (not isinstance(discipline_id, str)
+                or re.fullmatch(r"[a-z][a-z0-9_]{0,63}", discipline_id) is None
+                or discipline_id in disciplines or not isinstance(discipline, dict)
+                or set(discipline) != {"title"}
+                or not isinstance(discipline["title"], str)
+                or not discipline["title"].strip()):
+            raise InventoryError("invalid_private_discipline")
+        disciplines[discipline_id] = discipline
     topics = dict(curriculum["topics"])
     for topic_id, topic in private["topics"].items():
         if (not isinstance(topic_id, str) or re.fullmatch(r"t_[0-9a-f]{12}", topic_id) is None
                 or topic_id in topics or not isinstance(topic, dict)
                 or set(topic) != {"title", "discipline_id", "source"}
                 or not isinstance(topic["title"], str) or not topic["title"].strip()
-                or topic["discipline_id"] not in curriculum["disciplines"]
+                or topic["discipline_id"] not in disciplines
                 or not isinstance(topic["source"], dict)
                 or set(topic["source"]) != {"source_id", "modified_time", "snapshot_sha256"}
                 or topic["source"]["source_id"] not in allowed_sources):
             raise InventoryError("invalid_private_topic")
         topics[topic_id] = topic
-    return {**curriculum, "topics": topics}
+    return {**curriculum, "disciplines": disciplines, "topics": topics}
 
 
 def report(current: dict, *, previous: dict | None = None,
