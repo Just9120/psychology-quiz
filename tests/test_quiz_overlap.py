@@ -25,7 +25,7 @@ def test_finite_quiz_defers_reviewed_concept_overlap_without_losing_count():
 def test_reviewed_question_pairs_share_overlap_without_removing_all_mode():
     groups = memberships()
     for first, second in (
-        ("m1_gp_048", "m1_gp_056"),
+        ("m1_gp_032", "m1_gp_045"),
         ("m1_intro_043", "m3_psychological_consulting_030"),
     ):
         assert groups[first] & groups[second]
@@ -40,6 +40,10 @@ def test_distinct_learning_objectives_are_not_deferred_as_duplicates():
         ("m2_qual_015", "m2_qual_047"),  # consent versus de-identification
         ("m3_psychological_consulting_009", "m3_psychological_consulting_045"),
         ("m3_psychological_consulting_055", "m3_psychological_consulting_066"),
+        ("m1_gp_048", "m1_gp_056"),  # one observation versus testable hypothesis
+        ("m2_exp_020", "m2_exp_098"),  # confound example versus control-variable distinction
+        ("m3_psychological_consulting_009", "m3_psychological_consulting_031"),
+        ("m3_psychological_consulting_008", "m3_psychological_consulting_027"),
     )
     for first, second in distinct_pairs:
         assert diverse_first([(1, first), (2, second)], 2) == [1, 2]
