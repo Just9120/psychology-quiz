@@ -217,6 +217,12 @@ def test_private_topics_can_hold_unpublished_discipline_without_overriding_publi
     assert "clinical_psychology" not in curriculum["disciplines"]
     assert combined["topics"]["t_123456789abc"]["discipline_id"] == "clinical_psychology"
 
+    published = {"disciplines": {**curriculum["disciplines"],
+                                 "clinical_psychology": {"title": "Clinical psychology"}},
+                 "topics": {}}
+    assert inventory_report.combine_private_topics(published, private, private_registry)[
+        "topics"]["t_123456789abc"]["discipline_id"] == "clinical_psychology"
+
     private["disciplines"] = {"published": {"title": "Changed"}}
     with pytest.raises(InventoryError, match="invalid_private_discipline"):
         inventory_report.combine_private_topics(curriculum, private, private_registry)

@@ -163,10 +163,19 @@ def combine_private_topics(curriculum: dict, private: dict,
     for discipline_id, discipline in private.get("disciplines", {}).items():
         if (not isinstance(discipline_id, str)
                 or re.fullmatch(r"[a-z][a-z0-9_]{0,63}", discipline_id) is None
-                or discipline_id in disciplines or not isinstance(discipline, dict)
+                or not isinstance(discipline, dict)
                 or set(discipline) != {"title"}
                 or not isinstance(discipline["title"], str)
                 or not discipline["title"].strip()):
+            raise InventoryError("invalid_private_discipline")
+        if discipline_id in disciplines:
+            # A previously private discipline may have been published since
+            # this immutable source-review snapshot was written. Reuse only
+            # its exact public definition; never override or rename it.
+            if disciplines[discipline_id] != discipline:
+                raise InventoryError("invalid_private_discipline")
+            continue
+        if any(item["title"] == discipline["title"] for item in disciplines.values()):
             raise InventoryError("invalid_private_discipline")
         disciplines[discipline_id] = discipline
     topics = dict(curriculum["topics"])
