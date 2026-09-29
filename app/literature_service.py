@@ -72,12 +72,9 @@ def validate_progress(payload: dict[str, Any]) -> tuple[str, str, int | None] | 
     if not isinstance(reading_status, str) or reading_status not in USER_LITERATURE_READING_STATUSES:
         return "invalid_reading_status"
 
-    progress_percent = payload.get("progress_percent")
-    if progress_percent is None:
-        return literature_id, str(reading_status), None
-    if type(progress_percent) is not int or progress_percent < 0 or progress_percent > 100:
-        return "invalid_progress_percent"
-    return literature_id, str(reading_status), progress_percent
+    if payload.get("progress_percent") is not None:
+        return "manual_progress_not_supported"
+    return literature_id, str(reading_status), None
 
 
 def _build_literature_progress_values(existing: Any, reading_status: str, requested_progress: int | None, now: str) -> dict[str, Any]:

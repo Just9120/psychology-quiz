@@ -21,6 +21,7 @@ from app.main import (
     READING_MODE_BUTTON_ALIASES,
     START_QUIZ_BUTTON_TEXT,
     START_QUIZ_BUTTON_ALIASES,
+    TELEGRAM_PRIVACY_POLICY_URL,
     _parse_miniapp_answer_payload,
     build_menu_button_regex,
     build_miniapp_launch_inline_keyboard,
@@ -28,6 +29,7 @@ from app.main import (
     should_start_miniapp_api,
     get_main_menu_keyboard,
     ping_command,
+    privacy_command,
     post_init,
     start_command,
 )
@@ -793,6 +795,13 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         ping_cmd = next(cmd for cmd in commands if cmd.command == "ping")
         self.assertEqual("Открыть викторину в окне", ui_cmd.description)
         self.assertEqual("Проверить, что бот на связи", ping_cmd.description)
+        self.assertIn("privacy", [cmd.command for cmd in commands])
+
+    def test_privacy_command_shows_telegram_standard_policy(self):
+        message = SimpleNamespace(reply_text=AsyncMock())
+        asyncio.run(privacy_command(SimpleNamespace(message=message), None))
+        text = message.reply_text.await_args.args[0]
+        self.assertIn(TELEGRAM_PRIVACY_POLICY_URL, text)
 
     def test_should_start_miniapp_api_disabled_by_default(self):
         settings = SimpleNamespace(

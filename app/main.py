@@ -136,6 +136,7 @@ START_QUIZ_BUTTON_TEXT = "🎯 Начать"
 READING_MODE_BUTTON_TEXT = "👁 Чтение"
 GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
 LITERATURE_BUTTON_TEXT = "📖 Литература"
+TELEGRAM_PRIVACY_POLICY_URL = "https://telegram.org/privacy-tpa"
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
@@ -158,6 +159,7 @@ HELP_TEXT = (
     "/glossary — открыть глоссарий-тест\n"
     "/literature — открыть личный список чтения\n"
     "/homework — открыть тесты домашних заданий\n"
+    "/privacy — политика конфиденциальности Telegram для ботов и Mini App\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
@@ -371,6 +373,7 @@ async def post_init(application: Application) -> None:
             BotCommand("ui", "Открыть викторину в окне"),
             BotCommand("glossary", "Открыть глоссарий"),
             BotCommand("literature", "Список чтения"),
+            BotCommand("privacy", "Политика конфиденциальности"),
             BotCommand("pwa", "Веб-приложение"),
         ]
     )
@@ -521,6 +524,15 @@ async def hide_menu_button_handler(update: Update, context: ContextTypes.DEFAULT
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
     await safe_reply(update, HELP_TEXT)
+
+
+async def privacy_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    del context
+    await safe_reply(
+        update,
+        "Стандартная политика конфиденциальности Telegram для ботов и Mini App:\n"
+        f"{TELEGRAM_PRIVACY_POLICY_URL}",
+    )
 
 
 async def ping_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -993,6 +1005,7 @@ def main() -> None:
     application.add_handler(CommandHandler("link", link_command))
     application.add_handler(CallbackQueryHandler(confirm_link_callback, pattern=r"^pwa_link:"))
     application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("privacy", privacy_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
     application.add_handler(CommandHandler("homework", homework_command))

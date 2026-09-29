@@ -187,6 +187,7 @@ export function MiniApp() {
       <button className="nav-item" disabled={busy} onClick={() => void run(loadLiterature)}>Литература</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadProgress)}>Мой прогресс</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadLearning)}>Повторение и цели</button>
+      <a className="nav-item miniapp-privacy-link" href="https://telegram.org/privacy-tpa" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
     </nav></aside>
     <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram</header><main id="main-content" className="workspace-main" tabIndex={-1}>
       {error && <div role="alert" className="app-alert">{error} <button type="button" onClick={() => setError('')} aria-label="Закрыть сообщение">×</button></div>}

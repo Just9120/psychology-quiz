@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from collections import Counter, defaultdict
 from datetime import date
 from functools import lru_cache
@@ -107,11 +108,13 @@ def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
     return item
 
 
-def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:
+@lru_cache(maxsize=4)
+def _published_literature_items(directory: Path) -> tuple[dict[str, Any], ...]:
+    """Content is immutable within one deployed process; a new deploy restarts it."""
     items: list[dict[str, Any]] = []
     publication = load_policy()
     access_links = load_access_links()
-    for path in sorted(LITERATURE_DIR.glob("*.json")):
+    for path in sorted(directory.glob("*.json")):
         raw_items = _load_json_file(path)
         if not isinstance(raw_items, list):
             continue
@@ -120,14 +123,19 @@ def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:
                 continue
             if not publication.can_publish("literature", entry):
                 continue
-            if topic_id is not None and entry.get("topic_id") != topic_id:
-                continue
             item = _public_literature_item(entry)
             item["access_links"] = access_links.get(item["work_id"], [])
             items.append(item)
+    return tuple(sorted(items, key=lambda item: (int(item.get("global_order") or 0), str(item.get("id") or ""))))
+
+
+def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:
+    items = _published_literature_items(LITERATURE_DIR)
+    selected = (item for item in items if topic_id is None or item.get("topic_id") == topic_id)
     if topic_id is None:
-        return sorted(items, key=lambda item: (int(item.get("global_order") or 0), str(item.get("id") or "")))
-    return sorted(items, key=lambda item: (int(item.get("topic_order") or 0), str(item.get("id") or "")))
+        return [deepcopy(item) for item in selected]
+    return sorted((deepcopy(item) for item in selected),
+                  key=lambda item: (int(item.get("topic_order") or 0), str(item.get("id") or "")))
 
 
 def list_literature_topic_payloads(user_states: dict[str, dict[str, Any]] | None = None) -> list[dict[str, Any]]:

@@ -130,13 +130,13 @@ class LiteratureApiTests(unittest.TestCase):
         response = self.client.post(
             "/miniapp/literature/progress",
             headers={"Authorization": f"tma {self.init_data}"},
-            json={"literature_id": new_item["id"], "reading_status": "in_progress", "progress_percent": 40},
+            json={"literature_id": new_item["id"], "reading_status": "in_progress", "progress_percent": None},
         )
         self.assertEqual(200, response.status_code)
         progress = response.json()["literature_progress"]
         self.assertEqual(new_item["id"], progress["literature_id"])
         self.assertEqual("in_progress", progress["reading_status"])
-        self.assertEqual(40, progress["progress_percent"])
+        self.assertIsNone(progress["progress_percent"])
         self.assertIsNotNone(progress["started_at"])
         self.assertIsNone(progress["completed_at"])
         self.assertIsNotNone(progress["last_opened_at"])
@@ -148,13 +148,13 @@ class LiteratureApiTests(unittest.TestCase):
         response = self.client.post(
             "/miniapp/literature/progress",
             headers={"Authorization": f"tma {self.init_data}"},
-            json={"literature_id": new_item["id"], "reading_status": "revisit", "progress_percent": 55},
+            json={"literature_id": new_item["id"], "reading_status": "revisit", "progress_percent": None},
         )
         self.assertEqual(200, response.status_code)
         self.assertEqual(3, self._progress_count())
         self.assertEqual(1, self._progress_count_for(self.user_id, new_item["id"]))
         self.assertEqual("revisit", response.json()["literature_progress"]["reading_status"])
-        self.assertEqual(55, response.json()["literature_progress"]["progress_percent"])
+        self.assertIsNone(response.json()["literature_progress"]["progress_percent"])
 
         state_payload = self.client.get("/miniapp/literature/state", headers={"Authorization": f"tma {self.init_data}"}).json()
         self.assertTrue(any(item["literature_id"] == new_item["id"] and item["reading_status"] == "revisit" for item in state_payload["literature_state"]))
@@ -169,7 +169,7 @@ class LiteratureApiTests(unittest.TestCase):
             self.db,
             self.bot_token,
             self.init_data,
-            json.dumps({"literature_id": self.first_item["id"], "reading_status": "read", "progress_percent": 12}).encode(),
+            json.dumps({"literature_id": self.first_item["id"], "reading_status": "read", "progress_percent": None}).encode(),
         )
         self.assertEqual(200, code)
         read_progress = json.loads(body)["literature_progress"]
@@ -198,8 +198,8 @@ class LiteratureApiTests(unittest.TestCase):
             ({"literature_id": self.first_item["id"], "reading_status": "bad"}, "invalid_reading_status"),
             ({"literature_id": self.first_item["id"], "reading_status": []}, "invalid_reading_status"),
             ({"literature_id": self.first_item["id"], "reading_status": {}}, "invalid_reading_status"),
-            ({"literature_id": self.first_item["id"], "reading_status": "in_progress", "progress_percent": -1}, "invalid_progress_percent"),
-            ({"literature_id": self.first_item["id"], "reading_status": "in_progress", "progress_percent": 101}, "invalid_progress_percent"),
+            ({"literature_id": self.first_item["id"], "reading_status": "in_progress", "progress_percent": -1}, "manual_progress_not_supported"),
+            ({"literature_id": self.first_item["id"], "reading_status": "in_progress", "progress_percent": 101}, "manual_progress_not_supported"),
             ({"literature_id": "", "reading_status": "in_progress"}, "invalid_literature_id"),
             ({"reading_status": "in_progress"}, "invalid_literature_id"),
             ({"literature_id": "unknown_lit", "reading_status": "in_progress"}, "unknown_literature_id"),
