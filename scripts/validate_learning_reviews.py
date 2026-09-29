@@ -42,6 +42,12 @@ def validate(ledger, items, sources, policy=None):
     for key in sorted(reviews.keys() - items.keys()):
         errors.append(f"{key}: orphan review")
     for key in sorted(items.keys() & reviews.keys()):
+        kind = key.split(":", 1)[0]
+        if (policy is not None and key in (policy.certificates or {})
+                and policy.can_publish(kind, items[key])):
+            # An older ledger row may describe the historical edition. The
+            # signed private dossier verifies the current public projection.
+            continue
         r = reviews[key]
         if not isinstance(r, dict):
             errors.append(f"{key}: invalid review")

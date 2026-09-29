@@ -63,6 +63,69 @@
       "review_sha256": "17075b2db8f497cfdecfe2a572476a7f1d2033438430ae173e17ef848c3ab5de",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "JKG0q/gQU3KIq34Sl6AUHXk9XNxDFcwbcI4B+noJTiIi4lyb0I8kkPxDEgC2xsyCcNA7wFN3TrpmHynp+s2lCA=="
+    },
+    "glossary:neuron": {
+      "schema_version": 1,
+      "item_sha256": "d3b476545d03d22748e66cb6495c7b72483246765a74487e8952e14ef8be927c",
+      "review_sha256": "c69079733f9290d7afb35ef348c85993f1705d960025255ea9ae675434d97a2b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XY7TjXAZMdmpkYYpA62THOZt5pgZW/Y/zCTptwigwRw+2UqJ7JHY9vyOW8OOXX3MOmi9ZSm9SpFPHQNJVdaJCg=="
+    },
+    "glossary:synapse": {
+      "schema_version": 1,
+      "item_sha256": "71c3baaade05a2706c741b008e18d6397283b8dd48269544e16616959ab3b884",
+      "review_sha256": "2ba9e1bc8f68b2f19581c7bf9553076f51a581d1395cf752dcbcfc74e936d926",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qjjZeFdt1AqS3LZJVf6YtPQQWPv4rD4NXHZGiSeppnVvcCZJyHNCxcm1IgZinOOKSCI2kvb48+wiGaecGvlgDw=="
+    },
+    "glossary:voluntary_involuntary_regulation": {
+      "schema_version": 1,
+      "item_sha256": "75b75fcedd2cf15577862959c04901f2f4ec96e88a7171e69a58b1e9e9ecd6ae",
+      "review_sha256": "6f833f8ddff72431594fbe908cd4acc273beb1114c6b23526311867b32015876",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "/X8GM8srvuJNcGXW6MxgRgo9VFu4MNWMB3pIGuidGFyixtcD/PvXlKTAp9MSjrhu7/IQ5W8iKU9AmjfQ8xifAw=="
+    },
+    "glossary:exp_psych_external_validity": {
+      "schema_version": 1,
+      "item_sha256": "0b4228d66289b34f582a2af7e4897c427ea71175648643df747365656f8218c6",
+      "review_sha256": "53ae7caf8080789583f9376fd52e8cbed29b42ca585b0ec01c031642efd6c646",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "T4phkCnh1JAoTSi2Ag2ewiv/WPFVVoylD4iLasXKwS7VWjNeTuy3Zui1ETDHqESm9tOnZA4fUQUB7j93Ee/CBQ=="
+    },
+    "glossary:exp_psych_independent_variable": {
+      "schema_version": 1,
+      "item_sha256": "18298b93fce8d3cfb4eeb837fa09b0f5e864617db67fb701985119ca508068cf",
+      "review_sha256": "75ef068bfd9bdf68a737cbfa7cdf401b814ad3522bdaaddf98aa9810a40da2fb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kJoXEqYoMqcdGuxu7uJpmcqNVFwVpt1K0TPHuRY3mhs9bVqo0rgQ0iex/Hw/FJQUq7AKkMmVgYgBcFEE3GWfDA=="
+    },
+    "glossary:exp_psych_dependent_variable": {
+      "schema_version": 1,
+      "item_sha256": "8b1364f1e99d2e60aa3b349452913c7e8dd8a6a91bcbfd0c61b5f3e1fdefe70c",
+      "review_sha256": "afb8dfac37ffe7dcb6e715bceaad245390c54299e6a8b8e7f3a3a987fc077353",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "W8ISvIBSTLbmAdGyQCnH+G9E8ByeOLdvy6WScgC3n5E5ZKF13Dns1AcJfpIhNi7aEebAjqGMdnLpg4eUmEWdBg=="
+    },
+    "glossary:exp_psych_random_assignment": {
+      "schema_version": 1,
+      "item_sha256": "3753ac4b0fd5a759b19311dbd506d3aff40305f01c16839abb528a601739ab6c",
+      "review_sha256": "76812e08fb132c600842d87f46d7f496f623d3b9eeef1321a7399ea01679e120",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0p/rmKnabCvKyV5hqlW860Xw5YJdIO0o68lO5ReeMuHLZBbODRHpQkG2jheoZJrYpl/STRPPbVndhjiShSciBw=="
+    },
+    "glossary:exp_psych_pretest": {
+      "schema_version": 1,
+      "item_sha256": "f59c8929175aa99011512345d5b8102a92ededaf46992c6316f61bbd761e80f7",
+      "review_sha256": "13179bf28f88801258db1aa7af137cd254f566b093d069eab0feff596c9d14df",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E4780/+89uxwrDOFq8McDHs1Ri20+vatU55vo1vvXvoC9Nyq2bxg1WLqR7KwhJIuxMJD/kudFmiBN1QBxMm7Aw=="
+    },
+    "glossary:reflex_arc": {
+      "schema_version": 1,
+      "item_sha256": "8de785341e1159f94213eb5a902d237f265c7dd75d20703c54c88e97c6e9d51c",
+      "review_sha256": "2e25f0db8afe0192912e48de2f0e5d1b11c92fb3dda36ac3bf23e589aad12bf0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "oSScd8C9lo6KK3CvN4VcccAQGmC7IoolRF/WDG3xg8mI3dcNLsu5EvnU7+PmDHyUaQchzfIQ0YS6Spw4YoVDBg=="
     }
   }
 }
