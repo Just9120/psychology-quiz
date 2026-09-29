@@ -71,6 +71,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .nav-heading { font-size: 9px; letter-spacing: 1.6px; color: var(--muted); margin: 0 15px 14px; font-weight: 650; }
 .nav-item { width: 100%; min-height: 49px; display: flex; align-items: center; gap: 12px; margin-bottom: 5px; text-align: left; padding: 12px 14px; border-radius: 8px; border: 0; background: none; font-size: 13px; color: #647067; }
 .nav-item.active { color: var(--green); background: var(--soft-green); font-weight: 600; }
+.miniapp-privacy-link { text-decoration: none; }
 .nav-dot { height: 5px; width: 5px; border-radius: 50%; background: var(--green); margin-left: auto; }
 .sidebar-note { margin: auto 15px 28px; padding-top: 55px; color: #728076; }
 .sidebar-note svg { color: #a5b794; margin-bottom: 8px; }.sidebar-note p { font-family: Georgia, serif; font-size: 16px; line-height: 1.55; margin-bottom: 0; }

@@ -27,6 +27,7 @@ test('Telegram Mini App loads shared quiz, checks a case and shows its rationale
   }))
   render(<MiniApp />)
   await screen.findByRole('heading', { name: 'Что изучим сегодня?' })
+  expect(screen.getByRole('link', { name: 'Политика конфиденциальности' })).toHaveAttribute('href', 'https://telegram.org/privacy-tpa')
   fireEvent.click(screen.getByRole('radio', { name: 'Кейсы' }))
   fireEvent.click(screen.getByRole('button', { name: 'Начать квиз' }))
   await screen.findByText('Что делать на первой консультации?')
