@@ -56,12 +56,19 @@ def validate_private_bindings(catalog, document, public_key, active_certificates
                 or certificate_error("questions", {"id": edition["external_id"]}, certificate,
                                      public_key, item_sha256=edition["item_sha256"]) is not None):
             raise ValueError("Invalid private curriculum binding")
+    current_bindings = set()
     for digest, edition in catalog["editions"].items():
         current = (active_certificates or {}).get("questions:" + edition["external_id"])
         if (isinstance(current, dict) and current.get("schema_version") == 2
-                and current.get("item_sha256") == edition["item_sha256"]
-                and document["items"].get(digest) != current):
-            raise ValueError("Missing current private curriculum binding")
+                and current.get("item_sha256") == edition["item_sha256"]):
+            if document["items"].get(digest) != current:
+                raise ValueError("Missing current private curriculum binding")
+            current_bindings.add("questions:" + edition["external_id"])
+    for key, certificate in (active_certificates or {}).items():
+        if (key.startswith("questions:") and isinstance(certificate, dict)
+                and certificate.get("schema_version") == 2
+                and key not in current_bindings):
+            raise ValueError("Missing current private curriculum edition")
     return document["items"]
 
 

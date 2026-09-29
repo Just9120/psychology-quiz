@@ -96,6 +96,9 @@ def test_signed_alternate_lesson_binding_rejects_topic_or_edition_change():
     with pytest.raises(ValueError, match="Missing current private curriculum binding"):
         validate_private_bindings(catalog, {"schema_version": 1, "items": {}},
                                   key.public_key(), active)
+    with pytest.raises(ValueError, match="Missing current private curriculum edition"):
+        validate_private_bindings({"editions": {}}, {"schema_version": 1, "items": {}},
+                                  key.public_key(), active)
     with pytest.raises(ValueError, match="Invalid private curriculum binding"):
         validate_private_bindings({"editions": {"c" * 64: {**edition,
             "topic_id": "t_" + "b" * 12}}}, document, key.public_key())
