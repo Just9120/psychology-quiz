@@ -9,6 +9,7 @@ import { QuizView } from './QuizView'
 import { HomeworkView } from './HomeworkView'
 import { ErrorsView, ProgressView } from './ProgressView'
 import { OwnerStatsView } from './OwnerStatsView'
+import { OwnerContentView } from './OwnerContentView'
 import { ResetView } from './ResetView'
 import { LiteratureView } from './LiteratureView'
 import { LearningView, loadLearning } from './LearningView'
@@ -18,7 +19,7 @@ import { GlossaryView } from './GlossaryView'
 import type { GlossaryState, GlossaryTopic } from './types'
 import type { ResetPreview } from './types'
 import { InstallButton } from './install'
-import type { Account, Answer, Feedback, MailProof, Question, QuizState, RunnerState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, OwnerStats } from './types'
+import type { Account, Answer, Feedback, MailProof, Question, QuizState, RunnerState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, OwnerStats, OwnerContent } from './types'
 import type { HomeworkAssignment, HomeworkCatalog } from './types'
 
 export function App({ initialProof = null }: { initialProof?: MailProof | null }) {
@@ -31,7 +32,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [selected, setSelected] = useState<number | null>(null)
   const [pending, setPending] = useState<Answer | null>(null)
   const [uncertainSetup, setUncertainSetup] = useState(false)
-  const [view, setView] = useState<'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'account' | 'progress' | 'errors' | 'reset' | 'glossary' | 'literature' | 'learning' | 'ownerStats'>('setup')
+  const [view, setView] = useState<'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'account' | 'progress' | 'errors' | 'reset' | 'glossary' | 'literature' | 'learning' | 'ownerStats' | 'ownerContent'>('setup')
   const [homeworkCatalog, setHomeworkCatalog] = useState<HomeworkCatalog | null>(null)
   const [homeworkId, setHomeworkId] = useState<string | null>(null)
   const [homeworkConfirmId, setHomeworkConfirmId] = useState<string | null>(null)
@@ -44,6 +45,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [notice, setNotice] = useState('')
   const [progress, setProgress] = useState<ProgressOverview | null>(null)
   const [ownerStats, setOwnerStats] = useState<OwnerStats | null>(null)
+  const [ownerContent, setOwnerContent] = useState<OwnerContent | null>(null)
   const [progressScope, setProgressScope] = useState<string | null>(null)
   const [history, setHistory] = useState<HistoryPage | null>(null)
   const [detail, setDetail] = useState<AttemptPage | null>(null)
@@ -61,7 +63,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
     reviewQuizSession.current = null; reviewGlossarySession.current = null
     setAccount(null); setOptions(null); setState(null); setFeedback(null); setFeedbackQuestion(null)
     setSelected(null); setPending(null); setUncertainSetup(false); setView('setup')
-    setProgress(null); setOwnerStats(null); setProgressScope(null); setHistory(null); setDetail(null); setMistakes(null)
+    setProgress(null); setOwnerStats(null); setOwnerContent(null); setProgressScope(null); setHistory(null); setDetail(null); setMistakes(null)
     setResetPreview(null); setNotice(''); setGlossary(null); setGlossaryTopics([]); setLiterature(null); setLearning(null)
     setHomeworkCatalog(null); setHomeworkId(null); setHomeworkConfirmId(null)
   }
@@ -153,6 +155,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
     setProgress(summary); setHistory(attempts); setProgressScope(scope); setDetail(null); setView('progress')
   }
   async function loadErrors() { setMistakes(await api.errors()); setView('errors') }
+  async function loadOwnerContent() { setOwnerContent(await api.ownerContent()); setView('ownerContent') }
   async function loadOwnerStats(period: OwnerStats['period'] = '7d') { setOwnerStats(await api.ownerStats(period)); setView('ownerStats') }
   async function loadGlossary() {
     const [available, current] = await Promise.all([api.glossaryOptions(), api.glossaryState()])
@@ -227,10 +230,11 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   if (!account || proof) return <>{alert}<AuthScreen busy={busy} run={run} proof={proof} consumeProof={() => setProof(null)} onLogin={loadAccount} /></>
 
   return <div className="app-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
-    <aside className="sidebar"><Brand /><div className="nav-heading">МОЁ ОБУЧЕНИЕ</div><nav aria-label="Основная навигация"><button className={view === 'quiz' || view === 'setup' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}><Icon name="book" />Квиз по психологии<span className="nav-dot" /></button><button className={view === 'homework' || view === 'homeworkQuiz' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadHomework)}><Icon name="book" />Домашние задания</button><button className={view === 'glossary' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadGlossary)}><Icon name="book" />Глоссарий</button><button className={view === 'literature' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLiterature)}><Icon name="book" />Литература</button><button className={view === 'progress' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadProgress)}><Icon name="chart" />Мой прогресс</button><button className={view === 'learning' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLearningView)}><Icon name="refresh" />Повторение и цели</button><button className={view === 'errors' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadErrors)}><Icon name="refresh" />Мои ошибки</button><button className={view === 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView('account')}><Icon name="user" />Мой аккаунт</button>{account.role === 'owner' && <button className={view === 'ownerStats' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => void run(() => loadOwnerStats())}><Icon name="chart" />Статистика</button>}</nav><div className="sidebar-note"><Icon name="spark" /><p>Небольшие шаги.<br />Большое понимание.</p></div><InstallButton /><button className="logout" disabled={busy} onClick={() => void run(async () => { try { await api.logout() } finally { clearPrivateState() } })}><Icon name="logout" />Выйти</button></aside>
+    <aside className="sidebar"><Brand /><div className="nav-heading">МОЁ ОБУЧЕНИЕ</div><nav aria-label="Основная навигация"><button className={view === 'quiz' || view === 'setup' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}><Icon name="book" />Квиз по психологии<span className="nav-dot" /></button><button className={view === 'homework' || view === 'homeworkQuiz' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadHomework)}><Icon name="book" />Домашние задания</button><button className={view === 'glossary' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadGlossary)}><Icon name="book" />Глоссарий</button><button className={view === 'literature' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLiterature)}><Icon name="book" />Литература</button><button className={view === 'progress' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadProgress)}><Icon name="chart" />Мой прогресс</button><button className={view === 'learning' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadLearningView)}><Icon name="refresh" />Повторение и цели</button><button className={view === 'errors' ? 'nav-item active' : 'nav-item'} disabled={busy || account.needs_identity} onClick={() => void run(loadErrors)}><Icon name="refresh" />Мои ошибки</button><button className={view === 'account' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => setView('account')}><Icon name="user" />Мой аккаунт</button>{account.role === 'owner' && <button className={view === 'ownerContent' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => void run(loadOwnerContent)}><Icon name="book" />Содержание</button>}{account.role === 'owner' && <button className={view === 'ownerStats' ? 'nav-item active' : 'nav-item'} disabled={busy} onClick={() => void run(() => loadOwnerStats())}><Icon name="chart" />Статистика</button>}</nav><div className="sidebar-note"><Icon name="spark" /><p>Небольшие шаги.<br />Большое понимание.</p></div><InstallButton /><button className="logout" disabled={busy} onClick={() => void run(async () => { try { await api.logout() } finally { clearPrivateState() } })}><Icon name="logout" />Выйти</button></aside>
     <div className="workspace"><header className="topbar"><span>Ваше пространство обучения</span><div className="profile-badge"><span className="avatar">{(account.display_name || account.email)[0].toUpperCase()}</span><span>{account.display_name || 'Личный аккаунт'}</span></div></header><main id="main-content" tabIndex={-1} className="workspace-main">
       {alert}{notice && <p className="notice" role="status">{notice}</p>}{offline && <div className="offline-banner" role="status">Вы не в сети. Новые ответы требуют подтверждения сервера.</div>}
       {view === 'account' ? <><AccountView account={account} busy={busy} run={run} onAccount={setAccount} onLearn={() => setView('setup')} onReset={() => void run(loadReset)} /><div className="mobile-install"><InstallButton /></div></>
+        : view === 'ownerContent' && account.role === 'owner' && ownerContent ? <OwnerContentView data={ownerContent} busy={busy} onRefresh={() => void run(loadOwnerContent)} />
         : view === 'ownerStats' && account.role === 'owner' && ownerStats ? <OwnerStatsView data={ownerStats} busy={busy} onPeriod={period => void run(() => loadOwnerStats(period))} />
         : account.needs_identity ? <Onboarding account={account} busy={busy} run={run} refresh={loadAccount} />
           : view === 'homework' && homeworkCatalog ? <HomeworkView catalog={homeworkCatalog} busy={busy} confirmId={homeworkConfirmId} onStart={id => void run(() => startHomework(id, false))} onConfirm={id => void run(() => startHomework(id, true))} onResume={item => void run(() => resumeHomework(item))} onRefresh={() => void run(loadHomework)} />

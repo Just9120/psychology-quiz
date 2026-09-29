@@ -11,6 +11,13 @@ export interface Account {
   link_target: { telegram_id: number; username: string | null; display_name: string } | null
 }
 
+export interface OwnerContent {
+  ok: true
+  topics: { id: string; title: string; module: string; questions: number; kinds: Record<'theory' | 'glossary' | 'case', number>; glossary_terms: number | null; literature_works: number; notes_state: 'UNSET'; notes: null; gaps: string[] }[]
+  sources: { state: 'UNSET' | 'PARTIAL'; reason?: string; captured_at?: string; files?: number; folders?: number; processing?: Record<string, number>; processing_records?: number; known_holds?: number }
+  unmapped_questions: number
+}
+
 export interface OwnerStats {
   ok: true
   period: '24h' | '7d' | '30d'

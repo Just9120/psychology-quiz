@@ -17,7 +17,7 @@ from app.logging_config import configure_noisy_http_client_loggers
 
 GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
-                "identity/new", "link/start", "link/complete", "profile/name", "owner/stats", "quiz/setup", "quiz/answer", "homework/start", "literature/progress",
+                "identity/new", "link/start", "link/complete", "profile/name", "owner/stats", "owner/content", "quiz/setup", "quiz/answer", "homework/start", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
                 "progress/reset-preview", "progress/reset-confirm", "progress/review-start", "progress/review-glossary-start", "progress/goal-set", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
 logger = logging.getLogger(__name__)
@@ -52,6 +52,11 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
             return {"ok": True}, ""
         if action == "profile/name":
             return {"ok": True, "display_name": auth.set_display_name(conn, account, payload.get("display_name"))}, None
+        if action == "owner/content":
+            if account["email"] != auth.settings.owner_email:
+                raise AuthError("forbidden", 403)
+            from app.owner_content import dashboard
+            return dashboard(conn), None
         if action == "owner/stats":
             if account["email"] != auth.settings.owner_email:
                 raise AuthError("forbidden", 403)

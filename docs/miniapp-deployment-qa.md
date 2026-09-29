@@ -746,3 +746,41 @@ The debug panel shows the latest safe rows as `action request_id request_ms pars
 ### Remaining ops experiment
 
 Because `miniapp.librechat.online` is Cloudflare-proxied while `quiz-api.librechat.online` appears to be direct Nginx, a remaining production experiment is to temporarily bypass Cloudflare for the Mini App frontend (or publish an equivalent non-proxied frontend hostname) and compare debug rows for the same user action. If `request_ms` and `total_ms` improve only on the bypassed frontend while backend `duration_ms` remains low, Cloudflare/frontend caching/proxy/WebView interaction remains a likely contributor. This experiment should not change classic Telegram callback routing or production DNS permanently in this PR.
+
+
+## Owner content dashboard
+
+PWA «Содержание» использует только owner session и CSRF через `POST /web/owner/content`.
+Другим аккаунтам, anonymous requests и Telegram clients operational API недоступен.
+Клиент не задаёт actor или путь к файлу. Обзор только читает approved bank, опубликованный
+каталог глоссария и библиографию; personal learning rows не читает и не меняет.
+Отсутствующий вопрос определённого вида — подтверждённый пустой раздел банка,
+а достаточность количества не оценивается без предметного критерия. Неизвестные
+термины/Obsidian notes показываются как неподтверждённые, а не как нулевое покрытие.
+
+Source processing summary готовится оператором из полного private inventory и выбранного
+private processing snapshot. Canonical команда, cwd root репозитория:
+
+```bash
+python scripts/owner_source_summary.py --current data/current-inventory.json \
+  --processed data/current-processing.json --observed-at "$INVENTORY_OBSERVED_AT" \
+  --output data/owner-source-summary-candidate.json
+```
+
+Пути здесь обозначают проверенные operator inputs; не создавайте пустые файлы вместо них.
+`INVENTORY_OBSERVED_AT` — подтверждённое время metadata-наблюдения с timezone,
+а не время запуска команды. Output создаётся только новым ignored `data/*.json`;
+существующий файл не перезаписывается. В него входят counts, дата наблюдения и время
+подготовки; тексты, названия, Drive IDs, locators и reviewer identities не переносятся.
+Даже полный inventory не доказывает полный semantic review: summary сохраняет `PARTIAL`,
+известные holds учитываются отдельно от pending records. Поздние потерянные review
+records остаются неизвестными; этот файл не является разрешением публикации.
+
+После readback/digest проверки поставляйте только агрегированный файл в host
+`data/owner-source-summary.json` штатного checkout, доступный API через `/data` mount.
+Операторская передача файла — отдельное действие поставки; Git/CD не содержит этот
+ignored snapshot. `OWNER_SOURCE_SUMMARY_PATH` позволяет явно выбрать путь для API;
+default — `/data/owner-source-summary.json`. Не передавайте вместо него raw review JSON.
+Отсутствующий/невалидный snapshot возвращает UNSET, без исключения приватного текста.
+Обзор показывает дату и ограничение актуальности, не объявляет старый snapshot текущим
+состоянием Drive. Изменение snapshot не меняет auth gates, банк или пользовательские данные.
