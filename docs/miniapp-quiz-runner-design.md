@@ -1,5 +1,9 @@
 # Mini App quiz runner design (historical/supporting)
 
+## Current transport resource guard
+
+Общий [request-body reader](../app/request_body.py) задаёт прежний PWA wire limit 16 KiB и применяется также к POST Mini App ASGI, включая simple-body initData envelope. Chunk превышения не копируется в аккумулятор; оставшийся stream не читается. Oversize даёт JSON 413/body_too_large до auth/domain/DB dispatch с обычными no-store и разрешёнными CORS headers. Допустимый header-auth и simple-body protocol сохраняется; это ограничение transport buffering, не размер ответа, вопроса или учебного корпуса. Сохраняемый [legacy HTTP adapter](../app/miniapp_api.py) отвергает malformed/ambiguous длину и неподдерживаемый transfer framing до чтения, закрывая соединение с JSON 400; oversize — 413. Reverse-proxy/infrastructure capacity отдельно проверяется по deployment records и не выводится из этих tests.
+
 ## Status and scope
 - Document type: **historical/supporting design + implemented architecture summary**.
 - Current product behavior is defined in `docs/project-spec.md`; current delivery state is defined in `docs/delivery-plan.md`.
