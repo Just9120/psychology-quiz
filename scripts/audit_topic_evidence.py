@@ -232,7 +232,9 @@ def main() -> int:
             (args.inventory, args.processed, args.private_registry, args.private_topics, args.links)):
         parser.error("private topic coverage requires inventory, processed, registry, topics and links")
     curriculum = validate_catalog(json.loads(args.curriculum.read_text(encoding="utf-8")))
-    bindings = load_private_bindings(curriculum)
+    bindings = (load_private_bindings(curriculum)
+                if args.curriculum.resolve() == (ROOT / "content/curriculum.json").resolve()
+                else {})
     quality = json.loads(args.quality.read_text(encoding="utf-8"))
     source_states = None
     if args.inventory is not None:
