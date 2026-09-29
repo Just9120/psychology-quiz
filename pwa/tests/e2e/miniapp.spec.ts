@@ -14,6 +14,30 @@ test('built Mini App requires Telegram and keeps initData on the fixed API origi
   expect(requests).toEqual([])
 })
 
+test('Mini App recovers its setup screen after the first server load fails', async ({ page }) => {
+  await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
+  await page.addInitScript(() => { (window as typeof window & { Telegram: unknown }).Telegram = { WebApp: { initData: 'synthetic-miniapp-proof', ready() {}, expand() {} } } })
+  let failedOnce = false
+  await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
+    const path = new URL(route.request().url()).pathname
+    if (route.request().method() === 'OPTIONS') {
+      await route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': site.slice(0, -1), 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type' } })
+    } else if (path === '/miniapp/setup-options' && !failedOnce) {
+      failedOnce = true
+      await route.abort('failed')
+    } else {
+      const payload = path === '/miniapp/setup-options' ? { setup_options: setup }
+        : { runner_state: { state: 'setup', status: 'setup', session: null } }
+      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, ...payload }), headers: { 'Access-Control-Allow-Origin': site.slice(0, -1) } })
+    }
+  })
+  await page.goto(site)
+  await expect(page.getByRole('alert')).toContainText('Ответ сервера не получен')
+  await page.getByRole('button', { name: 'Повторить загрузку' }).click()
+  await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
+  expect(failedOnce).toBe(true)
+})
+
 test('built Mini App answers a case and shows review on desktop/mobile', async ({ page }) => {
   await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
   await page.addInitScript(() => { (window as typeof window & { Telegram: unknown }).Telegram = { WebApp: { initData: 'synthetic-miniapp-proof', ready() {}, expand() {} } } })
