@@ -65,7 +65,7 @@ from app.db import (
     get_question_options,
     get_quiz_session,
     get_selected_categories_for_session,
-    get_owner_stats,
+    get_owner_period_stats,
     init_db_connection,
     select_random_approved_question_ids_across_active_categories,
     select_random_approved_question_ids_by_category,
@@ -543,55 +543,16 @@ async def ping_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await safe_reply(update, "Бот на связи ✅")
 
 
-def format_owner_stats_text(stats: dict) -> str:
-    lines = [
-        "📊 Статистика бота",
-        "",
-        f"Пользователи всего: {stats['total_users']}",
-        (
-            "Новые пользователи: "
-            f"24ч — {stats['new_users_24h']}, "
-            f"7д — {stats['new_users_7d']}, "
-            f"30д — {stats['new_users_30d']}"
-        ),
-        (
-            "Активные пользователи: "
-            f"24ч — {stats['active_users_24h']}, "
-            f"7д — {stats['active_users_7d']}, "
-            f"30д — {stats['active_users_30d']}"
-        ),
-        "",
-        f"Сессии всего: {stats['total_quiz_sessions']}",
-        f"Сессии завершено: {stats['completed_quiz_sessions']}",
-        f"Сессии в процессе: {stats['in_progress_quiz_sessions']}",
-        f"Ответов всего: {stats['total_quiz_answers']}",
-        "",
-        f"Одобренных вопросов: {stats['total_approved_questions']}",
-        f"Активных категорий: {stats['active_categories_count']}",
-        "",
-        "Вопросы по категориям:",
-    ]
-
-    questions_by_category = stats.get("questions_by_category", [])
-    if questions_by_category:
-        lines.extend(
-            f"• {item['category_name']}: {item['question_count']}"
-            for item in questions_by_category
-        )
-    else:
-        lines.append("• Нет данных")
-
-    lines.extend(["", "Топ-5 категорий по начатым сессиям (30 дней):"])
-    top_categories = stats.get("top_categories_30d", [])
-    if top_categories:
-        lines.extend(
-            f"• {item['category_name']}: {item['started_sessions']}"
-            for item in top_categories
-        )
-    else:
-        lines.append("• Нет данных")
-
-    return "\n".join(lines)
+def format_owner_period_stats_text(stats: dict) -> str:
+    return "\n".join((
+        f"📊 Учебная активность за {stats['period']}",
+        f"Активных пользователей: {stats['active_users']}",
+        f"Квизов начато: {stats['quiz_started']}, завершено: {stats['quiz_completed']}",
+        f"Ответов на вопросы: {stats['quiz_answers']}",
+        f"Глоссарий: начато {stats['glossary_started']}, завершено {stats['glossary_completed']}",
+        f"Обновлено книжных отметок: {stats['reading_items_updated']}",
+        "Другой период: /stats 24h, /stats 7d или /stats 30d",
+    ))
 
 
 async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -607,12 +568,18 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await safe_reply(update, "Недоступно")
         return
 
+    args = getattr(context, "args", None) or []
+    period = args[0] if len(args) == 1 else "7d" if not args else None
+    if period not in {"24h", "7d", "30d"}:
+        await safe_reply(update, "Выберите период: /stats 24h, /stats 7d или /stats 30d")
+        return
+
     def _load_stats():
         with closing(get_connection(settings.db_path)) as conn, conn:
-            return get_owner_stats(conn)
+            return get_owner_period_stats(conn, period)
 
     stats = await _run_db_task(_load_stats)
-    await safe_reply(update, format_owner_stats_text(stats))
+    await safe_reply(update, format_owner_period_stats_text(stats))
 
 
 def _parse_miniapp_answer_payload(payload: dict) -> tuple[int, int, int] | None:

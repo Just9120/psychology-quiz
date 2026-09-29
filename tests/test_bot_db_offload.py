@@ -31,7 +31,9 @@ class BotDbOffloadTests(unittest.TestCase):
             if func.__name__ == '_load_ui_context':
                 return ([{'id': 1, 'name': 'Cat'}], None)
             if func.__name__ == '_load_stats':
-                return {'total_users': 0, 'new_users_24h': 0, 'new_users_7d': 0, 'new_users_30d': 0, 'active_users_24h': 0, 'active_users_7d': 0, 'active_users_30d': 0, 'total_quiz_sessions': 0, 'completed_quiz_sessions': 0, 'in_progress_quiz_sessions': 0, 'total_quiz_answers': 0, 'total_approved_questions': 0, 'active_categories_count': 0, 'questions_by_category': [], 'top_categories_30d': []}
+                return {'period': '7d', 'active_users': 0, 'quiz_started': 0, 'quiz_completed': 0,
+                        'quiz_answers': 0, 'glossary_started': 0, 'glossary_completed': 0,
+                        'reading_items_updated': 0}
             return 'normal'
 
         with patch('app.main._run_db_task', side_effect=fake_run_db_task):
@@ -41,6 +43,19 @@ class BotDbOffloadTests(unittest.TestCase):
             asyncio.run(main.reading_mode_button_handler(update_mode, context))
 
         self.assertGreaterEqual(len(calls), 4)
+
+    def test_stats_period_rejects_other_actor_and_invalid_window(self):
+        context = self._context()
+        context.args = ['all']
+        update = SimpleNamespace(effective_chat=SimpleNamespace(type='private'),
+                                 effective_user=SimpleNamespace(id=1),
+                                 message=SimpleNamespace(reply_text=AsyncMock()))
+        asyncio.run(main.stats_command(update, context))
+        self.assertIn('/stats 7d', update.message.reply_text.await_args.args[0])
+        update.effective_user.id = 2
+        context.args = ['7d']
+        asyncio.run(main.stats_command(update, context))
+        self.assertEqual('Недоступно', update.message.reply_text.await_args.args[0])
 
 
     def test_quiz_command_explains_modes_and_preserves_callback_buttons(self):

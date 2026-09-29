@@ -822,3 +822,39 @@ def get_owner_stats(conn: Connection) -> dict[str, Any]:
             for row in top_categories_30d_rows
         ],
     }
+
+
+OWNER_STATS_PERIODS = {"24h": 1, "7d": 7, "30d": 30}
+
+
+def get_owner_period_stats(conn: Connection, period: str, *, now: datetime | None = None) -> dict[str, Any]:
+    """Aggregate learning activity for an allowed rolling UTC period, without identities."""
+    if not isinstance(period, str) or period not in OWNER_STATS_PERIODS:
+        raise ValueError("invalid_period")
+    current = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
+    cutoff = (current - timedelta(days=OWNER_STATS_PERIODS[period])).strftime("%Y-%m-%d %H:%M:%S")
+
+    def count(query: str, *params: object) -> int:
+        return int(conn.execute(query, params).fetchone()[0])
+
+    # SQLite and PostgreSQL both store these UTC timestamps as text. Some
+    # learning events use ISO's T separator; normalize only for comparison.
+    active = count("""
+        SELECT COUNT(DISTINCT user_id) FROM (
+            SELECT user_id FROM quiz_sessions WHERE replace(substr(started_at,1,19),'T',' ') >= ?
+            UNION ALL SELECT user_id FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') >= ?
+            UNION ALL SELECT user_id FROM user_review_events WHERE replace(substr(answered_at,1,19),'T',' ') >= ?
+            UNION ALL SELECT user_id FROM user_literature_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?
+        ) activity
+    """, cutoff, cutoff, cutoff, cutoff)
+    return {
+        "ok": True,
+        "period": period,
+        "active_users": active,
+        "quiz_started": count("SELECT COUNT(*) FROM quiz_sessions WHERE started_at >= ?", cutoff),
+        "quiz_completed": count("SELECT COUNT(*) FROM quiz_sessions WHERE status='finished' AND finished_at >= ?", cutoff),
+        "quiz_answers": count("SELECT COUNT(*) FROM quiz_answers WHERE answered_at >= ?", cutoff),
+        "glossary_started": count("SELECT COUNT(*) FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') >= ?", cutoff),
+        "glossary_completed": count("SELECT COUNT(*) FROM glossary_sessions WHERE status='completed' AND replace(substr(updated_at,1,19),'T',' ') >= ?", cutoff),
+        "reading_items_updated": count("SELECT COUNT(*) FROM user_literature_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?", cutoff),
+    }

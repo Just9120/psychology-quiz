@@ -11,6 +11,18 @@ export interface Account {
   link_target: { telegram_id: number; username: string | null; display_name: string } | null
 }
 
+export interface OwnerStats {
+  ok: true
+  period: '24h' | '7d' | '30d'
+  active_users: number
+  quiz_started: number
+  quiz_completed: number
+  quiz_answers: number
+  glossary_started: number
+  glossary_completed: number
+  reading_items_updated: number
+}
+
 export interface SetupOptions {
   categories: { id: number; name: string; topic_id?: string | null; module?: string | null }[]
   question_count_choices: (5 | 10 | 15 | 'all')[]

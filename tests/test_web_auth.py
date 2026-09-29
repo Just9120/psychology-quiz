@@ -72,6 +72,19 @@ def login(web):
     return web.client.get('/web/auth/me').json()['csrf_token']
 
 
+def test_owner_period_stats_require_session_csrf_and_allowed_period(web):
+    assert post(web, 'owner/stats', {'period': '7d'}).status_code == 401
+    register(web)
+    csrf = login(web)
+    assert post(web, 'owner/stats', {'period': '7d'}).status_code == 403
+    assert post(web, 'owner/stats', {'period': 'all'}, csrf=csrf).status_code == 400
+    result = post(web, 'owner/stats', {'period': '7d'}, csrf=csrf)
+    assert result.status_code == 200
+    body = result.json()
+    assert body['period'] == '7d' and isinstance(body['active_users'], int)
+    assert not any(key in str(body).lower() for key in ('user_id', 'telegram_id', 'username', EMAIL))
+
+
 def test_profile_name_is_private_and_survives_auth_schema_migration(web):
     register(web)
     csrf = login(web)
@@ -128,6 +141,7 @@ def test_invited_student_requires_both_email_and_invited_telegram_actor(web):
         app.state.web_auth.confirm_telegram_link(code, 42)
         assert post(student, 'link/complete', csrf=csrf).status_code == 200
         assert client.get('/web/auth/me').json()['needs_identity'] is False
+        assert post(student, 'owner/stats', {'period': '7d'}, csrf=csrf).status_code == 403
 
 
 def test_expired_invitation_does_not_send_registration_mail(web):
