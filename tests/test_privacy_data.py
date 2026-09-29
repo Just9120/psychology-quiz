@@ -18,6 +18,7 @@ def conn():
         CREATE TABLE questions(id INTEGER PRIMARY KEY);
         CREATE TABLE quiz_sessions(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
         CREATE TABLE quiz_answers(id INTEGER PRIMARY KEY,session_id INTEGER REFERENCES quiz_sessions(id) ON DELETE CASCADE);
+        CREATE TABLE homework_attempts(session_id INTEGER PRIMARY KEY REFERENCES quiz_sessions(id) ON DELETE CASCADE, assignment_id TEXT NOT NULL);
         CREATE TABLE glossary_sessions(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
         CREATE TABLE user_literature_progress(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
         CREATE TABLE user_learning_goals(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
@@ -28,6 +29,7 @@ def conn():
         INSERT INTO questions VALUES(9);
         INSERT INTO quiz_sessions VALUES(11,1),(22,2);
         INSERT INTO quiz_answers VALUES(11,11),(22,22);
+        INSERT INTO homework_attempts VALUES(11,'assignment-1'),(22,'assignment-2');
         INSERT INTO glossary_sessions VALUES(11,1),(22,2);
         INSERT INTO user_literature_progress VALUES(11,1),(22,2);
         INSERT INTO user_learning_goals VALUES(11,1),(22,2);
@@ -57,6 +59,7 @@ def test_deletion_is_scoped_and_one_use(conn):
         assert conn.execute(f"SELECT count(*) FROM {table} WHERE user_id=1").fetchone()[0] == 0
         assert conn.execute(f"SELECT count(*) FROM {table} WHERE user_id=2").fetchone()[0] == 1
     assert conn.execute("SELECT count(*) FROM quiz_answers").fetchone()[0] == 1
+    assert conn.execute("SELECT session_id FROM homework_attempts").fetchall() == [(22,)]
     assert conn.execute("SELECT count(*) FROM questions").fetchone()[0] == 1
     assert conn.execute("SELECT count(*) FROM users").fetchone()[0] == 2
     with pytest.raises(PrivacyError, match="invalid_confirmation"):
