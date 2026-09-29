@@ -278,12 +278,14 @@ def test_current_legacy_counts_preserved_without_source_certification():
     assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 14
     # Reading learning sources for an audit must not silently approve derivatives.
     assert any(source["kind"] == "learning_material" for source in policy.sources.values())
-    for kind, expected in [("questions", 420), ("glossary", 96), ("literature", 130)]:
+    for kind, expected in [("questions", 404), ("glossary", 77), ("literature", 130)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected
         assert publication.validate_publications(kind) == []
-    item = json.loads(next((publication.ROOT / "content/questions").rglob("*.json")).read_text(encoding="utf-8"))[0]
+    item = next(item for path in (publication.ROOT / "content/questions").rglob("*.json")
+                for item in json.loads(path.read_text(encoding="utf-8"))
+                if item.get("status") == "approved" and policy.is_legacy("questions", item))
     assert policy.is_legacy("questions", item)
     item["explanation"] += " changed"
     assert not policy.can_publish("questions", item)
@@ -322,7 +324,9 @@ def test_actual_runtime_loader_excludes_unreviewed_new_content(tmp_path, monkeyp
     else:
         monkeypatch.setattr(literature, "LITERATURE_DIR", tmp_path)
         ids = [entry["id"] for entry in literature.load_literature_items()]
-    assert ids == [entry["id"] for entry in sorted(entries, key=lambda entry: entry.get("global_order", 0))]
+    policy = publication.load_policy()
+    assert ids == [entry["id"] for entry in sorted(entries, key=lambda entry: entry.get("global_order", 0))
+                   if policy.can_publish(kind, entry)]
     assert "unreviewed_new_entry" not in ids
 
 

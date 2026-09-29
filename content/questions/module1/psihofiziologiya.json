@@ -84,7 +84,7 @@
     "category": "Психофизиология",
     "source_ref": "module1/psychophysiology/lecture3_motivation_and_wakefulness",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Как корректнее описывать роль дофамина в современной учебной психофизиологии?",
     "options": [
       "Как систему кодирования вознаграждения, мотивационной значимости и ошибки прогноза",
@@ -596,7 +596,7 @@
     "category": "Психофизиология",
     "source_ref": "module1/psychophysiology/lecture3_motivation_and_wakefulness",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Как обычно связан уровень активации с продуктивностью выполнения задачи?",
     "options": [
       "Чем выше активация, тем всегда лучше результат",
@@ -1028,7 +1028,7 @@
     "category": "Психофизиология",
     "source_ref": "module1/psychophysiology/lecture9_attention_properties",
     "difficulty": "medium",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему жалоба «я не могу сосредоточиться» недостаточна для точного психофизиологического вывода?",
     "options": [
       "Потому что внимание вообще нельзя анализировать по частям",
@@ -1060,7 +1060,7 @@
     "category": "Психофизиология",
     "source_ref": "module1/psychophysiology/lecture11_perception_and_attention_networks",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему клиент может быть уверен, что «точно увидел» враждебное отношение, хотя в данных это неочевидно?",
     "options": [
       "Потому что восприятие всегда полностью объективно",

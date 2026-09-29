@@ -36,7 +36,7 @@
     "category": "Общая психология",
     "source_ref": "module1/general/lecture1",
     "difficulty": "easy",
-    "status": "approved",
+    "status": "retired",
     "question": "Какой метод позволяет целенаправленно изменять условия и отслеживать влияние этих изменений на психическое явление?",
     "options": [
       "Эксперимент",
@@ -772,7 +772,7 @@
     "category": "Общая психология",
     "source_ref": "module1/general/practice1",
     "difficulty": "hard",
-    "status": "approved",
+    "status": "retired",
     "question": "Почему уверенность консультанта в своей версии может оставаться высокой даже тогда, когда он уже упустил часть материала клиента?",
     "options": [
       "Потому что память профессионала автоматически точна",

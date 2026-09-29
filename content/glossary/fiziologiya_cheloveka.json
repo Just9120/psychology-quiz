@@ -14,7 +14,7 @@
       "question:m1_phys_001"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "dendrites",
@@ -88,7 +88,7 @@
       "question:m1_phys_005"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "chemical_synaptic_transmission",
@@ -126,7 +126,7 @@
       "question:m1_phys_007"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "voluntary_involuntary_regulation",
@@ -143,7 +143,7 @@
       "question:m1_phys_008"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "central_nervous_system",
@@ -198,7 +198,7 @@
       "question:m1_phys_011"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "reflex",

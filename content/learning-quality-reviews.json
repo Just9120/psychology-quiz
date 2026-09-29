@@ -861,7 +861,7 @@
       ]
     },
     "questions:m1_intro_031": {
-      "item_sha256": "79b4bc70146d46f2e1ca808238e7cb10ada189e4d29dd68f52f01461af163097",
+      "item_sha256": "660272e87c76866e773f76efe11a7569d581e4542ae68eaebef29451615aa9e5",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -879,7 +879,7 @@
         "source_support_incomplete",
         "high_severity_length_cue"
       ],
-      "note": "Различие помощи и медицинской роли подтверждено; формальная процедура диагностического заключения в прочитанных фрагментах не раскрыта.",
+      "note": "Вводная лекция различает поддержку и медицинскую роль, но не раскрывает процедуру диагностического заключения как в ключе.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
@@ -1482,7 +1482,7 @@
       ]
     },
     "questions:m1_intro_055": {
-      "item_sha256": "30dfb90ba5f621ed0da43ff9c719f33fb3e239bc40b7158cdbaa6ed2746537e7",
+      "item_sha256": "85220e6fe67f77c727d31c245a0c0acd22561f99506491d1c215a192b11fe3ab",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1499,7 +1499,7 @@
       "issues": [
         "wording_or_semantic_review"
       ],
-      "note": "Ритм/поддержка, нормализация волнения и сомнений согласуются с фрагментами; точные формулы о героизме/одиночестве не найдены в прочитанном фрагменте. Точный тезис о героических рывках не подтвержден прочитанным фрагментом, хотя устойчивый ритм/поддержка подтверждены.",
+      "note": "Ритм/поддержка, нормализация волнения и сомнений согласуются с фрагментами; точные формулы о героизме/одиночестве не найдены в прочитанном фрагменте. Точный тезис о героических рывках не подтвержден прочитанным фрагментом, хотя устойчивый ритм/поддержка подтверждены. Текущая тема 7 прочитана: ритм, сомнения и поддержка описаны, но противопоставление «героизму» и исключительное условие одиночества ей не принадлежат. Редакция снята с выдачи, ID/история сохранены.",
       "sources": [
         {
           "source_id": "17cRf5sw25ROGoRyzxRBv5kDoGT5B1TOfqz_5Zhj7ugA",
@@ -1510,7 +1510,7 @@
       ]
     },
     "questions:m1_intro_056": {
-      "item_sha256": "69c0daa3fbf3878d524de99f4b94baefdb8140ec441d5d318e8037fba51eeb99",
+      "item_sha256": "7317d2c9a58c53ce444b5b18fb8b0c18f635586a3778f3665d5d825ff3b74d33",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1527,7 +1527,7 @@
       "issues": [
         "wording_or_semantic_review"
       ],
-      "note": "Ритм/поддержка, нормализация волнения и сомнений согласуются с фрагментами; точные формулы о героизме/одиночестве не найдены в прочитанном фрагменте. Нормализация сомнений подтверждена; источник не подтверждает исключительное условие опасности только при отсутствии поддержки.",
+      "note": "Ритм/поддержка, нормализация волнения и сомнений согласуются с фрагментами; точные формулы о героизме/одиночестве не найдены в прочитанном фрагменте. Нормализация сомнений подтверждена; источник не подтверждает исключительное условие опасности только при отсутствии поддержки. Текущая тема 7 прочитана: ритм, сомнения и поддержка описаны, но противопоставление «героизму» и исключительное условие одиночества ей не принадлежат. Редакция снята с выдачи, ID/история сохранены.",
       "sources": [
         {
           "source_id": "17cRf5sw25ROGoRyzxRBv5kDoGT5B1TOfqz_5Zhj7ugA",
@@ -1863,7 +1863,7 @@
       ]
     },
     "glossary:working_alliance": {
-      "item_sha256": "14f2f05b86de5b18131aa2b1000821d71e0e0d839bb444be73ab7a03e4fa4691",
+      "item_sha256": "90705821751e39307705e14cbb005df832d09449081c1c0d2087fb477b5fb872",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1882,7 +1882,7 @@
         "example_is_question_reference",
         "definition_scope_requires_review"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
@@ -1945,7 +1945,7 @@
       ]
     },
     "questions:m1_gp_003": {
-      "item_sha256": "2a5219d62dc189cba065491fe14cb85824c1628b9a1edbc322f8e95d61b33818",
+      "item_sha256": "6da30e2826976e987ac9205002b74157ee879fe723a75c87908054b2314448a8",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1962,7 +1962,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Источник обсуждает эксперимент как проверку гипотез, но точное определение контролируемого изменения фактора в прочитанном фрагменте не дано; требуется evidence экспериментального раздела.",
+      "note": "Лекция 1 упоминает повторение экспериментов, но не определяет эксперимент через управляемое изменение условий; выбранный источник недостаточен.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
@@ -3171,7 +3171,7 @@
       ]
     },
     "questions:m1_gp_049": {
-      "item_sha256": "fda8e38469bcac44e31245bd2f193c042761737a4290855505a70862fe3df784",
+      "item_sha256": "b94323e33ad9dbcbae6780dcbe21ab955b8e7ed7463d229b1b6edd986060a162",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -3188,7 +3188,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Фильтрация внимания и ограниченность памяти подтверждены; тезис о неосознаваемой ошибке при высокой уверенности ещё не подтверждён выбранным фрагментом практики.",
+      "note": "Фильтрация внимания и ограниченность памяти подтверждены; тезис о неосознаваемой ошибке при высокой уверенности ещё не подтверждён выбранным фрагментом практики. Текущая практика №1 повторно прочитана: источник описывает пропуск деталей при узком внимании и перегрузке памяти, но не подтверждает высокую субъективную уверенность при неосознаваемой ошибке. Редакция снята с выдачи, ID/история сохранены.",
       "sources": [
         {
           "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
@@ -3290,17 +3290,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "wording_or_semantic_review"
-      ],
-      "note": "Практика прямо различает факты/интерпретации, отбор внимания и ограниченную рабочую память. Ключи применяют эти принципы; буквальные кейсы являются производными. Рабочая память подтверждена практикой, а explanation объявляет прямую связь в лекции; не все части утверждения имеют один и тот же источник.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Практика прямо описывает фильтрацию внимания, ограниченный объём рабочей памяти и потерю деталей при перегрузке/стрессе. Сценарий «я всё забываю» — авторская иллюстрация нескольких возможных механизмов, не диагноз и не доказательство единственной причины.",
       "sources": [
         {
           "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
           "modified_time": "2026-04-08T10:01:12.380Z",
           "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
+          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 17600:21500"
         }
       ]
     },
@@ -3445,7 +3443,7 @@
       ]
     },
     "glossary:experiment": {
-      "item_sha256": "c88347f64d4cba80da8761be33de69a983fa7c2242ad379c11d8423b5615a993",
+      "item_sha256": "10b027a97ed0c9b97fc60e17d28b1b3489ec3908b4633c2b5969e5cbacf3982f",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -3464,7 +3462,7 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
@@ -3562,7 +3560,7 @@
       ]
     },
     "glossary:attention": {
-      "item_sha256": "4fdbe09703f6c31a14ba092ecf71c16e9497ba39489f0b7ee45a78a9c20437a6",
+      "item_sha256": "3a8074954f287f1b10d24a02deb7a90a0e76aee50bd69755c665df2f6b21475e",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -3582,7 +3580,7 @@
         "example_is_question_reference",
         "definition_scope_requires_review"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
@@ -4352,7 +4350,7 @@
       ]
     },
     "questions:m1_phys_024": {
-      "item_sha256": "ed6e27d63485af939e966c956c8c441513535a5b3ce0680428900c5b7b0f4707",
+      "item_sha256": "61df22eb9814ade192e8b6f18fff5672e152aece484a88199395708784a12c39",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -4370,7 +4368,7 @@
         "source_support_incomplete",
         "wording_or_semantic_review"
       ],
-      "note": "Произвольная регуляция/дыхательные упражнения присутствуют; конкретный автономный механизм уменьшения напряжения не подтверждён выбранным фрагментом. По одному наблюдению нельзя считать механизм установленным. Механизм нельзя уверенно установить по одному наблюдению снижения напряжения.",
+      "note": "Лекция 6 описывает дыхание и возможное снижение эмоционального напряжения, но не подтверждает симпатический механизм по наблюдению; вопрос о механизме снят.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
@@ -4786,7 +4784,7 @@
       ]
     },
     "questions:m1_phys_040": {
-      "item_sha256": "db15b04780c94594ca12def7143fd1a2aa4868e28b2202b17725980c662f2f2d",
+      "item_sha256": "bb8b90b1f2c074fff36a347324eb0f7bbdee963e00309c771e21e0d9c887f9ac",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -4803,7 +4801,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Стрессовая связь прочитана; дефицит сна/восстановления как весь причинный контекст не подтверждён указанным фрагментом.",
+      "note": "Стрессовая связь прочитана; дефицит сна/восстановления как весь причинный контекст не подтверждён указанным фрагментом. Текущая лекция 3 иммунной системы прочитана: стресс упоминается, но сон, утомляемость и восстановление как полный причинный набор этих ответов отсутствуют. Редакция снята с выдачи, ID/история сохранены.",
       "sources": [
         {
           "source_id": "1EMJFu79Uh7iBGWbHD3tT6uzbK8K8noOPyqGqaKiaQao",
@@ -5093,7 +5091,7 @@
       ]
     },
     "questions:m1_phys_051": {
-      "item_sha256": "44e4b02c1732579178bcb55e8657a42f20567288dad1db9dc200e76f802d81f9",
+      "item_sha256": "74f5b88640f91a3fcd8ef29e1578b7b58e5dab29b318b3f5292c675d3fd82176",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -5111,7 +5109,7 @@
         "source_support_incomplete",
         "high_severity_length_cue"
       ],
-      "note": "Общая стрессовая связь подтверждена; уязвимость/утомляемость/восстановление не специфичны для иммунной системы и требуют отдельного evidence.",
+      "note": "Общая стрессовая связь подтверждена; уязвимость/утомляемость/восстановление не специфичны для иммунной системы и требуют отдельного evidence. Текущая лекция 3 иммунной системы прочитана: стресс упоминается, но сон, утомляемость и восстановление как полный причинный набор этих ответов отсутствуют. Редакция снята с выдачи, ID/история сохранены.",
       "sources": [
         {
           "source_id": "1EMJFu79Uh7iBGWbHD3tT6uzbK8K8noOPyqGqaKiaQao",
@@ -5230,7 +5228,7 @@
       ]
     },
     "glossary:neuron": {
-      "item_sha256": "d0766a5f675187e70c741bc0dcaa20f647c92df284f000ab46cd5ad37be5442d",
+      "item_sha256": "8e14a09648c57a149d8e4d14e802ce188c4bebe33df6c401839100c1cc8a7c07",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-27",
@@ -5249,7 +5247,7 @@
         "example_is_question_reference",
         "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Приём, обработка и передача импульсов даны; утверждение о восприятии, эмоциях и поведении в определении не подтверждено.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Приём, обработка и передача импульсов даны; утверждение о восприятии, эмоциях и поведении в определении не подтверждено. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5347,7 +5345,7 @@
       ]
     },
     "glossary:synapse": {
-      "item_sha256": "c88b3024539b7ebf768904c0ac1d4e505bbd93c5d40249a322f35e44a1e4efba",
+      "item_sha256": "dab216fa14fd914bd0f7d5094826eb47f3a7a7cba84a9451fed3b49a9bff14c1",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-27",
@@ -5366,7 +5364,7 @@
         "example_is_question_reference",
         "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Контакт и химическая/электрическая передача даны; регуляция и медиатор в определении не названы.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Контакт и химическая/электрическая передача даны; регуляция и медиатор в определении не названы. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5406,7 +5404,7 @@
       ]
     },
     "glossary:reflex_principle": {
-      "item_sha256": "dd8e6a55c62de926c46576e69a43312ffb02df24243e038ee6fc235fabea0dfc",
+      "item_sha256": "05af0d28ebd3100033462ba29f4430e1f7e3fc22789bd38faeec2da8d2c72f98",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -5425,7 +5423,7 @@
         "example_is_question_reference",
         "definition_scope_requires_review"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5436,7 +5434,7 @@
       ]
     },
     "glossary:voluntary_involuntary_regulation": {
-      "item_sha256": "170a00c1dc1f58ef3542234a8db2255f764c42e14bbda1ff0430b4d8eb3ef37e",
+      "item_sha256": "1eff8277e83ba898b0755e30333951098c016b8cb9a2622ce4ec37ea840a1417",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -5455,7 +5453,7 @@
         "example_is_question_reference",
         "definition_scope_requires_review"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
@@ -5524,7 +5522,7 @@
       ]
     },
     "glossary:sleep_stability": {
-      "item_sha256": "2719cded060b8ee20475b698e258c4a780203f3ddcf53c44f99ab7dadd11ec38",
+      "item_sha256": "3e9c39984042946222916e0837d1cb4190f62bb0dc1feae9f9c796c9c2d4f578",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -5543,7 +5541,7 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
@@ -7002,7 +7000,7 @@
       ]
     },
     "questions:m1_vnd_054": {
-      "item_sha256": "b089294b394828a76e4378b6b05642841ca2dc0acd99ffaf68c6882149dc7b28",
+      "item_sha256": "dd7fadaa6517326567ae953cdcd57415e463d1b8b952694bd2c333a0e15e0bef",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -7019,7 +7017,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Общая физиология эмоций не подтверждает конкретную консультативную стратегию при «замри»; нужен первичный practical source и контекст, не уверенная интерпретация одного поведения.",
+      "note": "Лекция 4 о физиологии эмоций не содержит консультативного протокола для реакции «замри»; клинический совет снят.",
       "sources": [
         {
           "source_id": "1SqvFpDhIdbcZ3UjZNr4s0pGxBQSVHAOAn4UiYG8JQHo",
@@ -7141,7 +7139,7 @@
       ]
     },
     "glossary:pavlov_teaching": {
-      "item_sha256": "781e9b70d522478fcd330f19b02e2aa7a8131c351466168029a23641647b2b4b",
+      "item_sha256": "1f5989c3a2e7631f1e4f4d5bd5d99e26fc38527f89285862e4fef637d498d7d9",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -7161,7 +7159,7 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
@@ -7291,7 +7289,7 @@
       ]
     },
     "glossary:differentiation": {
-      "item_sha256": "d502a7521e0def3f805dc5385e6daea3a2af96c22c63d0b95a983ea636e98fd1",
+      "item_sha256": "5b559e2430c11a7c09a0b01bf804e7f44ac33b9b4a614072d0e1702bad77c1ba",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -7310,7 +7308,7 @@
         "example_is_question_reference",
         "definition_scope_requires_review"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
@@ -7596,7 +7594,7 @@
       ]
     },
     "questions:m1_psyf_006": {
-      "item_sha256": "319f425a9955074e3214ae761623c1d5daacf3d19c50e5ff4cf26ac498703af7",
+      "item_sha256": "519bd7ff084e09f2d520d19413a4a788e3fa1bd27eec65d72e0dd0c76863da05",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -7613,7 +7611,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Ключ шире формулы «гормон удовольствия», но точное утверждение об ошибке прогноза не подтверждено выбранным фрагментом; требуется прямой источник этой части.",
+      "note": "Лекция 3 связывает дофамин с мотивацией и вознаграждением, но не раскрывает ошибку прогноза; составной ключ снят.",
       "sources": [
         {
           "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
@@ -8463,7 +8461,7 @@
       ]
     },
     "questions:m1_psyf_038": {
-      "item_sha256": "9dc76a0d1e472467aca303dd91645e23f3ab6b1ec0805fccd1eb06b0e67d17f0",
+      "item_sha256": "cc846652c7289d0deaab4a42911d99dc9e1ae450b0939182699872c911ede0d5",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -8480,7 +8478,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Зависимость оптимальной активации от задачи не тождественна модели ограниченных ресурсов. Обобщение об умеренной активации требует прямого источника и границы применимости.",
+      "note": "Удерживаемая из-за source conflict лекция 10 не подтверждает заявленную универсальную кривую активации и продуктивности; публикация снята.",
       "sources": [
         {
           "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
@@ -9209,7 +9207,7 @@
       ]
     },
     "questions:m1_psyf_065": {
-      "item_sha256": "89fd3502470bd2e51a696fe40b10a2c4f9d9e3ad998b4758bc31d61b0dbf0445",
+      "item_sha256": "e90baa1c47f92195f03216570532a4126597de84606c18348d261c93e986ba3b",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -9226,7 +9224,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Различение концентрации и устойчивости есть в лекции; конкретный разбор неспецифичной жалобы и заявленная ссылка объяснения требуют подтверждения.",
+      "note": "Лекция 9 перечисляет свойства внимания, но не утверждает заявленный разбор жалобы; объяснение ложно приписывает его лекции.",
       "sources": [
         {
           "source_id": "1znCyGf9RhkhkbsCKGmWQHGhcliY9kfekglchDlWp9As",
@@ -9265,7 +9263,7 @@
       ]
     },
     "questions:m1_psyf_067": {
-      "item_sha256": "3c7b7413b956c4e765d716c547ad2149f059b4ec54b55c49bfc17fc0219eceff",
+      "item_sha256": "83764eb13381064d7f4119f4eee8df9a55200c4d92925a63807f20c813cd68ec",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -9282,7 +9280,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Контекстуальное восприятие поддержано, но интерпретация чужой враждебности шире прочитанного опыта с ожиданиями; точный practical source не установлен.",
+      "note": "Лекция 11 рассматривает восприятие и внимание, но не подтверждает вывод о распознавании чужой враждебности в сформулированном кейсе.",
       "sources": [
         {
           "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
@@ -9611,7 +9609,7 @@
       ]
     },
     "glossary:limited_attention_resource": {
-      "item_sha256": "38dcad6f23ff550f106f5f0e388f34fcaec51b6a0611347745fbf1cfd5f37ec3",
+      "item_sha256": "5114f6e83cd930ded32dfdf84587e25b709f0c5fce83b313874d13d2192c2354",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -9630,7 +9628,7 @@
         "example_is_question_reference",
         "definition_scope_requires_review"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
@@ -9641,7 +9639,7 @@
       ]
     },
     "glossary:attention_filtering": {
-      "item_sha256": "c4c8116bad6b8eb1d0a0ff64cebfe586d2d3ba969f47d2e26d19224a02b98575",
+      "item_sha256": "924ea1b4b1d51367a6f752d092a56393f333be813a4e1264fc9572656e81fd17",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-27",
@@ -9660,7 +9658,7 @@
         "example_is_question_reference",
         "source_claim_partially_supported"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики. Точечная сверка 27.09.2026: Глоссарий описывает модель раннего фильтра; опубликованные определение и пример со ссылкой на вопрос не подтверждены целиком.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики. Точечная сверка 27.09.2026: Глоссарий описывает модель раннего фильтра; опубликованные определение и пример со ссылкой на вопрос не подтверждены целиком. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
@@ -9762,17 +9760,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Разбор Альберта и исследовательской конструкции найден, но выбранные фрагменты не подтверждают все детали процедуры, заявленные в объяснении.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Практика №7 прямо предлагает разбирать классическое исследование по цели, процедуре, результату и парадигме; затем обсуждает допустимость обобщения. Вопрос проверяет исследовательскую конструкцию, не этическое одобрение исторического эксперимента.",
       "sources": [
         {
           "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7700:9300, 10500:12200, 25000:26700, 36300:38200"
+          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 4000:10200"
         }
       ]
     },
@@ -9790,17 +9786,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Разбор Альберта и исследовательской конструкции найден, но выбранные фрагменты не подтверждают все детали процедуры, заявленные в объяснении.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Практика №7 описывает исходную гипотезу научения и последовательное сочетание нейтрального стимула с громким звуком в опыте маленького Альберта. Вопрос касается логики связи гипотезы и процедуры, не современной допустимости опыта.",
       "sources": [
         {
           "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7700:9300, 10500:12200, 25000:26700, 36300:38200"
+          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 4100:7300"
         }
       ]
     },
@@ -11960,7 +11954,7 @@
       ]
     },
     "questions:m2_exp_088": {
-      "item_sha256": "f250360d9a6d6d2bd05be40391098fe36c9b9aa7872530ec47a8084d93348b35",
+      "item_sha256": "219536ac688940c691c9f6978eed4422606b5947c0f41bc8973311e27a854cd4",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -11977,7 +11971,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Самоотбор способен ограничивать переносимость; знак смещения не установлен самим наличием мотивированных добровольцев. Слово «может» сохраняет гипотезу, но конкретное завышение не доказано.",
+      "note": "Практика №9 обсуждает исследование медитации и ограничения выборки, но не устанавливает направление смещения от самоотбора.",
       "sources": [
         {
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
@@ -12780,7 +12774,7 @@
       ]
     },
     "glossary:exp_psych_operational_definition": {
-      "item_sha256": "a7f72b9863b6bf4492f25cf491d64bc94f19f287ce2ede001f51a147f1ccf5e7",
+      "item_sha256": "c4e834f56d5e05db064b57032f1be2dfb12241f7271ba6f6fea38fb404a18feb",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -12798,7 +12792,7 @@
         "source_support_incomplete",
         "question_reference_is_not_primary_source"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
@@ -12837,7 +12831,7 @@
       ]
     },
     "glossary:exp_psych_observation": {
-      "item_sha256": "69bb537a075a553314a0dfd77ccf13e5a5f3d9190401573842e22b284007fc67",
+      "item_sha256": "33b23127a3e0146160e4a7efc20b421adb6748a3015d86a7a6378db46fa13174",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -12855,7 +12849,7 @@
         "source_support_incomplete",
         "question_reference_is_not_primary_source"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
@@ -12866,7 +12860,7 @@
       ]
     },
     "glossary:exp_psych_interpretation": {
-      "item_sha256": "3438a19d4d24681e70223a8a8ed3b6e6ae878da0523b30840443d4e634bf17d0",
+      "item_sha256": "0d2b4200032e0b8641b61b73276c46c149105b33292687382f46b25829e537a1",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -12884,7 +12878,7 @@
         "source_support_incomplete",
         "question_reference_is_not_primary_source"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
@@ -12895,7 +12889,7 @@
       ]
     },
     "glossary:exp_psych_hindsight": {
-      "item_sha256": "dfa060196e829e9825f3ffec2bff81eb0a05e784219ee1c6645fec87c728bb11",
+      "item_sha256": "4a46c41820b20e5515b88e3a19cca8e172cbc523bc6b9ca9707dcdbeef054415",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -12913,7 +12907,7 @@
         "source_support_incomplete",
         "question_reference_is_not_primary_source"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
@@ -13037,7 +13031,7 @@
       ]
     },
     "glossary:exp_psych_external_validity": {
-      "item_sha256": "a68ac0daa76f7331de825e0ea3c6486248136d65af2767b8d89950ba04f298ea",
+      "item_sha256": "42ecf6418849d3d5734acf468876e8b665e9379ab1e408dd8e30cb6adaae378b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -13055,7 +13049,7 @@
         "question_reference_is_not_primary_source",
         "definition_scope_requires_review"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
@@ -14609,7 +14603,7 @@
           "locator": "PDF pages (one-based): 3, 4, 5, 6, 7, 8, 9, 10, 11"
         }
       ],
-      "item_sha256": "3fe6c2b8834ef6049afe4b74a44f91249baf1db8d4db070cf9be6563672a2498",
+      "item_sha256": "ffa5506fe4a54a76fd3c6d2f0dcb3044ccaaac7dd221eddb9466109f090012f0",
       "checks": [
         "meaning",
         "definition",
@@ -14618,7 +14612,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "Дефиниция соответствует специальному употреблению курса для аномалий, но без этой границы может быть спутана с артефактом как продуктом процедуры/измерения. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Дефиниция соответствует специальному употреблению курса для аномалий, но без этой границы может быть спутана с артефактом как продуктом процедуры/измерения. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены."
     },
     "glossary:qual_methods_transcription": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
@@ -14965,7 +14959,7 @@
       "note": "Определение сопоставлено с полным фрагментом практики: внимание к процессу и человеку, позиции исследователя, деталям текста, транскрипции и контекстуальному переносу. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
     },
     "questions:m3_psychological_consulting_001": {
-      "item_sha256": "5fb00ab5f94076613a9199b4a2b4164f132a6e8dbcb5c1a45ce651359e6e019c",
+      "item_sha256": "78a3286b44a1e71fff2e7e05719dd97fcea9f208f6abd9e8be3f3d7b0d48a1e8",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -14982,7 +14976,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Определение точно передаёт вводную границу курса, но без атрибуции выглядит универсальным исключением людей с диагнозом из психологического консультирования. Требуется явно обозначить рамку курса/компетенций.",
+      "note": "Урок 1 даёт определение для рамки курса, но опубликованный вопрос представляет ограничение «психологически здоровые» как универсальное определение без рамки.",
       "sources": [
         {
           "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
@@ -15827,7 +15821,7 @@
       ]
     },
     "questions:m3_psychological_consulting_034": {
-      "item_sha256": "3d9d3b4664b0bad83bcbfbcd1cdf83dd0ffc51637a72507065495c922874abfd",
+      "item_sha256": "72da1ed461491ede9035888b45912aaecdd6e4fb3dc9e5406dc6fcb9a823e0d7",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -15844,7 +15838,7 @@
       "issues": [
         "source_support_incomplete"
       ],
-      "note": "Приватность/рамка поддержаны; точные онлайн-требования к фону и связи не сверены с прямым фрагментом. Не выводить нарушение контакта только из выключенной камеры.",
+      "note": "Урок 2 прямо подтверждает приватное пространство и нейтральный фон, но не содержит требование устойчивой связи в составном ключе.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
@@ -16286,17 +16280,15 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "source_support_incomplete"
-      ],
-      "note": "Приватность/рамка поддержаны; точные онлайн-требования к фону и связи не сверены с прямым фрагментом. Не выводить нарушение контакта только из выключенной камеры.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Урок 2 прямо требует приватности и конфиденциальности онлайн-пространства, предупреждения домашних и закрытой двери; нейтральный фон и предсказуемая среда описаны отдельно. Кейс с проходящими родственниками поддержан.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7600:10300, 11400:12400, 15800:17200"
         }
       ]
     },
@@ -17810,7 +17802,7 @@
       ]
     },
     "glossary:psychological_consulting": {
-      "item_sha256": "24035db71e363a638aaf04acfd38ff75e2aef18356a2873b629191b399250e6e",
+      "item_sha256": "4234a7c91646ba4ba1ff413db98c8a3b3075d6d2455438fff07bdc7ae374cb15",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -17829,7 +17821,7 @@
         "question_reference_is_not_primary_source",
         "example_is_question_reference"
       ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
       "sources": [
         {
           "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",

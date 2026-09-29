@@ -173,7 +173,9 @@ def validate_entry(entry: dict[str, Any], label: str, file_topic_id: str, active
         if not source_ref.startswith(SUPPORTED_SOURCE_REF_PREFIXES):
             errors.append(f"{label}: unsupported source_ref format: {source_ref}")
             continue
-        if source_ref.startswith(QUESTION_REF_PREFIX):
+        # Historical entries keep their original references for traceability;
+        # only a published term needs its linked question to remain published.
+        if status == "approved" and source_ref.startswith(QUESTION_REF_PREFIX):
             question_id = source_ref.removeprefix(QUESTION_REF_PREFIX)
             question_topic = approved_questions.get(question_id)
             if question_topic is None:

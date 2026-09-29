@@ -198,7 +198,7 @@
       "question:m1_psyf_011"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "attention_filtering",
@@ -218,6 +218,6 @@
       "question:m1_psyf_012"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   }
 ]

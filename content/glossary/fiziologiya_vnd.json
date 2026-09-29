@@ -31,7 +31,7 @@
       "question:m1_vnd_002"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "unconditioned_reflex",
@@ -128,7 +128,7 @@
       "question:m1_vnd_007"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "excitation_and_inhibition",

@@ -52,7 +52,7 @@
       "question:m1_gp_003"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "explanation_mechanism",
@@ -126,7 +126,7 @@
       "question:m1_gp_007"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "memory",
