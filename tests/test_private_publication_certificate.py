@@ -91,7 +91,11 @@ def test_signed_alternate_lesson_binding_rejects_topic_or_edition_change():
                "locator": "private certificate:questions:synthetic_question"}
     catalog = {"editions": {"c" * 64: edition}}
     document = {"schema_version": 1, "items": {"c" * 64: certificate}}
-    assert validate_private_bindings(catalog, document, key.public_key()) == document["items"]
+    active = {"questions:synthetic_question": certificate}
+    assert validate_private_bindings(catalog, document, key.public_key(), active) == document["items"]
+    with pytest.raises(ValueError, match="Missing current private curriculum binding"):
+        validate_private_bindings(catalog, {"schema_version": 1, "items": {}},
+                                  key.public_key(), active)
     with pytest.raises(ValueError, match="Invalid private curriculum binding"):
         validate_private_bindings({"editions": {"c" * 64: {**edition,
             "topic_id": "t_" + "b" * 12}}}, document, key.public_key())

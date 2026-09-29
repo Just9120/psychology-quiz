@@ -42,7 +42,7 @@ def validate_catalog(data):
     return data
 
 
-def validate_private_bindings(catalog, document, public_key):
+def validate_private_bindings(catalog, document, public_key, active_certificates=None):
     """Keep signed source-free lesson mappings valid across later item revisions."""
     if (not isinstance(document, dict) or document.get("schema_version") != 1
             or not isinstance(document.get("items"), dict)):
@@ -56,19 +56,26 @@ def validate_private_bindings(catalog, document, public_key):
                 or certificate_error("questions", {"id": edition["external_id"]}, certificate,
                                      public_key, item_sha256=edition["item_sha256"]) is not None):
             raise ValueError("Invalid private curriculum binding")
+    for digest, edition in catalog["editions"].items():
+        current = (active_certificates or {}).get("questions:" + edition["external_id"])
+        if (isinstance(current, dict) and current.get("schema_version") == 2
+                and current.get("item_sha256") == edition["item_sha256"]
+                and document["items"].get(digest) != current):
+            raise ValueError("Missing current private curriculum binding")
     return document["items"]
 
 
 def load_private_bindings(catalog):
     binding_path = ROOT / "content/curriculum-bindings.json"
-    if not binding_path.exists():
-        return {}
+    document = (json.loads(binding_path.read_text(encoding="utf-8"))
+                if binding_path.exists() else {"schema_version": 1, "items": {}})
+    certificates = json.loads((ROOT / "content/publication-certificates.json").read_text(encoding="utf-8"))
     key_hex = (ROOT / "content/publication-review-public-key.hex").read_text(encoding="ascii").strip()
     if re.fullmatch(r"[0-9a-f]{64}", key_hex) is None:
         raise ValueError("Invalid curriculum binding public key")
     key = Ed25519PublicKey.from_public_bytes(bytes.fromhex(key_hex))
     return validate_private_bindings(
-        catalog, json.loads(binding_path.read_text(encoding="utf-8")), key)
+        catalog, document, key, certificates.get("items", {}))
 
 
 @lru_cache(maxsize=1)
