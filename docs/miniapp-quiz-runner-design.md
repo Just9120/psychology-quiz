@@ -1,4 +1,10 @@
-# Mini App quiz runner design (historical/supporting)
+# Mini App quiz runner: current runtime and historical design
+
+## Действующий runtime
+
+[Compose](../docker-compose.yml) запускает API как `uvicorn app.miniapp_fastapi_runtime:app` в отдельном сервисе `psych_quiz_miniapp_api` на loopback port 8081. Бот запускается отдельно; `MINIAPP_LEGACY_API_ENABLED=false` отключает встроенный `ThreadingHTTPServer` в этом delivery configuration. Legacy adapter сохранён для совместимости и адресных проверок; исторические слова «current MVP» ниже относятся к первоначальной реализации и не описывают текущий deployment. Фактическая запущенная версия подтверждается только delivery records и post-checks в [процедуре поставки](miniapp-deployment-qa.md).
+
+Общие продуктовые контракты задаёт [spec](project-spec.md), запуск и hydration — [reference](miniapp_setup_hydration.md), текущую работу и gates — [plan](delivery-plan.md). Старый phased rollout FastAPI ниже завершён как изменение архитектуры; это не новая последовательность PR и не основание повторно переключать production.
 
 ## Current transport resource guard
 

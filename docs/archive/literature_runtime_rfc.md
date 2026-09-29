@@ -1,6 +1,6 @@
 # RFC: Literature / Reading Tracker runtime contour
 
-> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](../project-spec.md), текущие AC/findings и выбор работы — [план](../delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
 
 Delivery Item ID: `LITERATURE-RUNTIME-RFC-004`
 

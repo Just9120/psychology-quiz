@@ -21,3 +21,12 @@
 
 - [Прежний student PWA draft](student-access-draft.md): исключённый student PWA scope; фактические data flows — в [data processing](../data-processing.md).
 - [Архив завершённых Goal](../delivery-plan-archive.md): история delivery, primary records и ограничений.
+
+## Исторические предложения учебных разделов
+
+Два RFC перенесены 30.09.2026 с полным сохранением текста и исправлением relative navigation. Их исходная модель static-only/future progress уже не описывает runtime: каталог и личные отметки реализованы в [literature service](../../app/literature_service.py), термины — в действующем клиенте. Приоритеты и обязательства определяют текущие spec/plan.
+
+| Документ | Сохранённые границы и незакрытые обязательства |
+| --- | --- |
+| [Literature runtime RFC](literature_runtime_rfc.md) | E09: личный план чтения и обоснованный следующий шаг AC-LIT-06 остаются в текущей Goal; legacy state mapping Q-04 и интеграции AC-LIT-08/09 не объявлены завершёнными. Старые /next, reminders, deadline и daily-time proposals сами по себе не расширяют требования. |
+| [Glossary and literature contours RFC](glossary_literature_contours_rfc.md) | E05/E09: сохраняются историческая структура и rationale разделов; source-backed coverage и чтение проверяются по текущим AC, а не по прежнему статусу proposal. Topic registry reference сохранён в активной документации. |
