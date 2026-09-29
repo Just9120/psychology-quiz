@@ -16,6 +16,31 @@
         "access": "provider_terms",
         "checked_at": "2026-09-29"
       }
+    ],
+    "lit_0199865ad8d23ecb": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/uliya-gippenreyter/obschatsya-s-rebenkom-kak-130203/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-29"
+      }
+    ],
+    "lit_819808cf97ad8eb5": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-180602/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-29"
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-568685/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-29"
+      }
     ]
   }
 }
