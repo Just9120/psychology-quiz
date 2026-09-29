@@ -40,6 +40,7 @@ PERSONAL_TABLES = {
     "user_achievements": ("user_id", {"user_id", "evidence_key"}),
     "user_review_events": ("user_id", {"user_id", "answer_key"}),
     "user_review_sessions": ("user_id", {"user_id", "session_key"}),
+    "user_data_deletion_challenges": ("user_id", {"user_id", "token_digest", "expires_at"}),
 }
 OTHER_TABLES = {"categories", "questions", "question_options",
                 "schema_migrations", "postgres_storage"}

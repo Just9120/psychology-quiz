@@ -19,6 +19,7 @@ from app.literature_service import (
     validate_progress as _validate_literature_progress_payload, save_progress as _upsert_literature_progress,
 )
 from app import glossary_service, progress_service, repetition, learning_goals, achievements, homework
+from app import privacy_data
 from app.mastery import overview as mastery_overview
 from app.miniapp_glossary import run as run_glossary
 from typing import Any
@@ -43,7 +44,7 @@ from app.miniapp_glossary import (
 logger = logging.getLogger(__name__)
 
 LEARNING_READ_ACTIONS = {"overview", "review", "mastery", "goals", "achievements"}
-LEARNING_WRITE_ACTIONS = {"goal-set", "review-start", "review-glossary-start"}
+LEARNING_WRITE_ACTIONS = {"goal-set", "review-start", "review-glossary-start", "delete-prepare", "delete-confirm"}
 
 
 def build_homework_response(db_path: str, bot_token: str, action: str,
@@ -110,6 +111,10 @@ def build_learning_response(db_path: str, bot_token: str, action: str,
                 result = learning_goals.set_target(conn, actor, payload)
             elif action == "review-start":
                 result = progress_service.review_today(conn, actor, payload)
+            elif action == "delete-prepare":
+                result = privacy_data.prepare_learning_data_deletion(conn, actor)
+            elif action == "delete-confirm":
+                result = privacy_data.confirm_learning_data_deletion(conn, actor, payload.get("confirmation_token"))
             else:
                 result = progress_service.review_glossary_today(conn, actor, payload)
         return _json(HTTPStatus.OK, result)
@@ -117,6 +122,8 @@ def build_learning_response(db_path: str, bot_token: str, action: str,
         return _json(HTTPStatus(error.status), {"ok": False, "error": error.code})
     except learning_goals.GoalError as error:
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": error.code})
+    except privacy_data.PrivacyError as error:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": str(error)})
     except OPERATIONAL_ERRORS as error:
         if _is_sqlite_locked_error(error):
             return _database_busy_response()

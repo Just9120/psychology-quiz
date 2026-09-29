@@ -9,6 +9,7 @@ const routes = new Set([
   'literature/topics', 'literature/items', 'literature/progress',
   'learning/overview', 'learning/review', 'learning/mastery', 'learning/goals', 'learning/achievements',
   'learning/goal-set', 'learning/review-start', 'learning/review-glossary-start',
+  'learning/delete-prepare', 'learning/delete-confirm',
 ])
 
 declare global {
@@ -79,6 +80,8 @@ export const miniApi = {
     miniRequest<QuizState>('learning/review-start', { expected_session_id, replace_active, question_count: 5 }),
   startReviewGlossary: (topic_id: string, expected_session_id: string | null, replace_active: boolean) =>
     miniRequest<{ ok: true; glossary_state: GlossaryState }>('learning/review-glossary-start', { topic_id, expected_session_id, replace_active, question_count: 5 }),
+  prepareLearningDataDeletion: () => miniRequest<{ ok: true; confirmation_token: string; expires_at: string }>('learning/delete-prepare', {}),
+  confirmLearningDataDeletion: (confirmation_token: string) => miniRequest<{ ok: true; telegram_access_retained: true }>('learning/delete-confirm', { confirmation_token }),
 }
 
 export type MiniLiteratureTopic = { topic_id: string; title: string; module?: string }

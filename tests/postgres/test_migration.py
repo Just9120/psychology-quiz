@@ -27,7 +27,7 @@ def test_homework_v6_snapshot_import_preserves_assignment_link(source, pg_target
                      (session_id, "synthetic_assignment"))
     assert import_snapshot(source, pg_target)["result"] == "imported"
     with closing(get_connection(pg_target)) as conn:
-        assert verify_schema(conn) == "postgres-v6"
+        assert verify_schema(conn) == "postgres-v7"
         assert conn.execute("SELECT session_id,assignment_id FROM homework_attempts").fetchone()[:] == (
             session_id, "synthetic_assignment")
 

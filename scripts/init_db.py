@@ -18,6 +18,7 @@ from app.postgres_schema import upgrade_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
 from app.homework_schema import migrate_homework_schema
+from app.privacy_schema import migrate_privacy_schema
 
 from dotenv import load_dotenv
 
@@ -76,6 +77,7 @@ def main() -> int:
             migrate_glossary_schema(conn)
             migrate_learning_schema(conn)
             migrate_homework_schema(conn)
+            migrate_privacy_schema(conn)
             migrate_invitation_schema(conn)
             ensure_users_reading_mode_column(conn)
             ensure_quiz_sessions_difficulty_mode_column(conn)

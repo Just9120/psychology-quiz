@@ -52,6 +52,7 @@ from app.glossary_handlers import (
 )
 from app.literature_chat import literature_command, literature_callback
 from app.homework_chat import BUTTON_TEXT as HOMEWORK_BUTTON_TEXT, homework_command, homework_callback
+from app.privacy_chat import delete_data_command, confirm_delete_data_command
 from app.db import (
     abandon_in_progress_sessions_for_user,
     create_or_load_user,
@@ -160,6 +161,7 @@ HELP_TEXT = (
     "/literature — открыть личный список чтения\n"
     "/homework — открыть тесты домашних заданий\n"
     "/privacy — политика конфиденциальности Telegram для ботов и Mini App\n"
+    "/delete_data — удалить мои учебные данные после повторного подтверждения\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
@@ -374,6 +376,7 @@ async def post_init(application: Application) -> None:
             BotCommand("glossary", "Открыть глоссарий"),
             BotCommand("literature", "Список чтения"),
             BotCommand("privacy", "Политика конфиденциальности"),
+            BotCommand("delete_data", "Удалить мои учебные данные"),
             BotCommand("pwa", "Веб-приложение"),
         ]
     )
@@ -1006,6 +1009,8 @@ def main() -> None:
     application.add_handler(CallbackQueryHandler(confirm_link_callback, pattern=r"^pwa_link:"))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("privacy", privacy_command))
+    application.add_handler(CommandHandler("delete_data", delete_data_command))
+    application.add_handler(CommandHandler("delete_data_confirm", confirm_delete_data_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
     application.add_handler(CommandHandler("homework", homework_command))
