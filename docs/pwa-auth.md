@@ -11,7 +11,7 @@ Enabled API и bot требуют:
 | Переменная | Правило |
 | --- | --- |
 | `PWA_ENABLED` | `true` / `false`; неизвестное значение — startup error |
-| `PWA_STUDENT_ACCESS_ENABLED` | Только `false` для действующего production release. `true` отклоняется при startup до подключения к DB: нет утверждённого age/privacy policy. Synthetic tests инъектируют enabled settings напрямую, не через runtime env. |
+| `PWA_STUDENT_ACCESS_ENABLED` | Только `false` для действующего production release. `true` отклоняется при startup до подключения к DB: student PWA исключён из текущего продукта по D-29. Synthetic tests инъектируют enabled settings напрямую, не через runtime env. |
 | `PWA_STUDENT_INVITEE_IDS` | Неиспользуемый совместимый параметр прежнего draft flow; бот больше не выдаёт приглашения. Пустой по умолчанию; неизвестный/нечисловой ID отклоняется при startup. |
 | `PWA_ORIGIN` | Единственный HTTPS origin без path/query/fragment/credentials. PWA вызывает same-origin `/web/*`, Nginx направляет его в existing loopback API; PWA CORS не включается |
 | `PWA_OWNER_EMAIL` | Allowlisted owner, lowercase/trim; реальный адрес в repository не публиковать. Другие PWA accounts в production выключены |

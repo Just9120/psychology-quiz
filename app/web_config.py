@@ -26,7 +26,7 @@ class WebSettings:
     sender: str
     secure_cookie: bool = True
     # Synthetic tests can exercise student account flows. Production config
-    # deliberately cannot enable them before age/privacy decisions are approved.
+    # deliberately cannot enable them: student PWA is outside current product scope.
     student_access_enabled: bool = False
 
     @property
@@ -44,7 +44,7 @@ class WebSettings:
         if student not in {"true", "false"}:
             raise RuntimeError("Invalid PWA_STUDENT_ACCESS_ENABLED")
         if student == "true":
-            raise RuntimeError("Student PWA access requires approved age/privacy policy; this release keeps it disabled")
+            raise RuntimeError("Student PWA access is outside current product scope; this release keeps it disabled")
         def required(name):
             value = os.getenv(name, "").strip()
             if not value:

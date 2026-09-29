@@ -217,7 +217,9 @@ export function MiniApp() {
       {error && <div role="alert" className="app-alert">{error} <button type="button" onClick={() => setError('')} aria-label="Закрыть сообщение">×</button></div>}
       {page === 'privacy' ? <section className="page-width panel">
           <h1>Мои учебные данные</h1>
+          <p>Для сохранения обучения приложение хранит ваш идентификатор Telegram, переданные Telegram имя и username, ответы и попытки, отметки книг, цели, достижения и историю повторений. Почта и пароль для Telegram не нужны.</p>
           <p>Можно удалить сохранённые ответы и попытки, отметки книг, цели, достижения и историю повторений. Доступ к боту и Mini App сохранится. Если Telegram связан с аккаунтом владельца PWA, удаление здесь недоступно.</p>
+          <p>Удаление здесь не очищает сообщения в Telegram и ранее созданные резервные копии.</p>
           {deletionCompleted && <p role="status">Учебные данные удалены. Вы можете начать обучение заново.</p>}
           {!deletionToken ? <button type="button" className="button secondary" disabled={busy} onClick={() => void run(prepareDeletion)}>Подготовить удаление</button>
             : <div className="panel">

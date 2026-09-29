@@ -276,7 +276,7 @@ def test_student_pwa_flows_are_dormant_in_production_but_isolated_in_synthetic_p
 def test_runtime_config_rejects_enabling_student_pwa_without_approved_policy(monkeypatch):
     monkeypatch.setenv('PWA_ENABLED', 'true')
     monkeypatch.setenv('PWA_STUDENT_ACCESS_ENABLED', 'true')
-    with pytest.raises(RuntimeError, match='approved age/privacy policy'):
+    with pytest.raises(RuntimeError, match='outside current product scope'):
         WebSettings.from_env()
 
 
