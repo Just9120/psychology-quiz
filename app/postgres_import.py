@@ -56,7 +56,8 @@ def validate_source(source, columns: dict[str, tuple[str, ...]]) -> None:
     required = ({"identity-v1", "auth-v1"}
                 | ({"glossary-v1"} if "glossary_sessions" in columns else set())
                 | ({"learning-v1"} if "user_learning_goals" in columns else set())
-                | ({"invitations-v1"} if "pwa_invitations" in columns else set()))
+                | ({"invitations-v1"} if "pwa_invitations" in columns else set())
+                | ({"homework-v1"} if "homework_attempts" in columns else set()))
     if versions != required:
         raise ValueError("SQLite schema must be upgraded before creating the cutover snapshot")
     for encoded, digest, provenance in source.execute(
