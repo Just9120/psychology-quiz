@@ -385,9 +385,9 @@ def search(conn, query: str, model, *, limit: int = 5, owner="psychology_app"):
         WHERE search_text @@ plainto_tsquery('russian',%s)
         ORDER BY score DESC,source_id,locator LIMIT %s""", (query, query, MAX_RESULTS)).fetchall()
     semantic = conn.execute("""SELECT source_id,modified_time,snapshot_sha256,locator,content,
-        1-(embedding <=> %s::private_search.vector) AS score
+        1-(embedding OPERATOR(private_search.<=>) %s::private_search.vector) AS score
         FROM private_search.chunks
-        ORDER BY embedding <=> %s::private_search.vector,source_id,locator LIMIT %s""",
+        ORDER BY embedding OPERATOR(private_search.<=>) %s::private_search.vector,source_id,locator LIMIT %s""",
         (vector, vector, MAX_RESULTS)).fetchall()
     ranks = {}
     for rows in (lexical, semantic):

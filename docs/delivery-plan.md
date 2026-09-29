@@ -2,6 +2,8 @@
 
 ## Current Goal — LEARNING-FOUNDATION-001
 
+**PR #319, третий CI cycle, 29.09.2026:** PWA и Mini App PASS; backend suite и disposable pgvector setup дошли до `search()` и выявили реальный дефект: vector distance operator `<=>` не находился при extension в приватной схеме и неизменённом `search_path`. Оба употребления заменены на явно квалифицированный `OPERATOR(private_search.<=>)` без расширения `search_path`; синтаксис сверён с документацией PostgreSQL. Реальный integration rerun, review, merge и CD PENDING.
+
 **PR #319, второй CI cycle, 29.09.2026:** прежние backend failures устранены; PWA job дошёл до browser E2E и показал 48 PASS / 2 FAIL на одном устаревшем заголовке пустого прогресса desktop/mobile. Disposable pgvector job выявил только setup нового regression test: после проверенного rollback savepoint оставалась внешняя транзакция перед `SET TRANSACTION`; test теперь явно закрывает её. Адресный browser rerun — 2 PASS; новый PostgreSQL test ожидает CI. Production поставка ещё не запускалась.
 
 **PR #319, первый CI cycle, 29.09.2026:** initial PR head `a977659` дал FAIL в PWA test (устаревший текст пустого состояния) и backend suite (16 failures: рассинхрон точных curriculum locators, `None`/пустой provenance в canonical parity, устаревшие ожидания подтверждения замены попытки и retirement, Linux mode приватных synthetic fixtures). Исправления сгруппированы в том же PR: 22 locator приведены к уже проверенным review, canonical parity нормализует пустой `source_ref`, тесты отражают действующие контракты без ослабления проверок. Адресно локально 18 Python tests и 4 Mini App tests PASS; обязательный повтор CI на новой revision PENDING. PostgreSQL/pgvector и production CD остаются gates.
