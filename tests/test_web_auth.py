@@ -88,6 +88,14 @@ def test_profile_name_is_private_and_survives_auth_schema_migration(web):
     assert post(web, 'profile/name', {'display_name': ''}, csrf=csrf).json()['display_name'] is None
 
 
+def test_private_vault_has_no_web_or_miniapp_route(web):
+    register(web)
+    login(web)
+    for path in ('/web/vault', '/web/knowledge', '/miniapp/vault', '/miniapp/knowledge', '/vault'):
+        response = web.client.get(path)
+        assert response.status_code == 404, path
+
+
 def test_invited_student_requires_both_email_and_invited_telegram_actor(web):
     student_email = 'student@example.test'
     student_settings = replace(SETTINGS, student_access_enabled=True)
