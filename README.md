@@ -1,15 +1,10 @@
 # psychology-quiz
 
-`psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами (включая домашние задания в формате тестов), повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md). Отдельный раздел домашних заданий пока запланирован, а не поставлен.
+`psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами (включая домашние задания в формате тестов), повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md). Отдельный раздел домашних заданий находится в работе; его поставку подтверждают records в плане.
 
 Текущая реализация — Telegram-бот на Python/FastAPI, Mini App и самостоятельный PWA quiz client на React/TypeScript/Vite. Клиенты используют общий backend и банк. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#завершённая-goal--pwa-first-001). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. Внутренний pgvector/search готовится отдельно от публичного приложения; его включение требует stateful gates из [операторской процедуры](docs/private-search-operations.md).
 
-Текущее состояние продукта:
-- **Module 1** — стабильный baseline, 295 approved questions across five active topics.
-- **Module 2** — ограниченный рабочий scope, 169 approved questions across two active topics.
-- **Module 3** — `Психологическое консультирование` (108 вопросов) и отдельная тема `Кейсы` (1 авторский вымышленный кейс с разбором).
-- **Module 5** — «Клиническая психология» (1 проверенный авторский вопрос); дальнейшее наполнение остаётся в работе.
-- Активный банк вопросов: 404 approved questions в JSON source-of-truth under `content/questions/**/*.json`, включая вопрос «Клинической психологии» и четыре вопроса темы «Кейс»; вопросы без достаточного подтверждения сохраняются для истории, но снимаются с выдачи.
+Текущее состояние продукта: утверждённые вопросы и термины хранятся в `content/`; актуальный состав банка проверяют canonical validators ниже. Вопросы без достаточного подтверждения сохраняются для истории, но снимаются с новой выдачи. Статус поставки домашних заданий указан в [плане](docs/delivery-plan.md#current-goal--quiz-homework-20260929).
 
 Бот по умолчанию работает в режиме **long polling**; production также может работать в validated webhook mode за конфиг-флагом. Самостоятельный Web UI находится в [pwa](pwa/); Telegram Mini App остаётся opt-in UX внутри Telegram. В чате команда `/literature` открывает тот же личный список чтения и позволяет отметить статус материала; связанная PWA и Mini App видят это состояние. Внешняя генерация вопросов во время работы (RAG/retrieval) отсутствует.
 
@@ -108,6 +103,8 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 
 Для редакторской сверки извлечённого текста с существующими вопросами/терминами запустите `python scripts/source_claim_candidates.py --current data/source-inventory-current.json --processed data/source-processing-current.json --manifest data/source-batch.json --output data/source-claim-candidates.json` из корня репозитория. Команда сверяет SHA-256 с private capture и текущую metadata revision, затем сохраняет в новый ignored JSON возможные диапазоны фрагментов для связанных quality-review записей. Добавьте `--discover-existing`, чтобы получить отдельный ранжированный список ещё не связанных approved вопросов/терминов, которые могут уже покрывать материал; их нужно сверить вручную перед созданием новых вопросов. Диапазоны относятся к exact decoded UTF-8 с сохранёнными CRLF; обычное `read_text()` на Windows меняет координаты. Лексическое совпадение не доказывает смысловую поддержку и не утверждает публикацию; отсутствие кандидата не доказывает отсутствие поддержки. Редактор читает исходник и каждое утверждение до смены review state.
 
+Для инкрементального контроля покрытия запустите из корня `python scripts/audit_topic_evidence.py --summary`; краткий отчёт показывает темы без подтверждённого вопроса и approved вопросы без точной связи с учебной темой. Передайте актуальные ignored `--inventory` и `--processed`, чтобы различить удержанный источник и непроверенный статус; для подписанных вопросов передайте их приватные `--signed-dossier`. Отчёт не публикует source ID, не удостоверяет истинность текста и не требует автоматически добавлять вопрос из спорного материала. Семантические дубли новых/изменённых вопросов редактор сверяет с действующим банком до approval.
+
 Если текущая редакция файла после чтения оказалась только организационным материалом, завершите точный private capture командой `python scripts/source_finalize.py --current data/source-inventory-current.json --prior data/source-processing-current.json --source-id ID --content data/source-extract.txt --reviewer editor --review-note 'Причина исключения' --source-kind excluded --output data/source-processing-next.json`. Отчёт показывает `excluded` отдельно от учебных `processed`; новая редакция снова требует review. Такой файл нельзя зарегистрировать как учебный источник или подписать как основание вопроса. Для спорных учебных утверждений используйте `source_conflict.py`, а не исключение всего файла.
 
 Для длинного уже захваченного источника можно дополнительно ранжировать связанные утверждения по смысловому сходству: установите `requirements-search.txt`, укажите `SEARCH_MODEL_CACHE` на существующий локальный cache закреплённой модели и запустите `python scripts/source_semantic_candidates.py --candidates data/source-claim-candidates.json --source-id SOURCE_ID --output data/source-semantic-candidates.json`. Скрипт работает офлайн, проверяет digest исходного extract, сохраняет только диапазоны в новый ignored JSON и не принимает решений о корректности или публикации. Каждый диапазон и ответ нужно сверить вручную с полной редакцией первичного материала; source ID здесь — операторский аргумент и не добавляется в вопрос.
@@ -170,7 +167,7 @@ Browser tests сами поднимают изолированный backend н�
 
 Для режима `Микс из выбранных тем` выбранный набор категорий сохраняется на уровне сессии.
 
-## Поток данных: JSON → seed → SQLite
+## Поток данных: Drive → проверенный JSON → seed → runtime DB
 
 - Первичные учебные знания — согласованный Drive corpus; JSON в репозитории — canonical approved derivative для runtime банка.
 - Новый/изменённый published derivative требует review точного content/source fingerprint; вопрос и термин дополнительно требуют актуального `supported` quality review той же редакции и источников, с адресными локаторами вместо ссылки `0:<end>` на извлечённый текст. Библиография не подтверждает содержание книги; legacy baseline не объявляется source-certified. [Контракт публикации](docs/question_bank_content_rollout.md#проверка-происхождения-и-публикация) действует для quiz, glossary и literature.
@@ -178,10 +175,10 @@ Browser tests сами поднимают изолированный backend н�
   - `content/questions/module1/`
   - `content/questions/module2/`
   - `content/questions/module3/`
-- SQLite **не** является source of truth; это runtime layer хранения и выдачи данных.
-- Заполнение и обновление SQLite выполняется сидером `scripts/seed_questions.py`: полный sync снимает approval с non-approved/отсутствующих IDs без удаления истории. Quiz attempts сохраняют immutable question/options snapshot; legacy backfill явно помечен как доступная текущая редакция. Контракт и recovery — в [content rollout](docs/question_bank_content_rollout.md).
+- Ни SQLite, ни PostgreSQL не являются source of truth для содержания: это runtime-хранилища выдачи и личного прогресса. В production используется PostgreSQL; SQLite остаётся локальным/совместимым режимом.
+- Заполнение и обновление runtime DB выполняется сидером `scripts/seed_questions.py`: полный sync снимает approval с non-approved/отсутствующих IDs без удаления истории. Quiz attempts сохраняют immutable question/options snapshot; legacy backfill явно помечен как доступная текущая редакция. Контракт и recovery — в [content rollout](docs/question_bank_content_rollout.md) и [PostgreSQL storage](docs/postgres-storage.md).
 
-Runtime sync for JSON/content changes is deployment-environment-specific. Repository-visible CI validates question-bank syntax and seedability, but does not deploy or mutate runtime SQLite. When deployment matters, verify deployed commit/runtime state in the target environment after merge; docs-only changes do not require runtime sync.
+Runtime sync for JSON/content changes is deployment-environment-specific. Repository-visible CI validates question-bank syntax and seedability, but does not mutate production DB. When deployment matters, verify deployed commit/runtime state in the target environment after merge; docs-only changes do not require runtime sync.
 
 Операционные процедуры находятся в [deployment / QA](docs/miniapp-deployment-qa.md) и [content rollout](docs/question_bank_content_rollout.md); правила работы агента — в [AGENTS.md](AGENTS.md). Настройка pipeline регулируется [ci-cd-rules.md](ci-cd-rules.md).
 
@@ -217,7 +214,7 @@ Runtime sync for JSON/content changes is deployment-environment-specific. Reposi
 
 ## Границы дальнейшей работы
 
-- PWA, PostgreSQL, progress/repetition и knowledge layer планируются по [новой спецификации](docs/project-spec.md), а не реализуются принятием документации
+- Дальнейшее развитие PWA, PostgreSQL, прогресса и повторения определяется [спецификацией](docs/project-spec.md) и [планом](docs/delivery-plan.md); реализованное подтверждается кодом, CI и соответствующей поставкой
 - webhook как обязательный/единственный runtime mode; доступен только опциональный infrastructure experiment за `TELEGRAM_UPDATE_MODE=webhook`
 - runtime LLM-генерация вопросов запрещена; optional RAG поверх retrieval требует отдельного решения и оценки
 - расширение Module 2 на новые темы без отдельного согласованного решения (помимо уже открытых активных категорий)

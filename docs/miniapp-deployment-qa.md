@@ -2,9 +2,9 @@
 
 ## Действующие правила и delivery snapshot
 
-[AGENTS.md](../AGENTS.md) задаёт routine Git/PR/delivery flow; [ci-cd-rules.md](../ci-cd-rules.md) — настройку и исправление pipeline. Продуктовый target — [spec](project-spec.md); AC/findings/checkpoint — [план](delivery-plan.md). Этот runbook сохраняет процедуры Telegram/SQLite deployment. [PostgreSQL storage](postgres-storage.md) задаёт private service, native backup/isolated restore, operator cutover/retry и ветку обычного CD после переключения; наличие процедуры не подтверждает фактический cutover. Поставка PWA — в [PWA procedure](pwa-delivery.md).
+[AGENTS.md](../AGENTS.md) задаёт routine Git/PR/delivery flow; [ci-cd-rules.md](../ci-cd-rules.md) — настройку и исправление pipeline. Продуктовый target — [spec](project-spec.md); AC/findings/checkpoint — [план](delivery-plan.md). Текущая production БД — PostgreSQL; её подтверждённый cutover и primary records указаны в [плане](delivery-plan.md), а backup/recovery и штатный CD — в [PostgreSQL storage](postgres-storage.md). Ниже сохранены также исторические процедуры Telegram/SQLite, которые применяются лишь к соответствующей среде/версии. Поставка PWA — в [PWA procedure](pwa-delivery.md).
 
-Текущая процедура введена в PLATFORM-STABILIZATION-001 на base `df383200fd0e6c389038f5b080ec23310a26be07`. До merge/live checks её runtime результат PENDING; первичные records искать по PR и expected merge SHA. Исторические результаты ниже действуют только для названных ими версий.
+Процедура первоначально введена в PLATFORM-STABILIZATION-001 на base `df383200fd0e6c389038f5b080ec23310a26be07`. Её прежний `PENDING` относился к тому checkpoint, а не к текущей поставке. Действующие CI/CD records и runtime-версию сверяйте по [плану](delivery-plan.md) и primary GitHub/VPS records; исторические результаты ниже действуют только для названных ими версий.
 
 | Поверхность | Контракт / ограничение |
 | --- | --- |
@@ -197,7 +197,7 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 
 - Date/time (UTC):
 - Environment (prod/staging/dev):
-- `MINI_APP_URL` class (например: `https://<public-host>/miniapp/index.html`, без секретов):
+- `MINI_APP_URL` class (проверенный HTTPS entrypoint текущего Mini App build, без секретов):
 - Deployed commit SHA:
 - Scenarios passed:
 - Scenarios failed:
@@ -317,7 +317,7 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 - Безопасность: diagnostics и логи не должны содержать raw `initData`, `Authorization`, bot token, полный профиль пользователя, текст вопроса/ответов.
 - Если в debug UI есть `req_id`, но backend не видит POST c тем же `request_id`, проблема до входа запроса в API (WebView/network/proxy path между клиентом и сервером).
 - Если backend видит POST c `request_id`, используйте статус/error_code и duration для локализации причины.
-- Если `OPTIONS` всё ещё часто появляется, проверьте cache busting/версию `miniapp/index.html` (возможен старый cached frontend) и наличие fallback path.
+- Если `OPTIONS` всё ещё часто появляется, проверьте cache busting/версию опубликованного `miniapp-react/index.html` и наличие fallback path; `miniapp/index.html` — legacy reference.
 
 Примеры grep для корреляции:
 - `grep "miniapp_api endpoint=/miniapp/answer request_id=rq_ab12cd34 transport=simple_body" <bot-log-file>`
@@ -507,7 +507,7 @@ Smoke checks:
   - Move Mini App context/URL builder concerns into `app/miniapp_context.py`.
   - Split Telegram handlers by domain responsibility instead of one large module.
 - Mini App API production serving is now the dedicated FastAPI/uvicorn service `psych_quiz_miniapp_api`; legacy in-bot `ThreadingHTTPServer` notes are historical only.
-- `miniapp/index.html` currently contains a large imperative state machine; if Mini App remains a strategic product direction, plan a declarative state-management refactor in a dedicated backlog track.
+- Старый `miniapp/index.html` содержит imperative state machine, но активный Telegram Mini App собирается из React-кода в `pwa/`; отдельный refactor старого файла не является текущим условием поставки.
 
 ## 18) Historical roadmap (after #155; superseded by project-spec)
 - **Done / urgent:** SQLite hardening shipped in #155 (WAL, `busy_timeout`, explicit connection closing, performance indexes).

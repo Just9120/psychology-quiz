@@ -1,4 +1,4 @@
-from scripts.audit_topic_evidence import coverage, private_topic_coverage
+from scripts.audit_topic_evidence import coverage, private_topic_coverage, summary_report
 
 
 def test_current_edition_support_is_distinct_from_stale_and_partial():
@@ -68,6 +68,18 @@ def test_private_review_state_explains_gap_without_exposing_source_id():
     assert result["topics"]["one"]["source_review_state"] == "conflict_review"
     assert result["topics"]["two"]["source_review_state"] == "missing_from_inventory"
     assert "private-1" not in str(result)
+
+
+def test_owner_summary_keeps_held_gap_visible_without_private_source_id():
+    curriculum = {"topics": {"lesson": {"title": "Memory", "source": {
+        "source_id": "private-source-id"}}}, "editions": {}}
+    result = coverage(curriculum, {"items": {}}, {}, {"private-source-id": "conflict_review"})
+    summary = summary_report(result)
+    assert summary["topics_total"] == 1
+    assert summary["topics_with_supported_question"] == 0
+    assert summary["coverage_gaps"] == [{"topic_id": "lesson", "title": "Memory",
+        "source_review_state": "conflict_review", "stale_editions": 0}]
+    assert "private-source-id" not in str(summary)
 
 
 def test_unmapped_supported_glossary_source_is_reported_at_discipline_scope_only():
