@@ -709,10 +709,10 @@
       "modified_time": "2026-05-14T11:25:02.862Z",
       "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
       "snapshot_kind": "extracted_text",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-29",
       "reviewer": "coding-agent",
-      "review_method": "connected Drive; targeted original fragments and semantic item review",
-      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+      "review_method": "connected Drive exact raw export; scoped review of twelve published method questions and their source ranges",
+      "limitations": "Вывод о возможной отмене лечения депрессии по результатам небольшого исследования удержан от новых производных материалов. Методологические вопросы не сертифицируют эффективность вмешательства. Полный разбор транскрипта и исследований, clinical/SME certification и точность автоматической транскрипции не заявлены."
     },
     {
       "id": "19N0i2gCoy7Y9LkimwPA-C2x1m6gSpHXo",
