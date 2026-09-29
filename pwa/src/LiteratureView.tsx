@@ -6,6 +6,7 @@ const statuses: Record<ReadingStatus, string> = {
   not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', revisit: 'Вернуться', skipped: 'Пропущено',
 }
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
+const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
 
 export function LiteratureView({ initial, busy, run }: { initial: LiteratureCatalog; busy: boolean; run: (operation: () => Promise<void>) => Promise<void> }) {
   const [catalog, setCatalog] = useState(initial)
@@ -56,8 +57,12 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       </select></label>
       {work.entries.length > 1 && <p className="muted">Эта работа встречается в нескольких списках. Отметки чтения сохраняются отдельно для выбранного списка.</p>}
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
-      <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source === 'teacher' ? 'приоритет преподавателя' : 'рекомендация агента'}` : 'не определена'}</p>
+      <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>
+      {work.access_links.length ? <div className="literature-access"><h3>Внешние версии</h3>
+        <p className="muted">Ссылка ведёт к провайдеру. Наличие доступа, цена и совпадение издания проверяются там.</p>
+        {work.access_links.map(link => <p key={link.format}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
+      </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
       <details className="source-details"><summary>Источник и библиографическая запись</summary><p>{entry.source.title}</p><p>{entry.source.locator}</p><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>

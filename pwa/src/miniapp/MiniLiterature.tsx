@@ -4,6 +4,7 @@ import { miniApi, type MiniLiteratureItem, type MiniLiteratureTopic } from './ap
 
 const labels: Record<ReadingStatus, string> = { not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', revisit: 'Вернуться', skipped: 'Пропущено' }
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
+const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
 
 export function MiniLiterature({ initial, topics, busy, run }: {
   initial: MiniLiteratureItem[]; topics: MiniLiteratureTopic[]; busy: boolean
@@ -40,7 +41,10 @@ export function MiniLiterature({ initial, topics, busy, run }: {
     <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог</button>
     {item ? <article className="panel literature-detail"><button className="text-button" onClick={() => setSelected(null)}>← К списку</button>
       <h2>{item.title}</h2><p>{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p>
-      <p>Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source === 'teacher' ? 'приоритет преподавателя' : 'рекомендация агента'}` : 'не определена'}</p>
+      <p>Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source ? importanceSources[item.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
+      {item.access_links?.length ? <div className="literature-access"><h3>Внешние версии</h3><p className="muted">Доступ и совпадение издания уточняются у провайдера.</p>
+        {item.access_links.map(link => <p key={link.format}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
+      </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
       <p>{item.why_read}</p>{item.source?.citation && <details><summary>Библиографическая запись</summary><blockquote>{item.source.citation}</blockquote></details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!uncertain) void run(save) }}>
         <label className="field">Статус<select value={status} disabled={busy || uncertain} onChange={event => { setStatus(event.target.value as ReadingStatus); setSaved(false) }}>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>

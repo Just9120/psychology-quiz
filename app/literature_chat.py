@@ -100,6 +100,12 @@ def _item_view(item: dict, state: dict | None) -> tuple[str, InlineKeyboardMarku
     token = _token(item["id"])
     rows = [[InlineKeyboardButton(label, callback_data=f"lit:s:{token}:{code}")]
             for code, (label, _) in STATUS_CODES.items()]
+    links = item.get("access_links") or []
+    if links:
+        text += "\nВнешние версии: доступ и издание проверьте у провайдера."
+        rows.extend([[InlineKeyboardButton(
+            f"{'Текст' if link['format'] == 'text' else 'Аудио'} · {link['provider']}",
+            url=link["url"])] for link in links])
     rows.append([InlineKeyboardButton("К теме", callback_data=f"lit:t:{_token(item['topic_id'])}:0")])
     return text, InlineKeyboardMarkup(rows)
 

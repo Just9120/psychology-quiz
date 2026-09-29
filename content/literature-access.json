@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "works": {
+    "vygotsky_myshlenie_i_rech": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/lev-vygotskiy-30932777/myshlenie-i-rech-7759426/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-29"
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/lev-vygotskiy-30932777/myshlenie-i-rech-65226391/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-29"
+      }
+    ]
+  }
+}

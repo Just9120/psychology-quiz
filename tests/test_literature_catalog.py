@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 from app.content_publication import load_policy
-from app.literature import load_literature_items
+from app.literature import load_access_links, load_literature_items
 from app.literature import load_topic_registry
 from scripts import validate_literature, validate_topics
 
@@ -72,3 +72,13 @@ def test_importance_taxonomy_requires_reviewed_value():
     errors = []
     validate_literature.validate_entry(changed, 'test', item['topic_id'], {item['topic_id']}, {}, errors)
     assert any('importance must be' in error for error in errors)
+
+
+def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access():
+    links = load_access_links()
+    assert set(links) == {'vygotsky_myshlenie_i_rech'}
+    assert {link['format'] for link in links['vygotsky_myshlenie_i_rech']} == {'text', 'audio'}
+    assert all(link['access'] == 'provider_terms' for link in links['vygotsky_myshlenie_i_rech'])
+    items = load_literature_items()
+    assert all(item['access_links'] == links[item['work_id']] for item in items if item['work_id'] in links)
+    assert all(item['access_links'] == [] for item in items if item['work_id'] not in links)

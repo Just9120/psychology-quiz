@@ -17,7 +17,8 @@ def catalog(conn, actor_user_id: int) -> dict[str, Any]:
     for item in load_literature_items():
         work_id = item["work_id"]
         work = works.setdefault(work_id, {"work_id": work_id, "title": item["title"],
-            "authors": item["authors"], "type": item["type"], "entries": []})
+            "authors": item["authors"], "type": item["type"],
+            "access_links": item["access_links"], "entries": []})
         used_topics.add(item["topic_id"])
         work["entries"].append({**item, "topic_title": topics[item["topic_id"]]["title"],
             "user_state": states.get(item["id"])})
