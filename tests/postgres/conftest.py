@@ -20,6 +20,7 @@ from tests.test_web_auth import Mailbox, SETTINGS, ORIGIN
 
 def remove_learning_schema(conn):
     """Build an actual v1/v2 SQLite source for upgrade/recovery tests."""
+    conn.execute("DROP TABLE IF EXISTS web_profile_names")
     conn.execute("DROP TABLE IF EXISTS pwa_invitations")
     conn.execute("DELETE FROM schema_migrations WHERE version='invitations-v1'")
     for table in ("user_review_sessions", "user_review_events", "user_achievements", "user_learning_goals"):

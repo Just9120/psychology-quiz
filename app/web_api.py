@@ -17,7 +17,7 @@ from app.logging_config import configure_noisy_http_client_loggers
 
 GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
-                "identity/new", "link/start", "link/complete", "quiz/setup", "quiz/answer", "literature/progress",
+                "identity/new", "link/start", "link/complete", "profile/name", "quiz/setup", "quiz/answer", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
                 "progress/reset-preview", "progress/reset-confirm", "progress/review-start", "progress/review-glossary-start", "progress/goal-set", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
 logger = logging.getLogger(__name__)
@@ -50,6 +50,8 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         if action == "auth/logout":
             conn.execute("DELETE FROM web_sessions WHERE digest=?", (account["session_digest"],))
             return {"ok": True}, ""
+        if action == "profile/name":
+            return {"ok": True, "display_name": auth.set_display_name(conn, account, payload.get("display_name"))}, None
         if action == "identity/new":
             auth.fresh_identity(conn, account)
             return {"ok": True}, None

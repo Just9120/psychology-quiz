@@ -1,7 +1,7 @@
 """Additive owner authentication storage; init script only, no request-time DDL."""
 import sqlite3
 
-AUTH_TABLES = ("web_accounts", "web_sessions", "web_mail_tokens", "web_link_tokens", "web_auth_limits")
+AUTH_TABLES = ("web_accounts", "web_sessions", "web_mail_tokens", "web_link_tokens", "web_auth_limits", "web_profile_names")
 
 DDL = (
     """CREATE TABLE IF NOT EXISTS web_accounts (
@@ -37,6 +37,10 @@ DDL = (
     )""",
     """CREATE TABLE IF NOT EXISTS web_auth_limits (
         bucket TEXT PRIMARY KEY, started_at INTEGER NOT NULL, count INTEGER NOT NULL
+    )""",
+    """CREATE TABLE IF NOT EXISTS web_profile_names (
+        account_id INTEGER PRIMARY KEY REFERENCES web_accounts(id) ON DELETE CASCADE,
+        display_name TEXT NOT NULL CHECK(length(display_name) BETWEEN 1 AND 60)
     )""",
     "CREATE INDEX IF NOT EXISTS idx_web_sessions_account ON web_sessions(account_id)",
     "CREATE INDEX IF NOT EXISTS idx_web_mail_account ON web_mail_tokens(account_id)",

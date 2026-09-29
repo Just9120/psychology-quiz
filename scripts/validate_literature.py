@@ -11,6 +11,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from app.content_publication import validate_publications
+from app.literature import load_access_links
 
 LITERATURE_FILES_GLOB = "content/literature/*.json"
 TOPICS_FILE = Path("content/topics.json")
@@ -39,6 +40,7 @@ VALID_READING_LEVELS = {"foundation", "core", "applied", "deepening", "advanced"
 VALID_STATUSES = {"draft", "review", "approved", "deprecated", "placeholder"}
 USER_READING_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
 VALID_PRIORITIES = {"low", "medium", "high"}
+VALID_IMPORTANCE = {"basic", "important", "additional", "advanced"}
 ID_RE = re.compile(r"^[a-z0-9_]+$")
 TAG_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
@@ -171,6 +173,16 @@ def validate_entry(
     priority = entry.get("priority")
     if priority is not None and priority not in VALID_PRIORITIES:
         errors.append(f"{label}: priority must be one of {', '.join(sorted(VALID_PRIORITIES))}")
+    importance = entry.get("importance")
+    if importance is not None and importance not in VALID_IMPORTANCE:
+        errors.append(f"{label}: importance must be one of {', '.join(sorted(VALID_IMPORTANCE))} or null")
+    importance_source = entry.get("importance_source")
+    if importance_source not in (None, "teacher", "agent"):
+        errors.append(f"{label}: importance_source must be teacher, agent or null")
+    if (importance is None) != (importance_source is None):
+        errors.append(f"{label}: importance and importance_source must be set together")
+    if importance is not None and priority is not None:
+        errors.append(f"{label}: legacy priority and reviewed importance cannot both be set")
 
     validate_positive_int(entry.get("topic_order"), "topic_order", label, errors)
     validate_positive_int(entry.get("global_order"), "global_order", label, errors)
@@ -294,6 +306,14 @@ def validate() -> list[str]:
     for label, prerequisite in prerequisite_refs:
         if prerequisite not in seen_ids:
             errors.append(f"{label}: prerequisite '{prerequisite}' does not match any literature entry id")
+
+    try:
+        links = load_access_links()
+        for work_id in links:
+            if work_id not in entries or entries[work_id].get("work_id") != work_id:
+                errors.append(f"Unknown canonical literature work for access link: {work_id}")
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        errors.append(f"Invalid literature access catalog: {type(error).__name__}")
 
     return errors
 

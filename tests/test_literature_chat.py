@@ -43,7 +43,8 @@ def test_chat_literature_write_is_shared_with_linked_pwa_and_miniapp_but_not_oth
     read_button = next(row[0] for row in item.kwargs["reply_markup"].inline_keyboard
                        if row[0].text == "Прочитано")
     saved = _click(web, 42, read_button.callback_data)
-    assert "Статус: Прочитано · 100%" in saved.args[0]
+    assert "Статус: Прочитано" in saved.args[0]
+    assert "%" not in saved.args[0]
 
     selected_id = next(item["id"] for item in load_literature_items()
                        if literature_chat._token(item["id"]) == item_button.callback_data.split(":")[2])

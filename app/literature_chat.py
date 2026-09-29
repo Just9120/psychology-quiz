@@ -96,12 +96,16 @@ def _item_view(item: dict, state: dict | None) -> tuple[str, InlineKeyboardMarku
     status = STATUS_LABELS.get((state or {}).get("reading_status"), "Не начато")
     authors = ", ".join(item.get("authors") or [])
     text = f"<b>{escape(item['title'])}</b>\n{escape(authors)}\nСтатус: {status}"
-    if state and state.get("progress_percent") is not None:
-        text += f" · {state['progress_percent']}%"
-    text += "\n\nОтметьте чтение. Процент можно уточнить в Mini App или PWA."
+    text += "\n\nОтметьте чтение личным статусом."
     token = _token(item["id"])
     rows = [[InlineKeyboardButton(label, callback_data=f"lit:s:{token}:{code}")]
             for code, (label, _) in STATUS_CODES.items()]
+    links = item.get("access_links") or []
+    if links:
+        text += "\nВнешние версии: доступ и издание проверьте у провайдера."
+        rows.extend([[InlineKeyboardButton(
+            f"{'Текст' if link['format'] == 'text' else 'Аудио'} · {link['provider']}",
+            url=link["url"])] for link in links])
     rows.append([InlineKeyboardButton("К теме", callback_data=f"lit:t:{_token(item['topic_id'])}:0")])
     return text, InlineKeyboardMarkup(rows)
 

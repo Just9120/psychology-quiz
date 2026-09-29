@@ -8,7 +8,7 @@ export class ApiError extends Error {
 }
 
 const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
-  'auth/logout', 'identity/new', 'link/start', 'link/complete', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
+  'auth/logout', 'identity/new', 'link/start', 'link/complete', 'profile/name', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer',
   'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
   'progress/review', 'progress/mastery', 'progress/goals', 'progress/achievements', 'progress/review-start', 'progress/review-glossary-start', 'progress/goal-set',
   'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart', 'literature/catalog', 'literature/progress'])
@@ -58,6 +58,7 @@ export const api = {
   newIdentity: () => request('identity/new', {}),
   linkStart: () => request<{ ok: true; code: string }>('link/start', {}),
   linkComplete: () => request('link/complete', {}),
+  setDisplayName: (display_name: string) => request<{ ok: true; display_name: string | null }>('profile/name', { display_name }),
   options: () => request<{ ok: true; setup_options: SetupOptions }>('quiz/options'),
   state: () => request<QuizState>('quiz/state'),
   setup: (setup: Setup) => request<QuizState>('quiz/setup', setup),

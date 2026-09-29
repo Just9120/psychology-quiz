@@ -1,6 +1,7 @@
 export interface Account {
   ok: true
   email: string
+  display_name: string | null
   role?: 'owner' | 'student'
   csrf_token: string
   needs_identity: boolean
@@ -172,10 +173,13 @@ export interface ErrorsPage {
 }
 export type ReadingStatus = 'not_started' | 'in_progress' | 'read' | 'revisit' | 'skipped'
 export type ReadingState = { literature_id: string; reading_status: ReadingStatus; progress_percent: number | null; updated_at: string }
+export type LiteratureAccessLink = { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; checked_at: string }
 export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
+  importance: 'basic' | 'important' | 'additional' | 'advanced' | null;
+  importance_source: 'teacher' | 'agent' | null;
   source: { title: string; locator: string; citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
 }
-export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; entries: LiteratureEntry[] }
+export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }
 export type LiteratureCatalog = { ok: true; works: LiteratureWork[]; topics: { topic_id: string; title: string; module: string }[] }

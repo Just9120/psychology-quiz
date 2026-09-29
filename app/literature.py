@@ -2,13 +2,17 @@ from __future__ import annotations
 
 import json
 from collections import Counter, defaultdict
+from datetime import date
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 from app.content_publication import load_policy
 
 ROOT = Path(__file__).resolve().parents[1]
 LITERATURE_DIR = ROOT / "content/literature"
 TOPICS_FILE = ROOT / "content/topics.json"
+ACCESS_FILE = ROOT / "content/literature-access.json"
 PUBLIC_ITEM_FIELDS = (
     "work_id", "module", "content_access", "metadata_warnings",
     "id",
@@ -19,7 +23,7 @@ PUBLIC_ITEM_FIELDS = (
     "type",
     "reading_level",
     "status",
-    "priority",
+    "priority", "importance", "importance_source",
     "topic_order",
     "global_order",
     "estimated_minutes",
@@ -38,6 +42,41 @@ USER_STATE_FIELDS = (
     "last_opened_at",
     "remind_at",
 )
+
+
+@lru_cache(maxsize=1)
+def load_access_links() -> dict[str, list[dict[str, str]]]:
+    """Curated outbound offers; a link never means that the user owns a copy."""
+    raw = _load_json_file(ACCESS_FILE)
+    if not isinstance(raw, dict) or raw.get("schema_version") != 1 or not isinstance(raw.get("works"), dict):
+        raise ValueError("Invalid literature access catalog")
+    links: dict[str, list[dict[str, str]]] = {}
+    for work_id, offers in raw["works"].items():
+        if not isinstance(work_id, str) or not isinstance(offers, list):
+            raise ValueError("Invalid literature access entry")
+        seen: set[str] = set()
+        links[work_id] = []
+        for offer in offers:
+            if not isinstance(offer, dict) or set(offer) != {"format", "provider", "url", "access", "checked_at"}:
+                raise ValueError("Invalid literature access offer")
+            fmt, url = offer["format"], offer["url"]
+            parsed = urlsplit(url) if isinstance(url, str) else None
+            checked = offer["checked_at"]
+            try:
+                checked_date = isinstance(checked, str) and date.fromisoformat(checked).isoformat() == checked
+            except ValueError:
+                checked_date = False
+            if (not isinstance(fmt, str) or fmt not in {"text", "audio"} or fmt in seen
+                    or offer["provider"] != "Литрес" or offer["access"] != "provider_terms"
+                    or not checked_date
+                    or parsed is None or parsed.scheme != "https" or parsed.hostname != "www.litres.ru"
+                    or parsed.netloc != "www.litres.ru" or parsed.username or parsed.password
+                    or parsed.query or parsed.fragment
+                    or not parsed.path.startswith("/book/" if fmt == "text" else "/audiobook/")):
+                raise ValueError("Invalid literature access offer")
+            seen.add(fmt)
+            links[work_id].append(offer)
+    return links
 
 
 def _load_json_file(path: Path) -> Any:
@@ -71,6 +110,7 @@ def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
 def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     publication = load_policy()
+    access_links = load_access_links()
     for path in sorted(LITERATURE_DIR.glob("*.json")):
         raw_items = _load_json_file(path)
         if not isinstance(raw_items, list):
@@ -82,7 +122,9 @@ def load_literature_items(topic_id: str | None = None) -> list[dict[str, Any]]:
                 continue
             if topic_id is not None and entry.get("topic_id") != topic_id:
                 continue
-            items.append(_public_literature_item(entry))
+            item = _public_literature_item(entry)
+            item["access_links"] = access_links.get(item["work_id"], [])
+            items.append(item)
     if topic_id is None:
         return sorted(items, key=lambda item: (int(item.get("global_order") or 0), str(item.get("id") or "")))
     return sorted(items, key=lambda item: (int(item.get("topic_order") or 0), str(item.get("id") or "")))

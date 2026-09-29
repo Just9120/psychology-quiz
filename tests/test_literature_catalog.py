@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 from app.content_publication import load_policy
-from app.literature import load_literature_items
+from app.literature import load_access_links, load_literature_items
 from app.literature import load_topic_registry
 from scripts import validate_literature, validate_topics
 
@@ -56,3 +56,33 @@ def test_catalog_paths_do_not_depend_on_process_working_directory(tmp_path, monk
     monkeypatch.chdir(tmp_path)
     assert len(load_literature_items()) == 130
     assert 'family_psychology' in load_topic_registry()
+
+
+def test_importance_taxonomy_requires_reviewed_value():
+    item = json.loads(Path('content/literature/family_psychology.json').read_text(encoding='utf-8'))[0]
+    for importance in ('basic', 'important', 'additional', 'advanced', None):
+        changed = copy.deepcopy(item)
+        changed['importance'] = importance
+        changed['importance_source'] = 'teacher' if importance else None
+        errors = []
+        validate_literature.validate_entry(changed, 'test', item['topic_id'], {item['topic_id']}, {}, errors)
+        assert not any('importance must be' in error for error in errors)
+        assert not any('must be set together' in error for error in errors)
+    changed['importance'] = 'high'
+    errors = []
+    validate_literature.validate_entry(changed, 'test', item['topic_id'], {item['topic_id']}, {}, errors)
+    assert any('importance must be' in error for error in errors)
+
+
+def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access():
+    links = load_access_links()
+    assert set(links) == {
+        'vygotsky_myshlenie_i_rech', 'lit_0199865ad8d23ecb', 'lit_819808cf97ad8eb5',
+    }
+    assert {link['format'] for link in links['vygotsky_myshlenie_i_rech']} == {'text', 'audio'}
+    assert {link['format'] for link in links['lit_0199865ad8d23ecb']} == {'text'}
+    assert {link['format'] for link in links['lit_819808cf97ad8eb5']} == {'text', 'audio'}
+    assert all(link['access'] == 'provider_terms' for link in links['vygotsky_myshlenie_i_rech'])
+    items = load_literature_items()
+    assert all(item['access_links'] == links[item['work_id']] for item in items if item['work_id'] in links)
+    assert all(item['access_links'] == [] for item in items if item['work_id'] not in links)

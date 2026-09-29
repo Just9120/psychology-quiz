@@ -92,7 +92,7 @@ it('labels reconstructed legacy content without changing the recorded outcome', 
 })
 
 it('clears personal progress when authentication expires on a later page', async () => {
-  vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', csrf_token: 'test', needs_identity: false, telegram_linked: true, link_pending: false, link_confirmed: false, link_target: null })
+  vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', display_name: null, csrf_token: 'test', needs_identity: false, telegram_linked: true, link_pending: false, link_confirmed: false, link_target: null })
   vi.spyOn(api, 'options').mockResolvedValue({ ok: true, setup_options: { categories: [], question_count_choices: [5], difficulty_choices: ['any'] } })
   vi.spyOn(api, 'state').mockResolvedValue({ ok: true, runner_state: { state: 'setup', status: 'ok', session: null } })
   vi.spyOn(api, 'progress').mockResolvedValue(overview)
