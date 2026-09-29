@@ -183,7 +183,7 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
             if source_kind is not None and (
                     state != "processed"
                     or not isinstance(source_kind, str)
-                    or source_kind not in {"learning_material", "bibliography"}):
+                    or source_kind not in {"learning_material", "bibliography", "excluded"}):
                 raise InventoryError("invalid_reviewed_source_kind")
             if source_kind is not None:
                 kind_review = record.get("source_kind_review")
@@ -234,7 +234,7 @@ def processing_status(snapshot: dict, processed: dict[str, dict]) -> dict[str, s
             elif state == "conflict":
                 result[file_id] = "conflict_review"
             elif state == "processed":
-                result[file_id] = "processed"
+                result[file_id] = "excluded" if source_kind == "excluded" else "processed"
             else:
                 result[file_id] = "pending_review"
     return result
@@ -576,6 +576,9 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
     for topic_id, topic in curriculum["topics"].items():
         topics.setdefault(topic["source"]["source_id"], []).append(topic_id)
     processing = processing_status(snapshot, processed) if processed is not None else None
+    if processing is not None and any(processing.get(source_id) == "excluded"
+                                      for source_id in sources):
+        raise InventoryError("excluded_source_registered")
     # A newer Drive revision does not resolve an earlier disagreement. Hold
     # both sides until an explicit review replaces the conflict record.
     related_conflicts = unresolved_related_conflicts(processed) if processing is not None else set()

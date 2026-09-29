@@ -41,7 +41,7 @@ def finalize(current: dict, prior: dict, source_id: str, content_path: Path,
         raise InventoryError("review_evidence_required")
     if source_kind is not None and (
             not isinstance(source_kind, str)
-            or source_kind not in {"learning_material", "bibliography"}):
+            or source_kind not in {"learning_material", "bibliography", "excluded"}):
         raise InventoryError("invalid_reviewed_source_kind")
     pending = prior[source_id]
     conflict_hold = pending.get("conflict_hold")
@@ -86,7 +86,7 @@ def main(argv=None) -> int:
     parser.add_argument("--content", required=True, type=Path)
     parser.add_argument("--reviewer", required=True)
     parser.add_argument("--review-note", required=True)
-    parser.add_argument("--source-kind", choices=("learning_material", "bibliography"),
+    parser.add_argument("--source-kind", choices=("learning_material", "bibliography", "excluded"),
                         help="reviewed purpose; required for signing an unregistered source")
     parser.add_argument("--conflict-resolution-note")
     parser.add_argument("--output", required=True, type=Path)

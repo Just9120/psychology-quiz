@@ -72,3 +72,22 @@ def test_finalize_requires_matching_capture_and_does_not_release_conflict(tmp_pa
     assert "conflict_hold" not in resolved["private"]
     assert resolved["private"]["resolved_conflict_hold"] == captured_conflict["private"]["conflict_hold"]
     assert resolved["private"]["conflict_resolution_note"].startswith("Compared")
+
+
+def test_non_learning_file_can_be_reviewed_and_excluded_without_publication(tmp_path):
+    inventory = export(["private"])
+    content = tmp_path / "private.txt"
+    content.write_text("Организационное приглашение без учебного содержания", encoding="utf-8")
+    pending = source_capture.capture(inventory, {}, "private", content, "extracted_text")
+    excluded = source_finalize.finalize(
+        inventory, pending, "private", content, reviewer="editor",
+        review_note="Организационное приглашение; не использовать для вопросов",
+        reviewed_at="2026-09-29T07:30:00Z", source_kind="excluded",
+    )
+    snapshot = source_capture._snapshot(inventory)
+    assert processing_status(snapshot, excluded)["private"] == "excluded"
+    assert excluded["private"]["snapshot_sha256"] == pending["private"]["snapshot_sha256"]
+    assert excluded["private"]["source_kind_review"]["reviewer"] == "editor"
+    changed = export(["private"])
+    changed["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-30T00:00:00Z"
+    assert processing_status(source_capture._snapshot(changed), excluded)["private"] == "changed_unprocessed"

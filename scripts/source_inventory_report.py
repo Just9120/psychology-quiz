@@ -205,6 +205,9 @@ def report(current: dict, *, previous: dict | None = None,
         raise InventoryError("reviewed_graph_inputs_required")
     reviewed = reviewed_graph(snapshot, registry, curriculum) if registry is not None else None
     states = processing_status(snapshot, processed or {})
+    if registry is not None and any(states.get(source["id"]) == "excluded"
+                                    for source in registry["sources"]):
+        raise InventoryError("excluded_source_registered")
     lessons = link_lessons(snapshot, links or [],
                            curriculum_topics=curriculum["topics"] if curriculum is not None else None)
     changes = reconcile(_snapshot(previous), snapshot) if previous is not None else None

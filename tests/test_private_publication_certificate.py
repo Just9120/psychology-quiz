@@ -261,6 +261,9 @@ def test_signer_checks_processed_private_source_against_complete_inventory():
     with pytest.raises(SigningError, match="private_source_kind_mismatch"):
         verify_current_sources(dossier, inventory, {source["id"]: {
             **processed[source["id"]], "source_kind": "bibliography"}})
+    with pytest.raises(SigningError, match="private_source_revision_not_current"):
+        verify_current_sources(dossier, inventory, {source["id"]: {
+            **processed[source["id"]], "source_kind": "excluded"}})
     with pytest.raises(SigningError, match="private_source_kind_mismatch"):
         verify_current_sources(dossier, inventory, {source["id"]: {
             key: value for key, value in processed[source["id"]].items()

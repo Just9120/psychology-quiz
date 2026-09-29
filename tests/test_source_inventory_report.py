@@ -410,6 +410,17 @@ def test_reviewed_graph_counts_exact_lesson_edges_and_stale_metadata_without_ids
     assert "private-lesson" not in json.dumps(result)
     assert "private-bibliography" not in json.dumps(result)
 
+    excluded = {"private-lesson": {
+        "revision": ["2026-09-25T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "processed", "snapshot_kind": "extracted_text",
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE,
+        "source_kind": "excluded", "source_kind_review": {
+            "reviewer": "editor", "reviewed_at": "2026-09-26T10:32:54Z",
+            "note": "Organizational file, no learning claims"},
+    }}
+    with pytest.raises(InventoryError, match="excluded_source_registered"):
+        report(current, processed=excluded, registry=registry, curriculum=curriculum)
+
     current["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
     changed = report(current, registry=registry, curriculum=curriculum)["reviewed_graph"]
     assert changed["source_metadata"] == {"changed": 1, "current": 1}
