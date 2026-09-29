@@ -40,7 +40,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
     <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог</button>
     {item ? <article className="panel literature-detail"><button className="text-button" onClick={() => setSelected(null)}>← К списку</button>
       <h2>{item.title}</h2><p>{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p>
-      <p>Значимость: {item.importance ? importanceLabels[item.importance] : 'не определена'}</p>
+      <p>Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source === 'teacher' ? 'приоритет преподавателя' : 'рекомендация агента'}` : 'не определена'}</p>
       <p>{item.why_read}</p>{item.source?.citation && <details><summary>Библиографическая запись</summary><blockquote>{item.source.citation}</blockquote></details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!uncertain) void run(save) }}>
         <label className="field">Статус<select value={status} disabled={busy || uncertain} onChange={event => { setStatus(event.target.value as ReadingStatus); setSaved(false) }}>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>

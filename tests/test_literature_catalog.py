@@ -63,9 +63,11 @@ def test_importance_taxonomy_requires_reviewed_value():
     for importance in ('basic', 'important', 'additional', 'advanced', None):
         changed = copy.deepcopy(item)
         changed['importance'] = importance
+        changed['importance_source'] = 'teacher' if importance else None
         errors = []
         validate_literature.validate_entry(changed, 'test', item['topic_id'], {item['topic_id']}, {}, errors)
         assert not any('importance must be' in error for error in errors)
+        assert not any('must be set together' in error for error in errors)
     changed['importance'] = 'high'
     errors = []
     validate_literature.validate_entry(changed, 'test', item['topic_id'], {item['topic_id']}, {}, errors)

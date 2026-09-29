@@ -56,7 +56,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       </select></label>
       {work.entries.length > 1 && <p className="muted">Эта работа встречается в нескольких списках. Отметки чтения сохраняются отдельно для выбранного списка.</p>}
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
-      <p>Значимость: {entry.importance ? importanceLabels[entry.importance] : 'не определена'}</p>
+      <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source === 'teacher' ? 'приоритет преподавателя' : 'рекомендация агента'}` : 'не определена'}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>
       <details className="source-details"><summary>Источник и библиографическая запись</summary><p>{entry.source.title}</p><p>{entry.source.locator}</p><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}

@@ -78,4 +78,4 @@ export const miniApi = {
 }
 
 export type MiniLiteratureTopic = { topic_id: string; title: string; module?: string }
-export type MiniLiteratureItem = { id: string; topic_id: string; title?: string; authors?: string[]; year?: number | null; why_read?: string; importance?: 'basic' | 'important' | 'additional' | 'advanced' | null; source?: { title?: string; citation?: string }; user_state?: { reading_status: ReadingStatus; progress_percent: number | null } | null }
+export type MiniLiteratureItem = { id: string; topic_id: string; title?: string; authors?: string[]; year?: number | null; why_read?: string; importance?: 'basic' | 'important' | 'additional' | 'advanced' | null; importance_source?: 'teacher' | 'agent' | null; source?: { title?: string; citation?: string }; user_state?: { reading_status: ReadingStatus; progress_percent: number | null } | null }

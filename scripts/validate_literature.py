@@ -175,6 +175,11 @@ def validate_entry(
     importance = entry.get("importance")
     if importance is not None and importance not in VALID_IMPORTANCE:
         errors.append(f"{label}: importance must be one of {', '.join(sorted(VALID_IMPORTANCE))} or null")
+    importance_source = entry.get("importance_source")
+    if importance_source not in (None, "teacher", "agent"):
+        errors.append(f"{label}: importance_source must be teacher, agent or null")
+    if (importance is None) != (importance_source is None):
+        errors.append(f"{label}: importance and importance_source must be set together")
 
     validate_positive_int(entry.get("topic_order"), "topic_order", label, errors)
     validate_positive_int(entry.get("global_order"), "global_order", label, errors)
