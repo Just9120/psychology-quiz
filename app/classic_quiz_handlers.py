@@ -1415,11 +1415,6 @@ def _unmark_callback_processing(context: ContextTypes.DEFAULT_TYPE, key: str) ->
     if isinstance(in_progress, set):
         in_progress.discard(key)
 
-def _get_classic_reply_state(context: ContextTypes.DEFAULT_TYPE) -> dict:
-    state = context.user_data.get(CLASSIC_REPLY_STATE_KEY)
-    return state if isinstance(state, dict) else {}
-
-
 def _load_classic_text_answer_context(settings, tg_user, state: dict) -> dict:
     if tg_user is None:
         return {"status": "missing_user"}
