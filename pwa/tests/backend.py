@@ -19,6 +19,7 @@ from app.auth_schema import migrate_auth_schema
 from app.invitation_schema import migrate_invitation_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
+from app.homework_schema import migrate_homework_schema
 from app.miniapp_fastapi import create_app
 from app.web_config import WebSettings
 from app.postgres_import import import_snapshot
@@ -54,6 +55,7 @@ def main():
                 conn.executescript((ROOT / "sql/schema.sql").read_text(encoding="utf-8"))
                 migrate_identity_schema(conn)
                 migrate_learning_schema(conn)
+                migrate_homework_schema(conn)
                 upsert_approved_questions(conn, [
                     {"id": f"test-{i}", "category": "Основы психологии" if i < 5 else "Психология развития",
                      "source_ref": "synthetic", "difficulty": "easy", "status": "approved",

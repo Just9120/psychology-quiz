@@ -51,6 +51,7 @@ from app.glossary_handlers import (
     glossary_reply_text_next_handler,
 )
 from app.literature_chat import literature_command, literature_callback
+from app.homework_chat import BUTTON_TEXT as HOMEWORK_BUTTON_TEXT, homework_command, homework_callback
 from app.db import (
     abandon_in_progress_sessions_for_user,
     create_or_load_user,
@@ -148,6 +149,7 @@ HELP_TEXT = (
     f"{READING_MODE_BUTTON_TEXT} — выбрать обычный или бионический режим.\n"
     f"{GLOSSARY_BUTTON_TEXT} — пройти тест по терминам.\n"
     f"{LITERATURE_BUTTON_TEXT} — отметить чтение литературы.\n"
+    f"{HOMEWORK_BUTTON_TEXT} — пройти тест по домашнему заданию.\n"
     "🙈 Скрыть меню — убрать нижнюю клавиатуру.\n"
     "\n"
     "/start — вернуть меню\n"
@@ -155,6 +157,7 @@ HELP_TEXT = (
     "/ui — открыть викторину в окне\n"
     "/glossary — открыть глоссарий-тест\n"
     "/literature — открыть личный список чтения\n"
+    "/homework — открыть тесты домашних заданий\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
@@ -364,6 +367,7 @@ async def post_init(application: Application) -> None:
             BotCommand("help", "Список команд"),
             BotCommand("ping", "Проверить, что бот на связи"),
             BotCommand("quiz", "Начать викторину"),
+            BotCommand("homework", "Домашние задания"),
             BotCommand("ui", "Открыть викторину в окне"),
             BotCommand("glossary", "Открыть глоссарий"),
             BotCommand("literature", "Список чтения"),
@@ -415,7 +419,7 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
         keyboard=[
             [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
             [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
-            [KeyboardButton(LITERATURE_BUTTON_TEXT)],
+            [KeyboardButton(LITERATURE_BUTTON_TEXT), KeyboardButton(HOMEWORK_BUTTON_TEXT)],
             [KeyboardButton("ℹ️ Помощь")],
             [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
         ],
@@ -991,6 +995,8 @@ def main() -> None:
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
+    application.add_handler(CommandHandler("homework", homework_command))
+    application.add_handler(CallbackQueryHandler(homework_callback, pattern=r"^hw:"))
     application.add_handler(CommandHandler("ui", ui_command))
     application.add_handler(CommandHandler("glossary", glossary_command))
     application.add_handler(CommandHandler("literature", literature_command))
@@ -1032,6 +1038,10 @@ def main() -> None:
             literature_command,
         )
     )
+    application.add_handler(MessageHandler(
+        filters.ChatType.PRIVATE & filters.Regex(build_menu_button_regex(HOMEWORK_BUTTON_TEXT)),
+        homework_command,
+    ))
     application.add_handler(
         MessageHandler(
             filters.ChatType.PRIVATE & filters.Regex(rf"^{re.escape(HIDE_MENU_BUTTON_TEXT)}$"),

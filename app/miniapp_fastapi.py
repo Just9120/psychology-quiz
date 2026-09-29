@@ -34,11 +34,12 @@ from app.miniapp_api import (
     build_setup_options_response,
     build_setup_response,
     build_state_response,
+    build_homework_response,
 )
 
 logger = logging.getLogger("uvicorn.error")
 
-_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"} | {f"/miniapp/learning/{action}" for action in LEARNING_READ_ACTIONS | LEARNING_WRITE_ACTIONS}
+_ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/homework/catalog", "/miniapp/homework/start", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"} | {f"/miniapp/learning/{action}" for action in LEARNING_READ_ACTIONS | LEARNING_WRITE_ACTIONS}
 
 
 def _to_response(status: int, headers: dict[str, str], body: bytes) -> Response:
@@ -304,6 +305,24 @@ def create_app(
     @app.get("/miniapp/setup-options")
     async def get_setup_options(request: Request) -> Response:
         return await _get_builder_response("/miniapp/setup-options", request, build_setup_options_response, db_path, bot_token)
+
+    @app.options("/miniapp/homework/catalog")
+    async def options_homework_catalog(request: Request) -> Response:
+        return await _options_response("/miniapp/homework/catalog", request)
+
+    @app.options("/miniapp/homework/start")
+    async def options_homework_start(request: Request) -> Response:
+        return await _options_response("/miniapp/homework/start", request)
+
+    @app.get("/miniapp/homework/catalog")
+    async def get_homework_catalog(request: Request) -> Response:
+        return await _get_builder_response("/miniapp/homework/catalog", request,
+            build_homework_response, db_path, bot_token, "catalog")
+
+    @app.post("/miniapp/homework/start")
+    async def post_homework_start(request: Request) -> Response:
+        return await _post_builder_response("/miniapp/homework/start", request,
+            build_homework_response, db_path, bot_token, "start")
 
     @app.options("/miniapp/learning/{action}")
     async def options_learning(action: str, request: Request) -> Response:

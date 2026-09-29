@@ -12,10 +12,24 @@ from app.db import get_connection, create_or_load_user, get_owner_stats, upsert_
 from app.postgres_import import import_snapshot
 from app.postgres_recovery import manifest, verify_user_state
 from app.postgres_schema import initialize_schema, verify_schema, table_columns
+from app.homework_schema import migrate_homework_schema
 from app.quiz_service import answer_quiz, prepare_quiz, start_prepared_quiz
 from app.web_auth import AuthError, WebAuth, digest
 from tests.test_attempt_content import make_attempt, populate_extended_user_state, NEW, OTHER
 from tests.test_web_auth import EMAIL, PASSWORD, SETTINGS, Mailbox, post, login
+
+
+def test_homework_v6_snapshot_import_preserves_assignment_link(source, pg_target):
+    with closing(get_connection(str(source))) as conn, conn:
+        migrate_homework_schema(conn)
+        session_id = make_attempt(conn)
+        conn.execute("INSERT INTO homework_attempts(session_id,assignment_id) VALUES(?,?)",
+                     (session_id, "synthetic_assignment"))
+    assert import_snapshot(source, pg_target)["result"] == "imported"
+    with closing(get_connection(pg_target)) as conn:
+        assert verify_schema(conn) == "postgres-v6"
+        assert conn.execute("SELECT session_id,assignment_id FROM homework_attempts").fetchone()[:] == (
+            session_id, "synthetic_assignment")
 
 
 def test_every_row_identity_sequence_and_snapshot_survive_import(source, pg_target):

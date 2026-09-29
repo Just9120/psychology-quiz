@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "assignments": [
+    {
+      "id": "professional_reflection",
+      "title": "Профессиональная позиция и рефлексия",
+      "module": "Модуль 1",
+      "discipline_id": "vvedenie_v_professiyu",
+      "topic_id": "t_c17d1ae57018",
+      "description": "Тест проверяет профессиональные принципы. Личные письменные ответы не оцениваются и не сохраняются.",
+      "question_ids": ["m1_intro_007", "m1_intro_014", "m1_intro_015", "m1_intro_019", "m1_intro_025"]
+    },
+    {
+      "id": "professional_diary",
+      "title": "Дневник начинающего консультанта",
+      "module": "Модуль 1",
+      "discipline_id": "vvedenie_v_professiyu",
+      "topic_id": "t_c17d1ae57018",
+      "description": "Тест проверяет конфиденциальность и профессиональную рефлексию. Он не подтверждает ведение дневника.",
+      "question_ids": ["m1_intro_004", "m1_intro_015", "m1_intro_016", "m1_intro_025", "m1_intro_033"]
+    },
+    {
+      "id": "observation_and_listening",
+      "title": "Наблюдение и активное слушание",
+      "module": "Модуль 1",
+      "discipline_id": "vvedenie_v_professiyu",
+      "topic_id": "t_5f1cca01d535",
+      "description": "Тест проверяет навыки наблюдения и слушания. Он не подтверждает выполнение упражнения с другим человеком.",
+      "question_ids": ["m1_intro_010", "m1_intro_011", "m1_intro_033", "m3_psychological_consulting_006", "m3_psychological_consulting_007"]
+    },
+    {
+      "id": "first_consultation",
+      "title": "Первая встреча с клиентом",
+      "module": "Модуль 3",
+      "discipline_id": "psychological_consulting",
+      "topic_id": "t_7246705017fc",
+      "description": "Тест проверяет понятия первой встречи. Он не подтверждает участие в практической сессии.",
+      "question_ids": ["m3_psychological_consulting_004", "m3_psychological_consulting_005", "m3_psychological_consulting_006", "m3_psychological_consulting_008", "m3_psychological_consulting_009"]
+    }
+  ]
+}

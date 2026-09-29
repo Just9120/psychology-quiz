@@ -1,9 +1,10 @@
 import type { AchievementsOverview, Answer, AnswerResult, GlossaryState, GlossaryTopic, GoalKind, GoalsOverview, MasteryOverview, ProgressOverview, QuizState, ReadingStatus, ReviewQueue, Setup, SetupOptions } from '../types'
+import type { HomeworkCatalog, HomeworkStart } from '../types'
 
 // Static deployment-owned API target; launch parameters cannot redirect initData.
 const origin = 'https://quiz-api.librechat.online'
 const routes = new Set([
-  'state', 'setup-options', 'setup', 'answer',
+  'state', 'setup-options', 'setup', 'answer', 'homework/catalog', 'homework/start',
   'glossary/topics', 'glossary/start', 'glossary/answer', 'glossary/next',
   'literature/topics', 'literature/items', 'literature/progress',
   'learning/overview', 'learning/review', 'learning/mastery', 'learning/goals', 'learning/achievements',
@@ -47,6 +48,9 @@ export const miniApi = {
   options: () => miniRequest<{ ok: true; setup_options: SetupOptions }>('setup-options'),
   setup: (setup: Setup) => miniRequest<QuizState>('setup', setup),
   answer: (answer: Answer) => miniRequest<AnswerResult>('answer', answer),
+  homework: () => miniRequest<HomeworkCatalog>('homework/catalog'),
+  startHomework: (assignment_id: string, expected_session_id: number | null, replace_active: boolean) =>
+    miniRequest<HomeworkStart>('homework/start', { assignment_id, expected_session_id, replace_active }),
   glossaryOptions: async () => {
     const result = await miniRequest<{ ok: true; glossary: { topics: GlossaryTopic[] } }>('glossary/topics')
     return { ok: true as const, topics: result.glossary.topics }

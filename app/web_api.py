@@ -3,7 +3,7 @@ import asyncio
 import json
 import logging
 from app.database import OPERATIONAL_ERRORS, begin_write
-from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements
+from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements, homework
 from app.mastery import overview as mastery_overview
 from urllib.parse import unquote
 
@@ -15,9 +15,9 @@ from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_set
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
+GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
-                "identity/new", "link/start", "link/complete", "profile/name", "quiz/setup", "quiz/answer", "literature/progress",
+                "identity/new", "link/start", "link/complete", "profile/name", "quiz/setup", "quiz/answer", "homework/start", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
                 "progress/reset-preview", "progress/reset-confirm", "progress/review-start", "progress/review-glossary-start", "progress/goal-set", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
 logger = logging.getLogger(__name__)
@@ -126,6 +126,15 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
                 raise AuthError(exc.code, exc.status) from None
         if action == "quiz/options":
             return {"ok": True, "setup_options": quiz_setup_options(conn)}, None
+        if action == "homework/catalog":
+            return homework.catalog_for_actor(conn, actor), None
+        if action == "homework/start":
+            try:
+                return homework.start_homework(conn, actor_user_id=actor,
+                    assignment_id=payload.get("assignment_id"), payload=payload), None
+            except homework.HomeworkError as exc:
+                code = str(exc)
+                raise AuthError(code, 400 if code == "invalid_homework" else 404 if code == "homework_unavailable" else 409) from None
         if action == "quiz/state":
             return quiz_state(conn, actor_user_id=actor), None
         if action == "quiz/setup":
@@ -146,6 +155,7 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
             result = answer_quiz(conn, actor_user_id=actor, session_id=sid, question_id=qid, selected_option_index=choice)
             if result["submission_status"] == "forbidden":
                 raise AuthError("forbidden", 403)
+            result["homework_outcome"] = homework.outcome_for_session(conn, actor_user_id=actor, session_id=sid)
             return result, None
         raise AuthError("not_found", 404)
 

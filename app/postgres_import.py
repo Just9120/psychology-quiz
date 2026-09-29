@@ -12,7 +12,7 @@ from pathlib import Path
 import sqlite3
 
 from app.database import Connection, begin_write, connect_database, is_postgres_target
-from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, V2_TABLES, V3_TABLES, V4_TABLES, initialize_schema, table_columns, verify_schema
+from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, VERSION, V2_TABLES, V3_TABLES, V4_TABLES, V5_TABLES, initialize_schema, table_columns, verify_schema
 
 
 def quote_identifier(name: str) -> str:
@@ -56,7 +56,8 @@ def validate_source(source, columns: dict[str, tuple[str, ...]]) -> None:
     required = ({"identity-v1", "auth-v1"}
                 | ({"glossary-v1"} if "glossary_sessions" in columns else set())
                 | ({"learning-v1"} if "user_learning_goals" in columns else set())
-                | ({"invitations-v1"} if "pwa_invitations" in columns else set()))
+                | ({"invitations-v1"} if "pwa_invitations" in columns else set())
+                | ({"homework-v1"} if "homework_attempts" in columns else set()))
     if versions != required:
         raise ValueError("SQLite schema must be upgraded before creating the cutover snapshot")
     for encoded, digest, provenance in source.execute(
@@ -90,8 +91,10 @@ def import_snapshot(source_path: Path, target: str) -> dict:
     with closing(sqlite3.connect(source_path.resolve().as_uri() + "?mode=ro", uri=True)) as source:
         source.execute("BEGIN")
         source_tables = {row[0] for row in source.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        if "web_profile_names" in source_tables:
-            tables, version = TABLES, "postgres-v5"
+        if "homework_attempts" in source_tables:
+            tables, version = TABLES, "postgres-v6"
+        elif "web_profile_names" in source_tables:
+            tables, version = V5_TABLES, "postgres-v5"
         elif "pwa_invitations" in source_tables:
             tables, version = V4_TABLES, "postgres-v4"
         elif "user_learning_goals" in source_tables:
@@ -102,7 +105,16 @@ def import_snapshot(source_path: Path, target: str) -> dict:
             tables, version = BASE_TABLES, "postgres-v1"
         with closing(connect_database(target)) as conn, conn:
             begin_write(conn, "schema")
-            initialize_schema(conn, version=version)
+            existing = table_columns(conn)
+            if existing:
+                target_version = verify_schema(conn, allow_legacy=True)
+                # A current empty target can receive a v5 SQLite snapshot;
+                # homework_attempts starts empty and the imported v5 tables
+                # retain their exact projection for reconciliation.
+                if target_version != version and not (target_version == VERSION and version == "postgres-v5"):
+                    raise ValueError("Explicit PostgreSQL upgrade required")
+            else:
+                initialize_schema(conn, version=version)
             # An accidentally running target writer must not interleave with the
             # empty-target check, reconciliation or sequence reset.
             conn.execute("LOCK TABLE " + ",".join(tables) + " IN ACCESS EXCLUSIVE MODE")

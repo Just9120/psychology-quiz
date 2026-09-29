@@ -18,7 +18,7 @@ from app.literature_service import (
     load_progress as _load_literature_progress_by_user, load_item_states as _load_literature_item_states_by_user,
     validate_progress as _validate_literature_progress_payload, save_progress as _upsert_literature_progress,
 )
-from app import glossary_service, progress_service, repetition, learning_goals, achievements
+from app import glossary_service, progress_service, repetition, learning_goals, achievements, homework
 from app.mastery import overview as mastery_overview
 from app.miniapp_glossary import run as run_glossary
 from typing import Any
@@ -44,6 +44,35 @@ logger = logging.getLogger(__name__)
 
 LEARNING_READ_ACTIONS = {"overview", "review", "mastery", "goals", "achievements"}
 LEARNING_WRITE_ACTIONS = {"goal-set", "review-start", "review-glossary-start"}
+
+
+def build_homework_response(db_path: str, bot_token: str, action: str,
+                            init_data: str, body: bytes = b"", *, max_age_seconds: int = 3600):
+    if action not in {"catalog", "start"}:
+        return _json(HTTPStatus.NOT_FOUND, {"ok": False, "error": "not_found"})
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    payload = _parse_json_payload(body) if action == "start" else {}
+    if payload is None:
+        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
+    try:
+        with closing(get_connection(db_path)) as conn, conn:
+            user = create_or_load_user(conn, verified.telegram_user_id, verified.username,
+                                       verified.first_name, verified.last_name)
+            actor = int(user["id"])
+            result = (homework.catalog_for_actor(conn, actor) if action == "catalog" else
+                      homework.start_homework(conn, actor_user_id=actor,
+                          assignment_id=payload.get("assignment_id"), payload=payload))
+        return _json(HTTPStatus.OK, result)
+    except homework.HomeworkError as exc:
+        code = str(exc)
+        status = HTTPStatus.BAD_REQUEST if code == "invalid_homework" else HTTPStatus.NOT_FOUND if code == "homework_unavailable" else HTTPStatus.CONFLICT
+        return _json(status, {"ok": False, "error": code})
+    except OPERATIONAL_ERRORS as error:
+        if _is_sqlite_locked_error(error):
+            return _database_busy_response()
+        raise
 
 
 def build_learning_response(db_path: str, bot_token: str, action: str,
@@ -586,6 +615,8 @@ def build_answer_response(
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
                 result = answer_quiz(conn, actor_user_id=int(user_row["id"]), session_id=req[0],
                                      question_id=req[1], selected_option_index=req[2])
+                result["homework_outcome"] = homework.outcome_for_session(
+                    conn, actor_user_id=int(user_row["id"]), session_id=req[0])
                 return _json(HTTPStatus.OK, result)
     except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
@@ -700,7 +731,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         origin = self.headers.get("Origin", "")
         allowed = bool(self.allowed_origin and origin == self.allowed_origin)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/homework/catalog", "/miniapp/homework/start", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s", "unknown", request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no")
             return
@@ -719,7 +750,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         transport = "header_auth"
         init_data = _extract_init_data(self.headers)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/glossary/topics", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/homework/catalog", "/miniapp/glossary/topics", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         try:
@@ -737,6 +768,10 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     init_data,
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
+            elif endpoint == "/miniapp/homework/catalog":
+                status, headers, body = build_homework_response(
+                    self.db_path, self.bot_token, "catalog", init_data,
+                    max_age_seconds=self.initdata_ttl_seconds)
             elif endpoint == "/miniapp/glossary/topics":
                 status, headers, body = build_glossary_topics_response(
                     self.bot_token,
@@ -790,7 +825,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         endpoint = self.path.split("?")[0]
         request_id = _read_request_id(self.headers)
         transport = "header_auth"
-        if endpoint not in {"/miniapp/answer", "/miniapp/setup", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/progress"}:
+        if endpoint not in {"/miniapp/answer", "/miniapp/setup", "/miniapp/homework/start", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         length = int(self.headers.get("Content-Length", "0"))
@@ -814,6 +849,10 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                     payload_body,
                     max_age_seconds=self.initdata_ttl_seconds,
                 )
+            elif endpoint == "/miniapp/homework/start":
+                status, headers, data = build_homework_response(
+                    self.db_path, self.bot_token, "start", init_data, payload_body,
+                    max_age_seconds=self.initdata_ttl_seconds)
             elif endpoint == "/miniapp/literature/progress":
                 status, headers, data = build_literature_progress_response(
                     self.db_path, self.bot_token, init_data, payload_body, max_age_seconds=self.initdata_ttl_seconds

@@ -64,6 +64,8 @@ Repository-visible GitHub Actions are split by responsibility:
 
 Общий quiz backend: [quiz_service](app/quiz_service.py) задаёт setup/state/answer/feedback для проверенного `users.id`; [quiz_runner](app/quiz_runner.py) — переходы попытки. Telegram API проверяет initData отдельно; `miniapp_runner` сохраняет совместимые imports для bot. [Identity migration](app/identity_schema.py) выполняется через canonical init command, сохраняет legacy данные и допускает пользователей без Telegram. Процедура production migration — в [runbook](docs/miniapp-deployment-qa.md#identity-v1-для-pwa).
 
+[Каталог домашних заданий](content/homework.json) содержит только учебные названия, классификацию и ID утверждённых вопросов общего банка. Исходные материалы Drive и редакторские досье остаются приватными. Telegram `/homework`, Mini App и owner PWA используют [общую модель попыток](app/homework.py): отметка «Выполнено» требует не менее 80% в одной завершённой попытке и не подтверждает выполнение эссе или упражнения. Additive SQLite/PostgreSQL миграции выполняет та же canonical `scripts/init_db.py`; источник и границы AC описаны в [спецификации](docs/project-spec.md#e08--домашние-задания-в-формате-тестов).
+
 ```bash
 pip install -r requirements.txt
 python -m compileall app scripts

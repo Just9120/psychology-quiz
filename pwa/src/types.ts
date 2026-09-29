@@ -89,7 +89,34 @@ export interface AnswerResult {
   submission_status: string
   feedback?: Feedback
   runner_state?: RunnerState
+  homework_outcome?: HomeworkOutcome | null
 }
+
+export interface HomeworkOutcome {
+  assignment_id: string
+  attempt_finished: boolean
+  passed: boolean
+  score: number
+  total_questions: number
+}
+
+export interface HomeworkAssignment {
+  id: string
+  title: string
+  module: string
+  discipline: string
+  topic: string
+  description: string
+  question_count: number
+  completed: boolean
+  finished_attempts: number
+  best_score: number | null
+  best_total: number | null
+  active_session_id: number | null
+}
+
+export interface HomeworkCatalog { ok: true; assignments: HomeworkAssignment[] }
+export interface HomeworkStart { ok: true; assignment_id: string; runner_state: RunnerState }
 
 export interface MailProof { purpose: 'verify' | 'recover'; token: string }
 
