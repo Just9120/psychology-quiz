@@ -2142,6 +2142,150 @@
         }
       ],
       "rationale": "Практика №9 обсуждает зависимые переменные как измеряемые показатели. Школьная разминка — авторский учебный пример, не случай из источника; stem теперь явно сообщает, что после урока измеряют внимание. Сохранённые попытки не переписываются."
+    },
+    "literature:lit_family_slide_01": {
+      "decision": "approved",
+      "item_sha256": "e18544e179e2cdb4a68f5feab6401683bc46f33936276477a6fc0a20b15ca211",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+          "modified_time": "2026-09-08T15:33:29.050Z",
+          "snapshot_sha256": "b67f5afbcc71c902368e5b10842eff25aa702f131795cffd4fe0ed9d4c2bf43b",
+          "locator": "Раздел «Полезная литература», позиция 1"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_02": {
+      "decision": "approved",
+      "item_sha256": "25663a0dda81a8f4fcb88f065c47339f6b4a63a940c1a893b59698859d499517",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+          "modified_time": "2026-09-08T15:33:29.050Z",
+          "snapshot_sha256": "b67f5afbcc71c902368e5b10842eff25aa702f131795cffd4fe0ed9d4c2bf43b",
+          "locator": "Раздел «Полезная литература», позиция 2"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_03": {
+      "decision": "approved",
+      "item_sha256": "d831a51ca2466909350259e2dca9d74b4ccc09558fa9a2d0804bd6c942470fb6",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+          "modified_time": "2026-09-08T15:33:29.050Z",
+          "snapshot_sha256": "b67f5afbcc71c902368e5b10842eff25aa702f131795cffd4fe0ed9d4c2bf43b",
+          "locator": "Раздел «Полезная литература», позиция 3"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_04": {
+      "decision": "approved",
+      "item_sha256": "1ee12134de1249fad364c9697e81c2fef80548d3104ecb940ae4159a5af710d5",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+          "modified_time": "2026-09-08T15:33:29.050Z",
+          "snapshot_sha256": "b67f5afbcc71c902368e5b10842eff25aa702f131795cffd4fe0ed9d4c2bf43b",
+          "locator": "Раздел «Полезная литература», позиция 4"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_05": {
+      "decision": "approved",
+      "item_sha256": "42c51988f60a412686687f5435e895e6d4ddce0b33057a8dfe5f8ce3cc69b923",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+          "modified_time": "2026-09-08T15:33:27.381Z",
+          "snapshot_sha256": "5c6c6b6a811b93e55dc3b6c05dc8d90ff3cf10a00b4b255680fe4e85b026e617",
+          "locator": "Раздел «Полезная литература», позиция 1"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_06": {
+      "decision": "approved",
+      "item_sha256": "f8bcc18c85822fcc4a193b08aa093b0fd59c110f04458d076b6620a389d394aa",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+          "modified_time": "2026-09-08T15:33:27.381Z",
+          "snapshot_sha256": "5c6c6b6a811b93e55dc3b6c05dc8d90ff3cf10a00b4b255680fe4e85b026e617",
+          "locator": "Раздел «Полезная литература», позиция 2"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_07": {
+      "decision": "approved",
+      "item_sha256": "c759daa045daf5c3af852c5127c994ce353bf8b2af29e17e0d7ac37900edd948",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+          "modified_time": "2026-09-08T15:33:27.381Z",
+          "snapshot_sha256": "5c6c6b6a811b93e55dc3b6c05dc8d90ff3cf10a00b4b255680fe4e85b026e617",
+          "locator": "Раздел «Полезная литература», позиция 3"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_08": {
+      "decision": "approved",
+      "item_sha256": "f77cb5056b1753677177bb004b22fe1b9b11ba3d75dc0e3dd43deba8388d6113",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+          "modified_time": "2026-09-08T15:33:27.381Z",
+          "snapshot_sha256": "5c6c6b6a811b93e55dc3b6c05dc8d90ff3cf10a00b4b255680fe4e85b026e617",
+          "locator": "Раздел «Полезная литература», позиция 4"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_family_slide_09": {
+      "decision": "approved",
+      "item_sha256": "7c88d7786e51f3f9c968f1a532c8ecbc00e40b6b4505b7a31c7a4efe45517aa1",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+          "modified_time": "2026-09-08T15:33:27.381Z",
+          "snapshot_sha256": "5c6c6b6a811b93e55dc3b6c05dc8d90ff3cf10a00b4b255680fe4e85b026e617",
+          "locator": "Раздел «Полезная литература», позиция 5"
+        }
+      ],
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
     }
   }
 }

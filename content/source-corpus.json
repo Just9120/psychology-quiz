@@ -896,6 +896,34 @@
       "reviewer": "coding-agent",
       "review_method": "connected Drive; targeted original fragments and semantic item review",
       "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+    },
+    {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "corpus_path": "Модуль 6. Направления работы психолога/Семейная психология/Детские кризисы_Дмитриева Виктория.pdf",
+      "kind": "bibliography",
+      "readable": true,
+      "modified_time": "2026-09-08T15:33:29.050Z",
+      "snapshot_sha256": "b67f5afbcc71c902368e5b10842eff25aa702f131795cffd4fe0ed9d4c2bf43b",
+      "snapshot_kind": "extracted_text",
+      "reviewed_at": "2026-09-29",
+      "reviewer": "coding-agent",
+      "review_method": "connected Drive; complete presentation text and bibliography section",
+      "limitations": "Проверены только библиографические упоминания; издания, полнота записи и содержание перечисленных работ не подтверждены."
+    },
+    {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "corpus_path": "Модуль 6. Направления работы психолога/Семейная психология/Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "kind": "bibliography",
+      "readable": true,
+      "modified_time": "2026-09-08T15:33:27.381Z",
+      "snapshot_sha256": "5c6c6b6a811b93e55dc3b6c05dc8d90ff3cf10a00b4b255680fe4e85b026e617",
+      "snapshot_kind": "extracted_text",
+      "reviewed_at": "2026-09-29",
+      "reviewer": "coding-agent",
+      "review_method": "connected Drive; complete presentation text and bibliography section",
+      "limitations": "Проверены только библиографические упоминания; издания, полнота записи и содержание перечисленных работ не подтверждены."
     }
   ]
 }

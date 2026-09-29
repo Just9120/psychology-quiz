@@ -516,5 +516,330 @@
       "Год издания не установлен по исходному списку."
     ],
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_01",
+    "work_id": "lit_family_slide_01",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Психология развития и возрастная психология",
+    "authors": [
+      "Кулагина И. Ю.",
+      "Колюцкий В. Н."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 160,
+    "global_order": 620160,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Психология развития и возрастная психология. И. Ю. Кулагина, В. Н. Колюцкий"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_02",
+    "work_id": "lit_57ba3a9bf5d4ff18",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Привязанность",
+    "authors": [
+      "Боулби Джон"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 170,
+    "global_order": 620170,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Привязанность. Джон Боулби"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены.",
+      "Та же работа и автор уже есть в списке возрастной психологии; издание не установлено."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_03",
+    "work_id": "lit_family_slide_03",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Давай договоримся",
+    "authors": [
+      "Кляйндинст Анн-Клер"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 180,
+    "global_order": 620180,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Давай договоримся. Анн-Клер Кляйндинст"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_04",
+    "work_id": "lit_family_slide_04",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Трудный подросток",
+    "authors": [
+      "Зурита Она Патрисия И."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 190,
+    "global_order": 620190,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Трудный подросток. Патрисия И. Зурита Она"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_05",
+    "work_id": "lit_family_slide_05",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Теория семейных систем Мюррея Боуэна. Основные понятия, методы и клиническая практика",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 200,
+    "global_order": 620200,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Теория семейных систем Мюррея Боуэна. Основные понятия, методы и клиническая практика. Сборник статей. Когито-центр"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены.",
+      "Автор или редактор сборника не указан в презентации."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_06",
+    "work_id": "lit_family_slide_06",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Введение в системную семейную психотерапию",
+    "authors": [
+      "Варга Анна"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 210,
+    "global_order": 620210,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Введение в системную семейную психотерапию. Анна Варга"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_07",
+    "work_id": "lit_family_slide_07",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Системная психотерапия супружеских пар",
+    "authors": [
+      "Варга Анна"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 220,
+    "global_order": 620220,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Системная психотерапия супружеских пар. Сборник статей. Анна Варга"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_08",
+    "work_id": "lit_family_slide_08",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Психотерапия семьи",
+    "authors": [
+      "Сатир Вирджиния"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 230,
+    "global_order": 620230,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Психотерапия семьи. Вирджиния Сатир"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_family_slide_09",
+    "work_id": "lit_family_slide_09",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Техники семейной терапии",
+    "authors": [
+      "Минухин Сальвадор"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 240,
+    "global_order": 620240,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Техники семейной терапии. Сальвадор Минухин"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
   }
 ]
