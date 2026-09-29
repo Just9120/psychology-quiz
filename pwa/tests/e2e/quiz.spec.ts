@@ -3,6 +3,22 @@ import { expect, test, type Page } from '@playwright/test'
 const backend = 'http://127.0.0.1:8085'
 const email = 'owner@example.test', password = 'A synthetic browser passphrase'
 
+async function readingCount(page: Page, topic?: string) {
+  const catalog = await (await page.request.get('/web/literature/catalog')).json() as { works: { entries: { topic_id: string }[] }[] }
+  return catalog.works.filter(work => !topic || work.entries.some(entry => entry.topic_id === topic)).length
+}
+
+test('owner can select a period for deidentified learning statistics', async ({ page }) => {
+  await fresh(page)
+  await page.getByRole('button', { name: 'Статистика', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Статистика', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: '7 дней', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  await page.getByRole('button', { name: '24 часа', exact: true }).click()
+  await expect(page.getByRole('button', { name: '24 часа', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.locator('.progress-page')).not.toContainText(email)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+})
+
 test('owner-only PWA offers no guest demo or learning state', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('button', { name: 'Войти в пространство' })).toBeVisible()
@@ -30,7 +46,7 @@ test('short desktop viewport keeps sidebar navigation and logout reachable', asy
   await page.setViewportSize({ width: 1280, height: 480 })
   await fresh(page)
   await page.getByRole('button', { name: 'Литература', exact: true }).click()
-  await expect(page.getByText('Работ: 114')).toBeVisible()
+  await expect(page.getByText(`Работ: ${await readingCount(page)}`)).toBeVisible()
   await page.getByRole('button', { name: 'Мой аккаунт' }).click()
   await page.getByRole('button', { name: 'Установить приложение' }).filter({ visible: true }).click()
   await expect(page.getByRole('status')).toBeVisible()
@@ -42,9 +58,9 @@ test('short desktop viewport keeps sidebar navigation and logout reachable', asy
 test('reading catalog preserves separate lists, lost save and reload', async ({ page }, testInfo) => {
   await fresh(page)
   await page.getByRole('button', { name: 'Литература', exact: true }).click()
-  await expect(page.getByText('Работ: 114')).toBeVisible()
+  await expect(page.getByText(`Работ: ${await readingCount(page)}`)).toBeVisible()
   await page.getByLabel('Тема литературы').selectOption('fiziologiya_cheloveka')
-  await expect(page.getByText('Работ: 15')).toBeVisible()
+  await expect(page.getByText(`Работ: ${await readingCount(page, 'fiziologiya_cheloveka')}`)).toBeVisible()
   await page.locator('.literature-title').first().click()
   const title = await page.locator('.literature-detail h2').innerText()
   const first = await page.getByLabel('Учебный список').inputValue()
