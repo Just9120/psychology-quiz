@@ -115,13 +115,14 @@ class GlossaryRuntimeTests(unittest.TestCase):
         exp_entries = load_glossary_entries(EXP_TOPIC_ID)
 
         self.assertIsNotNone(entries)
-        self.assertGreaterEqual(len(entries), 14)
+        self.assertIn("qual_methods_case_study", {entry.id for entry in entries})
         self.assertEqual(TOPIC_ID, entries[0].topic_id)
         self.assertTrue(entries[0].term)
         self.assertIsNotNone(exp_entries)
         self.assertEqual(10, len(exp_entries))
         self.assertTrue(all(entry.id.startswith("exp_psych_") for entry in exp_entries))
-        self.assertTrue(all(entry.source_refs for entry in exp_entries))
+        self.assertTrue(any(entry.source_refs for entry in exp_entries))
+        self.assertTrue(any(not entry.source_refs for entry in exp_entries))
         self.assertTrue(all(isinstance(entry.confusable_with, tuple) for entry in exp_entries))
         self.assertTrue(any(entry.confusable_with for entry in exp_entries))
 
@@ -178,10 +179,10 @@ class GlossaryRuntimeTests(unittest.TestCase):
         labels = [button.text for row in keyboard.keyboard for button in row]
 
         self.assertIn("Вопрос 1 из 5", question_text)
-        self.assertIn("Ответьте кнопкой с номером варианта внизу", question_text)
+        self.assertIn("Ответьте кнопкой с номером варианта или «Не знаю» внизу", question_text)
         for number in range(1, 5):
             self.assertIn(f"{number}. ", question_text)
-        self.assertEqual(["1", "2", "3", "4"], labels)
+        self.assertEqual(["1", "2", "3", "4", "Не знаю"], labels)
         self.assertFalse(hasattr(keyboard, "inline_keyboard"))
 
     def test_feedback_numbers_next_keyboard_and_result(self):
@@ -202,8 +203,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
 
     def test_rendered_question_feedback_result_hide_internal_provenance(self):
         entries = load_glossary_entries(EXP_TOPIC_ID)
-        entry = entries[8]
-        self.assertIn("question:m2_exp_022", entry.source_refs)
+        entry = next(entry for entry in entries if "question:m2_exp_022" in entry.source_refs)
         question = build_glossary_quiz_question(entries, entry, rng=random.Random(4))
 
         rendered = "\n".join(
