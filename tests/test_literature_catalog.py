@@ -2,6 +2,7 @@ import copy
 import json
 from pathlib import Path
 
+from app import literature
 from app.content_publication import load_policy
 from app.literature import load_access_links, load_literature_items
 from app.literature import load_topic_registry
@@ -56,6 +57,31 @@ def test_catalog_paths_do_not_depend_on_process_working_directory(tmp_path, monk
     monkeypatch.chdir(tmp_path)
     assert len(load_literature_items()) == 130
     assert 'family_psychology' in load_topic_registry()
+
+
+def test_catalog_reuses_approved_content_without_sharing_mutable_response(monkeypatch):
+    literature._published_literature_items.cache_clear()
+    original_load = literature._load_json_file
+    reads = []
+
+    def tracked_load(path):
+        if path.parent == literature.LITERATURE_DIR:
+            reads.append(path)
+        return original_load(path)
+
+    monkeypatch.setattr(literature, '_load_json_file', tracked_load)
+    try:
+        first = load_literature_items()
+        assert reads
+        first[0]['title'] = 'changed by caller'
+        first[0]['source']['title'] = 'changed by caller'
+        first[0]['access_links'].clear()
+        second = load_literature_items()
+        assert len(reads) == len(list(literature.LITERATURE_DIR.glob('*.json')))
+        assert second[0]['title'] != 'changed by caller'
+        assert second[0]['source']['title'] != 'changed by caller'
+    finally:
+        literature._published_literature_items.cache_clear()
 
 
 def test_importance_taxonomy_requires_reviewed_value():
