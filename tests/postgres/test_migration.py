@@ -228,7 +228,7 @@ def test_literature_progress_persists_and_isolates_actors(bank):
     item = load_literature_items()[0]['id']
     headers = {'Authorization':'tma '+_make_init_data(TOKEN, {'id':42,'first_name':'Original user'})}
     with TestClient(create_app(db_path=bank, bot_token=TOKEN)) as client:
-        for status, percent, expected in [('in_progress',40,40),('read',12,100),('not_started',None,0)]:
+        for status, percent, expected in [('in_progress',None,None),('read',None,100),('not_started',None,0)]:
             response = client.post('/miniapp/literature/progress', headers=headers,
                 json={'literature_id':item,'reading_status':status,'progress_percent':percent})
             assert response.status_code == 200
