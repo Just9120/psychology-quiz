@@ -25,6 +25,39 @@ def reading_summary(items: list[dict], states: dict) -> dict:
     return {"read": read, "total": len(works), "conflicts": conflicts, "current": current}
 
 
+def reading_next_step(items: list[dict], states: dict) -> dict | None:
+    """Continue a started work in this scope; never infer pedagogical priority.
+
+    Conflicting association states require a decision before a recommendation.
+    Only canonical UTC timestamps rank recency; missing dates tie by stable ID.
+    """
+    works = {}
+    for item in items:
+        works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    candidates = []
+    for entries in works.values():
+        if {states.get(item["id"], {}).get("reading_status", "not_started")
+                for item in entries} == {"in_progress"}:
+            candidates.extend(entries)
+    def recency(item):
+        value = states.get(item["id"], {}).get("updated_at")
+        if not isinstance(value, str) or len(value) != 20 or not value.endswith("Z"):
+            return ""
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return ""
+        return value if parsed.strftime("%Y-%m-%dT%H:%M:%SZ") == value else ""
+    if not candidates:
+        return None
+    # Two stable sorts avoid deriving a preference from bibliography position.
+    candidates.sort(key=lambda item: str(item["id"]))
+    candidates.sort(key=recency, reverse=True)
+    return {"item": candidates[0], "kind": "continue",
+            "reason": "Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.",
+            "basis": "personal_reading_state"}
+
+
 def catalog(conn, actor_user_id: int) -> dict[str, Any]:
     states = load_progress(conn, actor_user_id)
     topics = load_topic_registry()

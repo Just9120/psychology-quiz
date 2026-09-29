@@ -1,6 +1,25 @@
 import type { ReadingStatus } from './types'
 
-type Item = { id: string; work_id?: string; title?: string; user_state?: { reading_status: ReadingStatus } | null }
+type Item = { id: string; work_id?: string; title?: string; user_state?: { reading_status: ReadingStatus; updated_at?: string } | null }
+
+export function readingNextStep(items: Item[]): Item | null {
+  const works = new Map<string, Item[]>()
+  for (const item of items) {
+    const key = item.work_id ?? item.id
+    works.set(key, [...(works.get(key) ?? []), item])
+  }
+  const candidates = [...works.values()].filter(entries =>
+    entries.every(item => item.user_state?.reading_status === 'in_progress')).flat()
+  const recency = (item: Item) => {
+    const value = item.user_state?.updated_at ?? ''
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(value)) return ''
+    const time = Date.parse(value)
+    return Number.isFinite(time) && new Date(time).toISOString().replace('.000Z', 'Z') === value ? value : ''
+  }
+  const compare = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0
+  candidates.sort((a, b) => compare(recency(b), recency(a)) || compare(a.id, b.id))
+  return candidates[0] ?? null
+}
 
 export function ReadingSummary({ items, busy, onSelect }: { items: Item[]; busy: boolean; onSelect: (id: string) => void }) {
   const works = new Map<string, Item[]>()
@@ -13,10 +32,16 @@ export function ReadingSummary({ items, busy, onSelect }: { items: Item[]; busy:
   const read = groups.filter(entries => statuses(entries).size === 1 && statuses(entries).has('read')).length
   const conflicts = groups.filter(entries => statuses(entries).size > 1).length
   const current = groups.map(entries => entries.find(item => item.user_state?.reading_status === 'in_progress')).filter((item): item is Item => !!item)
+  const next = readingNextStep(items)
   return <aside className="panel reading-summary" aria-label="Прогресс списка чтения">
     <p role="status">Прочитано {read} из {groups.length}</p>
     {conflicts > 0 && <p className="muted">У {conflicts} работ отметки в выбранных списках различаются. Они не включены в число прочитанных до согласования отметок.</p>}
     <h2>Сейчас читаю</h2>
     {current.length ? <ul>{current.map(item => <li key={item.id}><button className="text-button" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button></li>)}</ul> : <p className="muted">В выбранных списках нет книг со статусом «Читаю».</p>}
+    {next && <section aria-label="Следующий шаг чтения">
+      <h2>Следующий шаг</h2>
+      <button className="text-button" disabled={busy} onClick={() => onSelect(next.id)}>Продолжить «{next.title ?? 'Книга'}»</button>
+      <p className="muted">Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.</p>
+    </section>}
   </aside>
 }
