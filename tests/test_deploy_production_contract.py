@@ -82,6 +82,8 @@ git() {
       elif [[ "$FAULT" == snapshot_change ]]; then echo app/attempt_content.py;
       elif [[ "$FAULT" == identity_change ]]; then echo app/identity_schema.py;
       elif [[ "$FAULT" == auth_change ]]; then echo app/auth_schema.py;
+      elif [[ "$FAULT" == schema_change ]]; then echo app/privacy_schema.py;
+      elif [[ "$FAULT" == lockfile_change ]]; then echo requirements.lock;
       elif [[ "$FAULT" == quality_review_change ]]; then echo content/learning-quality-reviews.json;
       elif [[ "$FAULT" == publication_certificate_change ]]; then echo content/publication-certificates.json;
       elif [[ "$FAULT" == publication_key_change ]]; then echo content/publication-review-public-key.hex;
@@ -174,7 +176,7 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
     return result, log.read_text() if log.exists() else ""
 
 
-@pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change", "auth_change",
+@pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change", "auth_change", "schema_change",
                                     "quality_review_change", "publication_certificate_change", "publication_key_change",
                                     "evidence_policy_change", "case_policy_change"])
 def test_deployment_builds_before_backup_migration_and_checks_running_revision(tmp_path, change):
@@ -252,6 +254,15 @@ def test_documentation_change_only_syncs_source(tmp_path):
     assert result.returncode == 0, result.stderr
     assert "SOURCE_SYNC_OK" in result.stdout
     assert "build psych_quiz_bot" not in log
+
+
+def test_dependency_lock_change_rebuilds_and_restarts_backend(tmp_path):
+    result, log = run_deploy(tmp_path, "lockfile_change")
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert "build psych_quiz_bot psych_quiz_miniapp_api" in log
+    assert "up -d --no-build" in log
+    assert "scripts/init_db.py" not in log
+    assert f"DEPLOY_OK revision={SHA}" in result.stdout
 
 
 def test_frontend_only_change_publishes_after_health_without_backend_restart(tmp_path):
