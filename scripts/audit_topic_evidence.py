@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.content_publication import DRIVE_REF, fingerprint, load_policy
+from app.curriculum import load_private_bindings, validate_catalog
 from app.source_inventory import (combine_registries, link_lessons, processing_status,
                                   unresolved_related_conflicts)
 from scripts.sign_private_publication import private_path
@@ -60,7 +61,8 @@ def private_topic_coverage(curriculum: dict, private_topics: dict, private_regis
 def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str],
              source_states: dict[str, str] | None = None,
              source_registry: dict | None = None,
-             certified_questions: dict[str, dict] | None = None) -> dict:
+             certified_questions: dict[str, dict] | None = None,
+             binding_certificates: dict[str, dict] | None = None) -> dict:
     topics = curriculum["topics"]
     items = quality["items"]
     result = {topic_id: {"title": topic["title"], "supported": 0, "signed_private": 0,
@@ -73,7 +75,7 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
             result[topic_id]["source_review_state"] = source_states.get(source_id, "missing_from_inventory")
     unmapped = 0
     mapped_ids = set()
-    for edition in curriculum["editions"].values():
+    for edition_sha, edition in curriculum["editions"].items():
         if edition["external_id"] not in approved_questions:
             continue
         if edition.get("item_sha256") == approved_questions[edition["external_id"]]:
@@ -81,6 +83,12 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
         topic_id = edition["topic_id"]
         if topic_id not in result:
             unmapped += 1
+            continue
+        if (edition_sha in (binding_certificates or {})
+                and edition.get("item_sha256") ==
+                    (binding_certificates or {})[edition_sha].get("item_sha256")
+                and edition.get("item_sha256") == approved_questions[edition["external_id"]]):
+            result[topic_id]["signed_private"] += 1
             continue
         if (question_id := edition["external_id"]) in (certified_questions or {}):
             source = topics[topic_id].get("source", {})
@@ -223,7 +231,8 @@ def main() -> int:
     if any((args.private_registry, args.private_topics, args.links)) and not all(
             (args.inventory, args.processed, args.private_registry, args.private_topics, args.links)):
         parser.error("private topic coverage requires inventory, processed, registry, topics and links")
-    curriculum = json.loads(args.curriculum.read_text(encoding="utf-8"))
+    curriculum = validate_catalog(json.loads(args.curriculum.read_text(encoding="utf-8")))
+    bindings = load_private_bindings(curriculum)
     quality = json.loads(args.quality.read_text(encoding="utf-8"))
     source_states = None
     if args.inventory is not None:
@@ -250,7 +259,7 @@ def main() -> int:
                 for source_id, item in inventory["files"].items()
                 if source_states.get(source_id) == "processed"})
     result = coverage(curriculum, quality, approved_questions(ROOT), source_states,
-                      registry, certified)
+                      registry, certified, bindings)
     if private is not None:
         result["private_topic_coverage"] = private
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))

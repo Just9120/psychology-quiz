@@ -8,7 +8,10 @@ import json
 from pathlib import Path
 import re
 
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+
 from app.database import is_postgres
+from app.publication_certificate import certificate_error
 
 ROOT = Path(__file__).resolve().parents[1]
 UNMAPPED = "unmapped"
@@ -39,9 +42,40 @@ def validate_catalog(data):
     return data
 
 
+def validate_private_bindings(catalog, document, public_key):
+    """Keep signed source-free lesson mappings valid across later item revisions."""
+    if (not isinstance(document, dict) or document.get("schema_version") != 1
+            or not isinstance(document.get("items"), dict)):
+        raise ValueError("Invalid private curriculum bindings")
+    for digest, certificate in document["items"].items():
+        edition = catalog["editions"].get(digest)
+        if (edition is None or not isinstance(certificate, dict)
+                or certificate.get("schema_version") != 2
+                or certificate.get("topic_id") != edition["topic_id"]
+                or edition["locator"] != "private certificate:questions:" + edition["external_id"]
+                or certificate_error("questions", {"id": edition["external_id"]}, certificate,
+                                     public_key, item_sha256=edition["item_sha256"]) is not None):
+            raise ValueError("Invalid private curriculum binding")
+    return document["items"]
+
+
+def load_private_bindings(catalog):
+    binding_path = ROOT / "content/curriculum-bindings.json"
+    if not binding_path.exists():
+        return {}
+    key_hex = (ROOT / "content/publication-review-public-key.hex").read_text(encoding="ascii").strip()
+    if re.fullmatch(r"[0-9a-f]{64}", key_hex) is None:
+        raise ValueError("Invalid curriculum binding public key")
+    key = Ed25519PublicKey.from_public_bytes(bytes.fromhex(key_hex))
+    return validate_private_bindings(
+        catalog, json.loads(binding_path.read_text(encoding="utf-8")), key)
+
+
 @lru_cache(maxsize=1)
 def load_catalog():
-    return validate_catalog(json.loads((ROOT / "content/curriculum.json").read_text(encoding="utf-8")))
+    catalog = validate_catalog(json.loads((ROOT / "content/curriculum.json").read_text(encoding="utf-8")))
+    load_private_bindings(catalog)
+    return catalog
 
 
 def scopes():

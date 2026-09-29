@@ -7,6 +7,7 @@ import pytest
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from app.content_publication import PublicationPolicy, fingerprint
+from app.curriculum import validate_private_bindings
 from scripts import sign_private_publication as signer
 from scripts.sign_private_publication import SigningError, sign_review, verify_current_sources
 from scripts import validate_questions
@@ -71,6 +72,36 @@ def test_signed_private_review_allows_exact_public_item_without_drive_ref():
                                  {"questions:synthetic_question": certificate},
                                  Ed25519PrivateKey.generate().public_key()).can_publish("questions", public)
     assert not PublicationPolicy({}, {}, {}, {}).can_publish("questions", public)
+
+
+def test_signed_alternate_lesson_binding_rejects_topic_or_edition_change():
+    public, dossier = fixture_review()
+    topic_id = "t_" + "a" * 12
+    dossier["curriculum_topic_id"] = topic_id
+    dossier["curriculum_link"] = {"source_id": "fixture", "topic_id": topic_id,
+                                  "lesson_id": topic_id, "format": "presentation"}
+    key = Ed25519PrivateKey.generate()
+    certificate = sign_review("questions", public, dossier, key)
+    assert certificate["schema_version"] == 2
+    policy = PublicationPolicy({}, {}, {}, {},
+                               {"questions:synthetic_question": certificate}, key.public_key())
+    assert policy.can_publish("questions", public)
+    edition = {"external_id": "synthetic_question", "topic_id": topic_id,
+               "item_sha256": fingerprint(public),
+               "locator": "private certificate:questions:synthetic_question"}
+    catalog = {"editions": {"c" * 64: edition}}
+    document = {"schema_version": 1, "items": {"c" * 64: certificate}}
+    assert validate_private_bindings(catalog, document, key.public_key()) == document["items"]
+    with pytest.raises(ValueError, match="Invalid private curriculum binding"):
+        validate_private_bindings({"editions": {"c" * 64: {**edition,
+            "topic_id": "t_" + "b" * 12}}}, document, key.public_key())
+    with pytest.raises(ValueError, match="Invalid private curriculum binding"):
+        validate_private_bindings({"editions": {"c" * 64: {**edition,
+            "item_sha256": "d" * 64}}}, document, key.public_key())
+    assert not PublicationPolicy({}, {}, {}, {},
+                                 {"questions:synthetic_question": {**certificate,
+                                     "topic_id": "t_" + "b" * 12}},
+                                 key.public_key()).can_publish("questions", public)
 
 
 def test_question_validator_requires_verified_certificate_when_source_ref_is_private(tmp_path, monkeypatch):

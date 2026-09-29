@@ -115,6 +115,21 @@ def test_exact_private_certificate_covers_only_current_mapped_source():
     assert changed["topics_without_supported_question"] == ["one"]
 
 
+def test_signed_alternate_binding_covers_only_exact_current_edition():
+    curriculum = {"topics": {"one": {"title": "One"}}, "editions": {"captured": {
+        "external_id": "q1", "topic_id": "one", "item_sha256": "current",
+        "locator": "private certificate:questions:q1"}}}
+    binding = {"captured": {"item_sha256": "current", "topic_id": "one"}}
+    current = coverage(curriculum, {"items": {}}, {"q1": "current"},
+                       binding_certificates=binding)
+    assert current["topics"]["one"]["signed_private"] == 1
+    assert current["topics_without_supported_question"] == []
+    changed = coverage(curriculum, {"items": {}}, {"q1": "new"},
+                       binding_certificates=binding)
+    assert changed["topics"]["one"]["signed_private"] == 0
+    assert changed["topics_without_supported_question"] == ["one"]
+
+
 def test_private_topic_coverage_requires_current_unambiguous_signed_source():
     topic_id = "t_123456789abc"
     curriculum = {"disciplines": {"clinical": {"title": "Clinical"}},

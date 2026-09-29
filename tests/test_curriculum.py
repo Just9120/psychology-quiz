@@ -110,7 +110,8 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     reviews = json.loads((curriculum.ROOT / 'content/learning-quality-reviews.json').read_text(encoding='utf-8'))['items']
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
-    assert len(catalog['disciplines']) == 9 and len(catalog['editions']) == 326
+    assert len(catalog['disciplines']) == 9 and len(catalog['editions']) == 328
+    private_bindings = curriculum.load_private_bindings(catalog)
     assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
         k: v['title'] for k, v in registry.items()
         if k != 'cases' and any(contour in v['available_contours']
@@ -141,6 +142,13 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                 assert item['locator']
                 continue
             assert actual[item['external_id']] == sha
+            if sha in private_bindings:
+                certificate = private_bindings[sha]
+                assert certificate['topic_id'] == item['topic_id']
+                assert item['locator'] == 'private certificate:' + key
+                assert load_policy().can_publish('questions', items[key])
+                assert registry[topic['discipline_id']]['title'] == items[key]['category']
+                continue
             if item['locator'] == 'private certificate:' + key:
                 assert load_policy().can_publish('questions', items[key])
                 assert item['item_sha256'] == fingerprint(items[key])

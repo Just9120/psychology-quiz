@@ -28,7 +28,8 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from app.content_publication import KINDS, PUBLIC_DRIVE_LINK, PublicationPolicy, fingerprint
 from app.publication_certificate import certificate_payload, key_id
-from app.source_inventory import InventoryError, complete_listing, processing_status, scan, unresolved_related_conflicts
+from app.source_inventory import (InventoryError, complete_listing, link_lessons,
+                                  processing_status, scan, unresolved_related_conflicts)
 
 
 class SigningError(ValueError):
@@ -207,6 +208,14 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
             or not isinstance(dossier.get("nonce"), str)
             or re.fullmatch(r"[0-9a-f]{64}", dossier["nonce"]) is None):
         raise SigningError("invalid_review_dossier")
+    topic_id = dossier.get("curriculum_topic_id")
+    if (topic_id is not None
+            and (kind != "questions" or not isinstance(topic_id, str)
+                 or re.fullmatch(r"t_[a-f0-9]{12}", topic_id) is None
+                 or not isinstance(dossier.get("curriculum_link"), dict))):
+        raise SigningError("invalid_private_curriculum_binding")
+    if topic_id is None and "curriculum_link" in dossier:
+        raise SigningError("invalid_private_curriculum_binding")
     reference_field = "source_ref" if kind == "questions" else "source_refs"
     full_item = {**public_item, reference_field: dossier.get(reference_field)}
     sources = dossier.get("sources")
@@ -243,10 +252,15 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
     review_sha256 = fingerprint(dossier)
     signer_key_id = key_id(private_key.public_key())
     signature = private_key.sign(certificate_payload(
-        kind, public_item["id"], public_sha256, review_sha256, signer_key_id))
-    return {"schema_version": 1, "item_sha256": public_sha256,
+        kind, public_item["id"], public_sha256, review_sha256, signer_key_id,
+        topic_id=topic_id))
+    result = {"schema_version": 2 if topic_id is not None else 1,
+            "item_sha256": public_sha256,
             "review_sha256": review_sha256, "key_id": signer_key_id,
             "signature": base64.b64encode(signature).decode("ascii")}
+    if topic_id is not None:
+        result["topic_id"] = topic_id
+    return result
 
 
 def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
@@ -316,6 +330,25 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                 raise SigningError("private_source_kind_mismatch")
         elif record.get("source_kind") != source.get("kind"):
             raise SigningError("private_source_kind_mismatch")
+    if "curriculum_topic_id" in dossier or "curriculum_link" in dossier:
+        sources = dossier.get("sources")
+        topic_id = dossier.get("curriculum_topic_id")
+        link = dossier.get("curriculum_link")
+        if (dossier.get("kind") != "questions" or not isinstance(sources, list)
+                or len(sources) != 1 or not isinstance(link, dict)
+                or link.get("source_id") != sources[0].get("id")
+                or link.get("topic_id") != topic_id
+                or link.get("lesson_id") != topic_id
+                or states.get(sources[0]["id"]) != "processed"):
+            raise SigningError("private_curriculum_link_required")
+        try:
+            catalog = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
+            lessons = link_lessons(snapshot, [link], curriculum_topics=catalog["topics"])
+        except (InventoryError, OSError, ValueError, KeyError, TypeError) as error:
+            raise SigningError("private_curriculum_link_required") from error
+        if (lessons.get(topic_id, {}).get("topic_id") != topic_id
+                or len(lessons[topic_id]["sources"]) != 1):
+            raise SigningError("private_curriculum_link_required")
 
 
 def main(argv=None) -> int:

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "reviewed_at": "2026-09-21",
-  "method": "D-17: exact captured editions; topics from reviewed primary lectures/practices. Partial support and glossary-only evidence remain without a lecture assignment. This mapping does not certify all content.",
+  "method": "D-17: exact captured editions; topics from reviewed primary lectures/practices or signed private alternate-format lesson bindings. Partial support and glossary-only evidence remain without a lecture assignment. This mapping does not certify all content.",
   "disciplines": {
     "vvedenie_v_professiyu": {
       "title": "Введение в профессию"
@@ -2367,6 +2367,18 @@
       "topic_id": "t_350cf495eee7",
       "item_sha256": "b98c9a7d0c53a28b49cbaa7c5d59526d367c2bbc73098babc980a18fd3d67b21",
       "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 96000:97500, 104900:105500"
+    },
+    "6737326f7f589644b5f747a341bf35cf19ac1831770bbc2a5392525de05b3905": {
+      "external_id": "m1_intro_058",
+      "topic_id": "t_ae68a82010f9",
+      "item_sha256": "67e51097cf712a701cb005714e954c0dee28180f6026d69abfd52fcafdb330f8",
+      "locator": "private certificate:questions:m1_intro_058"
+    },
+    "3ef877b6af9b37d01fbc3623c49a0cc2750ad2ca446b8d03d9bd98d062360570": {
+      "external_id": "m1_phys_057",
+      "topic_id": "t_f2b92ac4b2ef",
+      "item_sha256": "34d71f2746217308ec31b92ad3b4906e62deede5b76a6bdc9a21248996a12072",
+      "locator": "private certificate:questions:m1_phys_057"
     }
   }
 }
