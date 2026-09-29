@@ -1,6 +1,7 @@
 export interface Account {
   ok: true
   email: string
+  display_name: string | null
   role?: 'owner' | 'student'
   csrf_token: string
   needs_identity: boolean

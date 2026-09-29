@@ -63,7 +63,6 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin }: TaskProp
             : mode === 'login' ? <><button disabled={busy} onClick={() => { setMode('recover'); setNotice(''); setPassword('') }}>Забыли пароль?</button><button disabled={busy} onClick={() => { setMode('register'); setNotice(''); setPassword('') }}>Первый вход</button></>
               : <button disabled={busy} onClick={() => { setMode('login'); setNotice('') }}>Вернуться ко входу</button>}
         </div>
-        {!settingPassword && <p className="muted">Веб-приложение доступно только владельцу. Студенты занимаются в Telegram и Mini App.</p>}
         <p className="auth-note"><Icon name="book" size={16} />Ваш прогресс хранится в аккаунте — можно продолжить на другом устройстве.</p>
       </div>
     </main>

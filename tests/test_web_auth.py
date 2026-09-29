@@ -72,6 +72,22 @@ def login(web):
     return web.client.get('/web/auth/me').json()['csrf_token']
 
 
+def test_profile_name_is_private_and_survives_auth_schema_migration(web):
+    register(web)
+    csrf = login(web)
+    assert post(web, 'profile/name', {'display_name': '  Владимир  '}).status_code == 403
+    assert post(web, 'profile/name', {'display_name': 'Владимир\nДругой'}, csrf=csrf).status_code == 400
+    response = post(web, 'profile/name', {'display_name': '  Владимир  '}, csrf=csrf)
+    assert response.status_code == 200
+    assert response.json()['display_name'] == 'Владимир'
+    assert web.client.get('/web/auth/me').json()['display_name'] == 'Владимир'
+    with closing(get_connection(str(web.db))) as conn, conn:
+        migrate_auth_schema(conn)
+        assert conn.execute('SELECT display_name FROM web_profile_names WHERE account_id=(SELECT id FROM web_accounts WHERE email=?)', (EMAIL,)).fetchone()[0] == 'Владимир'
+        assert conn.execute('SELECT first_name FROM users WHERE id=(SELECT user_id FROM web_accounts WHERE email=?)', (EMAIL,)).fetchone() is None
+    assert post(web, 'profile/name', {'display_name': ''}, csrf=csrf).json()['display_name'] is None
+
+
 def test_invited_student_requires_both_email_and_invited_telegram_actor(web):
     student_email = 'student@example.test'
     student_settings = replace(SETTINGS, student_access_enabled=True)

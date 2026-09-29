@@ -6,6 +6,8 @@ import { AuthScreen } from '../src/AuthScreen'
 import { api, ApiError } from '../src/api'
 import { App } from '../src/App'
 import { InstallButton } from '../src/install'
+import { QuizView } from '../src/QuizView'
+import { AccountView } from '../src/AccountView'
 
 it('requires topics, confirms replacement and sends actual mix/all settings', async () => {
   const user = userEvent.setup(), start = vi.fn()
@@ -65,6 +67,35 @@ it('registration requests proof before password entry', async () => {
   expect(await screen.findByRole('status')).toHaveTextContent('Если для этой почты')
 })
 
+it('does not show the owner/student access note on the sign-in screen', () => {
+  render(<AuthScreen busy={false} run={async action => action()} proof={null} consumeProof={vi.fn()} onLogin={vi.fn()} />)
+  expect(screen.queryByText(/Веб-приложение доступно только владельцу/)).not.toBeInTheDocument()
+})
+
+it('styles the saved answer by correctness while keeping the explanation readable', () => {
+  const state = { state: 'in_progress' as const, status: 'ok', session: { session_id: 1 } }
+  const props = { state, feedbackQuestion: null, selected: null, pending: null, busy: false,
+    onSelect: vi.fn(), onAnswer: vi.fn(), onNext: vi.fn(), onSetup: vi.fn(), onRefresh: vi.fn() }
+  const feedback = { selected_option_index: 0, selected_option_text: 'Первый вариант', is_correct: false,
+    correct_option_index: 1, correct_option_text: 'Второй вариант', explanation: 'Разбор ответа' }
+  const { container, rerender } = render(<QuizView {...props} feedback={feedback} />)
+  expect(container.querySelector('.question-panel-incorrect .your-answer.incorrect')).toHaveTextContent('Первый вариант')
+  expect(screen.getByText('Разбор ответа')).toBeVisible()
+  rerender(<QuizView {...props} feedback={{ ...feedback, is_correct: true }} />)
+  expect(container.querySelector('.question-panel-correct .your-answer.correct')).toHaveTextContent('Первый вариант')
+})
+
+it('saves a private display name through the profile action', async () => {
+  const account = { ok: true as const, email: 'owner@example.test', display_name: null, csrf_token: 'test',
+    needs_identity: false, telegram_linked: true, link_pending: false, link_confirmed: false, link_target: null }
+  const save = vi.spyOn(api, 'setDisplayName').mockResolvedValue({ ok: true, display_name: 'Владимир' })
+  render(<AccountView account={account} busy={false} run={async action => action()} onAccount={vi.fn()} onLearn={vi.fn()} onReset={vi.fn()} />)
+  await userEvent.type(screen.getByLabelText('Имя в приложении'), 'Владимир')
+  await userEvent.click(screen.getByRole('button', { name: 'Сохранить имя' }))
+  expect(save).toHaveBeenCalledWith('Владимир')
+  expect(await screen.findByText('Имя сохранено.')).toBeVisible()
+})
+
 it('offers browser-specific installation instructions when prompt API is absent', async () => {
   render(<InstallButton />)
   await userEvent.click(screen.getByRole('button', { name: 'Установить приложение' }))
@@ -72,7 +103,7 @@ it('offers browser-specific installation instructions when prompt API is absent'
 })
 
 it('clears private account UI if the session expires during initial quiz hydration', async () => {
-  vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', csrf_token: 'test', needs_identity: false, telegram_linked: false, link_pending: false, link_confirmed: false, link_target: null })
+  vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', display_name: null, csrf_token: 'test', needs_identity: false, telegram_linked: false, link_pending: false, link_confirmed: false, link_target: null })
   vi.spyOn(api, 'options').mockRejectedValue(new ApiError('unauthorized', 401))
   vi.spyOn(api, 'state').mockRejectedValue(new ApiError('unauthorized', 401))
   render(<App />)
@@ -93,7 +124,7 @@ it('groups exact curriculum topics by module without hiding unmapped categories'
 })
 
 it('restores the answered question instead of labeling its feedback with the next question', async () => {
-  vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', csrf_token: 'test', needs_identity: false, telegram_linked: false, link_pending: false, link_confirmed: false, link_target: null })
+  vi.spyOn(api, 'me').mockResolvedValue({ ok: true, email: 'owner@example.test', display_name: null, csrf_token: 'test', needs_identity: false, telegram_linked: false, link_pending: false, link_confirmed: false, link_target: null })
   vi.spyOn(api, 'options').mockResolvedValue({ ok: true, setup_options: { categories: [{ id: 1, name: 'Тема' }], question_count_choices: [5], difficulty_choices: ['any'] } })
   vi.spyOn(api, 'state').mockResolvedValue({ ok: true,
     runner_state: { state: 'in_progress', status: 'ok', session: { session_id: 10 },

@@ -235,10 +235,24 @@ class WebAuth:
             if target_user is not None:
                 target = {"telegram_id": target_user["telegram_user_id"], "username": target_user["username"],
                           "display_name": " ".join(str(target_user[key]) for key in ("first_name", "last_name") if target_user[key])}
-        return {"ok": True, "email": account["email"], "role": "owner" if account["email"] == self.settings.owner_email else "student",
+        profile = conn.execute("SELECT display_name FROM web_profile_names WHERE account_id=?", (account["id"],)).fetchone()
+        return {"ok": True, "email": account["email"], "display_name": profile[0] if profile else None, "role": "owner" if account["email"] == self.settings.owner_email else "student",
                 "needs_identity": account["user_id"] is None,
                 "telegram_linked": actor is not None and actor[0] is not None, "csrf_token": csrf_token(session),
                 "link_pending": bool(pending), "link_confirmed": bool(pending and pending["telegram_confirmed"]), "link_target": target}
+
+    def set_display_name(self, conn, account, value: object) -> str | None:
+        if not isinstance(value, str):
+            raise AuthError("invalid_display_name")
+        name = " ".join(value.split())
+        if len(name) > 60 or any(ord(char) < 32 or ord(char) == 127 for char in value):
+            raise AuthError("invalid_display_name")
+        if name:
+            conn.execute("""INSERT INTO web_profile_names(account_id,display_name) VALUES(?,?)
+                ON CONFLICT(account_id) DO UPDATE SET display_name=excluded.display_name""", (account["id"], name))
+        else:
+            conn.execute("DELETE FROM web_profile_names WHERE account_id=?", (account["id"],))
+        return name or None
 
     def fresh_identity(self, conn, account) -> None:
         if account["user_id"] is not None:

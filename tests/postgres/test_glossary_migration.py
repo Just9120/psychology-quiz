@@ -26,7 +26,7 @@ def test_versioned_upgrade_preserves_legacy_data_and_is_idempotent(source, pg_ta
         verify_user_state(before, after)
         assert after['tables']['glossary_sessions']['rows'] == 0
         assert after['sequences'] == before['sequences']
-        assert verify_schema(conn) == 'postgres-v4'
+        assert verify_schema(conn) == 'postgres-v5'
         upgrade_schema(conn)
         assert manifest(conn) == after
         conn.execute("INSERT INTO glossary_sessions VALUES('session',1,'topic','Title','in_progress','{}','{}','now','now')")
@@ -66,11 +66,24 @@ def test_v2_learning_upgrade_preserves_user_rows_and_is_idempotent(pg_target):
         upgrade_schema(conn)
         after = manifest(conn)
         verify_user_state(before, after)
-        assert verify_schema(conn) == 'postgres-v4'
+        assert verify_schema(conn) == 'postgres-v5'
         assert conn.execute("SELECT count(*) FROM user_learning_goals").fetchone()[0] == 0
         assert conn.execute("SELECT first_name FROM users").fetchone()[0] == 'legacy learner'
         upgrade_schema(conn)
         assert manifest(conn) == after
+
+
+def test_profile_upgrade_from_v4_preserves_account_and_sessions(pg_target):
+    with closing(get_connection(pg_target)) as conn, conn:
+        initialize_schema(conn, version='postgres-v4')
+        conn.execute("INSERT INTO web_accounts(email,password_hash,verified_at,created_at) VALUES('owner@example.test','synthetic-hash',1,1)")
+        conn.execute("INSERT INTO web_sessions VALUES('session-digest',1,1,9999999999,1)")
+        before = manifest(conn)
+        upgrade_schema(conn)
+        assert verify_schema(conn) == 'postgres-v5'
+        assert conn.execute("SELECT count(*) FROM web_profile_names").fetchone()[0] == 0
+        assert conn.execute("SELECT digest FROM web_sessions").fetchone()[0] == 'session-digest'
+        verify_user_state(before, manifest(conn))
 
 
 def test_existing_glossary_data_is_part_of_preservation_contract(bank):
