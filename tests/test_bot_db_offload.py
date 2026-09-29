@@ -809,7 +809,7 @@ class BotDbOffloadTests(unittest.TestCase):
             r'^mixsel:(toggle:\d+|done|reset)$',
             r'^qcntselmix:(5|10|15|all|choose)$',
             r'^qmodeselmix:(5|10|15|all|choose):(any|easy|medium|hard)$',
-            r'^ans:\d+:\d+:\d+$',
+            r'^ans:\d+:\d+:(?:\d+|-1)$',
             r'^next:\d+$',
         ]
         for pattern in expected_patterns:

@@ -122,6 +122,7 @@ def test_private_registry_adds_reviewed_source_without_publishing_id(tmp_path, m
     private_path = tmp_path / "data/private-registry.json"
     input_path.write_text(json.dumps(current), encoding="utf-8")
     private_path.write_text(json.dumps(private), encoding="utf-8")
+    private_path.chmod(0o600)
     monkeypatch.setattr(inventory_report, "REPO_ROOT", tmp_path)
     args = ["--current", str(input_path), "--reviewed", "--private-registry",
             str(private_path), "--require-current-reviewed"]
@@ -134,6 +135,7 @@ def test_private_registry_adds_reviewed_source_without_publishing_id(tmp_path, m
             graph["registered_sources"]) == (0, 1, 1)
     private["sources"].append(source)
     private_path.write_text(json.dumps(private), encoding="utf-8")
+    private_path.chmod(0o600)
     assert main(args) == 1
     assert "duplicate_or_invalid_private_source" in capsys.readouterr().err
     assert main(["--current", str(input_path), "--private-registry", str(private_path)]) == 1
@@ -176,6 +178,7 @@ def test_private_topics_link_unreleased_formats_without_public_ids(tmp_path, mon
     for name, value in (("current.json", current), ("registry.json", private_registry),
                         ("topics.json", private_topics), ("links.json", links)):
         paths[name].write_text(json.dumps(value), encoding="utf-8")
+        paths[name].chmod(0o600)
     monkeypatch.setattr(inventory_report, "REPO_ROOT", tmp_path)
     args = ["--current", str(paths["current.json"]), "--reviewed",
             "--private-registry", str(paths["registry.json"]),

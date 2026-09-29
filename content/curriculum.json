@@ -656,19 +656,19 @@
       "external_id": "m1_gp_001",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "3505b98265e6cce948a0d1197e3bea65c45c5c7e208358227a7beaf91da328af",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7580:8090, 10500:13700"
     },
     "3a14e0dbc690e9ac15417daddfeca89eecc0636f5a7520294a17413ce6baa819": {
       "external_id": "m1_gp_002",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "f3eee52a772bd8110d07ffcd15b03beb2e7d383c52f39c85f298bc0ee6d54f45",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3650, 4000:4620"
     },
     "c95e238f4c7506809ec150aba982ca95ef766136d02ab8061ff8c3e1b162ee60": {
       "external_id": "m1_gp_004",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "2e15db3d9eee48f3ac3cccf1fd1d6f59d9c02bf47f477d770889fca9100e27d9",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7900:8290, 4000:4620"
     },
     "ece8260ed73d4b6e721c0e95d2dd75e7e973543b3633bc9a65f43ceb55a088ac": {
       "external_id": "m1_gp_005",
@@ -734,7 +734,7 @@
       "external_id": "m1_gp_031",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "175cca2a99060d97ace57e927eda46dfc4035212d493f32f8e0ffdd7be6d39ab",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 9310:10350"
     },
     "b350b36ad3ac5323975fcb3aacd7bea61f57ce06ee7868474cd48861ca9fe98e": {
       "external_id": "m1_gp_032",
@@ -746,7 +746,7 @@
       "external_id": "m1_gp_033",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "043c76a7b3ffffc29a78296f93c1373465b2dcd22c782bd6d1dc37eb731a0c70",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
     },
     "9e5068b424deb8d5a64fd7458ec0921caf9cd353468a69530d0851436911c49f": {
       "external_id": "m1_gp_035",
@@ -776,7 +776,7 @@
       "external_id": "m1_gp_041",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "cb69f131580f2cf49e455dc9baa0e5d04651c425259d56cbe998e7fd55b89571",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 13100:13680"
     },
     "1731b33ede46972bd4dee61429579741221f0e3a5b9e8090bd7ede949933760a": {
       "external_id": "m1_gp_042",
@@ -806,7 +806,7 @@
       "external_id": "m1_gp_048",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "9fdd95579c66f2b7124cf113deef0e7cdd8bc5e8d614d67f761b3c60e946a9fc",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
     },
     "56d241fa0d0d2c7f068ed82f7b011eb8a02d607d90d0382c40743be2165502ec": {
       "external_id": "m1_gp_050",
@@ -818,7 +818,7 @@
       "external_id": "m1_gp_051",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "a2cb736ac61e139f37bf7e32ac525b5249bbee24a6b6e0d65e7f84ae668a7f7e",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2650:3530"
     },
     "a5c1303af8153f4e86d1aed79d4ea85c8ca7b09d5813c84be3a7e63a9db27c91": {
       "external_id": "m1_gp_052",
@@ -830,7 +830,7 @@
       "external_id": "m1_gp_056",
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "197c2e4356ccf9e8608370db0fd48e16d7c50526744b83fbbc5e4075630c6e69",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2165:3055, 4191:5331, 9214:11700, 13039:13789"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
     },
     "4623e70a97f264b810d09b4da40138be3889fcd03f8bf2e430a8d0285c91b493": {
       "external_id": "m1_phys_002",
@@ -1580,13 +1580,13 @@
       "external_id": "m2_exp_084",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "fdff6501fdc92f882322afd469e159e6e5170fe236d6a20f38556aab4182f694",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 20700:22150, 24900:25700"
     },
     "56d833336f283a64de921d7cb10c7beb3853d99ac387ce723cb477bfb872c032": {
       "external_id": "m2_exp_085",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "60a67f9cd0f4195b00c49817219de1b00b0114284073304992e2f74432aa0e25",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 27700:28500"
     },
     "0c31966f2e206e7bf1aed13bf5faf1550925a1fc254eb7b295a8b58a057ef230": {
       "external_id": "m2_exp_086",
@@ -1640,7 +1640,7 @@
       "external_id": "m2_exp_095",
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "28a2cff4bb7888de622832cf50792e192c94f26334e0a26577fcdc6869455b6e",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+      "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 106600:109600"
     },
     "59c1417099b71958a44c1a7af27c0dad77d740b69142da8b3b4bf822026281b7": {
       "external_id": "m2_exp_098",
@@ -1742,19 +1742,19 @@
       "external_id": "m2_qual_001",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "c98e388367b5e45f8150c75bbb8d89610dd97df6e360f58ff46b03ebc44b282d",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 15, 17"
     },
     "bff454e3a7354bed4ef1f352dd7c89b849af7060c13d2deb234c8cd5e55da783": {
       "external_id": "m2_qual_002",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "8ed843ff012be2f638b3597f74e6135d75cafd38863f61820490ba5b26e81c1c",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 11, 15, 17"
     },
     "2776ac7d06d9437312d76fb53793e0862d15a5e7932182e16b52a2bcef2cc086": {
       "external_id": "m2_qual_003",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "c20f77abdd53a7ec67ab399e72b97611b6eae28d7aed593139a40622feda84c0",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 15, 17; question wording is an authored application, not a literal slide example"
     },
     "9ecbddb596ef80036cbea94f50b9500099a94650df7c20531f614981b821e612": {
       "external_id": "m2_qual_004",
@@ -1766,7 +1766,7 @@
       "external_id": "m2_qual_006",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "49062fd1afd985e1f9ccb4368e29ddc03dc64be41c88812ad7ee76bb8053a54f",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 9, 10, 15"
     },
     "759529af666ae2667b72db7043a717cde5cb542c70d9f8f42da3caf67ece7621": {
       "external_id": "m2_qual_008",
@@ -1784,7 +1784,7 @@
       "external_id": "m2_qual_010",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "98045b6618b42eecebfafb85b0030425daf8913ba149e7d1499a995f2fa3b046",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 15"
     },
     "94582df731879034c9bb807474ba3d41a10d9f7cdb8c832ddf2a57626b613b47": {
       "external_id": "m2_qual_013",
@@ -1802,25 +1802,25 @@
       "external_id": "m2_qual_017",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "c5ff2afbd5f67a7355d20d09030b5e10cb68c500efec1e395f35b3f60b34e3e9",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 11, 15, 17"
     },
     "e0cb0533c67a77bc77adc6853695cc145ee33ffede6b16cf77683150b391fb0e": {
       "external_id": "m2_qual_018",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "01c690b51374046ffac5c71e42aee9d2971ba51d667259759ef1fba53937d0b4",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 15, 17; student-adaptation example is authored, not a literal slide example"
     },
     "3da9c0361b1e1851710785a0337341592d9327964978947630c542689d178a99": {
       "external_id": "m2_qual_024",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "308b5fb6e5093dc3751ea9f0e8d2103b68fd578e40d60beafcf45560f6ef09e7",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 15, 17"
     },
     "d86ceb9f3edeb7d0c6aec0c5b175bb86d923d9e218fbbdaa797217578225a334": {
       "external_id": "m2_qual_025",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "d59fba95de6b13255d0a12c8e303bbd6063205ca6002a9e1d152781f1a544717",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 11; describes this slide model, not a universal methodological divide"
     },
     "258bcdb60a8eaa04a4af33d15a9c9e75d9485b505bc109d91ee07a4954650410": {
       "external_id": "m2_qual_026",
@@ -1838,7 +1838,7 @@
       "external_id": "m2_qual_029",
       "topic_id": "t_3bb3423d5435",
       "item_sha256": "6714e627663fa0821ea42fb6770bc4649e7e78b5bfe27d9c3c9e01afe3041c7b",
-      "locator": "PDF pages (one-based): 9, 10, 11, 12, 15, 17, 18, 19"
+      "locator": "PDF pages (one-based): 11, 15"
     },
     "0910bcb2c3ef15bfed569fa4735e3cbe07522b49dec251745c580cac83d698e2": {
       "external_id": "m2_qual_034",

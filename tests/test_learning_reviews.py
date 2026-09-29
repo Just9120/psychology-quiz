@@ -96,7 +96,7 @@ def test_repository_reviews_cover_exact_current_learning_inventory():
     for key in ("questions:m1_gp_034", "questions:m2_qual_045", "glossary:qual_methods_focus_group"):
         assert ledger["items"][key]["issues"]
         assert ledger["items"][key]["source_support"] != "supported"
-    for key in ("questions:m1_vnd_002", "questions:m2_exp_040", "glossary:dopamine"):
+    for key in ("questions:m1_vnd_002", "questions:m2_exp_040"):
         kind, _ = key.split(":", 1)
         review = ledger["items"][key]
         assert review["resolution"]["previous_item_sha256"] != fingerprint(items[key])

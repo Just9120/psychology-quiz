@@ -26,7 +26,7 @@ def test_reviewed_question_pairs_share_overlap_without_removing_all_mode():
     groups = memberships()
     for first, second in (
         ("m1_gp_032", "m1_gp_045"),
-        ("m1_intro_043", "m3_psychological_consulting_030"),
+        ("m1_intro_008", "m1_intro_019"),
     ):
         assert groups[first] & groups[second]
         assert diverse_first([(1, first), (2, second)], 1) == [1]

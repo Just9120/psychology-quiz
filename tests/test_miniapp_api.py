@@ -380,7 +380,7 @@ class MiniAppApiTests(unittest.TestCase):
             self.db,
             self.bot_token,
             self.init_data,
-            json.dumps({"quiz_mode": "single", "category_ids": [1], "question_count": 5, "difficulty": "any", "user_id": 999999}).encode(),
+            json.dumps({"quiz_mode": "single", "category_ids": [1], "question_count": 5, "difficulty": "any", "user_id": 999999, "replace_active": True, "expected_session_id": self.session_id}).encode(),
         )
         self.assertEqual(200, code)
         payload = json.loads(body)
@@ -400,7 +400,7 @@ class MiniAppApiTests(unittest.TestCase):
             answer_payload = json.loads(answer_resp.read())
             self.assertTrue(answer_payload["ok"])
             self.assertIn(answer_payload["submission_status"], {"accepted", "duplicate", "stale_question"})
-            setup_body = json.dumps({"init_data": self.init_data, "request_id": "rq_setup", "payload": {"quiz_mode": "single", "category_ids": [1], "question_count": 5, "difficulty": "any", "user_id": 999}})
+            setup_body = json.dumps({"init_data": self.init_data, "request_id": "rq_setup", "payload": {"quiz_mode": "single", "category_ids": [1], "question_count": 5, "difficulty": "any", "user_id": 999, "replace_active": True, "expected_session_id": self.session_id}})
             conn.request("POST", "/miniapp/setup", body=setup_body, headers={"Content-Type": "text/plain;charset=UTF-8", "Origin": "https://miniapp.example.com"})
             setup_resp = conn.getresponse()
             self.assertEqual(200, setup_resp.status)
