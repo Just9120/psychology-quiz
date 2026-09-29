@@ -175,6 +175,9 @@ export function MiniApp() {
     await miniApi.confirmLearningDataDeletion(deletionToken)
     setDeletionToken(null); setDeletionAcknowledged(false); setDeletionCompleted(true)
     setFeedback(null); setProgress(null); setLearning(null); setHomeworkCatalog(null)
+    setGlossary(null); setLiteratureItems(null)
+    setHomeworkId(null); setHomeworkConfirmId(null)
+    reviewQuizSession.current = null; reviewGlossarySession.current = null
     await loadInitial()
     setPage('privacy')
   }
