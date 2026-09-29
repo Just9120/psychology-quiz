@@ -58,7 +58,7 @@ Repository-visible GitHub Actions are split by responsibility:
 
 ## Быстрый старт и проверки
 
-Рабочий каталог — корень репозитория. Runtime/CI: Python 3.12, package manager — pip; прямые зависимости фиксирует [requirements.txt](requirements.txt), transitive lockfile отсутствует. Для локальной работы используйте изолированное Python-окружение; команды ниже предполагают, что оно активировано.
+Рабочий каталог — корень репозитория. Runtime/CI: Python 3.12, package manager — pip; прямые зависимости задают [requirements.txt](requirements.txt), [requirements-dev.txt](requirements-dev.txt) и [requirements-search.txt](requirements-search.txt). Linux runtime/CI устанавливают соответствующие `*.lock` с проверкой хешей; эти файлы получены для Python 3.12 на x86_64 Linux. Для локальной работы используйте изолированное Python-окружение; команды ниже предполагают, что оно активировано. На Windows установка из прямых requirements остаётся локальным вариантом и не подтверждает точный Linux dependency graph.
 
 Карта: [app](app/) — bot/API/domain code, [pwa](pwa/) — исходники обоих React-клиентов, [miniapp-react](miniapp-react/) — проверяемая статика Telegram Mini App, [miniapp](miniapp/) — legacy frontend reference, [content](content/) — производный учебный контент, [sql](sql/) — SQLite/PostgreSQL schemas, [scripts](scripts/) — init/seed/validators, [tests](tests/) — pytest suite (включая unittest cases). Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
 
@@ -88,7 +88,7 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 
 | Назначение | Canonical команда / условие |
 | --- | --- |
-| Behavioral suite | `python -m pip install -r requirements-dev.txt`, затем `python -m pytest -q`; временные/in-memory DB внутри tests. Frontend security regression требует Node.js без npm dependencies; Docker compose contract требует Docker CLI (локально иначе skip; в CI обязателен) |
+| Behavioral suite | На Linux `python -m pip install --require-hashes -r requirements-dev.lock`; на Windows `python -m pip install -r requirements-dev.txt`, затем `python -m pytest -q`; временные/in-memory DB внутри tests. Frontend security regression требует Node.js без npm dependencies; Docker compose contract требует Docker CLI (локально иначе skip; в CI обязателен) |
 | Выбранная suite | `python -m pytest tests/test_miniapp_frontend_contract.py -q` для frontend/docs contracts; выбирайте другие существующие test modules по diff |
 | FastAPI local run | `python -m uvicorn app.miniapp_fastapi_runtime:app --host 127.0.0.1 --port 8081`; тот же тестовый DB_PATH/BOT_TOKEN; подробности в [runbook](docs/miniapp-deployment-qa.md) |
 | Python format / lint / typecheck | N/A: отдельных команд нет; whitespace проверяет `git diff --check`. Frontend typecheck — ниже |

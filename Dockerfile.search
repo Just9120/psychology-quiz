@@ -4,8 +4,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/*
-COPY requirements-search.txt /app/requirements-search.txt
-RUN pip install --no-cache-dir -r /app/requirements-search.txt
+COPY requirements-search.lock /app/requirements-search.lock
+RUN pip install --no-cache-dir --require-hashes -r /app/requirements-search.lock
 COPY app/private_search.py /app/app/private_search.py
 COPY app/private_rag.py /app/app/private_rag.py
 COPY app/postgres_config.py /app/app/postgres_config.py

@@ -9,8 +9,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+COPY requirements.lock /app/requirements.lock
+RUN pip install --no-cache-dir --require-hashes -r /app/requirements.lock
 
 COPY app /app/app
 COPY scripts /app/scripts

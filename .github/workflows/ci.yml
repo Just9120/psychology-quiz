@@ -47,7 +47,7 @@ jobs:
         run: |
           npm install --global npm@12.0.2
           npm ci --ignore-scripts
-          pip install -r ../requirements.txt
+          pip install --require-hashes -r ../requirements.lock
       - name: Components, types and production build
         env:
           PWA_BUILD_SHA: ${{ github.sha }}
@@ -111,7 +111,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install -r requirements-dev.txt
+        run: pip install --require-hashes -r requirements-dev.lock
 
       - name: Behavioral regression suite
         env:
@@ -133,7 +133,7 @@ jobs:
           base="${PR_BASE:-${PUSH_BASE:-HEAD^}}"
           if [[ "$base" == 0000000000000000000000000000000000000000 ]]; then base=HEAD^; fi
           changes=$(git diff --name-only "$base" HEAD)
-          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|requirements-search\.txt|requirements-dev\.txt|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
+          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|requirements-search\.(txt|lock)|requirements-dev\.(txt|lock)|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
             echo "Private search unchanged; isolated pgvector check not applicable"
             exit 0
           fi
