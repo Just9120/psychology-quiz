@@ -723,10 +723,10 @@
       "modified_time": "2026-05-16T13:55:50.170Z",
       "snapshot_sha256": "30addfabe7c84fc06293a61eed0d7570217eea53d8ffb852111a9e2794f02574",
       "snapshot_kind": "file_bytes",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-29",
       "reviewer": "coding-agent",
-      "review_method": "connected Drive; visual PDF pages and semantic item review",
-      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+      "review_method": "connected Drive exact PDF bytes; all 22 slides visually read with item-level locators",
+      "limitations": "Противопоставление качественной и количественной методологии в слайдах является учебной схемой, а не универсальным запретом смешанных подходов. Примеры исследовательских вопросов в производных заданиях авторские; исторические и клинические тезисы не получили отдельной SME-проверки."
     },
     {
       "id": "1JcLSq8ZJ7DeuKJ9HPaHLhGugpjuLDXTv",
