@@ -312,10 +312,10 @@
       "modified_time": "2026-03-20T13:55:22.021Z",
       "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
       "snapshot_kind": "extracted_text",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-29",
       "reviewer": "coding-agent",
-      "review_method": "connected Drive; targeted original fragments and semantic item review",
-      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+      "review_method": "connected Drive full transcript read; exact current export and item-level locators",
+      "limitations": "Широкие исторические, возрастные и методологические утверждения не утверждены как научно подтверждённые. Автоматическая транскрипция, клинические выводы и внешняя SME-проверка не подтверждены; review источника не означает одобрения всех производных ответов."
     },
     {
       "id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
@@ -347,6 +347,7 @@
     },
     {
       "id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
+      "discipline_id": "obschaya_psihologiya",
       "title": "Общая психология. Глоссарий",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Общая психология/Общая психология. Глоссарий",
       "kind": "learning_material",
@@ -375,6 +376,7 @@
     },
     {
       "id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+      "discipline_id": "fiziologiya_cheloveka",
       "title": "Физиология человека. Глоссарий",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Физиология человека/Физиология человека. Глоссарий",
       "kind": "learning_material",
@@ -501,6 +503,7 @@
     },
     {
       "id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
+      "discipline_id": "fiziologiya_vnd",
       "title": "Глоссарий основных понятий",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Физиология высшей нервной деятельности/Глоссарий основных понятий",
       "kind": "learning_material",
@@ -543,6 +546,7 @@
     },
     {
       "id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
+      "discipline_id": "psihofiziologiya",
       "title": "Глоссарий основных понятий. Часть 1",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Психофизиология/Глоссарий основных понятий. Часть 1",
       "kind": "learning_material",
@@ -557,6 +561,7 @@
     },
     {
       "id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
+      "discipline_id": "psihofiziologiya",
       "title": "Глоссарий основных понятий.  Часть 2",
       "corpus_path": "Модуль 1. Общая психология, психофизиология и физиология человека/Психофизиология/Глоссарий основных понятий.  Часть 2",
       "kind": "learning_material",
@@ -704,10 +709,10 @@
       "modified_time": "2026-05-14T11:25:02.862Z",
       "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
       "snapshot_kind": "extracted_text",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-29",
       "reviewer": "coding-agent",
-      "review_method": "connected Drive; targeted original fragments and semantic item review",
-      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+      "review_method": "connected Drive exact raw export; scoped review of twelve published method questions and their source ranges",
+      "limitations": "Вывод о возможной отмене лечения депрессии по результатам небольшого исследования удержан от новых производных материалов. Методологические вопросы не сертифицируют эффективность вмешательства. Полный разбор транскрипта и исследований, clinical/SME certification и точность автоматической транскрипции не заявлены."
     },
     {
       "id": "19N0i2gCoy7Y9LkimwPA-C2x1m6gSpHXo",
@@ -718,10 +723,10 @@
       "modified_time": "2026-05-16T13:55:50.170Z",
       "snapshot_sha256": "30addfabe7c84fc06293a61eed0d7570217eea53d8ffb852111a9e2794f02574",
       "snapshot_kind": "file_bytes",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-29",
       "reviewer": "coding-agent",
-      "review_method": "connected Drive; visual PDF pages and semantic item review",
-      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+      "review_method": "connected Drive exact PDF bytes; all 22 slides visually read with item-level locators",
+      "limitations": "Противопоставление качественной и количественной методологии в слайдах является учебной схемой, а не универсальным запретом смешанных подходов. Примеры исследовательских вопросов в производных заданиях авторские; исторические и клинические тезисы не получили отдельной SME-проверки."
     },
     {
       "id": "1JcLSq8ZJ7DeuKJ9HPaHLhGugpjuLDXTv",
@@ -781,6 +786,7 @@
     },
     {
       "id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+      "discipline_id": "psychological_consulting",
       "title": "Глоссарий основных понятий",
       "corpus_path": "Модуль 3. Психологическое консультирование/Психологические консультирование/Глоссарий основных понятий",
       "kind": "learning_material",

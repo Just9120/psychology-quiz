@@ -1,0 +1,16 @@
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+COPY requirements-search.txt /app/requirements-search.txt
+RUN pip install --no-cache-dir -r /app/requirements-search.txt
+COPY app/private_search.py /app/app/private_search.py
+COPY app/private_rag.py /app/app/private_rag.py
+COPY app/postgres_config.py /app/app/postgres_config.py
+COPY app/source_inventory.py /app/app/source_inventory.py
+COPY app/source_evidence.py /app/app/source_evidence.py
+COPY content/source-corpus.json /app/content/source-corpus.json
+ENTRYPOINT ["python", "-m", "app.private_search"]
+CMD ["status"]

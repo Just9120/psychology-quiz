@@ -26,7 +26,7 @@ from app.payload_validation import is_sqlite_integer, valid_quiz_setup
 
 from app.db import create_or_load_user, get_connection
 from app.quiz_service import (
-    QuizSetupError, prepare_quiz, start_prepared_quiz, quiz_setup_options, quiz_state, answer_quiz,
+    QuizSetupError, prepare_quiz, start_confirmed_quiz, quiz_setup_options, quiz_state, answer_quiz,
 )
 from app.literature import (
     list_literature_topic_payloads,
@@ -302,7 +302,7 @@ def build_glossary_answer_response(db_path: str, bot_token: str, init_data: str,
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_json"})
     session_id = payload.get("session_id")
     selected = payload.get("selected_option_index")
-    if not isinstance(session_id, str) or not is_sqlite_integer(selected):
+    if not isinstance(session_id, str) or not (is_sqlite_integer(selected) or type(selected) is int and selected == -1):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
     step_id = payload.get("step_id")
     if not is_sqlite_integer(step_id, minimum=1):
@@ -506,7 +506,7 @@ def _build_existing_endpoint_glossary_answer_response(db_path: str, verified: Ve
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "glossary_step_required"})
     if action == "answer":
         selected = payload.get("selected_option_index")
-        if not is_sqlite_integer(selected):
+        if not (is_sqlite_integer(selected) or type(selected) is int and selected == -1):
             return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_glossary_answer"})
         state = answer_glossary_session(verified.telegram_user_id, session_id, selected, step_id, db_path=db_path)
         error = "invalid_glossary_answer"
@@ -577,7 +577,7 @@ def build_answer_response(
         return _build_existing_endpoint_glossary_answer_response(db_path, verified, payload)
     req = (payload.get("session_id"), payload.get("question_id"), payload.get("selected_option_index"))
     if not (is_sqlite_integer(req[0], minimum=1) and is_sqlite_integer(req[1], minimum=1)
-            and is_sqlite_integer(req[2])):
+            and (is_sqlite_integer(req[2]) or type(req[2]) is int and req[2] == -1)):
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "invalid_payload"})
 
     try:
@@ -624,7 +624,11 @@ def build_setup_response(db_path: str, bot_token: str, init_data: str, body: byt
                     status = HTTPStatus.BAD_REQUEST if str(exc) == "invalid_setup" else HTTPStatus.CONFLICT
                     return _json(status, {"ok": False, "error": str(exc)})
                 user_row = create_or_load_user(conn, verified.telegram_user_id, verified.username, verified.first_name, verified.last_name)
-                state = start_prepared_quiz(conn, actor_user_id=int(user_row["id"]), prepared=prepared)
+                try:
+                    state = start_confirmed_quiz(conn, actor_user_id=int(user_row["id"]), prepared=prepared, payload=payload)
+                except QuizSetupError as exc:
+                    status = HTTPStatus.BAD_REQUEST if str(exc) == "invalid_setup" else HTTPStatus.CONFLICT
+                    return _json(status, {"ok": False, "error": str(exc)})
     except OPERATIONAL_ERRORS as exc:
         if _is_sqlite_locked_error(exc):
             _log_locked_db("/miniapp/setup", started_at)

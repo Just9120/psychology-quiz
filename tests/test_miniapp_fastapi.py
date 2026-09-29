@@ -182,7 +182,7 @@ class MiniAppFastApiTests(unittest.TestCase):
         request_payload = {
             "init_data": self.init_data,
             "request_id": "req-123",
-            "payload": {"quiz_mode": "all", "category_ids": [], "question_count": 5, "difficulty": "any"},
+            "payload": {"quiz_mode": "all", "category_ids": [], "question_count": 5, "difficulty": "any", "replace_active": True, "expected_session_id": self.session_id},
         }
 
         shadow_db = f"{self.db}.expected"

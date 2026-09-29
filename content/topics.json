@@ -111,7 +111,7 @@
   },
   {
     "id": "cases",
-    "title": "Кейсы",
+    "title": "Кейс",
     "module": "module3",
     "question_file": "content/questions/module3/cases.json",
     "status": "active",
@@ -144,6 +144,18 @@
       "literature"
     ],
     "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "klinicheskaya_psihologiya",
+    "title": "Клиническая психология",
+    "module": "module5",
+    "question_file": "content/questions/module5/klinicheskaya_psihologiya.json",
+    "status": "active",
+    "order": 510,
+    "available_contours": [
+      "questions"
+    ],
+    "source_notes": "Авторский учебный вопрос по проверенному материалу."
   },
   {
     "id": "social_psychology",

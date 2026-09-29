@@ -18,7 +18,7 @@
       "question:m2_exp_001"
     ],
     "difficulty": "medium",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "exp_psych_hypothesis",
@@ -58,7 +58,7 @@
       "question:m2_exp_018"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "exp_psych_interpretation",
@@ -77,7 +77,7 @@
       "question:m2_exp_018"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "exp_psych_hindsight",
@@ -98,7 +98,7 @@
       "question:m2_exp_019"
     ],
     "difficulty": "medium",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "exp_psych_confounding_variable",
@@ -119,6 +119,22 @@
     ],
     "source_refs": [
       "question:m2_exp_020"
+    ],
+    "difficulty": "medium",
+    "status": "deprecated"
+  },
+  {
+    "id": "exp_psych_extraneous_variable",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "term": "Побочная переменная",
+    "aliases": [],
+    "definition": "Побочная переменная — фактор помимо изучаемого воздействия, который может повлиять на результат эксперимента. Его учитывают или контролируют, чтобы не приписать его влияние изучаемому воздействию.",
+    "short_definition": "Фактор вне изучаемого воздействия, способный повлиять на результат эксперимента.",
+    "examples": [
+      "Температура в комнате может повлиять на выполнение задания, хотя исследователь изучает другое воздействие."
+    ],
+    "confusable_with": [
+      "exp_psych_confounding_variable"
     ],
     "difficulty": "medium",
     "status": "approved"
@@ -190,18 +206,71 @@
     "topic_id": "osnovy_eksperimentalnoy_psihologii",
     "term": "Внешняя валидность",
     "aliases": [],
-    "definition": "Внешняя валидность касается того, насколько осторожно результаты можно переносить за пределы конкретной выборки и исследовательской ситуации.",
-    "short_definition": "Осторожность переноса результатов за пределы конкретной выборки и ситуации исследования.",
+    "definition": "Внешняя валидность показывает, в какой мере результат можно перенести на другую выборку, условия и способы измерения.",
+    "short_definition": "Обоснованность переноса результатов за пределы конкретного исследования.",
     "examples": [
-      "Результат на одной небольшой группе не стоит автоматически распространять на всех людей."
+      "Если эффект найден только у студентов в лаборатории, исследователь отдельно проверяет его на другой выборке."
     ],
     "confusable_with": [
       "exp_psych_internal_validity"
     ],
-    "source_refs": [
-      "question:m2_exp_023"
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "exp_psych_independent_variable",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "term": "Независимая переменная",
+    "aliases": [],
+    "short_definition": "Фактор, который исследователь изменяет в эксперименте.",
+    "definition": "Независимая переменная — условие, которым исследователь целенаправленно управляет, чтобы проверить его влияние на результат.",
+    "examples": [
+      "Исследователь меняет способ предъявления инструкции: это независимая переменная."
     ],
-    "difficulty": "hard",
+    "confusable_with": [],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "exp_psych_dependent_variable",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "term": "Зависимая переменная",
+    "aliases": [],
+    "short_definition": "Измеряемый результат экспериментального воздействия.",
+    "definition": "Зависимая переменная — результат, который в эксперименте наблюдают или измеряют при изменении независимой переменной.",
+    "examples": [
+      "После предъявления инструкции измеряют число верных ответов: это зависимая переменная."
+    ],
+    "confusable_with": [],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "exp_psych_random_assignment",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "term": "Случайное распределение по группам",
+    "aliases": [],
+    "short_definition": "Распределение участников в экспериментальные условия случайным способом.",
+    "definition": "Рандомизация распределяет участников по экспериментальной и контрольной группам случайным способом, снижая риск систематических различий между группами.",
+    "examples": [
+      "Участников случайным способом распределяют между группой воздействия и контрольной группой."
+    ],
+    "confusable_with": [],
+    "difficulty": "medium",
+    "status": "approved"
+  },
+  {
+    "id": "exp_psych_pretest",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "term": "Предварительное измерение",
+    "aliases": [],
+    "short_definition": "Измерение результата до экспериментального воздействия.",
+    "definition": "Предварительное измерение фиксирует зависимую переменную до воздействия; затем её можно сравнить с итоговым измерением.",
+    "examples": [
+      "До изменения условий исследователь измеряет исходный результат группы, а после — измеряет его снова."
+    ],
+    "confusable_with": [],
+    "difficulty": "medium",
     "status": "approved"
   }
 ]

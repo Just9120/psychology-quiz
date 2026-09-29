@@ -2,11 +2,12 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
 import { AnswerReview, ErrorsView, ProgressView } from '../src/ProgressView'
+import { MiniProgress } from '../src/miniapp/MiniProgress'
 import { App } from '../src/App'
 import { api, ApiError } from '../src/api'
 import type { ErrorsPage, ProgressOverview, SavedAnswer } from '../src/types'
 
-const overview: ProgressOverview = { ok: true, summary: { answered: 1, correct: 0, accuracy: 0, attempts: 1, finished: 0 }, topics: [{ topic: 'Память', answered: 1, correct: 0, accuracy: 0, days: [{ day: '2026-09-20', answered: 1, correct: 0, accuracy: 0 }] }], days: [{ day: '2026-09-20', answered: 1, correct: 0, accuracy: 0 }] }
+const overview: ProgressOverview = { ok: true, summary: { answered: 1, correct: 0, accuracy: 0, attempts: 1, finished: 0, knowledge_gaps: 0 }, topics: [{ topic: 'Память', answered: 1, correct: 0, accuracy: 0, days: [{ day: '2026-09-20', answered: 1, correct: 0, accuracy: 0 }] }], days: [{ day: '2026-09-20', answered: 1, correct: 0, accuracy: 0 }] }
 const answer: SavedAnswer = { answer_id: 1, question_id: 1, session_id: 1, answered_at: '2026-09-20 06:00:00', is_correct: false, question_text: 'Исходный вопрос?', topic: 'Память', selected_option_text: 'Ошибка', correct_option_text: 'Верный вариант', explanation: 'Исходное объяснение', snapshot_provenance: 'captured', content_sha256: 'original' }
 const errors: ErrorsPage = { ok: true, items: [{ ...answer, edition_state: 'changed', trainable: true }], next_before: null, total: 1, trainable_count: 1, latest_session_id: 1, has_active_attempt: true }
 
@@ -15,6 +16,43 @@ it('explains small-sample evidence and does not present accuracy as mastery', ()
   expect(screen.getByText(/Процент отражает результат практики/)).toBeVisible()
   expect(screen.getByText(/хотя бы в два разных дня/)).toBeVisible()
   expect(screen.getByText('0 из 1 ответов')).toBeVisible()
+})
+
+it('shows durable knowledge gaps separately from practice accuracy in both clients', () => {
+  const data: ProgressOverview = { ...overview,
+    summary: { ...overview.summary, answered: 2, correct: 1, accuracy: 50, knowledge_gaps: 1 },
+    glossary: { answered: 1, correct: 0, accuracy: 0, knowledge_gaps: 0 },
+  }
+  const pwa = render(<ProgressView data={data} history={{ ok: true, items: [], next_before: null }}
+    detail={null} busy={false} onRefresh={vi.fn()} onMore={vi.fn()} onOpen={vi.fn()}
+    onBack={vi.fn()} onMoreAnswers={vi.fn()} />)
+  expect(screen.getByText('1 из 2 ответов')).toBeVisible()
+  expect(screen.getByText('«Не знаю» в квизах и глоссарии: 1')).toBeVisible()
+  pwa.unmount()
+  render(<MiniProgress data={data} busy={false} onRefresh={vi.fn()} />)
+  expect(screen.getByText(/Ответов: 2 · Верных: 1/)).toBeVisible()
+  expect(screen.getByText('«Не знаю» в квизах и глоссарии: 1')).toBeVisible()
+})
+
+it('shows the distinct-question threshold and only then personal recommendations in both clients', () => {
+  const props = { history: { ok: true as const, items: [], next_before: null }, detail: null,
+    busy: false, onRefresh: vi.fn(), onMore: vi.fn(), onOpen: vi.fn(), onBack: vi.fn(), onMoreAnswers: vi.fn() }
+  const pending: ProgressOverview = { ...overview,
+    recommendations: { eligible: false, distinct_questions: 49, items: [] } }
+  const ready: ProgressOverview = { ...overview,
+    recommendations: { eligible: true, distinct_questions: 50,
+      items: [{ topic: 'Память', answered: 3, accuracy: 33.3, reason: 'Есть неверные ответы' }] } }
+  const pwa = render(<ProgressView data={pending} {...props} />)
+  expect(screen.getByText(/Сейчас: 49/)).toBeVisible()
+  expect(screen.queryByText(/Есть неверные ответы/)).not.toBeInTheDocument()
+  pwa.rerender(<ProgressView data={ready} {...props} />)
+  expect(screen.getByText(/Есть неверные ответы/)).toBeVisible()
+  pwa.unmount()
+
+  const mini = render(<MiniProgress data={pending} busy={false} onRefresh={vi.fn()} />)
+  expect(screen.getByText(/Сейчас: 49/)).toBeVisible()
+  mini.rerender(<MiniProgress data={ready} busy={false} onRefresh={vi.fn()} />)
+  expect(screen.getByText(/Есть неверные ответы/)).toBeVisible()
 })
 
 it('keeps unmapped evidence visible and filters history with the chosen curriculum scope', async () => {

@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import re
 import sys
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -41,7 +42,53 @@ def record_conflict(current: dict, prior: dict, source_id: str, *, reason: str,
               "reason": reason.strip(), "locator": locator.strip(),
               "related_source_ids": sorted(related_source_ids),
               "reviewed_at": reviewed_at}
-    if prior.get(source_id) == record:
+    previous = prior.get(source_id)
+    if isinstance(previous, dict) and previous.get("review_state") == "conflict" and previous.get("revision") == revision:
+        issues = previous.get("issues")
+        if issues is None:
+            issues = [{key: previous[key] for key in
+                       ("reason", "locator", "related_source_ids", "reviewed_at")}]
+        if (not isinstance(issues, list) or not issues
+                or any(not isinstance(issue, dict)
+                       or any(not isinstance(issue.get(key), str) or not issue[key]
+                              for key in ("reason", "locator", "reviewed_at"))
+                       or not isinstance(issue.get("related_source_ids"), list)
+                       or any(not isinstance(related, str) or related == source_id
+                              or related not in snapshot["files"]
+                              for related in issue["related_source_ids"])
+                       for issue in issues)):
+            raise InventoryError("invalid_conflict_evidence")
+        new_issue = {key: record[key] for key in
+                     ("reason", "locator", "related_source_ids", "reviewed_at")}
+        if any(issue.get("reason") == new_issue["reason"]
+               and issue.get("locator") == new_issue["locator"] for issue in issues):
+            raise InventoryError("conflict_review_already_recorded")
+        issues = [*issues, new_issue]
+        record = {**previous, **record, "issues": issues,
+                  "reason": "\n\n".join(issue["reason"] for issue in issues),
+                  "locator": "; ".join(issue["locator"] for issue in issues),
+                  "related_source_ids": sorted({related for issue in issues
+                                                for related in issue["related_source_ids"]})}
+    elif (isinstance(previous, dict) and previous.get("review_state") == "processed"
+          and previous.get("revision") == revision):
+        # A later editorial hold revokes approval, but must not erase the
+        # evidence for the review that preceded it.
+        record["previous_processed_review"] = previous
+    elif (isinstance(previous, dict) and previous.get("review_state") == "pending_review"
+          and previous.get("revision") == revision):
+        # Keep the exact capture evidence while withholding editorial approval.
+        # A later resolution still requires a new review of those bytes.
+        if "conflict_hold" in previous:
+            raise InventoryError("unresolved_prior_conflict_hold")
+        if (previous.get("snapshot_kind") not in {"file_bytes", "extracted_text"}
+                or not isinstance(previous.get("snapshot_sha256"), str)
+                or re.fullmatch(r"[0-9a-f]{64}", previous["snapshot_sha256"]) is None):
+            raise InventoryError("invalid_pending_capture")
+        record["snapshot_kind"] = previous["snapshot_kind"]
+        record["snapshot_sha256"] = previous["snapshot_sha256"]
+        if "extraction_profile" in previous:
+            record["extraction_profile"] = previous["extraction_profile"]
+    elif previous == record:
         raise InventoryError("conflict_review_already_recorded")
     updated = dict(prior)
     updated[source_id] = record

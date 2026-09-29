@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "source": "content/learning-quality-reviews.json discipline_reviews.duplicates plus manual cross-question review, 2026-09-28",
+  "groups": [
+    {
+      "discipline_id": "vvedenie_v_professiyu",
+      "question_ids": [
+        "m1_intro_008",
+        "m1_intro_019",
+        "m1_intro_022",
+        "m1_intro_026"
+      ]
+    },
+    {
+      "discipline_id": "vvedenie_v_professiyu",
+      "question_ids": [
+        "m1_intro_013",
+        "m1_intro_027",
+        "m1_intro_037"
+      ]
+    },
+    {
+      "discipline_id": "vvedenie_v_professiyu",
+      "question_ids": [
+        "m1_intro_021",
+        "m1_intro_044"
+      ]
+    },
+    {
+      "discipline_id": "vvedenie_v_professiyu",
+      "question_ids": [
+        "m1_intro_036",
+        "m1_intro_041"
+      ]
+    },
+    {
+      "discipline_id": "obschaya_psihologiya",
+      "question_ids": [
+        "m1_gp_007",
+        "m1_gp_021"
+      ]
+    },
+    {
+      "discipline_id": "obschaya_psihologiya",
+      "question_ids": [
+        "m1_gp_009",
+        "m1_gp_024",
+        "m1_gp_036"
+      ]
+    },
+    {
+      "discipline_id": "obschaya_psihologiya",
+      "question_ids": [
+        "m1_gp_032",
+        "m1_gp_045",
+        "m1_gp_050"
+      ]
+    },
+    {
+      "discipline_id": "fiziologiya_cheloveka",
+      "question_ids": [
+        "m1_phys_022",
+        "m1_phys_038",
+        "m1_phys_053"
+      ]
+    },
+    {
+      "discipline_id": "fiziologiya_cheloveka",
+      "question_ids": [
+        "m1_phys_025",
+        "m1_phys_044"
+      ]
+    },
+    {
+      "discipline_id": "fiziologiya_cheloveka",
+      "question_ids": [
+        "m1_phys_027",
+        "m1_phys_039",
+        "m1_phys_054"
+      ]
+    },
+    {
+      "discipline_id": "fiziologiya_vnd",
+      "question_ids": [
+        "m1_vnd_004",
+        "m1_vnd_048"
+      ]
+    },
+    {
+      "discipline_id": "fiziologiya_vnd",
+      "question_ids": [
+        "m1_vnd_031",
+        "m1_vnd_050"
+      ]
+    },
+    {
+      "discipline_id": "fiziologiya_vnd",
+      "question_ids": [
+        "m1_vnd_009",
+        "m1_vnd_034",
+        "m1_vnd_049"
+      ]
+    },
+    {
+      "discipline_id": "fiziologiya_vnd",
+      "question_ids": [
+        "m1_vnd_033",
+        "m1_vnd_056"
+      ]
+    },
+    {
+      "discipline_id": "psihofiziologiya",
+      "question_ids": [
+        "m1_psyf_011",
+        "m1_psyf_031"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_006",
+        "m2_exp_021",
+        "m2_exp_113"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_020",
+        "m2_exp_110"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_048",
+        "m2_exp_094",
+        "m2_exp_100"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_026",
+        "m2_exp_034",
+        "m2_exp_087"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_029",
+        "m2_exp_030"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_043",
+        "m2_exp_090"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_045",
+        "m2_exp_073"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_046",
+        "m2_exp_084",
+        "m2_exp_116"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_047",
+        "m2_exp_089",
+        "m2_exp_106",
+        "m2_exp_114"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_067",
+        "m2_exp_104"
+      ]
+    },
+    {
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "question_ids": [
+        "m2_qual_001",
+        "m2_qual_002",
+        "m2_qual_017"
+      ]
+    },
+    {
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "question_ids": [
+        "m2_qual_003",
+        "m2_qual_018"
+      ]
+    },
+    {
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "question_ids": [
+        "m2_qual_004",
+        "m2_qual_034",
+        "m2_qual_043"
+      ]
+    },
+    {
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "question_ids": [
+        "m2_qual_014",
+        "m2_qual_028",
+        "m2_qual_053"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_004",
+        "m3_psychological_consulting_093"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_005",
+        "m3_psychological_consulting_011"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_024",
+        "m3_psychological_consulting_040",
+        "m3_psychological_consulting_094"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_064",
+        "m3_psychological_consulting_096"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_008",
+        "m3_psychological_consulting_068",
+        "m3_psychological_consulting_086",
+        "m3_psychological_consulting_089"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_031",
+        "m3_psychological_consulting_032"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_017",
+        "m3_psychological_consulting_053"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_025",
+        "m3_psychological_consulting_026",
+        "m3_psychological_consulting_035"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_036",
+        "m3_psychological_consulting_085"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_044",
+        "m3_psychological_consulting_052"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_054",
+        "m3_psychological_consulting_078"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_066",
+        "m3_psychological_consulting_095"
+      ]
+    },
+    {
+      "discipline_id": "psychological_consulting",
+      "question_ids": [
+        "m3_psychological_consulting_074",
+        "m3_psychological_consulting_107"
+      ]
+    },
+    {
+      "discipline_ids": [
+        "fiziologiya_cheloveka",
+        "psihofiziologiya"
+      ],
+      "question_ids": [
+        "m1_phys_002",
+        "m1_psyf_002"
+      ]
+    },
+    {
+      "discipline_ids": [
+        "fiziologiya_cheloveka",
+        "psihofiziologiya"
+      ],
+      "question_ids": [
+        "m1_phys_006",
+        "m1_psyf_004"
+      ]
+    }
+  ]
+}

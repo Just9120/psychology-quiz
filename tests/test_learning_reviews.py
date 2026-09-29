@@ -75,11 +75,18 @@ def test_semantic_concern_cannot_be_recorded_without_an_explicit_issue():
     assert validate(ledger, items, sources)
 
 
+def test_unsigned_missing_review_is_not_exempted_by_a_certificate_label():
+    ledger, items, sources = fixture()
+    ledger["items"].clear()
+    policy = PublicationPolicy({}, sources, {}, {}, {"questions:q": {}})
+    assert validate(ledger, items, sources, policy) == ["questions:q: missing review"]
+
+
 def test_repository_reviews_cover_exact_current_learning_inventory():
     ledger = json.loads((ROOT / "content/learning-quality-reviews.json").read_text(encoding="utf-8"))
     items = inventory()
     policy = load_policy()
-    assert validate(ledger, items, policy.sources) == []
+    assert validate(ledger, items, policy.sources, policy) == []
     assert {review["discipline_id"] for review in ledger["items"].values()} == {
         "vvedenie_v_professiyu", "obschaya_psihologiya", "fiziologiya_cheloveka", "fiziologiya_vnd",
         "psihofiziologiya", "osnovy_eksperimentalnoy_psihologii", "kachestvennye_metody_issledovaniya",
@@ -89,7 +96,7 @@ def test_repository_reviews_cover_exact_current_learning_inventory():
     for key in ("questions:m1_gp_034", "questions:m2_qual_045", "glossary:qual_methods_focus_group"):
         assert ledger["items"][key]["issues"]
         assert ledger["items"][key]["source_support"] != "supported"
-    for key in ("questions:m1_vnd_002", "questions:m2_exp_040", "glossary:dopamine"):
+    for key in ("questions:m1_vnd_002", "questions:m2_exp_040"):
         kind, _ = key.split(":", 1)
         review = ledger["items"][key]
         assert review["resolution"]["previous_item_sha256"] != fingerprint(items[key])

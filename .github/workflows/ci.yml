@@ -121,6 +121,57 @@ jobs:
           python scripts/postgres_test_support.py
           python -m pytest -q
 
+      - name: Disposable pgvector index and user-state contract
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE: ${{ github.event.before }}
+          POSTGRES_SEARCH_TEST_ADMIN_DSN: postgresql://postgres:synthetic-admin-only@127.0.0.1:5433/psychology_search_test
+          POSTGRES_SEARCH_TEST_DSN: postgresql://psychology_app:synthetic-search-only@127.0.0.1:5433/psychology_search_test
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="${PR_BASE:-${PUSH_BASE:-HEAD^}}"
+          if [[ "$base" == 0000000000000000000000000000000000000000 ]]; then base=HEAD^; fi
+          changes=$(git diff --name-only "$base" HEAD)
+          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|requirements-search\.txt|requirements-dev\.txt|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
+            echo "Private search unchanged; isolated pgvector check not applicable"
+            exit 0
+          fi
+          docker build --file Dockerfile.search --tag psychology-private-search-ci .
+          docker run --rm --network none --read-only psychology-private-search-ci --help >/dev/null
+          image='pgvector/pgvector@sha256:1d50c689b0a6511b9ea0a15615281c81a59fd04a08eb35057ec8646fb3a2118a'
+          container=$(docker run -d --rm --pull=always \
+            -e POSTGRES_DB=psychology_search_test -e POSTGRES_PASSWORD=synthetic-admin-only \
+            -p 127.0.0.1:5433:5432 \
+            --health-cmd 'pg_isready -U postgres -d psychology_search_test' \
+            --health-interval 2s --health-retries 20 "$image")
+          trap 'docker rm -f "$container" >/dev/null 2>&1 || true' EXIT
+          for attempt in {1..40}; do
+            if [[ "$(docker inspect --format '{{.State.Health.Status}}' "$container")" == healthy ]]; then break; fi
+            sleep 2
+          done
+          [[ "$(docker inspect --format '{{.State.Health.Status}}' "$container")" == healthy ]]
+          python -m pytest -q -p no:cacheprovider tests/integration_private_search_postgres.py
+          # pgvector is a rebuildable private derivative. The next production
+          # backup must still restore every public user row under the app role.
+          dump="$RUNNER_TEMP/psychology-search-user-state.dump"
+          docker exec -e PGPASSWORD=synthetic-admin-only "$container" \
+            pg_dump -U postgres -d psychology_search_test --format=custom \
+            --no-owner --no-acl --exclude-schema=private_search \
+            --exclude-extension=vector > "$dump"
+          docker exec -e PGPASSWORD=synthetic-admin-only "$container" \
+            createdb -U postgres -O psychology_app psychology_search_restore
+          docker exec -i -e PGPASSWORD=synthetic-admin-only "$container" \
+            pg_restore -U postgres -d psychology_search_restore --role=psychology_app \
+            --exit-on-error --single-transaction --no-owner --no-acl < "$dump"
+          [[ "$(docker exec -e PGPASSWORD=synthetic-search-only "$container" \
+            psql -U psychology_app -d psychology_search_restore -Atqc \
+            'SELECT actor,progress FROM public.learning_state_probe')" == '7|42' ]]
+          [[ "$(docker exec -e PGPASSWORD=synthetic-admin-only "$container" \
+            psql -U postgres -d psychology_search_restore -Atqc \
+            "SELECT count(*) FROM pg_namespace WHERE nspname='private_search'")" == 0 ]]
+          bash scripts/ci_pgvector_transition.sh
+
       - name: Validate deployment shell syntax
         run: bash -n deploy.sh
 

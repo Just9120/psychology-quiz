@@ -18,6 +18,8 @@ const errors: Record<string, string> = {
   no_questions: 'Для выбранных условий пока нет вопросов.',
   no_reviews: 'На сегодня нет материалов для повторения.',
   active_attempt: 'Незавершённую попытку можно заменить только после подтверждения.',
+  active_attempt_confirmation_required: 'Есть незавершённый квиз. Продолжите его или подтвердите замену.',
+  attempt_changed: 'Попытка изменилась. Восстановите актуальное состояние.',
   active_glossary: 'Незавершённый тест по терминам можно заменить только после подтверждения.',
   practice_changed: 'Состояние изменилось. Восстановите сохранённую попытку.',
   network: 'Ответ сервера не получен. Восстановите состояние перед следующим действием.',
@@ -43,6 +45,8 @@ export function MiniApp() {
   const [booting, setBooting] = useState(true)
   const [error, setError] = useState('')
   const lock = useRef(false)
+  const reviewQuizSession = useRef<number | null>(null)
+  const reviewGlossarySession = useRef<string | null>(null)
   const authorized = Boolean(window.Telegram?.WebApp?.initData)
 
   const run = useCallback(async (action: () => Promise<void>) => {
@@ -77,14 +81,19 @@ export function MiniApp() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  async function start(setup: Setup) {
-    try { applyState((await miniApi.setup(setup)).runner_state) }
-    catch (failure) { if (failure instanceof MiniAppError && !failure.status) setUncertain(true); throw failure }
+  async function start(setup: Setup, confirmed: boolean) {
+    try { applyState((await miniApi.setup({ ...setup, replace_active: confirmed,
+      expected_session_id: confirmed ? state?.session?.session_id ?? null : null })).runner_state) }
+    catch (failure) {
+      if (failure instanceof MiniAppError && !failure.status) setUncertain(true)
+      else if (failure instanceof MiniAppError && failure.status === 409) await refreshQuiz()
+      throw failure
+    }
   }
-  async function answer() {
+  async function answer(choice?: number) {
     const question = state?.current_question
-    if (!pending && (!question || selected === null)) return
-    const payload = pending ?? { session_id: question!.session_id, question_id: question!.question_id, selected_option_index: selected! }
+    if (!pending && (!question || (selected === null && choice === undefined))) return
+    const payload = pending ?? { session_id: question!.session_id, question_id: question!.question_id, selected_option_index: choice ?? selected! }
     setPending(payload)
     let result
     try { result = await miniApi.answer(payload) }
@@ -123,16 +132,22 @@ export function MiniApp() {
   }
   async function loadProgress() { setProgress(await miniApi.overview()); setPage('progress') }
   async function startReviewQuiz(replace: boolean) {
-    const saved = await miniApi.state()
-    try { applyState((await miniApi.startReviewQuiz(saved.runner_state.session?.session_id ?? null, replace)).runner_state) }
-    catch (failure) { if (failure instanceof MiniAppError && !failure.status) await refreshQuiz(); throw failure }
+    if (!replace) reviewQuizSession.current = (await miniApi.state()).runner_state.session?.session_id ?? null
+    try { applyState((await miniApi.startReviewQuiz(reviewQuizSession.current, replace)).runner_state) }
+    catch (failure) {
+      if (failure instanceof MiniAppError && (!failure.status || failure.status === 409)) await refreshQuiz()
+      throw failure
+    }
   }
   async function startReviewGlossary(topic: string, replace: boolean) {
-    const saved = await miniApi.glossaryState()
+    if (!replace) reviewGlossarySession.current = (await miniApi.glossaryState()).glossary_state.session_id ?? null
     try {
-      const result = await miniApi.startReviewGlossary(topic, saved.glossary_state.session_id ?? null, replace)
+      const result = await miniApi.startReviewGlossary(topic, reviewGlossarySession.current, replace)
       setGlossary(result.glossary_state); setGlossaryTopics((await miniApi.glossaryOptions()).topics); setPage('glossary')
-    } catch (failure) { if (failure instanceof MiniAppError && !failure.status) await loadGlossary(); throw failure }
+    } catch (failure) {
+      if (failure instanceof MiniAppError && (!failure.status || failure.status === 409)) await loadGlossary()
+      throw failure
+    }
   }
 
   if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p></main>
@@ -153,8 +168,8 @@ export function MiniApp() {
         : page === 'learning' && learning ? <LearningView {...learning} busy={busy} onRefresh={() => void run(loadLearning)} onSaveGoal={(kind: GoalKind, target: number) => void run(async () => { await miniApi.setGoal(kind, target); await loadLearning() })} onStartQuiz={replace => void run(() => startReviewQuiz(replace))} onStartGlossary={(topic, replace) => void run(() => startReviewGlossary(topic, replace))} />
         : uncertain ? <section className="page-width panel empty-state"><h1>Проверим сохранённое состояние</h1><p>Ответ сервера не получен. Перед новым квизом восстановите текущую попытку.</p><button className="button primary" disabled={busy} onClick={() => void run(refreshQuiz)}>Восстановить квиз</button></section>
         : !state || !options ? <section className="page-width panel empty-state"><h1>Не удалось загрузить обучение</h1><button className="button primary" disabled={busy} onClick={() => void run(loadInitial)}>Повторить загрузку</button></section>
-        : page === 'setup' || state.state === 'setup' ? <QuizSetup options={options} busy={busy} hasAttempt={state.state === 'in_progress'} onStart={setup => void run(() => start(setup))} onResume={() => void run(refreshQuiz)} />
-        : <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={() => void run(answer)} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => { setPage('setup'); setFeedback(null) }} onRefresh={() => void run(refreshQuiz)} />}
+        : page === 'setup' || state.state === 'setup' ? <QuizSetup options={options} busy={busy} activeSessionId={state.state === 'in_progress' ? state.session?.session_id ?? null : null} onStart={(setup, confirmed) => void run(() => start(setup, confirmed))} onResume={() => void run(refreshQuiz)} />
+        : <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => { setPage('setup'); setFeedback(null) }} onRefresh={() => void run(refreshQuiz)} />}
     </main></div>
   </div>
 }

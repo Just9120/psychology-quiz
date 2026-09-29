@@ -86,8 +86,40 @@ def _claim(key: str, item: dict) -> str:
                      item["definition"], *item.get("examples", [])))
 
 
+def discover_existing(text: str, derivatives: dict, excluded: set[str], *, limit: int = 20) -> list[dict]:
+    """Find possible existing coverage; lexical similarity is never approval."""
+    passages = _passages(text)
+    if not passages:
+        return []
+    frequency = Counter(word for _, _, words in passages for word in words)
+    ranked = []
+    for key, item in derivatives.items():
+        if key in excluded or item.get("status") != "approved":
+            continue
+        query = _tokens(_claim(key, item))
+        if len(query) < 2:
+            continue
+        best = None
+        for start, end, words in passages:
+            overlap = query & words
+            if len(overlap) < 2:
+                continue
+            score = sum(math.log1p((len(passages) + 1) / (frequency[word] + 1))
+                        for word in overlap) / math.sqrt(len(query))
+            candidate = (score, len(overlap), -start, start, end)
+            if best is None or candidate > best:
+                best = candidate
+        if best is not None:
+            ranked.append((best[0], best[1], key, item, best[3], best[4]))
+    ranked.sort(key=lambda row: (-row[0], -row[1], row[2]))
+    return [{"item_key": key, "item_sha256": fingerprint(item),
+             "score": round(score, 4), "overlap_terms": overlap,
+             "candidate_range": [start, end], "state": "candidate_not_approval"}
+            for score, overlap, key, item, start, end in ranked[:limit]]
+
+
 def build_queue(current: dict, processed: dict, manifest: dict, reviews: dict,
-                derivatives: dict) -> dict:
+                derivatives: dict, *, discover: bool = False) -> dict:
     snapshot = _snapshot(current)
     states = processing_status(snapshot, processed)
     if (not isinstance(manifest, dict) or manifest.get("schema_version") != 1
@@ -127,9 +159,13 @@ def build_queue(current: dict, processed: dict, manifest: dict, reviews: dict,
                 continue
             claims[key] = {"state": "needs_claim_review",
                            "candidate_ranges": candidate_ranges(text, _claim(key, item))}
-        result.append({"source_id": source_id, "revision": record["revision"],
-                       "snapshot_sha256": record["snapshot_sha256"],
-                       "content": entry["content"], "claims": claims})
+        source_result = {"source_id": source_id, "revision": record["revision"],
+                         "snapshot_sha256": record["snapshot_sha256"],
+                         "content": entry["content"], "claims": claims}
+        if discover:
+            source_result["discovery_candidates"] = discover_existing(
+                text, derivatives, set(claims))
+        result.append(source_result)
     return {"schema_version": 1, "purpose": "private_candidates_not_approval",
             "sources": result}
 
@@ -140,13 +176,16 @@ def main(argv=None) -> int:
     parser.add_argument("--processed", required=True, type=Path)
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--discover-existing", action="store_true",
+                        help="rank existing approved items for manual coverage review")
     args = parser.parse_args(argv)
     try:
         manifest_path = private_json_target(args.manifest, REPO_ROOT)
         target = private_json_target(args.output, REPO_ROOT)
         reviews = _read(REPO_ROOT / "content/learning-quality-reviews.json")["items"]
         queue = build_queue(_read(args.current), _read(args.processed),
-                            _read(manifest_path), reviews, _derivatives(REPO_ROOT))
+                            _read(manifest_path), reviews, _derivatives(REPO_ROOT),
+                            discover=args.discover_existing)
         descriptor = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(descriptor, "w", encoding="utf-8") as output:
             json.dump(queue, output, ensure_ascii=False, indent=2)

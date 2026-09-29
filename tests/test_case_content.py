@@ -47,7 +47,7 @@ def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
     item = json.loads(Path("content/questions/module3/cases.json").read_text(encoding="utf-8"))[0]
     registry = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
     topic = next(topic for topic in registry if topic["id"] == "cases")
-    assert topic["title"] == item["category"] == "Кейсы"
+    assert topic["title"] == item["category"] == "Кейс"
     assert topic["question_file"] == "content/questions/module3/cases.json"
     assert item["kind"] == "case"
     with closing(get_connection(str(bank))) as conn, conn:
@@ -56,7 +56,7 @@ def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
         options = quiz_setup_options(conn)
         categories = options["categories"]
         assert options["content_kind_choices"] == ["theory", "case"]
-        cases_category = next(category for category in categories if category["name"] == "Кейсы")
+        cases_category = next(category for category in categories if category["name"] == "Кейс")
         other_category = next(category for category in categories if category["name"] == "Original category")
         assert (cases_category["topic_id"], cases_category["module"]) == ("cases", "module3")
         assert (other_category["topic_id"], other_category["module"]) == (None, None)

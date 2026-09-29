@@ -39,7 +39,7 @@ def _canonical_row(topic: dict[str, Any], q: dict[str, Any], order: int) -> dict
         "category": str(q.get("category", topic["title"])).strip(),
         "difficulty": str(q.get("difficulty", "")).strip(),
         "status": str(q.get("status", "")).strip(),
-        "source_ref": str(q.get("source_ref", "")).strip(),
+        "source_ref": str(q.get("source_ref") or "").strip(),
         "question_text": str(q.get("question", "")).strip(),
         "explanation": str(q.get("explanation", "")).strip(),
         "kind": str(q.get("kind", "theory")),

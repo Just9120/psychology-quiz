@@ -5,6 +5,7 @@ import pytest
 
 from app.source_inventory import InventoryError
 from scripts import source_inventory_report as inventory_report
+from scripts import source_capture, source_finalize
 from scripts.source_inventory_report import main, report
 from tests.test_source_inventory import REVIEW_EVIDENCE, item
 
@@ -40,6 +41,54 @@ def test_private_inventory_report_reconciles_without_exposing_ids(tmp_path, caps
     assert "current_review_gate_requires_reviewed" in capsys.readouterr().err
 
 
+def test_changed_source_keeps_derivative_held_until_new_review(tmp_path):
+    current = export(["private"])
+    content = tmp_path / "source.txt"
+    content.write_text("first edition", encoding="utf-8")
+    first = source_capture.capture(current, {}, "private", content, "extracted_text")
+    reviewed = source_finalize.finalize(
+        current, first, "private", content, reviewer="editor",
+        review_note="Checked first edition", reviewed_at="2026-09-26T12:00:00Z",
+        source_kind="learning_material")
+    first_record = reviewed["private"]
+    source = {"id": "private", "kind": "learning_material", "title": "Lesson",
+              "corpus_path": "Lesson", "modified_time": first_record["revision"][0],
+              "snapshot_sha256": first_record["snapshot_sha256"], "readable": True,
+              "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-26",
+              "reviewer": "editor"}
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [source]}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    reviews = {"schema_version": 1, "items": {"questions:example": {
+        "decision": "approved", "sources": [{"source_id": "private",
+            "modified_time": source["modified_time"],
+            "snapshot_sha256": source["snapshot_sha256"]}]}}}
+
+    changed = export(["private"])
+    changed["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-27T00:00:00Z"
+    content.write_text("second edition", encoding="utf-8")
+    pending = source_capture.capture(changed, reviewed, "private", content, "extracted_text")
+    assert pending["private"]["previous_processed_review"] == first_record
+
+    def queued(records):
+        return inventory_report.private_review_queue(
+            inventory_report._snapshot(changed), registry, curriculum,
+            processed=records, reviews=reviews)["files"][0]
+
+    assert queued(pending)["derivative_ids_requiring_review"] == ["questions:example"]
+    completed = source_finalize.finalize(
+        changed, pending, "private", content, reviewer="editor",
+        review_note="Checked changed edition", reviewed_at="2026-09-27T12:00:00Z",
+        source_kind="learning_material")
+    assert queued(completed)["derivative_ids_requiring_review"] == ["questions:example"]
+    source["modified_time"] = completed["private"]["revision"][0]
+    source["snapshot_sha256"] = completed["private"]["snapshot_sha256"]
+    assert queued(completed)["derivative_ids_requiring_review"] == ["questions:example"]
+    reviews["items"]["questions:example"]["sources"][0].update({
+        "modified_time": source["modified_time"],
+        "snapshot_sha256": source["snapshot_sha256"]})
+    assert queued(completed)["derivative_ids_requiring_review"] == []
+
+
 def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path, capsys):
     path = tmp_path / "sensitive-name.json"
     data = export(["private-file-id"])
@@ -49,6 +98,137 @@ def test_private_inventory_report_rejects_truncated_export_without_leak(tmp_path
     output = capsys.readouterr()
     assert output.out == ""
     assert output.err.strip() == "SOURCE_INVENTORY_STOP: incomplete_folder_listing"
+
+
+def test_private_registry_adds_reviewed_source_without_publishing_id(tmp_path, monkeypatch, capsys):
+    (tmp_path / "content").mkdir()
+    (tmp_path / "data").mkdir()
+    (tmp_path / ".gitignore").write_text("data/\n", encoding="utf-8")
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, capture_output=True)
+    source_id = "private-drive-file-1234567890"
+    current = export([source_id])
+    live = current["folders"]["root"][0]["children"][0]
+    (tmp_path / "content/source-corpus.json").write_text(json.dumps({
+        "schema_version": 1, "corpus_root_id": "root", "sources": []}), encoding="utf-8")
+    (tmp_path / "content/curriculum.json").write_text(json.dumps({
+        "schema_version": 1, "disciplines": {}, "topics": {}}), encoding="utf-8")
+    source = {"id": source_id, "kind": "learning_material", "title": live["title"],
+              "corpus_path": "Lesson", "modified_time": live["modified_time"],
+              "snapshot_sha256": "a" * 64, "readable": True,
+              "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-28",
+              "reviewer": "editor"}
+    private = {"schema_version": 1, "corpus_root_id": "root", "sources": [source]}
+    input_path = tmp_path / "data/current.json"
+    private_path = tmp_path / "data/private-registry.json"
+    input_path.write_text(json.dumps(current), encoding="utf-8")
+    private_path.write_text(json.dumps(private), encoding="utf-8")
+    private_path.chmod(0o600)
+    monkeypatch.setattr(inventory_report, "REPO_ROOT", tmp_path)
+    args = ["--current", str(input_path), "--reviewed", "--private-registry",
+            str(private_path), "--require-current-reviewed"]
+    assert main(args) == 0
+    output = capsys.readouterr()
+    assert source_id not in output.out + output.err
+    graph = json.loads(output.out)["reviewed_graph"]
+    assert graph["source_metadata"] == {"current": 1}
+    assert (graph["tracked_sources"], graph["private_reviewed_sources"],
+            graph["registered_sources"]) == (0, 1, 1)
+    private["sources"].append(source)
+    private_path.write_text(json.dumps(private), encoding="utf-8")
+    private_path.chmod(0o600)
+    assert main(args) == 1
+    assert "duplicate_or_invalid_private_source" in capsys.readouterr().err
+    assert main(["--current", str(input_path), "--private-registry", str(private_path)]) == 1
+    assert "private_registry_requires_reviewed" in capsys.readouterr().err
+
+
+def test_private_topics_link_unreleased_formats_without_public_ids(tmp_path, monkeypatch, capsys):
+    (tmp_path / "content").mkdir()
+    (tmp_path / "data").mkdir()
+    (tmp_path / ".gitignore").write_text("data/\n", encoding="utf-8")
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, capture_output=True)
+    ids = ("private-lesson-slides-1234567890", "private-lesson-transcript-1234567890")
+    current = export(ids)
+    children = current["folders"]["root"][0]["children"]
+    children[0].update(title="Slides", mime_type="application/pdf")
+    children[1].update(title="Transcript", mime_type="application/vnd.google-apps.document")
+    (tmp_path / "content/source-corpus.json").write_text(json.dumps({
+        "schema_version": 1, "corpus_root_id": "root", "sources": []}), encoding="utf-8")
+    (tmp_path / "content/curriculum.json").write_text(json.dumps({
+        "schema_version": 1, "disciplines": {"psychology": {"title": "Psychology"}},
+        "topics": {}}), encoding="utf-8")
+    sources = [{"id": source_id, "kind": "learning_material", "title": child["title"],
+                "corpus_path": child["title"], "modified_time": child["modified_time"],
+                "snapshot_sha256": "a" * 64, "readable": True,
+                "snapshot_kind": "extracted_text", "reviewed_at": "2026-09-28T00:00:00Z",
+                "reviewer": "editor"} for source_id, child in zip(ids, children)]
+    private_registry = {"schema_version": 1, "corpus_root_id": "root", "sources": sources}
+    topic_id = "t_123456789abc"
+    private_topics = {"schema_version": 1, "corpus_root_id": "root", "topics": {
+        topic_id: {"title": "Practice 2", "discipline_id": "psychology", "source": {
+            "source_id": ids[1], "modified_time": sources[1]["modified_time"],
+            "snapshot_sha256": sources[1]["snapshot_sha256"]}}}}
+    links = [{"source_id": source_id, "lesson_id": topic_id, "topic_id": topic_id,
+              "format": fmt, "revision": [child["modified_time"], child["title"], child["mime_type"]],
+              "corpus_path": child["title"], "reviewer": "editor",
+              "reviewed_at": "2026-09-28T00:00:00Z", "review_note": "Formats matched to one practice"}
+             for source_id, child, fmt in zip(ids, children, ("slides", "transcript"))]
+    paths = {name: tmp_path / "data" / name for name in
+             ("current.json", "registry.json", "topics.json", "links.json")}
+    for name, value in (("current.json", current), ("registry.json", private_registry),
+                        ("topics.json", private_topics), ("links.json", links)):
+        paths[name].write_text(json.dumps(value), encoding="utf-8")
+        paths[name].chmod(0o600)
+    monkeypatch.setattr(inventory_report, "REPO_ROOT", tmp_path)
+    args = ["--current", str(paths["current.json"]), "--reviewed",
+            "--private-registry", str(paths["registry.json"]),
+            "--private-topics", str(paths["topics.json"]), "--links", str(paths["links.json"]),
+            "--require-current-reviewed"]
+    assert main(args) == 0
+    output = capsys.readouterr()
+    assert not any(secret in output.out + output.err for secret in (*ids, topic_id))
+    result = json.loads(output.out)
+    assert result["linked_lessons"] == 1
+    assert result["reviewed_graph"]["registered_lesson_edges"] == 1
+    assert result["reviewed_graph"]["reviewed_lesson_edges"] == 0
+    assert result["reviewed_graph"]["private_reviewed_topics"] == 1
+    private_topics["topics"][topic_id]["source"]["source_id"] = "not-in-private-registry"
+    paths["topics.json"].write_text(json.dumps(private_topics), encoding="utf-8")
+    assert main(args) == 1
+    assert "invalid_private_topic" in capsys.readouterr().err
+    private_topics["topics"][topic_id]["source"]["source_id"] = ids[1]
+    private_topics["topics"][topic_id]["source"]["snapshot_sha256"] = "b" * 64
+    paths["topics.json"].write_text(json.dumps(private_topics), encoding="utf-8")
+    assert main(args) == 1
+    assert "invalid_reviewed_lesson" in capsys.readouterr().err
+    assert main(["--current", str(paths["current.json"]), "--reviewed",
+                 "--private-topics", str(paths["topics.json"])]) == 1
+    assert "private_topics_requires_private_registry" in capsys.readouterr().err
+
+
+def test_private_topics_can_hold_unpublished_discipline_without_overriding_public_one():
+    curriculum = {"disciplines": {"published": {"title": "Published"}}, "topics": {}}
+    private_registry = {"corpus_root_id": "root", "sources": [{"id": "lesson"}]}
+    private = {"corpus_root_id": "root",
+               "disciplines": {"clinical_psychology": {"title": "Clinical psychology"}},
+               "topics": {"t_123456789abc": {"title": "First consultation",
+                   "discipline_id": "clinical_psychology", "source": {
+                       "source_id": "lesson", "modified_time": "revision",
+                       "snapshot_sha256": "a" * 64}}}}
+    combined = inventory_report.combine_private_topics(curriculum, private, private_registry)
+    assert "clinical_psychology" in combined["disciplines"]
+    assert "clinical_psychology" not in curriculum["disciplines"]
+    assert combined["topics"]["t_123456789abc"]["discipline_id"] == "clinical_psychology"
+
+    published = {"disciplines": {**curriculum["disciplines"],
+                                 "clinical_psychology": {"title": "Clinical psychology"}},
+                 "topics": {}}
+    assert inventory_report.combine_private_topics(published, private, private_registry)[
+        "topics"]["t_123456789abc"]["discipline_id"] == "clinical_psychology"
+
+    private["disciplines"] = {"published": {"title": "Changed"}}
+    with pytest.raises(InventoryError, match="invalid_private_discipline"):
+        inventory_report.combine_private_topics(curriculum, private, private_registry)
 
 
 def test_conflict_holds_derivatives_of_both_related_sources_until_review():
@@ -139,6 +319,27 @@ def test_private_queue_distinguishes_reviewed_format_links_from_candidates():
         queue([{**links[0], "revision": ["old", *links[0]["revision"][1:]]}])
 
 
+def test_private_queue_reports_cross_folder_titles_without_linking_them():
+    folders = [{"id": key, "title": key, "parent_ids": ["root"],
+                "file_or_folder": "folder"} for key in ("first", "second")]
+    listing = {"schema_version": 1, "root_id": "root", "folders": {
+        "root": [{"page_token": None, "next_page_token": None, "children": folders}],
+        "first": [{"page_token": None, "next_page_token": None,
+                   "children": [item("a", "first", title="Lecture.pdf")]}],
+        "second": [{"page_token": None, "next_page_token": None,
+                    "children": [item("b", "second", title="Lecture.pdf")]}],
+    }}
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": []}
+    curriculum = {"schema_version": 1, "disciplines": {}, "topics": {}}
+    queue = inventory_report.private_review_queue(
+        inventory_report._snapshot(listing), registry, curriculum)
+    assert queue["cross_folder_title_review_candidates"] == [{
+        "normalized_stem": "lecture", "file_ids": ["a", "b"],
+        "parent_paths": [["first"], ["second"]],
+    }]
+    assert all(not entry["linked_lesson_ids"] for entry in queue["files"])
+
+
 def test_frozen_legacy_derivatives_stay_in_private_source_review_queue(tmp_path):
     question = {"id": "old", "status": "approved", "source_ref": "drive:private#slide-2"}
     altered = {"id": "altered", "status": "approved", "source_ref": "drive:private",
@@ -207,9 +408,21 @@ def test_reviewed_graph_counts_exact_lesson_edges_and_stale_metadata_without_ids
                       "source_metadata": {"current": 2}, "current_by_format": {"application/pdf": 2},
                       "untracked_inventory_files": 1, "reviewed_lesson_edges": 1,
                       "lesson_metadata": {"current": 1}, "unique_lesson_files": 1,
-                      "multi_lesson_files": 0, "reviewed_learning_without_lesson": 0}
+                      "multi_lesson_files": 0, "reviewed_discipline_sources": 0,
+                      "reviewed_learning_without_lesson": 0}
     assert "private-lesson" not in json.dumps(result)
     assert "private-bibliography" not in json.dumps(result)
+
+    excluded = {"private-lesson": {
+        "revision": ["2026-09-25T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "processed", "snapshot_kind": "extracted_text",
+        "snapshot_sha256": "a" * 64, **REVIEW_EVIDENCE,
+        "source_kind": "excluded", "source_kind_review": {
+            "reviewer": "editor", "reviewed_at": "2026-09-26T10:32:54Z",
+            "note": "Organizational file, no learning claims"},
+    }}
+    with pytest.raises(InventoryError, match="excluded_source_registered"):
+        report(current, processed=excluded, registry=registry, curriculum=curriculum)
 
     current["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
     changed = report(current, registry=registry, curriculum=curriculum)["reviewed_graph"]
@@ -227,6 +440,30 @@ def test_reviewed_graph_counts_exact_lesson_edges_and_stale_metadata_without_ids
                        curriculum=curriculum)["reviewed_graph"]
     assert relocated["source_metadata"] == {"current": 1, "relocated": 1}
     assert relocated["lesson_metadata"] == {"relocated": 1}
+
+
+def test_reviewed_graph_keeps_discipline_glossary_out_of_lesson_gaps():
+    source = {"id": "general-glossary", "kind": "learning_material", "title": "Glossary",
+              "corpus_path": "Glossary", "discipline_id": "discipline",
+              "modified_time": "2026-09-25T00:00:00Z", "snapshot_sha256": "a" * 64,
+              "readable": True, "snapshot_kind": "extracted_text",
+              "reviewed_at": "2026-09-25", "reviewer": "agent"}
+    registry = {"schema_version": 1, "corpus_root_id": "root", "sources": [source]}
+    curriculum = {"schema_version": 1, "disciplines": {"discipline": {"title": "D"}},
+                  "topics": {}}
+    graph = report(export(["general-glossary"]), registry=registry,
+                   curriculum=curriculum)["reviewed_graph"]
+    assert graph["reviewed_discipline_sources"] == 1
+    assert graph["reviewed_learning_without_lesson"] == 0
+    with pytest.raises(InventoryError, match="invalid_reviewed_discipline_source"):
+        report(export(["general-glossary"]), registry={**registry, "sources": [
+            {**source, "discipline_id": "unknown"}]}, curriculum=curriculum)
+    with pytest.raises(InventoryError, match="invalid_reviewed_lesson"):
+        report(export(["general-glossary"]), registry=registry,
+               curriculum={**curriculum, "topics": {"one": {"title": "One",
+                   "discipline_id": "discipline", "source": {"source_id": "general-glossary",
+                   "modified_time": source["modified_time"],
+                   "snapshot_sha256": source["snapshot_sha256"]}}}})
 
 
 def test_reviewed_graph_rejects_conflicting_repository_evidence():

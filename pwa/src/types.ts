@@ -23,6 +23,8 @@ export interface Setup {
   question_count: 5 | 10 | 15 | null
   difficulty: 'any' | 'easy' | 'medium' | 'hard'
   content_kinds?: ('theory' | 'glossary' | 'case')[]
+  replace_active?: boolean
+  expected_session_id?: number | null
 }
 
 export interface Question {
@@ -45,6 +47,7 @@ export interface RunnerState {
 
 export interface Feedback {
   question_id?: number
+  knowledge_gap?: boolean
   selected_option_index: number | null
   selected_option_text: string | null
   is_correct: boolean
@@ -126,10 +129,12 @@ export interface CurriculumProgress extends PracticeCounts { scope: string; titl
 export interface DisciplineProgress extends CurriculumProgress { topics: CurriculumProgress[]; unmapped_answers: number; module?: string | null }
 export interface ProgressOverview {
   ok: true
-  summary: PracticeCounts & { attempts: number; finished: number }
+  summary: PracticeCounts & { attempts: number; finished: number; knowledge_gaps: number }
+  glossary?: PracticeCounts & { knowledge_gaps: number }
   topics: TopicProgress[]
   days: PracticeDay[]
   curriculum?: { disciplines: DisciplineProgress[]; unmapped: CurriculumProgress }
+  recommendations?: { eligible: boolean; distinct_questions: number; items: { topic: string; answered: number; accuracy: number; reason: string }[] }
 }
 export interface HistoryAttempt extends PracticeCounts {
   session_id: number

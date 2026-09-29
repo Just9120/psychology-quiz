@@ -65,7 +65,8 @@ while IFS= read -r file; do
     Dockerfile|.dockerignore|docker-compose.yml|requirements.txt|app/*|scripts/*|sql/*|content/*|deploy.sh|.github/workflows/deploy-production.yml) NEEDS_RUNTIME=1 ;;
   esac
   case "$file" in
-    app/db.py|app/database.py|app/postgres_*.py|app/attempt_content.py|app/identity_schema.py|app/auth_schema.py|app/invitation_schema.py|app/pwa_promotion.py|app/web_auth.py|app/glossary.py|app/glossary_projection.py|app/case_content.py|app/content_publication.py|app/source_evidence.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*|content/glossary/*|content/publication-reviews.json|content/learning-quality-reviews.json|content/legacy-publication-baseline.json|content/source-corpus.json) STATEFUL=1; MIGRATE=1 ;;
+    docker-compose.yml) STATEFUL=1 ;;
+    app/db.py|app/database.py|app/postgres_*.py|app/attempt_content.py|app/identity_schema.py|app/auth_schema.py|app/invitation_schema.py|app/pwa_promotion.py|app/web_auth.py|app/glossary.py|app/glossary_projection.py|app/case_content.py|app/content_publication.py|app/publication_certificate.py|app/source_evidence.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/questions/*|content/glossary/*|content/publication-reviews.json|content/publication-certificates.json|content/publication-review-public-key.hex|content/learning-quality-reviews.json|content/legacy-publication-baseline.json|content/source-corpus.json) STATEFUL=1; MIGRATE=1 ;;
   esac
 done <<< "$CHANGED_FILES"
 git merge --ff-only "$EXPECTED_SHA"
@@ -96,6 +97,16 @@ DATABASE_BACKEND="$(compose run --rm --no-deps psych_quiz_bot python scripts/dep
 [[ "$DATABASE_BACKEND" == sqlite || "$DATABASE_BACKEND" == postgresql ]] || fail 'Unknown database backend'
 compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py preflight
 
+PG_IMAGE_STATE=current
+if [[ "$DATABASE_BACKEND" == postgresql ]]; then
+  PG_IMAGE_STATE="$(python3 scripts/postgres_vps.py image-state --expected-sha "$EXPECTED_SHA" --lock-held)"
+  [[ "$PG_IMAGE_STATE" == current || "$PG_IMAGE_STATE" == previous || "$PG_IMAGE_STATE" == resume ]] || fail 'Unknown PostgreSQL image transition state'
+  if [[ "$PG_IMAGE_STATE" != current ]]; then
+    # Pull and verify the candidate while the old application is still live.
+    python3 scripts/postgres_vps.py stage-vector-image --expected-sha "$EXPECTED_SHA" --lock-held
+  fi
+fi
+
 STOPPED=0
 MIGRATION_STARTED=0
 recover_pre_migration() {
@@ -112,7 +123,14 @@ if [[ "$STATEFUL" == 1 ]]; then
   compose stop "${SERVICES[@]}"
   STOPPED=1
   if [[ "$DATABASE_BACKEND" == postgresql ]]; then
-    BACKUP_PATH="$(python3 scripts/postgres_vps.py backup --expected-sha "$EXPECTED_SHA" --lock-held)"
+    if [[ "$PG_IMAGE_STATE" == current ]]; then
+      BACKUP_PATH="$(python3 scripts/postgres_vps.py backup --expected-sha "$EXPECTED_SHA" --lock-held)"
+    else
+      # The transition owns backup/isolated restore before changing the DB
+      # image. A failure after this point needs operator reconciliation.
+      MIGRATION_STARTED=1
+      BACKUP_PATH="$(python3 scripts/postgres_vps.py upgrade-vector-image --expected-sha "$EXPECTED_SHA" --lock-held)"
+    fi
     [[ "$BACKUP_PATH" == "$PROJECT_DIR"/.postgres/backups/release-*/record.json ]] || fail 'Invalid PostgreSQL backup record'
   else
     BACKUP_PATH="$(compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py backup)"

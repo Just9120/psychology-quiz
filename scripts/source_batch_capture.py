@@ -37,7 +37,9 @@ def capture_batch(current: dict, prior: dict, manifest: dict) -> dict:
     updated, seen = prior, set()
     for item in manifest["sources"]:
         if (not isinstance(item, dict)
-                or set(item) != {"source_id", "content", "snapshot_kind"}
+                or not {"source_id", "content", "snapshot_kind"} <= set(item)
+                or set(item) - {"source_id", "content", "snapshot_kind", "extraction_profile"}
+                or ("extraction_profile" in item and item["extraction_profile"] is None)
                 or not isinstance(item["source_id"], str)
                 or not item["source_id"]
                 or item["source_id"] in seen):
@@ -45,7 +47,8 @@ def capture_batch(current: dict, prior: dict, manifest: dict) -> dict:
         seen.add(item["source_id"])
         updated = capture(current, updated, item["source_id"],
                           _private_content_path(item["content"]),
-                          item["snapshot_kind"])
+                          item["snapshot_kind"],
+                          extraction_profile=item.get("extraction_profile"))
     return updated
 
 

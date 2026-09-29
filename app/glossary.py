@@ -102,7 +102,9 @@ def load_glossary_entries(topic_id: str) -> list[GlossaryEntry] | None:
         difficulty = item.get("difficulty")
         aliases = _string_list(item.get("aliases"))
         examples = _string_list(item.get("examples"))
-        source_refs = _string_list(item.get("source_refs"))
+        # The publication gate above already verified the signed private
+        # dossier for an approved item without public source references.
+        source_refs = _string_list(item.get("source_refs", []))
         confusable_with = _string_list(item.get("confusable_with"))
         if not all(isinstance(value, str) and value.strip() for value in (entry_id, entry_topic_id, term, short_definition, definition, difficulty)):
             return None
@@ -234,7 +236,7 @@ def build_glossary_quiz_question(entries: list[GlossaryEntry], entry: GlossaryEn
 def build_glossary_answer_keyboard(question: GlossaryQuizQuestion) -> ReplyKeyboardMarkup:
     buttons = [str(index) for index in range(1, len(question.options) + 1)]
     return ReplyKeyboardMarkup(
-        [buttons[index : index + 2] for index in range(0, len(buttons), 2)],
+        [buttons[index : index + 2] for index in range(0, len(buttons), 2)] + [['Не знаю']],
         resize_keyboard=True,
         one_time_keyboard=False,
     )
@@ -247,7 +249,7 @@ def format_glossary_question_text(question: GlossaryQuizQuestion, order_index: i
         "Что означает термин:\n"
         f"<b>{escape(question.entry.term)}</b>\n\n"
         f"{option_lines}\n\n"
-        "Ответьте кнопкой с номером варианта внизу 👇"
+        "Ответьте кнопкой с номером варианта или «Не знаю» внизу 👇"
     )
 
 

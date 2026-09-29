@@ -31,7 +31,7 @@
       "question:m1_vnd_002"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "unconditioned_reflex",
@@ -91,7 +91,7 @@
       "question:m1_vnd_005"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "extinction",
@@ -128,7 +128,7 @@
       "question:m1_vnd_007"
     ],
     "difficulty": "easy",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "excitation_and_inhibition",
@@ -224,6 +224,20 @@
     "source_refs": [
       "question:m1_vnd_012"
     ],
+    "difficulty": "easy",
+    "status": "approved"
+  },
+  {
+    "id": "reflex_arc",
+    "topic_id": "fiziologiya_vnd",
+    "term": "Рефлекторная дуга",
+    "aliases": [],
+    "short_definition": "Путь нервного импульса от рецептора через ЦНС к рабочему органу.",
+    "definition": "Рефлекторная дуга — путь, по которому импульс проходит от рецептора через центральную нервную систему к рабочему органу, например мышце или железе.",
+    "examples": [
+      "При рефлекторной реакции сигнал от рецептора проходит через ЦНС к мышце."
+    ],
+    "confusable_with": [],
     "difficulty": "easy",
     "status": "approved"
   }

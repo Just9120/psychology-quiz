@@ -83,8 +83,11 @@ git() {
       elif [[ "$FAULT" == identity_change ]]; then echo app/identity_schema.py;
       elif [[ "$FAULT" == auth_change ]]; then echo app/auth_schema.py;
       elif [[ "$FAULT" == quality_review_change ]]; then echo content/learning-quality-reviews.json;
+      elif [[ "$FAULT" == publication_certificate_change ]]; then echo content/publication-certificates.json;
+      elif [[ "$FAULT" == publication_key_change ]]; then echo content/publication-review-public-key.hex;
       elif [[ "$FAULT" == evidence_policy_change ]]; then echo app/source_evidence.py;
       elif [[ "$FAULT" == case_policy_change ]]; then echo app/case_content.py;
+      elif [[ "$FAULT" == pg_upgrade || "$FAULT" == pg_upgrade_failed ]]; then echo app/postgres_config.py;
       else echo app/db.py; fi ;;
     'merge --ff-only '*) FAKE_HEAD="$EXPECTED" ;;
     *) return 0 ;;
@@ -132,6 +135,9 @@ python3() {
       if [[ "$FAULT" == docs ]]; then target="$OLD"; else target="$EXPECTED"; fi
       echo "PWA_DELIVERY_OK revision=$target source=$EXPECTED previous=$OLD" ;;
     *postgres_vps.py\ backup*) [[ "$FAULT" != pg_backup ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
+    *postgres_vps.py\ image-state*) if [[ "$FAULT" == pg_upgrade || "$FAULT" == pg_upgrade_failed ]]; then echo previous; else echo current; fi ;;
+    *postgres_vps.py\ stage-vector-image*) echo VECTOR_IMAGE_STAGED ;;
+    *postgres_vps.py\ upgrade-vector-image*) [[ "$FAULT" != pg_upgrade_failed ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
     *postgres_vps.py\ verify*) [[ "$FAULT" != pg_preservation ]] ;;
     *) return 99 ;;
   esac
@@ -169,7 +175,8 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
 
 
 @pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change", "auth_change",
-                                    "quality_review_change", "evidence_policy_change", "case_policy_change"])
+                                    "quality_review_change", "publication_certificate_change", "publication_key_change",
+                                    "evidence_policy_change", "case_policy_change"])
 def test_deployment_builds_before_backup_migration_and_checks_running_revision(tmp_path, change):
     result, log = run_deploy(tmp_path, change)
     assert result.returncode == 0, result.stderr + result.stdout
@@ -196,6 +203,24 @@ def test_postgres_delivery_requires_native_restore_and_preservation(tmp_path, fa
         assert result.returncode != 0
         assert 'up -d' not in log and 'DEPLOY_OK' not in result.stdout
         if fault == 'pg_backup': assert 'scripts/init_db.py' not in log
+
+
+def test_pgvector_upgrade_stages_before_outage_and_rehearses_before_migration(tmp_path):
+    result, log = run_deploy(tmp_path, 'pg_upgrade')
+    assert result.returncode == 0, result.stdout + result.stderr
+    commands = ['postgres_vps.py image-state', 'postgres_vps.py stage-vector-image',
+                'stop psych_quiz_bot', 'postgres_vps.py upgrade-vector-image',
+                'scripts/init_db.py', 'postgres_vps.py verify', 'up -d']
+    assert [log.index(command) for command in commands] == sorted(log.index(command) for command in commands)
+    assert 'postgres_vps.py backup' not in log
+
+
+def test_failed_pgvector_upgrade_never_starts_application_or_reports_delivery(tmp_path):
+    result, log = run_deploy(tmp_path, 'pg_upgrade_failed')
+    assert result.returncode != 0
+    assert 'postgres_vps.py upgrade-vector-image' in log
+    assert 'start psych_quiz_bot' not in log and 'up -d' not in log
+    assert 'DEPLOY_OK' not in result.stdout
 
 
 @pytest.mark.parametrize("fault,forbidden", [("lock", "git fetch"), ("dirty", "git fetch"),

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "items": {
+    "glossary:dopamine": {
+      "schema_version": 1,
+      "item_sha256": "d3247f15bced957d31b4d0ca353df8f08da90132e96cd2ddc9c4acdbc598ced3",
+      "review_sha256": "89762fdceccca10fa94c3321f7173725b194cf2eb6bfed8a8ff153efc0c5d9b7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "r/C8gWEkWYADVXHUQWkyzXl1hoU7Lo9KzQnXFjMdcp2X9sd8Km9sKEEPu9RtO0ouDRwywuf/5en/PS7MDVUsBg=="
+    },
+    "glossary:exp_psych_extraneous_variable": {
+      "schema_version": 1,
+      "item_sha256": "047ecb570f5c0a5a37cadf8976a41a29fc8d3df15bfe95354dc444fe9c4c6ea4",
+      "review_sha256": "fd484f9f27d86fcc56223a957ba7d00b9f65f57999c10ce6b08a7ed8c2d84146",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "PoNvRISCoerkLCjjKC08xa0iH1FqI7dCc5BASNnZuM/j0db84Ro7Ro+42CoCXv9JjkOqonA37mK7hv856EhuBg=="
+    },
+    "questions:m1_intro_054": {
+      "schema_version": 1,
+      "item_sha256": "26d1c5576412cac8f24882f77f784638c8a2eecf40e727c5ad4a06fa93e135ad",
+      "review_sha256": "0d5a354e7ea2742238ee1e7bb56e4cdc09c7027b86417465d0c36d803082ec24",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "uOEBOluYocMazcIp1QlJWFrv0uox7TOviYRzd1KaG1XIitGI4wuy8IpC/WsGw29jE/RLO/WyNOgDa4H3lGGZCw=="
+    },
+    "questions:m1_psyf_070": {
+      "schema_version": 1,
+      "item_sha256": "6de41630ee94b4e255862c4b9e8a777198b0473cadcab1061a3c9bdc671595db",
+      "review_sha256": "de5322516b3b64b05d8c7d51c99d4d6778ad691dabede507cf685ebba141b0b1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "FN7C7RgCnCgYVGh95s4iloxO+xz0oqEhVgqXZZ7Zl4/3OF2aSeXwqoYTk7wXLDpUdBCpo2eYhCZ32m7BBCgXDA=="
+    },
+    "questions:m1_psyf_071": {
+      "schema_version": 1,
+      "item_sha256": "29f557d84b57b2a2c1deca2de4a81bcdecaa42e617ccb74059659872de7f9fe2",
+      "review_sha256": "39412c6958cbfa09cde85e26435cdf7350f807e56b9f2ee22001c03e0818e2f6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "e6I/hXWYhEgeQ+WagStWPwbkyF5AXrbX+oI+IwUHvxHXCkl5ZLszELrSJ1qpc7FMDT2abPMvcB2j45z8kSu8Cw=="
+    },
+    "questions:m5_clinical_001": {
+      "schema_version": 1,
+      "item_sha256": "50a9804f484247b33933038a2758b85b455c04a3a99a828318eb6c5e48ede43d",
+      "review_sha256": "32295b3847fe6b0c85c4f026d18a9f082d2e8d3d9315b9f2a9d47e1101507250",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0theVg88V4wc8BJCH5ZvxOaY71Qnz9RVZBf9IsUwrQwxkL8Y++zItN1QZoJnj8W8n+p6QOXuGum1e3dEVRubBA=="
+    },
+    "questions:case_goal_method_001": {
+      "schema_version": 1,
+      "item_sha256": "470d5f35f5f80dda78c5181e6f5dca34a64a71716c112b407cb90bc076feac6b",
+      "review_sha256": "1349f5d5798ac6e89e05cad8d0eddc214038c2d3222685c60c5a2f6e4fea964e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "6ejRuXgdd2iqMLEvox8Se9WaGLqTm9LCk5YaAlyKsTl3p6bnRV6E5HrTlOH2rfgCU064tVB/uL0wD4q+0AAmCw=="
+    },
+    "questions:case_ambivalence_001": {
+      "schema_version": 1,
+      "item_sha256": "ba42a15478557366e58ea6c456c76446374c09fa875b2511cbcf9397be1c87a4",
+      "review_sha256": "72301497a4aa1c19ecae6364908811df8756fd6304f3a8fc95f9225c7cade93c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "sPEGy5ncV/ykclapp4YjREWOuHWpz0DMvGVYbaFyeZWS38f9Yhtb+rVmMGb2GEaB0zlIh9lLvcvZjc7hRZYmAg=="
+    },
+    "questions:case_ending_plan_001": {
+      "schema_version": 1,
+      "item_sha256": "b5e7db31d2a1589bc81c2513dfc6774bccfd16ca6968b1518574950061bc87a7",
+      "review_sha256": "17075b2db8f497cfdecfe2a572476a7f1d2033438430ae173e17ef848c3ab5de",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JKG0q/gQU3KIq34Sl6AUHXk9XNxDFcwbcI4B+noJTiIi4lyb0I8kkPxDEgC2xsyCcNA7wFN3TrpmHynp+s2lCA=="
+    },
+    "glossary:neuron": {
+      "schema_version": 1,
+      "item_sha256": "d3b476545d03d22748e66cb6495c7b72483246765a74487e8952e14ef8be927c",
+      "review_sha256": "c69079733f9290d7afb35ef348c85993f1705d960025255ea9ae675434d97a2b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XY7TjXAZMdmpkYYpA62THOZt5pgZW/Y/zCTptwigwRw+2UqJ7JHY9vyOW8OOXX3MOmi9ZSm9SpFPHQNJVdaJCg=="
+    },
+    "glossary:synapse": {
+      "schema_version": 1,
+      "item_sha256": "71c3baaade05a2706c741b008e18d6397283b8dd48269544e16616959ab3b884",
+      "review_sha256": "2ba9e1bc8f68b2f19581c7bf9553076f51a581d1395cf752dcbcfc74e936d926",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qjjZeFdt1AqS3LZJVf6YtPQQWPv4rD4NXHZGiSeppnVvcCZJyHNCxcm1IgZinOOKSCI2kvb48+wiGaecGvlgDw=="
+    },
+    "glossary:voluntary_involuntary_regulation": {
+      "schema_version": 1,
+      "item_sha256": "75b75fcedd2cf15577862959c04901f2f4ec96e88a7171e69a58b1e9e9ecd6ae",
+      "review_sha256": "6f833f8ddff72431594fbe908cd4acc273beb1114c6b23526311867b32015876",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "/X8GM8srvuJNcGXW6MxgRgo9VFu4MNWMB3pIGuidGFyixtcD/PvXlKTAp9MSjrhu7/IQ5W8iKU9AmjfQ8xifAw=="
+    },
+    "glossary:exp_psych_external_validity": {
+      "schema_version": 1,
+      "item_sha256": "0b4228d66289b34f582a2af7e4897c427ea71175648643df747365656f8218c6",
+      "review_sha256": "53ae7caf8080789583f9376fd52e8cbed29b42ca585b0ec01c031642efd6c646",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "T4phkCnh1JAoTSi2Ag2ewiv/WPFVVoylD4iLasXKwS7VWjNeTuy3Zui1ETDHqESm9tOnZA4fUQUB7j93Ee/CBQ=="
+    },
+    "glossary:exp_psych_independent_variable": {
+      "schema_version": 1,
+      "item_sha256": "18298b93fce8d3cfb4eeb837fa09b0f5e864617db67fb701985119ca508068cf",
+      "review_sha256": "75ef068bfd9bdf68a737cbfa7cdf401b814ad3522bdaaddf98aa9810a40da2fb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kJoXEqYoMqcdGuxu7uJpmcqNVFwVpt1K0TPHuRY3mhs9bVqo0rgQ0iex/Hw/FJQUq7AKkMmVgYgBcFEE3GWfDA=="
+    },
+    "glossary:exp_psych_dependent_variable": {
+      "schema_version": 1,
+      "item_sha256": "8b1364f1e99d2e60aa3b349452913c7e8dd8a6a91bcbfd0c61b5f3e1fdefe70c",
+      "review_sha256": "afb8dfac37ffe7dcb6e715bceaad245390c54299e6a8b8e7f3a3a987fc077353",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "W8ISvIBSTLbmAdGyQCnH+G9E8ByeOLdvy6WScgC3n5E5ZKF13Dns1AcJfpIhNi7aEebAjqGMdnLpg4eUmEWdBg=="
+    },
+    "glossary:exp_psych_random_assignment": {
+      "schema_version": 1,
+      "item_sha256": "3753ac4b0fd5a759b19311dbd506d3aff40305f01c16839abb528a601739ab6c",
+      "review_sha256": "76812e08fb132c600842d87f46d7f496f623d3b9eeef1321a7399ea01679e120",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0p/rmKnabCvKyV5hqlW860Xw5YJdIO0o68lO5ReeMuHLZBbODRHpQkG2jheoZJrYpl/STRPPbVndhjiShSciBw=="
+    },
+    "glossary:exp_psych_pretest": {
+      "schema_version": 1,
+      "item_sha256": "f59c8929175aa99011512345d5b8102a92ededaf46992c6316f61bbd761e80f7",
+      "review_sha256": "13179bf28f88801258db1aa7af137cd254f566b093d069eab0feff596c9d14df",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E4780/+89uxwrDOFq8McDHs1Ri20+vatU55vo1vvXvoC9Nyq2bxg1WLqR7KwhJIuxMJD/kudFmiBN1QBxMm7Aw=="
+    },
+    "glossary:reflex_arc": {
+      "schema_version": 1,
+      "item_sha256": "8de785341e1159f94213eb5a902d237f265c7dd75d20703c54c88e97c6e9d51c",
+      "review_sha256": "2e25f0db8afe0192912e48de2f0e5d1b11c92fb3dda36ac3bf23e589aad12bf0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "oSScd8C9lo6KK3CvN4VcccAQGmC7IoolRF/WDG3xg8mI3dcNLsu5EvnU7+PmDHyUaQchzfIQ0YS6Spw4YoVDBg=="
+    },
+    "questions:m1_intro_058": {
+      "schema_version": 2,
+      "item_sha256": "67e51097cf712a701cb005714e954c0dee28180f6026d69abfd52fcafdb330f8",
+      "review_sha256": "9001eea04582e1a09423d9ee669f0a63c3293e4d7b2d6dfcec1e426270ce0ffe",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qhMDhunvKVfVpRureKvVVT7RGBJ+MLqFRkz+Fmvj/aycZpqCjwtx7vZYfJLugzA2ewNqhG6i/MEwNukiX6tQBA==",
+      "topic_id": "t_ae68a82010f9"
+    },
+    "questions:m1_phys_057": {
+      "schema_version": 2,
+      "item_sha256": "34d71f2746217308ec31b92ad3b4906e62deede5b76a6bdc9a21248996a12072",
+      "review_sha256": "a7d834fca93a354f9154aba8accaf73e38239fdfa51c0a7325d833732a8ebddb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "rI/zq+B2i05SkyduRwKqQabIhgAwNS//D8tDkMVQSW3E9BOqkmB4Nss58P9Tbp63GzzEtkHS4onzs/BG2tPrBw==",
+      "topic_id": "t_f2b92ac4b2ef"
+    }
+  }
+}

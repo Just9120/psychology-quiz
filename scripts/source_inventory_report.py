@@ -11,6 +11,8 @@ from collections import Counter
 import json
 import os
 from pathlib import Path
+import re
+import stat
 import subprocess
 import sys
 
@@ -19,7 +21,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from app.source_inventory import (
-    InventoryError, complete_listing, link_lessons, private_review_queue,
+    InventoryError, combine_registries, complete_listing, link_lessons, private_review_queue,
     processing_status, reconcile, reviewed_graph, scan,
 )
 from app.content_publication import DRIVE_REF, LEGACY_SHA256, fingerprint
@@ -109,6 +111,88 @@ def private_json_target(raw_target: Path, repo_root: Path, *,
     return target
 
 
+def private_registry_input(raw_path: Path, repo_root: Path) -> dict:
+    """Read additional reviewed source metadata only from ignored operator storage."""
+    if raw_path.is_symlink():
+        raise InventoryError("private_registry_requires_owned_regular_file")
+    path = private_json_target(raw_path, repo_root,
+                               error_code="private_registry_requires_ignored_data_json")
+    info = path.lstat()
+    if (not stat.S_ISREG(info.st_mode) or not 0 < info.st_size <= 20_000_000
+            or (os.name == "posix" and
+                (info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) & 0o077))):
+        raise InventoryError("private_registry_requires_owned_regular_file")
+    value = _read(path)
+    if (not isinstance(value, dict) or set(value) != {"schema_version", "corpus_root_id", "sources"}
+            or value["schema_version"] != 1 or not isinstance(value["sources"], list)):
+        raise InventoryError("invalid_private_source_registry")
+    return value
+
+
+def private_topics_input(raw_path: Path, repo_root: Path) -> dict:
+    """Read unreleased lesson metadata from ignored operator storage."""
+    if raw_path.is_symlink():
+        raise InventoryError("private_topics_requires_owned_regular_file")
+    path = private_json_target(raw_path, repo_root,
+                               error_code="private_topics_requires_ignored_data_json")
+    info = path.lstat()
+    if (not stat.S_ISREG(info.st_mode) or not 0 < info.st_size <= 20_000_000
+            or (os.name == "posix" and
+                (info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) & 0o077))):
+        raise InventoryError("private_topics_requires_owned_regular_file")
+    value = _read(path)
+    if (not isinstance(value, dict)
+            or not {"schema_version", "corpus_root_id", "topics"} <= set(value)
+            or set(value) - {"schema_version", "corpus_root_id", "topics", "disciplines"}
+            or value["schema_version"] != 1 or not isinstance(value["topics"], dict)
+            or not isinstance(value.get("disciplines", {}), dict)):
+        raise InventoryError("invalid_private_topics")
+    return value
+
+
+def combine_private_topics(curriculum: dict, private: dict,
+                           private_registry: dict) -> dict:
+    """Overlay only privately reviewed sources, without changing public curriculum."""
+    if (private["corpus_root_id"] != private_registry["corpus_root_id"]
+            or not isinstance(curriculum, dict)
+            or not isinstance(curriculum.get("topics"), dict)
+            or not isinstance(curriculum.get("disciplines"), dict)):
+        raise InventoryError("invalid_private_topics")
+    allowed_sources = {source["id"] for source in private_registry["sources"]}
+    disciplines = dict(curriculum["disciplines"])
+    for discipline_id, discipline in private.get("disciplines", {}).items():
+        if (not isinstance(discipline_id, str)
+                or re.fullmatch(r"[a-z][a-z0-9_]{0,63}", discipline_id) is None
+                or not isinstance(discipline, dict)
+                or set(discipline) != {"title"}
+                or not isinstance(discipline["title"], str)
+                or not discipline["title"].strip()):
+            raise InventoryError("invalid_private_discipline")
+        if discipline_id in disciplines:
+            # A previously private discipline may have been published since
+            # this immutable source-review snapshot was written. Reuse only
+            # its exact public definition; never override or rename it.
+            if disciplines[discipline_id] != discipline:
+                raise InventoryError("invalid_private_discipline")
+            continue
+        if any(item["title"] == discipline["title"] for item in disciplines.values()):
+            raise InventoryError("invalid_private_discipline")
+        disciplines[discipline_id] = discipline
+    topics = dict(curriculum["topics"])
+    for topic_id, topic in private["topics"].items():
+        if (not isinstance(topic_id, str) or re.fullmatch(r"t_[0-9a-f]{12}", topic_id) is None
+                or topic_id in topics or not isinstance(topic, dict)
+                or set(topic) != {"title", "discipline_id", "source"}
+                or not isinstance(topic["title"], str) or not topic["title"].strip()
+                or topic["discipline_id"] not in disciplines
+                or not isinstance(topic["source"], dict)
+                or set(topic["source"]) != {"source_id", "modified_time", "snapshot_sha256"}
+                or topic["source"]["source_id"] not in allowed_sources):
+            raise InventoryError("invalid_private_topic")
+        topics[topic_id] = topic
+    return {**curriculum, "disciplines": disciplines, "topics": topics}
+
+
 def report(current: dict, *, previous: dict | None = None,
            processed: dict | None = None, links: list | None = None,
            registry: dict | None = None, curriculum: dict | None = None) -> dict:
@@ -121,6 +205,9 @@ def report(current: dict, *, previous: dict | None = None,
         raise InventoryError("reviewed_graph_inputs_required")
     reviewed = reviewed_graph(snapshot, registry, curriculum) if registry is not None else None
     states = processing_status(snapshot, processed or {})
+    if registry is not None and any(states.get(source["id"]) == "excluded"
+                                    for source in registry["sources"]):
+        raise InventoryError("excluded_source_registered")
     lessons = link_lessons(snapshot, links or [],
                            curriculum_topics=curriculum["topics"] if curriculum is not None else None)
     changes = reconcile(_snapshot(previous), snapshot) if previous is not None else None
@@ -146,6 +233,10 @@ def main(argv=None) -> int:
     parser.add_argument("--links", type=Path)
     parser.add_argument("--reviewed", action="store_true",
                         help="compare live metadata to repository source and curriculum reviews")
+    parser.add_argument("--private-registry", type=Path,
+                        help="additional reviewed sources in ignored data/; requires --reviewed")
+    parser.add_argument("--private-topics", type=Path,
+                        help="unreleased lesson topics in ignored data/; requires --private-registry")
     parser.add_argument("--require-current-reviewed", action="store_true",
                         help="stop if a reviewed source is changed, relocated or missing; requires --reviewed")
     parser.add_argument("--private-queue", type=Path,
@@ -154,6 +245,10 @@ def main(argv=None) -> int:
     try:
         if args.private_queue and not args.reviewed:
             raise InventoryError("private_queue_requires_reviewed")
+        if args.private_registry and not args.reviewed:
+            raise InventoryError("private_registry_requires_reviewed")
+        if args.private_topics and not args.private_registry:
+            raise InventoryError("private_topics_requires_private_registry")
         if args.require_current_reviewed and not args.reviewed:
             raise InventoryError("current_review_gate_requires_reviewed")
         current = _read(args.current)
@@ -161,7 +256,19 @@ def main(argv=None) -> int:
         processed = _read(args.processed) if args.processed else None
         links = _read(args.links) if args.links else None
         registry = _read(REPO_ROOT / "content/source-corpus.json") if args.reviewed else None
+        public_source_count = len(registry["sources"]) if registry is not None else 0
+        private_source_count = 0
+        private_registry = None
+        if args.private_registry:
+            private_registry = private_registry_input(args.private_registry, REPO_ROOT)
+            private_source_count = len(private_registry["sources"])
+            registry = combine_registries(registry, private_registry)
         curriculum = _read(REPO_ROOT / "content/curriculum.json") if args.reviewed else None
+        public_topic_count = len(curriculum["topics"]) if curriculum is not None else 0
+        if args.private_topics:
+            curriculum = combine_private_topics(
+                curriculum, private_topics_input(args.private_topics, REPO_ROOT),
+                private_registry)
         reviews = _read(REPO_ROOT / "content/publication-reviews.json") if args.private_queue else None
         quality_reviews = _read(REPO_ROOT / "content/learning-quality-reviews.json") if args.private_queue else None
         legacy, unmapped_legacy = legacy_derivative_links(
@@ -169,6 +276,16 @@ def main(argv=None) -> int:
             quality_reviews["items"]) if args.private_queue else ({}, [])
         value = report(current, previous=previous, processed=processed, links=links,
                        registry=registry, curriculum=curriculum)
+        if args.private_registry:
+            graph = value["reviewed_graph"]
+            graph["registered_sources"] = graph["tracked_sources"]
+            graph["tracked_sources"] = public_source_count
+            graph["private_reviewed_sources"] = private_source_count
+        if args.private_topics:
+            graph = value["reviewed_graph"]
+            graph["registered_lesson_edges"] = graph["reviewed_lesson_edges"]
+            graph["reviewed_lesson_edges"] = public_topic_count
+            graph["private_reviewed_topics"] = len(curriculum["topics"]) - public_topic_count
         if args.require_current_reviewed and any(
                 state != "current" and count
                 for state, count in value["reviewed_graph"]["source_metadata"].items()):

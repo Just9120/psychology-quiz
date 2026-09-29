@@ -55,12 +55,41 @@ def test_read_bibliography_supports_only_its_catalog_metadata():
     assert not policy.can_publish("glossary", item)
 
 
-@pytest.mark.parametrize("kind", ["questions", "glossary"])
-def test_exact_review_of_readable_learning_material_allows_publication(kind):
+def test_new_question_requires_private_publication_even_after_exact_source_review():
+    kind = "questions"
     item, _, _, policy = reviewed(kind)
-    assert policy.can_publish(kind, item)
+    assert policy.error(kind, item) == "new_public_question_source_ref_forbidden"
+    assert not policy.can_publish(kind, item)
+    assert policy.error(kind, item, private_review=True) is None
     # Content fingerprints ignore JSON formatting/key order, not content changes.
-    assert policy.can_publish(kind, dict(reversed(list(item.items()))))
+    assert policy.error(kind, dict(reversed(list(item.items()))), private_review=True) is None
+
+
+def test_historical_direct_ref_allowance_is_bound_to_exact_question_edition(monkeypatch):
+    item, _, review, policy = reviewed("questions")
+    monkeypatch.setitem(publication.HISTORICAL_DIRECT_REF_SHA256,
+                        "questions:fixture", publication.fingerprint(item))
+    assert policy.can_publish("questions", item)
+    item["explanation"] = "A revised explanation"
+    review["item_sha256"] = publication.fingerprint(item)
+    policy.quality_reviews["questions:fixture"]["item_sha256"] = review["item_sha256"]
+    assert policy.error("questions", item) == "new_public_question_source_ref_forbidden"
+
+
+def test_new_glossary_item_cannot_publish_a_direct_drive_reference():
+    item, _, _, policy = reviewed("glossary")
+    assert policy.error("glossary", item) == "private_glossary_source_review_required"
+    assert not policy.can_publish("glossary", item)
+
+
+def test_existing_dopamine_glossary_uses_private_certificate():
+    item = next(item for item in json.loads(
+        (publication.ROOT / "content/glossary/psihofiziologiya.json").read_text(encoding="utf-8"))
+        if item["id"] == "dopamine")
+    policy = publication.load_policy()
+    assert policy.can_publish("glossary", item)
+    assert "source_refs" not in item
+    assert policy.certificates["glossary:dopamine"]["item_sha256"] == publication.fingerprint(item)
 
 
 @pytest.mark.parametrize("explanation", [None, "", "  "])
@@ -121,6 +150,38 @@ def test_frozen_legacy_learning_item_stops_when_source_evidence_is_stale(kind, f
         del policy.sources["fixture"]
         expected = "legacy_source_review_required"
     assert policy.error(kind, item) == expected
+    assert not policy.can_publish(kind, item)
+
+
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
+def test_frozen_legacy_learning_item_with_disputed_source_cannot_publish(kind):
+    item, _, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    policy.quality_reviews[f"{kind}:fixture"]["source_support"] = "disputed"
+
+    assert policy.error(kind, item) == "legacy_disputed_source_review"
+    assert not policy.can_publish(kind, item)
+
+
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
+@pytest.mark.parametrize("source_support", ["partial", "unconfirmed"])
+def test_frozen_legacy_learning_item_with_incomplete_source_cannot_publish(kind, source_support):
+    item, _, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    policy.quality_reviews[f"{kind}:fixture"]["source_support"] = source_support
+
+    assert policy.error(kind, item) == "legacy_incomplete_source_review"
+    assert not policy.can_publish(kind, item)
+
+
+@pytest.mark.parametrize("kind", ["questions", "glossary"])
+def test_frozen_legacy_explicit_drive_ref_must_match_quality_source(kind):
+    item, source, _, policy = reviewed(kind)
+    policy.legacy[f"{kind}:fixture"] = publication.fingerprint(item)
+    policy.sources["other"] = {**source, "id": "other"}
+    policy.quality_reviews[f"{kind}:fixture"]["sources"][0]["source_id"] = "other"
+
+    assert policy.error(kind, item) == "legacy_source_reference_mismatch"
     assert not policy.can_publish(kind, item)
 
 
@@ -207,24 +268,46 @@ def test_current_legacy_counts_preserved_without_source_certification():
     assert sum(review["purpose"] == "bibliographic_metadata" for review in policy.reviews.values()) == 130
     learning_reviews = {key for key, review in policy.reviews.items() if review["purpose"] == "learning_content"}
     assert learning_reviews == {
-        "questions:m1_vnd_002", "questions:m2_exp_040", "glossary:dopamine",
+        "questions:m1_vnd_002", "questions:m2_exp_040",
         "questions:case_first_consultation_001",
         "questions:m2_exp_001", "questions:m2_exp_012", "questions:m2_exp_036",
         "questions:m2_exp_050", "questions:m2_exp_052", "questions:m2_exp_053",
         "questions:m2_exp_054", "questions:m2_exp_058", "questions:m2_exp_109",
     }
+    assert "glossary:dopamine" in policy.certificates
     assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 14
     # Reading learning sources for an audit must not silently approve derivatives.
     assert any(source["kind"] == "learning_material" for source in policy.sources.values())
-    for kind, expected in [("questions", 575), ("glossary", 99), ("literature", 130)]:
+    for kind, expected in [("questions", 406), ("glossary", 85), ("literature", 130)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected
         assert publication.validate_publications(kind) == []
-    item = json.loads(next((publication.ROOT / "content/questions").rglob("*.json")).read_text(encoding="utf-8"))[0]
+    item = next(item for path in (publication.ROOT / "content/questions").rglob("*.json")
+                for item in json.loads(path.read_text(encoding="utf-8"))
+                if item.get("status") == "approved" and policy.is_legacy("questions", item))
     assert policy.is_legacy("questions", item)
     item["explanation"] += " changed"
     assert not policy.can_publish("questions", item)
+
+
+def test_current_learning_reviews_do_not_use_bibliographies_as_knowledge():
+    policy = publication.load_policy()
+    quality = json.loads((publication.ROOT / "content" / "learning-quality-reviews.json")
+                         .read_text(encoding="utf-8"))["items"]
+    published = set()
+    for kind in ("questions", "glossary"):
+        for path in (publication.ROOT / "content" / kind).rglob("*.json"):
+            for item in json.loads(path.read_text(encoding="utf-8")):
+                if policy.can_publish(kind, item):
+                    published.add(f"{kind}:{item['id']}")
+    assert published <= quality.keys() | policy.certificates.keys()
+    for key, review in quality.items():
+        if not key.startswith(("questions:", "glossary:")):
+            continue
+        for evidence in review["sources"]:
+            source = policy.sources[evidence["source_id"]]
+            assert source["kind"] == "learning_material", key
 
 
 @pytest.mark.parametrize("kind", ["glossary", "literature"])
@@ -241,7 +324,9 @@ def test_actual_runtime_loader_excludes_unreviewed_new_content(tmp_path, monkeyp
     else:
         monkeypatch.setattr(literature, "LITERATURE_DIR", tmp_path)
         ids = [entry["id"] for entry in literature.load_literature_items()]
-    assert ids == [entry["id"] for entry in sorted(entries, key=lambda entry: entry.get("global_order", 0))]
+    policy = publication.load_policy()
+    assert ids == [entry["id"] for entry in sorted(entries, key=lambda entry: entry.get("global_order", 0))
+                   if policy.can_publish(kind, entry)]
     assert "unreviewed_new_entry" not in ids
 
 

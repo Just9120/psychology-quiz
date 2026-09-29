@@ -11,7 +11,7 @@ from typing import Any
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from app.content_publication import validate_publications
+from app.content_publication import load_policy, validate_publications
 
 GLOSSARY_FILES_GLOB = "content/glossary/*.json"
 TOPICS_FILE = Path("content/topics.json")
@@ -147,7 +147,7 @@ def validate_entry(entry: dict[str, Any], label: str, file_topic_id: str, active
     validate_string_list(entry.get("examples"), "examples", label, errors, require_non_empty=True)
     validate_string_list(entry.get("confusable_with"), "confusable_with", label, errors, require_non_empty=False)
     status = entry.get("status")
-    if status == "approved" or "source_refs" in entry:
+    if "source_refs" in entry:
         validate_string_list(entry.get("source_refs"), "source_refs", label, errors,
                              require_non_empty=status == "approved")
 
@@ -157,8 +157,15 @@ def validate_entry(entry: dict[str, Any], label: str, file_topic_id: str, active
 
     if status not in VALID_STATUSES:
         errors.append(f"{label}: status must be one of {', '.join(sorted(VALID_STATUSES))}")
-    elif status == "approved" and not entry.get("source_refs"):
-        errors.append(f"{label}: approved entries must include at least one source_ref")
+    elif status == "approved" and "source_refs" not in entry:
+        try:
+            policy = load_policy()
+            signed_private = (f"glossary:{entry.get('id')}" in (policy.certificates or {})
+                              and policy.can_publish("glossary", entry))
+        except (OSError, ValueError, KeyError, TypeError):
+            signed_private = False
+        if not signed_private:
+            errors.append(f"{label}: approved entry requires source_refs or verified private certificate")
 
     for source_ref in entry.get("source_refs") or []:
         if not isinstance(source_ref, str):
@@ -166,7 +173,9 @@ def validate_entry(entry: dict[str, Any], label: str, file_topic_id: str, active
         if not source_ref.startswith(SUPPORTED_SOURCE_REF_PREFIXES):
             errors.append(f"{label}: unsupported source_ref format: {source_ref}")
             continue
-        if source_ref.startswith(QUESTION_REF_PREFIX):
+        # Historical entries keep their original references for traceability;
+        # only a published term needs its linked question to remain published.
+        if status == "approved" and source_ref.startswith(QUESTION_REF_PREFIX):
             question_id = source_ref.removeprefix(QUESTION_REF_PREFIX)
             question_topic = approved_questions.get(question_id)
             if question_topic is None:

@@ -98,7 +98,7 @@ test('verified Telegram actor can open review, glossary and literature without P
   expect(screen.getByText('Учебный список')).toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: 'Мой прогресс' }))
   await screen.findByRole('heading', { name: 'Мой прогресс' })
-  expect(screen.getByText(/Истории ответов пока нет/)).toBeInTheDocument()
+  expect(screen.getByText(/Истории квизов пока нет/)).toBeInTheDocument()
   expect(seen).toContain('/miniapp/glossary/topics')
   expect(seen).toContain('/miniapp/literature/items')
 })

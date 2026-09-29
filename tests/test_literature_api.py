@@ -3,6 +3,7 @@ import os
 import sqlite3
 import tempfile
 import unittest
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 
@@ -82,6 +83,8 @@ class LiteratureApiTests(unittest.TestCase):
         self.assertNotIn("notes", dumped)
         self.assertNotIn("private text", dumped)
         self.assertTrue(all(set(item["source"]) == {"title", "locator", "citation"} for item in items))
+        corpus = json.loads((Path(__file__).resolve().parents[1] / "content/source-corpus.json").read_text(encoding="utf-8"))
+        self.assertFalse(any(source["id"] in dumped for source in corpus["sources"]))
         first = next(item for item in items if item["id"] == self.first_item["id"])
         self.assertEqual("in_progress", first["user_state"]["reading_status"])
         self.assertNotIn("private_note", first["user_state"])

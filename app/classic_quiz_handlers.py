@@ -13,6 +13,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton,
 from telegram.ext import ContextTypes
 
 from app.db import (
+    abandon_in_progress_sessions_for_user,
     create_or_load_user,
     finalize_quiz_session,
     get_active_categories,
@@ -30,6 +31,7 @@ from app.db import (
     start_quiz_session,
     store_session_questions,
 )
+from app.database import begin_write
 from app.glossary import GLOSSARY_QUIZ_SESSION_KEY
 from app.attempt_content import get_attempt_content
 from app.handler_latency import HandlerLatency as _HandlerLatency
@@ -59,6 +61,20 @@ LITERATURE_BUTTON_TEXT = "📖 Литература"
 HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
 CLASSIC_REPLY_NEXT_TEXT = "Далее"
 CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
+CONFIRMED_REPLACEMENT_KEY = "confirmed_quiz_replacement"
+
+
+def claim_quiz_replacement(conn, actor: int, expected_session_id: int | None) -> bool:
+    """Reject stale menu callbacks and never replace an unconfirmed attempt."""
+    begin_write(conn, f"actor:{actor}")
+    active = conn.execute("""SELECT id FROM quiz_sessions WHERE user_id=? AND status='in_progress'
+                             ORDER BY id DESC LIMIT 1""", (actor,)).fetchone()
+    if active is None:
+        return expected_session_id is None
+    if expected_session_id != int(active[0]):
+        return False
+    abandon_in_progress_sessions_for_user(conn, actor)
+    return True
 
 
 def _main_attr(name: str):
@@ -270,6 +286,7 @@ def build_quiz_finished_text(score: int, total_questions: int) -> str:
 def build_classic_answer_reply_keyboard(options) -> ReplyKeyboardMarkup:
     buttons = [str(position) for position, _ in enumerate(options, start=1)]
     keyboard = [buttons[index : index + 2] for index in range(0, len(buttons), 2)]
+    keyboard.append(["Не знаю"])
     return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=False)
 
 
@@ -378,10 +395,18 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
     def _load_categories():
         with closing(get_connection(settings.db_path)) as conn, conn:
-            return get_active_categories(conn)
+            categories = get_active_categories(conn)
+            actor = update.effective_user
+            active = None
+            if actor is not None:
+                row = conn.execute("""SELECT s.id FROM quiz_sessions s JOIN users u ON u.id=s.user_id
+                    WHERE u.telegram_user_id=? AND s.status='in_progress' ORDER BY s.id DESC LIMIT 1""",
+                    (actor.id,)).fetchone()
+                active = int(row[0]) if row else None
+            return categories, active
 
     db_started_at = time.perf_counter()
-    categories = await _run_db_task(_load_categories)
+    categories, active = await _run_db_task(_load_categories)
     latency.add_db(db_started_at)
 
     if not categories:
@@ -393,6 +418,17 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
     if update.message:
         context.user_data["selected_mix_categories"] = set()
+        context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
+        if active is not None:
+            await update.message.reply_text(
+                "У вас есть незавершённый квиз. Продолжить его или подтвердить начало нового?",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("Продолжить", callback_data=f"quizresume:{active}")],
+                    [InlineKeyboardButton("Начать новый", callback_data=f"quizreplace:{active}")],
+                ]),
+            )
+            latency.summary()
+            return
         render_started_at = time.perf_counter()
         reply_markup = build_quiz_mode_keyboard()
         latency.add_render(render_started_at)
@@ -406,6 +442,35 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         )
         latency.add_telegram_api(api_started_at)
     latency.summary()
+
+
+async def quiz_resume_or_replace_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    actor = update.effective_user
+    if query is None or actor is None or not query.data:
+        return
+    mode, _, raw_id = query.data.partition(":")
+    if mode not in {"quizresume", "quizreplace"} or not raw_id.isdigit():
+        return
+    session_id = int(raw_id)
+    settings = context.application.bot_data["settings"]
+    with closing(get_connection(settings.db_path)) as conn:
+        row = conn.execute("""SELECT s.id FROM quiz_sessions s JOIN users u ON u.id=s.user_id
+            WHERE u.telegram_user_id=? AND s.id=? AND s.status='in_progress'""",
+            (actor.id, session_id)).fetchone()
+    await query.answer()
+    if row is None:
+        context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
+        await query.edit_message_text("Попытка изменилась. Откройте /quiz заново.")
+        return
+    if mode == "quizresume":
+        context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
+        await send_current_question(query, settings, session_id, context=context)
+        return
+    context.user_data[CONFIRMED_REPLACEMENT_KEY] = session_id
+    context.user_data["selected_mix_categories"] = set()
+    await query.edit_message_text("Выберите режим нового квиза. Текущая попытка будет завершена только после выбора вопросов.",
+                                  reply_markup=build_quiz_mode_keyboard())
 
 
 
@@ -441,6 +506,7 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
         latency.summary()
         return False
     keyboard = [[InlineKeyboardButton(option_index_to_label(int(opt["option_index"])), callback_data=f"ans:{session_id}:{question_id}:{int(opt['option_index'])}")] for opt in options]
+    keyboard.append([InlineKeyboardButton("Не знаю", callback_data=f"ans:{session_id}:{question_id}:-1")])
     render_started_at = time.perf_counter()
     message_text = build_question_text_with_options(
         order_index=int(current["order_index"]),
@@ -725,6 +791,7 @@ async def send_current_question(
                 )
             ]
         )
+    keyboard.append([InlineKeyboardButton("Не знаю", callback_data=f"ans:{session_id}:{question_id}:-1")])
 
     render_started_at = time.perf_counter()
     message_text = build_question_text_with_options(
@@ -852,6 +919,10 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
 
         if not question_ids:
             await query.edit_message_text("Не удалось подобрать вопросы для повторной попытки.")
+            return
+
+        if not claim_quiz_replacement(conn, int(user_row["id"]), None):
+            await query.edit_message_text("Есть незавершённый квиз. Откройте /quiz для продолжения или подтверждения замены.")
             return
 
         new_session_id = start_quiz_session(
@@ -1003,6 +1074,8 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
             )
             if not question_ids:
                 return {"status": "no_questions"}
+            if not claim_quiz_replacement(conn, int(user_row["id"]), context.user_data.get(CONFIRMED_REPLACEMENT_KEY)):
+                return {"status": "active_attempt"}
             session_id = start_quiz_session(conn, int(user_row["id"]), category_id, difficulty_mode=difficulty_filter)
             store_session_questions(conn, session_id, question_ids)
             return {"status": "ok", "session_id": session_id}
@@ -1014,6 +1087,11 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         await _timed_telegram_api_call(latency, query.edit_message_text("В этой категории пока нет одобренных вопросов."))
         latency.summary()
         return
+    if result["status"] == "active_attempt":
+        await _timed_telegram_api_call(latency, query.edit_message_text("Попытка изменилась или требует подтверждения. Откройте /quiz заново."))
+        latency.summary()
+        return
+    context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
 
     await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
     await (_main_attr("send_current_question") or send_current_question)(query, settings, result["session_id"], latency=latency, context=context)
@@ -1291,6 +1369,8 @@ async def start_mix_quiz(
                 )
             if not question_ids:
                 return {"status": "no_questions"}
+            if not claim_quiz_replacement(conn, int(user_row["id"]), context.user_data.get(CONFIRMED_REPLACEMENT_KEY)):
+                return {"status": "active_attempt"}
             session_id = start_quiz_session(conn, int(user_row["id"]), None, difficulty_mode=difficulty_filter)
             if filtered_selected_ids:
                 set_selected_categories_for_session(conn, session_id, filtered_selected_ids)
@@ -1304,6 +1384,10 @@ async def start_mix_quiz(
     if result["status"] == "no_questions":
         await _timed_telegram_api_call(latency, query.edit_message_text("Пока нет одобренных вопросов в активных темах."))
         return
+    if result["status"] == "active_attempt":
+        await _timed_telegram_api_call(latency, query.edit_message_text("Попытка изменилась или требует подтверждения. Откройте /quiz заново."))
+        return
+    context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
 
     await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
     await (_main_attr("send_current_question") or send_current_question)(query, settings, result["session_id"], latency=latency, context=context)
@@ -1387,7 +1471,7 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
         saved_option_index = int(submission.selected_option_index)
         selected_option = _find_option_by_index(options, saved_option_index)
         correct_option = next((opt for opt in options if bool(int(opt["is_correct"]))), None)
-        if selected_option is None or correct_option is None:
+        if (selected_option is None and saved_option_index != -1) or correct_option is None:
             return {"status": "invalid_option"}
         answered_questions = get_answered_questions_count(conn, session_id)
         total_questions = int(conn.execute(
@@ -1401,8 +1485,8 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
         return {
             "status": submission.status,
             "is_correct": bool(submission.is_correct),
-            "selected_option_label": numeric_answer_label_for_option(options, saved_option_index),
-            "selected_option_text": str(selected_option["option_text"]),
+            "selected_option_label": "—" if saved_option_index == -1 else numeric_answer_label_for_option(options, saved_option_index),
+            "selected_option_text": "Не знаю" if saved_option_index == -1 else str(selected_option["option_text"]),
             "correct_option_label": numeric_answer_label_for_option(options, correct_option_index),
             "correct_option_text": str(correct_option["option_text"]),
             "explanation": str(content["explanation"] or ""),
@@ -1464,10 +1548,11 @@ async def classic_reply_text_answer_handler(update: Update, context: ContextType
     )
 
     options = context_result["options"]
-    option_position = parse_classic_reply_answer_number(message.text, len(options))
+    option_position = (-1 if message.text.strip().casefold() == "не знаю"
+                       else parse_classic_reply_answer_number(message.text, len(options)))
     if option_position is None:
         elapsed_ms = int((time.perf_counter() - started_at) * 1000)
-        await message.reply_text(f"Выберите вариант числом от 1 до {len(options)}.")
+        await message.reply_text(f"Выберите вариант числом от 1 до {len(options)} или «Не знаю».")
         _log_classic_text_event(
             "classic_text_answer_latency",
             telegram_user_id=tg_user.id,
@@ -1478,7 +1563,7 @@ async def classic_reply_text_answer_handler(update: Update, context: ContextType
         )
         return
 
-    selected_option_index = int(options[option_position]["option_index"])
+    selected_option_index = -1 if option_position == -1 else int(options[option_position]["option_index"])
     processing_key = f"answer:{session_id}:{question_id}"
     if not _mark_callback_processing(context, processing_key):
         elapsed_ms = int((time.perf_counter() - started_at) * 1000)
@@ -1686,12 +1771,12 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                                         if option["option_index"] == submission.selected_option_index), None)
                 correct_option = next((option for option in content["options"]
                                        if bool(option["is_correct"])), None)
-                if selected_option is None or correct_option is None:
+                if (selected_option is None and submission.selected_option_index != -1) or correct_option is None:
                     return {"status": "invalid_option"}
                 return {
                     "status": submission.status,
                     "is_correct": bool(submission.is_correct),
-                    "selected_option_text": str(selected_option["option_text"]),
+                    "selected_option_text": "Не знаю" if submission.selected_option_index == -1 else str(selected_option["option_text"]),
                     "correct_option_text": str(correct_option["option_text"]),
                     "explanation": str(content["explanation"] or ""),
                     "case_review": case_review_for_attempt(conn, session_id, question_id),

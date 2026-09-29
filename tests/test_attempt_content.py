@@ -134,6 +134,24 @@ def test_content_publication_preserves_attempts_and_excludes_inactive_from_all_s
                 store_session_questions(conn, start_quiz_session(conn, 1, category), [1])
 
 
+def test_selected_mix_deals_across_topics_before_refilling_large_topic(bank):
+    items = [{**OLD, "id": f"large-{index}", "question": f"Large question {index}?"}
+             for index in range(20)]
+    items += [{**OTHER, "id": f"small-{index}", "question": f"Small question {index}?"}
+              for index in range(2)]
+    items += [{**OLD, "id": "single", "category": "Third category", "question": "Third question?"}]
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, items, authoritative=True)
+        categories = {row["name"]: row["id"] for row in get_active_categories(conn)}
+        picked = select_random_approved_question_ids_by_categories(
+            conn, [categories[name] for name in ("Original category", "Other category", "Third category")], 6)
+        selected = [conn.execute("SELECT category_id FROM questions WHERE id=?", (qid,)).fetchone()[0]
+                    for qid in picked]
+        assert len(picked) == len(set(picked)) == 6
+        assert sorted(selected.count(categories[name]) for name in
+                      ("Original category", "Other category", "Third category")) == [1, 2, 3]
+
+
 def test_api_current_question_answer_and_recent_feedback_use_same_edition(bank):
     with closing(get_connection(str(bank))) as conn, conn:
         sid = make_attempt(conn)
