@@ -230,7 +230,7 @@ Runtime sync for JSON/content changes is deployment-environment-specific. Reposi
 
 Важно: Mini App собирается из `pwa/miniapp-app` и `pwa/src/miniapp` командой `cd pwa && npm run build:miniapp` в `miniapp-react/`; этот проверяемый статический каталог публикует отдельная Cloudflare Git integration. VPS runtime/deploy-скрипты не публикуют Mini App assets.
 
-Важно: root `wrangler.toml` публикует проверенную сборку из `./miniapp-react` через `npx wrangler deploy`.
+Ручная публикация уже проверенной сборки Mini App: из `pwa/`, после `npm ci --ignore-scripts`, выполните `npm run deploy:miniapp`. Команда использует закреплённый в `package-lock.json` Wrangler и root `wrangler.toml` с assets из `miniapp-react/`. Для публикации нужны права на существующий Cloudflare Worker; команда не заменяет штатную Git integration.
 
 ## Документация
 
