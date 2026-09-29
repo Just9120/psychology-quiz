@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from app.private_search import MAX_CHARS, SearchError, capacity_estimate, chunks, load_private_chunks, load_qa_cases, model_probe, require_current_reviewed_index, reviewed_chunks, search, statement_timeout_seconds, vector_text, verify_retrieval
+from app.private_search import MAX_CHARS, SearchError, benchmark_retrieval, capacity_estimate, chunks, load_private_chunks, load_qa_cases, model_probe, require_current_reviewed_index, reviewed_chunks, search, statement_timeout_seconds, vector_text, verify_retrieval
 
 
 def test_operator_rebuild_has_bounded_timeout_without_weakening_reads():
@@ -304,3 +304,28 @@ def test_private_hybrid_qa_requires_exact_top_source_revision(monkeypatch, tmp_p
         "query": "Что я отметил о консультации?", "source_id": "note:my-note",
         "snapshot_sha256": digest}]}), encoding="utf-8")
     assert load_qa_cases(path)[0]["source_id"] == "note:my-note"
+
+
+def test_private_benchmark_reports_only_aggregate_and_fails_on_wrong_revision(monkeypatch):
+    from app import private_search
+
+    source = "source_12345678901234567890"
+    digest = "a" * 64
+    cases = [{"query": "проверка", "source_id": source, "snapshot_sha256": digest}]
+
+    class Connection:
+        def execute(self, query):
+            assert "pg_total_relation_size" in query
+            return type("Row", (), {"fetchone": lambda _: (4096,)})()
+
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [
+        {"source_id": source, "snapshot_sha256": digest}])
+    result = benchmark_retrieval(Connection(), cases, object())
+    assert result["cases_passed"] == 1 and result["storage_bytes"] == 4096
+    assert result["max_ms"] >= 0
+    assert source not in str(result) and "проверка" not in str(result)
+
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [
+        {"source_id": source, "snapshot_sha256": "b" * 64}])
+    with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
+        benchmark_retrieval(Connection(), cases, object())

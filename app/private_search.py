@@ -437,6 +437,24 @@ def verify_retrieval(conn, cases, model):
     return {"cases_passed": len(cases)}
 
 
+def benchmark_retrieval(conn, cases, model):
+    """Read-only, bounded operator measurement over private reviewed QA cases."""
+    if not cases:
+        raise SearchError("private_qa_file_required")
+    timings = []
+    for case in cases:
+        started = monotonic()
+        matches = search(conn, case["query"], model, limit=1)
+        timings.append(round((monotonic() - started) * 1000))
+        if (not matches or matches[0]["source_id"] != case["source_id"]
+                or matches[0]["snapshot_sha256"] != case["snapshot_sha256"]):
+            raise SearchError("private_retrieval_qa_failed")
+    timings.sort()
+    size = conn.execute("SELECT pg_total_relation_size('private_search.chunks'::regclass)").fetchone()[0]
+    return {"cases_passed": len(timings), "max_ms": timings[-1],
+            "median_ms": timings[len(timings) // 2], "storage_bytes": size}
+
+
 def verify_index_content(conn, expected_chunks):
     """Compare the complete derivative with its reviewed input before serving it."""
     ensure_index(conn)
@@ -456,7 +474,7 @@ def require_current_reviewed_index(conn, manifest_path: Path):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Private owner/agent retrieval; no public API")
-    parser.add_argument("action", choices=("estimate", "probe", "rebuild", "search", "qa", "rag", "status"))
+    parser.add_argument("action", choices=("estimate", "probe", "rebuild", "search", "qa", "benchmark", "rag", "status"))
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--cases", type=Path)
     parser.add_argument("--query")
@@ -468,7 +486,7 @@ def main(argv=None):
         timeout = statement_timeout_seconds(args.action, args.statement_timeout_seconds)
         if args.action == "rag" and os.environ.get("PRIVATE_RAG_ENABLED") != "1":
             raise SearchError("private_rag_disabled")
-        if args.action in {"search", "qa", "rag"} and args.manifest is None:
+        if args.action in {"search", "qa", "benchmark", "rag"} and args.manifest is None:
             raise SearchError("private_manifest_required")
         if args.action == "estimate":
             if args.manifest is None:
@@ -484,14 +502,14 @@ def main(argv=None):
         except ValueError as error:
             raise SearchError("explicit_private_postgres_required")
         with psycopg.connect(target, connect_timeout=5) as conn:
-            if args.action in {"search", "qa", "rag", "status"}:
+            if args.action in {"search", "qa", "benchmark", "rag", "status"}:
                 conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
             identity = conn.execute("SELECT current_database(),current_user,current_setting('server_version')").fetchone()
             if identity[:2] != ("psychology_atlas", "psychology_app") or identity[2].split()[0] != "18.6":
                 raise SearchError("unexpected_private_postgres_identity")
             conn.execute("SELECT set_config('statement_timeout', %s, true)",
                          (f"{timeout}s",))
-            if args.action in {"search", "qa", "rag"}:
+            if args.action in {"search", "qa", "benchmark", "rag"}:
                 require_current_reviewed_index(conn, args.manifest)
             if args.action == "rebuild":
                 if args.manifest is None:
@@ -503,6 +521,10 @@ def main(argv=None):
                 if args.cases is None:
                     raise SearchError("private_qa_file_required")
                 result = verify_retrieval(conn, load_qa_cases(args.cases), embedder())
+            elif args.action == "benchmark":
+                if args.cases is None:
+                    raise SearchError("private_qa_file_required")
+                result = benchmark_retrieval(conn, load_qa_cases(args.cases), embedder())
             elif args.action == "rag":
                 result = {"results": search(conn, args.query, embedder(), limit=args.limit)}
             else:

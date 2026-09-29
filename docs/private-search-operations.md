@@ -170,6 +170,8 @@ docker compose --profile search run --rm psych_quiz_private_search status
 docker compose --profile search run --rm psych_quiz_private_search \
   qa --manifest /data/search-input/manifest.json --cases /data/search-input/qa.json
 docker compose --profile search run --rm psych_quiz_private_search \
+  benchmark --manifest /data/search-input/manifest.json --cases /data/search-input/qa.json
+docker compose --profile search run --rm psych_quiz_private_search \
   search --manifest /data/search-input/manifest.json \
   --query 'формулировка учебного вопроса' --limit 5
 ```
@@ -177,7 +179,7 @@ docker compose --profile search run --rm psych_quiz_private_search \
 `rebuild` использует до 600 секунд на каждый SQL statement; оператор может
 задать `--statement-timeout-seconds` от 30 до 3600 после оценки объёма
 индекса. Это ограничение одного запроса, не обещание длительности всей
-пересборки. Для `search`, `qa`, `rag` и `status` остаётся 30 секунд;
+пересборки. Для `search`, `qa`, `benchmark`, `rag` и `status` остаётся 30 секунд;
 изменение timeout не обходит проверку manifest, транзакционную замену индекса
 или обязательный retrieval QA.
 
@@ -187,7 +189,10 @@ docker compose --profile search run --rm psych_quiz_private_search \
 источника для каждого перефразированного запроса в read-only транзакции;
 выводит только число успешных cases без фрагментов или Drive IDs. Ошибка
 останавливает включение поиска до проверки ранжирования, данных и модели.
-`search`, `qa` и будущий `rag` требуют текущий приватный manifest: перед выдачей
+`benchmark` повторяет эти 1–20 проверок и выводит только median/max времени
+запроса и размер relation PostgreSQL. Замер выполняйте на VPS после rebuild;
+фиксируйте загрузку RAM/CPU отдельно и не распространяйте результат малого
+набора на весь корпус. `search`, `qa`, `benchmark` и будущий `rag` требуют текущий приватный manifest: перед выдачей
 они сверяют разрешённые после review source fragments с точным содержимым индекса.
 После нового conflict hold или изменения source revision импортируйте новый
 приватный пакет и пересоберите derivative; прежний manifest не является
