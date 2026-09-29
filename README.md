@@ -242,7 +242,7 @@ README is the repository entrypoint and navigation layer, not the full product s
 | [AGENTS.md](AGENTS.md) | Постоянный router, Goal, AC/Evidence, проверки, Git/PR и поставка | При старте и восстановлении контекста |
 | [Project Specification](docs/project-spec.md) | Каноническая продуктовая/проектная спецификация | Нужно проверить scope, продуктовые правила, модель контента и runtime-ограничения |
 | [Delivery Plan](docs/delivery-plan.md) | Операционное состояние delivery | Нужно понять текущие checkpoints, активный фокус и следующий рекомендуемый шаг |
-| [Student access draft](docs/student-access-draft.md) | Исторический черновик условий PWA; технический inventory требует проверки для Telegram/Mini App | При сверке Q-09/11; приглашения и student PWA исключены D-29 |
+| [Обработка учебных данных](docs/data-processing.md) | Фактические цели/потоки по коду, границы удаления и открытые runtime вопросы | При проверке Telegram/PWA privacy и Q-09/11 |
 | [Delivery Plan Archive](docs/delivery-plan-archive.md) | Исторический архив delivery | Только для явных history/archive/reconciliation tasks |
 | [CI/CD Rules](ci-cd-rules.md) | Правила настройки workflows, gates, artifacts, окружений и recovery | При настройке CI/CD и исправлении pipeline |
 | [Workflow adoption record](docs/ai-delivery-infrastructure-plan.md) | Происхождение принятых документов и прежнее решение по Context Bundle Builder | При проверке истории workflow; текущие задачи находятся в Delivery Plan |
