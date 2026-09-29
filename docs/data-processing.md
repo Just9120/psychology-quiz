@@ -29,3 +29,7 @@ Telegram identity сохраняется для продолжения испо�
 - Согласовать backup retention/recovery так, чтобы восстановление старой копии не выдавалось за сохранение выполненного удаления.
 
 Статусы и Evidence остаются в [delivery plan](delivery-plan.md); AC-PRIV-01/02/05 не закрываются этим документом целиком.
+
+## Сохранённый student PWA state
+
+Перед deprecation приглашений/связанной схемы выполнить [read-only preflight](../scripts/student_legacy_preflight.py) в окружении с действующими `DATABASE_URL`/`DB_PATH` и `PWA_OWNER_EMAIL`: `python scripts/student_legacy_preflight.py` из root. В контейнере штатного API используются уже установленные runtime values: `docker compose -p psychology-quiz -f docker-compose.yml exec -T psych_quiz_miniapp_api python scripts/student_legacy_preflight.py`. Команда применима после поставки версии с этим script; повторный deploy ради inventory не требуется. Не публикуйте resolved env/DSN. Вывод содержит только агрегаты и метки snapshot; unknown owner/table означает отсутствие подтверждения, не отсутствие данных. Даже нулевые counts не разрешают удаление схемы: отдельно нужны согласованные migration/recovery и проверки consumers. Существующие accounts, приглашения, history и schema этим preflight не меняются.
