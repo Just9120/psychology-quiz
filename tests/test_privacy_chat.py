@@ -44,3 +44,13 @@ def test_telegram_learning_deletion_requires_private_repeat_confirmation(tmp_pat
         assert conn.execute("SELECT count(*) FROM quiz_sessions WHERE user_id=1").fetchone()[0] == 0
         assert conn.execute("SELECT count(*) FROM quiz_sessions WHERE user_id=?", (other["id"],)).fetchone()[0] == 1
         assert conn.execute("SELECT count(*) FROM users WHERE id=1").fetchone()[0] == 1
+
+    with closing(get_connection(str(bank))) as conn, conn:
+        conn.execute("""INSERT INTO web_accounts(email,password_hash,user_id,verified_at,created_at)
+            VALUES(?,?,?,?,?)""", ("owner@example.invalid", "test-only", other["id"], 1, 1))
+    update.effective_user = SimpleNamespace(id=777, username=None, first_name="Other", last_name=None)
+    asyncio.run(delete_data_command(update, context))
+    assert "learning_data_deletion_token" not in context.user_data
+    assert "связаны с аккаунтом PWA" in message.reply_text.await_args.args[0]
+    with closing(get_connection(str(bank))) as conn:
+        assert conn.execute("SELECT count(*) FROM quiz_sessions WHERE user_id=?", (other["id"],)).fetchone()[0] == 1
