@@ -20,6 +20,18 @@ class SyntheticEmbedding:
             yield value
 
 
+class FailingAfterFirstBatch(SyntheticEmbedding):
+    def __init__(self):
+        self.calls = 0
+
+    def embed(self, texts):
+        self.calls += 1
+        if self.calls == 2:
+            yield [0.0]
+            return
+        yield from super().embed(texts)
+
+
 def learning_state(dsn):
     """Read the actual application rows, not only the CI restore probe."""
     with psycopg.connect(dsn) as conn:
@@ -73,6 +85,13 @@ def test_private_rebuild_keeps_learning_state_and_replaces_only_index():
     with psycopg.connect(app_dsn) as conn:
         assert rebuild(conn, first, SyntheticEmbedding()) == 2
         conn.commit()
+        interrupted = [
+            ("synthetic-source-c", "2026-09-27T00:00:00Z", "c" * 64,
+             f"characters:{index}:{index + 1}", f"поддержка {index}")
+            for index in range(33)
+        ]
+        with pytest.raises(SearchError, match="invalid_embedding_dimensions"):
+            rebuild(conn, interrupted, FailingAfterFirstBatch())
         conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
         verify_index_content(conn, first)
         with psycopg.connect(app_dsn) as writer:
