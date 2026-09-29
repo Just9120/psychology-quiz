@@ -30,7 +30,7 @@ def manifest(conn: Connection) -> dict:
     storage = list(conn.execute("SELECT * FROM postgres_storage WHERE singleton=1").fetchone())
     import_record = conn.execute(
         "SELECT import_manifest FROM postgres_storage WHERE singleton=1").fetchone()[0]
-    return {
+    result = {
         "format": "psychology-postgres-backup-v1",
         "columns": {name: list(values) for name, values in columns.items()},
         "tables": projection(conn, columns),
@@ -39,6 +39,16 @@ def manifest(conn: Connection) -> dict:
         "import_manifest_sha256": hashlib.sha256(
             json.dumps(import_record, separators=(",", ":")).encode()).hexdigest(),
     }
+    from app.literature import load_literature_items
+    from app.reading_schema import TABLE, planned_projection, catalog_mapping_digest
+    items = load_literature_items()
+    if TABLE not in columns:
+        # Capture the exact allowed derivation before schema/data writes.
+        result["reading_work_migration"] = planned_projection(conn, items)
+    else:
+        result["reading_work_catalog_sha256"] = catalog_mapping_digest(items)
+    return result
+
 
 
 def verify_user_state(before: dict, after: dict) -> None:
@@ -62,6 +72,20 @@ def verify_user_state(before: dict, after: dict) -> None:
         if table in before["sequences"] and after["sequences"].get(table) != before["sequences"][table]:
             raise ValueError("PostgreSQL migration changed a user identity sequence")
     for table in after_columns.keys() - before_columns.keys() - REBUILDABLE_TABLES:
+        if table == "user_literature_work_progress":
+            from app.reading_schema import FIELDS, VERSION as READING_VERSION
+            proof = before.get("reading_work_migration")
+            if ("user_literature_progress" not in before_columns
+                    or not isinstance(proof, dict) or proof.get("version") != READING_VERSION
+                    or not isinstance(proof.get("catalog_sha256"), str)
+                    or re.fullmatch(r"[0-9a-f]{64}", proof["catalog_sha256"]) is None
+                    or proof.get("columns") != list(FIELDS)
+                    or after_columns[table] != list(FIELDS)
+                    or proof.get("projection") != after["tables"][table]
+                    or proof.get("catalog_sha256") != after.get("reading_work_catalog_sha256")
+                    or after["sequences"].get(table, 0) != 0):
+                raise ValueError("New reading state does not match the verified legacy derivation")
+            continue
         if (after["tables"][table]["rows"] != 0
                 or after["sequences"].get(table, 0) != 0):
             raise ValueError("New user-state table must be empty during migration")

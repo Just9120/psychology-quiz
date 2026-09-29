@@ -36,6 +36,7 @@ PERSONAL_TABLES = {
     "homework_attempts": ("session_id", {"session_id"}),
     "glossary_sessions": ("user_id", {"user_id", "snapshot", "state"}),
     "user_literature_progress": ("user_id", {"user_id", "private_note"}),
+    "user_literature_work_progress": ("user_id", {"user_id", "reading_status", "source_literature_id"}),
     "user_learning_goals": ("user_id", {"user_id"}),
     "user_achievements": ("user_id", {"user_id", "evidence_key"}),
     "user_review_events": ("user_id", {"user_id", "answer_key"}),

@@ -21,6 +21,8 @@ from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
 from app.homework_schema import migrate_homework_schema
 from app.privacy_schema import migrate_privacy_schema
+from app.reading_schema import migrate_reading_schema
+from app.literature import load_literature_items
 
 from dotenv import load_dotenv
 
@@ -66,10 +68,14 @@ def main() -> int:
             ensure_users_reading_mode_column(conn)
             ensure_quiz_sessions_difficulty_mode_column(conn)
             ensure_user_literature_progress_table(conn)
+            migrate_reading_schema(conn, load_literature_items())
             ensure_attempt_snapshots(conn)
         print(f"[OK] База данных инициализирована: {db_path}")
         print("[OK] SQL-схема успешно применена.")
         return 0
+    except ValueError:
+        print("[ERROR] Explicit reading/schema migration requires a decision; original records preserved.")
+        return 1
     except sqlite3.Error as exc:
         print(f"[ERROR] Ошибка SQLite: {exc}")
         return 1

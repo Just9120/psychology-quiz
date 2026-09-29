@@ -7,6 +7,8 @@ from __future__ import annotations
 
 from collections import defaultdict
 from datetime import datetime, timezone
+import hashlib
+import json
 from pathlib import Path
 
 from app.database import begin_write, is_postgres
@@ -16,8 +18,11 @@ TABLE = "user_literature_work_progress"
 SQL_PATH = Path(__file__).resolve().parent.parent / "sql" / "reading-work-v1.sql"
 STATUS_MAP = {"not_started": "not_started", "in_progress": "in_progress",
               "read": "read", "revisit": "deferred", "skipped": "deferred"}
-COLUMNS = {"user_id", "work_id", "reading_status", "started_at", "completed_at",
-           "updated_at", "last_opened_at", "source_literature_id"}
+FIELDS = ("user_id", "work_id", "reading_status", "started_at", "completed_at",
+          "updated_at", "last_opened_at", "source_literature_id")
+COLUMNS = set(FIELDS)
+LEGACY_FIELDS = ("user_id", "literature_id", "reading_status", "progress_percent", "started_at",
+                 "completed_at", "updated_at", "last_opened_at", "private_note", "remind_at")
 
 
 def _timestamp(value):
@@ -75,6 +80,43 @@ def plan_legacy_reading(rows, items):
     return result, unknown
 
 
+def legacy_rows(conn):
+    # Canonical SQLite init uses tuple rows; no row-factory mutation is needed.
+    return [dict(zip(LEGACY_FIELDS, row)) for row in conn.execute(
+        "SELECT " + ",".join(LEGACY_FIELDS) + " FROM user_literature_progress ORDER BY user_id,literature_id")]
+
+
+def catalog_mapping_digest(items):
+    pairs = sorted((item["id"], item["work_id"]) for item in items)
+    return hashlib.sha256(json.dumps(pairs, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
+
+
+def planned_projection(conn, items):
+    """Same row projection as backup reconciliation, with no personal values output."""
+    planned, unknown = plan_legacy_reading(legacy_rows(conn), items)
+    hashes = [hashlib.sha256(json.dumps([row[field] for field in FIELDS],
+               ensure_ascii=False, separators=(",", ":")).encode()).digest() for row in planned]
+    return {"version": VERSION, "columns": list(FIELDS),
+            "projection": {"rows": len(planned), "sha256": hashlib.sha256(b"".join(sorted(hashes))).hexdigest()},
+            "catalog_sha256": catalog_mapping_digest(items),
+            "unknown_association_rows_preserved": unknown}
+
+
+def insert_planned_rows(conn, planned):
+    for row in planned:
+        conn.execute(f"INSERT INTO {TABLE} ({','.join(FIELDS)}) VALUES (?,?,?,?,?,?,?,?)",
+                     tuple(row[field] for field in FIELDS))
+
+
+def populate_imported_reading(conn, items):
+    """Only verified current empty targets importing a legacy schema call this."""
+    if conn.execute(f"SELECT 1 FROM {TABLE} LIMIT 1").fetchone():
+        raise ValueError("Imported reading state requires an empty work table")
+    planned, unknown = plan_legacy_reading(legacy_rows(conn), items)
+    insert_planned_rows(conn, planned)
+    return {"work_rows": len(planned), "unknown_association_rows_preserved": unknown}
+
+
 def migrate_reading_schema(conn, items):
     """Run only from explicit initialization; marker never replays personal state."""
     begin_write(conn, "schema")
@@ -91,12 +133,7 @@ def migrate_reading_schema(conn, items):
         return {"already_applied": True}
     if columns:
         raise ValueError("Unknown partial reading work schema; refusing adoption")
-    legacy_fields = ("user_id", "literature_id", "reading_status", "progress_percent", "started_at",
-                     "completed_at", "updated_at", "last_opened_at", "private_note", "remind_at")
-    # Canonical SQLite init uses tuple rows; do not require changing its factory.
-    rows = [dict(zip(legacy_fields, row)) for row in conn.execute(
-        "SELECT " + ",".join(legacy_fields) + " FROM user_literature_progress ORDER BY user_id,literature_id")]
-
+    rows = legacy_rows(conn)
     # Validate the complete plan before DDL or data writes.
     planned, unknown = plan_legacy_reading(rows, items)
     ddl = SQL_PATH.read_text(encoding="utf-8")
@@ -105,11 +142,7 @@ def migrate_reading_schema(conn, items):
     for statement in ddl.split(";"):
         if statement.strip():
             conn.execute(statement)
-    fields = ("user_id", "work_id", "reading_status", "started_at", "completed_at",
-              "updated_at", "last_opened_at", "source_literature_id")
-    for row in planned:
-        conn.execute(f"INSERT INTO {TABLE} ({','.join(fields)}) VALUES (?,?,?,?,?,?,?,?)",
-                     tuple(row[field] for field in fields))
+    insert_planned_rows(conn, planned)
     conn.execute("INSERT INTO schema_migrations(version) VALUES(?)", (VERSION,))
     return {"already_applied": False, "legacy_rows_preserved": len(rows),
             "work_rows": len(planned), "unknown_association_rows_preserved": unknown}

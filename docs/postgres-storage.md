@@ -1,5 +1,13 @@
 # PostgreSQL storage
 
+## Подготовленная миграция чтения v8
+
+В текущей локальной Goal подготовлен additive `postgres-v8`: [work-level reading DDL](../sql/reading-work-v1.sql) и [migration planner](../app/reading_schema.py). Прежние `user_literature_progress` строки и все их поля остаются историей без перезаписи. Новые отметки принимают четыре статуса и выбираются по последней подтверждённой отметке одного catalog work. Конфликт одинаковых/невалидных timestamps останавливает переход.
+
+Canonical init выполняет upgrade под прежними writer-stop/backup/restore/lock preconditions. [Preservation manifest](../app/postgres_recovery.py) сверяет исходные строки и exact derived projection новых work rows, columns и catalog mapping digest; общий запрет произвольных новых user rows сохраняется. Проверка старых schema hashes v1–v7 остаётся неизменной. Fresh initialization и импорт прежних SQLite versions используют отдельные ветви, не усыновляют неизвестный namespace и не переносят повторно отметки поверх текущего состояния.
+
+Это подготовленный код, не evidence production migration. Runtime/client переход и удаление новых work rows при actor deletion ещё требуют завершения в PR2; фактические CI/CD records находятся в [плане](delivery-plan.md). Helper не запускать отдельно на VPS.
+
 PostgreSQL 18.6, psycopg 3.3.6. Production cutover выполнен 20.09.2026; его Evidence и первичные records — в [delivery plan](delivery-plan.md). Раздел подготовки ниже нужен только для нового согласованного cutover; для последующих изменений используется обычный CD. Фактическая версия восстанавливается по CI/CD records и host phase record.
 
 ## Выбор БД и контракт
