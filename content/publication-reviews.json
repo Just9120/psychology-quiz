@@ -2286,6 +2286,38 @@
         }
       ],
       "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+    },
+    "literature:lit_consult_lecture_01": {
+      "decision": "approved",
+      "item_sha256": "1dc5b63c125ee92b179e47a60e457c7999368dbde2d3b5b8482717e742e3b7aa",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
+          "modified_time": "2026-06-07T20:48:25.702Z",
+          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
+          "locator": "extracted text, Unicode characters 56714:56974"
+        }
+      ],
+      "rationale": "Урок явно называет книгу Роджерса; год и издание не определяются из записи."
+    },
+    "literature:lit_consult_lecture_02": {
+      "decision": "approved",
+      "item_sha256": "83308494d28efb6098555bd8033184d151a8555d8e68274967601f85dc7054b0",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-09-29",
+      "sources": [
+        {
+          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
+          "modified_time": "2026-06-07T20:48:25.702Z",
+          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
+          "locator": "extracted text, Unicode characters 68091:68351"
+        }
+      ],
+      "rationale": "Урок прямо рекомендует книгу Ялома; содержание книги не проверено."
     }
   }
 }

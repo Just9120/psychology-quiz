@@ -323,5 +323,77 @@
       "Год издания не установлен по исходному списку."
     ],
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_consult_lecture_01",
+    "work_id": "lit_consult_lecture_01",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Становление личности",
+    "authors": [
+      "Роджерс Карл"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 100,
+    "global_order": 310100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в уроке о клиент-центрированном консультировании.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0"
+    ],
+    "source": {
+      "id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
+      "title": "Урок 1. Введение в психологическое консультирование",
+      "locator": "extracted text, Unicode characters 56714:56974",
+      "citation": "Карл Роджерс опубликовал книгу «Становление личности»."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и конкретное издание не названы в уроке; содержание и доступность книги не проверены."
+    ],
+    "notes": "Проверено только упоминание книги в текущем тексте урока; это не подтверждение её содержания."
+  },
+  {
+    "id": "lit_consult_lecture_02",
+    "work_id": "lit_consult_lecture_02",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Дар психотерапии",
+    "authors": [
+      "Ялом Ирвин"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 110,
+    "global_order": 310110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга рекомендована в уроке о психологическом консультировании.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0"
+    ],
+    "source": {
+      "id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
+      "title": "Урок 1. Введение в психологическое консультирование",
+      "locator": "extracted text, Unicode characters 68091:68351",
+      "citation": "У Ялома рекомендую «Дар психотерапии»."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и конкретное издание не названы в уроке; содержание и доступность книги не проверены."
+    ],
+    "notes": "Проверено только упоминание книги в текущем тексте урока; это не подтверждение её содержания."
   }
 ]
