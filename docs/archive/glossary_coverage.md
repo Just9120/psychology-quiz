@@ -1,6 +1,6 @@
 # Glossary coverage
 
-> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](../project-spec.md), текущие AC/findings и выбор работы — [план](../delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
 
 This document records the repository-backed glossary coverage added by `GLOSSARY-COVERAGE-EXPANSION-ALL-TOPICS-001`.
 

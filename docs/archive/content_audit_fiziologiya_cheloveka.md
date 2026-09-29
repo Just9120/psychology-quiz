@@ -1,6 +1,6 @@
 # Content audit: `module1/fiziologiya_cheloveka.json`
 
-> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](../project-spec.md), текущие AC/findings и выбор работы — [план](../delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
 
 ## Scope and constraints
 - Изначальный аудит был выполнен в режиме **review-only** без правки фактического содержания question bank.
