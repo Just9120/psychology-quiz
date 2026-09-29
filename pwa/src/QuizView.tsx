@@ -1,21 +1,23 @@
 import { Icon } from './Icon'
 import type { Answer, Feedback, Question, RunnerState } from './types'
 
-export function QuizView({ state, feedback, feedbackQuestion, selected, pending, busy, onSelect, onAnswer, onNext, onSetup, onRefresh }: {
+export function QuizView({ state, feedback, feedbackQuestion, selected, pending, busy, onSelect, onAnswer, onNext, onSetup, onRefresh, homeworkTitle }: {
   state: RunnerState; feedback: Feedback | null; feedbackQuestion: Question | null
   selected: number | null; pending: Answer | null; busy: boolean
   onSelect: (choice: number) => void; onAnswer: (choice?: number) => void; onNext: () => void; onSetup: () => void; onRefresh: () => void
+  homeworkTitle?: string
 }) {
   const question = feedback ? feedbackQuestion : state.current_question
   const total = question?.total_questions ?? state.result?.total_questions ?? state.progress?.total_questions ?? 0
   const answered = state.progress?.answered_count ?? (state.state === 'completed' ? total : 0)
   if (!feedback && state.state === 'completed' && state.result) {
     const result = state.result
-    return <section className="result-page page-width"><span className="eyebrow">ЕЩЁ ОДИН ШАГ ВПЕРЁД</span><h1>Квиз завершён</h1><p className="lead">Хорошая работа. Вопросы помогают увидеть, что уже знакомо и к чему стоит вернуться.</p>
-      <div className="panel result-card"><div className="score-ring" style={{ background: `conic-gradient(var(--green) ${result.percent}%, var(--line) 0)` }}><div><strong>{result.score}<span> / {result.total_questions}</span></strong><small>правильных ответов</small></div></div><h2>{result.percent}% верных ответов</h2><p className="muted">Результат сохранён в вашем аккаунте.</p><button className="button primary" disabled={busy} onClick={onSetup}>Выбрать следующий квиз<Icon name="arrow" /></button></div>
+    const homeworkPassed = homeworkTitle && result.total_questions > 0 && result.score * 5 >= result.total_questions * 4
+    return <section className="result-page page-width"><span className="eyebrow">ЕЩЁ ОДИН ШАГ ВПЕРЁД</span><h1>{homeworkTitle ? 'Тест задания завершён' : 'Квиз завершён'}</h1><p className="lead">{homeworkTitle ?? 'Хорошая работа. Вопросы помогают увидеть, что уже знакомо и к чему стоит вернуться.'}</p>
+      <div className="panel result-card"><div className="score-ring" style={{ background: `conic-gradient(var(--green) ${result.percent}%, var(--line) 0)` }}><div><strong>{result.score}<span> / {result.total_questions}</span></strong><small>правильных ответов</small></div></div><h2>{result.percent}% верных ответов</h2><p className="muted">{homeworkTitle ? homeworkPassed ? 'Выполнено: порог 80% достигнут в этой попытке.' : 'Порог 80% пока не достигнут. Можно пройти тест снова.' : 'Результат сохранён в вашем аккаунте.'}</p><button className="button primary" disabled={busy} onClick={onSetup}>{homeworkTitle ? 'К заданиям' : 'Выбрать следующий квиз'}<Icon name="arrow" /></button></div>
     </section>
   }
-  return <section className="quiz-page page-width"><div className="quiz-toolbar"><button className="text-button" disabled={busy} onClick={onSetup}>← К темам</button><span className="eyebrow">КВИЗ ПО ПСИХОЛОГИИ</span><span className="question-counter">{question ? `Вопрос ${question.order_index} из ${question.total_questions}` : 'Последний ответ'}</span></div>
+  return <section className="quiz-page page-width"><div className="quiz-toolbar"><button className="text-button" disabled={busy} onClick={onSetup}>{homeworkTitle ? '← К заданиям' : '← К темам'}</button><span className="eyebrow">{homeworkTitle ?? 'КВИЗ ПО ПСИХОЛОГИИ'}</span><span className="question-counter">{question ? `Вопрос ${question.order_index} из ${question.total_questions}` : 'Последний ответ'}</span></div>
     <progress className="quiz-progress" value={answered} max={Math.max(total, 1)} aria-label="Отвечено вопросов" />
     <article className={`panel question-panel ${feedback ? feedback.is_correct ? 'question-panel-correct' : 'question-panel-incorrect' : ''}`}>
       {feedback ? <><div className={`feedback-label ${feedback.is_correct ? 'correct' : 'incorrect'}`} role="status"><Icon name={feedback.is_correct ? 'check' : 'close'} />{feedback.is_correct ? 'Верно' : feedback.knowledge_gap ? 'Пробел знаний сохранён' : 'Разберём этот ответ'}</div>

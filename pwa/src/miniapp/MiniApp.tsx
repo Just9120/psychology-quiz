@@ -2,20 +2,23 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Brand } from '../Icon'
 import { QuizSetup } from '../QuizSetup'
 import { QuizView } from '../QuizView'
+import { HomeworkView } from '../HomeworkView'
 import { GlossaryView } from '../GlossaryView'
 import { LearningView } from '../LearningView'
-import type { Answer, Feedback, GlossaryState, GlossaryTopic, GoalKind, Question, RunnerState, Setup, SetupOptions } from '../types'
+import type { Answer, Feedback, GlossaryState, GlossaryTopic, GoalKind, HomeworkAssignment, HomeworkCatalog, Question, RunnerState, Setup, SetupOptions } from '../types'
 import { miniApi, MiniAppError, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 import { MiniLiterature } from './MiniLiterature'
 import { MiniProgress } from './MiniProgress'
 import type { ProgressOverview } from '../types'
 
-type Page = 'quiz' | 'setup' | 'glossary' | 'literature' | 'learning' | 'progress'
+type Page = 'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'glossary' | 'literature' | 'learning' | 'progress'
 type Learning = { review: Awaited<ReturnType<typeof miniApi.review>>; mastery: Awaited<ReturnType<typeof miniApi.mastery>>; goals: Awaited<ReturnType<typeof miniApi.goals>>; achievements: Awaited<ReturnType<typeof miniApi.achievements>> }
 
 const errors: Record<string, string> = {
   telegram_required: 'Откройте Mini App из Telegram.',
   no_questions: 'Для выбранных условий пока нет вопросов.',
+  homework_unavailable: 'Этот тест пока недоступен. Обновите список заданий.',
+  invalid_homework: 'Выберите задание из актуального списка.',
   no_reviews: 'На сегодня нет материалов для повторения.',
   active_attempt: 'Незавершённую попытку можно заменить только после подтверждения.',
   active_attempt_confirmation_required: 'Есть незавершённый квиз. Продолжите его или подтвердите замену.',
@@ -35,6 +38,9 @@ export function MiniApp() {
   const [selected, setSelected] = useState<number | null>(null)
   const [pending, setPending] = useState<Answer | null>(null)
   const [uncertain, setUncertain] = useState(false)
+  const [homeworkCatalog, setHomeworkCatalog] = useState<HomeworkCatalog | null>(null)
+  const [homeworkId, setHomeworkId] = useState<string | null>(null)
+  const [homeworkConfirmId, setHomeworkConfirmId] = useState<string | null>(null)
   const [glossary, setGlossary] = useState<GlossaryState | null>(null)
   const [glossaryTopics, setGlossaryTopics] = useState<GlossaryTopic[]>([])
   const [literatureItems, setLiteratureItems] = useState<MiniLiteratureItem[] | null>(null)
@@ -64,8 +70,29 @@ export function MiniApp() {
   }
   async function refreshQuiz() {
     const saved = await miniApi.state()
+    const sameHomework = page === 'homeworkQuiz' && homeworkId && saved.runner_state.session?.session_id === state?.session?.session_id
     applyState(saved.runner_state, saved.runner_state.state === 'in_progress' ? saved.recent_answer_feedback ?? null : null,
       saved.runner_state.state === 'in_progress' ? saved.recent_answer_question ?? null : null)
+    if (sameHomework) setPage('homeworkQuiz')
+    else setHomeworkId(null)
+  }
+  async function loadHomework() {
+    setHomeworkCatalog(await miniApi.homework()); setHomeworkConfirmId(null); setPage('homework')
+  }
+  async function startHomework(id: string, replace: boolean) {
+    const current = await miniApi.state()
+    const active = current.runner_state.state === 'in_progress' ? current.runner_state.session?.session_id ?? null : null
+    if (active && !replace) { setHomeworkConfirmId(id); return }
+    const result = await miniApi.startHomework(id, active, Boolean(active && replace))
+    applyState(result.runner_state); setHomeworkId(id); setHomeworkConfirmId(null); setPage('homeworkQuiz')
+  }
+  async function resumeHomework(item: HomeworkAssignment) {
+    const current = await miniApi.state()
+    if (current.runner_state.session?.session_id !== item.active_session_id || current.runner_state.state !== 'in_progress') {
+      await loadHomework(); throw new MiniAppError('attempt_changed', 409)
+    }
+    applyState(current.runner_state, current.recent_answer_feedback ?? null, current.recent_answer_question ?? null)
+    setHomeworkId(item.id); setPage('homeworkQuiz')
   }
   async function loadInitial() {
     const [available, saved] = await Promise.all([miniApi.options(), miniApi.state()])
@@ -82,7 +109,7 @@ export function MiniApp() {
   }, [])
 
   async function start(setup: Setup, confirmed: boolean) {
-    try { applyState((await miniApi.setup({ ...setup, replace_active: confirmed,
+    try { setHomeworkId(null); applyState((await miniApi.setup({ ...setup, replace_active: confirmed,
       expected_session_id: confirmed ? state?.session?.session_id ?? null : null })).runner_state) }
     catch (failure) {
       if (failure instanceof MiniAppError && !failure.status) setUncertain(true)
@@ -155,6 +182,7 @@ export function MiniApp() {
   return <div className="app-layout miniapp-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
     <aside className="sidebar"><Brand /><nav aria-label="Разделы Mini App">
       <button className="nav-item" onClick={() => setPage(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}>Квиз</button>
+      <button className="nav-item" disabled={busy} onClick={() => void run(loadHomework)}>Домашние задания</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadGlossary)}>Глоссарий</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadLiterature)}>Литература</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadProgress)}>Мой прогресс</button>
@@ -162,7 +190,9 @@ export function MiniApp() {
     </nav></aside>
     <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram</header><main id="main-content" className="workspace-main" tabIndex={-1}>
       {error && <div role="alert" className="app-alert">{error} <button type="button" onClick={() => setError('')} aria-label="Закрыть сообщение">×</button></div>}
-      {page === 'literature' && literatureItems ? <MiniLiterature initial={literatureItems} topics={literatureTopics} busy={busy} run={run} />
+      {page === 'homework' && homeworkCatalog ? <HomeworkView catalog={homeworkCatalog} busy={busy} confirmId={homeworkConfirmId} onStart={id => void run(() => startHomework(id, false))} onConfirm={id => void run(() => startHomework(id, true))} onResume={item => void run(() => resumeHomework(item))} onRefresh={() => void run(loadHomework)} />
+        : page === 'homeworkQuiz' && state ? <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => void run(loadHomework)} onRefresh={() => void run(refreshQuiz)} homeworkTitle={homeworkCatalog?.assignments.find(item => item.id === homeworkId)?.title ?? 'Домашнее задание'} />
+        : page === 'literature' && literatureItems ? <MiniLiterature initial={literatureItems} topics={literatureTopics} busy={busy} run={run} />
         : page === 'progress' && progress ? <MiniProgress data={progress} busy={busy} onRefresh={() => void run(loadProgress)} />
         : page === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} client={miniApi} />
         : page === 'learning' && learning ? <LearningView {...learning} busy={busy} onRefresh={() => void run(loadLearning)} onSaveGoal={(kind: GoalKind, target: number) => void run(async () => { await miniApi.setGoal(kind, target); await loadLearning() })} onStartQuiz={replace => void run(() => startReviewQuiz(replace))} onStartGlossary={(topic, replace) => void run(() => startReviewGlossary(topic, replace))} />

@@ -12,7 +12,7 @@ from pathlib import Path
 import sqlite3
 
 from app.database import Connection, begin_write, connect_database, is_postgres_target
-from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, V2_TABLES, V3_TABLES, V4_TABLES, initialize_schema, table_columns, verify_schema
+from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, V2_TABLES, V3_TABLES, V4_TABLES, V5_TABLES, initialize_schema, table_columns, verify_schema
 
 
 def quote_identifier(name: str) -> str:
@@ -90,8 +90,10 @@ def import_snapshot(source_path: Path, target: str) -> dict:
     with closing(sqlite3.connect(source_path.resolve().as_uri() + "?mode=ro", uri=True)) as source:
         source.execute("BEGIN")
         source_tables = {row[0] for row in source.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        if "web_profile_names" in source_tables:
-            tables, version = TABLES, "postgres-v5"
+        if "homework_attempts" in source_tables:
+            tables, version = TABLES, "postgres-v6"
+        elif "web_profile_names" in source_tables:
+            tables, version = V5_TABLES, "postgres-v5"
         elif "pwa_invitations" in source_tables:
             tables, version = V4_TABLES, "postgres-v4"
         elif "user_learning_goals" in source_tables:

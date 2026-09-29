@@ -33,6 +33,7 @@ from app.db import (
 )
 from app.database import begin_write
 from app.glossary import GLOSSARY_QUIZ_SESSION_KEY
+from app.homework import outcome_for_session
 from app.attempt_content import get_attempt_content
 from app.handler_latency import HandlerLatency as _HandlerLatency
 from app.miniapp_entrypoint_handlers import MINI_APP_BUTTON_TEXT
@@ -279,7 +280,13 @@ def build_selected_mix_keyboard(categories, selected_ids: set[int]) -> InlineKey
     return InlineKeyboardMarkup(keyboard)
 
 
-def build_quiz_finished_text(score: int, total_questions: int) -> str:
+def build_quiz_finished_text(score: int, total_questions: int, homework_outcome=None) -> str:
+    if homework_outcome is not None:
+        mark = "Выполнено ✅" if homework_outcome["passed"] else "Пока не выполнено"
+        return ("<b>Тест домашнего задания завершён</b>\n\n"
+                f"<b>Результат:</b> {score} из {total_questions}. {mark}\n\n"
+                "Отметка относится только к тесту, не к эссе или упражнению. "
+                "Откройте /homework для просмотра заданий и повторной попытки.")
     return ("<b>Викторина завершена 🎉</b>\n\n" f"<b>Результат:</b> {score} из {total_questions}\n\n" f"Чтобы начать новую викторину, нажмите {START_QUIZ_BUTTON_TEXT} или отправьте /quiz.")
 
 
@@ -1496,6 +1503,8 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
             "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
             "is_last_question": is_last_question,
             "finalized": finalized,
+            "homework_outcome": outcome_for_session(
+                conn, actor_user_id=int(user_row["id"]), session_id=session_id) if is_last_question else None,
         }
 
 
@@ -1603,7 +1612,7 @@ async def classic_reply_text_answer_handler(update: Update, context: ContextType
                     latency,
                     message.reply_text(
                         f"{feedback_text}\n\n"
-                        f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}",
+                        f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']), result.get('homework_outcome'))}",
                         reply_markup=get_main_menu_keyboard() if message.chat.type == "private" else None,
                         parse_mode="HTML",
                     ),
@@ -1785,6 +1794,8 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                     "reading_mode": get_user_reading_mode(conn, int(user_row["id"])),
                     "is_last_question": is_last_question,
                     "finalized": finalized,
+                    "homework_outcome": outcome_for_session(
+                        conn, actor_user_id=int(user_row["id"]), session_id=session_id) if is_last_question else None,
                 }
 
         db_started_at = time.perf_counter()
@@ -1847,7 +1858,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 f"{selected_line}"
                 f"{correct_line}"
                 f"<b>Пояснение:</b> {rendered_explanation}\n\n"
-                f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']))}"
+                f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']), result.get('homework_outcome'))}"
             )
             await (_main_attr("send_quiz_result_with_main_menu") or send_quiz_result_with_main_menu)(query, message, latency=latency)
             latency.summary()

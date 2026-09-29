@@ -33,6 +33,7 @@ PERSONAL_TABLES = {
     "quiz_session_selected_categories": ("session_id", {"session_id"}),
     "quiz_session_questions": ("session_id", {"session_id", "content_snapshot"}),
     "quiz_answers": ("session_id", {"session_id"}),
+    "homework_attempts": ("session_id", {"session_id"}),
     "glossary_sessions": ("user_id", {"user_id", "snapshot", "state"}),
     "user_literature_progress": ("user_id", {"user_id", "private_note"}),
     "user_learning_goals": ("user_id", {"user_id"}),

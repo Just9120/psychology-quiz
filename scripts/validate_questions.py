@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from app.content_publication import load_policy, validate_publications
 from app.case_content import case_error
 from app.quiz_overlap import memberships
+from app.homework import load_catalog as load_homework_catalog
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TOPICS_PATH = REPO_ROOT / "content" / "topics.json"
@@ -171,6 +172,14 @@ def validate() -> list[str]:
                           + ", ".join(missing))
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         errors.append(f"Invalid quiz overlap groups: {exc}")
+    try:
+        for assignment in load_homework_catalog():
+            missing = sorted(set(assignment["question_ids"]) - approved_ids)
+            if missing:
+                errors.append(f"Homework {assignment['id']} references non-approved questions: "
+                              + ", ".join(missing))
+    except (OSError, json.JSONDecodeError, ValueError, TypeError, KeyError) as exc:
+        errors.append(f"Invalid homework catalog: {exc}")
     return errors
 
 
