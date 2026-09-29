@@ -5,6 +5,7 @@ import hmac
 import json
 import logging
 import re
+from app.request_body import MAX_REQUEST_BODY_BYTES
 from app.database import OperationalError, OPERATIONAL_ERRORS
 import time
 import urllib.parse
@@ -827,6 +828,20 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
             error_code or "-",
         )
 
+    def _reject_request_body(self, endpoint: str, status: HTTPStatus, error: str) -> None:
+        code, headers, body = _json(status, {"ok": False, "error": error})
+        # The unread/rejected body must not become another request on this socket.
+        self.close_connection = True
+        self.send_response(code)
+        for name, value in headers.items():
+            self.send_header(name, value)
+        self.send_header("Connection", "close")
+        self._set_common_headers()
+        self.end_headers()
+        self.wfile.write(body)
+        logger.info("miniapp_api endpoint=%s method=POST status=%s error_code=%s",
+                    endpoint, code, error)
+
     def do_POST(self):
         started_at = time.time()
         endpoint = self.path.split("?")[0]
@@ -835,7 +850,19 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         if endpoint not in {"/miniapp/answer", "/miniapp/setup", "/miniapp/homework/start", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
-        length = int(self.headers.get("Content-Length", "0"))
+        try:
+            lengths = self.headers.get_all("Content-Length", [])
+            if len(lengths) > 1 or self.headers.get("Transfer-Encoding"):
+                raise ValueError()
+            length = int(lengths[0] if lengths else "0")
+            if length < 0:
+                raise ValueError()
+        except ValueError:
+            self._reject_request_body(endpoint, HTTPStatus.BAD_REQUEST, "invalid_body_length")
+            return
+        if length > MAX_REQUEST_BODY_BYTES:
+            self._reject_request_body(endpoint, HTTPStatus.REQUEST_ENTITY_TOO_LARGE, "body_too_large")
+            return
         body = self.rfile.read(length)
         init_data, payload_body, body_request_id, transport = _extract_transport_payload(self.headers, body)
         request_id = body_request_id or request_id

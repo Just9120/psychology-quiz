@@ -8,7 +8,9 @@ from typing import Any
 TELEGRAM_BOT_API_URL_RE = re.compile(r"(https?://api\.telegram\.org/(?:file/)?bot)([^/\s]+)")
 NOISY_HTTP_CLIENT_LOGGERS = (
     "httpx",
+    "httpx2",
     "httpcore",
+    "httpcore2",
     "telegram.request",
 )
 

@@ -2,6 +2,7 @@
 import asyncio
 import json
 import logging
+from app.request_body import RequestBodyTooLarge, read_request_body
 from app.database import OPERATIONAL_ERRORS, begin_write
 from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements, homework
 from app.mastery import overview as mastery_overview
@@ -199,11 +200,10 @@ def install_web_api(app, auth: WebAuth) -> None:
             if method == "POST":
                 if request.headers.get("content-type", "").split(";")[0].strip().lower() != "application/json":
                     raise AuthError("json_required", 415)
-                body = bytearray()
-                async for part in request.stream():
-                    body.extend(part)
-                    if len(body) > 16384:
-                        raise AuthError("body_too_large", 413)
+                try:
+                    body = await read_request_body(request.stream())
+                except RequestBodyTooLarge:
+                    raise AuthError("body_too_large", 413) from None
                 try:
                     payload = json.loads(body)
                 except (ValueError, UnicodeError, RecursionError):

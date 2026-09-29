@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from app.request_body import RequestBodyTooLarge, read_request_body
 from app.database import DATABASE_ERRORS, is_postgres, is_postgres_target, resolve_database_target
 from contextlib import closing
 from pathlib import Path
@@ -283,7 +284,16 @@ def create_app(
     async def _post_builder_response(endpoint: str, request: Request, builder: Any, *builder_args: Any) -> Response:
         started_at = time.perf_counter()
         request_id = _read_request_id(request.headers)
-        raw_body = await request.body()
+        try:
+            raw_body = await read_request_body(request.stream())
+        except RequestBodyTooLarge:
+            body = b'{"ok":false,"error":"body_too_large"}'
+            response = _to_response(413, {"Content-Type": "application/json; charset=utf-8"}, body)
+            _set_common_headers(response, request)
+            _log_request(endpoint=endpoint, method="POST", status=413, started_at=started_at,
+                         request_id=request_id, transport="body_limit", body=body,
+                         slow_request_ms=slow_request_ms)
+            return response
         init_data, payload_body, body_request_id, transport = _extract_transport_payload(request.headers, raw_body)
         request_id = body_request_id or request_id
         status, headers, body = await _run_builder_in_thread(
