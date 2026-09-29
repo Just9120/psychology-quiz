@@ -11871,7 +11871,7 @@
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 20700:22150, 24900:25700"
         }
       ]
     },
@@ -11897,7 +11897,7 @@
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 27700:28500"
         }
       ]
     },
@@ -12159,7 +12159,7 @@
           "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
           "modified_time": "2026-05-14T11:25:02.862Z",
           "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 8900:11800, 18900:21400, 22600:24000, 42500:44900, 56100:57400, 80000:82600, 92700:93800"
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 106600:109600"
         }
       ]
     },
