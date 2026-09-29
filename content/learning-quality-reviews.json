@@ -1913,8 +1913,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7580:8090, 10500:13700"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7580:8090, 10500:13700"
         }
       ]
     },
@@ -1939,8 +1939,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2300:3650, 4000:4620"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3650, 4000:4620"
         }
       ]
     },
@@ -1967,8 +1967,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4300:4800; method named, intervention/control detail not established"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 4300:4800; method named, intervention/control detail not established"
         }
       ]
     },
@@ -1993,8 +1993,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7900:8290, 4000:4620"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7900:8290, 4000:4620"
         }
       ]
     },
@@ -2718,8 +2718,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9310:10350"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 9310:10350"
         }
       ]
     },
@@ -2770,8 +2770,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
         }
       ]
     },
@@ -2981,8 +2981,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13100:13680"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 13100:13680"
         }
       ]
     },
@@ -3165,8 +3165,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
         }
       ]
     },
@@ -3245,8 +3245,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2650:3530"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2650:3530"
         }
       ]
     },
@@ -3379,8 +3379,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
         }
       ]
     },
@@ -3408,8 +3408,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7580:8090, 9310:10350"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7580:8090, 9310:10350"
         }
       ]
     },
@@ -3437,8 +3437,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:4620"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 4000:4620"
         }
       ]
     },
@@ -3467,8 +3467,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4300:4800; method named, intervention/control detail not established"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 4300:4800; method named, intervention/control detail not established"
         }
       ]
     },
@@ -3496,8 +3496,8 @@
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "a32736e6de3eee0c32ddcb0d49aa98b7041aa21cf5a65bf55b02fbeda12317b9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7580:8290, 4000:4620"
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7580:8290, 4000:4620"
         }
       ]
     },
