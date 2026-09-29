@@ -121,16 +121,6 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 
 Owner PWA auth backend поставляется выключенным по умолчанию. Переменные, API contract, mail/session/linking policy и условия включения — в [PWA auth](docs/pwa-auth.md). Новые credentials не заменяют Telegram initData в прежних routes.
 
-## Личный Obsidian Vault
-
-`scripts/obsidian_vault.py` из корня репозитория строит Markdown только в отдельном каталоге приватного репозитория владельца, вне публичного `psychology-quiz`. Входы `--manifest`, `--inventory` и `--processing` — приватные JSON: текущий полный Drive inventory, revision-bound processing review и вручную проверенный список заметок. Каждый note указывает `id`, `title`, `body`, `source_id`, точную тройку `source_revision`, `source_sha256`, `source_locator`, `reviewer`, `reviewed_at`; опциональны `links`, `question_ids`, `term_ids`, `literature_ids`. Скрипт отклоняет непроверенный/изменённый источник и битые внутренние wikilinks. Он не создаёт заметки из непроверенного текста автоматически.
-
-```bash
-python scripts/obsidian_vault.py --manifest data/vault-notes-private.json --inventory data/source-inventory-current.json --processing data/source-processing-current.json --vault /path/to/private/owner-vault
-```
-
-Перед первым запуском проверьте, что `--vault` действительно является отдельным приватным checkout с доступом только владельца. Скрипт владеет лишь его `generated/`: личные файлы вне этого каталога не трогает, а изменённый вручную сгенерированный файл не перезаписывает. Приватные JSON, исходные тексты и сам Vault не добавляйте в публичный Git. Подготовленный exporter сам по себе не подтверждает создание приватного GitHub-репозитория, содержательную проверку всех заметок или их поставку; состояния AC-KNW-01/03/04 — в [плане](docs/delivery-plan.md).
-
 ## PWA local run и проверки
 
 Рабочий каталог `pwa/`; Node **22.23.1**, npm **12.0.2**, [package-lock.json](pwa/package-lock.json). Установите Python dependencies в отдельное окружение по командам выше.
