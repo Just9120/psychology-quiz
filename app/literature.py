@@ -66,7 +66,7 @@ def load_access_links() -> dict[str, list[dict[str, str]]]:
                 checked_date = isinstance(checked, str) and date.fromisoformat(checked).isoformat() == checked
             except ValueError:
                 checked_date = False
-            if (fmt not in {"text", "audio"} or fmt in seen
+            if (not isinstance(fmt, str) or fmt not in {"text", "audio"} or fmt in seen
                     or offer["provider"] != "Литрес" or offer["access"] != "provider_terms"
                     or not checked_date
                     or parsed is None or parsed.scheme != "https" or parsed.hostname != "www.litres.ru"
