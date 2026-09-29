@@ -78,3 +78,34 @@ def test_topic_coverage_distinguishes_empty_kinds_unknown_notes_and_deduplicated
     assert topic["gaps"] == ["theory", "glossary"]
     assert topic["glossary_terms"] is None and topic["notes_state"] == "UNSET"
     assert topic["literature_works"] == 1 and data["unmapped_questions"] == 1
+
+
+def test_lesson_graph_requires_exact_question_edition_and_preserves_known_holds(monkeypatch, tmp_path):
+    from app.content_publication import fingerprint
+    current = {"schema_version": 1, "root_id": "private-root", "folders": {"private-root": [{
+        "page_token": None, "next_page_token": None,
+        "children": [{"id": "private-source", "title": "Lecture", "mime_type": "text/plain", "modified_time": "2026-01-01T00:00:00Z", "file_or_folder": "file", "parent_ids": ["private-root"]}],
+    }]}}
+    source = {"id": "private-source", "title": "Lecture", "modified_time": "2026-01-01T00:00:00Z", "snapshot_sha256": "a" * 64, "kind": "learning_material", "readable": True, "snapshot_kind": "extracted_text", "corpus_path": "Lecture", "reviewed_at": "2026-01-02", "reviewer": "private-editor"}
+    registry = {"schema_version": 1, "corpus_root_id": "private-root", "sources": [source]}
+    item = {"id": "question", "kind": "case", "text": "Current edition"}
+    topic = "t_aaaaaaaaaaaa"
+    curriculum = {"schema_version": 1, "disciplines": {"one": {"title": "Discipline"}}, "topics": {topic: {"title": "Public lesson", "discipline_id": "one", "source": {"source_id": source["id"], "modified_time": source["modified_time"], "snapshot_sha256": source["snapshot_sha256"]}}}, "editions": {"b" * 64: {"external_id": item["id"], "item_sha256": fingerprint(item), "topic_id": topic}}}
+    processed = {source["id"]: {"revision": [source["modified_time"], source["title"], "text/plain"], "review_state": "pending_review", "conflict_hold": {"reason": "private objection", "locator": "characters:1:2", "related_source_ids": []}}}
+    result = build(current, processed, "2026-01-02T00:00:00Z", registry=registry, curriculum=curriculum, published_items=[item])
+    lesson = result["coverage"]["lessons"][0]
+    assert lesson["known_hold"] and lesson["source_metadata_current"]
+    assert lesson["kinds"] == {"theory": 0, "glossary": 0, "case": 1}
+    assert not any(private in json.dumps(result) for private in ("private-source", "private-editor", "private objection", "characters:"))
+    changed = build(current, processed, "2026-01-02T00:00:00Z", registry=registry, curriculum=curriculum, published_items=[{**item, "text": "Changed edition"}])
+    assert changed["coverage"]["lessons"][0]["kinds"]["case"] == 0
+    assert changed["coverage"]["unmapped_published_questions"] == 1
+    monkeypatch.setattr(owner_content, "load_catalog", lambda: curriculum)
+    result["coverage"]["lessons"][0]["title"] = "private-source"
+    result["coverage"]["lessons"][0]["source_ref"] = "private-source"
+    path = tmp_path / "summary.json"
+    path.write_text(json.dumps(result), encoding="utf-8")
+    monkeypatch.setenv("OWNER_SOURCE_SUMMARY_PATH", str(path))
+    returned = owner_content.source_summary()
+    assert returned["coverage"]["lessons"][0]["title"] == "Public lesson"
+    assert "private-source" not in json.dumps(returned)

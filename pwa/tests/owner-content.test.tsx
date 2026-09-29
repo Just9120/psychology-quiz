@@ -18,3 +18,17 @@ it('distinguishes unknown coverage from empty kinds and filters modules without 
   await userEvent.setup().click(screen.getByRole('button', { name: 'Обновить обзор' }))
   expect(refresh).toHaveBeenCalledOnce()
 })
+
+
+it('shows dated lesson coverage, unresolved source holds and unknown notes independently', () => {
+  const data: OwnerContent = { ok: true, topics: [], unmapped_questions: 0,
+    sources: { state: 'PARTIAL', captured_at: '2026-09-30T00:00:00Z', files: 425, folders: 93, processing_records: 6, known_holds: 2, processing: { pending_review: 6, new_unprocessed: 419 },
+      coverage: { tracked_sources: 66, untracked_files: 359, source_metadata: { current: 66 }, unmapped_published_questions: 83,
+        lessons: [{ id: 'lesson', title: 'Проверенная учебная тема', discipline: 'Дисциплина', kinds: { theory: 0, glossary: 0, case: 0 }, source_metadata_current: false, processing_state: 'pending_review', known_hold: true, glossary_terms: null, notes: null, notes_state: 'UNSET' }] } } }
+  render(<OwnerContentView data={data} busy={false} onRefresh={() => {}} />)
+  expect(screen.getByText(/Редакция источника требует сверки/)).toBeVisible()
+  expect(screen.getByText('Есть неразрешённое возражение к источнику.')).toBeVisible()
+  expect(screen.getByText('Нет опубликованных вопросов с подтверждённой привязкой к этой теме.')).toBeVisible()
+  expect(screen.getByText(/Отдельные термины и личные заметки: покрытие по этой теме не подтверждено/)).toBeVisible()
+  expect(screen.getByText(/не подтверждает полное покрытие корпуса/)).toBeVisible()
+})

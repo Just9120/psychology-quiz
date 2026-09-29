@@ -763,7 +763,7 @@ private processing snapshot. Canonical команда, cwd root репозито
 
 ```bash
 python scripts/owner_source_summary.py --current data/current-inventory.json \
-  --processed data/current-processing.json --observed-at "$INVENTORY_OBSERVED_AT" \
+  --processed data/current-processing.json --observed-at "$INVENTORY_OBSERVED_AT" --reviewed \
   --output data/owner-source-summary-candidate.json
 ```
 
@@ -784,3 +784,13 @@ default — `/data/owner-source-summary.json`. Не передавайте вм�
 Отсутствующий/невалидный snapshot возвращает UNSET, без исключения приватного текста.
 Обзор показывает дату и ограничение актуальности, не объявляет старый snapshot текущим
 состоянием Drive. Изменение snapshot не меняет auth gates, банк или пользовательские данные.
+
+
+`--reviewed` включает только проверенные registry/curriculum edges и допущенные
+publication gate вопросы текущего checkout. Привязка требует совпадения ID и
+`item_sha256`; новая формулировка со старым ID остаётся вне lesson coverage.
+Snapshot хранит counts по публичным lesson IDs, состояние metadata/review и known hold;
+Drive ID/locator не переносит. API повторно проверяет вложенные counts и использует
+только текущие публичные lesson/discipline названия. Неизвестные термины/Obsidian notes
+не превращаются в нули. Цифры lesson coverage относятся к snapshot, а не к живому DB
+запросу. Обновление текущего банка само по себе не обновляет ignored snapshot.

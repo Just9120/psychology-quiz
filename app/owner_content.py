@@ -5,9 +5,49 @@ import os
 from pathlib import Path
 
 from app.glossary import load_glossary_entries
+from app.curriculum import load_catalog
 from app.literature import load_literature_items, load_topic_registry
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _coverage(raw):
+    if not isinstance(raw, dict):
+        raise ValueError("invalid_coverage")
+    for key in ("tracked_sources", "untracked_files", "unmapped_published_questions"):
+        if type(raw.get(key)) is not int or raw[key] < 0:
+            raise ValueError("invalid_coverage")
+    metadata = raw.get("source_metadata")
+    if (not isinstance(metadata, dict) or set(metadata) - {"current", "changed", "relocated", "missing"}
+            or any(type(value) is not int or value < 0 for value in metadata.values())
+            or sum(metadata.values()) != raw["tracked_sources"]):
+        raise ValueError("invalid_coverage")
+    catalog = load_catalog()
+    supplied = raw.get("lessons")
+    if not isinstance(supplied, list) or len(supplied) > len(catalog["topics"]):
+        raise ValueError("invalid_coverage")
+    lessons, seen = [], set()
+    for item in supplied:
+        if not isinstance(item, dict):
+            raise ValueError("invalid_coverage")
+        key = item.get("id")
+        if key not in catalog["topics"] or key in seen:
+            raise ValueError("invalid_coverage")
+        seen.add(key)
+        kinds = item.get("kinds")
+        if (not isinstance(kinds, dict) or set(kinds) != {"theory", "glossary", "case"}
+                or any(type(value) is not int or value < 0 for value in kinds.values())
+                or type(item.get("source_metadata_current")) is not bool
+                or type(item.get("known_hold")) is not bool
+                or item.get("processing_state") not in {"processed", "pending_review", "conflict_review", "new_unprocessed", "changed_unprocessed", "excluded", "missing"}):
+            raise ValueError("invalid_coverage")
+        topic = catalog["topics"][key]
+        lessons.append({"id": key, "title": topic["title"],
+                        "discipline": catalog["disciplines"][topic["discipline_id"]]["title"],
+                        "kinds": kinds, "source_metadata_current": item["source_metadata_current"],
+                        "processing_state": item["processing_state"], "known_hold": item["known_hold"],
+                        "glossary_terms": None, "notes": None, "notes_state": "UNSET"})
+    return {key: raw[key] for key in ("tracked_sources", "untracked_files", "source_metadata", "unmapped_published_questions")} | {"lessons": lessons}
 
 
 def source_summary():
@@ -35,7 +75,10 @@ def source_summary():
                 or raw["processing_records"] > raw["files"] or raw["known_holds"] > raw["processing_records"]):
             raise ValueError("invalid_snapshot")
         # Return an explicit allowlist, never arbitrary JSON supplied by an operator.
-        return {key: raw[key] for key in ("state", "captured_at", "files", "folders", "processing", "processing_records", "known_holds")}
+        result = {key: raw[key] for key in ("state", "captured_at", "files", "folders", "processing", "processing_records", "known_holds")}
+        if "coverage" in raw:
+            result["coverage"] = _coverage(raw["coverage"])
+        return result
     except (OSError, ValueError, TypeError, AttributeError):
         return {"state": "UNSET", "reason": "source_snapshot_invalid"}
 
