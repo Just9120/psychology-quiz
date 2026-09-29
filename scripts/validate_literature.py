@@ -39,6 +39,7 @@ VALID_READING_LEVELS = {"foundation", "core", "applied", "deepening", "advanced"
 VALID_STATUSES = {"draft", "review", "approved", "deprecated", "placeholder"}
 USER_READING_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
 VALID_PRIORITIES = {"low", "medium", "high"}
+VALID_IMPORTANCE = {"basic", "important", "additional", "advanced"}
 ID_RE = re.compile(r"^[a-z0-9_]+$")
 TAG_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
@@ -171,6 +172,9 @@ def validate_entry(
     priority = entry.get("priority")
     if priority is not None and priority not in VALID_PRIORITIES:
         errors.append(f"{label}: priority must be one of {', '.join(sorted(VALID_PRIORITIES))}")
+    importance = entry.get("importance")
+    if importance is not None and importance not in VALID_IMPORTANCE:
+        errors.append(f"{label}: importance must be one of {', '.join(sorted(VALID_IMPORTANCE))} or null")
 
     validate_positive_int(entry.get("topic_order"), "topic_order", label, errors)
     validate_positive_int(entry.get("global_order"), "global_order", label, errors)

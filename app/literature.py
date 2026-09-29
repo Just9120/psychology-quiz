@@ -19,7 +19,7 @@ PUBLIC_ITEM_FIELDS = (
     "type",
     "reading_level",
     "status",
-    "priority",
+    "priority", "importance",
     "topic_order",
     "global_order",
     "estimated_minutes",

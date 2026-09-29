@@ -56,3 +56,17 @@ def test_catalog_paths_do_not_depend_on_process_working_directory(tmp_path, monk
     monkeypatch.chdir(tmp_path)
     assert len(load_literature_items()) == 130
     assert 'family_psychology' in load_topic_registry()
+
+
+def test_importance_taxonomy_requires_reviewed_value():
+    item = json.loads(Path('content/literature/family_psychology.json').read_text(encoding='utf-8'))[0]
+    for importance in ('basic', 'important', 'additional', 'advanced', None):
+        changed = copy.deepcopy(item)
+        changed['importance'] = importance
+        errors = []
+        validate_literature.validate_entry(changed, 'test', item['topic_id'], {item['topic_id']}, {}, errors)
+        assert not any('importance must be' in error for error in errors)
+    changed['importance'] = 'high'
+    errors = []
+    validate_literature.validate_entry(changed, 'test', item['topic_id'], {item['topic_id']}, {}, errors)
+    assert any('importance must be' in error for error in errors)
