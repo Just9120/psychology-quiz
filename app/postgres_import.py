@@ -12,7 +12,7 @@ from pathlib import Path
 import sqlite3
 
 from app.database import Connection, begin_write, connect_database, is_postgres_target
-from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, V2_TABLES, V3_TABLES, V4_TABLES, V5_TABLES, initialize_schema, table_columns, verify_schema
+from app.postgres_schema import BASE_TABLES, IDENTITY_TABLES, TABLES, VERSION, V2_TABLES, V3_TABLES, V4_TABLES, V5_TABLES, initialize_schema, table_columns, verify_schema
 
 
 def quote_identifier(name: str) -> str:
@@ -104,7 +104,16 @@ def import_snapshot(source_path: Path, target: str) -> dict:
             tables, version = BASE_TABLES, "postgres-v1"
         with closing(connect_database(target)) as conn, conn:
             begin_write(conn, "schema")
-            initialize_schema(conn, version=version)
+            existing = table_columns(conn)
+            if existing:
+                target_version = verify_schema(conn, allow_legacy=True)
+                # A current empty target can receive a v5 SQLite snapshot;
+                # homework_attempts starts empty and the imported v5 tables
+                # retain their exact projection for reconciliation.
+                if target_version != version and not (target_version == VERSION and version == "postgres-v5"):
+                    raise ValueError("Explicit PostgreSQL upgrade required")
+            else:
+                initialize_schema(conn, version=version)
             # An accidentally running target writer must not interleave with the
             # empty-target check, reconciliation or sequence reset.
             conn.execute("LOCK TABLE " + ",".join(tables) + " IN ACCESS EXCLUSIVE MODE")

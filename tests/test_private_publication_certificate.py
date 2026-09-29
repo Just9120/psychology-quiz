@@ -134,6 +134,7 @@ def test_question_validator_requires_verified_certificate_when_source_ref_is_pri
     monkeypatch.setattr(validate_questions, "TOPICS_PATH", content / "topics.json")
     monkeypatch.setattr(validate_questions, "memberships", lambda: {})
     monkeypatch.setattr(validate_questions, "load_policy", lambda: policy)
+    monkeypatch.setattr(validate_questions, "load_homework_catalog", lambda: ())
     assert validate_questions.validate() == []
     questions.write_text(json.dumps([{**public, "question": "Подменённый вопрос"}]), encoding="utf-8")
     assert any("source_ref" in error for error in validate_questions.validate())

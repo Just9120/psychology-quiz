@@ -14,6 +14,7 @@ from app.identity_schema import migrate_identity_schema
 from app.db import get_connection
 from app.miniapp_fastapi import create_app
 from app.postgres_import import import_snapshot
+from app.postgres_schema import upgrade_schema
 from tests.test_attempt_content import bank as sqlite_bank, TOKEN
 from tests.test_web_auth import Mailbox, SETTINGS, ORIGIN
 
@@ -54,6 +55,8 @@ def source(sqlite_bank):
 @pytest.fixture
 def bank(source, pg_target):
     import_snapshot(source, pg_target)
+    with closing(get_connection(pg_target)) as conn, conn:
+        upgrade_schema(conn)
     return pg_target
 
 
