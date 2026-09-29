@@ -209,6 +209,22 @@ def certified_questions(root: Path, dossier_paths: list[Path]) -> dict[str, dict
     return certified
 
 
+def summary_report(result: dict) -> dict:
+    gaps = [{"topic_id": topic_id,
+             "title": result["topics"][topic_id]["title"],
+             "source_review_state": result["topics"][topic_id].get(
+                 "source_review_state", "not_checked"),
+             "stale_editions": result["topics"][topic_id]["stale"]}
+            for topic_id in result["topics_without_supported_question"]]
+    return {"topics_total": len(result["topics"]),
+            "topics_with_supported_question": len(result["topics"]) - len(gaps),
+            "coverage_gaps": gaps,
+            "approved_questions_without_curriculum_edition": result[
+                "approved_questions_without_curriculum_edition"],
+            "unmapped_questions_by_source_support": result[
+                "unmapped_questions_by_source_support"]}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--curriculum", type=Path, default=ROOT / "content/curriculum.json")
@@ -225,6 +241,8 @@ def main() -> int:
                         help="ignored private topics; requires registry and lesson links")
     parser.add_argument("--links", type=Path,
                         help="ignored explicit lesson links for private topic coverage")
+    parser.add_argument("--summary", action="store_true",
+                        help="compact owner-facing coverage gaps without source IDs")
     args = parser.parse_args()
     if (args.inventory is None) != (args.processed is None):
         parser.error("--inventory and --processed must be supplied together")
@@ -264,6 +282,8 @@ def main() -> int:
                       registry, certified, bindings)
     if private is not None:
         result["private_topic_coverage"] = private
+    if args.summary:
+        result = summary_report(result)
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0
 
