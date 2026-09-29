@@ -13,7 +13,9 @@ from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.invitation_schema import migrate_invitation_schema
 from app.database import connect_database, is_postgres_target, resolve_database_target
-from app.db import ensure_user_literature_progress_table
+from app.db import (ensure_user_literature_progress_table,
+                    ensure_users_reading_mode_column,
+                    ensure_quiz_sessions_difficulty_mode_column)
 from app.postgres_schema import upgrade_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
@@ -21,24 +23,6 @@ from app.homework_schema import migrate_homework_schema
 from app.privacy_schema import migrate_privacy_schema
 
 from dotenv import load_dotenv
-
-
-def ensure_users_reading_mode_column(conn: sqlite3.Connection) -> None:
-    columns = conn.execute("PRAGMA table_info(users)").fetchall()
-    column_names = {str(column[1]) for column in columns}
-    if "reading_mode" in column_names:
-        return
-    conn.execute(
-        "ALTER TABLE users ADD COLUMN reading_mode TEXT NOT NULL DEFAULT 'normal'"
-    )
-
-
-def ensure_quiz_sessions_difficulty_mode_column(conn: sqlite3.Connection) -> None:
-    columns = conn.execute("PRAGMA table_info(quiz_sessions)").fetchall()
-    column_names = {str(column[1]) for column in columns}
-    if "difficulty_mode" in column_names:
-        return
-    conn.execute("ALTER TABLE quiz_sessions ADD COLUMN difficulty_mode TEXT")
 
 
 def resolve_db_path() -> str:

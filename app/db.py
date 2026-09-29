@@ -61,7 +61,8 @@ VALID_DIFFICULTY_MODES = {"easy", "medium", "hard"}
 
 def ensure_users_reading_mode_column(conn: Connection) -> None:
     columns = conn.execute("PRAGMA table_info(users)").fetchall()
-    column_names = {str(column["name"]) for column in columns}
+    # PRAGMA's name is column 1 for both sqlite3.Row runtime and tuple init connections.
+    column_names = {str(column[1]) for column in columns}
     if "reading_mode" in column_names:
         return
 
@@ -128,7 +129,7 @@ def ensure_user_literature_progress_table(conn: Connection) -> None:
 
 def ensure_quiz_sessions_difficulty_mode_column(conn: Connection) -> None:
     columns = conn.execute("PRAGMA table_info(quiz_sessions)").fetchall()
-    column_names = {str(column["name"]) for column in columns}
+    column_names = {str(column[1]) for column in columns}
     if "difficulty_mode" in column_names:
         return
 
