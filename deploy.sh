@@ -6,6 +6,8 @@ umask 077
 EXPECTED_SHA="${1:-}"
 PWA_ARCHIVE="${2:-}"
 PWA_DIGEST="${3:-}"
+BACKEND_ARCHIVE="${4:-}"
+BACKEND_DIGEST="${5:-}"
 PROJECT_DIR=/opt/psychology-quiz
 SERVICES=(psych_quiz_bot psych_quiz_miniapp_api)
 log() { printf '[deploy] %s\n' "$*"; }
@@ -90,9 +92,13 @@ if [[ "$NEEDS_RUNTIME" == 0 && "$DEPLOYED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
 fi
 
 export APP_REVISION="$EXPECTED_SHA"
-log "Building candidate revision=$EXPECTED_SHA stateful=$STATEFUL migrate=$MIGRATE"
-# Build both images before any candidate migration. Runtime .env remains untouched.
-compose build "${SERVICES[@]}"
+[[ "$BACKEND_ARCHIVE" == "${PWA_ARCHIVE%/artifact.zip}/backend.zip" ]] || fail 'Verified backend archive required; no host rebuild'
+[[ "$BACKEND_DIGEST" =~ ^[0-9a-f]{64}$ ]] || fail 'Verified backend artifact digest required'
+CANDIDATE_IMAGE_ID="$(python3 scripts/backend_artifact.py load --sha "$EXPECTED_SHA" --archive "$BACKEND_ARCHIVE" --digest "$BACKEND_DIGEST" --id-only)"
+[[ "$CANDIDATE_IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]] || fail 'Invalid loaded image identity'
+log "Verified candidate revision=$EXPECTED_SHA image=$CANDIDATE_IMAGE_ID stateful=$STATEFUL migrate=$MIGRATE"
+# The trusted CI image is loaded before any backup/migration or service stop.
+# No requirements installation or Docker build takes place on the host.
 DATABASE_BACKEND="$(compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py backend)"
 [[ "$DATABASE_BACKEND" == sqlite || "$DATABASE_BACKEND" == postgresql ]] || fail 'Unknown database backend'
 compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py preflight
@@ -156,6 +162,7 @@ for service in "${SERVICES[@]}"; do
   container_id="$(compose ps -q "$service")"
   [[ -n "$container_id" ]] || fail "Missing deployed service: $service"
   [[ "$(docker inspect -f '{{.State.Running}}' "$container_id")" == true ]] || fail "Service stopped: $service"
+  [[ "$(docker inspect -f '{{.Image}}' "$container_id")" == "$CANDIDATE_IMAGE_ID" ]] || fail 'Running image differs from verified CI image'
   [[ "$(docker inspect -f '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$container_id")" == "$EXPECTED_SHA" ]] || fail 'Running image revision mismatch'
   image_id="$(docker inspect -f '{{.Image}}' "$container_id")"
   log "RUNTIME_OK service=$service revision=$EXPECTED_SHA image=$image_id"

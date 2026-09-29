@@ -228,6 +228,29 @@ jobs:
       - name: Verify serving content parity
         run: python scripts/audit_question_bank.py --db-path "$DB_PATH"
 
+      - name: Build and package exact backend image
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          image="psychology-quiz-runtime:$EXPECTED_SHA"
+          docker build --platform linux/amd64 --build-arg "APP_REVISION=$EXPECTED_SHA" --tag "$image" .
+          docker run --rm --network none --read-only --entrypoint python "$image" \
+            -c 'import app.main, app.miniapp_fastapi, app.owner_content'
+          python scripts/backend_artifact.py package --sha "$EXPECTED_SHA" --directory "$RUNNER_TEMP/backend-artifact"
+
+      - name: Upload trusted main backend image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: backend-${{ github.sha }}
+          path: ${{ runner.temp }}/backend-artifact/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+
       - name: Write CI summary
         shell: bash
         run: |

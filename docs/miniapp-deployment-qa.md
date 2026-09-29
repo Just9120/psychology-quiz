@@ -21,7 +21,7 @@
 | Backup / recovery | [deployment_db.py](../scripts/deployment_db.py): SQLite backup API в private `/data/backups/release-*/quiz.sqlite3`; restore во временный файл, integrity/FK и fingerprint users/sessions/answers/literature. До migrations failure запускает только прежние containers. После начала migration/post-check failure — stop продвижения и forward-fix; production restore/volume cleanup не автоматизированы. Retention/удаление backups — отдельная maintenance задача. |
 | Обязательные post-checks | Проверка DB serving questions/options, всех attempt snapshot hashes и canonical parity, неизменности user state для stateful release, [internal HTTP smoke](../scripts/deployment_http_smoke.py) `/healthz` с expected SHA и unauthenticated `/miniapp/state` → 401; затем обе службы Running и image revision. `DEPLOY_OK revision=...` допустим только после всех checks. Bot Telegram roundtrip не входит в read-only smoke. |
 
-Routine entrypoint — [deploy.sh](../deploy.sh), переданный по verified SSH из validated candidate с positional expected SHA, приватным incoming ZIP path и проверенным GitHub SHA-256 artifact. Параметры формирует existing CD, ручная передача не нужна. SSH сначала читает полный script в аргумент bash -c, чтобы stdin дочернего процесса не забрал оставшийся код; workflow требует exact completion marker и `PWA_DELIVERY_OK`. Не запускать старую host-копию script: checkout обновляется внутри candidate procedure. Docs-only change синхронизирует source без runtime restart/static activation и сообщает отдельно SOURCE_SYNC_OK/runtime_unchanged. Frontend-only change публикует PWA после проверки совместимого backend без его restart. Повторный deploy ради статуса не нужен: читать CI/CD records.
+Routine entrypoint — [deploy.sh](../deploy.sh), переданный по verified SSH из validated candidate с positional expected SHA, incoming PWA ZIP/digest и backend ZIP/digest. Оба artifacts выбираются из successful trusted main CI той же revision и актуальной попытки required jobs. Параметры формирует existing CD, ручная передача не нужна. SSH сначала читает полный script в аргумент bash -c, чтобы stdin дочернего процесса не забрал оставшийся код; workflow требует exact completion marker и `PWA_DELIVERY_OK`. Не запускать старую host-копию script: checkout обновляется внутри candidate procedure. Docs-only change синхронизирует source без runtime restart/static activation и сообщает отдельно SOURCE_SYNC_OK/runtime_unchanged. Frontend-only change публикует PWA после проверки совместимого backend без его restart. Повторный deploy ради статуса не нужен: читать CI/CD records.
 
 При failure записать run ID, candidate SHA и последний успешно пройденный этап. Не начинать следующий PR до завершения применимой поставки. Если службы остановлены после migration failure, сначала сверить backup, DB integrity/user preservation и совместимость; обычная процедура намеренно требует существующие Running services и не является обходом recovery gate. Production restore или изменение target требует отдельного решения. Read-only runtime smoke не доказывает authenticated/mobile UX или нагрузочную устойчивость.
 
@@ -794,3 +794,37 @@ Drive ID/locator не переносит. API повторно проверяе�
 только текущие публичные lesson/discipline названия. Неизвестные термины/Obsidian notes
 не превращаются в нули. Цифры lesson coverage относятся к snapshot, а не к живому DB
 запросу. Обновление текущего банка само по себе не обновляет ignored snapshot.
+
+
+## Backend image promotion
+
+Основной backend image собирается единожды для candidate revision в `validate-and-smoke-test`:
+`Dockerfile`, hash-locked requirements и pinned base image. PR CI проверяет build/import/package;
+только trusted `push main` публикует `backend-<SHA>` в Actions artifacts. Package содержит
+`manifest.json` и `image.tar.gz`; его identity — revision, `linux/amd64`, Docker image ID и
+SHA-256 compressed image. CI artifact retention — 7 дней, как для PWA; это не retention
+личных backups. Prod secrets, `.env`, host `data/`, `.postgres/` и private search inputs не
+входят в Dockerfile COPY или Docker context. Образ не требует нового external registry.
+
+[Backend artifact procedure](../scripts/backend_artifact.py) переиспользует exact trusted
+main CI/run/attempt selection из PWA delivery. Проверки перед SSH и после transfer:
+required jobs успешны, artifact принадлежит backend producer window, не expired,
+GitHub digest/ZIP layout/manifest/image bytes совпадают. Fork/PR artifacts не являются
+production inputs. Процедура не запускает workflow ради получения статуса.
+
+На VPS под прежним deployment lock сначала проверяются archive/digest, target
+Docker platform и loaded image ID/revision. Runtime services используют один
+`psychology-quiz-runtime:<SHA>` с разными commands и `pull_policy: never`;
+production script не вызывает `compose build` и не устанавливает dependencies.
+Отсутствующий backend artifact блокирует runtime поставку до stop/backup/migration;
+fallback к host rebuild не предусмотрен. Docs/frontend-only flow сохраняет прежний
+runtime и не требует загрузки image. Ручной старый трёхаргументный вызов для runtime
+недостаточен — штатный CD передаёт все пять аргументов.
+
+Backup/isolated restore, stateful migration, user preservation, serving parity,
+HTTP/PWA smoke и exact completion markers сохраняются. После запуска revision label
+и фактический container image ID обоих сервисов должны совпасть с проверенным CI image.
+Ошибка после миграции не запускает автоматический data rollback; действуют прежние
+forward-fix/recovery gates. GitHub protections proposal не применяется этим изменением.
+Actual Docker build, GitHub artifact provenance и VPS promotion требуют CI/CD evidence;
+адресные fake-boundary checks не заменяют живые records.

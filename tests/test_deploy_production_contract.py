@@ -107,7 +107,7 @@ docker() {
         if [[ "$DEPLOY_STARTED" == 1 && "$FAULT" != image ]]; then echo "$EXPECTED";
         elif [[ "$FAULT" == first_adoption ]]; then echo '<no value>';
         else echo "$OLD"; fi ;;
-      *Image*) echo sha256:test-image ;;
+      *Image*) if [[ "$DEPLOY_STARTED" == 1 && "$FAULT" != image_id ]]; then printf 'sha256:%064d\n' 0; else echo sha256:test-image; fi ;;
     esac
     return
   fi
@@ -129,6 +129,7 @@ docker() {
 python3() {
   printf 'python3 %s\n' "$*" >> "$COMMAND_LOG"
   case "$*" in
+    *backend_artifact.py\ load*) [[ "$FAULT" != backend_artifact ]] || return 2; printf 'sha256:%064d\n' 0 ;;
     *pwa_cd.py\ prepare*)
       [[ "$FAULT" != pwa_prepare ]] || return 2
       if [[ "$FAULT" == docs ]]; then echo "$OLD $OLD"; else echo "$OLD $EXPECTED"; fi ;;
@@ -167,11 +168,11 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
         step = step.split("run: |", 1)[1].split("\n      - name:", 1)[0]
         code = 'ssh() { bash -c "${@: -1}"; }\n' + textwrap.dedent(step)
         env.update(EXPECTED_SHA=SHA, DEPLOY_USER="test", DEPLOY_HOST="localhost", RUNNER_TEMP=tmp_path.as_posix(),
-                   REMOTE_DIR="/tmp/psychology-pwa.ABC123xy", ARTIFACT_DIGEST="c" * 64)
+                   REMOTE_DIR="/tmp/psychology-pwa.ABC123xy", ARTIFACT_DIGEST="c" * 64, BACKEND_DIGEST="d" * 64)
     # Windows truncates a long bash -c command at the process argument limit.
     test_script = tmp_path / "deployment-test.sh"
     test_script.write_text(code, encoding="utf-8", newline="\n")
-    result = subprocess.run([bash, test_script.as_posix(), SHA, "/tmp/psychology-pwa.ABC123xy/artifact.zip", "c" * 64], input="",
+    result = subprocess.run([bash, test_script.as_posix(), SHA, "/tmp/psychology-pwa.ABC123xy/artifact.zip", "c" * 64, "/tmp/psychology-pwa.ABC123xy/backend.zip", "d" * 64], input="",
                             cwd=tmp_path, env=env, capture_output=True, text=True, timeout=20)
     return result, log.read_text() if log.exists() else ""
 
@@ -179,14 +180,15 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
 @pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change", "auth_change", "schema_change",
                                     "quality_review_change", "publication_certificate_change", "publication_key_change",
                                     "evidence_policy_change", "case_policy_change"])
-def test_deployment_builds_before_backup_migration_and_checks_running_revision(tmp_path, change):
+def test_deployment_loads_verified_image_before_backup_migration_and_checks_running_revision(tmp_path, change):
     result, log = run_deploy(tmp_path, change)
     assert result.returncode == 0, result.stderr + result.stdout
-    ordered = ["pwa_cd.py prepare", "build psych_quiz_bot psych_quiz_miniapp_api", "deployment_db.py preflight", "stop psych_quiz_bot",
+    ordered = ["pwa_cd.py prepare", "backend_artifact.py load", "deployment_db.py preflight", "stop psych_quiz_bot",
                "deployment_db.py backup", "scripts/init_db.py", "scripts/seed_questions.py", "deployment_db.py verify",
                "deployment_db.py smoke", "up -d --no-build", "deployment_http_smoke.py", "pwa_cd.py publish"]
     positions = [log.index(command) for command in ordered]
     assert positions == sorted(positions)
+    assert "build psych_quiz_bot" not in log
     assert f"DEPLOY_OK revision={SHA}" in result.stdout
     assert (tmp_path / ".env").read_text() == "BOT_TOKEN=synthetic\n"
 
@@ -227,9 +229,9 @@ def test_failed_pgvector_upgrade_never_starts_application_or_reports_delivery(tm
 
 @pytest.mark.parametrize("fault,forbidden", [("lock", "git fetch"), ("dirty", "git fetch"),
         ("stale", "git merge --ff-only"), ("project", "git merge --ff-only"),
-        ("build", "deployment_db.py backup"), ("backup", "scripts/init_db.py"),
+        ("backend_artifact", "deployment_db.py backup"), ("backup", "scripts/init_db.py"),
         ("migration", "up -d"), ("preservation", "up -d"), ("content_parity", "up -d"),
-        ("pwa_prepare", "build psych_quiz_bot"), ("advanced", "pwa_cd.py publish"), ("nginx", "pwa_cd.py publish")])
+        ("pwa_prepare", "backend_artifact.py load"), ("advanced", "pwa_cd.py publish"), ("nginx", "pwa_cd.py publish")])
 def test_failure_stops_before_dependent_operation(tmp_path, fault, forbidden):
     result, log = run_deploy(tmp_path, fault)
     assert result.returncode != 0
@@ -256,10 +258,11 @@ def test_documentation_change_only_syncs_source(tmp_path):
     assert "build psych_quiz_bot" not in log
 
 
-def test_dependency_lock_change_rebuilds_and_restarts_backend(tmp_path):
+def test_dependency_lock_change_loads_candidate_and_restarts_backend(tmp_path):
     result, log = run_deploy(tmp_path, "lockfile_change")
     assert result.returncode == 0, result.stderr + result.stdout
-    assert "build psych_quiz_bot psych_quiz_miniapp_api" in log
+    assert "backend_artifact.py load" in log
+    assert "build psych_quiz_bot" not in log
     assert "up -d --no-build" in log
     assert "scripts/init_db.py" not in log
     assert f"DEPLOY_OK revision={SHA}" in result.stdout
@@ -303,3 +306,16 @@ def test_workflow_rejects_zero_exit_without_completion_record(tmp_path, output):
     result = subprocess.run([bash, "-c", "ssh() { cat >/dev/null; printf '%s\\n' '" + output + "'; }\n" + textwrap.dedent(step)],
                             cwd=tmp_path, env=env, capture_output=True, text=True, timeout=20)
     assert result.returncode != 0
+
+
+@pytest.mark.parametrize("fault", ["backend_artifact", "image_id"])
+def test_image_transport_and_running_identity_are_fail_closed(tmp_path, fault):
+    result, log = run_deploy(tmp_path, fault)
+    assert result.returncode != 0
+    assert "DEPLOY_OK" not in result.stdout
+    assert "pwa_cd.py publish" not in log
+    if fault == "backend_artifact":
+        assert "stop psych_quiz_bot" not in log
+        assert "deployment_db.py backup" not in log
+    else:
+        assert "up -d --no-build" in log
