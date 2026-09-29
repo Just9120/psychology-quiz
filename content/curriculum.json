@@ -1772,7 +1772,7 @@
       "external_id": "m2_qual_008",
       "topic_id": "t_6be3cecd6596",
       "item_sha256": "6a43bbc2c3b8b2c55c60bc17960071e8d5c682df5fdb6ddfe19b8ff3a3856a61",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 34000:36100"
     },
     "67f98473a75387dc19607295ac607a82ace11bc8c2160bdae320bd80c05f3c5d": {
       "external_id": "m2_qual_009",
@@ -1796,7 +1796,7 @@
       "external_id": "m2_qual_014",
       "topic_id": "t_6be3cecd6596",
       "item_sha256": "0973898a5b0e5f312f25a6e6560295a1f6a4f06bd2e71c3aba0b1d6d4adaaeeb",
-      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 94800:96300"
     },
     "2e9c1244c454e7909438e472a4cf4f536e4f4a8f87d3b07659f6cf80fce7c204": {
       "external_id": "m2_qual_017",
@@ -2271,6 +2271,102 @@
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "66851265d067e44097a39fbebbddc3a1c7f583747408700ece7a6c5c7a495d28",
       "locator": "extracted text, Unicode characters (zero-based, end exclusive): 44300:45200"
+    },
+    "462ad756f5a0f3f76e39a37a6d85b0a0aa022032d222fc6a4d80bbe5a36e95ee": {
+      "external_id": "m1_gp_007",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "a6152ff8216666e7b7379bf260dd6d6fa4a0b9756830216d4d9e31ce69d7d6a2",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 6300:9700"
+    },
+    "d186aa7c1f70b65391b06b43225b33aa3be4f61308817a8a55c85f3f03909f7e": {
+      "external_id": "m1_gp_021",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "471a5fa4735363071912683778f4c7881ef058848d0e9a718c3b21e16decbc7c",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 6300:9700"
+    },
+    "e5b96898f747f19921c2462f0f64a2b4e9ee4d496a9fb48204d37a71076ea646": {
+      "external_id": "m1_gp_043",
+      "topic_id": "t_8416412afc7d",
+      "item_sha256": "8423ec1096e09ca3f8a04f34bde055a43c7fcc9ba3ea59f94d8f9ef4314497a8",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 9000:9700"
+    },
+    "d5930e1a010decc3cdd246f1d11b79171c1c5f777a83b1b5a43dfefe9d32d74e": {
+      "external_id": "m1_gp_053",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "861ae7bf2165ba18b24a938e58a53a3e008423e59f442713892ea03d7a1ca035",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 17600:21500"
+    },
+    "4c6bc4fea533b922f9cc761aac50a669bcdf6f0f125efa8b0e3499772f961112": {
+      "external_id": "m1_intro_036",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "1d48174794d209b02429c15c0f623dc61b0fa5ad32bd0995ae3c14c77f478faf",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5300:6600, 13500:14500"
+    },
+    "f92636254d9d2486d12f515c9eda6542e8deec3966d1301c6505c8863376deac": {
+      "external_id": "m1_intro_041",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "11c5cc9440296b6546e5f4f253b3d4c16c7a91dfc4fc569f2be59431e7dcc217",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5300:6600, 13500:14500"
+    },
+    "2e39f221f919d9ed38bd21abb4998029292ac52499e80ad7c4c9e308e2cad4d6": {
+      "external_id": "m1_intro_049",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "09248f4376b7939c6e96fde748b3bd9a3fbf68925688eddfbf48e9c762e7bda5",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 200:1500, 10700:11700"
+    },
+    "f740dcffd2789d8179cca9a5a5f83cc308b991c4ffd1d75ddce6cf3c06e934d4": {
+      "external_id": "m1_psyf_014",
+      "topic_id": "t_43f9e7d785af",
+      "item_sha256": "f570f12ae9b16fd7b60958300ec5998294e4aed9cc653d42a3f0e9fc325cbd55",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17400:18900"
+    },
+    "bc8ae620f775d1fc3e3e730fe2ad58844fca0604675218e76ada2dd341a39e81": {
+      "external_id": "m1_vnd_023",
+      "topic_id": "t_e9dd359706e6",
+      "item_sha256": "3069d5cd64b842842c4a7d98b3f5827434a21e5a0ba80af090b3d3339e054f17",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 14500:17000"
+    },
+    "b6a93f76a72c201b41c333f790f26cf9dfb9e9b3f712d7005514df478cce0e9e": {
+      "external_id": "m2_exp_004",
+      "topic_id": "t_177f292cc47a",
+      "item_sha256": "f96996b3869e02eadd6387b5506b759a172a8357d468e741114c2c0583f8cf38",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 4000:10200"
+    },
+    "7005793ddf565e30b55300e55e8e0f56a3dea43b6ff9a4f9244ed6515569f5d4": {
+      "external_id": "m2_exp_005",
+      "topic_id": "t_177f292cc47a",
+      "item_sha256": "d6edeb198a298108f0f0a6ef0800321c48fe1ae6a67822cd31ef56586d4f5b13",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 4100:7300"
+    },
+    "4c060fcf6210bf6111e606f995c52c989e8106cf073898719548bd26debbc3fa": {
+      "external_id": "m2_exp_025",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "a3856f2d4a6c625b8a1642794a4869ad7339a3939462f07ae16aaf699e45036e",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 26000:27400"
+    },
+    "c854409481004a15a3840de3d7a70e3b3ee10a80818b0c6f74a4e909fd7c4672": {
+      "external_id": "m2_exp_030",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "3aeb682ff316c4e9bd8b71b6522ee3b64372f276f774b65ccae0efd31dadd423",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 22000:23500"
+    },
+    "a34bdc78b77a37a6801b47512622b019d389f833c9c07faf6f3a481010769e75": {
+      "external_id": "m2_exp_031",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "7286f108c20432de2a4a191abdcc72ce7531d760f75f5e4444cfc6858424334b",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 10700:12000"
+    },
+    "01a713a901fa50bee9321984a15d7844d23c6ae4f9a60447f33ac2e35e646d8d": {
+      "external_id": "m3_psychological_consulting_051",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "562343a9b1b084d4c8914603eae3ab54a463912b88971a496a59afcacafd2013",
+      "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7600:10300, 11400:12400, 15800:17200"
+    },
+    "1f25cb1b0be833e50d4c3b5fe3bdf87453376a0c42e01f13a6e019e7f354605b": {
+      "external_id": "m3_psychological_consulting_082",
+      "topic_id": "t_350cf495eee7",
+      "item_sha256": "b98c9a7d0c53a28b49cbaa7c5d59526d367c2bbc73098babc980a18fd3d67b21",
+      "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 96000:97500, 104900:105500"
     }
   }
 }

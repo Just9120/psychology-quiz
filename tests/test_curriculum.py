@@ -110,7 +110,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     reviews = json.loads((curriculum.ROOT / 'content/learning-quality-reviews.json').read_text(encoding='utf-8'))['items']
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
-    assert len(catalog['disciplines']) == 9 and len(catalog['editions']) == 310
+    assert len(catalog['disciplines']) == 9 and len(catalog['editions']) == 326
     assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
         k: v['title'] for k, v in registry.items()
         if k != 'cases' and any(contour in v['available_contours']
@@ -124,12 +124,18 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
         upsert_approved_questions(conn, [v for k, v in items.items() if k.startswith('questions:')], authoritative=True)
         actual = {row['external_id']: capture_question(conn, row['id'])[1] for row in conn.execute('SELECT id,external_id FROM questions')}
         historical = set()
+        retired = set()
         for sha, item in catalog['editions'].items():
             key = 'questions:' + item['external_id']
             topic = catalog['topics'][item['topic_id']]
             source = load_policy().sources[topic['source']['source_id']]
             if item['item_sha256'] != fingerprint(items[key]):
                 # Prior immutable editions remain mapped for historical attempts.
+                if items[key]['status'] != 'approved':
+                    retired.add(item['external_id'])
+                    assert item['external_id'] not in actual
+                    assert item['locator']
+                    continue
                 historical.add(item['external_id'])
                 assert actual[item['external_id']] != sha
                 assert item['locator']
@@ -151,6 +157,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
         assert historical == {'m1_intro_054', 'm2_exp_012', 'm2_exp_058'}
+        assert retired == {'m2_qual_009', 'm2_qual_013'}
 
 
 def test_catalog_rejects_orphan_and_ambiguous_identities(mapped):
