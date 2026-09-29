@@ -120,6 +120,17 @@ candidate image, сохранность cluster ID/записи и создан�
 Команды выполняются в `/opt/psychology-quiz` после выполнения предусловий.
 Профиль `search` не открывает порт и не запускает PostgreSQL автоматически.
 
+При потере последнего processing snapshot сначала восстановите exact captures
+из Drive и сохраните их вне временного worktree. [Source recovery](../scripts/source_recovery.py)
+принимает current inventory, новые pending captures и найденные старые snapshots:
+сохраняет известные conflict holds, отказывается выбирать между различающимися
+objections и не переносит прежние processed/search approvals. Output — только новый
+ignored `data/*.json`; существующий файл не перезаписывается. Проверенный output
+и исходные texts скопируйте в приватное постоянное хранилище с проверкой digest.
+Этот путь не подтверждает полноту потерянной истории и не допускает поиск до
+повторного review и явного range approval. Raw pending capture без известных
+holds не используйте как восстановленный editorial snapshot.
+
 Приватные extracts и review records не попадают в Git/CD artifact. После merge
 с актуальной локальной копии `.private-search/input/` создайте закрытый пакет:
 
