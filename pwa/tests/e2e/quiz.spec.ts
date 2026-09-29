@@ -361,7 +361,7 @@ test('curriculum filters history and preserves unmapped evidence on reload', asy
 test('personal progress, historical mistakes and retry-safe training share the quiz state', async ({ page }, testInfo) => {
   await fresh(page)
   await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
-  await expect(page.getByText('История начинается с первого ответа')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'История квизов начинается с первого ответа' })).toBeVisible()
   await page.getByRole('button', { name: 'Мои ошибки', exact: true }).click()
   await expect(page.getByText('Сейчас нет вопросов для тренировки')).toBeVisible()
   await page.getByRole('button', { name: 'Квиз по психологии' }).click()

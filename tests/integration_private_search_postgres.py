@@ -92,6 +92,9 @@ def test_private_rebuild_keeps_learning_state_and_replaces_only_index():
         ]
         with pytest.raises(SearchError, match="invalid_embedding_dimensions"):
             rebuild(conn, interrupted, FailingAfterFirstBatch())
+        # verify_private_schema starts an outer transaction before rebuild's
+        # savepoint; close it before selecting a read-only snapshot.
+        conn.rollback()
         conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
         verify_index_content(conn, first)
         with psycopg.connect(app_dsn) as writer:
