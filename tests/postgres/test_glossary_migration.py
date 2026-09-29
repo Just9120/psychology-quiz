@@ -99,6 +99,19 @@ def test_homework_upgrade_from_production_v5_preserves_quiz_attempts(pg_target):
         verify_user_state(before, manifest(conn))
 
 
+def test_privacy_upgrade_from_production_v6_preserves_learning_state(pg_target):
+    with closing(get_connection(pg_target)) as conn, conn:
+        initialize_schema(conn, version='postgres-v6')
+        conn.execute("INSERT INTO users(telegram_user_id) VALUES(42)")
+        conn.execute("INSERT INTO quiz_sessions(user_id,status,score,total_questions) VALUES(1,'finished',1,1)")
+        before = manifest(conn)
+        upgrade_schema(conn)
+        assert verify_schema(conn) == 'postgres-v7'
+        assert conn.execute("SELECT count(*) FROM user_data_deletion_challenges").fetchone()[0] == 0
+        assert conn.execute("SELECT score FROM quiz_sessions WHERE user_id=1").fetchone()[0] == 1
+        verify_user_state(before, manifest(conn))
+
+
 def test_existing_glossary_data_is_part_of_preservation_contract(bank):
     with closing(get_connection(bank)) as conn, conn:
         conn.execute("INSERT INTO glossary_sessions VALUES('session',1,'topic','Title','in_progress','{}','{}','now','now')")
