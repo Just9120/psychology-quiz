@@ -2,10 +2,31 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
 import { LiteratureView } from '../src/LiteratureView'
+import { MiniLiterature } from '../src/miniapp/MiniLiterature'
 import { api, ApiError } from '../src/api'
 import type { LiteratureCatalog } from '../src/types'
 
 const catalog: LiteratureCatalog = { ok: true, topics: [{ topic_id: 'one', title: 'Первая тема', module: 'module1' }], works: [{ work_id: 'book', title: 'Учебная книга', authors: [], type: 'book', access_links: [], entries: [{ id: 'book', topic_id: 'one', topic_title: 'Первая тема', module: 'module1', year: null, importance: null, importance_source: null, source: { title: 'Учебный список', locator: 'Позиция 1', citation: 'Исходная запись' }, metadata_warnings: ['Год неизвестен'], user_state: null }] }] }
+
+it.each(['pwa', 'miniapp'])('combines module/topic/status filters without borrowing another association in %s', async client => {
+  const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }
+  const second = { ...first, id: 'book-two', topic_id: 'two', topic_title: 'Вторая тема', module: 'module2',
+    user_state: { literature_id: 'book-two', reading_status: 'read' as const, progress_percent: 100, updated_at: '2026-09-29' } }
+  const topics = [...catalog.topics, { topic_id: 'two', title: 'Вторая тема', module: 'module2' }]
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [{ ...catalog.works[0], entries: [first, second] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module1')
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'read')
+  expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'not_started')
+  expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
+  await user.selectOptions(screen.getByLabelText(client === 'pwa' ? 'Тема литературы' : 'Тема'), 'one')
+  await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module2')
+  expect(screen.getByLabelText(client === 'pwa' ? 'Тема литературы' : 'Тема')).toHaveValue('')
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'read')
+  expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
+})
 
 it('shows an empty catalog without inventing reading entries', () => {
   render(<LiteratureView initial={{ ...catalog, works: [], topics: [] }} busy={false} run={async op => op()} />)
