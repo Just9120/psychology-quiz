@@ -9,6 +9,22 @@ from app.db import USER_LITERATURE_READING_STATUSES
 from app.literature import load_literature_items, load_topic_registry, state_row_to_payload, state_row_to_item_user_state
 
 
+def reading_summary(items: list[dict], states: dict) -> dict:
+    """Count works in the selected scope without resolving legacy state conflicts."""
+    works = {}
+    for item in items:
+        works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    read, conflicts, current = 0, 0, []
+    for entries in works.values():
+        statuses = {states.get(item["id"], {}).get("reading_status", "not_started") for item in entries}
+        read += statuses == {"read"}
+        conflicts += len(statuses) > 1
+        reading = next((item for item in entries if states.get(item["id"], {}).get("reading_status") == "in_progress"), None)
+        if reading:
+            current.append(reading)
+    return {"read": read, "total": len(works), "conflicts": conflicts, "current": current}
+
+
 def catalog(conn, actor_user_id: int) -> dict[str, Any]:
     states = load_progress(conn, actor_user_id)
     topics = load_topic_registry()

@@ -74,6 +74,7 @@ def _topic_view(items: list[dict], states: dict, token: str, page: int) -> tuple
     pages = max(1, (len(selected) + PAGE_SIZE - 1) // PAGE_SIZE)
     if page >= pages:
         return None
+    summary = literature_service.reading_summary(selected, states)
     rows = []
     for item in selected[page * PAGE_SIZE:(page + 1) * PAGE_SIZE]:
         state = states.get(item["id"], {})
@@ -88,7 +89,15 @@ def _topic_view(items: list[dict], states: dict, token: str, page: int) -> tuple
     if navigation:
         rows.append(navigation)
     rows.append([InlineKeyboardButton("К темам", callback_data="lit:topics")])
-    return (f"<b>{escape(topic['title'])}</b>\nМатериалы {page + 1}/{pages}. Личный статус показан рядом с названием.",
+    text = f"<b>{escape(topic['title'])}</b>\nПрочитано {summary['read']} из {summary['total']}"
+    if summary['conflicts']:
+        text += f"\nРазличаются отметки в списках: {summary['conflicts']} работ. Они не включены в число прочитанных."
+    current = summary['current']
+    text += "\nСейчас читаю: " + (", ".join(escape(item["title"][:80]) for item in current[:5]) if current else "нет текущих книг")
+    if len(current) > 5:
+        text += f"; ещё {len(current) - 5}"
+    text += f"\nМатериалы {page + 1}/{pages}. Личный статус показан рядом с названием."
+    return (text,
             InlineKeyboardMarkup(rows))
 
 

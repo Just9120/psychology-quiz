@@ -83,7 +83,7 @@ def test_chat_literature_rejects_group_stale_item_and_unknown_callback(web, monk
 def test_all_published_literature_entries_have_stable_short_callbacks():
     items = load_literature_items()
     topics = literature_chat.list_literature_topic_payloads()
-    assert len(items) == 130
+    assert len(items) == 143
     assert len({literature_chat._token(item["id"]) for item in items}) == len(items)
     seen = set()
     for topic in topics:

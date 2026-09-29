@@ -85,3 +85,24 @@ it('blocks another reading write after lost confirmation until successful readba
   expect(screen.getByLabelText('Статус чтения')).toBeEnabled()
   expect(save).toHaveBeenCalledTimes(1)
 })
+
+
+it.each(['pwa', 'miniapp'])('shows scoped work totals and current reading independently of the status filter in %s', async client => {
+  const first = { ...catalog.works[0].entries[0], work_id: 'book', title: 'Учебная книга', user_state: { literature_id: 'book', reading_status: 'read' as const, progress_percent: 100, updated_at: '2026-09-30' } }
+  const second = { ...first, id: 'book-two', topic_id: 'two', topic_title: 'Вторая тема', module: 'module2', user_state: { ...first.user_state, literature_id: 'book-two', reading_status: 'in_progress' as const } }
+  const topics = [...catalog.topics, { topic_id: 'two', title: 'Вторая тема', module: 'module2' }]
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [{ ...catalog.works[0], entries: [first, second] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
+  expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
+  expect(screen.getByText(/У 1 работ отметки/)).toBeVisible()
+  const user = userEvent.setup()
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'read')
+  expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
+  await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module1')
+  expect(screen.getByText('Прочитано 1 из 1')).toBeVisible()
+  expect(screen.queryByText(/У 1 работ отметки/)).not.toBeInTheDocument()
+  await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module2')
+  const current = screen.getByRole('complementary', { name: 'Прогресс списка чтения' })
+  await user.click(current.querySelector('button')!)
+  expect(screen.getByLabelText(client === 'pwa' ? 'Статус чтения' : 'Статус')).toHaveValue('in_progress')
+})
