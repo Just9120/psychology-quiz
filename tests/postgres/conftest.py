@@ -45,6 +45,9 @@ def pg_target():
 @pytest.fixture
 def source(sqlite_bank):
     with closing(get_connection(str(sqlite_bank))) as conn, conn:
+        # Deliberately import a legacy v5 source, then upgrade it.
+        conn.execute("DROP TABLE user_literature_work_progress")
+        conn.execute("DELETE FROM schema_migrations WHERE version='reading-work-v1'")
         migrate_identity_schema(conn)
         migrate_auth_schema(conn)
         migrate_invitation_schema(conn)

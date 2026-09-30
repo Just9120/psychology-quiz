@@ -3,7 +3,7 @@ import { ReadingSummary } from '../ReadingSummary'
 import type { ReadingStatus } from '../types'
 import { miniApi, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 
-const labels: Record<ReadingStatus, string> = { not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', revisit: 'Вернуться', skipped: 'Пропущено' }
+const labels: Record<ReadingStatus, string> = { not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', deferred: 'Отложено' }
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
 const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
 

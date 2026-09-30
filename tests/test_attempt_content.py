@@ -11,6 +11,8 @@ from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
+from app.reading_schema import migrate_reading_schema
+from app.literature import load_literature_items
 from app.classic_quiz_handlers import _handle_classic_text_answer_db
 from app.db import (
     create_or_load_user, finalize_quiz_session, get_active_categories, get_connection,
@@ -54,6 +56,7 @@ def bank(tmp_path):
         upsert_approved_questions(conn, [OLD, OTHER], authoritative=True)
         create_or_load_user(conn, 42, None, "Original user", None)
         conn.execute("INSERT INTO user_literature_progress (user_id,literature_id,reading_status,updated_at,private_note) VALUES (1,'lit','read','today','Private note')")
+        migrate_reading_schema(conn, load_literature_items())
     return path
 
 

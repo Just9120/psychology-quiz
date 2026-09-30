@@ -21,6 +21,7 @@ def conn():
         CREATE TABLE homework_attempts(session_id INTEGER PRIMARY KEY REFERENCES quiz_sessions(id) ON DELETE CASCADE, assignment_id TEXT NOT NULL);
         CREATE TABLE glossary_sessions(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
         CREATE TABLE user_literature_progress(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
+        CREATE TABLE user_literature_work_progress(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
         CREATE TABLE user_learning_goals(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
         CREATE TABLE user_achievements(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
         CREATE TABLE user_review_events(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id));
@@ -32,6 +33,7 @@ def conn():
         INSERT INTO homework_attempts VALUES(11,'assignment-1'),(22,'assignment-2');
         INSERT INTO glossary_sessions VALUES(11,1),(22,2);
         INSERT INTO user_literature_progress VALUES(11,1),(22,2);
+        INSERT INTO user_literature_work_progress VALUES(11,1),(22,2);
         INSERT INTO user_learning_goals VALUES(11,1),(22,2);
         INSERT INTO user_achievements VALUES(11,1),(22,2);
         INSERT INTO user_review_events VALUES(11,1),(22,2);
@@ -54,7 +56,7 @@ def test_deletion_is_scoped_and_one_use(conn):
     conn.commit()
     result = confirm_learning_data_deletion(conn, 1, token)
     assert result["telegram_access_retained"] is True
-    for table in ("quiz_sessions", "glossary_sessions", "user_literature_progress",
+    for table in ("quiz_sessions", "glossary_sessions", "user_literature_progress", "user_literature_work_progress",
                   "user_learning_goals", "user_achievements", "user_review_events", "user_review_sessions"):
         assert conn.execute(f"SELECT count(*) FROM {table} WHERE user_id=1").fetchone()[0] == 0
         assert conn.execute(f"SELECT count(*) FROM {table} WHERE user_id=2").fetchone()[0] == 1

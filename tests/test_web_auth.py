@@ -9,6 +9,8 @@ from types import SimpleNamespace
 from fastapi.testclient import TestClient
 import pytest
 
+from app.reading_schema import migrate_reading_schema
+from app.literature import load_literature_items
 from app.auth_schema import migrate_auth_schema
 from app.invitation_schema import migrate_invitation_schema
 from app.pwa_promotion import INVITATION_TTL, claim_first_offer, issue_invitation
@@ -45,6 +47,7 @@ def web(bank):
         migrate_identity_schema(conn)
         migrate_auth_schema(conn)
         migrate_invitation_schema(conn)
+        migrate_reading_schema(conn, load_literature_items())
     now = [1800000000]
     mailbox = Mailbox()
     app = create_app(db_path=str(bank), bot_token=TOKEN, web_settings=SETTINGS, web_mailer=mailbox, web_clock=lambda: now[0])

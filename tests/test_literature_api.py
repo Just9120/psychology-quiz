@@ -7,6 +7,7 @@ from pathlib import Path
 
 from fastapi.testclient import TestClient
 
+from app.reading_schema import migrate_reading_schema
 from app.db import create_or_load_user
 from app.literature import load_literature_items
 from app.miniapp_api import (
@@ -26,7 +27,7 @@ class LiteratureApiTests(unittest.TestCase):
         os.close(fd)
         conn = sqlite3.connect(self.db)
         conn.row_factory = sqlite3.Row
-        _setup_schema(conn)
+        _setup_schema(conn, reading=False)
         user = create_or_load_user(conn, 42, "u", "f", None)
         self.user_id = int(user["id"])
         self.first_item = load_literature_items()[0]
@@ -49,6 +50,7 @@ class LiteratureApiTests(unittest.TestCase):
             """,
             (int(other["id"]), self.second_item["id"]),
         )
+        migrate_reading_schema(conn, load_literature_items())
         conn.commit()
         conn.close()
         self.init_data = _make_init_data(self.bot_token, {"id": 42, "username": "u", "first_name": "f"})
@@ -102,8 +104,8 @@ class LiteratureApiTests(unittest.TestCase):
         payload = self._payload(build_literature_state_response(self.db, self.bot_token, self.init_data))
         after = self._progress_count()
         self.assertEqual(before, after)
-        self.assertEqual(1, len(payload["literature_state"]))
-        state = payload["literature_state"][0]
+        self.assertEqual({item["id"] for item in load_literature_items() if item["work_id"] == self.first_item["work_id"]}, {state["literature_id"] for state in payload["literature_state"]})
+        state = next(state for state in payload["literature_state"] if state["literature_id"] == self.first_item["id"])
         self.assertEqual(self.first_item["id"], state["literature_id"])
         self.assertEqual("in_progress", state["reading_status"])
         self.assertNotIn("private_note", state)
@@ -148,23 +150,23 @@ class LiteratureApiTests(unittest.TestCase):
         response = self.client.post(
             "/miniapp/literature/progress",
             headers={"Authorization": f"tma {self.init_data}"},
-            json={"literature_id": new_item["id"], "reading_status": "revisit", "progress_percent": None},
+            json={"literature_id": new_item["id"], "reading_status": "deferred", "progress_percent": None},
         )
         self.assertEqual(200, response.status_code)
         self.assertEqual(3, self._progress_count())
         self.assertEqual(1, self._progress_count_for(self.user_id, new_item["id"]))
-        self.assertEqual("revisit", response.json()["literature_progress"]["reading_status"])
+        self.assertEqual("deferred", response.json()["literature_progress"]["reading_status"])
         self.assertIsNone(response.json()["literature_progress"]["progress_percent"])
 
         state_payload = self.client.get("/miniapp/literature/state", headers={"Authorization": f"tma {self.init_data}"}).json()
-        self.assertTrue(any(item["literature_id"] == new_item["id"] and item["reading_status"] == "revisit" for item in state_payload["literature_state"]))
+        self.assertTrue(any(item["literature_id"] == new_item["id"] and item["reading_status"] == "deferred" for item in state_payload["literature_state"]))
         items_response = self.client.get("/miniapp/literature/items", headers={"Authorization": f"tma {self.init_data}"})
         self.assertEqual(200, items_response.status_code, items_response.text)
         items_payload = items_response.json()
         item = next(item for item in items_payload["literature_items"] if item["id"] == new_item["id"])
-        self.assertEqual("revisit", item["user_state"]["reading_status"])
+        self.assertEqual("deferred", item["user_state"]["reading_status"])
 
-    def test_read_forces_progress_to_100_and_not_started_resets_fields(self):
+    def test_read_records_completion_without_manual_progress_and_not_started_resets_fields(self):
         code, _, body = build_literature_progress_response(
             self.db,
             self.bot_token,
@@ -173,7 +175,7 @@ class LiteratureApiTests(unittest.TestCase):
         )
         self.assertEqual(200, code)
         read_progress = json.loads(body)["literature_progress"]
-        self.assertEqual(100, read_progress["progress_percent"])
+        self.assertIsNone(read_progress["progress_percent"])
         self.assertIsNotNone(read_progress["started_at"])
         self.assertIsNotNone(read_progress["completed_at"])
         self.assertIsNotNone(read_progress["last_opened_at"])
@@ -187,7 +189,7 @@ class LiteratureApiTests(unittest.TestCase):
         self.assertEqual(200, code)
         reset_progress = json.loads(body)["literature_progress"]
         self.assertEqual("not_started", reset_progress["reading_status"])
-        self.assertEqual(0, reset_progress["progress_percent"])
+        self.assertIsNone(reset_progress["progress_percent"])
         self.assertIsNone(reset_progress["started_at"])
         self.assertIsNone(reset_progress["completed_at"])
         self.assertIsNone(reset_progress["last_opened_at"])
@@ -232,14 +234,14 @@ class LiteratureApiTests(unittest.TestCase):
     def _progress_count(self):
         conn = sqlite3.connect(self.db)
         try:
-            return conn.execute("SELECT COUNT(*) FROM user_literature_progress").fetchone()[0]
+            return conn.execute("SELECT COUNT(*) FROM user_literature_work_progress").fetchone()[0]
         finally:
             conn.close()
 
     def _progress_count_for(self, user_id, literature_id):
         conn = sqlite3.connect(self.db)
         try:
-            return conn.execute("SELECT COUNT(*) FROM user_literature_progress WHERE user_id = ? AND literature_id = ?", (user_id, literature_id)).fetchone()[0]
+            return conn.execute("SELECT COUNT(*) FROM user_literature_work_progress WHERE user_id = ? AND work_id = ?", (user_id, next(item["work_id"] for item in load_literature_items() if item["id"] == literature_id))).fetchone()[0]
         finally:
             conn.close()
 

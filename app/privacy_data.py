@@ -17,6 +17,7 @@ LEARNING_TABLES = (
     "quiz_sessions",
     "glossary_sessions",
     "user_literature_progress",
+    "user_literature_work_progress",
     "user_learning_goals",
     "user_achievements",
     "user_review_events",

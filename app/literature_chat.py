@@ -17,13 +17,12 @@ from app import literature_service
 
 logger = logging.getLogger(__name__)
 PAGE_SIZE = 5
-CALLBACK_PATTERN = re.compile(r"^lit:(?:topics|t:[0-9a-f]{12}:\d{1,3}|i:[0-9a-f]{12}|s:[0-9a-f]{12}:[npdrs])$")
+CALLBACK_PATTERN = re.compile(r"^lit:(?:topics|t:[0-9a-f]{12}:\d{1,3}|i:[0-9a-f]{12}|s:[0-9a-f]{12}:[npdf])$")
 STATUS_CODES = {
     "n": ("Не начато", "not_started"),
     "p": ("Читаю", "in_progress"),
     "d": ("Прочитано", "read"),
-    "r": ("Вернуться позже", "revisit"),
-    "s": ("Пропущено", "skipped"),
+    "f": ("Отложено", "deferred"),
 }
 STATUS_LABELS = {value: label for label, value in STATUS_CODES.values()}
 

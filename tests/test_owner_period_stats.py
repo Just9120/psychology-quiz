@@ -15,7 +15,7 @@ def conn():
         CREATE TABLE quiz_answers(id INTEGER PRIMARY KEY,answered_at TEXT);
         CREATE TABLE glossary_sessions(id TEXT PRIMARY KEY,user_id INTEGER,created_at TEXT,updated_at TEXT,status TEXT);
         CREATE TABLE user_review_events(user_id INTEGER,answered_at TEXT);
-        CREATE TABLE user_literature_progress(user_id INTEGER,updated_at TEXT);
+        CREATE TABLE user_literature_work_progress(user_id INTEGER,updated_at TEXT);
         INSERT INTO quiz_sessions VALUES
           (1,10,'2026-09-29 10:00:00','2026-09-29 11:00:00','finished'),
           (2,10,'2026-09-25 10:00:00',NULL,'in_progress'),
@@ -24,7 +24,7 @@ def conn():
         INSERT INTO glossary_sessions VALUES
           ('one',20,'2026-09-26T10:00:00+00:00','2026-09-26T11:00:00+00:00','completed');
         INSERT INTO user_review_events VALUES(10,'2026-09-29T09:00:00+00:00');
-        INSERT INTO user_literature_progress VALUES(30,'2026-09-29T09:00:00+00:00');
+        INSERT INTO user_literature_work_progress VALUES(30,'2026-09-29T09:00:00+00:00');
     """)
     try:
         yield db

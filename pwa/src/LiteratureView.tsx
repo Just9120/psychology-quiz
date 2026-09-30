@@ -4,7 +4,7 @@ import { api, ApiError } from './api'
 import type { LiteratureCatalog, LiteratureEntry, ReadingStatus } from './types'
 
 const statuses: Record<ReadingStatus, string> = {
-  not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', revisit: 'Вернуться', skipped: 'Пропущено',
+  not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', deferred: 'Отложено',
 }
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
 const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
@@ -44,7 +44,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
     try {
       const result = await api.readingProgress(entry.id, status, null)
       const next = { ...entry, user_state: result.literature_progress }
-      setCatalog(current => ({ ...current, works: current.works.map(item => ({ ...item, entries: item.entries.map(link => link.id === entry.id ? next : link) })) }))
+      setCatalog(current => ({ ...current, works: current.works.map(item => item.work_id === work?.work_id ? { ...item, entries: item.entries.map(link => ({ ...link, user_state: { ...result.literature_progress, literature_id: link.id } })) } : item) }))
       select(next); setSaved(true)
     } catch (failure) {
       // An unconfirmed write must be read back before another edit, never replayed automatically.

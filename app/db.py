@@ -845,7 +845,7 @@ def get_owner_period_stats(conn: Connection, period: str, *, now: datetime | Non
             SELECT user_id FROM quiz_sessions WHERE replace(substr(started_at,1,19),'T',' ') >= ?
             UNION ALL SELECT user_id FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') >= ?
             UNION ALL SELECT user_id FROM user_review_events WHERE replace(substr(answered_at,1,19),'T',' ') >= ?
-            UNION ALL SELECT user_id FROM user_literature_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?
+            UNION ALL SELECT user_id FROM user_literature_work_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?
         ) activity
     """, cutoff, cutoff, cutoff, cutoff)
     return {
@@ -857,5 +857,5 @@ def get_owner_period_stats(conn: Connection, period: str, *, now: datetime | Non
         "quiz_answers": count("SELECT COUNT(*) FROM quiz_answers WHERE answered_at >= ?", cutoff),
         "glossary_started": count("SELECT COUNT(*) FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') >= ?", cutoff),
         "glossary_completed": count("SELECT COUNT(*) FROM glossary_sessions WHERE status='completed' AND replace(substr(updated_at,1,19),'T',' ') >= ?", cutoff),
-        "reading_items_updated": count("SELECT COUNT(*) FROM user_literature_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?", cutoff),
+        "reading_items_updated": count("SELECT COUNT(*) FROM user_literature_work_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?", cutoff),
     }
