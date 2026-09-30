@@ -145,3 +145,18 @@ it.each(['pwa', 'miniapp'])('keeps bibliographic text but hides obsolete source 
   expect(document.body.textContent).not.toContain('private-original-file.pdf')
   expect(document.body.textContent).not.toContain('private-page-17')
 })
+
+
+it.each(['pwa', 'miniapp'])('keeps topic totals but does not offer off-filter reading actions in %s', async client => {
+  const entry = { ...catalog.works[0].entries[0], title: 'Учебная книга',
+    user_state: { literature_id: 'book', reading_status: 'in_progress' as const, progress_percent: null, updated_at: '2026-09-30T12:00:00Z' } }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, works: [{ ...catalog.works[0], entries: [entry] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[entry]} topics={catalog.topics} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  expect(screen.getByRole('button', { name: 'Продолжить «Учебная книга»' })).toBeVisible()
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'read')
+  expect(screen.queryByRole('button', { name: /Учебная книга/ })).not.toBeInTheDocument()
+  expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), '')
+  expect(screen.getByRole('button', { name: 'Продолжить «Учебная книга»' })).toBeVisible()
+})

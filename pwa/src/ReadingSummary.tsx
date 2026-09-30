@@ -41,7 +41,7 @@ export function readingNextStep(items: Item[], allItems: Item[] = items): Item |
   return recommendations[0] ?? null
 }
 
-export function ReadingSummary({ items, allItems = items, busy, onSelect }: { items: Item[]; allItems?: Item[]; busy: boolean; onSelect: (id: string) => void }) {
+export function ReadingSummary({ items, allItems = items, busy, onSelect, showActions = true }: { items: Item[]; allItems?: Item[]; busy: boolean; onSelect: (id: string) => void; showActions?: boolean }) {
   const works = new Map<string, Item[]>()
   for (const item of items) {
     const key = item.work_id ?? item.id
@@ -52,13 +52,13 @@ export function ReadingSummary({ items, allItems = items, busy, onSelect }: { it
   const read = groups.filter(entries => statuses(entries).size === 1 && statuses(entries).has('read')).length
   const conflicts = groups.filter(entries => statuses(entries).size > 1).length
   const current = groups.map(entries => entries.find(item => item.user_state?.reading_status === 'in_progress')).filter((item): item is Item => !!item)
-  const next = readingNextStep(items, allItems)
+  const next = showActions ? readingNextStep(items, allItems) : null
   const continuing = next?.user_state?.reading_status === 'in_progress'
   return <aside className="panel reading-summary" aria-label="Прогресс списка чтения">
     <p role="status">Прочитано {read} из {groups.length}</p>
     {conflicts > 0 && <p className="muted">У {conflicts} работ отметки в выбранных списках различаются. Они не включены в число прочитанных до согласования отметок.</p>}
     <h2>Сейчас читаю</h2>
-    {current.length ? <ul>{current.map(item => <li key={item.id}><button className="text-button" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button></li>)}</ul> : <p className="muted">В выбранных списках нет книг со статусом «Читаю».</p>}
+    {current.length ? <ul>{current.map(item => <li key={item.id}>{showActions ? <button className="text-button" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button> : <span>{item.title ?? 'Книга'}</span>}</li>)}</ul> : <p className="muted">В выбранных списках нет книг со статусом «Читаю».</p>}
     {next && <section aria-label="Следующий шаг чтения">
       <h2>Следующий шаг</h2>
       <button className="text-button" disabled={busy} onClick={() => onSelect(next.id)}>{continuing ? 'Продолжить' : 'Начать'} «{next.title ?? 'Книга'}»</button>
