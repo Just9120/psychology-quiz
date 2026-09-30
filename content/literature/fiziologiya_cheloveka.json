@@ -156,14 +156,14 @@
     ],
     "year": 2019,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "foundation",
     "status": "approved",
     "priority": null,
     "topic_order": 50,
     "global_order": 130050,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Физиология человека».",
+    "why_read": "Дополнительный обзор работы мозга и её связи с поведением; читать рядом с вводным материалом, не вместо систематического учебника.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -177,7 +177,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание. Роль и значимость в плане чтения — рекомендация агента по библиографическим сведениям/описанию, не приоритет преподавателя. Полный текст, измеренная сложность и соответствие конкретных изданий не подтверждены.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "fch_nicholls_martin_ot_neirona_k_mozgu",
@@ -261,16 +263,18 @@
     ],
     "year": 2012,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 80,
     "global_order": 130080,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Физиология человека».",
+    "why_read": "После вводного обзора рассмотреть авторское исследование мозга через неврологические ситуации; интерпретации сопоставлять с учебником и актуальными исследованиями.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "fch_carter_kak_rabotaet_mozg"
+    ],
     "source_refs": [
       "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S"
     ],
@@ -282,7 +286,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание. Роль и значимость в плане чтения — рекомендация агента по библиографическим сведениям/описанию, не приоритет преподавателя. Полный текст, измеренная сложность и соответствие конкретных изданий не подтверждены.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "fch_swaab_my_eto_nash_mozg",
@@ -470,16 +476,18 @@
     ],
     "year": 2017,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 140,
     "global_order": 130140,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Физиология человека».",
+    "why_read": "После вводного знакомства с мозгом перейти к систематическому учебнику по физиологии нервной системы.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "fch_carter_kak_rabotaet_mozg"
+    ],
     "source_refs": [
       "drive:1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S"
     ],
@@ -491,7 +499,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание. Роль и значимость в плане чтения — рекомендация агента по библиографическим сведениям/описанию, не приоритет преподавателя. Полный текст, измеренная сложность и соответствие конкретных изданий не подтверждены.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "fch_yakutenko_volya_i_samokontrol",

@@ -268,10 +268,10 @@
     },
     "literature:fch_martynov_mozg": {
       "decision": "approved",
-      "item_sha256": "23aa2c8b25a69ff11e397fc36b0f02156088fdb027e26e36a303e7bd3b2c46e7",
+      "item_sha256": "8d74d1ba9df02bce3f1d9ecee060c41c820cf70598a2ad4af633d88bdc475b02",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -279,7 +279,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 5"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/news/non-fictio-21-otchet-detskaya-literatura-den-4/?ast_utm=book_news",
+        "evidence_scope": "Indexed official publisher presentation identifies author/title and brain organization, behavior, choice and emotions. Direct page fetch 403; exact edition, full text and practical claims not verified.",
+        "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
+        "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      }
     },
     "literature:fch_nicholls_martin_ot_neirona_k_mozgu": {
       "decision": "approved",
@@ -313,10 +322,10 @@
     },
     "literature:fch_ramachandran_mozg_rasskazyvaet": {
       "decision": "approved",
-      "item_sha256": "3a8c897882cd23c5cbbce25c4cb14c05ba31d9f32cdd3b73cf0c5095387fe0b3",
+      "item_sha256": "18ef0ade673a612b817eb151b56fbaebbb6261317da0ef580621036dad9f12ce",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -324,7 +333,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 8"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://careerpress.ru/book/Tell-Tale-Brain/",
+        "evidence_scope": "Official publisher description read: named author/work, neurological case-based discussion of brain functions and evolution. RSL 01007504481 records 2014; course year 2012 and current publisher ISBN edition equivalence not established. Marketing claims and treatment claims are not endorsed.",
+        "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
+        "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      }
     },
     "literature:fch_swaab_my_eto_nash_mozg": {
       "decision": "approved",
@@ -403,10 +421,10 @@
     },
     "literature:fch_shulgovsky_neirofiziologiya": {
       "decision": "approved",
-      "item_sha256": "19b3e738569032519dbf060f49b1f6ecec7d84004b32ca7b513423abd54d12a3",
+      "item_sha256": "742ee6969425480a364b35e38c707a702fd9c222da1d44fb3353e3af0d2a55d3",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -414,7 +432,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 14"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01008241399",
+        "evidence_scope": "RSL catalogue read: university neurophysiology textbook, author/title/publisher match. Catalogue edition 2016 differs from course year 2017; exact edition and full text not verified.",
+        "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
+        "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      }
     },
     "literature:fch_yakutenko_volya_i_samokontrol": {
       "decision": "approved",
@@ -520,10 +547,10 @@
     },
     "literature:fvnd_martynov_mozg": {
       "decision": "approved",
-      "item_sha256": "ea12cf18c5b6df6044809325c5ca576f1feb94234dcd78734f3e7e2c5e631224",
+      "item_sha256": "a218b14c994e747d311d3f2e8384a665a4885c4bb4e4eb832976ecb850587ed8",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -531,7 +558,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 5"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/news/non-fictio-21-otchet-detskaya-literatura-den-4/?ast_utm=book_news",
+        "evidence_scope": "Indexed official publisher presentation identifies author/title and brain organization, behavior, choice and emotions. Direct page fetch 403; exact edition, full text and practical claims not verified.",
+        "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
+        "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      }
     },
     "literature:fvnd_nicholls_martin_ot_neirona_k_mozgu": {
       "decision": "approved",
@@ -565,10 +601,10 @@
     },
     "literature:fvnd_ramachandran_mozg_rasskazyvaet": {
       "decision": "approved",
-      "item_sha256": "706d2cd19038b28f353ae7bb035c47ca94842b546616c45b1c190b9fa1a56e6a",
+      "item_sha256": "43ae93156164e8074a76b477fb2d4deecf424559cd69d5baa3cdca4afec4e662",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -576,7 +612,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 8"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://careerpress.ru/book/Tell-Tale-Brain/",
+        "evidence_scope": "Official publisher description read: named author/work, neurological case-based discussion of brain functions and evolution. RSL 01007504481 records 2014; course year 2012 and current publisher ISBN edition equivalence not established. Marketing claims and treatment claims are not endorsed.",
+        "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
+        "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      }
     },
     "literature:fvnd_swaab_my_eto_nash_mozg": {
       "decision": "approved",
@@ -655,10 +700,10 @@
     },
     "literature:fvnd_shulgovsky_neirofiziologiya": {
       "decision": "approved",
-      "item_sha256": "941e0880940b855083fb63a976f65f7df02a70cf2550be5aa9e530f49d94be62",
+      "item_sha256": "cd392bdbe30e6ccd4116ff5f8036cac7e3e6c7ebcd7fdd8dde8e93dcf58750f2",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -666,7 +711,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 14"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01008241399",
+        "evidence_scope": "RSL catalogue read: university neurophysiology textbook, author/title/publisher match. Catalogue edition 2016 differs from course year 2017; exact edition and full text not verified.",
+        "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
+        "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      }
     },
     "literature:fvnd_yakutenko_volya_i_samokontrol": {
       "decision": "approved",
