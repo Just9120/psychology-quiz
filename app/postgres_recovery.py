@@ -64,14 +64,14 @@ def verify_user_state(before: dict, after: dict) -> None:
     if ("import_manifest_sha256" in before
             and after.get("import_manifest_sha256") != before["import_manifest_sha256"]):
         raise ValueError("PostgreSQL migration changed import provenance")
-    for table in before_columns.keys() - REBUILDABLE_TABLES:
+    for table in sorted(before_columns.keys() - REBUILDABLE_TABLES):
         if (table not in after_columns
                 or before_columns[table] != after_columns[table]
                 or before["tables"][table] != after["tables"][table]):
             raise ValueError("PostgreSQL migration changed pre-existing user state")
         if table in before["sequences"] and after["sequences"].get(table) != before["sequences"][table]:
             raise ValueError("PostgreSQL migration changed a user identity sequence")
-    for table in after_columns.keys() - before_columns.keys() - REBUILDABLE_TABLES:
+    for table in sorted(after_columns.keys() - before_columns.keys() - REBUILDABLE_TABLES):
         if table == "user_literature_work_progress":
             from app.reading_schema import FIELDS, VERSION as READING_VERSION
             proof = before.get("reading_work_migration")
