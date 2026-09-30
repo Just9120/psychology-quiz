@@ -1556,10 +1556,10 @@
     },
     "literature:lit_ae000be9a73115a6": {
       "decision": "approved",
-      "item_sha256": "c2514b630b85618fd7c8797909e80cc790d08df9c3a1d07f72f6bbaf095fd8b2",
+      "item_sha256": "39d1c0d5f8dcd0f69b79546915f78b398b5dacd41c79336091a38fb071074e75",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
@@ -1575,6 +1575,23 @@
         "additional_primary_record": "https://vshpk.ru/nashi-knigi",
         "evidence_scope": "NEB 2016 record and author institution both identify E.V. Martynova for exact title; existing course citation says E.A. No course identity/edition confirmation.",
         "limitations": "Preserve original author/year/work identity, source capture and user history; do not assign role or silently merge/correct author."
+      },
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "primary_record": "https://vshpk.ru/nashi-knigi",
+        "evidence_scope": "Author-school catalogue retrieved: exact book title explicitly attributed to E. V. Martynova. Display author initials corrected from E. A. to E. V.; original course citation retained. Indexed NEB record corroborates E. V. but direct NEB fetch failed, so it is not used as retrieved full evidence.",
+        "decision": "correct_normalized_author_keep_source_citation",
+        "limitations": "Course year and edition remain UNSET. Publisher link timed out. No replacement of source snapshots or work identity."
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://vshpk.ru/nashi-knigi",
+        "evidence_scope": "Author-school annotation retrieved: consulting principles, skills, ethics, process/stages, organization of therapeutic space, training tasks and explicit student/practitioner audience. Applied recommendation after introduction uses this metadata only.",
+        "sequence": "Agent recommends introduction before applied consulting process study; not teacher-assigned order.",
+        "limitations": "Full book not read, exact course edition/access not verified; no efficacy endorsement or substitute for professional training/supervision."
       }
     },
     "literature:lit_e397986f81e37d22": {
