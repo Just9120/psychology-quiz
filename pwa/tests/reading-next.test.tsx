@@ -43,3 +43,10 @@ it('starts reviewed reading only after prerequisites across topics and labels it
   await userEvent.setup().click(screen.getByRole('button', { name: 'Начать «Intro»' }))
   expect(onSelect).toHaveBeenCalledWith('next')
 })
+
+
+it('distinguishes agent sequence from the teacher priority', () => {
+  const item = { id: 'classic', title: 'Classic', importance: 'additional', importance_source: 'teacher', reading_level: 'deepening', why_read: 'После вводного курса.', prerequisites: [] }
+  render(<ReadingSummary items={[item]} busy={false} onSelect={vi.fn()} />)
+  expect(screen.getByText('Рекомендация агента. После вводного курса. Приоритет книги — из учебного списка.')).toBeVisible()
+})

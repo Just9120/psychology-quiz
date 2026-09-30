@@ -66,5 +66,14 @@ def test_telegram_start_recommendation_labels_origin_and_escapes_reason(monkeypa
             "importance_source": "teacher", "reading_level": "foundation",
             "why_read": "<Reason>", "prerequisites": []}
     text, keyboard = literature_chat._topic_view([item], {}, literature_chat._token("one"), 0)
-    assert "Приоритет преподавателя" in text and "&lt;Reason&gt;" in text
+    assert "Рекомендация агента." in text and "Приоритет книги — из учебного списка." in text and "&lt;Reason&gt;" in text
     assert "начать" in text and keyboard.inline_keyboard[0][0].text == "Начать чтение"
+
+
+def test_agent_sequence_is_distinct_from_teacher_book_priority():
+    item = {"id": "classic", "importance": "additional", "importance_source": "teacher",
+            "reading_level": "deepening", "why_read": "После вводного курса.", "prerequisites": []}
+    result = reading_next_step([item], {})
+    assert result["basis"] == "agent"
+    assert result["priority_source"] == "teacher"
+    assert result["reason"] == "Рекомендация агента. После вводного курса. Приоритет книги — из учебного списка."

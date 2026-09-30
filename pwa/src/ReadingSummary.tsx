@@ -62,7 +62,7 @@ export function ReadingSummary({ items, allItems = items, busy, onSelect }: { it
     {next && <section aria-label="Следующий шаг чтения">
       <h2>Следующий шаг</h2>
       <button className="text-button" disabled={busy} onClick={() => onSelect(next.id)}>{continuing ? 'Продолжить' : 'Начать'} «{next.title ?? 'Книга'}»</button>
-      <p className="muted">{continuing ? 'Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.' : `${next.importance_source === 'agent' ? 'Рекомендация агента' : 'Приоритет преподавателя'}. ${next.why_read}`}</p>
+      <p className="muted">{continuing ? 'Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.' : `Рекомендация агента. ${next.why_read}${next.importance_source === 'teacher' ? ' Приоритет книги — из учебного списка.' : ''}`}</p>
     </section>}
   </aside>
 }

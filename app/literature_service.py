@@ -81,9 +81,11 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             return None
         recommendations.sort(key=lambda item: (rank[item["importance"]], str(item["id"])))
         item = recommendations[0]
-        origin = "Рекомендация агента" if item["importance_source"] == "agent" else "Приоритет преподавателя"
-        return {"item": item, "kind": "start", "reason": f"{origin}. {item['why_read']}",
-                "basis": item["importance_source"]}
+        reason = f"Рекомендация агента. {item['why_read']}"
+        if item["importance_source"] == "teacher":
+            reason += " Приоритет книги — из учебного списка."
+        return {"item": item, "kind": "start", "reason": reason,
+                "basis": "agent", "priority_source": item["importance_source"]}
     # Two stable sorts avoid deriving a preference from bibliography position.
     candidates.sort(key=lambda item: str(item["id"]))
     candidates.sort(key=recency, reverse=True)
