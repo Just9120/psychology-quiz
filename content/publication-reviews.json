@@ -1045,7 +1045,7 @@
     },
     "literature:lit_4f9768a778fe2a01": {
       "decision": "approved",
-      "item_sha256": "9e99a6b2c158637ebb8fdc56dea3eed082011103f53a2a09e8fea5f2f1f67ba7",
+      "item_sha256": "2c563d6c625feaf223ef45e1c969e6256bf7a5d5237a09cbe636c203cd7db470",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1063,12 +1063,13 @@
         "publisher_description": "https://www.piter.com/collection/psihologicheskaya-literatura/product/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pamyati",
         "evidence_scope": "Existing reviewed course bibliography explicitly calls both works examples of domestic case studies. First-party Piter collected-edition description confirms observation/diary framing for the injured participant; NEB catalogue confirms standalone Small Book title/authorship. Recommendation is agent metadata inference, not full-text review or measured difficulty. Unknown course edition/year remains unchanged; the two works are not merged into one collected edition.",
         "additional_primary_record": "https://rusneb.ru/catalog/002676_000027_IRKNB-RU_%D0%98%D0%9E%D0%93%D0%A3%D0%9D%D0%91_HOBBIT_15_%D0%9B%2B86-000000-486394/",
-        "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite."
+        "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite.",
+        "sequence": "Updated after direct methodology-paper research: Busygina first, then independent Luria case-study examples. This sequence is agent inference, not teacher priority or measured prerequisite."
       }
     },
     "literature:lit_25a5d2f1c7ba76e1": {
       "decision": "approved",
-      "item_sha256": "1712fff80af7a8c8706d5463a87faf96fa05d53f2d796db2830d10e99dd00d4c",
+      "item_sha256": "a6021e5241f668e1342681aac93417186e68fc1cb6e401288c3f595d7a80aa32",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1086,7 +1087,8 @@
         "publisher_description": "https://www.piter.com/collection/psihologicheskaya-literatura/product/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pamyati",
         "evidence_scope": "Existing reviewed course bibliography explicitly calls both works examples of domestic case studies. First-party Piter collected-edition description confirms observation/diary framing for the injured participant; NEB catalogue confirms standalone Small Book title/authorship. Recommendation is agent metadata inference, not full-text review or measured difficulty. Unknown course edition/year remains unchanged; the two works are not merged into one collected edition.",
         "additional_primary_record": "https://rusneb.ru/catalog/002676_000027_IRKNB-RU_%D0%98%D0%9E%D0%93%D0%A3%D0%9D%D0%91_HOBBIT_15_%D0%9B%2B86-000000-486394/",
-        "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite."
+        "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite.",
+        "sequence": "Updated after direct methodology-paper research: Busygina first, then independent Luria case-study examples. This sequence is agent inference, not teacher priority or measured prerequisite."
       }
     },
     "literature:lit_a29dd1990e36a236": {
@@ -1181,7 +1183,7 @@
     },
     "literature:lit_6190d3b37fdeeab5": {
       "decision": "approved",
-      "item_sha256": "2f010adaec1644ae992966c3bd2c4482ec86af8cfe3887d143196b634c33d375",
+      "item_sha256": "00a9df206bc3883990d12559b0f1241d2206a72b6968492bdad6dcc58f6bcfac",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1192,7 +1194,20 @@
           "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
           "locator": "Позиция 2: Научный статус методологии исследования случаев"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://psyjournals.ru/journals/cpp/archive/2009_n1/Busigina",
+        "evidence_scope": "Existing course recommendation and first-party journal abstract support methodology-before-example sequencing. Metadata and abstract checked; no clinical recommendation, measured reading difficulty, or full course-corpus review. Original bibliography/source snapshot/work identity retained despite recorded discrepancy.",
+        "prerequisites": "No named book prerequisite for methodology; applied example follows the methodology article."
+      },
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://psyjournals.ru/journals/cpp/archive/2009_n1/Busigina",
+        "limitations": "Страницы статьи расходятся: учебный список и библиотечная запись МГППУ указывают 9–34, текущая страница журнала — 5–29. Исходная цитата сохранена; точная пагинация требует сверки."
+      }
     },
     "literature:lit_93082f75dd37021b": {
       "decision": "approved",
@@ -1286,7 +1301,7 @@
     },
     "literature:lit_7e152869797af503": {
       "decision": "approved",
-      "item_sha256": "7cff44957dc215315883e0f1aa5cd996f1fcfbef117b63d6efcf54ecca45e6c4",
+      "item_sha256": "e457e4ac49d3cf9c0e86ca1b67918b80e717535f0d42d340e1c7c99c0d41377a",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1297,7 +1312,20 @@
           "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
           "locator": "Позиция 5: Феноменологический анализ динамики переживаний клиентов в процессе психотерапии: изучение отдельных случаев. Часть 1"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://psyjournals.ru/journals/cpp/archive/2019_n2/Kiselnikova_Lavrova_et_al",
+        "evidence_scope": "Existing course recommendation and first-party journal abstract support methodology-before-example sequencing. Metadata and abstract checked; no clinical recommendation, measured reading difficulty, or full course-corpus review. Original bibliography/source snapshot/work identity retained despite recorded discrepancy.",
+        "prerequisites": "No named book prerequisite for methodology; applied example follows the methodology article."
+      },
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://psyjournals.ru/journals/cpp/archive/2019_n2/Kiselnikova_Lavrova_et_al",
+        "limitations": "Инициалы соавтора Альмухаметовой расходятся: в учебном списке Т. А., на странице журнала Т. Н. Исходный список авторов сохранён; перед исправлением нужна сверка."
+      }
     },
     "literature:lit_13f7ecd9b94275d0": {
       "decision": "approved",
