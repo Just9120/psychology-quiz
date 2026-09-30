@@ -55,3 +55,18 @@ def test_owner_profile_name_is_classified_without_reading_its_value():
         assert 'private-owner-display-name' not in str(report)
     finally:
         conn.close()
+
+
+def test_canonical_initialized_schema_has_complete_privacy_classification(tmp_path, monkeypatch):
+    from contextlib import closing
+    from scripts import init_db
+
+    target = tmp_path / "privacy-schema.sqlite3"
+    monkeypatch.setattr(init_db, "resolve_db_path", lambda: str(target))
+    assert init_db.main() == 0
+    with closing(sqlite3.connect(target)) as conn:
+        columns, keys = sqlite_schema(conn)
+        report = inventory(columns, keys)
+    assert not report["unclassified_tables"]
+    assert all(item["present"] and not item["missing_columns"]
+               for item in report["personal_tables"].values())
