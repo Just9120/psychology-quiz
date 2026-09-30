@@ -1855,7 +1855,7 @@
     },
     "literature:lit_28136036489db778": {
       "decision": "approved",
-      "item_sha256": "58abf4f1eba3f038401ff0638e7bf5047bbedeb69909f09e365080832ce94de2",
+      "item_sha256": "d04cd8409ddc5d0bdad27e20bf46a360f1fe07f572d6cd45075ec21e6eb19902",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1866,7 +1866,15 @@
           "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
           "locator": "Позиция 3: Психология самосознания: Хрестоматия"
         }
-      ]
+      ],
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://rusneb.ru/catalog/002178_000020_BGUNB-BEL%7C%7C%7CBIBL%7C%7C%7C0000106457/",
+        "evidence_scope": "Primary national electronic library indexed metadata identifies editor/compiler Raygorodsky for 2000 anthology. Current course list text fetch retains Ivanova. Visual source layout and exact edition identity not reverified.",
+        "source_read": "Authenticated current course PDF text fetch; modified timestamp matches recorded source, 2026-09-08. Text extraction is not visual page verification.",
+        "limitations": "No scientific content certification, role assignment, edition merging or personal state change."
+      }
     },
     "literature:lit_88dee04d51aa3119": {
       "decision": "approved",
@@ -1909,7 +1917,7 @@
     },
     "literature:lit_4ac5113ca33225a9": {
       "decision": "approved",
-      "item_sha256": "e9b1179d6e524ec02b5e73a1a86cfe99e007bdf59a3b0dcf2936e066ea319f20",
+      "item_sha256": "1239177939320b4a2b95edcbaf9d778be94f526294011905400f64e730b109cd",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1920,7 +1928,15 @@
           "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
           "locator": "Позиция 6: Социальная идентичность: теория и практика"
         }
-      ]
+      ],
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://www.buninlib.orel.ru/cgi-bin/irbis64r_14/cgiirbis_64.exe?C21COM=S&I21DBN=EK_PRINT&LNG=&P21DBN=EK&S21CNR=500&S21FMT=FULLW_print&S21P01=0&S21P02=1&S21P03=A%3D&S21REF=&S21STN=1&S21STR=%D0%98%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0%2C+%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D1%8F+%D0%9B%D1%8C%D0%B2%D0%BE%D0%B2%D0%BD%D0%B0&Z21ID=",
+        "evidence_scope": "Indexed library metadata and university publication bibliography name Ivanova/Rumyantseva for 2009 work. Current course list text names only Rumyantseva. No replacement of original author citation or work identity.",
+        "source_read": "Authenticated current course PDF text fetch; modified timestamp matches recorded source, 2026-09-08. Text extraction is not visual page verification.",
+        "limitations": "No scientific content certification, role assignment, edition merging or personal state change."
+      }
     },
     "literature:lit_7bcfce2256481407": {
       "decision": "approved",
