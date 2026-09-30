@@ -120,3 +120,17 @@ Backup record `.postgres/backups/release-*/record.json`: cluster/database/revisi
 `/readyz` проверяет существующий SQLite или version/catalog PostgreSQL и выполняет реальное чтение; unavailable/schema drift → 503 без DSN/raw errors. `/healthz` остаётся лёгкой process/version проверкой. Stateful classifier охватывает DB boundary/schema/import changes и canonical content; `.dockerignore` считается runtime input. SQL/schema compatibility для последующих schema versions всё равно требует отдельного reviewed migration — автоматического неизвестного DDL нет.
 
 Backup retention/RPO/RTO, off-host copy, HA и масштабная нагрузка — UNSET/outside этой Goal. Bounded restore rehearsal не доказывает восстановление всей VPS или готовность к неизвестному объёму пользователей.
+
+
+## Read-only план хранения резервных копий
+
+Canonical inspector — [backup_retention_plan.py](../scripts/backup_retention_plan.py). Он только читает отдельные `release-*` records и проверяет `database.dump` по размеру/SHA-256; операций удаления и production restore нет. Не использовать mtime как дату verified backup. Новые [backup records](../scripts/postgres_backup.py) сохраняют `created_at` и `verified_at` в UTC; старые records без этих полей по-прежнему пригодны для verified recovery, но inspector оставляет их на ручную проверку.
+
+На VPS из `/opt/psychology-quiz`, root, без вывода содержимого БД/DSN:
+
+```bash
+flock -n /tmp/psychology-quiz-deploy.lock python3 scripts/backup_retention_plan.py \
+  --backup-root /opt/psychology-quiz/.postgres/backups
+```
+
+Без `--retention-days` срок UNSET, кандидатов к очистке нет. После решения владельца можно передать явное число дней для плана; это не разрешает удаление. Для recovery point, которым пользуется активная процедура, добавить `--pin-record` с его `record.json`; внешние пути отклоняются. Минимум две новейшие проверенные точки каждого кластера остаются независимо от срока. Failed/unknown records, symlinks, повреждённые dumps, несовместимые identities и недостоверные даты сохраняются. `REVIEW_CANDIDATE` означает только необходимость операторского review с учётом незавершённых recovery records; automatic cleanup не внедрён. Снимок отражает момент проверки, не состояние после освобождения lock. Полный retention срок и применимое удаление остаются решением владельца; никакой RPO/RTO этот инструмент не устанавливает.

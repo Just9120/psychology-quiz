@@ -1,9 +1,11 @@
 """Native dump/isolated-restore workflow, with injectable system boundaries."""
 from __future__ import annotations
 
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import tempfile
 import uuid
@@ -52,7 +54,8 @@ def backup_and_rehearse(runtime, backup_root: Path) -> Path:
     directory = Path(tempfile.mkdtemp(prefix="release-", dir=backup_root))
     record_path, dump = directory / "record.json", directory / "database.dump"
     record = {"format": "psychology-postgres-recovery-v1", "phase": "started",
-              "source": runtime.identity(), "before": before}
+              "source": runtime.identity(), "before": before,
+              "created_at": datetime.now(timezone.utc).isoformat()}
     write_record(record_path, record)
     restore_name = "psychology_restore_" + uuid.uuid4().hex
     created = False
@@ -78,6 +81,7 @@ def backup_and_rehearse(runtime, backup_root: Path) -> Path:
         runtime.drop_restore_database(restore_name)
         created = False
         record["phase"] = "verified"
+        record["verified_at"] = datetime.now(timezone.utc).isoformat()
         write_record(record_path, record)
         return record_path
     except BaseException as error:
@@ -96,8 +100,12 @@ def backup_and_rehearse(runtime, backup_root: Path) -> Path:
 
 def read_verified_record(path: Path) -> dict:
     record = json.loads(path.read_text(encoding="utf-8"))
-    if record.get("format") != "psychology-postgres-recovery-v1" or record.get("phase") != "verified":
+    if not isinstance(record, dict) or record.get("format") != "psychology-postgres-recovery-v1" or record.get("phase") != "verified":
         raise ValueError("A verified PostgreSQL recovery record is required")
+    if (type(record.get("dump_bytes")) is not int or record["dump_bytes"] <= 0
+            or not isinstance(record.get("dump_sha256"), str)
+            or re.fullmatch(r"[0-9a-f]{64}", record["dump_sha256"]) is None):
+        raise ValueError("Invalid PostgreSQL recovery dump identity")
     dump = path.with_name("database.dump")
     if dump.stat().st_size != record["dump_bytes"] or file_digest(dump) != record["dump_sha256"]:
         raise ValueError("PostgreSQL recovery dump has changed")
