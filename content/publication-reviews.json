@@ -2501,10 +2501,10 @@
     },
     "literature:lit_3c68e7fa4c7ec0ba": {
       "decision": "approved",
-      "item_sha256": "b14f5cb6d00fce6c69b17993d49fb4eb38a35dbbd9637c45eb1c55e241200b48",
+      "item_sha256": "436d7a689f08509356c91784ab7947cf42aa49207ae74f7e2e2fde4a6b46227b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2512,7 +2512,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 15: С тобой я дома"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://eksmo.ru/amp/book/s-toboy-ya-doma-kniga-o-tom-kak-lyubit-drug-druga-ostavayas-vernymi-sebe-ITD1158682/",
+        "evidence_scope": "Official publisher page retrieved 30 September 2026; author/title and description of maintaining oneself in a couple verified. A popular relationship reading role is agent inference from this description. No full-text, clinical effectiveness or exact course-edition review.",
+        "sequence": "Optional additional reading after a general family psychology overview; no mandatory specific prerequisite established.",
+        "limitations": "Source citation, IDs, work identity, source snapshots, year, availability and personal reading state unchanged. No price, access entitlement or professional qualification claimed."
+      }
     },
     "literature:lit_d326f6da3f94e03b": {
       "decision": "approved",
