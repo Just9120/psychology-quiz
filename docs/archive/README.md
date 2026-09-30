@@ -30,3 +30,12 @@
 | --- | --- |
 | [Literature runtime RFC](literature_runtime_rfc.md) | E09: личный план чтения и обоснованный следующий шаг AC-LIT-06 остаются в текущей Goal; legacy state mapping Q-04 и интеграции AC-LIT-08/09 не объявлены завершёнными. Старые /next, reminders, deadline и daily-time proposals сами по себе не расширяют требования. |
 | [Glossary and literature contours RFC](glossary_literature_contours_rfc.md) | E05/E09: сохраняются историческая структура и rationale разделов; source-backed coverage и чтение проверяются по текущим AC, а не по прежнему статусу proposal. Topic registry reference сохранён в активной документации. |
+
+## Исторические отчёт и план Mini App
+
+Два файла перенесены 30.09.2026 без изменения содержимого. Exact-name/path consumer search в tracked файлах и проверка doc readers не выявили использования кодом/tests/workflows; прежние упоминания в карте документов плана обновлены. Перенос не закрывает findings и не подтверждает отсутствие дефектов текущего клиента.
+
+| Документ | Основание и действующие обязательства |
+| --- | --- |
+| [Runner audit после PR 146](2026-05-24-miniapp-runner-audit.md) | Снимок прежнего HTML client и API. AUDIT-001/002/003 (hydration/restart/error recovery) и AUDIT-005 (browser coverage) сопоставлять с текущим React-клиентом в F-013; AUDIT-004 (cache) и AUDIT-007 (origin configuration) — с действующей delivery procedure/F-116; AUDIT-006 (docs drift) — F-009; AUDIT-008 (parallel setup) — AC-FND-07/F-025. Все восемь исходных записей сохранены, неподтверждённые legacy гипотезы не объявлены текущими дефектами или устранёнными. |
+| [Mini App / Bot Refactor RFC](refactor-plan-miniapp-bot.md) | Исторический план шести PR и ограничение no-build/без React/PostgreSQL заменены текущими AGENTS/spec. Полезные цели разделения transport/domain, удаления dynamic coupling и сохранения contracts остаются в F-024. Legacy HTML сохраняется по F-116 до проверки внешних потребителей; перенос RFC не разрешает удаление или новый scope. |
