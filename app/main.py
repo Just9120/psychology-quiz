@@ -36,6 +36,7 @@ from telegram.ext import (
 )
 
 from app.config import load_settings
+from app.owner_stats import get_owner_period_stats
 from app.web_link_handlers import link_command, confirm_link_callback
 from app.logging_config import configure_app_logging
 from app.handler_latency import HandlerLatency as _HandlerLatency
@@ -68,7 +69,6 @@ from app.db import (
     get_question_options,
     get_quiz_session,
     get_selected_categories_for_session,
-    get_owner_period_stats,
     init_db_connection,
     select_random_approved_question_ids_across_active_categories,
     select_random_approved_question_ids_by_category,

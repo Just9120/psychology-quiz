@@ -61,7 +61,7 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         if action == "owner/stats":
             if account["email"] != auth.settings.owner_email:
                 raise AuthError("forbidden", 403)
-            from app.db import get_owner_period_stats
+            from app.owner_stats import get_owner_period_stats
             try:
                 return get_owner_period_stats(conn, payload.get("period")), None
             except ValueError:
