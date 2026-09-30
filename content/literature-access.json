@@ -41,6 +41,40 @@
         "access": "provider_terms",
         "checked_at": "2026-09-29"
       }
+    ],
+    "gippenreiter_vvedenie_v_obschuyu_psihologiyu": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/uliya-gippenreyter/vvedenie-v-obschuu-psihologiu-kurs-lekciy-180603/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/vvedenie-v-obschuu-psihologiu-6180795/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
+    ],
+    "nurkova_berezanskaya_obschaya_psihologiya": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/veronika-nurkova/obschaya-psihologiya-3-e-izd-per-i-dop-uchebnik-dlya-vuzo-13240704/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
+    ],
+    "rubinstein_osnovy_obschey_psihologii": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/sergey-rubinshteyn/osnovy-obschey-psihologii-50405712/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
     ]
   }
 }
