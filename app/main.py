@@ -89,13 +89,20 @@ from app.miniapp_context import (
     build_miniapp_url_with_fallback,
 )
 from app.glossary import GLOSSARY_QUIZ_SESSION_KEY
-from app.classic_quiz_handlers import (
+from app.classic_quiz_view import (
     build_quiz_mode_keyboard,
     build_difficulty_keyboard,
     build_category_keyboard,
     build_quiz_finished_text,
     build_selected_mix_keyboard,
     build_question_count_keyboard,
+    build_classic_answer_reply_keyboard,
+    build_classic_reply_feedback_text,
+    build_question_text_with_options,
+    build_classic_next_reply_keyboard,
+    parse_classic_reply_answer_number,
+)
+from app.classic_quiz_handlers import (
     _classic_reply_mode_enabled,
     _safe_classic_text_log_fields,
     _classic_text_latency_bucket,
@@ -103,8 +110,6 @@ from app.classic_quiz_handlers import (
     _load_classic_text_answer_context,
     _handle_classic_text_answer_db,
     answer_callback,
-    build_classic_answer_reply_keyboard,
-    build_classic_reply_feedback_text,
     start_mix_quiz,
     show_finished_quiz_message,
     send_quiz_result_with_main_menu,
@@ -113,8 +118,6 @@ from app.classic_quiz_handlers import (
     send_current_question,
     restore_main_menu_after_quiz,
     remove_main_menu_for_active_quiz,
-    build_question_text_with_options,
-    build_classic_next_reply_keyboard,
     claim_quiz_replacement,
     category_callback,
     classic_reply_text_answer_handler,
@@ -124,7 +127,6 @@ from app.classic_quiz_handlers import (
     difficulty_mode_selected_mix_callback,
     mix_selection_callback,
     next_callback,
-    parse_classic_reply_answer_number,
     question_count_callback,
     question_count_mix_callback,
     question_count_selected_mix_callback,

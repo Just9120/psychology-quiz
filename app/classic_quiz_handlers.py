@@ -2,6 +2,25 @@ from __future__ import annotations
 
 from contextlib import closing
 from app import bot_runtime
+from app.classic_quiz_view import (
+    CLASSIC_REPLY_NEXT_TEXT,
+    DIFFICULTY_CHOICES,
+    QUESTION_COUNT_CHOICES,
+    build_category_keyboard,
+    build_classic_answer_reply_keyboard,
+    build_classic_next_reply_keyboard,
+    build_classic_reply_answer_detail_line,
+    build_classic_reply_feedback_text,
+    build_difficulty_keyboard,
+    build_question_count_keyboard,
+    build_question_text_with_options,
+    build_quiz_finished_text,
+    build_quiz_mode_keyboard,
+    build_selected_mix_keyboard,
+    format_case_review_html,
+    numeric_answer_label_for_option,
+    parse_classic_reply_answer_number,
+)
 from app.bot_menu import (
     START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
     get_main_menu_keyboard,
@@ -12,7 +31,7 @@ import re
 from html import escape
 import time
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import ContextTypes
 
 from app.db import (
@@ -46,21 +65,7 @@ from app.miniapp_runner import submit_miniapp_answer_event
 # Preserve the deployed log namespace without importing the entrypoint.
 logger = logging.getLogger("app.main")
 
-QUESTION_COUNT_CHOICES = (
-    (5, "5"),
-    (10, "10"),
-    (15, "15"),
-    (None, "Все доступные"),
-)
 
-DIFFICULTY_CHOICES = (
-    ("any", "Любые"),
-    ("easy", "Лёгкие"),
-    ("medium", "Средние"),
-    ("hard", "Сложные"),
-)
-
-CLASSIC_REPLY_NEXT_TEXT = "Далее"
 CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
 CONFIRMED_REPLACEMENT_KEY = "confirmed_quiz_replacement"
 
@@ -80,9 +85,6 @@ def claim_quiz_replacement(conn, actor: int, expected_session_id: int | None) ->
 
 async def _run_db_task(func, *args, **kwargs):
     return await bot_runtime.run_db_task(func, *args, **kwargs)
-
-
-
 
 
 async def safe_reply(update: Update, text: str) -> None:
@@ -128,34 +130,6 @@ def _question_limit(value: str) -> int | None:
     return int(value)
 
 
-def build_question_count_keyboard(
-    callback_prefix: str, category_id: int | None = None, *, difficulty: str | None = None,
-) -> InlineKeyboardMarkup:
-    mode_prefix = {"qcnt": "qmode", "qcntall": "qmodeall", "qcntselmix": "qmodeselmix"}[callback_prefix]
-    mode = difficulty or "any"
-    if mode not in {"any", "easy", "medium", "hard"}:
-        raise ValueError("Unknown difficulty")
-    scope = "" if category_id is None else f"{category_id}:"
-    keyboard = []
-    for count, label in QUESTION_COUNT_CHOICES:
-        count_value = "all" if count is None else str(count)
-        callback_data = f"{mode_prefix}:{scope}{count_value}:{mode}"
-        keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
-    keyboard.append([InlineKeyboardButton(
-        "Настроить сложность (необязательно)" if difficulty is None else "Изменить сложность",
-        callback_data=f"{callback_prefix}:{scope}choose",
-    )])
-    return InlineKeyboardMarkup(keyboard)
-
-
-def build_difficulty_keyboard(callback_prefix: str, category_id: int | None = None, count_raw: str | None = None) -> InlineKeyboardMarkup:
-    keyboard = []
-    for mode, label in DIFFICULTY_CHOICES:
-        callback_data = f"{callback_prefix}:{count_raw}:{mode}" if category_id is None else f"{callback_prefix}:{category_id}:{count_raw}:{mode}"
-        keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
-    return InlineKeyboardMarkup(keyboard)
-
-
 async def _show_count_for_difficulty(query, latency, callback_prefix, count_raw, mode, category_id=None):
     if mode not in {"any", "easy", "medium", "hard"}:
         await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный режим сложности."))
@@ -170,53 +144,6 @@ async def _show_count_for_difficulty(query, latency, callback_prefix, count_raw,
     return True
 
 
-def build_category_keyboard(categories) -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup([[InlineKeyboardButton(str(row["name"]), callback_data=f"cat:{int(row['id'])}")] for row in categories])
-
-
-def build_quiz_mode_keyboard() -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup([[InlineKeyboardButton("Конкретная тема", callback_data="qzmode:single")], [InlineKeyboardButton("Микс из выбранных тем", callback_data="qzmode:selected_mix")], [InlineKeyboardButton("Все темы", callback_data="qzmode:all")]])
-
-
-def build_selected_mix_keyboard(categories, selected_ids: set[int]) -> InlineKeyboardMarkup:
-    keyboard = []
-    for row in categories:
-        category_id = int(row["id"])
-        marker = "✅" if category_id in selected_ids else "☑️"
-        keyboard.append([[InlineKeyboardButton(f"{marker} {row['name']}", callback_data=f"mixsel:toggle:{category_id}")][0]])
-    keyboard.append([InlineKeyboardButton("Готово", callback_data="mixsel:done")])
-    keyboard.append([InlineKeyboardButton("Сбросить", callback_data="mixsel:reset")])
-    return InlineKeyboardMarkup(keyboard)
-
-
-def build_quiz_finished_text(score: int, total_questions: int, homework_outcome=None) -> str:
-    if homework_outcome is not None:
-        mark = "Выполнено ✅" if homework_outcome["passed"] else "Пока не выполнено"
-        return ("<b>Тест домашнего задания завершён</b>\n\n"
-                f"<b>Результат:</b> {score} из {total_questions}. {mark}\n\n"
-                "Отметка относится только к тесту, не к эссе или упражнению. "
-                "Откройте /homework для просмотра заданий и повторной попытки.")
-    return ("<b>Викторина завершена 🎉</b>\n\n" f"<b>Результат:</b> {score} из {total_questions}\n\n" f"Чтобы начать новую викторину, нажмите {START_QUIZ_BUTTON_TEXT} или отправьте /quiz.")
-
-
-def build_classic_answer_reply_keyboard(options) -> ReplyKeyboardMarkup:
-    buttons = [str(position) for position, _ in enumerate(options, start=1)]
-    keyboard = [buttons[index : index + 2] for index in range(0, len(buttons), 2)]
-    keyboard.append(["Не знаю"])
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=False)
-
-
-def build_classic_next_reply_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup([[CLASSIC_REPLY_NEXT_TEXT]], resize_keyboard=True, one_time_keyboard=False)
-
-
-def numeric_answer_label_for_option(options, option_index: int) -> str:
-    for position, opt in enumerate(options, start=1):
-        if int(opt["option_index"]) == option_index:
-            return str(position)
-    raise ValueError("option_index is not present in options")
-
-
 def _find_option_by_index(options, option_index: int):
     for opt in options:
         if int(opt["option_index"]) == option_index:
@@ -224,47 +151,9 @@ def _find_option_by_index(options, option_index: int):
     return None
 
 
-def build_classic_reply_answer_detail_line(label: str, *, option_position_label: str, option_text: str, reading_mode: str) -> str:
-    rendered_option_text = render_reading_mode_text(option_text, reading_mode)
-    return f"<b>{label}:</b> {option_position_label} — {rendered_option_text}"
-
-
-def build_classic_reply_feedback_text(result: dict) -> str:
-    result_line = "<b>Верно ✅</b>" if result["is_correct"] else "<b>Неверно ❌</b>"
-    answer_lines = [build_classic_reply_answer_detail_line("Ваш ответ", option_position_label=str(result["selected_option_label"]), option_text=str(result["selected_option_text"]), reading_mode=str(result["reading_mode"]))]
-    if not result["is_correct"]:
-        answer_lines.append(build_classic_reply_answer_detail_line("Правильный ответ", option_position_label=str(result["correct_option_label"]), option_text=str(result["correct_option_text"]), reading_mode=str(result["reading_mode"])))
-    rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
-    answer_lines_text = "\n".join(answer_lines)
-    review = format_case_review_html(result.get("case_review"), result["reading_mode"])
-    return f"{result_line}\n\n{answer_lines_text}\n\n<b>Пояснение:</b>\n{rendered_explanation}{review}\n\n<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']}"
-
-
 def case_review_for_attempt(conn, session_id: int, question_id: int) -> dict | None:
     content = get_attempt_content(conn, session_id, question_id)
     return content.get("case") if content and content.get("kind") == "case" else None
-
-
-def format_case_review_html(case: dict | None, reading_mode: str) -> str:
-    if not case:
-        return ""
-    render = lambda value: render_reading_mode_text(value, reading_mode)
-    conditions = "\n".join("• " + render(value) for value in case["conditions"])
-    alternatives = "\n".join(f"{index}. {render(value)}" for index, value in enumerate(case["option_rationales"], 1))
-    return (f"\n\n<b>Разбор кейса:</b> {render(case['approach'])}"
-            f"\n<b>Условия:</b>\n{conditions}"
-            f"\n<b>Варианты действий:</b>\n{alternatives}"
-            f"\n<b>Неоднозначность:</b> {render(case['ambiguity'])}")
-
-
-def parse_classic_reply_answer_number(text: str, option_count: int) -> int | None:
-    cleaned = text.strip()
-    if not cleaned.isdigit():
-        return None
-    answer_number = int(cleaned)
-    if not 1 <= answer_number <= option_count:
-        return None
-    return answer_number - 1
 
 
 def _classic_text_latency_bucket(elapsed_ms: int) -> str:
@@ -290,16 +179,8 @@ def _log_classic_text_event(event_name: str, **fields) -> None:
         logger.info("%s %s", event_name, _safe_classic_text_log_fields(**fields))
 
 
-def build_question_text_with_options(order_index: int, total_questions: int, question_text: str, options, reading_mode: str, *, numeric_labels: bool = False, show_answer_keyboard_hint: bool = False) -> str:
-    formatted_options = "\n".join(f"{position if numeric_labels else option_index_to_label(int(opt['option_index']))}. {render_reading_mode_text(str(opt['option_text']), reading_mode)}" for position, opt in enumerate(options, start=1))
-    hint = "\n\nОтветьте кнопкой с номером варианта внизу 👇" if show_answer_keyboard_hint else ""
-    return f"<b>Вопрос {order_index} из {total_questions}</b>\n\n{render_reading_mode_text(question_text, reading_mode)}\n\n{formatted_options}{hint}"
-
-
 async def start_quiz_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await quiz_command(update, context)
-
-
 
 
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -388,7 +269,6 @@ async def quiz_resume_or_replace_callback(update: Update, context: ContextTypes.
                                   reply_markup=build_quiz_mode_keyboard())
 
 
-
 async def send_current_question_to_chat(chat, settings, session_id: int) -> bool:
     latency = _HandlerLatency(handler="send_current_question_to_chat", callback_prefix="sendq", session_id=session_id)
     def _load_current_question():
@@ -437,8 +317,6 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
     latency.add_telegram_api(api_started_at)
     latency.summary()
     return True
-
-
 
 
 async def send_current_question_to_message(message, settings, session_id: int, context: ContextTypes.DEFAULT_TYPE, latency: _HandlerLatency | None = None) -> bool:
@@ -517,9 +395,6 @@ async def send_current_question_to_message(message, settings, session_id: int, c
         api_kind="message_send",
     )
     return True
-
-
-
 
 
 async def remove_main_menu_for_active_quiz(query, latency: _HandlerLatency | None = None) -> None:
@@ -1308,8 +1183,6 @@ async def start_mix_quiz(
     await send_current_question(query, settings, result["session_id"], latency=latency, context=context)
 
 
-
-
 def _mark_callback_processing(context: ContextTypes.DEFAULT_TYPE, key: str) -> bool:
     in_progress = context.user_data.setdefault("_callback_in_progress", set())
     if key in in_progress:
@@ -1601,7 +1474,6 @@ async def classic_reply_text_next_handler(update: Update, context: ContextTypes.
         latency.summary()
     finally:
         _unmark_callback_processing(context, processing_key)
-
 
 
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
