@@ -1045,7 +1045,7 @@
     },
     "literature:lit_4f9768a778fe2a01": {
       "decision": "approved",
-      "item_sha256": "f51720509a9fb9a6b20a697b555fb494c6ff0ddb39b062b2fa7de94408ae6b52",
+      "item_sha256": "9e99a6b2c158637ebb8fdc56dea3eed082011103f53a2a09e8fea5f2f1f67ba7",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1056,11 +1056,19 @@
           "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
           "locator": "Пункт 1: Маленькая книжка о большой памяти"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/psihologicheskaya-literatura/product/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pamyati",
+        "evidence_scope": "Existing reviewed course bibliography explicitly calls both works examples of domestic case studies. First-party Piter collected-edition description confirms observation/diary framing for the injured participant; NEB catalogue confirms standalone Small Book title/authorship. Recommendation is agent metadata inference, not full-text review or measured difficulty. Unknown course edition/year remains unchanged; the two works are not merged into one collected edition.",
+        "additional_primary_record": "https://rusneb.ru/catalog/002676_000027_IRKNB-RU_%D0%98%D0%9E%D0%93%D0%A3%D0%9D%D0%91_HOBBIT_15_%D0%9B%2B86-000000-486394/",
+        "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite."
+      }
     },
     "literature:lit_25a5d2f1c7ba76e1": {
       "decision": "approved",
-      "item_sha256": "b272b789fc0820db0404bf1e96bfc8be75c472521a1dc3bd1b2fb542f5d29500",
+      "item_sha256": "1712fff80af7a8c8706d5463a87faf96fa05d53f2d796db2830d10e99dd00d4c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1071,7 +1079,15 @@
           "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
           "locator": "Пункт 1: Потерянный и возвращенный мир"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/psihologicheskaya-literatura/product/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pamyati",
+        "evidence_scope": "Existing reviewed course bibliography explicitly calls both works examples of domestic case studies. First-party Piter collected-edition description confirms observation/diary framing for the injured participant; NEB catalogue confirms standalone Small Book title/authorship. Recommendation is agent metadata inference, not full-text review or measured difficulty. Unknown course edition/year remains unchanged; the two works are not merged into one collected edition.",
+        "additional_primary_record": "https://rusneb.ru/catalog/002676_000027_IRKNB-RU_%D0%98%D0%9E%D0%93%D0%A3%D0%9D%D0%91_HOBBIT_15_%D0%9B%2B86-000000-486394/",
+        "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite."
+      }
     },
     "literature:lit_a29dd1990e36a236": {
       "decision": "approved",
