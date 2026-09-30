@@ -11,8 +11,8 @@ from scripts import validate_literature, validate_topics
 
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 130
-    assert len({item['work_id'] for item in items}) == 114
+    assert len(items) == 143
+    assert len({item['work_id'] for item in items}) == 126
     assert len({item['topic_id'] for item in items}) == 12
     assert all(set(item['source']) == {'title', 'locator', 'citation'} for item in items)
     assert all(item['source']['title'] and item['source']['citation'] for item in items)
@@ -54,8 +54,11 @@ def test_changed_bibliography_requires_new_review_and_missing_metadata_is_explic
 
 
 def test_catalog_paths_do_not_depend_on_process_working_directory(tmp_path, monkeypatch):
+    expected_items = load_literature_items()
+    expected_topics = load_topic_registry()
     monkeypatch.chdir(tmp_path)
-    assert len(load_literature_items()) == 130
+    assert load_literature_items() == expected_items
+    assert load_topic_registry() == expected_topics
     assert 'family_psychology' in load_topic_registry()
 
 
