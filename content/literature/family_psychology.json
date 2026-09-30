@@ -157,16 +157,18 @@
     ],
     "year": 1999,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 50,
     "global_order": 620050,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего введения в семейную терапию расширить представление о подходах к взаимодействию с семьёй на примере работы Витакера и Бамберри, основанной на личном опыте.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -178,7 +180,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_bd48225c86c8de17",
@@ -775,16 +779,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 220,
     "global_order": 620220,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "why_read": "После введения в системную семейную терапию изучить сборник о работе с супружескими парами: сравнить подходы к коммуникации и семейным изменениям. Это профессиональное дополнительное чтение, а не инструкция для самостоятельного лечения.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
     "source_refs": [
       "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
     ],
@@ -798,7 +804,9 @@
     "metadata_warnings": [
       "Год издания не указан в презентации; издание и полный текст не проверены."
     ],
-    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_family_slide_08",
@@ -811,16 +819,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 230,
     "global_order": 620230,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "why_read": "После общего введения в системную семейную терапию познакомиться с подходом Вирджинии Сатир к семейной системе и работе с семьёй; сопоставить его с другими учебными подходами.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
     "source_refs": [
       "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
     ],
@@ -834,7 +844,9 @@
     "metadata_warnings": [
       "Год издания не указан в презентации; издание и полный текст не проверены."
     ],
-    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_family_slide_09",

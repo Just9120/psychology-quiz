@@ -2174,7 +2174,7 @@
     },
     "literature:lit_40f4eacd15ed570b": {
       "decision": "approved",
-      "item_sha256": "979b591ff2d5a83c40f8eef9a0820169f9500b061b8b2b8e1e684d7254cc1d1c",
+      "item_sha256": "7a7f47f0b92719d65a70cd2d1a1b2876bd1044f897c20f024df17299563d03fb",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2185,7 +2185,17 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 5: Танцы с семьей: семейная терапия"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/A32928/product/tantsy-s-semiey-podhod-osnovannyy-na-lichnom-opyte",
+        "evidence_scope": "First-party Piter description identifies authors and experience-based family interaction; RSL 01001760890 confirms symbolic experiential family-therapy title for 1997 edition. Course 1999 edition is not established; no bibliographic year replacement or full-text review.",
+        "sequence": "Agent recommends the introductory systemic text before comparative professional approaches; not a mandatory teacher or author sequence.",
+        "limitations": "No full-text review, clinical efficacy or qualification claim. Existing source citations, snapshots, IDs, work identities, years, metadata warnings and personal reading state unchanged.",
+        "additional_primary_record": "https://search.rsl.ru/ru/record/01001760890"
+      }
     },
     "literature:lit_bd48225c86c8de17": {
       "decision": "approved",
@@ -2966,7 +2976,7 @@
     },
     "literature:lit_family_slide_07": {
       "decision": "approved",
-      "item_sha256": "c759daa045daf5c3af852c5127c994ce353bf8b2af29e17e0d7ac37900edd948",
+      "item_sha256": "7cb3810b5b0656a362e7e58ade7d53013b0bbd75543b582a433c8bea31dc0b45",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-29",
@@ -2978,11 +2988,20 @@
           "locator": "Раздел «Полезная литература», позиция 3"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://cogito-shop.com/catalog/semeynaya-terapiya/sistemnaya-psikhoterapiya-supruzheskikh-par/",
+        "evidence_scope": "First-party publisher description and contents identify a multi-author collection of approaches to couples therapy; Varga is listed as compiler. Current 2026 edition does not establish the unspecified course edition; existing source citation and authors remain unchanged.",
+        "sequence": "Agent recommends the introductory systemic text before comparative professional approaches; not a mandatory teacher or author sequence.",
+        "limitations": "No full-text review, clinical efficacy or qualification claim. Existing source citations, snapshots, IDs, work identities, years, metadata warnings and personal reading state unchanged."
+      }
     },
     "literature:lit_family_slide_08": {
       "decision": "approved",
-      "item_sha256": "f77cb5056b1753677177bb004b22fe1b9b11ba3d75dc0e3dd43deba8388d6113",
+      "item_sha256": "8d78aca76b91f8cd99a9016a7755df0fdc3007b2fcecd2e34e3a55980377b9c9",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-29",
@@ -2994,7 +3013,16 @@
           "locator": "Раздел «Полезная литература», позиция 4"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/spetsialnaya-psihologiya/product/psihoterapiya-semi",
+        "evidence_scope": "First-party Piter description identifies Satir and family-system teaching purpose. Current 2026 printing does not establish the course edition; publisher efficacy language is not adopted as verified clinical evidence.",
+        "sequence": "Agent recommends the introductory systemic text before comparative professional approaches; not a mandatory teacher or author sequence.",
+        "limitations": "No full-text review, clinical efficacy or qualification claim. Existing source citations, snapshots, IDs, work identities, years, metadata warnings and personal reading state unchanged."
+      }
     },
     "literature:lit_family_slide_09": {
       "decision": "approved",
