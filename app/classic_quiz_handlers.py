@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from contextlib import closing
+from app import bot_runtime
 
-import asyncio
 import logging
 import re
-import sys
 from html import escape
 import time
 
@@ -40,7 +39,8 @@ from app.handler_latency import HandlerLatency as _HandlerLatency
 from app.miniapp_entrypoint_handlers import MINI_APP_BUTTON_TEXT
 from app.miniapp_runner import submit_miniapp_answer_event
 
-logger = logging.getLogger(__name__)
+# Preserve the deployed log namespace without importing the entrypoint.
+logger = logging.getLogger("app.main")
 
 QUESTION_COUNT_CHOICES = (
     (5, "5"),
@@ -79,16 +79,8 @@ def claim_quiz_replacement(conn, actor: int, expected_session_id: int | None) ->
     return True
 
 
-def _main_attr(name: str):
-    main_module = sys.modules.get("app.main")
-    return getattr(main_module, name, None)
-
-
 async def _run_db_task(func, *args, **kwargs):
-    main_run_db_task = _main_attr("_run_db_task")
-    if main_run_db_task is not None and main_run_db_task is not _run_db_task:
-        return await main_run_db_task(func, *args, **kwargs)
-    return await asyncio.to_thread(func, *args, **kwargs)
+    return await bot_runtime.run_db_task(func, *args, **kwargs)
 
 
 def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
@@ -107,12 +99,7 @@ def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
 
 
 async def safe_reply(update: Update, text: str) -> None:
-    main_safe_reply = _main_attr("safe_reply")
-    if main_safe_reply is not None:
-        await main_safe_reply(update, text)
-        return
-    if update.message:
-        await update.message.reply_text(text)
+    await bot_runtime.safe_reply(update, text)
 
 def _classic_reply_mode_enabled(settings) -> bool:
     return bool(getattr(settings, "classic_quiz_reply_keyboard_mode", False))
@@ -133,14 +120,7 @@ def _get_classic_reply_state(context: ContextTypes.DEFAULT_TYPE) -> dict:
 
 
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call, api_kind: str | None = None):
-    main_call = _main_attr("_timed_telegram_api_call")
-    if main_call is not None:
-        return await main_call(latency, call, api_kind=api_kind)
-    started_at = time.perf_counter()
-    result = await call
-    if latency is not None:
-        latency.add_telegram_api(started_at, api_kind=api_kind)
-    return result
+    return await bot_runtime.timed_telegram_api_call(latency, call, api_kind=api_kind)
 
 
 def _mark_repeated_tap(latency: _HandlerLatency) -> None:
@@ -319,9 +299,8 @@ def _safe_classic_text_log_fields(*, telegram_user_id: int | None, session_id: i
 
 
 def _log_classic_text_event(event_name: str, **fields) -> None:
-    main_logger = _main_attr("logger") or logger
     if event_name in {"classic_text_answer_ingress", "classic_text_answer_latency", "classic_text_next_ingress", "classic_text_next_latency"}:
-        main_logger.info("%s %s", event_name, _safe_classic_text_log_fields(**fields))
+        logger.info("%s %s", event_name, _safe_classic_text_log_fields(**fields))
 
 
 def build_question_text_with_options(order_index: int, total_questions: int, question_text: str, options, reading_mode: str, *, numeric_labels: bool = False, show_answer_keyboard_hint: bool = False) -> str:
@@ -593,7 +572,7 @@ async def send_quiz_result_with_main_menu(query, text: str, latency: _HandlerLat
 async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int, latency: _HandlerLatency | None = None) -> None:
     # Reuse the single completion sink so stale inline quiz controls are always disabled first.
     del session_id
-    await (_main_attr("send_quiz_result_with_main_menu") or send_quiz_result_with_main_menu)(query, build_quiz_finished_text(score, total_questions), latency=latency)
+    await send_quiz_result_with_main_menu(query, build_quiz_finished_text(score, total_questions), latency=latency)
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -720,7 +699,7 @@ async def send_current_question(
         if finalize_payload is None:
             await _timed_telegram_api_call(latency, query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена."), api_kind="message_edit")
             return False
-        await (_main_attr("send_quiz_result_with_main_menu") or send_quiz_result_with_main_menu)(
+        await send_quiz_result_with_main_menu(
             query,
             "Для текущего вопроса не найдены варианты ответа.\n"
             "Сессия завершена досрочно.\n"
@@ -884,8 +863,8 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
             set_selected_categories_for_session(conn, new_session_id, selected_categories)
         store_session_questions(conn, new_session_id, question_ids)
 
-    await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
-    await (_main_attr("send_current_question") or send_current_question)(query, settings, new_session_id, context=context)
+    await remove_main_menu_for_active_quiz(query, latency=latency)
+    await send_current_question(query, settings, new_session_id, context=context)
 
 
 async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1042,8 +1021,8 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         return
     context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
 
-    await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
-    await (_main_attr("send_current_question") or send_current_question)(query, settings, result["session_id"], latency=latency, context=context)
+    await remove_main_menu_for_active_quiz(query, latency=latency)
+    await send_current_question(query, settings, result["session_id"], latency=latency, context=context)
     latency.session_id = result["session_id"]
     latency.summary()
 
@@ -1338,8 +1317,8 @@ async def start_mix_quiz(
         return
     context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
 
-    await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
-    await (_main_attr("send_current_question") or send_current_question)(query, settings, result["session_id"], latency=latency, context=context)
+    await remove_main_menu_for_active_quiz(query, latency=latency)
+    await send_current_question(query, settings, result["session_id"], latency=latency, context=context)
 
 
 
@@ -1797,7 +1776,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 f"<b>Пояснение:</b> {rendered_explanation}\n\n"
                 f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']), result.get('homework_outcome'))}"
             )
-            await (_main_attr("send_quiz_result_with_main_menu") or send_quiz_result_with_main_menu)(query, message, latency=latency)
+            await send_quiz_result_with_main_menu(query, message, latency=latency)
             latency.summary()
             return
 
@@ -1890,7 +1869,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             latency.summary()
             return
 
-        await (_main_attr("send_current_question") or send_current_question)(
+        await send_current_question(
             query,
             settings,
             session_id,

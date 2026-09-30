@@ -340,7 +340,7 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
             fake_run_db_task.calls += 1
             return result
 
-        with patch("app.main._run_db_task", side_effect=counting_run_db_task):
+        with patch("app.bot_runtime.run_db_task", side_effect=counting_run_db_task):
             asyncio.run(classic_reply_text_answer_handler(update, context))
 
         sent_text = message.reply_text.call_args.args[0]
@@ -364,7 +364,7 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
         async def immediate(func, *args, **kwargs):
             return func(*args, **kwargs)
 
-        with patch("app.main._run_db_task", side_effect=immediate):
+        with patch("app.bot_runtime.run_db_task", side_effect=immediate):
             asyncio.run(classic_reply_text_answer_handler(update, context))
 
         with closing(sqlite3.connect(self.db_path)) as conn:

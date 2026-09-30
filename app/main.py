@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from contextlib import closing
+from app import bot_runtime
 from app.payload_validation import valid_quiz_setup
 from app.quiz_text import (
     option_index_to_label, apply_bionic_reading,
@@ -13,7 +14,6 @@ import logging
 import re
 import urllib.parse
 import threading
-import asyncio
 import time
 
 from telegram import (
@@ -255,11 +255,7 @@ def register_update_ingress_handler(application: Application) -> None:
 
 
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call, api_kind: str | None = None):
-    started_at = time.perf_counter()
-    result = await call
-    if latency is not None:
-        latency.add_telegram_api(started_at, api_kind=api_kind)
-    return result
+    return await bot_runtime.timed_telegram_api_call(latency, call, api_kind=api_kind)
 
 
 def _mark_repeated_tap(latency: _HandlerLatency) -> None:
@@ -323,7 +319,7 @@ async def post_init(application: Application) -> None:
 
 
 async def _run_db_task(func, *args, **kwargs):
-    return await asyncio.to_thread(func, *args, **kwargs)
+    return await bot_runtime.run_db_task(func, *args, **kwargs)
 
 
 def build_post_setup_miniapp_prompt(
@@ -348,8 +344,7 @@ def build_post_setup_miniapp_prompt(
 
 
 async def safe_reply(update: Update, text: str) -> None:
-    if update.message:
-        await update.message.reply_text(text)
+    await bot_runtime.safe_reply(update, text)
 
 
 def is_private_chat(update: Update) -> bool:
