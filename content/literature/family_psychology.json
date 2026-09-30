@@ -84,14 +84,14 @@
     ],
     "year": 1988,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "reference",
     "status": "approved",
     "priority": null,
     "topic_order": 30,
     "global_order": 620030,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Дополнительное историческое чтение для педагогов и родителей о ребёнке в неблагополучной семье. Издание 1988 года не следует использовать как современное клиническое руководство.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -105,7 +105,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_4c4514f492edb1c6",
@@ -195,14 +197,14 @@
     ],
     "year": 1989,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 60,
     "global_order": 620060,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Дополнительное чтение врачебных размышлений о развитии и воспитании ребёнка. Рассматривать в историческом контексте; это не подтверждение актуальности медицинских рекомендаций.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -216,7 +218,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_0199865ad8d23ecb",
@@ -480,16 +484,18 @@
     ],
     "year": 2018,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 140,
     "global_order": 620140,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семьи перейти к учебному пособию о супружеских и детско-родительских отношениях и направлениях консультативной работы. Пособие адресовано магистрантам и практическим психологам; чтение не заменяет профессиональную подготовку.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -501,7 +507,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_3c68e7fa4c7ec0ba",
@@ -630,14 +638,14 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 180,
     "global_order": 620180,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "why_read": "Дополнительное чтение для родителей: наглядные разборы повседневных конфликтов с ребёнком. Использовать как знакомство с авторским подходом к общению, без обещания лечебного эффекта.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -653,7 +661,9 @@
     "metadata_warnings": [
       "Год издания не указан в презентации; издание и полный текст не проверены."
     ],
-    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_family_slide_04",

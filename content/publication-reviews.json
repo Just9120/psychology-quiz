@@ -2275,10 +2275,10 @@
     },
     "literature:lit_802f13c56eea6319": {
       "decision": "approved",
-      "item_sha256": "88a8c7586f476a138ad736d5bcb441247dc7cb6e3a537488d66bd30fcdb09969",
+      "item_sha256": "b347a3d608bb74063a79cd7fd1c654a2e81a07d4147efb4754e0b65c711fd96b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2286,7 +2286,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 3: Ребенок из неблагополучной семьи"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://library.omsu.ru/cgi-bin/irbis64r/cgiirbis_64.exe?C21COM=S&I21DBN=IBIS_PRINT&LNG=&P21DBN=IBIS&S21CNR=500&S21FMT=FULLW_print&S21P01=0&S21P02=0&S21P03=S%3D&S21REF=&S21STN=1&S21STR=%D0%9F%D1%81%D0%B8%D1%85%D0%B8%D0%B0%D1%82%D1%80%D0%B8%D1%8F+%D0%B4%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F&Z21ID=",
+        "evidence_scope": "Indexed primary university library catalogue matches author/title/1988 edition and explicitly identifies a book for teachers and parents. Direct page fetch failed. Role is limited to historical reading inferred from audience/year; no contents, clinical validity or full-text review.",
+        "sequence": "Agent recommendation: general family overview before professional applied study; parent-oriented and historical reading optional. Specific prerequisite only where explicitly recorded by this agent; not teacher/author requirement.",
+        "limitations": "Existing work IDs, source snapshots/citations, authors, years and personal reading state preserved. No new source IDs, access entitlements, measured difficulty or qualification claims."
+      }
     },
     "literature:lit_4c4514f492edb1c6": {
       "decision": "approved",
@@ -2339,10 +2348,10 @@
     },
     "literature:lit_bd48225c86c8de17": {
       "decision": "approved",
-      "item_sha256": "410ceb4441d545b5067c55804ee0f19b500258728b3d1444a31f994185bf2c0f",
+      "item_sha256": "e301fa218057e1fef765a41e466444f523ec67b4c774aefe6dbce21ff491ec0f",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2350,7 +2359,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 6: От младенчества до отрочества"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.buninlib.orel.ru/cgi-bin/irbis64r_14/cgiirbis_64.exe?C21COM=S&I21DBN=EK_PRINT&LNG=&P21DBN=EK&S21CNR=500&S21FMT=FULLW_print&S21P01=0&S21P02=1&S21P03=A%3D&S21STN=1&S21STR=%D0%93%D0%B0%D1%80%D0%B1%D1%83%D0%B7%D0%BE%D0%B2%2C+%D0%92%D0%B8%D0%BB%D0%B5%D0%BD%D0%B8%D0%BD+%D0%98%D1%81%D0%B0%D0%B0%D0%BA%D0%BE%D0%B2%D0%B8%D1%87&Z21ID=",
+        "evidence_scope": "Indexed primary regional library record identifies author/title and subtitle about a physician reflections on development and education. Retrieved metadata concerns 1995 revised edition, not the course 1989 edition. Direct fetch failed; role inference is limited to subtitle/audience, not full-text or medical accuracy.",
+        "sequence": "Agent recommendation: general family overview before professional applied study; parent-oriented and historical reading optional. Specific prerequisite only where explicitly recorded by this agent; not teacher/author requirement.",
+        "limitations": "Existing work IDs, source snapshots/citations, authors, years and personal reading state preserved. No new source IDs, access entitlements, measured difficulty or qualification claims."
+      }
     },
     "literature:lit_0199865ad8d23ecb": {
       "decision": "approved",
@@ -2486,10 +2504,10 @@
     },
     "literature:lit_319ec2108977ce66": {
       "decision": "approved",
-      "item_sha256": "c37d5288a0dfab899ad8783e2efc8fae7d5058cbd18d7cc2a5d3eca08ef005ac",
+      "item_sha256": "46653d5988815a46b685b89937013f16c0bf426bfb113bf8d5f1c7366ea1f576",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2497,7 +2515,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 14: Основные направления консультативной работы с семьей"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://magistr54.ru/wp-content/uploads/2023/09/osnovnye-napravlenija-konsultativnoj-raboty-s-semej.pdf",
+        "evidence_scope": "Author-authored 2018 university textbook title page, annotation, contents and preface retrieved from a third-party PDF host; original university repository robots blocked. Pages 2-6 identify authors, target masters students/practitioners and theoretical/applied family counselling scope. No whole-book review, clinical effectiveness or hosting-rights verification.",
+        "sequence": "Agent recommendation: general family overview before professional applied study; parent-oriented and historical reading optional. Specific prerequisite only where explicitly recorded by this agent; not teacher/author requirement.",
+        "limitations": "Existing work IDs, source snapshots/citations, authors, years and personal reading state preserved. No new source IDs, access entitlements, measured difficulty or qualification claims."
+      }
     },
     "literature:lit_3c68e7fa4c7ec0ba": {
       "decision": "approved",
@@ -3128,10 +3155,10 @@
     },
     "literature:lit_family_slide_03": {
       "decision": "approved",
-      "item_sha256": "d831a51ca2466909350259e2dca9d74b4ccc09558fa9a2d0804bd6c942470fb6",
+      "item_sha256": "099d8e35134c1a246be3e10b14f2fdecf85b448b35ebe6dffc89e25c7050f4f8",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-29",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
@@ -3140,7 +3167,16 @@
           "locator": "Раздел «Полезная литература», позиция 3"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://samokatbook.ru/book/davay-dogovorimsya/",
+        "evidence_scope": "Official publisher page retrieved: matching author/title, adult parent audience, short comic format and everyday parent-child conflict situations. Course exact edition/year UNSET; no full-text or clinical efficacy review. Publisher claims about diagnostic groups are not adopted as clinical facts.",
+        "sequence": "Agent recommendation: general family overview before professional applied study; parent-oriented and historical reading optional. Specific prerequisite only where explicitly recorded by this agent; not teacher/author requirement.",
+        "limitations": "Existing work IDs, source snapshots/citations, authors, years and personal reading state preserved. No new source IDs, access entitlements, measured difficulty or qualification claims."
+      }
     },
     "literature:lit_family_slide_04": {
       "decision": "approved",
