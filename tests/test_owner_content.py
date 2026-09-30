@@ -109,3 +109,58 @@ def test_lesson_graph_requires_exact_question_edition_and_preserves_known_holds(
     returned = owner_content.source_summary()
     assert returned["coverage"]["lessons"][0]["title"] == "Public lesson"
     assert "private-source" not in json.dumps(returned)
+
+
+def test_prepared_notes_require_current_review_and_return_only_aggregate_counts(monkeypatch):
+    from copy import deepcopy
+    from scripts.obsidian_vault import VaultError
+    from tests.test_obsidian_vault import evidence, note, SOURCE, REVISION, DIGEST
+
+    _, processed = evidence()
+    current = {"schema_version": 1, "root_id": "private-root", "folders": {
+        "private-root": [{"page_token": None, "next_page_token": None, "children": [{
+            "id": SOURCE, "title": REVISION[1], "mime_type": REVISION[2],
+            "modified_time": REVISION[0], "file_or_folder": "file", "parent_ids": ["private-root"]}]}]}}
+    registry = {"schema_version": 1, "corpus_root_id": "private-root", "sources": [{
+        "id": SOURCE, "title": REVISION[1], "modified_time": REVISION[0],
+        "snapshot_sha256": DIGEST, "kind": "learning_material", "readable": True,
+        "snapshot_kind": "file_bytes", "corpus_path": "Private lecture",
+        "reviewed_at": "2026-09-29", "reviewer": "private-editor"}]}
+    key = "t_aaaaaaaaaaaa"
+    curriculum = {"schema_version": 1, "disciplines": {"one": {"title": "Discipline"}},
+                  "topics": {key: {"title": "Public lesson", "discipline_id": "one",
+                      "source": {"source_id": SOURCE, "modified_time": REVISION[0], "snapshot_sha256": DIGEST}}},
+                  "editions": {}}
+    manifest = {"schema_version": 1, "notes": [note(body="Private body must not appear") ]}
+    inputs = dict(registry=registry, curriculum=curriculum, published_items=[])
+    result = build(current, processed, "2026-09-30T00:00:00Z", note_manifest=manifest, **inputs)
+    lesson = result["coverage"]["lessons"][0]
+    assert lesson["notes_state"] == "PREPARED" and lesson["notes"] == 1
+    assert result["coverage"]["prepared_notes_unmapped"] == 0
+    assert not any(value in json.dumps(result) for value in (SOURCE, "Private body", "private-editor", "attention", "стр. 2"))
+    monkeypatch.setattr(owner_content, "load_catalog", lambda: curriculum)
+    result["coverage"]["lessons"][0]["private_body"] = "private"
+    returned = owner_content._coverage(result["coverage"])
+    assert returned["lessons"][0]["notes"] == 1 and "private_body" not in json.dumps(returned)
+    unchanged = build(current, processed, "2026-09-30T00:00:00Z", **inputs)
+    assert unchanged["coverage"]["lessons"][0]["notes"] is None
+    stale = deepcopy(processed)
+    stale[SOURCE]["review_state"] = "pending_review"
+    stale[SOURCE].pop("source_kind")
+    stale[SOURCE].pop("source_kind_review")
+    with pytest.raises(VaultError, match="source_not_current_reviewed"):
+        build(current, stale, "2026-09-30T00:00:00Z", note_manifest=manifest, **inputs)
+    mismatched = deepcopy(curriculum)
+    mismatched["topics"][key]["source"]["snapshot_sha256"] = "f" * 64
+    # A note reviewed against another digest cannot acquire this lesson.
+    from scripts.owner_source_summary import prepared_note_coverage
+    coverage = deepcopy(result["coverage"])
+    prepared_note_coverage(coverage, manifest, current, processed, mismatched)
+    assert coverage["lessons"][0]["notes"] == 0 and coverage["prepared_notes_unmapped"] == 1
+    invalid = deepcopy(result["coverage"])
+    invalid["lessons"][0]["known_hold"] = True
+    with pytest.raises(ValueError, match="invalid_coverage"):
+        owner_content._coverage(invalid)
+    result["coverage"]["lessons"][0]["notes"] = "private text"
+    with pytest.raises(ValueError, match="invalid_coverage"):
+        owner_content._coverage(result["coverage"])

@@ -61,6 +61,30 @@ def lesson_coverage(current, processed, registry, curriculum, published_items):
             "unmapped_published_questions": unmapped}
 
 
+
+def prepared_note_coverage(coverage, note_manifest, current, processed, curriculum):
+    # Reuse source/revision/hold/link gates; rendered texts stay operator-only.
+    from scripts.obsidian_vault import render
+    render(note_manifest, current, processed)
+    counts = {key: 0 for key in curriculum["topics"]}
+    unmapped = 0
+    for note in note_manifest["notes"]:
+        matched = []
+        for key, topic in curriculum["topics"].items():
+            source = topic["source"]
+            if (note["source_id"] == source["source_id"]
+                    and note["source_revision"][0] == source["modified_time"]
+                    and note["source_sha256"] == source["snapshot_sha256"]):
+                matched.append(key)
+        if not matched:
+            unmapped += 1
+        for key in matched:
+            counts[key] += 1
+    for lesson in coverage["lessons"]:
+        lesson.update(notes=counts[lesson["id"]], notes_state="PREPARED")
+    coverage["prepared_notes_unmapped"] = unmapped
+
+
 def published_questions():
     policy = load_policy()
     result = []
@@ -72,7 +96,7 @@ def published_questions():
     return result
 
 
-def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None):
+def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None, note_manifest=None):
     observed = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
     if observed.tzinfo is None or observed > datetime.now(timezone.utc):
         raise ValueError("invalid_observation_time")
@@ -89,6 +113,10 @@ def build(current, processed, observed_at, *, registry=None, curriculum=None, pu
         if any(value is None for value in (registry, curriculum, published_items)):
             raise InventoryError("reviewed_graph_inputs_required")
         result["coverage"] = lesson_coverage(current, processed, registry, curriculum, published_items)
+        if note_manifest is not None:
+            prepared_note_coverage(result["coverage"], note_manifest, current, processed, curriculum)
+    elif note_manifest is not None:
+        raise InventoryError("reviewed_graph_inputs_required")
     return result
 
 
@@ -97,6 +125,7 @@ def main():
     parser.add_argument("--current", type=Path, required=True)
     parser.add_argument("--processed", type=Path, required=True)
     parser.add_argument("--reviewed", action="store_true")
+    parser.add_argument("--notes-manifest", type=Path, help="Optional ignored private preparation manifest; never Vault publication evidence")
     parser.add_argument("--observed-at", required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -104,11 +133,14 @@ def main():
         target = private_json_target(args.output, ROOT)
         inputs = {"registry": _read(ROOT / "content/source-corpus.json"), "curriculum": load_catalog(),
                   "published_items": published_questions()} if args.reviewed else {}
+        if args.notes_manifest is not None:
+            from scripts.obsidian_vault import _private_input
+            inputs["note_manifest"] = _private_input(args.notes_manifest)
         value = build(_read(args.current), _read(args.processed), args.observed_at, **inputs)
         with os.fdopen(os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w", encoding="utf-8") as output:
             json.dump(value, output, indent=2)
             output.write("\n")
-    except (InventoryError, OSError, ValueError, TypeError) as error:
+    except (InventoryError, OSError, ValueError, TypeError, KeyError) as error:
         print("OWNER_SUMMARY_STOP: " + (str(error) if isinstance(error, InventoryError) else type(error).__name__))
         return 1
     print("OWNER_SOURCE_SUMMARY_CREATED; counts only, supplied review snapshot remains partial")

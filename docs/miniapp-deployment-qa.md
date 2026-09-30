@@ -796,6 +796,20 @@ Drive ID/locator не переносит. API повторно проверяе�
 запросу. Обновление текущего банка само по себе не обновляет ignored snapshot.
 
 
+При наличии проверенного private note manifest добавьте `--notes-manifest` с
+ignored input, допустимым для canonical Obsidian exporter. Это operator-only
+проверка подготовки: exporter source/revision/digest/hold/link gates выполняются
+до подсчёта. Lesson получает note count только при exact source ID/revision/hash
+совпадении с curriculum; остальные notes считаются отдельно как unmapped.
+В API/summary попадают только числа и `notes_state=PREPARED`, без note IDs,
+названий, body, source IDs, locators или reviewer. Runtime не импортирует Vault.
+
+Число 0 означает отсутствие notes для этой темы в переданном manifest, а не
+отсутствие личных заметок в Vault. `PREPARED` не означает export, private GitHub
+publication, opening smoke или полноту базы. Без manifest сохраняются
+`notes=null`/`UNSET`; stale/conflicted inputs дают отказ вместо прежнего PASS.
+Отдельные glossary terms по lessons этим флагом не классифицируются.
+
 ## Backend image promotion
 
 Основной backend image собирается единожды для candidate revision в `validate-and-smoke-test`:

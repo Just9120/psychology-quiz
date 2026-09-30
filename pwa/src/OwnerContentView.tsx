@@ -23,6 +23,7 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
     {data.sources.coverage && <article className="panel"><h2>Подготовка по учебным материалам</h2>
       <p>Зарегистрированных источников: {data.sources.coverage.tracked_sources}; файлов вне registry: {data.sources.coverage.untracked_files}.</p>
       <p>Опубликованных вопросов без подтверждённой привязки к учебной теме в снимке: {data.sources.coverage.unmapped_published_questions}.</p>
+      {data.sources.coverage.prepared_notes_unmapped !== undefined && <p>Подготовленных заметок без подтверждённой привязки к учебной теме: {data.sources.coverage.prepared_notes_unmapped}.</p>}
       <p className="muted">Привязка проверена по редакции вопроса. Цифры относятся к датированному снимку выше; пустой раздел не означает оценку достаточности.</p>
       <div className="literature-list">{data.sources.coverage.lessons.map(lesson => <div key={lesson.id}>
         <h3>{lesson.title}</h3><p>{lesson.discipline}</p>
@@ -30,7 +31,7 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
         {lesson.known_hold && <p className="notice">Есть неразрешённое возражение к источнику.</p>}
         <p>Теория: {lesson.kinds.theory}; глоссарий: {lesson.kinds.glossary}; кейсы: {lesson.kinds.case}.</p>
         {Object.values(lesson.kinds).every(count => count === 0) && <p className="notice">Нет опубликованных вопросов с подтверждённой привязкой к этой теме.</p>}
-        <p className="muted">Отдельные термины и личные заметки: покрытие по этой теме не подтверждено.</p>
+        {lesson.notes_state === 'PREPARED' ? <><p>Подготовлено заметок в переданном снимке: {lesson.notes}.</p><p className="muted">Это проверка подготовки, а не подтверждение публикации в Obsidian или полноты личной базы. Отдельные термины: покрытие по этой теме не подтверждено.</p></> : <p className="muted">Отдельные термины и личные заметки: покрытие по этой теме не подтверждено.</p>}
       </div>)}</div>
     </article>}
     <label className="field">Модуль обзора<select value={module} disabled={busy} onChange={event => setModule(event.target.value)}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>

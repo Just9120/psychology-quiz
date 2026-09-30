@@ -41,13 +41,27 @@ def _coverage(raw):
                 or type(item.get("known_hold")) is not bool
                 or item.get("processing_state") not in {"processed", "pending_review", "conflict_review", "new_unprocessed", "changed_unprocessed", "excluded", "missing"}):
             raise ValueError("invalid_coverage")
+        notes_state, notes = item.get("notes_state", "UNSET"), item.get("notes")
+        if (notes_state not in {"UNSET", "PREPARED"}
+                or (notes_state == "UNSET" and notes is not None)
+                or (notes_state == "PREPARED" and (type(notes) is not int or notes < 0))
+                or (notes_state == "PREPARED" and notes > 0 and
+                    (not item["source_metadata_current"] or item["known_hold"]
+                     or item["processing_state"] != "processed"))):
+            raise ValueError("invalid_coverage")
         topic = catalog["topics"][key]
         lessons.append({"id": key, "title": topic["title"],
                         "discipline": catalog["disciplines"][topic["discipline_id"]]["title"],
                         "kinds": kinds, "source_metadata_current": item["source_metadata_current"],
                         "processing_state": item["processing_state"], "known_hold": item["known_hold"],
-                        "glossary_terms": None, "notes": None, "notes_state": "UNSET"})
-    return {key: raw[key] for key in ("tracked_sources", "untracked_files", "source_metadata", "unmapped_published_questions")} | {"lessons": lessons}
+                        "glossary_terms": None, "notes": notes, "notes_state": notes_state})
+    result = {key: raw[key] for key in ("tracked_sources", "untracked_files", "source_metadata", "unmapped_published_questions")} | {"lessons": lessons}
+    if "prepared_notes_unmapped" in raw:
+        value = raw["prepared_notes_unmapped"]
+        if type(value) is not int or value < 0:
+            raise ValueError("invalid_coverage")
+        result["prepared_notes_unmapped"] = value
+    return result
 
 
 def source_summary():

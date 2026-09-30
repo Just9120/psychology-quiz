@@ -32,3 +32,19 @@ it('shows dated lesson coverage, unresolved source holds and unknown notes indep
   expect(screen.getByText(/Отдельные термины и личные заметки: покрытие по этой теме не подтверждено/)).toBeVisible()
   expect(screen.getByText(/не подтверждает полное покрытие корпуса/)).toBeVisible()
 })
+
+
+it('shows prepared note counts without claiming Vault publication or complete coverage', () => {
+  const data: OwnerContent = { ok: true, topics: [], unmapped_questions: 0,
+    sources: { state: 'PARTIAL', captured_at: '2026-09-30T00:00:00Z',
+      coverage: { tracked_sources: 1, untracked_files: 0, source_metadata: { current: 1 },
+        unmapped_published_questions: 0, prepared_notes_unmapped: 2,
+        lessons: [{ id: 'lesson', title: 'Тема', discipline: 'Дисциплина',
+          kinds: { theory: 0, glossary: 0, case: 0 }, source_metadata_current: true,
+          processing_state: 'processed', known_hold: false, glossary_terms: null,
+          notes: 3, notes_state: 'PREPARED' }] } } }
+  render(<OwnerContentView data={data} busy={false} onRefresh={() => {}} />)
+  expect(screen.getByText('Подготовлено заметок в переданном снимке: 3.')).toBeVisible()
+  expect(screen.getByText(/Подготовленных заметок без подтверждённой привязки к учебной теме: 2/)).toBeVisible()
+  expect(screen.getByText(/не подтверждение публикации в Obsidian/)).toBeVisible()
+})
