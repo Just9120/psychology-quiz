@@ -44,6 +44,43 @@ Telegram identity сохраняется для продолжения испо�
 
 Контакт для обращений о копии или исправлении учебных данных: `Just9119@gmail.com`. Владелец явно разрешил публикацию 30.09.2026. Доступность почтового ящика и фактическое исполнение запросов этим решением не проверены.
 
+## Копия учебных данных по обращению
+
+В рамках E16 подготовлен [операторский exporter](../scripts/export_learning_data.py).
+Это выгрузка учебных строк одного подтверждённого Telegram actor, не полная копия
+всех персональных данных платформы. Identity, e-mail/password hashes, sessions,
+mail/link/deletion tokens, общие content snapshots, приватные источники и
+инфраструктурные logs/backups в неё не входят. Сохранённые ответы глоссария,
+попытки, повторения, цели, достижения и личные отметки книг входят.
+
+Перед запуском оператор должен подтвердить, что обращение принадлежит этому
+Telegram user ID. Username, подпись в письме или присланный чужой ID сами по себе
+не подтверждают личность. Флаг `--verified-request` фиксирует выполненный оператором
+шаг; script не делает эту проверку и не отправляет файл. Автоматической доставки
+и публичного API выбора actor нет. Порядок проверки личности и выдачи полного
+owner/identity export остаётся UNSET.
+
+Canonical команда из root, с действующим DATABASE_URL/DB_PATH:
+```bash
+python scripts/export_learning_data.py --telegram-user-id "$VERIFIED_TELEGRAM_USER_ID" \
+  --verified-request --output data/learning-copy-request.json
+```
+
+Output допускается только как новый ignored `data/*.json`, создаётся с mode 0600;
+права и ACL Windows дополнительно контролирует оператор. База открывается read-only,
+а все запросы выполняются в одном consistent snapshot. Session children выбираются
+через принадлежащие actor попытки; чужой learning state и общий банк не меняются.
+JSON содержит row_counts для всех учебных таблиц и `complete: true` только в конце
+успешной записи. При STOP частичный файл не доставлять и не выдавать за готовую копию;
+проверить результат локально в приватном окружении. Файлы не включать в Git, PR,
+public artifacts или обычные logs. Способ передачи и срок хранения копии ещё не
+утверждены; этот код не разрешает автоматическую рассылку или новую retention policy.
+
+Validation: [SQLite/CLI isolation](../tests/test_privacy_export.py) и
+[native PostgreSQL contract](../tests/postgres/test_learning_copy_postgres.py).
+Native проверка обязательна в существующем backend CI до merge; подготовка кода
+не подтверждает исполнение реальных обращений или готовность AC-PRIV-01/02/05 целиком.
+
 ## Оставшиеся условия проверки
 
 - На целевой revision выполнить PostgreSQL actor-isolation/one-use tests в required CI и подтвердить additive migration/CD.
