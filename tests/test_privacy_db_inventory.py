@@ -32,3 +32,26 @@ def test_inventory_reads_schema_only_and_flags_unclassified_tables():
         assert "private-name" not in str(report)
     finally:
         conn.close()
+
+
+def test_owner_profile_name_is_classified_without_reading_its_value():
+    from pathlib import Path
+    conn = sqlite3.connect(":memory:")
+    try:
+        conn.execute("CREATE TABLE web_accounts (id INTEGER PRIMARY KEY)")
+        conn.executescript(Path('sql/profile-v1.sql').read_text(encoding='utf-8'))
+        conn.execute("INSERT INTO web_accounts VALUES (1)")
+        conn.execute("INSERT INTO web_profile_names VALUES (1,'private-owner-display-name')")
+        conn.set_authorizer(lambda action, table, _column, _db, _trigger:
+            sqlite3.SQLITE_DENY if action == sqlite3.SQLITE_READ and table == 'web_profile_names'
+            else sqlite3.SQLITE_OK)
+        columns, keys = sqlite_schema(conn)
+        report = inventory(columns, keys)
+        profile = report['personal_tables']['web_profile_names']
+        assert profile['present'] and profile['owner_path'] == 'account_id'
+        assert profile['columns'] == ['account_id', 'display_name'] and not profile['missing_columns']
+        assert 'web_profile_names' not in report['unclassified_tables']
+        assert {'table':'web_profile_names', 'column':'account_id', 'references':'web_accounts', 'on_delete':'CASCADE'} in report['foreign_keys']
+        assert 'private-owner-display-name' not in str(report)
+    finally:
+        conn.close()
