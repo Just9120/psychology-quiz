@@ -7,14 +7,14 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/lev-vygotskiy-30932777/myshlenie-i-rech-7759426/",
         "access": "provider_terms",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-30"
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/lev-vygotskiy-30932777/myshlenie-i-rech-65226391/",
         "access": "provider_terms",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-30"
       }
     ],
     "lit_0199865ad8d23ecb": [
@@ -23,7 +23,7 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/obschatsya-s-rebenkom-kak-130203/",
         "access": "provider_terms",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-30"
       }
     ],
     "lit_819808cf97ad8eb5": [
@@ -32,14 +32,14 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-180602/",
         "access": "provider_terms",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-30"
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-568685/",
         "access": "provider_terms",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-30"
       }
     ],
     "gippenreiter_vvedenie_v_obschuyu_psihologiyu": [
@@ -59,13 +59,6 @@
       }
     ],
     "nurkova_berezanskaya_obschaya_psihologiya": [
-      {
-        "format": "text",
-        "provider": "Литрес",
-        "url": "https://www.litres.ru/book/veronika-nurkova/obschaya-psihologiya-3-e-izd-per-i-dop-uchebnik-dlya-vuzo-13240704/",
-        "access": "provider_terms",
-        "checked_at": "2026-09-30"
-      },
       {
         "format": "text",
         "provider": "Юрайт",

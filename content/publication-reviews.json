@@ -1570,7 +1570,7 @@
     },
     "literature:lit_8c4dd1a3c39ecbcf": {
       "decision": "approved",
-      "item_sha256": "7a2d7b4230e6bd3d0ab3f029f7591218f3761251c6dc2c32a81bc08e3bc77529",
+      "item_sha256": "67b7e2c9e87c952c0632c4e679f6c389e03a45ed663697c46d0aa3049ec2a157",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -1589,7 +1589,12 @@
         "publisher_description": "https://shop.aspectpress.ru/product/andreeva-g-m-sotsialnaya-psihologiya",
         "evidence_scope": "Official publisher card description/contents available: systematic university course, communication, groups, social psychology of personality and methods. Card 2016 and anniversary 2026 editions differ from course year 2017; text equivalence/full book not established.",
         "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
-        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review.",
+        "outbound_browser_review": {
+          "checked_at": "2026-09-30",
+          "url": "https://www.litres.ru/audiobook/galina-andreeva/socialnaya-psihologiya-292322/",
+          "result": "Correct audiobook card opens; visibly marked Нет в продаже. Availability warning only; no login, purchase, playback or full-content access verified."
+        }
       }
     },
     "literature:lit_00a7af60c24a8221": {
