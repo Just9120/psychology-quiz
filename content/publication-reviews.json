@@ -40,10 +40,10 @@
     },
     "literature:vygotsky_myshlenie_i_rech": {
       "decision": "approved",
-      "item_sha256": "040b6aa2ff9361283c27083fe3422625f339713a4ac5d67ff140c218f6c5f4e3",
+      "item_sha256": "fd921f346e8497d2acaa44a83478ba96f9ade3eb16a8c6631cff0b3b2be97948",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
@@ -51,7 +51,16 @@
           "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
           "locator": "Страница 1, позиция 3"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "teacher bibliography: additional",
+        "publisher_description": "https://www.piter.com/collection/mastera-psihologii/product/myshlenie-i-rech-2",
+        "evidence_scope": "Official publisher page read: specific experimental study of thinking/speech, word meaning and concept development, written/internal speech; RSL catalogue independently confirms author/work. No full-book review or measured difficulty.",
+        "sequence": "Agent recommends the reviewed introductory course before this focused theoretical work; this is a platform recommendation, not a prerequisite required by the author or teacher.",
+        "limitations": "Existing visual course bibliography snapshot unchanged; no new Drive IDs or book text published."
+      }
     },
     "literature:zhdan_istoriya_psihologii": {
       "decision": "approved",
@@ -85,10 +94,10 @@
     },
     "literature:rubinstein_osnovy_obschey_psihologii": {
       "decision": "approved",
-      "item_sha256": "b9a54265ad20a498e4b42a7c5ac65163230587fe582c0001fe08527d183c539a",
+      "item_sha256": "1710d7534d6bfb1d812fc87b8d05a810c16ec4a404318d3454edb4e67e39f081",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
@@ -96,7 +105,16 @@
           "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
           "locator": "Страница 1, позиция 6"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "teacher bibliography: additional",
+        "publisher_description": "https://www.piter.com/collection/A19915/product/osnovy-obschey-psihologii-5e43d1",
+        "evidence_scope": "Indexed official publisher description confirms a classic general-psychology textbook. Direct page reread timed out; no full-book/content review, exact-edition match or measured difficulty claimed.",
+        "sequence": "Agent recommends the introductory course before comparative reading of the classic textbook; not an author/teacher mandatory prerequisite.",
+        "limitations": "Existing visual course bibliography snapshot unchanged; no new Drive IDs or book text published."
+      }
     },
     "literature:fch_gazzaniga_kto_za_glavnogo": {
       "decision": "approved",
