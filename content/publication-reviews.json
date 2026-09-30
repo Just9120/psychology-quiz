@@ -1045,7 +1045,7 @@
     },
     "literature:lit_4f9768a778fe2a01": {
       "decision": "approved",
-      "item_sha256": "2c563d6c625feaf223ef45e1c969e6256bf7a5d5237a09cbe636c203cd7db470",
+      "item_sha256": "0804dbbd3be780168a1d37afecd0cdcf9aff2fee1be587e37d3454f9005beebb",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1065,11 +1065,18 @@
         "additional_primary_record": "https://rusneb.ru/catalog/002676_000027_IRKNB-RU_%D0%98%D0%9E%D0%93%D0%A3%D0%9D%D0%91_HOBBIT_15_%D0%9B%2B86-000000-486394/",
         "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite.",
         "sequence": "Updated after direct methodology-paper research: Busygina first, then independent Luria case-study examples. This sequence is agent inference, not teacher priority or measured prerequisite."
+      },
+      "external_access_review": {
+        "reviewed_at": "2026-09-30",
+        "text_offer": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
+        "audio_offer": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
+        "publisher_record": "https://www.piter.com/collection/psihologicheskaya-literatura/product/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pamyati",
+        "evidence_scope": "Direct Litres text product matches Luria and both work titles, explicitly links the audio edition; direct Piter text/audio collected-edition records confirm formats and author. Direct Litres audio fetch HTTP 403; no actual playback, subscription entitlement or complete content check. Offers concern a collection, not proof of identical standalone course editions. Independent work IDs/checklist marks unchanged."
       }
     },
     "literature:lit_25a5d2f1c7ba76e1": {
       "decision": "approved",
-      "item_sha256": "a6021e5241f668e1342681aac93417186e68fc1cb6e401288c3f595d7a80aa32",
+      "item_sha256": "21eaac966ccd92570495515b81d854f1b2ce5752948cc4f305d985ed9f135f30",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1089,6 +1096,13 @@
         "additional_primary_record": "https://rusneb.ru/catalog/002676_000027_IRKNB-RU_%D0%98%D0%9E%D0%93%D0%A3%D0%9D%D0%91_HOBBIT_15_%D0%9B%2B86-000000-486394/",
         "prerequisites": "Course case-study introduction; no particular preceding book established. Independent examples: no artificial book-to-book prerequisite.",
         "sequence": "Updated after direct methodology-paper research: Busygina first, then independent Luria case-study examples. This sequence is agent inference, not teacher priority or measured prerequisite."
+      },
+      "external_access_review": {
+        "reviewed_at": "2026-09-30",
+        "text_offer": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
+        "audio_offer": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
+        "publisher_record": "https://www.piter.com/collection/psihologicheskaya-literatura/product/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pamyati",
+        "evidence_scope": "Direct Litres text product matches Luria and both work titles, explicitly links the audio edition; direct Piter text/audio collected-edition records confirm formats and author. Direct Litres audio fetch HTTP 403; no actual playback, subscription entitlement or complete content check. Offers concern a collection, not proof of identical standalone course editions. Independent work IDs/checklist marks unchanged."
       }
     },
     "literature:lit_a29dd1990e36a236": {

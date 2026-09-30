@@ -110,6 +110,7 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'gippenreiter_vvedenie_v_obschuyu_psihologiyu', 'nurkova_berezanskaya_obschaya_psihologiya',
         'rubinstein_osnovy_obschey_psihologii', 'lit_consult_lecture_01', 'lit_consult_lecture_02',
         'lit_5505760c8ef8c4b8', 'lit_8c4dd1a3c39ecbcf',
+        'lit_4f9768a778fe2a01', 'lit_25a5d2f1c7ba76e1',
     }
     assert {link['format'] for link in links['vygotsky_myshlenie_i_rech']} == {'text', 'audio'}
     assert {link['format'] for link in links['lit_0199865ad8d23ecb']} == {'text'}
@@ -118,6 +119,16 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
     items = load_literature_items()
     assert all(item['access_links'] == links[item['work_id']] for item in items if item['work_id'] in links)
     assert all(item['access_links'] == [] for item in items if item['work_id'] not in links)
+    # One publisher collection must not merge its two independently studied works.
+    from app.literature_service import reading_summary
+    collected = [item for item in items if item['id'] in {'lit_4f9768a778fe2a01', 'lit_25a5d2f1c7ba76e1'}]
+    assert len({item['work_id'] for item in collected}) == 2
+    assert collected[0]['access_links'] == collected[1]['access_links']
+    assert {offer['format'] for offer in collected[0]['access_links']} == {'text', 'audio'}
+    summary = reading_summary(collected, {collected[0]['id']: {'reading_status': 'read'}})
+    assert summary['total'] == 2 and summary['read'] == 1
+    assert all(item['content_access'] == 'not_verified' for item in collected)
+    assert all(any('сборнику' in warning for warning in item['metadata_warnings']) for item in collected)
 
 
 def test_reading_prerequisites_reject_cycles_between_works_and_their_associations():

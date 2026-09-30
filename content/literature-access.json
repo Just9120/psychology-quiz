@@ -125,6 +125,38 @@
         "access": "provider_terms",
         "checked_at": "2026-09-30"
       }
+    ],
+    "lit_25a5d2f1c7ba76e1": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
+    ],
+    "lit_4f9768a778fe2a01": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
     ]
   }
 }
