@@ -2546,7 +2546,7 @@
     },
     "literature:lit_f0436ade24a5adb3": {
       "decision": "approved",
-      "item_sha256": "281d874976d5c8630b100858c2dbac8e153b6dd2ab7b0aa60458706fe8f62cae",
+      "item_sha256": "ecc720934a9ba91efb6f477900dbb11622ee498dd34f7a621ca6f2c36c9e1a46",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2557,7 +2557,14 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 3: Организационная психология"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "library_record": "https://search.rsl.ru/ru/record/01000674855",
+        "evidence_scope": "Direct primary RSL record names the university teaching purpose and social psychology/person-and-work subject. Record is 2000, course edition is 2002; exact-edition/full-text equivalence not confirmed. Foundation/basic is an agent pedagogical-role inference, not measured difficulty.",
+        "prerequisites": "No particular preceding book established; empty prerequisites does not prove absence of knowledge requirements."
+      }
     },
     "literature:lit_7a7c03e9f990308e": {
       "decision": "approved",
@@ -2621,7 +2628,7 @@
     },
     "literature:lit_4bbfe78685eb81c2": {
       "decision": "approved",
-      "item_sha256": "091d8868c867b4141ed65c6e8a580e91b1fd04e9a1e3c6447fab072048f3947c",
+      "item_sha256": "4c2e59b16a8469bf756cd9f770de5e37cbe048dcb0833200925b3b21cf09407c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2632,7 +2639,14 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 8: Организационная психология"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_record": "https://urait.ru/bcode/600375",
+        "evidence_scope": "Indexed official publisher library description identifies a university textbook covering organizational psychology foundations and organizational functioning. Direct card fetch returned Internal Error; researched 2026 edition differs from course 2005 edition. No full-text/edition equivalence or difficulty measurement; additional overview is agent inference.",
+        "prerequisites": "No particular preceding book established; empty prerequisites does not prove absence of knowledge requirements."
+      }
     },
     "literature:lit_5643db88a7fa06b2": {
       "decision": "approved",
