@@ -34,17 +34,6 @@ PUBLIC_ITEM_FIELDS = (
     "prerequisites",
 )
 PUBLIC_SOURCE_FIELDS = ("title", "locator", "citation")
-USER_STATE_FIELDS = (
-    "reading_status",
-    "progress_percent",
-    "started_at",
-    "completed_at",
-    "updated_at",
-    "last_opened_at",
-    "remind_at",
-)
-
-
 @lru_cache(maxsize=1)
 def load_access_links() -> dict[str, list[dict[str, str]]]:
     """Curated outbound offers; a link never means that the user owns a copy."""
@@ -167,14 +156,3 @@ def list_literature_topic_payloads(user_states: dict[str, dict[str, Any]] | None
             payload["user_reading_status_counts"] = dict(sorted(reading_status_counts.items()))
         payloads.append(payload)
     return sorted(payloads, key=lambda payload: (int(topics.get(str(payload["topic_id"]), {}).get("order") or 0), str(payload["topic_id"])))
-
-
-def state_row_to_payload(row: Any) -> dict[str, Any]:
-    payload = {"literature_id": str(row["literature_id"])}
-    for field in USER_STATE_FIELDS:
-        payload[field] = row[field]
-    return payload
-
-
-def state_row_to_item_user_state(row: Any) -> dict[str, Any]:
-    return {field: row[field] for field in USER_STATE_FIELDS}
