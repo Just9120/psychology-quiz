@@ -1,12 +1,12 @@
 # Phase 1 proposal: topic registry and schema validation
 
-> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](project-spec.md), текущие AC/findings и выбор работы — [план](delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
+> Контекст документа: прежний review/RFC с ограниченным scope и Evidence на описанную в нём версию. Согласованные требования — [spec](../project-spec.md), текущие AC/findings и выбор работы — [план](../delivery-plan.md). Старые рекомендации и слова «current/ready» не подтверждают новые AC и не разрешают реализацию.
 
 Delivery Item ID: `LEARN-CONTOURS-PHASE1-001`
 
 ## 1. Purpose
 
-The current product already has a topic-oriented Tests / Questions contour: approved question JSON files live under `content/questions/**`, and learners can practice by one topic, a selected topic mix, or all approved questions. The future glossary and literature contours proposed in [historical contours RFC](archive/glossary_literature_contours_rfc.md) need to reuse those same learner-facing topics without renaming or rewriting existing question files.
+The current product already has a topic-oriented Tests / Questions contour: approved question JSON files live under `content/questions/**`, and learners can practice by one topic, a selected topic mix, or all approved questions. The future glossary and literature contours proposed in [historical contours RFC](glossary_literature_contours_rfc.md) need to reuse those same learner-facing topics without renaming or rewriting existing question files.
 
 A shared topic registry should be introduced before implementing Glossary / Terms or Literature / Reading tracker behavior because it gives all contours one stable topic contract:
 
