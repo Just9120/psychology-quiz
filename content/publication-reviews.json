@@ -3,7 +3,7 @@
   "items": {
     "literature:gippenreiter_vvedenie_v_obschuyu_psihologiyu": {
       "decision": "approved",
-      "item_sha256": "bba2ad03f6c1672d069f5b48e15b2a3adc79e5af1a16aa4aad62157e22c10c4d",
+      "item_sha256": "edabc4de7915fda945dfc486311bd7d630e72781896705e99fe94ba61ad1b54a",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -21,14 +21,21 @@
         "publisher_description": "https://ast.ru/book/vvedenie-v-obshchuyu-psikhologiyu-867357/",
         "evidence_scope": "Indexed official publisher description: introductory course for first-year psychology students; direct page fetch HTTP 403. Course bibliography reread identifies this book as primary. No book-content review or difficulty measurement. Existing visual bibliography snapshot remains unchanged.",
         "prerequisites": "No particular preceding book established; not a claim that no knowledge is required."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "teacher",
+        "evidence_scope": "Existing approved course bibliography explicitly labels the entry as primary or additional; mapping uses that label only. No title/order inference or full-book difficulty claim.",
+        "bibliography_label": "Основная",
+        "mapping": "Основная -> базовая; Дополнительная -> дополнительная"
       }
     },
     "literature:nurkova_berezanskaya_obschaya_psihologiya": {
       "decision": "approved",
-      "item_sha256": "9fc0c872058f8ff183faca93bb72b6b817c10b3ef16155d2185e5b8c921e47b4",
+      "item_sha256": "edbddcf39396437eea8da653db67490379b12973c6749b26682c67f970526814",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
@@ -36,7 +43,14 @@
           "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
           "locator": "Страница 1, позиция 2"
         }
-      ]
+      ],
+      "priority_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "teacher",
+        "evidence_scope": "Existing approved course bibliography explicitly labels the entry as primary or additional; mapping uses that label only. No title/order inference or full-book difficulty claim.",
+        "bibliography_label": "Основная",
+        "mapping": "Основная -> базовая; Дополнительная -> дополнительная"
+      }
     },
     "literature:vygotsky_myshlenie_i_rech": {
       "decision": "approved",
@@ -64,10 +78,10 @@
     },
     "literature:zhdan_istoriya_psihologii": {
       "decision": "approved",
-      "item_sha256": "d12c0dc7fb652c9d5694c6dafd36b5e354c0a8262b605113eb01c08b00fc71e5",
+      "item_sha256": "505847c73f5219192a25307bd830987dfabfc919b77ed59c94883b9f43657f84",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
@@ -75,14 +89,21 @@
           "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
           "locator": "Страница 1, позиция 4"
         }
-      ]
+      ],
+      "priority_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "teacher",
+        "evidence_scope": "Existing approved course bibliography explicitly labels the entry as primary or additional; mapping uses that label only. No title/order inference or full-book difficulty claim.",
+        "bibliography_label": "Дополнительная",
+        "mapping": "Основная -> базовая; Дополнительная -> дополнительная"
+      }
     },
     "literature:myers_psihologiya": {
       "decision": "approved",
-      "item_sha256": "30cadf6de638bec3ee02fa31c0b1c818bbaa5dbc4a91ff40a8aedd15fd61eba2",
+      "item_sha256": "682ffbe78f34d982646eb580aca77130d8532b6b023b854fa665370c78e4f9a5",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
@@ -90,7 +111,14 @@
           "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
           "locator": "Страница 1, позиция 5"
         }
-      ]
+      ],
+      "priority_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "teacher",
+        "evidence_scope": "Existing approved course bibliography explicitly labels the entry as primary or additional; mapping uses that label only. No title/order inference or full-book difficulty claim.",
+        "bibliography_label": "Дополнительная",
+        "mapping": "Основная -> базовая; Дополнительная -> дополнительная"
+      }
     },
     "literature:rubinstein_osnovy_obschey_psihologii": {
       "decision": "approved",
