@@ -10,16 +10,18 @@
     ],
     "year": 1999,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 10,
     "global_order": 620010,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семьи перейти к профессиональной литературе об индивидуальном и семейном консультировании.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -33,7 +35,9 @@
     "metadata_warnings": [
       "Совпали работа и автор; список консультирования без года, семейная психология указывает 1999. Это связь работы, не доказательство одинакового издания."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_98bfb98e25b39800",
@@ -114,16 +118,18 @@
     ],
     "year": 2001,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 40,
     "global_order": 620040,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семейных отношений познакомиться с системным подходом к семье по краткому лекционному курсу.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -135,7 +141,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_40f4eacd15ed570b",
@@ -217,16 +225,18 @@
     ],
     "year": 2002,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 70,
     "global_order": 620070,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семьи рассмотреть доступное изложение общения родителей и детей; оно дополняет профессиональный курс.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -238,7 +248,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_819808cf97ad8eb5",
@@ -251,16 +263,18 @@
     ],
     "year": 2009,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 80,
     "global_order": 620080,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После первой книги Гиппенрейтер продолжить тему общения с ребёнком и познакомиться с дальнейшими авторскими пояснениями.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_0199865ad8d23ecb"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -272,7 +286,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_ee1fe3562df0c482",
@@ -319,14 +335,14 @@
     ],
     "year": 2000,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "foundation",
     "status": "approved",
     "priority": null,
     "topic_order": 100,
     "global_order": 620100,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Начать с обзора отношений в семье, стилей воспитания и их связи с развитием ребёнка.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -340,7 +356,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "basic",
+    "importance_source": "agent"
   },
   {
     "id": "lit_e8a91d867727899b",
@@ -565,16 +583,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 170,
     "global_order": 620170,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "why_read": "После обзора семьи углубить тему связи ребёнка с близким взрослым по теории привязанности Боулби.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
     ],
@@ -589,7 +609,9 @@
       "Год издания не указан в презентации; издание и полный текст не проверены.",
       "Та же работа и автор уже есть в списке возрастной психологии; издание не установлено."
     ],
-    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_family_slide_03",

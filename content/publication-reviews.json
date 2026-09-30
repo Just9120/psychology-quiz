@@ -2095,7 +2095,7 @@
     },
     "literature:lit_7ff4b50c4911b5f7": {
       "decision": "approved",
-      "item_sha256": "fce5e2ab1157533398d4843efdc98341da3ff3c2bf93654d6ac7f2c3b140b0eb",
+      "item_sha256": "eaed9121e072e2bff18f798787e2732371f62da38cc7d555dd045621ba99394c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2106,7 +2106,17 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 1: Индивидуальное и семейное психологическое консультирование"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01000619187",
+        "evidence_scope": "Primary RSL indexed metadata matches Aleshina, Klass 1999; Dubna university library record classifies practical psychology and individual/family counselling. Recommendation scope based on bibliographic subject, no therapeutic efficacy or full-text certification.",
+        "sequence": "Agent recommends general family relationship overview before professional counselling/systemic course and attachment specialization; popular parent-child communication book before its continuation. Not compulsory teacher/author sequence.",
+        "limitations": "Existing source citations, snapshots, IDs, work aliases, years and personal reading state unchanged. No clinical qualification or full-text/scientific certification.",
+        "additional_primary_record": "https://lib.uni-dubna.ru/biblweb/search/bibl.asp?doc_id=86644&full=yes"
+      }
     },
     "literature:lit_98bfb98e25b39800": {
       "decision": "approved",
@@ -2140,7 +2150,7 @@
     },
     "literature:lit_4c4514f492edb1c6": {
       "decision": "approved",
-      "item_sha256": "cc64c06cc7ec1d2f6ac2d0cdfb90f8935512233ed830b3357bdd98529027510d",
+      "item_sha256": "8fe28e5b581502d09219d73086bc39992a29be497693ecd6b13b93d3a4e7b250",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2151,7 +2161,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 4: Системная семейная психотерапия: краткий лекционный курс"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A230766%2FSource%3Adefault",
+        "evidence_scope": "Primary MGPPU library card matches Varga, Rech 2001 lecture course and describes family system as unit of intervention. No full-text review, newer introduction not merged as identical work.",
+        "sequence": "Agent recommends general family relationship overview before professional counselling/systemic course and attachment specialization; popular parent-child communication book before its continuation. Not compulsory teacher/author sequence.",
+        "limitations": "Existing source citations, snapshots, IDs, work aliases, years and personal reading state unchanged. No clinical qualification or full-text/scientific certification."
+      }
     },
     "literature:lit_40f4eacd15ed570b": {
       "decision": "approved",
@@ -2185,7 +2204,7 @@
     },
     "literature:lit_0199865ad8d23ecb": {
       "decision": "approved",
-      "item_sha256": "b25156222c261cb99161eb4ce67af7359ec809e9c8218397c617d947dd915f4a",
+      "item_sha256": "58e4daa45771951ecd722a055cd1334a9e3aec81901672bbb1290e33ff95542d",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2196,11 +2215,20 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 7: Общаться с ребенком. Как?"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/obshchatsya-s-rebenkom-kak-866225/",
+        "evidence_scope": "Indexed official AST description identifies book for parents and teachers about communication and family relationships. Course 2002 edition not specifically matched, no full-text review or adoption of publisher outcome claims.",
+        "sequence": "Agent recommends general family relationship overview before professional counselling/systemic course and attachment specialization; popular parent-child communication book before its continuation. Not compulsory teacher/author sequence.",
+        "limitations": "Existing source citations, snapshots, IDs, work aliases, years and personal reading state unchanged. No clinical qualification or full-text/scientific certification."
+      }
     },
     "literature:lit_819808cf97ad8eb5": {
       "decision": "approved",
-      "item_sha256": "9f702c3f9b812a4f210963b213311c491307ffc2d1ba4a17ab8f4bb8c959e97d",
+      "item_sha256": "8a7078fb3bd5d387f60184a1bab4988d8e82cb90f4878feac7e89cd99f5e7b5a",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2211,7 +2239,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 8: Продолжаем общаться с ребенком. Так?"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/prodolzhaem-obshchatsya-s-rebenkom-tak-898358/",
+        "evidence_scope": "Indexed official AST description explicitly continues the first book and discusses additional communication details. Direct fetch failed; course 2009 edition not specifically matched, no full-text review.",
+        "sequence": "Agent recommends general family relationship overview before professional counselling/systemic course and attachment specialization; popular parent-child communication book before its continuation. Not compulsory teacher/author sequence.",
+        "limitations": "Existing source citations, snapshots, IDs, work aliases, years and personal reading state unchanged. No clinical qualification or full-text/scientific certification."
+      }
     },
     "literature:lit_ee1fe3562df0c482": {
       "decision": "approved",
@@ -2230,7 +2267,7 @@
     },
     "literature:lit_a172ffe221539480": {
       "decision": "approved",
-      "item_sha256": "60743af548e3d1fbc87a447caaf693364eec35662b8e38203c8b03479ded8c42",
+      "item_sha256": "c0743d0deedb9e3ffcf554b4e01f6d0e0c114a6848d740bb58035cd9ccc10984",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2241,7 +2278,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 10: Психология семьи"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A58035%2FSource%3Adefault",
+        "evidence_scope": "Indexed primary university library description identifies family relationships, parenting styles and child personality development in 2007 third edition. Direct fetch failed; course 2000 edition not matched, no full-text review.",
+        "sequence": "Agent recommends general family relationship overview before professional counselling/systemic course and attachment specialization; popular parent-child communication book before its continuation. Not compulsory teacher/author sequence.",
+        "limitations": "Existing source citations, snapshots, IDs, work aliases, years and personal reading state unchanged. No clinical qualification or full-text/scientific certification."
+      }
     },
     "literature:lit_e8a91d867727899b": {
       "decision": "approved",
@@ -2813,7 +2859,7 @@
     },
     "literature:lit_family_slide_02": {
       "decision": "approved",
-      "item_sha256": "25663a0dda81a8f4fcb88f065c47339f6b4a63a940c1a893b59698859d499517",
+      "item_sha256": "8b8da4584feeb95626d132749df0c040173cb48a7623e29ca51b628da100a45c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-29",
@@ -2825,7 +2871,16 @@
           "locator": "Раздел «Полезная литература», позиция 2"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01001857176",
+        "evidence_scope": "Primary RSL description of Attachment studies child-to-mother attachment for psychology students/professionals. Existing proven work identity shared with developmental list retained; course edition unspecified, no full-text review.",
+        "sequence": "Agent recommends general family relationship overview before professional counselling/systemic course and attachment specialization; popular parent-child communication book before its continuation. Not compulsory teacher/author sequence.",
+        "limitations": "Existing source citations, snapshots, IDs, work aliases, years and personal reading state unchanged. No clinical qualification or full-text/scientific certification."
+      }
     },
     "literature:lit_family_slide_03": {
       "decision": "approved",
