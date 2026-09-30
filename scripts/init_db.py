@@ -13,7 +13,7 @@ from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.invitation_schema import migrate_invitation_schema
 from app.database import connect_database, is_postgres_target, resolve_database_target
-from app.db import (ensure_user_literature_progress_table,
+from app.quiz_schema import (ensure_user_literature_progress_table,
                     ensure_users_reading_mode_column,
                     ensure_quiz_sessions_difficulty_mode_column)
 from app.postgres_schema import upgrade_schema
