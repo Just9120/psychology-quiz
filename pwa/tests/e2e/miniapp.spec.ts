@@ -172,3 +172,44 @@ for (const sameSession of [true, false]) {
     expect(answers).toBe(1)
   })
 }
+
+
+test('built Mini App opens book offers externally without passing Telegram proof', async ({ page }) => {
+  await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
+  await page.addInitScript(() => { (window as typeof window & { Telegram: unknown }).Telegram = { WebApp: { initData: 'synthetic-miniapp-proof', ready() {}, expand() {} } } })
+  const offers = [{ format: 'text', provider: 'Провайдер', url: 'https://books.example.test/text', access: 'provider_terms', checked_at: '2026-09-30' },
+                  { format: 'audio', provider: 'Провайдер', url: 'https://books.example.test/audio', access: 'provider_terms', checked_at: '2026-09-30' }]
+  await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
+    const path = new URL(route.request().url()).pathname
+    const payload: Record<string, object> = {
+      '/miniapp/setup-options': { setup_options: setup },
+      '/miniapp/state': { runner_state: { state: 'setup', status: 'setup', session: null } },
+      '/miniapp/literature/topics': { literature_topics: [{ topic_id: 'one', title: 'Тема', module: 'module1' }] },
+      '/miniapp/literature/items': { literature_items: [{ id: 'book', work_id: 'work', title: 'Учебная книга', topic_id: 'one', access_links: offers, user_state: null }] },
+    }
+    expect(payload[path]).toBeDefined()
+    await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, ...payload[path] }), headers: { 'Access-Control-Allow-Origin': site.slice(0, -1) } })
+  })
+  await page.goto(site)
+  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await page.getByRole('button', { name: 'Учебная книга', exact: true }).click()
+  await expect(page.getByText('Доступ и совпадение издания уточняются у провайдера.')).toBeVisible()
+  for (const offer of offers) {
+    await page.context().route(offer.url, async route => {
+      expect(route.request().url()).not.toContain('synthetic-miniapp-proof')
+      expect(route.request().headers().authorization).toBeUndefined()
+      expect(route.request().headers().cookie).toBeUndefined()
+      await route.fulfill({ contentType: 'text/html', body: '<title>External provider fixture</title>' })
+    })
+    const link = page.getByRole('link', { name: `${offer.format === 'text' ? 'Текст' : 'Аудио'} · ${offer.provider}`, exact: true })
+    await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    const opened = page.context().waitForEvent('page')
+    await link.click()
+    const provider = await opened
+    await expect(provider).toHaveURL(offer.url)
+    expect(await provider.evaluate(() => window.opener)).toBeNull()
+    await provider.close()
+    await page.context().unroute(offer.url)
+  }
+  await expect(page.getByRole('combobox', { name: 'Статус', exact: true })).toHaveValue('not_started')
+})

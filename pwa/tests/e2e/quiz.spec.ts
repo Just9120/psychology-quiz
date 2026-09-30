@@ -78,7 +78,7 @@ test('reading catalog shares a work status across lists, lost save and reload', 
   await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
   await page.getByLabel('Учебный список').selectOption(first)
   await expect(page.getByLabel('Статус чтения')).toHaveValue('read')
-  await page.getByText('Источник и библиографическая запись').click()
+  await page.getByText('Библиографическая запись', { exact: true }).click()
   await page.evaluate(() => window.scrollTo(0, 0))
   await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-reading.png`, fullPage: true })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
@@ -88,6 +88,47 @@ test('reading catalog shares a work status across lists, lost save and reload', 
   await page.getByLabel('Учебный список').selectOption(first)
   await expect(page.getByLabel('Статус чтения')).toHaveValue('read')
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
+})
+
+test('reviewed literature links open a separate provider page without learning changes', async ({ page }) => {
+  await fresh(page)
+  type Work = { title: string; access_links: { format: 'text' | 'audio'; provider: string; url: string }[]; entries: { user_state: unknown }[] }
+  const response = await page.request.get('/web/literature/catalog')
+  expect(response.ok()).toBeTruthy()
+  const before = await response.json() as { works: Work[] }
+  const work = before.works.find(item => new Set(item.access_links.map(link => link.format)).size === 2
+    && before.works.filter(other => other.title === item.title).length === 1)
+  expect(work, 'published catalog has an unambiguous work with text and audio offers').toBeTruthy()
+  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await page.getByRole('button', { name: work!.title, exact: true }).click()
+  await expect(page.getByText(/Наличие доступа, цена и совпадение издания проверяются там/)).toBeVisible()
+  for (const format of ['text', 'audio'] as const) {
+    const offer = work!.access_links.find(link => link.format === format)!
+    const target = new URL(offer.url).href
+    // Intercept the provider boundary: reproducible UI check, no provider login/purchase/network.
+    await page.context().route(target, async route => {
+      expect(route.request().method()).toBe('GET')
+      const headers = route.request().headers()
+      expect(headers.authorization).toBeUndefined()
+      expect(headers['x-csrf-token']).toBeUndefined()
+      expect(headers.cookie).toBeUndefined()
+      await route.fulfill({ contentType: 'text/html', body: '<title>External provider fixture</title>' })
+    })
+    const link = page.getByRole('link', { name: `${format === 'text' ? 'Текст' : 'Аудио'} · ${offer.provider}`, exact: true }).first()
+    await expect(link).toHaveAttribute('href', offer.url)
+    await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    const opened = page.context().waitForEvent('page')
+    await link.click()
+    const provider = await opened
+    await expect(provider).toHaveURL(target)
+    expect(await provider.evaluate(() => window.opener)).toBeNull()
+    await provider.close()
+    await page.context().unroute(target)
+    await expect(page.getByRole('heading', { name: work!.title, exact: true })).toBeVisible()
+  }
+  const after = await (await page.request.get('/web/literature/catalog')).json() as { works: Work[] }
+  expect(after.works.map(item => item.entries.map(entry => entry.user_state)))
+    .toEqual(before.works.map(item => item.entries.map(entry => entry.user_state)))
 })
 
 test('reading empty and failed catalog loads are recoverable', async ({ page }) => {
