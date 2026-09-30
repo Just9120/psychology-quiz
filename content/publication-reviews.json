@@ -2459,10 +2459,10 @@
     },
     "literature:lit_e8a91d867727899b": {
       "decision": "approved",
-      "item_sha256": "5e9017eb834bad99ed6eec955f0fdb813df8b8283dc61ff6ac7bdb42a94e0d1e",
+      "item_sha256": "f6b17a865d9322342bd27738492ee4d4acd08f5c285ae66b681b8276a9a10242",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2470,7 +2470,14 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 11: Зависимость характеристик супружеской семьи от родительской"
         }
-      ]
+      ],
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "primary_record": "https://voppsy.ru/issues/1998/982/982046.htm",
+        "evidence_scope": "Journal page retrieved: exact title, displayed initials T. I. and first printed page 46 differ from course citation T. N. and pages 19-27. Original course citation and work identity retained; no automatic author replacement or scientific approval.",
+        "decision": "warn_pending_reconciliation"
+      }
     },
     "literature:lit_4bad7531005a5e23": {
       "decision": "approved",
@@ -3114,10 +3121,10 @@
     },
     "literature:lit_family_slide_01": {
       "decision": "approved",
-      "item_sha256": "e18544e179e2cdb4a68f5feab6401683bc46f33936276477a6fc0a20b15ca211",
+      "item_sha256": "c6cc28690077e3d38812479bfdc5dc75f72f8093993cdd4e0001a536eab6190c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-29",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
@@ -3126,7 +3133,16 @@
           "locator": "Раздел «Полезная литература», позиция 1"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.gbs.spb.ru/ru/search/detail/?id=088e1f06ba833af64edb0f8d0144101f",
+        "evidence_scope": "Primary municipal library catalogue retrieved: matching authors/title, university psychology student audience and full life-cycle scope. Record describes 2013 edition; course exact edition/year remains UNSET. No whole-book or scientific accuracy review.",
+        "sequence": "Agent recommendation: core developmental overview in family reading plan, not a teacher requirement or a proven prerequisite for all parenting books.",
+        "limitations": "Work identity, original source snapshots/citations, authors, year and reading state preserved; no edition equivalence, access entitlement or measured difficulty claimed."
+      }
     },
     "literature:lit_family_slide_02": {
       "decision": "approved",
