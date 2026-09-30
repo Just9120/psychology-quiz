@@ -1783,7 +1783,7 @@
     },
     "literature:lit_b76317a4d7bec59d": {
       "decision": "approved",
-      "item_sha256": "f11f1aaf5df866e06b108accf60dfad3e9fbe2aba96e4ecac8de60967ebd9ae0",
+      "item_sha256": "806c3974b6443477235d6295ce42f4ac0a1c5739b5429c939a2a28733f566c40",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1794,11 +1794,19 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 9: Создание и разрушение эмоциональных связей"
         }
-      ]
+      ],
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=260897&lang=Ru&page=Book",
+        "evidence_scope": "URSS catalogue identifies the phrase as a subtitle of Bowlby emotional bonds, 2026 edition. The current course PDF text lists it as a separate bullet without author. Exact course edition and visual PDF layout not verified.",
+        "source_read": "Authenticated current course PDF text fetch on 2026-09-30; modified_time 2026-08-30T19:32:28.269Z matches existing source record. Extraction evidence only.",
+        "limitations": "Candidate duplicate only. No identity merge, source citation change, role assignment or personal reading-state change."
+      }
     },
     "literature:lit_d679ea65152d4922": {
       "decision": "approved",
-      "item_sha256": "71860eb2b7d300b357a37675ba1cee9c2ca1eb7b70bceab57c2f56f661b718d6",
+      "item_sha256": "c444e9b220f3b498fad9764dd516a248d9cac73996983902356120b898586274",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1809,7 +1817,15 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 10: Руководство практического психолога"
         }
-      ]
+      ],
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=260897&lang=Ru&page=Book",
+        "evidence_scope": "URSS catalogue identifies the phrase as a subtitle of Bowlby emotional bonds, 2026 edition. The current course PDF text lists it as a separate bullet without author. Exact course edition and visual PDF layout not verified.",
+        "source_read": "Authenticated current course PDF text fetch on 2026-09-30; modified_time 2026-08-30T19:32:28.269Z matches existing source record. Extraction evidence only.",
+        "limitations": "Candidate duplicate only. No identity merge, source citation change, role assignment or personal reading-state change."
+      }
     },
     "literature:lit_3ecf3ffbaa287019": {
       "decision": "approved",
