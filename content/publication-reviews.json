@@ -2420,10 +2420,10 @@
     },
     "literature:lit_ee1fe3562df0c482": {
       "decision": "approved",
-      "item_sha256": "b23ae1923937f014fbe3186f092fef3861fd125ac7b0beefa1b634714c26697a",
+      "item_sha256": "01f883d63fbf65aa25c61cb82dd5325f4e6362e2444c03f6da0d3eba5a52a5c1",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2431,7 +2431,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 9: Основы семейной жизни"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A17738%2FSource%3Adefault",
+        "evidence_scope": "Indexed primary university/library records: matching author/title/publisher/1991, pedagogical student textbook audience; 156 plus 2 or 158 pages conflicts with course 256. NEB/direct catalogue fetch limitations preserved. No full-content review.",
+        "sequence": "Agent-selected reading role and prerequisites; not teacher priority or measured difficulty.",
+        "limitations": "Original citation/authors/year/source snapshots/work identity/reading state preserved. No entitlement, complete text or exact edition equivalence claimed."
+      }
     },
     "literature:lit_a172ffe221539480": {
       "decision": "approved",
@@ -2496,10 +2505,10 @@
     },
     "literature:lit_ce87499b1e725a4d": {
       "decision": "approved",
-      "item_sha256": "e32a48b502bcccbc1f72aadc30a22f3db025aeb023c2f002ac8e89c132667560",
+      "item_sha256": "89b74ccfa116b52d4f7c0efd7dd687c0166d921a5b98979a8471462aa62c37f2",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2507,7 +2516,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 13: Психология семейных отношений"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ebs.rgunh.ru/index.php?q=node/638",
+        "evidence_scope": "Primary university electronic library catalogue retrieved: matching author/title, 2009 South Ural university 63-page textbook, student/practitioner audience and systemic family/development scope. No full-book or scientific accuracy review.",
+        "sequence": "Agent-selected reading role and prerequisites; not teacher priority or measured difficulty.",
+        "limitations": "Original citation/authors/year/source snapshots/work identity/reading state preserved. No entitlement, complete text or exact edition equivalence claimed."
+      }
     },
     "literature:lit_319ec2108977ce66": {
       "decision": "approved",
@@ -3231,10 +3249,10 @@
     },
     "literature:lit_family_slide_04": {
       "decision": "approved",
-      "item_sha256": "1ee12134de1249fad364c9697e81c2fef80548d3104ecb940ae4159a5af710d5",
+      "item_sha256": "fca5c44044e954721114fd06b5840b616736664a580022d3796c4d68d4404319",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-29",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
@@ -3243,7 +3261,17 @@
           "locator": "Раздел «Полезная литература», позиция 4"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.newharbinger.com/9781626258990/parenting-a-troubled-teen/",
+        "evidence_scope": "Original publisher description and Russian publisher-supplied excerpt on Litres retrieved: original title/author/translation connection and parent-of-teens audience verified. Russian introduction identifies emotional regulation/parent reactions scope. No whole-book, exact course edition or clinical efficacy review.",
+        "sequence": "Agent-selected reading role and prerequisites; not teacher priority or measured difficulty.",
+        "limitations": "Original citation/authors/year/source snapshots/work identity/reading state preserved. No entitlement, complete text or exact edition equivalence claimed.",
+        "translation_excerpt": "https://www.litres.ru/book/patrisiya-i-zurita-o/trudnyy-podrostok-konflikty-i-silnye-emocii-terapiya-43228655/chitat-onlayn/"
+      }
     },
     "literature:lit_family_slide_05": {
       "decision": "approved",
@@ -3347,10 +3375,10 @@
     },
     "literature:lit_family_slide_09": {
       "decision": "approved",
-      "item_sha256": "7c88d7786e51f3f9c968f1a532c8ecbc00e40b6b4505b7a31c7a4efe45517aa1",
+      "item_sha256": "68120288c05a5e7e19866f5d4dbf1e3cb1fb32b28d202b98c25e77e34179ae93",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-29",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
@@ -3359,7 +3387,13 @@
           "locator": "Раздел «Полезная литература», позиция 5"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "evidence": "https://rusneb.ru/catalog/000200_000018_RU_NLR_bibl_965184/",
+        "corroboration": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A44755%2FSource%3Adefault",
+        "scope": "Indexed primary national/university library records name Minuchin and Fishman, 2006 Klass edition. Direct fetch failed; course edition remains unknown. No identity rewrite, reading role or whole-text approval."
+      }
     },
     "literature:lit_consult_lecture_01": {
       "decision": "approved",
