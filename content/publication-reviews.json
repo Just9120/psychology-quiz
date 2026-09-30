@@ -3,10 +3,10 @@
   "items": {
     "literature:gippenreiter_vvedenie_v_obschuyu_psihologiyu": {
       "decision": "approved",
-      "item_sha256": "102646dababcf25e691b63b212550a1b94b561cd279dad8f288f68fce674d081",
+      "item_sha256": "bba2ad03f6c1672d069f5b48e15b2a3adc79e5af1a16aa4aad62157e22c10c4d",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1Qu7CXXravaMnHmmsgSDTeEfgAK36uzZZ",
@@ -14,7 +14,14 @@
           "snapshot_sha256": "fd9834163341ef4e3d4ab62bf59a5469ecc2cfec3408e427704598607f57359c",
           "locator": "Страница 1, позиция 1"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://ast.ru/book/vvedenie-v-obshchuyu-psikhologiyu-867357/",
+        "evidence_scope": "Indexed official publisher description: introductory course for first-year psychology students; direct page fetch HTTP 403. Course bibliography reread identifies this book as primary. No book-content review or difficulty measurement. Existing visual bibliography snapshot remains unchanged.",
+        "prerequisites": "No particular preceding book established; not a claim that no knowledge is required."
+      }
     },
     "literature:nurkova_berezanskaya_obschaya_psihologiya": {
       "decision": "approved",

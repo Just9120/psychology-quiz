@@ -95,11 +95,12 @@ def _topic_view(items: list[dict], states: dict, token: str, page: int) -> tuple
     text += "\nСейчас читаю: " + (", ".join(escape(item["title"][:80]) for item in current[:5]) if current else "нет текущих книг")
     if len(current) > 5:
         text += f"; ещё {len(current) - 5}"
-    next_step = literature_service.reading_next_step(selected, states)
+    next_step = literature_service.reading_next_step(selected, states, items)
     if next_step:
         item = next_step["item"]
-        text += f"\n\nСледующий шаг: продолжить «{escape(item['title'])}».\n{escape(next_step['reason'])}"
-        rows.insert(0, [InlineKeyboardButton("Продолжить чтение",
+        action = "продолжить" if next_step["kind"] == "continue" else "начать"
+        text += f"\n\nСледующий шаг: {action} «{escape(item['title'])}».\n{escape(next_step['reason'])}"
+        rows.insert(0, [InlineKeyboardButton("Продолжить чтение" if next_step["kind"] == "continue" else "Начать чтение",
                      callback_data=f"lit:i:{_token(item['id'])}")])
     text += f"\nМатериалы {page + 1}/{pages}. Личный статус показан рядом с названием."
     return (text,

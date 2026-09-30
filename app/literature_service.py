@@ -27,8 +27,8 @@ def reading_summary(items: list[dict], states: dict) -> dict:
     return {"read": read, "total": len(works), "conflicts": conflicts, "current": current}
 
 
-def reading_next_step(items: list[dict], states: dict) -> dict | None:
-    """Continue a started work in this scope; never infer pedagogical priority.
+def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | None = None) -> dict | None:
+    """Continue started reading, then use explicitly reviewed recommendation metadata.
 
     Conflicting association states require a decision before a recommendation.
     Only canonical UTC timestamps rank recency; missing dates tie by stable ID.
@@ -51,7 +51,39 @@ def reading_next_step(items: list[dict], states: dict) -> dict | None:
             return ""
         return value if parsed.strftime("%Y-%m-%dT%H:%M:%SZ") == value else ""
     if not candidates:
-        return None
+        known = {item["id"]: item for item in (all_items if all_items is not None else items)}
+        all_works = {}
+        for item in known.values():
+            all_works.setdefault(item.get("work_id", item["id"]), []).append(item)
+        def status(item):
+            return states.get(item["id"], {}).get("reading_status", "not_started")
+        def completed(reference):
+            prerequisite = known.get(reference)
+            if prerequisite is None:
+                return False
+            group = all_works[prerequisite.get("work_id", prerequisite["id"])]
+            return all(status(item) == "read" for item in group)
+        rank = {"basic": 0, "important": 1, "additional": 2, "advanced": 3}
+        recommendations = []
+        for item in items:
+            group = all_works.get(item.get("work_id", item["id"]), [])
+            prerequisites = item.get("prerequisites")
+            if (not group or any(status(entry) != "not_started" for entry in group)
+                    or item.get("importance") not in rank
+                    or item.get("importance_source") not in {"agent", "teacher"}
+                    or item.get("reading_level") not in {"foundation", "core", "applied", "deepening", "advanced", "reference"}
+                    or not isinstance(item.get("why_read"), str) or not item["why_read"].strip()
+                    or not isinstance(prerequisites, list)
+                    or not all(isinstance(ref, str) and completed(ref) for ref in prerequisites)):
+                continue
+            recommendations.append(item)
+        if not recommendations:
+            return None
+        recommendations.sort(key=lambda item: (rank[item["importance"]], str(item["id"])))
+        item = recommendations[0]
+        origin = "Рекомендация агента" if item["importance_source"] == "agent" else "Приоритет преподавателя"
+        return {"item": item, "kind": "start", "reason": f"{origin}. {item['why_read']}",
+                "basis": item["importance_source"]}
     # Two stable sorts avoid deriving a preference from bibliography position.
     candidates.sort(key=lambda item: str(item["id"]))
     candidates.sort(key=recency, reverse=True)

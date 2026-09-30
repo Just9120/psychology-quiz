@@ -27,3 +27,19 @@ it('does not recommend conflicts, finished books or invalid date priority', () =
   expect(readingNextStep(items.slice(0, 1))?.id).toBe('a')
   expect(readingNextStep([])).toBeNull()
 })
+
+
+it('starts reviewed reading only after prerequisites across topics and labels its origin', async () => {
+  const item = { id: 'next', title: 'Intro', importance: 'basic', importance_source: 'agent', reading_level: 'foundation', why_read: 'Вводный курс.', prerequisites: ['previous'] }
+  const previous = { id: 'previous', work_id: 'previous', user_state: { reading_status: 'read' as const } }
+  expect(readingNextStep([item])).toBeNull()
+  expect(readingNextStep([item], [item, previous])?.id).toBe('next')
+  expect(readingNextStep([{ ...item, reading_level: null }], [item, previous])).toBeNull()
+  expect(readingNextStep([item], [item, previous, { id: 'alias', work_id: 'previous' }])).toBeNull()
+  expect(readingNextStep([{ ...item, user_state: { reading_status: 'deferred' as const } }])).toBeNull()
+  const onSelect = vi.fn()
+  render(<ReadingSummary items={[item]} allItems={[item, previous]} busy={false} onSelect={onSelect} />)
+  expect(screen.getByText('Рекомендация агента. Вводный курс.')).toBeVisible()
+  await userEvent.setup().click(screen.getByRole('button', { name: 'Начать «Intro»' }))
+  expect(onSelect).toHaveBeenCalledWith('next')
+})

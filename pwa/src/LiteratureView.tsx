@@ -86,7 +86,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       <label className="field literature-filter">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
       <label className="field literature-filter">Тема литературы<select value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{catalog.topics.filter(item => !module || item.module === module).map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
       <label className="field literature-filter">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(statuses).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
-      <ReadingSummary items={summaryItems} busy={busy} onSelect={id => {
+      <ReadingSummary allItems={catalog.works.flatMap(work => work.entries)} items={summaryItems} busy={busy} onSelect={id => {
         const selectedWork = catalog.works.find(item => item.entries.some(link => link.id === id))
         if (selectedWork) { setWorkId(selectedWork.work_id); select(selectedWork.entries.find(link => link.id === id)!) }
       }} />

@@ -39,3 +39,32 @@ def test_telegram_continuation_opens_exact_association_and_escapes_title(monkeyp
     assert "&lt;Book&gt;" in text and "<Book>" not in text
     assert "Следующий шаг" in text
     assert keyboard.inline_keyboard[0][0].callback_data == "lit:i:" + literature_chat._token("book")
+
+
+def test_start_recommendation_requires_reviewed_metadata_and_completed_prerequisites():
+    item = {"id": "next", "title": "Next", "work_id": "next", "importance": "basic",
+            "importance_source": "agent", "reading_level": "foundation",
+            "why_read": "Начните с вводного курса.", "prerequisites": ["previous"]}
+    previous = {"id": "previous", "work_id": "previous"}
+    assert reading_next_step([item], {}, [item, previous]) is None
+    states = {"previous": {"reading_status": "read"}}
+    result = reading_next_step([item], states, [item, previous])
+    assert result["kind"] == "start" and result["basis"] == "agent"
+    assert result["reason"].startswith("Рекомендация агента.")
+    assert states == {"previous": {"reading_status": "read"}}
+    assert reading_next_step([item], states) is None
+    assert reading_next_step([{**item, "reading_level": None}], states, [item, previous]) is None
+    alias = {"id": "alias", "work_id": "previous"}
+    assert reading_next_step([item], states, [item, previous, alias]) is None
+    assert reading_next_step([item], {**states, "next": {"reading_status": "deferred"}}, [item, previous]) is None
+
+
+def test_telegram_start_recommendation_labels_origin_and_escapes_reason(monkeypatch):
+    from app import literature_chat
+    monkeypatch.setattr(literature_chat, "list_literature_topic_payloads", lambda: [{"topic_id": "one", "title": "Topic"}])
+    item = {"id": "new", "topic_id": "one", "title": "Book", "importance": "basic",
+            "importance_source": "teacher", "reading_level": "foundation",
+            "why_read": "<Reason>", "prerequisites": []}
+    text, keyboard = literature_chat._topic_view([item], {}, literature_chat._token("one"), 0)
+    assert "Приоритет преподавателя" in text and "&lt;Reason&gt;" in text
+    assert "начать" in text and keyboard.inline_keyboard[0][0].text == "Начать чтение"
