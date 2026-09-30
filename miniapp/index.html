@@ -1816,8 +1816,7 @@
         not_started: 'Не начато',
         in_progress: 'Читаю',
         read: 'Прочитано',
-        revisit: 'Повторить',
-        skipped: 'Пропущено',
+        deferred: 'Отложено',
       };
       let literatureTopicsCache = [];
       let literatureItemsCache = [];
@@ -2001,7 +2000,7 @@
         details.appendChild(status);
         const actions = document.createElement('div');
         actions.className = 'miniapp-choice-list';
-        ['in_progress', 'read', 'revisit', 'skipped'].forEach((readingStatus) => {
+        ['in_progress', 'read', 'deferred'].forEach((readingStatus) => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'miniapp-choice-button literature-choice-button';

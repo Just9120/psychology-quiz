@@ -17,15 +17,17 @@ from app import literature_service
 
 logger = logging.getLogger(__name__)
 PAGE_SIZE = 5
-CALLBACK_PATTERN = re.compile(r"^lit:(?:topics|t:[0-9a-f]{12}:\d{1,3}|i:[0-9a-f]{12}|s:[0-9a-f]{12}:[npdrs])$")
+CALLBACK_PATTERN = re.compile(r"^lit:(?:topics|m:[0-9a-f]{12}|t:[0-9a-f]{12}:\d{1,3}(?::[anpdf])?|i:[0-9a-f]{12}|s:[0-9a-f]{12}:[npdf])$")
 STATUS_CODES = {
     "n": ("Не начато", "not_started"),
     "p": ("Читаю", "in_progress"),
     "d": ("Прочитано", "read"),
-    "r": ("Вернуться позже", "revisit"),
-    "s": ("Пропущено", "skipped"),
+    "f": ("Отложено", "deferred"),
 }
 STATUS_LABELS = {value: label for label, value in STATUS_CODES.values()}
+IMPORTANCE_LABELS = {"basic": "Базовая", "important": "Важная",
+                     "additional": "Дополнительная", "advanced": "Углублённая"}
+IMPORTANCE_SOURCES = {"teacher": "приоритет преподавателя", "agent": "рекомендация агента"}
 
 
 def _token(value: str) -> str:
@@ -55,40 +57,80 @@ def _save(db_path: str, telegram_user, literature_id: str, status: str) -> dict:
         return literature_service.save_progress(conn, int(actor["id"]), literature_id, status, None)
 
 
-def _topics() -> tuple[str, InlineKeyboardMarkup | None]:
+def _topics(module_token: str | None = None) -> tuple[str, InlineKeyboardMarkup | None] | None:
     topics = list_literature_topic_payloads()
     if not topics:
-        return "Сейчас нет опубликованной литературы.", None
+        return ("Сейчас нет опубликованной литературы.", None) if module_token is None else None
+    modules = [{"module": value} for value in dict.fromkeys(topic.get("module") for topic in topics)
+               if isinstance(value, str) and value]
+    module = _find(modules, module_token, "module") if module_token is not None else None
+    if module_token is not None and module is None:
+        return None
+    selected = [topic for topic in topics if module is None or topic.get("module") == module["module"]]
     rows = [[InlineKeyboardButton(f"{topic['title']} · {topic['item_count']}",
              callback_data=f"lit:t:{_token(topic['topic_id'])}:0")]
-            for topic in topics]
-    return "<b>Литература по темам</b>\nВыберите тему, чтобы открыть список чтения.", InlineKeyboardMarkup(rows)
+            for topic in selected]
+    if module is None and len(modules) > 1:
+        rows.extend([[InlineKeyboardButton(value["module"].replace("module", "Модуль "),
+                     callback_data=f"lit:m:{_token(value['module'])}")] for value in modules])
+    elif module is not None:
+        rows.append([InlineKeyboardButton("Все темы и модули", callback_data="lit:topics")])
+    title = "Литература по темам" if module is None else module["module"].replace("module", "Модуль ")
+    return f"<b>{escape(title)}</b>\nВыберите тему, чтобы открыть список чтения.", InlineKeyboardMarkup(rows)
 
 
-def _topic_view(items: list[dict], states: dict, token: str, page: int) -> tuple[str, InlineKeyboardMarkup] | None:
+def _topic_view(items: list[dict], states: dict, token: str, page: int, status_filter: str = "a") -> tuple[str, InlineKeyboardMarkup] | None:
     topics = list_literature_topic_payloads()
     topic = _find(topics, token, "topic_id")
-    if topic is None:
+    if topic is None or status_filter not in {"a", *STATUS_CODES} or page < 0:
         return None
     selected = [item for item in items if item["topic_id"] == topic["topic_id"]]
-    pages = max(1, (len(selected) + PAGE_SIZE - 1) // PAGE_SIZE)
+    visible = [item for item in selected if status_filter == "a"
+               or (states.get(item["id"]) or {}).get("reading_status", "not_started") == STATUS_CODES[status_filter][1]]
+    pages = max(1, (len(visible) + PAGE_SIZE - 1) // PAGE_SIZE)
     if page >= pages:
         return None
+    summary = literature_service.reading_summary(selected, states)
     rows = []
-    for item in selected[page * PAGE_SIZE:(page + 1) * PAGE_SIZE]:
+    for item in visible[page * PAGE_SIZE:(page + 1) * PAGE_SIZE]:
         state = states.get(item["id"], {})
         label = STATUS_LABELS.get(state.get("reading_status"), "Не начато")
         rows.append([InlineKeyboardButton(f"{item['title'][:45]} · {label}",
                     callback_data=f"lit:i:{_token(item['id'])}")])
     navigation = []
     if page:
-        navigation.append(InlineKeyboardButton("←", callback_data=f"lit:t:{token}:{page - 1}"))
+        navigation.append(InlineKeyboardButton("←", callback_data=f"lit:t:{token}:{page - 1}:{status_filter}"))
     if page + 1 < pages:
-        navigation.append(InlineKeyboardButton("→", callback_data=f"lit:t:{token}:{page + 1}"))
+        navigation.append(InlineKeyboardButton("→", callback_data=f"lit:t:{token}:{page + 1}:{status_filter}"))
     if navigation:
         rows.append(navigation)
+    rows.append([InlineKeyboardButton("Все статусы", callback_data=f"lit:t:{token}:0:a")])
+    rows.extend([[InlineKeyboardButton(label, callback_data=f"lit:t:{token}:0:{code}")]
+                 for code, (label, _) in STATUS_CODES.items()])
     rows.append([InlineKeyboardButton("К темам", callback_data="lit:topics")])
-    return (f"<b>{escape(topic['title'])}</b>\nМатериалы {page + 1}/{pages}. Личный статус показан рядом с названием.",
+    text = f"<b>{escape(topic['title'])}</b>\nПрочитано {summary['read']} из {summary['total']}"
+    if summary['conflicts']:
+        text += f"\nРазличаются отметки в списках: {summary['conflicts']} работ. Они не включены в число прочитанных."
+    current = summary['current']
+    text += "\nСейчас читаю: " + (", ".join(escape(item["title"][:80]) for item in current[:5]) if current else "нет текущих книг")
+    if len(current) > 5:
+        text += f"; ещё {len(current) - 5}"
+    # Keep the filtered button list separate from recommendations for the full topic.
+    next_step = literature_service.reading_next_step(selected, states, items) if status_filter == "a" else None
+    if next_step:
+        item = next_step["item"]
+        action = "продолжить" if next_step["kind"] == "continue" else "начать"
+        text += f"\n\nСледующий шаг: {action} «{escape(item['title'])}».\n{escape(next_step['reason'])}"
+        activity = "просмотр" if item.get("type") == "video" else ("изучение" if item.get("type") in {"article", "chapter", "other"} else "чтение")
+        verb = "Продолжить" if next_step["kind"] == "continue" else "Начать"
+        rows.insert(0, [InlineKeyboardButton(f"{verb} {activity}",
+                     callback_data=f"lit:i:{_token(item['id'])}")])
+    filter_label = "Все статусы" if status_filter == "a" else STATUS_CODES[status_filter][0]
+    text += f"\nФильтр: {filter_label}."
+    if not visible:
+        text += "\nПо этому статусу книг пока нет."
+    text += f"\nМатериалы {page + 1}/{pages}. Личный статус показан рядом с названием."
+    return (text,
             InlineKeyboardMarkup(rows))
 
 
@@ -96,6 +138,14 @@ def _item_view(item: dict, state: dict | None) -> tuple[str, InlineKeyboardMarku
     status = STATUS_LABELS.get((state or {}).get("reading_status"), "Не начато")
     authors = ", ".join(item.get("authors") or [])
     text = f"<b>{escape(item['title'])}</b>\n{escape(authors)}\nСтатус: {status}"
+    importance = IMPORTANCE_LABELS.get(item.get("importance"))
+    if importance is None:
+        text += "\nЗначимость: не определена"
+    else:
+        origin = IMPORTANCE_SOURCES.get(item.get("importance_source"), "источник оценки не указан")
+        text += f"\nЗначимость: {importance} · {origin}"
+    for warning in item.get("metadata_warnings") or []:
+        text += f"\n\n{escape(warning)}"
     text += "\n\nОтметьте чтение личным статусом."
     token = _token(item["id"])
     rows = [[InlineKeyboardButton(label, callback_data=f"lit:s:{token}:{code}")]
@@ -136,12 +186,19 @@ async def literature_callback(update, context) -> None:
     if data == "lit:topics":
         await literature_command(update, context)
         return
+    if data.startswith("lit:m:"):
+        view = await asyncio.to_thread(_topics, data.split(":")[2])
+        if view is None:
+            await query.message.reply_text("Модуль изменился или больше недоступен. Откройте /literature снова.")
+        else:
+            await query.message.reply_text(view[0], reply_markup=view[1], parse_mode="HTML")
+        return
     settings = context.application.bot_data["settings"]
     try:
         items, states = await asyncio.to_thread(_catalog, settings.db_path, update.effective_user)
         _, action, *parts = data.split(":")
         if action == "t":
-            view = await asyncio.to_thread(_topic_view, items, states, parts[0], int(parts[1]))
+            view = await asyncio.to_thread(_topic_view, items, states, parts[0], int(parts[1]), parts[2] if len(parts) > 2 else "a")
         else:
             item = _find(items, parts[0], "id")
             if item is None:

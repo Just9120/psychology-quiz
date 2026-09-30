@@ -10,7 +10,7 @@ import random
 from datetime import datetime, timezone
 
 from app import curriculum
-from app.attempt_content import capture_question, get_attempt_content
+from app.attempt_content import capture_question, get_attempt_content, decode_attempt_content
 from app.database import begin_write, is_postgres, timestamp_sql
 from app import repetition, glossary_service
 from app.quiz_service import PreparedQuiz, start_prepared_quiz
@@ -151,7 +151,11 @@ def history(conn, actor: int, before=None, scope=None) -> dict:
 
 
 def answer_detail(conn, row) -> dict:
-    content = get_attempt_content(conn, row["session_id"], row["question_id"])
+    if "content_snapshot" in row.keys():
+        content = decode_attempt_content(
+            row["content_snapshot"], row["content_sha256"], row["snapshot_provenance"])
+    else:
+        content = get_attempt_content(conn, row["session_id"], row["question_id"])
     if content is None:
         raise ValueError("Missing attempt edition")
     selected = next((opt["option_text"] for opt in content["options"]
@@ -172,7 +176,8 @@ def attempt(conn, actor: int, session_id, after=None) -> dict:
     if row is None:
         # The same response for a missing ID and another user's attempt.
         raise ProgressError("attempt_not_found", 404)
-    rows = conn.execute("""SELECT a.*,sq.order_index FROM quiz_answers a
+    rows = conn.execute("""SELECT a.*,sq.order_index,sq.content_snapshot,sq.content_sha256,sq.snapshot_provenance
+        FROM quiz_answers a
         JOIN quiz_session_questions sq ON sq.session_id=a.session_id AND sq.question_id=a.question_id
         WHERE a.session_id=? AND sq.order_index>? ORDER BY sq.order_index LIMIT ?""",
         (session_id, after or 0, PAGE_SIZE + 1)).fetchall()

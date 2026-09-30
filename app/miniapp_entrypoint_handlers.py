@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from app.bot_menu import START_QUIZ_BUTTON_TEXT, MINI_APP_BUTTON_TEXT
+
 from contextlib import closing
 
-import asyncio
+from app import bot_runtime
 import logging
 import time
 
@@ -17,20 +19,12 @@ from app.miniapp_runner import build_miniapp_runner_state
 
 logger = logging.getLogger(__name__)
 
-START_QUIZ_BUTTON_TEXT = "🎯 Начать"
-MINI_APP_BUTTON_TEXT = "🚀 В окне"
 LEGACY_MINI_APP_BUTTON_TEXT = "🚀 Викторина в окне"
 MINI_APP_BUTTON_ALIASES = (MINI_APP_BUTTON_TEXT, LEGACY_MINI_APP_BUTTON_TEXT)
 
 
 async def _run_db_task(func, *args, **kwargs):
-    import sys
-
-    main_module = sys.modules.get("app.main")
-    main_run_db_task = getattr(main_module, "_run_db_task", None)
-    if main_run_db_task is not None and main_run_db_task is not _run_db_task:
-        return await main_run_db_task(func, *args, **kwargs)
-    return await asyncio.to_thread(func, *args, **kwargs)
+    return await bot_runtime.run_db_task(func, *args, **kwargs)
 
 
 def is_private_chat(update: Update) -> bool:

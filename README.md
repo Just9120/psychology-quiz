@@ -33,6 +33,8 @@ Telegram update delivery mode:
 
 Команда `/stats` скрыта из публичного меню/списка команд и доступна только owner-пользователям из `ADMIN_TELEGRAM_IDS` в личном чате.
 
+`/privacy` показывает цели хранения и стандартную политику Telegram; `/delete_data` с повторным подтверждением удаляет учебную историю, сохраняя доступ к боту. Состав данных, ограничения удаления и незакрытые операторские вопросы — в [карте обработки данных](docs/data-processing.md).
+
 Кратко по конфигурации:
 - `BOT_TOKEN` — обязательный.
 - `MINI_APP_URL` — опциональный; включает экспериментальный opt-in Telegram Mini App runner (`/ui`).
@@ -144,6 +146,14 @@ Browser tests сами поднимают изолированный backend н�
 
 [Клиент, caching и artifact identity](docs/pwa-client.md); [auth/API и конфигурация](docs/pwa-auth.md); [подготовленные static release/Nginx/smoke процедуры](docs/pwa-delivery.md). Existing Mini App и его Cloudflare target не заменяются новой PWA.
 
+## Личная база Obsidian
+
+Локальный exporter собирает проверенные заметки в отдельный приватный Vault, сохраняя личные файлы и ссылки. Формат входных данных, обновление и границы публикации — в [процедуре](docs/obsidian-vault.md). Клиенты не используют Vault как runtime dependency.
+
+## Учебная практика через внешнюю модель
+
+Раздельные пакеты вводной ученика, роли клиента и учебного разбора экспортируются локально из опубликованных кейсов. Команда, порядок ручной передачи и границы данных — в [процедуре](docs/practice-packages.md). Встроенный LLM API и хранение транскриптов не используются.
+
 ## Текущий продуктовый контур
 
 Активные категории в продукте формируются из БД по `approved`-вопросам (не хардкодятся в UI).
@@ -228,7 +238,7 @@ Runtime sync for JSON/content changes is deployment-environment-specific. Reposi
 
 Важно: Mini App собирается из `pwa/miniapp-app` и `pwa/src/miniapp` командой `cd pwa && npm run build:miniapp` в `miniapp-react/`; этот проверяемый статический каталог публикует отдельная Cloudflare Git integration. VPS runtime/deploy-скрипты не публикуют Mini App assets.
 
-Важно: root `wrangler.toml` публикует проверенную сборку из `./miniapp-react` через `npx wrangler deploy`.
+Ручная публикация уже проверенной сборки Mini App: из `pwa/`, после `npm ci --ignore-scripts`, выполните `npm run deploy:miniapp`. Команда использует закреплённый в `package-lock.json` Wrangler и root `wrangler.toml` с assets из `miniapp-react/`. Для публикации нужны права на существующий Cloudflare Worker; команда не заменяет штатную Git integration.
 
 ## Документация
 
@@ -240,10 +250,10 @@ README is the repository entrypoint and navigation layer, not the full product s
 | [AGENTS.md](AGENTS.md) | Постоянный router, Goal, AC/Evidence, проверки, Git/PR и поставка | При старте и восстановлении контекста |
 | [Project Specification](docs/project-spec.md) | Каноническая продуктовая/проектная спецификация | Нужно проверить scope, продуктовые правила, модель контента и runtime-ограничения |
 | [Delivery Plan](docs/delivery-plan.md) | Операционное состояние delivery | Нужно понять текущие checkpoints, активный фокус и следующий рекомендуемый шаг |
-| [Student access draft](docs/student-access-draft.md) | Исторический черновик условий PWA; технический inventory требует проверки для Telegram/Mini App | При сверке Q-09/11; приглашения и student PWA исключены D-29 |
+| [Обработка учебных данных](docs/data-processing.md) | Фактические цели/потоки по коду, границы удаления и открытые runtime вопросы | При проверке Telegram/PWA privacy и Q-09/11 |
 | [Delivery Plan Archive](docs/delivery-plan-archive.md) | Исторический архив delivery | Только для явных history/archive/reconciliation tasks |
 | [CI/CD Rules](ci-cd-rules.md) | Правила настройки workflows, gates, artifacts, окружений и recovery | При настройке CI/CD и исправлении pipeline |
-| [Workflow adoption record](docs/ai-delivery-infrastructure-plan.md) | Происхождение принятых документов и прежнее решение по Context Bundle Builder | При проверке истории workflow; текущие задачи находятся в Delivery Plan |
+| [Workflow adoption record](docs/archive/ai-delivery-infrastructure-plan.md) | Происхождение принятых документов и прежнее решение по Context Bundle Builder | При проверке истории workflow; текущие задачи находятся в Delivery Plan |
 | [Mini App deployment / QA runbook](docs/miniapp-deployment-qa.md) | Чеклист/runbook по настройке `MINI_APP_URL`, HTTPS static hosting и ручной Telegram QA | Перед deployment-валидацией или ручным Mini App QA |
 
 Source-of-truth модель:

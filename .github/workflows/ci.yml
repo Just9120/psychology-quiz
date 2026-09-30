@@ -74,7 +74,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends nginx
           python tests/nginx_smoke.py
       - name: Upload versioned public assets
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: pwa-${{ github.sha }}
           path: pwa/dist/
@@ -133,12 +133,14 @@ jobs:
           base="${PR_BASE:-${PUSH_BASE:-HEAD^}}"
           if [[ "$base" == 0000000000000000000000000000000000000000 ]]; then base=HEAD^; fi
           changes=$(git diff --name-only "$base" HEAD)
-          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|requirements-search\.(txt|lock)|requirements-dev\.(txt|lock)|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
+          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|deploy/search-debian\.sources|requirements-search\.(txt|lock)|requirements-dev\.(txt|lock)|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
             echo "Private search unchanged; isolated pgvector check not applicable"
             exit 0
           fi
           docker build --file Dockerfile.search --tag psychology-private-search-ci .
           docker run --rm --network none --read-only psychology-private-search-ci --help >/dev/null
+          docker run --rm --network none --read-only --entrypoint python psychology-private-search-ci \
+            -c 'import onnxruntime, fastembed'
           image='pgvector/pgvector@sha256:1d50c689b0a6511b9ea0a15615281c81a59fd04a08eb35057ec8646fb3a2118a'
           container=$(docker run -d --rm --pull=always \
             -e POSTGRES_DB=psychology_search_test -e POSTGRES_PASSWORD=synthetic-admin-only \
@@ -227,6 +229,29 @@ jobs:
 
       - name: Verify serving content parity
         run: python scripts/audit_question_bank.py --db-path "$DB_PATH"
+
+      - name: Build and package exact backend image
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          image="psychology-quiz-runtime:$EXPECTED_SHA"
+          docker build --platform linux/amd64 --build-arg "APP_REVISION=$EXPECTED_SHA" --tag "$image" .
+          docker run --rm --network none --read-only --entrypoint python "$image" \
+            -c 'import app.main, app.miniapp_fastapi, app.owner_content'
+          python scripts/backend_artifact.py package --sha "$EXPECTED_SHA" --directory "$RUNNER_TEMP/backend-artifact"
+
+      - name: Upload trusted main backend image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: backend-${{ github.sha }}
+          path: ${{ runner.temp }}/backend-artifact/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
 
       - name: Write CI summary
         shell: bash

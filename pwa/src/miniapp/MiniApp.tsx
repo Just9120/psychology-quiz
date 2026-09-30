@@ -11,7 +11,7 @@ import { MiniLiterature } from './MiniLiterature'
 import { MiniProgress } from './MiniProgress'
 import type { ProgressOverview } from '../types'
 
-type Page = 'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'glossary' | 'literature' | 'learning' | 'progress'
+type Page = 'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'glossary' | 'literature' | 'learning' | 'progress' | 'privacy'
 type Learning = { review: Awaited<ReturnType<typeof miniApi.review>>; mastery: Awaited<ReturnType<typeof miniApi.mastery>>; goals: Awaited<ReturnType<typeof miniApi.goals>>; achievements: Awaited<ReturnType<typeof miniApi.achievements>> }
 
 const errors: Record<string, string> = {
@@ -26,6 +26,9 @@ const errors: Record<string, string> = {
   active_glossary: 'Незавершённый тест по терминам можно заменить только после подтверждения.',
   practice_changed: 'Состояние изменилось. Восстановите сохранённую попытку.',
   network: 'Ответ сервера не получен. Восстановите состояние перед следующим действием.',
+  invalid_confirmation: 'Подтверждение устарело. Начните удаление заново.',
+  confirmation_expired: 'Время подтверждения истекло. Начните удаление заново.',
+  linked_owner_requires_separate_flow: 'Данные связаны с аккаунтом PWA. Для него нужен отдельный порядок удаления.',
 }
 function message(error: unknown) { return error instanceof MiniAppError ? errors[error.code] ?? (error.status === 401 ? 'Проверка Telegram не прошла. Откройте Mini App заново.' : 'Не удалось выполнить действие. Попробуйте ещё раз.') : 'Не удалось выполнить действие.' }
 
@@ -47,6 +50,9 @@ export function MiniApp() {
   const [literatureTopics, setLiteratureTopics] = useState<MiniLiteratureTopic[]>([])
   const [learning, setLearning] = useState<Learning | null>(null)
   const [progress, setProgress] = useState<ProgressOverview | null>(null)
+  const [deletionToken, setDeletionToken] = useState<string | null>(null)
+  const [deletionAcknowledged, setDeletionAcknowledged] = useState(false)
+  const [deletionCompleted, setDeletionCompleted] = useState(false)
   const [busy, setBusy] = useState(false)
   const [booting, setBooting] = useState(true)
   const [error, setError] = useState('')
@@ -158,6 +164,23 @@ export function MiniApp() {
     setLearning({ review, mastery, goals, achievements }); setPage('learning')
   }
   async function loadProgress() { setProgress(await miniApi.overview()); setPage('progress') }
+  async function prepareDeletion() {
+    const prepared = await miniApi.prepareLearningDataDeletion()
+    setDeletionToken(prepared.confirmation_token)
+    setDeletionAcknowledged(false)
+    setDeletionCompleted(false)
+  }
+  async function confirmDeletion() {
+    if (!deletionToken || !deletionAcknowledged) return
+    await miniApi.confirmLearningDataDeletion(deletionToken)
+    setDeletionToken(null); setDeletionAcknowledged(false); setDeletionCompleted(true)
+    setFeedback(null); setProgress(null); setLearning(null); setHomeworkCatalog(null)
+    setGlossary(null); setLiteratureItems(null)
+    setHomeworkId(null); setHomeworkConfirmId(null)
+    reviewQuizSession.current = null; reviewGlossarySession.current = null
+    await loadInitial()
+    setPage('privacy')
+  }
   async function startReviewQuiz(replace: boolean) {
     if (!replace) reviewQuizSession.current = (await miniApi.state()).runner_state.session?.session_id ?? null
     try { applyState((await miniApi.startReviewQuiz(reviewQuizSession.current, replace)).runner_state) }
@@ -177,7 +200,7 @@ export function MiniApp() {
     }
   }
 
-  if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p></main>
+  if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p><p>Для пользователей от 18 лет.</p></main>
   if (booting) return <main className="loading-screen"><Brand /><p role="status">Восстанавливаем ваши занятия…</p></main>
   return <div className="app-layout miniapp-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
     <aside className="sidebar"><Brand /><nav aria-label="Разделы Mini App">
@@ -187,11 +210,28 @@ export function MiniApp() {
       <button className="nav-item" disabled={busy} onClick={() => void run(loadLiterature)}>Литература</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadProgress)}>Мой прогресс</button>
       <button className="nav-item" disabled={busy} onClick={() => void run(loadLearning)}>Повторение и цели</button>
+      <button className="nav-item" disabled={busy} onClick={() => setPage('privacy')}>Мои данные</button>
       <a className="nav-item miniapp-privacy-link" href="https://telegram.org/privacy-tpa" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
     </nav></aside>
-    <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram</header><main id="main-content" className="workspace-main" tabIndex={-1}>
+    <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram · 18+</header><main id="main-content" className="workspace-main" tabIndex={-1}>
       {error && <div role="alert" className="app-alert">{error} <button type="button" onClick={() => setError('')} aria-label="Закрыть сообщение">×</button></div>}
-      {page === 'homework' && homeworkCatalog ? <HomeworkView catalog={homeworkCatalog} busy={busy} confirmId={homeworkConfirmId} onStart={id => void run(() => startHomework(id, false))} onConfirm={id => void run(() => startHomework(id, true))} onResume={item => void run(() => resumeHomework(item))} onRefresh={() => void run(loadHomework)} />
+      {page === 'privacy' ? <section className="page-width panel">
+          <h1>Мои учебные данные</h1>
+          <p>Для сохранения обучения приложение хранит ваш идентификатор Telegram, переданные Telegram имя и username, ответы и попытки, отметки книг, цели, достижения и историю повторений. Почта и пароль для Telegram не нужны.</p>
+          <p>Можно удалить сохранённые ответы и попытки, отметки книг, цели, достижения и историю повторений. Доступ к боту и Mini App сохранится. Если Telegram связан с аккаунтом владельца PWA, удаление здесь недоступно.</p>
+          <p>Это удаление истории обучения, а не аккаунта Telegram. Идентификатор Telegram и переданное имя сохранятся для работы бота. Удаление здесь не очищает сообщения в Telegram и ранее созданные резервные копии.</p>
+          <p>По вопросам копии или исправления учебных данных: <a href="mailto:Just9119@gmail.com">Just9119@gmail.com</a>.</p>
+          {deletionCompleted && <p role="status">Учебные данные удалены. Вы можете начать обучение заново.</p>}
+          {!deletionToken ? <button type="button" className="button secondary" disabled={busy} onClick={() => void run(prepareDeletion)}>Подготовить удаление</button>
+            : <div className="panel">
+                <h2>Подтвердите удаление</h2>
+                <p>Это действие удалит вашу сохранённую историю обучения. Восстановить её из приложения нельзя.</p>
+                <label><input type="checkbox" checked={deletionAcknowledged} onChange={event => setDeletionAcknowledged(event.target.checked)} /> Я понимаю, какие данные будут удалены</label>
+                <div><button type="button" className="button" disabled={busy || !deletionAcknowledged} onClick={() => void run(confirmDeletion)}>Удалить мои учебные данные</button>
+                  <button type="button" className="button secondary" disabled={busy} onClick={() => { setDeletionToken(null); setDeletionAcknowledged(false) }}>Отмена</button></div>
+              </div>}
+        </section>
+        : page === 'homework' && homeworkCatalog ? <HomeworkView catalog={homeworkCatalog} busy={busy} confirmId={homeworkConfirmId} onStart={id => void run(() => startHomework(id, false))} onConfirm={id => void run(() => startHomework(id, true))} onResume={item => void run(() => resumeHomework(item))} onRefresh={() => void run(loadHomework)} />
         : page === 'homeworkQuiz' && state ? <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => void run(loadHomework)} onRefresh={() => void run(refreshQuiz)} homeworkTitle={homeworkCatalog?.assignments.find(item => item.id === homeworkId)?.title ?? 'Домашнее задание'} />
         : page === 'literature' && literatureItems ? <MiniLiterature initial={literatureItems} topics={literatureTopics} busy={busy} run={run} />
         : page === 'progress' && progress ? <MiniProgress data={progress} busy={busy} onRefresh={() => void run(loadProgress)} />

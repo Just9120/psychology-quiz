@@ -24,6 +24,7 @@ from app.database import is_postgres_target, resolve_database_target, validate_p
 PERSONAL_TABLES = {
     "users": ("id", {"telegram_user_id", "username", "first_name", "last_name"}),
     "web_accounts": ("user_id/email", {"email", "password_hash", "user_id"}),
+    "web_profile_names": ("account_id", {"account_id", "display_name"}),
     "web_sessions": ("account_id", {"digest", "account_id"}),
     "web_mail_tokens": ("email/account_id", {"digest", "email", "account_id"}),
     "web_link_tokens": ("account_id/proposed_user_id", {"digest", "account_id", "proposed_user_id"}),
@@ -36,10 +37,12 @@ PERSONAL_TABLES = {
     "homework_attempts": ("session_id", {"session_id"}),
     "glossary_sessions": ("user_id", {"user_id", "snapshot", "state"}),
     "user_literature_progress": ("user_id", {"user_id", "private_note"}),
+    "user_literature_work_progress": ("user_id", {"user_id", "reading_status", "source_literature_id"}),
     "user_learning_goals": ("user_id", {"user_id"}),
     "user_achievements": ("user_id", {"user_id", "evidence_key"}),
     "user_review_events": ("user_id", {"user_id", "answer_key"}),
     "user_review_sessions": ("user_id", {"user_id", "session_key"}),
+    "user_data_deletion_challenges": ("user_id", {"user_id", "token_digest", "expires_at"}),
 }
 OTHER_TABLES = {"categories", "questions", "question_options",
                 "schema_migrations", "postgres_storage"}

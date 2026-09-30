@@ -26,7 +26,7 @@ def test_versioned_upgrade_preserves_legacy_data_and_is_idempotent(source, pg_ta
         verify_user_state(before, after)
         assert after['tables']['glossary_sessions']['rows'] == 0
         assert after['sequences'] == before['sequences']
-        assert verify_schema(conn) == 'postgres-v6'
+        assert verify_schema(conn) == 'postgres-v8'
         upgrade_schema(conn)
         assert manifest(conn) == after
         conn.execute("INSERT INTO glossary_sessions VALUES('session',1,'topic','Title','in_progress','{}','{}','now','now')")
@@ -66,7 +66,7 @@ def test_v2_learning_upgrade_preserves_user_rows_and_is_idempotent(pg_target):
         upgrade_schema(conn)
         after = manifest(conn)
         verify_user_state(before, after)
-        assert verify_schema(conn) == 'postgres-v6'
+        assert verify_schema(conn) == 'postgres-v8'
         assert conn.execute("SELECT count(*) FROM user_learning_goals").fetchone()[0] == 0
         assert conn.execute("SELECT first_name FROM users").fetchone()[0] == 'legacy learner'
         upgrade_schema(conn)
@@ -80,7 +80,7 @@ def test_profile_upgrade_from_v4_preserves_account_and_sessions(pg_target):
         conn.execute("INSERT INTO web_sessions VALUES('session-digest',1,1,9999999999,1)")
         before = manifest(conn)
         upgrade_schema(conn)
-        assert verify_schema(conn) == 'postgres-v6'
+        assert verify_schema(conn) == 'postgres-v8'
         assert conn.execute("SELECT count(*) FROM web_profile_names").fetchone()[0] == 0
         assert conn.execute("SELECT digest FROM web_sessions").fetchone()[0] == 'session-digest'
         verify_user_state(before, manifest(conn))
@@ -93,9 +93,22 @@ def test_homework_upgrade_from_production_v5_preserves_quiz_attempts(pg_target):
         conn.execute("INSERT INTO quiz_sessions(user_id,status,score,total_questions) VALUES(1,'finished',4,5)")
         before = manifest(conn)
         upgrade_schema(conn)
-        assert verify_schema(conn) == 'postgres-v6'
+        assert verify_schema(conn) == 'postgres-v8'
         assert conn.execute("SELECT score,total_questions FROM quiz_sessions").fetchone()[:] == (4, 5)
         assert conn.execute("SELECT count(*) FROM homework_attempts").fetchone()[0] == 0
+        verify_user_state(before, manifest(conn))
+
+
+def test_privacy_upgrade_from_production_v6_preserves_learning_state(pg_target):
+    with closing(get_connection(pg_target)) as conn, conn:
+        initialize_schema(conn, version='postgres-v6')
+        conn.execute("INSERT INTO users(telegram_user_id) VALUES(42)")
+        conn.execute("INSERT INTO quiz_sessions(user_id,status,score,total_questions) VALUES(1,'finished',1,1)")
+        before = manifest(conn)
+        upgrade_schema(conn)
+        assert verify_schema(conn) == 'postgres-v8'
+        assert conn.execute("SELECT count(*) FROM user_data_deletion_challenges").fetchone()[0] == 0
+        assert conn.execute("SELECT score FROM quiz_sessions WHERE user_id=1").fetchone()[0] == 1
         verify_user_state(before, manifest(conn))
 
 

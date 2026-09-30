@@ -37,7 +37,10 @@ def all_records(path, key):
         page += 1
 
 
-def select_artifact(sha, run, jobs, artifacts):
+def select_artifact(sha, run, jobs, artifacts, *, kind="pwa"):
+    if kind not in {"pwa", "backend"}:
+        raise ValueError("Unknown delivery artifact kind")
+    limit = MAX_BYTES if kind == "pwa" else 512 * 1024 * 1024
     if (run["repository"]["full_name"] != REPOSITORY
             or run["head_repository"]["full_name"] != REPOSITORY):
         raise ValueError("Untrusted build repository")
@@ -49,12 +52,12 @@ def select_artifact(sha, run, jobs, artifacts):
                 or matching[0]["head_sha"] != sha or matching[0]["run_id"] != run["id"]):
             raise ValueError("Required job was not successful for this revision/attempt")
         required[name] = matching[0]
-    matching = [item for item in artifacts if item["name"] == f"pwa-{sha}"]
+    matching = [item for item in artifacts if item["name"] == f"{kind}-{sha}"]
     if len(matching) != 1:
-        raise ValueError("Expected exactly one versioned PWA artifact")
+        raise ValueError("Expected exactly one versioned delivery artifact")
     item = matching[0]
     source = item["workflow_run"]
-    if (item["expired"] is not False or not 0 < item["size_in_bytes"] <= MAX_BYTES
+    if (item["expired"] is not False or not 0 < item["size_in_bytes"] <= limit
             or not re.fullmatch(r"sha256:[0-9a-f]{64}", item.get("digest", ""))
             or source["id"] != run["id"] or source["head_sha"] != sha
             or source["head_branch"] != "main"
@@ -62,14 +65,14 @@ def select_artifact(sha, run, jobs, artifacts):
             or source["head_repository_id"] != run["repository"]["id"]):
         raise ValueError("Invalid, expired or untrusted artifact identity")
     # Reruns share a run ID. Never reuse an artifact left by an earlier attempt.
-    job = required["pwa-client"]
+    job = required["pwa-client" if kind == "pwa" else "validate-and-smoke-test"]
     parse = lambda value: datetime.fromisoformat(value.replace("Z", "+00:00"))
     if not parse(job["started_at"]) <= parse(item["created_at"]) <= parse(job["completed_at"]):
         raise ValueError("Artifact does not belong to the validated job attempt")
     return item
 
 
-def authorize(sha, run_id):
+def authorize(sha, run_id, *, kind="pwa"):
     revision(sha)
     prefix = f"repos/{REPOSITORY}"
     branch = api(f"{prefix}/branches/main")
@@ -80,7 +83,7 @@ def authorize(sha, run_id):
         raise ValueError("The authorized CI run is no longer the latest")
     jobs = all_records(f"{prefix}/actions/runs/{run_id}/attempts/{run['run_attempt']}/jobs", "jobs")
     artifacts = all_records(f"{prefix}/actions/runs/{run_id}/artifacts", "artifacts")
-    return select_artifact(sha, run, jobs, artifacts)
+    return select_artifact(sha, run, jobs, artifacts, kind=kind)
 
 
 def extract_verified(archive, destination, sha, digest):

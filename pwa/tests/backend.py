@@ -20,6 +20,9 @@ from app.invitation_schema import migrate_invitation_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
 from app.homework_schema import migrate_homework_schema
+from app.privacy_schema import migrate_privacy_schema
+from app.reading_schema import migrate_reading_schema
+from app.literature import load_literature_items
 from app.miniapp_fastapi import create_app
 from app.web_config import WebSettings
 from app.postgres_import import import_snapshot
@@ -69,6 +72,8 @@ def main():
                 with conn:
                     migrate_invitation_schema(conn)
                     migrate_glossary_schema(conn)
+                    migrate_privacy_schema(conn)
+                    migrate_reading_schema(conn, load_literature_items())
                 # The harness supplies its own reviewed taxonomy for synthetic
                 # editions; production catalog and user data are never changed.
                 data = {"schema_version": 1,

@@ -2,6 +2,7 @@
 import asyncio
 import json
 import logging
+from app.request_body import RequestBodyTooLarge, read_request_body
 from app.database import OPERATIONAL_ERRORS, begin_write
 from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements, homework
 from app.mastery import overview as mastery_overview
@@ -17,7 +18,7 @@ from app.logging_config import configure_noisy_http_client_loggers
 
 GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
 POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
-                "identity/new", "link/start", "link/complete", "profile/name", "quiz/setup", "quiz/answer", "homework/start", "literature/progress",
+                "identity/new", "link/start", "link/complete", "profile/name", "owner/stats", "owner/content", "quiz/setup", "quiz/answer", "homework/start", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
                 "progress/reset-preview", "progress/reset-confirm", "progress/review-start", "progress/review-glossary-start", "progress/goal-set", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
 logger = logging.getLogger(__name__)
@@ -35,7 +36,7 @@ class WebAccessLogFilter(logging.Filter):
 
 def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf: str | None):
     if action in {"auth/register", "auth/recover"}:
-        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover", payload.get("invitation"))
+        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover")
         return {"ok": True}, None
     if action in {"auth/verify", "auth/reset"}:
         auth.set_password(payload.get("token"), payload.get("password"), "register" if action == "auth/verify" else "recover")
@@ -52,6 +53,19 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
             return {"ok": True}, ""
         if action == "profile/name":
             return {"ok": True, "display_name": auth.set_display_name(conn, account, payload.get("display_name"))}, None
+        if action == "owner/content":
+            if account["email"] != auth.settings.owner_email:
+                raise AuthError("forbidden", 403)
+            from app.owner_content import dashboard
+            return dashboard(conn), None
+        if action == "owner/stats":
+            if account["email"] != auth.settings.owner_email:
+                raise AuthError("forbidden", 403)
+            from app.owner_stats import get_owner_period_stats
+            try:
+                return get_owner_period_stats(conn, payload.get("period")), None
+            except ValueError:
+                raise AuthError("invalid_period", 400) from None
         if action == "identity/new":
             auth.fresh_identity(conn, account)
             return {"ok": True}, None
@@ -186,11 +200,10 @@ def install_web_api(app, auth: WebAuth) -> None:
             if method == "POST":
                 if request.headers.get("content-type", "").split(";")[0].strip().lower() != "application/json":
                     raise AuthError("json_required", 415)
-                body = bytearray()
-                async for part in request.stream():
-                    body.extend(part)
-                    if len(body) > 16384:
-                        raise AuthError("body_too_large", 413)
+                try:
+                    body = await read_request_body(request.stream())
+                except RequestBodyTooLarge:
+                    raise AuthError("body_too_large", 413) from None
                 try:
                     payload = json.loads(body)
                 except (ValueError, UnicodeError, RecursionError):

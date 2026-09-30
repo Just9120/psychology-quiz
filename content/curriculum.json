@@ -29,6 +29,18 @@
     },
     "klinicheskaya_psihologiya": {
       "title": "Клиническая психология"
+    },
+    "personality_psychology": {
+      "title": "Психология личности и индивидуальных различий"
+    },
+    "social_psychology": {
+      "title": "Социальная психология"
+    },
+    "family_psychology": {
+      "title": "Семейная психология"
+    },
+    "psycholinguistics": {
+      "title": "Психолингвистика"
     }
   },
   "topics": {

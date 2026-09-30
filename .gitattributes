@@ -1,0 +1,3 @@
+# Keep the Mini App HTML source and generated entrypoint reproducible across platforms.
+pwa/miniapp-app/index.html text eol=lf
+miniapp-react/index.html text eol=lf

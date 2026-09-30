@@ -749,6 +749,8 @@ class MiniAppRunnerContractTests(unittest.TestCase):
 
         call = message.reply_text.await_args
         self.assertIn("Привет! Я учебный бот-викторина по психологии.", call.args[0])
+        self.assertIn("предназначены для пользователей от 18 лет", call.args[0])
+        self.assertIn("предназначены для пользователей от 18 лет", HELP_TEXT)
         self.assertIn("🎯 В чате — быстрый классический режим.", call.args[0])
         self.assertIn("🚀 В окне — удобный режим внутри Telegram.", call.args[0])
         self.assertIn("Выберите действие ниже 👇", call.args[0])
@@ -802,6 +804,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         asyncio.run(privacy_command(SimpleNamespace(message=message), None))
         text = message.reply_text.await_args.args[0]
         self.assertIn(TELEGRAM_PRIVACY_POLICY_URL, text)
+        self.assertIn("Just9119@gmail.com", text)
 
     def test_should_start_miniapp_api_disabled_by_default(self):
         settings = SimpleNamespace(

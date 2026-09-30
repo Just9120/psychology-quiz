@@ -70,3 +70,43 @@ def test_content_rebuild_preserves_import_provenance():
     legacy = deepcopy(before)
     del legacy["import_manifest_sha256"]
     verify_user_state(legacy, before)
+
+
+def reading_migration_manifests():
+    from app.reading_schema import FIELDS, VERSION
+    before = _manifest()
+    before['columns']['user_literature_progress'] = ['id']
+    before['tables']['user_literature_progress'] = {'rows': 2, 'sha256': 'unchanged-history'}
+    before['reading_work_migration'] = {'version': VERSION, 'columns': list(FIELDS),
+        'projection': {'rows': 1, 'sha256': 'a' * 64}, 'catalog_sha256': 'b' * 64}
+    after = deepcopy(before)
+    after['columns']['user_literature_work_progress'] = list(FIELDS)
+    after['tables']['user_literature_work_progress'] = dict(before['reading_work_migration']['projection'])
+    after['reading_work_catalog_sha256'] = 'b' * 64
+    return before, after
+
+
+def test_accepts_only_exact_derived_reading_state_and_keeps_history_check():
+    before, after = reading_migration_manifests()
+    verify_user_state(before, after)
+    after['tables']['user_literature_progress']['sha256'] = 'changed'
+    with pytest.raises(ValueError, match='pre-existing user state'):
+        verify_user_state(before, after)
+
+
+@pytest.mark.parametrize('tamper', ['digest', 'count', 'columns', 'catalog', 'proof', 'sequence', 'old-columns'])
+def test_rejects_reading_derivation_tampering(tamper):
+    before, after = reading_migration_manifests()
+    table = 'user_literature_work_progress'
+    if tamper == 'digest': after['tables'][table]['sha256'] = 'c' * 64
+    elif tamper == 'count': after['tables'][table]['rows'] += 1
+    elif tamper == 'columns': after['columns'][table].reverse()
+    elif tamper == 'catalog': after['reading_work_catalog_sha256'] = 'c' * 64
+    elif tamper == 'proof': del before['reading_work_migration']
+    elif tamper == 'sequence': after['sequences'][table] = 1
+    else:
+        del before['columns']['user_literature_progress']
+        del before['tables']['user_literature_progress']
+    expected = 'must be empty' if tamper == 'old-columns' else 'verified legacy derivation'
+    with pytest.raises(ValueError, match=expected):
+        verify_user_state(before, after)

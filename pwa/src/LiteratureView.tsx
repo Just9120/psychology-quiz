@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { ReadingSummary } from './ReadingSummary'
 import { api, ApiError } from './api'
 import type { LiteratureCatalog, LiteratureEntry, ReadingStatus } from './types'
 
 const statuses: Record<ReadingStatus, string> = {
-  not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', revisit: 'Вернуться', skipped: 'Пропущено',
+  not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', deferred: 'Отложено',
 }
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
 const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
@@ -11,6 +12,8 @@ const importanceSources = { teacher: 'приоритет преподавате�
 export function LiteratureView({ initial, busy, run }: { initial: LiteratureCatalog; busy: boolean; run: (operation: () => Promise<void>) => Promise<void> }) {
   const [catalog, setCatalog] = useState(initial)
   const [topic, setTopic] = useState('')
+  const [module, setModule] = useState('')
+  const [statusFilter, setStatusFilter] = useState<ReadingStatus | ''>('')
   const [workId, setWorkId] = useState<string | null>(null)
   const [entryId, setEntryId] = useState<string | null>(null)
   const [status, setStatus] = useState<ReadingStatus>('not_started')
@@ -18,7 +21,12 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
   const [saved, setSaved] = useState(false)
   const work = catalog.works.find(item => item.work_id === workId)
   const entry = work?.entries.find(item => item.id === entryId)
-  const visible = catalog.works.filter(item => !topic || item.entries.some(link => link.topic_id === topic))
+  const modules = [...new Set(catalog.topics.map(item => item.module))]
+  const matches = (link: LiteratureEntry) => (!module || link.module === module)
+    && (!topic || link.topic_id === topic)
+    && (!statusFilter || (link.user_state?.reading_status ?? 'not_started') === statusFilter)
+  const visible = catalog.works.filter(item => item.entries.some(matches))
+  const summaryItems = catalog.works.flatMap(item => item.entries.filter(link => (!module || link.module === module) && (!topic || link.topic_id === topic)).map(link => ({ ...link, work_id: item.work_id, title: item.title })))
 
   function select(link: LiteratureEntry) {
     setEntryId(link.id); setStatus(link.user_state?.reading_status ?? 'not_started')
@@ -36,7 +44,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
     try {
       const result = await api.readingProgress(entry.id, status, null)
       const next = { ...entry, user_state: result.literature_progress }
-      setCatalog(current => ({ ...current, works: current.works.map(item => ({ ...item, entries: item.entries.map(link => link.id === entry.id ? next : link) })) }))
+      setCatalog(current => ({ ...current, works: current.works.map(item => item.work_id === work?.work_id ? { ...item, entries: item.entries.map(link => ({ ...link, user_state: { ...result.literature_progress, literature_id: link.id } })) } : item) }))
       select(next); setSaved(true)
     } catch (failure) {
       // An unconfirmed write must be read back before another edit, never replayed automatically.
@@ -53,17 +61,17 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       <button className="text-button" disabled={busy || uncertain} onClick={() => { setWorkId(null); setSaved(false) }}>← К списку литературы</button>
       <h2>{work.title}</h2><p>{work.authors.length ? work.authors.join(', ') : 'Автор не указан в источнике'}</p>
       <label className="field">Учебный список<select value={entry.id} disabled={busy || uncertain} onChange={event => select(work.entries.find(link => link.id === event.target.value)!)}>
-        {work.entries.map(link => <option key={link.id} value={link.id}>{link.topic_title} · {link.source.title}</option>)}
+        {work.entries.map(link => <option key={link.id} value={link.id}>{link.module.replace('module', 'Модуль ')} · {link.topic_title}</option>)}
       </select></label>
-      {work.entries.length > 1 && <p className="muted">Эта работа встречается в нескольких списках. Отметки чтения сохраняются отдельно для выбранного списка.</p>}
+      {work.entries.length > 1 && <p className="muted">Эта книга встречается в нескольких списках. Статус чтения общий для всех её списков.</p>}
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
       <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>
       {work.access_links.length ? <div className="literature-access"><h3>Внешние версии</h3>
         <p className="muted">Ссылка ведёт к провайдеру. Наличие доступа, цена и совпадение издания проверяются там.</p>
-        {work.access_links.map(link => <p key={link.format}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
+        {work.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
       </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
-      <details className="source-details"><summary>Источник и библиографическая запись</summary><p>{entry.source.title}</p><p>{entry.source.locator}</p><blockquote>{entry.source.citation}</blockquote>
+      <details className="source-details"><summary>Библиографическая запись</summary><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!busy && !uncertain) void run(save) }}>
@@ -75,10 +83,16 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
         {saved && <p role="status">Прогресс чтения сохранён.</p>}
       </form>
     </article> : <>
-      <label className="field literature-filter">Тема литературы<select value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{catalog.topics.map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
-      <p className="muted" role="status">Работ: {visible.length}</p>
+      <label className="field literature-filter">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
+      <label className="field literature-filter">Тема литературы<select value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{catalog.topics.filter(item => !module || item.module === module).map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
+      <label className="field literature-filter">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(statuses).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+      <ReadingSummary showActions={!statusFilter} allItems={catalog.works.flatMap(work => work.entries)} items={summaryItems} busy={busy} onSelect={id => {
+        const selectedWork = catalog.works.find(item => item.entries.some(link => link.id === id))
+        if (selectedWork) { setWorkId(selectedWork.work_id); select(selectedWork.entries.find(link => link.id === id)!) }
+      }} />
+      <p className="muted" role="status">Работ по фильтру: {visible.length}</p>
       {visible.length ? <div className="literature-list">{visible.map(item => {
-        const links = item.entries.filter(link => !topic || link.topic_id === topic)
+        const links = item.entries.filter(matches)
         return <article className="panel literature-card" key={item.work_id}><h2><button className="text-button literature-title" disabled={busy} onClick={() => { setWorkId(item.work_id); select(links[0]) }}>{item.title}</button></h2>
           <p>{item.authors.length ? item.authors.join(', ') : 'Автор не указан в источнике'}</p>
           {links.map(link => <p className="muted reading-association" key={link.id}>{link.topic_title} · {statuses[link.user_state?.reading_status ?? 'not_started']}</p>)}

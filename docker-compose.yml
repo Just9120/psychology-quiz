@@ -1,5 +1,7 @@
 services:
   psych_quiz_bot:
+    image: psychology-quiz-runtime:${APP_REVISION:-local}
+    pull_policy: never
     build:
       context: .
       args:
@@ -19,6 +21,8 @@ services:
       APP_REVISION: ${APP_REVISION:-UNSET}
 
   psych_quiz_miniapp_api:
+    image: psychology-quiz-runtime:${APP_REVISION:-local}
+    pull_policy: never
     build:
       context: .
       args:

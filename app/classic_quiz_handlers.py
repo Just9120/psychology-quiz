@@ -1,15 +1,37 @@
 from __future__ import annotations
 
 from contextlib import closing
+from app import bot_runtime
+from app.classic_quiz_view import (
+    CLASSIC_REPLY_NEXT_TEXT,
+    DIFFICULTY_CHOICES,
+    QUESTION_COUNT_CHOICES,
+    build_category_keyboard,
+    build_classic_answer_reply_keyboard,
+    build_classic_next_reply_keyboard,
+    build_classic_reply_answer_detail_line,
+    build_classic_reply_feedback_text,
+    build_difficulty_keyboard,
+    build_question_count_keyboard,
+    build_question_text_with_options,
+    build_quiz_finished_text,
+    build_quiz_mode_keyboard,
+    build_selected_mix_keyboard,
+    format_case_review_html,
+    numeric_answer_label_for_option,
+    parse_classic_reply_answer_number,
+)
+from app.bot_menu import (
+    START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
+    get_main_menu_keyboard,
+)
 
-import asyncio
 import logging
 import re
-import sys
 from html import escape
 import time
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import ContextTypes
 
 from app.db import (
@@ -32,6 +54,7 @@ from app.db import (
     store_session_questions,
 )
 from app.database import begin_write
+from app.quiz_text import option_index_to_label, render_reading_mode_text, _safe_callback_session_id
 from app.glossary import GLOSSARY_QUIZ_SESSION_KEY
 from app.homework import outcome_for_session
 from app.attempt_content import get_attempt_content
@@ -39,28 +62,10 @@ from app.handler_latency import HandlerLatency as _HandlerLatency
 from app.miniapp_entrypoint_handlers import MINI_APP_BUTTON_TEXT
 from app.miniapp_runner import submit_miniapp_answer_event
 
-logger = logging.getLogger(__name__)
+# Preserve the deployed log namespace without importing the entrypoint.
+logger = logging.getLogger("app.main")
 
-QUESTION_COUNT_CHOICES = (
-    (5, "5"),
-    (10, "10"),
-    (15, "15"),
-    (None, "Все доступные"),
-)
 
-DIFFICULTY_CHOICES = (
-    ("any", "Любые"),
-    ("easy", "Лёгкие"),
-    ("medium", "Средние"),
-    ("hard", "Сложные"),
-)
-
-START_QUIZ_BUTTON_TEXT = "🎯 Начать"
-READING_MODE_BUTTON_TEXT = "👁 Чтение"
-GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
-LITERATURE_BUTTON_TEXT = "📖 Литература"
-HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
-CLASSIC_REPLY_NEXT_TEXT = "Далее"
 CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
 CONFIRMED_REPLACEMENT_KEY = "confirmed_quiz_replacement"
 
@@ -78,40 +83,12 @@ def claim_quiz_replacement(conn, actor: int, expected_session_id: int | None) ->
     return True
 
 
-def _main_attr(name: str):
-    main_module = sys.modules.get("app.main")
-    return getattr(main_module, name, None)
-
-
 async def _run_db_task(func, *args, **kwargs):
-    main_run_db_task = _main_attr("_run_db_task")
-    if main_run_db_task is not None and main_run_db_task is not _run_db_task:
-        return await main_run_db_task(func, *args, **kwargs)
-    return await asyncio.to_thread(func, *args, **kwargs)
-
-
-def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
-            [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
-            [KeyboardButton(LITERATURE_BUTTON_TEXT)],
-            [KeyboardButton("ℹ️ Помощь")],
-            [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
-        ],
-        resize_keyboard=True,
-        is_persistent=True,
-    )
-
+    return await bot_runtime.run_db_task(func, *args, **kwargs)
 
 
 async def safe_reply(update: Update, text: str) -> None:
-    main_safe_reply = _main_attr("safe_reply")
-    if main_safe_reply is not None:
-        await main_safe_reply(update, text)
-        return
-    if update.message:
-        await update.message.reply_text(text)
+    await bot_runtime.safe_reply(update, text)
 
 def _classic_reply_mode_enabled(settings) -> bool:
     return bool(getattr(settings, "classic_quiz_reply_keyboard_mode", False))
@@ -131,74 +108,8 @@ def _get_classic_reply_state(context: ContextTypes.DEFAULT_TYPE) -> dict:
     return state if isinstance(state, dict) else {}
 
 
-# Shared pure rendering helpers are imported from app.main at call time to keep this
-# refactor narrow and preserve existing reading-mode behavior.
-def option_index_to_label(option_index: int) -> str:
-    main_func = _main_attr("option_index_to_label")
-    if main_func is not None:
-        return main_func(option_index)
-    if option_index < 0:
-        raise ValueError("option_index must be non-negative")
-    label = ""
-    current_index = option_index
-    while True:
-        current_index, remainder = divmod(current_index, 26)
-        label = chr(ord("A") + remainder) + label
-        if current_index == 0:
-            break
-        current_index -= 1
-    return label
-
-
-def render_reading_mode_text(text: str, mode: str) -> str:
-    main_func = _main_attr("render_reading_mode_text")
-    if main_func is not None:
-        return main_func(text, mode)
-    if mode != "bionic":
-        return escape(text)
-    rendered_parts: list[str] = []
-    for chunk in re.split(r"(\s+)", text):
-        if not chunk:
-            continue
-        if chunk.isspace():
-            rendered_parts.append(chunk)
-            continue
-        for part in re.findall(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)", chunk):
-            if not part:
-                continue
-            if not re.fullmatch(r"[0-9A-Za-zА-Яа-яЁё]+", part):
-                rendered_parts.append(escape(part))
-                continue
-            if len(part) <= 3:
-                rendered_parts.append(escape(part))
-                continue
-            bold_len = 1 if len(part) <= 5 else 2 if len(part) <= 9 else 3
-            rendered_parts.append(f"<b>{escape(part[:bold_len])}</b>{escape(part[bold_len:])}")
-    return "".join(rendered_parts)
-
-
-def _safe_callback_session_id(data: str, expected_prefix: str) -> int | None:
-    main_func = _main_attr("_safe_callback_session_id")
-    if main_func is not None:
-        return main_func(data, expected_prefix)
-    parts = data.split(":", 2)
-    if len(parts) < 2 or parts[0] != expected_prefix:
-        return None
-    try:
-        return int(parts[1])
-    except ValueError:
-        return None
-
-
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call, api_kind: str | None = None):
-    main_call = _main_attr("_timed_telegram_api_call")
-    if main_call is not None:
-        return await main_call(latency, call, api_kind=api_kind)
-    started_at = time.perf_counter()
-    result = await call
-    if latency is not None:
-        latency.add_telegram_api(started_at, api_kind=api_kind)
-    return result
+    return await bot_runtime.timed_telegram_api_call(latency, call, api_kind=api_kind)
 
 
 def _mark_repeated_tap(latency: _HandlerLatency) -> None:
@@ -219,34 +130,6 @@ def _question_limit(value: str) -> int | None:
     return int(value)
 
 
-def build_question_count_keyboard(
-    callback_prefix: str, category_id: int | None = None, *, difficulty: str | None = None,
-) -> InlineKeyboardMarkup:
-    mode_prefix = {"qcnt": "qmode", "qcntall": "qmodeall", "qcntselmix": "qmodeselmix"}[callback_prefix]
-    mode = difficulty or "any"
-    if mode not in {"any", "easy", "medium", "hard"}:
-        raise ValueError("Unknown difficulty")
-    scope = "" if category_id is None else f"{category_id}:"
-    keyboard = []
-    for count, label in QUESTION_COUNT_CHOICES:
-        count_value = "all" if count is None else str(count)
-        callback_data = f"{mode_prefix}:{scope}{count_value}:{mode}"
-        keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
-    keyboard.append([InlineKeyboardButton(
-        "Настроить сложность (необязательно)" if difficulty is None else "Изменить сложность",
-        callback_data=f"{callback_prefix}:{scope}choose",
-    )])
-    return InlineKeyboardMarkup(keyboard)
-
-
-def build_difficulty_keyboard(callback_prefix: str, category_id: int | None = None, count_raw: str | None = None) -> InlineKeyboardMarkup:
-    keyboard = []
-    for mode, label in DIFFICULTY_CHOICES:
-        callback_data = f"{callback_prefix}:{count_raw}:{mode}" if category_id is None else f"{callback_prefix}:{category_id}:{count_raw}:{mode}"
-        keyboard.append([InlineKeyboardButton(label, callback_data=callback_data)])
-    return InlineKeyboardMarkup(keyboard)
-
-
 async def _show_count_for_difficulty(query, latency, callback_prefix, count_raw, mode, category_id=None):
     if mode not in {"any", "easy", "medium", "hard"}:
         await _timed_telegram_api_call(latency, query.edit_message_text("Некорректный режим сложности."))
@@ -261,53 +144,6 @@ async def _show_count_for_difficulty(query, latency, callback_prefix, count_raw,
     return True
 
 
-def build_category_keyboard(categories) -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup([[InlineKeyboardButton(str(row["name"]), callback_data=f"cat:{int(row['id'])}")] for row in categories])
-
-
-def build_quiz_mode_keyboard() -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup([[InlineKeyboardButton("Конкретная тема", callback_data="qzmode:single")], [InlineKeyboardButton("Микс из выбранных тем", callback_data="qzmode:selected_mix")], [InlineKeyboardButton("Все темы", callback_data="qzmode:all")]])
-
-
-def build_selected_mix_keyboard(categories, selected_ids: set[int]) -> InlineKeyboardMarkup:
-    keyboard = []
-    for row in categories:
-        category_id = int(row["id"])
-        marker = "✅" if category_id in selected_ids else "☑️"
-        keyboard.append([[InlineKeyboardButton(f"{marker} {row['name']}", callback_data=f"mixsel:toggle:{category_id}")][0]])
-    keyboard.append([InlineKeyboardButton("Готово", callback_data="mixsel:done")])
-    keyboard.append([InlineKeyboardButton("Сбросить", callback_data="mixsel:reset")])
-    return InlineKeyboardMarkup(keyboard)
-
-
-def build_quiz_finished_text(score: int, total_questions: int, homework_outcome=None) -> str:
-    if homework_outcome is not None:
-        mark = "Выполнено ✅" if homework_outcome["passed"] else "Пока не выполнено"
-        return ("<b>Тест домашнего задания завершён</b>\n\n"
-                f"<b>Результат:</b> {score} из {total_questions}. {mark}\n\n"
-                "Отметка относится только к тесту, не к эссе или упражнению. "
-                "Откройте /homework для просмотра заданий и повторной попытки.")
-    return ("<b>Викторина завершена 🎉</b>\n\n" f"<b>Результат:</b> {score} из {total_questions}\n\n" f"Чтобы начать новую викторину, нажмите {START_QUIZ_BUTTON_TEXT} или отправьте /quiz.")
-
-
-def build_classic_answer_reply_keyboard(options) -> ReplyKeyboardMarkup:
-    buttons = [str(position) for position, _ in enumerate(options, start=1)]
-    keyboard = [buttons[index : index + 2] for index in range(0, len(buttons), 2)]
-    keyboard.append(["Не знаю"])
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=False)
-
-
-def build_classic_next_reply_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup([[CLASSIC_REPLY_NEXT_TEXT]], resize_keyboard=True, one_time_keyboard=False)
-
-
-def numeric_answer_label_for_option(options, option_index: int) -> str:
-    for position, opt in enumerate(options, start=1):
-        if int(opt["option_index"]) == option_index:
-            return str(position)
-    raise ValueError("option_index is not present in options")
-
-
 def _find_option_by_index(options, option_index: int):
     for opt in options:
         if int(opt["option_index"]) == option_index:
@@ -315,47 +151,9 @@ def _find_option_by_index(options, option_index: int):
     return None
 
 
-def build_classic_reply_answer_detail_line(label: str, *, option_position_label: str, option_text: str, reading_mode: str) -> str:
-    rendered_option_text = render_reading_mode_text(option_text, reading_mode)
-    return f"<b>{label}:</b> {option_position_label} — {rendered_option_text}"
-
-
-def build_classic_reply_feedback_text(result: dict) -> str:
-    result_line = "<b>Верно ✅</b>" if result["is_correct"] else "<b>Неверно ❌</b>"
-    answer_lines = [build_classic_reply_answer_detail_line("Ваш ответ", option_position_label=str(result["selected_option_label"]), option_text=str(result["selected_option_text"]), reading_mode=str(result["reading_mode"]))]
-    if not result["is_correct"]:
-        answer_lines.append(build_classic_reply_answer_detail_line("Правильный ответ", option_position_label=str(result["correct_option_label"]), option_text=str(result["correct_option_text"]), reading_mode=str(result["reading_mode"])))
-    rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])
-    answer_lines_text = "\n".join(answer_lines)
-    review = format_case_review_html(result.get("case_review"), result["reading_mode"])
-    return f"{result_line}\n\n{answer_lines_text}\n\n<b>Пояснение:</b>\n{rendered_explanation}{review}\n\n<b>Прогресс:</b> {result['answered_questions']} из {result['total_questions']}"
-
-
 def case_review_for_attempt(conn, session_id: int, question_id: int) -> dict | None:
     content = get_attempt_content(conn, session_id, question_id)
     return content.get("case") if content and content.get("kind") == "case" else None
-
-
-def format_case_review_html(case: dict | None, reading_mode: str) -> str:
-    if not case:
-        return ""
-    render = lambda value: render_reading_mode_text(value, reading_mode)
-    conditions = "\n".join("• " + render(value) for value in case["conditions"])
-    alternatives = "\n".join(f"{index}. {render(value)}" for index, value in enumerate(case["option_rationales"], 1))
-    return (f"\n\n<b>Разбор кейса:</b> {render(case['approach'])}"
-            f"\n<b>Условия:</b>\n{conditions}"
-            f"\n<b>Варианты действий:</b>\n{alternatives}"
-            f"\n<b>Неоднозначность:</b> {render(case['ambiguity'])}")
-
-
-def parse_classic_reply_answer_number(text: str, option_count: int) -> int | None:
-    cleaned = text.strip()
-    if not cleaned.isdigit():
-        return None
-    answer_number = int(cleaned)
-    if not 1 <= answer_number <= option_count:
-        return None
-    return answer_number - 1
 
 
 def _classic_text_latency_bucket(elapsed_ms: int) -> str:
@@ -377,21 +175,12 @@ def _safe_classic_text_log_fields(*, telegram_user_id: int | None, session_id: i
 
 
 def _log_classic_text_event(event_name: str, **fields) -> None:
-    main_logger = _main_attr("logger") or logger
     if event_name in {"classic_text_answer_ingress", "classic_text_answer_latency", "classic_text_next_ingress", "classic_text_next_latency"}:
-        main_logger.info("%s %s", event_name, _safe_classic_text_log_fields(**fields))
-
-
-def build_question_text_with_options(order_index: int, total_questions: int, question_text: str, options, reading_mode: str, *, numeric_labels: bool = False, show_answer_keyboard_hint: bool = False) -> str:
-    formatted_options = "\n".join(f"{position if numeric_labels else option_index_to_label(int(opt['option_index']))}. {render_reading_mode_text(str(opt['option_text']), reading_mode)}" for position, opt in enumerate(options, start=1))
-    hint = "\n\nОтветьте кнопкой с номером варианта внизу 👇" if show_answer_keyboard_hint else ""
-    return f"<b>Вопрос {order_index} из {total_questions}</b>\n\n{render_reading_mode_text(question_text, reading_mode)}\n\n{formatted_options}{hint}"
+        logger.info("%s %s", event_name, _safe_classic_text_log_fields(**fields))
 
 
 async def start_quiz_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await quiz_command(update, context)
-
-
 
 
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -480,7 +269,6 @@ async def quiz_resume_or_replace_callback(update: Update, context: ContextTypes.
                                   reply_markup=build_quiz_mode_keyboard())
 
 
-
 async def send_current_question_to_chat(chat, settings, session_id: int) -> bool:
     latency = _HandlerLatency(handler="send_current_question_to_chat", callback_prefix="sendq", session_id=session_id)
     def _load_current_question():
@@ -529,8 +317,6 @@ async def send_current_question_to_chat(chat, settings, session_id: int) -> bool
     latency.add_telegram_api(api_started_at)
     latency.summary()
     return True
-
-
 
 
 async def send_current_question_to_message(message, settings, session_id: int, context: ContextTypes.DEFAULT_TYPE, latency: _HandlerLatency | None = None) -> bool:
@@ -611,9 +397,6 @@ async def send_current_question_to_message(message, settings, session_id: int, c
     return True
 
 
-
-
-
 async def remove_main_menu_for_active_quiz(query, latency: _HandlerLatency | None = None) -> None:
     if query.message is None or query.message.chat.type != "private":
         return
@@ -651,7 +434,7 @@ async def send_quiz_result_with_main_menu(query, text: str, latency: _HandlerLat
 async def show_finished_quiz_message(query, session_id: int, score: int, total_questions: int, latency: _HandlerLatency | None = None) -> None:
     # Reuse the single completion sink so stale inline quiz controls are always disabled first.
     del session_id
-    await (_main_attr("send_quiz_result_with_main_menu") or send_quiz_result_with_main_menu)(query, build_quiz_finished_text(score, total_questions), latency=latency)
+    await send_quiz_result_with_main_menu(query, build_quiz_finished_text(score, total_questions), latency=latency)
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -778,7 +561,7 @@ async def send_current_question(
         if finalize_payload is None:
             await _timed_telegram_api_call(latency, query.edit_message_text("Для вопроса не найдены варианты ответа. Сессия завершена."), api_kind="message_edit")
             return False
-        await (_main_attr("send_quiz_result_with_main_menu") or send_quiz_result_with_main_menu)(
+        await send_quiz_result_with_main_menu(
             query,
             "Для текущего вопроса не найдены варианты ответа.\n"
             "Сессия завершена досрочно.\n"
@@ -942,8 +725,8 @@ async def restart_quiz_from_finished_session(query, settings, tg_user, session_i
             set_selected_categories_for_session(conn, new_session_id, selected_categories)
         store_session_questions(conn, new_session_id, question_ids)
 
-    await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
-    await (_main_attr("send_current_question") or send_current_question)(query, settings, new_session_id, context=context)
+    await remove_main_menu_for_active_quiz(query, latency=latency)
+    await send_current_question(query, settings, new_session_id, context=context)
 
 
 async def category_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -1100,8 +883,8 @@ async def difficulty_mode_callback(update: Update, context: ContextTypes.DEFAULT
         return
     context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
 
-    await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
-    await (_main_attr("send_current_question") or send_current_question)(query, settings, result["session_id"], latency=latency, context=context)
+    await remove_main_menu_for_active_quiz(query, latency=latency)
+    await send_current_question(query, settings, result["session_id"], latency=latency, context=context)
     latency.session_id = result["session_id"]
     latency.summary()
 
@@ -1396,10 +1179,8 @@ async def start_mix_quiz(
         return
     context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
 
-    await (_main_attr("remove_main_menu_for_active_quiz") or remove_main_menu_for_active_quiz)(query, latency=latency)
-    await (_main_attr("send_current_question") or send_current_question)(query, settings, result["session_id"], latency=latency, context=context)
-
-
+    await remove_main_menu_for_active_quiz(query, latency=latency)
+    await send_current_question(query, settings, result["session_id"], latency=latency, context=context)
 
 
 def _mark_callback_processing(context: ContextTypes.DEFAULT_TYPE, key: str) -> bool:
@@ -1695,7 +1476,6 @@ async def classic_reply_text_next_handler(update: Update, context: ContextTypes.
         _unmark_callback_processing(context, processing_key)
 
 
-
 async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     latency = _HandlerLatency(handler="answer_callback", callback_prefix="ans", telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     query = update.callback_query
@@ -1855,7 +1635,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 f"<b>Пояснение:</b> {rendered_explanation}\n\n"
                 f"{build_quiz_finished_text(int(finalized['score']), int(finalized['total_questions']), result.get('homework_outcome'))}"
             )
-            await (_main_attr("send_quiz_result_with_main_menu") or send_quiz_result_with_main_menu)(query, message, latency=latency)
+            await send_quiz_result_with_main_menu(query, message, latency=latency)
             latency.summary()
             return
 
@@ -1948,7 +1728,7 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             latency.summary()
             return
 
-        await (_main_attr("send_current_question") or send_current_question)(
+        await send_current_question(
             query,
             settings,
             session_id,

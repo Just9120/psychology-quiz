@@ -27,7 +27,7 @@ def test_homework_v6_snapshot_import_preserves_assignment_link(source, pg_target
                      (session_id, "synthetic_assignment"))
     assert import_snapshot(source, pg_target)["result"] == "imported"
     with closing(get_connection(pg_target)) as conn:
-        assert verify_schema(conn) == "postgres-v6"
+        assert verify_schema(conn, allow_legacy=True) == "postgres-v6"
         assert conn.execute("SELECT session_id,assignment_id FROM homework_attempts").fetchone()[:] == (
             session_id, "synthetic_assignment")
 
@@ -228,15 +228,21 @@ def test_literature_progress_persists_and_isolates_actors(bank):
     item = load_literature_items()[0]['id']
     headers = {'Authorization':'tma '+_make_init_data(TOKEN, {'id':42,'first_name':'Original user'})}
     with TestClient(create_app(db_path=bank, bot_token=TOKEN)) as client:
-        for status, percent, expected in [('in_progress',None,None),('read',None,100),('not_started',None,0)]:
+        for status in ('in_progress', 'read', 'deferred', 'not_started'):
             response = client.post('/miniapp/literature/progress', headers=headers,
-                json={'literature_id':item,'reading_status':status,'progress_percent':percent})
+                json={'literature_id':item,'reading_status':status,'progress_percent':None})
             assert response.status_code == 200
             state = response.json()['literature_progress']
-            assert state['reading_status'] == status and state['progress_percent'] == expected
+            assert state['reading_status'] == status and state['progress_percent'] is None
             assert 'private_note' not in state
-        assert client.post('/miniapp/literature/progress', headers=headers,
-            json={'literature_id':item,'reading_status':'in_progress','progress_percent':101}).status_code == 400
+        for invalid in (
+            {'reading_status': 'in_progress', 'progress_percent': 101},
+            {'reading_status': 'in_progress', 'progress_percent': 50},
+            {'reading_status': 'revisit', 'progress_percent': None},
+            {'reading_status': 'skipped', 'progress_percent': None},
+        ):
+            assert client.post('/miniapp/literature/progress', headers=headers,
+                json={'literature_id': item, **invalid}).status_code == 400
     with TestClient(create_app(db_path=bank, bot_token=TOKEN)) as restarted:
         states = restarted.get('/miniapp/literature/state',headers=headers).json()['literature_state']
         assert any(row['literature_id']==item and row['reading_status']=='not_started' for row in states)

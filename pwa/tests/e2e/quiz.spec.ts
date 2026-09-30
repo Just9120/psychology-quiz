@@ -3,6 +3,22 @@ import { expect, test, type Page } from '@playwright/test'
 const backend = 'http://127.0.0.1:8085'
 const email = 'owner@example.test', password = 'A synthetic browser passphrase'
 
+async function readingCount(page: Page, topic?: string) {
+  const catalog = await (await page.request.get('/web/literature/catalog')).json() as { works: { entries: { topic_id: string }[] }[] }
+  return catalog.works.filter(work => !topic || work.entries.some(entry => entry.topic_id === topic)).length
+}
+
+test('owner can select a period for deidentified learning statistics', async ({ page }) => {
+  await fresh(page)
+  await page.getByRole('button', { name: 'Статистика', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Статистика', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: '7 дней', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  await page.getByRole('button', { name: '24 часа', exact: true }).click()
+  await expect(page.getByRole('button', { name: '24 часа', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.locator('.progress-page')).not.toContainText(email)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+})
+
 test('owner-only PWA offers no guest demo or learning state', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('button', { name: 'Войти в пространство' })).toBeVisible()
@@ -30,7 +46,7 @@ test('short desktop viewport keeps sidebar navigation and logout reachable', asy
   await page.setViewportSize({ width: 1280, height: 480 })
   await fresh(page)
   await page.getByRole('button', { name: 'Литература', exact: true }).click()
-  await expect(page.getByText('Работ: 114')).toBeVisible()
+  await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
   await page.getByRole('button', { name: 'Мой аккаунт' }).click()
   await page.getByRole('button', { name: 'Установить приложение' }).filter({ visible: true }).click()
   await expect(page.getByRole('status')).toBeVisible()
@@ -39,12 +55,12 @@ test('short desktop viewport keeps sidebar navigation and logout reachable', asy
   expect((await page.request.get('/web/quiz/state')).status()).toBe(401)
 })
 
-test('reading catalog preserves separate lists, lost save and reload', async ({ page }, testInfo) => {
+test('reading catalog shares a work status across lists, lost save and reload', async ({ page }, testInfo) => {
   await fresh(page)
   await page.getByRole('button', { name: 'Литература', exact: true }).click()
-  await expect(page.getByText('Работ: 114')).toBeVisible()
+  await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
   await page.getByLabel('Тема литературы').selectOption('fiziologiya_cheloveka')
-  await expect(page.getByText('Работ: 15')).toBeVisible()
+  await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, 'fiziologiya_cheloveka')}`)).toBeVisible()
   await page.locator('.literature-title').first().click()
   const title = await page.locator('.literature-detail h2').innerText()
   const first = await page.getByLabel('Учебный список').inputValue()
@@ -56,13 +72,13 @@ test('reading catalog preserves separate lists, lost save and reload', async ({ 
   await page.getByRole('button', { name: 'Обновить каталог и прогресс' }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveValue('in_progress')
   await page.getByLabel('Учебный список').selectOption({ index: 1 })
-  await expect(page.getByLabel('Статус чтения')).toHaveValue('not_started')
+  await expect(page.getByLabel('Статус чтения')).toHaveValue('in_progress')
   await page.getByLabel('Статус чтения').selectOption('read')
   await page.getByRole('button', { name: 'Сохранить чтение' }).click()
   await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
   await page.getByLabel('Учебный список').selectOption(first)
-  await expect(page.getByLabel('Статус чтения')).toHaveValue('in_progress')
-  await page.getByText('Источник и библиографическая запись').click()
+  await expect(page.getByLabel('Статус чтения')).toHaveValue('read')
+  await page.getByText('Библиографическая запись', { exact: true }).click()
   await page.evaluate(() => window.scrollTo(0, 0))
   await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-reading.png`, fullPage: true })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
@@ -70,8 +86,49 @@ test('reading catalog preserves separate lists, lost save and reload', async ({ 
   await page.getByRole('button', { name: 'Литература', exact: true }).click()
   await page.getByRole('button', { name: title, exact: true }).click()
   await page.getByLabel('Учебный список').selectOption(first)
-  await expect(page.getByLabel('Статус чтения')).toHaveValue('in_progress')
+  await expect(page.getByLabel('Статус чтения')).toHaveValue('read')
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
+})
+
+test('reviewed literature links open a separate provider page without learning changes', async ({ page }) => {
+  await fresh(page)
+  type Work = { title: string; access_links: { format: 'text' | 'audio'; provider: string; url: string }[]; entries: { user_state: unknown }[] }
+  const response = await page.request.get('/web/literature/catalog')
+  expect(response.ok()).toBeTruthy()
+  const before = await response.json() as { works: Work[] }
+  const work = before.works.find(item => new Set(item.access_links.map(link => link.format)).size === 2
+    && before.works.filter(other => other.title === item.title).length === 1)
+  expect(work, 'published catalog has an unambiguous work with text and audio offers').toBeTruthy()
+  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await page.getByRole('button', { name: work!.title, exact: true }).click()
+  await expect(page.getByText(/Наличие доступа, цена и совпадение издания проверяются там/)).toBeVisible()
+  for (const format of ['text', 'audio'] as const) {
+    const offer = work!.access_links.find(link => link.format === format)!
+    const target = new URL(offer.url).href
+    // Intercept the provider boundary: reproducible UI check, no provider login/purchase/network.
+    await page.context().route(target, async route => {
+      expect(route.request().method()).toBe('GET')
+      const headers = route.request().headers()
+      expect(headers.authorization).toBeUndefined()
+      expect(headers['x-csrf-token']).toBeUndefined()
+      expect(headers.cookie).toBeUndefined()
+      await route.fulfill({ contentType: 'text/html', body: '<title>External provider fixture</title>' })
+    })
+    const link = page.getByRole('link', { name: `${format === 'text' ? 'Текст' : 'Аудио'} · ${offer.provider}`, exact: true }).first()
+    await expect(link).toHaveAttribute('href', offer.url)
+    await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    const opened = page.context().waitForEvent('page')
+    await link.click()
+    const provider = await opened
+    await expect(provider).toHaveURL(target)
+    expect(await provider.evaluate(() => window.opener)).toBeNull()
+    await provider.close()
+    await page.context().unroute(target)
+    await expect(page.getByRole('heading', { name: work!.title, exact: true })).toBeVisible()
+  }
+  const after = await (await page.request.get('/web/literature/catalog')).json() as { works: Work[] }
+  expect(after.works.map(item => item.entries.map(entry => entry.user_state)))
+    .toEqual(before.works.map(item => item.entries.map(entry => entry.user_state)))
 })
 
 test('reading empty and failed catalog loads are recoverable', async ({ page }) => {
@@ -83,7 +140,7 @@ test('reading empty and failed catalog loads are recoverable', async ({ page }) 
   await page.getByRole('button', { name: 'Литература', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Список пока пуст' })).toBeVisible()
   await page.getByRole('button', { name: 'Обновить каталог и прогресс' }).click()
-  await expect(page.getByText('Работ: 114')).toBeVisible()
+  await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
 })
 
 async function syntheticPost(page: Page, action: string, payload: unknown) {

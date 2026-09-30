@@ -2,13 +2,32 @@ export interface Account {
   ok: true
   email: string
   display_name: string | null
-  role?: 'owner' | 'student'
+  role?: 'owner'
   csrf_token: string
   needs_identity: boolean
   telegram_linked: boolean
   link_pending: boolean
   link_confirmed: boolean
   link_target: { telegram_id: number; username: string | null; display_name: string } | null
+}
+
+export interface OwnerContent {
+  ok: true
+  topics: { id: string; title: string; module: string; questions: number; kinds: Record<'theory' | 'glossary' | 'case', number>; glossary_terms: number | null; literature_works: number; notes_state: 'UNSET'; notes: null; gaps: string[] }[]
+  sources: { state: 'UNSET' | 'PARTIAL'; reason?: string; captured_at?: string; files?: number; folders?: number; processing?: Record<string, number>; processing_records?: number; known_holds?: number; coverage?: { unreleased_lessons?: { total: number; processing: Record<string, number>; metadata_current: number; known_holds: number }; tracked_sources: number; untracked_files: number; source_metadata: Record<string, number>; unmapped_published_questions: number; prepared_notes_unmapped?: number; unmapped_published_glossary?: number; lessons: { id: string; title: string; discipline: string; kinds: Record<'theory' | 'glossary' | 'case', number>; source_metadata_current: boolean; processing_state: string; known_hold: boolean; glossary_terms: number | null; notes: number | null; notes_state: 'UNSET' | 'PREPARED' }[] } }
+  unmapped_questions: number
+}
+
+export interface OwnerStats {
+  ok: true
+  period: '24h' | '7d' | '30d'
+  active_users: number
+  quiz_started: number
+  quiz_completed: number
+  quiz_answers: number
+  glossary_started: number
+  glossary_completed: number
+  reading_items_updated: number
 }
 
 export interface SetupOptions {
@@ -198,14 +217,14 @@ export interface ErrorsPage {
   latest_session_id: number | null
   has_active_attempt: boolean
 }
-export type ReadingStatus = 'not_started' | 'in_progress' | 'read' | 'revisit' | 'skipped'
-export type ReadingState = { literature_id: string; reading_status: ReadingStatus; progress_percent: number | null; updated_at: string }
+export type ReadingStatus = 'not_started' | 'in_progress' | 'read' | 'deferred'
+export type ReadingState = { literature_id: string; work_id?: string; reading_status: ReadingStatus; progress_percent: number | null; updated_at: string }
 export type LiteratureAccessLink = { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; checked_at: string }
 export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
   importance: 'basic' | 'important' | 'additional' | 'advanced' | null;
   importance_source: 'teacher' | 'agent' | null;
-  source: { title: string; locator: string; citation: string };
+  source: { citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
 }
 export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }

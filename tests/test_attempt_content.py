@@ -11,6 +11,8 @@ from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
 from app.glossary_schema import migrate_glossary_schema
 from app.learning_schema import migrate_learning_schema
+from app.reading_schema import migrate_reading_schema
+from app.literature import load_literature_items
 from app.classic_quiz_handlers import _handle_classic_text_answer_db
 from app.db import (
     create_or_load_user, finalize_quiz_session, get_active_categories, get_connection,
@@ -54,6 +56,7 @@ def bank(tmp_path):
         upsert_approved_questions(conn, [OLD, OTHER], authoritative=True)
         create_or_load_user(conn, 42, None, "Original user", None)
         conn.execute("INSERT INTO user_literature_progress (user_id,literature_id,reading_status,updated_at,private_note) VALUES (1,'lit','read','today','Private note')")
+        migrate_reading_schema(conn, load_literature_items())
     return path
 
 
@@ -250,3 +253,23 @@ def test_legacy_migration_is_idempotent_preserves_users_answers_and_marks_uncert
         assert conn.execute("SELECT score FROM quiz_sessions").fetchone()[0] == 0
         check_business(conn)
     verify_preserved(path, backup)
+
+
+def test_random_selectors_keep_full_filtered_bank_without_database_sort(bank):
+    with closing(get_connection(str(bank))) as conn:
+        category = conn.execute("SELECT category_id FROM questions WHERE external_id='stable-question'").fetchone()[0]
+        statements = []
+        conn.set_trace_callback(statements.append)
+        selectors = (
+            (select_random_approved_question_ids_by_category, category, {1}),
+            (select_random_approved_question_ids_by_categories, [category], {1}),
+            (select_random_approved_question_ids_across_active_categories, None, {1, 2}),
+        )
+        for selector, scope, expected in selectors:
+            args = (conn,) if scope is None else (conn, scope)
+            picked = selector(*args, limit=None, difficulty_mode="easy")
+            assert len(picked) == len(expected)
+            assert set(picked) == expected
+            assert selector(*args, limit=None, difficulty_mode="hard") == []
+        assert statements
+        assert all("ORDER BY RANDOM()" not in statement.upper() for statement in statements)

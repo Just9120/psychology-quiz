@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from app import classic_quiz_handlers as classic, main
+from app import classic_quiz_handlers as classic
 from app.identity_schema import migrate_identity_schema
 from app.learning_schema import migrate_learning_schema
 
@@ -41,8 +41,8 @@ def quiz(tmp_path, monkeypatch):
     context = SimpleNamespace(application=SimpleNamespace(bot_data={"settings": settings}),
                               user_data={"selected_mix_categories": {1}})
     sent = AsyncMock()
-    monkeypatch.setattr(main, "send_current_question", sent)
-    monkeypatch.setattr(main, "remove_main_menu_for_active_quiz", AsyncMock())
+    monkeypatch.setattr(classic, "send_current_question", sent)
+    monkeypatch.setattr(classic, "remove_main_menu_for_active_quiz", AsyncMock())
     return path, context, sent
 
 

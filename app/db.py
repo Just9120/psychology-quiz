@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import json
 import random
@@ -10,6 +9,12 @@ from app.attempt_content import capture_question, ensure_attempt_snapshots, get_
 from app.case_content import case_error
 from app.database import Connection, Row, begin_write, connect_database, is_postgres, timestamp_sql
 from app.quiz_overlap import balanced_diverse_first, diverse_first
+from app.owner_stats import OWNER_STATS_PERIODS, get_owner_stats, get_owner_period_stats
+from app.quiz_schema import (
+    ensure_performance_indexes, ensure_users_reading_mode_column,
+    ensure_quiz_session_selected_categories_table,
+    ensure_user_literature_progress_table, ensure_quiz_sessions_difficulty_mode_column,
+)
 
 
 SESSION_QUESTION_LIMIT = 10
@@ -40,99 +45,11 @@ def init_db_connection(db_path: str) -> None:
         conn.close()
 
 
-def ensure_performance_indexes(conn: Connection) -> None:
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_quiz_sessions_user_status ON quiz_sessions(user_id, status)"
-    )
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_quiz_answers_session_question ON quiz_answers(session_id, question_id)"
-    )
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_session_order ON quiz_session_questions(session_id, order_index)"
-    )
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_quiz_session_questions_question ON quiz_session_questions(question_id)"
-    )
-
-
 VALID_READING_MODES = {"normal", "bionic"}
 VALID_DIFFICULTY_MODES = {"easy", "medium", "hard"}
 
 
-def ensure_users_reading_mode_column(conn: Connection) -> None:
-    columns = conn.execute("PRAGMA table_info(users)").fetchall()
-    column_names = {str(column["name"]) for column in columns}
-    if "reading_mode" in column_names:
-        return
-
-    conn.execute(
-        "ALTER TABLE users ADD COLUMN reading_mode TEXT NOT NULL DEFAULT 'normal'"
-    )
-
-
-def ensure_quiz_session_selected_categories_table(conn: Connection) -> None:
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS quiz_session_selected_categories (
-            session_id INTEGER NOT NULL,
-            category_id INTEGER NOT NULL,
-            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (session_id, category_id),
-            FOREIGN KEY (session_id) REFERENCES quiz_sessions(id) ON DELETE CASCADE,
-            FOREIGN KEY (category_id) REFERENCES categories(id)
-        )
-        """
-    )
-
-
 USER_LITERATURE_READING_STATUSES = {"not_started", "in_progress", "read", "revisit", "skipped"}
-
-
-def ensure_user_literature_progress_table(conn: Connection) -> None:
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS user_literature_progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            literature_id TEXT NOT NULL CHECK (length(trim(literature_id)) > 0),
-            reading_status TEXT NOT NULL CHECK (
-                reading_status IN ('not_started', 'in_progress', 'read', 'revisit', 'skipped')
-            ),
-            progress_percent INTEGER CHECK (
-                progress_percent IS NULL OR (progress_percent >= 0 AND progress_percent <= 100)
-            ),
-            started_at TEXT,
-            completed_at TEXT,
-            updated_at TEXT NOT NULL,
-            last_opened_at TEXT,
-            private_note TEXT,
-            remind_at TEXT,
-            UNIQUE (user_id, literature_id),
-            FOREIGN KEY (user_id) REFERENCES users(id)
-        )
-        """
-    )
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_id "
-        "ON user_literature_progress(user_id)"
-    )
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_reading_status "
-        "ON user_literature_progress(reading_status)"
-    )
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_user_literature_progress_user_updated "
-        "ON user_literature_progress(user_id, updated_at)"
-    )
-
-
-def ensure_quiz_sessions_difficulty_mode_column(conn: Connection) -> None:
-    columns = conn.execute("PRAGMA table_info(quiz_sessions)").fetchall()
-    column_names = {str(column["name"]) for column in columns}
-    if "difficulty_mode" in column_names:
-        return
-
-    conn.execute("ALTER TABLE quiz_sessions ADD COLUMN difficulty_mode TEXT")
 
 
 def _normalize_reading_mode(mode: str | None) -> str:
@@ -422,10 +339,12 @@ def select_random_approved_question_ids_by_category(
         SELECT q.id,q.external_id
         FROM questions q
         WHERE {where_clause}
-        ORDER BY RANDOM()
     """
 
     rows = conn.execute(query, params).fetchall()
+    # Fetching the full candidate set is required for overlap-aware selection.
+    # A linear shuffle avoids sorting that same set inside the database.
+    random.shuffle(rows)
     return diverse_first([(int(row["id"]), str(row["external_id"])) for row in rows], limit)
 
 
@@ -452,10 +371,12 @@ def select_random_approved_question_ids_across_active_categories(
               WHERE q2.category_id = c.id
                 AND q2.status = 'approved'
           )
-        ORDER BY RANDOM()
     """
 
     rows = conn.execute(query, params).fetchall()
+    # Fetching the full candidate set is required for overlap-aware selection.
+    # A linear shuffle avoids sorting that same set inside the database.
+    random.shuffle(rows)
     return diverse_first([(int(row["id"]), str(row["external_id"])) for row in rows], limit)
 
 
@@ -482,8 +403,8 @@ def select_random_approved_question_ids_by_categories(
         SELECT q.id, q.category_id, q.external_id
         FROM questions q
         WHERE {where_clause}
-        ORDER BY RANDOM()
     """, params).fetchall()
+    random.shuffle(rows)
     order = list(dict.fromkeys(category_ids))
     random.shuffle(order)
     buckets: dict[int, list[tuple[int, str]]] = {category_id: [] for category_id in order}
@@ -730,95 +651,3 @@ def set_user_reading_mode(conn: Connection, user_id: int, mode: str) -> str:
         (normalized_mode, user_id),
     )
     return normalized_mode
-
-
-def get_owner_stats(conn: Connection) -> dict[str, Any]:
-    now = datetime.now(timezone.utc)
-    cutoffs = {days: (now - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S") for days in (1, 7, 30)}
-
-    def _fetch_count(query: str, parameters=()) -> int:
-        row = conn.execute(query, parameters).fetchone()
-        if row is None:
-            return 0
-        return int(row[0])
-
-    questions_by_category_rows = conn.execute(
-        """
-        SELECT c.name AS category_name, COUNT(q.id) AS question_count
-        FROM categories c
-        LEFT JOIN questions q
-          ON q.category_id = c.id
-         AND q.status = 'approved'
-        GROUP BY c.id, c.name
-        HAVING COUNT(q.id) > 0
-        ORDER BY c.name ASC
-        """
-    ).fetchall()
-
-    top_categories_30d_rows = conn.execute(
-        """
-        SELECT c.name, COUNT(DISTINCT qs.id) AS started_sessions
-        FROM quiz_sessions qs
-        JOIN quiz_session_questions qsq ON qsq.session_id = qs.id
-        JOIN questions q ON q.id = qsq.question_id
-        JOIN categories c ON c.id = q.category_id
-        WHERE qs.started_at >= ?
-        GROUP BY c.id, c.name
-        ORDER BY started_sessions DESC, c.name ASC
-        LIMIT 5
-        """, (cutoffs[30],)
-    ).fetchall()
-
-    return {
-        "total_users": _fetch_count("SELECT COUNT(*) FROM users"),
-        "new_users_24h": _fetch_count(
-            "SELECT COUNT(*) FROM users WHERE created_at >= ?", (cutoffs[1],)
-        ),
-        "new_users_7d": _fetch_count(
-            "SELECT COUNT(*) FROM users WHERE created_at >= ?", (cutoffs[7],)
-        ),
-        "new_users_30d": _fetch_count(
-            "SELECT COUNT(*) FROM users WHERE created_at >= ?", (cutoffs[30],)
-        ),
-        "active_users_24h": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[1],)
-        ),
-        "active_users_7d": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[7],)
-        ),
-        "active_users_30d": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[30],)
-        ),
-        "total_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions"),
-        "completed_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions WHERE status = 'finished'"),
-        "in_progress_quiz_sessions": _fetch_count(
-            "SELECT COUNT(*) FROM quiz_sessions WHERE status = 'in_progress'"
-        ),
-        "total_quiz_answers": _fetch_count("SELECT COUNT(*) FROM quiz_answers"),
-        "total_approved_questions": _fetch_count("SELECT COUNT(*) FROM questions WHERE status = 'approved'"),
-        "active_categories_count": _fetch_count(
-            """
-            SELECT COUNT(*)
-            FROM categories c
-            WHERE EXISTS (
-                SELECT 1 FROM questions q
-                WHERE q.category_id = c.id
-                  AND q.status = 'approved'
-            )
-            """
-        ),
-        "questions_by_category": [
-            {
-                "category_name": str(row["category_name"]),
-                "question_count": int(row["question_count"]),
-            }
-            for row in questions_by_category_rows
-        ],
-        "top_categories_30d": [
-            {
-                "category_name": str(row["name"]),
-                "started_sessions": int(row["started_sessions"]),
-            }
-            for row in top_categories_30d_rows
-        ],
-    }

@@ -10,16 +10,18 @@
     ],
     "year": 1999,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 10,
     "global_order": 620010,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семьи перейти к профессиональной литературе об индивидуальном и семейном консультировании.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -33,7 +35,9 @@
     "metadata_warnings": [
       "Совпали работа и автор; список консультирования без года, семейная психология указывает 1999. Это связь работы, не доказательство одинакового издания."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_98bfb98e25b39800",
@@ -80,14 +84,14 @@
     ],
     "year": 1988,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "reference",
     "status": "approved",
     "priority": null,
     "topic_order": 30,
     "global_order": 620030,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Дополнительное историческое чтение для педагогов и родителей о ребёнке в неблагополучной семье. Издание 1988 года не следует использовать как современное клиническое руководство.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -101,7 +105,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_4c4514f492edb1c6",
@@ -114,16 +120,18 @@
     ],
     "year": 2001,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 40,
     "global_order": 620040,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семейных отношений познакомиться с системным подходом к семье по краткому лекционному курсу.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -135,7 +143,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_40f4eacd15ed570b",
@@ -149,16 +159,18 @@
     ],
     "year": 1999,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 50,
     "global_order": 620050,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего введения в семейную терапию расширить представление о подходах к взаимодействию с семьёй на примере работы Витакера и Бамберри, основанной на личном опыте.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -170,7 +182,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_bd48225c86c8de17",
@@ -183,14 +197,14 @@
     ],
     "year": 1989,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 60,
     "global_order": 620060,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Дополнительное чтение врачебных размышлений о развитии и воспитании ребёнка. Рассматривать в историческом контексте; это не подтверждение актуальности медицинских рекомендаций.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -204,7 +218,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_0199865ad8d23ecb",
@@ -217,16 +233,18 @@
     ],
     "year": 2002,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 70,
     "global_order": 620070,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семьи рассмотреть доступное изложение общения родителей и детей; оно дополняет профессиональный курс.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -238,7 +256,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_819808cf97ad8eb5",
@@ -251,16 +271,18 @@
     ],
     "year": 2009,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 80,
     "global_order": 620080,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После первой книги Гиппенрейтер продолжить тему общения с ребёнком и познакомиться с дальнейшими авторскими пояснениями.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_0199865ad8d23ecb"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -272,7 +294,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_ee1fe3562df0c482",
@@ -285,14 +309,14 @@
     ],
     "year": 1991,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "reference",
     "status": "approved",
     "priority": null,
     "topic_order": 90,
     "global_order": 620090,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Историческое учебное пособие для педагогических институтов о семейной жизни. Полезно для сопоставления прежних педагогических представлений с современными курсами; не использовать как актуальный источник семейного права или клинических рекомендаций.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -305,8 +329,12 @@
       "citation": "Гребенников, И.В. Основы семейной жизни / И.В. Гребенников. – М.: Просвещение,1991. – 256 с"
     },
     "content_access": "not_verified",
-    "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "metadata_warnings": [
+      "В исходном списке указано 256 страниц; библиотечные записи издания 1991 года указывают 156 и две ненумерованные страницы (158). Исходная цитата сохранена; пагинация требует уточнения по экземпляру."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_a172ffe221539480",
@@ -319,14 +347,14 @@
     ],
     "year": 2000,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "foundation",
     "status": "approved",
     "priority": null,
     "topic_order": 100,
     "global_order": 620100,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Начать с обзора отношений в семье, стилей воспитания и их связи с развитием ребёнка.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -340,7 +368,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "basic",
+    "importance_source": "agent"
   },
   {
     "id": "lit_e8a91d867727899b",
@@ -353,16 +383,18 @@
     ],
     "year": 1998,
     "type": "article",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 110,
     "global_order": 620110,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Исторический пример исследования связей родительской и супружеской семьи. Читать после общего обзора семейной психологии, обращая внимание на ретроспективный корреляционный дизайн и состав выборки; связи в этой работе не означают неизбежность или доказанную причинность.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -373,8 +405,12 @@
       "citation": "Дымнова, Т. Н. Зависимость характеристик супружеской семьи от родительской / Т. Н. Дымнова // Вопросы психологии. – 1998. – № 2. – С. 19 - 27"
     },
     "content_access": "not_verified",
-    "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "metadata_warnings": [
+      "В учебном списке указаны Т. Н. Дымнова и страницы 19–27; сайт журнала для этого названия указывает Т. И. Дымнову и начало на странице 46. Требуется сверка библиографии; исходная цитата сохранена."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_4bad7531005a5e23",
@@ -388,16 +424,18 @@
     ],
     "year": 1996,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 120,
     "global_order": 620120,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Дополнительное чтение по семейной педагогике и отношениям родителей и детей после общего обзора психологии семьи. Историческое пособие стоит читать с учётом времени его издания.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -409,7 +447,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_ce87499b1e725a4d",
@@ -422,16 +462,18 @@
     ],
     "year": 2009,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 130,
     "global_order": 620130,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Специальное учебное пособие о семье как системе и развитии супружеских и детско-родительских отношений. Читать после общего обзора психологии семьи, чтобы связать отношения с этапами жизни семьи.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -443,7 +485,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_319ec2108977ce66",
@@ -458,16 +502,18 @@
     ],
     "year": 2018,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 140,
     "global_order": 620140,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "После общего обзора семьи перейти к учебному пособию о супружеских и детско-родительских отношениях и направлениях консультативной работы. Пособие адресовано магистрантам и практическим психологам; чтение не заменяет профессиональную подготовку.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -479,7 +525,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_3c68e7fa4c7ec0ba",
@@ -492,14 +540,14 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 150,
     "global_order": 620150,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Дополнительное популярное чтение о бережных отношениях и сохранении себя в паре после общего обзора семейной психологии. Не заменяет профессиональную подготовку консультанта.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -515,6 +563,366 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_01",
+    "work_id": "lit_family_slide_01",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Психология развития и возрастная психология",
+    "authors": [
+      "Кулагина И. Ю.",
+      "Колюцкий В. Н."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 160,
+    "global_order": 620160,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Учебный обзор возрастного развития на протяжении жизненного цикла для студентов психологии. Поможет связать семейные отношения с этапами развития; конкретное издание из презентации не установлено.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Психология развития и возрастная психология. И. Ю. Кулагина, В. Н. Колюцкий"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_02",
+    "work_id": "lit_57ba3a9bf5d4ff18",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Привязанность",
+    "authors": [
+      "Боулби Джон"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 170,
+    "global_order": 620170,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После обзора семьи углубить тему связи ребёнка с близким взрослым по теории привязанности Боулби.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Привязанность. Джон Боулби"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены.",
+      "Та же работа и автор уже есть в списке возрастной психологии; издание не установлено."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_03",
+    "work_id": "lit_family_slide_03",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Давай договоримся",
+    "authors": [
+      "Кляйндинст Анн-Клер"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 180,
+    "global_order": 620180,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение для родителей: наглядные разборы повседневных конфликтов с ребёнком. Использовать как знакомство с авторским подходом к общению, без обещания лечебного эффекта.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Давай договоримся. Анн-Клер Кляйндинст"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_04",
+    "work_id": "lit_family_slide_04",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Трудный подросток",
+    "authors": [
+      "Зурита Она Патрисия И."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 190,
+    "global_order": 620190,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Практическое дополнительное чтение для родителей подростков о собственных реакциях и конфликтах в общении. Предлагается после обзора возрастного развития; не заменяет профессиональную помощь и не удостоверяет эффективность каждого совета.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_family_slide_01"
+    ],
+    "source_refs": [
+      "drive:1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb"
+    ],
+    "source": {
+      "id": "1DdRnQQskmLTfusRU4XRQom8FFmyNCHeb",
+      "title": "Детские кризисы_Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Трудный подросток. Патрисия И. Зурита Она"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_05",
+    "work_id": "lit_family_slide_05",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Теория семейных систем Мюррея Боуэна. Основные понятия, методы и клиническая практика",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 200,
+    "global_order": 620200,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения в системную семейную терапию обратиться к сборнику статей по теории Боуэна: сопоставить общие понятия семейной системы с дифференциацией и межпоколенными связями.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Теория семейных систем Мюррея Боуэна. Основные понятия, методы и клиническая практика. Сборник статей. Когито-центр"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены.",
+      "Автор или редактор сборника не указан в презентации."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_06",
+    "work_id": "lit_family_slide_06",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Введение в системную семейную психотерапию",
+    "authors": [
+      "Варга Анна"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 210,
+    "global_order": 620210,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После краткого лекционного курса системной семейной терапии углубить понимание семейных правил, границ и генограмм; это дополнительное изложение подхода, а не подтверждённая замена учебному курсу.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_4c4514f492edb1c6"
+    ],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Введение в системную семейную психотерапию. Анна Варга"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_07",
+    "work_id": "lit_family_slide_07",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Системная психотерапия супружеских пар",
+    "authors": [
+      "Варга Анна"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 220,
+    "global_order": 620220,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения в системную семейную терапию изучить сборник о работе с супружескими парами: сравнить подходы к коммуникации и семейным изменениям. Это профессиональное дополнительное чтение, а не инструкция для самостоятельного лечения.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Системная психотерапия супружеских пар. Сборник статей. Анна Варга"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_08",
+    "work_id": "lit_family_slide_08",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Психотерапия семьи",
+    "authors": [
+      "Сатир Вирджиния"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 230,
+    "global_order": 620230,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После общего введения в системную семейную терапию познакомиться с подходом Вирджинии Сатир к семейной системе и работе с семьёй; сопоставить его с другими учебными подходами.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Психотерапия семьи. Вирджиния Сатир"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_family_slide_09",
+    "work_id": "lit_family_slide_09",
+    "topic_id": "family_psychology",
+    "module": "module6",
+    "title": "Техники семейной терапии",
+    "authors": [
+      "Минухин Сальвадор"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 240,
+    "global_order": 620240,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Специализированное чтение о техниках структурной семейной терапии: контакте с семьёй, планировании и работе с взаимодействием. Читать после введения в системный подход; отдельная техника требует понимания целей, контекста и профессиональной подготовки, книга не заменяет супервизию.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_4c4514f492edb1c6"
+    ],
+    "source_refs": [
+      "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
+    ],
+    "source": {
+      "id": "1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ",
+      "title": "Дмитриева. Семья как система_ Дмитриева Виктория.pdf",
+      "locator": "Раздел «Полезная литература»",
+      "citation": "Техники семейной терапии. Сальвадор Минухин"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не указан в презентации; издание и полный текст не проверены.",
+      "Библиотечная запись одноимённой книги называет двух авторов: Сальвадора Минухина и Чарльза Фишмана. В исходной рекомендации назван только Минухин, издание не указано. Точный состав авторов требует уточнения; исходная запись сохранена."
+    ],
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   }
 ]

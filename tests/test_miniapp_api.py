@@ -29,12 +29,16 @@ from app.miniapp_api import (
 )
 
 
-def _setup_schema(conn):
+def _setup_schema(conn, *, reading=True):
     with open('sql/schema.sql', encoding='utf-8') as f:
         conn.executescript(f.read())
     migrate_identity_schema(conn)
     migrate_glossary_schema(conn)
     migrate_learning_schema(conn)
+    if reading:
+        from app.reading_schema import migrate_reading_schema
+        from app.literature import load_literature_items
+        migrate_reading_schema(conn, load_literature_items())
     conn.commit()
 
 

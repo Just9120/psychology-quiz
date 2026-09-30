@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from copy import deepcopy
 from collections import Counter, defaultdict
 from datetime import date
@@ -33,16 +34,17 @@ PUBLIC_ITEM_FIELDS = (
     "learning_outcomes",
     "prerequisites",
 )
-PUBLIC_SOURCE_FIELDS = ("title", "locator", "citation")
-USER_STATE_FIELDS = (
-    "reading_status",
-    "progress_percent",
-    "started_at",
-    "completed_at",
-    "updated_at",
-    "last_opened_at",
-    "remind_at",
-)
+PUBLIC_SOURCE_FIELDS = ("citation",)
+def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
+    if (parsed is None or parsed.scheme != "https" or parsed.username or parsed.password
+            or parsed.query or parsed.fragment):
+        return False
+    if provider == "Литрес":
+        prefix = "/book/" if fmt == "text" else "/audiobook/"
+        return parsed.netloc == "www.litres.ru" and parsed.path.startswith(prefix)
+    if provider == "Юрайт":
+        return fmt == "text" and parsed.netloc == "urait.ru" and re.fullmatch(r"/bcode/[0-9]+", parsed.path) is not None
+    return False
 
 
 @lru_cache(maxsize=1)
@@ -67,15 +69,12 @@ def load_access_links() -> dict[str, list[dict[str, str]]]:
                 checked_date = isinstance(checked, str) and date.fromisoformat(checked).isoformat() == checked
             except ValueError:
                 checked_date = False
-            if (not isinstance(fmt, str) or fmt not in {"text", "audio"} or fmt in seen
-                    or offer["provider"] != "Литрес" or offer["access"] != "provider_terms"
+            if (not isinstance(fmt, str) or fmt not in {"text", "audio"} or not isinstance(url, str) or url in seen
+                    or offer["access"] != "provider_terms"
                     or not checked_date
-                    or parsed is None or parsed.scheme != "https" or parsed.hostname != "www.litres.ru"
-                    or parsed.netloc != "www.litres.ru" or parsed.username or parsed.password
-                    or parsed.query or parsed.fragment
-                    or not parsed.path.startswith("/book/" if fmt == "text" else "/audiobook/")):
+                    or not _valid_offer_target(offer["provider"], fmt, parsed)):
                 raise ValueError("Invalid literature access offer")
-            seen.add(fmt)
+            seen.add(url)
             links[work_id].append(offer)
     return links
 
@@ -160,6 +159,7 @@ def list_literature_topic_payloads(user_states: dict[str, dict[str, Any]] | None
         payload: dict[str, Any] = {
             "topic_id": topic_id,
             "title": str(topic.get("title") or topic_id),
+            "module": str(topic.get("module") or ""),
             "item_count": len(topic_items),
             "status_counts": dict(sorted(Counter(str(item.get("status")) for item in topic_items).items())),
         }
@@ -167,14 +167,3 @@ def list_literature_topic_payloads(user_states: dict[str, dict[str, Any]] | None
             payload["user_reading_status_counts"] = dict(sorted(reading_status_counts.items()))
         payloads.append(payload)
     return sorted(payloads, key=lambda payload: (int(topics.get(str(payload["topic_id"]), {}).get("order") or 0), str(payload["topic_id"])))
-
-
-def state_row_to_payload(row: Any) -> dict[str, Any]:
-    payload = {"literature_id": str(row["literature_id"])}
-    for field in USER_STATE_FIELDS:
-        payload[field] = row[field]
-    return payload
-
-
-def state_row_to_item_user_state(row: Any) -> dict[str, Any]:
-    return {field: row[field] for field in USER_STATE_FIELDS}

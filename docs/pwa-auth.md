@@ -11,8 +11,7 @@ Enabled API и bot требуют:
 | Переменная | Правило |
 | --- | --- |
 | `PWA_ENABLED` | `true` / `false`; неизвестное значение — startup error |
-| `PWA_STUDENT_ACCESS_ENABLED` | Только `false` для действующего production release. `true` отклоняется при startup до подключения к DB: нет утверждённого age/privacy policy. Synthetic tests инъектируют enabled settings напрямую, не через runtime env. |
-| `PWA_STUDENT_INVITEE_IDS` | Неиспользуемый совместимый параметр прежнего draft flow; бот больше не выдаёт приглашения. Пустой по умолчанию; неизвестный/нечисловой ID отклоняется при startup. |
+| `PWA_STUDENT_ACCESS_ENABLED` | Только `false` для действующего production release. `true` отклоняется при startup до подключения к DB: student PWA исключён из текущего продукта по D-29. Устаревший параметр оставлен только как fail-closed проверка: он не включает иной режим. |
 | `PWA_ORIGIN` | Единственный HTTPS origin без path/query/fragment/credentials. PWA вызывает same-origin `/web/*`, Nginx направляет его в existing loopback API; PWA CORS не включается |
 | `PWA_OWNER_EMAIL` | Allowlisted owner, lowercase/trim; реальный адрес в repository не публиковать. Другие PWA accounts в production выключены |
 | `PWA_SMTP_HOST`, `PWA_SMTP_PORT` | По документации Яндекс 360, проверенной 19.09.2026: `smtp.yandex.ru`, SSL 465 или STARTTLS 587. Фактический mailbox устанавливает владелец; certificate verification обязательно |
@@ -21,7 +20,7 @@ Enabled API и bot требуют:
 
 Install/init/run/tests — canonical команды в [README](../README.md#быстрый-старт-и-проверки). Tests inject synthetic mailer; runtime не имеет bypass e-mail proof и не возвращает mail tokens в API. SMTP timeout 10 секунд, до двух отправок на процесс. Ошибка удаляет выданный token и возвращает только `mail_unavailable`.
 
-Исторический synthetic student flow содержит одноразовые приглашения и таблицу digest; он не является действующим продуктовым путём D-29. В production `PWA_STUDENT_ACCESS_ENABLED=true` отклоняется, бот не предлагает PWA и не выдаёт приглашений, а анонимные demo routes закрыты. При выключенном gate student session не проходит `authenticate`, login и новые письма не дают доступа. Проект политики, правила возраста Telegram-доступа, удаления/retention, фактическое размещение и уведомления остаются Q-09/11.
+Исторический student invitation flow удалён из runtime, settings и клиентов по D-29. PWA принимает только e-mail владельца, включая login, sessions и mail proofs; приглашение не может открыть доступ. `PWA_STUDENT_ACCESS_ENABLED=true` по-прежнему отклоняется как несовместимая устаревшая конфигурация. Бот не предлагает студенческую PWA, а анонимные demo routes закрыты. Таблица `pwa_invitations` и её versioned schema сохранены для совместимости существующих данных, импорта и recovery; этот release их не удаляет и не изменяет. Проект политики, удаление/retention, фактическое размещение и уведомления остаются Q-09/11.
 
 ## API и пользовательский flow
 
@@ -29,10 +28,11 @@ POST: JSON до 16 KiB, exact Origin; query parameters запрещены. Authe
 
 | Endpoint | Payload / результат |
 | --- | --- |
-| `POST /web/auth/register` | `{email}` → generic `{ok:true}` для owner allowlist. Legacy поле `invitation` поддержано только в закрытом synthetic flow; production student gate OFF. Пароль до e-mail proof не сохраняется |
+| `POST /web/auth/register` | `{email}` → generic `{ok:true}` для owner allowlist. Поле `invitation` не участвует в auth flow и не открывает доступ; legacy student accounts/sessions отклоняются owner boundary. Пароль до e-mail proof не сохраняется |
 | `POST /web/auth/verify` | `{token,password}` → verified account. Expired/replayed/wrong-purpose proof отклоняется; все register tokens адреса отзываются. Затем обычный login |
 | `POST /web/auth/login` | `{email,password}` → `{ok:true}` + HttpOnly cookie. Unknown/disabled/not-allowlisted/wrong credentials → одинаковый 401; неизвестный account также проходит password hash workload |
-| `GET /web/auth/me` | E-mail, CSRF, `needs_identity`, `telegram_linked`, `link_pending`, `link_confirmed`, `link_target` (подтверждённые имя/username/Telegram ID) только инициировавшей session |
+| `GET /web/auth/me` | E-mail, `display_name` (либо null), CSRF, `needs_identity`, `telegram_linked`, `link_pending`, `link_confirmed`, `link_target` (подтверждённые имя/username/Telegram ID) только инициировавшей session |
+| `POST /web/profile/name` | `{display_name}` + session/CSRF → сохранённое имя либо null. Пробелы нормализуются; максимум 60 символов после нормализации, control characters и нестроковое значение отклоняются. Пустая строка снимает имя; e-mail, Telegram identity и учебный actor не меняются |
 | `POST /web/auth/logout` | Пустой JSON + CSRF → session/link request отозваны, cookie истекает |
 | `POST /web/auth/recover` | `{email}` → generic response; письмо только enabled owner |
 | `POST /web/auth/reset` | `{token,password}` → новый hash, все sessions/link requests account отозваны, recovery tokens удалены |
@@ -46,7 +46,7 @@ POST: JSON до 16 KiB, exact Origin; query parameters запрещены. Authe
 | `POST /web/progress/reset-preview` | `{scope:"all",topic:null}` либо `{scope:"topic",topic:<saved-topic>}` → personal topics, counts, active attempts и `revision`. Читает состояние, не удаляет данные |
 | `POST /web/progress/reset-confirm` | Тот же scope/topic, `expected_revision`, `confirm:true` → удаление только выбранного quiz learning actor. Изменившийся прогресс или replay → `reset_changed`/409; без confirmation → 400. User ID из payload не задаёт actor |
 
-Сброс доступен из «Мой прогресс» и требует preview + отдельного checkbox/button. После ошибки или неопределённого network outcome прежнее подтверждение снимается; для следующего действия нужен новый preview. Тема берётся из immutable snapshot: ответы других тем смешанной попытки сохраняются, затронутая активная попытка прекращается. All-reset удаляет только quiz attempts и зависимые questions/answers/selected categories; литература, private notes, аккаунт и linking сохраняются. Glossary пока не относится к этому первому reset endpoint. Общая actor lock сериализует reset с setup/answer/finalize всех quiz клиентов; транзакционный rollback не оставляет частичного сброса. Новых migrations или runtime settings нет.
+Сброс доступен из «Мой аккаунт» → «Настроить сброс» и требует preview + отдельного checkbox/button. После ошибки или неопределённого network outcome прежнее подтверждение снимается; для следующего действия нужен новый preview. Тема берётся из immutable snapshot: ответы других тем смешанной попытки сохраняются, затронутая активная попытка прекращается. All-reset удаляет только quiz attempts и зависимые questions/answers/selected categories; литература, private notes, аккаунт и linking сохраняются. Glossary пока не относится к этому первому reset endpoint. Общая actor lock сериализует reset с setup/answer/finalize всех quiz клиентов; транзакционный rollback не оставляет частичного сброса. Новых migrations или runtime settings нет.
 
 Verification/recovery links передают token в fragment, который не поступает в HTTP access log/Referer. Frontend обязан сразу удалить fragment из address bar, хранить token только в памяти формы и передать JSON. Нельзя сохранять passwords/tokens/private responses в localStorage, service-worker cache или analytics. Ссылка сама не устанавливает пароль; владелец задаёт его после proof. Linking confirmation нельзя выполнять автоматически.
 

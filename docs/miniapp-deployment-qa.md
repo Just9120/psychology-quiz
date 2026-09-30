@@ -15,13 +15,13 @@
 | Target / unit | Существующий checkout `/opt/psychology-quiz`, origin Just9120/psychology-quiz, main; Docker default context, Compose project `psychology-quiz`, services `psych_quiz_bot` + `psych_quiz_miniapp_api`. Существующие container labels/Running сверяются до изменения; несовпадение блокирует, не разрешает bootstrap. Host/user — existing DEPLOY_HOST/DEPLOY_USER; values UNSET в документации, не выводить. |
 | Config owner | Runtime host `.env` обслуживает владелец VPS; routine CD не добавляет keys и не заменяет values. Repository Secrets DEPLOY_SSH_KEY/DEPLOY_KNOWN_HOSTS задают доступ/host identity. Ответственный за rotation персонально UNSET. Compose задаёт revision и выключает legacy API в bot. |
 | Очередь / выбор версии | production-deploy concurrency без cancel; host flock ждёт до 60 s, затем FAIL. Только 40-character SHA, совпадающий с origin/main на момент fetch; stale candidate завершается без поставки. Host checkout clean, merge только ff-only. Никогда reset --hard/down/remove-orphans/prune. |
-| Artifact identity | VPS пересобирает оба image из точного source SHA перед init/seed. Это отдельные binary artifacts, не CI-built image. Build label, APP_REVISION, running image IDs и API health revision сверяются/записываются в CD logs. Python base image закреплён digest, runtime/search зависимости — hash-locked `requirements*.lock` (F-015, до CI pending). Однако CI-built image не переносится на VPS, а apt-зависимость search image и внешняя инфраструктура build не полностью фиксированы: побайтовую идентичность binary не заявлять. |
+| Artifact identity | CI собирает exact backend image по candidate SHA; [backend promotion](#backend-image-promotion) переносит тот же image с проверкой ZIP/image digest, revision/platform и running container image IDs. VPS runtime больше не выполняет build. Python base image закреплён digest, runtime/search Python dependencies — hash-locked. Search build использует [Debian snapshot](../deploy/search-debian.sources) с датой 20.09.2026 и обязательными archive signatures; его реальную сборку/imports проверяет applicable CI. Конфигурация promotion не доказывает живую поставку до CI/CD records; повторную сборку binary побайтово идентичной не заявлять. |
 | Static frontend | Telegram Mini App: React/TS/Vite source `pwa/miniapp-app` + `pwa/src/miniapp`, проверенная сборка `miniapp-react/` и отдельная Cloudflare Git integration/Worker psychology-quiz-miniapp; после PR нужны asset/provider check. Самостоятельная PWA: тот же production CD, trusted main CI artifact и atomic release на VPS по [PWA procedure](pwa-delivery.md). |
 | Stateful class | Обычный code-only release — NONE. Schema/seed/content DB release этой Goal — BACKWARD_COMPATIBLE_AUTOMATED; Для первой поставки без прежнего image SHA обязательны backup rehearsal/user preservation; init/seed выполняются только при соответствующем source diff, не из-за отсутствия label. Stateful script останавливает оба writer services, создаёт backup, репетирует restore отдельно, затем init/seed и проверяет сохранность всех прежних user fields. |
 | Backup / recovery | [deployment_db.py](../scripts/deployment_db.py): SQLite backup API в private `/data/backups/release-*/quiz.sqlite3`; restore во временный файл, integrity/FK и fingerprint users/sessions/answers/literature. До migrations failure запускает только прежние containers. После начала migration/post-check failure — stop продвижения и forward-fix; production restore/volume cleanup не автоматизированы. Retention/удаление backups — отдельная maintenance задача. |
 | Обязательные post-checks | Проверка DB serving questions/options, всех attempt snapshot hashes и canonical parity, неизменности user state для stateful release, [internal HTTP smoke](../scripts/deployment_http_smoke.py) `/healthz` с expected SHA и unauthenticated `/miniapp/state` → 401; затем обе службы Running и image revision. `DEPLOY_OK revision=...` допустим только после всех checks. Bot Telegram roundtrip не входит в read-only smoke. |
 
-Routine entrypoint — [deploy.sh](../deploy.sh), переданный по verified SSH из validated candidate с positional expected SHA, приватным incoming ZIP path и проверенным GitHub SHA-256 artifact. Параметры формирует existing CD, ручная передача не нужна. SSH сначала читает полный script в аргумент bash -c, чтобы stdin дочернего процесса не забрал оставшийся код; workflow требует exact completion marker и `PWA_DELIVERY_OK`. Не запускать старую host-копию script: checkout обновляется внутри candidate procedure. Docs-only change синхронизирует source без runtime restart/static activation и сообщает отдельно SOURCE_SYNC_OK/runtime_unchanged. Frontend-only change публикует PWA после проверки совместимого backend без его restart. Повторный deploy ради статуса не нужен: читать CI/CD records.
+Routine entrypoint — [deploy.sh](../deploy.sh), переданный по verified SSH из validated candidate с positional expected SHA, incoming PWA ZIP/digest и backend ZIP/digest. Оба artifacts выбираются из successful trusted main CI той же revision и актуальной попытки required jobs. Параметры формирует existing CD, ручная передача не нужна. SSH сначала читает полный script в аргумент bash -c, чтобы stdin дочернего процесса не забрал оставшийся код; workflow требует exact completion marker и `PWA_DELIVERY_OK`. Не запускать старую host-копию script: checkout обновляется внутри candidate procedure. Docs-only change синхронизирует source без runtime restart/static activation и сообщает отдельно SOURCE_SYNC_OK/runtime_unchanged. Frontend-only change публикует PWA после проверки совместимого backend без его restart. Повторный deploy ради статуса не нужен: читать CI/CD records.
 
 При failure записать run ID, candidate SHA и последний успешно пройденный этап. Не начинать следующий PR до завершения применимой поставки. Если службы остановлены после migration failure, сначала сверить backup, DB integrity/user preservation и совместимость; обычная процедура намеренно требует существующие Running services и не является обходом recovery gate. Production restore или изменение target требует отдельного решения. Read-only runtime smoke не доказывает authenticated/mobile UX или нагрузочную устойчивость.
 
@@ -415,7 +415,7 @@ python -m unittest tests/test_miniapp_fastapi.py
   - Startup/init enables `PRAGMA journal_mode = WAL` once for file-backed databases.
   - Regular connections configure `PRAGMA busy_timeout = 10000`, `PRAGMA synchronous = NORMAL`, and `PRAGMA foreign_keys = ON` without changing journal mode.
 - For file-backed DBs, side files `quiz.sqlite3-wal` and `quiz.sqlite3-shm` may appear; this is expected in WAL mode.
-- Runtime performance indexes are ensured on startup for both existing and fresh DBs.
+- SQLite startup сохраняет compatibility helpers для performance indexes; PostgreSQL startup только проверяет schema/version/catalog. Создание и обновление PostgreSQL indexes выполняются явной миграцией до запуска writers по [PostgreSQL procedure](postgres-storage.md).
 - Repeated user loads should not update `users.updated_at` unless Telegram profile fields (`username`, `first_name`, `last_name`) changed; this keeps read-like bot and Mini App flows from taking avoidable SQLite write locks.
 - Mini App answer timeout remains longer than hedge timing (`ANSWER_API_TIMEOUT_MS = 8000`, `ANSWER_HEDGE_DELAY_MS = 1000`). The answer hedge still waits briefly before attempt 2 and performs state-resync first, but it now recovers from a stalled first WebView/fetch attempt in roughly 1 second instead of roughly 3 seconds. If debug telemetry shows `attempt=2`, `hedged=true`, `winner_attempt=2`, and `pre_request_ms`/`hedge_started_ms` roughly equal to the hedge delay while backend logs have no matching `_a1` `miniapp_api` line, interpret it as the first frontend/WebView fetch attempt likely stalling before it reached backend; the `_a2` backend `duration_ms` should then represent the successful hedged request.
 
@@ -495,10 +495,10 @@ Smoke checks:
 Класс изменения для текущего Telegram-only rollout: BACKWARD_COMPATIBLE_AUTOMATED, до появления web users; нет удаления пользовательских данных. Target и writers — существующий `/opt/psychology-quiz`, Compose `psychology-quiz`, bot/API. Обязательны stop writers, backup с isolated restore, init/seed, полный prior-user fingerprint/snapshot/parity и post-checks из таблицы выше. `app/identity_schema.py` входит в stateful classifier. После начала migration failure требует сверки DB/backup и forward-fix; production restore не автоматизирован. После появления web identities rollback к Telegram-only schema несовместим и не допускается без отдельного плана. PWA credentials/session tables и включение web routes поставляются отдельными следующими этапами; эта migration их не включает.
 
 ## 16) DB migration / upgrade policy
-- `schema.sql` is source of truth for fresh database creation.
-- Runtime `ensure_*` migration helpers are used for selected additive upgrades on existing DBs (for example, missing indexes/columns that can be added safely).
-- Production deploy must run normal bot startup (`init_db_connection`) so runtime checks can ensure expected additive indexes exist.
-- Destructive or behavior-changing migrations (drop/rewrite/backfill with risk) require explicit migration scripts + operator-approved backups/rollback plan.
+- [SQLite schema](../sql/schema.sql) используется canonical [init](../scripts/init_db.py) для SQLite. Этот же init явно применяет identity/auth/glossary/learning/homework/privacy/reading migrations; legacy `ensure_*` helpers в SQLite startup не заменяют этот шаг.
+- Действующий production использует PostgreSQL: init вызывает ordered `upgrade_schema`, а `init_db_connection` при старте вызывает только `verify_schema`. Не рассчитывайте на создание PostgreSQL таблиц, колонок или indexes при старте приложения.
+- Для stateful изменений [deploy](../deploy.sh) под штатной lock останавливает оба writer-сервиса, подтверждает backup/isolated restore, выполняет init/seed, проверяет сохранность прежнего user state и только затем запускает проверенную версию. Точный version/catalog, поддержанные исходные схемы и recovery описаны в [PostgreSQL procedure](postgres-storage.md).
+- Неизвестная схема, failed migration или расхождение preservation не допускают продолжения поставки. После начала миграции нет автоматического data restore/application rollback; необходима сверка recovery record и согласованный forward-fix либо отдельное recovery-решение. Destructive изменения требуют явного разрешения.
 
 Для действующей production SQLite с WAL используйте SQLite backup API и isolated restore rehearsal из [DB checks](../scripts/deployment_db.py), вызываемые штатным [deploy](../deploy.sh). Простое копирование основного файла не является принятой backup procedure.
 
@@ -746,3 +746,166 @@ The debug panel shows the latest safe rows as `action request_id request_ms pars
 ### Remaining ops experiment
 
 Because `miniapp.librechat.online` is Cloudflare-proxied while `quiz-api.librechat.online` appears to be direct Nginx, a remaining production experiment is to temporarily bypass Cloudflare for the Mini App frontend (or publish an equivalent non-proxied frontend hostname) and compare debug rows for the same user action. If `request_ms` and `total_ms` improve only on the bypassed frontend while backend `duration_ms` remains low, Cloudflare/frontend caching/proxy/WebView interaction remains a likely contributor. This experiment should not change classic Telegram callback routing or production DNS permanently in this PR.
+
+
+## Owner content dashboard
+
+PWA «Содержание» использует только owner session и CSRF через `POST /web/owner/content`.
+Другим аккаунтам, anonymous requests и Telegram clients operational API недоступен.
+Клиент не задаёт actor или путь к файлу. Обзор только читает approved bank, опубликованный
+каталог глоссария и библиографию; personal learning rows не читает и не меняет.
+Отсутствующий вопрос определённого вида — подтверждённый пустой раздел банка,
+а достаточность количества не оценивается без предметного критерия. Неизвестные
+термины/Obsidian notes показываются как неподтверждённые, а не как нулевое покрытие.
+
+Source processing summary готовится оператором из полного private inventory и выбранного
+private processing snapshot. Canonical команда, cwd root репозитория:
+
+```bash
+python scripts/owner_source_summary.py --current data/current-inventory.json \
+  --processed data/current-processing.json --observed-at "$INVENTORY_OBSERVED_AT" --reviewed \
+  --output data/owner-source-summary-candidate.json
+```
+
+При необходимости добавьте `--private-registry data/reviewed-source-registry.json` к этой же команде с `--reviewed`. Дополнение должно быть непустым ignored private JSON в `data/`, принадлежащим оператору; corpus root должен совпадать, дубликаты source IDs отклоняются. Оно влияет только на coverage агрегата, не меняет публичный registry, processing states или разрешения публикации. Дисциплинарный глоссарий не становится источником отдельной лекции без подтверждённой связи.
+
+Пути здесь обозначают проверенные operator inputs; не создавайте пустые файлы вместо них.
+`INVENTORY_OBSERVED_AT` — подтверждённое время metadata-наблюдения с timezone,
+а не время запуска команды. Output создаётся только новым ignored `data/*.json`;
+существующий файл не перезаписывается. В него входят counts, дата наблюдения и время
+подготовки; тексты, названия, Drive IDs, locators и reviewer identities не переносятся.
+Даже полный inventory не доказывает полный semantic review: summary сохраняет `PARTIAL`,
+известные holds учитываются отдельно от pending records. Поздние потерянные review
+records остаются неизвестными; этот файл не является разрешением публикации.
+
+После readback/digest проверки поставляйте только агрегированный файл в host
+`data/owner-source-summary.json` штатного checkout, доступный API через `/data` mount.
+Операторская передача файла — отдельное действие поставки; Git/CD не содержит этот
+ignored snapshot. `OWNER_SOURCE_SUMMARY_PATH` позволяет явно выбрать путь для API;
+default — `/data/owner-source-summary.json`. Не передавайте вместо него raw review JSON.
+Отсутствующий/невалидный snapshot возвращает UNSET, без исключения приватного текста.
+Обзор показывает дату и ограничение актуальности, не объявляет старый snapshot текущим
+состоянием Drive. Изменение snapshot не меняет auth gates, банк или пользовательские данные.
+
+
+`--reviewed` включает только проверенные registry/curriculum edges и допущенные
+publication gate вопросы текущего checkout. Привязка требует совпадения ID и
+`item_sha256`; новая формулировка со старым ID остаётся вне lesson coverage.
+Snapshot хранит counts по публичным lesson IDs, состояние metadata/review и known hold;
+Drive ID/locator не переносит. API повторно проверяет вложенные counts и использует
+только текущие публичные lesson/discipline названия. Неизвестные термины/Obsidian notes
+не превращаются в нули. Цифры lesson coverage относятся к snapshot, а не к живому DB
+запросу. Обновление текущего банка само по себе не обновляет ignored snapshot.
+
+
+При наличии проверенного private note manifest добавьте `--notes-manifest` с
+ignored input, допустимым для canonical Obsidian exporter. Это operator-only
+проверка подготовки: exporter source/revision/digest/hold/link gates выполняются
+до подсчёта. Lesson получает note count только при exact source ID/revision/hash
+совпадении с curriculum; остальные notes считаются отдельно как unmapped.
+В API/summary попадают только числа и `notes_state=PREPARED`, без note IDs,
+названий, body, source IDs, locators или reviewer. Runtime не импортирует Vault.
+
+Число 0 означает отсутствие notes для этой темы в переданном manifest, а не
+отсутствие личных заметок в Vault. `PREPARED` не означает export, private GitHub
+publication, opening smoke или полноту базы. Без manifest сохраняются
+`notes=null`/`UNSET`; stale/conflicted inputs дают отказ вместо прежнего PASS.
+Отдельные glossary terms по lessons этим флагом не классифицируются.
+
+## Backend image promotion
+
+Основной backend image собирается единожды для candidate revision в `validate-and-smoke-test`:
+`Dockerfile`, hash-locked requirements и pinned base image. PR CI проверяет build/import/package;
+только trusted `push main` публикует `backend-<SHA>` в Actions artifacts. Package содержит
+`manifest.json` и `image.tar.gz`; его identity — revision, `linux/amd64`, Docker image ID и
+SHA-256 compressed image. CI artifact retention — 7 дней, как для PWA; это не retention
+личных backups. Prod secrets, `.env`, host `data/`, `.postgres/` и private search inputs не
+входят в Dockerfile COPY или Docker context. Образ не требует нового external registry.
+
+[Backend artifact procedure](../scripts/backend_artifact.py) переиспользует exact trusted
+main CI/run/attempt selection из PWA delivery. Проверки перед SSH и после transfer:
+required jobs успешны, artifact принадлежит backend producer window, не expired,
+GitHub digest/ZIP layout/manifest/image bytes совпадают. Fork/PR artifacts не являются
+production inputs. Процедура не запускает workflow ради получения статуса.
+
+На VPS под прежним deployment lock сначала проверяются archive/digest, target
+Docker platform и loaded image ID/revision. Runtime services используют один
+`psychology-quiz-runtime:<SHA>` с разными commands и `pull_policy: never`;
+production script не вызывает `compose build` и не устанавливает dependencies.
+Отсутствующий backend artifact блокирует runtime поставку до stop/backup/migration;
+fallback к host rebuild не предусмотрен. Docs/frontend-only flow сохраняет прежний
+runtime и не требует загрузки image. Ручной старый трёхаргументный вызов для runtime
+недостаточен — штатный CD передаёт все пять аргументов.
+
+Backup/isolated restore, stateful migration, user preservation, serving parity,
+HTTP/PWA smoke и exact completion markers сохраняются. После запуска revision label
+и фактический container image ID обоих сервисов должны совпасть с проверенным CI image.
+Ошибка после миграции не запускает автоматический data rollback; действуют прежние
+forward-fix/recovery gates. GitHub protections proposal не применяется этим изменением.
+Actual Docker build, GitHub artifact provenance и VPS promotion требуют CI/CD evidence;
+адресные fake-boundary checks не заменяют живые records.
+
+## Search image build inputs
+
+[Dockerfile.search](../Dockerfile.search) использует закреплённый Python image с Debian Trixie и [подписанный Debian snapshot](../deploy/search-debian.sources). Base suite и отсутствие иных apt sources проверяются до установки `libgomp1`; неизвестный новый источник останавливает build. Historic Release expiry отключён только в этих двух snapshot stanzas, проверки подписи и archive keyring сохранены. Timestamp зафиксирован вместе с Dockerfile; обновление базового image или системных пакетов требует согласованного обновления snapshot и applicable CI build/import check. Обычный `apt-get update` не выбирает текущую версию из mutable mirror. Версии wheels и модели задаются существующими lockfiles/модельной identity; эта фиксация не разрешает установку приватного индекса или включение RAG.
+
+
+## Isolated user recovery with current content
+
+Подготовленная operator-процедура проверяет восстановление личного состояния
+из существующего verified native backup независимо от новой редакции serving
+content. Она не восстанавливает данные поверх production, не меняет `.env`,
+не переключает database target и не запускает/останавливает runtime services.
+Входной backup и его verified record остаются неизменными; private search index
+не восстанавливается и пересобирается своей отдельной процедурой.
+
+Рабочий каталог — `/opt/psychology-quiz`, environment — root VPS operator с
+известным target и текущим candidate application image. До запуска требуется
+согласованное окно с остановленными обоими writers; процедура проверяет это,
+но не останавливает их сама. После процедуры writers остаются в исходном
+состоянии. Запуск не является обычным smoke check на работающем production.
+
+`EXPECTED_SHA` — проверенный текущий checkout/candidate image; `VERIFIED_RECORD`
+— обычный приватный `record.json` внутри `.postgres/backups/` с неизменённым
+`database.dump`. Старую revision backup допускают только при совпадении
+project/database/service/cluster. Неизвестный target, неверный checksum,
+несовместимая schema или отсутствие места останавливают действие.
+
+```bash
+python3 scripts/postgres_vps.py rehearse-user-recovery   --expected-sha "$EXPECTED_SHA" --record "$VERIFIED_RECORD" </dev/null
+```
+
+Под штатным delivery lock процедура создаёт новый owned
+`psychology_restore_<random>` database и восстанавливает в него snapshot.
+Сначала exact manifest должен совпасть с backup record. Затем тот же
+проверенный candidate image выполняет canonical `scripts/init_db.py` и
+`scripts/seed_questions.py` с target override только на этот owned database.
+Publication gates не обходятся. Personal tables, identity sequences и import
+provenance сверяются с исходным snapshot; новая reading schema допускает только
+ранее рассчитанную безопасную derivation. Исходная production БД проверяется
+на неизменность независимо от восстановленного snapshot.
+
+Успех подтверждает `phase=verified` в возвращённом приватном
+`.postgres/recovery-rehearsals/rehearsal-*/record.json`; временная owned database
+удалена. Запись содержит hashes/manifests и identity, без DSN или текстов
+учебных ответов. Этот результат доказывает rehearsal на конкретной revision,
+а не разрешает реальное переключение production на старую историю.
+
+При failure не переключать production и не изменять backup. Сохранить record.
+`restore_cleanup=removed` означает cleanup подтверждённой owned копии;
+`pending` или `creation_unconfirmed_inspect_owned_name` требуют сверки точного
+имени/owner перед recovery. Не удалять database по одному совпадению prefix.
+Rehearsal не восстанавливает удалённую после backup историю автоматически;
+выбор snapshot и reconciliation более новых данных требуют отдельного решения.
+
+Validation: адресные failure/ownership tests
+`tests/test_postgres_user_recovery.py`; required native CI scenario
+`tests/postgres/test_recovery.py::test_native_restored_history_survives_current_content_rebuild`
+проверяет реальные `pg_dump`/`pg_restore`, две legacy schema revisions,
+canonical content update и сохранение attempt snapshots. Local synthetic PASS
+не заменяет native CI и фактический operator rehearsal. Retention/RPO/RTO
+остаются UNSET до решения владельца.
+
+### Unreleased lesson coverage in the owner summary
+
+From the repository root, optional `--private-topics data/<topics>.json` requires `--reviewed --private-registry data/<registry>.json`. Both inputs pass the existing private ignored-file and exact source/revision gates. Unreleased lesson names and bindings stay in operator storage; the owner client receives only total, processing counts, current metadata count and known holds. Metadata classification does not grant derivative publication or index approval. The public curriculum and published lesson rows remain authoritative.

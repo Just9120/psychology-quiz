@@ -441,7 +441,10 @@ class MiniAppFrontendContractTests(unittest.TestCase):
             '/miniapp/literature/progress',
         ):
             self.assertIn(endpoint, self.content)
-        self.assertIn("['in_progress', 'read', 'revisit', 'skipped'].forEach((readingStatus)", self.content)
+        self.assertIn("['in_progress', 'read', 'deferred'].forEach((readingStatus)", self.content)
+        self.assertIn("deferred: 'Отложено'", self.content)
+        self.assertNotIn("revisit: 'Повторить'", self.content)
+        self.assertNotIn("skipped: 'Пропущено'", self.content)
         self.assertIn("btn.setAttribute('data-reading-status', readingStatus);", self.content)
         self.assertIn("payload = { literature_id: literatureId, reading_status: readingStatus };", self.content)
         self.assertIn('Вся литература', self.content)

@@ -1,4 +1,4 @@
-import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, ResetPreview } from './types'
+import type { Account, Answer, AnswerResult, QuizState, Setup, SetupOptions, ProgressOverview, HistoryPage, AttemptPage, ErrorsPage, ResetPreview, OwnerStats, OwnerContent } from './types'
 import type { GlossaryState, GlossaryTopic } from './types'
 import type { LiteratureCatalog, ReadingState, ReadingStatus } from './types'
 import type { ReviewQueue, MasteryOverview, GoalsOverview, AchievementsOverview, GoalKind } from './types'
@@ -9,7 +9,7 @@ export class ApiError extends Error {
 }
 
 const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
-  'auth/logout', 'identity/new', 'link/start', 'link/complete', 'profile/name', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer', 'homework/catalog', 'homework/start',
+  'auth/logout', 'identity/new', 'link/start', 'link/complete', 'profile/name', 'owner/stats', 'owner/content', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer', 'homework/catalog', 'homework/start',
   'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
   'progress/review', 'progress/mastery', 'progress/goals', 'progress/achievements', 'progress/review-start', 'progress/review-glossary-start', 'progress/goal-set',
   'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart', 'literature/catalog', 'literature/progress'])
@@ -60,6 +60,8 @@ export const api = {
   linkStart: () => request<{ ok: true; code: string }>('link/start', {}),
   linkComplete: () => request('link/complete', {}),
   setDisplayName: (display_name: string) => request<{ ok: true; display_name: string | null }>('profile/name', { display_name }),
+  ownerContent: () => request<OwnerContent>('owner/content', {}),
+  ownerStats: (period: OwnerStats['period']) => request<OwnerStats>('owner/stats', { period }),
   options: () => request<{ ok: true; setup_options: SetupOptions }>('quiz/options'),
   state: () => request<QuizState>('quiz/state'),
   setup: (setup: Setup) => request<QuizState>('quiz/setup', setup),
@@ -107,6 +109,7 @@ const messages: Record<string, string> = {
   no_errors: 'Доступных ошибок уже нет. Обновите список — сохранённая история осталась на месте.',
   no_reviews: 'Сегодня нет материалов для повторения. Обновите список позже.',
   invalid_goal: 'Укажите цель целым положительным числом.',
+  invalid_period: 'Выберите период статистики заново.',
   practice_changed: 'Квиз изменился в другом окне. Восстановите актуальную попытку.',
   reset_changed: 'Прогресс изменился. Загрузите новый предварительный просмотр и подтвердите сброс заново.',
   nothing_to_reset: 'Нет попыток для сброса. Обновите предварительный просмотр.',

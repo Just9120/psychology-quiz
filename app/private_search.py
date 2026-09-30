@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 import stat
 import sys
-from time import monotonic
+from time import monotonic, process_time
 
 import psycopg
 
@@ -315,9 +315,25 @@ def embedder():
                          specific_model_path=path, local_files_only=True)
 
 
+def process_peak_rss_bytes():
+    """Process-lifetime high-water mark; unavailable platforms return unknown."""
+    try:
+        import resource
+    except ImportError:
+        return None
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    # Linux reports KiB; macOS reports bytes. Do not guess other OS units.
+    if sys.platform.startswith("linux"):
+        return int(usage * 1024)
+    if sys.platform == "darwin":
+        return int(usage)
+    return None
+
+
 def model_probe():
     """Measure local embedding startup without reading sources or connecting to DB."""
     started = monotonic()
+    cpu_started = process_time()
     vector = list(embedder().embed(["проверка поиска по учебному материалу"]))
     if len(vector) != 1:
         raise SearchError("incomplete_probe_embedding")
@@ -326,7 +342,9 @@ def model_probe():
     cache_bytes = sum(path.stat().st_size for path in cache.rglob("*")
                       if path.is_file() and not path.is_symlink()) if cache.is_dir() else 0
     return {"model": MODEL_IDENTITY, "dimensions": DIMENSIONS,
-            "elapsed_ms": round((monotonic() - started) * 1000), "cache_bytes": cache_bytes}
+            "elapsed_ms": round((monotonic() - started) * 1000), "cache_bytes": cache_bytes,
+            "process_cpu_ms": round((process_time() - cpu_started) * 1000),
+            "process_peak_rss_bytes": process_peak_rss_bytes()}
 
 
 def vector_text(value):

@@ -1,4 +1,14 @@
-# Mini App quiz runner design (historical/supporting)
+# Mini App quiz runner: current runtime and historical design
+
+## Действующий runtime
+
+[Compose](../docker-compose.yml) запускает API как `uvicorn app.miniapp_fastapi_runtime:app` в отдельном сервисе `psych_quiz_miniapp_api` на loopback port 8081. Бот запускается отдельно; `MINIAPP_LEGACY_API_ENABLED=false` отключает встроенный `ThreadingHTTPServer` в этом delivery configuration. Legacy adapter сохранён для совместимости и адресных проверок; исторические слова «current MVP» ниже относятся к первоначальной реализации и не описывают текущий deployment. Фактическая запущенная версия подтверждается только delivery records и post-checks в [процедуре поставки](miniapp-deployment-qa.md).
+
+Общие продуктовые контракты задаёт [spec](project-spec.md), запуск и hydration — [reference](miniapp_setup_hydration.md), текущую работу и gates — [plan](delivery-plan.md). Старый phased rollout FastAPI ниже завершён как изменение архитектуры; это не новая последовательность PR и не основание повторно переключать production.
+
+## Current transport resource guard
+
+Общий [request-body reader](../app/request_body.py) задаёт прежний PWA wire limit 16 KiB и применяется также к POST Mini App ASGI, включая simple-body initData envelope. Chunk превышения не копируется в аккумулятор; оставшийся stream не читается. Oversize даёт JSON 413/body_too_large до auth/domain/DB dispatch с обычными no-store и разрешёнными CORS headers. Допустимый header-auth и simple-body protocol сохраняется; это ограничение transport buffering, не размер ответа, вопроса или учебного корпуса. Сохраняемый [legacy HTTP adapter](../app/miniapp_api.py) отвергает malformed/ambiguous длину и неподдерживаемый transfer framing до чтения, закрывая соединение с JSON 400; oversize — 413. Reverse-proxy/infrastructure capacity отдельно проверяется по deployment records и не выводится из этих tests.
 
 ## Status and scope
 - Document type: **historical/supporting design + implemented architecture summary**.

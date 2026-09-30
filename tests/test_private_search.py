@@ -280,6 +280,10 @@ def test_model_probe_reports_only_local_resource_evidence(monkeypatch, tmp_path)
     result = model_probe()
     assert result["dimensions"] == 384 and result["cache_bytes"] == 9
     assert result["elapsed_ms"] >= 0
+    assert result["process_cpu_ms"] >= 0
+    assert result["process_peak_rss_bytes"] is None or result["process_peak_rss_bytes"] > 0
+    assert set(result) == {"model", "dimensions", "elapsed_ms", "cache_bytes",
+                           "process_cpu_ms", "process_peak_rss_bytes"}
 
 
 def test_private_hybrid_qa_requires_exact_top_source_revision(monkeypatch, tmp_path):
@@ -329,3 +333,18 @@ def test_private_benchmark_reports_only_aggregate_and_fails_on_wrong_revision(mo
         {"source_id": source, "snapshot_sha256": "b" * 64}])
     with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
         benchmark_retrieval(Connection(), cases, object())
+
+
+def test_probe_peak_memory_units_and_unavailable_platform(monkeypatch):
+    from types import SimpleNamespace
+    from app import private_search
+    fake = SimpleNamespace(RUSAGE_SELF=0, getrusage=lambda _: SimpleNamespace(ru_maxrss=123))
+    monkeypatch.setitem(private_search.sys.modules, "resource", fake)
+    monkeypatch.setattr(private_search.sys, "platform", "linux")
+    assert private_search.process_peak_rss_bytes() == 123 * 1024
+    monkeypatch.setattr(private_search.sys, "platform", "darwin")
+    assert private_search.process_peak_rss_bytes() == 123
+    monkeypatch.setattr(private_search.sys, "platform", "unsupported")
+    assert private_search.process_peak_rss_bytes() is None
+    monkeypatch.setitem(private_search.sys.modules, "resource", None)
+    assert private_search.process_peak_rss_bytes() is None

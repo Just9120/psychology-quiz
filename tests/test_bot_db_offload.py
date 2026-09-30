@@ -31,16 +31,31 @@ class BotDbOffloadTests(unittest.TestCase):
             if func.__name__ == '_load_ui_context':
                 return ([{'id': 1, 'name': 'Cat'}], None)
             if func.__name__ == '_load_stats':
-                return {'total_users': 0, 'new_users_24h': 0, 'new_users_7d': 0, 'new_users_30d': 0, 'active_users_24h': 0, 'active_users_7d': 0, 'active_users_30d': 0, 'total_quiz_sessions': 0, 'completed_quiz_sessions': 0, 'in_progress_quiz_sessions': 0, 'total_quiz_answers': 0, 'total_approved_questions': 0, 'active_categories_count': 0, 'questions_by_category': [], 'top_categories_30d': []}
+                return {'period': '7d', 'active_users': 0, 'quiz_started': 0, 'quiz_completed': 0,
+                        'quiz_answers': 0, 'glossary_started': 0, 'glossary_completed': 0,
+                        'reading_items_updated': 0}
             return 'normal'
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.quiz_command(update_quiz, context))
             asyncio.run(main.ui_command(update_ui, context))
             asyncio.run(main.stats_command(update_stats, context))
             asyncio.run(main.reading_mode_button_handler(update_mode, context))
 
         self.assertGreaterEqual(len(calls), 4)
+
+    def test_stats_period_rejects_other_actor_and_invalid_window(self):
+        context = self._context()
+        context.args = ['all']
+        update = SimpleNamespace(effective_chat=SimpleNamespace(type='private'),
+                                 effective_user=SimpleNamespace(id=1),
+                                 message=SimpleNamespace(reply_text=AsyncMock()))
+        asyncio.run(main.stats_command(update, context))
+        self.assertIn('/stats 7d', update.message.reply_text.await_args.args[0])
+        update.effective_user.id = 2
+        context.args = ['7d']
+        asyncio.run(main.stats_command(update, context))
+        self.assertEqual('Недоступно', update.message.reply_text.await_args.args[0])
 
 
     def test_quiz_command_explains_modes_and_preserves_callback_buttons(self):
@@ -54,7 +69,7 @@ class BotDbOffloadTests(unittest.TestCase):
             self.assertEqual('_load_categories', func.__name__)
             return ([{'id': 1, 'name': 'Cat'}], None)
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.quiz_command(update, context))
 
         text = update.message.reply_text.call_args.args[0]
@@ -81,7 +96,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 'reading_mode': 'normal',
             }
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task) as mocked:
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task) as mocked:
             result = asyncio.run(main.send_current_question_to_chat(chat, settings, 1))
         self.assertTrue(result)
         self.assertTrue(mocked.called)
@@ -100,7 +115,7 @@ class BotDbOffloadTests(unittest.TestCase):
         async def fake_run_db_task_answer(func, *args, **kwargs):
             return {'status': 'accepted_next', 'next_url': None}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task_answer) as mocked:
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task_answer) as mocked:
             asyncio.run(main.web_app_data_handler(update, context))
         self.assertTrue(mocked.called)
 
@@ -110,7 +125,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 return {'status': 'ok', 'runner_state': {'state': 'setup'}, 'active_categories': [{'id': 1, 'name': 'Cat'}]}
             return None
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task_setup) as mocked:
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task_setup) as mocked:
             asyncio.run(main.web_app_data_handler(update, context))
         self.assertTrue(mocked.called)
 
@@ -131,9 +146,9 @@ class BotDbOffloadTests(unittest.TestCase):
                 return {'status': 'ok'}
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task) as mocked, \
-             patch('app.main.remove_main_menu_for_active_quiz', new=AsyncMock()), \
-             patch('app.main.send_current_question', new=AsyncMock()):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task) as mocked, \
+             patch('app.classic_quiz_handlers.remove_main_menu_for_active_quiz', new=AsyncMock()), \
+             patch('app.classic_quiz_handlers.send_current_question', new=AsyncMock()):
             asyncio.run(main.difficulty_mode_callback(update, context))
 
             mix_query = SimpleNamespace(data='mixsel:reset', answer=AsyncMock(), edit_message_text=AsyncMock())
@@ -166,7 +181,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 'options': [{'option_index': 0, 'option_text': 'sensitive option'}],
             }
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task), \
              patch('app.main.logger.info') as info_log:
             asyncio.run(main.classic_reply_text_answer_handler(update, context))
 
@@ -216,7 +231,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 }
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task), patch('app.main.logger.info') as info_log:
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task), patch('app.main.logger.info') as info_log:
             asyncio.run(main.quiz_command(update_quiz, context))
             asyncio.run(main.answer_callback(update_answer, context))
 
@@ -259,7 +274,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 }
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task), \
              patch('app.main.logger.info') as info_log:
             asyncio.run(main.update_ingress_logger(callback_update, context))
             asyncio.run(main.update_ingress_logger(message_update, context))
@@ -325,8 +340,8 @@ class BotDbOffloadTests(unittest.TestCase):
                 return {'status': 'ok'}
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
-             patch('app.main.send_current_question', new=AsyncMock()), \
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task), \
+             patch('app.classic_quiz_handlers.send_current_question', new=AsyncMock()), \
              patch('app.main.logger.info') as info_log:
             asyncio.run(main.answer_callback(answer_update, context))
             context.user_data['_callback_in_progress'] = set()
@@ -376,8 +391,8 @@ class BotDbOffloadTests(unittest.TestCase):
                 return {'status': 'ok'}
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task), \
-             patch('app.main.send_current_question', new=AsyncMock()):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task), \
+             patch('app.classic_quiz_handlers.send_current_question', new=AsyncMock()):
             context.user_data['_callback_in_progress'] = {'answer:1:1'}
             asyncio.run(main.answer_callback(repeated_answer_update, context))
             repeated_answer_query.answer.assert_awaited_once_with("Ответ уже обрабатывается…", cache_time=1)
@@ -409,7 +424,7 @@ class BotDbOffloadTests(unittest.TestCase):
                     'reading_mode': 'normal', 'is_last_question': False,
                     'finalized': None}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.answer_callback(update, context))
         self.assertIn('Сохранённое пояснение', query.edit_message_text.call_args.args[0])
         self.assertIn('Сохранённый выбранный вариант', query.edit_message_text.call_args.args[0])
@@ -435,11 +450,11 @@ class BotDbOffloadTests(unittest.TestCase):
                 return {'status': 'missing'}
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task_answer):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task_answer):
             asyncio.run(main.answer_callback(answer_update, context))
         self.assertNotIn('answer:1:1', context.user_data.get('_callback_in_progress', set()))
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task_next):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task_next):
             asyncio.run(main.next_callback(next_update, context))
         self.assertNotIn('next:1', context.user_data.get('_callback_in_progress', set()))
 
@@ -461,7 +476,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 }
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_answer_db):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_answer_db):
             asyncio.run(main.answer_callback(answer_update, context))
 
         next_query = SimpleNamespace(data='next:1', answer=AsyncMock(), edit_message_text=AsyncMock())
@@ -473,7 +488,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 return {'status': 'missing'}
             return {'status': 'ok'}
 
-        with patch('app.main._run_db_task', side_effect=fake_next_db):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_next_db):
             asyncio.run(main.next_callback(next_update, context))
 
     def test_answer_and_next_latency_logs_split_telegram_api_timings(self):
@@ -499,9 +514,9 @@ class BotDbOffloadTests(unittest.TestCase):
             return {'status': 'ok'}
 
         with patch('app.main.logger.info') as info_log:
-            with patch('app.main._run_db_task', side_effect=fake_answer_db):
+            with patch('app.bot_runtime.run_db_task', side_effect=fake_answer_db):
                 asyncio.run(main.answer_callback(answer_update, context))
-            with patch('app.main._run_db_task', side_effect=fake_next_db):
+            with patch('app.bot_runtime.run_db_task', side_effect=fake_next_db):
                 asyncio.run(main.next_callback(next_update, context))
 
         logged = " ".join(str(call.args[2]) for call in info_log.call_args_list if len(call.args) >= 3 and call.args[0] == "%s %s")
@@ -548,7 +563,7 @@ class BotDbOffloadTests(unittest.TestCase):
         async def slow_reply(*args, **kwargs):
             await asyncio.sleep(0.01)
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task),              patch('app.main.remove_main_menu_for_active_quiz', new=AsyncMock(side_effect=slow_reply)),              patch('app.main.send_current_question', new=AsyncMock(side_effect=slow_reply)),              patch('app.main.send_quiz_result_with_main_menu', new=AsyncMock(side_effect=slow_reply)),              patch('app.main.logger.info') as info_log:
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task),              patch('app.classic_quiz_handlers.remove_main_menu_for_active_quiz', new=AsyncMock(side_effect=slow_reply)),              patch('app.classic_quiz_handlers.send_current_question', new=AsyncMock(side_effect=slow_reply)),              patch('app.classic_quiz_handlers.send_quiz_result_with_main_menu', new=AsyncMock(side_effect=slow_reply)),              patch('app.main.logger.info') as info_log:
             asyncio.run(main.difficulty_mode_selected_mix_callback(mix_update, context))
             asyncio.run(main.answer_callback(answer_update, context))
 
@@ -606,7 +621,7 @@ class BotDbOffloadTests(unittest.TestCase):
         async def fake_run_db_task(func, *args, **kwargs):
             return 'normal'
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.reading_mode_button_handler(update, context))
 
         message.reply_text.assert_awaited_once()
@@ -648,7 +663,7 @@ class BotDbOffloadTests(unittest.TestCase):
         bionic_query = SimpleNamespace(data='readingmode:set:bionic', answer=AsyncMock(), edit_message_text=AsyncMock())
         normal_query = SimpleNamespace(data='readingmode:set:normal', answer=AsyncMock(), edit_message_text=AsyncMock())
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.reading_mode_callback(SimpleNamespace(callback_query=bionic_query, effective_user=user), context))
             asyncio.run(main.reading_mode_callback(SimpleNamespace(callback_query=normal_query, effective_user=user), context))
 
@@ -669,7 +684,7 @@ class BotDbOffloadTests(unittest.TestCase):
         async def fake_run_db_task(func, *args, **kwargs):
             return 'bionic'
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.reading_mode_callback(SimpleNamespace(callback_query=query, effective_user=user), context))
 
         text = query.edit_message_text.call_args.args[0]
@@ -718,7 +733,7 @@ class BotDbOffloadTests(unittest.TestCase):
                 return 'normal'
             return None
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task), patch('app.main.logger.info') as info_log:
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task), patch('app.main.logger.info') as info_log:
             asyncio.run(main.reading_mode_callback(menu_update, context))
             asyncio.run(main.reading_mode_callback(set_update, context))
 
@@ -737,7 +752,7 @@ class BotDbOffloadTests(unittest.TestCase):
         async def fake_run_db_task(func, *args, **kwargs):
             return categories
 
-        with patch('app.main._run_db_task', side_effect=fake_run_db_task):
+        with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             single_query = SimpleNamespace(data='qzmode:single', answer=AsyncMock(), edit_message_text=AsyncMock())
             single_update = SimpleNamespace(callback_query=single_query, effective_user=SimpleNamespace(id=1))
             asyncio.run(main.quiz_mode_callback(single_update, context))

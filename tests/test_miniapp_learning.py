@@ -14,11 +14,44 @@ from tests.test_case_content import CASE
 from tests.test_miniapp_api import _make_init_data
 from tests.test_web_auth import EMAIL, post, web
 from tests.test_web_literature import linked
+from app.privacy_schema import migrate_privacy_schema
 
 
 def _headers(user_id=42):
     token = _make_init_data(TOKEN, {"id": user_id, "first_name": "Synthetic"})
     return {"Authorization": f"tma {token}"}
+
+
+def test_deletion_requires_verified_telegram_actor_and_two_steps(web):
+    with closing(get_connection(str(web.db))) as conn, conn:
+        migrate_privacy_schema(conn)
+    route = "/miniapp/learning/delete-prepare"
+    assert web.client.post(route, json={}).status_code == 401
+    prepared = web.client.post(route, json={}, headers=_headers(777))
+    assert prepared.status_code == 200
+    token = prepared.json()["confirmation_token"]
+    with closing(get_connection(str(web.db))) as conn, conn:
+        conn.execute("INSERT INTO quiz_sessions(user_id,status,score,total_questions) VALUES(2,'finished',0,0)")
+        conn.execute("INSERT INTO quiz_sessions(user_id,status,score,total_questions) VALUES(1,'finished',0,0)")
+    confirm = "/miniapp/learning/delete-confirm"
+    assert web.client.post(confirm, json={"confirmation_token": token}, headers=_headers()).status_code == 400
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute("SELECT count(*) FROM quiz_sessions WHERE user_id=2").fetchone()[0] == 1
+    assert web.client.post(confirm, json={"confirmation_token": token}, headers=_headers(777)).status_code == 200
+    assert web.client.post(confirm, json={"confirmation_token": token}, headers=_headers(777)).status_code == 400
+    with closing(get_connection(str(web.db))) as conn:
+        assert conn.execute("SELECT count(*) FROM quiz_sessions WHERE user_id=2").fetchone()[0] == 0
+        assert conn.execute("SELECT count(*) FROM quiz_sessions WHERE user_id=1").fetchone()[0] == 1
+        assert conn.execute("SELECT count(*) FROM users WHERE telegram_user_id=777").fetchone()[0] == 1
+
+
+def test_deletion_refuses_linked_owner_account(web):
+    with closing(get_connection(str(web.db))) as conn, conn:
+        migrate_privacy_schema(conn)
+        conn.execute("""INSERT INTO web_accounts(email,password_hash,user_id,verified_at,created_at)
+            VALUES(?,?,?,?,?)""", (EMAIL, "synthetic-unused", 1, 1, 1))
+    response = web.client.post("/miniapp/learning/delete-prepare", json={}, headers=_headers())
+    assert response.status_code == 400 and response.json()["error"] == "linked_owner_requires_separate_flow"
 
 
 def test_learning_routes_accept_verified_telegram_users(web):
@@ -94,6 +127,12 @@ def test_linked_owner_quiz_review_goals_and_literature_are_private_across_client
     assert goal.status_code == 200
     assert web.client.get("/web/progress/goals").json()["goals"][0]["weekly_target"] == 2
     assert web.client.get("/miniapp/learning/goals", headers=other).json()["goals"][0]["weekly_target"] is None
+    # Use a real published work: an unknown preserved legacy ID is not a current reading state.
+    from app.literature import load_literature_items
+    from app.literature_service import save_progress
+    item = load_literature_items()[0]
+    with closing(get_connection(str(web.db))) as conn, conn:
+        save_progress(conn, 1, item["id"], "in_progress", None)
     assert web.client.get("/miniapp/literature/state", headers=owner).json()["literature_state"]
     assert web.client.get("/miniapp/literature/state", headers=other).json()["literature_state"] == []
     # Materialized awards are private too; award eligibility is tested separately.

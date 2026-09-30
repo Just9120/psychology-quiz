@@ -1,24 +1,29 @@
 from __future__ import annotations
 
 from contextlib import closing
+from app import bot_runtime
+from app.bot_menu import (
+    START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
+    get_main_menu_keyboard,
+)
 from app.payload_validation import valid_quiz_setup
+from app.quiz_text import (
+    option_index_to_label, apply_bionic_reading,
+    render_reading_mode_text, _safe_callback_session_id,
+)
 
-from html import escape
 import random
 import json
 import logging
 import re
 import urllib.parse
 import threading
-import asyncio
 import time
 
 from telegram import (
     BotCommand,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
-    KeyboardButton,
-    ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
     Update,
 )
@@ -33,6 +38,7 @@ from telegram.ext import (
 )
 
 from app.config import load_settings
+from app.owner_stats import get_owner_period_stats
 from app.web_link_handlers import link_command, confirm_link_callback
 from app.logging_config import configure_app_logging
 from app.handler_latency import HandlerLatency as _HandlerLatency
@@ -52,6 +58,7 @@ from app.glossary_handlers import (
 )
 from app.literature_chat import literature_command, literature_callback
 from app.homework_chat import BUTTON_TEXT as HOMEWORK_BUTTON_TEXT, homework_command, homework_callback
+from app.privacy_chat import delete_data_command, confirm_delete_data_command
 from app.db import (
     abandon_in_progress_sessions_for_user,
     create_or_load_user,
@@ -64,7 +71,6 @@ from app.db import (
     get_question_options,
     get_quiz_session,
     get_selected_categories_for_session,
-    get_owner_stats,
     init_db_connection,
     select_random_approved_question_ids_across_active_categories,
     select_random_approved_question_ids_by_category,
@@ -83,13 +89,20 @@ from app.miniapp_context import (
     build_miniapp_url_with_fallback,
 )
 from app.glossary import GLOSSARY_QUIZ_SESSION_KEY
-from app.classic_quiz_handlers import (
+from app.classic_quiz_view import (
     build_quiz_mode_keyboard,
     build_difficulty_keyboard,
     build_category_keyboard,
     build_quiz_finished_text,
     build_selected_mix_keyboard,
     build_question_count_keyboard,
+    build_classic_answer_reply_keyboard,
+    build_classic_reply_feedback_text,
+    build_question_text_with_options,
+    build_classic_next_reply_keyboard,
+    parse_classic_reply_answer_number,
+)
+from app.classic_quiz_handlers import (
     _classic_reply_mode_enabled,
     _safe_classic_text_log_fields,
     _classic_text_latency_bucket,
@@ -97,8 +110,6 @@ from app.classic_quiz_handlers import (
     _load_classic_text_answer_context,
     _handle_classic_text_answer_db,
     answer_callback,
-    build_classic_answer_reply_keyboard,
-    build_classic_reply_feedback_text,
     start_mix_quiz,
     show_finished_quiz_message,
     send_quiz_result_with_main_menu,
@@ -107,8 +118,6 @@ from app.classic_quiz_handlers import (
     send_current_question,
     restore_main_menu_after_quiz,
     remove_main_menu_for_active_quiz,
-    build_question_text_with_options,
-    build_classic_next_reply_keyboard,
     claim_quiz_replacement,
     category_callback,
     classic_reply_text_answer_handler,
@@ -118,7 +127,6 @@ from app.classic_quiz_handlers import (
     difficulty_mode_selected_mix_callback,
     mix_selection_callback,
     next_callback,
-    parse_classic_reply_answer_number,
     question_count_callback,
     question_count_mix_callback,
     question_count_selected_mix_callback,
@@ -132,17 +140,16 @@ from app.classic_quiz_handlers import (
 
 logger = logging.getLogger(__name__)
 
-START_QUIZ_BUTTON_TEXT = "🎯 Начать"
-READING_MODE_BUTTON_TEXT = "👁 Чтение"
-GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
-LITERATURE_BUTTON_TEXT = "📖 Литература"
 TELEGRAM_PRIVACY_POLICY_URL = "https://telegram.org/privacy-tpa"
+PRIVACY_CONTACT_EMAIL = "Just9119@gmail.com"
+AGE_NOTICE = "Учебный бот и Mini App предназначены для пользователей от 18 лет."
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
 READING_MODE_BUTTON_ALIASES = (READING_MODE_BUTTON_TEXT, LEGACY_READING_MODE_BUTTON_TEXT)
 GLOSSARY_BUTTON_ALIASES = (GLOSSARY_BUTTON_TEXT, "Глоссарий")
 HELP_TEXT = (
+    f"{AGE_NOTICE}\n\n"
     "Что можно сделать:\n"
     "\n"
     f"{START_QUIZ_BUTTON_TEXT} — пройти викторину прямо в чате.\n"
@@ -160,17 +167,16 @@ HELP_TEXT = (
     "/literature — открыть личный список чтения\n"
     "/homework — открыть тесты домашних заданий\n"
     "/privacy — политика конфиденциальности Telegram для ботов и Mini App\n"
+    "/delete_data — удалить мои учебные данные после повторного подтверждения\n"
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
-HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
 CLASSIC_REPLY_NEXT_TEXT = "Далее"
 CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
 READING_MODE_LABELS = {
     "normal": "Обычный",
     "bionic": "Бионическое чтение",
 }
-WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)")
 MAX_WEBAPP_DATA_BYTES = 4096
 UPDATE_INGRESS_LOG_PREFIX = "bot_update_ingress"
 UPDATE_INGRESS_HANDLER_GROUP = -100
@@ -250,21 +256,8 @@ def register_update_ingress_handler(application: Application) -> None:
     )
 
 
-def _safe_callback_session_id(data: str, expected_prefix: str) -> int | None:
-    parts = data.split(":", 2)
-    if len(parts) < 2 or parts[0] != expected_prefix:
-        return None
-    try:
-        return int(parts[1])
-    except ValueError:
-        return None
-
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call, api_kind: str | None = None):
-    started_at = time.perf_counter()
-    result = await call
-    if latency is not None:
-        latency.add_telegram_api(started_at, api_kind=api_kind)
-    return result
+    return await bot_runtime.timed_telegram_api_call(latency, call, api_kind=api_kind)
 
 
 def _mark_repeated_tap(latency: _HandlerLatency) -> None:
@@ -275,59 +268,6 @@ def _mark_repeated_tap(latency: _HandlerLatency) -> None:
 def _mark_stale_callback(latency: _HandlerLatency) -> None:
     latency.set_status("ignored_stale_callback")
     latency.add_field("stale_callback", True)
-
-
-def option_index_to_label(option_index: int) -> str:
-    if option_index < 0:
-        raise ValueError("option_index must be non-negative")
-
-    label = ""
-    current_index = option_index
-    while True:
-        current_index, remainder = divmod(current_index, 26)
-        label = chr(ord("A") + remainder) + label
-        if current_index == 0:
-            break
-        current_index -= 1
-    return label
-
-
-def apply_bionic_reading(text: str) -> str:
-    rendered_parts: list[str] = []
-    for chunk in re.split(r"(\s+)", text):
-        if not chunk:
-            continue
-        if chunk.isspace():
-            rendered_parts.append(chunk)
-            continue
-        for part in WORD_RE.findall(chunk):
-            if not part:
-                continue
-            if not re.fullmatch(r"[0-9A-Za-zА-Яа-яЁё]+", part):
-                rendered_parts.append(escape(part))
-                continue
-            if len(part) <= 3:
-                rendered_parts.append(escape(part))
-                continue
-
-            part_length = len(part)
-            if part_length <= 5:
-                bold_len = 1
-            elif part_length <= 9:
-                bold_len = 2
-            else:
-                bold_len = 3
-            prefix = escape(part[:bold_len])
-            suffix = escape(part[bold_len:])
-            rendered_parts.append(f"<b>{prefix}</b>{suffix}")
-
-    return "".join(rendered_parts)
-
-
-def render_reading_mode_text(text: str, mode: str) -> str:
-    if mode == "bionic":
-        return apply_bionic_reading(text)
-    return escape(text)
 
 
 def format_reading_mode_screen(current_mode: str) -> str:
@@ -374,13 +314,14 @@ async def post_init(application: Application) -> None:
             BotCommand("glossary", "Открыть глоссарий"),
             BotCommand("literature", "Список чтения"),
             BotCommand("privacy", "Политика конфиденциальности"),
+            BotCommand("delete_data", "Удалить мои учебные данные"),
             BotCommand("pwa", "Веб-приложение"),
         ]
     )
 
 
 async def _run_db_task(func, *args, **kwargs):
-    return await asyncio.to_thread(func, *args, **kwargs)
+    return await bot_runtime.run_db_task(func, *args, **kwargs)
 
 
 def build_post_setup_miniapp_prompt(
@@ -405,8 +346,7 @@ def build_post_setup_miniapp_prompt(
 
 
 async def safe_reply(update: Update, text: str) -> None:
-    if update.message:
-        await update.message.reply_text(text)
+    await bot_runtime.safe_reply(update, text)
 
 
 def is_private_chat(update: Update) -> bool:
@@ -417,18 +357,6 @@ def build_menu_button_regex(*labels: str) -> str:
     return rf"^({'|'.join(re.escape(label) for label in labels)})$"
 
 
-def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
-            [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
-            [KeyboardButton(LITERATURE_BUTTON_TEXT), KeyboardButton(HOMEWORK_BUTTON_TEXT)],
-            [KeyboardButton("ℹ️ Помощь")],
-            [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
-        ],
-        resize_keyboard=True,
-        is_persistent=True,
-    )
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -439,6 +367,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     context.user_data.pop(CLASSIC_REPLY_STATE_KEY, None)
     message_text = (
         "Привет! Я учебный бот-викторина по психологии.\n"
+        f"{AGE_NOTICE}\n"
         "\n"
         "Можно пройти викторину двумя способами:\n"
         "🎯 В чате — быстрый классический режим.\n"
@@ -530,8 +459,16 @@ async def privacy_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     del context
     await safe_reply(
         update,
+        "Чтобы сохранять ваше обучение, приложение хранит идентификатор Telegram, "
+        "переданные Telegram имя и username, ответы и попытки, отметки книг, цели, "
+        "достижения и историю повторений. Почта и пароль для Telegram не нужны.\n\n"
+        "Удаление учебной истории: /delete_data, затем повторное подтверждение. "
+        "Аккаунт Telegram не удаляется. Идентификатор и переданное имя сохраняются для работы бота. "
+        "Удаление общей истории аккаунта владельца PWA здесь недоступно. Команда не удаляет сообщения Telegram "
+        "и ранее созданные резервные копии.\n\n"
         "Стандартная политика конфиденциальности Telegram для ботов и Mini App:\n"
-        f"{TELEGRAM_PRIVACY_POLICY_URL}",
+        f"{TELEGRAM_PRIVACY_POLICY_URL}\n\n"
+        f"По вопросам копии или исправления учебных данных: {PRIVACY_CONTACT_EMAIL}",
     )
 
 
@@ -540,55 +477,16 @@ async def ping_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await safe_reply(update, "Бот на связи ✅")
 
 
-def format_owner_stats_text(stats: dict) -> str:
-    lines = [
-        "📊 Статистика бота",
-        "",
-        f"Пользователи всего: {stats['total_users']}",
-        (
-            "Новые пользователи: "
-            f"24ч — {stats['new_users_24h']}, "
-            f"7д — {stats['new_users_7d']}, "
-            f"30д — {stats['new_users_30d']}"
-        ),
-        (
-            "Активные пользователи: "
-            f"24ч — {stats['active_users_24h']}, "
-            f"7д — {stats['active_users_7d']}, "
-            f"30д — {stats['active_users_30d']}"
-        ),
-        "",
-        f"Сессии всего: {stats['total_quiz_sessions']}",
-        f"Сессии завершено: {stats['completed_quiz_sessions']}",
-        f"Сессии в процессе: {stats['in_progress_quiz_sessions']}",
-        f"Ответов всего: {stats['total_quiz_answers']}",
-        "",
-        f"Одобренных вопросов: {stats['total_approved_questions']}",
-        f"Активных категорий: {stats['active_categories_count']}",
-        "",
-        "Вопросы по категориям:",
-    ]
-
-    questions_by_category = stats.get("questions_by_category", [])
-    if questions_by_category:
-        lines.extend(
-            f"• {item['category_name']}: {item['question_count']}"
-            for item in questions_by_category
-        )
-    else:
-        lines.append("• Нет данных")
-
-    lines.extend(["", "Топ-5 категорий по начатым сессиям (30 дней):"])
-    top_categories = stats.get("top_categories_30d", [])
-    if top_categories:
-        lines.extend(
-            f"• {item['category_name']}: {item['started_sessions']}"
-            for item in top_categories
-        )
-    else:
-        lines.append("• Нет данных")
-
-    return "\n".join(lines)
+def format_owner_period_stats_text(stats: dict) -> str:
+    return "\n".join((
+        f"📊 Учебная активность за {stats['period']}",
+        f"Активных пользователей: {stats['active_users']}",
+        f"Квизов начато: {stats['quiz_started']}, завершено: {stats['quiz_completed']}",
+        f"Ответов на вопросы: {stats['quiz_answers']}",
+        f"Глоссарий: начато {stats['glossary_started']}, завершено {stats['glossary_completed']}",
+        f"Обновлено книжных отметок: {stats['reading_items_updated']}",
+        "Другой период: /stats 24h, /stats 7d или /stats 30d",
+    ))
 
 
 async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -604,12 +502,18 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await safe_reply(update, "Недоступно")
         return
 
+    args = getattr(context, "args", None) or []
+    period = args[0] if len(args) == 1 else "7d" if not args else None
+    if period not in {"24h", "7d", "30d"}:
+        await safe_reply(update, "Выберите период: /stats 24h, /stats 7d или /stats 30d")
+        return
+
     def _load_stats():
         with closing(get_connection(settings.db_path)) as conn, conn:
-            return get_owner_stats(conn)
+            return get_owner_period_stats(conn, period)
 
     stats = await _run_db_task(_load_stats)
-    await safe_reply(update, format_owner_stats_text(stats))
+    await safe_reply(update, format_owner_period_stats_text(stats))
 
 
 def _parse_miniapp_answer_payload(payload: dict) -> tuple[int, int, int] | None:
@@ -1006,6 +910,8 @@ def main() -> None:
     application.add_handler(CallbackQueryHandler(confirm_link_callback, pattern=r"^pwa_link:"))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("privacy", privacy_command))
+    application.add_handler(CommandHandler("delete_data", delete_data_command))
+    application.add_handler(CommandHandler("delete_data_confirm", confirm_delete_data_command))
     application.add_handler(CommandHandler("ping", ping_command))
     application.add_handler(CommandHandler("quiz", quiz_command))
     application.add_handler(CommandHandler("homework", homework_command))

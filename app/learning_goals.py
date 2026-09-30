@@ -43,7 +43,7 @@ def overview(conn, actor: int, *, now: datetime | None = None) -> dict:
         "review": conn.execute("""SELECT count(*) FROM user_review_events
             WHERE user_id=? AND answered_at>=? AND answered_at<?""",
             (actor, lower, upper)).fetchone()[0],
-        "reading": conn.execute("""SELECT count(*) FROM user_literature_progress
+        "reading": conn.execute("""SELECT count(*) FROM user_literature_work_progress
             WHERE user_id=? AND reading_status='read' AND completed_at>=? AND completed_at<?""",
             (actor, lower, upper)).fetchone()[0],
     }

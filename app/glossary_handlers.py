@@ -4,11 +4,15 @@ from contextvars import ContextVar
 from functools import wraps
 import time
 from app.handler_latency import HandlerLatency
+from app.bot_menu import (
+    START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
+    get_main_menu_keyboard,
+)
 from html import escape
 import logging
 from types import SimpleNamespace
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 from app import glossary_service as service
 from app.database import DATABASE_ERRORS
@@ -19,15 +23,9 @@ from app.glossary import (
     format_glossary_count_text, format_glossary_question_text, format_glossary_result_text,
     format_glossary_topics_text, load_glossary_entries, topic_title,
 )
-from app.miniapp_entrypoint_handlers import MINI_APP_BUTTON_TEXT
 from app.miniapp_glossary import run
 
 logger = logging.getLogger(__name__)
-START_QUIZ_BUTTON_TEXT = '🎯 Начать'
-READING_MODE_BUTTON_TEXT = '👁 Чтение'
-GLOSSARY_BUTTON_TEXT = '📚 Глоссарий'
-LITERATURE_BUTTON_TEXT = '📖 Литература'
-HIDE_MENU_BUTTON_TEXT = '🙈 Скрыть меню'
 CLASSIC_REPLY_NEXT_TEXT = 'Далее'
 CLASSIC_REPLY_STATE_KEY = 'classic_reply_keyboard_state'
 
@@ -61,13 +59,6 @@ async def _reply(message, *args, **kwargs):
             _latency.get().add_telegram_api(start, api_kind='message_send')
 
 
-def get_main_menu_keyboard():
-    return ReplyKeyboardMarkup([
-        [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
-        [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
-        [KeyboardButton(LITERATURE_BUTTON_TEXT)],
-        [KeyboardButton('ℹ️ Помощь')], [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
-    ], resize_keyboard=True, is_persistent=True)
 
 
 async def _operation(update, context, operation, *args, **kwargs):
