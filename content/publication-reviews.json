@@ -1153,7 +1153,7 @@
     },
     "literature:lit_d9803abbb663e67c": {
       "decision": "approved",
-      "item_sha256": "20f37dd3e95f2de58a0c904780af675cee8d680bb464a125d1f9f1cbac9f27de",
+      "item_sha256": "d7e351c8f3be84035404db991736ef95e0f0533b101f8b9b2fcd823a7bf175d5",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1164,7 +1164,14 @@
           "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
           "locator": "Пункт 6: Видеокурс по общей психологии"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://fdomgppu.ru/node/33388",
+        "evidence_scope": "Direct MGPPU faculty course plan and official MSU faculty channel confirm general-psychology video lectures, beginning with science introduction. Course playlist edition/availability and full viewing not verified; no duration or year assigned.",
+        "prerequisites": "Agent sequence: selected introductory lecture first; video course and experiment textbook are parallel supplementary branches, not mandatory prerequisites for case-study papers."
+      }
     },
     "literature:lit_c0537b6dc885ea1f": {
       "decision": "approved",
@@ -1183,7 +1190,7 @@
     },
     "literature:lit_6190d3b37fdeeab5": {
       "decision": "approved",
-      "item_sha256": "00a9df206bc3883990d12559b0f1241d2206a72b6968492bdad6dcc58f6bcfac",
+      "item_sha256": "0206614a05bdf507d5e067e523c17aedd01962bed0e6772aa6929ccfdb3effe8",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1200,7 +1207,8 @@
         "origin": "agent",
         "publisher_description": "https://psyjournals.ru/journals/cpp/archive/2009_n1/Busigina",
         "evidence_scope": "Existing course recommendation and first-party journal abstract support methodology-before-example sequencing. Metadata and abstract checked; no clinical recommendation, measured reading difficulty, or full course-corpus review. Original bibliography/source snapshot/work identity retained despite recorded discrepancy.",
-        "prerequisites": "No named book prerequisite for methodology; applied example follows the methodology article."
+        "prerequisites": "No named book prerequisite for methodology; applied example follows the methodology article.",
+        "sequence": "Selected introductory lecture before methodology article, then applied case studies; agent inference from explicit course purposes, not teacher priority."
       },
       "metadata_reconciliation": {
         "reviewed_at": "2026-09-30",
@@ -1226,7 +1234,7 @@
     },
     "literature:lit_2d2ab1a9e58aaa66": {
       "decision": "approved",
-      "item_sha256": "86fd7917b9d6dff51f1b5320871b7b6ea13b9b8fd5aa01a84a7aeb350a2cdaff",
+      "item_sha256": "baa361bc1d0a8065ad59842220b27fc289d6015871be9052c07a7d9a1ea1bed4",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1237,7 +1245,14 @@
           "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
           "locator": "Позиция 4: Основы психологического эксперимента"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=260653&lang=Ru&page=Book",
+        "evidence_scope": "Course explicitly identifies experiment principles and varieties. Indexed URSS description identifies experimental-methodology teaching purpose; direct fetch failed robots encoding check. Library metadata supports university textbook status. Full text and exact course edition/year not verified.",
+        "prerequisites": "Agent sequence: selected introductory lecture first; video course and experiment textbook are parallel supplementary branches, not mandatory prerequisites for case-study papers."
+      }
     },
     "literature:lit_510a576872873c35": {
       "decision": "approved",
@@ -1329,7 +1344,7 @@
     },
     "literature:lit_13f7ecd9b94275d0": {
       "decision": "approved",
-      "item_sha256": "86a46376c77561d26318dfb50fc9c51340037c51c60edb82410e9e9a38aa599e",
+      "item_sha256": "b1f06e333e477a0fa54766f4585f07aaae54b7eda9b9349f55e1077b2004784c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1340,7 +1355,14 @@
           "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
           "locator": "Позиция 6: Введение в психологию, лекция 1"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01003444552",
+        "evidence_scope": "Course explicitly selects lecture 1 as science introduction; first-party RSL confirms the underlying general-psychology university lecture textbook. Exact excerpt boundaries/course edition are not established; original abbreviated title, year, work identity and snapshot remain unchanged.",
+        "prerequisites": "Agent sequence: selected introductory lecture first; video course and experiment textbook are parallel supplementary branches, not mandatory prerequisites for case-study papers."
+      }
     },
     "literature:lit_12ca0a14d27fe4f9": {
       "decision": "approved",
