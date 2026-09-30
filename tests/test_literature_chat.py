@@ -97,3 +97,15 @@ def test_all_published_literature_entries_have_stable_short_callbacks():
                     if button.callback_data.startswith("lit:i:"):
                         seen.add(button.callback_data)
     assert len(seen) == len(items)
+
+
+def test_book_card_preserves_and_escapes_metadata_uncertainty():
+    item = {"id": "synthetic-book", "topic_id": "synthetic-topic", "title": "Учебная книга",
+            "authors": ["Указанный автор"], "metadata_warnings": ["Авторство <b>не уточнено</b>"],
+            "source": {"id": "private-source-id", "locator": "private-page"}}
+    text, keyboard = literature_chat._item_view(item, None)
+    assert "Авторство &lt;b&gt;не уточнено&lt;/b&gt;" in text
+    assert "<b>не уточнено</b>" not in text
+    assert "private-source-id" not in text and "private-page" not in text
+    assert "Статус: Не начато" in text
+    assert keyboard.inline_keyboard[0][0].text == "Не начато"

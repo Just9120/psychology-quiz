@@ -138,6 +138,7 @@ it.each(['pwa', 'miniapp'])('keeps bibliographic text but hides obsolete source 
   await user.click(screen.getByRole('button', { name: 'Учебная книга' }))
   await user.click(screen.getByText('Библиографическая запись', { selector: 'summary' }))
   expect(screen.getByText('Проверенная библиографическая запись')).toBeVisible()
+  expect(screen.getByText('Год неизвестен')).toBeVisible()
   expect(document.body.textContent).not.toContain('private-original-file.pdf')
   expect(document.body.textContent).not.toContain('private-page-17')
 })

@@ -52,7 +52,10 @@ export function MiniLiterature({ initial, topics, busy, run }: {
       {item.access_links?.length ? <div className="literature-access"><h3>Внешние версии</h3><p className="muted">Доступ и совпадение издания уточняются у провайдера.</p>
         {item.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
       </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
-      <p>{item.why_read}</p>{item.source?.citation && <details><summary>Библиографическая запись</summary><blockquote>{item.source.citation}</blockquote></details>}
+      <p>{item.why_read}</p>{(item.source?.citation || item.metadata_warnings?.length) && <details><summary>Библиографическая запись</summary>
+        {item.source?.citation && <blockquote>{item.source.citation}</blockquote>}
+        {item.metadata_warnings?.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
+      </details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!uncertain) void run(save) }}>
         <label className="field">Статус<select value={status} disabled={busy || uncertain} onChange={event => { setStatus(event.target.value as ReadingStatus); setSaved(false) }}>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
         {uncertain && <p role="status">Сохранение не подтверждено. Сначала обновите каталог.</p>}
