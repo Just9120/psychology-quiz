@@ -398,3 +398,24 @@ def test_disabled_web_routes_do_not_touch_database(bank):
     with TestClient(create_app(db_path=str(bank), bot_token=TOKEN)) as client:
         assert client.get('/web/auth/me').status_code == 404
         assert client.post('/web/auth/register', json={'email':EMAIL}).status_code == 404
+
+
+def test_telegram_proof_opens_learning_but_not_owner_or_private_interfaces(web):
+    from tests.test_miniapp_api import _make_init_data
+    proof = _make_init_data(TOKEN, {"id": 42, "first_name": "Synthetic adult"})
+    headers = {"Authorization": "tma " + proof, "X-Telegram-Init-Data": proof}
+    response = web.client.get('/miniapp/setup-options', headers=headers)
+    assert response.status_code == 200
+    assert response.json()['ok'] is True
+    # A valid Telegram signature is not a PWA owner session or CSRF proof.
+    assert web.client.get('/web/auth/me', headers=headers).status_code == 401
+    for action in ('owner/content', 'owner/stats'):
+        assert post(web, action, {'period': '7d'}, headers=headers).status_code == 401
+    for path in ('/miniapp/owner/content', '/miniapp/owner/stats', '/miniapp/vault',
+                 '/miniapp/knowledge', '/miniapp/sources', '/miniapp/search',
+                 '/web/vault', '/web/knowledge', '/web/sources', '/web/search'):
+        assert web.client.get(path, headers=headers).status_code == 404, path
+    with closing(get_connection(str(web.db))) as conn:
+        for table in ('web_accounts', 'web_sessions', 'web_mail_tokens', 'pwa_invitations'):
+            assert conn.execute(f'SELECT count(*) FROM {table}').fetchone()[0] == 0
+    assert web.mailbox.messages == []
