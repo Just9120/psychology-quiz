@@ -35,6 +35,7 @@ test('Telegram Mini App loads shared quiz, checks a case and shows its rationale
   fireEvent.click(screen.getByRole('button', { name: 'Проверить ответ' }))
   await screen.findByRole('heading', { name: 'Разбор кейса' })
   expect(screen.getByText('Контекст важен')).toBeInTheDocument()
+  expect(screen.getByText('Ваше пространство обучения · Telegram · 18+')).toBeVisible()
   expect(calls.map(call => call.path)).toEqual(['/miniapp/setup-options', '/miniapp/state', '/miniapp/setup', '/miniapp/answer'])
   expect(calls.every(call => call.initData.includes('verified-test-payload'))).toBe(true)
 })

@@ -200,7 +200,7 @@ export function MiniApp() {
     }
   }
 
-  if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p></main>
+  if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p><p>Для пользователей от 18 лет.</p></main>
   if (booting) return <main className="loading-screen"><Brand /><p role="status">Восстанавливаем ваши занятия…</p></main>
   return <div className="app-layout miniapp-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
     <aside className="sidebar"><Brand /><nav aria-label="Разделы Mini App">
@@ -213,7 +213,7 @@ export function MiniApp() {
       <button className="nav-item" disabled={busy} onClick={() => setPage('privacy')}>Мои данные</button>
       <a className="nav-item miniapp-privacy-link" href="https://telegram.org/privacy-tpa" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
     </nav></aside>
-    <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram</header><main id="main-content" className="workspace-main" tabIndex={-1}>
+    <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram · 18+</header><main id="main-content" className="workspace-main" tabIndex={-1}>
       {error && <div role="alert" className="app-alert">{error} <button type="button" onClick={() => setError('')} aria-label="Закрыть сообщение">×</button></div>}
       {page === 'privacy' ? <section className="page-width panel">
           <h1>Мои учебные данные</h1>

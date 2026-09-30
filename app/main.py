@@ -141,12 +141,14 @@ from app.classic_quiz_handlers import (
 logger = logging.getLogger(__name__)
 
 TELEGRAM_PRIVACY_POLICY_URL = "https://telegram.org/privacy-tpa"
+AGE_NOTICE = "Учебный бот и Mini App предназначены для пользователей от 18 лет."
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
 START_QUIZ_BUTTON_ALIASES = (START_QUIZ_BUTTON_TEXT, LEGACY_START_QUIZ_BUTTON_TEXT)
 READING_MODE_BUTTON_ALIASES = (READING_MODE_BUTTON_TEXT, LEGACY_READING_MODE_BUTTON_TEXT)
 GLOSSARY_BUTTON_ALIASES = (GLOSSARY_BUTTON_TEXT, "Глоссарий")
 HELP_TEXT = (
+    f"{AGE_NOTICE}\n\n"
     "Что можно сделать:\n"
     "\n"
     f"{START_QUIZ_BUTTON_TEXT} — пройти викторину прямо в чате.\n"
@@ -364,6 +366,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     context.user_data.pop(CLASSIC_REPLY_STATE_KEY, None)
     message_text = (
         "Привет! Я учебный бот-викторина по психологии.\n"
+        f"{AGE_NOTICE}\n"
         "\n"
         "Можно пройти викторину двумя способами:\n"
         "🎯 В чате — быстрый классический режим.\n"
