@@ -1330,7 +1330,7 @@
     },
     "literature:lit_6d7bc0cc3c9ce6eb": {
       "decision": "approved",
-      "item_sha256": "c92a96ff2f34df8041894ac5d9b80c55ce435b7721bc0b93d2252d4b53b09d63",
+      "item_sha256": "be4c8bf1ebab0fe07317bc578c98e7e1808260197b6dc0583e39bca25b993e82",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1341,7 +1341,17 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 3: Индивидуальное и семейное психологическое консультирование"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01000619187",
+        "evidence_scope": "Existing reviewed family-list work alias is confirmed by RSL 1999 and Dubna library bibliographic subjects. The consulting list omits edition/year. Same work identity retained; prerequisite tailored to consulting context, not a new work.",
+        "sequence": "Agent selects introductory institutional overview before university counselling manual and practice, followed by author perspectives; no compulsory teacher order or measured difficulty claimed.",
+        "limitations": "Bibliographic/annotation evidence only. IDs, work aliases, source snapshots, course citations/years/warnings and personal state retained. No full-text approval or clinical qualification.",
+        "additional_primary_record": "https://lib.uni-dubna.ru/biblweb/search/bibl.asp?doc_id=86644&full=yes"
+      }
     },
     "literature:lit_e5921321564edbc4": {
       "decision": "approved",
@@ -1360,7 +1370,7 @@
     },
     "literature:lit_f207603bd416c4be": {
       "decision": "approved",
-      "item_sha256": "675cb33c5b684b7002724bd8a14cc1fc2a82902d3bbd4d18facbcbf595f603ef",
+      "item_sha256": "1cab34deca1dc3d1dfe67cf01f0430c988cc68f08d8feb089b455764b5dc16dc",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1371,7 +1381,16 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 5: Основы психологического консультирования"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A21895%2FSource%3Adefault",
+        "evidence_scope": "MGPPU primary catalogue confirms Kochunas 1999 title and subject, used as supplementary literature in counselling and consultative-practicum university courses. Not the different combined group-therapy title. Course year remains unknown.",
+        "sequence": "Agent selects introductory institutional overview before university counselling manual and practice, followed by author perspectives; no compulsory teacher order or measured difficulty claimed.",
+        "limitations": "Bibliographic/annotation evidence only. IDs, work aliases, source snapshots, course citations/years/warnings and personal state retained. No full-text approval or clinical qualification."
+      }
     },
     "literature:lit_5568f7c20141100f": {
       "decision": "approved",
@@ -1405,7 +1424,7 @@
     },
     "literature:lit_e397986f81e37d22": {
       "decision": "approved",
-      "item_sha256": "ec0c9b4e255a8fbc892212d073172fea1ed45cf7bad8bb1c927328b1459df0c9",
+      "item_sha256": "c3f2c17e894885f21794b02664455d5b9dfc6a561a720c81be3a955638123f77",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1416,7 +1435,16 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 8: Введение в психологическое консультирование"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01002428843",
+        "evidence_scope": "RSL primary annotation confirms Menovshchikov introductory manual on counselling in social/psychological assistance institutions, third edition 2004. Course edition/year unspecified; not filled from this record.",
+        "sequence": "Agent selects introductory institutional overview before university counselling manual and practice, followed by author perspectives; no compulsory teacher order or measured difficulty claimed.",
+        "limitations": "Bibliographic/annotation evidence only. IDs, work aliases, source snapshots, course citations/years/warnings and personal state retained. No full-text approval or clinical qualification."
+      }
     },
     "literature:lit_7b4d2c2bdc54b178": {
       "decision": "approved",
@@ -3113,7 +3141,7 @@
     },
     "literature:lit_consult_lecture_01": {
       "decision": "approved",
-      "item_sha256": "1dc5b63c125ee92b179e47a60e457c7999368dbde2d3b5b8482717e742e3b7aa",
+      "item_sha256": "857e4731528052267337bea87c2986e73495f24a5dfa31c53dcade928051253b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-29",
@@ -3125,11 +3153,20 @@
           "locator": "extracted text, Unicode characters 56714:56974"
         }
       ],
-      "rationale": "Урок явно называет книгу Роджерса; год и издание не определяются из записи."
+      "rationale": "Урок явно называет книгу Роджерса; год и издание не определяются из записи.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01009545999",
+        "evidence_scope": "RSL primary record confirms Rogers title, psychotherapy/specialist subject and 2017 edition; existing lesson identifies client-centred context. Course year/edition unspecified. No therapeutic efficacy or full-content certification.",
+        "sequence": "Agent selects introductory institutional overview before university counselling manual and practice, followed by author perspectives; no compulsory teacher order or measured difficulty claimed.",
+        "limitations": "Bibliographic/annotation evidence only. IDs, work aliases, source snapshots, course citations/years/warnings and personal state retained. No full-text approval or clinical qualification."
+      }
     },
     "literature:lit_consult_lecture_02": {
       "decision": "approved",
-      "item_sha256": "83308494d28efb6098555bd8033184d151a8555d8e68274967601f85dc7054b0",
+      "item_sha256": "797930d18f52e964af4089914c2f6f1ead61cb8fec3e967cfe5c06dcaac1e08f",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-29",
@@ -3141,7 +3178,16 @@
           "locator": "extracted text, Unicode characters 68091:68351"
         }
       ],
-      "rationale": "Урок прямо рекомендует книгу Ялома; содержание книги не проверено."
+      "rationale": "Урок прямо рекомендует книгу Ялома; содержание книги не проверено.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://eksmo.ru/amp/book/dar-psikhoterapii-novoe-izdanie-ITD1175809/",
+        "evidence_scope": "First-party Eksmo publisher annotation/section outline describes personal subjective clinical observations and therapist/patient relationships. Existing course lesson recommends this title. Publisher edition must not become the unknown course edition.",
+        "sequence": "Agent selects introductory institutional overview before university counselling manual and practice, followed by author perspectives; no compulsory teacher order or measured difficulty claimed.",
+        "limitations": "Bibliographic/annotation evidence only. IDs, work aliases, source snapshots, course citations/years/warnings and personal state retained. No full-text approval or clinical qualification."
+      }
     },
     "literature:lit_org_lecture_01": {
       "decision": "approved",
