@@ -1179,10 +1179,10 @@
     },
     "literature:lit_d4fe5859f2ce2c33": {
       "decision": "approved",
-      "item_sha256": "5be8e72125708c4a8072c958ac6acf15a6f2c195d319feb40fa7e1ead70efc97",
+      "item_sha256": "c9d9a9119a79aa1f2561972e38271251bc1f8964820aa3f4fba8025dc59d81d5",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
@@ -1190,7 +1190,16 @@
           "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
           "locator": "Пункт 5: «Закрытый перелом» 1970-х как веха в истории научной психологии"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://rshps.ru/books/congress2018t3.pdf",
+        "evidence_scope": "Publisher congress volume retrieved with pypdf after browser timeout. Printed page 56 matches title/author and opens the historical-methodological abstract; only selected extracted sections inspected, not full article. Course citation retained.",
+        "limitations": "Not a full-text scientific review; historical interpretation is not adopted as established consensus or used to approve quiz derivatives.",
+        "sequence": "Optional additional material; no teacher prerequisite or measured difficulty asserted."
+      }
     },
     "literature:lit_d9803abbb663e67c": {
       "decision": "approved",
@@ -1351,10 +1360,10 @@
     },
     "literature:lit_2bc65fc1b8868a95": {
       "decision": "approved",
-      "item_sha256": "a48c1c9db8488e4fc2e5dd1892e2eba70c0a24a1a67a0581e7ed3711185a343e",
+      "item_sha256": "46a0b8da74d9386d5593ff9056fac366ed4f7bb136036974aadb9f4d37cd225e",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
@@ -1362,7 +1371,17 @@
           "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
           "locator": "Позиция 4: Отец (The Father)"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://www.sonyclassics.com/film/thefather",
+        "comparison_record": "https://filmsandfestivals.britishcouncil.org/projects/the-father",
+        "evidence_scope": "Distributor synopsis/credits retrieved, film-register year 2020 and fiction classification corroborated; course list already identifies this 2020 film as an experiential discussion example.",
+        "limitations": "Film not watched; no clinical accuracy, efficacy, lawful full-film access or diagnostic approval. Original source citation and empty source authors retained.",
+        "sequence": "Optional additional material; no teacher prerequisite or measured difficulty asserted."
+      }
     },
     "literature:lit_7e152869797af503": {
       "decision": "approved",
