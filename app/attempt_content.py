@@ -79,7 +79,11 @@ def get_attempt_content(conn: Connection, session_id: int, question_id: int) -> 
     ).fetchone()
     if row is None:
         return None
-    encoded, digest, provenance = row
+    return decode_attempt_content(*row)
+
+
+def decode_attempt_content(encoded: str, digest: str, provenance: str) -> dict:
+    """Validate an immutable edition loaded alone or in an actor-scoped join."""
     if not encoded or hashlib.sha256(encoded.encode()).hexdigest() != digest:
         raise ValueError("Attempt content is missing or corrupt; migration/recovery required")
     content = json.loads(encoded)

@@ -286,3 +286,28 @@ def test_legacy_correct_answer_cannot_resolve_captured_mistake(bank):
         errors = progress.errors(conn, 1)
         assert errors['total'] == errors['trainable_count'] == 1
         assert errors['items'][0]['snapshot_provenance'] == 'captured'
+
+
+def test_attempt_page_loads_snapshots_in_two_queries_and_still_rejects_corruption(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        questions = [{**OLD, "id": f"paged-question-{index}"} for index in range(21)]
+        upsert_approved_questions(conn, questions)
+        ids = tuple(row[0] for row in conn.execute(
+            "SELECT id FROM questions WHERE external_id LIKE 'paged-question-%' ORDER BY id"))
+        sid = record(conn, qids=ids, choices=(0,) * len(ids))
+        queries = []
+        conn.set_trace_callback(queries.append)
+        try:
+            page = progress.attempt(conn, 1, sid)
+        finally:
+            conn.set_trace_callback(None)
+        assert len(page["items"]) == progress.PAGE_SIZE
+        assert page["next_after"] == progress.PAGE_SIZE
+        assert all(item["question_text"] == OLD["question"] for item in page["items"])
+        assert len([query for query in queries if query.lstrip().upper().startswith("SELECT")]) == 2
+        # Simulate damaged storage; the optimized join must still reject it.
+        conn.execute("DROP TRIGGER immutable_attempt_content")
+        conn.execute("UPDATE quiz_session_questions SET content_sha256=? WHERE session_id=? AND question_id=?",
+                     ("0" * 64, sid, ids[0]))
+        with pytest.raises(ValueError, match="missing or corrupt"):
+            progress.attempt(conn, 1, sid)
