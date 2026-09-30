@@ -415,7 +415,7 @@ python -m unittest tests/test_miniapp_fastapi.py
   - Startup/init enables `PRAGMA journal_mode = WAL` once for file-backed databases.
   - Regular connections configure `PRAGMA busy_timeout = 10000`, `PRAGMA synchronous = NORMAL`, and `PRAGMA foreign_keys = ON` without changing journal mode.
 - For file-backed DBs, side files `quiz.sqlite3-wal` and `quiz.sqlite3-shm` may appear; this is expected in WAL mode.
-- Runtime performance indexes are ensured on startup for both existing and fresh DBs.
+- SQLite startup сохраняет compatibility helpers для performance indexes; PostgreSQL startup только проверяет schema/version/catalog. Создание и обновление PostgreSQL indexes выполняются явной миграцией до запуска writers по [PostgreSQL procedure](postgres-storage.md).
 - Repeated user loads should not update `users.updated_at` unless Telegram profile fields (`username`, `first_name`, `last_name`) changed; this keeps read-like bot and Mini App flows from taking avoidable SQLite write locks.
 - Mini App answer timeout remains longer than hedge timing (`ANSWER_API_TIMEOUT_MS = 8000`, `ANSWER_HEDGE_DELAY_MS = 1000`). The answer hedge still waits briefly before attempt 2 and performs state-resync first, but it now recovers from a stalled first WebView/fetch attempt in roughly 1 second instead of roughly 3 seconds. If debug telemetry shows `attempt=2`, `hedged=true`, `winner_attempt=2`, and `pre_request_ms`/`hedge_started_ms` roughly equal to the hedge delay while backend logs have no matching `_a1` `miniapp_api` line, interpret it as the first frontend/WebView fetch attempt likely stalling before it reached backend; the `_a2` backend `duration_ms` should then represent the successful hedged request.
 
@@ -495,10 +495,10 @@ Smoke checks:
 Класс изменения для текущего Telegram-only rollout: BACKWARD_COMPATIBLE_AUTOMATED, до появления web users; нет удаления пользовательских данных. Target и writers — существующий `/opt/psychology-quiz`, Compose `psychology-quiz`, bot/API. Обязательны stop writers, backup с isolated restore, init/seed, полный prior-user fingerprint/snapshot/parity и post-checks из таблицы выше. `app/identity_schema.py` входит в stateful classifier. После начала migration failure требует сверки DB/backup и forward-fix; production restore не автоматизирован. После появления web identities rollback к Telegram-only schema несовместим и не допускается без отдельного плана. PWA credentials/session tables и включение web routes поставляются отдельными следующими этапами; эта migration их не включает.
 
 ## 16) DB migration / upgrade policy
-- `schema.sql` is source of truth for fresh database creation.
-- Runtime `ensure_*` migration helpers are used for selected additive upgrades on existing DBs (for example, missing indexes/columns that can be added safely).
-- Production deploy must run normal bot startup (`init_db_connection`) so runtime checks can ensure expected additive indexes exist.
-- Destructive or behavior-changing migrations (drop/rewrite/backfill with risk) require explicit migration scripts + operator-approved backups/rollback plan.
+- [SQLite schema](../sql/schema.sql) используется canonical [init](../scripts/init_db.py) для SQLite. Этот же init явно применяет identity/auth/glossary/learning/homework/privacy/reading migrations; legacy `ensure_*` helpers в SQLite startup не заменяют этот шаг.
+- Действующий production использует PostgreSQL: init вызывает ordered `upgrade_schema`, а `init_db_connection` при старте вызывает только `verify_schema`. Не рассчитывайте на создание PostgreSQL таблиц, колонок или indexes при старте приложения.
+- Для stateful изменений [deploy](../deploy.sh) под штатной lock останавливает оба writer-сервиса, подтверждает backup/isolated restore, выполняет init/seed, проверяет сохранность прежнего user state и только затем запускает проверенную версию. Точный version/catalog, поддержанные исходные схемы и recovery описаны в [PostgreSQL procedure](postgres-storage.md).
+- Неизвестная схема, failed migration или расхождение preservation не допускают продолжения поставки. После начала миграции нет автоматического data restore/application rollback; необходима сверка recovery record и согласованный forward-fix либо отдельное recovery-решение. Destructive изменения требуют явного разрешения.
 
 Для действующей production SQLite с WAL используйте SQLite backup API и isolated restore rehearsal из [DB checks](../scripts/deployment_db.py), вызываемые штатным [deploy](../deploy.sh). Простое копирование основного файла не является принятой backup procedure.
 
