@@ -2185,10 +2185,10 @@
     },
     "literature:lit_28136036489db778": {
       "decision": "approved",
-      "item_sha256": "d04cd8409ddc5d0bdad27e20bf46a360f1fe07f572d6cd45075ec21e6eb19902",
+      "item_sha256": "159c7fe81d9f646d965871977b5b2cc526f6b3fd33ee5fdd375b8856169d605e",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
@@ -2204,6 +2204,24 @@
         "evidence_scope": "Primary national electronic library indexed metadata identifies editor/compiler Raygorodsky for 2000 anthology. Current course list text fetch retains Ivanova. Visual source layout and exact edition identity not reverified.",
         "source_read": "Authenticated current course PDF text fetch; modified timestamp matches recorded source, 2026-09-08. Text extraction is not visual page verification.",
         "limitations": "No scientific content certification, role assignment, edition merging or personal state change."
+      },
+      "bibliographic_metadata_review": {
+        "primary_record": "https://rusneb.ru/catalog/002178_000020_BGUNB-BEL%7C%7C%7CBIBL%7C%7C%7C0000106457/",
+        "comparison_record": "https://publications.hse.ru/books/963976491",
+        "evidence_scope": "NEB participant-library record retrieved: exact anthology title, Raigorodsky editor/compiler, Samara Bakhrah-M 2000. HSE publication record retrieved: compiler separately identified, multiple contributing authors and anthology annotation. Normalized attribution changed to editor/compiler instead of sole Ivanova; original course citation/work identity retained.",
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "decision": "correct_normalized_attribution_keep_source_citation",
+        "limitations": "Source course citation and snapshots retained; no replacement of work identity or personal reading state. Full text and exact course copy not read."
+      },
+      "reading_metadata_review": {
+        "primary_record": "https://rusneb.ru/catalog/002178_000020_BGUNB-BEL%7C%7C%7CBIBL%7C%7C%7C0000106457/",
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "evidence_scope": "Reference/additional recommendation uses anthology genre and multiple approaches to self-consciousness explicitly described by university record. After general personality course is agent inference; no individual chapter or scientific claim approval.",
+        "limitations": "Recommendation is agent inference from verified metadata, not teacher priority, measured difficulty or full-text approval.",
+        "comparison_record": "https://publications.hse.ru/books/963976491"
       }
     },
     "literature:lit_88dee04d51aa3119": {
@@ -2256,10 +2274,10 @@
     },
     "literature:lit_4ac5113ca33225a9": {
       "decision": "approved",
-      "item_sha256": "1239177939320b4a2b95edcbaf9d778be94f526294011905400f64e730b109cd",
+      "item_sha256": "8aca4ea8c22f9001e11effe9c67308ec576d47f78867192507066cafa78f210a",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
@@ -2275,6 +2293,22 @@
         "evidence_scope": "Indexed library metadata and university publication bibliography name Ivanova/Rumyantseva for 2009 work. Current course list text names only Rumyantseva. No replacement of original author citation or work identity.",
         "source_read": "Authenticated current course PDF text fetch; modified timestamp matches recorded source, 2026-09-08. Text extraction is not visual page verification.",
         "limitations": "No scientific content certification, role assignment, edition merging or personal state change."
+      },
+      "bibliographic_metadata_review": {
+        "primary_record": "https://www.buninlib.orel.ru/cgi-bin/irbis64r_14/cgiirbis_64.exe?C21COM=S&I21DBN=EK_PRINT&LNG=&P21DBN=EK&S21CNR=500&S21FMT=FULLW_print&S21P01=0&S21P02=1&S21P03=A%3D&S21REF=&S21STN=1&S21STR=%D0%98%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0%2C+%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D1%8F+%D0%9B%D1%8C%D0%B2%D0%BE%D0%B2%D0%BD%D0%B0&Z21ID=",
+        "evidence_scope": "Orel regional scientific library catalogue retrieved: exact title, Ivanova and Rumyantseva, Moscow SGU 2009, ISBN 978-5-8323-0584-4. Missing coauthor added to normalized author list. Original course citation and work identity retained.",
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "decision": "correct_normalized_attribution_keep_source_citation",
+        "limitations": "Source course citation and snapshots retained; no replacement of work identity or personal reading state. Full text and exact course copy not read."
+      },
+      "reading_metadata_review": {
+        "primary_record": "https://www.buninlib.orel.ru/cgi-bin/irbis64r_14/cgiirbis_64.exe?C21COM=S&I21DBN=EK_PRINT&LNG=&P21DBN=EK&S21CNR=500&S21FMT=FULLW_print&S21P01=0&S21P02=1&S21P03=A%3D&S21REF=&S21STN=1&S21STR=%D0%98%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0%2C+%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D1%8F+%D0%9B%D1%8C%D0%B2%D0%BE%D0%B2%D0%BD%D0%B0&Z21ID=",
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "evidence_scope": "Supplementary focused reading inferred from verified social-identity subject and bibliography; no claims about unobserved contents or efficacy.",
+        "limitations": "Recommendation is agent inference from verified metadata, not teacher priority, measured difficulty or full-text approval."
       }
     },
     "literature:lit_7bcfce2256481407": {
