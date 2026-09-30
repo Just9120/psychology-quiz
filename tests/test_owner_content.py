@@ -26,15 +26,18 @@ def test_owner_content_requires_session_csrf_and_does_not_return_source_ids(web,
     assert not any(field in json.dumps(data) for field in ("source_id", "snapshot_sha256", "source_ref", "telegram_user_id", "owner@example.test"))
 
 
-def test_nonowner_cannot_reach_content_loader(monkeypatch):
+@pytest.mark.parametrize("action", ["owner/content", "owner/stats"])
+def test_nonowner_cannot_reach_content_loader(monkeypatch, action):
     @contextmanager
     def transaction():
         yield object()
     auth = SimpleNamespace(transaction=transaction, settings=SimpleNamespace(owner_email="owner@example.test"),
                            authenticate=lambda *args, **kwargs: {"email": "other@example.test"})
     monkeypatch.setattr(owner_content, "dashboard", lambda conn: pytest.fail("nonowner reached loader"))
+    from app import owner_stats
+    monkeypatch.setattr(owner_stats, "get_owner_period_stats", lambda *args: pytest.fail("nonowner reached analytics"))
     with pytest.raises(AuthError, match="forbidden"):
-        _dispatch(auth, "owner/content", {}, "token", "csrf")
+        _dispatch(auth, action, {}, "token", "csrf")
 
 
 def test_source_snapshot_is_partial_allowlisted_and_rejects_inconsistent_totals(tmp_path, monkeypatch):
