@@ -315,7 +315,45 @@ def validate() -> list[str]:
     except (OSError, ValueError, json.JSONDecodeError) as error:
         errors.append(f"Invalid literature access catalog: {type(error).__name__}")
 
+    errors.extend(validate_prerequisite_graph(entries))
     return errors
+
+
+def validate_prerequisite_graph(entries: dict[str, dict]) -> list[str]:
+    """Reject impossible reading order, resolving associations to proven works."""
+    graph: dict[str, set[str]] = {}
+    for entry in entries.values():
+        work = entry.get("work_id")
+        canonical = entries.get(work) if isinstance(work, str) else None
+        if canonical is None or canonical.get("work_id") != work:
+            continue  # Canonical identity errors are reported by validate().
+        dependencies = graph.setdefault(work, set())
+        prerequisites = entry.get("prerequisites")
+        if not isinstance(prerequisites, list):
+            continue
+        for reference in prerequisites:
+            prerequisite = entries.get(reference) if isinstance(reference, str) else None
+            target = prerequisite.get("work_id") if prerequisite else None
+            if isinstance(target, str) and target in entries and entries[target].get("work_id") == target:
+                dependencies.add(target)
+    # Iterative topological traversal handles long reading lists without recursion.
+    dependents: dict[str, set[str]] = {work: set() for work in graph}
+    for work, dependencies in graph.items():
+        for prerequisite in dependencies:
+            dependents[prerequisite].add(work)
+    remaining = {work: len(dependencies) for work, dependencies in graph.items()}
+    ready = [work for work, count in remaining.items() if count == 0]
+    visited = 0
+    while ready:
+        work = ready.pop()
+        visited += 1
+        for dependent in dependents[work]:
+            remaining[dependent] -= 1
+            if remaining[dependent] == 0:
+                ready.append(dependent)
+    if visited == len(graph):
+        return []
+    return ["Literature prerequisites contain a work-level cycle; resolve reading order before publication"]
 
 
 def main() -> int:

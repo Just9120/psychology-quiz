@@ -115,3 +115,21 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
     items = load_literature_items()
     assert all(item['access_links'] == links[item['work_id']] for item in items if item['work_id'] in links)
     assert all(item['access_links'] == [] for item in items if item['work_id'] not in links)
+
+
+def test_reading_prerequisites_reject_cycles_between_works_and_their_associations():
+    def entry(work, prerequisites=()):
+        return {"work_id": work, "prerequisites": list(prerequisites)}
+    entries = {"a": entry("a"), "a-list": entry("a", ["b"]),
+               "b": entry("b", ["a"]), "c": entry("c", ["b"])}
+    assert validate_literature.validate_prerequisite_graph(entries)
+    entries["b"]["prerequisites"] = []
+    assert validate_literature.validate_prerequisite_graph(entries) == []
+    entries["a-list"]["prerequisites"] = ["a"]
+    assert validate_literature.validate_prerequisite_graph(entries)
+
+
+def test_reading_prerequisite_graph_handles_long_valid_sequence_without_recursion():
+    entries = {str(i): {"work_id": str(i), "prerequisites": [str(i-1)] if i else []}
+               for i in range(1500)}
+    assert validate_literature.validate_prerequisite_graph(entries) == []
