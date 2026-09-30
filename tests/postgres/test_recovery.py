@@ -15,7 +15,7 @@ from app.db import get_connection, upsert_approved_questions
 from app.postgres_import import import_snapshot
 from app.postgres_recovery import manifest, verify_user_state
 from app.postgres_schema import upgrade_schema
-from scripts.postgres_backup import backup_and_rehearse, read_verified_record
+from scripts.postgres_backup import backup_and_rehearse, read_verified_record, rehearse_user_recovery
 from scripts.postgres_test_support import test_target as validate_test_target
 from tests.test_attempt_content import make_attempt, NEW, OTHER
 from tests.postgres.conftest import remove_learning_schema
@@ -70,6 +70,22 @@ class NativeRuntime:
         with path.open('rb') as source:
             self.tool('pg_restore', ['--dbname', database, '--role', unquote(urlsplit(self.target).username),
                                     '--exit-on-error', '--single-transaction', '--no-owner', '--no-acl'], source=source)
+
+    def rebuild_restore_content(self, name):
+        assert name in self.created
+        target = urlunsplit(urlsplit(self.target)._replace(path='/' + name))
+        with closing(get_connection(target)) as conn, conn:
+            upgrade_schema(conn)
+            upsert_approved_questions(conn, [NEW, OTHER], authoritative=True)
+        with closing(get_connection(target)) as conn:
+            assert conn.execute(
+                "SELECT question_text FROM questions WHERE external_id=?", (NEW['id'],)
+            ).fetchone()[0] == NEW['question']
+            snapshots = conn.execute(
+                "SELECT content_snapshot FROM quiz_session_questions ORDER BY session_id,order_index"
+            ).fetchall()
+            assert snapshots and any('Original question?' in row[0] for row in snapshots)
+            assert all('Edited question?' not in row[0] for row in snapshots)
 
     def drop_restore_database(self, name):
         assert name in self.created
@@ -132,34 +148,13 @@ def test_native_restore_preserves_every_table_sequence_and_schema(native_runtime
 
 def test_native_restored_history_survives_current_content_rebuild(native_runtime, tmp_path):
     before = native_runtime.manifest()
-    record_path = backup_and_rehearse(native_runtime, tmp_path / 'backups')
-    read_verified_record(record_path)
-    restored_name = 'psychology_restore_' + uuid.uuid4().hex
-    restored_target = urlunsplit(urlsplit(native_runtime.target)._replace(path='/' + restored_name))
-    native_runtime.create_restore_database(restored_name)
-    try:
-        native_runtime.restore(record_path.with_name('database.dump'), restored_name)
-        assert native_runtime.manifest(database=restored_name) == before
-        with closing(get_connection(restored_target)) as conn, conn:
-            upgrade_schema(conn)
-            upsert_approved_questions(conn, [NEW, OTHER], authoritative=True)
-        after = native_runtime.manifest(database=restored_name)
-        # Current serving content is independent of the recovered personal state.
-        assert after['tables']['questions'] != before['tables']['questions']
-        verify_user_state(before, after)
-        with closing(get_connection(restored_target)) as conn:
-            assert conn.execute(
-                "SELECT question_text FROM questions WHERE external_id=?", (NEW['id'],)
-            ).fetchone()[0] == NEW['question']
-            snapshots = conn.execute(
-                "SELECT content_snapshot FROM quiz_session_questions ORDER BY session_id,order_index"
-            ).fetchall()
-            assert snapshots and any('Original question?' in row[0] for row in snapshots)
-            assert all('Edited question?' not in row[0] for row in snapshots)
-        # No part of the rehearsal writes to the source database.
-        assert native_runtime.manifest() == before
-    finally:
-        native_runtime.drop_restore_database(restored_name)
+    backup_path = backup_and_rehearse(native_runtime, tmp_path / 'backups')
+    path = rehearse_user_recovery(native_runtime, backup_path, tmp_path / 'rehearsals')
+    record = json.loads(path.read_text())
+    assert record['phase'] == 'verified'
+    assert record['after']['tables']['questions'] != before['tables']['questions']
+    verify_user_state(before, record['after'])
+    assert native_runtime.manifest() == before
     assert not native_runtime.created
 
 

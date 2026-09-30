@@ -24,7 +24,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.postgres_config import PG_DATABASE, PG_IMAGE, PG_PREVIOUS_IMAGE, PG_ROLE, PG_SERVICE, private_target
-from scripts.postgres_backup import backup_and_rehearse, file_digest, read_verified_record, sync_directory, write_record
+from scripts.postgres_backup import backup_and_rehearse, file_digest, read_verified_record, rehearse_user_recovery, sync_directory, write_record
 
 PROJECT = Path("/opt/psychology-quiz")
 STATE = PROJECT / ".postgres"
@@ -235,6 +235,15 @@ class Runtime:
         with dump.open("rb") as source:
             self.pg(["pg_restore", "--username", "postgres", "--dbname", database, "--role", PG_ROLE,
                      "--exit-on-error", "--single-transaction", "--no-owner", "--no-acl"], input_file=source)
+
+    def rebuild_restore_content(self, name):
+        if name not in self.owned_restore or RESTORE.fullmatch(name) is None:
+            raise OperationError("restore_target_not_owned")
+        from app.postgres_recovery import recovery_target
+        candidate = Runtime(self.revision, target_override=recovery_target(app_target(), name),
+                            db_image=self.db_image)
+        candidate.app(["scripts/init_db.py"])
+        candidate.app(["scripts/seed_questions.py"])
 
     def drop_restore_database(self, name):
         if name not in self.owned_restore or RESTORE.fullmatch(name) is None:
@@ -717,7 +726,7 @@ def post_checks(runtime):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("preflight", "prepare", "cutover", "status", "backup", "verify",
-                                           "image-state", "stage-vector-image", "upgrade-vector-image"))
+                                           "image-state", "stage-vector-image", "upgrade-vector-image", "rehearse-user-recovery"))
     parser.add_argument("--expected-sha", required=True)
     parser.add_argument("--record", type=Path)
     parser.add_argument("--lock-held", action="store_true", help="Only deploy.sh with inherited fd 200")
@@ -769,8 +778,17 @@ def main():
                 else:
                     if args.record is None:
                         raise OperationError("backup_record_required")
-                    verify_backup(runtime, args.record)
-                    print("POSTGRES_USER_STATE_PRESERVED")
+                    if args.action == "rehearse-user-recovery":
+                        path = args.record.resolve(strict=True)
+                        if not path.is_relative_to(STATE / "backups") or path.name != "record.json":
+                            raise OperationError("owned_backup_record_required")
+                        private_file(path)
+                        size = int(runtime.sql(f"SELECT pg_database_size('{PG_DATABASE}');"))
+                        check_space(max(1024 ** 3, size * 3))
+                        print(rehearse_user_recovery(runtime, path, STATE / "recovery-rehearsals"))
+                    else:
+                        verify_backup(runtime, args.record)
+                        print("POSTGRES_USER_STATE_PRESERVED")
         return 0
     except Exception as error:
         reason = str(error) if isinstance(error, OperationError) else type(error).__name__

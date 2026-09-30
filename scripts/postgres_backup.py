@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import re
+import stat
 from pathlib import Path
 import tempfile
 import uuid
@@ -110,3 +111,76 @@ def read_verified_record(path: Path) -> dict:
     if dump.stat().st_size != record["dump_bytes"] or file_digest(dump) != record["dump_sha256"]:
         raise ValueError("PostgreSQL recovery dump has changed")
     return record
+
+
+def rehearse_user_recovery(runtime, verified_path: Path, output_root: Path) -> Path:
+    """Restore a verified snapshot and rebuild serving content in an owned copy.
+
+    This never replaces production, deletes a backup, or restores the derivative
+    search index. The caller verifies the target, private paths and delivery lock.
+    """
+    from app.postgres_recovery import verify_user_state
+
+    runtime.require_stopped_writers()
+    backup = read_verified_record(verified_path)
+    identity = runtime.identity()
+    source = backup.get("source")
+    if (not isinstance(source, dict)
+            or {k: v for k, v in source.items() if k != "revision"}
+            != {k: v for k, v in identity.items() if k != "revision"}):
+        raise ValueError("Recovery snapshot belongs to another runtime")
+    live_before = runtime.manifest()
+    if output_root.exists() or output_root.is_symlink():
+        info = output_root.lstat()
+        if (not stat.S_ISDIR(info.st_mode)
+                or (os.name == "posix" and
+                    (info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) & 0o077))):
+            raise ValueError("Private owned recovery directory required")
+    else:
+        output_root.mkdir(mode=0o700, parents=True)
+    directory = Path(tempfile.mkdtemp(prefix="rehearsal-", dir=output_root))
+    record_path = directory / "record.json"
+    name = "psychology_restore_" + uuid.uuid4().hex
+    record = {"format": "psychology-user-recovery-v1", "phase": "prepared",
+              "source": source, "candidate": identity,
+              "backup_sha256": backup["dump_sha256"], "restore_database": name,
+              "created_at": datetime.now(timezone.utc).isoformat()}
+    write_record(record_path, record)
+    created = False
+    try:
+        record["phase"] = "creating_restore"
+        write_record(record_path, record)
+        runtime.create_restore_database(name)
+        created = True
+        record["phase"] = "restoring"
+        write_record(record_path, record)
+        runtime.restore(verified_path.with_name("database.dump"), name)
+        if runtime.manifest(database=name) != backup["before"]:
+            raise ValueError("Restored snapshot does not match recovery record")
+        record["phase"] = "rebuilding_content"
+        write_record(record_path, record)
+        runtime.rebuild_restore_content(name)
+        after = runtime.manifest(database=name)
+        verify_user_state(backup["before"], after)
+        runtime.require_stopped_writers()
+        if runtime.identity() != identity or runtime.manifest() != live_before:
+            raise ValueError("Runtime changed during user recovery rehearsal")
+        record["after"] = after
+        runtime.drop_restore_database(name)
+        created = False
+        record.update(phase="verified", restore_cleanup="removed",
+                      verified_at=datetime.now(timezone.utc).isoformat())
+        write_record(record_path, record)
+        return record_path
+    except BaseException as error:
+        if record["phase"] == "creating_restore" and not created:
+            record["restore_cleanup"] = "creation_unconfirmed_inspect_owned_name"
+        record.update(phase="failed", error_type=type(error).__name__)
+        if created:
+            try:
+                runtime.drop_restore_database(name)
+                record["restore_cleanup"] = "removed"
+            except Exception:
+                record["restore_cleanup"] = "pending"
+        write_record(record_path, record)
+        raise

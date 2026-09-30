@@ -832,3 +832,60 @@ Actual Docker build, GitHub artifact provenance и VPS promotion требуют 
 ## Search image build inputs
 
 [Dockerfile.search](../Dockerfile.search) использует закреплённый Python image с Debian Trixie и [подписанный Debian snapshot](../deploy/search-debian.sources). Base suite и отсутствие иных apt sources проверяются до установки `libgomp1`; неизвестный новый источник останавливает build. Historic Release expiry отключён только в этих двух snapshot stanzas, проверки подписи и archive keyring сохранены. Timestamp зафиксирован вместе с Dockerfile; обновление базового image или системных пакетов требует согласованного обновления snapshot и applicable CI build/import check. Обычный `apt-get update` не выбирает текущую версию из mutable mirror. Версии wheels и модели задаются существующими lockfiles/модельной identity; эта фиксация не разрешает установку приватного индекса или включение RAG.
+
+
+## Isolated user recovery with current content
+
+Подготовленная operator-процедура проверяет восстановление личного состояния
+из существующего verified native backup независимо от новой редакции serving
+content. Она не восстанавливает данные поверх production, не меняет `.env`,
+не переключает database target и не запускает/останавливает runtime services.
+Входной backup и его verified record остаются неизменными; private search index
+не восстанавливается и пересобирается своей отдельной процедурой.
+
+Рабочий каталог — `/opt/psychology-quiz`, environment — root VPS operator с
+известным target и текущим candidate application image. До запуска требуется
+согласованное окно с остановленными обоими writers; процедура проверяет это,
+но не останавливает их сама. После процедуры writers остаются в исходном
+состоянии. Запуск не является обычным smoke check на работающем production.
+
+`EXPECTED_SHA` — проверенный текущий checkout/candidate image; `VERIFIED_RECORD`
+— обычный приватный `record.json` внутри `.postgres/backups/` с неизменённым
+`database.dump`. Старую revision backup допускают только при совпадении
+project/database/service/cluster. Неизвестный target, неверный checksum,
+несовместимая schema или отсутствие места останавливают действие.
+
+```bash
+python3 scripts/postgres_vps.py rehearse-user-recovery   --expected-sha "$EXPECTED_SHA" --record "$VERIFIED_RECORD" </dev/null
+```
+
+Под штатным delivery lock процедура создаёт новый owned
+`psychology_restore_<random>` database и восстанавливает в него snapshot.
+Сначала exact manifest должен совпасть с backup record. Затем тот же
+проверенный candidate image выполняет canonical `scripts/init_db.py` и
+`scripts/seed_questions.py` с target override только на этот owned database.
+Publication gates не обходятся. Personal tables, identity sequences и import
+provenance сверяются с исходным snapshot; новая reading schema допускает только
+ранее рассчитанную безопасную derivation. Исходная production БД проверяется
+на неизменность независимо от восстановленного snapshot.
+
+Успех подтверждает `phase=verified` в возвращённом приватном
+`.postgres/recovery-rehearsals/rehearsal-*/record.json`; временная owned database
+удалена. Запись содержит hashes/manifests и identity, без DSN или текстов
+учебных ответов. Этот результат доказывает rehearsal на конкретной revision,
+а не разрешает реальное переключение production на старую историю.
+
+При failure не переключать production и не изменять backup. Сохранить record.
+`restore_cleanup=removed` означает cleanup подтверждённой owned копии;
+`pending` или `creation_unconfirmed_inspect_owned_name` требуют сверки точного
+имени/owner перед recovery. Не удалять database по одному совпадению prefix.
+Rehearsal не восстанавливает удалённую после backup историю автоматически;
+выбор snapshot и reconciliation более новых данных требуют отдельного решения.
+
+Validation: адресные failure/ownership tests
+`tests/test_postgres_user_recovery.py`; required native CI scenario
+`tests/postgres/test_recovery.py::test_native_restored_history_survives_current_content_rebuild`
+проверяет реальные `pg_dump`/`pg_restore`, две legacy schema revisions,
+canonical content update и сохранение attempt snapshots. Local synthetic PASS
+не заменяет native CI и фактический operator rehearsal. Retention/RPO/RTO
+остаются UNSET до решения владельца.
