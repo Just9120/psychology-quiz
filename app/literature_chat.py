@@ -25,6 +25,9 @@ STATUS_CODES = {
     "f": ("Отложено", "deferred"),
 }
 STATUS_LABELS = {value: label for label, value in STATUS_CODES.values()}
+IMPORTANCE_LABELS = {"basic": "Базовая", "important": "Важная",
+                     "additional": "Дополнительная", "advanced": "Углублённая"}
+IMPORTANCE_SOURCES = {"teacher": "приоритет преподавателя", "agent": "рекомендация агента"}
 
 
 def _token(value: str) -> str:
@@ -111,6 +114,12 @@ def _item_view(item: dict, state: dict | None) -> tuple[str, InlineKeyboardMarku
     status = STATUS_LABELS.get((state or {}).get("reading_status"), "Не начато")
     authors = ", ".join(item.get("authors") or [])
     text = f"<b>{escape(item['title'])}</b>\n{escape(authors)}\nСтатус: {status}"
+    importance = IMPORTANCE_LABELS.get(item.get("importance"))
+    if importance is None:
+        text += "\nЗначимость: не определена"
+    else:
+        origin = IMPORTANCE_SOURCES.get(item.get("importance_source"), "источник оценки не указан")
+        text += f"\nЗначимость: {importance} · {origin}"
     for warning in item.get("metadata_warnings") or []:
         text += f"\n\n{escape(warning)}"
     text += "\n\nОтметьте чтение личным статусом."

@@ -2,6 +2,8 @@ import asyncio
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
+import pytest
+
 from app import literature_chat
 from app.literature import load_literature_items
 from tests.test_attempt_content import TOKEN, bank
@@ -109,3 +111,19 @@ def test_book_card_preserves_and_escapes_metadata_uncertainty():
     assert "private-source-id" not in text and "private-page" not in text
     assert "Статус: Не начато" in text
     assert keyboard.inline_keyboard[0][0].text == "Не начато"
+
+
+@pytest.mark.parametrize("value,label,origin,origin_label", [
+    ("basic", "Базовая", "teacher", "приоритет преподавателя"),
+    ("important", "Важная", "agent", "рекомендация агента"),
+    ("additional", "Дополнительная", "teacher", "приоритет преподавателя"),
+    ("advanced", "Углублённая", "agent", "рекомендация агента"),
+])
+def test_chat_book_card_distinguishes_importance_and_provenance(value, label, origin, origin_label):
+    item = {"id": "book", "topic_id": "topic", "title": "Учебная книга",
+            "importance": value, "importance_source": origin}
+    text, _ = literature_chat._item_view(item, None)
+    assert f"Значимость: {label} · {origin_label}" in text
+    unknown, _ = literature_chat._item_view({k: v for k, v in item.items() if not k.startswith("importance")}, None)
+    assert "Значимость: не определена" in unknown
+    assert "приоритет преподавателя" not in unknown and "рекомендация агента" not in unknown

@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
 import { LiteratureView } from '../src/LiteratureView'
-import { MiniLiterature } from '../src/miniapp/MiniLiterature'
 import { api, ApiError } from '../src/api'
+import { MiniLiterature } from '../src/miniapp/MiniLiterature'
 import type { LiteratureCatalog } from '../src/types'
 
 const catalog: LiteratureCatalog = { ok: true, topics: [{ topic_id: 'one', title: 'Первая тема', module: 'module1' }], works: [{ work_id: 'book', title: 'Учебная книга', authors: [], type: 'book', access_links: [], entries: [{ id: 'book', topic_id: 'one', topic_title: 'Первая тема', module: 'module1', year: null, importance: null, importance_source: null, source: { citation: 'Исходная запись' }, metadata_warnings: ['Год неизвестен'], user_state: null }] }] }
@@ -42,7 +42,10 @@ it.each([
 ] as const)('shows reviewed importance %s with its provenance', async (importance, label, source, sourceLabel) => {
   const entry = { ...catalog.works[0].entries[0], importance, importance_source: source }
   const current = { ...catalog, works: [{ ...catalog.works[0], entries: [entry] }] }
-  render(<LiteratureView initial={current} busy={false} run={async op => op()} />)
+  const view = render(<LiteratureView initial={current} busy={false} run={async op => op()} />)
+  await userEvent.setup().click(screen.getByRole('button', { name: 'Учебная книга' }))
+  expect(screen.getByText(`Значимость: ${label} · ${sourceLabel}`)).toBeVisible()
+  view.rerender(<MiniLiterature initial={[{ ...entry, work_id: 'book', title: 'Учебная книга' }]} topics={catalog.topics} busy={false} run={async op => op()} />)
   await userEvent.setup().click(screen.getByRole('button', { name: 'Учебная книга' }))
   expect(screen.getByText(`Значимость: ${label} · ${sourceLabel}`)).toBeVisible()
 })
