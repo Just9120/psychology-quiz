@@ -424,16 +424,18 @@
     ],
     "year": 1996,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 120,
     "global_order": 620120,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Семейная психология».",
+    "why_read": "Дополнительное чтение по семейной педагогике и отношениям родителей и детей после общего обзора психологии семьи. Историческое пособие стоит читать с учётом времени его издания.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_a172ffe221539480"
+    ],
     "source_refs": [
       "drive:1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0"
     ],
@@ -445,7 +447,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_ce87499b1e725a4d",

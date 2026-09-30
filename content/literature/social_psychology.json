@@ -124,16 +124,18 @@
     ],
     "year": 1984,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 40,
     "global_order": 610040,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Социальная психология».",
+    "why_read": "Углубить тему становления личности и самосознания, рассматривая её в историко-культурном и психологическом контексте. Читать после общего курса социальной психологии личности и с учётом времени издания книги.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
     "source_refs": [
       "drive:1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM"
     ],
@@ -145,7 +147,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_6968d12a30949ae7",

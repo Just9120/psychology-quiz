@@ -2191,10 +2191,10 @@
     },
     "literature:lit_88dee04d51aa3119": {
       "decision": "approved",
-      "item_sha256": "cd490684cb6c54e3dd26181e547a4edd4ef646a8b651c9a2fee82a013d6b5721",
+      "item_sha256": "36cb76bcaccdacdda4607ea52e1970d4e0dc0d76bd2c883f9da33fc51f932dd7",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1wlalDtKpLbFWg-CFxZY5lYDfbU4CmLkM",
@@ -2202,7 +2202,16 @@
           "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
           "locator": "Позиция 4: В поисках себя: личность и самосознание"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "primary_record": "https://rgub.ru/searchopac/book.php?id=RGUB%5CBIBL%5C0000802825",
+        "evidence_scope": "Russian State Library for Young Adults catalogue and annotation retrieved: Kon, 1984, Politizdat, 335 pages; historical-cultural and psychological treatment of personality/self-consciousness with worldview and moral aspects. Historical supplementary reading recommendation, not a contemporary evidence or clinical efficacy endorsement.",
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "sequence": "General discipline overview before focused historical supplementary reading; agent inference, not a teacher requirement.",
+        "limitations": "Full text not read. Course bibliography, source snapshots, work identity and reading state retained; no scientific or access approval."
+      }
     },
     "literature:lit_6968d12a30949ae7": {
       "decision": "approved",
@@ -2564,10 +2573,10 @@
     },
     "literature:lit_4bad7531005a5e23": {
       "decision": "approved",
-      "item_sha256": "6f67e6e6dc1fdb6c81a4ae8e43f8a57d793120896820cb8fd670f80e816f6fb8",
+      "item_sha256": "0a7d70d3dae1b831c74285c5a3c8e92de042ddb6563490c17940fd0bebe897e5",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2575,7 +2584,16 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 12: Родители и дети: взаимопонимание или отчуждение?"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "primary_record": "https://ecatalog.gasu.ru/cgi/irbis64r_11/cgiirbis_64.exe?C21COM=S&I21DBN=IBIS&LNG=&P21DBN=IBIS&S21ALL=%3C.%3EK%3D%D0%9A%D0%BE%D0%BD%D1%84%D0%BB%D0%B8%D0%BA%D1%82%3C.%3E&S21CNR=20&S21FMT=infow_wh&S21REF=3&S21SRD=&S21SRW=TIPVID&S21STN=1&Z21ID=",
+        "evidence_scope": "University library page retrieved: exact authors, title, Moscow Prosveshchenie 1996, 191 pages, textbook genre and family pedagogy subject agree with course. Search snippet annotation actually belongs to the adjacent Arutyunyan/Zemnov book and is explicitly excluded. Recommendation uses verified subject/genre only, not unobserved contents.",
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "sequence": "General discipline overview before focused historical supplementary reading; agent inference, not a teacher requirement.",
+        "limitations": "Full text not read. Course bibliography, source snapshots, work identity and reading state retained; no scientific or access approval."
+      }
     },
     "literature:lit_ce87499b1e725a4d": {
       "decision": "approved",
