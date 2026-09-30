@@ -2533,7 +2533,7 @@
     },
     "literature:lit_e8a91d867727899b": {
       "decision": "approved",
-      "item_sha256": "f6b17a865d9322342bd27738492ee4d4acd08f5c285ae66b681b8276a9a10242",
+      "item_sha256": "09c461e64037e0c65427b3a9521d62f0a9d0f7d98dfd22cb1f620fa41ec2f488",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -2551,6 +2551,15 @@
         "primary_record": "https://voppsy.ru/issues/1998/982/982046.htm",
         "evidence_scope": "Journal page retrieved: exact title, displayed initials T. I. and first printed page 46 differ from course citation T. N. and pages 19-27. Original course citation and work identity retained; no automatic author replacement or scientific approval.",
         "decision": "warn_pending_reconciliation"
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "journal_article": "https://voppsy.ru/issues/1998/982/982046.htm",
+        "evidence_scope": "Original journal title, abstract and methods sections retrieved. Retrospective correlational study uses reported family histories across generations in a pedagogical-university student sample. Recommendation is for critical study-design reading, not causal/clinical claim approval. Course author initials/pagination discrepancy remains in warning.",
+        "sequence": "Agent-selected general overview before specialized article or techniques; not a teacher requirement or measured difficulty.",
+        "limitations": "Original course citation, authors/year, source snapshots, warnings, work identity and reading state preserved. No scientific endorsement or exact-edition/access approval."
       }
     },
     "literature:lit_4bad7531005a5e23": {
@@ -3461,7 +3470,7 @@
     },
     "literature:lit_family_slide_09": {
       "decision": "approved",
-      "item_sha256": "68120288c05a5e7e19866f5d4dbf1e3cb1fb32b28d202b98c25e77e34179ae93",
+      "item_sha256": "6e47e8154fda73373ab2c236ad6bbdedd1b7766ff28800461dcf6fb176cf6eae",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -3479,6 +3488,17 @@
         "evidence": "https://rusneb.ru/catalog/000200_000018_RU_NLR_bibl_965184/",
         "corroboration": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A44755%2FSource%3Adefault",
         "scope": "Indexed primary national/university library records name Minuchin and Fishman, 2006 Klass edition. Direct fetch failed; course edition remains unknown. No identity rewrite, reading role or whole-text approval."
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "author_center_bibliography": "https://minuchin.org/publications/",
+        "publisher_hosted_description_and_contents": "https://www.jstor.org/stable/j.ctvjnrtsx",
+        "translation_record": "https://rusneb.ru/catalog/000200_000018_RU_NLR_bibl_965184/",
+        "evidence_scope": "Author-center bibliography and Harvard University Press edition hosted on JSTOR retrieved: Minuchin/Fishman authorship, description, contents and limited chapter previews identify professional technique focus. Russian NEB record indexed; direct fetch forbidden. Exact course edition is unspecified; original full book/translation and efficacy not reviewed.",
+        "sequence": "Agent-selected general overview before specialized article or techniques; not a teacher requirement or measured difficulty.",
+        "limitations": "Original course citation, authors/year, source snapshots, warnings, work identity and reading state preserved. No scientific endorsement or exact-edition/access approval."
       }
     },
     "literature:lit_consult_lecture_01": {
