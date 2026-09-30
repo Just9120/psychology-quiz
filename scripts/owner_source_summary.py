@@ -9,10 +9,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from app.source_inventory import InventoryError, reviewed_graph, processing_status
+from app.source_inventory import InventoryError, reviewed_graph, processing_status, combine_registries
 from app.content_publication import fingerprint, load_policy
 from app.curriculum import load_catalog
-from scripts.source_inventory_report import _read, _snapshot, report, private_json_target
+from scripts.source_inventory_report import _read, _snapshot, report, private_json_target, private_registry_input
 
 
 def lesson_coverage(current, processed, registry, curriculum, published_items):
@@ -170,19 +170,24 @@ def build(current, processed, observed_at, *, registry=None, curriculum=None, pu
     return result
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--current", type=Path, required=True)
     parser.add_argument("--processed", type=Path, required=True)
     parser.add_argument("--reviewed", action="store_true")
+    parser.add_argument("--private-registry", type=Path, help="Additional reviewed source metadata in ignored data/; requires --reviewed")
     parser.add_argument("--notes-manifest", type=Path, help="Optional ignored private preparation manifest; never Vault publication evidence")
     parser.add_argument("--observed-at", required=True)
     parser.add_argument("--output", type=Path, required=True)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     try:
+        if args.private_registry is not None and not args.reviewed:
+            raise InventoryError("private_registry_requires_reviewed")
         target = private_json_target(args.output, ROOT)
         inputs = {"registry": _read(ROOT / "content/source-corpus.json"), "curriculum": load_catalog(),
                   "published_items": published_questions()} if args.reviewed else {}
+        if args.private_registry is not None:
+            inputs["registry"] = combine_registries(inputs["registry"], private_registry_input(args.private_registry, ROOT))
         if args.reviewed:
             policy = load_policy()
             inputs.update(glossary_items=published_glossary(policy), glossary_policy=policy)

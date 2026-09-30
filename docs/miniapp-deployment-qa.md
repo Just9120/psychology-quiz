@@ -767,6 +767,8 @@ python scripts/owner_source_summary.py --current data/current-inventory.json \
   --output data/owner-source-summary-candidate.json
 ```
 
+При необходимости добавьте `--private-registry data/reviewed-source-registry.json` к этой же команде с `--reviewed`. Дополнение должно быть непустым ignored private JSON в `data/`, принадлежащим оператору; corpus root должен совпадать, дубликаты source IDs отклоняются. Оно влияет только на coverage агрегата, не меняет публичный registry, processing states или разрешения публикации. Дисциплинарный глоссарий не становится источником отдельной лекции без подтверждённой связи.
+
 Пути здесь обозначают проверенные operator inputs; не создавайте пустые файлы вместо них.
 `INVENTORY_OBSERVED_AT` — подтверждённое время metadata-наблюдения с timezone,
 а не время запуска команды. Output создаётся только новым ignored `data/*.json`;

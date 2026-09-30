@@ -215,3 +215,67 @@ def test_glossary_coverage_requires_current_edition_source_and_review_without_le
     lesson["glossary_terms"] = True
     with pytest.raises(ValueError, match="invalid_coverage"):
         owner_content._coverage(coverage)
+
+
+def test_owner_summary_cli_accepts_only_private_registry_and_preserves_pending_state(tmp_path, monkeypatch, capsys):
+    import subprocess
+    from scripts import owner_source_summary as summary
+    (tmp_path / "content").mkdir()
+    (tmp_path / "data").mkdir()
+    (tmp_path / ".gitignore").write_text("data/\n", encoding="utf-8")
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, capture_output=True)
+    source_id = "private-glossary-id-123456789"
+    current = {"schema_version": 1, "root_id": "private-root", "folders": {"private-root": [{
+        "page_token": None, "next_page_token": None, "children": [{
+            "id": source_id, "title": "Glossary", "mime_type": "text/plain",
+            "modified_time": "2026-01-01T00:00:00Z", "file_or_folder": "file",
+            "parent_ids": ["private-root"]}]}]}}
+    source = {"id": source_id, "title": "Glossary", "modified_time": "2026-01-01T00:00:00Z",
+              "snapshot_sha256": "a" * 64, "kind": "learning_material", "readable": True,
+              "snapshot_kind": "extracted_text", "corpus_path": "Glossary",
+              "reviewed_at": "2026-01-02", "reviewer": "editor", "discipline_id": "one"}
+    private = {"schema_version": 1, "corpus_root_id": "private-root", "sources": [source]}
+    public = {"schema_version": 1, "corpus_root_id": "private-root", "sources": []}
+    processed = {source_id: {"revision": ["2026-01-01T00:00:00Z", "Glossary", "text/plain"],
+                            "review_state": "pending_review", "snapshot_kind": "extracted_text",
+                            "snapshot_sha256": "a" * 64}}
+    paths = {name: tmp_path / "data" / name for name in ("current.json", "processed.json", "registry.json")}
+    for name, value in (("current.json", current), ("processed.json", processed), ("registry.json", private)):
+        paths[name].write_text(json.dumps(value), encoding="utf-8")
+        paths[name].chmod(0o600)
+    (tmp_path / "content/source-corpus.json").write_text(json.dumps(public), encoding="utf-8")
+    monkeypatch.setattr(summary, "ROOT", tmp_path)
+    monkeypatch.setattr(summary, "load_catalog", lambda: {
+        "schema_version": 1, "disciplines": {"one": {"title": "Discipline"}}, "topics": {}, "editions": {}})
+    monkeypatch.setattr(summary, "published_questions", lambda: [])
+    monkeypatch.setattr(summary, "published_glossary", lambda policy: [])
+    monkeypatch.setattr(summary, "load_policy", lambda: object())
+    output = tmp_path / "data/summary.json"
+    args = ["--current", str(paths["current.json"]), "--processed", str(paths["processed.json"]),
+            "--observed-at", "2026-01-02T00:00:00Z", "--private-registry", str(paths["registry.json"]),
+            "--output", str(output)]
+    assert summary.main(args) == 1
+    assert "private_registry_requires_reviewed" in capsys.readouterr().out
+    assert not output.exists()
+    assert summary.main([*args, "--reviewed"]) == 0
+    value = json.loads(output.read_text(encoding="utf-8"))
+    assert value["coverage"]["tracked_sources"] == 1
+    assert value["coverage"]["untracked_files"] == 0 and value["coverage"]["lessons"] == []
+    assert value["processing"] == {"pending_review": 1} and value["known_holds"] == 0
+    assert source_id not in output.read_text(encoding="utf-8") + capsys.readouterr().out
+    assert json.loads((tmp_path / "content/source-corpus.json").read_text(encoding="utf-8")) == public
+    assert json.loads(paths["processed.json"].read_text(encoding="utf-8")) == processed
+    private["sources"].append(source)
+    paths["registry.json"].write_text(json.dumps(private), encoding="utf-8")
+    paths["registry.json"].chmod(0o600)
+    duplicate_output = tmp_path / "data/duplicate.json"
+    duplicate_args = [str(duplicate_output) if part == str(output) else part for part in args]
+    assert summary.main([*duplicate_args, "--reviewed"]) == 1
+    assert "duplicate_or_invalid_private_source" in capsys.readouterr().out
+    assert not duplicate_output.exists()
+    outside = tmp_path / "public-registry.json"
+    outside.write_text(json.dumps(private), encoding="utf-8")
+    outside_args = [str(outside) if part == str(paths["registry.json"]) else part for part in duplicate_args]
+    assert summary.main([*outside_args, "--reviewed"]) == 1
+    assert "private_registry_requires_ignored_data_json" in capsys.readouterr().out
+    assert not duplicate_output.exists()
