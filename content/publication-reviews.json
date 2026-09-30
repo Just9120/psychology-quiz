@@ -205,10 +205,10 @@
     },
     "literature:fch_dubynin_mozg_i_ego_potrebnosti": {
       "decision": "approved",
-      "item_sha256": "9344e224795e0bc811cfa9055dbf581e64b9551218991843fef2304754083f65",
+      "item_sha256": "92b7d9aa9ff5cd8a98aa02c01a8d45e4d835c63c6817688963e8bbc9f3beb0cd",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -216,7 +216,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 2"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.litres.ru/book/vyacheslav-albertovich-du/mozg-i-ego-potrebnosti-ot-pitaniya-do-priznaniya-63171093/",
+        "evidence_scope": "Official distributor card read: named author/title, 2020, popular-science category, publisher description of biological needs. Text offer unavailable now; this review does not establish access or endorse practical claims.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_kandel_v_poiskah_pamyati": {
       "decision": "approved",
@@ -292,10 +301,10 @@
     },
     "literature:fch_nicholls_martin_ot_neirona_k_mozgu": {
       "decision": "approved",
-      "item_sha256": "8ceee911caf577f6a98d31ed42057125ebed0cad985d45901f74e5d70d2c00d9",
+      "item_sha256": "47dfafe7534d3b5a3d7046055b2f744dc5907221593e0ecb6ccdcc8b2a720524",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -303,14 +312,23 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 6"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=340792&lang=Ru&page=Book",
+        "evidence_scope": "Official publisher/distributor annotation and contents read: neuronal signaling, membrane transport, synaptic mechanisms, experimental methods; medical/biology student audience in author preface. Current 2026 edition differs from course 2017; no edition equivalence asserted. Authors unchanged until exact course edition review.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_pavlov_dvadtsatiletniy_opyt": {
       "decision": "approved",
-      "item_sha256": "624f91ce767337ebda4d0ee3d7bc1ba3bdaf62efe1d42405cd4d1b678b75d510",
+      "item_sha256": "5ecd40a25dffd55c0d9782587d3715e772165d89285e93bd99341a2d62b2eb0f",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -318,7 +336,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 7"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01009225137",
+        "evidence_scope": "Indexed RSL catalogue identifies Pavlov and historical 1928 collection of papers, lectures, reports on conditioned reflexes. Course edition year unknown; no full text review or claim that historical conclusions equal current consensus.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_ramachandran_mozg_rasskazyvaet": {
       "decision": "approved",
@@ -346,10 +373,10 @@
     },
     "literature:fch_swaab_my_eto_nash_mozg": {
       "decision": "approved",
-      "item_sha256": "5679524f751ad315af29966faa5bdacf782138089c8c9366470076bdaf4fd3c0",
+      "item_sha256": "49256741bcf9f7604bb4fb228cd98f6651eed7c2d32b155ac891cb5d86cdd609",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -357,14 +384,23 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 9"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://limbakh.ru/index.php?id=3305",
+        "evidence_scope": "Official publisher indexed description identifies author/work and broad brain-related readership; RSL 01006742645 independently records 2014 popular edition. Direct publisher response extracted only navigation on readback; full text and claims not verified.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_sergeev_dubynin_telo_cheloveka": {
       "decision": "approved",
-      "item_sha256": "389cc00f012fc8eb1150e5ee6c2e2c961fafa148c3028873733d7d7ecfe08d74",
+      "item_sha256": "c3f252f7296ba9c06563f07bf639c458700b3a4e5cda1bb59af5cfaa7794ecbf",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -372,14 +408,23 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 10"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/telo-cheloveka-861522/?ast_utm=book_see_also",
+        "evidence_scope": "Indexed official publisher description identifies both authors and explicitly describes a popular-science book for children about body systems. Direct fetch failed; full text and exact edition equivalence not established.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_simonov_motivirovanny_mozg": {
       "decision": "approved",
-      "item_sha256": "1dc45d9b70b4a81494f90a5ab14bd7dcc6b6e7e5b5ada5163923ed216048f242",
+      "item_sha256": "bb7bd962b38d3014b825275df7b1aa5fccce1dc0c200e1951c55a83940f7fcc7",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -387,14 +432,23 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 11"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/mastera-psihologii/product/motivirovannyy-mozg-vysshaya-nervnaya-deyatelnost-i-estestvenno-nauchnye-osnovy-obschey-psihologii",
+        "evidence_scope": "Indexed official publisher annotation names needs, emotion, will and behavior, explicitly author need-information approach. Page retrieval later failed; course 1987/current edition correspondence unknown. No claim of complete contemporary scientific consensus.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_simonov_emotsionalny_mozg": {
       "decision": "approved",
-      "item_sha256": "65e313443b6ec421dae1ec8a725b93d7ff8b1135ae09cf807b4fcd3e398b73f3",
+      "item_sha256": "1e99a64329ebebccf4c1872518505cc6df52a1cf61b0280990892a9c49db1ffd",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -402,14 +456,23 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 12"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/psihologiya-na-kazhdyy-den/product/emotsionalnyy-mozg",
+        "evidence_scope": "Indexed official publisher description identifies Simonov and interdisciplinary physiological/anatomical/psychological study of emotions. NLR archive independently lists original 1981 work. Direct page failed; course edition unknown and full text not reviewed.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_ukhtomsky_dominanta": {
       "decision": "approved",
-      "item_sha256": "1759ea021e9a2fe77c0a5c98a4955b4d94cb30071809811f3e9506b4af9d3e18",
+      "item_sha256": "c8bcbc2f4e18a114d693105f10622d3eccebd1a49fc95af9f57e8769dbc7594c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -417,7 +480,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 13"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://rusneb.ru/catalog/000199_000009_004485205/",
+        "evidence_scope": "Indexed National Electronic Library catalogue identifies Ukhtomsky Dominanta 2002. Official AST descriptions 875110/865599 locate attention physiology and interdisciplinary interpretation; exact compilation/edition match not established. NEB direct fetch 403; full text not reviewed.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fch_shulgovsky_neirofiziologiya": {
       "decision": "approved",
@@ -445,10 +517,10 @@
     },
     "literature:fch_yakutenko_volya_i_samokontrol": {
       "decision": "approved",
-      "item_sha256": "e3690f1e3931404506387c68739c20377dc0c0a3cd9ff4228d71db7a86646938",
+      "item_sha256": "948c2f3e63887477884c1b3c856aefe65bb1f8b95e4cb5fed5af638e815ebc2c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -456,7 +528,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 15"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://alpinabook.ru/catalog/book-volya-i-samokontrol/",
+        "evidence_scope": "Indexed official publisher card identifies author/title and popular discussion of self-control. CBR library 941485 records revised edition and prior 2018 edition; exact text equivalence not established. Direct subsequent body fetch failed; no full text review or endorsement of genetic/clinical claims.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_gazzaniga_kto_za_glavnogo": {
       "decision": "approved",
@@ -484,10 +565,10 @@
     },
     "literature:fvnd_dubynin_mozg_i_ego_potrebnosti": {
       "decision": "approved",
-      "item_sha256": "a35b467c1fddb63df0412fc83db9f9795954317ff57a1c957fd448a0b69d7fd2",
+      "item_sha256": "f0e15c873d7e38f0284de5b16f85cd7eafa1d744b2b7d118241b7e04933148a7",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -495,7 +576,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 2"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.litres.ru/book/vyacheslav-albertovich-du/mozg-i-ego-potrebnosti-ot-pitaniya-do-priznaniya-63171093/",
+        "evidence_scope": "Official distributor card read: named author/title, 2020, popular-science category, publisher description of biological needs. Text offer unavailable now; this review does not establish access or endorse practical claims.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_kandel_v_poiskah_pamyati": {
       "decision": "approved",
@@ -571,10 +661,10 @@
     },
     "literature:fvnd_nicholls_martin_ot_neirona_k_mozgu": {
       "decision": "approved",
-      "item_sha256": "7278c928ff2b070ac5207c4c50cf9d755633a112a0927aca31f933cefa96c0da",
+      "item_sha256": "cdd9ec4d493c88c51580dfd086fd00a97206f33d9e068a3fe5eb2e939cb1a915",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -582,14 +672,23 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 6"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=340792&lang=Ru&page=Book",
+        "evidence_scope": "Official publisher/distributor annotation and contents read: neuronal signaling, membrane transport, synaptic mechanisms, experimental methods; medical/biology student audience in author preface. Current 2026 edition differs from course 2017; no edition equivalence asserted. Authors unchanged until exact course edition review.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_pavlov_dvadtsatiletniy_opyt": {
       "decision": "approved",
-      "item_sha256": "661aff67d4b08a28ba5f82728e36e030b13742dc11ba8c7b8bf3a4f2c8684104",
+      "item_sha256": "14ac99a28ecf5d3cc21cefd7d6922314a5760652500a8171f9110fabda6da9d0",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -597,7 +696,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 7"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01009225137",
+        "evidence_scope": "Indexed RSL catalogue identifies Pavlov and historical 1928 collection of papers, lectures, reports on conditioned reflexes. Course edition year unknown; no full text review or claim that historical conclusions equal current consensus.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_ramachandran_mozg_rasskazyvaet": {
       "decision": "approved",
@@ -625,10 +733,10 @@
     },
     "literature:fvnd_swaab_my_eto_nash_mozg": {
       "decision": "approved",
-      "item_sha256": "b9d905e9c2b34f240803189ec78ef56e8d1b10689969c058b869e10893ab5afc",
+      "item_sha256": "119ec8bda68c042d56d3b628ea490433f56e10b46b4c1d28c6491819a2c327f8",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -636,14 +744,23 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 9"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://limbakh.ru/index.php?id=3305",
+        "evidence_scope": "Official publisher indexed description identifies author/work and broad brain-related readership; RSL 01006742645 independently records 2014 popular edition. Direct publisher response extracted only navigation on readback; full text and claims not verified.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_sergeev_dubynin_telo_cheloveka": {
       "decision": "approved",
-      "item_sha256": "5bfc794aee149141e7bea8fd608477bd757825498820ce966e330b5da3276155",
+      "item_sha256": "eca5552447cacc3097a6d598e08a814cf522842b44c35f5e0aef0b7cc5bf9ad1",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -651,14 +768,23 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 10"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/telo-cheloveka-861522/?ast_utm=book_see_also",
+        "evidence_scope": "Indexed official publisher description identifies both authors and explicitly describes a popular-science book for children about body systems. Direct fetch failed; full text and exact edition equivalence not established.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_simonov_motivirovanny_mozg": {
       "decision": "approved",
-      "item_sha256": "1b3f2213340a861c47b2c1a7f369d4dd162648fe8aea58428354aee4b0fff141",
+      "item_sha256": "3334ac22bec2af8a10a05a2a1e079dc393c7dd17f78b4296f06b98925845a29c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -666,14 +792,23 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 11"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/mastera-psihologii/product/motivirovannyy-mozg-vysshaya-nervnaya-deyatelnost-i-estestvenno-nauchnye-osnovy-obschey-psihologii",
+        "evidence_scope": "Indexed official publisher annotation names needs, emotion, will and behavior, explicitly author need-information approach. Page retrieval later failed; course 1987/current edition correspondence unknown. No claim of complete contemporary scientific consensus.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_simonov_emotsionalny_mozg": {
       "decision": "approved",
-      "item_sha256": "ea8b712a10248230324066b317401c3dbce2261b02d8994ad73aec5179372884",
+      "item_sha256": "9bc35e4e987c3c147cccaf46c4a33a181576f0438f28531582ab9a86a42b0051",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -681,14 +816,23 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 12"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/psihologiya-na-kazhdyy-den/product/emotsionalnyy-mozg",
+        "evidence_scope": "Indexed official publisher description identifies Simonov and interdisciplinary physiological/anatomical/psychological study of emotions. NLR archive independently lists original 1981 work. Direct page failed; course edition unknown and full text not reviewed.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_ukhtomsky_dominanta": {
       "decision": "approved",
-      "item_sha256": "027f762803de7bae02dbdb7be2ae78ad0d7e37caea196e4d4183ef150730b66d",
+      "item_sha256": "c31d3f5bd0a2dfe66b61df76a5ca3cd49537c273707e5bf942ffd91e56474b48",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -696,7 +840,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 13"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://rusneb.ru/catalog/000199_000009_004485205/",
+        "evidence_scope": "Indexed National Electronic Library catalogue identifies Ukhtomsky Dominanta 2002. Official AST descriptions 875110/865599 locate attention physiology and interdisciplinary interpretation; exact compilation/edition match not established. NEB direct fetch 403; full text not reviewed.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:fvnd_shulgovsky_neirofiziologiya": {
       "decision": "approved",
@@ -724,10 +877,10 @@
     },
     "literature:fvnd_yakutenko_volya_i_samokontrol": {
       "decision": "approved",
-      "item_sha256": "471df71913acfab8c8a82b093e63395e3c27da524175127fc2bbb0bdc5779094",
+      "item_sha256": "b7aeaa457f9b97a476d426d630badcafd6df1421a09344ce35930b424c83944d",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -735,7 +888,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 15"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://alpinabook.ru/catalog/book-volya-i-samokontrol/",
+        "evidence_scope": "Indexed official publisher card identifies author/title and popular discussion of self-control. CBR library 941485 records revised edition and prior 2018 edition; exact text equivalence not established. Direct subsequent body fetch failed; no full text review or endorsement of genetic/clinical claims.",
+        "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
+        "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      }
     },
     "literature:psf_danilova_psihofiziologiya": {
       "decision": "approved",
