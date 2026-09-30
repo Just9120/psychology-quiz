@@ -69,7 +69,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       <p>Год: {entry.year ?? 'не указан'}</p>
       {work.access_links.length ? <div className="literature-access"><h3>Внешние версии</h3>
         <p className="muted">Ссылка ведёт к провайдеру. Наличие доступа, цена и совпадение издания проверяются там.</p>
-        {work.access_links.map(link => <p key={link.format}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
+        {work.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
       </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
       <details className="source-details"><summary>Библиографическая запись</summary><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}

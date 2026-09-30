@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from copy import deepcopy
 from collections import Counter, defaultdict
 from datetime import date
@@ -34,6 +35,18 @@ PUBLIC_ITEM_FIELDS = (
     "prerequisites",
 )
 PUBLIC_SOURCE_FIELDS = ("citation",)
+def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
+    if (parsed is None or parsed.scheme != "https" or parsed.username or parsed.password
+            or parsed.query or parsed.fragment):
+        return False
+    if provider == "Литрес":
+        prefix = "/book/" if fmt == "text" else "/audiobook/"
+        return parsed.netloc == "www.litres.ru" and parsed.path.startswith(prefix)
+    if provider == "Юрайт":
+        return fmt == "text" and parsed.netloc == "urait.ru" and re.fullmatch(r"/bcode/[0-9]+", parsed.path) is not None
+    return False
+
+
 @lru_cache(maxsize=1)
 def load_access_links() -> dict[str, list[dict[str, str]]]:
     """Curated outbound offers; a link never means that the user owns a copy."""
@@ -56,15 +69,12 @@ def load_access_links() -> dict[str, list[dict[str, str]]]:
                 checked_date = isinstance(checked, str) and date.fromisoformat(checked).isoformat() == checked
             except ValueError:
                 checked_date = False
-            if (not isinstance(fmt, str) or fmt not in {"text", "audio"} or fmt in seen
-                    or offer["provider"] != "Литрес" or offer["access"] != "provider_terms"
+            if (not isinstance(fmt, str) or fmt not in {"text", "audio"} or not isinstance(url, str) or url in seen
+                    or offer["access"] != "provider_terms"
                     or not checked_date
-                    or parsed is None or parsed.scheme != "https" or parsed.hostname != "www.litres.ru"
-                    or parsed.netloc != "www.litres.ru" or parsed.username or parsed.password
-                    or parsed.query or parsed.fragment
-                    or not parsed.path.startswith("/book/" if fmt == "text" else "/audiobook/")):
+                    or not _valid_offer_target(offer["provider"], fmt, parsed)):
                 raise ValueError("Invalid literature access offer")
-            seen.add(fmt)
+            seen.add(url)
             links[work_id].append(offer)
     return links
 

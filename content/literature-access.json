@@ -65,6 +65,13 @@
         "url": "https://www.litres.ru/book/veronika-nurkova/obschaya-psihologiya-3-e-izd-per-i-dop-uchebnik-dlya-vuzo-13240704/",
         "access": "provider_terms",
         "checked_at": "2026-09-30"
+      },
+      {
+        "format": "text",
+        "provider": "Юрайт",
+        "url": "https://urait.ru/bcode/582490",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
       }
     ],
     "rubinstein_osnovy_obschey_psihologii": [

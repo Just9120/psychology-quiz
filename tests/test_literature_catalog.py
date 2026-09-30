@@ -107,6 +107,9 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
     links = load_access_links()
     assert set(links) == {
         'vygotsky_myshlenie_i_rech', 'lit_0199865ad8d23ecb', 'lit_819808cf97ad8eb5',
+        'gippenreiter_vvedenie_v_obschuyu_psihologiyu', 'nurkova_berezanskaya_obschaya_psihologiya',
+        'rubinstein_osnovy_obschey_psihologii', 'lit_consult_lecture_01', 'lit_consult_lecture_02',
+        'lit_5505760c8ef8c4b8', 'lit_8c4dd1a3c39ecbcf',
     }
     assert {link['format'] for link in links['vygotsky_myshlenie_i_rech']} == {'text', 'audio'}
     assert {link['format'] for link in links['lit_0199865ad8d23ecb']} == {'text'}
@@ -133,3 +136,34 @@ def test_reading_prerequisite_graph_handles_long_valid_sequence_without_recursio
     entries = {str(i): {"work_id": str(i), "prerequisites": [str(i-1)] if i else []}
                for i in range(1500)}
     assert validate_literature.validate_prerequisite_graph(entries) == []
+
+
+def test_curated_offers_allow_multiple_text_providers_and_reject_wrong_targets(monkeypatch):
+    import pytest
+    base = {"format": "text", "provider": "Литрес", "url": "https://www.litres.ru/book/author/book-1/", "access": "provider_terms", "checked_at": "2026-09-30"}
+    publisher = {**base, "provider": "Юрайт", "url": "https://urait.ru/bcode/582490"}
+    raw = {"schema_version": 1, "works": {"work": [base, publisher]}}
+    monkeypatch.setattr(literature, '_load_json_file', lambda path: raw)
+    try:
+        literature.load_access_links.cache_clear()
+        assert literature.load_access_links()['work'] == [base, publisher]
+        invalid = [
+            {**publisher, "provider": "Unknown"},
+            {**publisher, "format": "audio"},
+            {**publisher, "url": "https://urait.ru.evil.example/bcode/582490"},
+            {**publisher, "url": "https://urait.ru@evil.example/bcode/582490"},
+            {**publisher, "url": "https://urait.ru/bcode/582490?redirect=elsewhere"},
+            {**publisher, "url": "https://urait.ru/account"},
+            {**publisher, "url": "http://urait.ru/bcode/582490"},
+        ]
+        for offer in invalid:
+            raw['works']['work'] = [offer]
+            literature.load_access_links.cache_clear()
+            with pytest.raises(ValueError):
+                literature.load_access_links()
+        raw['works']['work'] = [base, dict(base)]
+        literature.load_access_links.cache_clear()
+        with pytest.raises(ValueError):
+            literature.load_access_links()
+    finally:
+        literature.load_access_links.cache_clear()

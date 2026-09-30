@@ -50,7 +50,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
       <h2>{item.title}</h2><p>{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p>
       <p>Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source ? importanceSources[item.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       {item.access_links?.length ? <div className="literature-access"><h3>Внешние версии</h3><p className="muted">Доступ и совпадение издания уточняются у провайдера.</p>
-        {item.access_links.map(link => <p key={link.format}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
+        {item.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
       </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
       <p>{item.why_read}</p>{item.source?.citation && <details><summary>Библиографическая запись</summary><blockquote>{item.source.citation}</blockquote></details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!uncertain) void run(save) }}>
