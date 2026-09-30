@@ -32,7 +32,7 @@
     },
     "literature:nurkova_berezanskaya_obschaya_psihologiya": {
       "decision": "approved",
-      "item_sha256": "edbddcf39396437eea8da653db67490379b12973c6749b26682c67f970526814",
+      "item_sha256": "62b7e763b4757f0b25d296c910eff506853b195d5a067a5939aef2eab1145bea",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -50,6 +50,17 @@
         "evidence_scope": "Existing approved course bibliography explicitly labels the entry as primary or additional; mapping uses that label only. No title/order inference or full-book difficulty claim.",
         "bibliography_label": "Основная",
         "mapping": "Основная -> базовая; Дополнительная -> дополнительная"
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "teacher bibliography, kept unchanged",
+        "research_sources": [
+          "https://urait.ru/bcode/582490"
+        ],
+        "evidence_scope": "Official publisher catalogue matches both authors/title and identifies a university general-psychology textbook spanning theoretical knowledge, experimental facts and psychological practice. The bcode page exposes only title/widgets to the reader; publisher library description was indexed. Exact course edition and full text not checked.",
+        "sequence": "Agent recommends a broad systematic textbook after the reviewed introductory course; not a teacher/author required predecessor.",
+        "limitations": "Existing course bibliography source IDs/snapshot/revision unchanged; no source content, book text or user state published."
       }
     },
     "literature:vygotsky_myshlenie_i_rech": {
@@ -78,7 +89,7 @@
     },
     "literature:zhdan_istoriya_psihologii": {
       "decision": "approved",
-      "item_sha256": "505847c73f5219192a25307bd830987dfabfc919b77ed59c94883b9f43657f84",
+      "item_sha256": "22a9cad977b8281fc9c91f7a601614796a198f1d2155b888b035c13b9879452a",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -96,11 +107,22 @@
         "evidence_scope": "Existing approved course bibliography explicitly labels the entry as primary or additional; mapping uses that label only. No title/order inference or full-book difficulty claim.",
         "bibliography_label": "Дополнительная",
         "mapping": "Основная -> базовая; Дополнительная -> дополнительная"
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "teacher bibliography, kept unchanged",
+        "research_sources": [
+          "https://search.rsl.ru/ru/record/01003126894"
+        ],
+        "evidence_scope": "RSL record read: author/title, university psychology-student audience and subject history of psychology confirmed. The record concerns the 2007 edition; no claim that it matches the 2008 course copy page-for-page, no full-text/difficulty measurement.",
+        "sequence": "Agent recommends historical-context reading after introductory concepts; selected predecessor is a platform recommendation, not a quoted teacher prerequisite.",
+        "limitations": "Existing course bibliography source IDs/snapshot/revision unchanged; no source content, book text or user state published."
       }
     },
     "literature:myers_psihologiya": {
       "decision": "approved",
-      "item_sha256": "682ffbe78f34d982646eb580aca77130d8532b6b023b854fa665370c78e4f9a5",
+      "item_sha256": "5a9018237bcfbc2b1fd6efd2631b2e6a0843f853fc96dd2f7e39c4bbe31e3ceb",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -118,6 +140,19 @@
         "evidence_scope": "Existing approved course bibliography explicitly labels the entry as primary or additional; mapping uses that label only. No title/order inference or full-book difficulty claim.",
         "bibliography_label": "Дополнительная",
         "mapping": "Основная -> базовая; Дополнительная -> дополнительная"
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "teacher bibliography, kept unchanged",
+        "research_sources": [
+          "https://davidmyers.org/textbooks",
+          "https://store.macmillanlearning.com/us/product/Psychology/p/1319426891",
+          "https://lib.ndu.edu.ua/cgi-bin/irbis64r_12/cgiirbis_64.exe?C21COM=S&I21DBN=IBIS_PRINT&LNG=en&P21DBN=IBIS&S21CNR=&S21FMT=fullw_print&S21P01=0&S21P02=1&S21P03=A%3D&S21REF=&S21STN=1&S21STR=%D0%9C%D0%B0%D0%B9%D0%B5%D1%80%D1%81%2C+%D0%94%D1%8D%D0%B2%D0%B8%D0%B4&Z21ID="
+        ],
+        "evidence_scope": "Indexed author/publisher descriptions identify Psychology as an introductory textbook; university library record identifies the Russian Popurri translation of Psychology (5th English edition). Author/title/work role supported; the course cites 2008, library 2001, current publisher 14th edition. No edition equivalence, current research content or full-text review claimed.",
+        "sequence": "Alternative introductory reading recommended by agent. No specific mandatory preceding book established; an empty prerequisite list is not proof of no assumed knowledge.",
+        "limitations": "Existing course bibliography source IDs/snapshot/revision unchanged; no source content, book text or user state published."
       }
     },
     "literature:rubinstein_osnovy_obschey_psihologii": {
