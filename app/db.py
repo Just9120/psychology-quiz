@@ -423,10 +423,12 @@ def select_random_approved_question_ids_by_category(
         SELECT q.id,q.external_id
         FROM questions q
         WHERE {where_clause}
-        ORDER BY RANDOM()
     """
 
     rows = conn.execute(query, params).fetchall()
+    # Fetching the full candidate set is required for overlap-aware selection.
+    # A linear shuffle avoids sorting that same set inside the database.
+    random.shuffle(rows)
     return diverse_first([(int(row["id"]), str(row["external_id"])) for row in rows], limit)
 
 
@@ -453,10 +455,12 @@ def select_random_approved_question_ids_across_active_categories(
               WHERE q2.category_id = c.id
                 AND q2.status = 'approved'
           )
-        ORDER BY RANDOM()
     """
 
     rows = conn.execute(query, params).fetchall()
+    # Fetching the full candidate set is required for overlap-aware selection.
+    # A linear shuffle avoids sorting that same set inside the database.
+    random.shuffle(rows)
     return diverse_first([(int(row["id"]), str(row["external_id"])) for row in rows], limit)
 
 
@@ -483,8 +487,8 @@ def select_random_approved_question_ids_by_categories(
         SELECT q.id, q.category_id, q.external_id
         FROM questions q
         WHERE {where_clause}
-        ORDER BY RANDOM()
     """, params).fetchall()
+    random.shuffle(rows)
     order = list(dict.fromkeys(category_ids))
     random.shuffle(order)
     buckets: dict[int, list[tuple[int, str]]] = {category_id: [] for category_id in order}

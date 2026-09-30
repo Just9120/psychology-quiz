@@ -253,3 +253,23 @@ def test_legacy_migration_is_idempotent_preserves_users_answers_and_marks_uncert
         assert conn.execute("SELECT score FROM quiz_sessions").fetchone()[0] == 0
         check_business(conn)
     verify_preserved(path, backup)
+
+
+def test_random_selectors_keep_full_filtered_bank_without_database_sort(bank):
+    with closing(get_connection(str(bank))) as conn:
+        category = conn.execute("SELECT category_id FROM questions WHERE external_id='stable-question'").fetchone()[0]
+        statements = []
+        conn.set_trace_callback(statements.append)
+        selectors = (
+            (select_random_approved_question_ids_by_category, category, {1}),
+            (select_random_approved_question_ids_by_categories, [category], {1}),
+            (select_random_approved_question_ids_across_active_categories, None, {1, 2}),
+        )
+        for selector, scope, expected in selectors:
+            args = (conn,) if scope is None else (conn, scope)
+            picked = selector(*args, limit=None, difficulty_mode="easy")
+            assert len(picked) == len(expected)
+            assert set(picked) == expected
+            assert selector(*args, limit=None, difficulty_mode="hard") == []
+        assert statements
+        assert all("ORDER BY RANDOM()" not in statement.upper() for statement in statements)
