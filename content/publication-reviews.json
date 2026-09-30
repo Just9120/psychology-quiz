@@ -1435,10 +1435,10 @@
     },
     "literature:lit_8c4dd1a3c39ecbcf": {
       "decision": "approved",
-      "item_sha256": "70234d074347417ebdb5df5c68074b671f3f48e065b51737b6dec6082a958eef",
+      "item_sha256": "7a2d7b4230e6bd3d0ab3f029f7591218f3761251c6dc2c32a81bc08e3bc77529",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1446,14 +1446,23 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 1: Социальная психология"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://shop.aspectpress.ru/product/andreeva-g-m-sotsialnaya-psihologiya",
+        "evidence_scope": "Official publisher card description/contents available: systematic university course, communication, groups, social psychology of personality and methods. Card 2016 and anniversary 2026 editions differ from course year 2017; text equivalence/full book not established.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_00a7af60c24a8221": {
       "decision": "approved",
-      "item_sha256": "ea51bee878e3461595e3a8e71f4f99dc995d827cbed767e50a8d6b6ff99c00b4",
+      "item_sha256": "c4800129ea188d71e50dc90a74fc701188661217693719958a55d89ae283030e",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1461,14 +1470,23 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 2: Психология личности"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.litres.ru/book/t-slotina/psihologiya-lichnosti-uchebnoe-posobie-181646/",
+        "evidence_scope": "Official distributor card identifies Slotina and overview of concepts/domestic and foreign theories. Omsk university library indexed catalogue records revised 2017 edition with broad subject contents. Exact distributor/course edition equivalence and full text not verified.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_917071a82ba4c6db": {
       "decision": "approved",
-      "item_sha256": "27cd56c4828da8304ebb09e6faea522e834a8c6938e85ed85698686954de684f",
+      "item_sha256": "ba96792bd278ea7f662027b3eb23614286a17ca8598d129ee3b5a07b858f7ae0",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1476,14 +1494,23 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 3: Психология личности"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01004837997",
+        "evidence_scope": "RSL catalogue identifies both authors and university-level personality study aid, second edition 2011. Course year 2016 is different; exact edition/full text/relative difficulty not verified.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_5505760c8ef8c4b8": {
       "decision": "approved",
-      "item_sha256": "6d478d551028d44c03aba9b22229ec531765915ef3f1b0afb285b113609941c0",
+      "item_sha256": "7f7b21eca964d4832be0c525934c3dbf97fec6a843ef73b8d2678f8529fefd1d",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1491,14 +1518,23 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 4: Психология личности. Культурно-историческое понимание развития человека"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://asmolovpsy.ru/book/psihologiya-lichnosti-kulturno-istoricheskoe-ponimanie-razvitiya-cheloveka/",
+        "evidence_scope": "Author website annotation read: changing personality in changing world, interdisciplinary development perspective, university audience; author/title/year 2007 matches course bibliography. Annotation and partial preface reviewed, not whole book.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_2055c41e007c80b8": {
       "decision": "approved",
-      "item_sha256": "c51fcca406bb1736e81a224a28db3bb4f38908773735acba81f04ac2c28c5042",
+      "item_sha256": "847e8548a3b48e7b04f288059e8f18ed3b145eeb8fb6b9c2cafedadeea806675",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1506,14 +1542,23 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 5: Психология эмоций"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://zounb.zp.ua/resourse/pokazhchyky/knigi-ishchushchim/psikhologiya/emocijni-stani",
+        "evidence_scope": "Public library indexed bibliography identifies Breslav 2004 university study aid on emotions; BGPU university library independently matches author/year/publishers. Different authors with same title excluded. Full text and measured difficulty not reviewed.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_4bfaf8e48c20ad8b": {
       "decision": "approved",
-      "item_sha256": "b6d273f1ae8f07b17811cb32ca61a8e9b201abb00b4ca3174cd44b42c2e7f7f2",
+      "item_sha256": "f2e048b30682ee47133b763f471be478e8851c689597ec26ab01746d28f20562",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1521,14 +1566,23 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 6: Социальная психология"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://academia-moscow.ru/ftp_share/_books/fragments/fragment_13613.pdf",
+        "evidence_scope": "Official publisher fragment pp0-2 read: authors/title/year 2011/ISBN, annotation and contents explicitly preschool social development, child-adult interaction and socialization. Not a generic all-age social psychology textbook. Only supplied fragment, not full 224-page book, reviewed.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_09470e6d0794b19a": {
       "decision": "approved",
-      "item_sha256": "3cc81b19887299146cf99840210ef4ae355842b14d5dbe2927512ada8352bdaa",
+      "item_sha256": "d0c4fee2e97c7904ee650a6d71793a2762810d5724d1fbdc4ad9f069bc082138",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1536,14 +1590,23 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 7: Психология индивидуальных различий"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01001111098",
+        "evidence_scope": "RSL catalogue identifies edited anthology, university audience, individuality/personality and both editors in 1982 edition. Presidential library lLZOB2idenf74mm and MGPPU PsyJournals author publications index identify later 2008 editions; exact variant/pages unresolved. Full book not read.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_1e9a50757f2caf6e": {
       "decision": "approved",
-      "item_sha256": "4f2ef5c751cb0166741e49bab081b5247f4d051dd3c90456e5dcc9f6748abb0a",
+      "item_sha256": "16b39ff021894ec8fc83ddae12cd2821a20a13342d05f935c44388fc39bb1fa7",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "11cVBHaFUv9P4TmeXCduV6DtMtwYruQmS",
@@ -1551,7 +1614,16 @@
           "snapshot_sha256": "f44a3a478b9ecea1d1324be07da5a1817e66a92ca0f5d7d7bd1e0872acc9fc4f",
           "locator": "Позиция 8: Психология мотивации достижения"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://publications.hse.ru/books/153416139",
+        "evidence_scope": "Primary university publication record identifies Gordeeva and achievement motivation; RSL 01002866411 identifies psychology student study aid, publishers and 2006 matching course. Only metadata reviewed, not all theories or full text.",
+        "sequence": "Agent suggests overview before thematic/methodological reading; child social development after general social psychology. No teacher/author mandatory reading order asserted.",
+        "limitations": "Existing work identity, bibliography/source snapshot/revision and personal reading state unchanged. Not a scientific certification of book claims or complete content review."
+      }
     },
     "literature:lit_634fbb9e1e821b8a": {
       "decision": "approved",
