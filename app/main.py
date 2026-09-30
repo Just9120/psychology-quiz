@@ -141,6 +141,7 @@ from app.classic_quiz_handlers import (
 logger = logging.getLogger(__name__)
 
 TELEGRAM_PRIVACY_POLICY_URL = "https://telegram.org/privacy-tpa"
+PRIVACY_CONTACT_EMAIL = "Just9119@gmail.com"
 AGE_NOTICE = "Учебный бот и Mini App предназначены для пользователей от 18 лет."
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
@@ -466,7 +467,8 @@ async def privacy_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         "Удаление общей истории аккаунта владельца PWA здесь недоступно. Команда не удаляет сообщения Telegram "
         "и ранее созданные резервные копии.\n\n"
         "Стандартная политика конфиденциальности Telegram для ботов и Mini App:\n"
-        f"{TELEGRAM_PRIVACY_POLICY_URL}",
+        f"{TELEGRAM_PRIVACY_POLICY_URL}\n\n"
+        f"По вопросам копии или исправления учебных данных: {PRIVACY_CONTACT_EMAIL}",
     )
 
 

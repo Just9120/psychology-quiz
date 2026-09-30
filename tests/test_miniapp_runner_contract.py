@@ -804,6 +804,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         asyncio.run(privacy_command(SimpleNamespace(message=message), None))
         text = message.reply_text.await_args.args[0]
         self.assertIn(TELEGRAM_PRIVACY_POLICY_URL, text)
+        self.assertIn("Just9119@gmail.com", text)
 
     def test_should_start_miniapp_api_disabled_by_default(self):
         settings = SimpleNamespace(
