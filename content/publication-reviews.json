@@ -1768,7 +1768,7 @@
     },
     "literature:lit_57ba3a9bf5d4ff18": {
       "decision": "approved",
-      "item_sha256": "bcbfbbd05c839c9a3ee748e9e317febe4453b4f83a3a2886dab1931b43c37e5a",
+      "item_sha256": "18b2813b2f053a1e782ba7e9f188b15aeda4b1b267ead4861b47a9392ec13405",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1779,11 +1779,20 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 8: Привязанность"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01001857176",
+        "evidence_scope": "Primary RSL 2003 record describes child-to-mother attachment and scholarly/student audience. Course edition unspecified; no full-text review.",
+        "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
+        "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
+      }
     },
     "literature:lit_b76317a4d7bec59d": {
       "decision": "approved",
-      "item_sha256": "806c3974b6443477235d6295ce42f4ac0a1c5739b5429c939a2a28733f566c40",
+      "item_sha256": "3ceb5804c1f3a5621ece80e6624b599512635bf51f0e4ee9aa30f30c6c973456",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1802,6 +1811,15 @@
         "evidence_scope": "URSS catalogue identifies the phrase as a subtitle of Bowlby emotional bonds, 2026 edition. The current course PDF text lists it as a separate bullet without author. Exact course edition and visual PDF layout not verified.",
         "source_read": "Authenticated current course PDF text fetch on 2026-09-30; modified_time 2026-08-30T19:32:28.269Z matches existing source record. Extraction evidence only.",
         "limitations": "Candidate duplicate only. No identity merge, source citation change, role assignment or personal reading-state change."
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=260897&lang=Ru&page=Book",
+        "evidence_scope": "URSS bibliographic card and contents identify seven lectures on attachment, separation and loss. Course edition unspecified; possible subtitle duplicate retained with warning; no full-text review.",
+        "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
+        "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
       }
     },
     "literature:lit_d679ea65152d4922": {
@@ -1829,7 +1847,7 @@
     },
     "literature:lit_3ecf3ffbaa287019": {
       "decision": "approved",
-      "item_sha256": "f89ed0e95ca690b3a5f69eb920744f874ec542e37129d00e166b58728d45e69b",
+      "item_sha256": "02e14d2cbdbebcd8de8ac838fd752c26ebb8fca8be4c056e93a1ee816004dc5c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1840,11 +1858,20 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 11: Ребёнок, семья и внешний мир"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/all/product/rebenok-semya-i-vneshniy-mir",
+        "evidence_scope": "Indexed official publisher description identifies parental concerns and pediatric, psychiatric and psychoanalytic perspectives. Direct reread failed; NEB record confirms title/author for 2016 translation. Course edition unspecified; no full-text review.",
+        "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
+        "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
+      }
     },
     "literature:lit_6f18559891d319c1": {
       "decision": "approved",
-      "item_sha256": "a74efd76f9ea620679d75ee00e241a07f055319e93b82dcfb0a66ad876d8ebc7",
+      "item_sha256": "956e07ecce38e3199eccff056feeac37073c822968daac53eaf5de3df1a8b801",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1855,7 +1882,16 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 12: От педиатрии к психоанализу"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.studentlibrary.ru/ru/book/ISBN9785731209977.html",
+        "evidence_scope": "Indexed licensed electronic library description identifies collected articles tracing child development and treatment views, 2022 corrected edition. Direct fetch failed; course edition unspecified; no full-text review.",
+        "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
+        "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
+      }
     },
     "literature:lit_caa8d94a943aae0d": {
       "decision": "approved",

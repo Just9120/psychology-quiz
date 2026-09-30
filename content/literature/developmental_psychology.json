@@ -272,16 +272,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 80,
     "global_order": 420080,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "why_read": "После общего курса развития подробнее рассмотреть формирование привязанности ребёнка к близкому взрослому в теории Боулби.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_c9f5f2a72f8ab645"
+    ],
     "source_refs": [
       "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
     ],
@@ -295,7 +297,9 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_b76317a4d7bec59d",
@@ -308,16 +312,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 90,
     "global_order": 420090,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "why_read": "После знакомства с теорией привязанности перейти к лекциям Боулби о разлуке, утрате и эмоциональных связях.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_57ba3a9bf5d4ff18"
+    ],
     "source_refs": [
       "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
     ],
@@ -332,7 +338,9 @@
       "Год издания не установлен по исходному списку.",
       "В другом издании «Руководство практического психолога» — подзаголовок книги Боулби «Создание и разрушение эмоциональных связей». В учебном списке это отдельный пункт; соответствие конкретному изданию пока не подтверждено."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_d679ea65152d4922",
@@ -381,16 +389,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 110,
     "global_order": 420110,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "why_read": "После общего обзора развития познакомиться с авторским психоаналитическим взглядом Винникотта на отношения ребёнка, семьи и внешнего мира.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_8c7e7daa0a5aa779"
+    ],
     "source_refs": [
       "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
     ],
@@ -404,7 +414,9 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_6f18559891d319c1",
@@ -417,16 +429,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "advanced",
     "status": "approved",
     "priority": null,
     "topic_order": 120,
     "global_order": 420120,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "why_read": "После более общего знакомства с Винникоттом углубить изучение его взглядов на развитие ребёнка по специализированному сборнику статей.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_3ecf3ffbaa287019"
+    ],
     "source_refs": [
       "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
     ],
@@ -440,6 +454,8 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "advanced",
+    "importance_source": "agent"
   }
 ]
