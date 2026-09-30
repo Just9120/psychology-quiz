@@ -2611,10 +2611,10 @@
     },
     "literature:lit_7a7c03e9f990308e": {
       "decision": "approved",
-      "item_sha256": "c57065a5e157522b9c4a12f0b25063333ee701fbf1259110aa961d282d1272a7",
+      "item_sha256": "3d70e3b2151eeaff0c4c928ec31976d62a534ed39927caabcb2fbf0502cd8ebb",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -2622,7 +2622,16 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 4: Организационное поведение"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01000631446",
+        "evidence_scope": "Primary RSL catalogue retrieved: matching title, author, publisher and 1999 translation from seventh English edition; university economic student audience and management/social psychology subjects. No full-book or current scientific accuracy review.",
+        "sequence": "Agent recommendation, not a teacher requirement. No hard prerequisite inferred from bibliographic metadata.",
+        "limitations": "Original source snapshots/citations, authors, year, work identity and reading state preserved. No measured difficulty, entitlement or whole-book validation claimed."
+      }
     },
     "literature:lit_909b215a9fece3cc": {
       "decision": "approved",
@@ -2641,10 +2650,10 @@
     },
     "literature:lit_543dcd562c0460c5": {
       "decision": "approved",
-      "item_sha256": "02a381e2b12c9fd8d20f6701d09369434982489f03ec829f3f68d7a50a8ece0b",
+      "item_sha256": "209c8219bacc529a84361453d06c19546ac874d67d46c36c54e41c8b14e59df8",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -2652,7 +2661,16 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 6: Психология влияния"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/all/product/psihologiya-vliyaniya-5-e-izd-poket-3",
+        "evidence_scope": "Indexed official publisher description: matching title/author, influence, motivation and decision-making scope. Direct page extraction did not expose the description; exact course 2016 edition and full book not verified.",
+        "sequence": "Agent recommendation, not a teacher requirement. No hard prerequisite inferred from bibliographic metadata.",
+        "limitations": "Original source snapshots/citations, authors, year, work identity and reading state preserved. No measured difficulty, entitlement or whole-book validation claimed."
+      }
     },
     "literature:lit_b31bb7b1dc37d79d": {
       "decision": "approved",
@@ -2723,10 +2741,10 @@
     },
     "literature:lit_e29fc4e37d6eef9b": {
       "decision": "approved",
-      "item_sha256": "5b791a28a39a383b83029560cf76118ffbbcae5aed85da9edb85693b636f852d",
+      "item_sha256": "48f9e955729df48c85edf8ade6df3e63ee18aeb581f1fc9961a32301a12c018c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -2734,7 +2752,12 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 11: Организационная психология"
         }
-      ]
+      ],
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "evidence": "https://urss.ru/images/add_ru/183034-1.pdf",
+        "scope": "Original book excerpt title, bibliographic page and contents retrieved: 2014 collective textbook under Karpov editorship, 570 pages. Course 2020/512-page citation not reconciled. Reading role remains UNSET; source identity not changed."
+      }
     },
     "literature:lit_1febe2b9612a7668": {
       "decision": "approved",
