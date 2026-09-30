@@ -10,16 +10,18 @@
     ],
     "year": 1984,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "reference",
     "status": "approved",
     "priority": null,
     "topic_order": 10,
     "global_order": 420010,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "why_read": "После общего курса обращаться к отдельным работам Выготского как к первоисточникам; шеститомное собрание не предполагает обязательного чтения целиком.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_d5aee85ddf3b94c4"
+    ],
     "source_refs": [
       "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
     ],
@@ -31,7 +33,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_8c7e7daa0a5aa779",
@@ -80,16 +84,18 @@
     ],
     "year": 2007,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 30,
     "global_order": 420030,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "why_read": "После краткого курса возрастной психологии перейти к коллективному университетскому учебнику по психологии развития.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_8c7e7daa0a5aa779"
+    ],
     "source_refs": [
       "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
     ],
@@ -101,7 +107,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent"
   },
   {
     "id": "lit_c9f5f2a72f8ab645",
@@ -155,16 +163,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 50,
     "global_order": 420050,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Возрастная психология».",
+    "why_read": "После знакомства с теорией привязанности рассмотреть авторское изложение темы ранней травмы как дополнительное чтение, а не руководство для самостоятельного лечения.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_57ba3a9bf5d4ff18"
+    ],
     "source_refs": [
       "drive:15zimRlDoqD7nCnGNiAiLm2rKWP8zNI7r"
     ],
@@ -178,7 +188,9 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_677867857cce3e89",

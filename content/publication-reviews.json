@@ -1627,7 +1627,7 @@
     },
     "literature:lit_634fbb9e1e821b8a": {
       "decision": "approved",
-      "item_sha256": "2de4846c97feaefd5b4531927ec09cb125ec999b1ba0266493c15a5f422e2d5d",
+      "item_sha256": "429b210e80da80b4c2fffda118f81632ccc246663d9849cc1c66fd8a4272802f",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1638,7 +1638,17 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 1: Собрание сочинений в 6 томах"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://rusneb.ru/catalog/000199_000009_009995403/",
+        "evidence_scope": "Indexed NEB collective record confirms six-volume collected works published 1982–1984; separate NEB volume 4 record identifies child psychology, 1984. Course 1984 reference retained; no full collection or page review, no equivalence to a single volume.",
+        "sequence": "Agent recommendation: lecture introduction before university developmental textbook; collected works used as selective primary references; author trauma book after attachment background. No compulsory teacher sequence.",
+        "limitations": "Existing author/editor citations, source snapshots, IDs, years, warnings and personal state unchanged. No full-text certification, scientific validation or therapeutic recommendation.",
+        "additional_primary_record": "https://rusneb.ru/catalog/000199_000009_001192105/"
+      }
     },
     "literature:lit_8c7e7daa0a5aa779": {
       "decision": "approved",
@@ -1666,7 +1676,7 @@
     },
     "literature:lit_d5aee85ddf3b94c4": {
       "decision": "approved",
-      "item_sha256": "ad2156bdf6dfa134d83b708872144901a3319eb7bab71b69869f08db0c848fb9",
+      "item_sha256": "c178430b8b9ef87548f07a934795ab2b0fc3f28906d9123ff3ea366648d12b49",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1677,7 +1687,16 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 3: Психология развития"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://library.omsu.ru/cgi-bin/irbis64r/cgiirbis_64.exe?C21COM=S&I21DBN=IBIS_PRINT&LNG=ru&P21DBN=IBIS&S21CNR=&S21FMT=fullw_print&S21P01=0&S21P02=0&S21P03=S%3D&S21REF=&S21STN=1&S21STR=%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F+%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D1%8F&Z21ID=)",
+        "evidence_scope": "Indexed Omsk State University library record matches third stereotyped edition, Academia 2007, university psychology textbook with Marцinkovskaya as editor and collective authors. Scope inferred from verified bibliographic type/subject, not full-text review.",
+        "sequence": "Agent recommendation: lecture introduction before university developmental textbook; collected works used as selective primary references; author trauma book after attachment background. No compulsory teacher sequence.",
+        "limitations": "Existing author/editor citations, source snapshots, IDs, years, warnings and personal state unchanged. No full-text certification, scientific validation or therapeutic recommendation."
+      }
     },
     "literature:lit_c9f5f2a72f8ab645": {
       "decision": "approved",
@@ -1705,7 +1724,7 @@
     },
     "literature:lit_5c4001030a94d65d": {
       "decision": "approved",
-      "item_sha256": "0779f7543ea0488bc2238bc9fa192abf7e8fdaa4f321e1a5c1fa0b300058a6ea",
+      "item_sha256": "81ab86992581cf29e8b1fdbb1fb9caf468e82d5407f187afaa9062610440584b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1716,7 +1735,16 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 5: Выход из детской травмы. Обнять внутреннего ребёнка"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/A33780/product/vyhod-iz-detskoy-travmy-obnyat-vnutrennego-rebenka-2",
+        "evidence_scope": "Indexed official Piter publisher description matches Maria Osipova and topic of early trauma/attachment, including practitioner audience. Direct fetch failed; course edition/year unspecified and full text not reviewed. Publisher therapeutic claims not adopted.",
+        "sequence": "Agent recommendation: lecture introduction before university developmental textbook; collected works used as selective primary references; author trauma book after attachment background. No compulsory teacher sequence.",
+        "limitations": "Existing author/editor citations, source snapshots, IDs, years, warnings and personal state unchanged. No full-text certification, scientific validation or therapeutic recommendation."
+      }
     },
     "literature:lit_677867857cce3e89": {
       "decision": "approved",
