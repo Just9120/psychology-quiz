@@ -2556,7 +2556,7 @@
     },
     "literature:lit_7d6fbb6d57ed5a71": {
       "decision": "approved",
-      "item_sha256": "de9efab729858a07a7ebec1656ac23a469889faf26028747299e863a15a6dee2",
+      "item_sha256": "e76e1c04f7fed42314cc7dbb8b63c85d6a0ad8d04b1a174e28eb67380d815c58",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2567,11 +2567,18 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 2: Психолингвистика"
         }
-      ]
+      ],
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://search.rsl.ru/ru/record/01002725052",
+        "evidence_scope": "RSL and MGPPU author catalogue identify Glukhov Osnovy psikholingvistiki AST/Astrel 2005; course bibliography says Psikholingvistika. Candidate mismatch, not a proven correction.",
+        "limitations": "No source citation/title/year/identity merge or role assignment; full text/course edition not verified."
+      }
     },
     "literature:lit_97e355592d42be46": {
       "decision": "approved",
-      "item_sha256": "939418c3887e95da92a0798e13ca575a6d5d7e2de76ebe2cb17dd3431369559a",
+      "item_sha256": "6ea4c4ec4ac476cbda1dbb790bdf14939fba6e8c96e2c9ea917d7ca17058c523",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2582,11 +2589,20 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 3: Основы психолингвистики"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A22178%2FSource%3Adefault",
+        "evidence_scope": "MGPPU primary library record matches Gorelov/Sedov, Labirint 1997 and identifies scientific experiments and observations of everyday communication.",
+        "sequence": "Agent selects a historical/conceptual survey as entry point before supplementary disciplinary perspectives and experiment descriptions. Not teacher priority or compulsory author order.",
+        "limitations": "Bibliographic subject/annotation only; full-text and precise difficulty not certified. Existing IDs, sources, citations, years, warnings and personal state unchanged."
+      }
     },
     "literature:lit_3fe49ed705cbf4cc": {
       "decision": "approved",
-      "item_sha256": "7d105bafa4f69d97dc5b7f8455ba51c8248ab8752ddc961fdd4386c646ba4892",
+      "item_sha256": "77f2b239221a71aeb639c49b006a29ae4ade85fd2a171778b645b15aaaf526ad",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2597,11 +2613,20 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 4: Введение в психолингвистику"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01000674522",
+        "evidence_scope": "RSL primary bibliographic record matches Zalevskaya 2000 and identifies a university textbook for philology students, classified under linguistics and speech psychology; full contents not reviewed.",
+        "sequence": "Agent selects a historical/conceptual survey as entry point before supplementary disciplinary perspectives and experiment descriptions. Not teacher priority or compulsory author order.",
+        "limitations": "Bibliographic subject/annotation only; full-text and precise difficulty not certified. Existing IDs, sources, citations, years, warnings and personal state unchanged."
+      }
     },
     "literature:lit_6491072220dbf2cb": {
       "decision": "approved",
-      "item_sha256": "0a3196fc4ce9c96843490b0376c61054383a3a410a46976c01003316021e7f8d",
+      "item_sha256": "11625786f193bfea7286474caf61218fb978894c4ee7776b870df78ec0046e15",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2612,7 +2637,16 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 5: Основы психолингвистики"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A14314%2FSource%3Adefault",
+        "evidence_scope": "MGPPU primary library record matches Leontiev, Smysl 1997 and describes history, theoretical schools, concepts and methods.",
+        "sequence": "Agent selects a historical/conceptual survey as entry point before supplementary disciplinary perspectives and experiment descriptions. Not teacher priority or compulsory author order.",
+        "limitations": "Bibliographic subject/annotation only; full-text and precise difficulty not certified. Existing IDs, sources, citations, years, warnings and personal state unchanged."
+      }
     },
     "literature:lit_cefdc62fe30c6d9d": {
       "decision": "approved",
@@ -2631,7 +2665,7 @@
     },
     "literature:lit_5852670b2e030af5": {
       "decision": "approved",
-      "item_sha256": "f827619191bc27dfa155b093a822a839e893077cb7f8c52ac0865acc285ea67b",
+      "item_sha256": "367faacd78111a86e30623dce2662768322d41d16c0e1b4beb7d8ec4a0559a6d",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2642,7 +2676,16 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 7: Психолингвистика"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://rusneb.ru/catalog/000199_000009_007933819/",
+        "evidence_scope": "NEB/RSL primary bibliographic record identifies Frumkina university textbook for applied linguistics and special education, 2014 edition. Course edition remains unknown; no year inferred.",
+        "sequence": "Agent selects a historical/conceptual survey as entry point before supplementary disciplinary perspectives and experiment descriptions. Not teacher priority or compulsory author order.",
+        "limitations": "Bibliographic subject/annotation only; full-text and precise difficulty not certified. Existing IDs, sources, citations, years, warnings and personal state unchanged."
+      }
     },
     "literature:lit_79347303885d264c": {
       "decision": "approved",

@@ -64,7 +64,9 @@
       "citation": "Глухов В. П. Психолингвистика : учеб. пособие для студентов педвузов. — Москва : ACT, Астрель, 2005. — 351 с. — (Высшая школа)."
     },
     "content_access": "not_verified",
-    "metadata_warnings": [],
+    "metadata_warnings": [
+      "В РГБ и библиотеке МГППУ книга Глухова за 2005 год называется «Основы психолингвистики»; в учебном списке указано «Психолингвистика». Соответствие конкретному изданию пока не подтверждено."
+    ],
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
   },
   {
@@ -79,16 +81,18 @@
     ],
     "year": 1997,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "applied",
     "status": "approved",
     "priority": null,
     "topic_order": 30,
     "global_order": 640030,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Психолингвистика».",
+    "why_read": "После общего обзора обратиться к учебному пособию с описаниями экспериментов и наблюдений над повседневным общением.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6491072220dbf2cb"
+    ],
     "source_refs": [
       "drive:1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx"
     ],
@@ -100,7 +104,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_3fe49ed705cbf4cc",
@@ -113,16 +119,18 @@
     ],
     "year": 2000,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 40,
     "global_order": 640040,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Психолингвистика».",
+    "why_read": "После общего обзора сопоставить психологический и филологический ракурсы психолингвистики по университетскому учебнику.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6491072220dbf2cb"
+    ],
     "source_refs": [
       "drive:1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx"
     ],
@@ -134,7 +142,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_6491072220dbf2cb",
@@ -147,14 +157,14 @@
     ],
     "year": 1997,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "foundation",
     "status": "approved",
     "priority": null,
     "topic_order": 50,
     "global_order": 640050,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Психолингвистика».",
+    "why_read": "Начать знакомство с психолингвистикой с учебника о её истории, основных школах, понятиях и методах.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -168,7 +178,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "basic",
+    "importance_source": "agent"
   },
   {
     "id": "lit_cefdc62fe30c6d9d",
@@ -215,16 +227,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 70,
     "global_order": 640070,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Психолингвистика».",
+    "why_read": "После общего обзора расширить учебное чтение университетским учебником Фрумкиной по психолингвистике. Год вашего издания пока не установлен.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6491072220dbf2cb"
+    ],
     "source_refs": [
       "drive:1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx"
     ],
@@ -238,7 +252,9 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_79347303885d264c",
