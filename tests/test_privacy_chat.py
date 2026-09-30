@@ -51,6 +51,6 @@ def test_telegram_learning_deletion_requires_private_repeat_confirmation(tmp_pat
     update.effective_user = SimpleNamespace(id=777, username=None, first_name="Other", last_name=None)
     asyncio.run(delete_data_command(update, context))
     assert "learning_data_deletion_token" not in context.user_data
-    assert "связаны с аккаунтом PWA" in message.reply_text.await_args.args[0]
+    assert "связаны с аккаунтом владельца PWA" in message.reply_text.await_args.args[0]
     with closing(get_connection(str(bank))) as conn:
         assert conn.execute("SELECT count(*) FROM quiz_sessions WHERE user_id=?", (other["id"],)).fetchone()[0] == 1

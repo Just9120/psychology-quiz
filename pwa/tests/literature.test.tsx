@@ -105,6 +105,7 @@ it.each(['pwa', 'miniapp'])('shows scoped work totals and current reading indepe
   expect(screen.getByText('Прочитано 1 из 1')).toBeVisible()
   expect(screen.queryByText(/У 1 работ отметки/)).not.toBeInTheDocument()
   await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module2')
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), '')
   const current = screen.getByRole('complementary', { name: 'Прогресс списка чтения' })
   await user.click(current.querySelector('button')!)
   expect(screen.getByLabelText(client === 'pwa' ? 'Статус чтения' : 'Статус')).toHaveValue('in_progress')

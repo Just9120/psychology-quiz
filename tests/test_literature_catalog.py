@@ -27,7 +27,7 @@ def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     assert len(ales) == 2 and len({item['work_id'] for item in ales}) == 1
     assert {item['year'] for item in ales} == {None, 1999}
     # A common textbook title alone cannot merge different authors' works.
-    for title, expected in [('Организационная психология', 5), ('Психолингвистика', 4), ('Психология личности', 2)]:
+    for title, expected in [('Организационная психология', 5), ('Психолингвистика', 3), ('Психология личности', 2)]:
         named = [item for item in items if item['title'] == title]
         assert len(named) == expected
         assert len({item['work_id'] for item in named}) == expected

@@ -48,6 +48,7 @@ def source(sqlite_bank):
         # Deliberately import a legacy v5 source, then upgrade it.
         conn.execute("DROP TABLE user_literature_work_progress")
         conn.execute("DELETE FROM schema_migrations WHERE version='reading-work-v1'")
+        conn.commit()  # Identity migration owns its transaction and FK boundary.
         migrate_identity_schema(conn)
         migrate_auth_schema(conn)
         migrate_invitation_schema(conn)

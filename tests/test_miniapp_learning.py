@@ -127,6 +127,12 @@ def test_linked_owner_quiz_review_goals_and_literature_are_private_across_client
     assert goal.status_code == 200
     assert web.client.get("/web/progress/goals").json()["goals"][0]["weekly_target"] == 2
     assert web.client.get("/miniapp/learning/goals", headers=other).json()["goals"][0]["weekly_target"] is None
+    # Use a real published work: an unknown preserved legacy ID is not a current reading state.
+    from app.literature import load_literature_items
+    from app.literature_service import save_progress
+    item = load_literature_items()[0]
+    with closing(get_connection(str(web.db))) as conn, conn:
+        save_progress(conn, 1, item["id"], "in_progress", None)
     assert web.client.get("/miniapp/literature/state", headers=owner).json()["literature_state"]
     assert web.client.get("/miniapp/literature/state", headers=other).json()["literature_state"] == []
     # Materialized awards are private too; award eligibility is tested separately.
