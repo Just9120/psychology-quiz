@@ -2763,7 +2763,7 @@
     },
     "literature:lit_b31bb7b1dc37d79d": {
       "decision": "approved",
-      "item_sha256": "dc4cad9674378e039959e508ea1e34af39413742a35a70b25544c9475881b1ef",
+      "item_sha256": "55e22886ed8c7c79135e6a374f068fc1c74af8cf7a611323a531c03de8a23f6c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2774,7 +2774,17 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 7: Лидер на кушетке"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "author_institution_description": "https://www.insead.edu/faculty-research/publications/books/leader-couch-a-clinical-approach-changing-people-and",
+        "translation_record": "https://search.rsl.ru/ru/record/01004272679",
+        "evidence_scope": "Primary author-institution description and Russian national-library translation record retrieved. Specialized clinical/psychodynamic interpretation of leadership and organizational transformation; Russian/English title bridge explicit in RSL. Course 2018 publisher/pagination not confirmed. Role is a work-level genre recommendation, not exact-edition approval or clinical efficacy evidence.",
+        "sequence": "Agent-selected general organizational behavior prerequisite; not a teacher requirement or measured difficulty.",
+        "limitations": "Original citation/authors/year/source snapshots/work identity/reading state preserved. Full text, exact course edition and access entitlement not verified."
+      }
     },
     "literature:lit_4bbfe78685eb81c2": {
       "decision": "approved",
@@ -2821,7 +2831,7 @@
     },
     "literature:lit_4326336ddc0d7a05": {
       "decision": "approved",
-      "item_sha256": "9a8c7908e959c7c98c10f3eb7b69b9d74ec9ae9b21b731fa22db47836570f36d",
+      "item_sha256": "aa0177622b24e82cfa1d3ebbbf01b05160584788ce8e8cf5abb21bfb06852a8e",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2832,7 +2842,18 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 10: Психология управления персоналом"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "library_description": "https://lib.mgppu.ru/opacunicode/app/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A465122%2FSource%3Adefault",
+        "publisher_record": "https://urait.ru/bcode/582880",
+        "publisher_listing": "https://urait.ru/library?materials=&order=asc&page=865&sort=date",
+        "evidence_scope": "Primary university-library annotation retrieved for 2022 title/author, student/practitioner audience and HR topics; original publisher listing identifies 2026 textbook/practicum. Direct publisher book page is script-only. Course 2012 INFRA-M edition not established. Recommendation concerns same-author/title subject and textbook genre; editions, contents and identity are not automatically reconciled.",
+        "sequence": "Agent-selected general organizational behavior prerequisite; not a teacher requirement or measured difficulty.",
+        "limitations": "Original citation/authors/year/source snapshots/work identity/reading state preserved. Full text, exact course edition and access entitlement not verified."
+      }
     },
     "literature:lit_e29fc4e37d6eef9b": {
       "decision": "approved",
