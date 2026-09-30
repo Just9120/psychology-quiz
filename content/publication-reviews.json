@@ -3014,10 +3014,10 @@
     },
     "literature:lit_7d6fbb6d57ed5a71": {
       "decision": "approved",
-      "item_sha256": "e76e1c04f7fed42314cc7dbb8b63c85d6a0ad8d04b1a174e28eb67380d815c58",
+      "item_sha256": "10493959c2578344ec05e8cb7bff71382be5b1dd2a4c43758cfd2d56790f6f56",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx",
@@ -3032,6 +3032,24 @@
         "primary_record": "https://search.rsl.ru/ru/record/01002725052",
         "evidence_scope": "RSL and MGPPU author catalogue identify Glukhov Osnovy psikholingvistiki AST/Astrel 2005; course bibliography says Psikholingvistika. Candidate mismatch, not a proven correction.",
         "limitations": "No source citation/title/year/identity merge or role assignment; full text/course edition not verified."
+      },
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "primary_record": "https://search.rsl.ru/ru/record/01002725052",
+        "comparison_record": "https://lib.mgppu.ru/opacunicode/index.php?url=%2Fnotices%2Findex%2FIdNotice%3A69505%2FSource%3Adefault",
+        "evidence_scope": "Both library records retrieved: Glukhov, Osnovy psikholingvistiki, AST/Astrel 2005, ISBN 5-17-030476-5. RSL 350,[1] and MGPPU 351 match course volume. Normalized title restored; original abbreviated course citation retained.",
+        "decision": "correct_normalized_title_keep_source_citation",
+        "limitations": "Full text and exact course copy not inspected. Work identity, year, authors and source snapshots retained."
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://search.rsl.ru/ru/record/01002725052",
+        "evidence_scope": "Retrieved RSL record explicitly identifies textbook for pedagogical university students. Additional core overview recommended from confirmed genre/audience; no chapter-specific or unobserved content claims.",
+        "sequence": "Agent recommends general introduction before another university overview. Not a teacher prerequisite or measured difficulty.",
+        "limitations": "Full book not read, no scientific efficacy/access approval or personal reading state changes."
       }
     },
     "literature:lit_97e355592d42be46": {
