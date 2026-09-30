@@ -265,6 +265,26 @@ def test_owner_summary_cli_accepts_only_private_registry_and_preserves_pending_s
     assert source_id not in output.read_text(encoding="utf-8") + capsys.readouterr().out
     assert json.loads((tmp_path / "content/source-corpus.json").read_text(encoding="utf-8")) == public
     assert json.loads(paths["processed.json"].read_text(encoding="utf-8")) == processed
+    private["sources"][0].pop("discipline_id")
+    paths["registry.json"].write_text(json.dumps(private), encoding="utf-8")
+    paths["registry.json"].chmod(0o600)
+    topics = tmp_path / "data/topics.json"
+    topics.write_text(json.dumps({"schema_version": 1, "corpus_root_id": "private-root", "topics": {
+        "t_aaaaaaaaaaaa": {"title": "Unreleased private lesson", "discipline_id": "one", "source": {
+            "source_id": source_id, "modified_time": source["modified_time"], "snapshot_sha256": source["snapshot_sha256"]}}}}), encoding="utf-8")
+    topics.chmod(0o600)
+    private_output = tmp_path / "data/private-summary.json"
+    private_args = [str(private_output) if part == str(output) else part for part in args]
+    assert summary.main([*private_args, "--private-topics", str(topics)]) == 1
+    assert "private_registry_requires_reviewed" in capsys.readouterr().out
+    assert not private_output.exists()
+    assert summary.main([*private_args, "--reviewed", "--private-topics", str(topics)]) == 0
+    private_value = json.loads(private_output.read_text(encoding="utf-8"))
+    assert private_value["coverage"]["lessons"] == []
+    assert private_value["coverage"]["unreleased_lessons"] == {
+        "total": 1, "processing": {"pending_review": 1}, "metadata_current": 1, "known_holds": 0}
+    assert not any(value in private_output.read_text(encoding="utf-8") for value in
+                   (source_id, "Unreleased private lesson", "t_aaaaaaaaaaaa"))
     private["sources"].append(source)
     paths["registry.json"].write_text(json.dumps(private), encoding="utf-8")
     paths["registry.json"].chmod(0o600)
@@ -279,3 +299,46 @@ def test_owner_summary_cli_accepts_only_private_registry_and_preserves_pending_s
     assert summary.main([*outside_args, "--reviewed"]) == 1
     assert "private_registry_requires_ignored_data_json" in capsys.readouterr().out
     assert not duplicate_output.exists()
+
+
+def test_unreleased_lesson_summary_is_numeric_and_rejects_private_fields(monkeypatch):
+    from copy import deepcopy
+    from scripts.owner_source_summary import build
+    from tests.test_obsidian_vault import evidence, SOURCE, REVISION, DIGEST
+    _, processed = evidence()
+    current = {"schema_version": 1, "root_id": "private-root", "folders": {
+        "private-root": [{"page_token": None, "next_page_token": None, "children": [{
+            "id": SOURCE, "title": REVISION[1], "mime_type": REVISION[2],
+            "modified_time": REVISION[0], "file_or_folder": "file", "parent_ids": ["private-root"]}]}]}}
+    registry = {"schema_version": 1, "corpus_root_id": "private-root", "sources": [{
+        "id": SOURCE, "title": REVISION[1], "modified_time": REVISION[0],
+        "snapshot_sha256": DIGEST, "kind": "learning_material", "readable": True,
+        "snapshot_kind": "file_bytes", "corpus_path": "Private lecture",
+        "reviewed_at": "2026-09-29", "reviewer": "private-editor"}]}
+    public = {"schema_version": 1, "disciplines": {"one": {"title": "Discipline"}}, "topics": {}, "editions": {}}
+    key = "t_aaaaaaaaaaaa"
+    curriculum = {**public, "topics": {key: {"title": "Unreleased private title", "discipline_id": "one",
+        "source": {"source_id": SOURCE, "modified_time": REVISION[0], "snapshot_sha256": DIGEST}}}}
+    held = deepcopy(processed)
+    held[SOURCE]["review_state"] = "pending_review"
+    held[SOURCE].pop("source_kind", None)
+    held[SOURCE].pop("source_kind_review", None)
+    held[SOURCE]["conflict_hold"] = {"reason": "private objection", "locator": "page:1", "related_source_ids": []}
+    value = build(current, held, "2026-09-30T00:00:00Z", registry=registry,
+                  curriculum=curriculum, published_items=[], public_topic_ids=set())
+    coverage = value["coverage"]
+    assert coverage["lessons"] == []
+    expected = {"total": 1, "processing": {"pending_review": 1}, "metadata_current": 1, "known_holds": 1}
+    assert coverage["unreleased_lessons"] == expected
+    assert not any(private in json.dumps(value) for private in (SOURCE, key, "Unreleased private title", "private objection", DIGEST))
+    monkeypatch.setattr(owner_content, "load_catalog", lambda: public)
+    assert owner_content._coverage(coverage)["unreleased_lessons"] == expected
+    for changed in ({**expected, "total": 2}, {**expected, "known_holds": 2},
+                    {**expected, "metadata_current": True}, {**expected, "source_id": SOURCE},
+                    {**expected, "processing": {SOURCE: 1}}):
+        invalid = {**coverage, "unreleased_lessons": changed}
+        with pytest.raises(ValueError, match="invalid_coverage"):
+            owner_content._coverage(invalid)
+    with pytest.raises(Exception, match="invalid_public_topics"):
+        build(current, held, "2026-09-30T00:00:00Z", registry=registry,
+              curriculum=curriculum, published_items=[], public_topic_ids={"missing"})

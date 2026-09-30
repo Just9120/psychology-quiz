@@ -100,4 +100,3 @@ def ensure_quiz_sessions_difficulty_mode_column(conn: Connection) -> None:
         return
 
     conn.execute("ALTER TABLE quiz_sessions ADD COLUMN difficulty_mode TEXT")
-

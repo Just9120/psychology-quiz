@@ -905,3 +905,7 @@ Validation: адресные failure/ownership tests
 canonical content update и сохранение attempt snapshots. Local synthetic PASS
 не заменяет native CI и фактический operator rehearsal. Retention/RPO/RTO
 остаются UNSET до решения владельца.
+
+### Unreleased lesson coverage in the owner summary
+
+From the repository root, optional `--private-topics data/<topics>.json` requires `--reviewed --private-registry data/<registry>.json`. Both inputs pass the existing private ignored-file and exact source/revision gates. Unreleased lesson names and bindings stay in operator storage; the owner client receives only total, processing counts, current metadata count and known holds. Metadata classification does not grant derivative publication or index approval. The public curriculum and published lesson rows remain authoritative.

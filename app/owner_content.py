@@ -61,6 +61,21 @@ def _coverage(raw):
                         "processing_state": item["processing_state"], "known_hold": item["known_hold"],
                         "glossary_terms": terms, "notes": notes, "notes_state": notes_state})
     result = {key: raw[key] for key in ("tracked_sources", "untracked_files", "source_metadata", "unmapped_published_questions")} | {"lessons": lessons}
+    if "unreleased_lessons" in raw:
+        private = raw["unreleased_lessons"]
+        if not isinstance(private, dict) or set(private) != {"total", "processing", "metadata_current", "known_holds"}:
+            raise ValueError("invalid_coverage")
+        for key in ("total", "metadata_current", "known_holds"):
+            if type(private[key]) is not int or private[key] < 0:
+                raise ValueError("invalid_coverage")
+        states = private["processing"]
+        allowed = {"processed", "pending_review", "conflict_review", "new_unprocessed", "changed_unprocessed", "excluded", "missing"}
+        if (not isinstance(states, dict) or set(states) - allowed
+                or any(type(value) is not int or value < 0 for value in states.values())
+                or sum(states.values()) != private["total"]
+                or max(private["metadata_current"], private["known_holds"]) > private["total"]):
+            raise ValueError("invalid_coverage")
+        result["unreleased_lessons"] = {key: private[key] for key in ("total", "processing", "metadata_current", "known_holds")}
     for field in ("prepared_notes_unmapped", "unmapped_published_glossary"):
         if field in raw:
             value = raw[field]

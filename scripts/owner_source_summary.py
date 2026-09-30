@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 from app.source_inventory import InventoryError, reviewed_graph, processing_status, combine_registries
 from app.content_publication import fingerprint, load_policy
 from app.curriculum import load_catalog
-from scripts.source_inventory_report import _read, _snapshot, report, private_json_target, private_registry_input
+from scripts.source_inventory_report import _read, _snapshot, report, private_json_target, private_registry_input, private_topics_input, combine_private_topics
 
 
 def lesson_coverage(current, processed, registry, curriculum, published_items):
@@ -142,7 +142,7 @@ def published_questions():
     return result
 
 
-def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None, note_manifest=None, glossary_items=None, glossary_policy=None):
+def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None, note_manifest=None, glossary_items=None, glossary_policy=None, public_topic_ids=None):
     observed = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
     if observed.tzinfo is None or observed > datetime.now(timezone.utc):
         raise ValueError("invalid_observation_time")
@@ -165,7 +165,24 @@ def build(current, processed, observed_at, *, registry=None, curriculum=None, pu
             glossary_coverage(result["coverage"], glossary_items, glossary_policy, curriculum)
         if note_manifest is not None:
             prepared_note_coverage(result["coverage"], note_manifest, current, processed, curriculum)
-    elif note_manifest is not None or glossary_items is not None:
+        if public_topic_ids is not None:
+            if not isinstance(public_topic_ids, set) or not public_topic_ids <= set(curriculum["topics"]):
+                raise InventoryError("invalid_public_topics")
+            public_lessons, private_lessons = [], []
+            for lesson in result["coverage"]["lessons"]:
+                (public_lessons if lesson["id"] in public_topic_ids else private_lessons).append(lesson)
+            states = {}
+            for lesson in private_lessons:
+                state = lesson["processing_state"]
+                states[state] = states.get(state, 0) + 1
+            result["coverage"]["lessons"] = public_lessons
+            # Unreleased names and source bindings never leave operator storage.
+            result["coverage"]["unreleased_lessons"] = {
+                "total": len(private_lessons), "processing": states,
+                "metadata_current": sum(item["source_metadata_current"] for item in private_lessons),
+                "known_holds": sum(item["known_hold"] for item in private_lessons),
+            }
+    elif note_manifest is not None or glossary_items is not None or public_topic_ids is not None:
         raise InventoryError("reviewed_graph_inputs_required")
     return result
 
@@ -176,6 +193,7 @@ def main(argv=None):
     parser.add_argument("--processed", type=Path, required=True)
     parser.add_argument("--reviewed", action="store_true")
     parser.add_argument("--private-registry", type=Path, help="Additional reviewed source metadata in ignored data/; requires --reviewed")
+    parser.add_argument("--private-topics", type=Path, help="Unreleased lesson metadata in ignored data/; requires reviewed private registry")
     parser.add_argument("--notes-manifest", type=Path, help="Optional ignored private preparation manifest; never Vault publication evidence")
     parser.add_argument("--observed-at", required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -183,11 +201,18 @@ def main(argv=None):
     try:
         if args.private_registry is not None and not args.reviewed:
             raise InventoryError("private_registry_requires_reviewed")
+        if args.private_topics is not None and (not args.reviewed or args.private_registry is None):
+            raise InventoryError("private_topics_requires_reviewed_registry")
         target = private_json_target(args.output, ROOT)
         inputs = {"registry": _read(ROOT / "content/source-corpus.json"), "curriculum": load_catalog(),
                   "published_items": published_questions()} if args.reviewed else {}
         if args.private_registry is not None:
-            inputs["registry"] = combine_registries(inputs["registry"], private_registry_input(args.private_registry, ROOT))
+            private_registry = private_registry_input(args.private_registry, ROOT)
+            inputs["registry"] = combine_registries(inputs["registry"], private_registry)
+            if args.private_topics is not None:
+                inputs["public_topic_ids"] = set(inputs["curriculum"]["topics"])
+                inputs["curriculum"] = combine_private_topics(
+                    inputs["curriculum"], private_topics_input(args.private_topics, ROOT), private_registry)
         if args.reviewed:
             policy = load_policy()
             inputs.update(glossary_items=published_glossary(policy), glossary_policy=policy)

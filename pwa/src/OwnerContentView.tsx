@@ -26,6 +26,11 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
       {data.sources.coverage.unmapped_published_glossary !== undefined && <p>Опубликованных терминов без подтверждённой привязки к учебной теме в снимке: {data.sources.coverage.unmapped_published_glossary}.</p>}
       {data.sources.coverage.prepared_notes_unmapped !== undefined && <p>Подготовленных заметок без подтверждённой привязки к учебной теме: {data.sources.coverage.prepared_notes_unmapped}.</p>}
       <p className="muted">Привязка проверена по редакции вопроса. Цифры относятся к датированному снимку выше; пустой раздел не означает оценку достаточности.</p>
+      {data.sources.coverage.unreleased_lessons && <div className="notice">
+        <p>Ещё не опубликованные учебные темы: {data.sources.coverage.unreleased_lessons.total}. Актуальные метаданные: {data.sources.coverage.unreleased_lessons.metadata_current}; темы с возражениями: {data.sources.coverage.unreleased_lessons.known_holds}.</p>
+        {Object.entries(data.sources.coverage.unreleased_lessons.processing).map(([state, count]) => <p key={state}>{states[state] ?? 'Источник отсутствует'}: {count}</p>)}
+        <p>Это учёт подготовки материалов, а не подтверждение научной проверки или публикации.</p>
+      </div>}
       <div className="literature-list">{data.sources.coverage.lessons.map(lesson => <div key={lesson.id}>
         <h3>{lesson.title}</h3><p>{lesson.discipline}</p>
         <p>{lesson.source_metadata_current ? 'Редакция источника совпадала с registry' : 'Редакция источника требует сверки'} · {states[lesson.processing_state] ?? 'Нет записи проверки'}.</p>

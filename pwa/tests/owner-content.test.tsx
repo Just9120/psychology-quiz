@@ -23,9 +23,10 @@ it('distinguishes unknown coverage from empty kinds and filters modules without 
 it('shows dated lesson coverage, unresolved source holds and unknown notes independently', () => {
   const data: OwnerContent = { ok: true, topics: [], unmapped_questions: 0,
     sources: { state: 'PARTIAL', captured_at: '2026-09-30T00:00:00Z', files: 425, folders: 93, processing_records: 6, known_holds: 2, processing: { pending_review: 6, new_unprocessed: 419 },
-      coverage: { tracked_sources: 66, untracked_files: 359, source_metadata: { current: 66 }, unmapped_published_questions: 83,
+      coverage: { unreleased_lessons: { total: 3, processing: { pending_review: 3 }, metadata_current: 3, known_holds: 3 }, tracked_sources: 66, untracked_files: 359, source_metadata: { current: 66 }, unmapped_published_questions: 83,
         lessons: [{ id: 'lesson', title: 'Проверенная учебная тема', discipline: 'Дисциплина', kinds: { theory: 0, glossary: 0, case: 0 }, source_metadata_current: false, processing_state: 'pending_review', known_hold: true, glossary_terms: null, notes: null, notes_state: 'UNSET' }] } } }
   render(<OwnerContentView data={data} busy={false} onRefresh={() => {}} />)
+  expect(screen.getByText("\u0415\u0449\u0451 \u043d\u0435 \u043e\u043f\u0443\u0431\u043b\u0438\u043a\u043e\u0432\u0430\u043d\u043d\u044b\u0435 \u0443\u0447\u0435\u0431\u043d\u044b\u0435 \u0442\u0435\u043c\u044b: 3. \u0410\u043a\u0442\u0443\u0430\u043b\u044c\u043d\u044b\u0435 \u043c\u0435\u0442\u0430\u0434\u0430\u043d\u043d\u044b\u0435: 3; \u0442\u0435\u043c\u044b \u0441 \u0432\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u044f\u043c\u0438: 3." )).toBeVisible()
   expect(screen.getByText(/Редакция источника требует сверки/)).toBeVisible()
   expect(screen.getByText('Есть неразрешённое возражение к источнику.')).toBeVisible()
   expect(screen.getByText('Нет опубликованных вопросов с подтверждённой привязкой к этой теме.')).toBeVisible()
