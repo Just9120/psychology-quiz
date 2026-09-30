@@ -694,16 +694,18 @@
     "authors": [],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 200,
     "global_order": 620200,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "why_read": "После введения в системную семейную терапию обратиться к сборнику статей по теории Боуэна: сопоставить общие понятия семейной системы с дифференциацией и межпоколенными связями.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_family_slide_06"
+    ],
     "source_refs": [
       "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
     ],
@@ -718,7 +720,9 @@
       "Год издания не указан в презентации; издание и полный текст не проверены.",
       "Автор или редактор сборника не указан в презентации."
     ],
-    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_family_slide_06",
@@ -731,16 +735,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 210,
     "global_order": 620210,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебной презентации по семейной психологии.",
+    "why_read": "После краткого лекционного курса системной семейной терапии углубить понимание семейных правил, границ и генограмм; это дополнительное изложение подхода, а не подтверждённая замена учебному курсу.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_4c4514f492edb1c6"
+    ],
     "source_refs": [
       "drive:1B_TwSgvooq4wqPDMyqWsUhxKvhONkvrZ"
     ],
@@ -754,7 +760,9 @@
     "metadata_warnings": [
       "Год издания не указан в презентации; издание и полный текст не проверены."
     ],
-    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание."
+    "notes": "Проверена запись в учебной презентации; содержание книги не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_family_slide_07",

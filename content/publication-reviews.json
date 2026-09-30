@@ -2916,7 +2916,7 @@
     },
     "literature:lit_family_slide_05": {
       "decision": "approved",
-      "item_sha256": "42c51988f60a412686687f5435e895e6d4ddce0b33057a8dfe5f8ce3cc69b923",
+      "item_sha256": "5683cf3ac93d6c69232270e43062bbc2cfddf88da928ebcff07a2334f3f20e5b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-29",
@@ -2928,11 +2928,20 @@
           "locator": "Раздел «Полезная литература», позиция 1"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://cogito-shop.com/catalog/semeynaya-terapiya/teoriya-semeynykh-sistem-myurreya-bouena-osnovnye-ponyatiya-metody-i-klinicheskaya-praktika-new/",
+        "evidence_scope": "Publisher describes an anthology by Bowen and followers with theory and clinical applications; editors/authors are distinguished in the table of contents. Current 2022 edition does not establish the edition or editors of the course citation. Existing unknown author/editor fields and warnings preserved.",
+        "sequence": "Agent recommends the existing systemic lecture course before the supplementary introduction, then the Bowen anthology. This is not a compulsory teacher or author sequence.",
+        "limitations": "No full-text review, clinical efficacy or qualification claim. Existing source citations, snapshots, IDs, work identities, years, metadata warnings and personal reading state unchanged."
+      }
     },
     "literature:lit_family_slide_06": {
       "decision": "approved",
-      "item_sha256": "f8bcc18c85822fcc4a193b08aa093b0fd59c110f04458d076b6620a389d394aa",
+      "item_sha256": "0a4aaaba560ee5e2d97e8ba0bc20953d4de36c20f39543e917b143c9d9ebe605",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-29",
@@ -2944,7 +2953,16 @@
           "locator": "Раздел «Полезная литература», позиция 2"
         }
       ],
-      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены."
+      "rationale": "Точное упоминание названия и автора проверено в презентации; содержание книги и конкретное издание не подтверждены.",
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://cogito-shop.com/catalog/semeynaya-terapiya/vvedenie-v-sistemnuyu-semeynuyu-psikhoterapiyu/",
+        "evidence_scope": "Publisher description and table of contents identify family-system parameters, genograms, methodological principles and practice examples. Current publisher edition is 2025; course edition remains unknown; not merged with the 2001 lecture course.",
+        "sequence": "Agent recommends the existing systemic lecture course before the supplementary introduction, then the Bowen anthology. This is not a compulsory teacher or author sequence.",
+        "limitations": "No full-text review, clinical efficacy or qualification claim. Existing source citations, snapshots, IDs, work identities, years, metadata warnings and personal reading state unchanged."
+      }
     },
     "literature:lit_family_slide_07": {
       "decision": "approved",
