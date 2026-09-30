@@ -901,10 +901,10 @@
     },
     "literature:psf_danilova_psihofiziologiya": {
       "decision": "approved",
-      "item_sha256": "6e4efda91338c6de2c10c3d9f72fd7b2a161997369a2b4b74518fdb569d02d6c",
+      "item_sha256": "c91e4e2c4ebfcd539e6ec9834699cf586895d0424ab79e4a9c2526a8a9b1c478",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
@@ -912,14 +912,23 @@
           "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
           "locator": "Страница 1, позиция 1"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=192897&lang=Ru&page=Book",
+        "evidence_scope": "Official distributor annotation read: interdisciplinary textbook on brain mechanisms of perception, attention, memory and other processes, with macroscopic/neuronal/molecular levels. Course edition unspecified; current card is a second-hand edition. Full text and measured difficulty unknown.",
+        "sequence": "Agent suggested basic textbook before expanded/thematic/applied reading; not an author/teacher mandatory prerequisite. No particular prior work verified for starting textbook.",
+        "limitations": "Original bibliography/source revision/snapshot and personal state preserved; no clinical efficacy certification or full book review."
+      }
     },
     "literature:psf_ilyin_psihofiziologiya_sostoyaniy": {
       "decision": "approved",
-      "item_sha256": "b0250ec627e3047190cf0b0d98fe0d9a3b033406b058be1d8cd3150f2682b3bd",
+      "item_sha256": "afce08d17d5bf13f7ae319b42a390ca2201266318fe72fbf17dcb4866f6a524c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
@@ -927,14 +936,23 @@
           "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
           "locator": "Страница 1, позиция 2"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://rusneb.ru/catalog/000199_000009_002695609/",
+        "evidence_scope": "Indexed National Electronic Library and MGPPU library 22527 identify Ilyin and normal human states during wakefulness, excluding sleep. NEB edition 2005; course edition unknown. Library direct fetch failed; full text and difficulty not verified.",
+        "sequence": "Agent suggested basic textbook before expanded/thematic/applied reading; not an author/teacher mandatory prerequisite. No particular prior work verified for starting textbook.",
+        "limitations": "Original bibliography/source revision/snapshot and personal state preserved; no clinical efficacy certification or full book review."
+      }
     },
     "literature:psf_aleksandrov_psihofiziologiya": {
       "decision": "approved",
-      "item_sha256": "bd473d5fd12c99a647aacb6f5c73f9ce95fa343ca53d32003b4aef45d65cad48",
+      "item_sha256": "12a08c7bce05dd6f8ff58fe0ed37a2bb55c795f4b0fdf9066df93a1e23f2e3d2",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
@@ -942,14 +960,23 @@
           "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
           "locator": "Страница 1, позиция 3"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/A20556-2/product/psihofiziologiya-uchebnik-dlya-vuzov-5-e-izdanie",
+        "evidence_scope": "Official publisher indexed annotation: fifth revised university textbook, course coverage and student/researcher audience. Course citation explicitly names Alexandrov as editor. Exact course edition unspecified; page reread timed out, full text not reviewed.",
+        "sequence": "Agent suggested basic textbook before expanded/thematic/applied reading; not an author/teacher mandatory prerequisite. No particular prior work verified for starting textbook.",
+        "limitations": "Original bibliography/source revision/snapshot and personal state preserved; no clinical efficacy certification or full book review."
+      }
     },
     "literature:psf_van_der_kolk_telo_pomnit_vse": {
       "decision": "approved",
-      "item_sha256": "9d2a690f20422b030192faa73ae5614ae3821ac4c20561ca56712e4fc01cd772",
+      "item_sha256": "7d5775a417b9b1e772371267160420a2a828d1e4c27b31097ee7c24e076a5e24",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
@@ -957,14 +984,23 @@
           "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
           "locator": "Страница 1, позиция 4"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://bombora.ru/book/48221/",
+        "evidence_scope": "Official publisher title/author card retrieved, indexed publisher excerpt identifies case-based discussion of trauma. Multiple publisher ISBN editions exist; exact course edition unspecified. This metadata review does not validate clinical claims, treatment methods or diagnostic use.",
+        "sequence": "Agent suggested basic textbook before expanded/thematic/applied reading; not an author/teacher mandatory prerequisite. No particular prior work verified for starting textbook.",
+        "limitations": "Original bibliography/source revision/snapshot and personal state preserved; no clinical efficacy certification or full book review."
+      }
     },
     "literature:psf_sapolsky_psihologiya_stressa": {
       "decision": "approved",
-      "item_sha256": "b3759328102b27e53ce83ef198ac6a22d2d13ffc0737a0d1bd25ea715a9f4d87",
+      "item_sha256": "fb6ad9f7b976a729c48702a88fc96fd16f9dd6fe2e1c75e0f6aafaff907c0245",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
@@ -972,14 +1008,23 @@
           "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
           "locator": "Страница 1, позиция 5"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/all/product/psihologiya-stressa-3-e-izd-2",
+        "evidence_scope": "Indexed official publisher card identifies Sapolsky, stress psychology/physiology and specialist/student audience. Third edition card; course edition unspecified. No full text review or endorsement of medical/practical claims.",
+        "sequence": "Agent suggested basic textbook before expanded/thematic/applied reading; not an author/teacher mandatory prerequisite. No particular prior work verified for starting textbook.",
+        "limitations": "Original bibliography/source revision/snapshot and personal state preserved; no clinical efficacy certification or full book review."
+      }
     },
     "literature:psf_kabat_zinn_kuda_by_ty_ni_shel": {
       "decision": "approved",
-      "item_sha256": "ca35857cb3082e70b3c1e9978d6e49a4cb7d3197ca66bd4ba1f9a3982bfd5a55",
+      "item_sha256": "f5ce5e8823b901c7e247fefb82b0a4af6d2e77c8a2c6c5fc81f76acfc260c8b9",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1w7N6-xBrVvPdIx9TxBoEaCZNa4qz8_Ni",
@@ -987,7 +1032,16 @@
           "snapshot_sha256": "8793ceed7e4b8b8863360591a60bcfe20621477fef7bd081af8c6ea23adec580",
           "locator": "Страница 1, позиция 6"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://eksmo.ru/book/kuda-by-ty-ni-shel-ty-uzhe-tam-osoznannaya-meditatsiya-v-povsednevnoy-zhizni-ITD962805/",
+        "evidence_scope": "Official publisher description read: meditation fundamentals and everyday practice, author/title match. Course edition unspecified; no full text review. Publisher promises about depression/stress treatment are not reproduced or endorsed.",
+        "sequence": "Agent suggested basic textbook before expanded/thematic/applied reading; not an author/teacher mandatory prerequisite. No particular prior work verified for starting textbook.",
+        "limitations": "Original bibliography/source revision/snapshot and personal state preserved; no clinical efficacy certification or full book review."
+      }
     },
     "literature:lit_4f9768a778fe2a01": {
       "decision": "approved",
