@@ -2,8 +2,11 @@ from __future__ import annotations
 
 from contextlib import closing
 from app.payload_validation import valid_quiz_setup
+from app.quiz_text import (
+    option_index_to_label, apply_bionic_reading,
+    render_reading_mode_text, _safe_callback_session_id,
+)
 
-from html import escape
 import random
 import json
 import logging
@@ -172,7 +175,6 @@ READING_MODE_LABELS = {
     "normal": "Обычный",
     "bionic": "Бионическое чтение",
 }
-WORD_RE = re.compile(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)")
 MAX_WEBAPP_DATA_BYTES = 4096
 UPDATE_INGRESS_LOG_PREFIX = "bot_update_ingress"
 UPDATE_INGRESS_HANDLER_GROUP = -100
@@ -252,15 +254,6 @@ def register_update_ingress_handler(application: Application) -> None:
     )
 
 
-def _safe_callback_session_id(data: str, expected_prefix: str) -> int | None:
-    parts = data.split(":", 2)
-    if len(parts) < 2 or parts[0] != expected_prefix:
-        return None
-    try:
-        return int(parts[1])
-    except ValueError:
-        return None
-
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call, api_kind: str | None = None):
     started_at = time.perf_counter()
     result = await call
@@ -277,59 +270,6 @@ def _mark_repeated_tap(latency: _HandlerLatency) -> None:
 def _mark_stale_callback(latency: _HandlerLatency) -> None:
     latency.set_status("ignored_stale_callback")
     latency.add_field("stale_callback", True)
-
-
-def option_index_to_label(option_index: int) -> str:
-    if option_index < 0:
-        raise ValueError("option_index must be non-negative")
-
-    label = ""
-    current_index = option_index
-    while True:
-        current_index, remainder = divmod(current_index, 26)
-        label = chr(ord("A") + remainder) + label
-        if current_index == 0:
-            break
-        current_index -= 1
-    return label
-
-
-def apply_bionic_reading(text: str) -> str:
-    rendered_parts: list[str] = []
-    for chunk in re.split(r"(\s+)", text):
-        if not chunk:
-            continue
-        if chunk.isspace():
-            rendered_parts.append(chunk)
-            continue
-        for part in WORD_RE.findall(chunk):
-            if not part:
-                continue
-            if not re.fullmatch(r"[0-9A-Za-zА-Яа-яЁё]+", part):
-                rendered_parts.append(escape(part))
-                continue
-            if len(part) <= 3:
-                rendered_parts.append(escape(part))
-                continue
-
-            part_length = len(part)
-            if part_length <= 5:
-                bold_len = 1
-            elif part_length <= 9:
-                bold_len = 2
-            else:
-                bold_len = 3
-            prefix = escape(part[:bold_len])
-            suffix = escape(part[bold_len:])
-            rendered_parts.append(f"<b>{prefix}</b>{suffix}")
-
-    return "".join(rendered_parts)
-
-
-def render_reading_mode_text(text: str, mode: str) -> str:
-    if mode == "bionic":
-        return apply_bionic_reading(text)
-    return escape(text)
 
 
 def format_reading_mode_screen(current_mode: str) -> str:

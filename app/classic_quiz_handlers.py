@@ -32,6 +32,7 @@ from app.db import (
     store_session_questions,
 )
 from app.database import begin_write
+from app.quiz_text import option_index_to_label, render_reading_mode_text, _safe_callback_session_id
 from app.glossary import GLOSSARY_QUIZ_SESSION_KEY
 from app.homework import outcome_for_session
 from app.attempt_content import get_attempt_content
@@ -129,65 +130,6 @@ def _set_classic_reply_state(context: ContextTypes.DEFAULT_TYPE | None, state: d
 def _get_classic_reply_state(context: ContextTypes.DEFAULT_TYPE) -> dict:
     state = context.user_data.get(CLASSIC_REPLY_STATE_KEY)
     return state if isinstance(state, dict) else {}
-
-
-# Shared pure rendering helpers are imported from app.main at call time to keep this
-# refactor narrow and preserve existing reading-mode behavior.
-def option_index_to_label(option_index: int) -> str:
-    main_func = _main_attr("option_index_to_label")
-    if main_func is not None:
-        return main_func(option_index)
-    if option_index < 0:
-        raise ValueError("option_index must be non-negative")
-    label = ""
-    current_index = option_index
-    while True:
-        current_index, remainder = divmod(current_index, 26)
-        label = chr(ord("A") + remainder) + label
-        if current_index == 0:
-            break
-        current_index -= 1
-    return label
-
-
-def render_reading_mode_text(text: str, mode: str) -> str:
-    main_func = _main_attr("render_reading_mode_text")
-    if main_func is not None:
-        return main_func(text, mode)
-    if mode != "bionic":
-        return escape(text)
-    rendered_parts: list[str] = []
-    for chunk in re.split(r"(\s+)", text):
-        if not chunk:
-            continue
-        if chunk.isspace():
-            rendered_parts.append(chunk)
-            continue
-        for part in re.findall(r"([0-9A-Za-zА-Яа-яЁё]+|[^0-9A-Za-zА-Яа-яЁё]+)", chunk):
-            if not part:
-                continue
-            if not re.fullmatch(r"[0-9A-Za-zА-Яа-яЁё]+", part):
-                rendered_parts.append(escape(part))
-                continue
-            if len(part) <= 3:
-                rendered_parts.append(escape(part))
-                continue
-            bold_len = 1 if len(part) <= 5 else 2 if len(part) <= 9 else 3
-            rendered_parts.append(f"<b>{escape(part[:bold_len])}</b>{escape(part[bold_len:])}")
-    return "".join(rendered_parts)
-
-
-def _safe_callback_session_id(data: str, expected_prefix: str) -> int | None:
-    main_func = _main_attr("_safe_callback_session_id")
-    if main_func is not None:
-        return main_func(data, expected_prefix)
-    parts = data.split(":", 2)
-    if len(parts) < 2 or parts[0] != expected_prefix:
-        return None
-    try:
-        return int(parts[1])
-    except ValueError:
-        return None
 
 
 async def _timed_telegram_api_call(latency: _HandlerLatency | None, call, api_kind: str | None = None):
