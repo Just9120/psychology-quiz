@@ -75,6 +75,49 @@
         "access": "provider_terms",
         "checked_at": "2026-09-30"
       }
+    ],
+    "lit_consult_lecture_02": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/irvin-yalom/dar-psihoterapii-73836533/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/irvin-yalom/dar-psihoterapii-41894046/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
+    ],
+    "lit_consult_lecture_01": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/karl-rodzhers/stanovlenie-lichnosti-vzglyad-na-psihoterapiu-74431861/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
+    ],
+    "lit_5505760c8ef8c4b8": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/aleksandr-asmolov/psihologiya-lichnosti-kulturno-istoricheskoe-ponimanie-r-3300775/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
+    ],
+    "lit_8c4dd1a3c39ecbcf": [
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/galina-andreeva/socialnaya-psihologiya-292322/",
+        "access": "provider_terms",
+        "checked_at": "2026-09-30"
+      }
     ]
   }
 }
