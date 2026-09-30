@@ -1107,10 +1107,10 @@
     },
     "literature:lit_a29dd1990e36a236": {
       "decision": "approved",
-      "item_sha256": "f2f5534420cb6a15028dc710a406ec82a414518b99a3aa0c797db9ef493eaba2",
+      "item_sha256": "c7538edca529831d7497b01d1ca2a1a1a8ceed9e8d457319da790c9518f9b0d3",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
@@ -1118,14 +1118,23 @@
           "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
           "locator": "Пункт 2: Две улыбки (из книги «Лечение от любви и другие психотерапевтические новеллы»)"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.yalom.com/loves-executioner/",
+        "evidence_scope": "Author-domain book description retrieved: psychotherapy tales and therapist feelings/errors. Chapter-specific pedagogical purpose comes from preserved verified course citation, not from a full chapter read. English book description does not reconcile exact Russian course edition.",
+        "sequence": "Agent recommendation: methodology first, reflective narrative afterwards; later Kagan conversation after earlier one. Not a teacher requirement or measured difficulty.",
+        "limitations": "No whole-book/chapter validation, clinical efficacy, source science approval or edition equivalence claimed. Original source snapshots/citations/authors/years/work IDs and reading state preserved."
+      }
     },
     "literature:lit_ca9234874710e30d": {
       "decision": "approved",
-      "item_sha256": "e503e9a2594426ec74659bddf20eaa5604dc1ca33c6c994288b044788099a007",
+      "item_sha256": "b495e104aa0959c7295ec53e44f16a724a6e6c56bfb670d08e6d95dc194191f3",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
@@ -1133,14 +1142,23 @@
           "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
           "locator": "Пункт 3: Пора подумать о душе? (в «Смыслы психотерапии» и альтернативных публикациях)"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.litres.ru/book/viktor-kagan/smysly-psihoterapii-56435994/chitat-onlayn/",
+        "evidence_scope": "Publisher-supplied 2018 excerpt retrieved: copyright/title and author introduction distinguish subjective chronological reflections from an academic systematic review; practitioner audience. Chapter-specific scope and alternate versions are from preserved course citation. Full named chapters not read; alternate editions not equated.",
+        "sequence": "Agent recommendation: methodology first, reflective narrative afterwards; later Kagan conversation after earlier one. Not a teacher requirement or measured difficulty.",
+        "limitations": "No whole-book/chapter validation, clinical efficacy, source science approval or edition equivalence claimed. Original source snapshots/citations/authors/years/work IDs and reading state preserved."
+      }
     },
     "literature:lit_08357e2b580707a7": {
       "decision": "approved",
-      "item_sha256": "37b760427e08425b818104dc7ca8445d4b36e452c2317a2aa0dfc0b5e08ef4dc",
+      "item_sha256": "b578443f0b19841f6a900a7d6081fe92327f1cc7bb7eb96334310808a221fdc7",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4",
@@ -1148,7 +1166,16 @@
           "snapshot_sha256": "52d98b4f248c15c19da8303f707dd573b7b91b5662457406e31ac02ecc6f43b9",
           "locator": "Пункт 4: Думая о душе (в «Смыслы психотерапии»; альтернативное интервью «Заново думая о душе»)"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.litres.ru/book/viktor-kagan/smysly-psihoterapii-56435994/chitat-onlayn/",
+        "evidence_scope": "Publisher-supplied 2018 excerpt retrieved: copyright/title and author introduction distinguish subjective chronological reflections from an academic systematic review; practitioner audience. Chapter-specific scope and alternate versions are from preserved course citation. Full named chapters not read; alternate editions not equated.",
+        "sequence": "Agent recommendation: methodology first, reflective narrative afterwards; later Kagan conversation after earlier one. Not a teacher requirement or measured difficulty.",
+        "limitations": "No whole-book/chapter validation, clinical efficacy, source science approval or edition equivalence claimed. Original source snapshots/citations/authors/years/work IDs and reading state preserved."
+      }
     },
     "literature:lit_d4fe5859f2ce2c33": {
       "decision": "approved",
@@ -1189,10 +1216,10 @@
     },
     "literature:lit_c0537b6dc885ea1f": {
       "decision": "approved",
-      "item_sha256": "31881a8496fe707b847a0dd3f7437c4148f9ec420d6b68c46a3694b21920a4a5",
+      "item_sha256": "c2ac13a5570dd7ea777db1b8946dfa375269bad493c3e8258e637a0993b5f459",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
@@ -1200,7 +1227,16 @@
           "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
           "locator": "Позиция 1: Толстуха (из книги «Лечение от любви и другие психотерапевтические новеллы»)"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.yalom.com/loves-executioner/",
+        "evidence_scope": "Author-domain book description retrieved: psychotherapy tales and therapist feelings/errors. Chapter-specific pedagogical purpose comes from preserved verified course citation, not from a full chapter read. English book description does not reconcile exact Russian course edition.",
+        "sequence": "Agent recommendation: methodology first, reflective narrative afterwards; later Kagan conversation after earlier one. Not a teacher requirement or measured difficulty.",
+        "limitations": "No whole-book/chapter validation, clinical efficacy, source science approval or edition equivalence claimed. Original source snapshots/citations/authors/years/work IDs and reading state preserved."
+      }
     },
     "literature:lit_6190d3b37fdeeab5": {
       "decision": "approved",

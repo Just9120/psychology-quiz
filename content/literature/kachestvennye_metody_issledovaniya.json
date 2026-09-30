@@ -92,16 +92,18 @@
     ],
     "year": null,
     "type": "chapter",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 30,
     "global_order": 220030,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "why_read": "Дополнительная психотерапевтическая история для обсуждения разных интерпретаций одного события, как предложено в учебном списке. Читать после знакомства с научным статусом исследования случаев: отдельная история иллюстрирует вопрос, но не доказывает общий вывод.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6190d3b37fdeeab5"
+    ],
     "source_refs": [
       "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
     ],
@@ -115,7 +117,9 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_ca9234874710e30d",
@@ -128,16 +132,18 @@
     ],
     "year": 2018,
     "type": "chapter",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 40,
     "global_order": 220040,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "why_read": "Авторские размышления и беседа о психотерапии, её месте в культуре и отношениях с религией. Дополняет методологический обзор как материал для критического обсуждения; не заменяет систематический научный обзор или учебник.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6190d3b37fdeeab5"
+    ],
     "source_refs": [
       "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
     ],
@@ -149,7 +155,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_08357e2b580707a7",
@@ -162,16 +170,18 @@
     ],
     "year": 2018,
     "type": "chapter",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 50,
     "global_order": 220050,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "why_read": "Дополнительный материал для сопоставления взглядов на психотерапию в разные периоды. Читать после первого разговора «Пора подумать о душе?», различая авторскую позицию и научные данные; альтернативное интервью не объявлено тождественной редакцией главы.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_ca9234874710e30d"
+    ],
     "source_refs": [
       "drive:19CcN7GRl7URk3VnMZEHs5WDzGvc0fGe4"
     ],
@@ -183,7 +193,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_d4fe5859f2ce2c33",
@@ -270,16 +282,18 @@
     ],
     "year": null,
     "type": "chapter",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
     "topic_order": 80,
     "global_order": 220080,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Качественные методы исследования».",
+    "why_read": "Дополнительная психотерапевтическая история для обсуждения рефлексии терапевта и его собственных установок, как предложено в учебном списке. Читать после введения в исследование случаев; авторское описание не является клиническим протоколом или доказательством эффективности.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6190d3b37fdeeab5"
+    ],
     "source_refs": [
       "drive:1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5"
     ],
@@ -293,7 +307,9 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_6190d3b37fdeeab5",
