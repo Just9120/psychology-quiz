@@ -2,6 +2,10 @@ from __future__ import annotations
 
 from contextlib import closing
 from app import bot_runtime
+from app.bot_menu import (
+    START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
+    get_main_menu_keyboard,
+)
 from app.payload_validation import valid_quiz_setup
 from app.quiz_text import (
     option_index_to_label, apply_bionic_reading,
@@ -20,8 +24,6 @@ from telegram import (
     BotCommand,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
-    KeyboardButton,
-    ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
     Update,
 )
@@ -136,10 +138,6 @@ from app.classic_quiz_handlers import (
 
 logger = logging.getLogger(__name__)
 
-START_QUIZ_BUTTON_TEXT = "🎯 Начать"
-READING_MODE_BUTTON_TEXT = "👁 Чтение"
-GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
-LITERATURE_BUTTON_TEXT = "📖 Литература"
 TELEGRAM_PRIVACY_POLICY_URL = "https://telegram.org/privacy-tpa"
 LEGACY_START_QUIZ_BUTTON_TEXT = "🎯 Начать викторину"
 LEGACY_READING_MODE_BUTTON_TEXT = "👁 Режим чтения"
@@ -168,7 +166,6 @@ HELP_TEXT = (
     "\n"
     "Если меню скрыто, нажмите кнопку «Меню» рядом со строкой ввода или отправьте /start."
 )
-HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
 CLASSIC_REPLY_NEXT_TEXT = "Далее"
 CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
 READING_MODE_LABELS = {
@@ -355,18 +352,6 @@ def build_menu_button_regex(*labels: str) -> str:
     return rf"^({'|'.join(re.escape(label) for label in labels)})$"
 
 
-def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
-            [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
-            [KeyboardButton(LITERATURE_BUTTON_TEXT), KeyboardButton(HOMEWORK_BUTTON_TEXT)],
-            [KeyboardButton("ℹ️ Помощь")],
-            [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
-        ],
-        resize_keyboard=True,
-        is_persistent=True,
-    )
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

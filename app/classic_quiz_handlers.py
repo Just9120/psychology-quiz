@@ -2,6 +2,10 @@ from __future__ import annotations
 
 from contextlib import closing
 from app import bot_runtime
+from app.bot_menu import (
+    START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
+    get_main_menu_keyboard,
+)
 
 import logging
 import re
@@ -56,11 +60,6 @@ DIFFICULTY_CHOICES = (
     ("hard", "Сложные"),
 )
 
-START_QUIZ_BUTTON_TEXT = "🎯 Начать"
-READING_MODE_BUTTON_TEXT = "👁 Чтение"
-GLOSSARY_BUTTON_TEXT = "📚 Глоссарий"
-LITERATURE_BUTTON_TEXT = "📖 Литература"
-HIDE_MENU_BUTTON_TEXT = "🙈 Скрыть меню"
 CLASSIC_REPLY_NEXT_TEXT = "Далее"
 CLASSIC_REPLY_STATE_KEY = "classic_reply_keyboard_state"
 CONFIRMED_REPLACEMENT_KEY = "confirmed_quiz_replacement"
@@ -83,18 +82,6 @@ async def _run_db_task(func, *args, **kwargs):
     return await bot_runtime.run_db_task(func, *args, **kwargs)
 
 
-def get_main_menu_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(START_QUIZ_BUTTON_TEXT), KeyboardButton(MINI_APP_BUTTON_TEXT)],
-            [KeyboardButton(READING_MODE_BUTTON_TEXT), KeyboardButton(GLOSSARY_BUTTON_TEXT)],
-            [KeyboardButton(LITERATURE_BUTTON_TEXT)],
-            [KeyboardButton("ℹ️ Помощь")],
-            [KeyboardButton(HIDE_MENU_BUTTON_TEXT)],
-        ],
-        resize_keyboard=True,
-        is_persistent=True,
-    )
 
 
 

@@ -11,7 +11,7 @@ from app.db import create_or_load_user, get_connection
 from app.homework import HomeworkError, catalog_for_actor, start_homework
 from app.classic_quiz_handlers import send_current_question
 
-BUTTON_TEXT = "📝 Домашние задания"
+from app.bot_menu import HOMEWORK_BUTTON_TEXT as BUTTON_TEXT
 
 
 def _actor(conn, tg_user) -> int:
