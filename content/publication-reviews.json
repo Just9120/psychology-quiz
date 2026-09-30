@@ -2541,7 +2541,7 @@
     },
     "literature:lit_1febe2b9612a7668": {
       "decision": "approved",
-      "item_sha256": "677c4173d78f3d072f2c380b07d0331422c31c8c5d3ccb6c1afeccb4ad1dd71b",
+      "item_sha256": "71693b6abfbdd6025910d81407ffeb753c87cb89a20e3f85bb9210ac29167303",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2552,7 +2552,16 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 1: Психолингвистика"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.flinta.ru/book.php?id=261",
+        "evidence_scope": "First-party Flinta description identifies Belyanin textbook for senior psychology/humanities students, speech-activity theory and applications. Publisher page is third edition 2013, same Flinta ISBN as course citation; course fifth edition 2021 not independently verified.",
+        "sequence": "Agent recommendation: additional introductory manual independently accessible; supplementary university texts after general survey. Not teacher priority or mandatory author order.",
+        "limitations": "Bibliographic/annotation evidence only. Course IDs, source snapshots, citations, years, warnings and personal state unchanged; full-text review and exact difficulty not certified."
+      }
     },
     "literature:lit_7d6fbb6d57ed5a71": {
       "decision": "approved",
@@ -2650,7 +2659,7 @@
     },
     "literature:lit_cefdc62fe30c6d9d": {
       "decision": "approved",
-      "item_sha256": "9c7c84f696c8fef161b66e5e08ded7f25e71eda22a5d3869319198835850024f",
+      "item_sha256": "4ffc493dafcc3805848b5616f5574ed5a87647a13ed39a4857c7abefea2bcf92",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2661,7 +2670,17 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 6: Основы психолингвистики"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://lib.dm-centre.ru/lib/gpntb/?e_kls=%D0%9F%D0%A1%D0%98%D0%A5%D0%9E%D0%9B%D0%98%D0%9D%D0%93%D0%92%D0%98%D0%A1%D0%A2%D0%98%D0%9A%D0%90&e_viewdb=ESVODT",
+        "evidence_scope": "Indexed primary union-library annotation describes concise concepts/problems/methods for independent study by philology/pedagogy students; direct fetch failed. HSE course bibliography independently matches author, Flinta second edition 2018, 103 pages and ISBN 9785976534681. No full-text access.",
+        "sequence": "Agent recommendation: additional introductory manual independently accessible; supplementary university texts after general survey. Not teacher priority or mandatory author order.",
+        "limitations": "Bibliographic/annotation evidence only. Course IDs, source snapshots, citations, years, warnings and personal state unchanged; full-text review and exact difficulty not certified.",
+        "additional_primary_record": "https://www.hse.ru/edu/courses/1163546644"
+      }
     },
     "literature:lit_5852670b2e030af5": {
       "decision": "approved",
@@ -2689,7 +2708,7 @@
     },
     "literature:lit_79347303885d264c": {
       "decision": "approved",
-      "item_sha256": "b4ae79dad88115f19a98cf8015dce052490e7683003f0f8d6234d2592c7bbbae",
+      "item_sha256": "744b14f813dbbaf87ee19f9d3c4a06a2679d680a76f781ab9f424598a1c1eda7",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2700,7 +2719,16 @@
           "snapshot_sha256": "2801e9dee5a68e23ca67052365b3443c2ce5a350e4e5394201612315bd17327a",
           "locator": "Позиция 8: Психолингвистика"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://pureportal.spbu.ru/ru/publications/--%28d031552e-155d-4218-8c7a-ae56b69a9d75%29.html",
+        "evidence_scope": "First-party SPbU author publication record confirms sole author Shcherbakova, psycholinguistics teaching manual, Skifiya-print 2016. Course citation lacks year/publisher; exact course edition remains unverified. No detailed content or difficulty inference.",
+        "sequence": "Agent recommendation: additional introductory manual independently accessible; supplementary university texts after general survey. Not teacher priority or mandatory author order.",
+        "limitations": "Bibliographic/annotation evidence only. Course IDs, source snapshots, citations, years, warnings and personal state unchanged; full-text review and exact difficulty not certified."
+      }
     },
     "questions:m1_vnd_002": {
       "decision": "approved",

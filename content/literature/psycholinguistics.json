@@ -10,16 +10,18 @@
     ],
     "year": 2021,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 10,
     "global_order": 640010,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Психолингвистика».",
+    "why_read": "После общего обзора изучить теорию речевой деятельности и её приложения по учебнику для старших курсов.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6491072220dbf2cb"
+    ],
     "source_refs": [
       "drive:1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx"
     ],
@@ -31,7 +33,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_7d6fbb6d57ed5a71",
@@ -193,14 +197,14 @@
     ],
     "year": 2018,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "foundation",
     "status": "approved",
     "priority": null,
     "topic_order": 60,
     "global_order": 640060,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Психолингвистика».",
+    "why_read": "Для дополнительного самостоятельного знакомства с основными концепциями и методами психолингвистики.",
     "learning_outcomes": [],
     "prerequisites": [],
     "source_refs": [
@@ -214,7 +218,9 @@
     },
     "content_access": "not_verified",
     "metadata_warnings": [],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   },
   {
     "id": "lit_5852670b2e030af5",
@@ -267,16 +273,18 @@
     ],
     "year": null,
     "type": "book",
-    "reading_level": null,
+    "reading_level": "core",
     "status": "approved",
     "priority": null,
     "topic_order": 80,
     "global_order": 640080,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Указано в учебном списке «Психолингвистика».",
+    "why_read": "Дополнить общий обзор университетским учебным пособием Щербаковой. Год издания в вашем списке пока не установлен.",
     "learning_outcomes": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "lit_6491072220dbf2cb"
+    ],
     "source_refs": [
       "drive:1YARMh0_5ElikmnEQpjRUUzrv15xhjjRx"
     ],
@@ -290,6 +298,8 @@
     "metadata_warnings": [
       "Год издания не установлен по исходному списку."
     ],
-    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "additional",
+    "importance_source": "agent"
   }
 ]
