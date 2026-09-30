@@ -1807,7 +1807,7 @@
     },
     "literature:lit_caa8d94a943aae0d": {
       "decision": "approved",
-      "item_sha256": "db1a5e772fb3a87a333e3f93681f2ce18b765c9bac80d7f042afff6c8cbe1210",
+      "item_sha256": "052e3726033db6f405e65e353237f3af94aa1cd92d58d3182c211acc4f9b7b7b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1818,11 +1818,20 @@
           "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
           "locator": "Позиция 1: Социальная психология личности"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://publications.hse.ru/books/108419313",
+        "evidence_scope": "University publication description identifies textbook scope and authors; university library lists 2001 course edition. Description concerns 2009 edition; equivalence to 2001 full text not established.",
+        "sequence": "Agent recommendation: social personality overview, then communication textbook, then author-specific applied/theoretical additions. Not a teacher/author mandatory order.",
+        "limitations": "Existing work identity, bibliography/source snapshots and personal state unchanged. Full content review and scientific certification not performed."
+      }
     },
     "literature:lit_a851d2e2d491dfed": {
       "decision": "approved",
-      "item_sha256": "249d86ebbcc12c4c2b732faa609a4c79ef91b0f09fd7f723bab29efda9a9390a",
+      "item_sha256": "04a4124950c06a07c7159866e280897871e71cff0701fadace11e541f1303468",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1833,7 +1842,16 @@
           "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
           "locator": "Позиция 2: Игры, в которые играют люди. Люди, которые играют в игры"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://eksmo.ru/book/igry-v-kotorye-igrayut-lyudi-lyudi-kotorye-igrayut-v-igry-43083009/",
+        "evidence_scope": "Official publisher combined-title card read: author, transactional analysis description and combined edition. Course edition/year unspecified; full text and therapeutic efficacy not verified.",
+        "sequence": "Agent recommendation: social personality overview, then communication textbook, then author-specific applied/theoretical additions. Not a teacher/author mandatory order.",
+        "limitations": "Existing work identity, bibliography/source snapshots and personal state unchanged. Full content review and scientific certification not performed."
+      }
     },
     "literature:lit_28136036489db778": {
       "decision": "approved",
@@ -1867,7 +1885,7 @@
     },
     "literature:lit_6968d12a30949ae7": {
       "decision": "approved",
-      "item_sha256": "8607514c65eea6f70d6825e182e3711c05cc08b083148638a21a992f404df62a",
+      "item_sha256": "440725572c91d5127de311910e8491cb0c65787edf3afb0b5abc08f2517e9a78",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1878,7 +1896,16 @@
           "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
           "locator": "Позиция 5: Межличностное общение"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01000707877",
+        "evidence_scope": "National library record identifies all three authors, university textbook and communication subject. Record 2001 differs from course year 2003; full text and edition equivalence unverified.",
+        "sequence": "Agent recommendation: social personality overview, then communication textbook, then author-specific applied/theoretical additions. Not a teacher/author mandatory order.",
+        "limitations": "Existing work identity, bibliography/source snapshots and personal state unchanged. Full content review and scientific certification not performed."
+      }
     },
     "literature:lit_4ac5113ca33225a9": {
       "decision": "approved",
@@ -1897,7 +1924,7 @@
     },
     "literature:lit_7bcfce2256481407": {
       "decision": "approved",
-      "item_sha256": "e8aa5c62c1e9e618a345ef94e0e9d205b6b551d4099a0f60b55ff69f57ab3004",
+      "item_sha256": "8c2d6958999e9d412ddd8e934f0b3b70a42a490fae4f5f10d5aa6da16c757c4b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1908,7 +1935,16 @@
           "snapshot_sha256": "071e7bbb30cde8189800cc6d175d2d7bd731b9e10fd450f5432930aca6113e5f",
           "locator": "Позиция 7: Тренинг влияния и противостояния влиянию"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/trening-vliyaniya-i-protivostoyaniya-vliyaniyu-3-e-izdanie-831838/",
+        "evidence_scope": "Indexed official publisher description and national library record 01009444630 identify third edition 2017, matching course year. Direct publisher fetch failed. Author methods not certified by this bibliographic review.",
+        "sequence": "Agent recommendation: social personality overview, then communication textbook, then author-specific applied/theoretical additions. Not a teacher/author mandatory order.",
+        "limitations": "Existing work identity, bibliography/source snapshots and personal state unchanged. Full content review and scientific certification not performed."
+      }
     },
     "literature:lit_89d363ca5a33cb7d": {
       "decision": "approved",
