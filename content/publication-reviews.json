@@ -1394,7 +1394,7 @@
     },
     "literature:lit_5568f7c20141100f": {
       "decision": "approved",
-      "item_sha256": "6f72b0f2d85bc4492a4f6eab9160e58be6c34ce80ba7593e2259e3dd4aed9c68",
+      "item_sha256": "fb3d4403a5f4db7489aaf0711525b7da1431d504ab06d2fd507f3daf6a644d1c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1405,11 +1405,21 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 6: Психологическое консультирование"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/psikhologicheskoe-konsultirovanie-teoriya-i-praktika-3-e-izdanie-ispravlennoe-i-dopolnennoe-865923/",
+        "evidence_scope": "Indexed first-party AST annotation describes counselling stages and practice examples for psychology students/practitioners; direct page HTTP 403. NEB record 004242023 confirms Linde university manual, 2009. Course abbreviated title has no edition/year, kept unchanged. No efficacy inference about author method.",
+        "sequence": "Agent recommends introductory overview before supplementary university/practice texts. Not teacher priority or measured complexity.",
+        "limitations": "Metadata/annotation only; course year, source snapshots, aliases, citation and user state unchanged. Full-text not reviewed.",
+        "additional_primary_record": "https://rusneb.ru/catalog/000199_000009_004242023/"
+      }
     },
     "literature:lit_ae000be9a73115a6": {
       "decision": "approved",
-      "item_sha256": "9b3a517bf44af72f1721175ae0a398dd744f115b8f3fdf22d6b28b54717b2c74",
+      "item_sha256": "c2514b630b85618fd7c8797909e80cc790d08df9c3a1d07f72f6bbaf095fd8b2",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1420,7 +1430,15 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 7: Индивидуальное психологическое консультирование: теория, практика, обучение"
         }
-      ]
+      ],
+      "metadata_reconciliation": {
+        "reviewed_at": "2026-09-30",
+        "decision": "preserve_course_citation_with_warning",
+        "primary_record": "https://rusneb.ru/catalog/000199_000009_009428637/",
+        "additional_primary_record": "https://vshpk.ru/nashi-knigi",
+        "evidence_scope": "NEB 2016 record and author institution both identify E.V. Martynova for exact title; existing course citation says E.A. No course identity/edition confirmation.",
+        "limitations": "Preserve original author/year/work identity, source capture and user history; do not assign role or silently merge/correct author."
+      }
     },
     "literature:lit_e397986f81e37d22": {
       "decision": "approved",
@@ -1448,7 +1466,7 @@
     },
     "literature:lit_7b4d2c2bdc54b178": {
       "decision": "approved",
-      "item_sha256": "55e65b8de8512e37aad194b33ecf70d57d5e465e27f42d25f3d60c1f55b6602c",
+      "item_sha256": "5fa584b236af4479d0a14fddc5b7fd9bbedb14603e8f97eef94fc998790f29d9",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1459,7 +1477,16 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 9: Психологическое консультирование: учебник для вузов"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://urait.ru/bcode/582735",
+        "evidence_scope": "Indexed first-party Yurait catalogue identifies Nemov university textbook, second revised edition 2026 and description of organization/conduct of counselling. Direct card exposes only widgets; course unspecified edition/year is not replaced with publisher edition.",
+        "sequence": "Agent recommends introductory overview before supplementary university/practice texts. Not teacher priority or measured complexity.",
+        "limitations": "Metadata/annotation only; course year, source snapshots, aliases, citation and user state unchanged. Full-text not reviewed."
+      }
     },
     "literature:lit_8c4dd1a3c39ecbcf": {
       "decision": "approved",
