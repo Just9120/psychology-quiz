@@ -1416,10 +1416,10 @@
     },
     "literature:lit_12ca0a14d27fe4f9": {
       "decision": "approved",
-      "item_sha256": "c1b35eda85d60ade26b3a9b7ca25e1a9471ae46177d381f0dd59cdb36738a5a8",
+      "item_sha256": "2f66cf8ea2a1c682c563316c969a65137398e453508150932ccba326c4506d5b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
@@ -1427,14 +1427,23 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 1: Психологическое консультирование: настольная книга для начинающих"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=325873&lang=Ru&page=Book",
+        "evidence_scope": "Publisher catalogue, annotation, contents and original author introduction retrieved: matching author/title, practical beginner/student audience, consultation stages and exercises. Card describes 2025 edition; course year remains UNSET. No whole-book or clinical efficacy review.",
+        "sequence": "Agent-selected prerequisite: introductory counseling text before practical consultation techniques. Not a teacher requirement or measured difficulty.",
+        "limitations": "Original source citation, snapshots, authors, unknown year, work ID and reading state preserved; exact course edition and access entitlement not claimed."
+      }
     },
     "literature:lit_16a62202b82667da": {
       "decision": "approved",
-      "item_sha256": "d45d125af425c237ce40bb18080b63abf9c6c4184fcd70ac1cad1e5e888be45d",
+      "item_sha256": "bacb38568d348098982b90181cc9070b8642be475a84ab70778b10c100b4c023",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
@@ -1442,7 +1451,13 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 2: Практическая психология: психологическое консультирование"
         }
-      ]
+      ],
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "evidence": "https://search.rsl.ru/ru/record/01000904560",
+        "scope": "Primary RSL record retrieved: Abramova Practical Psychology, 2002 seventh edition, university textbook. Indexed university contents contain counseling chapter; course colon title could refer to book/chapter, not established. No identity rewrite or reading role.",
+        "decision": "Keep original source bibliography, author, work identity and reading role UNSET until reconciliation."
+      }
     },
     "literature:lit_6d7bc0cc3c9ce6eb": {
       "decision": "approved",
@@ -1471,10 +1486,10 @@
     },
     "literature:lit_e5921321564edbc4": {
       "decision": "approved",
-      "item_sha256": "9be36388304db297d623d19dd0c1c7c46f10cc107172a347a19e26be3f034d82",
+      "item_sha256": "edcc6f743556506f721e4888b47073586d3b036765b4370d936e20ecdb29ed53",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1QN84N6KYOWMLclcDoPng8kNiKQWA0Bzj",
@@ -1482,7 +1497,13 @@
           "snapshot_sha256": "8c25dc2e9798fde357b62fefc0ffb34a689ca7f0034a43dae3763ae2800a0f7b",
           "locator": "Позиция 4: Психологическое консультирование: теория и практика"
         }
-      ]
+      ],
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "evidence": "https://rusneb.ru/catalog/000199_000009_004242023/",
+        "scope": "Indexed primary NEB record identifies same title with Linde, 2009; primary national-library reference answer corroborates Linde 2010. Direct retrieval failed. Course Burlachuk entry not identified; same-title record is a reconciliation candidate, not proof that no such work exists.",
+        "decision": "Keep original source bibliography, author, work identity and reading role UNSET until reconciliation."
+      }
     },
     "literature:lit_f207603bd416c4be": {
       "decision": "approved",
