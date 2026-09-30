@@ -2651,10 +2651,10 @@
     },
     "literature:lit_d326f6da3f94e03b": {
       "decision": "approved",
-      "item_sha256": "77233227b25672c852639c774bb05efb73e60792b2b762563df9d481c2d8e60e",
+      "item_sha256": "be2cba0a77821bf28774e9d6490d077b0f241f3a6dcffd8e18ef3e6433015188",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -2662,14 +2662,31 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 1: Организационная психология"
         }
-      ]
+      ],
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "primary_record": "https://library.tversu.ru/vystavki/136-otdel-filologicheskoj-literatury/1257-organizatsionnaya-psikhologiya.html?template=accessibility",
+        "evidence_scope": "University library records retrieved: Bekoeva, Academy, 2014 and undergraduate psychology audience match. Tver pagination 251,[1] agrees with course 252; GUMRF 256 requires reconciliation.",
+        "limitations": "Original course citation, source snapshots and work identity preserved. Exact edition and full text not verified."
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "university_library_record": "https://library.tversu.ru/vystavki/136-otdel-filologicheskoj-literatury/1257-organizatsionnaya-psikhologiya.html?template=accessibility",
+        "comparison_record": "https://e-library.gumrf.ru/cgi-bin/irbis64r_11/cgiirbis_64.exe?C21COM=F&I21DBN=IBIS_PRINT&LNG=en&P21DBN=IBIS&S21FMT=infow_wh_print&Z21MFN=40762",
+        "evidence_scope": "Both university library records retrieved: undergraduate psychology textbook. Agent recommends core/basic overview from explicit genre and audience; no contents-specific learning outcomes or efficacy claims.",
+        "sequence": "General textbook overview before specialist works; agent inference, not a teacher prerequisite.",
+        "limitations": "Full text not read; pagination discrepancy unresolved. Course bibliography, source records and reading state retained."
+      }
     },
     "literature:lit_925e5ff861131189": {
       "decision": "approved",
-      "item_sha256": "90dd78fcca7167c9a1b8777de63edda3fc4a7726d4751c064f0474b2f3b01d3e",
+      "item_sha256": "4d9ea7c3d7141dcfb7d6bb4fcd5f9afc7d5530e0f9fcc6a31d67c33eff924012",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -2677,7 +2694,14 @@
           "snapshot_sha256": "252fa381791e2170e6b0e15ebd73d6f45803aade454e25fd41b242977ec2ca84",
           "locator": "Позиция 2: Организационная психология"
         }
-      ]
+      ],
+      "bibliographic_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "primary_record": "https://library.tversu.ru/vystavki/136-otdel-filologicheskoj-literatury/1257-organizatsionnaya-psikhologiya.html?template=accessibility",
+        "evidence_scope": "University library record retrieved: collective authorship, Rogov editor, second edition 2013 differs from course sole Zholudeva attribution and 2012. Candidate discrepancy only; no automatic author/year/work replacement. Reading role remains UNSET.",
+        "limitations": "Original course citation, source snapshots and work identity preserved. Exact edition and full text not verified."
+      }
     },
     "literature:lit_f0436ade24a5adb3": {
       "decision": "approved",
