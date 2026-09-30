@@ -13,7 +13,6 @@ from app.reading_schema import migrate_reading_schema
 from app.literature import load_literature_items
 from app.auth_schema import migrate_auth_schema
 from app.invitation_schema import migrate_invitation_schema
-from app.pwa_promotion import INVITATION_TTL, claim_first_offer, issue_invitation
 from app.identity_schema import migrate_identity_schema
 from app.db import create_or_load_user, get_connection
 from app.miniapp_fastapi import create_app
@@ -112,70 +111,6 @@ def test_private_vault_has_no_web_or_miniapp_route(web):
         assert response.status_code == 404, path
 
 
-def test_invited_student_requires_both_email_and_invited_telegram_actor(web):
-    student_email = 'student@example.test'
-    student_settings = replace(SETTINGS, student_access_enabled=True)
-    app = create_app(db_path=str(web.db), bot_token=TOKEN, web_settings=student_settings,
-                     web_mailer=web.mailbox, web_clock=lambda: web.now[0])
-    with closing(get_connection(str(web.db))) as conn, conn:
-        assert claim_first_offer(conn, 42, now=web.now[0])
-        assert not claim_first_offer(conn, 42, now=web.now[0])
-        invitation = issue_invitation(conn, 42, now=web.now[0])
-        assert invitation and invitation not in '\n'.join(conn.iterdump())
-    with TestClient(app, base_url=ORIGIN) as client:
-        student = SimpleNamespace(client=client)
-        assert post(student, 'auth/register', {'email': student_email}).status_code == 200
-        assert web.mailbox.messages == []
-        assert post(student, 'auth/register', {'email': student_email, 'invitation': invitation}).status_code == 200
-        proof = web.mailbox.messages[-1][2]
-        assert post(student, 'auth/verify', {'token': proof, 'password': PASSWORD}).status_code == 200
-        assert post(student, 'auth/verify', {'token': proof, 'password': PASSWORD}).status_code == 400
-        assert post(student, 'auth/register', {'email': 'other@example.test', 'invitation': invitation}).status_code == 200
-        assert len(web.mailbox.messages) == 1
-        assert post(student, 'auth/login', {'email': student_email, 'password': PASSWORD}).status_code == 200
-        account = client.get('/web/auth/me').json()
-        assert account['role'] == 'student' and account['needs_identity']
-        csrf = account['csrf_token']
-        assert post(student, 'identity/new', csrf=csrf).status_code == 403
-        code = post(student, 'link/start', csrf=csrf).json()['code']
-        with pytest.raises(AuthError, match='identity_unavailable'):
-            app.state.web_auth.propose_telegram_link(code, SimpleNamespace(id=999, username=None, first_name=None, last_name=None))
-        app.state.web_auth.propose_telegram_link(code, SimpleNamespace(id=42, username=None, first_name='Original user', last_name=None))
-        app.state.web_auth.confirm_telegram_link(code, 42)
-        assert post(student, 'link/complete', csrf=csrf).status_code == 200
-        assert client.get('/web/auth/me').json()['needs_identity'] is False
-        assert post(student, 'owner/stats', {'period': '7d'}, csrf=csrf).status_code == 403
-
-
-def test_expired_invitation_does_not_send_registration_mail(web):
-    settings = replace(SETTINGS, student_access_enabled=True)
-    app = create_app(db_path=str(web.db), bot_token=TOKEN, web_settings=settings,
-                     web_mailer=web.mailbox, web_clock=lambda: web.now[0])
-    with closing(get_connection(str(web.db))) as conn, conn:
-        invitation = issue_invitation(conn, 42, now=web.now[0])
-    web.now[0] += INVITATION_TTL + 1
-    with TestClient(app, base_url=ORIGIN) as client:
-        assert post(SimpleNamespace(client=client), 'auth/register',
-                    {'email': 'student@example.test', 'invitation': invitation}).status_code == 200
-    assert web.mailbox.messages == []
-
-
-def test_one_email_cannot_be_reserved_by_two_telegram_invitations(web):
-    student_email = 'student@example.test'
-    with closing(get_connection(str(web.db))) as conn, conn:
-        create_or_load_user(conn, 43, None, 'Other student', None)
-        first = issue_invitation(conn, 42, now=web.now[0])
-        second = issue_invitation(conn, 43, now=web.now[0])
-    student_app = create_app(db_path=str(web.db), bot_token=TOKEN,
-                             web_settings=replace(SETTINGS, student_access_enabled=True),
-                             web_mailer=web.mailbox, web_clock=lambda: web.now[0])
-    with TestClient(student_app, base_url=ORIGIN) as client:
-        student = SimpleNamespace(client=client)
-        assert post(student, 'auth/register', {'email': student_email, 'invitation': first}).status_code == 200
-        assert post(student, 'auth/register', {'email': student_email, 'invitation': second}).status_code == 200
-    assert len(web.mailbox.messages) == 1
-
-
 def test_email_proof_precedes_account_password_and_login_cookie(web):
     assert post(web, 'auth/register', {'email': EMAIL, 'password': 'attacker-chosen-password'}).status_code == 200
     with closing(get_connection(str(web.db))) as conn:
@@ -237,43 +172,31 @@ def test_non_owner_unknown_login_and_disabled_account_are_denied(web):
     assert post(web, 'auth/login', {'email': EMAIL, 'password': PASSWORD}).status_code == 401
 
 
-def test_student_pwa_flows_are_dormant_in_production_but_isolated_in_synthetic_policy(web):
+def test_legacy_student_accounts_sessions_and_invitations_cannot_bypass_owner_access(web):
+    from app.web_auth import digest
+    register(web)
     student = 'student@example.test'
+    raw_session = secrets.token_urlsafe(32)
     with closing(get_connection(str(web.db))) as conn, conn:
-        owner_session = make_attempt(conn)
-        create_or_load_user(conn, 43, None, 'Student', None)
-        invitation = issue_invitation(conn, 43, now=web.now[0])
-    assert post(web, 'auth/register', {'email': student}).status_code == 200
-    assert web.mailbox.messages == []
-    synthetic = create_app(db_path=str(web.db), bot_token=TOKEN,
-        web_settings=replace(SETTINGS, student_access_enabled=True), web_mailer=web.mailbox,
-        web_clock=lambda: web.now[0])
-    with TestClient(synthetic, base_url=ORIGIN) as client:
-        student_web = SimpleNamespace(db=web.db, client=client, mailbox=web.mailbox)
-        assert post(student_web, 'auth/register', {'email': student, 'invitation': invitation}).status_code == 200
-        token = web.mailbox.messages[-1][2]
-        assert post(student_web, 'auth/verify', {'token': token, 'password': PASSWORD}).status_code == 200
-        assert post(student_web, 'auth/login', {'email': student, 'password': PASSWORD}).status_code == 200
-        me = client.get('/web/auth/me').json()
-        assert me['role'] == 'student' and me['needs_identity'] is True
-        assert post(student_web, 'identity/new', csrf=me['csrf_token']).status_code == 403
-        code = post(student_web, 'link/start', csrf=me['csrf_token']).json()['code']
-        synthetic.state.web_auth.propose_telegram_link(code, SimpleNamespace(id=43, username=None, first_name='Student', last_name=None))
-        synthetic.state.web_auth.confirm_telegram_link(code, 43)
-        assert post(student_web, 'link/complete', csrf=me['csrf_token']).status_code == 200
-        assert client.get('/web/quiz/state').status_code == 200
-        denied = post(student_web, 'quiz/answer', {'session_id': owner_session, 'question_id': 1, 'selected_option_index': 0}, csrf=me['csrf_token'])
-        assert denied.status_code == 403
-        assert client.get('/web/quiz/state').json()['runner_state']['state'] == 'setup'
-        student_actor = client.get('/web/auth/me').json()['email']
-        assert student_actor == student
-        issued_cookie = client.cookies.get(SETTINGS.cookie_name)
-    # A student session cannot be used after the production gate is closed.
-    with closing(get_connection(str(web.db))) as conn:
-        assert conn.execute('SELECT count(*) FROM web_accounts WHERE email=?', (student,)).fetchone()[0] == 1
-    web.client.cookies.set(SETTINGS.cookie_name, issued_cookie)
-    assert web.client.get('/web/auth/me').status_code == 401
+        owner_hash = conn.execute('SELECT password_hash FROM web_accounts WHERE email=?', (EMAIL,)).fetchone()[0]
+        actor = create_or_load_user(conn, 43, None, 'Synthetic legacy actor', None)['id']
+        account = conn.execute('INSERT INTO web_accounts(email,password_hash,user_id,verified_at,created_at) VALUES(?,?,?,?,?) RETURNING id',
+                               (student, owner_hash, actor, web.now[0], web.now[0])).fetchone()[0]
+        conn.execute('INSERT INTO web_sessions VALUES(?,?,?,?,?)',
+                     (digest(raw_session), account, web.now[0], web.now[0]+3600, web.now[0]))
+        conn.execute('INSERT INTO pwa_invitations(user_id,account_id,consumed_at) VALUES(?,?,?)', (actor, account, web.now[0]))
+        before = [tuple(row) for row in conn.execute('SELECT * FROM pwa_invitations')]
+    messages = len(web.mailbox.messages)
+    assert post(web, 'auth/register', {'email': student, 'invitation': 'legacy-token'}).json() == {'ok': True}
+    assert post(web, 'auth/recover', {'email': student}).json() == {'ok': True}
+    assert len(web.mailbox.messages) == messages
     assert post(web, 'auth/login', {'email': student, 'password': PASSWORD}).status_code == 401
+    web.client.cookies.set(SETTINGS.cookie_name, raw_session)
+    assert web.client.get('/web/auth/me').status_code == 401
+    assert web.client.get('/web/quiz/state').status_code == 401
+    with closing(get_connection(str(web.db))) as conn:
+        assert [tuple(row) for row in conn.execute('SELECT * FROM pwa_invitations')] == before
+        assert conn.execute('SELECT count(*) FROM web_accounts WHERE email=?', (student,)).fetchone()[0] == 1
 
 
 def test_runtime_config_rejects_enabling_student_pwa_without_approved_policy(monkeypatch):

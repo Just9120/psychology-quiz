@@ -63,7 +63,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       <label className="field">Учебный список<select value={entry.id} disabled={busy || uncertain} onChange={event => select(work.entries.find(link => link.id === event.target.value)!)}>
         {work.entries.map(link => <option key={link.id} value={link.id}>{link.topic_title} · {link.source.title}</option>)}
       </select></label>
-      {work.entries.length > 1 && <p className="muted">Эта работа встречается в нескольких списках. Отметки чтения сохраняются отдельно для выбранного списка.</p>}
+      {work.entries.length > 1 && <p className="muted">Эта книга встречается в нескольких списках. Статус чтения общий для всех её списков.</p>}
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
       <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>

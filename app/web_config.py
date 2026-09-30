@@ -25,10 +25,6 @@ class WebSettings:
     smtp_password: str
     sender: str
     secure_cookie: bool = True
-    # Synthetic tests can exercise student account flows. Production config
-    # deliberately cannot enable them: student PWA is outside current product scope.
-    student_access_enabled: bool = False
-
     @property
     def cookie_name(self) -> str:
         return "__Host-psychology_session" if self.secure_cookie else "psychology_dev_session"

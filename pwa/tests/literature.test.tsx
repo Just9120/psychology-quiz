@@ -106,3 +106,25 @@ it.each(['pwa', 'miniapp'])('shows scoped work totals and current reading indepe
   await user.click(current.querySelector('button')!)
   expect(screen.getByLabelText(client === 'pwa' ? 'Статус чтения' : 'Статус')).toHaveValue('in_progress')
 })
+
+
+it('shares a saved work status across reading lists and exposes exactly four choices', async () => {
+  const second = { ...catalog.works[0].entries[0], id: 'book-two', topic_title: 'Вторая тема' }
+  const current = { ...catalog, works: [{ ...catalog.works[0], entries: [...catalog.works[0].entries, second] }] }
+  vi.spyOn(api, 'readingProgress').mockResolvedValue({ ok: true, literature_progress: {
+    literature_id: 'book', work_id: 'book', reading_status: 'deferred', progress_percent: null, updated_at: '2026-09-30T08:00:00Z',
+  } })
+  render(<LiteratureView initial={current} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  await user.click(screen.getByRole('button', { name: 'Учебная книга' }))
+  const select = screen.getByLabelText('Статус чтения')
+  expect([...select.querySelectorAll('option')].map(option => option.textContent)).toEqual(['Не начато', 'Читаю', 'Прочитано', 'Отложено'])
+  await user.selectOptions(select, 'deferred')
+  await user.click(screen.getByRole('button', { name: 'Сохранить чтение' }))
+  await user.selectOptions(screen.getByLabelText('Учебный список'), 'book-two')
+  expect(screen.getByLabelText('Статус чтения')).toHaveValue('deferred')
+  await user.click(screen.getByRole('button', { name: '← К списку литературы' }))
+  await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'deferred')
+  expect(screen.getByText('Первая тема · Отложено')).toBeVisible()
+  expect(screen.getByText('Вторая тема · Отложено')).toBeVisible()
+})

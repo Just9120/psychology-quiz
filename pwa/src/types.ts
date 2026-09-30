@@ -2,7 +2,7 @@ export interface Account {
   ok: true
   email: string
   display_name: string | null
-  role?: 'owner' | 'student'
+  role?: 'owner'
   csrf_token: string
   needs_identity: boolean
   telegram_linked: boolean

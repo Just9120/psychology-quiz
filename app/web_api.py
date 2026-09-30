@@ -36,7 +36,7 @@ class WebAccessLogFilter(logging.Filter):
 
 def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf: str | None):
     if action in {"auth/register", "auth/recover"}:
-        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover", payload.get("invitation"))
+        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover")
         return {"ok": True}, None
     if action in {"auth/verify", "auth/reset"}:
         auth.set_password(payload.get("token"), payload.get("password"), "register" if action == "auth/verify" else "recover")

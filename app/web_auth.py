@@ -15,7 +15,6 @@ from argon2.exceptions import VerificationError, InvalidHashError
 from app.db import create_or_load_user, get_connection
 from app.database import begin_write
 from app.web_config import WebSettings, normalize_email
-from app.pwa_promotion import complete_invitation, invited_actor, reserve_invitation
 
 SESSION_TTL = 7 * 86400
 IDLE_TTL = 12 * 3600
@@ -74,7 +73,7 @@ class WebAuth:
             self.dummy_hash = PASSWORDS.hash(secrets.token_urlsafe(32))
 
     def _allowed_email(self, email: str) -> bool:
-        return email == self.settings.owner_email or self.settings.student_access_enabled
+        return email == self.settings.owner_email
 
     @contextmanager
     def transaction(self):
@@ -97,7 +96,7 @@ class WebAuth:
         if not allowed:
             raise AuthError("rate_limited", 429)
 
-    def request_mail(self, email: object, purpose: str, invitation: object = None) -> None:
+    def request_mail(self, email: object, purpose: str) -> None:
         self.limit("mail", 5, 3600)
         try:
             email = normalize_email(email)
@@ -118,9 +117,6 @@ class WebAuth:
                     return
                 if purpose == "recover" and (account is None or not account["enabled"]):
                     return
-                if purpose == "register" and email != self.settings.owner_email:
-                    if not reserve_invitation(conn, invitation, email, now=now):
-                        return
                 ttl = VERIFY_TTL if purpose == "register" else RECOVERY_TTL
                 conn.execute("INSERT INTO web_mail_tokens VALUES(?,?,?,?,?)",
                              (token_digest, email, purpose, account["id"] if account else None, now + ttl))
@@ -156,11 +152,8 @@ class WebAuth:
             if purpose == "register":
                 if conn.execute("SELECT 1 FROM web_accounts WHERE email=?", (proof["email"],)).fetchone():
                     raise AuthError("invalid_token")
-                inserted = conn.execute("INSERT INTO web_accounts(email,password_hash,verified_at,created_at) VALUES(?,?,?,?) RETURNING id",
+                conn.execute("INSERT INTO web_accounts(email,password_hash,verified_at,created_at) VALUES(?,?,?,?) RETURNING id",
                                         (proof["email"], encoded, now, now)).fetchone()
-                if proof["email"] != self.settings.owner_email:
-                    if complete_invitation(conn, proof["email"], int(inserted[0]), now=now) is None:
-                        raise AuthError("invalid_invitation")
             elif purpose == "recover":
                 account = conn.execute("SELECT * FROM web_accounts WHERE id=? AND enabled=1", (proof["account_id"],)).fetchone()
                 if account is None:
@@ -236,7 +229,7 @@ class WebAuth:
                 target = {"telegram_id": target_user["telegram_user_id"], "username": target_user["username"],
                           "display_name": " ".join(str(target_user[key]) for key in ("first_name", "last_name") if target_user[key])}
         profile = conn.execute("SELECT display_name FROM web_profile_names WHERE account_id=?", (account["id"],)).fetchone()
-        return {"ok": True, "email": account["email"], "display_name": profile[0] if profile else None, "role": "owner" if account["email"] == self.settings.owner_email else "student",
+        return {"ok": True, "email": account["email"], "display_name": profile[0] if profile else None, "role": "owner",
                 "needs_identity": account["user_id"] is None,
                 "telegram_linked": actor is not None and actor[0] is not None, "csrf_token": csrf_token(session),
                 "link_pending": bool(pending), "link_confirmed": bool(pending and pending["telegram_confirmed"]), "link_target": target}
@@ -289,8 +282,6 @@ class WebAuth:
         with self.transaction() as conn:
             proof = self._link_proof(conn, token)
             actor = create_or_load_user(conn, telegram_user.id, telegram_user.username, telegram_user.first_name, telegram_user.last_name)
-            if proof["email"] != self.settings.owner_email and invited_actor(conn, int(proof["account_id"])) != int(actor["id"]):
-                raise AuthError("identity_unavailable", 409)
             if conn.execute("SELECT 1 FROM web_accounts WHERE user_id=?", (actor["id"],)).fetchone():
                 raise AuthError("identity_unavailable", 409)
             if proof["proposed_user_id"] is not None and proof["proposed_user_id"] != actor["id"]:
