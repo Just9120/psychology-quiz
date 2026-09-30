@@ -2878,7 +2878,7 @@
     },
     "literature:lit_5643db88a7fa06b2": {
       "decision": "approved",
-      "item_sha256": "e3e10ff42baafb4e815727de66d21195e12f1ccbc092ea61f5e262837736c2bd",
+      "item_sha256": "a33969c9a84ebbef3ac4b04998676374bbbb4c2d46a741eb6b57819ef1c2a295",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -2892,9 +2892,20 @@
       ],
       "bibliographic_metadata_review": {
         "reviewed_at": "2026-09-30",
-        "evidence": "https://pureportal.spbu.ru/ru/publications/--(cd6cbff1-564d-43ac-b5c1-6b2b0930ac2f).html",
-        "scope": "Primary author-university publication record retrieved: Pochebut/Chiker, 2019 Yurait 246 pages. Course 2010 Rech edition not reconciled; author spelling differs.",
-        "decision": "Preserve original metadata and identity; reading role remains UNSET pending reconciliation."
+        "origin": "agent",
+        "primary_record": "https://pureportal.spbu.ru/ru/publications/--(cd6cbff1-564d-43ac-b5c1-6b2b0930ac2f).html",
+        "evidence_scope": "Author-university publication page retrieved: Lyudmila Georgievna Pochebut and Vera Aleksandrovna Chiker, exact title, academic undergraduate textbook, Yurait 2019, 246 pages. Normalized author spelling corrected, original course citation Pocheshut retained.",
+        "decision": "correct_normalized_author_keep_source_citation",
+        "limitations": "Course Rech 2010, 288 pages edition not reconciled. No automatic year/publisher replacement or work identity merge."
+      },
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://pureportal.spbu.ru/ru/publications/--(cd6cbff1-564d-43ac-b5c1-6b2b0930ac2f).html",
+        "evidence_scope": "Retrieved author-university record explicitly identifies undergraduate textbook genre and subject. Recommendation uses genre/audience, not a claim about exact contents of the course edition. Other edition record/annotation request timed out and is excluded from direct evidence.",
+        "sequence": "Agent recommends general organizational psychology overview before focused organizational social psychology study. Not a teacher-assigned prerequisite.",
+        "limitations": "Full text not read; exact course edition not verified. No measured difficulty or efficacy endorsement. Course source snapshots and personal reading state unchanged."
       }
     },
     "literature:lit_4326336ddc0d7a05": {
