@@ -181,10 +181,10 @@
     },
     "literature:fch_gazzaniga_kto_za_glavnogo": {
       "decision": "approved",
-      "item_sha256": "404f3bf3007b828af63143c3ecbf6bb6c490767c622a152441b75ee26dc61c8a",
+      "item_sha256": "60d854567543821b335482221b9211ab9dd2cf7459c26684a241593a76c22a90",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -192,7 +192,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 1"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/kto-za-glavnogo-156527/",
+        "evidence_scope": "Indexed official publisher description/Corpus article confirms the work on brain, mind and choice. Direct AST page failed; no access denial reason or full-text verification inferred. Deepening role/additional priority/overview-first order are agent recommendations, not endorsement of every scientific/philosophical claim.",
+        "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
+        "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      }
     },
     "literature:fch_dubynin_mozg_i_ego_potrebnosti": {
       "decision": "approved",
@@ -211,10 +220,10 @@
     },
     "literature:fch_kandel_v_poiskah_pamyati": {
       "decision": "approved",
-      "item_sha256": "d1c323b4a777056bfd6f38d1cb8cb6151191c8efa94b669ab33c9e58a4195606",
+      "item_sha256": "e71c29d44710075785f924f3bcbdf15801416da6c7cba3a2023c0b4099efdcb1",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -222,14 +231,23 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 3"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.corpus.ru/products/v-poiskah-pamyati-vozniknovenie-novoj-nauki-psihike.htm",
+        "evidence_scope": "Official publisher product description read/indexed: history of biological foundations of mind and interaction of behavioural, cognitive and molecular approaches. Deepening role/additional priority and overview-first order are agent recommendations.",
+        "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
+        "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      }
     },
     "literature:fch_carter_kak_rabotaet_mozg": {
       "decision": "approved",
-      "item_sha256": "26b75508a6cc05507a0186352486a97725e60db5eb9c6512b1d09c8b38a78c14",
+      "item_sha256": "4726f23750c4875e3dcd69635cfdc56d5c5c1d77baeaaa57b62394869d0e7560",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1PwOHb_wdshbIgg9-cmO1d4E7iJzere5S",
@@ -237,7 +255,16 @@
           "snapshot_sha256": "41066e3c1aac65f39e992a9249f3c8a8ce629716c49f8cc7901d9d6d187b78e4",
           "locator": "Страница 1, позиция 4"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.corpus.ru/products/rita-karter-kak-rabotaet-mozg.htm",
+        "evidence_scope": "Official publisher description read: illustrated guide to the brain, popular-science category and broad readership. Foundational role/basic priority are agent judgements about an introductory overview, not a teacher priority or measured difficulty.",
+        "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
+        "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      }
     },
     "literature:fch_martynov_mozg": {
       "decision": "approved",
@@ -406,10 +433,10 @@
     },
     "literature:fvnd_gazzaniga_kto_za_glavnogo": {
       "decision": "approved",
-      "item_sha256": "7e2e2d7f98f7f1fa6be92997af70c05eb97832176ebaf6c272163ab28a44167f",
+      "item_sha256": "e59e05392496236aa3fa94da2689f2baaf61303fdf82ad107e40d5ca27e2bea4",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -417,7 +444,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 1"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/kto-za-glavnogo-156527/",
+        "evidence_scope": "Indexed official publisher description/Corpus article confirms the work on brain, mind and choice. Direct AST page failed; no access denial reason or full-text verification inferred. Deepening role/additional priority/overview-first order are agent recommendations, not endorsement of every scientific/philosophical claim.",
+        "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
+        "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      }
     },
     "literature:fvnd_dubynin_mozg_i_ego_potrebnosti": {
       "decision": "approved",
@@ -436,10 +472,10 @@
     },
     "literature:fvnd_kandel_v_poiskah_pamyati": {
       "decision": "approved",
-      "item_sha256": "014582bd9c9167f188c6c6e130ac5dd201e1a9bd464675eeb37246b0e55858b0",
+      "item_sha256": "4ff95f49f963e70194bcd1218e48150d3edd812c964becf4e62be70aeb696415",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -447,14 +483,23 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 3"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.corpus.ru/products/v-poiskah-pamyati-vozniknovenie-novoj-nauki-psihike.htm",
+        "evidence_scope": "Official publisher product description read/indexed: history of biological foundations of mind and interaction of behavioural, cognitive and molecular approaches. Deepening role/additional priority and overview-first order are agent recommendations.",
+        "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
+        "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      }
     },
     "literature:fvnd_carter_kak_rabotaet_mozg": {
       "decision": "approved",
-      "item_sha256": "995af9bb828416ba973e27ea4979a0226a3a757b07cc98d1f855d43017d01ca9",
+      "item_sha256": "b232cb8e31dfe90d9f1f51e9c8aa4bc7a826d9e2ac3de44fba8df71934a3b3e0",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1H9qgOSUyfvrVRo1Q7hkVG7BgnjHjYuaX",
@@ -462,7 +507,16 @@
           "snapshot_sha256": "1b6646cae3a91480ee72833ff2b280815a6b55daba5f33ce55d77575ec6cbb2b",
           "locator": "Страница 1, позиция 4"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.corpus.ru/products/rita-karter-kak-rabotaet-mozg.htm",
+        "evidence_scope": "Official publisher description read: illustrated guide to the brain, popular-science category and broad readership. Foundational role/basic priority are agent judgements about an introductory overview, not a teacher priority or measured difficulty.",
+        "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
+        "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      }
     },
     "literature:fvnd_martynov_mozg": {
       "decision": "approved",
