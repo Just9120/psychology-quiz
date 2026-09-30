@@ -1642,7 +1642,7 @@
     },
     "literature:lit_8c7e7daa0a5aa779": {
       "decision": "approved",
-      "item_sha256": "925a4160d38e60e75d803387a1d8a5cad60ccf635103f4160b78160ef18b502b",
+      "item_sha256": "62c8bb0573625cde163ca605ee19a3379749b0bdde6bffa9b2d297e922c10810",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1653,7 +1653,16 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 2: Возрастная психология: конспект лекций"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://search.rsl.ru/ru/record/01002676440",
+        "evidence_scope": "National library 2005 record read: matching author/title/year, university study aid and systematic basic-theory description. Full text not read.",
+        "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
+        "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      }
     },
     "literature:lit_d5aee85ddf3b94c4": {
       "decision": "approved",
@@ -1672,7 +1681,7 @@
     },
     "literature:lit_c9f5f2a72f8ab645": {
       "decision": "approved",
-      "item_sha256": "85d7b2c93c4ebee95da713978a5966880d3eb7a4903f94422bb2666af161fff2",
+      "item_sha256": "dce06cb1430c53519ab0ab7cfd5ec1a2aec8d769022989aecfb7a9eadcbaab30",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1683,7 +1692,16 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 4: Психология развития"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/A19795/product/psihologiya-razvitiya-9-e-izd-2",
+        "evidence_scope": "Indexed official publisher ninth-edition card matches Craig/Baucum and broad developmental scope. Direct fetch failed; course edition/year unspecified, full text not reviewed.",
+        "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
+        "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      }
     },
     "literature:lit_5c4001030a94d65d": {
       "decision": "approved",
@@ -1702,7 +1720,7 @@
     },
     "literature:lit_677867857cce3e89": {
       "decision": "approved",
-      "item_sha256": "91b5da0c45884fddab7f742074457034d1dd785f671e0591c7da108b2e9d9280",
+      "item_sha256": "454e8febf36269d04fc051af5baff012440332ceedf78c2d0991c8bb1074cc00",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1713,11 +1731,20 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 6: Тайная опора: привязанность в жизни ребёнка"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://ast.ru/book/taynaya-opora-privyazannost-v-zhizni-rebenka-719902/",
+        "evidence_scope": "Indexed official publisher card matches Petranovskaya/title and popular-parenting attachment scope. Direct fetch failed. Exact course edition/full text and clinical efficacy not established.",
+        "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
+        "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      }
     },
     "literature:lit_702e5c3a28977b88": {
       "decision": "approved",
-      "item_sha256": "cd1236635ebcfe02ccf88fa1c71bbbcd860021b0b45823ec1d494261faad8c37",
+      "item_sha256": "0251464620c2edc2125608db81c8ed9cd0894eee2c9d7fbe8b0d77a745775445",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1728,7 +1755,16 @@
           "snapshot_sha256": "105cc04aee1bf3031e0eb5d56f998c3753b9b42d9eacaacb592a67bbb4161e28",
           "locator": "Позиция 7: Психология подросткового и юношеского возраста"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "publisher_description": "https://www.piter.com/collection/psihologiya-razvitiya-i-vozrastnaya-psihologiya/product/psihologiya-podrostkovogo-i-yunosheskogo-vozrasta-12-e-izd",
+        "evidence_scope": "Official publisher twelfth-edition card read; matching Rice/Dolgin, theory/research/methodology of adolescence and youth. Course edition/year unspecified; no full text or measured difficulty review.",
+        "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
+        "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      }
     },
     "literature:lit_57ba3a9bf5d4ff18": {
       "decision": "approved",
