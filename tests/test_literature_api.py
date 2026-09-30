@@ -84,7 +84,7 @@ class LiteratureApiTests(unittest.TestCase):
         self.assertNotIn("source_refs", dumped)
         self.assertNotIn("notes", dumped)
         self.assertNotIn("private text", dumped)
-        self.assertTrue(all(set(item["source"]) == {"title", "locator", "citation"} for item in items))
+        self.assertTrue(all(set(item["source"]) == {"citation"} for item in items))
         corpus = json.loads((Path(__file__).resolve().parents[1] / "content/source-corpus.json").read_text(encoding="utf-8"))
         self.assertFalse(any(source["id"] in dumped for source in corpus["sources"]))
         first = next(item for item in items if item["id"] == self.first_item["id"])

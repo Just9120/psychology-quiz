@@ -61,7 +61,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       <button className="text-button" disabled={busy || uncertain} onClick={() => { setWorkId(null); setSaved(false) }}>← К списку литературы</button>
       <h2>{work.title}</h2><p>{work.authors.length ? work.authors.join(', ') : 'Автор не указан в источнике'}</p>
       <label className="field">Учебный список<select value={entry.id} disabled={busy || uncertain} onChange={event => select(work.entries.find(link => link.id === event.target.value)!)}>
-        {work.entries.map(link => <option key={link.id} value={link.id}>{link.topic_title} · {link.source.title}</option>)}
+        {work.entries.map(link => <option key={link.id} value={link.id}>{link.module.replace('module', 'Модуль ')} · {link.topic_title}</option>)}
       </select></label>
       {work.entries.length > 1 && <p className="muted">Эта книга встречается в нескольких списках. Статус чтения общий для всех её списков.</p>}
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
@@ -71,7 +71,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
         <p className="muted">Ссылка ведёт к провайдеру. Наличие доступа, цена и совпадение издания проверяются там.</p>
         {work.access_links.map(link => <p key={link.format}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
       </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
-      <details className="source-details"><summary>Источник и библиографическая запись</summary><p>{entry.source.title}</p><p>{entry.source.locator}</p><blockquote>{entry.source.citation}</blockquote>
+      <details className="source-details"><summary>Библиографическая запись</summary><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!busy && !uncertain) void run(save) }}>

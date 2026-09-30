@@ -33,7 +33,7 @@ PUBLIC_ITEM_FIELDS = (
     "learning_outcomes",
     "prerequisites",
 )
-PUBLIC_SOURCE_FIELDS = ("title", "locator", "citation")
+PUBLIC_SOURCE_FIELDS = ("citation",)
 @lru_cache(maxsize=1)
 def load_access_links() -> dict[str, list[dict[str, str]]]:
     """Curated outbound offers; a link never means that the user owns a copy."""

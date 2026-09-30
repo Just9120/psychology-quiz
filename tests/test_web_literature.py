@@ -37,7 +37,7 @@ def test_reading_shared_actor_preserves_distinct_lists_private_notes_and_other_a
     works = catalog.json()['works']
     assert len(works) == len({item['work_id'] for item in load_literature_items()})
     assert len(works) < len(load_literature_items())
-    assert all(set(entry['source']) == {'title', 'locator', 'citation'}
+    assert all(set(entry['source']) == {'citation'}
                for work in works for entry in work['entries'])
     corpus = json.loads((Path(__file__).resolve().parents[1] / 'content/source-corpus.json').read_text(encoding='utf-8'))
     assert not any(source['id'] in catalog.text for source in corpus['sources'])

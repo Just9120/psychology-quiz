@@ -224,7 +224,7 @@ export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
   importance: 'basic' | 'important' | 'additional' | 'advanced' | null;
   importance_source: 'teacher' | 'agent' | null;
-  source: { title: string; locator: string; citation: string };
+  source: { citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
 }
 export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }

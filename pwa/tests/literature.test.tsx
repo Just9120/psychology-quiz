@@ -6,7 +6,7 @@ import { MiniLiterature } from '../src/miniapp/MiniLiterature'
 import { api, ApiError } from '../src/api'
 import type { LiteratureCatalog } from '../src/types'
 
-const catalog: LiteratureCatalog = { ok: true, topics: [{ topic_id: 'one', title: 'Первая тема', module: 'module1' }], works: [{ work_id: 'book', title: 'Учебная книга', authors: [], type: 'book', access_links: [], entries: [{ id: 'book', topic_id: 'one', topic_title: 'Первая тема', module: 'module1', year: null, importance: null, importance_source: null, source: { title: 'Учебный список', locator: 'Позиция 1', citation: 'Исходная запись' }, metadata_warnings: ['Год неизвестен'], user_state: null }] }] }
+const catalog: LiteratureCatalog = { ok: true, topics: [{ topic_id: 'one', title: 'Первая тема', module: 'module1' }], works: [{ work_id: 'book', title: 'Учебная книга', authors: [], type: 'book', access_links: [], entries: [{ id: 'book', topic_id: 'one', topic_title: 'Первая тема', module: 'module1', year: null, importance: null, importance_source: null, source: { citation: 'Исходная запись' }, metadata_warnings: ['Год неизвестен'], user_state: null }] }] }
 
 it.each(['pwa', 'miniapp'])('combines module/topic/status filters without borrowing another association in %s', async client => {
   const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }
@@ -127,4 +127,17 @@ it('shares a saved work status across reading lists and exposes exactly four cho
   await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'deferred')
   expect(screen.getByText('Первая тема · Отложено')).toBeVisible()
   expect(screen.getByText('Вторая тема · Отложено')).toBeVisible()
+})
+
+it.each(['pwa', 'miniapp'])('keeps bibliographic text but hides obsolete source file metadata in %s', async client => {
+  const entry = { ...catalog.works[0].entries[0], title: 'Учебная книга',
+    source: { ...{ title: 'private-original-file.pdf', locator: 'private-page-17' }, citation: 'Проверенная библиографическая запись' } }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, works: [{ ...catalog.works[0], entries: [entry] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[entry]} topics={catalog.topics} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  await user.click(screen.getByRole('button', { name: 'Учебная книга' }))
+  await user.click(screen.getByText('Библиографическая запись', { selector: 'summary' }))
+  expect(screen.getByText('Проверенная библиографическая запись')).toBeVisible()
+  expect(document.body.textContent).not.toContain('private-original-file.pdf')
+  expect(document.body.textContent).not.toContain('private-page-17')
 })
