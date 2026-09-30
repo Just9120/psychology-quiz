@@ -1278,10 +1278,10 @@
     },
     "literature:lit_93082f75dd37021b": {
       "decision": "approved",
-      "item_sha256": "c874a8a138c47100d0d7a733730cf97cb005773505db6dea4f626ec1e9f9b432",
+      "item_sha256": "6ef5d24b658421a827cd54c1a733030bcfa911c893a02225ffe95b97c5ae700c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
@@ -1289,7 +1289,16 @@
           "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
           "locator": "Позиция 3: Сборник тезисов II Международной научно-практической конференции «Кейс-стади в психотерапии и психологическом консультировании»"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://aipp.education/conference-2023/",
+        "evidence_scope": "Organizer page and linked 135-page 2023 proceedings retrieved: cover identifies II conference; table of contents includes client cases and methodological discussion. Only cover, contents and introductory selected sections inspected.",
+        "limitations": "Exact private-list hyperlink not recovered; no complete proceedings/individual case scientific review or derivative approval. Original empty authors/year/citation retained.",
+        "sequence": "Optional agent recommendation; proceedings follow reviewed case-study methodology, not teacher requirement or measured difficulty."
+      }
     },
     "literature:lit_2d2ab1a9e58aaa66": {
       "decision": "approved",
@@ -1315,10 +1324,10 @@
     },
     "literature:lit_510a576872873c35": {
       "decision": "approved",
-      "item_sha256": "c6009eca1881a66e29cbe611ffc9ba06a1e26e62f59f3ce9c7f18873b2c84fb9",
+      "item_sha256": "e3a3836606eeff175899645041a40b8dea56bcf0eb131edf2ced42e3f4b99f44",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
@@ -1326,14 +1335,23 @@
           "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
           "locator": "Позиция 1: Феноменологическая психиатрия и психотерапия (из книги «Болевые точки психотерапии»)"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://genesisbook.ru/internet-magazin/bolevye-tochki-psikhoterapii-prinimaya-vyzov.html",
+        "evidence_scope": "Publisher-retailer book annotation and contents retrieved; contents identify Mokhovikov chapter Fenomenologicheskaya psikhiatriya i fenomenologicheskaya psikhoterapiya, matching abbreviated course reference. Specialist audience confirmed, full chapter not inspected.",
+        "limitations": "Exact course edition/page locator not established; original chapter title/citation/year retained; no clinical efficacy, scientific derivative or access approval.",
+        "sequence": "Optional agent recommendation; proceedings follow reviewed case-study methodology, not teacher requirement or measured difficulty."
+      }
     },
     "literature:lit_cd5ce1720bc8bc2b": {
       "decision": "approved",
-      "item_sha256": "b2e1ab6d5756fc9c562faee91372029ac67daca7bda226cd339b3e6ca41db532",
+      "item_sha256": "7403d722c07267d869e11917ce9f0aff5dec09dca9ae493cc22f66a230281931",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
@@ -1341,14 +1359,24 @@
           "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
           "locator": "Позиция 2: Феномен и симптом (из книги «Болевые точки психотерапии»)"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://genesisbook.ru/internet-magazin/bolevye-tochki-psikhoterapii-prinimaya-vyzov.html",
+        "comparison_record": "https://gestaltobzor.wordpress.com/2015/05/26/2305/",
+        "evidence_scope": "Book contents identify Fenomen i simptom; journal-hosted author text selected sections confirm discussion of clinical symptom versus gestalt phenomenological perspectives. Audience/genre support optional theoretical reading.",
+        "limitations": "Only selected article sections read; no whole chapter/exact edition or current medical/scientific accuracy validation. No clinical efficacy, derivative or access approval.",
+        "sequence": "Optional agent recommendation; proceedings follow reviewed case-study methodology, not teacher requirement or measured difficulty."
+      }
     },
     "literature:lit_398a49d30e4ed132": {
       "decision": "approved",
-      "item_sha256": "0e418160a326528c00d90b4836e462537126599431c7953e32cee26df4a69731",
+      "item_sha256": "e35635426d44901881a3e1e0adf092c145b3067a574cea9fc491a6e153aeacef",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-09-30",
       "sources": [
         {
           "source_id": "1FFkTZmSsGV_QlQkMHIyQ22ungUZ7niO-",
@@ -1356,7 +1384,16 @@
           "snapshot_sha256": "78e51c8d5486baebd986deae969c8afb5d34984477f84373e1987241b363c1c4",
           "locator": "Позиция 3: Психопатология и экзистенциальные темы в шизофрении"
         }
-      ]
+      ],
+      "reading_metadata_review": {
+        "reviewed_at": "2026-09-30",
+        "origin": "agent",
+        "priority_origin": "agent",
+        "primary_record": "https://psyjournals.ru/journals/cpp/archive/2008_n4/Lengle",
+        "evidence_scope": "Journal author/title/2008 issue 16(4), pages 37-57 and abstract retrieved. Rubric Theory and methodology, author's phenomenological-existential perspective matches course reference.",
+        "limitations": "Abstract and selected initial sections inspected, not full article scientific review. No causal/clinical efficacy or derivative approval; original citation, unspecified year and source snapshot retained.",
+        "sequence": "Optional agent recommendation; proceedings follow reviewed case-study methodology, not teacher requirement or measured difficulty."
+      }
     },
     "literature:lit_2bc65fc1b8868a95": {
       "decision": "approved",
