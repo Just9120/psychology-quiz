@@ -62,6 +62,42 @@ def lesson_coverage(current, processed, registry, curriculum, published_items):
 
 
 
+def glossary_coverage(coverage, published_glossary, policy, curriculum):
+    """Count only current reviewed term editions against exact lesson sources."""
+    lessons = {item["id"]: item for item in coverage["lessons"]}
+    counts = {key: 0 for key in lessons}
+    unmapped, seen = 0, set()
+    for item in published_glossary:
+        if item["id"] in seen:
+            raise InventoryError("duplicate_glossary_derivative")
+        seen.add(item["id"])
+        if item.get("status") != "approved" or not policy.can_publish("glossary", item):
+            raise InventoryError("published_glossary_required")
+        review = (policy.quality_reviews or {}).get("glossary:" + item["id"], {})
+        refs = review.get("sources", []) if (isinstance(review, dict)
+                and review.get("item_sha256") == fingerprint(item)
+                and review.get("source_support") == "supported"
+                and isinstance(review.get("sources"), list)) else []
+        matched = set()
+        for key, topic in curriculum["topics"].items():
+            source, lesson = topic["source"], lessons[key]
+            if (not lesson["source_metadata_current"] or lesson["known_hold"]
+                    or lesson["processing_state"] != "processed"):
+                continue
+            if any(isinstance(ref, dict)
+                   and ref.get("source_id") == source["source_id"]
+                   and ref.get("modified_time") == source["modified_time"]
+                   and ref.get("snapshot_sha256") == source["snapshot_sha256"] for ref in refs):
+                matched.add(key)
+        if not matched:
+            unmapped += 1
+        for key in matched:
+            counts[key] += 1
+    for key, lesson in lessons.items():
+        lesson["glossary_terms"] = counts[key]
+    coverage["unmapped_published_glossary"] = unmapped
+
+
 def prepared_note_coverage(coverage, note_manifest, current, processed, curriculum):
     # Reuse source/revision/hold/link gates; rendered texts stay operator-only.
     from scripts.obsidian_vault import render
@@ -85,6 +121,16 @@ def prepared_note_coverage(coverage, note_manifest, current, processed, curricul
     coverage["prepared_notes_unmapped"] = unmapped
 
 
+def published_glossary(policy):
+    result = []
+    for path in sorted((ROOT / "content/glossary").glob("*.json")):
+        items = _read(path)
+        if not isinstance(items, list):
+            raise InventoryError("invalid_derivative_file")
+        result.extend(item for item in items if isinstance(item, dict) and item.get("status") == "approved" and policy.can_publish("glossary", item))
+    return result
+
+
 def published_questions():
     policy = load_policy()
     result = []
@@ -96,7 +142,7 @@ def published_questions():
     return result
 
 
-def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None, note_manifest=None):
+def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None, note_manifest=None, glossary_items=None, glossary_policy=None):
     observed = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
     if observed.tzinfo is None or observed > datetime.now(timezone.utc):
         raise ValueError("invalid_observation_time")
@@ -113,9 +159,13 @@ def build(current, processed, observed_at, *, registry=None, curriculum=None, pu
         if any(value is None for value in (registry, curriculum, published_items)):
             raise InventoryError("reviewed_graph_inputs_required")
         result["coverage"] = lesson_coverage(current, processed, registry, curriculum, published_items)
+        if glossary_items is not None:
+            if glossary_policy is None:
+                raise InventoryError("glossary_policy_required")
+            glossary_coverage(result["coverage"], glossary_items, glossary_policy, curriculum)
         if note_manifest is not None:
             prepared_note_coverage(result["coverage"], note_manifest, current, processed, curriculum)
-    elif note_manifest is not None:
+    elif note_manifest is not None or glossary_items is not None:
         raise InventoryError("reviewed_graph_inputs_required")
     return result
 
@@ -133,6 +183,9 @@ def main():
         target = private_json_target(args.output, ROOT)
         inputs = {"registry": _read(ROOT / "content/source-corpus.json"), "curriculum": load_catalog(),
                   "published_items": published_questions()} if args.reviewed else {}
+        if args.reviewed:
+            policy = load_policy()
+            inputs.update(glossary_items=published_glossary(policy), glossary_policy=policy)
         if args.notes_manifest is not None:
             from scripts.obsidian_vault import _private_input
             inputs["note_manifest"] = _private_input(args.notes_manifest)

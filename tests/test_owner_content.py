@@ -164,3 +164,51 @@ def test_prepared_notes_require_current_review_and_return_only_aggregate_counts(
     result["coverage"]["lessons"][0]["notes"] = "private text"
     with pytest.raises(ValueError, match="invalid_coverage"):
         owner_content._coverage(result["coverage"])
+
+
+def test_glossary_coverage_requires_current_edition_source_and_review_without_leaking_refs(monkeypatch):
+    from copy import deepcopy
+    from app.content_publication import fingerprint
+    from app.source_inventory import InventoryError
+    from scripts.owner_source_summary import glossary_coverage
+
+    key = "t_aaaaaaaaaaaa"
+    source = {"source_id": "private-source", "modified_time": "2026-01-01T00:00:00Z", "snapshot_sha256": "a" * 64}
+    curriculum = {"topics": {key: {"title": "Lesson", "discipline_id": "one", "source": source}},
+                  "disciplines": {"one": {"title": "Discipline"}}}
+    lesson = {"id": key, "kinds": {"theory": 0, "glossary": 0, "case": 0},
+              "source_metadata_current": True, "known_hold": False, "processing_state": "processed",
+              "notes": None, "notes_state": "UNSET", "glossary_terms": None}
+    coverage = {"lessons": [lesson], "tracked_sources": 1, "untracked_files": 0,
+                "source_metadata": {"current": 1}, "unmapped_published_questions": 0}
+    term = {"id": "term", "status": "approved", "term": "Definition"}
+    unmatched = {"id": "other", "status": "approved", "term": "Other definition"}
+    policy = SimpleNamespace(can_publish=lambda kind, item: kind == "glossary" and item["status"] == "approved",
+        quality_reviews={"glossary:term": {"item_sha256": fingerprint(term), "source_support": "supported",
+                                          "sources": [deepcopy(source), deepcopy(source)]}})
+    glossary_coverage(coverage, [term, unmatched], policy, curriculum)
+    assert lesson["glossary_terms"] == 1 and coverage["unmapped_published_glossary"] == 1
+    assert "private-source" not in json.dumps(coverage)
+    monkeypatch.setattr(owner_content, "load_catalog", lambda: curriculum)
+    assert owner_content._coverage(coverage)["lessons"][0]["glossary_terms"] == 1
+    for change in ({"known_hold": True}, {"source_metadata_current": False}, {"processing_state": "pending_review"}):
+        stale = deepcopy(coverage)
+        stale["lessons"][0].update(change)
+        with pytest.raises(ValueError, match="invalid_coverage"):
+            owner_content._coverage(stale)
+        glossary_coverage(stale, [term], policy, curriculum)
+        assert stale["lessons"][0]["glossary_terms"] == 0 and stale["unmapped_published_glossary"] == 1
+    for field in ("modified_time", "snapshot_sha256", "source_id"):
+        changed = deepcopy(curriculum)
+        changed["topics"][key]["source"][field] = "different"
+        glossary_coverage(coverage, [term], policy, changed)
+        assert lesson["glossary_terms"] == 0 and coverage["unmapped_published_glossary"] == 1
+    glossary_coverage(coverage, [{**term, "term": "Changed definition"}], policy, curriculum)
+    assert lesson["glossary_terms"] == 0
+    with pytest.raises(InventoryError, match="duplicate_glossary_derivative"):
+        glossary_coverage(coverage, [term, term], policy, curriculum)
+    with pytest.raises(InventoryError, match="published_glossary_required"):
+        glossary_coverage(coverage, [{**term, "status": "draft"}], policy, curriculum)
+    lesson["glossary_terms"] = True
+    with pytest.raises(ValueError, match="invalid_coverage"):
+        owner_content._coverage(coverage)

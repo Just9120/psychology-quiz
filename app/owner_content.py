@@ -49,18 +49,24 @@ def _coverage(raw):
                     (not item["source_metadata_current"] or item["known_hold"]
                      or item["processing_state"] != "processed"))):
             raise ValueError("invalid_coverage")
+        terms = item.get("glossary_terms")
+        if terms is not None and (type(terms) is not int or terms < 0
+                or (terms > 0 and (not item["source_metadata_current"]
+                    or item["known_hold"] or item["processing_state"] != "processed"))):
+            raise ValueError("invalid_coverage")
         topic = catalog["topics"][key]
         lessons.append({"id": key, "title": topic["title"],
                         "discipline": catalog["disciplines"][topic["discipline_id"]]["title"],
                         "kinds": kinds, "source_metadata_current": item["source_metadata_current"],
                         "processing_state": item["processing_state"], "known_hold": item["known_hold"],
-                        "glossary_terms": None, "notes": notes, "notes_state": notes_state})
+                        "glossary_terms": terms, "notes": notes, "notes_state": notes_state})
     result = {key: raw[key] for key in ("tracked_sources", "untracked_files", "source_metadata", "unmapped_published_questions")} | {"lessons": lessons}
-    if "prepared_notes_unmapped" in raw:
-        value = raw["prepared_notes_unmapped"]
-        if type(value) is not int or value < 0:
-            raise ValueError("invalid_coverage")
-        result["prepared_notes_unmapped"] = value
+    for field in ("prepared_notes_unmapped", "unmapped_published_glossary"):
+        if field in raw:
+            value = raw[field]
+            if type(value) is not int or value < 0:
+                raise ValueError("invalid_coverage")
+            result[field] = value
     return result
 
 

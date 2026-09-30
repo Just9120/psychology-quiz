@@ -14,7 +14,7 @@ export interface Account {
 export interface OwnerContent {
   ok: true
   topics: { id: string; title: string; module: string; questions: number; kinds: Record<'theory' | 'glossary' | 'case', number>; glossary_terms: number | null; literature_works: number; notes_state: 'UNSET'; notes: null; gaps: string[] }[]
-  sources: { state: 'UNSET' | 'PARTIAL'; reason?: string; captured_at?: string; files?: number; folders?: number; processing?: Record<string, number>; processing_records?: number; known_holds?: number; coverage?: { tracked_sources: number; untracked_files: number; source_metadata: Record<string, number>; unmapped_published_questions: number; prepared_notes_unmapped?: number; lessons: { id: string; title: string; discipline: string; kinds: Record<'theory' | 'glossary' | 'case', number>; source_metadata_current: boolean; processing_state: string; known_hold: boolean; glossary_terms: null; notes: number | null; notes_state: 'UNSET' | 'PREPARED' }[] } }
+  sources: { state: 'UNSET' | 'PARTIAL'; reason?: string; captured_at?: string; files?: number; folders?: number; processing?: Record<string, number>; processing_records?: number; known_holds?: number; coverage?: { tracked_sources: number; untracked_files: number; source_metadata: Record<string, number>; unmapped_published_questions: number; prepared_notes_unmapped?: number; unmapped_published_glossary?: number; lessons: { id: string; title: string; discipline: string; kinds: Record<'theory' | 'glossary' | 'case', number>; source_metadata_current: boolean; processing_state: string; known_hold: boolean; glossary_terms: number | null; notes: number | null; notes_state: 'UNSET' | 'PREPARED' }[] } }
   unmapped_questions: number
 }
 
