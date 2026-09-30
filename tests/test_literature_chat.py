@@ -62,6 +62,14 @@ def test_chat_literature_write_is_shared_with_linked_pwa_and_miniapp_but_not_oth
     assert web.client.get("/miniapp/literature/state", headers={
         "Authorization": "tma " + _make_init_data(TOKEN, {"id": 99})
     }).json()["literature_state"] == []
+    topic_id = next(item["topic_id"] for item in load_literature_items() if item["id"] == selected_id)
+    filtered = f"lit:t:{literature_chat._token(topic_id)}:0:d"
+    own_filter = _click(web, 42, filtered)
+    other_filter = _click(web, 99, filtered)
+    assert "Фильтр: Прочитано" in own_filter.args[0]
+    assert "По этому статусу книг пока нет" in other_filter.args[0]
+    assert not any(b.callback_data == item_button.callback_data
+                   for row in other_filter.kwargs["reply_markup"].inline_keyboard for b in row)
     assert csrf
 
 
@@ -127,3 +135,38 @@ def test_chat_book_card_distinguishes_importance_and_provenance(value, label, or
     unknown, _ = literature_chat._item_view({k: v for k, v in item.items() if not k.startswith("importance")}, None)
     assert "Значимость: не определена" in unknown
     assert "приоритет преподавателя" not in unknown and "рекомендация агента" not in unknown
+
+
+def test_chat_reading_module_navigation_and_filter_keep_tally_and_pagination(monkeypatch):
+    topics = [{"topic_id": "one", "title": "Первый список", "item_count": 12, "module": "module1"},
+              {"topic_id": "two", "title": "Другой список", "item_count": 1, "module": "module2"}]
+    monkeypatch.setattr(literature_chat, "list_literature_topic_payloads", lambda: topics)
+    items = [{"id": f"book-{i}", "work_id": f"work-{i}", "title": f"Книга {i}", "topic_id": "one"}
+             for i in range(12)]
+    states = {item["id"]: {"reading_status": "read"} for item in items[:8]}
+    token = literature_chat._token("one")
+    root = literature_chat._topics()
+    modules = [b for row in root[1].inline_keyboard for b in row if b.callback_data.startswith("lit:m:")]
+    assert [b.text for b in modules] == ["Модуль 1", "Модуль 2"]
+    module = literature_chat._topics(literature_chat._token("module1"))
+    assert "Модуль 1" in module[0]
+    assert [b.text for row in module[1].inline_keyboard for b in row if b.callback_data.startswith("lit:t:")] == ["Первый список · 12"]
+    assert literature_chat._topics("f" * 12) is None
+    for code, expected in (("a", 5), ("d", 5), ("n", 4), ("p", 0), ("f", 0)):
+        text, keyboard = literature_chat._topic_view(items, states, token, 0, code)
+        assert "Прочитано 8 из 12" in text
+        buttons = [b for row in keyboard.inline_keyboard for b in row]
+        assert len([b for b in buttons if b.callback_data.startswith("lit:i:")]) == expected
+        assert all(literature_chat.CALLBACK_PATTERN.fullmatch(b.callback_data) for b in buttons)
+        assert all(len(b.callback_data.encode()) <= 64 for b in buttons)
+        if not expected:
+            assert "По этому статусу книг пока нет" in text
+    page = literature_chat._topic_view(items, states, token, 1, "d")
+    buttons = [b for row in page[1].inline_keyboard for b in row]
+    assert len([b for b in buttons if b.callback_data.startswith("lit:i:")]) == 3
+    assert next(b for b in buttons if b.text == "←").callback_data == f"lit:t:{token}:0:d"
+    assert literature_chat._topic_view(items, states, token, 2, "d") is None
+    assert literature_chat._topic_view(items, states, token, 0, "invalid") is None
+    assert literature_chat._topic_view(items, states, token, -1) is None
+    assert literature_chat.CALLBACK_PATTERN.fullmatch(f"lit:t:{token}:0")  # Existing buttons still work.
+    assert states == {item["id"]: {"reading_status": "read"} for item in items[:8]}

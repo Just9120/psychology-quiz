@@ -159,6 +159,7 @@ def list_literature_topic_payloads(user_states: dict[str, dict[str, Any]] | None
         payload: dict[str, Any] = {
             "topic_id": topic_id,
             "title": str(topic.get("title") or topic_id),
+            "module": str(topic.get("module") or ""),
             "item_count": len(topic_items),
             "status_counts": dict(sorted(Counter(str(item.get("status")) for item in topic_items).items())),
         }
