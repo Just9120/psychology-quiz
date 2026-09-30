@@ -77,3 +77,30 @@ def test_agent_sequence_is_distinct_from_teacher_book_priority():
     assert result["basis"] == "agent"
     assert result["priority_source"] == "teacher"
     assert result["reason"] == "Рекомендация агента. После вводного курса. Приоритет книги — из учебного списка."
+
+
+def test_telegram_video_continuation_preserves_association_and_viewing_language(monkeypatch):
+    from app import literature_chat
+    monkeypatch.setattr(literature_chat, "list_literature_topic_payloads",
+                        lambda: [{"topic_id": "one", "title": "Topic"}])
+    item = {"id": "film", "topic_id": "one", "type": "video", "title": "<Film>"}
+    states = {"film": {"reading_status": "in_progress"}}
+    text, keyboard = literature_chat._topic_view(
+        [item], states, literature_chat._token("one"), 0)
+    assert "Продолжите просмотр" in text and "Продолжите чтение" not in text
+    assert "&lt;Film&gt;" in text and "<Film>" not in text
+    assert keyboard.inline_keyboard[0][0].text == "Продолжить просмотр"
+    assert keyboard.inline_keyboard[0][0].callback_data == "lit:i:" + literature_chat._token("film")
+    assert states == {"film": {"reading_status": "in_progress"}}
+
+
+def test_article_recommendation_keeps_teacher_priority_without_calling_it_a_book():
+    item = {"id": "article", "type": "article", "importance": "additional",
+            "importance_source": "teacher", "reading_level": "deepening",
+            "why_read": "Сопоставьте методологические подходы.", "prerequisites": []}
+    result = reading_next_step([item], {})
+    assert result["priority_source"] == "teacher" and result["basis"] == "agent"
+    assert result["reason"].endswith("Приоритет материала — из учебного списка.")
+    states = {"article": {"reading_status": "in_progress"}}
+    result = reading_next_step([item], states)
+    assert "Продолжите работу с ним" in result["reason"] and "эту книгу" not in result["reason"]

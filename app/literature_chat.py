@@ -121,7 +121,9 @@ def _topic_view(items: list[dict], states: dict, token: str, page: int, status_f
         item = next_step["item"]
         action = "продолжить" if next_step["kind"] == "continue" else "начать"
         text += f"\n\nСледующий шаг: {action} «{escape(item['title'])}».\n{escape(next_step['reason'])}"
-        rows.insert(0, [InlineKeyboardButton("Продолжить чтение" if next_step["kind"] == "continue" else "Начать чтение",
+        activity = "просмотр" if item.get("type") == "video" else ("изучение" if item.get("type") in {"article", "chapter", "other"} else "чтение")
+        verb = "Продолжить" if next_step["kind"] == "continue" else "Начать"
+        rows.insert(0, [InlineKeyboardButton(f"{verb} {activity}",
                      callback_data=f"lit:i:{_token(item['id'])}")])
     filter_label = "Все статусы" if status_filter == "a" else STATUS_CODES[status_filter][0]
     text += f"\nФильтр: {filter_label}."

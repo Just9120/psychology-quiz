@@ -50,3 +50,21 @@ it('distinguishes agent sequence from the teacher priority', () => {
   render(<ReadingSummary items={[item]} busy={false} onSelect={vi.fn()} />)
   expect(screen.getByText('Рекомендация агента. После вводного курса. Приоритет книги — из учебного списка.')).toBeVisible()
 })
+
+
+it('continues a video by viewing and keeps its exact selection callback', async () => {
+  const onSelect = vi.fn()
+  const film = { id: 'film', type: 'video', title: 'Отец', user_state: state('2026-09-30T12:00:00Z') }
+  render(<ReadingSummary items={[film]} busy={false} onSelect={onSelect} />)
+  expect(screen.getByText('Вы уже начали этот видеоматериал. Продолжите просмотр перед выбором следующего.')).toBeVisible()
+  expect(screen.queryByText('Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.')).not.toBeInTheDocument()
+  await userEvent.setup().click(screen.getByRole('button', { name: 'Продолжить «Отец»' }))
+  expect(onSelect).toHaveBeenCalledWith('film')
+})
+
+it('labels teacher priority of an article as material while retaining agent recommendation', () => {
+  const article = { id: 'article', type: 'article', title: 'Методология', importance: 'additional',
+    importance_source: 'teacher', reading_level: 'deepening', why_read: 'Сопоставьте подходы.', prerequisites: [] }
+  render(<ReadingSummary items={[article]} busy={false} onSelect={vi.fn()} />)
+  expect(screen.getByText('Рекомендация агента. Сопоставьте подходы. Приоритет материала — из учебного списка.')).toBeVisible()
+})

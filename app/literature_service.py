@@ -27,6 +27,14 @@ def reading_summary(items: list[dict], states: dict) -> dict:
     return {"read": read, "total": len(works), "conflicts": conflicts, "current": current}
 
 
+def reading_continuation_reason(item: dict) -> str:
+    if item.get("type") == "video":
+        return "Вы уже начали этот видеоматериал. Продолжите просмотр перед выбором следующего."
+    if item.get("type") in {"article", "chapter", "other"}:
+        return "Вы уже начали этот материал. Продолжите работу с ним перед выбором следующего."
+    return "Вы уже начали эту книгу. Продолжите чтение перед выбором следующей."
+
+
 def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | None = None) -> dict | None:
     """Continue started reading, then use explicitly reviewed recommendation metadata.
 
@@ -83,14 +91,14 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
         item = recommendations[0]
         reason = f"Рекомендация агента. {item['why_read']}"
         if item["importance_source"] == "teacher":
-            reason += " Приоритет книги — из учебного списка."
+            reason += (" Приоритет материала — из учебного списка." if item.get("type") in {"video", "article", "chapter", "other"} else " Приоритет книги — из учебного списка.")
         return {"item": item, "kind": "start", "reason": reason,
                 "basis": "agent", "priority_source": item["importance_source"]}
     # Two stable sorts avoid deriving a preference from bibliography position.
     candidates.sort(key=lambda item: str(item["id"]))
     candidates.sort(key=recency, reverse=True)
     return {"item": candidates[0], "kind": "continue",
-            "reason": "Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.",
+            "reason": reading_continuation_reason(candidates[0]),
             "basis": "personal_reading_state"}
 
 

@@ -1,6 +1,6 @@
 import type { ReadingStatus } from './types'
 
-type Item = { id: string; work_id?: string; title?: string; importance?: string | null; importance_source?: string | null; reading_level?: string | null; why_read?: string | null; prerequisites?: string[]; user_state?: { reading_status: ReadingStatus; updated_at?: string } | null }
+type Item = { id: string; type?: string; work_id?: string; title?: string; importance?: string | null; importance_source?: string | null; reading_level?: string | null; why_read?: string | null; prerequisites?: string[]; user_state?: { reading_status: ReadingStatus; updated_at?: string } | null }
 
 export function readingNextStep(items: Item[], allItems: Item[] = items): Item | null {
   const works = new Map<string, Item[]>()
@@ -41,6 +41,12 @@ export function readingNextStep(items: Item[], allItems: Item[] = items): Item |
   return recommendations[0] ?? null
 }
 
+export function readingContinuationReason(item: Item): string {
+  if (item.type === 'video') return 'Вы уже начали этот видеоматериал. Продолжите просмотр перед выбором следующего.'
+  if (['article', 'chapter', 'other'].includes(item.type ?? '')) return 'Вы уже начали этот материал. Продолжите работу с ним перед выбором следующего.'
+  return 'Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.'
+}
+
 export function ReadingSummary({ items, allItems = items, busy, onSelect, showActions = true }: { items: Item[]; allItems?: Item[]; busy: boolean; onSelect: (id: string) => void; showActions?: boolean }) {
   const works = new Map<string, Item[]>()
   for (const item of items) {
@@ -62,7 +68,7 @@ export function ReadingSummary({ items, allItems = items, busy, onSelect, showAc
     {next && <section aria-label="Следующий шаг чтения">
       <h2>Следующий шаг</h2>
       <button className="text-button" disabled={busy} onClick={() => onSelect(next.id)}>{continuing ? 'Продолжить' : 'Начать'} «{next.title ?? 'Книга'}»</button>
-      <p className="muted">{continuing ? 'Вы уже начали эту книгу. Продолжите чтение перед выбором следующей.' : `Рекомендация агента. ${next.why_read}${next.importance_source === 'teacher' ? ' Приоритет книги — из учебного списка.' : ''}`}</p>
+      <p className="muted">{continuing ? readingContinuationReason(next) : `Рекомендация агента. ${next.why_read}${next.importance_source === 'teacher' ? (['video', 'article', 'chapter', 'other'].includes(next.type ?? '') ? ' Приоритет материала — из учебного списка.' : ' Приоритет книги — из учебного списка.') : ''}`}</p>
     </section>}
   </aside>
 }
