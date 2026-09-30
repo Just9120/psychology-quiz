@@ -34,13 +34,14 @@ async def delete_data_command(update: Update, context: ContextTypes.DEFAULT_TYPE
                                            update.effective_user, None)
     except PrivacyError as error:
         if str(error) == "linked_owner_requires_separate_flow":
-            await update.message.reply_text("Ваши учебные данные связаны с аккаунтом PWA. Для него нужен отдельный порядок удаления; данные не изменены.")
+            await update.message.reply_text("Ваши учебные данные связаны с аккаунтом владельца PWA. Здесь нельзя удалить его общую историю; данные не изменены.")
             return
         raise
     context.user_data[_TOKEN_KEY] = prepared["confirmation_token"]
     await update.message.reply_text(
         "Можно удалить ваши ответы и попытки, отметки книг, цели, достижения и историю повторений. "
-        "Доступ к боту сохранится. Для подтверждения в течение 10 минут отправьте /delete_data_confirm. "
+        "Это удаление истории обучения, а не аккаунта Telegram. Идентификатор Telegram и переданное имя "
+        "сохранятся для работы бота. Для подтверждения в течение 10 минут отправьте /delete_data_confirm. "
         "Если передумали, ничего не отправляйте."
     )
 
