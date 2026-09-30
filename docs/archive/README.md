@@ -46,3 +46,7 @@
 | Документ | Основание и действующие обязательства |
 | --- | --- |
 | [Topic registry / phase 1 proposal](topic_registry_schema_phase1.md) | Прежний design-only snapshot восьми тем / 575 вопросов предшествует действующим [topics](../../content/topics.json), [validator](../../scripts/validate_topics.py) и runtime consumers. Exact-name/path consumer search в tracked app/scripts/tests/workflows не выявил использования proposal; код использует registry, CI — validator. Полный текст сохранён с исправлением трёх relative links. Старые будущие решения и запреты runtime не задают текущий scope; E01/E02/E05/E09, стабильные IDs и compatibility проверяются по spec/plan. Перенос не подтверждает выполнение этих AC. |
+
+## Происхождение рабочих правил
+
+[Workflow adoption record](ai-delivery-infrastructure-plan.md) сохраняет принятие документов и прежнее решение не вводить Context Bundle Builder. Перенесён 30.09.2026 как исторический provenance, без изменения правил или удаления решений; пять относительных ссылок пересчитаны, README navigation обновлена. Текущие инструкции определяются корневым AGENTS.md, задачи — Delivery Plan. Exact-name consumers в app/scripts/tests/workflows отсутствуют; перенос не подтверждает соответствие GitHub settings или закрытие F-003/F-009.
