@@ -1,6 +1,22 @@
 # Delivery Plan
 
-## Current Goal — COMPLETE-CURRENT-SCOPE-20260929
+## Current Goal - PWA-UPDATE-RESPONSIVE-20261001
+
+User authorized a short implementation Goal after selecting header update placement and reviewing seven browser sizes. Scope: manual PWA update discovery/application, desktop header button and mobile header counterpart; collapsible mobile navigation; visible installation/logout actions on short desktop screens. One main PR, branch codex/pwa-manual-update, base 64b1af59bdc89c88604140d6babd541d259578dd. Existing unrelated checkout/private worktree files preserved. Non-goals: Mini App navigation redesign, offline learning/content caching, backend/schema changes, actual-device certification, other remaining project AC/findings.
+
+DoD: new versions never force reload; update appears only when a worker is waiting; click checks current persisted quiz/homework/glossary activity, refuses interruption and offers continuing; explicit confirmation activates and reloads. Mobile menu collapses by default and stays keyboard accessible; install/logout remain reachable without scrolling the desktop nav. Existing learning state and API/private-data caching boundaries unchanged.
+
+Validation Plan: REQUIRED local PWA typecheck and targeted update-component/worker regressions (pwa, synthetic browser/service worker); REQUIRED existing PR CI pwa-client + validate-and-smoke-test, build artifacts and applicable main CI; REQUIRED production CD exact revision with runtime/HTTP/public smoke; RECOMMENDED browser checks 320/390/768/1024/1440 widths and landscape using read-only navigation. No full local suite. Production quiz answers/reset/name/reading state must not change for smoke. READY claims require these gates; PR/CI/merge/CD PENDING. Previous Goal closed early after PR325/326/327 delivered by CD36819880090 at revision64b1af5; its 57/88 checkpoint and open remainder retained below. Project percentages not recalculated.
+
+Current code checkpoint: 2/2 AC implemented. Local validation PASS: 4 manual-update component/lifecycle/actual-worker tests, typecheck, PWA build and shared Mini App build; 2 targeted responsive E2E runs (desktop/mobile projects, widths 320/390/768/1024/1440 and height480); public asset/content scan and diff check. Existing E2E navigation now opens the collapsed menu as needed; all prior behavioral assertions retained. No full local suite. PR CI/merge/main artifacts/CD remain REQUIRED PENDING. Service worker still caches only the public offline document; no private/API/learning content cache. Production state was not changed for local tests.
+
+| AC | Code status | Evidence / remaining gates |
+| --- | --- | --- |
+| AC-PWA-UPDATE-01 | READY | 4 targeted tests PASS, explicit message handler, fresh activity read and failure refusal; required CI/CD PENDING. |
+| AC-PWA-NAV-01 | READY | Targeted E2E desktop/mobile PASS over five widths and short height; typecheck/build PASS; CI and production browser readback PENDING. |
+
+## Previous Goal - COMPLETE-CURRENT-SCOPE-20260929 (closed early)
+
 
 **Confirmed delivery hotfix, 01.10:** CD 36783639874 failed before writer stop/migration/static activation; user VPS readback confirms checkout 429c931, Docker 29.8.1 linux/amd64, loaded candidate ID a6955af42f12d7ff71572d9d97df683cb845b23aac3e3c6f9d708a83d0712884, both running services still revision 1732b5a4a00e86a8a4204b750cf12fd2d3c77227. Trusted archive 11128473210 SHA 14d408141b59fa1d6a0fe7ddffa57b0260b144f4d33bb170d60e848d7a39328d binds that OCI manifest to exact config 25cea0703ec1578abd168a1c9ab557b6df7ed2a9911fbf0f09867838175a660c; mismatch is store representation, not different candidate content. Hotfix branch codex/backend-image-delivery-hotfix, base 429c931, retains GitHub archive digest, exact tag/revision/platform and container equality gates. Bounded read-only saved-image metadata validation admits only the cryptographically linked config/OCI manifest identity; returned ID is the verified target-store ID. Local 13 artifact regression tests PASS (0.10s), actual trusted archive identity check PASS, diff check PASS. Required PR CI, merge, trusted main artifact and CD/post-checks remain PENDING. No Docker/VPS settings, secrets or production data changed locally; no speculative rerun. Early closure after delivery preserves 57/88 mandatory AC checkpoint and remaining open work. Private materials and unrelated checkout remain preserved.
 

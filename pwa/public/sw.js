@@ -4,6 +4,9 @@ const OFFLINE = '/offline.html';
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.add(new Request(OFFLINE, { cache: 'reload' }))));
 });
+self.addEventListener('message', event => {
+  if (event.data?.type === 'APPLY_UPDATE') event.waitUntil(self.skipWaiting());
+});
 self.addEventListener('activate', event => {
   event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('psychology-public-') && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim()));
 });
