@@ -28,6 +28,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from app.content_publication import KINDS, PUBLIC_DRIVE_LINK, PublicationPolicy, fingerprint
 from app.publication_certificate import certificate_payload, key_id
+from scripts.scoped_fragment_review import FragmentReviewError, verify_fragment_review
 from app.source_inventory import (InventoryError, complete_listing, link_lessons,
                                   processing_status, scan, unresolved_related_conflicts)
 
@@ -292,6 +293,8 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         raise
     except (InventoryError, KeyError, TypeError, OSError, ValueError) as error:
         raise SigningError("invalid_private_inventory") from error
+    fragment_v2 = (isinstance(dossier.get("scoped_claim_review"), dict)
+                   and dossier["scoped_claim_review"].get("schema_version") == 2)
     for source in dossier.get("sources", []):
         if not isinstance(source, dict) or not isinstance(source.get("id"), str):
             raise SigningError("invalid_private_source_review")
@@ -300,22 +303,28 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         record = processed.get(source_id)
         canonical = registered.get(source_id)
         state = states.get(source_id)
-        if (item is None or state not in {"processed", "conflict_review"}
+        allowed_states = {"processed", "conflict_review", "pending_review"} if fragment_v2 else {"processed", "conflict_review"}
+        if (item is None or state not in allowed_states
                 or source_id in related_conflicts
                 or not isinstance(record, dict)
                 or source.get("title") != item["title"]
                 or source.get("modified_time") != item["modified_time"]
                 or source.get("snapshot_kind") != record.get("snapshot_kind")
                 or source.get("snapshot_sha256") != record.get("snapshot_sha256")
-                or (state == "processed" and
+                or (state == "processed" and not fragment_v2 and
                     (source.get("reviewer") != record.get("reviewer")
                      or source.get("reviewed_at") != record.get("reviewed_at", "")[:10]))
-                or (state == "conflict_review" and
+                or (state == "conflict_review" and not fragment_v2 and
                     (not isinstance(canonical, dict)
                      or source.get("reviewer") != canonical.get("reviewer")
                      or source.get("reviewed_at") != canonical.get("reviewed_at")))):
             raise SigningError("private_source_revision_not_current")
-        if state == "conflict_review":
+        if fragment_v2:
+            try:
+                verify_fragment_review(dossier, source, record, public_item, private_path=private_path)
+            except FragmentReviewError as error:
+                raise SigningError(str(error)) from error
+        elif state == "conflict_review":
             _verify_scoped_claim(dossier, source, record)
         elif "scoped_claim_review" in dossier:
             raise SigningError("scoped_claim_review_unnecessary")
