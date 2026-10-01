@@ -34,6 +34,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [selected, setSelected] = useState<number | null>(null)
   const [pending, setPending] = useState<Answer | null>(null)
   const [uncertainSetup, setUncertainSetup] = useState(false)
+  const [glossaryUpdateBlocked, setGlossaryUpdateBlocked] = useState(false)
   const [view, setView] = useState<'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'account' | 'progress' | 'errors' | 'reset' | 'glossary' | 'literature' | 'learning' | 'ownerStats' | 'ownerContent'>('setup')
   useEffect(() => { setMenuOpen(false) }, [view])
   const [homeworkCatalog, setHomeworkCatalog] = useState<HomeworkCatalog | null>(null)
@@ -67,7 +68,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
     setAccount(null); setOptions(null); setState(null); setFeedback(null); setFeedbackQuestion(null)
     setSelected(null); setPending(null); setUncertainSetup(false); setView('setup')
     setProgress(null); setOwnerStats(null); setOwnerContent(null); setProgressScope(null); setHistory(null); setDetail(null); setMistakes(null)
-    setResetPreview(null); setNotice(''); setGlossary(null); setGlossaryTopics([]); setLiterature(null); setLearning(null)
+    setGlossaryUpdateBlocked(false); setResetPreview(null); setNotice(''); setGlossary(null); setGlossaryTopics([]); setLiterature(null); setLearning(null)
     setHomeworkCatalog(null); setHomeworkId(null); setHomeworkConfirmId(null)
   }
 
@@ -229,10 +230,8 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   }
 
   async function checkActive() {
-    if (busy || pending !== null || uncertainSetup) return true
-    if (account?.needs_identity) return false
-    const [quiz, terms] = await Promise.all([api.state(), api.glossaryState()])
-    return quiz.runner_state.state === 'in_progress' || terms.glossary_state.state === 'in_progress' || terms.glossary_state.state === 'feedback'
+    // Persisted attempts resume after reload; only unconfirmed local work is unsafe.
+    return lock.current || busy || pending !== null || uncertainSetup || glossaryUpdateBlocked
   }
 
   const alert = error && <div className="app-alert" role="alert" tabIndex={-1} ref={alertRef}><Icon name="close" /><span>{error}</span><button aria-label="Скрыть сообщение" onClick={() => setError('')}><Icon name="close" size={16} /></button></div>
@@ -250,7 +249,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
           : view === 'homework' && homeworkCatalog ? <HomeworkView catalog={homeworkCatalog} busy={busy} confirmId={homeworkConfirmId} onStart={id => void run(() => startHomework(id, false))} onConfirm={id => void run(() => startHomework(id, true))} onResume={item => void run(() => resumeHomework(item))} onRefresh={() => void run(loadHomework)} />
           : view === 'homeworkQuiz' && state ? <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => void run(loadHomework)} onRefresh={() => void run(refreshState)} homeworkTitle={homeworkCatalog?.assignments.find(item => item.id === homeworkId)?.title ?? 'Домашнее задание'} />
           : view === 'literature' && literature ? <LiteratureView key={literatureLoad} initial={literature} busy={busy} run={run} />
-          : view === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} />
+          : view === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} onUpdateBlocked={setGlossaryUpdateBlocked} />
           : view === 'learning' && learning ? <LearningView {...learning} busy={busy} onRefresh={() => void run(loadLearningView)} onSaveGoal={(kind, target) => void run(() => saveGoal(kind, target))} onStartQuiz={replace => void run(() => startReviewQuiz(replace))} onStartGlossary={(topic, replace) => void run(() => startReviewGlossary(topic, replace))} />
           : view === 'reset' && resetPreview ? <ResetView initial={resetPreview} busy={busy} run={run} onCancel={() => setView('account')} onComplete={afterReset} />
           : view === 'progress' && progress && history ? <ProgressView scope={progressScope} onScope={scope => void run(async () => { const page = await api.history(null, scope); setHistory(page); setProgressScope(scope) })} data={progress} history={history} detail={detail} busy={busy} onRefresh={() => void run(() => loadProgress(progressScope))} onBack={() => setDetail(null)} onOpen={id => void run(async () => setDetail(await api.attempt(id)))} onMore={() => void run(async () => { const page = await api.history(history.next_before, progressScope); setHistory({ ...page, items: [...history.items, ...page.items] }) })} onMoreAnswers={() => void run(async () => { if (detail) { const page = await api.attempt(detail.attempt.session_id, detail.next_after); setDetail({ ...page, items: [...detail.items, ...page.items] }) } })} />
