@@ -10,6 +10,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+import tarfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +38,7 @@ def inspect_image(name, sha, expected_id=None):
     if (len(value) != 1 or value[0].get("Os") != "linux" or value[0].get("Architecture") != "amd64"
             or value[0].get("Config", {}).get("Labels", {}).get("org.opencontainers.image.revision") != sha
             or not re.fullmatch(r"sha256:[0-9a-f]{64}", value[0].get("Id", ""))
-            or expected_id is not None and value[0]["Id"] != expected_id):
+            or expected_id is not None and value[0]["Id"] not in ({expected_id} if isinstance(expected_id, str) else expected_id)):
         raise ValueError("Backend image identity/platform/revision differs")
     return value[0]["Id"]
 
@@ -110,15 +111,89 @@ def verify(archive, destination, sha, expected_digest):
     return manifest, target
 
 
+def archive_image_ids(image, manifest):
+    """Bind classic config and containerd manifest IDs to the verified archive.
+
+    Docker stores expose different IDs for identical saved bytes. Never accept
+    an ID from the daemon unless it is linked to this archive's exact config.
+    No archive paths are extracted; metadata and expanded size are bounded.
+    """
+    metadata = {}
+    files = set()
+    expanded = 0
+    metadata_bytes = 0
+    with tarfile.open(image, "r|gz") as saved:
+        for entry in saved:
+            expanded += entry.size
+            if expanded > 4 * 1024 * 1024 * 1024 or len(files) >= 10000:
+                raise ValueError("Oversized saved image")
+            if entry.isdir():
+                continue
+            name = entry.name
+            if not entry.isfile() or name in files:
+                raise ValueError("Invalid saved image entry")
+            files.add(name)
+            if (name in {"manifest.json", "index.json"} or name.endswith(".json")
+                    or re.fullmatch(r"blobs/sha256/[0-9a-f]{64}", name)) and entry.size <= 4 * 1024 * 1024:
+                raw = saved.extractfile(entry).read()
+                metadata_bytes += len(raw)
+                if metadata_bytes > 32 * 1024 * 1024:
+                    raise ValueError("Oversized saved image metadata")
+                metadata[name] = raw
+    try:
+        docker = json.loads(metadata["manifest.json"])
+        if (not isinstance(docker, list) or len(docker) != 1
+                or docker[0].get("RepoTags") != [manifest["tag"]]):
+            raise ValueError("Ambiguous saved image")
+        config_name = docker[0]["Config"]
+        config_raw = metadata[config_name]
+        config_id = "sha256:" + hashlib.sha256(config_raw).hexdigest()
+        config = json.loads(config_raw)
+        if (config.get("os") != "linux" or config.get("architecture") != "amd64"
+                or config.get("config", {}).get("Labels", {}).get("org.opencontainers.image.revision") != manifest["revision"]):
+            raise ValueError("Saved image platform/revision differs")
+        layers = docker[0]["Layers"]
+        if not isinstance(layers, list) or not layers or any(name not in files for name in layers):
+            raise ValueError("Incomplete saved image")
+        identities = {config_id}
+        if "index.json" in metadata:
+            index = json.loads(metadata["index.json"])
+            descriptors = index["manifests"]
+            if index.get("schemaVersion") != 2 or len(descriptors) != 1:
+                raise ValueError("Ambiguous OCI image")
+            descriptor = descriptors[0]
+            manifest_id = descriptor["digest"]
+            if not re.fullmatch(r"sha256:[0-9a-f]{64}", manifest_id):
+                raise ValueError("Invalid OCI digest")
+            raw = metadata["blobs/sha256/" + manifest_id.removeprefix("sha256:")]
+            if ("sha256:" + hashlib.sha256(raw).hexdigest() != manifest_id
+                    or descriptor["size"] != len(raw)):
+                raise ValueError("OCI manifest digest differs")
+            oci = json.loads(raw)
+            if (oci.get("schemaVersion") != 2 or oci["config"]["digest"] != config_id
+                    or oci["config"]["size"] != len(config_raw)
+                    or ["blobs/sha256/" + layer["digest"].removeprefix("sha256:") for layer in oci["layers"]] != layers):
+                raise ValueError("OCI manifest/config/layers differ")
+            identities.add(manifest_id)
+        if manifest["image_id"] not in identities:
+            raise ValueError("Producer identity differs from saved image")
+        return identities
+    except (KeyError, TypeError, AttributeError, json.JSONDecodeError) as error:
+        raise ValueError("Invalid saved image metadata") from error
+
+
 def load(archive, sha, expected_digest):
     with tempfile.TemporaryDirectory(prefix="psychology-backend-") as temporary:
         manifest, image = verify(archive, Path(temporary) / "verified", sha, expected_digest)
+        identities = archive_image_ids(image, manifest)
         platform = subprocess.check_output(["docker", "version", "--format", "{{.Server.Os}}/{{.Server.Arch}}"], text=True).strip()
         if platform != "linux/amd64":
             raise ValueError("Unexpected target Docker platform")
         subprocess.run(["docker", "image", "load", "--input", str(image)],
                        stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, check=True)
-        inspect_image(tag(sha), sha, manifest["image_id"])
+        # Return the target store ID so deploy.sh retains exact container equality.
+        loaded_id = inspect_image(tag(sha), sha, identities)
+        manifest = {**manifest, "image_id": loaded_id}
     return manifest
 
 
@@ -166,5 +241,5 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except (ValueError, OSError, subprocess.CalledProcessError) as error:
+    except (ValueError, OSError, tarfile.TarError, subprocess.CalledProcessError) as error:
         raise SystemExit("BACKEND_ARTIFACT_STOP: " + type(error).__name__) from None
