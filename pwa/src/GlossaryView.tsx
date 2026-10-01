@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { api } from './api'
 import type { GlossaryState, GlossaryTopic } from './types'
 
-export function GlossaryView({ initial, topics, busy, run, client = api }: {
+export function GlossaryView({ initial, topics, busy, run, onUpdateBlocked, client = api }: {
   initial: GlossaryState; topics: GlossaryTopic[]; busy: boolean
   run: (operation: () => Promise<void>) => Promise<void>
+  onUpdateBlocked?: (blocked: boolean) => void
   client?: Pick<typeof api, 'glossaryState' | 'glossaryStart' | 'glossaryAnswer' | 'glossaryNext'>
 }) {
   const [saved, setSaved] = useState(initial)
@@ -18,6 +19,7 @@ export function GlossaryView({ initial, topics, busy, run, client = api }: {
   const [selected, setSelected] = useState<number | null>(null)
   const [pending, setPending] = useState<number | null>(null)
   const [uncertain, setUncertain] = useState(false)
+  useEffect(() => { onUpdateBlocked?.(pending !== null || uncertain) }, [pending, uncertain, onUpdateBlocked])
   const active = saved.state === 'in_progress' || saved.state === 'feedback'
   const eligible = topics.filter(item => item.available_count >= 4)
   const setupTopics = mode === 'single' ? topic : mode === 'all' ? eligible.map(item => item.topic_id) : selectedTopics

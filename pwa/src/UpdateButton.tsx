@@ -13,7 +13,7 @@ export function UpdateButton({ busy, checkActive }: { busy: boolean; checkActive
     setChecking(true); setMessage('')
     try {
       if (await checkActive()) {
-        setMessage('Сначала завершите текущую попытку. Обновление будет доступно после занятия.')
+        setMessage('Сначала подтвердите сохранение последнего действия или восстановите состояние. Затем можно обновить приложение.')
         return
       }
       if (worker) activateUpdate(worker)
@@ -31,7 +31,7 @@ export function UpdateButton({ busy, checkActive }: { busy: boolean; checkActive
         if (document.activeElement === (event.shiftKey ? buttons[0] : buttons.at(-1))) { event.preventDefault(); next?.focus() }
       }
     }}><h2 id="update-title">Доступна новая версия</h2><p>Обновление перезагрузит страницу. Сохранённый прогресс останется; несохранённый ввод нужно завершить заранее.</p>
-      {message && <p role="status">{message}</p>}<div className="button-row"><button className="button primary" disabled={checking || busy || Boolean(message)} onClick={() => void apply()}>Обновить сейчас</button><button autoFocus className="button secondary" disabled={checking} onClick={close}>{message ? 'Продолжить занятие' : 'Позже'}</button></div>
+      {message && <p role="status">{message}</p>}<div className="button-row"><button className="button primary" disabled={checking || busy || Boolean(message)} onClick={() => void apply()}>Обновить сейчас</button><button autoFocus className="button secondary" disabled={checking} onClick={close}>{message ? 'Вернуться' : 'Позже'}</button></div>
     </section></div>}
   </>
 }
