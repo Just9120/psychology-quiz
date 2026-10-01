@@ -502,7 +502,7 @@ test('independent quiz saves answers, explains mistakes, resumes and completes',
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
   await navigate(page, 'Мой аккаунт')
   await expect(page.getByRole('button', { name: 'Установить приложение' }).filter({ visible: true })).toBeVisible()
-  await page.getByRole('button', { name: 'Выйти', exact: true }).click()
+  await navigate(page, 'Выйти')
   await expect(page.getByRole('button', { name: 'Войти в пространство' })).toBeVisible()
   expect((await page.request.get('/web/quiz/state')).status()).toBe(401)
 })
@@ -627,7 +627,12 @@ test('responsive PWA navigation and short desktop actions', async ({ page }) => 
 
 
 async function navigate(page: Page, name: string) {
-  const menu = page.getByRole('button', { name: 'Открыть меню', exact: true })
-  if (await menu.isVisible()) await menu.click()
+  const action = page.getByRole('button', { name, exact: true, includeHidden: true })
+  await expect(action).toBeEnabled()
+  if ((page.viewportSize()?.width ?? 1280) <= 800) {
+    const menu = page.getByRole('button', { name: /^(Открыть|Закрыть) меню$/ })
+    await expect(menu).toBeEnabled()
+    if (await menu.getAttribute('aria-expanded') === 'false') await menu.click()
+  }
   await page.getByRole('button', { name, exact: true }).click()
 }

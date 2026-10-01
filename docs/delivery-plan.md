@@ -10,6 +10,8 @@ Validation Plan: REQUIRED local PWA typecheck and targeted update-component/work
 
 Current code checkpoint: 2/2 AC implemented. Local validation PASS: 4 manual-update component/lifecycle/actual-worker tests, typecheck, PWA build and shared Mini App build; 2 targeted responsive E2E runs (desktop/mobile projects, widths 320/390/768/1024/1440 and height480); public asset/content scan and diff check. Existing E2E navigation now opens the collapsed menu as needed; all prior behavioral assertions retained. No full local suite. PR CI/merge/main artifacts/CD remain REQUIRED PENDING. Service worker still caches only the public offline document; no private/API/learning content cache. Production state was not changed for local tests.
 
+CI checkpoint: PR #328, initial run 36828884614: backend PASS; frontend 72 component tests and 56 SQLite E2E PASS, 4 mobile E2E failures in collapsed-menu navigation. Menu toggle now shares the busy gate; E2E helper waits for loaded/enabled navigation and opens the menu before logout. All four failed scenarios PASS in a targeted local rerun (10 seconds), PWA typecheck/build PASS. Behavioral assertions retained. Corrective push and subsequent required CI/merge/CD PENDING.
+
 | AC | Code status | Evidence / remaining gates |
 | --- | --- | --- |
 | AC-PWA-UPDATE-01 | READY | 4 targeted tests PASS, explicit message handler, fresh activity read and failure refusal; required CI/CD PENDING. |
