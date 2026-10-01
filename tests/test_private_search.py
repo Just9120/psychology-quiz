@@ -348,3 +348,54 @@ def test_probe_peak_memory_units_and_unavailable_platform(monkeypatch):
     assert private_search.process_peak_rss_bytes() is None
     monkeypatch.setitem(private_search.sys.modules, "resource", None)
     assert private_search.process_peak_rss_bytes() is None
+
+
+def test_operator_lexical_empty_result_never_downloads_or_calls_model(monkeypatch):
+    from app import private_search
+    monkeypatch.setattr(private_search, "ensure_index", lambda *args, **kwargs: None)
+    class Connection:
+        def execute(self, query, params):
+            assert "ts_rank_cd" in query and "embedding OPERATOR" not in query
+            return type("Rows", (), {"fetchall": lambda self: []})()
+    assert search(Connection(), "no lexical match", None, mode="lexical") == []
+    with pytest.raises(SearchError, match="invalid_search_mode"):
+        search(Connection(), "query", None, mode="unknown")
+
+
+def test_operator_semantic_mode_excludes_lexical_fallback(monkeypatch):
+    from app import private_search
+    monkeypatch.setattr(private_search, "ensure_index", lambda *args, **kwargs: None)
+    class Model:
+        def embed(self, texts):
+            return [[1.0] + [0.0] * 383]
+    class Connection:
+        def execute(self, query, params):
+            assert "embedding OPERATOR" in query and "ts_rank_cd" not in query
+            row = ("synthetic-source", "2026-10-01", "a" * 64,
+                   "characters:0:20", "synthetic reviewed text", 0.8)
+            return type("Rows", (), {"fetchall": lambda self: [row]})()
+    assert search(Connection(), "paraphrase", Model(), mode="semantic")[0]["source_id"] == "synthetic-source"
+
+
+def test_private_qa_checks_expected_passage_and_requested_mode(monkeypatch, tmp_path):
+    from app import private_search
+    source = "source_12345678901234567890"
+    digest = "a" * 64
+    case = {"query": "reviewed paraphrase", "source_id": source,
+            "snapshot_sha256": digest, "locator": "characters:10:40", "mode": "semantic"}
+    path = tmp_path / "qa.json"
+    path.write_text(json.dumps({"schema_version": 1, "cases": [case]}), encoding="utf-8")
+    monkeypatch.setattr(private_search, "PRIVATE_ROOT", tmp_path)
+    cases = load_qa_cases(path)
+    def result(*args, **kwargs):
+        assert kwargs["mode"] == "semantic"
+        return [{"source_id": source, "snapshot_sha256": digest, "locator": "characters:41:80"}]
+    monkeypatch.setattr(private_search, "search", result)
+    with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
+        verify_retrieval(None, cases, object())
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [case])
+    assert verify_retrieval(None, cases, object()) == {"cases_passed": 1}
+    for invalid in ({"locator": "characters:40:10"}, {"mode": "unknown"}, {"mode": []}, {"locator": "line:4"}):
+        path.write_text(json.dumps({"schema_version": 1, "cases": [{**case, **invalid}]}), encoding="utf-8")
+        with pytest.raises(SearchError, match="invalid_private_qa_cases"):
+            load_qa_cases(path)
