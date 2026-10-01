@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Icon } from './Icon'
+import { watchUpdates } from './pwaUpdate'
 
 interface InstallEvent extends Event {
   prompt: () => Promise<void>
@@ -27,6 +28,6 @@ export function InstallButton() {
 export function registerServiceWorker() {
   if ('serviceWorker' in navigator && import.meta.env.PROD) {
     // Network-only learning: the worker caches only an unpersonalized offline page.
-    void navigator.serviceWorker.register('/sw.js').catch(() => {})
+    void navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(watchUpdates).catch(() => {})
   }
 }

@@ -339,3 +339,13 @@ E04/E15 зависят от user identity, immutable content editions и лич�
 | Q-12 | Личная база Obsidian должна находиться в отдельной приватной папке GitHub владельца, отдельно от публичного приложения. Target `Just9120/psychology-atlas-vault` существует: GitHub readback 30.09.2026 подтвердил PRIVATE, viewer ADMIN и отсутствие других collaborators. Это подтверждает выбранный storage/access snapshot D-32, а не поставку заметок. Точный локальный Vault path, разрешённый publication scope конкретных заметок, private delivery/readback и opening smoke ещё не подтверждены; остальные integrations/access paths UNSET. AC-KNW-03/04. |
 
 Эти вопросы блокируют только зависящие от них решения; декомпозиция понятных требований в AC не требует повторного утверждения каждой строки.
+
+
+### D-40 - PWA manual updates and responsive navigation, 01.10.2026
+
+Owner chose update placement in the desktop header beside the account, with a mobile header counterpart. New frontend versions are offered explicitly, never force a reload; current learning attempts must not be interrupted by activation. Mobile navigation collapses to a menu control and short desktop layouts keep service actions accessible. Backend still uses regular CD; compatible previous frontend/API behavior remains required.
+
+| Requirement / AC | Acceptance and verification |
+| --- | --- |
+| R-PWA-UPDATE-01 / AC-PWA-UPDATE-01 | A newly installed waiting worker exposes an Update control; no automatic reload occurs. Explicit activation after confirmation reloads only the requesting tab; active quiz/homework/glossary attempts and unavailable state checks prevent activation. Verify worker lifecycle and component failure/activity tests plus browser/CD smoke. |
+| R-PWA-NAV-01 / AC-PWA-NAV-01 | At phone/tablet widths, navigation is collapsed initially and can be opened/closed with an accessible Menu control; selecting a section closes it. At short desktop heights, navigation can scroll independently while install/logout remain visible. Content and controls fit at tested widths 320-1440 without horizontal page overflow. Verify responsive browser scenarios; real iOS/Android certification remains outside this change. |

@@ -10,7 +10,7 @@ async function readingCount(page: Page, topic?: string) {
 
 test('owner can select a period for deidentified learning statistics', async ({ page }) => {
   await fresh(page)
-  await page.getByRole('button', { name: 'Статистика', exact: true }).click()
+  await navigate(page, 'Статистика')
   await expect(page.getByRole('heading', { name: 'Статистика', exact: true })).toBeVisible()
   await expect(page.getByRole('button', { name: '7 дней', exact: true })).toHaveAttribute('aria-pressed', 'true')
   await page.getByRole('button', { name: '24 часа', exact: true }).click()
@@ -31,23 +31,23 @@ test('owner-only PWA offers no guest demo or learning state', async ({ page }) =
 
 test('personal learning shows empty queue and persists a weekly target', async ({ page }) => {
   await fresh(page)
-  await page.getByRole('button', { name: 'Повторение и цели' }).click()
+  await navigate(page, 'Повторение и цели')
   await expect(page.getByRole('heading', { name: 'Повторение и цели' })).toBeVisible()
   await expect(page.getByText(/Пока нет ответов, по которым можно составить очередь/)).toBeVisible()
   await page.getByLabel('Завершённые попытки').fill('2')
   await page.getByRole('button', { name: 'Сохранить цель' }).first().click()
   await expect(page.getByText('Недельная цель сохранена.')).toBeVisible()
   await page.reload()
-  await page.getByRole('button', { name: 'Повторение и цели' }).click()
+  await navigate(page, 'Повторение и цели')
   await expect(page.getByLabel('Завершённые попытки')).toHaveValue('2')
 })
 
 test('short desktop viewport keeps sidebar navigation and logout reachable', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 480 })
   await fresh(page)
-  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await navigate(page, 'Литература')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
-  await page.getByRole('button', { name: 'Мой аккаунт' }).click()
+  await navigate(page, 'Мой аккаунт')
   await page.getByRole('button', { name: 'Установить приложение' }).filter({ visible: true }).click()
   await expect(page.getByRole('status')).toBeVisible()
   await page.getByRole('button', { name: 'Выйти', exact: true }).click({ timeout: 3000 })
@@ -57,7 +57,7 @@ test('short desktop viewport keeps sidebar navigation and logout reachable', asy
 
 test('reading catalog shares a work status across lists, lost save and reload', async ({ page }, testInfo) => {
   await fresh(page)
-  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await navigate(page, 'Литература')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
   await page.getByLabel('Тема литературы').selectOption('fiziologiya_cheloveka')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, 'fiziologiya_cheloveka')}`)).toBeVisible()
@@ -83,7 +83,7 @@ test('reading catalog shares a work status across lists, lost save and reload', 
   await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-reading.png`, fullPage: true })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
   await page.reload()
-  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await navigate(page, 'Литература')
   await page.getByRole('button', { name: title, exact: true }).click()
   await page.getByLabel('Учебный список').selectOption(first)
   await expect(page.getByLabel('Статус чтения')).toHaveValue('read')
@@ -99,7 +99,7 @@ test('reviewed literature links open a separate provider page without learning c
   const work = before.works.find(item => new Set(item.access_links.map(link => link.format)).size === 2
     && before.works.filter(other => other.title === item.title).length === 1)
   expect(work, 'published catalog has an unambiguous work with text and audio offers').toBeTruthy()
-  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await navigate(page, 'Литература')
   await page.getByRole('button', { name: work!.title, exact: true }).click()
   await expect(page.getByText(/Наличие доступа, цена и совпадение издания проверяются там/)).toBeVisible()
   for (const format of ['text', 'audio'] as const) {
@@ -134,10 +134,10 @@ test('reviewed literature links open a separate provider page without learning c
 test('reading empty and failed catalog loads are recoverable', async ({ page }) => {
   await fresh(page)
   await page.route('**/web/literature/catalog', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'database_unavailable' }) }), { times: 1 })
-  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await navigate(page, 'Литература')
   await expect(page.getByRole('alert')).toContainText('Сервер занят')
   await page.route('**/web/literature/catalog', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, works: [], topics: [] }) }), { times: 1 })
-  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await navigate(page, 'Литература')
   await expect(page.getByRole('heading', { name: 'Список пока пуст' })).toBeVisible()
   await page.getByRole('button', { name: 'Обновить каталог и прогресс' }).click()
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
@@ -152,7 +152,7 @@ async function syntheticPost(page: Page, action: string, payload: unknown) {
 
 test('glossary survives lost setup, repeated answer, reload and completion', async ({ page }, testInfo) => {
   await fresh(page)
-  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await navigate(page, 'Глоссарий')
   await page.getByLabel('Тема глоссария').selectOption('obschaya_psihologiya')
   await page.route('**/web/glossary/setup', async route => { await route.fetch(); await route.abort('failed') }, { times: 1 })
   await page.getByRole('button', { name: 'Начать тест по терминам' }).click()
@@ -167,7 +167,7 @@ test('glossary survives lost setup, repeated answer, reload and completion', asy
   await page.getByRole('button', { name: 'Повторить тот же ответ' }).click()
   await expect(page.getByText('Ответ сохранён · 1 из 5')).toBeVisible()
   await page.reload()
-  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await navigate(page, 'Глоссарий')
   await expect(page.getByText('Ответ сохранён · 1 из 5')).toBeVisible()
   expect((await (await page.request.get('/web/glossary/state')).json()).glossary_state.current_question).toEqual(before.glossary_state.current_question)
   for (let step = 2; step <= 5; step++) {
@@ -179,7 +179,7 @@ test('glossary survives lost setup, repeated answer, reload and completion', asy
   await page.getByRole('button', { name: 'Показать результат' }).click()
   await expect(page.getByRole('heading', { name: 'Тест по терминам завершён' })).toBeVisible()
   await page.reload()
-  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await navigate(page, 'Глоссарий')
   await expect(page.getByRole('heading', { name: 'Тест по терминам завершён' })).toBeVisible()
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })
@@ -189,7 +189,7 @@ test('mixed glossary keeps two topics and preserves the other topic after reset'
   const options = await (await page.request.get('/web/glossary/options')).json()
   const chosen = options.topics.filter((item: { available_count: number }) => item.available_count >= 4).slice(0, 2)
   expect(chosen).toHaveLength(2)
-  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await navigate(page, 'Глоссарий')
   await page.getByRole('combobox', { name: 'Режим', exact: true }).selectOption('mix')
   for (const item of chosen) await page.getByRole('checkbox', { name: new RegExp(item.title) }).check()
   await page.getByRole('button', { name: 'Начать тест по терминам' }).click()
@@ -216,7 +216,7 @@ test('mixed glossary keeps two topics and preserves the other topic after reset'
 test('glossary replacement needs confirmation and topic reset preserves another quiz', async ({ page }) => {
   await fresh(page)
   const quiz = await syntheticPost(page, 'quiz/setup', { quiz_mode: 'all', category_ids: [], question_count: null, difficulty: 'any' })
-  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await navigate(page, 'Глоссарий')
   await page.getByLabel('Тема глоссария').selectOption('obschaya_psihologiya')
   await page.getByRole('button', { name: 'Начать тест по терминам' }).click()
   await page.getByRole('button', { name: '← К темам глоссария' }).click()
@@ -224,7 +224,7 @@ test('glossary replacement needs confirmation and topic reset preserves another 
   await page.getByRole('button', { name: 'К сохранённому тесту' }).click()
   await page.getByRole('radio').first().check()
   await page.getByRole('button', { name: 'Проверить определение' }).click()
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await openResetSettings(page)
   await page.getByRole('combobox').selectOption('topic:Общая психология')
   await page.getByRole('button', { name: 'Отмена', exact: true }).click()
@@ -235,7 +235,7 @@ test('glossary replacement needs confirmation and topic reset preserves another 
   await page.getByRole('button', { name: 'Подтвердить сброс' }).click()
   await expect(page.getByText('Учебный прогресс сброшен.')).toBeVisible()
   expect((await (await page.request.get('/web/quiz/state')).json()).runner_state.session.session_id).toBe(quiz.runner_state.session.session_id)
-  await page.getByRole('button', { name: 'Глоссарий', exact: true }).click()
+  await navigate(page, 'Глоссарий')
   await expect(page.getByRole('button', { name: 'Начать тест по терминам' })).toBeEnabled()
 })
 
@@ -246,12 +246,12 @@ test('reset previews, cancels, clears one historical topic then all, and survive
     const question = quiz.runner_state.current_question
     quiz = await syntheticPost(page, 'quiz/answer', { session_id: question.session_id, question_id: question.question_id, selected_option_index: 0 })
   }
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
   await openResetSettings(page)
   await expect(page.getByRole('button', { name: 'Подтвердить сброс' })).toBeDisabled()
   await page.getByRole('button', { name: 'Отмена', exact: true }).click()
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
   await openResetSettings(page)
   await page.getByRole('combobox').selectOption('topic:Основы психологии')
@@ -263,7 +263,7 @@ test('reset previews, cancels, clears one historical topic then all, and survive
   await expect(page.getByText('Учебный прогресс сброшен.')).toBeVisible()
   await expect(page.getByText('2 из 2 ответов', { exact: true })).toBeVisible()
   await page.reload()
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('2 из 2 ответов', { exact: true })).toBeVisible()
   await openResetSettings(page)
   await page.getByRole('checkbox').check()
@@ -279,7 +279,7 @@ test('stale reset and lost response require a new preview without deleting new l
   await start(page)
   await page.getByRole('radio', { name: 'Только скорость' }).check()
   await page.getByRole('button', { name: 'Проверить ответ' }).click()
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await openResetSettings(page)
   await page.getByRole('checkbox').check()
   const state = await (await page.request.get('/web/quiz/state')).json()
@@ -298,7 +298,7 @@ test('stale reset and lost response require a new preview without deleting new l
   await expect(page.getByRole('checkbox')).not.toBeChecked()
   await expect(page.getByRole('button', { name: 'Подтвердить сброс' })).toBeDisabled()
   await page.getByRole('button', { name: 'Отмена', exact: true }).click()
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('Всего попыток: 1')).toBeVisible()
 })
 
@@ -323,7 +323,7 @@ async function fresh(page: Page) {
 }
 
 async function openResetSettings(page: Page) {
-  await page.getByRole('button', { name: 'Мой аккаунт' }).click()
+  await navigate(page, 'Мой аккаунт')
   await expect(page.getByRole('heading', { name: 'Настройки учебного прогресса' })).toBeVisible()
   await page.getByRole('button', { name: 'Настроить сброс' }).click()
 }
@@ -393,7 +393,7 @@ test('curriculum filters history and preserves unmapped evidence on reload', asy
     const question = quiz.runner_state.current_question
     quiz = await syntheticPost(page, 'quiz/answer', { session_id: question.session_id, question_id: question.question_id, selected_option_index: 0 })
   }
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Дисциплины и темы' })).toBeVisible()
   await page.getByText('Основы психологии · 100% · 5 ответов', { exact: true }).click()
@@ -410,22 +410,22 @@ test('curriculum filters history and preserves unmapped evidence on reload', asy
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
   await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-curriculum.png`, fullPage: true })
   await page.reload()
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
   await expect(page.getByRole('combobox', { name: 'Дисциплина или тема' })).toHaveValue('')
 })
 
 test('personal progress, historical mistakes and retry-safe training share the quiz state', async ({ page }, testInfo) => {
   await fresh(page)
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByRole('heading', { name: 'История квизов начинается с первого ответа' })).toBeVisible()
-  await page.getByRole('button', { name: 'Мои ошибки', exact: true }).click()
+  await navigate(page, 'Мои ошибки')
   await expect(page.getByText('Сейчас нет вопросов для тренировки')).toBeVisible()
-  await page.getByRole('button', { name: 'Квиз по психологии' }).click()
+  await navigate(page, 'Квиз по психологии')
   await start(page)
   await page.getByRole('radio', { name: 'Только скорость' }).check()
   await page.getByRole('button', { name: 'Проверить ответ' }).click()
-  await page.getByRole('button', { name: 'Мои ошибки', exact: true }).click()
+  await navigate(page, 'Мои ошибки')
   await expect(page.getByRole('heading', { name: 'Для тренировки: 1' })).toBeVisible()
   await page.getByText('Разобрать ответ', { exact: true }).click()
   await expect(page.getByText('Только скорость', { exact: true })).toBeVisible()
@@ -443,10 +443,10 @@ test('personal progress, historical mistakes and retry-safe training share the q
   await expect(page.getByText('Вопрос 1 из 1')).toBeVisible()
   await page.getByRole('radio', { name: 'Осмысленное повторение' }).check()
   await page.getByRole('button', { name: 'Проверить ответ' }).click()
-  await page.getByRole('button', { name: 'Мои ошибки', exact: true }).click()
+  await navigate(page, 'Мои ошибки')
   await expect(page.getByText('Сейчас нет вопросов для тренировки')).toBeVisible()
   await expect(page.getByText('Разобрать ответ', { exact: true })).toHaveCount(0)
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('1 из 2 ответов', { exact: true })).toBeVisible()
   await expect(page.getByText('Прервана', { exact: true })).toBeVisible()
   await expect(page.getByText('Завершена', { exact: true })).toBeVisible()
@@ -457,7 +457,7 @@ test('personal progress, historical mistakes and retry-safe training share the q
   await expect(page.getByText('Ответ был неверным')).toBeVisible()
   await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-history.png`, fullPage: true })
   await page.reload()
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByText('1 из 2 ответов', { exact: true })).toBeVisible()
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })
@@ -465,12 +465,12 @@ test('personal progress, historical mistakes and retry-safe training share the q
 test('progress network failure can be retried and expiry removes personal data', async ({ page }) => {
   await fresh(page)
   await page.route('**/web/progress/overview', route => route.abort('failed'), { times: 1 })
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByRole('alert')).toContainText('Нет подтверждения')
-  await page.getByRole('button', { name: 'Мой прогресс', exact: true }).click()
+  await navigate(page, 'Мой прогресс')
   await expect(page.getByRole('heading', { name: 'Мой прогресс' })).toBeVisible()
   await page.route('**/web/progress/errors', route => route.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'unauthorized' }) }), { times: 1 })
-  await page.getByRole('button', { name: 'Мои ошибки', exact: true }).click()
+  await navigate(page, 'Мои ошибки')
   await expect(page.getByRole('button', { name: 'Войти в пространство' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Мой прогресс' })).toHaveCount(0)
 })
@@ -500,9 +500,9 @@ test('independent quiz saves answers, explains mistakes, resumes and completes',
   await page.reload()
   await expect(page.getByRole('heading', { name: '80% верных ответов' })).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
-  await page.getByRole('button', { name: 'Мой аккаунт' }).click()
+  await navigate(page, 'Мой аккаунт')
   await expect(page.getByRole('button', { name: 'Установить приложение' }).filter({ visible: true })).toBeVisible()
-  await page.getByRole('button', { name: 'Выйти', exact: true }).click()
+  await navigate(page, 'Выйти')
   await expect(page.getByRole('button', { name: 'Войти в пространство' })).toBeVisible()
   expect((await page.request.get('/web/quiz/state')).status()).toBe(401)
 })
@@ -565,7 +565,7 @@ test('linking requires Telegram proof then explicit confirmation in the browser'
   await expect(page.getByText('Учебный аккаунт', { exact: true })).toBeVisible()
   await page.getByRole('button', { name: 'Подключить этот прогресс' }).click()
   await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
-  await page.getByRole('button', { name: 'Мой аккаунт' }).click()
+  await navigate(page, 'Мой аккаунт')
   await expect(page.getByText('Прогресс связан с вашим Telegram-аккаунтом.')).toBeVisible()
 })
 
@@ -603,3 +603,36 @@ test('keyboard can submit login and reach the main-content skip link', async ({ 
   await page.keyboard.press('Enter')
   await expect(page.locator('#main-content')).toBeFocused()
 })
+
+
+test('responsive PWA navigation and short desktop actions', async ({ page }) => {
+  await fresh(page)
+  for (const width of [320, 390, 768]) {
+    await page.setViewportSize({ width, height: 844 })
+    const menu = page.getByRole('button', { name: 'Открыть меню', exact: true })
+    await expect(menu).toHaveAttribute('aria-expanded', 'false')
+    await expect(page.getByRole('navigation', { name: 'Основная навигация' })).toBeHidden()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+    await menu.click()
+    await navigate(page, 'Мой аккаунт')
+    await expect(menu).toHaveAttribute('aria-expanded', 'false')
+    await expect(page.getByRole('heading', { name: 'Мой аккаунт', exact: true })).toBeVisible()
+  }
+  for (const width of [1024, 1440]) {
+    await page.setViewportSize({ width, height: 480 })
+    await expect(page.locator('.sidebar-actions').getByRole('button', { name: 'Выйти', exact: true })).toBeInViewport()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+  }
+})
+
+
+async function navigate(page: Page, name: string) {
+  const action = page.getByRole('button', { name, exact: true, includeHidden: true })
+  await expect(action).toBeEnabled()
+  if ((page.viewportSize()?.width ?? 1280) <= 800) {
+    const menu = page.getByRole('button', { name: /^(Открыть|Закрыть) меню$/ })
+    await expect(menu).toBeEnabled()
+    if (await menu.getAttribute('aria-expanded') === 'false') await menu.click()
+  }
+  await page.getByRole('button', { name, exact: true }).click()
+}
