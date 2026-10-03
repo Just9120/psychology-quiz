@@ -27,17 +27,18 @@ export function readingNextStep(items: Item[], allItems: Item[] = items): Item |
   }
   const status = (item: Item) => item.user_state?.reading_status ?? 'not_started'
   const rank: Record<string, number> = { basic: 0, important: 1, additional: 2, advanced: 3 }
+  const stages: Record<string, number> = { foundation: 0, core: 1, applied: 2, deepening: 3, advanced: 4, reference: 5 }
   const recommendations = items.filter(item => {
     const group = allWorks.get(item.work_id ?? item.id) ?? []
     return group.length > 0 && group.every(entry => status(entry) === 'not_started') &&
       Object.hasOwn(rank, item.importance ?? '') && ['agent', 'teacher'].includes(item.importance_source ?? '') &&
-      ['foundation', 'core', 'applied', 'deepening', 'advanced', 'reference'].includes(item.reading_level ?? '') &&
+      Object.hasOwn(stages, item.reading_level ?? '') &&
       !!item.why_read?.trim() && Array.isArray(item.prerequisites) && item.prerequisites.every(reference => {
         const prerequisite = known.get(reference)
         return !!prerequisite && (allWorks.get(prerequisite.work_id ?? prerequisite.id) ?? []).every(entry => status(entry) === 'read')
       })
   })
-  recommendations.sort((a, b) => rank[a.importance!] - rank[b.importance!] || compare(a.id, b.id))
+  recommendations.sort((a, b) => rank[a.importance!] - rank[b.importance!] || stages[a.reading_level!] - stages[b.reading_level!] || compare(a.id, b.id))
   return recommendations[0] ?? null
 }
 

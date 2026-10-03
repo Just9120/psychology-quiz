@@ -68,3 +68,25 @@ it('labels teacher priority of an article as material while retaining agent reco
   render(<ReadingSummary items={[article]} busy={false} onSelect={vi.fn()} />)
   expect(screen.getByText('Рекомендация агента. Сопоставьте подходы. Приоритет материала — из учебного списка.')).toBeVisible()
 })
+
+
+it.each([
+  ['foundation', 'core'], ['core', 'applied'], ['applied', 'deepening'],
+  ['deepening', 'advanced'], ['advanced', 'reference'],
+])('follows the reviewed %s stage before %s rather than association ID', (earlier, later) => {
+  const common = { importance: 'additional', importance_source: 'agent',
+    why_read: 'Проверенный этап чтения.', prerequisites: [] }
+  const first = { ...common, id: 'z', reading_level: earlier }
+  const second = { ...common, id: 'a', reading_level: later }
+  expect(readingNextStep([second, first])?.id).toBe('z')
+  expect(readingNextStep([second, { ...first, user_state: { reading_status: 'read' as const } }])?.id).toBe('a')
+  expect(readingNextStep([{ ...second, user_state: state('2026-10-03T16:00:00Z') }, first])?.id).toBe('a')
+})
+
+it('preserves reviewed book priority ahead of reading stage and excludes missing prerequisites', () => {
+  const common = { importance_source: 'teacher', why_read: 'Приоритет курса.', prerequisites: [] }
+  const foundation = { ...common, id: 'z', importance: 'additional', reading_level: 'foundation' }
+  const required = { ...common, id: 'a', importance: 'basic', reading_level: 'applied' }
+  expect(readingNextStep([foundation, required])?.id).toBe('a')
+  expect(readingNextStep([foundation, { ...required, prerequisites: ['missing'] }])?.id).toBe('z')
+})
