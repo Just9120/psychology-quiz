@@ -201,10 +201,10 @@
     },
     "literature:lit_chomsky_syntactic_structures": {
       "schema_version": 1,
-      "item_sha256": "89e1d78f5001c85bc5acda130a339439cefa56f310d1ba591acd541bffaca016",
-      "review_sha256": "f48c40abfefd5497b8b7fb8e341f16618dc433b8deaf5d6d8f738f9e43723fb9",
+      "item_sha256": "24fa5b55f05ead09ff20354c6747e263aa44ffb0b4a36a77f74d7c175e625cf1",
+      "review_sha256": "40ed7a446cb75cb0c4d3ce53f7983b658b303d0a8294f013c875f5a9aa72ae71",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "YrOQJh4J6nPGmGrYs1BPQFfRsRYeaQkFrGd1NQ/oo30TYYC7u2KgFTd+Qs1Zui1Kr/ID2nmUVm2/2UW81F3YCg=="
+      "signature": "ozj9+7rlh7YoiY0lLZKUwO4gD2iIe+MMOEciarkOPABAZqS7KTIOYFRpW9kiNTp8U8MMDhjv+e3ie5DVgjHrDA=="
     },
     "literature:lit_hsieh_delivering_happiness": {
       "schema_version": 1,
