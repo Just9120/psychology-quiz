@@ -1249,7 +1249,7 @@
     },
     "literature:lit_6190d3b37fdeeab5": {
       "decision": "approved",
-      "item_sha256": "0206614a05bdf507d5e067e523c17aedd01962bed0e6772aa6929ccfdb3effe8",
+      "item_sha256": "31ebd4bddee0cf14eac660f5d5800bb7a3a2f28682f0e9b6c4431e846d169c36",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1270,10 +1270,10 @@
         "sequence": "Selected introductory lecture before methodology article, then applied case studies; agent inference from explicit course purposes, not teacher priority."
       },
       "metadata_reconciliation": {
-        "reviewed_at": "2026-09-30",
-        "decision": "preserve_course_citation_with_warning",
-        "primary_record": "https://psyjournals.ru/journals/cpp/archive/2009_n1/Busigina",
-        "limitations": "Страницы статьи расходятся: учебный список и библиотечная запись МГППУ указывают 9–34, текущая страница журнала — 5–29. Исходная цитата сохранена; точная пагинация требует сверки."
+        "reviewed_at": "2026-10-03T23:57:10+00:00",
+        "decision": "primary_printed_pdf_checked",
+        "evidence_scope": "Busygina printed pages 9–34; Al mukhametova author line and full name Tatyana Nikolaevna confirm T.N., while the PDF citation line retains T.A. Original course citation preserved. Article body not fully reviewed.",
+        "private_receipt": "data/goal-qualitative-recommendations-review-20261004.json"
       }
     },
     "literature:lit_93082f75dd37021b": {
@@ -1422,7 +1422,7 @@
     },
     "literature:lit_7e152869797af503": {
       "decision": "approved",
-      "item_sha256": "e457e4ac49d3cf9c0e86ca1b67918b80e717535f0d42d340e1c7c99c0d41377a",
+      "item_sha256": "d5b8760fc91b2c3d1c9f7bb596eff328133574d1e34793fc3afd96e56b101ce1",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1442,10 +1442,10 @@
         "prerequisites": "No named book prerequisite for methodology; applied example follows the methodology article."
       },
       "metadata_reconciliation": {
-        "reviewed_at": "2026-09-30",
-        "decision": "preserve_course_citation_with_warning",
-        "primary_record": "https://psyjournals.ru/journals/cpp/archive/2019_n2/Kiselnikova_Lavrova_et_al",
-        "limitations": "Инициалы соавтора Альмухаметовой расходятся: в учебном списке Т. А., на странице журнала Т. Н. Исходный список авторов сохранён; перед исправлением нужна сверка."
+        "reviewed_at": "2026-10-03T23:57:10+00:00",
+        "decision": "primary_printed_pdf_checked",
+        "evidence_scope": "Busygina printed pages 9–34; Al mukhametova author line and full name Tatyana Nikolaevna confirm T.N., while the PDF citation line retains T.A. Original course citation preserved. Article body not fully reviewed.",
+        "private_receipt": "data/goal-qualitative-recommendations-review-20261004.json"
       }
     },
     "literature:lit_13f7ecd9b94275d0": {
