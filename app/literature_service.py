@@ -72,6 +72,8 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             group = all_works[prerequisite.get("work_id", prerequisite["id"])]
             return all(status(item) == "read" for item in group)
         rank = {"basic": 0, "important": 1, "additional": 2, "advanced": 3}
+        stages = {"foundation": 0, "core": 1, "applied": 2,
+                  "deepening": 3, "advanced": 4, "reference": 5}
         recommendations = []
         for item in items:
             group = all_works.get(item.get("work_id", item["id"]), [])
@@ -79,7 +81,7 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             if (not group or any(status(entry) != "not_started" for entry in group)
                     or item.get("importance") not in rank
                     or item.get("importance_source") not in {"agent", "teacher"}
-                    or item.get("reading_level") not in {"foundation", "core", "applied", "deepening", "advanced", "reference"}
+                    or item.get("reading_level") not in stages
                     or not isinstance(item.get("why_read"), str) or not item["why_read"].strip()
                     or not isinstance(prerequisites, list)
                     or not all(isinstance(ref, str) and completed(ref) for ref in prerequisites)):
@@ -87,7 +89,9 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             recommendations.append(item)
         if not recommendations:
             return None
-        recommendations.sort(key=lambda item: (rank[item["importance"]], str(item["id"])))
+        # Reviewed stages resolve equal priority, never arbitrary bibliography order.
+        recommendations.sort(key=lambda item: (rank[item["importance"]],
+                             stages[item["reading_level"]], str(item["id"])))
         item = recommendations[0]
         reason = f"Рекомендация агента. {item['why_read']}"
         if item["importance_source"] == "teacher":

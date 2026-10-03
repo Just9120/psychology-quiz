@@ -1,6 +1,29 @@
 from app.literature_service import reading_next_step
 
 
+def test_equal_priority_reading_follows_reviewed_stage_before_identifier():
+    common = {"importance": "additional", "importance_source": "agent", "type": "book",
+              "why_read": "Reviewed course reading stage", "prerequisites": []}
+    advanced = {**common, "id": "a", "reading_level": "advanced"}
+    foundation = {**common, "id": "z", "reading_level": "foundation"}
+    assert reading_next_step([advanced, foundation], {})["item"]["id"] == "z"
+    assert reading_next_step([advanced, foundation], {
+        "a": {"reading_status": "in_progress"}})["item"]["id"] == "a"
+    assert reading_next_step([advanced, foundation], {
+        "z": {"reading_status": "read"}})["item"]["id"] == "a"
+    blocked = {**foundation, "prerequisites": ["missing"]}
+    assert reading_next_step([advanced, blocked], {})["item"]["id"] == "a"
+
+
+def test_reviewed_priority_is_preserved_across_reading_stages():
+    common = {"importance_source": "teacher", "type": "book",
+              "why_read": "Explicit course priority", "prerequisites": []}
+    foundation = {**common, "id": "z", "importance": "additional", "reading_level": "foundation"}
+    required = {**common, "id": "a", "importance": "basic", "reading_level": "applied"}
+    result = reading_next_step([foundation, required], {})
+    assert result["item"]["id"] == "a" and result["priority_source"] == "teacher"
+
+
 def test_continue_is_personal_recency_not_bibliography_priority():
     items = [{"id": "a", "title": "Earlier", "topic_order": 1},
              {"id": "b", "title": "Later", "topic_order": 100}]
