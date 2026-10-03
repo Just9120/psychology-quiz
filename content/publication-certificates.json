@@ -397,10 +397,10 @@
     },
     "literature:lit_sobchik_smil_mmpi": {
       "schema_version": 1,
-      "item_sha256": "17f16147f8f65c6ffe73cea1d41b188fb1df8d13d59704f3d3d3b1c21cff574a",
-      "review_sha256": "fcda301f68c9c3f3a8cf245fce32b7fa18ae822577d9c486b538f39b351d6266",
+      "item_sha256": "a546f79f4ef4f41d21f43652586482f6d1548b55822164e8d356e685d7e3ec9a",
+      "review_sha256": "a25cb5d990900bca6b01f0e54325df832c627d8cc551ce1feb9b8ee016bb7852",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "2KIDuUh/JRU6Ld7XoHNg7zXzzGnQ0a0CQ0Y1vfbw30r+YC0xPt0EK+gyyNVVAoe7ES+/CUUX9KR5juxsB0SUDw=="
+      "signature": "ctWSihTY4r6LbfO3SR8XsWFLWbKUFNHrkSjf6Jc9cMLu1+jneo//YHFrBZMyAVU9n9PHrVHihClM5YU/Zv+YCA=="
     },
     "literature:lit_salinger_catcher_rye": {
       "schema_version": 1,
@@ -474,10 +474,10 @@
     },
     "literature:lit_zobkov_understanding_fairytale": {
       "schema_version": 1,
-      "item_sha256": "69957a07d629ad478a0196873e781578dcda062e89a468003a8f13afcae15c8e",
-      "review_sha256": "48e0451aa23742ac5eb6cf9e733ac1c07026e71232b93e4c3b66a9143b80b0ca",
+      "item_sha256": "b514e8cf797ed6d77240851c093bc4b16a73d978ec109e3e82023537d8c36a7d",
+      "review_sha256": "d691cebe10b025a30ed0d2be8f100c7599881b2e21c80cb3b38784099e80a10b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "XacmPfyG/B8WiLGQKJd3TjQpU3inCyXUZTwYrEzYUdArnxKnG/49df9WqKhDGT9ks0nOlrMhNJ/LmsifpTH3Bw=="
+      "signature": "aPVyi4SzUwKVu0OtF85Y+uI9c/pTI0BoqvxIjd1cux+447PXaDMrwB8VCk+l1n6kQRv88ae/xiLMu6AdbWDtCA=="
     },
     "literature:lit_bugental_art_being_alive": {
       "schema_version": 1,
@@ -502,10 +502,10 @@
     },
     "literature:lit_mokhovikov_psychotherapy_pain_points": {
       "schema_version": 1,
-      "item_sha256": "5d8ec24698f410bdcc0e4fd69675fc7f9923d4611ea26d0a0ee6a6d7afc2c4e6",
-      "review_sha256": "e2594cf31e630c66a7896113a2d57f3b3b3c465c12b65fc5e753d6546a9daabf",
+      "item_sha256": "03069a667a88d10a423fe2e444688c04632984d7d33bcf57371bd357a400346a",
+      "review_sha256": "3220caee140b5e2a8fd63e0e055d7473f6554857717288c5f010745d767e161f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "1ZsXa5HPPKBuAKIukA+8w+9pEl+0cSvqoZP+mnGVTTfUZ1XYM8aI9jRaF6knA/MqvMYXXmy+bKgQy7ipJBu+Bg=="
+      "signature": "3ckU5dxszPa4Tm0NMMHi2SdqEjLmj0jzmZw+ftt8VtsJerBtRdbItibjtYq62wp5x+yplpXa1CcwgLc+F6xjAQ=="
     }
   }
 }
