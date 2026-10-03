@@ -492,6 +492,20 @@
       "review_sha256": "6d08a157b44d9844b0b53874bd811f1fc778245eb0391d3b2b02274d4059b982",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "CLAPY17CPZfNr7P2Ex0cTye8jyUsBQ8IAoVXIGW2F13nDnCUxol/UazA/P1lnCl3QfwGb7eAzxsT9zwsMX64Bg=="
+    },
+    "literature:lit_moody_life_after_life": {
+      "schema_version": 1,
+      "item_sha256": "3b018368b3da900cc8f4871df0b647d877f001e078cd0f862fa5cc0a8050f84d",
+      "review_sha256": "87d4d75436bcf203cb1248a7df0f20ebc156a4deb47492fc7d5909a926df1cb7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7c7RCZWNBUeTlMyNqkVJuB869bH+YuUPXhehPZmacWVe7Z8alc4VTajQVfaidXudnLfIgDUpQyY1CG9nPsaWAA=="
+    },
+    "literature:lit_mokhovikov_psychotherapy_pain_points": {
+      "schema_version": 1,
+      "item_sha256": "5d8ec24698f410bdcc0e4fd69675fc7f9923d4611ea26d0a0ee6a6d7afc2c4e6",
+      "review_sha256": "e2594cf31e630c66a7896113a2d57f3b3b3c465c12b65fc5e753d6546a9daabf",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1ZsXa5HPPKBuAKIukA+8w+9pEl+0cSvqoZP+mnGVTTfUZ1XYM8aI9jRaF6knA/MqvMYXXmy+bKgQy7ipJBu+Bg=="
     }
   }
 }
