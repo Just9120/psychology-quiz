@@ -394,6 +394,27 @@
       "review_sha256": "d54ecd190b0234a8081cecbbb6138c4a4fd63801c293f8f3785bfd2a1115d77d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "SkCC9t/fx4NHLQnOUhdJEhag10lEbj8EUxAeY91QBWc3LuDsg1lvKs4EuQJCmpxiA5oiCmFRCQPoDjb8Sp7ICA=="
+    },
+    "literature:lit_sobchik_smil_mmpi": {
+      "schema_version": 1,
+      "item_sha256": "17f16147f8f65c6ffe73cea1d41b188fb1df8d13d59704f3d3d3b1c21cff574a",
+      "review_sha256": "fcda301f68c9c3f3a8cf245fce32b7fa18ae822577d9c486b538f39b351d6266",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "2KIDuUh/JRU6Ld7XoHNg7zXzzGnQ0a0CQ0Y1vfbw30r+YC0xPt0EK+gyyNVVAoe7ES+/CUUX9KR5juxsB0SUDw=="
+    },
+    "literature:lit_salinger_catcher_rye": {
+      "schema_version": 1,
+      "item_sha256": "f8b04a0212e58bacb57f2a471fde461f3bf5d50a6f46040d2f04ac86749975e5",
+      "review_sha256": "ea1bde4b45345f3252a0a7439e7e6532d6b3b46c26638ef8e081416b7ab92b63",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "CILE+1Y4J5PKoDddO1OKXkwvB9aWpav/SGOcjPV5It0+3aMHEJ6rW1/ss9nMK/kBCB6zShdaRFT/rquBe6HoAw=="
+    },
+    "literature:lit_remarque_black_obelisk": {
+      "schema_version": 1,
+      "item_sha256": "9f972508f5fd30e4dff08a4a5380bd864342130d8d0862ea6a10b7bcbacbfe98",
+      "review_sha256": "18a0e6232d0e0d92441b2eb6865d2f795e0f31e49cfed5ef4d6fd82ac10ce6c1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "I65HhHLNRum77G760o8vuSxwp4+sG4T7H5qSAN8YT49Dx/Yb6TWnAIBLKiv6n95Fz9CtQ2G3Aj7UtQUE0tzODA=="
     }
   }
 }
