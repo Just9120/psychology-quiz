@@ -31,7 +31,8 @@ from app.publication_certificate import certificate_payload, key_id
 from scripts.scoped_fragment_review import FragmentReviewError, verify_fragment_review
 from app.source_inventory import (InventoryError, combine_registries, complete_listing, link_lessons,
                                   processing_status, reviewed_graph, scan, unresolved_related_conflicts)
-from scripts.source_inventory_report import private_registry_input
+from scripts.source_inventory_report import (combine_private_topics, private_registry_input,
+                                             private_topics_input)
 
 
 class SigningError(ValueError):
@@ -267,7 +268,8 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
 
 def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                            *, public_item: dict | None = None,
-                           private_registry_path: Path | None = None) -> None:
+                           private_registry_path: Path | None = None,
+                           private_topics_path: Path | None = None) -> None:
     """Require every private source to match a completed review in this inventory."""
     if (not isinstance(inventory, dict) or inventory.get("schema_version") != 1
             or not isinstance(inventory.get("folders"), dict)
@@ -290,6 +292,25 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
             curriculum = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
             reviewed_graph(snapshot, registry, curriculum)
             private_ids = {source["id"] for source in private_registry["sources"]}
+        labels = (public_item or {}).get("reviewed_curriculum_topics", [])
+        if labels:
+            if (dossier.get("kind") != "literature" or not isinstance(labels, list)
+                    or private_registry_path is None or private_topics_path is None):
+                raise SigningError("private_literature_topics_required")
+            private_topics = private_topics_input(private_topics_path, REPO_ROOT)
+            combined = combine_private_topics(curriculum, private_topics, private_registry)
+            reviewed_graph(snapshot, registry, combined)
+            source_ids = {source.get("id") for source in dossier.get("sources", [])}
+            if len({label.get("id") for label in labels if isinstance(label, dict)}) != len(labels):
+                raise SigningError("private_literature_topics_required")
+            for label in labels:
+                topic = private_topics["topics"].get(label.get("id")) if isinstance(label, dict) else None
+                if (topic is None or set(label) != {"id", "title", "discipline_id"}
+                        or label["title"] != topic["title"] or label["discipline_id"] != topic["discipline_id"]
+                        or label["discipline_id"] != public_item.get("topic_id")
+                        or label["id"] not in public_item.get("curriculum_topic_ids", [])
+                        or topic["source"]["source_id"] not in source_ids):
+                    raise SigningError("private_literature_topics_required")
         registered = {source["id"]: source for source in registry["sources"]}
         if public_item is not None:
             visible_text = json.dumps(public_item, ensure_ascii=False, sort_keys=True)
@@ -406,6 +427,8 @@ def main(argv=None) -> int:
     parser.add_argument("--processed", required=True, type=Path)
     parser.add_argument("--private-registry", type=Path,
                         help="Ignored current source classifications; fragment approval remains required")
+    parser.add_argument("--private-topics", type=Path,
+                        help="Ignored current lesson metadata for signed source-free literature labels")
     parser.add_argument("--private-key", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args(argv)
@@ -429,7 +452,8 @@ def main(argv=None) -> int:
         inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
         processed = json.loads(processed_path.read_text(encoding="utf-8"))
         verify_current_sources(dossier, inventory, processed, public_item=items[0],
-                               private_registry_path=args.private_registry)
+                               private_registry_path=args.private_registry,
+                               private_topics_path=args.private_topics)
         private_key = serialization.load_pem_private_key(key_path.read_bytes(), password=None)
         if not isinstance(private_key, Ed25519PrivateKey):
             raise SigningError("ed25519_signing_key_required")

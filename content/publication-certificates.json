@@ -177,6 +177,13 @@
       "review_sha256": "83173d3e194960223060cbd0c9da989596dd5ba2aeaf9b4162c7ae7393d1f0b7",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "KjmqlYK2GWNFn0c2R57x+K2wW4ftLkpKTEv1r4K996i1xNoVNTtnwGdF1LYkGmBhLrtIfocJcB16ekYw0AtKBg=="
+    },
+    "literature:lit_kagan_meanings_psychotherapy": {
+      "schema_version": 1,
+      "item_sha256": "49516517b532bcbd32faaf3dfc02ebee452432450cfa7ea8aefcb4e6351853db",
+      "review_sha256": "0f6aa62c11009241c1c8c7284410ee091df96c509e5875e7d3a17a5e3b861251",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "i5yvkATaVLwPH/CWRldbLmPWKiERrmopEFBiG/zrhXlbEjEXqmWcy7e8q8ySkc1d9696jek0tt3WA6WgbUj0Ag=="
     }
   }
 }

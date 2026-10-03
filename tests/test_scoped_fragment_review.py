@@ -138,6 +138,34 @@ def test_private_classification_still_rejects_overlapping_conflict(tmp_path, mon
         verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=path)
 
 
+def test_private_literature_labels_bind_current_reviewed_lesson(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _, registry = private_classification_fixture(tmp_path, monkeypatch)
+    sid = dossier["sources"][0]["id"]
+    tid = "t_" + hashlib.sha256(sid.encode()).hexdigest()[:12]
+    label = {"id": tid, "title": "Exact private lesson", "discipline_id": "one"}
+    public.update(topic_id="one", curriculum_topic_ids=[tid], reviewed_curriculum_topics=[label])
+    full = {**public, "source_refs": dossier["source_refs"]}
+    for field in ("scoped_claim_review", "publication_review", "quality_review"):
+        dossier[field]["item_sha256"] = fingerprint(full)
+    topics = signer.REPO_ROOT / "data/topics.json"
+    topics.write_text(json.dumps({"schema_version": 1, "corpus_root_id": "root",
+        "disciplines": {"one": {"title": "Discipline"}}, "topics": {tid: {
+            "title": label["title"], "discipline_id": "one", "source": {
+                "source_id": sid, "modified_time": dossier["sources"][0]["modified_time"],
+                "snapshot_sha256": dossier["sources"][0]["snapshot_sha256"]}}}}), encoding="utf-8")
+    topics.chmod(0o600)
+    before = deepcopy(processed)
+    with pytest.raises(SigningError, match="private_literature_topics_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=registry)
+    verify_current_sources(dossier, inventory, processed, public_item=public,
+                           private_registry_path=registry, private_topics_path=topics)
+    assert processed == before
+    label["title"] = "Unreviewed title"
+    with pytest.raises(SigningError, match="private_literature_topics_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
+
+
 @pytest.mark.parametrize("kind", ["questions", "glossary", "literature"])
 def test_new_fragment_review_preserves_all_source_holds(tmp_path, monkeypatch, kind):
     public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch, kind=kind)

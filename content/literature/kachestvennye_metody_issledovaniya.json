@@ -698,5 +698,47 @@
       "Редакция перевода и год используемого издания не установлены."
     ],
     "notes": "Авторство и название сверены по фрагменту занятия и издательской записи. Содержание книги не использовалось для формирования вопросов."
+  },
+  {
+    "id": "lit_kagan_meanings_psychotherapy",
+    "work_id": "lit_kagan_meanings_psychotherapy",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Смыслы психотерапии",
+    "authors": [
+      "Каган В. Е."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 190,
+    "global_order": 220190,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение после вводного занятия по качественным методам: преподаватель рекомендует книгу для развития профессионального мышления и обсуждения этических оснований работы. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_5238b79de120"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_5238b79de120",
+        "title": "Практика №10. Введение в качественные методы исследования",
+        "discipline_id": "kachestvennye_metody_issledovaniya"
+      }
+    ],
+    "source": {
+      "citation": "Каган В. Е. Смыслы психотерапии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция и год используемого издания не установлены."
+    ],
+    "notes": "Авторство и название сверены по фрагменту занятия и библиотечной записи. Содержание книги не использовалось для формирования вопросов."
   }
 ]

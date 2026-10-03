@@ -121,11 +121,26 @@ def literature_curriculum_topics(entry: dict[str, Any]) -> list[dict[str, str]]:
         return []
     from app.curriculum import load_catalog
     topics = load_catalog()["topics"]
+    private_labels = entry.get("reviewed_curriculum_topics", [])
+    if (not isinstance(private_labels, list)
+            or any(not isinstance(value, dict) or set(value) != {"id", "title", "discipline_id"}
+                   or not isinstance(value["id"], str) or re.fullmatch(r"t_[0-9a-f]{12}", value["id"]) is None
+                   or not isinstance(value["title"], str) or not value["title"].strip()
+                   or value["discipline_id"] != entry.get("topic_id") for value in private_labels)
+            or len({value["id"] for value in private_labels}) != len(private_labels)
+            or any(value["id"] not in ids for value in private_labels)):
+        raise ValueError("Invalid private literature lesson labels")
+    if private_labels and ("source_refs" in entry or "source_ref" in entry
+                           or not load_policy().can_publish("literature", entry)):
+        raise ValueError("Signed private literature lesson labels required")
+    labels = {value["id"]: value for value in private_labels}
     result = []
     for value in ids:
-        topic = topics.get(value)
+        topic = topics.get(value) or labels.get(value)
         if topic is None or topic["discipline_id"] != entry.get("topic_id"):
             raise ValueError("Literature curriculum discipline mismatch")
+        if value in topics and value in labels and topic["title"] != labels[value]["title"]:
+            raise ValueError("Literature curriculum title mismatch")
         result.append({"id": value, "title": topic["title"]})
     return result
 

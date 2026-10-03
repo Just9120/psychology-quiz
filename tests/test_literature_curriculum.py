@@ -49,6 +49,39 @@ def test_bot_lesson_scope_keeps_status_pagination_and_personal_summary(monkeypat
     assert literature_chat._topic_view(items, {}, token, 0, "d", lesson_token)[0].find("Прочитано 0 из 6") >= 0
 
 
+def test_private_lesson_labels_require_signature_and_keep_source_private(monkeypatch):
+    from app import literature
+    monkeypatch.setattr(curriculum, "load_catalog", lambda: {"topics": {}})
+    label = {"id": "t_0123456789ab", "title": "Reviewed lesson", "discipline_id": "physiology"}
+    item = {"id": "book", "topic_id": "physiology", "curriculum_topic_ids": [label["id"]],
+            "reviewed_curriculum_topics": [label]}
+    class Policy:
+        allowed = True
+        def can_publish(self, kind, entry):
+            return self.allowed
+    policy = Policy()
+    monkeypatch.setattr(literature, "load_policy", lambda: policy)
+    assert literature_curriculum_topics(item) == [{"id": label["id"], "title": label["title"]}]
+    assert "reviewed_curriculum_topics" not in literature._public_literature_item(item)
+    policy.allowed = False
+    with pytest.raises(ValueError, match="Signed private"):
+        literature_curriculum_topics(item)
+    policy.allowed = True
+    for changed in ([{**label, "discipline_id": "other"}], [label, label], [{**label, "source_id": "private"}]):
+        with pytest.raises(ValueError, match="Invalid private"):
+            literature_curriculum_topics({**item, "reviewed_curriculum_topics": changed})
+
+
+def test_private_lesson_labels_cannot_rename_existing_curriculum(monkeypatch):
+    from app import literature
+    label = {"id": "t_0123456789ab", "title": "Renamed", "discipline_id": "physiology"}
+    monkeypatch.setattr(curriculum, "load_catalog", lambda: {"topics": {label["id"]: {**label, "title": "Original"}}})
+    monkeypatch.setattr(literature, "load_policy", lambda: type("Policy", (), {"can_publish": lambda *args: True})())
+    with pytest.raises(ValueError, match="title mismatch"):
+        literature_curriculum_topics({"topic_id": "physiology", "curriculum_topic_ids": [label["id"]],
+                                     "reviewed_curriculum_topics": [label]})
+
+
 def test_signed_private_bibliography_binding_cannot_be_changed_without_review():
     entries = json.loads(Path("content/literature/psychological_consulting.json").read_text(encoding="utf-8"))
     item = next(entry for entry in entries if entry["id"] == "lit_consult_lecture_01")
@@ -61,3 +94,18 @@ def test_signed_private_bibliography_binding_cannot_be_changed_without_review():
     errors = []
     validate_literature.validate_entry(changed, "tampered", item["topic_id"], {item["topic_id"]}, {}, errors)
     assert any("source_refs" in error for error in errors)
+
+
+def test_real_private_lesson_label_is_signed_and_contains_no_source_identity():
+    entries = json.loads(Path("content/literature/kachestvennye_metody_issledovaniya.json").read_text(encoding="utf-8"))
+    item = next(entry for entry in entries if entry["id"] == "lit_kagan_meanings_psychotherapy")
+    assert load_policy().can_publish("literature", item)
+    assert literature_curriculum_topics(item) == [{
+        "id": item["curriculum_topic_ids"][0],
+        "title": "Практика №10. Введение в качественные методы исследования"}]
+    assert set(item["reviewed_curriculum_topics"][0]) == {"id", "title", "discipline_id"}
+    changed = deepcopy(item)
+    changed["reviewed_curriculum_topics"][0]["title"] = "Another unreviewed lesson"
+    assert not load_policy().can_publish("literature", changed)
+    with pytest.raises(ValueError, match="Signed private"):
+        literature_curriculum_topics(changed)
