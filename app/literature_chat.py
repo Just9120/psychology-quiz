@@ -34,6 +34,10 @@ def _token(value: str) -> str:
     return sha256(value.encode("utf-8")).hexdigest()[:12]
 
 
+def _module_label(value: str) -> str:
+    return "Другое" if value == "other" else value.replace("module", "Модуль ")
+
+
 def _find(items: list[dict], token: str, key: str) -> dict | None:
     matches = [item for item in items if isinstance(item.get(key), str) and _token(item[key]) == token]
     return matches[0] if len(matches) == 1 else None
@@ -73,11 +77,11 @@ def _topics(module_token: str | None = None) -> tuple[str, InlineKeyboardMarkup 
              callback_data=f"lit:t:{_token(topic['topic_id'])}:0")]
             for topic in selected]
     if module is None and len(modules) > 1:
-        rows.extend([[InlineKeyboardButton(value["module"].replace("module", "Модуль "),
+        rows.extend([[InlineKeyboardButton(_module_label(value["module"]),
                      callback_data=f"lit:m:{_token(value['module'])}")] for value in modules])
     elif module is not None:
         rows.append([InlineKeyboardButton("Все темы и модули", callback_data="lit:topics")])
-    title = "Литература по дисциплинам" if module is None else module["module"].replace("module", "Модуль ")
+    title = "Литература по дисциплинам" if module is None else _module_label(module["module"])
     return f"<b>{escape(title)}</b>\nВыберите дисциплину, чтобы открыть список чтения.", InlineKeyboardMarkup(rows)
 
 

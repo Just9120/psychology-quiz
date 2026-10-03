@@ -282,6 +282,34 @@
       "review_sha256": "2f44778823f9915a3daeeed63a84e0443adfac14a404e24c171285e644a5bd70",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "n4469t+IHEi4CTnxx3Y/nBaRGyaHfSANZUCsXWP2X/JWsDw3vQBYhAYfGN16rTuLMAzeAQfrIMtXkGNmVjGOBw=="
+    },
+    "literature:lit_lombroso_genius_insanity": {
+      "schema_version": 1,
+      "item_sha256": "0642274dce7265a2fb7186435f305f621df8cfec59bb951e83c164cfd1c6dfee",
+      "review_sha256": "45c0babf02b358dd48019ec64b84c63c7aa110cd78bb9d1c92dc71e18316f52b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "AG2LizmEmHucAijYwNkx/m6iH8nNy2uKMWnM1tibfIelrwkoDTIoZWeCy0RSph/7Mo0wFpWZAwhA0M4RW9wMAQ=="
+    },
+    "literature:lit_loehr_schwartz_full_engagement": {
+      "schema_version": 1,
+      "item_sha256": "63a821f139c522e66650819e10080cd3037a54364f2ea1dd4cf3f395b81ed382",
+      "review_sha256": "9b689f95d02b856cd11c0fa10f2616f0ab1cc2ca3cdf4c9ae0c449c0b180853a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0CPi94RXG5/XaaweGhvJyVUUtgbkizNaDohSVmJBaY9NHQlF4rwTYNDhYra7aT50nVxXmvZEdLjectWe2VZODw=="
+    },
+    "literature:lit_covey_seven_habits": {
+      "schema_version": 1,
+      "item_sha256": "1640d400e3d40a7b3f03a62731053271391e2d606040e4d8c1bcc8162365fcc8",
+      "review_sha256": "52718fa426c50af8232fde3ea50727d8d10ce2f4ffa8a74b30038559cbbbe4ad",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "VbCEtyOBUyxpvvsiktOt4KpEb/uN0FKkvpwSET3U+ibr+/YixSHu3LG1Z33K7WmTPLBqyDqubQs/1vrAgSOTDA=="
+    },
+    "literature:lit_levine_waking_tiger": {
+      "schema_version": 1,
+      "item_sha256": "09d6406f3b919a56411e53ddd9fcdcdd4bc5e714bb90ac485ebfdfb6c832a8c5",
+      "review_sha256": "11d919293348087e8216a1243a588beeca3151b0c2747bd42c098e1801bda83b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "APzJ+cJ0pDoF1Eqyo5+J/RnyX9uKR93CiEm9ONe/2AHU+f2fFDb2Y2TUL99ADQMJeFmWQk93S9CLDR0eYgf5CQ=="
     }
   }
 }

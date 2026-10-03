@@ -222,5 +222,17 @@
       "literature"
     ],
     "source_notes": "Shared course discipline in modules 2 and 3; bibliographic metadata only, no quiz publication implied."
+  },
+  {
+    "id": "turning_point",
+    "title": "Точка поворота. 5 шагов",
+    "module": "other",
+    "question_file": null,
+    "status": "active",
+    "order": 900,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Additional course in the Drive section Other; no numbered module or quiz publication is implied."
   }
 ]

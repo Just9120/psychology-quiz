@@ -1,4 +1,5 @@
 import { BookOffers } from '../BookOffers'
+import { literatureModuleLabel } from '../literatureModule'
 import { useState } from 'react'
 import { ReadingSummary } from '../ReadingSummary'
 import { BookSearch } from '../BookSearch'
@@ -63,7 +64,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
         {uncertain && <p role="status">Сохранение не подтверждено. Сначала обновите каталог.</p>}
         <button className="button primary" type="submit" disabled={busy || uncertain}>Сохранить чтение</button>{saved && <p role="status">Отметка сохранена.</p>}
       </form></article> : <>
-      <label className="field">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic(''); setLesson('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
+      <label className="field">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic(''); setLesson('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{literatureModuleLabel(value)}</option>)}</select></label>
       <label className="field">Дисциплина литературы<select value={topic} disabled={busy} onChange={event => { setTopic(event.target.value); setLesson('') }}><option value="">Все дисциплины</option>{topics.filter(entry => !module || (entry.modules ?? [entry.module]).includes(module)).map(entry => <option key={entry.topic_id} value={entry.topic_id}>{entry.title}</option>)}</select></label>
       <label className="field">Учебная тема<select value={lesson} disabled={busy} onChange={event => setLesson(event.target.value)}><option value="">Все темы и общие книги</option><option value="general">Общие книги дисциплины</option>{lessons.map(entry => <option key={entry.id} value={entry.id}>{entry.title}</option>)}</select></label>
       <label className="field">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>

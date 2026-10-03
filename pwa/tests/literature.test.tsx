@@ -8,6 +8,19 @@ import type { LiteratureCatalog } from '../src/types'
 
 const catalog: LiteratureCatalog = { ok: true, topics: [{ topic_id: 'one', title: 'Первая тема', module: 'module1' }], works: [{ work_id: 'book', title: 'Учебная книга', authors: [], type: 'book', access_links: [], entries: [{ id: 'book', topic_id: 'one', topic_title: 'Первая тема', module: 'module1', year: null, importance: null, importance_source: null, source: { citation: 'Исходная запись' }, metadata_warnings: ['Год неизвестен'], user_state: null }] }] }
 
+it.each(['pwa', 'miniapp'])('keeps additional-course books in the Other section in %s', async client => {
+  const topics = [...catalog.topics, { topic_id: 'extra', title: 'Дополнительный курс', module: 'other' }]
+  const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }
+  const second = { ...first, id: 'extra-book', topic_id: 'extra', topic_title: 'Дополнительный курс', module: 'other', title: 'Дополнительная книга' }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [catalog.works[0], { ...catalog.works[0], work_id: 'extra-book', title: second.title, entries: [second] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
+  await userEvent.setup().selectOptions(screen.getByLabelText('Модуль литературы'), 'other')
+  expect(screen.getByRole('option', { name: 'Другое' })).toBeVisible()
+  expect(screen.getByRole('option', { name: 'Дополнительный курс' })).toBeVisible()
+  expect(screen.getByRole('button', { name: 'Дополнительная книга' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
+})
+
 it.each(['pwa', 'miniapp'])('finds cross-module disciplines and keeps exact book membership in %s', async client => {
   const topics = [{ ...catalog.topics[0], modules: ['module1', 'module3'] }]
   const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }

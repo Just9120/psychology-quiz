@@ -1,0 +1,87 @@
+[
+  {
+    "id": "lit_loehr_schwartz_full_engagement",
+    "work_id": "lit_loehr_schwartz_full_engagement",
+    "topic_id": "turning_point",
+    "module": "other",
+    "title": "Жизнь на полной мощности",
+    "authors": [
+      "Лоэр Д.",
+      "Шварц Т."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 10,
+    "global_order": 900010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Прикладное дополнительное чтение после урока об энергии и контроле в курсе «Точка поворота»: преподаватель прямо рекомендует книгу. Этап и значимость — рекомендация агента; курс находится в разделе «Другое» и не относится к нумерованным модулям. Рекомендация не подтверждает все медицинские или физиологические утверждения книги.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_45e69d90b32c"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_45e69d90b32c",
+        "title": "Урок 2 Где я теряю энергию и контроль",
+        "discipline_id": "turning_point"
+      }
+    ],
+    "source": {
+      "citation": "Лоэр Д., Шварц Т.. Жизнь на полной мощности"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_covey_seven_habits",
+    "work_id": "lit_covey_seven_habits",
+    "topic_id": "turning_point",
+    "module": "other",
+    "title": "Семь навыков высокоэффективных людей",
+    "authors": [
+      "Кови С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 20,
+    "global_order": 900020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Прикладное дополнительное чтение после урока об энергии и контроле: работа названа при обсуждении кругов контроля и влияния. Этап и значимость — рекомендация агента; обязательного порядка между этой книгой и другими преподаватель не устанавливает.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_45e69d90b32c"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_45e69d90b32c",
+        "title": "Урок 2 Где я теряю энергию и контроль",
+        "discipline_id": "turning_point"
+      }
+    ],
+    "source": {
+      "citation": "Кови С.. Семь навыков высокоэффективных людей"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  }
+]
