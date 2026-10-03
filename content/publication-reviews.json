@@ -1937,7 +1937,7 @@
     },
     "literature:lit_634fbb9e1e821b8a": {
       "decision": "approved",
-      "item_sha256": "429b210e80da80b4c2fffda118f81632ccc246663d9849cc1c66fd8a4272802f",
+      "item_sha256": "7f37a5ac29c96ca0b4243a4dac042292c461c44701bc0a57b6d3181e98a622af",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1952,17 +1952,23 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://rusneb.ru/catalog/000199_000009_009995403/",
         "evidence_scope": "Indexed NEB collective record confirms six-volume collected works published 1982–1984; separate NEB volume 4 record identifies child psychology, 1984. Course 1984 reference retained; no full collection or page review, no equivalence to a single volume.",
         "sequence": "Agent recommendation: lecture introduction before university developmental textbook; collected works used as selective primary references; author trauma book after attachment background. No compulsory teacher sequence.",
         "limitations": "Existing author/editor citations, source snapshots, IDs, years, warnings and personal state unchanged. No full-text certification, scientific validation or therapeutic recommendation.",
         "additional_primary_record": "https://rusneb.ru/catalog/000199_000009_001192105/"
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_8c7e7daa0a5aa779": {
       "decision": "approved",
-      "item_sha256": "62c8bb0573625cde163ca605ee19a3379749b0bdde6bffa9b2d297e922c10810",
+      "item_sha256": "fe34f32d1e198a55fdd3fce727d4f6b0f46c575e4c1e5c7f67284792b1102f59",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -1977,16 +1983,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://search.rsl.ru/ru/record/01002676440",
         "evidence_scope": "National library 2005 record read: matching author/title/year, university study aid and systematic basic-theory description. Full text not read.",
         "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
         "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_d5aee85ddf3b94c4": {
       "decision": "approved",
-      "item_sha256": "c178430b8b9ef87548f07a934795ab2b0fc3f28906d9123ff3ea366648d12b49",
+      "item_sha256": "c2b32e132ac2dab869d876e1f33d236eb43174edb2ed59c1c122d858cb7b389e",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2001,16 +2013,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://library.omsu.ru/cgi-bin/irbis64r/cgiirbis_64.exe?C21COM=S&I21DBN=IBIS_PRINT&LNG=ru&P21DBN=IBIS&S21CNR=&S21FMT=fullw_print&S21P01=0&S21P02=0&S21P03=S%3D&S21REF=&S21STN=1&S21STR=%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F+%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D1%8F&Z21ID=)",
         "evidence_scope": "Indexed Omsk State University library record matches third stereotyped edition, Academia 2007, university psychology textbook with Marцinkovskaya as editor and collective authors. Scope inferred from verified bibliographic type/subject, not full-text review.",
         "sequence": "Agent recommendation: lecture introduction before university developmental textbook; collected works used as selective primary references; author trauma book after attachment background. No compulsory teacher sequence.",
         "limitations": "Existing author/editor citations, source snapshots, IDs, years, warnings and personal state unchanged. No full-text certification, scientific validation or therapeutic recommendation."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_c9f5f2a72f8ab645": {
       "decision": "approved",
-      "item_sha256": "dce06cb1430c53519ab0ab7cfd5ec1a2aec8d769022989aecfb7a9eadcbaab30",
+      "item_sha256": "77ea91f3d7af44631b0375903f96571e8b8d2aa09166300706a50b1063141bbc",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2025,16 +2043,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/A19795/product/psihologiya-razvitiya-9-e-izd-2",
         "evidence_scope": "Indexed official publisher ninth-edition card matches Craig/Baucum and broad developmental scope. Direct fetch failed; course edition/year unspecified, full text not reviewed.",
         "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
         "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_5c4001030a94d65d": {
       "decision": "approved",
-      "item_sha256": "81ab86992581cf29e8b1fdbb1fb9caf468e82d5407f187afaa9062610440584b",
+      "item_sha256": "8aa17f64ca3e7f71fefec4a630b8ac50d5af6c18d88ee14e07bf1357346fb270",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2049,16 +2073,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/A33780/product/vyhod-iz-detskoy-travmy-obnyat-vnutrennego-rebenka-2",
         "evidence_scope": "Indexed official Piter publisher description matches Maria Osipova and topic of early trauma/attachment, including practitioner audience. Direct fetch failed; course edition/year unspecified and full text not reviewed. Publisher therapeutic claims not adopted.",
         "sequence": "Agent recommendation: lecture introduction before university developmental textbook; collected works used as selective primary references; author trauma book after attachment background. No compulsory teacher sequence.",
         "limitations": "Existing author/editor citations, source snapshots, IDs, years, warnings and personal state unchanged. No full-text certification, scientific validation or therapeutic recommendation."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_677867857cce3e89": {
       "decision": "approved",
-      "item_sha256": "454e8febf36269d04fc051af5baff012440332ceedf78c2d0991c8bb1074cc00",
+      "item_sha256": "7c5ab796d1e6a056dbea364d4efc7f3cb79cdd26edfaffdb42c7bcd0b921d16d",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2073,16 +2103,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://ast.ru/book/taynaya-opora-privyazannost-v-zhizni-rebenka-719902/",
         "evidence_scope": "Indexed official publisher card matches Petranovskaya/title and popular-parenting attachment scope. Direct fetch failed. Exact course edition/full text and clinical efficacy not established.",
         "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
         "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_702e5c3a28977b88": {
       "decision": "approved",
-      "item_sha256": "0251464620c2edc2125608db81c8ed9cd0894eee2c9d7fbe8b0d77a745775445",
+      "item_sha256": "2644a471ca555197e5da7fbdb9b6e9ad5d1af1f50c14e1f8977b856ccbe3ef2b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2097,16 +2133,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/psihologiya-razvitiya-i-vozrastnaya-psihologiya/product/psihologiya-podrostkovogo-i-yunosheskogo-vozrasta-12-e-izd",
         "evidence_scope": "Official publisher twelfth-edition card read; matching Rice/Dolgin, theory/research/methodology of adolescence and youth. Course edition/year unspecified; no full text or measured difficulty review.",
         "sequence": "Agent recommends basic lecture overview, broader developmental textbook, then focused adolescent or popular-parenting additions. Not a compulsory teacher/author order.",
         "limitations": "Existing work identity, source snapshots, bibliography and personal states unchanged. Not a scientific certification, therapeutic recommendation or complete text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_57ba3a9bf5d4ff18": {
       "decision": "approved",
-      "item_sha256": "18b2813b2f053a1e782ba7e9f188b15aeda4b1b267ead4861b47a9392ec13405",
+      "item_sha256": "d5b006f8782872c7cb1ac20fbcda8099d42222424ddd706100095273e0c74b26",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2121,16 +2163,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://search.rsl.ru/ru/record/01001857176",
         "evidence_scope": "Primary RSL 2003 record describes child-to-mother attachment and scholarly/student audience. Course edition unspecified; no full-text review.",
         "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
         "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_b76317a4d7bec59d": {
       "decision": "approved",
-      "item_sha256": "3ceb5804c1f3a5621ece80e6624b599512635bf51f0e4ee9aa30f30c6c973456",
+      "item_sha256": "78e02f8c6d671122feebdea2278aa302d89994db285c086da67628b0dfbe4223",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2153,16 +2201,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=260897&lang=Ru&page=Book",
         "evidence_scope": "URSS bibliographic card and contents identify seven lectures on attachment, separation and loss. Course edition unspecified; possible subtitle duplicate retained with warning; no full-text review.",
         "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
         "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_d679ea65152d4922": {
       "decision": "approved",
-      "item_sha256": "c444e9b220f3b498fad9764dd516a248d9cac73996983902356120b898586274",
+      "item_sha256": "0603359c919bf194f9a1bf0cc74ba2f911f68bf5fa02e20337a1c60cdfa6029b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2181,11 +2235,17 @@
         "evidence_scope": "URSS catalogue identifies the phrase as a subtitle of Bowlby emotional bonds, 2026 edition. The current course PDF text lists it as a separate bullet without author. Exact course edition and visual PDF layout not verified.",
         "source_read": "Authenticated current course PDF text fetch on 2026-09-30; modified_time 2026-08-30T19:32:28.269Z matches existing source record. Extraction evidence only.",
         "limitations": "Candidate duplicate only. No identity merge, source citation change, role assignment or personal reading-state change."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_3ecf3ffbaa287019": {
       "decision": "approved",
-      "item_sha256": "02e14d2cbdbebcd8de8ac838fd752c26ebb8fca8be4c056e93a1ee816004dc5c",
+      "item_sha256": "825d431326007fd1f3bc998f5abb18c5a48d35dbf0c951567907f6c09ed7b6bd",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2200,16 +2260,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/all/product/rebenok-semya-i-vneshniy-mir",
         "evidence_scope": "Indexed official publisher description identifies parental concerns and pediatric, psychiatric and psychoanalytic perspectives. Direct reread failed; NEB record confirms title/author for 2016 translation. Course edition unspecified; no full-text review.",
         "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
         "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_6f18559891d319c1": {
       "decision": "approved",
-      "item_sha256": "956e07ecce38e3199eccff056feeac37073c822968daac53eaf5de3df1a8b801",
+      "item_sha256": "836ac0d362c22e555b1cf2c1c353304541d863a42261e02f8ce254eebe851766",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-20",
@@ -2224,11 +2290,17 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.studentlibrary.ru/ru/book/ISBN9785731209977.html",
         "evidence_scope": "Indexed licensed electronic library description identifies collected articles tracing child development and treatment views, 2022 corrected edition. Direct fetch failed; course edition unspecified; no full-text review.",
         "sequence": "Agent recommends general developmental overview before attachment theory and collected lectures; introductory Winnicott before specialized collected articles. Not compulsory teacher/author order.",
         "limitations": "Existing bibliography, source snapshots, warnings, identities and personal states unchanged. No clinical treatment recommendation, scientific certification or full-text review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-03T23:53:12+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Full one-page course PDF visually read: first 3 entries basic, remaining 9 additional. Identity, unknown editions, agent sequence and reading role unchanged.",
+        "private_receipt": "data/goal-three-more-bibliographies-review-20261004.json"
       }
     },
     "literature:lit_caa8d94a943aae0d": {
