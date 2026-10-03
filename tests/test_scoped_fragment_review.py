@@ -7,6 +7,28 @@ import pytest
 from app.content_publication import fingerprint
 from scripts import sign_private_publication as signer
 from scripts.sign_private_publication import SigningError, verify_current_sources
+from scripts.source_conflict import record_conflict
+from scripts.source_finalize import finalize
+
+
+def test_later_hold_keeps_captured_edition_for_independent_fragment_review(tmp_path, monkeypatch):
+    public, dossier, inventory, pending, path = fragment_fixture(tmp_path, monkeypatch, state="pending_review")
+    source_id = "synthetic_source"
+    completed = finalize(inventory, pending, source_id, path, reviewer="reviewer",
+                         review_note="Reviewed captured edition", reviewed_at="2026-09-28T00:00:00Z")
+    held = record_conflict(inventory, completed, source_id, reason="Disputed second sentence",
+                           locator="characters:16:30", related_source_ids=[],
+                           reviewed_at="2026-09-29T00:00:00Z")
+    before = deepcopy(held)
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(held[source_id])
+    verify_current_sources(dossier, inventory, held, public_item=public)
+    assert held == before and held[source_id]["review_state"] == "conflict"
+    assert held[source_id]["previous_processed_review"] == completed[source_id]
+    overlapping = deepcopy(held)
+    overlapping[source_id]["locator"] = "characters:0:30"
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(overlapping[source_id])
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, overlapping, public_item=public)
 
 
 def fragment_fixture(tmp_path, monkeypatch, *, state="conflict", kind="questions"):

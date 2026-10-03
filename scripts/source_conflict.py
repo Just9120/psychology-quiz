@@ -74,6 +74,13 @@ def record_conflict(current: dict, prior: dict, source_id: str, *, reason: str,
         # A later editorial hold revokes approval, but must not erase the
         # evidence for the review that preceded it.
         record["previous_processed_review"] = previous
+        # Editorial approval is revoked, but the unchanged captured edition
+        # remains the evidence for locating held and independent fragments.
+        # Keeping it only inside history made current fragment verification
+        # impossible even when the caller supplied the exact same bytes.
+        for field in ("snapshot_kind", "snapshot_sha256", "extraction_profile"):
+            if field in previous:
+                record[field] = previous[field]
     elif (isinstance(previous, dict) and previous.get("review_state") == "pending_review"
           and previous.get("revision") == revision):
         # Keep the exact capture evidence while withholding editorial approval.

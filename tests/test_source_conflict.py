@@ -63,6 +63,8 @@ def test_later_conflict_retains_prior_processed_review_evidence():
                            reviewed_at="2026-09-27T08:00:00Z")
     assert held["transcript"]["review_state"] == "conflict"
     assert held["transcript"]["previous_processed_review"] == previous["transcript"]
+    assert held["transcript"]["snapshot_kind"] == "file_bytes"
+    assert held["transcript"]["snapshot_sha256"] == "a" * 64
     assert processing_status(_snapshot(inventory), held)["transcript"] == "conflict_review"
 
 
