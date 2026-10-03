@@ -290,7 +290,11 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
             private_registry = private_registry_input(private_registry_path, REPO_ROOT)
             registry = combine_registries(registry, private_registry)
             curriculum = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
-            reviewed_graph(snapshot, registry, curriculum)
+            classification_catalog = curriculum
+            if private_topics_path is not None:
+                classification_catalog = combine_private_topics(
+                    curriculum, private_topics_input(private_topics_path, REPO_ROOT), private_registry)
+            reviewed_graph(snapshot, registry, classification_catalog)
             private_ids = {source["id"] for source in private_registry["sources"]}
         labels = (public_item or {}).get("reviewed_curriculum_topics", [])
         if labels:

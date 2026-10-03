@@ -219,6 +219,20 @@
       "review_sha256": "c314ac012f881a47b0c2b00f24d3fea14c16eb2be8301e5ef90ae6dec9c5ee60",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "YghEgC8XSbgfpJZ5H1H1N+kAmexd3b87kYZ/Eg3W/QKL7yG7lk1QYzcxgSMX0gDsZbWjBUOV3qHJhNbIJoFLBw=="
+    },
+    "literature:lit_frankl_man_search_meaning": {
+      "schema_version": 1,
+      "item_sha256": "73c350b708d64697661efc9e51487c49c1f797dfb5f6245593e80cd35ec15594",
+      "review_sha256": "62256fc41a7556697d56a0e3d1a986bb62155521b7ed3c5e4458810cb7fa5d7b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "30O2eXHarc6BoqfUlBNQju33XYzAcdpWZdva5iDcV0b4Vi4Ce1dUi0fqd1hQjbIc7qExWWs6GXN9R1Evq8RnDw=="
+    },
+    "literature:lit_huizinga_homo_ludens": {
+      "schema_version": 1,
+      "item_sha256": "f0f56bc96925fa0f13eb51cf14b7cb474e5483c6fbd9e3d335069171e378a48c",
+      "review_sha256": "768ff37ebcf3432f1aa6d092121b801d198646e98a040c2f47eb3015724877be",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "yI11KGYBZTJYpa/ZK/q59mhW38uuebAB/B/iyzwcX5uLYjc9zWdzVgytOrcHE2sbmUB9hVD3/pG7DFkzLZG2CQ=="
     }
   }
 }

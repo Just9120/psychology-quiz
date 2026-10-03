@@ -138,6 +138,29 @@ def test_private_classification_still_rejects_overlapping_conflict(tmp_path, mon
         verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=path)
 
 
+def test_private_classification_resolves_unpublished_discipline_before_graph_validation(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _, registry = private_classification_fixture(tmp_path, monkeypatch)
+    document = json.loads(registry.read_text(encoding="utf-8"))
+    document["sources"][0]["discipline_id"] = "unpublished"
+    registry.write_text(json.dumps(document), encoding="utf-8")
+    topics = signer.REPO_ROOT / "data/topics.json"
+    topics.write_text(json.dumps({"schema_version": 1, "corpus_root_id": "root",
+        "disciplines": {"unpublished": {"title": "Private discipline"}}, "topics": {}}), encoding="utf-8")
+    topics.chmod(0o600)
+    before = deepcopy(processed)
+    with pytest.raises(SigningError, match="invalid_private_inventory"):
+        verify_current_sources(dossier, inventory, processed, public_item=public,
+                               private_registry_path=registry)
+    verify_current_sources(dossier, inventory, processed, public_item=public,
+                           private_registry_path=registry, private_topics_path=topics)
+    assert processed == before
+    document["sources"][0]["discipline_id"] = "unknown"
+    registry.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(SigningError, match="invalid_private_inventory"):
+        verify_current_sources(dossier, inventory, processed, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
+
+
 def test_private_literature_labels_bind_current_reviewed_lesson(tmp_path, monkeypatch):
     public, dossier, inventory, processed, _, registry = private_classification_fixture(tmp_path, monkeypatch)
     sid = dossier["sources"][0]["id"]
