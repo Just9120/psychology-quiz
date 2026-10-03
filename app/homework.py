@@ -51,6 +51,14 @@ def load_catalog() -> tuple[dict, ...]:
         for field in ("title", "module", "description"):
             if not isinstance(item[field], str) or not item[field].strip() or len(item[field]) > 300:
                 raise ValueError("Invalid homework text")
+        discipline = curriculum["disciplines"][item["discipline_id"]]
+        modules = discipline.get("modules", [discipline.get("module")])
+        allowed_labels = {module.replace("module", "Модуль ") for module in modules
+                          if isinstance(module, str) and module}
+        if not allowed_labels and discipline.get("modules") == [] and discipline.get("module") is None:
+            allowed_labels = {"Другое"}
+        if item["module"] not in allowed_labels:
+            raise ValueError("Homework module does not match curriculum")
         questions = item["question_ids"]
         if not isinstance(questions, list) or len(questions) < 5 or len(set(questions)) != len(questions):
             raise ValueError("Invalid homework question set")
