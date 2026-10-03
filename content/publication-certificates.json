@@ -341,10 +341,10 @@
     },
     "literature:lit_rybina_muradyan_coach_turning_point": {
       "schema_version": 1,
-      "item_sha256": "cbdf503e37c5918082ab196df9e9144ad060440ed29d2242a8137634b6416225",
-      "review_sha256": "c4e4abcb898409e802b4450195325a446c5ce9468b53c810b3facb857f5d5c6b",
+      "item_sha256": "c58068e644ad564cc6ec03f6965de335929d4cf7fb0a4c2de225c7e8515e88ad",
+      "review_sha256": "9fe574ac0435b832b5df0c8bac544f58717f1d688ffcb7589de398ad5376569a",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "H6zkYXmVkNvCJJc5q7uoCo3ct+0XS6QsyzXvXTBgzi3rLBCpb3YcmlEBR/CrIw3UxpDXi80oR638uH7kXhGFCg=="
+      "signature": "E9C72QTogELLYnego6j3Gs5RaI71EifcAJyNBOFrNZpwl9ArzV/INcEQEu3MLryzDqJMxVJyiZNwrCBsSS87Cg=="
     },
     "literature:lit_masterstvo_psychological_counseling": {
       "schema_version": 1,
@@ -355,10 +355,10 @@
     },
     "literature:lit_rybina_muradyan_coach_psycholinguistics": {
       "schema_version": 1,
-      "item_sha256": "82e3b3bfb66ed0a48cd6529cfb022dcd6111989e7a555c4a284c5e07a40d41df",
-      "review_sha256": "c4036550be5b09e147caa3cc341f24c77f836170d364675a32c4407e95e9cb51",
+      "item_sha256": "0bc55c2dbfedbafeb8671c64db7adb0081836632d6f064ec43c95ed8a93de1e2",
+      "review_sha256": "e97a3fc6e1f26d5191671f6dee6b1f2ebf0674235297e7b4f11063c7a5ea9e0b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "JyxLz3r6z7NOD0oPDBRMbbzPy0fZPSMO2EyOhrdO70oAqQoA+RRMGiDiEhpVEz95TbZmcn99AJRRcuR2P1FwAQ=="
+      "signature": "GLlEr23Cam5rnVqO/t+YXV0O/1+v9KUbgk+lImDII9MJ4EsYgmKWZIHNTqiGULwxsNmQO5a/ymyRxL2UqNraCg=="
     },
     "literature:lit_muradyan_atlant_game_turning_point": {
       "schema_version": 1,
@@ -376,10 +376,10 @@
     },
     "literature:lit_zatulovski_everyday_cybernetics": {
       "schema_version": 1,
-      "item_sha256": "4b745c7ceb5acd135c43c2bea4e3b28a5ac78a5026c7bbfa4783344282a1d3dd",
-      "review_sha256": "6326bbb168ae7658f7bb28ce52f7ecbb702fbedb5e7cfc2cfd8da94de0776ec2",
+      "item_sha256": "c85d066b07130afff24e1a695d7fafffdfad1ce99d88c9069468c9a70026f5b8",
+      "review_sha256": "eb0593ec60af461f5a62bd9a3571c511b02370c949f29ee557e0f170c93697d9",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "cFBonVbsr9vESP+TflJh6P0WkqpxPZLcTRfc7w5FZy+7+IauogSk1OJ3u7tIDfT3fI87fDKx5+v6KSWH+Wx3BQ=="
+      "signature": "RRoa6HgW+n6395CN9bTsQXD61IbtjO0qXlawWLQBX6qZxAY07ZAPT3y3yeIcZs1C502hooQnIfNE9LIh1PitCw=="
     },
     "literature:lit_course_mention_psychiatry_disasters": {
       "schema_version": 1,
@@ -404,17 +404,17 @@
     },
     "literature:lit_salinger_catcher_rye": {
       "schema_version": 1,
-      "item_sha256": "f8b04a0212e58bacb57f2a471fde461f3bf5d50a6f46040d2f04ac86749975e5",
-      "review_sha256": "ea1bde4b45345f3252a0a7439e7e6532d6b3b46c26638ef8e081416b7ab92b63",
+      "item_sha256": "8f6bb61b1d84d1e4477b9bc9f72ffed0a86c211649db6919f8a00705e0b91e85",
+      "review_sha256": "11ffa8d5e8ad59635bf3bc3d305917f4b070488168c0b4b562a3fb0b4f83511e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "CILE+1Y4J5PKoDddO1OKXkwvB9aWpav/SGOcjPV5It0+3aMHEJ6rW1/ss9nMK/kBCB6zShdaRFT/rquBe6HoAw=="
+      "signature": "/vzxCoLZv75awZn8K3eJP9x+2ybOrWbrHCG0YzWFjij1i4wow67lKfJEE3xOlEQUoskHAxGeC8ecK2g/YDJwDg=="
     },
     "literature:lit_remarque_black_obelisk": {
       "schema_version": 1,
-      "item_sha256": "9f972508f5fd30e4dff08a4a5380bd864342130d8d0862ea6a10b7bcbacbfe98",
-      "review_sha256": "18a0e6232d0e0d92441b2eb6865d2f795e0f31e49cfed5ef4d6fd82ac10ce6c1",
+      "item_sha256": "fa3a7cfe0a1ffa55ced3412f991cbe57ded3a34b56bece29bbb1e03294893c0c",
+      "review_sha256": "75a2bcde03c8784344abf79b157441d2a12a692d3c965454d90335f59c21941f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "I65HhHLNRum77G760o8vuSxwp4+sG4T7H5qSAN8YT49Dx/Yb6TWnAIBLKiv6n95Fz9CtQ2G3Aj7UtQUE0tzODA=="
+      "signature": "qCsWu/rk8LrT2RHH3w+aM3asMayPKvvKFXxv6y2GaoMA5rMi1hNF+ZPzkLHDTgmlMCCl8VtpyuaZdicIPDDyCA=="
     },
     "literature:lit_butler_bowdon_eysenck_overview": {
       "schema_version": 1,
