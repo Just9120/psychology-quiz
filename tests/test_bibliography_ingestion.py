@@ -80,3 +80,28 @@ def test_empty_extract_does_not_mark_source_as_read(raw):
                "snapshot_sha256": hashlib.sha256(raw).hexdigest()}
     with pytest.raises(InventoryError, match="empty_capture_not_read"):
         discover_bibliography(snapshot, [capture], [])
+
+
+@pytest.mark.parametrize("newline", ["\n", "\r\n"])
+def test_wrapped_unknown_titles_preserve_raw_spans_and_remain_pending(newline):
+    title = f"Неизвестная учебная{newline}книга"
+    second = f"Другое длинное{newline}название"
+    text = (f"Рекомендую книги{newline}«{title}», «{second}». "
+            'Он сказал: «Спасибо за участие». '
+            f'Упоминание книги завершено.{newline}{newline}«Отдельная реплика».')
+    raw = text.encode("utf-8")
+    revision = ["2026-10-03", "Slides", "application/pdf"]
+    snapshot = {"files": {"source": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"source": [["Module", "Slides"]]}}
+    capture = {"source_id": "source", "content": raw, "revision": revision,
+               "snapshot_sha256": hashlib.sha256(raw).hexdigest()}
+    result = discover_bibliography(snapshot, [capture], [])
+    assert [item["title_candidate"] for item in result["mentions"]] == [title, second]
+    for item in result["mentions"]:
+        start, end = map(int, item["locator"].split(":")[1:])
+        assert text[start:end] == item["title_candidate"]
+        assert item["snapshot_sha256"] == capture["snapshot_sha256"]
+        assert item["revision"] == revision
+        assert item["candidate_work_ids"] == []
+        assert item["decision"] == "pending_review"
+    assert result["publication_approval"] is False
