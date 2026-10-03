@@ -380,6 +380,13 @@
       "review_sha256": "6326bbb168ae7658f7bb28ce52f7ecbb702fbedb5e7cfc2cfd8da94de0776ec2",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "cFBonVbsr9vESP+TflJh6P0WkqpxPZLcTRfc7w5FZy+7+IauogSk1OJ3u7tIDfT3fI87fDKx5+v6KSWH+Wx3BQ=="
+    },
+    "literature:lit_course_mention_psychiatry_disasters": {
+      "schema_version": 1,
+      "item_sha256": "8dd451628f0e1a6ebdc57fbefd4f079d60430db8e2775996a0fc950d5a582f98",
+      "review_sha256": "28de4fbbec0da89c8305920379be8a464c06a0e67d0bf627cff1991d25f4343e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "8Qrf0nyQQ5Xfj3KfWcDD8JpdUQpU+jgYb2P7wnzf18kqBT68bq+52o3YeNmHAMHGtabi5VSSx9PpeaHn3W4fCw=="
     }
   }
 }
