@@ -16,6 +16,26 @@ READING_QUOTE = re.compile(
     r'(?:книг[а-я]*|учебник[а-я]*|пособи[а-я]*|монографи[а-я]*|прочита[а-я]*|литератур[а-я]*)'
     r'[^\n]{0,120}?[«“"](?P<title>[^»”"\n]{3,200})[»”"]', re.IGNORECASE)
 
+QUOTED_TITLE = re.compile(r'[«“"](?P<title>[^»”"\n]{3,200})[»”"]')
+TITLE_SEPARATOR = re.compile(r'[\s,;]*(?:(?:и|или|а также)[\s,;]+)?', re.IGNORECASE)
+
+
+def _book_quotes(text: str):
+    """Keep adjacent titles in a book list, without interpreting later dialogue."""
+    for first in READING_QUOTE.finditer(text):
+        yield first.span("title"), first.group("title")
+        end = first.end()
+        while True:
+            separator = TITLE_SEPARATOR.match(text, end)
+            # Only a bounded list separator may connect another quoted title.
+            if separator.end() - end > 80:
+                break
+            following = QUOTED_TITLE.match(text, separator.end())
+            if following is None:
+                break
+            yield following.span("title"), following.group("title")
+            end = following.end()
+
 
 def _title_pattern(title: str):
     # Keep offsets in the exact captured text; do not normalize the source.
@@ -55,10 +75,9 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
         for pattern, work_ids in known:
             for match in pattern.finditer(text):
                 found[match.span()] = (match.group(), work_ids)
-        for match in READING_QUOTE.finditer(text):
-            bounds = match.span("title")
+        for bounds, title in _book_quotes(text):
             if not any(start <= bounds[0] and bounds[1] <= end for start, end in found):
-                found[bounds] = (match.group("title"), [])
+                found[bounds] = (title, [])
         for (start, end), (title, work_ids) in sorted(found.items()):
             mentions.append({
                 "source_id": source_id, "revision": list(_revision(source)),

@@ -7,6 +7,24 @@ from app.bibliography_ingestion import discover_bibliography
 from app.source_inventory import InventoryError
 
 
+def test_adjacent_books_in_wrapped_list_keep_exact_offsets_without_later_dialogue():
+    text = ('Автор книг «Первая книга»,\n«Вторая книга» и «Третья книга». '
+            'Он сказал: «Спасибо за участие».')
+    raw = text.encode("utf-8")
+    revision = ["2026-10-03", "Slides", "application/pdf"]
+    snapshot = {"files": {"source": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"source": [["Module", "Slides"]]}}
+    result = discover_bibliography(snapshot, [{"source_id": "source", "content": raw,
+        "revision": revision, "snapshot_sha256": hashlib.sha256(raw).hexdigest()}], [])
+    assert [item["title_candidate"] for item in result["mentions"]] == [
+        "Первая книга", "Вторая книга", "Третья книга"]
+    for item in result["mentions"]:
+        start, end = map(int, item["locator"].split(":")[1:])
+        assert text[start:end] == item["title_candidate"]
+        assert item["candidate_work_ids"] == [] and item["decision"] == "pending_review"
+    assert result["publication_approval"] is False
+
+
 def test_recursive_multiformat_mentions_are_private_pending_and_preserve_catalogue():
     catalogue = [{"id": "association", "work_id": "work", "title": "Учебная книга"}]
     before = deepcopy(catalogue)
