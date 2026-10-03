@@ -77,7 +77,8 @@
     "order": 210,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from static source-backed content/glossary JSON."
   },

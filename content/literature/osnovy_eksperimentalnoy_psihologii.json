@@ -1,0 +1,40 @@
+[
+  {
+    "id": "lit_kuhn_structure_scientific_revolutions",
+    "work_id": "lit_kuhn_structure_scientific_revolutions",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "module": "module2",
+    "title": "Структура научных революций",
+    "authors": [
+      "Кун Т. С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 10,
+    "global_order": 210010,
+    "estimated_minutes": null,
+    "tags": [
+      "philosophy_of_science",
+      "methodology"
+    ],
+    "why_read": "Дополнительное чтение после занятия «Предмет и метод психологии»: философский контекст научных парадигм и изменения исследовательских подходов. Рекомендация агента; книга не заменяет учебник экспериментальных методов.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_7a8e0286a42d"
+    ],
+    "source": {
+      "citation": "Кун, Т. С. Структура научных революций"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Автор и название сверены по упоминанию в занятии; оригинальная библиографическая идентичность дополнительно проверена по издательскому описанию. Содержание книги не использовалось для формирования вопросов."
+  }
+]

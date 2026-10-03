@@ -11,9 +11,9 @@ from scripts import validate_literature, validate_topics
 
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 143
-    assert len({item['work_id'] for item in items}) == 126
-    assert len({item['topic_id'] for item in items}) == 12
+    assert len(items) == 144
+    assert len({item['work_id'] for item in items}) == 127
+    assert len({item['topic_id'] for item in items}) == 13
     assert all(set(item['source']) == {'citation'} for item in items)
     assert all(item['source']['citation'] for item in items)
     legacy_ids = {key.split(':', 1)[1] for key in load_policy().legacy if key.startswith('literature:')}

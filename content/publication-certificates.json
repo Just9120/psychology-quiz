@@ -156,6 +156,13 @@
       "review_sha256": "3fa135a3ba8bcfcc545252af8ca73dc00976cc942fc4db67289bd7b0b3465ab4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "Rhd3hLJcsS59ksukjVJWEFDFLWPzsmuia3J9fWQXfkrygqJCH5xAUBH0cU8fZmmqjw+nFbYCeZeoySkE0L+9AA=="
+    },
+    "literature:lit_kuhn_structure_scientific_revolutions": {
+      "schema_version": 1,
+      "item_sha256": "816439402af7e67ba6840f30728105af39a66656f70fa86edb83fcb3c45adaf2",
+      "review_sha256": "1c4b753f419eaf28f329e4dcd7a34f1aa469f0e4ae0de15a5061875c0dbbbd57",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "l28BN5eLXzLLIHaRJ2f0q0Dnba17xE4pvjoDWHxWTeI7dSqDL/SBd0wShZmzjUtBQ7bseNSAr2rnWUzqUVWFBg=="
     }
   }
 }
