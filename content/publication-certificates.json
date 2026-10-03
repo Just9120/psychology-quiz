@@ -331,6 +331,20 @@
       "review_sha256": "1b3bd05a34b8043ff87417a3f102820bb5ee820907f389ab21005644f7f3cb51",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "VOWo2RhZ/XBqXi2Ge4hyV1rokh2zv82JG1z5m/zYMXpiCnJfKkbTZKCnVVoQdCjI34hHQQepBjM16p/0fY4/AQ=="
+    },
+    "literature:lit_rybina_muradyan_coach": {
+      "schema_version": 1,
+      "item_sha256": "b289930564ac241b1562b4ce78db4478568c6699cfdedcb78609569876361668",
+      "review_sha256": "4c17b145903514dbe838ee441129f393776241854a366ae37011436a0e231d9a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XwY1pg+B2nZ6let2WiHFcXim+S7Jmy2Zkv/1JGKtXKWKc1xGzG6zSOk2D3OzEaukOnAwLBBDQCEJXGEAiqFHCw=="
+    },
+    "literature:lit_rybina_muradyan_coach_turning_point": {
+      "schema_version": 1,
+      "item_sha256": "cbdf503e37c5918082ab196df9e9144ad060440ed29d2242a8137634b6416225",
+      "review_sha256": "c4e4abcb898409e802b4450195325a446c5ce9468b53c810b3facb857f5d5c6b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "H6zkYXmVkNvCJJc5q7uoCo3ct+0XS6QsyzXvXTBgzi3rLBCpb3YcmlEBR/CrIw3UxpDXi80oR638uH7kXhGFCg=="
     }
   }
 }

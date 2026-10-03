@@ -1,0 +1,45 @@
+[
+  {
+    "id": "lit_rybina_muradyan_coach",
+    "work_id": "lit_rybina_muradyan_coach",
+    "topic_id": "personal_brand",
+    "module": "other",
+    "title": "Делай как коуч",
+    "authors": [
+      "Рыбина О.",
+      "Мурадян Ю."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 10,
+    "global_order": 910010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное прикладное чтение к вебинару «Метод 5 Prism»: авторы предлагают книгу для знакомства со своим подходом к коучингу. Этап и значимость предложены агентом, обязательность в программе не установлена. Отделяйте авторскую методику и рекламные утверждения от проверенных научных знаний.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_479561392d36"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_479561392d36",
+        "title": "Вебинар «Метод 5 Prism»",
+        "discipline_id": "personal_brand"
+      }
+    ],
+    "source": {
+      "citation": "Рыбина О., Мурадян Ю.. Делай как коуч"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  }
+]

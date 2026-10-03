@@ -21,15 +21,20 @@ def test_topic_module_membership_requires_primary_module_and_unique_course_modul
 
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 168
-    assert len({item['work_id'] for item in items}) == 149
-    assert len({item['topic_id'] for item in items}) == 16
+    assert len(items) == 170
+    assert len({item['work_id'] for item in items}) == 150
+    assert len({item['topic_id'] for item in items}) == 17
     for work in ('lit_anna_freud_ego_defence', 'lit_frankl_man_search_meaning'):
         entries = [item for item in items if item['work_id'] == work]
         assert len(entries) == 2 and len({item['topic_id'] for item in entries}) == 2
         assert len({item['title'] for item in entries}) == 1
     assert all(set(item['source']) == {'citation'} for item in items)
     assert all(item['source']['citation'] for item in items)
+    prize = next(item for item in items if item['id'] == 'lit_rybina_muradyan_coach_turning_point')
+    assert prize['reading_level'] is None and prize['importance'] is None
+    assert prize['importance_source'] is None
+    from app.literature_service import reading_next_step
+    assert reading_next_step([prize], {}, items) is None
     legacy_ids = {key.split(':', 1)[1] for key in load_policy().legacy if key.startswith('literature:')}
     assert len(legacy_ids) == 42
     assert legacy_ids <= {item['id'] for item in items}

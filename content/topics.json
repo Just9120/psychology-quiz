@@ -234,5 +234,17 @@
       "literature"
     ],
     "source_notes": "Additional course in the Drive section Other; no numbered module or quiz publication is implied."
+  },
+  {
+    "id": "personal_brand",
+    "title": "Личный бренд и самопрезентация",
+    "module": "other",
+    "question_file": null,
+    "status": "active",
+    "order": 910,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Существующий курс раздела «Другое»: литература без нумерованного модуля."
   }
 ]
