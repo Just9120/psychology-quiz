@@ -2441,10 +2441,10 @@
     },
     "literature:lit_98bfb98e25b39800": {
       "decision": "approved",
-      "item_sha256": "52cef229f14d28968aa42ba0797fc493d967dd69459f3b6302efe6248f8fb310",
+      "item_sha256": "95b0e0a6dabb8513b36a5705eba3c02744d2e837cff66b81fd7109d72b3dc12c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-03",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2452,7 +2452,8 @@
           "snapshot_sha256": "2a062b2a68974ef0d3008220fcbb88c7a9232f2c53b4f84a0bab4b6ebd185677",
           "locator": "Позиция 2: Социальная психология семейных отношений"
         }
-      ]
+      ],
+      "notes": "Reading stage, additional importance and prerequisite are agent recommendations after subject-level bibliographic research. Course citation/author/year/work identity unchanged; library/course pagination differs. No full-book content or measured difficulty review."
     },
     "literature:lit_802f13c56eea6319": {
       "decision": "approved",
