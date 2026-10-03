@@ -373,6 +373,13 @@
       "review_sha256": "431edc5b1dcb182abf62d4b6ea5868dc0d4ecaaf3ab484b952218688ff8b5303",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "n/zfkJGSH7WcF9ES1uFDAulKtETXDdMTh36IF5hfeq1d+1Yst3RBQxpprxra8vGCpHTzqFZ9JKSki7aTHtCJAg=="
+    },
+    "literature:lit_zatulovski_everyday_cybernetics": {
+      "schema_version": 1,
+      "item_sha256": "4b745c7ceb5acd135c43c2bea4e3b28a5ac78a5026c7bbfa4783344282a1d3dd",
+      "review_sha256": "6326bbb168ae7658f7bb28ce52f7ecbb702fbedb5e7cfc2cfd8da94de0776ec2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "cFBonVbsr9vESP+TflJh6P0WkqpxPZLcTRfc7w5FZy+7+IauogSk1OJ3u7tIDfT3fI87fDKx5+v6KSWH+Wx3BQ=="
     }
   }
 }

@@ -21,8 +21,8 @@ def test_topic_module_membership_requires_primary_module_and_unique_course_modul
 
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 174
-    assert len({item['work_id'] for item in items}) == 152
+    assert len(items) == 175
+    assert len({item['work_id'] for item in items}) == 153
     assert len({item['topic_id'] for item in items}) == 17
     for work in ('lit_anna_freud_ego_defence', 'lit_frankl_man_search_meaning'):
         entries = [item for item in items if item['work_id'] == work]
@@ -34,13 +34,16 @@ def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     assert prize['reading_level'] is None and prize['importance'] is None
     assert prize['importance_source'] is None
     for entry in items:
-        if entry['id'] in {'lit_rybina_muradyan_coach_psycholinguistics', 'lit_muradyan_atlant_game', 'lit_muradyan_atlant_game_turning_point'}:
+        if entry['id'] in {'lit_rybina_muradyan_coach_psycholinguistics', 'lit_muradyan_atlant_game', 'lit_muradyan_atlant_game_turning_point', 'lit_zatulovski_everyday_cybernetics'}:
             assert entry['reading_level'] is None and entry['importance'] is None
     masterpiece = next(item for item in items if item['id'] == 'lit_masterstvo_psychological_counseling')
     assert masterpiece['authors'] == [] and masterpiece['metadata_warnings']
     assert masterpiece['importance'] == 'additional' and masterpiece['importance_source'] == 'teacher'
     from app.literature_service import reading_next_step
     assert reading_next_step([prize], {}, items) is None
+    biography = next(item for item in items if item['id'] == 'lit_zatulovski_everyday_cybernetics')
+    assert biography['authors'] == ['Затуловски Ю.'] and biography['importance_source'] is None
+    assert reading_next_step([biography], {}, items) is None
     legacy_ids = {key.split(':', 1)[1] for key in load_policy().legacy if key.startswith('literature:')}
     assert len(legacy_ids) == 42
     assert legacy_ids <= {item['id'] for item in items}
