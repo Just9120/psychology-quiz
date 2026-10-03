@@ -198,6 +198,27 @@
       "review_sha256": "8c6e735c0a05ea83a68b022645e7cd495041c6cdde6bc7752e29b6655f383ea5",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "boHPZ+J4/IVunxCd/q9bQWPz0QmsUkvOVEBeHiMwj5TeoxnSvF77P2WqBUAyUj3zujlgvxmYCPVJB3lo+kRUCg=="
+    },
+    "literature:lit_chomsky_syntactic_structures": {
+      "schema_version": 1,
+      "item_sha256": "89e1d78f5001c85bc5acda130a339439cefa56f310d1ba591acd541bffaca016",
+      "review_sha256": "f48c40abfefd5497b8b7fb8e341f16618dc433b8deaf5d6d8f738f9e43723fb9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "YrOQJh4J6nPGmGrYs1BPQFfRsRYeaQkFrGd1NQ/oo30TYYC7u2KgFTd+Qs1Zui1Kr/ID2nmUVm2/2UW81F3YCg=="
+    },
+    "literature:lit_hsieh_delivering_happiness": {
+      "schema_version": 1,
+      "item_sha256": "0706fafb617795daa09e7f4e47cf55b95ce05be1d854dad53a6158e0f668a311",
+      "review_sha256": "5702c140f3755bcb6f96219388b9ff245a740f80eb78de9059cd1103ecb47c47",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7TN9wOISz3QnyjhTvzPErd8DXyxJ0kcZ/7YOQxND+pe2pSu1w4Clpe6ZCLkCwRRRFs66oOPlGXgM26ab201cDg=="
+    },
+    "literature:lit_taylor_principles_scientific_management": {
+      "schema_version": 1,
+      "item_sha256": "d557df43b79428910184601c6594e5d53e3e1a45bc650cb4b7438d772aeba7ee",
+      "review_sha256": "c314ac012f881a47b0c2b00f24d3fea14c16eb2be8301e5ef90ae6dec9c5ee60",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "YghEgC8XSbgfpJZ5H1H1N+kAmexd3b87kYZ/Eg3W/QKL7yG7lk1QYzcxgSMX0gDsZbWjBUOV3qHJhNbIJoFLBw=="
     }
   }
 }

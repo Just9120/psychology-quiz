@@ -486,5 +486,89 @@
     "notes": "Проверено библиографическое упоминание; издание, год и содержание книги не проверены.",
     "importance": "important",
     "importance_source": "agent"
+  },
+  {
+    "id": "lit_taylor_principles_scientific_management",
+    "work_id": "lit_taylor_principles_scientific_management",
+    "topic_id": "organizational_psychology",
+    "module": "module6",
+    "title": "The Principles of Scientific Management",
+    "authors": [
+      "Frederick Winslow Taylor"
+    ],
+    "year": 1911,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 150,
+    "global_order": 630150,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Историческое дополнительное чтение после введения в организационную психологию. В курсе книга названа «Принципы научного менеджмента». Порядок и значимость предложены агентом; исторические подходы следует сопоставлять с современными условиями труда.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_738f15039db8"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_738f15039db8",
+        "title": "Введение в организационную психологию",
+        "discipline_id": "organizational_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Frederick Winslow Taylor. The Principles of Scientific Management"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русский перевод и используемая редакция не установлены."
+    ],
+    "notes": "Оригинальное название, автор и год первой публикации сверены по библиотечной записи. Год 1911 относится к оригиналу, а не к неустановленному русскому переводу."
+  },
+  {
+    "id": "lit_hsieh_delivering_happiness",
+    "work_id": "lit_hsieh_delivering_happiness",
+    "topic_id": "organizational_psychology",
+    "module": "module6",
+    "title": "Доставляя счастье",
+    "authors": [
+      "Тони Шей"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 140,
+    "global_order": 630140,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение после лекции о мотивации и вовлечённости: история компании помогает сопоставить организационные понятия с авторским описанием практики. Порядок и значимость предложены агентом; опыт одной компании не является универсальным правилом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_368865518bf8"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_368865518bf8",
+        "title": "Организация и её человеческие ресурсы: мотивация и вовлечённость",
+        "discipline_id": "organizational_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Тони Шей. Доставляя счастье"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по издательской карточке и точному упоминанию в лекции. Год неизвестной редакции курса не подставляется из другой карточки."
   }
 ]

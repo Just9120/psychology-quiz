@@ -306,5 +306,47 @@
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
     "importance": "additional",
     "importance_source": "agent"
+  },
+  {
+    "id": "lit_chomsky_syntactic_structures",
+    "work_id": "lit_chomsky_syntactic_structures",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "Syntactic Structures",
+    "authors": [
+      "Noam Chomsky"
+    ],
+    "year": 1957,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 90,
+    "global_order": 640090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Углублённое историческое чтение после вводной лекции по психолингвистике. В курсе книга названа «Синтаксические структуры». Порядок и значимость предложены агентом; это отдельное чтение о построении грамматической теории.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_e39d1d65a4d7"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e39d1d65a4d7",
+        "title": "Психолингвистика как наука",
+        "discipline_id": "psycholinguistics"
+      }
+    ],
+    "source": {
+      "citation": "Noam Chomsky. Syntactic Structures"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русский перевод и используемая редакция не установлены."
+    ],
+    "notes": "Указан оригинал 1957 года по издательской записи. Дата 1958 из транскрипта исправлена только в производной библиографической записи; исходный материал сохранён. Научные обобщения лекции этим review не одобряются."
   }
 ]
