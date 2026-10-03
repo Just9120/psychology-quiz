@@ -173,6 +173,11 @@ def _item_view(item: dict, state: dict | None) -> tuple[str, InlineKeyboardMarku
         rows.extend([[InlineKeyboardButton(
             f"{'Текст' if link['format'] == 'text' else 'Аудио'} · {link['provider']}",
             url=link["url"])] for link in links])
+    search = item.get("book_search")
+    if search:
+        text += f"\n\nПоисковый запрос книги:\n<code>{escape(search['query'])}</code>"
+        text += "\nРезультаты поиска не подтверждают доступность скачивания."
+        rows.append([InlineKeyboardButton("Поиск книги в интернете", url=search["url"])])
     rows.append([InlineKeyboardButton("К теме", callback_data=f"lit:t:{_token(item['topic_id'])}:0")])
     return text, InlineKeyboardMarkup(rows)
 

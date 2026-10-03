@@ -111,7 +111,7 @@ def catalog(conn, actor_user_id: int) -> dict[str, Any]:
         work_id = item["work_id"]
         work = works.setdefault(work_id, {"work_id": work_id, "title": item["title"],
             "authors": item["authors"], "type": item["type"],
-            "access_links": item["access_links"], "entries": []})
+            "access_links": item["access_links"], "book_search": item["book_search"], "entries": []})
         used_topics.add(item["topic_id"])
         work["entries"].append({**item, "topic_title": topics[item["topic_id"]]["title"],
             "user_state": states.get(item["id"])})

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ReadingSummary } from './ReadingSummary'
+import { BookSearch } from './BookSearch'
 import { api, ApiError } from './api'
 import type { LiteratureCatalog, LiteratureEntry, ReadingStatus } from './types'
 
@@ -77,6 +78,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
         <p className="muted">Ссылка ведёт к провайдеру. Наличие доступа, цена и совпадение издания проверяются там.</p>
         {work.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
       </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
+      <BookSearch search={work.book_search} />
       <details className="source-details"><summary>Библиографическая запись</summary><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>

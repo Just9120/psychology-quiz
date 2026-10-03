@@ -8,7 +8,7 @@ from datetime import date
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlsplit
+from urllib.parse import urlencode, urlsplit
 from app.content_publication import load_policy
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -108,6 +108,14 @@ def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
     return item
 
 
+def literature_search(entry: dict[str, Any]) -> dict[str, str]:
+    """A public bibliographic query, not an offer or proof of availability."""
+    title = str(entry["title"]).strip()
+    authors = ", ".join(str(author).strip() for author in entry.get("authors", []) if str(author).strip())
+    query = " ".join(part for part in (f'"{title}"', authors, "скачать") if part)
+    return {"query": query, "url": "https://www.google.com/search?" + urlencode({"q": query})}
+
+
 def literature_curriculum_topics(entry: dict[str, Any]) -> list[dict[str, str]]:
     """Expose only explicitly reviewed lesson IDs, never source metadata.
 
@@ -163,6 +171,7 @@ def _published_literature_items(directory: Path) -> tuple[dict[str, Any], ...]:
             item = _public_literature_item(entry)
             item["curriculum_topics"] = literature_curriculum_topics(entry)
             item["access_links"] = access_links.get(item["work_id"], [])
+            item["book_search"] = literature_search(item)
             items.append(item)
     return tuple(sorted(items, key=lambda item: (int(item.get("global_order") or 0), str(item.get("id") or ""))))
 

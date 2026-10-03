@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ReadingSummary } from '../ReadingSummary'
+import { BookSearch } from '../BookSearch'
 import type { ReadingStatus } from '../types'
 import { miniApi, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 
@@ -53,6 +54,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
       {item.access_links?.length ? <div className="literature-access"><h3>Внешние версии</h3><p className="muted">Доступ и совпадение издания уточняются у провайдера.</p>
         {item.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
       </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
+      <BookSearch search={item.book_search} />
       <p>{item.why_read}</p>{(item.source?.citation || item.metadata_warnings?.length) && <details><summary>Библиографическая запись</summary>
         {item.source?.citation && <blockquote>{item.source.citation}</blockquote>}
         {item.metadata_warnings?.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}

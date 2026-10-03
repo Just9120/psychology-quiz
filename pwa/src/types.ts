@@ -228,5 +228,5 @@ export type LiteratureEntry = {
   metadata_warnings: string[]; user_state: ReadingState | null;
   curriculum_topics?: { id: string; title: string }[];
 }
-export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }
+export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; book_search?: { query: string; url: string }; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }
 export type LiteratureCatalog = { ok: true; works: LiteratureWork[]; topics: { topic_id: string; title: string; module: string }[] }
