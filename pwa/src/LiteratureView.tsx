@@ -12,6 +12,7 @@ const importanceSources = { teacher: 'приоритет преподавате�
 export function LiteratureView({ initial, busy, run }: { initial: LiteratureCatalog; busy: boolean; run: (operation: () => Promise<void>) => Promise<void> }) {
   const [catalog, setCatalog] = useState(initial)
   const [topic, setTopic] = useState('')
+  const [lesson, setLesson] = useState('')
   const [module, setModule] = useState('')
   const [statusFilter, setStatusFilter] = useState<ReadingStatus | ''>('')
   const [workId, setWorkId] = useState<string | null>(null)
@@ -22,11 +23,16 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
   const work = catalog.works.find(item => item.work_id === workId)
   const entry = work?.entries.find(item => item.id === entryId)
   const modules = [...new Set(catalog.topics.map(item => item.module))]
-  const matches = (link: LiteratureEntry) => (!module || link.module === module)
+  const inScope = (link: LiteratureEntry) => (!module || link.module === module)
     && (!topic || link.topic_id === topic)
+    && (!lesson || (lesson === 'general' ? !link.curriculum_topics?.length : link.curriculum_topics?.some(item => item.id === lesson)))
+  const lessons = [...new Map(catalog.works.flatMap(item => item.entries)
+    .filter(link => (!module || link.module === module) && (!topic || link.topic_id === topic))
+    .flatMap(link => link.curriculum_topics ?? []).map(item => [item.id, item])).values()]
+  const matches = (link: LiteratureEntry) => inScope(link)
     && (!statusFilter || (link.user_state?.reading_status ?? 'not_started') === statusFilter)
   const visible = catalog.works.filter(item => item.entries.some(matches))
-  const summaryItems = catalog.works.flatMap(item => item.entries.filter(link => (!module || link.module === module) && (!topic || link.topic_id === topic)).map(link => ({ ...link, work_id: item.work_id, title: item.title })))
+  const summaryItems = catalog.works.flatMap(item => item.entries.filter(inScope).map(link => ({ ...link, work_id: item.work_id, title: item.title })))
 
   function select(link: LiteratureEntry) {
     setEntryId(link.id); setStatus(link.user_state?.reading_status ?? 'not_started')
@@ -83,8 +89,9 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
         {saved && <p role="status">Прогресс чтения сохранён.</p>}
       </form>
     </article> : <>
-      <label className="field literature-filter">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
-      <label className="field literature-filter">Тема литературы<select value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{catalog.topics.filter(item => !module || item.module === module).map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
+      <label className="field literature-filter">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic(''); setLesson('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
+      <label className="field literature-filter">Дисциплина литературы<select value={topic} disabled={busy} onChange={event => { setTopic(event.target.value); setLesson('') }}><option value="">Все дисциплины</option>{catalog.topics.filter(item => !module || item.module === module).map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
+      <label className="field literature-filter">Учебная тема<select value={lesson} disabled={busy} onChange={event => setLesson(event.target.value)}><option value="">Все темы и общие книги</option><option value="general">Общие книги дисциплины</option>{lessons.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}</select></label>
       <label className="field literature-filter">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(statuses).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
       <ReadingSummary showActions={!statusFilter} allItems={catalog.works.flatMap(work => work.entries)} items={summaryItems} busy={busy} onSelect={id => {
         const selectedWork = catalog.works.find(item => item.entries.some(link => link.id === id))

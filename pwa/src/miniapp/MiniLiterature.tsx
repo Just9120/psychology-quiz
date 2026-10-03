@@ -13,6 +13,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
 }) {
   const [items, setItems] = useState(initial)
   const [topic, setTopic] = useState('')
+  const [lesson, setLesson] = useState('')
   const [module, setModule] = useState('')
   const [statusFilter, setStatusFilter] = useState<ReadingStatus | ''>('')
   const [selected, setSelected] = useState<string | null>(null)
@@ -21,10 +22,10 @@ export function MiniLiterature({ initial, topics, busy, run }: {
   const [saved, setSaved] = useState(false)
   const item = items.find(entry => entry.id === selected)
   const modules = [...new Set(topics.map(entry => entry.module).filter((value): value is string => !!value))]
-  const scoped = items.filter(entry => (!topic || entry.topic_id === topic) && (!module || topics.some(link => link.topic_id === entry.topic_id && link.module === module)))
-  const visible = items.filter(entry => (!topic || entry.topic_id === topic)
-    && (!module || topics.some(link => link.topic_id === entry.topic_id && link.module === module))
-    && (!statusFilter || (entry.user_state?.reading_status ?? 'not_started') === statusFilter))
+  const disciplineItems = items.filter(entry => (!topic || entry.topic_id === topic) && (!module || topics.some(link => link.topic_id === entry.topic_id && link.module === module)))
+  const lessons = [...new Map(disciplineItems.flatMap(entry => entry.curriculum_topics ?? []).map(entry => [entry.id, entry])).values()]
+  const scoped = disciplineItems.filter(entry => !lesson || (lesson === 'general' ? !entry.curriculum_topics?.length : entry.curriculum_topics?.some(link => link.id === lesson)))
+  const visible = scoped.filter(entry => !statusFilter || (entry.user_state?.reading_status ?? 'not_started') === statusFilter)
   function choose(entry: MiniLiteratureItem) {
     setSelected(entry.id); setStatus(entry.user_state?.reading_status ?? 'not_started')
     setUncertain(false); setSaved(false)
@@ -61,8 +62,9 @@ export function MiniLiterature({ initial, topics, busy, run }: {
         {uncertain && <p role="status">Сохранение не подтверждено. Сначала обновите каталог.</p>}
         <button className="button primary" type="submit" disabled={busy || uncertain}>Сохранить чтение</button>{saved && <p role="status">Отметка сохранена.</p>}
       </form></article> : <>
-      <label className="field">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
-      <label className="field">Тема<select value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{topics.filter(entry => !module || entry.module === module).map(entry => <option key={entry.topic_id} value={entry.topic_id}>{entry.title}</option>)}</select></label>
+      <label className="field">Модуль литературы<select value={module} disabled={busy} onChange={event => { setModule(event.target.value); setTopic(''); setLesson('') }}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
+      <label className="field">Дисциплина литературы<select value={topic} disabled={busy} onChange={event => { setTopic(event.target.value); setLesson('') }}><option value="">Все дисциплины</option>{topics.filter(entry => !module || entry.module === module).map(entry => <option key={entry.topic_id} value={entry.topic_id}>{entry.title}</option>)}</select></label>
+      <label className="field">Учебная тема<select value={lesson} disabled={busy} onChange={event => setLesson(event.target.value)}><option value="">Все темы и общие книги</option><option value="general">Общие книги дисциплины</option>{lessons.map(entry => <option key={entry.id} value={entry.id}>{entry.title}</option>)}</select></label>
       <label className="field">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
       <ReadingSummary showActions={!statusFilter} allItems={items} items={scoped} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} />
       {visible.length ? <div className="literature-list">{visible.map(entry => <article className="panel literature-card" key={entry.id}><h2><button className="text-button literature-title" onClick={() => choose(entry)}>{entry.title}</button></h2><p>{entry.authors?.join(', ') || 'Автор не указан'}</p><p className="muted">{labels[entry.user_state?.reading_status ?? 'not_started']}</p></article>)}</div> : <p role="status">По этой теме список пока пуст.</p>}

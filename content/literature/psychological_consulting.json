@@ -376,13 +376,7 @@
     "prerequisites": [
       "lit_f207603bd416c4be"
     ],
-    "source_refs": [
-      "drive:1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0"
-    ],
     "source": {
-      "id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-      "title": "Урок 1. Введение в психологическое консультирование",
-      "locator": "extracted text, Unicode characters 56714:56974",
       "citation": "Карл Роджерс опубликовал книгу «Становление личности»."
     },
     "content_access": "not_verified",
@@ -391,7 +385,10 @@
     ],
     "notes": "Проверено только упоминание книги в текущем тексте урока; это не подтверждение её содержания.",
     "importance": "additional",
-    "importance_source": "agent"
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_09efb9aedb46"
+    ]
   },
   {
     "id": "lit_consult_lecture_02",
@@ -416,13 +413,7 @@
     "prerequisites": [
       "lit_f207603bd416c4be"
     ],
-    "source_refs": [
-      "drive:1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0"
-    ],
     "source": {
-      "id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-      "title": "Урок 1. Введение в психологическое консультирование",
-      "locator": "extracted text, Unicode characters 68091:68351",
       "citation": "У Ялома рекомендую «Дар психотерапии»."
     },
     "content_access": "not_verified",
@@ -431,6 +422,9 @@
     ],
     "notes": "Проверено только упоминание книги в текущем тексте урока; это не подтверждение её содержания.",
     "importance": "additional",
-    "importance_source": "agent"
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_09efb9aedb46"
+    ]
   }
 ]

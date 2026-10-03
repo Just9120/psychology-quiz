@@ -59,7 +59,7 @@ test('reading catalog shares a work status across lists, lost save and reload', 
   await fresh(page)
   await navigate(page, 'Литература')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
-  await page.getByLabel('Тема литературы').selectOption('fiziologiya_cheloveka')
+  await page.getByLabel('Дисциплина литературы').selectOption('fiziologiya_cheloveka')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, 'fiziologiya_cheloveka')}`)).toBeVisible()
   await page.locator('.literature-title').first().click()
   const title = await page.locator('.literature-detail h2').innerText()

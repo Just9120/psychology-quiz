@@ -142,6 +142,20 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "rI/zq+B2i05SkyduRwKqQabIhgAwNS//D8tDkMVQSW3E9BOqkmB4Nss58P9Tbp63GzzEtkHS4onzs/BG2tPrBw==",
       "topic_id": "t_f2b92ac4b2ef"
+    },
+    "literature:lit_consult_lecture_01": {
+      "schema_version": 1,
+      "item_sha256": "f1ce9faef6834cb0f72d06ec28d486e62662e1bdea0888f44ddf506ff7b3fd15",
+      "review_sha256": "3bcba555ad2c2f4dba52e8d71573d1b908cd0bd7254f842d266ff9d07140cc56",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "KfMAmaCmX512HMIVPz/E6VaPlkQklZ+IIMBWStDKl6frAJj1yEUxuTzexJV5qnzHEcLNpX73ZMX3H8vlPlJYAA=="
+    },
+    "literature:lit_consult_lecture_02": {
+      "schema_version": 1,
+      "item_sha256": "51e856c9ad7e35b2604787edad5ad341b6da8ed9839ab1f08d28581fcd4ad6dc",
+      "review_sha256": "3fa135a3ba8bcfcc545252af8ca73dc00976cc942fc4db67289bd7b0b3465ab4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Rhd3hLJcsS59ksukjVJWEFDFLWPzsmuia3J9fWQXfkrygqJCH5xAUBH0cU8fZmmqjw+nFbYCeZeoySkE0L+9AA=="
     }
   }
 }

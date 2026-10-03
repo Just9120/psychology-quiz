@@ -33,6 +33,7 @@ PUBLIC_ITEM_FIELDS = (
     "why_read",
     "learning_outcomes",
     "prerequisites",
+    "curriculum_topic_ids",
 )
 PUBLIC_SOURCE_FIELDS = ("citation",)
 def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
@@ -107,6 +108,28 @@ def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
     return item
 
 
+def literature_curriculum_topics(entry: dict[str, Any]) -> list[dict[str, str]]:
+    """Expose only explicitly reviewed lesson IDs, never source metadata.
+
+    The optional field is part of the publication fingerprint. A discipline
+    reading list without a lesson binding stays discipline-wide.
+    """
+    ids = entry.get("curriculum_topic_ids", [])
+    if not isinstance(ids, list) or any(not isinstance(value, str) for value in ids) or len(set(ids)) != len(ids):
+        raise ValueError("Invalid literature curriculum topics")
+    if not ids:
+        return []
+    from app.curriculum import load_catalog
+    topics = load_catalog()["topics"]
+    result = []
+    for value in ids:
+        topic = topics.get(value)
+        if topic is None or topic["discipline_id"] != entry.get("topic_id"):
+            raise ValueError("Literature curriculum discipline mismatch")
+        result.append({"id": value, "title": topic["title"]})
+    return result
+
+
 @lru_cache(maxsize=4)
 def _published_literature_items(directory: Path) -> tuple[dict[str, Any], ...]:
     """Content is immutable within one deployed process; a new deploy restarts it."""
@@ -123,6 +146,7 @@ def _published_literature_items(directory: Path) -> tuple[dict[str, Any], ...]:
             if not publication.can_publish("literature", entry):
                 continue
             item = _public_literature_item(entry)
+            item["curriculum_topics"] = literature_curriculum_topics(entry)
             item["access_links"] = access_links.get(item["work_id"], [])
             items.append(item)
     return tuple(sorted(items, key=lambda item: (int(item.get("global_order") or 0), str(item.get("id") or ""))))
