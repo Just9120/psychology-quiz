@@ -127,3 +127,17 @@ def test_article_recommendation_keeps_teacher_priority_without_calling_it_a_book
     states = {"article": {"reading_status": "in_progress"}}
     result = reading_next_step([item], states)
     assert "Продолжите работу с ним" in result["reason"] and "эту книгу" not in result["reason"]
+
+
+def test_filtered_continuation_checks_other_associations_without_mutating_states():
+    selected = {"id": "selected", "work_id": "shared"}
+    alias = {"id": "other-topic", "work_id": "shared"}
+    other = {"id": "other-work"}
+    states = {"selected": {"reading_status": "in_progress"},
+              "other-topic": {"reading_status": "read"},
+              "other-work": {"reading_status": "in_progress"}}
+    assert reading_next_step([selected], states, [selected, alias]) is None
+    assert reading_next_step([selected, other], states, [selected, alias, other])["item"]["id"] == "other-work"
+    assert states["other-topic"]["reading_status"] == "read"
+    states["other-topic"]["reading_status"] = "in_progress"
+    assert reading_next_step([selected], states, [selected, alias])["item"]["id"] == "selected"

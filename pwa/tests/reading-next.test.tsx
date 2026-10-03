@@ -90,3 +90,14 @@ it('preserves reviewed book priority ahead of reading stage and excludes missing
   expect(readingNextStep([foundation, required])?.id).toBe('a')
   expect(readingNextStep([foundation, { ...required, prerequisites: ['missing'] }])?.id).toBe('z')
 })
+
+
+it('checks aliases outside the filtered list before recommending continuation', () => {
+  const selected = { id: 'selected', work_id: 'shared', user_state: { reading_status: 'in_progress' as const } }
+  const alias = { id: 'other-topic', work_id: 'shared', user_state: { reading_status: 'read' as const } }
+  const other = { id: 'other-work', user_state: { reading_status: 'in_progress' as const } }
+  expect(readingNextStep([selected], [selected, alias])).toBeNull()
+  expect(readingNextStep([selected, other], [selected, alias, other])?.id).toBe('other-work')
+  expect(alias.user_state.reading_status).toBe('read')
+  expect(readingNextStep([selected], [selected, { ...alias, user_state: { reading_status: 'in_progress' as const } }])?.id).toBe('selected')
+})

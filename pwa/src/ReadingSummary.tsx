@@ -3,13 +3,18 @@ import type { ReadingStatus } from './types'
 type Item = { id: string; type?: string; work_id?: string; title?: string; importance?: string | null; importance_source?: string | null; reading_level?: string | null; why_read?: string | null; prerequisites?: string[]; user_state?: { reading_status: ReadingStatus; updated_at?: string } | null }
 
 export function readingNextStep(items: Item[], allItems: Item[] = items): Item | null {
-  const works = new Map<string, Item[]>()
-  for (const item of items) {
+  const known = new Map(allItems.map(item => [item.id, item]))
+  const allWorks = new Map<string, Item[]>()
+  for (const item of allItems) {
     const key = item.work_id ?? item.id
-    works.set(key, [...(works.get(key) ?? []), item])
+    allWorks.set(key, [...(allWorks.get(key) ?? []), item])
   }
-  const candidates = [...works.values()].filter(entries =>
-    entries.every(item => item.user_state?.reading_status === 'in_progress')).flat()
+  const status = (item: Item) => item.user_state?.reading_status ?? 'not_started'
+  // Keep the selected association, but check the entire work for conflicts.
+  const candidates = items.filter(item => {
+    const group = allWorks.get(item.work_id ?? item.id) ?? []
+    return group.length > 0 && group.every(entry => status(entry) === 'in_progress')
+  })
   const recency = (item: Item) => {
     const value = item.user_state?.updated_at ?? ''
     if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(value)) return ''
@@ -19,13 +24,6 @@ export function readingNextStep(items: Item[], allItems: Item[] = items): Item |
   const compare = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0
   candidates.sort((a, b) => compare(recency(b), recency(a)) || compare(a.id, b.id))
   if (candidates.length) return candidates[0]
-  const known = new Map(allItems.map(item => [item.id, item]))
-  const allWorks = new Map<string, Item[]>()
-  for (const item of allItems) {
-    const key = item.work_id ?? item.id
-    allWorks.set(key, [...(allWorks.get(key) ?? []), item])
-  }
-  const status = (item: Item) => item.user_state?.reading_status ?? 'not_started'
   const rank: Record<string, number> = { basic: 0, important: 1, additional: 2, advanced: 3 }
   const stages: Record<string, number> = { foundation: 0, core: 1, applied: 2, deepening: 3, advanced: 4, reference: 5 }
   const recommendations = items.filter(item => {

@@ -41,14 +41,18 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
     Conflicting association states require a decision before a recommendation.
     Only canonical UTC timestamps rank recency; missing dates tie by stable ID.
     """
-    works = {}
-    for item in items:
-        works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    known = {item["id"]: item for item in (all_items if all_items is not None else items)}
+    all_works = {}
+    for item in known.values():
+        all_works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    def status(item):
+        return states.get(item["id"], {}).get("reading_status", "not_started")
+    # A topic filter must not hide a conflicting state of the same work.
     candidates = []
-    for entries in works.values():
-        if {states.get(item["id"], {}).get("reading_status", "not_started")
-                for item in entries} == {"in_progress"}:
-            candidates.extend(entries)
+    for item in items:
+        group = all_works.get(item.get("work_id", item["id"]), [])
+        if group and all(status(entry) == "in_progress" for entry in group):
+            candidates.append(item)
     def recency(item):
         value = states.get(item["id"], {}).get("updated_at")
         if not isinstance(value, str) or len(value) != 20 or not value.endswith("Z"):
@@ -59,12 +63,6 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             return ""
         return value if parsed.strftime("%Y-%m-%dT%H:%M:%SZ") == value else ""
     if not candidates:
-        known = {item["id"]: item for item in (all_items if all_items is not None else items)}
-        all_works = {}
-        for item in known.values():
-            all_works.setdefault(item.get("work_id", item["id"]), []).append(item)
-        def status(item):
-            return states.get(item["id"], {}).get("reading_status", "not_started")
         def completed(reference):
             prerequisite = known.get(reference)
             if prerequisite is None:
