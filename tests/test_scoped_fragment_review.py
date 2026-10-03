@@ -75,6 +75,68 @@ def fragment_fixture(tmp_path, monkeypatch, *, state="conflict", kind="questions
     return public, dossier, inventory, {source["id"]: record}, path
 
 
+def private_classification_fixture(tmp_path, monkeypatch):
+    import subprocess
+    from app.source_inventory import complete_listing, scan
+
+    public, dossier, inventory, processed, extract = fragment_fixture(
+        tmp_path, monkeypatch, state="pending_review", kind="literature")
+    root = signer.REPO_ROOT
+    subprocess.run(["git", "init", "-q", str(root)], check=True)
+    (root / ".gitignore").write_text("data/\n", encoding="utf-8")
+    (root / "data").mkdir()
+    (root / "content/source-corpus.json").write_text(json.dumps({
+        "schema_version": 1, "corpus_root_id": "root", "sources": []}), encoding="utf-8")
+    (root / "content/curriculum.json").write_text(json.dumps({
+        "schema_version": 1, "disciplines": {}, "topics": {}}), encoding="utf-8")
+    snapshot = scan("root", {"root": complete_listing(inventory["folders"]["root"])})
+    source = deepcopy(dossier["sources"][0])
+    source.update(corpus_path="/".join(snapshot["paths"][source["id"]][0]),
+                  classification_receipt={"content": str(extract), "locator": "characters:0:15",
+                      "snapshot_kind": "extracted_text", "snapshot_sha256": source["snapshot_sha256"]})
+    path = root / "data/classification.json"
+    path.write_text(json.dumps({"schema_version": 1, "corpus_root_id": "root", "sources": [source]}), encoding="utf-8")
+    path.chmod(0o600)
+    return public, dossier, inventory, processed, extract, path
+
+
+def test_private_classification_supports_fragment_without_finalizing_source(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _, path = private_classification_fixture(tmp_path, monkeypatch)
+    before = deepcopy(processed)
+    with pytest.raises(SigningError, match="private_source_kind_mismatch"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+    verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=path)
+    assert processed == before
+    dossier["publication_review"]["decision"] = "pending"
+    with pytest.raises(SigningError, match="fragment_review_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=path)
+
+
+def test_private_classification_cannot_override_public_source(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _, path = private_classification_fixture(tmp_path, monkeypatch)
+    registry = json.loads(path.read_text(encoding="utf-8"))
+    (signer.REPO_ROOT / "content/source-corpus.json").write_text(json.dumps(registry), encoding="utf-8")
+    with pytest.raises(SigningError, match="invalid_private_inventory"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=path)
+
+
+def test_private_classification_checks_receipt_not_only_metadata(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, extract, path = private_classification_fixture(tmp_path, monkeypatch)
+    extract.write_bytes(extract.read_bytes() + b"Changed")
+    with pytest.raises(SigningError, match="private_source_classification_changed"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=path)
+
+
+def test_private_classification_still_rejects_overlapping_conflict(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _, path = private_classification_fixture(tmp_path, monkeypatch)
+    source_id = dossier["sources"][0]["id"]
+    processed[source_id].update(review_state="conflict", locator="characters:0:15",
+        reviewed_at="2026-09-28T00:00:00Z", reason="Held same fragment", related_source_ids=[])
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(processed[source_id])
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=path)
+
+
 @pytest.mark.parametrize("kind", ["questions", "glossary", "literature"])
 def test_new_fragment_review_preserves_all_source_holds(tmp_path, monkeypatch, kind):
     public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch, kind=kind)

@@ -29,8 +29,9 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from app.content_publication import KINDS, PUBLIC_DRIVE_LINK, PublicationPolicy, fingerprint
 from app.publication_certificate import certificate_payload, key_id
 from scripts.scoped_fragment_review import FragmentReviewError, verify_fragment_review
-from app.source_inventory import (InventoryError, complete_listing, link_lessons,
-                                  processing_status, scan, unresolved_related_conflicts)
+from app.source_inventory import (InventoryError, combine_registries, complete_listing, link_lessons,
+                                  processing_status, reviewed_graph, scan, unresolved_related_conflicts)
+from scripts.source_inventory_report import private_registry_input
 
 
 class SigningError(ValueError):
@@ -265,7 +266,8 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
 
 
 def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
-                           *, public_item: dict | None = None) -> None:
+                           *, public_item: dict | None = None,
+                           private_registry_path: Path | None = None) -> None:
     """Require every private source to match a completed review in this inventory."""
     if (not isinstance(inventory, dict) or inventory.get("schema_version") != 1
             or not isinstance(inventory.get("folders"), dict)
@@ -275,13 +277,20 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         registry = json.loads((REPO_ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
         if not isinstance(registry, dict) or not isinstance(registry.get("sources"), list):
             raise SigningError("invalid_reviewed_source_registry")
-        registered = {source["id"]: source for source in registry["sources"]}
-        if len(registered) != len(registry["sources"]):
+        if len({source["id"] for source in registry["sources"]}) != len(registry["sources"]):
             raise SigningError("invalid_reviewed_source_registry")
         snapshot = scan(inventory.get("root_id"), {
             folder: complete_listing(pages)
             for folder, pages in inventory["folders"].items()
         })
+        private_ids = set()
+        if private_registry_path is not None:
+            private_registry = private_registry_input(private_registry_path, REPO_ROOT)
+            registry = combine_registries(registry, private_registry)
+            curriculum = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
+            reviewed_graph(snapshot, registry, curriculum)
+            private_ids = {source["id"] for source in private_registry["sources"]}
+        registered = {source["id"]: source for source in registry["sources"]}
         if public_item is not None:
             visible_text = json.dumps(public_item, ensure_ascii=False, sort_keys=True)
             if any(file_id in visible_text for file_id in snapshot["files"]
@@ -319,6 +328,28 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                      or source.get("reviewer") != canonical.get("reviewer")
                      or source.get("reviewed_at") != canonical.get("reviewed_at")))):
             raise SigningError("private_source_revision_not_current")
+        if source_id in private_ids:
+            # A private classification establishes source identity/kind, never
+            # whole-source approval or an exemption from the fragment gate.
+            if not fragment_v2:
+                raise SigningError("fragment_review_required")
+            receipt = canonical.get("classification_receipt")
+            if (not isinstance(receipt, dict)
+                    or receipt.get("snapshot_kind") != "extracted_text"
+                    or receipt.get("snapshot_sha256") != record.get("snapshot_sha256")
+                    or canonical.get("reviewer") != source.get("reviewer")
+                    or canonical.get("reviewed_at") != source.get("reviewed_at")
+                    or canonical.get("corpus_path") not in
+                    ("/".join(path) for path in snapshot["paths"][source_id])):
+                raise SigningError("private_source_classification_required")
+            path = private_path(Path(receipt.get("content", "")), suffix=".txt")
+            raw = path.read_bytes()
+            if hashlib.sha256(raw).hexdigest() != record.get("snapshot_sha256"):
+                raise SigningError("private_source_classification_changed")
+            text = raw.decode("utf-8")
+            ranges = _character_ranges(receipt.get("locator"))
+            if any(end > len(text) or not text[start:end].strip() for start, end in ranges):
+                raise SigningError("private_source_classification_required")
         if fragment_v2:
             try:
                 verify_fragment_review(dossier, source, record, public_item, private_path=private_path)
@@ -367,6 +398,8 @@ def main(argv=None) -> int:
     parser.add_argument("--dossier", required=True, type=Path)
     parser.add_argument("--inventory", required=True, type=Path)
     parser.add_argument("--processed", required=True, type=Path)
+    parser.add_argument("--private-registry", type=Path,
+                        help="Ignored current source classifications; fragment approval remains required")
     parser.add_argument("--private-key", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args(argv)
@@ -389,7 +422,8 @@ def main(argv=None) -> int:
         dossier = json.loads(dossier_path.read_text(encoding="utf-8"))
         inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
         processed = json.loads(processed_path.read_text(encoding="utf-8"))
-        verify_current_sources(dossier, inventory, processed, public_item=items[0])
+        verify_current_sources(dossier, inventory, processed, public_item=items[0],
+                               private_registry_path=args.private_registry)
         private_key = serialization.load_pem_private_key(key_path.read_bytes(), password=None)
         if not isinstance(private_key, Ed25519PrivateKey):
             raise SigningError("ed25519_signing_key_required")
