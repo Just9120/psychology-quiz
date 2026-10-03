@@ -362,17 +362,17 @@
     },
     "literature:lit_muradyan_atlant_game_turning_point": {
       "schema_version": 1,
-      "item_sha256": "fe6244b5107f5171c2199edabaecf9efaaeff6e071d3f09b61df7d9d14a59af3",
-      "review_sha256": "c5e3ec71e77b3ea125dea11fd78a4327ff22d99411d4d2ae43cb6f5c2223f088",
+      "item_sha256": "02f7ccd287431e354ef525ca57a7cf446391b25544257f6b1d98af4684bdf57f",
+      "review_sha256": "3343faf7a0a309f97ea23b89279ec755f8b73276e4009fe2f9568d7ba35132d4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "tt6A2imxTvI7/DIrWyGCr/I8WTrHJQNp5dKWPUUwndigYU/X200EUX6lKnq7YBf2bdwTRiIcG0Wa9fmW2tbICA=="
+      "signature": "O2mVwRR+AYmuIIN3+Op5F2j/OVKmt+THOzA1s4V5z5ndt9PLDA4qW7a3JPEGrKv3Bv8/wZmlcbIqdRFVe66HBQ=="
     },
     "literature:lit_muradyan_atlant_game": {
       "schema_version": 1,
-      "item_sha256": "9786425c52e1648d58d760faa2313a6b92a151d681e7f9a53faf70782a5e9514",
-      "review_sha256": "431edc5b1dcb182abf62d4b6ea5868dc0d4ecaaf3ab484b952218688ff8b5303",
+      "item_sha256": "de67657b343f2a90ca2b305b114e2b13e19f599e072dcf5a8215e777c1cffb5c",
+      "review_sha256": "f2d7f4d68b365a2928795e173d5164d798cbd004d1865676a2465eb278e30784",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "n/zfkJGSH7WcF9ES1uFDAulKtETXDdMTh36IF5hfeq1d+1Yst3RBQxpprxra8vGCpHTzqFZ9JKSki7aTHtCJAg=="
+      "signature": "VhnBtUnGhjxFbQBwkieT87mohbvp54SCYhb7XwMecSHCwUgwRLlwmqatZllaKcf98k1n5o7P7wMIIsAVX/7YBw=="
     },
     "literature:lit_zatulovski_everyday_cybernetics": {
       "schema_version": 1,
