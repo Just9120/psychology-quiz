@@ -420,3 +420,41 @@ def test_private_empty_qa_is_explicit_lexical_and_refuses_an_unexpected_result(m
         path.write_text(json.dumps({"schema_version": 1, "cases": [{**case, **invalid}]}), encoding="utf-8")
         with pytest.raises(SearchError, match="invalid_private_qa_cases"):
             load_qa_cases(path)
+
+
+@pytest.mark.parametrize("identity", [
+    ("other_database", "psychology_app", "18.6"),
+    ("psychology_atlas", "unexpected_role", "18.6"),
+])
+def test_operator_search_refuses_unexpected_database_identity_before_private_read(monkeypatch, tmp_path, capsys, identity):
+    from app import private_search
+    from app.postgres_config import private_target
+
+    class Connection:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            pass
+
+        def execute(self, query):
+            if query == "SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY":
+                return None
+            assert query == "SELECT current_database(),current_user,current_setting('server_version')"
+            return type("Identity", (), {"fetchone": lambda self: identity})()
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Unexpected database identity must stop before reading private data or loading a model")
+
+    monkeypatch.setenv("DATABASE_URL", private_target("synthetic-only"))
+    monkeypatch.setattr(private_search.psycopg, "connect", lambda *args, **kwargs: Connection())
+    monkeypatch.setattr(private_search, "require_current_reviewed_index", forbidden)
+    monkeypatch.setattr(private_search, "embedder", forbidden)
+    monkeypatch.setattr(private_search, "search", forbidden)
+    assert private_search.main([
+        "search", "--manifest", str(tmp_path / "unread-private-manifest.json"),
+        "--query", "private query",
+    ]) == 1
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err.strip() == "PRIVATE_SEARCH_STOP: unexpected_private_postgres_identity"
