@@ -434,6 +434,15 @@ def load_qa_cases(path: Path):
             or not isinstance(cases, list) or not 1 <= len(cases) <= MAX_QA_CASES):
         raise SearchError("invalid_private_qa_cases")
     for case in cases:
+        if isinstance(case, dict) and "expect_empty" in case:
+            if (set(case) != {"query", "mode", "expect_empty"}
+                    or case["expect_empty"] is not True or case["mode"] != "lexical"
+                    or not isinstance(case["query"], str)
+                    or not case["query"].strip() or len(case["query"]) > MAX_QUERY):
+                raise SearchError("invalid_private_qa_cases")
+            # Semantic retrieval always ranks nearest neighbours; an empty-result
+            # assertion must not imply an unconfigured semantic relevance cutoff.
+            continue
         if (not isinstance(case, dict)
                 or not {"query", "source_id", "snapshot_sha256"} <= set(case)
                 or set(case) - {"query", "source_id", "snapshot_sha256", "locator", "mode"}
@@ -459,9 +468,15 @@ def load_qa_cases(path: Path):
 
 def _qa_match(matches, case):
     """A correct document alone does not prove the expected passage was found."""
+    if case.get("expect_empty") is True:
+        return not matches
     return bool(matches and matches[0]["source_id"] == case["source_id"]
                 and matches[0]["snapshot_sha256"] == case["snapshot_sha256"]
                 and ("locator" not in case or matches[0].get("locator") == case["locator"]))
+
+
+def _qa_model(cases):
+    return embedder() if any(case.get("mode", "hybrid") != "lexical" for case in cases) else None
 
 
 def verify_retrieval(conn, cases, model):
@@ -556,11 +571,13 @@ def main(argv=None):
             elif args.action == "qa":
                 if args.cases is None:
                     raise SearchError("private_qa_file_required")
-                result = verify_retrieval(conn, load_qa_cases(args.cases), embedder())
+                cases = load_qa_cases(args.cases)
+                result = verify_retrieval(conn, cases, _qa_model(cases))
             elif args.action == "benchmark":
                 if args.cases is None:
                     raise SearchError("private_qa_file_required")
-                result = benchmark_retrieval(conn, load_qa_cases(args.cases), embedder())
+                cases = load_qa_cases(args.cases)
+                result = benchmark_retrieval(conn, cases, _qa_model(cases))
             elif args.action == "rag":
                 result = {"results": search(conn, args.query, embedder(), limit=args.limit)}
             else:

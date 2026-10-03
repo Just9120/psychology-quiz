@@ -399,3 +399,24 @@ def test_private_qa_checks_expected_passage_and_requested_mode(monkeypatch, tmp_
         path.write_text(json.dumps({"schema_version": 1, "cases": [{**case, **invalid}]}), encoding="utf-8")
         with pytest.raises(SearchError, match="invalid_private_qa_cases"):
             load_qa_cases(path)
+
+
+def test_private_empty_qa_is_explicit_lexical_and_refuses_an_unexpected_result(monkeypatch, tmp_path):
+    from app import private_search
+    case = {"query": "несуществующийтерминконтроля", "mode": "lexical", "expect_empty": True}
+    path = tmp_path / "empty-qa.json"
+    monkeypatch.setattr(private_search, "PRIVATE_ROOT", tmp_path)
+    path.write_text(json.dumps({"schema_version": 1, "cases": [case]}), encoding="utf-8")
+    cases = load_qa_cases(path)
+    monkeypatch.setattr(private_search, "embedder", lambda: pytest.fail("lexical QA must not load a model"))
+    assert private_search._qa_model(cases) is None
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [])
+    assert verify_retrieval(None, cases, None) == {"cases_passed": 1}
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [{"source_id": "unexpected"}])
+    with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
+        verify_retrieval(None, cases, None)
+    for invalid in ({"mode": "semantic"}, {"expect_empty": False}, {"expect_empty": 1},
+                    {"source_id": "source_12345678901234567890"}, {"query": " "}):
+        path.write_text(json.dumps({"schema_version": 1, "cases": [{**case, **invalid}]}), encoding="utf-8")
+        with pytest.raises(SearchError, match="invalid_private_qa_cases"):
+            load_qa_cases(path)
