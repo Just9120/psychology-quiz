@@ -345,6 +345,34 @@
       "review_sha256": "c4e4abcb898409e802b4450195325a446c5ce9468b53c810b3facb857f5d5c6b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "H6zkYXmVkNvCJJc5q7uoCo3ct+0XS6QsyzXvXTBgzi3rLBCpb3YcmlEBR/CrIw3UxpDXi80oR638uH7kXhGFCg=="
+    },
+    "literature:lit_masterstvo_psychological_counseling": {
+      "schema_version": 1,
+      "item_sha256": "f3d505201353a5252f39a6c07c8c307c99e48adb962f7ea243020d2880c060c8",
+      "review_sha256": "43253122db961d7740cd4f43b6e37c1f26cc33a877c50bc8f771d72d4b0fd0c3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "sHJmJi9vhpAOPZHeqEGVa1S/c9HI5mkSgoHUzymGG7lQYMTanmf0lEpKZDKN2Dxykuv0vG+M5TxUFBlhysJ1DQ=="
+    },
+    "literature:lit_rybina_muradyan_coach_psycholinguistics": {
+      "schema_version": 1,
+      "item_sha256": "82e3b3bfb66ed0a48cd6529cfb022dcd6111989e7a555c4a284c5e07a40d41df",
+      "review_sha256": "c4036550be5b09e147caa3cc341f24c77f836170d364675a32c4407e95e9cb51",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JyxLz3r6z7NOD0oPDBRMbbzPy0fZPSMO2EyOhrdO70oAqQoA+RRMGiDiEhpVEz95TbZmcn99AJRRcuR2P1FwAQ=="
+    },
+    "literature:lit_muradyan_atlant_game_turning_point": {
+      "schema_version": 1,
+      "item_sha256": "fe6244b5107f5171c2199edabaecf9efaaeff6e071d3f09b61df7d9d14a59af3",
+      "review_sha256": "c5e3ec71e77b3ea125dea11fd78a4327ff22d99411d4d2ae43cb6f5c2223f088",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tt6A2imxTvI7/DIrWyGCr/I8WTrHJQNp5dKWPUUwndigYU/X200EUX6lKnq7YBf2bdwTRiIcG0Wa9fmW2tbICA=="
+    },
+    "literature:lit_muradyan_atlant_game": {
+      "schema_version": 1,
+      "item_sha256": "9786425c52e1648d58d760faa2313a6b92a151d681e7f9a53faf70782a5e9514",
+      "review_sha256": "431edc5b1dcb182abf62d4b6ea5868dc0d4ecaaf3ab484b952218688ff8b5303",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "n/zfkJGSH7WcF9ES1uFDAulKtETXDdMTh36IF5hfeq1d+1Yst3RBQxpprxra8vGCpHTzqFZ9JKSki7aTHtCJAg=="
     }
   }
 }

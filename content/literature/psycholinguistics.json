@@ -348,5 +348,74 @@
       "Русский перевод и используемая редакция не установлены."
     ],
     "notes": "Указан оригинал 1957 года по издательской записи. Дата 1958 встречается и в транскрипте, и в презентации одного занятия; исправлена только производная библиографическая запись, исходные материалы сохранены. Научные обобщения лекции этим review не одобряются."
+  },
+  {
+    "id": "lit_rybina_muradyan_coach_psycholinguistics",
+    "work_id": "lit_rybina_muradyan_coach",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "Делай как коуч",
+    "authors": [
+      "Рыбина О.",
+      "Мурадян Ю."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 100,
+    "global_order": 640100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упомянута в биографической справке ведущего курса. Это связь с библиографией курса, а не рекомендация преподавателя или обязательный этап чтения. Личная отметка общая с этой книгой в других разделах.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Рыбина О., Мурадян Ю.. Делай как коуч"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_muradyan_atlant_game",
+    "work_id": "lit_muradyan_atlant_game",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "Игра Атлантов. Алхимия мечты",
+    "authors": [
+      "Мурадян Ю."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 110,
+    "global_order": 640110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга названа в биографической справке ведущего. Учебная обязательность и порядок чтения не установлены; библиографическое упоминание не подтверждает научные утверждения книги.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Мурадян Ю.. Игра Атлантов. Алхимия мечты"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
   }
 ]
