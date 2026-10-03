@@ -1,3 +1,4 @@
+import { BookOffers } from '../BookOffers'
 import { useState } from 'react'
 import { ReadingSummary } from '../ReadingSummary'
 import { BookSearch } from '../BookSearch'
@@ -51,9 +52,7 @@ export function MiniLiterature({ initial, topics, busy, run }: {
     {item ? <article className="panel literature-detail"><button className="text-button" onClick={() => setSelected(null)}>← К списку</button>
       <h2>{item.title}</h2><p>{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p>
       <p>Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source ? importanceSources[item.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
-      {item.access_links?.length ? <div className="literature-access"><h3>Внешние версии</h3><p className="muted">Доступ и совпадение издания уточняются у провайдера.</p>
-        {item.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
-      </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
+      <BookOffers links={item.access_links} description="Доступ и совпадение издания уточняются у провайдера." />
       <BookSearch search={item.book_search} />
       <p>{item.why_read}</p>{(item.source?.citation || item.metadata_warnings?.length) && <details><summary>Библиографическая запись</summary>
         {item.source?.citation && <blockquote>{item.source.citation}</blockquote>}

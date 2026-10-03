@@ -12,7 +12,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 from app.database import DATABASE_ERRORS
 from app.db import create_or_load_user, get_connection
-from app.literature import list_literature_topic_payloads, load_literature_items
+from app.literature import list_literature_topic_payloads, load_literature_items, literature_access_label
 from app import literature_service
 
 logger = logging.getLogger(__name__)
@@ -170,6 +170,8 @@ def _item_view(item: dict, state: dict | None) -> tuple[str, InlineKeyboardMarku
     links = item.get("access_links") or []
     if links:
         text += "\nВнешние версии: доступ и издание проверьте у провайдера."
+        for link in links:
+            text += f"\n{'Текст' if link['format'] == 'text' else 'Аудио'} · {escape(link['provider'])}: {literature_access_label(link)} (проверка {escape(link['checked_at'])})"
         rows.extend([[InlineKeyboardButton(
             f"{'Текст' if link['format'] == 'text' else 'Аудио'} · {link['provider']}",
             url=link["url"])] for link in links])

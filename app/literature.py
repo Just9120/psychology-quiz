@@ -36,6 +36,12 @@ PUBLIC_ITEM_FIELDS = (
     "curriculum_topic_ids",
 )
 PUBLIC_SOURCE_FIELDS = ("citation",)
+ACCESS_MODE_LABELS = {"free": "Бесплатно", "subscription": "По подписке", "purchase": "Отдельная покупка"}
+
+
+def literature_access_label(offer: dict[str, Any]) -> str:
+    modes = offer.get("access_modes", [])
+    return " · ".join(ACCESS_MODE_LABELS[mode] for mode in modes) if modes else "Условия доступа не подтверждены"
 def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
     if (parsed is None or parsed.scheme != "https" or parsed.username or parsed.password
             or parsed.query or parsed.fragment):
@@ -49,20 +55,29 @@ def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
 
 
 @lru_cache(maxsize=1)
-def load_access_links() -> dict[str, list[dict[str, str]]]:
+def load_access_links() -> dict[str, list[dict[str, Any]]]:
     """Curated outbound offers; a link never means that the user owns a copy."""
     raw = _load_json_file(ACCESS_FILE)
     if not isinstance(raw, dict) or raw.get("schema_version") != 1 or not isinstance(raw.get("works"), dict):
         raise ValueError("Invalid literature access catalog")
-    links: dict[str, list[dict[str, str]]] = {}
+    links: dict[str, list[dict[str, Any]]] = {}
     for work_id, offers in raw["works"].items():
         if not isinstance(work_id, str) or not isinstance(offers, list):
             raise ValueError("Invalid literature access entry")
         seen: set[str] = set()
         links[work_id] = []
         for offer in offers:
-            if not isinstance(offer, dict) or set(offer) != {"format", "provider", "url", "access", "checked_at"}:
+            required = {"format", "provider", "url", "access", "checked_at"}
+            review_fields = {"access_modes", "access_review"}
+            if (not isinstance(offer, dict) or not required <= set(offer)
+                    or set(offer) - required not in (set(), review_fields)):
                 raise ValueError("Invalid literature access offer")
+            if "access_modes" in offer:
+                modes, review = offer["access_modes"], offer["access_review"]
+                if (not isinstance(modes, list) or any(not isinstance(mode, str) or mode not in ACCESS_MODE_LABELS for mode in modes)
+                        or len(set(modes)) != len(modes)
+                        or not isinstance(review, str) or not review.strip() or len(review) > 1000):
+                    raise ValueError("Invalid literature access review")
             fmt, url = offer["format"], offer["url"]
             parsed = urlsplit(url) if isinstance(url, str) else None
             checked = offer["checked_at"]

@@ -1,3 +1,4 @@
+import { BookOffers } from './BookOffers'
 import { useState } from 'react'
 import { ReadingSummary } from './ReadingSummary'
 import { BookSearch } from './BookSearch'
@@ -74,10 +75,7 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       <p className="eyebrow">{entry.module.replace('module', 'Модуль ')} · {entry.topic_title}</p>
       <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>
-      {work.access_links.length ? <div className="literature-access"><h3>Внешние версии</h3>
-        <p className="muted">Ссылка ведёт к провайдеру. Наличие доступа, цена и совпадение издания проверяются там.</p>
-        {work.access_links.map(link => <p key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.format === 'text' ? 'Текст' : 'Аудио'} · {link.provider}</a></p>)}
-      </div> : <p className="muted">Проверенных ссылок на текст или аудио пока нет.</p>}
+      <BookOffers links={work.access_links} />
       <BookSearch search={work.book_search} />
       <details className="source-details"><summary>Библиографическая запись</summary><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}

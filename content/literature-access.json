@@ -7,14 +7,24 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/lev-vygotskiy-30932777/myshlenie-i-rech-7759426/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Book-specific offer block shows a priced purchase and reading by subscription. The adjacent free wording belongs to the subscription offer, not unconditional free full text."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/lev-vygotskiy-30932777/myshlenie-i-rech-65226391/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Audiobook-specific offer block shows a priced purchase and listening by subscription. A trial/subscription promotion is not unconditional free audio."
       }
     ],
     "lit_0199865ad8d23ecb": [
@@ -23,7 +33,9 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/obschatsya-s-rebenkom-kak-130203/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "lit_819808cf97ad8eb5": [
@@ -32,14 +44,18 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-180602/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-568685/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "gippenreiter_vvedenie_v_obschuyu_psihologiyu": [
@@ -48,14 +64,21 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/vvedenie-v-obschuu-psihologiu-kurs-lekciy-180603/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Book-specific offer block shows a priced purchase and reading by subscription. Edition and personal entitlement remain unverified."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/vvedenie-v-obschuu-psihologiu-6180795/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "nurkova_berezanskaya_obschaya_psihologiya": [
@@ -64,7 +87,9 @@
         "provider": "Юрайт",
         "url": "https://urait.ru/bcode/582490",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "rubinstein_osnovy_obschey_psihologii": [
@@ -73,7 +98,12 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/sergey-rubinshteyn/osnovy-obschey-psihologii-50405712/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Book-specific offer block shows a priced purchase and reading by subscription. The partial audiobook in related versions is not this full text."
       }
     ],
     "lit_consult_lecture_02": [
@@ -82,14 +112,18 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/irvin-yalom/dar-psihoterapii-73836533/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/irvin-yalom/dar-psihoterapii-41894046/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "lit_consult_lecture_01": [
@@ -98,7 +132,9 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/karl-rodzhers/stanovlenie-lichnosti-vzglyad-na-psihoterapiu-74431861/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "lit_5505760c8ef8c4b8": [
@@ -107,7 +143,9 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/aleksandr-asmolov/psihologiya-lichnosti-kulturno-istoricheskoe-ponimanie-r-3300775/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "lit_8c4dd1a3c39ecbcf": [
@@ -116,7 +154,9 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/galina-andreeva/socialnaya-psihologiya-292322/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "lit_25a5d2f1c7ba76e1": [
@@ -125,14 +165,18 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ],
     "lit_4f9768a778fe2a01": [
@@ -141,14 +185,18 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
         "access": "provider_terms",
-        "checked_at": "2026-09-30"
+        "checked_at": "2026-10-03",
+        "access_modes": [],
+        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
       }
     ]
   }
