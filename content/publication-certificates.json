@@ -387,6 +387,13 @@
       "review_sha256": "28de4fbbec0da89c8305920379be8a464c06a0e67d0bf627cff1991d25f4343e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "8Qrf0nyQQ5Xfj3KfWcDD8JpdUQpU+jgYb2P7wnzf18kqBT68bq+52o3YeNmHAMHGtabi5VSSx9PpeaHn3W4fCw=="
+    },
+    "literature:lit_pfeffer_managing_with_power": {
+      "schema_version": 1,
+      "item_sha256": "c3160ee34938da433d0cc4a7ea7f4925ea9c8bd2e48efa323d033e09ae9ac943",
+      "review_sha256": "d54ecd190b0234a8081cecbbb6138c4a4fd63801c293f8f3785bfd2a1115d77d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "SkCC9t/fx4NHLQnOUhdJEhag10lEbj8EUxAeY91QBWc3LuDsg1lvKs4EuQJCmpxiA5oiCmFRCQPoDjb8Sp7ICA=="
     }
   }
 }
