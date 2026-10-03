@@ -14,6 +14,27 @@ def item(file_id, parent, *, title="Lesson", changed="2026-09-25T00:00:00Z"):
             "title": title, "mime_type": "application/pdf", "modified_time": changed}
 
 
+def test_four_formats_across_folders_share_one_reviewed_lesson_without_copying_files():
+    roles = ("transcript", "slides", "glossary", "practice")
+    folders = [{"id": role + "-folder", "title": role, "parent_ids": ["root"], "file_or_folder": "folder"} for role in roles]
+    listings = {"root": {"complete": True, "children": folders}}
+    for role in roles:
+        listings[role + "-folder"] = {"complete": True, "children": [item(role, role + "-folder", title=role)]}
+    snapshot = scan("root", listings)
+    before = {key: dict(value) for key, value in snapshot["files"].items()}
+    links = [{"source_id": role, "lesson_id": "lesson", "topic_id": "topic", "format": role,
+              "revision": ["2026-09-25T00:00:00Z", role, "application/pdf"],
+              "corpus_path": role + "/" + role, **REVIEW_EVIDENCE} for role in roles]
+    lessons = link_lessons(snapshot, links, curriculum_topics={"topic": {}})
+    assert set(lessons) == {"lesson"}
+    assert {source["format"] for source in lessons["lesson"]["sources"]} == set(roles)
+    assert len(snapshot["files"]) == 4 and snapshot["files"] == before
+    # A fresh source edition must be explicitly checked before reusing the link.
+    snapshot["files"]["slides"]["modified_time"] = "2026-10-03T00:00:00Z"
+    with pytest.raises(InventoryError, match="stale_lesson_link"):
+        link_lessons(snapshot, links, curriculum_topics={"topic": {}})
+
+
 def test_format_variants_are_private_candidates_not_cross_folder_merges():
     root, first, second = "root", "first-folder", "second-folder"
     folders = [{"id": folder, "title": folder, "parent_ids": [root],
