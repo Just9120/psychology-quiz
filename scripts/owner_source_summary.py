@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from app.source_inventory import InventoryError, reviewed_graph, processing_status, combine_registries
 from app.content_publication import fingerprint, load_policy
-from app.curriculum import load_catalog
+from app.curriculum import load_reviewed_catalog
 from scripts.source_inventory_report import _read, _snapshot, report, private_json_target, private_registry_input, private_topics_input, combine_private_topics
 
 
@@ -204,7 +204,7 @@ def main(argv=None):
         if args.private_topics is not None and (not args.reviewed or args.private_registry is None):
             raise InventoryError("private_topics_requires_reviewed_registry")
         target = private_json_target(args.output, ROOT)
-        inputs = {"registry": _read(ROOT / "content/source-corpus.json"), "curriculum": load_catalog(),
+        inputs = {"registry": _read(ROOT / "content/source-corpus.json"), "curriculum": load_reviewed_catalog(),
                   "published_items": published_questions()} if args.reviewed else {}
         if args.private_registry is not None:
             private_registry = private_registry_input(args.private_registry, ROOT)

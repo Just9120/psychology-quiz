@@ -1,0 +1,641 @@
+{
+  "schema_version": 1,
+  "disciplines": {
+    "vvedenie_v_professiyu": {
+      "title": "Введение в профессию",
+      "module": "module1",
+      "modules": [
+        "module1"
+      ]
+    },
+    "obschaya_psihologiya": {
+      "title": "Общая психология",
+      "module": "module1",
+      "modules": [
+        "module1"
+      ]
+    },
+    "fiziologiya_cheloveka": {
+      "title": "Физиология человека",
+      "module": "module1",
+      "modules": [
+        "module1"
+      ]
+    },
+    "fiziologiya_vnd": {
+      "title": "Физиология ВНД",
+      "module": "module1",
+      "modules": [
+        "module1"
+      ]
+    },
+    "psihofiziologiya": {
+      "title": "Психофизиология",
+      "module": "module1",
+      "modules": [
+        "module1"
+      ]
+    },
+    "osnovy_eksperimentalnoy_psihologii": {
+      "title": "Основы экспериментальной психологии",
+      "module": "module2",
+      "modules": [
+        "module2"
+      ]
+    },
+    "kachestvennye_metody_issledovaniya": {
+      "title": "Качественные методы исследования",
+      "module": "module2",
+      "modules": [
+        "module2"
+      ]
+    },
+    "psychological_consulting": {
+      "title": "Психологическое консультирование",
+      "module": "module3",
+      "modules": [
+        "module3"
+      ]
+    },
+    "klinicheskaya_psihologiya": {
+      "title": "Клиническая психология",
+      "module": "module5",
+      "modules": [
+        "module5"
+      ]
+    },
+    "personality_psychology": {
+      "title": "Психология личности и индивидуальных различий",
+      "module": "module4",
+      "modules": [
+        "module4"
+      ]
+    },
+    "social_psychology": {
+      "title": "Социальная психология",
+      "module": "module6",
+      "modules": [
+        "module6"
+      ]
+    },
+    "family_psychology": {
+      "title": "Семейная психология",
+      "module": "module6",
+      "modules": [
+        "module6"
+      ]
+    },
+    "psycholinguistics": {
+      "title": "Психолингвистика",
+      "module": "module6",
+      "modules": [
+        "module6"
+      ]
+    },
+    "developmental_psychology": {
+      "title": "Возрастная психология",
+      "module": "module4",
+      "modules": [
+        "module4"
+      ]
+    },
+    "organizational_psychology": {
+      "title": "Организационная психология",
+      "module": "module6",
+      "modules": [
+        "module6"
+      ]
+    },
+    "professional_legal_ethics": {
+      "title": "Правовые и этические основы профессиональной деятельности психолога-консультанта",
+      "module": "module6",
+      "modules": [
+        "module6"
+      ]
+    },
+    "quantitative_methods": {
+      "title": "Количественные методы исследования",
+      "module": "module2",
+      "modules": [
+        "module2"
+      ]
+    },
+    "psychodiagnostics": {
+      "title": "Психодиагностика",
+      "module": null,
+      "modules": [
+        "module2",
+        "module3"
+      ]
+    },
+    "bonus_lessons": {
+      "title": "Бонусные уроки",
+      "module": null,
+      "modules": []
+    },
+    "personal_brand": {
+      "title": "Личный бренд и самопрезентация",
+      "module": null,
+      "modules": []
+    },
+    "turning_point": {
+      "title": "Точка поворота. 5 шагов",
+      "module": null,
+      "modules": []
+    }
+  },
+  "topics": {
+    "t_6cad9faef9be": {
+      "title": "Практика №2",
+      "discipline_id": "obschaya_psihologiya"
+    },
+    "t_51d21da1b3b3": {
+      "title": "Практика №3",
+      "discipline_id": "fiziologiya_vnd"
+    },
+    "t_fdf0949c60f1": {
+      "title": "Практика №4",
+      "discipline_id": "fiziologiya_vnd"
+    },
+    "t_269e302a9e03": {
+      "title": "Практика №5. Интеграция психофизиологии и общей психологии",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_3d6b038c413a": {
+      "title": "Практика №17. Первая встреча",
+      "discipline_id": "psychological_consulting"
+    },
+    "t_cb4906154e12": {
+      "title": "Практика №18. Целеполагание и контракт",
+      "discipline_id": "psychological_consulting"
+    },
+    "t_f638492f04ed": {
+      "title": "Практика №19. Концептуализация случая",
+      "discipline_id": "psychological_consulting"
+    },
+    "t_bd934f61e018": {
+      "title": "Практика №20. Интегративный подход",
+      "discipline_id": "psychological_consulting"
+    },
+    "t_edaeea6e8df0": {
+      "title": "Практика №21. Супервизия кейсов",
+      "discipline_id": "psychological_consulting"
+    },
+    "t_4e0186fe70c1": {
+      "title": "Практика №26. Личность клиента и концептуализация",
+      "discipline_id": "personality_psychology"
+    },
+    "t_60851f7e2090": {
+      "title": "Практика №27. Индивидуальные особенности и стиль консультирования",
+      "discipline_id": "personality_psychology"
+    },
+    "t_34dd25f0b3ca": {
+      "title": "Практика №29. Возрастной контекст запроса",
+      "discipline_id": "developmental_psychology"
+    },
+    "t_3ad06a5e9c34": {
+      "title": "Практика №30. Первая встреча, запрос и границы консультирования",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_3ef6769f0fe5": {
+      "title": "Практика №31. Норма, патология и клинически значимая информация",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_d49d050505ff": {
+      "title": "Практика №32. Формирование психологических гипотез",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_2ef6a1c72d17": {
+      "title": "Практика №33. Тревога, стресс и депрессивные проявления",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_fc07b1b21d0b": {
+      "title": "Практика №34. Цели и стратегия консультирования",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_5f8628e3fbce": {
+      "title": "Практика №35. Выбор методов и планирование работы",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_1ff7a1f7180c": {
+      "title": "Практика №36. Сопротивление и внутренние конфликты",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_7b4fc82d0ccb": {
+      "title": "Практика №37. Оценка результатов и завершение работы",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_0faeaab9c732": {
+      "title": "Практика №38. Границы компетенций и маршрутизация клиента",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_bb5cc6935105": {
+      "title": "Практика №39. Социальный контекст индивидуального запроса",
+      "discipline_id": "social_psychology"
+    },
+    "t_b25f2b4f0528": {
+      "title": "Практика №40. Семья как система и индивидуальный запрос",
+      "discipline_id": "family_psychology"
+    },
+    "t_a47c7ff1c7db": {
+      "title": "Практика №41. Рабочий запрос: личность, роль и организация",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_d3a3b3541dab": {
+      "title": "Практика №42. От жалобы руководителя к диагностике организации",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_ba868cd218a1": {
+      "title": "Практика №43. Язык клиента как источник информации",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_803856ff9688": {
+      "title": "Практика №44. Язык как инструмент изменений",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_5238b79de120": {
+      "title": "Практика №10. Введение в качественные методы исследования",
+      "discipline_id": "kachestvennye_metody_issledovaniya"
+    },
+    "t_e452196d73e9": {
+      "title": "История социально-психологических идей. Часть 1",
+      "discipline_id": "social_psychology"
+    },
+    "t_75f56fc4df73": {
+      "title": "Психология горя и утраты. Часть 1",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_e39d1d65a4d7": {
+      "title": "Психолингвистика как наука",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_368865518bf8": {
+      "title": "Организация и её человеческие ресурсы: мотивация и вовлечённость",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_738f15039db8": {
+      "title": "Введение в организационную психологию",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_79cbec1d3bf8": {
+      "title": "Семья как система: структура и функции",
+      "discipline_id": "family_psychology"
+    },
+    "t_c3a5dde091f0": {
+      "title": "Детские возрастные кризисы",
+      "discipline_id": "family_psychology"
+    },
+    "t_323315f65081": {
+      "title": "Теория деятельности А. Н. Леонтьева",
+      "discipline_id": "obschaya_psihologiya"
+    },
+    "t_d94c05043175": {
+      "title": "Личность в психологии",
+      "discipline_id": "obschaya_psihologiya"
+    },
+    "t_24ae16397e54": {
+      "title": "Мотив и воля",
+      "discipline_id": "obschaya_psihologiya"
+    },
+    "t_082cd47dd86a": {
+      "title": "Анатомия мозга и нейромедиаторы",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_1a8edcb4d16c": {
+      "title": "Память и мышление",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_a9b7a1a11ae9": {
+      "title": "Внимание и функции мозга",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_1c1cdcf2927c": {
+      "title": "Принятие решений и свобода воли",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_628424ccc652": {
+      "title": "Бонус: анатомия и физиология мозга, регуляторные системы и нейроны",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_ace91dd22d46": {
+      "title": "Бонус: рефлекторный принцип ЦНС, стимулы и эмоции",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_b3f855d925a5": {
+      "title": "Бонус: принципы работы мозга, эмерджентность и речевые модели",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_87341c203ee5": {
+      "title": "Бонус: принципы работы нервной системы и лобная доля",
+      "discipline_id": "psihofiziologiya"
+    },
+    "t_fe58fea5e306": {
+      "title": "Физиология потребностей",
+      "discipline_id": "fiziologiya_vnd"
+    },
+    "t_329d4a4fb105": {
+      "title": "Анализ деятельности и профессиография. Подбор и оценка персонала",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_752d5d43f05a": {
+      "title": "Лидерство и стили руководства в организации",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_261793e3e999": {
+      "title": "Командообразование, групповая динамика и конфликты",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_a4d66c776fde": {
+      "title": "Изменения и развитие организации: культура и обучение",
+      "discipline_id": "organizational_psychology"
+    },
+    "t_57b3ff2e86d6": {
+      "title": "Предмет, задачи и методы социальной психологии",
+      "discipline_id": "social_psychology"
+    },
+    "t_19d5c3e27698": {
+      "title": "Метамоделирование",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_9d2936546cf1": {
+      "title": "Сила в слове: вводный урок",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_ef90957fb44d": {
+      "title": "Сила в слове: предмет психолингвистики",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_c5473461ba84": {
+      "title": "Сила в слове: образы и эмоции",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_f5c490de4927": {
+      "title": "Сила в слове: модальности восприятия",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_d63b12d91886": {
+      "title": "Сила в слове: как создаётся реальность",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_47b1d61583c9": {
+      "title": "Сила в слове: что такое язык",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_e70a273f3eeb": {
+      "title": "Сила в слове: взаимосвязи языка и психики",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_6d89c8fc95f4": {
+      "title": "Сила в слове: ключевые теории психолингвистики",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_a99a7c1d4381": {
+      "title": "Сила в слове: завершающий вебинар",
+      "discipline_id": "psycholinguistics"
+    },
+    "t_b4f42b4660bc": {
+      "title": "Основы клинической психологии",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_bb895f94e077": {
+      "title": "Базовые категории и подходы в клинической психологии",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_36271f6f602e": {
+      "title": "Психодиагностика и профилактика в клинической практике",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_284ec6eeecd6": {
+      "title": "Границы нормы и патологии",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_be63ccbdf1d7": {
+      "title": "Патопсихологические нарушения и синдромы",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_184dd2def77e": {
+      "title": "Связь психики и тела: психосоматика",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_ed21996686a8": {
+      "title": "Нейропсихология: мозг и когнитивные функции",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_abb95614339d": {
+      "title": "Оценка психологических факторов риска",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_117013a575cc": {
+      "title": "Психология зависимого поведения",
+      "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_c6c292615ebc": {
+      "title": "Правовая компетентность психолога-консультанта",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_1e3eef176953": {
+      "title": "Право в системе социальных норм",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_b753e28f7dec": {
+      "title": "Механизм правового регулирования",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_c021b84fea51": {
+      "title": "Правовые отношения",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_ab4ad6f8717d": {
+      "title": "Правомерное поведение и правонарушения в консультировании",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_452e1eafc29f": {
+      "title": "Структура нормативных правовых актов Российской Федерации",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_e7688019783e": {
+      "title": "Конфиденциальность в работе психолога-консультанта",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_fcc82e4e1d38": {
+      "title": "Система этических принципов в практике психолога-консультанта",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_425dd8fad1a1": {
+      "title": "Супервизия и интервизия в профессиональном развитии",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_010515981cbc": {
+      "title": "Особенности и проблемы консультативного процесса",
+      "discipline_id": "psychological_consulting"
+    },
+    "t_c11dd0b8d422": {
+      "title": "Выборка в психологическом исследовании",
+      "discipline_id": "quantitative_methods"
+    },
+    "t_172f3d89602b": {
+      "title": "Инструментарий исследования: валидность и надёжность",
+      "discipline_id": "quantitative_methods"
+    },
+    "t_290c97a08218": {
+      "title": "Диагностика в психологическом консультировании",
+      "discipline_id": "psychodiagnostics"
+    },
+    "t_0fc9f8b6f0df": {
+      "title": "Критерии психической нормы",
+      "discipline_id": "psychodiagnostics"
+    },
+    "t_018b7d739bac": {
+      "title": "Методы исследования личности: введение в психодиагностику",
+      "discipline_id": "psychodiagnostics"
+    },
+    "t_9ce550077bb9": {
+      "title": "Бонусный урок. Личные финансы для помогающего практика",
+      "discipline_id": "bonus_lessons"
+    },
+    "t_c7f9c8245f70": {
+      "title": "Модуль 1 Личный бренд и самопрезентация",
+      "discipline_id": "personal_brand"
+    },
+    "t_479561392d36": {
+      "title": "Вебинар «Метод 5 Prism»",
+      "discipline_id": "personal_brand"
+    },
+    "t_52b95caff70a": {
+      "title": "Урок 0 Точка поворота, Вводный урок",
+      "discipline_id": "turning_point"
+    },
+    "t_f67eb12f923e": {
+      "title": "Урок 1 Как понять, что со мной происходит",
+      "discipline_id": "turning_point"
+    },
+    "t_45e69d90b32c": {
+      "title": "Урок 2 Где я теряю энергию и контроль",
+      "discipline_id": "turning_point"
+    },
+    "t_ce70a84a108b": {
+      "title": "Урок 3 Как услышать, чего я хочу на самом деле",
+      "discipline_id": "turning_point"
+    },
+    "t_d9ef710a3784": {
+      "title": "Урок 4 Как перестать саботировать",
+      "discipline_id": "turning_point"
+    },
+    "t_74892d6fd852": {
+      "title": "Урок 5 Как не свернуть с пути",
+      "discipline_id": "turning_point"
+    },
+    "t_cd3ef034dfd0": {
+      "title": "Урок 6.Как закрепить знания и двигаться дальше",
+      "discipline_id": "turning_point"
+    },
+    "t_ca3da7d9e816": {
+      "title": "Гуманистическая психология",
+      "discipline_id": "personality_psychology"
+    },
+    "t_c534cb37cafe": {
+      "title": "Лекция 1. Личность как психологическое явление",
+      "discipline_id": "personality_psychology"
+    },
+    "t_a02df743a989": {
+      "title": "Лекция 2. Личность как психологическое явление",
+      "discipline_id": "personality_psychology"
+    },
+    "t_977635b85384": {
+      "title": "Лекция 3. Теории личности и типологии личности",
+      "discipline_id": "personality_psychology"
+    },
+    "t_038e94ebb903": {
+      "title": "Лекция 4. Характер и темперамент",
+      "discipline_id": "personality_psychology"
+    },
+    "t_6fab11312f85": {
+      "title": "Лекция 5. Воля и эмоции",
+      "discipline_id": "personality_psychology"
+    },
+    "t_e38216a4120e": {
+      "title": "Лекция 6. Личностные типы и структура индивидуальности",
+      "discipline_id": "personality_psychology"
+    },
+    "t_488876ba5116": {
+      "title": "Современное состояние психологической науки",
+      "discipline_id": "personality_psychology"
+    },
+    "t_c3dab5fa36b3": {
+      "title": "Экзистенциальная психология",
+      "discipline_id": "personality_psychology"
+    },
+    "t_5eb8451e9cd9": {
+      "title": "Практика №13",
+      "discipline_id": "quantitative_methods"
+    },
+    "t_aeef051631cd": {
+      "title": "Практика №14",
+      "discipline_id": "quantitative_methods"
+    },
+    "t_edd3923e9043": {
+      "title": "Практика №15",
+      "discipline_id": "quantitative_methods"
+    },
+    "t_50367f0a1a1d": {
+      "title": "Практика №16",
+      "discipline_id": "psychodiagnostics"
+    },
+    "t_ebf8821f2933": {
+      "title": "Практика №6",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii"
+    },
+    "t_d0ae2304480c": {
+      "title": "Практика №22",
+      "discipline_id": "psychodiagnostics"
+    },
+    "t_2fecd8a4c446": {
+      "title": "Практика №24",
+      "discipline_id": "psychodiagnostics"
+    },
+    "t_5aebea2fd740": {
+      "title": "Практика №25",
+      "discipline_id": "psychodiagnostics"
+    },
+    "t_06b57c568b62": {
+      "title": "Практика №28",
+      "discipline_id": "personality_psychology"
+    },
+    "t_370d8938a12f": {
+      "title": "Практика №45",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_b4bcf4ea4337": {
+      "title": "Практика №46",
+      "discipline_id": "professional_legal_ethics"
+    },
+    "t_7b4f03ad9966": {
+      "title": "Лекция 1. Введение в возрастную психологию",
+      "discipline_id": "developmental_psychology"
+    },
+    "t_41a5946c3222": {
+      "title": "Лекция 2. От дошкольного возраста к юности",
+      "discipline_id": "developmental_psychology"
+    },
+    "t_ef4a29dbfadb": {
+      "title": "Лекция 3. Понятие возрастного кризиса",
+      "discipline_id": "developmental_psychology"
+    },
+    "t_e4cb73e2bc30": {
+      "title": "Лекция 4. Кризис 20 лет",
+      "discipline_id": "developmental_psychology"
+    },
+    "t_69c04e1e8d20": {
+      "title": "Лекция 5. Кризис 30 лет",
+      "discipline_id": "developmental_psychology"
+    },
+    "t_d54f1d369642": {
+      "title": "Лекция 6. Кризис середины жизни",
+      "discipline_id": "developmental_psychology"
+    },
+    "t_8ea62b03f36a": {
+      "title": "Лекция 7. Кризис 55+",
+      "discipline_id": "developmental_psychology"
+    }
+  }
+}

@@ -245,7 +245,7 @@ def test_owner_summary_cli_accepts_only_private_registry_and_preserves_pending_s
         paths[name].chmod(0o600)
     (tmp_path / "content/source-corpus.json").write_text(json.dumps(public), encoding="utf-8")
     monkeypatch.setattr(summary, "ROOT", tmp_path)
-    monkeypatch.setattr(summary, "load_catalog", lambda: {
+    monkeypatch.setattr(summary, "load_reviewed_catalog", lambda: {
         "schema_version": 1, "disciplines": {"one": {"title": "Discipline"}}, "topics": {}, "editions": {}})
     monkeypatch.setattr(summary, "published_questions", lambda: [])
     monkeypatch.setattr(summary, "published_glossary", lambda policy: [])

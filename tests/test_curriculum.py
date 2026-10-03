@@ -33,6 +33,16 @@ def mapped(bank, monkeypatch):
     return data
 
 
+def test_curriculum_overview_keeps_reviewed_cross_module_membership(bank, mapped, monkeypatch):
+    mapped["disciplines"]["first"].update(module=None, modules=["module1", "module4"])
+    monkeypatch.setattr("app.literature.load_topic_registry", lambda: {"first": {"module": "module1"}})
+    with closing(get_connection(str(bank))) as conn:
+        first = next(item for item in curriculum.overview(conn, 1)["disciplines"]
+                     if item["scope"] == "discipline:first")
+    assert first["module"] is None
+    assert first["modules"] == ["module1", "module4"]
+
+
 def test_curriculum_preserves_editions_and_explicit_unknown_history(bank, mapped):
     with closing(get_connection(str(bank))) as conn, conn:
         mixed = record(conn, qids=(1, 2), choices=(0, 1))
@@ -110,9 +120,14 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     reviews = json.loads((curriculum.ROOT / 'content/learning-quality-reviews.json').read_text(encoding='utf-8'))['items']
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
-    assert len(catalog['disciplines']) == 13 and len(catalog['editions']) == 328
+    core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 328
+    assert catalog['editions'] == core['editions']
+    assert curriculum.load_reviewed_catalog() == core
+    assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
+    assert all(catalog['topics'][key] == value for key, value in core['topics'].items())
     private_bindings = curriculum.load_private_bindings(catalog)
-    assert {k: v['title'] for k, v in catalog['disciplines'].items()} == {
+    assert {k: v['title'] for k, v in core['disciplines'].items()} == {
         k: v['title'] for k, v in registry.items()
         if k != 'cases' and (any(contour in v['available_contours']
                                 for contour in ('questions', 'glossary'))
