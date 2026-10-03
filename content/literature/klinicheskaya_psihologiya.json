@@ -1,0 +1,44 @@
+[
+  {
+    "id": "lit_betensky_what_do_you_see",
+    "work_id": "lit_betensky_what_do_you_see",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Что ты видишь? Новые методы арт-терапии",
+    "authors": [
+      "Бетенски М."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 10,
+    "global_order": 510010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение к лекции о горе и утрате: преподаватель упоминает книгу при обсуждении арт-терапии. Порядок и значимость предложены агентом. Библиографическая запись не подтверждает пригодность каждого упражнения для любой ситуации.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Бетенски М. Что ты видишь? Новые методы арт-терапии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Фамилия автора и полное название уточнены по библиотечной записи; год внешней карточки не перенесён на неизвестную редакцию курса. Научные утверждения лекции этим review не одобряются."
+  }
+]

@@ -310,5 +310,51 @@
       "Библиотека РГБМ различает сокращённый пересказ «Анти-Карнеги» и полный перевод «Человек-манипулятор» 2004 года. Учебный список указывает 2005 год без издательства. Конкретное издание требует сверки; варианты не объединены, исходная запись сохранена."
     ],
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_dollard_frustration_aggression",
+    "work_id": "lit_dollard_frustration_aggression",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Frustration and Aggression",
+    "authors": [
+      "John Dollard",
+      "Neal E. Miller",
+      "Leonard W. Doob",
+      "O. H. Mowrer",
+      "Robert R. Sears"
+    ],
+    "year": 1939,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 90,
+    "global_order": 610090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Историческое дополнительное чтение после лекции о становлении социальной психологии. В лекции книга названа «Фрустрация и агрессия». Порядок и значимость предложены агентом; наличие книги в каталоге не означает одобрения гипотезы как универсального объяснения поведения.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "John Dollard, Neal E. Miller, Leonard W. Doob, O. H. Mowrer, Robert R. Sears. Frustration and Aggression"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русский перевод и используемая в курсе редакция не установлены."
+    ],
+    "notes": "Оригинальное название, пять основных авторов и год первой публикации сверены по библиотечной записи и упоминанию в лекции. Содержание книги не использовано для новых учебных ответов."
   }
 ]

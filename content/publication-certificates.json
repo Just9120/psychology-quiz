@@ -184,6 +184,20 @@
       "review_sha256": "0f6aa62c11009241c1c8c7284410ee091df96c509e5875e7d3a17a5e3b861251",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "i5yvkATaVLwPH/CWRldbLmPWKiERrmopEFBiG/zrhXlbEjEXqmWcy7e8q8ySkc1d9696jek0tt3WA6WgbUj0Ag=="
+    },
+    "literature:lit_dollard_frustration_aggression": {
+      "schema_version": 1,
+      "item_sha256": "90074a050e729f11b59a29a7771f391d99b37769371430cf0200c95afc2d71f7",
+      "review_sha256": "ddfe018fa9af4a565a256c14e2462f273e3444cfa260816c527ab8b43a924ae1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "RRdc2PFzpcHR4LwsGciaFMu7mG1erDRDr3+vJUK40mBmnVwzOx6TMmsmqkcxE2/BoVjYcQUO3fMobh/yNXTLDQ=="
+    },
+    "literature:lit_betensky_what_do_you_see": {
+      "schema_version": 1,
+      "item_sha256": "773a6fdd011df19198bbbb63c1faf788a65a53b5d7ce27f1ed3a9bbcfacd36fa",
+      "review_sha256": "8c6e735c0a05ea83a68b022645e7cd495041c6cdde6bc7752e29b6655f383ea5",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "boHPZ+J4/IVunxCd/q9bQWPz0QmsUkvOVEBeHiMwj5TeoxnSvF77P2WqBUAyUj3zujlgvxmYCPVJB3lo+kRUCg=="
     }
   }
 }

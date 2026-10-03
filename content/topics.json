@@ -154,7 +154,8 @@
     "status": "active",
     "order": 510,
     "available_contours": [
-      "questions"
+      "questions",
+      "literature"
     ],
     "source_notes": "Авторский учебный вопрос по проверенному материалу."
   },
