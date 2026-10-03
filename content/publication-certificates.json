@@ -254,6 +254,34 @@
       "review_sha256": "91963b20b0a0dd2e9dafe226e6b540c22f9f25b553d8321978f5ffa5c601cb38",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "CbDyRQbMtXQlgqp6me1DfnIiAbIqvVknii6EjK7D43SGL/N56qYMhckt2Og2YwPhgcN7TD/2PYtyymvQIgKFBA=="
+    },
+    "literature:lit_schutzenberger_ancestor_syndrome": {
+      "schema_version": 1,
+      "item_sha256": "a7fee40f99fb87a84fd83c5f065b2185c5f356786b9cf52f79e37007d8b9a424",
+      "review_sha256": "75077b0a111d3ea07e071476d890589bc83407aadabab71d11109a231ce38a68",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "EJCp5qFF2X1bMF8ijHhRx50ewreGJeFs1TFevNj2OIDKyex77BmJIAqaLmS3XjoSYMYmfV+yLGciIBNbiiWtBQ=="
+    },
+    "literature:lit_makarov_selected_psychotherapy_lectures": {
+      "schema_version": 1,
+      "item_sha256": "bc0bb20395b01dc2a071948dc18ea40b282b7ffd80da2fc3d51169639c0034f5",
+      "review_sha256": "c4c2d0e495563d475a98e0e9714e45a5fe0fcde10c69f7211cc1265fb238f956",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qtC57glD0S3z4CxtoVL2x9f9BtwQVgejEdaQ/1VaaoqSg/9zy70B6YaRWEqkTA5t113JsghcBqR5hRSVcgqKDw=="
+    },
+    "literature:lit_piaget_psychology_intelligence": {
+      "schema_version": 1,
+      "item_sha256": "90c67bb19cd48119c646980a957a7167022d24352c09bd9c81048426ab39d3a2",
+      "review_sha256": "816def29412793d8a8adae39d524f43bb9d1cf36ac0341b4e2a433e4c9305b37",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "HHFLk6XI6Dfrh5hRSgWErT3liFz2v0qL02VTfgDaL+sa5yLZq4/3QsZ3RhJJX1VuYXeznQ0PsbNajdjlRoSHBQ=="
+    },
+    "literature:lit_maslow_psychology_being": {
+      "schema_version": 1,
+      "item_sha256": "ed9890d57cb1ab4530c747dfda91cbe57a0f661417586bce6534d3bbd701f2d1",
+      "review_sha256": "2f44778823f9915a3daeeed63a84e0443adfac14a404e24c171285e644a5bd70",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "n4469t+IHEi4CTnxx3Y/nBaRGyaHfSANZUCsXWP2X/JWsDw3vQBYhAYfGN16rTuLMAzeAQfrIMtXkGNmVjGOBw=="
     }
   }
 }

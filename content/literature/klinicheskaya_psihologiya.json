@@ -40,5 +40,89 @@
       "Редакция перевода и год используемого издания не установлены."
     ],
     "notes": "Фамилия автора и полное название уточнены по библиотечной записи; год внешней карточки не перенесён на неизвестную редакцию курса. Научные утверждения лекции этим review не одобряются."
+  },
+  {
+    "id": "lit_schutzenberger_ancestor_syndrome",
+    "work_id": "lit_schutzenberger_ancestor_syndrome",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Синдром предков",
+    "authors": [
+      "Шутценбергер А. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 20,
+    "global_order": 510020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после темы зависимого поведения: книга прямо названа в лекции курса. Этап и значимость — рекомендация агента. Библиографическое включение не подтверждает научную достоверность трансгенерационных объяснений, семейных расстановок или других методов; их утверждения требуют отдельной содержательной проверки.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_117013a575cc"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_117013a575cc",
+        "title": "Психология зависимого поведения",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Шутценбергер А. А.. Синдром предков"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_makarov_selected_psychotherapy_lectures",
+    "work_id": "lit_makarov_selected_psychotherapy_lectures",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Избранные лекции по психотерапии",
+    "authors": [
+      "Макаров В. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 30,
+    "global_order": 510030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Углубляющее чтение после лекции о горе и утрате: преподаватель прямо рекомендует книгу, отдельно упоминая главу о мифическом мышлении. Дополнительная значимость и этап — рекомендация агента; сравнение с другими книгами и обязательные предварительные работы преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Макаров В. В.. Избранные лекции по психотерапии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
   }
 ]
