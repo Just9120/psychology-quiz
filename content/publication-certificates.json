@@ -310,6 +310,13 @@
       "review_sha256": "11d919293348087e8216a1243a588beeca3151b0c2747bd42c098e1801bda83b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "APzJ+cJ0pDoF1Eqyo5+J/RnyX9uKR93CiEm9ONe/2AHU+f2fFDb2Y2TUL99ADQMJeFmWQk93S9CLDR0eYgf5CQ=="
+    },
+    "literature:lit_lindsay_ethics_european_psychologists": {
+      "schema_version": 1,
+      "item_sha256": "14df79dff03d3343e0e888a1f3302dd3c0c4fd94f48b01df1e12282f30389a18",
+      "review_sha256": "9f31cb9d7ee0985afb8cdb526fc7100c66654381138710d1a4ee9ff8ea0e4c3d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "nFJc74z8IZnP0UroaQnfuXS7TEbhWabcXNIJCNcame/e6gfyFXR+lsqYTOdXhJhnGUaZ7BO6/y860gZgPCzGDg=="
     }
   }
 }
