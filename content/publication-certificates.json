@@ -453,10 +453,10 @@
     },
     "literature:lit_znakov_understanding_thought_communication": {
       "schema_version": 1,
-      "item_sha256": "9f5716c4cdf40c6e60d081187818de12bd7a9f9857c9b7fbcabe2b049c711ae4",
-      "review_sha256": "72ba36b971a9e32c23a81a5b945d15fdec4d230bfdaddc616a6c4c08d9f364dc",
+      "item_sha256": "30cb25cee5f02726e3f4bb3b8564ddff8c618a57fa77391fb911fec991e382f4",
+      "review_sha256": "55f604a88216516149c74b49e02064e63a6b57debc9f3c78e8745c9131d99486",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "ipqMyPKBxq5lY4ZKBeRENJ2OXV1b+huouxZTkYaTJdEyU/HsXetWz/r0rm669JHBBNya/IbYWNnpi5tbab7ECg=="
+      "signature": "LzGBT0DizFx0fsVzhAzfGD3ubwoU8FIjmJCKOXelfSgKSFCKO5bbMRaImgXhD/ef1KP22MBec5v8rI9E1wGcDg=="
     },
     "literature:lit_existential_psychology_anthology": {
       "schema_version": 1,
