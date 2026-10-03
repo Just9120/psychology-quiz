@@ -460,10 +460,10 @@
     },
     "literature:lit_existential_psychology_anthology": {
       "schema_version": 1,
-      "item_sha256": "581b5f73e5925a98ee5e22319c8b9a1e8eff906a14d95e1cd8d58da2aab24adb",
-      "review_sha256": "86f504d7ab915ce26c91037b336ff139aaecf40cf3739867d5f51240cafc3a9d",
+      "item_sha256": "a15045848fcc206bfac97d75d4c777a23600d3392b1448af09b26332569917dc",
+      "review_sha256": "cf1cc71513c895e5b492e7ba6b913a568fa22abdef0de5b7cf22764e63fd19bd",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "eSF3vb59YsznVnCi6SsphbsqVwa6l1PdcUGTvbZmKLKC/OIaa8mxKVEiytY8zEMD/0BTQbSk/Cg4U2QaqSvICQ=="
+      "signature": "wGG/ZeyLtYImw/WiNml4y0fArTZl8A1v4jrl+TaWLTgWjCOm1J0PsTShzmkTXyi1FfiRorX6QXPrUsm7mrndAA=="
     },
     "literature:lit_znakov_psychology_understanding": {
       "schema_version": 1,
@@ -495,10 +495,10 @@
     },
     "literature:lit_moody_life_after_life": {
       "schema_version": 1,
-      "item_sha256": "3b018368b3da900cc8f4871df0b647d877f001e078cd0f862fa5cc0a8050f84d",
-      "review_sha256": "87d4d75436bcf203cb1248a7df0f20ebc156a4deb47492fc7d5909a926df1cb7",
+      "item_sha256": "21ff9fb7cafed1d68c8af04477a14b46cb93eaad8d9c59bd4200920ea2c13fa2",
+      "review_sha256": "5a05dfcdd47f787d894710fd455e0147613effd19c7923ec97f31799c86f0cfe",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "7c7RCZWNBUeTlMyNqkVJuB869bH+YuUPXhehPZmacWVe7Z8alc4VTajQVfaidXudnLfIgDUpQyY1CG9nPsaWAA=="
+      "signature": "e81Gyv3HB6XZgkrFkYx81jcNLF16KP5gSrx9oKtcrTvNKIasbh4OZt4y9/vZQnKLw570KSHjjOKE9M/5BOOUBQ=="
     },
     "literature:lit_mokhovikov_psychotherapy_pain_points": {
       "schema_version": 1,
