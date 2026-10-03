@@ -415,6 +415,83 @@
       "review_sha256": "18a0e6232d0e0d92441b2eb6865d2f795e0f31e49cfed5ef4d6fd82ac10ce6c1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "I65HhHLNRum77G760o8vuSxwp4+sG4T7H5qSAN8YT49Dx/Yb6TWnAIBLKiv6n95Fz9CtQ2G3Aj7UtQUE0tzODA=="
+    },
+    "literature:lit_butler_bowdon_eysenck_overview": {
+      "schema_version": 1,
+      "item_sha256": "fb35864a2a796f188c5be6ac8547783c7ea3856a706e140cc4f257e461c79a98",
+      "review_sha256": "4482ba3738f1374b4453f1ab8c87511c4204f98c95586c534634eabe461a6cf1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "vCU8KgFuv1xsMqlEI1X4D10hIfNwvt+RWLDQ3XYIgd7ma7JnspxjYPnT7kdDC7MvNUpfRXBlgjiUd/A2i/DODQ=="
+    },
+    "literature:lit_eysenck_wilson_personality": {
+      "schema_version": 1,
+      "item_sha256": "0f18d5ce123033e140d1a816908db795195634ef6724bc1bfc8c05c866781e5a",
+      "review_sha256": "5d1e7d64cb494976ca2e281d2d7b2d0a3a617c3b0b5ccdc2070bd4655e2ba375",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "jnoASG2xKAJnhw11OMMK9zWPBf5VvXPTdHwVgzKPfDWfvZPriCYswTdByRxDqCku2RDbBiQbjVxUHx9gDUV6CA=="
+    },
+    "literature:lit_burlachuk_psychodiagnostics": {
+      "schema_version": 1,
+      "item_sha256": "9842aa8aac261d9762eeb87ef2bb4a5ca6b480e707dc06b4c40fbbee16c16ec4",
+      "review_sha256": "efed0b76d34234b7acdb55b265ec32eed90beb8a3b612b152154fb3cc0961dd4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "jEbcTuc20/JGiHOdHzESevWzp5MA0tGNihRyTr3J95x3kb9pgbi2tEi8PaiJBrBpIzNeqQPcHa88TRZTTkf+AA=="
+    },
+    "literature:lit_logvinenko_psychological_measurement": {
+      "schema_version": 1,
+      "item_sha256": "0868ec6f8ece97796f4d1875be8fd73f519aa16b56c68febc6013a5a9a48bca7",
+      "review_sha256": "b0f02c317d85c8282d8f2a846c27f85abdb005b077758aac4dfdcbeac23e7dae",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "d36H+0NpbjhHefmv9UJIjokkTOE47+Ce4Dpk++SGk3NRC2hZ2IiD5HVMxn4sPTLQxqKe8gK4t1jMg6NocbzqBA=="
+    },
+    "literature:lit_binet_mental_abilities": {
+      "schema_version": 1,
+      "item_sha256": "cfb8e2b260db60bd33a513542f2dfeb74a0ad6f96a097f3dc8499f00ac34ee9e",
+      "review_sha256": "02c86afebe9998041ae1bc0ed7a15a2af41009d460072d2fe7f5fe44c618afa6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "jgAQvY/VKb55Ce82q7XXxOrVmyb2Ue1a6dP5E2FQlNsLUlDAHUte/XZcLIl4PYKOvfCax7Gwp9tYHgDJFgAqBg=="
+    },
+    "literature:lit_znakov_understanding_thought_communication": {
+      "schema_version": 1,
+      "item_sha256": "9f5716c4cdf40c6e60d081187818de12bd7a9f9857c9b7fbcabe2b049c711ae4",
+      "review_sha256": "72ba36b971a9e32c23a81a5b945d15fdec4d230bfdaddc616a6c4c08d9f364dc",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ipqMyPKBxq5lY4ZKBeRENJ2OXV1b+huouxZTkYaTJdEyU/HsXetWz/r0rm669JHBBNya/IbYWNnpi5tbab7ECg=="
+    },
+    "literature:lit_existential_psychology_anthology": {
+      "schema_version": 1,
+      "item_sha256": "581b5f73e5925a98ee5e22319c8b9a1e8eff906a14d95e1cd8d58da2aab24adb",
+      "review_sha256": "86f504d7ab915ce26c91037b336ff139aaecf40cf3739867d5f51240cafc3a9d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "eSF3vb59YsznVnCi6SsphbsqVwa6l1PdcUGTvbZmKLKC/OIaa8mxKVEiytY8zEMD/0BTQbSk/Cg4U2QaqSvICQ=="
+    },
+    "literature:lit_znakov_psychology_understanding": {
+      "schema_version": 1,
+      "item_sha256": "bd294e12c8f7601e2b701ee9866a4feefc26a5ce518bf533e6329e0c0ca06532",
+      "review_sha256": "58d018a3a23bee4d97abab26ce2438999f4051ea441f1ad1c4a560ca231f865d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "dhu9lfSUNWXjO5VFry1JL7b6QyPX02BqNtbPuq2ill7dJd0/BkV0LBreUKYR5G5R0ZOB6O5d/bNrVP222tSrAg=="
+    },
+    "literature:lit_zobkov_understanding_fairytale": {
+      "schema_version": 1,
+      "item_sha256": "69957a07d629ad478a0196873e781578dcda062e89a468003a8f13afcae15c8e",
+      "review_sha256": "48e0451aa23742ac5eb6cf9e733ac1c07026e71232b93e4c3b66a9143b80b0ca",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XacmPfyG/B8WiLGQKJd3TjQpU3inCyXUZTwYrEzYUdArnxKnG/49df9WqKhDGT9ks0nOlrMhNJ/LmsifpTH3Bw=="
+    },
+    "literature:lit_bugental_art_being_alive": {
+      "schema_version": 1,
+      "item_sha256": "1f543bc17de86c1605de54bb1d9690d333e068e436cf50be7c2f96f4898f78e3",
+      "review_sha256": "753e7d1a2a4545cfa811dd1bfbe593e7b9dc763f608bb019c9e53a795cd6c0c0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "KfJf2YeIpIAV537hUFhvd/JETTt2Jzpvo7C+cHqK3Orbewne4NJ0IHmI4xSZtOubHrjfFnzOHbJt1CN2kp4GAQ=="
+    },
+    "literature:lit_vasilyuk_understanding_psychotherapy_system": {
+      "schema_version": 1,
+      "item_sha256": "acc0828d141f201546552106d4058808e6752c4786514262dfd7a0c2e0650583",
+      "review_sha256": "6d08a157b44d9844b0b53874bd811f1fc778245eb0391d3b2b02274d4059b982",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "CLAPY17CPZfNr7P2Ex0cTye8jyUsBQ8IAoVXIGW2F13nDnCUxol/UazA/P1lnCl3QfwGb7eAzxsT9zwsMX64Bg=="
     }
   }
 }
