@@ -432,10 +432,10 @@
     },
     "literature:lit_burlachuk_psychodiagnostics": {
       "schema_version": 1,
-      "item_sha256": "9842aa8aac261d9762eeb87ef2bb4a5ca6b480e707dc06b4c40fbbee16c16ec4",
-      "review_sha256": "efed0b76d34234b7acdb55b265ec32eed90beb8a3b612b152154fb3cc0961dd4",
+      "item_sha256": "ed3b2c0a3d0547eee102dbb8229e539ebcdd71106ed279a873a6b8d0aea7356b",
+      "review_sha256": "95280da1cfa4bcead198da083b17a1db4a34494aff31d863100b47d37ce6682a",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "jEbcTuc20/JGiHOdHzESevWzp5MA0tGNihRyTr3J95x3kb9pgbi2tEi8PaiJBrBpIzNeqQPcHa88TRZTTkf+AA=="
+      "signature": "6ar1PY4wy+pWrZRX5jSDs7iMgn5zpDgaMYVabZNQR7ycU8pn5cMo0sX26Cj29Lxi8ee3qrty8M+UqAQJA6gVBw=="
     },
     "literature:lit_logvinenko_psychological_measurement": {
       "schema_version": 1,
@@ -467,10 +467,10 @@
     },
     "literature:lit_znakov_psychology_understanding": {
       "schema_version": 1,
-      "item_sha256": "bd294e12c8f7601e2b701ee9866a4feefc26a5ce518bf533e6329e0c0ca06532",
-      "review_sha256": "58d018a3a23bee4d97abab26ce2438999f4051ea441f1ad1c4a560ca231f865d",
+      "item_sha256": "bf0394c57161113942be47f9bb98d0296fa4f8af47c2289e717df29aad533800",
+      "review_sha256": "3df51e2d95a26ddbdd13d7952ee680e99ef46f8bf35a7798434603027052255d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "dhu9lfSUNWXjO5VFry1JL7b6QyPX02BqNtbPuq2ill7dJd0/BkV0LBreUKYR5G5R0ZOB6O5d/bNrVP222tSrAg=="
+      "signature": "3byBK2TWVu0F2tQ4ox3ETa7rldwCjZfiJgBTuPQJ2E7LX7vEMFtmuWCetxbdrsCYcK/C+d9FOuZa1DOBXOSyCA=="
     },
     "literature:lit_zobkov_understanding_fairytale": {
       "schema_version": 1,
@@ -488,10 +488,10 @@
     },
     "literature:lit_vasilyuk_understanding_psychotherapy_system": {
       "schema_version": 1,
-      "item_sha256": "acc0828d141f201546552106d4058808e6752c4786514262dfd7a0c2e0650583",
-      "review_sha256": "6d08a157b44d9844b0b53874bd811f1fc778245eb0391d3b2b02274d4059b982",
+      "item_sha256": "a702095f07dac6f3cd218a1a6dcb83001f5bde8fd36b9056a2079ba679f8b7e6",
+      "review_sha256": "1c154defc647bc6324ff6e99d35d16733e1e83e745af077291b0a440cbd4e1f9",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "CLAPY17CPZfNr7P2Ex0cTye8jyUsBQ8IAoVXIGW2F13nDnCUxol/UazA/P1lnCl3QfwGb7eAzxsT9zwsMX64Bg=="
+      "signature": "HmWdV1Z2S5+rS+RPmpONAiLzFtWaEzG14JZDAMfw6LIAqvB025K0eSIPe+odo/ZuqiMjnnZAo+DPOybGhvjTBg=="
     },
     "literature:lit_moody_life_after_life": {
       "schema_version": 1,
