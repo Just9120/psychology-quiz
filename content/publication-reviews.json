@@ -2877,10 +2877,10 @@
     },
     "literature:lit_909b215a9fece3cc": {
       "decision": "approved",
-      "item_sha256": "44b1111fe665d1e683fe4e0b4da94b8387bbc04cdb796c52da2df88e25618650",
+      "item_sha256": "63b881d752f4faba3f373877925334b827593f473166482cd1faed8727042039",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-30",
+      "reviewed_at": "2026-10-03",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -2894,6 +2894,11 @@
         "evidence": "https://www.mann-ivanov-ferber.ru/catalog/product/psixologiia-ubezdeniia-legkii-vybor/",
         "scope": "Official publisher record retrieved: same short title, three authors, revised MIF edition. Course Piter 2017 edition not identified; reconciliation candidate, not proof of identical edition.",
         "decision": "Preserve original metadata and identity; reading role remains UNSET pending reconciliation."
+      },
+      "bibliographic_reconciliation_20261003": {
+        "decision": "preserve_course_citation_with_corrected_warning",
+        "evidence_scope": "Official Piter record confirms publication of this title by Piter with three authors, 2015 printing and 288 pages. Prior MIF-only comparison was incomplete. Current course source still lists Cialdini alone, 2017, 320 pages; exact edition and reading role remain unresolved. No scientific claims or reading-state changes.",
+        "source_readback": "Authenticated current PDF text and modified_time 2026-09-08T19:47:53.199Z match the source record."
       }
     },
     "literature:lit_543dcd562c0460c5": {
