@@ -1,5 +1,11 @@
 # Delivery Plan
 
+**SRC-02 / подтверждённое задание практики №36, 03.10:** два исходных PDF в соседних папках связаны с существующим занятием после сравнения вопросов задания с явным объявлением домашней работы в транскрипте: новые изменения и ресурсы клиента, актуальность целей и корректировка стратегии. Fresh metadata трёх источников, SHA captures и exact locators проверены; все прежние 410 links сохранены. Это классификация задания, а не научное одобрение клинических утверждений или готовых ответов. Исходники, holds и личное состояние не менялись.
+
+Актуальные private inputs: `data/goal-source-format-links-homework36-20261003.json`, `data/goal-source-queue-homework36-20261003.json`; paired evidence `data/goal-homework-paired-review-36-20261003.json`, оставшиеся восемь заданий `data/goal-homework-classification-limitations-remaining8-20261003.json`. Canonical current-source/signature verification PASS: 425 источников, 412 links / 153 сгруппированных занятия, 33 signed derivatives; processing 410 pending / 13 conflict / два processed сохранён. Runtime tests/build N/A — metadata-only работа. №34–35 требуют дополнительного сопоставления: этап PDF-кейса не всегда совпадает с объявленной темой занятия; семейное расхождение также сохранено, автоматическая привязка по номеру не применяется.
+
+Реализовано по коду 7/12 AC. SRC-02/05, SRH-01, LIT-01/06 и общий PR/required CI/merge/CD остаются незавершёнными. Следующий шаг — разбор оставшихся неоднозначных associations с сохранением исходного номера задания и дополнительных связей через metadata.
+
 ## Current Goal — CORPUS-SEARCH-COMPLETION-20261001
 
 **SRC-02 / клинические задания 30–33, 03.10:** семь ранее unresolved источников связаны с четырьмя существующими занятиями. Транскрипты называют домашний кейс Алексея, его первичный разбор/пересмотр гипотез; numbered homework sources продолжают этот же кейс. Exact snapshot hashes и свежие metadata всех 11 источников совпали. Одинаковые copies задания 31/32/33 в своей и соседней папках сохраняют distinct Drive identities и связь с исходным numbered lesson; новые занятия и физические copies агент не создавал. Содержательная/клиническая проверка готовых разборов не заявляется; metadata connection не означает publication approval.
