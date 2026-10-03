@@ -285,7 +285,7 @@ def validate() -> list[str]:
             if isinstance(entry.get("id"), str):
                 entries[entry["id"]] = entry
             topic = topic_map.get(file_topic_id, {})
-            if entry.get("module") != topic.get("module") or "literature" not in topic.get("available_contours", []):
+            if entry.get("module") not in topic.get("modules", [topic.get("module")]) or "literature" not in topic.get("available_contours", []):
                 errors.append(f"{label}: module/literature contour must match topic registry")
             topic_order = entry.get("topic_order")
             if type(topic_order) is int:

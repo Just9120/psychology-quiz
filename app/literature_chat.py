@@ -61,12 +61,14 @@ def _topics(module_token: str | None = None) -> tuple[str, InlineKeyboardMarkup 
     topics = list_literature_topic_payloads()
     if not topics:
         return ("Сейчас нет опубликованной литературы.", None) if module_token is None else None
-    modules = [{"module": value} for value in dict.fromkeys(topic.get("module") for topic in topics)
+    modules = [{"module": value} for value in dict.fromkeys(value for topic in topics
+               for value in topic.get("modules", [topic.get("module")]))
                if isinstance(value, str) and value]
     module = _find(modules, module_token, "module") if module_token is not None else None
     if module_token is not None and module is None:
         return None
-    selected = [topic for topic in topics if module is None or topic.get("module") == module["module"]]
+    selected = [topic for topic in topics if module is None
+                or module["module"] in topic.get("modules", [topic.get("module")])]
     rows = [[InlineKeyboardButton(f"{topic['title']} · {topic['item_count']}",
              callback_data=f"lit:t:{_token(topic['topic_id'])}:0")]
             for topic in selected]

@@ -9,11 +9,21 @@ from app.literature import load_topic_registry
 from scripts import validate_literature, validate_topics
 
 
+def test_topic_module_membership_requires_primary_module_and_unique_course_modules(monkeypatch):
+    original = json.loads(Path('content/topics.json').read_text(encoding='utf-8'))
+    for invalid in ([], ['module1', 'module1'], ['module8'], ['module3'], 'module1'):
+        topics = copy.deepcopy(original)
+        topics[0]['modules'] = invalid
+        monkeypatch.setattr(validate_topics, 'load_json', lambda *_: topics)
+        assert any('modules must contain unique course modules' in error
+                   for error in validate_topics.validate())
+
+
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 152
-    assert len({item['work_id'] for item in items}) == 135
-    assert len({item['topic_id'] for item in items}) == 14
+    assert len(items) == 157
+    assert len({item['work_id'] for item in items}) == 140
+    assert len({item['topic_id'] for item in items}) == 15
     assert all(set(item['source']) == {'citation'} for item in items)
     assert all(item['source']['citation'] for item in items)
     legacy_ids = {key.split(':', 1)[1] for key in load_policy().legacy if key.startswith('literature:')}
@@ -21,8 +31,10 @@ def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     assert legacy_ids <= {item['id'] for item in items}
     physiology = [item for item in items if item['topic_id'] == 'fiziologiya_cheloveka']
     vnd = [item for item in items if item['topic_id'] == 'fiziologiya_vnd']
-    assert len(physiology) == len(vnd) == 15
-    assert {item['work_id'] for item in physiology} == {item['work_id'] for item in vnd}
+    assert len(physiology) == 15 and len(vnd) == 17
+    assert {item['work_id'] for item in vnd} - {item['work_id'] for item in physiology} == {
+        'lit_huizinga_homo_ludens', 'lit_selye_stress_without_distress'}
+    assert {item['work_id'] for item in physiology} <= {item['work_id'] for item in vnd}
     ales = [item for item in items if item['title'] == 'Индивидуальное и семейное психологическое консультирование']
     assert len(ales) == 2 and len({item['work_id'] for item in ales}) == 1
     assert {item['year'] for item in ales} == {None, 1999}

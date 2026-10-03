@@ -5,6 +5,16 @@ from unittest.mock import AsyncMock
 import pytest
 
 from app import literature_chat
+
+
+def test_cross_module_discipline_is_available_from_both_module_buttons(monkeypatch):
+    monkeypatch.setattr(literature_chat, "list_literature_topic_payloads", lambda: [
+        {"topic_id": "shared", "title": "Shared discipline", "module": "module2",
+         "modules": ["module2", "module3"], "item_count": 2}])
+    for module in ("module2", "module3"):
+        text, keyboard = literature_chat._topics(literature_chat._token(module))
+        assert module.replace("module", "Модуль ") in text
+        assert keyboard.inline_keyboard[0][0].callback_data == "lit:t:" + literature_chat._token("shared") + ":0"
 from app.literature import load_literature_items
 from tests.test_attempt_content import TOKEN, bank
 from tests.test_miniapp_api import _make_init_data

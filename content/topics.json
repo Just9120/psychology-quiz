@@ -206,5 +206,21 @@
       "literature"
     ],
     "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "psychodiagnostics",
+    "title": "Психодиагностика",
+    "module": "module2",
+    "modules": [
+      "module2",
+      "module3"
+    ],
+    "question_file": null,
+    "status": "active",
+    "order": 250,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Shared course discipline in modules 2 and 3; bibliographic metadata only, no quiz publication implied."
   }
 ]

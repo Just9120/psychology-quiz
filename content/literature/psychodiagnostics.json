@@ -1,0 +1,78 @@
+[
+  {
+    "id": "lit_vasilyuk_psychology_experiencing",
+    "work_id": "lit_vasilyuk_psychology_experiencing",
+    "topic_id": "psychodiagnostics",
+    "module": "module2",
+    "title": "Психология переживания",
+    "authors": [
+      "Василюк Ф. Е."
+    ],
+    "year": 1984,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 20,
+    "global_order": 250020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение по переживанию критических ситуаций: книга прямо указана в библиографии доступной статьи курса. Этап и значимость — рекомендация агента; точная привязка статьи к одному занятию не установлена, поэтому книга остаётся общей для дисциплины. Библиографическая ссылка не означает, что полный текст книги прочитан или доступен в источниках проекта.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Василюк Ф. Е.. Психология переживания"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Издатель и конкретный экземпляр не установлены; год прямо указан в библиографии курса."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_freud_psychopathology_everyday_life",
+    "work_id": "lit_freud_psychopathology_everyday_life",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Психопатология обыденной жизни",
+    "authors": [
+      "Фрейд З."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 10,
+    "global_order": 250010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после психодиагностического практикума: преподаватель прямо называет работу Фрейда при обсуждении оговорок. Значимость и этап — рекомендация агента. Исторические психоаналитические интерпретации не заменяют современную диагностику; сама запись не утверждает их универсальную достоверность.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_2fecd8a4c446"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_2fecd8a4c446",
+        "title": "Практика №24",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Фрейд З.. Психопатология обыденной жизни"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  }
+]
