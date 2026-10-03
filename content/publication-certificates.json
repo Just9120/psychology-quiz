@@ -418,17 +418,17 @@
     },
     "literature:lit_butler_bowdon_eysenck_overview": {
       "schema_version": 1,
-      "item_sha256": "fb35864a2a796f188c5be6ac8547783c7ea3856a706e140cc4f257e461c79a98",
-      "review_sha256": "4482ba3738f1374b4453f1ab8c87511c4204f98c95586c534634eabe461a6cf1",
+      "item_sha256": "9c8283344e7f9e3b73e4083e7addb37d4f0eed4ba957a1801c141cfb5d1c5c9e",
+      "review_sha256": "038af77a55100561b2f9c551697ab0026695eb46d8efba847e1d8d10a412fca4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "vCU8KgFuv1xsMqlEI1X4D10hIfNwvt+RWLDQ3XYIgd7ma7JnspxjYPnT7kdDC7MvNUpfRXBlgjiUd/A2i/DODQ=="
+      "signature": "eks49HKYomVMOkz0xoWN/ypy4mxfCg7biIQqmvi0EYMqYIKk3AWP/f7pniZqvSMxRsTwqyLyNv8riJlS8bPzAw=="
     },
     "literature:lit_eysenck_wilson_personality": {
       "schema_version": 1,
-      "item_sha256": "0f18d5ce123033e140d1a816908db795195634ef6724bc1bfc8c05c866781e5a",
-      "review_sha256": "5d1e7d64cb494976ca2e281d2d7b2d0a3a617c3b0b5ccdc2070bd4655e2ba375",
+      "item_sha256": "d18f2e4adfb12e5423ae94b4237e8653e3a055eceaf50f26d55ec3917c1b6eb5",
+      "review_sha256": "8fa3a82c481d080d81cfe40679778995107cfe12bbd5bbcbcb570f50d5645b09",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "jnoASG2xKAJnhw11OMMK9zWPBf5VvXPTdHwVgzKPfDWfvZPriCYswTdByRxDqCku2RDbBiQbjVxUHx9gDUV6CA=="
+      "signature": "PIfeeLehvbIo2sWy1/y/Q6qNZlSSEhxXGk37svOxkK1JNudBV/NKxQaxyJcYQXdNAGfyL6A+xDyefsZMA6KNDg=="
     },
     "literature:lit_burlachuk_psychodiagnostics": {
       "schema_version": 1,
