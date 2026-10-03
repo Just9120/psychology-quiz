@@ -663,5 +663,40 @@
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
     "importance": "important",
     "importance_source": "agent"
+  },
+  {
+    "id": "lit_anna_freud_ego_defence",
+    "work_id": "lit_anna_freud_ego_defence",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Эго и механизмы защиты",
+    "authors": [
+      "Фрейд А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 180,
+    "global_order": 220180,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение к занятию №12: пример теоретической модели механизмов защиты, на который прямо ссылается преподаватель. Рассматривать в контексте психоаналитического подхода, а не как универсальное объяснение любого наблюдаемого поведения. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_6be3cecd6596"
+    ],
+    "source": {
+      "citation": "Фрейд А.. Эго и механизмы защиты"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Авторство и название сверены по фрагменту занятия и издательской записи. Содержание книги не использовалось для формирования вопросов."
   }
 ]

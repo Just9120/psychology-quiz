@@ -426,5 +426,41 @@
     "curriculum_topic_ids": [
       "t_09efb9aedb46"
     ]
+  },
+  {
+    "id": "lit_sommers_flanagan_clinical_interviewing",
+    "work_id": "lit_sommers_flanagan_clinical_interviewing",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Клиническое интервьюирование",
+    "authors": [
+      "Соммерс-Фланаган Дж.",
+      "Соммерс-Фланаган Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 120,
+    "global_order": 310120,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение после занятия о работе с запросом и выборе метода: структура клинической беседы и сбор информации для концептуализации. Книга прямо названа преподавателем; порядок и значимость предложены агентом. Чтение не заменяет практическое обучение и супервизию.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_34b2eed9d99a"
+    ],
+    "source": {
+      "citation": "Соммерс-Фланаган Дж., Соммерс-Фланаган Р.. Клиническое интервьюирование"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Авторство и название сверены по фрагменту занятия и издательской записи. Содержание книги не использовалось для формирования вопросов."
   }
 ]

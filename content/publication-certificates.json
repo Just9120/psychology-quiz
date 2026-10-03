@@ -163,6 +163,20 @@
       "review_sha256": "1c4b753f419eaf28f329e4dcd7a34f1aa469f0e4ae0de15a5061875c0dbbbd57",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "l28BN5eLXzLLIHaRJ2f0q0Dnba17xE4pvjoDWHxWTeI7dSqDL/SBd0wShZmzjUtBQ7bseNSAr2rnWUzqUVWFBg=="
+    },
+    "literature:lit_sommers_flanagan_clinical_interviewing": {
+      "schema_version": 1,
+      "item_sha256": "154cb8c20bbfc43a29a1b0285bc048dc5378d614cb87eee6699b8def95ea7ef9",
+      "review_sha256": "f0067f477d169e7f3c5c2a8841a0c2ef34177ff5aee27656faa99123f1cc04df",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7xlUgHPpyhjqNPQO/T31OkaTqqKFk3mPVzuZpCYKGY2ei6OMg0o/MzrkOYbTTSHMNxjGycZYHs6pefIz1xLcBg=="
+    },
+    "literature:lit_anna_freud_ego_defence": {
+      "schema_version": 1,
+      "item_sha256": "cec01136ad4c5578a0de88c40ac97a797bbc4286470abedd6e3f7360e55fabb8",
+      "review_sha256": "83173d3e194960223060cbd0c9da989596dd5ba2aeaf9b4162c7ae7393d1f0b7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "KjmqlYK2GWNFn0c2R57x+K2wW4ftLkpKTEv1r4K996i1xNoVNTtnwGdF1LYkGmBhLrtIfocJcB16ekYw0AtKBg=="
     }
   }
 }
