@@ -91,7 +91,8 @@ def private_classification_fixture(tmp_path, monkeypatch):
         "schema_version": 1, "disciplines": {}, "topics": {}}), encoding="utf-8")
     snapshot = scan("root", {"root": complete_listing(inventory["folders"]["root"])})
     source = deepcopy(dossier["sources"][0])
-    source.update(corpus_path="/".join(snapshot["paths"][source["id"]][0]),
+    source.update(reviewer="classification reviewer", reviewed_at="2026-09-29",
+                  corpus_path="/".join(snapshot["paths"][source["id"]][0]),
                   classification_receipt={"content": str(extract), "locator": "characters:0:15",
                       "snapshot_kind": "extracted_text", "snapshot_sha256": source["snapshot_sha256"]})
     path = root / "data/classification.json"

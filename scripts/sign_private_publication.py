@@ -337,10 +337,16 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
             if (not isinstance(receipt, dict)
                     or receipt.get("snapshot_kind") != "extracted_text"
                     or receipt.get("snapshot_sha256") != record.get("snapshot_sha256")
-                    or canonical.get("reviewer") != source.get("reviewer")
-                    or canonical.get("reviewed_at") != source.get("reviewed_at")
                     or canonical.get("corpus_path") not in
                     ("/".join(path) for path in snapshot["paths"][source_id])):
+                raise SigningError("private_source_classification_required")
+            # Classification and publication may be performed by different
+            # reviewers on different days; neither review substitutes for the other.
+            try:
+                classification_date = datetime.fromisoformat(canonical["reviewed_at"]).date()
+            except ValueError as error:
+                raise SigningError("private_source_classification_required") from error
+            if classification_date > datetime.now().date():
                 raise SigningError("private_source_classification_required")
             path = private_path(Path(receipt.get("content", "")), suffix=".txt")
             raw = path.read_bytes()
