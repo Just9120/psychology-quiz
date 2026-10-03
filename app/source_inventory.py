@@ -471,6 +471,37 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
     }
 
 
+def private_conflict_reviews(processed: dict, lesson_ids_by_file: dict[str, set[str]]) -> list[dict]:
+    """Expose editorial evidence privately without resolving or widening holds."""
+    result = []
+    for file_id, record in sorted(processed.items()):
+        state = record.get("review_state")
+        held = record if state == "conflict" else record.get("conflict_hold") if state == "pending_review" else None
+        if not isinstance(held, dict):
+            continue
+        issues = held.get("issues") or [held]
+        if (not isinstance(issues, list) or any(
+                not isinstance(issue, dict) or not isinstance(issue.get("reason"), str)
+                or not issue["reason"].strip() for issue in issues)):
+            raise InventoryError("invalid_conflict_evidence")
+        result.append({
+            "file_id": file_id,
+            "held_revision": list(record["revision"]),
+            "linked_lesson_ids": sorted(lesson_ids_by_file.get(file_id, set())),
+            "issues": [{
+                "reason": issue.get("reason"),
+                "locator": issue.get("locator"),
+                "reviewed_at": issue.get("reviewed_at"),
+                "related_source_ids": sorted(issue.get("related_source_ids") or []),
+            } for issue in issues],
+            "lesson_context_source_ids": sorted({
+                related for related, lessons in lesson_ids_by_file.items()
+                if related != file_id and lessons & lesson_ids_by_file.get(file_id, set())
+            }),
+        })
+    return result
+
+
 def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                          processed: dict | None = None, previous: dict | None = None,
                          reviews: dict | None = None,
@@ -667,6 +698,7 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
         linked = [lesson_ids_by_file.get(file_id, set()) for file_id in folder["file_ids"]]
         folder["link_state"] = "linked" if linked and set.intersection(*linked) else "candidate"
     return {"schema_version": 1, "root_id": snapshot["root_id"],
+            "conflict_reviews": private_conflict_reviews(processed or {}, lesson_ids_by_file),
             "files": entries, "missing_tracked_sources": missing,
             "missing_untracked_files": missing_untracked,
             "unmapped_legacy_derivative_ids": sorted(unmapped_legacy_derivatives or []),
