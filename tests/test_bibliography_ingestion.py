@@ -165,3 +165,58 @@ def test_single_word_catalogue_title_needs_book_or_author_context(text, expected
     for item in result["mentions"]:
         start, end = map(int, item["locator"].split(":")[1:])
         assert text[start:end] == item["title_candidate"]
+
+
+@pytest.mark.parametrize("changed", [None, "original", "derived", "revision"])
+def test_binary_bibliography_capture_binds_original_and_ocr_without_mutating_processing(
+        tmp_path, monkeypatch, changed):
+    from scripts import source_bibliography
+    import json
+
+    revision = ["2026-10-01", "Slides", "application/pdf"]
+    snapshot = {"files": {"s": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"s": [["Module", "Slides"]]}}
+    monkeypatch.setattr(source_bibliography, "_snapshot", lambda _: snapshot)
+    monkeypatch.setattr(source_bibliography, "_private_content_path", lambda p: tmp_path / p)
+    monkeypatch.setattr(source_bibliography, "_private_original_path", lambda p: tmp_path / p)
+    original, text = b"synthetic original bytes", 'Книга «Учебная работа».'.encode("utf-8")
+    (tmp_path / "original.pdf").write_bytes(original)
+    (tmp_path / "ocr.txt").write_bytes(text)
+    original_sha = hashlib.sha256(original).hexdigest()
+    binding = {"schema_version": 1, "source_id": "s", "revision": revision,
+               "original_sha256": original_sha,
+               "derived_text_sha256": hashlib.sha256(text).hexdigest(),
+               "extraction_profile": "synthetic-ocr-v1"}
+    (tmp_path / "binding.json").write_text(json.dumps(binding), encoding="utf-8")
+    processing = {"s": {"snapshot_kind": "file_bytes", "snapshot_sha256": original_sha,
+                        "revision": revision, "review_state": "conflict"}}
+    before = deepcopy(processing)
+    manifest = {"schema_version": 1, "sources": [{"source_id": "s", "content": "ocr.txt",
+                 "original": "original.pdf", "derivation_receipt": "binding.json"}]}
+    if changed == "original":
+        (tmp_path / "original.pdf").write_bytes(original + b"changed")
+    elif changed == "derived":
+        (tmp_path / "ocr.txt").write_bytes(text + b"changed")
+    elif changed == "revision":
+        binding["revision"] = ["different", "Slides", "application/pdf"]
+        (tmp_path / "binding.json").write_text(json.dumps(binding), encoding="utf-8")
+    if changed:
+        with pytest.raises(InventoryError, match="invalid_derivation_binding"):
+            source_bibliography.run({}, processing, manifest, [])
+    else:
+        result = source_bibliography.run({}, processing, manifest, [])
+        mention = result["mentions"][0]
+        assert mention["title_candidate"] == "Учебная работа"
+        assert mention["original_snapshot_sha256"] == original_sha
+        assert mention["snapshot_sha256"] == hashlib.sha256(text).hexdigest()
+        assert mention["decision"] == "pending_review" and result["publication_approval"] is False
+    assert processing == before
+
+
+@pytest.mark.parametrize("relative", ["outside.pdf", "data/../outside.pdf", "data/input.txt"])
+def test_binary_bibliography_original_rejects_paths_outside_private_pdf_storage(
+        tmp_path, monkeypatch, relative):
+    from scripts import source_bibliography
+    monkeypatch.setattr(source_bibliography, "ROOT", tmp_path)
+    with pytest.raises(InventoryError, match="original_requires_private_pdf"):
+        source_bibliography._private_original_path(relative)
