@@ -46,8 +46,12 @@ def record_conflict(current: dict, prior: dict, source_id: str, *, reason: str,
     if isinstance(previous, dict) and previous.get("review_state") == "conflict" and previous.get("revision") == revision:
         issues = previous.get("issues")
         if issues is None:
+            # Older single-issue records omitted this optional relationship list.
+            # Default only an absent field: malformed explicit values still fail
+            # validation, and the prior evidence must remain unchanged.
             issues = [{key: previous[key] for key in
-                       ("reason", "locator", "related_source_ids", "reviewed_at")}]
+                       ("reason", "locator", "reviewed_at")}]
+            issues[0]["related_source_ids"] = previous.get("related_source_ids", [])
         if (not isinstance(issues, list) or not issues
                 or any(not isinstance(issue, dict)
                        or any(not isinstance(issue.get(key), str) or not issue[key]

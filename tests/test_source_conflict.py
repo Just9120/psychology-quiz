@@ -124,3 +124,39 @@ def test_conflict_rejects_unverifiable_or_ambiguous_link(source_id, reason, rela
         record_conflict(export(["transcript", "slides"]), {}, source_id,
                         reason=reason, locator="slide 4", related_source_ids=related,
                         reviewed_at="2026-09-26T08:00:00Z")
+
+
+def test_second_conflict_accepts_legacy_record_without_optional_relationships():
+    inventory = export(["transcript", "slides"])
+    prior = {"transcript": {
+        "revision": ["2026-09-25T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "conflict", "reason": "Original issue",
+        "locator": "paragraph 1", "reviewed_at": "2026-09-26T08:00:00Z",
+        "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64,
+        "extraction_profile": "drive-native-text-v1"}}
+    updated = record_conflict(
+        inventory, prior, "transcript", reason="Additional issue",
+        locator="paragraph 4", related_source_ids=["slides"],
+        reviewed_at="2026-09-27T08:00:00Z")
+    assert "related_source_ids" not in prior["transcript"]
+    assert updated["transcript"]["issues"][0] == {
+        "reason": "Original issue", "locator": "paragraph 1",
+        "reviewed_at": "2026-09-26T08:00:00Z", "related_source_ids": []}
+    assert updated["transcript"]["snapshot_sha256"] == "a" * 64
+    assert updated["transcript"]["extraction_profile"] == "drive-native-text-v1"
+    assert updated["transcript"]["related_source_ids"] == ["slides"]
+    assert processing_status(_snapshot(inventory), updated)["transcript"] == "conflict_review"
+
+
+@pytest.mark.parametrize("relationships", [None, "slides", ["unknown"]])
+def test_legacy_conflict_does_not_default_malformed_explicit_relationships(relationships):
+    inventory = export(["transcript", "slides"])
+    prior = {"transcript": {
+        "revision": ["2026-09-25T00:00:00Z", "Lesson", "application/pdf"],
+        "review_state": "conflict", "reason": "Original issue",
+        "locator": "paragraph 1", "reviewed_at": "2026-09-26T08:00:00Z",
+        "related_source_ids": relationships}}
+    with pytest.raises(InventoryError, match="invalid_conflict_evidence"):
+        record_conflict(inventory, prior, "transcript", reason="Additional issue",
+                        locator="paragraph 4", related_source_ids=[],
+                        reviewed_at="2026-09-27T08:00:00Z")
