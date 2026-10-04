@@ -649,24 +649,24 @@
     },
     "literature:lit_nurkova_autobiographical_memory": {
       "schema_version": 1,
-      "item_sha256": "d3500fb0d2b007959e355c069f6480f391dd85b55fcc694d4fc7a873438a2d1d",
-      "review_sha256": "53127aa5316402912bd2d4f4e6a6bebb961c6189a9a8b45b5c016f76c6c83da2",
+      "item_sha256": "2dfe7689a5af801e0b2efd8104efd947aceddcf0b54a4a3ad5b1b8208abb57f0",
+      "review_sha256": "517a3ec50966f0cf17df49b1726894c2a8c94646c22a32be3cd471049b1fc3ac",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "5PxTf/K0P2ZqCrnCXb/vfKSysfpmNoWPSKqKf1Rp9Bu+efLX8o462H4ipUB1e/iWS3ruiPpFIMIEtZ8f5uTdAg=="
+      "signature": "xssvH+59acBBvS62CneLnzqaN4hxP18QXDCr8d8klCvVmbxvHGB1KyTsO+ffGDYYF2qzMCIYCW10Z1Pg9q0dCw=="
     },
     "literature:lit_golovakha_kronik_psychological_time": {
       "schema_version": 1,
-      "item_sha256": "05973a5c05be566d5892706e68c14089b5658ef8c82e2731fe18c9efd183af67",
-      "review_sha256": "4357ea1340b9489ec384463c5785c33a229d7a7c2c89257e95df35270e29f695",
+      "item_sha256": "5548354132b6c1e3eb66090af6712025cc53f7a2b6e12d1eba94ddc46dd9c599",
+      "review_sha256": "651343f2d715a0e9d57b696a5bb88eb13f626427ce22d29c3ff95250ae611f76",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Fcw7tAXLq/SigxpbPOUry8g821ZTA4ZZLIqWKAwcbnOR7yH/pvZw+fl3+IjXDt6EJPYl0Ho4YfDpZMXVFW3cBg=="
+      "signature": "aLyKquaPwRZdlL2Q1OTX5I0iu6W9/usM+2sgr8W8sbdt7ywjRqSxuDzt5MUe23tUnr54H6z3EEIV8dCeRO1JBw=="
     },
     "literature:lit_lebon_psychology_peoples_masses": {
       "schema_version": 1,
-      "item_sha256": "65fc65ecdadfb45cbd65e2bc8bef71060aef2057a6263a69f644b8d85afe8a3a",
-      "review_sha256": "97cae08d53ce07af7c2fe87a1a87b037bf91f2046bc924f5f2f7855b59bb9069",
+      "item_sha256": "deaefde3a1705aee0cd9507e32f9ff9e05c22ebcd5fe02f87281d35f6f1a56ac",
+      "review_sha256": "7a18d8b8129473921256917974ed6f941fb232e37131babccb7136dec2c9ab22",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "BmXhdJp5e7oZaOFzROn+fo8Ur9uNWK3FQX/+l6DQsSjVRKYmIvybUOHHwZJg5/A4eZToAFg/Tgxe/48tcgo+Ag=="
+      "signature": "jrVQPCNqjJyMY15uS6GqrMz7dGbUoJM5hM7d72z0DUc4zwFrG6TXwvEfT1MNF2W0BHhA+oJBump6xVxVBZlWAw=="
     }
   }
 }
