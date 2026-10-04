@@ -688,6 +688,13 @@
       "review_sha256": "6c7c057a0a616416329e4a513b55f83e0732ed6b0d38f3af596216eca938d6ef",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "AG4KPHOHthGazEsyYSak/IclDnE2YB7sSC0aRc7Csc1d8sRsBPUH4dIdQwvpV8P4ER3Bln09f+OoFTA2G/SDCA=="
+    },
+    "literature:lit_leonhard_accentuated_personalities": {
+      "schema_version": 1,
+      "item_sha256": "add8a5bbc07122a836dad2f35de2b4a066db8f6aa47f6ffe3342a394de146157",
+      "review_sha256": "6c22202225675a0d73efe5818e0f36e89affb24677fbca3265a104094552cb54",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "IJ6uhnPIhMT2RUTryPgz5qiytX2zp5X5Qp/MtV4iqCNrrhecmguZ0kZYEHXWIwYm7CdNHuw8YnyOI9BjkjmqBA=="
     }
   }
 }
