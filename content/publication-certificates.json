@@ -230,16 +230,16 @@
     "literature:lit_huizinga_homo_ludens": {
       "schema_version": 1,
       "item_sha256": "f0f56bc96925fa0f13eb51cf14b7cb474e5483c6fbd9e3d335069171e378a48c",
-      "review_sha256": "768ff37ebcf3432f1aa6d092121b801d198646e98a040c2f47eb3015724877be",
+      "review_sha256": "791b4128193242605ecb1636cbe80ad65df77530298e34c6193c7bc5ad905b4d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "yI11KGYBZTJYpa/ZK/q59mhW38uuebAB/B/iyzwcX5uLYjc9zWdzVgytOrcHE2sbmUB9hVD3/pG7DFkzLZG2CQ=="
+      "signature": "BAsCDeNcfT/aCBM4gm2Gzsrfow3vkdYsir5wfim/JAZy6FJ2udDg56H4oUM3dj6214IONXHU0jwQG0ZU8qsFCA=="
     },
     "literature:lit_selye_stress_without_distress": {
       "schema_version": 1,
       "item_sha256": "6f4d175a56e5cd6d72a4e47a65344e370aebd5b39783fde2198668da6f7705f3",
-      "review_sha256": "1a6b0150f3a6d7991f2624714c0a3efb78071ccdbcbcb151b9128e1a618bc332",
+      "review_sha256": "495cdba3a680e53a49020429ff62b2bec865444a1cb7e0ba46f6467e82d5ab59",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Y1yHV5G9NrWsY8VANOUoA1xXvYiLG8sBatABtYia3Cuq0P+rKVn48qI5u7mQ+9N2GmhAGnlJDLLJeSth5aRPDg=="
+      "signature": "75D7wW3VfRURn94DgKqX6vmD9KuPWWmGbQg9+yzSprw0bPobs2W0insD1zuMUOIGQ5KdXbMMelNKTYKW1LZJCg=="
     },
     "literature:lit_freud_psychopathology_everyday_life": {
       "schema_version": 1,
