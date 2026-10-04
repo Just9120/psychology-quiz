@@ -506,6 +506,20 @@
       "review_sha256": "3220caee140b5e2a8fd63e0e055d7473f6554857717288c5f010745d767e161f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "3ckU5dxszPa4Tm0NMMHi2SdqEjLmj0jzmZw+ftt8VtsJerBtRdbItibjtYq62wp5x+yplpXa1CcwgLc+F6xjAQ=="
+    },
+    "literature:lit_sechenov_reflexes_of_brain": {
+      "schema_version": 1,
+      "item_sha256": "db5c21e1afc413ea4092017197babbfff9e62724f7b24a7d449643772fc8adb8",
+      "review_sha256": "c76256e44d3e3f9677bd51c391a598f78837ab47cd55eab10a41f9768eaa849b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "X6SNZFe7sExKj+UIT+hQX1JWtC5sl5f+HHD98jerbdgTOxq+G+FtRC51jGMtu6wWvKPLh450K8faK7hyfA2UDQ=="
+    },
+    "literature:lit_kantor_objective_psychology_grammar": {
+      "schema_version": 1,
+      "item_sha256": "843dacedf89a347acbdde1029b33c467e2c8e56acd69dbaa128754abbb4109f3",
+      "review_sha256": "0b0f18fd6a786dacfa1b19722e7e3a89f923242e4c7a38f9b270ab3fe0694572",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ge7T7cce5lwnB8vUi/w+nRr7mndMwxiw6J5ntHhOQC55WIcdGTda3OQhKdtGV7sazQgWsGcXpyoaz9jvObzNAw=="
     }
   }
 }

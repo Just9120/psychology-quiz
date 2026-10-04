@@ -417,5 +417,52 @@
       "Конкретное издание и год в материале курса не указаны. Эффективность авторских упражнений и обещаний не установлена."
     ],
     "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_kantor_objective_psychology_grammar",
+    "work_id": "lit_kantor_objective_psychology_grammar",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "An objective psychology of grammar",
+    "authors": [
+      "Kantor J. R."
+    ],
+    "year": 1936,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 120,
+    "global_order": 640120,
+    "estimated_minutes": null,
+    "tags": [
+      "history"
+    ],
+    "why_read": "Дополнительное историческое чтение после введения в психолингвистику. В лекции произведение названо «Объективная психология грамматики»; англоязычный труд позволяет проследить исторический контекст дисциплины. Порядок предложен агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_6491072220dbf2cb"
+    ],
+    "curriculum_topic_ids": [
+      "t_e39d1d65a4d7"
+    ],
+    "source": {
+      "citation": "Kantor J. R.. An objective psychology of grammar"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Приведено английское название оригинала 1936 года; русское название в лекции не подтверждает опубликованный русский перевод. Экземпляр/переиздание курса не установлены.",
+      "Приоритет преподавателя не задан; содержание книги не проверено как источник новых ответов."
+    ],
+    "notes": "Подтверждены автор и произведение из упоминания курса; библиографическая проверка не одобряет все утверждения лекции.",
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e39d1d65a4d7",
+        "title": "Психолингвистика как наука",
+        "discipline_id": "psycholinguistics"
+      }
+    ]
   }
 ]
