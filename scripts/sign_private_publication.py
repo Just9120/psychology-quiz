@@ -360,7 +360,7 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                 raise SigningError("fragment_review_required")
             receipt = canonical.get("classification_receipt")
             if (not isinstance(receipt, dict)
-                    or receipt.get("snapshot_kind") != "extracted_text"
+                    or receipt.get("snapshot_kind") != record.get("snapshot_kind")
                     or receipt.get("snapshot_sha256") != record.get("snapshot_sha256")
                     or canonical.get("corpus_path") not in
                     ("/".join(path) for path in snapshot["paths"][source_id])):
@@ -373,14 +373,22 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                 raise SigningError("private_source_classification_required") from error
             if classification_date > datetime.now().date():
                 raise SigningError("private_source_classification_required")
-            path = private_path(Path(receipt.get("content", "")), suffix=".txt")
+            binary_classification = receipt.get("snapshot_kind") == "file_bytes"
+            if binary_classification and (dossier.get("kind") != "literature"
+                    or record.get("revision", [None, None, None])[2] != "application/pdf"):
+                raise SigningError("private_source_classification_required")
+            path = private_path(Path(receipt.get("content", "")), suffix=".pdf" if binary_classification else ".txt")
             raw = path.read_bytes()
             if hashlib.sha256(raw).hexdigest() != record.get("snapshot_sha256"):
                 raise SigningError("private_source_classification_changed")
-            text = raw.decode("utf-8")
-            ranges = _character_ranges(receipt.get("locator"))
-            if any(end > len(text) or not text[start:end].strip() for start, end in ranges):
-                raise SigningError("private_source_classification_required")
+            if binary_classification:
+                if not raw.startswith(b"%PDF-") or not re.fullmatch(r"pdf-pages:\d+(?:,\d+)*", receipt.get("locator", "")):
+                    raise SigningError("private_source_classification_required")
+            else:
+                text = raw.decode("utf-8")
+                ranges = _character_ranges(receipt.get("locator"))
+                if any(end > len(text) or not text[start:end].strip() for start, end in ranges):
+                    raise SigningError("private_source_classification_required")
         if fragment_v2:
             try:
                 verify_fragment_review(dossier, source, record, public_item, private_path=private_path)

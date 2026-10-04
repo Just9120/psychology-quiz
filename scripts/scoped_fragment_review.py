@@ -38,6 +38,73 @@ def _timestamp(value):
     return result
 
 
+def _derived_pdf_text(claim, source, record, *, private_path):
+    """Bind a reviewed bibliographic OCR fragment to unchanged PDF bytes."""
+    try:
+        original = private_path(Path(claim["original_path"]), suffix=".pdf")
+        binding_path = private_path(Path(claim["derivation_receipt"]), suffix=".json")
+        text_path = private_path(Path(claim["snapshot_path"]), suffix=".txt")
+        if (not original.is_file() or not text_path.is_file()
+                or not 0 < text_path.stat().st_size <= 32 * 1024 * 1024
+                or not binding_path.is_file() or binding_path.stat().st_size > 65536):
+            raise FragmentReviewError("fragment_derivation_invalid")
+        binding = json.loads(binding_path.read_text(encoding="utf-8"))
+        raw = text_path.read_bytes()
+        if not isinstance(binding, dict):
+            raise FragmentReviewError("fragment_derivation_invalid")
+        with original.open("rb") as original_file:
+            if original_file.read(5) != b"%PDF-":
+                raise FragmentReviewError("fragment_derivation_invalid")
+            original_file.seek(0)
+            original_digest = hashlib.file_digest(original_file, "sha256").hexdigest()
+        if (binding.get("schema_version") != 1
+                or binding.get("source_id") != source.get("id")
+                or binding.get("revision") != record.get("revision")
+                or binding.get("original_sha256") != source.get("snapshot_sha256")
+                or original_digest != source.get("snapshot_sha256")
+                or binding.get("derived_text_sha256") != hashlib.sha256(raw).hexdigest()
+                or claim.get("derived_text_sha256") != binding.get("derived_text_sha256")
+                or not isinstance(binding.get("extraction_profile"), str)
+                or not binding["extraction_profile"].strip()):
+            raise FragmentReviewError("fragment_derivation_changed")
+        text = raw.decode("utf-8")
+        # Page coordinates are explicit form-feed boundaries, never guessed offsets.
+        pages, start = [], 0
+        for end, char in enumerate(text):
+            if char == "\f":
+                pages.append((start, end))
+                start = end + 1
+        if text[start:].strip():
+            pages.append((start, len(text)))
+        if not pages:
+            raise FragmentReviewError("fragment_pdf_pages_required")
+        reviewed = claim.get("visual_pages_read")
+        if (not isinstance(reviewed, list) or not reviewed
+                or any(type(page) is not int or not 1 <= page <= len(pages) for page in reviewed)):
+            raise FragmentReviewError("fragment_pdf_visual_review_required")
+        for a, b in _ranges(claim.get("locator")):
+            if not any(i in reviewed and start <= a < b <= end
+                       for i, (start, end) in enumerate(pages, 1)):
+                raise FragmentReviewError("fragment_pdf_visual_review_required")
+        return text, pages
+    except FragmentReviewError:
+        raise
+    except (OSError, UnicodeError, KeyError, TypeError, ValueError) as error:
+        raise FragmentReviewError("fragment_derivation_invalid") from error
+
+
+def _held_ranges(locator, pdf_pages):
+    if pdf_pages is None or not isinstance(locator, str) or not locator.startswith("page:"):
+        return _ranges(locator)
+    result = []
+    for part in locator.split(";"):
+        match = re.fullmatch(r"page:(\d{1,6})", part.strip())
+        if match is None or not 1 <= int(match[1]) <= len(pdf_pages):
+            raise FragmentReviewError("fragment_conflict_scope_unknown")
+        result.append(pdf_pages[int(match[1]) - 1])
+    return result
+
+
 def verify_fragment_review(dossier, source, record, public_item, *, private_path):
     """Keep record/hold fingerprints and exact excerpts bound to a single item.
 
@@ -59,7 +126,7 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
             or review.get("decision") != "approved"
             or claim.get("snapshot_sha256") != source.get("snapshot_sha256")
             or claim.get("processing_sha256") != fingerprint(record)
-            or source.get("snapshot_kind") != "extracted_text"
+            or source.get("snapshot_kind") not in {"extracted_text", "file_bytes"}
             or not isinstance(claim.get("reviewer"), str) or not claim["reviewer"].strip()
             or not isinstance(claim.get("note"), str) or not claim["note"].strip()):
         raise FragmentReviewError("fragment_review_required")
@@ -79,6 +146,11 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
             or source.get("reviewed_at") != reviewed_at.date().isoformat()):
         raise FragmentReviewError("fragment_review_date_required")
     selected = _ranges(claim.get("locator"))
+    pdf_text, pdf_pages = None, None
+    if source.get("snapshot_kind") == "file_bytes":
+        if kind != "literature" or record.get("revision", [None, None, None])[2] != "application/pdf":
+            raise FragmentReviewError("fragment_pdf_bibliography_only")
+        pdf_text, pdf_pages = _derived_pdf_text(claim, source, record, private_path=private_path)
     held = []
     if "conflict_hold" in record:
         # No cross-edition offset inference. Resolve or explicitly recapture the hold first.
@@ -86,14 +158,14 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
     if record.get("review_state") == "conflict":
         if reviewed_at <= _timestamp(record.get("reviewed_at")):
             raise FragmentReviewError("fragment_review_date_required")
-        held.extend(_ranges(record.get("locator")))
+        held.extend(_held_ranges(record.get("locator"), pdf_pages))
     issues = record.get("issues", [])
     if not isinstance(issues, list):
         raise FragmentReviewError("fragment_conflict_scope_unknown")
     for issue in issues:
         if not isinstance(issue, dict):
             raise FragmentReviewError("fragment_conflict_scope_unknown")
-        held.extend(_ranges(issue.get("locator")))
+        held.extend(_held_ranges(issue.get("locator"), pdf_pages))
     if any(a < d and c < b for a,b in selected for c,d in held):
         raise FragmentReviewError("fragment_overlaps_conflict")
     evidence = [{"source_id": source["id"], "snapshot_sha256": source["snapshot_sha256"],
@@ -118,9 +190,9 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
         if not path.is_file() or not 0 < path.stat().st_size <= 32 * 1024 * 1024:
             raise FragmentReviewError("fragment_snapshot_invalid")
         raw = path.read_bytes()
-        if hashlib.sha256(raw).hexdigest() != source["snapshot_sha256"]:
+        if pdf_text is None and hashlib.sha256(raw).hexdigest() != source["snapshot_sha256"]:
             raise FragmentReviewError("fragment_snapshot_changed")
-        text = raw.decode("utf-8")
+        text = pdf_text if pdf_text is not None else raw.decode("utf-8")
         if any(end > len(text) for _,end in [*selected,*held]):
             raise FragmentReviewError("fragment_locator_out_of_bounds")
         excerpts = [text[start:end] for start,end in selected]

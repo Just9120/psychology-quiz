@@ -253,3 +253,90 @@ def test_fragment_cannot_infer_offsets_from_previous_edition_hold(tmp_path, monk
     with pytest.raises(FragmentReviewError, match="fragment_previous_hold_unresolved"):
         verify_fragment_review(dossier, dossier["sources"][0], record, public,
                                private_path=lambda path, *, suffix: path)
+
+
+def pdf_fragment_fixture(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, text_path = fragment_fixture(
+        tmp_path, monkeypatch, kind="literature")
+    source = dossier["sources"][0]
+    record = processed[source["id"]]
+    text = "Supported book.\fDisputed scientific claim.\f"
+    text_path.write_text(text, encoding="utf-8")
+    original = tmp_path / "original.pdf"
+    original.write_bytes(b"%PDF-1.7\nsynthetic unchanged original")
+    digest = hashlib.sha256(original.read_bytes()).hexdigest()
+    source.update(snapshot_kind="file_bytes", snapshot_sha256=digest)
+    record.update(snapshot_kind="file_bytes", snapshot_sha256=digest,
+                  revision=[source["modified_time"], source["title"], "application/pdf"],
+                  locator="page:2", issues=[{"locator": "page:2"}])
+    inventory["folders"]["root"][0]["children"][0]["mime_type"] = "application/pdf"
+    binding = tmp_path / "binding.json"
+    text_sha = hashlib.sha256(text_path.read_bytes()).hexdigest()
+    binding.write_text(json.dumps({"schema_version": 1, "source_id": source["id"],
+        "revision": record["revision"], "original_sha256": digest,
+        "derived_text_sha256": text_sha, "extraction_profile": "synthetic-ocr"}), encoding="utf-8")
+    (signer.REPO_ROOT / "content/source-corpus.json").write_text(
+        json.dumps({"sources": [source]}), encoding="utf-8")
+    claim = dossier["scoped_claim_review"]
+    claim.update(snapshot_sha256=digest, processing_sha256=fingerprint(record),
+                 original_path=str(original), derivation_receipt=str(binding),
+                 derived_text_sha256=text_sha, visual_pages_read=[1],
+                 excerpt_sha256=hashlib.sha256(json.dumps([text[:15]],
+                     ensure_ascii=False, separators=(",", ":")).encode("utf-8")).hexdigest())
+    dossier["publication_review"]["sources"][0]["snapshot_sha256"] = digest
+    return public, dossier, inventory, processed, original, text_path, binding
+
+
+def test_pdf_bibliography_fragment_keeps_other_page_held(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, *_ = pdf_fragment_fixture(tmp_path, monkeypatch)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    record = processed["synthetic_source"]
+    record.update(locator="page:1", issues=[])
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("changed", ["original", "ocr", "revision", "page_review"])
+def test_pdf_bibliography_rejects_changed_binding(tmp_path, monkeypatch, changed):
+    public, dossier, inventory, processed, original, text_path, binding = pdf_fragment_fixture(tmp_path, monkeypatch)
+    if changed == "original":
+        original.write_bytes(b"%PDF-1.7 changed")
+    elif changed == "ocr":
+        text_path.write_text("Changed OCR.\fOther page.\f", encoding="utf-8")
+    elif changed == "revision":
+        data = json.loads(binding.read_text(encoding="utf-8"))
+        data["revision"][0] = "2026-09-26T00:00:00Z"
+        binding.write_text(json.dumps(data), encoding="utf-8")
+    else:
+        dossier["scoped_claim_review"]["visual_pages_read"] = [2]
+    with pytest.raises(SigningError, match="fragment_derivation_changed|fragment_pdf_visual_review_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+def test_private_pdf_classification_requires_original_bytes(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, original, text_path, binding = pdf_fragment_fixture(tmp_path, monkeypatch)
+    root = tmp_path / "repo"
+    assert root == signer.REPO_ROOT
+    assert root.is_relative_to(tmp_path)
+    import subprocess
+    subprocess.run(["git", "init", "-q", str(root)], check=True)
+    (root / ".gitignore").write_text("data/\n", encoding="utf-8")
+    (root / "data").mkdir()
+    (root / "content/source-corpus.json").write_text(json.dumps({
+        "schema_version": 1, "corpus_root_id": "root", "sources": []}), encoding="utf-8")
+    (root / "content/curriculum.json").write_text(json.dumps({
+        "schema_version": 1, "disciplines": {}, "topics": {}}), encoding="utf-8")
+    source = deepcopy(dossier["sources"][0])
+    source.update(corpus_path=source["title"], reviewed_at="2026-09-29",
+        classification_receipt={"content": str(original), "locator": "pdf-pages:1",
+            "snapshot_kind": "file_bytes", "snapshot_sha256": source["snapshot_sha256"]})
+    registry = root / "data/classification.json"
+    registry.write_text(json.dumps({"schema_version": 1, "corpus_root_id": "root", "sources": [source]}), encoding="utf-8")
+    registry.chmod(0o600)
+    verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=registry)
+    original.write_bytes(b"%PDF-1.7 replaced")
+    with pytest.raises(SigningError, match="private_source_classification_changed"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=registry)
