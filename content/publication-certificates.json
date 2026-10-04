@@ -632,6 +632,13 @@
       "review_sha256": "93840df4de06454cfc8673897310cd755bd2e4d6195d2b58b8848e752b062fcf",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "HpYQ195/KH9vBLHoxtlN8KQ0Tv4X7MuVjukKzlb3fQrLPa38V2sCJdwQMaVuiOcxRjLOu6UniNtuVOfhH2WhDg=="
+    },
+    "literature:lit_kreisman_straus_hate_you_dont_leave": {
+      "schema_version": 1,
+      "item_sha256": "aaed56d05e9652182909e5c3f3b0cb5d90c4bbce92c17577c1ec1d22f1454d55",
+      "review_sha256": "d6ab247e869228a3e0a14daf9644b832a6d57229f8252846d432a59f167afc36",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "pMvXZIk8hZ7YMVFePZFtRZgBfkoP/RA1wPbN85D+j5uVzR9eSZsQemoEfB+AvBbYEtEiCdF+4Lb8h7JKumTLCw=="
     }
   }
 }
