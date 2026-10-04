@@ -390,5 +390,48 @@
       "Точная редакция перевода и год используемого издания не установлены."
     ],
     "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_lebon_psychology_peoples_masses",
+    "work_id": "lit_lebon_psychology_peoples_masses",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Психология народов и масс",
+    "authors": [
+      "Лебон Г."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 101,
+    "global_order": 912043,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в учебном материале. Автор и заглавие уточнены по библиотечному каталогу; учебный приоритет и порядок чтения ещё не определены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Лебон Г.. Психология народов и масс"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и редакция используемого в курсе издания не установлены.",
+      "Значимость и этап чтения требуют отдельной проверки."
+    ],
+    "notes": "Библиографическая запись не означает научного одобрения утверждений лекции или автоматической рекомендации книги."
   }
 ]

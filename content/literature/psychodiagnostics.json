@@ -265,5 +265,49 @@
       "Упоминание в примере самоописания не задаёт приоритет чтения."
     ],
     "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_golovakha_kronik_psychological_time",
+    "work_id": "lit_golovakha_kronik_psychological_time",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Психологическое время личности",
+    "authors": [
+      "Головаха Е. И.",
+      "Кроник А. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 71,
+    "global_order": 912042,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в учебном материале. Автор и заглавие уточнены по библиотечному каталогу; учебный приоритет и порядок чтения ещё не определены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_d0ae2304480c"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_d0ae2304480c",
+        "title": "Практика №22",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Головаха Е. И., Кроник А. А.. Психологическое время личности"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и редакция используемого в курсе издания не установлены.",
+      "Значимость и этап чтения требуют отдельной проверки."
+    ],
+    "notes": "Библиографическая запись не означает научного одобрения утверждений лекции или автоматической рекомендации книги."
   }
 ]

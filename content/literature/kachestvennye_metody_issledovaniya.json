@@ -1371,5 +1371,48 @@
       "Ссылка в окончании соседней статьи, не рекомендация Леонтьева; перевод/редакция экземпляра по учебному PDF не установлены."
     ],
     "notes": "Проверены библиографические сведения; чтение всей книги и доступность полного текста не заявлены. Исходные списки и личные отметки сохранены."
+  },
+  {
+    "id": "lit_nurkova_autobiographical_memory",
+    "work_id": "lit_nurkova_autobiographical_memory",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Свершенное продолжается: психология автобиографической памяти личности",
+    "authors": [
+      "Нуркова В. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 361,
+    "global_order": 912041,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в учебном материале. Автор и заглавие уточнены по библиотечному каталогу; учебный приоритет и порядок чтения ещё не определены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_5238b79de120"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_5238b79de120",
+        "title": "Практика №10. Введение в качественные методы исследования",
+        "discipline_id": "kachestvennye_metody_issledovaniya"
+      }
+    ],
+    "source": {
+      "citation": "Нуркова В. В.. Свершенное продолжается: психология автобиографической памяти личности"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и редакция используемого в курсе издания не установлены.",
+      "Значимость и этап чтения требуют отдельной проверки."
+    ],
+    "notes": "Библиографическая запись не означает научного одобрения утверждений лекции или автоматической рекомендации книги."
   }
 ]
