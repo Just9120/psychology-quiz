@@ -541,6 +541,13 @@
       "review_sha256": "260e5afb3b8ba564817aaa10f4730ed9950ba3ef78dfdd46223535313add659e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "GjQki6+x4VDG7olHMzRCB96LgJr22BQQ3erKILz2BfGd0Hm9SDaasvp8APqMfqAjZMwMqdKJMhOe5rlsQc1WDg=="
+    },
+    "literature:lit_ratner_george_iveson_solution_focused": {
+      "schema_version": 1,
+      "item_sha256": "99a064f5145062e790635f4c183f104a8ee408dea80d45840df0a7437211fb4b",
+      "review_sha256": "29d0ab1bd5e063d5c9a04c1e59de999ee0f910d4713368366735131e20b5cfc9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "F60ZCpetOupg3F6z3Kqk79yoSXIe3eveRnWZwLO8TWQainQUYMu9fdpiG0bH6/oultqed0NKFHTz32iN1C6rCg=="
     }
   }
 }
