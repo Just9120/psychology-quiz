@@ -639,6 +639,13 @@
       "review_sha256": "d6ab247e869228a3e0a14daf9644b832a6d57229f8252846d432a59f167afc36",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "pMvXZIk8hZ7YMVFePZFtRZgBfkoP/RA1wPbN85D+j5uVzR9eSZsQemoEfB+AvBbYEtEiCdF+4Lb8h7JKumTLCw=="
+    },
+    "literature:lit_course_mention_selye_stress_is_life": {
+      "schema_version": 1,
+      "item_sha256": "2256e8b45f43c50529a134f01452456bea999efac1bb53ab5d2e392b0648f30b",
+      "review_sha256": "8872d2f05eb01f978d4ce7d12e7cf9fc6c1b24d2e372b7b139a242d11d993d2f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "2oRRCwQN9f4DZFvj3kewPrQLY7uK5PT7cKFsJ6GqPfrX9Nw7vIHI4oOjH9CQHjlM/nO2in7Spyl/ixGO3jQGCQ=="
     }
   }
 }
