@@ -667,6 +667,13 @@
       "review_sha256": "7a18d8b8129473921256917974ed6f941fb232e37131babccb7136dec2c9ab22",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "jrVQPCNqjJyMY15uS6GqrMz7dGbUoJM5hM7d72z0DUc4zwFrG6TXwvEfT1MNF2W0BHhA+oJBump6xVxVBZlWAw=="
+    },
+    "literature:lit_yalom_loves_executioner": {
+      "schema_version": 1,
+      "item_sha256": "5163eb826f387d281555bc06afcd3bd374b03dcdc095d7b13c4ddb10ebe1fed2",
+      "review_sha256": "44a4a14fc437b55592fa1665360a7332602415b26164a37728c70e90d0bbcdf2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "OFQIFvjxS8jwY1xeVXzCQe0RTHwOIbxVFfJV29ztQL0kg3GDF4HlVpp2JBeB5oCfwte5KMTqC3QQacizhSOZCw=="
     }
   }
 }

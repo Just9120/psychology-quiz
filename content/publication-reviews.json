@@ -1413,7 +1413,7 @@
         {
           "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
           "modified_time": "2026-08-30T19:32:03.425Z",
-          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "snapshot_sha256": "0aeb9c10e133fbe195bc9f4416fbe6b361f5725112d6a19516a983aa99142250",
           "locator": "Позиция 1: Толстуха (из книги «Лечение от любви и другие психотерапевтические новеллы»)"
         }
       ],
@@ -1425,6 +1425,11 @@
         "evidence_scope": "Author-domain book description retrieved: psychotherapy tales and therapist feelings/errors. Chapter-specific pedagogical purpose comes from preserved verified course citation, not from a full chapter read. English book description does not reconcile exact Russian course edition.",
         "sequence": "Agent recommendation: methodology first, reflective narrative afterwards; later Kagan conversation after earlier one. Not a teacher requirement or measured difficulty.",
         "limitations": "No whole-book/chapter validation, clinical efficacy, source science approval or edition equivalence claimed. Original source snapshots/citations/authors/years/work IDs and reading state preserved."
+      },
+      "source_extraction_reconciliation": {
+        "checked_at": "2026-10-04T21:49:12.636153+00:00",
+        "scope": "Four bibliographic entries and their stated course purposes read in current DOCX-body extraction; connected metadata confirms unchanged source revision. Only source-extraction fingerprint refreshed, public item and reading metadata unchanged. No full article/chapter review or clinical approval.",
+        "private_receipt": "data/goal-yalom-parent-book-published-20261005.json"
       }
     },
     "literature:lit_6190d3b37fdeeab5": {
@@ -1437,7 +1442,7 @@
         {
           "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
           "modified_time": "2026-08-30T19:32:03.425Z",
-          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "snapshot_sha256": "0aeb9c10e133fbe195bc9f4416fbe6b361f5725112d6a19516a983aa99142250",
           "locator": "Позиция 2: Научный статус методологии исследования случаев"
         }
       ],
@@ -1454,6 +1459,11 @@
         "decision": "primary_printed_pdf_checked",
         "evidence_scope": "Busygina printed pages 9–34; Al mukhametova author line and full name Tatyana Nikolaevna confirm T.N., while the PDF citation line retains T.A. Original course citation preserved. Article body not fully reviewed.",
         "private_receipt": "data/goal-qualitative-recommendations-review-20261004.json"
+      },
+      "source_extraction_reconciliation": {
+        "checked_at": "2026-10-04T21:49:12.636153+00:00",
+        "scope": "Four bibliographic entries and their stated course purposes read in current DOCX-body extraction; connected metadata confirms unchanged source revision. Only source-extraction fingerprint refreshed, public item and reading metadata unchanged. No full article/chapter review or clinical approval.",
+        "private_receipt": "data/goal-yalom-parent-book-published-20261005.json"
       }
     },
     "literature:lit_93082f75dd37021b": {
@@ -1466,7 +1476,7 @@
         {
           "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
           "modified_time": "2026-08-30T19:32:03.425Z",
-          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "snapshot_sha256": "0aeb9c10e133fbe195bc9f4416fbe6b361f5725112d6a19516a983aa99142250",
           "locator": "Позиция 3: Сборник тезисов II Международной научно-практической конференции «Кейс-стади в психотерапии и психологическом консультировании»"
         }
       ],
@@ -1478,6 +1488,11 @@
         "evidence_scope": "Organizer page and linked 135-page 2023 proceedings retrieved: cover identifies II conference; table of contents includes client cases and methodological discussion. Only cover, contents and introductory selected sections inspected.",
         "limitations": "Exact private-list hyperlink not recovered; no complete proceedings/individual case scientific review or derivative approval. Original empty authors/year/citation retained.",
         "sequence": "Optional agent recommendation; proceedings follow reviewed case-study methodology, not teacher requirement or measured difficulty."
+      },
+      "source_extraction_reconciliation": {
+        "checked_at": "2026-10-04T21:49:12.636153+00:00",
+        "scope": "Four bibliographic entries and their stated course purposes read in current DOCX-body extraction; connected metadata confirms unchanged source revision. Only source-extraction fingerprint refreshed, public item and reading metadata unchanged. No full article/chapter review or clinical approval.",
+        "private_receipt": "data/goal-yalom-parent-book-published-20261005.json"
       }
     },
     "literature:lit_2d2ab1a9e58aaa66": {
@@ -1490,7 +1505,7 @@
         {
           "source_id": "1MqI82_TEfwgWP_jEE-74TkZQ84ZumNW5",
           "modified_time": "2026-08-30T19:32:03.425Z",
-          "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
+          "snapshot_sha256": "0aeb9c10e133fbe195bc9f4416fbe6b361f5725112d6a19516a983aa99142250",
           "locator": "Позиция 4: Основы психологического эксперимента"
         }
       ],
@@ -1500,6 +1515,11 @@
         "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=260653&lang=Ru&page=Book",
         "evidence_scope": "Course explicitly identifies experiment principles and varieties. Indexed URSS description identifies experimental-methodology teaching purpose; direct fetch failed robots encoding check. Library metadata supports university textbook status. Full text and exact course edition/year not verified.",
         "prerequisites": "Agent sequence: selected introductory lecture first; video course and experiment textbook are parallel supplementary branches, not mandatory prerequisites for case-study papers."
+      },
+      "source_extraction_reconciliation": {
+        "checked_at": "2026-10-04T21:49:12.636153+00:00",
+        "scope": "Four bibliographic entries and their stated course purposes read in current DOCX-body extraction; connected metadata confirms unchanged source revision. Only source-extraction fingerprint refreshed, public item and reading metadata unchanged. No full article/chapter review or clinical approval.",
+        "private_receipt": "data/goal-yalom-parent-book-published-20261005.json"
       }
     },
     "literature:lit_510a576872873c35": {
