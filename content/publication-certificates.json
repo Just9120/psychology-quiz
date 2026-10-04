@@ -625,6 +625,13 @@
       "review_sha256": "317c4c04cf8eae044d0102ab348e0f5ae3c80466d81a59ece43bb2859d5b7359",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "5OZCNsVF/vJ1bieEP3iiFY1D5UPRGOhGetSwhM6z1tFl6uUgmcMGCyqw7U9qLldsf4Z4gfMmNwpONlrgUfkTBQ=="
+    },
+    "literature:lit_hy_loevinger_measuring_ego_development": {
+      "schema_version": 1,
+      "item_sha256": "02d54d5cbce4fb5510c7929a5de7b777936fde6378d2f3e4a94875a9f9a0e346",
+      "review_sha256": "93840df4de06454cfc8673897310cd755bd2e4d6195d2b58b8848e752b062fcf",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "HpYQ195/KH9vBLHoxtlN8KQ0Tv4X7MuVjukKzlb3fQrLPa38V2sCJdwQMaVuiOcxRjLOu6UniNtuVOfhH2WhDg=="
     }
   }
 }
