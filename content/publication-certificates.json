@@ -202,9 +202,9 @@
     "literature:lit_chomsky_syntactic_structures": {
       "schema_version": 1,
       "item_sha256": "24fa5b55f05ead09ff20354c6747e263aa44ffb0b4a36a77f74d7c175e625cf1",
-      "review_sha256": "40ed7a446cb75cb0c4d3ce53f7983b658b303d0a8294f013c875f5a9aa72ae71",
+      "review_sha256": "65b0a6e12e4d6fd916c54e9c12efccc8a289f1c696cb78c84fd5ffaf415c090a",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "ozj9+7rlh7YoiY0lLZKUwO4gD2iIe+MMOEciarkOPABAZqS7KTIOYFRpW9kiNTp8U8MMDhjv+e3ie5DVgjHrDA=="
+      "signature": "JZGt6JGIJxMeIZXyPtlzucNZFNK31kTFMqp4b86PrkLkRopGmd8T1cqcYUqBApXcrNLPrCVb/ngmn9wMMssmAA=="
     },
     "literature:lit_hsieh_delivering_happiness": {
       "schema_version": 1,
@@ -335,9 +335,9 @@
     "literature:lit_rybina_muradyan_coach": {
       "schema_version": 1,
       "item_sha256": "b289930564ac241b1562b4ce78db4478568c6699cfdedcb78609569876361668",
-      "review_sha256": "4c17b145903514dbe838ee441129f393776241854a366ae37011436a0e231d9a",
+      "review_sha256": "2daa70ee766b3574d88eaf2aec316c5768d4908203e7dbcd241c3460e06ecf09",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "XwY1pg+B2nZ6let2WiHFcXim+S7Jmy2Zkv/1JGKtXKWKc1xGzG6zSOk2D3OzEaukOnAwLBBDQCEJXGEAiqFHCw=="
+      "signature": "11PNnitl5MyyHLIzDu1YzOW7BHtpUa5Fj+MeEhbcDPOadrJdSLFESrSfUv5bJUATd6bVkPT93BZZPIg/fJIGBw=="
     },
     "literature:lit_rybina_muradyan_coach_turning_point": {
       "schema_version": 1,
@@ -517,9 +517,9 @@
     "literature:lit_kantor_objective_psychology_grammar": {
       "schema_version": 1,
       "item_sha256": "843dacedf89a347acbdde1029b33c467e2c8e56acd69dbaa128754abbb4109f3",
-      "review_sha256": "0b0f18fd6a786dacfa1b19722e7e3a89f923242e4c7a38f9b270ab3fe0694572",
+      "review_sha256": "1e2e7b95804a24dc4909b52d93f8b3e5d2128297ed033480025b34afeaf552be",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "ge7T7cce5lwnB8vUi/w+nRr7mndMwxiw6J5ntHhOQC55WIcdGTda3OQhKdtGV7sazQgWsGcXpyoaz9jvObzNAw=="
+      "signature": "8BZHAphqeueUiqjXzOmH9GJ8nQBqdBi5w3DuiokgUr/hOMiJf4/4LIOEbpdqc5OH6PTPp3RRFjJVLh0U+kb1AQ=="
     },
     "literature:lit_mill_on_liberty": {
       "schema_version": 1,
