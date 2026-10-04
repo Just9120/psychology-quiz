@@ -458,3 +458,15 @@ def test_operator_search_refuses_unexpected_database_identity_before_private_rea
     captured = capsys.readouterr()
     assert captured.out == ""
     assert captured.err.strip() == "PRIVATE_SEARCH_STOP: unexpected_private_postgres_identity"
+
+
+def test_operator_rebuild_requires_qa_before_database_or_embedding_access(monkeypatch, capsys):
+    from app import private_search
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("database/model must not be accessed without QA cases")
+
+    monkeypatch.setattr(private_search.psycopg, "connect", forbidden)
+    monkeypatch.setattr(private_search, "embedder", forbidden)
+    assert private_search.main(["rebuild", "--manifest", "manifest.json"]) == 1
+    assert "private_qa_file_required" in capsys.readouterr().err

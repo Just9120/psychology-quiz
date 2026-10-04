@@ -358,8 +358,10 @@ def vector_text(value):
     return "[" + ",".join(format(number, ".9g") for number in numbers) + "]"
 
 
-def rebuild(conn, source_chunks, model, *, owner="psychology_app"):
-    """Atomically replace only the derivative; never touch source/user tables."""
+def rebuild(conn, source_chunks, model, *, owner="psychology_app", qa_cases=None):
+    """Replace the derivative atomically, including supplied retrieval checks."""
+    if qa_cases is not None and (not isinstance(qa_cases, list) or not qa_cases):
+        raise SearchError("private_qa_file_required")
     verify_private_schema(conn, owner=owner)
     with conn.transaction():
         # Serialize operator rebuilds. Without this, two concurrent DELETE / INSERT
@@ -384,6 +386,10 @@ def rebuild(conn, source_chunks, model, *, owner="psychology_app"):
             raise SearchError("incomplete_private_rebuild")
         conn.execute("""UPDATE private_search.index_meta SET source_count=%s,chunk_count=%s
             WHERE singleton=true""", (len({item[0] for item in source_chunks}), count))
+        if qa_cases is not None:
+            # Validate the uncommitted replacement. A failed retrieval check
+            # rolls back this transaction/savepoint and preserves the old index.
+            verify_retrieval(conn, qa_cases, model)
     return count
 
 
@@ -536,8 +542,13 @@ def main(argv=None):
         timeout = statement_timeout_seconds(args.action, args.statement_timeout_seconds)
         if args.action == "rag" and os.environ.get("PRIVATE_RAG_ENABLED") != "1":
             raise SearchError("private_rag_disabled")
-        if args.action in {"search", "qa", "benchmark", "rag"} and args.manifest is None:
+        if args.action in {"rebuild", "search", "qa", "benchmark", "rag"} and args.manifest is None:
             raise SearchError("private_manifest_required")
+        rebuild_cases = None
+        if args.action == "rebuild":
+            if args.cases is None:
+                raise SearchError("private_qa_file_required")
+            rebuild_cases = load_qa_cases(args.cases)
         if args.action == "estimate":
             if args.manifest is None:
                 raise SearchError("private_manifest_required")
@@ -564,7 +575,9 @@ def main(argv=None):
             if args.action == "rebuild":
                 if args.manifest is None:
                     raise SearchError("private_manifest_required")
-                result = {"chunks": rebuild(conn, load_private_chunks(args.manifest), embedder())}
+                result = {"chunks": rebuild(conn, load_private_chunks(args.manifest), embedder(),
+                                             qa_cases=rebuild_cases),
+                          "cases_passed": len(rebuild_cases)}
             elif args.action == "search":
                 result = {"results": search(conn, args.query, embedder() if args.mode != "lexical" else None,
                                             limit=args.limit, mode=args.mode)}

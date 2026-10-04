@@ -170,7 +170,10 @@ python3 scripts/private_search_bundle.py install \
 безопасное перемещение этих файлов, не удалять их автоматически. Затем выполните
 `estimate`, `probe`, `rebuild`, `status` и `qa` с именами manifest/cases из
 результата импорта. В примерах ниже `manifest.json` и `qa.json` — условные
-имена, замените их на имена из результата импорта. Если импорт или retrieval QA остановились, не включайте
+имена, замените их на имена из результата импорта. Для `rebuild` обязательны `--cases`: retrieval QA выполняется внутри транзакции
+замены индекса. Неуспешная проверка откатывает замену; прежний индекс сохраняется.
+Отдельные `qa` и `benchmark` после rebuild подтверждают чтение уже сохранённого
+индекса и измеряют ресурсы. Если импорт или retrieval QA остановились, не включайте
 поиск и сохраните старый индекс; приватные файлы и архив не выводите в logs.
 
 ```bash
@@ -179,7 +182,8 @@ docker compose --profile search run --rm psych_quiz_private_search \
   estimate --manifest /data/search-input/manifest.json
 docker compose --profile search run --rm psych_quiz_private_search probe
 docker compose --profile search run --rm psych_quiz_private_search \
-  rebuild --manifest /data/search-input/manifest.json
+  rebuild --manifest /data/search-input/manifest.json \
+  --cases /data/search-input/qa.json
 docker compose --profile search run --rm psych_quiz_private_search status
 docker compose --profile search run --rm psych_quiz_private_search \
   qa --manifest /data/search-input/manifest.json --cases /data/search-input/qa.json

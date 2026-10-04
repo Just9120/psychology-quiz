@@ -83,7 +83,16 @@ def test_private_rebuild_keeps_learning_state_and_replaces_only_index():
          "структура психологической консультации"),
     ]
     with psycopg.connect(app_dsn) as conn:
-        assert rebuild(conn, first, SyntheticEmbedding()) == 2
+        cases = [{"query": "поддержка", "source_id": first[0][0],
+                  "snapshot_sha256": first[0][2], "locator": first[0][3], "mode": "lexical"}]
+        assert rebuild(conn, first, SyntheticEmbedding(), qa_cases=cases) == 2
+        conn.commit()
+        # A valid replacement that fails retrieval QA must not replace the
+        # previously committed index, even after all its rows were inserted.
+        with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
+            rebuild(conn, first[1:], SyntheticEmbedding(), qa_cases=cases)
+        conn.rollback()
+        verify_index_content(conn, first)
         conn.commit()
         interrupted = [
             ("synthetic-source-c", "2026-09-27T00:00:00Z", "c" * 64,
