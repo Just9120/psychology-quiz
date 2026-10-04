@@ -16,7 +16,7 @@ from app.source_inventory import InventoryError, _revision
 # spelling for source coordinates and limit the cue-to-title break to one line.
 READING_QUOTE = re.compile(
     r'(?:книг[а-я]*|учебник[а-я]*|пособи[а-я]*|монографи[а-я]*|прочита[а-я]*|литератур[а-я]*)'
-    r'[^\n]{0,120}?(?:\r?\n[ \t]*)?[«“"](?P<title>[^»”"]{3,200})[»”"]', re.IGNORECASE)
+    r'[^\n«»“”"]{0,120}?(?:\r?\n[ \t]*)?[«“"](?P<title>[^«»“”"]{3,200})[»”"]', re.IGNORECASE)
 
 QUOTED_TITLE = re.compile(r'[«“"](?P<title>[^»”"]{3,200})[»”"]')
 TITLE_SEPARATOR = re.compile(r'[\s,;]*(?:(?:и|или|а также)[\s,;]+)?', re.IGNORECASE)

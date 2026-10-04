@@ -105,3 +105,12 @@ def test_wrapped_unknown_titles_preserve_raw_spans_and_remain_pending(newline):
         assert item["candidate_work_ids"] == []
         assert item["decision"] == "pending_review"
     assert result["publication_approval"] is False
+
+
+def test_book_cue_inside_quoted_title_cannot_capture_following_dialogue():
+    from app.bibliography_ingestion import _book_quotes
+
+    text = 'Рекомендую книгу «Учебная книга». Он сказал: «Что ты видишь?»'
+    candidates = list(_book_quotes(text))
+    assert [title for _, title in candidates] == ["Учебная книга"]
+    assert all(text[start:end] == title for (start, end), title in candidates)
