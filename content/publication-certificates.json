@@ -548,6 +548,34 @@
       "review_sha256": "29d0ab1bd5e063d5c9a04c1e59de999ee0f910d4713368366735131e20b5cfc9",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "F60ZCpetOupg3F6z3Kqk79yoSXIe3eveRnWZwLO8TWQainQUYMu9fdpiG0bH6/oultqed0NKFHTz32iN1C6rCg=="
+    },
+    "literature:lit_graham_resilience": {
+      "schema_version": 1,
+      "item_sha256": "8b5441d6140cb1a746b88a4a8e76bd0ac667ba5251259c48f99fe2d2be01b9d2",
+      "review_sha256": "7a60a99c0b4776854669e26642661725445291045d6db18d9664b4508573a289",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "wzzAWJgTfKJ6HXr0Tt0MIYmmKO/Ow17Q6e8ebG/zcXANGSRR/41z1Zp+3afRX/Wt+lUcXqk+VRcPlsjTliqTBw=="
+    },
+    "literature:lit_ekman_psychology_of_emotions": {
+      "schema_version": 1,
+      "item_sha256": "eeac0e8719fe454a8060e70b13c88be75921e7d2c0db89da76b861e5c55aaabd",
+      "review_sha256": "45f64f8d4ce86318f21a65b78574b442c1245cdaf2deb121da7d13110c15d29e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "EZSvmPMoJwjGWorP4Yl4aLAnsscKk9qW6Z8h6a++tKIJTOWwsB3MP70MJDvSfL6sziRI4KMtX3nxXwhcrusEAA=="
+    },
+    "literature:lit_kahneman_thinking_fast_slow": {
+      "schema_version": 1,
+      "item_sha256": "8a5ab90c6613e30f63a918b454d872a24926b517993b8e26196d6c07cdf36f39",
+      "review_sha256": "bbeec8238ea8e44c3fe63d3927d6cfde514d612b75c1060a23bfd77259bc98e2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kGFPlrWAWgitMduTnyLLYKVb8YWf+o0tFyVxjSGtWDfgV2P+nNIrFu9ZWPxI4rA08UKA8hehwCT84kWVwABOCg=="
+    },
+    "literature:lit_ilyin_individual_differences": {
+      "schema_version": 1,
+      "item_sha256": "9755abbffa51e48039ec93a9ec9cb3b8c667ded88f685d97bc0781ac1a9f32bf",
+      "review_sha256": "eb223292238975b672de1a3efc7a1e89d604d4d59034319fd8e992a1ef275d41",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "KWVepiTVXwMDXnUfiY8P2acrw+ouGncm/Q4S3lRuzQOas1lz+Mpi1BNhXhDDxVUtDpm6Z2fST5qR1hklxmIiAw=="
     }
   }
 }
