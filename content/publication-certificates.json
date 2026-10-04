@@ -216,9 +216,9 @@
     "literature:lit_taylor_principles_scientific_management": {
       "schema_version": 1,
       "item_sha256": "d557df43b79428910184601c6594e5d53e3e1a45bc650cb4b7438d772aeba7ee",
-      "review_sha256": "c314ac012f881a47b0c2b00f24d3fea14c16eb2be8301e5ef90ae6dec9c5ee60",
+      "review_sha256": "4ab2a9c29cba3a8211059436e6c672b5114d76d44c452222282f77a0b2170e5e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "YghEgC8XSbgfpJZ5H1H1N+kAmexd3b87kYZ/Eg3W/QKL7yG7lk1QYzcxgSMX0gDsZbWjBUOV3qHJhNbIJoFLBw=="
+      "signature": "nBal/1Y4pijLXlJ8p5REdbY5Am4BGejHira912AVv7MykG4T9EXirNTslilm9d3soadVDB6LEmyeCULwpxUPCg=="
     },
     "literature:lit_frankl_man_search_meaning": {
       "schema_version": 1,
