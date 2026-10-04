@@ -674,6 +674,20 @@
       "review_sha256": "44a4a14fc437b55592fa1665360a7332602415b26164a37728c70e90d0bbcdf2",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "OFQIFvjxS8jwY1xeVXzCQe0RTHwOIbxVFfJV29ztQL0kg3GDF4HlVpp2JBeB5oCfwte5KMTqC3QQacizhSOZCw=="
+    },
+    "literature:lit_tereshonok_levina_psychology_pedagogy_part1": {
+      "schema_version": 1,
+      "item_sha256": "3d45221b249b7706dd00ac4870045ce83ff770ebae66959afef43acbb0b472e0",
+      "review_sha256": "8c014c997e7c282e11f1aa9d598771cd27e7c7017ba91866251f69d0e498b28f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E0K+3/lTTthyK+0zbNJgjJeQNJpsDraCZZGcja2kPVG42lnlfhZP4qRQUm2vgykw2uGjNrto3bdEMbfCY7RECQ=="
+    },
+    "literature:lit_meshcheryakov_zinchenko_big_dictionary": {
+      "schema_version": 1,
+      "item_sha256": "9e9715b221c5063220a207854a0b0e7d232e4666ba5bf453327e10e5ddc1e698",
+      "review_sha256": "6c7c057a0a616416329e4a513b55f83e0732ed6b0d38f3af596216eca938d6ef",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "AG4KPHOHthGazEsyYSak/IclDnE2YB7sSC0aRc7Csc1d8sRsBPUH4dIdQwvpV8P4ER3Bln09f+OoFTA2G/SDCA=="
     }
   }
 }

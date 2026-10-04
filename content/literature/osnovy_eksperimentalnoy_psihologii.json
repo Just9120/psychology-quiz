@@ -152,5 +152,81 @@
       "Приоритет преподавателя не задан; содержание книги не проверено как источник новых ответов."
     ],
     "notes": "Автор и произведение сверены по точному упоминанию курса и первичной издательской библиографии. Запись не одобряет все утверждения лекции."
+  },
+  {
+    "estimated_minutes": null,
+    "title": "Психология и педагогика. Часть 1",
+    "learning_outcomes": [],
+    "work_id": "lit_tereshonok_levina_psychology_pedagogy_part1",
+    "topic_order": 1,
+    "source": {
+      "citation": "Терешонок Т. В., Левина Т. В. Психология и педагогика: учебник в 2 частях. Часть 1. Красноярск, 2010."
+    },
+    "authors": [
+      "Терешонок Т. В.",
+      "Левина Т. В."
+    ],
+    "tags": [
+      "methodology"
+    ],
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "importance_source": "agent",
+    "status": "approved",
+    "global_order": 210001,
+    "content_access": "not_verified",
+    "reading_level": "core",
+    "priority": null,
+    "why_read": "Базовое дополнительное чтение перед философскими работами: разделы о предмете, методах и направлениях психологии. Порядок предложен агентом по оглавлению. В занятии книга указана как источник иллюстрации, а не как обязательное чтение преподавателя.",
+    "importance": "additional",
+    "notes": "Визуально проверена библиографическая ссылка занятия. Приоритет преподавателя не задан; запись не подтверждает спорные утверждения лекции или правильные ответы.",
+    "metadata_warnings": [
+      "Проверены выходные данные и оглавление; полный текст учебника не прочитан."
+    ],
+    "type": "book",
+    "id": "lit_tereshonok_levina_psychology_pedagogy_part1",
+    "curriculum_topic_ids": [
+      "t_7a8e0286a42d"
+    ],
+    "prerequisites": [],
+    "year": 2010,
+    "module": "module2"
+  },
+  {
+    "estimated_minutes": null,
+    "title": "Большой психологический словарь",
+    "learning_outcomes": [],
+    "work_id": "lit_meshcheryakov_zinchenko_big_dictionary",
+    "topic_order": 2,
+    "source": {
+      "citation": "Большой психологический словарь / под ред. Б. Г. Мещерякова, В. П. Зинченко. 4-е изд., расширенное. Санкт-Петербург: Прайм-ЕВРОЗНАК, 2009."
+    },
+    "authors": [
+      "Мещеряков Б. Г. (ред.)",
+      "Зинченко В. П. (ред.)"
+    ],
+    "tags": [
+      "dictionary"
+    ],
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "importance_source": "agent",
+    "status": "approved",
+    "global_order": 210002,
+    "content_access": "not_verified",
+    "reading_level": "reference",
+    "priority": null,
+    "why_read": "Справочное чтение параллельно занятиям: уточнять значения терминов по мере необходимости. Не предполагает последовательного чтения всего словаря; роль предложена агентом.",
+    "importance": "additional",
+    "notes": "Визуально проверена библиографическая ссылка занятия. Приоритет преподавателя не задан; запись не подтверждает спорные утверждения лекции или правильные ответы.",
+    "metadata_warnings": [
+      "Издание указано по библиографической ссылке занятия; экземпляр словаря и полный текст не проверены."
+    ],
+    "type": "book",
+    "id": "lit_meshcheryakov_zinchenko_big_dictionary",
+    "curriculum_topic_ids": [
+      "t_7a8e0286a42d"
+    ],
+    "prerequisites": [],
+    "year": 2009,
+    "module": "module2"
   }
 ]
