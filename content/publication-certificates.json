@@ -520,6 +520,13 @@
       "review_sha256": "0b0f18fd6a786dacfa1b19722e7e3a89f923242e4c7a38f9b270ab3fe0694572",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "ge7T7cce5lwnB8vUi/w+nRr7mndMwxiw6J5ntHhOQC55WIcdGTda3OQhKdtGV7sazQgWsGcXpyoaz9jvObzNAw=="
+    },
+    "literature:lit_mill_on_liberty": {
+      "schema_version": 1,
+      "item_sha256": "4ef816fb2b8d5e676451a8823eda1c1464da7d98ee5c2ce899d8b01c9896b2b1",
+      "review_sha256": "51099f5cbe2b2c9725e0ecbcdfaa63c30ebc3ed52370b34ca8b1c055219f7044",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1ZOFqLuDCfAHU+gaukDfeNvyONiBEapkczd7Sf43gLWJ7wWEM4C4eUEtg3T7NtywbKIpvbSa3wzMVrKr9OT1Bg=="
     }
   }
 }
