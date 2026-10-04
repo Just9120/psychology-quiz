@@ -114,3 +114,28 @@ def test_book_cue_inside_quoted_title_cannot_capture_following_dialogue():
     candidates = list(_book_quotes(text))
     assert [title for _, title in candidates] == ["Учебная книга"]
     assert all(text[start:end] == title for (start, end), title in candidates)
+
+
+def test_private_title_alias_locates_existing_work_without_merging_or_approval():
+    text = 'В лекции упоминают «Принципы научного менеджмента».'
+    raw = text.encode("utf-8")
+    revision = ["2026-10-04", "Lesson", "text/plain"]
+    snapshot = {"files": {"source": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"source": [["Module", "Lesson"]]}}
+    capture = {"source_id": "source", "content": raw, "revision": revision,
+               "snapshot_sha256": hashlib.sha256(raw).hexdigest()}
+    catalogue = [{"id": "entry", "work_id": "taylor",
+                  "title": "The Principles of Scientific Management"}]
+    before = deepcopy(catalogue)
+    aliases = [{"title": "Принципы научного менеджмента", "work_id": "taylor"}]
+    result = discover_bibliography(snapshot, [capture], catalogue, aliases)
+    assert len(result["mentions"]) == 1
+    mention = result["mentions"][0]
+    assert mention["candidate_work_ids"] == ["taylor"]
+    assert mention["decision"] == "pending_review"
+    start, end = map(int, mention["locator"].split(":")[1:])
+    assert text[start:end] == aliases[0]["title"]
+    assert catalogue == before and result["publication_approval"] is False
+    with pytest.raises(InventoryError, match="invalid_bibliography_alias"):
+        discover_bibliography(snapshot, [capture], catalogue,
+                              [{"title": "Новая книга", "work_id": "missing"}])

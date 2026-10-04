@@ -46,7 +46,8 @@ def _title_pattern(title: str):
                       + r"(?!\w)", re.IGNORECASE)
 
 
-def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[dict]) -> dict:
+def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[dict],
+                          catalogue_aliases: list[dict] | None = None) -> dict:
     """Return review candidates and explicit unread coverage, never a clean bill."""
     by_title = defaultdict(set)
     for entry in catalogue:
@@ -54,6 +55,18 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                                                  for k in ("title", "id", "work_id")):
             raise InventoryError("invalid_bibliography_catalogue")
         by_title[entry["title"]].add(entry["work_id"])
+    # Operator-supplied title variants identify candidates only. They never
+    # merge works or grant publication approval, and stay outside public JSON.
+    work_ids = {entry["work_id"] for entry in catalogue}
+    if catalogue_aliases is not None and not isinstance(catalogue_aliases, list):
+        raise InventoryError("invalid_bibliography_aliases")
+    for alias in catalogue_aliases or []:
+        if (not isinstance(alias, dict)
+                or not isinstance(alias.get("title"), str) or not alias["title"].strip()
+                or not isinstance(alias.get("work_id"), str)
+                or alias["work_id"] not in work_ids):
+            raise InventoryError("invalid_bibliography_alias")
+        by_title[alias["title"]].add(alias["work_id"])
     known = [(_title_pattern(title), sorted(ids)) for title, ids in by_title.items()]
     seen, mentions = set(), []
     for capture in captures:

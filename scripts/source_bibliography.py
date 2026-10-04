@@ -33,7 +33,8 @@ def run(current, processing, capture_manifest, catalogue):
         captures.append({"source_id": item["source_id"], "content": raw,
                          "revision": record.get("revision"),
                          "snapshot_sha256": record.get("snapshot_sha256")})
-    return discover_bibliography(snapshot, captures, catalogue)
+    return discover_bibliography(snapshot, captures, catalogue,
+                                 capture_manifest.get("catalogue_aliases"))
 
 
 def main(argv=None):
