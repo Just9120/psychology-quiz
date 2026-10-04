@@ -181,7 +181,7 @@
     },
     "literature:fch_gazzaniga_kto_za_glavnogo": {
       "decision": "approved",
-      "item_sha256": "60d854567543821b335482221b9211ab9dd2cf7459c26684a241593a76c22a90",
+      "item_sha256": "d3b39a3bf2ca510cfe1a55413498e31f79d9b90f87911a14e8e25f828848df69",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -196,16 +196,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://ast.ru/book/kto-za-glavnogo-156527/",
         "evidence_scope": "Indexed official publisher description/Corpus article confirms the work on brain, mind and choice. Direct AST page failed; no access denial reason or full-text verification inferred. Deepening role/additional priority/overview-first order are agent recommendations, not endorsement of every scientific/philosophical claim.",
         "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
         "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_dubynin_mozg_i_ego_potrebnosti": {
       "decision": "approved",
-      "item_sha256": "92b7d9aa9ff5cd8a98aa02c01a8d45e4d835c63c6817688963e8bbc9f3beb0cd",
+      "item_sha256": "41b0870a518d55b9cb46d845118deeb211dd3bb345ca649d2c0bc309f2f17114",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -220,16 +226,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.litres.ru/book/vyacheslav-albertovich-du/mozg-i-ego-potrebnosti-ot-pitaniya-do-priznaniya-63171093/",
         "evidence_scope": "Official distributor card read: named author/title, 2020, popular-science category, publisher description of biological needs. Text offer unavailable now; this review does not establish access or endorse practical claims.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_kandel_v_poiskah_pamyati": {
       "decision": "approved",
-      "item_sha256": "e71c29d44710075785f924f3bcbdf15801416da6c7cba3a2023c0b4099efdcb1",
+      "item_sha256": "1e3ba6eaec30622c5447503f20eb1ab196508f62516e4de9b70cf587564f02ae",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -244,16 +256,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.corpus.ru/products/v-poiskah-pamyati-vozniknovenie-novoj-nauki-psihike.htm",
         "evidence_scope": "Official publisher product description read/indexed: history of biological foundations of mind and interaction of behavioural, cognitive and molecular approaches. Deepening role/additional priority and overview-first order are agent recommendations.",
         "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
         "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_carter_kak_rabotaet_mozg": {
       "decision": "approved",
-      "item_sha256": "4726f23750c4875e3dcd69635cfdc56d5c5c1d77baeaaa57b62394869d0e7560",
+      "item_sha256": "0937332986144e903c58e3fd679c7c0d88a14de9a9cdfad63387de59528afc57",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -268,16 +286,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.corpus.ru/products/rita-karter-kak-rabotaet-mozg.htm",
         "evidence_scope": "Official publisher description read: illustrated guide to the brain, popular-science category and broad readership. Foundational role/basic priority are agent judgements about an introductory overview, not a teacher priority or measured difficulty.",
         "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
         "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_martynov_mozg": {
       "decision": "approved",
-      "item_sha256": "8d74d1ba9df02bce3f1d9ecee060c41c820cf70598a2ad4af633d88bdc475b02",
+      "item_sha256": "842c4b91a612e154b0d4b1776cebde5e358a2a3865bcdc9ad400df3a4d7b0b0c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -292,16 +316,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://ast.ru/news/non-fictio-21-otchet-detskaya-literatura-den-4/?ast_utm=book_news",
         "evidence_scope": "Indexed official publisher presentation identifies author/title and brain organization, behavior, choice and emotions. Direct page fetch 403; exact edition, full text and practical claims not verified.",
         "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
         "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_nicholls_martin_ot_neirona_k_mozgu": {
       "decision": "approved",
-      "item_sha256": "47dfafe7534d3b5a3d7046055b2f744dc5907221593e0ecb6ccdcc8b2a720524",
+      "item_sha256": "34d1459b835f0ad1c3314868867b52b228f7063a85a9c52cb7854a198a4dc522",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -316,16 +346,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=340792&lang=Ru&page=Book",
         "evidence_scope": "Official publisher/distributor annotation and contents read: neuronal signaling, membrane transport, synaptic mechanisms, experimental methods; medical/biology student audience in author preface. Current 2026 edition differs from course 2017; no edition equivalence asserted. Authors unchanged until exact course edition review.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_pavlov_dvadtsatiletniy_opyt": {
       "decision": "approved",
-      "item_sha256": "5ecd40a25dffd55c0d9782587d3715e772165d89285e93bd99341a2d62b2eb0f",
+      "item_sha256": "2bffafe9a428fecc07bbd595743ec9e52bffd2e87c78b8fc99b3f3d07800200f",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -340,16 +376,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://search.rsl.ru/ru/record/01009225137",
         "evidence_scope": "Indexed RSL catalogue identifies Pavlov and historical 1928 collection of papers, lectures, reports on conditioned reflexes. Course edition year unknown; no full text review or claim that historical conclusions equal current consensus.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_ramachandran_mozg_rasskazyvaet": {
       "decision": "approved",
-      "item_sha256": "18ef0ade673a612b817eb151b56fbaebbb6261317da0ef580621036dad9f12ce",
+      "item_sha256": "57739120e2478e6cab1c1f1be06afaabe676680c995b0307ccbb6d2117721dc9",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -364,16 +406,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://careerpress.ru/book/Tell-Tale-Brain/",
         "evidence_scope": "Official publisher description read: named author/work, neurological case-based discussion of brain functions and evolution. RSL 01007504481 records 2014; course year 2012 and current publisher ISBN edition equivalence not established. Marketing claims and treatment claims are not endorsed.",
         "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
         "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_swaab_my_eto_nash_mozg": {
       "decision": "approved",
-      "item_sha256": "49256741bcf9f7604bb4fb228cd98f6651eed7c2d32b155ac891cb5d86cdd609",
+      "item_sha256": "949745dd94ea7d9f261b17888bac7de56b7eda613be470b0b3a4b0b3a39310e5",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -388,16 +436,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://limbakh.ru/index.php?id=3305",
         "evidence_scope": "Official publisher indexed description identifies author/work and broad brain-related readership; RSL 01006742645 independently records 2014 popular edition. Direct publisher response extracted only navigation on readback; full text and claims not verified.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_sergeev_dubynin_telo_cheloveka": {
       "decision": "approved",
-      "item_sha256": "c3f252f7296ba9c06563f07bf639c458700b3a4e5cda1bb59af5cfaa7794ecbf",
+      "item_sha256": "033a280f813c101f0ce9de0691536ff0baa470228d165c7358cfe7983ad459fb",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -412,16 +466,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://ast.ru/book/telo-cheloveka-861522/?ast_utm=book_see_also",
         "evidence_scope": "Indexed official publisher description identifies both authors and explicitly describes a popular-science book for children about body systems. Direct fetch failed; full text and exact edition equivalence not established.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_simonov_motivirovanny_mozg": {
       "decision": "approved",
-      "item_sha256": "bb7bd962b38d3014b825275df7b1aa5fccce1dc0c200e1951c55a83940f7fcc7",
+      "item_sha256": "4dee765b8aba704e41f5fdeb5d41e16589a9c48e01f2e34fdaf76884a06f5f93",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -436,16 +496,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/mastera-psihologii/product/motivirovannyy-mozg-vysshaya-nervnaya-deyatelnost-i-estestvenno-nauchnye-osnovy-obschey-psihologii",
         "evidence_scope": "Indexed official publisher annotation names needs, emotion, will and behavior, explicitly author need-information approach. Page retrieval later failed; course 1987/current edition correspondence unknown. No claim of complete contemporary scientific consensus.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_simonov_emotsionalny_mozg": {
       "decision": "approved",
-      "item_sha256": "1e99a64329ebebccf4c1872518505cc6df52a1cf61b0280990892a9c49db1ffd",
+      "item_sha256": "1e4467d10ba3f966d050152f6cdf154a7cf0d36e46889b75850d1463feb40841",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -460,16 +526,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/psihologiya-na-kazhdyy-den/product/emotsionalnyy-mozg",
         "evidence_scope": "Indexed official publisher description identifies Simonov and interdisciplinary physiological/anatomical/psychological study of emotions. NLR archive independently lists original 1981 work. Direct page failed; course edition unknown and full text not reviewed.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_ukhtomsky_dominanta": {
       "decision": "approved",
-      "item_sha256": "c8bcbc2f4e18a114d693105f10622d3eccebd1a49fc95af9f57e8769dbc7594c",
+      "item_sha256": "fe385137756d9ca51eb3d220901408e2a0b8a4e0be3c537571fdde53bdd60891",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -484,16 +556,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://rusneb.ru/catalog/000199_000009_004485205/",
         "evidence_scope": "Indexed National Electronic Library catalogue identifies Ukhtomsky Dominanta 2002. Official AST descriptions 875110/865599 locate attention physiology and interdisciplinary interpretation; exact compilation/edition match not established. NEB direct fetch 403; full text not reviewed.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_shulgovsky_neirofiziologiya": {
       "decision": "approved",
-      "item_sha256": "742ee6969425480a364b35e38c707a702fd9c222da1d44fb3353e3af0d2a55d3",
+      "item_sha256": "c98e8cf818c478d22d973aa48c747b768998b227cc5f7c367999ae526c764361",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -508,16 +586,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://search.rsl.ru/ru/record/01008241399",
         "evidence_scope": "RSL catalogue read: university neurophysiology textbook, author/title/publisher match. Catalogue edition 2016 differs from course year 2017; exact edition and full text not verified.",
         "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
         "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fch_yakutenko_volya_i_samokontrol": {
       "decision": "approved",
-      "item_sha256": "948c2f3e63887477884c1b3c856aefe65bb1f8b95e4cb5fed5af638e815ebc2c",
+      "item_sha256": "610ec315b1f3770953444f2b6d5e5335714faecfd42c79ac38877b43be1fe8a4",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -532,16 +616,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://alpinabook.ru/catalog/book-volya-i-samokontrol/",
         "evidence_scope": "Indexed official publisher card identifies author/title and popular discussion of self-control. CBR library 941485 records revised edition and prior 2018 edition; exact text equivalence not established. Direct subsequent body fetch failed; no full text review or endorsement of genetic/clinical claims.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_gazzaniga_kto_za_glavnogo": {
       "decision": "approved",
-      "item_sha256": "e59e05392496236aa3fa94da2689f2baaf61303fdf82ad107e40d5ca27e2bea4",
+      "item_sha256": "b0e25ea551d0069bc4f1c6f71190ed781e33e9160e4526ac9f545b81e1211aed",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -556,16 +646,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://ast.ru/book/kto-za-glavnogo-156527/",
         "evidence_scope": "Indexed official publisher description/Corpus article confirms the work on brain, mind and choice. Direct AST page failed; no access denial reason or full-text verification inferred. Deepening role/additional priority/overview-first order are agent recommendations, not endorsement of every scientific/philosophical claim.",
         "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
         "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_dubynin_mozg_i_ego_potrebnosti": {
       "decision": "approved",
-      "item_sha256": "f0e15c873d7e38f0284de5b16f85cd7eafa1d744b2b7d118241b7e04933148a7",
+      "item_sha256": "c0e3556e76c5601a39f12820688147ce428c9e47cf295779ed219d93ace2736b",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -580,16 +676,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.litres.ru/book/vyacheslav-albertovich-du/mozg-i-ego-potrebnosti-ot-pitaniya-do-priznaniya-63171093/",
         "evidence_scope": "Official distributor card read: named author/title, 2020, popular-science category, publisher description of biological needs. Text offer unavailable now; this review does not establish access or endorse practical claims.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_kandel_v_poiskah_pamyati": {
       "decision": "approved",
-      "item_sha256": "4ff95f49f963e70194bcd1218e48150d3edd812c964becf4e62be70aeb696415",
+      "item_sha256": "a8242aaa1553e09a6a82fd1199187b49eb908e1f7f7f3e88865a09bb868a4ad3",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -604,16 +706,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.corpus.ru/products/v-poiskah-pamyati-vozniknovenie-novoj-nauki-psihike.htm",
         "evidence_scope": "Official publisher product description read/indexed: history of biological foundations of mind and interaction of behavioural, cognitive and molecular approaches. Deepening role/additional priority and overview-first order are agent recommendations.",
         "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
         "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_carter_kak_rabotaet_mozg": {
       "decision": "approved",
-      "item_sha256": "b232cb8e31dfe90d9f1f51e9c8aa4bc7a826d9e2ac3de44fba8df71934a3b3e0",
+      "item_sha256": "4ea474bd13736de6a3e8a6746298b30d1279fc75caad520f8d4207b07657ba22",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -628,16 +736,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.corpus.ru/products/rita-karter-kak-rabotaet-mozg.htm",
         "evidence_scope": "Official publisher description read: illustrated guide to the brain, popular-science category and broad readership. Foundational role/basic priority are agent judgements about an introductory overview, not a teacher priority or measured difficulty.",
         "sequence": "Suggested introductory overview before thematic works; no specific author/teacher prerequisite established. Empty prerequisites do not prove no assumed knowledge.",
         "limitations": "Bibliographic source IDs/revisions/snapshots unchanged; no book text or personal reading state published."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_martynov_mozg": {
       "decision": "approved",
-      "item_sha256": "a218b14c994e747d311d3f2e8384a665a4885c4bb4e4eb832976ecb850587ed8",
+      "item_sha256": "6361a46409ab1ee11c69144775ae14640a043d94c41973c2c9ebd026679b6bd2",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -652,16 +766,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://ast.ru/news/non-fictio-21-otchet-detskaya-literatura-den-4/?ast_utm=book_news",
         "evidence_scope": "Indexed official publisher presentation identifies author/title and brain organization, behavior, choice and emotions. Direct page fetch 403; exact edition, full text and practical claims not verified.",
         "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
         "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_nicholls_martin_ot_neirona_k_mozgu": {
       "decision": "approved",
-      "item_sha256": "cdd9ec4d493c88c51580dfd086fd00a97206f33d9e068a3fe5eb2e939cb1a915",
+      "item_sha256": "836990042e7b2996aae1499b323b029dae630e4c913fc4dfdeb178dd3e5af17f",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -676,16 +796,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://urss.ru/cgi-bin/db.pl?blang=ru&id=340792&lang=Ru&page=Book",
         "evidence_scope": "Official publisher/distributor annotation and contents read: neuronal signaling, membrane transport, synaptic mechanisms, experimental methods; medical/biology student audience in author preface. Current 2026 edition differs from course 2017; no edition equivalence asserted. Authors unchanged until exact course edition review.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_pavlov_dvadtsatiletniy_opyt": {
       "decision": "approved",
-      "item_sha256": "14ac99a28ecf5d3cc21cefd7d6922314a5760652500a8171f9110fabda6da9d0",
+      "item_sha256": "641a86d1566b7422ba90b3b6800b585789672579625e37ff15dfd6cbbd2e3552",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -700,16 +826,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://search.rsl.ru/ru/record/01009225137",
         "evidence_scope": "Indexed RSL catalogue identifies Pavlov and historical 1928 collection of papers, lectures, reports on conditioned reflexes. Course edition year unknown; no full text review or claim that historical conclusions equal current consensus.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_ramachandran_mozg_rasskazyvaet": {
       "decision": "approved",
-      "item_sha256": "43ae93156164e8074a76b477fb2d4deecf424559cd69d5baa3cdca4afec4e662",
+      "item_sha256": "d790cc53c58c31e32b6f024fd71322a59452ee60819897b740e75ca5bf87f1f8",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -724,16 +856,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://careerpress.ru/book/Tell-Tale-Brain/",
         "evidence_scope": "Official publisher description read: named author/work, neurological case-based discussion of brain functions and evolution. RSL 01007504481 records 2014; course year 2012 and current publisher ISBN edition equivalence not established. Marketing claims and treatment claims are not endorsed.",
         "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
         "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_swaab_my_eto_nash_mozg": {
       "decision": "approved",
-      "item_sha256": "119ec8bda68c042d56d3b628ea490433f56e10b46b4c1d28c6491819a2c327f8",
+      "item_sha256": "19cbca2cd2b0b4c74e2e84b2e7850d5309459df7122c6018b0221625477ba459",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -748,16 +886,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://limbakh.ru/index.php?id=3305",
         "evidence_scope": "Official publisher indexed description identifies author/work and broad brain-related readership; RSL 01006742645 independently records 2014 popular edition. Direct publisher response extracted only navigation on readback; full text and claims not verified.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_sergeev_dubynin_telo_cheloveka": {
       "decision": "approved",
-      "item_sha256": "eca5552447cacc3097a6d598e08a814cf522842b44c35f5e0aef0b7cc5bf9ad1",
+      "item_sha256": "da0e28dd9b9020a5c6bac93eede16f5c1ce30478a8e31421101615e001221e6c",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -772,16 +916,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://ast.ru/book/telo-cheloveka-861522/?ast_utm=book_see_also",
         "evidence_scope": "Indexed official publisher description identifies both authors and explicitly describes a popular-science book for children about body systems. Direct fetch failed; full text and exact edition equivalence not established.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_simonov_motivirovanny_mozg": {
       "decision": "approved",
-      "item_sha256": "3334ac22bec2af8a10a05a2a1e079dc393c7dd17f78b4296f06b98925845a29c",
+      "item_sha256": "c970f40d7fa99e6cbf47a79a4ea96ea29f64595d9d2bb8e46804b23fe9a50674",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -796,16 +946,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/mastera-psihologii/product/motivirovannyy-mozg-vysshaya-nervnaya-deyatelnost-i-estestvenno-nauchnye-osnovy-obschey-psihologii",
         "evidence_scope": "Indexed official publisher annotation names needs, emotion, will and behavior, explicitly author need-information approach. Page retrieval later failed; course 1987/current edition correspondence unknown. No claim of complete contemporary scientific consensus.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_simonov_emotsionalny_mozg": {
       "decision": "approved",
-      "item_sha256": "9bc35e4e987c3c147cccaf46c4a33a181576f0438f28531582ab9a86a42b0051",
+      "item_sha256": "8ab6606c2c89ff239f18a86a4019621a9a49b02ff65d373b90e3935d6ed5f758",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -820,16 +976,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://www.piter.com/collection/psihologiya-na-kazhdyy-den/product/emotsionalnyy-mozg",
         "evidence_scope": "Indexed official publisher description identifies Simonov and interdisciplinary physiological/anatomical/psychological study of emotions. NLR archive independently lists original 1981 work. Direct page failed; course edition unknown and full text not reviewed.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_ukhtomsky_dominanta": {
       "decision": "approved",
-      "item_sha256": "c31d3f5bd0a2dfe66b61df76a5ca3cd49537c273707e5bf942ffd91e56474b48",
+      "item_sha256": "0fbc75af5fffc14d61f616c87983f03c2e760f690c69553bf105a6c6c4479535",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -844,16 +1006,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://rusneb.ru/catalog/000199_000009_004485205/",
         "evidence_scope": "Indexed National Electronic Library catalogue identifies Ukhtomsky Dominanta 2002. Official AST descriptions 875110/865599 locate attention physiology and interdisciplinary interpretation; exact compilation/edition match not established. NEB direct fetch 403; full text not reviewed.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_shulgovsky_neirofiziologiya": {
       "decision": "approved",
-      "item_sha256": "cd392bdbe30e6ccd4116ff5f8036cac7e3e6c7ebcd7fdd8dde8e93dcf58750f2",
+      "item_sha256": "66b4c3c11a125dde80f2816fdadf8a2d053571a4855a6e6fc2a57c978997eae6",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -868,16 +1036,22 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://search.rsl.ru/ru/record/01008241399",
         "evidence_scope": "RSL catalogue read: university neurophysiology textbook, author/title/publisher match. Catalogue edition 2016 differs from course year 2017; exact edition and full text not verified.",
         "sequence": "Agent suggested sequence after Carter introductory overview for core/deepening works; no author/teacher mandatory prerequisites asserted.",
         "limitations": "Existing bibliography/source IDs/revisions/snapshots, work identity and personal state unchanged. No full book review or measured difficulty; reading role is an explicit agent judgement."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:fvnd_yakutenko_volya_i_samokontrol": {
       "decision": "approved",
-      "item_sha256": "b7aeaa457f9b97a476d426d630badcafd6df1421a09344ce35930b424c83944d",
+      "item_sha256": "0d74792d3baf0bccee3aaa22a93f82e80d539a440f64599f20d1e9508cf1fcdc",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-09-30",
@@ -892,11 +1066,17 @@
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
-        "priority_origin": "agent",
+        "priority_origin": "teacher",
         "publisher_description": "https://alpinabook.ru/catalog/book-volya-i-samokontrol/",
         "evidence_scope": "Indexed official publisher card identifies author/title and popular discussion of self-control. CBR library 941485 records revised edition and prior 2018 edition; exact text equivalence not established. Direct subsequent body fetch failed; no full text review or endorsement of genetic/clinical claims.",
         "sequence": "Suggested introduction -> systematic basics -> thematic/experimental/historical reading. Dependencies are agent recommendations, not verified teacher/author obligations.",
         "limitations": "No full text review or measured difficulty; work identity, course bibliography/source revisions/snapshots and personal state preserved. Book claims are not certified by metadata review."
+      },
+      "priority_review": {
+        "reviewed_at": "2026-10-04T00:00:19+00:00",
+        "origin": "teacher",
+        "evidence_scope": "Complete visual reading of original scanned one-page PDF: all 15 listed items under explicit basic literature category. Agent reading order and bibliographic warnings unchanged.",
+        "private_receipt": "data/goal-four-scanned-bibliographies-review-20261004.json"
       }
     },
     "literature:psf_danilova_psihofiziologiya": {
