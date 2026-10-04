@@ -611,6 +611,20 @@
       "review_sha256": "2c4bb2ad7fbff74801c0ce7235545bec0ac8a577538e1ff4fa0773370a092044",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "nksotfa6vOyO27UeygSTSpDunwSns1nPI2UyIeqtt5CnQE3bd4E6HIjN55fHNHYghWpjz/W3LLng1SSjUCbEDA=="
+    },
+    "literature:lit_history_science_congress_volume3": {
+      "schema_version": 1,
+      "item_sha256": "f6860ff163597d815d60878e4070920507d01ee03453c7c24f1a6b586921f0eb",
+      "review_sha256": "73e5c2889d2794a5a29b2a895622f8737bdfa9e95e25d2d3abdd5c02bfb2cf20",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "xhn8GGI/GSGfmJgr7ZKHbB8XYh+IAVx7tvEdhGnvY5ld8DQYaDLHjRnY0q9VYqq7ph+o6tM63F6V8w1VDcb2Ag=="
+    },
+    "literature:lit_newton_principia_1989": {
+      "schema_version": 1,
+      "item_sha256": "097a0e7fb4e7da6f7adc4093204459cdf626358e17d2e5f8658ba1447f2419a9",
+      "review_sha256": "317c4c04cf8eae044d0102ab348e0f5ae3c80466d81a59ece43bb2859d5b7359",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "5OZCNsVF/vJ1bieEP3iiFY1D5UPRGOhGetSwhM6z1tFl6uUgmcMGCyqw7U9qLldsf4Z4gfMmNwpONlrgUfkTBQ=="
     }
   }
 }
