@@ -72,5 +72,85 @@
       "Приоритет преподавателя не задан; содержание книги не проверено как источник новых ответов."
     ],
     "notes": "Автор и произведение подтверждены упоминанием курса и первичной издательской библиографией. Библиографическая запись не одобряет все утверждения лекции."
+  },
+  {
+    "id": "lit_bacon_new_organon",
+    "work_id": "lit_bacon_new_organon",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "module": "module2",
+    "title": "Новый Органон",
+    "authors": [
+      "Бэкон Ф."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 5,
+    "global_order": 210005,
+    "estimated_minutes": null,
+    "tags": [
+      "philosophy_of_science",
+      "methodology"
+    ],
+    "why_read": "Историческое знакомство с индукцией и критикой ошибок познания после занятия о предмете и методе психологии. Порядок и значимость предложены агентом; книга не заменяет учебник экспериментальных методов.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_7a8e0286a42d"
+    ],
+    "source": {
+      "citation": "Бэкон Ф. Новый Органон"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены.",
+      "Приоритет преподавателя не задан; содержание книги не проверено как источник новых ответов."
+    ],
+    "notes": "Автор и произведение сверены по точному упоминанию курса и первичной издательской библиографии. Запись не одобряет все утверждения лекции."
+  },
+  {
+    "id": "lit_feyerabend_against_method",
+    "work_id": "lit_feyerabend_against_method",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "module": "module2",
+    "title": "Против метода",
+    "authors": [
+      "Фейерабенд П."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 30,
+    "global_order": 210030,
+    "estimated_minutes": null,
+    "tags": [
+      "philosophy_of_science",
+      "methodology"
+    ],
+    "why_read": "Дополнительное обсуждение методологического плюрализма после знакомства с научными парадигмами Куна. Порядок и значимость предложены агентом; книга не заменяет учебник экспериментальных методов.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_kuhn_structure_scientific_revolutions"
+    ],
+    "curriculum_topic_ids": [
+      "t_7a8e0286a42d"
+    ],
+    "source": {
+      "citation": "Фейерабенд П. Против метода"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены.",
+      "Приоритет преподавателя не задан; содержание книги не проверено как источник новых ответов."
+    ],
+    "notes": "Автор и произведение сверены по точному упоминанию курса и первичной издательской библиографии. Запись не одобряет все утверждения лекции."
   }
 ]

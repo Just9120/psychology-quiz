@@ -527,6 +527,20 @@
       "review_sha256": "51099f5cbe2b2c9725e0ecbcdfaa63c30ebc3ed52370b34ca8b1c055219f7044",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "1ZOFqLuDCfAHU+gaukDfeNvyONiBEapkczd7Sf43gLWJ7wWEM4C4eUEtg3T7NtywbKIpvbSa3wzMVrKr9OT1Bg=="
+    },
+    "literature:lit_bacon_new_organon": {
+      "schema_version": 1,
+      "item_sha256": "bd41f943f40b6505a392bb4ffc974fa346cc636cafe5fd2ce4acc3a696bc75f7",
+      "review_sha256": "50bafd77ff399ec1cd3725e8cead434fa5c7b35d88c51d6665aa18bf821f8ae7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "QP57ChWbxqBjizPYciDn3L/Lp7IyaGAZxsgKewKi7LVQ6Sw1ezuhSPMamBoiD12YaBcFkkPQylzyOKegy56/CA=="
+    },
+    "literature:lit_feyerabend_against_method": {
+      "schema_version": 1,
+      "item_sha256": "39677432bee1c44aa4b6c4bf7431c7b2189f0360d248b9255f4cea1ff9a4e200",
+      "review_sha256": "260e5afb3b8ba564817aaa10f4730ed9950ba3ef78dfdd46223535313add659e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "GjQki6+x4VDG7olHMzRCB96LgJr22BQQ3erKILz2BfGd0Hm9SDaasvp8APqMfqAjZMwMqdKJMhOe5rlsQc1WDg=="
     }
   }
 }
