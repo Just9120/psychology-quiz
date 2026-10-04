@@ -209,9 +209,9 @@
     "literature:lit_hsieh_delivering_happiness": {
       "schema_version": 1,
       "item_sha256": "0706fafb617795daa09e7f4e47cf55b95ce05be1d854dad53a6158e0f668a311",
-      "review_sha256": "5702c140f3755bcb6f96219388b9ff245a740f80eb78de9059cd1103ecb47c47",
+      "review_sha256": "b4f0df77ee10b45c34de00cb723e32db38bf45bbe7d7e27dcacdde1970ade18e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "7TN9wOISz3QnyjhTvzPErd8DXyxJ0kcZ/7YOQxND+pe2pSu1w4Clpe6ZCLkCwRRRFs66oOPlGXgM26ab201cDg=="
+      "signature": "LxFihYnSBciyCsYUmNRVx0m3MNYhOXWPFXGo8d26mgqJeDcVWqTpKClUn/Bb7PIY6+dPZEK9IEckDhrciLdUAg=="
     },
     "literature:lit_taylor_principles_scientific_management": {
       "schema_version": 1,
