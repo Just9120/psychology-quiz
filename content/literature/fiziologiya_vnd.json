@@ -857,5 +857,78 @@
     "curriculum_topic_ids": [
       "t_fdf0949c60f1"
     ]
+  },
+  {
+    "id": "lit_danilova_krylova_higher_nervous_activity",
+    "work_id": "lit_danilova_krylova_higher_nervous_activity",
+    "topic_id": "fiziologiya_vnd",
+    "module": "module1",
+    "title": "Физиология высшей нервной деятельности",
+    "authors": [
+      "Данилова Н. Н.",
+      "Крылова А. Л."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "teacher",
+    "topic_order": 230,
+    "global_order": 140230,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение к практике №4: обращаться к разделам о физиологии эмоций и вегетативной нервной системе после вводных материалов курса. Использование как справочника предложено агентом; конкретные главы и обязательные предпосылки не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fdf0949c60f1"
+    ],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Данилова Н. Н., Крылова А. Л.. Физиология высшей нервной деятельности"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание и год рекомендованной в курсе книги не установлены."
+    ],
+    "notes": "Проверено точное библиографическое упоминание в уже просмотренном материале курса. Содержание книги не прочитано. Неизвестное издание не восстановлено предположениями; новые обязательные предпосылки и подтверждение эффективности не заявлены."
+  },
+  {
+    "id": "lit_gordon_effective_parent_training",
+    "work_id": "lit_gordon_effective_parent_training",
+    "topic_id": "fiziologiya_vnd",
+    "module": "module1",
+    "title": "Тренинг эффективного родителя",
+    "authors": [
+      "Гордон Т."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "teacher",
+    "topic_order": 240,
+    "global_order": 140240,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение из списка практики №4 по теме общения. Прикладной этап предложен агентом по описанию книги Parent Effectiveness Training в официальном каталоге автора; соответствие конкретному русскому изданию не установлено.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fdf0949c60f1"
+    ],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Гордон Т.. Тренинг эффективного родителя"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русское название и инициалы сохранены по курсу. Конкретный перевод, издание и соответствие англоязычной книге Parent Effectiveness Training не установлены."
+    ],
+    "notes": "Проверено точное библиографическое упоминание в уже просмотренном материале курса. Содержание книги не прочитано. Неизвестное издание не восстановлено предположениями; новые обязательные предпосылки и подтверждение эффективности не заявлены."
   }
 ]

@@ -597,6 +597,20 @@
       "review_sha256": "6447d5eda202f6b2915abf9b9f48fe2ebfd0158818bb7f4efafe45184b392c9f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "Ye6jrxu2yk5QlUf/nTGxR5qOD13j/d0c9cEK+Yj9oyrlcXBQQvLET71YYLLQF/wYv8Yo3kEe3KYxiAXGa7ycBg=="
+    },
+    "literature:lit_danilova_krylova_higher_nervous_activity": {
+      "schema_version": 1,
+      "item_sha256": "a161b6762542e3a904f636254eb0da1e7bd608637461c2dc24aa856599b89f7c",
+      "review_sha256": "b0adea2260f35f13819df4336d8620881765307a0ac686f8c9df40f0fe139567",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "A/SZ853eYoJ9pDEten/S2t60ExQfjMyGJ+4O1a8ut7FveeVEILLr++jA8MfAhYo1yQWBFrl3Icih2N1KBqrZDw=="
+    },
+    "literature:lit_gordon_effective_parent_training": {
+      "schema_version": 1,
+      "item_sha256": "3a81a21cb9664115911852dc15df142317f2bc77bb3e38dc29d087cfaf60aa88",
+      "review_sha256": "2c4bb2ad7fbff74801c0ce7235545bec0ac8a577538e1ff4fa0773370a092044",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "nksotfa6vOyO27UeygSTSpDunwSns1nPI2UyIeqtt5CnQE3bd4E6HIjN55fHNHYghWpjz/W3LLng1SSjUCbEDA=="
     }
   }
 }
