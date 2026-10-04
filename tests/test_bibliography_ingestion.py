@@ -139,3 +139,29 @@ def test_private_title_alias_locates_existing_work_without_merging_or_approval()
     with pytest.raises(InventoryError, match="invalid_bibliography_alias"):
         discover_bibliography(snapshot, [capture], catalogue,
                               [{"title": "Новая книга", "work_id": "missing"}])
+
+
+@pytest.mark.parametrize("text, expected", [
+    ("Психология изучает поведение. Качественные методы в психологии.", []),
+    ('Литература к блоку «Психология».', []),
+    ('Прочитайте книгу «Психология».', [("Психология", ["myers"])]),
+    ('Майерс Д. Психология. Учебник.', [("Психология", ["myers"])]),
+    ('Рекомендую книгу «Основы психологии».', [("Основы психологии", [])]),
+    ('Майерс объясняет, что психология изучает поведение.', []),
+])
+def test_single_word_catalogue_title_needs_book_or_author_context(text, expected):
+    raw = text.encode("utf-8")
+    revision = ["2026-10-05", "Synthetic", "text/plain"]
+    snapshot = {"files": {"source": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"source": [["Module", "Synthetic"]]}}
+    capture = {"source_id": "source", "content": raw, "revision": revision,
+               "snapshot_sha256": hashlib.sha256(raw).hexdigest()}
+    catalogue = [{"id": "entry", "work_id": "myers", "title": "Психология",
+                  "authors": ["Майерс Д."]}]
+    result = discover_bibliography(snapshot, [capture], catalogue)
+    assert [(item["title_candidate"], item["candidate_work_ids"])
+            for item in result["mentions"]] == expected
+    assert result["publication_approval"] is False
+    for item in result["mentions"]:
+        start, end = map(int, item["locator"].split(":")[1:])
+        assert text[start:end] == item["title_candidate"]

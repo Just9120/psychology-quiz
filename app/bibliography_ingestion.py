@@ -25,6 +25,10 @@ TITLE_SEPARATOR = re.compile(r'[\s,;]*(?:(?:и|или|а также)[\s,;]+)?', 
 def _book_quotes(text: str):
     """Keep adjacent titles in a book list, without interpreting later dialogue."""
     for first in READING_QUOTE.finditer(text):
+        cue = text[first.start():first.start("title")]
+        if re.search(r"литератур[а-я]*\s+к\s+блок[а-я]*\s*[«“\"]$", cue, re.IGNORECASE):
+            # The quoted name labels the course block, not a recommended book.
+            continue
         yield first.span("title"), first.group("title")
         end = first.end()
         while True:
@@ -67,7 +71,23 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                 or alias["work_id"] not in work_ids):
             raise InventoryError("invalid_bibliography_alias")
         by_title[alias["title"]].add(alias["work_id"])
-    known = [(_title_pattern(title), sorted(ids)) for title, ids in by_title.items()]
+    author_cues = defaultdict(set)
+    for entry in catalogue:
+        authors = entry.get("authors", [])
+        if not isinstance(authors, list):
+            continue
+        for author in authors:
+            # Conventional surname-first bibliography names. Do not infer a
+            # surname from arbitrary full names or expand unidentified authors.
+            if isinstance(author, str) and re.fullmatch(
+                    r"[A-Za-zА-Яа-яЁё-]{3,}(?:\s+[A-ZА-ЯЁ]\.){1,3}", author):
+                author_cues[entry["work_id"]].add(author.split()[0])
+    known = [(_title_pattern(title), sorted(ids), len(title.split()) == 1,
+              [re.compile(r"(?<!\w)" + re.escape(surname)
+                          + r"(?:[ \t]*[A-ZА-ЯЁ]\.){0,3}[ \t]*(?:[:.,—–-][ \t]*)?$",
+                          re.IGNORECASE)
+               for work_id in ids for surname in author_cues[work_id]])
+             for title, ids in by_title.items()]
     seen, mentions = set(), []
     for capture in captures:
         if not isinstance(capture, dict):
@@ -87,10 +107,18 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
             raise InventoryError("bibliography_empty_capture_not_read")
         seen.add(source_id)
         found = {}
-        for pattern, work_ids in known:
+        book_quotes = list(_book_quotes(text))
+        explicit_titles = {bounds for bounds, _ in book_quotes}
+        for pattern, work_ids, single_word, author_patterns in known:
             for match in pattern.finditer(text):
+                if (single_word and match.span() not in explicit_titles
+                        and not any(author.search(text[max(0, match.start() - 80):match.start()])
+                                    for author in author_patterns)):
+                    # A common word such as "психология" is not a citation of
+                    # the same-named textbook, including inside another title.
+                    continue
                 found[match.span()] = (match.group(), work_ids)
-        for bounds, title in _book_quotes(text):
+        for bounds, title in book_quotes:
             if not any(start <= bounds[0] and bounds[1] <= end for start, end in found):
                 found[bounds] = (title, [])
         for (start, end), (title, work_ids) in sorted(found.items()):
