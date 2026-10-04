@@ -306,10 +306,10 @@
     },
     "literature:lit_levine_waking_tiger": {
       "schema_version": 1,
-      "item_sha256": "09d6406f3b919a56411e53ddd9fcdcdd4bc5e714bb90ac485ebfdfb6c832a8c5",
-      "review_sha256": "11d919293348087e8216a1243a588beeca3151b0c2747bd42c098e1801bda83b",
+      "item_sha256": "5181defa1bd0e3314b94b96f3365e089ad7767a75e5234b9827da69c05c5f47a",
+      "review_sha256": "b36cefbd047252b7d0a4378bf3bd0b5ce15eb40d0d9aab27445c721252a116ad",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "APzJ+cJ0pDoF1Eqyo5+J/RnyX9uKR93CiEm9ONe/2AHU+f2fFDb2Y2TUL99ADQMJeFmWQk93S9CLDR0eYgf5CQ=="
+      "signature": "eJZmfBNtaMDCsYgPitEB7vglE5byD3Cs+br+us5PPK18LGrrLrsQ8jSo+nOaGcGLzuUsvcAWw3/2RVZAZemNCA=="
     },
     "literature:lit_lindsay_ethics_european_psychologists": {
       "schema_version": 1,
@@ -576,6 +576,27 @@
       "review_sha256": "eb223292238975b672de1a3efc7a1e89d604d4d59034319fd8e992a1ef275d41",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "KWVepiTVXwMDXnUfiY8P2acrw+ouGncm/Q4S3lRuzQOas1lz+Mpi1BNhXhDDxVUtDpm6Z2fST5qR1hklxmIiAw=="
+    },
+    "literature:lit_vnd_practice04_rogers": {
+      "schema_version": 1,
+      "item_sha256": "b3b10ffa9e171beaabeef370a3f410540d0e10dddff19d8681b2225f5bad8004",
+      "review_sha256": "ead5e9168884a4846654a1e88424c172198e44b302bb147b0fee4761267e249a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Ko3dX4YydXeoqUjNBhJ8/IwSrJN4SQm1H7iOxRylBnZwL+wQdkLlfaslz/qWK2wmtyNEuaTwhNbSUUsnyvrKCA=="
+    },
+    "literature:lit_vnd_practice04_ekman": {
+      "schema_version": 1,
+      "item_sha256": "d64f4bbd6fe203c8b34e401b3e23d229216cdd56c19580a4a97bb8b3033cb7c1",
+      "review_sha256": "fca246ebf7f411eedd8030bf95543192c517c94d7aa94682960ddd05f204a924",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "y81BksI7h7MDX2XhTKCroIF78WgWJZ/RcgNdYCcDV2AajKDlmZUl5doxgIHMKH/87zzIqMPfqY+wMn8x0QIiCw=="
+    },
+    "literature:lit_vnd_practice04_sapolsky": {
+      "schema_version": 1,
+      "item_sha256": "26e929f3136e2b1d0c19e5d4219cd5d1d7735eb255e6a4fa922f485605baabf4",
+      "review_sha256": "6447d5eda202f6b2915abf9b9f48fe2ebfd0158818bb7f4efafe45184b392c9f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Ye6jrxu2yk5QlUf/nTGxR5qOD13j/d0c9cEK+Yj9oyrlcXBQQvLET71YYLLQF/wYv8Yo3kEe3KYxiAXGa7ycBg=="
     }
   }
 }
