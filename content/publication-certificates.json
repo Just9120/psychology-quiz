@@ -244,9 +244,9 @@
     "literature:lit_freud_psychopathology_everyday_life": {
       "schema_version": 1,
       "item_sha256": "1d3b749508875fc5212d22dc819f02d7709154c75f80235aa59307bf179f844b",
-      "review_sha256": "831e30e2b478902498e64fc4a984f0b645b76be7f3db1aba8ce3cdcd51948f5f",
+      "review_sha256": "cd954e95223e516b9d6c635ba5a0b9381f7f9f11ac21d6886b0ee9a3cd411047",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "+xc74kjdVpCcr9vpg0jiIrM+1pJH0tyfZ7xweOhV+KpYyjKqcqKnidGv5u4sIzP3v7aCoMgksyl6Mpd4Mh7OAQ=="
+      "signature": "HTn4NS6RhNt7qvn6f4Ye9xpW6vxbJ+27CY/vW2U11WbhOlOGK3UJwWxiHtDoe4uLUIgDgAMTrY7ZPIUz+fI9Bw=="
     },
     "literature:lit_vasilyuk_psychology_experiencing": {
       "schema_version": 1,
