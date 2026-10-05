@@ -1143,6 +1143,13 @@
       "review_sha256": "35fb18ad0cbe24d3a4aea8bab0609afcb9e665bde55ea917522970e81c0fbc96",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "Dvmws/nq+xfXfk2aggoIreUrEIT62wKBaAvFgXfARwX4o0UJmF/GMj9WgW+LqtZT/khzRv4Qa/h1wCHlmaVVAw=="
+    },
+    "literature:lit_frankl_man_search_meaning_quantitative": {
+      "schema_version": 1,
+      "item_sha256": "0b82b97ae17ac46ebf0bf4ea9e7d07e7daf7dfc9757da374d26f20102ac9df12",
+      "review_sha256": "99a4a5ddaa0f755a39bdbc51bc830a43e79ff170d3a2dbfc7d35802b72a34f85",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "GZcMcKBH5K6oodbMAdLFxPi1/61SaF6lCrbq+epACfou7Igck+AIMcz2PCxIm5dlq3nVxqPHz2CRuKjVut38Ag=="
     }
   }
 }
