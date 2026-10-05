@@ -279,3 +279,63 @@ def test_book_cue_never_turns_following_dialogue_into_a_book(text, expected):
         "revision": revision, "snapshot_sha256": hashlib.sha256(raw).hexdigest()}], [])
     assert [m["title_candidate"] for m in result["mentions"]] == expected
     assert result["publication_approval"] is False
+
+
+def test_same_title_as_discipline_is_retained_but_not_presented_as_book_citation():
+    text = ('Социальная психология изучает поведение групп. '
+            'Прочитайте книгу «Социальная психология».')
+    raw = text.encode("utf-8")
+    revision = ["2026-10-05", "Lesson", "text/plain"]
+    snapshot = {"files": {"source": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"source": [["Module", "Lesson"]]}}
+    capture = {"source_id": "source", "content": raw, "revision": revision,
+               "snapshot_sha256": hashlib.sha256(raw).hexdigest()}
+    catalogue = [{"id": "book", "work_id": "work", "title": "Социальная психология"}]
+    result = discover_bibliography(snapshot, [capture], catalogue)
+    assert [m["evidence_kind"] for m in result["mentions"]] == [
+        "catalogue_title_match", "explicit_book_title"]
+    assert result["evidence_counts"] == {"catalogue_title_match": 1, "explicit_book_title": 1}
+    assert all(m["candidate_work_ids"] == ["work"] and m["decision"] == "pending_review"
+               for m in result["mentions"])
+    assert result["publication_approval"] is False
+    for mention in result["mentions"]:
+        start, end = map(int, mention["locator"].split(":")[1:])
+        assert text[start:end] == mention["title_candidate"]
+
+
+def test_author_citation_and_unknown_explicit_title_keep_separate_evidence_kinds():
+    text = 'Иванов И. Социальная психология. Рекомендую книгу «Неизвестная книга».'
+    raw = text.encode("utf-8")
+    revision = ["2026-10-05", "Lesson", "text/plain"]
+    snapshot = {"files": {"source": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"source": [["Module", "Lesson"]]}}
+    capture = {"source_id": "source", "content": raw, "revision": revision,
+               "snapshot_sha256": hashlib.sha256(raw).hexdigest()}
+    result = discover_bibliography(snapshot, [capture], [{"id": "book", "work_id": "work",
+        "title": "Социальная психология", "authors": ["Иванов И."]}])
+    assert [m["evidence_kind"] for m in result["mentions"]] == [
+        "author_title_citation", "explicit_book_title"]
+    assert result["mentions"][1]["candidate_work_ids"] == []
+    assert all(m["decision"] == "pending_review" for m in result["mentions"])
+
+
+@pytest.mark.parametrize("known_full_title", [False, True])
+def test_short_catalogue_title_inside_long_book_title_does_not_create_second_work(known_full_title):
+    text = 'Дополнительная литература: «Психологическое консультирование: теория и практика».'
+    raw = text.encode("utf-8")
+    revision = ["2026-10-05", "Lesson", "text/plain"]
+    snapshot = {"files": {"source": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"source": [["Module", "Lesson"]]}}
+    capture = {"source_id": "source", "content": raw, "revision": revision,
+               "snapshot_sha256": hashlib.sha256(raw).hexdigest()}
+    catalogue = [{"id": "short", "work_id": "short_work", "title": "Психологическое консультирование"}]
+    if known_full_title:
+        catalogue.append({"id": "long", "work_id": "long_work",
+                          "title": "Психологическое консультирование: теория и практика"})
+    result = discover_bibliography(snapshot, [capture], catalogue)
+    assert len(result["mentions"]) == 1
+    mention = result["mentions"][0]
+    assert mention["title_candidate"] == "Психологическое консультирование: теория и практика"
+    assert mention["candidate_work_ids"] == (["long_work"] if known_full_title else [])
+    assert mention["decision"] == "pending_review"
+    assert not result["publication_approval"]

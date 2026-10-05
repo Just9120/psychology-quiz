@@ -97,6 +97,7 @@ def main(argv=None):
         print(json.dumps({"captured_sources": result["captured_sources"],
                           "unread_sources": len(result["unread_source_ids"]),
                           "mention_candidates": len(result["mentions"]),
+                          "evidence_counts": result["evidence_counts"],
                           "unknown_work_candidates": sum(not item["candidate_work_ids"]
                                                          for item in result["mentions"]),
                           "publication_approval": False}))

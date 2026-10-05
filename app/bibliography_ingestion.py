@@ -126,6 +126,7 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                for work_id in ids for surname in author_cues[work_id]])
              for title, ids in by_title.items()]
     seen, mentions = set(), []
+    evidence_counts = defaultdict(int)
     for capture in captures:
         if not isinstance(capture, dict):
             raise InventoryError("invalid_bibliography_capture")
@@ -144,10 +145,17 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
             raise InventoryError("bibliography_empty_capture_not_read")
         seen.add(source_id)
         found = {}
+        evidence_kinds = {}
         book_quotes = list(_book_quotes(text))
         explicit_titles = {bounds for bounds, _ in book_quotes}
         for pattern, work_ids, single_word, author_patterns in known:
             for match in pattern.finditer(text):
+                if any(start <= match.start() and match.end() <= end
+                       and match.span() != (start, end)
+                       for start, end in explicit_titles):
+                    # A shorter catalogue title inside an explicit longer title
+                    # is not a second work. Keep the full title's review task.
+                    continue
                 if (single_word and match.span() not in explicit_titles
                         and not any(author.search(text[max(0, match.start() - 80):match.start()])
                                     for author in author_patterns)):
@@ -155,9 +163,20 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                     # the same-named textbook, including inside another title.
                     continue
                 found[match.span()] = (match.group(), work_ids)
+                # A title match alone is a broad search hit, not a citation.
+                # Retain it so discovery does not silently lose possible books.
+                evidence_kinds[match.span()] = (
+                    "explicit_book_title" if any(
+                        start <= match.start() and match.end() <= end
+                        for start, end in explicit_titles)
+                    else "author_title_citation" if any(
+                        author.search(text[max(0, match.start() - 80):match.start()])
+                        for author in author_patterns)
+                    else "catalogue_title_match")
         for bounds, title in book_quotes:
             if not any(start <= bounds[0] and bounds[1] <= end for start, end in found):
                 found[bounds] = (title, [])
+                evidence_kinds[bounds] = "explicit_book_title"
         unparsed = {}
         for bounds, citation in _unparsed_book_citations(text):
             if any(bounds[0] <= start and end <= bounds[1] and work_ids
@@ -166,7 +185,10 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                 continue
             found[bounds] = (citation, [])
             unparsed[bounds] = True
+            evidence_kinds[bounds] = "unparsed_author_title"
         for (start, end), (title, work_ids) in sorted(found.items()):
+            evidence_kind = evidence_kinds[(start, end)]
+            evidence_counts[evidence_kind] += 1
             mentions.append({
                 "source_id": source_id, "revision": list(_revision(source)),
                 "snapshot_sha256": capture["snapshot_sha256"],
@@ -174,6 +196,7 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                 "locator": f"characters:{start}:{end}", "title_candidate": title,
                 "excerpt": text[max(0, start - 150):min(len(text), end + 150)],
                 "candidate_work_ids": work_ids, "decision": "pending_review",
+                "evidence_kind": evidence_kind,
             })
             if (start, end) in unparsed:
                 mentions[-1]["candidate_kind"] = "unparsed_author_title"
@@ -182,4 +205,5 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                     "the full citation is not an approved title or work identity.")
     return {"schema_version": 1, "captured_sources": len(seen),
             "unread_source_ids": sorted(set(snapshot["files"]) - seen),
-            "mentions": mentions, "publication_approval": False}
+            "mentions": mentions, "evidence_counts": dict(sorted(evidence_counts.items())),
+            "publication_approval": False}
