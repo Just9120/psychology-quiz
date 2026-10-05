@@ -656,10 +656,10 @@
     },
     "literature:lit_golovakha_kronik_psychological_time": {
       "schema_version": 1,
-      "item_sha256": "5548354132b6c1e3eb66090af6712025cc53f7a2b6e12d1eba94ddc46dd9c599",
-      "review_sha256": "651343f2d715a0e9d57b696a5bb88eb13f626427ce22d29c3ff95250ae611f76",
+      "item_sha256": "2f26488a076f53cf978124a78b73956e990984acaab28a763ae12b1d1d300860",
+      "review_sha256": "0c5c2b1b18e6eed42e1abe9ffa35c4df4873832c1dea244a067e46bd478ce9e5",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "aLyKquaPwRZdlL2Q1OTX5I0iu6W9/usM+2sgr8W8sbdt7ywjRqSxuDzt5MUe23tUnr54H6z3EEIV8dCeRO1JBw=="
+      "signature": "+Zdwr3QLXkL2OW2l6XuwzxE8fGiATj4JrLAR1iqD6Fs9YM2etLh94Jz0ZG8/9OF1E4kO4IHZVh+03d3EqfkEAg=="
     },
     "literature:lit_lebon_psychology_peoples_masses": {
       "schema_version": 1,
