@@ -69,6 +69,67 @@ def _character_ranges(locator: object) -> list[tuple[int, int]]:
     return ranges
 
 
+def _verify_related_fragment_reviews(dossier, source_id, processed, states):
+    """Require current, explicit mappings of every related hold into local holds.
+
+    A relation alone supplies no coordinates. Unmapped or changed relations stay
+    blocked; a mapping never removes an original hold or approves a whole source.
+    """
+    target = processed[source_id]
+    claim = dossier["scoped_claim_review"]
+    reviews = dossier.get("related_conflict_reviews")
+    origins = {}
+    for origin_id, record in processed.items():
+        hold = record.get("conflict_hold") if record.get("review_state") == "pending_review" else record
+        if (record.get("review_state") in {"conflict", "pending_review"}
+                and isinstance(hold, dict) and source_id in hold.get("related_source_ids", [])):
+            origins[origin_id] = (record, hold)
+    if (not isinstance(reviews, list) or len(reviews) != len(origins)
+            or any(not isinstance(review, dict) for review in reviews)
+            or {review.get("source_id") for review in reviews} != set(origins)):
+        raise SigningError("related_fragment_review_required")
+    local_locators = {target.get("locator")}
+    local_locators.update(issue.get("locator") for issue in target.get("issues", []))
+    local_parts = {part.strip() for locator in local_locators if isinstance(locator, str)
+                   for part in locator.split(";")}
+    for review in reviews:
+        origin, hold = origins[review["source_id"]]
+        mappings = review.get("mappings")
+        origin_locators = {hold.get("locator")}
+        origin_locators.update(issue.get("locator") for issue in hold.get("issues", []))
+        if (states.get(review["source_id"]) != "conflict_review"
+                or origin.get("snapshot_kind") != "extracted_text"
+                or review.get("revision") != origin.get("revision")
+                or review.get("processing_sha256") != fingerprint(origin)
+                or review.get("target_processing_sha256") != fingerprint(target)
+                or review.get("reviewer") != claim.get("reviewer")
+                or not isinstance(review.get("note"), str) or not review["note"].strip()
+                or not isinstance(mappings, list) or not mappings
+                or any(not isinstance(mapping, dict) for mapping in mappings)):
+            raise SigningError("related_fragment_review_required")
+        if (None in origin_locators or len(mappings) != len(origin_locators)
+                or {mapping.get("origin_locator") for mapping in mappings} != origin_locators
+                or any(not isinstance(mapping.get("target_locator"), str)
+                       or any(part.strip() not in local_parts
+                              for part in mapping["target_locator"].split(";"))
+                       for mapping in mappings)):
+            raise SigningError("related_fragment_mapping_required")
+        try:
+            reviewed_at = datetime.fromisoformat(review["reviewed_at"].replace("Z", "+00:00"))
+            claim_at = datetime.fromisoformat(claim["reviewed_at"].replace("Z", "+00:00"))
+            origin_at = datetime.fromisoformat(hold["reviewed_at"].replace("Z", "+00:00"))
+            target_at = datetime.fromisoformat(target["reviewed_at"].replace("Z", "+00:00"))
+            if not max(origin_at, target_at) <= reviewed_at <= claim_at:
+                raise ValueError("stale mapping")
+            # Only explicit text coordinates are supported here. PDF page mapping
+            # needs a separately verified extraction; do not infer page offsets.
+            for mapping in mappings:
+                _character_ranges(mapping["origin_locator"])
+                _character_ranges(mapping["target_locator"])
+        except (KeyError, TypeError, ValueError, AttributeError) as error:
+            raise SigningError("related_fragment_mapping_required") from error
+
+
 def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
     """Permit only named, reviewed claims outside a source's held passage."""
     claim = dossier.get("scoped_claim_review")
@@ -339,7 +400,7 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         state = states.get(source_id)
         allowed_states = {"processed", "conflict_review", "pending_review"} if fragment_v2 else {"processed", "conflict_review"}
         if (item is None or state not in allowed_states
-                or source_id in related_conflicts
+                or (source_id in related_conflicts and not fragment_v2)
                 or not isinstance(record, dict)
                 or source.get("title") != item["title"]
                 or source.get("modified_time") != item["modified_time"]
@@ -390,6 +451,8 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                 if any(end > len(text) or not text[start:end].strip() for start, end in ranges):
                     raise SigningError("private_source_classification_required")
         if fragment_v2:
+            if source_id in related_conflicts:
+                _verify_related_fragment_reviews(dossier, source_id, processed, states)
             try:
                 verify_fragment_review(dossier, source, record, public_item, private_path=private_path)
             except FragmentReviewError as error:

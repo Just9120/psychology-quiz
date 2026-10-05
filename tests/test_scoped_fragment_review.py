@@ -340,3 +340,69 @@ def test_private_pdf_classification_requires_original_bytes(tmp_path, monkeypatc
     original.write_bytes(b"%PDF-1.7 replaced")
     with pytest.raises(SigningError, match="private_source_classification_changed"):
         verify_current_sources(dossier, inventory, processed, public_item=public, private_registry_path=registry)
+
+
+def related_fragment_fixture(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, path = fragment_fixture(tmp_path, monkeypatch, kind="literature")
+    origin = deepcopy(processed["synthetic_source"])
+    origin["revision"][1] = "Related slides"
+    origin["related_source_ids"] = ["synthetic_source"]
+    processed["related_slides"] = origin
+    child = deepcopy(inventory["folders"]["root"][0]["children"][0])
+    child.update(id="related_slides", title="Related slides")
+    inventory["folders"]["root"][0]["children"].append(child)
+    dossier["related_conflict_reviews"] = [{
+        "source_id": "related_slides", "revision": origin["revision"],
+        "processing_sha256": fingerprint(origin),
+        "target_processing_sha256": fingerprint(processed["synthetic_source"]),
+        "reviewer": "reviewer", "reviewed_at": "2026-09-29T00:00:00Z",
+        "note": "Both related assertions are retained in the target's local holds.",
+        "mappings": [{"origin_locator": locator, "target_locator": locator}
+                     for locator in ("characters:16:30", "characters:31:52")]}]
+    return public, dossier, inventory, processed
+
+
+def test_related_fragment_mapping_preserves_both_sources_holds(tmp_path, monkeypatch):
+    public, dossier, inventory, processed = related_fragment_fixture(tmp_path, monkeypatch)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    dossier.pop("related_conflict_reviews")
+    with pytest.raises(SigningError, match="related_fragment_review_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("change", ["origin", "target", "revision", "missing_mapping", "outside_hold", "old_review", "overlap"])
+def test_related_fragment_mapping_rejects_incomplete_or_changed_evidence(tmp_path, monkeypatch, change):
+    public, dossier, inventory, processed = related_fragment_fixture(tmp_path, monkeypatch)
+    review = dossier["related_conflict_reviews"][0]
+    if change == "origin":
+        processed["related_slides"]["reason"] = "New unresolved issue"
+    elif change == "target":
+        processed["synthetic_source"]["reason"] = "Changed local issue"
+    elif change == "revision":
+        inventory["folders"]["root"][0]["children"][1]["modified_time"] = "2026-10-02T00:00:00Z"
+    elif change == "missing_mapping":
+        review["mappings"].pop()
+    elif change == "outside_hold":
+        review["mappings"][0]["target_locator"] = "characters:0:15"
+    elif change == "old_review":
+        review["reviewed_at"] = "2026-09-27T00:00:00Z"
+    else:
+        processed["synthetic_source"]["issues"].append({"locator": "characters:0:15"})
+        review["target_processing_sha256"] = fingerprint(processed["synthetic_source"])
+        dossier["scoped_claim_review"]["processing_sha256"] = review["target_processing_sha256"]
+    with pytest.raises(SigningError):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+def test_related_fragment_mapping_accepts_explicit_union_of_existing_holds(tmp_path, monkeypatch):
+    public, dossier, inventory, processed = related_fragment_fixture(tmp_path, monkeypatch)
+    origin = processed["related_slides"]
+    origin["locator"] = "characters:16:30; characters:31:52"
+    review = dossier["related_conflict_reviews"][0]
+    review["processing_sha256"] = fingerprint(origin)
+    review["mappings"][0] = {"origin_locator": origin["locator"], "target_locator": origin["locator"]}
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
