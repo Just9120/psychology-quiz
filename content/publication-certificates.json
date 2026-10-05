@@ -930,9 +930,9 @@
     "literature:lit_quantitative_practice13_kahneman": {
       "schema_version": 1,
       "item_sha256": "73dcf6b265ae5eb4c6585d3a39227077a9963d6fc487c4b0a54a0844023b3572",
-      "review_sha256": "151a573f9983a5a000b8564a48d014e2ac6ae6ee9ec005cbf20842d0e58e3c0b",
+      "review_sha256": "bd9d81d9b2f51e579b22baa67a013c759a006e745ecd7308c8e0ae448981387e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "87b6h43wegk5g35PBUQSo5CH1D+nHPz2ikjxtd08tVRGrzBHi17zofnLOWLDmf5kJj+MWGg3XGkMD+vLOImeAg=="
+      "signature": "baLeIBrNUInj4lLNVkybyRxvWoD3rqoewG7vMoOKLZG3M+VMkl4eDEBq9sGSK3u5L+vJo32ZEOb4O0MUgqdACg=="
     },
     "literature:lit_consult4_rogers_new_approaches": {
       "schema_version": 1,
