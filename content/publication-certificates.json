@@ -349,9 +349,9 @@
     "literature:lit_masterstvo_psychological_counseling": {
       "schema_version": 1,
       "item_sha256": "f3d505201353a5252f39a6c07c8c307c99e48adb962f7ea243020d2880c060c8",
-      "review_sha256": "43253122db961d7740cd4f43b6e37c1f26cc33a877c50bc8f771d72d4b0fd0c3",
+      "review_sha256": "46ec959e6402a23cc7769fc84dc1af29dc02cdd024dc40c290d99d4ec2794b42",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "sHJmJi9vhpAOPZHeqEGVa1S/c9HI5mkSgoHUzymGG7lQYMTanmf0lEpKZDKN2Dxykuv0vG+M5TxUFBlhysJ1DQ=="
+      "signature": "UJKnbfQt8SNPP7Y+OUsn4roZWN0hWIAuGnj3LkrrcVd6bmWJYoMa28zOQ0Mvxlc2y/R20HJxck0baFIfIDAtCg=="
     },
     "literature:lit_rybina_muradyan_coach_psycholinguistics": {
       "schema_version": 1,
@@ -860,9 +860,9 @@
     "literature:lit_consult_practice17_kochiunas": {
       "schema_version": 1,
       "item_sha256": "fe17fa02216bae2beb5906d0e9db4bf05bbbae66d8efc5af83bf50487ab6dc38",
-      "review_sha256": "3397ef929cd43b1bc7e79795e99226af98e3b483e1de8ca4098dafb917af3072",
+      "review_sha256": "3aadaadb1248020cff7e4a236b79b3dea039ad7b64ea37a9db52a1a8d8437515",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "q+KkVQvhQZkb2Y7y8Jp46sYf9m9kL+TkvOCRW4zq6XYKjTw2wSHKCQxD3iaBa6QX2/wQusMx0z5PlsxTrrIBDQ=="
+      "signature": "C2I7aENhp/9AUpoAYMTFM0XSLUu+QCUAH7gEJG2MN5SYu5ndenVFCWclMPHigeeSnGWtP9BfDSSrsdFDEe3zDg=="
     },
     "literature:lit_qualitative_practice10_luria_memory": {
       "schema_version": 1,
