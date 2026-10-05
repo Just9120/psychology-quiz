@@ -470,3 +470,29 @@ def test_operator_rebuild_requires_qa_before_database_or_embedding_access(monkey
     monkeypatch.setattr(private_search, "embedder", forbidden)
     assert private_search.main(["rebuild", "--manifest", "manifest.json"]) == 1
     assert "private_qa_file_required" in capsys.readouterr().err
+
+
+def test_embedding_context_keeps_exact_passages_and_review_boundaries():
+    from app.private_search import embedding_passages
+
+    def item(source, modified, digest, start, text):
+        return (source, modified, digest, f"characters:{start}:{start + len(text)}", text)
+
+    definition = item("source-a", "today", "a" * 64, 0, "Reviewed definition. " * 5)
+    examples = item("source-a", "today", "a" * 64, 120, "Reviewed examples.")
+    original = [definition, examples]
+    vectors = embedding_passages(original)
+    assert vectors == [definition[4], definition[4] + "\n" + examples[4]]
+    assert original == [definition, examples]  # Stored excerpts/locators unchanged.
+    for changed in (
+        item("source-b", "today", "a" * 64, 120, examples[4]),
+        item("source-a", "tomorrow", "a" * 64, 120, examples[4]),
+        item("source-a", "today", "b" * 64, 120, examples[4]),
+        item("source-a", "today", "a" * 64, 1000, examples[4]),
+        item("source-a", "today", "a" * 64, 20, examples[4]),
+    ):
+        assert embedding_passages([definition, changed])[1] == changed[4]
+    long = item("source-a", "today", "a" * 64, 120, "x" * (MAX_CHARS - 20))
+    assert embedding_passages([definition, long])[1] == long[4]
+    near_limit = item("source-a", "today", "a" * 64, 120, "x" * 90)
+    assert len(embedding_passages([definition, near_limit])[1]) == MAX_CHARS
