@@ -716,6 +716,20 @@
       "review_sha256": "a5ab3bc6080c1eba5871725bf01c93c2fb34eb83fe3dfb1acd33c499c48178a2",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "bboJsrU10RVf3wjc6ygtA7fIF8s6AOwYbtSRibH9LVHpLsPnvO+bqhTOBYPDlLYAPuNQ+LLru2pdUX2kXsg/DQ=="
+    },
+    "literature:lit_searls_inkblots": {
+      "schema_version": 1,
+      "item_sha256": "9fba7ac374e52568edf89ffa1a4710d47b99f0f7a77f2275f3e606222f29d92f",
+      "review_sha256": "a8446aab56c6909481d54cc1bbeeea5a2c2bdbfc998230f645272573ce06eeda",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "b2Ns2mGTKxBwnIreaFn1bw3Y/9v5JOAa1O9ZiBputit0feRcSkckLzYZdDIGyi42HvF3yHxpD6ztDxaBvdegBA=="
+    },
+    "literature:lit_course_mention_romanova_projective_methods": {
+      "schema_version": 1,
+      "item_sha256": "2a164896ca4172301a692c6e5d9d79a7b8904f437502e041fefe094817b81be0",
+      "review_sha256": "41e3e01478ea330c2a12f826f656d3d7ee1143ebb0ed9a7518055f673fb59ec7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Ko6qW9UMRyspm30cmEAkibc3Ovl5WUGA2FpUDjQRDjHE9XJK6bj1VPxqud7TdD75ejLV1pXfFu65AXlcakQ5Aw=="
     }
   }
 }

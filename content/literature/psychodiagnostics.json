@@ -345,5 +345,90 @@
       "В учебном материале не указаны год, перевод и редакция издания. Полный текст книги не проверен."
     ],
     "notes": "Автор и название визуально сверены в занятии. Приоритет преподавателя не задан; запись подтверждает только библиографическое упоминание, не все положения исторической типологии."
+  },
+  {
+    "id": "lit_searls_inkblots",
+    "work_id": "lit_searls_inkblots",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "The Inkblots",
+    "authors": [
+      "Damion Searls"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 82,
+    "global_order": 912053,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после психодиагностического практикума: биография Роршаха и история его теста. В курсе книга названа «Чернильные пятна»; конкретное русское издание не установлено. Этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_2fecd8a4c446"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_2fecd8a4c446",
+        "title": "Практика №24",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Damion Searls. The Inkblots."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русское издание, перевод и год используемого в курсе издания не установлены."
+    ],
+    "notes": "Подтверждены автор и оригинальное название биографии. Запись подтверждает библиографическое упоминание; полный текст книги не проверен и не служит одобрением диагностических утверждений практики."
+  },
+  {
+    "id": "lit_course_mention_romanova_projective_methods",
+    "work_id": "lit_course_mention_romanova_projective_methods",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Проективные методы исследования личности (название требует уточнения)",
+    "authors": [
+      "Романова"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 83,
+    "global_order": 912054,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "В практикуме рекомендовано чтение о проективных методиках, но название произнесено предположительно. До уточнения книги этап и значимость не назначены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_2fecd8a4c446"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_2fecd8a4c446",
+        "title": "Практика №24",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Романова. Неуточнённое упоминание книги о проективных методах исследования личности."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Название в курсе произнесено неуверенно; точное произведение, полное имя автора и издание не установлены.",
+      "Запись не объединена с книгами Романовой с другими названиями."
+    ],
+    "notes": "Сохранено неуточнённое книжное упоминание из курса. Это самостоятельная запись для уточнения, а не подтверждение существования книги с данным точным названием."
   }
 ]
