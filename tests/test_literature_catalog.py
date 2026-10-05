@@ -21,7 +21,7 @@ def test_topic_module_membership_requires_primary_module_and_unique_course_modul
 
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 251
+    assert len(items) == 252
     assert len({item['work_id'] for item in items}) == 218
     assert len({item['topic_id'] for item in items}) == 17
     for work in ('lit_anna_freud_ego_defence', 'lit_frankl_man_search_meaning'):

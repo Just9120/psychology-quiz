@@ -912,6 +912,13 @@
       "review_sha256": "27a96af24c193312c9425b3a152c07140b9de52c105025a0e40da5bfa8296b5d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "VQFkHX1vcPIuCkFPbjw4hh2n5G3WcYrWLkltkmT+v4ptim3lNh+N0Pep5k/7s01ukJDWSeKuoFC2mfAnn+kMAg=="
+    },
+    "literature:lit_experimental_practice08_maslow_being": {
+      "schema_version": 1,
+      "item_sha256": "fb61e64e3983450703963eea74ad5274b71ee2416abea798a170589c2a26e290",
+      "review_sha256": "4e3d77eca0d8607a50bbb54f086ec343f432071c79be982dbd6c4ce21613a615",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ZF19Hfz8hdje96M4hhJgJoknlM1oPRVvr1D9rNBLMTCdjmuucWlz/jBQy0CMSYUMwPmBYTBDVCVXvcyE95TRDQ=="
     }
   }
 }
