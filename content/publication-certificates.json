@@ -877,6 +877,41 @@
       "review_sha256": "b05d8369da5353b38daa136baa235d1a0163e750326a086a59dedddb66075231",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "kKwilFQy5s2Ze4boUpqHJRFINWw7AH6zEYOQGHE7+Zb2H0oeyDimSGeRp4dOsMOIxuFe26MG1Kv9zt6Rh7jLAQ=="
+    },
+    "literature:lit_alexandrov_exploded_brain": {
+      "schema_version": 1,
+      "item_sha256": "a24d0757f4c797c883076946ef2edb3c2eaa7acadad8a997a5ee307c524c5059",
+      "review_sha256": "4b75bdf0ada18e173798f84b74028bec80f06df996464ec7bc1ed4e983177d02",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0O2hdkTtkM8NdlYIJIrV/P3mO2JMymQ1vWBNpB7dpBSHsZZ4WcaB/BQ++6RH7Zd/8GtMuuqkcBl+GvSlZumrBw=="
+    },
+    "literature:lit_tarabrina_posttraumatic_stress_practicum": {
+      "schema_version": 1,
+      "item_sha256": "d6f3f05f73f769fcca4da321ee3e6f7a0e7a1a9edc217e6c8c53ed3bd6c3877b",
+      "review_sha256": "1202b026cea76250f1dd8fb028d898419eece423269e328204cc4a72b3a77d7a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kYwkO27AnUcTvko3Dbdk4XupSzy7UZgwy4fWaul19EQfUAM3iGm61pQWyASFifpPbIXI8KZk8uTw3xPE5NXPDg=="
+    },
+    "literature:lit_course_mention_small_steps_covid": {
+      "schema_version": 1,
+      "item_sha256": "da314c252a644d2608fe955a682e26df3422354d76bd5c516c1e7d0d98b1000b",
+      "review_sha256": "4eb4c7e4ef712b4f1f7c9d26c0b1fa19cd8a288d210ee8d28096154a0674886f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "IB5X4yuulDSxYa8xq9oFv1RlKcC6YNLzSFlk2MalhBhselfg84I9Ds9phk61Lys7PtkEUSgbO67QQHkqD2X4AQ=="
+    },
+    "literature:lit_course_mention_kucher_ptsd_theory_practice": {
+      "schema_version": 1,
+      "item_sha256": "f883129f5b22756a9ab95641588f42152460405b22eb7cd2e9fd9d03f2653027",
+      "review_sha256": "c67ebfb449cdc8b9aab9673269331ecd7ac8c43e7fdec955035e560a517cfae6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mu3r0qNhkTH0z5wJM99KR2nhZ/nlRZw9E1JL0ANWgqrZTjYx+ZSWts7b/H2BidQjHlbHwwzw6gpxisiLY14xAA=="
+    },
+    "literature:lit_course_mention_combat_nlp": {
+      "schema_version": 1,
+      "item_sha256": "750a28bacde3a830d48356d876119ffcd05f07442c57af4619aeb797ed02af64",
+      "review_sha256": "27a96af24c193312c9425b3a152c07140b9de52c105025a0e40da5bfa8296b5d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "VQFkHX1vcPIuCkFPbjw4hh2n5G3WcYrWLkltkmT+v4ptim3lNh+N0Pep5k/7s01ukJDWSeKuoFC2mfAnn+kMAg=="
     }
   }
 }

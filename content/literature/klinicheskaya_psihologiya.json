@@ -333,5 +333,214 @@
       "Авторство и принадлежность ежедневника не установлены: в лекции названы разные сообщества."
     ],
     "notes": "Библиографическое включение отражает явное упоминание курса. Первичная запись используется только для проверки названия; содержание и эффективность методов не утверждаются."
+  },
+  {
+    "id": "lit_alexandrov_exploded_brain",
+    "work_id": "lit_alexandrov_exploded_brain",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Взорванный мозг",
+    "authors": [
+      "Александров Е. О."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 63,
+    "global_order": 510063,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После базового знакомства с психологией травмы: дополнительное профессиональное чтение по упомянутой в лекции работе. Чтение не заменяет клиническую подготовку; этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Александров Е. О. — Взорванный мозг"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены."
+    ],
+    "notes": "НЭБ подтверждает автора и произведение; год её экземпляра не определяет издание курса. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_tarabrina_posttraumatic_stress_practicum",
+    "work_id": "lit_tarabrina_posttraumatic_stress_practicum",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Практикум по психологии посттравматического стресса",
+    "authors": [
+      "Тарабрина Н. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 64,
+    "global_order": 510064,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После базового знакомства с психологией травмы: профессиональное дополнительное изучение практикума, упомянутого в лекции. Не применять диагностические процедуры без необходимой подготовки; этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Тарабрина Н. В. — Практикум по психологии посттравматического стресса"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены."
+    ],
+    "notes": "Сокращённое упоминание практикума Тарабриной сопоставлено с записью РГБ; конкретное издание курса не установлено. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_course_mention_small_steps_covid",
+    "work_id": "lit_course_mention_small_steps_covid",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Искусство маленьких шагов и остановок в ковидное время",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 65,
+    "global_order": 510065,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из темы горя. До уточнения названия, авторства и редакции автоматический следующий шаг не назначается.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Искусство маленьких шагов и остановок в ковидное время"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены.",
+      "Неуточнённое учебное упоминание; точная идентичность произведения не подтверждена."
+    ],
+    "notes": "Издатель подтверждает близкую коллективную монографию под редакцией Д. А. Донцова. Транскрипт не называет лектора и сокращает название; идентичность именно рекомендованной редакции не установлена. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_course_mention_kucher_ptsd_theory_practice",
+    "work_id": "lit_course_mention_kucher_ptsd_theory_practice",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Посттравматическое стрессовое расстройство. Теория и такая же практика",
+    "authors": [
+      "Кучер А. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 66,
+    "global_order": 510066,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Буквальное упоминание курса. Пока точная библиографическая запись не установлена, книга не включается в автоматическую последовательность.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Кучер А. А. — Посттравматическое стрессовое расстройство. Теория и такая же практика"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены.",
+      "Неуточнённое учебное упоминание; точная идентичность произведения не подтверждена."
+    ],
+    "notes": "В лекции назван Александр Артурович Кучер. В программе БГМУ указаны тома с другим названием; это кандидаты, а не подтверждённое исправление учебного упоминания. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_course_mention_combat_nlp",
+    "work_id": "lit_course_mention_combat_nlp",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Боевое NLP",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 67,
+    "global_order": 510067,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Буквальное упоминание курса. Автор, вид публикации и точная запись требуют уточнения; автоматическая рекомендация не назначается.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Боевое NLP"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены.",
+      "Неуточнённое учебное упоминание; точная идентичность произведения не подтверждена."
+    ],
+    "notes": "Транскрипт не позволяет уверенно установить автора и вид публикации. Найдена статья Н. В. Владиславовой с близким названием; она не доказывает существование или идентичность названной книги. Содержание книги и лечебная эффективность этим review не проверены."
   }
 ]
