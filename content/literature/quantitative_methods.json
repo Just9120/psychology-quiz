@@ -74,5 +74,142 @@
       "Печатный, PDF, HTML и EPUB форматы относятся к одному произведению; не создавать отдельные отметки чтения для каждого формата."
     ],
     "notes": "Библиографическая запись сверена с титульными страницами и официальной карточкой OECD. Год публикации2019 отличается от года исследования2018. ISBN печатного издания9789264970427, PDF9789264879720. Полный содержательный review продолжается; запись не означает одобрения всех выводов или подготовки вопросов из отчёта."
+  },
+  {
+    "id": "lit_dweck_mindset",
+    "work_id": "lit_dweck_mindset",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Mindset",
+    "authors": [
+      "Carol S. Dweck"
+    ],
+    "year": 2006,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 12,
+    "global_order": 912066,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Carol S. Dweck. Mindset. Random House, 2006."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения. ISBN сверенного издания: 9781400062751."
+  },
+  {
+    "id": "lit_freiberg_school_climate",
+    "work_id": "lit_freiberg_school_climate",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "School Climate: Measuring, Improving and Sustaining Healthy Learning Environments",
+    "authors": [
+      "H. Jerome Freiberg (редактор)"
+    ],
+    "year": 1999,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 13,
+    "global_order": 912067,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "H. Jerome Freiberg (редактор). School Climate: Measuring, Improving and Sustaining Healthy Learning Environments. Falmer Press, 1999."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения. ISBN сверенного издания: 9780750706421."
+  },
+  {
+    "id": "lit_rath_harter_wellbeing",
+    "work_id": "lit_rath_harter_wellbeing",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Wellbeing: The Five Essential Elements",
+    "authors": [
+      "Tom Rath",
+      "Jim Harter"
+    ],
+    "year": 2010,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 14,
+    "global_order": 912068,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Tom Rath; Jim Harter. Wellbeing: The Five Essential Elements. Gallup Press, 2010."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_olweus_bullying_at_school",
+    "work_id": "lit_olweus_bullying_at_school",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Bullying at School: What We Know and What We Can Do",
+    "authors": [
+      "Dan Olweus"
+    ],
+    "year": 1993,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 15,
+    "global_order": 912069,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Dan Olweus. Bullying at School: What We Know and What We Can Do. Blackwell Publishers, 1993."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения. ISBN сверенного издания: 9780631192411."
   }
 ]

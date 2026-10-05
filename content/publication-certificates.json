@@ -1010,6 +1010,34 @@
       "review_sha256": "c3c748eb5d3a076387833c2dcf1bb6c5908ed3a1f02ea1f0a5e4e9f02902256b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "ZZrQEMOYgQ0/ntZR36vrrNuqmzT4Crah+kJEX1s5A5FCiMeMmoszzYe/6+zhAYCskgkjwKmLvExvfElPa2muAA=="
+    },
+    "literature:lit_dweck_mindset": {
+      "schema_version": 1,
+      "item_sha256": "6a535e6c4dc6324a101505c960296feb8f8ae6d820035f548da919371b182fb2",
+      "review_sha256": "6a384f6843f146450378f58f47e6254ee691f626eb843253e1ad5d7fc4fd0152",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "NOlMj4GlAhUeFrKyxiRul9PlKosvDJ25pQPUjjEFutF+f03rK7tAZrkSUvoKqgi7Mf/1pRGpq+Rr0RcBbxnTBA=="
+    },
+    "literature:lit_freiberg_school_climate": {
+      "schema_version": 1,
+      "item_sha256": "be5d733c63c6cc21193e3ce50a3083ab523c5a2b2970ba158bc67b5718f77d74",
+      "review_sha256": "e6fa6c1ce5f2d5c0b5da3451ea8e9ac8726909014ee6f5c259ad379c830d19a6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "BmD4mlBKOJhYDbQzyensIY0ZjV2mHcfclBGGhm8f6dlVXk/pAy6cqYPuoJbpTF+bNziDvbbxUwh7mM30hyqqBw=="
+    },
+    "literature:lit_rath_harter_wellbeing": {
+      "schema_version": 1,
+      "item_sha256": "9bef5b9c70b74311b187d4c7d2a03a34f7811eb80d959fb21c4259043c3e0710",
+      "review_sha256": "de1ab52e2185dab389b48b5c6d46ef2bdf5ccdd345a180754a479d4863c47609",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9e9UryhwjIi8hf3lajAewasWIXm0spohgw0V4CBtS93d4VI6Qy/fuetkAMn5oqV3JUePOKXSEx7oSCTSSpCHDw=="
+    },
+    "literature:lit_olweus_bullying_at_school": {
+      "schema_version": 1,
+      "item_sha256": "69def62c082533779f07dc2854467a648f529ec84243b12905086aa9ffde8fc1",
+      "review_sha256": "938c6cf0954a3e8ea6dc77398f39ad73daf33078952c87ca91e7209541bf7522",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qkguOOXGe97vFWNI8RVrF011X+zFlpC+hqAkMmQynTymiiAmH0ok+g/RRWMH7plSnph+J5CDSFF82JfX6pLYDA=="
     }
   }
 }
