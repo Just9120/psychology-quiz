@@ -141,3 +141,91 @@ def test_filtered_continuation_checks_other_associations_without_mutating_states
     assert states["other-topic"]["reading_status"] == "read"
     states["other-topic"]["reading_status"] = "in_progress"
     assert reading_next_step([selected], states, [selected, alias])["item"]["id"] == "selected"
+
+
+def test_published_catalogue_reading_paths_cover_reviewed_works():
+    """Exercise the shipped catalogue, including cross-topic work identities.
+
+    An isolated scope assumes prerequisites outside it were completed. The
+    whole-catalogue path starts empty, so cycles and unreachable dependencies
+    cannot be hidden by that assumption. Unknown recommendations stay unknown.
+    """
+    from copy import deepcopy
+    from app.literature import load_literature_items
+    from app.literature_service import reading_summary
+
+    items = load_literature_items()
+    assert items, "Publication filtering must not silently empty the catalogue"
+    original = deepcopy(items)
+    groups = {}
+    scopes = {"all": items}
+    for item in items:
+        work = item.get("work_id", item["id"])
+        groups.setdefault(work, []).append(item)
+        for key, value in (("module", item["module"]),
+                           ("discipline", item["topic_id"])):
+            scopes.setdefault(f"{key}:{value}", []).append(item)
+        for lesson in item["curriculum_topics"]:
+            scopes.setdefault("lesson:" + lesson["id"], []).append(item)
+
+    def has_reviewed_recommendation(item):
+        return (item.get("importance") in {"basic", "important", "additional", "advanced"}
+                and item.get("importance_source") in {"teacher", "agent"}
+                and item.get("reading_level") in
+                    {"foundation", "core", "applied", "deepening", "advanced", "reference"}
+                and bool(item.get("why_read", "").strip())
+                and isinstance(item.get("prerequisites"), list))
+
+    for name, selected in scopes.items():
+        selected_ids = {item["id"] for item in selected}
+        selected_works = {item.get("work_id", item["id"]) for item in selected}
+        expected = {item.get("work_id", item["id"]) for item in selected
+                    if has_reviewed_recommendation(item)}
+        assert expected, f"No reviewed reading recommendations in {name}"
+        states = {item["id"]: {"reading_status": "read"} for item in items
+                  if item.get("work_id", item["id"]) not in selected_works}
+        # Even unknown-priority works can be personally started; lack of an
+        # agent recommendation must never strand an existing reading mark.
+        for work in selected_works:
+            personal = {alias["id"]: {"reading_status": "in_progress"}
+                        for alias in groups[work]}
+            before = deepcopy(personal)
+            continuation = reading_next_step(selected, personal, items)
+            assert continuation["kind"] == "continue"
+            chosen = continuation["item"]
+            assert chosen.get("work_id", chosen["id"]) == work
+            assert personal == before
+            if len(groups[work]) > 1:
+                personal[groups[work][-1]["id"]] = {"reading_status": "read"}
+                result = reading_next_step(selected, personal, items)
+                assert result is None or result["item"].get(
+                    "work_id", result["item"]["id"]) != work
+        reached = set()
+        for _ in range(len(expected) + 1):
+            before = deepcopy(states)
+            result = reading_next_step(selected, states, items)
+            assert states == before, f"Recommendation mutated personal state in {name}"
+            if result is None:
+                break
+            item = result["item"]
+            work = item.get("work_id", item["id"])
+            assert item["id"] in selected_ids and work in expected
+            assert work not in reached, f"Repeated reading recommendation in {name}: {work}"
+            assert result["kind"] == "start" and result["reason"].strip()
+            reached.add(work)
+            for alias in groups[work]:
+                states[alias["id"]] = {"reading_status": "in_progress"}
+            before = deepcopy(states)
+            continuation = reading_next_step(selected, states, items)
+            assert continuation["kind"] == "continue"
+            assert continuation["item"].get("work_id", continuation["item"]["id"]) == work
+            assert states == before
+            for alias in groups[work]:
+                states[alias["id"]] = {"reading_status": "read"}
+        assert reached == expected, f"Unreachable reviewed works in {name}: {expected - reached}"
+        assert reading_next_step(selected, states, items) is None
+        summary = reading_summary(selected, states)
+        assert summary["read"] == len(expected)
+        assert summary["total"] == len(selected_works)
+        assert summary["conflicts"] == 0 and summary["current"] == []
+    assert items == original, "Reading paths must preserve catalogue metadata"
