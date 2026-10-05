@@ -25,7 +25,26 @@ for service in psych_quiz_bot psych_quiz_miniapp_api; do
 done
 
 record="$(mktemp -d /root/psychology-search-check-XXXXXXXX)"
-trap 'code=$?; if (( code != 0 )); then printf "PRIVATE_SEARCH_CHECKS_STOP RECORD=%s\n" "$record"; fi' EXIT
+on_exit() {
+    code=$?
+    trap - EXIT
+    if (( code != 0 )); then
+        # Also verify personal data after a failed rebuild/QA. Preserve the
+        # original failure and records; never print the private manifest.
+        if [[ -s "$record/before.json" ]]; then
+            if "${compose[@]}" exec -T psych_quiz_miniapp_api python scripts/postgres_manifest.py \
+                --verify-user-state < "$record/before.json" \
+                > "$record/failure-user-state-check.txt" 2> "$record/failure-user-state-check.log"; then
+                printf 'PRIVATE_SEARCH_FAILURE_USER_STATE=PRESERVED\n'
+            else
+                printf 'PRIVATE_SEARCH_FAILURE_USER_STATE=UNVERIFIED\n'
+            fi
+        fi
+        printf 'PRIVATE_SEARCH_CHECKS_STOP RECORD=%s\n' "$record"
+    fi
+    exit "$code"
+}
+trap on_exit EXIT
 printf '%s\n' "$expected" > "$record/revision.txt"
 printf '%s\n' "$archive_sha" > "$record/bundle-sha256.txt"
 "${compose[@]}" exec -T psych_quiz_miniapp_api python scripts/postgres_manifest.py > "$record/before.json" </dev/null
