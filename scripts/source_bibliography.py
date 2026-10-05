@@ -100,7 +100,9 @@ def main(argv=None):
             json.dump(result, stream, ensure_ascii=False, indent=2)
             stream.write("\n")
         print(json.dumps({"captured_sources": result["captured_sources"],
-                          "unread_sources": len(result["unread_source_ids"]),
+                          "uncaptured_in_batch": len(result["uncaptured_source_ids"]),
+                          "coverage_scope": result["coverage_scope"],
+                          "content_review_completed": result["content_review_completed"],
                           "mention_candidates": len(result["mentions"]),
                           "evidence_counts": result["evidence_counts"],
                           "reused_non_publishing_decisions": result.get("reused_non_publishing_decisions", 0),

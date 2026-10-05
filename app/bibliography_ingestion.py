@@ -203,8 +203,12 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                 mentions[-1]["review_note"] = (
                     "Unquoted author/title citation: identify the title manually; "
                     "the full citation is not an approved title or work identity.")
-    return {"schema_version": 1, "captured_sources": len(seen),
-            "unread_source_ids": sorted(set(snapshot["files"]) - seen),
+    # Missing from this capture batch says nothing about previous reading or
+    # review. Only the separate revision-bound review ledger proves that state.
+    return {"schema_version": 2, "captured_sources": len(seen),
+            "uncaptured_source_ids": sorted(set(snapshot["files"]) - seen),
+            "coverage_scope": "supplied_capture_manifest",
+            "content_review_completed": False,
             "mentions": mentions, "evidence_counts": dict(sorted(evidence_counts.items())),
             "publication_approval": False}
 

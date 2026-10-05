@@ -39,9 +39,14 @@ def test_recursive_multiformat_mentions_are_private_pending_and_preserve_catalog
         snapshot["paths"][source_id] = [["Module", "Discipline", "Lesson", "Synthetic"]]
         captures.append({"source_id": source_id, "content": raw, "revision": revision,
                          "snapshot_sha256": hashlib.sha256(raw).hexdigest()})
-    snapshot["files"]["unread"] = {}
+    snapshot["files"]["outside_this_batch"] = {}
     result = discover_bibliography(snapshot, captures, catalogue)
-    assert result["captured_sources"] == 3 and result["unread_source_ids"] == ["unread"]
+    assert result["captured_sources"] == 3
+    assert result["uncaptured_source_ids"] == ["outside_this_batch"]
+    assert result["schema_version"] == 2
+    assert result["coverage_scope"] == "supplied_capture_manifest"
+    assert result["content_review_completed"] is False
+    assert "unread_source_ids" not in result
     assert len(result["mentions"]) == 3 and not result["publication_approval"]
     assert all(item["candidate_work_ids"] == ["work"] and item["decision"] == "pending_review"
                for item in result["mentions"])
