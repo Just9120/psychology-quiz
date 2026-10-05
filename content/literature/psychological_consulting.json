@@ -582,5 +582,47 @@
         "discipline_id": "psychological_consulting"
       }
     ]
+  },
+  {
+    "id": "lit_consult_practice18_graham_resilience",
+    "work_id": "lit_graham_resilience",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Жизнестойкость. Выжить после разочарований и катастроф",
+    "authors": [
+      "Грэм Л."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 142,
+    "global_order": 310142,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение к обсуждению тревоги и целеполагания. Книга названа участником занятия; значимость и прикладной этап предложены агентом. Упоминание упражнений не подтверждает их универсальную эффективность.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_cb4906154e12"
+    ],
+    "source": {
+      "citation": "Грэм Л.. Жизнестойкость. Выжить после разочарований и катастроф"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, перевод и год используемой в курсе книги не установлены."
+    ],
+    "notes": "Проверены точное библиографическое упоминание курса и первичная каталожная запись автора/названия. Содержание книги не прочитано и не использовалось для формирования вопросов; порядок предложен агентом, обязательные предпосылки не установлены.",
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_cb4906154e12",
+        "title": "Практика №18. Целеполагание и контракт",
+        "discipline_id": "psychological_consulting"
+      }
+    ]
   }
 ]

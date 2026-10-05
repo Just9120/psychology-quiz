@@ -246,5 +246,17 @@
       "literature"
     ],
     "source_notes": "Существующий курс раздела «Другое»: литература без нумерованного модуля."
+  },
+  {
+    "id": "quantitative_methods",
+    "title": "Количественные методы исследования",
+    "module": "module2",
+    "question_file": null,
+    "status": "active",
+    "order": 230,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Литературная связь существующего занятия курса; вопросы и глоссарий не подразумеваются."
   }
 ]

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "lit_quantitative_practice13_kahneman",
+    "work_id": "lit_kahneman_thinking_fast_slow",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Думай медленно... решай быстро",
+    "authors": [
+      "Канеман Д."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 1,
+    "global_order": 230001,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение после вводных материалов по количественным методам: работа упомянута при обсуждении решений и двух систем мышления. Углублённый этап и значимость предложены агентом; модель не устанавливает причину конкретного решения без исследования.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_5eb8451e9cd9"
+    ],
+    "source": {
+      "citation": "Канеман Д.. Думай медленно... решай быстро"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, перевод и год используемой в курсе книги не установлены."
+    ],
+    "notes": "Проверены точное библиографическое упоминание курса и первичная каталожная запись автора/названия. Содержание книги не прочитано и не использовалось для формирования вопросов; порядок предложен агентом, обязательные предпосылки не установлены.",
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_5eb8451e9cd9",
+        "title": "Практика №13",
+        "discipline_id": "quantitative_methods"
+      }
+    ]
+  }
+]

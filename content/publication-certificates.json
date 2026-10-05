@@ -919,6 +919,20 @@
       "review_sha256": "4e3d77eca0d8607a50bbb54f086ec343f432071c79be982dbd6c4ce21613a615",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "ZF19Hfz8hdje96M4hhJgJoknlM1oPRVvr1D9rNBLMTCdjmuucWlz/jBQy0CMSYUMwPmBYTBDVCVXvcyE95TRDQ=="
+    },
+    "literature:lit_consult_practice18_graham_resilience": {
+      "schema_version": 1,
+      "item_sha256": "f5eab2e02ea66fdebad6765e47aeb191d1e12c11dae02a7777bfcd75ce480af7",
+      "review_sha256": "8abd06c0ed222f8ed411396a2ac5d8c6cd441d34218f63a37461b180119cd2e7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "P4fm3MJ3o8y5iRkxpHPFypyscNdItuMMWwQ/qyacqTUAozwDfr7Dtym/EjDWVKQQm1/y4OWCwVdfA35kzL9MCg=="
+    },
+    "literature:lit_quantitative_practice13_kahneman": {
+      "schema_version": 1,
+      "item_sha256": "73dcf6b265ae5eb4c6585d3a39227077a9963d6fc487c4b0a54a0844023b3572",
+      "review_sha256": "151a573f9983a5a000b8564a48d014e2ac6ae6ee9ec005cbf20842d0e58e3c0b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "87b6h43wegk5g35PBUQSo5CH1D+nHPz2ikjxtd08tVRGrzBHi17zofnLOWLDmf5kJj+MWGg3XGkMD+vLOImeAg=="
     }
   }
 }
