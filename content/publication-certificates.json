@@ -695,6 +695,13 @@
       "review_sha256": "6c22202225675a0d73efe5818e0f36e89affb24677fbca3265a104094552cb54",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "IJ6uhnPIhMT2RUTryPgz5qiytX2zp5X5Qp/MtV4iqCNrrhecmguZ0kZYEHXWIwYm7CdNHuw8YnyOI9BjkjmqBA=="
+    },
+    "literature:lit_tolstoy_war_and_peace": {
+      "schema_version": 1,
+      "item_sha256": "42f8239c334004c55ded4646c32a2e3c1edcda6e8bfa13556097bc149eb5895f",
+      "review_sha256": "624891142533b5736439eab9661bad8cd5ebe5aef0e74792561a0156e7795dba",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "dILp4sDPXJhX9VN9wQyr1OKMMhPg84wLCvooXeg0sXaUr+RAOyVUwrLU+YvPcS/qnrCnYF0VgbvI9zd4gZ9xAQ=="
     }
   }
 }
