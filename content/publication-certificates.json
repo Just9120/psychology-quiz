@@ -258,9 +258,9 @@
     "literature:lit_schutzenberger_ancestor_syndrome": {
       "schema_version": 1,
       "item_sha256": "a7fee40f99fb87a84fd83c5f065b2185c5f356786b9cf52f79e37007d8b9a424",
-      "review_sha256": "75077b0a111d3ea07e071476d890589bc83407aadabab71d11109a231ce38a68",
+      "review_sha256": "cbd900f6119e8541b4dab38772247aae00fad1d4be7189f671a8f60bd92d3b96",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "EJCp5qFF2X1bMF8ijHhRx50ewreGJeFs1TFevNj2OIDKyex77BmJIAqaLmS3XjoSYMYmfV+yLGciIBNbiiWtBQ=="
+      "signature": "VfA9EnBDXP6uohTassFe/04ORLQlczyjEY2Gnzfv46EOh5ci9vDPg+QvTDwVsWlDuiVarWgk7nTeg0A9k6eiBA=="
     },
     "literature:lit_makarov_selected_psychotherapy_lectures": {
       "schema_version": 1,
@@ -828,6 +828,20 @@
       "review_sha256": "04ec305328aa53f394201c4e45e0aa73d6088b10d0c59f12d7f307a2cf28e9e0",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "Pkz7GGC9Id2AUU2mHx11jQT/cTq0/7GN8oIHqMRfAY/YvSKCT7fywBsAHgvxYmDPRheL3sgdIp+R5eJ0DTGUCA=="
+    },
+    "literature:lit_hellinger_orders_of_love": {
+      "schema_version": 1,
+      "item_sha256": "4bb5c4f5b8dce3187f547b51a15adf5aaaf802e78a8f6bcdb93fe5d241fe4d18",
+      "review_sha256": "87a1356b55fe706bd43fc3a8d509b2751d9231b995017fff6a4e906ea112f30b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tljRO6NSBaM9OGyAvFXSDVo0tczBIyAjjsf/5vO3Y0NiwIbFCY9RtRQbz/EbUxH6zLozr1G/b1gs8QzN6xE7DQ=="
+    },
+    "literature:lit_course_mention_just_for_today": {
+      "schema_version": 1,
+      "item_sha256": "6277a49055c8c91a9f7f00ae4f2da90859f93c238e41a79dc1c4a1e71c57684c",
+      "review_sha256": "c2ff0a088cf2ec6a94ade80a7d007f1c8acfd2a99cb536bf681fbdf6c66da2f3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7FtwJoBGquSMZ0qmmsNTulzNDuyR1AYc51AlclPD0i2auK8pGBLn9I+5T0nx39cM/6bjB1A3B7T717rzqwbDBg=="
     }
   }
 }

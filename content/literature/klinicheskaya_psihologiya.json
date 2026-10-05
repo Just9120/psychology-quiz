@@ -249,5 +249,89 @@
       "Год, издание и страницы учебника в лекции не названы."
     ],
     "notes": "Название и автор подтверждены библиотечной карточкой. Год внешней карточки не перенесён на неизвестный экземпляр курса; запись не удостоверяет полный текст книги или все клинические утверждения лекции."
+  },
+  {
+    "id": "lit_hellinger_orders_of_love",
+    "work_id": "lit_hellinger_orders_of_love",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Порядки любви",
+    "authors": [
+      "Хеллингер Б."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 61,
+    "global_order": 510061,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Историческое и критическое чтение после темы семейных отношений при зависимости. Отделять авторские системные представления от доказательств лечения; книга не заменяет клинические рекомендации.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_117013a575cc"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_117013a575cc",
+        "title": "Психология зависимого поведения",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Порядки любви. Книжное упоминание в лекции о зависимости; издание не установлено."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, год и страницы в лекции не указаны.",
+      "Подзаголовок и вариант издания не установлены."
+    ],
+    "notes": "Библиографическое включение отражает явное упоминание курса. Первичная запись используется только для проверки названия; содержание и эффективность методов не утверждаются."
+  },
+  {
+    "id": "lit_course_mention_just_for_today",
+    "work_id": "lit_course_mention_just_for_today",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Только сегодня",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 62,
+    "global_order": 510062,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упомянутый в лекции ежедневник поддержки выздоровления: обращаться к отдельным дневным записям по интересу. Точный выпуск и принадлежность названного экземпляра сообществу не установлены; чтение не заменяет профессиональную помощь.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_117013a575cc"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_117013a575cc",
+        "title": "Психология зависимого поведения",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Только сегодня. Книжное упоминание в лекции о зависимости; издание не установлено."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, год и страницы в лекции не указаны.",
+      "Авторство и принадлежность ежедневника не установлены: в лекции названы разные сообщества."
+    ],
+    "notes": "Библиографическое включение отражает явное упоминание курса. Первичная запись используется только для проверки названия; содержание и эффективность методов не утверждаются."
   }
 ]
