@@ -195,9 +195,9 @@
     "literature:lit_betensky_what_do_you_see": {
       "schema_version": 1,
       "item_sha256": "773a6fdd011df19198bbbb63c1faf788a65a53b5d7ce27f1ed3a9bbcfacd36fa",
-      "review_sha256": "8c6e735c0a05ea83a68b022645e7cd495041c6cdde6bc7752e29b6655f383ea5",
+      "review_sha256": "1649607dc4276ee8481ca45b9a9ceb9d39ac1ef2f306cdaef08a3cec6be46fe8",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "boHPZ+J4/IVunxCd/q9bQWPz0QmsUkvOVEBeHiMwj5TeoxnSvF77P2WqBUAyUj3zujlgvxmYCPVJB3lo+kRUCg=="
+      "signature": "oB3EEf19FWnWS2A0DGpjESXBvP4qn6N90t+3l2659hxU63Abkxh4T70z976N/g15OoxsoyX+GBmF7rpVpyQrCQ=="
     },
     "literature:lit_chomsky_syntactic_structures": {
       "schema_version": 1,
@@ -265,9 +265,9 @@
     "literature:lit_makarov_selected_psychotherapy_lectures": {
       "schema_version": 1,
       "item_sha256": "bc0bb20395b01dc2a071948dc18ea40b282b7ffd80da2fc3d51169639c0034f5",
-      "review_sha256": "c4c2d0e495563d475a98e0e9714e45a5fe0fcde10c69f7211cc1265fb238f956",
+      "review_sha256": "08c6a753e817462a72ad067022dc1b3a74c0767f75155e100671ee92df78ac6e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "qtC57glD0S3z4CxtoVL2x9f9BtwQVgejEdaQ/1VaaoqSg/9zy70B6YaRWEqkTA5t113JsghcBqR5hRSVcgqKDw=="
+      "signature": "QagSsgSSutGFDwfwJ7pCi/QugBy8XQRJTrX6ar43cfvMbzRjJdNyfKbWR4p0Tmq6Z91DrNIsfRvBZghf1U1dCg=="
     },
     "literature:lit_piaget_psychology_intelligence": {
       "schema_version": 1,
@@ -384,9 +384,9 @@
     "literature:lit_course_mention_psychiatry_disasters": {
       "schema_version": 1,
       "item_sha256": "8dd451628f0e1a6ebdc57fbefd4f079d60430db8e2775996a0fc950d5a582f98",
-      "review_sha256": "28de4fbbec0da89c8305920379be8a464c06a0e67d0bf627cff1991d25f4343e",
+      "review_sha256": "b15833a6a2aa51fc82d00e4d335aa397fd417e2285cac2ae7cfa2d41b7078041",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "8Qrf0nyQQ5Xfj3KfWcDD8JpdUQpU+jgYb2P7wnzf18kqBT68bq+52o3YeNmHAMHGtabi5VSSx9PpeaHn3W4fCw=="
+      "signature": "MkTECGF9IUVIlMXpUz2stg+LNBNvTVwxKtosX4UHkSZBSpY8+JCVyHUNH/3NUl1bgfQnsYcqP279K6Om6t6mAQ=="
     },
     "literature:lit_pfeffer_managing_with_power": {
       "schema_version": 1,
@@ -954,6 +954,20 @@
       "review_sha256": "fa3b4855ebd2f8db64c4c8d619bbe026ff580feac76ba4781199a9676bdcf119",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "Eg0jvvAgEKkQRopnUQPbBv97mKTtyKubj4mpwiWMxPUF3MMLwQ+lXRSKqqozDYD5bl8Upo+UBQlCh0rwrrlnAQ=="
+    },
+    "literature:lit_course_mention_galin_creativity": {
+      "schema_version": 1,
+      "item_sha256": "5ac6c7b1d84efc91b7a0720be4884089c1258da12a3d2c7cf745796743acc775",
+      "review_sha256": "70f6478528ae9f6a92f9ef66a3772c2fe5224549b41f52a1b56c9d1ebd7e4757",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Yo/pGPFarO2o1f15mcuBB/ZlWaMlkqAEbCBiex/e+75g2LjDuJx5OoU4El3w3nZ0vRduEzZzadjSt6gkBaT/Cg=="
+    },
+    "literature:lit_course_mention_galin_influence": {
+      "schema_version": 1,
+      "item_sha256": "e4af06e2d906259fede67985a561c257fb1e16d431c5bddd8d27dae0b0d917c9",
+      "review_sha256": "dd508542dbce3c8af6afef36746a7bfc109377d5962a21a2d11505d71d5fd95a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "C9S+l/3y1iheXeIZd+v2u2HqXekDn3FN52sMyYtNTZFXCjuVUynf7DRYwUKzDSNus7KzSrFPL7TdjdnLDHj3CA=="
     }
   }
 }

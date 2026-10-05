@@ -542,5 +542,91 @@
       "Неуточнённое учебное упоминание; точная идентичность произведения не подтверждена."
     ],
     "notes": "Транскрипт не позволяет уверенно установить автора и вид публикации. Найдена статья Н. В. Владиславовой с близким названием; она не доказывает существование или идентичность названной книги. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_course_mention_galin_creativity",
+    "work_id": "lit_course_mention_galin_creativity",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Психология творчества",
+    "authors": [
+      "Галин А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 68,
+    "global_order": 510068,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание преподавателя при обсуждении творчества. Библиографическая идентичность требует уточнения; автоматический следующий шаг чтения не назначен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Александр Галин. Психология творчества; неуточнённое упоминание курса."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Название сохранено по лекции. Точное произведение и издание не установлены; найденная библиотечная карточка другого названия не подставляется.",
+      "Год и издание не установлены."
+    ],
+    "notes": "Сохранено неуточнённое упоминание курса. Это не подтверждение содержания или пригодности книги для клинической работы."
+  },
+  {
+    "id": "lit_course_mention_galin_influence",
+    "work_id": "lit_course_mention_galin_influence",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Книга о приёмах управления и влияния (название не установлено)",
+    "authors": [
+      "Галин А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 69,
+    "global_order": 510069,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание преподавателя при обсуждении творчества. Библиографическая идентичность требует уточнения; автоматический следующий шаг чтения не назначен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Александр Галин. Книга о приёмах управления и влияния (название не установлено); неуточнённое упоминание курса."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "В лекции указаны автор и предмет книги, но не точное название. Это не подтверждённое библиографическое название.",
+      "Год и издание не установлены."
+    ],
+    "notes": "Сохранено неуточнённое упоминание курса. Это не подтверждение содержания или пригодности книги для клинической работы."
   }
 ]
