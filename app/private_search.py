@@ -30,8 +30,9 @@ MODEL_REVISION = "faf4aa4225822f3bc6376869cb1164e8e3feedd0"
 MODEL_FILES = ("config.json", "model_optimized.onnx", "special_tokens_map.json",
                "tokenizer.json", "tokenizer_config.json")
 FASTEMBED_VERSION = "0.8.0"
-MODEL_IDENTITY = f"{MODEL}@{MODEL_REVISION}:fastembed-{FASTEMBED_VERSION}:mean-pooling"
-INDEX_VERSION = "private-search-v2"
+BASE_MODEL_IDENTITY = f"{MODEL}@{MODEL_REVISION}:fastembed-{FASTEMBED_VERSION}:mean-pooling"
+MODEL_IDENTITY = BASE_MODEL_IDENTITY + ":reviewed-neighbour-context-v1"
+INDEX_VERSION = "private-search-v3"
 DIMENSIONS = 384
 PRIVATE_ROOT = Path("/data/search-input")
 CORPUS = Path(__file__).resolve().parents[1] / "content/source-corpus.json"
@@ -261,7 +262,12 @@ def ensure_index(conn, *, owner="psychology_app", create=False):
             raise SearchError("private_search_relation_drift")
         marker = conn.execute("""SELECT version,model_name,dimensions FROM private_search.index_meta
             WHERE singleton=true""").fetchone()
-        if marker != (INDEX_VERSION, MODEL_IDENTITY, DIMENSIONS):
+        if create and marker == ("private-search-v2", BASE_MODEL_IDENTITY, DIMENSIONS):
+            # Only an explicit transactional rebuild can upgrade the known old
+            # representation. Failed embedding/QA rolls this marker back too.
+            conn.execute("""UPDATE private_search.index_meta SET version=%s,model_name=%s
+                WHERE singleton=true""", (INDEX_VERSION, MODEL_IDENTITY))
+        elif marker != (INDEX_VERSION, MODEL_IDENTITY, DIMENSIONS):
             raise SearchError("private_search_index_drift")
         return
     if not create:
@@ -358,6 +364,25 @@ def vector_text(value):
     return "[" + ",".join(format(number, ".9g") for number in numbers) + "]"
 
 
+def embedding_passages(source_chunks):
+    """Add bounded reviewed context without changing excerpts or references."""
+    passages = []
+    for index, item in enumerate(source_chunks):
+        text = item[4]
+        spare = MAX_CHARS - len(text) - 1
+        if index and spare >= 32:
+            previous = source_chunks[index - 1]
+            # Same source, modification time and exact snapshot; never borrow
+            # across editions or fill gaps with unreviewed original text.
+            if previous[:3] == item[:3]:
+                previous_end = int(previous[3].split(":")[2])
+                start = int(item[3].split(":")[1])
+                if 0 <= start - previous_end <= MAX_CHARS:
+                    text = previous[4][-spare:] + "\n" + text
+        passages.append(text)
+    return passages
+
+
 def rebuild(conn, source_chunks, model, *, owner="psychology_app", qa_cases=None):
     """Replace the derivative atomically, including supplied retrieval checks."""
     if qa_cases is not None and (not isinstance(qa_cases, list) or not qa_cases):
@@ -371,10 +396,11 @@ def rebuild(conn, source_chunks, model, *, owner="psychology_app", qa_cases=None
         conn.execute("SELECT pg_advisory_xact_lock(%s)", (lock_key,))
         ensure_index(conn, owner=owner, create=True)
         conn.execute("DELETE FROM private_search.chunks")
+        passages = embedding_passages(source_chunks)
         with conn.cursor() as cursor:
             for offset in range(0, len(source_chunks), 32):
                 batch = source_chunks[offset:offset + 32]
-                vectors = list(model.embed([item[4] for item in batch]))
+                vectors = list(model.embed(passages[offset:offset + len(batch)]))
                 if len(vectors) != len(batch):
                     raise SearchError("incomplete_embeddings")
                 prepared = [(*item, vector_text(vector)) for item, vector in zip(batch, vectors)]

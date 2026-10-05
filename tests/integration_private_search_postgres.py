@@ -8,7 +8,7 @@ import psycopg
 import pytest
 
 from app.database import connect_database
-from app.private_search import DIMENSIONS, SearchError, rebuild, search, verify_index_content
+from app.private_search import BASE_MODEL_IDENTITY, DIMENSIONS, INDEX_VERSION, MODEL_IDENTITY, SearchError, rebuild, search, verify_index_content
 from app.postgres_schema import initialize_schema
 
 
@@ -86,6 +86,24 @@ def test_private_rebuild_keeps_learning_state_and_replaces_only_index():
         cases = [{"query": "поддержка", "source_id": first[0][0],
                   "snapshot_sha256": first[0][2], "locator": first[0][3], "mode": "lexical"}]
         assert rebuild(conn, first, SyntheticEmbedding(), qa_cases=cases) == 2
+        conn.commit()
+        # Reproduce the deployed v2 marker. The representation upgrade must
+        # roll back with failed QA and reject reads until a valid rebuild.
+        conn.execute("UPDATE private_search.index_meta SET version=%s,model_name=%s",
+                     ("private-search-v2", BASE_MODEL_IDENTITY))
+        conn.commit()
+        with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
+            rebuild(conn, first[1:], SyntheticEmbedding(), qa_cases=cases)
+        conn.rollback()
+        assert conn.execute("SELECT version,model_name FROM private_search.index_meta").fetchone() == (
+            "private-search-v2", BASE_MODEL_IDENTITY)
+        with pytest.raises(SearchError, match="private_search_index_drift"):
+            search(conn, "поддержка", SyntheticEmbedding())
+        conn.rollback()
+        assert rebuild(conn, first, SyntheticEmbedding(), qa_cases=cases) == 2
+        conn.commit()
+        assert conn.execute("SELECT version,model_name FROM private_search.index_meta").fetchone() == (
+            INDEX_VERSION, MODEL_IDENTITY)
         conn.commit()
         # A valid replacement that fails retrieval QA must not replace the
         # previously committed index, even after all its rows were inserted.
