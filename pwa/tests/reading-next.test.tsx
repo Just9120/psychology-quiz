@@ -101,3 +101,17 @@ it('checks aliases outside the filtered list before recommending continuation', 
   expect(alias.user_state.reading_status).toBe('read')
   expect(readingNextStep([selected], [selected, { ...alias, user_state: { reading_status: 'in_progress' as const } }])?.id).toBe('selected')
 })
+
+
+it('keeps a hidden alias conflict out of the filtered completed count', () => {
+  const selected = { id: 'selected', work_id: 'shared', title: 'Книга', user_state: { reading_status: 'read' as const } }
+  const alias = { id: 'another-list', work_id: 'shared', title: 'Книга', user_state: { reading_status: 'in_progress' as const } }
+  const unrelated = { id: 'other', title: 'Другая', user_state: { reading_status: 'read' as const } }
+  const { rerender } = render(<ReadingSummary items={[selected]} allItems={[selected, alias, unrelated]} busy={false} onSelect={() => {}} />)
+  expect(screen.getByRole('status')).toHaveTextContent('Прочитано 0 из 1')
+  expect(screen.getByText(/У 1 работ отметки в учебных списках различаются/)).toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: /Продолжить/ })).not.toBeInTheDocument()
+  rerender(<ReadingSummary items={[selected]} allItems={[selected, { ...alias, user_state: { reading_status: 'read' } }, unrelated]} busy={false} onSelect={() => {}} />)
+  expect(screen.getByRole('status')).toHaveTextContent('Прочитано 1 из 1')
+  expect(screen.queryByText(/отметки в учебных списках различаются/)).not.toBeInTheDocument()
+})

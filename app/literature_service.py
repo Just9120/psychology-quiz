@@ -11,14 +11,18 @@ READING_STATUSES = frozenset(STATUS_MAP.values())
 from app.literature import load_literature_items, load_topic_registry
 
 
-def reading_summary(items: list[dict], states: dict) -> dict:
+def reading_summary(items: list[dict], states: dict, all_items: list[dict] | None = None) -> dict:
     """Count works in the selected scope without resolving legacy state conflicts."""
     works = {}
     for item in items:
         works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    all_works = {}
+    for item in (all_items if all_items is not None else items):
+        all_works.setdefault(item.get("work_id", item["id"]), []).append(item)
     read, conflicts, current = 0, 0, []
-    for entries in works.values():
-        statuses = {states.get(item["id"], {}).get("reading_status", "not_started") for item in entries}
+    for work_id, entries in works.items():
+        aliases = all_works.get(work_id, entries)
+        statuses = {states.get(item["id"], {}).get("reading_status", "not_started") for item in aliases}
         read += statuses == {"read"}
         conflicts += len(statuses) > 1
         reading = next((item for item in entries if states.get(item["id"], {}).get("reading_status") == "in_progress"), None)

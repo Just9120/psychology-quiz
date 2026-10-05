@@ -46,6 +46,8 @@ Non-goals: включение RAG, платных LLM, студенческой 
 
 ### Актуальные результаты и ограничения
 
+Self-review LIT-06, 05.10: фильтр темы скрывал конфликт отметок одной книги в других списках при подсчёте «прочитано». Backend Telegram и общий компонент PWA/Mini App теперь проверяют все aliases выбранных произведений; denominator остаётся в выбранном scope, состояния не переписываются. Backend regression: 2 PASS /0,11с; shared UI suite: 14 PASS /2,88с; typecheck и Mini App build PASS. Новые Drive IDs не обнаружены в 26 изменённых публичных JSON; это адресная проверка identifiers, не полный privacy audit. Required CI новой revision и VPS PENDING.
+
 На ошибке VPS rebuild/QA процедура также проверяет сохранность личных данных по уже снятому before-manifest, сохраняет исходный код ошибки и закрытые recovery records. Успех этой проверки не превращает неуспешную поставку в PASS; автоматического восстановления поверх production нет. Evidence: `scripts/private_search_verify.sh`; Bash syntax PASS; четыре existing argument checks PASS /0,14с; две изолированные проверки error handler PASS (comparator success/failure, исходный exit=42, private manifest не раскрыт). Private receipt `data/goal-search-failure-state-validation-20261005.json`; actual VPS и required CI PENDING.
 
 Классификация охватывает 425 источников, включая связанные форматы и приватные определения дисциплин/тем. Discovery, классификация и extraction не дают scientific approval. Неподтверждённые точные lesson associations сохраняются явно unresolved; названия папок не заменяют анализ содержания. Оригиналы Drive не перемещались и не переписывались.

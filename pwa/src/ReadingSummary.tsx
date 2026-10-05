@@ -53,7 +53,15 @@ export function ReadingSummary({ items, allItems = items, busy, onSelect, showAc
     works.set(key, [...(works.get(key) ?? []), item])
   }
   const groups = [...works.values()]
-  const statuses = (entries: Item[]) => new Set(entries.map(item => item.user_state?.reading_status ?? 'not_started'))
+  const allWorks = new Map<string, Item[]>()
+  for (const item of allItems) {
+    const key = item.work_id ?? item.id
+    allWorks.set(key, [...(allWorks.get(key) ?? []), item])
+  }
+  const statuses = (entries: Item[]) => {
+    const key = entries[0].work_id ?? entries[0].id
+    return new Set((allWorks.get(key) ?? entries).map(item => item.user_state?.reading_status ?? 'not_started'))
+  }
   const read = groups.filter(entries => statuses(entries).size === 1 && statuses(entries).has('read')).length
   const conflicts = groups.filter(entries => statuses(entries).size > 1).length
   const current = groups.map(entries => entries.find(item => item.user_state?.reading_status === 'in_progress')).filter((item): item is Item => !!item)
@@ -61,7 +69,7 @@ export function ReadingSummary({ items, allItems = items, busy, onSelect, showAc
   const continuing = next?.user_state?.reading_status === 'in_progress'
   return <aside className="panel reading-summary" aria-label="Прогресс списка чтения">
     <p role="status">Прочитано {read} из {groups.length}</p>
-    {conflicts > 0 && <p className="muted">У {conflicts} работ отметки в выбранных списках различаются. Они не включены в число прочитанных до согласования отметок.</p>}
+    {conflicts > 0 && <p className="muted">У {conflicts} работ отметки в учебных списках различаются. Они не включены в число прочитанных до согласования отметок.</p>}
     <h2>Сейчас читаю</h2>
     {current.length ? <ul>{current.map(item => <li key={item.id}>{showActions ? <button className="text-button" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button> : <span>{item.title ?? 'Книга'}</span>}</li>)}</ul> : <p className="muted">В выбранных списках нет книг со статусом «Читаю».</p>}
     {next && <section aria-label="Следующий шаг чтения">

@@ -106,7 +106,7 @@ def _topic_view(items: list[dict], states: dict, token: str, page: int, status_f
     pages = max(1, (len(visible) + PAGE_SIZE - 1) // PAGE_SIZE)
     if page >= pages:
         return None
-    summary = literature_service.reading_summary(selected, states)
+    summary = literature_service.reading_summary(selected, states, items)
     rows = []
     for item in visible[page * PAGE_SIZE:(page + 1) * PAGE_SIZE]:
         state = states.get(item["id"], {})
