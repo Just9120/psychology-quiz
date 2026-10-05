@@ -91,3 +91,31 @@ def test_unbound_completed_evidence_cannot_pass_with_two_missing_hashes():
     processing["done"] = {"review_state": "conflict"}
     with pytest.raises(InventoryError, match="completed_review_binding_mismatch"):
         resume_review(ledger, queue, processing, checkpoint, partial=partial, capture=capture)
+
+
+def completed_state():
+    ledger, queue, processing, checkpoint, partial, capture = state()
+    ledger["records"] = [{"source_id": "done", "full_capture_read": True,
+                          "snapshot_sha256": processing["next"]["snapshot_sha256"],
+                          "revision": ["old", "Title", "text"]}]
+    ledger["full_capture_read"] = queue["full_read_evidence"] = checkpoint["full_review_evidence"] = 1
+    processing["done"] = {"review_state": "conflict",
+                          "snapshot_sha256": processing["next"]["snapshot_sha256"],
+                          "revision": ["new", "Title", "text"]}
+    return ledger, queue, processing, checkpoint, partial, capture
+
+
+def test_identical_text_cannot_reuse_review_of_an_explicitly_different_edition():
+    ledger, queue, processing, checkpoint, partial, capture = completed_state()
+    with pytest.raises(InventoryError, match="completed_review_revision_mismatch"):
+        resume_review(ledger, queue, processing, checkpoint, partial=partial, capture=capture)
+
+
+def test_legacy_hash_only_review_is_preserved_without_inventing_revision_binding():
+    ledger, queue, processing, checkpoint, partial, capture = completed_state()
+    del ledger["records"][0]["revision"]
+    before = copy.deepcopy(ledger)
+    result = resume_review(ledger, queue, processing, checkpoint, partial=partial, capture=capture)
+    assert result["recorded_complete"] == 1
+    assert result["publication_approval"] is False
+    assert ledger == before

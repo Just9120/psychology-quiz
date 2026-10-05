@@ -56,6 +56,15 @@ def resume_review(ledger: dict, queue: dict, processing: dict, checkpoint: dict,
                 or current.get("review_state") == "pending_review"
                 or record.get("snapshot_sha256") != current.get("snapshot_sha256")):
             raise InventoryError("completed_review_binding_mismatch")
+        # Equal text bytes do not establish that a recorded review belongs to
+        # the current source edition. Legacy hash-only records remain usable
+        # as text evidence; do not fabricate a revision binding for them.
+        if "revision" in record and (
+                not isinstance(record["revision"], list)
+                or len(record["revision"]) != 3
+                or any(not isinstance(value, str) or not value for value in record["revision"])
+                or record["revision"] != current.get("revision")):
+            raise InventoryError("completed_review_revision_mismatch")
     for field, owner, count in (
         ("full_capture_read", ledger, len(done)),
         ("full_read_evidence", queue, len(done)),
