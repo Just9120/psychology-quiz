@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.bibliography_ingestion import discover_bibliography
+from app.bibliography_ingestion import discover_bibliography, reuse_review_decisions
 from app.source_inventory import InventoryError
 from scripts.source_batch_capture import _private_content_path
 from scripts.source_inventory_report import _read, _snapshot, private_json_target
@@ -81,6 +81,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("current", "processed", "manifest", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--reuse-decisions", type=Path)
     args = parser.parse_args(argv)
     try:
         # All evidence and output live in ignored operator storage.
@@ -90,6 +91,10 @@ def main(argv=None):
                      for entry in _read(path)]
         result = run(_read(paths["current"]), _read(paths["processed"]),
                      _read(paths["manifest"]), catalogue)
+        if args.reuse_decisions is not None:
+            review_path = private_json_target(args.reuse_decisions, ROOT)
+            result = reuse_review_decisions(result, _read(review_path))
+            result["review_decisions_receipt"] = str(review_path.relative_to(ROOT))
         descriptor = os.open(paths["output"], os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
             json.dump(result, stream, ensure_ascii=False, indent=2)
@@ -98,6 +103,7 @@ def main(argv=None):
                           "unread_sources": len(result["unread_source_ids"]),
                           "mention_candidates": len(result["mentions"]),
                           "evidence_counts": result["evidence_counts"],
+                          "reused_non_publishing_decisions": result.get("reused_non_publishing_decisions", 0),
                           "unknown_work_candidates": sum(not item["candidate_work_ids"]
                                                          for item in result["mentions"]),
                           "publication_approval": False}))

@@ -207,3 +207,58 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
             "unread_source_ids": sorted(set(snapshot["files"]) - seen),
             "mentions": mentions, "evidence_counts": dict(sorted(evidence_counts.items())),
             "publication_approval": False}
+
+
+NON_PUBLISHING_REVIEW_DECISIONS = frozenset({
+    "not_a_book_title", "unresolved_identity", "publisher_work_found_author_binding_pending",
+})
+
+
+def reuse_review_decisions(result: dict, previous_receipt: dict) -> dict:
+    """Reuse operator classification of the same fragment, never publication approval.
+
+    All candidates stay visible. Changed source/revision/locator/title or ambiguous
+    prior decisions remain pending. Newly found work identities are not overwritten
+    with an old unresolved-identity decision.
+    """
+    from copy import deepcopy
+
+    if (not isinstance(previous_receipt, dict)
+            or not isinstance(previous_receipt.get("decisions"), list)):
+        raise InventoryError("invalid_bibliography_review_receipt")
+    decisions = defaultdict(list)
+    for record in previous_receipt["decisions"]:
+        if not isinstance(record, dict):
+            raise InventoryError("invalid_bibliography_review_receipt")
+        if record.get("decision") not in NON_PUBLISHING_REVIEW_DECISIONS:
+            continue
+        revision = record.get("current_revision")
+        digest = record.get("current_snapshot_sha256")
+        fields = tuple(record.get(k) for k in ("source_id", "locator", "title_candidate"))
+        if (not isinstance(revision, list) or len(revision) != 3
+                or not all(isinstance(value, str) for value in revision)
+                or not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest)
+                or not all(isinstance(value, str) and value for value in fields)):
+            # Historical unbound notes are useful context, not reusable evidence.
+            continue
+        decisions[(*fields, tuple(revision), digest)].append(record)
+    updated = deepcopy(result)
+    reused = 0
+    for mention in updated["mentions"]:
+        key = tuple(mention[k] for k in ("source_id", "locator", "title_candidate"))
+        previous = decisions.get((*key, tuple(mention["revision"]), mention["snapshot_sha256"]), [])
+        if not previous or mention.get("decision") != "pending_review":
+            continue
+        if len({record["decision"] for record in previous}) != 1:
+            mention["review_reuse_conflict"] = True
+            continue
+        record = previous[0]
+        if mention["candidate_work_ids"] and record["decision"] != "not_a_book_title":
+            continue
+        mention["decision"] = record["decision"]
+        mention["review_reuse"] = {"operator_note": record.get("operator_note", ""),
+                                 "scope": "same_source_revision_hash_title_and_locator"}
+        reused += 1
+    updated["reused_non_publishing_decisions"] = reused
+    updated["publication_approval"] = False
+    return updated

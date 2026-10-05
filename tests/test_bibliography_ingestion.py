@@ -339,3 +339,44 @@ def test_short_catalogue_title_inside_long_book_title_does_not_create_second_wor
     assert mention["candidate_work_ids"] == (["long_work"] if known_full_title else [])
     assert mention["decision"] == "pending_review"
     assert not result["publication_approval"]
+
+
+@pytest.mark.parametrize("changed_field", [None, "source_id", "locator", "title_candidate",
+                                           "current_revision", "current_snapshot_sha256"])
+def test_review_reuse_requires_exact_fragment_binding_and_does_not_mutate_input(changed_field):
+    from app.bibliography_ingestion import reuse_review_decisions
+    mention = {"source_id": "s", "locator": "characters:10:20", "title_candidate": "Реплика",
+               "revision": ["date", "Lesson", "text/plain"], "snapshot_sha256": "a" * 64,
+               "candidate_work_ids": [], "decision": "pending_review"}
+    result = {"mentions": [mention], "publication_approval": False}
+    previous = {"decisions": [{"source_id": "s", "locator": "characters:10:20",
+        "title_candidate": "Реплика", "current_revision": mention["revision"].copy(),
+        "current_snapshot_sha256": "a" * 64, "decision": "not_a_book_title"}]}
+    if changed_field:
+        previous["decisions"][0][changed_field] = (
+            ["new", "Lesson", "text/plain"] if changed_field == "current_revision"
+            else "b" * 64 if changed_field == "current_snapshot_sha256" else "changed")
+    original = deepcopy(result)
+    updated = reuse_review_decisions(result, previous)
+    assert result == original
+    assert updated["reused_non_publishing_decisions"] == (0 if changed_field else 1)
+    assert updated["mentions"][0]["decision"] == ("pending_review" if changed_field else "not_a_book_title")
+    assert not updated["publication_approval"]
+
+
+def test_review_reuse_never_carries_approval_conflicts_or_stale_unresolved_work_decisions():
+    from app.bibliography_ingestion import reuse_review_decisions
+    mention = {"source_id": "s", "locator": "characters:10:20", "title_candidate": "Книга",
+               "revision": ["date", "Lesson", "text/plain"], "snapshot_sha256": "a" * 64,
+               "candidate_work_ids": ["now_known_work"], "decision": "pending_review"}
+    record = {"source_id": "s", "locator": "characters:10:20", "title_candidate": "Книга",
+              "current_revision": mention["revision"], "current_snapshot_sha256": "a" * 64}
+    for decisions in ([{**record, "decision": "approved"}],
+                      [{**record, "decision": "unresolved_identity"}],
+                      [{**record, "decision": "unresolved_identity"},
+                       {**record, "decision": "not_a_book_title"}],
+                      [{**record, "decision": "not_a_book_title", "current_snapshot_sha256": None}]):
+        updated = reuse_review_decisions({"mentions": [mention]}, {"decisions": decisions})
+        assert updated["reused_non_publishing_decisions"] == 0
+        assert updated["mentions"][0]["decision"] == "pending_review"
+        assert not updated["publication_approval"]
