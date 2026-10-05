@@ -40,5 +40,39 @@
         "discipline_id": "quantitative_methods"
       }
     ]
+  },
+  {
+    "id": "lit_oecd_pisa2018_volume3",
+    "work_id": "lit_oecd_pisa2018_volume3",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Results (Volume III): What School Life Means for Students’ Lives",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 11,
+    "global_order": 912065,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Исследовательский отчёт о школьной среде и благополучии пятнадцатилетних участников PISA2018. Подходит для знакомства с измерением показателей и интерпретацией статистических связей. Это исторические данные конкретной выборки; они не устанавливают причины психологических трудностей отдельного человека.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Results (Volume III): What School Life Means for Students’ Lives. OECD Publishing, 2019. DOI: 10.1787/acd78851-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Место отчёта в обязательном порядке чтения и значимость по рекомендации преподавателя не установлены.",
+      "Печатный, PDF, HTML и EPUB форматы относятся к одному произведению; не создавать отдельные отметки чтения для каждого формата."
+    ],
+    "notes": "Библиографическая запись сверена с титульными страницами и официальной карточкой OECD. Год публикации2019 отличается от года исследования2018. ISBN печатного издания9789264970427, PDF9789264879720. Полный содержательный review продолжается; запись не означает одобрения всех выводов или подготовки вопросов из отчёта."
   }
 ]

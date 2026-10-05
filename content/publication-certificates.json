@@ -1003,6 +1003,13 @@
       "review_sha256": "e43c1f6163362d3b38dedc9ea98b2ab37f0281383b9343cd92a1d669a9ae1dba",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "L2FSKVHQvBEaY8KxtWrwJKSnb9kexX0zmS6uIXBvqzfPFBbK4Nz7nZdmJYqasdQ/t0zBn/6JE6UcSzhSDuM8Aw=="
+    },
+    "literature:lit_oecd_pisa2018_volume3": {
+      "schema_version": 1,
+      "item_sha256": "86d82090945c47fa0ed56fa720b254be853900a8085720fd5ccdd88a267278b0",
+      "review_sha256": "c3c748eb5d3a076387833c2dcf1bb6c5908ed3a1f02ea1f0a5e4e9f02902256b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ZZrQEMOYgQ0/ntZR36vrrNuqmzT4Crah+kJEX1s5A5FCiMeMmoszzYe/6+zhAYCskgkjwKmLvExvfElPa2muAA=="
     }
   }
 }
