@@ -144,8 +144,9 @@ it.each(['pwa', 'miniapp'])('shows scoped work totals and current reading indepe
   await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'read')
   expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
   await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module1')
-  expect(screen.getByText('Прочитано 1 из 1')).toBeVisible()
-  expect(screen.queryByText(/У 1 работ отметки/)).not.toBeInTheDocument()
+  // A module filter must not conceal conflicting aliases of the same work.
+  expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
+  expect(screen.getByText(/У 1 работ отметки/)).toBeVisible()
   await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module2')
   await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), '')
   const current = screen.getByRole('complementary', { name: 'Прогресс списка чтения' })
