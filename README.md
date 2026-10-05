@@ -108,6 +108,8 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 Для поиска книжных упоминаний в уже извлечённых материалах всех форматов выполните
 `python scripts/source_bibliography.py --current data/source-inventory-current.json --processed data/source-processing-current.json --manifest data/bibliography-captures.json --output data/bibliography-candidates-next.json`
 
+Для использования сохранённых решений добавьте `--reuse-decisions data/review-first.json`; параметр можно повторять для нескольких приватных receipts. Решения объединяются до сверки revision/hash/locator: противоречащие друг другу записи оставляют упоминание pending, порядок файлов не даёт приоритета и не разрешает публикацию.
+
 Discovery schema v2 reports `uncaptured_source_ids` / `uncaptured_in_batch`: files absent from this supplied capture manifest, not unread or unreviewed files. `coverage_scope: supplied_capture_manifest` and `content_review_completed: false` keep extraction coverage separate from the revision-bound content-review ledger. Historical schema v1 `unread_source_ids` has the same batch-only meaning and must not create a rereading queue.
 из корня репозитория. Manifest содержит `schema_version: 1` и `sources` с
 `source_id` и `content` (UTF-8 файл непосредственно в ignored `data/`). Команда

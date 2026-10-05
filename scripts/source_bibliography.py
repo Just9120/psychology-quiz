@@ -77,11 +77,23 @@ def run(current, processing, capture_manifest, catalogue):
     return result
 
 
+def reuse_receipts(result, receipts):
+    """Combine prior evidence before reuse so conflicting decisions stay pending."""
+    decisions = []
+    for receipt in receipts:
+        if (not isinstance(receipt, dict)
+                or not isinstance(receipt.get("decisions"), list)):
+            raise InventoryError("invalid_bibliography_review_receipt")
+        decisions.extend(receipt["decisions"])
+    return reuse_review_decisions(result, {"decisions": decisions})
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("current", "processed", "manifest", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
-    parser.add_argument("--reuse-decisions", type=Path)
+    parser.add_argument("--reuse-decisions", type=Path, action="append", default=[],
+                        help="Prior private review receipt; repeat to reuse all saved decisions.")
     args = parser.parse_args(argv)
     try:
         # All evidence and output live in ignored operator storage.
@@ -91,10 +103,12 @@ def main(argv=None):
                      for entry in _read(path)]
         result = run(_read(paths["current"]), _read(paths["processed"]),
                      _read(paths["manifest"]), catalogue)
-        if args.reuse_decisions is not None:
-            review_path = private_json_target(args.reuse_decisions, ROOT)
-            result = reuse_review_decisions(result, _read(review_path))
-            result["review_decisions_receipt"] = str(review_path.relative_to(ROOT))
+        if args.reuse_decisions:
+            review_paths = [private_json_target(path, ROOT) for path in args.reuse_decisions]
+            result = reuse_receipts(result, [_read(path) for path in review_paths])
+            result["review_decisions_receipts"] = [str(path.relative_to(ROOT)) for path in review_paths]
+            if len(review_paths) == 1:
+                result["review_decisions_receipt"] = result["review_decisions_receipts"][0]
         descriptor = os.open(paths["output"], os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
             json.dump(result, stream, ensure_ascii=False, indent=2)

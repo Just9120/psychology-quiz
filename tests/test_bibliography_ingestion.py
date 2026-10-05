@@ -385,3 +385,32 @@ def test_review_reuse_never_carries_approval_conflicts_or_stale_unresolved_work_
         assert updated["reused_non_publishing_decisions"] == 0
         assert updated["mentions"][0]["decision"] == "pending_review"
         assert not updated["publication_approval"]
+
+
+def test_multiple_saved_receipts_reuse_all_fragments_but_preserve_cross_receipt_conflicts():
+    from scripts.source_bibliography import reuse_receipts
+    def mention(source):
+        return {"source_id": source, "locator": "characters:10:20", "title_candidate": "Книга",
+                "revision": ["date", "Lesson", "text/plain"], "snapshot_sha256": "a" * 64,
+                "candidate_work_ids": [], "decision": "pending_review"}
+    def record(source, decision):
+        item = mention(source)
+        return {"source_id": source, "locator": item["locator"],
+                "title_candidate": item["title_candidate"], "current_revision": item["revision"],
+                "current_snapshot_sha256": item["snapshot_sha256"], "decision": decision}
+    result = {"mentions": [mention(source) for source in ("a", "b", "conflict")]}
+    original = deepcopy(result)
+    receipts = [{"decisions": [record("a", "not_a_book_title"),
+                              record("conflict", "not_a_book_title")]},
+                {"decisions": [record("b", "unresolved_identity"),
+                              record("conflict", "unresolved_identity")]}]
+    updated = reuse_receipts(result, receipts)
+    assert result == original
+    assert updated["reused_non_publishing_decisions"] == 2
+    assert [item["decision"] for item in updated["mentions"]] == [
+        "not_a_book_title", "unresolved_identity", "pending_review"]
+    assert updated["mentions"][2]["review_reuse_conflict"] is True
+    assert updated["publication_approval"] is False
+    assert reuse_receipts(result, list(reversed(receipts))) == updated
+    with pytest.raises(InventoryError, match="invalid_bibliography_review_receipt"):
+        reuse_receipts(result, [receipts[0], {}])
