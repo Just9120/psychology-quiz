@@ -1374,6 +1374,20 @@
       "review_sha256": "74366c4f64a73deda377a5649892fcd13aaa484cc76ab51ee5e486f35e6b6cc6",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "EePUcOSM0lCGxt3DvQL/w3MVSK+D6KGhOCQYG/aA4I9HkLRqFqFdXTrsv5LyFFL/1ncaj7KeHNMGQ9RgE/iABQ=="
+    },
+    "literature:lit_course_mention_mead_culture_childhood": {
+      "schema_version": 1,
+      "item_sha256": "30b4262705449ccf3907dead134e3405a992121d80348b345080cae6161c0ca4",
+      "review_sha256": "137c7a9db1b93a4194409c31e8aeb45c9910fc0683ebf2f215f256c49606de94",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "wBOx4h+JEnz5OrkxMB6mbaIuT7guK7s4/QggbZ5eWL+WVYgQkDmfhN6sCrdchuka119+J/1mx5eIs7a4ENfcAw=="
+    },
+    "literature:lit_course_mention_unspecified_psychology_basics": {
+      "schema_version": 1,
+      "item_sha256": "7f9bc5e8b48ba4ea434a3059fb0cec1bc7cbc83824202222300ed35c0aaeaef7",
+      "review_sha256": "e7b6074664e340eb67f5838571fdda085c3713210a7c92fa6339c7fcef52efdc",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mFw14MMO1y31Z+ZuWTG+RdzggBBQ+sf2JcFREHhJWADnJqCXEVE5CAoLEsZLo8gVR4T8gl3gMxScNqSDXbYZAw=="
     }
   }
 }

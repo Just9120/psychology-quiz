@@ -1584,5 +1584,37 @@
     "source": {
       "citation": "Маслоу А. Новые рубежи человеческой природы. Издание курса не установлено."
     }
+  },
+  {
+    "id": "lit_course_mention_mead_culture_childhood",
+    "work_id": "lit_course_mention_mead_culture_childhood",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Культура и детство",
+    "authors": [
+      "Мид М."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 374,
+    "global_order": 900374,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из учебного материала. До уточнения произведения запись не включается в автоматический порядок чтения.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Мид М. Культура и детство. Точное произведение и издание не установлены."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Лектор называет книгу «Культура и детство»; библиотечный каталог содержит другое название — «Культура и мир детства». Точное произведение и издание не подтверждены; записи не объединены."
+    ],
+    "notes": "Сохранено буквальное упоминание; библиографическая идентичность не угадывается."
   }
 ]
