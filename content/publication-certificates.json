@@ -881,37 +881,37 @@
     "literature:lit_alexandrov_exploded_brain": {
       "schema_version": 1,
       "item_sha256": "a24d0757f4c797c883076946ef2edb3c2eaa7acadad8a997a5ee307c524c5059",
-      "review_sha256": "4b75bdf0ada18e173798f84b74028bec80f06df996464ec7bc1ed4e983177d02",
+      "review_sha256": "22ec9437f77f28fcdfdb51a295b3b88b23f13387cdff0d8bad501153df5203a4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "0O2hdkTtkM8NdlYIJIrV/P3mO2JMymQ1vWBNpB7dpBSHsZZ4WcaB/BQ++6RH7Zd/8GtMuuqkcBl+GvSlZumrBw=="
+      "signature": "PlrMBnculmD9FxHitStkP7gcQxGRNc4gkzRD22WmKjWXDiCuz0jwbJr0JBpmO4k81Z1xK1F8syb7OB1Gp9iHBw=="
     },
     "literature:lit_tarabrina_posttraumatic_stress_practicum": {
       "schema_version": 1,
       "item_sha256": "d6f3f05f73f769fcca4da321ee3e6f7a0e7a1a9edc217e6c8c53ed3bd6c3877b",
-      "review_sha256": "1202b026cea76250f1dd8fb028d898419eece423269e328204cc4a72b3a77d7a",
+      "review_sha256": "f695203afe4c4b66a407f06322fcf006ce48887da0d3d23f6eeae34cfea5449b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "kYwkO27AnUcTvko3Dbdk4XupSzy7UZgwy4fWaul19EQfUAM3iGm61pQWyASFifpPbIXI8KZk8uTw3xPE5NXPDg=="
+      "signature": "r4arJIRXs2Yg6l3/8ylJiegg3auiidtRbEm0nVZZZQvdiPCza1UzOFGrL3urXpt1PfiEkn41nQ6ZCGcCl1gMDg=="
     },
     "literature:lit_course_mention_small_steps_covid": {
       "schema_version": 1,
-      "item_sha256": "da314c252a644d2608fe955a682e26df3422354d76bd5c516c1e7d0d98b1000b",
-      "review_sha256": "4eb4c7e4ef712b4f1f7c9d26c0b1fa19cd8a288d210ee8d28096154a0674886f",
+      "item_sha256": "ea82cbb584092c100881a5f6b81f21c19907d0438cf6058a5590da233ebde2e2",
+      "review_sha256": "848365c4900de2603eeb39e204e0afed1c45265d6b799f81df7de50b812a0cb4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "IB5X4yuulDSxYa8xq9oFv1RlKcC6YNLzSFlk2MalhBhselfg84I9Ds9phk61Lys7PtkEUSgbO67QQHkqD2X4AQ=="
+      "signature": "rN0dbcQrV+O6zjyFjBZ8nPqYpX0lnPUhJDUj8WI0NMpz3AWTpmjUvqTRQhnwcoHqS46r4eq7vVuBGhxNC6zsCQ=="
     },
     "literature:lit_course_mention_kucher_ptsd_theory_practice": {
       "schema_version": 1,
       "item_sha256": "f883129f5b22756a9ab95641588f42152460405b22eb7cd2e9fd9d03f2653027",
-      "review_sha256": "c67ebfb449cdc8b9aab9673269331ecd7ac8c43e7fdec955035e560a517cfae6",
+      "review_sha256": "b5a8203a9d5c47955334b823512f22233b0f58395355962d51275061c882c7ba",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "mu3r0qNhkTH0z5wJM99KR2nhZ/nlRZw9E1JL0ANWgqrZTjYx+ZSWts7b/H2BidQjHlbHwwzw6gpxisiLY14xAA=="
+      "signature": "3eFZhCZdTmYgOE1m29fOcNupGFb9bbR/xrzEbpcIBF/5oy+46eFKdKgymgD8jx7rW4uCdvtItS3AIsu7TglMBg=="
     },
     "literature:lit_course_mention_combat_nlp": {
       "schema_version": 1,
       "item_sha256": "750a28bacde3a830d48356d876119ffcd05f07442c57af4619aeb797ed02af64",
-      "review_sha256": "27a96af24c193312c9425b3a152c07140b9de52c105025a0e40da5bfa8296b5d",
+      "review_sha256": "ab1ca80652cc60130784910ef1b25dfa587381f8bb612b52dec1e28cdd6a9bd9",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "VQFkHX1vcPIuCkFPbjw4hh2n5G3WcYrWLkltkmT+v4ptim3lNh+N0Pep5k/7s01ukJDWSeKuoFC2mfAnn+kMAg=="
+      "signature": "tGI7Yyx3kz9mmp0XFDFEco4Zt+8glzux29CHXVMr0WpjXJE6pgxYYGjsTSdNI+7aaIlx9SsKlRM2YQyYwtmPBQ=="
     },
     "literature:lit_experimental_practice08_maslow_being": {
       "schema_version": 1,
@@ -972,23 +972,30 @@
     "literature:lit_course_mention_granovskaya_psychological_defenses": {
       "schema_version": 1,
       "item_sha256": "d9f0f43db32f3baa080bac7352d89c4bddece535d5f4df3cf0a0643c5e406004",
-      "review_sha256": "da5323797caa7a6045cc81f80a53394b75cbf9f97aca16ec12eb057a3d15b014",
+      "review_sha256": "3d772dced42154abe98e8c298b418b2aa38291b5a8cbb54f019bb6c3420b7bf5",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "FTOVFjrTcaddCR6l24Wb2y6obdC9Df0Qto8WSpW9gtO4oYTkSuM/6sgxxoTq/PnSQfh7Cnj6s3m3RcNuc+npCw=="
+      "signature": "q34yVostpg3zoMLY3ZEov5sJElklCNY2L1sv6I2caM2kMGpt2ja1NKwLvXtdH2buMTxGRoWasW/5ckAx2CZwBQ=="
     },
     "literature:lit_course_mention_subbotina_psychological_defenses": {
       "schema_version": 1,
       "item_sha256": "990a6a2295d4e58071da7f62592508c5a1b8d8d3058071509c7ea3f87931bfba",
-      "review_sha256": "662a43d7fe00dc9d0bb26186fb4d50d1fa9f3d6471527a81c64947fddac203b3",
+      "review_sha256": "26a10f737da374b590f2eb824364d07c286a16d8941ca0bf300fa8737607e7a0",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "XAZlb9EW8AM7xXdSYPgcdkj1QuJwxS8In7wqusw4ceje9JRIHxE3sKP9HtNYypp0qBUqXW+7kayBdVaWFjWLCA=="
+      "signature": "ls7xcWd75k68zZMx9oHDs9LZbwNEWzzGPhEaMIQ4x2dKJhw9idSp8CPbV9FlUQaQe4HhjVzweal+48aeZ0xfBQ=="
     },
     "literature:lit_course_mention_detroit_child_trauma_techniques": {
       "schema_version": 1,
       "item_sha256": "146f30a57ffe79f2a3a7fc15c303339b31be9a173466588e6d0df24bfb528844",
-      "review_sha256": "13fe542bfa71038b0916b1577d853d13867b86f8c97b4ddf59c5876a4f1ee297",
+      "review_sha256": "24162a2425cdfb9e97b5bf706c85a1c943f1a42c5353015bb2733d272399079e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "vqyZ9vZxAN1xL+P+zG21WMUt2aSFerOqJWkh1RD4Y+LifIIZM5qE0DqpCYSck+jnRTEL78QSZBs9WfBHRu3iCw=="
+      "signature": "ZIXyIulrN54h3XulHPEtaiyEy/386aHyo8gk0euKeV6ZNeT5SOILJBbKlsOyFrRQti3drShyhcX9AYl5LCy3BQ=="
+    },
+    "literature:lit_course_mention_return_death_tales": {
+      "schema_version": 1,
+      "item_sha256": "333aec99328ef8204379526a5d89a5c6230fd269dec6043d68a50c1e6a53f0f5",
+      "review_sha256": "592aeef3b877e270ef576f8437f481fe225a07829d24b58a39cc409d9576ab86",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "z5yqX+royZmJ/dAdmppk+zh06zTQcj2yVO0dPwAHFU890MRYt8N72TqHHXZKRme3KoXH786txQUwswAo4YRWBA=="
     }
   }
 }
