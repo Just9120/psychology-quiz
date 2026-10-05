@@ -793,6 +793,13 @@
       "review_sha256": "340f6c77a2c2e46d791742f1c849136f69c2051bf2cd9a3974d868ce898f2fab",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "L77r7AZgHY++ECh7zLAe+FutaO5haDQ8gJvSEE/kBV8BCJSWmU9qWyBQ35gbvzCkNZUVHXrpDDsOeb8c9kTkCg=="
+    },
+    "literature:lit_chekhov_death_of_clerk": {
+      "schema_version": 1,
+      "item_sha256": "f6f2540025d60ca4386dd5cfed616db94f4737befee36e6f378988bc187e8ff0",
+      "review_sha256": "ab54609d1f4e3ab95220ed066dfb996ba210ec773ea7adffcceff872707017d9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9e9Ch0V7vUyals0FRdxOX271W9S0+LHA9Na+16UMy5a78fX4SpnVBZ9WzZgv9TC33ukhM0xRyCFucb+LewYYCw=="
     }
   }
 }
