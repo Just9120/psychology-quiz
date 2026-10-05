@@ -1038,6 +1038,48 @@
       "review_sha256": "938c6cf0954a3e8ea6dc77398f39ad73daf33078952c87ca91e7209541bf7522",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "qkguOOXGe97vFWNI8RVrF011X+zFlpC+hqAkMmQynTymiiAmH0ok+g/RRWMH7plSnph+J5CDSFF82JfX6pLYDA=="
+    },
+    "literature:lit_oecd_subjective_wellbeing_guidelines": {
+      "schema_version": 1,
+      "item_sha256": "d0912ba7e58a3c1121b6f7cf1743e8e2a164e39f36cbbc2132611863f6b39131",
+      "review_sha256": "980cfd913d7aa70025fc652a424c7ac04c64defb1acfc224924bf5770e667ad8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "6zFUCA78NDW/UqHuIkKNT74JQG6ToDsc9ejUdUYwLCUcQ/8Wx1OqX3k8gMIiY+Q5tfOlB32dnV1/c73mGhEIDA=="
+    },
+    "literature:lit_burns_gottschalk_21st_century_children": {
+      "schema_version": 1,
+      "item_sha256": "3a39f83a7d0aa6cce6ccbbe21e2518e5dfa59f63aa43c799bac30a78be3fbf9c",
+      "review_sha256": "086897b6cb3eafa88611ee2ec1822b573de8158b04d7623891ab7caee5bc3663",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tPSAei1G7ay0V6leXZgJ1zLF1VDMba5gRz10liwajJx0GkX+fxKmgb3LIxZw1m9Zyhmtpf5J6+P+olBny7fQBg=="
+    },
+    "literature:lit_christenson_student_engagement": {
+      "schema_version": 1,
+      "item_sha256": "d3e52763d16062e2a51d08007772c1d8035c5268fe85c4371e839520b04f16e8",
+      "review_sha256": "77e5fc65e8b54cb1c709625ac1c2d892ac5b67f28d434bc22c8a4ec5fce713ed",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "pNBhoVl5AauHivPw0PBoPfeLzL9U5KTHxeA+J7uza9KkJj3Q4zBoX1DVNRTde0iXZxsGdAzE+G/sKolSwpJDCg=="
+    },
+    "literature:lit_buck_akerson_science_teacher_self_study": {
+      "schema_version": 1,
+      "item_sha256": "7d63071ea1e77b6531d34028d919307f023b100069566dfc4b25c61c47213261",
+      "review_sha256": "1b20a6d9aadb89050a94110fb2a65f8752919cc69952b5691ff639e8aa77cdbe",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "28NFfKFaEWhPxyfkcb6j6q/plwkXFuiiGA2ccQ5UOk0o2N3eCtzsONC6sXBCsFij8IxpwrCdz2GtYdq2UgZlBw=="
+    },
+    "literature:lit_hattie_anderman_student_achievement": {
+      "schema_version": 1,
+      "item_sha256": "0ba781c5280670499ebe2e3bec0a4f909a7ed60cfd2b97f1f7aebbe322cb31e8",
+      "review_sha256": "dd9234e9356a2a97536474670fb65dacdfc4c828c10f4f6eabe6aebaee11f3fc",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tulF6BLcnRFfhy/O7pfttb8FUrh+PXqDFUwtn4y+yxLkOAuqzUoCbeKChpuYTszhAb5YVEcuyDhCiIfs7ETKCg=="
+    },
+    "literature:lit_kunter_coactiv_teacher_competence": {
+      "schema_version": 1,
+      "item_sha256": "0d185da7b19559d7ec3579f4ae5fc27104a34bf8c2189afeada952c4f3023f5b",
+      "review_sha256": "d3dd7458593f883df27bb36da61d2a38794d67a13a621aa12f8a95072fdca903",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0z2aaUf0CeLLYTseEe77Z/DboUZnCciTfVO52W7Foi8qym8/RNosn5lsdrN0oCXtQfJAyp5blgscyjNgTViwAA=="
     }
   }
 }

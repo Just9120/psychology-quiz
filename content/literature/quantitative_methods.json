@@ -211,5 +211,220 @@
       "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены."
     ],
     "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения. ISBN сверенного издания: 9780631192411."
+  },
+  {
+    "id": "lit_oecd_subjective_wellbeing_guidelines",
+    "work_id": "lit_oecd_subjective_wellbeing_guidelines",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "OECD Guidelines on Measuring Subjective Well-being",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2013,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 16,
+    "global_order": 912070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Работа упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. OECD Guidelines on Measuring Subjective Well-being. OECD Publishing, 2013. DOI: 10.1787/9789264191655-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_burns_gottschalk_21st_century_children",
+    "work_id": "lit_burns_gottschalk_21st_century_children",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Educating 21st Century Children: Emotional Well-being in the Digital Age",
+    "authors": [
+      "Tracey Burns (редактор)",
+      "Francesca Gottschalk (редактор)"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 17,
+    "global_order": 912071,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Работа упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Tracey Burns (редактор); Francesca Gottschalk (редактор). Educating 21st Century Children: Emotional Well-being in the Digital Age. OECD Publishing, 2019. DOI: 10.1787/b7f33425-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_christenson_student_engagement",
+    "work_id": "lit_christenson_student_engagement",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Handbook of Research on Student Engagement",
+    "authors": [
+      "Sandra L. Christenson (редактор)",
+      "Amy L. Reschly (редактор)",
+      "Cathy Wylie (редактор)"
+    ],
+    "year": 2012,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 18,
+    "global_order": 912072,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Работа упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Sandra L. Christenson (редактор); Amy L. Reschly (редактор); Cathy Wylie (редактор). Handbook of Research on Student Engagement. Springer US, 2012. DOI: 10.1007/978-1-4614-2018-7."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_buck_akerson_science_teacher_self_study",
+    "work_id": "lit_buck_akerson_science_teacher_self_study",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Enhancing Professional Knowledge of Pre-Service Science Teacher Education by Self-Study Research: Turning a Critical Eye on Our Practice",
+    "authors": [
+      "Gayle A. Buck (редактор)",
+      "Valarie L. Akerson (редактор)"
+    ],
+    "year": 2016,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 19,
+    "global_order": 912073,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Работа упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Gayle A. Buck (редактор); Valarie L. Akerson (редактор). Enhancing Professional Knowledge of Pre-Service Science Teacher Education by Self-Study Research: Turning a Critical Eye on Our Practice. Springer Cham, 2016. DOI: 10.1007/978-3-319-32447-0."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_hattie_anderman_student_achievement",
+    "work_id": "lit_hattie_anderman_student_achievement",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "International Guide to Student Achievement",
+    "authors": [
+      "John Hattie (редактор)",
+      "Eric M. Anderman (редактор)"
+    ],
+    "year": 2013,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 20,
+    "global_order": 912074,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Работа упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "John Hattie (редактор); Eric M. Anderman (редактор). International Guide to Student Achievement. Routledge, 2013."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Год издания 2013 подтверждён издателем; библиография учебного материала указывает 2012. Конкретное издание, использованное автором главы, не установлено."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_kunter_coactiv_teacher_competence",
+    "work_id": "lit_kunter_coactiv_teacher_competence",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Cognitive Activation in the Mathematics Classroom and Professional Competence of Teachers: Results from the COACTIV Project",
+    "authors": [
+      "Mareike Kunter (редактор)",
+      "Jürgen Baumert (редактор)",
+      "Werner Blum (редактор)",
+      "Ute Klusmann (редактор)",
+      "Stefan Krauss (редактор)",
+      "Michael Neubrand (редактор)"
+    ],
+    "year": 2013,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 21,
+    "global_order": 912075,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Работа упомянута в библиографии исследовательского материала дисциплины. Её можно рассмотреть при изучении соответствующего направления; обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Mareike Kunter (редактор); Jürgen Baumert (редактор); Werner Blum (редактор); Ute Klusmann (редактор); Stefan Krauss (редактор); Michael Neubrand (редактор). Cognitive Activation in the Mathematics Classroom and Professional Competence of Teachers: Results from the COACTIV Project. Springer New York, 2013. DOI: 10.1007/978-1-4614-5149-5."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
   }
 ]
