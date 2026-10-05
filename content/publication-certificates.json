@@ -167,9 +167,9 @@
     "literature:lit_sommers_flanagan_clinical_interviewing": {
       "schema_version": 1,
       "item_sha256": "154cb8c20bbfc43a29a1b0285bc048dc5378d614cb87eee6699b8def95ea7ef9",
-      "review_sha256": "f0067f477d169e7f3c5c2a8841a0c2ef34177ff5aee27656faa99123f1cc04df",
+      "review_sha256": "052242e45a35b0d017027d4708cfb28748a5b017f5a356800a3cf9dd4cbbc479",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "7xlUgHPpyhjqNPQO/T31OkaTqqKFk3mPVzuZpCYKGY2ei6OMg0o/MzrkOYbTTSHMNxjGycZYHs6pefIz1xLcBg=="
+      "signature": "S0rWG5mrGzVTqsd11oc9B6se3y4RE9+84xGzXFt3XEE+JE1f2nG4gTctOjKNpX3p0pUDo10o8ZL4DAnoU/l9Aw=="
     },
     "literature:lit_anna_freud_ego_defence": {
       "schema_version": 1,
