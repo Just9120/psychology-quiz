@@ -1080,6 +1080,69 @@
       "review_sha256": "d3dd7458593f883df27bb36da61d2a38794d67a13a621aa12f8a95072fdca903",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "0z2aaUf0CeLLYTseEe77Z/DboUZnCciTfVO52W7Foi8qym8/RNosn5lsdrN0oCXtQfJAyp5blgscyjNgTViwAA=="
+    },
+    "literature:lit_oecd_pisa2015_volume3": {
+      "schema_version": 1,
+      "item_sha256": "5c57dcb1774f9ccabf0c71147effa633cf5d1f0f87b11859ee435a47cf6547d8",
+      "review_sha256": "1b53aaaaab3d5a7c17266e831de6e1618da017db7b47042dd21d05f24a3e3ec8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "+Xl4myr/EuXMcr5gqiNH0zB2z8FdCKAeP50wc0LAyEYxiwtpAj1/uPnWXjZ/vLygkAk+AIHh5pUl+AJWiuakDg=="
+    },
+    "literature:lit_oecd_pisa2015_volume2": {
+      "schema_version": 1,
+      "item_sha256": "6ddad51af8970a970d4eaa820d4c23fcb870417451ee8c4be1f8489ba3d46df2",
+      "review_sha256": "58f4d17042e663bcb7a12370dea354bd4c7c6f9fbc8c2e785923edfb85f1cc67",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "O9j2MDZuLYwjJIPBKxXacDkoJRUAiaUUxXJWg0H5cmLo/Mg9lFk9KW/LwphPQT5qtlPJnVQzIA4J3V+cduIiBQ=="
+    },
+    "literature:lit_rees_main_childrens_worlds2015": {
+      "schema_version": 1,
+      "item_sha256": "c51888c09a0f51dc12da6f4ac5c644f47b510c7f2e5b1d5bbc5ba908be6b7afd",
+      "review_sha256": "bb52692d0db316613ac4b64fe6ea112bd7261d40098fae1730dd065641dd93ae",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "PeIKKlsYPvm97VsvCtkM7XTDtxMxKKguZ7KtT9kivswF4pF1Rmw8y77M+BPrOwgnmiHzbRRUmiw1CeufF/6zBg=="
+    },
+    "literature:lit_good_childhood_report2015": {
+      "schema_version": 1,
+      "item_sha256": "6e453c760fd6c5e5e698553965e9451a36e851a24b17e78c76dd442528c7fce5",
+      "review_sha256": "b77494c9d49321ea81735b58a1224570fb02bfc85f7a9ae01c2c34b7d6bc4650",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "24mS1HwhoMPxuU0PENKOW0deLBTUOcbnAHhh83etpUNcEVYXIbzhwN4Gi9XfC2b1z/9Z/vibvK7nUKO5qFesCw=="
+    },
+    "literature:lit_unesco_ending_school_violence": {
+      "schema_version": 1,
+      "item_sha256": "863d4bba5cd28641849eea7fd8c2413f4bbe3b5e2a48ae924459543d719d4afc",
+      "review_sha256": "2901c63b396f0745eb261642198d09cd08113b845e359ff177459152f664d982",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "A4bFJfoJ5XcpOr4xF9Z91BE+oGox1mTVVbcqDQNmE1+HUmqYNS8YxZ2y4RHFyipcK3w5e8uxhZ0XkE1GYJosCg=="
+    },
+    "literature:lit_oecd_talis2018_volume1": {
+      "schema_version": 1,
+      "item_sha256": "7564624d9b1113cca1165d811a5ed925c060aa167c4f253eb31e9dd50f597942",
+      "review_sha256": "53b9b9a61baad84ab9e8b3c9cf6889b77c2e7bd14bb2b5f83919e3f35c74c269",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Zvsn419H3aLfdzTrqn+IxBk200e0PvgZxgwFRfFZjSb0/vA+Gv290QcgMBlAWlGJHimEDqVxV34115cQvdJsAw=="
+    },
+    "literature:lit_oecd_gender_equality_education": {
+      "schema_version": 1,
+      "item_sha256": "4152b59b79ae54f4043815c9ca99cb2133e1efb8c14dbb8edae56dae7c634e3e",
+      "review_sha256": "a0f8ae586df23f7dfed65cf57886c5445e9954afaee48373d467fb3a8ce5ccb5",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E076bIjfSU+iuN3FWJw3GW6U7ADpKRhEbwkgDG3pZOho1hFdRlLQm4YNSWyxsj1vSqJoYinf3Z1Ek4bIjv/+CA=="
+    },
+    "literature:lit_oecd_pisa2012_volume4": {
+      "schema_version": 1,
+      "item_sha256": "9dccd4cc222e7265545f2cfc80f24de8bff42723b44086aab905ca33fa1a0640",
+      "review_sha256": "5b83cacd0388ed2d2860968d55f832483d3cd4e391a95c96e58dcbf364f28c3c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "+jU/pB5AJ3v0rnm3hqx1yKgMUgFEIKz+YSV+SZgwDLebDChQEoOD3e8eQfvw3KkPHSNhN9sKHOPtoVYcQJ51BQ=="
+    },
+    "literature:lit_european_commission_early_school_leaving": {
+      "schema_version": 1,
+      "item_sha256": "d89dcd211967e38ce3f87ea409d17f1a1de5b40f3086a5139e4915174487c5d8",
+      "review_sha256": "35fb18ad0cbe24d3a4aea8bab0609afcb9e665bde55ea917522970e81c0fbc96",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Dvmws/nq+xfXfk2aggoIreUrEIT62wKBaAvFgXfARwX4o0UJmF/GMj9WgW+LqtZT/khzRv4Qa/h1wCHlmaVVAw=="
     }
   }
 }

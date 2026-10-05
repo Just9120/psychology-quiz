@@ -426,5 +426,313 @@
       "Полный текст работы не проверен; уровень и значимость чтения не установлены."
     ],
     "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_pisa2015_volume3",
+    "work_id": "lit_oecd_pisa2015_volume3",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2015 Results (Volume III): Students’ Well-Being",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2017,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 22,
+    "global_order": 912076,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2015 Results (Volume III): Students’ Well-Being. OECD Publishing, 2017. DOI: 10.1787/9789264273856-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_pisa2015_volume2",
+    "work_id": "lit_oecd_pisa2015_volume2",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2015 Results (Volume II): Policies and Practices for Successful Schools",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2016,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 23,
+    "global_order": 912077,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2015 Results (Volume II): Policies and Practices for Successful Schools. OECD Publishing, 2016. DOI: 10.1787/9789264267510-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_rees_main_childrens_worlds2015",
+    "work_id": "lit_rees_main_childrens_worlds2015",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Children’s Views on Their Lives and Well-Being in 15 Countries: A Report on the Children’s Worlds Survey, 2013–14",
+    "authors": [
+      "Gwyther Rees (редактор)",
+      "Gill Main (редактор)"
+    ],
+    "year": 2015,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 24,
+    "global_order": 912078,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Gwyther Rees (редактор); Gill Main (редактор). Children’s Views on Their Lives and Well-Being in 15 Countries: A Report on the Children’s Worlds Survey, 2013–14. Children’s Worlds Project, 2015."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Отчёт 2015 года по 15 странам отличается от следующего отчёта по 16 странам; их не объединять как форматы одной работы."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_good_childhood_report2015",
+    "work_id": "lit_good_childhood_report2015",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "The Good Childhood Report 2015",
+    "authors": [
+      "The Children’s Society"
+    ],
+    "year": 2015,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 25,
+    "global_order": 912079,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "The Children’s Society. The Good Childhood Report 2015. The Children’s Society, 2015."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_unesco_ending_school_violence",
+    "work_id": "lit_unesco_ending_school_violence",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Behind the Numbers: Ending School Violence and Bullying",
+    "authors": [
+      "UNESCO"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 26,
+    "global_order": 912080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "UNESCO. Behind the Numbers: Ending School Violence and Bullying. UNESCO, 2019."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_talis2018_volume1",
+    "work_id": "lit_oecd_talis2018_volume1",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "TALIS 2018 Results (Volume I): Teachers and School Leaders as Lifelong Learners",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 27,
+    "global_order": 912081,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. TALIS 2018 Results (Volume I): Teachers and School Leaders as Lifelong Learners. OECD Publishing, 2019. DOI: 10.1787/1d0bc92a-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_gender_equality_education",
+    "work_id": "lit_oecd_gender_equality_education",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "The ABC of Gender Equality in Education: Aptitude, Behaviour, Confidence",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2015,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 28,
+    "global_order": 912082,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. The ABC of Gender Equality in Education: Aptitude, Behaviour, Confidence. OECD Publishing, 2015. DOI: 10.1787/9789264229945-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_pisa2012_volume4",
+    "work_id": "lit_oecd_pisa2012_volume4",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2012 Results: What Makes Schools Successful (Volume IV): Resources, Policies and Practices",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2013,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 29,
+    "global_order": 912083,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2012 Results: What Makes Schools Successful (Volume IV): Resources, Policies and Practices. OECD Publishing, 2013. DOI: 10.1787/9789264201156-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_european_commission_early_school_leaving",
+    "work_id": "lit_european_commission_early_school_leaving",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Reducing Early School Leaving: Key Messages and Policy Support",
+    "authors": [
+      "European Commission"
+    ],
+    "year": 2013,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 30,
+    "global_order": 912084,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Отчёт упомянут в библиографии исследовательского материала дисциплины. Обязательность и место в порядке чтения преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "European Commission. Reducing Early School Leaving: Key Messages and Policy Support. European Commission, 2013."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
   }
 ]
