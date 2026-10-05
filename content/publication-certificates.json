@@ -916,9 +916,9 @@
     "literature:lit_experimental_practice08_maslow_being": {
       "schema_version": 1,
       "item_sha256": "fb61e64e3983450703963eea74ad5274b71ee2416abea798a170589c2a26e290",
-      "review_sha256": "4e3d77eca0d8607a50bbb54f086ec343f432071c79be982dbd6c4ce21613a615",
+      "review_sha256": "a5e54eb5f8c3cd7717463580cb72ba299b4f7c3644bb468a138f67cc95ea65fd",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "ZF19Hfz8hdje96M4hhJgJoknlM1oPRVvr1D9rNBLMTCdjmuucWlz/jBQy0CMSYUMwPmBYTBDVCVXvcyE95TRDQ=="
+      "signature": "xbgxFvrb9bAMC5op4w121RdoLUXF3Q788BWEnPVR3HbhykDXi6F/g/EjzTYV5xEPQuwwtZhoApuWg7EOXLseCA=="
     },
     "literature:lit_consult_practice18_graham_resilience": {
       "schema_version": 1,
