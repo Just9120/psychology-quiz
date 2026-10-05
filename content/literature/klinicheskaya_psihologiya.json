@@ -628,5 +628,132 @@
       "Год и издание не установлены."
     ],
     "notes": "Сохранено неуточнённое упоминание курса. Это не подтверждение содержания или пригодности книги для клинической работы."
+  },
+  {
+    "id": "lit_course_mention_granovskaya_psychological_defenses",
+    "work_id": "lit_course_mention_granovskaya_psychological_defenses",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Книга о психологических защитах (точное название не установлено)",
+    "authors": [
+      "Грановская Р. М."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 70,
+    "global_order": 510070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из лекции о горе и утрате. Для выбора книги сначала нужно уточнить её полное название и издание.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Грановская Р. М. Книга о психологических защитах (точное название не установлено)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точное библиографическое название и издание не установлены.",
+      "Порядок и значимость чтения пока не определены."
+    ],
+    "notes": "Лектор называет Раду Михайловну Грановскую и тему психологических защит, но сокращает название. Не подставлять другую книгу автора без подтверждения."
+  },
+  {
+    "id": "lit_course_mention_subbotina_psychological_defenses",
+    "work_id": "lit_course_mention_subbotina_psychological_defenses",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Книга о психологических защитах (точное название не установлено)",
+    "authors": [
+      "Субботина Людмила"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 71,
+    "global_order": 510071,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из лекции о горе и утрате. Для выбора книги сначала нужно уточнить её полное название и издание.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Субботина Людмила. Книга о психологических защитах (точное название не установлено)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точное библиографическое название и издание не установлены.",
+      "Порядок и значимость чтения пока не определены."
+    ],
+    "notes": "Лектор называет Людмилу Субботину, но прямо не помнит отчество и не сообщает точное название. Авторство сохранено в пределах услышанного; отчество и издание не угадываются."
+  },
+  {
+    "id": "lit_course_mention_detroit_child_trauma_techniques",
+    "work_id": "lit_course_mention_detroit_child_trauma_techniques",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Краткосрочные техники работы с травмой для детей (издание не установлено)",
+    "authors": [],
+    "year": null,
+    "type": "course_material",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 72,
+    "global_order": 510072,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из лекции о горе и утрате. Для выбора книги сначала нужно уточнить её полное название и издание.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Краткосрочные техники работы с травмой для детей (издание не установлено)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точное библиографическое название и издание не установлены.",
+      "Порядок и значимость чтения пока не определены."
+    ],
+    "notes": "В лекции названо учебное пособие «Техники Детройта» и описаны возрастные разделы. Точный автор, учреждение, библиографическое название и издание не установлены. Клинические заявления о применимости не одобрены."
   }
 ]

@@ -968,6 +968,27 @@
       "review_sha256": "dd508542dbce3c8af6afef36746a7bfc109377d5962a21a2d11505d71d5fd95a",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "C9S+l/3y1iheXeIZd+v2u2HqXekDn3FN52sMyYtNTZFXCjuVUynf7DRYwUKzDSNus7KzSrFPL7TdjdnLDHj3CA=="
+    },
+    "literature:lit_course_mention_granovskaya_psychological_defenses": {
+      "schema_version": 1,
+      "item_sha256": "d9f0f43db32f3baa080bac7352d89c4bddece535d5f4df3cf0a0643c5e406004",
+      "review_sha256": "da5323797caa7a6045cc81f80a53394b75cbf9f97aca16ec12eb057a3d15b014",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "FTOVFjrTcaddCR6l24Wb2y6obdC9Df0Qto8WSpW9gtO4oYTkSuM/6sgxxoTq/PnSQfh7Cnj6s3m3RcNuc+npCw=="
+    },
+    "literature:lit_course_mention_subbotina_psychological_defenses": {
+      "schema_version": 1,
+      "item_sha256": "990a6a2295d4e58071da7f62592508c5a1b8d8d3058071509c7ea3f87931bfba",
+      "review_sha256": "662a43d7fe00dc9d0bb26186fb4d50d1fa9f3d6471527a81c64947fddac203b3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XAZlb9EW8AM7xXdSYPgcdkj1QuJwxS8In7wqusw4ceje9JRIHxE3sKP9HtNYypp0qBUqXW+7kayBdVaWFjWLCA=="
+    },
+    "literature:lit_course_mention_detroit_child_trauma_techniques": {
+      "schema_version": 1,
+      "item_sha256": "146f30a57ffe79f2a3a7fc15c303339b31be9a173466588e6d0df24bfb528844",
+      "review_sha256": "13fe542bfa71038b0916b1577d853d13867b86f8c97b4ddf59c5876a4f1ee297",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "vqyZ9vZxAN1xL+P+zG21WMUt2aSFerOqJWkh1RD4Y+LifIIZM5qE0DqpCYSck+jnRTEL78QSZBs9WfBHRu3iCw=="
     }
   }
 }
