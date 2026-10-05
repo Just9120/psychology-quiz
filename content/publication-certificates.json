@@ -320,10 +320,10 @@
     },
     "literature:lit_anna_freud_ego_defence_social": {
       "schema_version": 1,
-      "item_sha256": "86fc52d0ae926735804718b03d4d9167016a02fb16be358d4e92abb42e8132cf",
-      "review_sha256": "17be8f24ed00874fd702a7b3195505862aafcfc31199b867284a68d121d688b4",
+      "item_sha256": "ad986b558e8c4e80a9d49bbc9e9993b0641e4d183c1c107329921b37c77b25a3",
+      "review_sha256": "e80d637e71262f78b85015e28090c8b1ce3a8f19976ec85c8532c4092956a177",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "5PsgscSCvZWbTk3D3kI0HKuy5c3wLgHXbJ34YAgj0+AlBv2TVzzfCVaUZu9Lv0469w4mVr0ie/E0SEQu4YcYBQ=="
+      "signature": "r1ds74OiN+QNczr8qUBQ2vJHtzwVZRZzqxuZgim998t3PN+j/o5ONRH/om3N+6/H468aGAhB8YeoHa4fBW9JAQ=="
     },
     "literature:lit_frankl_man_search_meaning_qualitative": {
       "schema_version": 1,
@@ -779,6 +779,13 @@
       "review_sha256": "b8ae008c59fa1a868f23bddd6780b189ff54032ceeca37001aab2790efc65c41",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "UmEey9FEE+P9OiQeLYi1FlbA3nKGt43RsaLXVg4RWTbHc1N2mmAS0A23lIW1LFLXQOHvdUmnA/LsUZjmewbsBw=="
+    },
+    "literature:lit_social_history03_freud": {
+      "schema_version": 1,
+      "item_sha256": "dc977bc6883737532bccccecc9b0393af4c6afa727d3fd02fd16c1169d8bf295",
+      "review_sha256": "d63a0f5428aa8bfb7721426b5fc246409d08d1e895d9027a3a8e453a6e141711",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "CfPtqzV5yKjsl3df95LMdnhD/YIJH/nthn+ZcYaoYHzsv3V84x18hOoeIJypiWT8z16ZeYsXu6Rh6TOF13E0Cg=="
     }
   }
 }
