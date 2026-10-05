@@ -737,6 +737,34 @@
       "review_sha256": "22217df54c96e964a941606ee62599455fc8c91be0bb1745ebdbadb3dcefa677",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "E4yHAK6Iuf6x5JbZCX5ueg0nzcKCIs1j8kDN9aUeb8uQZwQ0ArnxJnmIObUham/ZAgSHg/JCYnBZEsk4G1TxAw=="
+    },
+    "literature:lit_social_history02_wundt": {
+      "schema_version": 1,
+      "item_sha256": "1f15ac916d85203df55f393ff84bd1ff46cb107988fe11d9db437e92c13120ad",
+      "review_sha256": "34f3528f16269c19becbc299e63350afda0e040d3e4194bafba323033cda93cb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "do2d5yEqvXOZAxz9MEq7U0honnOXP1zaiNF2h6+IxxltEAuh2pidlrIBn4iE8OyziWaRqUWRfOGzBqy1hkWhCg=="
+    },
+    "literature:lit_social_history02_freud": {
+      "schema_version": 1,
+      "item_sha256": "9c9164e4eabd8d167ae609c99b6ba0bbd698e073ebf967927471a0293bf5181b",
+      "review_sha256": "5ff9ad7d9959807cd6813dcac62ca48f8a8725cf9be44d7b97d5f75d57b1cb23",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "5fpEdUKelFx4GrTk5bG7U8gALvsZz9i9AC+EhNJNJfl0YHnFurLOWsuYE8XImk4Lmx/KR9yt+aMlkYFHi+sXAQ=="
+    },
+    "literature:lit_social_history02_lebon": {
+      "schema_version": 1,
+      "item_sha256": "8a2c17b6cb72bccb9280264486de93ab350168760aa15bf6d735d62c2a4c5b9d",
+      "review_sha256": "862347bdc5bd651704a424e673081567b66b59f9e197caf1dcf69de9ffcb9da4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kN+hthv3hWJxTv1BbtdfmZ6Cr7ygE0SiWuyM3J/m3dZAqGgWsKRaSyee3y1JpT1Bf2l9xsKGUh1JCO1xR8cACA=="
+    },
+    "literature:lit_social_history02_miller_dollard": {
+      "schema_version": 1,
+      "item_sha256": "83f1ba77525a7c31e2699934df8af9c769dad3d0659f306eda24e7532cbbd6ee",
+      "review_sha256": "7c05fe9228828511676245d520383389c72b38dc4207af325caf25b481f6accb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ftLyLKKzB2kLnmfbUwQ77o9X0nvi+DIO43uhHnxBFJ02qUQdKuswd402xh3B7orZF/1w6g1sP+Zbch3eBrvOCg=="
     }
   }
 }
