@@ -28,13 +28,22 @@ NOVEL_QUOTE = re.compile(
     r'(?:под названием[ \t]+)?(?:\r?\n[ \t]*)?'
     r'[«“"](?P<title>[^«»“”"]{3,200})[»”"]')
 
+# Lectures may name a textbook as an author's main scholarly work. Keep the
+# qualifier and immediate title grammar, rather than matching any use of "труд".
+ACADEMIC_WORK_QUOTE = re.compile(
+    r'(?<!\w)(?i:(?:основн[а-я]+|научн[а-я]+|фундаментальн[а-я]+)'
+    r'[ \t]+труд(?:а|е|ом|у|ы|ов|ах|ами)?)(?:[ \t]+|[ \t]*\r?\n[ \t]*)'
+    r'(?:это[ \t]+)?(?:\r?\n[ \t]*)?'
+    r'[«“"](?P<title>[^«»“”"]{3,200})[»”"]')
+
 QUOTED_TITLE = re.compile(r'[«“"](?P<title>[^»”"]{3,200})[»”"]')
 TITLE_SEPARATOR = re.compile(r'[\s,;]*(?:(?:и|или|а также)[\s,;]+)?', re.IGNORECASE)
 
 
 def _book_quotes(text: str):
     """Keep adjacent titles in a book list, without interpreting later dialogue."""
-    for first in chain(READING_QUOTE.finditer(text), NOVEL_QUOTE.finditer(text)):
+    for first in chain(READING_QUOTE.finditer(text), NOVEL_QUOTE.finditer(text),
+                       ACADEMIC_WORK_QUOTE.finditer(text)):
         cue = text[first.start():first.start("title")]
         if re.search(r"литератур[а-я]*\s+к\s+блок[а-я]*\s*[«“\"]$", cue, re.IGNORECASE):
             # The quoted name labels the course block, not a recommended book.

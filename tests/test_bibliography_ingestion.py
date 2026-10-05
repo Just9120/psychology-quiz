@@ -262,11 +262,15 @@ def test_known_title_inside_unquoted_citation_does_not_duplicate_review_task():
 @pytest.mark.parametrize("text, expected", [
     ('Рекомендую роман «Неизвестная история». Он сказал: «Привет».', ["Неизвестная история"]),
     ('Повесть «Другая история». Он сказал: «Привет».', ["Другая история"]),
+    ('У неё основной труд это «Патопсихология».', ["Патопсихология"]),
+    ('Научный труд «Основы анализа» рекомендован на занятии.', ["Основы анализа"]),
+    ('Фундаментальный труд\n«История метода». Он сказал: «Привет».', ["История метода"]),
+    ('Это был огромный труд. Он сказал: «Привет».', []),
     ('У них начался роман. Он сказал: «Привет».', []),
     ('Обсуждаем роман Льва Толстого. Он сказал: «Привет».', []),
     ('Обсуждаем роман Льва Толстого и поведение героя.', []),
 ])
-def test_novel_cue_never_turns_following_dialogue_into_a_book(text, expected):
+def test_book_cue_never_turns_following_dialogue_into_a_book(text, expected):
     raw = text.encode("utf-8")
     revision = ["2026-10-05", "Synthetic", "text/plain"]
     snapshot = {"files": {"s": dict(zip(("modified_time", "title", "mime_type"), revision))},

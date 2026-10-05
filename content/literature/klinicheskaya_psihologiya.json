@@ -205,5 +205,49 @@
     "notes": "Преподаватель прямо рекомендует книгу психологам. Этап, порядок и категория значимости определены агентом; год текущего тиража издателя не подменяет неизвестное издание преподавателя.",
     "importance": "important",
     "importance_source": "agent"
+  },
+  {
+    "id": "lit_zeigarnik_pathopsychology",
+    "work_id": "lit_zeigarnik_pathopsychology",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Патопсихология",
+    "authors": [
+      "Зейгарник Б. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "approved",
+    "priority": null,
+    "importance": "important",
+    "importance_source": "teacher",
+    "topic_order": 60,
+    "global_order": 510060,
+    "estimated_minutes": null,
+    "tags": [
+      "pathopsychology"
+    ],
+    "why_read": "После общего знакомства с клинической психологией — для систематизации качественного анализа психической деятельности. Преподаватель выделяет этот учебник при введении в патопсихологию; место в последовательности чтения предложено агентом. Примеры и результаты отдельных заданий не заменяют комплексную оценку специалистом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_be63ccbdf1d7"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_be63ccbdf1d7",
+        "title": "Патопсихологические нарушения и синдромы",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Зейгарник Б. В. Патопсихология. Учебник, явно упомянутый преподавателем; конкретное издание не указано."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, издание и страницы учебника в лекции не названы."
+    ],
+    "notes": "Название и автор подтверждены библиотечной карточкой. Год внешней карточки не перенесён на неизвестный экземпляр курса; запись не удостоверяет полный текст книги или все клинические утверждения лекции."
   }
 ]
