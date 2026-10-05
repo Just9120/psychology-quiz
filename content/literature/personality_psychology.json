@@ -426,5 +426,46 @@
     "notes": "Порядок и значимость — рекомендации агента, не приоритет преподавателя.",
     "importance": "additional",
     "importance_source": "agent"
+  },
+  {
+    "id": "lit_course_mention_handbook_personality",
+    "work_id": "lit_course_mention_handbook_personality",
+    "topic_id": "personality_psychology",
+    "module": "module4",
+    "title": "Handbook on Personality (упоминание в курсе)",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 111,
+    "global_order": 410111,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книжное упоминание в практике сохранено для поиска. До установления редакторов и редакции этап и значимость не назначены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_06b57c568b62"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_06b57c568b62",
+        "title": "Практика №28",
+        "discipline_id": "personality_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Handbook on Personality — устное упоминание в курсе"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторы/редакторы и точное издание курса не установлены.",
+      "Год и номер издания названы неуверенно; карточка издателя другой редакции не доказывает используемую редакцию."
+    ],
+    "notes": "Подтверждено буквальное книжное упоминание. Не отождествлять автоматически с конкретным Handbook of Personality: Theory and Research; личные отметки других произведений не объединяются."
   }
 ]

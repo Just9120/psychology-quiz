@@ -272,9 +272,9 @@
     "literature:lit_piaget_psychology_intelligence": {
       "schema_version": 1,
       "item_sha256": "90c67bb19cd48119c646980a957a7167022d24352c09bd9c81048426ab39d3a2",
-      "review_sha256": "816def29412793d8a8adae39d524f43bb9d1cf36ac0341b4e2a433e4c9305b37",
+      "review_sha256": "b84060900b8072c6370553b5629ed53f4ecdcc4fda57840ae8663507c1f5aa02",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "HHFLk6XI6Dfrh5hRSgWErT3liFz2v0qL02VTfgDaL+sa5yLZq4/3QsZ3RhJJX1VuYXeznQ0PsbNajdjlRoSHBQ=="
+      "signature": "sLN5JPgVqZhasfrgtmss6IdW+pY7ojSZ+1+/uZJdUWVmYLN5n5RSkNBJonRpxCIHAL7dPG87+OuaZ1Vr8kCLBQ=="
     },
     "literature:lit_maslow_psychology_being": {
       "schema_version": 1,
@@ -786,6 +786,13 @@
       "review_sha256": "d63a0f5428aa8bfb7721426b5fc246409d08d1e895d9027a3a8e453a6e141711",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "CfPtqzV5yKjsl3df95LMdnhD/YIJH/nthn+ZcYaoYHzsv3V84x18hOoeIJypiWT8z16ZeYsXu6Rh6TOF13E0Cg=="
+    },
+    "literature:lit_course_mention_handbook_personality": {
+      "schema_version": 1,
+      "item_sha256": "7c55f3678771a307b7b65472e9d248b5e75390f1cbc7eb624899992fec61de0a",
+      "review_sha256": "340f6c77a2c2e46d791742f1c849136f69c2051bf2cd9a3974d868ce898f2fab",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "L77r7AZgHY++ECh7zLAe+FutaO5haDQ8gJvSEE/kBV8BCJSWmU9qWyBQ35gbvzCkNZUVHXrpDDsOeb8c9kTkCg=="
     }
   }
 }
