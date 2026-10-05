@@ -479,6 +479,10 @@ def private_conflict_reviews(processed: dict, lesson_ids_by_file: dict[str, set[
         held = record if state == "conflict" else record.get("conflict_hold") if state == "pending_review" else None
         if not isinstance(held, dict):
             continue
+        if "revision" in held and (not isinstance(held["revision"], list)
+                or len(held["revision"]) != 3
+                or any(not isinstance(value, str) or not value for value in held["revision"])):
+            raise InventoryError("invalid_conflict_evidence")
         issues = held.get("issues") or [held]
         if (not isinstance(issues, list) or any(
                 not isinstance(issue, dict) or not isinstance(issue.get("reason"), str)
@@ -486,7 +490,8 @@ def private_conflict_reviews(processed: dict, lesson_ids_by_file: dict[str, set[
             raise InventoryError("invalid_conflict_evidence")
         result.append({
             "file_id": file_id,
-            "held_revision": list(record["revision"]),
+            "source_revision": list(record["revision"]),
+            "held_revision": list(held["revision"]) if "revision" in held else None,
             "linked_lesson_ids": sorted(lesson_ids_by_file.get(file_id, set())),
             "issues": [{
                 "reason": issue.get("reason"),

@@ -1,4 +1,6 @@
 import copy
+import pytest
+from app.source_inventory import InventoryError
 
 from app.source_inventory import private_conflict_reviews
 
@@ -38,3 +40,25 @@ def test_legacy_conflict_without_locator_stays_explicitly_unknown():
                                                  'review_state': 'conflict', 'reason': 'Disagreement'}}, {})
     assert report[0]['issues'][0]['locator'] is None
     assert report[0]['lesson_context_source_ids'] == []
+
+
+def test_pending_capture_does_not_rebind_a_prior_hold_to_the_current_revision():
+    old = ["old", "Lecture", "text/plain"]
+    current = ["current", "Lecture", "text/plain"]
+    hold = {"revision": old, "reason": "Original disagreement", "locator": "page:2"}
+    processing = {"source": {"revision": current, "review_state": "pending_review", "conflict_hold": hold}}
+    before = copy.deepcopy(processing)
+    report = private_conflict_reviews(processing, {})
+    assert report[0]["source_revision"] == current
+    assert report[0]["held_revision"] == old
+    assert processing == before
+    del hold["revision"]
+    assert private_conflict_reviews(processing, {})[0]["held_revision"] is None
+
+
+@pytest.mark.parametrize("revision", [None, "old", [], ["old", "title"], ["old", "title", None]])
+def test_explicit_malformed_hold_revision_does_not_become_an_unknown_or_current_revision(revision):
+    record = {"revision": ["current", "Lecture", "text/plain"], "review_state": "pending_review",
+              "conflict_hold": {"reason": "Original objection", "revision": revision}}
+    with pytest.raises(InventoryError, match="invalid_conflict_evidence"):
+        private_conflict_reviews({"source": record}, {})
