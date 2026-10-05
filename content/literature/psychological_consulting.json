@@ -538,5 +538,49 @@
       "Издание и год экземпляра курса не указаны; сведения издателя не определяют редакцию учебной рекомендации."
     ],
     "notes": "Дополнительное изучение прямо рекомендовано в практике. Название и три автора сверены по издательской карточке; содержание книги, научная эффективность и весь материал занятия не одобрены этой библиографической проверкой. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_consult_practice17_kochiunas",
+    "work_id": "lit_f207603bd416c4be",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Основы психологического консультирования",
+    "authors": [
+      "Кочюнас Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 141,
+    "global_order": 310141,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения расширить знакомство с профессиональным консультированием по учебному пособию Кочюнаса.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_e397986f81e37d22"
+    ],
+    "source": {
+      "citation": "Кочюнас, Р. Основы психологического консультирования"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_3d6b038c413a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_3d6b038c413a",
+        "title": "Практика №17. Первая встреча",
+        "discipline_id": "psychological_consulting"
+      }
+    ]
   }
 ]

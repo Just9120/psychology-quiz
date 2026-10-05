@@ -856,6 +856,27 @@
       "review_sha256": "07c50b1917189b6082233bafbad27463ab21f6dbcafdb9e1661194f3de1d6d4d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "s+9UIfWYeAUYstgdCQOf5cI9eBtmBkoI+r5NmpL1nxIrHs3Rbt8oeNLcwkwfneNO+grx6rYa/gbX8xObGJjqCg=="
+    },
+    "literature:lit_consult_practice17_kochiunas": {
+      "schema_version": 1,
+      "item_sha256": "fe17fa02216bae2beb5906d0e9db4bf05bbbae66d8efc5af83bf50487ab6dc38",
+      "review_sha256": "3397ef929cd43b1bc7e79795e99226af98e3b483e1de8ca4098dafb917af3072",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "q+KkVQvhQZkb2Y7y8Jp46sYf9m9kL+TkvOCRW4zq6XYKjTw2wSHKCQxD3iaBa6QX2/wQusMx0z5PlsxTrrIBDQ=="
+    },
+    "literature:lit_qualitative_practice10_luria_memory": {
+      "schema_version": 1,
+      "item_sha256": "bbc305f044257af044b76a8f98d0ff078424d3b82351055c64e703ea691fc17f",
+      "review_sha256": "0d433d88f71574377df1e46cb431d2667af7610425023d77bead7ad9885729bb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "drlOOF69pTsFMB7GdSS99GoAHI6eZ9sizpGKzFOt08UzcRAqw+Skb2HUivAv6GUSua2wQnG8+htFlp3TDou7AQ=="
+    },
+    "literature:lit_qualitative_practice10_luria_recovery": {
+      "schema_version": 1,
+      "item_sha256": "f380a73048ef7a66c51a3b9fff28ab2ebfd0bd2de137c545bf3a6903547049aa",
+      "review_sha256": "b05d8369da5353b38daa136baa235d1a0163e750326a086a59dedddb66075231",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kKwilFQy5s2Ze4boUpqHJRFINWw7AH6zEYOQGHE7+Zb2H0oeyDimSGeRp4dOsMOIxuFe26MG1Kv9zt6Rh7jLAQ=="
     }
   }
 }
