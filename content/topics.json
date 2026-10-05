@@ -77,7 +77,8 @@
     "order": 210,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Existing approved question topic; glossary contour is available from static source-backed content/glossary JSON."
   },
@@ -153,7 +154,8 @@
     "status": "active",
     "order": 510,
     "available_contours": [
-      "questions"
+      "questions",
+      "literature"
     ],
     "source_notes": "Авторский учебный вопрос по проверенному материалу."
   },
@@ -204,5 +206,57 @@
       "literature"
     ],
     "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+  },
+  {
+    "id": "psychodiagnostics",
+    "title": "Психодиагностика",
+    "module": "module2",
+    "modules": [
+      "module2",
+      "module3"
+    ],
+    "question_file": null,
+    "status": "active",
+    "order": 250,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Shared course discipline in modules 2 and 3; bibliographic metadata only, no quiz publication implied."
+  },
+  {
+    "id": "turning_point",
+    "title": "Точка поворота. 5 шагов",
+    "module": "other",
+    "question_file": null,
+    "status": "active",
+    "order": 900,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Additional course in the Drive section Other; no numbered module or quiz publication is implied."
+  },
+  {
+    "id": "personal_brand",
+    "title": "Личный бренд и самопрезентация",
+    "module": "other",
+    "question_file": null,
+    "status": "active",
+    "order": 910,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Существующий курс раздела «Другое»: литература без нумерованного модуля."
+  },
+  {
+    "id": "quantitative_methods",
+    "title": "Количественные методы исследования",
+    "module": "module2",
+    "question_file": null,
+    "status": "active",
+    "order": 230,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Литературная связь существующего занятия курса; вопросы и глоссарий не подразумеваются."
   }
 ]

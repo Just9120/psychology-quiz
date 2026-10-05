@@ -219,13 +219,14 @@ export interface ErrorsPage {
 }
 export type ReadingStatus = 'not_started' | 'in_progress' | 'read' | 'deferred'
 export type ReadingState = { literature_id: string; work_id?: string; reading_status: ReadingStatus; progress_percent: number | null; updated_at: string }
-export type LiteratureAccessLink = { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; checked_at: string }
+export type LiteratureAccessLink = { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }
 export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
   importance: 'basic' | 'important' | 'additional' | 'advanced' | null;
   importance_source: 'teacher' | 'agent' | null;
   source: { citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
+  curriculum_topics?: { id: string; title: string }[];
 }
-export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }
-export type LiteratureCatalog = { ok: true; works: LiteratureWork[]; topics: { topic_id: string; title: string; module: string }[] }
+export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; book_search?: { query: string; url: string }; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }
+export type LiteratureCatalog = { ok: true; works: LiteratureWork[]; topics: { topic_id: string; title: string; module: string; modules?: string[] }[] }

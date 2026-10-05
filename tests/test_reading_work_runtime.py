@@ -8,7 +8,7 @@ from tests.test_reading_work_migration import make_connection, legacy, add, ITEM
 @pytest.fixture
 def runtime(monkeypatch):
     items = [{**item, "topic_id": item['id'], "title": "Book", "authors": [],
-              "type": "book", "access_links": [], "module": "module1"} for item in ITEMS]
+              "type": "book", "access_links": [], "book_search": {"query": "Book", "url": "https://www.google.com/search?q=Book"}, "module": "module1"} for item in ITEMS]
     monkeypatch.setattr(literature_service, 'load_literature_items', lambda: items)
     monkeypatch.setattr(literature_service, 'load_topic_registry', lambda: {
         item['id']: {'title': item['id'], 'module': 'module1', 'order': n} for n,item in enumerate(items)})

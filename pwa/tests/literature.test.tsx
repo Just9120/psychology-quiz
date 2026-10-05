@@ -8,6 +8,48 @@ import type { LiteratureCatalog } from '../src/types'
 
 const catalog: LiteratureCatalog = { ok: true, topics: [{ topic_id: 'one', title: 'Первая тема', module: 'module1' }], works: [{ work_id: 'book', title: 'Учебная книга', authors: [], type: 'book', access_links: [], entries: [{ id: 'book', topic_id: 'one', topic_title: 'Первая тема', module: 'module1', year: null, importance: null, importance_source: null, source: { citation: 'Исходная запись' }, metadata_warnings: ['Год неизвестен'], user_state: null }] }] }
 
+it.each(['pwa', 'miniapp'])('keeps additional-course books in the Other section in %s', async client => {
+  const topics = [...catalog.topics, { topic_id: 'extra', title: 'Дополнительный курс', module: 'other' }]
+  const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }
+  const second = { ...first, id: 'extra-book', topic_id: 'extra', topic_title: 'Дополнительный курс', module: 'other', title: 'Дополнительная книга' }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [catalog.works[0], { ...catalog.works[0], work_id: 'extra-book', title: second.title, entries: [second] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
+  await userEvent.setup().selectOptions(screen.getByLabelText('Модуль литературы'), 'other')
+  expect(screen.getByRole('option', { name: 'Другое' })).toBeVisible()
+  expect(screen.getByRole('option', { name: 'Дополнительный курс' })).toBeVisible()
+  expect(screen.getByRole('button', { name: 'Дополнительная книга' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
+})
+
+it.each(['pwa', 'miniapp'])('finds cross-module disciplines and keeps exact book membership in %s', async client => {
+  const topics = [{ ...catalog.topics[0], modules: ['module1', 'module3'] }]
+  const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }
+  const second = { ...first, id: 'second', module: 'module3', title: 'Книга другого модуля' }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [catalog.works[0], { ...catalog.works[0], work_id: 'second', title: second.title, entries: [second] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
+  await userEvent.setup().selectOptions(screen.getByLabelText('Модуль литературы'), 'module3')
+  expect(screen.getByRole('option', { name: 'Первая тема' })).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: 'Книга другого модуля' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
+})
+
+it.each(['pwa', 'miniapp'])('separates reviewed lesson books from general discipline reading in %s', async client => {
+  const entry = { ...catalog.works[0].entries[0], title: 'Учебная книга', curriculum_topics: [{ id: 'lesson', title: 'Память' }] }
+  const general = { ...entry, id: 'general', work_id: 'general', title: 'Общая книга', curriculum_topics: [] }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, works: [{ ...catalog.works[0], entries: [entry] }, { ...catalog.works[0], work_id: 'general', title: general.title, entries: [general] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[entry, general]} topics={catalog.topics} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  await user.selectOptions(screen.getByLabelText('Учебная тема'), 'lesson')
+  expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Общая книга' })).not.toBeInTheDocument()
+  expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
+  await user.selectOptions(screen.getByLabelText('Учебная тема'), 'general')
+  expect(screen.getByRole('button', { name: 'Общая книга' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
+  await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module1')
+  expect(screen.getByLabelText('Учебная тема')).toHaveValue('')
+})
+
 it.each(['pwa', 'miniapp'])('combines module/topic/status filters without borrowing another association in %s', async client => {
   const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }
   const second = { ...first, id: 'book-two', topic_id: 'two', topic_title: 'Вторая тема', module: 'module2',
@@ -21,9 +63,9 @@ it.each(['pwa', 'miniapp'])('combines module/topic/status filters without borrow
   expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
   await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'not_started')
   expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
-  await user.selectOptions(screen.getByLabelText(client === 'pwa' ? 'Тема литературы' : 'Тема'), 'one')
+  await user.selectOptions(screen.getByLabelText('Дисциплина литературы'), 'one')
   await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module2')
-  expect(screen.getByLabelText(client === 'pwa' ? 'Тема литературы' : 'Тема')).toHaveValue('')
+  expect(screen.getByLabelText('Дисциплина литературы')).toHaveValue('')
   await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'read')
   expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
 })
@@ -102,8 +144,9 @@ it.each(['pwa', 'miniapp'])('shows scoped work totals and current reading indepe
   await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), 'read')
   expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
   await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module1')
-  expect(screen.getByText('Прочитано 1 из 1')).toBeVisible()
-  expect(screen.queryByText(/У 1 работ отметки/)).not.toBeInTheDocument()
+  // A module filter must not conceal conflicting aliases of the same work.
+  expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
+  expect(screen.getByText(/У 1 работ отметки/)).toBeVisible()
   await user.selectOptions(screen.getByLabelText('Модуль литературы'), 'module2')
   await user.selectOptions(screen.getByLabelText('Фильтр статуса чтения'), '')
   const current = screen.getByRole('complementary', { name: 'Прогресс списка чтения' })

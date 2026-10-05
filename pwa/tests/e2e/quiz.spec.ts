@@ -59,7 +59,7 @@ test('reading catalog shares a work status across lists, lost save and reload', 
   await fresh(page)
   await navigate(page, 'Литература')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
-  await page.getByLabel('Тема литературы').selectOption('fiziologiya_cheloveka')
+  await page.getByLabel('Дисциплина литературы').selectOption('fiziologiya_cheloveka')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, 'fiziologiya_cheloveka')}`)).toBeVisible()
   await page.locator('.literature-title').first().click()
   const title = await page.locator('.literature-detail h2').innerText()
@@ -636,3 +636,39 @@ async function navigate(page: Page, name: string) {
   }
   await page.getByRole('button', { name, exact: true }).click()
 }
+
+
+test('reading next step persists start, continuation and completion in the current catalogue', async ({ page }) => {
+  await fresh(page)
+  await navigate(page, 'Литература')
+  const next = page.getByRole('region', { name: 'Следующий шаг чтения' })
+  const startButton = next.getByRole('button', { name: /^Начать «/ })
+  await expect(startButton).toBeVisible()
+  const firstAction = await startButton.innerText()
+  await startButton.click()
+  const title = await page.locator('.literature-detail h2').innerText()
+  expect(firstAction).toBe(`Начать «${title}»`)
+  await page.getByLabel('Статус чтения').selectOption('in_progress')
+  const saving = page.waitForResponse('**/web/literature/progress')
+  await page.getByRole('button', { name: 'Сохранить чтение' }).click()
+  expect((await saving).ok()).toBeTruthy()
+  await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
+  await page.reload()
+  await navigate(page, 'Литература')
+  await next.getByRole('button', { name: `Продолжить «${title}»`, exact: true }).click()
+  await expect(page.getByLabel('Статус чтения')).toHaveValue('in_progress')
+  await page.getByLabel('Статус чтения').selectOption('read')
+  await page.getByRole('button', { name: 'Сохранить чтение' }).click()
+  await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
+  await page.reload()
+  await navigate(page, 'Литература')
+  await expect(next.getByRole('button', { name: /^Начать «/ })).toBeVisible()
+  await expect(next).not.toContainText(title)
+  const catalog = await (await page.request.get('/web/literature/catalog')).json() as {
+    works: { title: string; entries: { user_state: { reading_status: string } | null }[] }[]
+  }
+  const work = catalog.works.find(entry => entry.title === title)!
+  expect(work.entries.length).toBeGreaterThan(0)
+  expect(work.entries.every(entry => entry.user_state?.reading_status === 'read')).toBe(true)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+})

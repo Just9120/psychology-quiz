@@ -8,7 +8,7 @@ from datetime import date
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlsplit
+from urllib.parse import urlencode, urlsplit
 from app.content_publication import load_policy
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,8 +33,15 @@ PUBLIC_ITEM_FIELDS = (
     "why_read",
     "learning_outcomes",
     "prerequisites",
+    "curriculum_topic_ids",
 )
 PUBLIC_SOURCE_FIELDS = ("citation",)
+ACCESS_MODE_LABELS = {"free": "Бесплатно", "subscription": "По подписке", "purchase": "Отдельная покупка"}
+
+
+def literature_access_label(offer: dict[str, Any]) -> str:
+    modes = offer.get("access_modes", [])
+    return " · ".join(ACCESS_MODE_LABELS[mode] for mode in modes) if modes else "Условия доступа не подтверждены"
 def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
     if (parsed is None or parsed.scheme != "https" or parsed.username or parsed.password
             or parsed.query or parsed.fragment):
@@ -48,20 +55,29 @@ def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
 
 
 @lru_cache(maxsize=1)
-def load_access_links() -> dict[str, list[dict[str, str]]]:
+def load_access_links() -> dict[str, list[dict[str, Any]]]:
     """Curated outbound offers; a link never means that the user owns a copy."""
     raw = _load_json_file(ACCESS_FILE)
     if not isinstance(raw, dict) or raw.get("schema_version") != 1 or not isinstance(raw.get("works"), dict):
         raise ValueError("Invalid literature access catalog")
-    links: dict[str, list[dict[str, str]]] = {}
+    links: dict[str, list[dict[str, Any]]] = {}
     for work_id, offers in raw["works"].items():
         if not isinstance(work_id, str) or not isinstance(offers, list):
             raise ValueError("Invalid literature access entry")
         seen: set[str] = set()
         links[work_id] = []
         for offer in offers:
-            if not isinstance(offer, dict) or set(offer) != {"format", "provider", "url", "access", "checked_at"}:
+            required = {"format", "provider", "url", "access", "checked_at"}
+            review_fields = {"access_modes", "access_review"}
+            if (not isinstance(offer, dict) or not required <= set(offer)
+                    or set(offer) - required not in (set(), review_fields)):
                 raise ValueError("Invalid literature access offer")
+            if "access_modes" in offer:
+                modes, review = offer["access_modes"], offer["access_review"]
+                if (not isinstance(modes, list) or any(not isinstance(mode, str) or mode not in ACCESS_MODE_LABELS for mode in modes)
+                        or len(set(modes)) != len(modes)
+                        or not isinstance(review, str) or not review.strip() or len(review) > 1000):
+                    raise ValueError("Invalid literature access review")
             fmt, url = offer["format"], offer["url"]
             parsed = urlsplit(url) if isinstance(url, str) else None
             checked = offer["checked_at"]
@@ -107,6 +123,51 @@ def _public_literature_item(entry: dict[str, Any]) -> dict[str, Any]:
     return item
 
 
+def literature_search(entry: dict[str, Any]) -> dict[str, str]:
+    """A public bibliographic query, not an offer or proof of availability."""
+    title = str(entry["title"]).strip()
+    authors = ", ".join(str(author).strip() for author in entry.get("authors", []) if str(author).strip())
+    query = " ".join(part for part in (f'"{title}"', authors, "скачать") if part)
+    return {"query": query, "url": "https://www.google.com/search?" + urlencode({"q": query})}
+
+
+def literature_curriculum_topics(entry: dict[str, Any]) -> list[dict[str, str]]:
+    """Expose only explicitly reviewed lesson IDs, never source metadata.
+
+    The optional field is part of the publication fingerprint. A discipline
+    reading list without a lesson binding stays discipline-wide.
+    """
+    ids = entry.get("curriculum_topic_ids", [])
+    if not isinstance(ids, list) or any(not isinstance(value, str) for value in ids) or len(set(ids)) != len(ids):
+        raise ValueError("Invalid literature curriculum topics")
+    if not ids:
+        return []
+    from app.curriculum import load_catalog
+    topics = load_catalog()["topics"]
+    private_labels = entry.get("reviewed_curriculum_topics", [])
+    if (not isinstance(private_labels, list)
+            or any(not isinstance(value, dict) or set(value) != {"id", "title", "discipline_id"}
+                   or not isinstance(value["id"], str) or re.fullmatch(r"t_[0-9a-f]{12}", value["id"]) is None
+                   or not isinstance(value["title"], str) or not value["title"].strip()
+                   or value["discipline_id"] != entry.get("topic_id") for value in private_labels)
+            or len({value["id"] for value in private_labels}) != len(private_labels)
+            or any(value["id"] not in ids for value in private_labels)):
+        raise ValueError("Invalid private literature lesson labels")
+    if private_labels and ("source_refs" in entry or "source_ref" in entry
+                           or not load_policy().can_publish("literature", entry)):
+        raise ValueError("Signed private literature lesson labels required")
+    labels = {value["id"]: value for value in private_labels}
+    result = []
+    for value in ids:
+        topic = topics.get(value) or labels.get(value)
+        if topic is None or topic["discipline_id"] != entry.get("topic_id"):
+            raise ValueError("Literature curriculum discipline mismatch")
+        if value in topics and value in labels and topic["title"] != labels[value]["title"]:
+            raise ValueError("Literature curriculum title mismatch")
+        result.append({"id": value, "title": topic["title"]})
+    return result
+
+
 @lru_cache(maxsize=4)
 def _published_literature_items(directory: Path) -> tuple[dict[str, Any], ...]:
     """Content is immutable within one deployed process; a new deploy restarts it."""
@@ -123,7 +184,9 @@ def _published_literature_items(directory: Path) -> tuple[dict[str, Any], ...]:
             if not publication.can_publish("literature", entry):
                 continue
             item = _public_literature_item(entry)
+            item["curriculum_topics"] = literature_curriculum_topics(entry)
             item["access_links"] = access_links.get(item["work_id"], [])
+            item["book_search"] = literature_search(item)
             items.append(item)
     return tuple(sorted(items, key=lambda item: (int(item.get("global_order") or 0), str(item.get("id") or ""))))
 
@@ -160,6 +223,7 @@ def list_literature_topic_payloads(user_states: dict[str, dict[str, Any]] | None
             "topic_id": topic_id,
             "title": str(topic.get("title") or topic_id),
             "module": str(topic.get("module") or ""),
+            "modules": topic.get("modules", [topic["module"]] if topic.get("module") else []),
             "item_count": len(topic_items),
             "status_counts": dict(sorted(Counter(str(item.get("status")) for item in topic_items).items())),
         }

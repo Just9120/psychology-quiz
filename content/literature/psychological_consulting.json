@@ -376,13 +376,7 @@
     "prerequisites": [
       "lit_f207603bd416c4be"
     ],
-    "source_refs": [
-      "drive:1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0"
-    ],
     "source": {
-      "id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-      "title": "Урок 1. Введение в психологическое консультирование",
-      "locator": "extracted text, Unicode characters 56714:56974",
       "citation": "Карл Роджерс опубликовал книгу «Становление личности»."
     },
     "content_access": "not_verified",
@@ -391,7 +385,10 @@
     ],
     "notes": "Проверено только упоминание книги в текущем тексте урока; это не подтверждение её содержания.",
     "importance": "additional",
-    "importance_source": "agent"
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_09efb9aedb46"
+    ]
   },
   {
     "id": "lit_consult_lecture_02",
@@ -416,13 +413,7 @@
     "prerequisites": [
       "lit_f207603bd416c4be"
     ],
-    "source_refs": [
-      "drive:1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0"
-    ],
     "source": {
-      "id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-      "title": "Урок 1. Введение в психологическое консультирование",
-      "locator": "extracted text, Unicode characters 68091:68351",
       "citation": "У Ялома рекомендую «Дар психотерапии»."
     },
     "content_access": "not_verified",
@@ -431,6 +422,359 @@
     ],
     "notes": "Проверено только упоминание книги в текущем тексте урока; это не подтверждение её содержания.",
     "importance": "additional",
-    "importance_source": "agent"
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_09efb9aedb46"
+    ]
+  },
+  {
+    "id": "lit_sommers_flanagan_clinical_interviewing",
+    "work_id": "lit_sommers_flanagan_clinical_interviewing",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Клиническое интервьюирование",
+    "authors": [
+      "Соммерс-Фланаган Дж.",
+      "Соммерс-Фланаган Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 120,
+    "global_order": 310120,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение после занятия о работе с запросом и выборе метода: структура клинической беседы и сбор информации для концептуализации. Книга прямо названа преподавателем; порядок и значимость предложены агентом. Чтение не заменяет практическое обучение и супервизию.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_34b2eed9d99a"
+    ],
+    "source": {
+      "citation": "Соммерс-Фланаган Дж., Соммерс-Фланаган Р.. Клиническое интервьюирование"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Авторство и название сверены по фрагменту занятия и издательской записи. Содержание книги не использовалось для формирования вопросов."
+  },
+  {
+    "id": "lit_masterstvo_psychological_counseling",
+    "work_id": "lit_masterstvo_psychological_counseling",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Мастерство психологического консультирования",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "teacher",
+    "topic_order": 130,
+    "global_order": 310130,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение по рекомендации преподавателя практики «Первая встреча» для углубления основ психологического консультирования. Прикладной этап предложен агентом; конкретное издание и авторский состав в занятии не названы.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_3d6b038c413a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_3d6b038c413a",
+        "title": "Практика №17. Первая встреча",
+        "discipline_id": "psychological_consulting"
+      }
+    ],
+    "source": {
+      "citation": "Мастерство психологического консультирования"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторский состав и конкретная редакция в материале курса не указаны. Библиотечная запись указывает научных редакторов А. А. Бадхена и А. М. Родину; они не записаны как авторы."
+    ],
+    "notes": "Название и рекомендация дополнительного чтения подтверждены фрагментом практики. Библиотечная карточка указывает научных редакторов, но авторский состав и используемая редакция в курсе не установлены. Обязательные книги-предпосылки не названы."
+  },
+  {
+    "id": "lit_ratner_george_iveson_solution_focused",
+    "work_id": "lit_ratner_george_iveson_solution_focused",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Краткосрочная терапия, ориентированная на решение: 100 ключевых особенностей и техник",
+    "authors": [
+      "Ратнер Х.",
+      "Джордж Э.",
+      "Айвсон К."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "teacher",
+    "topic_order": 140,
+    "global_order": 310140,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение к практике по согласованию целей и контракта: познакомиться с беседой о предпочитаемых изменениях и оценкой прогресса. Прикладной этап предложен агентом после вводной подготовки по консультированию; книга не заменяет профессиональную подготовку или супервизию.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Ратнер Х., Джордж Э., Айвсон К. Краткосрочная терапия, ориентированная на решение: 100 ключевых особенностей и техник"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Издание и год экземпляра курса не указаны; сведения издателя не определяют редакцию учебной рекомендации."
+    ],
+    "notes": "Дополнительное изучение прямо рекомендовано в практике. Название и три автора сверены по издательской карточке; содержание книги, научная эффективность и весь материал занятия не одобрены этой библиографической проверкой. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_consult_practice17_kochiunas",
+    "work_id": "lit_f207603bd416c4be",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Основы психологического консультирования",
+    "authors": [
+      "Кочюнас Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 141,
+    "global_order": 310141,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения расширить знакомство с профессиональным консультированием по учебному пособию Кочюнаса.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_e397986f81e37d22"
+    ],
+    "source": {
+      "citation": "Кочюнас, Р. Основы психологического консультирования"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год издания не установлен по исходному списку."
+    ],
+    "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
+    "importance": "important",
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_3d6b038c413a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_3d6b038c413a",
+        "title": "Практика №17. Первая встреча",
+        "discipline_id": "psychological_consulting"
+      }
+    ]
+  },
+  {
+    "id": "lit_consult_practice18_graham_resilience",
+    "work_id": "lit_graham_resilience",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Жизнестойкость. Выжить после разочарований и катастроф",
+    "authors": [
+      "Грэм Л."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 142,
+    "global_order": 310142,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение к обсуждению тревоги и целеполагания. Книга названа участником занятия; значимость и прикладной этап предложены агентом. Упоминание упражнений не подтверждает их универсальную эффективность.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_cb4906154e12"
+    ],
+    "source": {
+      "citation": "Грэм Л.. Жизнестойкость. Выжить после разочарований и катастроф"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, перевод и год используемой в курсе книги не установлены."
+    ],
+    "notes": "Проверены точное библиографическое упоминание курса и первичная каталожная запись автора/названия. Содержание книги не прочитано и не использовалось для формирования вопросов; порядок предложен агентом, обязательные предпосылки не установлены.",
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_cb4906154e12",
+        "title": "Практика №18. Целеполагание и контракт",
+        "discipline_id": "psychological_consulting"
+      }
+    ]
+  },
+  {
+    "id": "lit_consult4_rogers_new_approaches",
+    "work_id": "lit_consult4_rogers_new_approaches",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Новейшие подходы к психологической практике",
+    "authors": [
+      "Роджерс Карл"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 101,
+    "global_order": 310101,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Исходное книжное упоминание курса. До уточнения точного произведения автоматическая рекомендация не назначается.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Карл Роджерс: Новейшие подходы к психологической практике. Рекомендация к навыкам первичной консультации."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание в учебном материале не названы; содержание и доступность книги не проверены.",
+      "Название отличается от библиографической записи «Консультирование и психотерапия: новейшие подходы в области практической работы»; точная идентичность требует уточнения."
+    ],
+    "notes": "Проверено книжное упоминание; спорные утверждения лекции не одобрены.",
+    "importance": null,
+    "importance_source": null,
+    "curriculum_topic_ids": [
+      "t_84bd9f531980"
+    ]
+  },
+  {
+    "id": "lit_consult4_rogers_client_centered",
+    "work_id": "lit_consult4_rogers_client_centered",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Клиент-центрированная психотерапия",
+    "authors": [
+      "Роджерс Карл"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 102,
+    "global_order": 310102,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После вводного пособия углубить знакомство с клиент-центрированным подходом: преподаватель рекомендует книгу к навыкам консультирования. Этап предложен агентом; обязательный порядок не задан.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_f207603bd416c4be"
+    ],
+    "source": {
+      "citation": "Карл Роджерс: Клиент-центрированная психотерапия. Рекомендация к навыкам первичной консультации."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание в учебном материале не названы; содержание и доступность книги не проверены."
+    ],
+    "notes": "Проверено книжное упоминание; спорные утверждения лекции не одобрены.",
+    "importance": "additional",
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_84bd9f531980"
+    ]
+  },
+  {
+    "id": "lit_consult4_rogers_becoming_person",
+    "work_id": "lit_consult_lecture_01",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Становление личности",
+    "authors": [
+      "Роджерс Карл"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 103,
+    "global_order": 310103,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга Роджерса рекомендована также к навыкам первичной консультации. После вводного пособия вернуться к авторскому взгляду на психотерапию; этап предложен агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_f207603bd416c4be"
+    ],
+    "source": {
+      "citation": "Карл Роджерс: Становление личности. Рекомендация к навыкам первичной консультации."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание в учебном материале не названы; содержание и доступность книги не проверены."
+    ],
+    "notes": "Проверено книжное упоминание; спорные утверждения лекции не одобрены.",
+    "importance": "additional",
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_84bd9f531980"
+    ]
+  },
+  {
+    "id": "lit_course_mention_practice19_consulting_theory_practice",
+    "work_id": "lit_course_mention_practice19_consulting_theory_practice",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Психологическое консультирование: теория и практика",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "teacher",
+    "topic_order": 143,
+    "global_order": 912055,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "В практикуме пособие рекомендовано для дополнительного изучения психологического консультирования. Автор и издание не названы; порядок чтения пока не определён.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_f638492f04ed"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_f638492f04ed",
+        "title": "Практика №19. Концептуализация случая",
+        "discipline_id": "psychological_consulting"
+      }
+    ],
+    "source": {
+      "citation": "Психологическое консультирование: теория и практика. Упоминание пособия без указания автора и издания."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Автор и издание в рекомендации не указаны. Одного названия недостаточно для точного сопоставления книги.",
+      "Не объединено с одноимёнными произведениями; их личные отметки сохраняются отдельно.",
+      "Дополнительная литература — приоритет из практикума; этап чтения не определён."
+    ],
+    "notes": "Самостоятельная запись неуточнённого упоминания. Точное произведение и его содержание не подтверждены."
   }
 ]

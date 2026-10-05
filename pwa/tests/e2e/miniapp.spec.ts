@@ -1,3 +1,4 @@
+import { createHmac } from 'node:crypto'
 import { expect, test } from '@playwright/test'
 
 const site = 'http://127.0.0.1:4174/'
@@ -212,4 +213,61 @@ test('built Mini App opens book offers externally without passing Telegram proof
     await page.context().unroute(offer.url)
   }
   await expect(page.getByRole('combobox', { name: 'Статус', exact: true })).toHaveValue('not_started')
+})
+
+
+test('Mini App reading next step persists against the real local backend', async ({ page, request }) => {
+  const backend = 'http://127.0.0.1:8085'
+  expect((await request.post(backend + '/__test/reset', { data: { seed: true } })).ok()).toBe(true)
+  const proof = new URLSearchParams({ auth_date: String(Math.floor(Date.now() / 1000)),
+    user: JSON.stringify({ id: 4242, first_name: 'Synthetic learner' }) })
+  const secret = createHmac('sha256', 'WebAppData').update('123:synthetic-e2e').digest()
+  const check = [...proof.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([key, value]) => `${key}=${value}`).join('\n')
+  proof.set('hash', createHmac('sha256', secret).update(check).digest('hex'))
+  const initData = proof.toString()
+  await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
+  await page.addInitScript(value => {
+    (window as typeof window & { Telegram: unknown }).Telegram = {
+      WebApp: { initData: value, ready() {}, expand() {} },
+    }
+  }, initData)
+  await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
+    if (route.request().method() === 'OPTIONS') {
+      await route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': site.slice(0, -1),
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type' } })
+      return
+    }
+    const url = new URL(route.request().url())
+    const response = await route.fetch({ url: backend + url.pathname + url.search })
+    await route.fulfill({ response, headers: { ...response.headers(), 'Access-Control-Allow-Origin': site.slice(0, -1) } })
+  })
+  async function openReading() {
+    await page.goto(site)
+    await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
+    await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  }
+  await openReading()
+  const next = page.getByRole('region', { name: 'Следующий шаг чтения' })
+  await next.getByRole('button', { name: /^Начать «/ }).click()
+  const title = await page.locator('.literature-detail h2').innerText()
+  await page.getByRole('combobox', { name: 'Статус', exact: true }).selectOption('in_progress')
+  await page.getByRole('button', { name: 'Сохранить чтение' }).click()
+  await expect(page.getByText('Отметка сохранена.')).toBeVisible()
+  await openReading()
+  await next.getByRole('button', { name: `Продолжить «${title}»`, exact: true }).click()
+  await expect(page.getByRole('combobox', { name: 'Статус', exact: true })).toHaveValue('in_progress')
+  await page.getByRole('combobox', { name: 'Статус', exact: true }).selectOption('read')
+  await page.getByRole('button', { name: 'Сохранить чтение' }).click()
+  await expect(page.getByText('Отметка сохранена.')).toBeVisible()
+  await openReading()
+  await expect(next.getByRole('button', { name: /^Начать «/ })).toBeVisible()
+  await expect(next).not.toContainText(title)
+  const response = await request.get(backend + '/miniapp/literature/items', { headers: { Authorization: `tma ${initData}` } })
+  expect(response.ok()).toBe(true)
+  const result = await response.json() as { literature_items: { title: string; work_id: string; user_state: { reading_status: string } | null }[] }
+  const selected = result.literature_items.find(entry => entry.title === title)!
+  const aliases = result.literature_items.filter(entry => entry.work_id === selected.work_id)
+  expect(aliases.length).toBeGreaterThan(0)
+  expect(aliases.every(entry => entry.user_state?.reading_status === 'read')).toBe(true)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 })

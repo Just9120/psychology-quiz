@@ -142,6 +142,1252 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "rI/zq+B2i05SkyduRwKqQabIhgAwNS//D8tDkMVQSW3E9BOqkmB4Nss58P9Tbp63GzzEtkHS4onzs/BG2tPrBw==",
       "topic_id": "t_f2b92ac4b2ef"
+    },
+    "literature:lit_consult_lecture_01": {
+      "schema_version": 1,
+      "item_sha256": "f1ce9faef6834cb0f72d06ec28d486e62662e1bdea0888f44ddf506ff7b3fd15",
+      "review_sha256": "9abb2e99331d677bf6381d9fcaf630789e3b813966cb26b3a75aa4b170988bfa",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "hBsov8cARz0ZwqPKtCN1JcmRKFnEk8lGFe8P5ORHBZgPeIgWmYV0DdsHy+800uPsH5RSm8mXoYhXBRWnGoK9AQ=="
+    },
+    "literature:lit_consult_lecture_02": {
+      "schema_version": 1,
+      "item_sha256": "51e856c9ad7e35b2604787edad5ad341b6da8ed9839ab1f08d28581fcd4ad6dc",
+      "review_sha256": "37edf2154e04fe5ddc78a6b2a1faadbe4cbe823650d8db043e6f906d886841d1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "HVq5pY2E6SUe422+hxcOyPqT66Xglp6o0jo+3Gyc6W59Gi/pFgrB4DEVBPvcc4GuPo+Q48ZVszywFl3BWzLSDA=="
+    },
+    "literature:lit_kuhn_structure_scientific_revolutions": {
+      "schema_version": 1,
+      "item_sha256": "816439402af7e67ba6840f30728105af39a66656f70fa86edb83fcb3c45adaf2",
+      "review_sha256": "742bb38f94b1c38da371c77f86abbecc2bd68e41730f5ee9c48d22da7d5acde2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9ZmPDR/zwl0jR74JidR+j6mOLCpoLqrYeUF9gHfiPTLplNI+3u1PwzmmIF3LA/fx6IZ3oYASNGwBLrGoh7zNAw=="
+    },
+    "literature:lit_sommers_flanagan_clinical_interviewing": {
+      "schema_version": 1,
+      "item_sha256": "154cb8c20bbfc43a29a1b0285bc048dc5378d614cb87eee6699b8def95ea7ef9",
+      "review_sha256": "052242e45a35b0d017027d4708cfb28748a5b017f5a356800a3cf9dd4cbbc479",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "S0rWG5mrGzVTqsd11oc9B6se3y4RE9+84xGzXFt3XEE+JE1f2nG4gTctOjKNpX3p0pUDo10o8ZL4DAnoU/l9Aw=="
+    },
+    "literature:lit_anna_freud_ego_defence": {
+      "schema_version": 1,
+      "item_sha256": "cec01136ad4c5578a0de88c40ac97a797bbc4286470abedd6e3f7360e55fabb8",
+      "review_sha256": "13c7d0b09c70dc5db71ffbe1049df392e1af7765c1a36d20c3b696f3235373fe",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "m4aiPyw2VvZZtOgJGToubTwOLd8+LTqn16jhOKB/pFm6ZzAzuBhK4y3GInoyBTSbPUudXbRvCCcLalN2bRlGCQ=="
+    },
+    "literature:lit_kagan_meanings_psychotherapy": {
+      "schema_version": 1,
+      "item_sha256": "49516517b532bcbd32faaf3dfc02ebee452432450cfa7ea8aefcb4e6351853db",
+      "review_sha256": "0f6aa62c11009241c1c8c7284410ee091df96c509e5875e7d3a17a5e3b861251",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "i5yvkATaVLwPH/CWRldbLmPWKiERrmopEFBiG/zrhXlbEjEXqmWcy7e8q8ySkc1d9696jek0tt3WA6WgbUj0Ag=="
+    },
+    "literature:lit_dollard_frustration_aggression": {
+      "schema_version": 1,
+      "item_sha256": "90074a050e729f11b59a29a7771f391d99b37769371430cf0200c95afc2d71f7",
+      "review_sha256": "3b8143836d9e9a0c4d3796bce6711cbe6a8b3a87817b217559e271f4856ae3ff",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "lkAr5nFh5GQCzA2/M8saoisLzkjdB4lVPdjNgsAF0VWAG79aI8VxyQWuBZQMchp1Oi+ItyNm70+vFYdFHTmqCQ=="
+    },
+    "literature:lit_betensky_what_do_you_see": {
+      "schema_version": 1,
+      "item_sha256": "773a6fdd011df19198bbbb63c1faf788a65a53b5d7ce27f1ed3a9bbcfacd36fa",
+      "review_sha256": "1649607dc4276ee8481ca45b9a9ceb9d39ac1ef2f306cdaef08a3cec6be46fe8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "oB3EEf19FWnWS2A0DGpjESXBvP4qn6N90t+3l2659hxU63Abkxh4T70z976N/g15OoxsoyX+GBmF7rpVpyQrCQ=="
+    },
+    "literature:lit_chomsky_syntactic_structures": {
+      "schema_version": 1,
+      "item_sha256": "24fa5b55f05ead09ff20354c6747e263aa44ffb0b4a36a77f74d7c175e625cf1",
+      "review_sha256": "65b0a6e12e4d6fd916c54e9c12efccc8a289f1c696cb78c84fd5ffaf415c090a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JZGt6JGIJxMeIZXyPtlzucNZFNK31kTFMqp4b86PrkLkRopGmd8T1cqcYUqBApXcrNLPrCVb/ngmn9wMMssmAA=="
+    },
+    "literature:lit_hsieh_delivering_happiness": {
+      "schema_version": 1,
+      "item_sha256": "0706fafb617795daa09e7f4e47cf55b95ce05be1d854dad53a6158e0f668a311",
+      "review_sha256": "b4f0df77ee10b45c34de00cb723e32db38bf45bbe7d7e27dcacdde1970ade18e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "LxFihYnSBciyCsYUmNRVx0m3MNYhOXWPFXGo8d26mgqJeDcVWqTpKClUn/Bb7PIY6+dPZEK9IEckDhrciLdUAg=="
+    },
+    "literature:lit_taylor_principles_scientific_management": {
+      "schema_version": 1,
+      "item_sha256": "d557df43b79428910184601c6594e5d53e3e1a45bc650cb4b7438d772aeba7ee",
+      "review_sha256": "4ab2a9c29cba3a8211059436e6c672b5114d76d44c452222282f77a0b2170e5e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "nBal/1Y4pijLXlJ8p5REdbY5Am4BGejHira912AVv7MykG4T9EXirNTslilm9d3soadVDB6LEmyeCULwpxUPCg=="
+    },
+    "literature:lit_frankl_man_search_meaning": {
+      "schema_version": 1,
+      "item_sha256": "73c350b708d64697661efc9e51487c49c1f797dfb5f6245593e80cd35ec15594",
+      "review_sha256": "32334f07556dcc45142cef3da84344d9a7e3cb3429a26528aca5f14bc5e907a4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "m+XWKDuSEYUEtIKhS/+TIIwKfOkVGZ9ZC9YvBCUXS2FMXullYxLma7K+rrj+IrQ/wKai7Op2LrltDEHELyBSAA=="
+    },
+    "literature:lit_huizinga_homo_ludens": {
+      "schema_version": 1,
+      "item_sha256": "f0f56bc96925fa0f13eb51cf14b7cb474e5483c6fbd9e3d335069171e378a48c",
+      "review_sha256": "791b4128193242605ecb1636cbe80ad65df77530298e34c6193c7bc5ad905b4d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "BAsCDeNcfT/aCBM4gm2Gzsrfow3vkdYsir5wfim/JAZy6FJ2udDg56H4oUM3dj6214IONXHU0jwQG0ZU8qsFCA=="
+    },
+    "literature:lit_selye_stress_without_distress": {
+      "schema_version": 1,
+      "item_sha256": "6f4d175a56e5cd6d72a4e47a65344e370aebd5b39783fde2198668da6f7705f3",
+      "review_sha256": "495cdba3a680e53a49020429ff62b2bec865444a1cb7e0ba46f6467e82d5ab59",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "75D7wW3VfRURn94DgKqX6vmD9KuPWWmGbQg9+yzSprw0bPobs2W0insD1zuMUOIGQ5KdXbMMelNKTYKW1LZJCg=="
+    },
+    "literature:lit_freud_psychopathology_everyday_life": {
+      "schema_version": 1,
+      "item_sha256": "1d3b749508875fc5212d22dc819f02d7709154c75f80235aa59307bf179f844b",
+      "review_sha256": "cd954e95223e516b9d6c635ba5a0b9381f7f9f11ac21d6886b0ee9a3cd411047",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "HTn4NS6RhNt7qvn6f4Ye9xpW6vxbJ+27CY/vW2U11WbhOlOGK3UJwWxiHtDoe4uLUIgDgAMTrY7ZPIUz+fI9Bw=="
+    },
+    "literature:lit_vasilyuk_psychology_experiencing": {
+      "schema_version": 1,
+      "item_sha256": "69b39d70f1735d47ef073271d69814735936c46960d1d42b7694ec78ff6e71d0",
+      "review_sha256": "d56615825518a5a0eefc1a0beb8072a5613e07ed2d2675271cd963009faeede4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7aB9MH8icx6bZk1uO+g6xmZCE8e68+OFVd2o/Uj3tWX4ZrJnN5d+d7pxGguW+xn6d6H5K83oPw/Zhiip6rTLCg=="
+    },
+    "literature:lit_schutzenberger_ancestor_syndrome": {
+      "schema_version": 1,
+      "item_sha256": "a7fee40f99fb87a84fd83c5f065b2185c5f356786b9cf52f79e37007d8b9a424",
+      "review_sha256": "cbd900f6119e8541b4dab38772247aae00fad1d4be7189f671a8f60bd92d3b96",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "VfA9EnBDXP6uohTassFe/04ORLQlczyjEY2Gnzfv46EOh5ci9vDPg+QvTDwVsWlDuiVarWgk7nTeg0A9k6eiBA=="
+    },
+    "literature:lit_makarov_selected_psychotherapy_lectures": {
+      "schema_version": 1,
+      "item_sha256": "bc0bb20395b01dc2a071948dc18ea40b282b7ffd80da2fc3d51169639c0034f5",
+      "review_sha256": "08c6a753e817462a72ad067022dc1b3a74c0767f75155e100671ee92df78ac6e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "QagSsgSSutGFDwfwJ7pCi/QugBy8XQRJTrX6ar43cfvMbzRjJdNyfKbWR4p0Tmq6Z91DrNIsfRvBZghf1U1dCg=="
+    },
+    "literature:lit_piaget_psychology_intelligence": {
+      "schema_version": 1,
+      "item_sha256": "90c67bb19cd48119c646980a957a7167022d24352c09bd9c81048426ab39d3a2",
+      "review_sha256": "b84060900b8072c6370553b5629ed53f4ecdcc4fda57840ae8663507c1f5aa02",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "sLN5JPgVqZhasfrgtmss6IdW+pY7ojSZ+1+/uZJdUWVmYLN5n5RSkNBJonRpxCIHAL7dPG87+OuaZ1Vr8kCLBQ=="
+    },
+    "literature:lit_maslow_psychology_being": {
+      "schema_version": 1,
+      "item_sha256": "ed9890d57cb1ab4530c747dfda91cbe57a0f661417586bce6534d3bbd701f2d1",
+      "review_sha256": "2f44778823f9915a3daeeed63a84e0443adfac14a404e24c171285e644a5bd70",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "n4469t+IHEi4CTnxx3Y/nBaRGyaHfSANZUCsXWP2X/JWsDw3vQBYhAYfGN16rTuLMAzeAQfrIMtXkGNmVjGOBw=="
+    },
+    "literature:lit_lombroso_genius_insanity": {
+      "schema_version": 1,
+      "item_sha256": "0642274dce7265a2fb7186435f305f621df8cfec59bb951e83c164cfd1c6dfee",
+      "review_sha256": "dc336469d118250f8bf9756bf2f152569307ff0ffe4276f8d703a1fb92670712",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "wxqjuTFjvMhAnRQPIIJWkmwdrRpkx4u2diMnuac+c10JOiatwCafNsl2vkEitNxSNGtRzQ9rJoD6iCCVSFE4BA=="
+    },
+    "literature:lit_loehr_schwartz_full_engagement": {
+      "schema_version": 1,
+      "item_sha256": "63a821f139c522e66650819e10080cd3037a54364f2ea1dd4cf3f395b81ed382",
+      "review_sha256": "ce6360b4f472d532617db23c28c7a35218dd446b480690d657b127b138eabf0f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "bjYpmBSHkaOaLxQ+hg36krKDtjjrbt3sjuMT2F1hnn1Kkwg6mEN3SOYVkVEBvIXo7nIx9jdTohwk1NougJ1MAA=="
+    },
+    "literature:lit_covey_seven_habits": {
+      "schema_version": 1,
+      "item_sha256": "1640d400e3d40a7b3f03a62731053271391e2d606040e4d8c1bcc8162365fcc8",
+      "review_sha256": "c685a706ee5da381859541d00365cf8df583e8e0364a3e3ffdc77865470b9cce",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "uUCd8oVxJJWqWE1KRSELsKDI3n9jiNPHcjH4M4AZyCVUov0WGhhRSCOF5bdlCfO1HNhb4WqG7Co96W8Q1AGqDQ=="
+    },
+    "literature:lit_levine_waking_tiger": {
+      "schema_version": 1,
+      "item_sha256": "5181defa1bd0e3314b94b96f3365e089ad7767a75e5234b9827da69c05c5f47a",
+      "review_sha256": "b36cefbd047252b7d0a4378bf3bd0b5ce15eb40d0d9aab27445c721252a116ad",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "eJZmfBNtaMDCsYgPitEB7vglE5byD3Cs+br+us5PPK18LGrrLrsQ8jSo+nOaGcGLzuUsvcAWw3/2RVZAZemNCA=="
+    },
+    "literature:lit_lindsay_ethics_european_psychologists": {
+      "schema_version": 1,
+      "item_sha256": "14df79dff03d3343e0e888a1f3302dd3c0c4fd94f48b01df1e12282f30389a18",
+      "review_sha256": "9f31cb9d7ee0985afb8cdb526fc7100c66654381138710d1a4ee9ff8ea0e4c3d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "nFJc74z8IZnP0UroaQnfuXS7TEbhWabcXNIJCNcame/e6gfyFXR+lsqYTOdXhJhnGUaZ7BO6/y860gZgPCzGDg=="
+    },
+    "literature:lit_anna_freud_ego_defence_social": {
+      "schema_version": 1,
+      "item_sha256": "ad986b558e8c4e80a9d49bbc9e9993b0641e4d183c1c107329921b37c77b25a3",
+      "review_sha256": "e80d637e71262f78b85015e28090c8b1ce3a8f19976ec85c8532c4092956a177",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "r1ds74OiN+QNczr8qUBQ2vJHtzwVZRZzqxuZgim998t3PN+j/o5ONRH/om3N+6/H468aGAhB8YeoHa4fBW9JAQ=="
+    },
+    "literature:lit_frankl_man_search_meaning_qualitative": {
+      "schema_version": 1,
+      "item_sha256": "546a8676607acbbf20a537552cb42a5c3f68a47da1007e6b6d9ae6014b7027c5",
+      "review_sha256": "1b3bd05a34b8043ff87417a3f102820bb5ee820907f389ab21005644f7f3cb51",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "VOWo2RhZ/XBqXi2Ge4hyV1rokh2zv82JG1z5m/zYMXpiCnJfKkbTZKCnVVoQdCjI34hHQQepBjM16p/0fY4/AQ=="
+    },
+    "literature:lit_rybina_muradyan_coach": {
+      "schema_version": 1,
+      "item_sha256": "b289930564ac241b1562b4ce78db4478568c6699cfdedcb78609569876361668",
+      "review_sha256": "2daa70ee766b3574d88eaf2aec316c5768d4908203e7dbcd241c3460e06ecf09",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "11PNnitl5MyyHLIzDu1YzOW7BHtpUa5Fj+MeEhbcDPOadrJdSLFESrSfUv5bJUATd6bVkPT93BZZPIg/fJIGBw=="
+    },
+    "literature:lit_rybina_muradyan_coach_turning_point": {
+      "schema_version": 1,
+      "item_sha256": "c58068e644ad564cc6ec03f6965de335929d4cf7fb0a4c2de225c7e8515e88ad",
+      "review_sha256": "9fe574ac0435b832b5df0c8bac544f58717f1d688ffcb7589de398ad5376569a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E9C72QTogELLYnego6j3Gs5RaI71EifcAJyNBOFrNZpwl9ArzV/INcEQEu3MLryzDqJMxVJyiZNwrCBsSS87Cg=="
+    },
+    "literature:lit_masterstvo_psychological_counseling": {
+      "schema_version": 1,
+      "item_sha256": "f3d505201353a5252f39a6c07c8c307c99e48adb962f7ea243020d2880c060c8",
+      "review_sha256": "46ec959e6402a23cc7769fc84dc1af29dc02cdd024dc40c290d99d4ec2794b42",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "UJKnbfQt8SNPP7Y+OUsn4roZWN0hWIAuGnj3LkrrcVd6bmWJYoMa28zOQ0Mvxlc2y/R20HJxck0baFIfIDAtCg=="
+    },
+    "literature:lit_rybina_muradyan_coach_psycholinguistics": {
+      "schema_version": 1,
+      "item_sha256": "0bc55c2dbfedbafeb8671c64db7adb0081836632d6f064ec43c95ed8a93de1e2",
+      "review_sha256": "5df8830419a4fed5cef26253de1ff166c9be200d0461553e5aa10c008eb5484c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kAmHsVzGUU+2Qnup+45ZpUMO1fh1wDLy22KIX4M8qnLsYHWecYioL6OpfqoEoq2VBHhGEnopaRsUmFxhlXNRAQ=="
+    },
+    "literature:lit_muradyan_atlant_game_turning_point": {
+      "schema_version": 1,
+      "item_sha256": "02f7ccd287431e354ef525ca57a7cf446391b25544257f6b1d98af4684bdf57f",
+      "review_sha256": "fe1d0c8f657b231ef4edaea3c768eac521073bfb75107a0519b7251b95214ffe",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "2EhSQ2rWrGWF7ZpdlbnMUTv8t003BfZsCScMcl4UUJ9UF2VrwiPJpJpplwIw5EKILiGBFb1n/FdhjEs2h9HFAw=="
+    },
+    "literature:lit_muradyan_atlant_game": {
+      "schema_version": 1,
+      "item_sha256": "de67657b343f2a90ca2b305b114e2b13e19f599e072dcf5a8215e777c1cffb5c",
+      "review_sha256": "037108dc1d35c6af12296fb041ea68211cb888a3e9e403f4afe1f2c276009f2f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Ru4m+GWWSt/8HgDuCYaZdm7JhZ7aCVqNYHm1sMivEALzXThn9xPJjzEIniFMTkfDapXka9hNXN7ZvnIAA62cDw=="
+    },
+    "literature:lit_zatulovski_everyday_cybernetics": {
+      "schema_version": 1,
+      "item_sha256": "c85d066b07130afff24e1a695d7fafffdfad1ce99d88c9069468c9a70026f5b8",
+      "review_sha256": "53e2b3b91ded1b79eea51767e021732ad0a3389963bd752e60c7d1f69db707e7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "5E89V3gGMHSPP0+gvH9/PQEJHCHc9n4iXNfrMdHAb86Mi33Fz6OzHQxHg6UsDprPo8eK4N0JQxPKVj8kNYXDAg=="
+    },
+    "literature:lit_course_mention_psychiatry_disasters": {
+      "schema_version": 1,
+      "item_sha256": "8dd451628f0e1a6ebdc57fbefd4f079d60430db8e2775996a0fc950d5a582f98",
+      "review_sha256": "b15833a6a2aa51fc82d00e4d335aa397fd417e2285cac2ae7cfa2d41b7078041",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "MkTECGF9IUVIlMXpUz2stg+LNBNvTVwxKtosX4UHkSZBSpY8+JCVyHUNH/3NUl1bgfQnsYcqP279K6Om6t6mAQ=="
+    },
+    "literature:lit_pfeffer_managing_with_power": {
+      "schema_version": 1,
+      "item_sha256": "c3160ee34938da433d0cc4a7ea7f4925ea9c8bd2e48efa323d033e09ae9ac943",
+      "review_sha256": "feefce386ee788dc62d554e15a6a5713b6129f214a90ef7ed8e9421b97bbb0c1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "6rLdRslVLeQk1gYUnrpRdkp2HIv/KyApdhL/tC3VVc3i8wcwod1ul/QwCwCy6MoBkCytoC0QIbM+8oUCL0oyAQ=="
+    },
+    "literature:lit_sobchik_smil_mmpi": {
+      "schema_version": 1,
+      "item_sha256": "a546f79f4ef4f41d21f43652586482f6d1548b55822164e8d356e685d7e3ec9a",
+      "review_sha256": "4ebba61394f95e155dbdf6f5ab83cf6c7770c422974bb79069e1311e6857d550",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "inVyyrPxM8HmXekc9L2JqyBMJVIiKmMNqke3RadBMkYaG11rdFPjiOI1gH0cvJBtPGtYjAqtB2Eruh2ONDAzAg=="
+    },
+    "literature:lit_salinger_catcher_rye": {
+      "schema_version": 1,
+      "item_sha256": "8f6bb61b1d84d1e4477b9bc9f72ffed0a86c211649db6919f8a00705e0b91e85",
+      "review_sha256": "712107312411d540d4867271957a8e57f5efd3003c772c00577789d34371f9eb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Skm56y7CtlyYi3u3AnqqfC3+zNZUVFedabM5kMwjCtqpg6f5Zg5Omak7kdt9gi65VKSDc3WAKAXwcfIYqipzDA=="
+    },
+    "literature:lit_remarque_black_obelisk": {
+      "schema_version": 1,
+      "item_sha256": "fa3a7cfe0a1ffa55ced3412f991cbe57ded3a34b56bece29bbb1e03294893c0c",
+      "review_sha256": "dbaf67783c39f91083ad83f7109021e65c48fddf75c37c678d26640713e1b1d1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "aCH0Yp9HMYAhoKP3YVpI2j66kqEmEhFZEHVNMzDOfD7jr0aQJsjrbKwEa0QAKfGjIe7fTei3s6TmHD9vt2yyBg=="
+    },
+    "literature:lit_butler_bowdon_eysenck_overview": {
+      "schema_version": 1,
+      "item_sha256": "9c8283344e7f9e3b73e4083e7addb37d4f0eed4ba957a1801c141cfb5d1c5c9e",
+      "review_sha256": "c7ceafe8ace2a993168428ca2dea6a6e5c02fb34db341ac1ca09820ef7cbcf34",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "lhYXPGtMPeOG084e/MMVYqi3EGMkgbJEGMoQdvmQAJzc4QWpjNrfr+aqvkUoFffMMVcgbyx4wymRPqYbeNGRAA=="
+    },
+    "literature:lit_eysenck_wilson_personality": {
+      "schema_version": 1,
+      "item_sha256": "d18f2e4adfb12e5423ae94b4237e8653e3a055eceaf50f26d55ec3917c1b6eb5",
+      "review_sha256": "644733dc2976ec6ae2541b5a80f2d553a4974089373f2619cd239b5db2bde162",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Rzt9J5YniuaqeogsM+DzkT4qKkfgoUil8eCOuq2euMcrEU03Sv94N5dUmpFoxWtayHqln0hYanVMTESEKSzHBw=="
+    },
+    "literature:lit_burlachuk_psychodiagnostics": {
+      "schema_version": 1,
+      "item_sha256": "ed3b2c0a3d0547eee102dbb8229e539ebcdd71106ed279a873a6b8d0aea7356b",
+      "review_sha256": "7d0bd864a56f0df51c3b59fa2c19726c292bc3e7052023d1cfc6241585f31252",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "r0/QLSUFAOOsfg514KNPsHzRlzXWJhkRhH21uH0Fp7ZyhFOlM35LRf5Fgz5pLIT38Lxj1MimswuPtayYmrfdAw=="
+    },
+    "literature:lit_logvinenko_psychological_measurement": {
+      "schema_version": 1,
+      "item_sha256": "6fa86f36276a15f04beacaf701b041c1a49b9cf819144383c807349da4cfd10b",
+      "review_sha256": "70329e0618f211700fbc72f2bb43d97f7cdfe9dcb6ef312d5bcd17a7eae39ba9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9l1UBxujCgkATTqMt51VjiVp44hmVUyzINNwwaDPQrv8ASrM1NSS59+kHCPLlfamKA3pMSBJiwhFw6PGrdURBA=="
+    },
+    "literature:lit_binet_mental_abilities": {
+      "schema_version": 1,
+      "item_sha256": "24beec28243c91ff947aa461fe47d0759b8f8edf98381f48a369df288e9b0b8f",
+      "review_sha256": "420fbca11a5e9e20fbb4b1981b2bc93e24c5338419972593ef22743de9dbadf7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "SpcnWKy4+sOT3WpYyAp45Y2rWFo4YukskA4HZUN/HImEdMAd0eWZ1EnexL8cvEsnNBpQV8xw7i9EuH/UPsG7BA=="
+    },
+    "literature:lit_znakov_understanding_thought_communication": {
+      "schema_version": 1,
+      "item_sha256": "30cb25cee5f02726e3f4bb3b8564ddff8c618a57fa77391fb911fec991e382f4",
+      "review_sha256": "0f711c16648d671ef96784fde2dfa617cd927838771dcbee6799dd06b1e8f185",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "sGqbffGLALhpOXR+rYjQmTEnV19F7AsU4GRwMUO2pa+j86onmRMdZHjQMnvkUl9el36wTSb7s27ufQmi78AlDw=="
+    },
+    "literature:lit_existential_psychology_anthology": {
+      "schema_version": 1,
+      "item_sha256": "a15045848fcc206bfac97d75d4c777a23600d3392b1448af09b26332569917dc",
+      "review_sha256": "ce175af92535257306518105a117dc9dbcf2062fcc7c07a20aa3d4e830192c0e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "053eS8nAjK3GXrR8T59dWea0DhkRzhUK8/A5xhGLaITGZZ283J127LaLY3ifejLxj7b01lentf19LbfubO7nBQ=="
+    },
+    "literature:lit_znakov_psychology_understanding": {
+      "schema_version": 1,
+      "item_sha256": "bf0394c57161113942be47f9bb98d0296fa4f8af47c2289e717df29aad533800",
+      "review_sha256": "6797551e9a4f03f449b4e688fd04238e2066b65a53031add52a27be749f2979c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "eFL/Kd68GgRy7jvt9qmMVOHWaqGfiV+rn67Pupxa1YPppU5pWGGwH2AklqM6u7y/Lcu4FoQlFfQ0Et5e4zloDg=="
+    },
+    "literature:lit_zobkov_understanding_fairytale": {
+      "schema_version": 1,
+      "item_sha256": "b514e8cf797ed6d77240851c093bc4b16a73d978ec109e3e82023537d8c36a7d",
+      "review_sha256": "c5b1ae4de3e5def97463473450a7ef3350077fe0ba464b43aea3b705301aa2f8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9CpSwsTsfQfHUrDJlepNKwT/3wg8na8aFhPjaxMi9NA+DZNiCDIg4BY+zDXLJyLXjA5Lm32ZMVMLQY0JkCnOAw=="
+    },
+    "literature:lit_bugental_art_being_alive": {
+      "schema_version": 1,
+      "item_sha256": "aa7706392985b2cfa9fb683f12b79d777565a4ec749d9f7aa50b0ff85f2f615d",
+      "review_sha256": "9593b9b00fea02d528d82f1d8d3849bb8586841c45078a86632d31a8de4b4330",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "j86PKZX+xdPrgS6TiU6offeWr1Qhfo3cQOdMs13YePBjksh4aJlnv3NtTjtvdu7jB4QUpiB9QV14k3Oa4PDdBQ=="
+    },
+    "literature:lit_vasilyuk_understanding_psychotherapy_system": {
+      "schema_version": 1,
+      "item_sha256": "a702095f07dac6f3cd218a1a6dcb83001f5bde8fd36b9056a2079ba679f8b7e6",
+      "review_sha256": "cfd625877e3239c5975b7b7afa4ec27f3921c37b8ff8289dc34553029c232f4d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "VLeGIHcRBQZM4d6xuq5PIjvoDjqoDpUc1k1OlNMd0FDADUsoOXvpuXFskeDZNtjr01RM20sJS+4pLPkDmaP5BQ=="
+    },
+    "literature:lit_moody_life_after_life": {
+      "schema_version": 1,
+      "item_sha256": "21ff9fb7cafed1d68c8af04477a14b46cb93eaad8d9c59bd4200920ea2c13fa2",
+      "review_sha256": "fe06fbe345201014f6c4e9a39cbdd726149f01861864a9d3074c7719179d0fa9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "PefJ6UCFbGi/Q65HhR5bFiCwXrFpPX0xtuYSgTRdBE4vVTBbN3pdLc8H324vfMDicgM6BWV8rI5pOuHyXnzDAw=="
+    },
+    "literature:lit_mokhovikov_psychotherapy_pain_points": {
+      "schema_version": 1,
+      "item_sha256": "03069a667a88d10a423fe2e444688c04632984d7d33bcf57371bd357a400346a",
+      "review_sha256": "eeb7adee2e8fadbf850f8da54d8b560fa423a8129cbf8845ff4cf2973b64098c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XweHKEnDSsMQuWawXQCymF9Qo9IpKXrNkSQWVBz4LAuKxxQcd7cTghJhnIRF+E3ymbCGkabOf+1ykujzYbq+Cg=="
+    },
+    "literature:lit_sechenov_reflexes_of_brain": {
+      "schema_version": 1,
+      "item_sha256": "db5c21e1afc413ea4092017197babbfff9e62724f7b24a7d449643772fc8adb8",
+      "review_sha256": "c76256e44d3e3f9677bd51c391a598f78837ab47cd55eab10a41f9768eaa849b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "X6SNZFe7sExKj+UIT+hQX1JWtC5sl5f+HHD98jerbdgTOxq+G+FtRC51jGMtu6wWvKPLh450K8faK7hyfA2UDQ=="
+    },
+    "literature:lit_kantor_objective_psychology_grammar": {
+      "schema_version": 1,
+      "item_sha256": "843dacedf89a347acbdde1029b33c467e2c8e56acd69dbaa128754abbb4109f3",
+      "review_sha256": "1e2e7b95804a24dc4909b52d93f8b3e5d2128297ed033480025b34afeaf552be",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "8BZHAphqeueUiqjXzOmH9GJ8nQBqdBi5w3DuiokgUr/hOMiJf4/4LIOEbpdqc5OH6PTPp3RRFjJVLh0U+kb1AQ=="
+    },
+    "literature:lit_mill_on_liberty": {
+      "schema_version": 1,
+      "item_sha256": "4ef816fb2b8d5e676451a8823eda1c1464da7d98ee5c2ce899d8b01c9896b2b1",
+      "review_sha256": "51099f5cbe2b2c9725e0ecbcdfaa63c30ebc3ed52370b34ca8b1c055219f7044",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1ZOFqLuDCfAHU+gaukDfeNvyONiBEapkczd7Sf43gLWJ7wWEM4C4eUEtg3T7NtywbKIpvbSa3wzMVrKr9OT1Bg=="
+    },
+    "literature:lit_bacon_new_organon": {
+      "schema_version": 1,
+      "item_sha256": "bd41f943f40b6505a392bb4ffc974fa346cc636cafe5fd2ce4acc3a696bc75f7",
+      "review_sha256": "50bafd77ff399ec1cd3725e8cead434fa5c7b35d88c51d6665aa18bf821f8ae7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "QP57ChWbxqBjizPYciDn3L/Lp7IyaGAZxsgKewKi7LVQ6Sw1ezuhSPMamBoiD12YaBcFkkPQylzyOKegy56/CA=="
+    },
+    "literature:lit_feyerabend_against_method": {
+      "schema_version": 1,
+      "item_sha256": "39677432bee1c44aa4b6c4bf7431c7b2189f0360d248b9255f4cea1ff9a4e200",
+      "review_sha256": "260e5afb3b8ba564817aaa10f4730ed9950ba3ef78dfdd46223535313add659e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "GjQki6+x4VDG7olHMzRCB96LgJr22BQQ3erKILz2BfGd0Hm9SDaasvp8APqMfqAjZMwMqdKJMhOe5rlsQc1WDg=="
+    },
+    "literature:lit_ratner_george_iveson_solution_focused": {
+      "schema_version": 1,
+      "item_sha256": "99a064f5145062e790635f4c183f104a8ee408dea80d45840df0a7437211fb4b",
+      "review_sha256": "29d0ab1bd5e063d5c9a04c1e59de999ee0f910d4713368366735131e20b5cfc9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "F60ZCpetOupg3F6z3Kqk79yoSXIe3eveRnWZwLO8TWQainQUYMu9fdpiG0bH6/oultqed0NKFHTz32iN1C6rCg=="
+    },
+    "literature:lit_graham_resilience": {
+      "schema_version": 1,
+      "item_sha256": "8b5441d6140cb1a746b88a4a8e76bd0ac667ba5251259c48f99fe2d2be01b9d2",
+      "review_sha256": "7a60a99c0b4776854669e26642661725445291045d6db18d9664b4508573a289",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "wzzAWJgTfKJ6HXr0Tt0MIYmmKO/Ow17Q6e8ebG/zcXANGSRR/41z1Zp+3afRX/Wt+lUcXqk+VRcPlsjTliqTBw=="
+    },
+    "literature:lit_ekman_psychology_of_emotions": {
+      "schema_version": 1,
+      "item_sha256": "eeac0e8719fe454a8060e70b13c88be75921e7d2c0db89da76b861e5c55aaabd",
+      "review_sha256": "45f64f8d4ce86318f21a65b78574b442c1245cdaf2deb121da7d13110c15d29e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "EZSvmPMoJwjGWorP4Yl4aLAnsscKk9qW6Z8h6a++tKIJTOWwsB3MP70MJDvSfL6sziRI4KMtX3nxXwhcrusEAA=="
+    },
+    "literature:lit_kahneman_thinking_fast_slow": {
+      "schema_version": 1,
+      "item_sha256": "8a5ab90c6613e30f63a918b454d872a24926b517993b8e26196d6c07cdf36f39",
+      "review_sha256": "bbeec8238ea8e44c3fe63d3927d6cfde514d612b75c1060a23bfd77259bc98e2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kGFPlrWAWgitMduTnyLLYKVb8YWf+o0tFyVxjSGtWDfgV2P+nNIrFu9ZWPxI4rA08UKA8hehwCT84kWVwABOCg=="
+    },
+    "literature:lit_ilyin_individual_differences": {
+      "schema_version": 1,
+      "item_sha256": "9755abbffa51e48039ec93a9ec9cb3b8c667ded88f685d97bc0781ac1a9f32bf",
+      "review_sha256": "eb223292238975b672de1a3efc7a1e89d604d4d59034319fd8e992a1ef275d41",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "KWVepiTVXwMDXnUfiY8P2acrw+ouGncm/Q4S3lRuzQOas1lz+Mpi1BNhXhDDxVUtDpm6Z2fST5qR1hklxmIiAw=="
+    },
+    "literature:lit_vnd_practice04_rogers": {
+      "schema_version": 1,
+      "item_sha256": "b3b10ffa9e171beaabeef370a3f410540d0e10dddff19d8681b2225f5bad8004",
+      "review_sha256": "ead5e9168884a4846654a1e88424c172198e44b302bb147b0fee4761267e249a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Ko3dX4YydXeoqUjNBhJ8/IwSrJN4SQm1H7iOxRylBnZwL+wQdkLlfaslz/qWK2wmtyNEuaTwhNbSUUsnyvrKCA=="
+    },
+    "literature:lit_vnd_practice04_ekman": {
+      "schema_version": 1,
+      "item_sha256": "d64f4bbd6fe203c8b34e401b3e23d229216cdd56c19580a4a97bb8b3033cb7c1",
+      "review_sha256": "fca246ebf7f411eedd8030bf95543192c517c94d7aa94682960ddd05f204a924",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "y81BksI7h7MDX2XhTKCroIF78WgWJZ/RcgNdYCcDV2AajKDlmZUl5doxgIHMKH/87zzIqMPfqY+wMn8x0QIiCw=="
+    },
+    "literature:lit_vnd_practice04_sapolsky": {
+      "schema_version": 1,
+      "item_sha256": "26e929f3136e2b1d0c19e5d4219cd5d1d7735eb255e6a4fa922f485605baabf4",
+      "review_sha256": "6447d5eda202f6b2915abf9b9f48fe2ebfd0158818bb7f4efafe45184b392c9f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Ye6jrxu2yk5QlUf/nTGxR5qOD13j/d0c9cEK+Yj9oyrlcXBQQvLET71YYLLQF/wYv8Yo3kEe3KYxiAXGa7ycBg=="
+    },
+    "literature:lit_danilova_krylova_higher_nervous_activity": {
+      "schema_version": 1,
+      "item_sha256": "a161b6762542e3a904f636254eb0da1e7bd608637461c2dc24aa856599b89f7c",
+      "review_sha256": "b0adea2260f35f13819df4336d8620881765307a0ac686f8c9df40f0fe139567",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "A/SZ853eYoJ9pDEten/S2t60ExQfjMyGJ+4O1a8ut7FveeVEILLr++jA8MfAhYo1yQWBFrl3Icih2N1KBqrZDw=="
+    },
+    "literature:lit_gordon_effective_parent_training": {
+      "schema_version": 1,
+      "item_sha256": "3a81a21cb9664115911852dc15df142317f2bc77bb3e38dc29d087cfaf60aa88",
+      "review_sha256": "2c4bb2ad7fbff74801c0ce7235545bec0ac8a577538e1ff4fa0773370a092044",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "nksotfa6vOyO27UeygSTSpDunwSns1nPI2UyIeqtt5CnQE3bd4E6HIjN55fHNHYghWpjz/W3LLng1SSjUCbEDA=="
+    },
+    "literature:lit_history_science_congress_volume3": {
+      "schema_version": 1,
+      "item_sha256": "f6860ff163597d815d60878e4070920507d01ee03453c7c24f1a6b586921f0eb",
+      "review_sha256": "73e5c2889d2794a5a29b2a895622f8737bdfa9e95e25d2d3abdd5c02bfb2cf20",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "xhn8GGI/GSGfmJgr7ZKHbB8XYh+IAVx7tvEdhGnvY5ld8DQYaDLHjRnY0q9VYqq7ph+o6tM63F6V8w1VDcb2Ag=="
+    },
+    "literature:lit_newton_principia_1989": {
+      "schema_version": 1,
+      "item_sha256": "097a0e7fb4e7da6f7adc4093204459cdf626358e17d2e5f8658ba1447f2419a9",
+      "review_sha256": "317c4c04cf8eae044d0102ab348e0f5ae3c80466d81a59ece43bb2859d5b7359",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "5OZCNsVF/vJ1bieEP3iiFY1D5UPRGOhGetSwhM6z1tFl6uUgmcMGCyqw7U9qLldsf4Z4gfMmNwpONlrgUfkTBQ=="
+    },
+    "literature:lit_hy_loevinger_measuring_ego_development": {
+      "schema_version": 1,
+      "item_sha256": "02d54d5cbce4fb5510c7929a5de7b777936fde6378d2f3e4a94875a9f9a0e346",
+      "review_sha256": "93840df4de06454cfc8673897310cd755bd2e4d6195d2b58b8848e752b062fcf",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "HpYQ195/KH9vBLHoxtlN8KQ0Tv4X7MuVjukKzlb3fQrLPa38V2sCJdwQMaVuiOcxRjLOu6UniNtuVOfhH2WhDg=="
+    },
+    "literature:lit_kreisman_straus_hate_you_dont_leave": {
+      "schema_version": 1,
+      "item_sha256": "aaed56d05e9652182909e5c3f3b0cb5d90c4bbce92c17577c1ec1d22f1454d55",
+      "review_sha256": "d6ab247e869228a3e0a14daf9644b832a6d57229f8252846d432a59f167afc36",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "pMvXZIk8hZ7YMVFePZFtRZgBfkoP/RA1wPbN85D+j5uVzR9eSZsQemoEfB+AvBbYEtEiCdF+4Lb8h7JKumTLCw=="
+    },
+    "literature:lit_course_mention_selye_stress_is_life": {
+      "schema_version": 1,
+      "item_sha256": "2256e8b45f43c50529a134f01452456bea999efac1bb53ab5d2e392b0648f30b",
+      "review_sha256": "8872d2f05eb01f978d4ce7d12e7cf9fc6c1b24d2e372b7b139a242d11d993d2f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "2oRRCwQN9f4DZFvj3kewPrQLY7uK5PT7cKFsJ6GqPfrX9Nw7vIHI4oOjH9CQHjlM/nO2in7Spyl/ixGO3jQGCQ=="
+    },
+    "literature:lit_nurkova_autobiographical_memory": {
+      "schema_version": 1,
+      "item_sha256": "2dfe7689a5af801e0b2efd8104efd947aceddcf0b54a4a3ad5b1b8208abb57f0",
+      "review_sha256": "517a3ec50966f0cf17df49b1726894c2a8c94646c22a32be3cd471049b1fc3ac",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "xssvH+59acBBvS62CneLnzqaN4hxP18QXDCr8d8klCvVmbxvHGB1KyTsO+ffGDYYF2qzMCIYCW10Z1Pg9q0dCw=="
+    },
+    "literature:lit_golovakha_kronik_psychological_time": {
+      "schema_version": 1,
+      "item_sha256": "2f26488a076f53cf978124a78b73956e990984acaab28a763ae12b1d1d300860",
+      "review_sha256": "0c5c2b1b18e6eed42e1abe9ffa35c4df4873832c1dea244a067e46bd478ce9e5",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "+Zdwr3QLXkL2OW2l6XuwzxE8fGiATj4JrLAR1iqD6Fs9YM2etLh94Jz0ZG8/9OF1E4kO4IHZVh+03d3EqfkEAg=="
+    },
+    "literature:lit_lebon_psychology_peoples_masses": {
+      "schema_version": 1,
+      "item_sha256": "deaefde3a1705aee0cd9507e32f9ff9e05c22ebcd5fe02f87281d35f6f1a56ac",
+      "review_sha256": "d870f160be3ebe55a8084a0f56f870200db025ef57bca55c169364f857d35d6c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "xP9A0GDzztqQd2Rb5mXMA5R419uLqjed4x8iWMJl6gbJkPBbVREPDHSkMWVO+c+1i8pzltGaoVLTl3N8UDLzAQ=="
+    },
+    "literature:lit_yalom_loves_executioner": {
+      "schema_version": 1,
+      "item_sha256": "5163eb826f387d281555bc06afcd3bd374b03dcdc095d7b13c4ddb10ebe1fed2",
+      "review_sha256": "44a4a14fc437b55592fa1665360a7332602415b26164a37728c70e90d0bbcdf2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "OFQIFvjxS8jwY1xeVXzCQe0RTHwOIbxVFfJV29ztQL0kg3GDF4HlVpp2JBeB5oCfwte5KMTqC3QQacizhSOZCw=="
+    },
+    "literature:lit_tereshonok_levina_psychology_pedagogy_part1": {
+      "schema_version": 1,
+      "item_sha256": "3d45221b249b7706dd00ac4870045ce83ff770ebae66959afef43acbb0b472e0",
+      "review_sha256": "8c014c997e7c282e11f1aa9d598771cd27e7c7017ba91866251f69d0e498b28f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E0K+3/lTTthyK+0zbNJgjJeQNJpsDraCZZGcja2kPVG42lnlfhZP4qRQUm2vgykw2uGjNrto3bdEMbfCY7RECQ=="
+    },
+    "literature:lit_meshcheryakov_zinchenko_big_dictionary": {
+      "schema_version": 1,
+      "item_sha256": "9e9715b221c5063220a207854a0b0e7d232e4666ba5bf453327e10e5ddc1e698",
+      "review_sha256": "6c7c057a0a616416329e4a513b55f83e0732ed6b0d38f3af596216eca938d6ef",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "AG4KPHOHthGazEsyYSak/IclDnE2YB7sSC0aRc7Csc1d8sRsBPUH4dIdQwvpV8P4ER3Bln09f+OoFTA2G/SDCA=="
+    },
+    "literature:lit_leonhard_accentuated_personalities": {
+      "schema_version": 1,
+      "item_sha256": "add8a5bbc07122a836dad2f35de2b4a066db8f6aa47f6ffe3342a394de146157",
+      "review_sha256": "6c22202225675a0d73efe5818e0f36e89affb24677fbca3265a104094552cb54",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "IJ6uhnPIhMT2RUTryPgz5qiytX2zp5X5Qp/MtV4iqCNrrhecmguZ0kZYEHXWIwYm7CdNHuw8YnyOI9BjkjmqBA=="
+    },
+    "literature:lit_tolstoy_war_and_peace": {
+      "schema_version": 1,
+      "item_sha256": "42f8239c334004c55ded4646c32a2e3c1edcda6e8bfa13556097bc149eb5895f",
+      "review_sha256": "624891142533b5736439eab9661bad8cd5ebe5aef0e74792561a0156e7795dba",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "dILp4sDPXJhX9VN9wQyr1OKMMhPg84wLCvooXeg0sXaUr+RAOyVUwrLU+YvPcS/qnrCnYF0VgbvI9zd4gZ9xAQ=="
+    },
+    "literature:lit_bulgakov_heart_of_a_dog": {
+      "schema_version": 1,
+      "item_sha256": "9d3f35b535d4e8bcf72f8d677de6694a6bef6b6c88eb1aec44f223ab77d44b73",
+      "review_sha256": "0e6c9b9337560d38b713b0db24ca230d41a01c49cf5b225863f7cfb6aa9128ee",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "abUtYy9nJ/B7ULNOVJZlNSdWYrMZws1DaDuEvaScRDhLDsPS/kad6A7dJlBtjUwQt+tv3Ga3Zh71DZW43fvdCg=="
+    },
+    "literature:lit_zeigarnik_pathopsychology": {
+      "schema_version": 1,
+      "item_sha256": "6891bbb90c9a08a53af912eeea2c3a74ae790addf8acae66c581229d5d052bfd",
+      "review_sha256": "a5ab3bc6080c1eba5871725bf01c93c2fb34eb83fe3dfb1acd33c499c48178a2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "bboJsrU10RVf3wjc6ygtA7fIF8s6AOwYbtSRibH9LVHpLsPnvO+bqhTOBYPDlLYAPuNQ+LLru2pdUX2kXsg/DQ=="
+    },
+    "literature:lit_searls_inkblots": {
+      "schema_version": 1,
+      "item_sha256": "9fba7ac374e52568edf89ffa1a4710d47b99f0f7a77f2275f3e606222f29d92f",
+      "review_sha256": "a8446aab56c6909481d54cc1bbeeea5a2c2bdbfc998230f645272573ce06eeda",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "b2Ns2mGTKxBwnIreaFn1bw3Y/9v5JOAa1O9ZiBputit0feRcSkckLzYZdDIGyi42HvF3yHxpD6ztDxaBvdegBA=="
+    },
+    "literature:lit_course_mention_romanova_projective_methods": {
+      "schema_version": 1,
+      "item_sha256": "2a164896ca4172301a692c6e5d9d79a7b8904f437502e041fefe094817b81be0",
+      "review_sha256": "41e3e01478ea330c2a12f826f656d3d7ee1143ebb0ed9a7518055f673fb59ec7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Ko6qW9UMRyspm30cmEAkibc3Ovl5WUGA2FpUDjQRDjHE9XJK6bj1VPxqud7TdD75ejLV1pXfFu65AXlcakQ5Aw=="
+    },
+    "literature:lit_general_practice02_sapolsky": {
+      "schema_version": 1,
+      "item_sha256": "f5d00b6c520ea5060ff201d1d3b5bd9d2840df3c444ac28dfed0c637fbb966f3",
+      "review_sha256": "22217df54c96e964a941606ee62599455fc8c91be0bb1745ebdbadb3dcefa677",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E4yHAK6Iuf6x5JbZCX5ueg0nzcKCIs1j8kDN9aUeb8uQZwQ0ArnxJnmIObUham/ZAgSHg/JCYnBZEsk4G1TxAw=="
+    },
+    "literature:lit_social_history02_wundt": {
+      "schema_version": 1,
+      "item_sha256": "1f15ac916d85203df55f393ff84bd1ff46cb107988fe11d9db437e92c13120ad",
+      "review_sha256": "34f3528f16269c19becbc299e63350afda0e040d3e4194bafba323033cda93cb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "do2d5yEqvXOZAxz9MEq7U0honnOXP1zaiNF2h6+IxxltEAuh2pidlrIBn4iE8OyziWaRqUWRfOGzBqy1hkWhCg=="
+    },
+    "literature:lit_social_history02_freud": {
+      "schema_version": 1,
+      "item_sha256": "9c9164e4eabd8d167ae609c99b6ba0bbd698e073ebf967927471a0293bf5181b",
+      "review_sha256": "5ff9ad7d9959807cd6813dcac62ca48f8a8725cf9be44d7b97d5f75d57b1cb23",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "5fpEdUKelFx4GrTk5bG7U8gALvsZz9i9AC+EhNJNJfl0YHnFurLOWsuYE8XImk4Lmx/KR9yt+aMlkYFHi+sXAQ=="
+    },
+    "literature:lit_social_history02_lebon": {
+      "schema_version": 1,
+      "item_sha256": "8a2c17b6cb72bccb9280264486de93ab350168760aa15bf6d735d62c2a4c5b9d",
+      "review_sha256": "862347bdc5bd651704a424e673081567b66b59f9e197caf1dcf69de9ffcb9da4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kN+hthv3hWJxTv1BbtdfmZ6Cr7ygE0SiWuyM3J/m3dZAqGgWsKRaSyee3y1JpT1Bf2l9xsKGUh1JCO1xR8cACA=="
+    },
+    "literature:lit_social_history02_miller_dollard": {
+      "schema_version": 1,
+      "item_sha256": "83f1ba77525a7c31e2699934df8af9c769dad3d0659f306eda24e7532cbbd6ee",
+      "review_sha256": "7c05fe9228828511676245d520383389c72b38dc4207af325caf25b481f6accb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ftLyLKKzB2kLnmfbUwQ77o9X0nvi+DIO43uhHnxBFJ02qUQdKuswd402xh3B7orZF/1w6g1sP+Zbch3eBrvOCg=="
+    },
+    "literature:lit_social_history02_sighele": {
+      "schema_version": 1,
+      "item_sha256": "3e9f444c5321c527a60f09fa187c7824240658169616f83261de5bb396dcaf21",
+      "review_sha256": "8cca110d46b9c48070bd5d6f85c5850dc45ddfb9a1a8aeeab6f697ce1025570a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "gXDRi8SmyDVZkcbGbcMorZE0/fcmzXf9MCZuifdUVN8vJ6e6YBVRXxnINdtj0WLlr27ONp9Ks/ho2mR+mUb1AA=="
+    },
+    "literature:lit_course_mention_lebon_crowd": {
+      "schema_version": 1,
+      "item_sha256": "e81c762cb9aff7bea2e6c30a922964bf0e9a8918b99fdabd3e02d8834619720e",
+      "review_sha256": "b8ae008c59fa1a868f23bddd6780b189ff54032ceeca37001aab2790efc65c41",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "UmEey9FEE+P9OiQeLYi1FlbA3nKGt43RsaLXVg4RWTbHc1N2mmAS0A23lIW1LFLXQOHvdUmnA/LsUZjmewbsBw=="
+    },
+    "literature:lit_social_history03_freud": {
+      "schema_version": 1,
+      "item_sha256": "dc977bc6883737532bccccecc9b0393af4c6afa727d3fd02fd16c1169d8bf295",
+      "review_sha256": "d63a0f5428aa8bfb7721426b5fc246409d08d1e895d9027a3a8e453a6e141711",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "CfPtqzV5yKjsl3df95LMdnhD/YIJH/nthn+ZcYaoYHzsv3V84x18hOoeIJypiWT8z16ZeYsXu6Rh6TOF13E0Cg=="
+    },
+    "literature:lit_course_mention_handbook_personality": {
+      "schema_version": 1,
+      "item_sha256": "7c55f3678771a307b7b65472e9d248b5e75390f1cbc7eb624899992fec61de0a",
+      "review_sha256": "340f6c77a2c2e46d791742f1c849136f69c2051bf2cd9a3974d868ce898f2fab",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "L77r7AZgHY++ECh7zLAe+FutaO5haDQ8gJvSEE/kBV8BCJSWmU9qWyBQ35gbvzCkNZUVHXrpDDsOeb8c9kTkCg=="
+    },
+    "literature:lit_chekhov_death_of_clerk": {
+      "schema_version": 1,
+      "item_sha256": "f6f2540025d60ca4386dd5cfed616db94f4737befee36e6f378988bc187e8ff0",
+      "review_sha256": "ab54609d1f4e3ab95220ed066dfb996ba210ec773ea7adffcceff872707017d9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9e9Ch0V7vUyals0FRdxOX271W9S0+LHA9Na+16UMy5a78fX4SpnVBZ9WzZgv9TC33ukhM0xRyCFucb+LewYYCw=="
+    },
+    "literature:lit_nosov_mishkina_kasha": {
+      "schema_version": 1,
+      "item_sha256": "da95ae13f35051a633ec4f973e168e2effaeb3ea811940fc9ed909fa8b357986",
+      "review_sha256": "4afb074af3d38d5acf7ae4c1ba54c25aa3c6332c7a497986485f9a28ab1c711b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "dzCEMHXxYnPLMgbnSFfpzwVBX8OqIT0exQjlHuc3bpmNNVR6l4BOU3KwRpaGrEQUYUnOOeHMeXs+a4gw/vtCAA=="
+    },
+    "literature:lit_dahl_explanatory_dictionary": {
+      "schema_version": 1,
+      "item_sha256": "d19ca45c430f7b2b8c22173aec5d75fd16b413cb4531e04b034ee36bffa0e07e",
+      "review_sha256": "abdb1cd54ecf292281c0cbd24a6a0f7d85ba1d3296e01cca618f8ee9d10ab1ff",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "m8L7k2x+ZCgHBVc95gWkHLkck+7vzAYuo0a+2eV8EdQvCi8kV+XtXyChC7ZLcLTK6FHkoxMnk1ZHEmgugjpgCQ=="
+    },
+    "literature:lit_hock_forty_studies": {
+      "schema_version": 1,
+      "item_sha256": "14febca17a63598d6f68a0db240c026dbe487519606b5650e6940ddb8111fb50",
+      "review_sha256": "3c1c790dd66f65b772f82d47f4d10b80f354d206dba34a1391a778312376f22e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0UoqT/xwjcSddLsOXm5wI1+cZ3L3PhEEowxDWIdIWJNrCnzstX7iB+CNiz0ww9LWoOJQHy+KAIjDwu4/W+6gDA=="
+    },
+    "literature:lit_lorenz_on_aggression": {
+      "schema_version": 1,
+      "item_sha256": "540a6631621351758e4444d8f6c6be8ecd23ae2f467339975392edb41eecba8a",
+      "review_sha256": "04ec305328aa53f394201c4e45e0aa73d6088b10d0c59f12d7f307a2cf28e9e0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Pkz7GGC9Id2AUU2mHx11jQT/cTq0/7GN8oIHqMRfAY/YvSKCT7fywBsAHgvxYmDPRheL3sgdIp+R5eJ0DTGUCA=="
+    },
+    "literature:lit_hellinger_orders_of_love": {
+      "schema_version": 1,
+      "item_sha256": "4bb5c4f5b8dce3187f547b51a15adf5aaaf802e78a8f6bcdb93fe5d241fe4d18",
+      "review_sha256": "87a1356b55fe706bd43fc3a8d509b2751d9231b995017fff6a4e906ea112f30b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tljRO6NSBaM9OGyAvFXSDVo0tczBIyAjjsf/5vO3Y0NiwIbFCY9RtRQbz/EbUxH6zLozr1G/b1gs8QzN6xE7DQ=="
+    },
+    "literature:lit_course_mention_just_for_today": {
+      "schema_version": 1,
+      "item_sha256": "6277a49055c8c91a9f7f00ae4f2da90859f93c238e41a79dc1c4a1e71c57684c",
+      "review_sha256": "c2ff0a088cf2ec6a94ade80a7d007f1c8acfd2a99cb536bf681fbdf6c66da2f3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7FtwJoBGquSMZ0qmmsNTulzNDuyR1AYc51AlclPD0i2auK8pGBLn9I+5T0nx39cM/6bjB1A3B7T717rzqwbDBg=="
+    },
+    "literature:lit_social_history01_miller_dollard": {
+      "schema_version": 1,
+      "item_sha256": "45fb85caa164bd50d5c0412142ae9461114edf8bbe04db81c4d81d9d432c1b60",
+      "review_sha256": "a02271c18944d1c6f3581a18ce61b926a1eef543f6065a23cef8720fc30ff193",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mLeIgbyv6U0IU3dUpVbfDbRXgsekIJBKlfFd8qR/LbC1e2WY6EWcataC9BM+YMihe6fRnm8vtPqEptSTG4jUAw=="
+    },
+    "literature:lit_social_history01_sighele": {
+      "schema_version": 1,
+      "item_sha256": "d1841dadb18b2e49b1d8d5e86fd0433502fd5daec6e8d0d6cfc8ae54daa22be9",
+      "review_sha256": "07c50b1917189b6082233bafbad27463ab21f6dbcafdb9e1661194f3de1d6d4d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "s+9UIfWYeAUYstgdCQOf5cI9eBtmBkoI+r5NmpL1nxIrHs3Rbt8oeNLcwkwfneNO+grx6rYa/gbX8xObGJjqCg=="
+    },
+    "literature:lit_consult_practice17_kochiunas": {
+      "schema_version": 1,
+      "item_sha256": "fe17fa02216bae2beb5906d0e9db4bf05bbbae66d8efc5af83bf50487ab6dc38",
+      "review_sha256": "3aadaadb1248020cff7e4a236b79b3dea039ad7b64ea37a9db52a1a8d8437515",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "C2I7aENhp/9AUpoAYMTFM0XSLUu+QCUAH7gEJG2MN5SYu5ndenVFCWclMPHigeeSnGWtP9BfDSSrsdFDEe3zDg=="
+    },
+    "literature:lit_qualitative_practice10_luria_memory": {
+      "schema_version": 1,
+      "item_sha256": "bbc305f044257af044b76a8f98d0ff078424d3b82351055c64e703ea691fc17f",
+      "review_sha256": "0d433d88f71574377df1e46cb431d2667af7610425023d77bead7ad9885729bb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "drlOOF69pTsFMB7GdSS99GoAHI6eZ9sizpGKzFOt08UzcRAqw+Skb2HUivAv6GUSua2wQnG8+htFlp3TDou7AQ=="
+    },
+    "literature:lit_qualitative_practice10_luria_recovery": {
+      "schema_version": 1,
+      "item_sha256": "f380a73048ef7a66c51a3b9fff28ab2ebfd0bd2de137c545bf3a6903547049aa",
+      "review_sha256": "b05d8369da5353b38daa136baa235d1a0163e750326a086a59dedddb66075231",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kKwilFQy5s2Ze4boUpqHJRFINWw7AH6zEYOQGHE7+Zb2H0oeyDimSGeRp4dOsMOIxuFe26MG1Kv9zt6Rh7jLAQ=="
+    },
+    "literature:lit_alexandrov_exploded_brain": {
+      "schema_version": 1,
+      "item_sha256": "a24d0757f4c797c883076946ef2edb3c2eaa7acadad8a997a5ee307c524c5059",
+      "review_sha256": "22ec9437f77f28fcdfdb51a295b3b88b23f13387cdff0d8bad501153df5203a4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "PlrMBnculmD9FxHitStkP7gcQxGRNc4gkzRD22WmKjWXDiCuz0jwbJr0JBpmO4k81Z1xK1F8syb7OB1Gp9iHBw=="
+    },
+    "literature:lit_tarabrina_posttraumatic_stress_practicum": {
+      "schema_version": 1,
+      "item_sha256": "d6f3f05f73f769fcca4da321ee3e6f7a0e7a1a9edc217e6c8c53ed3bd6c3877b",
+      "review_sha256": "f695203afe4c4b66a407f06322fcf006ce48887da0d3d23f6eeae34cfea5449b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "r4arJIRXs2Yg6l3/8ylJiegg3auiidtRbEm0nVZZZQvdiPCza1UzOFGrL3urXpt1PfiEkn41nQ6ZCGcCl1gMDg=="
+    },
+    "literature:lit_course_mention_small_steps_covid": {
+      "schema_version": 1,
+      "item_sha256": "ea82cbb584092c100881a5f6b81f21c19907d0438cf6058a5590da233ebde2e2",
+      "review_sha256": "848365c4900de2603eeb39e204e0afed1c45265d6b799f81df7de50b812a0cb4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "rN0dbcQrV+O6zjyFjBZ8nPqYpX0lnPUhJDUj8WI0NMpz3AWTpmjUvqTRQhnwcoHqS46r4eq7vVuBGhxNC6zsCQ=="
+    },
+    "literature:lit_course_mention_kucher_ptsd_theory_practice": {
+      "schema_version": 1,
+      "item_sha256": "f883129f5b22756a9ab95641588f42152460405b22eb7cd2e9fd9d03f2653027",
+      "review_sha256": "b5a8203a9d5c47955334b823512f22233b0f58395355962d51275061c882c7ba",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "3eFZhCZdTmYgOE1m29fOcNupGFb9bbR/xrzEbpcIBF/5oy+46eFKdKgymgD8jx7rW4uCdvtItS3AIsu7TglMBg=="
+    },
+    "literature:lit_course_mention_combat_nlp": {
+      "schema_version": 1,
+      "item_sha256": "750a28bacde3a830d48356d876119ffcd05f07442c57af4619aeb797ed02af64",
+      "review_sha256": "ab1ca80652cc60130784910ef1b25dfa587381f8bb612b52dec1e28cdd6a9bd9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tGI7Yyx3kz9mmp0XFDFEco4Zt+8glzux29CHXVMr0WpjXJE6pgxYYGjsTSdNI+7aaIlx9SsKlRM2YQyYwtmPBQ=="
+    },
+    "literature:lit_experimental_practice08_maslow_being": {
+      "schema_version": 1,
+      "item_sha256": "fb61e64e3983450703963eea74ad5274b71ee2416abea798a170589c2a26e290",
+      "review_sha256": "a5e54eb5f8c3cd7717463580cb72ba299b4f7c3644bb468a138f67cc95ea65fd",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "xbgxFvrb9bAMC5op4w121RdoLUXF3Q788BWEnPVR3HbhykDXi6F/g/EjzTYV5xEPQuwwtZhoApuWg7EOXLseCA=="
+    },
+    "literature:lit_consult_practice18_graham_resilience": {
+      "schema_version": 1,
+      "item_sha256": "f5eab2e02ea66fdebad6765e47aeb191d1e12c11dae02a7777bfcd75ce480af7",
+      "review_sha256": "8a3f1fd00d5501d631e921c497a7ab39837b09996877b500be1378deda2be47d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XZFUCbkkeH/tIbHdVMmAtp1ZTKcxPxVrJtZN8PEFbM2/Qt8gag+uHS8GAxJqIlmNecRfqiUdvjPjzOjwR7BAAw=="
+    },
+    "literature:lit_quantitative_practice13_kahneman": {
+      "schema_version": 1,
+      "item_sha256": "73dcf6b265ae5eb4c6585d3a39227077a9963d6fc487c4b0a54a0844023b3572",
+      "review_sha256": "bd9d81d9b2f51e579b22baa67a013c759a006e745ecd7308c8e0ae448981387e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "baLeIBrNUInj4lLNVkybyRxvWoD3rqoewG7vMoOKLZG3M+VMkl4eDEBq9sGSK3u5L+vJo32ZEOb4O0MUgqdACg=="
+    },
+    "literature:lit_consult4_rogers_new_approaches": {
+      "schema_version": 1,
+      "item_sha256": "d98bdaaf3e6de79f1b26f10011eead6a6850a2588245f0791fb09845c290873c",
+      "review_sha256": "fa3e851d68714d54bba2fa7878f1a7cbc024fd9c4030a417bc47f867618c1353",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "14l5w6Kcb3Kp03nho/cS3DKs1R+nBXZDgbtVn7j7SGnwMS5tDtecug8qen9tPMrDv4XsMOT4C9MFZylq5SY1BQ=="
+    },
+    "literature:lit_consult4_rogers_client_centered": {
+      "schema_version": 1,
+      "item_sha256": "c39b09105e09a35356cf15e9baf0a869adcd40cb51ce87ddd794247d4cd9e192",
+      "review_sha256": "9e9aac8334f4c9fb0d6a7fda76d8c7b914015179d11c24c5969039cfef83af38",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "hgST4xHEIDAO8nZKE87b2tMtdpBnvhkDSEsDSmiXqLnscFSfYppIZZq8oA99BvP0JUwYE4hoHOpb1Tb5EilSCA=="
+    },
+    "literature:lit_consult4_rogers_becoming_person": {
+      "schema_version": 1,
+      "item_sha256": "7b36caa6b43b2ccb0541f4f4e3f35fd5d01d73a9c1714e01872ef90e95f46787",
+      "review_sha256": "fa3b4855ebd2f8db64c4c8d619bbe026ff580feac76ba4781199a9676bdcf119",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Eg0jvvAgEKkQRopnUQPbBv97mKTtyKubj4mpwiWMxPUF3MMLwQ+lXRSKqqozDYD5bl8Upo+UBQlCh0rwrrlnAQ=="
+    },
+    "literature:lit_course_mention_galin_creativity": {
+      "schema_version": 1,
+      "item_sha256": "5ac6c7b1d84efc91b7a0720be4884089c1258da12a3d2c7cf745796743acc775",
+      "review_sha256": "70f6478528ae9f6a92f9ef66a3772c2fe5224549b41f52a1b56c9d1ebd7e4757",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Yo/pGPFarO2o1f15mcuBB/ZlWaMlkqAEbCBiex/e+75g2LjDuJx5OoU4El3w3nZ0vRduEzZzadjSt6gkBaT/Cg=="
+    },
+    "literature:lit_course_mention_galin_influence": {
+      "schema_version": 1,
+      "item_sha256": "e4af06e2d906259fede67985a561c257fb1e16d431c5bddd8d27dae0b0d917c9",
+      "review_sha256": "dd508542dbce3c8af6afef36746a7bfc109377d5962a21a2d11505d71d5fd95a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "C9S+l/3y1iheXeIZd+v2u2HqXekDn3FN52sMyYtNTZFXCjuVUynf7DRYwUKzDSNus7KzSrFPL7TdjdnLDHj3CA=="
+    },
+    "literature:lit_course_mention_granovskaya_psychological_defenses": {
+      "schema_version": 1,
+      "item_sha256": "d9f0f43db32f3baa080bac7352d89c4bddece535d5f4df3cf0a0643c5e406004",
+      "review_sha256": "3d772dced42154abe98e8c298b418b2aa38291b5a8cbb54f019bb6c3420b7bf5",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "q34yVostpg3zoMLY3ZEov5sJElklCNY2L1sv6I2caM2kMGpt2ja1NKwLvXtdH2buMTxGRoWasW/5ckAx2CZwBQ=="
+    },
+    "literature:lit_course_mention_subbotina_psychological_defenses": {
+      "schema_version": 1,
+      "item_sha256": "990a6a2295d4e58071da7f62592508c5a1b8d8d3058071509c7ea3f87931bfba",
+      "review_sha256": "26a10f737da374b590f2eb824364d07c286a16d8941ca0bf300fa8737607e7a0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ls7xcWd75k68zZMx9oHDs9LZbwNEWzzGPhEaMIQ4x2dKJhw9idSp8CPbV9FlUQaQe4HhjVzweal+48aeZ0xfBQ=="
+    },
+    "literature:lit_course_mention_detroit_child_trauma_techniques": {
+      "schema_version": 1,
+      "item_sha256": "146f30a57ffe79f2a3a7fc15c303339b31be9a173466588e6d0df24bfb528844",
+      "review_sha256": "24162a2425cdfb9e97b5bf706c85a1c943f1a42c5353015bb2733d272399079e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ZIXyIulrN54h3XulHPEtaiyEy/386aHyo8gk0euKeV6ZNeT5SOILJBbKlsOyFrRQti3drShyhcX9AYl5LCy3BQ=="
+    },
+    "literature:lit_course_mention_return_death_tales": {
+      "schema_version": 1,
+      "item_sha256": "333aec99328ef8204379526a5d89a5c6230fd269dec6043d68a50c1e6a53f0f5",
+      "review_sha256": "592aeef3b877e270ef576f8437f481fe225a07829d24b58a39cc409d9576ab86",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "z5yqX+royZmJ/dAdmppk+zh06zTQcj2yVO0dPwAHFU890MRYt8N72TqHHXZKRme3KoXH786txQUwswAo4YRWBA=="
+    },
+    "literature:lit_course_mention_practice19_consulting_theory_practice": {
+      "schema_version": 1,
+      "item_sha256": "a09245e6e48629af40b3e578c08455dd6cf0a4d0987a3b3be6feb7c729adf13c",
+      "review_sha256": "e43c1f6163362d3b38dedc9ea98b2ab37f0281383b9343cd92a1d669a9ae1dba",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "L2FSKVHQvBEaY8KxtWrwJKSnb9kexX0zmS6uIXBvqzfPFBbK4Nz7nZdmJYqasdQ/t0zBn/6JE6UcSzhSDuM8Aw=="
+    },
+    "literature:lit_oecd_pisa2018_volume3": {
+      "schema_version": 1,
+      "item_sha256": "330b7d13fbf029246f34434d8a58577d132589e52bcddde82bb0a70b46e1e42c",
+      "review_sha256": "ba45a9e1bd36d8ddbe5623921df76f32bdfd4fabe7ab406192cbf066b62cd4da",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "jJc5KItL5R/0PzOUEw0ef95j1TI1DBZvcFLKBmY+b6Xans9RFuCWlATcRVc7amw+F5NVAtKGVibPJZ47W72GDg=="
+    },
+    "literature:lit_dweck_mindset": {
+      "schema_version": 1,
+      "item_sha256": "b4cd82dc1504be5f7a5e1f97970d640e853fd3fbdc0c1912f2a521a3d4d03210",
+      "review_sha256": "9d1b6863ad272b61875a774292333776e475185021d3fe497830b1b1afc50a2d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "jUMIJW/oTg4PDsTd/J6MBvUq7/PifD+24Ps80bsGNAb9LI4UxNzU5rCSTB00ooJy/RlcD8CvV75Mjo9Dt1yWDQ=="
+    },
+    "literature:lit_freiberg_school_climate": {
+      "schema_version": 1,
+      "item_sha256": "940963649a32e62633bd4fb8c447775baf95541a7734f352203e5fd5e60a1b53",
+      "review_sha256": "4c399a590a82540f79695275a141fede27a28cf57dbb138024e178f8440bf35f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kdlun/eAXPZEegbxG2mCblfQnogYz1cFd5uYC9CG29UEBpC/FEqvixiloch66K0Go4yBXuGHJPXGuwDxe9FlBQ=="
+    },
+    "literature:lit_rath_harter_wellbeing": {
+      "schema_version": 1,
+      "item_sha256": "e526b6868cff4e19b4084f43b5cebdc2fcda40e06545c9525dac593bc34740ea",
+      "review_sha256": "56b223c02c222284372a315c640f0e58a11383167c68f6e0cd1b9b42e14244e4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "91NGg0+/2ila+vo7kf+epdCAIu6z040pXMQHL4Qq30S8LEWq5QoYhqRYO2j1DSVNFNAv/pD1h1gm+ZaLPrfiDw=="
+    },
+    "literature:lit_olweus_bullying_at_school": {
+      "schema_version": 1,
+      "item_sha256": "d2bc910e4ab8f82d25f92c19ce45f40e0f2830b3221dd580c1553085ba0a8178",
+      "review_sha256": "145378eeb9f7592012b0d57f08d112701db4499a7b99dd0cdf46d16fef9ee816",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9c8BvLi+bS1Yj0AlFTZU1qhtf8+gZnEn27xNLnesJukhAYYR3QLtWt+eGuobKXp/D+eXPZth87GG1u+6Edd3AA=="
+    },
+    "literature:lit_oecd_subjective_wellbeing_guidelines": {
+      "schema_version": 1,
+      "item_sha256": "c0d1221e73c94c2b56bf7b1102a98920b1b50c7ec2831815993ee050807a4009",
+      "review_sha256": "ac56aa2009d309cfcf2634ca4cb65d8cc9d3dbb089b422d0a8d5158844fcc288",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "337Nnm8JAOC8J9XHEneyDGzn8tV0B4C/Rl4jypQPlqw/MFUycwMZYzGSZ9hJ83rvh5Xg02SbH52ywjQN38auDw=="
+    },
+    "literature:lit_burns_gottschalk_21st_century_children": {
+      "schema_version": 1,
+      "item_sha256": "6d5bb229dcd7190ef0e46b41950a492c8aa00f16e84b5020be751e211caf910f",
+      "review_sha256": "4e52c4b2790b6e50b645d390ee50a85cba8f3dd058d583013c8f6a76fa7a182a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "lG6P7v3t98N/VByFiYskO7v1LuF2yD+9X4qDdQHGLfWT1dTpvvwZoEk1XI80tqIGKIRApu3R21ETWvCOp5NGAw=="
+    },
+    "literature:lit_christenson_student_engagement": {
+      "schema_version": 1,
+      "item_sha256": "20d25b7084b6649685ca320e2b65594ca68c57d0a0e62eb91e50c14a823e607c",
+      "review_sha256": "76ccc2147657328d41179585ae925a84da53f84fede8084b13cbc96e59f84dfb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mFyCCzZqDwEcYXfhv3zGIpEPByuZeWCgrpAVnxUGSalR1p9pOF9dNFExJvuGhwBVmDs+cuPcnR91K96/0XWWBA=="
+    },
+    "literature:lit_buck_akerson_science_teacher_self_study": {
+      "schema_version": 1,
+      "item_sha256": "8f5f0a632647a56fecca993236a8d617d8e7d62ca1aba5a442f9b9fceef48793",
+      "review_sha256": "d98f1dfd7f4cbbb6b2a0a6749c03a419d1e292c92e013ac56ae50fc54e42564e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "GvlbTuETwL3Tb/62RIJqa/0ZsZO13fqjqbz2TkGKNXdzmv8IUehiBhVDfYdubQ351v66MNXetJIG/Vfy8BlRCQ=="
+    },
+    "literature:lit_hattie_anderman_student_achievement": {
+      "schema_version": 1,
+      "item_sha256": "589f2d1c5aa5cd0da7e2c112c847ab23edd2fe927676a0c0077fea3b30096d5e",
+      "review_sha256": "fbcf5f94e696b4801dccb9295b0358f26b2ff1def8c2452ce55a0569522c9227",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "BdwF19ac7Pxf901OAXX95al6hn4LrcDm6wqEEoQb3fjXIuEQc3tDY2o5e62uTuw7swouDO3pPxYBbNziF/YXBw=="
+    },
+    "literature:lit_kunter_coactiv_teacher_competence": {
+      "schema_version": 1,
+      "item_sha256": "22c5e03eb0e81f57e1043bf93fdd7e51656431d0c542408123964114eba069b3",
+      "review_sha256": "5bfd5a412ec78c1edb6bb60883f01ea331d55f59dce5576e3e48ea4e8094163d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "oKifjFyzvgS/xme9ZiJFq7Mjx9z4vVRhXDRbGQ78QUTimGlK96O9rh69Ad9Gc6v8mzbydDmpWzNYZLXlVmV4BQ=="
+    },
+    "literature:lit_oecd_pisa2015_volume3": {
+      "schema_version": 1,
+      "item_sha256": "da11e053a6b3878bd4139ed40e1e9c0a70c2ce624c41d92c23a6f68d38abfca9",
+      "review_sha256": "c4dc1aec4a12661109ab323a7b117c6003d80fdfe0fe05e12f360f56377fd21d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ynNak3KSRd5FZ8UlX0Amz/tYky8RfthvEpv+C2ifLkmTKDQFfqFuYLoVQigqotamOEnERekqLZuES9UwmausCQ=="
+    },
+    "literature:lit_oecd_pisa2015_volume2": {
+      "schema_version": 1,
+      "item_sha256": "2b2311bf25a40574dfed0cadc593a251fac332a89b9e2c158f7192568f6da63c",
+      "review_sha256": "8d9c269e6cfe4c6bb783c7a4493ca4d187ba5a94922b8212aa98ea5164f27b9a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "RnD4z1rSDhEFP+ox6JhwF2sdojhfaADuxRzJGyccl2kCFCvdFI5Smd49eP+UvPjGqKMPp/zEInhML6SPeQG6CQ=="
+    },
+    "literature:lit_rees_main_childrens_worlds2015": {
+      "schema_version": 1,
+      "item_sha256": "5a222e73bef5347d5823b229e00946c0b3c52f5bb825cd20028f61ce3eb200a5",
+      "review_sha256": "5cf49900b3746bd173a8c24d7715e4d66bd10437d9049e94ecd1c2d1757ec12d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "6rR40md7Me8XwvclmwLqH2+IG1XUSvqkri5FOlkTWEXDR+lTFar7vKzGhgZROQJjzU0NZj7Grbz8choVw504Cg=="
+    },
+    "literature:lit_good_childhood_report2015": {
+      "schema_version": 1,
+      "item_sha256": "ff3618c07dc7c7ec5453cd899a2f13668d54a8a093a749910ca5b849c44620b7",
+      "review_sha256": "d4efcecf16347cfad65b98c0200fc77566594738dcaf51a207138011365e535b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "QaN0ciUocOUfUwG+Eu4EALctip2bOUd31u9dCYrQZNXHcIK4aZ4ME1VYWlUcQgpuOG7pNenBtMa+8LJGVw6VCQ=="
+    },
+    "literature:lit_unesco_ending_school_violence": {
+      "schema_version": 1,
+      "item_sha256": "0299a8030149ebff976ed28ed2d23497f4869f7d4780a217d826d6f0a459a76c",
+      "review_sha256": "7924703c9191ff212f830f31d80b1839560686fa3761fe8b0924dfd0334640ed",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "U+o6oasd3RuYlBR9ZC8UM/iNC1aC6ChU8vKQUIr2VcZSduzejqH/HmQNz65rSrLH6ZejQSpBBvPSCUVJebfWBw=="
+    },
+    "literature:lit_oecd_talis2018_volume1": {
+      "schema_version": 1,
+      "item_sha256": "9eb28c958159754f9acf4a9f93c083b6cca9d28123ba8059c51aceec912a84b3",
+      "review_sha256": "9db6a64c235b26797fd269c9e569fb59d6284f7ee3cfbb0a7fdb3a472e24d44a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qPOM7EhkUpfHJmCnK2nrftTBkMUtX28Li/5oIe8nco2LwEM8Lxks2gY+RnF/J+43vvmt/pQGOSLSRNMhiDjeBw=="
+    },
+    "literature:lit_oecd_gender_equality_education": {
+      "schema_version": 1,
+      "item_sha256": "c8ca2afccc66e7ea24a6ea5f6f45a1414be0898c74f319c44b94ef9ea2e3c60d",
+      "review_sha256": "6aedc8906b306d7637c369068dbf460843aef673b69513a938933c149d4b219a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "B6fITe2Z9XYIuVBd9goewjlyuowt+ZWXeK9npud9LOHT0k1bX+JkhI4svPxxTpGyS1MsencbqB6HeQo6lzLfAw=="
+    },
+    "literature:lit_oecd_pisa2012_volume4": {
+      "schema_version": 1,
+      "item_sha256": "f22579f43e4468ac6fa6db7769f80aa045001e6bfd9dff7f2bc6ab6492dc86bf",
+      "review_sha256": "cdc0dec8bf45349db321cb57823b69ebe662d7199cc793fe811420dee90733d4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "XIGizUMSxVSdhUG/A1kjmhpAcIuzxstEAuY78rA76iIem+nOnPscHqOX6T+8D2h74r3KxOug36VErT97+HqCBA=="
+    },
+    "literature:lit_european_commission_early_school_leaving": {
+      "schema_version": 1,
+      "item_sha256": "7784139ba1b93af2ef4a938736a6fa6cf16c1ca4f5acaeee9ad94b5dd2c0e2b9",
+      "review_sha256": "3ad1e1415ab43b881c304cd95e1da7bedaed700e2841e83bf2996fe46ab162b0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "LsQdznqBLxWtRVHn/8wOFFV5cloI4FLTaz6yXmWDTbTf+z3Ml9R8rhceWgNEgDSJ8BMzIJR8QABL44HayM3LBw=="
+    },
+    "literature:lit_frankl_man_search_meaning_quantitative": {
+      "schema_version": 1,
+      "item_sha256": "e02e8b2f352ce4b676025e1ba22f5860ea4c04d313ac65914b4158882d065c4c",
+      "review_sha256": "683f261357c6933ae4e27ff2e7134dfd461bc91002a99614ba6eeb6bef96ed5f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ANDCXoOAX7XE7DjmoHzplE+N8SL3Nrm+U3kRf6Fds7SnleHWLM9D9CI7Zfuvg3nT5i/NVOqn64T0z8oBYpoFBA=="
+    },
+    "literature:lit_course_mention_d0925c1eabd1814f": {
+      "schema_version": 1,
+      "item_sha256": "769c9132c2084e2bd19d2c952db15c31c1fb0f3b1f2917dc14ca7dc26a87d23a",
+      "review_sha256": "03ee36c6c3257023be44fae82d86e4acbbf09cfa194649eb008086ac372012ba",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mR1EBeRdrwbRIHZ8VqDPGNqq3ZM/b97/RlXU16PBgwXCWxNHCmaLexKcfDkQq2JvmfybIQppw0NECyQQhuHeAQ=="
+    },
+    "literature:lit_course_mention_6a0411db5000673f": {
+      "schema_version": 1,
+      "item_sha256": "917f7988b66086c708e8f27c38e20e211d87e8e75a1f558b3cfaf82bc859168f",
+      "review_sha256": "de8a1259d751d30bf44ddf0baace370418d533efa2478a7abae12e9df06e3d57",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "dT3LxuRzNK+m2B8el8Gn6Z2H2mXERGVX30b+iXC8HIA9pfHms+vFObCrLHCHs2ZwLAUQusqFxoVuerA4+CuZCw=="
+    },
+    "literature:lit_course_mention_bcb1d48d8219a2de": {
+      "schema_version": 1,
+      "item_sha256": "5ded14517c4e5c19f1bbfb9bc7e84ba13745cf8c28560daed23a54da0618aac2",
+      "review_sha256": "a8544234a06d616d61af6cbdfa0abaa1cf7a500b23304465a0296a68c0dc7754",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "c9n5fnVEh4lJx8oSTSooy5y2SbbNEvzrvTN7rYyb5FImiDrpxuHv+8CiEd4WhbyRp1WGoPgkZWoJhlRM9rzTBA=="
+    },
+    "literature:lit_course_mention_e50e0babc4a8e1ac": {
+      "schema_version": 1,
+      "item_sha256": "1a667939d2fdfe65d9292990e3af231615abe1f9e3ca8c544c4d04ff683cebda",
+      "review_sha256": "835ea9e4ae7241de784b33ff6066a7bcd23f653a3ee95ae908bd87de3484acd4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "IjkBuwnveSOXd+RS5yxegs4Rj1BLheJ42X3xQ15MIdBuMSLZJam+CO5y49P/iTqP9jVkV7juYRQFL5zekcShDA=="
+    },
+    "literature:lit_course_mention_52ee0cc6d8328928": {
+      "schema_version": 1,
+      "item_sha256": "a45eaee4fe0fff5f4677898efd07b26221c3c1b156b30576abdddfc377ec3fc4",
+      "review_sha256": "589af9b9647c7117ad091ee8688630bc2caf43e74c6b202318219f0e2c59432a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qqmi7xOlYxLxq1WJzRObO+M7oYYvIWzDI7wIbCJkzZyVgYNVdvDfaeN58tpu9DPNFrPzB69rwScEJ1wRr/tVBg=="
+    },
+    "literature:lit_course_mention_6989ce1295898678": {
+      "schema_version": 1,
+      "item_sha256": "060917ed2e86594c7de3c72d58eb9a91346e2067e8546f942358c34abaab238e",
+      "review_sha256": "ef3b6b5aa91fdc509a2d5a4cf001b25b1dbcd12ccdb142a40d955547bc72e052",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "IYkZkpNJvVp7bIYjSdh4wehXaEDGP7hLy4mB1K5NjZl3pDmLQjq4osAzMu0TTgzDOcvfLdkT2ka/AB3oRcqtBg=="
+    },
+    "literature:lit_course_mention_57f33726ed4ac65d": {
+      "schema_version": 1,
+      "item_sha256": "78bfd918b2bc05fc4ca55f479e48cb12470c02d1b59a0819bf75df07b0b0ac1e",
+      "review_sha256": "8fc37bf4c8064b27b212b7fb132dd0d9cc828906c9b1ba313c3761afc27b38a7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0Xg75Z0R4uk6kmuCx5zCeeV2hC9VWykqb3InRy5SgUec6zn7ZVWDB6aKR7CltNNeHGbaKrkVKmzqQhFY6xdkAQ=="
+    },
+    "literature:lit_course_mention_893a89421300f678": {
+      "schema_version": 1,
+      "item_sha256": "fad77d3f327ef0a23439c40be38ba6ae978df432e125385d539ba67852720a4e",
+      "review_sha256": "8e0c5e151786e826c5ccdd95933584755797ce4b69222d4361103e3a8f6129bc",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "MZThMdDi8A6Xg7S1yAywDdbY+HoTS/fEA6Cp1rYBJxwfq0jADOJqKeNLXsgmYEaJLz7Mtpmyw3RM8TJy8yN8CA=="
+    },
+    "literature:lit_course_mention_1e33b87d4c9cedbc": {
+      "schema_version": 1,
+      "item_sha256": "14e557995abb3d48f3e15605d2b75e558c3ba0ae631369678204992a737744d2",
+      "review_sha256": "6655cae565bc5f170bd45d4fc427890ef3fe09133eec31f72a51c0c4b9cba564",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "OYUAMMCub63JXxI3eCQjFB+Kj0WMjUI2rfouVM1tVn28hQ8O4XtAg+fTMxIij2hXjFfnJyDdPXRSEFnj1ZHbCw=="
+    },
+    "literature:lit_course_mention_b976cc7351d9e31f": {
+      "schema_version": 1,
+      "item_sha256": "22633ce66723aa222107b69f3ec1beeda81a6be45ccaa25c7165706dcaf10575",
+      "review_sha256": "4d52bd91180dcb4adf3f860b37953711c3d7dcae23b8a7d777cd87c3e6ae7771",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "GTNmFG4tPqhEZyWwRgclqTFMfqsU+8ogXUkNcim10DwS1NW0uKxrb1/lpqD62frwIqaBd0JZad0HNuEFD5tcCQ=="
+    },
+    "literature:lit_course_mention_4072b2a06746eb8e": {
+      "schema_version": 1,
+      "item_sha256": "ea74c0c8fc54691af77282a6685f8ac690413ca2715dab44dc3773cc306b2a53",
+      "review_sha256": "cabad583e340768f5604c30cdace3dcb03b53642f0c5ee21b48130c0c9c989a7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mtqQKiaDsEviNqMnzaAPDKai/x5L9z2kcjETzO9p+/BqffKLDlUeq5s2cj/wdi9UKtHmM9GyuExvTb1dwws6Dg=="
+    },
+    "literature:lit_course_mention_e63d19e97ba91e8d": {
+      "schema_version": 1,
+      "item_sha256": "24c6ff22aeac5a1e70c9b3938e6b09443e3e9e7649678a149daf17a94a5fcd1e",
+      "review_sha256": "976cf6d3b7ccd5bc624760cd3e9d126e97b1b2ef617b117a88e214c8a74a7535",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "dOiEkULwyu/UlPadjqfT0nmaMwRAfFmjzgYTM2uZvVl3Bn6y1sn+tzDCVv7RtsjZjZEwpXlTOruEBGlh5yKUDA=="
+    },
+    "literature:lit_course_mention_efdf2863f47b640a": {
+      "schema_version": 1,
+      "item_sha256": "73576fc161717bfa4ebebcb6ca610436b0576fc03358495b551b925548a9370a",
+      "review_sha256": "9cf737143886b11ee4e5ee599e29fb9cebfa9002d2d0d3dd1660985f3974105d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "yPNnU04hpZGQs3dZbEbxHQ6/VeJhJavewv19yMLSqWfaDFm/6iuf9yI0Tc/kL+pRf7pknpm6H4Dr3kHVXgh/Dw=="
+    },
+    "literature:lit_course_mention_62bd57a7137c573f": {
+      "schema_version": 1,
+      "item_sha256": "de08474c7b78c8776f75fb26d4c80e40e372a7729b8951f0ee86dbd87d5f9af5",
+      "review_sha256": "3906ac4d89ff912b9c92acf3d3b1433dc8460d390003faef87efee2b48abd2f2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "KgWLUN+tb76LL4JZWM0L1ohfbFJxdeeoAMgKWycOkRNVJ12g2vpIz9IJc2JJc8elYkiwSupwOByxrSKyYt/GDA=="
+    },
+    "literature:lit_course_mention_f3a45bec2566afc2": {
+      "schema_version": 1,
+      "item_sha256": "54f302c34199a7ec20d323d014d78407ccbf61ac8e81487f445a5b82df9052ef",
+      "review_sha256": "ef056bdba61d523d613e64f7a114c76869d146578ef189ab904ed4cbb929bbb4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E0fUe3LjWSv0gUSYZBTFErb58AP2DFrnMmkRAygFfyQzGLNKVeiiKWX3Os2XIfRj4HaS5IRiKf/m2rug3XRpBQ=="
+    },
+    "literature:lit_course_mention_be2b1c9d425fc832": {
+      "schema_version": 1,
+      "item_sha256": "1fdf9e37c0e6edf49682928363c4f33492994d5cf2bab07ce61a777f25c86397",
+      "review_sha256": "0261c01c55262175955c3d8e46abe789897a6eda85d92b186222a807cac13a8f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "vj2wJNxdz8OMMhANzh+QveWFXiaquP54li8hFgCrUbXI9MQyubeHmipT1zDY3pH/mMZzIZwboWMyr3vrICDfCA=="
+    },
+    "literature:lit_course_mention_d7e88c1d4f888bb6": {
+      "schema_version": 1,
+      "item_sha256": "93e100a2a2d1147a9c6cd4aefe1e2a8cc7ce88c07886ebcbaf16a2d63469a5f7",
+      "review_sha256": "93877a086cbbd501e85d938620c2dec1e5765194c8aa47d344c559eaadfb51ab",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JdRL/xZEyOZbTWI7ltkJh/cPgm/H/OsaMDUrJG8E0Be5qBHzWEDPCQuahB1rXkWQp0YV+y0P8or7uO00qlcXCA=="
+    },
+    "literature:lit_course_mention_76d6f7e8dfe457a7": {
+      "schema_version": 1,
+      "item_sha256": "20a4875b81ecf0b45a506e7fc4005d919a140f2d5a30c932a6705344a4772097",
+      "review_sha256": "0548a76f925e7bbedb9ce82e190c9c597ec40d465256cb28efdf55ff5d2bc235",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Py+lqvuzt42kXMZtzN1syG5hdrWNk42qp07QIer90Cy+K+9yt+EGt2p9L3uWb1N6jM3zjmP2dvRUA+PEBmxiCQ=="
+    },
+    "literature:lit_course_mention_a00c9150bcfd7966": {
+      "schema_version": 1,
+      "item_sha256": "b3b0e38f0f4ceb0caed15af3d842e046e3f04b535aecdf2bd667b05e1f5136c1",
+      "review_sha256": "6af7116bd446db5254c70711b9159d680083e7dc2847c28923e06d1378b13496",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "NEKvp4QOcnKUlH9pgrWmfQLEEQ/FicR1kk5hf6fay3Z01bxhQtF5lmkwR4ystat/zzOFJ7cbQ5RNbQBY1rPGAQ=="
+    },
+    "literature:lit_course_mention_db2ba3e8c2e1dcc9": {
+      "schema_version": 1,
+      "item_sha256": "637fa3554e482ccebdc4d0756b382660149921fe6083f3b3adc4aa4146e0eab1",
+      "review_sha256": "b5e5cb9f85d6b2f6bce4254ef3fa1f0d440a85e580967d197b6c7120b1fb0380",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "o9YBiTjVDErOJ9hfbWweZCIg53HmBk0w/S5EYLlJ9AY+iKNOgDP25S3dbomwBfFBzF0SBajJZk6ozr66A82MDg=="
+    },
+    "literature:lit_course_mention_a1f851d16e687949": {
+      "schema_version": 1,
+      "item_sha256": "012073b0218b7bbf693638c610c6a2edb2f80ef27f07f44f9f34c7e3d2c1256d",
+      "review_sha256": "aa7674bae3d166ed7a23917b7b6847b1cce292c58ffed9ab0fa08fec6f03808c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "vwFFsuER+FEym5NMuGKuryDYQy1Yr9xdAEF2UmeggB682Te/zgrqjNkSRNfOljoxlxNlLy7hoVUrw5qe0gXbBA=="
+    },
+    "literature:lit_course_mention_c18b55e2a22acdc7": {
+      "schema_version": 1,
+      "item_sha256": "ec18830ba887a7cb45c6df175dc8fd9408e730ee3b05767ada3867ca7e5d666e",
+      "review_sha256": "337726badeb488757850fe03ae898370c9c30589b997e0516f5b997683608dee",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1IVRom3u7onGcg1GyOarFj+4RgY1eZNyJ12ERv7y25aWN1Hb7gDKiqfe8mY6YXY+V97o7icCw24ISJyYjvLBAw=="
+    },
+    "literature:lit_course_mention_277405e34a8fefe0": {
+      "schema_version": 1,
+      "item_sha256": "3f5308e2c21155d7ef2bc5233b83263fbbdbe03b62919f4baecd148a2faaaf15",
+      "review_sha256": "85d3a3aa4918c9db958f1db640ec0fb6bde5281390e1dfa9a403c181aaf6c622",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "pITCRkIv6mYYBqXTLXg0PlnRwyBc+hUsYeFkdaDfb/mKq/pZZfpwTeBBrNHPqF4gEiShLpoalCRs6gXiI8S5CA=="
+    },
+    "literature:lit_course_mention_680648f4cff86e93": {
+      "schema_version": 1,
+      "item_sha256": "b5a8303212d347d697abd21269005f46e879ad1429acbece656c2141c2492b0a",
+      "review_sha256": "b72114627878f96015f63773b31b2c1365e1263431254208e9ab0e2f8b567d24",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "u26jeQ5zy9fjjHQaFttGLljjOYTSKr4G4p6lp0x/sRgmMvisKF0pVGlAfFlaQJ7XGcgsQUpvI5vHC+UOMbYTAQ=="
+    },
+    "literature:lit_course_mention_5471070945426f93": {
+      "schema_version": 1,
+      "item_sha256": "8a8374c5a9f684fe1a881395daf624b37b3fc63954493f7905388fd299756c6f",
+      "review_sha256": "67998d18fb8981564dce91e24265ef9ef263c0d7a291ce8a2abd1b9b502ad0e3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "q1N9E8Y9ILa9x71geg0ELyQD1V5NLqy2Hc4OGiWSa27PrunKlG9mFkpZctlbDH9oD+zELSpKdwcUzDaCq41IAw=="
+    },
+    "literature:lit_course_mention_e51d58eb24bcf8a2": {
+      "schema_version": 1,
+      "item_sha256": "45b2f7fb59570e6758016942ae74f86127cfadd67b0067897bd96712731067b8",
+      "review_sha256": "8c2f9d0985a9169cf70035ccfd107ffdc0a1b3cbacb35a1f86a215a46442681e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "I9pu5nEbJjb6ckGzY1LRtABK2V+I65UiQz3ZnJ30m4aeF5Qbm8Zo1FHQUMNvadPM21jL0s+m4JQOrdDmS+mmCA=="
+    },
+    "literature:lit_course_mention_e809609920ac0938": {
+      "schema_version": 1,
+      "item_sha256": "bac83d1c83c05007adb5e6aa24f845ccfd3cfc373cec8b2a318463f916a69710",
+      "review_sha256": "2dd8b7ce8f4e3ea18e9e61df83b11e0ba8cb5647f3479c2986b8adc3df224d09",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tFy1YFwvoVaIVsNAsNCJISoWJ0zx9ythM7RXgYuh/yEAsmY86UeDZAG58lRg6dKDJxBeWgRMbhQSFQQHVFC3BQ=="
+    },
+    "literature:lit_course_mention_591ae30eda19be76": {
+      "schema_version": 1,
+      "item_sha256": "ecadd2996e237b64f77881648959f48f2c6c1769d2df346f72c37fe11a015751",
+      "review_sha256": "5a43fa99cfad45fd63663a1c4762a15f17e67fa8a4ac07f21a17e6933cb665ea",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "3QuHupvIbemn+beLFI/5nSdk/TsdnvkYS3HAmGgH4huNJPs1/tO5NLwQmvmUUSbz55ove/LuTo/VvgjErl3bCA=="
+    },
+    "literature:lit_course_mention_afddeebaeeda2e6b": {
+      "schema_version": 1,
+      "item_sha256": "96bdad6b76f0b52ddcafe2fb49af9123ad50c5a17fa118a186841c4f8a6e42e1",
+      "review_sha256": "6eea0357fd717be28e721349936a0fbb88e658102d0f633aabdf780b12b1fa1c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JpGVvDiHxK0PZUx7ClVOi0ZJicNFrV1Z52sOHoHTbxYWeX1ykP2MVurgAEzDVu2lIt1ZyloyGSuIWmeCI2vPBw=="
+    },
+    "literature:lit_course_mention_61a2ce21b5d8cac9": {
+      "schema_version": 1,
+      "item_sha256": "4c8b27fa067b8901865a89bffd4a2dd6238a0990f14c3cef520c4683c6591d07",
+      "review_sha256": "1e16b264a48b666ff013ed5c8b54d6ee923c549d6e735e9f4563019582295c33",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "QZHn5hxozDDGF0OlsaX1oxORpniL9giYkHF1HVKwBfle3TTuZqPyha8k/d1Pf35jQEUhJUWiQEylWNa1o5UzCA=="
+    },
+    "literature:lit_course_mention_0378825302da1e51": {
+      "schema_version": 1,
+      "item_sha256": "42c4bbf3af1e66f740a6b2febb4f994dc6acd18c53af59c41191072d40b26e70",
+      "review_sha256": "c75f86e5913c4a2e74bd533824ae332a8ec9c76d3a6a2b67819e3b717f59eeef",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "s3XhHzy6vPgNb6FUrOttOUSbcTqDqsTaNkpZHU8NdTif5So4ng0KMCsGdgdUyXJpKo5DkfWUpxFPKTrT2ZwjBg=="
+    },
+    "literature:lit_maslow_new_reaches": {
+      "schema_version": 1,
+      "item_sha256": "e0e6f49bbaf4524b2fe60f9862d37e4c60c89430fb3ed00e036eed8abd2579c8",
+      "review_sha256": "74366c4f64a73deda377a5649892fcd13aaa484cc76ab51ee5e486f35e6b6cc6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "EePUcOSM0lCGxt3DvQL/w3MVSK+D6KGhOCQYG/aA4I9HkLRqFqFdXTrsv5LyFFL/1ncaj7KeHNMGQ9RgE/iABQ=="
+    },
+    "literature:lit_course_mention_mead_culture_childhood": {
+      "schema_version": 1,
+      "item_sha256": "30b4262705449ccf3907dead134e3405a992121d80348b345080cae6161c0ca4",
+      "review_sha256": "137c7a9db1b93a4194409c31e8aeb45c9910fc0683ebf2f215f256c49606de94",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "wBOx4h+JEnz5OrkxMB6mbaIuT7guK7s4/QggbZ5eWL+WVYgQkDmfhN6sCrdchuka119+J/1mx5eIs7a4ENfcAw=="
+    },
+    "literature:lit_course_mention_unspecified_psychology_basics": {
+      "schema_version": 1,
+      "item_sha256": "7f9bc5e8b48ba4ea434a3059fb0cec1bc7cbc83824202222300ed35c0aaeaef7",
+      "review_sha256": "e7b6074664e340eb67f5838571fdda085c3713210a7c92fa6339c7fcef52efdc",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mFw14MMO1y31Z+ZuWTG+RdzggBBQ+sf2JcFREHhJWADnJqCXEVE5CAoLEsZLo8gVR4T8gl3gMxScNqSDXbYZAw=="
     }
   }
 }

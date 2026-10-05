@@ -9,6 +9,25 @@
 содержит приватные фрагменты и references; его нельзя помещать в CI logs,
 публичные artifacts или ответы студентам.
 
+## Единая проверка установленной версии
+
+После штатного CD и передачи закрытого ZIP по SFTP оператор запускает из
+`/opt/psychology-quiz` одну процедуру. `EXPECTED_SHA` — проверенный merge SHA,
+`BUNDLE_SHA256` — digest конкретного переданного архива:
+
+```bash
+bash scripts/private_search_verify.sh "$EXPECTED_SHA" /root/BUNDLE.zip "$BUNDLE_SHA256"
+```
+
+Процедура сверяет checkout и запущенные bot/API revisions, закреплённый образ
+PostgreSQL и общий lock, затем устанавливает пакет, строит search image и выполняет
+`estimate`, `probe`, атомарный `rebuild` с обязательным QA, `status`, повторный `qa`
+и `benchmark`. Имена manifest/cases берутся из проверенного пакета. Состояние
+пользовательских таблиц сравнивается до и после; исходные тексты и приватные logs
+остаются в каталоге record владельца `/root/` с закрытыми правами. Ошибка сохраняет
+record и останавливает дальнейшие шаги; сервисы приложения не перезапускаются.
+Скрипт не выполняет merge/CD и не подтверждает полноту всего учебного корпуса.
+
 ## Предусловия
 
 - Runtime и рабочий каталог: `/opt/psychology-quiz`, PostgreSQL 18.6, БД
@@ -170,7 +189,10 @@ python3 scripts/private_search_bundle.py install \
 безопасное перемещение этих файлов, не удалять их автоматически. Затем выполните
 `estimate`, `probe`, `rebuild`, `status` и `qa` с именами manifest/cases из
 результата импорта. В примерах ниже `manifest.json` и `qa.json` — условные
-имена, замените их на имена из результата импорта. Если импорт или retrieval QA остановились, не включайте
+имена, замените их на имена из результата импорта. Для `rebuild` обязательны `--cases`: retrieval QA выполняется внутри транзакции
+замены индекса. Неуспешная проверка откатывает замену; прежний индекс сохраняется.
+Отдельные `qa` и `benchmark` после rebuild подтверждают чтение уже сохранённого
+индекса и измеряют ресурсы. Если импорт или retrieval QA остановились, не включайте
 поиск и сохраните старый индекс; приватные файлы и архив не выводите в logs.
 
 ```bash
@@ -179,7 +201,8 @@ docker compose --profile search run --rm psych_quiz_private_search \
   estimate --manifest /data/search-input/manifest.json
 docker compose --profile search run --rm psych_quiz_private_search probe
 docker compose --profile search run --rm psych_quiz_private_search \
-  rebuild --manifest /data/search-input/manifest.json
+  rebuild --manifest /data/search-input/manifest.json \
+  --cases /data/search-input/qa.json
 docker compose --profile search run --rm psych_quiz_private_search status
 docker compose --profile search run --rm psych_quiz_private_search \
   qa --manifest /data/search-input/manifest.json --cases /data/search-input/qa.json
@@ -198,11 +221,20 @@ docker compose --profile search run --rm psych_quiz_private_search \
 или обязательный retrieval QA.
 
 `qa.json` — приватный файл `schema_version: 1` с 1–20 записями `cases`:
-`query`, ожидаемые `source_id` и `snapshot_sha256`. После rebuild команда
-проверяет первый результат фактического hybrid-поиска и точную редакцию
-источника для каждого перефразированного запроса в read-only транзакции;
+`query`, ожидаемые `source_id` и `snapshot_sha256`; для проверки конкретного
+фрагмента задайте `locator` в формате `characters:start:end`. Необязательный
+`mode` выбирает `hybrid` (по умолчанию), `lexical` или `semantic`. Для новых QA
+задавайте ожидаемый locator: совпадение документа само по себе не подтверждает
+правильный фрагмент. После rebuild команда проверяет первый результат выбранного
+режима, точную редакцию и заданный locator для каждого запроса в read-only транзакции;
 выводит только число успешных cases без фрагментов или Drive IDs. Ошибка
 останавливает включение поиска до проверки ранжирования, данных и модели.
+Для ожидаемого пустого результата используйте отдельный case только с полями
+`query`, `mode: "lexical"` и `expect_empty: true`. Такой case отклоняет любой
+найденный результат; сочетание с ожидаемым source или другим режимом недопустимо.
+Векторный поиск возвращает ближайшие фрагменты без настроенного порога релевантности,
+поэтому этот контракт не обещает пустой semantic ответ на неизвестную тему.
+Если все cases имеют lexical mode, QA/benchmark не загружают embedding-модель.
 `benchmark` повторяет эти 1–20 проверок и выводит только median/max времени
 запроса и размер relation PostgreSQL. Замер выполняйте на VPS после rebuild;
 фиксируйте загрузку RAM/CPU отдельно и не распространяйте результат малого
@@ -271,3 +303,10 @@ chunks и нижнюю границу объёма текста/векторов
 остановки, проверить manifest, редакции и состояние DB. Восстановление
 первичных источников и пользовательского прогресса этим инструментом не
 выполняется.
+
+
+Операторский `search --mode lexical` выполняет только полнотекстовый запрос без
+загрузки embedding-модели; `--mode semantic` выполняет только векторный запрос.
+Оба режима сохраняют проверки доступа, актуальности manifest и точного индекса.
+Пустая лексическая выдача не подменяется семантическим результатом. Используйте
+раздельные режимы для диагностики, а `hybrid` для совместного ранжирования.

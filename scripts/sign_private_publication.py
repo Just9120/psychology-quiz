@@ -28,8 +28,11 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from app.content_publication import KINDS, PUBLIC_DRIVE_LINK, PublicationPolicy, fingerprint
 from app.publication_certificate import certificate_payload, key_id
-from app.source_inventory import (InventoryError, complete_listing, link_lessons,
-                                  processing_status, scan, unresolved_related_conflicts)
+from scripts.scoped_fragment_review import FragmentReviewError, verify_fragment_review
+from app.source_inventory import (InventoryError, combine_registries, complete_listing, link_lessons,
+                                  processing_status, reviewed_graph, scan, unresolved_related_conflicts)
+from scripts.source_inventory_report import (combine_private_topics, private_registry_input,
+                                             private_topics_input)
 
 
 class SigningError(ValueError):
@@ -64,6 +67,67 @@ def _character_ranges(locator: object) -> list[tuple[int, int]]:
     if not ranges or any(left[1] > right[0] for left, right in zip(ranges, ranges[1:])):
         raise SigningError("scoped_claim_locator_required")
     return ranges
+
+
+def _verify_related_fragment_reviews(dossier, source_id, processed, states):
+    """Require current, explicit mappings of every related hold into local holds.
+
+    A relation alone supplies no coordinates. Unmapped or changed relations stay
+    blocked; a mapping never removes an original hold or approves a whole source.
+    """
+    target = processed[source_id]
+    claim = dossier["scoped_claim_review"]
+    reviews = dossier.get("related_conflict_reviews")
+    origins = {}
+    for origin_id, record in processed.items():
+        hold = record.get("conflict_hold") if record.get("review_state") == "pending_review" else record
+        if (record.get("review_state") in {"conflict", "pending_review"}
+                and isinstance(hold, dict) and source_id in hold.get("related_source_ids", [])):
+            origins[origin_id] = (record, hold)
+    if (not isinstance(reviews, list) or len(reviews) != len(origins)
+            or any(not isinstance(review, dict) for review in reviews)
+            or {review.get("source_id") for review in reviews} != set(origins)):
+        raise SigningError("related_fragment_review_required")
+    local_locators = {target.get("locator")}
+    local_locators.update(issue.get("locator") for issue in target.get("issues", []))
+    local_parts = {part.strip() for locator in local_locators if isinstance(locator, str)
+                   for part in locator.split(";")}
+    for review in reviews:
+        origin, hold = origins[review["source_id"]]
+        mappings = review.get("mappings")
+        origin_locators = {hold.get("locator")}
+        origin_locators.update(issue.get("locator") for issue in hold.get("issues", []))
+        if (states.get(review["source_id"]) != "conflict_review"
+                or origin.get("snapshot_kind") != "extracted_text"
+                or review.get("revision") != origin.get("revision")
+                or review.get("processing_sha256") != fingerprint(origin)
+                or review.get("target_processing_sha256") != fingerprint(target)
+                or review.get("reviewer") != claim.get("reviewer")
+                or not isinstance(review.get("note"), str) or not review["note"].strip()
+                or not isinstance(mappings, list) or not mappings
+                or any(not isinstance(mapping, dict) for mapping in mappings)):
+            raise SigningError("related_fragment_review_required")
+        if (None in origin_locators or len(mappings) != len(origin_locators)
+                or {mapping.get("origin_locator") for mapping in mappings} != origin_locators
+                or any(not isinstance(mapping.get("target_locator"), str)
+                       or any(part.strip() not in local_parts
+                              for part in mapping["target_locator"].split(";"))
+                       for mapping in mappings)):
+            raise SigningError("related_fragment_mapping_required")
+        try:
+            reviewed_at = datetime.fromisoformat(review["reviewed_at"].replace("Z", "+00:00"))
+            claim_at = datetime.fromisoformat(claim["reviewed_at"].replace("Z", "+00:00"))
+            origin_at = datetime.fromisoformat(hold["reviewed_at"].replace("Z", "+00:00"))
+            target_at = datetime.fromisoformat(target["reviewed_at"].replace("Z", "+00:00"))
+            if not max(origin_at, target_at) <= reviewed_at <= claim_at:
+                raise ValueError("stale mapping")
+            # Only explicit text coordinates are supported here. PDF page mapping
+            # needs a separately verified extraction; do not infer page offsets.
+            for mapping in mappings:
+                _character_ranges(mapping["origin_locator"])
+                _character_ranges(mapping["target_locator"])
+        except (KeyError, TypeError, ValueError, AttributeError) as error:
+            raise SigningError("related_fragment_mapping_required") from error
 
 
 def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
@@ -264,7 +328,9 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
 
 
 def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
-                           *, public_item: dict | None = None) -> None:
+                           *, public_item: dict | None = None,
+                           private_registry_path: Path | None = None,
+                           private_topics_path: Path | None = None) -> None:
     """Require every private source to match a completed review in this inventory."""
     if (not isinstance(inventory, dict) or inventory.get("schema_version") != 1
             or not isinstance(inventory.get("folders"), dict)
@@ -274,13 +340,43 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         registry = json.loads((REPO_ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
         if not isinstance(registry, dict) or not isinstance(registry.get("sources"), list):
             raise SigningError("invalid_reviewed_source_registry")
-        registered = {source["id"]: source for source in registry["sources"]}
-        if len(registered) != len(registry["sources"]):
+        if len({source["id"] for source in registry["sources"]}) != len(registry["sources"]):
             raise SigningError("invalid_reviewed_source_registry")
         snapshot = scan(inventory.get("root_id"), {
             folder: complete_listing(pages)
             for folder, pages in inventory["folders"].items()
         })
+        private_ids = set()
+        if private_registry_path is not None:
+            private_registry = private_registry_input(private_registry_path, REPO_ROOT)
+            registry = combine_registries(registry, private_registry)
+            curriculum = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
+            classification_catalog = curriculum
+            if private_topics_path is not None:
+                classification_catalog = combine_private_topics(
+                    curriculum, private_topics_input(private_topics_path, REPO_ROOT), private_registry)
+            reviewed_graph(snapshot, registry, classification_catalog)
+            private_ids = {source["id"] for source in private_registry["sources"]}
+        labels = (public_item or {}).get("reviewed_curriculum_topics", [])
+        if labels:
+            if (dossier.get("kind") != "literature" or not isinstance(labels, list)
+                    or private_registry_path is None or private_topics_path is None):
+                raise SigningError("private_literature_topics_required")
+            private_topics = private_topics_input(private_topics_path, REPO_ROOT)
+            combined = combine_private_topics(curriculum, private_topics, private_registry)
+            reviewed_graph(snapshot, registry, combined)
+            source_ids = {source.get("id") for source in dossier.get("sources", [])}
+            if len({label.get("id") for label in labels if isinstance(label, dict)}) != len(labels):
+                raise SigningError("private_literature_topics_required")
+            for label in labels:
+                topic = private_topics["topics"].get(label.get("id")) if isinstance(label, dict) else None
+                if (topic is None or set(label) != {"id", "title", "discipline_id"}
+                        or label["title"] != topic["title"] or label["discipline_id"] != topic["discipline_id"]
+                        or label["discipline_id"] != public_item.get("topic_id")
+                        or label["id"] not in public_item.get("curriculum_topic_ids", [])
+                        or topic["source"]["source_id"] not in source_ids):
+                    raise SigningError("private_literature_topics_required")
+        registered = {source["id"]: source for source in registry["sources"]}
         if public_item is not None:
             visible_text = json.dumps(public_item, ensure_ascii=False, sort_keys=True)
             if any(file_id in visible_text for file_id in snapshot["files"]
@@ -292,6 +388,8 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         raise
     except (InventoryError, KeyError, TypeError, OSError, ValueError) as error:
         raise SigningError("invalid_private_inventory") from error
+    fragment_v2 = (isinstance(dossier.get("scoped_claim_review"), dict)
+                   and dossier["scoped_claim_review"].get("schema_version") == 2)
     for source in dossier.get("sources", []):
         if not isinstance(source, dict) or not isinstance(source.get("id"), str):
             raise SigningError("invalid_private_source_review")
@@ -300,22 +398,66 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         record = processed.get(source_id)
         canonical = registered.get(source_id)
         state = states.get(source_id)
-        if (item is None or state not in {"processed", "conflict_review"}
-                or source_id in related_conflicts
+        allowed_states = {"processed", "conflict_review", "pending_review"} if fragment_v2 else {"processed", "conflict_review"}
+        if (item is None or state not in allowed_states
+                or (source_id in related_conflicts and not fragment_v2)
                 or not isinstance(record, dict)
                 or source.get("title") != item["title"]
                 or source.get("modified_time") != item["modified_time"]
                 or source.get("snapshot_kind") != record.get("snapshot_kind")
                 or source.get("snapshot_sha256") != record.get("snapshot_sha256")
-                or (state == "processed" and
+                or (state == "processed" and not fragment_v2 and
                     (source.get("reviewer") != record.get("reviewer")
                      or source.get("reviewed_at") != record.get("reviewed_at", "")[:10]))
-                or (state == "conflict_review" and
+                or (state == "conflict_review" and not fragment_v2 and
                     (not isinstance(canonical, dict)
                      or source.get("reviewer") != canonical.get("reviewer")
                      or source.get("reviewed_at") != canonical.get("reviewed_at")))):
             raise SigningError("private_source_revision_not_current")
-        if state == "conflict_review":
+        if source_id in private_ids:
+            # A private classification establishes source identity/kind, never
+            # whole-source approval or an exemption from the fragment gate.
+            if not fragment_v2:
+                raise SigningError("fragment_review_required")
+            receipt = canonical.get("classification_receipt")
+            if (not isinstance(receipt, dict)
+                    or receipt.get("snapshot_kind") != record.get("snapshot_kind")
+                    or receipt.get("snapshot_sha256") != record.get("snapshot_sha256")
+                    or canonical.get("corpus_path") not in
+                    ("/".join(path) for path in snapshot["paths"][source_id])):
+                raise SigningError("private_source_classification_required")
+            # Classification and publication may be performed by different
+            # reviewers on different days; neither review substitutes for the other.
+            try:
+                classification_date = datetime.fromisoformat(canonical["reviewed_at"]).date()
+            except ValueError as error:
+                raise SigningError("private_source_classification_required") from error
+            if classification_date > datetime.now().date():
+                raise SigningError("private_source_classification_required")
+            binary_classification = receipt.get("snapshot_kind") == "file_bytes"
+            if binary_classification and (dossier.get("kind") != "literature"
+                    or record.get("revision", [None, None, None])[2] != "application/pdf"):
+                raise SigningError("private_source_classification_required")
+            path = private_path(Path(receipt.get("content", "")), suffix=".pdf" if binary_classification else ".txt")
+            raw = path.read_bytes()
+            if hashlib.sha256(raw).hexdigest() != record.get("snapshot_sha256"):
+                raise SigningError("private_source_classification_changed")
+            if binary_classification:
+                if not raw.startswith(b"%PDF-") or not re.fullmatch(r"pdf-pages:\d+(?:,\d+)*", receipt.get("locator", "")):
+                    raise SigningError("private_source_classification_required")
+            else:
+                text = raw.decode("utf-8")
+                ranges = _character_ranges(receipt.get("locator"))
+                if any(end > len(text) or not text[start:end].strip() for start, end in ranges):
+                    raise SigningError("private_source_classification_required")
+        if fragment_v2:
+            if source_id in related_conflicts:
+                _verify_related_fragment_reviews(dossier, source_id, processed, states)
+            try:
+                verify_fragment_review(dossier, source, record, public_item, private_path=private_path)
+            except FragmentReviewError as error:
+                raise SigningError(str(error)) from error
+        elif state == "conflict_review":
             _verify_scoped_claim(dossier, source, record)
         elif "scoped_claim_review" in dossier:
             raise SigningError("scoped_claim_review_unnecessary")
@@ -358,6 +500,10 @@ def main(argv=None) -> int:
     parser.add_argument("--dossier", required=True, type=Path)
     parser.add_argument("--inventory", required=True, type=Path)
     parser.add_argument("--processed", required=True, type=Path)
+    parser.add_argument("--private-registry", type=Path,
+                        help="Ignored current source classifications; fragment approval remains required")
+    parser.add_argument("--private-topics", type=Path,
+                        help="Ignored current lesson metadata for signed source-free literature labels")
     parser.add_argument("--private-key", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args(argv)
@@ -380,7 +526,9 @@ def main(argv=None) -> int:
         dossier = json.loads(dossier_path.read_text(encoding="utf-8"))
         inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
         processed = json.loads(processed_path.read_text(encoding="utf-8"))
-        verify_current_sources(dossier, inventory, processed, public_item=items[0])
+        verify_current_sources(dossier, inventory, processed, public_item=items[0],
+                               private_registry_path=args.private_registry,
+                               private_topics_path=args.private_topics)
         private_key = serialization.load_pem_private_key(key_path.read_bytes(), password=None)
         if not isinstance(private_key, Ed25519PrivateKey):
             raise SigningError("ed25519_signing_key_required")

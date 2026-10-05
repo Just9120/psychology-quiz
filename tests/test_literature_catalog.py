@@ -9,20 +9,58 @@ from app.literature import load_topic_registry
 from scripts import validate_literature, validate_topics
 
 
+def test_topic_module_membership_requires_primary_module_and_unique_course_modules(monkeypatch):
+    original = json.loads(Path('content/topics.json').read_text(encoding='utf-8'))
+    for invalid in ([], ['module1', 'module1'], ['module8'], ['module3'], 'module1'):
+        topics = copy.deepcopy(original)
+        topics[0]['modules'] = invalid
+        monkeypatch.setattr(validate_topics, 'load_json', lambda *_: topics)
+        assert any('modules must contain unique course modules' in error
+                   for error in validate_topics.validate())
+
+
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 143
-    assert len({item['work_id'] for item in items}) == 126
-    assert len({item['topic_id'] for item in items}) == 12
+    assert len(items) == 319
+    assert len({item['work_id'] for item in items}) == 281
+    assert len({item['topic_id'] for item in items}) == 18
+    for work in ('lit_anna_freud_ego_defence', 'lit_frankl_man_search_meaning'):
+        entries = [item for item in items if item['work_id'] == work]
+        expected = 3 if work == 'lit_frankl_man_search_meaning' else 2
+        assert len(entries) == expected and len({item['topic_id'] for item in entries}) == expected
+        assert len({item['title'] for item in entries}) == 1
     assert all(set(item['source']) == {'citation'} for item in items)
     assert all(item['source']['citation'] for item in items)
+    prize = next(item for item in items if item['id'] == 'lit_rybina_muradyan_coach_turning_point')
+    assert prize['reading_level'] == 'applied' and prize['importance'] == 'additional'
+    assert prize['importance_source'] == 'agent' and prize['metadata_warnings']
+    for entry in items:
+        if entry['id'] in {'lit_rybina_muradyan_coach_psycholinguistics', 'lit_muradyan_atlant_game', 'lit_muradyan_atlant_game_turning_point', 'lit_zatulovski_everyday_cybernetics'}:
+            assert entry['reading_level'] == ('deepening' if entry['id'] == 'lit_zatulovski_everyday_cybernetics' else 'applied')
+            assert entry['importance'] == 'additional' and entry['importance_source'] == 'agent'
+            assert entry['metadata_warnings']
+    masterpiece = next(item for item in items if item['id'] == 'lit_masterstvo_psychological_counseling')
+    assert masterpiece['authors'] == [] and masterpiece['metadata_warnings']
+    assert masterpiece['importance'] == 'additional' and masterpiece['importance_source'] == 'teacher'
+    from app.literature_service import reading_next_step
+    assert reading_next_step([prize], {}, items)['basis'] == 'agent'
+    biography = next(item for item in items if item['id'] == 'lit_zatulovski_everyday_cybernetics')
+    assert biography['authors'] == ['Затуловски Ю.'] and biography['importance_source'] == 'agent'
+    assert reading_next_step([biography], {}, items)['basis'] == 'agent'
     legacy_ids = {key.split(':', 1)[1] for key in load_policy().legacy if key.startswith('literature:')}
     assert len(legacy_ids) == 42
     assert legacy_ids <= {item['id'] for item in items}
     physiology = [item for item in items if item['topic_id'] == 'fiziologiya_cheloveka']
     vnd = [item for item in items if item['topic_id'] == 'fiziologiya_vnd']
-    assert len(physiology) == len(vnd) == 15
-    assert {item['work_id'] for item in physiology} == {item['work_id'] for item in vnd}
+    assert len(physiology) == 17 and len(vnd) == 25
+    assert {item['work_id'] for item in vnd} - {item['work_id'] for item in physiology} == {
+        'lit_huizinga_homo_ludens', 'lit_selye_stress_without_distress', 'lit_levine_waking_tiger',
+        'lit_consult_lecture_01', 'lit_course_mention_selye_stress_is_life',
+        'lit_danilova_krylova_higher_nervous_activity', 'lit_ekman_psychology_of_emotions',
+        'lit_gordon_effective_parent_training', 'lit_ilyin_individual_differences',
+        'psf_sapolsky_psihologiya_stressa'}
+    assert {item['work_id'] for item in physiology} - {item['work_id'] for item in vnd} == {
+        'lit_bulgakov_heart_of_a_dog', 'lit_sechenov_reflexes_of_brain'}
     ales = [item for item in items if item['title'] == 'Индивидуальное и семейное психологическое консультирование']
     assert len(ales) == 2 and len({item['work_id'] for item in ales}) == 1
     assert {item['year'] for item in ales} == {None, 1999}
@@ -178,3 +216,32 @@ def test_curated_offers_allow_multiple_text_providers_and_reject_wrong_targets(m
             literature.load_access_links()
     finally:
         literature.load_access_links.cache_clear()
+
+
+def test_history_books_preserve_shared_work_and_do_not_recommend_uncertain_identity():
+    from app.literature_service import reading_next_step, reading_summary
+
+    all_items = load_literature_items()
+    by_id = {item['id']: item for item in all_items}
+    anthology = [by_id['lit_lebon_psychology_peoples_masses'],
+                 by_id['lit_social_history02_lebon']]
+    uncertain = by_id['lit_course_mention_lebon_crowd']
+    states = {item['id']: {'reading_status': 'read'} for item in anthology}
+    summary = reading_summary([*anthology, uncertain], states)
+    assert summary['total'] == 2 and summary['read'] == 1
+    assert summary['conflicts'] == 0
+    assert uncertain['work_id'] != anthology[0]['work_id']
+    assert reading_next_step([uncertain], states, all_items) is None
+    started = {**states, uncertain['id']: {'reading_status': 'in_progress'}}
+    continuation = reading_next_step([uncertain], started, all_items)
+    assert continuation['kind'] == 'continue'
+    assert continuation['item']['id'] == uncertain['id']
+    for item_id in ('lit_social_history02_wundt', 'lit_social_history02_freud',
+                    'lit_social_history02_miller_dollard', 'lit_social_history02_sighele'):
+        item = by_id[item_id]
+        assert reading_next_step([item], {}, all_items) is None
+        prerequisites = {entry['id']: {'reading_status': 'read'} for entry in all_items
+                         if entry['work_id'] == by_id['lit_caa8d94a943aae0d']['work_id']}
+        recommended = reading_next_step([item], prerequisites, all_items)
+        assert recommended['kind'] == 'start' and recommended['basis'] == 'agent'
+        assert recommended['item']['id'] == item_id

@@ -1,0 +1,1919 @@
+[
+  {
+    "id": "lit_quantitative_practice13_kahneman",
+    "work_id": "lit_kahneman_thinking_fast_slow",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Думай медленно... решай быстро",
+    "authors": [
+      "Канеман Д."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 1,
+    "global_order": 230001,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение после вводных материалов по количественным методам: работа упомянута при обсуждении решений и двух систем мышления. Углублённый этап и значимость предложены агентом; модель не устанавливает причину конкретного решения без исследования.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_5eb8451e9cd9"
+    ],
+    "source": {
+      "citation": "Канеман Д.. Думай медленно... решай быстро"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, перевод и год используемой в курсе книги не установлены."
+    ],
+    "notes": "Проверены точное библиографическое упоминание курса и первичная каталожная запись автора/названия. Содержание книги не прочитано и не использовалось для формирования вопросов; порядок предложен агентом, обязательные предпосылки не установлены.",
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_5eb8451e9cd9",
+        "title": "Практика №13",
+        "discipline_id": "quantitative_methods"
+      }
+    ]
+  },
+  {
+    "id": "lit_oecd_pisa2018_volume3",
+    "work_id": "lit_oecd_pisa2018_volume3",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Results (Volume III): What School Life Means for Students’ Lives",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 11,
+    "global_order": 912065,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с измерением благополучия разобрать пример большого международного исследования: показатели школьной среды и их связи с благополучием учащихся. Начать с описания выборки и измерений; наблюдаемые связи не следует автоматически считать причинными. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_subjective_wellbeing_guidelines"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Results (Volume III): What School Life Means for Students’ Lives. OECD Publishing, 2019. DOI: 10.1787/acd78851-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Место отчёта в обязательном порядке чтения и значимость по рекомендации преподавателя не установлены.",
+      "Печатный, PDF, HTML и EPUB форматы относятся к одному произведению; не создавать отдельные отметки чтения для каждого формата.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическая запись сверена с титульными страницами и официальной карточкой OECD. Год публикации2019 отличается от года исследования2018. ISBN печатного издания9789264970427, PDF9789264879720. Полный содержательный review продолжается; запись не означает одобрения всех выводов или подготовки вопросов из отчёта."
+  },
+  {
+    "id": "lit_dweck_mindset",
+    "work_id": "lit_dweck_mindset",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Mindset",
+    "authors": [
+      "Carol S. Dweck"
+    ],
+    "year": 2006,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 12,
+    "global_order": 912066,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После разбора эмпирического отчёта сопоставить популярное изложение взглядов автора на мотивацию и способности с используемыми показателями. Примеры книги не заменяют проверку дизайна и ограничений исследования. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Carol S. Dweck. Mindset. Random House, 2006."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения. ISBN сверенного издания: 9781400062751."
+  },
+  {
+    "id": "lit_freiberg_school_climate",
+    "work_id": "lit_freiberg_school_climate",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "School Climate: Measuring, Improving and Sustaining Healthy Learning Environments",
+    "authors": [
+      "H. Jerome Freiberg (редактор)"
+    ],
+    "year": 1999,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 13,
+    "global_order": 912067,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с показателями школьной среды углубить понимание способов её измерения и обсуждения. Тематический сборник выбран для сопоставления подходов, а не как обязательный начальный учебник. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "H. Jerome Freiberg (редактор). School Climate: Measuring, Improving and Sustaining Healthy Learning Environments. Falmer Press, 1999."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения. ISBN сверенного издания: 9780750706421."
+  },
+  {
+    "id": "lit_rath_harter_wellbeing",
+    "work_id": "lit_rath_harter_wellbeing",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Wellbeing: The Five Essential Elements",
+    "authors": [
+      "Tom Rath",
+      "Jim Harter"
+    ],
+    "year": 2010,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 14,
+    "global_order": 912068,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После изучения способов измерения благополучия сравнить авторскую модель его пяти составляющих с показателями учебного исследования. Популярное изложение и авторская интерпретация не подменяют анализ первичных данных. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Tom Rath; Jim Harter. Wellbeing: The Five Essential Elements. Gallup Press, 2010."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_olweus_bullying_at_school",
+    "work_id": "lit_olweus_bullying_at_school",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Bullying at School: What We Know and What We Can Do",
+    "authors": [
+      "Dan Olweus"
+    ],
+    "year": 1993,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 15,
+    "global_order": 912069,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное тематическое чтение о школьной травле после общего знакомства со школьной средой. Конкретную программу вмешательства нельзя выбирать только по включению книги в список. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Dan Olweus. Bullying at School: What We Know and What We Can Do. Blackwell Publishers, 1993."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст книги, содержание и применимость рекомендаций не проверены; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Отдельные форматы одного произведения используют общую отметку чтения. ISBN сверенного издания: 9780631192411."
+  },
+  {
+    "id": "lit_oecd_subjective_wellbeing_guidelines",
+    "work_id": "lit_oecd_subjective_wellbeing_guidelines",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "OECD Guidelines on Measuring Subjective Well-being",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2013,
+    "type": "other",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 16,
+    "global_order": 912070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После вводных занятий о шкалах, выборках и опросах познакомиться с руководством по сбору, анализу и представлению данных о субъективном благополучии. Это методологическая подготовка к чтению международных отчётов. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. OECD Guidelines on Measuring Subjective Well-being. OECD Publishing, 2013. DOI: 10.1787/9789264191655-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_burns_gottschalk_21st_century_children",
+    "work_id": "lit_burns_gottschalk_21st_century_children",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Educating 21st Century Children: Emotional Well-being in the Digital Age",
+    "authors": [
+      "Tracey Burns (редактор)",
+      "Francesca Gottschalk (редактор)"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 17,
+    "global_order": 912071,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После общего отчёта о благополучии рассмотреть более узкую тему детства в цифровой среде, отношений, возможностей и рисков технологий. Это тематическое расширение, а не вводная статистическая подготовка. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Tracey Burns (редактор); Francesca Gottschalk (редактор). Educating 21st Century Children: Emotional Well-being in the Digital Age. OECD Publishing, 2019. DOI: 10.1787/b7f33425-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_christenson_student_engagement",
+    "work_id": "lit_christenson_student_engagement",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Handbook of Research on Student Engagement",
+    "authors": [
+      "Sandra L. Christenson (редактор)",
+      "Amy L. Reschly (редактор)",
+      "Cathy Wylie (редактор)"
+    ],
+    "year": 2012,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 18,
+    "global_order": 912072,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с измерением и показателями вовлечённости перейти к исследовательскому справочнику: концептуальные границы, факторы и способы измерения. Издатель адресует его исследователям, практикам и магистрантам; поэтому он помещён после вводного материала. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Sandra L. Christenson (редактор); Amy L. Reschly (редактор); Cathy Wylie (редактор). Handbook of Research on Student Engagement. Springer US, 2012. DOI: 10.1007/978-1-4614-2018-7."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_buck_akerson_science_teacher_self_study",
+    "work_id": "lit_buck_akerson_science_teacher_self_study",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Enhancing Professional Knowledge of Pre-Service Science Teacher Education by Self-Study Research: Turning a Critical Eye on Our Practice",
+    "authors": [
+      "Gayle A. Buck (редактор)",
+      "Valarie L. Akerson (редактор)"
+    ],
+    "year": 2016,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 19,
+    "global_order": 912073,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с исследовательским дизайном рассмотреть примеры self-study в подготовке преподавателей естественных наук. Это сопоставление другого типа исследования и профессиональной рефлексии, а не учебник количественных методов. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Gayle A. Buck (редактор); Valarie L. Akerson (редактор). Enhancing Professional Knowledge of Pre-Service Science Teacher Education by Self-Study Research: Turning a Critical Eye on Our Practice. Springer Cham, 2016. DOI: 10.1007/978-3-319-32447-0."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_hattie_anderman_student_achievement",
+    "work_id": "lit_hattie_anderman_student_achievement",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "International Guide to Student Achievement",
+    "authors": [
+      "John Hattie (редактор)",
+      "Eric M. Anderman (редактор)"
+    ],
+    "year": 2013,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 20,
+    "global_order": 912074,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После разбора отдельного эмпирического отчёта сравнить краткие исследовательские обзоры факторов учебных достижений. Сборник позволяет сопоставлять выводы, но не задаёт универсальную инструкцию для школы. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "John Hattie (редактор); Eric M. Anderman (редактор). International Guide to Student Achievement. Routledge, 2013."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Год издания 2013 подтверждён издателем; библиография учебного материала указывает 2012. Конкретное издание, использованное автором главы, не установлено.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_kunter_coactiv_teacher_competence",
+    "work_id": "lit_kunter_coactiv_teacher_competence",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Cognitive Activation in the Mathematics Classroom and Professional Competence of Teachers: Results from the COACTIV Project",
+    "authors": [
+      "Mareike Kunter (редактор)",
+      "Jürgen Baumert (редактор)",
+      "Werner Blum (редактор)",
+      "Ute Klusmann (редактор)",
+      "Stefan Krauss (редактор)",
+      "Michael Neubrand (редактор)"
+    ],
+    "year": 2013,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 21,
+    "global_order": 912075,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с дизайном исследования и несколькими уровнями образовательных данных разобрать специализированный проект COACTIV: компетенции учителя, преподавание математики и результаты учащихся. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Mareike Kunter (редактор); Jürgen Baumert (редактор); Werner Blum (редактор); Ute Klusmann (редактор); Stefan Krauss (редактор); Michael Neubrand (редактор). Cognitive Activation in the Mathematics Classroom and Professional Competence of Teachers: Results from the COACTIV Project. Springer New York, 2013. DOI: 10.1007/978-1-4614-5149-5."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Название, авторство и год сверены по библиографическому упоминанию и первичной карточке издателя. Полный текст работы не использовался для формирования вопросов. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_pisa2015_volume3",
+    "work_id": "lit_oecd_pisa2015_volume3",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2015 Results (Volume III): Students’ Well-Being",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2017,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 22,
+    "global_order": 912076,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После PISA 2018 сопоставить показатели благополучия с предыдущим циклом обследования. До вывода о динамике необходимо проверить сопоставимость выборок и измерений. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2015 Results (Volume III): Students’ Well-Being. OECD Publishing, 2017. DOI: 10.1787/9789264273856-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_pisa2015_volume2",
+    "work_id": "lit_oecd_pisa2015_volume2",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2015 Results (Volume II): Policies and Practices for Successful Schools",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2016,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 23,
+    "global_order": 912077,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После общего знакомства с PISA рассмотреть связи результатов учащихся с ресурсами, школьной средой и организацией системы образования. Это дополнительное чтение о контексте исследования. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2015 Results (Volume II): Policies and Practices for Successful Schools. OECD Publishing, 2016. DOI: 10.1787/9789264267510-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_rees_main_childrens_worlds2015",
+    "work_id": "lit_rees_main_childrens_worlds2015",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Children’s Views on Their Lives and Well-Being in 15 Countries: A Report on the Children’s Worlds Survey, 2013–14",
+    "authors": [
+      "Gwyther Rees (редактор)",
+      "Gill Main (редактор)"
+    ],
+    "year": 2015,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 24,
+    "global_order": 912078,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с измерением благополучия сравнить его исследование у детей 8–12 лет в 15 странах с обследованием учащихся PISA. Возрастные группы и обследования нельзя автоматически считать взаимозаменяемыми. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Gwyther Rees (редактор); Gill Main (редактор). Children’s Views on Their Lives and Well-Being in 15 Countries: A Report on the Children’s Worlds Survey, 2013–14. Children’s Worlds Project, 2015."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Отчёт 2015 года по 15 странам отличается от следующего отчёта по 16 странам; их не объединять как форматы одной работы.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_good_childhood_report2015",
+    "work_id": "lit_good_childhood_report2015",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "The Good Childhood Report 2015",
+    "authors": [
+      "The Children’s Society"
+    ],
+    "year": 2015,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 25,
+    "global_order": 912079,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После общего международного отчёта рассмотреть национальные показатели и тенденции субъективного благополучия детей. Сопоставляя страны и годы, сначала проверить используемые вопросы и выборки. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "The Children’s Society. The Good Childhood Report 2015. The Children’s Society, 2015."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_unesco_ending_school_violence",
+    "work_id": "lit_unesco_ending_school_violence",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Behind the Numbers: Ending School Violence and Bullying",
+    "authors": [
+      "UNESCO"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 26,
+    "global_order": 912080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства со школьной средой рассмотреть сводный отчёт о насилии и травле с данными крупных обследований и отдельными кейсами. Разные источники данных и кейсы требуют раздельной оценки оснований вывода. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "UNESCO. Behind the Numbers: Ending School Violence and Bullying. UNESCO, 2019."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_talis2018_volume1",
+    "work_id": "lit_oecd_talis2018_volume1",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "TALIS 2018 Results (Volume I): Teachers and School Leaders as Lifelong Learners",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2019,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 27,
+    "global_order": 912081,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После обследования учащихся сравнить его с международным опросом учителей и руководителей школ: профессиональная подготовка, практики и рабочая среда. Ответы разных групп не следует объединять без проверки дизайна. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. TALIS 2018 Results (Volume I): Teachers and School Leaders as Lifelong Learners. OECD Publishing, 2019. DOI: 10.1787/1d0bc92a-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_gender_equality_education",
+    "work_id": "lit_oecd_gender_equality_education",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "The ABC of Gender Equality in Education: Aptitude, Behaviour, Confidence",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2015,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 28,
+    "global_order": 912082,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После общего знакомства с образовательными данными рассмотреть тематический анализ различий по полу и семейного, школьного и общественного контекста. Групповые различия не задают характеристику отдельного учащегося. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. The ABC of Gender Equality in Education: Aptitude, Behaviour, Confidence. OECD Publishing, 2015. DOI: 10.1787/9789264229945-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_oecd_pisa2012_volume4",
+    "work_id": "lit_oecd_pisa2012_volume4",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2012 Results: What Makes Schools Successful (Volume IV): Resources, Policies and Practices",
+    "authors": [
+      "OECD"
+    ],
+    "year": 2013,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 29,
+    "global_order": 912083,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После общего разбора PISA рассмотреть распределение школьных ресурсов, организацию обучения и сравнение циклов. Это более узкий материал для практики чтения образовательных данных. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2012 Results: What Makes Schools Successful (Volume IV): Resources, Policies and Practices. OECD Publishing, 2013. DOI: 10.1787/9789264201156-en."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_european_commission_early_school_leaving",
+    "work_id": "lit_european_commission_early_school_leaving",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Reducing Early School Leaving: Key Messages and Policy Support",
+    "authors": [
+      "European Commission"
+    ],
+    "year": 2013,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 30,
+    "global_order": 912084,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После общего знакомства с образовательными данными рассмотреть исторический отчёт рабочей группы о раннем прекращении обучения. Рекомендации для политики и результаты исследования следует различать; актуальность политики оценивается отдельно. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "European Commission. Reducing Early School Leaving: Key Messages and Policy Support. European Commission, 2013."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Упоминание в библиографии не означает обязательную рекомендацию преподавателя.",
+      "Полный текст работы не проверен; уровень и значимость чтения не установлены.",
+      "Этап, значимость и предварительное чтение предложены агентом. Проверены библиографические сведения и издательское описание; полный текст работы не оценивался для этой рекомендации."
+    ],
+    "notes": "Библиографическое упоминание сверено с записью издателя или титульными сведениями отчёта. Это отдельная работа указанного года, не результат полного чтения её содержания. Форматы одного произведения используют общую отметку чтения."
+  },
+  {
+    "id": "lit_frankl_man_search_meaning_quantitative",
+    "work_id": "lit_frankl_man_search_meaning",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Человек в поисках смысла",
+    "authors": [
+      "Франкл В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 31,
+    "global_order": 912085,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение после вводных материалов: автобиографический и концептуальный текст для обсуждения смысла и интерпретации опыта. Это не учебник количественных методов и не доказательство эффективности терапии. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Frankl, V. (1959). Man’s Search for Meaning. Beacon Press, Boston, MA."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "В библиографическом упоминании указан 1959 год. Соответствие конкретному русскому переводу и изданию не установлено."
+    ],
+    "notes": "Добавлена связь существующего произведения с библиографией раздела. Это не новая книга и не научное одобрение её содержания. Порядок и значимость для этого раздела не назначены."
+  },
+  {
+    "id": "lit_course_mention_d0925c1eabd1814f",
+    "work_id": "lit_course_mention_d0925c1eabd1814f",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Evaluating Educational Environments",
+    "authors": [
+      "Rudolf H. Moos"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 32,
+    "global_order": 912086,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с показателями школьной среды изучить процедуры и инструменты её оценки. Методическая монография выбрана для углубления измерений и сопоставления подходов. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "Rudolf H. Moos. Evaluating Educational Environments. 1979 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_6a0411db5000673f",
+    "work_id": "lit_course_mention_6a0411db5000673f",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Results (Volume II): Where All Students Can Succeed",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 33,
+    "global_order": 912087,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После описания измерений PISA сопоставить результаты обучения и благополучие с социальными характеристиками учащихся. Международные связи не являются сами по себе причинными объяснениями. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_course_mention_db2ba3e8c2e1dcc9"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Results (Volume II): Where All Students Can Succeed. 2019 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_bcb1d48d8219a2de",
+    "work_id": "lit_course_mention_bcb1d48d8219a2de",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2012 Results: Ready to Learn (Volume III): Students’ Engagement, Drive and Self-Beliefs",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 34,
+    "global_order": 912088,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения в показатели PISA разобрать исследование вовлечённости, мотивации и представлений учащихся о себе. При сравнении циклов учитывать сопоставимость измерений. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_course_mention_db2ba3e8c2e1dcc9"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2012 Results: Ready to Learn (Volume III): Students’ Engagement, Drive and Self-Beliefs. 2013 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_e50e0babc4a8e1ac",
+    "work_id": "lit_course_mention_e50e0babc4a8e1ac",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Black American Students in an Affluent Suburb: A Study of Academic Disengagement",
+    "authors": [
+      "J. Ogbu"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 35,
+    "global_order": 912089,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После вводных материалов по наблюдению, интервью и статистике разобрать исследование конкретного школьного сообщества в США. Выводы из этого контекста нельзя автоматически переносить на другие группы и школы. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "J. Ogbu. Black American Students in an Affluent Suburb: A Study of Academic Disengagement. 2003 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_52ee0cc6d8328928",
+    "work_id": "lit_course_mention_52ee0cc6d8328928",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "The Impact of Parental Involvement, Parental Support and Family Education on Pupil Achievements and Adjustment: A Literature Review",
+    "authors": [
+      "C. Desforges",
+      "A. Abouchaar"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 36,
+    "global_order": 912090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После основ исследовательского дизайна разобрать пример обзора литературы о родительском участии. Начать с определений, методологических вопросов и процедуры обзора; различать наблюдаемые связи и исследования вмешательств. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "C. Desforges; A. Abouchaar. The Impact of Parental Involvement, Parental Support and Family Education on Pupil Achievements and Adjustment: A Literature Review. 2003 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_6989ce1295898678",
+    "work_id": "lit_course_mention_6989ce1295898678",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Social Determinants of Health and Well-Being Among Young People",
+    "authors": [
+      "C. Currie et al."
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 37,
+    "global_order": 912091,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с опросами и измерением благополучия изучить международный отчёт HBSC по обследованию 2009/2010 годов. Возрастные группы и контекст выборки важны для интерпретации; отчёт не даёт индивидуальных медицинских рекомендаций. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "C. Currie et al.. Social Determinants of Health and Well-Being Among Young People. 2012 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_57f33726ed4ac65d",
+    "work_id": "lit_course_mention_57f33726ed4ac65d",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "International Encyclopedia of the Social & Behavioral Sciences",
+    "authors": [
+      "N. Smelser",
+      "P. Baltes (editors)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 38,
+    "global_order": 912092,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Использовать тематические статьи первого издания как дополнительный справочник после вводных материалов. Многотомная энциклопедия не предполагает последовательного чтения целиком; выбирать понятия, нужные для разбора исследования. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "N. Smelser; P. Baltes (editors). International Encyclopedia of the Social & Behavioral Sciences. 2001 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_893a89421300f678",
+    "work_id": "lit_course_mention_893a89421300f678",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "World Happiness Report 2019",
+    "authors": [
+      "J. Helliwell",
+      "R. Layard",
+      "J. Sachs (editors)"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 39,
+    "global_order": 912093,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с измерением благополучия читать выбранные главы отчёта 2019 года о сообществе, социальных связях и данных. Сопоставлять показатели и ограничения; рейтинг стран не объясняет благополучие отдельного человека. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "J. Helliwell; R. Layard; J. Sachs (editors). World Happiness Report 2019. 2019 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_1e33b87d4c9cedbc",
+    "work_id": "lit_course_mention_1e33b87d4c9cedbc",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "The Oxford Handbook of Positive Psychology",
+    "authors": [
+      "S. Lopez",
+      "C. Snyder (editors)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 40,
+    "global_order": 912094,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с психологическими измерениями обратиться к тематическим главам второго издания справочника: теория, исследования и приложения позитивной психологии. Объёмный научный сборник удобнее читать выборочно, сопоставляя основания выводов. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "S. Lopez; C. Snyder (editors). The Oxford Handbook of Positive Psychology. 2009 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_b976cc7351d9e31f",
+    "work_id": "lit_course_mention_b976cc7351d9e31f",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Handbook of Educational Psychology",
+    "authors": [
+      "P. Alexander",
+      "P. Winne (editors)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 41,
+    "global_order": 912095,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После вводных материалов по психологии образования и исследовательским методам читать выбранные главы второго издания: развитие, познание, мотивация, обучение и анализ данных. Справочник рассчитан на углублённое университетское чтение. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "P. Alexander; P. Winne (editors). Handbook of Educational Psychology. 2006 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_4072b2a06746eb8e",
+    "work_id": "lit_course_mention_4072b2a06746eb8e",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Affect in Social Thinking and Behavior",
+    "authors": [
+      "J. Forgas (editor)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 42,
+    "global_order": 912096,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с социальным познанием и методами исследования сопоставить теории и исследования связей аффекта, мышления и поведения. Научный сборник используется для углубления, а не как начальное руководство консультанта. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "J. Forgas (editor). Affect in Social Thinking and Behavior. 2006 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_e63d19e97ba91e8d",
+    "work_id": "lit_course_mention_e63d19e97ba91e8d",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Self-Efficacy Beliefs of Adolescents",
+    "authors": [
+      "F. Pajares",
+      "T. Urdan (editors)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 43,
+    "global_order": 912097,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения в мотивацию и саморегуляцию читать тематические главы о самоэффективности подростков, семье и учителях. Научный сборник углубляет понятие, а не заменяет начальный курс исследовательских методов. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "F. Pajares; T. Urdan (editors). Self-Efficacy Beliefs of Adolescents. 2006 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_efdf2863f47b640a",
+    "work_id": "lit_course_mention_efdf2863f47b640a",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Stress and Anxiety",
+    "authors": [
+      "I. Sarason",
+      "C. Spielberger (editors)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 44,
+    "global_order": 912098,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Произведение упомянуто в библиографии раздела. Конкретное издание, порядок чтения и значимость для курса пока не определены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "I. Sarason; C. Spielberger (editors). Stress and Anxiety. 1975 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_62bd57a7137c573f",
+    "work_id": "lit_course_mention_62bd57a7137c573f",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Emotion and Adaptation",
+    "authors": [
+      "R. Lazarus"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 45,
+    "global_order": 912099,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения в эмоции, познание и психологические измерения изучить теоретическую модель Лазаруса и её исследовательские основания. Начать с классификации и измерения эмоций; чтение не подтверждает эффективность клинических методов. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "R. Lazarus. Emotion and Adaptation. 1991 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_f3a45bec2566afc2",
+    "work_id": "lit_course_mention_f3a45bec2566afc2",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Mathematical Mindsets: Unleashing Students’ Potential Through Creative Math, Inspiring Messages and Innovative Teaching",
+    "authors": [
+      "J. Boaler"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 46,
+    "global_order": 912100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с исследованиями мотивации рассмотреть практические предложения автора для обучения математике. Обсуждать связь примеров с данными; издательское описание не является самостоятельным доказательством эффективности. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "J. Boaler. Mathematical Mindsets: Unleashing Students’ Potential Through Creative Math, Inspiring Messages and Innovative Teaching. 2015 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_be2b1c9d425fc832",
+    "work_id": "lit_course_mention_be2b1c9d425fc832",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Looking in Classrooms",
+    "authors": [
+      "T. Good",
+      "A. Lavigne"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 47,
+    "global_order": 912101,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После основ психологии образования и наблюдения разобрать применение исследований в классе: мотивацию, организацию занятий и работу учителя. Прикладное чтение предложено агентом для сопоставления с показателями школьной среды. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "T. Good; A. Lavigne. Looking in Classrooms. 2017 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_d7e88c1d4f888bb6",
+    "work_id": "lit_course_mention_d7e88c1d4f888bb6",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Growth Mindset, Performance Avoidance, and Academic Behaviors in Clark County School District",
+    "authors": [
+      "J. Snipes",
+      "L. Tran"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 48,
+    "global_order": 912102,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После основ опросного исследования разобрать описательный отчёт о взглядах учащихся и учителей одного школьного округа. Работа не является проверкой эффективности вмешательства; её результаты ограничены дизайном и контекстом. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "J. Snipes; L. Tran. Growth Mindset, Performance Avoidance, and Academic Behaviors in Clark County School District. 2017 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_76d6f7e8dfe457a7",
+    "work_id": "lit_course_mention_76d6f7e8dfe457a7",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Attribution Theory in the Organizational Sciences",
+    "authors": [
+      "M. Martinko (editor)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 49,
+    "global_order": 912103,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Произведение упомянуто в библиографии раздела. Конкретное издание, порядок чтения и значимость для курса пока не определены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "M. Martinko (editor). Attribution Theory in the Organizational Sciences. 2004 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_a00c9150bcfd7966",
+    "work_id": "lit_course_mention_a00c9150bcfd7966",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Advances in Cross-National Comparison",
+    "authors": [
+      "J. Hoffmeyer-Zlotnik",
+      "C. Wolf (editors)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 50,
+    "global_order": 912104,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После основ измерения и сравнительного исследования изучить гармонизацию демографических и социально-экономических переменных между странами. Сборник ориентирован на исследователей и работу со статистическими данными. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "J. Hoffmeyer-Zlotnik; C. Wolf (editors). Advances in Cross-National Comparison. 2003 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_db2ba3e8c2e1dcc9",
+    "work_id": "lit_course_mention_db2ba3e8c2e1dcc9",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Assessment and Analytical Framework",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 51,
+    "global_order": 912105,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Перед тематическими результатами PISA изучить теоретические определения оцениваемых областей и устройство измерений. Это методическая опора для интерпретации отчётов после вводного знакомства с исследовательскими методами. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Assessment and Analytical Framework. 2019 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_a1f851d16e687949",
+    "work_id": "lit_course_mention_a1f851d16e687949",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Classifying Educational Programmes: Manual for ISCED-97 Implementation in OECD Countries",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 52,
+    "global_order": 912106,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После основ международных сравнений обратиться к историческому руководству по классификации образовательных программ ISCED-97. Оно помогает разбирать данные своего периода и не заявляется действующим стандартом для новых исследований. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. Classifying Educational Programmes: Manual for ISCED-97 Implementation in OECD Countries. 1999 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Авторство, название и год приведены по библиографическому упоминанию. Конкретное издание и перевод независимо не подтверждены; год издания карточки не назначен."
+    ],
+    "notes": "Каталогизировано точное упоминание произведения или сборника. Для ссылки на главу указан весь сборник; авторы главы не подменяют редакторов. Содержание книги не одобрено. Приоритет преподавателя и обоснованный этап чтения не установлены."
+  },
+  {
+    "id": "lit_course_mention_c18b55e2a22acdc7",
+    "work_id": "lit_course_mention_c18b55e2a22acdc7",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Ten Questions for Mathematics Teachers… and How PISA Can Help Answer Them",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 53,
+    "global_order": 912107,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с измерениями PISA разобрать адресованные учителям вопросы о самостоятельности учащихся, отношениях и преподавании математики. Рекомендации сопоставлять с условиями конкретного обучения. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_course_mention_db2ba3e8c2e1dcc9"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. Ten Questions for Mathematics Teachers… and How PISA Can Help Answer Them. 2016 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_277405e34a8fefe0",
+    "work_id": "lit_course_mention_277405e34a8fefe0",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Engaging Resistance: How Ordinary People Successfully Champion Change",
+    "authors": [
+      "A. Anderson"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 54,
+    "global_order": 912108,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с организационными изменениями сопоставить конкретные кейсы сопротивления и вовлечения участников. Ситуации из двух организаций служат примерами анализа, а не универсальным доказательством успешности подхода. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "A. Anderson. Engaging Resistance: How Ordinary People Successfully Champion Change. 2011 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_680648f4cff86e93",
+    "work_id": "lit_course_mention_680648f4cff86e93",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Equality of Educational Opportunity",
+    "authors": [
+      "J. Coleman et al."
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 55,
+    "global_order": 912109,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После основ опросных исследований изучить исторический пример большого обследования образовательных возможностей в США в 1966 году. Читать с учётом эпохи, выборки и ограничений наблюдательного дизайна; не переносить выводы на современные группы автоматически. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "J. Coleman et al.. Equality of Educational Opportunity. 1966 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_5471070945426f93",
+    "work_id": "lit_course_mention_5471070945426f93",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "The Human Side of School Change: Reform, Resistance, and the Real-Life Problems of Innovation",
+    "authors": [
+      "R. Evans"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 56,
+    "global_order": 912110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства со школьной средой и организационными изменениями рассмотреть человеческую сторону реформ: сотрудничество, сопротивление и лидерство. Практические рассуждения автора следует сопоставлять с эмпирическими исследованиями. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "R. Evans. The Human Side of School Change: Reform, Resistance, and the Real-Life Problems of Innovation. 1996 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_e51d58eb24bcf8a2",
+    "work_id": "lit_course_mention_e51d58eb24bcf8a2",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Teaching and Digital Technologies: Big Issues and Critical Questions",
+    "authors": [
+      "M. Henderson",
+      "G. Romeo (editors)"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 57,
+    "global_order": 912111,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После введения в обучение и оценку исследовательских оснований рассмотреть, когда и зачем применять цифровые технологии в классе. Университетский учебник ставит критические вопросы о выборе, а не служит инструкцией конкретного программного продукта. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "M. Henderson; G. Romeo (editors). Teaching and Digital Technologies: Big Issues and Critical Questions. 2015 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_e809609920ac0938",
+    "work_id": "lit_course_mention_e809609920ac0938",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "Listening to Urban Kids: School Reform and the Teachers They Want",
+    "authors": [
+      "B. Wilson",
+      "D. Corbett"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 58,
+    "global_order": 912112,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После знакомства с интервью и исследованием школьной среды разобрать перспективу учащихся городских школ. Качественные свидетельства помогают обсуждать опыт, но не задают универсальные требования для всех школ. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_oecd_pisa2018_volume3"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "B. Wilson; D. Corbett. Listening to Urban Kids: School Reform and the Teachers They Want. 2001 (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_591ae30eda19be76",
+    "work_id": "lit_course_mention_591ae30eda19be76",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Results (Volume I): What Students Know and Can Do",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 59,
+    "global_order": 912113,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После изучения рамки оценивания PISA разобрать результаты чтения, математики и естественных наук. Сравнивать показатели с учётом измерений и выборки; том служит эмпирическим примером. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_course_mention_db2ba3e8c2e1dcc9"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Results (Volume I): What Students Know and Can Do (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_afddeebaeeda2e6b",
+    "work_id": "lit_course_mention_afddeebaeeda2e6b",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Results (Volume IV): Are Students Smart about Money?",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 60,
+    "global_order": 912114,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После изучения рамки PISA разобрать отдельное оценивание финансовой грамотности пятнадцатилетних учащихся. Учитывать ограниченный состав участвовавших стран; это пример исследования, а не совет по личным финансам. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_course_mention_db2ba3e8c2e1dcc9"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Results (Volume IV): Are Students Smart about Money? (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_61a2ce21b5d8cac9",
+    "work_id": "lit_course_mention_61a2ce21b5d8cac9",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Results (Volume V): Effective Policies, Successful Schools",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 61,
+    "global_order": 912115,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После рамки PISA и знакомства с результатами обучения изучить данные о школьных практиках и образовательной политике. Сопоставлять контексты и не трактовать статистические связи как доказательство универсальной эффективности. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_course_mention_db2ba3e8c2e1dcc9"
+    ],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Results (Volume V): Effective Policies, Successful Schools (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  },
+  {
+    "id": "lit_course_mention_0378825302da1e51",
+    "work_id": "lit_course_mention_0378825302da1e51",
+    "topic_id": "quantitative_methods",
+    "module": "module2",
+    "title": "PISA 2018 Results (Volume VI): Are Students Ready to Thrive in Global Societies?",
+    "authors": [
+      "OECD"
+    ],
+    "year": null,
+    "type": "other",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 62,
+    "global_order": 912116,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Произведение упомянуто в библиографии или обзоре исследовательских отчётов. Конкретное издание, порядок чтения и значимость для курса пока не определены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "source": {
+      "citation": "OECD. PISA 2018 Results (Volume VI): Are Students Ready to Thrive in Global Societies? (библиографическое упоминание)."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Метаданные сохранены по учебному упоминанию. Конкретное издание и перевод независимо не подтверждены; год карточки и порядок чтения не назначены."
+    ],
+    "notes": "Отдельное произведение или том, а не формат уже имеющейся книги. Это каталогизация упоминания, не одобрение полного содержания или рекомендация преподавателя."
+  }
+]

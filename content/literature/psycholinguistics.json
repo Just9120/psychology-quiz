@@ -306,5 +306,163 @@
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание.",
     "importance": "additional",
     "importance_source": "agent"
+  },
+  {
+    "id": "lit_chomsky_syntactic_structures",
+    "work_id": "lit_chomsky_syntactic_structures",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "Syntactic Structures",
+    "authors": [
+      "Noam Chomsky"
+    ],
+    "year": 1957,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 90,
+    "global_order": 640090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Углублённое историческое чтение после вводной лекции по психолингвистике. В курсе книга названа «Синтаксические структуры». Порядок и значимость предложены агентом; это отдельное чтение о построении грамматической теории.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_e39d1d65a4d7"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e39d1d65a4d7",
+        "title": "Психолингвистика как наука",
+        "discipline_id": "psycholinguistics"
+      }
+    ],
+    "source": {
+      "citation": "Noam Chomsky. Syntactic Structures"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русский перевод и используемая редакция не установлены."
+    ],
+    "notes": "Указан оригинал 1957 года по издательской записи. Дата 1958 встречается и в транскрипте, и в презентации одного занятия; исправлена только производная библиографическая запись, исходные материалы сохранены. Научные обобщения лекции этим review не одобряются."
+  },
+  {
+    "id": "lit_rybina_muradyan_coach_psycholinguistics",
+    "work_id": "lit_rybina_muradyan_coach",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "Делай как коуч",
+    "authors": [
+      "Рыбина О.",
+      "Мурадян Ю."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 100,
+    "global_order": 640100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное прикладное чтение о коучинговой беседе и работе с целями. Книга упомянута в материалах курса; этот этап предложен агентом и не заменяет базовую психологическую подготовку или изучение психолингвистики.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Рыбина О., Мурадян Ю.. Делай как коуч"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_muradyan_atlant_game",
+    "work_id": "lit_muradyan_atlant_game",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "Игра Атлантов. Алхимия мечты",
+    "authors": [
+      "Мурадян Ю."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 110,
+    "global_order": 640110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "По желанию познакомьтесь с авторским коучинговым форматом работы с личными целями: сюжетом и упражнениями книги. Отделяйте авторские образы и обещания от проверенных психологических знаний. Это дополнительное чтение по рекомендации агента, а не обязательный учебник или рекомендация преподавателя.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Мурадян Ю.. Игра Атлантов. Алхимия мечты"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание и год в материале курса не указаны. Эффективность авторских упражнений и обещаний не установлена."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_kantor_objective_psychology_grammar",
+    "work_id": "lit_kantor_objective_psychology_grammar",
+    "topic_id": "psycholinguistics",
+    "module": "module6",
+    "title": "An objective psychology of grammar",
+    "authors": [
+      "Kantor J. R."
+    ],
+    "year": 1936,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 120,
+    "global_order": 640120,
+    "estimated_minutes": null,
+    "tags": [
+      "history"
+    ],
+    "why_read": "Дополнительное историческое чтение после введения в психолингвистику. В лекции произведение названо «Объективная психология грамматики»; англоязычный труд позволяет проследить исторический контекст дисциплины. Порядок предложен агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_6491072220dbf2cb"
+    ],
+    "curriculum_topic_ids": [
+      "t_e39d1d65a4d7"
+    ],
+    "source": {
+      "citation": "Kantor J. R.. An objective psychology of grammar"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Приведено английское название оригинала 1936 года; русское название в лекции не подтверждает опубликованный русский перевод. Экземпляр/переиздание курса не установлены.",
+      "Приоритет преподавателя не задан; содержание книги не проверено как источник новых ответов."
+    ],
+    "notes": "Подтверждены автор и произведение из упоминания курса; библиографическая проверка не одобряет все утверждения лекции.",
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e39d1d65a4d7",
+        "title": "Психолингвистика как наука",
+        "discipline_id": "psycholinguistics"
+      }
+    ]
   }
 ]

@@ -236,5 +236,95 @@
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание. Роль, значимость и порядок — рекомендация агента по первичным metadata/описаниям, не приоритет преподавателя. Полный текст, конкретная редакция и измеренная сложность не подтверждены.",
     "importance": "additional",
     "importance_source": "agent"
+  },
+  {
+    "id": "lit_nosov_mishkina_kasha",
+    "work_id": "lit_nosov_mishkina_kasha",
+    "topic_id": "psihofiziologiya",
+    "module": "module1",
+    "title": "Мишкина каша",
+    "authors": [
+      "Носов Н. Н."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 61,
+    "global_order": 150061,
+    "estimated_minutes": null,
+    "tags": [
+      "fiction",
+      "metaphor"
+    ],
+    "why_read": "Дополнительный художественный пример, упомянутый в бонусном уроке. Рассказ используется как образ; рост каши не доказывает устройство мозга или рост миндалины. Это чтение по интересу, не обязательная рекомендация преподавателя.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_b3f855d925a5"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_b3f855d925a5",
+        "title": "Бонус: принципы работы мозга, эмерджентность и речевые модели",
+        "discipline_id": "psihofiziologiya"
+      }
+    ],
+    "source": {
+      "citation": "Мишкина каша. Книжное упоминание в бонусном уроке о принятии решений; конкретное издание не указано."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, год и страницы в занятии не указаны."
+    ],
+    "notes": "Библиографическая идентичность подтверждена отдельным упоминанием и каталогом издателя/библиотеки. Полный текст произведения не читался; научные утверждения урока не утверждаются."
+  },
+  {
+    "id": "lit_dahl_explanatory_dictionary",
+    "work_id": "lit_dahl_explanatory_dictionary",
+    "topic_id": "psihofiziologiya",
+    "module": "module1",
+    "title": "Толковый словарь живого великорусского языка",
+    "authors": [
+      "Даль В. И."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 62,
+    "global_order": 150062,
+    "estimated_minutes": null,
+    "tags": [
+      "dictionary",
+      "language"
+    ],
+    "why_read": "Справочник для обращения к значениям слов, упомянутый как словарь Даля. Читать подряд не требуется. Исторические словарные сведения не доказывают числовые нормы словарного запаса или число мозговых центров.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_b3f855d925a5"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_b3f855d925a5",
+        "title": "Бонус: принципы работы мозга, эмерджентность и речевые модели",
+        "discipline_id": "psihofiziologiya"
+      }
+    ],
+    "source": {
+      "citation": "Толковый словарь живого великорусского языка. Книжное упоминание в бонусном уроке о принятии решений; конкретное издание не указано."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, год и страницы в занятии не указаны."
+    ],
+    "notes": "Библиографическая идентичность подтверждена отдельным упоминанием и каталогом издателя/библиотеки. Полный текст произведения не читался; научные утверждения урока не утверждаются."
   }
 ]

@@ -4,6 +4,7 @@ Only captured editions with an explicit mapping acquire a nested topic. A
 current question ID or a backfilled snapshot is insufficient evidence.
 """
 from functools import lru_cache
+from copy import deepcopy
 import json
 from pathlib import Path
 import re
@@ -40,6 +41,44 @@ def validate_catalog(data):
                 or not all(isinstance(item.get(k), str) and item[k] for k in ("external_id", "item_sha256", "locator"))):
             raise ValueError("Invalid curriculum edition")
     return data
+
+
+def merge_public_labels(catalog, document):
+    """Extend shared navigation with reviewed labels, never source records or answer mappings."""
+    if (not isinstance(document, dict) or set(document) != {"schema_version", "disciplines", "topics"}
+            or document["schema_version"] != 1
+            or not isinstance(document["disciplines"], dict) or not isinstance(document["topics"], dict)):
+        raise ValueError("Invalid curriculum labels")
+    result = deepcopy(catalog)
+    for key, item in document["disciplines"].items():
+        if (not isinstance(key, str) or re.fullmatch(r"[a-z0-9_]+", key) is None
+                or not isinstance(item, dict) or set(item) != {"title", "module", "modules"}
+                or not isinstance(item["title"], str) or not item["title"].strip()
+                or (item["module"] is not None and
+                    (not isinstance(item["module"], str) or re.fullmatch(r"module[1-6]", item["module"]) is None))
+                or not isinstance(item["modules"], list)
+                or any(not isinstance(value, str) or re.fullmatch(r"module[1-6]", value) is None for value in item["modules"])
+                or len(set(item["modules"])) != len(item["modules"])
+                or item["module"] != (item["modules"][0] if len(item["modules"]) == 1 else None)):
+            raise ValueError("Invalid curriculum discipline label")
+        existing = result["disciplines"].get(key)
+        if existing is not None and existing["title"] != item["title"]:
+            raise ValueError("Conflicting curriculum discipline label")
+        result["disciplines"][key] = {**(existing or {}), **item}
+    if len({x["title"] for x in result["disciplines"].values()}) != len(result["disciplines"]):
+        raise ValueError("Ambiguous curriculum discipline label")
+    for key, item in document["topics"].items():
+        if (not isinstance(key, str) or re.fullmatch(r"t_[a-f0-9]{12}", key) is None
+                or not isinstance(item, dict) or set(item) != {"title", "discipline_id"}
+                or not isinstance(item["title"], str) or not item["title"].strip()
+                or not isinstance(item["discipline_id"], str)
+                or item["discipline_id"] not in result["disciplines"]):
+            raise ValueError("Invalid curriculum topic label")
+        existing = result["topics"].get(key)
+        if existing is not None and any(existing[field] != item[field] for field in item):
+            raise ValueError("Conflicting curriculum topic label")
+        result["topics"][key] = {**(existing or {}), **item}
+    return result
 
 
 def validate_private_bindings(catalog, document, public_key, active_certificates=None):
@@ -86,9 +125,19 @@ def load_private_bindings(catalog):
 
 
 @lru_cache(maxsize=1)
-def load_catalog():
+def load_reviewed_catalog():
+    """Return source-bearing reviewed identities for private operator validation."""
     catalog = validate_catalog(json.loads((ROOT / "content/curriculum.json").read_text(encoding="utf-8")))
     load_private_bindings(catalog)
+    return catalog
+
+
+@lru_cache(maxsize=1)
+def load_catalog():
+    catalog = load_reviewed_catalog()
+    labels = ROOT / "content/curriculum-labels.json"
+    if labels.exists():
+        catalog = merge_public_labels(catalog, json.loads(labels.read_text(encoding="utf-8")))
     return catalog
 
 
@@ -176,7 +225,8 @@ def overview(conn, actor):
         topics = [result("topic:" + t, item["title"]) for t, item in catalog["topics"].items() if item["discipline_id"] == key]
         topics.sort(key=lambda x: (x["accuracy"] is None, x["accuracy"] or 0, -x["answered"], x["title"]))
         item = result("discipline:" + key, value["title"])
-        item["module"] = topic_registry.get(key, {}).get("module")
+        item["module"] = value["module"] if "module" in value else topic_registry.get(key, {}).get("module")
+        item["modules"] = value.get("modules", [item["module"]] if item["module"] else [])
         item["topics"] = topics
         item["unmapped_answers"] = item["answered"] - sum(t["answered"] for t in topics)
         result_disciplines.append(item)

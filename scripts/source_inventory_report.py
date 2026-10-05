@@ -24,7 +24,8 @@ from app.source_inventory import (
     InventoryError, combine_registries, complete_listing, link_lessons, private_review_queue,
     processing_status, reconcile, reviewed_graph, scan,
 )
-from app.content_publication import DRIVE_REF, LEGACY_SHA256, fingerprint
+from app.content_publication import DRIVE_REF, LEGACY_SHA256, fingerprint, load_policy
+from app.publication_certificate import certificate_error
 
 
 def _read(path: Path):
@@ -92,6 +93,57 @@ def legacy_derivative_links(repo_root: Path, baseline: dict, quality_reviews: di
                 if not all_ids or (source_ids and quality_ids and source_ids != quality_ids):
                     unmapped.append(derivative_id)
     return linked, sorted(unmapped)
+
+
+def private_dossier_reviews(repo_root: Path, document: dict, *, policy=None) -> tuple[dict, dict]:
+    """Recover private provenance only from the dossier signed for a live item.
+
+    A certificate without its matching private dossier cannot reveal its
+    source edges. Old/modified dossiers must not replace current evidence.
+    This does not approve the source or change its processing/hold state.
+    """
+    if (not isinstance(document, dict) or document.get("schema_version") != 1
+            or not isinstance(document.get("dossiers"), list)):
+        raise InventoryError("invalid_private_publication_dossiers")
+    policy = policy if policy is not None else load_policy()
+    public = {}
+    for kind, pattern in (("questions", "**/*.json"), ("glossary", "*.json"), ("literature", "*.json")):
+        for path in (repo_root / "content" / kind).glob(pattern):
+            entries = _read(path)
+            if not isinstance(entries, list):
+                raise InventoryError("invalid_derivative_file")
+            for item in entries:
+                if not isinstance(item, dict) or not isinstance(item.get("id"), str):
+                    raise InventoryError("invalid_derivative_file")
+                key = kind + ":" + item["id"]
+                if key in public:
+                    raise InventoryError("duplicate_derivative")
+                public[key] = item
+    reviews, quality = {}, {}
+    for dossier in document["dossiers"]:
+        if (not isinstance(dossier, dict) or dossier.get("schema_version") != 1
+                or dossier.get("kind") not in {"questions", "glossary", "literature"}
+                or not isinstance(dossier.get("item_id"), str)):
+            raise InventoryError("invalid_private_publication_dossier")
+        key = dossier["kind"] + ":" + dossier["item_id"]
+        certificate = (policy.certificates or {}).get(key)
+        item = public.get(key)
+        review = dossier.get("publication_review")
+        if (key in reviews or item is None or not policy.can_publish(dossier["kind"], item)
+                or not isinstance(certificate, dict)
+                or certificate_error(dossier["kind"], item, certificate, policy.certificate_key,
+                                     item_sha256=fingerprint(item)) is not None
+                or certificate.get("review_sha256") != fingerprint(dossier)
+                or not isinstance(review, dict) or review.get("decision") != "approved"
+                or not isinstance(review.get("sources"), list) or not review["sources"]):
+            raise InventoryError("private_publication_dossier_not_current")
+        reviews[key] = review
+        if dossier.get("kind") != "literature":
+            claim_quality = dossier.get("quality_review")
+            if not isinstance(claim_quality, dict):
+                raise InventoryError("invalid_private_publication_quality")
+            quality[key] = claim_quality
+    return reviews, quality
 
 
 def private_json_target(raw_target: Path, repo_root: Path, *,
@@ -241,10 +293,14 @@ def main(argv=None) -> int:
                         help="stop if a reviewed source is changed, relocated or missing; requires --reviewed")
     parser.add_argument("--private-queue", type=Path,
                         help="write a new per-file review queue only in ignored data/; requires --reviewed")
+    parser.add_argument("--private-publication-dossiers", type=Path,
+                        help="restore signed private derivative edges; requires --private-queue")
     args = parser.parse_args(argv)
     try:
         if args.private_queue and not args.reviewed:
             raise InventoryError("private_queue_requires_reviewed")
+        if args.private_publication_dossiers and not args.private_queue:
+            raise InventoryError("private_publication_dossiers_require_queue")
         if args.private_registry and not args.reviewed:
             raise InventoryError("private_registry_requires_reviewed")
         if args.private_topics and not args.private_registry:
@@ -271,6 +327,18 @@ def main(argv=None) -> int:
                 private_registry)
         reviews = _read(REPO_ROOT / "content/publication-reviews.json") if args.private_queue else None
         quality_reviews = _read(REPO_ROOT / "content/learning-quality-reviews.json") if args.private_queue else None
+        private_review_count = 0
+        if args.private_publication_dossiers:
+            path = private_json_target(args.private_publication_dossiers, REPO_ROOT)
+            info = path.lstat()
+            if (args.private_publication_dossiers.is_symlink() or not stat.S_ISREG(info.st_mode)
+                    or not 0 < info.st_size <= 20_000_000
+                    or (os.name == "posix" and (info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) & 0o077))):
+                raise InventoryError("private_dossiers_require_owned_regular_file")
+            private_reviews, private_quality = private_dossier_reviews(REPO_ROOT, _read(path))
+            reviews = {**reviews, "items": {**reviews["items"], **private_reviews}}
+            quality_reviews = {**quality_reviews, "items": {**quality_reviews["items"], **private_quality}}
+            private_review_count = len(private_reviews)
         legacy, unmapped_legacy = legacy_derivative_links(
             REPO_ROOT, _read(REPO_ROOT / "content/legacy-publication-baseline.json"),
             quality_reviews["items"]) if args.private_queue else ({}, [])
@@ -300,6 +368,8 @@ def main(argv=None) -> int:
                                          unmapped_legacy_derivatives=unmapped_legacy)
             value["legacy_derivatives"] = {"linked": len(legacy),
                                            "unmapped": len(unmapped_legacy)}
+            if args.private_publication_dossiers:
+                value["signed_private_derivatives"] = private_review_count
             descriptor = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
             with os.fdopen(descriptor, "w", encoding="utf-8") as output:
                 json.dump(queue, output, ensure_ascii=False, indent=2)

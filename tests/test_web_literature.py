@@ -35,6 +35,8 @@ def test_reading_shared_actor_preserves_distinct_lists_private_notes_and_other_a
     catalog = web.client.get('/web/literature/catalog')
     assert catalog.status_code == 200 and catalog.headers['cache-control'] == 'no-store'
     works = catalog.json()['works']
+    discipline = next(topic for topic in catalog.json()['topics'] if topic['topic_id'] == 'psychodiagnostics')
+    assert discipline['modules'] == ['module2', 'module3']
     assert len(works) == len({item['work_id'] for item in load_literature_items()})
     assert len(works) < len(load_literature_items())
     assert all(set(entry['source']) == {'citation'}
@@ -51,6 +53,8 @@ def test_reading_shared_actor_preserves_distinct_lists_private_notes_and_other_a
     assert post(web, 'literature/progress', body, csrf=csrf, headers={'Origin':'https://foreign.test'}).status_code == 403
     assert post(web, 'literature/progress', body, csrf=csrf).status_code == 200
     headers = {'Authorization': 'tma ' + _make_init_data(TOKEN, {'id':42})}
+    mini_topics = web.client.get('/miniapp/literature/topics', headers=headers).json()['literature_topics']
+    assert next(topic for topic in mini_topics if topic['topic_id'] == 'psychodiagnostics')['modules'] == discipline['modules']
     other = {'Authorization': 'tma ' + _make_init_data(TOKEN, {'id':99})}
     state = web.client.get('/miniapp/literature/state', headers=headers).json()['literature_state']
     assert next(row for row in state if row['literature_id'] == first)['progress_percent'] is None

@@ -1,0 +1,802 @@
+[
+  {
+    "id": "lit_betensky_what_do_you_see",
+    "work_id": "lit_betensky_what_do_you_see",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Что ты видишь? Новые методы арт-терапии",
+    "authors": [
+      "Бетенски М."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 10,
+    "global_order": 510010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение к лекции о горе и утрате: преподаватель упоминает книгу при обсуждении арт-терапии. Порядок и значимость предложены агентом. Библиографическая запись не подтверждает пригодность каждого упражнения для любой ситуации.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Бетенски М. Что ты видишь? Новые методы арт-терапии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Фамилия автора и полное название уточнены по библиотечной записи; год внешней карточки не перенесён на неизвестную редакцию курса. Научные утверждения лекции этим review не одобряются."
+  },
+  {
+    "id": "lit_schutzenberger_ancestor_syndrome",
+    "work_id": "lit_schutzenberger_ancestor_syndrome",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Синдром предков",
+    "authors": [
+      "Шутценбергер А. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 20,
+    "global_order": 510020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после темы зависимого поведения: книга прямо названа в лекции курса. Этап и значимость — рекомендация агента. Библиографическое включение не подтверждает научную достоверность трансгенерационных объяснений, семейных расстановок или других методов; их утверждения требуют отдельной содержательной проверки.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_117013a575cc"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_117013a575cc",
+        "title": "Психология зависимого поведения",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Шутценбергер А. А.. Синдром предков"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_makarov_selected_psychotherapy_lectures",
+    "work_id": "lit_makarov_selected_psychotherapy_lectures",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Избранные лекции по психотерапии",
+    "authors": [
+      "Макаров В. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 30,
+    "global_order": 510030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Углубляющее чтение после лекции о горе и утрате: преподаватель прямо рекомендует книгу, отдельно упоминая главу о мифическом мышлении. Дополнительная значимость и этап — рекомендация агента; сравнение с другими книгами и обязательные предварительные работы преподавателем не установлены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Макаров В. В.. Избранные лекции по психотерапии"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_course_mention_psychiatry_disasters",
+    "work_id": "lit_course_mention_psychiatry_disasters",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Психиатрия катастроф",
+    "authors": [
+      "Александровский Ю. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 40,
+    "global_order": 510040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Сохранено упоминание книги в занятии по психологии горя и утраты. Точное название, авторство и издание требуют библиографического уточнения; следующий шаг чтения пока не назначен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "В занятии книга «Психиатрия катастроф» приписана Юрию Анатольевичу Александровскому; точное библиографическое соответствие не установлено."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Название и автор переданы по упоминанию в курсе, а не по подтверждённой карточке издания.",
+      "У Александровского подтверждена другая книга — «Катастрофы и психическое здоровье». Её тождество данному упоминанию не установлено; записи не объединены.",
+      "Год, издание и содержание упомянутой книги не подтверждены."
+    ],
+    "notes": "Каталог сохраняет неуточнённое упоминание курса. Это не подтверждение авторства, полного названия, научной корректности книги или всей лекции. Рекомендация чтения и ссылки на доступ не назначены."
+  },
+  {
+    "id": "lit_kreisman_straus_hate_you_dont_leave",
+    "work_id": "lit_kreisman_straus_hate_you_dont_leave",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Я ненавижу тебя, только не бросай меня. Пограничные личности и как их понять",
+    "authors": [
+      "Джерольд Крейсман",
+      "Хэл Страус"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 50,
+    "global_order": 510050,
+    "estimated_minutes": null,
+    "tags": [
+      "personality"
+    ],
+    "why_read": "После общего знакомства с психотерапией перейти к чтению о пограничном расстройстве личности и общении с человеком, который с ним живёт. Сопоставлять описания с современной клинической практикой; книга не предназначена для постановки диагноза себе или близким.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_makarov_selected_psychotherapy_lectures"
+    ],
+    "source": {
+      "citation": "Крейсман Дж., Страус Х. Я ненавижу тебя, только не бросай меня. Пограничные личности и как их понять. Питер. Издание в учебной рекомендации не указано."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и конкретное издание в учебной рекомендации не названы. Подтверждено произведение и авторы, содержание всей книги не проверено."
+    ],
+    "notes": "Преподаватель прямо рекомендует книгу психологам. Этап, порядок и категория значимости определены агентом; год текущего тиража издателя не подменяет неизвестное издание преподавателя.",
+    "importance": "important",
+    "importance_source": "agent"
+  },
+  {
+    "id": "lit_zeigarnik_pathopsychology",
+    "work_id": "lit_zeigarnik_pathopsychology",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Патопсихология",
+    "authors": [
+      "Зейгарник Б. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "approved",
+    "priority": null,
+    "importance": "important",
+    "importance_source": "teacher",
+    "topic_order": 60,
+    "global_order": 510060,
+    "estimated_minutes": null,
+    "tags": [
+      "pathopsychology"
+    ],
+    "why_read": "После общего знакомства с клинической психологией — для систематизации качественного анализа психической деятельности. Преподаватель выделяет этот учебник при введении в патопсихологию; место в последовательности чтения предложено агентом. Примеры и результаты отдельных заданий не заменяют комплексную оценку специалистом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_be63ccbdf1d7"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_be63ccbdf1d7",
+        "title": "Патопсихологические нарушения и синдромы",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Зейгарник Б. В. Патопсихология. Учебник, явно упомянутый преподавателем; конкретное издание не указано."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, издание и страницы учебника в лекции не названы."
+    ],
+    "notes": "Название и автор подтверждены библиотечной карточкой. Год внешней карточки не перенесён на неизвестный экземпляр курса; запись не удостоверяет полный текст книги или все клинические утверждения лекции."
+  },
+  {
+    "id": "lit_hellinger_orders_of_love",
+    "work_id": "lit_hellinger_orders_of_love",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Порядки любви",
+    "authors": [
+      "Хеллингер Б."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 61,
+    "global_order": 510061,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Историческое и критическое чтение после темы семейных отношений при зависимости. Отделять авторские системные представления от доказательств лечения; книга не заменяет клинические рекомендации.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_117013a575cc"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_117013a575cc",
+        "title": "Психология зависимого поведения",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Порядки любви. Книжное упоминание в лекции о зависимости; издание не установлено."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, год и страницы в лекции не указаны.",
+      "Подзаголовок и вариант издания не установлены."
+    ],
+    "notes": "Библиографическое включение отражает явное упоминание курса. Первичная запись используется только для проверки названия; содержание и эффективность методов не утверждаются."
+  },
+  {
+    "id": "lit_course_mention_just_for_today",
+    "work_id": "lit_course_mention_just_for_today",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Только сегодня",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 62,
+    "global_order": 510062,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упомянутый в лекции ежедневник поддержки выздоровления: обращаться к отдельным дневным записям по интересу. Точный выпуск и принадлежность названного экземпляра сообществу не установлены; чтение не заменяет профессиональную помощь.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_117013a575cc"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_117013a575cc",
+        "title": "Психология зависимого поведения",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Только сегодня. Книжное упоминание в лекции о зависимости; издание не установлено."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, год и страницы в лекции не указаны.",
+      "Авторство и принадлежность ежедневника не установлены: в лекции названы разные сообщества."
+    ],
+    "notes": "Библиографическое включение отражает явное упоминание курса. Первичная запись используется только для проверки названия; содержание и эффективность методов не утверждаются."
+  },
+  {
+    "id": "lit_alexandrov_exploded_brain",
+    "work_id": "lit_alexandrov_exploded_brain",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Взорванный мозг",
+    "authors": [
+      "Александров Е. О."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 63,
+    "global_order": 510063,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После базового знакомства с психологией травмы: дополнительное профессиональное чтение по упомянутой в лекции работе. Чтение не заменяет клиническую подготовку; этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Александров Е. О. — Взорванный мозг"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены."
+    ],
+    "notes": "НЭБ подтверждает автора и произведение; год её экземпляра не определяет издание курса. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_tarabrina_posttraumatic_stress_practicum",
+    "work_id": "lit_tarabrina_posttraumatic_stress_practicum",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Практикум по психологии посттравматического стресса",
+    "authors": [
+      "Тарабрина Н. В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 64,
+    "global_order": 510064,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После базового знакомства с психологией травмы: профессиональное дополнительное изучение практикума, упомянутого в лекции. Не применять диагностические процедуры без необходимой подготовки; этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Тарабрина Н. В. — Практикум по психологии посттравматического стресса"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены."
+    ],
+    "notes": "Сокращённое упоминание практикума Тарабриной сопоставлено с записью РГБ; конкретное издание курса не установлено. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_course_mention_small_steps_covid",
+    "work_id": "lit_course_mention_small_steps_covid",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Искусство маленьких шагов и остановок в ковидное время",
+    "authors": [
+      "Синицына"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 65,
+    "global_order": 510065,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из темы горя. До уточнения названия, авторства и редакции автоматический следующий шаг не назначается.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Синицына — Искусство маленьких шагов и остановок в ковидное время"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены.",
+      "Неуточнённое учебное упоминание; точная идентичность произведения не подтверждена."
+    ],
+    "notes": "В лекции названа фамилия Синицына; имя, отчество и точная редакция не установлены. Близкая коллективная монография под редакцией Д. А. Донцова не подставляется как доказательство издания курса."
+  },
+  {
+    "id": "lit_course_mention_kucher_ptsd_theory_practice",
+    "work_id": "lit_course_mention_kucher_ptsd_theory_practice",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Посттравматическое стрессовое расстройство. Теория и такая же практика",
+    "authors": [
+      "Кучер А. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 66,
+    "global_order": 510066,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Буквальное упоминание курса. Пока точная библиографическая запись не установлена, книга не включается в автоматическую последовательность.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Кучер А. А. — Посттравматическое стрессовое расстройство. Теория и такая же практика"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены.",
+      "Неуточнённое учебное упоминание; точная идентичность произведения не подтверждена."
+    ],
+    "notes": "В лекции назван Александр Артурович Кучер. В программе БГМУ указаны тома с другим названием; это кандидаты, а не подтверждённое исправление учебного упоминания. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_course_mention_combat_nlp",
+    "work_id": "lit_course_mention_combat_nlp",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Боевое NLP",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 67,
+    "global_order": 510067,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Буквальное упоминание курса. Автор, вид публикации и точная запись требуют уточнения; автоматическая рекомендация не назначается.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Боевое NLP"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание курса не установлены.",
+      "Неуточнённое учебное упоминание; точная идентичность произведения не подтверждена."
+    ],
+    "notes": "Транскрипт не позволяет уверенно установить автора и вид публикации. Найдена статья Н. В. Владиславовой с близким названием; она не доказывает существование или идентичность названной книги. Содержание книги и лечебная эффективность этим review не проверены."
+  },
+  {
+    "id": "lit_course_mention_galin_creativity",
+    "work_id": "lit_course_mention_galin_creativity",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Психология творчества",
+    "authors": [
+      "Галин А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 68,
+    "global_order": 510068,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание преподавателя при обсуждении творчества. Библиографическая идентичность требует уточнения; автоматический следующий шаг чтения не назначен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Александр Галин. Психология творчества; неуточнённое упоминание курса."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Название сохранено по лекции. Точное произведение и издание не установлены; найденная библиотечная карточка другого названия не подставляется.",
+      "Год и издание не установлены."
+    ],
+    "notes": "Сохранено неуточнённое упоминание курса. Это не подтверждение содержания или пригодности книги для клинической работы."
+  },
+  {
+    "id": "lit_course_mention_galin_influence",
+    "work_id": "lit_course_mention_galin_influence",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Книга о приёмах управления и влияния (название не установлено)",
+    "authors": [
+      "Галин А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 69,
+    "global_order": 510069,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание преподавателя при обсуждении творчества. Библиографическая идентичность требует уточнения; автоматический следующий шаг чтения не назначен.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_75f56fc4df73"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_75f56fc4df73",
+        "title": "Психология горя и утраты. Часть 1",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Александр Галин. Книга о приёмах управления и влияния (название не установлено); неуточнённое упоминание курса."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "В лекции указаны автор и предмет книги, но не точное название. Это не подтверждённое библиографическое название.",
+      "Год и издание не установлены."
+    ],
+    "notes": "Сохранено неуточнённое упоминание курса. Это не подтверждение содержания или пригодности книги для клинической работы."
+  },
+  {
+    "id": "lit_course_mention_granovskaya_psychological_defenses",
+    "work_id": "lit_course_mention_granovskaya_psychological_defenses",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Книга о психологических защитах (точное название не установлено)",
+    "authors": [
+      "Грановская Р. М."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 70,
+    "global_order": 510070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из лекции о горе и утрате. Для выбора книги сначала нужно уточнить её полное название и издание.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Грановская Р. М. Книга о психологических защитах (точное название не установлено)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точное библиографическое название и издание не установлены.",
+      "Порядок и значимость чтения пока не определены."
+    ],
+    "notes": "Лектор называет Раду Михайловну Грановскую и тему психологических защит, но сокращает название. Не подставлять другую книгу автора без подтверждения."
+  },
+  {
+    "id": "lit_course_mention_subbotina_psychological_defenses",
+    "work_id": "lit_course_mention_subbotina_psychological_defenses",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Книга о психологических защитах (точное название не установлено)",
+    "authors": [
+      "Субботина Людмила"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 71,
+    "global_order": 510071,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из лекции о горе и утрате. Для выбора книги сначала нужно уточнить её полное название и издание.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Субботина Людмила. Книга о психологических защитах (точное название не установлено)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точное библиографическое название и издание не установлены.",
+      "Порядок и значимость чтения пока не определены."
+    ],
+    "notes": "Лектор называет Людмилу Субботину, но прямо не помнит отчество и не сообщает точное название. Авторство сохранено в пределах услышанного; отчество и издание не угадываются."
+  },
+  {
+    "id": "lit_course_mention_detroit_child_trauma_techniques",
+    "work_id": "lit_course_mention_detroit_child_trauma_techniques",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Краткосрочные техники работы с травмой для детей (издание не установлено)",
+    "authors": [],
+    "year": null,
+    "type": "course_material",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 72,
+    "global_order": 510072,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Упоминание из лекции о горе и утрате. Для выбора книги сначала нужно уточнить её полное название и издание.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Краткосрочные техники работы с травмой для детей (издание не установлено)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точное библиографическое название и издание не установлены.",
+      "Порядок и значимость чтения пока не определены."
+    ],
+    "notes": "В лекции названо учебное пособие «Техники Детройта» и описаны возрастные разделы. Точный автор, учреждение, библиографическое название и издание не установлены. Клинические заявления о применимости не одобрены."
+  },
+  {
+    "id": "lit_course_mention_return_death_tales",
+    "work_id": "lit_course_mention_return_death_tales",
+    "topic_id": "klinicheskaya_psihologiya",
+    "module": "module5",
+    "title": "Сказки о возвратной смерти",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 73,
+    "global_order": 510073,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Лектор упоминает тренинг по этой книге. До уточнения автора, названия и издания место в порядке чтения не определено.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_fded5a914d5a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_fded5a914d5a",
+        "title": "Психология горя и утраты. Часть 2",
+        "discipline_id": "klinicheskaya_psihologiya"
+      }
+    ],
+    "source": {
+      "citation": "Сказки о возвратной смерти — неуточнённое упоминание курса."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точный автор и издание не установлены.",
+      "Порядок и значимость чтения пока не определены."
+    ],
+    "notes": "Название сохранено по транскрипту; библиографическая идентичность и издание не установлены. Упоминание тренинга не подтверждает терапевтическую эффективность книги."
+  }
+]

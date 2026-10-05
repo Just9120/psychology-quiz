@@ -193,3 +193,34 @@ def test_batch_capture_is_atomic_and_keeps_private_paths(tmp_path, monkeypatch, 
         {**entries[0], "extraction_profile": None}]}), encoding="utf-8")
     assert source_batch_capture.main(args) == 1
     assert not output.exists()
+
+
+def test_changed_capture_preserves_independent_conflict_evidence(tmp_path):
+    from copy import deepcopy
+    from app.source_inventory import private_conflict_reviews
+    original = export(["private"])
+    old_revision = list(source_capture._snapshot(original)["files"]["private"][field]
+                        for field in ("modified_time", "title", "mime_type"))
+    issues = [{"reason": "First objection", "locator": "characters:1:2", "related_source_ids": [], "reviewed_at": "2026-09-25T00:00:00Z"},
+              {"reason": "Second objection", "locator": "characters:3:4", "related_source_ids": [], "reviewed_at": "2026-09-25T00:00:00Z"}]
+    prior = {"private": {"revision": old_revision, "review_state": "conflict",
+                         "reason": "Two independent objections", "locator": "characters:1:2; characters:3:4",
+                         "related_source_ids": [], "issues": issues, "reviewed_at": "2026-09-25T00:00:00Z",
+                         "snapshot_kind": "extracted_text", "snapshot_sha256": "a" * 64}}
+    before = deepcopy(prior)
+    current = deepcopy(original)
+    current["folders"]["root"][0]["children"][0]["modified_time"] = "2026-09-26T00:00:00Z"
+    content = tmp_path / "changed.txt"
+    content.write_text("Changed edition", encoding="utf-8")
+    captured = source_capture.capture(current, prior, "private", content, "extracted_text")
+    held = captured["private"]["conflict_hold"]
+    assert held["revision"] == old_revision
+    assert held["issues"] == issues
+    assert held["snapshot_sha256"] == "a" * 64
+    assert prior == before
+    report = private_conflict_reviews(captured, {})[0]
+    assert report["held_revision"] == old_revision
+    assert report["source_revision"] != old_revision
+    assert [issue["locator"] for issue in report["issues"]] == ["characters:1:2", "characters:3:4"]
+    held["issues"][0]["reason"] = "Edited new record"
+    assert prior == before

@@ -10,8 +10,8 @@ from typing import Any
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from app.content_publication import validate_publications
-from app.literature import load_access_links
+from app.content_publication import validate_publications, load_policy
+from app.literature import load_access_links, literature_curriculum_topics
 
 LITERATURE_FILES_GLOB = "content/literature/*.json"
 TOPICS_FILE = Path("content/topics.json")
@@ -103,7 +103,13 @@ def validate_entry(
     seen_ids: dict[str, str],
     errors: list[str],
 ) -> None:
-    missing = sorted(REQUIRED_FIELDS - entry.keys())
+    private_projection = False
+    if "source_refs" not in entry:
+        policy = load_policy()
+        private_projection = (f"literature:{entry.get('id')}" in (policy.certificates or {})
+                              and policy.error("literature", entry) is None)
+    required = REQUIRED_FIELDS - {"source_refs"} if private_projection else REQUIRED_FIELDS
+    missing = sorted(required - entry.keys())
     if missing:
         errors.append(f"{label}: missing required fields: {', '.join(missing)}")
 
@@ -144,7 +150,10 @@ def validate_entry(
     if entry.get("content_access") != "not_verified":
         errors.append(f"{label}: only reviewed bibliographic metadata is supported")
     source = entry.get("source")
-    if not isinstance(source, dict) or not all(is_non_empty_string(source.get(key)) for key in ("id", "title", "locator", "citation")):
+    if private_projection:
+        if not isinstance(source, dict) or set(source) != {"citation"} or not is_non_empty_string(source.get("citation")):
+            errors.append(f"{label}: signed private bibliography exposes citation only")
+    elif not isinstance(source, dict) or not all(is_non_empty_string(source.get(key)) for key in ("id", "title", "locator", "citation")):
         errors.append(f"{label}: complete bibliographic source required")
     elif f"drive:{source['id']}" not in entry.get("source_refs", []):
         errors.append(f"{label}: source must match source_refs")
@@ -223,7 +232,9 @@ def validate_entry(
                 errors.append(f"{label}: prerequisites[{prerequisite_idx}] must not reference the entry itself")
 
     source_refs = entry.get("source_refs")
-    if not isinstance(source_refs, list):
+    if private_projection:
+        pass  # The verified certificate binds the public item to its private dossier.
+    elif not isinstance(source_refs, list):
         errors.append(f"{label}: source_refs must be a list")
     elif not source_refs:
         errors.append(f"{label}: source_refs must contain at least one item for real reading entries")
@@ -266,11 +277,15 @@ def validate() -> list[str]:
                 errors.append(f"{label}: literature entry must be an object")
                 continue
             validate_entry(entry, label, file_topic_id, active_topic_ids, seen_ids, errors)
+            try:
+                literature_curriculum_topics(entry)
+            except ValueError as error:
+                errors.append(f"{label}: {error}")
 
             if isinstance(entry.get("id"), str):
                 entries[entry["id"]] = entry
             topic = topic_map.get(file_topic_id, {})
-            if entry.get("module") != topic.get("module") or "literature" not in topic.get("available_contours", []):
+            if entry.get("module") not in topic.get("modules", [topic.get("module")]) or "literature" not in topic.get("available_contours", []):
                 errors.append(f"{label}: module/literature contour must match topic registry")
             topic_order = entry.get("topic_order")
             if type(topic_order) is int:

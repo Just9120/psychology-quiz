@@ -11,14 +11,18 @@ READING_STATUSES = frozenset(STATUS_MAP.values())
 from app.literature import load_literature_items, load_topic_registry
 
 
-def reading_summary(items: list[dict], states: dict) -> dict:
+def reading_summary(items: list[dict], states: dict, all_items: list[dict] | None = None) -> dict:
     """Count works in the selected scope without resolving legacy state conflicts."""
     works = {}
     for item in items:
         works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    all_works = {}
+    for item in (all_items if all_items is not None else items):
+        all_works.setdefault(item.get("work_id", item["id"]), []).append(item)
     read, conflicts, current = 0, 0, []
-    for entries in works.values():
-        statuses = {states.get(item["id"], {}).get("reading_status", "not_started") for item in entries}
+    for work_id, entries in works.items():
+        aliases = all_works.get(work_id, entries)
+        statuses = {states.get(item["id"], {}).get("reading_status", "not_started") for item in aliases}
         read += statuses == {"read"}
         conflicts += len(statuses) > 1
         reading = next((item for item in entries if states.get(item["id"], {}).get("reading_status") == "in_progress"), None)
@@ -41,14 +45,18 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
     Conflicting association states require a decision before a recommendation.
     Only canonical UTC timestamps rank recency; missing dates tie by stable ID.
     """
-    works = {}
-    for item in items:
-        works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    known = {item["id"]: item for item in (all_items if all_items is not None else items)}
+    all_works = {}
+    for item in known.values():
+        all_works.setdefault(item.get("work_id", item["id"]), []).append(item)
+    def status(item):
+        return states.get(item["id"], {}).get("reading_status", "not_started")
+    # A topic filter must not hide a conflicting state of the same work.
     candidates = []
-    for entries in works.values():
-        if {states.get(item["id"], {}).get("reading_status", "not_started")
-                for item in entries} == {"in_progress"}:
-            candidates.extend(entries)
+    for item in items:
+        group = all_works.get(item.get("work_id", item["id"]), [])
+        if group and all(status(entry) == "in_progress" for entry in group):
+            candidates.append(item)
     def recency(item):
         value = states.get(item["id"], {}).get("updated_at")
         if not isinstance(value, str) or len(value) != 20 or not value.endswith("Z"):
@@ -59,12 +67,6 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             return ""
         return value if parsed.strftime("%Y-%m-%dT%H:%M:%SZ") == value else ""
     if not candidates:
-        known = {item["id"]: item for item in (all_items if all_items is not None else items)}
-        all_works = {}
-        for item in known.values():
-            all_works.setdefault(item.get("work_id", item["id"]), []).append(item)
-        def status(item):
-            return states.get(item["id"], {}).get("reading_status", "not_started")
         def completed(reference):
             prerequisite = known.get(reference)
             if prerequisite is None:
@@ -72,6 +74,8 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             group = all_works[prerequisite.get("work_id", prerequisite["id"])]
             return all(status(item) == "read" for item in group)
         rank = {"basic": 0, "important": 1, "additional": 2, "advanced": 3}
+        stages = {"foundation": 0, "core": 1, "applied": 2,
+                  "deepening": 3, "advanced": 4, "reference": 5}
         recommendations = []
         for item in items:
             group = all_works.get(item.get("work_id", item["id"]), [])
@@ -79,7 +83,7 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             if (not group or any(status(entry) != "not_started" for entry in group)
                     or item.get("importance") not in rank
                     or item.get("importance_source") not in {"agent", "teacher"}
-                    or item.get("reading_level") not in {"foundation", "core", "applied", "deepening", "advanced", "reference"}
+                    or item.get("reading_level") not in stages
                     or not isinstance(item.get("why_read"), str) or not item["why_read"].strip()
                     or not isinstance(prerequisites, list)
                     or not all(isinstance(ref, str) and completed(ref) for ref in prerequisites)):
@@ -87,7 +91,9 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             recommendations.append(item)
         if not recommendations:
             return None
-        recommendations.sort(key=lambda item: (rank[item["importance"]], str(item["id"])))
+        # Reviewed stages resolve equal priority, never arbitrary bibliography order.
+        recommendations.sort(key=lambda item: (rank[item["importance"]],
+                             stages[item["reading_level"]], str(item["id"])))
         item = recommendations[0]
         reason = f"Рекомендация агента. {item['why_read']}"
         if item["importance_source"] == "teacher":
@@ -111,12 +117,13 @@ def catalog(conn, actor_user_id: int) -> dict[str, Any]:
         work_id = item["work_id"]
         work = works.setdefault(work_id, {"work_id": work_id, "title": item["title"],
             "authors": item["authors"], "type": item["type"],
-            "access_links": item["access_links"], "entries": []})
+            "access_links": item["access_links"], "book_search": item["book_search"], "entries": []})
         used_topics.add(item["topic_id"])
         work["entries"].append({**item, "topic_title": topics[item["topic_id"]]["title"],
             "user_state": states.get(item["id"])})
     return {"ok": True, "works": list(works.values()), "topics": [
-        {"topic_id": topic_id, "title": topic["title"], "module": topic["module"]}
+        {"topic_id": topic_id, "title": topic["title"], "module": topic["module"],
+         "modules": topic.get("modules", [topic["module"]])}
         for topic_id, topic in sorted(topics.items(), key=lambda pair: pair[1]["order"])
         if topic_id in used_topics]}
 

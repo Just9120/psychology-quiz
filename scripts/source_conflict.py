@@ -46,8 +46,12 @@ def record_conflict(current: dict, prior: dict, source_id: str, *, reason: str,
     if isinstance(previous, dict) and previous.get("review_state") == "conflict" and previous.get("revision") == revision:
         issues = previous.get("issues")
         if issues is None:
+            # Older single-issue records omitted this optional relationship list.
+            # Default only an absent field: malformed explicit values still fail
+            # validation, and the prior evidence must remain unchanged.
             issues = [{key: previous[key] for key in
-                       ("reason", "locator", "related_source_ids", "reviewed_at")}]
+                       ("reason", "locator", "reviewed_at")}]
+            issues[0]["related_source_ids"] = previous.get("related_source_ids", [])
         if (not isinstance(issues, list) or not issues
                 or any(not isinstance(issue, dict)
                        or any(not isinstance(issue.get(key), str) or not issue[key]
@@ -74,6 +78,13 @@ def record_conflict(current: dict, prior: dict, source_id: str, *, reason: str,
         # A later editorial hold revokes approval, but must not erase the
         # evidence for the review that preceded it.
         record["previous_processed_review"] = previous
+        # Editorial approval is revoked, but the unchanged captured edition
+        # remains the evidence for locating held and independent fragments.
+        # Keeping it only inside history made current fragment verification
+        # impossible even when the caller supplied the exact same bytes.
+        for field in ("snapshot_kind", "snapshot_sha256", "extraction_profile"):
+            if field in previous:
+                record[field] = previous[field]
     elif (isinstance(previous, dict) and previous.get("review_state") == "pending_review"
           and previous.get("revision") == revision):
         # Keep the exact capture evidence while withholding editorial approval.

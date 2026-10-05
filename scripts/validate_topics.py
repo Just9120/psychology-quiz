@@ -129,6 +129,13 @@ def validate() -> list[str]:
             if field in topic and not is_non_empty_string(topic.get(field)):
                 errors.append(f"{label}: {field} must be a non-empty string")
 
+        if "modules" in topic:
+            modules = topic["modules"]
+            if (not isinstance(modules, list) or not modules
+                    or any(not isinstance(value, str) or re.fullmatch(r"module[1-6]", value) is None for value in modules)
+                    or len(set(modules)) != len(modules) or topic.get("module") not in modules):
+                errors.append(f"{label}: modules must contain unique course modules including the primary module")
+
         status = topic.get("status")
         if status not in VALID_STATUSES:
             errors.append(f"{label}: status must be one of {', '.join(sorted(VALID_STATUSES))}")

@@ -348,3 +348,125 @@ def test_probe_peak_memory_units_and_unavailable_platform(monkeypatch):
     assert private_search.process_peak_rss_bytes() is None
     monkeypatch.setitem(private_search.sys.modules, "resource", None)
     assert private_search.process_peak_rss_bytes() is None
+
+
+def test_operator_lexical_empty_result_never_downloads_or_calls_model(monkeypatch):
+    from app import private_search
+    monkeypatch.setattr(private_search, "ensure_index", lambda *args, **kwargs: None)
+    class Connection:
+        def execute(self, query, params):
+            assert "ts_rank_cd" in query and "embedding OPERATOR" not in query
+            return type("Rows", (), {"fetchall": lambda self: []})()
+    assert search(Connection(), "no lexical match", None, mode="lexical") == []
+    with pytest.raises(SearchError, match="invalid_search_mode"):
+        search(Connection(), "query", None, mode="unknown")
+
+
+def test_operator_semantic_mode_excludes_lexical_fallback(monkeypatch):
+    from app import private_search
+    monkeypatch.setattr(private_search, "ensure_index", lambda *args, **kwargs: None)
+    class Model:
+        def embed(self, texts):
+            return [[1.0] + [0.0] * 383]
+    class Connection:
+        def execute(self, query, params):
+            assert "embedding OPERATOR" in query and "ts_rank_cd" not in query
+            row = ("synthetic-source", "2026-10-01", "a" * 64,
+                   "characters:0:20", "synthetic reviewed text", 0.8)
+            return type("Rows", (), {"fetchall": lambda self: [row]})()
+    assert search(Connection(), "paraphrase", Model(), mode="semantic")[0]["source_id"] == "synthetic-source"
+
+
+def test_private_qa_checks_expected_passage_and_requested_mode(monkeypatch, tmp_path):
+    from app import private_search
+    source = "source_12345678901234567890"
+    digest = "a" * 64
+    case = {"query": "reviewed paraphrase", "source_id": source,
+            "snapshot_sha256": digest, "locator": "characters:10:40", "mode": "semantic"}
+    path = tmp_path / "qa.json"
+    path.write_text(json.dumps({"schema_version": 1, "cases": [case]}), encoding="utf-8")
+    monkeypatch.setattr(private_search, "PRIVATE_ROOT", tmp_path)
+    cases = load_qa_cases(path)
+    def result(*args, **kwargs):
+        assert kwargs["mode"] == "semantic"
+        return [{"source_id": source, "snapshot_sha256": digest, "locator": "characters:41:80"}]
+    monkeypatch.setattr(private_search, "search", result)
+    with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
+        verify_retrieval(None, cases, object())
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [case])
+    assert verify_retrieval(None, cases, object()) == {"cases_passed": 1}
+    for invalid in ({"locator": "characters:40:10"}, {"mode": "unknown"}, {"mode": []}, {"locator": "line:4"}):
+        path.write_text(json.dumps({"schema_version": 1, "cases": [{**case, **invalid}]}), encoding="utf-8")
+        with pytest.raises(SearchError, match="invalid_private_qa_cases"):
+            load_qa_cases(path)
+
+
+def test_private_empty_qa_is_explicit_lexical_and_refuses_an_unexpected_result(monkeypatch, tmp_path):
+    from app import private_search
+    case = {"query": "несуществующийтерминконтроля", "mode": "lexical", "expect_empty": True}
+    path = tmp_path / "empty-qa.json"
+    monkeypatch.setattr(private_search, "PRIVATE_ROOT", tmp_path)
+    path.write_text(json.dumps({"schema_version": 1, "cases": [case]}), encoding="utf-8")
+    cases = load_qa_cases(path)
+    monkeypatch.setattr(private_search, "embedder", lambda: pytest.fail("lexical QA must not load a model"))
+    assert private_search._qa_model(cases) is None
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [])
+    assert verify_retrieval(None, cases, None) == {"cases_passed": 1}
+    monkeypatch.setattr(private_search, "search", lambda *args, **kwargs: [{"source_id": "unexpected"}])
+    with pytest.raises(SearchError, match="private_retrieval_qa_failed"):
+        verify_retrieval(None, cases, None)
+    for invalid in ({"mode": "semantic"}, {"expect_empty": False}, {"expect_empty": 1},
+                    {"source_id": "source_12345678901234567890"}, {"query": " "}):
+        path.write_text(json.dumps({"schema_version": 1, "cases": [{**case, **invalid}]}), encoding="utf-8")
+        with pytest.raises(SearchError, match="invalid_private_qa_cases"):
+            load_qa_cases(path)
+
+
+@pytest.mark.parametrize("identity", [
+    ("other_database", "psychology_app", "18.6"),
+    ("psychology_atlas", "unexpected_role", "18.6"),
+])
+def test_operator_search_refuses_unexpected_database_identity_before_private_read(monkeypatch, tmp_path, capsys, identity):
+    from app import private_search
+    from app.postgres_config import private_target
+
+    class Connection:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            pass
+
+        def execute(self, query):
+            if query == "SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY":
+                return None
+            assert query == "SELECT current_database(),current_user,current_setting('server_version')"
+            return type("Identity", (), {"fetchone": lambda self: identity})()
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Unexpected database identity must stop before reading private data or loading a model")
+
+    monkeypatch.setenv("DATABASE_URL", private_target("synthetic-only"))
+    monkeypatch.setattr(private_search.psycopg, "connect", lambda *args, **kwargs: Connection())
+    monkeypatch.setattr(private_search, "require_current_reviewed_index", forbidden)
+    monkeypatch.setattr(private_search, "embedder", forbidden)
+    monkeypatch.setattr(private_search, "search", forbidden)
+    assert private_search.main([
+        "search", "--manifest", str(tmp_path / "unread-private-manifest.json"),
+        "--query", "private query",
+    ]) == 1
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err.strip() == "PRIVATE_SEARCH_STOP: unexpected_private_postgres_identity"
+
+
+def test_operator_rebuild_requires_qa_before_database_or_embedding_access(monkeypatch, capsys):
+    from app import private_search
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("database/model must not be accessed without QA cases")
+
+    monkeypatch.setattr(private_search.psycopg, "connect", forbidden)
+    monkeypatch.setattr(private_search, "embedder", forbidden)
+    assert private_search.main(["rebuild", "--manifest", "manifest.json"]) == 1
+    assert "private_qa_file_required" in capsys.readouterr().err

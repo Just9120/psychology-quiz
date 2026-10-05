@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import codecs
+from copy import deepcopy
 import hashlib
 import json
 import os
@@ -99,11 +100,15 @@ def capture(current: dict, prior: dict, source_id: str, content_path: Path,
         record["extraction_profile"] = extraction_profile
     if isinstance(previous, dict):
         if previous.get("review_state") == "conflict":
+            # A new capture must not rebind old objections to the new
+            # edition or collapse independent issues into one summary.
             record["conflict_hold"] = {
-                "reason": previous["reason"],
-                "locator": previous.get("locator"),
-                "related_source_ids": previous.get("related_source_ids", []),
+                field: deepcopy(previous[field]) for field in (
+                    "revision", "reason", "locator", "reviewed_at", "issues",
+                    "snapshot_kind", "snapshot_sha256", "extraction_profile",
+                ) if field in previous
             }
+            record["conflict_hold"]["related_source_ids"] = deepcopy(previous.get("related_source_ids", []))
             if "previous_processed_review" in previous:
                 record["previous_processed_review"] = previous["previous_processed_review"]
         elif previous.get("review_state") == "processed":

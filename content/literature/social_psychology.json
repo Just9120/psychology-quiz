@@ -310,5 +310,537 @@
       "Библиотека РГБМ различает сокращённый пересказ «Анти-Карнеги» и полный перевод «Человек-манипулятор» 2004 года. Учебный список указывает 2005 год без издательства. Конкретное издание требует сверки; варианты не объединены, исходная запись сохранена."
     ],
     "notes": "Проверена библиографическая запись по указанной редакции списка; содержание работы не использовалось как учебное знание."
+  },
+  {
+    "id": "lit_dollard_frustration_aggression",
+    "work_id": "lit_dollard_frustration_aggression",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Frustration and Aggression",
+    "authors": [
+      "John Dollard",
+      "Neal E. Miller",
+      "Leonard W. Doob",
+      "O. H. Mowrer",
+      "Robert R. Sears"
+    ],
+    "year": 1939,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 90,
+    "global_order": 610090,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Историческое дополнительное чтение после лекции о становлении социальной психологии. В лекции книга названа «Фрустрация и агрессия». Порядок и значимость предложены агентом; наличие книги в каталоге не означает одобрения гипотезы как универсального объяснения поведения.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "John Dollard, Neal E. Miller, Leonard W. Doob, O. H. Mowrer, Robert R. Sears. Frustration and Aggression"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русский перевод и используемая в курсе редакция не установлены."
+    ],
+    "notes": "Оригинальное название, пять основных авторов и год первой публикации сверены по библиотечной записи и упоминанию в лекции. Содержание книги не использовано для новых учебных ответов."
+  },
+  {
+    "id": "lit_anna_freud_ego_defence_social",
+    "work_id": "lit_anna_freud_ego_defence",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Эго и механизмы защиты",
+    "authors": [
+      "Фрейд А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 100,
+    "global_order": 610100,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение к обсуждению эго-психологии в социальной психологии: в лекции книга названа «Я и механизмы защиты». Это та же работа Анны Фрейд, уже включённая в раздел качественных методов; отметка чтения общая. Читать после знакомства с психоаналитическим подходом. Этап и значимость предложены агентом; теоретическая модель не является универсальным объяснением поведения.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_c200db7e665a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_c200db7e665a",
+        "title": "История социально-психологических идей. Часть 3",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Фрейд А.. Эго и механизмы защиты"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_lebon_psychology_peoples_masses",
+    "work_id": "lit_lebon_psychology_peoples_masses",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Психология народов и масс",
+    "authors": [
+      "Лебон Г."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 101,
+    "global_order": 912043,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После современной социальной психологии: историческое дополнительное чтение к теме формирования социально-психологических идей. Сопоставляйте авторские объяснения с современными подходами; исторический статус книги не делает её утверждения современным научным стандартом. Этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Лебон Г.. Психология народов и масс"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и редакция используемого в курсе издания не установлены."
+    ],
+    "notes": "Книга включена по точному упоминанию в исторической лекции; предварительная современная база предложена агентом для критического чтения. Не заявляется проверка или одобрение всех утверждений книги."
+  },
+  {
+    "id": "lit_social_history02_wundt",
+    "work_id": "lit_social_history02_wundt",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Психология народов (Völkerpsychologie, десять томов)",
+    "authors": [
+      "Вундт В."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 102,
+    "global_order": 610102,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Вундт В. — Психология народов (Völkerpsychologie, десять томов)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, перевод и конкретное издание курса не установлены.",
+      "Указан многотомный труд; конкретный том и русское издание не определены. Не отождествлять с отдельными сокращёнными книгами автора."
+    ],
+    "notes": "Название подтверждено в исторической лекции. Проверка касается идентичности книги, а не полного чтения или одобрения её утверждений."
+  },
+  {
+    "id": "lit_social_history02_freud",
+    "work_id": "lit_social_history02_freud",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Массовая психология и анализ Я",
+    "authors": [
+      "Фрейд З."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 103,
+    "global_order": 610103,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Фрейд З. — Массовая психология и анализ Я"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, перевод и конкретное издание курса не установлены."
+    ],
+    "notes": "Название подтверждено в исторической лекции. Проверка касается идентичности книги, а не полного чтения или одобрения её утверждений."
+  },
+  {
+    "id": "lit_social_history02_lebon",
+    "work_id": "lit_lebon_psychology_peoples_masses",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Психология народов и масс",
+    "authors": [
+      "Лебон Г."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 104,
+    "global_order": 610104,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Лебон Г. — Психология народов и масс"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, перевод и конкретное издание курса не установлены."
+    ],
+    "notes": "Название подтверждено в исторической лекции. Проверка касается идентичности книги, а не полного чтения или одобрения её утверждений. Дополнительная связь того же произведения с частью 2; единый work_id сохраняет общий прогресс чтения."
+  },
+  {
+    "id": "lit_social_history02_miller_dollard",
+    "work_id": "lit_social_history02_miller_dollard",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Социальное научение и подражание",
+    "authors": [
+      "Миллер Н. Э.",
+      "Доллард Дж."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 105,
+    "global_order": 610105,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Миллер Н. Э., Доллард Дж. — Социальное научение и подражание"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, перевод и конкретное издание курса не установлены."
+    ],
+    "notes": "Отдельная работа Social Learning and Imitation, названная в лекции. Не объединять с Frustration and Aggression. Подтверждена идентичность произведения, а не полное чтение книги или русский перевод."
+  },
+  {
+    "id": "lit_social_history02_sighele",
+    "work_id": "lit_social_history02_sighele",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Преступная толпа",
+    "authors": [
+      "Сигеле С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 106,
+    "global_order": 610106,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Сигеле С. — Преступная толпа"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и конкретное издание курса не установлены.",
+      "В лекции фамилия записана Сигиле; каталог РГБ подтверждает автора Сципиона Сигеле."
+    ],
+    "notes": "Подтверждены название и автор по каталогу РГБ. Год русского издания из карточки не приписан неизвестному изданию курса. Историческая модель толпы не используется как современный универсальный закон; полный текст книги не прочитан."
+  },
+  {
+    "id": "lit_course_mention_lebon_crowd",
+    "work_id": "lit_course_mention_lebon_crowd",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Душа толпы (упоминание в курсе)",
+    "authors": [
+      "Лебон Г."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 107,
+    "global_order": 610107,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Лекция называет эту работу Лебона. До уточнения русского текста и его связи со сборником этап и значимость не назначены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Лебон Г. — Душа толпы (упоминание в курсе)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Сохранено название, указанное в курсе; точный русский текст, перевод и издание не установлены.",
+      "Не объединено со сборником Психология народов и масс: совпадение автора не подтверждает тождество всего произведения."
+    ],
+    "notes": "Самостоятельная запись для уточнения книжного упоминания. Не утверждает подтверждённую идентичность перевода; личные отметки других книг не переносятся."
+  },
+  {
+    "id": "lit_social_history03_freud",
+    "work_id": "lit_social_history02_freud",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Массовая психология и анализ Я",
+    "authors": [
+      "Фрейд З."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 108,
+    "global_order": 610108,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_c200db7e665a"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_c200db7e665a",
+        "title": "История социально-психологических идей. Часть 3",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Фрейд З. — Массовая психология и анализ Я"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, перевод и конкретное издание курса не установлены."
+    ],
+    "notes": "Та же работа Зигмунда Фрейда, упомянутая в третьей части исторической лекции как «Массовая психология и анализ человеческого Я» и «Групповая психология и анализ Эго». Идентичность произведения и общая отметка чтения сохранены; год и конкретный перевод курса не установлены. Атрибуция теории не означает одобрение её как универсального объяснения поведения."
+  },
+  {
+    "id": "lit_social_history01_miller_dollard",
+    "work_id": "lit_social_history02_miller_dollard",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Социальное научение и подражание",
+    "authors": [
+      "Миллер Н. Э.",
+      "Доллард Дж."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 109,
+    "global_order": 610109,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Миллер Н. Э., Доллард Дж. — Социальное научение и подражание"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, перевод и конкретное издание курса не установлены."
+    ],
+    "notes": "Отдельная работа Social Learning and Imitation, названная в лекции. Не объединять с Frustration and Aggression. Подтверждена идентичность произведения, а не полное чтение книги или русский перевод."
+  },
+  {
+    "id": "lit_social_history01_sighele",
+    "work_id": "lit_social_history02_sighele",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Преступная толпа",
+    "authors": [
+      "Сигеле С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 110,
+    "global_order": 610110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Сигеле С. — Преступная толпа"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и конкретное издание курса не установлены.",
+      "В лекции фамилия записана Сигиле; каталог РГБ подтверждает автора Сципиона Сигеле."
+    ],
+    "notes": "Подтверждены название и автор по каталогу РГБ. Год русского издания из карточки не приписан неизвестному изданию курса. Историческая модель толпы не используется как современный универсальный закон; полный текст книги не прочитан."
   }
 ]

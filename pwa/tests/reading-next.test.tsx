@@ -68,3 +68,50 @@ it('labels teacher priority of an article as material while retaining agent reco
   render(<ReadingSummary items={[article]} busy={false} onSelect={vi.fn()} />)
   expect(screen.getByText('Рекомендация агента. Сопоставьте подходы. Приоритет материала — из учебного списка.')).toBeVisible()
 })
+
+
+it.each([
+  ['foundation', 'core'], ['core', 'applied'], ['applied', 'deepening'],
+  ['deepening', 'advanced'], ['advanced', 'reference'],
+])('follows the reviewed %s stage before %s rather than association ID', (earlier, later) => {
+  const common = { importance: 'additional', importance_source: 'agent',
+    why_read: 'Проверенный этап чтения.', prerequisites: [] }
+  const first = { ...common, id: 'z', reading_level: earlier }
+  const second = { ...common, id: 'a', reading_level: later }
+  expect(readingNextStep([second, first])?.id).toBe('z')
+  expect(readingNextStep([second, { ...first, user_state: { reading_status: 'read' as const } }])?.id).toBe('a')
+  expect(readingNextStep([{ ...second, user_state: state('2026-10-03T16:00:00Z') }, first])?.id).toBe('a')
+})
+
+it('preserves reviewed book priority ahead of reading stage and excludes missing prerequisites', () => {
+  const common = { importance_source: 'teacher', why_read: 'Приоритет курса.', prerequisites: [] }
+  const foundation = { ...common, id: 'z', importance: 'additional', reading_level: 'foundation' }
+  const required = { ...common, id: 'a', importance: 'basic', reading_level: 'applied' }
+  expect(readingNextStep([foundation, required])?.id).toBe('a')
+  expect(readingNextStep([foundation, { ...required, prerequisites: ['missing'] }])?.id).toBe('z')
+})
+
+
+it('checks aliases outside the filtered list before recommending continuation', () => {
+  const selected = { id: 'selected', work_id: 'shared', user_state: { reading_status: 'in_progress' as const } }
+  const alias = { id: 'other-topic', work_id: 'shared', user_state: { reading_status: 'read' as const } }
+  const other = { id: 'other-work', user_state: { reading_status: 'in_progress' as const } }
+  expect(readingNextStep([selected], [selected, alias])).toBeNull()
+  expect(readingNextStep([selected, other], [selected, alias, other])?.id).toBe('other-work')
+  expect(alias.user_state.reading_status).toBe('read')
+  expect(readingNextStep([selected], [selected, { ...alias, user_state: { reading_status: 'in_progress' as const } }])?.id).toBe('selected')
+})
+
+
+it('keeps a hidden alias conflict out of the filtered completed count', () => {
+  const selected = { id: 'selected', work_id: 'shared', title: 'Книга', user_state: { reading_status: 'read' as const } }
+  const alias = { id: 'another-list', work_id: 'shared', title: 'Книга', user_state: { reading_status: 'in_progress' as const } }
+  const unrelated = { id: 'other', title: 'Другая', user_state: { reading_status: 'read' as const } }
+  const { rerender } = render(<ReadingSummary items={[selected]} allItems={[selected, alias, unrelated]} busy={false} onSelect={() => {}} />)
+  expect(screen.getByRole('status')).toHaveTextContent('Прочитано 0 из 1')
+  expect(screen.getByText(/У 1 работ отметки в учебных списках различаются/)).toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: /Продолжить/ })).not.toBeInTheDocument()
+  rerender(<ReadingSummary items={[selected]} allItems={[selected, { ...alias, user_state: { reading_status: 'read' } }, unrelated]} busy={false} onSelect={() => {}} />)
+  expect(screen.getByRole('status')).toHaveTextContent('Прочитано 1 из 1')
+  expect(screen.queryByText(/отметки в учебных списках различаются/)).not.toBeInTheDocument()
+})

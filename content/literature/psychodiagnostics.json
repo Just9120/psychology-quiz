@@ -1,0 +1,480 @@
+[
+  {
+    "id": "lit_vasilyuk_psychology_experiencing",
+    "work_id": "lit_vasilyuk_psychology_experiencing",
+    "topic_id": "psychodiagnostics",
+    "module": "module2",
+    "title": "Психология переживания",
+    "authors": [
+      "Василюк Ф. Е."
+    ],
+    "year": 1984,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 20,
+    "global_order": 250020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение по переживанию критических ситуаций: книга прямо указана в библиографии доступной статьи курса. Этап и значимость — рекомендация агента; точная привязка статьи к одному занятию не установлена, поэтому книга остаётся общей для дисциплины. Библиографическая ссылка не означает, что полный текст книги прочитан или доступен в источниках проекта.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Василюк Ф. Е.. Психология переживания"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Издатель и конкретный экземпляр не установлены; год прямо указан в библиографии курса."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_freud_psychopathology_everyday_life",
+    "work_id": "lit_freud_psychopathology_everyday_life",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Психопатология обыденной жизни",
+    "authors": [
+      "Фрейд З."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 10,
+    "global_order": 250010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после психодиагностического практикума: преподаватель прямо называет работу Фрейда при обсуждении оговорок. Значимость и этап — рекомендация агента. Исторические психоаналитические интерпретации не заменяют современную диагностику; сама запись не утверждает их универсальную достоверность.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_2fecd8a4c446"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_2fecd8a4c446",
+        "title": "Практика №24",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Фрейд З.. Психопатология обыденной жизни"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_lombroso_genius_insanity",
+    "work_id": "lit_lombroso_genius_insanity",
+    "topic_id": "psychodiagnostics",
+    "module": "module2",
+    "title": "Гениальность и помешательство",
+    "authors": [
+      "Ломброзо Ч."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 30,
+    "global_order": 250030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после темы критериев психической нормы. Этап и значимость — рекомендация агента: знакомство с историческим объяснением не означает его принятия как современной диагностической модели или подтверждения связи гениальности с психическими расстройствами.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_0fc9f8b6f0df"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_0fc9f8b6f0df",
+        "title": "Критерии психической нормы",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Ломброзо Ч.. Гениальность и помешательство"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_lindsay_ethics_european_psychologists",
+    "work_id": "lit_lindsay_ethics_european_psychologists",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Этика для европейских психологов",
+    "authors": [
+      "Geoff Lindsay",
+      "Casper Koene",
+      "Haldor Øvreeide",
+      "Fredi Lang"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 40,
+    "global_order": 250040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное прикладное чтение после вводных занятий по психодиагностике: книга показана в презентации курса. Этап и значимость предложены агентом. Рассматривает профессиональную этику и решение этических задач; конкретная русская редакция неизвестна. Не заменяет применимые правила профессионального сообщества и не подтверждает спорные утверждения презентации.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Geoff Lindsay, Casper Koene, Haldor Øvreeide, Fredi Lang. Этика для европейских психологов"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год используемого издания не установлены."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_sobchik_smil_mmpi",
+    "work_id": "lit_sobchik_smil_mmpi",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "СМИЛ (MMPI). Стандартизированный многофакторный метод исследования личности",
+    "authors": [
+      "Собчик Л. Н."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "applied",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 50,
+    "global_order": 360050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное прикладное чтение по конкретному методу исследования личности после знакомства с основами психодиагностики. Пособие адресовано специалистам; чтение само по себе не даёт квалификации для проведения и интерпретации обследования.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_5aebea2fd740"
+    ],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Собчик Л. Н.. СМИЛ (MMPI). Стандартизированный многофакторный метод исследования личности"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Издание и год показанного экземпляра не установлены.",
+      "Серия «Практикум по психодиагностике» не является отдельным названием книги."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_salinger_catcher_rye",
+    "work_id": "lit_salinger_catcher_rye",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Над пропастью во ржи",
+    "authors": [
+      "Сэлинджер Дж. Д."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 60,
+    "global_order": 360060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное художественное чтение для сопоставления с примером самоописания из занятия. Роман не заменяет учебник психодиагностики и не является обязательной предпосылкой освоения метода.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_5aebea2fd740"
+    ],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Сэлинджер Дж. Д.. Над пропастью во ржи"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год не установлены.",
+      "Упоминание в примере самоописания не задаёт приоритет чтения."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_remarque_black_obelisk",
+    "work_id": "lit_remarque_black_obelisk",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Черный обелиск",
+    "authors": [
+      "Ремарк Э. М."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 70,
+    "global_order": 360070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное художественное чтение, связанное с примером самоописания в занятии. История персонажей может служить поводом для размышления; роман не является руководством по диагностике или лечению.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_5aebea2fd740"
+    ],
+    "reviewed_curriculum_topics": [],
+    "source": {
+      "citation": "Ремарк Э. М.. Черный обелиск"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точная редакция перевода и год не установлены.",
+      "Внешняя карточка части 2 подтверждает произведение, но не означает, что в курсе упомянута только эта часть.",
+      "Упоминание в примере самоописания не задаёт приоритет чтения."
+    ],
+    "notes": "Название и автор сверены по точному упоминанию в материале курса и первичной издательской/библиотечной карточке. Каталожные сведения не означают научное одобрение всей лекции, содержания книги или конкретного метода. Обязательные книги-предпосылки не установлены."
+  },
+  {
+    "id": "lit_golovakha_kronik_psychological_time",
+    "work_id": "lit_golovakha_kronik_psychological_time",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Психологическое время личности",
+    "authors": [
+      "Головаха Е. И.",
+      "Кроник А. А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 71,
+    "global_order": 912042,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После основ психодиагностики: дополнительное чтение о субъективном жизненном пути, психологическом времени и каузометрии. Важно отличать исследовательскую модель и её ограничения от универсального диагностического заключения. Этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_burlachuk_psychodiagnostics"
+    ],
+    "curriculum_topic_ids": [
+      "t_d0ae2304480c"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_d0ae2304480c",
+        "title": "Практика №22",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Головаха Е. И., Кроник А. А.. Психологическое время личности"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и редакция используемого в курсе издания не установлены.",
+      "Название в устной лекции произнесено приблизительно. Каталог РГБ подтверждает монографию этих авторов, но точное соответствие изданию и упражнению курса не установлено."
+    ],
+    "notes": "Адресная исследовательская рецензия рассматривает методы и спорные допущения монографии. Это основание для критического дополнительного чтения, а не разрешение самостоятельно применять все методики в практике. Устное название не является точным библиографическим цитированием; год и перевод не выведены из карточки другого издания."
+  },
+  {
+    "id": "lit_leonhard_accentuated_personalities",
+    "work_id": "lit_leonhard_accentuated_personalities",
+    "topic_id": "psychodiagnostics",
+    "module": "module2",
+    "title": "Акцентуированные личности",
+    "authors": [
+      "Леонгард К."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 81,
+    "global_order": 912052,
+    "estimated_minutes": null,
+    "tags": [
+      "personality",
+      "history"
+    ],
+    "why_read": "Дополнительное справочное чтение после вводных занятий: исторический контекст типологии акцентуаций, упомянутой в лекции. Рекомендация агента; книга не заменяет современные диагностические руководства и не предназначена для самостоятельной постановки диагноза.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Леонгард К. Акцентуированные личности."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "В учебном материале не указаны год, перевод и редакция издания. Полный текст книги не проверен."
+    ],
+    "notes": "Автор и название визуально сверены в занятии. Приоритет преподавателя не задан; запись подтверждает только библиографическое упоминание, не все положения исторической типологии."
+  },
+  {
+    "id": "lit_searls_inkblots",
+    "work_id": "lit_searls_inkblots",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "The Inkblots",
+    "authors": [
+      "Damion Searls"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 82,
+    "global_order": 912053,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после психодиагностического практикума: биография Роршаха и история его теста. В курсе книга названа «Чернильные пятна»; конкретное русское издание не установлено. Этап и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_2fecd8a4c446"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_2fecd8a4c446",
+        "title": "Практика №24",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Damion Searls. The Inkblots."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Русское издание, перевод и год используемого в курсе издания не установлены."
+    ],
+    "notes": "Подтверждены автор и оригинальное название биографии. Запись подтверждает библиографическое упоминание; полный текст книги не проверен и не служит одобрением диагностических утверждений практики."
+  },
+  {
+    "id": "lit_course_mention_romanova_projective_methods",
+    "work_id": "lit_course_mention_romanova_projective_methods",
+    "topic_id": "psychodiagnostics",
+    "module": "module3",
+    "title": "Проективные методы исследования личности (название требует уточнения)",
+    "authors": [
+      "Романова"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 83,
+    "global_order": 912054,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "В практикуме рекомендовано чтение о проективных методиках, но название произнесено предположительно. До уточнения книги этап и значимость не назначены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_2fecd8a4c446"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_2fecd8a4c446",
+        "title": "Практика №24",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Романова. Неуточнённое упоминание книги о проективных методах исследования личности."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Название в курсе произнесено неуверенно; точное произведение, полное имя автора и издание не установлены.",
+      "Запись не объединена с книгами Романовой с другими названиями."
+    ],
+    "notes": "Сохранено неуточнённое книжное упоминание из курса. Это самостоятельная запись для уточнения, а не подтверждение существования книги с данным точным названием."
+  },
+  {
+    "id": "lit_chekhov_death_of_clerk",
+    "work_id": "lit_chekhov_death_of_clerk",
+    "topic_id": "psychodiagnostics",
+    "module": "module2",
+    "title": "Смерть чиновника",
+    "authors": [
+      "Чехов А. П."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "reference",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 84,
+    "global_order": 250084,
+    "estimated_minutes": null,
+    "tags": [
+      "fiction",
+      "personality"
+    ],
+    "why_read": "Дополнительная художественная иллюстрация восприятия ситуации и переживаний персонажа, упомянутая в практике по психодиагностике. Это чтение по интересу, а не обязательная рекомендация преподавателя. Рассказ не служит доказательством диагноза или медицинской причинности.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_50367f0a1a1d"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_50367f0a1a1d",
+        "title": "Практика №16",
+        "discipline_id": "psychodiagnostics"
+      }
+    ],
+    "source": {
+      "citation": "Чехов А. П. Смерть чиновника. Рассказ, упомянутый в практике по психодиагностике; конкретное издание не указано."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Конкретное издание, год и страницы в занятии не указаны."
+    ],
+    "notes": "Запись фиксирует явное упоминание рассказа. Художественный сюжет и его пересказ в лекции не являются клиническим доказательством; научные утверждения занятия этой записью не утверждаются."
+  }
+]

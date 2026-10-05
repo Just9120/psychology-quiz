@@ -358,8 +358,10 @@ def vector_text(value):
     return "[" + ",".join(format(number, ".9g") for number in numbers) + "]"
 
 
-def rebuild(conn, source_chunks, model, *, owner="psychology_app"):
-    """Atomically replace only the derivative; never touch source/user tables."""
+def rebuild(conn, source_chunks, model, *, owner="psychology_app", qa_cases=None):
+    """Replace the derivative atomically, including supplied retrieval checks."""
+    if qa_cases is not None and (not isinstance(qa_cases, list) or not qa_cases):
+        raise SearchError("private_qa_file_required")
     verify_private_schema(conn, owner=owner)
     with conn.transaction():
         # Serialize operator rebuilds. Without this, two concurrent DELETE / INSERT
@@ -384,29 +386,35 @@ def rebuild(conn, source_chunks, model, *, owner="psychology_app"):
             raise SearchError("incomplete_private_rebuild")
         conn.execute("""UPDATE private_search.index_meta SET source_count=%s,chunk_count=%s
             WHERE singleton=true""", (len({item[0] for item in source_chunks}), count))
+        if qa_cases is not None:
+            # Validate the uncommitted replacement. A failed retrieval check
+            # rolls back this transaction/savepoint and preserves the old index.
+            verify_retrieval(conn, qa_cases, model)
     return count
 
 
-def search(conn, query: str, model, *, limit: int = 5, owner="psychology_app"):
+def search(conn, query: str, model, *, limit: int = 5, owner="psychology_app", mode="hybrid"):
     ensure_index(conn, owner=owner)
     if not isinstance(query, str) or not query.strip() or len(query) > MAX_QUERY:
         raise SearchError("invalid_search_query")
     if type(limit) is not int or not 1 <= limit <= MAX_RESULTS:
         raise SearchError("invalid_search_limit")
-    query_vectors = list(model.embed([query]))
-    if len(query_vectors) != 1:
+    if mode not in {"lexical", "semantic", "hybrid"}:
+        raise SearchError("invalid_search_mode")
+    query_vectors = list(model.embed([query])) if mode != "lexical" else []
+    if mode != "lexical" and len(query_vectors) != 1:
         raise SearchError("incomplete_query_embedding")
-    vector = vector_text(query_vectors[0])
+    vector = vector_text(query_vectors[0]) if query_vectors else None
     lexical = conn.execute("""SELECT source_id,modified_time,snapshot_sha256,locator,content,
         ts_rank_cd(search_text,plainto_tsquery('russian',%s)) AS score
         FROM private_search.chunks
         WHERE search_text @@ plainto_tsquery('russian',%s)
-        ORDER BY score DESC,source_id,locator LIMIT %s""", (query, query, MAX_RESULTS)).fetchall()
+        ORDER BY score DESC,source_id,locator LIMIT %s""", (query, query, MAX_RESULTS)).fetchall() if mode != "semantic" else []
     semantic = conn.execute("""SELECT source_id,modified_time,snapshot_sha256,locator,content,
         1-(embedding OPERATOR(private_search.<=>) %s::private_search.vector) AS score
         FROM private_search.chunks
         ORDER BY embedding OPERATOR(private_search.<=>) %s::private_search.vector,source_id,locator LIMIT %s""",
-        (vector, vector, MAX_RESULTS)).fetchall()
+        (vector, vector, MAX_RESULTS)).fetchall() if mode != "lexical" else []
     ranks = {}
     for rows in (lexical, semantic):
         for rank, row in enumerate(rows, 1):
@@ -432,8 +440,18 @@ def load_qa_cases(path: Path):
             or not isinstance(cases, list) or not 1 <= len(cases) <= MAX_QA_CASES):
         raise SearchError("invalid_private_qa_cases")
     for case in cases:
+        if isinstance(case, dict) and "expect_empty" in case:
+            if (set(case) != {"query", "mode", "expect_empty"}
+                    or case["expect_empty"] is not True or case["mode"] != "lexical"
+                    or not isinstance(case["query"], str)
+                    or not case["query"].strip() or len(case["query"]) > MAX_QUERY):
+                raise SearchError("invalid_private_qa_cases")
+            # Semantic retrieval always ranks nearest neighbours; an empty-result
+            # assertion must not imply an unconfigured semantic relevance cutoff.
+            continue
         if (not isinstance(case, dict)
-                or set(case) != {"query", "source_id", "snapshot_sha256"}
+                or not {"query", "source_id", "snapshot_sha256"} <= set(case)
+                or set(case) - {"query", "source_id", "snapshot_sha256", "locator", "mode"}
                 or not isinstance(case["query"], str)
                 or not case["query"].strip() or len(case["query"]) > MAX_QUERY
                 or not isinstance(case["source_id"], str)
@@ -443,14 +461,34 @@ def load_qa_cases(path: Path):
                 or not isinstance(case["snapshot_sha256"], str)
                 or not SHA256.fullmatch(case["snapshot_sha256"])):
             raise SearchError("invalid_private_qa_cases")
+        if (not isinstance(case.get("mode", "hybrid"), str)
+                or case.get("mode", "hybrid") not in {"hybrid", "lexical", "semantic"}):
+            raise SearchError("invalid_private_qa_cases")
+        if "locator" in case:
+            locator = case["locator"]
+            match = re.fullmatch(r"characters:(\d+):(\d+)", locator) if isinstance(locator, str) else None
+            if not match or int(match[1]) >= int(match[2]):
+                raise SearchError("invalid_private_qa_cases")
     return cases
+
+
+def _qa_match(matches, case):
+    """A correct document alone does not prove the expected passage was found."""
+    if case.get("expect_empty") is True:
+        return not matches
+    return bool(matches and matches[0]["source_id"] == case["source_id"]
+                and matches[0]["snapshot_sha256"] == case["snapshot_sha256"]
+                and ("locator" not in case or matches[0].get("locator") == case["locator"]))
+
+
+def _qa_model(cases):
+    return embedder() if any(case.get("mode", "hybrid") != "lexical" for case in cases) else None
 
 
 def verify_retrieval(conn, cases, model):
     for case in cases:
-        matches = search(conn, case["query"], model, limit=1)
-        if (not matches or matches[0]["source_id"] != case["source_id"]
-                or matches[0]["snapshot_sha256"] != case["snapshot_sha256"]):
+        matches = search(conn, case["query"], model, limit=1, mode=case.get("mode", "hybrid"))
+        if not _qa_match(matches, case):
             raise SearchError("private_retrieval_qa_failed")
     return {"cases_passed": len(cases)}
 
@@ -462,10 +500,9 @@ def benchmark_retrieval(conn, cases, model):
     timings = []
     for case in cases:
         started = monotonic()
-        matches = search(conn, case["query"], model, limit=1)
+        matches = search(conn, case["query"], model, limit=1, mode=case.get("mode", "hybrid"))
         timings.append(round((monotonic() - started) * 1000))
-        if (not matches or matches[0]["source_id"] != case["source_id"]
-                or matches[0]["snapshot_sha256"] != case["snapshot_sha256"]):
+        if not _qa_match(matches, case):
             raise SearchError("private_retrieval_qa_failed")
     timings.sort()
     size = conn.execute("SELECT pg_total_relation_size('private_search.chunks'::regclass)").fetchone()[0]
@@ -497,6 +534,7 @@ def main(argv=None):
     parser.add_argument("--cases", type=Path)
     parser.add_argument("--query")
     parser.add_argument("--limit", type=int, default=5)
+    parser.add_argument("--mode", choices=("hybrid", "lexical", "semantic"), default="hybrid")
     parser.add_argument("--statement-timeout-seconds", type=int,
                         help="operator rebuild only; 30–3600 seconds per SQL statement")
     args = parser.parse_args(argv)
@@ -504,8 +542,13 @@ def main(argv=None):
         timeout = statement_timeout_seconds(args.action, args.statement_timeout_seconds)
         if args.action == "rag" and os.environ.get("PRIVATE_RAG_ENABLED") != "1":
             raise SearchError("private_rag_disabled")
-        if args.action in {"search", "qa", "benchmark", "rag"} and args.manifest is None:
+        if args.action in {"rebuild", "search", "qa", "benchmark", "rag"} and args.manifest is None:
             raise SearchError("private_manifest_required")
+        rebuild_cases = None
+        if args.action == "rebuild":
+            if args.cases is None:
+                raise SearchError("private_qa_file_required")
+            rebuild_cases = load_qa_cases(args.cases)
         if args.action == "estimate":
             if args.manifest is None:
                 raise SearchError("private_manifest_required")
@@ -532,17 +575,22 @@ def main(argv=None):
             if args.action == "rebuild":
                 if args.manifest is None:
                     raise SearchError("private_manifest_required")
-                result = {"chunks": rebuild(conn, load_private_chunks(args.manifest), embedder())}
+                result = {"chunks": rebuild(conn, load_private_chunks(args.manifest), embedder(),
+                                             qa_cases=rebuild_cases),
+                          "cases_passed": len(rebuild_cases)}
             elif args.action == "search":
-                result = {"results": search(conn, args.query, embedder(), limit=args.limit)}
+                result = {"results": search(conn, args.query, embedder() if args.mode != "lexical" else None,
+                                            limit=args.limit, mode=args.mode)}
             elif args.action == "qa":
                 if args.cases is None:
                     raise SearchError("private_qa_file_required")
-                result = verify_retrieval(conn, load_qa_cases(args.cases), embedder())
+                cases = load_qa_cases(args.cases)
+                result = verify_retrieval(conn, cases, _qa_model(cases))
             elif args.action == "benchmark":
                 if args.cases is None:
                     raise SearchError("private_qa_file_required")
-                result = benchmark_retrieval(conn, load_qa_cases(args.cases), embedder())
+                cases = load_qa_cases(args.cases)
+                result = benchmark_retrieval(conn, cases, _qa_model(cases))
             elif args.action == "rag":
                 result = {"results": search(conn, args.query, embedder(), limit=args.limit)}
             else:
