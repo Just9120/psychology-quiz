@@ -1367,6 +1367,13 @@
       "review_sha256": "c75f86e5913c4a2e74bd533824ae332a8ec9c76d3a6a2b67819e3b717f59eeef",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "s3XhHzy6vPgNb6FUrOttOUSbcTqDqsTaNkpZHU8NdTif5So4ng0KMCsGdgdUyXJpKo5DkfWUpxFPKTrT2ZwjBg=="
+    },
+    "literature:lit_maslow_new_reaches": {
+      "schema_version": 1,
+      "item_sha256": "e0e6f49bbaf4524b2fe60f9862d37e4c60c89430fb3ed00e036eed8abd2579c8",
+      "review_sha256": "74366c4f64a73deda377a5649892fcd13aaa484cc76ab51ee5e486f35e6b6cc6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "EePUcOSM0lCGxt3DvQL/w3MVSK+D6KGhOCQYG/aA4I9HkLRqFqFdXTrsv5LyFFL/1ncaj7KeHNMGQ9RgE/iABQ=="
     }
   }
 }

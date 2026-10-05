@@ -1540,5 +1540,49 @@
         "discipline_id": "kachestvennye_metody_issledovaniya"
       }
     ]
+  },
+  {
+    "id": "lit_maslow_new_reaches",
+    "work_id": "lit_maslow_new_reaches",
+    "topic_id": "kachestvennye_metody_issledovaniya",
+    "module": "module2",
+    "title": "Новые рубежи человеческой природы",
+    "authors": [
+      "Маслоу А."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 205,
+    "global_order": 220205,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное чтение для сопоставления гуманистического и экзистенциального подходов после знакомства с «Психологией бытия». Книга упомянута на практике; порядок и значимость предложены агентом, а не заданы преподавателем. Включение не означает подтверждения всех философских или методологических выводов автора.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_maslow_psychology_being"
+    ],
+    "curriculum_topic_ids": [
+      "t_5238b79de120"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_5238b79de120",
+        "title": "Практика №10. Введение в качественные методы исследования",
+        "discipline_id": "kachestvennye_metody_issledovaniya"
+      }
+    ],
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Точное издание курса не установлено. Порядок и значимость — рекомендация агента."
+    ],
+    "notes": "Название и автор сверены с каталогом издателя; полный текст книги не проверялся.",
+    "source": {
+      "citation": "Маслоу А. Новые рубежи человеческой природы. Издание курса не установлено."
+    }
   }
 ]
