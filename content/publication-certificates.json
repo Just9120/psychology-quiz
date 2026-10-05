@@ -765,6 +765,20 @@
       "review_sha256": "7c05fe9228828511676245d520383389c72b38dc4207af325caf25b481f6accb",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "ftLyLKKzB2kLnmfbUwQ77o9X0nvi+DIO43uhHnxBFJ02qUQdKuswd402xh3B7orZF/1w6g1sP+Zbch3eBrvOCg=="
+    },
+    "literature:lit_social_history02_sighele": {
+      "schema_version": 1,
+      "item_sha256": "3e9f444c5321c527a60f09fa187c7824240658169616f83261de5bb396dcaf21",
+      "review_sha256": "8cca110d46b9c48070bd5d6f85c5850dc45ddfb9a1a8aeeab6f697ce1025570a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "gXDRi8SmyDVZkcbGbcMorZE0/fcmzXf9MCZuifdUVN8vJ6e6YBVRXxnINdtj0WLlr27ONp9Ks/ho2mR+mUb1AA=="
+    },
+    "literature:lit_course_mention_lebon_crowd": {
+      "schema_version": 1,
+      "item_sha256": "e81c762cb9aff7bea2e6c30a922964bf0e9a8918b99fdabd3e02d8834619720e",
+      "review_sha256": "b8ae008c59fa1a868f23bddd6780b189ff54032ceeca37001aab2790efc65c41",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "UmEey9FEE+P9OiQeLYi1FlbA3nKGt43RsaLXVg4RWTbHc1N2mmAS0A23lIW1LFLXQOHvdUmnA/LsUZjmewbsBw=="
     }
   }
 }

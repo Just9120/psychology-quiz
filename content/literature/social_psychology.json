@@ -612,5 +612,93 @@
       "Год, перевод и конкретное издание курса не установлены."
     ],
     "notes": "Отдельная работа Social Learning and Imitation, названная в лекции. Не объединять с Frustration and Aggression. Подтверждена идентичность произведения, а не полное чтение книги или русский перевод."
+  },
+  {
+    "id": "lit_social_history02_sighele",
+    "work_id": "lit_social_history02_sighele",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Преступная толпа",
+    "authors": [
+      "Сигеле С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 106,
+    "global_order": 610106,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Сигеле С. — Преступная толпа"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и конкретное издание курса не установлены.",
+      "В лекции фамилия записана Сигиле; каталог РГБ подтверждает автора Сципиона Сигеле."
+    ],
+    "notes": "Подтверждены название и автор по каталогу РГБ. Год русского издания из карточки не приписан неизвестному изданию курса. Историческая модель толпы не используется как современный универсальный закон; полный текст книги не прочитан."
+  },
+  {
+    "id": "lit_course_mention_lebon_crowd",
+    "work_id": "lit_course_mention_lebon_crowd",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Душа толпы (упоминание в курсе)",
+    "authors": [
+      "Лебон Г."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 107,
+    "global_order": 610107,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Лекция называет эту работу Лебона. До уточнения русского текста и его связи со сборником этап и значимость не назначены.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_7d11c6491ee3"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_7d11c6491ee3",
+        "title": "История социально-психологических идей. Часть 2",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Лебон Г. — Душа толпы (упоминание в курсе)"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Сохранено название, указанное в курсе; точный русский текст, перевод и издание не установлены.",
+      "Не объединено со сборником Психология народов и масс: совпадение автора не подтверждает тождество всего произведения."
+    ],
+    "notes": "Самостоятельная запись для уточнения книжного упоминания. Не утверждает подтверждённую идентичность перевода; личные отметки других книг не переносятся."
   }
 ]
