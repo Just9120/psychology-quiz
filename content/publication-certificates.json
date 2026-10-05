@@ -1146,94 +1146,94 @@
     },
     "literature:lit_frankl_man_search_meaning_quantitative": {
       "schema_version": 1,
-      "item_sha256": "0b82b97ae17ac46ebf0bf4ea9e7d07e7daf7dfc9757da374d26f20102ac9df12",
-      "review_sha256": "075794e3f062b11affff500ee83196450849248d585e384b86d680ae6cbe361c",
+      "item_sha256": "e02e8b2f352ce4b676025e1ba22f5860ea4c04d313ac65914b4158882d065c4c",
+      "review_sha256": "683f261357c6933ae4e27ff2e7134dfd461bc91002a99614ba6eeb6bef96ed5f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "IB3LisSuxDORWdUbEDPah+x+fTdFQgFXdEjLxK2+t6oPVLfK5178TqpbZ9t+SD4XQ6nbNDgAbMkbpqz0w1B4Bg=="
+      "signature": "ANDCXoOAX7XE7DjmoHzplE+N8SL3Nrm+U3kRf6Fds7SnleHWLM9D9CI7Zfuvg3nT5i/NVOqn64T0z8oBYpoFBA=="
     },
     "literature:lit_course_mention_d0925c1eabd1814f": {
       "schema_version": 1,
-      "item_sha256": "94356a312ce550452875e274c470f70143a2b2dc10832b22ee9afd0e1adba43c",
-      "review_sha256": "0f8ff628893505462ed019b1e34e4b5722ba82ab82225c74471f2fd1f4515882",
+      "item_sha256": "769c9132c2084e2bd19d2c952db15c31c1fb0f3b1f2917dc14ca7dc26a87d23a",
+      "review_sha256": "03ee36c6c3257023be44fae82d86e4acbbf09cfa194649eb008086ac372012ba",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "d+5jakSR25TuPZPFZbdOg0AXBywhDDwUVmugii4nXqE4EMClGul8iWaSyg9iGq4zPdYn3atNukzX8DVvyDWODg=="
+      "signature": "mR1EBeRdrwbRIHZ8VqDPGNqq3ZM/b97/RlXU16PBgwXCWxNHCmaLexKcfDkQq2JvmfybIQppw0NECyQQhuHeAQ=="
     },
     "literature:lit_course_mention_6a0411db5000673f": {
       "schema_version": 1,
-      "item_sha256": "d50c8a20a5f26cad8bcf7970316b443b7c19b064a8af46107ddb1e293d5d74a0",
-      "review_sha256": "ddb6810f03352360d5caeaa7bf0c91b9bfcd04bcbac65966bbb388192a6f8fd6",
+      "item_sha256": "917f7988b66086c708e8f27c38e20e211d87e8e75a1f558b3cfaf82bc859168f",
+      "review_sha256": "de8a1259d751d30bf44ddf0baace370418d533efa2478a7abae12e9df06e3d57",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "K13XaauaglTKtJ1VKTnBOfsql0etO0iAOM83h8Io6vPM5Ax5Fsu32FcZ2HZnA4GnB5sfliNxdJR57Ejbm1SuBg=="
+      "signature": "dT3LxuRzNK+m2B8el8Gn6Z2H2mXERGVX30b+iXC8HIA9pfHms+vFObCrLHCHs2ZwLAUQusqFxoVuerA4+CuZCw=="
     },
     "literature:lit_course_mention_bcb1d48d8219a2de": {
       "schema_version": 1,
-      "item_sha256": "09dcc2b091e2f2db0b8f10dab434dbd2dd65b7666f87768959546a1d5ff6e0ad",
-      "review_sha256": "9df1ddc1aad0a5f4a0a7db9aa2b1bdcaa0a88095152ca8656587b3c235ceca2f",
+      "item_sha256": "5ded14517c4e5c19f1bbfb9bc7e84ba13745cf8c28560daed23a54da0618aac2",
+      "review_sha256": "a8544234a06d616d61af6cbdfa0abaa1cf7a500b23304465a0296a68c0dc7754",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "1Ph76rABOwiNWQJ1VdbBi09iXTACdVcEktJv/RyRTIZ8EnYfkFG+QmaYPIq/tWi9ufe49SD8+2y2ehmrVmXSCA=="
+      "signature": "c9n5fnVEh4lJx8oSTSooy5y2SbbNEvzrvTN7rYyb5FImiDrpxuHv+8CiEd4WhbyRp1WGoPgkZWoJhlRM9rzTBA=="
     },
     "literature:lit_course_mention_e50e0babc4a8e1ac": {
       "schema_version": 1,
-      "item_sha256": "f390474d64b7029ffbcb3f8eca469af597423fa7d79d5d9580f3f8d2082159b4",
-      "review_sha256": "8f6ca1542031477b3ccd1e62edb2e54b0f253eddf5ed2bee00991587c03b03a5",
+      "item_sha256": "1a667939d2fdfe65d9292990e3af231615abe1f9e3ca8c544c4d04ff683cebda",
+      "review_sha256": "835ea9e4ae7241de784b33ff6066a7bcd23f653a3ee95ae908bd87de3484acd4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "FOec72O6q7qVD3J+t1E9EDcCxOAPIJLK3lZoVdW8zTg5qkouG/x/Yi3KNtsZksq2HLpj4JJglBCPeEl8zW6bCw=="
+      "signature": "IjkBuwnveSOXd+RS5yxegs4Rj1BLheJ42X3xQ15MIdBuMSLZJam+CO5y49P/iTqP9jVkV7juYRQFL5zekcShDA=="
     },
     "literature:lit_course_mention_52ee0cc6d8328928": {
       "schema_version": 1,
-      "item_sha256": "98966ca6cae4cd81f6565e768915c29dcf3f9134dd4c61cee1903e881c7dda06",
-      "review_sha256": "7782e46ee3fd77d4fdfc2b95448628cd84c591b2445f6c8d35a2a6a31d78e6b0",
+      "item_sha256": "a45eaee4fe0fff5f4677898efd07b26221c3c1b156b30576abdddfc377ec3fc4",
+      "review_sha256": "589af9b9647c7117ad091ee8688630bc2caf43e74c6b202318219f0e2c59432a",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "v1bHgW6VabD1BA7d5Xtc/LMp3/Q+K+lKUnqwPsxY3/a/9CzNyV12d9D+Dvm8NTuN+UDpBVm2XT1Ld+Zr2wG5BQ=="
+      "signature": "qqmi7xOlYxLxq1WJzRObO+M7oYYvIWzDI7wIbCJkzZyVgYNVdvDfaeN58tpu9DPNFrPzB69rwScEJ1wRr/tVBg=="
     },
     "literature:lit_course_mention_6989ce1295898678": {
       "schema_version": 1,
-      "item_sha256": "643af32f5edf1702d02d5e21c51321104b869d1477dba3a2a145fb78ddc0a18a",
-      "review_sha256": "b107caaa92839e26a02b5253a58e76a2a3cec2fe29d49b1afbbf20a2017b6aaf",
+      "item_sha256": "060917ed2e86594c7de3c72d58eb9a91346e2067e8546f942358c34abaab238e",
+      "review_sha256": "ef3b6b5aa91fdc509a2d5a4cf001b25b1dbcd12ccdb142a40d955547bc72e052",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "WxKuJ32PQWL+TmHm4CxX6Ud8whwRur4AWLpVc1DCLWuPL3/mNwMhIusOjojyclpHgNzBKPnQDm9r24Ut685xBg=="
+      "signature": "IYkZkpNJvVp7bIYjSdh4wehXaEDGP7hLy4mB1K5NjZl3pDmLQjq4osAzMu0TTgzDOcvfLdkT2ka/AB3oRcqtBg=="
     },
     "literature:lit_course_mention_57f33726ed4ac65d": {
       "schema_version": 1,
-      "item_sha256": "071c9a510453e5da85210a97089b5187af1de5bcd0988e626fe2f1f127925a78",
-      "review_sha256": "2cd347bfa6ea3db1f3a23ed84f5afdb54a8b148ae1c0d6990045df96de94e337",
+      "item_sha256": "78bfd918b2bc05fc4ca55f479e48cb12470c02d1b59a0819bf75df07b0b0ac1e",
+      "review_sha256": "8fc37bf4c8064b27b212b7fb132dd0d9cc828906c9b1ba313c3761afc27b38a7",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "HWkNnTd/pxRRTcWavyOYfLFtpewLBu6Hr118Ccs4dR5cb8dgcMwlQd5tgvntqlAHK7YZePBjGLv9JZG9CIw5Aw=="
+      "signature": "0Xg75Z0R4uk6kmuCx5zCeeV2hC9VWykqb3InRy5SgUec6zn7ZVWDB6aKR7CltNNeHGbaKrkVKmzqQhFY6xdkAQ=="
     },
     "literature:lit_course_mention_893a89421300f678": {
       "schema_version": 1,
-      "item_sha256": "c72b9e5648bb57707462e5ebfee0acdb6bd682a4e57d4c0a85c09256b7a5a1e0",
-      "review_sha256": "9c59f9200775cac2a5258380cdef48942e9cede15cef463b6c18616c15204c64",
+      "item_sha256": "fad77d3f327ef0a23439c40be38ba6ae978df432e125385d539ba67852720a4e",
+      "review_sha256": "8e0c5e151786e826c5ccdd95933584755797ce4b69222d4361103e3a8f6129bc",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Wel0c3/d7uYn+3Ebqj3BNQJwVDJ8LVVPs/WW971pZJY0MmUCk3dFeMCkS/mcc5VA9RteiLqqyb8HbL1aHt6VCw=="
+      "signature": "MZThMdDi8A6Xg7S1yAywDdbY+HoTS/fEA6Cp1rYBJxwfq0jADOJqKeNLXsgmYEaJLz7Mtpmyw3RM8TJy8yN8CA=="
     },
     "literature:lit_course_mention_1e33b87d4c9cedbc": {
       "schema_version": 1,
-      "item_sha256": "efae2a587b7f2f2beee03787e5035988e3e93842893851f2adf069dbcc8ceeff",
-      "review_sha256": "95339f02045812584eac36d91a0d1bfbdb4eb021917e394220b03e6a4c0b8d65",
+      "item_sha256": "14e557995abb3d48f3e15605d2b75e558c3ba0ae631369678204992a737744d2",
+      "review_sha256": "6655cae565bc5f170bd45d4fc427890ef3fe09133eec31f72a51c0c4b9cba564",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "f9C/HW89/qHcD6IXdXm3UvbvWx0ubKUa4kY5rLqrbBeDFUemZLymX6fpJEAPao7fmuOtmn3o7vo16iqiKhzeBg=="
+      "signature": "OYUAMMCub63JXxI3eCQjFB+Kj0WMjUI2rfouVM1tVn28hQ8O4XtAg+fTMxIij2hXjFfnJyDdPXRSEFnj1ZHbCw=="
     },
     "literature:lit_course_mention_b976cc7351d9e31f": {
       "schema_version": 1,
-      "item_sha256": "038f0514ab72f99d6ba172481f2391227dfd4a94e6c64f5bed33cfc9d898f47f",
-      "review_sha256": "e2e98f9ec5c8cd631308d87da52df2ac05192b537c01bca8c7150b0b421bb53b",
+      "item_sha256": "22633ce66723aa222107b69f3ec1beeda81a6be45ccaa25c7165706dcaf10575",
+      "review_sha256": "4d52bd91180dcb4adf3f860b37953711c3d7dcae23b8a7d777cd87c3e6ae7771",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "d0Qwz+qYMBb8GK2TCy28c+fBpUL2oQgVzBaWt4tUVT7d3pWvB95m1ivfm4u92DrgW+2gxDid2+mRM8IxP65zBg=="
+      "signature": "GTNmFG4tPqhEZyWwRgclqTFMfqsU+8ogXUkNcim10DwS1NW0uKxrb1/lpqD62frwIqaBd0JZad0HNuEFD5tcCQ=="
     },
     "literature:lit_course_mention_4072b2a06746eb8e": {
       "schema_version": 1,
-      "item_sha256": "95c0830561c9e5991cb2cc6a4955a692d4b9aa5101965cca11c01980cb20b419",
-      "review_sha256": "f0ba6a603309d578d18d3eb91e9d60dca591d385fb6f9143e3844fa641d2bac5",
+      "item_sha256": "ea74c0c8fc54691af77282a6685f8ac690413ca2715dab44dc3773cc306b2a53",
+      "review_sha256": "cabad583e340768f5604c30cdace3dcb03b53642f0c5ee21b48130c0c9c989a7",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "UjPDdvVDdAzi/EGScqrlFnRuPgO3+2TlSR1Z9C34ePHUm2SoPHgEvzQY5N85E1tOtIFxFhrqdV3I/uhMJTvuBQ=="
+      "signature": "mtqQKiaDsEviNqMnzaAPDKai/x5L9z2kcjETzO9p+/BqffKLDlUeq5s2cj/wdi9UKtHmM9GyuExvTb1dwws6Dg=="
     },
     "literature:lit_course_mention_e63d19e97ba91e8d": {
       "schema_version": 1,
-      "item_sha256": "f0ea01a72e22b22c39370f44901cdc16ce98c4449ccc333f3c046d34b86edf47",
-      "review_sha256": "0f0888f987e33052825587c4ca3fe451426af70cb942049ce95c751c80773367",
+      "item_sha256": "24c6ff22aeac5a1e70c9b3938e6b09443e3e9e7649678a149daf17a94a5fcd1e",
+      "review_sha256": "976cf6d3b7ccd5bc624760cd3e9d126e97b1b2ef617b117a88e214c8a74a7535",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "8GaJfh8k3O8n73xf6eyJRgkkm+WmMg/VA8iI6uODwcfQtisvyp59hz9pEYZNnAhxDUzzxwJF6sp9FJtt16BxAQ=="
+      "signature": "dOiEkULwyu/UlPadjqfT0nmaMwRAfFmjzgYTM2uZvVl3Bn6y1sn+tzDCVv7RtsjZjZEwpXlTOruEBGlh5yKUDA=="
     },
     "literature:lit_course_mention_efdf2863f47b640a": {
       "schema_version": 1,
@@ -1244,31 +1244,31 @@
     },
     "literature:lit_course_mention_62bd57a7137c573f": {
       "schema_version": 1,
-      "item_sha256": "8223145def7051b2c71cc24c6fcb7f91d617720a24c26ddbe5d28c3f31aa9655",
-      "review_sha256": "61c7d4e5c80b5b8be0176ad8e189382b8477a27082c00de529dfe889a9eb46a2",
+      "item_sha256": "de08474c7b78c8776f75fb26d4c80e40e372a7729b8951f0ee86dbd87d5f9af5",
+      "review_sha256": "3906ac4d89ff912b9c92acf3d3b1433dc8460d390003faef87efee2b48abd2f2",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "l5sYoK2hBBWiAsW9oZ50FwRA+YdDVH2apfP674Poyd8Dn6jGpPtb1z9BtjHjJDGjyjnb9cAVVel77hHyIkdTAg=="
+      "signature": "KgWLUN+tb76LL4JZWM0L1ohfbFJxdeeoAMgKWycOkRNVJ12g2vpIz9IJc2JJc8elYkiwSupwOByxrSKyYt/GDA=="
     },
     "literature:lit_course_mention_f3a45bec2566afc2": {
       "schema_version": 1,
-      "item_sha256": "fc727dfecec257c49b352814d9a1b3fd96e0dcef83e0edcd252295a77f2322fa",
-      "review_sha256": "fe36684da929de3ed7ca641f3d71de416a8de09e48621b0b2302d23ee3ca56c6",
+      "item_sha256": "54f302c34199a7ec20d323d014d78407ccbf61ac8e81487f445a5b82df9052ef",
+      "review_sha256": "ef056bdba61d523d613e64f7a114c76869d146578ef189ab904ed4cbb929bbb4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "voAnn78T+UofIu6NLzulw7cPI7W1gcI2CzgUwgW2L50/biaVcy8wFwHijNNW+0JFujeey0WwJG/vt2ja+VQ9Ag=="
+      "signature": "E0fUe3LjWSv0gUSYZBTFErb58AP2DFrnMmkRAygFfyQzGLNKVeiiKWX3Os2XIfRj4HaS5IRiKf/m2rug3XRpBQ=="
     },
     "literature:lit_course_mention_be2b1c9d425fc832": {
       "schema_version": 1,
-      "item_sha256": "b44426cd2bbdf7fe3b28d1d7130251d0c5b9cd8f30089da1e7651077cbc48906",
-      "review_sha256": "5d9356e43e3b2034c5f1f927a4d7de69efec18934b23dce6816cf6ec7b360381",
+      "item_sha256": "1fdf9e37c0e6edf49682928363c4f33492994d5cf2bab07ce61a777f25c86397",
+      "review_sha256": "0261c01c55262175955c3d8e46abe789897a6eda85d92b186222a807cac13a8f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "sREpJBK61jdfEq1Jm4UTdqZvRLBocB9lLbN1JPSPG3GakSmtIGswF1gvaGYnkD6EO1ssF8C9RHxI3yTaOFC8Cw=="
+      "signature": "vj2wJNxdz8OMMhANzh+QveWFXiaquP54li8hFgCrUbXI9MQyubeHmipT1zDY3pH/mMZzIZwboWMyr3vrICDfCA=="
     },
     "literature:lit_course_mention_d7e88c1d4f888bb6": {
       "schema_version": 1,
-      "item_sha256": "fca6df47fb90ba57d923649cd2bd176b65c9588b91c438792ef6626e0225a620",
-      "review_sha256": "63bdf087840335e51822e9de9975e87711537fb6d8c348dc4e44d169865a51d5",
+      "item_sha256": "93e100a2a2d1147a9c6cd4aefe1e2a8cc7ce88c07886ebcbaf16a2d63469a5f7",
+      "review_sha256": "93877a086cbbd501e85d938620c2dec1e5765194c8aa47d344c559eaadfb51ab",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "myiSghKSXqSlCg+k1T+7NMYbuKF4/dzPJQrvHsJH7PUr9pcC4w2fj9SPgSaUmixoZYHh2CiijBJOGLBkJ85qAA=="
+      "signature": "JdRL/xZEyOZbTWI7ltkJh/cPgm/H/OsaMDUrJG8E0Be5qBHzWEDPCQuahB1rXkWQp0YV+y0P8or7uO00qlcXCA=="
     },
     "literature:lit_course_mention_76d6f7e8dfe457a7": {
       "schema_version": 1,
@@ -1279,87 +1279,87 @@
     },
     "literature:lit_course_mention_a00c9150bcfd7966": {
       "schema_version": 1,
-      "item_sha256": "c89a584aeafa8406e4e70220ca1bc5ae7b2c06ae5182a5a69ba4b6e5e284f71e",
-      "review_sha256": "605098bf47b6fb8ad4dbe86214df50fdf8a7296f8f581cc7d598f8f383efd992",
+      "item_sha256": "b3b0e38f0f4ceb0caed15af3d842e046e3f04b535aecdf2bd667b05e1f5136c1",
+      "review_sha256": "6af7116bd446db5254c70711b9159d680083e7dc2847c28923e06d1378b13496",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "0rftyTTkGCTqWGLpPCv6pmWpAyYJwYKmDu8fSkPWK8iL8ltd+B1k64fP+jUrMOSp73ZJ8FNnHGc7XYid2JQnCg=="
+      "signature": "NEKvp4QOcnKUlH9pgrWmfQLEEQ/FicR1kk5hf6fay3Z01bxhQtF5lmkwR4ystat/zzOFJ7cbQ5RNbQBY1rPGAQ=="
     },
     "literature:lit_course_mention_db2ba3e8c2e1dcc9": {
       "schema_version": 1,
-      "item_sha256": "5d4d400ced447fb858dc385683aae04f683bd907bfdc33ca3e6239b9e9c595ec",
-      "review_sha256": "877b27906aaa740087dc822aecd33a7cd3b08e81a5ef20458eb1318ef9cf0012",
+      "item_sha256": "637fa3554e482ccebdc4d0756b382660149921fe6083f3b3adc4aa4146e0eab1",
+      "review_sha256": "b5e5cb9f85d6b2f6bce4254ef3fa1f0d440a85e580967d197b6c7120b1fb0380",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "LXc05MUK+gi8/HeQQB1KKEK3Uqe5aC8pB0W4zHN+mz0nLZRbwWamSzFkj+RHDohNe0jhlM7Grx7N936Nu4wqBw=="
+      "signature": "o9YBiTjVDErOJ9hfbWweZCIg53HmBk0w/S5EYLlJ9AY+iKNOgDP25S3dbomwBfFBzF0SBajJZk6ozr66A82MDg=="
     },
     "literature:lit_course_mention_a1f851d16e687949": {
       "schema_version": 1,
-      "item_sha256": "dd6cb9111d6fd5e73d81b7c5d4a21a68904dc7ab6fdb452064e61897f1b462ed",
-      "review_sha256": "38af3fceed4b3a26300140f43302c78f382f8e573b0cdee9aeab6aa7aa523e51",
+      "item_sha256": "012073b0218b7bbf693638c610c6a2edb2f80ef27f07f44f9f34c7e3d2c1256d",
+      "review_sha256": "aa7674bae3d166ed7a23917b7b6847b1cce292c58ffed9ab0fa08fec6f03808c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "wDkK7PzxJUq6XFeO8FA98fkpkegR0Y7NQqlm3R7UVD+k+YGKHiIliSALRAZtrBPNuOBYo2qMQecRxdPVtoV/Bg=="
+      "signature": "vwFFsuER+FEym5NMuGKuryDYQy1Yr9xdAEF2UmeggB682Te/zgrqjNkSRNfOljoxlxNlLy7hoVUrw5qe0gXbBA=="
     },
     "literature:lit_course_mention_c18b55e2a22acdc7": {
       "schema_version": 1,
-      "item_sha256": "c22aef4b2e9897d59710e34a3e1c15aeb215a72eab71940eb8a5147a4a5ae47b",
-      "review_sha256": "41785a82da481dcdb1b537f5e8daa46d0b3109a8224f3b699c2e299925f0895e",
+      "item_sha256": "ec18830ba887a7cb45c6df175dc8fd9408e730ee3b05767ada3867ca7e5d666e",
+      "review_sha256": "337726badeb488757850fe03ae898370c9c30589b997e0516f5b997683608dee",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "vkkyYigdNVcEazuKK8kf1DwtOs2DXnIpFFOLGyZFGovxTBwwcG4YifMd6+WITKTOcPTCyodQUKBbsNf17iymDg=="
+      "signature": "1IVRom3u7onGcg1GyOarFj+4RgY1eZNyJ12ERv7y25aWN1Hb7gDKiqfe8mY6YXY+V97o7icCw24ISJyYjvLBAw=="
     },
     "literature:lit_course_mention_277405e34a8fefe0": {
       "schema_version": 1,
-      "item_sha256": "7fd8abe24c8b39e6b0e2069d5ba007c79f7477e0cd842e7cc522fd95fef3f55d",
-      "review_sha256": "f3e98195a9de9f8036c09c3e13fb5c4375af0d5beba89fdc1f42d1b9aec46f35",
+      "item_sha256": "3f5308e2c21155d7ef2bc5233b83263fbbdbe03b62919f4baecd148a2faaaf15",
+      "review_sha256": "85d3a3aa4918c9db958f1db640ec0fb6bde5281390e1dfa9a403c181aaf6c622",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "jimtmhdpraOyXurOMyeiaFhrxMxc4dJhpRdU71age1U5R9/svsJAH1+MxUXfbEfmdVnkurxOg1t4FTvi1dQhCg=="
+      "signature": "pITCRkIv6mYYBqXTLXg0PlnRwyBc+hUsYeFkdaDfb/mKq/pZZfpwTeBBrNHPqF4gEiShLpoalCRs6gXiI8S5CA=="
     },
     "literature:lit_course_mention_680648f4cff86e93": {
       "schema_version": 1,
-      "item_sha256": "cd5628bda55d5157f004ae9d38543dd6ed42e691507fec9b73c9785b85a89f6a",
-      "review_sha256": "c95db82e48e92ded0c871ced33baa3916feae45c24d5685c1d6c8291fed62779",
+      "item_sha256": "b5a8303212d347d697abd21269005f46e879ad1429acbece656c2141c2492b0a",
+      "review_sha256": "b72114627878f96015f63773b31b2c1365e1263431254208e9ab0e2f8b567d24",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "s8k33rTca24+uznLzC/0eQF5dZ88ThyM1Ute81QoB1B2vUsr3N5lYIiH/EyXHLltbyGhGSR5QO873qTK6vOhCA=="
+      "signature": "u26jeQ5zy9fjjHQaFttGLljjOYTSKr4G4p6lp0x/sRgmMvisKF0pVGlAfFlaQJ7XGcgsQUpvI5vHC+UOMbYTAQ=="
     },
     "literature:lit_course_mention_5471070945426f93": {
       "schema_version": 1,
-      "item_sha256": "7e74279f96e5288013869813c6b44d1a89545ebe2e76961fec88e266525e0ee3",
-      "review_sha256": "16d5ebcd5d20e2ee828f78919756c2e665fb437e0523d2524511368c17f9c775",
+      "item_sha256": "8a8374c5a9f684fe1a881395daf624b37b3fc63954493f7905388fd299756c6f",
+      "review_sha256": "67998d18fb8981564dce91e24265ef9ef263c0d7a291ce8a2abd1b9b502ad0e3",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "4h7g0p8oYMiPmYEpbN6P0HiKg9c2vrcRp26fXJB3GZbexQYM5SbQXkr6CEm/KPKfVQ+RsXtZ5MQNhznn1RTWDA=="
+      "signature": "q1N9E8Y9ILa9x71geg0ELyQD1V5NLqy2Hc4OGiWSa27PrunKlG9mFkpZctlbDH9oD+zELSpKdwcUzDaCq41IAw=="
     },
     "literature:lit_course_mention_e51d58eb24bcf8a2": {
       "schema_version": 1,
-      "item_sha256": "4cedb5f348dc8a394cf3267aac16f477a8d712ab198a7d66a5fb26ac681cc407",
-      "review_sha256": "9ba585f2db78423ffc7138a565ca434fa6e5cc8d2557a1a0c0927409adc3b489",
+      "item_sha256": "45b2f7fb59570e6758016942ae74f86127cfadd67b0067897bd96712731067b8",
+      "review_sha256": "8c2f9d0985a9169cf70035ccfd107ffdc0a1b3cbacb35a1f86a215a46442681e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "rPYLidxKlAyjD9XQUKCxl9gmeKgzrPGZRL1s5gdwzVcTGpzsVb23a23RK5OaS3af6bQfskp4IFvg86y1u0dsCg=="
+      "signature": "I9pu5nEbJjb6ckGzY1LRtABK2V+I65UiQz3ZnJ30m4aeF5Qbm8Zo1FHQUMNvadPM21jL0s+m4JQOrdDmS+mmCA=="
     },
     "literature:lit_course_mention_e809609920ac0938": {
       "schema_version": 1,
-      "item_sha256": "4eb39ca3b1879a54fc7612e027efc7a71ecbe5627f0def7bbbf4a8551084eb12",
-      "review_sha256": "0035d79fa91008018b26b5e1b2e7c0a6f5371c1621566f592318ee9f863a3d58",
+      "item_sha256": "bac83d1c83c05007adb5e6aa24f845ccfd3cfc373cec8b2a318463f916a69710",
+      "review_sha256": "2dd8b7ce8f4e3ea18e9e61df83b11e0ba8cb5647f3479c2986b8adc3df224d09",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "eJu4mfS2JJ7K7LWTMueZoPcVAgHznS1oDzHGBsxqoG/7U43BS2wznXO96v0iSjtDeVoFjBxq2HW7PvCyvHtuAQ=="
+      "signature": "tFy1YFwvoVaIVsNAsNCJISoWJ0zx9ythM7RXgYuh/yEAsmY86UeDZAG58lRg6dKDJxBeWgRMbhQSFQQHVFC3BQ=="
     },
     "literature:lit_course_mention_591ae30eda19be76": {
       "schema_version": 1,
-      "item_sha256": "6f15e210077a370ea085a623a4510619325c12413f430cfeab0460fe5fe0584b",
-      "review_sha256": "9122269d8bb4f5ded566606ffcd96433a2dba4be6be4feb73a4e241a25191ce9",
+      "item_sha256": "ecadd2996e237b64f77881648959f48f2c6c1769d2df346f72c37fe11a015751",
+      "review_sha256": "5a43fa99cfad45fd63663a1c4762a15f17e67fa8a4ac07f21a17e6933cb665ea",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "iUUXt/PTxCgvPWOfXPfsxtz8Q4PCjROiUaVvvzy0EezhdjTr3TWDeNZg3hnhDjqXs1xvK6+78/klsvdEfdCvDg=="
+      "signature": "3QuHupvIbemn+beLFI/5nSdk/TsdnvkYS3HAmGgH4huNJPs1/tO5NLwQmvmUUSbz55ove/LuTo/VvgjErl3bCA=="
     },
     "literature:lit_course_mention_afddeebaeeda2e6b": {
       "schema_version": 1,
-      "item_sha256": "d48e99fd4459431cb08bebc37ca83b054ccd5095a5651683a479fecbfdfe1f8d",
-      "review_sha256": "76eaca03242d02a5e3c364fecf85b270c072aa9b82224328688fdd7af7be699c",
+      "item_sha256": "96bdad6b76f0b52ddcafe2fb49af9123ad50c5a17fa118a186841c4f8a6e42e1",
+      "review_sha256": "6eea0357fd717be28e721349936a0fbb88e658102d0f633aabdf780b12b1fa1c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "ZiV2JZ66HrjnAOI6lbVMiNNCWGDPDzCnd1B6ZFCPFBNYWW5AYIeQQym2O6dJJtJurvac19SAxGRAVYyEX3VBAA=="
+      "signature": "JpGVvDiHxK0PZUx7ClVOi0ZJicNFrV1Z52sOHoHTbxYWeX1ykP2MVurgAEzDVu2lIt1ZyloyGSuIWmeCI2vPBw=="
     },
     "literature:lit_course_mention_61a2ce21b5d8cac9": {
       "schema_version": 1,
-      "item_sha256": "83a9fd84c842b51d23236de7fc0d4930898a51409b747c5c4a0a3494d59237a2",
-      "review_sha256": "cac2d8d6e5b0235365e8fb1e7b04a1cf14a5970d4786c6cf608f81566ac23c78",
+      "item_sha256": "4c8b27fa067b8901865a89bffd4a2dd6238a0990f14c3cef520c4683c6591d07",
+      "review_sha256": "1e16b264a48b666ff013ed5c8b54d6ee923c549d6e735e9f4563019582295c33",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "yZlygI3uYD0ETIwWhJUQ0d3gWCkIpKP015mb2x5/6UXDT+w4JKv9tmggPXGLJLEl9M5b6t4SQqheUcuvL968BQ=="
+      "signature": "QZHn5hxozDDGF0OlsaX1oxORpniL9giYkHF1HVKwBfle3TTuZqPyha8k/d1Pf35jQEUhJUWiQEylWNa1o5UzCA=="
     },
     "literature:lit_course_mention_0378825302da1e51": {
       "schema_version": 1,
