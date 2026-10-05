@@ -734,5 +734,47 @@
     "curriculum_topic_ids": [
       "t_84bd9f531980"
     ]
+  },
+  {
+    "id": "lit_course_mention_practice19_consulting_theory_practice",
+    "work_id": "lit_course_mention_practice19_consulting_theory_practice",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Психологическое консультирование: теория и практика",
+    "authors": [],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "teacher",
+    "topic_order": 143,
+    "global_order": 912055,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "В практикуме пособие рекомендовано для дополнительного изучения психологического консультирования. Автор и издание не названы; порядок чтения пока не определён.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_f638492f04ed"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_f638492f04ed",
+        "title": "Практика №19. Концептуализация случая",
+        "discipline_id": "psychological_consulting"
+      }
+    ],
+    "source": {
+      "citation": "Психологическое консультирование: теория и практика. Упоминание пособия без указания автора и издания."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Автор и издание в рекомендации не указаны. Одного названия недостаточно для точного сопоставления книги.",
+      "Не объединено с одноимёнными произведениями; их личные отметки сохраняются отдельно.",
+      "Дополнительная литература — приоритет из практикума; этап чтения не определён."
+    ],
+    "notes": "Самостоятельная запись неуточнённого упоминания. Точное произведение и его содержание не подтверждены."
   }
 ]

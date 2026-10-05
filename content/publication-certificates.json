@@ -996,6 +996,13 @@
       "review_sha256": "592aeef3b877e270ef576f8437f481fe225a07829d24b58a39cc409d9576ab86",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "z5yqX+royZmJ/dAdmppk+zh06zTQcj2yVO0dPwAHFU890MRYt8N72TqHHXZKRme3KoXH786txQUwswAo4YRWBA=="
+    },
+    "literature:lit_course_mention_practice19_consulting_theory_practice": {
+      "schema_version": 1,
+      "item_sha256": "a09245e6e48629af40b3e578c08455dd6cf0a4d0987a3b3be6feb7c729adf13c",
+      "review_sha256": "f9384e7aa40fc7a055d5266374b0ecba080f056dfd67e3a51e4dbf0db4bdb65b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "c9mpVTuFdf1COi36youh1k1JQR0WcEzsxA+QeDi/m0eciXCntNFeV/uhbjwOJjevbsmbX5psINim6JgYGJx0CQ=="
     }
   }
 }

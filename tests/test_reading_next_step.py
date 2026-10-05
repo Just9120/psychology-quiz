@@ -181,7 +181,13 @@ def test_published_catalogue_reading_paths_cover_reviewed_works():
         selected_works = {item.get("work_id", item["id"]) for item in selected}
         expected = {item.get("work_id", item["id"]) for item in selected
                     if has_reviewed_recommendation(item)}
-        assert expected, f"No reviewed reading recommendations in {name}"
+        if not expected:
+            # A lesson may contain only explicitly unidentified course mentions.
+            # Never invent a reading stage merely to make traversal non-empty.
+            assert name != "all", "The shipped catalogue must retain reviewed recommendations"
+            assert selected and all(item.get("metadata_warnings")
+                                    and item.get("reading_level") is None for item in selected), name
+            assert reading_next_step(selected, {}, items) is None, name
         states = {item["id"]: {"reading_status": "read"} for item in items
                   if item.get("work_id", item["id"]) not in selected_works}
         # Even unknown-priority works can be personally started; lack of an
