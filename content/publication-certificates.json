@@ -174,9 +174,9 @@
     "literature:lit_anna_freud_ego_defence": {
       "schema_version": 1,
       "item_sha256": "cec01136ad4c5578a0de88c40ac97a797bbc4286470abedd6e3f7360e55fabb8",
-      "review_sha256": "83173d3e194960223060cbd0c9da989596dd5ba2aeaf9b4162c7ae7393d1f0b7",
+      "review_sha256": "13c7d0b09c70dc5db71ffbe1049df392e1af7765c1a36d20c3b696f3235373fe",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "KjmqlYK2GWNFn0c2R57x+K2wW4ftLkpKTEv1r4K996i1xNoVNTtnwGdF1LYkGmBhLrtIfocJcB16ekYw0AtKBg=="
+      "signature": "m4aiPyw2VvZZtOgJGToubTwOLd8+LTqn16jhOKB/pFm6ZzAzuBhK4y3GInoyBTSbPUudXbRvCCcLalN2bRlGCQ=="
     },
     "literature:lit_kagan_meanings_psychotherapy": {
       "schema_version": 1,
@@ -496,16 +496,16 @@
     "literature:lit_moody_life_after_life": {
       "schema_version": 1,
       "item_sha256": "21ff9fb7cafed1d68c8af04477a14b46cb93eaad8d9c59bd4200920ea2c13fa2",
-      "review_sha256": "5a05dfcdd47f787d894710fd455e0147613effd19c7923ec97f31799c86f0cfe",
+      "review_sha256": "fe06fbe345201014f6c4e9a39cbdd726149f01861864a9d3074c7719179d0fa9",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "e81Gyv3HB6XZgkrFkYx81jcNLF16KP5gSrx9oKtcrTvNKIasbh4OZt4y9/vZQnKLw570KSHjjOKE9M/5BOOUBQ=="
+      "signature": "PefJ6UCFbGi/Q65HhR5bFiCwXrFpPX0xtuYSgTRdBE4vVTBbN3pdLc8H324vfMDicgM6BWV8rI5pOuHyXnzDAw=="
     },
     "literature:lit_mokhovikov_psychotherapy_pain_points": {
       "schema_version": 1,
       "item_sha256": "03069a667a88d10a423fe2e444688c04632984d7d33bcf57371bd357a400346a",
-      "review_sha256": "3220caee140b5e2a8fd63e0e055d7473f6554857717288c5f010745d767e161f",
+      "review_sha256": "eeb7adee2e8fadbf850f8da54d8b560fa423a8129cbf8845ff4cf2973b64098c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "3ckU5dxszPa4Tm0NMMHi2SdqEjLmj0jzmZw+ftt8VtsJerBtRdbItibjtYq62wp5x+yplpXa1CcwgLc+F6xjAQ=="
+      "signature": "XweHKEnDSsMQuWawXQCymF9Qo9IpKXrNkSQWVBz4LAuKxxQcd7cTghJhnIRF+E3ymbCGkabOf+1ykujzYbq+Cg=="
     },
     "literature:lit_sechenov_reflexes_of_brain": {
       "schema_version": 1,
