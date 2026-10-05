@@ -730,6 +730,13 @@
       "review_sha256": "41e3e01478ea330c2a12f826f656d3d7ee1143ebb0ed9a7518055f673fb59ec7",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "Ko6qW9UMRyspm30cmEAkibc3Ovl5WUGA2FpUDjQRDjHE9XJK6bj1VPxqud7TdD75ejLV1pXfFu65AXlcakQ5Aw=="
+    },
+    "literature:lit_general_practice02_sapolsky": {
+      "schema_version": 1,
+      "item_sha256": "f5d00b6c520ea5060ff201d1d3b5bd9d2840df3c444ac28dfed0c637fbb966f3",
+      "review_sha256": "22217df54c96e964a941606ee62599455fc8c91be0bb1745ebdbadb3dcefa677",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "E4yHAK6Iuf6x5JbZCX5ueg0nzcKCIs1j8kDN9aUeb8uQZwQ0ArnxJnmIObUham/ZAgSHg/JCYnBZEsk4G1TxAw=="
     }
   }
 }
