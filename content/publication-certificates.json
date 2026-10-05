@@ -146,16 +146,16 @@
     "literature:lit_consult_lecture_01": {
       "schema_version": 1,
       "item_sha256": "f1ce9faef6834cb0f72d06ec28d486e62662e1bdea0888f44ddf506ff7b3fd15",
-      "review_sha256": "3bcba555ad2c2f4dba52e8d71573d1b908cd0bd7254f842d266ff9d07140cc56",
+      "review_sha256": "9abb2e99331d677bf6381d9fcaf630789e3b813966cb26b3a75aa4b170988bfa",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "KfMAmaCmX512HMIVPz/E6VaPlkQklZ+IIMBWStDKl6frAJj1yEUxuTzexJV5qnzHEcLNpX73ZMX3H8vlPlJYAA=="
+      "signature": "hBsov8cARz0ZwqPKtCN1JcmRKFnEk8lGFe8P5ORHBZgPeIgWmYV0DdsHy+800uPsH5RSm8mXoYhXBRWnGoK9AQ=="
     },
     "literature:lit_consult_lecture_02": {
       "schema_version": 1,
       "item_sha256": "51e856c9ad7e35b2604787edad5ad341b6da8ed9839ab1f08d28581fcd4ad6dc",
-      "review_sha256": "3fa135a3ba8bcfcc545252af8ca73dc00976cc942fc4db67289bd7b0b3465ab4",
+      "review_sha256": "37edf2154e04fe5ddc78a6b2a1faadbe4cbe823650d8db043e6f906d886841d1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Rhd3hLJcsS59ksukjVJWEFDFLWPzsmuia3J9fWQXfkrygqJCH5xAUBH0cU8fZmmqjw+nFbYCeZeoySkE0L+9AA=="
+      "signature": "HVq5pY2E6SUe422+hxcOyPqT66Xglp6o0jo+3Gyc6W59Gi/pFgrB4DEVBPvcc4GuPo+Q48ZVszywFl3BWzLSDA=="
     },
     "literature:lit_kuhn_structure_scientific_revolutions": {
       "schema_version": 1,
