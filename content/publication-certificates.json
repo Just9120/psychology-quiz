@@ -814,6 +814,20 @@
       "review_sha256": "abdb1cd54ecf292281c0cbd24a6a0f7d85ba1d3296e01cca618f8ee9d10ab1ff",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "m8L7k2x+ZCgHBVc95gWkHLkck+7vzAYuo0a+2eV8EdQvCi8kV+XtXyChC7ZLcLTK6FHkoxMnk1ZHEmgugjpgCQ=="
+    },
+    "literature:lit_hock_forty_studies": {
+      "schema_version": 1,
+      "item_sha256": "14febca17a63598d6f68a0db240c026dbe487519606b5650e6940ddb8111fb50",
+      "review_sha256": "3c1c790dd66f65b772f82d47f4d10b80f354d206dba34a1391a778312376f22e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0UoqT/xwjcSddLsOXm5wI1+cZ3L3PhEEowxDWIdIWJNrCnzstX7iB+CNiz0ww9LWoOJQHy+KAIjDwu4/W+6gDA=="
+    },
+    "literature:lit_lorenz_on_aggression": {
+      "schema_version": 1,
+      "item_sha256": "540a6631621351758e4444d8f6c6be8ecd23ae2f467339975392edb41eecba8a",
+      "review_sha256": "04ec305328aa53f394201c4e45e0aa73d6088b10d0c59f12d7f307a2cf28e9e0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Pkz7GGC9Id2AUU2mHx11jQT/cTq0/7GN8oIHqMRfAY/YvSKCT7fywBsAHgvxYmDPRheL3sgdIp+R5eJ0DTGUCA=="
     }
   }
 }

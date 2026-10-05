@@ -228,5 +228,83 @@
     "prerequisites": [],
     "year": 2009,
     "module": "module2"
+  },
+  {
+    "id": "lit_hock_forty_studies",
+    "work_id": "lit_hock_forty_studies",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "module": "module2",
+    "title": "40 исследований, которые потрясли психологию: секреты выдающихся экспериментов",
+    "authors": [
+      "Хок Р. Р."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "core",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 3,
+    "global_order": 210003,
+    "estimated_minutes": null,
+    "tags": [
+      "history",
+      "experiments"
+    ],
+    "why_read": "Сначала читать четыре обсуждаемых исследования: обусловливание, обучение по модели, когнитивные карты и подчинение. Сопоставлять методы, результаты и ограничения; остальные главы — по интересу.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_177f292cc47a"
+    ],
+    "source": {
+      "citation": "40 исследований, которые потрясли психологию: секреты выдающихся экспериментов. Произведение упомянуто на практическом занятии; конкретное издание курса не установлено."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Издание, год и страницы использованного экземпляра не установлены.",
+      "Полный текст книги не проверен; порядок и роль чтения предложены агентом."
+    ],
+    "notes": "Автор и произведение сверены с библиографической записью библиотеки или издателя. Запись не одобряет все утверждения занятия."
+  },
+  {
+    "id": "lit_lorenz_on_aggression",
+    "work_id": "lit_lorenz_on_aggression",
+    "topic_id": "osnovy_eksperimentalnoy_psihologii",
+    "module": "module2",
+    "title": "Агрессия (так называемое зло)",
+    "authors": [
+      "Лоренц К."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "advanced",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 4,
+    "global_order": 210004,
+    "estimated_minutes": null,
+    "tags": [
+      "ethology",
+      "aggression"
+    ],
+    "why_read": "Дополнительное историческое чтение после разбора экспериментов. Различать этологические объяснения поведения животных и проверенные выводы о человеке; не использовать книгу как современную клиническую рекомендацию.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "curriculum_topic_ids": [
+      "t_177f292cc47a"
+    ],
+    "source": {
+      "citation": "Агрессия (так называемое зло). Произведение упомянуто на практическом занятии; конкретное издание курса не установлено."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Издание, год и страницы использованного экземпляра не установлены.",
+      "Полный текст книги не проверен; порядок и роль чтения предложены агентом."
+    ],
+    "notes": "Автор и произведение сверены с библиографической записью библиотеки или издателя. Запись не одобряет все утверждения занятия."
   }
 ]
