@@ -752,5 +752,95 @@
       "Год, перевод и конкретное издание курса не установлены."
     ],
     "notes": "Та же работа Зигмунда Фрейда, упомянутая в третьей части исторической лекции как «Массовая психология и анализ человеческого Я» и «Групповая психология и анализ Эго». Идентичность произведения и общая отметка чтения сохранены; год и конкретный перевод курса не установлены. Атрибуция теории не означает одобрение её как универсального объяснения поведения."
+  },
+  {
+    "id": "lit_social_history01_miller_dollard",
+    "work_id": "lit_social_history02_miller_dollard",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Социальное научение и подражание",
+    "authors": [
+      "Миллер Н. Э.",
+      "Доллард Дж."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 109,
+    "global_order": 610109,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Миллер Н. Э., Доллард Дж. — Социальное научение и подражание"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год, перевод и конкретное издание курса не установлены."
+    ],
+    "notes": "Отдельная работа Social Learning and Imitation, названная в лекции. Не объединять с Frustration and Aggression. Подтверждена идентичность произведения, а не полное чтение книги или русский перевод."
+  },
+  {
+    "id": "lit_social_history01_sighele",
+    "work_id": "lit_social_history02_sighele",
+    "topic_id": "social_psychology",
+    "module": "module6",
+    "title": "Преступная толпа",
+    "authors": [
+      "Сигеле С."
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "importance": "additional",
+    "importance_source": "agent",
+    "topic_order": 110,
+    "global_order": 610110,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Дополнительное историческое чтение после современной социальной психологии. Сопоставляйте авторские модели с современными объяснениями; книга не является современным диагностическим или практическим стандартом. Порядок и значимость предложены агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_caa8d94a943aae0d"
+    ],
+    "curriculum_topic_ids": [
+      "t_e452196d73e9"
+    ],
+    "reviewed_curriculum_topics": [
+      {
+        "id": "t_e452196d73e9",
+        "title": "История социально-психологических идей. Часть 1",
+        "discipline_id": "social_psychology"
+      }
+    ],
+    "source": {
+      "citation": "Сигеле С. — Преступная толпа"
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и конкретное издание курса не установлены.",
+      "В лекции фамилия записана Сигиле; каталог РГБ подтверждает автора Сципиона Сигеле."
+    ],
+    "notes": "Подтверждены название и автор по каталогу РГБ. Год русского издания из карточки не приписан неизвестному изданию курса. Историческая модель толпы не используется как современный универсальный закон; полный текст книги не прочитан."
   }
 ]

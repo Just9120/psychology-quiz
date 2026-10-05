@@ -188,9 +188,9 @@
     "literature:lit_dollard_frustration_aggression": {
       "schema_version": 1,
       "item_sha256": "90074a050e729f11b59a29a7771f391d99b37769371430cf0200c95afc2d71f7",
-      "review_sha256": "ddfe018fa9af4a565a256c14e2462f273e3444cfa260816c527ab8b43a924ae1",
+      "review_sha256": "3b8143836d9e9a0c4d3796bce6711cbe6a8b3a87817b217559e271f4856ae3ff",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "RRdc2PFzpcHR4LwsGciaFMu7mG1erDRDr3+vJUK40mBmnVwzOx6TMmsmqkcxE2/BoVjYcQUO3fMobh/yNXTLDQ=="
+      "signature": "lkAr5nFh5GQCzA2/M8saoisLzkjdB4lVPdjNgsAF0VWAG79aI8VxyQWuBZQMchp1Oi+ItyNm70+vFYdFHTmqCQ=="
     },
     "literature:lit_betensky_what_do_you_see": {
       "schema_version": 1,
@@ -664,9 +664,9 @@
     "literature:lit_lebon_psychology_peoples_masses": {
       "schema_version": 1,
       "item_sha256": "deaefde3a1705aee0cd9507e32f9ff9e05c22ebcd5fe02f87281d35f6f1a56ac",
-      "review_sha256": "7a18d8b8129473921256917974ed6f941fb232e37131babccb7136dec2c9ab22",
+      "review_sha256": "d870f160be3ebe55a8084a0f56f870200db025ef57bca55c169364f857d35d6c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "jrVQPCNqjJyMY15uS6GqrMz7dGbUoJM5hM7d72z0DUc4zwFrG6TXwvEfT1MNF2W0BHhA+oJBump6xVxVBZlWAw=="
+      "signature": "xP9A0GDzztqQd2Rb5mXMA5R419uLqjed4x8iWMJl6gbJkPBbVREPDHSkMWVO+c+1i8pzltGaoVLTl3N8UDLzAQ=="
     },
     "literature:lit_yalom_loves_executioner": {
       "schema_version": 1,
@@ -842,6 +842,20 @@
       "review_sha256": "c2ff0a088cf2ec6a94ade80a7d007f1c8acfd2a99cb536bf681fbdf6c66da2f3",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "7FtwJoBGquSMZ0qmmsNTulzNDuyR1AYc51AlclPD0i2auK8pGBLn9I+5T0nx39cM/6bjB1A3B7T717rzqwbDBg=="
+    },
+    "literature:lit_social_history01_miller_dollard": {
+      "schema_version": 1,
+      "item_sha256": "45fb85caa164bd50d5c0412142ae9461114edf8bbe04db81c4d81d9d432c1b60",
+      "review_sha256": "a02271c18944d1c6f3581a18ce61b926a1eef543f6065a23cef8720fc30ff193",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "mLeIgbyv6U0IU3dUpVbfDbRXgsekIJBKlfFd8qR/LbC1e2WY6EWcataC9BM+YMihe6fRnm8vtPqEptSTG4jUAw=="
+    },
+    "literature:lit_social_history01_sighele": {
+      "schema_version": 1,
+      "item_sha256": "d1841dadb18b2e49b1d8d5e86fd0433502fd5daec6e8d0d6cfc8ae54daa22be9",
+      "review_sha256": "07c50b1917189b6082233bafbad27463ab21f6dbcafdb9e1661194f3de1d6d4d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "s+9UIfWYeAUYstgdCQOf5cI9eBtmBkoI+r5NmpL1nxIrHs3Rbt8oeNLcwkwfneNO+grx6rYa/gbX8xObGJjqCg=="
     }
   }
 }
