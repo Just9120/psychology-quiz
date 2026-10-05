@@ -923,9 +923,9 @@
     "literature:lit_consult_practice18_graham_resilience": {
       "schema_version": 1,
       "item_sha256": "f5eab2e02ea66fdebad6765e47aeb191d1e12c11dae02a7777bfcd75ce480af7",
-      "review_sha256": "8abd06c0ed222f8ed411396a2ac5d8c6cd441d34218f63a37461b180119cd2e7",
+      "review_sha256": "8a3f1fd00d5501d631e921c497a7ab39837b09996877b500be1378deda2be47d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "P4fm3MJ3o8y5iRkxpHPFypyscNdItuMMWwQ/qyacqTUAozwDfr7Dtym/EjDWVKQQm1/y4OWCwVdfA35kzL9MCg=="
+      "signature": "XZFUCbkkeH/tIbHdVMmAtp1ZTKcxPxVrJtZN8PEFbM2/Qt8gag+uHS8GAxJqIlmNecRfqiUdvjPjzOjwR7BAAw=="
     },
     "literature:lit_quantitative_practice13_kahneman": {
       "schema_version": 1,
