@@ -220,3 +220,58 @@ def test_binary_bibliography_original_rejects_paths_outside_private_pdf_storage(
     monkeypatch.setattr(source_bibliography, "ROOT", tmp_path)
     with pytest.raises(InventoryError, match="original_requires_private_pdf"):
         source_bibliography._private_original_path(relative)
+
+
+@pytest.mark.parametrize("citation", [
+    "Льва Толстого Война и мир",
+    "Бориса Пастернака Доктор Живаго",
+    "Михаила Александровича Шолохова Тихий Дон",
+])
+def test_unquoted_novel_keeps_author_title_boundary_unparsed_and_private(citation):
+    text = "\ufeffПример в романе " + citation + ", где герой принимает решение."
+    raw = text.encode("utf-8")
+    revision = ["2026-10-05", "Synthetic", "text/plain"]
+    snapshot = {"files": {"s": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"s": [["Module", "Lesson"]]}}
+    result = discover_bibliography(snapshot, [{"source_id": "s", "content": raw,
+        "revision": revision, "snapshot_sha256": hashlib.sha256(raw).hexdigest()}], [])
+    assert len(result["mentions"]) == 1
+    mention = result["mentions"][0]
+    assert mention["candidate_kind"] == "unparsed_author_title"
+    assert mention["title_candidate"] == citation and mention["candidate_work_ids"] == []
+    start, end = map(int, mention["locator"].split(":")[1:])
+    assert text[start:end] == citation
+    assert mention["decision"] == "pending_review" and result["publication_approval"] is False
+
+
+def test_known_title_inside_unquoted_citation_does_not_duplicate_review_task():
+    text = "В романе Льва Толстого Война и мир, герой ищет решение."
+    raw = text.encode("utf-8")
+    revision = ["2026-10-05", "Synthetic", "text/plain"]
+    snapshot = {"files": {"s": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"s": [["Module", "Lesson"]]}}
+    catalogue = [{"id": "entry", "work_id": "war-peace", "title": "Война и мир"}]
+    before = deepcopy(catalogue)
+    result = discover_bibliography(snapshot, [{"source_id": "s", "content": raw,
+        "revision": revision, "snapshot_sha256": hashlib.sha256(raw).hexdigest()}], catalogue)
+    assert [(m["title_candidate"], m["candidate_work_ids"]) for m in result["mentions"]] == [
+        ("Война и мир", ["war-peace"])]
+    assert catalogue == before and result["publication_approval"] is False
+
+
+@pytest.mark.parametrize("text, expected", [
+    ('Рекомендую роман «Неизвестная история». Он сказал: «Привет».', ["Неизвестная история"]),
+    ('Повесть «Другая история». Он сказал: «Привет».', ["Другая история"]),
+    ('У них начался роман. Он сказал: «Привет».', []),
+    ('Обсуждаем роман Льва Толстого. Он сказал: «Привет».', []),
+    ('Обсуждаем роман Льва Толстого и поведение героя.', []),
+])
+def test_novel_cue_never_turns_following_dialogue_into_a_book(text, expected):
+    raw = text.encode("utf-8")
+    revision = ["2026-10-05", "Synthetic", "text/plain"]
+    snapshot = {"files": {"s": dict(zip(("modified_time", "title", "mime_type"), revision))},
+                "paths": {"s": [["Module", "Lesson"]]}}
+    result = discover_bibliography(snapshot, [{"source_id": "s", "content": raw,
+        "revision": revision, "snapshot_sha256": hashlib.sha256(raw).hexdigest()}], [])
+    assert [m["title_candidate"] for m in result["mentions"]] == expected
+    assert result["publication_approval"] is False

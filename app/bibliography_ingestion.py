@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import re
 from collections import defaultdict
+from itertools import chain
 
 from app.source_inventory import InventoryError, _revision
 
@@ -18,13 +19,22 @@ READING_QUOTE = re.compile(
     r'(?:книг[а-я]*|учебник[а-я]*|пособи[а-я]*|монографи[а-я]*|прочита[а-я]*|литератур[а-я]*)'
     r'[^\n«»“”"]{0,120}?(?:\r?\n[ \t]*)?[«“"](?P<title>[^«»“”"]{3,200})[»”"]', re.IGNORECASE)
 
+
+# Genre cues have a tighter grammar than explicit reading instructions: do not
+# cross a sentence into dialogue after a mention of somebody's romantic affair.
+NOVEL_QUOTE = re.compile(
+    r'(?<!\w)(?i:роман(?:а|е|ом|у|ы|ов|ах|ами)?|повест(?:ь|и|ью|ей|ям|ями|ях))'
+    r'[ \t]+(?:(?:[А-ЯЁ][а-яё-]+[ \t]+){1,3})?'
+    r'(?:под названием[ \t]+)?(?:\r?\n[ \t]*)?'
+    r'[«“"](?P<title>[^«»“”"]{3,200})[»”"]')
+
 QUOTED_TITLE = re.compile(r'[«“"](?P<title>[^»”"]{3,200})[»”"]')
 TITLE_SEPARATOR = re.compile(r'[\s,;]*(?:(?:и|или|а также)[\s,;]+)?', re.IGNORECASE)
 
 
 def _book_quotes(text: str):
     """Keep adjacent titles in a book list, without interpreting later dialogue."""
-    for first in READING_QUOTE.finditer(text):
+    for first in chain(READING_QUOTE.finditer(text), NOVEL_QUOTE.finditer(text)):
         cue = text[first.start():first.start("title")]
         if re.search(r"литератур[а-я]*\s+к\s+блок[а-я]*\s*[«“\"]$", cue, re.IGNORECASE):
             # The quoted name labels the course block, not a recommended book.
@@ -41,6 +51,24 @@ def _book_quotes(text: str):
                 break
             yield following.span("title"), following.group("title")
             end = following.end()
+
+
+# Transcripts can omit title quotes: e.g. "романе Льва Толстого Война и мир,".
+# There is no reliable boundary between a two-/three-part author name and a
+# capitalized title. Preserve the complete citation as a private review task,
+# rather than guessing an author, edition or work identity.
+UNQUOTED_BOOK_CITATION = re.compile(
+    r"(?<!\w)(?i:роман(?:а|е|ом|у|ы|ов|ах|ами)?|повест(?:ь|и|ью|ей|ям|ями|ях))"
+    r"[ \t]+(?P<citation>(?:[А-ЯЁ][а-яё-]+[ \t]+){2}"
+    r"[А-ЯЁ][^\n,.;:!?«»“”\"]{1,200})(?=[,.;:!?]|$)")
+
+
+def _unparsed_book_citations(text: str):
+    for match in UNQUOTED_BOOK_CITATION.finditer(text):
+        start, end = match.span("citation")
+        while end > start and text[end - 1].isspace():
+            end -= 1
+        yield (start, end), text[start:end]
 
 
 def _title_pattern(title: str):
@@ -121,6 +149,14 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
         for bounds, title in book_quotes:
             if not any(start <= bounds[0] and bounds[1] <= end for start, end in found):
                 found[bounds] = (title, [])
+        unparsed = {}
+        for bounds, citation in _unparsed_book_citations(text):
+            if any(bounds[0] <= start and end <= bounds[1] and work_ids
+                   for (start, end), (_, work_ids) in found.items()):
+                # A known title inside this citation already has a review task.
+                continue
+            found[bounds] = (citation, [])
+            unparsed[bounds] = True
         for (start, end), (title, work_ids) in sorted(found.items()):
             mentions.append({
                 "source_id": source_id, "revision": list(_revision(source)),
@@ -130,6 +166,11 @@ def discover_bibliography(snapshot: dict, captures: list[dict], catalogue: list[
                 "excerpt": text[max(0, start - 150):min(len(text), end + 150)],
                 "candidate_work_ids": work_ids, "decision": "pending_review",
             })
+            if (start, end) in unparsed:
+                mentions[-1]["candidate_kind"] = "unparsed_author_title"
+                mentions[-1]["review_note"] = (
+                    "Unquoted author/title citation: identify the title manually; "
+                    "the full citation is not an approved title or work identity.")
     return {"schema_version": 1, "captured_sources": len(seen),
             "unread_source_ids": sorted(set(snapshot["files"]) - seen),
             "mentions": mentions, "publication_approval": False}

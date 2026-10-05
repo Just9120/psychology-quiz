@@ -702,6 +702,13 @@
       "review_sha256": "624891142533b5736439eab9661bad8cd5ebe5aef0e74792561a0156e7795dba",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "dILp4sDPXJhX9VN9wQyr1OKMMhPg84wLCvooXeg0sXaUr+RAOyVUwrLU+YvPcS/qnrCnYF0VgbvI9zd4gZ9xAQ=="
+    },
+    "literature:lit_bulgakov_heart_of_a_dog": {
+      "schema_version": 1,
+      "item_sha256": "9d3f35b535d4e8bcf72f8d677de6694a6bef6b6c88eb1aec44f223ab77d44b73",
+      "review_sha256": "0e6c9b9337560d38b713b0db24ca230d41a01c49cf5b225863f7cfb6aa9128ee",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "abUtYy9nJ/B7ULNOVJZlNSdWYrMZws1DaDuEvaScRDhLDsPS/kad6A7dJlBtjUwQt+tv3Ga3Zh71DZW43fvdCg=="
     }
   }
 }
