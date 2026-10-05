@@ -933,6 +933,27 @@
       "review_sha256": "151a573f9983a5a000b8564a48d014e2ac6ae6ee9ec005cbf20842d0e58e3c0b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "87b6h43wegk5g35PBUQSo5CH1D+nHPz2ikjxtd08tVRGrzBHi17zofnLOWLDmf5kJj+MWGg3XGkMD+vLOImeAg=="
+    },
+    "literature:lit_consult4_rogers_new_approaches": {
+      "schema_version": 1,
+      "item_sha256": "d98bdaaf3e6de79f1b26f10011eead6a6850a2588245f0791fb09845c290873c",
+      "review_sha256": "fa3e851d68714d54bba2fa7878f1a7cbc024fd9c4030a417bc47f867618c1353",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "14l5w6Kcb3Kp03nho/cS3DKs1R+nBXZDgbtVn7j7SGnwMS5tDtecug8qen9tPMrDv4XsMOT4C9MFZylq5SY1BQ=="
+    },
+    "literature:lit_consult4_rogers_client_centered": {
+      "schema_version": 1,
+      "item_sha256": "c39b09105e09a35356cf15e9baf0a869adcd40cb51ce87ddd794247d4cd9e192",
+      "review_sha256": "9e9aac8334f4c9fb0d6a7fda76d8c7b914015179d11c24c5969039cfef83af38",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "hgST4xHEIDAO8nZKE87b2tMtdpBnvhkDSEsDSmiXqLnscFSfYppIZZq8oA99BvP0JUwYE4hoHOpb1Tb5EilSCA=="
+    },
+    "literature:lit_consult4_rogers_becoming_person": {
+      "schema_version": 1,
+      "item_sha256": "7b36caa6b43b2ccb0541f4f4e3f35fd5d01d73a9c1714e01872ef90e95f46787",
+      "review_sha256": "fa3b4855ebd2f8db64c4c8d619bbe026ff580feac76ba4781199a9676bdcf119",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Eg0jvvAgEKkQRopnUQPbBv97mKTtyKubj4mpwiWMxPUF3MMLwQ+lXRSKqqozDYD5bl8Upo+UBQlCh0rwrrlnAQ=="
     }
   }
 }

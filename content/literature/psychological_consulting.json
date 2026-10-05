@@ -624,5 +624,115 @@
         "discipline_id": "psychological_consulting"
       }
     ]
+  },
+  {
+    "id": "lit_consult4_rogers_new_approaches",
+    "work_id": "lit_consult4_rogers_new_approaches",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Новейшие подходы к психологической практике",
+    "authors": [
+      "Роджерс Карл"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "topic_order": 101,
+    "global_order": 310101,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Исходное книжное упоминание курса. До уточнения точного произведения автоматическая рекомендация не назначается.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Карл Роджерс: Новейшие подходы к психологической практике. Рекомендация к навыкам первичной консультации."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание в учебном материале не названы; содержание и доступность книги не проверены.",
+      "Название отличается от библиографической записи «Консультирование и психотерапия: новейшие подходы в области практической работы»; точная идентичность требует уточнения."
+    ],
+    "notes": "Проверено книжное упоминание; спорные утверждения лекции не одобрены.",
+    "importance": null,
+    "importance_source": null,
+    "curriculum_topic_ids": [
+      "t_84bd9f531980"
+    ]
+  },
+  {
+    "id": "lit_consult4_rogers_client_centered",
+    "work_id": "lit_consult4_rogers_client_centered",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Клиент-центрированная психотерапия",
+    "authors": [
+      "Роджерс Карл"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 102,
+    "global_order": 310102,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "После вводного пособия углубить знакомство с клиент-центрированным подходом: преподаватель рекомендует книгу к навыкам консультирования. Этап предложен агентом; обязательный порядок не задан.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_f207603bd416c4be"
+    ],
+    "source": {
+      "citation": "Карл Роджерс: Клиент-центрированная психотерапия. Рекомендация к навыкам первичной консультации."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание в учебном материале не названы; содержание и доступность книги не проверены."
+    ],
+    "notes": "Проверено книжное упоминание; спорные утверждения лекции не одобрены.",
+    "importance": "additional",
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_84bd9f531980"
+    ]
+  },
+  {
+    "id": "lit_consult4_rogers_becoming_person",
+    "work_id": "lit_consult_lecture_01",
+    "topic_id": "psychological_consulting",
+    "module": "module3",
+    "title": "Становление личности",
+    "authors": [
+      "Роджерс Карл"
+    ],
+    "year": null,
+    "type": "book",
+    "reading_level": "deepening",
+    "status": "approved",
+    "priority": null,
+    "topic_order": 103,
+    "global_order": 310103,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Книга Роджерса рекомендована также к навыкам первичной консультации. После вводного пособия вернуться к авторскому взгляду на психотерапию; этап предложен агентом.",
+    "learning_outcomes": [],
+    "prerequisites": [
+      "lit_f207603bd416c4be"
+    ],
+    "source": {
+      "citation": "Карл Роджерс: Становление личности. Рекомендация к навыкам первичной консультации."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Год и издание в учебном материале не названы; содержание и доступность книги не проверены."
+    ],
+    "notes": "Проверено книжное упоминание; спорные утверждения лекции не одобрены.",
+    "importance": "additional",
+    "importance_source": "agent",
+    "curriculum_topic_ids": [
+      "t_84bd9f531980"
+    ]
   }
 ]
