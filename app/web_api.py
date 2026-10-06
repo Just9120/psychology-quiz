@@ -9,15 +9,16 @@ from app.mastery import overview as mastery_overview
 from urllib.parse import unquote
 
 from fastapi import Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 
 from app.payload_validation import is_sqlite_integer
 from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_setup_options, quiz_state, start_confirmed_quiz
+from app.owner_google_oauth import OwnerGoogleOAuth, TTL as OAUTH_TTL
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
-POST_ACTIONS = {"auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
+GET_ACTIONS = {"auth/google/available", "auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
+POST_ACTIONS = {"auth/google/begin", "auth/google/unlink", "auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
                 "identity/new", "link/start", "link/complete", "profile/name", "owner/stats", "owner/content", "quiz/setup", "quiz/answer", "homework/start", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
                 "progress/reset-preview", "progress/reset-confirm", "progress/review-start", "progress/review-glossary-start", "progress/goal-set", "glossary/setup", "glossary/answer", "glossary/next", "glossary/restart"}
@@ -35,6 +36,11 @@ class WebAccessLogFilter(logging.Filter):
 
 
 def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf: str | None):
+    if action == "auth/google/available":
+        with auth.transaction() as conn:
+            linked = conn.execute("""SELECT 1 FROM web_google_identities g JOIN web_accounts a ON a.id=g.account_id
+                WHERE a.email=? AND a.enabled=1""", (auth.settings.owner_email,)).fetchone()
+        return {"ok": True, "available": auth.settings.google is not None and linked is not None}, None
     if action in {"auth/register", "auth/recover"}:
         auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover")
         return {"ok": True}, None
@@ -46,6 +52,9 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         return {"ok": True}, session
     with auth.transaction() as conn:
         account = auth.authenticate(conn, token, csrf=csrf, mutation=action in POST_ACTIONS)
+        if action == "auth/google/unlink":
+            OwnerGoogleOAuth(auth).unlink(conn, account)
+            return {"ok": True}, None
         if action == "auth/me":
             return auth.account_state(conn, account, token), None
         if action == "auth/logout":
@@ -180,9 +189,35 @@ def install_web_api(app, auth: WebAuth) -> None:
     if not any(isinstance(item, WebAccessLogFilter) for item in access.filters):
         access.addFilter(WebAccessLogFilter())
 
+    google = OwnerGoogleOAuth(auth)
+
+    @app.get("/web/auth/google/callback")
+    async def google_callback(request: Request):
+        try:
+            params = request.query_params
+            if len(request.url.query) > 8192 or any(len(params.getlist(key)) != 1 for key in params):
+                raise AuthError("invalid_oauth_state", 401)
+            cookie = await asyncio.to_thread(google.complete, params.get("state"),
+                request.cookies.get(google.cookie_name), params.get("code"))
+            response = RedirectResponse(auth.settings.origin + "/", status_code=303)
+            if cookie:
+                response.set_cookie(auth.settings.cookie_name, cookie, max_age=SESSION_TTL,
+                    secure=auth.settings.secure_cookie, httponly=True, samesite="strict", path="/")
+        except AuthError as exc:
+            response = JSONResponse({"ok": False, "error": exc.code}, status_code=exc.status)
+        except OPERATIONAL_ERRORS:
+            response = JSONResponse({"ok": False, "error": "database_unavailable"}, status_code=503)
+        except Exception as exc:
+            logger.error("web_oauth_failure type=%s", type(exc).__name__)
+            response = JSONResponse({"ok": False, "error": "internal_error"}, status_code=500)
+        response.delete_cookie(google.cookie_name, path="/", secure=auth.settings.secure_cookie, httponly=True, samesite="lax")
+        response.headers.update({"Cache-Control": "no-store", "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"})
+        return response
+
     @app.api_route("/web/{action:path}", methods=["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH"])
     async def web_endpoint(action: str, request: Request):
         cookie = None
+        oauth_cookie = None
         try:
             if action not in GET_ACTIONS | POST_ACTIONS:
                 raise AuthError("not_found", 404)
@@ -210,8 +245,12 @@ def install_web_api(app, auth: WebAuth) -> None:
                     raise AuthError("invalid_json") from None
                 if not isinstance(payload, dict):
                     raise AuthError("invalid_payload")
-            result, cookie = await asyncio.to_thread(_dispatch, auth, action, payload,
-                request.cookies.get(auth.settings.cookie_name), request.headers.get("x-csrf-token"))
+            if action == "auth/google/begin":
+                result, oauth_cookie = await asyncio.to_thread(google.begin, payload.get("purpose"),
+                    request.cookies.get(auth.settings.cookie_name), request.headers.get("x-csrf-token"))
+            else:
+                result, cookie = await asyncio.to_thread(_dispatch, auth, action, payload,
+                    request.cookies.get(auth.settings.cookie_name), request.headers.get("x-csrf-token"))
             response = JSONResponse(result)
         except AuthError as exc:
             response = JSONResponse({"ok": False, "error": exc.code}, status_code=exc.status)
@@ -220,6 +259,9 @@ def install_web_api(app, auth: WebAuth) -> None:
         except Exception as exc:
             logger.error("web_api_failure type=%s", type(exc).__name__)
             response = JSONResponse({"ok": False, "error": "internal_error"}, status_code=500)
+        if oauth_cookie is not None:
+            response.set_cookie(google.cookie_name, oauth_cookie, max_age=OAUTH_TTL,
+                secure=auth.settings.secure_cookie, httponly=True, samesite="lax", path="/")
         if cookie is not None:
             response.set_cookie(auth.settings.cookie_name, cookie, max_age=SESSION_TTL if cookie else 0,
                                 secure=auth.settings.secure_cookie, httponly=True, samesite="strict", path="/")

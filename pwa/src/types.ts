@@ -5,6 +5,8 @@ export interface Account {
   role?: 'owner'
   csrf_token: string
   needs_identity: boolean
+  google_available?: boolean
+  google_linked?: boolean
   telegram_linked: boolean
   link_pending: boolean
   link_confirmed: boolean

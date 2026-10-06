@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { api } from './api'
 import { Brand, Icon } from './Icon'
 import type { MailProof } from './types'
@@ -15,6 +15,8 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin }: TaskProp
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [notice, setNotice] = useState('')
+  const [googleAvailable, setGoogleAvailable] = useState(false)
+  useEffect(() => { let active = true; void api.googleAvailable().then(result => { if (active) setGoogleAvailable(result.available) }).catch(() => {}); return () => { active = false } }, [])
   const settingPassword = proof !== null
   const title = settingPassword ? (proof.purpose === 'verify' ? 'Создайте свой пароль' : 'Новый пароль')
     : mode === 'register' ? 'Начнём с вашей почты' : mode === 'recover' ? 'Восстановить доступ' : 'Рады видеть вас снова'
@@ -58,6 +60,7 @@ export function AuthScreen({ busy, run, proof, consumeProof, onLogin }: TaskProp
           {(mode === 'login' || settingPassword) && <label className="field">{settingPassword ? 'Новый пароль' : 'Пароль'}<input type="password" autoComplete={settingPassword ? 'new-password' : 'current-password'} value={password} onChange={event => setPassword(event.target.value)} minLength={settingPassword ? 15 : undefined} maxLength={128} required disabled={busy} /></label>}
           <button className="button primary full" disabled={busy}>{busy ? 'Подождите…' : settingPassword ? 'Сохранить пароль' : mode === 'login' ? 'Войти в пространство' : 'Получить письмо'}<Icon name="arrow" /></button>
         </form>
+        {googleAvailable && !settingPassword && mode === 'login' && <button className="button secondary full" disabled={busy} onClick={() => void run(async () => { const result = await api.googleBegin('login'); window.location.assign(result.url) })}>Войти через Google</button>}
         <div className="auth-links">
           {settingPassword ? <button disabled={busy} onClick={() => { consumeProof(); setMode('recover'); setPassword(''); setNotice('') }}>Запросить новую ссылку</button>
             : mode === 'login' ? <><button disabled={busy} onClick={() => { setMode('recover'); setNotice(''); setPassword('') }}>Забыли пароль?</button><button disabled={busy} onClick={() => { setMode('register'); setNotice(''); setPassword('') }}>Первый вход</button></>

@@ -24,6 +24,8 @@ from app.database import is_postgres_target, resolve_database_target, validate_p
 PERSONAL_TABLES = {
     "users": ("id", {"telegram_user_id", "username", "first_name", "last_name"}),
     "web_accounts": ("user_id/email", {"email", "password_hash", "user_id"}),
+    "web_google_identities": ("account_id", {"subject", "account_id"}),
+    "web_oauth_challenges": ("account_id/session_digest; expiring OAuth proofs", {"state_digest", "browser_digest", "nonce", "pkce_verifier", "account_id", "session_digest"}),
     "web_profile_names": ("account_id", {"account_id", "display_name"}),
     "web_sessions": ("account_id", {"digest", "account_id"}),
     "web_mail_tokens": ("email/account_id", {"digest", "email", "account_id"}),

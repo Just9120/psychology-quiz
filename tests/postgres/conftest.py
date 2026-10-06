@@ -21,6 +21,9 @@ from tests.test_web_auth import Mailbox, SETTINGS, ORIGIN
 
 def remove_learning_schema(conn):
     """Build an actual v1/v2 SQLite source for upgrade/recovery tests."""
+    conn.execute("DROP TABLE IF EXISTS web_oauth_challenges")
+    conn.execute("DROP TABLE IF EXISTS web_google_identities")
+    conn.execute("DELETE FROM schema_migrations WHERE version='google-oauth-v1'")
     conn.execute("DROP TABLE IF EXISTS web_profile_names")
     conn.execute("DROP TABLE IF EXISTS pwa_invitations")
     conn.execute("DELETE FROM schema_migrations WHERE version='invitations-v1'")
@@ -53,6 +56,9 @@ def source(sqlite_bank):
         migrate_auth_schema(conn)
         migrate_invitation_schema(conn)
         migrate_glossary_schema(conn)
+        conn.execute("DROP TABLE web_oauth_challenges")
+        conn.execute("DROP TABLE web_google_identities")
+        conn.execute("DELETE FROM schema_migrations WHERE version='google-oauth-v1'")
     return sqlite_bank
 
 

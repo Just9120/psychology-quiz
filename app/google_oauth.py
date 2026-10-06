@@ -91,8 +91,7 @@ class GoogleOAuthClient:
                     self._keys, self._keys_expire = keys, now + 300
                 matches = [key for key in self._keys if isinstance(key, dict) and key.get("kid") == kid]
                 if len(matches) != 1:
-                    # A missing key fails closed; the next attempt may refresh after rotation.
-                    self._keys_expire = 0
+                    # Unknown IDs fail closed until the bounded cache refresh.
                     raise GoogleOAuthError("google_signing_key_unavailable")
                 key = matches[0]
                 if key.get("kty") != "RSA" or key.get("alg") != "RS256" or key.get("use") != "sig":
