@@ -86,7 +86,7 @@ def _coverage(raw):
 
 
 def source_summary():
-    path = Path(os.environ.get("OWNER_SOURCE_SUMMARY_PATH", "/data/owner-source-summary.json"))
+    path = Path(os.environ.get("OWNER_SOURCE_SUMMARY_PATH", str(ROOT / "content" / "owner-source-summary.json")))
     try:
         if not path.exists():
             return {"state": "UNSET", "reason": "source_snapshot_not_installed"}

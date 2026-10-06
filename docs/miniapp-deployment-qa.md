@@ -791,11 +791,14 @@ python scripts/owner_source_summary.py --current data/current-inventory.json \
 известные holds учитываются отдельно от pending records. Поздние потерянные review
 records остаются неизвестными; этот файл не является разрешением публикации.
 
-После readback/digest проверки поставляйте только агрегированный файл в host
-`data/owner-source-summary.json` штатного checkout, доступный API через `/data` mount.
-Операторская передача файла — отдельное действие поставки; Git/CD не содержит этот
-ignored snapshot. `OWNER_SOURCE_SUMMARY_PATH` позволяет явно выбрать путь для API;
-default — `/data/owner-source-summary.json`. Не передавайте вместо него raw review JSON.
+После проверки схемы, readback и отсутствия приватных полей разрешённая сводка включается
+в `content/owner-source-summary.json`. Она содержит только дату, counts и identifiers
+уже публичных тем, без source IDs, текстов, locators и operator identities. Git, runtime
+artifact и обычный CD поставляют её вместе с той же revision приложения; отдельный SFTP
+перенос не требуется. Приватные inputs остаются в ignored `data/`.
+`OWNER_SOURCE_SUMMARY_PATH` позволяет явно выбрать operator snapshot вместо поставляемой
+сводки; default — `/app/content/owner-source-summary.json`. Явный отсутствующий или
+невалидный override не заменяется встроенной сводкой. Не передавайте raw review JSON.
 Отсутствующий/невалидный snapshot возвращает UNSET, без исключения приватного текста.
 Обзор показывает дату и ограничение актуальности, не объявляет старый snapshot текущим
 состоянием Drive. Изменение snapshot не меняет auth gates, банк или пользовательские данные.

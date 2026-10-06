@@ -1,0 +1,614 @@
+{
+  "schema_version": 1,
+  "state": "PARTIAL",
+  "captured_at": "2026-10-06T17:32:24.774860+00:00",
+  "files": 425,
+  "folders": 94,
+  "processing": {
+    "conflict_review": 321,
+    "processed": 104
+  },
+  "processing_records": 425,
+  "known_holds": 321,
+  "observation_basis": "saved_inputs",
+  "coverage": {
+    "tracked_sources": 78,
+    "untracked_files": 347,
+    "source_metadata": {
+      "current": 78
+    },
+    "unmapped_published_questions": 83,
+    "lessons": [
+      {
+        "id": "t_760b622ba9f6",
+        "kinds": {
+          "theory": 11,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_6f07f36a8251",
+        "kinds": {
+          "theory": 12,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_c17d1ae57018",
+        "kinds": {
+          "theory": 6,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "processed",
+        "known_hold": false,
+        "glossary_terms": 3,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_5f1cca01d535",
+        "kinds": {
+          "theory": 4,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_ab1e7408a209",
+        "kinds": {
+          "theory": 4,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "processed",
+        "known_hold": false,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_bc927cd2edda",
+        "kinds": {
+          "theory": 6,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "processed",
+        "known_hold": false,
+        "glossary_terms": 1,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_ae68a82010f9",
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_a6c516bbe92a",
+        "kinds": {
+          "theory": 9,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_8416412afc7d",
+        "kinds": {
+          "theory": 18,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_2be8cec234c0",
+        "kinds": {
+          "theory": 0,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_4451554cf717",
+        "kinds": {
+          "theory": 7,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_2476fabb75f8",
+        "kinds": {
+          "theory": 12,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_32c45a18e1bf",
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_e8545fea4531",
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_f2b92ac4b2ef",
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_c8fdaba2064a",
+        "kinds": {
+          "theory": 4,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_3ec476ff48e7",
+        "kinds": {
+          "theory": 3,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_033b84e9a10e",
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_e9dd359706e6",
+        "kinds": {
+          "theory": 24,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_27f468335f64",
+        "kinds": {
+          "theory": 0,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_17a20a4fb08e",
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_1db07b61e05b",
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_a5bd6646dc05",
+        "kinds": {
+          "theory": 8,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_43f9e7d785af",
+        "kinds": {
+          "theory": 3,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_05aeac347c73",
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_6f9edd8074a3",
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "processed",
+        "known_hold": false,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_7a8e0286a42d",
+        "kinds": {
+          "theory": 26,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_219d66e8496a",
+        "kinds": {
+          "theory": 50,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_517448740f11",
+        "kinds": {
+          "theory": 9,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_177f292cc47a",
+        "kinds": {
+          "theory": 5,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_a4cdbc5015b0",
+        "kinds": {
+          "theory": 13,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_3bb3423d5435",
+        "kinds": {
+          "theory": 10,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_03a33ddcf539",
+        "kinds": {
+          "theory": 3,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_6be3cecd6596",
+        "kinds": {
+          "theory": 5,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_059cbac41979",
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_09efb9aedb46",
+        "kinds": {
+          "theory": 7,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_7246705017fc",
+        "kinds": {
+          "theory": 10,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_89b592be8732",
+        "kinds": {
+          "theory": 10,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_84bd9f531980",
+        "kinds": {
+          "theory": 7,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_34b2eed9d99a",
+        "kinds": {
+          "theory": 10,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_944c292b1d23",
+        "kinds": {
+          "theory": 6,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      },
+      {
+        "id": "t_350cf495eee7",
+        "kinds": {
+          "theory": 7,
+          "glossary": 0,
+          "case": 0
+        },
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
+      }
+    ],
+    "prepared_notes_unmapped": 4,
+    "unmapped_published_glossary": 81
+  }
+}
