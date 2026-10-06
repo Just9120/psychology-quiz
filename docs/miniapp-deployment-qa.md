@@ -1,5 +1,15 @@
 # Mini App deployment and manual QA checklist
 
+## Доступ VPS к единому приватному репозиторию (D-45)
+
+Target остаётся Just9120/psychology-quiz, checkout /opt/psychology-quiz и ветка main; visibility transition не меняет deployment unit, данные или target. До перехода подтвердить аутентифицированное чтение именно этого repository с VPS. Текущий owner preflight06.10: origin HTTPS/github.com, credential helper отсутствует, HEAD3c10221; presence /root/.ssh сама по себе не подтверждает доступ.
+
+Для этого проекта готовится отдельный Ed25519 deploy key /root/.ssh/psychology-quiz/github_ed25519: закрытый ключ остаётся root-only на VPS, в GitHub только публичный ключ, read_only=true. Existing key/config/known_hosts не перезаписывать и ключ для подписи контента не использовать. Host verification обязателен; используйте отдельный known_hosts с актуальным официальным GitHub Ed25519 fingerprint, сверенным оператором перед записью. Нельзя заменять его неаутентифицированным ssh-keyscan или StrictHostKeyChecking=no.
+
+После регистрации exact read-only deploy key проверить git ls-remote для git@github.com:Just9120/psychology-quiz.git с IdentitiesOnly=yes, BatchMode=yes и StrictHostKeyChecking=yes. Только после успешного чтения main изменить local core.sshCommand этого checkout на dedicated identity/known_hosts и origin на этот canonical SSH URL; общий /root/.ssh/config и другие проекты не менять. Canonical deploy.sh уже принимает этот origin. Под shared deploy lock повторить exact branch/HEAD и remote readback; неверный project/key/host или отсутствие доступа оставляет transition невыполненным. Commit/push с VPS ключом не разрешён.
+
+Final PRIVATE transition разрешён D-45 после code/CI. Перед ним сохранить проверенное состояние/access и проверить GitHub visibility/private access сразу после изменения; новый public push с notes запрещён. Для одного общего PR private Vault добавляется в ту же branch после подтверждённого PRIVATE; metadata/ключи/notes не становятся runtime assets, vault/ исключён .dockerignore. После merge применять штатный CI→CD: проверка аутентифицированного чтения не разрешает повторную поставку ради проверки доступа и не заменяет required main CI/artifact.
+
 ## Действующие правила и delivery snapshot
 
 [AGENTS.md](../AGENTS.md) задаёт routine Git/PR/delivery flow; [ci-cd-rules.md](../ci-cd-rules.md) — настройку и исправление pipeline. Продуктовый target — [spec](project-spec.md); AC/findings/checkpoint — [план](delivery-plan.md). Текущая production БД — PostgreSQL; её подтверждённый cutover и primary records указаны в [плане](delivery-plan.md), а backup/recovery и штатный CD — в [PostgreSQL storage](postgres-storage.md). Ниже сохранены также исторические процедуры Telegram/SQLite, которые применяются лишь к соответствующей среде/версии. Поставка PWA — в [PWA procedure](pwa-delivery.md).
