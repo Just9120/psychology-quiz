@@ -11,7 +11,7 @@ from app.database import IntegrityError, OperationalError, PostgresConnection
 from app.db import get_connection, create_or_load_user, get_owner_stats, upsert_approved_questions
 from app.postgres_import import import_snapshot
 from app.postgres_recovery import manifest, verify_user_state
-from app.postgres_schema import initialize_schema, verify_schema, table_columns
+from app.postgres_schema import initialize_schema, verify_schema, table_columns, upgrade_schema
 from app.homework_schema import migrate_homework_schema
 from app.quiz_service import answer_quiz, prepare_quiz, start_prepared_quiz
 from app.web_auth import AuthError, WebAuth, digest
@@ -207,6 +207,10 @@ def test_existing_session_mail_proof_and_telegram_link_continue_after_import(sou
     recovery = mailbox.messages[-1][2]
     source_bytes = source.read_bytes()
     import_snapshot(source, pg_target)
+    # Import preserves the old schema; canonical init upgrades before new writers start.
+    with closing(get_connection(pg_target)) as conn, conn:
+        upgrade_schema(conn)
+        assert verify_schema(conn) == 'postgres-v9'
     new = WebAuth(pg_target, SETTINGS, Mailbox(), clock=now)
     with new.transaction() as conn:
         account = new.authenticate(conn, session)

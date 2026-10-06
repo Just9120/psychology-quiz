@@ -26,7 +26,7 @@ def test_period_counts_and_identity_projection_on_postgres(pg_target):
                                '2026-09-26T10:00:00+00:00','2026-09-26T11:00:00+00:00')""")
         conn.execute("""INSERT INTO user_literature_work_progress
                         (user_id,work_id,reading_status,updated_at,source_literature_id)
-                        VALUES(30,'book','reading','2026-09-29T09:00:00+00:00','entry')""")
+                        VALUES(30,'book','in_progress','2026-09-29T09:00:00+00:00','entry')""")
         now = datetime(2026, 9, 29, 12, tzinfo=timezone.utc)
         results = [get_owner_period_stats(conn, period, now=now) for period in ('24h', '7d', '30d')]
         assert [row['active_users'] for row in results] == [2, 3, 3]

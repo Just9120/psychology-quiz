@@ -249,7 +249,17 @@ class PublicationPolicy:
 
     def has_private_review(self, kind, item):
         key = f"{kind}:{item.get('id')}"
-        return (key in (self.certificates or {}) or key in (self.receipts or {})) and self.can_publish(kind, item)
+        certificate = (self.certificates or {}).get(key)
+        receipt = (self.receipts or {}).get(key)
+        # Frozen legacy publication is not authentication of a private review.
+        if certificate is not None:
+            error = certificate_error(kind, item, certificate, self.certificate_key,
+                                      item_sha256=fingerprint(item))
+        elif receipt is not None:
+            error = receipt_error(kind, receipt, item_sha256=fingerprint(item))
+        else:
+            return False
+        return error is None and self.can_publish(kind, item)
 
     def can_publish(self, kind, item):
         return item.get("status") == "approved" and self.error(kind, item) is None
