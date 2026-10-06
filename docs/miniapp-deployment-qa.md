@@ -847,6 +847,7 @@ runtime и не требует загрузки image. Ручной старый
 Backup/isolated restore, stateful migration, user preservation, serving parity,
 HTTP/PWA smoke и exact completion markers сохраняются. После запуска revision label
 и фактический container image ID обоих сервисов должны совпасть с проверенным CI image.
+До публикации PWA и completion marker read-only `scripts/runtime_exposure.py` проверяет каждый runtime container: project/service/revision, running state, единственную owned Compose bridge network и фактические/requested bindings только на 127.0.0.1:8090/8081. Public wildcard, дополнительные опубликованные порты, host/чужие сети останавливают поставку. PostgreSQL ports/network/storage проверяются существующим postgres_vps image-state/verify. Guard не меняет firewall/container/network и не выводит raw Docker inspection с environment secrets. Failure сохраняет действующие recovery gates; автоматического удаления или data rollback нет.
 Ошибка после миграции не запускает автоматический data rollback; действуют прежние
 forward-fix/recovery gates. GitHub protections proposal не применяется этим изменением.
 Actual Docker build, GitHub artifact provenance и VPS promotion требуют CI/CD evidence;

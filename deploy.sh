@@ -164,6 +164,7 @@ for service in "${SERVICES[@]}"; do
   [[ "$(docker inspect -f '{{.State.Running}}' "$container_id")" == true ]] || fail "Service stopped: $service"
   [[ "$(docker inspect -f '{{.Image}}' "$container_id")" == "$CANDIDATE_IMAGE_ID" ]] || fail 'Running image differs from verified CI image'
   [[ "$(docker inspect -f '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$container_id")" == "$EXPECTED_SHA" ]] || fail 'Running image revision mismatch'
+  python3 scripts/runtime_exposure.py --service "$service" --container-id "$container_id" --expected-sha "$EXPECTED_SHA"
   image_id="$(docker inspect -f '{{.Image}}' "$container_id")"
   log "RUNTIME_OK service=$service revision=$EXPECTED_SHA image=$image_id"
 done

@@ -142,6 +142,7 @@ python3() {
     *postgres_vps.py\ stage-vector-image*) echo VECTOR_IMAGE_STAGED ;;
     *postgres_vps.py\ upgrade-vector-image*) [[ "$FAULT" != pg_upgrade_failed ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
     *postgres_vps.py\ verify*) [[ "$FAULT" != pg_preservation ]] ;;
+    *runtime_exposure.py*) [[ "$FAULT" != exposure ]] ;;
     *) return 99 ;;
   esac
 }
@@ -308,8 +309,8 @@ def test_workflow_rejects_zero_exit_without_completion_record(tmp_path, output):
     assert result.returncode != 0
 
 
-@pytest.mark.parametrize("fault", ["backend_artifact", "image_id"])
-def test_image_transport_and_running_identity_are_fail_closed(tmp_path, fault):
+@pytest.mark.parametrize("fault", ["backend_artifact", "image_id", "exposure"])
+def test_backend_artifact_and_running_runtime_checks_are_fail_closed(tmp_path, fault):
     result, log = run_deploy(tmp_path, fault)
     assert result.returncode != 0
     assert "DEPLOY_OK" not in result.stdout
