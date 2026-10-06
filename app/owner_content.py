@@ -124,11 +124,18 @@ def source_summary():
 
 def dashboard(conn):
     registry = load_topic_registry()
+    # Imported category slugs are derived from their names; they are not the
+    # stable identifiers of the public discipline registry.
+    names = {}
+    for key, topic in registry.items():
+        names.setdefault(topic["title"], []).append(key)
     counts = {}
-    for row in conn.execute("""SELECT c.slug,q.kind,COUNT(*) FROM questions q
+    for row in conn.execute("""SELECT c.name,q.kind,COUNT(*) FROM questions q
                               JOIN categories c ON c.id=q.category_id
-                              WHERE q.status='approved' GROUP BY c.slug,q.kind"""):
-        counts.setdefault(row[0], {})[row[1]] = row[2]
+                              WHERE q.status='approved' GROUP BY c.name,q.kind"""):
+        matches = names.get(row[0], [])
+        key = matches[0] if len(matches) == 1 else ("unmapped", row[0])
+        counts.setdefault(key, {})[row[1]] = row[2]
     literature = {}
     for item in load_literature_items():
         literature.setdefault(item["topic_id"], set()).add(item["work_id"])

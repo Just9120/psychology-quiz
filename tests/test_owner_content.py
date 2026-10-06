@@ -82,9 +82,9 @@ def test_source_snapshot_is_partial_allowlisted_and_rejects_inconsistent_totals(
 def test_topic_coverage_distinguishes_empty_kinds_unknown_notes_and_deduplicated_books(monkeypatch):
     import sqlite3
     conn = sqlite3.connect(":memory:")
-    conn.executescript("""CREATE TABLE categories(id INTEGER,slug TEXT);
+    conn.executescript("""CREATE TABLE categories(id INTEGER,slug TEXT,name TEXT);
         CREATE TABLE questions(category_id INTEGER,kind TEXT,status TEXT);
-        INSERT INTO categories VALUES(1,'one'),(2,'outside');
+        INSERT INTO categories VALUES(1,'imported-category-slug','One'),(2,'outside','one');
         INSERT INTO questions VALUES(1,'case','approved'),(1,'theory','draft'),(2,'theory','approved');""")
     monkeypatch.setattr(owner_content, "load_topic_registry", lambda: {"one": {"title": "One", "module": "module1", "order": 1}})
     monkeypatch.setattr(owner_content, "load_glossary_entries", lambda topic: None)
