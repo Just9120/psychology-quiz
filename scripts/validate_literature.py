@@ -106,7 +106,7 @@ def validate_entry(
     private_projection = False
     if "source_refs" not in entry:
         policy = load_policy()
-        private_projection = (f"literature:{entry.get('id')}" in (policy.certificates or {})
+        private_projection = (policy.private_review_record("literature", entry.get('id')) is not None
                               and policy.error("literature", entry) is None)
     required = REQUIRED_FIELDS - {"source_refs"} if private_projection else REQUIRED_FIELDS
     missing = sorted(required - entry.keys())
@@ -233,7 +233,7 @@ def validate_entry(
 
     source_refs = entry.get("source_refs")
     if private_projection:
-        pass  # The verified certificate binds the public item to its private dossier.
+        pass  # The validated private review binds the public item to its private dossier.
     elif not isinstance(source_refs, list):
         errors.append(f"{label}: source_refs must be a list")
     elif not source_refs:

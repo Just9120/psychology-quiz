@@ -160,12 +160,12 @@ def validate_entry(entry: dict[str, Any], label: str, file_topic_id: str, active
     elif status == "approved" and "source_refs" not in entry:
         try:
             policy = load_policy()
-            signed_private = (f"glossary:{entry.get('id')}" in (policy.certificates or {})
+            signed_private = (policy.private_review_record("glossary", entry.get('id')) is not None
                               and policy.can_publish("glossary", entry))
         except (OSError, ValueError, KeyError, TypeError):
             signed_private = False
         if not signed_private:
-            errors.append(f"{label}: approved entry requires source_refs or verified private certificate")
+            errors.append(f"{label}: approved entry requires source_refs or verified private certificate or review receipt")
 
     for source_ref in entry.get("source_refs") or []:
         if not isinstance(source_ref, str):

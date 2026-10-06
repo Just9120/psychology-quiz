@@ -11,6 +11,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 from app.case_content import case_error
 from app.publication_certificate import certificate_error
+from app.publication_receipt import receipt_error
 from app.source_evidence import locator_precision_review_required
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -87,6 +88,7 @@ class PublicationPolicy:
     quality_reviews: dict | None = None
     certificates: dict | None = None
     certificate_key: Ed25519PublicKey | None = None
+    receipts: dict | None = None
 
     def is_legacy(self, kind, item):
         return self.legacy.get(f"{kind}:{item.get('id')}") == fingerprint(item)
@@ -141,14 +143,18 @@ class PublicationPolicy:
         if item.get("status") != "approved":
             return None  # Preparation is permitted; the loader does not publish it.
         certificate = (self.certificates or {}).get(f"{kind}:{item.get('id')}")
-        if certificate is not None:
+        receipt = (self.receipts or {}).get(f"{kind}:{item.get('id')}")
+        if certificate is not None or receipt is not None:
             if "source_ref" in item or "source_refs" in item:
                 return "mixed_public_private_source_review"
             if "source" in item and (kind != "literature" or not isinstance(item["source"], dict)
                                      or set(item["source"]) - {"title", "locator", "citation"}):
                 return "private_source_in_public_content"
-            return certificate_error(kind, item, certificate, self.certificate_key,
-                                     item_sha256=fingerprint(item))
+            # A receipt must never rescue a malformed existing signature.
+            if certificate is not None:
+                return certificate_error(kind, item, certificate, self.certificate_key,
+                                         item_sha256=fingerprint(item))
+            return receipt_error(kind, receipt, item_sha256=fingerprint(item))
         review = self.reviews.get(f"{kind}:{item.get('id')}")
         if not isinstance(review, dict) or review.get("decision") != "approved":
             return "repository_review_required"
@@ -237,6 +243,14 @@ class PublicationPolicy:
             return "new_public_question_source_ref_forbidden"
         return None
 
+    def private_review_record(self, kind, item_id):
+        key = f"{kind}:{item_id}"
+        return (self.certificates or {}).get(key, (self.receipts or {}).get(key))
+
+    def has_private_review(self, kind, item):
+        key = f"{kind}:{item.get('id')}"
+        return (key in (self.certificates or {}) or key in (self.receipts or {})) and self.can_publish(kind, item)
+
     def can_publish(self, kind, item):
         return item.get("status") == "approved" and self.error(kind, item) is None
 
@@ -285,8 +299,23 @@ def load_policy():
             if re.fullmatch(r"[0-9a-f]{64}", key_hex) is None:
                 raise ValueError("Invalid publication review public key")
             certificate_key = Ed25519PublicKey.from_public_bytes(bytes.fromhex(key_hex))
+    receipt_path = ROOT / "content/publication-receipts.json"
+    receipts = {}
+    if receipt_path.exists():
+        document = json.loads(receipt_path.read_text(encoding="utf-8"))
+        if (not isinstance(document, dict) or set(document) != {"schema_version", "items"}
+                or type(document["schema_version"]) is not int or document["schema_version"] != 1
+                or not isinstance(document["items"], dict)):
+            raise ValueError("Invalid publication receipts")
+        receipts = document["items"]
+        for identity, receipt in receipts.items():
+            kind, separator, item_id = identity.partition(":")
+            if (not separator or not item_id or not isinstance(receipt, dict)
+                    or receipt_error(kind, receipt, item_sha256=receipt.get("item_sha256"))
+                    or _public_text_contains_private_source(kind, receipt, sources)):
+                raise ValueError("Invalid publication receipt")
     return PublicationPolicy(legacy, sources, reviews["items"], quality["items"],
-                             certificates, certificate_key)
+                             certificates, certificate_key, receipts)
 
 
 def validate_publications(kind):

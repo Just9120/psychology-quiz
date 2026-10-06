@@ -68,7 +68,7 @@ while IFS= read -r file; do
   esac
   case "$file" in
     docker-compose.yml) STATEFUL=1 ;;
-    app/db.py|app/database.py|app/postgres_*.py|app/homework*.py|app/attempt_content.py|app/*_schema.py|app/pwa_promotion.py|app/web_auth.py|app/glossary.py|app/glossary_projection.py|app/case_content.py|app/content_publication.py|app/publication_certificate.py|app/source_evidence.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/homework.json|content/questions/*|content/glossary/*|content/publication-reviews.json|content/publication-certificates.json|content/publication-review-public-key.hex|content/learning-quality-reviews.json|content/legacy-publication-baseline.json|content/source-corpus.json) STATEFUL=1; MIGRATE=1 ;;
+    app/db.py|app/database.py|app/postgres_*.py|app/homework*.py|app/attempt_content.py|app/*_schema.py|app/pwa_promotion.py|app/web_auth.py|app/glossary.py|app/glossary_projection.py|app/case_content.py|app/content_publication.py|app/publication_certificate.py|app/publication_receipt.py|app/source_evidence.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/homework.json|content/questions/*|content/glossary/*|content/publication-reviews.json|content/publication-certificates.json|content/publication-receipts.json|content/publication-review-public-key.hex|content/learning-quality-reviews.json|content/legacy-publication-baseline.json|content/source-corpus.json) STATEFUL=1; MIGRATE=1 ;;
   esac
 done <<< "$CHANGED_FILES"
 git merge --ff-only "$EXPECTED_SHA"

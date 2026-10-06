@@ -35,18 +35,18 @@ def validate(ledger, items, sources, policy=None):
     reviews = ledger["items"]
     for key in sorted(items.keys() - reviews.keys()):
         kind = key.split(":", 1)[0]
-        if (policy is not None and key in (policy.certificates or {})
+        if (policy is not None and policy.private_review_record(kind, items[key]["id"]) is not None
                 and policy.can_publish(kind, items[key])):
-            continue  # The private dossier was checked before its signed certificate entered Git.
+            continue  # The private dossier was checked before its source-free review entered Git.
         errors.append(f"{key}: missing review")
     for key in sorted(reviews.keys() - items.keys()):
         errors.append(f"{key}: orphan review")
     for key in sorted(items.keys() & reviews.keys()):
         kind = key.split(":", 1)[0]
-        if (policy is not None and key in (policy.certificates or {})
+        if (policy is not None and policy.private_review_record(kind, items[key]["id"]) is not None
                 and policy.can_publish(kind, items[key])):
             # An older ledger row may describe the historical edition. The
-            # signed private dossier verifies the current public projection.
+            # validated private dossier verifies the current public projection.
             continue
         r = reviews[key]
         if not isinstance(r, dict):

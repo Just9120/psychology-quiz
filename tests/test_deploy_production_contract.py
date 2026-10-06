@@ -86,6 +86,8 @@ git() {
       elif [[ "$FAULT" == lockfile_change ]]; then echo requirements.lock;
       elif [[ "$FAULT" == quality_review_change ]]; then echo content/learning-quality-reviews.json;
       elif [[ "$FAULT" == publication_certificate_change ]]; then echo content/publication-certificates.json;
+      elif [[ "$FAULT" == publication_receipt_change ]]; then echo content/publication-receipts.json;
+      elif [[ "$FAULT" == receipt_policy_change ]]; then echo app/publication_receipt.py;
       elif [[ "$FAULT" == publication_key_change ]]; then echo content/publication-review-public-key.hex;
       elif [[ "$FAULT" == evidence_policy_change ]]; then echo app/source_evidence.py;
       elif [[ "$FAULT" == case_policy_change ]]; then echo app/case_content.py;
@@ -181,6 +183,7 @@ def run_deploy(tmp_path, fault="", through_workflow=False):
 
 @pytest.mark.parametrize("change", ["", "snapshot_change", "identity_change", "auth_change", "schema_change",
                                     "quality_review_change", "publication_certificate_change", "publication_key_change",
+                                    "publication_receipt_change", "receipt_policy_change",
                                     "evidence_policy_change", "case_policy_change"])
 def test_deployment_loads_verified_image_before_backup_migration_and_checks_running_revision(tmp_path, change):
     result, log = run_deploy(tmp_path, change)

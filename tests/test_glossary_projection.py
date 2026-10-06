@@ -34,7 +34,8 @@ def test_published_glossary_projection_is_stable_and_contains_only_approved_term
             assert item['options'][item['correct_option_index']] == entry.short_definition
 
 
-def test_privately_signed_glossary_projects_without_public_source_ref(monkeypatch):
+@pytest.mark.parametrize("signed_review", [True, False])
+def test_privately_signed_glossary_projects_without_public_source_ref(monkeypatch, signed_review):
     topic_id, title = GLOSSARY_TOPICS[0]
     entries = load_glossary_entries(topic_id)[:4]
     signed = replace(entries[0], source_refs=())
@@ -42,12 +43,13 @@ def test_privately_signed_glossary_projects_without_public_source_ref(monkeypatc
     monkeypatch.setattr(glossary_projection, 'load_glossary_entries',
                         lambda _: [signed, *entries[1:]])
     monkeypatch.setattr(glossary_projection, 'load_policy',
-                        lambda: SimpleNamespace(certificates={f'glossary:{signed.id}': {}}))
+                        lambda: SimpleNamespace(certificates={f'glossary:{signed.id}': {}} if signed_review else {},
+                                                receipts={} if signed_review else {f'glossary:{signed.id}': {}}))
     projected = glossary_projection.projected_questions()
     assert len(projected) == 4
     assert projected[0]['source_ref'] is None
     monkeypatch.setattr(glossary_projection, 'load_policy',
-                        lambda: SimpleNamespace(certificates={}))
+                        lambda: SimpleNamespace(certificates={}, receipts={}))
     with pytest.raises(ValueError, match='Invalid published glossary entry'):
         glossary_projection.projected_questions()
 
