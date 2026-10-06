@@ -1,14 +1,10 @@
 # Mini App deployment and manual QA checklist
 
-## Доступ VPS к единому приватному репозиторию (D-45)
+## Итоговый приватный репозиторий (D-45)
 
-Target остаётся Just9120/psychology-quiz, checkout /opt/psychology-quiz и ветка main; visibility transition не меняет deployment unit, данные или target. До перехода подтвердить аутентифицированное чтение именно этого repository с VPS. Текущий owner preflight06.10: origin HTTPS/github.com, credential helper отсутствует, HEAD3c10221; presence /root/.ssh сама по себе не подтверждает доступ.
+Пока идёт разработка, основной репозиторий остаётся PUBLIC ради Actions. Уточнение владельца06.10: не переносить PRIVATE transition или подготовку нового VPS deploy key на текущий этап. Сейчас visibility и Git access не меняются; private Vault notes остаются локально вне Git. Смена visibility относится к окончанию разработки, не к prerequisite текущего PR/merge/CD. Target будущей базы — vault/ единого Just9120/psychology-quiz; существующий отдельный репозиторий сохраняется.
 
-Для этого проекта готовится отдельный Ed25519 deploy key /root/.ssh/psychology-quiz/github_ed25519: закрытый ключ остаётся root-only на VPS, в GitHub только публичный ключ, read_only=true. Existing key/config/known_hosts не перезаписывать и ключ для подписи контента не использовать. Host verification обязателен; используйте отдельный known_hosts с актуальным официальным GitHub Ed25519 fingerprint, сверенным оператором перед записью. Нельзя заменять его неаутентифицированным ssh-keyscan или StrictHostKeyChecking=no.
-
-После регистрации exact read-only deploy key проверить git ls-remote для git@github.com:Just9120/psychology-quiz.git с IdentitiesOnly=yes, BatchMode=yes и StrictHostKeyChecking=yes. Только после успешного чтения main изменить local core.sshCommand этого checkout на dedicated identity/known_hosts и origin на этот canonical SSH URL; общий /root/.ssh/config и другие проекты не менять. Canonical deploy.sh уже принимает этот origin. Под shared deploy lock повторить exact branch/HEAD и remote readback; неверный project/key/host или отсутствие доступа оставляет transition невыполненным. Commit/push с VPS ключом не разрешён.
-
-Final PRIVATE transition разрешён D-45 после code/CI. Перед ним сохранить проверенное состояние/access и проверить GitHub visibility/private access сразу после изменения; новый public push с notes запрещён. Для одного общего PR private Vault добавляется в ту же branch после подтверждённого PRIVATE; metadata/ключи/notes не становятся runtime assets, vault/ исключён .dockerignore. После merge применять штатный CI→CD: проверка аутентифицированного чтения не разрешает повторную поставку ради проверки доступа и не заменяет required main CI/artifact.
+Для финального перехода позднее потребуется проверить authenticated VPS Git read access и actual private visibility, сохранив canonical origin/deployment unit и mandatory host verification. Current preflight06.10: VPS origin HTTPS/github.com, credential helper отсутствует, HEAD3c10221. Это не достаточное доказательство отсутствия всех способов authentication и не поручение менять remote/ключи сейчас. Local GitHub metadata read подтвердил admin/push права, existing deploy keys0; новых keys/visibility mutations не выполнено.
 
 ## Действующие правила и delivery snapshot
 
