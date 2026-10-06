@@ -46,6 +46,23 @@ def test_period_aggregates_are_deidentified_and_change_with_window(conn):
     assert not any(key in str(week).lower() for key in ("email", "username", "telegram", "user_id"))
 
 
+def test_same_day_iso_events_before_cutoff_do_not_inflate_quiz_counts(conn):
+    conn.execute("UPDATE quiz_sessions SET started_at=?,finished_at=?,status='finished' WHERE id=2",
+                 ('2026-09-28T11:59:59+00:00', '2026-09-28T11:59:59+00:00'))
+    conn.execute("UPDATE quiz_answers SET answered_at=? WHERE id=2",
+                 ('2026-09-28T11:59:59+00:00',))
+    now = datetime(2026, 9, 29, 12, tzinfo=timezone.utc)
+    result = get_owner_period_stats(conn, "24h", now=now)
+    assert (result['quiz_started'], result['quiz_completed'], result['quiz_answers']) == (1, 1, 1)
+    # The rolling period includes the exact cutoff in either stored format.
+    conn.execute("UPDATE quiz_sessions SET started_at=?,finished_at=? WHERE id=2",
+                 ('2026-09-28T12:00:00+00:00', '2026-09-28T12:00:00+00:00'))
+    conn.execute("UPDATE quiz_answers SET answered_at=? WHERE id=2",
+                 ('2026-09-28T12:00:00+00:00',))
+    result = get_owner_period_stats(conn, "24h", now=now)
+    assert (result['quiz_started'], result['quiz_completed'], result['quiz_answers']) == (2, 2, 2)
+
+
 @pytest.mark.parametrize("period", ["all", "", None, [], 7])
 def test_period_is_allowlisted(conn, period):
     with pytest.raises(ValueError, match="invalid_period"):
