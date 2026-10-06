@@ -5,4 +5,5 @@ from tests.test_owner_google_oauth import (
     test_google_link_revalidates_initiating_owner_session,
     test_google_does_not_register_or_bind_by_matching_email,
     test_google_failed_exchange_consumes_proof_and_unlink_invalidates_link,
+    test_google_api_callback_is_browser_bound_and_leaves_actor_unchanged,
 )
