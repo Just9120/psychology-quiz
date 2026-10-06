@@ -60,10 +60,17 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 После frontend delivery проверить опубликованный `miniapp-react/index.html`, его versioned JS/CSS assets, provider check и UI load. Component/API tests проверяют trusted fetch boundary без network. Browser smoke без Telegram показывает экран запуска; это не authenticated mobile roundtrip.
 
 ### Cloudflare Workers Static Assets (GitHub deployment flow)
-- Build command: empty; `miniapp-react/` собирается из pinned frontend dependencies и сверяется с tracked assets в CI до merge
-- Deploy command: `npx wrangler deploy`
+- Build command: `npm --prefix pwa ci --ignore-scripts`; устанавливает инструменты по `pwa/package-lock.json`, не пересобирает проверенные tracked assets
+- Deploy command: `npm --prefix pwa run deploy:miniapp`; использует локальный pinned Wrangler и root `wrangler.toml`
 - Path: `/`
 - Static assets directory in `wrangler.toml`: `./miniapp-react`
+
+`miniapp-react/` собирается из pinned frontend dependencies и сверяется с tracked
+assets в CI до merge. Не заменять deploy command на bare `npx wrangler`: при
+отсутствии root package установка может получить незакреплённую версию. Эти поля
+задают целевую конфигурацию; текущие Cloudflare dashboard settings и их применение
+UNSET до readback владельца существующего Worker. Изменение этой процедуры не
+утверждает, что внешний provider уже обновлён.
 
 1. Опубликовать `miniapp-react/index.html` и его assets на HTTPS static hosting в deployment environment.
 2. После готовности Cloudflare custom domain установить `MINI_APP_URL` на этот HTTPS URL в runtime `.env` на VPS.
