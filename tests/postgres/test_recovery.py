@@ -94,7 +94,7 @@ class NativeRuntime:
         self.created.remove(name)
 
 
-@pytest.fixture(params=['postgres-v1', 'postgres-v2'])
+@pytest.fixture(params=['postgres-v1', 'postgres-v2', 'postgres-v9'])
 def native_runtime(source, request):
     admin, target = os.environ.get('POSTGRES_TEST_ADMIN_DSN'), os.environ.get('POSTGRES_TEST_DSN')
     native_bin, container = os.environ.get('POSTGRES_TEST_NATIVE_BIN'), os.environ.get('POSTGRES_TEST_CONTAINER')
@@ -122,6 +122,14 @@ def native_runtime(source, request):
             else:
                 conn.execute("INSERT INTO glossary_sessions VALUES('session',1,'topic','Title','in_progress','{}','{}','now','now')")
         import_snapshot(source, runtime.target)
+        if request.param == 'postgres-v9':
+            with closing(get_connection(runtime.target)) as conn, conn:
+                upgrade_schema(conn)
+                conn.execute("INSERT INTO web_google_identities VALUES('synthetic-google-subject',1,1)")
+                conn.execute("""INSERT INTO web_oauth_challenges
+                    (state_digest,browser_digest,nonce,pkce_verifier,purpose,account_id,session_digest,expires_at)
+                    VALUES('synthetic-state','synthetic-browser','synthetic-nonce',
+                           'synthetic-verifier','link',1,'session',9999999999)""")
         yield runtime
     finally:
         for owned in list(runtime.created): runtime.drop_restore_database(owned)
@@ -135,6 +143,10 @@ def test_native_restore_preserves_every_table_sequence_and_schema(native_runtime
     record = read_verified_record(path)
     assert record['before'] == before == native_runtime.manifest()
     assert before['sequences']['users'] == 901
+    if 'web_google_identities' in before['tables']:
+        with closing(get_connection(native_runtime.target)) as conn:
+            assert conn.execute('SELECT subject FROM web_google_identities').fetchone()[0] == 'synthetic-google-subject'
+            assert conn.execute('SELECT pkce_verifier FROM web_oauth_challenges').fetchone()[0] == 'synthetic-verifier'
     assert not native_runtime.created
     verify_user_state(before, native_runtime.manifest())
     with closing(get_connection(native_runtime.target)) as conn, conn:
