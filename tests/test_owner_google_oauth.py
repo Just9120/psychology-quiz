@@ -137,6 +137,35 @@ def test_google_api_callback_is_browser_bound_and_leaves_actor_unchanged(flow, m
         assert client.post('/web/auth/google/begin', json={'purpose':'login'}, headers={'Origin':'https://attacker.test'}).status_code == 403
 
 
+def test_google_callback_failure_keeps_credentials_out_of_response_and_logs(flow, monkeypatch, caplog):
+    import logging
+    from fastapi.testclient import TestClient
+    from app.miniapp_fastapi import create_app
+    from tests.test_web_auth import ORIGIN, TOKEN
+
+    def fail(*args, **kwargs):
+        raise RuntimeError('private-provider-code private-cookie synthetic-secret private-owner-identity')
+
+    monkeypatch.setattr('app.owner_google_oauth.OwnerGoogleOAuth.complete', fail)
+    app = create_app(db_path=str(flow.web.db), bot_token=TOKEN, web_settings=flow.web.auth.settings,
+                     web_mailer=flow.web.mailbox, web_clock=lambda: flow.web.now[0])
+    with caplog.at_level(logging.INFO), TestClient(app, base_url=ORIGIN) as client:
+        client.cookies.set(flow.oauth.cookie_name, 'private-cookie')
+        result = client.get('/web/auth/google/callback?state=private-state&code=private-provider-code',
+                            follow_redirects=False)
+        assert result.status_code == 500 and result.json() == {'ok': False, 'error': 'internal_error'}
+        assert result.headers['cache-control'] == 'no-store'
+        assert result.headers['referrer-policy'] == 'no-referrer'
+        # Exercise the actual installed Uvicorn filter with its argument layout.
+        logging.getLogger('uvicorn.access').info('%s - "%s %s HTTP/%s" %s',
+            'private-client-address', 'GET', '/web/auth/google/callback?code=private-provider-code', '1.1', 500)
+    assert 'web_oauth_failure type=RuntimeError' in caplog.text
+    captured = result.text + caplog.text
+    for secret in ('private-provider-code', 'private-cookie', 'synthetic-secret',
+                   'private-owner-identity', 'private-state', 'private-client-address'):
+        assert secret not in captured
+
+
 def test_google_configuration_is_default_off_and_requires_complete_secret_config(monkeypatch):
     from app.web_config import WebSettings
     for name, value in {'PWA_ENABLED':'true', 'PWA_ORIGIN':'https://pwa.example.test',
