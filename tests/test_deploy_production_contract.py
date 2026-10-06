@@ -138,9 +138,10 @@ python3() {
       if [[ "$FAULT" == docs ]]; then target="$OLD"; else target="$EXPECTED"; fi
       echo "PWA_DELIVERY_OK revision=$target source=$EXPECTED previous=$OLD" ;;
     *postgres_vps.py\ backup*) [[ "$FAULT" != pg_backup ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
-    *postgres_vps.py\ image-state*) if [[ "$FAULT" == pg_upgrade || "$FAULT" == pg_upgrade_failed ]]; then echo previous; else echo current; fi ;;
+    *postgres_vps.py\ image-state*) if [[ "$FAULT" == pg_upgrade* ]]; then echo previous; else echo current; fi ;;
     *postgres_vps.py\ stage-vector-image*) echo VECTOR_IMAGE_STAGED ;;
     *postgres_vps.py\ upgrade-vector-image*) [[ "$FAULT" != pg_upgrade_failed ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
+    *postgres_vps.py\ rehearse-user-recovery*) [[ "$FAULT" != pg_recovery && "$FAULT" != pg_upgrade_recovery ]] || return 2; echo /opt/psychology-quiz/.postgres/recovery-rehearsals/rehearsal-test/record.json ;;
     *postgres_vps.py\ verify*) [[ "$FAULT" != pg_preservation ]] ;;
     *runtime_exposure.py*) [[ "$FAULT" != exposure ]] ;;
     *) return 99 ;;
@@ -194,20 +195,20 @@ def test_deployment_loads_verified_image_before_backup_migration_and_checks_runn
     assert (tmp_path / ".env").read_text() == "BOT_TOKEN=synthetic\n"
 
 
-@pytest.mark.parametrize('fault', ['pg', 'pg_backup', 'pg_preservation'])
+@pytest.mark.parametrize('fault', ['pg', 'pg_backup', 'pg_preservation', 'pg_recovery'])
 def test_postgres_delivery_requires_native_restore_and_preservation(tmp_path, fault):
     result, log = run_deploy(tmp_path, fault)
     assert 'deployment_db.py backup' not in log
     assert 'postgres_vps.py backup' in log
     if fault == 'pg':
         assert result.returncode == 0, result.stdout + result.stderr
-        commands = ['stop psych_quiz_bot', 'postgres_vps.py backup', 'scripts/init_db.py', 'postgres_vps.py verify', 'up -d', 'deployment_http_smoke.py']
+        commands = ['stop psych_quiz_bot', 'postgres_vps.py backup', 'postgres_vps.py rehearse-user-recovery', 'scripts/init_db.py', 'postgres_vps.py verify', 'up -d', 'deployment_http_smoke.py']
         positions = [log.index(value) for value in commands]
         assert positions == sorted(positions)
     else:
         assert result.returncode != 0
         assert 'up -d' not in log and 'DEPLOY_OK' not in result.stdout
-        if fault == 'pg_backup': assert 'scripts/init_db.py' not in log
+        if fault in {'pg_backup', 'pg_recovery'}: assert 'scripts/init_db.py' not in log
 
 
 def test_pgvector_upgrade_stages_before_outage_and_rehearses_before_migration(tmp_path):
@@ -215,9 +216,20 @@ def test_pgvector_upgrade_stages_before_outage_and_rehearses_before_migration(tm
     assert result.returncode == 0, result.stdout + result.stderr
     commands = ['postgres_vps.py image-state', 'postgres_vps.py stage-vector-image',
                 'stop psych_quiz_bot', 'postgres_vps.py upgrade-vector-image',
-                'scripts/init_db.py', 'postgres_vps.py verify', 'up -d']
+                'postgres_vps.py rehearse-user-recovery', 'scripts/init_db.py', 'postgres_vps.py verify', 'up -d']
     assert [log.index(command) for command in commands] == sorted(log.index(command) for command in commands)
     assert 'postgres_vps.py backup' not in log
+
+
+@pytest.mark.parametrize('fault,restarts_original', [('pg_recovery', True), ('pg_upgrade_recovery', False)])
+def test_failed_user_recovery_prevents_live_migration_and_preserves_existing_recovery_rules(tmp_path, fault, restarts_original):
+    result, log = run_deploy(tmp_path, fault)
+    assert result.returncode != 0
+    assert 'postgres_vps.py rehearse-user-recovery' in log
+    assert 'scripts/init_db.py' not in log and 'scripts/seed_questions.py' not in log
+    assert 'up -d' not in log and 'pwa_cd.py publish' not in log
+    assert 'USER_RECOVERY_OK' not in result.stdout and 'DEPLOY_OK' not in result.stdout
+    assert ('start psych_quiz_bot psych_quiz_miniapp_api' in log) == restarts_original
 
 
 def test_failed_pgvector_upgrade_never_starts_application_or_reports_delivery(tmp_path):

@@ -868,10 +868,22 @@ content. Она не восстанавливает данные поверх pr
 не восстанавливается и пересобирается своей отдельной процедурой.
 
 Рабочий каталог — `/opt/psychology-quiz`, environment — root VPS operator с
-известным target и текущим candidate application image. До запуска требуется
+известным target и текущим candidate application image. Для отдельного ручного запуска требуется
 согласованное окно с остановленными обоими writers; процедура проверяет это,
 но не останавливает их сама. После процедуры writers остаются в исходном
 состоянии. Запуск не является обычным smoke check на работающем production.
+
+При штатной PostgreSQL stateful поставке, которая меняет schema/content,
+`deploy.sh` выполняет тот же rehearsal автоматически после verified backup,
+под inherited delivery lock и до изменения production schema/content.
+Используется уже существующее stopped-writer окно. Возвращённый owned record
+и `USER_RECOVERY_OK` подтверждают successful candidate-content rebuild и
+сохранность personal state в изолированной копии; запись остаётся приватной.
+При failure live migration, PWA publish и `DEPLOY_OK` не выполняются. Если DB
+ещё не менялась, существующий pre-migration recovery возвращает прежние
+containers; после начала image transition сохраняется прежний stop/reconcile
+flow. Новый автоматический restore production или переключение DB не добавлен.
+Non-migration runtime/docs updates дополнительный rehearsal не запускают.
 
 `EXPECTED_SHA` — проверенный текущий checkout/candidate image; `VERIFIED_RECORD`
 — обычный приватный `record.json` внутри `.postgres/backups/` с неизменённым
