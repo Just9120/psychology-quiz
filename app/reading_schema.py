@@ -12,14 +12,12 @@ import json
 from pathlib import Path
 
 from app.database import begin_write, is_postgres
+from app.reading_contract import FIELDS, VERSION
 
-VERSION = "reading-work-v1"
 TABLE = "user_literature_work_progress"
 SQL_PATH = Path(__file__).resolve().parent.parent / "sql" / "reading-work-v1.sql"
 STATUS_MAP = {"not_started": "not_started", "in_progress": "in_progress",
               "read": "read", "revisit": "deferred", "skipped": "deferred"}
-FIELDS = ("user_id", "work_id", "reading_status", "started_at", "completed_at",
-          "updated_at", "last_opened_at", "source_literature_id")
 COLUMNS = set(FIELDS)
 LEGACY_FIELDS = ("user_id", "literature_id", "reading_status", "progress_percent", "started_at",
                  "completed_at", "updated_at", "last_opened_at", "private_note", "remind_at")
