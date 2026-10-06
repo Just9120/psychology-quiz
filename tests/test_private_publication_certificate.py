@@ -43,6 +43,73 @@ def fixture_review():
     return public, dossier
 
 
+def test_private_dossier_review_is_key_independent_but_does_not_grant_publication():
+    public, dossier = fixture_review()
+    review = signer.validate_review_dossier("questions", public, dossier)
+    assert review == {"item_sha256": fingerprint(public), "review_sha256": fingerprint(dossier)}
+    assert "source_ref" not in review and "sources" not in review
+    # An unsigned validation result cannot bypass the existing publication gate.
+    key = Ed25519PrivateKey.generate()
+    policy = PublicationPolicy({}, {}, {}, certificates={"questions:synthetic_question": review},
+                               certificate_key=key.public_key())
+    assert policy.error("questions", public) == "invalid_publication_certificate"
+    with pytest.raises(SigningError, match="derivative_changed_since_review"):
+        signer.validate_review_dossier("questions", {**public, "explanation": "Changed claim"}, dossier)
+    key = Ed25519PrivateKey.generate()
+    certificate = sign_review("questions", public, dossier, key)
+    assert all(certificate[field] == value for field, value in review.items())
+
+
+@pytest.mark.parametrize("stale_source", [False, True])
+def test_review_only_cli_never_reads_key_and_requires_current_sources(tmp_path, monkeypatch, capsys, stale_source):
+    public, dossier = fixture_review()
+    root = tmp_path / "repo"
+    content = root / "content" / "questions"
+    content.mkdir(parents=True)
+    bank = content / "synthetic.json"
+    bank.write_text(json.dumps([public]), encoding="utf-8")
+    private = root / "data"
+    private.mkdir()
+    paths = []
+    for name, value in (("dossier", dossier), ("inventory", {"synthetic": "inventory"}),
+                        ("processed", {"synthetic": "processed"})):
+        path = private / (name + ".json")
+        path.write_text(json.dumps(value), encoding="utf-8")
+        paths.append(path)
+    output = private / "result.json"
+    before = bank.read_bytes()
+    calls = []
+    def verify(d, inventory, processed, **kwargs):
+        assert d == dossier and inventory == {"synthetic": "inventory"}
+        assert processed == {"synthetic": "processed"} and kwargs["public_item"] == public
+        calls.append("source-review")
+        if stale_source:
+            raise SigningError("source_revision_changed_since_review")
+    def key_forbidden(*args, **kwargs):
+        pytest.fail("Review-only must not touch a signing key")
+    monkeypatch.setattr(signer, "REPO_ROOT", root)
+    monkeypatch.setattr(signer, "private_path", lambda path, **kwargs: path)
+    monkeypatch.setattr(signer, "verify_current_sources", verify)
+    monkeypatch.setattr(signer, "private_signing_key", key_forbidden)
+    monkeypatch.setattr(signer.serialization, "load_pem_private_key", key_forbidden)
+    args = ["--review-only", "--kind", "questions", "--item-id", public["id"],
+            "--dossier", str(paths[0]), "--inventory", str(paths[1]), "--processed", str(paths[2]),
+            "--output", str(output)]
+    assert signer.main(args) == int(stale_source)
+    assert calls == ["source-review"] and bank.read_bytes() == before
+    if stale_source:
+        assert not output.exists()
+    else:
+        result = json.loads(output.read_text(encoding="utf-8"))
+        assert result["scope"] == "private_review_validation"
+        assert result["items"]["questions:" + public["id"]] == signer.validate_review_dossier("questions", public, dossier)
+        assert "signature" not in output.read_text(encoding="utf-8")
+        saved = output.read_bytes()
+        assert signer.main(args) == 1 and output.read_bytes() == saved
+    captured = capsys.readouterr()
+    assert "drive:fixture" not in captured.out + captured.err
+
+
 def test_signing_key_must_be_outside_checkout_in_owner_secret_directory(tmp_path, monkeypatch):
     secrets = tmp_path / "secrets" / "psychology-quiz"
     secrets.mkdir(parents=True)

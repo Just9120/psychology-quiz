@@ -92,6 +92,24 @@ Canonical validators из [README](../README.md#быстрый-старт-и-п�
 
 Для дисциплины литературы, встречающейся в нескольких модулях, [topic registry](../content/topics.json) может содержать `modules` — непустой список уникальных `module1`–`module6`, включающий прежнее поле `module`. Это поле сохраняет совместимость; каждая библиографическая association указывает свой подтверждённый модуль из списка. API отдаёт полный список модулей дисциплины. PWA/Mini App показывают её при выборе любого из них и фильтруют записи по модулю association; Telegram позволяет найти дисциплину из обоих модулей и открыть её общий список. Такие связи не дублируют work identity, reading marks или исходные файлы. Новый literature-only registry entry не добавляет вопросы без отдельного approved content.
 
+
+### Проверка приватного досье без ключа
+
+Из корня репозитория тот же `scripts/sign_private_publication.py` поддерживает
+`--review-only` вместо `--private-key`. Остальные обязательные inputs прежние:
+`--kind`, `--item-id`, `--dossier`, `--inventory`, `--processed`, `--output`,
+а private registry/topics передаются при их использовании.
+
+Этот режим запускает existing current-source/fragment/hold checks и общую
+`validate_review_dossier`: exact edition/fingerprint, source support, качество,
+неоднозначность/дубли и отсутствие private refs в public item. Ключ не читается.
+Новый ignored/private output имеет scope `private_review_validation` и только
+item/dossier digests (плюс уже проверенный topic binding, когда применим).
+Существующий output не перезаписывается; source mismatch запрещает запись.
+Результат не является publication certificate и runtime его не принимает.
+Действующий signed publication flow и формат ранее подписанных items сохранены;
+изменение обязательности подписи остаётся отдельным решением F-112.
+
 ## Содержательный review учебного банка
 
 [Learning quality ledger](../content/learning-quality-reviews.json) и подписанные приватные досье фиксируют review смысла, ключа/определения, объяснения/примера, неоднозначности, повторов и источников на точном fingerprint item. Актуальные количества опубликованных вопросов и терминов выводят canonical validators; числа прежних локальных срезов не являются текущим состоянием. Primary fragments связаны с revision/fingerprint из source registry и locator; `partial`/`disputed` сохраняют причины ограничения. Discipline summaries описывают смысловые повторы; они не дают основания автоматически удалять IDs или историю.
