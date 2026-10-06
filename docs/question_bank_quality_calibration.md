@@ -28,4 +28,4 @@ The parity audit now separates blocking and informational rows:
 
 ## Safe rollout
 
-Use `docs/question_bank_content_rollout.md` before replacing content in a database with unfinished sessions. The key safety point is to snapshot the database, run read-only audits, dry-run the in-progress session closure, explicitly apply it only if acceptable, reseed content, rerun parity, and smoke-test a new quiz. Unfinished-session closure is never automatic.
+Current updates follow [content rollout](question_bank_content_rollout.md) and the [deployment procedure](miniapp-deployment-qa.md). Captured attempt snapshots preserve the presented edition; stopping unfinished sessions is not a normal content-update step. Native backup/isolated restore, user-state preservation and serving parity apply to the validated candidate. The earlier closure recommendation belonged to the pre-snapshot implementation and does not authorize abandoning current attempts.
