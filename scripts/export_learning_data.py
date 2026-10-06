@@ -37,6 +37,10 @@ def main(argv=None):
             actor = conn.execute("SELECT id FROM users WHERE telegram_user_id=?", (args.telegram_user_id,)).fetchone()
             if actor is None:
                 raise ValueError("unknown_actor")
+            # PostgreSQL starts a transaction for this read. The exporter owns
+            # a separate read-only snapshot and rechecks the Telegram identity
+            # inside it before writing any personal data to the private file.
+            conn.rollback()
             output = os.fdopen(os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w", encoding="utf-8")
             with output:
                 write_learning_copy(conn, int(actor[0]), output, expected_telegram_user_id=args.telegram_user_id)
