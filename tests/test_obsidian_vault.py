@@ -1,6 +1,8 @@
 """Private Vault export preserves owner files and rejects stale sources."""
 import hashlib
+import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -178,3 +180,55 @@ def test_bibliography_and_unclassified_capture_are_not_knowledge_sources():
     processing[SOURCE].pop("source_kind_review")
     with pytest.raises(VaultError, match="learning_source_required"):
         render({"schema_version": 1, "notes": [note()]}, inventory, processing)
+
+
+@pytest.mark.parametrize("metadata,allowed", [
+    ({"private": True, "archived": False, "permissions": {"push": True}}, True),
+    ({"private": False, "archived": False, "permissions": {"push": True}}, False),
+    ({"private": True, "archived": True, "permissions": {"push": True}}, False),
+    ({"private": True, "archived": False, "permissions": {"push": False}}, False),
+])
+def test_unified_repository_export_requires_authenticated_private_target(tmp_path, monkeypatch, metadata, allowed):
+    from scripts import obsidian_vault as vault_module
+    monkeypatch.setattr(vault_module, "ROOT", tmp_path)
+    monkeypatch.setattr(vault_module, "_git_common_directory", lambda _: tmp_path)
+    vault = tmp_path / "vault"
+    vault.mkdir()
+    personal = vault / "personal.md"
+    personal.write_text("Мои заметки.", encoding="utf-8")
+    calls = []
+    def run(command, **kwargs):
+        calls.append(command)
+        if command[0] == "git":
+            return SimpleNamespace(stdout="https://github.com/Just9120/psychology-quiz.git\n")
+        assert command == ["gh", "api", "--hostname", "github.com", "repos/Just9120/psychology-quiz"]
+        return SimpleNamespace(stdout=json.dumps({"full_name": "Just9120/psychology-quiz", **metadata}))
+    monkeypatch.setattr(vault_module.subprocess, "run", run)
+    files = {"index.md": b"# Private index\n"}
+    if allowed:
+        write_vault(vault, files, repository_vault=True)
+        assert (vault / "generated/index.md").read_bytes() == files["index.md"]
+    else:
+        with pytest.raises(VaultError, match="private_repository_required"):
+            write_vault(vault, files, repository_vault=True)
+        assert not (vault / "generated").exists()
+    assert personal.read_text(encoding="utf-8") == "Мои заметки."
+    assert len(calls) == 2
+
+
+def test_unified_vault_refuses_unknown_visibility_and_other_destinations(tmp_path, monkeypatch):
+    from scripts import obsidian_vault as vault_module
+    monkeypatch.setattr(vault_module, "ROOT", tmp_path)
+    monkeypatch.setattr(vault_module, "_git_common_directory", lambda _: tmp_path)
+    vault = tmp_path / "vault"
+    vault.mkdir()
+    def unavailable(command, **kwargs):
+        raise FileNotFoundError("synthetic unavailable gh")
+    monkeypatch.setattr(vault_module.subprocess, "run", unavailable)
+    with pytest.raises(VaultError, match="private_repository_verification_unavailable"):
+        write_vault(vault, {"index.md": b"# Private\n"}, repository_vault=True)
+    other = tmp_path / "other"
+    other.mkdir()
+    with pytest.raises(VaultError, match="repository_vault_path_required"):
+        write_vault(other, {"index.md": b"# Private\n"}, repository_vault=True)
+    assert not (vault / "generated").exists() and not (other / "generated").exists()

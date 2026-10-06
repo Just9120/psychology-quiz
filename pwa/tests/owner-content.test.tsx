@@ -4,6 +4,17 @@ import { expect, it, vi } from 'vitest'
 import { OwnerContentView } from '../src/OwnerContentView'
 import type { OwnerContent } from '../src/types'
 
+it('distinguishes compilation time of saved inputs from a live Drive observation', () => {
+  const data: OwnerContent = { ok: true, topics: [], unmapped_questions: 0, sources: {
+    state: 'PARTIAL', observation_basis: 'saved_inputs', captured_at: '2026-10-06T12:00:00Z',
+    files: 1, folders: 1, processing_records: 1, known_holds: 0, processing: { processed: 1 },
+  } }
+  render(<OwnerContentView data={data} busy={false} onRefresh={() => {}} />)
+  expect(screen.getByText(/Сводка сохранённых данных: 2026-10-06/)).toBeVisible()
+  expect(screen.getByText(/Актуальность папки Google Drive этим расчётом не проверялась/)).toBeVisible()
+  expect(screen.queryByText(/^Снимок:/)).not.toBeInTheDocument()
+})
+
 it('distinguishes unknown coverage from empty kinds and filters modules without inventing notes', async () => {
   const topic = { id: 'one', title: 'Первая тема', module: 'module1', questions: 1, kinds: { theory: 0, glossary: 0, case: 1 }, glossary_terms: null, literature_works: 1, notes_state: 'UNSET' as const, notes: null, gaps: ['theory', 'glossary'] }
   const data: OwnerContent = { ok: true, topics: [topic, { ...topic, id: 'two', title: 'Вторая тема', module: 'module2' }], sources: { state: 'UNSET' }, unmapped_questions: 2 }

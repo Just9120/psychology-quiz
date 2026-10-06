@@ -1,7 +1,7 @@
-"""Render reviewed private notes into a separate owner-only Obsidian Vault.
+"""Render reviewed private notes into an owner-only Obsidian Vault.
 
-This command does not contact Drive or GitHub and never writes into this repo.
-Content review and private repository access remain separate operator gates.
+This command never contacts Drive. Repository output requires an authenticated
+GitHub visibility check; local staging remains outside the application repo.
 """
 from __future__ import annotations
 
@@ -202,16 +202,42 @@ def _remove_owned_directory(path: Path, target: Path) -> None:
     shutil.rmtree(path)
 
 
-def write_vault(vault: Path, files: dict[str, bytes]) -> dict:
+def _verify_repository_vault(target: Path) -> None:
+    """Allow only this project's vault after GitHub confirms it is private."""
+    if target != ROOT.resolve() / "vault":
+        raise VaultError("repository_vault_path_required")
+    try:
+        remote = subprocess.run(["git", "config", "--get", "remote.origin.url"], cwd=ROOT,
+                                capture_output=True, text=True, timeout=10, check=True).stdout.strip()
+        if remote not in {"https://github.com/Just9120/psychology-quiz.git",
+                          "https://github.com/Just9120/psychology-quiz",
+                          "git@github.com:Just9120/psychology-quiz.git"}:
+            raise VaultError("repository_identity_mismatch")
+        response = subprocess.run(["gh", "api", "--hostname", "github.com", "repos/Just9120/psychology-quiz"], cwd=ROOT,
+                                  capture_output=True, text=True, timeout=15, check=True)
+        metadata = json.loads(response.stdout)
+        if (metadata.get("full_name") != "Just9120/psychology-quiz"
+                or metadata.get("private") is not True or metadata.get("archived") is not False
+                or metadata.get("permissions", {}).get("push") is not True):
+            raise VaultError("private_repository_required")
+    except (OSError, subprocess.SubprocessError, ValueError, AttributeError) as error:
+        if isinstance(error, VaultError):
+            raise
+        raise VaultError("private_repository_verification_unavailable") from None
+
+
+def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool = False) -> dict:
     if (not isinstance(files, dict) or "index.md" not in files
             or any(not isinstance(content, bytes) or not content for content in files.values())):
         raise VaultError("generated_files_required")
     files = dict(files)
     target = vault.resolve(strict=True)
-    if target.is_relative_to(ROOT) or not target.is_dir() or vault.is_symlink():
+    if not target.is_dir() or vault.is_symlink():
         raise VaultError("separate_private_vault_required")
     repository = _git_common_directory(ROOT)
-    if repository is not None and _git_common_directory(target) == repository:
+    if repository_vault:
+        _verify_repository_vault(target)
+    elif target.is_relative_to(ROOT) or (repository is not None and _git_common_directory(target) == repository):
         raise VaultError("separate_private_vault_required")
     generated = target / GENERATED
     if generated.is_symlink():
@@ -281,11 +307,13 @@ def main() -> None:
     parser.add_argument("--inventory", type=Path, required=True)
     parser.add_argument("--processing", type=Path, required=True)
     parser.add_argument("--vault", type=Path, required=True)
+    parser.add_argument("--repository-vault", action="store_true",
+                        help="Write to this project's vault/ only after authenticated private visibility verification")
     args = parser.parse_args()
     try:
         files = render(_private_input(args.manifest), _private_input(args.inventory),
                        _private_input(args.processing))
-        print(json.dumps(write_vault(args.vault, files), sort_keys=True))
+        print(json.dumps(write_vault(args.vault, files, repository_vault=args.repository_vault), sort_keys=True))
     except (OSError, VaultError, json.JSONDecodeError) as error:
         raise SystemExit(f"VAULT_STOP: {type(error).__name__}; private details withheld") from None
 

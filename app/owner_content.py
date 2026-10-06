@@ -111,6 +111,10 @@ def source_summary():
             raise ValueError("invalid_snapshot")
         # Return an explicit allowlist, never arbitrary JSON supplied by an operator.
         result = {key: raw[key] for key in ("state", "captured_at", "files", "folders", "processing", "processing_records", "known_holds")}
+        if "observation_basis" in raw:
+            if raw["observation_basis"] != "saved_inputs":
+                raise ValueError("invalid_snapshot")
+            result["observation_basis"] = "saved_inputs"
         if "coverage" in raw:
             result["coverage"] = _coverage(raw["coverage"])
         return result

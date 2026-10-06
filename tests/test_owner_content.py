@@ -12,6 +12,24 @@ from tests.test_web_auth import web, post, register, login
 from tests.test_attempt_content import bank
 
 
+def test_saved_input_summary_is_explicit_and_cannot_smuggle_private_observation_text(tmp_path, monkeypatch):
+    current = {"schema_version": 1, "root_id": "private-root", "folders": {"private-root": [{
+        "page_token": None, "next_page_token": None,
+        "children": [{"id": "private-id", "title": "Private", "mime_type": "text/plain",
+                      "modified_time": "2026-01-01T00:00:00Z", "file_or_folder": "file", "parent_ids": ["private-root"]}],
+    }]}}
+    value = build(current, {}, "2026-01-02T00:00:00Z", saved_inputs=True)
+    path = tmp_path / "summary.json"
+    monkeypatch.setenv("OWNER_SOURCE_SUMMARY_PATH", str(path))
+    path.write_text(json.dumps(value), encoding="utf-8")
+    returned = owner_content.source_summary()
+    assert returned["state"] == "PARTIAL" and returned["observation_basis"] == "saved_inputs"
+    assert "private-id" not in json.dumps(returned) and "Private" not in json.dumps(returned)
+    value["observation_basis"] = "private-source-locator"
+    path.write_text(json.dumps(value), encoding="utf-8")
+    assert owner_content.source_summary() == {"state": "UNSET", "reason": "source_snapshot_invalid"}
+
+
 def test_owner_content_requires_session_csrf_and_does_not_return_source_ids(web, monkeypatch, tmp_path):
     monkeypatch.setenv("OWNER_SOURCE_SUMMARY_PATH", str(tmp_path / "absent.json"))
     assert post(web, "owner/content").status_code == 401
