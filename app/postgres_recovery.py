@@ -5,10 +5,10 @@ import hashlib
 import json
 import re
 from urllib.parse import urlsplit, urlunsplit
+from typing import TYPE_CHECKING
 
-from app.database import Connection, is_postgres_target
-from app.postgres_import import projection, target_sequences
-from app.postgres_schema import TABLES, table_columns, verify_schema
+if TYPE_CHECKING:
+    from app.database import Connection
 
 RESTORE_NAME = re.compile(r"psychology_restore_[0-9a-f]{32}")
 # Content can be rebuilt from approved repository inputs. Every other table
@@ -19,12 +19,17 @@ REBUILDABLE_TABLES = frozenset({
 
 
 def recovery_target(target: str, database: str) -> str:
-    if not is_postgres_target(target) or RESTORE_NAME.fullmatch(database) is None:
+    if (not str(target).lower().startswith(("postgresql://", "postgres://"))
+            or RESTORE_NAME.fullmatch(database) is None):
         raise ValueError("Owned isolated restore database required")
     return urlunsplit(urlsplit(target)._replace(path="/" + database))
 
 
 def manifest(conn: Connection) -> dict:
+    # Database access runs inside the pinned application image, not on the host.
+    from app.postgres_import import projection, target_sequences
+    from app.postgres_schema import TABLES, table_columns, verify_schema
+
     verify_schema(conn, allow_legacy=True)
     columns = {name: values for name, values in table_columns(conn).items() if name in TABLES}
     storage = list(conn.execute("SELECT * FROM postgres_storage WHERE singleton=1").fetchone())
@@ -73,7 +78,7 @@ def verify_user_state(before: dict, after: dict) -> None:
             raise ValueError("PostgreSQL migration changed a user identity sequence")
     for table in sorted(after_columns.keys() - before_columns.keys() - REBUILDABLE_TABLES):
         if table == "user_literature_work_progress":
-            from app.reading_schema import FIELDS, VERSION as READING_VERSION
+            from app.reading_contract import FIELDS, VERSION as READING_VERSION
             proof = before.get("reading_work_migration")
             if ("user_literature_progress" not in before_columns
                     or not isinstance(proof, dict) or proof.get("version") != READING_VERSION

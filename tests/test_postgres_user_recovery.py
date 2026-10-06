@@ -141,3 +141,52 @@ def test_recovery_refuses_unknown_output_object_without_touching_it(tmp_path):
     with pytest.raises(ValueError, match='Private owned recovery directory'):
         rehearse_user_recovery(runtime, backup, output)
     assert output.read_bytes() == b'owner state' and not runtime.owned
+
+
+def test_vps_recovery_helpers_work_without_installed_application_dependencies():
+    """The VPS operator uses system Python; DB drivers belong to the image."""
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    program = r"""
+from copy import deepcopy
+import sys
+from scripts.postgres_backup import rehearse_user_recovery
+from scripts.postgres_vps import Runtime
+from app.postgres_recovery import recovery_target, verify_user_state
+from app.reading_contract import FIELDS, VERSION
+before = {'format': 'psychology-postgres-backup-v1',
+          'columns': {'users': ['id'], 'user_literature_progress': ['id']},
+          'tables': {'users': {'rows': 1, 'sha256': 'preserved'},
+                     'user_literature_progress': {'rows': 1, 'sha256': 'legacy'}},
+          'sequences': {'users': 1},
+          'reading_work_migration': {'version': VERSION, 'columns': list(FIELDS),
+               'projection': {'rows': 1, 'sha256': 'a' * 64},
+               'catalog_sha256': 'b' * 64}}
+after = deepcopy(before)
+after['columns']['user_literature_work_progress'] = list(FIELDS)
+after['tables']['user_literature_work_progress'] = before['reading_work_migration']['projection']
+after['reading_work_catalog_sha256'] = 'b' * 64
+verify_user_state(before, after)
+after['tables']['users']['sha256'] = 'changed'
+try:
+    verify_user_state(before, after)
+except ValueError:
+    pass
+else:
+    raise AssertionError('Lost user state accepted')
+name = 'psychology_restore_' + 'a' * 32
+assert recovery_target('postgresql://actor:synthetic@postgres/production', name).endswith('/' + name)
+try:
+    recovery_target('postgresql://actor:synthetic@postgres/production', 'production')
+except ValueError:
+    pass
+else:
+    raise AssertionError('Production accepted as restore target')
+assert 'psycopg' not in sys.modules
+"""
+    result = subprocess.run([sys.executable, '-S', '-c', program],
+                            cwd=Path(__file__).resolve().parents[1],
+                            capture_output=True, text=True, timeout=15)
+    assert result.returncode == 0, result.stderr
