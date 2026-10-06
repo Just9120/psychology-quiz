@@ -15,6 +15,9 @@ def test_learning_copy_postgres_consistent_scope(pg_target):
         initialize_schema(conn)
         conn.execute("INSERT INTO users(id,telegram_user_id) VALUES(1,101),(2,202)")
         conn.execute("INSERT INTO quiz_sessions(id,user_id) VALUES(11,1),(22,2)")
+        conn.execute("INSERT INTO web_accounts(id,email,user_id,password_hash,verified_at,created_at) VALUES(10,'mine@example.test',1,'secret-hash',100,100),(20,'other-private@example.test',2,'other-hash',100,100)")
+        conn.execute("INSERT INTO web_profile_names(account_id,display_name) VALUES(10,'My display name'),(20,'Other display name')")
+        conn.execute("INSERT INTO web_google_identities(subject,account_id,created_at) VALUES('my-google-subject',10,100),('other-google-subject',20,100)")
     with closing(get_connection(pg_target)) as conn:
         output = StringIO()
         counts = write_learning_copy(conn, 1, output)
@@ -24,6 +27,14 @@ def test_learning_copy_postgres_consistent_scope(pg_target):
         assert [row["id"] for row in result["tables"]["quiz_sessions"]] == [11]
         assert result["tables"]["quiz_answers"] == []
         assert not conn.in_transaction
+        profile = StringIO()
+        write_learning_copy(conn, 1, profile, expected_telegram_user_id=101, include_identity=True)
+        copied = json.loads(profile.getvalue())
+        assert copied['complete'] is True and copied['scope'] == 'profile_and_learning_data_copy'
+        assert copied['tables']['web_accounts'][0]['email'] == 'mine@example.test'
+        assert copied['tables']['web_profile_names'][0]['display_name'] == 'My display name'
+        assert copied['tables']['web_google_identities'][0]['subject'] == 'my-google-subject'
+        assert not any(marker in profile.getvalue() for marker in ('other-', 'secret-hash', 'password_hash'))
         assert conn.execute("SELECT count(*) FROM quiz_sessions").fetchone()[0] == 2
         assert conn.execute("SELECT count(*) FROM users").fetchone()[0] == 2
 

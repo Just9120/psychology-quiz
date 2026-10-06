@@ -49,24 +49,34 @@ Telegram identity сохраняется для продолжения испо�
 ## Копия учебных данных по обращению
 
 В рамках E16 подготовлен [операторский exporter](../scripts/export_learning_data.py).
-Это выгрузка учебных строк одного подтверждённого Telegram actor, не полная копия
-всех персональных данных платформы. Identity, e-mail/password hashes, sessions,
-mail/link/deletion tokens, общие content snapshots, приватные источники и
-инфраструктурные logs/backups в неё не входят. Сохранённые ответы глоссария,
-попытки, повторения, цели, достижения и личные отметки книг входят.
+Это выгрузка данных одного подтверждённого Telegram actor, не полная копия
+всех персональных данных платформы. По умолчанию выгружаются только учебные строки:
+ответы глоссария, попытки, повторения, цели, достижения и личные отметки книг.
+Явный флаг `--include-identity` добавляет сохранённые Telegram ID/имя/username,
+режим чтения и даты, а также принадлежащие этому actor e-mail, состояние связанного
+PWA account, display name и Google subject с датой привязки. Поля выбираются
+по allowlist; password hashes, sessions, mail/link/deletion/OAuth challenges,
+общие content snapshots, приватные источники и инфраструктурные logs/backups
+не выгружаются. Эти исключения обозначены в metadata копии.
 
 Перед запуском оператор должен подтвердить, что обращение принадлежит этому
 Telegram user ID. Username, подпись в письме или присланный чужой ID сами по себе
 не подтверждают личность. Флаг `--verified-request` фиксирует выполненный оператором
 шаг; script не делает эту проверку и не отправляет файл. Автоматической доставки
-и публичного API выбора actor нет. Порядок проверки личности и выдачи полного
-owner/identity export остаётся UNSET.
+и публичного API выбора actor нет. Порядок проверки личности и передачи копии
+остаётся UNSET; подготовленный exporter сам эти процедуры не заменяет.
 
 Canonical команда из root, с действующим DATABASE_URL/DB_PATH:
 ```bash
 python scripts/export_learning_data.py --telegram-user-id "$VERIFIED_TELEGRAM_USER_ID" \
   --verified-request --output data/learning-copy-request.json
 ```
+
+Для запроса, включающего сохранённые сведения пользователя, к той же команде
+добавляется `--include-identity`. Это требует текущей инициализированной auth schema;
+при несовместимой schema операция прекращается, неполный файл не доставляется.
+Результат имеет scope `profile_and_learning_data_copy` и schema_version 2;
+прежний учебный формат версии 1 сохраняется без этого флага.
 
 Output допускается только как новый ignored `data/*.json`, создаётся с mode 0600;
 права и ACL Windows дополнительно контролирует оператор. База открывается read-only,

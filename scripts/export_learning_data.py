@@ -24,6 +24,8 @@ def main(argv=None):
     parser.add_argument("--verified-request", action="store_true", required=True,
                         help="Operator has already verified the requesting identity")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--include-identity", action="store_true",
+                        help="Also copy this actor's saved profile and linked account identifiers; never credentials")
     args = parser.parse_args(argv)
     output = None
     try:
@@ -43,7 +45,9 @@ def main(argv=None):
             conn.rollback()
             output = os.fdopen(os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w", encoding="utf-8")
             with output:
-                write_learning_copy(conn, int(actor[0]), output, expected_telegram_user_id=args.telegram_user_id)
+                write_learning_copy(conn, int(actor[0]), output,
+                                    expected_telegram_user_id=args.telegram_user_id,
+                                    include_identity=args.include_identity)
                 output.flush()
                 os.fsync(output.fileno())
     except Exception as error:
@@ -51,7 +55,8 @@ def main(argv=None):
         print("LEARNING_COPY_STOP type=" + type(error).__name__ +
               ("; incomplete output must not be delivered" if output is not None else ""), file=sys.stderr)
         return 1
-    print("LEARNING_COPY_CREATED; identity/authentication storage and backups excluded; delivery not performed")
+    exclusions = "credentials/authentication state and backups" if args.include_identity else "identity/authentication storage and backups"
+    print("LEARNING_COPY_CREATED; " + exclusions + " excluded; delivery not performed")
     return 0
 
 
