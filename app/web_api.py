@@ -2,6 +2,7 @@
 import asyncio
 import json
 import logging
+from html import escape
 from app.request_body import RequestBodyTooLarge, read_request_body
 from app.database import OPERATIONAL_ERRORS, begin_write
 from app import glossary_service, learning_reset, progress_service, literature_service, repetition, learning_goals, achievements, homework
@@ -9,7 +10,7 @@ from app.mastery import overview as mastery_overview
 from urllib.parse import unquote
 
 from fastapi import Request
-from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
 from app.payload_validation import is_sqlite_integer
 from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_setup_options, quiz_state, start_confirmed_quiz
@@ -191,6 +192,20 @@ def install_web_api(app, auth: WebAuth) -> None:
 
     google = OwnerGoogleOAuth(auth)
 
+    def google_failure(status):
+        # Fixed copy and configured same-origin link: never render provider
+        # errors, query parameters, credentials or exception messages.
+        home = escape(auth.settings.origin + "/", quote=True)
+        return HTMLResponse(
+            '<!doctype html><html lang="ru"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<title>Вход через Google — PsychologyAtlas</title></head><body><main>'
+            '<h1>Не удалось войти через Google</h1>'
+            '<p>Вернитесь в приложение и попробуйте ещё раз. '
+            'Вы также можете войти с помощью пароля.</p>'
+            f'<p><a href="{home}">Вернуться в приложение</a></p>'
+            '</main></body></html>', status_code=status)
+
     @app.get("/web/auth/google/callback")
     async def google_callback(request: Request):
         try:
@@ -204,12 +219,12 @@ def install_web_api(app, auth: WebAuth) -> None:
                 response.set_cookie(auth.settings.cookie_name, cookie, max_age=SESSION_TTL,
                     secure=auth.settings.secure_cookie, httponly=True, samesite="strict", path="/")
         except AuthError as exc:
-            response = JSONResponse({"ok": False, "error": exc.code}, status_code=exc.status)
+            response = google_failure(exc.status)
         except OPERATIONAL_ERRORS:
-            response = JSONResponse({"ok": False, "error": "database_unavailable"}, status_code=503)
+            response = google_failure(503)
         except Exception as exc:
             logger.error("web_oauth_failure type=%s", type(exc).__name__)
-            response = JSONResponse({"ok": False, "error": "internal_error"}, status_code=500)
+            response = google_failure(500)
         response.delete_cookie(google.cookie_name, path="/", secure=auth.settings.secure_cookie, httponly=True, samesite="lax")
         response.headers.update({"Cache-Control": "no-store", "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"})
         return response

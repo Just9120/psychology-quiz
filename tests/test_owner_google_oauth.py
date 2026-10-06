@@ -130,6 +130,13 @@ def test_google_api_callback_is_browser_bound_and_leaves_actor_unchanged(flow, m
         assert after['google_linked'] is True
         replay = client.get('/web/auth/google/callback', params={'state': state, 'code': 'synthetic'})
         assert replay.status_code == 401 and 'synthetic' not in replay.text
+        assert replay.headers['content-type'].startswith('text/html')
+        assert 'Не удалось войти через Google' in replay.text
+        assert f'href="{ORIGIN}/"' in replay.text
+        assert 'invalid_oauth_state' not in replay.text
+        cancelled = client.get('/web/auth/google/callback', params={'error': 'access_denied'}, follow_redirects=False)
+        assert cancelled.status_code == 401 and 'access_denied' not in cancelled.text
+        assert 'Не удалось войти через Google' in cancelled.text
         assert client.post('/web/auth/google/unlink', json={}, headers={'Origin': ORIGIN}).status_code == 403
         assert client.post('/web/auth/google/unlink', json={}, headers={'Origin': ORIGIN, 'X-CSRF-Token': after['csrf_token']}).status_code == 200
         assert client.get('/web/auth/google/available').json()['available'] is False
@@ -153,7 +160,10 @@ def test_google_callback_failure_keeps_credentials_out_of_response_and_logs(flow
         client.cookies.set(flow.oauth.cookie_name, 'private-cookie')
         result = client.get('/web/auth/google/callback?state=private-state&code=private-provider-code',
                             follow_redirects=False)
-        assert result.status_code == 500 and result.json() == {'ok': False, 'error': 'internal_error'}
+        assert result.status_code == 500 and result.headers['content-type'].startswith('text/html')
+        assert 'Не удалось войти через Google' in result.text
+        assert f'href="{ORIGIN}/"' in result.text
+        assert 'internal_error' not in result.text
         assert result.headers['cache-control'] == 'no-store'
         assert result.headers['referrer-policy'] == 'no-referrer'
         # Exercise the actual installed Uvicorn filter with its argument layout.
