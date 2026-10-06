@@ -82,9 +82,9 @@ def test_source_snapshot_is_partial_allowlisted_and_rejects_inconsistent_totals(
 def test_topic_coverage_distinguishes_empty_kinds_unknown_notes_and_deduplicated_books(monkeypatch):
     import sqlite3
     conn = sqlite3.connect(":memory:")
-    conn.executescript("""CREATE TABLE categories(id INTEGER,slug TEXT);
+    conn.executescript("""CREATE TABLE categories(id INTEGER,slug TEXT,name TEXT);
         CREATE TABLE questions(category_id INTEGER,kind TEXT,status TEXT);
-        INSERT INTO categories VALUES(1,'one'),(2,'outside');
+        INSERT INTO categories VALUES(1,'imported-category-slug','One'),(2,'outside','one');
         INSERT INTO questions VALUES(1,'case','approved'),(1,'theory','draft'),(2,'theory','approved');""")
     monkeypatch.setattr(owner_content, "load_topic_registry", lambda: {"one": {"title": "One", "module": "module1", "order": 1}})
     monkeypatch.setattr(owner_content, "load_glossary_entries", lambda topic: None)
@@ -360,3 +360,35 @@ def test_unreleased_lesson_summary_is_numeric_and_rejects_private_fields(monkeyp
     with pytest.raises(Exception, match="invalid_public_topics"):
         build(current, held, "2026-09-30T00:00:00Z", registry=registry,
               curriculum=curriculum, published_items=[], public_topic_ids={"missing"})
+
+
+def test_release_bundles_safe_summary_without_operator_file(monkeypatch):
+    monkeypatch.delenv("OWNER_SOURCE_SUMMARY_PATH", raising=False)
+    path = owner_content.ROOT / "content" / "owner-source-summary.json"
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    result = owner_content.source_summary()
+    assert result["state"] == "PARTIAL" and result["observation_basis"] == "saved_inputs"
+    assert result["files"] == sum(result["processing"].values()) > 0
+    assert set(raw) == {"schema_version", "state", "captured_at", "files", "folders",
+                        "processing", "processing_records", "known_holds",
+                        "observation_basis", "coverage"}
+    coverage = raw["coverage"]
+    assert set(coverage) <= {"tracked_sources", "untracked_files", "source_metadata",
+                             "lessons", "unreleased_lessons", "prepared_notes_unmapped",
+                             "unmapped_published_glossary", "unmapped_published_questions"}
+    for lesson in coverage["lessons"]:
+        assert set(lesson) == {"id", "kinds", "source_metadata_current", "processing_state",
+                               "known_hold", "glossary_terms", "notes", "notes_state"}
+    # Runtime validates nested counts and public topic identifiers; the release
+    # file cannot carry private prose, source locators or operator identities.
+    expected = {key: raw[key] for key in raw if key != "schema_version"}
+    expected["coverage"] = owner_content._coverage(coverage)
+    assert result == expected
+
+
+def test_explicit_operator_path_never_falls_back_to_release_summary(tmp_path, monkeypatch):
+    path = tmp_path / "operator.json"
+    monkeypatch.setenv("OWNER_SOURCE_SUMMARY_PATH", str(path))
+    assert owner_content.source_summary() == {"state": "UNSET", "reason": "source_snapshot_not_installed"}
+    path.write_text("{}", encoding="utf-8")
+    assert owner_content.source_summary() == {"state": "UNSET", "reason": "source_snapshot_invalid"}
