@@ -47,6 +47,9 @@ export function AccountView({ account, busy, run, onAccount, onLearn, onReset }:
       <hr /><p>{account.needs_identity ? 'Выберите, с каким прогрессом продолжить обучение.' : account.telegram_linked ? 'Прогресс связан с вашим Telegram-аккаунтом.' : 'Самостоятельный аккаунт с отдельным прогрессом.'}</p>
       <button className="button secondary" disabled={busy} onClick={onLearn}>К обучению<Icon name="arrow" /></button>
     </div>
+    {account.google_available && <div className="panel"><h2>Вход через Google</h2><p className="muted">{account.google_linked ? 'Google подключён к этому аккаунту. Пароль продолжает работать.' : 'Подключите свой Google-аккаунт для входа с тем же учебным прогрессом.'}</p>
+      <button className="button secondary" disabled={busy} onClick={() => void run(async () => { if (account.google_linked) { await api.googleUnlink(); await refresh() } else { const result = await api.googleBegin('link'); window.location.assign(result.url) } })}>{account.google_linked ? 'Отключить Google' : 'Подключить Google'}</button>
+    </div>}
     <div className="panel"><h2>Настройки учебного прогресса</h2><p className="muted">Можно сбросить результаты отдельной темы или всех тестов. Аккаунт и литература сохраняются.</p><button className="button secondary warning-text" disabled={busy || account.needs_identity} onClick={onReset}>Настроить сброс</button></div>
   </section>
 }

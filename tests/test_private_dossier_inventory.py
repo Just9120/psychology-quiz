@@ -58,3 +58,32 @@ def test_changed_proof_item_signature_or_duplicate_cannot_restore_edges(tmp_path
     assert policy.can_publish("literature", item)
     with pytest.raises(InventoryError, match="not_current"):
         private_dossier_reviews(root, document, policy=policy)
+
+
+def test_legacy_allowlist_cannot_authenticate_a_damaged_unsigned_review(tmp_path):
+    root, document, signed = signed_document(tmp_path)
+    item = json.loads((root / "content/literature/discipline.json").read_text())[0]
+    receipt = {
+        "schema_version": 1, "item_sha256": fingerprint(item),
+        "review_sha256": fingerprint(document["dossiers"][0]),
+        "decision": "approved", "purpose": "bibliographic_metadata",
+        "reviewer": "private-review", "reviewed_at": "2026-10-06",
+        "checks": ["sources"], "source_support": "supported",
+    }
+    policy = PublicationPolicy({"literature:book": fingerprint(item)}, {}, {},
+                               receipts={"literature:book": receipt})
+    assert private_dossier_reviews(root, document, policy=policy)[0]["literature:book"]
+    receipt["checks"] = []
+    assert policy.can_publish("literature", item)  # Unchanged legacy publication survives.
+    with pytest.raises(InventoryError, match="not_current"):
+        private_dossier_reviews(root, document, policy=policy)
+    # A receipt also cannot rescue an existing invalid signature on a legacy item.
+    receipt["checks"] = ["sources"]
+    signed.legacy["literature:book"] = fingerprint(item)
+    signed.certificates["literature:book"]["signature"] = "invalid"
+    both = PublicationPolicy(signed.legacy, {}, {}, certificates=signed.certificates,
+                             certificate_key=signed.certificate_key,
+                             receipts={"literature:book": receipt})
+    assert both.can_publish("literature", item)
+    with pytest.raises(InventoryError, match="not_current"):
+        private_dossier_reviews(root, document, policy=both)

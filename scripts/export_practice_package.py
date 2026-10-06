@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 from app.practice_packages import load_case_package
 
 
-def export(case_id: str, output: Path) -> dict:
+def export(case_id: str, output: Path, *, mode: str = "text") -> dict:
     data = ROOT / "data"
     if data.is_symlink():
         raise ValueError("private_output_required")
@@ -20,7 +20,7 @@ def export(case_id: str, output: Path) -> dict:
     if (output.is_symlink() or output.exists()
             or output.resolve(strict=False).parent != data.resolve(strict=True)):
         raise ValueError("new_private_output_required")
-    package = load_case_package(case_id)
+    package = load_case_package(case_id, mode=mode)
     output.mkdir(mode=0o700)
     documents = {"session.json": package, "client-role.json": package["client_role"],
                  "transcript-analysis.json": package["transcript_analysis"]}
@@ -40,10 +40,11 @@ def export(case_id: str, output: Path) -> dict:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Export reviewed case for manual external-model practice")
     parser.add_argument("--case-id", required=True)
+    parser.add_argument("--mode", choices=("text", "voice"), default="text")
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args(argv)
     try:
-        result = export(args.case_id, args.output)
+        result = export(args.case_id, args.output, mode=args.mode)
     except (OSError, ValueError, TypeError, KeyError):
         print("PRACTICE_EXPORT_STOP: check case approval and unused private output; preserve partial output", file=sys.stderr)
         return 1

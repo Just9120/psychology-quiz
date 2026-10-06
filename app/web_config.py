@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import os
 import re
 from urllib.parse import urlsplit
+from app.google_oauth import GoogleOAuthSettings
 
 
 def normalize_email(value: object) -> str:
@@ -25,6 +26,7 @@ class WebSettings:
     smtp_password: str
     sender: str
     secure_cookie: bool = True
+    google: GoogleOAuthSettings | None = None
     @property
     def cookie_name(self) -> str:
         return "__Host-psychology_session" if self.secure_cookie else "psychology_dev_session"
@@ -60,5 +62,12 @@ class WebSettings:
             raise RuntimeError("Invalid PWA mailbox/port configuration") from None
         if port not in {465, 587}:
             raise RuntimeError("PWA SMTP requires TLS port 465 or 587")
+        google_enabled = os.getenv("PWA_GOOGLE_OAUTH_ENABLED", "false").strip().lower()
+        if google_enabled not in {"true", "false"}:
+            raise RuntimeError("Invalid PWA_GOOGLE_OAUTH_ENABLED")
+        google = None
+        if google_enabled == "true":
+            google = GoogleOAuthSettings(required("PWA_GOOGLE_CLIENT_ID"), required("PWA_GOOGLE_CLIENT_SECRET"),
+                                         origin + "/web/auth/google/callback")
         return cls(origin, owner, required("PWA_SMTP_HOST"), port,
-                   required("PWA_SMTP_USERNAME"), required("PWA_SMTP_PASSWORD"), sender, not local)
+                   required("PWA_SMTP_USERNAME"), required("PWA_SMTP_PASSWORD"), sender, not local, google)

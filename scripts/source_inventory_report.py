@@ -25,7 +25,6 @@ from app.source_inventory import (
     processing_status, reconcile, reviewed_graph, scan,
 )
 from app.content_publication import DRIVE_REF, LEGACY_SHA256, fingerprint, load_policy
-from app.publication_certificate import certificate_error
 
 
 def _read(path: Path):
@@ -96,9 +95,9 @@ def legacy_derivative_links(repo_root: Path, baseline: dict, quality_reviews: di
 
 
 def private_dossier_reviews(repo_root: Path, document: dict, *, policy=None) -> tuple[dict, dict]:
-    """Recover private provenance only from the dossier signed for a live item.
+    """Recover private provenance only from the exact reviewed dossier for a live item.
 
-    A certificate without its matching private dossier cannot reveal its
+    A certificate/receipt without its matching private dossier cannot reveal its
     source edges. Old/modified dossiers must not replace current evidence.
     This does not approve the source or change its processing/hold state.
     """
@@ -126,13 +125,11 @@ def private_dossier_reviews(repo_root: Path, document: dict, *, policy=None) -> 
                 or not isinstance(dossier.get("item_id"), str)):
             raise InventoryError("invalid_private_publication_dossier")
         key = dossier["kind"] + ":" + dossier["item_id"]
-        certificate = (policy.certificates or {}).get(key)
+        certificate = policy.private_review_record(dossier["kind"], dossier["item_id"])
         item = public.get(key)
         review = dossier.get("publication_review")
-        if (key in reviews or item is None or not policy.can_publish(dossier["kind"], item)
+        if (key in reviews or item is None or not policy.has_private_review(dossier["kind"], item)
                 or not isinstance(certificate, dict)
-                or certificate_error(dossier["kind"], item, certificate, policy.certificate_key,
-                                     item_sha256=fingerprint(item)) is not None
                 or certificate.get("review_sha256") != fingerprint(dossier)
                 or not isinstance(review, dict) or review.get("decision") != "approved"
                 or not isinstance(review.get("sources"), list) or not review["sources"]):

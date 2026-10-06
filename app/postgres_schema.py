@@ -7,7 +7,7 @@ from pathlib import Path
 
 from app.database import Connection, begin_write, is_postgres
 
-VERSION = "postgres-v8"
+VERSION = "postgres-v9"
 SCHEMA_PATH = Path(__file__).resolve().parent.parent / "sql" / "postgres-v1.sql"
 GLOSSARY_PATH = SCHEMA_PATH.with_name("glossary-v1.sql")
 LEARNING_PATH = SCHEMA_PATH.with_name("learning-v1.sql")
@@ -16,6 +16,7 @@ PROFILE_PATH = SCHEMA_PATH.with_name("profile-v1.sql")
 HOMEWORK_PATH = SCHEMA_PATH.with_name("homework-v1.sql")
 PRIVACY_PATH = SCHEMA_PATH.with_name("privacy-v1.sql")
 READING_PATH = SCHEMA_PATH.with_name("reading-work-v1.sql")
+OAUTH_PATH = SCHEMA_PATH.with_name("google-oauth-v1.sql")
 BASE_TABLES = (
     "users", "categories", "questions", "question_options", "quiz_sessions",
     "quiz_session_selected_categories", "quiz_session_questions", "quiz_answers",
@@ -28,7 +29,8 @@ V4_TABLES = V3_TABLES + ("pwa_invitations",)
 V5_TABLES = V4_TABLES + ("web_profile_names",)
 V6_TABLES = V5_TABLES + ("homework_attempts",)
 V7_TABLES = V6_TABLES + ("user_data_deletion_challenges",)
-TABLES = V7_TABLES + ("user_literature_work_progress",)
+V8_TABLES = V7_TABLES + ("user_literature_work_progress",)
+TABLES = V8_TABLES + ("web_google_identities", "web_oauth_challenges")
 IDENTITY_TABLES = (
     "users", "categories", "questions", "question_options", "quiz_sessions",
     "quiz_session_questions", "quiz_answers", "user_literature_progress", "web_accounts",
@@ -70,10 +72,10 @@ def catalog_digest(conn: Connection) -> str:
 SCHEMA_VERSIONS = {
     "postgres-v1": BASE_TABLES, "postgres-v2": V2_TABLES, "postgres-v3": V3_TABLES,
     "postgres-v4": V4_TABLES, "postgres-v5": V5_TABLES, "postgres-v6": V6_TABLES,
-    "postgres-v7": V7_TABLES, VERSION: TABLES,
+    "postgres-v7": V7_TABLES, "postgres-v8": V8_TABLES, VERSION: TABLES,
 }
 SCHEMA_STEPS = (GLOSSARY_PATH, LEARNING_PATH, INVITATION_PATH, PROFILE_PATH,
-                HOMEWORK_PATH, PRIVACY_PATH, READING_PATH)
+                HOMEWORK_PATH, PRIVACY_PATH, READING_PATH, OAUTH_PATH)
 
 
 def _version_number(version):
@@ -84,6 +86,8 @@ def _version_number(version):
 
 def _step_ddl(path):
     text = path.read_text(encoding="utf-8")
+    if path == OAUTH_PATH:
+        return text.replace(" INTEGER", " BIGINT")
     return text.replace("user_id INTEGER", "user_id BIGINT") if path in {GLOSSARY_PATH, READING_PATH} else text
 
 

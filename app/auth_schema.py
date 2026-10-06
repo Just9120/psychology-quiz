@@ -1,7 +1,8 @@
 """Additive owner authentication storage; init script only, no request-time DDL."""
 import sqlite3
+from pathlib import Path
 
-AUTH_TABLES = ("web_accounts", "web_sessions", "web_mail_tokens", "web_link_tokens", "web_auth_limits", "web_profile_names")
+AUTH_TABLES = ("web_accounts", "web_sessions", "web_mail_tokens", "web_link_tokens", "web_auth_limits", "web_profile_names", "web_google_identities", "web_oauth_challenges")
 
 DDL = (
     """CREATE TABLE IF NOT EXISTS web_accounts (
@@ -55,6 +56,11 @@ def migrate_auth_schema(conn: sqlite3.Connection) -> None:
         conn.execute("BEGIN IMMEDIATE")
         for statement in DDL:
             conn.execute(statement)
+        oauth = (Path(__file__).resolve().parent.parent / "sql/google-oauth-v1.sql").read_text(encoding="utf-8")
+        for statement in oauth.split(";"):
+            if statement.strip():
+                conn.execute(statement)
         conn.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES ('auth-v1')")
+        conn.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES ('google-oauth-v1')")
         if conn.execute("PRAGMA foreign_key_check").fetchone():
             raise RuntimeError("Auth migration requires valid foreign keys")

@@ -8,7 +8,7 @@ export class ApiError extends Error {
   constructor(public code: string, public status = 0) { super(code) }
 }
 
-const actions = new Set(['auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
+const actions = new Set(['auth/google/available', 'auth/google/begin', 'auth/google/unlink', 'auth/me', 'auth/login', 'auth/register', 'auth/verify', 'auth/recover', 'auth/reset',
   'auth/logout', 'identity/new', 'link/start', 'link/complete', 'profile/name', 'owner/stats', 'owner/content', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer', 'homework/catalog', 'homework/start',
   'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
   'progress/review', 'progress/mastery', 'progress/goals', 'progress/achievements', 'progress/review-start', 'progress/review-glossary-start', 'progress/goal-set',
@@ -50,6 +50,9 @@ export const api = {
     csrf = result.csrf_token
     return result
   },
+  googleAvailable: () => request<{ ok: true; available: boolean }>('auth/google/available'),
+  googleBegin: (purpose: 'login' | 'link') => request<{ ok: true; url: string }>('auth/google/begin', { purpose }),
+  googleUnlink: () => request('auth/google/unlink', {}),
   login: (email: string, password: string) => request('auth/login', { email, password }),
   register: (email: string) => request('auth/register', { email }),
   verify: (token: string, password: string) => request('auth/verify', { token, password }),
@@ -93,6 +96,11 @@ export const api = {
 }
 
 const messages: Record<string, string> = {
+  google_unavailable: 'Вход через Google пока не настроен.',
+  google_already_linked: 'Google уже подключён. Обновите профиль.',
+  google_link_conflict: 'Эту привязку нельзя изменить автоматически. Обновите профиль.',
+  google_login_failed: 'Не удалось подтвердить вход через Google. Попробуйте заново.',
+  invalid_oauth_state: 'Подтверждение входа истекло. Начните заново.',
   invalid_credentials: 'Не удалось войти. Проверьте почту и пароль.',
   unauthorized: 'Сессия завершилась. Войдите ещё раз — сохранённый прогресс останется на месте.',
   password_length: 'Используйте от 15 до 128 символов. Подойдёт длинная фраза.',

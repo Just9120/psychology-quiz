@@ -33,7 +33,7 @@ The previous full one-record-per-question manifest was removed because it over-l
 - Deterministic answer-length severity rule: include only cases where the keyed option is the longest option, `length(correct) / median(length(distractors)) >= 2.75`, and `length(correct) - max(length(distractors)) >= 45`; keep at most the 50 highest ratio/delta cases.
 - Confirmed structural blockers, exact duplicate IDs, and duplicate normalized stems are not present in the current active approved bank.
 
-Semantic question-quality calibration remains the next separate content PR. Queue entries are review targets, not automatic authorization to rewrite ambiguous psychology content.
+These historical queue entries are review targets, not automatic authorization to rewrite ambiguous psychology content or to create a separate PR. Current findings, source holds and selected Goal scope are recorded in the [delivery plan](delivery-plan.md); stable question IDs and prior attempts are preserved.
 
 ## SQLite parity model
 

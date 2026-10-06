@@ -142,7 +142,7 @@ def published_questions():
     return result
 
 
-def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None, note_manifest=None, glossary_items=None, glossary_policy=None, public_topic_ids=None):
+def build(current, processed, observed_at, *, registry=None, curriculum=None, published_items=None, note_manifest=None, glossary_items=None, glossary_policy=None, public_topic_ids=None, saved_inputs=False):
     observed = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
     if observed.tzinfo is None or observed > datetime.now(timezone.utc):
         raise ValueError("invalid_observation_time")
@@ -155,6 +155,8 @@ def build(current, processed, observed_at, *, registry=None, curriculum=None, pu
             "processing": value["processing"], "processing_records": len(records),
             "known_holds": sum(record.get("review_state") == "conflict" or bool(record.get("conflict_hold"))
                                for record in records.values())}
+    if saved_inputs:
+        result["observation_basis"] = "saved_inputs"
     if any(value is not None for value in (registry, curriculum, published_items)):
         if any(value is None for value in (registry, curriculum, published_items)):
             raise InventoryError("reviewed_graph_inputs_required")
@@ -195,7 +197,10 @@ def main(argv=None):
     parser.add_argument("--private-registry", type=Path, help="Additional reviewed source metadata in ignored data/; requires --reviewed")
     parser.add_argument("--private-topics", type=Path, help="Unreleased lesson metadata in ignored data/; requires reviewed private registry")
     parser.add_argument("--notes-manifest", type=Path, help="Optional ignored private preparation manifest; never Vault publication evidence")
-    parser.add_argument("--observed-at", required=True)
+    observation = parser.add_mutually_exclusive_group(required=True)
+    observation.add_argument("--observed-at", help="Known inventory observation time")
+    observation.add_argument("--saved-inputs", action="store_true",
+                             help="Date compilation of saved inputs, without claiming fresh Drive observation")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
@@ -219,7 +224,8 @@ def main(argv=None):
         if args.notes_manifest is not None:
             from scripts.obsidian_vault import _private_input
             inputs["note_manifest"] = _private_input(args.notes_manifest)
-        value = build(_read(args.current), _read(args.processed), args.observed_at, **inputs)
+        observed_at = datetime.now(timezone.utc).isoformat() if args.saved_inputs else args.observed_at
+        value = build(_read(args.current), _read(args.processed), observed_at, saved_inputs=args.saved_inputs, **inputs)
         with os.fdopen(os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w", encoding="utf-8") as output:
             json.dump(value, output, indent=2)
             output.write("\n")

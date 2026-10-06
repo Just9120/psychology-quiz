@@ -260,8 +260,12 @@ def private_signing_key(path: Path) -> Path:
     return candidate
 
 
-def sign_review(kind: str, public_item: dict, dossier: dict,
-                private_key: Ed25519PrivateKey) -> dict:
+def validate_review_dossier(kind: str, public_item: dict, dossier: dict) -> dict:
+    """Validate private content/source/quality evidence independently of signing.
+
+    The caller still runs verify_current_sources against its saved inventory and
+    processing records. These digests alone do not grant runtime publication.
+    """
     if kind not in KINDS or not isinstance(public_item, dict) or not isinstance(dossier, dict):
         raise SigningError("invalid_review_dossier")
     if (public_item.get("status") != "approved"
@@ -312,8 +316,33 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
     error = policy.error(kind, full_item, private_review=True)
     if error is not None:
         raise SigningError(error)
-    public_sha256 = fingerprint(public_item)
-    review_sha256 = fingerprint(dossier)
+    result = {"item_sha256": fingerprint(public_item), "review_sha256": fingerprint(dossier)}
+    if topic_id is not None:
+        result["topic_id"] = topic_id
+    return result
+
+
+def create_review_receipt(kind: str, public_item: dict, dossier: dict) -> dict:
+    from app.publication_receipt import required_checks, receipt_error
+    validation = validate_review_dossier(kind, public_item, dossier)
+    review = dossier["publication_review"]
+    # Reviewer identity stays in the hashed private dossier, not public metadata.
+    result = {"schema_version": 1, **validation, "decision": "approved",
+              "purpose": review["purpose"], "reviewer": "private-review",
+              "reviewed_at": review["reviewed_at"], "checks": sorted(required_checks(kind)),
+              "source_support": "supported"}
+    if (receipt_error(kind, result, item_sha256=fingerprint(public_item))
+            or any(source["id"] in json.dumps(result, ensure_ascii=False) for source in dossier["sources"])):
+        raise SigningError("invalid_publication_receipt")
+    return result
+
+
+def sign_review(kind: str, public_item: dict, dossier: dict,
+                private_key: Ed25519PrivateKey) -> dict:
+    # Reuse the exact validation path; certificate format/signature stay stable.
+    review = validate_review_dossier(kind, public_item, dossier)
+    topic_id = review.get("topic_id")
+    public_sha256, review_sha256 = review["item_sha256"], review["review_sha256"]
     signer_key_id = key_id(private_key.public_key())
     signature = private_key.sign(certificate_payload(
         kind, public_item["id"], public_sha256, review_sha256, signer_key_id,
@@ -494,7 +523,7 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Sign a private source review for one public item")
+    parser = argparse.ArgumentParser(description="Validate a private source review and create a receipt or optional signed certificate")
     parser.add_argument("--kind", required=True, choices=sorted(KINDS))
     parser.add_argument("--item-id", required=True)
     parser.add_argument("--dossier", required=True, type=Path)
@@ -504,16 +533,20 @@ def main(argv=None) -> int:
                         help="Ignored current source classifications; fragment approval remains required")
     parser.add_argument("--private-topics", type=Path,
                         help="Ignored current lesson metadata for signed source-free literature labels")
-    parser.add_argument("--private-key", required=True, type=Path)
+    parser.add_argument("--private-key", type=Path)
+    parser.add_argument("--review-only", action="store_true",
+                        help="Validate private evidence without reading a key or creating a publication certificate")
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args(argv)
     try:
         dossier_path = private_path(args.dossier, suffix=".json")
         inventory_path = private_path(args.inventory, suffix=".json")
         processed_path = private_path(args.processed, suffix=".json")
-        key_path = private_signing_key(args.private_key)
+        if args.review_only and args.private_key is not None:
+            raise SigningError("review_only_does_not_use_signing_key")
+        key_path = private_signing_key(args.private_key) if args.private_key is not None else None
         output_path = private_path(args.output, suffix=".json")
-        if output_path.exists() or not stat.S_ISREG(key_path.stat().st_mode):
+        if output_path.exists() or (key_path is not None and not stat.S_ISREG(key_path.stat().st_mode)):
             raise SigningError("private_output_or_key_invalid")
         items = []
         pattern = "**/*.json" if args.kind == "questions" else "*.json"
@@ -529,20 +562,29 @@ def main(argv=None) -> int:
         verify_current_sources(dossier, inventory, processed, public_item=items[0],
                                private_registry_path=args.private_registry,
                                private_topics_path=args.private_topics)
-        private_key = serialization.load_pem_private_key(key_path.read_bytes(), password=None)
-        if not isinstance(private_key, Ed25519PrivateKey):
-            raise SigningError("ed25519_signing_key_required")
-        certificate = sign_review(args.kind, items[0], dossier, private_key)
+        identity = f"{args.kind}:{args.item_id}"
+        if args.review_only:
+            payload = {"schema_version": 1, "scope": "private_review_validation",
+                       "items": {identity: validate_review_dossier(args.kind, items[0], dossier)}}
+        elif key_path is None:
+            payload = {identity: create_review_receipt(args.kind, items[0], dossier)}
+        else:
+            private_key = serialization.load_pem_private_key(key_path.read_bytes(), password=None)
+            if not isinstance(private_key, Ed25519PrivateKey):
+                raise SigningError("ed25519_signing_key_required")
+            payload = {identity: sign_review(args.kind, items[0], dossier, private_key)}
         descriptor = os.open(output_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(descriptor, "w", encoding="utf-8") as output:
-            json.dump({f"{args.kind}:{args.item_id}": certificate}, output, indent=2)
+            json.dump(payload, output, indent=2)
             output.write("\n")
     except (SigningError, OSError, ValueError, TypeError, KeyError) as error:
         print("PRIVATE_PUBLICATION_SIGN_STOP: " +
               (str(error) if isinstance(error, SigningError) else type(error).__name__),
               file=sys.stderr)
         return 1
-    print("PRIVATE_PUBLICATION_CERTIFICATE_CREATED; no item published")
+    print(("PRIVATE_REVIEW_VALIDATED" if args.review_only else
+           "PRIVATE_PUBLICATION_CERTIFICATE_CREATED" if key_path is not None else "PRIVATE_PUBLICATION_RECEIPT_CREATED")
+          + "; no item published")
     return 0
 
 

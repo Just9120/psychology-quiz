@@ -9,10 +9,9 @@ import json
 from pathlib import Path
 import re
 
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
-
 from app.database import is_postgres
 from app.publication_certificate import certificate_error
+from app.publication_receipt import receipt_error
 
 ROOT = Path(__file__).resolve().parents[1]
 UNMAPPED = "unmapped"
@@ -81,31 +80,34 @@ def merge_public_labels(catalog, document):
     return result
 
 
-def validate_private_bindings(catalog, document, public_key, active_certificates=None):
-    """Keep signed source-free lesson mappings valid across later item revisions."""
+def validate_private_bindings(catalog, document, public_key, active_certificates=None, active_receipts=None):
+    """Keep reviewed source-free mappings valid across later item revisions."""
+    approvals = {**(active_receipts or {}), **(active_certificates or {})}
     if (not isinstance(document, dict) or document.get("schema_version") != 1
             or not isinstance(document.get("items"), dict)):
         raise ValueError("Invalid private curriculum bindings")
     for digest, certificate in document["items"].items():
         edition = catalog["editions"].get(digest)
+        signed = isinstance(certificate, dict) and "signature" in certificate
         if (edition is None or not isinstance(certificate, dict)
-                or certificate.get("schema_version") != 2
+                or "topic_id" not in certificate
                 or certificate.get("topic_id") != edition["topic_id"]
-                or edition["locator"] != "private certificate:questions:" + edition["external_id"]
-                or certificate_error("questions", {"id": edition["external_id"]}, certificate,
-                                     public_key, item_sha256=edition["item_sha256"]) is not None):
+                or edition["locator"] != ("private certificate:questions:" if signed else "private review:questions:") + edition["external_id"]
+                or (certificate_error("questions", {"id": edition["external_id"]}, certificate,
+                                      public_key, item_sha256=edition["item_sha256"]) if signed else
+                    receipt_error("questions", certificate, item_sha256=edition["item_sha256"])) is not None):
             raise ValueError("Invalid private curriculum binding")
     current_bindings = set()
     for digest, edition in catalog["editions"].items():
-        current = (active_certificates or {}).get("questions:" + edition["external_id"])
-        if (isinstance(current, dict) and current.get("schema_version") == 2
+        current = approvals.get("questions:" + edition["external_id"])
+        if (isinstance(current, dict) and "topic_id" in current
                 and current.get("item_sha256") == edition["item_sha256"]):
             if document["items"].get(digest) != current:
                 raise ValueError("Missing current private curriculum binding")
             current_bindings.add("questions:" + edition["external_id"])
-    for key, certificate in (active_certificates or {}).items():
+    for key, certificate in approvals.items():
         if (key.startswith("questions:") and isinstance(certificate, dict)
-                and certificate.get("schema_version") == 2
+                and "topic_id" in certificate
                 and key not in current_bindings):
             raise ValueError("Missing current private curriculum edition")
     return document["items"]
@@ -115,13 +117,10 @@ def load_private_bindings(catalog):
     binding_path = ROOT / "content/curriculum-bindings.json"
     document = (json.loads(binding_path.read_text(encoding="utf-8"))
                 if binding_path.exists() else {"schema_version": 1, "items": {}})
-    certificates = json.loads((ROOT / "content/publication-certificates.json").read_text(encoding="utf-8"))
-    key_hex = (ROOT / "content/publication-review-public-key.hex").read_text(encoding="ascii").strip()
-    if re.fullmatch(r"[0-9a-f]{64}", key_hex) is None:
-        raise ValueError("Invalid curriculum binding public key")
-    key = Ed25519PublicKey.from_public_bytes(bytes.fromhex(key_hex))
+    from app.content_publication import load_policy
+    policy = load_policy()
     return validate_private_bindings(
-        catalog, document, key, certificates.get("items", {}))
+        catalog, document, policy.certificate_key, policy.certificates, policy.receipts)
 
 
 @lru_cache(maxsize=1)

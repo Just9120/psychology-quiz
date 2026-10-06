@@ -4,12 +4,26 @@
 
 Проверка кода ветки `codex/complete-scope-pr2` 29.09.2026 после `a48bfde`; работа относится к AC-PRIV-01/02/05. Это карта обработки, а не новая политика или заключение о соответствии закону. Действующий Telegram/Mini App использует Telegram Standard Bot Privacy Policy; адрес хранится в интерфейсе и `TELEGRAM_PRIVACY_POLICY_URL` в [боте](../app/main.py). Первичный документ прочитан 29.09.2026: разделы 4–7 охватывают получение данных, необходимые цели, защиту и обращения пользователей. Доступная ссылка сама по себе не доказывает выполнение этих правил.
 
+## Установленные условия размещения
+
+06.10.2026 владелец подтвердил в чате: страна размещения VPS — Франция.
+Основание — сведения владельца; договор провайдера и фактическая инфраструктура
+отдельно не проверены. Это не устанавливает страны обработки Telegram, Google,
+SMTP и Cloudflare.
+
+Сроки хранения резервных копий и серверных логов, порядок проверки личности
+заявителя и передачи ему копии данных владельцу неизвестны: UNSET. Ответ не
+задаёт срок хранения, способ передачи или новую политику удаления. Эти пробелы
+остаются в Q-08/Q-11 и AC-PRIV-01/02/05.
+
 ## Данные и цели
 
 | Поток | Данные и цель | Подтверждение и ограничения |
 | --- | --- | --- |
 | Telegram → bot/API → runtime DB | Telegram ID и переданные имя/username связывают личные попытки. Ответы, результаты, история повторений, цели, достижения и отметки книг сохраняют обучение. Telegram не требует e-mail/пароля приложения. | [DB](../app/db.py), [Mini App API](../app/miniapp_api.py). Runtime actor устанавливается после проверки Telegram identity; клиент не выбирает чужого пользователя. Полный перечень таблиц и связей формирует [read-only inventory](../scripts/privacy_db_inventory.py), без чтения личных строк. |
 | Владелец → PWA → DB | E-mail, password hash, session/token digests и подтверждённая связь Telegram дают owner-only доступ к общим учебным данным. Заданное владельцем отображаемое имя хранится отдельно в web_profile_names по account_id; оно тоже относится к персональным данным. | [PWA auth](pwa-auth.md); student PWA исключён из продукта. Не приписывать Telegram пользователям PWA credentials. |
+| Владелец → Google OIDC → PWA | По явному подключению из действующей owner session сохраняется Google subject, account_id и время связи. Подтверждённый Google e-mail проверяется при обработке ID token, но не добавляется в таблицу связи и не заменяет identity владельца. | [OIDC client](../app/google_oauth.py), [durable flow](../app/owner_google_oauth.py), [схема](../sql/google-oauth-v1.sql). Только openid/email; авторизационный код, PKCE verifier и client secret передаются Google для обмена. Access/refresh/ID tokens не сохраняются в DB и не выдаются клиенту. Код подготовлен в текущей Goal; фактический вход и включение на VPS PENDING. |
+| PWA → временное OAuth state | На срок 10 минут DB хранит state/browser digests, nonce, PKCE verifier, purpose и связь с инициировавшей session для link. Secure HttpOnly cookie связывает callback с браузером. | Challenge удаляется до сетевого обмена при принятом callback; просроченные rows очищаются при следующем begin, поэтому TTL не означает немедленное физическое удаление. Disconnect удаляет связь и принадлежащие account challenges, отзывает другие sessions. Backup может сохранять прежние rows до удаления копии. Эти данные входят в privacy inventory и additive recovery, а не в learning-data export. |
 | PWA → SMTP | Письма подтверждения/восстановления содержат адрес получателя и одноразовую ссылку. Учебные ответы в SMTP не отправляются этим модулем. | [Mailer](../app/web_mail.py), настройки в [PWA auth](pwa-auth.md). Фактические сроки хранения у почтового провайдера UNSET. |
 | Runtime DB → backup/recovery | Копии persistent state нужны для безопасной миграции и восстановления. Они могут содержать личные строки. | [PostgreSQL backup](../scripts/postgres_backup.py), [процедура поставки](miniapp-deployment-qa.md). Срок хранения и ручной порядок исполнения запросов в backups UNSET; автоматического удаления всех copies нет. |
 | Browser → reverse proxy → API | HTTP запросы необходимы для Mini App/PWA. Прокси и инфраструктура могут обрабатывать сетевые metadata. | [Поставка](miniapp-deployment-qa.md) и [PWA auth](pwa-auth.md) задают запрет credential/body logging. Фактические Cloudflare/Nginx logs, сроки и география требуют runtime records; текущий code review их не устанавливает. |
@@ -17,7 +31,7 @@
 
 ## Уточнение клиентских и операторских потоков
 
-Сверка 30.09.2026 на локальной ветке PR2 после `252a36d`: это анализ текущего кода/config, а не снимок сетевого трафика VPS. Страны обработки, фактические logs и retention по этим данным не установлены.
+Сверка 30.09.2026 на локальной ветке PR2 после `252a36d`: это анализ текущего кода/config, а не снимок сетевого трафика VPS. Этот анализ не устанавливает страны обработки, фактические logs и retention. Позднее владелец подтвердил Францию только для VPS (см. условия размещения выше).
 
 | Граница | Наблюдаемый кодовый поток | Ограничение Evidence |
 | --- | --- | --- |
@@ -25,14 +39,22 @@
 | Mini App → закреплённый API | [Клиент API](../pwa/src/miniapp/api.ts) использует `quiz-api.librechat.online`. GET передаёт initData в Authorization, POST — в envelope вместе с учебным payload. Destination/route allowlist закреплены кодом, redirect запрещён, credentials omitted и cache no-store. | Проверка кода подтверждает адрес и способ передачи, но не текущую DNS/proxy topology или сохранность headers в фактических logs. Контроль backend identity и host verification остаётся в процедуре поставки. |
 | Owner PWA → same-origin API | [PWA transport](../pwa/src/api.ts) обращается к относительным `/web/` routes; данные auth и учебные ответы обрабатывает тот же backend domain, с server actor mapping. | Same-origin не означает отсутствие инфраструктурного посредника или access logs. Runtime Nginx/Cloudflare settings требуют отдельных records. |
 | Bot → Telegram | [Telegram adapter](../app/main.py) получает update identity и возвращает интерфейс/feedback через Telegram. Учебный результат, показанный в чате, становится содержимым сообщения Telegram. | Это отличается от Mini App API response. Удаление runtime DB history не удаляет автоматически ранее отправленные Telegram-сообщения или данные платформы. |
-| Клиент → книжный провайдер | [Литература PWA](../pwa/src/LiteratureView.tsx), [Mini App](../pwa/src/miniapp/MiniLiterature.tsx) и [Telegram adapter](../app/literature_chat.py) открывают внешние offers по действию пользователя. В app-generated URL нет Telegram actor, e-mail, ответов или personal reading state; browser links используют noopener/noreferrer. | После открытия provider может получать собственные сетевые metadata и обрабатывать свою учётную запись по своим условиям. Это не синхронизация прогресса; Литрес account integration остаётся неподтверждённой Q-10. |
+| Клиент → книжный провайдер | [Литература PWA](../pwa/src/LiteratureView.tsx), [Mini App](../pwa/src/miniapp/MiniLiterature.tsx) и [Telegram adapter](../app/literature_chat.py) открывают внешние offers по действию пользователя. В app-generated URL нет Telegram actor, e-mail, ответов или personal reading state; browser links используют noopener/noreferrer. | После открытия provider может получать собственные сетевые metadata и обрабатывать свою учётную запись по своим условиям. Это не синхронизация прогресса; подключения читалок исключены D-42, дополнительных provider credentials приложение не получает. |
 | SMTP → почтовый провайдер | [Mailer](../app/web_mail.py) отправляет owner recipient, тему/текст и одноразовую auth-ссылку через configured SMTP с TLS. | Полный recipient/token нужен для доставки. Generic error path не раскрывает SMTP exceptions клиенту; фактические mail logs/retention/geography ещё UNSET. |
-| Private search → локальная модель | [Search service](../app/private_search.py) работает с приватными reviewed extracts и локальным embedding/index. При первом получении model weights возможен внешний сетевой запрос; это отдельный download от runtime query embedding. | Наличие offline query path не доказывает готовый cache или отсутствие любых исходящих соединений во время подготовки. VPS cache/probe/QA ещё PENDING; RAG disabled. |
+| Private search → локальная модель | [Search service](../app/private_search.py) работает с приватными reviewed extracts и локальным embedding/index. При первом получении model weights возможен внешний сетевой запрос; это отдельный download от runtime query embedding. | Наличие offline query path не доказывает готовый cache или отсутствие любых исходящих соединений во время подготовки. VPS cache/probe/seven-case QA подтверждены на baseline3c10221 owner record06.10 (ниже); проверка этого ограниченного набора не устанавливает все исходящие соединения. RAG отложен D-44. |
 | GitHub CI/CD → VPS | [CI](../.github/workflows/ci.yml), [поставка](miniapp-deployment-qa.md) и [исключения build context](../.dockerignore) поставляют код/контент и verified artifacts. Private input/cache исключены из backend build context. | Это конфигурационный контроль; не утверждение о фактическом отсутствии чувствительных данных во всех ранее созданных artifacts/logs. Runtime personal DB/SMTP secret не должны передаваться в публичные repository artifacts. |
 
 ## Соответствие выбранной стандартной политике
 
 Telegram Standard Bot Privacy Policy повторно прочитана 30.09.2026. Разделы 2.6, 5–7 оставляют ответственность за соответствие фактической обработки разработчику; одна ссылка не подтверждает соответствие. Проверенная процедура повторно подтверждаемого удаления учебных данных покрывает только согласованный learning-state scope. Правила политики также предусматривают доступный канал запросов, копию личных данных и обращения об исправлении/удалении иных данных. Контакт обращений о копии или исправлении учебных данных согласован владельцем: `Just9119@gmail.com`. Идентификация оператора и исполнение requests для owner identity, backups и logs остаются UNSET.
+
+Сверка действующей политики 06.10.2026: пункт 7.3(c) требует своевременно
+обрабатывать законные обращения и отвечать в применимые сроки, в любом случае
+не позднее 30 дней с получения. Это правило уже выбранной стандартной политики,
+а не новый срок хранения данных или утверждение о выполненных обращениях.
+Конкретные более короткие применимые сроки и фактический порядок исполнения
+не установлены. Пункты 7.2(a) и 7.4(a) предусматривают проверку личности и
+содействие заявителя; они сами не определяют технический способ этой проверки.
 
 До решения этих вопросов AC-PRIV-01/02/05 не считать полностью READY. Этот разбор не вводит consent form, возрастную блокировку, миграцию хранилища или новый data collection; условные правовые требования остаются предметной проверкой Q-11.
 
@@ -47,24 +69,34 @@ Telegram identity сохраняется для продолжения испо�
 ## Копия учебных данных по обращению
 
 В рамках E16 подготовлен [операторский exporter](../scripts/export_learning_data.py).
-Это выгрузка учебных строк одного подтверждённого Telegram actor, не полная копия
-всех персональных данных платформы. Identity, e-mail/password hashes, sessions,
-mail/link/deletion tokens, общие content snapshots, приватные источники и
-инфраструктурные logs/backups в неё не входят. Сохранённые ответы глоссария,
-попытки, повторения, цели, достижения и личные отметки книг входят.
+Это выгрузка данных одного подтверждённого Telegram actor, не полная копия
+всех персональных данных платформы. По умолчанию выгружаются только учебные строки:
+ответы глоссария, попытки, повторения, цели, достижения и личные отметки книг.
+Явный флаг `--include-identity` добавляет сохранённые Telegram ID/имя/username,
+режим чтения и даты, а также принадлежащие этому actor e-mail, состояние связанного
+PWA account, display name и Google subject с датой привязки. Поля выбираются
+по allowlist; password hashes, sessions, mail/link/deletion/OAuth challenges,
+общие content snapshots, приватные источники и инфраструктурные logs/backups
+не выгружаются. Эти исключения обозначены в metadata копии.
 
 Перед запуском оператор должен подтвердить, что обращение принадлежит этому
 Telegram user ID. Username, подпись в письме или присланный чужой ID сами по себе
 не подтверждают личность. Флаг `--verified-request` фиксирует выполненный оператором
 шаг; script не делает эту проверку и не отправляет файл. Автоматической доставки
-и публичного API выбора actor нет. Порядок проверки личности и выдачи полного
-owner/identity export остаётся UNSET.
+и публичного API выбора actor нет. Порядок проверки личности и передачи копии
+остаётся UNSET; подготовленный exporter сам эти процедуры не заменяет.
 
 Canonical команда из root, с действующим DATABASE_URL/DB_PATH:
 ```bash
 python scripts/export_learning_data.py --telegram-user-id "$VERIFIED_TELEGRAM_USER_ID" \
   --verified-request --output data/learning-copy-request.json
 ```
+
+Для запроса, включающего сохранённые сведения пользователя, к той же команде
+добавляется `--include-identity`. Это требует текущей инициализированной auth schema;
+при несовместимой schema операция прекращается, неполный файл не доставляется.
+Результат имеет scope `profile_and_learning_data_copy` и schema_version 2;
+прежний учебный формат версии 1 сохраняется без этого флага.
 
 Output допускается только как новый ignored `data/*.json`, создаётся с mode 0600;
 права и ACL Windows дополнительно контролирует оператор. База открывается read-only,
@@ -84,9 +116,11 @@ Native проверка обязательна в существующем backe
 ## Оставшиеся условия проверки
 
 - На целевой revision выполнить PostgreSQL actor-isolation/one-use tests в required CI и подтвердить additive migration/CD.
-- Проверить фактические DB/backups/logs/SMTP/Cloudflare records; оператор, страны и сроки UNSET до первичных данных. Страна VPS не выводится из IP или названия хостера.
-- Проверить доступность согласованного контакта и определить порядок owner PWA/identity/export requests; сроки исполнения остаются UNSET.
+- Проверить фактические DB/backups/logs/SMTP/Cloudflare records; оператор, страны внешних сервисов и сроки UNSET до первичных данных. Для VPS Франция подтверждена владельцем 06.10; страна не выведена из IP или названия хостера.
+- Проверить доступность согласованного контакта и определить порядок owner PWA/identity/export requests; выбранная политика задаёт ответ не позднее 30 дней, фактическое исполнение и конкретные применимые сроки пока не подтверждены.
 - Согласовать backup retention/recovery так, чтобы восстановление старой копии не выдавалось за сохранение выполненного удаления.
+
+Сверка 06.10.2026, ветка `codex/project-completion`: native PostgreSQL deletion/export/recovery checks уже прошли на delivered baseline `3c10221592bdc749f349f8a34db9e7f603f80097` (main CI `37369443143`, CD `37428925553`). Они подтверждают actor isolation и сохранность state в своих сценариях, но не юридическое соответствие, фактическую географию или сроки хранения. Для новой OAuth schema v9 обязательные native upgrade/contract checks текущей revision ещё PENDING. Private search VPS checks baseline PASS по record `/root/psychology-search-check-dPLNP3lJ`; это ограниченный набор retrieval cases и resource measurements, не утверждение об отсутствии любых внешних запросов. RAG отложен по D-44.
 
 Статусы и Evidence остаются в [delivery plan](delivery-plan.md); AC-PRIV-01/02/05 не закрываются этим документом целиком.
 

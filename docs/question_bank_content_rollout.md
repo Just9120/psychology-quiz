@@ -1,5 +1,27 @@
 # Поставка банка вопросов и сохранение попыток
 
+## Обычное обновление и отдельный полный аудит
+
+По поручению владельца обычное обновление обрабатывает новые/изменённые материалы
+и затронутые производные редакции. Проверяются их содержание, ответы, пояснения,
+неоднозначности, качество и повторы с существующим банком. Ранее завершённые review
+и точные фрагменты используются повторно при совпадении редакции и digest;
+неизменённые материалы не нужно повторно читать целиком из-за очередного commit.
+Изменение source revision, содержимого extract или новое противоречие требует
+адресной перепроверки связанных derivatives и сохраняет прежние review/holds.
+
+Полная metadata inventory нужна для полноты структуры, связей и защиты от
+попадания известных source IDs в публичный текст. Это не обязательное чтение
+всех исходных документов: signer проверяет завершённое review источников,
+использованных в конкретном досье. Наличие необработанного постороннего источника
+не означает автоматического запуска полного аудита банка.
+
+Полный содержательный аудит существующих questions/glossary выполняется только
+по отдельному поручению, по AC-QUIZ-06 в [спецификации](project-spec.md).
+Полный seed всех canonical JSON остаётся технической синхронизацией DB,
+сохраняющей попытки; он не является повторным чтением Drive или переодобрением
+материалов. Эти границы не отменяют действующие публикационные и CI gates ниже.
+
 Canonical derivative — JSON в content/questions; [seed](../scripts/seed_questions.py) читает полный набор module directories. Это authoritative sync: approved rows обновляются, supplied non-approved IDs снимаются с выдачи, отсутствующие IDs становятся retired. Частичный вызов DB helper не снимает approval с неуказанных IDs. Вопросы и пользовательская история физически не удаляются.
 
 При включении вопроса в попытку [attempt content](../app/attempt_content.py) сохраняет JSON v1, SHA-256 и provenance `captured` в quiz_session_questions. Текущий вопрос, варианты, оценка и feedback в API и классическом Telegram используют этот snapshot. Изменение текста, порядка/числа вариантов, верного ответа, approval или удаление JSON не меняет существующую попытку. Новые attempts используют актуальный approved банк.
@@ -50,7 +72,11 @@ Additive migration [init](../scripts/init_db.py) и bot startup заполняю
 
 Ключ review — `questions:ID`, `glossary:ID` или `literature:ID`. Запись содержит `decision: approved`, `item_sha256` из `app.content_publication.fingerprint(item)`, `purpose` (`learning_content` для quiz/glossary, `bibliographic_metadata` для literature), `reviewer`, дату `reviewed_at` формата YYYY-MM-DD и непустой `sources`. Каждый source evidence содержит `source_id`, `modified_time`, `snapshot_sha256` из registry и точный `locator`. Новый вопрос и термин используют приватный путь с сертификатом ниже: их публичная редакция не содержит Drive ID/locator. Прямые `source_ref` старых редакций остаются только в ограниченном историческом пути, предусмотренном policy; он не разрешает новые публичные вопросы с такими ссылками. Для нового вопроса или термина также нужен независимый review качества с тем же fingerprint и набором источников, `supported`/`consistent` без открытых issues и проверенными аспектами содержания. Локатор `extracted text …: 0:<end>` требует уточнения фрагмента перед новым approval и отклоняется как в publication, так и в quality evidence; это не пересматривает frozen legacy. Частичный или устаревший quality review не разрешает публикацию. Изменение любого поля item или source revision требует нового review, а не переноса прежнего approval. Fingerprint источника относится к PDF bytes или к извлечённому тексту по `snapshot_kind`, не к тексту упомянутой книги.
 
-Для терминов глоссария и других материалов, чьи Drive references должны оставаться приватными, действует второй путь с теми же содержательными gates: публичный item не содержит `source_ref`/`source_refs` и ID исходного файла. Приватное JSON-досье в ignored `data/` содержит `schema_version: 1`, `kind`, `item_id`, случайный приватный `nonce` (64 hex), прямой `source_ref` либо `source_refs`, полные проверенные `sources`, `publication_review` и для учебного материала `quality_review`. Их fingerprints относятся к item **с** приватной ссылкой. [Signer](../scripts/sign_private_publication.py) требует `--inventory` со свежей полной приватной выгрузкой и `--processed` с завершённой проверкой каждого источника: file identity, revision и extract digest должны совпадать с досье. Только для уже опубликованного термина «Дофамин» допускается узкое подтверждение фрагментов источника под `conflict_review`: `scoped_claim_review` привязывает точный item fingerprint, source revision, полный конфликтный record, непересекающиеся диапазоны символов и digest фрагментов из приватного extract; оно не снимает удержание остальной лекции и не разрешает другие derivatives. Затем signer запускает прежнюю [publication policy](../app/content_publication.py) на полном item и сверяет locator и quality, прежде чем подписать точный fingerprint публичной проекции. Его output остаётся новым файлом в ignored `data/` до явного переноса одной записи в [public certificates](../content/publication-certificates.json). Публичный certificate содержит только fingerprint item, digest приватного досье, ID публичного Ed25519-ключа и подпись. CI/runtime проверяют подпись по `content/publication-review-public-key.hex` и отклоняют изменения item, подмену сертификата и смешение приватного и публичного путей. Signer читает существующий PEM только из пользовательского `~/.codex/secrets/psychology-quiz/`, вне checkout; на POSIX требует права владельца `0600`. Это ключ авторизации новых публикаций, не ключ GitHub/CD: закрытая часть не нужна на VPS и может повторно использоваться для будущих проверенных items, пока открытая часть закреплена в репозитории. Локальный ключ создан по явному разрешению владельца 27.09.2026; закрытый ключ и полное досье никогда не входят в Git, assets или CI. Два предложенных вопроса владелец оставил черновиками. Сертификат удостоверяет review на момент подписания, а не текущесть Drive или истинность непроверенного утверждения; обнаруженная позднее правка источника требует снятия approval до нового приватного review и подписи.
+Для новых source-free вопросов, терминов и библиографических записей действует один приватный review path: публичный item не содержит source_ref/source_refs и Drive ID. Досье в ignored data/ сохраняет точную source revision, snapshot/fragment/locator, reviewer/time, случайный nonce, проверку содержания/ответа/пояснения или определения/примера, неоднозначности и дублей. Существующий scripts/sign_private_publication.py всегда сверяет inventory/processing и applicable conflict/fragment/classification gates; спорные и неподдержанные основания остаются на удержании.
+
+По D-46 подпись необязательна. Без --private-key CLI создаёт новый private output с одной source-free записью для [publication receipts](../content/publication-receipts.json): exact item SHA, private dossier SHA, approved purpose, роль private-review и date, complete checks и supported source status; optional topic binding содержит только стабильный opaque ID. После локальной проверки в repository переносится только эта запись; реальный reviewer и полное досье остаются приватными. Runtime/validators требуют exact fingerprint и полный receipt schema, отвергают mixed private/public fields и неполный review. Доверие к неподписанной записи задаётся review и поставкой Git revision; receipt не является криптографическим доказательством чтения или научной истинности. Полное досье и его current source verification нужны до создания записи. При обнаружении новой source revision approval снимается до адресной повторной проверки.
+
+С --private-key прежний CLI создаёт Ed25519 certificate; existing format/key/signature проверки сохранены. Некорректный существующий certificate не обходится receipt. PEM читается только из owner secrets вне checkout; приватный ключ не входит в Git/VPS/assets/CI. Curriculum history принимает старые signed bindings и новые private review bindings на exact edition: изменение item/topic требует новой проверки, прежние ответы не переписываются. Два ранее отклонённых авторских вопроса остаются черновиками; это изменение не публикует новый контент.
 
 Перед подписью signer сверяет видимый текст нового item со всеми file IDs полного приватного inventory, в том числе не входящими в его досье. Голый ID другого источника в вопросе или пояснении блокирует сертификат так же, как прямая Drive-ссылка; совпадение редакции и content review этот запрет не снимают.
 
@@ -70,6 +96,24 @@ Canonical validators из [README](../README.md#быстрый-старт-и-п�
 
 Для дисциплины литературы, встречающейся в нескольких модулях, [topic registry](../content/topics.json) может содержать `modules` — непустой список уникальных `module1`–`module6`, включающий прежнее поле `module`. Это поле сохраняет совместимость; каждая библиографическая association указывает свой подтверждённый модуль из списка. API отдаёт полный список модулей дисциплины. PWA/Mini App показывают её при выборе любого из них и фильтруют записи по модулю association; Telegram позволяет найти дисциплину из обоих модулей и открыть её общий список. Такие связи не дублируют work identity, reading marks или исходные файлы. Новый literature-only registry entry не добавляет вопросы без отдельного approved content.
 
+
+### Проверка приватного досье без ключа
+
+Из корня репозитория тот же `scripts/sign_private_publication.py` поддерживает
+`--review-only` вместо `--private-key`. Остальные обязательные inputs прежние:
+`--kind`, `--item-id`, `--dossier`, `--inventory`, `--processed`, `--output`,
+а private registry/topics передаются при их использовании.
+
+Этот режим запускает existing current-source/fragment/hold checks и общую
+`validate_review_dossier`: exact edition/fingerprint, source support, качество,
+неоднозначность/дубли и отсутствие private refs в public item. Ключ не читается.
+Новый ignored/private output имеет scope `private_review_validation` и только
+item/dossier digests (плюс уже проверенный topic binding, когда применим).
+Существующий output не перезаписывается; source mismatch запрещает запись.
+Результат не является publication certificate и runtime его не принимает.
+Действующий signed publication flow и формат ранее подписанных items сохранены;
+подпись необязательна по D-46; для publication receipt запускайте CLI без --review-only и без --private-key.
+
 ## Содержательный review учебного банка
 
 [Learning quality ledger](../content/learning-quality-reviews.json) и подписанные приватные досье фиксируют review смысла, ключа/определения, объяснения/примера, неоднозначности, повторов и источников на точном fingerprint item. Актуальные количества опубликованных вопросов и терминов выводят canonical validators; числа прежних локальных срезов не являются текущим состоянием. Primary fragments связаны с revision/fingerprint из source registry и locator; `partial`/`disputed` сохраняют причины ограничения. Discipline summaries описывают смысловые повторы; они не дают основания автоматически удалять IDs или историю.
@@ -80,9 +124,9 @@ Ledger не является publication approval, SME certification или за
 
 ## Каталог литературы
 
-Дисциплина чтения сохраняет прежний `topic_id` и reading identities. Необязательный `curriculum_topic_ids` связывает запись только с явно проверенными учебными темами этой дисциплины; неизвестные, повторные IDs и переход в другую дисциплину отклоняются. Связь входит в publication fingerprint: её изменение требует новой проверки/подписи. В API `curriculum_topics` содержит только стабильные ID и названия тем, без source metadata. Книги без такой связи остаются общими книгами дисциплины; фильтр темы не приписывает их всем лекциям. PWA, Mini App и Telegram используют эти же связи, личные статусы и summaries выбранного scope; выбор статуса не меняет общий счётчик темы.
+Дисциплина чтения сохраняет прежний `topic_id` и reading identities. Необязательный `curriculum_topic_ids` связывает запись только с явно проверенными учебными темами этой дисциплины; неизвестные, повторные IDs и переход в другую дисциплину отклоняются. Связь входит в publication fingerprint: её изменение требует новой проверки и receipt либо optional подписи. В API `curriculum_topics` содержит только стабильные ID и названия тем, без source metadata. Книги без такой связи остаются общими книгами дисциплины; фильтр темы не приписывает их всем лекциям. PWA, Mini App и Telegram используют эти же связи, личные статусы и summaries выбранного scope; выбор статуса не меняет общий счётчик темы.
 
-Source-free библиографическая запись может хранить только `source.citation` и не иметь публичного `source_refs`, если её точная редакция подтверждена действительным publication certificate. Наличие поля certificate само по себе не освобождает от проверки подписи, fingerprint и приватного досье. Старые записи с прямым provenance остаются совместимыми; новые связи не требуют добавления Drive ID в публичный каталог. Проверка библиографической записи не подтверждает научное содержание книги.
+Source-free библиографическая запись может хранить только `source.citation` и не иметь публичного `source_refs`, если её точная редакция подтверждена проверенным review receipt или действительным publication certificate. Наличие записи само по себе не освобождает от проверки fingerprint и приватного досье; existing signatures проверяются. Старые записи с прямым provenance остаются совместимыми; новые связи не требуют добавления Drive ID в публичный каталог. Проверка библиографической записи не подтверждает научное содержание книги.
 
 [Литературные записи](../content/literature/) хранят отдельно библиографические связи и группировку работ. `id` — стабильный ключ записи учебного списка и существующего `user_literature_progress`; `work_id` ссылается на canonical запись той же работы. Повторные упоминания объединяются только после review автора/названия/гранулярности; совпадение названий не доказывает одинаковое произведение или издание. `module`/`topic_id` соответствуют [registry](../content/topics.json); `source` содержит ID списка, title, locator и исходную citation. Source revision/fingerprint и review находятся в едином publication ledger. Новые literature-only topics имеют `question_file: null` и не создают пустых quiz/glossary разделов.
 

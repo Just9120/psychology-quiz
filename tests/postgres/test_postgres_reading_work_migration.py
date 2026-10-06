@@ -25,7 +25,7 @@ def test_postgres_reading_migration_preserves_history_and_is_idempotent(pg_targe
         before = [tuple(row) for row in conn.execute('SELECT * FROM user_literature_progress ORDER BY id')]
         before_manifest = manifest(conn)
         upgrade_schema(conn)
-        assert verify_schema(conn) == 'postgres-v8'
+        assert verify_schema(conn) == 'postgres-v9'
         verify_user_state(before_manifest, manifest(conn))
         assert [tuple(row) for row in conn.execute('SELECT * FROM user_literature_progress ORDER BY id')] == before
         assert conn.execute('SELECT reading_status FROM user_literature_work_progress').fetchone()[0] == 'deferred'

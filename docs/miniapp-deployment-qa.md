@@ -1,5 +1,11 @@
 # Mini App deployment and manual QA checklist
 
+## Итоговый приватный репозиторий (D-45)
+
+Пока идёт разработка, основной репозиторий остаётся PUBLIC ради Actions. Уточнение владельца06.10: не переносить PRIVATE transition или подготовку нового VPS deploy key на текущий этап. Сейчас visibility и Git access не меняются; private Vault notes остаются локально вне Git. Смена visibility относится к окончанию разработки, не к prerequisite текущего PR/merge/CD. Target будущей базы — vault/ единого Just9120/psychology-quiz; существующий отдельный репозиторий сохраняется.
+
+Для финального перехода позднее потребуется проверить authenticated VPS Git read access и actual private visibility, сохранив canonical origin/deployment unit и mandatory host verification. Current preflight06.10: VPS origin HTTPS/github.com, credential helper отсутствует, HEAD3c10221. Это не достаточное доказательство отсутствия всех способов authentication и не поручение менять remote/ключи сейчас. Local GitHub metadata read подтвердил admin/push права, existing deploy keys0; новых keys/visibility mutations не выполнено.
+
 ## Действующие правила и delivery snapshot
 
 [AGENTS.md](../AGENTS.md) задаёт routine Git/PR/delivery flow; [ci-cd-rules.md](../ci-cd-rules.md) — настройку и исправление pipeline. Продуктовый target — [spec](project-spec.md); AC/findings/checkpoint — [план](delivery-plan.md). Текущая production БД — PostgreSQL; её подтверждённый cutover и primary records указаны в [плане](delivery-plan.md), а backup/recovery и штатный CD — в [PostgreSQL storage](postgres-storage.md). Ниже сохранены также исторические процедуры Telegram/SQLite, которые применяются лишь к соответствующей среде/версии. Поставка PWA — в [PWA procedure](pwa-delivery.md).
@@ -60,10 +66,17 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 После frontend delivery проверить опубликованный `miniapp-react/index.html`, его versioned JS/CSS assets, provider check и UI load. Component/API tests проверяют trusted fetch boundary без network. Browser smoke без Telegram показывает экран запуска; это не authenticated mobile roundtrip.
 
 ### Cloudflare Workers Static Assets (GitHub deployment flow)
-- Build command: empty; `miniapp-react/` собирается из pinned frontend dependencies и сверяется с tracked assets в CI до merge
-- Deploy command: `npx wrangler deploy`
+- Build command: `npm --prefix pwa ci --ignore-scripts`; устанавливает инструменты по `pwa/package-lock.json`, не пересобирает проверенные tracked assets
+- Deploy command: `npm --prefix pwa run deploy:miniapp`; использует локальный pinned Wrangler и root `wrangler.toml`
 - Path: `/`
 - Static assets directory in `wrangler.toml`: `./miniapp-react`
+
+`miniapp-react/` собирается из pinned frontend dependencies и сверяется с tracked
+assets в CI до merge. Не заменять deploy command на bare `npx wrangler`: при
+отсутствии root package установка может получить незакреплённую версию. Эти поля
+задают целевую конфигурацию; текущие Cloudflare dashboard settings и их применение
+UNSET до readback владельца существующего Worker. Изменение этой процедуры не
+утверждает, что внешний provider уже обновлён.
 
 1. Опубликовать `miniapp-react/index.html` и его assets на HTTPS static hosting в deployment environment.
 2. После готовности Cloudflare custom domain установить `MINI_APP_URL` на этот HTTPS URL в runtime `.env` на VPS.
@@ -840,6 +853,7 @@ runtime и не требует загрузки image. Ручной старый
 Backup/isolated restore, stateful migration, user preservation, serving parity,
 HTTP/PWA smoke и exact completion markers сохраняются. После запуска revision label
 и фактический container image ID обоих сервисов должны совпасть с проверенным CI image.
+До публикации PWA и completion marker read-only `scripts/runtime_exposure.py` проверяет каждый runtime container: project/service/revision, running state, единственную owned Compose bridge network и фактические/requested bindings только на 127.0.0.1:8090/8081. Public wildcard, дополнительные опубликованные порты, host/чужие сети останавливают поставку. PostgreSQL ports/network/storage проверяются существующим postgres_vps image-state/verify. Guard не меняет firewall/container/network и не выводит raw Docker inspection с environment secrets. Failure сохраняет действующие recovery gates; автоматического удаления или data rollback нет.
 Ошибка после миграции не запускает автоматический data rollback; действуют прежние
 forward-fix/recovery gates. GitHub protections proposal не применяется этим изменением.
 Actual Docker build, GitHub artifact provenance и VPS promotion требуют CI/CD evidence;
@@ -860,10 +874,22 @@ content. Она не восстанавливает данные поверх pr
 не восстанавливается и пересобирается своей отдельной процедурой.
 
 Рабочий каталог — `/opt/psychology-quiz`, environment — root VPS operator с
-известным target и текущим candidate application image. До запуска требуется
+известным target и текущим candidate application image. Для отдельного ручного запуска требуется
 согласованное окно с остановленными обоими writers; процедура проверяет это,
 но не останавливает их сама. После процедуры writers остаются в исходном
 состоянии. Запуск не является обычным smoke check на работающем production.
+
+При штатной PostgreSQL stateful поставке, которая меняет schema/content,
+`deploy.sh` выполняет тот же rehearsal автоматически после verified backup,
+под inherited delivery lock и до изменения production schema/content.
+Используется уже существующее stopped-writer окно. Возвращённый owned record
+и `USER_RECOVERY_OK` подтверждают successful candidate-content rebuild и
+сохранность personal state в изолированной копии; запись остаётся приватной.
+При failure live migration, PWA publish и `DEPLOY_OK` не выполняются. Если DB
+ещё не менялась, существующий pre-migration recovery возвращает прежние
+containers; после начала image transition сохраняется прежний stop/reconcile
+flow. Новый автоматический restore production или переключение DB не добавлен.
+Non-migration runtime/docs updates дополнительный rehearsal не запускают.
 
 `EXPECTED_SHA` — проверенный текущий checkout/candidate image; `VERIFIED_RECORD`
 — обычный приватный `record.json` внутри `.postgres/backups/` с неизменённым

@@ -118,3 +118,40 @@ def test_miniapp_homework_requires_verified_actor_and_shares_attempts(tmp_path):
     status, _, body = build_homework_response(str(path), token, "catalog", other_data)
     assert status == 200
     assert not next(a for a in json.loads(body)["assignments"] if a["id"] == "first_consultation")["completed"]
+
+
+def test_homework_runner_and_feedback_do_not_project_private_provenance(tmp_path):
+    path = tmp_path / 'homework-projection.sqlite3'
+    actor, _ = _bank(path)
+    private_ref = 'drive:private-homework-source-0123456789#characters:1:20'
+    forbidden_fields = {'source_ref', 'source_refs', 'source_title', 'external_id',
+                        'publication_review', 'quality_review', 'content_snapshot', 'review_sha256'}
+
+    def assert_public(value):
+        if isinstance(value, dict):
+            assert not forbidden_fields.intersection(value)
+            for child in value.values():
+                assert_public(child)
+        elif isinstance(value, list):
+            for child in value:
+                assert_public(child)
+        elif isinstance(value, str):
+            assert private_ref not in value and 'drive:' not in value
+
+    with closing(get_connection(str(path))) as conn, conn:
+        # Private DB provenance remains available for review; clients receive
+        # only the presentation projection even for immutable attempt snapshots.
+        conn.execute('UPDATE questions SET source_ref=?', (private_ref,))
+        result = start_homework(conn, actor_user_id=actor, assignment_id='first_consultation',
+                                payload={'replace_active': False})
+        assert_public(result)
+        state = result['runner_state']
+        session = state['session']['session_id']
+        for row in conn.execute('SELECT question_id FROM quiz_session_questions WHERE session_id=? ORDER BY order_index', (session,)).fetchall():
+            feedback = answer_quiz(conn, actor_user_id=actor, session_id=session,
+                                   question_id=int(row[0]), selected_option_index=0)
+            assert_public(feedback)
+            assert feedback['submission_status'] == 'accepted'
+        assert_public(catalog_for_actor(conn, actor))
+        snapshots = conn.execute('SELECT content_snapshot FROM quiz_session_questions WHERE session_id=?', (session,)).fetchall()
+        assert snapshots and all(private_ref in row[0] for row in snapshots)

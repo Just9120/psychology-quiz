@@ -65,6 +65,8 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
              binding_certificates: dict[str, dict] | None = None) -> dict:
     topics = curriculum["topics"]
     items = quality["items"]
+    # signed_private is a retained report field name for exact private reviews,
+    # including repository receipts; its name is not a cryptographic claim.
     result = {topic_id: {"title": topic["title"], "supported": 0, "signed_private": 0,
                          "partial": 0, "disputed": 0, "stale": 0,
                          "unverified_source": 0}
@@ -96,7 +98,7 @@ def coverage(curriculum: dict, quality: dict, approved_questions: dict[str, str]
             registered = next((item for item in (source_registry or {}).get("sources", [])
                                if item["id"] == source.get("source_id")), None)
             if (edition.get("item_sha256") == approved_questions[question_id]
-                    and edition.get("locator") == f"private certificate:questions:{question_id}"
+                    and edition.get("locator") in {f"private certificate:questions:{question_id}", f"private review:questions:{question_id}"}
                     and registered is not None
                     and all(source.get(key) == certified_source.get(key)
                             for key in ("source_id", "modified_time", "snapshot_sha256"))
@@ -193,7 +195,7 @@ def certified_questions(root: Path, dossier_paths: list[Path]) -> dict[str, dict
                 or dossier["item_id"] in certified):
             raise ValueError("invalid_signed_curriculum_dossier")
         item_id = dossier["item_id"]
-        certificate = (policy.certificates or {}).get(f"questions:{item_id}")
+        certificate = policy.private_review_record("questions", item_id)
         sources = dossier.get("sources")
         if (not isinstance(certificate, dict) or certificate.get("review_sha256") != fingerprint(dossier)
                 or not isinstance(sources, list) or len(sources) != 1
@@ -233,8 +235,8 @@ def main() -> int:
                         help="private current Drive inventory; use together with --processed")
     parser.add_argument("--processed", type=Path,
                         help="private source review snapshot; use together with --inventory")
-    parser.add_argument("--signed-dossier", type=Path, action="append", default=[],
-                        help="ignored signed private review dossier for an exact question edition")
+    parser.add_argument("--private-dossier", "--signed-dossier", dest="signed_dossier", type=Path, action="append", default=[],
+                        help="ignored reviewed private dossier for an exact question edition (signature optional)")
     parser.add_argument("--private-registry", type=Path,
                         help="ignored reviewed source registry for private topic coverage")
     parser.add_argument("--private-topics", type=Path,

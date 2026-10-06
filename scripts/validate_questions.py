@@ -89,7 +89,7 @@ def validate() -> list[str]:
             if status == "approved" and "source_ref" not in question and qid:
                 try:
                     policy = load_policy()
-                    signed_private = (f"questions:{qid}" in (policy.certificates or {})
+                    signed_private = (policy.private_review_record("questions", qid) is not None
                                       and policy.can_publish("questions", question))
                 except (OSError, ValueError, KeyError, TypeError):
                     pass

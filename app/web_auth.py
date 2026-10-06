@@ -187,20 +187,24 @@ class WebAuth:
                 verified = False
         if not verified or row is None or not row["enabled"] or not self._allowed_email(email):
             raise AuthError("invalid_credentials", 401)
-        now, token = int(self.clock()), secrets.token_urlsafe(32)
+        now = int(self.clock())
         with self.transaction() as conn:
             # Reset/disable may have happened while the hash was being verified.
             current = conn.execute("SELECT 1 FROM web_accounts WHERE id=? AND enabled=1 AND password_hash=?",
                                    (row["id"], encoded)).fetchone()
             if current is None:
                 raise AuthError("invalid_credentials", 401)
-            conn.execute("DELETE FROM web_sessions WHERE expires_at<=? OR last_seen_at<=?", (now, now-IDLE_TTL))
-            conn.execute("INSERT INTO web_sessions VALUES(?,?,?,?,?)", (digest(token), row["id"], now, now+SESSION_TTL, now))
-            # Bound retained sessions for this closed owner application.
-            conn.execute("""DELETE FROM web_sessions WHERE account_id=? AND digest NOT IN (
-                SELECT digest FROM web_sessions WHERE account_id=?
-                ORDER BY CASE WHEN digest=? THEN 0 ELSE 1 END,created_at DESC,digest DESC LIMIT 10
-            )""", (row["id"], row["id"], digest(token)))
+            token = self.create_session(conn, row["id"], now)
+        return token
+
+    def create_session(self, conn, account_id, now):
+        token = secrets.token_urlsafe(32)
+        conn.execute("DELETE FROM web_sessions WHERE expires_at<=? OR last_seen_at<=?", (now, now-IDLE_TTL))
+        conn.execute("INSERT INTO web_sessions VALUES(?,?,?,?,?)", (digest(token), account_id, now, now+SESSION_TTL, now))
+        conn.execute("""DELETE FROM web_sessions WHERE account_id=? AND digest NOT IN (
+            SELECT digest FROM web_sessions WHERE account_id=?
+            ORDER BY CASE WHEN digest=? THEN 0 ELSE 1 END,created_at DESC,digest DESC LIMIT 10
+        )""", (account_id, account_id, digest(token)))
         return token
 
     def authenticate(self, conn, token: object, *, csrf: object = None, mutation=False):
@@ -230,6 +234,8 @@ class WebAuth:
                           "display_name": " ".join(str(target_user[key]) for key in ("first_name", "last_name") if target_user[key])}
         profile = conn.execute("SELECT display_name FROM web_profile_names WHERE account_id=?", (account["id"],)).fetchone()
         return {"ok": True, "email": account["email"], "display_name": profile[0] if profile else None, "role": "owner",
+                "google_available": self.settings.google is not None,
+                "google_linked": conn.execute("SELECT 1 FROM web_google_identities WHERE account_id=?", (account["id"],)).fetchone() is not None,
                 "needs_identity": account["user_id"] is None,
                 "telegram_linked": actor is not None and actor[0] is not None, "csrf_token": csrf_token(session),
                 "link_pending": bool(pending), "link_confirmed": bool(pending and pending["telegram_confirmed"]), "link_target": target}

@@ -68,7 +68,7 @@ while IFS= read -r file; do
   esac
   case "$file" in
     docker-compose.yml) STATEFUL=1 ;;
-    app/db.py|app/database.py|app/postgres_*.py|app/homework*.py|app/attempt_content.py|app/*_schema.py|app/pwa_promotion.py|app/web_auth.py|app/glossary.py|app/glossary_projection.py|app/case_content.py|app/content_publication.py|app/publication_certificate.py|app/source_evidence.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/homework.json|content/questions/*|content/glossary/*|content/publication-reviews.json|content/publication-certificates.json|content/publication-review-public-key.hex|content/learning-quality-reviews.json|content/legacy-publication-baseline.json|content/source-corpus.json) STATEFUL=1; MIGRATE=1 ;;
+    app/db.py|app/database.py|app/postgres_*.py|app/homework*.py|app/attempt_content.py|app/*_schema.py|app/pwa_promotion.py|app/web_auth.py|app/glossary.py|app/glossary_projection.py|app/case_content.py|app/content_publication.py|app/publication_certificate.py|app/publication_receipt.py|app/source_evidence.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/homework.json|content/questions/*|content/glossary/*|content/publication-reviews.json|content/publication-certificates.json|content/publication-receipts.json|content/publication-review-public-key.hex|content/learning-quality-reviews.json|content/legacy-publication-baseline.json|content/source-corpus.json) STATEFUL=1; MIGRATE=1 ;;
   esac
 done <<< "$CHANGED_FILES"
 git merge --ff-only "$EXPECTED_SHA"
@@ -138,6 +138,13 @@ if [[ "$STATEFUL" == 1 ]]; then
       BACKUP_PATH="$(python3 scripts/postgres_vps.py upgrade-vector-image --expected-sha "$EXPECTED_SHA" --lock-held)"
     fi
     [[ "$BACKUP_PATH" == "$PROJECT_DIR"/.postgres/backups/release-*/record.json ]] || fail 'Invalid PostgreSQL backup record'
+    if [[ "$MIGRATE" == 1 ]]; then
+      # Use the existing stopped-writer/lock window. Rebuild only an owned
+      # restored copy before any production schema/content change.
+      USER_RECOVERY_RECORD="$(python3 scripts/postgres_vps.py rehearse-user-recovery --expected-sha "$EXPECTED_SHA" --lock-held --record "$BACKUP_PATH")"
+      [[ "$USER_RECOVERY_RECORD" =~ ^/opt/psychology-quiz/\.postgres/recovery-rehearsals/rehearsal-[A-Za-z0-9_-]+/record\.json$ ]] || fail 'Invalid user recovery record'
+      log "USER_RECOVERY_OK record=$USER_RECOVERY_RECORD"
+    fi
   else
     BACKUP_PATH="$(compose run --rm --no-deps psych_quiz_bot python scripts/deployment_db.py backup)"
     [[ "$BACKUP_PATH" == /data/backups/release-*/quiz.sqlite3 ]] || fail 'Invalid backup record'
@@ -164,6 +171,7 @@ for service in "${SERVICES[@]}"; do
   [[ "$(docker inspect -f '{{.State.Running}}' "$container_id")" == true ]] || fail "Service stopped: $service"
   [[ "$(docker inspect -f '{{.Image}}' "$container_id")" == "$CANDIDATE_IMAGE_ID" ]] || fail 'Running image differs from verified CI image'
   [[ "$(docker inspect -f '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$container_id")" == "$EXPECTED_SHA" ]] || fail 'Running image revision mismatch'
+  python3 scripts/runtime_exposure.py --service "$service" --container-id "$container_id" --expected-sha "$EXPECTED_SHA"
   image_id="$(docker inspect -f '{{.Image}}' "$container_id")"
   log "RUNTIME_OK service=$service revision=$EXPECTED_SHA image=$image_id"
 done

@@ -43,6 +43,78 @@ def fixture_review():
     return public, dossier
 
 
+def test_private_dossier_review_is_key_independent_but_does_not_grant_publication():
+    public, dossier = fixture_review()
+    review = signer.validate_review_dossier("questions", public, dossier)
+    assert review == {"item_sha256": fingerprint(public), "review_sha256": fingerprint(dossier)}
+    assert "source_ref" not in review and "sources" not in review
+    # An unsigned validation result cannot bypass the existing publication gate.
+    key = Ed25519PrivateKey.generate()
+    policy = PublicationPolicy({}, {}, {}, certificates={"questions:synthetic_question": review},
+                               certificate_key=key.public_key())
+    assert policy.error("questions", public) == "invalid_publication_certificate"
+    with pytest.raises(SigningError, match="derivative_changed_since_review"):
+        signer.validate_review_dossier("questions", {**public, "explanation": "Changed claim"}, dossier)
+    key = Ed25519PrivateKey.generate()
+    certificate = sign_review("questions", public, dossier, key)
+    assert all(certificate[field] == value for field, value in review.items())
+
+
+@pytest.mark.parametrize("stale_source", [False, True])
+@pytest.mark.parametrize("review_only", [False, True])
+def test_review_only_cli_never_reads_key_and_requires_current_sources(tmp_path, monkeypatch, capsys, stale_source, review_only):
+    public, dossier = fixture_review()
+    root = tmp_path / "repo"
+    content = root / "content" / "questions"
+    content.mkdir(parents=True)
+    bank = content / "synthetic.json"
+    bank.write_text(json.dumps([public]), encoding="utf-8")
+    private = root / "data"
+    private.mkdir()
+    paths = []
+    for name, value in (("dossier", dossier), ("inventory", {"synthetic": "inventory"}),
+                        ("processed", {"synthetic": "processed"})):
+        path = private / (name + ".json")
+        path.write_text(json.dumps(value), encoding="utf-8")
+        paths.append(path)
+    output = private / "result.json"
+    before = bank.read_bytes()
+    calls = []
+    def verify(d, inventory, processed, **kwargs):
+        assert d == dossier and inventory == {"synthetic": "inventory"}
+        assert processed == {"synthetic": "processed"} and kwargs["public_item"] == public
+        calls.append("source-review")
+        if stale_source:
+            raise SigningError("source_revision_changed_since_review")
+    def key_forbidden(*args, **kwargs):
+        pytest.fail("Review-only must not touch a signing key")
+    monkeypatch.setattr(signer, "REPO_ROOT", root)
+    monkeypatch.setattr(signer, "private_path", lambda path, **kwargs: path)
+    monkeypatch.setattr(signer, "verify_current_sources", verify)
+    monkeypatch.setattr(signer, "private_signing_key", key_forbidden)
+    monkeypatch.setattr(signer.serialization, "load_pem_private_key", key_forbidden)
+    args = [*( ["--review-only"] if review_only else []), "--kind", "questions", "--item-id", public["id"],
+            "--dossier", str(paths[0]), "--inventory", str(paths[1]), "--processed", str(paths[2]),
+            "--output", str(output)]
+    assert signer.main(args) == int(stale_source)
+    assert calls == ["source-review"] and bank.read_bytes() == before
+    if stale_source:
+        assert not output.exists()
+    else:
+        result = json.loads(output.read_text(encoding="utf-8"))
+        if review_only:
+            assert result["scope"] == "private_review_validation"
+            assert result["items"]["questions:" + public["id"]] == signer.validate_review_dossier("questions", public, dossier)
+        else:
+            assert result["questions:" + public["id"]] == signer.create_review_receipt("questions", public, dossier)
+            assert PublicationPolicy({}, {}, {}, receipts=result).can_publish("questions", public)
+        assert "signature" not in output.read_text(encoding="utf-8")
+        saved = output.read_bytes()
+        assert signer.main(args) == 1 and output.read_bytes() == saved
+    captured = capsys.readouterr()
+    assert "drive:fixture" not in captured.out + captured.err
+
+
 def test_signing_key_must_be_outside_checkout_in_owner_secret_directory(tmp_path, monkeypatch):
     secrets = tmp_path / "secrets" / "psychology-quiz"
     secrets.mkdir(parents=True)
@@ -111,7 +183,8 @@ def test_signed_alternate_lesson_binding_rejects_topic_or_edition_change():
                                  key.public_key()).can_publish("questions", public)
 
 
-def test_question_validator_requires_verified_certificate_when_source_ref_is_private(tmp_path, monkeypatch):
+@pytest.mark.parametrize("signed", [True, False])
+def test_question_validator_requires_verified_certificate_when_source_ref_is_private(tmp_path, monkeypatch, signed):
     public, dossier = fixture_review()
     public.update({"category": "Тема", "options": ["А", "Б", "В", "Г"],
                    "correct_option_index": 0, "difficulty": "easy"})
@@ -121,7 +194,8 @@ def test_question_validator_requires_verified_certificate_when_source_ref_is_pri
     key = Ed25519PrivateKey.generate()
     certificate = sign_review("questions", public, dossier, key)
     policy = PublicationPolicy({}, {}, {}, {},
-                               {"questions:synthetic_question": certificate}, key.public_key())
+                               {"questions:synthetic_question": certificate}, key.public_key()) if signed else PublicationPolicy(
+                                   {}, {}, {}, receipts={"questions:synthetic_question": signer.create_review_receipt("questions", public, dossier)})
     content = tmp_path / "content"
     content.mkdir()
     (content / "topics.json").write_text(json.dumps([{
@@ -142,7 +216,8 @@ def test_question_validator_requires_verified_certificate_when_source_ref_is_pri
     assert validate_questions.validate() == []
 
 
-def test_glossary_loader_requires_verified_certificate_when_refs_are_private(tmp_path, monkeypatch):
+@pytest.mark.parametrize("signed", [True, False])
+def test_glossary_loader_requires_verified_certificate_when_refs_are_private(tmp_path, monkeypatch, signed):
     public = {"id": "synthetic_term", "topic_id": "vvedenie_v_professiyu", "term": "Опора",
               "aliases": [], "short_definition": "Источник поддержки",
               "definition": "То, что помогает человеку справляться с учебными задачами.",
@@ -169,7 +244,8 @@ def test_glossary_loader_requires_verified_certificate_when_refs_are_private(tmp
     key = Ed25519PrivateKey.generate()
     certificate = sign_review("glossary", public, dossier, key)
     policy = PublicationPolicy({}, {}, {}, {},
-                               {"glossary:synthetic_term": certificate}, key.public_key())
+                               {"glossary:synthetic_term": certificate}, key.public_key()) if signed else PublicationPolicy(
+                                   {}, {}, {}, receipts={"glossary:synthetic_term": signer.create_review_receipt("glossary", public, dossier)})
     directory = tmp_path / "glossary"
     directory.mkdir()
     path = directory / "vvedenie_v_professiyu.json"
@@ -392,3 +468,70 @@ def test_registered_bibliography_cannot_be_relabelled_as_learning_source():
     with pytest.raises(SigningError, match="private_source_kind_mismatch"):
         verify_current_sources({"sources": [{**dossier_source, "kind": "learning_material"}]},
                                inventory, processed)
+
+
+def test_review_receipt_keeps_quality_tamper_and_signature_boundaries():
+    from copy import deepcopy
+    public, dossier = fixture_review()
+    receipt = signer.create_review_receipt("questions", public, dossier)
+    policy = PublicationPolicy({}, {}, {}, receipts={"questions:synthetic_question": receipt})
+    assert policy.has_private_review("questions", public)
+    assert receipt["reviewer"] == "private-review" and "test-reviewer" not in json.dumps(receipt)
+    assert not policy.can_publish("questions", {**public, "status": "draft"})
+    assert not policy.can_publish("questions", {**public, "explanation": "Changed"})
+    assert not policy.can_publish("questions", {**public, "source_ref": "drive:fixture"})
+    for change in ({"checks": []}, {"source_support": "disputed"}, {"review_sha256": "bad"},
+                   {"reviewed_at": "invalid"}, {"sources": []}, {"decision": "draft"}, {"schema_version": True}):
+        invalid = PublicationPolicy({}, {}, {}, receipts={"questions:synthetic_question": {**receipt, **change}})
+        assert not invalid.can_publish("questions", public)
+    for change in ({"checks": []}, {"source_support": "disputed"}, {"issues": ["ambiguous"]}):
+        invalid = deepcopy(dossier)
+        invalid["quality_review"].update(change)
+        with pytest.raises(SigningError):
+            signer.create_review_receipt("questions", public, invalid)
+    # Existing signed records still require a valid signature even with a valid receipt.
+    key = Ed25519PrivateKey.generate()
+    certificate = sign_review("questions", public, dossier, key)
+    invalid = PublicationPolicy({}, {}, {}, certificates={"questions:synthetic_question": {**certificate, "signature": "bad"}},
+                                certificate_key=key.public_key(), receipts={"questions:synthetic_question": receipt})
+    assert invalid.error("questions", public) == "invalid_publication_certificate"
+    assert "drive:" not in json.dumps(receipt) and "signature" not in receipt
+
+
+def test_unsigned_curriculum_binding_preserves_exact_editions():
+    public, dossier = fixture_review()
+    topic = "t_" + "a" * 12
+    dossier["curriculum_topic_id"] = topic
+    dossier["curriculum_link"] = {"source_id": "fixture", "topic_id": topic, "lesson_id": topic, "format": "presentation"}
+    receipt = signer.create_review_receipt("questions", public, dossier)
+    edition = {"external_id": public["id"], "topic_id": topic, "item_sha256": fingerprint(public),
+               "locator": "private review:questions:" + public["id"]}
+    catalog = {"editions": {"c" * 64: edition}}
+    document = {"schema_version": 1, "items": {"c" * 64: receipt}}
+    active = {"questions:" + public["id"]: receipt}
+    assert validate_private_bindings(catalog, document, None, active_receipts=active) == document["items"]
+    with pytest.raises(ValueError, match="Missing current private curriculum binding"):
+        validate_private_bindings(catalog, {"schema_version": 1, "items": {}}, None, active_receipts=active)
+    with pytest.raises(ValueError, match="Invalid private curriculum binding"):
+        validate_private_bindings({"editions": {"c" * 64: {**edition, "topic_id": "t_" + "b" * 12}}}, document, None)
+
+
+def test_unsigned_bibliography_receipt_keeps_public_projection_and_metadata_validation(monkeypatch):
+    from scripts import validate_literature
+    public = json.loads(Path("content/literature/psychological_consulting.json").read_text(encoding="utf-8"))[0]
+    public = {key: value for key, value in public.items() if key not in {"source_ref", "source_refs", "reviewed_curriculum_topics"}}
+    public["source"] = {"citation": "Synthetic bibliographic citation"}
+    public["id"] = "synthetic_book"
+    _, dossier = fixture_review()
+    dossier.update(kind="literature", item_id=public["id"], source_refs=["drive:fixture#page-1"])
+    dossier.pop("source_ref")
+    dossier["publication_review"].update(purpose="bibliographic_metadata",
+        item_sha256=fingerprint({**public, "source_refs": dossier["source_refs"]}))
+    receipt = signer.create_review_receipt("literature", public, dossier)
+    policy = PublicationPolicy({}, {}, {}, receipts={"literature:synthetic_book": receipt})
+    monkeypatch.setattr(validate_literature, "load_policy", lambda: policy)
+    assert policy.can_publish("literature", public)
+    errors = []
+    validate_literature.validate_entry(public, "receipt book", public["topic_id"], {public["topic_id"]}, {}, errors)
+    assert errors == []
+    assert not policy.can_publish("literature", {**public, "title": "Changed"})

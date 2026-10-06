@@ -14,10 +14,11 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
     <button className="button secondary" disabled={busy} onClick={onRefresh}>Обновить обзор</button>
     <article className="panel"><h2>Источники</h2>
       {data.sources.state === 'UNSET' ? <p role="status">Снимок обработки источников не загружен или не прошёл проверку. Текущее покрытие неизвестно.</p> : <>
-        <p>Снимок: {data.sources.captured_at}. Файлов: {data.sources.files}; папок: {data.sources.folders}.</p>
+        <p>{data.sources.observation_basis === 'saved_inputs' ? 'Сводка сохранённых данных' : 'Снимок'}: {data.sources.captured_at}. Файлов: {data.sources.files}; папок: {data.sources.folders}.</p>
         <p>Записей проверки: {data.sources.processing_records}; известных удержаний: {data.sources.known_holds}.</p>
         <ul>{Object.entries(data.sources.processing ?? {}).map(([key, count]) => <li key={key}>{states[key] ?? key}: {count}</li>)}</ul>
         <p className="muted">Это состояние переданного снимка. Оно не подтверждает полное покрытие корпуса или отсутствие более поздних изменений.</p>
+        {data.sources.observation_basis === 'saved_inputs' && <p className="muted">Дата сводки — время расчёта. Актуальность папки Google Drive этим расчётом не проверялась.</p>}
       </>}
     </article>
     {data.sources.coverage && <article className="panel"><h2>Подготовка по учебным материалам</h2>
