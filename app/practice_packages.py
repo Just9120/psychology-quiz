@@ -33,7 +33,9 @@ ANALYSIS_INSTRUCTIONS = [
 ]
 
 
-def package_from_case(question: dict, policy=None) -> dict:
+def package_from_case(question: dict, policy=None, *, mode: str = "text") -> dict:
+    if mode not in {"text", "voice"}:
+        raise ValueError("invalid_practice_mode")
     policy = policy or load_policy()
     if (not isinstance(question, dict) or question.get("kind") != "case"
             or question.get("status") != "approved" or case_error(question)
@@ -48,7 +50,7 @@ def package_from_case(question: dict, policy=None) -> dict:
     fingerprint = hashlib.sha256(json.dumps(
         {"situation": case["situation"], "materials": materials, "criteria": criteria},
         ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-    return {
+    package = {
         "schema_version": 1, "case_id": question["id"], "case_fingerprint": fingerprint,
         "notice": NOTICE,
         "student_brief": {"situation": case["situation"],
@@ -62,9 +64,22 @@ def package_from_case(question: dict, policy=None) -> dict:
                                 "materials": deepcopy(materials), "criteria": deepcopy(criteria),
                                 "notice": NOTICE, "constraints": deepcopy(CONSTRAINTS)},
     }
+    if mode == "voice":
+        package["practice_mode"] = "voice"
+        package["student_brief"]["task"] += (
+            " Передайте роль клиента внешней модели и включите её голосовой режим. "
+            "Говорите от имени консультанта; после завершения выйдите из роли и "
+            "используйте отдельный пакет разбора."
+        )
+        package["client_role"]["voice_instructions"] = [
+            "Используйте те же role_context и instructions, отвечайте короткими естественными репликами клиента.",
+            "Дождитесь окончания реплики консультанта. Не превращайте паузу или ошибку распознавания в новый факт кейса; попросите повторить неясную реплику.",
+            "Не произносите критерии разбора и не подсказывайте методы. Голосовой формат не меняет границ роли.",
+        ]
+    return package
 
 
-def load_case_package(case_id: str) -> dict:
+def load_case_package(case_id: str, *, mode: str = "text") -> dict:
     if not isinstance(case_id, str) or not case_id:
         raise ValueError("case_id_required")
     matched = []
@@ -74,4 +89,4 @@ def load_case_package(case_id: str) -> dict:
             matched.extend(q for q in entries if isinstance(q, dict) and q.get("id") == case_id)
     if len(matched) != 1:
         raise ValueError("unique_case_required")
-    return package_from_case(matched[0])
+    return package_from_case(matched[0], mode=mode)
