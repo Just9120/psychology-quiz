@@ -1,4 +1,5 @@
 """Rolling owner aggregates respect mixed UTC formats on the native schema."""
+import json
 from contextlib import closing
 from datetime import datetime, timezone
 
@@ -41,3 +42,32 @@ def test_period_counts_and_identity_projection_on_postgres(pg_target):
         conn.execute("UPDATE quiz_answers SET answered_at=? WHERE session_id=2", ('2026-09-28T12:00:00+00:00',))
         cutoff = get_owner_period_stats(conn, '24h', now=now)
         assert (cutoff['quiz_started'], cutoff['quiz_completed'], cutoff['quiz_answers']) == (2, 2, 2)
+
+
+def test_resumed_answer_activity_native_postgres(pg_target):
+    with closing(get_connection(pg_target)) as conn, conn:
+        initialize_schema(conn)
+        conn.execute("INSERT INTO users(id,telegram_user_id) VALUES(10,101),(20,202)")
+        conn.execute("INSERT INTO categories(id,slug,name) VALUES(1,'resumed','Resumed')")
+        conn.execute("INSERT INTO questions(id,external_id,category_id,question_text) VALUES(1,'resumed-question',1,'Question')")
+        conn.execute("INSERT INTO quiz_sessions(id,user_id,started_at,status) VALUES(1,10,'2026-09-01 10:00:00','in_progress')")
+        conn.execute("""INSERT INTO quiz_answers(session_id,question_id,selected_option_index,is_correct,answered_at)
+                        VALUES(1,1,0,1,'2026-09-29T10:00:00+00:00')""")
+        conn.execute("""INSERT INTO glossary_sessions
+                        (id,user_id,topic_id,topic_title,status,snapshot,state,created_at,updated_at)
+                        VALUES('resumed',20,'term','Term','in_progress','{}',?,
+                               '2026-09-01 10:00:00','2026-09-30 10:00:00')""",
+                     (json.dumps({'answers': {'1': {'answered_at': '2026-09-28T12:00:00+00:00'}}}),))
+        now = datetime(2026, 9, 29, 12, tzinfo=timezone.utc)
+        assert get_owner_period_stats(conn, '24h', now=now)['active_users'] == 2
+        conn.execute("""INSERT INTO user_review_events(user_id,answer_kind,answer_key,answered_at)
+                        VALUES(10,'quiz','answer','2026-09-29 10:00:00')""")
+        assert get_owner_period_stats(conn, '24h', now=now)['active_users'] == 2
+        for stamp in ('2026-09-28T11:59:59+00:00', '2026-09-29T12:00:01+00:00', None):
+            conn.execute("UPDATE glossary_sessions SET state=?",
+                         (json.dumps({'answers': {'1': {'answered_at': stamp}}}),))
+            assert get_owner_period_stats(conn, '24h', now=now)['active_users'] == 1
+        conn.execute("DELETE FROM user_review_events")
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-30 10:00:00'")
+        empty = get_owner_period_stats(conn, '24h', now=now)
+        assert empty['active_users'] == 0 and empty['quiz_answers'] == 0

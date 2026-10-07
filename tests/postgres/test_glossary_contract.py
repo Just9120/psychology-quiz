@@ -15,3 +15,5 @@ from tests.test_glossary_chat import (
     test_new_chat_context_resumes_web_attempt_and_answer_survives_another_restart,
     test_chat_old_confirmation_does_not_replace_a_newer_attempt,
 )
+
+from tests.test_glossary_balance import test_balanced_mixed_snapshot_and_resume

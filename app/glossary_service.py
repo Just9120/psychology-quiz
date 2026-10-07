@@ -105,10 +105,17 @@ def start(conn, actor, topic_id, count, *, expected_session_id=None, replace_act
     if selected_entry_ids is None:
         limit = len(entries) if count in (None, 'all') else min(count, len(entries))
         if len(topic_ids) > 1 and limit < len(entries):
-            # A mixed attempt always shows more than one selected topic even
-            # when a small sample is drawn from a much larger corpus.
-            guaranteed = [random.choice(by_topic[item]) for item in random.sample(topic_ids, 2)]
-            selected = guaranteed + random.sample([entry for entry in entries if entry not in guaranteed], limit - 2)
+            # Deal one entry per topic each round. Exhausted banks drop out,
+            # so their quota is redistributed without repeats or lost slots.
+            order = random.sample(topic_ids, len(topic_ids))
+            remaining = {item: random.sample(by_topic[item], len(by_topic[item])) for item in order}
+            selected = []
+            while len(selected) < limit:
+                for item in order:
+                    if remaining[item]:
+                        selected.append(remaining[item].pop())
+                    if len(selected) == limit:
+                        break
             random.shuffle(selected)
         else:
             selected = random.sample(entries, limit)
