@@ -6386,8 +6386,9 @@
     },
     "questions:m1_vnd_018": {
       "schema_version": 1,
-      "item_sha256": "25d25dbbc766c6554d953557bc44266aff365e9b15a1ea95203f8c3f2941b8ab",
-      "review_sha256": "38afb87b7febf6b44486ec011130dcf8ba4601f97f978fb830aef67b1af6659b",
+      "item_sha256": "ab4d3e28fca357fa1b462154a6af391e40fa2515c28f561b8895b68db57c1756",
+      "review_sha256": "02b5c89044c52ac026f1c2d884fb81add28b9c4cdcb02e0e3cc9094c0e9e3fe0",
+      "topic_id": "t_27f468335f64",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",

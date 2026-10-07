@@ -5752,7 +5752,7 @@
       ]
     },
     "questions:m1_vnd_018": {
-      "item_sha256": "25d25dbbc766c6554d953557bc44266aff365e9b15a1ea95203f8c3f2941b8ab",
+      "item_sha256": "ab4d3e28fca357fa1b462154a6af391e40fa2515c28f561b8895b68db57c1756",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-10-07",
@@ -5767,15 +5767,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Foundational lecture directly discusses neural contacts as a basis of learning/memory, separately corroborated by bounded OpenStax8.2 neural-communication section53-54. No claim of only one brain centre or exclusive REM transfer. The dedicated memory lecture has unresolved incoming mappings; this review uses another actual course source, retaining all restrictions unchanged.",
-      "sources": [
-        {
-          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
-          "modified_time": "2026-04-07T09:56:48.714Z",
-          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:8113:8438"
-        }
-      ]
+      "note": "Точный introductory course fragment связывает обучение/сохранение опыта с изменением синаптических контактов. Независимый первичный рассказ Кандела подтверждает изменение силы связей в обучении у Aplysia; перенос ограничен участием механизма, не всеми формами памяти или единственной структурой мозга. Вопрос проверяет осторожную интерпретацию наблюдения, отличается от определения нейропластичности и передачи сигнала в химическом синапсе. Неподтверждённые возрастные обобщения, числа клеток, гиппокамп как вся кратковременная память и универсальные последствия ЭСТ не используются. Историческая редакция сохранена. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_vnd_019": {
       "item_sha256": "6f12d5cb3214fd9c8c0d9d7749b7588d6f53462777d32b2dfc1fbde280bd9b93",

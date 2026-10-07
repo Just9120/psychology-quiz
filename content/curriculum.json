@@ -4305,6 +4305,12 @@
       "topic_id": "t_a4cdbc5015b0",
       "item_sha256": "d0f4c3849c4657232e7ae2c98435f16c9b444fe9d7390e1be64ba4b3b82eb00b",
       "locator": "private review:questions:m2_exp_109"
+    },
+    "7afb939760bfb005e8b5675def87158c660e3953906cfe3559c1cb555251ada5": {
+      "external_id": "m1_vnd_018",
+      "topic_id": "t_27f468335f64",
+      "item_sha256": "ab4d3e28fca357fa1b462154a6af391e40fa2515c28f561b8895b68db57c1756",
+      "locator": "private review:questions:m1_vnd_018"
     }
   }
 }
