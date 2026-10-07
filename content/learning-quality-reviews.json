@@ -7331,10 +7331,10 @@
       ]
     },
     "questions:m1_psyf_001": {
-      "item_sha256": "b44bbb213c54a5841bb01f687a2b1b12c0111d56fd03767d53229e64b5ff65d8",
+      "item_sha256": "014c47fbac67b7ae28374a8ef5b15e42690457cc5c95f57c4628b16e4197e3b3",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7346,21 +7346,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:3698:3723"
         }
       ]
     },
     "questions:m1_psyf_002": {
-      "item_sha256": "02095be324ee4ac73772f68c2c9af6e7adbe96f356c2dea831dec7bb79cd7841",
+      "item_sha256": "10152a39dd18176644acb25d6c944d2febaa0562c720483d0866da46977a6030",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7372,21 +7372,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:3698:3723"
         }
       ]
     },
     "questions:m1_psyf_003": {
-      "item_sha256": "4b85a5c9f403a7750646106645e87b6ff42f772a59ec469ce3402e46dfd5d785",
+      "item_sha256": "3454c2fa24ee54bb03a48562135ad6d1398e152f2f71c494295fce5fae76cd3c",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7398,21 +7398,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:5461:5495"
         }
       ]
     },
     "questions:m1_psyf_004": {
-      "item_sha256": "c7baa2dee260b217a0ed81f71944a31c913958fa460eaf65cff639d6c277bd50",
+      "item_sha256": "0dd8d587b2ae41fc6dd4bf6b86c19325ad5c50c5bd93339ff5e019dbe472c2d3",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7424,21 +7424,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:5461:5495"
         }
       ]
     },
     "questions:m1_psyf_005": {
-      "item_sha256": "b6b19ba2b538a53093bc7abaaf0d5ef4d8ba5b29fae1c288383deef5f427064f",
+      "item_sha256": "6cfb92463af87a60ef7ee800f24f206216809de04a59c3d0e359438a3cd974b8",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7450,13 +7450,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:572:647"
         }
       ]
     },
@@ -7515,10 +7515,10 @@
       ]
     },
     "questions:m1_psyf_008": {
-      "item_sha256": "1b7e6daea1152a6bf3d53f2c32e2b84bba9143bb3979bf5553c4aacad5e15a0d",
+      "item_sha256": "be9b4a5209b05f994adad56ccdb9e7b804f7fcccce6c085b62474c3bf7cbd789",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7530,21 +7530,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:2629:2657"
         }
       ]
     },
     "questions:m1_psyf_009": {
-      "item_sha256": "49e2ffedc1a7979e2679082d7d723d63d3ab40dd5054d3881e4ee09cbc62da81",
+      "item_sha256": "9310da05a7e3d71a0ef8786cc4418998aba146f613419cc0e1d47e629b9afac9",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7556,21 +7556,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:5876:6017"
         }
       ]
     },
     "questions:m1_psyf_010": {
-      "item_sha256": "cba7ef7d56ed88a41df0774ba375c60ca3e2474c533721c2783b37e8abb36748",
+      "item_sha256": "676d34a8d2dbcd6eb40426d564aca4f98ba3ef2e8e3b637c369abab4323c526c",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7582,13 +7582,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:1220:1363"
         }
       ]
     },
@@ -8080,10 +8080,10 @@
       ]
     },
     "questions:m1_psyf_029": {
-      "item_sha256": "2cb22f84c83e47563feb861f2fe3e252d123317080a539d98628b1a2d4bf5679",
+      "item_sha256": "8b4a0f965afd77c8ac3c1a1a2a5c50b9b826ce73c8fb1202658e89761f00bf36",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8095,13 +8095,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:1220:1363"
         }
       ]
     },
@@ -8768,10 +8768,10 @@
       ]
     },
     "questions:m1_psyf_054": {
-      "item_sha256": "7ee4a61965c09bdbd4ada7821adf8083166d7eafe91851a9d5ef561db856c869",
+      "item_sha256": "6b8e7ac971e251a80169e08e1443355872212c0f632a311603def5afcd81a1b9",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8783,13 +8783,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ соответствует базовым определениям нейрона, синапса, медиаторов, пластичности и активного торможения. Практические примеры иллюстрируют модель, а не устанавливают механизм конкретного клиента.",
+      "note": "Individually verified exact glossary concept fragments, distinguished from detailed support in independently read primary textbooks/abstracts. Glossary alone does not establish dendrites, receptor mechanisms, circadian main function or all plasticity/cognitive-control claims. Numbers, anticancer/lifestyle assertions and universal memory/behavior mechanisms not approved. Preserve source hold except separately corroborated pineal-gland name. No source-wide approval.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:5876:6017"
         }
       ]
     },
