@@ -17231,6 +17231,63 @@
       "issues": [],
       "note": "Exact lesson work/break sequence. Course description and author-specific exercise, no efficacy guarantee or physiological optimality. Official creator page paragraphs Distortion/Philosophy confirms the full method is not just25-minute timer sessions.",
       "sources": []
+    },
+    "questions:other_tp_002": {
+      "item_sha256": "4a6f3e452e76e708638e28718d5364180ac5dfb59197a03d8bceb2b0cbb12754",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact author-model definition of partial influence. Excludes100-percent control of psychological states, universal energy physiology, victim blame, factual environment safety and guaranteed outcomes.",
+      "sources": []
+    },
+    "questions:other_tp_003": {
+      "item_sha256": "66e272ba366d61ea1f5df5ad1c7a642c3560bc2836b6af75c123b2df0f88a9b4",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact author exercise of context exploration, scoped to self/relationships/professional environment. Excludes bodily response as proof of true goal, universal happiness guarantee, unverified quotation authorship and clinical validity claims.",
+      "sources": []
+    },
+    "questions:other_tp_004": {
+      "item_sha256": "719b9e8a6d4379fa15b751d8c0f23e7a8496beb08f48c1df46ac0bbf85474a2c",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact author examples of intermediate progress. Excludes guaranteed happiness, universal tracker efficacy, compulsory handwritten letters, unverified five-P expansion and physiological energy claims.",
+      "sources": []
     }
   }
 }

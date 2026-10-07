@@ -278,7 +278,7 @@ def test_historical_baseline_preserved_and_current_learning_content_is_reviewed(
     assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 17
     # Reading learning sources for an audit must not silently approve derivatives.
     assert any(source["kind"] == "learning_material" for source in policy.sources.values())
-    for kind, expected in [("questions", 414), ("glossary", 85), ("literature", 319)]:
+    for kind, expected in [("questions", 417), ("glossary", 85), ("literature", 319)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected

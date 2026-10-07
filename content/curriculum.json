@@ -4581,6 +4581,24 @@
       "topic_id": "t_d9ef710a3784",
       "item_sha256": "9e8659b346db831febf1d0425868ad62cf10856f3102c406a7e4e72f466dc057",
       "locator": "private review:questions:other_tp_001"
+    },
+    "615062528dbf9450abaf1e4477d05d263b714527304b45e152edc97ceca43012": {
+      "external_id": "other_tp_002",
+      "topic_id": "t_45e69d90b32c",
+      "item_sha256": "4a6f3e452e76e708638e28718d5364180ac5dfb59197a03d8bceb2b0cbb12754",
+      "locator": "private review:questions:other_tp_002"
+    },
+    "9ef8af8a4b82986137ac690249975d39bce9d6082663956ddc9cf7723f54583b": {
+      "external_id": "other_tp_003",
+      "topic_id": "t_ce70a84a108b",
+      "item_sha256": "66e272ba366d61ea1f5df5ad1c7a642c3560bc2836b6af75c123b2df0f88a9b4",
+      "locator": "private review:questions:other_tp_003"
+    },
+    "eeb2182a21a1be7b117ccec18c4d6e8070d821e7fbd77a691388285f6fd6a13a": {
+      "external_id": "other_tp_004",
+      "topic_id": "t_74892d6fd852",
+      "item_sha256": "719b9e8a6d4379fa15b751d8c0f23e7a8496beb08f48c1df46ac0bbf85474a2c",
+      "locator": "private review:questions:other_tp_004"
     }
   }
 }

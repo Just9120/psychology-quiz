@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-07T23:04:41.871640+00:00",
+  "captured_at": "2026-10-07T23:17:02.665022+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -12,10 +12,10 @@
   "known_holds": 321,
   "observation_basis": "saved_inputs",
   "coverage": {
-    "tracked_sources": 80,
-    "untracked_files": 345,
+    "tracked_sources": 83,
+    "untracked_files": 342,
     "source_metadata": {
-      "current": 80
+      "current": 83
     },
     "unmapped_published_questions": 58,
     "lessons": [
@@ -634,17 +634,59 @@
         "glossary_terms": null,
         "notes": null,
         "notes_state": "UNSET"
+      },
+      {
+        "id": "t_45e69d90b32c",
+        "source_metadata_current": true,
+        "processing_state": "processed",
+        "known_hold": false,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_ce70a84a108b",
+        "source_metadata_current": true,
+        "processing_state": "processed",
+        "known_hold": false,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_74892d6fd852",
+        "source_metadata_current": true,
+        "processing_state": "processed",
+        "known_hold": false,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
       }
     ],
     "prepared_notes_unmapped": 4,
     "unmapped_published_glossary": 81,
     "unreleased_lessons": {
-      "total": 124,
+      "total": 121,
       "processing": {
         "conflict_review": 119,
-        "processed": 5
+        "processed": 2
       },
-      "metadata_current": 124,
+      "metadata_current": 121,
       "known_holds": 119
     }
   }
