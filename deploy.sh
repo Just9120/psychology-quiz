@@ -184,5 +184,6 @@ deliver_pwa
 if [[ "$DATABASE_BACKEND" == postgresql ]]; then
   python3 scripts/install_backup_retention.py install --expected-sha "$EXPECTED_SHA" --lock-held
 fi
+python3 scripts/privacy_runtime_check.py --expected-sha "$EXPECTED_SHA"
 trap - ERR
 log "DEPLOY_OK revision=$EXPECTED_SHA"
