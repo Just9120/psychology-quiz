@@ -15836,10 +15836,10 @@
       ]
     },
     "questions:m3_psychological_consulting_054": {
-      "item_sha256": "e3669749ef47dfeed5637e95ef1da39c63c19cfa33aaa10cea35737f57d585a3",
+      "item_sha256": "a76ecd100a53464b624be74e0a060a0223d39903782e649c77e41a7fa83d4732",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15851,21 +15851,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Hypotheses remain provisional and checked against new information, not psychological diagnosis or true by consultant authority. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_055": {
-      "item_sha256": "f5a53ed15673d10d76b09a3645a622d07545f9e4a040e97ed07a8fe7dc825700",
+      "item_sha256": "e74ab01d66e96c050a416cebb98cd8f6bd597f5ffb3bf254af200b893735b69e",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15877,21 +15870,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Цели согласуются с клиентом и зоной его влияния; источник допускает уточнение, качественные критерии и ограничения SMART.",
-      "sources": [
-        {
-          "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
-          "modified_time": "2026-06-07T20:59:38.927Z",
-          "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
-        }
-      ]
+      "note": "Goal is an expected result jointly formulated. No agreement guarantees attainment or a fixed number of sessions. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_056": {
-      "item_sha256": "352b4adb6e01e3cc79ac025caeb1d1cd7a412f4213e593aae02f8dc38c74feb2",
+      "item_sha256": "8d683d9b94833533f8e37e5cc72c4b0765a3f54f4478de045865dc8af7ce3e41",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15903,21 +15889,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Цели согласуются с клиентом и зоной его влияния; источник допускает уточнение, качественные критерии и ограничения SMART.",
-      "sources": [
-        {
-          "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
-          "modified_time": "2026-06-07T20:59:38.927Z",
-          "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
-        }
-      ]
+      "note": "Attainable work and own influence, not blame for circumstances or removing consultant professional responsibility. Other people actions not promised to change. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_057": {
-      "item_sha256": "7b32463d01c5a4586bea95083c625285767dbe6c8528e316c71086dd3dd67220",
+      "item_sha256": "bdd984c91f9dae671c9ac5677321a8c532f2f508dda8aa2b7c1ab92369359fcd",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15929,15 +15908,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Выбор средств сопоставлен с ресурсами, задачей, предпочтениями, компетенцией и доказательной опорой; соответствие учебному примеру не является универсальным назначением подхода.",
-      "sources": [
-        {
-          "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
-          "modified_time": "2026-06-07T21:02:49.961Z",
-          "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
-        }
-      ]
+      "note": "Technique selection considers characteristics/context/preferences/resources and working conceptualization, not random choice or fixed symptom-to-method prescription. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_058": {
       "item_sha256": "7654d85e90a174a5d5654f81fea523d08fcc6bc3b926bd73fbaf5cbcdfe676ef",
@@ -16018,10 +15990,10 @@
       ]
     },
     "questions:m3_psychological_consulting_061": {
-      "item_sha256": "ab4b9e927451ccc7bb3b041c7ddff30b703bcedca12726f6a89c028662dd1a14",
+      "item_sha256": "1045b81e152ad8970b0ab3c0943ac0583c3966a39f89033b2033eee97526429e",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16033,21 +16005,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Course illustration of unguided questions contrasted with organized relevant inquiry. Framework can guide selection; not an empirical guarantee of prevention of every irrelevant question. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_062": {
-      "item_sha256": "2462de81f7078f2de769bf1b114484c8bd90bb46f83d08113c639942de196483",
+      "item_sha256": "3a4212ffa6c96b51c0f8aa390671f80235f0d76b7515f718c028178d8b0b2264",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16059,21 +16024,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Concept as organized unit connecting observations/context. It remains a representation, not proof that the consultant has discovered true etiology. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_063": {
-      "item_sha256": "e18d8efa948c82e649c0188991e8c0053ee0b502f4abceadca540ed3d990dcd7",
+      "item_sha256": "037255f5deedd8942d22bbbf90c10d9714458b3f28389765583051dc65036f71",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16085,15 +16043,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Aims and targets of formulation do not include guaranteeing freedom from all future difficulties. Prognosis expressly probabilistic, no efficacy or cure guarantee. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_064": {
       "item_sha256": "d7fdbc8635ab91eb65a734aaea6d58dc1552b46b6148dbef3a8cd0a5ddd004c9",
@@ -16122,10 +16073,10 @@
       ]
     },
     "questions:m3_psychological_consulting_065": {
-      "item_sha256": "6f3f44b1d6a9e098c4b50b6deaa36542cff782de22d783fc7a309441c88e48f7",
+      "item_sha256": "bada948476b475ab06c3bde8be6cd47479dadf057f4c65d8108da5bbad3461d6",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16137,21 +16088,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Цели согласуются с клиентом и зоной его влияния; источник допускает уточнение, качественные критерии и ограничения SMART.",
-      "sources": [
-        {
-          "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
-          "modified_time": "2026-06-07T20:59:38.927Z",
-          "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
-        }
-      ]
+      "note": "Goal helps orient attention and assess progress; no claim that all open exploratory conversation is useless or every session must be metric driven. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_066": {
-      "item_sha256": "e57f7d224c74389b7ee74c0f9fd5f74f93b82f16c06400a8ff6aa382bcaba468",
+      "item_sha256": "268d64c94b47d33e71d796a265828a9ccfae8b71e33080c0daad165fd1b0c9db",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16163,21 +16107,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Цели согласуются с клиентом и зоной его влияния; источник допускает уточнение, качественные критерии и ограничения SMART.",
-      "sources": [
-        {
-          "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
-          "modified_time": "2026-06-07T20:59:38.927Z",
-          "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
-        }
-      ]
+      "note": "Authored conflict-communication goal describes client own observable practice and awareness, not promised compliance by others or immediate calm. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_067": {
-      "item_sha256": "251b6e0c707ca802556b014d05824769963323592909828706d705ebbb64787b",
+      "item_sha256": "0033ccb3929dce68c60cc00643b16da4ccbe3dba62a3da7b5319dfba13097153",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16189,15 +16126,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Цели согласуются с клиентом и зоной его влияния; источник допускает уточнение, качественные критерии и ограничения SMART.",
-      "sources": [
-        {
-          "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
-          "modified_time": "2026-06-07T20:59:38.927Z",
-          "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
-        }
-      ]
+      "note": "SMART as optional goal-clarification guide; course warning about rigid measurement is not evidence every psychological process is nonlinear or that SMART cannot ever be used in deeper work. Client preferences and context matter. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_068": {
       "item_sha256": "44c91a9ddfee810ca0fc74f9e7b885dd6586a6df6afcde9a1bc30046e2c30b9f",
@@ -16226,10 +16156,10 @@
       ]
     },
     "questions:m3_psychological_consulting_069": {
-      "item_sha256": "94c66c9ceca92e95907fad353469cf6d09f761db80571cfc75d98478ea1b742b",
+      "item_sha256": "4cef20123838e33a799c301fb352cab5eb02932369cf688e68d20aeaabf664af",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16241,21 +16171,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Выбор средств сопоставлен с ресурсами, задачей, предпочтениями, компетенцией и доказательной опорой; соответствие учебному примеру не является универсальным назначением подхода.",
-      "sources": [
-        {
-          "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
-          "modified_time": "2026-06-07T21:02:49.961Z",
-          "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
-        }
-      ]
+      "note": "Reduce cognitive load and verify understanding while selecting attainable steps. Low resources do not prescribe a particular therapy duration or replace evaluation of exhaustion/sleep problems and risks. No infantilization of adults. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_070": {
-      "item_sha256": "0811614820d4824e2e0c908442c1a6401413661bf262c389390b8dc13c200ff4",
+      "item_sha256": "b005cbd455a7d8821d1cc960cf8bd06e32a16d02e0228eb20aff767f778530bd",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16267,21 +16190,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Выбор средств сопоставлен с ресурсами, задачей, предпочтениями, компетенцией и доказательной опорой; соответствие учебному примеру не является универсальным назначением подхода.",
-      "sources": [
-        {
-          "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
-          "modified_time": "2026-06-07T21:02:49.961Z",
-          "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
-        }
-      ]
+      "note": "Client preference considered within competence/ethics/scientific support, without claiming it guarantees improved effectiveness or universal attrition percentage. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_071": {
-      "item_sha256": "dd098177b5bdb0d384c1342163996256e6ba020e8bd09f9d3bbfd3bf7c4026e4",
+      "item_sha256": "7148590c3f59e537159f4fcd9b0526769a483f6a4068bf69e836a87908b83f5f",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16293,21 +16209,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Выбор средств сопоставлен с ресурсами, задачей, предпочтениями, компетенцией и доказательной опорой; соответствие учебному примеру не является универсальным назначением подхода.",
-      "sources": [
-        {
-          "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
-          "modified_time": "2026-06-07T21:02:49.961Z",
-          "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
-        }
-      ]
+      "note": "Question narrowed to identification of a studied CBT instrument, not universal superiority or recommending treatment for all behavioral symptoms. Beck primary method-selection text confirms behavioral experiment as one technique; no exposure or medication advice. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_072": {
-      "item_sha256": "753ea9d1ea7d260e29581b118e30420e26b2beb4dbc2207121510c5a2a7f924f",
+      "item_sha256": "c9c90245dedb7efbdba1e603296837381cdc6b4b5a177d9c91f4f6f2b2986a1a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16319,15 +16228,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Выбор средств сопоставлен с ресурсами, задачей, предпочтениями, компетенцией и доказательной опорой; соответствие учебному примеру не является универсальным назначением подхода.",
-      "sources": [
-        {
-          "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
-          "modified_time": "2026-06-07T21:02:49.961Z",
-          "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
-        }
-      ]
+      "note": "Integration is reasoned, coherent choice supported by formulation and scientific evidence. No guarantee mixing methods improves outcomes or erases competence boundaries. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_073": {
       "item_sha256": "704b098047dc97dfadbfec08142c4429995f107d2ed6db61f85313603e971375",
@@ -16438,10 +16340,10 @@
       ]
     },
     "questions:m3_psychological_consulting_077": {
-      "item_sha256": "800725c88e64867f5e780bffa4a0184a823c4e93d2d48a5e6635c47c041566eb",
+      "item_sha256": "2e185978461194ce84b0b53b311ca70dac3090c413c6725770fe3c0da61c59ad",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16453,21 +16355,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Descriptive symptom information versus possible maintaining-pattern hypotheses. Stem narrowed to the teaching model and non-diagnostic recurrent anxiety. No compulsory deep childhood cause, suppressed conflict, specific disorder treatment or universal depth hierarchy. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_078": {
-      "item_sha256": "3a4fabda696e85963fc4c5adb45d685071653aee710492e11881b5c471d9caa8",
+      "item_sha256": "1893fff22001fa6baca47f2a61a6cc139f85da2b6d31c4ba52a0790d6acb6904",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16479,15 +16374,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Inconsistent data require reconsideration rather than fitting evidence to one interpretation. No invented client diagnosis or causal certainty. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_079": {
       "item_sha256": "3477ecc4b18f32f4797c5eb557fc9c4934df633bb2b19a706bee5a6d0cfcea0b",
@@ -16516,10 +16404,10 @@
       ]
     },
     "questions:m3_psychological_consulting_080": {
-      "item_sha256": "c82897ee1a318eedea664271fe52e7da478861616902c6851a73fab9f27384e7",
+      "item_sha256": "bc5d95f8184b2932cde968dfb3e5a5cf8c70169ef00051947c73343908a09735",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16531,21 +16419,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Цели согласуются с клиентом и зоной его влияния; источник допускает уточнение, качественные критерии и ограничения SMART.",
-      "sources": [
-        {
-          "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
-          "modified_time": "2026-06-07T20:59:38.927Z",
-          "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13800:16500, 18500:20800"
-        }
-      ]
+      "note": "Preliminary formulation can be refined through further understanding. No requirement for an immediate perfect goal; no guarantee indefinite revising is effective. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_081": {
-      "item_sha256": "3ede21bfd2de2e725f21df170fe96e99d386f79bfeddf58563ea7ad614de27c8",
+      "item_sha256": "e784800bc8a214d4da147db2f85b9ce1031aa8e8008b6849168956ccb561cfd3",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16557,15 +16438,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Выбор средств сопоставлен с ресурсами, задачей, предпочтениями, компетенцией и доказательной опорой; соответствие учебному примеру не является универсальным назначением подхода.",
-      "sources": [
-        {
-          "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
-          "modified_time": "2026-06-07T21:02:49.961Z",
-          "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4000:5100, 6200:9200, 26800:29000, 82700:85300"
-        }
-      ]
+      "note": "Fictional loss example tests whether tool matches jointly discussed needs. No proof that cognitive tools are prohibited or inferior for bereavement, and no mandatory humanistic/existential approach. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_082": {
       "item_sha256": "b98c9a7d0c53a28b49cbaa7c5d59526d367c2bbc73098babc980a18fd3d67b21",
@@ -16964,10 +16838,10 @@
       ]
     },
     "questions:m3_psychological_consulting_097": {
-      "item_sha256": "b76dd13f9d7ac4b34a4f56d31a46d5b853cdafd0b2eb528fffd11682b25a9b60",
+      "item_sha256": "fb7217079b75f839ef45471a67f4a3e5c333f6917067af2f652af95fdf3da40d",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16979,21 +16853,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Social/emotional/intrapersonal/context/resources as categories of inquiry. Do not interpret a trait label as sufficient explanation or require unbounded collection of personal details. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_098": {
-      "item_sha256": "16525492f261db5c0c8bd94022d1fd15c099f97a530b1d1f9755c1b21c5f670b",
+      "item_sha256": "842a80b58d8519cb7b598c172b7179155b44f50ff769f497c9074720c929cdb9",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17005,15 +16872,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Multiple working hypotheses are a flexible course heuristic, not a mandatory clinical count or proof that every single hypothesis causes bias. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_099": {
       "item_sha256": "0aaa243c1bf3bc4aacd614e8bbe6e550b7339c6ee6b10a6dd062ec9dc5a9ca02",
@@ -17068,10 +16928,10 @@
       ]
     },
     "questions:m3_psychological_consulting_101": {
-      "item_sha256": "7088a4abdbfd7a19642918ae506a97a19adeaf40175e466446d1701727e53b5c",
+      "item_sha256": "ea3868dbda042b183ecb462e4118e5b411ccfc7b301312feb465bf9d5bd13fcf",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17083,21 +16943,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Course recommendations link working formulation to strategy/goals/methods. Probabilistic and revisable, no automatic optimal therapy claim. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_102": {
-      "item_sha256": "ffc9a01f40c618c8fe32a94fa35bdba774dab4949cef724c7715e0d09c4e0feb",
+      "item_sha256": "250ac20fb440a47809432bdab5a862a6b455e99e48bf27a6a82fbd11ca99fde6",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17109,15 +16962,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты прямо требуют строить/пересматривать гипотезы, учитывать контекст, эмоциональный и внутриличностный уровень, связывать картину со стратегией. Не объявляют гипотезу установленным диагнозом.",
-      "sources": [
-        {
-          "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
-          "modified_time": "2026-06-07T20:57:37.236Z",
-          "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2500:7600, 19000:23000"
-        }
-      ]
+      "note": "Hypothesis tested through concrete sequences of circumstances/thoughts/feelings/actions. Client fear of rejection remains a conjecture, not a confirmed cause. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_103": {
       "item_sha256": "ac863e90d3af1161c6dc15ec99ed6049183839ec5f79dcacfe60a3a39fc70334",
