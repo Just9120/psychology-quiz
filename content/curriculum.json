@@ -2415,6 +2415,30 @@
       "topic_id": "t_e9dd359706e6",
       "item_sha256": "a679880c6a6b28646e6b06950ac1bb9aa4196ad4e61bb64dd6bfd1c7465e6e80",
       "locator": "characters:8470:8910"
+    },
+    "325c40b5a05040788dde434a17df5b09c6c0ff2f59e453dfddd0a1a9859abb8d": {
+      "external_id": "m1_intro_035",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "46eb50b7e4eefc7614259bc86a7169d02aec9b93e3bee493d05ac4de9af1cde5",
+      "locator": "characters:5874:6310"
+    },
+    "f3238cf334d65e0d1a070880a45d66c8b781c16e7f5e2ccc7d3c617035c3bf67": {
+      "external_id": "m2_exp_030",
+      "topic_id": "t_517448740f11",
+      "item_sha256": "0f5676a328d024d18ea9d0907b7c01898a123405b3eccef1ddbd4721878ef01c",
+      "locator": "characters:22640:23350"
+    },
+    "fc2c8752596b933a28085021db77a05380cfb1099fcc1f21508c67d313e28837": {
+      "external_id": "m2_exp_046",
+      "topic_id": "t_219d66e8496a",
+      "item_sha256": "e389c129ebde0602a6e804b546017d9ecc0d2be2b3dd405174b27131c8753767",
+      "locator": "characters:14006:14347"
+    },
+    "35e2f6e4a735a2b9f6cd17d1b9b41e3895194ff4c5c1a8d2dbf32f93a4783136": {
+      "external_id": "m3_psychological_consulting_039",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "3c60c00c64c695dc3baef52ade2144adce1451e376d6a1670a434f8e8927cd7e",
+      "locator": "characters:2000:2800"
     }
   }
 }

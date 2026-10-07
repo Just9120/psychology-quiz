@@ -19,8 +19,8 @@ def test_global_canonical_quality_thresholds_and_rapport_resolution() -> None:
     report=build_report()
     g=report["global"]
     assert g["approved_question_count"] == 406
-    assert g["unique_longest_correct_count"] == 325
-    assert g["high_severity_length_cue_count"] == 8
+    assert g["unique_longest_correct_count"] == 324
+    assert g["high_severity_length_cue_count"] == 0
     assert g["duplicate_normalized_stems"] == {}
     inv,_=load_canonical_inventory(); by_id={r["external_id"]:r for r in inv}
     assert "что такое раппорт в консультировании?" not in {normalize_text(by_id["m3_psychological_consulting_031"]["question_text"])}

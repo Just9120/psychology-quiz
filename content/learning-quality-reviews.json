@@ -970,10 +970,10 @@
       ]
     },
     "questions:m1_intro_035": {
-      "item_sha256": "5781acd922adcf4951bbd4f609281a39905ae8775dabc19bddcf741477612b0c",
+      "item_sha256": "46eb50b7e4eefc7614259bc86a7169d02aec9b93e3bee493d05ac4de9af1cde5",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -984,16 +984,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Уважение/эмпатия и рефлексия собственных реакций подтверждаются фрагментами о личности; прикладные ситуации являются переносом общего принципа, не дословными кейсами лекции.",
+      "issues": [],
+      "note": "Сохранены описание трудности и приглашение к обсуждению, вместо длинной реплики. Точное понимание субъективного мира клиента, без оценочного ярлыка; прежние неправильные ответы противопоставляют эти принципы.",
       "sources": [
         {
           "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
           "modified_time": "2026-04-05T22:13:17.690Z",
           "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+          "locator": "characters:5874:6310"
         }
       ]
     },
@@ -10328,10 +10326,10 @@
       ]
     },
     "questions:m2_exp_030": {
-      "item_sha256": "3aeb682ff316c4e9bd8b71b6522ee3b64372f276f774b65ccae0efd31dadd423",
+      "item_sha256": "0f5676a328d024d18ea9d0907b7c01898a123405b3eccef1ddbd4721878ef01c",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10343,13 +10341,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо описывает второй этап анализа: более однородные группы позволяют исследовать различия эффекта. Это exploratory проверка, не готовая персональная рекомендация.",
+      "note": "Сокращение сохраняет исследовательскую цель анализа гетерогенности. Проверен точный фрагмент, без соседнего спорного обобщения о сходстве когнитивных свойств всех людей. Подгрупповой анализ не объявляется подтверждающим при любом post-hoc выборе.",
       "sources": [
         {
           "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 22000:23500"
+          "locator": "characters:22640:23350"
         }
       ]
     },
@@ -10756,10 +10754,10 @@
       ]
     },
     "questions:m2_exp_046": {
-      "item_sha256": "db79b4280fc9e98d08186787cfe37b20b328256f1f37eed256212bdd83676b7e",
+      "item_sha256": "e389c129ebde0602a6e804b546017d9ecc0d2be2b3dd405174b27131c8753767",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10770,16 +10768,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "issues": [],
+      "note": "Сохранены начальная неэквивалентность и смешение причин эффекта. Не утверждается, что случайное распределение гарантирует фактическое равенство любых характеристик; held утверждения о валидности не используются.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:14006:14347"
         }
       ]
     },
@@ -15849,10 +15845,10 @@
       ]
     },
     "questions:m3_psychological_consulting_039": {
-      "item_sha256": "87db90be09ce11ebc6900154c013f5026a6ae1bed615894d6c1d6347014e0f71",
+      "item_sha256": "3c60c00c64c695dc3baef52ade2144adce1451e376d6a1670a434f8e8927cd7e",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15863,16 +15859,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "issues": [],
+      "note": "Сохранены эмоциональная и рациональная стороны желаемого результата. Ответ не превращает два измерения в два диагноза, типа клиентов или формата консультации. Exact fragment заканчивается до held3981:4093.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:2000:2800"
         }
       ]
     },
@@ -17343,10 +17337,10 @@
       ]
     },
     "questions:m3_psychological_consulting_096": {
-      "item_sha256": "3f1c05ce7243cb66d81c2dda879fd8abfe4f1b6b2f4d248a0586a1bc77fb9f81",
+      "item_sha256": "737cb2e7c661cc5fbe1efb963b4538bd060fa546b0275c77d1cb593990867bf5",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17357,16 +17351,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "issues": [],
+      "note": "Точные отдельные определения жалобы/запроса и концептуализации случая. Сокращение сохраняет различие трудности и направления совместной работы, без смешения проблемы с медицинским диагнозом.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1483;characters:3313:3518"
         }
       ]
     },
@@ -17449,10 +17441,10 @@
       ]
     },
     "questions:m3_psychological_consulting_100": {
-      "item_sha256": "2616848d79b955bb30bb2b6365f0c50a78d22de136d5a9630c53b18b1451e10d",
+      "item_sha256": "71016bf2246ea6d9e1152da460344d1363b1f264a62e4327bcd640a19268f0fb",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17463,16 +17455,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "issues": [],
+      "note": "Психологическое заключение иллюстрируется ситуацией, паттерном и ресурсом; не ярлыком или обвинением. Нет детерминистического прогноза и назначения лечения. Сокращён только правильный вариант.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:5630:5862"
         }
       ]
     },
@@ -17613,10 +17603,10 @@
       ]
     },
     "questions:m3_psychological_consulting_106": {
-      "item_sha256": "6d72b254b19808ced755a991fec1764f4ccf43d3d7971a6ace0b1dad3e376ea6",
+      "item_sha256": "2e197f72fd89642052ad154d80cf43a5034f8840677c0462875fea7071429859",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17627,24 +17617,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "issues": [],
+      "note": "Активное слушание включает уточнение и отражение. Реплика описывает наблюдение и спрашивает о его значении, не утверждает ложь или диагноз по жесту. Не перенесено определение конгруэнтности консультанта на гарантированное чтение мыслей клиента.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:0:254"
         }
       ]
     },
     "questions:m3_psychological_consulting_107": {
-      "item_sha256": "b9a629a30f3feaf529f0ae3848f4107e7ef0e77086b6ecaf2a5b80d64349a599",
+      "item_sha256": "4d7f98e8ee3827526aa0c8a870c7476c0a2a99ee29e5514b124db462002cadf3",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17655,16 +17643,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "issues": [],
+      "note": "Проверено точное определение молчания как коммуникации с разным значением. Реплика разрешает паузу и приглашает к контакту, не объявляет молчание сопротивлением и не форсирует раскрытие. Искусственное padding отсутствует.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:3523:3724"
         }
       ]
     },
