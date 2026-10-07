@@ -4386,10 +4386,10 @@
       ]
     },
     "questions:m1_phys_028": {
-      "item_sha256": "c4fa49314174afeccce478766133fa67ddf809cc9a9462d28bc2a3b7e2aab723",
+      "item_sha256": "920f0b4998726043ede01d4df751cbd919d964e3cb84e172a7680cb0fd6d3735",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4401,13 +4401,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Совместное участие регуляции и связь циркадного ритма с мелатонином поддержаны. Ключи сформулированы как возможная гипотеза, не эндокринный диагноз.",
+      "note": "Курс: совместная регуляция внутренней среды. Независимая адресная проверка OpenStax 17.6 подтверждает участие нервной и эндокринной систем в стрессовом ответе; ответ обозначает возможный механизм, не диагноз. Прежние соседние held fragments исключены из привязки; options/answer/explanation не изменены.",
       "sources": [
         {
           "source_id": "1rkvQhtvLygM2ZsmsM7xN6rQPCI1GGh3mn2R6P1CUrmw",
           "modified_time": "2026-04-06T14:47:58.092Z",
           "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6240:6920, 11574:12254, 28233:30300, 37800:39300"
+          "locator": "characters:6240:6920"
         }
       ]
     },
@@ -4994,10 +4994,10 @@
       ]
     },
     "questions:m1_phys_050": {
-      "item_sha256": "17ca76a271b07c7955ee46f34c48e58a75741d222c6032e7cee1e11fd4fe7531",
+      "item_sha256": "2fb0ae919dcf3fffc87d016ebf96ac2e99c11611ea5dd6e10b570a40530e3690",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5009,13 +5009,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Совместное участие регуляции и связь циркадного ритма с мелатонином поддержаны. Ключи сформулированы как возможная гипотеза, не эндокринный диагноз.",
+      "note": "Точная часть курса о мелатонине, сне/бодрствовании и циркадных ритмах; Endotext подтверждает циркадный сигнал. Не принимаются соседние тезисы о половом развитии, антиоксидантах и старении; ответ допускает физиологическую гипотезу, не диагноз. Текст, варианты и пояснение сохранены.",
       "sources": [
         {
           "source_id": "1rkvQhtvLygM2ZsmsM7xN6rQPCI1GGh3mn2R6P1CUrmw",
           "modified_time": "2026-04-06T14:47:58.092Z",
           "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6240:6920, 11574:12254, 28233:30300, 37800:39300"
+          "locator": "characters:11615:11829"
         }
       ]
     },

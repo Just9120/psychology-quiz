@@ -434,7 +434,6 @@
   {
     "id": "m1_phys_028",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture2_endocrine_system",
     "difficulty": "hard",
     "status": "approved",
     "question": "Клиент в период длительного стресса жалуется на утомляемость и колебания работоспособности. Как корректнее всего описать роль регуляторных систем?",
@@ -786,7 +785,6 @@
   {
     "id": "m1_phys_050",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture2_endocrine_system",
     "difficulty": "medium",
     "status": "approved",
     "question": "Почему жалоба клиента «я вроде сплю, но не восстанавливаюсь» может требовать не только психологической, но и физиологической гипотезы?",

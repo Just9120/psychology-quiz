@@ -1350,6 +1350,42 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m1_phys_028": {
+      "schema_version": 1,
+      "item_sha256": "920f0b4998726043ede01d4df751cbd919d964e3cb84e172a7680cb0fd6d3735",
+      "review_sha256": "9fe329e2142dfc0c076dc3efa0848ad05db843b9db3e711f87372d7e9b60d6dd",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_050": {
+      "schema_version": 1,
+      "item_sha256": "2fb0ae919dcf3fffc87d016ebf96ac2e99c11611ea5dd6e10b570a40530e3690",
+      "review_sha256": "f112749b8271797820e7f749a59cbbcfcde732208cdb78b8211ba0b919d27e87",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
