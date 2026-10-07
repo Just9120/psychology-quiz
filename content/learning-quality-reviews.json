@@ -7489,10 +7489,10 @@
       ]
     },
     "questions:m1_psyf_007": {
-      "item_sha256": "f1d50e6e8145abd76cab441cfee596f4ffaef5885c47a35df05ba16f84100c7d",
+      "item_sha256": "2ddcffce53d42e3f8c74ef7af3179a85e439fe585d5639e1209a8beb8b9da608",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7504,13 +7504,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты различают медиаторные системы и несколько дофаминовых путей; дофамин не сводится к удовольствию или единственной функции.",
+      "note": "Course title and broad opening about wakefulness/activity establish topic only; exact transmitter-specific answers require the independently read primary literature. Petersen/Posner2012 Alerting121-124 supports noradrenergic alerting, not an exclusive transmitter/function mapping or guaranteed cognitive improvement. Schultz2016 original PubMed English abstract248-250 supports dopamine reward-prediction-error contribution to learning; not a complete account of personality, reward, novelty, addiction or all behaviour. All twelve source holds unchanged, including serotonin identities, pineal timing/percentages, HPA conflation, simplified amygdala, dopaminergic anatomy, Parkinson treatment, hallucinations, universal reward escalation and lifestyle claims. Full Schultz article not claimed read.",
       "sources": [
         {
           "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
           "modified_time": "2026-04-16T15:32:40.272Z",
           "snapshot_sha256": "7ab85f051a13bfe77a5a1bee02e7d634fe899fa2557f288b43e7d8378d6989cf",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2793:3503, 6430:7140, 12400:14300, 17900:20400"
+          "locator": "characters:348:515"
         }
       ]
     },
@@ -7645,33 +7645,7 @@
       ]
     },
     "questions:m1_psyf_013": {
-      "item_sha256": "19d778ad91e96f8130c02c756a25037528d0402908b5e02669d3190aea30c9e1",
-      "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Примеры ожиданий/контекста в восприятии соответствуют рассмотренным опытам с одинаковым стимулом и разными ожиданиями.",
-      "sources": [
-        {
-          "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
-          "modified_time": "2026-04-20T15:34:30.028Z",
-          "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6000:8500"
-        }
-      ]
-    },
-    "questions:m1_psyf_014": {
-      "item_sha256": "f570f12ae9b16fd7b60958300ec5998294e4aed9cc653d42a3f0e9fc325cbd55",
+      "item_sha256": "9243ee8c79eb7af133ae0ecc750d0d1a1eb35e891ca21803a81f99d8690bed68",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-10-07",
@@ -7686,13 +7660,39 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Адресно сверена сохранённая точная редакция лекции11, characters17400:18900: три сети внимания, разные задачи и синхронная активация связанных областей. Удалена дополнительная ссылка на весь извлечённый глоссарий0:8564, которая не нужна для этого утверждения. Ответ и пояснение сохраняются как учебное обобщение распределённых сетей, без единственного анатомического центра; прочие спорные фрагменты лекции этим review не утверждаются.",
+      "note": "Exact raw introductory perception/attention context and attributed three-network statement reviewed outside all eight existing holds. Independently read OpenStax Psychology2e5.1 perception definition, bottom-up/top-down processing, goal-directed search and experience/context paragraphs; original Petersen/Posner2012 introduction78-81 explicitly describes anatomical network and different functions. Course snippets alone do not establish all definition details; independent support is explicit. No beverage-experiment rates, subconscious universal thresholds, what/where-attention conflation, exact region/transmitter assignments, anxiety diagnosis or medical imaging advice approved. Eight holds unchanged.",
       "sources": [
         {
           "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
           "modified_time": "2026-04-20T15:34:30.028Z",
           "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17400:18900"
+          "locator": "characters:180:480"
+        }
+      ]
+    },
+    "questions:m1_psyf_014": {
+      "item_sha256": "efd94f67216eb7664c3446c62d5911f2e4a3c45f206cd96ac755e47abe483ccc",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact raw introductory perception/attention context and attributed three-network statement reviewed outside all eight existing holds. Independently read OpenStax Psychology2e5.1 perception definition, bottom-up/top-down processing, goal-directed search and experience/context paragraphs; original Petersen/Posner2012 introduction78-81 explicitly describes anatomical network and different functions. Course snippets alone do not establish all definition details; independent support is explicit. No beverage-experiment rates, subconscious universal thresholds, what/where-attention conflation, exact region/transmitter assignments, anxiety diagnosis or medical imaging advice approved. Eight holds unchanged.",
+      "sources": [
+        {
+          "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
+          "modified_time": "2026-04-20T15:34:30.028Z",
+          "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3",
+          "locator": "characters:17604:17671"
         }
       ]
     },
@@ -8026,10 +8026,10 @@
       ]
     },
     "questions:m1_psyf_027": {
-      "item_sha256": "f23282bd0f971df92e4ce286e7a0134f582402a1414279a48033df1bfd6ec015",
+      "item_sha256": "d4205844ab2d04ac3bfa811161d79b7a5514e53c9de68f0fb4aba3afaddf2feb",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8041,13 +8041,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Примеры ожиданий/контекста в восприятии соответствуют рассмотренным опытам с одинаковым стимулом и разными ожиданиями.",
+      "note": "Exact raw introductory perception/attention context and attributed three-network statement reviewed outside all eight existing holds. Independently read OpenStax Psychology2e5.1 perception definition, bottom-up/top-down processing, goal-directed search and experience/context paragraphs; original Petersen/Posner2012 introduction78-81 explicitly describes anatomical network and different functions. Course snippets alone do not establish all definition details; independent support is explicit. No beverage-experiment rates, subconscious universal thresholds, what/where-attention conflation, exact region/transmitter assignments, anxiety diagnosis or medical imaging advice approved. Eight holds unchanged.",
       "sources": [
         {
           "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
           "modified_time": "2026-04-20T15:34:30.028Z",
           "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6000:8500"
+          "locator": "characters:180:480"
         }
       ]
     },
@@ -8186,10 +8186,10 @@
       ]
     },
     "questions:m1_psyf_033": {
-      "item_sha256": "65aff8db5ffdb7c11fc659120e42851871685bbd08ff32621ca13c7c138cb615",
+      "item_sha256": "67c1526ff10e459076c1fbf4f5035b30e55d0a24f357b8f6b1751732d41b646c",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8201,13 +8201,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагменты различают медиаторные системы и несколько дофаминовых путей; дофамин не сводится к удовольствию или единственной функции.",
+      "note": "Course title and broad opening about wakefulness/activity establish topic only; exact transmitter-specific answers require the independently read primary literature. Petersen/Posner2012 Alerting121-124 supports noradrenergic alerting, not an exclusive transmitter/function mapping or guaranteed cognitive improvement. Schultz2016 original PubMed English abstract248-250 supports dopamine reward-prediction-error contribution to learning; not a complete account of personality, reward, novelty, addiction or all behaviour. All twelve source holds unchanged, including serotonin identities, pineal timing/percentages, HPA conflation, simplified amygdala, dopaminergic anatomy, Parkinson treatment, hallucinations, universal reward escalation and lifestyle claims. Full Schultz article not claimed read.",
       "sources": [
         {
           "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
           "modified_time": "2026-04-16T15:32:40.272Z",
           "snapshot_sha256": "7ab85f051a13bfe77a5a1bee02e7d634fe899fa2557f288b43e7d8378d6989cf",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2793:3503, 6430:7140, 12400:14300, 17900:20400"
+          "locator": "characters:0:51"
         }
       ]
     },
