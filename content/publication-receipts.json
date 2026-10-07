@@ -918,6 +918,42 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "glossary:scientific_hypothesis": {
+      "schema_version": 1,
+      "item_sha256": "b95db9b642eca6ea781ccc690bdf7fcc0c91127ace5a52907e9942bb8e44476e",
+      "review_sha256": "99e35f4b722e18ae9d3374e3bb0842a6afd6624e1b3bf6a6068bf3c32bfdff1a",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:myelin": {
+      "schema_version": 1,
+      "item_sha256": "a4dabcd227a2e99674eab86e8ec50a13ee7f66ea7ddc4c077aeafaad17a051c7",
+      "review_sha256": "32eac4d5769847a1a4032435ab91fe4458a62af80dc8bd8b3d78a2df4d178cf8",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
