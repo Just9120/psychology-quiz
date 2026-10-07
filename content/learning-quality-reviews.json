@@ -1746,10 +1746,10 @@
       ]
     },
     "glossary:client_centeredness": {
-      "item_sha256": "b7ed8dcc39171dac6840376db6c9524d8f365a9cd7f74d3574241bbce324ffb7",
+      "item_sha256": "9c090e3cbc22ac86b713f35efe862998bf77a97442b63756c7fa0b7d3567bf2f",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1760,17 +1760,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Пример опирается на точное описание субъективного мира клиента и профессиональных границ в processed лекции. Не обещает гарантированной эффективности и не заменяет автономию клиента готовым советом.",
       "sources": [
         {
           "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
           "modified_time": "2026-04-05T22:13:17.690Z",
           "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+          "locator": "characters:5874:6770"
         }
       ]
     },
@@ -3636,10 +3633,10 @@
       ]
     },
     "glossary:attention_stability": {
-      "item_sha256": "c8248bec54d8b1649ee240e0e7b16765d01463388b413e2e0b03b3574f69128d",
+      "item_sha256": "8c8e26ec60c64770d57db7728d8eeb493ff289c7ee13a404de656fafa64207ac",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3650,17 +3647,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Точный фрагмент processed лекции о свойствах внимания. Пример не устанавливает нормативную длительность, уровень здоровья или диагноз; концентрация и устойчивость не отождествляются.",
       "sources": [
         {
-          "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "source_id": "1znCyGf9RhkhkbsCKGmWQHGhcliY9kfekglchDlWp9As",
+          "modified_time": "2026-04-20T15:42:20.698Z",
+          "snapshot_sha256": "69d87f72192866c1929553a8c26711b6e992c3254e4870ea8c068ab51b16fb37",
+          "locator": "characters:560:920"
         }
       ]
     },
@@ -7110,10 +7104,10 @@
       ]
     },
     "glossary:unconditioned_reflex": {
-      "item_sha256": "950b26dbc15962d7c73c8c3f61015d8d0a31cac4342f7770804122dd32164ceb",
+      "item_sha256": "39c4a1e714dd3833879915c70ffce670000f986242e64f877342ec62d9e7188c",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7124,25 +7118,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Вместо номера вопроса использован классический пример врождённой пищевой реакции. OpenStax Psychology2e6.2 различает unconditioned и conditioned response; наличие индивидуальных различий не исключается.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:8470:8850"
         }
       ]
     },
     "glossary:conditioned_reflex": {
-      "item_sha256": "11e252a1094cdc7a4fed7d5c9731b5522de8e3d328af7a72aa05adcd481ecce9",
+      "item_sha256": "607f5a4037ee9eb7da317dbd3ea62946ef46b583d5530fc28c5cce66afa2d189",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7153,17 +7144,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Пример классического обусловливания; не утверждаются универсальные необходимые условия памяти, фиксированное число повторений или обязательная реакция на каждый звук.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:5550:6500"
         }
       ]
     },
@@ -7256,10 +7244,10 @@
       ]
     },
     "glossary:excitation_and_inhibition": {
-      "item_sha256": "ab9da4dc0fd722f72a64d057f003a68fdf1aa1d74f41838716732efeda7cd527",
+      "item_sha256": "d6efbb714b547dea3cb9459b6d3064fdd2430605fe9eb8ce903a795636a226ea",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7270,17 +7258,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Термины привязаны к исторической исследовательской модели; пример не сводит всё поведение и все клеточные механизмы к двум универсальным причинам.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:14000:14832"
         }
       ]
     },
@@ -7369,10 +7354,10 @@
       ]
     },
     "glossary:strength_of_nervous_processes": {
-      "item_sha256": "090e342ccf3bcb12083a1912ba57ba68a5cead121a2f7a41517af1e807e9c6b6",
+      "item_sha256": "756b44f8bf2791a3c30eac317900aed0ffb2d836922e72386aa54b2057df3eb6",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7383,17 +7368,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Определение рассматривается в павловской терминологии. Пример не использует held прогнозы о меланхолическом темпераменте, тревоге, агрессии или психиатрическом риске.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:22429:22718"
         }
       ]
     },
