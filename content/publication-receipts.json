@@ -3981,8 +3981,8 @@
     },
     "questions:m1_gp_021": {
       "schema_version": 1,
-      "item_sha256": "16cd8e5bee27bd1750ca9a56a48723420991bc59845f378b6a00c6b8ff58ab9a",
-      "review_sha256": "119388c3b47c8448281239d055031a63e435725e1854885a5f165cc3d045bd33",
+      "item_sha256": "b0ecb4705c3a51ce6f4884a809ed6225d16412d9a7b08a8be2041f644c38bbf4",
+      "review_sha256": "5f27a7179e7a6ae604f412e26577b614e7fc3ca85c33c737aa56725421f6edd3",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -4017,8 +4017,8 @@
     },
     "questions:m1_gp_024": {
       "schema_version": 1,
-      "item_sha256": "f9627af307d676cd77fb209b6863ab49971705eebb3b780709f73912e9faa0be",
-      "review_sha256": "ecaed94c415557e1bb851a0b67cb874a97fae4089c6e101adf91cd095888454e",
+      "item_sha256": "40e1bd5b88093b6c771c23853259185fb0510c3bb962aa15c16d4a26b8ecc806",
+      "review_sha256": "ef01298bdd8c342c7ea7612255d7a9d7bc23f2770be7929c1e3aa8c4026a0eb0",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -5367,8 +5367,8 @@
     },
     "questions:m1_gp_056": {
       "schema_version": 1,
-      "item_sha256": "60b53d4f2edb561ac79b5398ee45486bdc33537638b0a478b77a0afddfa648f9",
-      "review_sha256": "549d086d23c1e808382184a7c92e8e6ab34ae029cbca31c0f4542a45acc85e35",
+      "item_sha256": "b51da317287fa3890dd056ac727aff915454d58d4a49a1e326f52a4eeec68e5d",
+      "review_sha256": "dcff1e2877469bb0e0054d143c1a7d139941443f5c88ed0b3b986acc9545dd97",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -6413,6 +6413,24 @@
       "schema_version": 1,
       "item_sha256": "57ac45fbaae423ddbf60f45766bf3353e10c467c0854275c337d3a642a19b762",
       "review_sha256": "357d7a50c71cd4df74f0ab0aad98de389a3c59a54b165f4401750986936594b7",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m2_qual_043": {
+      "schema_version": 1,
+      "item_sha256": "ba7fe643bb9381ad33d72e50bfc0791ddd651dde75300c63a5ab86c1b2d128b7",
+      "review_sha256": "bf04316b0257b9f509f4b4cdfb94ff02d61908e10b0270f59047d4a3f7c963b9",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",

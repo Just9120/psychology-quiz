@@ -2381,7 +2381,7 @@
       ]
     },
     "questions:m1_gp_021": {
-      "item_sha256": "16cd8e5bee27bd1750ca9a56a48723420991bc59845f378b6a00c6b8ff58ab9a",
+      "item_sha256": "b0ecb4705c3a51ce6f4884a809ed6225d16412d9a7b08a8be2041f644c38bbf4",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-10-07",
@@ -2396,7 +2396,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
+      "note": "_007 keeps concentration/sustaining focus amid notifications; _021 now tests selective focus on a target in a list, directly supported by existing course definition/selectivity scope6391:6554/9147:9655. Different learning task rather than repeating the same notifications vignette. No memory impairment diagnosis.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
@@ -2461,7 +2461,7 @@
       ]
     },
     "questions:m1_gp_024": {
-      "item_sha256": "f9627af307d676cd77fb209b6863ab49971705eebb3b780709f73912e9faa0be",
+      "item_sha256": "40e1bd5b88093b6c771c23853259185fb0510c3bb962aa15c16d4a26b8ecc806",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-10-07",
@@ -2476,7 +2476,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
+      "note": "_009 keeps comparing alternatives/justifying a decision; _024 now identifies generalisation of relations across cases, directly supported by course thinking definition16900:17123. Does not claim any induction is conclusively true or localise thinking to one centre.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
@@ -3312,7 +3312,7 @@
       ]
     },
     "questions:m1_gp_056": {
-      "item_sha256": "60b53d4f2edb561ac79b5398ee45486bdc33537638b0a478b77a0afddfa648f9",
+      "item_sha256": "b51da317287fa3890dd056ac727aff915454d58d4a49a1e326f52a4eeec68e5d",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
       "reviewed_at": "2026-10-07",
@@ -3327,7 +3327,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
+      "note": "Semantic comparison _048/_056: _048 remains concrete one-observation-to-trait inference boundary; _056 now checks how to label an untested working hypothesis. Exact saved primary course paragraph36700:37180 describes scientific study/testing of hypotheses; existing independent source support retained, no new diagnosis or treatment claim.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
@@ -14024,10 +14024,10 @@
       ]
     },
     "questions:m2_qual_043": {
-      "item_sha256": "2accc518ac29ff6ddc477f8c5eec6f4b295c60cc895dc0139f0eaafafe6391fa",
+      "item_sha256": "ba7fe643bb9381ad33d72e50bfc0791ddd651dde75300c63a5ab86c1b2d128b7",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14039,13 +14039,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямой фрагмент требует рефлексировать предпосылки, позиции, установки и ценности исследователя. Кейс с заметкой применяет этот принцип, не обещает устранить субъективность.",
+      "note": "Semantic comparison of current _004/_043: _004 keeps concept definition; _043 now applies reflexivity to an interview researcher noticing prior beliefs. Exact course passage6300:7600 supports reflection on assumptions/positions/values; bounded Mays/Pope2000 reflexivity paragraph134 independently supports influence of prior assumptions. No claim of eliminating subjectivity or abandoning evidence. Existing held passage29852:30094 unchanged.",
       "sources": [
         {
           "source_id": "1-2cpVVR8XqRC5VfhSKAb3DUgsFkRHlfWrnIX9DGeqvw",
           "modified_time": "2026-05-14T11:45:40.351Z",
           "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6300:7600"
+          "locator": "characters:6300:7600"
         }
       ]
     },
