@@ -11380,10 +11380,10 @@
       ]
     },
     "questions:m2_exp_082": {
-      "item_sha256": "81ba56d03cf4ec1efed1d0a6d0d5194a6bb49a6351aa9ba577fffed067fca0c9",
+      "item_sha256": "b29234539c6114921d4bb20234213c329b2122c67bfbe2e98155715c38248ab7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11395,21 +11395,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Обсуждение прямо различает условия плавания, наблюдения и VR как независимую переменную исследования.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 19000:20000"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_083": {
-      "item_sha256": "14ede9734cbe8110a234987910751a423293884d62c15c7b71730e338c426b1e",
+      "item_sha256": "684e8a7710f4fef871926370da1d962c878a20e8375e4d3ca4300aae7cbc7bbe",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11421,21 +11414,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Описание групп и пред-/постизмерений включает опросник самочувствия, активности и настроения; это измеряемый результат воздействия.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16500:17800"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_084": {
-      "item_sha256": "fdff6501fdc92f882322afd469e159e6e5170fe236d6a20f38556aab4182f694",
+      "item_sha256": "433a4519dad6c445c19a21d03b697698a55f7ea2bbdf7b0ff26f2d68363991cf",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11447,21 +11433,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 20700:22150, 24900:25700"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_085": {
-      "item_sha256": "60a67f9cd0f4195b00c49817219de1b00b0114284073304992e2f74432aa0e25",
+      "item_sha256": "2389c02625226168b9c75f8716a1ed39e3082e3a639ec771527f8d8003a40dcc",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11473,21 +11452,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 27700:28500"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_086": {
-      "item_sha256": "34ca6fa2004e8e10e197c9bfef136c73d68dc9ca01c8fb7d54eea67cbb099ce4",
+      "item_sha256": "c4d6d9dd1261c1209ebc06bd4a0554ad032c5d83f2beca7a48f9130db3f48215",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11499,21 +11471,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Разбор указывает узкий возраст VR-группы и прямо ограничивает вывод для людей старше участников этой группы.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 22650:24000"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_087": {
-      "item_sha256": "ef061e988457815a3a0287207a9db30323a575493a74667ecaf15f41369e8492",
+      "item_sha256": "b407f090ef6954ad5611a64f3838cbe66f017b18b3f273dc857d417b61b7a8e3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11525,15 +11490,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Практика описывает waitlist в исследовании медитации: группа пока не получает курс, но участвует в тех же замерах и позже получает вмешательство.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 43050:44000"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_088": {
       "item_sha256": "219536ac688940c691c9f6978eed4422606b5947c0f41bc8973311e27a854cd4",
@@ -11564,10 +11522,10 @@
       ]
     },
     "questions:m2_exp_089": {
-      "item_sha256": "6ef9b6a32cfd17d22b97b9179a2119cd5a21d6fc24c9411bbcb9bba6e3a216d6",
+      "item_sha256": "bc0b288bfb7f9ec84948225778f996382205fd5b362a135f1de91f8250d8d50e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11579,21 +11537,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Обсуждение эффекта отсева указывает, что в финальной выборке могут преобладать люди с большей предрасположенностью к медитации; это ограничивает вывод об исходной совокупности.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 58200:59150"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_090": {
-      "item_sha256": "0521dd6c4e339c09f98cbfb0962f9449c621dcdb45721e8f0d7d34da9ee2fb55",
+      "item_sha256": "c416f95e779ec427fa27e2324306384dedff99a379deda426462ba687acac98e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11605,21 +11556,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. Практика отдельно обсуждает повторное применение тех же опросников до и после воздействия и возможность воспроизведения прежних ответов вместо текущего состояния.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 28950:29750"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_091": {
-      "item_sha256": "c505e91981ae2af01b337a98a10e9ceb7c6f664a149b22ab801a8feeb0cdf36f",
+      "item_sha256": "0bbf15a3cb9fc34033e94ca97aab04a94979e009cae80b896460e53febace250",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11631,21 +11575,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В исследовании одну группу студентов знакомили с негативным стереотипом об их математических способностях, другую — нет; это манипулируемое условие.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 80000:81300"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_092": {
-      "item_sha256": "ef22e3a2a0894033f2dfb91ba64c233b089d8f2f04ac910daeee0a21b109d44a",
+      "item_sha256": "0f7a54e7272e3f8eef9613925896a205cf5bb98cd6766d8d9390e7bd2b84c384",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11657,21 +11594,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В дискуссии сказано, что установка авторитетной фигуры может действовать сильнее; перенос этого принципа на преподавателя является возможным выводом, не отдельным измеренным эффектом.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 92900:93800"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_093": {
-      "item_sha256": "bca67b9e13a38248f3ec3ee6bb3d760ee28dec4e046386da73534c4789769c87",
+      "item_sha256": "41e357b77da9a82154a68d2b80856434d7005744d24b40760752ab2b4563ffc2",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11683,15 +11613,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №9 совпал с реестром. В дискуссии рассматриваются низкая самоэффективность и вовлечённость, а также прежний успешный опыт как возможные условия изменения эффекта. Это гипотеза о модераторе, не подтверждённая отдельной проверкой в данной практике.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 88500:90400"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_094": {
       "item_sha256": "435f36981a1a3992d408fca1d1113cd4678d3b7b1a334f4d9b78ee8b8a60f2e1",
@@ -12085,10 +12008,10 @@
       ]
     },
     "questions:m2_exp_109": {
-      "item_sha256": "66851265d067e44097a39fbebbddc3a1c7f583747408700ece7a6c5c7a495d28",
+      "item_sha256": "d0f4c3849c4657232e7ae2c98435f16c9b444fe9d7390e1be64ba4b3b82eb00b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12100,15 +12023,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Извлечённая редакция источника совпала с SHA-256 реестра. Практика №9 обсуждает зависимые переменные как измеряемые показатели. Школьная разминка — авторский учебный пример, не случай из источника; stem теперь явно сообщает, что после урока измеряют внимание.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 44300:45200"
-        }
-      ]
+      "note": "Проверено по точной текущей редакции: учебный пример исследовательского дизайна, только выбранный фрагмент. Координаты переведены из прежнего нормализованного текста в raw Unicode export (111182 символа) с проверкой смещения CRLF/BOM; старый locator сохранён в backup. Вопрос не подтверждает эффективность VR/медитации/анималотерапии, не даёт рекомендации отменять лечение и не диагностирует участников. Личные имена и реплики не опубликованы. Ограничения причинных выводов и индивидуальных различий сохранены. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_110": {
       "item_sha256": "354d24afc6017d4a3d26789b5c47da1c4783e204581cd50671346ab92f11b21b",
