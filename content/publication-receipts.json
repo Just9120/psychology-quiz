@@ -8806,6 +8806,25 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:other_tp_005": {
+      "schema_version": 1,
+      "item_sha256": "76d0c231ab895aeb18642dabed520e663cb68d317916a771a793699a7a69b9c3",
+      "review_sha256": "d20d506b5fe9ebe4f26cbcb59c2a1dc30851680f50333efccce9a4bccbe7ec59",
+      "topic_id": "t_f67eb12f923e",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

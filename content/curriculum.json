@@ -4599,6 +4599,12 @@
       "topic_id": "t_74892d6fd852",
       "item_sha256": "719b9e8a6d4379fa15b751d8c0f23e7a8496beb08f48c1df46ac0bbf85474a2c",
       "locator": "private review:questions:other_tp_004"
+    },
+    "92b686c051e429cf13cf5ec10f823e54d8b6fad98302494517902bd852729b77": {
+      "external_id": "other_tp_005",
+      "topic_id": "t_f67eb12f923e",
+      "item_sha256": "76d0c231ab895aeb18642dabed520e663cb68d317916a771a793699a7a69b9c3",
+      "locator": "private review:questions:other_tp_005"
     }
   }
 }

@@ -17288,6 +17288,25 @@
       "issues": [],
       "note": "Exact author examples of intermediate progress. Excludes guaranteed happiness, universal tracker efficacy, compulsory handwritten letters, unverified five-P expansion and physiological energy claims.",
       "sources": []
+    },
+    "questions:other_tp_005": {
+      "item_sha256": "76d0c231ab895aeb18642dabed520e663cb68d317916a771a793699a7a69b9c3",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course distinction between planned actions and reflection on already tried steps. No unverified model acronym, timeline authorship, diagnostic validation, universal readiness or therapeutic efficacy asserted.",
+      "sources": []
     }
   }
 }
