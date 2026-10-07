@@ -253,12 +253,13 @@
     "id": "quantitative_methods",
     "title": "Количественные методы исследования",
     "module": "module2",
-    "question_file": null,
+    "question_file": "content/questions/module2/quantitative_methods.json",
     "status": "active",
     "order": 230,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Литературная связь существующего занятия курса; вопросы и глоссарий не подразумеваются."
+    "source_notes": "Existing quantitative-methods discipline: scoped reliability/validity question has an exact private fragment review. Existing literature retained; remaining course claims are not approved."
   }
 ]

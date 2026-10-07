@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 697
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 698
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
@@ -130,6 +130,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     # Source-free lesson bindings can add learning contours outside the core graph.
     assert ({k: v['title'] for k, v in core['disciplines'].items()} | {
         'psychodiagnostics': 'Психодиагностика',
+        'quantitative_methods': 'Количественные методы исследования',
         'turning_point': 'Точка поворота. 5 шагов',
     }) == {
         k: v['title'] for k, v in registry.items()

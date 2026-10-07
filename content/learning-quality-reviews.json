@@ -17307,6 +17307,25 @@
       "issues": [],
       "note": "Exact course distinction between planned actions and reflection on already tried steps. No unverified model acronym, timeline authorship, diagnostic validation, universal readiness or therapeutic efficacy asserted.",
       "sources": []
+    },
+    "questions:m2_quant_001": {
+      "item_sha256": "fde71d183791c7a681d139085b6f0157e796d2e3a3e2f7a74bb354f328219a67",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Scoped measurement distinction: reliability is not sufficient evidence for validity of a stated score interpretation. No universal coefficient threshold, diagnosis, scoring change, or whole-course approval. Existing experimental internal/external validity questions do not cover this measurement distinction.",
+      "sources": []
     }
   }
 }
