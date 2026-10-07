@@ -15433,10 +15433,10 @@
       ]
     },
     "questions:m3_psychological_consulting_026": {
-      "item_sha256": "f528d73750fdec04c0091251dc8bc2bbde3732caa3d04ef4875ffe5d0cb68e11",
+      "item_sha256": "3b9eb1305723324967197374516f579fc26abc15eebc6893e1bd900b112b2503",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15448,21 +15448,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:13503:13800;characters:23100:23755;characters:24200:25000"
         }
       ]
     },
     "questions:m3_psychological_consulting_027": {
-      "item_sha256": "2f97ce6f8fd0093ff8bafd10c492f9709187f22097ef3dcf93e75ca79881f684",
+      "item_sha256": "7d5fd3cadc68775385b35ff7f16473f148ace3204687924e277c6f733da5f157",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15474,21 +15474,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:55800:56555;characters:69584:69775"
         }
       ]
     },
     "questions:m3_psychological_consulting_028": {
-      "item_sha256": "f4ba48594b9659c670aee437ed67d18cf7c6ec4020124caf9c40d8f6939d03d8",
+      "item_sha256": "a77ac1f5d32e03d3b5a0751d637bc5dbf59105fbe119b5b4f7e14e3802ced627",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15500,13 +15500,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:34995:35250;characters:55800:56555"
         }
       ]
     },
@@ -15615,10 +15615,10 @@
       ]
     },
     "questions:m3_psychological_consulting_033": {
-      "item_sha256": "6070f2b36395c7bba27f1bc927d40d8aa218396d16e61be67440a24e224fd2ef",
+      "item_sha256": "23cf715b8a338520b08f43f8cea1a00fe284dd981f3b93b803405bf9273ccd98",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15630,13 +15630,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:38613:39580"
         }
       ]
     },
@@ -15669,10 +15669,10 @@
       ]
     },
     "questions:m3_psychological_consulting_035": {
-      "item_sha256": "191f5c8a4a1fe4db5a59883f86bd0dd82a692fa2a6c66839321b588681b03578",
+      "item_sha256": "b0cce8b7ce911f1542d3a0fe950b92b20c873164af9866af5130ed28ad0736da",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15684,21 +15684,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:13503:13800;characters:23100:23755;characters:24200:25000;characters:55800:56555"
         }
       ]
     },
     "questions:m3_psychological_consulting_036": {
-      "item_sha256": "70ed3f5e5f4a64de84517dd0ed88352751e65de307ef888d2c9278b0675533fd",
+      "item_sha256": "236ae6e35bd003d03a8e3f8d908eff605e2212803a1e313b3e360ad271c4ead7",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15710,13 +15710,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:26104:27538;characters:69584:69775"
         }
       ]
     },
@@ -16975,10 +16975,10 @@
       ]
     },
     "questions:m3_psychological_consulting_085": {
-      "item_sha256": "c9426e4f74242171601810711c0b68ef16abf7992bb4c6338a885a91f33e61b6",
+      "item_sha256": "bad5884a7a42639832c28d10bc87880809dcb8c9e3a3ba1d7d5ce0ca91f026c8",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16990,21 +16990,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:26104:27538;characters:69584:69775"
         }
       ]
     },
     "questions:m3_psychological_consulting_086": {
-      "item_sha256": "66187ca40567def5563a6e88abddaa69ec326eff9a53f1adb33c38d84c479c6f",
+      "item_sha256": "0f8afd92f7fd3d49e37c237e868580d9f4630162e2b2661f8f1ca65734c12504",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17016,13 +17016,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:55800:56555;characters:69584:69775"
         }
       ]
     },
@@ -17079,10 +17079,10 @@
       ]
     },
     "questions:m3_psychological_consulting_089": {
-      "item_sha256": "3efa980541af8fce8a1ddbaeb6555499b34cea953df1c1acfc70cd0eb3625e89",
+      "item_sha256": "f2b04eff1cadc01cd70e51e3bd2668aec7e1cd87e29587f868f474caef263ae8",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17094,13 +17094,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены приватность, временная рамка, договорённости об опоздании и информирование об условиях. Формулировки не заменяют применимые правила конкретного специалиста.",
+      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
           "modified_time": "2026-06-07T20:50:34.245Z",
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 13000:14500, 23100:25000, 37500:40000, 55800:58300"
+          "locator": "characters:55800:56555;characters:69584:69775"
         }
       ]
     },

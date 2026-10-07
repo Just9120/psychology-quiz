@@ -3303,6 +3303,60 @@
       "topic_id": "t_6f07f36a8251",
       "item_sha256": "2bff26a9b68632ae42bbcafed56db878fb6af14f46f8d9b3b7f24371fd3a3f83",
       "locator": "private certificate:questions:m1_intro_046"
+    },
+    "c49242ee41575b0dbb1416d0d369fdc0018c03f70040f9f88353d711f692fa6d": {
+      "external_id": "m3_psychological_consulting_026",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "3b9eb1305723324967197374516f579fc26abc15eebc6893e1bd900b112b2503",
+      "locator": "private certificate:questions:m3_psychological_consulting_026"
+    },
+    "3f781ae0d68a71d31cb6626a1695f948f4b5e9e352745ae68e50e40a5f2ca801": {
+      "external_id": "m3_psychological_consulting_027",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "7d5fd3cadc68775385b35ff7f16473f148ace3204687924e277c6f733da5f157",
+      "locator": "private certificate:questions:m3_psychological_consulting_027"
+    },
+    "bbc452b6dc33fe9d01a26fd40953f0995e526cbcb96b192e66e3a33879f93889": {
+      "external_id": "m3_psychological_consulting_028",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "a77ac1f5d32e03d3b5a0751d637bc5dbf59105fbe119b5b4f7e14e3802ced627",
+      "locator": "private certificate:questions:m3_psychological_consulting_028"
+    },
+    "fdec93ae6ec62a223213c57cc716a0d38f1fa494b8841e23ecb3a438a6ce188d": {
+      "external_id": "m3_psychological_consulting_033",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "23cf715b8a338520b08f43f8cea1a00fe284dd981f3b93b803405bf9273ccd98",
+      "locator": "private certificate:questions:m3_psychological_consulting_033"
+    },
+    "304cece764bd88e6e0680e275f59e79ab95c72689becfadcbee36e6b2b936a7d": {
+      "external_id": "m3_psychological_consulting_035",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "b0cce8b7ce911f1542d3a0fe950b92b20c873164af9866af5130ed28ad0736da",
+      "locator": "private certificate:questions:m3_psychological_consulting_035"
+    },
+    "4102b1bd317948d836227ddf4be985242013aff9f19703642e922aac7046f195": {
+      "external_id": "m3_psychological_consulting_036",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "236ae6e35bd003d03a8e3f8d908eff605e2212803a1e313b3e360ad271c4ead7",
+      "locator": "private certificate:questions:m3_psychological_consulting_036"
+    },
+    "10b4c00a4226d8daa624a829b4e97d12a9685d82bdfc4ec67ec28c31e13cee01": {
+      "external_id": "m3_psychological_consulting_085",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "bad5884a7a42639832c28d10bc87880809dcb8c9e3a3ba1d7d5ce0ca91f026c8",
+      "locator": "private certificate:questions:m3_psychological_consulting_085"
+    },
+    "95a7c8eb098def4848b87055b2654f1e9486d8f3d8b83e15804c11ca786798be": {
+      "external_id": "m3_psychological_consulting_086",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "0f8afd92f7fd3d49e37c237e868580d9f4630162e2b2661f8f1ca65734c12504",
+      "locator": "private certificate:questions:m3_psychological_consulting_086"
+    },
+    "044284c4bbede06a0fff650397368d897b3212f5a96c5329b2a7b8a7344ba2d4": {
+      "external_id": "m3_psychological_consulting_089",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "f2b04eff1cadc01cd70e51e3bd2668aec7e1cd87e29587f868f474caef263ae8",
+      "locator": "private certificate:questions:m3_psychological_consulting_089"
     }
   }
 }
