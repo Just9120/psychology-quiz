@@ -468,7 +468,8 @@ async def privacy_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         "и ранее созданные резервные копии.\n\n"
         "Стандартная политика конфиденциальности Telegram для ботов и Mini App:\n"
         f"{TELEGRAM_PRIVACY_POLICY_URL}\n\n"
-        f"По вопросам копии или исправления учебных данных: {PRIVACY_CONTACT_EMAIL}",
+        f"Владелец PsychologyAtlas: {PRIVACY_CONTACT_EMAIL}\n"
+        "Сюда можно обратиться за копией, исправлением или удалением ваших персональных данных.",
     )
 
 
