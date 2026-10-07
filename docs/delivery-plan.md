@@ -52,6 +52,8 @@ F-112 / contract активирован D-46: source-free repository receipt д�
 | Static hygiene | AST/diff и затронутые validators | `git diff --check`, существующие scripts из README, корень | Local до PR | REQUIRED |
 | Новый full audit/load | Отдельное поручение/выявленный конкретный риск | N/A до такого условия | Не запускается автоматически | N/A |
 
+Локальная реализация retention07.10: scripts/backup_retention.py подготовлен как фиксированная production-target команда, default read-only; --apply требует expected SHA, чистую main и точный origin; удаляет только известные двухфайловые verified backup units старше30 дней. Минимум две точки на cluster, pinned control references, unknown/unfinished recovery и изменённый plan защищены. Local12 focused backup tests PASS/0,18с (synthetic files; Windows). Linux filesystem/lock behavior требуется existing CI; production cleanup ещё не выполнялся, logs/export retention ещё не реализованы. Счётчик остаётся18/22. Validation: existing backup suite + новые safety regressions REQUIRED local/CI; runtime read-only plan и reviewed apply REQUIRED до заявления о применении срока. Согласование retention не разрешает удалить unknown files или восстановить production DB.
+
 Следующий шаг: применить и проверить D-47 к точным owned backup/log/export paths, сохраняя minimum2 и active recovery. Завершить data-flow review; после окончания разработки подтвердить PRIVATE/Vault по D-45. Новый off-host backup не вводить; unknown runtime conditions не объявлять N/A.
 
 Исторические журналы предыдущей corpus Goal перенесены в [архив](delivery-plan-archive.md#corpus-search-completion-20261001--checkpoints-до-поставки); они не задают текущий счётчик или next step.

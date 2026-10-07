@@ -134,3 +134,10 @@ flock -n /tmp/psychology-quiz-deploy.lock python3 scripts/backup_retention_plan.
 ```
 
 Без `--retention-days` срок UNSET, кандидатов к очистке нет. В команде выше указан согласованный срок 30 дней; она не удаляет файлы. Для recovery point, которым пользуется активная процедура, добавить `--pin-record` с его `record.json`; внешние пути отклоняются. Минимум две новейшие проверенные точки каждого кластера остаются независимо от срока. Failed/unknown records, symlinks, повреждённые dumps, несовместимые identities и недостоверные даты сохраняются. `REVIEW_CANDIDATE` означает только необходимость операторского review с учётом незавершённых recovery records; automatic cleanup не внедрён. Снимок отражает момент проверки, не состояние после освобождения lock. Срок согласован D-47, фактическая очистка и её Evidence ещё не выполнены; никакой RPO/RTO этот инструмент не устанавливает.
+
+
+## Подготовленная очистка локальных DB backups
+
+[backup_retention.py](../scripts/backup_retention.py) применяет D-47 только к /opt/psychology-quiz/.postgres/backups, под общей deploy lock. Без --apply только план; с --apply --expected-sha <проверенная-revision> проверяются чистая main/exact origin и удаляются лишь известные record.json/database.dump units из свежего перепроверенного плана. Новый unit с unknown файлами, небезопасными paths/permissions, повреждённым dump, unfinished recovery или конфликтом плана не удаляется. Минимум две verified точки каждого cluster и control-record pins сохраняются. Recovery records, live DB и полные VPS snapshots не удаляются. Частичный сбой не считать успешной очисткой.
+
+Код подготовлен локально; production применение пока PENDING. Перед --apply нужны проверенная поставленная revision и read-only review точного плана. Никакой cron/systemd timer не установлен этой подготовкой. Application/Nginx logs и переданные копии обрабатываются отдельно.
