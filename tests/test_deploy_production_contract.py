@@ -145,6 +145,9 @@ python3() {
     *postgres_vps.py\ upgrade-vector-image*) [[ "$FAULT" != pg_upgrade_failed ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
     *postgres_vps.py\ rehearse-user-recovery*) [[ "$FAULT" != pg_recovery && "$FAULT" != pg_upgrade_recovery ]] || return 2; echo /opt/psychology-quiz/.postgres/recovery-rehearsals/rehearsal-test/record.json ;;
     *postgres_vps.py\ verify*) [[ "$FAULT" != pg_preservation ]] ;;
+    *install_backup_retention.py\ preflight*) [[ "$FAULT" != pg_timer_preflight ]] ;;
+    *install_backup_retention.py\ install*) [[ "$FAULT" != pg_timer_install ]] ;;
+    *privacy_runtime_check.py*) [[ "$FAULT" != pg_privacy_runtime ]] ;;
     *runtime_exposure.py*) [[ "$FAULT" != exposure ]] ;;
     *) return 99 ;;
   esac
@@ -335,3 +338,23 @@ def test_backend_artifact_and_running_runtime_checks_are_fail_closed(tmp_path, f
         assert "deployment_db.py backup" not in log
     else:
         assert "up -d --no-build" in log
+
+
+@pytest.mark.parametrize('fault', ['pg_timer_preflight', 'pg_timer_install', 'pg_privacy_runtime'])
+def test_owned_backup_timer_failure_does_not_claim_delivery(tmp_path, fault):
+    result, log = run_deploy(tmp_path, fault)
+    assert result.returncode != 0
+    assert 'DEPLOY_OK' not in result.stdout
+    if fault == 'pg_timer_preflight':
+        assert 'stop psych_quiz_bot' not in log
+    else:
+        assert 'up -d --no-build' in log
+        assert log.index('pwa_cd.py publish') < log.index('install_backup_retention.py install')
+
+
+def test_owned_timer_is_installed_after_successful_postgres_delivery(tmp_path):
+    result, log = run_deploy(tmp_path, 'pg')
+    assert result.returncode == 0, result.stderr + result.stdout
+    order = ['install_backup_retention.py preflight', 'stop psych_quiz_bot',
+             'runtime_exposure.py', 'pwa_cd.py publish', 'install_backup_retention.py install', 'privacy_runtime_check.py']
+    assert [log.index(x) for x in order] == sorted(log.index(x) for x in order)

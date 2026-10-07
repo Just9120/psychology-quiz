@@ -22,10 +22,14 @@ class DockerComposeContractTests(unittest.TestCase):
         self.assertIn('"127.0.0.1:8090:8090"', bot_block)
         self.assertNotIn('"0.0.0.0:8090:8090"', bot_block)
 
-    def test_fastapi_service_owns_8081_binding_and_uvicorn_command(self):
+    def test_fastapi_service_owns_8081_binding_and_private_runtime_command(self):
         fastapi_block = self.compose.split("psych_quiz_miniapp_api:", 1)[1]
         self.assertEqual(fastapi_block.count("127.0.0.1:8081:8081"), 1)
-        self.assertIn('"uvicorn", "app.miniapp_fastapi_runtime:app"', fastapi_block)
+        self.assertIn('"python", "scripts/runtime_log.py", "api"', fastapi_block)
+        self.assertIn('driver: "none"', fastapi_block)
+        from scripts.runtime_log import COMMANDS
+        self.assertIn('app.miniapp_fastapi_runtime:app', COMMANDS['api'])
+        self.assertIn('--no-access-log', COMMANDS['api'])
 
     def test_no_duplicate_published_host_ports(self):
         host_port_lines = [

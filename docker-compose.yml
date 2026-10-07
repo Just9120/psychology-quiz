@@ -10,7 +10,9 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    command: ["python", "-m", "app.main"]
+    command: ["python", "scripts/runtime_log.py", "bot"]
+    logging:
+      driver: "none"
     volumes:
       - ./data:/data
       - ./content:/app/content:ro
@@ -33,7 +35,9 @@ services:
       - .env
     environment:
       APP_REVISION: ${APP_REVISION:-UNSET}
-    command: ["uvicorn", "app.miniapp_fastapi_runtime:app", "--host", "0.0.0.0", "--port", "8081"]
+    command: ["python", "scripts/runtime_log.py", "api"]
+    logging:
+      driver: "none"
     volumes:
       - ./data:/data
       - ./content:/app/content:ro

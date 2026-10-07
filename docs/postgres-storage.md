@@ -119,7 +119,7 @@ Backup record `.postgres/backups/release-*/record.json`: cluster/database/revisi
 
 `/readyz` проверяет существующий SQLite или version/catalog PostgreSQL и выполняет реальное чтение; unavailable/schema drift → 503 без DSN/raw errors. `/healthz` остаётся лёгкой process/version проверкой. Stateful classifier охватывает DB boundary/schema/import changes и canonical content; `.dockerignore` считается runtime input. SQL/schema compatibility для последующих schema versions всё равно требует отдельного reviewed migration — автоматического неизвестного DDL нет.
 
-Срок backup retention — UNSET до решения владельца; ниже доступен read-only план. RPO/RTO, off-host copy, HA и масштабная нагрузка — UNSET, обязательства по ним не вводятся без согласованного требования. Bounded restore rehearsal не доказывает восстановление всей VPS или готовность к неизвестному объёму пользователей.
+D-47 задаёт локальным DB backups 30 дней с сохранением minimum2/recovery exceptions. Ниже read-only план; очистка ещё не внедрена. Ручные VPS snapshots отдельно управляются владельцем в панели провайдера; новый off-host backup не поручен. RPO/RTO, off-host copy, HA и масштабная нагрузка — UNSET, обязательства по ним не вводятся без согласованного требования. Bounded restore rehearsal не доказывает восстановление всей VPS или готовность к неизвестному объёму пользователей.
 
 
 ## Read-only план хранения резервных копий
@@ -130,7 +130,51 @@ Canonical inspector — [backup_retention_plan.py](../scripts/backup_retention_p
 
 ```bash
 flock -n /tmp/psychology-quiz-deploy.lock python3 scripts/backup_retention_plan.py \
-  --backup-root /opt/psychology-quiz/.postgres/backups
+  --backup-root /opt/psychology-quiz/.postgres/backups --retention-days 30
 ```
 
-Без `--retention-days` срок UNSET, кандидатов к очистке нет. После решения владельца можно передать явное число дней для плана; это не разрешает удаление. Для recovery point, которым пользуется активная процедура, добавить `--pin-record` с его `record.json`; внешние пути отклоняются. Минимум две новейшие проверенные точки каждого кластера остаются независимо от срока. Failed/unknown records, symlinks, повреждённые dumps, несовместимые identities и недостоверные даты сохраняются. `REVIEW_CANDIDATE` означает только необходимость операторского review с учётом незавершённых recovery records; automatic cleanup не внедрён. Снимок отражает момент проверки, не состояние после освобождения lock. Полный retention срок и применимое удаление остаются решением владельца; никакой RPO/RTO этот инструмент не устанавливает.
+Без `--retention-days` срок UNSET, кандидатов к очистке нет. В команде выше указан согласованный срок 30 дней; она не удаляет файлы. Для recovery point, которым пользуется активная процедура, добавить `--pin-record` с его `record.json`; внешние пути отклоняются. Минимум две новейшие проверенные точки каждого кластера остаются независимо от срока. Failed/unknown records, symlinks, повреждённые dumps, несовместимые identities и недостоверные даты сохраняются. `REVIEW_CANDIDATE` означает только необходимость операторского review с учётом незавершённых recovery records; automatic cleanup не внедрён. Снимок отражает момент проверки, не состояние после освобождения lock. Срок согласован D-47, фактическая очистка и её Evidence ещё не выполнены; никакой RPO/RTO этот инструмент не устанавливает.
+
+
+## Подготовленная очистка локальных DB backups
+
+[backup_retention.py](../scripts/backup_retention.py) применяет D-47 только к /opt/psychology-quiz/.postgres/backups, под общей deploy lock. Без --apply только план; с --apply --expected-sha <проверенная-revision> проверяются чистая main/exact origin и удаляются лишь известные record.json/database.dump units из свежего перепроверенного плана. Новый unit с unknown файлами, небезопасными paths/permissions, повреждённым dump, unfinished recovery или конфликтом плана не удаляется. Минимум две verified точки каждого cluster и control-record pins сохраняются. Recovery records, live DB и полные VPS snapshots не удаляются. Частичный сбой не считать успешной очисткой.
+
+Код подготовлен локально; production применение пока PENDING. Перед --apply нужны проверенная поставленная revision и read-only review точного плана. Для автоматического запуска подготовлен scoped systemd timer; его установка на VPS ещё PENDING. Application/Nginx logs и переданные копии обрабатываются отдельно.
+
+
+## Ежедневный запуск локальной очистки
+
+[Установщик](../scripts/install_backup_retention.py) обслуживает только
+`/etc/systemd/system/psychology-quiz-backup-retention.service` и
+`/etc/systemd/system/psychology-quiz-backup-retention.timer` на том же VPS.
+Timer запускается ежедневно с 03:00 UTC и случайной задержкой до 30 минут.
+Сервис не создаёт off-host backup и не управляет ручными VPS snapshots.
+
+Canonical [deploy](../deploy.sh) выполняет read-only preflight перед остановкой
+приложения, а установку — после проверки runtime и публикации PWA, только для
+PostgreSQL. Неизвестные/чужие units, overrides или незавершённое recovery блокируют
+поставку; существующие настройки других проектов не перезаписываются.
+Установка не запускает очистку немедленно. При ошибке timer post-check
+восстанавливаются прежние два unit files и enabled/active state; база не откатывается,
+`DEPLOY_OK` не выдаётся. Ошибка восстановления требует operator reconciliation.
+
+Scheduled cleanup сверяет clean main, exact origin и ancestry установленной
+revision; при последующих documentation-only commits используется текущая main.
+Общая deployment lock исключает очистку во время поставки. Неизвестные recovery
+records/повреждённые copies сохраняются, даже если поэтому срок превышает 30 дней;
+оператор должен разобраться с причиной. При остановке сервиса/таймера срок тоже
+не гарантирован. Minimum2 и pinned exceptions не являются новой гарантией RPO/RTO.
+
+Для bounded readback после поставки: из `/opt/psychology-quiz` проверить
+`systemctl is-enabled psychology-quiz-backup-retention.timer` и
+`systemctl is-active psychology-quiz-backup-retention.timer`, затем
+`python3 scripts/backup_retention.py` (read-only). Фактический scheduled run
+проверяется по systemd service result; чужие журналы и private dump contents
+не публикуются. Контракт установки и восстановления проверяется
+[адресными tests](../tests/test_install_backup_retention.py), порядок/failure
+поставки — [shell contract](../tests/test_deploy_production_contract.py).
+
+Согласование сроков D-47 само по себе не подтверждает установку этих privileged
+units и выполнение cleanup: для текущего пакета нужны разрешённая поставка и
+runtime Evidence. Полные VPS snapshots остаются под ручным управлением владельца.
