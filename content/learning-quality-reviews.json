@@ -3847,10 +3847,10 @@
       ]
     },
     "questions:m1_phys_008": {
-      "item_sha256": "41fa25b752e8ada659d9a30d30498124790e41c1dcf3e5f4c559679566f91e65",
+      "item_sha256": "132004116977dca3ad424eda1854683dd1e9b862aef9a3323cf2b3e478bccc9d",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3862,13 +3862,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "note": "Exact raw physiology glossary passages support reflex, relative homeostasis and hormonal regulation. _008 corrected: somatic control is skeletal-muscle control and includes voluntary and automatic/reflex activity; independent OpenStax14.3 introduction supplies this essential qualification. Only unqualified conscious-control parenthetical is excluded; shunting-inhibition issue remains held. No whole-source approval or psychological inference from a nervous-system division.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:834:1114"
         }
       ]
     },
@@ -3953,10 +3953,10 @@
       ]
     },
     "questions:m1_phys_012": {
-      "item_sha256": "3fec57eb8346ae99ef0be9ed775dc18c97b6e6a4450a8e52c08b1c6a769c9aee",
+      "item_sha256": "13072b6a449b32b7f4470b4b69b175cd6ba505be2afd53711fa6b2ac2419375e",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3968,13 +3968,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "note": "Exact raw physiology glossary passages support reflex, relative homeostasis and hormonal regulation. _008 corrected: somatic control is skeletal-muscle control and includes voluntary and automatic/reflex activity; independent OpenStax14.3 introduction supplies this essential qualification. Only unqualified conscious-control parenthetical is excluded; shunting-inhibition issue remains held. No whole-source approval or psychological inference from a nervous-system division.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:450:580"
         }
       ]
     },
@@ -4059,10 +4059,10 @@
       ]
     },
     "questions:m1_phys_016": {
-      "item_sha256": "2dd5e7bd24630ec527a8f346fa3bf7c9f7f0ef5cd27bc25b6c40e894473fb422",
+      "item_sha256": "0b90ce55002e0c5e2cb69e8a9013589fcc205f48c8d23f5bbda0c464f2e753ed",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4074,21 +4074,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "note": "Exact raw physiology glossary passages support reflex, relative homeostasis and hormonal regulation. _008 corrected: somatic control is skeletal-muscle control and includes voluntary and automatic/reflex activity; independent OpenStax14.3 introduction supplies this essential qualification. Only unqualified conscious-control parenthetical is excluded; shunting-inhibition issue remains held. No whole-source approval or psychological inference from a nervous-system division.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:702:834"
         }
       ]
     },
     "questions:m1_phys_017": {
-      "item_sha256": "fd82629e1285c18ca40f71c2283225ef4fca580bf51c867c1b95df8fd22b6569",
+      "item_sha256": "7dd1009ed94f9e64c7b0227fc1008998a18f6e06f9b8af4a24a183a9b28382d0",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4100,13 +4100,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Базовые нейрон/синапс/рефлекс, регуляция и гомеостаз поддержаны первичным глоссарием. Прикладные примеры иллюстрируют принцип, не являются медицинским заключением.",
+      "note": "Exact raw physiology glossary passages support reflex, relative homeostasis and hormonal regulation. _008 corrected: somatic control is skeletal-muscle control and includes voluntary and automatic/reflex activity; independent OpenStax14.3 introduction supplies this essential qualification. Only unqualified conscious-control parenthetical is excluded; shunting-inhibition issue remains held. No whole-source approval or psychological inference from a nervous-system division.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:1614:1937"
         }
       ]
     },
