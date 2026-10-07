@@ -17326,6 +17326,44 @@
       "issues": [],
       "note": "Scoped measurement distinction: reliability is not sufficient evidence for validity of a stated score interpretation. No universal coefficient threshold, diagnosis, scoring change, or whole-course approval. Existing experimental internal/external validity questions do not cover this measurement distinction.",
       "sources": []
+    },
+    "questions:m6_family_001": {
+      "item_sha256": "4b980e03d9c75d4623684801080b6e88c4a9be07ab67a408fd1ae75fd6a533fe",
+      "discipline_id": "family_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact scoped terminology: sibling interaction versus spouses or parent-child relations. No universal four-subsystem requirement, ideal family, treatment efficacy, age rule or diagnosis asserted. Existing bank has no sibling/subsystem teaching item.",
+      "sources": []
+    },
+    "questions:m6_family_002": {
+      "item_sha256": "667cad9209349ffa9ece3973713ddd6847e61ec4bacc174c9f87c130b17824b5",
+      "discipline_id": "family_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Course-framed circular inquiry: member responses, understandings and changes; no unique causal mechanism, coercion, diagnosis or therapeutic-effect claim. Existing observational/hypothesis items do not explain this family-system inquiry model.",
+      "sources": []
     }
   }
 }

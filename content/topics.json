@@ -175,13 +175,14 @@
     "id": "family_psychology",
     "title": "Семейная психология",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/family_psychology.json",
     "status": "active",
     "order": 620,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing family-psychology discipline: two course-framed questions have exact scoped private reviews. Literature preserved; no whole-source, universal family rule or clinical-effect approval."
   },
   {
     "id": "organizational_psychology",
