@@ -3121,10 +3121,10 @@
     },
     "literature:lit_925e5ff861131189": {
       "decision": "approved",
-      "item_sha256": "4d9ea7c3d7141dcfb7d6bb4fcd5f9afc7d5530e0f9fcc6a31d67c33eff924012",
+      "item_sha256": "0b1e93f973f991ab37da3cd1894613900b32c0cc045f9e29aef5cb9142393346",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-30",
+      "reviewed_at": "2026-10-07",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -3134,11 +3134,11 @@
         }
       ],
       "bibliographic_metadata_review": {
-        "reviewed_at": "2026-09-30",
+        "reviewed_at": "2026-10-07",
         "origin": "agent",
         "primary_record": "https://library.tversu.ru/vystavki/136-otdel-filologicheskoj-literatury/1257-organizatsionnaya-psikhologiya.html?template=accessibility",
-        "evidence_scope": "University library record retrieved: collective authorship, Rogov editor, second edition 2013 differs from course sole Zholudeva attribution and 2012. Candidate discrepancy only; no automatic author/year/work replacement. Reading role remains UNSET.",
-        "limitations": "Original course citation, source snapshots and work identity preserved. Exact edition and full text not verified."
+        "evidence_scope": "Course citation and existing approved bibliography snapshot preserved. Prior Tver university library2013 record retained; current indexed GUP and BrSTU catalogue descriptions also identify a Rogov-edited second edition2012. Year2012 alone is not a contradiction. Exact course edition/full author attribution remains unknown; only warning corrected, no identity/author/year/citation/state replacement.",
+        "limitations": "Primary catalogue indexed descriptions reviewed; direct BrSTU retrieval timed out. No full book review or confirmed edition merge. Existing publication source snapshot retained; later private extraction uses another profile/hash of the same recorded source revision and is not claimed byte-identical."
       }
     },
     "literature:lit_f0436ade24a5adb3": {
