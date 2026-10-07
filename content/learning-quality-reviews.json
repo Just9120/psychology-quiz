@@ -1958,10 +1958,10 @@
       ]
     },
     "questions:m1_gp_005": {
-      "item_sha256": "69d0a8370279bb11faf5f5c54eff07015446ddeb5958fc0e0016edd11fd6e43e",
+      "item_sha256": "51a521bb68c67c21a5ca4af6583e5e1fe931b8495200983c575be1e3a7db21d8",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1973,21 +1973,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:603:789"
         }
       ]
     },
     "questions:m1_gp_006": {
-      "item_sha256": "2ef9349ef4ce044bdd1aa39cf56fcfd4193759f8c2c487a111a6957756dac591",
+      "item_sha256": "eb9d762e6a241d57684550a0323c0c47e9a944f5397e5036741c67708e3fe6f0",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1999,21 +1999,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:603:789;characters:3174:3706"
         }
       ]
     },
     "questions:m1_gp_007": {
-      "item_sha256": "a6152ff8216666e7b7379bf260dd6d6fa4a0b9756830216d4d9e31ce69d7d6a2",
+      "item_sha256": "2450d98365fa652eb71dc24567b1abf585d2d19de795fb9e8014f7e338199ad9",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2025,21 +2025,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Лекция прямо определяет внимание как сосредоточенность и устойчивость фокуса; уведомления — учебная иллюстрация, не цитата. Смысловой повтор с 021 учтён overlap-группой.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 6300:9700"
+          "locator": "characters:6391:6554;characters:9147:9655"
         }
       ]
     },
     "questions:m1_gp_008": {
-      "item_sha256": "b1ede88219b7c18967c1c6b51bf5607b99a269355e881f6a9ed37164c71639c5",
+      "item_sha256": "c7957041aeb18fcc668c18e9e81d3b651c33c354945133e428a59aacc32659a0",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2051,21 +2051,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:10827:10999"
         }
       ]
     },
     "questions:m1_gp_009": {
-      "item_sha256": "05b7f4ed3d679535d7546849cf57ab80e3b77b6ecd1a6794f7fbc8ebd149428d",
+      "item_sha256": "48eb1f86ad624a85a4e5c2a2ebefa75437ca69ff69f1cb2bd22e20a606755d1c",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2077,21 +2077,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:16900:17123"
         }
       ]
     },
     "questions:m1_gp_010": {
-      "item_sha256": "3319cf1f808fbae99d4d2d4a819b07a83ff2f70318def08808e621884af148b3",
+      "item_sha256": "2ad7eb98b0a0cde844ac421ddc9111039e900e7371f4bc1a48ba5544a71bdf9f",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2103,21 +2103,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:20827:21003"
         }
       ]
     },
     "questions:m1_gp_011": {
-      "item_sha256": "9f154a4bf146eb714fea1ce6b666b261137e732264ec3d24b319fd13c8be3fd7",
+      "item_sha256": "ea809df2797af3852060dd1e7018de22dd28140d8da14a0b7dc14cd191817c02",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2129,21 +2129,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:9147:9655"
         }
       ]
     },
     "questions:m1_gp_012": {
-      "item_sha256": "c404205921d323ab5438aeac8ebab922f7546e15a9457f0d044f992506d3c56a",
+      "item_sha256": "404c5246ca42ead2ec5fce624fa0859630c5c9b7320a8f4abe5f7cf301241a46",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2155,13 +2155,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:168:412;characters:603:789;characters:10827:10999;characters:16900:17123"
         }
       ]
     },
@@ -2387,10 +2387,10 @@
       ]
     },
     "questions:m1_gp_021": {
-      "item_sha256": "471a5fa4735363071912683778f4c7881ef058848d0e9a718c3b21e16decbc7c",
+      "item_sha256": "16cd8e5bee27bd1750ca9a56a48723420991bc59845f378b6a00c6b8ff58ab9a",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2402,13 +2402,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Лекция прямо определяет устойчивость и переключение внимания; пример с уведомлениями — учебная иллюстрация. Смысловой повтор с 007 учтён overlap-группой.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 6300:9700"
+          "locator": "characters:6391:6554;characters:9147:9655"
         }
       ]
     },
@@ -2441,10 +2441,10 @@
       ]
     },
     "questions:m1_gp_023": {
-      "item_sha256": "ad4b075c387d91068774fc28dcb85979ae970c28f0a3ab2696ceef5786e84f0e",
+      "item_sha256": "9032560859426a3cc9092a8bb729f374496d7c058e3cb45d197f83902bdacc03",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2456,21 +2456,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:10827:10999"
         }
       ]
     },
     "questions:m1_gp_024": {
-      "item_sha256": "e3602d45655f5ba8e6ad5b069e7de51d83b1e628ccf2c3cc19d9447f90828db1",
+      "item_sha256": "f9627af307d676cd77fb209b6863ab49971705eebb3b780709f73912e9faa0be",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2482,21 +2482,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:16900:17123"
         }
       ]
     },
     "questions:m1_gp_025": {
-      "item_sha256": "8c20c5e1a23fc91e6e737e80988c718f0f7ed9a0deff531150c269a03a93a621",
+      "item_sha256": "8501f006cf6a3b531d62d3742efd72f232c6fb029204a59e0c2ea550da300cde",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2508,13 +2508,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:20827:21003"
         }
       ]
     },
@@ -2764,10 +2764,10 @@
       ]
     },
     "questions:m1_gp_035": {
-      "item_sha256": "c1748f62fb46ca2a9e32f79b40ff3e114bb3af75c36aa1dc4a03f77d4a625ed0",
+      "item_sha256": "5da58c9db5954cf98aa247e62c8d0a9ab61090e019418fe2b02887343ec0c5a1",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2779,21 +2779,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates. Self-review: encoding difficulty is a possibility, not an absolute outcome of every attention lapse.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:6391:6554;characters:10827:10999"
         }
       ]
     },
     "questions:m1_gp_036": {
-      "item_sha256": "ad4fe716f6b812ba166206e26f1feff95ee2ce6b521029d07e2d41979458ccec",
+      "item_sha256": "7eacec40d44c4e4d164244f901ada636b265c38fe95938e51b10468c0a6fe057",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2805,21 +2805,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:16900:17123"
         }
       ]
     },
     "questions:m1_gp_037": {
-      "item_sha256": "56c68d463f59de99a5da1facf951a214965e8f1260df35379e128a7a9073fab8",
+      "item_sha256": "a70a5a4c8911d5c2b1678e7d0b337228b1db55b794a8b1e57269d445813a3e8f",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2831,21 +2831,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:24680:24789"
         }
       ]
     },
     "questions:m1_gp_038": {
-      "item_sha256": "c44f694c73a5a00ba81dcfc474035cae522278d74e57587458d3102dc7598d87",
+      "item_sha256": "29aef252e74ead1bbae1d68002396141e96b2599495481e46cd7a3af7798c8bb",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2857,13 +2857,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:603:789;characters:6740:7214;characters:10827:10999;characters:16900:17123"
         }
       ]
     },
@@ -2972,10 +2972,10 @@
       ]
     },
     "questions:m1_gp_043": {
-      "item_sha256": "8423ec1096e09ca3f8a04f34bde055a43c7fcc9ba3ea59f94d8f9ef4314497a8",
+      "item_sha256": "dd5d08faafc50f889eafaf490c43473b0e2142d05cc72088fb8315728a1531f3",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2987,13 +2987,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Лекция прямо описывает избирательность и ограниченность внимания; среди вариантов это единственный процесс, отвечающий за отбор ярких деталей. Формулировка «ограниченная избирательность» учебная, не отдельный научный термин.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 9000:9700"
+          "locator": "characters:6391:6554;characters:9147:9655"
         }
       ]
     },
@@ -3210,10 +3210,10 @@
       ]
     },
     "questions:m1_gp_052": {
-      "item_sha256": "35d77c43232ed67dc5cb9a2d0c638dbda41c5f87660fe1cd89a5692bc44a955c",
+      "item_sha256": "c76a8668a11ecb228d945ce5766b1b05011b56a33bbc9f6b354fff0099775371",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3225,13 +3225,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключи согласуются с определениями ощущений/восприятия, внимания, памяти, мышления, воображения/речи; проверено различение вариантов. Конкретные примеры не выдаются за дословные ситуации лекции.",
+      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "locator": "characters:3174:3706;characters:5800:6053"
         }
       ]
     },
