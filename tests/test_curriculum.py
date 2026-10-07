@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 350
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 399
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
@@ -189,7 +189,15 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                               'm1_phys_002', 'm1_phys_003', 'm1_phys_004',
                               'm1_phys_006', 'm1_phys_009', 'm1_phys_010',
                               'm1_phys_014', 'm1_phys_015', 'm1_phys_025',
-                              'm1_phys_026', 'm1_phys_032', 'm1_phys_044'}
+                              'm1_phys_026', 'm1_phys_032', 'm1_phys_044'} | {
+                                  f'm2_exp_{number:03}' for number in (
+                                      6, 7, 8, 20, 21, 22, 23, 41, 42, 43,
+                                      44, 45, 47, 48, 62, 63, 64, 66, 67, 68,
+                                      69, 70, 71, 72, 73, 74, 75, 76, 77, 78,
+                                      79, 80, 81, 94, 98, 100, 101, 102, 103,
+                                      104, 106, 107, 110, 112, 113, 114, 116,
+                                      117, 118)
+                              }
         assert retired == {'m2_qual_009', 'm2_qual_013'}
 
 

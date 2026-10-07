@@ -9639,10 +9639,10 @@
       ]
     },
     "questions:m2_exp_006": {
-      "item_sha256": "a054d839f608758875a82e83d378dd39e94299db78dd03b3dcd2a9e1076003a0",
+      "item_sha256": "2d81e12a05f636997a85f1ed6ac60e99fa809ee21919201c1c305faa88da9925",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9654,21 +9654,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: alternative, prepost. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:12500:12735;characters:18200:18700"
         }
       ]
     },
     "questions:m2_exp_007": {
-      "item_sha256": "b1d17fb475ed9f5ad10a265a5aa735e86e9cddea9fa52ac081ae29febd5b90ce",
+      "item_sha256": "cd2cdf4d8a8207f77a795ff9e9038ec2ea6804b3c598cc76d94f4624f324e78a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9680,21 +9680,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: control. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:16997:17107"
         }
       ]
     },
     "questions:m2_exp_008": {
-      "item_sha256": "e0148db4cea7214981326ec7f747a8d6b202b5fcc2f0e9e74459954e0a477eb3",
+      "item_sha256": "091ce477bcb2b585956706d1c9a35599e4f267df8f0df22daec460b297e3d1fe",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9706,13 +9706,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: alternative. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:12500:12735"
         }
       ]
     },
@@ -10007,10 +10007,10 @@
       ]
     },
     "questions:m2_exp_020": {
-      "item_sha256": "bb9d0b6978d1c5c8d34081e53f5de7b4097ed8f60485afc8d61b97a192e002d4",
+      "item_sha256": "6c0162c841df5fd4d5bca66bb526171cef746166cf5d89016ac35fe6f0e79083",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10022,21 +10022,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: variables, alternative. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:4200:4740;characters:12500:12735"
         }
       ]
     },
     "questions:m2_exp_021": {
-      "item_sha256": "8289d614d717c614d0e93b06b98cd4279df0c5a9285750d062260285755d909d",
+      "item_sha256": "6cc2c9b0b00f4ecc51a74368e51481a6e2460e7388cfd119b2f8b89ff437b399",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10048,21 +10048,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: prepost, control. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:16997:17107;characters:18200:18700"
         }
       ]
     },
     "questions:m2_exp_022": {
-      "item_sha256": "65e892a1a43233f23d7b521be83f2d89fcc48fe76dabee2c7b73693937b0e29a",
+      "item_sha256": "0435830eaaf070bdf24d884bd0af2b57db96661a1960802737332d0220983a85",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10074,21 +10074,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: internal. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:10925:11325"
         }
       ]
     },
     "questions:m2_exp_023": {
-      "item_sha256": "0b219191245be019f2a2d1cfc811a8ba1d01f31c95f1d00b6a64b34e32ae610e",
+      "item_sha256": "42c10228c8f063a47acc7e53a77b39fd3c2df156eb69faccce8603a181465b65",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10100,13 +10100,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: external. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:11693:12100"
         }
       ]
     },
@@ -10570,10 +10570,10 @@
       }
     },
     "questions:m2_exp_041": {
-      "item_sha256": "07591af2d331ad26502888d07337a28ac5ac9fa227cc4922434b3a6aee131f5c",
+      "item_sha256": "5cd110115daf6b270cdd6c898e6039907ac4d37a52f84d5be4ebc7a701905b11",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10585,21 +10585,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: history. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:12735:12976"
         }
       ]
     },
     "questions:m2_exp_042": {
-      "item_sha256": "924ff6fc175058447390f9ec1975cbb88def6767f31cc22b242cefe844ad0a37",
+      "item_sha256": "6123223257ed47d6bf20a5dbc1b83fcc52361e256b83de6ab2456eae29410ac7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10611,21 +10611,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: maturation. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:12976:13203"
         }
       ]
     },
     "questions:m2_exp_043": {
-      "item_sha256": "a9621ea69b6641d0ede6b4e3e6341d6a3e4fca26f21b6eb3d4759da44004a758",
+      "item_sha256": "62a3195fb40458b3fafdea59638b1e1f200cfe795de30610c05a2d7ee9c754f3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10637,21 +10637,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: testing. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:13203:13444"
         }
       ]
     },
     "questions:m2_exp_044": {
-      "item_sha256": "230c5de09391958f739ae798d1e0d40621cbf65799bff381ee27ee0c5a1a3dbf",
+      "item_sha256": "ffdcb59143f2414720029168ed77675f3ccff08b2798ab0470cf8191b8d6e5da",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10663,21 +10663,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: measurement. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:13444:13700"
         }
       ]
     },
     "questions:m2_exp_045": {
-      "item_sha256": "eb69cb12e9c527b7fca94a6cb43c08c0b5727f9b485dee7831001cc85d21b7cc",
+      "item_sha256": "cfe3a7953c75fbb96f59eefb106c9ecea4cc9b2f9fef416928ad3147cae567d8",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10689,13 +10689,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: regression. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:13700:14006"
         }
       ]
     },
@@ -10726,10 +10726,10 @@
       ]
     },
     "questions:m2_exp_047": {
-      "item_sha256": "b9d198d4f3e1c00ed36cfd056df42f0124da9dd2948d6fa7e723dd94339a62f1",
+      "item_sha256": "7b24799a86168ec18bf7e02515b106ec5f93311bf67432117c7807be3b7a5c40",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10741,21 +10741,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: attrition. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:14303:14594"
         }
       ]
     },
     "questions:m2_exp_048": {
-      "item_sha256": "b7137eba481f2b4b95a253f68efb35b470eb9ba02f19f19b7b56080b77cf3592",
+      "item_sha256": "ef667b381ea0fa1ff25865c4b37915026041df536a7fdb31a569fd136f3dd3be",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10767,13 +10767,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: external. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:11693:12100"
         }
       ]
     },
@@ -11116,10 +11116,10 @@
       ]
     },
     "questions:m2_exp_062": {
-      "item_sha256": "1d998da6acab2599c09cc25856965c2919fa6bd37a2da02dd67b80f85e45ab8d",
+      "item_sha256": "0c8608ffdacd471a58646e4feb7f17a3146a4feac29c7725700e33adb33d217a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11131,21 +11131,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: testing, measurement. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:13203:13700"
         }
       ]
     },
     "questions:m2_exp_063": {
-      "item_sha256": "56b559b846cc6c86fb9288bcda55e1515ea6db1286f1766666f6bd62f3bcc93f",
+      "item_sha256": "01f81e1fd41bb2d5662736994386fc76a9f5d2bf2344e8cc04d84e730f057b96",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11157,21 +11157,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: correlation. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:1300:1960"
         }
       ]
     },
     "questions:m2_exp_064": {
-      "item_sha256": "016e6f5e39d37763dd4a74bba8714c105ccdd2e0b4d5eb14054cbd974218ea4e",
+      "item_sha256": "9f7ea5026cd5e4266fb2ca1af08a716fa45b2e95e88bea17570208abe2344135",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11183,13 +11183,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: priority, mill. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:1960:2200;characters:2787:2952"
         }
       ]
     },
@@ -11220,10 +11220,10 @@
       ]
     },
     "questions:m2_exp_066": {
-      "item_sha256": "bd3edef23453b778587db0a9a9664d9a1a6b8e7c801d4823aa54668468fbc75b",
+      "item_sha256": "cc45cace169c63f1e611537c69cd8a948ca9f8772d626b97166032c482ed2e23",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11235,21 +11235,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: pygmalion. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:5798:5927"
         }
       ]
     },
     "questions:m2_exp_067": {
-      "item_sha256": "bc1facbd59b21533e3e20cd5f8f99a80417c0c269060ebbcc621dbdf7888ea28",
+      "item_sha256": "1ad7aba02262dc7afc27ffbba3cc3f1966689d93bc5c4db98caba42fd193ca11",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11261,21 +11261,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: blinding. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:7012:7140"
         }
       ]
     },
     "questions:m2_exp_068": {
-      "item_sha256": "3e82a7a7275c94b7099799a32607083e008aa5836e82bf93535764b4984645aa",
+      "item_sha256": "c5d49d597451e45b9070f507fcd12d18ba5c4894008c696e620335d797743baf",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11287,21 +11287,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: variables, blinding. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. Separate independent primary review attached; no whole-source approval.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:4200:4740;characters:7012:7140"
         }
       ]
     },
     "questions:m2_exp_069": {
-      "item_sha256": "cfe3b51a5a698b1ed68b12d80f7d87d77122490c3efad7e1e317bb4ee9b782b5",
+      "item_sha256": "65c06650bf7dbeee71ce1bdcdb8a164392aa945708955cfd23c306f84a9bb236",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11313,21 +11313,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: critical. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:8206:8350"
         }
       ]
     },
     "questions:m2_exp_070": {
-      "item_sha256": "3547add54cd0fcb1015969f7136ba4b7fc5b60a194711cb8b8df98d63a29df64",
+      "item_sha256": "cd63090ef2602c628b7982afee43b99ee479ebb11b8847d5929c76c6721760d3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11339,21 +11339,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: natural. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:8800:9001"
         }
       ]
     },
     "questions:m2_exp_071": {
-      "item_sha256": "ef8b415c18e84fcf6312e3ba60502b70922cdcf121f22a1b89da6c2ca8c9cb01",
+      "item_sha256": "63c8c1cab844b38b2ec339d926d85a0763fdf1612a4e6633080a9fc9dc76f6e6",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11365,21 +11365,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: true. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:9620:10380"
         }
       ]
     },
     "questions:m2_exp_072": {
-      "item_sha256": "20709644f377ed1fcae8bd5b1b816c7c649e398e5f9a09fcebcf1ede7c57698b",
+      "item_sha256": "94bfbcefa5e9c8fa4ceaaaf355dc3060dbd42c1cc678d82048cd3c6346c7a6f2",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11391,21 +11391,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: history. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:12735:12976"
         }
       ]
     },
     "questions:m2_exp_073": {
-      "item_sha256": "b1da39f4e00984d65af139c24fe774b5521b60601bde098f6af5b8d39485c8ae",
+      "item_sha256": "73071504f45dfdc1bb3be838575f1f6386118011b6bf5d3b7544b02f2dda7856",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11417,21 +11417,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: regression. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:13700:14006"
         }
       ]
     },
     "questions:m2_exp_074": {
-      "item_sha256": "ce3d50ef2cae5b56c08238b8c904f49263f7a0c36dccbbeaeea93b2a8d5543e2",
+      "item_sha256": "7de0f75d7fe39693e3516664de7517c23a017ae46d897b6519c1b01f4720bd37",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11443,21 +11443,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: pretest_external. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:15000:15550"
         }
       ]
     },
     "questions:m2_exp_075": {
-      "item_sha256": "7abe5b57bc8a73e0117626e37c1cb9fa63b788710bd168e777f380d3bff9178c",
+      "item_sha256": "1a1ca503ed01fbbe187bd2f3a9cc6cdba377fe05acec0e531d7acc47e8f473e6",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11469,21 +11469,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: prepost. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:18200:18700"
         }
       ]
     },
     "questions:m2_exp_076": {
-      "item_sha256": "fe5e09c2b0545587e8a7cdfc11eba7e29fad13182d7851513b49df9b1e18c56c",
+      "item_sha256": "befe57f78878b67ff3c4e045774ae5015c759ab0cad9b8c98c6e9068160441d7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11495,21 +11495,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: static, selection. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:14006:14303;characters:18620:19300"
         }
       ]
     },
     "questions:m2_exp_077": {
-      "item_sha256": "a6f777e1e95735cdd4bcebc07c0021d44d9e472c0ece45be3dcc55bca5490662",
+      "item_sha256": "a1684238c6b1a385b225be11488e9be2e010f8c63fce597419968341ef8f27cd",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11521,21 +11521,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: solomon. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:21210:21790"
         }
       ]
     },
     "questions:m2_exp_078": {
-      "item_sha256": "e1b4c9c2fea85755382ce946b5200dade7a499de7ed3331a193ee6a87147e5af",
+      "item_sha256": "34ef7210d02273c00cf32595963ce589dda49078b3fea80f956c063144e3fa97",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11547,21 +11547,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: counterbalance. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:23300:23969"
         }
       ]
     },
     "questions:m2_exp_079": {
-      "item_sha256": "20743dd7fa7f0372d2f5f18cc2b2794a3980e9f79e3c5f1123f42ed87efbc21d",
+      "item_sha256": "455698b867520440339ca5e85eee8bec92ac6a3dc3d99ba11e81ee64fae4aa05",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11573,21 +11573,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: factorial. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. Separate independent primary review attached; no whole-source approval.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:23960:24300"
         }
       ]
     },
     "questions:m2_exp_080": {
-      "item_sha256": "803df9686f03e54478e4fadfd0232231dac13391a0c373efbbb57f3082cb302b",
+      "item_sha256": "691948f9c5cdc58d214e4319202dfc39a226b6d6b1b20815208bfcd01cdb68c9",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11599,21 +11599,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: counterbalance. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. Separate independent primary review attached; no whole-source approval. Уточнён правильный вариант: Latin square counterbalancing, не экономная замена полного факторного плана. Ключ/ID/остальные options/explanation сохранены.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:23300:23969"
         }
       ]
     },
     "questions:m2_exp_081": {
-      "item_sha256": "8cb597bc9f8738754d8afa92d37fba8f936a3ddea6cf4da587546267de64c0d1",
+      "item_sha256": "c6484c56cd0add0b49610479ce01d029f6162ec06534e37af578a1efae6cadf4",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11625,13 +11625,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: true, planning. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:9620:10380;characters:25180:25800"
         }
       ]
     },
@@ -11950,10 +11950,10 @@
       ]
     },
     "questions:m2_exp_094": {
-      "item_sha256": "deed02b85fc73e6cfc6843db370df7067731b093066df8f22796c4bcb2103538",
+      "item_sha256": "435f36981a1a3992d408fca1d1113cd4678d3b7b1a334f4d9b78ee8b8a60f2e1",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11965,13 +11965,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: external, planning. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:11693:12100;characters:25180:25800"
         }
       ]
     },
@@ -12058,10 +12058,10 @@
       ]
     },
     "questions:m2_exp_098": {
-      "item_sha256": "8524949e2191c425e6d054dddb37ac5e43f88d29d40c5260e930efc6cbbdfc19",
+      "item_sha256": "fbcc90ed9843acc561f6be220960f26ce8d5664de9a1644dbbc5f86d28b60b10",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12073,13 +12073,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: variables, alternative. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:4200:4740;characters:12500:12735"
         }
       ]
     },
@@ -12112,10 +12112,10 @@
       ]
     },
     "questions:m2_exp_100": {
-      "item_sha256": "d365d7ba77dedbe5d19373e58259496129b1c16f672e90b5d4896fa5b004dd5a",
+      "item_sha256": "7b7808ca6fc9d7ebae973011e0661d1dd79394fcfc472975315cb7d573daa25b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12127,21 +12127,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: external. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:11693:12100"
         }
       ]
     },
     "questions:m2_exp_101": {
-      "item_sha256": "91f491e22be509c32923a7dc1eaec0b9a1193919974c77371c5a0b9dcc29af08",
+      "item_sha256": "e44e5074e262d5fe99dc5d724fc88ebd402e498f27c0a75b94e45317cd5b5917",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12153,21 +12153,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: ecological. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:16000:16450"
         }
       ]
     },
     "questions:m2_exp_102": {
-      "item_sha256": "6b5c7a790e9327e79fbb598bb50358a2cfe68bff2bc2d0d7ebba3e27c24ce282",
+      "item_sha256": "b7ef0082f1a0f540807bd83ae7506c09ab576e9148a18b8708047c4b0c5d5693",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12179,21 +12179,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: true, blinding. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. Separate independent primary review attached; no whole-source approval.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:7012:7140;characters:9620:10380"
         }
       ]
     },
     "questions:m2_exp_103": {
-      "item_sha256": "667111392e8ab6e4d33fab6c251fd807ebbae18a5c9b5061f61c5b0e9229cebf",
+      "item_sha256": "7343386ca43a13c3315a9101da0aff316b02fe02dc4dde3e7d5288892286544e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12205,21 +12205,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: variables, blinding. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. Separate independent primary review attached; no whole-source approval.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:4200:4740;characters:7012:7140"
         }
       ]
     },
     "questions:m2_exp_104": {
-      "item_sha256": "cdac6812acd581084d351134a0b57083ebb2cbd923448100372e67c66c97b97a",
+      "item_sha256": "4a3caf69447eff798ac304cf2b66f299412e39a496fb753c2438137cd73ebcee",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12231,13 +12231,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: blinding. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. Separate independent primary review attached; no whole-source approval.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:7012:7140"
         }
       ]
     },
@@ -12270,10 +12270,10 @@
       ]
     },
     "questions:m2_exp_106": {
-      "item_sha256": "ed2426270ba5f9d38b5a4208604ce820b52e1424f8bbc34f850fb1062126b0ea",
+      "item_sha256": "96fa13ff557577b20de72c825a5791a4fdeec1a3c0acd90f413b1b42a516ef99",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12285,21 +12285,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: attrition. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:14303:14594"
         }
       ]
     },
     "questions:m2_exp_107": {
-      "item_sha256": "5c374a0bdadb59ec16c213a92f9bd964ab4e9cf1aa6c920bde2fa5d6e9320c39",
+      "item_sha256": "5530846b37d7dbefbb27d96b7b553973251b8cc50c3929236fcb3da2ebb22b41",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12311,13 +12311,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: selection, quasi. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:14006:14303;characters:25900:26500"
         }
       ]
     },
@@ -12374,10 +12374,10 @@
       ]
     },
     "questions:m2_exp_110": {
-      "item_sha256": "1db91d91bf58dadbe76f8bb26e9257e5fb50f3d93733bec2eca4b0fd08abb8b3",
+      "item_sha256": "354d24afc6017d4a3d26789b5c47da1c4783e204581cd50671346ab92f11b21b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12389,13 +12389,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: variables, alternative. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:4200:4740;characters:12500:12735"
         }
       ]
     },
@@ -12428,10 +12428,10 @@
       ]
     },
     "questions:m2_exp_112": {
-      "item_sha256": "fd366b955dff0fef8c1520a2170b91a2f4e1a19ba2c04d22168a184350c06db9",
+      "item_sha256": "89515aa4c48e91178a8b71c7163f8dd0f63f5aaa7eb4bcc47411130e8f37242d",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12443,21 +12443,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: sample_external. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:15550:15997"
         }
       ]
     },
     "questions:m2_exp_113": {
-      "item_sha256": "687f261de59a2877eda896c0d36108a279b3ce46cc9b5a2b1f0504c992d9bdf0",
+      "item_sha256": "47e7d3386c568a69b8e913643b334f67dbc8a5e83cac56588153ee6279b74f63",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12469,21 +12469,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: alternative, prepost. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:12500:12735;characters:18200:18700"
         }
       ]
     },
     "questions:m2_exp_114": {
-      "item_sha256": "988b3dff8a1b8348d0159a37100d5bfde20281e532ab39a0182a89f860619800",
+      "item_sha256": "288c2d982f35a8e05495e5813a105a086b790d78a487e1dd3ebea6c722c506fb",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12495,13 +12495,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: attrition. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:14303:14594"
         }
       ]
     },
@@ -12534,10 +12534,10 @@
       ]
     },
     "questions:m2_exp_116": {
-      "item_sha256": "82b739ce2b38db649318bafce709e7c9206d6e1ae1c0e57b00bd502e6974419f",
+      "item_sha256": "a187fd1a6bfe0599152feac2c74c92d2b7a5c01e6a5cd460a154f6a9ad7c900f",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12549,21 +12549,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: selection. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:14006:14303"
         }
       ]
     },
     "questions:m2_exp_117": {
-      "item_sha256": "19152155707c2e1f1aa9958d08a6f857257614d16c270c4170d0cfaf4f6f1690",
+      "item_sha256": "1691437652173f15bd0d616d50d1132de223c064473f7652cb7bd657d75f9cde",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12575,21 +12575,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: variables. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:4200:4740"
         }
       ]
     },
     "questions:m2_exp_118": {
-      "item_sha256": "970b46ab6579284f75e33421a24ea3f372d4bb8497b7e594d69e60177d8f47e0",
+      "item_sha256": "d877968b563d92c20d539dbe3f1d6c1f983b540a93ec9f74718406de18e68033",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12601,13 +12601,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены определение причинного вывода, альтернативные объяснения, виды валидности, X/O/R, контроль, экспериментальные планы и их ограничения. Кейсы применяют эти определения; статистическая эквивалентность не гарантируется для каждой конечной выборки.",
+      "note": "Exact course fragments: control, prepost. Question/answer/explanation individually reviewed; broad source union and unrelated held claims excluded. No new independent whole-source certification.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:16997:17107;characters:18200:18700"
         }
       ]
     },

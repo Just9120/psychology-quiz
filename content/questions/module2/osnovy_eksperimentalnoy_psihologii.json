@@ -82,7 +82,6 @@
   {
     "id": "m2_exp_006",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
     "status": "approved",
     "question": "Почему одного замера «до» и одного замера «после» на одной группе недостаточно, чтобы уверенно говорить о причинно-следственном эффекте?",
@@ -98,7 +97,6 @@
   {
     "id": "m2_exp_007",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
     "status": "approved",
     "question": "Зачем в экспериментальной психологии так важна контрольная группа?",
@@ -114,7 +112,6 @@
   {
     "id": "m2_exp_008",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "hard",
     "status": "approved",
     "question": "Что в исследовательском мышлении лучше всего показывает зрелую профессиональную позицию?",
@@ -306,7 +303,6 @@
   {
     "id": "m2_exp_020",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
     "status": "approved",
     "question": "Что лучше всего показывает проблему смешивающей переменной в исследовании?",
@@ -322,7 +318,6 @@
   {
     "id": "m2_exp_021",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой вывод наиболее корректен, если после обучающей программы показатели группы выросли, но контрольной группы не было?",
@@ -338,7 +333,6 @@
   {
     "id": "m2_exp_022",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой вариант лучше всего передаёт смысл внутренней валидности исследования?",
@@ -354,7 +348,6 @@
   {
     "id": "m2_exp_023",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
     "status": "approved",
     "question": "О чём в первую очередь говорит внешняя валидность исследования?",
@@ -641,7 +634,6 @@
   {
     "id": "m2_exp_041",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/eksperimentalnye_plany_issledovaniy",
     "difficulty": "medium",
     "status": "approved",
     "question": "Что лучше всего описывает эффект истории как угрозу внутренней валидности?",
@@ -657,7 +649,6 @@
   {
     "id": "m2_exp_042",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/eksperimentalnye_plany_issledovaniy",
     "difficulty": "medium",
     "status": "approved",
     "question": "Почему эффект созревания может мешать чистому выводу о причинности в длительном исследовании?",
@@ -673,7 +664,6 @@
   {
     "id": "m2_exp_043",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/eksperimentalnye_plany_issledovaniy",
     "difficulty": "medium",
     "status": "approved",
     "question": "Что означает эффект тестирования как угроза валидности?",
@@ -689,7 +679,6 @@
   {
     "id": "m2_exp_044",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/eksperimentalnye_plany_issledovaniy",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой пример лучше всего показывает погрешность измерения как угрозу внутренней валидности?",
@@ -705,7 +694,6 @@
   {
     "id": "m2_exp_045",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/eksperimentalnye_plany_issledovaniy",
     "difficulty": "hard",
     "status": "approved",
     "question": "Почему регрессию к среднему легко ошибочно принять за эффект лечения или обучения?",
@@ -736,7 +724,6 @@
   {
     "id": "m2_exp_047",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/eksperimentalnye_plany_issledovaniy",
     "difficulty": "medium",
     "status": "approved",
     "question": "Почему отсев участников считается опасной угрозой валидности?",
@@ -752,7 +739,6 @@
   {
     "id": "m2_exp_048",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/eksperimentalnye_plany_issledovaniy",
     "difficulty": "hard",
     "status": "approved",
     "question": "Почему высокая внешняя валидность нередко достигается ценой некоторого снижения внутренней валидности?",
@@ -976,7 +962,6 @@
   {
     "id": "m2_exp_062",
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice8_validity_and_alternative_hypotheses",
     "difficulty": "medium",
     "status": "approved",
     "question": "В исследовании тревоги участников измеряли 5 раз, но в разные дни часть тестов проводили в шумной аудитории, а часть — в тихом кабинете. Какой риск валидности здесь самый очевидный?",
@@ -1003,8 +988,7 @@
     "correct_option_index": 2,
     "explanation": "Корреляция сама по себе не устанавливает причинность; обе переменные могут зависеть от общего фактора.",
     "difficulty": "easy",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_064",
@@ -1020,8 +1004,7 @@
     "correct_option_index": 3,
     "explanation": "Для причинного вывода причина должна предшествовать следствию по времени.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_065",
@@ -1054,8 +1037,7 @@
     "correct_option_index": 3,
     "explanation": "Ожидания значимого взрослого/исследователя могут влиять на поведение участников и итоговые показатели.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_067",
@@ -1071,8 +1053,7 @@
     "correct_option_index": 3,
     "explanation": "В двойном слепом дизайне обе стороны не знают о распределении по условиям, что снижает систематические искажения.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_068",
@@ -1088,8 +1069,7 @@
     "correct_option_index": 1,
     "explanation": "Сокрытие цели (при этическом обосновании) уменьшает реактивность и ответы «под гипотезу».",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_069",
@@ -1105,8 +1085,7 @@
     "correct_option_index": 2,
     "explanation": "Критический эксперимент ставят так, чтобы различить альтернативные объяснения/теории.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_070",
@@ -1122,8 +1101,7 @@
     "correct_option_index": 2,
     "explanation": "В натуральном эксперименте источник воздействия задается жизненными обстоятельствами, а не прямой манипуляцией исследователя.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_071",
@@ -1139,8 +1117,7 @@
     "correct_option_index": 0,
     "explanation": "Ключевые компоненты: активная манипуляция, случайное распределение и сравнение с контролем.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_072",
@@ -1156,8 +1133,7 @@
     "correct_option_index": 1,
     "explanation": "Параллельные внешние события могут объяснить изменения вместо экспериментального воздействия.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_073",
@@ -1173,8 +1149,7 @@
     "correct_option_index": 1,
     "explanation": "Экстремальные значения статистически склонны смещаться к среднему при повторных измерениях.",
     "difficulty": "hard",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_074",
@@ -1190,8 +1165,7 @@
     "correct_option_index": 1,
     "explanation": "Если предтест меняет реакцию на X, выводы хуже переносятся на ситуации без предтестирования.",
     "difficulty": "hard",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_075",
@@ -1207,8 +1181,7 @@
     "correct_option_index": 1,
     "explanation": "Для одной группы измерение проводится до и после воздействия: O X O.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_076",
@@ -1224,8 +1197,7 @@
     "correct_option_index": 1,
     "explanation": "Без случайного распределения различия между группами могли существовать до вмешательства.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_077",
@@ -1241,8 +1213,7 @@
     "correct_option_index": 1,
     "explanation": "Соломон позволяет одновременно проверить эффект X и возможное влияние самого предтеста.",
     "difficulty": "hard",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_078",
@@ -1258,8 +1229,7 @@
     "correct_option_index": 1,
     "explanation": "Контрбалансировка распределяет последовательностные эффекты между условиями.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_079",
@@ -1275,8 +1245,7 @@
     "correct_option_index": 2,
     "explanation": "Если влияние одного фактора зависит от уровня другого, это взаимодействие.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_080",
@@ -1285,15 +1254,14 @@
     "question": "Зачем в многоусловном исследовании использовать латинский квадрат?",
     "options": [
       "Чтобы заменить рандомизацию в истинном эксперименте",
-      "Чтобы сократить число комбинаций и сбалансировать предъявления условий",
+      "Чтобы сбалансировать порядок предъявления условий и контролировать позиционные эффекты",
       "Чтобы повысить только внешнюю валидность",
       "Чтобы устранить необходимость контрольной группы"
     ],
     "correct_option_index": 1,
     "explanation": "Латинский квадрат помогает экономно распределять условия и контролировать позиционные эффекты.",
     "difficulty": "hard",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_081",
@@ -1309,8 +1277,7 @@
     "correct_option_index": 2,
     "explanation": "Рандомизация и контроль в истинном эксперименте лучше исключают альтернативные объяснения.",
     "difficulty": "medium",
-    "status": "approved",
-    "source_ref": "module2/experimental/experimental_research_designs"
+    "status": "approved"
   },
   {
     "id": "m2_exp_082",
@@ -1530,8 +1497,7 @@
     "correct_option_index": 2,
     "explanation": "В прикладных задачах важен компромисс: причинные выводы, переносимость и реалистичность дизайна.",
     "difficulty": "hard",
-    "status": "approved",
-    "source_ref": "module2/experimental/practice9_applied_experimental_method"
+    "status": "approved"
   },
   {
     "id": "m2_exp_095",
@@ -1588,7 +1554,6 @@
     "id": "m2_exp_098",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice9_applied_experimental_method",
     "difficulty": "hard",
     "status": "approved",
     "question": "Чем контрольная переменная отличается от конфаунда в анализе эксперимента?",
@@ -1622,7 +1587,6 @@
     "id": "m2_exp_100",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой компромисс чаще всего возникает между внутренней и внешней валидностью?",
@@ -1639,7 +1603,6 @@
     "id": "m2_exp_101",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice9_applied_experimental_method",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой пример лучше всего иллюстрирует высокую экологическую валидность?",
@@ -1656,7 +1619,6 @@
     "id": "m2_exp_102",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice7_classic_experiments",
     "difficulty": "medium",
     "status": "approved",
     "question": "Почему плацебо-эффект осложняет интерпретацию результатов интервенции?",
@@ -1673,7 +1635,6 @@
     "id": "m2_exp_103",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "hard",
     "status": "approved",
     "question": "Как demand characteristics чаще всего угрожают эксперименту?",
@@ -1690,7 +1651,6 @@
     "id": "m2_exp_104",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice7_classic_experiments",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой дизайн-прием прямо снижает риск эффекта ожиданий экспериментатора?",
@@ -1724,7 +1684,6 @@
     "id": "m2_exp_106",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice9_applied_experimental_method",
     "difficulty": "medium",
     "status": "approved",
     "question": "В схеме pretest-posttest с заметным выбыванием участников какой риск наиболее критичен?",
@@ -1741,7 +1700,6 @@
     "id": "m2_exp_107",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "hard",
     "status": "approved",
     "question": "Почему в квазиэксперименте даже при значимых различиях между группами причинный вывод ограничен?",
@@ -1792,7 +1750,6 @@
     "id": "m2_exp_110",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "hard",
     "status": "approved",
     "question": "В исследовании влияния фоновой музыки на запоминание экспериментальная группа выполняет задание утром под музыку, а контрольная — вечером в тишине. Какой конфаунд здесь наиболее очевиден?",
@@ -1826,7 +1783,6 @@
     "id": "m2_exp_112",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "medium",
     "status": "approved",
     "question": "В пилотном исследовании тренинга памяти участвуют только добровольцы из кружка когнитивных игр. Какой риск валидности здесь наиболее вероятен?",
@@ -1843,7 +1799,6 @@
     "id": "m2_exp_113",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice7_classic_experiments",
     "difficulty": "hard",
     "status": "approved",
     "question": "В одно-групповом pretest-posttest дизайне после тренинга показатели выросли. Какая угроза сильнее всего ослабляет причинный вывод именно из-за отсутствия контрольной группы?",
@@ -1860,7 +1815,6 @@
     "id": "m2_exp_114",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice9_applied_experimental_method",
     "difficulty": "medium",
     "status": "approved",
     "question": "В исследовании снижения тревоги из интервенционной группы выбыло 35% участников, из контрольной — 5%. Какой основной риск для причинной интерпретации возникает в первую очередь?",
@@ -1894,7 +1848,6 @@
     "id": "m2_exp_116",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/experimental_research_designs",
     "difficulty": "hard",
     "status": "approved",
     "question": "В исследовании программы тайм-менеджмента экспериментальную группу набрали из студентов с низкой успеваемостью, контрольную — из студентов с высокой. Какая угроза внутренней валидности наиболее вероятна?",
@@ -1911,7 +1864,6 @@
     "id": "m2_exp_117",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice9_applied_experimental_method",
     "difficulty": "easy",
     "status": "approved",
     "question": "Команда тестирует две версии интерфейса приложения памяти. Чтобы избежать влияния разницы в устройстве, всем участникам выдают одинаковые планшеты. Роль этого решения?",
@@ -1928,7 +1880,6 @@
     "id": "m2_exp_118",
     "module": 2,
     "category": "Основы экспериментальной психологии",
-    "source_ref": "module2/experimental/practice9_applied_experimental_method",
     "difficulty": "medium",
     "status": "approved",
     "question": "Школьный психолог оценивает новую программу снижения тревоги, но сравнивает результаты только с прошлогодними данными другой параллели. Какой шаг лучше всего усилит внутреннюю валидность?",
