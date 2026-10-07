@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-07T22:53:22.013068+00:00",
+  "captured_at": "2026-10-07T22:58:46.444710+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -609,6 +609,15 @@
       }
     ],
     "prepared_notes_unmapped": 4,
-    "unmapped_published_glossary": 81
+    "unmapped_published_glossary": 81,
+    "unreleased_lessons": {
+      "total": 126,
+      "processing": {
+        "conflict_review": 119,
+        "processed": 7
+      },
+      "metadata_current": 126,
+      "known_holds": 119
+    }
   }
 }
