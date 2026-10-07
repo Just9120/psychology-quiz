@@ -3495,6 +3495,12 @@
       "topic_id": "t_a6c516bbe92a",
       "item_sha256": "60b53d4f2edb561ac79b5398ee45486bdc33537638b0a478b77a0afddfa648f9",
       "locator": "private certificate:questions:m1_gp_056"
+    },
+    "29f6cbefc81fbbdd5d54ee7db7b2e573090e102f9bd5a414501a60e2014d0d0d": {
+      "external_id": "m2_qual_008",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "d5994195d23a213018141def0e2724e40e57ad84306307c1b80a2abeb032f2d0",
+      "locator": "private certificate:questions:m2_qual_008"
     }
   }
 }

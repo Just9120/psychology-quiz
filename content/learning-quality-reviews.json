@@ -13070,10 +13070,10 @@
       ]
     },
     "questions:m2_qual_008": {
-      "item_sha256": "6a43bbc2c3b8b2c55c60bc17960071e8d5c682df5fdb6ddfe19b8ff3a3856a61",
+      "item_sha256": "d5994195d23a213018141def0e2724e40e57ad84306307c1b80a2abeb032f2d0",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -13085,13 +13085,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Описание включённого наблюдения показывает, зачем исследователю доступ к повседневным практикам и контексту поведения; это подтверждает ключ и пояснение именно этого вопроса.",
+      "note": "Exact practice12 contextual-participant-observation passage supports analysing everyday practices and interaction in context. The historical geography/adolescent-crisis claim stays outside selected scope. No universal access, diagnostic or validity guarantee; course examples are not automatically an identified empirical study.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 34000:36100"
+          "locator": "characters:35200:36175"
         }
       ]
     },
@@ -14441,7 +14441,7 @@
     "glossary:qual_methods_transcription": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14450,10 +14450,10 @@
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "characters:36170:36840"
         }
       ],
-      "item_sha256": "1ad32c1abf6624bdfb844dc339a7cacb1e314bed02ae00e47cfe3a898f6c3ed6",
+      "item_sha256": "142a65a7c8d87f43a69498ff833b62260f32e9a1e4f1f622466a901fcc263027",
       "checks": [
         "meaning",
         "definition",
@@ -14462,7 +14462,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "Определение сопоставлено с полным фрагментом практики: внимание к процессу и человеку, позиции исследователя, деталям текста, транскрипции и контекстуальному переносу. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
     },
     "glossary:qual_methods_case_study": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
@@ -14519,7 +14519,7 @@
     "glossary:qual_methods_methodological_reflection": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14528,10 +14528,10 @@
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "characters:130940:131250;characters:132150:133100"
         }
       ],
-      "item_sha256": "eb974af44d9a500ab9e6c4a589543386a37a06da750435825d0e5349a69b257c",
+      "item_sha256": "f62ea414d6bc3e817083722b867af21196c2610172a5297f2026510a54559ca1",
       "checks": [
         "meaning",
         "definition",
@@ -14540,7 +14540,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "Определение сопоставлено с полным фрагментом практики: внимание к процессу и человеку, позиции исследователя, деталям текста, транскрипции и контекстуальному переносу. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
     },
     "glossary:qual_methods_subject_approach": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
@@ -14597,7 +14597,7 @@
     "glossary:qual_methods_double_attention": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14606,10 +14606,10 @@
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "characters:132150:133100"
         }
       ],
-      "item_sha256": "e64b46c2f918a086799b504c2b8376c0051cc8ea7da4d8e1d5e7fdb296b06fa9",
+      "item_sha256": "0d6a1b0d7d1b5f8cfb04e90f67bebbc1f7e6860b71d4b5ff551cb13217bf27e9",
       "checks": [
         "meaning",
         "definition",
@@ -14618,12 +14618,12 @@
         "duplicates",
         "sources"
       ],
-      "note": "Определение сопоставлено с полным фрагментом практики: внимание к процессу и человеку, позиции исследователя, деталям текста, транскрипции и контекстуальному переносу. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
     },
     "glossary:qual_methods_researcher_bias": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14632,10 +14632,10 @@
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "characters:130940:131250"
         }
       ],
-      "item_sha256": "874b7fb9d588850012e589322a37c76efcf737e41f214a45742ddaa20fabdcb0",
+      "item_sha256": "59811c5ab24ba6469e26c55a863dee6618d3d84d80ebf1dd47fcb005366af52f",
       "checks": [
         "meaning",
         "definition",
@@ -14644,12 +14644,12 @@
         "duplicates",
         "sources"
       ],
-      "note": "Определение сопоставлено с полным фрагментом практики: внимание к процессу и человеку, позиции исследователя, деталям текста, транскрипции и контекстуальному переносу. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
     },
     "glossary:qual_methods_text_texture": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14658,10 +14658,10 @@
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "characters:36170:36840;characters:130940:131250"
         }
       ],
-      "item_sha256": "3d908d46bb50acb8faf1eb89b6a8baeb5f9bac8a0ca1ae9515e1398b25c5294b",
+      "item_sha256": "6e019a9533fe3e1070068e632a6f371b5cb55965524d78932efedbebf665ddd9",
       "checks": [
         "meaning",
         "definition",
@@ -14670,7 +14670,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "Определение сопоставлено с полным фрагментом практики: внимание к процессу и человеку, позиции исследователя, деталям текста, транскрипции и контекстуальному переносу. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
     },
     "glossary:qual_methods_method_as_instrument": {
       "discipline_id": "kachestvennye_metody_issledovaniya",

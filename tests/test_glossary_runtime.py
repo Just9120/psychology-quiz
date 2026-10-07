@@ -3,6 +3,7 @@ import random
 import tempfile
 import unicodedata
 import unittest
+from dataclasses import replace
 from pathlib import Path
 from unittest.mock import patch
 
@@ -97,7 +98,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
         draft = {**raw[0], 'id': 'private_provenance_draft', 'status': 'draft',
                  'term': 'Черновик с приватным источником',
                  'short_definition': 'Неопубликованное определение'}
-        draft.pop('source_refs')
+        draft.pop('source_refs', None)
         errors: list[str] = []
         validate_entry(draft, 'draft', TOPIC_ID, {TOPIC_ID: {}}, {}, {}, errors)
         self.assertEqual([], errors)
@@ -121,8 +122,15 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertIsNotNone(exp_entries)
         self.assertEqual(10, len(exp_entries))
         self.assertTrue(all(entry.id.startswith("exp_psych_") for entry in exp_entries))
-        self.assertTrue(any(entry.source_refs for entry in exp_entries))
         self.assertTrue(any(not entry.source_refs for entry in exp_entries))
+        publication = load_policy()
+        raw = json.loads(Path(f'content/glossary/{EXP_TOPIC_ID}.json').read_text(encoding='utf-8'))
+        for item in raw:
+            if item['status'] == 'deprecated':
+                self.assertFalse(publication.can_publish('glossary', item), item['id'])
+                continue
+            self.assertTrue(item.get('source_refs') or publication.has_private_review('glossary', item), item['id'])
+            self.assertTrue(publication.can_publish('glossary', item), item['id'])
         self.assertTrue(all(isinstance(entry.confusable_with, tuple) for entry in exp_entries))
         self.assertTrue(any(entry.confusable_with for entry in exp_entries))
 
@@ -203,7 +211,8 @@ class GlossaryRuntimeTests(unittest.TestCase):
 
     def test_rendered_question_feedback_result_hide_internal_provenance(self):
         entries = load_glossary_entries(EXP_TOPIC_ID)
-        entry = next(entry for entry in entries if "question:m2_exp_022" in entry.source_refs)
+        entry = replace(entries[0], source_refs=("question:m2_exp_022", "supplied_snippet:private-fixture"))
+        entries = [entry if item.id == entry.id else item for item in entries]
         question = build_glossary_quiz_question(entries, entry, rng=random.Random(4))
 
         rendered = "\n".join(
@@ -357,11 +366,12 @@ class GlossaryRuntimeTests(unittest.TestCase):
         self.assertEqual(active_topic_ids, set(callback_topic_ids))
 
     def test_all_active_glossary_topics_load_have_valid_entries_and_questions(self):
-        certificates = load_policy().certificates
+        publication = load_policy()
         for topic_id, _title in GLOSSARY_TOPICS:
             entries = load_glossary_entries(topic_id)
             self.assertIsNotNone(entries, topic_id)
             self.assertGreaterEqual(len(entries), 10, topic_id)
+            raw = {item['id']: item for item in json.loads(Path(f'content/glossary/{topic_id}.json').read_text(encoding='utf-8'))}
             for entry in entries:
                 self.assertTrue(entry.id)
                 self.assertEqual(topic_id, entry.topic_id)
@@ -369,7 +379,8 @@ class GlossaryRuntimeTests(unittest.TestCase):
                 self.assertTrue(entry.short_definition)
                 self.assertTrue(entry.definition)
                 self.assertTrue(entry.examples)
-                self.assertTrue(entry.source_refs or f"glossary:{entry.id}" in certificates)
+                self.assertTrue(entry.source_refs or publication.has_private_review('glossary', raw[entry.id]), entry.id)
+                self.assertTrue(publication.can_publish('glossary', raw[entry.id]), entry.id)
                 self.assertTrue(entry.difficulty)
                 question = build_glossary_quiz_question(entries, entry, rng=random.Random(5))
                 self.assertIsNotNone(question, entry.id)
@@ -402,7 +413,7 @@ class GlossaryRuntimeTests(unittest.TestCase):
                 source_refs = item.get("source_refs", [])
                 self.assertIsInstance(source_refs, list, (topic_id, item["id"]))
                 if not source_refs:
-                    self.assertIn(f"glossary:{item['id']}", publication.certificates)
+                    self.assertTrue(publication.has_private_review('glossary', item), item['id'])
                 for source_ref in source_refs:
                     self.assertTrue(source_ref.startswith(("question:", "supplied_snippet:", "drive:")), source_ref)
                     if source_ref.startswith("drive:"):

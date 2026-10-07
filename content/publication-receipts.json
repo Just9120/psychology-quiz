@@ -5382,6 +5382,114 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m2_qual_008": {
+      "schema_version": 1,
+      "item_sha256": "d5994195d23a213018141def0e2724e40e57ad84306307c1b80a2abeb032f2d0",
+      "review_sha256": "470ef106e9bddcb4dc0beb7720a39d7a19d3052ce63008b5c984e0d115c74ea2",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_transcription": {
+      "schema_version": 1,
+      "item_sha256": "142a65a7c8d87f43a69498ff833b62260f32e9a1e4f1f622466a901fcc263027",
+      "review_sha256": "21bf6e4b7e6b443ed41068af9cbdcc575524dbfd30f3a04d5a445738c3c853d9",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_methodological_reflection": {
+      "schema_version": 1,
+      "item_sha256": "f62ea414d6bc3e817083722b867af21196c2610172a5297f2026510a54559ca1",
+      "review_sha256": "5d9518c3390e73883227c7e9986ded25fa658bfbe45e48a08c116cf05cab21ec",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_double_attention": {
+      "schema_version": 1,
+      "item_sha256": "0d6a1b0d7d1b5f8cfb04e90f67bebbc1f7e6860b71d4b5ff551cb13217bf27e9",
+      "review_sha256": "6136b50e6624ab2a39d50f14f5f45d183cd9e0d954325cf3c80771d9faf2cb8e",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_researcher_bias": {
+      "schema_version": 1,
+      "item_sha256": "59811c5ab24ba6469e26c55a863dee6618d3d84d80ebf1dd47fcb005366af52f",
+      "review_sha256": "d9f65b58c49ce0ec0e3e4cc3b4aac19403da5915c106a602ebb5c2727a918f34",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_text_texture": {
+      "schema_version": 1,
+      "item_sha256": "6e019a9533fe3e1070068e632a6f371b5cb55965524d78932efedbebf665ddd9",
+      "review_sha256": "d777f9f08392e24c169afbfe81b9079003fd95366f0151f2b9e1a2bb0f8f6d60",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
