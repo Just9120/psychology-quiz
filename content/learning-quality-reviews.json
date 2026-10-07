@@ -3693,10 +3693,10 @@
       ]
     },
     "questions:m1_phys_002": {
-      "item_sha256": "1f16c1fc87d69dcf3bc34968d3c185c075cf402eaa7f0a406e6effcf80eb5d48",
+      "item_sha256": "17a722b40c9f7766e7cf98d0d229fc6295a42c233f73e82f3d279426a9d168cd",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3708,21 +3708,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Приём входящего сигнала дендритами. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:4970:5390"
         }
       ]
     },
     "questions:m1_phys_003": {
-      "item_sha256": "83cf46ed129bd73d940e9ac13bdd8e080b32984b23dfd20fd72f8171d7fa8485",
+      "item_sha256": "72479ffa544ea9814961c61a1ed3d6ea8f4e93c7aa4f497bce937ae3c14ce59b",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3734,21 +3734,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Аксон проводит импульс от тела клетки; OpenStax12.2 отдельно подтверждает роли глии и дендритов. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:4970:5390"
         }
       ]
     },
     "questions:m1_phys_004": {
-      "item_sha256": "586bcde715f2f3aa6c472d44a060031ecefd87e68cd946b313a9e646fe61240f",
+      "item_sha256": "b39e583b9d0c53bd2647dd6a972a107bf0ac479d0ec03f0b5cc6a7b201a97e96",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3760,13 +3760,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Миелин и сальтаторное проведение; independent OpenStax12.2 review подтверждает роль изоляции/ускорения. Не используются скорости120м/с, универсальные множители или возрастные причинные выводы. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
-          "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
-          "modified_time": "2026-04-06T14:46:17.530Z",
-          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
+          "modified_time": "2026-04-20T11:05:12.145Z",
+          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
+          "locator": "characters:5081:5220"
         }
       ]
     },
@@ -3799,10 +3799,10 @@
       ]
     },
     "questions:m1_phys_006": {
-      "item_sha256": "c6fd1d50c9fbc56374f0d2a84d07e4e3b9c886097cecef5234e69eb30925b6cf",
+      "item_sha256": "fa2b2490632998c097a0c7dbe1858c9ba8ceacd8fcd617bbf75b5e94cf462f26",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3814,13 +3814,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Курс определяет синапс; механизм химической передачи отдельно проверен по OpenStax12.5. Не используется ошибочное обобщение, что любой медиатор открывает натриевые каналы или что вся синаптическая передача одинаковая. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
-          "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
-          "modified_time": "2026-04-06T14:46:17.530Z",
-          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "locator": "characters:153:309"
         }
       ]
     },
@@ -3879,10 +3879,10 @@
       ]
     },
     "questions:m1_phys_009": {
-      "item_sha256": "99ef956797e335956c276f01fd950bda98643dad040f7d5f4bb41a1d5bc7c267",
+      "item_sha256": "31f8f2ca431ae5013446a7e275a3458696064d341d791488faab6df18377b478",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3894,21 +3894,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Точный анатомический состав ЦНС, без соседних клинических обобщений. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:32000:32480"
         }
       ]
     },
     "questions:m1_phys_010": {
-      "item_sha256": "aef2774cc2badce90a9b9cb52bed4f6ce27929f0cc3e720d3f422e88e7b76ee2",
+      "item_sha256": "630c9ab6d36adff638603a72660d83ba9ea504ecfefff5259fa818a5651538cd",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3920,13 +3920,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Точный анатомический состав ПНС, без соседних клинических обобщений. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:32000:32480"
         }
       ]
     },
@@ -4013,10 +4013,10 @@
       ]
     },
     "questions:m1_phys_014": {
-      "item_sha256": "c5ebc0d0b74bcdf296718587aac048674ed00bf28df8f4210c71f71fdd9190d4",
+      "item_sha256": "aad83b555d428b0677a4ea750dc7842e8a341cfffa03af3e5bc4596c0845f282",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4028,21 +4028,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Мобилизационная симпатическая регуляция при стрессе, без утверждений о диабете или фиксированных медицинских порогах. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:59055:59926"
         }
       ]
     },
     "questions:m1_phys_015": {
-      "item_sha256": "210ee5154a5417a1f33b2e9bd2deb51b30333e59ae5dbae2d560e76f0a044d04",
+      "item_sha256": "79cf090d9cdf87140dfb610a85861ee82bc4da5c7917d5ad55026e07b0c8fd29",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4054,13 +4054,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Парасимпатический отдел: восстановление/расслабление и пищеварение; без universal food advice. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:62705:62831"
         }
       ]
     },
@@ -4308,10 +4308,10 @@
       ]
     },
     "questions:m1_phys_025": {
-      "item_sha256": "0b4ee0166f2e8d3663fffdd1c4dabc5df904fe6a8cf26399ec26c810fe4af23d",
+      "item_sha256": "9fbf17c5aed3ebbed7bbef7ffa20ced401f7c98cb482912aedbb4b972fd4a69e",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4323,21 +4323,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Учебная интерпретация кратковременной мобилизации перед нагрузкой, не диагноз по симптомам. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:59055:59926"
         }
       ]
     },
     "questions:m1_phys_026": {
-      "item_sha256": "5cf2fc44dec590991313b9f888fe00a8eaec174acf55277afe16712b8c75da95",
+      "item_sha256": "d3030d0caea08dc68f1052c14dda968c0ec5509c1a8d234effa5d4814cecd9de",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4349,13 +4349,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Возврат к спокойному состоянию после нагрузки; вариант не ставит диагноз и не приписывает наблюдению единственную причину. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:62705:62831"
         }
       ]
     },
@@ -4494,10 +4494,10 @@
       ]
     },
     "questions:m1_phys_032": {
-      "item_sha256": "bbdbae8a93220c361dae2c4c32bff4d1e99b9b2ef339e80ff34b2649efc5f5a2",
+      "item_sha256": "9beb9db63ff69135732c957fa44f8da83d4b244675c48fd86ef229de736a5436",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4509,13 +4509,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Первичная мобилизационная гипотеза в указанном стрессовом контексте; универсальные медицинские выводы не переносятся. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:59055:59926"
         }
       ]
     },
@@ -4825,10 +4825,10 @@
       ]
     },
     "questions:m1_phys_044": {
-      "item_sha256": "cfc83a67b5a8bfc850c7c60771eab607b2c8edfee42b8c557e5427a06fcd87f8",
+      "item_sha256": "f2b4d657f6829eea2bfcb88bdd42a92bffd97c5bcb0ef0930edc278e68181680",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4840,13 +4840,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прочитаны строение/передача сигнала, классификация ЦНС/ПНС и вегетативные отделы. Ключи согласуются с учебной моделью; более быстрое проведение при миелине подтверждено, но когнитивный эффект не измерялся.",
+      "note": "Кратковременная мобилизация и последующее восстановление описаны как возможная интерпретация, не диагностика. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:59055:59926;characters:62705:62831"
         }
       ]
     },

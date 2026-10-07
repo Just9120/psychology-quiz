@@ -328,7 +328,7 @@
     "glossary:dendrites": {
       "schema_version": 1,
       "item_sha256": "778c6d41d8db2c5d4cac8398cec9444478cb1b0a07019ecfb222312cae34892b",
-      "review_sha256": "34871dd3a6f9574b2478d446bea7c78406d5bad974029f61e337502f076601b2",
+      "review_sha256": "07603b93dbba7e728208fcab368a570dc57e62196093eb628ccb3ab9126e2cdd",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -346,7 +346,7 @@
     "glossary:axon": {
       "schema_version": 1,
       "item_sha256": "9caf468e764cd5945328087da9cdae26d1208e3b974dabd20fece05d141de86a",
-      "review_sha256": "86d1910c70ada7f2562bc0fb8371b51b5e7cf480d0d4b8e51852e8e2822e3ad6",
+      "review_sha256": "de8d79e9c2c1c93b414667da47d475a494868cf0826d5176c954c3088153c18f",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -364,7 +364,7 @@
     "glossary:central_nervous_system": {
       "schema_version": 1,
       "item_sha256": "03dc3726ee2a1cc3c2d48d0e9bb9fc3a94b95a917d94b4c866864c08b46f3e04",
-      "review_sha256": "9aec667c610c79d59eb829117cf1e4fcf0cf3dc309073f590cfb9955150873ff",
+      "review_sha256": "47769aa81cf2edeb1f4e6bdb67e3df9bf13f3b719f78a51fd77ee7964b10acac",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -382,7 +382,7 @@
     "glossary:peripheral_nervous_system": {
       "schema_version": 1,
       "item_sha256": "023d35f6451ecfec8c0b4aae2cf97024e3189bfd28c8ac2694d883574dd92dd8",
-      "review_sha256": "08ed90f39b6d7d03bd7001a55b7c3777325a216a3d9ed7eb5964e2a346fd34b9",
+      "review_sha256": "080443bec3731eee0099ecaaa43c46938344a551a2d422b2077b074d4baa6602",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -580,7 +580,7 @@
     "glossary:psyf_dendrites": {
       "schema_version": 1,
       "item_sha256": "f25ecfe5dba95b4a2c63d261bc0d4c9461587920428500dd1ec6ff8b7956daa6",
-      "review_sha256": "33e324809360e625f502d765fec244f07fa77e3b9410c00e1ea9dec63d316ad9",
+      "review_sha256": "fc909c000c775a6f0b705b31e08c92587d0e47162805f738157f9b7c86aad7bb",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -1373,6 +1373,222 @@
       "schema_version": 1,
       "item_sha256": "2fb0ae919dcf3fffc87d016ebf96ac2e99c11611ea5dd6e10b570a40530e3690",
       "review_sha256": "f112749b8271797820e7f749a59cbbcfcde732208cdb78b8211ba0b919d27e87",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_002": {
+      "schema_version": 1,
+      "item_sha256": "17a722b40c9f7766e7cf98d0d229fc6295a42c233f73e82f3d279426a9d168cd",
+      "review_sha256": "6016968f6c51b9d6a8c4518ef14cb8d9a40b84ce01782477a11dc03bd89adc72",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_003": {
+      "schema_version": 1,
+      "item_sha256": "72479ffa544ea9814961c61a1ed3d6ea8f4e93c7aa4f497bce937ae3c14ce59b",
+      "review_sha256": "a6b2d9a56bc3620c2aa1487ee44707844ef3bd78368f57b24c029a8f6655c44c",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_009": {
+      "schema_version": 1,
+      "item_sha256": "31f8f2ca431ae5013446a7e275a3458696064d341d791488faab6df18377b478",
+      "review_sha256": "9040c61b68a3c87bc569a6babc58733612c332e68443b40d071d509211d299a5",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_010": {
+      "schema_version": 1,
+      "item_sha256": "630c9ab6d36adff638603a72660d83ba9ea504ecfefff5259fa818a5651538cd",
+      "review_sha256": "c9209b4bbec58276f89128b2f933c5d0bb65bd5d3bcfa4fda3be80f8c4de6283",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_014": {
+      "schema_version": 1,
+      "item_sha256": "aad83b555d428b0677a4ea750dc7842e8a341cfffa03af3e5bc4596c0845f282",
+      "review_sha256": "8a1713bcc29e9b0f13f3512c9bc6f35664e1d7dc0a36b5e8a5f71ed8f9d41857",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_015": {
+      "schema_version": 1,
+      "item_sha256": "79cf090d9cdf87140dfb610a85861ee82bc4da5c7917d5ad55026e07b0c8fd29",
+      "review_sha256": "51137ccabb46d6474ebf94254a569c54217ca4c8a0d416dc2d2f11610e1e7f88",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_025": {
+      "schema_version": 1,
+      "item_sha256": "9fbf17c5aed3ebbed7bbef7ffa20ced401f7c98cb482912aedbb4b972fd4a69e",
+      "review_sha256": "ef97f1767b6c2e644fcaeb6472208e0e3d47de79bf33b9f60b737b4c89d7b886",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_026": {
+      "schema_version": 1,
+      "item_sha256": "d3030d0caea08dc68f1052c14dda968c0ec5509c1a8d234effa5d4814cecd9de",
+      "review_sha256": "2ddfd46608ee38570d2022a08946566f9823146847cd58f6399f33b0bd179889",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_032": {
+      "schema_version": 1,
+      "item_sha256": "9beb9db63ff69135732c957fa44f8da83d4b244675c48fd86ef229de736a5436",
+      "review_sha256": "c3801062a4c2141de1c41d4a58cc70d44b9ae5e4e087efa71f23d5d993f33263",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_044": {
+      "schema_version": 1,
+      "item_sha256": "f2b4d657f6829eea2bfcb88bdd42a92bffd97c5bcb0ef0930edc278e68181680",
+      "review_sha256": "d36aa25a2ff7fa6e09e2e546b06238406e0740e45c6a5630aac816f22921b7cb",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_004": {
+      "schema_version": 1,
+      "item_sha256": "b39e583b9d0c53bd2647dd6a972a107bf0ac479d0ec03f0b5cc6a7b201a97e96",
+      "review_sha256": "7db30232826c95b78ead46b47011724830d824aa30372ea25dac7aed575ac267",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_006": {
+      "schema_version": 1,
+      "item_sha256": "fa2b2490632998c097a0c7dbe1858c9ba8ceacd8fcd617bbf75b5e94cf462f26",
+      "review_sha256": "4ed9a97cb22d0ba9ad5983faf8369915570699fc4ab00c54c88dbce161f33b0e",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",

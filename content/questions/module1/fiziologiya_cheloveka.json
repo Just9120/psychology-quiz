@@ -18,7 +18,6 @@
   {
     "id": "m1_phys_002",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
     "status": "approved",
     "question": "При анализе сенсорной обработки какая роль дендритов нейрона является ключевой?",
@@ -34,7 +33,6 @@
   {
     "id": "m1_phys_003",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
     "status": "approved",
     "question": "Какая функция аксона наиболее важна для межклеточной коммуникации в нервной системе?",
@@ -50,7 +48,6 @@
   {
     "id": "m1_phys_004",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "medium",
     "status": "approved",
     "question": "Почему миелинизация нервных волокон важна для когнитивной эффективности?",
@@ -82,7 +79,6 @@
   {
     "id": "m1_phys_006",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой механизм наиболее типичен для передачи сигнала в химическом синапсе?",
@@ -130,7 +126,6 @@
   {
     "id": "m1_phys_009",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
     "status": "approved",
     "question": "Какая структура корректно описывает центральную нервную систему?",
@@ -146,7 +141,6 @@
   {
     "id": "m1_phys_010",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "easy",
     "status": "approved",
     "question": "Что корректнее всего отнести к периферической нервной системе в учебном контексте?",
@@ -210,7 +204,6 @@
   {
     "id": "m1_phys_014",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какое состояние чаще связано с повышением активности симпатической нервной системы?",
@@ -226,7 +219,6 @@
   {
     "id": "m1_phys_015",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture1_nervous_system",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какое состояние чаще отражает активность парасимпатической нервной системы?",
@@ -386,7 +378,6 @@
   {
     "id": "m1_phys_025",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture5_cardiovascular_system",
     "difficulty": "medium",
     "status": "approved",
     "question": "Перед публичным выступлением у студента учащаются пульс и дыхание, появляется сухость во рту. Как это лучше интерпретировать?",
@@ -402,7 +393,6 @@
   {
     "id": "m1_phys_026",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture5_cardiovascular_system",
     "difficulty": "easy",
     "status": "approved",
     "question": "После завершения напряженного разговора клиент отмечает, что сердцебиение постепенно нормализуется. Что это лучше всего показывает?",
@@ -497,7 +487,6 @@
   {
     "id": "m1_phys_032",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/lecture6_respiratory_system",
     "difficulty": "medium",
     "status": "approved",
     "question": "Студент перед экзаменом дышит часто и поверхностно, жалуется на внутреннюю суетливость. Какое первичное физиологическое объяснение наиболее уместно?",
@@ -689,7 +678,6 @@
   {
     "id": "m1_phys_044",
     "category": "Физиология человека",
-    "source_ref": "module1/human_physiology/practice2_emotions_stress_consulting",
     "difficulty": "hard",
     "status": "approved",
     "question": "Студент сообщает, что перед важной защитой у него учащаются пульс и дыхание, но после выступления через некоторое время состояние нормализуется. Какая интерпретация наиболее уместна?",
