@@ -305,10 +305,10 @@
       ]
     },
     "questions:m1_intro_011": {
-      "item_sha256": "05e2c137bf3b72e1fbfaa34337fd5c79062998d701632165670cfc1e451ccac1",
+      "item_sha256": "65ed064e311ab276327c6659805a0a0379cfdd5aaeb74fc5cea62ed54db1c7a0",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -320,15 +320,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Активное слушание, отражение чувств и проясняющие вопросы подтверждены; ключ отличим от преждевременного вывода или обесценивания.",
-      "sources": [
-        {
-          "source_id": "14lnAmWm0bN-XHtiDAg4_qFQ5-cka4HUZ6K3kxKWSGUc",
-          "modified_time": "2026-04-05T22:23:50.149Z",
-          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
-        }
-      ]
+      "note": "Active listening as paraphrase, tentative emotion reflection and client clarification. No mind reading or infallible emotion/deception inference. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_012": {
       "item_sha256": "4f2114f3b74aceb18d9888e16cce6ef833afd589c3a861a1409d05540bbc3bcd",
@@ -537,10 +530,10 @@
       "sources": []
     },
     "questions:m1_intro_021": {
-      "item_sha256": "33ec8e7b565f46e3d0c6a1853e4a48d5c97e22c2511c73d72c41838ee658959c",
+      "item_sha256": "cbf4c5e4f3a5676f05b863e48471e1791da9a1f2019d0b9c97eca298bf658ae1",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -552,15 +545,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ применяет исследование запроса, поддержку пассивного/сопротивляющегося клиента или стабилизацию кризиса; буквальность конкретных примеров и объяснений требует отдельной оговорки.",
-      "sources": [
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
-        }
-      ]
+      "note": "Open questions clarify a initially vague request. Own illustration not inferred hidden trauma and not refusal because the request is initially unclear. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_022": {
       "item_sha256": "fe1c7f6d32c5e370c2ed97dd7a28f7aec104c156a18c1cca1157036e1960509e",
@@ -721,10 +707,10 @@
       ]
     },
     "questions:m1_intro_028": {
-      "item_sha256": "8fcf8a6a3efb2f778503973fee1a99ada01b248fa8f503fb90f18bc29a1f59b4",
+      "item_sha256": "76dd5dff4e7522d18a3c10316d7e0b5fe976a707ebe22631a7c705ab7f73312e",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -736,21 +722,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ применяет исследование запроса, поддержку пассивного/сопротивляющегося клиента или стабилизацию кризиса; буквальность конкретных примеров и объяснений требует отдельной оговорки.",
-      "sources": [
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
-        }
-      ]
+      "note": "Question now concerns difficulty formulating a request; it is not a rule to replace crisis assessment or stabilization of acute danger with ordinary conversation structuring. Course supports attentive questions to clarify the focus. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_029": {
-      "item_sha256": "870be7d33b9c54befd86b2aa00ba2beded571add2969679253cc6cde975ca0ee",
+      "item_sha256": "337b8de934ea54bf6cdadd6eda4b5db2bc792aeb54300e9aee2aa5743e708ae3",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -762,15 +741,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Активное слушание, отражение чувств и проясняющие вопросы подтверждены; ключ отличим от преждевременного вывода или обесценивания.",
-      "sources": [
-        {
-          "source_id": "14lnAmWm0bN-XHtiDAg4_qFQ5-cka4HUZ6K3kxKWSGUc",
-          "modified_time": "2026-04-05T22:23:50.149Z",
-          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
-        }
-      ]
+      "note": "Acceptance and respect for client experience, not a guarantee of openness, therapeutic change or endorsement of every factual belief. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_030": {
       "item_sha256": "5ede2767a88c6a2c8e9b971f776e166da44a264dd63f12d182d5aad35d51c867",
@@ -884,10 +856,10 @@
       ]
     },
     "questions:m1_intro_033": {
-      "item_sha256": "978505f268774ab4a8e40b879877b10bfec9091cf9a68c928ceb6f7110a3774f",
+      "item_sha256": "eab00d2875a287e45d3ca402e925096b1882205ff701f80579fda93edf340481",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -899,15 +871,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Активное слушание, отражение чувств и проясняющие вопросы подтверждены; ключ отличим от преждевременного вывода или обесценивания.",
-      "sources": [
-        {
-          "source_id": "14lnAmWm0bN-XHtiDAg4_qFQ5-cka4HUZ6K3kxKWSGUc",
-          "modified_time": "2026-04-05T22:23:50.149Z",
-          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
-        }
-      ]
+      "note": "Checking own understanding of client words and situation before interpreting. Source contextual example is a teaching illustration, not evidence of a universal cause. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_034": {
       "item_sha256": "6b668d645fae30f2e98834a2575d01438f89f438fa83bb108409de90a147549a",
@@ -1014,10 +979,10 @@
       ]
     },
     "questions:m1_intro_038": {
-      "item_sha256": "68bc2ed923396a4a22228f14487dd3d4ce77338250d62a6c8af5886533012f0e",
+      "item_sha256": "09bb60eb17aac5562e52b63744126efc6b2dc26b59f3d6d549864640e551b7c9",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1029,15 +994,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ применяет исследование запроса, поддержку пассивного/сопротивляющегося клиента или стабилизацию кризиса; буквальность конкретных примеров и объяснений требует отдельной оговорки.",
-      "sources": [
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
-        }
-      ]
+      "note": "Clarify manifestations and working goals instead of premature diagnostic labelling. No diagnosis or treatment entitlement inferred from the course. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_039": {
       "item_sha256": "da810154763028d9b70f18ebe871a114dad62c5fe0e1c59f3c7f04c324946fef",
@@ -1122,10 +1080,10 @@
       ]
     },
     "questions:m1_intro_042": {
-      "item_sha256": "2143d5a716d9b5d7fa4ab856a08bf73ceb6e7de13be0ccd0c73e498a271fe2ac",
+      "item_sha256": "6d80e1cb6ddd802135507df24d8fbe8b4fa5caa959245e791ca76fe84c3dc191",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1137,15 +1095,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Активное слушание, отражение чувств и проясняющие вопросы подтверждены; ключ отличим от преждевременного вывода или обесценивания.",
-      "sources": [
-        {
-          "source_id": "14lnAmWm0bN-XHtiDAg4_qFQ5-cka4HUZ6K3kxKWSGUc",
-          "modified_time": "2026-04-05T22:23:50.149Z",
-          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
-        }
-      ]
+      "note": "Explicit tentative reflection and question to verify emotion/meaning with client. Neither infer emotion as certain nor override client refusal. Both independent held issues remain unchanged. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_043": {
       "item_sha256": "3fcca96a44d52ae2ec599ec3135fdb901417e0f9b9ec22ed835c24eeba4f9f54",
@@ -1176,10 +1127,10 @@
       ]
     },
     "questions:m1_intro_044": {
-      "item_sha256": "7c0eb685305625b6357a51b62c7910e79c3492460e38d7ae7cb5f52f554f6735",
+      "item_sha256": "12841949b4693ac3f30db447d8403dca01e3670244206d4d286f2e0149fe1683",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1191,15 +1142,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ применяет исследование запроса, поддержку пассивного/сопротивляющегося клиента или стабилизацию кризиса; буквальность конкретных примеров и объяснений требует отдельной оговорки.",
-      "sources": [
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
-        }
-      ]
+      "note": "Client own perspective and attainable agreed focus. External referral is not proof of passivity, and work is not imposed on the client. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_045": {
       "item_sha256": "c37690fb232fc7d34427674b41d6ef68da92dc2424fadd7d8f3858b61490b6f6",
@@ -1282,10 +1226,10 @@
       ]
     },
     "questions:m1_intro_048": {
-      "item_sha256": "2d27ed84319e2a57fea2e75de0994fd2b19e2b72c0621599c4f37ab440d46c60",
+      "item_sha256": "0826abf3513e4c6838a629ba5fb697a1562629da7cfad859697a77a8f32267ea",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1297,15 +1241,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ применяет исследование запроса, поддержку пассивного/сопротивляющегося клиента или стабилизацию кризиса; буквальность конкретных примеров и объяснений требует отдельной оговорки.",
-      "sources": [
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1000, 3200:5700, 12008:14300, 14300:17300"
-        }
-      ]
+      "note": "Joking is not proof of resistance or its cause. Tentative inquiry about avoidance and a next step only with client willingness; no pressure to overcome refusal and no guaranteed effectiveness. Course describes empathy and exploring possible barriers, not a scientifically fixed client type. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_intro_049": {
       "item_sha256": "09248f4376b7939c6e96fde748b3bd9a3fbf68925688eddfbf48e9c762e7bda5",
