@@ -6966,6 +6966,139 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_002": {
+      "schema_version": 1,
+      "item_sha256": "d819d2b3bd8d6f20a69186f8d90ab836c417c8bbe3822e22f6bcf0797ed8c187",
+      "review_sha256": "9904931cde09a3f2df58b82857f01b8cba99f02f37caa5f347c221ebb5b12479",
+      "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_003": {
+      "schema_version": 1,
+      "item_sha256": "37025b9009795edcdcd0274a3e8b2e0ddf1c23a5941418b33ffbdf21f228a172",
+      "review_sha256": "72c5d628ddebb16c5df807ff08e4ce7a3fdc7a82303f81c4f02a80b11b10f198",
+      "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_010": {
+      "schema_version": 1,
+      "item_sha256": "58bb605336659b4d76c389d7cad58b9fc5b83771d954384531a0e8c966bc5b75",
+      "review_sha256": "7169191d389c2679b7b3f932698bbfe891ff2c3457477a267b7f277150475f28",
+      "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_012": {
+      "schema_version": 1,
+      "item_sha256": "976a527ed95c707638fff0128298d23738352da321aba161a7a3555715affa8b",
+      "review_sha256": "78c92b7d9e7bf2a81b33ff4056413d9c22b07492422e594ae1e71ec7c67fdc92",
+      "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_020": {
+      "schema_version": 1,
+      "item_sha256": "1c39a8aac8ff89d840f5f622b4c338f687f50ba4ac86580e8792558c957bb1aa",
+      "review_sha256": "92793b9e487a31fc2d8c0bc33a7bb04d9abbab62cded5bcc5018460599879c55",
+      "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_021": {
+      "schema_version": 1,
+      "item_sha256": "2f50a49c9af48549664afcd87c61b882f67eb4c7a49554c00342d15aa8f7d664",
+      "review_sha256": "828ecc26053a20e0c255d3e07a70bd967d004dd24e0992614f275d5da99acad7",
+      "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_023": {
+      "schema_version": 1,
+      "item_sha256": "5b3a48eb781108f2167bc86bbb11086a9c3c2beb0e7237f202b90ac9be9b8c89",
+      "review_sha256": "e7c79161e87065915b634e338a79bdd77bf71703e1b54a35583b05db281b92d8",
+      "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

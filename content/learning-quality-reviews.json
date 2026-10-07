@@ -14557,10 +14557,10 @@
       ]
     },
     "questions:m3_psychological_consulting_002": {
-      "item_sha256": "dca8c7955e57673a29d6b459d378214d81b455be4aeeb1a3f7fefc48c7bae2d7",
+      "item_sha256": "d819d2b3bd8d6f20a69186f8d90ab836c417c8bbe3822e22f6bcf0797ed8c187",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14572,21 +14572,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок различает роль консультанта, ответственность/автономию клиента, метацель и минимальное направление к специализированной помощи. Это вводная модель triage, не полная клиническая оценка.",
-      "sources": [
-        {
-          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-          "modified_time": "2026-06-07T20:48:25.702Z",
-          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
-        }
-      ]
+      "note": "Current-problem focus in the course model, not a universal prohibition of counselling a person with mental disorder or exploration of past events. Adjacent absolute here-and-now/trauma passage held and excluded. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_003": {
-      "item_sha256": "b3a14c9b1c02febd432cd0caf323388a4b4dddd94968054317d233a510656012",
+      "item_sha256": "37025b9009795edcdcd0274a3e8b2e0ddf1c23a5941418b33ffbdf21f228a172",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14598,15 +14591,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок различает роль консультанта, ответственность/автономию клиента, метацель и минимальное направление к специализированной помощи. Это вводная модель triage, не полная клиническая оценка.",
-      "sources": [
-        {
-          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-          "modified_time": "2026-06-07T20:48:25.702Z",
-          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
-        }
-      ]
+      "note": "Client participates in choosing and implementing decisions with consultant support. No promise of change or attribution of all problems or unsuccessful outcomes to client choices; consultant professional responsibility retained. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_004": {
       "item_sha256": "1b0951614028ef3306a246ff090845fb3f4f84ede9495aeed46df5a8155b2d1a",
@@ -14765,10 +14751,10 @@
       ]
     },
     "questions:m3_psychological_consulting_010": {
-      "item_sha256": "f91e2e7abc516c9b520dbb94c841a92823421187591e12b5b7a6d1a45be1bc8d",
+      "item_sha256": "58bb605336659b4d76c389d7cad58b9fc5b83771d954384531a0e8c966bc5b75",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14780,15 +14766,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок различает роль консультанта, ответственность/автономию клиента, метацель и минимальное направление к специализированной помощи. Это вводная модель triage, не полная клиническая оценка.",
-      "sources": [
-        {
-          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-          "modified_time": "2026-06-07T20:48:25.702Z",
-          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
-        }
-      ]
+      "note": "Situational objective versus longer-term autonomy described as aims; fixed five-to-ten session efficacy and guaranteed future independence not included. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_011": {
       "item_sha256": "1f93f44b880ce034ae110a250de72ff153885942b49084372da3e5e04e4d53cd",
@@ -14817,10 +14796,10 @@
       ]
     },
     "questions:m3_psychological_consulting_012": {
-      "item_sha256": "a6b9a1b95874d2e87c6b096a7d4e280a0d9903c612d700ff2156e13a28e2666f",
+      "item_sha256": "976a527ed95c707638fff0128298d23738352da321aba161a7a3555715affa8b",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14832,15 +14811,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок различает роль консультанта, ответственность/автономию клиента, метацель и минимальное направление к специализированной помощи. Это вводная модель triage, не полная клиническая оценка.",
-      "sources": [
-        {
-          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-          "modified_time": "2026-06-07T20:48:25.702Z",
-          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
-        }
-      ]
+      "note": "Help client consider choices and consequences instead of deciding on their behalf. Authored illustration, no medical or diagnostic interpretation. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_013": {
       "item_sha256": "eb779c0e0323fe43ad85977874de6e1ed0843ce0ebcc72aee7fe69535439cf9f",
@@ -15025,10 +14997,10 @@
       ]
     },
     "questions:m3_psychological_consulting_020": {
-      "item_sha256": "7cceb85eba7762aab4822c77e2f6260904a60a6bc5920788b06ad7262527e14f",
+      "item_sha256": "1c39a8aac8ff89d840f5f622b4c338f687f50ba4ac86580e8792558c957bb1aa",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15040,21 +15012,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок различает роль консультанта, ответственность/автономию клиента, метацель и минимальное направление к специализированной помощи. Это вводная модель triage, не полная клиническая оценка.",
-      "sources": [
-        {
-          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-          "modified_time": "2026-06-07T20:48:25.702Z",
-          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
-        }
-      ]
+      "note": "Educational initial orientation only. Retained daily function does not exclude illness or establish eligibility; clarify symptoms, risks, need for other help, without diagnosis. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_021": {
-      "item_sha256": "d0ebc519787c54bc9088ac55a428e5836fe22d2874393ed13b640f8514081bd2",
+      "item_sha256": "2f50a49c9af48549664afcd87c61b882f67eb4c7a49554c00342d15aa8f7d664",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15066,15 +15031,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок различает роль консультанта, ответственность/автономию клиента, метацель и минимальное направление к специализированной помощи. Это вводная модель triage, не полная клиническая оценка.",
-      "sources": [
-        {
-          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-          "modified_time": "2026-06-07T20:48:25.702Z",
-          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
-        }
-      ]
+      "note": "Immediate safety risk takes priority over ordinary session. External NIMH immediate-help section confirms emergency assistance when life threatened; no US emergency phone generalized worldwide, no ordinary supervision substituted for urgent response. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_022": {
       "item_sha256": "29ef945ed46988049e86c94ac6c9285fae4443911eaa89ceda619f4962a91b7c",
@@ -15105,10 +15063,10 @@
       ]
     },
     "questions:m3_psychological_consulting_023": {
-      "item_sha256": "1642da828fab7554f74bfe7d84dd8fc8039786fce872884b853c26ccfc45ee24",
+      "item_sha256": "5b3a48eb781108f2167bc86bbb11086a9c3c2beb0e7237f202b90ac9be9b8c89",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15120,15 +15078,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок различает роль консультанта, ответственность/автономию клиента, метацель и минимальное направление к специализированной помощи. Это вводная модель triage, не полная клиническая оценка.",
-      "sources": [
-        {
-          "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
-          "modified_time": "2026-06-07T20:48:25.702Z",
-          "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
-        }
-      ]
+      "note": "For non-emergency uncertainty seek supervision or refer within competence. No prescription entitlement or claim that a more experienced ordinary colleague alone suffices for an emergency. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_024": {
       "item_sha256": "4e5697bde871c80ed572bf837f88dd0e2a26a652ea2b8986efbbe0dc66320496",
