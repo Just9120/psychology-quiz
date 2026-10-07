@@ -14865,10 +14865,10 @@
       ]
     },
     "questions:m3_psychological_consulting_004": {
-      "item_sha256": "425e73fab5ec2107cec9c30d24f705d0fe9132f78a7ca8aef6bc7ba2a546be82",
+      "item_sha256": "1b0951614028ef3306a246ff090845fb3f4f84ede9495aeed46df5a8155b2d1a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14880,21 +14880,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1362"
         }
       ]
     },
     "questions:m3_psychological_consulting_005": {
-      "item_sha256": "6563c5606680014116141703aed8024aa2159a7921eb498a624f721af22864ca",
+      "item_sha256": "d4eb737e68319a768332e7c2c4b3ef22c6f4df0a65970e8b5a5696b9209fe001",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14906,21 +14906,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 9. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1362:1484"
         }
       ]
     },
     "questions:m3_psychological_consulting_006": {
-      "item_sha256": "8da8efa3aef48ade387ceed8a2f36d270939a2f3b1055abe2b19f5adc4611820",
+      "item_sha256": "2f4ce3ed2e36110a3c31f031ffd603f0cf7452d8126d4f650113506003ad4ee5",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14932,21 +14932,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 1. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1:254"
         }
       ]
     },
     "questions:m3_psychological_consulting_007": {
-      "item_sha256": "e96358e736307c422b4614f24d48dd8eaeb0cf5208faacadf395256dbedf11ed",
+      "item_sha256": "5c670a80d1051258c41e5bcb7bcd4b2c708303067dfef6c736da5deec54fb1b5",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14958,21 +14958,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 25. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:4107:4261"
         }
       ]
     },
     "questions:m3_psychological_consulting_008": {
-      "item_sha256": "e4261ec6bbe52afca5f5b6b83b999536574bf627bb859a81294e861e8200a7df",
+      "item_sha256": "f1f19db0a2dc41ff6df94e7ea398abd8b7e3fd839e4374a24d94be6762d9efe3",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -14984,21 +14984,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 18. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:2838:3021"
         }
       ]
     },
     "questions:m3_psychological_consulting_009": {
-      "item_sha256": "aa59016ec7aca04051719ca2f2f97389ff0848788b370ab581a081980227b6ea",
+      "item_sha256": "25b0218ef3ff96d2ab16db98aab587d50c658251dc79dbd6a905fd74c5cea4a9",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15010,13 +15010,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 37. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:6275:6454"
         }
       ]
     },
@@ -15047,10 +15047,10 @@
       ]
     },
     "questions:m3_psychological_consulting_011": {
-      "item_sha256": "3da0a150268559ea41a0969aa443c78e87e5fd798d46483e46f05d8f0e62a4ae",
+      "item_sha256": "1f93f44b880ce034ae110a250de72ff153885942b49084372da3e5e04e4d53cd",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15062,13 +15062,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8,9. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1484"
         }
       ]
     },
@@ -15099,10 +15099,10 @@
       ]
     },
     "questions:m3_psychological_consulting_013": {
-      "item_sha256": "ee041960c7b65bea76b7f7a3bfcd781c3ceeb3baf5063030ce74e3c33b94740b",
+      "item_sha256": "eb779c0e0323fe43ad85977874de6e1ed0843ce0ebcc72aee7fe69535439cf9f",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15114,21 +15114,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 27. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:4402:4576"
         }
       ]
     },
     "questions:m3_psychological_consulting_014": {
-      "item_sha256": "84421004abd1dec5e1071cb522766f1392e0a5370b8a1fb1a0a8080a477aadc7",
+      "item_sha256": "dab522615ffa4e149ac23209ab629f40443141a847939e750e9e646c547d8e01",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15140,21 +15140,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 39. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:6651:6815"
         }
       ]
     },
     "questions:m3_psychological_consulting_015": {
-      "item_sha256": "b8e58e349b945fce4960d2456d9756098bde71badeeb87a0bad1c7d720af9ef0",
+      "item_sha256": "35fee8e3355dd93fd8208af59fe2370b4bbe401abad48d742f6eac8e249669c7",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15166,21 +15166,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 14,18. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:2214:2386;characters:2838:3021"
         }
       ]
     },
     "questions:m3_psychological_consulting_016": {
-      "item_sha256": "0ac314377eaab1f864c5146360e471d6adf2cf2cc61216c0c90144c549f7fd8b",
+      "item_sha256": "407023803ef95c3790d8d82b81e57e59336afbeaadb094b99ba38b34b4218b91",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15192,21 +15192,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 17. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:2654:2838"
         }
       ]
     },
     "questions:m3_psychological_consulting_017": {
-      "item_sha256": "031c701ef25f69928de2e2d6aa82188d635cf8388009848e55119979f17e0ed5",
+      "item_sha256": "719d9601082a18401bef05d420895b894506ebdb60ebe3fcaeb524efd2d25672",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15218,21 +15218,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 21. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:3313:3519"
         }
       ]
     },
     "questions:m3_psychological_consulting_018": {
-      "item_sha256": "44cb5dd80ba3a9020eb3b6a9811d673196962e38b3b0bcf4505a914f301955e3",
+      "item_sha256": "d4fd845a3bf4fb206d49012480fc7937258d6789923ee9a863872337f13d98b4",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15244,21 +15244,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 30. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:4921:5076"
         }
       ]
     },
     "questions:m3_psychological_consulting_019": {
-      "item_sha256": "6b72f649c237be1061db385f04c86d4b8d3a6632c722ff42c8ed02087f25006f",
+      "item_sha256": "17dca18cdc6f5395ba2575730c8f1e1c2830a67ac0ad3a8bb161ea8fd1dcfb6e",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15270,13 +15270,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 5. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:817:914"
         }
       ]
     },
@@ -15387,10 +15387,10 @@
       ]
     },
     "questions:m3_psychological_consulting_024": {
-      "item_sha256": "33934589b38d357307b02aee5652791d9e95fbf4bb865a73c42cdcbadb738e60",
+      "item_sha256": "4e5697bde871c80ed572bf837f88dd0e2a26a652ea2b8986efbbe0dc66320496",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15402,21 +15402,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 7,9,40,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1041:1220;characters:1362:1484;characters:6815:7021;characters:7903:8098"
         }
       ]
     },
     "questions:m3_psychological_consulting_025": {
-      "item_sha256": "c1209e1e91297b53093d70e824195a322b75241a05ad2e0a0cbeb5e46a8833b8",
+      "item_sha256": "0bf2bfe208bc76baf7fb7610d071c30dad1a473cee066638cf1d240494770d2b",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15428,13 +15428,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 17. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:2654:2838"
         }
       ]
     },
@@ -15543,10 +15543,10 @@
       ]
     },
     "questions:m3_psychological_consulting_030": {
-      "item_sha256": "7fb86c76c042b23d7c7edbec954f1c5a76669a94adbf966b34031debde73c721",
+      "item_sha256": "a8cf3cd4a38f9baf9bfc8979053350209359dbc174c9d60056d678cac9ae2774",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15558,13 +15558,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8,9. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1484"
         }
       ]
     },
@@ -15935,10 +15935,10 @@
       ]
     },
     "questions:m3_psychological_consulting_045": {
-      "item_sha256": "1b0d1c33018ef42d64b0c44f3694d8bc4a8dd26cbde6e984852758625927eae1",
+      "item_sha256": "441adb1aa58c0abf49367921c09030f93b2eaada3479d1032ba07e004961ea74",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15950,13 +15950,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 37. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:6275:6454"
         }
       ]
     },
@@ -16143,10 +16143,10 @@
       ]
     },
     "questions:m3_psychological_consulting_053": {
-      "item_sha256": "d7bedeee095a8aadcedebe91efbbd447b013f792248d637b96eeb0c44e1b1a7f",
+      "item_sha256": "72e2376e596e93f8f25bcd08c41a909a979745a03cb3e73d8422347540416b8b",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16158,13 +16158,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 21. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:3313:3519"
         }
       ]
     },
@@ -16273,10 +16273,10 @@
       ]
     },
     "questions:m3_psychological_consulting_058": {
-      "item_sha256": "8e2bf4ef020595f4ee6b390acac590566f3ea75e2da7f495991fc57c73b33e75",
+      "item_sha256": "7654d85e90a174a5d5654f81fea523d08fcc6bc3b926bd73fbaf5cbcdfe676ef",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16288,13 +16288,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 7. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1041:1220"
         }
       ]
     },
@@ -16325,10 +16325,10 @@
       ]
     },
     "questions:m3_psychological_consulting_060": {
-      "item_sha256": "9d5b466d9a6b47a91c213f516f1b35688dbee1e63207c97cc8e19472c41cea36",
+      "item_sha256": "4936b657bcca39a5dd5e7ca61af75c98569f9c4ff560bb4907180124a3083b45",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16340,13 +16340,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 6,33,38. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:914:1041;characters:5415:5634;characters:6454:6651"
         }
       ]
     },
@@ -16429,10 +16429,10 @@
       ]
     },
     "questions:m3_psychological_consulting_064": {
-      "item_sha256": "badc4028b997d26be48cff14e3323134df7ab7faa06567235ca3054c5d9742d5",
+      "item_sha256": "d7fdbc8635ab91eb65a734aaea6d58dc1552b46b6148dbef3a8cd0a5ddd004c9",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16444,13 +16444,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8,9,16. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1484;characters:2477:2654"
         }
       ]
     },
@@ -16533,10 +16533,10 @@
       ]
     },
     "questions:m3_psychological_consulting_068": {
-      "item_sha256": "75ac368454b113c9fd79af0c818937fcbfc345d85816f461dd60bc4ec66a9f6e",
+      "item_sha256": "44c91a9ddfee810ca0fc74f9e7b885dd6586a6df6afcde9a1bc30046e2c30b9f",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16548,13 +16548,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 18. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:2838:3021"
         }
       ]
     },
@@ -16691,10 +16691,10 @@
       ]
     },
     "questions:m3_psychological_consulting_074": {
-      "item_sha256": "8230534f8ab0934ab1b75b7fe70170e1889e6f66cf582c04be0c210ac01d1f52",
+      "item_sha256": "9ecc4723b960b9de9690f2e91a1cb6d99948b90977c194d21e87bdc3b9176b77",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16706,13 +16706,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 22. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:3519:3748"
         }
       ]
     },
@@ -16745,10 +16745,10 @@
       ]
     },
     "questions:m3_psychological_consulting_076": {
-      "item_sha256": "63d541d0553b0b3562f80a8a191e534d9cc198ddcc2a81d7d5eda0bd82b3b635",
+      "item_sha256": "84a8bc38c45eb7ba4ee6536b870ac9d0923b885cb1d1a31af9d31e01838f66db",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16760,13 +16760,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 44. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:7618:7796"
         }
       ]
     },
@@ -16823,10 +16823,10 @@
       ]
     },
     "questions:m3_psychological_consulting_079": {
-      "item_sha256": "333550b1b26ac056076d111eb10f92edb199b844386daba03cb0047b270627ce",
+      "item_sha256": "3477ecc4b18f32f4797c5eb557fc9c4934df633bb2b19a706bee5a6d0cfcea0b",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16838,13 +16838,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 18,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:2838:3021;characters:7903:8098"
         }
       ]
     },
@@ -16927,10 +16927,10 @@
       ]
     },
     "questions:m3_psychological_consulting_083": {
-      "item_sha256": "cbc7b3582ef8a9412956cace324338e240d2b58fe5aaacaa523f29b2ab7dc600",
+      "item_sha256": "d6eff4506e4192b85a4ba73514ebca164d819e75bee7c17ce511de2e6f70287d",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16942,13 +16942,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 40,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification. Removed unsupported causal inference about burnout; case still tests overcare and client responsibility, key and distractors unchanged.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:6815:7021;characters:7903:8098"
         }
       ]
     },
@@ -17033,10 +17033,10 @@
       ]
     },
     "questions:m3_psychological_consulting_087": {
-      "item_sha256": "8580144b84d2fd0202f728dcf219474984591e977a14e385679d904f2a72020b",
+      "item_sha256": "71a6e782f8c1cffbe396336e051e8cfc13dde63326876c7541e8e4b1a914bc58",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17048,21 +17048,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8,25. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1362;characters:4107:4261"
         }
       ]
     },
     "questions:m3_psychological_consulting_088": {
-      "item_sha256": "df4ffd74938361a4231ec523f67386a7f21f99293089a52d7134810e8cc4808a",
+      "item_sha256": "4f6eace4f697355fb270d2a63758f2d8b43ca55d8a6e94bce12e385029f6d3fb",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17074,13 +17074,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 1. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1:254"
         }
       ]
     },
@@ -17111,10 +17111,10 @@
       ]
     },
     "questions:m3_psychological_consulting_090": {
-      "item_sha256": "cc8d18895439a26ab957f2c65d46a55d69fe40702fe3e4422d34e52caec8c8fc",
+      "item_sha256": "c08df98a2ed10cc1b128efafc029728ad2911c6c63f984438b5aaf730380ab9d",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17126,13 +17126,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8,9,39. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1484;characters:6651:6815"
         }
       ]
     },
@@ -17193,10 +17193,10 @@
       ]
     },
     "questions:m3_psychological_consulting_093": {
-      "item_sha256": "f7b7f523f27eefa1ea2ad7bf0fb35d61de1cdc72a8a00a0b4ad597dadb60c9b4",
+      "item_sha256": "5bdf23ee8d2accb7749eb3f32d603c5e98fda416d76421aa6a47085b84a69551",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17208,21 +17208,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1220:1362"
         }
       ]
     },
     "questions:m3_psychological_consulting_094": {
-      "item_sha256": "653e73cf28f0637bceea69633ce757a69397174406f3c502d743bf14f5ab0479",
+      "item_sha256": "131afcb3b2ae8cd77d334415a70600796bab832ef9783bbe47251ffe2519383b",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17234,21 +17234,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 9,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1362:1484;characters:7903:8098"
         }
       ]
     },
     "questions:m3_psychological_consulting_095": {
-      "item_sha256": "090a94f77a94ca7f715fec0b918be59efe953f3988f990da60be5fd5ad37a914",
+      "item_sha256": "745e097d1b809d9e357e85688cd61cfafffa6fb9adbe913d10a15f6ec4d726d2",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17260,13 +17260,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 18,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:2838:3021;characters:7903:8098"
         }
       ]
     },
@@ -17349,10 +17349,10 @@
       ]
     },
     "questions:m3_psychological_consulting_099": {
-      "item_sha256": "f93e2717a0362eaaaa15e399f1e4b2f439ddb706bd13ad2f52e78ad3b7361f0d",
+      "item_sha256": "0aaa243c1bf3bc4aacd614e8bbe6e550b7339c6ee6b10a6dd062ec9dc5a9ca02",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17364,13 +17364,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и объяснение сопоставлены с первичными определениями запроса/жалобы, слушания, контракта, раппорта, концептуализации, техник, молчания и профессиональной поддержки. Кейсы — применение учебной модели, не доказательство скрытых мотивов клиента.",
+      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 10,16. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:9482"
+          "locator": "characters:1484:1628;characters:2477:2654"
         }
       ]
     },
