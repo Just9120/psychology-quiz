@@ -124,3 +124,10 @@ Native проверка обязательна в существующем backe
 ## Сохранённый student PWA state
 
 Перед deprecation приглашений/связанной схемы выполнить [read-only preflight](../scripts/student_legacy_preflight.py) в окружении с действующими `DATABASE_URL`/`DB_PATH` и `PWA_OWNER_EMAIL`: `python scripts/student_legacy_preflight.py` из root. В контейнере штатного API используются уже установленные runtime values: `docker compose -p psychology-quiz -f docker-compose.yml exec -T psych_quiz_miniapp_api python scripts/student_legacy_preflight.py`. Команда применима после поставки версии с этим script; повторный deploy ради inventory не требуется. Не публикуйте resolved env/DSN. Вывод содержит только агрегаты и метки snapshot; unknown owner/table означает отсутствие подтверждения, не отсутствие данных. Даже нулевые counts не разрешают удаление схемы: отдельно нужны согласованные migration/recovery и проверки consumers. Существующие accounts, приглашения, history и schema этим preflight не меняются.
+
+
+## Подготовленное хранение логов приложения
+
+[Runtime wrapper](../scripts/runtime_log.py) сохраняет вывод API и бота в приватных daily files mounted data/runtime-logs. Каждый сервис удаляет только собственные известные date buckets через14 дней; неизвестные files и логи другого сервиса не трогает. Mode directory0700/files0600, symlinks/hardlinks и чужие permissions отклоняются. Тихий сервис выполняет очистку раз в час. По [compose](../docker-compose.yml) API/bot не сохраняют вторую бессрочную копию stdout/stderr через Docker logging driver. Private log files исключены из Git/build/client assets как часть data/.
+
+До CI/CD это подготовленная конфигурация, не подтверждение runtime хранения. Nginx/Cloudflare/PostgreSQL diagnostics этим wrapper не управляются. Nginx retention14 дней требует отдельной проверки точного vhost/log path на shared host; общую nginx/journald retention не менять по догадке. Для диагностики после поставки использовать приватные host files, не docker logs; не прикладывать raw logs к публичным Actions/PR.
