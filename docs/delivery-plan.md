@@ -2,7 +2,7 @@
 
 ## Current Goal — PROJECT-COMPLETION-20261006
 
-Checkpoint07.10: PR334 merged eb57072a3ab74070d3bbbf2e325d2bc989d461d0; PR/main CI37535105780/37535922810 и CD37536493015 PASS, exact runtime и owner coverage readback подтверждены. Владелец 07.10 проверил Google link/login: тот же аккаунт и сохранённый прогресс (user smoke PASS, без независимого повторного login).18/22 AC текущей Goal; remaining KNW-03, PRIV-01/02/05.
+Checkpoint07.10: PR334 merged eb57072a3ab74070d3bbbf2e325d2bc989d461d0; PR/main CI37535105780/37535922810 и CD37536493015 PASS, exact runtime и owner coverage readback подтверждены. Владелец 07.10 проверил Google link/login: тот же аккаунт и сохранённый прогресс (user smoke PASS, без независимого повторного login).21/22 AC реализованы по коду текущей Goal; remaining KNW-03 (итоговая PRIVATE/Vault поставка). PR335/current CI и runtime retention delivery ещё PENDING.
 
 D-47 согласован: локальные DB backups30 дней с minimum2/recovery exceptions, logs14 дней, переданная копия7 дней, известный контакт/личная проверка и передача на подтверждённый адрес по запросу. Policy-choice blocker снят. Новый off-host backup не поручен; ручные VPS snapshots отдельно управляются владельцем, их retention UNSET. Remaining: настроить/проверить retention точных owned paths и runtime logs, полный data-flow review и применение D-47; owner PWA ручная процедура согласована D-49; итоговый PRIVATE/Vault после разработки.
 
@@ -56,7 +56,7 @@ F-112 / contract активирован D-46: source-free repository receipt д�
 
 Validation локально: combined backup/installer/export/receipt/log32 PASS/1 Linux signal skip (0,89с), затем адресный unknown recovery regression; synthetic files/child process, не production cleanup. Shell selector10 PASS, actual shell contract PENDING: установленный Windows Git Bash launcher не находит usr/bin/bash.exe. Это tooling limitation, не PASS shell behavior; existing Linux CI обязателен. Новые shell cases проверяют timer preflight-before-outage, install-after-health/PWA и failure без DEPLOY_OK. Production cleanup/units/logs ещё не применены. Required CI текущей revision и exact delivery/runtime readback остаются gates; privileged scoped timer/cleanup procedure требует конкретного разрешения перед поставкой. Счётчик18/22 не меняется от подготовки кода без полного privacy review.
 
-07.10 independent privacy review: подтверждены первичные main CI37535922810/backend112516673767/PWA112516674155 на exact eb57072; stale native PENDING затронутых AC устранены. Связанная карта потоков обновлена, операторские шаги scoped copy/correction/request verification/transfer расписаны; реальные обращения не отправлялись. Разрешение второго основного PR/scoped privileged timer/cleanup получено07.10 («Да, делай уже»). Pending: current CI/merge/CD/readback. Manual owner flow согласован D-49 (отдельный запрос, состав, повторное подтверждение); Developer label согласован D-48, интерфейс подготовлен локально (Владелец PsychologyAtlas + e-mail). Existing bot privacy contract1 PASS/0,42с; local missing PyJWT установлен только в isolated temp target из requirements.lock/hash. Mini App изменение только текста; node_modules отсутствует, текущие type/component/build gates остаются REQUIRED CI. AST/relative links/diff PASS. Счётчик18/22, никаких новых privacy UI/данных до решения не добавлено.
+07.10 independent privacy review: подтверждены первичные main CI37535922810/backend112516673767/PWA112516674155 на exact eb57072; stale native PENDING затронутых AC устранены. Связанная карта потоков обновлена, операторские шаги scoped copy/correction/request verification/transfer расписаны; реальные обращения не отправлялись. Разрешение второго основного PR/scoped privileged timer/cleanup получено07.10 («Да, делай уже»). PR335 открыт, initial head f9d130d; current CI/merge/CD/readback PENDING. Manual owner flow согласован D-49 (отдельный запрос, состав, повторное подтверждение); Developer label согласован D-48, интерфейс подготовлен локально (Владелец PsychologyAtlas + e-mail). Existing bot privacy contract1 PASS/0,42с; local missing PyJWT установлен только в isolated temp target из requirements.lock/hash. Mini App изменение только текста; node_modules отсутствует, текущие type/component/build gates остаются REQUIRED CI. AST/relative links/diff PASS. Счётчик18/22, никаких новых privacy UI/данных до решения не добавлено.
 
 Следующий шаг: применить и проверить D-47 к точным owned backup/log/export paths, сохраняя minimum2 и active recovery. Завершить data-flow review; после окончания разработки подтвердить PRIVATE/Vault по D-45. Новый off-host backup не вводить; unknown runtime conditions не объявлять N/A.
 
@@ -297,11 +297,11 @@ UPDATE 03.10/revision 17: AC-LIT-08/09 исключены, а не реализ�
 | AC-GAM-01 | READY | MANDATORY | #311 доставил durable weekly goals по finished attempts/review events/read literature с multi-actor и PostgreSQL CI PASS; #312 доставил PWA/Mini App UI, component/browser CI и CD PASS (E-PL-03/05). |
 | AC-GAM-02 | READY | MANDATORY | #311 доставил достижения по captured curriculum topic, двум последовательным неделям и исправленной ошибке той же редакции из review queue, duplicate/replay и SQLite/PostgreSQL CI PASS; #312 доставил PWA/Mini App UI, CI/CD PASS. Локально F-035 исправляет cross-kind glossary↔quiz выдачу без дубля и при несовпадающей редакции, 51 затронутый SQLite test PASS; PostgreSQL CI/merge/CD этой поправки PENDING (E-PL-06). |
 | AC-GAM-03 | READY | MANDATORY | #311 проверил gap/replay и чужой actor negative cases; #312 доставил личные достижения без leaderboard/сравнения, component/browser CI и CD PASS. |
-| AC-PRIV-01 | IN_PROGRESS | MANDATORY | Telegram learning deletion: повторное подтверждение/expiry/replay/actor isolation и защита linked owner подтверждены main CI37535922810/head eb57072, native target обязателен в CI. DB inventory классифицирует OAuth identity/proofs; modules не изменены retention diff. Operator scoped learning/profile copy также прошёл native CI; production output target исправлен локально (F-129), новый CI/runtime export PENDING. D-47 задаёт retention и request verification/transfer; применение сроков, owner PWA procedure согласована D-49; runtime исполнение сроков и окончательный data-flow review ещё не завершены. Никакое чужое состояние не удалялось. |
-| AC-PRIV-02 | IN_PROGRESS | MANDATORY | Policy/data-flow review обновлён07.10 по выбранной стандартной политике; contact, source/classification, owner-only Google OIDC и отсутствие передачи студентских credentials Google рассмотрены. VPS Франция — owner evidence; Nginx psy vhost access_log=off/error_log=/dev/null. D-47 снимает UNSET локальных сроков и request verification/transfer; код retention prepared713ffb1, current CI/CD/actual application PENDING. Внешние provider retention/geography не выдуманы. Developer label согласован D-48 и подготовлен в bot/Mini App; отдельный manual owner PWA flow согласован D-49; иных identity deletion requests сейчас нет; полный compliance не заявлен. |
+| AC-PRIV-01 | READY | MANDATORY | Telegram learning deletion: повторное подтверждение/expiry/replay/actor isolation и защита linked owner подтверждены main CI37535922810/head eb57072, native target обязателен в CI. DB inventory классифицирует OAuth identity/proofs; modules не изменены retention diff. Operator scoped learning/profile copy также прошёл native CI; production output target исправлен локально (F-129), новый CI/runtime export PENDING. D-47 задаёт retention и request verification/transfer; D-47 runtime code и private output исправлены; request procedure D-49 и data-flow review завершены в PR335. Current CI/runtime исполнение сроков ещё PENDING; полный юридический compliance не заявлен. Никакое чужое состояние не удалялось. |
+| AC-PRIV-02 | READY | MANDATORY | Policy/data-flow review обновлён07.10 по выбранной стандартной политике; contact, source/classification, owner-only Google OIDC и отсутствие передачи студентских credentials Google рассмотрены. VPS Франция — owner evidence; Nginx psy vhost access_log=off/error_log=/dev/null. D-47 снимает UNSET локальных сроков и request verification/transfer; код retention prepared713ffb1, current CI/CD/actual application PENDING. Внешние provider retention/geography не выдуманы. Developer label согласован D-48 и подготовлен в bot/Mini App; отдельный manual owner PWA flow согласован D-49; операторский flow определён для адресных запросов, реальные обращения не исполнялись ради проверки; полный compliance не заявлен. Review завершён07.10, текущая поставка D-47 ещё PENDING. |
 | AC-PRIV-03 | BACKLOG | CONDITIONAL | Фактическая topology/data-flow и конкретный применимый правовой триггер не установлены. До предметного решения не вводить миграцию или блокировку по предположению; Q-11. Это не утверждение о соблюдении закона. |
 | AC-PRIV-04 | BACKLOG | CONDITIONAL | Необходимость уведомления/передачи данных определяется по фактическим сервисам и применимым правилам; пока нет конкретного решения/изменения processing, Q-11. Не вводить новый gate по догадке. |
-| AC-PRIV-05 | IN_PROGRESS | MANDATORY | Bot /privacy, help/menu и Mini App external policy link delivered eb57072; required backend/PWA CI37535922810 PASS, privacy module unchanged. User-visible purposes и границы learning deletion соответствуют подтверждённому коду. Ссылка действует без owner PWA; отдельные consent forms не вводятся. Current policy/data-flow review обновлён07.10, но D-47 runtime evidence и полный request/data-flow review не закрыты. BotFather settings/почтовые запросы без поручения не менялись. |
+| AC-PRIV-05 | READY | MANDATORY | Bot /privacy, help/menu и Mini App external policy link delivered eb57072; required backend/PWA CI37535922810 PASS, privacy module unchanged. User-visible purposes и границы learning deletion соответствуют подтверждённому коду. Ссылка действует без owner PWA; отдельные consent forms не вводятся. Current policy/data-flow review обновлён07.10, request/data-flow review и правила D-47–49 зафиксированы; D-47 runtime evidence ещё PENDING. BotFather settings/почтовые запросы без поручения не менялись. |
 
 ## Полный реестр findings и blockers
 
@@ -555,3 +555,27 @@ read-only post-check перед DEPLOY_OK сверяет exact owned runtime com
 и private log/copy metadata без чтения текста/секретов. Required local targeted
 checks, current Linux CI (shell/signals/native DB/PWA) и exact CD PENDING.
 Это не поручение удалить текущий аккаунт или поменять visibility до окончания разработки.
+
+PR335 validation checkpoint07.10: initial CI37596417362 выявил stale tracked Mini App
+assets после согласованной подписи контакта.92 frontend tests/typecheck/build PASS;
+asset parity FAIL, gate сохраняется. Исправление — canonical build:miniapp и
+сохранение generated assets в том же PR. Backend job112710059313 ещё running;
+до следующего grouped push собрать остальные подтверждённые failures.
+Local final targeted suite33 PASS/2 platform skips (Linux signals/Docker остаются
+required CI), AST/relative links/diff PASS. Privacy review покрывает согласованные
+потоки и ручные requests без заявления о полном юридическом compliance.
+
+CI37596417362 backend:1480 tests и24 subtests PASS; один новый негативный
+shell case FAIL из-за SQLite fixture при проверке порядка PostgreSQL timer.
+Исправлен selector fault на pg_privacy_runtime, production checks не ослаблены.
+Остальные ошибки не выявлены; shell/signals/native DB исполнялись в Linux CI.
+
+Grouped fix перед push PR335: Mini App Vite8.3.0 rebuild PASS/118ms,
+asset index-CqYx-Pst.js совпадает с canonical CI build; generated bundle включён.
+Новый pg_privacy_runtime fixture соответствует PostgreSQL selector; production
+assertions и DEPLOY_OK gate сохранены. Privacy code scope21/22: D-47–49,
+существующий actor deletion/export/access и data-flow inventory подтверждены
+analysis/targeted tests +1480 PASS initial Linux suite; current CI ещё обязателен.
+KNW-03 остаётся pending final private publication после разработки; приватные
+заметки не включены в публичный PR. CI, merge и exact CD/runtime post-checks
+не предсказываются успешными. Actual request/export/deletion ради теста не выполняются.

@@ -147,7 +147,7 @@ python3() {
     *postgres_vps.py\ verify*) [[ "$FAULT" != pg_preservation ]] ;;
     *install_backup_retention.py\ preflight*) [[ "$FAULT" != pg_timer_preflight ]] ;;
     *install_backup_retention.py\ install*) [[ "$FAULT" != pg_timer_install ]] ;;
-    *privacy_runtime_check.py*) [[ "$FAULT" != privacy_runtime ]] ;;
+    *privacy_runtime_check.py*) [[ "$FAULT" != pg_privacy_runtime ]] ;;
     *runtime_exposure.py*) [[ "$FAULT" != exposure ]] ;;
     *) return 99 ;;
   esac
@@ -340,7 +340,7 @@ def test_backend_artifact_and_running_runtime_checks_are_fail_closed(tmp_path, f
         assert "up -d --no-build" in log
 
 
-@pytest.mark.parametrize('fault', ['pg_timer_preflight', 'pg_timer_install', 'privacy_runtime'])
+@pytest.mark.parametrize('fault', ['pg_timer_preflight', 'pg_timer_install', 'pg_privacy_runtime'])
 def test_owned_backup_timer_failure_does_not_claim_delivery(tmp_path, fault):
     result, log = run_deploy(tmp_path, fault)
     assert result.returncode != 0
