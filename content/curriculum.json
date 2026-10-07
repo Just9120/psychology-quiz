@@ -3945,6 +3945,48 @@
       "topic_id": "t_ab1e7408a209",
       "item_sha256": "68de193e34fb944f72a5027c5f5b3234988f20c020db3f43453dedbb78cd11e5",
       "locator": "private review:questions:m1_intro_020"
+    },
+    "81d6ec11080becc48cfd27ca070d7dff2d8963c2951e0e94156fb54f4b06c292": {
+      "external_id": "m1_gp_032",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "3c41a4eb29ec9696bb27b11844810803d10849b3c861026a0100f20dc41a4d69",
+      "locator": "private review:questions:m1_gp_032"
+    },
+    "278b7bafe678d12d1f983123472e3f69bb1257c978eb2ad79445ee2e21d9c0ff": {
+      "external_id": "m1_gp_042",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "c11acfcf731c985410a50368dbd75af36d05cb1e9eac8a3a6b1090e8ecbd7f69",
+      "locator": "private review:questions:m1_gp_042"
+    },
+    "8b83c6da7c5c8da8a0b1767b60dd3d0c0b4ad103e07a4c303f4ce984caf76dec": {
+      "external_id": "m1_gp_044",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "93ba71d1921d86cebb63e3135b9f9c03c665da8db4d551d8295bb3d4fcd1dbda",
+      "locator": "private review:questions:m1_gp_044"
+    },
+    "3fc34a09557a603ad27c6d2ca977b4e997fc604ee1f0c48d924baf6fa0403288": {
+      "external_id": "m1_gp_045",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "2febd3f9701cb5876a906793109c92f031f5a223bb68e5e02a68aaf450daefd9",
+      "locator": "private review:questions:m1_gp_045"
+    },
+    "6adc22b90b3e825f63d0915ac60e7a498924eb7559e153d91dd97913ffc08285": {
+      "external_id": "m1_gp_047",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "736a39bb2640e4244e6f0c7bd153cea364e468b5c3d4ade98d0e922ca67ff68b",
+      "locator": "private review:questions:m1_gp_047"
+    },
+    "a9e469fbef0fee54feca8e56d44fbc4ecaf38e0f568f7c25d791b5b4b4727502": {
+      "external_id": "m1_gp_050",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "7770ed135d79900903c9d1643327b7fb9851899128a0090a54d8944f35d8b7fd",
+      "locator": "private review:questions:m1_gp_050"
+    },
+    "0f68606ad21a4073b20e47d1cbda850ba2d45a62e14b7cb0802d1c10ada213e4": {
+      "external_id": "m1_gp_053",
+      "topic_id": "t_4451554cf717",
+      "item_sha256": "8e0b1be12ecd7c5bb2262cb5517df623da89c2526b03a2c6c772ea17c83b9492",
+      "locator": "private review:questions:m1_gp_053"
     }
   }
 }

@@ -2628,10 +2628,10 @@
       ]
     },
     "questions:m1_gp_032": {
-      "item_sha256": "330075b7d436991185ef20d98a7f1659822a354c1a33644d8e666d6e864504fd",
+      "item_sha256": "3c41a4eb29ec9696bb27b11844810803d10849b3c861026a0100f20dc41a4d69",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2643,15 +2643,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо различает факты/интерпретации, отбор внимания и ограниченную рабочую память. Ключи применяют эти принципы; буквальные кейсы являются производными.",
-      "sources": [
-        {
-          "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
-          "modified_time": "2026-04-08T10:01:12.380Z",
-          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
-        }
-      ]
+      "note": "Observable session record versus inference; stem no longer labels one session observation a generalized scientific fact. Counts/third meeting are own hypothetical illustration, not course participant data. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_gp_033": {
       "item_sha256": "0988a8282870acc21b69356fb14e7787896e10d3a8c45baf99a74ce89f4acd07",
@@ -2877,10 +2870,10 @@
       ]
     },
     "questions:m1_gp_042": {
-      "item_sha256": "c571c0c8df1580bc8cc5239fc0828bb7b3204205557ada1716dbee1c3f867502",
+      "item_sha256": "c11acfcf731c985410a50368dbd75af36d05cb1e9eac8a3a6b1090e8ecbd7f69",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2892,15 +2885,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо различает факты/интерпретации, отбор внимания и ограниченную рабочую память. Ключи применяют эти принципы; буквальные кейсы являются производными.",
-      "sources": [
-        {
-          "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
-          "modified_time": "2026-04-08T10:01:12.380Z",
-          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
-        }
-      ]
+      "note": "Course teaching example separates an initial statement from causal hypothesis. Own childhood-causality example tests premature inference, no trauma diagnosis or universal etiology. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_gp_043": {
       "item_sha256": "dd5d08faafc50f889eafaf490c43473b0e2142d05cc72088fb8315728a1531f3",
@@ -2929,10 +2915,10 @@
       ]
     },
     "questions:m1_gp_044": {
-      "item_sha256": "cb5bde462bd4018a5febcf2aa01c5faa54ee3b419d823b7cdad4472d6d3abf81",
+      "item_sha256": "93ba71d1921d86cebb63e3135b9f9c03c665da8db4d551d8295bb3d4fcd1dbda",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2944,21 +2930,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо различает факты/интерпретации, отбор внимания и ограниченную рабочую память. Ключи применяют эти принципы; буквальные кейсы являются производными.",
-      "sources": [
-        {
-          "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
-          "modified_time": "2026-04-08T10:01:12.380Z",
-          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
-        }
-      ]
+      "note": "Course explanation of expectations/perception and limited working memory read separately; independent primary working-memory papers support limited resources/attention only. No laboratory-to-clinical numeric threshold or causal guarantee. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_gp_045": {
-      "item_sha256": "5afd20d3133b944fd608e86230ce8cb6899b248897a1e047eb7b2f009e34da12",
+      "item_sha256": "2febd3f9701cb5876a906793109c92f031f5a223bb68e5e02a68aaf450daefd9",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2970,15 +2949,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо различает факты/интерпретации, отбор внимания и ограниченную рабочую память. Ключи применяют эти принципы; буквальные кейсы являются производными.",
-      "sources": [
-        {
-          "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
-          "modified_time": "2026-04-08T10:01:12.380Z",
-          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
-        }
-      ]
+      "note": "Classification of an observable note. Ten-second pauses are an authored example, not a diagnostic cut-off or personal story copied from the practice. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_gp_046": {
       "item_sha256": "97aa2b94522fbb3e16460a64db1ac06a2f6b710aad49ad9be04b6d046efc3d6c",
@@ -3009,10 +2981,10 @@
       ]
     },
     "questions:m1_gp_047": {
-      "item_sha256": "18caadf83e3ac6b9c429f74791fd0ef7b641f51043d96a08302ee2e51420f2eb",
+      "item_sha256": "736a39bb2640e4244e6f0c7bd153cea364e468b5c3d4ade98d0e922ca67ff68b",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3024,15 +2996,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо различает факты/интерпретации, отбор внимания и ограниченную рабочую память. Ключи применяют эти принципы; буквальные кейсы являются производными.",
-      "sources": [
-        {
-          "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
-          "modified_time": "2026-04-08T10:01:12.380Z",
-          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
-        }
-      ]
+      "note": "Course generic instructions explicitly distinguish facts from hypotheses and checking with client. Additional questions do not guarantee detecting lies or diagnosing the client. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_gp_048": {
       "item_sha256": "0fb98cc97a9ae86dda7036d3a59a1d526367967d1773fdbd09c5d315091eff87",
@@ -3089,10 +3054,10 @@
       ]
     },
     "questions:m1_gp_050": {
-      "item_sha256": "54214e01a99b3a84e51189369f0d2f806d7496b4f3fad4f53310dd7ed439f118",
+      "item_sha256": "7770ed135d79900903c9d1643327b7fb9851899128a0090a54d8944f35d8b7fd",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3104,15 +3069,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо различает факты/интерпретации, отбор внимания и ограниченную рабочую память. Ключи применяют эти принципы; буквальные кейсы являются производными.",
-      "sources": [
-        {
-          "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
-          "modified_time": "2026-04-08T10:01:12.380Z",
-          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 17495:18395, 19200:22200, 59900:60950"
-        }
-      ]
+      "note": "Selection of observational wording instead of attributing motives or traits. Looking away is observable in the authored scenario, not a diagnostic sign. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_gp_051": {
       "item_sha256": "a2cb736ac61e139f37bf7e32ac525b5249bbee24a6b6e0d65e7f84ae668a7f7e",
@@ -3167,10 +3125,10 @@
       ]
     },
     "questions:m1_gp_053": {
-      "item_sha256": "861ae7bf2165ba18b24a938e58a53a3e008423e59f442713892ea03d7a1ca035",
+      "item_sha256": "8e0b1be12ecd7c5bb2262cb5517df623da89c2526b03a2c6c772ea17c83b9492",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3182,15 +3140,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо описывает фильтрацию внимания, ограниченный объём рабочей памяти и потерю деталей при перегрузке/стрессе. Сценарий «я всё забываю» — авторская иллюстрация нескольких возможных механизмов, не диагноз и не доказательство единственной причины.",
-      "sources": [
-        {
-          "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
-          "modified_time": "2026-04-08T10:01:12.380Z",
-          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 17600:21500"
-        }
-      ]
+      "note": "Attention/working memory depend on workload; a single complaint does not establish its cause or justify a moral trait attribution. Correct option and explanation qualified; no clinical diagnosis, exclusive cause or memory-training efficacy claim. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m1_gp_054": {
       "item_sha256": "ed2f41052566f4562a861094c4ce55fef7f60932cf26b445aa6bb96af8ccc833",
