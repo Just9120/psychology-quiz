@@ -90,6 +90,8 @@ def cleanup(root, *, apply=False, now=None):
     for receipt in sorted(receipts.iterdir()):
         private(receipt)
         with receipt.open(encoding='utf-8') as stream: record=json.load(stream)
+        if not isinstance(record,dict):
+            raise ValueError('unknown_delivery_receipt')
         filename=record.get('filename')
         if (not isinstance(record,dict) or record.get('format')!='psychology-copy-retention-v1' or not isinstance(filename,str)
                 or Path(filename).name!=filename or filename in ('.','..')

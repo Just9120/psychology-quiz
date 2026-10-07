@@ -13,7 +13,7 @@ SMTP и Cloudflare.
 
 07.10 владелец согласовал D-47 в [spec](project-spec.md): DB backups30 дней с minimum2/recovery exceptions, собственные application/Nginx logs14 дней, переданная копия7 дней. Дополнительный VPS/облачный backup не поручен. Ручные VPS snapshots отдельно управляются владельцем; их фактическая retention UNSET.
 
-Это выбор правил, не подтверждение их применения: backup inspector пока read-only, очистка и age retention логов не настроены/не подтверждены. Заявителя проверяет владелец по известному контакту либо лично; передача на подтверждённый адрес — по явному запросу. Один Telegram ID/username недостаточен. Идентификация оператора, owner PWA deletion и внешние provider settings ещё требуют сверки.
+Код применения сроков подготовлен локально; фактическая поставка и очистка на VPS ещё не подтверждены. Заявителя проверяет владелец по известному контакту либо лично; передача на подтверждённый адрес — по явному запросу. Один Telegram ID/username недостаточен. Идентификация оператора, owner PWA deletion и внешние provider settings ещё требуют сверки.
 
 ## Данные и цели
 
@@ -21,7 +21,7 @@ SMTP и Cloudflare.
 | --- | --- | --- |
 | Telegram → bot/API → runtime DB | Telegram ID и переданные имя/username связывают личные попытки. Ответы, результаты, история повторений, цели, достижения и отметки книг сохраняют обучение. Telegram не требует e-mail/пароля приложения. | [DB](../app/db.py), [Mini App API](../app/miniapp_api.py). Runtime actor устанавливается после проверки Telegram identity; клиент не выбирает чужого пользователя. Полный перечень таблиц и связей формирует [read-only inventory](../scripts/privacy_db_inventory.py), без чтения личных строк. |
 | Владелец → PWA → DB | E-mail, password hash, session/token digests и подтверждённая связь Telegram дают owner-only доступ к общим учебным данным. Заданное владельцем отображаемое имя хранится отдельно в web_profile_names по account_id; оно тоже относится к персональным данным. | [PWA auth](pwa-auth.md); student PWA исключён из продукта. Не приписывать Telegram пользователям PWA credentials. |
-| Владелец → Google OIDC → PWA | По явному подключению из действующей owner session сохраняется Google subject, account_id и время связи. Подтверждённый Google e-mail проверяется при обработке ID token, но не добавляется в таблицу связи и не заменяет identity владельца. | [OIDC client](../app/google_oauth.py), [durable flow](../app/owner_google_oauth.py), [схема](../sql/google-oauth-v1.sql). Только openid/email; авторизационный код, PKCE verifier и client secret передаются Google для обмена. Access/refresh/ID tokens не сохраняются в DB и не выдаются клиенту. Код подготовлен в текущей Goal; фактический вход и включение на VPS PENDING. |
+| Владелец → Google OIDC → PWA | По явному подключению из действующей owner session сохраняется Google subject, account_id и время связи. Подтверждённый Google e-mail проверяется при обработке ID token, но не добавляется в таблицу связи и не заменяет identity владельца. | [OIDC client](../app/google_oauth.py), [durable flow](../app/owner_google_oauth.py), [схема](../sql/google-oauth-v1.sql). Только openid/email; авторизационный код, PKCE verifier и client secret передаются Google для обмена. Access/refresh/ID tokens не сохраняются в DB и не выдаются клиенту. Владелец 07.10 подтвердил включение и вход через Google с прежним аккаунтом и сохранённым прогрессом; независимый повторный login не выполнялся. |
 | PWA → временное OAuth state | На срок 10 минут DB хранит state/browser digests, nonce, PKCE verifier, purpose и связь с инициировавшей session для link. Secure HttpOnly cookie связывает callback с браузером. | Challenge удаляется до сетевого обмена при принятом callback; просроченные rows очищаются при следующем begin, поэтому TTL не означает немедленное физическое удаление. Disconnect удаляет связь и принадлежащие account challenges, отзывает другие sessions. Backup может сохранять прежние rows до удаления копии. Эти данные входят в privacy inventory и additive recovery, а не в learning-data export. |
 | PWA → SMTP | Письма подтверждения/восстановления содержат адрес получателя и одноразовую ссылку. Учебные ответы в SMTP не отправляются этим модулем. | [Mailer](../app/web_mail.py), настройки в [PWA auth](pwa-auth.md). Фактические сроки хранения у почтового провайдера UNSET. |
 | Runtime DB → backup/recovery | Копии persistent state нужны для безопасной миграции и восстановления. Они могут содержать личные строки. | [PostgreSQL backup](../scripts/postgres_backup.py), [процедура поставки](miniapp-deployment-qa.md). Срок локальных копий согласован D-47 с исключениями minimum2/recovery; его фактическое применение ещё не подтверждено, автоматического удаления всех copies нет. |
@@ -96,7 +96,7 @@ python scripts/export_learning_data.py --telegram-user-id "$VERIFIED_TELEGRAM_US
 Результат имеет scope `profile_and_learning_data_copy` и schema_version 2;
 прежний учебный формат версии 1 сохраняется без этого флага.
 
-Output допускается только как новый ignored `data/*.json`, создаётся с mode 0600;
+Локальный output — новый ignored `data/*.json`; в production container — новый `/data/learning-copies/*.json` на persistent mount. Файл создаётся с mode 0600;
 права и ACL Windows дополнительно контролирует оператор. База открывается read-only,
 а все запросы выполняются в одном consistent snapshot. Session children выбираются
 через принадлежащие actor попытки; чужой learning state и общий банк не меняются.
@@ -156,3 +156,22 @@ docker compose -p psychology-quiz -f docker-compose.yml exec -T psych_quiz_minia
 [Receipt/cleanup](../scripts/learning_copy_retention.py) фиксирует UTC передачи и SHA файла в private delivery-receipts; адрес, ID заявителя и текст копии в receipt не добавляются. Повторный mark не продлевает срок. Только полная выгрузка с совпадающими row_counts допустима; неполный/изменённый файл или чужой путь не удаляется. Непереданные copies и unknown files не имеют автоматического срока удаления. API wrapper при старте и раз в час чистит только неизменённые copies с истёкшими7 днями после передачи, под отдельной lock этого каталога. Ошибка receipt сохраняет файлы и даёт generic private diagnostic, не останавливая обучение. Эта команда не выполняет отправку и не заменяет проверку личности.
 
 Код подготовлен локально и требует current CI/CD; это не Evidence уже исполненного пользовательского обращения. Receipt helper, runtime upkeep и operator exporter должны поставляться одной revision.
+
+
+## Scoped Nginx evidence и диагностические логи
+
+07.10 владелец передал read-only снимок `nginx -T`: единственный найденный
+vhost `psy.cloud-nodes.net` расположен в
+`/etc/nginx/sites-enabled/psy.cloud-nodes.net.conf`, error_log — `/dev/null`.
+Дополнительная проверка этого файла подтвердила две access_log directives,
+обе `off`. Для этих потоков собственного vhost новые logs не создаются и
+retention не требуется. Файл и shared Nginx configuration не изменяются.
+Это ограниченный снимок, не проверка всех upstream/proxy/provider logs.
+
+API child запускается с `--no-access-log`: request URI, включая OAuth callback
+code/state, не должны попадать в новые диагностические файлы через Uvicorn
+access logger. Bot/API diagnostics остаются в private daily files по D-47.
+Cloudflare, Telegram, Google и SMTP — отдельные внешние системы; их страны и
+провайдерская retention этим снимком не установлены. Не описывать фактическую
+обработку как ограниченную только почтой: Telegram identity, учебная история
+и owner auth/link metadata перечислены в inventory выше.

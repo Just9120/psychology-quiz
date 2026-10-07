@@ -140,4 +140,41 @@ flock -n /tmp/psychology-quiz-deploy.lock python3 scripts/backup_retention_plan.
 
 [backup_retention.py](../scripts/backup_retention.py) применяет D-47 только к /opt/psychology-quiz/.postgres/backups, под общей deploy lock. Без --apply только план; с --apply --expected-sha <проверенная-revision> проверяются чистая main/exact origin и удаляются лишь известные record.json/database.dump units из свежего перепроверенного плана. Новый unit с unknown файлами, небезопасными paths/permissions, повреждённым dump, unfinished recovery или конфликтом плана не удаляется. Минимум две verified точки каждого cluster и control-record pins сохраняются. Recovery records, live DB и полные VPS snapshots не удаляются. Частичный сбой не считать успешной очисткой.
 
-Код подготовлен локально; production применение пока PENDING. Перед --apply нужны проверенная поставленная revision и read-only review точного плана. Никакой cron/systemd timer не установлен этой подготовкой. Application/Nginx logs и переданные копии обрабатываются отдельно.
+Код подготовлен локально; production применение пока PENDING. Перед --apply нужны проверенная поставленная revision и read-only review точного плана. Для автоматического запуска подготовлен scoped systemd timer; его установка на VPS ещё PENDING. Application/Nginx logs и переданные копии обрабатываются отдельно.
+
+
+## Ежедневный запуск локальной очистки
+
+[Установщик](../scripts/install_backup_retention.py) обслуживает только
+`/etc/systemd/system/psychology-quiz-backup-retention.service` и
+`/etc/systemd/system/psychology-quiz-backup-retention.timer` на том же VPS.
+Timer запускается ежедневно с 03:00 UTC и случайной задержкой до 30 минут.
+Сервис не создаёт off-host backup и не управляет ручными VPS snapshots.
+
+Canonical [deploy](../deploy.sh) выполняет read-only preflight перед остановкой
+приложения, а установку — после проверки runtime и публикации PWA, только для
+PostgreSQL. Неизвестные/чужие units, overrides или незавершённое recovery блокируют
+поставку; существующие настройки других проектов не перезаписываются.
+Установка не запускает очистку немедленно. При ошибке timer post-check
+восстанавливаются прежние два unit files и enabled/active state; база не откатывается,
+`DEPLOY_OK` не выдаётся. Ошибка восстановления требует operator reconciliation.
+
+Scheduled cleanup сверяет clean main, exact origin и ancestry установленной
+revision; при последующих documentation-only commits используется текущая main.
+Общая deployment lock исключает очистку во время поставки. Неизвестные recovery
+records/повреждённые copies сохраняются, даже если поэтому срок превышает 30 дней;
+оператор должен разобраться с причиной. При остановке сервиса/таймера срок тоже
+не гарантирован. Minimum2 и pinned exceptions не являются новой гарантией RPO/RTO.
+
+Для bounded readback после поставки: из `/opt/psychology-quiz` проверить
+`systemctl is-enabled psychology-quiz-backup-retention.timer` и
+`systemctl is-active psychology-quiz-backup-retention.timer`, затем
+`python3 scripts/backup_retention.py` (read-only). Фактический scheduled run
+проверяется по systemd service result; чужие журналы и private dump contents
+не публикуются. Контракт установки и восстановления проверяется
+[адресными tests](../tests/test_install_backup_retention.py), порядок/failure
+поставки — [shell contract](../tests/test_deploy_production_contract.py).
+
+Согласование сроков D-47 само по себе не подтверждает установку этих privileged
+units и выполнение cleanup: для текущего пакета нужны разрешённая поставка и
+runtime Evidence. Полные VPS snapshots остаются под ручным управлением владельца.

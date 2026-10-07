@@ -79,8 +79,10 @@ def recovery_pins(state: Path):
     for path in state.iterdir():
         if path.suffix == '.json' and path.name != 'state.json':
             record = read_record(path)
-            if record.get('phase') != 'complete':
-                raise ValueError('unfinished_control_record')
+            if (path.name != 'pgvector-upgrade.json'
+                    or record.get('format') != 'psychology-pgvector-upgrade-v1'
+                    or record.get('phase') != 'complete'):
+                raise ValueError('unknown_or_unfinished_control_record')
             references(record)
     return pins
 
@@ -142,7 +144,9 @@ def apply_cleanup(state: Path, expected, *, now=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--apply', action='store_true')
-    parser.add_argument('--expected-sha')
+    revision = parser.add_mutually_exclusive_group()
+    revision.add_argument('--expected-sha')
+    revision.add_argument('--scheduled-from')
     args = parser.parse_args()
     # Production target is fixed; no caller-supplied directory or remote DB.
     if os.name != 'posix' or os.geteuid() != 0:
@@ -157,12 +161,18 @@ def main():
             raise ValueError('unsafe_lock')
         fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
         if args.apply:
-            if not args.expected_sha or not re.fullmatch(r'[0-9a-f]{40}', args.expected_sha):
+            anchor = args.scheduled_from or args.expected_sha
+            if not anchor or not re.fullmatch(r'[0-9a-f]{40}', anchor):
                 raise ValueError('expected_revision_required')
             def git(*args):
                 return subprocess.check_output(['git', '-C', str(PROJECT), *args],
                     text=True, stderr=subprocess.DEVNULL).strip()
-            if (git('rev-parse', 'HEAD') != args.expected_sha
+            current_sha = git('rev-parse', 'HEAD')
+            if args.scheduled_from:
+                subprocess.run(['git', '-C', str(PROJECT), 'merge-base', '--is-ancestor', anchor, current_sha],
+                               check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if (not re.fullmatch(r'[0-9a-f]{40}', current_sha)
+                    or (not args.scheduled_from and current_sha != args.expected_sha)
                     or git('branch', '--show-current') != 'main'
                     or git('remote', 'get-url', 'origin') not in {
                         'https://github.com/Just9120/psychology-quiz.git',

@@ -86,3 +86,12 @@ def test_foreign_state_is_not_a_cleanup_target(tmp_path):
     write(root/'state.json',{'phase':'complete','format':'other','project':'/other'})
     with pytest.raises(ValueError,match='foreign_postgres_state'):
         plan_cleanup(root,now=NOW)
+
+
+
+def test_unknown_completed_control_record_preserves_all_copies(tmp_path):
+    root = state(tmp_path / 'state')
+    write(root / 'unknown.json', {'phase': 'complete', 'format': 'foreign'})
+    with pytest.raises(ValueError, match='unknown_or_unfinished_control_record'):
+        plan_cleanup(root, now=NOW)
+    assert (root / 'backups/release-old1/database.dump').exists()

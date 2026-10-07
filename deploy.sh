@@ -113,6 +113,11 @@ if [[ "$DATABASE_BACKEND" == postgresql ]]; then
   fi
 fi
 
+# Scope: only the two owned local-backup units, never other host jobs.
+if [[ "$DATABASE_BACKEND" == postgresql ]]; then
+  python3 scripts/install_backup_retention.py preflight --expected-sha "$EXPECTED_SHA" --lock-held
+fi
+
 STOPPED=0
 MIGRATION_STARTED=0
 recover_pre_migration() {
@@ -176,5 +181,8 @@ for service in "${SERVICES[@]}"; do
   log "RUNTIME_OK service=$service revision=$EXPECTED_SHA image=$image_id"
 done
 deliver_pwa
+if [[ "$DATABASE_BACKEND" == postgresql ]]; then
+  python3 scripts/install_backup_retention.py install --expected-sha "$EXPECTED_SHA" --lock-held
+fi
 trap - ERR
 log "DEPLOY_OK revision=$EXPECTED_SHA"

@@ -57,3 +57,14 @@ def test_unsafe_receipt_is_not_a_path_escape(tmp_path):
     with pytest.raises(ValueError,match='unknown_delivery'):
         cleanup(root,apply=True,now=NOW+timedelta(days=8))
     assert path.exists()
+
+
+def test_unknown_receipt_root_is_rejected_without_removing_copy(tmp_path):
+    root = tmp_path / 'copies'; root.mkdir(mode=0o700)
+    receipts = root / '.delivery-receipts'; receipts.mkdir(mode=0o700)
+    receipt = receipts / 'unknown.json'; receipt.write_text('[]')
+    if os.name == 'posix': receipt.chmod(0o600)
+    copy = root / 'unreceived.json'; copy.write_text('preserve')
+    with pytest.raises(ValueError, match='unknown_delivery_receipt'):
+        cleanup(root, apply=True)
+    assert copy.read_text() == 'preserve'

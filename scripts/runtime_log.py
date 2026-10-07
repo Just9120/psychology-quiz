@@ -20,7 +20,7 @@ LOG_NAME = re.compile(r'(bot|api)-(\d{4}-\d{2}-\d{2})\.log')
 COMMANDS = {
     'bot': [sys.executable, '-m', 'app.main'],
     'api': [sys.executable, '-m', 'uvicorn', 'app.miniapp_fastapi_runtime:app',
-            '--host', '0.0.0.0', '--port', '8081'],
+            '--host', '0.0.0.0', '--port', '8081', '--no-access-log'],
 }
 
 
