@@ -5730,10 +5730,10 @@
       ]
     },
     "questions:m1_vnd_010": {
-      "item_sha256": "8c456b19d4eaab229141be5f01ce3afee0f9ea6e310a183c5596cc038ad6c33a",
+      "item_sha256": "3085085e4fcb76edcfa292bf9b79cae087384b4066ca27e878acfb63b8a9e481",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5745,13 +5745,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: balance, regulation, mobility. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14042:14857;characters:22944:23036;characters:23828:24068"
         }
       ]
     },
@@ -5808,10 +5808,10 @@
       ]
     },
     "questions:m1_vnd_013": {
-      "item_sha256": "5941e8cf324bb531b0f374ded9aa9e5c1ed86292f606740a9b0101e67c9a0ddb",
+      "item_sha256": "52ec94a4910a76b075d9929524d792bab7d51d7b144f6eaf0a22e3ac8248bea6",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5823,21 +5823,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: mobility. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:23828:24068"
         }
       ]
     },
     "questions:m1_vnd_014": {
-      "item_sha256": "19bd76ad4a8d3d3516aa10dcc7b814e5cb037c32a8e154200296d101fd311007",
+      "item_sha256": "a3ff03888bd26eea45fde2d0e32bce20dd9101763a5566d40cfabf932992ff02",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5849,13 +5849,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: balance. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:22944:23036"
         }
       ]
     },
@@ -6388,10 +6388,10 @@
       ]
     },
     "questions:m1_vnd_035": {
-      "item_sha256": "aa88095ee4399fb038ff9eafb4a8e67d761334def9e1ba1e0ac7053f08a92e14",
+      "item_sha256": "2764d549ebf7691f9a19db2f5761560af0818734fe109765d0e6118047a5e2e7",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6403,13 +6403,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: regulation, external. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:12380:12862;characters:14042:14857"
         }
       ]
     },
@@ -6498,10 +6498,10 @@
       ]
     },
     "questions:m1_vnd_039": {
-      "item_sha256": "71427beb34b8d17d331214bc7b204fcb89c07ccb44f68de1e94e6988227cfaf5",
+      "item_sha256": "7f50620cc0950721fc89f545822445b4bb31c3a4b468b64868c317ac85d705fd",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6513,13 +6513,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: association, dynamic. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:6006:6165;characters:26358:26762"
         }
       ]
     },
@@ -6553,10 +6553,10 @@
       ]
     },
     "questions:m1_vnd_041": {
-      "item_sha256": "4db6d5e99da6335325a9e17e606dd3b3a20e65ef162e79fb718042a086404997",
+      "item_sha256": "14e8fc7bc78d0a6f68c174aec3f0d9c2de8e7c9a1101c246fd36b34d57e6b798",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6568,21 +6568,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: regulation, mobility. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14042:14857;characters:23828:24068"
         }
       ]
     },
     "questions:m1_vnd_042": {
-      "item_sha256": "99af2bc821abdf9c6f3da91c35a85e1c9235a00dba6861b85faf78ca9f2cb8bc",
+      "item_sha256": "db56152dc52624a9635f03f6feb4893c909e37a208cd3d5b13ab80691a63ac2a",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6594,13 +6594,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: association, dynamic. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:6006:6165;characters:26358:26762"
         }
       ]
     },
@@ -6631,10 +6631,10 @@
       ]
     },
     "questions:m1_vnd_044": {
-      "item_sha256": "188baf18b44d14521fa1217e49640bf8849ef451a8baeb9a566dfbe44b442999",
+      "item_sha256": "2fa0fd06c1c2c45427fbed8028bc5690b24a7f689b1d82680216b1424b034dfd",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6646,21 +6646,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: external. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:12380:12862"
         }
       ]
     },
     "questions:m1_vnd_045": {
-      "item_sha256": "ea3a985eff8869885f86368f4e077a98a088dbae024d70f6acc98d35307089a8",
+      "item_sha256": "f0b7156da3a59bf3c2a5229fa82a064381ce0ab64d6b269938a868c40855bc71",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6672,13 +6672,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Exact raw course fragments: association, external. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:6006:6165;characters:12380:12862"
         }
       ]
     },
