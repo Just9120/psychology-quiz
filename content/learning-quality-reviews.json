@@ -9821,10 +9821,10 @@
       ]
     },
     "questions:m2_exp_013": {
-      "item_sha256": "afa871d714cf119fb09d0d2ace750f65da4826e0180fae12660ac98f45404ac4",
+      "item_sha256": "567d1dc7de2b83e720352401b1ed36aa73d880cdf9543ed5f0afee3b677f3fa3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9836,21 +9836,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. В разборе Милгрэма указаны зафиксированная закономерность и варьирование условий для выявления факторов подчинения.",
+      "note": "Exact subject/method fragment independently delimited and individually reviewed. Milgram numbers/trait denial, conditional truth, NHST equation, universal empirical-study manipulation and mandatory context removal remain held. Question scope and method limitations made explicit; key/ID preserved.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 29700:30185"
+          "locator": "characters:29904:30245"
         }
       ]
     },
     "questions:m2_exp_014": {
-      "item_sha256": "2e19aacb9f9fa53a0ae33c2aaa0915a3b8c3a452b614f2e81503687c633f2fd5",
+      "item_sha256": "ad73b6e7327f3b3ff24d8c4431b406bbc53ce8636d42138159b3e8a555fe3b6f",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9862,21 +9862,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Разбор Милгрэма прямо отличает наблюдаемое подчинение от нераскрытых мотивов и переживаний участников.",
+      "note": "Exact subject/method fragment independently delimited and individually reviewed. Milgram numbers/trait denial, conditional truth, NHST equation, universal empirical-study manipulation and mandatory context removal remain held. Question scope and method limitations made explicit; key/ID preserved.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 30150:30700"
+          "locator": "characters:29904:30245"
         }
       ]
     },
     "questions:m2_exp_015": {
-      "item_sha256": "ff23c927065ded109eff8e9501902c0fca4e7f004cc363919add57c75e26fda1",
+      "item_sha256": "321f13a36510630e7029252c85b04d53b92cf76cb5ee8ac8c5bfbdeebf04f08d",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9888,21 +9888,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция перечисляет независимые, зависимые и побочные переменные и контроль последних.",
+      "note": "Exact subject/method fragment independently delimited and individually reviewed. Milgram numbers/trait denial, conditional truth, NHST equation, universal empirical-study manipulation and mandatory context removal remain held. Question scope and method limitations made explicit; key/ID preserved.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31000:31350"
+          "locator": "characters:31107:31332"
         }
       ]
     },
     "questions:m2_exp_016": {
-      "item_sha256": "f88800eb55a33ef23f70fe46afc2d1bcfb291ff845fdca3feafcd58c5494fd18",
+      "item_sha256": "b910e2857ae5143e55897c6c5e1dfbb7ad108b2a4e8aeb539bb3619dc60cb11e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9914,13 +9914,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция прямо противопоставляет классическое исключение субъективных факторов и неклассический их учёт.",
+      "note": "Exact subject/method fragment independently delimited and individually reviewed. Milgram numbers/trait denial, conditional truth, NHST equation, universal empirical-study manipulation and mandatory context removal remain held. Question scope and method limitations made explicit; key/ID preserved.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31880:32350"
+          "locator": "characters:16041:16453;characters:32144:32281"
         }
       ]
     },
@@ -10986,10 +10986,10 @@
       ]
     },
     "questions:m2_exp_057": {
-      "item_sha256": "a5b9ab0ecc3aea86ff2473ed4564af26d62776fb7cb7baea450bc4d2a38625a3",
+      "item_sha256": "ec89813ef46ecbffb6c430bdfce707bb22f5a470ba61b55873e0e90588347cdc",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11001,13 +11001,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент 16852:17401 прямо описывает принцип фальсифицируемости и невозможность окончательно доказать теорию конечным числом подтверждений; ключ и пояснение адресно сверены, исходный вопрос не менялся.",
+      "note": "Exact subject/method fragment independently delimited and individually reviewed. Milgram numbers/trait denial, conditional truth, NHST equation, universal empirical-study manipulation and mandatory context removal remain held. Question scope and method limitations made explicit; key/ID preserved.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16852:17401"
+          "locator": "characters:16849:17199;characters:17258:17861"
         }
       ]
     },
@@ -11194,10 +11194,10 @@
       ]
     },
     "questions:m2_exp_065": {
-      "item_sha256": "0c55387187910e77be6c82777744fb70205b53ea21da4e46661d4ff3315dd4ed",
+      "item_sha256": "7133d091637aa1d63d317966dfc5bf484c9539cabf4b9fd97b39d9eaf525103f",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11209,13 +11209,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Общее определение зависимой переменной как измеряемого исхода поддерживает применение к настойчивости в данном учебном примере; сам пример в лекции не приводится.",
+      "note": "Exact subject/method fragment independently delimited and individually reviewed. Milgram numbers/trait denial, conditional truth, NHST equation, universal empirical-study manipulation and mandatory context removal remain held. Question scope and method limitations made explicit; key/ID preserved.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31100:31350"
+          "locator": "characters:31107:31332"
         }
       ]
     },
@@ -12322,10 +12322,10 @@
       ]
     },
     "questions:m2_exp_108": {
-      "item_sha256": "1a63bdd8e1a69d5159481e9d123521e1400f27e6a09b7a377faafa7e7b8bb7ce",
+      "item_sha256": "4db33955eb730313f89432e6656b1e7ab556916a577a186be2d11d7ecbbcf3c7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12337,13 +12337,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Общее определение независимой переменной как фактора воздействия поддерживает применение к формату обучения в данном учебном примере; сам пример в лекции не приводится.",
+      "note": "Exact subject/method fragment independently delimited and individually reviewed. Milgram numbers/trait denial, conditional truth, NHST equation, universal empirical-study manipulation and mandatory context removal remain held. Question scope and method limitations made explicit; key/ID preserved.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 31100:31350"
+          "locator": "characters:31107:31332"
         }
       ]
     },
