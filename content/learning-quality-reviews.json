@@ -3452,10 +3452,10 @@
       ]
     },
     "glossary:sensation": {
-      "item_sha256": "129f87c6c79cd817021d57c3ea5d2fafbbdfcd99078971114520e175741cae96",
+      "item_sha256": "559180485f995f44a4bb95dd94e876e9c2558410714d7aad3c495cfdb53cb81a",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3466,25 +3466,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Авторский учебный пример отдельных сенсорных свойств. Курс относит ощущение к психическим процессам; индивидуальное определение независимо сверено с OpenStax Psychology 2e, 5.1. Никаких диагностических выводов.",
       "sources": [
         {
-          "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
+          "modified_time": "2026-03-31T05:56:42.059Z",
+          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
+          "locator": "characters:773:981"
         }
       ]
     },
     "glossary:perception": {
-      "item_sha256": "cd0b907de3705d3ef9630fd6a6ff953436f3cbded0d8cc77384c96ba15473a7b",
+      "item_sha256": "fd686cced77eea66481688d090682bd9e1470df8595b0e6404261a3fc221e2f1",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3495,17 +3492,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Авторский пример организации сенсорной информации в целостный предмет. Курс даёт классификацию процесса, OpenStax Psychology 2e, 5.1 — его определение; эти основания не смешиваются.",
       "sources": [
         {
-          "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
+          "modified_time": "2026-03-31T05:56:42.059Z",
+          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
+          "locator": "characters:773:981"
         }
       ]
     },
@@ -3541,10 +3535,10 @@
       ]
     },
     "glossary:memory": {
-      "item_sha256": "85057f987eff44514cf65da3e05bba1553d37ea300c9b5a28667b94c7840a583",
+      "item_sha256": "e21bd7af1f4742dd7507ac70ce13c548d8ced360f97d034d72a3008e32963006",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3555,25 +3549,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Авторский пример кодирования, сохранения и извлечения. Курс подтверждает декларативную память, независимо OpenStax Psychology 2e, 8.1 — общий цикл памяти; не утверждается, что фрагмент курса определяет все виды памяти.",
       "sources": [
         {
-          "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
+          "modified_time": "2026-04-20T11:05:12.145Z",
+          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
+          "locator": "characters:1041:1211"
         }
       ]
     },
     "glossary:thinking": {
-      "item_sha256": "4e7903f9086efad69a1a97984b1c210ec02af997ec66eae0e16781df0082ada6",
+      "item_sha256": "34f63fb749cc92f1925d6a4268de1ce2f746691c8d9808c5eeb6a2e7cbb0ba4d",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3584,25 +3575,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Авторский пример сравнения и логического вывода; курс явно определяет дедуктивное мышление. Общее понятие thinking дополнительно сверено с APA Dictionary; вывод о скрытых мыслях по поведению не делается.",
       "sources": [
         {
-          "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
+          "modified_time": "2026-04-20T11:05:12.145Z",
+          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
+          "locator": "characters:923:1040"
         }
       ]
     },
     "glossary:imagination": {
-      "item_sha256": "6783c75c1fc7703535a715278b059281b800c5e99f9e739787c8c8ea06f0f9ac",
+      "item_sha256": "edfe69837bfd9bda90563378c6684a26cba7c82af3c3e045ca85aa79f49fb99f",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3613,17 +3601,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Авторский пример построения новой сцены. Курс связывает воображение с образами; Hassabis et al., PNAS 2007, введение и метод задания различают конструирование новой ситуации и описание воспоминания. Клинические выводы не переносятся на всех людей.",
       "sources": [
         {
-          "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
+          "modified_time": "2026-04-20T11:05:12.145Z",
+          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
+          "locator": "characters:3122:3242"
         }
       ]
     },
@@ -5310,10 +5295,10 @@
       ]
     },
     "glossary:chemical_synaptic_transmission": {
-      "item_sha256": "dca5f92d03efbeced16ed5365e9d60341561bf0b2a2f249d352a077eab8503ff",
+      "item_sha256": "68f2c5c179cb67d06691abb200732476e0a3ff124ae6d5436380b43f9ea01582",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -5324,17 +5309,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "issues": [],
+      "note": "Course fragment определяет синапс и химический способ передачи; точные выделение/рецепторы сверены независимо с OpenStax Anatomy and Physiology2e12.5. Пример не задаёт универсальную скорость, не исключает электрические синапсы и не рекомендует лекарства.",
       "sources": [
         {
-          "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
-          "modified_time": "2026-04-06T14:46:17.530Z",
-          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "locator": "characters:153:309"
         }
       ]
     },
@@ -7028,10 +7010,10 @@
       ]
     },
     "glossary:higher_nervous_activity": {
-      "item_sha256": "696898609fead04d7d31b6e3c2427ebbb313f4280d7c8f7814e9d3636f99fe2b",
+      "item_sha256": "7c09895ed9d32ce68d482b1560d8cd323c7a08ab77c25c6a9d00720c633969ac",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7042,17 +7024,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Авторский исторический пример обучения сигналу из точного фрагмента курса; Pavlov, Conditioned Reflexes, Lecture I/II подтверждает предмет исследования. Не объявляется, что все законы памяти сводятся к условным рефлексам.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:5550:6200"
         }
       ]
     },
@@ -7280,10 +7259,10 @@
       ]
     },
     "glossary:balance_of_processes": {
-      "item_sha256": "cc5c218156e3deef3899e78c49c6d23b122bed05bcc2bf1c99b27b14b0414396",
+      "item_sha256": "f7b2f0c1d750cd228fa883287b9f51adeba2a9f9d70788d42bf30c9abe13e703",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7294,25 +7273,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Курс вводит возбуждение/торможение; Pavlov, Lecture XVII описывает их соотношение в наблюдениях за животными. Пример ограничен исторической моделью; не переносится на диагноз, агрессию или риск расстройства человека.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14000:14832"
         }
       ]
     },
     "glossary:type_of_higher_nervous_activity": {
-      "item_sha256": "ffe1fa578e41053c76db0da2b25e56b48eb4e4be86141f0d4e1cb2d1bbdbe39b",
+      "item_sha256": "ca575526c772d00a40a6b8acad91ab5f77b383a64d826d74f588c6165e1256bc",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7323,17 +7299,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Курс называет историческую типологию; Pavlov, Lectures XVII/XIX описывает типы животных и отдельное исследование свойств процессов. Не добавлено назначение темперамента или психиатрического риска по поведению.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:25013:25108"
         }
       ]
     },
@@ -9294,10 +9267,10 @@
       ]
     },
     "glossary:psyf_synapse": {
-      "item_sha256": "ed19aa2389e44bf094668fe8c302a73ae85958b44defa57d6ffb8c212ed96ae7",
+      "item_sha256": "546fc56d9c5fb0ca507ec414aa5b129b320ba5a7cb590372e9c7ab0271e69cc7",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9308,25 +9281,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Авторский пример изменяемой эффективности передачи. Курс подтверждает определение синапса, Bliss and Lomo 1973 — длительную потенциацию в конкретном эксперименте на кроликах; не обещается усиление любого синапса при любом повторении.",
       "sources": [
         {
-          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "locator": "characters:153:309"
         }
       ]
     },
     "glossary:chemical_synapse": {
-      "item_sha256": "30e559657052fa572b2910b3463473a5b2d9b5bd792a6095e624ff5a2204af53",
+      "item_sha256": "db4fd3a022972fe55e8235eeddb2e9490dfe7bf30cf487847fd90edc9b1bd6e3",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9337,25 +9307,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Тот же научный механизм применяется в двух предметных контурах; это не утверждение, что любые клетки контактируют лишь химически. Точное определение курса плюс независимо проверенный механизм OpenStax Anatomy and Physiology2e12.5, без held hyperpolarization-universality claim.",
       "sources": [
         {
-          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "locator": "characters:153:309"
         }
       ]
     },
     "glossary:gaba_inhibition": {
-      "item_sha256": "4ede6929aea9eb352c03f28fae8ef40e0b0d80de2407372f56307862a5bb7c3f",
+      "item_sha256": "2933bee757c3143a0a394aa7b0fecc0f6830a9a9c32dad0eda4d2aebbf923099",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9366,25 +9333,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Авторский пример тормозной передачи с явно ограниченным контекстом. Курс: только основное определение ГАМК, без процента клеток/постоянной конкуренции. OpenStax Anatomy and Physiology 2e, 12.5: рецепторная зависимость эффекта; не утверждается универсальное торможение во всех возрастах.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:568:642"
         }
       ]
     },
     "glossary:noradrenaline": {
-      "item_sha256": "2004f9923c09f12f9d3338f9907c74c231b8fe46e71c1042c5af48bde5c43d0b",
+      "item_sha256": "f4f11badf2a83aefbf60dad483d7faa4cd015259d8921d85a542be93aa7ec736",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9395,25 +9359,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Авторский пример роли системы, без численного вывода или диагностики по поведению. Курс называет норадреналин в связи с бдительностью; Waterhouse and Navarra 2022 отдельно рассматривают норадреналиновые нейроны голубого пятна в модуляции бодрствования и внимания. Спорная схема локализации других сетей не утверждается.",
       "sources": [
         {
-          "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
-          "modified_time": "2026-04-16T15:32:40.272Z",
-          "snapshot_sha256": "7ab85f051a13bfe77a5a1bee02e7d634fe899fa2557f288b43e7d8378d6989cf",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2793:3503, 6430:7140, 12400:14300, 17900:20400"
+          "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
+          "modified_time": "2026-04-20T11:05:23.167Z",
+          "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
+          "locator": "characters:6955:7155"
         }
       ]
     },
     "glossary:melatonin": {
-      "item_sha256": "639ad4a1c7f90154c0d575d38abf909299dac55f26ac47d196aead3e20b2e699",
+      "item_sha256": "25adc60e0467826debacead30738b64a74bd177e0ed9bedc99ab0ef190710f7a",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9424,25 +9385,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Авторский пример циркадного сигнала. Курс: выработка мелатонина эпифизом; Endotext, Main Function of the Pineal Gland — связь с внутренними часами и светом/темнотой. Лечебные, противоопухолевые и универсальные нормы сна не добавляются.",
       "sources": [
         {
-          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "locator": "characters:2205:2279"
         }
       ]
     },
     "glossary:inhibition_attention": {
-      "item_sha256": "9a64b6a8417a9bfaf3ad4179df018ddb9280d76ef048f03d7223b74c05f52586",
+      "item_sha256": "2dd0cf55f7ed89b9c4d64adaa5bde20f673cc90d4b66f4e33c9694bc6cbcf950",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9453,25 +9411,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Авторский пример контроля конкурирующего ответа по заданию Stroop 1935. Курс подтверждает активную природу торможения, но не доказывает конкретный механизм эффекта Струпа. Пример не отождествляет психологический контроль с единственным медиатором и не повторяет неверный тезис об энергии.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:5830:5970"
         }
       ]
     },
     "glossary:neuroplasticity": {
-      "item_sha256": "5be5a626c790ee4b628cb8525e738edd5a4dea8aaba80e9729d8a457a2cca041",
+      "item_sha256": "99dbf7059b541a3c5eafa5f288d926f61657d9108745a6ca8b0c351432a960c1",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9482,17 +9437,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Авторский пример адаптации нервной системы. Курс упоминает изменение связей при долговременной памяти; исключено универсальное требование новых окончаний. OpenStax Psychology 2e, 3.4 независимо определяет нейропластичность и ограниченность выводов о восстановлении.",
       "sources": [
         {
           "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "locator": "characters:1211:1291"
         }
       ]
     },

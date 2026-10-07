@@ -954,6 +954,294 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "glossary:chemical_synaptic_transmission": {
+      "schema_version": 1,
+      "item_sha256": "68f2c5c179cb67d06691abb200732476e0a3ff124ae6d5436380b43f9ea01582",
+      "review_sha256": "9fd29261e144475ed0ec18928a2f4bdba8724696ec44c212d6692342c1695fa2",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:chemical_synapse": {
+      "schema_version": 1,
+      "item_sha256": "db4fd3a022972fe55e8235eeddb2e9490dfe7bf30cf487847fd90edc9b1bd6e3",
+      "review_sha256": "217a433a81371505fae63cb46ebb59c00e7ede59d8db79264de4bfc8b98df4c5",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:sensation": {
+      "schema_version": 1,
+      "item_sha256": "559180485f995f44a4bb95dd94e876e9c2558410714d7aad3c495cfdb53cb81a",
+      "review_sha256": "66bc3d430a267e70ef135e472c92bcab65ad0a0ad1c652cabf97974450be05c7",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:perception": {
+      "schema_version": 1,
+      "item_sha256": "fd686cced77eea66481688d090682bd9e1470df8595b0e6404261a3fc221e2f1",
+      "review_sha256": "69ce02ef17007c87919a5c4effc617085c51baaee6448269f0eee78f831917c5",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:memory": {
+      "schema_version": 1,
+      "item_sha256": "e21bd7af1f4742dd7507ac70ce13c548d8ced360f97d034d72a3008e32963006",
+      "review_sha256": "222b9354b8b8e9fc8984af19a811c287e92f62853976711373cef4c9593d26a9",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:thinking": {
+      "schema_version": 1,
+      "item_sha256": "34f63fb749cc92f1925d6a4268de1ce2f746691c8d9808c5eeb6a2e7cbb0ba4d",
+      "review_sha256": "be94db9908690b5d632a542d0539850abc809f55b234cfbcd2ab3fc0edd10142",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:imagination": {
+      "schema_version": 1,
+      "item_sha256": "edfe69837bfd9bda90563378c6684a26cba7c82af3c3e045ca85aa79f49fb99f",
+      "review_sha256": "7baf793653ca7497db4c0485734dbfba19d37315abefe4a24163dfb43d1d69c9",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:gaba_inhibition": {
+      "schema_version": 1,
+      "item_sha256": "2933bee757c3143a0a394aa7b0fecc0f6830a9a9c32dad0eda4d2aebbf923099",
+      "review_sha256": "09ec63f5215c395aa663f913db1c88f030160c37e1f341e014042cb9db9001a3",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:psyf_synapse": {
+      "schema_version": 1,
+      "item_sha256": "546fc56d9c5fb0ca507ec414aa5b129b320ba5a7cb590372e9c7ab0271e69cc7",
+      "review_sha256": "6588ee97270ba8597b5387d829c0ca3cab01088bdc30cbb45dcafc3409b3113b",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:melatonin": {
+      "schema_version": 1,
+      "item_sha256": "25adc60e0467826debacead30738b64a74bd177e0ed9bedc99ab0ef190710f7a",
+      "review_sha256": "0f8de446a1cf3c2ef4520ee0855a9e57480591a10252af1061086e1e2d0437b2",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:noradrenaline": {
+      "schema_version": 1,
+      "item_sha256": "f4f11badf2a83aefbf60dad483d7faa4cd015259d8921d85a542be93aa7ec736",
+      "review_sha256": "e18d5cb215728da25f993ed6e9afc2abad0e38aa1467ae907cb9111232deb6b8",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:neuroplasticity": {
+      "schema_version": 1,
+      "item_sha256": "99dbf7059b541a3c5eafa5f288d926f61657d9108745a6ca8b0c351432a960c1",
+      "review_sha256": "0d8f3a4604e7e04311e1060200ad855da8552e2535133cc7356b4ab6b8db7d94",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:higher_nervous_activity": {
+      "schema_version": 1,
+      "item_sha256": "7c09895ed9d32ce68d482b1560d8cd323c7a08ab77c25c6a9d00720c633969ac",
+      "review_sha256": "beb5e1607a191bb4b6beee14739ba07614fcfd59f422de827c031dbee2d222d2",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:balance_of_processes": {
+      "schema_version": 1,
+      "item_sha256": "f7b2f0c1d750cd228fa883287b9f51adeba2a9f9d70788d42bf30c9abe13e703",
+      "review_sha256": "a49ea114804626dad38d383149c7bd65ec7ccbefc445d8a92dd0d2be05b5f094",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:type_of_higher_nervous_activity": {
+      "schema_version": 1,
+      "item_sha256": "ca575526c772d00a40a6b8acad91ab5f77b383a64d826d74f588c6165e1256bc",
+      "review_sha256": "3e5aa2a60e7e0437b64336e21ebdb10cdeb451edbfd9c3c3a438a3324439cdc9",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:inhibition_attention": {
+      "schema_version": 1,
+      "item_sha256": "2dd0cf55f7ed89b9c4d64adaa5bde20f673cc90d4b66f4e33c9694bc6cbcf950",
+      "review_sha256": "0ffa59cc169d3b682e2a4f46941e7fdf42766b54f4fd79fcc57390872179553d",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
