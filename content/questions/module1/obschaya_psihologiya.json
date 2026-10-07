@@ -199,7 +199,6 @@
   {
     "id": "m1_gp_014",
     "category": "Общая психология",
-    "source_ref": "module1/general/lecture3",
     "difficulty": "medium",
     "status": "approved",
     "question": "Как корректнее отличить психическое состояние от свойства личности?",
@@ -231,7 +230,6 @@
   {
     "id": "m1_gp_016",
     "category": "Общая психология",
-    "source_ref": "module1/general/lecture3",
     "difficulty": "medium",
     "status": "approved",
     "question": "Что в общей психологии точнее всего относят к характеру?",
@@ -419,7 +417,6 @@
   {
     "id": "m1_gp_028",
     "category": "Общая психология",
-    "source_ref": "module1/general/practice3",
     "difficulty": "medium",
     "status": "approved",
     "question": "Человек последовательно берет на себя ответственность, доводит дела до конца и надежен в совместной работе. Какая группа психологических характеристик описывает это наиболее точно?",
@@ -590,7 +587,6 @@
   {
     "id": "m1_gp_039",
     "category": "Общая психология",
-    "source_ref": "module1/general/lecture3",
     "difficulty": "medium",
     "status": "approved",
     "question": "Какой вывод корректнее при описании «сегодня человек тревожен перед выступлением»?",
@@ -606,7 +602,6 @@
   {
     "id": "m1_gp_040",
     "category": "Общая психология",
-    "source_ref": "module1/general/lecture3",
     "difficulty": "medium",
     "status": "approved",
     "question": "Почему утверждение «ты ленивый» по итогам одной тяжелой недели методологически слабое?",

@@ -2188,10 +2188,10 @@
       ]
     },
     "questions:m1_gp_014": {
-      "item_sha256": "f065b690081e1c292c7de477d6818fcc2a84a441a7722cba06da9e607fd4b92c",
+      "item_sha256": "f122cd4b34a5ae47a56627d9de32339890c1bf2202d5a09505774d03f5cf8676",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2203,15 +2203,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
-      "sources": [
-        {
-          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:3074"
-        }
-      ]
+      "note": "Direct bounded lecture definitions and hypothetical applications reviewed privately; exact current source-free receipt/curriculum binding verified. Earlier glossary support preserved privately; all own and related holds retained.",
+      "sources": []
     },
     "questions:m1_gp_015": {
       "item_sha256": "8ada1b91699b19e1efc57c6758d97f6acf1e52173b9fa40c0f582803da0f45a4",
@@ -2242,10 +2235,10 @@
       ]
     },
     "questions:m1_gp_016": {
-      "item_sha256": "59eba4f2539271e2d7b66ddf98b5fdf197f04d5a0e8b5a42e241c9eafacb42c0",
+      "item_sha256": "3025d4b963c5b10aaab1c735b8cf75d9c3b3ce39dd76ff1cc52ae8b778b90519",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2257,15 +2250,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
-      "sources": [
-        {
-          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:3074"
-        }
-      ]
+      "note": "Direct bounded lecture definitions and hypothetical applications reviewed privately; exact current source-free receipt/curriculum binding verified. Earlier glossary support preserved privately; all own and related holds retained.",
+      "sources": []
     },
     "questions:m1_gp_017": {
       "item_sha256": "b59f3e556775fb0d26b5de18ff91c6319ad8cbed6490cf0aadf9fab50b7fb5d0",
@@ -2569,10 +2555,10 @@
       ]
     },
     "questions:m1_gp_028": {
-      "item_sha256": "8f84fdc0e963d59136a1f14383fce6c8bf54e72822b709d608fd3cd8df964f13",
+      "item_sha256": "74f69e5a3261675a128331b49f23c2957e6aee0b78d4127ab46d9ac8b80cc9d9",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2584,15 +2570,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение характера прямо связывает устойчивые способы поведения с отношением к себе, другим людям и делу. Ситуация является учебной иллюстрацией отношения к делу/людям, не диагностическим выводом по одному эпизоду.",
-      "sources": [
-        {
-          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1198:1411, 1628:1843"
-        }
-      ]
+      "note": "Direct bounded lecture definitions and hypothetical applications reviewed privately; exact current source-free receipt/curriculum binding verified. Earlier glossary support preserved privately; all own and related holds retained.",
+      "sources": []
     },
     "questions:m1_gp_029": {
       "item_sha256": "ef5ffd1f1da792a57673ef5c9ac4612dc225fd3e5d4e0f03827686b5eaad021f",
@@ -2862,10 +2841,10 @@
       ]
     },
     "questions:m1_gp_039": {
-      "item_sha256": "005d9c735458a6ab978db1bf39c6e39ab122293ecf9ab8004885c0fd032fb596",
+      "item_sha256": "b5e981e8414dfb8d9687c1c74486b6079228ffa5e69c1bbd07fda157f0f6f110",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2877,21 +2856,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
-      "sources": [
-        {
-          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:3074"
-        }
-      ]
+      "note": "Direct bounded lecture definitions and hypothetical applications reviewed privately; exact current source-free receipt/curriculum binding verified. Earlier glossary support preserved privately; all own and related holds retained.",
+      "sources": []
     },
     "questions:m1_gp_040": {
-      "item_sha256": "ac553240e0fa4403870b8382595f82d8f1434c708a111827bad9831fac92afa2",
+      "item_sha256": "6245ccc7beaa2b6f0ef117f24e309e3c78acdf1164c3efc1a5c924a9ea3af912",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2903,15 +2875,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Процессы/состояния/устойчивые свойства, темперамент/характер/личность сопоставлены с первичными определениями; вывод по одному случаю не является диагностикой.",
-      "sources": [
-        {
-          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:3074"
-        }
-      ]
+      "note": "Direct bounded lecture definitions and hypothetical applications reviewed privately; exact current source-free receipt/curriculum binding verified. Earlier glossary support preserved privately; all own and related holds retained.",
+      "sources": []
     },
     "questions:m1_gp_041": {
       "item_sha256": "95b8f7e3b88dbf21224f280c45da3cdd7155ed12a5d1e751b8e05365fd012163",
