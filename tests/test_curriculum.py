@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 583
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 587
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
@@ -193,7 +193,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                               'm1_phys_022', 'm1_phys_031', 'm1_phys_038',
                               'm1_phys_053'} | {
                                   f'm1_intro_{n:03}' for n in (
-                                      1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 16,
+                                      1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 15, 16, 17, 18, 20,
                                       19, 22, 24, 26, 27, 30, 34, 36, 37, 41, 46)
                               } | {
                                   f'm1_gp_{n:03}' for n in (

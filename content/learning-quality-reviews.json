@@ -409,10 +409,10 @@
       ]
     },
     "questions:m1_intro_015": {
-      "item_sha256": "8c03273f1a5b163b1c22aaa80e72b5168af58e16dfae6a56293e74b93592ab5a",
+      "item_sha256": "2694de04e74cfac6b909f175db199d833db9b1ad19ee88612952ad44254c6d0b",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -424,15 +424,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Подготовка, совместный запрос/цели, доверительный контакт и итог встречи подтверждаются; outcome не обещает гарантированного изменения.",
-      "sources": [
-        {
-          "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
-          "modified_time": "2026-04-05T22:50:22.529Z",
-          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
-        }
-      ]
+      "note": "Supervision is professional reflective support, not a legal condition or replacement of education. Course preparation paragraph supports its role in sustaining practice; separate BACP primary definition and supervision60/61 support reflection/quality/client safety. No guaranteed outcome, statutory rule or country-specific requirement. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
+      "sources": []
     },
     "questions:m1_intro_016": {
       "item_sha256": "1054cc563210eb7607b04e44e6e7820e33dab60488c186cda0723e4db9a1853f",
@@ -461,10 +454,10 @@
       ]
     },
     "questions:m1_intro_017": {
-      "item_sha256": "dfe1da5f66f085c8cbc5d0ad622ebe1a7ec96211cc1f75a1484a0e6d65964520",
+      "item_sha256": "1a4099bc1e97e95eafd7937411a705ede6aa1ff507e0487877b4078ffdbff8c1",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -476,21 +469,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Подготовка, совместный запрос/цели, доверительный контакт и итог встречи подтверждаются; outcome не обещает гарантированного изменения.",
-      "sources": [
-        {
-          "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
-          "modified_time": "2026-04-05T22:50:22.529Z",
-          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
-        }
-      ]
+      "note": "Course first contact, role clarification, client questions and active listening support a respectful frame. This is not a full consent/crisis/confidentiality protocol; emotional empathy does not require fusion with the client feelings. No universal session script. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
+      "sources": []
     },
     "questions:m1_intro_018": {
-      "item_sha256": "f46cd0fdbc9bdb9b52fd6a5e95cd747a95512a95675dfdc6bf9689087e00c0f2",
+      "item_sha256": "980cfb8e8e198dcaf17bbd28d4620500a5797e8ccec731c9ddee3edf60be3dc3",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -502,15 +488,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Подготовка, совместный запрос/цели, доверительный контакт и итог встречи подтверждаются; outcome не обещает гарантированного изменения.",
-      "sources": [
-        {
-          "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
-          "modified_time": "2026-04-05T22:50:22.529Z",
-          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
-        }
-      ]
+      "note": "Read clarification of expectations/needs and joint goals; exclude the absolute statement that a consultant can never be useful without an explicit request. Individual needs and referral limits retained. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
+      "sources": []
     },
     "questions:m1_intro_019": {
       "item_sha256": "001ef37e109b5f1cee47c18d8999b1eee25727881db8cc0c7b073cf73aeef825",
@@ -539,10 +518,10 @@
       ]
     },
     "questions:m1_intro_020": {
-      "item_sha256": "a8c746b92d4e1dab8999d310cddc9e1082d8eecd2c8dfeaca4691bd34c84d117",
+      "item_sha256": "68de193e34fb944f72a5027c5f5b3234988f20c020db3f43453dedbb78cd11e5",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -554,15 +533,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Подготовка, совместный запрос/цели, доверительный контакт и итог встречи подтверждаются; outcome не обещает гарантированного изменения.",
-      "sources": [
-        {
-          "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
-          "modified_time": "2026-04-05T22:50:22.529Z",
-          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 800:3300, 3600:6500, 7342:8622, 8800:10400, 10400:15176"
-        }
-      ]
+      "note": "Read clients willingness to invest, joint work and client own subsequent steps; explanation now attributes cooperation to this course model. No claim that every durable change requires the same client activity or that technique guarantees outcome. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
+      "sources": []
     },
     "questions:m1_intro_021": {
       "item_sha256": "33ec8e7b565f46e3d0c6a1853e4a48d5c97e22c2511c73d72c41838ee658959c",
@@ -17792,10 +17764,10 @@
       ]
     },
     "questions:case_first_consultation_001": {
-      "item_sha256": "be027c74d060426e0e635e4276a58b7e3a7381faac16fd57468346e217caaf3a",
+      "item_sha256": "5e9e0ac58b584762a72ea7a94ff66bc874b349808d4195d747911d576cd5f24a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -17807,15 +17779,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторская вымышленная ситуация: при неясном запросе и отсутствии описанной срочной опасности первым шагом является прояснение контекста, ожиданий и цели. Совет об увольнении, выбор техники и диагноз третьему лицу не обоснованы этими данными. Все четыре варианта разобраны; при новой информации последовательность может измениться. Учебный принцип первой встречи сопоставлен с указанным фрагментом исходного материала; clinical/SME certification не заявлена. 27.09 изменено только название категории «Кейсы» → «Кейс»; смысл, ответ, варианты и источник сохранены, старые snapshots не переписаны.",
-      "sources": [
-        {
-          "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
-          "modified_time": "2026-04-05T22:50:22.529Z",
-          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
-          "locator": "Тема 5: первая встреча, контакт, прояснение запроса и согласование цели"
-        }
-      ]
+      "note": "Exact lecture presents inquiry into problem/history/context, joint goal formulation and alternatives for colleague conflict. Fictional adult case explicitly lacks immediate danger and has only one-sided initial information; no advice to quit, absent-third-party diagnosis, medical treatment or universal first-session protocol. Case is an authored application, not patient data. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
+      "sources": []
     },
     "glossary:case_conceptualization": {
       "item_sha256": "8c874daf392fedecc150c895cfd889a326bbdbe1a8a40b7617b004bd80c8b080",
