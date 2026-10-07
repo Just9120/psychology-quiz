@@ -5854,10 +5854,10 @@
       ]
     },
     "questions:m1_vnd_015": {
-      "item_sha256": "cf1d8350d7a21798a0366468bb071dbe199ce2ca15a84686bd39d0ca2534eed6",
+      "item_sha256": "5e50418c172fd88d3cf26f41258baf429eb1cb0e9ffa4ada43cda5861a038719",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5869,13 +5869,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational course passage relates innate programs to biological needs/food. Broader direction-of-behavior statement independently supported by OpenStax10.1 opening paragraph30 only, not a fixed brain-centre or exclusively biological theory. Hunger/search-for-food is an illustrative learning example; all own/related holds unchanged.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:8684:8848"
         }
       ]
     },
@@ -5932,10 +5932,10 @@
       ]
     },
     "questions:m1_vnd_018": {
-      "item_sha256": "8213ab6e944960882d2ed39b35fdbe848ad8a9dc51dd9281d6a22d48b9a83656",
+      "item_sha256": "25d25dbbc766c6554d953557bc44266aff365e9b15a1ea95203f8c3f2941b8ab",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5947,21 +5947,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Foundational lecture directly discusses neural contacts as a basis of learning/memory, separately corroborated by bounded OpenStax8.2 neural-communication section53-54. No claim of only one brain centre or exclusive REM transfer. The dedicated memory lecture has unresolved incoming mappings; this review uses another actual course source, retaining all restrictions unchanged.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:8113:8438"
         }
       ]
     },
     "questions:m1_vnd_019": {
-      "item_sha256": "5ab7ffd5efe8ff2ba289fe0b2e87a297d03d185facfa8eaab6e6464a08403ef6",
+      "item_sha256": "6f12d5cb3214fd9c8c0d9d7749b7588d6f53462777d32b2dfc1fbde280bd9b93",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5973,13 +5973,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Direct exact course introduction instead of whole-glossary reference. Course introduction establishes topic/context, not an isolated brain centre or measured physiological mechanism. General emotion/physiological-response association independently supported by reused exact OpenStax10.4 opening review. _028 is a classification of an illustrative choice/self-regulation situation under the named course topics, not causal proof of a cortical model. All13 own and related-source holds unchanged.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1SqvFpDhIdbcZ3UjZNr4s0pGxBQSVHAOAn4UiYG8JQHo",
+          "modified_time": "2026-04-07T09:58:03.450Z",
+          "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91",
+          "locator": "characters:0:315;characters:1038:1140"
         }
       ]
     },
@@ -6144,10 +6144,10 @@
       ]
     },
     "questions:m1_vnd_026": {
-      "item_sha256": "70ec3699a87b7fd24c3b45b9d6bf396f9d1d60ff2c7bfa18f9f2ab4dc6b09cb8",
+      "item_sha256": "8dde4972483346182d44521243560f6f965b8195be096a3a71e0c4c8fd3cf383",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6159,13 +6159,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational course passage relates innate programs to biological needs/food. Broader direction-of-behavior statement independently supported by OpenStax10.1 opening paragraph30 only, not a fixed brain-centre or exclusively biological theory. Hunger/search-for-food is an illustrative learning example; all own/related holds unchanged.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:8684:8848"
         }
       ]
     },
@@ -6196,10 +6196,10 @@
       ]
     },
     "questions:m1_vnd_028": {
-      "item_sha256": "a8b1f4884ed4be49fc10b984e937251d8bc268c211d13cc205af94892d6604a9",
+      "item_sha256": "57ac45fbaae423ddbf60f45766bf3353e10c467c0854275c337d3a642a19b762",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6211,13 +6211,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Direct exact course introduction instead of whole-glossary reference. Course introduction establishes topic/context, not an isolated brain centre or measured physiological mechanism. General emotion/physiological-response association independently supported by reused exact OpenStax10.4 opening review. _028 is a classification of an illustrative choice/self-regulation situation under the named course topics, not causal proof of a cortical model. All13 own and related-source holds unchanged.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1SqvFpDhIdbcZ3UjZNr4s0pGxBQSVHAOAn4UiYG8JQHo",
+          "modified_time": "2026-04-07T09:58:03.450Z",
+          "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91",
+          "locator": "characters:0:315"
         }
       ]
     },
