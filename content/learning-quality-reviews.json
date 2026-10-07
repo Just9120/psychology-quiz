@@ -4219,10 +4219,10 @@
       ]
     },
     "questions:m1_phys_022": {
-      "item_sha256": "8b265c0f4d7cc6f16ee7f8d75336c025494bf0a81359c93e9868a79f107dd0f9",
+      "item_sha256": "1fb43d19c0b623711d2b91d3f9b263eb9a14227660ac85894ade4dfcb393d746",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4234,13 +4234,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Газообмен и сочетание непроизвольной/произвольной регуляции дыхания подтверждены лекцией; опции с полной произвольностью/отсутствием связи отвергаются.",
+      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
           "modified_time": "2026-04-06T14:52:00.573Z",
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+          "locator": "characters:23482:23687"
         }
       ]
     },
@@ -4462,10 +4462,10 @@
       ]
     },
     "questions:m1_phys_031": {
-      "item_sha256": "d98641a92843794242cf32fa1acdf1a1a41ae4ca155cb053ef443eed39ed68dc",
+      "item_sha256": "ad5e1135d2612ac68ffc8de031b7ed60a47d74b82313a686236e9bc77e524021",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4477,13 +4477,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Газообмен и сочетание непроизвольной/произвольной регуляции дыхания подтверждены лекцией; опции с полной произвольностью/отсутствием связи отвергаются.",
+      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
           "modified_time": "2026-04-06T14:52:00.573Z",
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+          "locator": "characters:755:1634"
         }
       ]
     },
@@ -4655,10 +4655,10 @@
       ]
     },
     "questions:m1_phys_038": {
-      "item_sha256": "2ba91fcdf64a08af780f926394041f3834e9d9fd529c1a2741e75f3e9da75a19",
+      "item_sha256": "2545b7d000bac8cf2d874fc72cb638109ac780ce05e1e00f60207b48ec745a67",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4670,13 +4670,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Газообмен и сочетание непроизвольной/произвольной регуляции дыхания подтверждены лекцией; опции с полной произвольностью/отсутствием связи отвергаются.",
+      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
           "modified_time": "2026-04-06T14:52:00.573Z",
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+          "locator": "characters:23482:23687"
         }
       ]
     },
@@ -5071,10 +5071,10 @@
       ]
     },
     "questions:m1_phys_053": {
-      "item_sha256": "d62e91071dc5efdf79ec136f5c7d4fc9f8f4282ea20334546ae3a42c00bbdcc1",
+      "item_sha256": "f0e5c65ce65e58ea2a44ece75bb715f10a1d3a595344f1990e768a24e7619cfd",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5086,13 +5086,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Газообмен и сочетание непроизвольной/произвольной регуляции дыхания подтверждены лекцией; опции с полной произвольностью/отсутствием связи отвергаются.",
+      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
           "modified_time": "2026-04-06T14:52:00.573Z",
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 755:1634, 15569:16249, 22560:23240"
+          "locator": "characters:23482:23687"
         }
       ]
     },
