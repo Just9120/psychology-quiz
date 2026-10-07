@@ -9743,10 +9743,10 @@
       ]
     },
     "questions:m2_exp_010": {
-      "item_sha256": "9a454fbef3ce41f626cd29ab4e630fb15fb07e657c2ebe47ce9dbcf5f32f7dd5",
+      "item_sha256": "41ea06d3eb4f86ac0e2f6ddd631d36457c3014f6a77e4c92a4cc67922a4d55b3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9758,21 +9758,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент прямо определяет идеографический подход через уникальный случай, контекст и переживания; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
+      "note": "Exact individually reviewed course fragments: idiographic. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Source teaching scope; no unrelated held claim adopted.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26469:26710"
+          "locator": "characters:26466:26686"
         }
       ]
     },
     "questions:m2_exp_011": {
-      "item_sha256": "cfbd6c546b951f532b63e1008169ae3f22d134b403b1f9c415bc126c2b4ee947",
+      "item_sha256": "0567afafb71bd13a6407ec7dbd07dfdc9e5660b3a2f4486119c5bdd206a1240e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9784,21 +9784,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Подходы не образуют жёсткой дихотомии: лекция прямо допускает качественное построение модели с последующей количественной проверкой и обратный порядок.",
+      "note": "Exact individually reviewed course fragments: mixed. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26600:27150"
+          "locator": "characters:26779:27098"
         }
       ]
     },
     "questions:m2_exp_012": {
-      "item_sha256": "58793a62db0d5cac305b1118d24211461627333fafbac865615fb6a2f9a0cb7c",
+      "item_sha256": "b60231be0502ea0a81c0b4765b8a0b4a3a4fec979de888e3c3fdcd13eb50d0ae",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9810,13 +9810,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция прямо задаёт качественное движение от частного к общему и количественное применение общей закономерности к единичному случаю; вариант о движении от гипотез к проверке заменён.",
+      "note": "Exact individually reviewed course fragments: mixed. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26930:27500"
+          "locator": "characters:26779:27098"
         }
       ]
     },
@@ -9925,10 +9925,10 @@
       ]
     },
     "questions:m2_exp_017": {
-      "item_sha256": "173bcbc675401e5e77d661c5d98390daf35de6169716ec5bee69e4f293f3d757",
+      "item_sha256": "0e6ae3bf8d036121427b65cfc58df00c9d5035dd786be441fbe55cd93893c68b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9940,13 +9940,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "Exact individually reviewed course fragments: intro. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Source teaching scope; no unrelated held claim adopted.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "characters:300:510"
         }
       ]
     },
@@ -10111,10 +10111,10 @@
       ]
     },
     "questions:m2_exp_024": {
-      "item_sha256": "8dea1268f7c7cd61743f47ed8e099bc1f62558ff1da5cd36a5082b7574c33473",
+      "item_sha256": "e3ee7700f34d9084e4a74fc30aed4aa3a4a7e9b2489fc31e3aacf735925716fd",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10126,13 +10126,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "Exact individually reviewed course fragments: bacon. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Source teaching scope; no unrelated held claim adopted.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "characters:14091:14948"
         }
       ]
     },
@@ -10778,10 +10778,10 @@
       ]
     },
     "questions:m2_exp_049": {
-      "item_sha256": "472fe9ea44f8d19d788b72b4f8d27fb062c64d714f0831df41cb327a8c443996",
+      "item_sha256": "645015e6e81b3c8a4288b88afe919b4ab6b72713e151e40cc116699f47001268",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10793,21 +10793,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция описывает экспериментально организованную интроспекцию Вундта в контролируемых условиях.",
+      "note": "Exact individually reviewed course fragments: wundt. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1250:1700"
+          "locator": "characters:1378:1671"
         }
       ]
     },
     "questions:m2_exp_050": {
-      "item_sha256": "6c22063738a43ada5cda779474e30c68ef0fd1a07e7d8cc780b7324df421a7a9",
+      "item_sha256": "31c39037c2de29a4181500386c52fa4ef5803524cdddd70d31303515936993f6",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10819,21 +10819,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. В лекции указан интерес гештальтпсихологов к законам организации восприятия, мышления и решения задач. Прежний пример ошибки фигуры на фоне не был изложен и заменён прямым вопросом по этому фрагменту.",
+      "note": "Exact individually reviewed course fragments: gestalt. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1660:2240"
+          "locator": "characters:1671:2192"
         }
       ]
     },
     "questions:m2_exp_051": {
-      "item_sha256": "8a687e7fe01a8f049bdc1f115816c1a5a65738d7a0ed7d19326efc8a6fc4c806",
+      "item_sha256": "e49a83dce0750617921bc56ad406260fcc6b68947369ebce91cf82d051e7917a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10845,21 +10845,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент сопоставляет структуралистское разложение на элементы с гештальт-подходом и прямо формулирует целостность как несводимую к сумме частей.",
+      "note": "Exact individually reviewed course fragments: gestalt. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1674:2260"
+          "locator": "characters:1671:2192"
         }
       ]
     },
     "questions:m2_exp_052": {
-      "item_sha256": "f1c7c12936b70da386807549539bdf07630e7071459d30979986cadc2d86ad17",
+      "item_sha256": "d75fe4f84b6d9d3c4c5f3ac52e4bae4e26fdb9450803efb73f51d3cda3422411",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10871,21 +10871,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция прямо определяет бихевиористский предмет через наблюдаемое поведение, связи стимулов и реакций и закономерности научения. Не подтверждённое этим фрагментом требование контроля условий убрано.",
+      "note": "Exact individually reviewed course fragments: behavior. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2780:3330"
+          "locator": "characters:2785:3038"
         }
       ]
     },
     "questions:m2_exp_053": {
-      "item_sha256": "91ae5880e7a5306efe221f095ac44ca283e5d12d808d52a52d614b33d26820f3",
+      "item_sha256": "138f865e42475c1c82cf3ed8f355583dcb266541a0a0d8c78ad6d3f24fa7e19d",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10897,21 +10897,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция описывает клетки-головоломки Торндайка, награду, ускорение успешного действия и вывод о научении пробами и ошибками. Упоминание закона эффекта удалено как не изложенное в этом фрагменте.",
+      "note": "Exact individually reviewed course fragments: thorndike. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3270:4200"
+          "locator": "characters:3312:4166"
         }
       ]
     },
     "questions:m2_exp_054": {
-      "item_sha256": "7ce1f07ff7c80f18280cad3c573a40bfdfcd51d946f213ba223b0599b6ede387",
+      "item_sha256": "e169ee1bb1130863331c7b4678f8a4a5767ff6e989d7bd643de0793a4547f1d6",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10923,21 +10923,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагменты противопоставляют наблюдаемые стимулы/реакции бихевиоризма бессознательным конфликтам и глубинным мотивационным механизмам психоанализа; формулировка ответа согласована с ними.",
+      "note": "Exact individually reviewed course fragments: behavior,psychoanalysis. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2790:3250, 4171:4600"
+          "locator": "characters:2785:3038;characters:4166:5069"
         }
       ]
     },
     "questions:m2_exp_055": {
-      "item_sha256": "a3593fce6ae2dc82e10bd043951ec072f57e5e1161be5bc9760ba117e4c5b76f",
+      "item_sha256": "d1e9f50c1f05247571cf1aedb82f447e76f2ab6c2196b3b60a5a61c8c5f13caf",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10949,21 +10949,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ согласован с прочитанными определениями предмета, научной проверки, парадигм, переменных и исследовательской позиции. Историко-философские модели представлены как позиции курса, не единственно возможная классификация науки.",
+      "note": "Exact individually reviewed course fragments: bacon. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Bounded supplemental primary record attached.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "locator": "characters:14091:14948"
         }
       ]
     },
     "questions:m2_exp_056": {
-      "item_sha256": "503a17e4018a914c9e725c6b702b39561682acdae0da98a814d1b0f5016ff453",
+      "item_sha256": "c1a6d158d3ccb0ba11f2374980b84d52397952c737ac4885b7f4fa7c7f9b15c1",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10975,13 +10975,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция перечисляет факты, индукцию, верификацию и ценностную нейтральность позитивистского идеала.",
+      "note": "Exact individually reviewed course fragments: positivism. Two overbroad issue scopes refined after independent positive review; actual unsupported assertions remain held. Source teaching scope; no unrelated held claim adopted.",
       "sources": [
         {
           "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16050:16580"
+          "locator": "characters:16041:16453"
         }
       ]
     },
