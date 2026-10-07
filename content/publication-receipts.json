@@ -5188,7 +5188,7 @@
     "questions:m1_phys_008": {
       "schema_version": 1,
       "item_sha256": "132004116977dca3ad424eda1854683dd1e9b862aef9a3323cf2b3e478bccc9d",
-      "review_sha256": "12b2936c296e8cf4185883563a09656d18a1919a4fafc5e3eae1d9a945c134b7",
+      "review_sha256": "723eaa0c3afd0869d74ababa80b04d25e2a8a3ba199891af3dde866bbcb0d183",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -5206,7 +5206,7 @@
     "questions:m1_phys_012": {
       "schema_version": 1,
       "item_sha256": "13072b6a449b32b7f4470b4b69b175cd6ba505be2afd53711fa6b2ac2419375e",
-      "review_sha256": "bb70009917a8cee20a60f6f5fcef8f6514c3f11c2b540c64b220b197439fa931",
+      "review_sha256": "c9693cc41a0d50633f05d6c0dff8d75482615e30bef66071e70a9a5b000483dc",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -5224,7 +5224,7 @@
     "questions:m1_phys_016": {
       "schema_version": 1,
       "item_sha256": "0b90ce55002e0c5e2cb69e8a9013589fcc205f48c8d23f5bbda0c464f2e753ed",
-      "review_sha256": "5392f9429f6063863f48336930ca8aff03ff9866e52e52d4e6a756c9ff71cd88",
+      "review_sha256": "27800611655f9dad4de42a10784ef89d9abb9f5944416112b28db7b40fd5cdc7",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -5242,7 +5242,7 @@
     "questions:m1_phys_017": {
       "schema_version": 1,
       "item_sha256": "7dd1009ed94f9e64c7b0227fc1008998a18f6e06f9b8af4a24a183a9b28382d0",
-      "review_sha256": "58a85f349d9edfa4217bb92e5d344207907ad391d66c5c35c5390cf075db0614",
+      "review_sha256": "1f123b9f05f175aed031b0647922ee7e8b41c57285559c30337df85ae7476129",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
