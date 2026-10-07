@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-06T17:32:24.774860+00:00",
+  "captured_at": "2026-10-07T22:35:58.029691+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -17,7 +17,7 @@
     "source_metadata": {
       "current": 78
     },
-    "unmapped_published_questions": 83,
+    "unmapped_published_questions": 58,
     "lessons": [
       {
         "id": "t_760b622ba9f6",
@@ -148,7 +148,7 @@
       {
         "id": "t_2be8cec234c0",
         "kinds": {
-          "theory": 0,
+          "theory": 5,
           "glossary": 0,
           "case": 0
         },
@@ -176,7 +176,7 @@
       {
         "id": "t_2476fabb75f8",
         "kinds": {
-          "theory": 12,
+          "theory": 15,
           "glossary": 0,
           "case": 0
         },
@@ -190,7 +190,7 @@
       {
         "id": "t_32c45a18e1bf",
         "kinds": {
-          "theory": 1,
+          "theory": 2,
           "glossary": 0,
           "case": 0
         },
@@ -204,7 +204,7 @@
       {
         "id": "t_e8545fea4531",
         "kinds": {
-          "theory": 1,
+          "theory": 2,
           "glossary": 0,
           "case": 0
         },
@@ -246,7 +246,7 @@
       {
         "id": "t_3ec476ff48e7",
         "kinds": {
-          "theory": 3,
+          "theory": 4,
           "glossary": 0,
           "case": 0
         },
@@ -260,7 +260,7 @@
       {
         "id": "t_033b84e9a10e",
         "kinds": {
-          "theory": 2,
+          "theory": 4,
           "glossary": 0,
           "case": 0
         },
@@ -274,7 +274,7 @@
       {
         "id": "t_e9dd359706e6",
         "kinds": {
-          "theory": 24,
+          "theory": 37,
           "glossary": 0,
           "case": 0
         },
@@ -288,7 +288,7 @@
       {
         "id": "t_27f468335f64",
         "kinds": {
-          "theory": 0,
+          "theory": 1,
           "glossary": 0,
           "case": 0
         },
@@ -302,7 +302,7 @@
       {
         "id": "t_17a20a4fb08e",
         "kinds": {
-          "theory": 1,
+          "theory": 3,
           "glossary": 0,
           "case": 0
         },

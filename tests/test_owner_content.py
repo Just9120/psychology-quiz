@@ -121,6 +121,14 @@ def test_lesson_graph_requires_exact_question_edition_and_preserves_known_holds(
     changed = build(current, processed, "2026-01-02T00:00:00Z", registry=registry, curriculum=curriculum, published_items=[{**item, "text": "Changed edition"}])
     assert changed["coverage"]["lessons"][0]["kinds"]["case"] == 0
     assert changed["coverage"]["unmapped_published_questions"] == 1
+    # Exact private editions can refer to a supplementary navigation topic.
+    # Without a reviewed source lesson it stays unmapped in this graph.
+    supplementary = json.loads(json.dumps(curriculum))
+    supplementary["editions"]["b" * 64]["topic_id"] = "t_bbbbbbbbbbbb"
+    unmapped = build(current, processed, "2026-01-02T00:00:00Z",
+                     registry=registry, curriculum=supplementary, published_items=[item])
+    assert unmapped["coverage"]["unmapped_published_questions"] == 1
+    assert unmapped["coverage"]["lessons"][0]["kinds"]["case"] == 0
     monkeypatch.setattr(owner_content, "load_catalog", lambda: curriculum)
     result["coverage"]["lessons"][0]["title"] = "private-source"
     result["coverage"]["lessons"][0]["source_ref"] = "private-source"
