@@ -5,7 +5,7 @@
     "vvedenie_v_professiyu": {
       "scope": "57 questions, all four options/key/explanation read; 12 glossary definitions/short definitions/links/examples read. Direct Drive fragments reviewed below; no blanket source certification or SME/legal review.",
       "duplicates": "Точных повторов stems нет; пары 008/019/022/026, 013/014/027/037 и 036/041 проверяют тот же принцип в разных ситуациях. Это смысловое пересечение, не автоматически ошибочный duplicate; сохраняются IDs.",
-      "glossary": "12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом."
+      "glossary": "12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом. 07.10.2026: 7 current карточек этой дисциплины получили самостоятельные примеры с exact fragment review/private receipt; это не одобрение оставшихся замечаний или всей редакции источника."
     },
     "obschaya_psihologiya": {
       "scope": "56 questions including all options/key/explanation and 12 glossary definitions read. Selected direct lecture/glossary/practice fragments compared. Unread full lecture content is not claimed as fully certified.",
@@ -15,7 +15,7 @@
     "fiziologiya_cheloveka": {
       "scope": "All 55 stems/options/keys/explanations and12 glossary definitions read; source glossary and selected seven lecture fragments checked. This is source correspondence, not clinical/SME certification.",
       "duplicates": "Точных stems нет. Повторяются пары/серии 022/038/053,025/044,027/039/054,028/034/043/048 и011/042/045; серия по дыханию повторяет один механизм разными вопросами. Смысловое перекрытие фиксируется, IDs автоматически не объединяются.",
-      "glossary": "12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера."
+      "glossary": "12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. 07.10.2026: 5 current карточек этой дисциплины получили самостоятельные примеры с exact fragment review/private receipt; это не одобрение оставшихся замечаний или всей редакции источника."
     },
     "fiziologiya_vnd": {
       "scope": "57 questions with options/key/explanation and12 glossary definitions reviewed; direct glossary and targeted primary lecture fragments. Historical Pavlovian models are not modern individual clinical diagnostics.",
@@ -25,7 +25,7 @@
     "psihofiziologiya": {
       "scope": "71 вопрос (включая варианты, ключи и объяснения) и 12 терминов сопоставлены с первичными глоссариями и выбранными фрагментами лекций. Интерпретации индивидуальных состояний не являются диагностическими правилами.",
       "duplicates": "Точных stems нет. 041/052 повторяют неспецифичность пульса, 047/053 — функциональное различие мобилизации и дезорганизации, 011/031 — приоритет ресурсов, 009/054 — активное торможение. Это смысловые повторы с вариациями, а не основание автоматически удалять IDs.",
-      "glossary": "Проверены 12 определений. 11 examples отсылают к вопросу вместо самостоятельного примера; question refs производны. Определение dopamine как системы исправлено: нейромедиатор, самостоятельный пример и прямой primary source; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики."
+      "glossary": "Проверены 12 определений. 11 examples отсылают к вопросу вместо самостоятельного примера; question refs производны. Определение dopamine как системы исправлено: нейромедиатор, самостоятельный пример и прямой primary source; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики. 07.10.2026: 1 current карточек этой дисциплины получили самостоятельные примеры с exact fragment review/private receipt; это не одобрение оставшихся замечаний или всей редакции источника."
     },
     "osnovy_eksperimentalnoy_psihologii": {
       "scope": "118 вопросов со всеми вариантами/ключами/объяснениями и 10 терминов рассмотрены. Прочитаны выбранные фрагменты двух лекций и практик 7–9; соответствие учебному курсу не означает доказанность любого его методологического обобщения.",
@@ -40,7 +40,7 @@
     "psychological_consulting": {
       "scope": "108 вопросов со всеми вариантами, ключами и объяснениями и 12 терминов рассмотрены. Прочитан первичный глоссарий и указанные фрагменты уроков 1–7. Кейс-ответы не являются индивидуальными клиническими назначениями; точная сверка практик 17–21 ограничена.",
       "duplicates": "Точных stems нет. Много смысловых повторов:004/030/093;005/011/024/040/064/094/096;008/027/068/086/089;009/031/032/045;017/053/061;025/026/034/035/051;036/085;044/052;054/078/098;055/056/065/066/095;074/107. Кейсы иногда добавляют контекст, но разнообразие банка ниже числа IDs. Автоматическое удаление не выполняется.",
-      "glossary": "Исторический review20.09.2026: 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность. 07.10.2026: complaint, client_request, reflective_listening, therapeutic_contract, rapport и reflection_of_feelings получили самостоятельные вымышленные примеры; отдельные фрагменты проверены, private dossiers/receipts сохранены. Остальные старые замечания не объявлены исправленными."
+      "glossary": "Исторический review20.09.2026: 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность. 07.10.2026: complaint, client_request, reflective_listening, therapeutic_contract, rapport и reflection_of_feelings получили самостоятельные вымышленные примеры; отдельные фрагменты проверены, private dossiers/receipts сохранены. Остальные старые замечания не объявлены исправленными. 07.10.2026: 8 current карточек этой дисциплины получили самостоятельные примеры с exact fragment review/private receipt; это не одобрение оставшихся замечаний или всей редакции источника."
     }
   },
   "items": {
@@ -1631,10 +1631,10 @@
       ]
     },
     "glossary:confidentiality": {
-      "item_sha256": "22f92c4bbfe896e67ac63697c78f15ed654fd44f0672f1a49583ffd7dbad7c65",
+      "item_sha256": "36b2e0d1a8383e9e3fad71c6d2b5ac383f5020146933bfbed198ceb2e461e229",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1645,25 +1645,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
-          "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
-          "modified_time": "2026-04-05T22:48:11.869Z",
-          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:8437:8731"
         }
       ]
     },
     "glossary:professional_boundary": {
-      "item_sha256": "69048efa4bfefe0c5af6820731640cad4fabbc077da932fe98a9231b3e3ccc64",
+      "item_sha256": "5757c6821def57324f16e68ceb7ca9ea1ef975b04952275dac9d337983910d59",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1674,25 +1671,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
-          "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
-          "modified_time": "2026-04-05T22:48:11.869Z",
-          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:2838:3020"
         }
       ]
     },
     "glossary:informed_consent": {
-      "item_sha256": "2c43a57fd4f4c59e43f5f26c04c678c9a7aeecc37d0ada6c13672fbfd111eeac",
+      "item_sha256": "37104547b1f5f3ea95005dd3f666af3f3215fd17e39af2c6dc33634afb950948",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1703,25 +1697,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
-          "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
-          "modified_time": "2026-04-05T22:48:11.869Z",
-          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:2214:2385"
         }
       ]
     },
     "glossary:professional_position": {
-      "item_sha256": "361b1f3fb67cacb33013ede742f7d2f2d600cd35a2839819365bc68dbad311d3",
+      "item_sha256": "f942b7cdd6dd2579a9d132e0b129e0f60db452787dd8927656989788bfee8790",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1732,25 +1723,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
-          "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
-          "modified_time": "2026-04-05T22:13:17.690Z",
-          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:8437:8731"
         }
       ]
     },
     "glossary:client_autonomy": {
-      "item_sha256": "5b41acaf081f745ad16cd4eb20d4b43729d71f8a3cf1d405fa942f2ae5de814a",
+      "item_sha256": "6ee682f708be970ff70e9e76dc3bb7ffc8a3bfa1bebebae31e66df43a928b2e1",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1761,17 +1749,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
-          "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
-          "modified_time": "2026-04-05T22:24:03.847Z",
-          "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:8437:8731"
         }
       ]
     },
@@ -1805,10 +1790,10 @@
       ]
     },
     "glossary:empathy": {
-      "item_sha256": "fc7850726f7c91bde21e0d352ebccb8249eb63fb94bca7beb9d5dac5295a8527",
+      "item_sha256": "85ca7a03648b6ec75aec8d42df68ea6a9820590759067a82576b48836a81bb13",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1819,25 +1804,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
-          "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
-          "modified_time": "2026-04-05T22:13:17.690Z",
-          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
+          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:8732:8926"
         }
       ]
     },
     "glossary:active_listening": {
-      "item_sha256": "2f380b255232cfddcfce115e62d5d1da0880e0d3aceb8839b847f61497bfaf5c",
+      "item_sha256": "e507da3485a6717641828983c727025b701100b1c1de3f2943aeafb905b81bee",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1848,17 +1830,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
-          "source_id": "14lnAmWm0bN-XHtiDAg4_qFQ5-cka4HUZ6K3kxKWSGUc",
-          "modified_time": "2026-04-05T22:23:50.149Z",
-          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1000:2850, 3000:4270, 5000:7000"
+          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:0:254"
         }
       ]
     },
@@ -5255,10 +5234,10 @@
       ]
     },
     "glossary:dendrites": {
-      "item_sha256": "562c17f6c741c8b80ee6c16ef02f5b8a5b0ffa257667f0bf74d99ac54dd87fe6",
+      "item_sha256": "778c6d41d8db2c5d4cac8398cec9444478cb1b0a07019ecfb222312cae34892b",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -5269,25 +5248,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "issues": [],
+      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:4970:5390"
         }
       ]
     },
     "glossary:axon": {
-      "item_sha256": "f70c9355414df3c471bde56201d2afa213c0d52fad34f895dd502625539a1651",
+      "item_sha256": "9caf468e764cd5945328087da9cdae26d1208e3b974dabd20fece05d141de86a",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -5298,17 +5274,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "issues": [],
+      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:4970:5390"
         }
       ]
     },
@@ -5461,10 +5434,10 @@
       ]
     },
     "glossary:central_nervous_system": {
-      "item_sha256": "1de2e74a8409753da98b38a09f27b5bb77e670ef02ac5eebbccf41a7876373e9",
+      "item_sha256": "03dc3726ee2a1cc3c2d48d0e9bb9fc3a94b95a917d94b4c866864c08b46f3e04",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -5475,25 +5448,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "issues": [],
+      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:32000:32480"
         }
       ]
     },
     "glossary:peripheral_nervous_system": {
-      "item_sha256": "d9d677e4a1bfe1a6ef0dfce157fddca3b327cd19c653af438554fbb03660ee8c",
+      "item_sha256": "023d35f6451ecfec8c0b4aae2cf97024e3189bfd28c8ac2694d883574dd92dd8",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -5504,17 +5474,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "issues": [],
+      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4970:5650, 9022:9702, 15079:15805, 24600:25700, 31350:33269, 60100:61500, 62583:63350"
+          "locator": "characters:32000:32480"
         }
       ]
     },
@@ -5549,10 +5516,10 @@
       ]
     },
     "glossary:reflex": {
-      "item_sha256": "20d4d5f8d22318410dab59a41e4e6784e92485f3f90f8cd3f9cfebe9f48f86c8",
+      "item_sha256": "e490df123e9bb0ef2c61f619c785b25c109d64e6bcfbcdb93dd4c3837941660b",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -5563,17 +5530,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера.",
+      "issues": [],
+      "note": "Определение реакции на раздражитель сверено с точной строкой учебного словаря. Авторский пример коленного рефлекса независимо проверен по OpenStax Anatomy and Physiology2e §14.3, раздел Stretch reflex. Это иллюстрация принципа, не инструкция обследования и не заключение о здоровье по наличию или отсутствию реакции; ID и история сохраняются.",
       "sources": [
         {
           "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:446:703"
         }
       ]
     },
@@ -9339,10 +9303,10 @@
       ]
     },
     "glossary:psyf_neuron": {
-      "item_sha256": "97b4cbbb0b08517a77055c71064a0077b62d4ef781b3ede53b742562a6d4aa94",
+      "item_sha256": "0a5466c9a0186e30362cb487d9cc03815a1e3085be135a6dbe1966440787408a",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9353,17 +9317,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Определение нейрона и пример учебной схемы сопоставлены с первой отдельной строкой первичного словаря и независимо с OpenStax Anatomy and Physiology2e §12.2 (parts of a neuron). Авторский пример не является цитатой, диагностическим признаком или рекомендацией лечения; не утверждает одинаковую морфологию всех клеток. ID и история сохранены.",
       "sources": [
         {
-          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "source_id": "19NNL-Q127oEPSVaDomNoHJ0RjgJ_XMUt15Nj10YhH90",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "locator": "characters:20:152"
         }
       ]
     },
@@ -17959,10 +17920,10 @@
       ]
     },
     "glossary:open_question": {
-      "item_sha256": "65b713a24b5957c34abf59c1ec87e2470f838633f42c0748a844403d95ac8a62",
+      "item_sha256": "afe785c48148ff34ba0d09a2b756d9355c4ac8f4062e025db43e434f61bb69d6",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -17973,17 +17934,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 25 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4131:4284"
+          "locator": "characters:4107:4260"
         }
       ]
     },
@@ -18121,10 +18079,10 @@
       ]
     },
     "glossary:case_conceptualization": {
-      "item_sha256": "1c268cd75596fde7e0167dc4dea70e1e2e27646e44d0f085572605087761de53",
+      "item_sha256": "8c874daf392fedecc150c895cfd889a326bbdbe1a8a40b7617b004bd80c8b080",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -18135,17 +18093,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 21 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3333:3538"
+          "locator": "characters:3313:3518"
         }
       ]
     }
