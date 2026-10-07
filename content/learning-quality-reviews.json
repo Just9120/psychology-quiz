@@ -5483,10 +5483,10 @@
       ]
     },
     "questions:m1_vnd_001": {
-      "item_sha256": "a11997737fefd049d056e0f8cf90f8c99dc51412c0b70eef5172ad51fa3f64bb",
+      "item_sha256": "26fbb8aac7f04574d1e115e049941bac32fbbdaa597f53a5d7574d55ec00d2bf",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5498,13 +5498,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:4600:5050"
         }
       ]
     },
@@ -5539,10 +5539,10 @@
       }
     },
     "questions:m1_vnd_003": {
-      "item_sha256": "9a60f37662c71650fa859ef5c85fa65cd0f46e2abc3f15443cb5428dd709b201",
+      "item_sha256": "911596cf0bf19992e8ecd6091f2c0d246dec85b07dcae404eaf2c93b51685033",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5554,21 +5554,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:4600:5050;characters:8380:8660"
         }
       ]
     },
     "questions:m1_vnd_004": {
-      "item_sha256": "932e4769f74e5f19a42094ea67a4a6016a27b222c1afb1743ae2e88814a83fad",
+      "item_sha256": "a8f32b685a388f9ded14190d12b28584dfc8fd7833241fd4d14aa1c397acb6d5",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5580,13 +5580,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:6900:7440;characters:8380:8660"
         }
       ]
     },
@@ -5672,10 +5672,10 @@
       ]
     },
     "questions:m1_vnd_008": {
-      "item_sha256": "925e6cab14e8b54eca6f4d6d084e940205e92f16f8c09c59ec1118fc145d7ef1",
+      "item_sha256": "65bea25702f9b4d0a9719f7ba8281556e35150e79d1b874487845b87df5377cb",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5687,13 +5687,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:14042:14127"
         }
       ]
     },
@@ -5750,10 +5750,10 @@
       ]
     },
     "questions:m1_vnd_011": {
-      "item_sha256": "2676b5d5695e4d6226d454afb1e0667bf0b8ea7196ef4e61f4e8f425a7f95204",
+      "item_sha256": "da15fa49b0f3a073e0d7523faeb7208cff0ba4e53609c0e8c02dc755872dc6f2",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5765,13 +5765,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:22518:22641;characters:22944:23036;characters:23828:24068"
         }
       ]
     },
@@ -6304,10 +6304,10 @@
       ]
     },
     "questions:m1_vnd_032": {
-      "item_sha256": "5bc70bc5c9a0ff1f51f08ef6593cc8fb60150e1ea559149c911547458171ef8b",
+      "item_sha256": "0ffa718dfdf71ab40fea17c461458dac83248f730457f0c9d5ea660629f12feb",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6319,21 +6319,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:26343:26700"
         }
       ]
     },
     "questions:m1_vnd_033": {
-      "item_sha256": "b2b5c50ef009704c558beeb3e8204f4fca680a46f9db425609246c96f2004ca1",
+      "item_sha256": "e9dff9976c20ad53c356c6e8b884dd233ca2f25ccea0017cb19697186e85e7b4",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6345,13 +6345,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:26343:26700"
         }
       ]
     },
@@ -6599,10 +6599,10 @@
       ]
     },
     "questions:m1_vnd_043": {
-      "item_sha256": "78467234c0f4653be066f922d6fa294558ad58ec2db01f1540d4b83277f1b976",
+      "item_sha256": "6d8bc578ccf21a94660a52b66e75cd01f05a6957e293a65b4109524e13e11636",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6614,13 +6614,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:25220:25980"
         }
       ]
     },
@@ -6783,10 +6783,10 @@
       ]
     },
     "questions:m1_vnd_050": {
-      "item_sha256": "f639077d13c884f597c079288840b6c82633cc60d000183f4939e1dfadb4f4ca",
+      "item_sha256": "c13a2186e1383492cbb1e3100f57da0c8d2cd24b9b29e82945bae4534f27307d",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6798,13 +6798,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:26343:26700"
         }
       ]
     },
@@ -6950,10 +6950,10 @@
       ]
     },
     "questions:m1_vnd_056": {
-      "item_sha256": "f1ebf90d13143dc79d031bb302d8b2c4f1a8f9fe654f2e14fcd36967e31104da",
+      "item_sha256": "b50262c161bf72d3c5d44c0facc1a902fd7cc969a14ff17a5d03e4701ebea217",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6965,13 +6965,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:26343:26800"
         }
       ]
     },
