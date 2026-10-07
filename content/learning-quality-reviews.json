@@ -10,7 +10,7 @@
     "obschaya_psihologiya": {
       "scope": "56 questions including all options/key/explanation and 12 glossary definitions read. Selected direct lecture/glossary/practice fragments compared. Unread full lecture content is not claimed as fully certified.",
       "duplicates": "Точных stems нет;007/021 существенно повторяют одну ситуацию.009/024/036,013/026/039/046/054 и032/045/050 — определение/разные кейсы или одно умение в разных формулировках; сохраняются IDs, разнообразие требуется рассматривать по learning objective, не только текстовому similarity.",
-      "glossary": "12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал."
+      "glossary": "Исторический review20.09.2026: 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал. 07.10.2026: cognitive_processes получил самостоятельный авторский пример по отдельному первичному фрагменту и private receipt; замечание example_is_question_reference для этой редакции устранено."
     },
     "fiziologiya_cheloveka": {
       "scope": "All 55 stems/options/keys/explanations and12 glossary definitions read; source glossary and selected seven lecture fragments checked. This is source correspondence, not clinical/SME certification.",
@@ -40,7 +40,7 @@
     "psychological_consulting": {
       "scope": "108 вопросов со всеми вариантами, ключами и объяснениями и 12 терминов рассмотрены. Прочитан первичный глоссарий и указанные фрагменты уроков 1–7. Кейс-ответы не являются индивидуальными клиническими назначениями; точная сверка практик 17–21 ограничена.",
       "duplicates": "Точных stems нет. Много смысловых повторов:004/030/093;005/011/024/040/064/094/096;008/027/068/086/089;009/031/032/045;017/053/061;025/026/034/035/051;036/085;044/052;054/078/098;055/056/065/066/095;074/107. Кейсы иногда добавляют контекст, но разнообразие банка ниже числа IDs. Автоматическое удаление не выполняется.",
-      "glossary": "12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность."
+      "glossary": "Исторический review20.09.2026: 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность. 07.10.2026: complaint, client_request, reflective_listening, therapeutic_contract, rapport и reflection_of_feelings получили самостоятельные вымышленные примеры; отдельные фрагменты проверены, private dossiers/receipts сохранены. Остальные старые замечания не объявлены исправленными."
     }
   },
   "items": {
@@ -3707,10 +3707,10 @@
       ]
     },
     "glossary:cognitive_processes": {
-      "item_sha256": "72cc34fd0d6f9cc390fa3ebff6e0eb9b8c4a05c9ef1d2983f3a688cf5a0e9627",
+      "item_sha256": "afe8b7f412985279fafd72ceffef2742a9e8aaca87551b94284966ff368fd1ee",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3721,17 +3721,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "В учебном словаре процессы отделены от состояний и свойств; названы ощущение, восприятие, память и мышление. Авторский вымышленный пример иллюстрирует эти четыре процесса и не является цитатой, диагностикой или новым научным утверждением. Определение не представляет перечень как исчерпывающий. Термин сохраняет ID; совпадающего самостоятельного примера нет.",
       "sources": [
         {
-          "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 156:1461, 4900:5600, 6291:7041, 9250:9750, 10727:11598, 16788:17538, 20674:21564, 23685:24575"
+          "source_id": "1e4IXbRN3Lv_ZT00O6O5iJMa-wl88aJ0T8SoIRi6fUTI",
+          "modified_time": "2026-03-31T05:56:42.059Z",
+          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
+          "locator": "characters:774:1411"
         }
       ]
     },
@@ -17884,10 +17881,10 @@
       ]
     },
     "glossary:complaint": {
-      "item_sha256": "64da4595016dea724b95d57d75afa65aeedc6a91de58f95016e661750825e0cb",
+      "item_sha256": "daf45062faeae6f1550e622340640827666ff6889d00b543fc8800c85ae5422e",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -17898,25 +17895,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 8 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1227:1368"
+          "locator": "characters:1220:1361"
         }
       ]
     },
     "glossary:client_request": {
-      "item_sha256": "31fc91093f0bb24403fa16ed4f60fe788f1da46ee195cc3b367e9ba04b93e8b6",
+      "item_sha256": "d04db4da8eace5c3ac325a7c5c57aae6df69fafe76fda0a2c2ff203412b6fc42",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -17927,25 +17921,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 9 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1370:1491"
+          "locator": "characters:1362:1483"
         }
       ]
     },
     "glossary:reflective_listening": {
-      "item_sha256": "6e5845ee40431c43e72757bd10fb648e35cceeabb305303d0cd6ad6fe53c7b14",
+      "item_sha256": "e3b8020d37a88bd4b0fb41c2a487a73977dbf72760dcb0436d70cff0842614d1",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -17956,17 +17947,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 1 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1:253"
+          "locator": "characters:0:254"
         }
       ]
     },
@@ -18000,10 +17988,10 @@
       ]
     },
     "glossary:therapeutic_contract": {
-      "item_sha256": "eef68579e3db9d07d369a6fcf8e2494a76633edc9c8f2c2e5baebbc284f2a833",
+      "item_sha256": "20b061ba2c1533ae354af2c9dbf338a48dd5ed8c9136dd2c7cae58ff0acc71a1",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -18014,25 +18002,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 18 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2855:3037"
+          "locator": "characters:2838:3020"
         }
       ]
     },
     "glossary:rapport": {
-      "item_sha256": "7eb5b8667d11de63b3ad937917ec4f399b426f113cf745be64cdb4d92a49f88c",
+      "item_sha256": "7376b5671f43a7fdfd030149bca0365a2e70775f1d1853d5682a352d847e46bd",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -18043,17 +18028,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 37 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6311:6489"
+          "locator": "characters:6275:6453"
         }
       ]
     },
@@ -18087,10 +18069,10 @@
       ]
     },
     "glossary:reflection_of_feelings": {
-      "item_sha256": "aa1d8986911ee5207f2a808537d5898278a1ad5333ba64c0c884533b435094b0",
+      "item_sha256": "bac9388502c2d2336b49d752947119ce3577748bd5db30c693f1e7d8ddb0d374",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -18101,17 +18083,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Адресное соответствие определения пункту 27 текущей редакции исходного глоссария проверено 26.09.2026. Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
           "modified_time": "2026-06-07T21:20:48.648Z",
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4428:4601"
+          "locator": "characters:4402:4575"
         }
       ]
     },

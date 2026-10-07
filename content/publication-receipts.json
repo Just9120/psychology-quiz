@@ -1,4 +1,131 @@
 {
   "schema_version": 1,
-  "items": {}
+  "items": {
+    "glossary:cognitive_processes": {
+      "schema_version": 1,
+      "item_sha256": "afe8b7f412985279fafd72ceffef2742a9e8aaca87551b94284966ff368fd1ee",
+      "review_sha256": "6c1f6c95aa4d2a5bf116c3420c592995b7531e174666b546e9bfd4581217710a",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:complaint": {
+      "schema_version": 1,
+      "item_sha256": "daf45062faeae6f1550e622340640827666ff6889d00b543fc8800c85ae5422e",
+      "review_sha256": "233f304cce26ed4ccb7a9914a1b045b5de83fac1cc13b8532bcee9dcdfcd35d3",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:client_request": {
+      "schema_version": 1,
+      "item_sha256": "d04db4da8eace5c3ac325a7c5c57aae6df69fafe76fda0a2c2ff203412b6fc42",
+      "review_sha256": "04fd0382652ec76c5a4978a16b28cbba52fc411f3a886d5310a70b9e8e266f25",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:reflective_listening": {
+      "schema_version": 1,
+      "item_sha256": "e3b8020d37a88bd4b0fb41c2a487a73977dbf72760dcb0436d70cff0842614d1",
+      "review_sha256": "441dcf2fec092a76a6ea52e6bc7d5c754dfc7bf901dab9b96c92cebfd6c4bc8e",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:therapeutic_contract": {
+      "schema_version": 1,
+      "item_sha256": "20b061ba2c1533ae354af2c9dbf338a48dd5ed8c9136dd2c7cae58ff0acc71a1",
+      "review_sha256": "a19318e7d50b7dd2f902e5e16aa1e141ab846447030070c7acc936b5941639c7",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:rapport": {
+      "schema_version": 1,
+      "item_sha256": "7376b5671f43a7fdfd030149bca0365a2e70775f1d1853d5682a352d847e46bd",
+      "review_sha256": "531e19b36b4516844951b5be796e231c31667ecf91f26965c4312c1626c8ce70",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:reflection_of_feelings": {
+      "schema_version": 1,
+      "item_sha256": "bac9388502c2d2336b49d752947119ce3577748bd5db30c693f1e7d8ddb0d374",
+      "review_sha256": "d2ef4cfde137a06b55938842e063651cdaf5c1bb85f7058319d500f531c03a27",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    }
+  }
 }
