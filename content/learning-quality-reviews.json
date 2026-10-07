@@ -12641,10 +12641,10 @@
       ]
     },
     "glossary:exp_psych_hypothesis": {
-      "item_sha256": "7d4b59e295a3b64193de4b8eee2d38f927587d681c26a4e880d87e4972c59667",
+      "item_sha256": "9465155b64648dc36e9a33b930e4badff6b8d5f881d84946b7d87fa54f25a63b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -12655,16 +12655,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "issues": [],
+      "note": "Полное определение/пример рабочей проверяемой гипотезы сверены с точным описанием подтверждающего эксперимента. Статистическое подтверждение не приравнивается к окончательному доказательству. Question alias заменён точным приватным primary review; текст и ID сохраняются.",
       "sources": [
         {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5700:7100, 7200:10500, 13700:15500, 15700:20300, 21000:23000, 25400:27800, 28500:33692"
+          "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
+          "modified_time": "2026-04-22T20:23:09.227Z",
+          "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
+          "locator": "characters:7900:8248"
         }
       ]
     },
@@ -12785,10 +12783,10 @@
       ]
     },
     "glossary:exp_psych_control_group": {
-      "item_sha256": "9b9b5650243fdad757abb48dc7c9c552685b88ac9e6644ce89fcfbeaaeb55e5d",
+      "item_sha256": "f10cfe714732e84bcc60e08f4f2bcb821ca97f9844f0233c3b5216341cb389d8",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -12799,24 +12797,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "issues": [],
+      "note": "Курс прямо связывает контрольную группу с отделением воздействия от времени, тестирования и иных факторов. Самостоятельный пример/определение поддержаны; без обещания идеальной эквивалентности групп. Question alias заменён exact source review.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:16997:17107"
         }
       ]
     },
     "glossary:exp_psych_alternative_explanation": {
-      "item_sha256": "430cd0e6d3cb2312a9b165d08ec269ffd9c9ec667e0e5298c01f44a709d59f72",
+      "item_sha256": "991e2e2e4f4e99352c76148d76498011ace75e0b4e934f7c609c8f604d1301a4",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -12827,24 +12823,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "issues": [],
+      "note": "Определение/пример альтернативных причин сверены с угрозами внутренней валидности: история, созревание и повторное тестирование. Пример не утверждает, что повторное тестирование всегда объясняет весь эффект. Прямое основание сохранено приватно.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:12500:13500"
         }
       ]
     },
     "glossary:exp_psych_internal_validity": {
-      "item_sha256": "a8e0005999776224af6ea79ba54425ddf9c93a7b5ade9a1961a0a2f57641b478",
+      "item_sha256": "3d3bdf42526a37ba3d7eb415645b3f7e0659b6aa41e378573da59fe28de3ab91",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -12855,16 +12849,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition.",
+      "issues": [],
+      "note": "Курс прямо определяет обоснованность причинного вывода и необходимость исключить посторонние факторы. Самостоятельный пример контроля сохраняется, без безусловной гарантии. Question reference заменён exact primary review.",
       "sources": [
         {
           "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
           "modified_time": "2026-04-22T20:23:09.227Z",
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
+          "locator": "characters:10925:11325"
         }
       ]
     },
@@ -14715,21 +14707,19 @@
     "glossary:qual_methods_researcher_reflexivity": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source"
-      ],
+      "issues": [],
       "sources": [
         {
           "source_id": "1-2cpVVR8XqRC5VfhSKAb3DUgsFkRHlfWrnIX9DGeqvw",
           "modified_time": "2026-05-14T11:45:40.351Z",
           "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6300:7600"
+          "locator": "characters:6760:7060"
         }
       ],
-      "item_sha256": "c704aa7d36f6e054c7c87c794aaf47d79ea339a0f1f711e3ec1ba2aad05ad656",
+      "item_sha256": "6ea190097d0261ae01aab200a71ddc11ca322073521cd9425185c68da2acccbd",
       "checks": [
         "meaning",
         "definition",
@@ -14738,7 +14728,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "Фрагмент практики 11 прямо называет авторские предпосылки, позиции, установки и ценности. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Точный фрагмент требует рефлексировать авторские предпосылки, позиции, установки и ценности. Определение и пример самоанализа исследователя поддержаны; question/supplied snippet aliases заменены проверенной приватной координатой, не whole-source approval."
     },
     "glossary:qual_methods_thick_description": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
@@ -14771,21 +14761,19 @@
     "glossary:qual_methods_transferability": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source"
-      ],
+      "issues": [],
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12500:14900, 34900:38200, 94000:96400, 130600:134000"
+          "locator": "characters:95120:95999"
         }
       ],
-      "item_sha256": "fb607555e8667ca619d85020fcecbab8006a3374da5cec5a5a4bd0a591aa444b",
+      "item_sha256": "5f8a99dcaa05cfef3ad44e0f242a633d4b80af4cafa740a5585d37baa34ab984",
       "checks": [
         "meaning",
         "definition",
@@ -14794,7 +14782,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "Определение сопоставлено с полным фрагментом практики: внимание к процессу и человеку, позиции исследователя, деталям текста, транскрипции и контекстуальному переносу. 17 терминов рассмотрены. Примеры самостоятельны. Некоторые supplied_snippet refs теперь сопоставлены с полными первичными материалами, но сами refs не удостоверяют источник. focus_group ошибочно делает выработку общего мнения необходимой целью, semistructured_interview не описывает сочетание тематической рамки и гибкости. artifact — специальное употребление курса, не универсальная дефиниция; его нужно обозначить."
+      "note": "Фрагмент явно отличает переносимость от статистической репрезентативности и обсуждает применимость подробного описания в иных контекстах. Определение/пример поддержаны, без универсального обобщения на популяцию. Приватный exact review заменяет question/snippet aliases."
     },
     "questions:m3_psychological_consulting_001": {
       "item_sha256": "78a3286b44a1e71fff2e7e05719dd97fcea9f208f6abd9e8be3f3d7b0d48a1e8",

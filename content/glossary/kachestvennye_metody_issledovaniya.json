@@ -321,10 +321,6 @@
       "qual_methods_researcher_bias",
       "qual_methods_methodological_reflection"
     ],
-    "source_refs": [
-      "question:m2_qual_004",
-      "supplied_snippet:practice11:researcher_reflexivity"
-    ],
     "difficulty": "medium",
     "status": "approved"
   },
@@ -369,12 +365,6 @@
     "confusable_with": [
       "qual_methods_thick_description",
       "qual_methods_qualitative_methods"
-    ],
-    "source_refs": [
-      "question:m2_qual_014",
-      "question:m2_qual_028",
-      "question:m2_qual_053",
-      "supplied_snippet:practice12:transferability"
     ],
     "difficulty": "medium",
     "status": "approved"

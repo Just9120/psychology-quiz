@@ -35,9 +35,6 @@
     "confusable_with": [
       "exp_psych_operational_definition"
     ],
-    "source_refs": [
-      "question:m2_exp_017"
-    ],
     "difficulty": "easy",
     "status": "approved"
   },
@@ -152,9 +149,6 @@
     "confusable_with": [
       "exp_psych_alternative_explanation"
     ],
-    "source_refs": [
-      "question:m2_exp_007"
-    ],
     "difficulty": "easy",
     "status": "approved"
   },
@@ -174,11 +168,6 @@
       "exp_psych_control_group",
       "exp_psych_confounding_variable"
     ],
-    "source_refs": [
-      "question:m2_exp_006",
-      "question:m2_exp_008",
-      "question:m2_exp_021"
-    ],
     "difficulty": "medium",
     "status": "approved"
   },
@@ -194,9 +183,6 @@
     ],
     "confusable_with": [
       "exp_psych_external_validity"
-    ],
-    "source_refs": [
-      "question:m2_exp_022"
     ],
     "difficulty": "hard",
     "status": "approved"

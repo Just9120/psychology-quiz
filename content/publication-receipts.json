@@ -1242,6 +1242,114 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "glossary:exp_psych_hypothesis": {
+      "schema_version": 1,
+      "item_sha256": "9465155b64648dc36e9a33b930e4badff6b8d5f881d84946b7d87fa54f25a63b",
+      "review_sha256": "e36350c5a7c8b64c3d32b1459277f2b0c8096c1aa5e6299b0d1a9cbeea277555",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_control_group": {
+      "schema_version": 1,
+      "item_sha256": "f10cfe714732e84bcc60e08f4f2bcb821ca97f9844f0233c3b5216341cb389d8",
+      "review_sha256": "eb583cd8da603b70ccd5350ccea0b40434d1f253918fd9c1d4b36b61c32814b6",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_alternative_explanation": {
+      "schema_version": 1,
+      "item_sha256": "991e2e2e4f4e99352c76148d76498011ace75e0b4e934f7c609c8f604d1301a4",
+      "review_sha256": "dff75e2c69e59f7dcabc8702498cb493cf98292468647ac85135df801c83df35",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_internal_validity": {
+      "schema_version": 1,
+      "item_sha256": "3d3bdf42526a37ba3d7eb415645b3f7e0659b6aa41e378573da59fe28de3ab91",
+      "review_sha256": "767f1cf32d4d9937b0383f614f42ea5cbd681bbc947e1e100be3349003aaf45c",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_researcher_reflexivity": {
+      "schema_version": 1,
+      "item_sha256": "6ea190097d0261ae01aab200a71ddc11ca322073521cd9425185c68da2acccbd",
+      "review_sha256": "4a7101a41fce787e1e99ddb27be6b89e4432cfd0a9140423ba284f24ab206f32",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_transferability": {
+      "schema_version": 1,
+      "item_sha256": "5f8a99dcaa05cfef3ad44e0f242a633d4b80af4cafa740a5585d37baa34ab984",
+      "review_sha256": "a4aec4f9c4e4ae6ec660b1e654f15a5016c3814a285dcb85e9a5521383f06705",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
