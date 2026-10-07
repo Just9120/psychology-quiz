@@ -11720,10 +11720,10 @@
       ]
     },
     "questions:m2_exp_095": {
-      "item_sha256": "28a2cff4bb7888de622832cf50792e192c94f26334e0a26577fcdc6869455b6e",
+      "item_sha256": "708c3451e3243e13d5543e4ba36bc3e66228d299db87c774c7d3b78c4452a809",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11735,15 +11735,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены разборы VR/дельфинов, waitlist-медитации и инструкции стереотипной угрозы. Вопросы проверяют ограничения дизайна, не сертифицируют эффективность обсуждаемых вмешательств.",
-      "sources": [
-        {
-          "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
-          "modified_time": "2026-05-14T11:25:02.862Z",
-          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 106600:109600"
-        }
-      ]
+      "note": "General methodological conclusion bounded to sampled population, design and follow-up. Stem explicitly hypothetical, not a claim about efficacy of VR, meditation or dolphin therapy. Course discussion of age/sample limitation only; held clinical efficacy claims excluded. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_exp_096": {
       "item_sha256": "165ffbe8a344f2cf283661f59e7f63d73c6c7f2ca3b5c6e8e62f835054d8f9ee",
@@ -13364,10 +13357,10 @@
       ]
     },
     "questions:m2_qual_028": {
-      "item_sha256": "525ad6528a9c2460776e8ba2d0bd5dc0f54fa1caba24de9e056e647da67afa05",
+      "item_sha256": "6f76d29f3a87c25be00767122125b509487b1de82a851c12141fda5366ee20cf",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -13379,15 +13372,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Повторно сверено по точному raw export Практики №12: подробность описания исследовательского пути и контекста позволяет оценить переносимость, без статистического обобщения на популяцию. Термин thick description в транскрипте не произнесён, но смысл ответа ограничен этим контекстом.",
-      "sources": [
-        {
-          "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
-          "modified_time": "2026-05-16T14:38:37.594Z",
-          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 25000:25900, 94000:97000"
-        }
-      ]
+      "note": "Transferability as readers comparing a richly described contextual experience with other contexts. This is not population representativeness or guaranteed transfer. No participant anecdotes or held authorship claim selected. Primary Shenton abstract independently supports sufficient contextual detail for reader evaluation. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m2_qual_029": {
       "item_sha256": "6fb0b6eb27a62279dd8d8454810a76be98af80bdee369ab04fec2fda1163a232",
@@ -15385,15 +15371,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
-      "sources": [
-        {
-          "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
-          "modified_time": "2026-06-07T20:50:34.245Z",
-          "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "characters:13503:13800;characters:23100:23755;characters:24200:25000;characters:55800:56555"
-        }
-      ]
+      "note": "Organization of space/time and agreed conditions described as process supports. No universal guarantee that the frame makes every client feel safe, no inference of a legal contract duty. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_036": {
       "item_sha256": "236ae6e35bd003d03a8e3f8d908eff605e2212803a1e313b3e360ad271c4ead7",
@@ -15786,10 +15765,10 @@
       ]
     },
     "questions:m3_psychological_consulting_051": {
-      "item_sha256": "562343a9b1b084d4c8914603eae3ab54a463912b88971a496a59afcacafd2013",
+      "item_sha256": "329956644760ba6d82cb08346054d26e2ccbcf90b423de83f7afdbcc56d4425b",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15801,15 +15780,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок 2 прямо требует приватности и конфиденциальности онлайн-пространства, предупреждения домашних и закрытой двери; нейтральный фон и предсказуемая среда описаны отдельно. Кейс с проходящими родственниками поддержан.",
-      "sources": [
-        {
-          "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
-          "modified_time": "2026-06-07T20:50:34.245Z",
-          "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7600:10300, 11400:12400, 15800:17200"
-        }
-      ]
+      "note": "Private space and keeping others from hearing the conversation are the selected professional recommendations. Authored scenario indicates uncertainty about privacy, not proven unauthorized disclosure, universally harmful virtual backgrounds or diagnostic interpretation of room furniture. All eight source holds unchanged. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_052": {
       "item_sha256": "ee5c6a2bd16c16fd295833670d30f0b9d3728e1cbea14ae0af8491e146092727",

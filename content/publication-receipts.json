@@ -4820,7 +4820,8 @@
     "questions:m3_psychological_consulting_035": {
       "schema_version": 1,
       "item_sha256": "b0cce8b7ce911f1542d3a0fe950b92b20c873164af9866af5130ed28ad0736da",
-      "review_sha256": "c7995d483e29f8746e782f907e982605c105f507f241d9e0576a8b42aa981ee3",
+      "review_sha256": "698e22c7d21db0cd0ef602f9547f0a5d1a51422d98fb559435c43cdc32665c5b",
+      "topic_id": "t_7246705017fc",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -7086,6 +7087,63 @@
       "item_sha256": "5b3a48eb781108f2167bc86bbb11086a9c3c2beb0e7237f202b90ac9be9b8c89",
       "review_sha256": "e7c79161e87065915b634e338a79bdd77bf71703e1b54a35583b05db281b92d8",
       "topic_id": "t_09efb9aedb46",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m2_qual_028": {
+      "schema_version": 1,
+      "item_sha256": "6f76d29f3a87c25be00767122125b509487b1de82a851c12141fda5366ee20cf",
+      "review_sha256": "1e819e3ec32a0c8e66520583537302718f17530c7e9f377f149e192bc8593ae0",
+      "topic_id": "t_6be3cecd6596",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m2_exp_095": {
+      "schema_version": 1,
+      "item_sha256": "708c3451e3243e13d5543e4ba36bc3e66228d299db87c774c7d3b78c4452a809",
+      "review_sha256": "541caeb16e23cbff700c82f6c27e8eff07cff6c3cb249d4571038496665fec13",
+      "topic_id": "t_a4cdbc5015b0",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m3_psychological_consulting_051": {
+      "schema_version": 1,
+      "item_sha256": "329956644760ba6d82cb08346054d26e2ccbcf90b423de83f7afdbcc56d4425b",
+      "review_sha256": "e36477d92abd35abe8f12c6a3e08b04832a44bc81ebf9d0b84367ddf01bcaccd",
+      "topic_id": "t_7246705017fc",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
