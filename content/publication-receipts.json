@@ -4558,7 +4558,8 @@
     "questions:m1_psyf_001": {
       "schema_version": 1,
       "item_sha256": "014c47fbac67b7ae28374a8ef5b15e42690457cc5c95f57c4628b16e4197e3b3",
-      "review_sha256": "d53d8feecc08d0589ec1769bad35fedf8c4bcfa2a685550c96c98ed78ac5bc93",
+      "review_sha256": "db702239cf64572a82fdecff13a98cd7a1013ece016568c829f019878c160e0d",
+      "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -4576,7 +4577,8 @@
     "questions:m1_psyf_002": {
       "schema_version": 1,
       "item_sha256": "10152a39dd18176644acb25d6c944d2febaa0562c720483d0866da46977a6030",
-      "review_sha256": "04ca416f0d3138edcb3c97fcbd7f7ac25e0e986d5fb60533a18c1a4e62acf1db",
+      "review_sha256": "d8590b84f7534720703e9193eac0af8dec134b8ed1959cbb59dd0d131c0a4601",
+      "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",

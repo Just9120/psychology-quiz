@@ -510,10 +510,22 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                 or link.get("source_id") != sources[0].get("id")
                 or link.get("topic_id") != topic_id
                 or link.get("lesson_id") != topic_id
-                or states.get(sources[0]["id"]) != "processed"):
+                or (states.get(sources[0]["id"]) != "processed"
+                    and not fragment_v2)):
             raise SigningError("private_curriculum_link_required")
         try:
-            catalog = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
+            # Fragment validation above remains mandatory for held sources.
+            # A lesson link classifies that exact reviewed fragment, not the whole source.
+            catalog = (classification_catalog if private_registry_path is not None else
+                       json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8")))
+            topic = catalog["topics"].get(topic_id)
+            expected_source = {"source_id": sources[0]["id"],
+                               "modified_time": sources[0]["modified_time"],
+                               "snapshot_sha256": sources[0]["snapshot_sha256"]}
+            if (topic is None or topic.get("source") != expected_source
+                    or (sources[0].get("discipline_id") is not None
+                        and sources[0]["discipline_id"] != topic.get("discipline_id"))):
+                raise SigningError("private_curriculum_link_required")
             lessons = link_lessons(snapshot, [link], curriculum_topics=catalog["topics"])
         except (InventoryError, OSError, ValueError, KeyError, TypeError) as error:
             raise SigningError("private_curriculum_link_required") from error

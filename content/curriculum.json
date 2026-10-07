@@ -3825,6 +3825,18 @@
       "topic_id": "t_033b84e9a10e",
       "item_sha256": "7dd1009ed94f9e64c7b0227fc1008998a18f6e06f9b8af4a24a183a9b28382d0",
       "locator": "private certificate:questions:m1_phys_017"
+    },
+    "6f5f864feb9d0589d27a1aeba220bd8bf82f212fc9ac823fe144c5216c809170": {
+      "external_id": "m1_psyf_001",
+      "topic_id": "t_082cd47dd86a",
+      "item_sha256": "014c47fbac67b7ae28374a8ef5b15e42690457cc5c95f57c4628b16e4197e3b3",
+      "locator": "private review:questions:m1_psyf_001"
+    },
+    "1d64366d60032757271c1b4cf05624408f480c0b7b2f899c02b7719ca4795071": {
+      "external_id": "m1_psyf_002",
+      "topic_id": "t_082cd47dd86a",
+      "item_sha256": "10152a39dd18176644acb25d6c944d2febaa0562c720483d0866da46977a6030",
+      "locator": "private review:questions:m1_psyf_002"
     }
   }
 }

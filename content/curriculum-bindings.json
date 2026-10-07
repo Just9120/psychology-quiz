@@ -16,6 +16,44 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "rI/zq+B2i05SkyduRwKqQabIhgAwNS//D8tDkMVQSW3E9BOqkmB4Nss58P9Tbp63GzzEtkHS4onzs/BG2tPrBw==",
       "topic_id": "t_f2b92ac4b2ef"
+    },
+    "6f5f864feb9d0589d27a1aeba220bd8bf82f212fc9ac823fe144c5216c809170": {
+      "schema_version": 1,
+      "item_sha256": "014c47fbac67b7ae28374a8ef5b15e42690457cc5c95f57c4628b16e4197e3b3",
+      "review_sha256": "db702239cf64572a82fdecff13a98cd7a1013ece016568c829f019878c160e0d",
+      "topic_id": "t_082cd47dd86a",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "1d64366d60032757271c1b4cf05624408f480c0b7b2f899c02b7719ca4795071": {
+      "schema_version": 1,
+      "item_sha256": "10152a39dd18176644acb25d6c944d2febaa0562c720483d0866da46977a6030",
+      "review_sha256": "d8590b84f7534720703e9193eac0af8dec134b8ed1959cbb59dd0d131c0a4601",
+      "topic_id": "t_082cd47dd86a",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

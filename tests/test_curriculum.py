@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 567
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 569
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
@@ -146,7 +146,6 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
         for sha, item in catalog['editions'].items():
             key = 'questions:' + item['external_id']
             topic = catalog['topics'][item['topic_id']]
-            source = load_policy().sources[topic['source']['source_id']]
             if item['item_sha256'] != fingerprint(items[key]):
                 # Prior immutable editions remain mapped for historical attempts.
                 if items[key]['status'] != 'approved':
@@ -162,10 +161,11 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             if sha in private_bindings:
                 certificate = private_bindings[sha]
                 assert certificate['topic_id'] == item['topic_id']
-                assert item['locator'] == 'private certificate:' + key
+                assert item['locator'] == ('private certificate:' if 'signature' in certificate else 'private review:') + key
                 assert load_policy().can_publish('questions', items[key])
                 assert registry[topic['discipline_id']]['title'] == items[key]['category']
                 continue
+            source = load_policy().sources[topic['source']['source_id']]
             if item['locator'] == 'private certificate:' + key:
                 assert load_policy().can_publish('questions', items[key])
                 assert item['item_sha256'] == fingerprint(items[key])
@@ -266,3 +266,49 @@ def test_curriculum_api_filters_verified_actor_and_rejects_invalid_scope(web, ma
     invalid['disciplines']['second']['title'] = OLD['category']
     with pytest.raises(ValueError):
         curriculum.validate_catalog(invalid)
+
+
+def test_source_free_lesson_mapping_requires_label_and_exact_private_review(tmp_path, monkeypatch):
+    from tests.test_private_publication_certificate import fixture_review
+    from scripts.sign_private_publication import create_review_receipt
+    from app.content_publication import PublicationPolicy
+    public, dossier = fixture_review()
+    tid = "t_abcdef012345"
+    dossier["curriculum_topic_id"] = tid
+    dossier["curriculum_link"] = {"source_id": "fixture", "topic_id": tid,
+                                  "lesson_id": tid, "format": "lecture"}
+    receipt = create_review_receipt("questions", public, dossier)
+    edition = {"external_id": public["id"], "topic_id": tid,
+               "item_sha256": fingerprint(public), "locator": "private review:questions:" + public["id"]}
+    core = {"schema_version": 1, "disciplines": {"one": {"title": "Discipline"}},
+            "topics": {}, "editions": {"a" * 64: edition}}
+    labels = {"schema_version": 1, "disciplines": {},
+              "topics": {tid: {"title": "Existing reviewed lesson", "discipline_id": "one"}}}
+    root = tmp_path / "repo"
+    (root / "content").mkdir(parents=True)
+    monkeypatch.setattr(curriculum, "ROOT", root)
+    monkeypatch.setattr("app.content_publication.load_policy", lambda: PublicationPolicy(
+        {}, {}, {}, receipts={"questions:" + public["id"]: receipt}))
+    def write(name, value):
+        (root / "content" / name).write_text(json.dumps(value), encoding="utf-8")
+        curriculum.load_reviewed_catalog.cache_clear()
+        curriculum.load_catalog.cache_clear()
+    write("curriculum.json", core)
+    write("curriculum-labels.json", labels)
+    write("curriculum-bindings.json", {"schema_version": 1, "items": {"a" * 64: receipt}})
+    catalog = curriculum.load_catalog()
+    assert catalog["topics"][tid] == labels["topics"][tid] and "source" not in catalog["topics"][tid]
+    assert catalog["editions"]["a" * 64] == edition
+    write("curriculum-bindings.json", {"schema_version": 1, "items": {}})
+    with pytest.raises(ValueError, match="Missing current private curriculum binding"):
+        curriculum.load_catalog()
+    write("curriculum-bindings.json", {"schema_version": 1, "items": {"a" * 64: receipt}})
+    write("curriculum-labels.json", {**labels, "topics": {}})
+    with pytest.raises(ValueError, match="Invalid curriculum edition"):
+        curriculum.load_catalog()
+    write("curriculum-labels.json", labels)
+    write("curriculum.json", {**core, "editions": {"a" * 64: {**edition, "item_sha256": "b" * 64}}})
+    with pytest.raises(ValueError, match="Invalid private curriculum binding"):
+        curriculum.load_catalog()
+    curriculum.load_reviewed_catalog.cache_clear()
+    curriculum.load_catalog.cache_clear()

@@ -75,12 +75,12 @@ def fragment_fixture(tmp_path, monkeypatch, *, state="conflict", kind="questions
     return public, dossier, inventory, {source["id"]: record}, path
 
 
-def private_classification_fixture(tmp_path, monkeypatch):
+def private_classification_fixture(tmp_path, monkeypatch, *, kind="literature"):
     import subprocess
     from app.source_inventory import complete_listing, scan
 
     public, dossier, inventory, processed, extract = fragment_fixture(
-        tmp_path, monkeypatch, state="pending_review", kind="literature")
+        tmp_path, monkeypatch, state="pending_review", kind=kind)
     root = signer.REPO_ROOT
     subprocess.run(["git", "init", "-q", str(root)], check=True)
     (root / ".gitignore").write_text("data/\n", encoding="utf-8")
@@ -462,3 +462,47 @@ def test_discovery_order_holds_keep_every_range_and_validation(tmp_path, monkeyp
         with pytest.raises(SigningError, match="fragment_(overlaps_conflict|locator_required|locator_out_of_bounds)"):
             verify_current_sources(dossier, inventory, processed, public_item=public)
     assert processed == before
+
+
+def test_private_question_lesson_uses_exact_current_fragment_and_source(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _, registry = private_classification_fixture(
+        tmp_path, monkeypatch, kind="questions")
+    sid = dossier["sources"][0]["id"]
+    tid = "t_" + hashlib.sha256(sid.encode()).hexdigest()[:12]
+    source = dossier["sources"][0]
+    processed[sid].update(review_state="conflict", locator="characters:16:30",
+        reviewed_at="2026-09-28T00:00:00Z", reason="Held adjacent sentence", related_source_ids=[])
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(processed[sid])
+    dossier["curriculum_topic_id"] = tid
+    dossier["curriculum_link"] = {"source_id": sid, "topic_id": tid, "lesson_id": tid,
+        "format": "lecture", "revision": processed[sid]["revision"],
+        "corpus_path": "Synthetic lecture", "reviewer": "reviewer",
+        "review_note": "Exact first sentence belongs to this lesson", "reviewed_at": "2026-10-01T00:00:00Z"}
+    topics = signer.REPO_ROOT / "data/topics.json"
+    document = {"schema_version": 1, "corpus_root_id": "root",
+        "disciplines": {"one": {"title": "Discipline"}}, "topics": {tid: {
+            "title": "Exact private lesson", "discipline_id": "one", "source": {
+                "source_id": sid, "modified_time": source["modified_time"],
+                "snapshot_sha256": source["snapshot_sha256"]}}}}
+    topics.write_text(json.dumps(document), encoding="utf-8")
+    topics.chmod(0o600)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public,
+                           private_registry_path=registry, private_topics_path=topics)
+    assert processed == before and processed[sid]["review_state"] == "conflict"
+    changed = deepcopy(dossier)
+    changed["curriculum_link"]["revision"][0] = "2026-09-26T00:00:00Z"
+    with pytest.raises(SigningError, match="private_curriculum_link_required"):
+        verify_current_sources(changed, inventory, processed, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
+    changed = deepcopy(dossier)
+    changed["curriculum_link"]["source_id"] = "unrelated"
+    with pytest.raises(SigningError, match="private_curriculum_link_required"):
+        verify_current_sources(changed, inventory, processed, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
+    held = deepcopy(processed)
+    held[sid]["locator"] = "characters:0:30"
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(held[sid])
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, held, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
