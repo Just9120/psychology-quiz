@@ -15563,10 +15563,10 @@
       ]
     },
     "questions:m3_psychological_consulting_031": {
-      "item_sha256": "f02b06fbd26ec3647ecdc914fef6ce26fc7146e312c3bc8d006c285f8f59f7d8",
+      "item_sha256": "206e8a7c02e7b701736c32bdcd40e46026d598b144973fb5d42b83b751bb81bd",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15578,21 +15578,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок называет признаки доверия и отдельно запрещает вывод по одному признаку; проверены эмпатия, позитивное принятие и конгруэнтность в клиент-центрированной модели.",
+      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
           "modified_time": "2026-06-07T20:55:38.540Z",
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+          "locator": "characters:1818:2260"
         }
       ]
     },
     "questions:m3_psychological_consulting_032": {
-      "item_sha256": "659f388d2bc8a67af2875a1c9e486bc6644b755471b8d220e63a24232e3c8acd",
+      "item_sha256": "0fe18835ea9b4702b3b0b18f1beba014d5b9e2937c38ce43253a134fa3f0a877",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15604,13 +15604,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок называет признаки доверия и отдельно запрещает вывод по одному признаку; проверены эмпатия, позитивное принятие и конгруэнтность в клиент-центрированной модели.",
+      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
           "modified_time": "2026-06-07T20:55:38.540Z",
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+          "locator": "characters:4044:4700;characters:6080:6200"
         }
       ]
     },
@@ -15955,10 +15955,10 @@
       ]
     },
     "questions:m3_psychological_consulting_046": {
-      "item_sha256": "c4e68a85047a4cc43b71ab26d9e800b2103ea44d427874a3a2b9026fe20b6fd1",
+      "item_sha256": "29874fb3782fd481c829c26a5184fc6a970c9868561c3ef132543ca10b4218ec",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15970,21 +15970,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок называет признаки доверия и отдельно запрещает вывод по одному признаку; проверены эмпатия, позитивное принятие и конгруэнтность в клиент-центрированной модели.",
+      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
           "modified_time": "2026-06-07T20:55:38.540Z",
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+          "locator": "characters:6080:6200"
         }
       ]
     },
     "questions:m3_psychological_consulting_047": {
-      "item_sha256": "73e3189dc865b06b0cb7c44a5fec93e10bcfc8f0e27323d18faaaeb537a2abd6",
+      "item_sha256": "81cdf23c686a62a7505bed86d0f2c15f5b1532741ddd1d685736efe341b58490",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15996,21 +15996,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок называет признаки доверия и отдельно запрещает вывод по одному признаку; проверены эмпатия, позитивное принятие и конгруэнтность в клиент-центрированной модели.",
+      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
           "modified_time": "2026-06-07T20:55:38.540Z",
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+          "locator": "characters:6080:7060"
         }
       ]
     },
     "questions:m3_psychological_consulting_048": {
-      "item_sha256": "f0d8f4a4f91f4cc5a1e9fc3455f32a8c1f34c31733ab13c60699ccda7b31f4b9",
+      "item_sha256": "c428a6ca0bd4ea9a7617ac8de1d2db44d0ee6cceb6ad25d54a8cec248faad21a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16022,21 +16022,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок называет признаки доверия и отдельно запрещает вывод по одному признаку; проверены эмпатия, позитивное принятие и конгруэнтность в клиент-центрированной модели.",
+      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
           "modified_time": "2026-06-07T20:55:38.540Z",
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+          "locator": "characters:6400:7060"
         }
       ]
     },
     "questions:m3_psychological_consulting_049": {
-      "item_sha256": "a68877297e5030d91b1f3d0c5ddfdd6af3038ca77260f2eeb772c63aab432e04",
+      "item_sha256": "ed0d749838a93d7edc438a887aa5e8ceb712536baa11edb333f28b540082fca9",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16048,21 +16048,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок называет признаки доверия и отдельно запрещает вывод по одному признаку; проверены эмпатия, позитивное принятие и конгруэнтность в клиент-центрированной модели.",
+      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
           "modified_time": "2026-06-07T20:55:38.540Z",
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+          "locator": "characters:8551:8820"
         }
       ]
     },
     "questions:m3_psychological_consulting_050": {
-      "item_sha256": "ee59191ee7de90b419ea0d2290e4224450e071de2f8da3998bb7e045a4612a8d",
+      "item_sha256": "9c0544a42ac54002fe6fb85595aaae009a981b275988610bdeda22389de208f5",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16074,13 +16074,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок называет признаки доверия и отдельно запрещает вывод по одному признаку; проверены эмпатия, позитивное принятие и конгруэнтность в клиент-центрированной модели.",
+      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
           "modified_time": "2026-06-07T20:55:38.540Z",
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 4100:6800, 7600:9300"
+          "locator": "characters:6080:7060"
         }
       ]
     },
