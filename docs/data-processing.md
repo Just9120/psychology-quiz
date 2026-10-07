@@ -11,10 +11,9 @@
 отдельно не проверены. Это не устанавливает страны обработки Telegram, Google,
 SMTP и Cloudflare.
 
-Сроки хранения резервных копий и серверных логов, порядок проверки личности
-заявителя и передачи ему копии данных владельцу неизвестны: UNSET. Ответ не
-задаёт срок хранения, способ передачи или новую политику удаления. Эти пробелы
-остаются в Q-08/Q-11 и AC-PRIV-01/02/05.
+07.10 владелец согласовал D-47 в [spec](project-spec.md): DB backups30 дней с minimum2/recovery exceptions, собственные application/Nginx logs14 дней, переданная копия7 дней. Дополнительный VPS/облачный backup не поручен. Ручные VPS snapshots отдельно управляются владельцем; их фактическая retention UNSET.
+
+Это выбор правил, не подтверждение их применения: backup inspector пока read-only, очистка и age retention логов не настроены/не подтверждены. Заявителя проверяет владелец по известному контакту либо лично; передача на подтверждённый адрес — по явному запросу. Один Telegram ID/username недостаточен. Идентификация оператора, owner PWA deletion и внешние provider settings ещё требуют сверки.
 
 ## Данные и цели
 
@@ -25,8 +24,8 @@ SMTP и Cloudflare.
 | Владелец → Google OIDC → PWA | По явному подключению из действующей owner session сохраняется Google subject, account_id и время связи. Подтверждённый Google e-mail проверяется при обработке ID token, но не добавляется в таблицу связи и не заменяет identity владельца. | [OIDC client](../app/google_oauth.py), [durable flow](../app/owner_google_oauth.py), [схема](../sql/google-oauth-v1.sql). Только openid/email; авторизационный код, PKCE verifier и client secret передаются Google для обмена. Access/refresh/ID tokens не сохраняются в DB и не выдаются клиенту. Код подготовлен в текущей Goal; фактический вход и включение на VPS PENDING. |
 | PWA → временное OAuth state | На срок 10 минут DB хранит state/browser digests, nonce, PKCE verifier, purpose и связь с инициировавшей session для link. Secure HttpOnly cookie связывает callback с браузером. | Challenge удаляется до сетевого обмена при принятом callback; просроченные rows очищаются при следующем begin, поэтому TTL не означает немедленное физическое удаление. Disconnect удаляет связь и принадлежащие account challenges, отзывает другие sessions. Backup может сохранять прежние rows до удаления копии. Эти данные входят в privacy inventory и additive recovery, а не в learning-data export. |
 | PWA → SMTP | Письма подтверждения/восстановления содержат адрес получателя и одноразовую ссылку. Учебные ответы в SMTP не отправляются этим модулем. | [Mailer](../app/web_mail.py), настройки в [PWA auth](pwa-auth.md). Фактические сроки хранения у почтового провайдера UNSET. |
-| Runtime DB → backup/recovery | Копии persistent state нужны для безопасной миграции и восстановления. Они могут содержать личные строки. | [PostgreSQL backup](../scripts/postgres_backup.py), [процедура поставки](miniapp-deployment-qa.md). Срок хранения и ручной порядок исполнения запросов в backups UNSET; автоматического удаления всех copies нет. |
-| Browser → reverse proxy → API | HTTP запросы необходимы для Mini App/PWA. Прокси и инфраструктура могут обрабатывать сетевые metadata. | [Поставка](miniapp-deployment-qa.md) и [PWA auth](pwa-auth.md) задают запрет credential/body logging. Фактические Cloudflare/Nginx logs, сроки и география требуют runtime records; текущий code review их не устанавливает. |
+| Runtime DB → backup/recovery | Копии persistent state нужны для безопасной миграции и восстановления. Они могут содержать личные строки. | [PostgreSQL backup](../scripts/postgres_backup.py), [процедура поставки](miniapp-deployment-qa.md). Срок локальных копий согласован D-47 с исключениями minimum2/recovery; его фактическое применение ещё не подтверждено, автоматического удаления всех copies нет. |
+| Browser → reverse proxy → API | HTTP запросы необходимы для Mini App/PWA. Прокси и инфраструктура могут обрабатывать сетевые metadata. | [Поставка](miniapp-deployment-qa.md) и [PWA auth](pwa-auth.md) задают запрет credential/body logging. D-47 задаёт 14 дней собственным Nginx/application logs; фактическая конфигурация, Cloudflare retention и география требуют runtime records. |
 | Drive → приватная обработка → публикация | Учебные источники используются для подготовки контента. Это отдельный операторский поток, не экспорт личной истории обучающихся. | [Content rollout](question_bank_content_rollout.md). Приватные исходники и provenance не становятся публичными API ответами. |
 
 ## Уточнение клиентских и операторских потоков
@@ -83,8 +82,7 @@ PWA account, display name и Google subject с датой привязки. По
 Telegram user ID. Username, подпись в письме или присланный чужой ID сами по себе
 не подтверждают личность. Флаг `--verified-request` фиксирует выполненный оператором
 шаг; script не делает эту проверку и не отправляет файл. Автоматической доставки
-и публичного API выбора actor нет. Порядок проверки личности и передачи копии
-остаётся UNSET; подготовленный exporter сам эти процедуры не заменяет.
+и публичного API выбора actor нет. Порядок проверки личности и передачи согласован D-47; exporter сам эти процедуры не выполняет. Проверка заявителя по известному контакту либо лично проводится до запуска, передача на подтверждённый адрес — по явному запросу.
 
 Canonical команда из root, с действующим DATABASE_URL/DB_PATH:
 ```bash
@@ -105,8 +103,7 @@ Output допускается только как новый ignored `data/*.jso
 JSON содержит row_counts для всех учебных таблиц и `complete: true` только в конце
 успешной записи. При STOP частичный файл не доставлять и не выдавать за готовую копию;
 проверить результат локально в приватном окружении. Файлы не включать в Git, PR,
-public artifacts или обычные logs. Способ передачи и срок хранения копии ещё не
-утверждены; этот код не разрешает автоматическую рассылку или новую retention policy.
+public artifacts или обычные logs. Способ передачи и срок хранения согласованы D-47: подтверждённый адрес по явному запросу, 7 дней после передачи. Код не отправляет и не удаляет файл автоматически; применение срока требует процедуры и Evidence.
 
 Validation: [SQLite/CLI isolation](../tests/test_privacy_export.py) и
 [native PostgreSQL contract](../tests/postgres/test_learning_copy_postgres.py).
@@ -116,7 +113,7 @@ Native проверка обязательна в существующем backe
 ## Оставшиеся условия проверки
 
 - На целевой revision выполнить PostgreSQL actor-isolation/one-use tests в required CI и подтвердить additive migration/CD.
-- Проверить фактические DB/backups/logs/SMTP/Cloudflare records; оператор, страны внешних сервисов и сроки UNSET до первичных данных. Для VPS Франция подтверждена владельцем 06.10; страна не выведена из IP или названия хостера.
+- Проверить фактические DB/backups/logs/SMTP/Cloudflare records и применение D-47; оператор и страны/retention внешних сервисов UNSET до первичных данных. Для VPS Франция подтверждена владельцем 06.10; страна не выведена из IP или названия хостера.
 - Проверить доступность согласованного контакта и определить порядок owner PWA/identity/export requests; выбранная политика задаёт ответ не позднее 30 дней, фактическое исполнение и конкретные применимые сроки пока не подтверждены.
 - Согласовать backup retention/recovery так, чтобы восстановление старой копии не выдавалось за сохранение выполненного удаления.
 
