@@ -215,25 +215,27 @@
       "module2",
       "module3"
     ],
-    "question_file": null,
+    "question_file": "content/questions/module2/psychodiagnostics.json",
     "status": "active",
     "order": 250,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Shared course discipline in modules 2 and 3; bibliographic metadata only, no quiz publication implied."
+    "source_notes": "Existing shared discipline in modules2/3; selected direct-diagnostic-format question has an exact private fragment review. Literature contour retained; whole-course scientific approval is not implied."
   },
   {
     "id": "turning_point",
     "title": "Точка поворота. 5 шагов",
     "module": "other",
-    "question_file": null,
+    "question_file": "content/questions/other/turning_point.json",
     "status": "active",
     "order": 900,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Additional course in the Drive section Other; no numbered module or quiz publication is implied."
+    "source_notes": "Existing additional course; selected lesson4 timing description has an exact private fragment review. Literature contour retained; no efficacy guarantee or numbered-module assignment."
   },
   {
     "id": "personal_brand",

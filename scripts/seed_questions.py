@@ -103,8 +103,10 @@ def discover_module_dirs(questions_root: Path) -> list[Path]:
     if not questions_root.exists() or not questions_root.is_dir():
         raise FileNotFoundError(f"Не найдена директория с вопросами: {questions_root}")
 
+    # Additional courses retain their canonical Other location, without inventing a module.
     module_dirs = sorted(
-        (path for path in questions_root.iterdir() if path.is_dir() and path.name.startswith("module")),
+        (path for path in questions_root.iterdir()
+         if path.is_dir() and (path.name.startswith("module") or path.name == "other")),
         key=lambda path: path.name,
     )
     if not module_dirs:

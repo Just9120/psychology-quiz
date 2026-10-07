@@ -17193,6 +17193,44 @@
       "issues": [],
       "note": "Exact procedural/motor-memory definition; keyboard skill is an original teaching illustration. Excludes general cortical/hippocampal localization, REM/NREM consolidation, universal age rules, ECT/drug treatment and all other held claims. Exact private fragment receipt and primary teaching confirmation.",
       "sources": []
+    },
+    "questions:m2_pd_001": {
+      "item_sha256": "a38fa605e1c88ca4a67cb844670f19448c7b4f777e59d5093fe021267c9a5e9e",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course definition of direct diagnostic procedure only. No projective-test validity, homemade-questionnaire standardization, inference from corridor behavior, legal consent rules or universal clinical efficacy asserted.",
+      "sources": []
+    },
+    "questions:other_tp_001": {
+      "item_sha256": "9e8659b346db831febf1d0425868ad62cf10856f3102c406a7e4e72f466dc057",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact lesson work/break sequence. Course description and author-specific exercise, no efficacy guarantee or physiological optimality. Official creator page paragraphs Distortion/Philosophy confirms the full method is not just25-minute timer sessions.",
+      "sources": []
     }
   }
 }
