@@ -6310,10 +6310,10 @@
       ]
     },
     "questions:m1_vnd_031": {
-      "item_sha256": "fa395013b69f25d960fac84c67e8d8344dd4613472edcc52ccc22fd9645b39b1",
+      "item_sha256": "2d22ee3ebfb1df24b20e69d7cc9e53435589b4a7fa4f97241f145fff212cbfa2",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6324,16 +6324,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Ключ сопоставлен с первичным глоссарием: ВНД/условные и безусловные связи, потребности, память, эмоции, решения, стереотип и сигнальные системы. Примеры являются учебным применением, не доказательством механизма у конкретного клиента.",
+      "issues": [],
+      "note": "Устранена сильная подсказка длиной без искусственного удлинения distractors. Точное определение динамического стереотипа в лекции; не сводится к одиночному врождённому рефлексу, эмоции или случайному набору. Ответ и пояснение сохраняют учебный смысл.",
       "sources": [
         {
-          "source_id": "1aSnHxO5epC4yiCYxpTgRP_PMS66_TKE-Ky-6D3fqAhA",
-          "modified_time": "2026-04-20T11:10:55.494Z",
-          "snapshot_sha256": "cf0ea30d1c3e5c63af5fa33c4adac64e12ab10b9bcd08b90d8c906ec8eca4bb3",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5922"
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
+          "locator": "characters:26226:26926"
         }
       ]
     },
@@ -6390,10 +6388,10 @@
       ]
     },
     "questions:m1_vnd_034": {
-      "item_sha256": "4804bc8d240772bb84ac1af9d28f4a3a5f3597438cddc536dc5a5c2941fad42d",
+      "item_sha256": "0f806213f00a520d9e5f3068613e3e1770a79dc461aeba36b4efb791d24aa1dd",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6404,16 +6402,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "issues": [],
+      "note": "Сокращён правильный вариант с сохранением регулирующей функции торможения. Не только сон и не полное подавление. Точное независимое описание в курсе; историческая терминология не превращается в универсальный клеточный механизм.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14000:14832"
         }
       ]
     },
@@ -6741,10 +6737,10 @@
       ]
     },
     "questions:m1_vnd_047": {
-      "item_sha256": "b3f86351bf11abac079d9e659eaf308cbbd55cc2aba3a6a4d5be414fe34a70cf",
+      "item_sha256": "60fd92bc351fe45ee29afc58a6643ca6aee99ee71a609d459f937fafe7b3932b",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6755,24 +6751,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "issues": [],
+      "note": "Сохранён интегративный охват внешнего и четырёх внутренних форм торможения при сокращении ответа. Фрагмент включает перечисление форм; held физическое удаление связи и сроки забывания исключены. Отличие учебной цели от m1_vnd_034 сохранено.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14832:16889"
         }
       ]
     },
     "questions:m1_vnd_048": {
-      "item_sha256": "6d8bac514e0856c9b347b7a1f3e2c862edb470fd95262da0c562caad02adfe20",
+      "item_sha256": "a679880c6a6b28646e6b06950ac1bb9aa4196ad4e61bb64dd6bfd1c7465e6e80",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6783,16 +6777,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "high_severity_length_cue"
-      ],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "issues": [],
+      "note": "Сокращение сохраняет отличие обучения от врождённого рефлекса, гормонального ответа и полного подавления коры. Не вводится универсальное число повторений. Reviewed fragment независим от held обобщений о всей долговременной памяти.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:8470:8910"
         }
       ]
     },
