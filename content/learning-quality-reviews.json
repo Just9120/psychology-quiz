@@ -5626,10 +5626,10 @@
       ]
     },
     "questions:m1_vnd_006": {
-      "item_sha256": "921a0c8727241141e7bcbe5e598a624c2e415fc1b4dbd4b817b0ae985070a16c",
+      "item_sha256": "751ffbd2f223dfa8b348b8f8d7fc3787c2c1394cb0d7bd98db78ff1458466ac6",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5641,21 +5641,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: unreinforced, weakening. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:15637:15697;characters:16201:16294"
         }
       ]
     },
     "questions:m1_vnd_007": {
-      "item_sha256": "9db7a4f8680f8c3e3643e1ccb4a20188af68b46efee781505abe442f0263aae7",
+      "item_sha256": "595f3be5904880e30c5515d1bce9c3918a1f7a241d5f08a90baa3c0dfcbb252e",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5667,13 +5667,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: discrimination. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:17945:18232"
         }
       ]
     },
@@ -5704,10 +5704,10 @@
       ]
     },
     "questions:m1_vnd_009": {
-      "item_sha256": "524632e5203e5e4334eef9522fc37370ba1554090577aa011ee4bfad9e9d97be",
+      "item_sha256": "db25e8c7140653765fc3b146076e99ac9bb0cedc56898e77a72dfbde1e9c429c",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5719,13 +5719,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: regulation. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14042:14857"
         }
       ]
     },
@@ -5782,10 +5782,10 @@
       ]
     },
     "questions:m1_vnd_012": {
-      "item_sha256": "84e6f25b0db58293f42cd082ff2f57829b6f48b5858595b5656ecc8cb3daf36a",
+      "item_sha256": "5d3a6495c01f19d3b258d6a522dd69805ea9600386e4db1d6ddea095ad03295c",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5797,13 +5797,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: strength. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:22518:22641"
         }
       ]
     },
@@ -5886,10 +5886,10 @@
       ]
     },
     "questions:m1_vnd_016": {
-      "item_sha256": "125e9978b23de2751b1076f7a1ba7c9e36cf1d36260e869d8dcd96e9297ad4f1",
+      "item_sha256": "bbcce308aaf3ccce19b8d58a64a70d35dc5c1ed8584c28404e9dcdaeb613bc82",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5901,21 +5901,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: association. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:6006:6165"
         }
       ]
     },
     "questions:m1_vnd_017": {
-      "item_sha256": "0c61e67f67bab5c844bf865d38aaa76ab1b2533b54ed47acf4492f0d83f974d2",
+      "item_sha256": "174e78867eb5c972d3290c5fa6b6658f19c82d3ddbb258ea7355d5206d4c9fb2",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5927,13 +5927,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: unreinforced, recovery. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:15637:15697;characters:16398:16615"
         }
       ]
     },
@@ -6018,10 +6018,10 @@
       ]
     },
     "questions:m1_vnd_021": {
-      "item_sha256": "e8eb96ed1f7b5926e2a08b897044c72f238bfbc8c3759da0a58a8da28c016ff6",
+      "item_sha256": "14287e3e2a9a7ac967b106a35d5273754d66ca014ab88aae7b91ab01595cc8be",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6033,21 +6033,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: association. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:6006:6165"
         }
       ]
     },
     "questions:m1_vnd_022": {
-      "item_sha256": "5c3ada0068e5b76e145a31a1a3e2201cde007cd0ead9cf66e119ecf38e403f3f",
+      "item_sha256": "a1ceb16994a07ace4af387dd739b6cff7d1f83c79246cf2c8c0261af3e68204d",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6059,21 +6059,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: association. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:6006:6165"
         }
       ]
     },
     "questions:m1_vnd_023": {
-      "item_sha256": "3069d5cd64b842842c4a7d98b3f5827434a21e5a0ba80af090b3d3339e054f17",
+      "item_sha256": "991b4fe73381fc15cb1899cfb569aec7c035b87e0829a69dad15ed3efc9da8f6",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6085,21 +6085,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Лекция 1 прямо описывает угасательное торможение: ранее подкреплявшийся сигнал предъявляют без подкрепления, и выученная реакция ослабевает, хотя связь может восстановиться. Пример с уведомлением — учебная аналогия, не исключающая иных механизмов поведения; среди данных вариантов ответ об угасании единственный подходящий.",
+      "note": "Raw exact selected course fragments: unreinforced, weakening. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 14500:17000"
+          "locator": "characters:15637:15697;characters:16201:16294"
         }
       ]
     },
     "questions:m1_vnd_024": {
-      "item_sha256": "b951ece551e9ec6b97c5e307bf3aa9bcb0900d407f3f58913845fb05d6259506",
+      "item_sha256": "e380f6583d824bd2b6d47c8f657a042f07653aaeb3e5aabb75386ecb427fc727",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6111,13 +6111,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: discrimination. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:17945:18232"
         }
       ]
     },
@@ -6763,10 +6763,10 @@
       ]
     },
     "questions:m1_vnd_049": {
-      "item_sha256": "843ae279c52c30cb3bafff0ad8e98ce238d0bf72279a570558a88d6fad9fa52a",
+      "item_sha256": "de94ba7eb9b20970e7872e3bde035bdc95b03f7ed7bcaa718a002ac51c23281f",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6778,13 +6778,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямые фрагменты описывают подкрепление/повтор, внешнее торможение, восстановление угасшей реакции, дифференцировку и свойства нервных процессов. Ключи различимы; учебная модель не исключает иных механизмов реального поведения.",
+      "note": "Raw exact selected course fragments: regulation, discrimination, waiting. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14042:14857;characters:17945:18232;characters:20397:20482"
         }
       ]
     },
