@@ -9581,10 +9581,10 @@
       ]
     },
     "questions:m2_exp_004": {
-      "item_sha256": "f96996b3869e02eadd6387b5506b759a172a8357d468e741114c2c0583f8cf38",
+      "item_sha256": "1d714186ef84a8fe11d125287c3d6471a1ad71b35297d4f5c40b39c855ed2ed7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9596,21 +9596,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика №7 прямо предлагает разбирать классическое исследование по цели, процедуре, результату и парадигме; затем обсуждает допустимость обобщения. Вопрос проверяет исследовательскую конструкцию, не этическое одобрение исторического эксперимента.",
+      "note": "Individually verified exact raw practice7 passages for study analysis, stimulus pairing, one-case limitation, observed-model imitation and Tolman study context; primary originals independently reviewed in bounded sections. Watson/Rayner1920 one infant and conditioning procedure, Bandura/Ross/Ross1961 discussion imitation without exposure-phase reinforcers, Tolman1948 latent-learning sections distinguish non-rewarded acquisition from later performance and identify map as interpretation. Course snippets alone do not establish all detailed claims. No all-emotions-from-learning generalization, universal child imitation, fixed aggression rates, invented Tolman measurements or ethics-free procedure. All thirteen course holds preserved; _040 missing scope replaced by explicit current fragment review.",
       "sources": [
         {
           "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 4000:10200"
+          "locator": "characters:4020:4196;characters:7300:7732"
         }
       ]
     },
     "questions:m2_exp_005": {
-      "item_sha256": "d6edeb198a298108f0f0a6ef0800321c48fe1ae6a67822cd31ef56586d4f5b13",
+      "item_sha256": "6704c1750ed83d2649d32cf4b0d90719c629b20ee8d638d516aca6048ae98c16",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9622,13 +9622,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика №7 описывает исходную гипотезу научения и последовательное сочетание нейтрального стимула с громким звуком в опыте маленького Альберта. Вопрос касается логики связи гипотезы и процедуры, не современной допустимости опыта.",
+      "note": "Individually verified exact raw practice7 passages for study analysis, stimulus pairing, one-case limitation, observed-model imitation and Tolman study context; primary originals independently reviewed in bounded sections. Watson/Rayner1920 one infant and conditioning procedure, Bandura/Ross/Ross1961 discussion imitation without exposure-phase reinforcers, Tolman1948 latent-learning sections distinguish non-rewarded acquisition from later performance and identify map as interpretation. Course snippets alone do not establish all detailed claims. No all-emotions-from-learning generalization, universal child imitation, fixed aggression rates, invented Tolman measurements or ethics-free procedure. All thirteen course holds preserved; _040 missing scope replaced by explicit current fragment review.",
       "sources": [
         {
           "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 4100:7300"
+          "locator": "characters:4700:5650"
         }
       ]
     },
@@ -10534,10 +10534,10 @@
       ]
     },
     "questions:m2_exp_040": {
-      "item_sha256": "b33ac9069012c8fb79eaaafc6cc47fabd45d5bc60ce2c71145bc3613732c2dd4",
+      "item_sha256": "ed93d8cff2b4c0add84ea2087011267c7b7bae1a4504cbd99f2dfa2c3e75f2ec",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10549,13 +10549,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Убран ошибочный универсальный критерий обязательных групп/статистики: вопрос теперь проверяет границы обобщения конкретного исторического случая, не исключая контролируемые single-case designs.",
+      "note": "Individually verified exact raw practice7 passages for study analysis, stimulus pairing, one-case limitation, observed-model imitation and Tolman study context; primary originals independently reviewed in bounded sections. Watson/Rayner1920 one infant and conditioning procedure, Bandura/Ross/Ross1961 discussion imitation without exposure-phase reinforcers, Tolman1948 latent-learning sections distinguish non-rewarded acquisition from later performance and identify map as interpretation. Course snippets alone do not establish all detailed claims. No all-emotions-from-learning generalization, universal child imitation, fixed aggression rates, invented Tolman measurements or ethics-free procedure. All thirteen course holds preserved; _040 missing scope replaced by explicit current fragment review.",
       "sources": [
         {
+          "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
-          "locator": "characters-7700-9300-and-10500-12200"
+          "locator": "characters:8100:8300"
         }
       ],
       "resolution": {
@@ -11058,10 +11058,10 @@
       ]
     },
     "questions:m2_exp_060": {
-      "item_sha256": "129ead2c5f93edb7984e768e6d3029fa63f917ce55d89629704aa9dca5441bbe",
+      "item_sha256": "d97e8ca0b6e1d801ec8146fe3650bef15899b17325f3e5e456727a4cdf6ac4da",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11073,21 +11073,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика описывает наблюдательное научение и приобретение пространственной информации до явного подкрепления; ключи сохраняют вероятностный, а не универсальный характер.",
+      "note": "Individually verified exact raw practice7 passages for study analysis, stimulus pairing, one-case limitation, observed-model imitation and Tolman study context; primary originals independently reviewed in bounded sections. Watson/Rayner1920 one infant and conditioning procedure, Bandura/Ross/Ross1961 discussion imitation without exposure-phase reinforcers, Tolman1948 latent-learning sections distinguish non-rewarded acquisition from later performance and identify map as interpretation. Course snippets alone do not establish all detailed claims. No all-emotions-from-learning generalization, universal child imitation, fixed aggression rates, invented Tolman measurements or ethics-free procedure. All thirteen course holds preserved; _040 missing scope replaced by explicit current fragment review.",
       "sources": [
         {
           "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7700:9300, 10500:12200, 25000:26700, 36300:38200"
+          "locator": "characters:27100:27280"
         }
       ]
     },
     "questions:m2_exp_061": {
-      "item_sha256": "0fea441a80e5d10910660394d2ae3b8b06a82064eccec4009203e3fb8b322e75",
+      "item_sha256": "5fff71e2c69d4743fb5144379b060fc80b5bfd67f8928c7932ff07fee6cf8c13",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -11099,13 +11099,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика описывает наблюдательное научение и приобретение пространственной информации до явного подкрепления; ключи сохраняют вероятностный, а не универсальный характер.",
+      "note": "Individually verified exact raw practice7 passages for study analysis, stimulus pairing, one-case limitation, observed-model imitation and Tolman study context; primary originals independently reviewed in bounded sections. Watson/Rayner1920 one infant and conditioning procedure, Bandura/Ross/Ross1961 discussion imitation without exposure-phase reinforcers, Tolman1948 latent-learning sections distinguish non-rewarded acquisition from later performance and identify map as interpretation. Course snippets alone do not establish all detailed claims. No all-emotions-from-learning generalization, universal child imitation, fixed aggression rates, invented Tolman measurements or ethics-free procedure. All thirteen course holds preserved; _040 missing scope replaced by explicit current fragment review.",
       "sources": [
         {
           "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7700:9300, 10500:12200, 25000:26700, 36300:38200"
+          "locator": "characters:36580:36980"
         }
       ]
     },
