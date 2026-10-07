@@ -1846,10 +1846,10 @@
       ]
     },
     "questions:m1_gp_001": {
-      "item_sha256": "3505b98265e6cce948a0d1197e3bea65c45c5c7e208358227a7beaf91da328af",
+      "item_sha256": "120d505a039419d6d21906533a3922628782841de4cd9b2bd98c7372f9c95e54",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1861,21 +1861,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
+      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7580:8090, 10500:13700"
+          "locator": "characters:8000:8500;characters:11000:11300;characters:11400:12100"
         }
       ]
     },
     "questions:m1_gp_002": {
-      "item_sha256": "f3eee52a772bd8110d07ffcd15b03beb2e7d383c52f39c85f298bc0ee6d54f45",
+      "item_sha256": "e38eae68477bad09e152fd39ccb1a95258970f4d8c868fba1efa95fa5d900bcb",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1887,13 +1887,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
+      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3650, 4000:4620"
+          "locator": "characters:36700:37180"
         }
       ]
     },
@@ -1926,10 +1926,10 @@
       ]
     },
     "questions:m1_gp_004": {
-      "item_sha256": "2e15db3d9eee48f3ac3cccf1fd1d6f59d9c02bf47f477d770889fca9100e27d9",
+      "item_sha256": "d31ade2c9601aa72eb7d2734901c39d33b00183ce74400c107c0d7108906bbb5",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1941,13 +1941,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
+      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7900:8290, 4000:4620"
+          "locator": "characters:8000:8500;characters:36700:37180"
         }
       ]
     },
@@ -2703,10 +2703,10 @@
       ]
     },
     "questions:m1_gp_033": {
-      "item_sha256": "043c76a7b3ffffc29a78296f93c1373465b2dcd22c782bd6d1dc37eb731a0c70",
+      "item_sha256": "0988a8282870acc21b69356fb14e7787896e10d3a8c45baf99a74ce89f4acd07",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2718,13 +2718,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
+      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
+          "locator": "characters:4938:5660;characters:36700:37180"
         }
       ]
     },
@@ -2914,10 +2914,10 @@
       ]
     },
     "questions:m1_gp_041": {
-      "item_sha256": "cb69f131580f2cf49e455dc9baa0e5d04651c425259d56cbe998e7fd55b89571",
+      "item_sha256": "95b8f7e3b88dbf21224f280c45da3cdd7155ed12a5d1e751b8e05365fd012163",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2929,13 +2929,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
+      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 13100:13680"
+          "locator": "characters:13101:13470"
         }
       ]
     },
@@ -3098,10 +3098,10 @@
       ]
     },
     "questions:m1_gp_048": {
-      "item_sha256": "9fdd95579c66f2b7124cf113deef0e7cdd8bc5e8d614d67f761b3c60e946a9fc",
+      "item_sha256": "0fb98cc97a9ae86dda7036d3a59a1d526367967d1773fdbd09c5d315091eff87",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3113,13 +3113,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
+      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
+          "locator": "characters:36700:37180"
         }
       ]
     },
@@ -3312,10 +3312,10 @@
       ]
     },
     "questions:m1_gp_056": {
-      "item_sha256": "197c2e4356ccf9e8608370db0fd48e16d7c50526744b83fbbc5e4075630c6e69",
+      "item_sha256": "60b53d4f2edb561ac79b5398ee45486bdc33537638b0a478b77a0afddfa648f9",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3327,13 +3327,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
+      "note": "Exact raw lesson1 passages on subject breadth, studying mechanisms, fundamental research hypotheses and a bounded acquired-knowledge taxonomy. OpenStaxPsychology2e2.1 independently supports evidence versus intuition, distinguishing behaviour from reasons, empirical hypotheses and iterative refinement. Applied client/lateness/burnout examples are educational reasoning examples, not quotes or clinical diagnoses. Scientific research is not automatically bias-free; replication alone does not prove validity. _041 refers only to this course classification, not immutable innate traits or a universal causal pyramid. All other twelve substantive holds remain, only the bounded taxonomy passage separated.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2300:3930, 4000:4620"
+          "locator": "characters:36700:37180"
         }
       ]
     },

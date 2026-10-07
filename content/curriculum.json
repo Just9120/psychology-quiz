@@ -3453,6 +3453,48 @@
       "topic_id": "t_84bd9f531980",
       "item_sha256": "9c0544a42ac54002fe6fb85595aaae009a981b275988610bdeda22389de208f5",
       "locator": "private certificate:questions:m3_psychological_consulting_050"
+    },
+    "c540c370cd03591b2216410bfaf94fcf2986c3449add28c7f085e30e5c912c1a": {
+      "external_id": "m1_gp_001",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "120d505a039419d6d21906533a3922628782841de4cd9b2bd98c7372f9c95e54",
+      "locator": "private certificate:questions:m1_gp_001"
+    },
+    "081eabc72c22303f284d0885556f7907a9d5124ffcece498d36217f85cbf37ad": {
+      "external_id": "m1_gp_002",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "e38eae68477bad09e152fd39ccb1a95258970f4d8c868fba1efa95fa5d900bcb",
+      "locator": "private certificate:questions:m1_gp_002"
+    },
+    "2de08b3d2c5d91edfbfd00deeac37f172539e1095daecf503830e8fc4bdd2a5f": {
+      "external_id": "m1_gp_004",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "d31ade2c9601aa72eb7d2734901c39d33b00183ce74400c107c0d7108906bbb5",
+      "locator": "private certificate:questions:m1_gp_004"
+    },
+    "b55acbdf0e662ca4aef8fa507f801ffa234a8419c6a816dbdbeab81abeeed896": {
+      "external_id": "m1_gp_033",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "0988a8282870acc21b69356fb14e7787896e10d3a8c45baf99a74ce89f4acd07",
+      "locator": "private certificate:questions:m1_gp_033"
+    },
+    "0730a57a0b65555a6ca79c4130477771bb23bb87184c6ddf42ccccd252030d40": {
+      "external_id": "m1_gp_041",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "95b8f7e3b88dbf21224f280c45da3cdd7155ed12a5d1e751b8e05365fd012163",
+      "locator": "private certificate:questions:m1_gp_041"
+    },
+    "76ed9ee2544eaccb13a81af2bcff491ad16669311519ec324ed00036631ab624": {
+      "external_id": "m1_gp_048",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "0fb98cc97a9ae86dda7036d3a59a1d526367967d1773fdbd09c5d315091eff87",
+      "locator": "private certificate:questions:m1_gp_048"
+    },
+    "eeed7f620d23708582969a23d843a01303c7e87de9be092bace5bd4811375d30": {
+      "external_id": "m1_gp_056",
+      "topic_id": "t_a6c516bbe92a",
+      "item_sha256": "60b53d4f2edb561ac79b5398ee45486bdc33537638b0a478b77a0afddfa648f9",
+      "locator": "private certificate:questions:m1_gp_056"
     }
   }
 }
