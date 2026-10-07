@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 458
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 469
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
@@ -181,7 +181,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert source['kind'] == 'learning_material' and source['readable'] is True
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
-        assert historical == {'m1_vnd_002', *[f'm1_gp_{n:03}' for n in (5,6,7,8,9,10,11,12,21,23,24,25,35,36,37,38,43,52)], 'm1_intro_054', 'm2_exp_012', 'm2_exp_058',
+        assert historical == {*[f'm1_intro_{n:03}' for n in (1,2,3,8,13,14,19,22,26,27,37)], 'm1_vnd_002', *[f'm1_gp_{n:03}' for n in (5,6,7,8,9,10,11,12,21,23,24,25,35,36,37,38,43,52)], 'm1_intro_054', 'm2_exp_012', 'm2_exp_058',
                               'm1_vnd_034', 'm1_vnd_047', 'm1_vnd_048',
                               'm1_intro_035', 'm2_exp_030', 'm2_exp_046',
                               'm3_psychological_consulting_039',

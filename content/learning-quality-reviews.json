@@ -45,10 +45,10 @@
   },
   "items": {
     "questions:m1_intro_001": {
-      "item_sha256": "6560ff01e50d9e37986880805472a65e13cce08a43dd734a5e67be70cb378cdd",
+      "item_sha256": "1e509fe067ac81ec75a9faf3a16d5cf208498acd7638f8eaab17f89af3e131af",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -60,21 +60,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:3209:3572;characters:4084:4920"
         }
       ]
     },
     "questions:m1_intro_002": {
-      "item_sha256": "e89d66e9feaa5bfd3515849c96ecc35fdbff20f37186b4d5f712ca0947d334b7",
+      "item_sha256": "e67a63a522d2555cc038d3a7e1bea8c849cfc02a0e8531161b93b197c14ee792",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -86,21 +86,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:2294:2515"
         }
       ]
     },
     "questions:m1_intro_003": {
-      "item_sha256": "f5135966fc5d95258e2ac25404490fbd2b0062ecec254d6b8f3ea0b7721d5507",
+      "item_sha256": "111a0a30c4d1cd29162be17f871e8e9780902836450c9e1baeb46e2a9eb3b96b",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -112,19 +112,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Тема 1 подтверждает психологические и жизненные запросы вне медицинских назначений; тема 6 прямо перечисляет отношения, самооценку и тревожность среди типичных для курса запросов и приводит примеры. Слова о частоте не являются популяционной оценкой. Точные прежние extract SHA-256 обеих текущих Drive revisions воспроизведены 28.09.2026 с BOM и CRLF-разделителем абзацев; публичный вопрос не менялся.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
-        },
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5750:7350"
+          "locator": "characters:3209:3572"
         }
       ]
     },
@@ -233,10 +227,10 @@
       ]
     },
     "questions:m1_intro_008": {
-      "item_sha256": "b33309810edabc7f2f431e89b92af50a65fe408016e92cd0c6c01ca5334d1c87",
+      "item_sha256": "a264ca2da288b0e30515123d98be5632f8df9f7dfab094a85c7098a3b6be8f71",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -248,13 +242,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:13411:13946"
         }
       ]
     },
@@ -363,10 +357,10 @@
       ]
     },
     "questions:m1_intro_013": {
-      "item_sha256": "1226a3e9109a9042602c3248a06244e7466fef82e200b294d917af21ace655fa",
+      "item_sha256": "b28674421c56e6a4bb8ebf2262533bdb4305da6c7ebec46d5157f0052645dec8",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -378,21 +372,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:2294:2515;characters:3209:3572"
         }
       ]
     },
     "questions:m1_intro_014": {
-      "item_sha256": "e29d4f8e235448c230ed5f9d57d4a8b2b4dce94a390e0d410b00b0c43be27e13",
+      "item_sha256": "e2440654b6e9c7bf64d1e18becf398d6ea59c203abdc6f2de70ff6a703fbfdb5",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -404,13 +398,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:3209:3572"
         }
       ]
     },
@@ -519,10 +513,10 @@
       ]
     },
     "questions:m1_intro_019": {
-      "item_sha256": "d9f64ea0b55b0bf2c41923ba53f0d9c697758f245b1badbf954c5972ba646370",
+      "item_sha256": "001ef37e109b5f1cee47c18d8999b1eee25727881db8cc0c7b073cf73aeef825",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -534,13 +528,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:4084:4920;characters:13411:13946"
         }
       ]
     },
@@ -597,10 +591,10 @@
       ]
     },
     "questions:m1_intro_022": {
-      "item_sha256": "35b3e41ece8ae7abee541a49ada800010557f8dc00eb732e5770b39cf2ea34b2",
+      "item_sha256": "fe1c7f6d32c5e370c2ed97dd7a28f7aec104c156a18c1cca1157036e1960509e",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -612,13 +606,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:4084:4920;characters:13411:13946"
         }
       ]
     },
@@ -703,10 +697,10 @@
       ]
     },
     "questions:m1_intro_026": {
-      "item_sha256": "59f16dd83ad141dd0ef21ae82af4970ea320257580f67ab27d7e2be7c18af9f8",
+      "item_sha256": "787b5afc4ad48c33920f76ca23b05cbebf6b93367fff38ff0211e5e93bef1c89",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -718,21 +712,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:4084:4920;characters:13411:13946"
         }
       ]
     },
     "questions:m1_intro_027": {
-      "item_sha256": "613b3a8177ae564dbb14cacae2fbb174f18af761e0831814b70e25a4e11ca5ae",
+      "item_sha256": "6c5c3578e645d2fb9deb84d1a7b291b2a6d57214ed9c84648429ab17de956e46",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -744,13 +738,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:3209:3572"
         }
       ]
     },
@@ -1022,10 +1016,10 @@
       ]
     },
     "questions:m1_intro_037": {
-      "item_sha256": "ca1eea08b96d5ec83b6efc7a311275a68ad7e70ea299c932fe923d0c9ccb9f76",
+      "item_sha256": "2cb3abd4809f9cdfc3d7f45fd42d293c74a1eac78a0ef9ef638388522a38e71f",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1037,13 +1031,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Ключ и explanation согласуются с ролью, немедикаментозной помощью, компетенцией и автономией из вводной лекции; отвлекающие ответы подменяют профессию или решения клиента.",
+      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:2294:2515;characters:3209:3572"
         }
       ]
     },
