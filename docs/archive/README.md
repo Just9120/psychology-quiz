@@ -29,7 +29,7 @@
 
 | Документ | Сохранённые границы и незакрытые обязательства |
 | --- | --- |
-| [Literature runtime RFC](literature_runtime_rfc.md) | E09: личный план чтения и обоснованный следующий шаг AC-LIT-06 остаются в текущей Goal; legacy state mapping Q-04 и интеграции AC-LIT-08/09 не объявлены завершёнными. Старые /next, reminders, deadline и daily-time proposals сами по себе не расширяют требования. |
+| [Literature runtime RFC](literature_runtime_rfc.md) | E09: текущие состояния личного плана/следующего шага AC-LIT-06 и legacy mapping Q-04 подтверждены поставкой и матрицей плана. AC-LIT-08/09 исключены D-42 из требований; этот RFC не возвращает их в scope. Старые /next, reminders, deadline и daily-time proposals сами по себе не расширяют требования. |
 | [Glossary and literature contours RFC](glossary_literature_contours_rfc.md) | E05/E09: сохраняются историческая структура и rationale разделов; source-backed coverage и чтение проверяются по текущим AC, а не по прежнему статусу proposal. Исторический proposal реестра тем сохранён в архиве; действующие contracts определяются текущими registry/validator и spec/plan. |
 
 ## Исторические отчёт и план Mini App
