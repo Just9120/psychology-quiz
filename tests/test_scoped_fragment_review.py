@@ -406,3 +406,41 @@ def test_related_fragment_mapping_accepts_explicit_union_of_existing_holds(tmp_p
     before = deepcopy(processed)
     verify_current_sources(dossier, inventory, processed, public_item=public)
     assert processed == before
+
+
+@pytest.mark.parametrize("top_locator", ["absent", None])
+def test_issue_only_hold_preserves_all_ranges_and_current_review(tmp_path, monkeypatch, top_locator):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record.pop("locator")
+    if top_locator is None:
+        record["locator"] = None
+    record["issues"] = [{"locator": "characters:16:30"}, {"locator": "characters:31:52"}]
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    for overlapping in ("characters:0:15", "characters:10:20"):
+        record["issues"][1]["locator"] = overlapping
+        dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+        with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+            verify_current_sources(dossier, inventory, processed, public_item=public)
+    record["issues"][1]["locator"] = "characters:31:52"
+    # An old dossier is still invalid after any change to the hold record.
+    with pytest.raises(SigningError, match="fragment_review_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("issues", [[], [{}], [{"locator": None}],
+                                   [{"locator": "unknown"}],
+                                   [{"locator": "characters:31:900"}],
+                                   [{"locator": "characters:16:30"}, {"locator": "unknown"}],
+                                   [{"locator": "characters:16:30"}, {"locator": "characters:31:900"}]])
+def test_issue_only_hold_never_infers_missing_or_invalid_scope(tmp_path, monkeypatch, issues):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record.pop("locator")
+    record["issues"] = issues
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_(conflict_scope_unknown|locator_required|locator_out_of_bounds)"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)

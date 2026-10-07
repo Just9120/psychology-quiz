@@ -158,7 +158,11 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
     if record.get("review_state") == "conflict":
         if reviewed_at <= _timestamp(record.get("reviewed_at")):
             raise FragmentReviewError("fragment_review_date_required")
-        held.extend(_held_ranges(record.get("locator"), pdf_pages))
+        # Some completed reviews record each held passage in issues rather
+        # than repeating their union in a top-level locator. Both representations
+        # must preserve every explicit range; missing scope still fails below.
+        if record.get("locator") is not None:
+            held.extend(_held_ranges(record["locator"], pdf_pages))
     issues = record.get("issues", [])
     if not isinstance(issues, list):
         raise FragmentReviewError("fragment_conflict_scope_unknown")
@@ -166,6 +170,8 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
         if not isinstance(issue, dict):
             raise FragmentReviewError("fragment_conflict_scope_unknown")
         held.extend(_held_ranges(issue.get("locator"), pdf_pages))
+    if record.get("review_state") == "conflict" and not held:
+        raise FragmentReviewError("fragment_conflict_scope_unknown")
     if any(a < d and c < b for a,b in selected for c,d in held):
         raise FragmentReviewError("fragment_overlaps_conflict")
     evidence = [{"source_id": source["id"], "snapshot_sha256": source["snapshot_sha256"],
