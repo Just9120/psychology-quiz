@@ -123,10 +123,10 @@
       ]
     },
     "questions:m1_intro_004": {
-      "item_sha256": "124a00ba849e7490b9309d56620472823f83173214f9c57db8f440c5089a2d43",
+      "item_sha256": "858433af7c370fb160b275848d3f0c62ec0fe950cacb7e53640870fbd28c768c",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -138,21 +138,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:15359:15457"
         }
       ]
     },
     "questions:m1_intro_005": {
-      "item_sha256": "53607f771cbc65b585ae1d1ad8b4b58bcd0e898aafe93ef79ae81002bb67143f",
+      "item_sha256": "8481c31125d2b4550be386a8e9d9bff3f259ceb37eca56034c272fd4d81109c8",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -164,21 +164,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:2300:2789"
         }
       ]
     },
     "questions:m1_intro_006": {
-      "item_sha256": "8287188e0adeb862f9170d669a3709d99f7fefe64b5758ae798b40fefb0f3f9c",
+      "item_sha256": "020b8c54f719f4f5a2b02ae2a214f4f39e2e8cc910b6239f81039d44687899b9",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -190,13 +190,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:5734:6157;characters:15359:15457"
         }
       ]
     },
@@ -331,10 +331,10 @@
       ]
     },
     "questions:m1_intro_012": {
-      "item_sha256": "5becb8bc9b72880961f6342480ad98064fdd3073a249bc04be97e13100c453ac",
+      "item_sha256": "4f2114f3b74aceb18d9888e16cce6ef833afd589c3a861a1409d05540bbc3bcd",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -346,13 +346,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:2300:2789;characters:7893:8479"
         }
       ]
     },
@@ -435,10 +435,10 @@
       ]
     },
     "questions:m1_intro_016": {
-      "item_sha256": "6ddf6043013b6f0f49c05faf724a48741350532f104f259f71b48330997d3c1c",
+      "item_sha256": "1054cc563210eb7607b04e44e6e7820e33dab60488c186cda0723e4db9a1853f",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -450,13 +450,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:4038:4429;characters:5734:6157"
         }
       ]
     },
@@ -645,10 +645,10 @@
       ]
     },
     "questions:m1_intro_024": {
-      "item_sha256": "1b7d7acf51927310d39afbd19a24749c8e276ba27feabd81ca646addd63719fe",
+      "item_sha256": "9bf9bebd8274f292bdcc96a943ceb562d3d0447ed03bd9185a70e7cd647da2bb",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -660,13 +660,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:7893:8479"
         }
       ]
     },
@@ -801,10 +801,10 @@
       ]
     },
     "questions:m1_intro_030": {
-      "item_sha256": "c6797063cf9df6819790ea23efc9698a2ad7902fa8c320ffd429a55b01889867",
+      "item_sha256": "5ede2767a88c6a2c8e9b971f776e166da44a264dd63f12d182d5aad35d51c867",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -816,13 +816,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:2300:2789;characters:5734:6157"
         }
       ]
     },
@@ -938,10 +938,10 @@
       ]
     },
     "questions:m1_intro_034": {
-      "item_sha256": "765cbb9929e94d9d61c5f540c18cb806a78a37d4db6ed692cd267e9d51e31e36",
+      "item_sha256": "6b668d645fae30f2e98834a2575d01438f89f438fa83bb108409de90a147549a",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -953,13 +953,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:5734:6157;characters:15359:15457"
         }
       ]
     },
@@ -990,10 +990,10 @@
       ]
     },
     "questions:m1_intro_036": {
-      "item_sha256": "1d48174794d209b02429c15c0f623dc61b0fa5ad32bd0995ae3c14c77f478faf",
+      "item_sha256": "9156ff6cc962d39fbad3e5560a61349a30a373eea80038791c3f81e44b2546ca",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1005,13 +1005,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Текст прямо ограничивает возможности помощи и требует реальных достижимых целей; обещание гарантированного исхода за фиксированное число встреч противоречит обоим условиям. Это педагогическое применение принципа, не цитата о конкретном сроке.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5300:6600, 13500:14500"
+          "locator": "characters:5734:6157"
         }
       ]
     },
@@ -1124,10 +1124,10 @@
       ]
     },
     "questions:m1_intro_041": {
-      "item_sha256": "11c5cc9440296b6546e5f4f253b3d4c16c7a91dfc4fc569f2be59431e7dcc217",
+      "item_sha256": "c720b4749b2e0aca9277ff7470208639c5bff7ffea87690bc56b2b2b39ebc64d",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1139,13 +1139,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Текст требует честно объяснять ограничения консультирования и согласовывать реальные достижимые цели; в ситуации запроса на гарантию применено именно это правило. Не утверждается прогноз для конкретного клиента.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5300:6600, 13500:14500"
+          "locator": "characters:5734:6157"
         }
       ]
     },
@@ -1258,10 +1258,10 @@
       ]
     },
     "questions:m1_intro_046": {
-      "item_sha256": "b0746ab3656dc3eacde9768f8e75d60f9c9d382ea0658275fffcbbcde46d2db2",
+      "item_sha256": "2bff26a9b68632ae42bbcafed56db878fb6af14f46f8d9b3b7f24371fd3a3f83",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1273,13 +1273,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверены границы/контракт/согласие/ответственность; кейсы применяют общий принцип. Ссылка topic2 для части записей не соответствует фактической теме4. Конкретная юридическая норма не сертифицируется.",
+      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5600:6600, 9333:10613, 10900:12800, 12830:15500, 15350:18000, 18000:19500"
+          "locator": "characters:2300:2789;characters:5734:6157"
         }
       ]
     },
