@@ -19,3 +19,5 @@ from tests.test_repetition import (
     test_glossary_due_review_counts_one_answer_and_keeps_other_actors_private,
     test_topic_reset_removes_only_review_events_for_deleted_answers,
 )
+
+from tests.test_attempt_capture_batch import test_current_bank_batches_preserve_old_attempt_bytes

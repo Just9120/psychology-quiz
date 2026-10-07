@@ -7,31 +7,41 @@ from app.database import Connection, begin_write, is_postgres
 
 
 def capture_question(conn: Connection, question_id: int) -> tuple[str, str]:
-    row = conn.execute(
-        """SELECT q.external_id, q.question_text, q.explanation, q.source_ref,
-                  c.name, q.difficulty, q.kind, q.case_content
-           FROM questions q JOIN categories c ON c.id=q.category_id WHERE q.id=?""",
-        (question_id,),
-    ).fetchone()
-    if row is None:
-        raise ValueError("Cannot snapshot a missing question")
-    content = dict(zip(
-        ("external_id", "question_text", "explanation", "source_ref", "category", "difficulty"), row[:6]
-    ))
-    if row[6] != "theory":
-        content["kind"] = row[6]
-    if row[7] is not None:
-        content["case"] = json.loads(row[7])
-    content["version"] = 1
-    content["options"] = [
-        {"option_index": option[0], "option_text": option[1], "is_correct": option[2]}
-        for option in conn.execute(
-            "SELECT option_index, option_text, is_correct FROM question_options WHERE question_id=? ORDER BY option_index",
-            (question_id,),
-        )
-    ]
-    encoded = json.dumps(content, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-    return encoded, hashlib.sha256(encoded.encode()).hexdigest()
+    return capture_questions(conn, [question_id])[question_id]
+
+
+def capture_questions(conn: Connection, question_ids: list[int]) -> dict[int, tuple[str, str]]:
+    """Capture exact current editions in bounded batches, preserving byte identity.
+
+    Callers own the transaction/content lock. This replaces per-question bank
+    queries in actor history views; it never updates stored attempt snapshots.
+    """
+    ids = list(dict.fromkeys(question_ids))
+    captured = {}
+    for offset in range(0, len(ids), 500):
+        batch = ids[offset:offset + 500]
+        placeholders = ','.join('?' for _ in batch)
+        rows = conn.execute(f"""SELECT q.id,q.external_id,q.question_text,q.explanation,q.source_ref,
+                          c.name,q.difficulty,q.kind,q.case_content
+            FROM questions q JOIN categories c ON c.id=q.category_id WHERE q.id IN ({placeholders})""", batch).fetchall()
+        if len(rows) != len(batch):
+            raise ValueError("Cannot snapshot a missing question")
+        options = {qid: [] for qid in batch}
+        for qid, index, text, correct in conn.execute(f"""SELECT question_id,option_index,option_text,is_correct
+                FROM question_options WHERE question_id IN ({placeholders}) ORDER BY question_id,option_index""", batch):
+            options[qid].append({'option_index': index, 'option_text': text, 'is_correct': correct})
+        for row in rows:
+            content = dict(zip(
+                ('external_id', 'question_text', 'explanation', 'source_ref', 'category', 'difficulty'), row[1:7]))
+            if row[7] != 'theory':
+                content['kind'] = row[7]
+            if row[8] is not None:
+                content['case'] = json.loads(row[8])
+            content['version'] = 1
+            content['options'] = options[row[0]]
+            encoded = json.dumps(content, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            captured[row[0]] = encoded, hashlib.sha256(encoded.encode()).hexdigest()
+    return captured
 
 
 def ensure_attempt_snapshots(conn: Connection) -> None:
