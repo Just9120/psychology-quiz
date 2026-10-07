@@ -262,7 +262,7 @@ def test_preparation_can_validate_without_becoming_public(kind, status):
     assert not policy.can_publish(kind, item)
 
 
-def test_current_legacy_counts_preserved_without_source_certification():
+def test_historical_baseline_preserved_and_current_learning_content_is_reviewed():
     policy = publication.load_policy()
     assert len(policy.legacy) == 716
     assert sum(review["purpose"] == "bibliographic_metadata" for review in policy.reviews.values()) == 143
@@ -283,12 +283,17 @@ def test_current_legacy_counts_preserved_without_source_certification():
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected
         assert publication.validate_publications(kind) == []
-    item = next(item for path in (publication.ROOT / "content/questions").rglob("*.json")
-                for item in json.loads(path.read_text(encoding="utf-8"))
-                if item.get("status") == "approved" and policy.is_legacy("questions", item))
-    assert policy.is_legacy("questions", item)
-    item["explanation"] += " changed"
-    assert not policy.can_publish("questions", item)
+    current = [item for path in (publication.ROOT / "content/questions").rglob("*.json")
+               for item in json.loads(path.read_text(encoding="utf-8"))
+               if item.get("status") == "approved"]
+    # Historical allowances remain frozen; every currently approved edition
+    # now has an exact review, rather than relying on its legacy fingerprint.
+    assert all(not policy.is_legacy("questions", item) for item in current)
+    for item in current:
+        assert policy.can_publish("questions", item)
+        changed = copy.deepcopy(item)
+        changed["explanation"] += " changed"
+        assert not policy.can_publish("questions", changed), item["id"]
 
 
 def test_current_learning_reviews_do_not_use_bibliographies_as_knowledge():

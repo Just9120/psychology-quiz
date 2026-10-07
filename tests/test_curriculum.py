@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 648
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 685
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
@@ -238,6 +238,20 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                               } | {
                                   f'm2_exp_{number:03}'
                                   for number in (82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 109)
+                              } | {
+                                  'm1_gp_031', 'm1_gp_051', 'm1_intro_007',
+                                  'm1_intro_009', 'm1_intro_010', 'm1_intro_025',
+                                  'm1_intro_047', 'm1_intro_049', 'm1_phys_020',
+                                  'm1_psyf_011', 'm1_psyf_021', 'm1_psyf_026',
+                                  'm1_psyf_031', 'm1_psyf_034', 'm1_psyf_045',
+                                  'm1_psyf_055', 'm1_psyf_061', 'm1_psyf_064',
+                                  'm2_exp_001', 'm2_exp_002', 'm2_exp_003',
+                                  'm2_exp_009', 'm2_exp_025', 'm2_exp_026',
+                                  'm2_exp_031', 'm2_exp_034', 'm2_exp_035',
+                                  'm2_exp_036', 'm2_exp_038', 'm2_exp_058',
+                                  'm2_exp_059', 'm2_qual_004', 'm2_qual_014',
+                                  'm2_qual_034', 'm2_qual_040', 'm2_qual_053',
+                                  'm3_psychological_consulting_082',
                               }
         assert retired == {'m2_qual_009', 'm2_qual_013'}
 

@@ -201,10 +201,10 @@
       ]
     },
     "questions:m1_intro_007": {
-      "item_sha256": "9de16367564dbb81e8d3fc34b7364bbd587a3bcf026abc069511ab4e3e09caa2",
+      "item_sha256": "d06dcb169e43d32cf96acc54f795a91c38f970b6ac66a5a9ac11480ab0e91bbf",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -216,15 +216,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Уважение/эмпатия и рефлексия собственных реакций подтверждаются фрагментами о личности; прикладные ситуации являются переносом общего принципа, не дословными кейсами лекции.",
-      "sources": [
-        {
-          "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
-          "modified_time": "2026-04-05T22:13:17.690Z",
-          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
-        }
-      ]
+      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_intro_008": {
       "item_sha256": "a264ca2da288b0e30515123d98be5632f8df9f7dfab094a85c7098a3b6be8f71",
@@ -253,10 +246,10 @@
       ]
     },
     "questions:m1_intro_009": {
-      "item_sha256": "0469e2a9ed849ea4ed57815ea7f9cb311fd9f6a1b35eb6e0a6cf45a3e2201c59",
+      "item_sha256": "5c30021ab35a0b27f6ed9ad628203049cc2e1e7169b3ad2950a1346eba5e5e63",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -268,21 +261,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Уважение/эмпатия и рефлексия собственных реакций подтверждаются фрагментами о личности; прикладные ситуации являются переносом общего принципа, не дословными кейсами лекции.",
-      "sources": [
-        {
-          "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
-          "modified_time": "2026-04-05T22:13:17.690Z",
-          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
-        }
-      ]
+      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_intro_010": {
-      "item_sha256": "386631242ee744868200b5b1908ed57fdef31c59294ccf9016959b502aff0bf2",
+      "item_sha256": "265982d6f756864dd6379bf2ea568c36c032dc49a57876979b5f28af6f818ce1",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -294,15 +280,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Уважение/эмпатия и рефлексия собственных реакций подтверждаются фрагментами о личности; прикладные ситуации являются переносом общего принципа, не дословными кейсами лекции.",
-      "sources": [
-        {
-          "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
-          "modified_time": "2026-04-05T22:13:17.690Z",
-          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
-        }
-      ]
+      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_intro_011": {
       "item_sha256": "65ed064e311ab276327c6659805a0a0379cfdd5aaeb74fc5cea62ed54db1c7a0",
@@ -629,10 +608,10 @@
       ]
     },
     "questions:m1_intro_025": {
-      "item_sha256": "1f33dd13ae3a697b13ee88d070199c6e7d6fe2bf4ba4952fcb146fe972712ccb",
+      "item_sha256": "b16793e99f049423969da31d59fe08f340e219974c3f65b5e5139f497b9fd43e",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -644,15 +623,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Уважение/эмпатия и рефлексия собственных реакций подтверждаются фрагментами о личности; прикладные ситуации являются переносом общего принципа, не дословными кейсами лекции.",
-      "sources": [
-        {
-          "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
-          "modified_time": "2026-04-05T22:13:17.690Z",
-          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
-        }
-      ]
+      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_intro_026": {
       "item_sha256": "787b5afc4ad48c33920f76ca23b05cbebf6b93367fff38ff0211e5e93bef1c89",
@@ -1200,10 +1172,10 @@
       ]
     },
     "questions:m1_intro_047": {
-      "item_sha256": "569fa0ee58187ab202551ff9bc1f2f8b8b7bff4728522c018ac9045915ef669e",
+      "item_sha256": "042c8af28f22fce6245f776cf819f68552af59f6b167230aad1486a158ed468d",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1215,15 +1187,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Уважение/эмпатия и рефлексия собственных реакций подтверждаются фрагментами о личности; прикладные ситуации являются переносом общего принципа, не дословными кейсами лекции.",
-      "sources": [
-        {
-          "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
-          "modified_time": "2026-04-05T22:13:17.690Z",
-          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:1100, 3484:4764"
-        }
-      ]
+      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_intro_048": {
       "item_sha256": "0826abf3513e4c6838a629ba5fb697a1562629da7cfad859697a77a8f32267ea",
@@ -1245,10 +1210,10 @@
       "sources": []
     },
     "questions:m1_intro_049": {
-      "item_sha256": "09248f4376b7939c6e96fde748b3bd9a3fbf68925688eddfbf48e9c762e7bda5",
+      "item_sha256": "e5f320de51be34c6c66cef8d9fc9a4c058b78e44c3444783d4747718d924ec4d",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -1260,15 +1225,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Лекция прямо противопоставляет профессиональное консультирование дружескому общению и описывает структуру, границы, этику и ответственность. Ключ и пояснение точно передают это различие.",
-      "sources": [
-        {
-          "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
-          "modified_time": "2026-04-05T22:48:11.869Z",
-          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 200:1500, 10700:11700"
-        }
-      ]
+      "note": "Reviewed professional versus friendly interaction and responsibilities; all held healing, incidence and psychotherapy-regulation claims excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_intro_050": {
       "item_sha256": "16dd3d499b4cd8555d682a9f4210fe6e1542784a89a38c2d75260152bc63640b",
@@ -2539,10 +2497,10 @@
       ]
     },
     "questions:m1_gp_031": {
-      "item_sha256": "175cca2a99060d97ace57e927eda46dfc4035212d493f32f8e0ffdd7be6d39ab",
+      "item_sha256": "53a153535afde0cfaf4a76f47f867928b88d2febffff0e93cefbce8d0e81db21",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -2554,15 +2512,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
-      "sources": [
-        {
-          "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
-          "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 9310:10350"
-        }
-      ]
+      "note": "Reviewed the object/subject distinction and hindsight account as teaching frames, not a single mandatory definition or proof of an objective-world philosophy. All held behavioral, historical and numeric assertions excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_gp_032": {
       "item_sha256": "3c41a4eb29ec9696bb27b11844810803d10849b3c861026a0100f20dc41a4d69",
@@ -3010,10 +2961,10 @@
       "sources": []
     },
     "questions:m1_gp_051": {
-      "item_sha256": "a2cb736ac61e139f37bf7e32ac525b5249bbee24a6b6e0d65e7f84ae668a7f7e",
+      "item_sha256": "1aebdcb70d2a1f51e779a3ee604055c5d9f5881a3893f162e4cfd641f51ef63e",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -3025,15 +2976,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сопоставлены научный метод/проверка гипотез, объект/предмет и психические образования; конкретные кейсы — применение принципа. Объект в курсе включает также животных/группы, а формулировка вопроса031 уже этого определения.",
-      "sources": [
-        {
-          "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
-          "modified_time": "2026-03-20T13:55:22.021Z",
-          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 2650:3530"
-        }
-      ]
+      "note": "Reviewed the object/subject distinction and hindsight account as teaching frames, not a single mandatory definition or proof of an objective-world philosophy. All held behavioral, historical and numeric assertions excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_gp_052": {
       "item_sha256": "c76a8668a11ecb228d945ce5766b1b05011b56a33bbc9f6b354fff0099775371",
@@ -3985,10 +3929,10 @@
       "discipline_id": "fiziologiya_cheloveka"
     },
     "questions:m1_phys_020": {
-      "item_sha256": "fd6b5d41bdc9403d6d0b809329f0eb1eeb5d23557bd6c2983fe3016533a1b2d9",
+      "item_sha256": "ebbdf76e9c731c2c09e6a10c9c88ac3b097056c2b3d3c0cfa4c8048f028afd98",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4000,15 +3944,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Кровь, тканевая жидкость и лимфа прямо перечислены как взаимосвязанные компоненты внутренней среды.",
-      "sources": [
-        {
-          "source_id": "1PJ26qFrCsejtxljlXhcOZS6iyQAEJ1vvaVL2wcLARao",
-          "modified_time": "2026-04-06T14:49:49.208Z",
-          "snapshot_sha256": "0d32a19d40d64b597fc7358576de26ff8ffc1aaea9c0785727bcd3d4175c49ee",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 651:1451"
-        }
-      ]
+      "note": "Reviewed only blood/tissue-fluid/lymph membership. Excluded fluid-shift analogy and all clinical, blood-ratio, coagulation, endocrine and organ-maturation holds. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_phys_021": {
       "item_sha256": "0f6d8323a1214481df6acd9bb1501b33cd1b3caf749f173415a9881d5744923e",
@@ -7350,10 +7287,10 @@
       "sources": []
     },
     "questions:m1_psyf_011": {
-      "item_sha256": "2ea1737853f0ffb51c3282433df1267735858e04595e5edd46a51030ba0473af",
+      "item_sha256": "6e692a823b6363457dba61e63f54f5cda5e290d4add25da75ee708d71fad9e95",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7365,21 +7302,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_012": {
-      "item_sha256": "3a60eeaa7516a8304b966ec10a33807746f23b523a7528bf208305719513928b",
+      "item_sha256": "d209bfa254b0e3b980cc8d92beb55f69808e23c81b3cbda31157f3674a600f45",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7391,15 +7321,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Модель раннего фильтра описывает ограничение входящего канала, теория ресурсов — приоритет более важной задачи при ограниченном усилии. Ключ и пояснение применяют это различие без клинического причинного утверждения.",
-      "sources": [
-        {
-          "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
-          "modified_time": "2026-04-20T11:05:23.167Z",
-          "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2213:2346, 6248:6426"
-        }
-      ]
+      "note": "Reviewed exact dictionary definitions of selection, neuroeconomics and conformity. Evolutionary superiority of groups, Milgram voltage/mortality and readiness-potential/free-will inference excluded. No glossary-to-lecture curriculum identity invented. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_013": {
       "item_sha256": "9243ee8c79eb7af133ae0ecc750d0d1a1eb35e891ca21803a81f99d8690bed68",
@@ -7594,10 +7517,10 @@
       ]
     },
     "questions:m1_psyf_020": {
-      "item_sha256": "c65f9488e87bf8376f021ea25c2b8e0516437ccfbb2ed4ceddc3c57a7814e103",
+      "item_sha256": "324e3288f049a1ce141c8a28280aa2574dda82a49eb4d2a076e48be59b5db459",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7609,21 +7532,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Словарная статья определяет нейроэкономику через мозговые механизмы решения, риск, справедливость и вознаграждение; ключ и пояснение используют эти же понятия без дополнительного причинного вывода.",
-      "sources": [
-        {
-          "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
-          "modified_time": "2026-04-20T11:05:23.167Z",
-          "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2774:2942"
-        }
-      ]
+      "note": "Reviewed exact dictionary definitions of selection, neuroeconomics and conformity. Evolutionary superiority of groups, Milgram voltage/mortality and readiness-potential/free-will inference excluded. No glossary-to-lecture curriculum identity invented. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_021": {
-      "item_sha256": "2d9abeb689ff03ce5b91971266f3b871f43130b51623e6abcae4c0af8fac6522",
+      "item_sha256": "ba4cc42d58c57697b34e4c339d8b81afba6905c74bea6a8e2bf6104819257b69",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7635,15 +7551,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_022": {
       "item_sha256": "f83158108ca327ab8a60cdc6bf368d939323170afe9c0fca895c569565a04ce7",
@@ -7731,10 +7640,10 @@
       ]
     },
     "questions:m1_psyf_025": {
-      "item_sha256": "611d17603a22433535141c3afecf11339118a3e7ee9fa96db11e17ee6477950b",
+      "item_sha256": "af83b2dcfbb4c16694bf875e8f74bb9ef6afebd63bee8568eece47cdfd4429cf",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7746,21 +7655,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "При чтении удержание текста при фоновом шуме является учебным примером приоритета более важной задачи при ограниченном ресурсе и фильтрации конкурирующего сигнала; остальные варианты исключают избирательность или добавляют абсолютные утверждения.",
-      "sources": [
-        {
-          "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
-          "modified_time": "2026-04-20T11:05:23.167Z",
-          "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2213:2346, 6248:6426"
-        }
-      ]
+      "note": "Reviewed exact dictionary definitions of selection, neuroeconomics and conformity. Evolutionary superiority of groups, Milgram voltage/mortality and readiness-potential/free-will inference excluded. No glossary-to-lecture curriculum identity invented. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_026": {
-      "item_sha256": "cd0439eada7ea7a6b02a6597f88c444fa06e1c020fa77bc1a79fab6fcb5935b8",
+      "item_sha256": "2bf8895e3da766d260e7c90561e57575b9756bfeb872b20c9a5b6d63913eb798",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7772,15 +7674,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_027": {
       "item_sha256": "d4205844ab2d04ac3bfa811161d79b7a5514e53c9de68f0fb4aba3afaddf2feb",
@@ -7884,10 +7779,10 @@
       ]
     },
     "questions:m1_psyf_031": {
-      "item_sha256": "c0cfdc5180a0a3ed700139ab147ab7f9c7bd628e22ef7131411e5e0de01b5fb5",
+      "item_sha256": "d283e97d8154918dc9c4f2bf9d39061c60a5f8eff7b62fac0c14f0e660f4d8b8",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7899,21 +7794,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_032": {
-      "item_sha256": "b8e7cbd9de7777ca9066c515007ddeca6c7b679914cac11ab787d024a1fae2b1",
+      "item_sha256": "42559460575912111aa4d05446a3dbf38ebe33f9c4a984a4b2237ee56d6775d5",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7925,15 +7813,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Словарная статья определяет конформизм как изменение поведения под мнением большинства; ситуация смены ответа в группе и пояснение прямо применяют это определение.",
-      "sources": [
-        {
-          "source_id": "1lRDKLYLG6xEl1o5JW7HcC-3QC7BdUJ35UrPxHUHC1z0",
-          "modified_time": "2026-04-20T11:05:23.167Z",
-          "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1725:1920"
-        }
-      ]
+      "note": "Reviewed exact dictionary definitions of selection, neuroeconomics and conformity. Evolutionary superiority of groups, Milgram voltage/mortality and readiness-potential/free-will inference excluded. No glossary-to-lecture curriculum identity invented. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_033": {
       "item_sha256": "67c1526ff10e459076c1fbf4f5035b30e55d0a24f357b8f6b1751732d41b646c",
@@ -7962,10 +7843,10 @@
       ]
     },
     "questions:m1_psyf_034": {
-      "item_sha256": "8cba14a9a529f2fd63c2839e79972a5ea5bf3c4938b892c86135977f1ab9fbb5",
+      "item_sha256": "8cb78ea5e5c8c3b8f4ac7e6fb0d8942be368bde61aed84ddd945708b27eea2f9",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -7977,15 +7858,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_035": {
       "item_sha256": "8a27363e948d70e7fa6c1219efe8ee389e582b3a0b7549f9c221179676e847f4",
@@ -8268,10 +8142,10 @@
       ]
     },
     "questions:m1_psyf_045": {
-      "item_sha256": "4523d5055488c2be88867021113d54afa21379be130221d3dc11cd8f179685ba",
+      "item_sha256": "fdcf4e97ebff41dff6fb16dad58348907df028e56623f9fbddac0260878273f6",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8283,15 +8157,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_046": {
       "item_sha256": "af355e1fbf22e06aacdc2311247baaae4410d4417b7db03633c78762347e3480",
@@ -8537,10 +8404,10 @@
       "sources": []
     },
     "questions:m1_psyf_055": {
-      "item_sha256": "f6afcf1de7dc9b3b03f228157477e6430720709b1644f1570b7f032e4b38a17f",
+      "item_sha256": "bd9844bc8180d90f42dae90162e4bfcd164209a3d4cf7fc64a886cebd0d540eb",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8552,15 +8419,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_056": {
       "item_sha256": "4726567a7efb48ffe39df22d46211e2f42d6ca7ef75ae29c18519d1fe7a320e4",
@@ -8703,10 +8563,10 @@
       ]
     },
     "questions:m1_psyf_061": {
-      "item_sha256": "bd91d746e65319fb297d6c1468e6f768907ac7838e85cb64f5ed9fac4268bfb7",
+      "item_sha256": "56ce64f0f4de7f14870e08936c428e8552cc92a8c3233e1126ca00a3290eddad",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8718,15 +8578,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Содержание согласуется с ресурсной моделью Канемана и распределением ограниченных ресурсов; приоритет/уменьшение конкурирующих задач — применение модели.",
-      "sources": [
-        {
-          "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
-          "modified_time": "2026-04-20T15:33:01.800Z",
-          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 9300:10700"
-        }
-      ]
+      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_062": {
       "item_sha256": "dc65d45c9d90aaa3e3157d20feb9a8b9b67e04412e070b5ec06b2af1199020cd",
@@ -8785,10 +8638,10 @@
       ]
     },
     "questions:m1_psyf_064": {
-      "item_sha256": "a71ec9cc419a18b01db39da12d3bd378cc2caf0a47619e04cb25977bbf1d1638",
+      "item_sha256": "2230f968156a1d68333be061bf3d01b582d2549e48daee58f323e7baf8e36f9d",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -8800,15 +8653,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Устойчивость внимания в лекции определена как удержание внимания во времени; варианты различимы.",
-      "sources": [
-        {
-          "source_id": "1znCyGf9RhkhkbsCKGmWQHGhcliY9kfekglchDlWp9As",
-          "modified_time": "2026-04-20T15:42:20.698Z",
-          "snapshot_sha256": "69d87f72192866c1929553a8c26711b6e992c3254e4870ea8c068ab51b16fb37",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 473:1183"
-        }
-      ]
+      "note": "Reviewed distinction between sustaining focus and intensity of concentration; reading example is an educational illustration, not a diagnosis. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m1_psyf_065": {
       "item_sha256": "e90baa1c47f92195f03216570532a4126597de84606c18348d261c93e986ba3b",
@@ -9246,10 +9092,10 @@
       ]
     },
     "questions:m2_exp_001": {
-      "item_sha256": "7a9a1888f77498a5bb93b1047b8307109930eb62098cb3ae507de3d528cbf769",
+      "item_sha256": "e792b5b9779a149add6eb9d77a1a5ef50d397266e889e411478b4c6e6e9dcd27",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9261,21 +9107,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Извлечённая редакция источника совпала с SHA-256 реестра. Лекция определяет операциональные определения как рабочие для конкретного исследования; прежнее требование измерительной процедуры в вопросе и ключе выходило за этот фрагмент и заменено.",
-      "sources": [
-        {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6030:6300"
-        }
-      ]
+      "note": "Reviewed teaching definitions of operations, subject frames, general laws and Lakatos programmes. Kuhn claim remains explicitly attributed to the lecturer and is not certified as original Kuhn text or scholarly consensus. All demarcation, historical, percentage, testing and trait-denial holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_002": {
-      "item_sha256": "11fa3461c1c2495d691b2eaf567fed77479613a0c40e4e8e9d56a28969d1b84d",
+      "item_sha256": "1aa444b8cdfcc59e2fa2c861ce6e9db719ffeee015d81e86218ac1e8bcc53d4d",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9287,21 +9126,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. История определения предмета и психика как регуляция поведения прямо изложены в указанном фрагменте; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
-      "sources": [
-        {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5050:5900"
-        }
-      ]
+      "note": "Reviewed teaching definitions of operations, subject frames, general laws and Lakatos programmes. Kuhn claim remains explicitly attributed to the lecturer and is not certified as original Kuhn text or scholarly consensus. All demarcation, historical, percentage, testing and trait-denial holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_003": {
-      "item_sha256": "acc31195c97c75cdf858056b1dca4cd2cbab178d59f17638b494f7e2d2295e0a",
+      "item_sha256": "0b5489833d12dfc0cb17227afc4573030931e79c1d2f2f7b06955c6b3ea269f2",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9313,15 +9145,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Лекция отдельно называет сосуществование разных школ и направлений полипарадигмальной трактовкой; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
-      "sources": [
-        {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20932:21389"
-        }
-      ]
+      "note": "Reviewed teaching definitions of operations, subject frames, general laws and Lakatos programmes. Kuhn claim remains explicitly attributed to the lecturer and is not certified as original Kuhn text or scholarly consensus. All demarcation, historical, percentage, testing and trait-denial holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_004": {
       "item_sha256": "1d714186ef84a8fe11d125287c3d6471a1ad71b35297d4f5c40b39c855ed2ed7",
@@ -9454,10 +9279,10 @@
       ]
     },
     "questions:m2_exp_009": {
-      "item_sha256": "a0ecba430300cf4945ddaa1cce67837370a5f17a9d6185054a59a93af46b51db",
+      "item_sha256": "978384c91dc6abede94092bb64ff947ab182a6540e003cf801f4ab4fd9fa287e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9469,15 +9294,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент прямо определяет номотетический подход через общие законы и прогнозирование поведения; вопрос, ключ и пояснение сверены, текст вопроса не менялся.",
-      "sources": [
-        {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 26180:26469"
-        }
-      ]
+      "note": "Reviewed teaching definitions of operations, subject frames, general laws and Lakatos programmes. Kuhn claim remains explicitly attributed to the lecturer and is not certified as original Kuhn text or scholarly consensus. All demarcation, historical, percentage, testing and trait-denial holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_010": {
       "item_sha256": "41ea06d3eb4f86ac0e2f6ddd631d36457c3014f6a77e4c92a4cc67922a4d55b3",
@@ -9874,10 +9692,10 @@
       ]
     },
     "questions:m2_exp_025": {
-      "item_sha256": "a3856f2d4a6c625b8a1642794a4869ad7339a3939462f07ae16aaf699e45036e",
+      "item_sha256": "4eadab52bc24190e964132e3654bf7d21d0313dd205976c991ce08d271f512d7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9889,21 +9707,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо связывает неполное предварительное раскрытие плана с риском искажения результатов и отдельно требует согласия. Граница: это не разрешение скрывать существенные риски или нарушать права участников.",
-      "sources": [
-        {
-          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
-          "modified_time": "2026-04-22T20:18:51.271Z",
-          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 26000:27400"
-        }
-      ]
+      "note": "Reviewed design examples: participant expectations, waiting-list plan, repeated measurements, active comparison, replication and variability. Removed blanket secrecy permission, automatic ethical superiority and unsupported generalization that cognition varies little; no therapy discontinuation, low-risk guarantee or causal mechanism claim approved. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_026": {
-      "item_sha256": "4df0630fbbb2f89d2869a0eedcdb83be46d05058801f78525cbd051c24a69ae8",
+      "item_sha256": "5202e1dd171425d3063b2473206f6cd618915eac70f8392c7f2c475e228c2ee5",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -9915,15 +9726,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика объясняет waitlist: контроль пока не проходит интервенцию, но получает её после исследования; этическое обоснование обсуждается в том же фрагменте.",
-      "sources": [
-        {
-          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
-          "modified_time": "2026-04-22T20:18:51.271Z",
-          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18580:19600"
-        }
-      ]
+      "note": "Reviewed design examples: participant expectations, waiting-list plan, repeated measurements, active comparison, replication and variability. Removed blanket secrecy permission, automatic ethical superiority and unsupported generalization that cognition varies little; no therapy discontinuation, low-risk guarantee or causal mechanism claim approved. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_027": {
       "item_sha256": "716b03899411125e12c706b2ac16248f964269fca4b1af6b494d0506f1c2ca76",
@@ -10035,10 +9839,10 @@
       ]
     },
     "questions:m2_exp_031": {
-      "item_sha256": "7286f108c20432de2a4a191abdcc72ce7531d760f75f5e4444cfc6858424334b",
+      "item_sha256": "8492747281402879b118d80ac881dd8976f81085b3d2e5da00a72862d3ac1e71",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10050,15 +9854,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Практика прямо обсуждает дополнительные измерения во время интервенции и отмечает, что они улучшают картину динамики, не устраняя все альтернативные причины.",
-      "sources": [
-        {
-          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
-          "modified_time": "2026-04-22T20:18:51.271Z",
-          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 10700:12000"
-        }
-      ]
+      "note": "Reviewed design examples: participant expectations, waiting-list plan, repeated measurements, active comparison, replication and variability. Removed blanket secrecy permission, automatic ethical superiority and unsupported generalization that cognition varies little; no therapy discontinuation, low-risk guarantee or causal mechanism claim approved. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_032": {
       "item_sha256": "917b1d2036fa256c4636be3fbb5190e317c744a9eaffcaac6369e21e8da93d5d",
@@ -10117,10 +9914,10 @@
       ]
     },
     "questions:m2_exp_034": {
-      "item_sha256": "5df76ded82ffe20367ee09d2d792c418dc9773b170be3e822d285cd039fee5ea",
+      "item_sha256": "f8f9138ffd20f0bed2bfb72a282a5297bdd213170eccf20ed0986b99c60c8397",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10132,21 +9929,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. В обсуждении этической обязанности помочь участникам waitlist назван вариантом, при котором контрольная группа получает помощь после сравнения.",
-      "sources": [
-        {
-          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
-          "modified_time": "2026-04-22T20:18:51.271Z",
-          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 18580:19600"
-        }
-      ]
+      "note": "Reviewed design examples: participant expectations, waiting-list plan, repeated measurements, active comparison, replication and variability. Removed blanket secrecy permission, automatic ethical superiority and unsupported generalization that cognition varies little; no therapy discontinuation, low-risk guarantee or causal mechanism claim approved. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_035": {
-      "item_sha256": "acb35f8cd4349e52cc78e2e6a80e9ac4f2395eb103d557fb58f3da8b3f069f7b",
+      "item_sha256": "c53927f9ebe3cb17bfd55083f1a9906cd698c6eb750bcebf1bfab1b93e4f1481",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10158,21 +9948,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика приводит пример тренинга креативности в контроле при исследовании помощи с тревогой; вывод о роли другой активности является объяснением дизайна, а не доказанным эффектом.",
-      "sources": [
-        {
-          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
-          "modified_time": "2026-04-22T20:18:51.271Z",
-          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20460:21300"
-        }
-      ]
+      "note": "Reviewed design examples: participant expectations, waiting-list plan, repeated measurements, active comparison, replication and variability. Removed blanket secrecy permission, automatic ethical superiority and unsupported generalization that cognition varies little; no therapy discontinuation, low-risk guarantee or causal mechanism claim approved. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_036": {
-      "item_sha256": "1016b29d49101acf7a972058bb34691b3ae6c7c927922cc1cd84a876a3e7f3a2",
+      "item_sha256": "6efeb5b96cb0f74d4bf25b6ba378dffa39fd93d86db7db14be417b615494739a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10184,15 +9967,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Извлечённая редакция источника совпала с SHA-256 реестра. Практика №8 прямо обсуждает воспроизводимость результата на других группах и называет повторение репликацией. Вопрос и ключ остались прежними; source claim переведён на фактическую практику.",
-      "sources": [
-        {
-          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
-          "modified_time": "2026-04-22T20:18:51.271Z",
-          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 12380:12900"
-        }
-      ]
+      "note": "Reviewed design examples: participant expectations, waiting-list plan, repeated measurements, active comparison, replication and variability. Removed blanket secrecy permission, automatic ethical superiority and unsupported generalization that cognition varies little; no therapy discontinuation, low-risk guarantee or causal mechanism claim approved. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_037": {
       "item_sha256": "4625900aa7b1b9655f01c692e75e6e2cd41c9573cfa2c779820a487c0484d05b",
@@ -10223,10 +9999,10 @@
       ]
     },
     "questions:m2_exp_038": {
-      "item_sha256": "18d7fc062111b75d92d0db6743c7e21e59c879dfaaa4d516d12ad5bef0b878d1",
+      "item_sha256": "1ace0efa7f8d9e83d50a143c69f2bf8e66b1cf20c0683ed9ff4fbbf0c8efa833",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10238,15 +10014,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика прямо связывает степень искажения группового среднего с вариативностью признака и называет некоторые когнитивные показатели примером меньшей вариативности.",
-      "sources": [
-        {
-          "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
-          "modified_time": "2026-04-22T20:18:51.271Z",
-          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 21650:22600"
-        }
-      ]
+      "note": "Reviewed design examples: participant expectations, waiting-list plan, repeated measurements, active comparison, replication and variability. Removed blanket secrecy permission, automatic ethical superiority and unsupported generalization that cognition varies little; no therapy discontinuation, low-risk guarantee or causal mechanism claim approved. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_039": {
       "item_sha256": "cc73d5270628dd83da23501f5c5b71ba51ee961461461bf9cf51749d1f91b6ba",
@@ -10749,10 +10518,10 @@
       ]
     },
     "questions:m2_exp_058": {
-      "item_sha256": "1a4434b6c3cdb0a1953b675705e04cf8a3adf3fe3d8f86bf851a0aae7cacde28",
+      "item_sha256": "58dda5036bbebae64f393ce154be355ae65932b565aa0d240e3f388e3d7f68b1",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10764,21 +10533,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Полная извлечённая редакция Doc совпала с SHA-256 реестра. Фрагмент 20932:21389 прямо отделяет позицию самого Куна (допарадигмальность) от других трактовок — полипарадигмальности и внепарадигмальности. Вопрос, ключ, дистракторы и пояснение сверены с этим различием; прежнее объединение двух позиций устранено.",
-      "sources": [
-        {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 20932:21389"
-        }
-      ]
+      "note": "Reviewed teaching definitions of operations, subject frames, general laws and Lakatos programmes. Kuhn claim remains explicitly attributed to the lecturer and is not certified as original Kuhn text or scholarly consensus. All demarcation, historical, percentage, testing and trait-denial holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_059": {
-      "item_sha256": "178fe8ba909c94e60157556e70c5081b3a1be6ca1fd197738260718d263c9842",
+      "item_sha256": "69765464fdbb426e1daac05805e2c9fd00463fea55ebd3d73d115306c8088704",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10790,15 +10552,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полной извлечённой редакции Doc совпал с реестром. Фрагмент 21390:22345 описывает исследовательскую программу Лакатоша как жёсткое ядро и изменяемый защитный пояс гипотез; ключ и пояснение адресно сверены, исходный вопрос не менялся.",
-      "sources": [
-        {
-          "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 21390:22345"
-        }
-      ]
+      "note": "Reviewed teaching definitions of operations, subject frames, general laws and Lakatos programmes. Kuhn claim remains explicitly attributed to the lecturer and is not certified as original Kuhn text or scholarly consensus. All demarcation, historical, percentage, testing and trait-denial holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_exp_060": {
       "item_sha256": "d97e8ca0b6e1d801ec8146fe3650bef15899b17325f3e5e456727a4cdf6ac4da",
@@ -12614,10 +12369,10 @@
       ]
     },
     "questions:m2_qual_004": {
-      "item_sha256": "149a62eb8ac0bd99d315b6ab986c5c19cfcc7cd7df73c2d093eae5a54ef15d02",
+      "item_sha256": "9e9083d6e43e5696b296e9829550d07a36e4ef873a9f2777b93133e1ce6a97ed",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12629,15 +12384,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямой фрагмент требует рефлексировать предпосылки, позиции, установки и ценности исследователя. Кейс с заметкой применяет этот принцип, не обещает устранить субъективность.",
-      "sources": [
-        {
-          "source_id": "1-2cpVVR8XqRC5VfhSKAb3DUgsFkRHlfWrnIX9DGeqvw",
-          "modified_time": "2026-05-14T11:45:40.351Z",
-          "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6300:7600"
-        }
-      ]
+      "note": "Reviewed explicit reflection on researcher assumptions. Applied reflective-note example is methodological illustration, not elimination of every bias; held authorship statement excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_qual_005": {
       "item_sha256": "4e22556c5ab11b52d9f1e14c7de955fe16afab6250c3c0dc590d4fba9dae14fe",
@@ -12886,10 +12634,10 @@
       ]
     },
     "questions:m2_qual_014": {
-      "item_sha256": "0973898a5b0e5f312f25a6e6560295a1f6a4f06bd2e71c3aba0b1d6d4adaaeeb",
+      "item_sha256": "98502955aa23171dadb27d5948e8bcc370735c3b43aed80a8b0c45824829328d",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -12901,15 +12649,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Фрагмент прямо отличает переносимость качественного результата в сходные контексты от статистической репрезентативности и подчёркивает описание исходного контекста.",
-      "sources": [
-        {
-          "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
-          "modified_time": "2026-05-16T14:38:37.594Z",
-          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 94800:96300"
-        }
-      ]
+      "note": "Reviewed transferability as contextual comparison and potentially meaningful transcription features. No universal representativeness, illness interpretation or clinical efficacy asserted; held attribution excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_qual_015": {
       "item_sha256": "71363f425697b6aafc024612e2a1b7130a12bc3b06e74a707b2eb325bb5ef3b2",
@@ -13423,10 +13164,10 @@
       ]
     },
     "questions:m2_qual_034": {
-      "item_sha256": "be0bcb54c755a7ff685845de3121770c07fda4ee081ed44953f05a2e9572292d",
+      "item_sha256": "26e7f317c0adf898f61fbef0eab8db32579aa3f282465033dec7f58b348d28ce",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -13438,15 +13179,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Прямой фрагмент требует рефлексировать предпосылки, позиции, установки и ценности исследователя. Кейс с заметкой применяет этот принцип, не обещает устранить субъективность.",
-      "sources": [
-        {
-          "source_id": "1-2cpVVR8XqRC5VfhSKAb3DUgsFkRHlfWrnIX9DGeqvw",
-          "modified_time": "2026-05-14T11:45:40.351Z",
-          "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 6300:7600"
-        }
-      ]
+      "note": "Reviewed explicit reflection on researcher assumptions. Applied reflective-note example is methodological illustration, not elimination of every bias; held authorship statement excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_qual_035": {
       "item_sha256": "c682d8d792295a1a7bfeb95a2a197f3c8b4bf5ef472fdedfffc3b2175ad40927",
@@ -13589,10 +13323,10 @@
       ]
     },
     "questions:m2_qual_040": {
-      "item_sha256": "4d38c93cadffa6c44da947c3bfc9c68e3293038223a33f0d3e9f4c92ff78a38d",
+      "item_sha256": "91fc13e9b649cf1e41e47d3ebee37b52e94630939259fe3f09304d91014aef14",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -13604,15 +13338,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Повторно сверено по точному raw export Практики №12: при транскрипции названы паузы, повторный старт фразы, оговорки и неверные склонения как возможные значимые особенности речи.",
-      "sources": [
-        {
-          "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
-          "modified_time": "2026-05-16T14:38:37.594Z",
-          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 35900:37400"
-        }
-      ]
+      "note": "Reviewed transferability as contextual comparison and potentially meaningful transcription features. No universal representativeness, illness interpretation or clinical efficacy asserted; held attribution excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m2_qual_041": {
       "item_sha256": "bbc852fe66eea5bd09bd2763cde633f98ceac4b03d4a00e7142352a9b1eb7d4d",
@@ -13948,10 +13675,10 @@
       ]
     },
     "questions:m2_qual_053": {
-      "item_sha256": "706ae518a254ff0f699805757314b85c0d3f7e236480232baf89bb2f77d50edd",
+      "item_sha256": "21f421b1d45f7bca25b56e69682a325099b218868bbd2f396fb069dd1f4aab25",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -13963,15 +13690,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Повторно сверено по точному raw export Практики №12: переносимость на иной контекст явно противопоставлена репрезентативности количественной выборки.",
-      "sources": [
-        {
-          "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
-          "modified_time": "2026-05-16T14:38:37.594Z",
-          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 94700:96900"
-        }
-      ]
+      "note": "Reviewed transferability as contextual comparison and potentially meaningful transcription features. No universal representativeness, illness interpretation or clinical efficacy asserted; held attribution excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "glossary:qual_methods_qualitative_methods": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
@@ -15847,10 +15567,10 @@
       ]
     },
     "questions:m3_psychological_consulting_059": {
-      "item_sha256": "024497b2036f08c8510953b8478012186389fd733214395bb6570fefdde20ff6",
+      "item_sha256": "818358fe3b850922c234e4ee5cc9423e33d42db75116a9345fc4c6af250ab3c4",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15862,15 +15582,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Глоссарий прямо определяет сопротивление в защитной модели как препятствие процессу изменений при боли/страхе; вопрос предлагает исследовать, а не объявлять любое поведение доказательством скрытого конфликта. Это рамка учебного курса, не универсальная диагностика поведения клиента.",
-      "sources": [
-        {
-          "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 7200:7520"
-        }
-      ]
+      "note": "Reviewed resistance only as the dictionary psychodynamic interpretation, not as the cause of all disagreement. Held professional-history claim excluded; no exact lecture mapping invented. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_060": {
       "item_sha256": "4936b657bcca39a5dd5e7ca61af75c98569f9c4ff560bb4907180124a3083b45",
@@ -16351,10 +16064,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_082": {
-      "item_sha256": "b98c9a7d0c53a28b49cbaa7c5d59526d367c2bbc73098babc980a18fd3d67b21",
+      "item_sha256": "29759551d2627ef2052f115b1693c6be43b9fe074203ce7bd8295fb2d2208882",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16366,15 +16079,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Урок 7 прямо перечисляет принципы домашнего задания: согласование с клиентом, конкретность, посильность, постепенное усложнение и связь с работой. Двухчасовой сложный анализ при перегрузке — авторский контрпример, не цитата.",
-      "sources": [
-        {
-          "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
-          "modified_time": "2026-06-07T21:02:49.961Z",
-          "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266",
-          "locator": "current Drive extract, Unicode characters (zero-based, end exclusive): 96000:97500, 104900:105500"
-        }
-      ]
+      "note": "Reviewed concrete, agreed and feasible homework principles. Removed generic efficacy promise; all fourteen unverifiable numeric/quotation holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "sources": []
     },
     "questions:m3_psychological_consulting_083": {
       "item_sha256": "d6eff4506e4192b85a4ba73514ebca164d819e75bee7c17ce511de2e6f70287d",
