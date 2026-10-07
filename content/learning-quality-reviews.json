@@ -4354,10 +4354,10 @@
       ]
     },
     "questions:m1_phys_027": {
-      "item_sha256": "6872eede4582d7338f1aeb6fd9650fc572836d54c870e559556eefcc3366f547",
+      "item_sha256": "c9c15906f5b6db014959a9c8ab12d243eb5f6591eb4e8498be791ec5de7024b3",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4369,13 +4369,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник описывает нервную/гуморальную регуляцию ЖКТ, симпатическое торможение и стрессовые телесные ощущения. Это поддерживает возможность связи, не исключая иных причин симптомов.",
+      "note": "Exact raw concluding appetite/bowel-symptom passage32764:32990 reviewed, independently corroborated by original Konturek/Brzozowski/Konturek2011 PubMed abstract only for possible stress-related changes in gastrointestinal motility and visceral perception. No diagnostic attribution of every symptom to stress, universal blood-flow percentage, gut-as-first-stress-indicator, anatomical shortcut or treatment advice. Course aggregate overlapping held intervals normalized to their exact union, retaining all twelve issue records and unchanged held coverage. Prior non-character-hold classification was caused by overlap in aggregate, not an unknown original source.",
       "sources": [
         {
           "source_id": "1Y4ll-SXmAKMsZvBw8m7keLukQ9I5vK_85h3JebMe8Lk",
           "modified_time": "2026-04-06T14:53:23.072Z",
           "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1361:2041, 29219:31000"
+          "locator": "characters:32764:32990"
         }
       ]
     },
@@ -4681,10 +4681,10 @@
       ]
     },
     "questions:m1_phys_039": {
-      "item_sha256": "1795830a7123c4abd458cd0de309c14ac10fd1cd7c01af0a676f74e8ebb6e05f",
+      "item_sha256": "ef373c6b7d122e279ae4f6b7366afc424fa69b8cb534e2fb5b62cb0e468f5dd8",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -4696,13 +4696,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник описывает нервную/гуморальную регуляцию ЖКТ, симпатическое торможение и стрессовые телесные ощущения. Это поддерживает возможность связи, не исключая иных причин симптомов.",
+      "note": "Exact raw concluding appetite/bowel-symptom passage32764:32990 reviewed, independently corroborated by original Konturek/Brzozowski/Konturek2011 PubMed abstract only for possible stress-related changes in gastrointestinal motility and visceral perception. No diagnostic attribution of every symptom to stress, universal blood-flow percentage, gut-as-first-stress-indicator, anatomical shortcut or treatment advice. Course aggregate overlapping held intervals normalized to their exact union, retaining all twelve issue records and unchanged held coverage. Prior non-character-hold classification was caused by overlap in aggregate, not an unknown original source.",
       "sources": [
         {
           "source_id": "1Y4ll-SXmAKMsZvBw8m7keLukQ9I5vK_85h3JebMe8Lk",
           "modified_time": "2026-04-06T14:53:23.072Z",
           "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1361:2041, 29219:31000"
+          "locator": "characters:32764:32990"
         }
       ]
     },
@@ -5097,10 +5097,10 @@
       ]
     },
     "questions:m1_phys_054": {
-      "item_sha256": "2ee33cea427ffed9f5cdf333851e2787be4bef219c1a9a8e1ba28c33637b5f1c",
+      "item_sha256": "c0bf5caaf92c2ce2ebdb93575873fc47620a6697230034a97831729b97d1d5ff",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5112,13 +5112,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник описывает нервную/гуморальную регуляцию ЖКТ, симпатическое торможение и стрессовые телесные ощущения. Это поддерживает возможность связи, не исключая иных причин симптомов.",
+      "note": "Exact raw concluding appetite/bowel-symptom passage32764:32990 reviewed, independently corroborated by original Konturek/Brzozowski/Konturek2011 PubMed abstract only for possible stress-related changes in gastrointestinal motility and visceral perception. No diagnostic attribution of every symptom to stress, universal blood-flow percentage, gut-as-first-stress-indicator, anatomical shortcut or treatment advice. Course aggregate overlapping held intervals normalized to their exact union, retaining all twelve issue records and unchanged held coverage. Prior non-character-hold classification was caused by overlap in aggregate, not an unknown original source.",
       "sources": [
         {
           "source_id": "1Y4ll-SXmAKMsZvBw8m7keLukQ9I5vK_85h3JebMe8Lk",
           "modified_time": "2026-04-06T14:53:23.072Z",
           "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1361:2041, 29219:31000"
+          "locator": "characters:32764:32990"
         }
       ]
     },

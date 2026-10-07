@@ -3597,6 +3597,24 @@
       "topic_id": "t_17a20a4fb08e",
       "item_sha256": "3fa13e1455ea37c18ff27ed656259628c53f9c4e6030c62a570bfe002aec9334",
       "locator": "private certificate:questions:m1_vnd_027"
+    },
+    "d9f84393185dd144e1a1e008a440e5ca24439ba2c9d040a25340e4c5164a9d82": {
+      "external_id": "m1_phys_027",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "c9c15906f5b6db014959a9c8ab12d243eb5f6591eb4e8498be791ec5de7024b3",
+      "locator": "private certificate:questions:m1_phys_027"
+    },
+    "6eaa5279e3b2b8131c925305c47abf5e938ca1d5868f7512832ed7871dec0deb": {
+      "external_id": "m1_phys_039",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "ef373c6b7d122e279ae4f6b7366afc424fa69b8cb534e2fb5b62cb0e468f5dd8",
+      "locator": "private certificate:questions:m1_phys_039"
+    },
+    "03bd85a8e888d35eab5d62174818aa14e4ab3e4e043cc65327b1a82b5b6f7e59": {
+      "external_id": "m1_phys_054",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "c0bf5caaf92c2ce2ebdb93575873fc47620a6697230034a97831729b97d1d5ff",
+      "locator": "private certificate:questions:m1_phys_054"
     }
   }
 }
