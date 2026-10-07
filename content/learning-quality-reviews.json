@@ -15511,10 +15511,10 @@
       ]
     },
     "questions:m3_psychological_consulting_029": {
-      "item_sha256": "671c8296b9ae44bbc25c547f57335311e2f7bf589b43077286f15d2d57fc108f",
+      "item_sha256": "e303092ae7038b1a3ebfd00a746fc4fdb7b8d7e629228cb150a0208f7106b92c",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15526,13 +15526,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:1819:3981"
         }
       ]
     },
@@ -15721,10 +15721,10 @@
       ]
     },
     "questions:m3_psychological_consulting_037": {
-      "item_sha256": "8039393c54a484190898bcba010c48da25ad42d284c0cfc8d0d74874e65911bd",
+      "item_sha256": "d12867e0f931db2c1dcd2591f864c50ec20e6620d60d34bd46fc494107653952",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15736,21 +15736,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:1819:3981"
         }
       ]
     },
     "questions:m3_psychological_consulting_038": {
-      "item_sha256": "34717b4074a68ade47c8b5d3c1265005e33dee948acb057a39135704947db193",
+      "item_sha256": "6d668e09d484ba5e5f46d762608eea04d1c4052ee212d8604f940523fcbf6665",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15762,13 +15762,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:9615:10750"
         }
       ]
     },
@@ -15799,10 +15799,10 @@
       ]
     },
     "questions:m3_psychological_consulting_040": {
-      "item_sha256": "4322143d40a1db1b6830a02abecfa1a8c77bb5aa56e62fda49965a8a755460fd",
+      "item_sha256": "9f6fc6b1b491e49fc82ab1043a238e9b87389922a914aee563e650a752ba44bb",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15814,21 +15814,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:30600:31500"
         }
       ]
     },
     "questions:m3_psychological_consulting_041": {
-      "item_sha256": "6964fe7484b47c59a60c959d2a230db3b7a20426d941f0b1581bde195d1e05ba",
+      "item_sha256": "651eb8605ace29d4e92e24f329945f2cf6208d0061149c2c93215ac8183758bb",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15840,21 +15840,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:2719:3239"
         }
       ]
     },
     "questions:m3_psychological_consulting_042": {
-      "item_sha256": "d45466bde3a9880cf5c02675f5cb88d5603fc932eeb09f79386d4bf151338c1e",
+      "item_sha256": "47de19006aea61431ef16d4d64eb28e9a1adedf6792d01c81ba6a605d8d1216f",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15866,21 +15866,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:2719:3239"
         }
       ]
     },
     "questions:m3_psychological_consulting_043": {
-      "item_sha256": "2ba55d97751c7379171ea36ee40a0693d1dd8bc7ccc839d57ffa2c0864c0694c",
+      "item_sha256": "c2bea56248250a65e237aede08f2487ab99b317c479b7725afad0e81362e6ebc",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15892,21 +15892,21 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:3239:3619"
         }
       ]
     },
     "questions:m3_psychological_consulting_044": {
-      "item_sha256": "ca79548759caaddb4536092226151414f8bb59c1a99618d18072c30eb9638dd2",
+      "item_sha256": "262494728b77da3503310bb20af6cc0ac4b299e194e7d9cb2fca81987677841e",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -15918,13 +15918,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:3619:3981;characters:5100:5620"
         }
       ]
     },
@@ -16111,10 +16111,10 @@
       ]
     },
     "questions:m3_psychological_consulting_052": {
-      "item_sha256": "8ef4b44f684b9110071d829fee7ec0863c1abd4a24245a38e9e70985774c7919",
+      "item_sha256": "ee5c6a2bd16c16fd295833670d30f0b9d3728e1cbea14ae0af8491e146092727",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -16126,13 +16126,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Источник прямо описывает четыре этапа, эмоциональное/рациональное уточнение результата и гибкость. Ключи сохраняют авторство клиента и отсутствие жёсткого прохождения по таймеру.",
+      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
           "modified_time": "2026-06-07T20:52:52.371Z",
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1600:4000"
+          "locator": "characters:3619:3981;characters:4800:5620"
         }
       ]
     },
