@@ -396,6 +396,204 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "glossary:subject_general_psychology": {
+      "schema_version": 1,
+      "item_sha256": "a2a59921d4ce55b62598e0c955e1bff761329b59092ac151cdeb1558021725c8",
+      "review_sha256": "ed215e8b97b03aaa96f3c91c5e2df74e706330ffd4faf15d00ea10c009fdfb88",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:explanation_mechanism": {
+      "schema_version": 1,
+      "item_sha256": "986172fed4d495585fd98db13087f6537a84dceb8dbca61d0aac9263be13cc28",
+      "review_sha256": "7412379bc987327e0b38b5d465759819f247f8a215d12129cb171f465d15f59e",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:here_and_now_focus": {
+      "schema_version": 1,
+      "item_sha256": "1f0004f283ea75cd4dc92cd9f49ca047b064fb9e9713c7bad7be139055198078",
+      "review_sha256": "dce4f696b6e5c14c062571cf85da1f5b747fc1665672640604163d7738dccab1",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:client_responsibility": {
+      "schema_version": 1,
+      "item_sha256": "8fbc19ccce9cdf5b08ce8cbe3e736c4209b55e8d0e7fcfe0727a06189baac659",
+      "review_sha256": "ff2552d35bd21956042c881d986039aba8bb65f7b85e86685dd3c07233982621",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:metagoal": {
+      "schema_version": 1,
+      "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
+      "review_sha256": "ff8c805e18863ae74ea7e8503f8ea766e2b1039d8e4e553e1f918813d35b429b",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:psychologist_consultant_role": {
+      "schema_version": 1,
+      "item_sha256": "f2cb07a7d835d541b9f7c2abcf5bb0adfd5e65845a0668334966eeaa95223a46",
+      "review_sha256": "9bb7df8c3605f3eccc6b93b88bb5c491eadc6ac21a1b4c20b9cba77781e6f9ab",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:psychiatrist_difference": {
+      "schema_version": 1,
+      "item_sha256": "aef9ec9333506b43f59659c2fee4a8694ff477fd30534a868fbad4887dead167",
+      "review_sha256": "11f21372a14d5cb56b11c1354015e2eafcce11ed3be1841871cf7e6562821e77",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:consulting_request_topics": {
+      "schema_version": 1,
+      "item_sha256": "940ad4f501d2e21e68a807dea374a127e03be4ef0c88823663f3fb0aa173420a",
+      "review_sha256": "6ed24374e04285a78f198e328f106d7c3ee4a58b136e95ef53a40269f3d1fb9c",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:extinction": {
+      "schema_version": 1,
+      "item_sha256": "374812df057bbdc14368cde33e13aa9f8e892afd7f383ba53caabedd34469a70",
+      "review_sha256": "c63210f098d3043276a2f03f82dbb8b687751b7615335c79b0ea6ffe261e6ba7",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:inhibition": {
+      "schema_version": 1,
+      "item_sha256": "c685fb2e451f5501a1fb2f42e525e90f419307758260a27d5d5fed2308377192",
+      "review_sha256": "e54ca8bff702aaa00add26a79dca3c65f38565fc90aa3e276e2c0da5567725ee",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:psyf_dendrites": {
+      "schema_version": 1,
+      "item_sha256": "f25ecfe5dba95b4a2c63d261bc0d4c9461587920428500dd1ec6ff8b7956daa6",
+      "review_sha256": "33e324809360e625f502d765fec244f07fa77e3b9410c00e1ea9dec63d316ad9",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

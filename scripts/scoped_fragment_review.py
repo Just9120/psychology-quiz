@@ -14,7 +14,7 @@ class FragmentReviewError(ValueError):
     pass
 
 
-def _ranges(value):
+def _ranges(value, *, ordered=True):
     if not isinstance(value, str) or len(value) > 4000:
         raise FragmentReviewError("fragment_locator_required")
     result = []
@@ -23,6 +23,8 @@ def _ranges(value):
         if match is None or int(match[1]) >= int(match[2]):
             raise FragmentReviewError("fragment_locator_required")
         result.append((int(match[1]), int(match[2])))
+    if not ordered:
+        result.sort()
     if not result or any(a[1] > b[0] for a,b in zip(result,result[1:])):
         raise FragmentReviewError("fragment_locator_required")
     return result
@@ -95,7 +97,9 @@ def _derived_pdf_text(claim, source, record, *, private_path):
 
 def _held_ranges(locator, pdf_pages):
     if pdf_pages is None or not isinstance(locator, str) or not locator.startswith("page:"):
-        return _ranges(locator)
+        # Holds are a union, sometimes recorded in discovery order. Selected
+        # excerpts keep their original strict order for hashing and evidence.
+        return _ranges(locator, ordered=False)
     result = []
     for part in locator.split(";"):
         match = re.fullmatch(r"page:(\d{1,6})", part.strip())

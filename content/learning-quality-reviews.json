@@ -1538,10 +1538,10 @@
       ]
     },
     "glossary:psychologist_consultant_role": {
-      "item_sha256": "065090cd3979e5aa1a4b766313b4e7d9783132052e11616ffe7a6ecfe8cf70e8",
+      "item_sha256": "f2cb07a7d835d541b9f7c2abcf5bb0adfd5e65845a0668334966eeaa95223a46",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1552,25 +1552,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Немедикаментозная консультативная работа показана вымышленным примером, без универсальных утверждений о лицензировании или психотерапии.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:3301:3940"
         }
       ]
     },
     "glossary:psychiatrist_difference": {
-      "item_sha256": "c08ebd3541fd79f0547aa5f09f51204757aec8df1f57141d479ae4cf873baa51",
+      "item_sha256": "aef9ec9333506b43f59659c2fee4a8694ff477fd30534a868fbad4887dead167",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1581,25 +1578,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений семантически соответствуют первым 12 вопросам, но source_refs question: не первичные источники. Все 12 examples ссылаются на ID вопроса и не являются самостоятельным примером. Working alliance описывает контакт, не полную модель целей/задач/связи; полнота термина не подтверждена отдельным материалом.",
+      "issues": [],
+      "note": "Пример различает медицинскую и консультативную роль, не ставит диагноз и не назначает препарат. Проверено точное описание психиатра, вне held psychotherapy fragment.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
+          "locator": "characters:2294:2610"
         }
       ]
     },
     "glossary:consulting_request_topics": {
-      "item_sha256": "36a0aedf12113cf92611cd318856a2ebed7d06127ea6c306b376c2fe975206a5",
+      "item_sha256": "940ad4f501d2e21e68a807dea374a127e03be4ef0c88823663f3fb0aa173420a",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-28",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -1610,23 +1604,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Тема 1 подтверждает жизненные трудности и отношения; тема 6 прямо перечисляет отношения, самооценку и тревожность среди типичных для курса запросов. Точные прежние extract SHA-256 обеих текущих Drive revisions воспроизведены 28.09.2026 с BOM и CRLF-разделителем абзацев. source_refs question: не первичный источник, а example ссылается на ID вопроса вместо самостоятельного примера; публичный термин не менялся.",
+      "issues": [],
+      "note": "Пример иллюстрирует жизненный и профессиональный запрос, без определения пригодности конкретного человека к консультированию по одному описанию.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:5500, 10500:14300"
-        },
-        {
-          "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
-          "modified_time": "2026-04-05T22:53:25.427Z",
-          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 5750:7350"
+          "locator": "characters:3301:3650"
         }
       ]
     },
@@ -3364,10 +3349,10 @@
       ]
     },
     "glossary:subject_general_psychology": {
-      "item_sha256": "15ba204ee0530f3cf1d3d8eba07517e7fac7fa7272be1eea18f5c28d0dea5b1f",
+      "item_sha256": "a2a59921d4ce55b62598e0c955e1bff761329b59092ac151cdeb1558021725c8",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3378,17 +3363,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Пример показывает предмет общей психологии через психические явления, без принятия спорной пирамиды личности за причинную модель. Проверен точный независимый фрагмент.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7580:8090, 9310:10350"
+          "locator": "characters:11001:11275"
         }
       ]
     },
@@ -3452,10 +3434,10 @@
       ]
     },
     "glossary:explanation_mechanism": {
-      "item_sha256": "d535a97ae88b4ba5d2eeafc809895895e5e57f24eae450a58fdfce6daaaf8365",
+      "item_sha256": "986172fed4d495585fd98db13087f6537a84dceb8dbca61d0aac9263be13cc28",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -3466,17 +3448,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 определений прочитаны. sensation/perception/memory/thinking/imagination/attention_stability/cognitive_processes поддержаны первичными фрагментами; scientific_hypothesis/subject/explanation соотносятся с научным методом. experiment требует точного definition evidence. attention short_definition подменяет направленность и сосредоточенность направленностью и устойчивостью (последняя — отдельное свойство); definition описывает сбой, а не само понятие. examples всех12 ссылаются на question ID вместо содержательного примера; source_refs question: не первичный материал.",
+      "issues": [],
+      "note": "Различены описание, предполагаемый механизм и проверка объяснения. Не утверждается, что пример доказывает конкретную причину поведения; broad source locator заменён точным фрагментом.",
       "sources": [
         {
           "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "raw Google text export decoded UTF-8-sig with universal newlines; Unicode characters (zero-based, end exclusive): 7580:8290, 4000:4620"
+          "locator": "characters:8000:8350"
         }
       ]
     },
@@ -7221,10 +7200,10 @@
       ]
     },
     "glossary:extinction": {
-      "item_sha256": "33c83aae908fdb7f3fe345e7d5cb394ac606d6c8467bf0263658c7a5234a6c88",
+      "item_sha256": "374812df057bbdc14368cde33e13aa9f8e892afd7f383ba53caabedd34469a70",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7235,17 +7214,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Показано поведенческое угасание, без вывода о физическом удалении нервной связи или фиксированном сроке забывания. Held fragment16889:17100 не используется.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:14890:15900"
         }
       ]
     },
@@ -7309,10 +7285,10 @@
       ]
     },
     "glossary:inhibition": {
-      "item_sha256": "5bb805df2431b9987ad558e701e3a7df9769c4c343c429d9431f2fc338302b9b",
+      "item_sha256": "c685fb2e451f5501a1fb2f42e525e90f419307758260a27d5d5fed2308377192",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -7323,17 +7299,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Source refs производны; examples называют вопрос вместо иллюстрации понятия. reinforcement имеет круговое краткое определение; нужно различать классическое и оперантное подкрепление. differentiation должно уточнить отсутствие подкрепления похожего сигнала. Контекст учения Павлова не отрицает вклад других исследователей.",
+      "issues": [],
+      "note": "Пример дифференцировочного торможения в павловской терминологии, без утверждения об универсальном клеточном механизме, личности или диагнозе.",
       "sources": [
         {
           "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 457:1157, 9800:13006, 14832:17800, 22429:24200, 26226:26926"
+          "locator": "characters:17100:18100"
         }
       ]
     },
@@ -9329,10 +9302,10 @@
       ]
     },
     "glossary:psyf_dendrites": {
-      "item_sha256": "7e898390fb0a5b8c8ec4540960530a915fe2f426a0b1be3b0d23e0c03bb9e1ba",
+      "item_sha256": "f25ecfe5dba95b4a2c63d261bc0d4c9461587920428500dd1ec6ff8b7956daa6",
       "discipline_id": "psihofiziologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -9343,17 +9316,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. Проверены 12 определений. Все examples отсылают к вопросу вместо самостоятельного примера; question refs производны. short_definition dopamine ошибочно определяет медиатор как систему; limited_attention_resource следует ограничить ресурсной моделью, а не универсальным законом. Прочие определения используются в границах учебного курса, без биомаркерной диагностики.",
+      "issues": [],
+      "note": "Проверена та же точная независимая анатомическая основа, что у карточки dendrites. OpenStax Anatomy and Physiology2e12.2 подтверждает направление сигналов в типичном нейроне; универсальность формы не утверждается.",
       "sources": [
         {
-          "source_id": "1GfH6JJtQsWZAKezO6m_T5zxiHhrqYr3bsiLA5q7rcs4",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:6342"
+          "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "locator": "characters:4970:5390"
         }
       ]
     },
@@ -17784,10 +17754,10 @@
       ]
     },
     "glossary:here_and_now_focus": {
-      "item_sha256": "9b149a8a434e4400355309c5a6a010b9784bf3cb3a0a247069b20b432b09e2c1",
+      "item_sha256": "1f0004f283ea75cd4dc92cd9f49ca047b064fb9e9713c7bad7be139055198078",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -17798,25 +17768,22 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Вымышленная ситуация иллюстрирует фокус на актуальной проблеме; пример не исключает работу с прошлым и не устанавливает диагноз.",
       "sources": [
         {
           "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
           "modified_time": "2026-06-07T20:48:25.702Z",
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+          "locator": "characters:4900:5100"
         }
       ]
     },
     "glossary:client_responsibility": {
-      "item_sha256": "7da552b47d0b5ae839da24b89e37d2d42c46a6000ff3edb3a19f9299d7ee48b9",
+      "item_sha256": "8fbc19ccce9cdf5b08ce8cbe3e736c4209b55e8d0e7fcfe0727a06189baac659",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -17827,17 +17794,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Проверен фрагмент о самостоятельном выборе и действиях клиента. Ответственность не представлена как обвинение или основание отказать в помощи.",
       "sources": [
         {
           "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
           "modified_time": "2026-06-07T20:48:25.702Z",
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+          "locator": "characters:3800:3938"
         }
       ]
     },
@@ -17998,10 +17962,10 @@
       ]
     },
     "glossary:metagoal": {
-      "item_sha256": "3c0dd9f66b4ec195c49c383667225f482345ee302adf6afe71eab2916bd89adc",
+      "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "definition",
@@ -18012,17 +17976,14 @@
       ],
       "meaning": "consistent",
       "source_support": "supported",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 терминов прочитаны. Все examples называют вопрос вместо самостоятельного примера, source_refs производны. psychological_consulting требует ограничения рамкой данного вводного курса: помощь только «психологически здоровым» не является универсальной границей всей профессии. here_and_now_focus не означает запрета обсуждать прошлое; client_responsibility не снимает ответственность консультанта за качество и безопасность.",
+      "issues": [],
+      "note": "Метацель показана через будущую самостоятельность, без обещания гарантированного результата и фиксированного числа сессий.",
       "sources": [
         {
           "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
           "modified_time": "2026-06-07T20:48:25.702Z",
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 3800:8300"
+          "locator": "characters:7664:8110"
         }
       ]
     },

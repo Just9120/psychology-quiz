@@ -444,3 +444,21 @@ def test_issue_only_hold_never_infers_missing_or_invalid_scope(tmp_path, monkeyp
     dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
     with pytest.raises(SigningError, match="fragment_(conflict_scope_unknown|locator_required|locator_out_of_bounds)"):
         verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("locator", ["characters:31:52; characters:16:30",
+                                     "characters:31:52; characters:0:15",
+                                     "characters:31:52; unknown",
+                                     "characters:31:52; characters:16:900"])
+def test_discovery_order_holds_keep_every_range_and_validation(tmp_path, monkeypatch, locator):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record["locator"] = locator
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    before = deepcopy(processed)
+    if locator.endswith("characters:16:30"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+    else:
+        with pytest.raises(SigningError, match="fragment_(overlaps_conflict|locator_required|locator_out_of_bounds)"):
+            verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
