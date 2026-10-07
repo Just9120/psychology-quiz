@@ -68,3 +68,16 @@ def test_log_hardlink_is_not_written_or_pruned(tmp_path):
     assert target.read_text()=='keep'
     with pytest.raises(ValueError): log.prune(now=NOW+timedelta(days=14))
     assert alias.exists() and target.read_text()=='keep'
+
+
+def test_quiet_service_runs_maintenance_without_stopping_learning(tmp_path):
+    log=DailyLog(tmp_path/'logs','api')
+    calls=[]
+    def upkeep():
+        calls.append(True)
+        raise ValueError('unverified private receipt')
+    result=supervise([sys.executable,'-c','import time; time.sleep(0.10)'],log,interval=0.01,upkeep=upkeep)
+    assert result==0 and len(calls)>=2
+    text=''.join(p.read_text() for p in log.root.glob('api-*.log'))
+    assert 'COPY_RETENTION_STOP' in text
+    assert 'unverified private receipt' not in text

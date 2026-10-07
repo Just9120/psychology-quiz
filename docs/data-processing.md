@@ -131,3 +131,28 @@ Native проверка обязательна в существующем backe
 [Runtime wrapper](../scripts/runtime_log.py) сохраняет вывод API и бота в приватных daily files mounted data/runtime-logs. Каждый сервис удаляет только собственные известные date buckets через14 дней; неизвестные files и логи другого сервиса не трогает. Mode directory0700/files0600, symlinks/hardlinks и чужие permissions отклоняются. Тихий сервис выполняет очистку раз в час. По [compose](../docker-compose.yml) API/bot не сохраняют вторую бессрочную копию stdout/stderr через Docker logging driver. Private log files исключены из Git/build/client assets как часть data/.
 
 До CI/CD это подготовленная конфигурация, не подтверждение runtime хранения. Nginx/Cloudflare/PostgreSQL diagnostics этим wrapper не управляются. Nginx retention14 дней требует отдельной проверки точного vhost/log path на shared host; общую nginx/journald retention не менять по догадке. Для диагностики после поставки использовать приватные host files, не docker logs; не прикладывать raw logs к публичным Actions/PR.
+
+
+## Production выгрузка и семь дней после передачи
+
+Внутри runtime-container exporter пишет только в новый приватный /data/learning-copies/*.json на persistent mount, создавая learning-copies с0700 и файл с0600. /app/data не является runtime target и Git внутри образа не нужен. Локальный host checkout сохраняет прежнюю ignored-data policy. [Проверка target](../tests/test_export_learning_target.py) и actor/export tests подтверждают эти разные границы; actual production command ещё PENDING.
+
+После проверки заявителя оператор создаёт копию из /opt/psychology-quiz:
+
+```bash
+docker compose -p psychology-quiz -f docker-compose.yml exec -T psych_quiz_miniapp_api \
+  python scripts/export_learning_data.py --telegram-user-id "$VERIFIED_TELEGRAM_USER_ID" \
+  --verified-request --include-identity --output /data/learning-copies/request.json
+```
+
+Имя request.json — пример нового файла; existing target не перезаписывается. До передачи файл проверяется в приватном окружении. После фактической передачи на подтверждённый адрес по явному запросу:
+
+```bash
+docker compose -p psychology-quiz -f docker-compose.yml exec -T psych_quiz_miniapp_api \
+  python scripts/learning_copy_retention.py --mark-delivered /data/learning-copies/request.json \
+  --confirmed-transfer
+```
+
+[Receipt/cleanup](../scripts/learning_copy_retention.py) фиксирует UTC передачи и SHA файла в private delivery-receipts; адрес, ID заявителя и текст копии в receipt не добавляются. Повторный mark не продлевает срок. Только полная выгрузка с совпадающими row_counts допустима; неполный/изменённый файл или чужой путь не удаляется. Непереданные copies и unknown files не имеют автоматического срока удаления. API wrapper при старте и раз в час чистит только неизменённые copies с истёкшими7 днями после передачи, под отдельной lock этого каталога. Ошибка receipt сохраняет файлы и даёт generic private diagnostic, не останавливая обучение. Эта команда не выполняет отправку и не заменяет проверку личности.
+
+Код подготовлен локально и требует current CI/CD; это не Evidence уже исполненного пользовательского обращения. Receipt helper, runtime upkeep и operator exporter должны поставляться одной revision.

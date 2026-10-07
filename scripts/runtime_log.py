@@ -81,9 +81,18 @@ class DailyLog:
                 os.close(fd)
 
 
-def supervise(command, log, *, interval=3600):
+def supervise(command, log, *, interval=3600, upkeep=None):
     """Forward termination to the real service and preserve its exit status."""
-    log.prune()
+    def maintenance():
+        log.prune()
+        if upkeep is not None:
+            try:
+                upkeep()
+            except (OSError, ValueError, KeyError, TypeError):
+                # A concurrent operator or invalid receipt never destroys copies
+                # or stops learning. Keep a private diagnostic for operator review.
+                log.write('COPY_RETENTION_STOP: preserve private delivery files\n')
+    maintenance()
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                start_new_session=(os.name == 'posix'))
     stopped = threading.Event()
@@ -107,7 +116,7 @@ def supervise(command, log, *, interval=3600):
     def prune_quiet_logs():
         while not stopped.wait(interval):
             try:
-                log.prune()
+                maintenance()
             except Exception:
                 failures.append(True)
                 forward(signal.SIGTERM)
@@ -147,7 +156,9 @@ def main():
     os.umask(0o077)
     try:
         service = sys.argv[1]
-        return supervise(COMMANDS[service], DailyLog('/data/runtime-logs', service))
+        from scripts.learning_copy_retention import locked_cleanup
+        upkeep = (lambda: locked_cleanup(apply=True)) if service == 'api' else None
+        return supervise(COMMANDS[service], DailyLog('/data/runtime-logs', service), upkeep=upkeep)
     except (OSError, ValueError):
         print('RUNTIME_LOG_STOP: preserve private logs; inspect owned directory', file=sys.stderr)
         return 1
