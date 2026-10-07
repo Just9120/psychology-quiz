@@ -206,6 +206,25 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "1d1bbf9dc466a71c2fc974185ae5ad7d42ee0fb4941d04a146a22976aad67963": {
+      "schema_version": 1,
+      "item_sha256": "99ed3e48f092dfb47384cff23e746c018516ffac50a7eaf9b1467e92507d403a",
+      "review_sha256": "ac1e006150dbd8bc54e683938aa522c9a52fce6cb269d7032174fe8a70b715ab",
+      "topic_id": "t_32c45a18e1bf",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

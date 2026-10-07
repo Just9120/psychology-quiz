@@ -560,3 +560,82 @@ def test_additional_lesson_section_requires_captured_relationship(tmp_path, monk
     dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(held[sid])
     with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
         verify_current_sources(dossier, inventory, held, public_item=public, private_links_path=links)
+
+
+def independent_related_fixture(tmp_path, monkeypatch):
+    public, dossier, inventory, processed = related_fragment_fixture(tmp_path, monkeypatch)
+    origin = processed["related_slides"]
+    origin["locator"] = "page:5;table:cell-origin"
+    origin["issues"] = [{"locator": "characters:16:30"}]
+    claim = dossier["scoped_claim_review"]
+    review = dossier["related_conflict_reviews"][0]
+    review.pop("mappings")
+    review.update(schema_version=2, processing_sha256=fingerprint(origin),
+        decision="independent_fragment", item_sha256=claim["item_sha256"],
+        target_locator=claim["locator"], target_excerpt_sha256=claim["excerpt_sha256"],
+        origin_snapshot_path=claim["snapshot_path"],
+        note="Selected factual claim is independent of both held cell-origin assertions.",
+        comparisons=[{"origin_locator": locator, "decision": "excluded_from_selected_claim",
+                     "note": "Compared against the selected fact; this cell-origin assertion is not used."}
+                     for locator in (origin["locator"], origin["issues"][0]["locator"])])
+    return public, dossier, inventory, processed
+
+
+def test_related_independent_claim_keeps_unmatched_slide_and_target_holds(tmp_path, monkeypatch):
+    public, dossier, inventory, processed = independent_related_fixture(tmp_path, monkeypatch)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    # A source relationship is never blanket approval of other claims.
+    record = processed["synthetic_source"]
+    record["issues"].append({"locator": dossier["scoped_claim_review"]["locator"]})
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    dossier["related_conflict_reviews"][0]["target_processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("change", ["origin", "target", "revision", "capture", "missing_capture",
+    "missing_comparison", "duplicate_comparison", "reuse_claim", "reuse_excerpt", "reuse_locator",
+    "old_review", "blank_note", "unknown_decision", "malformed_locator", "malformed_version",
+    "mixed_modes", "missing_packet"])
+def test_related_independence_rejects_stale_missing_or_reused_comparison(tmp_path, monkeypatch, change):
+    public, dossier, inventory, processed = independent_related_fixture(tmp_path, monkeypatch)
+    review = dossier["related_conflict_reviews"][0]
+    if change == "origin":
+        processed["related_slides"]["reason"] = "Changed scientific review"
+    elif change == "target":
+        processed["synthetic_source"]["reason"] = "Changed target review"
+    elif change == "revision":
+        inventory["folders"]["root"][0]["children"][1]["modified_time"] = "2026-10-02T00:00:00Z"
+    elif change == "capture":
+        from pathlib import Path
+        Path(review["origin_snapshot_path"]).write_bytes(b"Changed captured source")
+    elif change == "missing_capture":
+        review.pop("origin_snapshot_path")
+    elif change == "missing_comparison":
+        review["comparisons"].pop()
+    elif change == "duplicate_comparison":
+        review["comparisons"][1] = deepcopy(review["comparisons"][0])
+    elif change == "reuse_claim":
+        review["item_sha256"] = "0" * 64
+    elif change == "reuse_excerpt":
+        review["target_excerpt_sha256"] = "0" * 64
+    elif change == "reuse_locator":
+        review["target_locator"] = "characters:0:10"
+    elif change == "old_review":
+        review["reviewed_at"] = "2026-09-27T00:00:00Z"
+    elif change == "blank_note":
+        review["comparisons"][0]["note"] = " "
+    elif change == "unknown_decision":
+        review["comparisons"][0]["decision"] = "approve_source"
+    elif change == "malformed_locator":
+        review["comparisons"][0]["origin_locator"] = []
+    elif change == "malformed_version":
+        review["schema_version"] = 2.0
+    elif change == "mixed_modes":
+        review["mappings"] = []
+    else:
+        dossier.pop("related_conflict_reviews")
+    with pytest.raises(SigningError):
+        verify_current_sources(dossier, inventory, processed, public_item=public)

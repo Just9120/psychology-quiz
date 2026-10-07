@@ -4139,10 +4139,12 @@
       ]
     },
     "questions:m1_phys_019": {
-      "item_sha256": "3bcbe0ee09b51bff9471f05f889f5ccbe807ab09b4643277a815c2c353f53fcd",
-      "discipline_id": "fiziologiya_cheloveka",
+      "purpose": "learning_content",
+      "item_sha256": "99ed3e48f092dfb47384cff23e746c018516ffac50a7eaf9b1467e92507d403a",
+      "decision": "approved",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
+      "sources": [],
       "checks": [
         "meaning",
         "answer",
@@ -4154,15 +4156,8 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Связь длительного стресса/иммунной регуляции присутствует в источнике; это общее учебное утверждение, не индивидуальный прогноз.",
-      "sources": [
-        {
-          "source_id": "1EMJFu79Uh7iBGWbHD3tT6uzbK8K8noOPyqGqaKiaQao",
-          "modified_time": "2026-04-06T14:48:45.485Z",
-          "snapshot_sha256": "dba8cc929d3e30e7393ccd09904fc8401315ac8a6a671b076b0690853872271a",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 16569:17249"
-        }
-      ]
+      "note": "Exact course stress-immunity fragment and qualified primary abstract reviewed privately. Every related slide hold compared against the selected claim and retained; no clinical mechanism, diagnosis or treatment inferred.",
+      "discipline_id": "fiziologiya_cheloveka"
     },
     "questions:m1_phys_020": {
       "item_sha256": "fd6b5d41bdc9403d6d0b809329f0eb1eeb5d23557bd6c2983fe3016533a1b2d9",

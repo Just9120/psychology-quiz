@@ -69,11 +69,54 @@ def _character_ranges(locator: object) -> list[tuple[int, int]]:
     return ranges
 
 
-def _verify_related_fragment_reviews(dossier, source_id, processed, states):
-    """Require current, explicit mappings of every related hold into local holds.
+def _verify_related_independence(review, origin, hold, target, claim):
+    """Check an explicit per-claim editorial comparison, never blanket clearance.
 
-    A relation alone supplies no coordinates. Unmapped or changed relations stay
-    blocked; a mapping never removes an original hold or approves a whole source.
+    A related source may discuss different claims which have no target locator.
+    Its exact captured review must compare every held assertion with the exact
+    selected item/fragment. The ordinary target overlap gate still runs below.
+    """
+    locators = {hold.get("locator")}
+    locators.update(issue.get("locator") for issue in hold.get("issues", []))
+    comparisons = review.get("comparisons")
+    if (None in locators or "mappings" in review or not isinstance(comparisons, list)
+            or len(comparisons) != len(locators)
+            or any(not isinstance(item, dict)
+                   or set(item) != {"origin_locator", "decision", "note"}
+                   or not isinstance(item.get("origin_locator"), str)
+                   or item.get("decision") != "excluded_from_selected_claim"
+                   or not isinstance(item.get("note"), str) or not item["note"].strip()
+                   for item in comparisons)
+            or {item["origin_locator"] for item in comparisons} != locators
+            or review.get("decision") != "independent_fragment"
+            or review.get("item_sha256") != claim.get("item_sha256")
+            or review.get("target_locator") != claim.get("locator")
+            or review.get("target_excerpt_sha256") != claim.get("excerpt_sha256")):
+        raise SigningError("related_fragment_comparison_required")
+    try:
+        reviewed = datetime.fromisoformat(review["reviewed_at"].replace("Z", "+00:00"))
+        claim_at = datetime.fromisoformat(claim["reviewed_at"].replace("Z", "+00:00"))
+        origin_at = datetime.fromisoformat(hold["reviewed_at"].replace("Z", "+00:00"))
+        target_at = datetime.fromisoformat(target["reviewed_at"].replace("Z", "+00:00"))
+        if not max(origin_at, target_at) <= reviewed <= claim_at:
+            raise ValueError("stale comparison")
+        path = private_path(Path(review["origin_snapshot_path"]), suffix=".txt")
+        if not path.is_file() or not 0 < path.stat().st_size <= 32 * 1024 * 1024:
+            raise ValueError("missing capture")
+        raw = path.read_bytes()
+        if (hashlib.sha256(raw).hexdigest() != origin.get("snapshot_sha256")
+                or not raw.decode("utf-8").strip()):
+            raise ValueError("changed capture")
+    except (KeyError, TypeError, ValueError, AttributeError, OSError) as error:
+        raise SigningError("related_fragment_comparison_required") from error
+
+
+def _verify_related_fragment_reviews(dossier, source_id, processed, states):
+    """Require exact current per-claim reviews of every related hold.
+
+    A relation alone supplies no coordinates. Every hold needs either a local
+    mapping or an exact captured per-claim independence comparison. Neither
+    outcome removes a hold or approves a whole source.
     """
     target = processed[source_id]
     claim = dossier["scoped_claim_review"]
@@ -104,7 +147,14 @@ def _verify_related_fragment_reviews(dossier, source_id, processed, states):
                 or review.get("target_processing_sha256") != fingerprint(target)
                 or review.get("reviewer") != claim.get("reviewer")
                 or not isinstance(review.get("note"), str) or not review["note"].strip()
-                or not isinstance(mappings, list) or not mappings
+                or (review.get("schema_version") is not None
+                    and (type(review["schema_version"]) is not int
+                         or review["schema_version"] not in {1, 2}))):
+            raise SigningError("related_fragment_review_required")
+        if review.get("schema_version") == 2:
+            _verify_related_independence(review, origin, hold, target, claim)
+            continue
+        if (not isinstance(mappings, list) or not mappings
                 or any(not isinstance(mapping, dict) for mapping in mappings)):
             raise SigningError("related_fragment_review_required")
         if (None in origin_locators or len(mappings) != len(origin_locators)
