@@ -4533,6 +4533,30 @@
       "topic_id": "t_350cf495eee7",
       "item_sha256": "29759551d2627ef2052f115b1693c6be43b9fe074203ce7bd8295fb2d2208882",
       "locator": "private review:questions:m3_psychological_consulting_082"
+    },
+    "7c078aeee0e7e9b76e1ffbcf61542df7f61abd13d3daf93bf21d2884f383d70a": {
+      "external_id": "m1_phys_058",
+      "topic_id": "t_32c45a18e1bf",
+      "item_sha256": "86c3736b06c7e41e936006522b6208b290fa2f596b35af102c5a962a728d3b70",
+      "locator": "private review:questions:m1_phys_058"
+    },
+    "9f9ad447231b49e15c2634d0af1b0d44f2c5ef7ee4b5e42bc4843c0d999d1c65": {
+      "external_id": "m1_phys_059",
+      "topic_id": "t_e8545fea4531",
+      "item_sha256": "2d9b8f71404fac9a776900820a1da48b9cf10e7d22722686379d3ecb901dd05e",
+      "locator": "private review:questions:m1_phys_059"
+    },
+    "dde89578a38db5d1fac2c935f160078ec5d20f85ba403944f7b668f46e1903ea": {
+      "external_id": "m1_phys_060",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "5d0eb108650a5b13fd3bcf9e7b57017ea2014a653dbf4338e014ce2b697efd1d",
+      "locator": "private review:questions:m1_phys_060"
+    },
+    "233dbb3b2f97aeced2e0cde8cb398ec147f00481e88fe6b25def8853783edd3b": {
+      "external_id": "m1_phys_061",
+      "topic_id": "t_033b84e9a10e",
+      "item_sha256": "5d938fe1dd76aaa39d09ddac099ddadb0a3a84baf6375d78964879f96980526f",
+      "locator": "private review:questions:m1_phys_061"
     }
   }
 }

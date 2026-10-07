@@ -17079,6 +17079,82 @@
           "locator": "characters:3333:3538"
         }
       ]
+    },
+    "questions:m1_phys_058": {
+      "item_sha256": "86c3736b06c7e41e936006522b6208b290fa2f596b35af102c5a962a728d3b70",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Phagocytes; neutrophil/phagocytosis. Excludes eosinophil, universal zoonosis, immune maturation and all held claims. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
+      "sources": []
+    },
+    "questions:m1_phys_059": {
+      "item_sha256": "2d9b8f71404fac9a776900820a1da48b9cf10e7d22722686379d3ecb901dd05e",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Composition/formed elements. Excludes unverified percentages, spleen B-cell maturation and all held claims; platelets explicitly cell fragments. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
+      "sources": []
+    },
+    "questions:m1_phys_060": {
+      "item_sha256": "5d0eb108650a5b13fd3bcf9e7b57017ea2014a653dbf4338e014ce2b697efd1d",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Digestive processes: chemical breakdown versus absorption. Excludes anatomy errors, universal all-organ absorption, diet/therapy advice and all held claims. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
+      "sources": []
+    },
+    "questions:m1_phys_061": {
+      "item_sha256": "5d938fe1dd76aaa39d09ddac099ddadb0a3a84baf6375d78964879f96980526f",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Target-cell receptors/intracellular and membrane receptors. Excludes paracrine-only gastrin, therapy/dose and all held claims. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
+      "sources": []
     }
   }
 }
