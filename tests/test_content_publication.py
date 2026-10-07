@@ -278,7 +278,7 @@ def test_historical_baseline_preserved_and_current_learning_content_is_reviewed(
     assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 17
     # Reading learning sources for an audit must not silently approve derivatives.
     assert any(source["kind"] == "learning_material" for source in policy.sources.values())
-    for kind, expected in [("questions", 410), ("glossary", 85), ("literature", 319)]:
+    for kind, expected in [("questions", 412), ("glossary", 85), ("literature", 319)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected
@@ -294,6 +294,17 @@ def test_historical_baseline_preserved_and_current_learning_content_is_reviewed(
         changed = copy.deepcopy(item)
         changed["explanation"] += " changed"
         assert not policy.can_publish("questions", changed), item["id"]
+    # A frozen legacy allowance cannot stand in for an exact private review.
+    for kind in ("questions", "glossary"):
+        for path in (publication.ROOT / "content" / kind).rglob("*.json"):
+            for item in json.loads(path.read_text(encoding="utf-8")):
+                if item.get("status") != "approved":
+                    continue
+                assert policy.has_private_review(kind, item), (kind, item["id"])
+                if kind == "glossary":
+                    changed = copy.deepcopy(item)
+                    changed["definition"] += " changed"
+                    assert not policy.can_publish(kind, changed), item["id"]
 
 
 def test_current_learning_reviews_do_not_use_bibliographies_as_knowledge():

@@ -17155,6 +17155,44 @@
       "issues": [],
       "note": "Target-cell receptors/intracellular and membrane receptors. Excludes paracrine-only gastrin, therapy/dose and all held claims. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
       "sources": []
+    },
+    "questions:m1_phys_062": {
+      "item_sha256": "a9071109d14ba2fcdd995d4b38f0b88ffdfefa06485eab8d6565fe3589c9ff7d",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact anatomical chamber enumeration only. Excludes artery naming mistakes, gas-exchange/metabolism confusion, vein/compliance, pressure/disease thresholds and all other held passages. Exact private fragment receipt and primary teaching confirmation.",
+      "sources": []
+    },
+    "questions:m1_vnd_058": {
+      "item_sha256": "3c32f1570dd6b172a42987111e3a4b0cb194f649daac2cf75d70a94f8d3a63af",
+      "discipline_id": "fiziologiya_vnd",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact procedural/motor-memory definition; keyboard skill is an original teaching illustration. Excludes general cortical/hippocampal localization, REM/NREM consolidation, universal age rules, ECT/drug treatment and all other held claims. Exact private fragment receipt and primary teaching confirmation.",
+      "sources": []
     }
   }
 }

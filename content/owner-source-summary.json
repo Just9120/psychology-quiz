@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-07T22:35:58.029691+00:00",
+  "captured_at": "2026-10-07T22:53:22.013068+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -218,7 +218,7 @@
       {
         "id": "t_f2b92ac4b2ef",
         "kinds": {
-          "theory": 1,
+          "theory": 2,
           "glossary": 0,
           "case": 0
         },
@@ -288,7 +288,7 @@
       {
         "id": "t_27f468335f64",
         "kinds": {
-          "theory": 1,
+          "theory": 2,
           "glossary": 0,
           "case": 0
         },

@@ -8673,6 +8673,44 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m1_phys_062": {
+      "schema_version": 1,
+      "item_sha256": "a9071109d14ba2fcdd995d4b38f0b88ffdfefa06485eab8d6565fe3589c9ff7d",
+      "review_sha256": "4362c99b4d194a005ae4cb232dba35713d6443d85d6caeae348db82061bac44b",
+      "topic_id": "t_f2b92ac4b2ef",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_vnd_058": {
+      "schema_version": 1,
+      "item_sha256": "3c32f1570dd6b172a42987111e3a4b0cb194f649daac2cf75d70a94f8d3a63af",
+      "review_sha256": "63e8a406f3fe6b1729cd3c237d1cb52073b783ddffa06e1ba1edb12757eb0c30",
+      "topic_id": "t_27f468335f64",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
