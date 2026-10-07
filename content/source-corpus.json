@@ -738,12 +738,15 @@
       "kind": "learning_material",
       "readable": true,
       "modified_time": "2026-05-16T13:58:40.660Z",
-      "snapshot_sha256": "69bc1f37acb05e20f4f558c96bd71f9c9106d4d909caadb84eea5df815243ed1",
-      "snapshot_kind": "file_bytes",
-      "reviewed_at": "2026-09-20",
+      "snapshot_sha256": "50c21d41d08f270d94eb95628db1eab7aa97256883ce21a14ea63635981acd59",
+      "snapshot_kind": "extracted_text",
+      "reviewed_at": "2026-10-07",
       "reviewer": "coding-agent",
-      "review_method": "connected Drive; visual PDF pages and semantic item review",
-      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+      "review_method": "SHA-bound saved OCR with preserved original PDF byte hash; selected pages 7,10 visually checked. Historical review and all scientific holds retained; no whole-source approval.",
+      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены.",
+      "original_snapshot_sha256": "69bc1f37acb05e20f4f558c96bd71f9c9106d4d909caadb84eea5df815243ed1",
+      "original_snapshot_kind": "file_bytes",
+      "original_review_method": "connected Drive; visual PDF pages and semantic item review"
     },
     {
       "id": "1pk2VpLe9Ic0A4-oUJhBooTifCTpXiKY4",
@@ -752,12 +755,15 @@
       "kind": "learning_material",
       "readable": true,
       "modified_time": "2026-05-16T13:59:25.372Z",
-      "snapshot_sha256": "9c65fbe26511a6cfb4c928aa31b6ce697d99951d40690db006ea0795f0ae6df7",
-      "snapshot_kind": "file_bytes",
-      "reviewed_at": "2026-09-20",
+      "snapshot_sha256": "307f0c1d865da7f97c2284748167b4281e14c2c43855a66aeb9d7427f0464fad",
+      "snapshot_kind": "extracted_text",
+      "reviewed_at": "2026-10-07",
       "reviewer": "coding-agent",
-      "review_method": "connected Drive; visual PDF pages and semantic item review",
-      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены."
+      "review_method": "SHA-bound saved OCR with preserved original PDF byte hash; selected pages 15,21 visually checked. Historical review and all scientific holds retained; no whole-source approval.",
+      "limitations": "Проверены указанные в learning review фрагменты. Полное чтение всех страниц/утверждений, clinical/SME certification и точность автоматической транскрипции не заявлены.",
+      "original_snapshot_sha256": "9c65fbe26511a6cfb4c928aa31b6ce697d99951d40690db006ea0795f0ae6df7",
+      "original_snapshot_kind": "file_bytes",
+      "original_review_method": "connected Drive; visual PDF pages and semantic item review"
     },
     {
       "id": "1-2cpVVR8XqRC5VfhSKAb3DUgsFkRHlfWrnIX9DGeqvw",

@@ -6048,6 +6048,114 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m2_qual_026": {
+      "schema_version": 1,
+      "item_sha256": "244903271ea4dd99a3d82e3297f0af16882ddd930a81f3b7fbdcc938bd678756",
+      "review_sha256": "4ca66325c8cd1b9a9683e6353c0f3dc0b98d5c90638a3658bd017888202071a1",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m2_qual_042": {
+      "schema_version": 1,
+      "item_sha256": "a1bb5f9183dd9ee84600f15e93e0e7bc035458e24f74e278bfef1b1a0321ab5a",
+      "review_sha256": "2af8050ed00a79d3c11bf8221bb6581d1688fd92bd2dbfb312d9f73ecc572f6c",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_phenomenological_openness": {
+      "schema_version": 1,
+      "item_sha256": "67706f76f5df4f9430533960fb3ee863fd88350c98bcf1b3f02b696eae05b130",
+      "review_sha256": "d14ef3dc919ca51f014fb01ad8bc7484d63ab53dc99821e2778f0c961abaa192",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_subject_approach": {
+      "schema_version": 1,
+      "item_sha256": "676531c325541016fe127c2906dd523654b2a38d7ee02a5029f4edb4c1eba110",
+      "review_sha256": "48404dd6579e311621e6772a74c171884207f4ace6c055af96618df8ced4b2aa",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_position_of_not_knowing": {
+      "schema_version": 1,
+      "item_sha256": "886d6bb097c5946f5e32e99758a83c2509d1c01ce239f83bdc267a344fc8c707",
+      "review_sha256": "91c729677f7734f9e80d0e9f7195f792ed8b48a6163f20331744c8a631e7ff13",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:qual_methods_method_as_instrument": {
+      "schema_version": 1,
+      "item_sha256": "b95cb183db7c140618d42f88f61acf1206fdb534e12976d06a74bf827049cfdc",
+      "review_sha256": "be2cde5dd0fe9b686c68e64eafc2ce887f7bb28d7f3065e4d2b2075fbb32f9fe",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
