@@ -356,10 +356,51 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
     return result
 
 
+def _verify_lesson_section(snapshot: dict, link: dict, source: dict,
+                           topics: dict, links_path: Path | None) -> None:
+    """Require a separate captured relationship for a non-primary lesson section."""
+    if links_path is None:
+        raise SigningError("private_curriculum_section_required")
+    path = private_path(links_path, suffix=".json")
+    if not path.is_file() or not 0 < path.stat().st_size <= 8 * 1024 * 1024:
+        raise SigningError("private_curriculum_section_required")
+    records = json.loads(path.read_text(encoding="utf-8"))
+    fields = ("source_id", "lesson_id", "topic_id", "format", "revision", "corpus_path")
+    if not isinstance(records, list):
+        raise SigningError("private_curriculum_section_required")
+    matches = [record for record in records if isinstance(record, dict)
+               and all(record.get(field) == link.get(field) for field in fields)]
+    if len(matches) != 1:
+        raise SigningError("private_curriculum_section_required")
+    relationship = matches[0]
+    link_lessons(snapshot, [relationship], curriculum_topics=topics)
+    receipt = relationship.get("private_content_receipt")
+    if (not isinstance(receipt, dict) or receipt.get("snapshot_kind") != "extracted_text"
+            or receipt.get("snapshot_kind") != source.get("snapshot_kind")
+            or receipt.get("snapshot_sha256") != source.get("snapshot_sha256")):
+        raise SigningError("private_curriculum_section_required")
+    capture = private_path(Path(receipt.get("content", "")), suffix=".txt")
+    if not capture.is_file() or not 0 < capture.stat().st_size <= 32 * 1024 * 1024:
+        raise SigningError("private_curriculum_section_required")
+    raw = capture.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != source["snapshot_sha256"]:
+        raise SigningError("private_curriculum_section_required")
+    text = raw.decode("utf-8")
+    ranges = _character_ranges(receipt.get("locator"))
+    if any(end > len(text) or not text[start:end].strip() for start, end in ranges):
+        raise SigningError("private_curriculum_section_required")
+    reviewed = datetime.fromisoformat(relationship["reviewed_at"].replace("Z", "+00:00"))
+    modified = datetime.fromisoformat(source["modified_time"].replace("Z", "+00:00"))
+    current = datetime.fromisoformat(link["reviewed_at"].replace("Z", "+00:00"))
+    if not modified <= reviewed <= current:
+        raise SigningError("private_curriculum_section_required")
+
+
 def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                            *, public_item: dict | None = None,
                            private_registry_path: Path | None = None,
-                           private_topics_path: Path | None = None) -> None:
+                           private_topics_path: Path | None = None,
+                           private_links_path: Path | None = None) -> None:
     """Require every private source to match a completed review in this inventory."""
     if (not isinstance(inventory, dict) or inventory.get("schema_version") != 1
             or not isinstance(inventory.get("folders"), dict)
@@ -522,11 +563,14 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
             expected_source = {"source_id": sources[0]["id"],
                                "modified_time": sources[0]["modified_time"],
                                "snapshot_sha256": sources[0]["snapshot_sha256"]}
-            if (topic is None or topic.get("source") != expected_source
-                    or (sources[0].get("discipline_id") is not None
-                        and sources[0]["discipline_id"] != topic.get("discipline_id"))):
+            if (topic is None or (sources[0].get("discipline_id") is not None
+                                  and sources[0]["discipline_id"] != topic.get("discipline_id"))):
                 raise SigningError("private_curriculum_link_required")
+            if topic.get("source") != expected_source:
+                _verify_lesson_section(snapshot, link, sources[0], catalog["topics"], private_links_path)
             lessons = link_lessons(snapshot, [link], curriculum_topics=catalog["topics"])
+        except SigningError:
+            raise
         except (InventoryError, OSError, ValueError, KeyError, TypeError) as error:
             raise SigningError("private_curriculum_link_required") from error
         if (lessons.get(topic_id, {}).get("topic_id") != topic_id
@@ -545,6 +589,8 @@ def main(argv=None) -> int:
                         help="Ignored current source classifications; fragment approval remains required")
     parser.add_argument("--private-topics", type=Path,
                         help="Ignored current lesson metadata for signed source-free literature labels")
+    parser.add_argument("--private-links", type=Path,
+                        help="Ignored captured relationships for non-primary lesson sections")
     parser.add_argument("--private-key", type=Path)
     parser.add_argument("--review-only", action="store_true",
                         help="Validate private evidence without reading a key or creating a publication certificate")
@@ -573,7 +619,8 @@ def main(argv=None) -> int:
         processed = json.loads(processed_path.read_text(encoding="utf-8"))
         verify_current_sources(dossier, inventory, processed, public_item=items[0],
                                private_registry_path=args.private_registry,
-                               private_topics_path=args.private_topics)
+                               private_topics_path=args.private_topics,
+                               private_links_path=args.private_links)
         identity = f"{args.kind}:{args.item_id}"
         if args.review_only:
             payload = {"schema_version": 1, "scope": "private_review_validation",

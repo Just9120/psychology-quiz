@@ -4596,7 +4596,8 @@
     "questions:m1_psyf_003": {
       "schema_version": 1,
       "item_sha256": "3454c2fa24ee54bb03a48562135ad6d1398e152f2f71c494295fce5fae76cd3c",
-      "review_sha256": "d3ec2888853bf4da6cbe76ef6d45e691ea14d4a299ec05f2cdfe8fd9080847ae",
+      "review_sha256": "0701e0ec4869f20a158b2e79469f4cfa0050649a5103005902562ea7473a4c2a",
+      "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -4614,7 +4615,8 @@
     "questions:m1_psyf_004": {
       "schema_version": 1,
       "item_sha256": "0dd8d587b2ae41fc6dd4bf6b86c19325ad5c50c5bd93339ff5e019dbe472c2d3",
-      "review_sha256": "3dfb8142ae2ed9dc9e6acba7e2a1b14e4b55bb5238f91da4a837f30d49acbd16",
+      "review_sha256": "a43095baf68ec1dbb1470a3315f770b0c7fa5ba142c72c70dc6c1b32d0de0c84",
+      "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -4632,7 +4634,8 @@
     "questions:m1_psyf_005": {
       "schema_version": 1,
       "item_sha256": "6cfb92463af87a60ef7ee800f24f206216809de04a59c3d0e359438a3cd974b8",
-      "review_sha256": "b64e1fe8e826f29706bacc16c304aeacbff068ea29d0b7fea76c1cf1008a6691",
+      "review_sha256": "67f6298ff448c5884214191e600ef99dd4066ec5b049adaa1b608f17447a1ea9",
+      "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",

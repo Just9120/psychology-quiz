@@ -506,3 +506,57 @@ def test_private_question_lesson_uses_exact_current_fragment_and_source(tmp_path
     with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
         verify_current_sources(dossier, inventory, held, public_item=public,
                                private_registry_path=registry, private_topics_path=topics)
+
+
+def test_additional_lesson_section_requires_captured_relationship(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, capture = fragment_fixture(tmp_path, monkeypatch)
+    root = signer.REPO_ROOT
+    source = dossier["sources"][0]
+    sid = source["id"]
+    tid = "t_012345abcdef"
+    # This source is a separately captured section of the existing parent lesson.
+    primary = {"source_id": "representative_source", "modified_time": "2026-09-27T00:00:00Z",
+               "snapshot_sha256": "a" * 64}
+    (root / "content/curriculum.json").write_text(json.dumps({"topics": {tid: {
+        "title": "Parent lesson", "discipline_id": "one", "source": primary}}}), encoding="utf-8")
+    dossier["curriculum_topic_id"] = tid
+    dossier["curriculum_link"] = {"source_id": sid, "topic_id": tid, "lesson_id": tid,
+        "format": "transcript", "revision": processed[sid]["revision"],
+        "corpus_path": "Synthetic lecture", "reviewer": "reviewer",
+        "review_note": "Independently checked section relationship", "reviewed_at": "2026-10-01T00:00:00Z"}
+    relationship = deepcopy(dossier["curriculum_link"])
+    relationship["reviewed_at"] = "2026-09-29T00:00:00Z"
+    relationship["private_content_receipt"] = {
+        "snapshot_kind": "extracted_text", "snapshot_sha256": source["snapshot_sha256"],
+        "content": str(capture), "locator": "characters:0:15"}
+    links = root / "links.json"
+    def write(records):
+        links.write_text(json.dumps(records), encoding="utf-8")
+    with pytest.raises(SigningError, match="private_curriculum_section_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+    write([relationship])
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public, private_links_path=links)
+    assert processed == before
+    for change in ({"topic_id": "t_fedcba543210"}, {"reviewed_at": "2026-10-02T00:00:00Z"},
+                   {"corpus_path": "Another lesson"}, {"private_content_receipt": {}},
+                   {"private_content_receipt": {**relationship["private_content_receipt"],
+                                                 "snapshot_sha256": "b" * 64}},
+                   {"private_content_receipt": {**relationship["private_content_receipt"],
+                                                 "locator": "characters:0:1000"}}):
+        write([{**relationship, **change}])
+        with pytest.raises(SigningError, match="private_curriculum_section_required"):
+            verify_current_sources(dossier, inventory, processed, public_item=public, private_links_path=links)
+    write([relationship, relationship])
+    with pytest.raises(SigningError, match="private_curriculum_section_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_links_path=links)
+    write([relationship])
+    invalid = deepcopy(dossier)
+    invalid["curriculum_link"]["revision"][0] = "2026-09-26T00:00:00Z"
+    with pytest.raises(SigningError, match="private_curriculum_section_required"):
+        verify_current_sources(invalid, inventory, processed, public_item=public, private_links_path=links)
+    held = deepcopy(processed)
+    held[sid]["locator"] = "characters:0:30"
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(held[sid])
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, held, public_item=public, private_links_path=links)
