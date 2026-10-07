@@ -3816,6 +3816,24 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m1_vnd_002": {
+      "schema_version": 1,
+      "item_sha256": "8e09db58f13fec290293094ccf4aebd3219f2be599db6e40b81f57f51103b572",
+      "review_sha256": "f4e145cb72c3182b28079e6af7ffc1b237527e2340eb82068c061fb1e4e256cc",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

@@ -5515,10 +5515,10 @@
       ]
     },
     "questions:m1_vnd_002": {
-      "item_sha256": "9214ba60717588c819ebd0fdea2f93a4069e8d1fed2f74699901710a48b38a01",
+      "item_sha256": "8e09db58f13fec290293094ccf4aebd3219f2be599db6e40b81f57f51103b572",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -5530,13 +5530,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Уточнён stem: спрашивается классическое учение об условных рефлексах, а не любой ключевой вклад в ВНД. Ключ Павлов и другие варианты сохранены.",
+      "note": "Exact raw source passages explicitly attribute the classical terminology and conditioned-reflex research to Pavlov. Replaced unrelated broad legacy locator, preserved all source holds and unchanged question/answer/explanation. No whole-source approval.",
       "sources": [
         {
+          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
-          "locator": "characters-9800-11600"
+          "locator": "characters:274:381;characters:1151:1359"
         }
       ],
       "resolution": {
