@@ -5742,6 +5742,42 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m2_exp_029": {
+      "schema_version": 1,
+      "item_sha256": "35a8171f652eb8f85e629322bc1f3bce9b397a3bfa401a4beb35a2453aa0c7a0",
+      "review_sha256": "bebc2856e2b0f2f48f71ad34e83ab3a95f8541aa892dba2cd09c8c0cb41353c5",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_vnd_027": {
+      "schema_version": 1,
+      "item_sha256": "3fa13e1455ea37c18ff27ed656259628c53f9c4e6030c62a570bfe002aec9334",
+      "review_sha256": "3b9ba8ffdf210fbf04c7eeb7716f1a1136242ff976a5497a8e919386249869f2",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-07",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

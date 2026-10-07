@@ -6170,10 +6170,10 @@
       ]
     },
     "questions:m1_vnd_027": {
-      "item_sha256": "162547f3df3c77cb2b75431ecb091127fcfc9ef4a5f9665ae0163fa6545b54b8",
+      "item_sha256": "3fa13e1455ea37c18ff27ed656259628c53f9c4e6030c62a570bfe002aec9334",
       "discipline_id": "fiziologiya_vnd",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -6185,13 +6185,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Лекция связывает эмоции с центрами потребностей, мозговыми структурами и запуском/выбором поведения; пример не используется как диагноз.",
+      "note": "Exact broad introductory sentence establishes the emotion/mental-activity course topic only; OpenStax Psychology2e10.4 opening30-32 independently read for subjective experience/expression/cognitive appraisal and possible physiological responses. Concrete example does not diagnose a disorder or infer a single neural cause. No one-to-one centre/emotion mapping, stem/amygdala claim, mirror-neuron empathy, fixed-transmitter affect, fMRI blood-flow simplification, political/risk prediction or treatment-percentage statement approved. All thirteen emotion-course holds unchanged.",
       "sources": [
         {
           "source_id": "1SqvFpDhIdbcZ3UjZNr4s0pGxBQSVHAOAn4UiYG8JQHo",
           "modified_time": "2026-04-07T09:58:03.450Z",
           "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 2306:3006, 15655:16355"
+          "locator": "characters:1038:1140"
         }
       ]
     },
@@ -10240,10 +10240,10 @@
       ]
     },
     "questions:m2_exp_029": {
-      "item_sha256": "450fbdbb7a5067dbf7f74aedb1157602eeabd1d8b95fbae33805f6650529af19",
+      "item_sha256": "35a8171f652eb8f85e629322bc1f3bce9b397a3bfa401a4beb35a2453aa0c7a0",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "reviewer": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_at": "2026-10-07",
       "checks": [
         "meaning",
         "answer",
@@ -10255,13 +10255,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "SHA-256 полного извлечённого текста Практики №8 совпал с реестром. Практика описывает групповое среднее как первый шаг и предлагает затем исследовать различия отклика участников и подгрупп.",
+      "note": "Exact raw practice8 paragraph16367:16870 distinguishes greater/smaller individual responses; selected scope starts after the held assertion that a substantial group effect occurs nearly in everyone. Key and explanation describe aggregation limits without asserting intervention efficacy, causal subgroup effect or superiority of every individual difference. All six methodological source holds unchanged.",
       "sources": [
         {
           "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 15300:16650"
+          "locator": "characters:16367:16870"
         }
       ]
     },
