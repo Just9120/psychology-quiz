@@ -19663,6 +19663,101 @@
       "issues": [],
       "note": "Exact P/O/X identities only before ambiguous transitivity text; no unread diagram claim or deterministic attitude prediction. Distinct from causal-attribution list and Newcomb communication subject.",
       "sources": []
+    },
+    "questions:m2_pd_012": {
+      "item_sha256": "b32fa0163f1cb5f40ebce3a7dcdcc4d9fd5ebf41b071cffd0454b52cbbc068b3",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact reference-population passage only. Course wrongly introduces it as standardisation; term corrected to norms using primary Standards5.8–5.9. No whole-source approval, clinical diagnosis or automatic group equivalence.",
+      "sources": []
+    },
+    "questions:m2_pd_013": {
+      "item_sha256": "ff0bf8818baacc794ba94e7629375358ffebefb8ceb6ee513d700f88ef147657",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact administration-error discussion before broader speculation. Primary Standard6.1 and5.7 clarify procedural consistency, documented variations and comparability. No absolute ban on accessibility accommodations or all-data-discard rule.",
+      "sources": []
+    },
+    "questions:m2_pd_014": {
+      "item_sha256": "8369b83acdfb8fb1d830e4fe853e392b4b58fbf19c311b8076684928b871de82",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact self/other experience separation before held complementary-countertransference claims27600:29900. Original fictional irritation example; no transfer of clinician emotion to respondent or group-consensus proof. Existing generic hypothesis item kept distinct.",
+      "sources": []
+    },
+    "questions:m2_pd_015": {
+      "item_sha256": "f9d1574b0b970ca901df11a29093b6d2043b53fdfb6d04e397cda74ae6ff261d",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact non-flattering concrete-resource feedback guidance, after universal rapport guarantee and before named participant example. Own generic attention example; no outcome promise, moral trait rating, automatic feedback or public identity disclosure.",
+      "sources": []
+    },
+    "questions:m4_person_015": {
+      "item_sha256": "6796151bcb72e2cceeca84084372e5aa1d1fca78ae77ba13c884fb365b5887b4",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact manual-based non-arbitrary coding paragraph, excluding prior any-stem claim and later arbitrary rater-stage/training-effect percentages. Course procedure description, no full manual reading, validated assessment or clinical maturity ranking claim. Primary generic scoring training principles apply but instrument-specific empirical efficacy not asserted.",
+      "sources": []
     }
   }
 }

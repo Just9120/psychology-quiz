@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-08T11:17:14.481994+00:00",
+  "captured_at": "2026-10-08T11:27:53.796154+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -1341,7 +1341,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 3,
+          "theory": 4,
           "glossary": 0,
           "case": 0
         },
@@ -1383,7 +1383,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 4,
+          "theory": 6,
           "glossary": 0,
           "case": 0
         },
@@ -1425,7 +1425,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 3,
+          "theory": 5,
           "glossary": 0,
           "case": 0
         },
