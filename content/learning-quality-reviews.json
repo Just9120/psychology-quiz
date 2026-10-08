@@ -19131,6 +19131,291 @@
       "issues": [],
       "note": "Exact ignored/rejected self-aspects definition after midlife universal stereotypes and before gender/retreat anecdotes. APA official shadow entry limits term to Jung theoretical tradition and permits positive/negative aspects; course text does not name author here, so no unverified original-author attribution inserted into item. No empirical treatment effect, diagnosis or age necessity asserted.",
       "sources": []
+    },
+    "questions:m6_psyl_009": {
+      "item_sha256": "dca629cd58207489e1c400b7aba1b1add600c30757792b11afde49f38f8e186d",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact sign-system definition only, before brain-virus, spatial-development and reality claims. Course definition is not a treatment or deterministic causality claim; no source-wide approval.",
+      "sources": []
+    },
+    "questions:m6_psyl_010": {
+      "item_sha256": "074bebb88e3718216866889bb05e8503aa60b80432246f58c760ec7324cc77e9",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact communicative/emotional/social functional distinctions before magic/reality claim. Own non-private joy example; multiple coexisting functions acknowledged, no exclusive mapping or efficacy inference.",
+      "sources": []
+    },
+    "questions:m2_pd_002": {
+      "item_sha256": "7f8c01fa91da802d1497efdd375ecbc3ca41296511370447dd4f826c79abcd14",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact four-source distinction; lecture inaccurate live expansion not copied. College primary four-source course objectives independently corroborate life-outcome/observer/self-report/test categories. Classification concerns source, not validity guarantee.",
+      "sources": []
+    },
+    "questions:m2_pd_003": {
+      "item_sha256": "5169a867520ebfda52ccf65f69bbcff40a6b42dbcc1d9856633d796167e590e1",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact unique-case passage only after simplified psychiatric labels. Correct idiographic spelling; no blanket qualitative-only/never-compare rule or clinical categorisation adopted.",
+      "sources": []
+    },
+    "questions:m2_pd_004": {
+      "item_sha256": "459c82bccc99aaa7527544588677d62161fd98e4902aa15526c843506cc7e8c6",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact multiple-method comparison definition; own generic study, not private participants. APA indexed methodological-triangulation definition independently supports variety of data collection; no guarantee of validity.",
+      "sources": []
+    },
+    "questions:m2_pd_005": {
+      "item_sha256": "adc04a3dfb0242268a5c4760f968587fc18d204752fb1e7fb7f0f7b5c69866f7",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact criticism of equating majority frequency with correctness; numerical20/80 story excluded. Frequency distinguished from moral, adaptive and clinical evaluation, no normative group cutoffs invented.",
+      "sources": []
+    },
+    "questions:m4_person_012": {
+      "item_sha256": "5bc57443188b80f8cbb2a37e63045b24adbd42c310bfdfd98b3721dab305b7c6",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact stated hypothesis only before toxic-label deterministic predictions. Hypothesis attribution, not universal cross-language proof, exact Galton chronology or word-based diagnosis.",
+      "sources": []
+    },
+    "questions:m4_person_013": {
+      "item_sha256": "ca8ada0d8babc448a203af5dcfa2929c323ec20ea2385fb2386b966da180e401",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact five-factor structure passage; independently read OpenStax67–69,75–77 supports five names and continuum. No universal cross-cultural consensus, fixed permanence, nervous-speed equation, clinical diagnosis or outcome prediction.",
+      "sources": []
+    },
+    "questions:m4_person_014": {
+      "item_sha256": "f186c9ce6434a176a618b7cda41afe50880fa65dd435e607ba557acccdb27e79",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact structural-statistical explanation before sweeping historical origin claim. No universal factor count, mechanistic causal inference or diagnosis.",
+      "sources": []
+    },
+    "questions:m6_social_002": {
+      "item_sha256": "100e49cc168788bbbd0e38f27aca7943ac5a4958d740a8bea891f57616387680",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact first meaning-based action premise; own conceptual contrast, no private stories or course inaccurate third-premise summary adopted. NLM descriptor is an indexing record and does not verify all Blumer premises; no claimed full original text review.",
+      "sources": []
+    },
+    "questions:m6_social_003": {
+      "item_sha256": "56fa4fc7790dbd0bb975cf7881b3df2801c6de0b239e395ce008b6d1129d85b6",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact theatrical metaphor before guaranteed impression-based control/power claims. Lecturer attribution only; no universal deceit, personality diagnosis or guaranteed influence adopted.",
+      "sources": []
+    },
+    "questions:m6_social_004": {
+      "item_sha256": "ebdcca9196707e920628d2bd8b931f62acd37bb3d61b9e0cff9e455bed0aa0d1",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact common character/shared experience definition; later closed causal loop, universal class predictions and diagnostic labelling not adopted. Historical model, not universal measured causal law.",
+      "sources": []
+    },
+    "questions:m6_social_005": {
+      "item_sha256": "45b0eabc2f51e244d31d574b0da33794dc937b64b54fc9c55e800b63237af687",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact communal/helping/empathic model definition before categorical personality-type judgements. No prescription of healthy uniform conduct or profession-based diagnosis; model is explicitly course-framed.",
+      "sources": []
+    },
+    "questions:m6_social_006": {
+      "item_sha256": "4006c19594a20f072711b7fe2a98225d0b8693f82d1888fa2a3d57d605f08fd2",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact reward/cost model passage; first exclusive economy and small trader claims not adopted. Official APA indexed definition independently supports exchange benefits/costs as theory, not universal conscious calculation. Lecture dates, nationality and alleged pure-behaviourist exclusivity not adopted.",
+      "sources": []
+    },
+    "questions:m6_social_007": {
+      "item_sha256": "f5842aed092fdbff393317e6f5b7833f36fc6ff9c6c34594b496626504b5bda3",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact implicit everyday rules definition before everyone-knows/general institution exclusions. No jurisdiction advice, universal etiquette, private dialogue or claim that implicit rules are legal norms.",
+      "sources": []
     }
   }
 }
