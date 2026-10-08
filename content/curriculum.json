@@ -5601,6 +5601,30 @@
       "topic_id": "t_45e69d90b32c",
       "item_sha256": "c72f973a9ce94d59cabec9d107a3336a3b241bd1c3f1e83cfff2fb724f2da904",
       "locator": "private review:questions:other_tp_007"
+    },
+    "8e11f19443d52e7314f22f9a75fc175693edefde089084a0a942ebdb5c95d1dd": {
+      "external_id": "m2_pd_016",
+      "topic_id": "t_0fc9f8b6f0df",
+      "item_sha256": "5ba960b145ab5b4477b4a2aa69b25564b69bf56b7266e31736aa0362b5b10f80",
+      "locator": "private review:questions:m2_pd_016"
+    },
+    "284af4ebd9d08fbe79e3470e028b9526e07a11d4d290909a19c799fa89dc64f2": {
+      "external_id": "m5_clinical_015",
+      "topic_id": "t_b4f42b4660bc",
+      "item_sha256": "61b7ac54821fcb0881d890d9ee8baa6544e9b669917955884abb7da94886795d",
+      "locator": "private review:questions:m5_clinical_015"
+    },
+    "13731a211584ba5f57a98654afa9305cff2d800de5262b2485139259146d4781": {
+      "external_id": "m5_clinical_016",
+      "topic_id": "t_bb895f94e077",
+      "item_sha256": "25d52330f4861179ff57037acf59cfe5eeac308e6453b72fa87c483101f0ec0f",
+      "locator": "private review:questions:m5_clinical_016"
+    },
+    "b027da9e06857d4ecad905e98657dac5b5e0434c63c1717122be9587a52f4900": {
+      "external_id": "m5_clinical_017",
+      "topic_id": "t_284ec6eeecd6",
+      "item_sha256": "7e7bbf5bc3806a5dcf35128035f7ba845d6fa05490fa0d15969a6e23d69e7cde",
+      "locator": "private review:questions:m5_clinical_017"
     }
   }
 }
