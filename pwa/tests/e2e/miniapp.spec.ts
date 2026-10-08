@@ -1,6 +1,15 @@
 import { createHmac } from 'node:crypto'
 import { expect, test } from '@playwright/test'
 
+async function chooseMenu(page: import('@playwright/test').Page, field: import('@playwright/test').Locator, value: string) {
+  await field.click()
+  const options = page.getByRole('option')
+  const values = await options.evaluateAll(items => items.map(item => item.getAttribute('data-value')))
+  const index = values.indexOf(value)
+  expect(index).toBeGreaterThanOrEqual(0)
+  await options.nth(index).click()
+}
+
 const site = 'http://127.0.0.1:4174/'
 const question = { session_id: 10, question_id: 20, question_text: 'Первый приём: что сделать?', order_index: 1, total_questions: 1,
   options: [{ option_index: 0, option_text: 'Уточнить запрос' }, { option_index: 1, option_text: 'Поставить диагноз' }] }
@@ -202,7 +211,7 @@ test('built Mini App opens book offers externally without passing Telegram proof
       expect(route.request().headers().cookie).toBeUndefined()
       await route.fulfill({ contentType: 'text/html', body: '<title>External provider fixture</title>' })
     })
-    const link = page.getByRole('link', { name: `${offer.format === 'text' ? 'Текст' : 'Аудио'} · ${offer.provider}`, exact: true })
+    const link = page.getByRole('link', { name: `${offer.format === 'text' ? 'Читать' : 'Слушать'} · ${offer.provider}`, exact: true })
     await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     const opened = page.context().waitForEvent('page')
     await link.click()
@@ -212,7 +221,7 @@ test('built Mini App opens book offers externally without passing Telegram proof
     await provider.close()
     await page.context().unroute(offer.url)
   }
-  await expect(page.getByRole('combobox', { name: 'Статус', exact: true })).toHaveValue('not_started')
+  await expect(page.getByRole('combobox', { name: 'Статус', exact: true })).toHaveAttribute('value', 'not_started')
 })
 
 
@@ -250,13 +259,13 @@ test('Mini App reading next step persists against the real local backend', async
   const next = page.getByRole('region', { name: 'Следующий шаг чтения' })
   await next.getByRole('button', { name: /^Начать «/ }).click()
   const title = await page.locator('.literature-detail h2').innerText()
-  await page.getByRole('combobox', { name: 'Статус', exact: true }).selectOption('in_progress')
+  await chooseMenu(page, page.getByRole('combobox', { name: 'Статус', exact: true }), 'in_progress')
   await page.getByRole('button', { name: 'Сохранить чтение' }).click()
   await expect(page.getByText('Отметка сохранена.')).toBeVisible()
   await openReading()
   await next.getByRole('button', { name: `Продолжить «${title}»`, exact: true }).click()
-  await expect(page.getByRole('combobox', { name: 'Статус', exact: true })).toHaveValue('in_progress')
-  await page.getByRole('combobox', { name: 'Статус', exact: true }).selectOption('read')
+  await expect(page.getByRole('combobox', { name: 'Статус', exact: true })).toHaveAttribute('value', 'in_progress')
+  await chooseMenu(page, page.getByRole('combobox', { name: 'Статус', exact: true }), 'read')
   await page.getByRole('button', { name: 'Сохранить чтение' }).click()
   await expect(page.getByText('Отметка сохранена.')).toBeVisible()
   await openReading()

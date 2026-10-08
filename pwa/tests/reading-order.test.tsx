@@ -26,6 +26,8 @@ it('shows the route, reasons, status and external-topic preparation with working
   await user.click(screen.getByText('Рекомендуемая последовательность чтения'))
   const row = screen.getByRole('listitem')
   expect(within(row).getByText(/Применение · приоритет преподавателя/)).toBeVisible()
+  await user.click(within(row).getByText('Зачем читать и что прочитать до этого'))
+  expect(within(row).getByText('Для освоения практики')).toBeVisible()
   expect(within(row).getByText(/Подготовка/)).toHaveTextContent('Основы ✓')
   await user.click(within(row).getByRole('button', { name: 'Основы' }))
   expect(select).toHaveBeenCalledWith('prep')

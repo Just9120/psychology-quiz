@@ -461,6 +461,66 @@
         "access_modes": [],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
       }
+    ],
+    "fch_gazzaniga_kto_za_glavnogo": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/maykl-gazzaniga/kto-za-glavnogo-svoboda-voli-s-tochki-zreniya-neyrobiologi-23135916/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-09",
+        "access_modes": [],
+        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/maykl-gazzaniga/kto-za-glavnogo-svoboda-voli-s-tochki-zreniya-neyrobiologi-68967180/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-09",
+        "access_modes": [],
+        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+      }
+    ],
+    "fch_martynov_mozg": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/ilya-martynov-21110132/mozg-kak-on-ustroen-i-chto-s-nim-delat-48516624/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-09",
+        "access_modes": [],
+        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/ilya-martynov-2/mozg-kak-on-ustroen-i-chto-s-nim-delat/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-09",
+        "access_modes": [],
+        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/W3ACAKGu",
+        "access": "provider_terms",
+        "checked_at": "2026-10-09",
+        "access_modes": [],
+        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+      }
+    ],
+    "fch_kandel_v_poiskah_pamyati": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/erik-kandel/v-poiskah-pamyati-vozniknovenie-novoj-nauki-o-chel/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-09",
+        "access_modes": [],
+        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+      }
     ]
   }
 }
