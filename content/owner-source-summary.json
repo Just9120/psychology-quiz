@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-08T12:42:34.948821+00:00",
+  "captured_at": "2026-10-08T12:59:16.355522+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -12,10 +12,10 @@
   "known_holds": 321,
   "observation_basis": "saved_inputs",
   "coverage": {
-    "tracked_sources": 154,
-    "untracked_files": 271,
+    "tracked_sources": 155,
+    "untracked_files": 270,
     "source_metadata": {
-      "current": 154
+      "current": 155
     },
     "unmapped_published_questions": 48,
     "lessons": [
@@ -613,7 +613,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 2,
+          "theory": 3,
           "glossary": 0,
           "case": 0
         },
@@ -697,7 +697,7 @@
         "processing_state": "processed",
         "known_hold": false,
         "kinds": {
-          "theory": 1,
+          "theory": 2,
           "glossary": 0,
           "case": 0
         },
@@ -725,7 +725,7 @@
         "processing_state": "processed",
         "known_hold": false,
         "kinds": {
-          "theory": 1,
+          "theory": 2,
           "glossary": 0,
           "case": 0
         },
@@ -1117,7 +1117,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 5,
+          "theory": 6,
           "glossary": 0,
           "case": 0
         },
@@ -1383,7 +1383,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 6,
+          "theory": 7,
           "glossary": 0,
           "case": 0
         },
@@ -1670,18 +1670,32 @@
         "glossary_terms": null,
         "notes": null,
         "notes_state": "UNSET"
+      },
+      {
+        "id": "t_bd934f61e018",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
       }
     ],
     "prepared_notes_unmapped": 4,
     "unmapped_published_glossary": 81,
     "unreleased_lessons": {
-      "total": 50,
+      "total": 49,
       "processing": {
-        "conflict_review": 49,
+        "conflict_review": 48,
         "processed": 1
       },
-      "metadata_current": 50,
-      "known_holds": 49
+      "metadata_current": 49,
+      "known_holds": 48
     }
   }
 }

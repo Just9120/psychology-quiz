@@ -20537,6 +20537,139 @@
       "issues": [],
       "note": "Exact cultural-context criterion only; no cultural relativism overriding safety/medical assessment, universal normal-person test or broken psychological-age formula.",
       "sources": []
+    },
+    "questions:m3_psychological_consulting_115": {
+      "item_sha256": "65fad8cf226f9bc85c360791c725db64de9dff27bfd6ea92d67b60087a87637a",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course taxonomy only; introductory windows distinct from three analytic psychophysiology levels; excluded categorical inverse emotion/cognition rule and guaranteed stabilization.",
+      "sources": []
+    },
+    "questions:m3_psychological_consulting_116": {
+      "item_sha256": "28c706eddf180141a00faa808a1feb02c9bff9ebace346e5a56b53fa040ca54f",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Selected defusion labeling and evidence-for/against distinction; ACBS definition checked. No superiority, mandatory sequencing or efficacy assertion.",
+      "sources": []
+    },
+    "questions:m1_gp_066": {
+      "item_sha256": "dc41f628b0a2466755f370ad2e1bb80e5998ae9966fdc3e39b43a347d0699188",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Attributed Leontiev dynamic level distinction; selected original translation chapter3 lines192–195 confirms transition, not universal neurological localization.",
+      "sources": []
+    },
+    "questions:m1_psyf_082": {
+      "item_sha256": "2763eac84a7e1daa32475648fb9ab43a80e8dfefd28f6e6a9f01ddafc646d58a",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Bounded stabilization definition corroborated by Squire et al2015 selected introduction101–108; held Ebbinghaus reproduction/savings numbers and universal capacity remain excluded.",
+      "sources": []
+    },
+    "questions:other_tp_008": {
+      "item_sha256": "55236544cbe319f845e62bff3bdc8c2181d1c76ed4c7e3c093d0217b28e3e8fd",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact three-point exercise distinguished from goal decomposition; no NLP efficacy, disputed authorship, transcript future/present typo or autobiographical content.",
+      "sources": []
+    },
+    "questions:other_tp_009": {
+      "item_sha256": "26c122988e104128f32299630ef55f1c5e410f595c0db939a74e13597d030dfe",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Bounded reflection prompt on social expectations; excludes blanket goals-guarantee-happiness, bodily authenticity inference and compulsory abandonment of obligations.",
+      "sources": []
+    },
+    "questions:m2_pd_017": {
+      "item_sha256": "00c68c3d38bc9d4b3fe1915c647e029e585f8dec063b77fb73bbf4b7e8668be8",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Selected participant subjective rating instruction only, no copyrighted stimulus form, formula/scoring, lecturer personal age or validated diagnosis.",
+      "sources": []
     }
   }
 }
