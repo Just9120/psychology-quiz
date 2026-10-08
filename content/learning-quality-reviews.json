@@ -18048,6 +18048,44 @@
       "issues": [],
       "note": "Exact course qualification optional final meeting; source-practice37 refusal statement, not categorical no-risk rule. Existing455 bank has no termination-meeting refusal case. No diagnosis, inevitability of relapse, legal assessment, safety protocol or fullsource approval. ACA2014 corroboration limited to appropriate termination/support; voluntary-refusal wording grounded in course excerpt.",
       "sources": []
+    },
+    "questions:m2_quant_005": {
+      "item_sha256": "90d2bac16f60c106fee805018737b5d963851536bb2d40191b15da279f82f01c",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Essential nonresponse distinction: current457 bank voluntary convenience sampling differs from nonresponse after random selection. Exact safe lecture17458:18031 plus independent Statistics Canada definition. Holds unchanged; no medical example, guaranteed bias or new adjustment algorithm.",
+      "sources": []
+    },
+    "questions:m2_quant_006": {
+      "item_sha256": "36fb0c2e789daecc2d2e16f65eaf3bcb990da8d0e9f9fb427f00dd537dc298b9",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Essential sampling design absent from current457 bank. Safe exact18031:18289 supports random start/fixed interval; no held periodicity/stratification wording used. Independent Statistics Canada53-57 and67 support distinction from SRS. No whole-lesson approval.",
+      "sources": []
     }
   }
 }
