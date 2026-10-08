@@ -20727,6 +20727,82 @@
       "issues": [],
       "note": "Exact attributed signal-function label only; excludes intensity-guarantees-motivation, emotion=certain-cause and medical inference.",
       "sources": []
+    },
+    "questions:m6_org_031": {
+      "item_sha256": "31b5cb924296bcdebfbd93cad0e66e9792b289cd457d7261c5959e4cfc9a3be0",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact later independent task/result and people-axis description only, begins outside original7299:7949 conflict. Earlier ideal-leader-result-not-people assertion remains held. No processing/gate changed or universal effectiveness asserted.",
+      "sources": []
+    },
+    "questions:m1_psyf_083": {
+      "item_sha256": "4d6af1a56414a6dac2ae7a1a906e5724e06294486623e032728e796a6703bd5f",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact named hypothalamus/pituitary hormone-regulation clause, outside retained70843:71692 and75592:77913 holds. Independent introductory primary text checked; no emotion-to-hormone individual inference or reverse control assertion.",
+      "sources": []
+    },
+    "questions:m6_org_033": {
+      "item_sha256": "1a4337d0f6957c69fbf8e7983c783d588a8ea1a963ba337bbb9db5beb9465224",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact accommodation definition only; fictional own example, excludes lecturer literary/real-worker story, automatic defeat/win label and compulsory sacrifice or universal recommendation.",
+      "sources": []
+    },
+    "questions:m6_org_034": {
+      "item_sha256": "6441e959fb7849ecc59a8fa5a8a303eb31826864ebfdeb28ef54db01758680cb",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact avoidance definition only; excludes fictional film people/details and universal avoidance-ineffective assertion earlier in source.",
+      "sources": []
     }
   }
 }
