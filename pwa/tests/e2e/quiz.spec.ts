@@ -193,10 +193,12 @@ test('mixed glossary keeps two topics and preserves the other topic after reset'
   await page.getByRole('combobox', { name: 'Режим', exact: true }).selectOption('mix')
   for (const item of chosen) await page.getByRole('checkbox', { name: new RegExp(item.title) }).check()
   await page.getByRole('button', { name: 'Начать тест по терминам' }).click()
+  await expect(page.locator('.question-card .quiz-toolbar').getByText('1 из 5', { exact: true })).toBeVisible()
   const started = (await (await page.request.get('/web/glossary/state')).json()).glossary_state
   expect(started.topic_ids).toEqual(chosen.map((item: { topic_id: string }) => item.topic_id))
   const seen = new Set<string>()
   for (let step = 1; step <= 5; step++) {
+    await expect(page.locator('.question-card .quiz-toolbar').getByText(`${step} из 5`, { exact: true })).toBeVisible()
     const state = (await (await page.request.get('/web/glossary/state')).json()).glossary_state
     seen.add(state.current_question.topic_id)
     await page.getByRole('radio').first().check()
@@ -204,6 +206,7 @@ test('mixed glossary keeps two topics and preserves the other topic after reset'
     await expect(page.getByText(`Ответ сохранён · ${step} из 5`)).toBeVisible()
     await page.getByRole('button', { name: step === 5 ? 'Показать результат' : 'Следующий термин' }).click()
   }
+  await expect(page.getByRole('heading', { name: 'Тест по терминам завершён' })).toBeVisible()
   expect(seen).toEqual(new Set(chosen.map((item: { topic_id: string }) => item.topic_id)))
   const preview = await syntheticPost(page, 'progress/reset-preview', { scope: 'topic', topic: chosen[0].title })
   expect(preview.glossary_answers).toBeGreaterThan(0)
