@@ -18846,6 +18846,101 @@
       "issues": [],
       "note": "Exact complex-action conflicting-motives distinction, no full rigid stage prescription, health-overexertion claim or universal desire-versus-duty hierarchy. Distinct from stabilising-function application and existing meaning-regulation question.",
       "sources": []
+    },
+    "questions:m4_person_007": {
+      "item_sha256": "153c6a3d3522b00c37b83d8be9a43828b65f58909a901015d44bb6107327d0e7",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact conceptual definition before held obligatory hierarchy/one-percent claims6135:6364. Compared with current Rogers conditions and character/ability items; those do not test Maslow self-actualisation. No universal growth law, strict ordering, numeric prevalence, effectiveness or maturity diagnosis adopted.",
+      "sources": []
+    },
+    "questions:m4_person_008": {
+      "item_sha256": "11144f76647b039a75a0b5303c88bd603ef625809ea5a54f4f8c49d37d1c4670",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact responsibility/position/choice description666:1062, after held chronology claims and before broad mental-health or universal-effectiveness discussion. Own theoretical distinction; no participant consultation narrative, unrestricted personal agency or promise of clinical benefit.",
+      "sources": []
+    },
+    "questions:m4_person_009": {
+      "item_sha256": "88a292f74fcbc043754b2dae4ffb896905148ec1ce59c6dd68dadcfb86d551b7",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact continuum and non-moral-classification passage2354:2763. Energy wording/majority distribution not adopted; no conflation of psychoticism scale with clinical diagnosis, vocational categorisation or one-answer individual score. Current trait/state questions do not cover dimensional versus binary distinction.",
+      "sources": []
+    },
+    "questions:m4_person_010": {
+      "item_sha256": "98628374b73aeb2e9adefb20be7a041eb7ee4917d33dd89acb556592028be79d",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact methodology description1488 onward, before chronological narrative and held universal consensus2900:2971. Compare with current Kuhn-attributed paradigm question: new item concerns interpretation/researcher role, not consensus or chronology. No claim of a sole universally accepted scientific history or rejection of empirical verification.",
+      "sources": []
+    },
+    "questions:m4_person_011": {
+      "item_sha256": "dd4340bb88e535974c45e6a596af2cdeaf31a41775b39fa625b2066371941146",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact three coexisting aspects conceptual definitions, no damaged author identity/chronology repair, mental-disorder universal claim, treatment effectiveness or participant anecdote. New distinction not covered by selected responsibility/choice question; own distractors test environment versus relational versus self-awareness aspects.",
+      "sources": []
     }
   }
 }
