@@ -18561,6 +18561,82 @@
       "issues": [],
       "note": "Exact generic activity/motive definition, no copied personal example. Ends before philosophical virtual-reality assertion. Complements existing061 action/operation and062 meaning-based will; no experimentally proven single causal mechanism claim.",
       "sources": []
+    },
+    "questions:m1_psyf_074": {
+      "item_sha256": "fb4c03aa5b5a378f8c3d2d5ec411d7264c6ddbcfd1e2eb918c2b93198d769c95",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact2949:3034 generic glia existence/support, no demeaning universal neuron-servant or nonparticipation claim. Precise functional scope checked against official SfN86-88; no glia/neuron ratio, disease diagnosis or treatment.",
+      "sources": []
+    },
+    "questions:m1_psyf_075": {
+      "item_sha256": "641a3b914d207523e0150a9b0d26412d92b5bee31511997000fcd98d09b450eb",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact9405:9560 unheld ion movement through membrane; excludes subsequent reduction of all neuronal work to regulating pores. Primary SfN83-85 confirms selected ion-channel mechanism; no pump ratio or universal speed.",
+      "sources": []
+    },
+    "questions:m1_psyf_076": {
+      "item_sha256": "67e6553edc3a125bbfcb13f9896e87a2a9a14079e3d3bc0abe6e1352e2888faa",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact13262:13576 safe fact/concrete-situation comparison; clarification independently verified by OpenStax93/97-99. No autobiographical event of actual participant, diagnosis, forgetting percentage or claim of exclusive memory compartments.",
+      "sources": []
+    },
+    "questions:m1_psyf_077": {
+      "item_sha256": "73d9ea56a1fc640598a8c708fc7395ceb9714a50979aa27883417c1156d6403a",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact14253:14982 later explicit/implicit hierarchy and learned skills, not earlier narrow declarative definition at12762. Original unsafe bicycle/phone illustration not copied or recommended. Compared with current vnd058 motor-skill question: new paired contrast tests declarative versus procedural classification, not another motor example.",
+      "sources": []
     }
   }
 }
