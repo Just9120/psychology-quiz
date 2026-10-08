@@ -138,13 +138,14 @@
     "id": "developmental_psychology",
     "title": "Возрастная психология",
     "module": "module4",
-    "question_file": null,
+    "question_file": "content/questions/module4/developmental_psychology.json",
     "status": "active",
     "order": 420,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
   {
     "id": "klinicheskaya_psihologiya",
@@ -163,13 +164,14 @@
     "id": "social_psychology",
     "title": "Социальная психология",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/social_psychology.json",
     "status": "active",
     "order": 610,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
   {
     "id": "family_psychology",
@@ -188,13 +190,14 @@
     "id": "organizational_psychology",
     "title": "Организационная психология",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/organizational_psychology.json",
     "status": "active",
     "order": 630,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
   {
     "id": "psycholinguistics",
