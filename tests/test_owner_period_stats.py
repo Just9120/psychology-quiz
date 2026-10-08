@@ -96,3 +96,12 @@ def test_resumed_answers_count_distinct_actors_in_the_actual_period(conn):
     conn.execute("UPDATE quiz_answers SET answered_at='2026-09-30 10:00:00'")
     empty = get_owner_period_stats(conn, '24h', now=now)
     assert empty['active_users'] == 0 and empty['quiz_answers'] == 0
+
+
+def test_legacy_schema_activity_read_does_not_require_or_create_reading_work_table(conn):
+    conn.execute("DROP TABLE user_literature_work_progress")
+    before = conn.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").fetchall()
+    day = get_owner_period_stats(conn, '24h', now=datetime(2026, 9, 29, 12, tzinfo=timezone.utc))
+    assert day['active_users'] == 1 and day['quiz_answers'] == 1
+    assert day['reading_items_updated'] == 0
+    assert conn.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").fetchall() == before

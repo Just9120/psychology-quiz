@@ -11,6 +11,14 @@ from typing import Any
 from app.database import Connection, is_postgres
 
 
+def _has_reading_work_progress(conn: Connection) -> bool:
+    """Legacy imported schemas precede work-level reading; never migrate on read."""
+    if is_postgres(conn):
+        return bool(conn.execute("""SELECT EXISTS (SELECT 1 FROM information_schema.tables
+            WHERE table_schema=current_schema() AND table_name='user_literature_work_progress')""").fetchone()[0])
+    return conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='user_literature_work_progress'").fetchone() is not None
+
+
 def _active_users(conn: Connection, cutoff: str, upper: str) -> int:
     """Count verified learning actors, including answers in older attempts.
 
@@ -36,10 +44,13 @@ def _active_users(conn: Connection, cutoff: str, upper: str) -> int:
         UNION ALL """ + glossary_answers + """
         UNION ALL SELECT user_id FROM user_review_events
             WHERE replace(substr(answered_at,1,19),'T',' ') BETWEEN ? AND ?
-        UNION ALL SELECT user_id FROM user_literature_work_progress
-            WHERE replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?
-    ) activity"""
-    return int(conn.execute(query, (cutoff, upper) * 6).fetchone()[0])
+    """
+    parameters = (cutoff, upper) * 5
+    if _has_reading_work_progress(conn):
+        query += """ UNION ALL SELECT user_id FROM user_literature_work_progress
+            WHERE replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?"""
+        parameters += (cutoff, upper)
+    return int(conn.execute(query + ") activity", parameters).fetchone()[0])
 
 
 def get_owner_stats(conn: Connection) -> dict[str, Any]:
@@ -152,5 +163,6 @@ def get_owner_period_stats(conn: Connection, period: str, *, now: datetime | Non
         "quiz_answers": count("SELECT COUNT(*) FROM quiz_answers WHERE replace(substr(answered_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
         "glossary_started": count("SELECT COUNT(*) FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
         "glossary_completed": count("SELECT COUNT(*) FROM glossary_sessions WHERE status='completed' AND replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
-        "reading_items_updated": count("SELECT COUNT(*) FROM user_literature_work_progress WHERE replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
+        "reading_items_updated": (count("SELECT COUNT(*) FROM user_literature_work_progress WHERE replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper)
+                                  if _has_reading_work_progress(conn) else 0),
     }
