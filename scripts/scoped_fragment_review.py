@@ -24,8 +24,11 @@ def _ranges(value, *, ordered=True):
             raise FragmentReviewError("fragment_locator_required")
         result.append((int(match[1]), int(match[2])))
     if not ordered:
+        # Holds may overlap, nest or repeat when separate issues cover the same
+        # passage. Keep every range for overlap and bounds checks below; only
+        # the selected publication excerpts require canonical disjoint order.
         result.sort()
-    if not result or any(a[1] > b[0] for a,b in zip(result,result[1:])):
+    if not result or (ordered and any(a[1] > b[0] for a,b in zip(result,result[1:]))):
         raise FragmentReviewError("fragment_locator_required")
     return result
 

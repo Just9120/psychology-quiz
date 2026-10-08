@@ -639,3 +639,41 @@ def test_related_independence_rejects_stale_missing_or_reused_comparison(tmp_pat
         dossier.pop("related_conflict_reviews")
     with pytest.raises(SigningError):
         verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("locator", [
+    "characters:31:52; characters:16:30; characters:18:42",
+    "characters:16:52; characters:20:30; characters:16:52",
+])
+def test_overlapping_holds_preserve_every_exclusion(tmp_path, monkeypatch, locator):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record["locator"] = locator
+    record["issues"] = [{"locator": "characters:20:30"}]
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    # A hold crossing the supported passage still blocks it, regardless of
+    # other redundant or overlapping holds in the same record.
+    record["locator"] += "; characters:10:20"
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("invalid", ["characters:52:52", "unknown", "characters:20:900"])
+def test_overlapping_holds_do_not_hide_invalid_ranges(tmp_path, monkeypatch, invalid):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record["locator"] = "characters:16:52; characters:20:30; " + invalid
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_(locator_required|locator_out_of_bounds)"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+def test_selected_excerpts_still_reject_overlapping_ranges(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    dossier["scoped_claim_review"]["locator"] = "characters:0:10; characters:8:15"
+    with pytest.raises(SigningError, match="fragment_locator_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
