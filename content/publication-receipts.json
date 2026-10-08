@@ -9053,6 +9053,120 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m5_clinical_002": {
+      "schema_version": 1,
+      "item_sha256": "5e81a6b5a51fc181d14a0c0a8ef29b7cdb513d63b841767039e20fe370d710dc",
+      "review_sha256": "5f63fcdee55ad98658971b17fb503b0f2fcf0357445725916e3c0ea1527a7b5c",
+      "topic_id": "t_bb895f94e077",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m5_clinical_003": {
+      "schema_version": 1,
+      "item_sha256": "1f36fb602600f9e325010f5a86feb6da753f4693c13d44e186de43636682cd70",
+      "review_sha256": "c841ce7cb5c2a6a8767048ea73e89ddeb0796461c03c1a812bc27729237e0df9",
+      "topic_id": "t_ed21996686a8",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m5_clinical_004": {
+      "schema_version": 1,
+      "item_sha256": "f6a572530c7a9a1f788da6a3523a9876dc297fce8d0b2ff8485ae8226539bd8e",
+      "review_sha256": "34335044fc8fb37661add273b45a06acc7f085ddbbf11086e1a1c086203da79f",
+      "topic_id": "t_ed21996686a8",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m5_clinical_005": {
+      "schema_version": 1,
+      "item_sha256": "3048675dc4ab8f4f0c1195d84b286b65bdb7f574437a83319f799eb4b1b3a8a7",
+      "review_sha256": "76c5481305cb76d68a591138ebc6a59f5dd8fa61fc92b7bda5a385bc01487b2c",
+      "topic_id": "t_ed21996686a8",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m6_ethics_001": {
+      "schema_version": 1,
+      "item_sha256": "63b41fb5b006d5b94a3785a30973643f0956e92c8e9a16f90f87d34248c1ff41",
+      "review_sha256": "7f810c842bd63c88a8dce63f7279e3435dde3678b02c21bb1c6ee04e4539363d",
+      "topic_id": "t_425dd8fad1a1",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:other_bonus_001": {
+      "schema_version": 1,
+      "item_sha256": "98962702f4e55ffbac65bcdb22c4f3ae68a9b7e1a42fc035f939d53171b77b87",
+      "review_sha256": "5a7ff6cb92683c19646585cb2c83077099f6c7ab8f231e6ac6fc7ba7a83adf87",
+      "topic_id": "t_9ce550077bb9",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

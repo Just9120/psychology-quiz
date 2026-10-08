@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 709
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 715
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
@@ -139,6 +139,8 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
         'personality_psychology': 'Психология личности и индивидуальных различий',
         'psycholinguistics': 'Психолингвистика',
         'personal_brand': 'Личный бренд и самопрезентация',
+        'professional_legal_ethics': 'Правовые и этические основы профессиональной деятельности психолога-консультанта',
+        'bonus_lessons': 'Бонусные уроки',
     }) == {
         k: v['title'] for k, v in registry.items()
         if k != 'cases' and (any(contour in v['available_contours']

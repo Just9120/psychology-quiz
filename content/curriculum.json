@@ -4677,6 +4677,42 @@
       "topic_id": "t_c7f9c8245f70",
       "item_sha256": "838e1887209db50248303a216053c3d31dd3b2c1b248dc19e7ab58326a92af4c",
       "locator": "private review:questions:other_brand_001"
+    },
+    "56ae792f89fbdf089448a7e56cb8e2de31ffddbef7ea676c3c17532900da2c71": {
+      "external_id": "m5_clinical_002",
+      "topic_id": "t_bb895f94e077",
+      "item_sha256": "5e81a6b5a51fc181d14a0c0a8ef29b7cdb513d63b841767039e20fe370d710dc",
+      "locator": "private review:questions:m5_clinical_002"
+    },
+    "995af4f41add815b8d6f176e50c921c50631b41cd0a960414ec2954a05d4ee56": {
+      "external_id": "m5_clinical_003",
+      "topic_id": "t_ed21996686a8",
+      "item_sha256": "1f36fb602600f9e325010f5a86feb6da753f4693c13d44e186de43636682cd70",
+      "locator": "private review:questions:m5_clinical_003"
+    },
+    "0aabe73e190b3764a2d4c3bfd478d315a22f77e9c17459a12a43f4a509807131": {
+      "external_id": "m5_clinical_004",
+      "topic_id": "t_ed21996686a8",
+      "item_sha256": "f6a572530c7a9a1f788da6a3523a9876dc297fce8d0b2ff8485ae8226539bd8e",
+      "locator": "private review:questions:m5_clinical_004"
+    },
+    "18128d3710065613fb6842ae8dd15976e3283cb650c3543830fca6de4394d93e": {
+      "external_id": "m5_clinical_005",
+      "topic_id": "t_ed21996686a8",
+      "item_sha256": "3048675dc4ab8f4f0c1195d84b286b65bdb7f574437a83319f799eb4b1b3a8a7",
+      "locator": "private review:questions:m5_clinical_005"
+    },
+    "73bf1d11f23eec32e2ff60f69a7834b07d127b29980fd01cc8b1fb72a94a786c": {
+      "external_id": "m6_ethics_001",
+      "topic_id": "t_425dd8fad1a1",
+      "item_sha256": "63b41fb5b006d5b94a3785a30973643f0956e92c8e9a16f90f87d34248c1ff41",
+      "locator": "private review:questions:m6_ethics_001"
+    },
+    "5e7193ad5a5d12d557b1c3c8f849699ffa2872af61d2b13dbbfff536494650f4": {
+      "external_id": "other_bonus_001",
+      "topic_id": "t_9ce550077bb9",
+      "item_sha256": "98962702f4e55ffbac65bcdb22c4f3ae68a9b7e1a42fc035f939d53171b77b87",
+      "locator": "private review:questions:other_bonus_001"
     }
   }
 }

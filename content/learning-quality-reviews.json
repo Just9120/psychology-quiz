@@ -17535,6 +17535,120 @@
       "issues": [],
       "note": "Explicit course-framed heuristic definition only; no claim of a scientifically universal personality structure or guaranteed marketing/client outcome. Ends before unverified Luria quotation; historical astronaut, pregnancy/efficacy, ad-frequency and denial-language claims remain held. No currently published brand-definition question duplicates this concept.",
       "sources": []
+    },
+    "questions:m5_clinical_002": {
+      "item_sha256": "5e81a6b5a51fc181d14a0c0a8ef29b7cdb513d63b841767039e20fe370d710dc",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course definition of a related group of manifestations only. No mandatory pathogenesis, depression/suicide inference, disease identity, single-cause or one-symptom diagnosis. Existing bank has no direct symptom/syndrome distinction. Independent NCI dictionary definition supports the group-of-manifestations core.",
+      "sources": []
+    },
+    "questions:m5_clinical_003": {
+      "item_sha256": "1f36fb602600f9e325010f5a86feb6da753f4693c13d44e186de43636682cd70",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Explicitly course-framed three-block functional model terminology only. No anatomical one-to-one localization, diagnosis or universal mechanism. Exact short selected third-block statement plus surrounding context was read, anatomical claims are not approved.",
+      "sources": []
+    },
+    "questions:m5_clinical_004": {
+      "item_sha256": "f6a572530c7a9a1f788da6a3523a9876dc297fce8d0b2ff8485ae8226539bd8e",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Course brief language-disorder introduction checked against NIDCD primary health definition. Correction is in derivative language wording, not source transcript. No aphasia subtype, lesion mapping, articulation-only definition or individual diagnosis; existing bank has no direct aphasia item.",
+      "sources": []
+    },
+    "questions:m5_clinical_005": {
+      "item_sha256": "3048675dc4ab8f4f0c1195d84b286b65bdb7f574437a83319f799eb4b1b3a8a7",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact object recognition versus naming distinction, independently supported by StatPearls publisher chapter hosted by NLM. No category-wide perceptual definition, facial/color misconceptions, lesion diagnosis or prevalence claims; current bank has no direct agnosia distinction.",
+      "sources": []
+    },
+    "questions:m6_ethics_001": {
+      "item_sha256": "63b41fb5b006d5b94a3785a30973643f0956e92c8e9a16f90f87d34248c1ff41",
+      "discipline_id": "professional_legal_ethics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Explicit course comparison of collegial support versus experienced-supervisor format only. No legal requirements, standardized universal evaluation rule, psychotherapy efficacy or permission to disclose client identity. Existing supervision questions do not test this distinction.",
+      "sources": []
+    },
+    "questions:other_bonus_001": {
+      "item_sha256": "98962702f4e55ffbac65bcdb22c4f3ae68a9b7e1a42fc035f939d53171b77b87",
+      "discipline_id": "bonus_lessons",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Simple income/expense timing problem from bonus course only, checked against CFPB cashflow definition. No tax/legal rule, fixed reserve percentage, debt/investment advice or promise of reduced anxiety/financial freedom. Existing bank has no direct cashflow timing concept.",
+      "sources": []
     }
   }
 }
