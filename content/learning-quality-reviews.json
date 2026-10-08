@@ -19416,6 +19416,120 @@
       "issues": [],
       "note": "Exact implicit everyday rules definition before everyone-knows/general institution exclusions. No jurisdiction advice, universal etiquette, private dialogue or claim that implicit rules are legal norms.",
       "sources": []
+    },
+    "questions:m2_pd_006": {
+      "item_sha256": "8b5158171f7c9494b4fad80aac0a917930b9c98809de14e247c61cfa7d81c9dd",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact socially desirable response context; own fictional applicant, possible influence only. No universal lying inference, diagnostic claim or social-desirability score correction. Primary abstract only consulted; full article not read.",
+      "sources": []
+    },
+    "questions:m2_pd_007": {
+      "item_sha256": "1af5e1f41c14f684319e1f316b362486060a32da5c92a01e26a4f247dc504864",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Bounded adaptive-criterion meaning before unsupported child/culture anecdotes. Only course taxonomy assessed, not clinical standard or universal conformity requirement.",
+      "sources": []
+    },
+    "questions:m2_pd_008": {
+      "item_sha256": "fc511610779a0eb3dca8de7864fd22a3bc6bd220cda740c2ff6afa4e29248c14",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact value/moral/ethics criterion definition, after samurai story and before practitioner anecdotes; neither anecdote adopted. Course taxonomy only, no legal or clinical normative assertion.",
+      "sources": []
+    },
+    "questions:m2_pd_009": {
+      "item_sha256": "b1b58b411649c266c48e2e81f96f8654b21f6f969ec636bdc76bd066da1f77f4",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact observable formal-procedure discussion; fictional omitted items, no participant handwriting/colour details copied and no cause or diagnosis inferred.",
+      "sources": []
+    },
+    "questions:m2_pd_010": {
+      "item_sha256": "400330cd1419ffb8266559a863a8e4592fb2c52f11469988fb6e9166aa604cbf",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact counting-operation definition only; original thematic frequency example, no validated instrument, clinical inference or meaning guarantee. Counting unit qualification avoids automatic diagnosis.",
+      "sources": []
+    },
+    "questions:m2_pd_011": {
+      "item_sha256": "1933334f2a47dab83d6ba726e0a5db524b6cfce3d1961bcca5231d8a98b3cbf4",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact distinction self-description versus researcher interpretation; original fictional fatigue quote. Not a clinical interpretation of real protocol, not a validation claim for projective testing.",
+      "sources": []
     }
   }
 }

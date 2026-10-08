@@ -5271,6 +5271,42 @@
       "topic_id": "t_c200db7e665a",
       "item_sha256": "f5842aed092fdbff393317e6f5b7833f36fc6ff9c6c34594b496626504b5bda3",
       "locator": "private review:questions:m6_social_007"
+    },
+    "d39b0167a5335fa77cb328d0c98dddd793a8237916e4d3bc50a23090f3f62dc0": {
+      "external_id": "m2_pd_006",
+      "topic_id": "t_50367f0a1a1d",
+      "item_sha256": "8b5158171f7c9494b4fad80aac0a917930b9c98809de14e247c61cfa7d81c9dd",
+      "locator": "private review:questions:m2_pd_006"
+    },
+    "0a014187ffb4cfe7dccd906148ea7065bb1c6786b6b7ceab893a70018fe9bafb": {
+      "external_id": "m2_pd_007",
+      "topic_id": "t_d0ae2304480c",
+      "item_sha256": "1af5e1f41c14f684319e1f316b362486060a32da5c92a01e26a4f247dc504864",
+      "locator": "private review:questions:m2_pd_007"
+    },
+    "65d197e53e11fc804a1fc70f8fda415ec6585147be1ca78aa05e7a3d9ee7d645": {
+      "external_id": "m2_pd_008",
+      "topic_id": "t_d0ae2304480c",
+      "item_sha256": "fc511610779a0eb3dca8de7864fd22a3bc6bd220cda740c2ff6afa4e29248c14",
+      "locator": "private review:questions:m2_pd_008"
+    },
+    "0275ccc2f1c86d5c9220ba863eaa30cbc94a4e70b834f0cd9e2de06ed58e31e1": {
+      "external_id": "m2_pd_009",
+      "topic_id": "t_5aebea2fd740",
+      "item_sha256": "b1b58b411649c266c48e2e81f96f8654b21f6f969ec636bdc76bd066da1f77f4",
+      "locator": "private review:questions:m2_pd_009"
+    },
+    "5c56610f4971c99f2a7e748714ea675bff9b31395e4ef1ecb658269cb50d9130": {
+      "external_id": "m2_pd_010",
+      "topic_id": "t_5aebea2fd740",
+      "item_sha256": "400330cd1419ffb8266559a863a8e4592fb2c52f11469988fb6e9166aa604cbf",
+      "locator": "private review:questions:m2_pd_010"
+    },
+    "84ffffa813a66918adb0390922a6f0561a60cda8baa072a87b65a2a1dcad35fe": {
+      "external_id": "m2_pd_011",
+      "topic_id": "t_5aebea2fd740",
+      "item_sha256": "1933334f2a47dab83d6ba726e0a5db524b6cfce3d1961bcca5231d8a98b3cbf4",
+      "locator": "private review:questions:m2_pd_011"
     }
   }
 }

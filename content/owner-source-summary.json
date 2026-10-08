@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-08T10:55:00.663686+00:00",
+  "captured_at": "2026-10-08T11:08:48.530627+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -12,10 +12,10 @@
   "known_holds": 321,
   "observation_basis": "saved_inputs",
   "coverage": {
-    "tracked_sources": 136,
-    "untracked_files": 289,
+    "tracked_sources": 137,
+    "untracked_files": 288,
     "source_metadata": {
-      "current": 136
+      "current": 137
     },
     "unmapped_published_questions": 48,
     "lessons": [
@@ -1369,7 +1369,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 2,
+          "theory": 3,
           "glossary": 0,
           "case": 0
         },
@@ -1383,7 +1383,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 2,
+          "theory": 4,
           "glossary": 0,
           "case": 0
         },
@@ -1418,18 +1418,32 @@
         "glossary_terms": null,
         "notes": null,
         "notes_state": "UNSET"
+      },
+      {
+        "id": "t_5aebea2fd740",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 3,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
       }
     ],
     "prepared_notes_unmapped": 4,
     "unmapped_published_glossary": 81,
     "unreleased_lessons": {
-      "total": 68,
+      "total": 67,
       "processing": {
-        "conflict_review": 67,
+        "conflict_review": 66,
         "processed": 1
       },
-      "metadata_current": 68,
-      "known_holds": 67
+      "metadata_current": 67,
+      "known_holds": 66
     }
   }
 }
