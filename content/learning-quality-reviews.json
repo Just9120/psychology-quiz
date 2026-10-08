@@ -20670,6 +20670,63 @@
       "issues": [],
       "note": "Selected participant subjective rating instruction only, no copyrighted stimulus form, formula/scoring, lecturer personal age or validated diagnosis.",
       "sources": []
+    },
+    "questions:m6_org_032": {
+      "item_sha256": "bc7fe06995aa7e802bbfd59d04cc54f367d5632975eb9910d17e31811ecf6713",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact workplace wording with WHO ICD11 definition correction: occupational phenomenon, not all-life fatigue or diagnosis. Adjacent causes, guaranteed reversibility and historical-author assertions excluded.",
+      "sources": []
+    },
+    "questions:m4_person_025": {
+      "item_sha256": "5206a27c71e3a3ec1df8f60f3de1da2487b8034f781be31c7f1ce26fed06fa21",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Specific-activity contrast completes existing general-ability definition; excludes blanket learnability split and unsupported exhaustive professional taxonomy.",
+      "sources": []
+    },
+    "questions:m4_person_026": {
+      "item_sha256": "5c271ddf8e46fdf11a42e6ef34befc2fa1dab036d1a727d3c919a812af0aef2e",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact attributed signal-function label only; excludes intensity-guarantees-motivation, emotion=certain-cause and medical inference.",
+      "sources": []
     }
   }
 }
