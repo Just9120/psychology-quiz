@@ -18504,6 +18504,63 @@
       "issues": [],
       "note": "Short unheld strategic management definition only; excludes next tools-efficacy assertion. Complements org022 HR functions and001 subject without claiming an exclusive legal occupational boundary.",
       "sources": []
+    },
+    "questions:m6_family_003": {
+      "item_sha256": "b3aaa91fa3a389335c847ee3f865cbda9e1c8413da3636a3dc040a99796dd084",
+      "discipline_id": "family_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact one-sentence internal-role boundary definition. Excludes neighboring mother-in-law inference and mandatory ideal-family/rigidity claims. Own abstract question, no copied family story or universal clinical diagnosis.",
+      "sources": []
+    },
+    "questions:m6_family_004": {
+      "item_sha256": "559843179e1b7bdaa4a0943b15ae6d40b80cba57c3a3440ecc2ae7cf22d87ab4",
+      "discipline_id": "family_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Course-attributed preservation/development distinction only, ending before prescriptive childbearing/lifecycle examples. No universal family physical-law, crisis timetable or clinical efficacy claim. Distinct subsystem001/circularquestions002/internalboundary003.",
+      "sources": []
+    },
+    "questions:m1_gp_063": {
+      "item_sha256": "a83571ff933586da7bc2ebb0af40d74f55f6c46ac31ec6b8b90b901441014625",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact generic activity/motive definition, no copied personal example. Ends before philosophical virtual-reality assertion. Complements existing061 action/operation and062 meaning-based will; no experimentally proven single causal mechanism claim.",
+      "sources": []
     }
   }
 }
