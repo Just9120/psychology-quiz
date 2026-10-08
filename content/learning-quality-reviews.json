@@ -18941,6 +18941,139 @@
       "issues": [],
       "note": "Exact three coexisting aspects conceptual definitions, no damaged author identity/chronology repair, mental-disorder universal claim, treatment effectiveness or participant anecdote. New distinction not covered by selected responsibility/choice question; own distractors test environment versus relational versus self-awareness aspects.",
       "sources": []
+    },
+    "questions:m6_psyl_002": {
+      "item_sha256": "fcd2c8d8a1b8cfa99b84431101a3256f687339890bbde212c55b837ff3070467",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact generalisation definition and bounded-experience questions25140:25704 after held self-label deterministic behaviour claim. Own project example, no participant narrative, automatic positive reframing, denial of actual failures or guaranteed change.",
+      "sources": []
+    },
+    "questions:m6_psyl_003": {
+      "item_sha256": "25fec51da96b788ba7814a3191e0b7e19ab723edb3b7696f1ec189bcbfbcc9a7",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact referent definition and who-are-they clarification26841:27294. Fictional quotation does not copy participant details. No assumption that referent omission is deception or that parents are implicated.",
+      "sources": []
+    },
+    "questions:m6_psyl_004": {
+      "item_sha256": "72b5eaa6587f175f3fb9e1471af6c4acfaff60806ace7219802369d81788d6e6",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact presupposition explanation30060:30565. Own example distinct from original participant wording. Does not assert every linguistic presupposition false or therapeutic enquiry must reject all assumptions; tests unverified loaded-question premises.",
+      "sources": []
+    },
+    "questions:m6_psyl_005": {
+      "item_sha256": "eec96d9b169ef39c069a60771c0db1e69b78ddaf782247c387439571690801fe",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact modal/rule inquiry31273:31685. No instruction to break legal, contractual or safety obligations; no universal all-rules-are-distortion interpretation. Neutral educational example not individual counselling or personality diagnosis.",
+      "sources": []
+    },
+    "questions:m6_psyl_006": {
+      "item_sha256": "3d384ecb1e6d14e0892e8d83c61efc942dd3289b19152c8ff1b7884b54199bf0",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact explicit correction32247:32506, not earlier universal literal-language-authority formulation. Own meeting example, no individual agency blame or diagnostic conclusion; preserves qualification from saved outline.",
+      "sources": []
+    },
+    "questions:m6_psyl_007": {
+      "item_sha256": "19cf415d05a628fafa2405ac4ea5ad66cfcf72f9983657ff44b9d3c03c1b1e33",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact individual/contextual metaphor meaning32939:33425, after unsupported broad ecological/heavy-experience efficacy language and before limitless-possibility claim. Own metaphor, not copied private story or fixed-symbol diagnostic rule.",
+      "sources": []
+    },
+    "questions:m6_psyl_008": {
+      "item_sha256": "1069cf0108662f703088fe55d8b1b44cb802d7e08fc730ee962e32f89cfdf7a1",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact causal-construction definition and sequence inquiry29024 vicinity before presupposition definition. Own neutral project example; no assertion external influence unreal, every cause internal, medical diagnosis or guaranteed cognitive-change effect.",
+      "sources": []
     }
   }
 }
