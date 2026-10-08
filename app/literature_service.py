@@ -8,7 +8,7 @@ from typing import Any
 from app.database import begin_write
 from app.reading_schema import STATUS_MAP
 READING_STATUSES = frozenset(STATUS_MAP.values())
-from app.literature import load_literature_items, load_topic_registry
+from app.literature import load_literature_items, load_topic_registry, list_reading_topic_payloads
 
 
 def reading_summary(items: list[dict], states: dict, all_items: list[dict] | None = None) -> dict:
@@ -121,7 +121,7 @@ def catalog(conn, actor_user_id: int) -> dict[str, Any]:
         used_topics.add(item["topic_id"])
         work["entries"].append({**item, "topic_title": topics[item["topic_id"]]["title"],
             "user_state": states.get(item["id"])})
-    return {"ok": True, "works": list(works.values()), "topics": [
+    return {"ok": True, "works": list(works.values()), "reading_topics": list_reading_topic_payloads(), "topics": [
         {"topic_id": topic_id, "title": topic["title"], "module": topic["module"],
          "modules": topic.get("modules", [topic["module"]])}
         for topic_id, topic in sorted(topics.items(), key=lambda pair: pair[1]["order"])

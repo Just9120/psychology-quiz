@@ -149,7 +149,14 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'rubinstein_osnovy_obschey_psihologii', 'lit_consult_lecture_01', 'lit_consult_lecture_02',
         'lit_5505760c8ef8c4b8', 'lit_8c4dd1a3c39ecbcf',
         'lit_4f9768a778fe2a01', 'lit_25a5d2f1c7ba76e1',
+        'lit_kahneman_thinking_fast_slow', 'psf_sapolsky_psihologiya_stressa',
+        'lit_677867857cce3e89', 'psf_van_der_kolk_telo_pomnit_vse',
+        'lit_levine_waking_tiger', 'lit_covey_seven_habits',
+        'lit_kreisman_straus_hate_you_dont_leave', 'lit_3c68e7fa4c7ec0ba',
+        'lit_burlachuk_psychodiagnostics',
     }
+    assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
+    assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
     assert {link['format'] for link in links['vygotsky_myshlenie_i_rech']} == {'text', 'audio'}
     assert {link['format'] for link in links['lit_0199865ad8d23ecb']} == {'text'}
     assert {link['format'] for link in links['lit_819808cf97ad8eb5']} == {'text', 'audio'}

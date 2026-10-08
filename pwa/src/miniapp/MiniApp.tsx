@@ -157,7 +157,7 @@ export function MiniApp() {
   }
   async function loadLiterature() {
     const [topics, items] = await Promise.all([miniApi.literatureTopics(), miniApi.literatureItems()])
-    setLiteratureTopics(topics.literature_topics); setLiteratureItems(items.literature_items); setPage('literature')
+    setLiteratureTopics(topics.reading_topics ?? topics.literature_topics); setLiteratureItems(items.literature_items); setPage('literature')
   }
   async function loadLearning() {
     const [review, mastery, goals, achievements] = await Promise.all([miniApi.review(), miniApi.mastery(), miniApi.goals(), miniApi.achievements()])

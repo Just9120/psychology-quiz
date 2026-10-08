@@ -66,7 +66,7 @@ export const miniApi = {
     miniRequest<{ ok: true; glossary_state: GlossaryState }>('glossary/answer', { session_id, step_id, selected_option_index }),
   glossaryNext: (session_id: string, step_id: number) =>
     miniRequest<{ ok: true; glossary_state: GlossaryState }>('glossary/next', { session_id, step_id }),
-  literatureTopics: () => miniRequest<{ ok: true; literature_topics: MiniLiteratureTopic[] }>('literature/topics'),
+  literatureTopics: () => miniRequest<{ ok: true; literature_topics: MiniLiteratureTopic[]; reading_topics?: MiniLiteratureTopic[] }>('literature/topics'),
   literatureItems: (topic_id?: string) => miniRequest<{ ok: true; literature_items: MiniLiteratureItem[] }>(`literature/items${topic_id ? `?topic_id=${encodeURIComponent(topic_id)}` : ''}`),
   literatureProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) =>
     miniRequest<{ ok: true; literature_progress: unknown }>('literature/progress', { literature_id, reading_status, progress_percent }),
@@ -85,4 +85,4 @@ export const miniApi = {
 }
 
 export type MiniLiteratureTopic = { topic_id: string; title: string; module?: string; modules?: string[] }
-export type MiniLiteratureItem = { module?: string; book_search?: { query: string; url: string }; id: string; work_id?: string; topic_id: string; curriculum_topics?: { id: string; title: string }[]; title?: string; authors?: string[]; year?: number | null; why_read?: string; metadata_warnings?: string[]; importance?: 'basic' | 'important' | 'additional' | 'advanced' | null; importance_source?: 'teacher' | 'agent' | null; access_links?: { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }[]; source?: { title?: string; citation?: string }; user_state?: { reading_status: ReadingStatus; progress_percent: number | null; updated_at?: string } | null }
+export type MiniLiteratureItem = { module?: string; book_search?: { query: string; url: string }; id: string; work_id?: string; topic_id: string; reading_topics?: { id: string; title: string }[]; reading_level?: string; prerequisites?: string[]; curriculum_topics?: { id: string; title: string }[]; title?: string; authors?: string[]; year?: number | null; why_read?: string; metadata_warnings?: string[]; importance?: 'basic' | 'important' | 'additional' | 'advanced' | null; importance_source?: 'teacher' | 'agent' | null; access_links?: { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }[]; source?: { title?: string; citation?: string }; user_state?: { reading_status: ReadingStatus; progress_percent: number | null; updated_at?: string } | null }
