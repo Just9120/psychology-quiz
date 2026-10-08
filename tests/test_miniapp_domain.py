@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 from app.miniapp_fastapi import create_app
 from app.miniapp_origins import parse_allowed_origins
 from app.miniapp_api import MiniAppApiHandler
-from scripts.miniapp_domain_config import OLD, NEW, apply, restore
+from scripts.miniapp_domain_config import OLD, NEW, apply, restore, migrated_url
 from types import SimpleNamespace
 
 
@@ -91,3 +91,35 @@ def test_quoted_runtime_values_and_comments_are_supported(tmp_path):
     path.write_text('export MINI_APP_URL="'+OLD+'" # owner choice\nMINIAPP_API_ALLOWED_ORIGIN=\''+OLD+'\'\n')
     apply(path, backup)
     assert ('MINI_APP_URL='+NEW+'\n') in path.read_text()
+
+
+@pytest.mark.parametrize('suffix', ['/', '/?api=https%3A%2F%2Fquiz-api.librechat.online&v=2',
+                                  '?debug=1&context=sample%2Bvalue%26x',
+                                  '/?context=first&context=second&blank='])
+def test_cutover_keeps_existing_entrypoint_path_and_query(tmp_path, suffix):
+    path, backup = tmp_path / '.env', tmp_path / 'backup'
+    original = ('MINI_APP_URL="'+OLD+suffix+'"\nOTHER=unchanged\n'
+                'MINIAPP_API_ALLOWED_ORIGIN='+OLD+'\n').encode()
+    path.write_bytes(original)
+    apply(path, backup)
+    assert ('MINI_APP_URL='+NEW+suffix+'\n').encode() in path.read_bytes()
+    assert b'OTHER=unchanged\n' in path.read_bytes()
+    assert migrated_url(NEW+suffix) == NEW+suffix
+    restore(path, backup)
+    assert path.read_bytes() == original
+
+
+@pytest.mark.parametrize('url', [OLD+'/other?api=example', OLD+'.evil.example/?v=1',
+                               OLD+'/#fragment', OLD+':443/?v=1',
+                               'http://miniapp.librechat.online/?v=1',
+                               'https://user:password@miniapp.librechat.online/?v=1',
+                               OLD+'/\t?v=1'])
+def test_entrypoint_migration_still_rejects_unknown_or_unsafe_urls(tmp_path, url):
+    path = tmp_path / '.env'
+    original = ('MINI_APP_URL="'+url+'"\nMINIAPP_API_ALLOWED_ORIGIN='+OLD+'\n').encode()
+    path.write_bytes(original)
+    backup = tmp_path / 'backup'
+    with pytest.raises(ValueError):
+        apply(path, backup)
+    assert path.read_bytes() == original
+    assert not backup.exists()
