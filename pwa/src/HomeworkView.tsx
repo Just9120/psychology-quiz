@@ -10,19 +10,12 @@ export function HomeworkView({ catalog, busy, confirmId, onStart, onConfirm, onR
   onResume: (item: HomeworkAssignment) => void
   onRefresh: () => void
 }) {
-  const [module, setModule] = useState('')
-  const [discipline, setDiscipline] = useState('')
   const [topic, setTopic] = useState('')
-  const unique = (values: string[]) => [...new Set(values)].sort((a, b) => a.localeCompare(b, 'ru'))
-  const modules = unique(catalog.assignments.map(item => item.module))
-  const activeModule = modules.includes(module) ? module : ''
-  const inModule = catalog.assignments.filter(item => !activeModule || item.module === activeModule)
-  const disciplines = unique(inModule.map(item => item.discipline))
-  const activeDiscipline = disciplines.includes(discipline) ? discipline : ''
-  const inDiscipline = inModule.filter(item => !activeDiscipline || item.discipline === activeDiscipline)
-  const topics = unique(inDiscipline.map(item => item.topic))
-  const activeTopic = topics.includes(topic) ? topic : ''
-  const assignments = inDiscipline.filter(item => !activeTopic || item.topic === activeTopic)
+  const topicKey = (item: HomeworkAssignment) => JSON.stringify([item.discipline, item.topic])
+  const topics = [...new Map(catalog.assignments.map(item => [topicKey(item), item])).values()]
+    .sort((a, b) => a.topic.localeCompare(b.topic, 'ru') || a.discipline.localeCompare(b.discipline, 'ru'))
+  const activeTopic = topics.some(item => topicKey(item) === topic) ? topic : ''
+  const assignments = catalog.assignments.filter(item => !activeTopic || topicKey(item) === activeTopic)
 
   return <section className="page-width homework-page">
     <span className="eyebrow">МОЁ ОБУЧЕНИЕ</span><h1>Домашние задания</h1>
@@ -30,19 +23,13 @@ export function HomeworkView({ catalog, busy, confirmId, onStart, onConfirm, onR
     <p className="muted">Задание считается выполненным при 80% верных ответов в одной завершённой попытке. Можно попробовать снова.</p>
     <button className="text-button" disabled={busy} onClick={onRefresh}>Обновить результаты</button>
     <div className="homework-actions">
-      <label>Модуль домашних заданий<select value={activeModule} onChange={event => { setModule(event.target.value); setDiscipline(''); setTopic('') }}>
-        <option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value}</option>)}
-      </select></label>
-      <label>Дисциплина домашних заданий<select value={activeDiscipline} onChange={event => { setDiscipline(event.target.value); setTopic('') }}>
-        <option value="">Все дисциплины</option>{disciplines.map(value => <option key={value} value={value}>{value}</option>)}
-      </select></label>
-      <label>Тема домашних заданий<select value={activeTopic} onChange={event => setTopic(event.target.value)}>
-        <option value="">Все темы</option>{topics.map(value => <option key={value} value={value}>{value}</option>)}
+      <label>Тема домашних заданий<select value={activeTopic} disabled={busy} onChange={event => setTopic(event.target.value)}>
+        <option value="">Все темы</option>{topics.map(item => <option key={topicKey(item)} value={topicKey(item)}>{item.topic} · {item.discipline}</option>)}
       </select></label>
     </div>
     {!assignments.length && <p role="status">Домашних заданий пока нет.</p>}
     {assignments.map(item => <article className="panel homework-card" key={item.id}>
-      <p className="eyebrow">{item.module} · {item.discipline}</p>
+      <p className="eyebrow">{item.discipline}</p>
       <h2>{item.title}</h2><p className="muted">{item.topic}</p><p>{item.description}</p>
       <p className="homework-status" role="status">{item.completed ? 'Выполнено' : item.finished_attempts ? 'Пока не выполнено' : 'Не начато'}
         {item.best_score !== null && item.best_total !== null ? ` · лучший результат ${item.best_score} из ${item.best_total}` : ''}</p>

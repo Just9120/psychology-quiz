@@ -13,21 +13,20 @@ def test_hierarchy_filters_exact_parent_and_keeps_attempt_callbacks(monkeypatch)
         return {"assignments": catalog}
     monkeypatch.setattr(homework_chat, "catalog_for_actor", actor_catalog)
     root, markup = homework_chat._list(None, 42)
-    assert "Первое" in root and "Второе" in root
+    assert "Модуль" not in root
+    assert all("Модуль" not in button.text for row in markup.inline_keyboard for button in row)
+    assert len(markup.inline_keyboard) == 1  # Same topic across internal modules.
+    text, markup = homework_chat._list(None, 42, navigation=homework_chat._path_token(("Психология", "Память")))
+    assert "Первое" in text and "Второе" in text
     callbacks = [button.callback_data for row in markup.inline_keyboard for button in row]
+    assert "hw:start:one" in callbacks and "hw:start:two" in callbacks
     assert "hw:resume:12" in callbacks
-    for depth in (1, 2, 3):
-        path = ("Модуль 1", "Психология", "Память")[:depth]
-        text, markup = homework_chat._list(None, 42, navigation=homework_chat._path_token(path))
-        assert "Первое" in text and "Второе" not in text
-        callbacks = [button.callback_data for row in markup.inline_keyboard for button in row]
-        assert "hw:start:one" in callbacks and "hw:start:two" not in callbacks
-        assert "hw:resume:12" in callbacks
-        assert all(len(value.encode()) <= 64 for value in callbacks)
-    text, markup = homework_chat._list(None, 42, navigation="old-token")
-    assert "Раздел изменился" in text
-    assert all(button.callback_data == "hw:list:all" for row in markup.inline_keyboard for button in row)
-    assert actors == [42] * 5
+    assert all(len(value.encode()) <= 64 for value in callbacks)
+    for token in ("old-token", homework_chat._path_token(("Модуль 1",))):
+        text, markup = homework_chat._list(None, 42, navigation=token)
+        assert "Раздел изменился" in text
+        assert all(button.callback_data == "hw:list:all" for row in markup.inline_keyboard for button in row)
+    assert actors == [42] * 4
 
 
 def test_navigation_callback_does_not_start_attempt_and_refuses_group(monkeypatch):

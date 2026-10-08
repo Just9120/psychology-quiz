@@ -5,9 +5,8 @@ const kinds = { theory: 'теория', glossary: 'глоссарий', case: '�
 const states: Record<string, string> = { processed: 'Проверены в переданном снимке', pending_review: 'Ожидают проверки', conflict_review: 'Есть возражения', excluded: 'Исключены из обработки', new_unprocessed: 'Нет записи проверки', changed_unprocessed: 'Редакция изменилась', unreadable: 'Не прочитаны' }
 
 export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent; busy: boolean; onRefresh: () => void }) {
-  const [module, setModule] = useState('')
-  const topics = data.topics.filter(item => !module || item.module === module)
-  const modules = [...new Set(data.topics.map(item => item.module))]
+  const [topicId, setTopicId] = useState('')
+  const topics = data.topics.filter(item => !topicId || item.id === topicId)
   return <section className="page-width progress-page">
     <span className="eyebrow">ДЛЯ ВЛАДЕЛЬЦА</span><h1>Содержание и пробелы</h1>
     <p className="lead">Опубликованные задания и материалы. Отсутствие заданий показано отдельно; достаточность банка требует содержательной проверки.</p>
@@ -43,10 +42,10 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
       </div>)}</div>
       <p className="muted">Количество терминов учитывает только проверенную привязку к редакции источника; отсутствие привязки не означает отсутствия термина в корпусе.</p>
     </article>}
-    <label className="field">Модуль обзора<select value={module} disabled={busy} onChange={event => setModule(event.target.value)}><option value="">Все модули</option>{modules.map(value => <option key={value} value={value}>{value.replace('module', 'Модуль ')}</option>)}</select></label>
+    <label className="field">Тема обзора<select value={topicId} disabled={busy} onChange={event => setTopicId(event.target.value)}><option value="">Все темы</option>{data.topics.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}</select></label>
     <p>Вопросов без привязки к текущим темам: {data.unmapped_questions}.</p>
     <div className="literature-list">{topics.map(topic => <article className="panel" key={topic.id}>
-      <h2>{topic.title}</h2><p>{topic.module.replace('module', 'Модуль ')} · Вопросов: {topic.questions}</p>
+      <h2>{topic.title}</h2><p>Вопросов: {topic.questions}</p>
       <p>Теория: {topic.kinds.theory}; глоссарий: {topic.kinds.glossary}; кейсы: {topic.kinds.case}.</p>
       <p>Терминов: {topic.glossary_terms ?? 'не подтверждено'}; произведений в списке чтения: {topic.literature_works}.</p>
       <p>Личные заметки Obsidian: покрытие не подтверждено.</p>

@@ -12,9 +12,9 @@ def test_additional_course_has_other_section_without_inventing_a_numbered_module
         {"topic_id": "turning_point", "title": "Точка поворота", "module": "other", "item_count": 2},
         {"topic_id": "regular", "title": "Психология", "module": "module1", "item_count": 1}])
     _, keyboard = literature_chat._topics()
-    assert any(button.text == "Другое" for row in keyboard.inline_keyboard for button in row)
+    assert any(button.text.startswith("Точка поворота") for row in keyboard.inline_keyboard for button in row)
     text, keyboard = literature_chat._topics(literature_chat._token("other"))
-    assert "Другое" in text and "other" not in text
+    assert "Литература по темам" in text and "other" not in text
     assert keyboard.inline_keyboard[0][0].callback_data == "lit:t:" + literature_chat._token("turning_point") + ":0"
 
 
@@ -24,7 +24,7 @@ def test_cross_module_discipline_is_available_from_both_module_buttons(monkeypat
          "modules": ["module2", "module3"], "item_count": 2}])
     for module in ("module2", "module3"):
         text, keyboard = literature_chat._topics(literature_chat._token(module))
-        assert module.replace("module", "Модуль ") in text
+        assert "Модуль" not in text
         assert keyboard.inline_keyboard[0][0].callback_data == "lit:t:" + literature_chat._token("shared") + ":0"
 from app.literature import load_literature_items
 from tests.test_attempt_content import TOKEN, bank
@@ -168,10 +168,10 @@ def test_chat_reading_module_navigation_and_filter_keep_tally_and_pagination(mon
     token = literature_chat._token("one")
     root = literature_chat._topics()
     modules = [b for row in root[1].inline_keyboard for b in row if b.callback_data.startswith("lit:m:")]
-    assert [b.text for b in modules] == ["Модуль 1", "Модуль 2"]
+    assert modules == []
     module = literature_chat._topics(literature_chat._token("module1"))
-    assert "Модуль 1" in module[0]
-    assert [b.text for row in module[1].inline_keyboard for b in row if b.callback_data.startswith("lit:t:")] == ["Первый список · 12"]
+    assert "Модуль" not in module[0]
+    assert [b.text for row in module[1].inline_keyboard for b in row if b.callback_data.startswith("lit:t:")] == ["Первый список · 12", "Другой список · 1"]
     assert literature_chat._topics("f" * 12) is None
     for code, expected in (("a", 5), ("d", 5), ("n", 4), ("p", 0), ("f", 0)):
         text, keyboard = literature_chat._topic_view(items, states, token, 0, code)

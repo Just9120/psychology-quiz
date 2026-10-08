@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from app.miniapp_origins import parse_allowed_origins
+
 import json
 import logging
 import re
@@ -665,8 +667,8 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
     def _set_common_headers(self) -> None:
         self.send_header("Cache-Control", "no-store")
         request_origin = self.headers.get("Origin", "")
-        if self.allowed_origin and request_origin == self.allowed_origin:
-            self.send_header("Access-Control-Allow-Origin", self.allowed_origin)
+        if request_origin in parse_allowed_origins(self.allowed_origin):
+            self.send_header("Access-Control-Allow-Origin", request_origin)
             self.send_header("Vary", "Origin")
 
     def do_OPTIONS(self):
@@ -674,7 +676,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         endpoint = self.path.split("?")[0]
         request_id = _read_request_id(self.headers)
         origin = self.headers.get("Origin", "")
-        allowed = bool(self.allowed_origin and origin == self.allowed_origin)
+        allowed = origin in parse_allowed_origins(self.allowed_origin)
         if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/homework/catalog", "/miniapp/homework/start", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s", "unknown", request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no")
@@ -877,6 +879,7 @@ def start_miniapp_api_server(
     MiniAppApiHandler.db_path = db_path
     MiniAppApiHandler.bot_token = bot_token
     MiniAppApiHandler.initdata_ttl_seconds = initdata_ttl_seconds
+    parse_allowed_origins(allowed_origin)
     MiniAppApiHandler.allowed_origin = allowed_origin
     server = ThreadingHTTPServer((host, port), MiniAppApiHandler)
     return server

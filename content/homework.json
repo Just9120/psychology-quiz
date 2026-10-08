@@ -8,7 +8,13 @@
       "discipline_id": "vvedenie_v_professiyu",
       "topic_id": "t_c17d1ae57018",
       "description": "Тест проверяет профессиональные принципы. Личные письменные ответы не оцениваются и не сохраняются.",
-      "question_ids": ["m1_intro_007", "m1_intro_014", "m1_intro_015", "m1_intro_019", "m1_intro_025"]
+      "question_ids": [
+        "m1_intro_007",
+        "m1_intro_014",
+        "m1_intro_015",
+        "m1_intro_019",
+        "m1_intro_025"
+      ]
     },
     {
       "id": "professional_diary",
@@ -17,7 +23,13 @@
       "discipline_id": "vvedenie_v_professiyu",
       "topic_id": "t_c17d1ae57018",
       "description": "Тест проверяет конфиденциальность и профессиональную рефлексию. Он не подтверждает ведение дневника.",
-      "question_ids": ["m1_intro_004", "m1_intro_015", "m1_intro_016", "m1_intro_025", "m1_intro_033"]
+      "question_ids": [
+        "m1_intro_004",
+        "m1_intro_015",
+        "m1_intro_016",
+        "m1_intro_025",
+        "m1_intro_033"
+      ]
     },
     {
       "id": "observation_and_listening",
@@ -26,7 +38,13 @@
       "discipline_id": "vvedenie_v_professiyu",
       "topic_id": "t_5f1cca01d535",
       "description": "Тест проверяет навыки наблюдения и слушания. Он не подтверждает выполнение упражнения с другим человеком.",
-      "question_ids": ["m1_intro_010", "m1_intro_011", "m1_intro_033", "m3_psychological_consulting_006", "m3_psychological_consulting_007"]
+      "question_ids": [
+        "m1_intro_010",
+        "m1_intro_011",
+        "m1_intro_033",
+        "m3_psychological_consulting_006",
+        "m3_psychological_consulting_007"
+      ]
     },
     {
       "id": "first_consultation",
@@ -35,7 +53,538 @@
       "discipline_id": "psychological_consulting",
       "topic_id": "t_7246705017fc",
       "description": "Тест проверяет понятия первой встречи. Он не подтверждает участие в практической сессии.",
-      "question_ids": ["m3_psychological_consulting_004", "m3_psychological_consulting_005", "m3_psychological_consulting_006", "m3_psychological_consulting_008", "m3_psychological_consulting_009"]
+      "question_ids": [
+        "m3_psychological_consulting_004",
+        "m3_psychological_consulting_005",
+        "m3_psychological_consulting_006",
+        "m3_psychological_consulting_008",
+        "m3_psychological_consulting_009"
+      ]
+    },
+    {
+      "id": "cognitive_processes",
+      "title": "Внимание, память и восприятие",
+      "module": "Модуль 1",
+      "discipline_id": "obschaya_psihologiya",
+      "topic_id": "t_4451554cf717",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_gp_007",
+        "m1_gp_008",
+        "m1_gp_009",
+        "m1_gp_010",
+        "m1_psyf_027"
+      ]
+    },
+    {
+      "id": "body_and_emotions",
+      "title": "Наблюдение телесных проявлений эмоций",
+      "module": "Модуль 1",
+      "discipline_id": "obschaya_psihologiya",
+      "topic_id": "t_6cad9faef9be",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_phys_014",
+        "m1_phys_025",
+        "m1_phys_026",
+        "m1_phys_028",
+        "m1_gp_050"
+      ]
+    },
+    {
+      "id": "individual_load",
+      "title": "Индивидуальные особенности и нагрузка",
+      "module": "Модуль 1",
+      "discipline_id": "fiziologiya_vnd",
+      "topic_id": "t_51d21da1b3b3",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_phys_028",
+        "m1_psyf_061",
+        "m1_gp_014",
+        "m1_vnd_011",
+        "m3_psychological_consulting_069"
+      ]
+    },
+    {
+      "id": "validation_and_contact",
+      "title": "Признание переживаний и контакт",
+      "module": "Модуль 1",
+      "discipline_id": "fiziologiya_vnd",
+      "topic_id": "t_fdf0949c60f1",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_vnd_059",
+        "m3_psychological_consulting_006",
+        "m3_psychological_consulting_069",
+        "m3_psychological_consulting_070",
+        "m3_psychological_consulting_088"
+      ]
+    },
+    {
+      "id": "case_observation",
+      "title": "Факты и интерпретации в наблюдении",
+      "module": "Модуль 1",
+      "discipline_id": "psihofiziologiya",
+      "topic_id": "t_269e302a9e03",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_gp_032",
+        "m1_gp_042",
+        "m1_gp_045",
+        "m1_gp_050",
+        "m3_psychological_consulting_102"
+      ]
+    },
+    {
+      "id": "research_hypothesis",
+      "title": "Гипотеза и исследовательский план",
+      "module": "Модуль 2",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "topic_id": "t_ebf8821f2933",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m2_exp_017",
+        "m2_exp_009",
+        "m2_exp_010",
+        "m1_gp_032",
+        "m1_gp_042"
+      ]
+    },
+    {
+      "id": "qualitative_case",
+      "title": "Качественное исследование случая",
+      "module": "Модуль 2",
+      "discipline_id": "kachestvennye_metody_issledovaniya",
+      "topic_id": "t_5238b79de120",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m2_qual_001",
+        "m2_qual_006",
+        "m2_qual_024",
+        "m2_exp_009",
+        "m2_exp_010"
+      ]
+    },
+    {
+      "id": "assessment_measurement",
+      "title": "Измерение и ограничения диагностики",
+      "module": "Модуль 2",
+      "discipline_id": "psychodiagnostics",
+      "topic_id": "t_50367f0a1a1d",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m2_pd_001",
+        "m2_pd_002",
+        "m2_pd_003",
+        "m2_pd_006",
+        "m2_pd_011"
+      ]
+    },
+    {
+      "id": "goal_and_contract",
+      "title": "Запрос, цель и контракт",
+      "module": "Модуль 3",
+      "discipline_id": "psychological_consulting",
+      "topic_id": "t_cb4906154e12",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m3_psychological_consulting_030",
+        "m3_psychological_consulting_094",
+        "m3_psychological_consulting_095",
+        "m3_psychological_consulting_096",
+        "m3_psychological_consulting_109"
+      ]
+    },
+    {
+      "id": "case_conceptualization",
+      "title": "Концептуализация и проверка гипотез",
+      "module": "Модуль 3",
+      "discipline_id": "psychological_consulting",
+      "topic_id": "t_f638492f04ed",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m3_psychological_consulting_054",
+        "m3_psychological_consulting_078",
+        "m3_psychological_consulting_098",
+        "m3_psychological_consulting_099",
+        "m3_psychological_consulting_102"
+      ]
+    },
+    {
+      "id": "integrative_case",
+      "title": "Выбор подхода к работе со случаем",
+      "module": "Модуль 3",
+      "discipline_id": "psychological_consulting",
+      "topic_id": "t_bd934f61e018",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m3_psychological_consulting_050",
+        "m3_psychological_consulting_069",
+        "m3_psychological_consulting_070",
+        "m3_psychological_consulting_115",
+        "m3_psychological_consulting_116"
+      ]
+    },
+    {
+      "id": "supervision_preparation",
+      "title": "Подготовка случая к супервизии",
+      "module": "Модуль 3",
+      "discipline_id": "psychological_consulting",
+      "topic_id": "t_edaeea6e8df0",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_intro_015",
+        "m3_psychological_consulting_023",
+        "m3_psychological_consulting_054",
+        "m3_psychological_consulting_102",
+        "m3_psychological_consulting_114"
+      ]
+    },
+    {
+      "id": "assessment_scoring",
+      "title": "Результаты теста и границы вывода",
+      "module": "Модуль 2",
+      "discipline_id": "psychodiagnostics",
+      "topic_id": "t_d0ae2304480c",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m2_pd_004",
+        "m2_pd_005",
+        "m2_pd_007",
+        "m2_pd_008",
+        "m2_pd_012"
+      ]
+    },
+    {
+      "id": "assessment_feedback",
+      "title": "Обратная связь по результатам исследования",
+      "module": "Модуль 2",
+      "discipline_id": "psychodiagnostics",
+      "topic_id": "t_2fecd8a4c446",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m2_pd_018",
+        "m2_pd_019",
+        "m1_intro_006",
+        "m3_psychological_consulting_054",
+        "m3_psychological_consulting_078"
+      ]
+    },
+    {
+      "id": "resource_description",
+      "title": "Описание ресурсов без диагностических ярлыков",
+      "module": "Модуль 2",
+      "discipline_id": "psychodiagnostics",
+      "topic_id": "t_5aebea2fd740",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m2_pd_009",
+        "m2_pd_010",
+        "m2_pd_011",
+        "m2_pd_014",
+        "m2_pd_015"
+      ]
+    },
+    {
+      "id": "personality_theory_case",
+      "title": "Теории личности в анализе случая",
+      "module": "Модуль 4",
+      "discipline_id": "personality_psychology",
+      "topic_id": "t_4e0186fe70c1",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m4_person_001",
+        "m4_person_007",
+        "m4_person_008",
+        "m4_person_009",
+        "m4_person_020"
+      ]
+    },
+    {
+      "id": "personality_hypotheses",
+      "title": "Индивидуальные различия и рабочие гипотезы",
+      "module": "Модуль 4",
+      "discipline_id": "personality_psychology",
+      "topic_id": "t_60851f7e2090",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m4_person_003",
+        "m4_person_004",
+        "m4_person_009",
+        "m1_gp_014",
+        "m3_psychological_consulting_098"
+      ]
+    },
+    {
+      "id": "personality_development",
+      "title": "Личность, идентичность и развитие",
+      "module": "Модуль 4",
+      "discipline_id": "personality_psychology",
+      "topic_id": "t_06b57c568b62",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m4_person_012",
+        "m4_person_013",
+        "m4_person_014",
+        "m4_person_015",
+        "m4_person_023"
+      ]
+    },
+    {
+      "id": "developmental_context",
+      "title": "Возрастной контекст запроса",
+      "module": "Модуль 4",
+      "discipline_id": "developmental_psychology",
+      "topic_id": "t_34dd25f0b3ca",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m4_dev_001",
+        "m4_dev_002",
+        "m4_dev_007",
+        "m3_psychological_consulting_098",
+        "m3_psychological_consulting_109"
+      ]
+    },
+    {
+      "id": "clinical_case_facts",
+      "title": "Сбор сведений и уточняющие вопросы",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_3ad06a5e9c34",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_intro_013",
+        "m1_gp_032",
+        "m3_psychological_consulting_054",
+        "m3_psychological_consulting_098",
+        "m3_psychological_consulting_110"
+      ]
+    },
+    {
+      "id": "clinical_norm",
+      "title": "Норма и клинически значимая информация",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_3ef6769f0fe5",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m5_clinical_007",
+        "m5_clinical_017",
+        "m5_clin_018",
+        "m1_intro_013",
+        "m3_psychological_consulting_098"
+      ]
+    },
+    {
+      "id": "clinical_hypotheses",
+      "title": "Пересмотр гипотез по новым сведениям",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_d49d050505ff",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m3_psychological_consulting_054",
+        "m3_psychological_consulting_078",
+        "m3_psychological_consulting_098",
+        "m3_psychological_consulting_102",
+        "m1_gp_042"
+      ]
+    },
+    {
+      "id": "distress_context",
+      "title": "Дистресс, функционирование и совладание",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_2ef6a1c72d17",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m5_clinical_017",
+        "m5_clin_018",
+        "m5_clin_026",
+        "m3_psychological_consulting_098",
+        "m3_psychological_consulting_110"
+      ]
+    },
+    {
+      "id": "clinical_goals",
+      "title": "Цель и стратегия работы",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_fc07b1b21d0b",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m5_clinical_001",
+        "m3_psychological_consulting_024",
+        "m3_psychological_consulting_095",
+        "m3_psychological_consulting_101",
+        "m3_psychological_consulting_109"
+      ]
+    },
+    {
+      "id": "clinical_methods",
+      "title": "Метод, техника и план работы",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_5f8628e3fbce",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m5_clin_023",
+        "m3_psychological_consulting_050",
+        "m3_psychological_consulting_070",
+        "m3_psychological_consulting_101",
+        "m3_psychological_consulting_115"
+      ]
+    },
+    {
+      "id": "resistance_and_agreement",
+      "title": "Трудности сотрудничества и согласование",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_1ff7a1f7180c",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m3_psychological_consulting_047",
+        "m3_psychological_consulting_059",
+        "m3_psychological_consulting_078",
+        "m3_psychological_consulting_110",
+        "m3_psychological_consulting_116"
+      ]
+    },
+    {
+      "id": "completion_plan",
+      "title": "Оценка результата и завершение",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_7b4fc82d0ccb",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m5_clinical_001",
+        "m5_clinical_013",
+        "m5_clinical_014",
+        "m5_clin_024",
+        "m3_psychological_consulting_101"
+      ]
+    },
+    {
+      "id": "competence_and_referral",
+      "title": "Границы компетенции и направление",
+      "module": "Модуль 5",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "topic_id": "t_0faeaab9c732",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m1_intro_013",
+        "m5_clin_022",
+        "m3_psychological_consulting_015",
+        "m3_psychological_consulting_023",
+        "m3_psychological_consulting_068"
+      ]
+    },
+    {
+      "id": "social_case_context",
+      "title": "Социальный контекст случая",
+      "module": "Модуль 6",
+      "discipline_id": "social_psychology",
+      "topic_id": "t_bb5cc6935105",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m6_social_010",
+        "m6_social_011",
+        "m6_social_021",
+        "m6_social_023",
+        "m3_psychological_consulting_078"
+      ]
+    },
+    {
+      "id": "family_case_context",
+      "title": "Роли, границы и взаимодействие в семье",
+      "module": "Модуль 6",
+      "discipline_id": "family_psychology",
+      "topic_id": "t_b25f2b4f0528",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m6_family_001",
+        "m6_family_002",
+        "m6_family_003",
+        "m6_family_004",
+        "m6_family_005"
+      ]
+    },
+    {
+      "id": "organizational_roles",
+      "title": "Рабочие роли и организационный контекст",
+      "module": "Модуль 6",
+      "discipline_id": "organizational_psychology",
+      "topic_id": "t_a47c7ff1c7db",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m6_org_001",
+        "m6_org_005",
+        "m6_org_022",
+        "m6_org_026",
+        "m6_org_029"
+      ]
+    },
+    {
+      "id": "organizational_inquiry",
+      "title": "Организационный запрос и сбор данных",
+      "module": "Модуль 6",
+      "discipline_id": "organizational_psychology",
+      "topic_id": "t_d3a3b3541dab",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m6_org_008",
+        "m6_org_016",
+        "m6_org_017",
+        "m6_org_035",
+        "m3_psychological_consulting_110"
+      ]
+    },
+    {
+      "id": "language_clarification",
+      "title": "Уточнение смысла высказываний",
+      "module": "Модуль 6",
+      "discipline_id": "psycholinguistics",
+      "topic_id": "t_ba868cd218a1",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m6_psyl_002",
+        "m6_psyl_003",
+        "m6_psyl_004",
+        "m6_psyl_005",
+        "m6_psyl_007"
+      ]
+    },
+    {
+      "id": "language_reframing",
+      "title": "Переформулировка и проверка понимания",
+      "module": "Модуль 6",
+      "discipline_id": "psycholinguistics",
+      "topic_id": "t_803856ff9688",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m6_psyl_005",
+        "m6_psyl_007",
+        "m6_psyl_008",
+        "m6_psyl_011",
+        "m3_psychological_consulting_100"
+      ]
+    },
+    {
+      "id": "language_and_observation",
+      "title": "Язык, описание и наблюдение",
+      "module": "Модуль 6",
+      "discipline_id": "psycholinguistics",
+      "topic_id": "t_ba868cd218a1",
+      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "question_ids": [
+        "m6_psyl_009",
+        "m6_psyl_010",
+        "m6_psyl_011",
+        "m6_psyl_012",
+        "m1_gp_032"
+      ]
     }
   ]
 }

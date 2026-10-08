@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from app.db import create_or_load_user, get_connection, upsert_approved_questions
-from app.homework import catalog_for_actor, outcome_for_session, passed, start_homework
+from app.homework import catalog_for_actor, load_catalog, outcome_for_session, passed, start_homework, validate_bank
 from app.homework_schema import migrate_homework_schema
 from app.quiz_service import answer_quiz
 from app.identity_schema import migrate_identity_schema
@@ -20,8 +20,7 @@ def _bank(path):
         migrate_learning_schema(conn)
         migrate_homework_schema(conn)
         questions = []
-        for source in ("content/questions/module1/vvedenie_v_professiyu.json",
-                       "content/questions/module3/psychological_consulting.json"):
+        for source in Path("content/questions").rglob("*.json"):
             questions.extend(item for item in json.loads(Path(source).read_text(encoding="utf-8"))
                              if item["status"] == "approved")
         upsert_approved_questions(conn, questions, authoritative=True)
@@ -155,3 +154,27 @@ def test_homework_runner_and_feedback_do_not_project_private_provenance(tmp_path
         assert_public(catalog_for_actor(conn, actor))
         snapshots = conn.execute('SELECT content_snapshot FROM quiz_session_questions WHERE session_id=?', (session,)).fetchall()
         assert snapshots and all(private_ref in row[0] for row in snapshots)
+
+def test_all_published_tasks_start_with_reviewed_questions_and_preserve_old_credit(tmp_path):
+    path = tmp_path / 'expanded-homework.sqlite3'
+    actor, other = _bank(path)
+    original = {'professional_reflection', 'professional_diary', 'observation_and_listening', 'first_consultation'}
+    with closing(get_connection(str(path))) as conn, conn:
+        validate_bank(conn)
+        catalog = load_catalog()
+        assert original.issubset({item['id'] for item in catalog})
+        old = start_homework(conn, actor_user_id=actor, assignment_id='first_consultation',
+                             payload={'replace_active': False})
+        old_session = _finish(conn, actor, old['runner_state'], 4)
+        for assignment in catalog:
+            started = start_homework(conn, actor_user_id=actor, assignment_id=assignment['id'],
+                                     payload={'replace_active': False})
+            session_id = started['runner_state']['session']['session_id']
+            selected = {row[0] for row in conn.execute('''SELECT q.external_id FROM quiz_session_questions sq
+                JOIN questions q ON q.id=sq.question_id WHERE sq.session_id=?''', (session_id,))}
+            assert selected == set(assignment['question_ids'])
+            _finish(conn, actor, started['runner_state'], len(selected))
+            assert _entry(conn, actor)['completed']
+            assert outcome_for_session(conn, actor_user_id=other, session_id=session_id) is None
+        assert outcome_for_session(conn, actor_user_id=actor, session_id=old_session)['passed']
+        assert not any(item['completed'] for item in catalog_for_actor(conn, other)['assignments'])

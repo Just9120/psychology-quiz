@@ -34,10 +34,6 @@ def _token(value: str) -> str:
     return sha256(value.encode("utf-8")).hexdigest()[:12]
 
 
-def _module_label(value: str) -> str:
-    return "Другое" if value == "other" else value.replace("module", "Модуль ")
-
-
 def _find(items: list[dict], token: str, key: str) -> dict | None:
     matches = [item for item in items if isinstance(item.get(key), str) and _token(item[key]) == token]
     return matches[0] if len(matches) == 1 else None
@@ -71,18 +67,12 @@ def _topics(module_token: str | None = None) -> tuple[str, InlineKeyboardMarkup 
     module = _find(modules, module_token, "module") if module_token is not None else None
     if module_token is not None and module is None:
         return None
-    selected = [topic for topic in topics if module is None
-                or module["module"] in topic.get("modules", [topic.get("module")])]
+    # Old module callbacks remain readable, but navigation now uses all topics.
     rows = [[InlineKeyboardButton(f"{topic['title']} · {topic['item_count']}",
              callback_data=f"lit:t:{_token(topic['topic_id'])}:0")]
-            for topic in selected]
-    if module is None and len(modules) > 1:
-        rows.extend([[InlineKeyboardButton(_module_label(value["module"]),
-                     callback_data=f"lit:m:{_token(value['module'])}")] for value in modules])
-    elif module is not None:
-        rows.append([InlineKeyboardButton("Все темы и модули", callback_data="lit:topics")])
-    title = "Литература по дисциплинам" if module is None else _module_label(module["module"])
-    return f"<b>{escape(title)}</b>\nВыберите дисциплину, чтобы открыть список чтения.", InlineKeyboardMarkup(rows)
+            for topic in topics]
+    return "<b>Литература по темам</b>\nВыберите тему, чтобы открыть список чтения.", InlineKeyboardMarkup(rows)
+
 
 
 def _topic_view(items: list[dict], states: dict, token: str, page: int, status_filter: str = "a", lesson_token: str | None = None) -> tuple[str, InlineKeyboardMarkup] | None:
@@ -219,7 +209,7 @@ async def literature_callback(update, context) -> None:
     if data.startswith("lit:m:"):
         view = await asyncio.to_thread(_topics, data.split(":")[2])
         if view is None:
-            await query.message.reply_text("Модуль изменился или больше недоступен. Откройте /literature снова.")
+            await query.message.reply_text("Раздел изменился или больше недоступен. Откройте /literature снова.")
         else:
             await query.message.reply_text(view[0], reply_markup=view[1], parse_mode="HTML")
         return

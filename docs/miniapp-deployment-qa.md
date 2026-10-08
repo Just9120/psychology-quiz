@@ -938,3 +938,14 @@ canonical content update и сохранение attempt snapshots. Local synthe
 ### Unreleased lesson coverage in the owner summary
 
 From the repository root, optional `--private-topics data/<topics>.json` requires `--reviewed --private-registry data/<registry>.json`. Both inputs pass the existing private ignored-file and exact source/revision gates. Unreleased lesson names and bindings stay in operator storage; the owner client receives only total, processing counts, current metadata count and known holds. Metadata classification does not grant derivative publication or index approval. The public curriculum and published lesson rows remain authoritative.
+
+
+## Переход Mini App на согласованный hostname
+
+PWA остаётся psy.cloud-nodes.net; Mini App переходит с miniapp.librechat.online на miniapp.psy.cloud-nodes.net; API hostname не меняется. Владелец уже добавил оба production Custom Domains к существующему Worker. Новая frontend страница должна открываться по HTTPS до переключения runtime. Старую привязку пока не удалять: прежние Telegram-кнопки содержат прежний адрес.
+
+После успешного CI → merge → CD новой revision выполните на VPS из `/opt/psychology-quiz` одну процедуру: `bash scripts/miniapp_domain_cutover.sh EXPECTED_MERGE_SHA`, подставив фактический поставленный merge SHA. [Процедура](../scripts/miniapp_domain_cutover.sh) проверяет target, revision, image и текущие службы, берёт штатную deploy lock, сохраняет private `.env` backup в root-only record и через [config helper](../scripts/miniapp_domain_config.py) меняет только MINI_APP_URL и MINIAPP_API_ALLOWED_ORIGIN. Последний принимает конечный список двух точных origins; response отражает только совпавший origin, чужому origin разрешение не выдаётся. Telegram initData/auth остаётся обязательным.
+
+Повторный запуск без необходимости не требуется. Процедура пересоздаёт только bot/API с уже поставленным image; БД, PWA, прочие env values и OAuth не изменяются. Post-checks: exact revision/readiness/auth boundary, оба разрешённых origins и запрещённый контрольный origin, новый URL в контейнере, обе службы Running. Итог `MINIAPP_DOMAIN_OK` подтверждает runtime/config; owner Telegram launch проверяет личный roundtrip. При failure восстанавливается сохранённый config только если после cutover владелец его не изменил; затем прежняя конфигурация пересоздаётся и проверяется. При concurrent edit автоматический restore останавливается и сохраняет record для recovery.
+
+Новые кнопки `/ui` используют MINI_APP_URL; уже отправленные кнопки не переписываются. Если отдельный Main Mini App URL или menu button был настроен владельцем в BotFather, его внешняя настройка не управляется этой процедурой: укажите там новый hostname, сохранив старый Worker domain на время перехода.

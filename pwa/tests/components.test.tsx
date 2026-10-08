@@ -111,15 +111,15 @@ it('clears private account UI if the session expires during initial quiz hydrati
   expect(screen.queryByText('Мой аккаунт')).not.toBeInTheDocument()
 })
 
-it('groups exact curriculum topics by module without hiding unmapped categories', () => {
+it('shows concrete topics without internal module groups or losing unmapped categories', () => {
   render(<QuizSetup options={{ categories: [
     { id: 1, name: 'Теория', module: 'module1', topic_id: 'theory' },
     { id: 2, name: 'Кейсы', module: 'module3', topic_id: 'cases' },
     { id: 3, name: 'Новая категория', module: null, topic_id: null },
   ], question_count_choices: [5], difficulty_choices: ['any'] }} busy={false} activeSessionId={null} onStart={vi.fn()} onResume={vi.fn()} />)
-  expect(screen.getByRole('heading', { name: 'Модуль 1' })).toBeVisible()
-  expect(screen.getByRole('heading', { name: 'Модуль 3' })).toBeVisible()
-  expect(screen.getByRole('heading', { name: 'Без подтверждённого модуля' })).toBeVisible()
+  expect(screen.queryByRole('heading', { name: /Модул|модул/ })).not.toBeInTheDocument()
+  expect(screen.getByRole('radio', { name: 'Теория' })).toBeVisible()
+  expect(screen.getByRole('radio', { name: 'Кейсы' })).toBeVisible()
   expect(screen.getByRole('radio', { name: 'Новая категория' })).toBeVisible()
 })
 
