@@ -21107,6 +21107,215 @@
       "issues": [],
       "note": "Exact course-framed motive/thought/verbal expression sequence only. Primary author attribution not independently confirmed because archive unavailable; therefore question/explanation avoid author, date and origin claim. No literal thought weight, neural prognosis, therapy efficacy or private case narrative.",
       "sources": []
+    },
+    "questions:m5_clin_018": {
+      "item_sha256": "d288be93f1713f8366ccbcf0327ba23212022a9ff1ff31b5d8bda004707005fc",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact three-dimensions course clause; no cortisol inference, diagnosis algorithm, causal weighting or certification of medical differentials.",
+      "sources": []
+    },
+    "questions:m5_clin_019": {
+      "item_sha256": "c7b2764fe23a5ff90e4d5e2be25705367a234aa4d8624644414e40fe67cfc412",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact qualitative multi-process principle; no protected forms, numerical norms, syndrome inference from one task or country-specific professional powers.",
+      "sources": []
+    },
+    "questions:m5_clin_020": {
+      "item_sha256": "60e881374fbd3067829ba0f1bf8f413abd22077ae9ee02145d58a84929662b99",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Clean lecture taxonomy label only. Definition independently checked against NIMH2024 negative symptoms section; held prognosis/irreversibility fragment not approved or reused.",
+      "sources": []
+    },
+    "questions:m5_clin_021": {
+      "item_sha256": "9dcd400ceddd0a497396927de6b5389871cfad44766ee378845f416115d0eea7",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact subjective-illness clause after retained objective/subjective-equivalence hold; excludes chemotherapy example, causal claims and diagnosis/treatment instruction.",
+      "sources": []
+    },
+    "questions:m5_clin_022": {
+      "item_sha256": "9364153c37ac5d3fb292b8d090d402160780519f2efb1974c55eebe356f30ec9",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact additional-diagnosis referral clause plus surrounding explicit explanation statement inspected; fictional non-emergency case. No hospitalisation law, urgency algorithm or guaranteed treatment efficacy.",
+      "sources": []
+    },
+    "questions:m2_pd_018": {
+      "item_sha256": "b5d274eacfcaf7c3242bc18810232916e36a12874a319089e3726677ec8b1020",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course transference example only; no participant case reused, universal therapist neutrality, equation of all projection with transference or proof of projective-test validity.",
+      "sources": []
+    },
+    "questions:m2_pd_019": {
+      "item_sha256": "517a9bd0d0402e30bfecabc456d356327a9d4d47c1353e1239a77551e31e5587",
+      "discipline_id": "psychodiagnostics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact projection-definition clause; explicitly excludes subsequent equation of projection and transference, universal self-projection, protected forms and test-validity claims.",
+      "sources": []
+    },
+    "questions:m5_clin_023": {
+      "item_sha256": "29057d648029be6365a66a312fa62d17c3518f60de314af6c206b0993092aae7",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact source-framed method/direction versus technique/concrete tools distinction. Not universal taxonomy of therapies, treatment guarantee or demonstration efficacy.",
+      "sources": []
+    },
+    "questions:m5_clin_024": {
+      "item_sha256": "7733e736aef2d01113902689af265634e5eedae30034ba568e788ea5253179e9",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact voluntary future-contact clause only; excludes immediately following guaranteed-success reassurance, refund rule, permanent availability and prognosis from speech.",
+      "sources": []
+    },
+    "questions:m5_clin_025": {
+      "item_sha256": "e9638f1ed8eac8bc20eb58573b395b00a2b76030d023637c22ffcc2a29923733",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Clean missing-person example only, excluding preceding fixed pathological grief duration and subsequent training anecdote. Definition independently checked in university interview with theory author; own fictional question, no source private narrative or efficacy claim.",
+      "sources": []
+    },
+    "questions:m5_clin_026": {
+      "item_sha256": "78fa4503037572edd216348ba88c8fd5418bd1776b5783ebd944290891d54a07",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact can-be-conscious coping clause plus official APA dictionary indexed definition. No all-coping-conscious claim, first-instrument priority, protected questionnaire items, scoring threshold or fixed personality inference.",
+      "sources": []
     }
   }
 }

@@ -5805,6 +5805,72 @@
       "topic_id": "t_e39d1d65a4d7",
       "item_sha256": "4cd790d715e9645705ea1283f1eb3af97f4b41fc34b0a587f20188bf6fb1c7c7",
       "locator": "private review:questions:m6_psyl_012"
+    },
+    "7fba4875dc922ee9ba54f72f1e76a7be0963c247689b6f5669b98805679e5ef6": {
+      "external_id": "m2_pd_018",
+      "topic_id": "t_2fecd8a4c446",
+      "item_sha256": "b5d274eacfcaf7c3242bc18810232916e36a12874a319089e3726677ec8b1020",
+      "locator": "private review:questions:m2_pd_018"
+    },
+    "9cfc811ff3a30a1890d5edbb7c6da90dfda4ddba4a9a3eb2f2a50614efad5378": {
+      "external_id": "m2_pd_019",
+      "topic_id": "t_2fecd8a4c446",
+      "item_sha256": "517a9bd0d0402e30bfecabc456d356327a9d4d47c1353e1239a77551e31e5587",
+      "locator": "private review:questions:m2_pd_019"
+    },
+    "23e0fd02309e1cf7b57e7faf68cf025de5d83e2a4481c065ff03077f5aa72242": {
+      "external_id": "m5_clin_018",
+      "topic_id": "t_3ef6769f0fe5",
+      "item_sha256": "d288be93f1713f8366ccbcf0327ba23212022a9ff1ff31b5d8bda004707005fc",
+      "locator": "private review:questions:m5_clin_018"
+    },
+    "fb40b8f1b5f56101074069464d0c6e047a0a76d6220ba9aae51ecbc937d0395f": {
+      "external_id": "m5_clin_019",
+      "topic_id": "t_be63ccbdf1d7",
+      "item_sha256": "c7b2764fe23a5ff90e4d5e2be25705367a234aa4d8624644414e40fe67cfc412",
+      "locator": "private review:questions:m5_clin_019"
+    },
+    "d5fc462817abf68812ad23e2bb1d2601b0192f6b4c2ed4c7c62e54bbe93a441f": {
+      "external_id": "m5_clin_020",
+      "topic_id": "t_bb895f94e077",
+      "item_sha256": "60e881374fbd3067829ba0f1bf8f413abd22077ae9ee02145d58a84929662b99",
+      "locator": "private review:questions:m5_clin_020"
+    },
+    "d9f5f8e803c0806b53485ca9d2d4922bb17b9acc81103a76b1cd1f359ffb36d5": {
+      "external_id": "m5_clin_021",
+      "topic_id": "t_184dd2def77e",
+      "item_sha256": "9dcd400ceddd0a497396927de6b5389871cfad44766ee378845f416115d0eea7",
+      "locator": "private review:questions:m5_clin_021"
+    },
+    "ffae1bc9cf89ca3cb892b990344b93f8b812ffe6d62cd23328b76fd0c6c3accf": {
+      "external_id": "m5_clin_022",
+      "topic_id": "t_0faeaab9c732",
+      "item_sha256": "9364153c37ac5d3fb292b8d090d402160780519f2efb1974c55eebe356f30ec9",
+      "locator": "private review:questions:m5_clin_022"
+    },
+    "80c222925c8bedaba325c61656f305c4b737d78afe75d0d695fb48236b306981": {
+      "external_id": "m5_clin_023",
+      "topic_id": "t_5f8628e3fbce",
+      "item_sha256": "29057d648029be6365a66a312fa62d17c3518f60de314af6c206b0993092aae7",
+      "locator": "private review:questions:m5_clin_023"
+    },
+    "044936b5ab5c69d13029808adec73c38379d077a1e79839e7821cd956b140d7f": {
+      "external_id": "m5_clin_024",
+      "topic_id": "t_7b4fc82d0ccb",
+      "item_sha256": "7733e736aef2d01113902689af265634e5eedae30034ba568e788ea5253179e9",
+      "locator": "private review:questions:m5_clin_024"
+    },
+    "4010000707b1b1c0e2d4cb62b791c2732c92a4dd10f40fd534f2ef363fbb9f38": {
+      "external_id": "m5_clin_025",
+      "topic_id": "t_fded5a914d5a",
+      "item_sha256": "e9638f1ed8eac8bc20eb58573b395b00a2b76030d023637c22ffcc2a29923733",
+      "locator": "private review:questions:m5_clin_025"
+    },
+    "e6acd2c77fce9f12da45dec030c2f6471d4368d044471a6e66f98f66950b8ab1": {
+      "external_id": "m5_clin_026",
+      "topic_id": "t_abb95614339d",
+      "item_sha256": "78fa4503037572edd216348ba88c8fd5418bd1776b5783ebd944290891d54a07",
+      "locator": "private review:questions:m5_clin_026"
     }
   }
 }

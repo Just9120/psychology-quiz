@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-08T13:58:44.742512+00:00",
+  "captured_at": "2026-10-08T14:20:05.615854+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -12,10 +12,10 @@
   "known_holds": 321,
   "observation_basis": "saved_inputs",
   "coverage": {
-    "tracked_sources": 157,
-    "untracked_files": 268,
+    "tracked_sources": 164,
+    "untracked_files": 261,
     "source_metadata": {
-      "current": 157
+      "current": 164
     },
     "unmapped_published_questions": 48,
     "lessons": [
@@ -823,7 +823,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 1,
+          "theory": 2,
           "glossary": 0,
           "case": 0
         },
@@ -865,7 +865,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 2,
+          "theory": 3,
           "glossary": 0,
           "case": 0
         },
@@ -1089,7 +1089,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 2,
+          "theory": 3,
           "glossary": 0,
           "case": 0
         },
@@ -1712,18 +1712,116 @@
         "glossary_terms": null,
         "notes": null,
         "notes_state": "UNSET"
+      },
+      {
+        "id": "t_0faeaab9c732",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_2fecd8a4c446",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_3ef6769f0fe5",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_be63ccbdf1d7",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_5f8628e3fbce",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_abb95614339d",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_fded5a914d5a",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
       }
     ],
     "prepared_notes_unmapped": 4,
     "unmapped_published_glossary": 81,
     "unreleased_lessons": {
-      "total": 47,
+      "total": 40,
       "processing": {
-        "conflict_review": 46,
+        "conflict_review": 39,
         "processed": 1
       },
-      "metadata_current": 47,
-      "known_holds": 46
+      "metadata_current": 40,
+      "known_holds": 39
     }
   }
 }
