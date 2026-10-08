@@ -4851,6 +4851,18 @@
       "topic_id": "t_c11dd0b8d422",
       "item_sha256": "36fb0c2e789daecc2d2e16f65eaf3bcb990da8d0e9f9fb427f00dd537dc298b9",
       "locator": "private review:questions:m2_quant_006"
+    },
+    "afff8bc7969c8722c7e81ce8f1cb0b4e0dd789db5263af44040b95dd21e5dd05": {
+      "external_id": "m6_org_009",
+      "topic_id": "t_368865518bf8",
+      "item_sha256": "40ea693f6733bab8054ed1aaacf504b4e0d848daaa41524c51f4f6666c4e821c",
+      "locator": "private review:questions:m6_org_009"
+    },
+    "3b076ff2a6ebe453d3083114f5bc37959c63dcbdb2c5e550f055fd42214bbf6d": {
+      "external_id": "m6_org_010",
+      "topic_id": "t_a4d66c776fde",
+      "item_sha256": "b4a9b04b029235366bda56900fa5473feac093dce1be18c7cb893bb82d22c326",
+      "locator": "private review:questions:m6_org_010"
     }
   }
 }

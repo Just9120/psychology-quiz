@@ -18086,6 +18086,44 @@
       "issues": [],
       "note": "Essential sampling design absent from current457 bank. Safe exact18031:18289 supports random start/fixed interval; no held periodicity/stratification wording used. Independent Statistics Canada53-57 and67 support distinction from SRS. No whole-lesson approval.",
       "sources": []
+    },
+    "questions:m6_org_009": {
+      "item_sha256": "40ea693f6733bab8054ed1aaacf504b4e0d848daaa41524c51f4f6666c4e821c",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Essential three-model-component distinction absent from current459 bank. Exact22369:22602 reused verified transcript; source universal zero-formula and workplace examples excluded. Own hypothetical case tests construct distinction only; publisher definition supplemental, no empirical efficacy approval.",
+      "sources": []
+    },
+    "questions:m6_org_010": {
+      "item_sha256": "b4a9b04b029235366bda56900fa5473feac093dce1be18c7cb893bb82d22c326",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Essential artifacts/espoused-values distinction absent from current459 bank; priororg007 concerns training evaluation. Exact safe lecture levels/exposed norms only, employer-specific claims and hidden-belief universality excluded. All8 source holds retained, Handy layers/70percent/ROI/universalresistance notpublished.",
+      "sources": []
     }
   }
 }
