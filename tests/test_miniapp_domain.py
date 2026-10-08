@@ -68,3 +68,11 @@ def test_unknown_or_duplicate_runtime_config_is_preserved(tmp_path, config):
     with pytest.raises(ValueError):
         apply(path, tmp_path / 'backup')
     assert path.read_text() == config
+
+def test_cutover_shell_syntax_on_linux_delivery_platform():
+    import subprocess
+    import sys
+    if sys.platform != 'linux':
+        pytest.skip('Linux Bash delivery check runs in required CI')
+    result = subprocess.run(['bash', '-n', 'scripts/miniapp_domain_cutover.sh'], capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
