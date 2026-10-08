@@ -1125,6 +1125,17 @@
         "notes": null,
         "notes_state": "UNSET"
       }
-    ]
+    ],
+    "prepared_notes_unmapped": 4,
+    "unmapped_published_glossary": 81,
+    "unreleased_lessons": {
+      "total": 89,
+      "processing": {
+        "conflict_review": 88,
+        "processed": 1
+      },
+      "metadata_current": 89,
+      "known_holds": 88
+    }
   }
 }
