@@ -4,8 +4,8 @@ const backend = 'http://127.0.0.1:8085'
 const email = 'owner@example.test', password = 'A synthetic browser passphrase'
 
 async function readingCount(page: Page, topic?: string) {
-  const catalog = await (await page.request.get('/web/literature/catalog')).json() as { works: { entries: { topic_id: string }[] }[] }
-  return catalog.works.filter(work => !topic || work.entries.some(entry => entry.topic_id === topic)).length
+  const catalog = await (await page.request.get('/web/literature/catalog')).json() as { works: { entries: { reading_topics: { id: string }[] }[] }[] }
+  return catalog.works.filter(work => !topic || work.entries.some(entry => entry.reading_topics.some(item => item.id === topic))).length
 }
 
 test('owner can select a period for deidentified learning statistics', async ({ page }) => {
@@ -55,15 +55,23 @@ test('short desktop viewport keeps sidebar navigation and logout reachable', asy
   expect((await page.request.get('/web/quiz/state')).status()).toBe(401)
 })
 
-test('reading catalog shares a work status across lists, lost save and reload', async ({ page }, testInfo) => {
+test('reading catalog shares a work status across themes, lost save and reload', async ({ page }, testInfo) => {
   await fresh(page)
   await navigate(page, 'Литература')
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
-  await page.getByLabel('Дисциплина литературы').selectOption('fiziologiya_cheloveka')
-  await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, 'fiziologiya_cheloveka')}`)).toBeVisible()
-  await page.locator('.literature-title').first().click()
+  const catalog = await (await page.request.get('/web/literature/catalog')).json() as { works: { title: string; entries: { reading_topics: { id: string }[] }[] }[] }
+  const work = catalog.works.find(item => item.entries[0].reading_topics.length > 1
+    && catalog.works.filter(other => other.title === item.title).length === 1)!
+  expect(work, 'a published work spans independent reading themes').toBeTruthy()
+  const [first, second] = work.entries[0].reading_topics.map(item => item.id)
+  await page.getByLabel('Тема', { exact: true }).selectOption(first)
+  await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, first)}`)).toBeVisible()
+  await page.locator('.reading-order summary').click()
+  await expect(page.locator('.reading-order ol')).toBeVisible()
+  await page.locator('.literature-title').filter({ hasText: work.title }).click()
   const title = await page.locator('.literature-detail h2').innerText()
-  const first = await page.getByLabel('Учебный список').inputValue()
+  await expect(page.getByLabel('Учебный список')).toHaveCount(0)
+  await expect(page.getByLabel('Учебная тема')).toHaveCount(0)
   await expect(page.getByLabel('Прочитано, %')).toHaveCount(0)
   await page.getByLabel('Статус чтения').selectOption('in_progress')
   await page.route('**/web/literature/progress', async route => { await route.fetch(); await route.abort('failed') }, { times: 1 })
@@ -71,12 +79,16 @@ test('reading catalog shares a work status across lists, lost save and reload', 
   await expect(page.getByLabel('Статус чтения')).toBeDisabled()
   await page.getByRole('button', { name: 'Обновить каталог и прогресс' }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveValue('in_progress')
-  await page.getByLabel('Учебный список').selectOption({ index: 1 })
+  await page.getByRole('button', { name: '← К списку литературы' }).click()
+  await page.getByLabel('Тема', { exact: true }).selectOption(second)
+  await page.locator('.literature-title').filter({ hasText: title }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveValue('in_progress')
   await page.getByLabel('Статус чтения').selectOption('read')
   await page.getByRole('button', { name: 'Сохранить чтение' }).click()
   await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
-  await page.getByLabel('Учебный список').selectOption(first)
+  await page.getByRole('button', { name: '← К списку литературы' }).click()
+  await page.getByLabel('Тема', { exact: true }).selectOption(first)
+  await page.locator('.literature-title').filter({ hasText: title }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveValue('read')
   await page.getByText('Библиографическая запись', { exact: true }).click()
   await page.evaluate(() => window.scrollTo(0, 0))
@@ -84,8 +96,7 @@ test('reading catalog shares a work status across lists, lost save and reload', 
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
   await page.reload()
   await navigate(page, 'Литература')
-  await page.getByRole('button', { name: title, exact: true }).click()
-  await page.getByLabel('Учебный список').selectOption(first)
+  await page.locator('.literature-title').filter({ hasText: title }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveValue('read')
   expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0)
 })

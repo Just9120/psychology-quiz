@@ -347,7 +347,9 @@ def build_literature_topics_response(
             _log_locked_db("/miniapp/literature/topics", started_at)
             return _database_busy_response()
         raise
-    return _json(HTTPStatus.OK, {"ok": True, "literature_topics": list_literature_topic_payloads(user_states)})
+    from app.literature import list_reading_topic_payloads
+    return _json(HTTPStatus.OK, {"ok": True, "literature_topics": list_literature_topic_payloads(user_states),
+                               "reading_topics": list_reading_topic_payloads()})
 
 
 def build_literature_items_response(

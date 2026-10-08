@@ -228,7 +228,9 @@ export type LiteratureEntry = {
   importance_source: 'teacher' | 'agent' | null;
   source: { citation: string };
   metadata_warnings: string[]; user_state: ReadingState | null;
+  reading_topics?: { id: string; title: string }[];
+  reading_level?: string; prerequisites?: string[]; why_read?: string;
   curriculum_topics?: { id: string; title: string }[];
 }
 export type LiteratureWork = { work_id: string; title: string; authors: string[]; type: string; book_search?: { query: string; url: string }; access_links: LiteratureAccessLink[]; entries: LiteratureEntry[] }
-export type LiteratureCatalog = { ok: true; works: LiteratureWork[]; topics: { topic_id: string; title: string; module: string; modules?: string[] }[] }
+export type LiteratureCatalog = { ok: true; reading_topics?: { topic_id: string; title: string }[]; works: LiteratureWork[]; topics: { topic_id: string; title: string; module: string; modules?: string[] }[] }

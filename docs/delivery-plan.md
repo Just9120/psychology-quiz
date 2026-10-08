@@ -1,6 +1,32 @@
 # Delivery Plan
 
-## Current Goal — TOPIC-HOMEWORK-20261008
+## Current work — LITERATURE-TOPICS-20261008
+
+Основание: прямое поручение владельца08.10.2026 — самостоятельные темы и книги по ним, без занятий; видимая рекомендуемая последовательность чтения; кроме поискового запроса — подтверждённые карточки Литрес, MyBook и Яндекс Книг. Это уточнение AC-LIT-06/07/10 и зависимых AC-LIT-02/03/04. Новая встроенная Goal не запрошена; предыдущая завершена.
+
+Baseline origin/main `ee12d9eff8e85884cf08e04a8876d5b251923592`; branch `codex/literature-topics-links-20261008`, base тот же, отдельный существующий checkout `psychology-quiz-privacy-20261007`. Primary dirty и private inputs/old broken worktree сохранены. Required checks текущего main: pwa-client и validate-and-smoke-test; открытых PR на начало нет.
+
+Результат/DoD: единая самостоятельная тематическая классификация опубликованных произведений в PWA/Mini App/Telegram, без фильтров занятий и выбора учебного списка в карточке; произведение не дублируется в теме. План чтения показывает проверенную подготовку, этапы и объяснения, сохраняя различие агентской рекомендации и преподавательского приоритета. Подтверждённые ссылки ведут на точное произведение/формат; неизвестные условия доступа не выдаются за бесплатный полный текст или подписку. Existing work/entry IDs, source publication gates и личные отметки сохраняются. Один основной PR, required CI/review, merge и applicable exact VPS/PWA/Cloudflare delivery.
+
+Non-goals: повторное чтение425 материалов Drive, переписывание источников/подписей, новые произведения и неподтверждённое объединение изданий, новые подписки/API/RAG/Vault, изменение внешних domain/auth/settings. Поисковый запрос остаётся отдельным способом найти неподтверждённую карточку; отсутствие найденной ссылки не доказывает отсутствие книги у провайдера.
+
+| AC/риск | Проверка/ожидаемый результат | Canonical команда/tool и cwd | Environment/этап | Gate |
+| --- | --- | --- | --- | --- |
+| LIT-06 / темы | Все опубликованные work IDs покрыты независимыми темами; навигация трёх клиентов без занятий/модулей, dedup и пустые фильтры | Catalog validators, targeted literature/chat/component tests; root/pwa | Local до push, full CI | REQUIRED |
+| LIT-06 / последовательность | Подготовка раньше зависимой книги; неизвестная/циклическая зависимость не создаёт рекомендацию; статус и why сейчас сохранены | Existing next-step tests и содержательные route regressions; root/pwa | Local/CI | REQUIRED |
+| LIT-07/10 / ссылки | Exact official bibliographic cards, allowlisted host/path/format; excerpt не free full book; поиск отдельно | Official provider readback, access validator/tests; root | Finite research, local/CI | REQUIRED |
+| LIT-02/03 / state | Изменение одного произведения синхронно во всех темах/клиентах; actor isolation, lost-confirmation readback | Existing API/work-state/native PostgreSQL regressions | Local/CI | REQUIRED |
+| Integration/delivery | Both builds, generated assets, publication/privacy validators, current-revision required checks; exact runtime/static and HTTPS smoke | README scripts/CI/CD procedures | До merge / production после merge | REQUIRED |
+
+Checkpoint08.10.2026: реализовано по коду 3/3 затронутых AC-LIT-06/07/10. 319 записей/281 произведение классифицированы по22 самостоятельным темам; source-list IDs/publication fingerprints и личные отметки сохранены. Добавлены25 прямых карточек для14 произведений; всего43 ссылки для21 произведения. Проверены название/автор/формат официальных карточек; подтверждённые способы доступа помечены, остальные явно неизвестны. Обновлённая редакция «Мозг и его потребности2.0», пересказы и неоднозначные результаты не подставлены вместо исходных книг. Coverage ссылок не означает полную проверку доступности всех281 работ у каждого провайдера. Drive повторно не читался; source/research receipts остаются локально, raw logs в Git не добавляются.
+
+Local Evidence PASS08.10.2026, dirty diff этой branch/baseee12:80 targeted backend cases (catalog/chat/API/next-step/work state, единственный устаревший snapshot перечня offers обновлён и повторно проверен),38 component cases, typecheck и обе сборки. Browser PASS: чтение между самостоятельными темами, lost-confirmation readback/reload и внешние text/audio links на desktop/mobile — четыре сценария; провайдеры в E2E перехвачены synthetic fixture, реальная покупка не выполнялась. Public asset/content audit PASS:15 файлов,1033 published items,519 known sources с сохранённым private inventory. Self-review: publication gates не ослаблены, DB migration отсутствует, legacy API/callback совместимость сохраняется, retired lesson callbacks предлагают обновить навигацию. Required checks свежей protection — pwa-client и validate-and-smoke-test, strict=true, approvals=0, admin enforcement=true; GitHub connector не читает protection, подтверждение получено через действующий gh account.
+
+Tasks: [x] самостоятельные темы и dedup трёх клиентов; [x] видимый порядок/подготовка; [x] конечная проверка official links; [x] regression checks, builds и self-review; [ ] PR/current-revision CI/merge; [ ] exact VPS/PWA/Cloudflare delivery и bounded smoke. Следующий шаг — initial push и один PR; CI/review/CD PENDING, успех не предсказывается. Основной dirty checkout владельца и private inputs/old broken worktree сохраняются.
+
+## Previous Goal — TOPIC-HOMEWORK-20261008 (DONE)
+
+Итог восстановлен по primary records: PR339 merged `ee12d9eff8e85884cf08e04a8876d5b251923592`; PR CI37828232856, main CI37828906802 и CD37829538498/job113490978837 PASS. Bot/API image sha256:264ba2f318d3aa4e32a85c0daef01f16723f9a7e50077de578c77564911d4785; совместимый PWA artifact92b3 и11 public assets PASS. Cloudflare build5e2c32a5-6f62-4066-9781-8dd95c1e137d PASS. Owner cutover наee12 подтвердил MINIAPP_URL_AND_CORS_OK, readiness/auth/version smoke и MINIAPP_DOMAIN_OK, record psychology-miniapp-domain-Z9h96Ked. Встроенная Goal завершена, собственные ветки удалены; ниже сохранён прежний pre-merge checkpoint.
 
 Основание: владелец указал недостаточную идентификацию домашних заданий и замену пользовательских модулей конкретными темами; поручение «Делай»08.10.2026. Встроенная новая Goal active; предыдущая завершена.
 

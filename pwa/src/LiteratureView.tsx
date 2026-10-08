@@ -1,5 +1,6 @@
 import { BookOffers } from './BookOffers'
 import { useState } from 'react'
+import { ReadingOrder } from './ReadingOrder'
 import { ReadingSummary } from './ReadingSummary'
 import { BookSearch } from './BookSearch'
 import { api, ApiError } from './api'
@@ -14,7 +15,6 @@ const importanceSources = { teacher: 'приоритет преподавате�
 export function LiteratureView({ initial, busy, run }: { initial: LiteratureCatalog; busy: boolean; run: (operation: () => Promise<void>) => Promise<void> }) {
   const [catalog, setCatalog] = useState(initial)
   const [topic, setTopic] = useState('')
-  const [lesson, setLesson] = useState('')
   const [statusFilter, setStatusFilter] = useState<ReadingStatus | ''>('')
   const [workId, setWorkId] = useState<string | null>(null)
   const [entryId, setEntryId] = useState<string | null>(null)
@@ -23,16 +23,18 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
   const [saved, setSaved] = useState(false)
   const work = catalog.works.find(item => item.work_id === workId)
   const entry = work?.entries.find(item => item.id === entryId)
-  const inScope = (link: LiteratureEntry) => (!topic || link.topic_id === topic)
-    && (!lesson || (lesson === 'general' ? !link.curriculum_topics?.length : link.curriculum_topics?.some(item => item.id === lesson)))
-  const lessons = [...new Map(catalog.works.flatMap(item => item.entries)
-    .filter(link => (!topic || link.topic_id === topic))
-    .flatMap(link => link.curriculum_topics ?? []).map(item => [item.id, item])).values()]
+  const readingTopics = catalog.reading_topics ?? catalog.topics
+  const inScope = (link: LiteratureEntry) => !topic || (link.reading_topics
+    ? link.reading_topics.some(item => item.id === topic) : link.topic_id === topic)
   const matches = (link: LiteratureEntry) => inScope(link)
     && (!statusFilter || (link.user_state?.reading_status ?? 'not_started') === statusFilter)
   const visible = catalog.works.filter(item => item.entries.some(matches))
   const summaryItems = catalog.works.flatMap(item => item.entries.filter(inScope).map(link => ({ ...link, work_id: item.work_id, title: item.title })))
 
+  function openEntry(id: string) {
+    const selectedWork = catalog.works.find(item => item.entries.some(link => link.id === id))
+    if (selectedWork) { setWorkId(selectedWork.work_id); select(selectedWork.entries.find(link => link.id === id)!) }
+  }
   function select(link: LiteratureEntry) {
     setEntryId(link.id); setStatus(link.user_state?.reading_status ?? 'not_started')
     setSaved(false)
@@ -59,17 +61,14 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
   }
   return <section className="page-width literature-page">
     <span className="eyebrow">ЧИТАТЬ И ОСМЫСЛЯТЬ</span><h1>Литература</h1>
-    <p className="lead">Учебные списки и ваш прогресс чтения.</p>
-    <p className="muted">Проверены библиографические записи. Доступность полных текстов и содержание работ пока не проверены.</p>
+    <p className="lead">Книги по темам и ваш прогресс чтения.</p>
+    <p className="muted">Выберите тему или откройте рекомендуемую последовательность чтения.</p>
     <button className="text-button" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог и прогресс</button>
     {work && entry ? <article className="panel literature-detail">
       <button className="text-button" disabled={busy || uncertain} onClick={() => { setWorkId(null); setSaved(false) }}>← К списку литературы</button>
       <h2>{work.title}</h2><p>{work.authors.length ? work.authors.join(', ') : 'Автор не указан в источнике'}</p>
-      <label className="field">Учебный список<select value={entry.id} disabled={busy || uncertain} onChange={event => select(work.entries.find(link => link.id === event.target.value)!)}>
-        {work.entries.map(link => <option key={link.id} value={link.id}>{link.topic_title}</option>)}
-      </select></label>
-      {work.entries.length > 1 && <p className="muted">Эта книга встречается в нескольких списках. Статус чтения общий для всех её списков.</p>}
-      <p className="eyebrow">{entry.topic_title}</p>
+      <p className="eyebrow">{entry.reading_topics?.map(item => item.title).join(' · ') ?? entry.topic_title}</p>
+      <p>{entry.why_read}</p>
       <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       <p>Год: {entry.year ?? 'не указан'}</p>
       <BookOffers links={work.access_links} />
@@ -86,19 +85,17 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
         {saved && <p role="status">Прогресс чтения сохранён.</p>}
       </form>
     </article> : <>
-      <label className="field literature-filter">Дисциплина литературы<select value={topic} disabled={busy} onChange={event => { setTopic(event.target.value); setLesson('') }}><option value="">Все дисциплины</option>{catalog.topics.map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
-      <label className="field literature-filter">Учебная тема<select value={lesson} disabled={busy} onChange={event => setLesson(event.target.value)}><option value="">Все темы и общие книги</option><option value="general">Общие книги дисциплины</option>{lessons.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}</select></label>
+      <label className="field literature-filter">Тема<select aria-label="Тема" value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{readingTopics.map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
       <label className="field literature-filter">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(statuses).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
-      <ReadingSummary showActions={!statusFilter} allItems={catalog.works.flatMap(work => work.entries)} items={summaryItems} busy={busy} onSelect={id => {
-        const selectedWork = catalog.works.find(item => item.entries.some(link => link.id === id))
-        if (selectedWork) { setWorkId(selectedWork.work_id); select(selectedWork.entries.find(link => link.id === id)!) }
-      }} />
+      <ReadingSummary showActions={!statusFilter} allItems={catalog.works.flatMap(work => work.entries)} items={summaryItems} busy={busy} onSelect={openEntry} />
+      <ReadingOrder items={summaryItems} allItems={catalog.works.flatMap(item => item.entries.map(link => ({ ...link, work_id: item.work_id, title: item.title })))} busy={busy} onSelect={openEntry} />
       <p className="muted" role="status">Работ по фильтру: {visible.length}</p>
       {visible.length ? <div className="literature-list">{visible.map(item => {
         const links = item.entries.filter(matches)
         return <article className="panel literature-card" key={item.work_id}><h2><button className="text-button literature-title" disabled={busy} onClick={() => { setWorkId(item.work_id); select(links[0]) }}>{item.title}</button></h2>
           <p>{item.authors.length ? item.authors.join(', ') : 'Автор не указан в источнике'}</p>
-          {links.map(link => <p className="muted reading-association" key={link.id}>{link.topic_title} · {statuses[link.user_state?.reading_status ?? 'not_started']}</p>)}
+          <p className="muted">{statuses[links[0].user_state?.reading_status ?? 'not_started']}</p>
+          <p className="muted">{links[0].reading_topics?.map(link => link.title).join(' · ')}</p>
         </article>
       })}</div> : <div className="panel empty-state"><h2>Список пока пуст</h2><p>Попробуйте выбрать другую тему или обновить каталог.</p></div>}
     </>}

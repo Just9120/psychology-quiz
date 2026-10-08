@@ -25,6 +25,24 @@
           "subscription"
         ],
         "access_review": "Audiobook-specific offer block shows a priced purchase and listening by subscription. A trial/subscription promotion is not unconditional free audio."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/lev-vygotskij/myshlenie-i-rech/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/Pzvjabyc",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
       }
     ],
     "lit_0199865ad8d23ecb": [
@@ -36,6 +54,15 @@
         "checked_at": "2026-10-03",
         "access_modes": [],
         "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/TzNJn23h",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
       }
     ],
     "lit_819808cf97ad8eb5": [
@@ -56,6 +83,15 @@
         "checked_at": "2026-10-03",
         "access_modes": [],
         "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/yTCndCWN",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
       }
     ],
     "gippenreiter_vvedenie_v_obschuyu_psihologiyu": [
@@ -79,6 +115,37 @@
         "checked_at": "2026-10-03",
         "access_modes": [],
         "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/yuliya-gippenrejter/vvedenie-v-obshuyu-psihologiyu-kurs-lekcij/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/yuliya-gippenrejter/vvedenie-v-obshuyu-psihologiyu/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/JIUJ6mpq",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
       }
     ],
     "nurkova_berezanskaya_obschaya_psihologiya": [
@@ -124,6 +191,33 @@
         "checked_at": "2026-10-03",
         "access_modes": [],
         "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/irvin-yalom/dar-psihoterapii-3/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/irvin-yalom/dar-psihoterapii-2/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/Gk6cUMrt",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
       }
     ],
     "lit_consult_lecture_01": [
@@ -197,6 +291,175 @@
         "checked_at": "2026-10-03",
         "access_modes": [],
         "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+      }
+    ],
+    "lit_kahneman_thinking_fast_slow": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/daniel-kaneman/dumaj-medlenno-reshaj-bystro/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/ApOv8ISe",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/daniel-kaneman/dumay-medlenno-reshay-bystro-6444517/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms purchase and subscription. An excerpt or trial is not free full access."
+      }
+    ],
+    "psf_sapolsky_psihologiya_stressa": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/robert-sapolski-2/psihologiya-stressa-2/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      }
+    ],
+    "lit_677867857cce3e89": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/gBHWtHrb",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      }
+    ],
+    "psf_van_der_kolk_telo_pomnit_vse": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/Egj6KpUn",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      }
+    ],
+    "lit_levine_waking_tiger": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/piter-a-levin/probuzhdenie-tigra-iscelenie-travmy-legendarnyy-bestseller-67897689/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/piter-levin/probuzhdenie-tigra-iscelenie-travmy-legendarnyj-be/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/b1jvINVo",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      }
+    ],
+    "lit_covey_seven_habits": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/stiven-kovi/sem-navykov-vysokoeffektivnyh-lyudej-moshnye-instr/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      }
+    ],
+    "lit_kreisman_straus_hate_you_dont_leave": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/dzherold-kreysman-12/ya-nenavizhu-tebya-tolko-ne-brosay-menya-pogranichnye-27429603/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms purchase. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/dzherold-krejsman/ya-nenavizhu-tebya-tolko-ne-brosaj-menya-pogranich/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      }
+    ],
+    "lit_3c68e7fa4c7ec0ba": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/M1wF3emq",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      }
+    ],
+    "lit_burlachuk_psychodiagnostics": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/leonid-burlachuk/psihodiagnostika-uchebnik-dlya-vuzov-181636/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms purchase and subscription. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/leonid-burlachuk/psihodiagnostika-uchebnik-dlya-vuzov-72780217/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-08",
+        "access_modes": [],
+        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
       }
     ]
   }

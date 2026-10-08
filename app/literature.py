@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlencode, urlsplit
 from app.content_publication import load_policy
+from app.literature_topics import reading_topics_for, load_reading_topics
 
 ROOT = Path(__file__).resolve().parents[1]
 LITERATURE_DIR = ROOT / "content/literature"
@@ -51,6 +52,11 @@ def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
         return parsed.netloc == "www.litres.ru" and parsed.path.startswith(prefix)
     if provider == "Юрайт":
         return fmt == "text" and parsed.netloc == "urait.ru" and re.fullmatch(r"/bcode/[0-9]+", parsed.path) is not None
+    if provider == "MyBook":
+        return parsed.netloc == "mybook.ru" and re.fullmatch(r"/author/[a-z0-9-]+/[a-z0-9-]+/", parsed.path) is not None
+    if provider == "Яндекс Книги":
+        kind = "books" if fmt == "text" else "audiobooks"
+        return parsed.netloc == "books.yandex.ru" and re.fullmatch(r"/" + kind + r"/[A-Za-z0-9]+/?", parsed.path) is not None
     return False
 
 
@@ -185,6 +191,7 @@ def _published_literature_items(directory: Path) -> tuple[dict[str, Any], ...]:
                 continue
             item = _public_literature_item(entry)
             item["curriculum_topics"] = literature_curriculum_topics(entry)
+            item["reading_topics"] = reading_topics_for(item["work_id"])
             item["access_links"] = access_links.get(item["work_id"], [])
             item["book_search"] = literature_search(item)
             items.append(item)
@@ -231,3 +238,13 @@ def list_literature_topic_payloads(user_states: dict[str, dict[str, Any]] | None
             payload["user_reading_status_counts"] = dict(sorted(reading_status_counts.items()))
         payloads.append(payload)
     return sorted(payloads, key=lambda payload: (int(topics.get(str(payload["topic_id"]), {}).get("order") or 0), str(payload["topic_id"])))
+
+
+def list_reading_topic_payloads() -> list[dict[str, Any]]:
+    """Counts are works, independent of duplicate source-list associations."""
+    topics, _ = load_reading_topics()
+    items = load_literature_items()
+    return [{"topic_id": topic["id"], "title": topic["title"], "item_count": len(works)}
+            for topic in topics
+            if (works := {item["work_id"] for item in items
+                          if any(link["id"] == topic["id"] for link in item["reading_topics"])})]

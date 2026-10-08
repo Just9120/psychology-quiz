@@ -331,6 +331,14 @@ def validate() -> list[str]:
         errors.append(f"Invalid literature access catalog: {type(error).__name__}")
 
     errors.extend(validate_prerequisite_graph(entries))
+    from app.literature_topics import load_reading_topics
+    try:
+        _, reading_works = load_reading_topics()
+        expected_works = {entry["work_id"] for entry in entries.values()}
+        if set(reading_works) != expected_works:
+            errors.append("Reading topics must cover exactly all canonical literature works")
+    except (OSError, ValueError, TypeError, KeyError) as error:
+        errors.append(f"Invalid reading topics catalog: {type(error).__name__}")
     return errors
 
 

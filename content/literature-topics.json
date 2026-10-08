@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "topics": [
+    {
+      "id": "reading_basics",
+      "title": "Основы психологии"
+    },
+    {
+      "id": "reading_history",
+      "title": "История психологии и научных идей"
+    },
+    {
+      "id": "reading_brain",
+      "title": "Мозг, нервная система и физиология"
+    },
+    {
+      "id": "reading_cognition",
+      "title": "Мышление, память и познание"
+    },
+    {
+      "id": "reading_emotions",
+      "title": "Эмоции и переживания"
+    },
+    {
+      "id": "reading_stress",
+      "title": "Стресс и психологическая травма"
+    },
+    {
+      "id": "reading_personality",
+      "title": "Личность и индивидуальные различия"
+    },
+    {
+      "id": "reading_development",
+      "title": "Развитие человека и привязанность"
+    },
+    {
+      "id": "reading_family",
+      "title": "Семья, отношения и воспитание"
+    },
+    {
+      "id": "reading_social",
+      "title": "Общение, группы и влияние"
+    },
+    {
+      "id": "reading_counseling",
+      "title": "Психологическое консультирование"
+    },
+    {
+      "id": "reading_therapy",
+      "title": "Подходы и методы психотерапии"
+    },
+    {
+      "id": "reading_clinical",
+      "title": "Клиническая психология"
+    },
+    {
+      "id": "reading_diagnostics",
+      "title": "Психодиагностика"
+    },
+    {
+      "id": "reading_research",
+      "title": "Методы психологических исследований"
+    },
+    {
+      "id": "reading_education",
+      "title": "Образование и школьная среда"
+    },
+    {
+      "id": "reading_organization",
+      "title": "Организации, управление и лидерство"
+    },
+    {
+      "id": "reading_self_regulation",
+      "title": "Мотивация и саморегуляция"
+    },
+    {
+      "id": "reading_ethics",
+      "title": "Профессиональная этика"
+    },
+    {
+      "id": "reading_language",
+      "title": "Язык и речь"
+    },
+    {
+      "id": "reading_fiction",
+      "title": "Художественная литература для осмысления"
+    },
+    {
+      "id": "reading_reference",
+      "title": "Словари и справочники"
+    }
+  ],
+  "works": {
+    "gippenreiter_vvedenie_v_obschuyu_psihologiyu": [
+      "reading_basics"
+    ],
+    "nurkova_berezanskaya_obschaya_psihologiya": [
+      "reading_basics"
+    ],
+    "vygotsky_myshlenie_i_rech": [
+      "reading_cognition",
+      "reading_language"
+    ],
+    "zhdan_istoriya_psihologii": [
+      "reading_history"
+    ],
+    "myers_psihologiya": [
+      "reading_basics"
+    ],
+    "rubinstein_osnovy_obschey_psihologii": [
+      "reading_basics"
+    ],
+    "lit_graham_resilience": [
+      "reading_stress",
+      "reading_self_regulation"
+    ],
+    "lit_ekman_psychology_of_emotions": [
+      "reading_emotions"
+    ],
+    "lit_kahneman_thinking_fast_slow": [
+      "reading_cognition"
+    ],
+    "psf_sapolsky_psihologiya_stressa": [
+      "reading_stress",
+      "reading_brain"
+    ],
+    "fch_gazzaniga_kto_za_glavnogo": [
+      "reading_brain"
+    ],
+    "fch_dubynin_mozg_i_ego_potrebnosti": [
+      "reading_brain"
+    ],
+    "fch_kandel_v_poiskah_pamyati": [
+      "reading_brain"
+    ],
+    "fch_carter_kak_rabotaet_mozg": [
+      "reading_brain"
+    ],
+    "fch_martynov_mozg": [
+      "reading_brain"
+    ],
+    "fch_nicholls_martin_ot_neirona_k_mozgu": [
+      "reading_brain"
+    ],
+    "fch_pavlov_dvadtsatiletniy_opyt": [
+      "reading_brain"
+    ],
+    "fch_ramachandran_mozg_rasskazyvaet": [
+      "reading_brain"
+    ],
+    "fch_swaab_my_eto_nash_mozg": [
+      "reading_brain"
+    ],
+    "fch_sergeev_dubynin_telo_cheloveka": [
+      "reading_brain"
+    ],
+    "fch_simonov_motivirovanny_mozg": [
+      "reading_brain"
+    ],
+    "fch_simonov_emotsionalny_mozg": [
+      "reading_brain"
+    ],
+    "fch_ukhtomsky_dominanta": [
+      "reading_brain"
+    ],
+    "fch_shulgovsky_neirofiziologiya": [
+      "reading_brain"
+    ],
+    "fch_yakutenko_volya_i_samokontrol": [
+      "reading_brain"
+    ],
+    "lit_sechenov_reflexes_of_brain": [
+      "reading_brain"
+    ],
+    "lit_bulgakov_heart_of_a_dog": [
+      "reading_fiction"
+    ],
+    "lit_huizinga_homo_ludens": [
+      "reading_social"
+    ],
+    "lit_selye_stress_without_distress": [
+      "reading_stress"
+    ],
+    "lit_levine_waking_tiger": [
+      "reading_stress"
+    ],
+    "lit_ilyin_individual_differences": [
+      "reading_personality",
+      "reading_brain"
+    ],
+    "lit_consult_lecture_01": [
+      "reading_personality",
+      "reading_therapy"
+    ],
+    "lit_danilova_krylova_higher_nervous_activity": [
+      "reading_brain"
+    ],
+    "lit_gordon_effective_parent_training": [
+      "reading_family"
+    ],
+    "lit_course_mention_selye_stress_is_life": [
+      "reading_stress"
+    ],
+    "psf_danilova_psihofiziologiya": [
+      "reading_brain"
+    ],
+    "psf_ilyin_psihofiziologiya_sostoyaniy": [
+      "reading_brain"
+    ],
+    "psf_aleksandrov_psihofiziologiya": [
+      "reading_brain"
+    ],
+    "psf_van_der_kolk_telo_pomnit_vse": [
+      "reading_stress"
+    ],
+    "psf_kabat_zinn_kuda_by_ty_ni_shel": [
+      "reading_self_regulation",
+      "reading_stress"
+    ],
+    "lit_nosov_mishkina_kasha": [
+      "reading_fiction"
+    ],
+    "lit_dahl_explanatory_dictionary": [
+      "reading_reference",
+      "reading_language"
+    ],
+    "lit_tereshonok_levina_psychology_pedagogy_part1": [
+      "reading_basics",
+      "reading_education"
+    ],
+    "lit_meshcheryakov_zinchenko_big_dictionary": [
+      "reading_reference"
+    ],
+    "lit_hock_forty_studies": [
+      "reading_research"
+    ],
+    "lit_lorenz_on_aggression": [
+      "reading_emotions",
+      "reading_social"
+    ],
+    "lit_bacon_new_organon": [
+      "reading_history",
+      "reading_research"
+    ],
+    "lit_kuhn_structure_scientific_revolutions": [
+      "reading_history",
+      "reading_research"
+    ],
+    "lit_mill_on_liberty": [
+      "reading_history",
+      "reading_social"
+    ],
+    "lit_feyerabend_against_method": [
+      "reading_history",
+      "reading_research"
+    ],
+    "lit_maslow_psychology_being": [
+      "reading_personality",
+      "reading_therapy"
+    ],
+    "lit_4f9768a778fe2a01": [
+      "reading_cognition"
+    ],
+    "lit_25a5d2f1c7ba76e1": [
+      "reading_clinical",
+      "reading_cognition"
+    ],
+    "lit_a29dd1990e36a236": [
+      "reading_therapy"
+    ],
+    "lit_ca9234874710e30d": [
+      "reading_therapy"
+    ],
+    "lit_08357e2b580707a7": [
+      "reading_therapy"
+    ],
+    "lit_d4fe5859f2ce2c33": [
+      "reading_history"
+    ],
+    "lit_d9803abbb663e67c": [
+      "reading_basics"
+    ],
+    "lit_c0537b6dc885ea1f": [
+      "reading_therapy"
+    ],
+    "lit_6190d3b37fdeeab5": [
+      "reading_research"
+    ],
+    "lit_93082f75dd37021b": [
+      "reading_therapy"
+    ],
+    "lit_2d2ab1a9e58aaa66": [
+      "reading_research"
+    ],
+    "lit_510a576872873c35": [
+      "reading_therapy"
+    ],
+    "lit_cd5ce1720bc8bc2b": [
+      "reading_therapy"
+    ],
+    "lit_398a49d30e4ed132": [
+      "reading_clinical"
+    ],
+    "lit_2bc65fc1b8868a95": [
+      "reading_fiction"
+    ],
+    "lit_7e152869797af503": [
+      "reading_therapy"
+    ],
+    "lit_13f7ecd9b94275d0": [
+      "reading_basics"
+    ],
+    "lit_anna_freud_ego_defence": [
+      "reading_therapy"
+    ],
+    "lit_kagan_meanings_psychotherapy": [
+      "reading_therapy"
+    ],
+    "lit_maslow_new_reaches": [
+      "reading_personality"
+    ],
+    "lit_frankl_man_search_meaning": [
+      "reading_therapy"
+    ],
+    "lit_freud_psychopathology_everyday_life": [
+      "reading_therapy"
+    ],
+    "lit_vasilyuk_psychology_experiencing": [
+      "reading_emotions",
+      "reading_therapy"
+    ],
+    "lit_lombroso_genius_insanity": [
+      "reading_history",
+      "reading_clinical"
+    ],
+    "lit_lindsay_ethics_european_psychologists": [
+      "reading_ethics"
+    ],
+    "lit_chekhov_death_of_clerk": [
+      "reading_fiction"
+    ],
+    "lit_12ca0a14d27fe4f9": [
+      "reading_counseling"
+    ],
+    "lit_16a62202b82667da": [
+      "reading_counseling"
+    ],
+    "lit_6d7bc0cc3c9ce6eb": [
+      "reading_counseling",
+      "reading_family"
+    ],
+    "lit_e5921321564edbc4": [
+      "reading_counseling"
+    ],
+    "lit_f207603bd416c4be": [
+      "reading_counseling"
+    ],
+    "lit_5568f7c20141100f": [
+      "reading_counseling"
+    ],
+    "lit_ae000be9a73115a6": [
+      "reading_counseling"
+    ],
+    "lit_e397986f81e37d22": [
+      "reading_counseling"
+    ],
+    "lit_7b4d2c2bdc54b178": [
+      "reading_counseling"
+    ],
+    "lit_consult4_rogers_new_approaches": [
+      "reading_counseling"
+    ],
+    "lit_consult4_rogers_client_centered": [
+      "reading_therapy"
+    ],
+    "lit_consult_lecture_02": [
+      "reading_counseling",
+      "reading_therapy"
+    ],
+    "lit_sommers_flanagan_clinical_interviewing": [
+      "reading_counseling"
+    ],
+    "lit_masterstvo_psychological_counseling": [
+      "reading_counseling"
+    ],
+    "lit_ratner_george_iveson_solution_focused": [
+      "reading_counseling",
+      "reading_therapy"
+    ],
+    "lit_sobchik_smil_mmpi": [
+      "reading_diagnostics"
+    ],
+    "lit_salinger_catcher_rye": [
+      "reading_fiction"
+    ],
+    "lit_remarque_black_obelisk": [
+      "reading_fiction"
+    ],
+    "lit_8c4dd1a3c39ecbcf": [
+      "reading_social"
+    ],
+    "lit_00a7af60c24a8221": [
+      "reading_personality"
+    ],
+    "lit_917071a82ba4c6db": [
+      "reading_personality"
+    ],
+    "lit_5505760c8ef8c4b8": [
+      "reading_personality"
+    ],
+    "lit_2055c41e007c80b8": [
+      "reading_emotions"
+    ],
+    "lit_4bfaf8e48c20ad8b": [
+      "reading_social"
+    ],
+    "lit_09470e6d0794b19a": [
+      "reading_personality"
+    ],
+    "lit_1e9a50757f2caf6e": [
+      "reading_self_regulation"
+    ],
+    "lit_piaget_psychology_intelligence": [
+      "reading_cognition",
+      "reading_development"
+    ],
+    "lit_hy_loevinger_measuring_ego_development": [
+      "reading_personality",
+      "reading_development",
+      "reading_diagnostics"
+    ],
+    "lit_course_mention_handbook_personality": [
+      "reading_personality"
+    ],
+    "lit_634fbb9e1e821b8a": [
+      "reading_development"
+    ],
+    "lit_8c7e7daa0a5aa779": [
+      "reading_development"
+    ],
+    "lit_d5aee85ddf3b94c4": [
+      "reading_development"
+    ],
+    "lit_c9f5f2a72f8ab645": [
+      "reading_development"
+    ],
+    "lit_5c4001030a94d65d": [
+      "reading_stress"
+    ],
+    "lit_677867857cce3e89": [
+      "reading_development",
+      "reading_family"
+    ],
+    "lit_702e5c3a28977b88": [
+      "reading_development"
+    ],
+    "lit_57ba3a9bf5d4ff18": [
+      "reading_development",
+      "reading_family"
+    ],
+    "lit_b76317a4d7bec59d": [
+      "reading_development",
+      "reading_family"
+    ],
+    "lit_d679ea65152d4922": [
+      "reading_development"
+    ],
+    "lit_3ecf3ffbaa287019": [
+      "reading_development",
+      "reading_family"
+    ],
+    "lit_6f18559891d319c1": [
+      "reading_development"
+    ],
+    "lit_betensky_what_do_you_see": [
+      "reading_therapy"
+    ],
+    "lit_schutzenberger_ancestor_syndrome": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_makarov_selected_psychotherapy_lectures": [
+      "reading_therapy"
+    ],
+    "lit_course_mention_psychiatry_disasters": [
+      "reading_stress"
+    ],
+    "lit_kreisman_straus_hate_you_dont_leave": [
+      "reading_clinical"
+    ],
+    "lit_zeigarnik_pathopsychology": [
+      "reading_clinical"
+    ],
+    "lit_hellinger_orders_of_love": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_course_mention_just_for_today": [
+      "reading_clinical"
+    ],
+    "lit_alexandrov_exploded_brain": [
+      "reading_clinical"
+    ],
+    "lit_tarabrina_posttraumatic_stress_practicum": [
+      "reading_stress"
+    ],
+    "lit_course_mention_small_steps_covid": [
+      "reading_clinical"
+    ],
+    "lit_course_mention_kucher_ptsd_theory_practice": [
+      "reading_stress"
+    ],
+    "lit_course_mention_combat_nlp": [
+      "reading_social"
+    ],
+    "lit_course_mention_galin_creativity": [
+      "reading_personality"
+    ],
+    "lit_course_mention_galin_influence": [
+      "reading_social"
+    ],
+    "lit_course_mention_granovskaya_psychological_defenses": [
+      "reading_personality"
+    ],
+    "lit_course_mention_subbotina_psychological_defenses": [
+      "reading_personality"
+    ],
+    "lit_course_mention_detroit_child_trauma_techniques": [
+      "reading_stress"
+    ],
+    "lit_course_mention_return_death_tales": [
+      "reading_clinical"
+    ],
+    "lit_caa8d94a943aae0d": [
+      "reading_personality",
+      "reading_social"
+    ],
+    "lit_a851d2e2d491dfed": [
+      "reading_social"
+    ],
+    "lit_28136036489db778": [
+      "reading_personality"
+    ],
+    "lit_88dee04d51aa3119": [
+      "reading_personality"
+    ],
+    "lit_6968d12a30949ae7": [
+      "reading_social"
+    ],
+    "lit_4ac5113ca33225a9": [
+      "reading_social"
+    ],
+    "lit_7bcfce2256481407": [
+      "reading_social"
+    ],
+    "lit_89d363ca5a33cb7d": [
+      "reading_social"
+    ],
+    "lit_dollard_frustration_aggression": [
+      "reading_social"
+    ],
+    "lit_social_history02_wundt": [
+      "reading_social"
+    ],
+    "lit_social_history02_freud": [
+      "reading_social"
+    ],
+    "lit_lebon_psychology_peoples_masses": [
+      "reading_social"
+    ],
+    "lit_social_history02_miller_dollard": [
+      "reading_social"
+    ],
+    "lit_social_history02_sighele": [
+      "reading_social"
+    ],
+    "lit_course_mention_lebon_crowd": [
+      "reading_social"
+    ],
+    "lit_98bfb98e25b39800": [
+      "reading_family"
+    ],
+    "lit_802f13c56eea6319": [
+      "reading_family"
+    ],
+    "lit_4c4514f492edb1c6": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_40f4eacd15ed570b": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_bd48225c86c8de17": [
+      "reading_family"
+    ],
+    "lit_0199865ad8d23ecb": [
+      "reading_family"
+    ],
+    "lit_819808cf97ad8eb5": [
+      "reading_family"
+    ],
+    "lit_ee1fe3562df0c482": [
+      "reading_family"
+    ],
+    "lit_a172ffe221539480": [
+      "reading_family"
+    ],
+    "lit_e8a91d867727899b": [
+      "reading_family"
+    ],
+    "lit_4bad7531005a5e23": [
+      "reading_family"
+    ],
+    "lit_ce87499b1e725a4d": [
+      "reading_family"
+    ],
+    "lit_319ec2108977ce66": [
+      "reading_family"
+    ],
+    "lit_3c68e7fa4c7ec0ba": [
+      "reading_family"
+    ],
+    "lit_family_slide_01": [
+      "reading_development"
+    ],
+    "lit_family_slide_03": [
+      "reading_family"
+    ],
+    "lit_family_slide_04": [
+      "reading_family",
+      "reading_development"
+    ],
+    "lit_family_slide_05": [
+      "reading_family"
+    ],
+    "lit_family_slide_06": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_family_slide_07": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_family_slide_08": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_family_slide_09": [
+      "reading_family",
+      "reading_therapy"
+    ],
+    "lit_d326f6da3f94e03b": [
+      "reading_organization"
+    ],
+    "lit_925e5ff861131189": [
+      "reading_organization"
+    ],
+    "lit_f0436ade24a5adb3": [
+      "reading_organization"
+    ],
+    "lit_7a7c03e9f990308e": [
+      "reading_organization"
+    ],
+    "lit_909b215a9fece3cc": [
+      "reading_social"
+    ],
+    "lit_543dcd562c0460c5": [
+      "reading_social"
+    ],
+    "lit_b31bb7b1dc37d79d": [
+      "reading_organization"
+    ],
+    "lit_4bbfe78685eb81c2": [
+      "reading_organization"
+    ],
+    "lit_5643db88a7fa06b2": [
+      "reading_organization"
+    ],
+    "lit_tolstoy_war_and_peace": [
+      "reading_fiction"
+    ],
+    "lit_4326336ddc0d7a05": [
+      "reading_organization"
+    ],
+    "lit_e29fc4e37d6eef9b": [
+      "reading_organization"
+    ],
+    "lit_org_lecture_01": [
+      "reading_organization"
+    ],
+    "lit_org_lecture_02": [
+      "reading_organization"
+    ],
+    "lit_hsieh_delivering_happiness": [
+      "reading_organization"
+    ],
+    "lit_taylor_principles_scientific_management": [
+      "reading_organization"
+    ],
+    "lit_pfeffer_managing_with_power": [
+      "reading_organization"
+    ],
+    "lit_1febe2b9612a7668": [
+      "reading_language"
+    ],
+    "lit_7d6fbb6d57ed5a71": [
+      "reading_language"
+    ],
+    "lit_97e355592d42be46": [
+      "reading_language"
+    ],
+    "lit_3fe49ed705cbf4cc": [
+      "reading_language"
+    ],
+    "lit_6491072220dbf2cb": [
+      "reading_language"
+    ],
+    "lit_cefdc62fe30c6d9d": [
+      "reading_language"
+    ],
+    "lit_5852670b2e030af5": [
+      "reading_language"
+    ],
+    "lit_79347303885d264c": [
+      "reading_language"
+    ],
+    "lit_chomsky_syntactic_structures": [
+      "reading_language"
+    ],
+    "lit_rybina_muradyan_coach": [
+      "reading_counseling",
+      "reading_self_regulation"
+    ],
+    "lit_muradyan_atlant_game": [
+      "reading_self_regulation"
+    ],
+    "lit_kantor_objective_psychology_grammar": [
+      "reading_language"
+    ],
+    "lit_loehr_schwartz_full_engagement": [
+      "reading_self_regulation"
+    ],
+    "lit_covey_seven_habits": [
+      "reading_self_regulation"
+    ],
+    "lit_zatulovski_everyday_cybernetics": [
+      "reading_self_regulation"
+    ],
+    "lit_course_mention_unspecified_psychology_basics": [
+      "reading_basics"
+    ],
+    "lit_course_mention_mead_culture_childhood": [
+      "reading_development",
+      "reading_social"
+    ],
+    "lit_butler_bowdon_eysenck_overview": [
+      "reading_personality",
+      "reading_diagnostics"
+    ],
+    "lit_eysenck_wilson_personality": [
+      "reading_diagnostics",
+      "reading_personality"
+    ],
+    "lit_burlachuk_psychodiagnostics": [
+      "reading_diagnostics"
+    ],
+    "lit_logvinenko_psychological_measurement": [
+      "reading_research",
+      "reading_diagnostics"
+    ],
+    "lit_binet_mental_abilities": [
+      "reading_diagnostics"
+    ],
+    "lit_znakov_understanding_thought_communication": [
+      "reading_cognition",
+      "reading_social"
+    ],
+    "lit_existential_psychology_anthology": [
+      "reading_therapy"
+    ],
+    "lit_znakov_psychology_understanding": [
+      "reading_cognition"
+    ],
+    "lit_zobkov_understanding_fairytale": [
+      "reading_therapy"
+    ],
+    "lit_bugental_art_being_alive": [
+      "reading_therapy"
+    ],
+    "lit_vasilyuk_understanding_psychotherapy_system": [
+      "reading_therapy"
+    ],
+    "lit_moody_life_after_life": [
+      "reading_counseling"
+    ],
+    "lit_mokhovikov_psychotherapy_pain_points": [
+      "reading_therapy"
+    ],
+    "lit_history_science_congress_volume3": [
+      "reading_history"
+    ],
+    "lit_newton_principia_1989": [
+      "reading_history"
+    ],
+    "lit_nurkova_autobiographical_memory": [
+      "reading_cognition"
+    ],
+    "lit_golovakha_kronik_psychological_time": [
+      "reading_personality"
+    ],
+    "lit_yalom_loves_executioner": [
+      "reading_therapy"
+    ],
+    "lit_leonhard_accentuated_personalities": [
+      "reading_personality",
+      "reading_diagnostics"
+    ],
+    "lit_searls_inkblots": [
+      "reading_diagnostics"
+    ],
+    "lit_course_mention_romanova_projective_methods": [
+      "reading_diagnostics"
+    ],
+    "lit_course_mention_practice19_consulting_theory_practice": [
+      "reading_counseling"
+    ],
+    "lit_oecd_pisa2018_volume3": [
+      "reading_education"
+    ],
+    "lit_dweck_mindset": [
+      "reading_self_regulation",
+      "reading_education"
+    ],
+    "lit_freiberg_school_climate": [
+      "reading_education"
+    ],
+    "lit_rath_harter_wellbeing": [
+      "reading_self_regulation"
+    ],
+    "lit_olweus_bullying_at_school": [
+      "reading_education"
+    ],
+    "lit_oecd_subjective_wellbeing_guidelines": [
+      "reading_research"
+    ],
+    "lit_burns_gottschalk_21st_century_children": [
+      "reading_education"
+    ],
+    "lit_christenson_student_engagement": [
+      "reading_education"
+    ],
+    "lit_buck_akerson_science_teacher_self_study": [
+      "reading_education"
+    ],
+    "lit_hattie_anderman_student_achievement": [
+      "reading_education"
+    ],
+    "lit_kunter_coactiv_teacher_competence": [
+      "reading_education"
+    ],
+    "lit_oecd_pisa2015_volume3": [
+      "reading_education"
+    ],
+    "lit_oecd_pisa2015_volume2": [
+      "reading_education"
+    ],
+    "lit_rees_main_childrens_worlds2015": [
+      "reading_education"
+    ],
+    "lit_good_childhood_report2015": [
+      "reading_education"
+    ],
+    "lit_unesco_ending_school_violence": [
+      "reading_education"
+    ],
+    "lit_oecd_talis2018_volume1": [
+      "reading_education"
+    ],
+    "lit_oecd_gender_equality_education": [
+      "reading_education"
+    ],
+    "lit_oecd_pisa2012_volume4": [
+      "reading_education"
+    ],
+    "lit_european_commission_early_school_leaving": [
+      "reading_education"
+    ],
+    "lit_course_mention_d0925c1eabd1814f": [
+      "reading_education"
+    ],
+    "lit_course_mention_6a0411db5000673f": [
+      "reading_education"
+    ],
+    "lit_course_mention_bcb1d48d8219a2de": [
+      "reading_education"
+    ],
+    "lit_course_mention_e50e0babc4a8e1ac": [
+      "reading_education"
+    ],
+    "lit_course_mention_52ee0cc6d8328928": [
+      "reading_education"
+    ],
+    "lit_course_mention_6989ce1295898678": [
+      "reading_education"
+    ],
+    "lit_course_mention_57f33726ed4ac65d": [
+      "reading_reference"
+    ],
+    "lit_course_mention_893a89421300f678": [
+      "reading_research"
+    ],
+    "lit_course_mention_1e33b87d4c9cedbc": [
+      "reading_personality"
+    ],
+    "lit_course_mention_b976cc7351d9e31f": [
+      "reading_education"
+    ],
+    "lit_course_mention_4072b2a06746eb8e": [
+      "reading_emotions",
+      "reading_social"
+    ],
+    "lit_course_mention_e63d19e97ba91e8d": [
+      "reading_education"
+    ],
+    "lit_course_mention_efdf2863f47b640a": [
+      "reading_stress"
+    ],
+    "lit_course_mention_62bd57a7137c573f": [
+      "reading_emotions"
+    ],
+    "lit_course_mention_f3a45bec2566afc2": [
+      "reading_education"
+    ],
+    "lit_course_mention_be2b1c9d425fc832": [
+      "reading_education"
+    ],
+    "lit_course_mention_d7e88c1d4f888bb6": [
+      "reading_education"
+    ],
+    "lit_course_mention_76d6f7e8dfe457a7": [
+      "reading_organization"
+    ],
+    "lit_course_mention_a00c9150bcfd7966": [
+      "reading_research"
+    ],
+    "lit_course_mention_db2ba3e8c2e1dcc9": [
+      "reading_education"
+    ],
+    "lit_course_mention_a1f851d16e687949": [
+      "reading_education"
+    ],
+    "lit_course_mention_c18b55e2a22acdc7": [
+      "reading_education"
+    ],
+    "lit_course_mention_277405e34a8fefe0": [
+      "reading_organization"
+    ],
+    "lit_course_mention_680648f4cff86e93": [
+      "reading_education"
+    ],
+    "lit_course_mention_5471070945426f93": [
+      "reading_education"
+    ],
+    "lit_course_mention_e51d58eb24bcf8a2": [
+      "reading_education"
+    ],
+    "lit_course_mention_e809609920ac0938": [
+      "reading_education"
+    ],
+    "lit_course_mention_591ae30eda19be76": [
+      "reading_education"
+    ],
+    "lit_course_mention_afddeebaeeda2e6b": [
+      "reading_education"
+    ],
+    "lit_course_mention_61a2ce21b5d8cac9": [
+      "reading_education"
+    ],
+    "lit_course_mention_0378825302da1e51": [
+      "reading_education"
+    ]
+  }
+}
