@@ -19834,6 +19834,158 @@
       "issues": [],
       "note": "Exact gradual-autonomy theme only, before universal never/always and age anecdotes. Own generic skills scenario; no feeding/sleep/medical instruction, crisis inevitability, fixed readiness age or withdrawal of necessary protection.",
       "sources": []
+    },
+    "questions:m6_ethics_002": {
+      "item_sha256": "48b5265066dab712232b0f46cc11a390948faf2128106f8b1a62af994fab457f",
+      "discipline_id": "professional_legal_ethics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course distinction only; no current statute, offence qualification or platform compliance asserted.",
+      "sources": []
+    },
+    "questions:m6_ethics_003": {
+      "item_sha256": "61ace4422a989e69ce68d91a34d33b180ce3e204b203a7f35615cfa3d6bbc64e",
+      "discipline_id": "professional_legal_ethics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Only internal-prescription definition; age and single-behaviour diagnostic inference excluded.",
+      "sources": []
+    },
+    "questions:m6_ethics_004": {
+      "item_sha256": "c98a8bed0f567b1e3007edce855c100ad04b6ba0cfb76c6bbb73aa5ffc0652fa",
+      "discipline_id": "professional_legal_ethics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact circumstance/norm relation before broad adulthood example; no legal advice or current-law guarantee.",
+      "sources": []
+    },
+    "questions:m6_ethics_005": {
+      "item_sha256": "af1d7992eb4caa48fcfd49deb7da4a5acee828eb3af2182533b97596e3f30013",
+      "discipline_id": "professional_legal_ethics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact relative/identified-parties classification only; minors, capacity and evidentiary claims held.",
+      "sources": []
+    },
+    "questions:m6_ethics_006": {
+      "item_sha256": "60ce25e9a1f09a03c9cf6b95c1431d7ca5b2778fcef4d953597eecebc6554827",
+      "discipline_id": "professional_legal_ethics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Bounded course definition ending before inaccurate state/local-act contrast; no hierarchy completeness or current applicability asserted.",
+      "sources": []
+    },
+    "questions:m6_psyl_011": {
+      "item_sha256": "8a78e5d5a80941ef33507eb39252be479c1293707fe8a04072fcf6ed539119ea",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact words/thing distinction only; surrounding simulation, quantum, universal neural and change-guarantee claims not adopted. Historical authorship not assessed.",
+      "sources": []
+    },
+    "questions:m3_psychological_consulting_113": {
+      "item_sha256": "965de4378611efa02d5ed82ba5e69ece44c78c05847f248876bfda27068b24cc",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact attributed CBT task-suitability account; universal defence/fear and later all-aggression transference claims excluded. Distinct from existing psychoanalytic interpretation and silence items.",
+      "sources": []
+    },
+    "questions:m3_psychological_consulting_114": {
+      "item_sha256": "6cdab26fc869ecb6e6f9c1166746dcc72e7b5105b0ec750ded520f1e4cbc7d6e",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact rule5 feedback-request only, before unrelated case details. Format attribution explicit; confidential participant material and universal secrecy rule not adopted.",
+      "sources": []
     }
   }
 }
