@@ -18751,6 +18751,101 @@
       "issues": [],
       "note": "Exact explicit qualification that a high test result does not establish depression and is reason for assessment, ending before unsupported minimum specialist-count rule. Primary NIH/NLM independently corroborates distinction. Original hypothetical task, no real participant symptoms/story; not a clinical diagnosis or treatment recommendation.",
       "sources": []
+    },
+    "questions:m4_person_002": {
+      "item_sha256": "0ebe37ea35efa389f0f3ca5f016c3300907d3851459f1880dbc40382e61aca7f",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact explicitly attributed Ananyev definition, before alternative social usage. No later PEN/temperament inference, universal maturity criterion, damaged author name or staged Platonov claim adopted. Compared with current basic character/state/trait items; distinction individual as natural human representative absent.",
+      "sources": []
+    },
+    "questions:m4_person_003": {
+      "item_sha256": "092db4063b65659cf82a10117fed122cd9cde90433af6f97e749855f541d35a5",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact third Teplov criterion only, avoiding held positive-emotion-only development assertion and later advertisement. APA ability entry uses a different competence/aptitude distinction, so it is not cited as exact independent confirmation; question explicitly confined to stated Teplov model. No innate-only claim or individual aptitude diagnosis.",
+      "sources": []
+    },
+    "questions:m4_person_004": {
+      "item_sha256": "4fde59b408f44f98107f9d033842f70d790d6db08051b8c260c8329c88276c54",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact characters34561:34696 after held damaged Merlin attribution34274:34518 and before first-impression assertion. No liquid/energy explanation, modern universality of Pavlov typology, hand-shake or accentuation diagnosis. OpenStax11.6 independently discusses temperament reactivity/self-regulation, but not exact Merlin definition; no claim that primary validates damaged attribution.",
+      "sources": []
+    },
+    "questions:m4_person_005": {
+      "item_sha256": "57651491c71485f8d4cd1de0479991f6ba553a7b1e19514fde06f7c50043b07b",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact stabilising definition/neutral work example after held ambiguous external-distraction activation example4521:5228, before other function. Compared with gp062 Ivanников meaning regulation; this tests maintaining activity, not assigning new meaning. No health symptom, overexertion advice or universal success guarantee.",
+      "sources": []
+    },
+    "questions:m4_person_006": {
+      "item_sha256": "6b76314808331aa0d06d2248b9f3ed8b38385d5ff40ee5df6b33807e5814b4fb",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact complex-action conflicting-motives distinction, no full rigid stage prescription, health-overexertion claim or universal desire-versus-duty hierarchy. Distinct from stabilising-function application and existing meaning-regulation question.",
+      "sources": []
     }
   }
 }
