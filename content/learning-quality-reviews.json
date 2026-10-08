@@ -17877,6 +17877,139 @@
       "issues": [],
       "note": "Exact course functional-system expected-outcome model definition only32036:32235. No lecture-specific12steps as universalbrainmodel, emotionalsign determinism, epigenetics, gender, imprinting or survival-protocol claim. Compared current446 question+85terms: generaldecision/network items do not test this model term.",
       "sources": []
+    },
+    "questions:m5_clinical_006": {
+      "item_sha256": "c1ba3d919f309825add7fef2a099948e741a18edcfe94444efc69a23a8c0c970",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact lecture praxis/action example only. MedlinePlus provider definition independently checked for understood request, willingness, functional muscles and learned task. No clinical diagnosis, lesion localization, medication or universal subtype taxonomy. Current aphasia/agnosia definitions assess other functions; no current apraxia item.",
+      "sources": []
+    },
+    "questions:m5_clinical_007": {
+      "item_sha256": "04d7bd794e27ce1480dd23677f17fc77ea4a75fd77446870b50886975b1280ec",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Bounded course distinction statistical/ideal/social/subjective norm, introductory definition before held population extrapolation and universal36.6example. No numericnorm/automaticdiagnosis/representativepopulation guarantee. Current448 bank has no question about this norm distinction.",
+      "sources": []
+    },
+    "questions:m5_clinical_008": {
+      "item_sha256": "85ac06dd874cd36ed597db34da79a3a1094c309d802c0b767e2b8bd19e2c0bdb",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact introductory definition before subsequent held somatic/clinical causal claims. Lesser1983 primary abstract confirms difficulty verbally expressing emotion only; lecture supplies recognition distinction. No all-or-none emotionalabsence, individualdiagnosis, TAS20cutoff, causeofsomaticdisease or treatment claim. Current448/85 term bank lacks this concept.",
+      "sources": []
+    },
+    "questions:m5_clinical_009": {
+      "item_sha256": "a014c9c8e366eb3bcb0206be48a030cc8e5c57d8127a6819a4bc5ce08343386c",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Narrow comparative-effect example only, poisonanecdote before excerpt excluded; deterministic three-stage progression after excerpt excluded. WHO2009 glossary indexed definitions distinguish tolerance from withdrawal; full page captcha so fullread not claimed. No dosing, intoxication levels, detox or individualdiagnosis.",
+      "sources": []
+    },
+    "questions:m5_clinical_010": {
+      "item_sha256": "168af3f7d5191ef00c09de13447c493bf1fa26c1a05d3ac4d52e1e4a6d9c5596",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact cessation/discomfort concept only, outside spiritual/moral causal claims starting58800. WHO2009 glossary indexed description supplies cessation/reduction and substance-specific/time-limited qualifier; full page captcha. No automaticdiagnosis, withdrawalmethod, medication, severity guarantee or moralclassification.",
+      "sources": []
+    },
+    "questions:m5_clinical_011": {
+      "item_sha256": "67771f750288d417e073eb34d85d8c1fb9249c2e36b205631745833f645a294f",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact introductory not-only-death distinction only; personal war/family anecdotes and categorical comparative severity outside excerpt excluded. Existingm3consult081 method-goal mismatch uses grief but does not test broad loss concept. NHSprimaryprovider confirms relationship/job/home loss.",
+      "sources": []
+    },
+    "questions:m5_clinical_012": {
+      "item_sha256": "0aa74a59c95d9849a79bb4f43c34d4efdda8363a0bdebba966860cf6d82ed78a",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact concluding course qualification stagesnotabsolute reality, outside all retained grief holds; earlier fixedstage/2year/treatment claims excluded and unchanged. NHSprovider passage41 independently corroborates nonmandatoryset/order. No denialofgrief distress, diagnosticthreshold, touchintervention or forcedtransition.",
+      "sources": []
     }
   }
 }

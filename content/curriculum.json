@@ -4785,6 +4785,48 @@
       "topic_id": "t_1c1cdcf2927c",
       "item_sha256": "4d6888e05d6bc8035a59ed4cd8b483567aa7a57faa084952676ef2b424de4322",
       "locator": "private review:questions:m1_psyf_073"
+    },
+    "b12c65507da6d7f260da587eaed40dc3d41679edc06e0c6bd7d4df2cd1eddde3": {
+      "external_id": "m5_clinical_006",
+      "topic_id": "t_ed21996686a8",
+      "item_sha256": "c1ba3d919f309825add7fef2a099948e741a18edcfe94444efc69a23a8c0c970",
+      "locator": "private review:questions:m5_clinical_006"
+    },
+    "51fa718864870c8f12b3cbd5f34fd05a8e28e014f64a867eb5967deed9cb0bcd": {
+      "external_id": "m5_clinical_007",
+      "topic_id": "t_284ec6eeecd6",
+      "item_sha256": "04d7bd794e27ce1480dd23677f17fc77ea4a75fd77446870b50886975b1280ec",
+      "locator": "private review:questions:m5_clinical_007"
+    },
+    "64e91ada12c7a851e24f77d6bba0dbebb38c744b7c69f68048227e0bbabd59e1": {
+      "external_id": "m5_clinical_008",
+      "topic_id": "t_184dd2def77e",
+      "item_sha256": "85ac06dd874cd36ed597db34da79a3a1094c309d802c0b767e2b8bd19e2c0bdb",
+      "locator": "private review:questions:m5_clinical_008"
+    },
+    "802fa7d2105cfffff4e3964a6ac55666b87a46a4bc8ad8585dcd94c66f00b81b": {
+      "external_id": "m5_clinical_009",
+      "topic_id": "t_117013a575cc",
+      "item_sha256": "a014c9c8e366eb3bcb0206be48a030cc8e5c57d8127a6819a4bc5ce08343386c",
+      "locator": "private review:questions:m5_clinical_009"
+    },
+    "0adc67da137cd3bca9fc1a75d7ab8821df7f067601abb18391e7f16f9364dbf1": {
+      "external_id": "m5_clinical_010",
+      "topic_id": "t_117013a575cc",
+      "item_sha256": "168af3f7d5191ef00c09de13447c493bf1fa26c1a05d3ac4d52e1e4a6d9c5596",
+      "locator": "private review:questions:m5_clinical_010"
+    },
+    "252dad9a83c5d9b8bd762953de4836adc593b0c693a5c2ee578f4b88ec20db24": {
+      "external_id": "m5_clinical_011",
+      "topic_id": "t_75f56fc4df73",
+      "item_sha256": "67771f750288d417e073eb34d85d8c1fb9249c2e36b205631745833f645a294f",
+      "locator": "private review:questions:m5_clinical_011"
+    },
+    "bf562e22a1fd39fab3a8a4ceba63c734f6d766f1e733b35b089d2574f3ca03d0": {
+      "external_id": "m5_clinical_012",
+      "topic_id": "t_75f56fc4df73",
+      "item_sha256": "0aa74a59c95d9849a79bb4f43c34d4efdda8363a0bdebba966860cf6d82ed78a",
+      "locator": "private review:questions:m5_clinical_012"
     }
   }
 }
