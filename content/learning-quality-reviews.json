@@ -17782,6 +17782,63 @@
       "issues": [],
       "note": "Fictional derivative organisational intervention-selection problem based on exact course skill-deficit condition and saved review of multi-level hypotheses. No named participant facts, universal ban on training, causal personnel diagnosis or promise to restore sales. Distinct from individual consulting method-goal agreement.",
       "sources": []
+    },
+    "questions:m1_gp_061": {
+      "item_sha256": "4fdc3e21f147d7825a714be6be136c4389b34af0d388719ada2c8cc1e017b0a6",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact attributed activity-model action-goal versus operation-means distinction. No virtual psyche/location, universal motive cause, immutable personality or efficacy claim. Current443 question and85 glossary items checked; operational research definition m2_exp001 is a different concept. Entire activity lecture not scientifically approved.",
+      "sources": []
+    },
+    "questions:m1_gp_062": {
+      "item_sha256": "417491205c4e7278f3e86b08319de1e8138e8b8725117881ef1226d1be3f0c92",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Explicitly attributed model terminology only; exact concluding formulation. Parachute/poisoning/shame and personal child examples not reproduced or recommended. No general mechanism consensus, clinical efficacy, moral ranking or universal victory over biological drives. Existing ambivalence/client-goal cases do not test this named model distinction.",
+      "sources": []
+    },
+    "questions:m4_dev_002": {
+      "item_sha256": "685472a938ed02a433d69278b7c93fddd29394bce4b6cc94794087613980aed0",
+      "discipline_id": "developmental_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course warning against self-diagnosis from idealised childhood comparison only. Does not approve universal perfect/imperfect childhood, strength-from-adversity, parent-only rules, fixed crisis ages or causal adult outcomes. Existing developmental item defines field; new item tests limits of inference.",
+      "sources": []
     }
   }
 }
