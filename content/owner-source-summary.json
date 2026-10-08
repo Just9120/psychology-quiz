@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-08T09:10:12.536658+00:00",
+  "captured_at": "2026-10-08T09:35:07.323689+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -12,10 +12,10 @@
   "known_holds": 321,
   "observation_basis": "saved_inputs",
   "coverage": {
-    "tracked_sources": 115,
-    "untracked_files": 310,
+    "tracked_sources": 118,
+    "untracked_files": 307,
     "source_metadata": {
-      "current": 115
+      "current": 118
     },
     "unmapped_published_questions": 48,
     "lessons": [
@@ -1117,7 +1117,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 4,
+          "theory": 5,
           "glossary": 0,
           "case": 0
         },
@@ -1138,18 +1138,46 @@
         "glossary_terms": null,
         "notes": null,
         "notes_state": "UNSET"
+      },
+      {
+        "id": "t_3d6b038c413a",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 3,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_cb4906154e12",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
       }
     ],
     "prepared_notes_unmapped": 4,
     "unmapped_published_glossary": 81,
     "unreleased_lessons": {
-      "total": 88,
+      "total": 86,
       "processing": {
-        "conflict_review": 87,
+        "conflict_review": 85,
         "processed": 1
       },
-      "metadata_current": 88,
-      "known_holds": 87
+      "metadata_current": 86,
+      "known_holds": 85
     }
   }
 }

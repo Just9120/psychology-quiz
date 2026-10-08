@@ -18656,6 +18656,101 @@
       "issues": [],
       "note": "Selected safe definition and explicit feelings-versus-beliefs distinction. Does not adopt subsequent universal any-person-same-feeling statement or physiological claims. Own wording, no participant personal experience; compared with current observable-fact and reflection items, none tests this validation/endorsement contrast.",
       "sources": []
+    },
+    "questions:m1_psyf_078": {
+      "item_sha256": "18af40a175de040d3f481eda27b4801abd67403024e7d0214e1d1018ceae70c4",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact5435:5805 supports temporary maintenance for current activity; OpenStax65-71 independently corroborates working/short-term distinction. Own arithmetic example, no universal capacity, limitless long-term memory, cell-localization guarantee or computer-identity claim. Compared with approved gp044, which tests overload/expectation bias, not the maintenance/processing distinction. Existing verified captured programme section links this child lecture to its memory/thinking parent; no source-wide approval.",
+      "sources": []
+    },
+    "questions:m3_psychological_consulting_109": {
+      "item_sha256": "b9ee967ebcec111d0537850a9cb73d043823e774b2991538a92d9a56a8b7ec45",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact selected statement that goals can change; collaborative framing retained from already reviewed practice18 goal/agency outline. Excludes subsequent asserted universally deeper true needs and exclusive safe-space mechanism. Own fictional learning situation; compared with095 concrete initial goal, new item tests revision rather than another goal formulation.",
+      "sources": []
+    },
+    "questions:m3_psychological_consulting_110": {
+      "item_sha256": "74074a7596a7fdc6779796531f0d11276ca4dded93f4564b7c5518fd73c26a09",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact refusal/right-to-stop discussion; preceding absolute confidentiality promise outside scope and not adopted. Original hypothetical adult case, no real participant identifiers/story; compared with047/107 contact/silence, new distinction is explicit refusal and voluntary continuation, not inferred resistance.",
+      "sources": []
+    },
+    "questions:m3_psychological_consulting_111": {
+      "item_sha256": "4099c50753cc3c49371c54c7f7af2d2a922e111e1489f27afb2c38403beff771",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact flexible-stage correction only, not earlier subjective relief or universal duration claims. Compared with current listening/contract/refusal items: new distinction tests flexible organisational structure rather than another listening technique.",
+      "sources": []
+    },
+    "questions:m3_psychological_consulting_112": {
+      "item_sha256": "851887f1ba51fe7ff08009ddea38bb3c55ea301e914e8bc1bf45dd8700736b55",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact explicit qualification that a high test result does not establish depression and is reason for assessment, ending before unsupported minimum specialist-count rule. Primary NIH/NLM independently corroborates distinction. Original hypothetical task, no real participant symptoms/story; not a clinical diagnosis or treatment recommendation.",
+      "sources": []
     }
   }
 }
