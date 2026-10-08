@@ -18,7 +18,7 @@ def test_quality_audit_controlled_calculations() -> None:
 def test_global_canonical_quality_thresholds_and_rapport_resolution() -> None:
     report=build_report()
     g=report["global"]
-    assert g["approved_question_count"] == 578
+    assert g["approved_question_count"] == 584
     assert g["unique_longest_correct_count"] == 351
     assert g["high_severity_length_cue_count"] == 0
     assert g["duplicate_normalized_stems"] == {}

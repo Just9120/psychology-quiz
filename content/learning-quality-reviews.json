@@ -20347,6 +20347,120 @@
       "issues": [],
       "note": "Exact inquiry into motives, own fictional adult case; no private retirement/financial story or fixed productivity/moral prescription.",
       "sources": []
+    },
+    "questions:other_tp_006": {
+      "item_sha256": "a3fde2565c89239db1ee17d0e26127b694f8d34bb669cd662c034c15a95afdb8",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Definition/active procrastination distinction only; own fictional illustration, no neural cause, moral diagnosis or guaranteed technique efficacy.",
+      "sources": []
+    },
+    "questions:other_tp_007": {
+      "item_sha256": "c72f973a9ce94d59cabec9d107a3336a3b241bd1c3f1e83cfff2fb724f2da904",
+      "discipline_id": "turning_point",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Explicitly metaphorical sentence only; physiological energy, diagnostic instrument and universal recovery claims not adopted.",
+      "sources": []
+    },
+    "questions:m4_person_024": {
+      "item_sha256": "55d6468078a39664bbcc5c34aa4b22cc212b4b12e001ff71b867bc0f567e44a0",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Attributed construct meaning only; theory lens, not established brain module or clinical test.",
+      "sources": []
+    },
+    "questions:other_bonus_002": {
+      "item_sha256": "3a1a949311a9934b21289d82d8700c45e4a66469f82874c16cc13c861e6d2c61",
+      "discipline_id": "bonus_lessons",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Own fully stipulated arithmetic case distinguishes cash resources from known obligations. Exact resource/debt list only; no six-month reserve prescription, legal tax guidance or income guarantee.",
+      "sources": []
+    },
+    "questions:other_brand_002": {
+      "item_sha256": "1601b3716694e1df1210ba77f2b7d6e94bc75061ca646577e857ef1d769e4662",
+      "discipline_id": "personal_brand",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Audience-description sentence only; nearby private client/status illustrations and efficacy or revenue promises excluded.",
+      "sources": []
+    },
+    "questions:m1_psyf_081": {
+      "item_sha256": "6e15728fc199d6ddbf5e642a28246afa1d85919a59e899e0114a1a5c41ef0e97",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact lecture naming sentence plus independently checked publisher definition/voltage-change explanation. Erroneous adjacent Na/K pump ratio remains held and is not used; no free-will or medical claim.",
+      "sources": []
     }
   }
 }

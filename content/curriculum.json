@@ -5565,6 +5565,42 @@
       "topic_id": "t_c200db7e665a",
       "item_sha256": "2b0e3a7f9e384557bdc0ba351dfe13901620ca04d4c3be50325d6086098616c9",
       "locator": "private review:questions:m6_social_021"
+    },
+    "c474488773f719f2bcb917b1e46d3f161ad2a966cd72559a2eeabec6356302f7": {
+      "external_id": "m1_psyf_081",
+      "topic_id": "t_082cd47dd86a",
+      "item_sha256": "6e15728fc199d6ddbf5e642a28246afa1d85919a59e899e0114a1a5c41ef0e97",
+      "locator": "private review:questions:m1_psyf_081"
+    },
+    "81d285b137db6b248eaa6ecefcb3dc2babf594a08cdd726117d824822db4d373": {
+      "external_id": "m4_person_024",
+      "topic_id": "t_977635b85384",
+      "item_sha256": "55d6468078a39664bbcc5c34aa4b22cc212b4b12e001ff71b867bc0f567e44a0",
+      "locator": "private review:questions:m4_person_024"
+    },
+    "275db123bce1fef2b054ccd85b19a16062ed8afbd2238bc88157d841e803080b": {
+      "external_id": "other_bonus_002",
+      "topic_id": "t_9ce550077bb9",
+      "item_sha256": "3a1a949311a9934b21289d82d8700c45e4a66469f82874c16cc13c861e6d2c61",
+      "locator": "private review:questions:other_bonus_002"
+    },
+    "3d60976e6c8375639d96bcbd31d51fa3b3ba132eb0d972771767cacfb1c1d65c": {
+      "external_id": "other_brand_002",
+      "topic_id": "t_c7f9c8245f70",
+      "item_sha256": "1601b3716694e1df1210ba77f2b7d6e94bc75061ca646577e857ef1d769e4662",
+      "locator": "private review:questions:other_brand_002"
+    },
+    "06500037550f617a68b0be040102412e8526e3127c368e3af8a64c1e3387f010": {
+      "external_id": "other_tp_006",
+      "topic_id": "t_d9ef710a3784",
+      "item_sha256": "a3fde2565c89239db1ee17d0e26127b694f8d34bb669cd662c034c15a95afdb8",
+      "locator": "private review:questions:other_tp_006"
+    },
+    "6c541b4926548538dc1937aa2b4b65e92683918b69c7c33ed6b6fdf0f4201eda": {
+      "external_id": "other_tp_007",
+      "topic_id": "t_45e69d90b32c",
+      "item_sha256": "c72f973a9ce94d59cabec9d107a3336a3b241bd1c3f1e83cfff2fb724f2da904",
+      "locator": "private review:questions:other_tp_007"
     }
   }
 }
