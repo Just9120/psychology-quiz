@@ -18257,6 +18257,101 @@
       "issues": [],
       "note": "Distinct triangulation hypothesis/data source concept versus org008 skill/process interventionchoice and qual010 casestudystrategy. Safe42698-region exactloc computed, own abstract case. No guaranteed totaltruth, majorityvote or universal alllevels hypothesis;5practice42 holds unchanged.",
       "sources": []
+    },
+    "questions:m6_org_018": {
+      "item_sha256": "8325c8d31e63de35af6151caf9518cc475588fd8ba95391cab46afffb6231dab",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Distinct competence-profile hard/soft/corporate classification, own abstract examples. Exact28970:32829 unheld; course claims that all hard skills are measurable or diploma proves skill not adopted. No personality diagnosis or universal hiring guarantee.",
+      "sources": []
+    },
+    "questions:m6_org_019": {
+      "item_sha256": "ee0bbb26c8227456b3381ce381db252275b587b7db31fcf6517b88cb1f7308ca",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact8650:8736 model definition only. Excludes subsequent Fiedler proof claim, historical attributions and authoritarian emergency recommendation. Not leadership005 formal/informal distinction.",
+      "sources": []
+    },
+    "questions:m6_org_020": {
+      "item_sha256": "024674dfb2991a305679c309b09fa92c854f653cbe67e84add3661351ed885e9",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact5223:5529 safe norming fragment; attributed teaching-model definition, no inevitable trajectory or performance guarantee, no historical date claim. Holds4307:4557/7171:8121 unchanged. Distinct groupstage versus teamgoal006 and roleflexibility013.",
+      "sources": []
+    },
+    "questions:m6_org_021": {
+      "item_sha256": "3381493d5b6dfc9edacc70c7a9c97956fd9de5e9806f73011758f3120a9ce371",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact6732:7496 selected basic-assumption distinction. No universal unconscious-cause or foundational-strength claim. Completes third level separately from org010 artifacts/espoused values; own abstract example, no private company narrative.",
+      "sources": []
+    },
+    "questions:m6_org_022": {
+      "item_sha256": "a750186c775f6f4d50262c88e89fb7045ad0bcf7b50cb2085cfc0b666356162b",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact38868:39006 HR work domains, not exclusive boundary/efficacy. Course claims best specialist selection outside scope. Distinct org001 subject and jobanalysis003/004; no countrylaw or new service policy.",
+      "sources": []
     }
   }
 }
