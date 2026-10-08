@@ -15,6 +15,7 @@ from typing import Any
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 from app.web_config import WebSettings
+from app.miniapp_origins import parse_allowed_origins
 
 from app.logging_config import configure_noisy_http_client_loggers, install_telegram_url_redaction
 from app.miniapp_api import (
@@ -133,12 +134,13 @@ def create_app(
     web_clock=time.time,
 ) -> FastAPI:
     app = FastAPI(redirect_slashes=False)
+    allowed_origins = parse_allowed_origins(allowed_origin)
 
     def _set_common_headers(response: Response, request: Request) -> None:
         response.headers["Cache-Control"] = "no-store"
         request_origin = request.headers.get("Origin", "")
-        if allowed_origin and request_origin == allowed_origin:
-            response.headers["Access-Control-Allow-Origin"] = allowed_origin
+        if request_origin in allowed_origins:
+            response.headers["Access-Control-Allow-Origin"] = request_origin
             response.headers["Vary"] = "Origin"
 
     @app.get("/healthz")
@@ -174,7 +176,7 @@ def create_app(
         started_at = time.perf_counter()
         request_id = _read_request_id(request.headers)
         origin = request.headers.get("Origin", "")
-        allowed = bool(allowed_origin and origin == allowed_origin)
+        allowed = origin in allowed_origins
         if endpoint not in _ENDPOINTS:
             response = Response(status_code=404)
         else:
