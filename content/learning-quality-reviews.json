@@ -18352,6 +18352,158 @@
       "issues": [],
       "note": "Exact38868:39006 HR work domains, not exclusive boundary/efficacy. Course claims best specialist selection outside scope. Distinct org001 subject and jobanalysis003/004; no countrylaw or new service policy.",
       "sources": []
+    },
+    "questions:m6_org_023": {
+      "item_sha256": "58c1c4e7e7f3b94b2e91c7909cd5ddbb995264271bbdc9c717df9c18a2b1992f",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact short engagement definition only, own hypothetical statement. Excludes unsupported research indicator and subsequent burnout/cause assertions; no implicit overtime recommendation or clinical diagnosis.",
+      "sources": []
+    },
+    "questions:m6_org_024": {
+      "item_sha256": "0e8f08f06f68f8c849e6c69bacb4c708093ee439a731c7b94271ad2b7c94ed27",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Course-attributed equity model definition only; excludes preceding historical/date/General Electric assertion and following deterministic satisfaction/productivity prediction. Distinct Vroom009 expectancy factors.",
+      "sources": []
+    },
+    "questions:m6_org_025": {
+      "item_sha256": "6c1be94763abfacc14f82d13b3b565a10afb1bfed24b82bb6b5af667a3750e8c",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Safe course classification of Herzberg factors, no research/performance efficacy guarantee, no age/generation stereotype. Selected group-definition fragment only; preceding and following anecdotes not published.",
+      "sources": []
+    },
+    "questions:m6_org_026": {
+      "item_sha256": "eed0f6125dcd54681c5f79e347939047d099179e0f153e4e44ec231afc11e1a4",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact unheld delegation agreement fragment before subsequent Kurt Lewin efficacy claim; no emergency authoritarian or universal democratic superiority claim. Distinct situational019 and formal/informal005.",
+      "sources": []
+    },
+    "questions:m6_org_027": {
+      "item_sha256": "a16901430c6344276a99de5223c13d3bbd0cf0d9059f10b9206502c2d80bb761",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Safe conflict strategy definition, no copied film/company anecdote, no guaranteed winwin. Distinct compromise014; independent coauthor concept reference already read for014 not treated as full instrument or empirical efficacy approval.",
+      "sources": []
+    },
+    "questions:m6_org_028": {
+      "item_sha256": "e02c4270194244b3377d7e7340cdc85190f074bee9f32dac4a45b82e7271ad20",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact unheld change phase definition only before deterministic support claim; no historical date, universal resistance or guaranteed outcome. Source training/communication support discussed as context, not effectiveness evidence.",
+      "sources": []
+    },
+    "questions:m6_org_029": {
+      "item_sha256": "c9876c2b8645443fa4a58b56cfd23c2c9968f3f345e9a8e9b61ec35e2874155c",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact generic responsibility/authority distinction after participant anecdote; entirely new abstract case, no participant identity or employer/private story. No universal cause conclusion or delegation efficacy guarantee.",
+      "sources": []
+    },
+    "questions:m6_org_030": {
+      "item_sha256": "1691fd30b6e167bc5531e472ba9561707799190e65b8e5ea4a46a8ab4b0bcbb7",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Short unheld strategic management definition only; excludes next tools-efficacy assertion. Complements org022 HR functions and001 subject without claiming an exclusive legal occupational boundary.",
+      "sources": []
     }
   }
 }

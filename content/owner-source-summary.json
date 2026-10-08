@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-08T08:05:05.394095+00:00",
+  "captured_at": "2026-10-08T08:22:04.975418+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -12,10 +12,10 @@
   "known_holds": 321,
   "observation_basis": "saved_inputs",
   "coverage": {
-    "tracked_sources": 112,
-    "untracked_files": 313,
+    "tracked_sources": 113,
+    "untracked_files": 312,
     "source_metadata": {
-      "current": 112
+      "current": 113
     },
     "unmapped_published_questions": 56,
     "lessons": [
@@ -608,6 +608,48 @@
         "notes_state": "PREPARED"
       },
       {
+        "id": "t_323315f65081",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_24ae16397e54",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_7b4f03ad9966",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
         "id": "t_290c97a08218",
         "source_metadata_current": true,
         "processing_state": "processed",
@@ -720,12 +762,12 @@
         "notes_state": "UNSET"
       },
       {
-        "id": "t_57b3ff2e86d6",
+        "id": "t_a9b7a1a11ae9",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 1,
+          "theory": 3,
           "glossary": 0,
           "case": 0
         },
@@ -734,77 +776,7 @@
         "notes_state": "UNSET"
       },
       {
-        "id": "t_738f15039db8",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 2,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_7b4f03ad9966",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 2,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_977635b85384",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_c7f9c8245f70",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_e39d1d65a4d7",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_bb895f94e077",
+        "id": "t_1c1cdcf2927c",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
@@ -824,6 +796,76 @@
         "known_hold": true,
         "kinds": {
           "theory": 4,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_284ec6eeecd6",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_184dd2def77e",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_117013a575cc",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_75f56fc4df73",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 2,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_bb895f94e077",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
           "glossary": 0,
           "case": 0
         },
@@ -860,54 +902,82 @@
         "notes_state": "UNSET"
       },
       {
+        "id": "t_738f15039db8",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 3,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_57b3ff2e86d6",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_e39d1d65a4d7",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_977635b85384",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_c7f9c8245f70",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 1,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
         "id": "t_329d4a4fb105",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
           "theory": 7,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_752d5d43f05a",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 2,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_261793e3e999",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 4,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_a4d66c776fde",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 3,
           "glossary": 0,
           "case": 0
         },
@@ -930,49 +1000,7 @@
         "notes_state": "UNSET"
       },
       {
-        "id": "t_323315f65081",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_24ae16397e54",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_1c1cdcf2927c",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_a9b7a1a11ae9",
+        "id": "t_752d5d43f05a",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
@@ -986,12 +1014,12 @@
         "notes_state": "UNSET"
       },
       {
-        "id": "t_117013a575cc",
+        "id": "t_261793e3e999",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 2,
+          "theory": 5,
           "glossary": 0,
           "case": 0
         },
@@ -1000,35 +1028,49 @@
         "notes_state": "UNSET"
       },
       {
-        "id": "t_184dd2def77e",
+        "id": "t_a4d66c776fde",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
+        "kinds": {
+          "theory": 4,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_368865518bf8",
+        "source_metadata_current": true,
+        "processing_state": "conflict_review",
+        "known_hold": true,
+        "kinds": {
+          "theory": 4,
+          "glossary": 0,
+          "case": 0
+        },
+        "glossary_terms": null,
+        "notes": null,
+        "notes_state": "UNSET"
+      },
+      {
+        "id": "t_a47c7ff1c7db",
         "kinds": {
           "theory": 1,
           "glossary": 0,
           "case": 0
         },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_284ec6eeecd6",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
+        "glossary_terms": 0,
+        "notes": 0,
+        "notes_state": "PREPARED"
       },
       {
-        "id": "t_75f56fc4df73",
+        "id": "t_c11dd0b8d422",
         "source_metadata_current": true,
         "processing_state": "conflict_review",
         "known_hold": true,
@@ -1054,46 +1096,18 @@
         "glossary_terms": null,
         "notes": null,
         "notes_state": "UNSET"
-      },
-      {
-        "id": "t_c11dd0b8d422",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 2,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
-      },
-      {
-        "id": "t_368865518bf8",
-        "source_metadata_current": true,
-        "processing_state": "conflict_review",
-        "known_hold": true,
-        "kinds": {
-          "theory": 1,
-          "glossary": 0,
-          "case": 0
-        },
-        "glossary_terms": null,
-        "notes": null,
-        "notes_state": "UNSET"
       }
     ],
     "prepared_notes_unmapped": 4,
     "unmapped_published_glossary": 81,
     "unreleased_lessons": {
-      "total": 92,
+      "total": 91,
       "processing": {
-        "conflict_review": 91,
+        "conflict_review": 90,
         "processed": 1
       },
-      "metadata_current": 92,
-      "known_holds": 91
+      "metadata_current": 91,
+      "known_holds": 90
     }
   }
 }
