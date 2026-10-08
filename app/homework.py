@@ -105,7 +105,7 @@ def catalog_for_actor(conn, actor_user_id: int) -> dict:
         active = next((row for row in attempts if row[2] == "in_progress"), None)
         output.append({"id": item["id"], "title": item["title"], "module": item["module"],
                        "discipline": curriculum["disciplines"][item["discipline_id"]]["title"],
-                       "topic": curriculum["topics"][item["topic_id"]]["title"],
+                       "topic": item["title"],
                        "description": item["description"], "question_count": len(item["question_ids"]),
                        "completed": completed, "finished_attempts": len(finished),
                        "best_score": int(best[3]) if best else None,

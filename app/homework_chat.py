@@ -28,8 +28,8 @@ def _path_token(path: tuple[str, ...]) -> str:
 def _paths(catalog):
     paths = {}
     for item in catalog:
-        full = (item["module"], item["discipline"], item["topic"])
-        for depth in range(1, 4):
+        full = (item["discipline"], item["topic"])
+        for depth in range(1, 3):
             path = full[:depth]
             token = _path_token(path)
             if token in paths and paths[token] != path:
@@ -47,7 +47,7 @@ def _list(conn, actor: int, *, navigation: str | None = None):
             return "Раздел изменился. Обновите список через /homework.", InlineKeyboardMarkup([
                 [InlineKeyboardButton("Все домашние задания", callback_data="hw:list:all")]])
     catalog = [item for item in catalog
-               if (item["module"], item["discipline"], item["topic"])[:len(path)] == path]
+               if (item["discipline"], item["topic"])[:len(path)] == path]
     lines = ["<b>Домашние задания</b>", "Тест проверяет знания, а не выполнение эссе или упражнения.",
              "Зачёт — 80% в одной завершённой попытке.\n"]
     keyboard = []
@@ -55,16 +55,18 @@ def _list(conn, actor: int, *, navigation: str | None = None):
         lines.append(" → ".join(escape(value) for value in path))
         back = "hw:nav:" + _path_token(path[:-1]) if len(path) > 1 else "hw:list:all"
         keyboard.append([InlineKeyboardButton("Назад", callback_data=back)])
-    if len(path) < 3:
-        field = ("module", "discipline", "topic")[len(path)]
-        for title in sorted({item[field] for item in catalog}):
-            keyboard.append([InlineKeyboardButton(title,
-                callback_data="hw:nav:" + _path_token((*path, title)))])
+    if not path:
+        for discipline, topic in sorted({(item["discipline"], item["topic"]) for item in catalog}):
+            keyboard.append([InlineKeyboardButton(f"{topic} · {discipline}",
+                callback_data="hw:nav:" + _path_token((discipline, topic)))])
+        if catalog:
+            lines.append("Выберите тему задания.")
+            return "\n".join(lines), InlineKeyboardMarkup(keyboard)
     if not catalog:
         lines.append("Домашних заданий пока нет.")
     for item in catalog:
         mark = "✅" if item["completed"] else "○"
-        lines.append(f"{mark} <b>{escape(item['title'])}</b> — {escape(item['module'])}, "
+        lines.append(f"{mark} <b>{escape(item['title'])}</b> — "
                      f"{escape(item['discipline'])}, {escape(item['topic'])}")
         keyboard.append([InlineKeyboardButton(item["title"], callback_data="hw:start:" + item["id"])])
         if item["active_session_id"]:
