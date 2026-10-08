@@ -19074,6 +19074,63 @@
       "issues": [],
       "note": "Exact causal-construction definition and sequence inquiry29024 vicinity before presupposition definition. Own neutral project example; no assertion external influence unreal, every cause internal, medical diagnosis or guaranteed cognitive-change effect.",
       "sources": []
+    },
+    "questions:m4_dev_003": {
+      "item_sha256": "b3be0c8b9fef2b15ca21b886809f73788a564856f5d8675ead5f6eb3a60ca4d9",
+      "discipline_id": "developmental_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact final identity-continuity qualification26028 onward after held deterministic stage outcomes20106:26028. Original participant/fictional names and stories omitted; no fixed age cutoffs, compulsory developmental sequence or clinical diagnosis adopted.",
+      "sources": []
+    },
+    "questions:m4_dev_004": {
+      "item_sha256": "85732c07e6fd8de164cfa75a1394c47b47a63188b70ec6c996e5d6a770cbff02",
+      "discipline_id": "developmental_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact inner/outer distinction8890 vicinity before oversimplified simple/complex grid. Primary Vasilyuk1984 text71–76 distinguishes inner simple-complex from outer easy-difficult; no assertion that lecture grid labels or stabilisation/change paraphrase are the exact primary taxonomy. New question confined to stated basic event/experience contrast, not diagnosis or universally inevitable crisis.",
+      "sources": []
+    },
+    "questions:m4_dev_005": {
+      "item_sha256": "010a7c0c2b6f23d876e9afe68cd40c67e90366f7a04b27fdb0c88bfe91d16fcb",
+      "discipline_id": "developmental_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact ignored/rejected self-aspects definition after midlife universal stereotypes and before gender/retreat anecdotes. APA official shadow entry limits term to Jung theoretical tradition and permits positive/negative aspects; course text does not name author here, so no unverified original-author attribution inserted into item. No empirical treatment effect, diagnosis or age necessity asserted.",
+      "sources": []
     }
   }
 }
