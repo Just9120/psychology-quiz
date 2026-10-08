@@ -18200,6 +18200,63 @@
       "issues": [],
       "note": "Essential conflict-mode distinction absent from461 bank. Own fictionaldepartment case not copied from class participant/property/film stories. Exact43957:44305 safe, unconditionalbadavoidance35880:36080 and universality remainheld. Coauthor definitions corroborate mutualconcessions only; no empirical efficacy or TKI assessmentitem.",
       "sources": []
+    },
+    "questions:m6_org_015": {
+      "item_sha256": "7eb0015526e3acbf5e5c6ba987136cba249dd19614efba3b4b676b77ede383f9",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact10434:10596 safe after held9880:10200; remaining jobanalysis methodgap filled without absolute observationobjectivity assertion. No quantitative validity/performance guarantee. Otherjob profession/psychogram/360/structured/assessment topics already covered.",
+      "sources": []
+    },
+    "questions:m6_org_016": {
+      "item_sha256": "47a446bed6c072f381784cf10d61b76dbeb3a98fb27a4f7c875684cb0d97b150",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Distinct organizational thirdpartyorderer feedback boundary beyond individualconsultingcontract008/068. Exactcoursepolicy excerpt, own hypothetical case, no participant story. Minimumgroup numericalthreshold intentionallyexcluded; no new appconsent/legalrequirements, no blanket countrylaw or guarantee anonymity in anyreport.",
+      "sources": []
+    },
+    "questions:m6_org_017": {
+      "item_sha256": "62d2a766700a54e20e43bdad1611e3ace2ad39942b13ff1feea479f5303d53d7",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Distinct triangulation hypothesis/data source concept versus org008 skill/process interventionchoice and qual010 casestudystrategy. Safe42698-region exactloc computed, own abstract case. No guaranteed totaltruth, majorityvote or universal alllevels hypothesis;5practice42 holds unchanged.",
+      "sources": []
     }
   }
 }

@@ -3398,6 +3398,63 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "ee33901ac9732b1c8726c60ed126a0cc740abf42d9f694e77d4f996b93707e5c": {
+      "schema_version": 1,
+      "item_sha256": "7eb0015526e3acbf5e5c6ba987136cba249dd19614efba3b4b676b77ede383f9",
+      "review_sha256": "0ea243df512ef026c3014c9154da44bbc77583a9707f527c903854a7f30b16f9",
+      "topic_id": "t_329d4a4fb105",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "4ce51c4bd3977e314e19e300ff9de3ea303ea296819700830de48f209962daeb": {
+      "schema_version": 1,
+      "item_sha256": "47a446bed6c072f381784cf10d61b76dbeb3a98fb27a4f7c875684cb0d97b150",
+      "review_sha256": "f622cfcb5b2f724008a0ab9325b70a2243b133aa128bb596ac285677d1df8433",
+      "topic_id": "t_d3a3b3541dab",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "3a32e87ea4aa5429f3248e20bbf494fbe754619ab5c3318870df8572ba943c99": {
+      "schema_version": 1,
+      "item_sha256": "62d2a766700a54e20e43bdad1611e3ace2ad39942b13ff1feea479f5303d53d7",
+      "review_sha256": "720a27fc72aa5e0cae28019131031eb394e63193290dbb7fa2c3bf3a7c620984",
+      "topic_id": "t_d3a3b3541dab",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

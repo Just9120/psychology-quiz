@@ -18,8 +18,8 @@ def test_quality_audit_controlled_calculations() -> None:
 def test_global_canonical_quality_thresholds_and_rapport_resolution() -> None:
     report=build_report()
     g=report["global"]
-    assert g["approved_question_count"] == 465
-    assert g["unique_longest_correct_count"] == 331
+    assert g["approved_question_count"] == 468
+    assert g["unique_longest_correct_count"] == 333
     assert g["high_severity_length_cue_count"] == 0
     assert g["duplicate_normalized_stems"] == {}
     inv,_=load_canonical_inventory(); by_id={r["external_id"]:r for r in inv}
