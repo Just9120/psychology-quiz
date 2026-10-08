@@ -19986,6 +19986,196 @@
       "issues": [],
       "note": "Exact rule5 feedback-request only, before unrelated case details. Format attribution explicit; confidential participant material and universal secrecy rule not adopted.",
       "sources": []
+    },
+    "questions:m4_person_016": {
+      "item_sha256": "d48a351b7ab4776bfe135d7802dfcf4e8c614e83798f965838f87887da68d7e3",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "General/multiple-activity definition only; blanket willpower-as-ability and fixed learnability label excluded.",
+      "sources": []
+    },
+    "questions:m4_person_017": {
+      "item_sha256": "82c2c86c279341df8f07ece187dfbfba7a22c0183dedbf3c9b5e5621482c961d",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Four exact relation-category sentences only, excluding nearby universal trait and private/moral examples; descriptive course framework, not validated diagnostic scale.",
+      "sources": []
+    },
+    "questions:m4_person_018": {
+      "item_sha256": "e7cf2e790e9bf68d3787dab2c5a5021fb0f7c3e86b3dc8a2b99ca275b270ddbf",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact value-based classification criterion before private self-typing/pejorative examples; no empirical exhaustive typology asserted.",
+      "sources": []
+    },
+    "questions:m4_person_019": {
+      "item_sha256": "2e60ba0d105f0ad74e9b541192998377b77454ce2fe5ceba2cc5e52db9834e3e",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Creative/experiential avenues only, before medical anecdote. No promise of treatment/recovery or obligation to suffer; unavoidable-suffering boundary separately corroborated.",
+      "sources": []
+    },
+    "questions:m6_social_015": {
+      "item_sha256": "e336de23b50387d65526ffea1b6e511609479926140011fa34c8a72d125e9a20",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact named ego-state list only, before deterministic early-script claim and erroneous all-six-neofreudian grouping.",
+      "sources": []
+    },
+    "questions:m6_social_016": {
+      "item_sha256": "77d2e54fe4624502f7849b3a250221ddf0c5e6bd28031d40c5a243bf2e5cb0e2",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact assumed-other-attitudes meaning; surrounding transcript typo about control, internal core and social-determinism claims excluded.",
+      "sources": []
+    },
+    "questions:m6_social_017": {
+      "item_sha256": "24bb3a15ffdf07e30f41a2510b6192d7d95ae94eb2e88da91785499db34f1960",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Course reinforcement positive/negative passage corrected with publisher four-quadrant terminology. Own fictional removal/response-frequency example; avoidance of punishment is not definition of all negative reinforcement.",
+      "sources": []
+    },
+    "questions:m6_social_018": {
+      "item_sha256": "570361878744eb6ff7f54a61c47ae61cd2e88b3416d7e2a5f454455fdde6900a",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Observed improved practiced performance only; misdated Triplett chronology and universal presence-improves claim not adopted.",
+      "sources": []
+    },
+    "questions:m6_social_019": {
+      "item_sha256": "0fbfb42e89d814ffea7cc675d367f47325d05b1d724e0ad1c5cf1512cf2db710",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact three-strategy enumeration only; no diagnosis from direction label or universal cultural/childhood cause adopted.",
+      "sources": []
+    },
+    "questions:m1_vnd_060": {
+      "item_sha256": "71ebfb75e5bfcab48ca51aabbbd6a4d003bbbbe5c77d631e484a95e3961356b0",
+      "discipline_id": "fiziologiya_vnd",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact three-group list only, before unsupported exclusive networks/hormones/gene explanation. No empirical anatomical completeness or hierarchy asserted.",
+      "sources": []
     }
   }
 }
