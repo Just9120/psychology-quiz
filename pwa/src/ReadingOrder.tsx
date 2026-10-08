@@ -35,13 +35,18 @@ export function readingOrder(items: Item[], allItems: Item[] = items) {
 
 export function ReadingOrder({ items, allItems, busy, onSelect }: { items: Item[]; allItems: Item[]; busy: boolean; onSelect: (id: string) => void }) {
   const order = readingOrder(items, allItems)
-  return <details className="panel reading-order"><summary>Рекомендуемая последовательность чтения</summary>
-    <p>Рекомендация агента: сначала книги, необходимые для подготовки. Для остальных учитываются значимость и этап чтения. Книги одного этапа без зависимостей можно выбирать по интересу.</p>
-    {order.length ? <ol>{order.map(({ item, stage, prerequisites }) => <li key={item.work_id ?? item.id}>
-      <p><button className="text-button" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button> · {statuses[item.user_state?.reading_status ?? 'not_started']}</p>
-      <p className="muted">{stage}{item.importance_source === 'teacher' ? ' · приоритет преподавателя' : ''}. {item.why_read}</p>
-      {prerequisites.length > 0 && <p>Подготовка: {prerequisites.map((required, index) => <span key={required.id}>{index > 0 && ', '}<button className="text-button" disabled={busy} onClick={() => onSelect(required.id)}>{required.title ?? 'Книга'}</button>{required.user_state?.reading_status === 'read' && ' ✓'}</span>)}</p>}
+  return <details className="panel reading-order"><summary><span>Рекомендуемая последовательность чтения</span><span className="route-count">{order.length} книг</span></summary>
+    <p className="reading-route-intro">Рекомендация агента: начните с подготовки, затем двигайтесь по этапам. Книги одного этапа без зависимостей можно выбирать по интересу.</p>
+    {order.length ? <ol className="reading-steps">{order.map(({ item, stage, prerequisites }, index) => <li className="reading-step" key={item.work_id ?? item.id}>
+      <span className="step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      <div className="step-content"><div className="step-heading"><button className="text-button reading-step-title" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button>
+        <span className={`reading-status status-${item.user_state?.reading_status ?? 'not_started'}`}>{statuses[item.user_state?.reading_status ?? 'not_started']}</span></div>
+        <p className="step-stage">{stage}{item.importance_source === 'teacher' ? ' · приоритет преподавателя' : ''}</p>
+        <details className="step-details"><summary>Зачем читать{prerequisites.length > 0 ? ' и что прочитать до этого' : ''}</summary><p>{item.why_read}</p>
+          {prerequisites.length > 0 && <p>Подготовка: {prerequisites.map((required, position) => <span key={required.id}>{position > 0 && ', '}<button className="text-button" disabled={busy} onClick={() => onSelect(required.id)}>{required.title ?? 'Книга'}</button>{required.user_state?.reading_status === 'read' && ' ✓'}</span>)}</p>}
+        </details>
+      </div>
     </li>)}</ol> : <p>Для выбранной темы последовательность пока не определена.</p>}
-    <p className="muted">Материалы без проверенных сведений о подготовке остаются в каталоге вне последовательности.</p>
+    <p className="hint route-footnote">Остальные материалы доступны в каталоге ниже.</p>
   </details>
 }

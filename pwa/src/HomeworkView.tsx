@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChoiceMenu } from './ChoiceMenu'
 import type { HomeworkAssignment, HomeworkCatalog } from './types'
 
 export function HomeworkView({ catalog, busy, confirmId, onStart, onConfirm, onResume, onRefresh }: {
@@ -23,9 +24,8 @@ export function HomeworkView({ catalog, busy, confirmId, onStart, onConfirm, onR
     <p className="muted">Задание считается выполненным при 80% верных ответов в одной завершённой попытке. Можно попробовать снова.</p>
     <button className="text-button" disabled={busy} onClick={onRefresh}>Обновить результаты</button>
     <div className="homework-actions">
-      <label>Тема домашних заданий<select value={activeTopic} disabled={busy} onChange={event => setTopic(event.target.value)}>
-        <option value="">Все темы</option>{topics.map(item => <option key={topicKey(item)} value={topicKey(item)}>{item.topic} · {item.discipline}</option>)}
-      </select></label>
+      <ChoiceMenu label="Тема домашних заданий" value={activeTopic} disabled={busy} onChange={setTopic}
+        options={[{ value: '', label: 'Все темы' }, ...topics.map(item => ({ value: topicKey(item), label: `${item.topic} · ${item.discipline}` }))]} />
     </div>
     {!assignments.length && <p role="status">Домашних заданий пока нет.</p>}
     {assignments.map(item => <article className="panel homework-card" key={item.id}>

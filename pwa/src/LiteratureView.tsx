@@ -1,4 +1,5 @@
 import { BookOffers } from './BookOffers'
+import { ChoiceMenu } from './ChoiceMenu'
 import { useState } from 'react'
 import { ReadingOrder } from './ReadingOrder'
 import { ReadingSummary } from './ReadingSummary'
@@ -66,11 +67,10 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
     <button className="text-button" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог и прогресс</button>
     {work && entry ? <article className="panel literature-detail">
       <button className="text-button" disabled={busy || uncertain} onClick={() => { setWorkId(null); setSaved(false) }}>← К списку литературы</button>
-      <h2>{work.title}</h2><p>{work.authors.length ? work.authors.join(', ') : 'Автор не указан в источнике'}</p>
+      <header className="book-heading"><span className="book-kicker">Книга</span><h2>{work.title}</h2><p className="book-authors">{work.authors.length ? work.authors.join(', ') : 'Автор не указан в источнике'}</p></header>
       <p className="eyebrow">{entry.reading_topics?.map(item => item.title).join(' · ') ?? entry.topic_title}</p>
-      <p>{entry.why_read}</p>
-      <p>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
-      <p>Год: {entry.year ?? 'не указан'}</p>
+      <p className="book-purpose">{entry.why_read}</p>
+      <div className="book-metadata"><span>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</span><span>Год: {entry.year ?? 'не указан'}</span></div>
       <BookOffers links={work.access_links} />
       <BookSearch search={work.book_search} />
       <details className="source-details"><summary>Библиографическая запись</summary><blockquote>{entry.source.citation}</blockquote>
@@ -78,15 +78,13 @@ export function LiteratureView({ initial, busy, run }: { initial: LiteratureCata
       </details>
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!busy && !uncertain) void run(save) }}>
         <h3>Моё чтение</h3>
-        <label className="field">Статус чтения<select value={status} disabled={busy || uncertain} onChange={event => { setStatus(event.target.value as ReadingStatus); setSaved(false) }}>
-          {Object.entries(statuses).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-        </select></label>
+        <ChoiceMenu label="Статус чтения" value={status} disabled={busy || uncertain} onChange={value => { setStatus(value as ReadingStatus); setSaved(false) }} options={Object.entries(statuses).map(([value, label]) => ({ value, label }))} />
         {uncertain ? <p role="status" className="notice">Подтверждение не получено. Обновите каталог и прогресс перед следующим изменением.</p> : <button className="button primary" type="submit" disabled={busy}>Сохранить чтение</button>}
         {saved && <p role="status">Прогресс чтения сохранён.</p>}
       </form>
     </article> : <>
-      <label className="field literature-filter">Тема<select aria-label="Тема" value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{readingTopics.map(item => <option key={item.topic_id} value={item.topic_id}>{item.title}</option>)}</select></label>
-      <label className="field literature-filter">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(statuses).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+      <div className="literature-filters"><ChoiceMenu label="Тема" value={topic} disabled={busy} onChange={setTopic} options={[{ value: '', label: 'Все темы' }, ...readingTopics.map(item => ({ value: item.topic_id, label: item.title }))]} />
+        <ChoiceMenu label="Фильтр статуса чтения" value={statusFilter} disabled={busy} onChange={value => setStatusFilter(value as ReadingStatus | '')} options={[{ value: '', label: 'Все статусы' }, ...Object.entries(statuses).map(([value, label]) => ({ value, label }))]} /></div>
       <ReadingSummary showActions={!statusFilter} allItems={catalog.works.flatMap(work => work.entries)} items={summaryItems} busy={busy} onSelect={openEntry} />
       <ReadingOrder items={summaryItems} allItems={catalog.works.flatMap(item => item.entries.map(link => ({ ...link, work_id: item.work_id, title: item.title })))} busy={busy} onSelect={openEntry} />
       <p className="muted" role="status">Работ по фильтру: {visible.length}</p>

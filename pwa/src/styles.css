@@ -177,6 +177,69 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .reading-form { margin-top: 24px; max-width: 420px; }
 .source-details { padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .source-details summary { cursor: pointer; }
+.choice-field { position: relative; min-width: 0; margin: 20px 0; }
+.choice-field > label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+.homework-actions .choice-field { width: 100%; }
+.choice-trigger { width: 100%; min-height: 50px; padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; gap: 14px; border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--ink); text-align: left; font: inherit; cursor: pointer; }
+.choice-trigger:hover:not(:disabled), .choice-trigger[aria-expanded="true"] { border-color: var(--green); background: #fbfcf9; }
+.choice-trigger:disabled { opacity: .6; cursor: default; }
+.choice-chevron { color: var(--green); font-size: 22px; line-height: 1; flex-shrink: 0; }
+.choice-trigger[aria-expanded="true"] .choice-chevron { transform: rotate(180deg); }
+.choice-popover { position: absolute; z-index: 30; top: calc(100% + 8px); left: 0; right: 0; padding: 8px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 14px 36px #163e3226; }
+.choice-popover-above { top: auto; bottom: calc(100% + 8px); }
+.choice-search { display: block; width: 100%; min-width: 0; padding: 12px; margin-bottom: 6px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); color: var(--ink); font: inherit; }
+.choice-options { max-height: min(320px, 42dvh); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.choice-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; min-height: 44px; border-radius: 8px; line-height: 1.45; cursor: pointer; overflow-wrap: anywhere; }
+.choice-option[data-active="true"] { background: var(--soft-green); }
+.choice-option[aria-selected="true"] { color: var(--green); font-weight: 600; }
+.choice-option[aria-disabled="true"] { opacity: .45; cursor: default; }
+.choice-empty { padding: 12px; color: var(--muted); }
+.literature-filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 18px; }
+.book-heading { margin: 22px 0; }
+.book-kicker { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+.book-heading h2 { font-size: clamp(24px, 3vw, 34px); line-height: 1.25; margin: 8px 0; }
+.book-authors { margin: 8px 0; color: var(--muted); }
+.book-purpose { max-width: 75ch; padding: 16px 20px; border-left: 3px solid var(--green); border-radius: 0 10px 10px 0; background: var(--soft-green); }
+.book-metadata { display: flex; flex-wrap: wrap; gap: 10px 24px; margin: 20px 0; font-size: 13px; }
+.literature-access, .literature-search, .book-offers-empty { margin: 28px 0; }
+.book-offer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; }
+.book-offer { display: grid; align-content: start; gap: 10px; padding: 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
+.book-format { color: var(--muted); font-size: 12px; }
+.book-offer .button { display: flex; justify-content: space-between; gap: 12px; }
+.book-offer .hint { margin: 0; font-size: 11px; }
+.offer-details { margin-top: 14px; }
+.offer-details summary, .step-details summary { color: var(--green); cursor: pointer; font-size: 13px; }
+.provider-searches { margin: 18px 0; }
+.provider-searches > span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+.provider-search { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 9px; color: var(--green); text-decoration: none; font-size: 13px; }
+.provider-search:hover { background: var(--soft-green); border-color: var(--green); }
+.literature-search .field textarea { width: 100%; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); font: inherit; font-weight: 400; resize: vertical; }
+.reading-order > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--green); font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; }
+.reading-order > summary::-webkit-details-marker { display: none; }
+.reading-order > summary::after { content: '+'; font-size: 23px; font-weight: 400; }
+.reading-order[open] > summary::after { content: '−'; }
+.route-count { margin-left: auto; white-space: nowrap; color: var(--muted); font-size: 12px; font-weight: 400; }
+.reading-route-intro { max-width: 72ch; color: var(--muted); font-size: 13px; }
+.reading-steps { list-style: none; margin: 24px 0 0; padding: 0; }
+.reading-step { display: flex; gap: 18px; padding: 20px 0; border-top: 1px solid var(--line); }
+.step-number { width: 38px; height: 38px; flex-shrink: 0; display: grid; place-items: center; border-radius: 12px; background: var(--soft-green); color: var(--green); font-size: 13px; font-weight: 600; }
+.step-content { flex: 1; min-width: 0; }
+.step-heading { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+.reading-step-title { font-size: 17px; font-weight: 600; line-height: 1.4; text-align: left; }
+.reading-status { padding: 4px 9px; border-radius: 20px; background: #f1f2ee; color: var(--muted); font-size: 11px; white-space: nowrap; }
+.reading-status.status-read, .reading-status.status-in_progress { color: var(--green); background: var(--soft-green); }
+.step-stage { margin: 8px 0; color: var(--muted); font-size: 12px; }
+.step-details p { margin: 12px 0; max-width: 75ch; font-size: 13px; }
+.route-footnote { margin: 14px 0 0; }
+@media (max-width: 700px) {
+  .literature-filters { grid-template-columns: 1fr; gap: 0; }
+  .literature-filters .choice-field { margin: 10px 0; }
+  .step-heading { flex-direction: column; gap: 7px; }
+  .reading-step { gap: 12px; }
+  .reading-order > summary { font-size: 15px; gap: 8px; }
+  .route-count { font-size: 11px; }
+  .choice-option { font-size: 13px; }
+}
 .source-details blockquote { margin: 16px 0; padding-left: 16px; border-left: 3px solid var(--line); }
 @media (max-width: 700px) { .literature-list { grid-template-columns: 1fr; } }
 .homework-card { margin-top: 1.25rem; }

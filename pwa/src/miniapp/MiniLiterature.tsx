@@ -1,4 +1,5 @@
 import { BookOffers } from '../BookOffers'
+import { ChoiceMenu } from '../ChoiceMenu'
 import { useState } from 'react'
 import { ReadingOrder } from '../ReadingOrder'
 import { ReadingSummary } from '../ReadingSummary'
@@ -48,22 +49,23 @@ export function MiniLiterature({ initial, topics, busy, run }: {
     <p className="muted">Выберите тему или откройте рекомендуемую последовательность чтения.</p>
     <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог</button>
     {item ? <article className="panel literature-detail"><button className="text-button" onClick={() => setSelected(null)}>← К списку</button>
-      <h2>{item.title}</h2><p>{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p>
+      <header className="book-heading"><span className="book-kicker">Книга</span><h2>{item.title}</h2><p className="book-authors">{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p></header>
       <p className="eyebrow">{item.reading_topics?.map(link => link.title).join(' · ')}</p>
-      <p>Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source ? importanceSources[item.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
+      <p className="book-purpose">{item.why_read}</p>
+      <p className="book-metadata">Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source ? importanceSources[item.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       <BookOffers links={item.access_links} description="Доступ и совпадение издания уточняются у провайдера." />
       <BookSearch search={item.book_search} />
-      <p>{item.why_read}</p>{(item.source?.citation || item.metadata_warnings?.length) && <details><summary>Библиографическая запись</summary>
+      {(item.source?.citation || item.metadata_warnings?.length) && <details className="source-details"><summary>Библиографическая запись</summary>
         {item.source?.citation && <blockquote>{item.source.citation}</blockquote>}
         {item.metadata_warnings?.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!uncertain) void run(save) }}>
-        <label className="field">Статус<select value={status} disabled={busy || uncertain} onChange={event => { setStatus(event.target.value as ReadingStatus); setSaved(false) }}>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+        <h3>Моё чтение</h3><ChoiceMenu label="Статус" value={status} disabled={busy || uncertain} onChange={value => { setStatus(value as ReadingStatus); setSaved(false) }} options={Object.entries(labels).map(([value, label]) => ({ value, label }))} />
         {uncertain && <p role="status">Сохранение не подтверждено. Сначала обновите каталог.</p>}
         <button className="button primary" type="submit" disabled={busy || uncertain}>Сохранить чтение</button>{saved && <p role="status">Отметка сохранена.</p>}
       </form></article> : <>
-      <label className="field">Тема<select aria-label="Тема" value={topic} disabled={busy} onChange={event => setTopic(event.target.value)}><option value="">Все темы</option>{navigationTopics.map(entry => <option key={entry.topic_id} value={entry.topic_id}>{entry.title}</option>)}</select></label>
-      <label className="field">Фильтр статуса чтения<select value={statusFilter} disabled={busy} onChange={event => setStatusFilter(event.target.value as ReadingStatus | '')}><option value="">Все статусы</option>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+      <div className="literature-filters"><ChoiceMenu label="Тема" value={topic} disabled={busy} onChange={setTopic} options={[{ value: '', label: 'Все темы' }, ...navigationTopics.map(entry => ({ value: entry.topic_id, label: entry.title }))]} />
+        <ChoiceMenu label="Фильтр статуса чтения" value={statusFilter} disabled={busy} onChange={value => setStatusFilter(value as ReadingStatus | '')} options={[{ value: '', label: 'Все статусы' }, ...Object.entries(labels).map(([value, label]) => ({ value, label }))]} /></div>
       <ReadingSummary showActions={!statusFilter} allItems={items} items={scoped} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} />
       <ReadingOrder items={scoped} allItems={items} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} />
       {visible.length ? <div className="literature-list">{visible.map(entry => <article className="panel literature-card" key={entry.id}><h2><button className="text-button literature-title" onClick={() => choose(entry)}>{entry.title}</button></h2><p>{entry.authors?.join(', ') || 'Автор не указан'}</p><p className="muted">{labels[entry.user_state?.reading_status ?? 'not_started']}</p></article>)}</div> : <p role="status">По этой теме список пока пуст.</p>}

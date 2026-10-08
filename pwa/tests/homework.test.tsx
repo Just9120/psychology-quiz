@@ -1,3 +1,4 @@
+import { chooseMenu } from './choose-menu'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
@@ -12,9 +13,9 @@ it('filters concrete homework topics without module labels and recovers after ca
   const { rerender } = render(<HomeworkView {...props} catalog={{ ok: true, assignments: [first, second] }} />)
   const user = userEvent.setup()
   expect(screen.queryByText(/Модуль/)).not.toBeInTheDocument()
-  await user.selectOptions(screen.getByLabelText('Тема домашних заданий'), JSON.stringify(['Психология', 'Память']))
+  await chooseMenu(user, screen.getByLabelText('Тема домашних заданий'), JSON.stringify(['Психология', 'Память']))
   expect(screen.queryByRole('heading', { name: 'Второе задание' })).not.toBeInTheDocument()
-  await user.selectOptions(screen.getByLabelText('Тема домашних заданий'), JSON.stringify(['Физиология', 'Движение']))
+  await chooseMenu(user, screen.getByLabelText('Тема домашних заданий'), JSON.stringify(['Физиология', 'Движение']))
   await user.click(screen.getByRole('button', { name: 'Начать тест · 5 вопросов' }))
   expect(onStart).toHaveBeenCalledExactlyOnceWith('two')
   rerender(<HomeworkView {...props} catalog={{ ok: true, assignments: [first] }} />)
