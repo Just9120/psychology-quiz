@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "state": "PARTIAL",
-  "captured_at": "2026-10-07T23:38:30.251488+00:00",
+  "captured_at": "2026-10-08T05:14:31.185261+00:00",
   "files": 425,
   "folders": 94,
   "processing": {
@@ -697,7 +697,7 @@
         "processing_state": "conflict_review",
         "known_hold": true,
         "kinds": {
-          "theory": 1,
+          "theory": 4,
           "glossary": 0,
           "case": 0
         },

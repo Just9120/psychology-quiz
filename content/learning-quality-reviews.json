@@ -17364,6 +17364,63 @@
       "issues": [],
       "note": "Course-framed circular inquiry: member responses, understandings and changes; no unique causal mechanism, coercion, diagnosis or therapeutic-effect claim. Existing observational/hypothesis items do not explain this family-system inquiry model.",
       "sources": []
+    },
+    "questions:m2_quant_002": {
+      "item_sha256": "caf6a4be9ffa2f535b0b3590a595ca8bea9b70af309ab38d9c0e79d0f88ffe66",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Test-retest method definition and conditional interpretation only. No universal interval/coefficient threshold, proof of absolute agreement or immutable trait assertion. Current measurement-risk items do not define retest procedure.",
+      "sources": []
+    },
+    "questions:m2_quant_003": {
+      "item_sha256": "03248b7b7196eb541e11fa8cdf412bfea99f7b46827cfd1aa0ed7b34be9e3539",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Internal-consistency concept, separately from repeated administration and validity. No alpha threshold, guaranteed lower-bound property, unidimensionality proof or automatic validated scoring asserted.",
+      "sources": []
+    },
+    "questions:m2_quant_004": {
+      "item_sha256": "c5f56680a8e6ea9b946d3acf71a3eab8dc9baf3277faf05aea7859a35e7d77bb",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course method-versus-instrument distinction using a nonclinical authored observation example. Does not assert instrument validity or diagnose participants; differs from operational-definition questions.",
+      "sources": []
     }
   }
 }
