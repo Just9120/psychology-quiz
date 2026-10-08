@@ -20803,6 +20803,253 @@
       "issues": [],
       "note": "Exact avoidance definition only; excludes fictional film people/details and universal avoidance-ineffective assertion earlier in source.",
       "sources": []
+    },
+    "questions:m6_org_035": {
+      "item_sha256": "0e4921cb9b0cf6a19e955f1d27ddc8c63dce5a23583998bcf6fb4be53010fb8c",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact orderer/client distinction; source confidentiality and multi-source considerations already assessed by organizational016/017 and voluntary participation by consulting110. No inference that manager consent replaces participant agreement.",
+      "sources": []
+    },
+    "questions:m6_org_036": {
+      "item_sha256": "b6465d785071954784e1be15ca48f12caabf5db30b2be5d67f329f0db1978e9f",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact later physiological-needs examples outside8580:9300 rigid-hierarchy hold; author1943 paragraph54–62 independently reviewed. No rigid sequence, employee-priority guarantee or efficacy.",
+      "sources": []
+    },
+    "questions:m6_social_022": {
+      "item_sha256": "cacb3625497c2c17977ffb58754cc25f83f74de46df12527cb2c21685878e1ea",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact alternative cognitive-change route, current social012 assesses behavior change. Own fictional example; no claim that contradiction always harmful, no misinformation avoidance recommendation.",
+      "sources": []
+    },
+    "questions:m6_social_023": {
+      "item_sha256": "d4c37dfeaab447c15b067afc24d8c5d7f239217da7833f735295abc9b1de75ca",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Course header identifies hypothesis only; qualified substantive definition independently checked in Berkowitz1989 author abstract indexed by PubMed and1988 publisher abstract. No determinism, all-aggression causal inference or intervention recommendation.",
+      "sources": []
+    },
+    "questions:m6_social_024": {
+      "item_sha256": "746d7459ca1964cc662913d4d020725b2ded277903d234e1b32c4a95edc37f6e",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Only domain-definition paragraph after LeBon/Sighele deterministic claims; historical orientation not modern endorsement or ethnicity/group inferiority.",
+      "sources": []
+    },
+    "questions:m6_social_025": {
+      "item_sha256": "2422df957279ac463d88a4b522de762e165500bf93997ebbf73ac0331651032c",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Historical subject-matter examples only; metaphorical collective spirit and universal individual determination not accepted as scientific facts. Wundt-specific laws/no-laws contradiction excluded.",
+      "sources": []
+    },
+    "questions:m1_psyf_084": {
+      "item_sha256": "d7f1015754dc305eaccba6a4ca140ade692f093ff87da69ec55e1340aacc3515",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Lecture introduction identifies frontal-lobe topic only; precise anatomical answer separately supported by publisherdefinition66–67 plus distributed-interaction30. Held percentages, deterministic brainstories and meditation/neural prognoses excluded.",
+      "sources": []
+    },
+    "questions:m1_psyf_085": {
+      "item_sha256": "d306357283c2188cd034cb89ea457c3a994a3409316dd2a59292e4b25aa39a96",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact internal-body signal clause only, excluding surrounding hypersensitivity/yoga recommendation. Terminology independently checked in2018 Khalsa coauthor manuscript abstract; no exclusivity to viscera, organ diagnosis or muscle-to-organ treatment claim.",
+      "sources": []
+    },
+    "questions:m4_dev_010": {
+      "item_sha256": "0001296850cb047d32c95f048e9686a11b7eee3f14a3ac77ee5f9b235d3b9ec4",
+      "discipline_id": "developmental_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Lecture clause identifies referenced author only; substantive answer independently verified in author1984 chapterII typology71–76. Explicitly distinguishes primary categories from lecturer stability/change paraphrase; no age-crisis inevitability, mental-status diagnosis or wholebook approval.",
+      "sources": []
+    },
+    "questions:m2_quant_007": {
+      "item_sha256": "2980436bbc5860ed81e6c8998f481060deef2aa028d3f7a12ec3715ba46fafa8",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact probability-inclusion definition only; independent official sampling definition confirmed. No all-person identical chance or representativeness guarantee.",
+      "sources": []
+    },
+    "questions:m2_quant_008": {
+      "item_sha256": "34cc70ae4a22b22ceed73ee8f0bd4bcafab4971971e067ac4cf061cc90abe4a3",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Lecture supports known positive inclusion-probability criterion only. Own fictional strata example and quota distinction separately verified against StatisticsCanada definitions. Held18400:20100 quota/proportional-inference paragraph NOT evidence or approved.",
+      "sources": []
+    },
+    "questions:m2_quant_009": {
+      "item_sha256": "55760c2b71afbd119b8c2db9a0ec007729e51aa0ecd3feeeac4f9a323725c0b0",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact schools/classes/pupils example and cluster definition only. No always-lower precision or independence assumption; official multistage distinction checked.",
+      "sources": []
+    },
+    "questions:m2_quant_010": {
+      "item_sha256": "b24000db294764b97a8b3c9df5500b18119e83f6a2d97a5775332a53ec86fe92",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact later weights qualification20139 onward outside18400:20100 hold. Fictional overrepresentation example and design caveat independently checked against official stratified-design definition. No approval of original held within-stratum selection shortcut or universal unbiasedness.",
+      "sources": []
     }
   }
 }
