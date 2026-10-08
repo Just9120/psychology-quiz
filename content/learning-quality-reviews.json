@@ -18637,6 +18637,25 @@
       "issues": [],
       "note": "Exact14253:14982 later explicit/implicit hierarchy and learned skills, not earlier narrow declarative definition at12762. Original unsafe bicycle/phone illustration not copied or recommended. Compared with current vnd058 motor-skill question: new paired contrast tests declarative versus procedural classification, not another motor example.",
       "sources": []
+    },
+    "questions:m1_vnd_059": {
+      "item_sha256": "f5551139325f76a4c15947e26e6edbd175c2e1ebc9f58b7ef11985d07bf8dabc",
+      "discipline_id": "fiziologiya_vnd",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Selected safe definition and explicit feelings-versus-beliefs distinction. Does not adopt subsequent universal any-person-same-feeling statement or physiological claims. Own wording, no participant personal experience; compared with current observable-fact and reflection items, none tests this validation/endorsement contrast.",
+      "sources": []
     }
   }
 }

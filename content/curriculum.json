@@ -5025,6 +5025,12 @@
       "topic_id": "t_1a8edcb4d16c",
       "item_sha256": "73d9ea56a1fc640598a8c708fc7395ceb9714a50979aa27883417c1156d6403a",
       "locator": "private review:questions:m1_psyf_077"
+    },
+    "2468b7fae803972029b725f61ede19b812ac0c581e4548d59ebbff35462f0303": {
+      "external_id": "m1_vnd_059",
+      "topic_id": "t_fdf0949c60f1",
+      "item_sha256": "f5551139325f76a4c15947e26e6edbd175c2e1ebc9f58b7ef11985d07bf8dabc",
+      "locator": "private review:questions:m1_vnd_059"
     }
   }
 }

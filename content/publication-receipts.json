@@ -10155,6 +10155,25 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m1_vnd_059": {
+      "schema_version": 1,
+      "item_sha256": "f5551139325f76a4c15947e26e6edbd175c2e1ebc9f58b7ef11985d07bf8dabc",
+      "review_sha256": "33d5e3f37ffae710c1512b37cef58d200d363fa7996db123713a06dbb0eac208",
+      "topic_id": "t_fdf0949c60f1",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
