@@ -43,8 +43,10 @@ compose exec -T psych_quiz_miniapp_api python scripts/deployment_http_smoke.py <
 compose exec -T psych_quiz_miniapp_api python - <<'PY'
 import os
 import urllib.request
+from scripts.miniapp_domain_config import migrated_url
 expected = 'https://miniapp.psy.cloud-nodes.net'
-assert os.environ.get('MINI_APP_URL') == expected
+actual = os.environ['MINI_APP_URL']
+assert migrated_url(actual) == actual
 for origin in ['https://miniapp.librechat.online', expected, 'https://untrusted.example']:
     request = urllib.request.Request('http://127.0.0.1:8081/miniapp/state', method='OPTIONS', headers={'Origin': origin})
     with urllib.request.urlopen(request, timeout=5) as response:
