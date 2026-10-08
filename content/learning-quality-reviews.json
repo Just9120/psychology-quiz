@@ -21316,6 +21316,234 @@
       "issues": [],
       "note": "Exact can-be-conscious coping clause plus official APA dictionary indexed definition. No all-coping-conscious claim, first-instrument priority, protected questionnaire items, scoring threshold or fixed personality inference.",
       "sources": []
+    },
+    "questions:case_clarify_meaning_001": {
+      "item_sha256": "2072958241d8d123a7ca6241b7b02b72ee0b3f4f7cf4e3059e4cd544aa106193",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Authored semantic-clarification case: paraphrase is tentative, concrete example checks understanding; no inference of family members' motives or efficacy guarantee. Distinct from emotion reflection. Exact saved skills fragment individually read. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_check_emotion_001": {
+      "item_sha256": "28590c024aafb365f0b2e3d8fd7eb02956928f3fce74fe9082fc1e18b02d01d8",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Authored correction of an emotion reflection; client clarification retained, no certainty about hidden emotion, diagnostic defence label or guaranteed openness. Both exact skills ranges read; original holds unchanged. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_client_choice_001": {
+      "item_sha256": "1d5155b57a3fd44b97bc6c0dd15651428669d87afb7baa9288877f2670619e81",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Non-emergency adult career choice; source supports exploring choices/consequences and client participation. No consultant responsibility waiver or claim all outcomes are client fault. Not a paraphrase of the existing first-session request clarification. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_competence_limit_001": {
+      "item_sha256": "c536d933ceea36f837e2d8786eeb761f3d83489a2c9d365efcff2bcfdf5c98d5",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Non-emergency competence uncertainty. Source supports supervision/referral; excludes emergency handling, prescription entitlement and claim supervision always makes an unfamiliar intervention safe. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_online_privacy_001": {
+      "item_sha256": "df1075244af9b1e64f242bff3c2b18fdfb5bf5cdebd355db4940ae9ef351e3f1",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Online-room privacy concern, not proof of a breach. Saved exact space/privacy recommendations read; virtual background is neither generally harmful nor a guarantee. No legal compliance assertion; all source holds preserved. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_informed_start_001": {
+      "item_sha256": "2a49e3b2c9bd6a13761772b4b10909c10c15b45bfb1388656fd3f8ab16ae7e7b",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Authored informed-start case using individually read glossary definitions14/18. Educational informing process, not jurisdiction-specific legal consent rule, certificate requirement or clinical entitlement. No new scientific claims. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_goal_own_actions_001": {
+      "item_sha256": "32f7b3efacfbd037bd13e8cd6142f12c792c1b7c8e487b1366480f0b4549e8ee",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Own-action goal with workplace context; source supports attainable jointly agreed focus. No blame for working conditions, guaranteed assertiveness success, legal advice or promise to change third parties. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_progress_criteria_001": {
+      "item_sha256": "e6175c80f8d02d5db30723d5e3ec7bbda19f161f2c2f691640beeadcaa01cdf1",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Progress check remains about agreed observable focus, not discharge or mandatory numeric scoring. Pleasant contact/session count not proof of goal attainment; no efficacy or failure diagnosis. Exact goals function fragments read. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_revise_hypothesis_001": {
+      "item_sha256": "c7ef3e2da80bd1824233e39d0123ed78ab64043076f871da75e64581ff3d01e7",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Provisional formulation confronted with contradictory episode information. No diagnosis, established etiology or claim one alternative cause is proven. Both exact hypothesis ranges read and known source holds remain. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_test_hypothesis_001": {
+      "item_sha256": "3d95f89ecf1fbe98fd6d12af7a534fa0d6adcfd8cebf77fd53c400099324f77d",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Episode-level hypothesis testing; fear of rejection remains conjecture. No dependent-personality diagnosis, general causal proof or risky prescribed experiment. Exact sequence-testing fragment read. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_compare_hypotheses_001": {
+      "item_sha256": "9842d2f4ddedc3c76e72e95b5a8c2b653818d939b1dca6f7cf43eb9c12cfc9a8",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Alternative hypotheses across distinct task contexts; no required count, bias guarantee, hidden-depth hierarchy or fixed procrastination etiology. Distinct from revision after direct contradictory information. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
+    },
+    "questions:case_realistic_forecast_001": {
+      "item_sha256": "667541bfb16d04c79961964a79bc3f8279281d0106f360c20f0997f4dcb6b910",
+      "discipline_id": "psychological_consulting",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Probabilistic counselling forecast, not medical efficacy guidance, fixed-session cure or claim all uncertainty prevents planning. Exact aims/probabilistic prognosis fragments read. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
+      "sources": []
     }
   }
 }

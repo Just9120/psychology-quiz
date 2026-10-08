@@ -1,5 +1,27 @@
 # Delivery Plan
 
+## Current work — CASE-QUESTIONS-20261009
+
+Основание: прямое поручение владельца09.10.2026 расширить тему «Кейс», в которой сейчас четыре вопроса. Результат: 12 дополнительных авторских ситуационных вопросов (16 всего), разные задачи консультирования, один наиболее подходящий ответ с разбором каждой альтернативы в заданных условиях. Scope: AC-QUIZ-08/09, AC-SRC-04/07/09; проверка конкретных ответов и пояснений по сохранённым extracts/редакциям корпуса. Существующие четыре IDs и история попыток сохраняются. Отдельная встроенная Goal не запрошена.
+
+Baseline `origin/main` `a50308beae2ab1970093a3bb544de538623f9668`; branch `codex/case-questions-20261009`, тот же base; существующий чистый checkout `psychology-quiz-privacy-20261007`. Primary dirty, ignored private inputs и старый broken worktree сохранены. Открытых PR нет; freshly checked strict required checks: pwa-client, validate-and-smoke-test; required approvals:0. Предыдущая LITERATURE-TOPICS работа завершена PR340: merge `a50308b`, main CI37837750115, CD37838247300 и Cloudflare build9c73b5fe PASS; checkpoint ниже предшествует поставке.
+
+Non-goals: замечания о внешнем виде dropdown/плана чтения/карточек книг, копирование запросов и расширение provider links остаются в чате до отдельного поручения; повторный полный обход425 материалов, RAG, Vault, новые runtime генераторы, изменение policy/CI/auth, клинические диагнозы и обещания эффективности исключены.
+
+DoD: semantic review всех12 новых вопросов, приватное досье и exact source-free receipts, неизменность старых вопросов/истории, publication/duplicate/privacy gates; один основной PR, required CI/review, merge, штатный stateful content CD с backup, user-state preservation и serving parity на точной merge revision. Локальные материалы источника не включаются в diff/artifacts.
+
+| AC/риск | Проверка/ожидаемый результат | Canonical команда/tool и cwd | Environment/этап | Gate |
+| --- | --- | --- | --- | --- |
+| QUIZ-08 / содержание | Разные вымышленные ситуации; контекст делает выбор обоснованным; все альтернативы разобраны; ответ/пояснение поддержаны точным прочитанным фрагментом, holds не сняты | Содержательное review saved extracts + private publication verification; root | Local до approval/push | REQUIRED |
+| SRC-04/07/09 / публикация | Валидный receipt exact item; нет private refs в новых public items; drafts/changed receipts не публикуются | README question validator, publication/scoped-review/privacy tests и public asset audit; root | Local и CI | REQUIRED |
+| QUIZ-09 / совместимость | 16 serving case questions, standalone/mixed selection и contextual feedback; существующие IDs/editions не меняются | Existing case/publication/seed parity tests; root | Local targeted; full CI | REQUIRED |
+| Поставка/state | Backup до content sync, preserved user state, parity и точная revision bot/API; HTTP/auth/readiness post-checks | Действующие CI/CD/content rollout процедуры | Production после merge | REQUIRED |
+| UI build/browser | Клиентский код не меняется; existing required CI suites подтверждают выдачу/разбор | Existing pwa-client CI | CI | REQUIRED; дополнительный локальный browser/build N/A для content-only diff |
+
+Checkpoint09.10.2026: реализовано12/12 новых вопросов; AC-QUIZ-08/09 и SRC-04/07/09 для этой редакции READY по коду и targeted validation. 16 serving cases, общий approved банк641; новые позиции правильного ответа распределены3/3/3/3, severe length cues0, exact duplicate stems0. Все прежние questions/reviews/receipts и processing/holds неизменны. Новые private dossiers лежат только в ignored data/; public diff содержит source-free questions, receipts и quality notes. Saved source excerpts/bytes/revisions и individual review PASS; live Drive freshness и whole-source/clinical certification не заявлены.
+
+Local Evidence PASS: question validator; private-source verification всех12 dossiers; public content/assets audit (3 unchanged Mini App assets,519 known sources,1045 approved items); targeted publication/receipt/scoped-review/seed-parity/quality suite и6 case tests. Existing standalone/mixed regression расширена на все16 approved cases; snapshot численности обновлён, negative publication assertions сохранены. Первичный sandbox temp-path failure разрешён отдельной disposable test directory; content-count snapshot и invalid test-only question_count исправлены до push. Self-review: diff только additions12, preserved baseline4 и старые ledger records, нет runtime/policy/schema changes. Следующий шаг: один PR, exact required CI/review → merge → stateful content CD с backup/user-state/parity. CI/CD PENDING; внешних blockers нет. Процент проекта не пересчитан.
+
 ## Current work — LITERATURE-TOPICS-20261008
 
 Основание: прямое поручение владельца08.10.2026 — самостоятельные темы и книги по ним, без занятий; видимая рекомендуемая последовательность чтения; кроме поискового запроса — подтверждённые карточки Литрес, MyBook и Яндекс Книг. Это уточнение AC-LIT-06/07/10 и зависимых AC-LIT-02/03/04. Новая встроенная Goal не запрошена; предыдущая завершена.

@@ -44,15 +44,20 @@ def test_approved_theory_without_explanation_cannot_be_seeded():
 
 
 def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
-    item = json.loads(Path("content/questions/module3/cases.json").read_text(encoding="utf-8"))[0]
+    items = json.loads(Path("content/questions/module3/cases.json").read_text(encoding="utf-8"))
+    item = items[0]
     registry = json.loads(Path("content/topics.json").read_text(encoding="utf-8"))
     topic = next(topic for topic in registry if topic["id"] == "cases")
     assert topic["title"] == item["category"] == "Кейс"
     assert topic["question_file"] == "content/questions/module3/cases.json"
-    assert item["kind"] == "case"
+    assert len(items) == 16
+    assert all(candidate["kind"] == "case" for candidate in items)
     with closing(get_connection(str(bank))) as conn, conn:
-        upsert_approved_questions(conn, [item])
+        upsert_approved_questions(conn, items)
         case_id = conn.execute("SELECT id FROM questions WHERE external_id=?", (item["id"],)).fetchone()[0]
+        case_ids = {row[0] for row in conn.execute(
+            "SELECT id FROM questions WHERE kind='case' AND status='approved'")}
+        assert len(case_ids) == len(items)
         options = quiz_setup_options(conn)
         categories = options["categories"]
         assert options["content_kind_choices"] == ["theory", "case"]
@@ -60,13 +65,13 @@ def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
         other_category = next(category for category in categories if category["name"] == "Original category")
         assert (cases_category["topic_id"], cases_category["module"]) == ("cases", "module3")
         assert (other_category["topic_id"], other_category["module"]) == (None, None)
-        setup = {"question_count": 5, "difficulty": "any", "content_kinds": ["case"]}
+        setup = {"question_count": None, "difficulty": "any", "content_kinds": ["case"]}
         single = prepare_quiz(conn, {**setup, "quiz_mode": "single",
                                      "category_ids": [cases_category["id"]]})
-        assert single.question_ids == (case_id,)
+        assert set(single.question_ids) == case_ids
         mixed = prepare_quiz(conn, {**setup, "quiz_mode": "selected_mix",
                                     "category_ids": [cases_category["id"], other_category["id"]]})
-        assert mixed.question_ids == (case_id,)
+        assert set(mixed.question_ids) == case_ids
         session = start_quiz_session(conn, 1, cases_category["id"])
         store_session_questions(conn, session, [case_id])
         feedback = build_answer_feedback(conn, session, case_id, 0, True)
