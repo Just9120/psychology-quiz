@@ -75,12 +75,12 @@ def fragment_fixture(tmp_path, monkeypatch, *, state="conflict", kind="questions
     return public, dossier, inventory, {source["id"]: record}, path
 
 
-def private_classification_fixture(tmp_path, monkeypatch):
+def private_classification_fixture(tmp_path, monkeypatch, *, kind="literature"):
     import subprocess
     from app.source_inventory import complete_listing, scan
 
     public, dossier, inventory, processed, extract = fragment_fixture(
-        tmp_path, monkeypatch, state="pending_review", kind="literature")
+        tmp_path, monkeypatch, state="pending_review", kind=kind)
     root = signer.REPO_ROOT
     subprocess.run(["git", "init", "-q", str(root)], check=True)
     (root / ".gitignore").write_text("data/\n", encoding="utf-8")
@@ -406,3 +406,274 @@ def test_related_fragment_mapping_accepts_explicit_union_of_existing_holds(tmp_p
     before = deepcopy(processed)
     verify_current_sources(dossier, inventory, processed, public_item=public)
     assert processed == before
+
+
+@pytest.mark.parametrize("top_locator", ["absent", None])
+def test_issue_only_hold_preserves_all_ranges_and_current_review(tmp_path, monkeypatch, top_locator):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record.pop("locator")
+    if top_locator is None:
+        record["locator"] = None
+    record["issues"] = [{"locator": "characters:16:30"}, {"locator": "characters:31:52"}]
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    for overlapping in ("characters:0:15", "characters:10:20"):
+        record["issues"][1]["locator"] = overlapping
+        dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+        with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+            verify_current_sources(dossier, inventory, processed, public_item=public)
+    record["issues"][1]["locator"] = "characters:31:52"
+    # An old dossier is still invalid after any change to the hold record.
+    with pytest.raises(SigningError, match="fragment_review_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("issues", [[], [{}], [{"locator": None}],
+                                   [{"locator": "unknown"}],
+                                   [{"locator": "characters:31:900"}],
+                                   [{"locator": "characters:16:30"}, {"locator": "unknown"}],
+                                   [{"locator": "characters:16:30"}, {"locator": "characters:31:900"}]])
+def test_issue_only_hold_never_infers_missing_or_invalid_scope(tmp_path, monkeypatch, issues):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record.pop("locator")
+    record["issues"] = issues
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_(conflict_scope_unknown|locator_required|locator_out_of_bounds)"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("locator", ["characters:31:52; characters:16:30",
+                                     "characters:31:52; characters:0:15",
+                                     "characters:31:52; unknown",
+                                     "characters:31:52; characters:16:900"])
+def test_discovery_order_holds_keep_every_range_and_validation(tmp_path, monkeypatch, locator):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record["locator"] = locator
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    before = deepcopy(processed)
+    if locator.endswith("characters:16:30"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+    else:
+        with pytest.raises(SigningError, match="fragment_(overlaps_conflict|locator_required|locator_out_of_bounds)"):
+            verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+
+
+def test_private_question_lesson_uses_exact_current_fragment_and_source(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _, registry = private_classification_fixture(
+        tmp_path, monkeypatch, kind="questions")
+    sid = dossier["sources"][0]["id"]
+    tid = "t_" + hashlib.sha256(sid.encode()).hexdigest()[:12]
+    source = dossier["sources"][0]
+    processed[sid].update(review_state="conflict", locator="characters:16:30",
+        reviewed_at="2026-09-28T00:00:00Z", reason="Held adjacent sentence", related_source_ids=[])
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(processed[sid])
+    dossier["curriculum_topic_id"] = tid
+    dossier["curriculum_link"] = {"source_id": sid, "topic_id": tid, "lesson_id": tid,
+        "format": "lecture", "revision": processed[sid]["revision"],
+        "corpus_path": "Synthetic lecture", "reviewer": "reviewer",
+        "review_note": "Exact first sentence belongs to this lesson", "reviewed_at": "2026-10-01T00:00:00Z"}
+    topics = signer.REPO_ROOT / "data/topics.json"
+    document = {"schema_version": 1, "corpus_root_id": "root",
+        "disciplines": {"one": {"title": "Discipline"}}, "topics": {tid: {
+            "title": "Exact private lesson", "discipline_id": "one", "source": {
+                "source_id": sid, "modified_time": source["modified_time"],
+                "snapshot_sha256": source["snapshot_sha256"]}}}}
+    topics.write_text(json.dumps(document), encoding="utf-8")
+    topics.chmod(0o600)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public,
+                           private_registry_path=registry, private_topics_path=topics)
+    assert processed == before and processed[sid]["review_state"] == "conflict"
+    changed = deepcopy(dossier)
+    changed["curriculum_link"]["revision"][0] = "2026-09-26T00:00:00Z"
+    with pytest.raises(SigningError, match="private_curriculum_link_required"):
+        verify_current_sources(changed, inventory, processed, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
+    changed = deepcopy(dossier)
+    changed["curriculum_link"]["source_id"] = "unrelated"
+    with pytest.raises(SigningError, match="private_curriculum_link_required"):
+        verify_current_sources(changed, inventory, processed, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
+    held = deepcopy(processed)
+    held[sid]["locator"] = "characters:0:30"
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(held[sid])
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, held, public_item=public,
+                               private_registry_path=registry, private_topics_path=topics)
+
+
+def test_additional_lesson_section_requires_captured_relationship(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, capture = fragment_fixture(tmp_path, monkeypatch)
+    root = signer.REPO_ROOT
+    source = dossier["sources"][0]
+    sid = source["id"]
+    tid = "t_012345abcdef"
+    # This source is a separately captured section of the existing parent lesson.
+    primary = {"source_id": "representative_source", "modified_time": "2026-09-27T00:00:00Z",
+               "snapshot_sha256": "a" * 64}
+    (root / "content/curriculum.json").write_text(json.dumps({"topics": {tid: {
+        "title": "Parent lesson", "discipline_id": "one", "source": primary}}}), encoding="utf-8")
+    dossier["curriculum_topic_id"] = tid
+    dossier["curriculum_link"] = {"source_id": sid, "topic_id": tid, "lesson_id": tid,
+        "format": "transcript", "revision": processed[sid]["revision"],
+        "corpus_path": "Synthetic lecture", "reviewer": "reviewer",
+        "review_note": "Independently checked section relationship", "reviewed_at": "2026-10-01T00:00:00Z"}
+    relationship = deepcopy(dossier["curriculum_link"])
+    relationship["reviewed_at"] = "2026-09-29T00:00:00Z"
+    relationship["private_content_receipt"] = {
+        "snapshot_kind": "extracted_text", "snapshot_sha256": source["snapshot_sha256"],
+        "content": str(capture), "locator": "characters:0:15"}
+    links = root / "links.json"
+    def write(records):
+        links.write_text(json.dumps(records), encoding="utf-8")
+    with pytest.raises(SigningError, match="private_curriculum_section_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+    write([relationship])
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public, private_links_path=links)
+    assert processed == before
+    for change in ({"topic_id": "t_fedcba543210"}, {"reviewed_at": "2026-10-02T00:00:00Z"},
+                   {"corpus_path": "Another lesson"}, {"private_content_receipt": {}},
+                   {"private_content_receipt": {**relationship["private_content_receipt"],
+                                                 "snapshot_sha256": "b" * 64}},
+                   {"private_content_receipt": {**relationship["private_content_receipt"],
+                                                 "locator": "characters:0:1000"}}):
+        write([{**relationship, **change}])
+        with pytest.raises(SigningError, match="private_curriculum_section_required"):
+            verify_current_sources(dossier, inventory, processed, public_item=public, private_links_path=links)
+    write([relationship, relationship])
+    with pytest.raises(SigningError, match="private_curriculum_section_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public, private_links_path=links)
+    write([relationship])
+    invalid = deepcopy(dossier)
+    invalid["curriculum_link"]["revision"][0] = "2026-09-26T00:00:00Z"
+    with pytest.raises(SigningError, match="private_curriculum_section_required"):
+        verify_current_sources(invalid, inventory, processed, public_item=public, private_links_path=links)
+    held = deepcopy(processed)
+    held[sid]["locator"] = "characters:0:30"
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(held[sid])
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, held, public_item=public, private_links_path=links)
+
+
+def independent_related_fixture(tmp_path, monkeypatch):
+    public, dossier, inventory, processed = related_fragment_fixture(tmp_path, monkeypatch)
+    origin = processed["related_slides"]
+    origin["locator"] = "page:5;table:cell-origin"
+    origin["issues"] = [{"locator": "characters:16:30"}]
+    claim = dossier["scoped_claim_review"]
+    review = dossier["related_conflict_reviews"][0]
+    review.pop("mappings")
+    review.update(schema_version=2, processing_sha256=fingerprint(origin),
+        decision="independent_fragment", item_sha256=claim["item_sha256"],
+        target_locator=claim["locator"], target_excerpt_sha256=claim["excerpt_sha256"],
+        origin_snapshot_path=claim["snapshot_path"],
+        note="Selected factual claim is independent of both held cell-origin assertions.",
+        comparisons=[{"origin_locator": locator, "decision": "excluded_from_selected_claim",
+                     "note": "Compared against the selected fact; this cell-origin assertion is not used."}
+                     for locator in (origin["locator"], origin["issues"][0]["locator"])])
+    return public, dossier, inventory, processed
+
+
+def test_related_independent_claim_keeps_unmatched_slide_and_target_holds(tmp_path, monkeypatch):
+    public, dossier, inventory, processed = independent_related_fixture(tmp_path, monkeypatch)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    # A source relationship is never blanket approval of other claims.
+    record = processed["synthetic_source"]
+    record["issues"].append({"locator": dossier["scoped_claim_review"]["locator"]})
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    dossier["related_conflict_reviews"][0]["target_processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("change", ["origin", "target", "revision", "capture", "missing_capture",
+    "missing_comparison", "duplicate_comparison", "reuse_claim", "reuse_excerpt", "reuse_locator",
+    "old_review", "blank_note", "unknown_decision", "malformed_locator", "malformed_version",
+    "mixed_modes", "missing_packet"])
+def test_related_independence_rejects_stale_missing_or_reused_comparison(tmp_path, monkeypatch, change):
+    public, dossier, inventory, processed = independent_related_fixture(tmp_path, monkeypatch)
+    review = dossier["related_conflict_reviews"][0]
+    if change == "origin":
+        processed["related_slides"]["reason"] = "Changed scientific review"
+    elif change == "target":
+        processed["synthetic_source"]["reason"] = "Changed target review"
+    elif change == "revision":
+        inventory["folders"]["root"][0]["children"][1]["modified_time"] = "2026-10-02T00:00:00Z"
+    elif change == "capture":
+        from pathlib import Path
+        Path(review["origin_snapshot_path"]).write_bytes(b"Changed captured source")
+    elif change == "missing_capture":
+        review.pop("origin_snapshot_path")
+    elif change == "missing_comparison":
+        review["comparisons"].pop()
+    elif change == "duplicate_comparison":
+        review["comparisons"][1] = deepcopy(review["comparisons"][0])
+    elif change == "reuse_claim":
+        review["item_sha256"] = "0" * 64
+    elif change == "reuse_excerpt":
+        review["target_excerpt_sha256"] = "0" * 64
+    elif change == "reuse_locator":
+        review["target_locator"] = "characters:0:10"
+    elif change == "old_review":
+        review["reviewed_at"] = "2026-09-27T00:00:00Z"
+    elif change == "blank_note":
+        review["comparisons"][0]["note"] = " "
+    elif change == "unknown_decision":
+        review["comparisons"][0]["decision"] = "approve_source"
+    elif change == "malformed_locator":
+        review["comparisons"][0]["origin_locator"] = []
+    elif change == "malformed_version":
+        review["schema_version"] = 2.0
+    elif change == "mixed_modes":
+        review["mappings"] = []
+    else:
+        dossier.pop("related_conflict_reviews")
+    with pytest.raises(SigningError):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("locator", [
+    "characters:31:52; characters:16:30; characters:18:42",
+    "characters:16:52; characters:20:30; characters:16:52",
+])
+def test_overlapping_holds_preserve_every_exclusion(tmp_path, monkeypatch, locator):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record["locator"] = locator
+    record["issues"] = [{"locator": "characters:20:30"}]
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    before = deepcopy(processed)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+    assert processed == before
+    # A hold crossing the supported passage still blocks it, regardless of
+    # other redundant or overlapping holds in the same record.
+    record["locator"] += "; characters:10:20"
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_overlaps_conflict"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+@pytest.mark.parametrize("invalid", ["characters:52:52", "unknown", "characters:20:900"])
+def test_overlapping_holds_do_not_hide_invalid_ranges(tmp_path, monkeypatch, invalid):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    record = processed["synthetic_source"]
+    record["locator"] = "characters:16:52; characters:20:30; " + invalid
+    dossier["scoped_claim_review"]["processing_sha256"] = fingerprint(record)
+    with pytest.raises(SigningError, match="fragment_(locator_required|locator_out_of_bounds)"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)
+
+
+def test_selected_excerpts_still_reject_overlapping_ranges(tmp_path, monkeypatch):
+    public, dossier, inventory, processed, _ = fragment_fixture(tmp_path, monkeypatch)
+    dossier["scoped_claim_review"]["locator"] = "characters:0:10; characters:8:15"
+    with pytest.raises(SigningError, match="fragment_locator_required"):
+        verify_current_sources(dossier, inventory, processed, public_item=public)

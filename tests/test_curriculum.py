@@ -121,13 +121,27 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 328
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 908
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
-    assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 165
+    assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 168
     assert all(catalog['topics'][key] == value for key, value in core['topics'].items())
     private_bindings = curriculum.load_private_bindings(catalog)
-    assert {k: v['title'] for k, v in core['disciplines'].items()} == {
+    # Source-free lesson bindings can add learning contours outside the core graph.
+    assert ({k: v['title'] for k, v in core['disciplines'].items()} | {
+        'psychodiagnostics': 'Психодиагностика',
+        'quantitative_methods': 'Количественные методы исследования',
+        'family_psychology': 'Семейная психология',
+        'turning_point': 'Точка поворота. 5 шагов',
+        'social_psychology': 'Социальная психология',
+        'organizational_psychology': 'Организационная психология',
+        'developmental_psychology': 'Возрастная психология',
+        'personality_psychology': 'Психология личности и индивидуальных различий',
+        'psycholinguistics': 'Психолингвистика',
+        'personal_brand': 'Личный бренд и самопрезентация',
+        'professional_legal_ethics': 'Правовые и этические основы профессиональной деятельности психолога-консультанта',
+        'bonus_lessons': 'Бонусные уроки',
+    }) == {
         k: v['title'] for k, v in registry.items()
         if k != 'cases' and (any(contour in v['available_contours']
                                 for contour in ('questions', 'glossary'))
@@ -146,7 +160,6 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
         for sha, item in catalog['editions'].items():
             key = 'questions:' + item['external_id']
             topic = catalog['topics'][item['topic_id']]
-            source = load_policy().sources[topic['source']['source_id']]
             if item['item_sha256'] != fingerprint(items[key]):
                 # Prior immutable editions remain mapped for historical attempts.
                 if items[key]['status'] != 'approved':
@@ -162,10 +175,11 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             if sha in private_bindings:
                 certificate = private_bindings[sha]
                 assert certificate['topic_id'] == item['topic_id']
-                assert item['locator'] == 'private certificate:' + key
+                assert item['locator'] == ('private certificate:' if 'signature' in certificate else 'private review:') + key
                 assert load_policy().can_publish('questions', items[key])
                 assert registry[topic['discipline_id']]['title'] == items[key]['category']
                 continue
+            source = load_policy().sources[topic['source']['source_id']]
             if item['locator'] == 'private certificate:' + key:
                 assert load_policy().can_publish('questions', items[key])
                 assert item['item_sha256'] == fingerprint(items[key])
@@ -181,7 +195,78 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert source['kind'] == 'learning_material' and source['readable'] is True
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
-        assert historical == {'m1_intro_054', 'm2_exp_012', 'm2_exp_058'}
+        assert historical == {'m1_vnd_002', 'm1_intro_054', 'm2_exp_012', 'm2_exp_058',
+                              'm1_vnd_034', 'm1_vnd_047', 'm1_vnd_048',
+                              'm1_intro_035', 'm2_exp_030', 'm2_exp_046',
+                              'm3_psychological_consulting_039',
+                              'm1_phys_028', 'm1_phys_050', 'm1_phys_019',
+                              'm1_phys_002', 'm1_phys_003', 'm1_phys_004',
+                              'm1_phys_006', 'm1_phys_009', 'm1_phys_010',
+                              'm1_phys_014', 'm1_phys_015', 'm1_phys_025',
+                              'm1_phys_026', 'm1_phys_032', 'm1_phys_044',
+                              'm1_phys_022', 'm1_phys_031', 'm1_phys_038',
+                              'm1_phys_053'} | {
+                                  f'm1_intro_{n:03}' for n in (
+                                      1, 2, 3, 4, 5, 6, 8, 11, 12, 13, 14, 15, 16, 17, 18, 20,
+                                      19, 21, 22, 24, 26, 27, 28, 29, 30, 33, 34, 36, 37, 38, 41, 42, 44, 46, 48)
+                              } | {
+                                  f'm1_gp_{n:03}' for n in (
+                                      1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21,
+                                      23, 24, 25, 33, 35, 36, 37, 38, 41,
+                                      32, 42, 43, 44, 45, 47, 48, 50, 52, 53, 56)
+                              } | {
+                                  f'm2_exp_{number:03}' for number in (
+                                      6, 7, 8, 20, 21, 22, 23, 41, 42, 43,
+                                      44, 45, 47, 48, 62, 63, 64, 66, 67, 68,
+                                      69, 70, 71, 72, 73, 74, 75, 76, 77, 78,
+                                      79, 80, 81, 94, 98, 100, 101, 102, 103,
+                                      104, 106, 107, 110, 112, 113, 114, 116,
+                                      117, 118)
+                              } | {
+                                  f'm2_exp_{number:03}' for number in (
+                                      10, 11, 12, 13, 14, 15, 16, 17, 24,
+                                      49, 50, 51, 52, 53, 54, 55, 56,
+                                      57, 65, 108)
+                              } | {
+                                  f'm1_vnd_{number:03}' for number in (
+                                      6, 7, 9, 10, 12, 13, 14, 16, 17, 21,
+                                      22, 23, 24, 35, 39, 41, 42, 44, 45, 49)
+                              } | {
+                                  f'm3_psychological_consulting_{number:03}'
+                                  for number in (2, 3, 10, 12, 20, 21, 23, 26, 27, 28, 29, 31, 32, 33, 35, 36,
+                                                 37, 38, 40, 41, 42, 43, 44, 46, 47,
+                                                 48, 49, 50, 52, 85, 86, 89)
+                              } | {
+                                  f'm3_psychological_consulting_{number:03}'
+                                  for number in (54, 55, 56, 57, 61, 62, 63, 65, 66, 67,
+                                                 69, 70, 71, 72, 77, 78, 80, 81, 97, 98, 101, 102)
+                              } | {'m2_qual_008', 'm2_qual_028', 'm2_exp_095', 'm3_psychological_consulting_051'} | {
+                                  f'm2_exp_{number:03}' for number in (4, 5, 40, 60, 61)
+                              } | {
+                                  f'm1_psyf_{number:03}' for number in (7, 13, 14, 27, 33)
+                              } | {'m2_exp_029', 'm1_vnd_027', 'm1_vnd_018'} | {
+                                  f'm1_phys_{number:03}' for number in (27, 39, 54)
+                              } | {
+                                  f'm2_qual_{number:03}'
+                                  for number in (1, 2, 3, 6, 10, 17, 18, 24, 25, 26, 29, 42, 43)
+                              } | {
+                                  f'm2_exp_{number:03}'
+                                  for number in (82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 109)
+                              } | {
+                                  'm1_gp_031', 'm1_gp_051', 'm1_intro_007',
+                                  'm1_intro_009', 'm1_intro_010', 'm1_intro_025',
+                                  'm1_intro_047', 'm1_intro_049', 'm1_phys_020',
+                                  'm1_psyf_011', 'm1_psyf_021', 'm1_psyf_026',
+                                  'm1_psyf_031', 'm1_psyf_034', 'm1_psyf_045',
+                                  'm1_psyf_055', 'm1_psyf_061', 'm1_psyf_064',
+                                  'm2_exp_001', 'm2_exp_002', 'm2_exp_003',
+                                  'm2_exp_009', 'm2_exp_025', 'm2_exp_026',
+                                  'm2_exp_031', 'm2_exp_034', 'm2_exp_035',
+                                  'm2_exp_036', 'm2_exp_038', 'm2_exp_058',
+                                  'm2_exp_059', 'm2_qual_004', 'm2_qual_014',
+                                  'm2_qual_034', 'm2_qual_040', 'm2_qual_053',
+                                  'm3_psychological_consulting_082',
+                              }
         assert retired == {'m2_qual_009', 'm2_qual_013'}
 
 
@@ -216,3 +301,49 @@ def test_curriculum_api_filters_verified_actor_and_rejects_invalid_scope(web, ma
     invalid['disciplines']['second']['title'] = OLD['category']
     with pytest.raises(ValueError):
         curriculum.validate_catalog(invalid)
+
+
+def test_source_free_lesson_mapping_requires_label_and_exact_private_review(tmp_path, monkeypatch):
+    from tests.test_private_publication_certificate import fixture_review
+    from scripts.sign_private_publication import create_review_receipt
+    from app.content_publication import PublicationPolicy
+    public, dossier = fixture_review()
+    tid = "t_abcdef012345"
+    dossier["curriculum_topic_id"] = tid
+    dossier["curriculum_link"] = {"source_id": "fixture", "topic_id": tid,
+                                  "lesson_id": tid, "format": "lecture"}
+    receipt = create_review_receipt("questions", public, dossier)
+    edition = {"external_id": public["id"], "topic_id": tid,
+               "item_sha256": fingerprint(public), "locator": "private review:questions:" + public["id"]}
+    core = {"schema_version": 1, "disciplines": {"one": {"title": "Discipline"}},
+            "topics": {}, "editions": {"a" * 64: edition}}
+    labels = {"schema_version": 1, "disciplines": {},
+              "topics": {tid: {"title": "Existing reviewed lesson", "discipline_id": "one"}}}
+    root = tmp_path / "repo"
+    (root / "content").mkdir(parents=True)
+    monkeypatch.setattr(curriculum, "ROOT", root)
+    monkeypatch.setattr("app.content_publication.load_policy", lambda: PublicationPolicy(
+        {}, {}, {}, receipts={"questions:" + public["id"]: receipt}))
+    def write(name, value):
+        (root / "content" / name).write_text(json.dumps(value), encoding="utf-8")
+        curriculum.load_reviewed_catalog.cache_clear()
+        curriculum.load_catalog.cache_clear()
+    write("curriculum.json", core)
+    write("curriculum-labels.json", labels)
+    write("curriculum-bindings.json", {"schema_version": 1, "items": {"a" * 64: receipt}})
+    catalog = curriculum.load_catalog()
+    assert catalog["topics"][tid] == labels["topics"][tid] and "source" not in catalog["topics"][tid]
+    assert catalog["editions"]["a" * 64] == edition
+    write("curriculum-bindings.json", {"schema_version": 1, "items": {}})
+    with pytest.raises(ValueError, match="Missing current private curriculum binding"):
+        curriculum.load_catalog()
+    write("curriculum-bindings.json", {"schema_version": 1, "items": {"a" * 64: receipt}})
+    write("curriculum-labels.json", {**labels, "topics": {}})
+    with pytest.raises(ValueError, match="Invalid curriculum edition"):
+        curriculum.load_catalog()
+    write("curriculum-labels.json", labels)
+    write("curriculum.json", {**core, "editions": {"a" * 64: {**edition, "item_sha256": "b" * 64}}})
+    with pytest.raises(ValueError, match="Invalid private curriculum binding"):
+        curriculum.load_catalog()
+    curriculum.load_reviewed_catalog.cache_clear()
+    curriculum.load_catalog.cache_clear()

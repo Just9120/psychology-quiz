@@ -251,7 +251,11 @@ def main() -> int:
     if any((args.private_registry, args.private_topics, args.links)) and not all(
             (args.inventory, args.processed, args.private_registry, args.private_topics, args.links)):
         parser.error("private topic coverage requires inventory, processed, registry, topics and links")
-    curriculum = validate_catalog(json.loads(args.curriculum.read_text(encoding="utf-8")))
+    labels_path = args.curriculum.with_name("curriculum-labels.json")
+    public_labels = (json.loads(labels_path.read_text(encoding="utf-8"))
+                     if labels_path.exists() else None)
+    curriculum = validate_catalog(json.loads(args.curriculum.read_text(encoding="utf-8")),
+                                  public_labels=public_labels)
     bindings = (load_private_bindings(curriculum)
                 if args.curriculum.resolve() == (ROOT / "content/curriculum.json").resolve()
                 else {})

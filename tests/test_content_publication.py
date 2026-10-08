@@ -262,7 +262,7 @@ def test_preparation_can_validate_without_becoming_public(kind, status):
     assert not policy.can_publish(kind, item)
 
 
-def test_current_legacy_counts_preserved_without_source_certification():
+def test_historical_baseline_preserved_and_current_learning_content_is_reviewed():
     policy = publication.load_policy()
     assert len(policy.legacy) == 716
     assert sum(review["purpose"] == "bibliographic_metadata" for review in policy.reviews.values()) == 143
@@ -278,17 +278,33 @@ def test_current_legacy_counts_preserved_without_source_certification():
     assert sum(source["kind"] == "bibliography" for source in policy.sources.values()) == 17
     # Reading learning sources for an audit must not silently approve derivatives.
     assert any(source["kind"] == "learning_material" for source in policy.sources.values())
-    for kind, expected in [("questions", 406), ("glossary", 85), ("literature", 319)]:
+    for kind, expected in [("questions", 629), ("glossary", 85), ("literature", 319)]:
         entries = [item for path in (publication.ROOT / "content" / kind).rglob("*.json")
                    for item in json.loads(path.read_text(encoding="utf-8"))]
         assert sum(policy.can_publish(kind, item) for item in entries) == expected
         assert publication.validate_publications(kind) == []
-    item = next(item for path in (publication.ROOT / "content/questions").rglob("*.json")
-                for item in json.loads(path.read_text(encoding="utf-8"))
-                if item.get("status") == "approved" and policy.is_legacy("questions", item))
-    assert policy.is_legacy("questions", item)
-    item["explanation"] += " changed"
-    assert not policy.can_publish("questions", item)
+    current = [item for path in (publication.ROOT / "content/questions").rglob("*.json")
+               for item in json.loads(path.read_text(encoding="utf-8"))
+               if item.get("status") == "approved"]
+    # Historical allowances remain frozen; every currently approved edition
+    # now has an exact review, rather than relying on its legacy fingerprint.
+    assert all(not policy.is_legacy("questions", item) for item in current)
+    for item in current:
+        assert policy.can_publish("questions", item)
+        changed = copy.deepcopy(item)
+        changed["explanation"] += " changed"
+        assert not policy.can_publish("questions", changed), item["id"]
+    # A frozen legacy allowance cannot stand in for an exact private review.
+    for kind in ("questions", "glossary"):
+        for path in (publication.ROOT / "content" / kind).rglob("*.json"):
+            for item in json.loads(path.read_text(encoding="utf-8")):
+                if item.get("status") != "approved":
+                    continue
+                assert policy.has_private_review(kind, item), (kind, item["id"])
+                if kind == "glossary":
+                    changed = copy.deepcopy(item)
+                    changed["definition"] += " changed"
+                    assert not policy.can_publish(kind, changed), item["id"]
 
 
 def test_current_learning_reviews_do_not_use_bibliographies_as_knowledge():
@@ -384,3 +400,35 @@ def test_canonical_seed_refuses_unreviewed_approved_content_before_db_write(tmp_
     monkeypatch.setattr(seed_questions, "get_connection", lambda *a: pytest.fail("Unreviewed seed reached the DB"))
     assert seed_questions.main() == 1
     assert db_path.stat().st_size == 0
+
+
+def test_canonical_seed_imports_reviewed_additional_course(tmp_path, monkeypatch):
+    from contextlib import closing
+    from app.db import get_connection
+
+    policy = publication.load_policy()
+    item = json.loads((publication.ROOT / "content/questions/other/turning_point.json").read_text(encoding="utf-8"))[0]
+    assert policy.can_publish("questions", item)
+    schema = (publication.ROOT / "sql/schema.sql").read_text(encoding="utf-8")
+    numbered = tmp_path / "content/questions/module1"
+    additional = tmp_path / "content/questions/other"
+    numbered.mkdir(parents=True)
+    additional.mkdir()
+    (numbered / "empty.json").write_text("[]", encoding="utf-8")
+    (additional / "reviewed.json").write_text(json.dumps([item]), encoding="utf-8")
+    db_path = tmp_path / "seed.sqlite3"
+    from app.identity_schema import migrate_identity_schema
+    from app.learning_schema import migrate_learning_schema
+    with closing(get_connection(str(db_path))) as conn, conn:
+        conn.executescript(schema)
+        migrate_identity_schema(conn)
+        migrate_learning_schema(conn)
+    monkeypatch.setattr(publication, "ROOT", tmp_path)
+    monkeypatch.setattr(publication, "load_policy", lambda: policy)
+    monkeypatch.setattr(seed_questions, "__file__", str(tmp_path / "scripts/seed_questions.py"))
+    monkeypatch.setattr(seed_questions, "resolve_db_path", lambda: str(db_path))
+    monkeypatch.setattr(seed_questions, "projected_questions", lambda: [])
+    assert seed_questions.main() == 0
+    with closing(get_connection(str(db_path))) as conn:
+        row = conn.execute("SELECT external_id,status FROM questions").fetchone()
+        assert tuple(row) == (item["id"], "approved")

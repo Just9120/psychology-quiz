@@ -9,6 +9,10 @@
 содержит приватные фрагменты и references; его нельзя помещать в CI logs,
 публичные artifacts или ответы студентам.
 
+## Подтверждённая поставка и границы
+
+Операторский verify06.10.2026 на VPS revision `3c10221592bdc749f349f8a34db9e7f603f80097` завершил estimate/probe/rebuild/status/QA/benchmark: `PRIVATE_SEARCH_CHECKS_OK`, record `/root/psychology-search-check-dPLNP3lJ`. Это подтверждение проверенного пакета source-note-complete и сохранности личного состояния на той версии; не approval всех исходных материалов и не автоматическое применение нового manifest. RAG остаётся отложенным по D-44; другая vector DB требует измеренного ограничения PostgreSQL по AC-SRH-03.
+
 ## Единая проверка установленной версии
 
 После штатного CD и передачи закрытого ZIP по SFTP оператор запускает из

@@ -6,7 +6,7 @@ from dataclasses import asdict
 from datetime import date, datetime, timedelta, timezone
 import json
 
-from app.attempt_content import capture_question
+from app.attempt_content import capture_questions
 from app.content_publication import fingerprint
 from app.glossary import GLOSSARY_TOPICS, load_glossary_entries
 from app.glossary_projection import projected_questions
@@ -69,14 +69,18 @@ def quiz_queue(conn, actor: int, *, today: date) -> list[dict]:
         grouped[int(row[0])].append((row[1], bool(row[2]), row[3], row[4]))
     if not grouped:
         return []
-    ids = sorted(grouped)
-    placeholders = ",".join("?" for _ in ids)
-    approved = conn.execute(f"""SELECT q.id,c.name FROM questions q
+    approved = conn.execute("""SELECT q.id,c.name FROM questions q
         JOIN categories c ON c.id=q.category_id WHERE q.status='approved'
-        AND q.kind!='glossary' AND q.id IN ({placeholders})""", ids)
+        AND q.kind!='glossary' AND EXISTS (
+            SELECT 1 FROM quiz_answers a JOIN quiz_sessions s ON s.id=a.session_id
+            WHERE a.question_id=q.id AND s.user_id=?)""", (actor,)).fetchall()
+    # Only answers joined to an attempt-question snapshot above are eligible.
+    # Keep legacy unlinked rows and newly arriving events out of this read.
+    approved = [row for row in approved if int(row[0]) in grouped]
+    editions = capture_questions(conn, [int(row[0]) for row in approved])
     items = []
     for question_id, topic in approved:
-        current = capture_question(conn, int(question_id))[1]
+        current = editions[int(question_id)][1]
         items.append({"kind": "quiz", "question_id": int(question_id), "topic": topic,
                       **schedule(grouped[int(question_id)], current, today=today)})
     return items
@@ -131,6 +135,7 @@ def glossary_history(conn, actor: int) -> dict[tuple[str, str], dict]:
         return {}
     question_keys = {}
     projections = {item["id"]: item for item in projected_questions()}
+    candidates = []
     for question_id, external_id in conn.execute(
             "SELECT id,external_id FROM questions WHERE kind='glossary' AND status='approved'"):
         parts = str(external_id).split(":", 2)
@@ -139,7 +144,10 @@ def glossary_history(conn, actor: int) -> dict[tuple[str, str], dict]:
         key = (parts[1], parts[2])
         if key not in current or (key not in grouped and int(question_id) not in answered_question_ids):
             continue
-        captured, edition = capture_question(conn, int(question_id))
+        candidates.append((int(question_id), str(external_id), key))
+    editions = capture_questions(conn, [item[0] for item in candidates])
+    for question_id, external_id, key in candidates:
+        captured, edition = editions[question_id]
         expected = projections.get(str(external_id))
         projection_valid = expected is not None and _matches_published_projection(json.loads(captured), expected)
         if projection_valid:

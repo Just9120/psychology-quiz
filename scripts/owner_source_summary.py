@@ -36,7 +36,9 @@ def lesson_coverage(current, processed, registry, curriculum, published_items):
             raise InventoryError("duplicate_derivative")
         seen.add(item["id"])
         topic_id = editions.get((item["id"], fingerprint(item)))
-        if topic_id is None:
+        # Additional navigation labels have no reviewed source lesson in this
+        # graph. An exact edition alone must not invent that source binding.
+        if topic_id not in counts:
             unmapped += 1
             continue
         kind = item.get("kind", "theory")

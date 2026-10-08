@@ -29,7 +29,8 @@ def test_handoff_separates_role_from_review_and_keeps_only_published_material():
         assert "criteria" not in package[key]
     serialized = json.dumps(package, ensure_ascii=False)
     assert "drive:" not in serialized and "source_ref" not in serialized
-    assert original["source_ref"].split("#")[0].split(":")[1] not in serialized
+    # Current private-review cases omit raw source identities before handoff.
+    assert "source_ref" not in original
     assert "профессиональную компетентность" in package["transcript_analysis"]["notice"]
     package["transcript_analysis"]["criteria"][0]["action"] = "modified"
     assert package["criteria"][0]["action"] == original["options"][0]

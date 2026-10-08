@@ -33,5 +33,10 @@
     "vite": "8.3.0",
     "vitest": "5.0.1",
     "wrangler": "4.144.0"
+  },
+  "overrides": {
+    "miniflare": {
+      "sharp": "0.35.5"
+    }
   }
 }

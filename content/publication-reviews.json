@@ -2962,10 +2962,10 @@
     },
     "literature:lit_e8a91d867727899b": {
       "decision": "approved",
-      "item_sha256": "09c461e64037e0c65427b3a9521d62f0a9d0f7d98dfd22cb1f620fa41ec2f488",
+      "item_sha256": "44e466685b69ac18201bd5a584d7448ea76882e20232309d999ae51ba81b50ef",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-30",
+      "reviewed_at": "2026-10-07",
       "sources": [
         {
           "source_id": "1XMrqhd0l0oldY8WFOKUEr74HEpghuzY0",
@@ -2975,20 +2975,20 @@
         }
       ],
       "bibliographic_metadata_review": {
-        "reviewed_at": "2026-09-30",
+        "reviewed_at": "2026-10-07",
         "origin": "agent",
         "primary_record": "https://voppsy.ru/issues/1998/982/982046.htm",
-        "evidence_scope": "Journal page retrieved: exact title, displayed initials T. I. and first printed page 46 differ from course citation T. N. and pages 19-27. Original course citation and work identity retained; no automatic author replacement or scientific approval.",
-        "decision": "warn_pending_reconciliation"
+        "evidence_scope": "First-party journal header retrieved: exact article title and author T. I. Dymnova, first printed page46 in1998/2 archive. Normalized initials corrected; course citation and pagination retained verbatim. Existing private full bibliography/text2078 and visual pages1/2 receipt reused; same Drive revision, different documented extraction profile hashes, not byte-identical public/private snapshots. No article scientific approval or reading-state/work identity change.",
+        "decision": "correct_verified_author_initials_preserve_original_citation"
       },
       "reading_metadata_review": {
         "reviewed_at": "2026-09-30",
         "origin": "agent",
         "priority_origin": "agent",
         "journal_article": "https://voppsy.ru/issues/1998/982/982046.htm",
-        "evidence_scope": "Original journal title, abstract and methods sections retrieved. Retrospective correlational study uses reported family histories across generations in a pedagogical-university student sample. Recommendation is for critical study-design reading, not causal/clinical claim approval. Course author initials/pagination discrepancy remains in warning.",
+        "evidence_scope": "Original journal title, abstract and methods sections retrieved. Retrospective correlational study uses reported family histories across generations in a pedagogical-university student sample. Recommendation is for critical study-design reading, not causal/clinical claim approval. Normalized initials now match the primary author header; original course citation/pagination discrepancy remains visible.",
         "sequence": "Agent-selected general overview before specialized article or techniques; not a teacher requirement or measured difficulty.",
-        "limitations": "Original course citation, authors/year, source snapshots, warnings, work identity and reading state preserved. No scientific endorsement or exact-edition/access approval."
+        "limitations": "No new full article review or scientific endorsement. Source citation, year, source snapshots, work identity and reading state preserved; normalized initials corrected by bibliographic header. Direct reading access remains not verified in catalogue."
       }
     },
     "literature:lit_4bad7531005a5e23": {
@@ -3121,10 +3121,10 @@
     },
     "literature:lit_925e5ff861131189": {
       "decision": "approved",
-      "item_sha256": "4d9ea7c3d7141dcfb7d6bb4fcd5f9afc7d5530e0f9fcc6a31d67c33eff924012",
+      "item_sha256": "0b1e93f973f991ab37da3cd1894613900b32c0cc045f9e29aef5cb9142393346",
       "purpose": "bibliographic_metadata",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-30",
+      "reviewed_at": "2026-10-07",
       "sources": [
         {
           "source_id": "12T9bWnZ6ORXmuvjAwPZ3o9wl1E6FLFFp",
@@ -3134,11 +3134,11 @@
         }
       ],
       "bibliographic_metadata_review": {
-        "reviewed_at": "2026-09-30",
+        "reviewed_at": "2026-10-07",
         "origin": "agent",
         "primary_record": "https://library.tversu.ru/vystavki/136-otdel-filologicheskoj-literatury/1257-organizatsionnaya-psikhologiya.html?template=accessibility",
-        "evidence_scope": "University library record retrieved: collective authorship, Rogov editor, second edition 2013 differs from course sole Zholudeva attribution and 2012. Candidate discrepancy only; no automatic author/year/work replacement. Reading role remains UNSET.",
-        "limitations": "Original course citation, source snapshots and work identity preserved. Exact edition and full text not verified."
+        "evidence_scope": "Course citation and existing approved bibliography snapshot preserved. Prior Tver university library2013 record retained; current indexed GUP and BrSTU catalogue descriptions also identify a Rogov-edited second edition2012. Year2012 alone is not a contradiction. Exact course edition/full author attribution remains unknown; only warning corrected, no identity/author/year/citation/state replacement.",
+        "limitations": "Primary catalogue indexed descriptions reviewed; direct BrSTU retrieval timed out. No full book review or confirmed edition merge. Existing publication source snapshot retained; later private extraction uses another profile/hash of the same recorded source revision and is not claimed byte-identical."
       }
     },
     "literature:lit_f0436ade24a5adb3": {

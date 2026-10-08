@@ -1,0 +1,15 @@
+{
+  "environment": "production",
+  "deployment_branch_policy": {
+    "protected_branches": false,
+    "custom_branch_policies": true
+  },
+  "branch_policies": [
+    {
+      "name": "main",
+      "type": "branch"
+    }
+  ],
+  "required_reviewers": [],
+  "wait_timer": 0
+}

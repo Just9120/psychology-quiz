@@ -126,25 +126,27 @@
     "id": "personality_psychology",
     "title": "Психология личности и индивидуальных различий",
     "module": "module4",
-    "question_file": null,
+    "question_file": "content/questions/module4/personality_psychology.json",
     "status": "active",
     "order": 410,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: one exact fragment-reviewed question on a definition or explicitly framed historical/course model. Existing literature retained; no whole-course, diagnostic or efficacy approval."
   },
   {
     "id": "developmental_psychology",
     "title": "Возрастная психология",
     "module": "module4",
-    "question_file": null,
+    "question_file": "content/questions/module4/developmental_psychology.json",
     "status": "active",
     "order": 420,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
   {
     "id": "klinicheskaya_psihologiya",
@@ -163,49 +165,53 @@
     "id": "social_psychology",
     "title": "Социальная психология",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/social_psychology.json",
     "status": "active",
     "order": 610,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
   {
     "id": "family_psychology",
     "title": "Семейная психология",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/family_psychology.json",
     "status": "active",
     "order": 620,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing family-psychology discipline: two course-framed questions have exact scoped private reviews. Literature preserved; no whole-source, universal family rule or clinical-effect approval."
   },
   {
     "id": "organizational_psychology",
     "title": "Организационная психология",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/organizational_psychology.json",
     "status": "active",
     "order": 630,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
   {
     "id": "psycholinguistics",
     "title": "Психолингвистика",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/psycholinguistics.json",
     "status": "active",
     "order": 640,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: one exact fragment-reviewed question on a definition or explicitly framed historical/course model. Existing literature retained; no whole-course, diagnostic or efficacy approval."
   },
   {
     "id": "psychodiagnostics",
@@ -215,48 +221,76 @@
       "module2",
       "module3"
     ],
-    "question_file": null,
+    "question_file": "content/questions/module2/psychodiagnostics.json",
     "status": "active",
     "order": 250,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Shared course discipline in modules 2 and 3; bibliographic metadata only, no quiz publication implied."
+    "source_notes": "Existing shared discipline in modules2/3; selected direct-diagnostic-format question has an exact private fragment review. Literature contour retained; whole-course scientific approval is not implied."
   },
   {
     "id": "turning_point",
     "title": "Точка поворота. 5 шагов",
     "module": "other",
-    "question_file": null,
+    "question_file": "content/questions/other/turning_point.json",
     "status": "active",
     "order": 900,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Additional course in the Drive section Other; no numbered module or quiz publication is implied."
+    "source_notes": "Existing additional course; selected lesson4 timing description has an exact private fragment review. Literature contour retained; no efficacy guarantee or numbered-module assignment."
   },
   {
     "id": "personal_brand",
     "title": "Личный бренд и самопрезентация",
     "module": "other",
-    "question_file": null,
+    "question_file": "content/questions/other/personal_brand.json",
     "status": "active",
     "order": 910,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Существующий курс раздела «Другое»: литература без нумерованного модуля."
+    "source_notes": "Existing discipline: one exact fragment-reviewed question on a definition or explicitly framed historical/course model. Existing literature retained; no whole-course, diagnostic or efficacy approval."
   },
   {
     "id": "quantitative_methods",
     "title": "Количественные методы исследования",
     "module": "module2",
-    "question_file": null,
+    "question_file": "content/questions/module2/quantitative_methods.json",
     "status": "active",
     "order": 230,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Литературная связь существующего занятия курса; вопросы и глоссарий не подразумеваются."
+    "source_notes": "Existing quantitative-methods discipline: scoped reliability/validity question has an exact private fragment review. Existing literature retained; remaining course claims are not approved."
+  },
+  {
+    "id": "professional_legal_ethics",
+    "title": "Правовые и этические основы профессиональной деятельности психолога-консультанта",
+    "module": "module6",
+    "question_file": "content/questions/module6/professional_legal_ethics.json",
+    "status": "active",
+    "order": 650,
+    "available_contours": [
+      "questions"
+    ],
+    "source_notes": "Exact fragment-reviewed introductory question. Broader source claims remain held; no whole-course certification."
+  },
+  {
+    "id": "bonus_lessons",
+    "title": "Бонусные уроки",
+    "module": "other",
+    "question_file": "content/questions/other/bonus_lessons.json",
+    "status": "active",
+    "order": 920,
+    "available_contours": [
+      "questions"
+    ],
+    "source_notes": "Exact fragment-reviewed introductory question. Broader source claims remain held; no whole-course certification."
   }
 ]

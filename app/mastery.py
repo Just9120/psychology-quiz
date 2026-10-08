@@ -6,7 +6,7 @@ must pass a verified actor; legacy backfills cannot prove a captured edition.
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
-from app.attempt_content import capture_question
+from app.attempt_content import capture_questions
 from app.repetition import glossary_history
 
 
@@ -74,9 +74,11 @@ def quiz_states(conn, actor: int) -> dict:
     by_question = {}
     for row in rows:
         by_question.setdefault(int(row[0]), []).append(row)
+    ids = sorted(by_question.keys() & approved)
+    current = capture_questions(conn, ids)
     items = []
-    for question_id in sorted(by_question.keys() & approved):
-        current_sha = capture_question(conn, question_id)[1]
+    for question_id in ids:
+        current_sha = current[question_id][1]
         events = []
         for row in by_question[question_id]:
             if row[3] != current_sha or row[4] != "captured":

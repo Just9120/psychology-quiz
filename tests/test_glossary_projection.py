@@ -37,7 +37,10 @@ def test_published_glossary_projection_is_stable_and_contains_only_approved_term
 @pytest.mark.parametrize("signed_review", [True, False])
 def test_privately_signed_glossary_projects_without_public_source_ref(monkeypatch, signed_review):
     topic_id, title = GLOSSARY_TOPICS[0]
-    entries = load_glossary_entries(topic_id)[:4]
+    # Keep the other fixture entries explicitly sourced. Their live receipts
+    # are unrelated to the single private-review branch exercised below.
+    entries = [replace(entry, source_refs=('fixture:primary-source',))
+               for entry in load_glossary_entries(topic_id)[:4]]
     signed = replace(entries[0], source_refs=())
     monkeypatch.setattr(glossary_projection, 'GLOSSARY_TOPICS', ((topic_id, title),))
     monkeypatch.setattr(glossary_projection, 'load_glossary_entries',

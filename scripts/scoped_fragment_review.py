@@ -14,7 +14,7 @@ class FragmentReviewError(ValueError):
     pass
 
 
-def _ranges(value):
+def _ranges(value, *, ordered=True):
     if not isinstance(value, str) or len(value) > 4000:
         raise FragmentReviewError("fragment_locator_required")
     result = []
@@ -23,7 +23,12 @@ def _ranges(value):
         if match is None or int(match[1]) >= int(match[2]):
             raise FragmentReviewError("fragment_locator_required")
         result.append((int(match[1]), int(match[2])))
-    if not result or any(a[1] > b[0] for a,b in zip(result,result[1:])):
+    if not ordered:
+        # Holds may overlap, nest or repeat when separate issues cover the same
+        # passage. Keep every range for overlap and bounds checks below; only
+        # the selected publication excerpts require canonical disjoint order.
+        result.sort()
+    if not result or (ordered and any(a[1] > b[0] for a,b in zip(result,result[1:]))):
         raise FragmentReviewError("fragment_locator_required")
     return result
 
@@ -95,7 +100,9 @@ def _derived_pdf_text(claim, source, record, *, private_path):
 
 def _held_ranges(locator, pdf_pages):
     if pdf_pages is None or not isinstance(locator, str) or not locator.startswith("page:"):
-        return _ranges(locator)
+        # Holds are a union, sometimes recorded in discovery order. Selected
+        # excerpts keep their original strict order for hashing and evidence.
+        return _ranges(locator, ordered=False)
     result = []
     for part in locator.split(";"):
         match = re.fullmatch(r"page:(\d{1,6})", part.strip())
@@ -158,7 +165,11 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
     if record.get("review_state") == "conflict":
         if reviewed_at <= _timestamp(record.get("reviewed_at")):
             raise FragmentReviewError("fragment_review_date_required")
-        held.extend(_held_ranges(record.get("locator"), pdf_pages))
+        # Some completed reviews record each held passage in issues rather
+        # than repeating their union in a top-level locator. Both representations
+        # must preserve every explicit range; missing scope still fails below.
+        if record.get("locator") is not None:
+            held.extend(_held_ranges(record["locator"], pdf_pages))
     issues = record.get("issues", [])
     if not isinstance(issues, list):
         raise FragmentReviewError("fragment_conflict_scope_unknown")
@@ -166,6 +177,8 @@ def verify_fragment_review(dossier, source, record, public_item, *, private_path
         if not isinstance(issue, dict):
             raise FragmentReviewError("fragment_conflict_scope_unknown")
         held.extend(_held_ranges(issue.get("locator"), pdf_pages))
+    if record.get("review_state") == "conflict" and not held:
+        raise FragmentReviewError("fragment_conflict_scope_unknown")
     if any(a < d and c < b for a,b in selected for c,d in held):
         raise FragmentReviewError("fragment_overlaps_conflict")
     evidence = [{"source_id": source["id"], "snapshot_sha256": source["snapshot_sha256"],

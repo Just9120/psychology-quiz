@@ -8,7 +8,49 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from app.database import Connection
+from app.database import Connection, is_postgres
+
+
+def _has_reading_work_progress(conn: Connection) -> bool:
+    """Legacy imported schemas precede work-level reading; never migrate on read."""
+    if is_postgres(conn):
+        return bool(conn.execute("""SELECT EXISTS (SELECT 1 FROM information_schema.tables
+            WHERE table_schema=current_schema() AND table_name='user_literature_work_progress')""").fetchone()[0])
+    return conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='user_literature_work_progress'").fetchone() is not None
+
+
+def _active_users(conn: Connection, cutoff: str, upper: str) -> int:
+    """Count verified learning actors, including answers in older attempts.
+
+    Glossary answers live in the captured attempt state; updated_at alone is
+    not an answer event. Read its timestamps without loading private answers
+    into the owner response. Both backends use the same inclusive UTC window.
+    """
+    if is_postgres(conn):
+        glossary_answers = """SELECT g.user_id FROM glossary_sessions g
+            CROSS JOIN LATERAL jsonb_each(COALESCE(g.state::jsonb->'answers', '{}'::jsonb)) a
+            WHERE replace(substr(a.value->>'answered_at',1,19),'T',' ') BETWEEN ? AND ?"""
+    else:
+        glossary_answers = """SELECT g.user_id FROM glossary_sessions g,
+            json_each(g.state, '$.answers') a
+            WHERE replace(substr(json_extract(a.value,'$.answered_at'),1,19),'T',' ') BETWEEN ? AND ?"""
+    query = """SELECT COUNT(DISTINCT user_id) FROM (
+        SELECT user_id FROM quiz_sessions
+            WHERE replace(substr(started_at,1,19),'T',' ') BETWEEN ? AND ?
+        UNION ALL SELECT s.user_id FROM quiz_answers a JOIN quiz_sessions s ON s.id=a.session_id
+            WHERE replace(substr(a.answered_at,1,19),'T',' ') BETWEEN ? AND ?
+        UNION ALL SELECT user_id FROM glossary_sessions
+            WHERE replace(substr(created_at,1,19),'T',' ') BETWEEN ? AND ?
+        UNION ALL """ + glossary_answers + """
+        UNION ALL SELECT user_id FROM user_review_events
+            WHERE replace(substr(answered_at,1,19),'T',' ') BETWEEN ? AND ?
+    """
+    parameters = (cutoff, upper) * 5
+    if _has_reading_work_progress(conn):
+        query += """ UNION ALL SELECT user_id FROM user_literature_work_progress
+            WHERE replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?"""
+        parameters += (cutoff, upper)
+    return int(conn.execute(query + ") activity", parameters).fetchone()[0])
 
 
 def get_owner_stats(conn: Connection) -> dict[str, Any]:
@@ -59,15 +101,9 @@ def get_owner_stats(conn: Connection) -> dict[str, Any]:
         "new_users_30d": _fetch_count(
             "SELECT COUNT(*) FROM users WHERE created_at >= ?", (cutoffs[30],)
         ),
-        "active_users_24h": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[1],)
-        ),
-        "active_users_7d": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[7],)
-        ),
-        "active_users_30d": _fetch_count(
-            "SELECT COUNT(DISTINCT user_id) FROM quiz_sessions WHERE started_at >= ?", (cutoffs[30],)
-        ),
+        "active_users_24h": _active_users(conn, cutoffs[1], now.strftime("%Y-%m-%d %H:%M:%S")),
+        "active_users_7d": _active_users(conn, cutoffs[7], now.strftime("%Y-%m-%d %H:%M:%S")),
+        "active_users_30d": _active_users(conn, cutoffs[30], now.strftime("%Y-%m-%d %H:%M:%S")),
         "total_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions"),
         "completed_quiz_sessions": _fetch_count("SELECT COUNT(*) FROM quiz_sessions WHERE status = 'finished'"),
         "in_progress_quiz_sessions": _fetch_count(
@@ -116,24 +152,17 @@ def get_owner_period_stats(conn: Connection, period: str, *, now: datetime | Non
     def count(query: str, *params: object) -> int:
         return int(conn.execute(query, params).fetchone()[0])
 
-    # SQLite and PostgreSQL both store these UTC timestamps as text. Some
-    # learning events use ISO's T separator; normalize only for comparison.
-    active = count("""
-        SELECT COUNT(DISTINCT user_id) FROM (
-            SELECT user_id FROM quiz_sessions WHERE replace(substr(started_at,1,19),'T',' ') >= ?
-            UNION ALL SELECT user_id FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') >= ?
-            UNION ALL SELECT user_id FROM user_review_events WHERE replace(substr(answered_at,1,19),'T',' ') >= ?
-            UNION ALL SELECT user_id FROM user_literature_work_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?
-        ) activity
-    """, cutoff, cutoff, cutoff, cutoff)
+    upper = current.strftime("%Y-%m-%d %H:%M:%S")
+    active = _active_users(conn, cutoff, upper)
     return {
         "ok": True,
         "period": period,
         "active_users": active,
-        "quiz_started": count("SELECT COUNT(*) FROM quiz_sessions WHERE replace(substr(started_at,1,19),'T',' ') >= ?", cutoff),
-        "quiz_completed": count("SELECT COUNT(*) FROM quiz_sessions WHERE status='finished' AND replace(substr(finished_at,1,19),'T',' ') >= ?", cutoff),
-        "quiz_answers": count("SELECT COUNT(*) FROM quiz_answers WHERE replace(substr(answered_at,1,19),'T',' ') >= ?", cutoff),
-        "glossary_started": count("SELECT COUNT(*) FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') >= ?", cutoff),
-        "glossary_completed": count("SELECT COUNT(*) FROM glossary_sessions WHERE status='completed' AND replace(substr(updated_at,1,19),'T',' ') >= ?", cutoff),
-        "reading_items_updated": count("SELECT COUNT(*) FROM user_literature_work_progress WHERE replace(substr(updated_at,1,19),'T',' ') >= ?", cutoff),
+        "quiz_started": count("SELECT COUNT(*) FROM quiz_sessions WHERE replace(substr(started_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
+        "quiz_completed": count("SELECT COUNT(*) FROM quiz_sessions WHERE status='finished' AND replace(substr(finished_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
+        "quiz_answers": count("SELECT COUNT(*) FROM quiz_answers WHERE replace(substr(answered_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
+        "glossary_started": count("SELECT COUNT(*) FROM glossary_sessions WHERE replace(substr(created_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
+        "glossary_completed": count("SELECT COUNT(*) FROM glossary_sessions WHERE status='completed' AND replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper),
+        "reading_items_updated": (count("SELECT COUNT(*) FROM user_literature_work_progress WHERE replace(substr(updated_at,1,19),'T',' ') BETWEEN ? AND ?", cutoff, upper)
+                                  if _has_reading_work_progress(conn) else 0),
     }

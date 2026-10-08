@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 UNMAPPED = "unmapped"
 
 
-def validate_catalog(data):
+def validate_catalog(data, *, public_labels=None):
     if not isinstance(data, dict) or data.get("schema_version") != 1:
         raise ValueError("Invalid curriculum schema")
     disciplines, topics, editions = (data.get(key) for key in ("disciplines", "topics", "editions"))
@@ -35,10 +35,16 @@ def validate_catalog(data):
         source = item.get("source", {})
         if not all(isinstance(source.get(k), str) and source[k] for k in ("source_id", "modified_time", "snapshot_sha256")):
             raise ValueError("Missing curriculum source")
+    known_topics = (merge_public_labels(data, public_labels)["topics"]
+                    if public_labels is not None else topics)
     for digest, item in editions.items():
-        if (not re.fullmatch(r"[a-f0-9]{64}", digest) or item.get("topic_id") not in topics
+        if (not re.fullmatch(r"[a-f0-9]{64}", digest) or item.get("topic_id") not in known_topics
                 or not all(isinstance(item.get(k), str) and item[k] for k in ("external_id", "item_sha256", "locator"))):
             raise ValueError("Invalid curriculum edition")
+        if (item["topic_id"] not in topics and item["locator"] not in {
+                "private certificate:questions:" + item["external_id"],
+                "private review:questions:" + item["external_id"]}):
+            raise ValueError("Missing private curriculum review")
     return data
 
 
@@ -99,6 +105,9 @@ def validate_private_bindings(catalog, document, public_key, active_certificates
             raise ValueError("Invalid private curriculum binding")
     current_bindings = set()
     for digest, edition in catalog["editions"].items():
+        topic = catalog.get("topics", {}).get(edition["topic_id"], {})
+        if not topic.get("source") and digest not in document["items"]:
+            raise ValueError("Missing current private curriculum binding")
         current = approvals.get("questions:" + edition["external_id"])
         if (isinstance(current, dict) and "topic_id" in current
                 and current.get("item_sha256") == edition["item_sha256"]):
@@ -126,7 +135,11 @@ def load_private_bindings(catalog):
 @lru_cache(maxsize=1)
 def load_reviewed_catalog():
     """Return source-bearing reviewed identities for private operator validation."""
-    catalog = validate_catalog(json.loads((ROOT / "content/curriculum.json").read_text(encoding="utf-8")))
+    labels = ROOT / "content/curriculum-labels.json"
+    public_labels = json.loads(labels.read_text(encoding="utf-8")) if labels.exists() else None
+    catalog = validate_catalog(
+        json.loads((ROOT / "content/curriculum.json").read_text(encoding="utf-8")),
+        public_labels=public_labels)
     load_private_bindings(catalog)
     return catalog
 

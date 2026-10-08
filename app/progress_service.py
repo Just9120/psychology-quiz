@@ -10,7 +10,7 @@ import random
 from datetime import datetime, timezone
 
 from app import curriculum
-from app.attempt_content import capture_question, get_attempt_content, decode_attempt_content
+from app.attempt_content import capture_questions, get_attempt_content, decode_attempt_content
 from app.database import begin_write, is_postgres, timestamp_sql
 from app import repetition, glossary_service
 from app.quiz_service import PreparedQuiz, start_prepared_quiz
@@ -197,7 +197,9 @@ def _mistakes(conn, actor: int):
         JOIN quiz_session_questions sq ON sq.session_id=a.session_id AND sq.question_id=a.question_id
         JOIN questions q ON q.id=a.question_id WHERE s.user_id=?
     ) SELECT * FROM ranked WHERE pos=1 ORDER BY id DESC""", (actor,)).fetchall()
-    current = {}
+    editions = capture_questions(conn, sorted({int(row["question_id"]) for row in rows
+                                              if not row["is_correct"] and row["question_status"] == "approved"}))
+    current = {qid: value[1] for qid, value in editions.items()}
     recorded = {(row["question_id"], row["content_sha256"]): bool(row["is_correct"])
                 for row in rows if row["snapshot_provenance"] == "captured"}
     mistakes, trainable = [], set()
@@ -205,9 +207,7 @@ def _mistakes(conn, actor: int):
         if row["is_correct"]:
             continue
         qid = row["question_id"]
-        if qid not in current:
-            current[qid] = capture_question(conn, qid)[1] if row["question_status"] == "approved" else None
-        edition = current[qid]
+        edition = current.get(qid)
         can_train = edition is not None and recorded.get((qid, edition)) is not True
         if can_train:
             trainable.add(qid)

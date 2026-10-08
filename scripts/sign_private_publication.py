@@ -69,11 +69,54 @@ def _character_ranges(locator: object) -> list[tuple[int, int]]:
     return ranges
 
 
-def _verify_related_fragment_reviews(dossier, source_id, processed, states):
-    """Require current, explicit mappings of every related hold into local holds.
+def _verify_related_independence(review, origin, hold, target, claim):
+    """Check an explicit per-claim editorial comparison, never blanket clearance.
 
-    A relation alone supplies no coordinates. Unmapped or changed relations stay
-    blocked; a mapping never removes an original hold or approves a whole source.
+    A related source may discuss different claims which have no target locator.
+    Its exact captured review must compare every held assertion with the exact
+    selected item/fragment. The ordinary target overlap gate still runs below.
+    """
+    locators = {hold.get("locator")}
+    locators.update(issue.get("locator") for issue in hold.get("issues", []))
+    comparisons = review.get("comparisons")
+    if (None in locators or "mappings" in review or not isinstance(comparisons, list)
+            or len(comparisons) != len(locators)
+            or any(not isinstance(item, dict)
+                   or set(item) != {"origin_locator", "decision", "note"}
+                   or not isinstance(item.get("origin_locator"), str)
+                   or item.get("decision") != "excluded_from_selected_claim"
+                   or not isinstance(item.get("note"), str) or not item["note"].strip()
+                   for item in comparisons)
+            or {item["origin_locator"] for item in comparisons} != locators
+            or review.get("decision") != "independent_fragment"
+            or review.get("item_sha256") != claim.get("item_sha256")
+            or review.get("target_locator") != claim.get("locator")
+            or review.get("target_excerpt_sha256") != claim.get("excerpt_sha256")):
+        raise SigningError("related_fragment_comparison_required")
+    try:
+        reviewed = datetime.fromisoformat(review["reviewed_at"].replace("Z", "+00:00"))
+        claim_at = datetime.fromisoformat(claim["reviewed_at"].replace("Z", "+00:00"))
+        origin_at = datetime.fromisoformat(hold["reviewed_at"].replace("Z", "+00:00"))
+        target_at = datetime.fromisoformat(target["reviewed_at"].replace("Z", "+00:00"))
+        if not max(origin_at, target_at) <= reviewed <= claim_at:
+            raise ValueError("stale comparison")
+        path = private_path(Path(review["origin_snapshot_path"]), suffix=".txt")
+        if not path.is_file() or not 0 < path.stat().st_size <= 32 * 1024 * 1024:
+            raise ValueError("missing capture")
+        raw = path.read_bytes()
+        if (hashlib.sha256(raw).hexdigest() != origin.get("snapshot_sha256")
+                or not raw.decode("utf-8").strip()):
+            raise ValueError("changed capture")
+    except (KeyError, TypeError, ValueError, AttributeError, OSError) as error:
+        raise SigningError("related_fragment_comparison_required") from error
+
+
+def _verify_related_fragment_reviews(dossier, source_id, processed, states):
+    """Require exact current per-claim reviews of every related hold.
+
+    A relation alone supplies no coordinates. Every hold needs either a local
+    mapping or an exact captured per-claim independence comparison. Neither
+    outcome removes a hold or approves a whole source.
     """
     target = processed[source_id]
     claim = dossier["scoped_claim_review"]
@@ -104,7 +147,14 @@ def _verify_related_fragment_reviews(dossier, source_id, processed, states):
                 or review.get("target_processing_sha256") != fingerprint(target)
                 or review.get("reviewer") != claim.get("reviewer")
                 or not isinstance(review.get("note"), str) or not review["note"].strip()
-                or not isinstance(mappings, list) or not mappings
+                or (review.get("schema_version") is not None
+                    and (type(review["schema_version"]) is not int
+                         or review["schema_version"] not in {1, 2}))):
+            raise SigningError("related_fragment_review_required")
+        if review.get("schema_version") == 2:
+            _verify_related_independence(review, origin, hold, target, claim)
+            continue
+        if (not isinstance(mappings, list) or not mappings
                 or any(not isinstance(mapping, dict) for mapping in mappings)):
             raise SigningError("related_fragment_review_required")
         if (None in origin_locators or len(mappings) != len(origin_locators)
@@ -356,10 +406,51 @@ def sign_review(kind: str, public_item: dict, dossier: dict,
     return result
 
 
+def _verify_lesson_section(snapshot: dict, link: dict, source: dict,
+                           topics: dict, links_path: Path | None) -> None:
+    """Require a separate captured relationship for a non-primary lesson section."""
+    if links_path is None:
+        raise SigningError("private_curriculum_section_required")
+    path = private_path(links_path, suffix=".json")
+    if not path.is_file() or not 0 < path.stat().st_size <= 8 * 1024 * 1024:
+        raise SigningError("private_curriculum_section_required")
+    records = json.loads(path.read_text(encoding="utf-8"))
+    fields = ("source_id", "lesson_id", "topic_id", "format", "revision", "corpus_path")
+    if not isinstance(records, list):
+        raise SigningError("private_curriculum_section_required")
+    matches = [record for record in records if isinstance(record, dict)
+               and all(record.get(field) == link.get(field) for field in fields)]
+    if len(matches) != 1:
+        raise SigningError("private_curriculum_section_required")
+    relationship = matches[0]
+    link_lessons(snapshot, [relationship], curriculum_topics=topics)
+    receipt = relationship.get("private_content_receipt")
+    if (not isinstance(receipt, dict) or receipt.get("snapshot_kind") != "extracted_text"
+            or receipt.get("snapshot_kind") != source.get("snapshot_kind")
+            or receipt.get("snapshot_sha256") != source.get("snapshot_sha256")):
+        raise SigningError("private_curriculum_section_required")
+    capture = private_path(Path(receipt.get("content", "")), suffix=".txt")
+    if not capture.is_file() or not 0 < capture.stat().st_size <= 32 * 1024 * 1024:
+        raise SigningError("private_curriculum_section_required")
+    raw = capture.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != source["snapshot_sha256"]:
+        raise SigningError("private_curriculum_section_required")
+    text = raw.decode("utf-8")
+    ranges = _character_ranges(receipt.get("locator"))
+    if any(end > len(text) or not text[start:end].strip() for start, end in ranges):
+        raise SigningError("private_curriculum_section_required")
+    reviewed = datetime.fromisoformat(relationship["reviewed_at"].replace("Z", "+00:00"))
+    modified = datetime.fromisoformat(source["modified_time"].replace("Z", "+00:00"))
+    current = datetime.fromisoformat(link["reviewed_at"].replace("Z", "+00:00"))
+    if not modified <= reviewed <= current:
+        raise SigningError("private_curriculum_section_required")
+
+
 def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                            *, public_item: dict | None = None,
                            private_registry_path: Path | None = None,
-                           private_topics_path: Path | None = None) -> None:
+                           private_topics_path: Path | None = None,
+                           private_links_path: Path | None = None) -> None:
     """Require every private source to match a completed review in this inventory."""
     if (not isinstance(inventory, dict) or inventory.get("schema_version") != 1
             or not isinstance(inventory.get("folders"), dict)
@@ -510,11 +601,26 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
                 or link.get("source_id") != sources[0].get("id")
                 or link.get("topic_id") != topic_id
                 or link.get("lesson_id") != topic_id
-                or states.get(sources[0]["id"]) != "processed"):
+                or (states.get(sources[0]["id"]) != "processed"
+                    and not fragment_v2)):
             raise SigningError("private_curriculum_link_required")
         try:
-            catalog = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
+            # Fragment validation above remains mandatory for held sources.
+            # A lesson link classifies that exact reviewed fragment, not the whole source.
+            catalog = (classification_catalog if private_registry_path is not None else
+                       json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8")))
+            topic = catalog["topics"].get(topic_id)
+            expected_source = {"source_id": sources[0]["id"],
+                               "modified_time": sources[0]["modified_time"],
+                               "snapshot_sha256": sources[0]["snapshot_sha256"]}
+            if (topic is None or (sources[0].get("discipline_id") is not None
+                                  and sources[0]["discipline_id"] != topic.get("discipline_id"))):
+                raise SigningError("private_curriculum_link_required")
+            if topic.get("source") != expected_source:
+                _verify_lesson_section(snapshot, link, sources[0], catalog["topics"], private_links_path)
             lessons = link_lessons(snapshot, [link], curriculum_topics=catalog["topics"])
+        except SigningError:
+            raise
         except (InventoryError, OSError, ValueError, KeyError, TypeError) as error:
             raise SigningError("private_curriculum_link_required") from error
         if (lessons.get(topic_id, {}).get("topic_id") != topic_id
@@ -533,6 +639,8 @@ def main(argv=None) -> int:
                         help="Ignored current source classifications; fragment approval remains required")
     parser.add_argument("--private-topics", type=Path,
                         help="Ignored current lesson metadata for signed source-free literature labels")
+    parser.add_argument("--private-links", type=Path,
+                        help="Ignored captured relationships for non-primary lesson sections")
     parser.add_argument("--private-key", type=Path)
     parser.add_argument("--review-only", action="store_true",
                         help="Validate private evidence without reading a key or creating a publication certificate")
@@ -561,7 +669,8 @@ def main(argv=None) -> int:
         processed = json.loads(processed_path.read_text(encoding="utf-8"))
         verify_current_sources(dossier, inventory, processed, public_item=items[0],
                                private_registry_path=args.private_registry,
-                               private_topics_path=args.private_topics)
+                               private_topics_path=args.private_topics,
+                               private_links_path=args.private_links)
         identity = f"{args.kind}:{args.item_id}"
         if args.review_only:
             payload = {"schema_version": 1, "scope": "private_review_validation",
