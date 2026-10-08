@@ -126,13 +126,14 @@
     "id": "personality_psychology",
     "title": "Психология личности и индивидуальных различий",
     "module": "module4",
-    "question_file": null,
+    "question_file": "content/questions/module4/personality_psychology.json",
     "status": "active",
     "order": 410,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: one exact fragment-reviewed question on a definition or explicitly framed historical/course model. Existing literature retained; no whole-course, diagnostic or efficacy approval."
   },
   {
     "id": "developmental_psychology",
@@ -203,13 +204,14 @@
     "id": "psycholinguistics",
     "title": "Психолингвистика",
     "module": "module6",
-    "question_file": null,
+    "question_file": "content/questions/module6/psycholinguistics.json",
     "status": "active",
     "order": 640,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Bibliographic metadata from reviewed corpus lists; no quiz/glossary is implied."
+    "source_notes": "Existing discipline: one exact fragment-reviewed question on a definition or explicitly framed historical/course model. Existing literature retained; no whole-course, diagnostic or efficacy approval."
   },
   {
     "id": "psychodiagnostics",
@@ -245,13 +247,14 @@
     "id": "personal_brand",
     "title": "Личный бренд и самопрезентация",
     "module": "other",
-    "question_file": null,
+    "question_file": "content/questions/other/personal_brand.json",
     "status": "active",
     "order": 910,
     "available_contours": [
+      "questions",
       "literature"
     ],
-    "source_notes": "Существующий курс раздела «Другое»: литература без нумерованного модуля."
+    "source_notes": "Existing discipline: one exact fragment-reviewed question on a definition or explicitly framed historical/course model. Existing literature retained; no whole-course, diagnostic or efficacy approval."
   },
   {
     "id": "quantitative_methods",

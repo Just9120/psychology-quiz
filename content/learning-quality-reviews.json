@@ -17478,6 +17478,63 @@
       "issues": [],
       "note": "Lifespan scope of developmental psychology only. No compulsory age-crisis timetable, diagnostic conclusion, disputed infancy milestones or exclusive mother-care rule. Distinct from the state/trait and learning-memory items.",
       "sources": []
+    },
+    "questions:m6_psyl_001": {
+      "item_sha256": "454c96654570d55d460c5795f0b0bcff151c3df00e5db4e586746080475aa0c2",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Definition of psycholinguistic production/comprehension only. Does not attribute unidentified Kantor book content, validate language-origin hypotheses, therapist influence efficacy, literal thought weight, Chomsky date or personal violence-case conclusions. Existing client-context question remains without semantic duplication.",
+      "sources": []
+    },
+    "questions:m4_person_001": {
+      "item_sha256": "1b8efe87fc68b0f874145b7bc03ba5374b69e06d549bf44a6de9ae4b8b2a68ca",
+      "discipline_id": "personality_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Historical theory terminology only, explicitly attributed to Freud. The exact excerpt ends before developmental/sex-identification/Electra claims held at16800:17500. No universal causal development, brain-localization, diagnosis, treatment efficacy or proven personality mechanism asserted. Current bank lacks a direct item on this structural-model distinction.",
+      "sources": []
+    },
+    "questions:other_brand_001": {
+      "item_sha256": "838e1887209db50248303a216053c3d31dd3b2c1b248dc19e7ab58326a92af4c",
+      "discipline_id": "personal_brand",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Explicit course-framed heuristic definition only; no claim of a scientifically universal personality structure or guaranteed marketing/client outcome. Ends before unverified Luria quotation; historical astronaut, pregnancy/efficacy, ad-frequency and denial-language claims remain held. No currently published brand-definition question duplicates this concept.",
+      "sources": []
     }
   }
 }
