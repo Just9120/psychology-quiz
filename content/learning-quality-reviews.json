@@ -19530,6 +19530,139 @@
       "issues": [],
       "note": "Exact distinction self-description versus researcher interpretation; original fictional fatigue quote. Not a clinical interpretation of real protocol, not a validation claim for projective testing.",
       "sources": []
+    },
+    "questions:m6_social_008": {
+      "item_sha256": "ad100273686df7775f6b3580d5ecf93121ab698f34ccfef1df9a7c84808c8090",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact observational learning passage only after inaccurate biography. Own adult example; not automatic imitation, aggression generalisation or proof of mirror-neuron mechanism. Existing experiment-scope item retained as distinct.",
+      "sources": []
+    },
+    "questions:m6_social_009": {
+      "item_sha256": "aa729f32e6448cce4bad405e7a86fb6ce37d6062302caa90c06825bc8b66ad62",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact four-process list; preservation singled out, not a score/diagnosis or age-stereotyped capacity. Correct retention/reproduction distinction independently checked in official course text.",
+      "sources": []
+    },
+    "questions:m6_social_010": {
+      "item_sha256": "40f40d82b309de8dc330a7c232894bcb7de1464009a4ad98a8e5b3647ed346b1",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact internal/external attribution list before overly deterministic temporal-cause rule. Own bus example; classification of proposed explanation only, not proof of causal motive.",
+      "sources": []
+    },
+    "questions:m6_social_011": {
+      "item_sha256": "9de989a24836114714a72662d21417e470c954e878e7e7418e3134ea595d6842",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact dissonance/consonance definition after held unverified earthquake story. Own promise example; no fixed date attribution, clinical disorder or universal response claimed.",
+      "sources": []
+    },
+    "questions:m6_social_012": {
+      "item_sha256": "5ecaaadc74ed5b844630e52bc42db95e720f59a58d3a65944c250d9abd414f09",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact behavior-adjustment paragraph only; own course example, distinct from dissonance recognition. Not directive to change other persons beliefs or guaranteed reduction/clinical benefit.",
+      "sources": []
+    },
+    "questions:m6_social_013": {
+      "item_sha256": "002c896912101388dfd98fb367355c038e95855659f42baca31f38407de0f8a4",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact model interpersonal communication orientation only; item general-object framing also supported by adjacent inspected A/B/X diagram text. Deterministic forced similarity/affection claim excluded; no communication prescription.",
+      "sources": []
+    },
+    "questions:m6_social_014": {
+      "item_sha256": "e66cc1b97ce5a82fca0004a2bfc2bac1308d4c9b19fd02be6de17225f411b7a4",
+      "discipline_id": "social_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact P/O/X identities only before ambiguous transitivity text; no unread diagram claim or deterministic attitude prediction. Distinct from causal-attribution list and Newcomb communication subject.",
+      "sources": []
     }
   }
 }
