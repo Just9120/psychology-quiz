@@ -76,3 +76,18 @@ def test_cutover_shell_syntax_on_linux_delivery_platform():
         pytest.skip('Linux Bash delivery check runs in required CI')
     result = subprocess.run(['bash', '-n', 'scripts/miniapp_domain_cutover.sh'], capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
+
+
+def test_host_config_helper_needs_only_python_standard_library():
+    import subprocess
+    import sys
+    result = subprocess.run([sys.executable, '-I', '-S', 'scripts/miniapp_domain_config.py', '--help'],
+                            capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+
+def test_quoted_runtime_values_and_comments_are_supported(tmp_path):
+    path, backup = tmp_path / '.env', tmp_path / 'backup'
+    path.write_text('export MINI_APP_URL="'+OLD+'" # owner choice\nMINIAPP_API_ALLOWED_ORIGIN=\''+OLD+'\'\n')
+    apply(path, backup)
+    assert ('MINI_APP_URL='+NEW+'\n') in path.read_text()

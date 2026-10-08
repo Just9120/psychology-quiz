@@ -3,14 +3,13 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-from io import StringIO
 import os
 from pathlib import Path
 import re
 import stat
+import shlex
 import tempfile
 
-from dotenv import dotenv_values
 
 OLD = 'https://miniapp.librechat.online'
 NEW = 'https://miniapp.psy.cloud-nodes.net'
@@ -48,17 +47,27 @@ def replace_checked(path: Path, original: bytes, changed: bytes) -> None:
 def apply(path: Path, backup: Path) -> None:
     original = read_regular(path)
     text = original.decode('utf-8')
-    parsed = dotenv_values(stream=StringIO(text), interpolate=False)
-    if parsed.get('MINI_APP_URL') not in {OLD, NEW}:
-        raise ValueError('Unknown existing Mini App URL; config was not changed')
-    origins = {value.strip() for value in (parsed.get('MINIAPP_API_ALLOWED_ORIGIN') or '').split(',')}
-    if not origins or not origins.issubset({OLD, NEW}):
-        raise ValueError('Unknown existing allowed origins; config was not changed')
     pattern = re.compile(r'^\s*(?:export\s+)?(MINI_APP_URL|MINIAPP_API_ALLOWED_ORIGIN)\s*=')
     lines = text.splitlines(keepends=True)
     for key in VALUES:
         if sum(bool(pattern.match(line) and pattern.match(line)[1] == key) for line in lines) != 1:
             raise ValueError('Missing or duplicate config key; config was not changed')
+    parsed = {}
+    for line in lines:
+        match = pattern.match(line)
+        if match:
+            lexer = shlex.shlex(line[match.end():].strip(), posix=True)
+            lexer.whitespace_split = True
+            lexer.commenters = '#'
+            tokens = list(lexer)
+            if len(tokens) != 1:
+                raise ValueError('Unsupported runtime config value; config was not changed')
+            parsed[match[1]] = tokens[0]
+    if parsed['MINI_APP_URL'] not in {OLD, NEW}:
+        raise ValueError('Unknown existing Mini App URL; config was not changed')
+    origins = {value.strip() for value in parsed['MINIAPP_API_ALLOWED_ORIGIN'].split(',')}
+    if not origins or not origins.issubset({OLD, NEW}):
+        raise ValueError('Unknown existing allowed origins; config was not changed')
     changed = ''.join(m[1] + '=' + VALUES[m[1]] + '\n'
                       if (m := pattern.match(line)) else line for line in lines).encode('utf-8')
     # A private backup is required before mutation; never overwrite an existing backup.

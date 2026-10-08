@@ -655,7 +655,7 @@ Confidence HIGH: Git/SHA/CI/CD/settings, local repro, versions/advisories, ар�
 
 ## Checkpoint и следующий шаг
 
-08.10.2026: TOPIC-HOMEWORK-20261008 active, branch codex/topic-homework-20261008/basefcf358a. Реализовано по коду3/3 AC (добавлен согласованный domain OPS-01); F-132/F-133 local FIX, CI PENDING. Предыдущая Goal DONE по PR337/CI/CD/Cloudflare records выше. Scope реализован локально:39 заданий, theme UI, finite CORS/config cutover. Next: self-review/required CI, merge/CD, затем owner cutover одной canonical командой. PR/CI/delivery ещё PENDING. Проценты проекта не пересчитываются; private originals/unknown files сохранены.
+08.10.2026: TOPIC-HOMEWORK-20261008 active, branch codex/topic-homework-20261008/basefcf358a. Реализовано по коду3/3 AC (добавлен согласованный domain OPS-01); F-132/F-133 local FIX, CI PENDING. Предыдущая Goal DONE по PR337/CI/CD/Cloudflare records выше. Scope реализован локально:39 заданий, theme UI, finite CORS/config cutover. Next: self-review/required CI, merge/CD, затем owner cutover одной canonical командой. PR338 открыт; initial head649b4ab, CI37823441870 pending. Следующее обновление в текущем PR убирает host dotenv dependency (stdlib-only test PASS); current revision checks перед merge обязательны. Delivery/config cutover PENDING. Проценты проекта не пересчитываются; private originals/unknown files сохранены.
 
 
 ### TOPIC-HOMEWORK local Evidence — 08.10.2026
@@ -665,3 +665,5 @@ Confidence HIGH: Git/SHA/CI/CD/settings, local repro, versions/advisories, ар�
 - E-TH-03 PASS / dirty branch diff:51 domain/FastAPI tests +8 subtests, exact old/new origins, unauthenticated401, unrelated origin rejection, private env preservation and checked restore. Cloudflare owner screenshot confirms new production binding; IAB new HTTPS frontend renders Telegram18+ gate. Read-only production OPTIONS confirms legacy204 with CORS, new204 without CORS: config cutover deliberately pending after code delivery.
 
 - E-TH-04 PASS / dirty branch diff: both production builds, generated Mini App refs updated; original four homework entries byte-equivalent as JSON,39 unique question sets; learning ledger894 unchanged/valid,48 frontend-contract/chat/classification tests PASS. Self-review checked ID/state preservation, source/privacy limits, exact origin matching, private config/backup/restore and generated consumers. Shell syntax validation local UNAVAILABLE (installed Git shim has no Bash runtime); new native Linux delivery syntax test runs in required CI before merge. No workflow change. Required CI/native browser/DB checks pending; config cutover remains delivery gate.
+
+- E-TH-05 PASS: после открытия PR338 устранена подтверждённая host dependency — config helper использует только stdlib, isolated Python `-I -S --help` и quoted/commented env fixtures PASS.21 domain tests PASS локально; Linux Bash syntax check ожидает native CI. Остальные ранее успешные checks не повторяются: их код/условия не затронуты.
