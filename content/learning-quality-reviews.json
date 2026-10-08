@@ -21050,6 +21050,63 @@
       "issues": [],
       "note": "Exact later weights qualification20139 onward outside18400:20100 hold. Fictional overrepresentation example and design caveat independently checked against official stratified-design definition. No approval of original held within-stratum selection shortcut or universal unbiasedness.",
       "sources": []
+    },
+    "questions:m2_quant_011": {
+      "item_sha256": "78012eb6cfd19a57a7f2cc3164fae782e9adb2aff19b0b6a8e75c08e663e4fd9",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact content-evidence clause only; excludes course four-groups enumeration and universal expert-judgment sufficiency. Distinct from current reliability/interpretation question and retest/internal consistency definitions.",
+      "sources": []
+    },
+    "questions:m2_quant_012": {
+      "item_sha256": "d347785fe89439dbf3232b8c482d1b525beaf764566f558f2069efc07bac3fcf",
+      "discipline_id": "quantitative_methods",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact cognitive-response-process evidence clause only; own fictional procedure, no exhaustive four-types taxonomy, guaranteed construct measure or causal outcome inference.",
+      "sources": []
+    },
+    "questions:m6_psyl_012": {
+      "item_sha256": "4cd790d715e9645705ea1283f1eb3af97f4b41fc34b0a587f20188bf6fb1c7c7",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course-framed motive/thought/verbal expression sequence only. Primary author attribution not independently confirmed because archive unavailable; therefore question/explanation avoid author, date and origin claim. No literal thought weight, neural prognosis, therapy efficacy or private case narrative.",
+      "sources": []
     }
   }
 }

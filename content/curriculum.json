@@ -5787,6 +5787,24 @@
       "topic_id": "t_c11dd0b8d422",
       "item_sha256": "b24000db294764b97a8b3c9df5500b18119e83f6a2d97a5775332a53ec86fe92",
       "locator": "private review:questions:m2_quant_010"
+    },
+    "a572bf833eefa0aaa3604b8c71d31226292ead4d0eb05488526bac8280198da0": {
+      "external_id": "m2_quant_011",
+      "topic_id": "t_edd3923e9043",
+      "item_sha256": "78012eb6cfd19a57a7f2cc3164fae782e9adb2aff19b0b6a8e75c08e663e4fd9",
+      "locator": "private review:questions:m2_quant_011"
+    },
+    "25b49b8532d0acadf0710fa67a3acc76645e9de98aad5457765760a23db1b0fd": {
+      "external_id": "m2_quant_012",
+      "topic_id": "t_edd3923e9043",
+      "item_sha256": "d347785fe89439dbf3232b8c482d1b525beaf764566f558f2069efc07bac3fcf",
+      "locator": "private review:questions:m2_quant_012"
+    },
+    "d401c52bffb92067ad18abaffd66faf9f6963b59b7187c4d555f6764d1ffab91": {
+      "external_id": "m6_psyl_012",
+      "topic_id": "t_e39d1d65a4d7",
+      "item_sha256": "4cd790d715e9645705ea1283f1eb3af97f4b41fc34b0a587f20188bf6fb1c7c7",
+      "locator": "private review:questions:m6_psyl_012"
     }
   }
 }

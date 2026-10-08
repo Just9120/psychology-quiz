@@ -12568,6 +12568,63 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m2_quant_011": {
+      "schema_version": 1,
+      "item_sha256": "78012eb6cfd19a57a7f2cc3164fae782e9adb2aff19b0b6a8e75c08e663e4fd9",
+      "review_sha256": "b8997fbc43992148ae77cea7634efdbd45faa13e089fc8998ff5ff9765c69c57",
+      "topic_id": "t_edd3923e9043",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m2_quant_012": {
+      "schema_version": 1,
+      "item_sha256": "d347785fe89439dbf3232b8c482d1b525beaf764566f558f2069efc07bac3fcf",
+      "review_sha256": "ad7383aaffe915ab1f2560092fd3bd1ad0ef8e59b33e7e878d4ddb50836ecc46",
+      "topic_id": "t_edd3923e9043",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m6_psyl_012": {
+      "schema_version": 1,
+      "item_sha256": "4cd790d715e9645705ea1283f1eb3af97f4b41fc34b0a587f20188bf6fb1c7c7",
+      "review_sha256": "1a4b587c3782e9b2857a4976b71cddf410acb73b69233d579c330553bbbb5c6e",
+      "topic_id": "t_e39d1d65a4d7",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
