@@ -4827,6 +4827,18 @@
       "topic_id": "t_75f56fc4df73",
       "item_sha256": "0aa74a59c95d9849a79bb4f43c34d4efdda8363a0bdebba966860cf6d82ed78a",
       "locator": "private review:questions:m5_clinical_012"
+    },
+    "96879028ed9cdb3b6ba9dbe6f2ffd1c84dd6ceecd996180166baee5c5ac6d13e": {
+      "external_id": "m5_clinical_013",
+      "topic_id": "t_7b4fc82d0ccb",
+      "item_sha256": "450925b5ec2f45f3b2c3bc61765d80a62a426ccdca8c74ee63d0668eb8e9a45a",
+      "locator": "private review:questions:m5_clinical_013"
+    },
+    "39953851202099c091ce209d18aae1de9ad14ae4b1091b7860af1b141a2dd43a": {
+      "external_id": "m5_clinical_014",
+      "topic_id": "t_7b4fc82d0ccb",
+      "item_sha256": "097468930eda85e232eafd76d7e2832f0fa1ad4924f16fea4053bed99bf77625",
+      "locator": "private review:questions:m5_clinical_014"
     }
   }
 }

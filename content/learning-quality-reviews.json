@@ -18010,6 +18010,44 @@
       "issues": [],
       "note": "Exact concluding course qualification stagesnotabsolute reality, outside all retained grief holds; earlier fixedstage/2year/treatment claims excluded and unchanged. NHSprovider passage41 independently corroborates nonmandatoryset/order. No denialofgrief distress, diagnosticthreshold, touchintervention or forcedtransition.",
       "sources": []
+    },
+    "questions:m5_clinical_013": {
+      "item_sha256": "450925b5ec2f45f3b2c3bc61765d80a62a426ccdca8c74ee63d0668eb8e9a45a",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Selected course termination-planning sequence only; scope outside all saved practice37 holds. Current455 questions searched and semantically compared: clinical001 assesses outcome evidence and consulting goal/method cases do not assess termination plan. No guaranteed success, universal eight-session outcome, mandatory therapy duration or reimbursement claim. ACA professional code only corroborates pretermination/support principle, not the exact course checklist.",
+      "sources": []
+    },
+    "questions:m5_clinical_014": {
+      "item_sha256": "097468930eda85e232eafd76d7e2832f0fa1ad4924f16fea4053bed99bf77625",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course qualification optional final meeting; source-practice37 refusal statement, not categorical no-risk rule. Existing455 bank has no termination-meeting refusal case. No diagnosis, inevitability of relapse, legal assessment, safety protocol or fullsource approval. ACA2014 corroboration limited to appropriate termination/support; voluntary-refusal wording grounded in course excerpt.",
+      "sources": []
     }
   }
 }

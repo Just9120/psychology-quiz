@@ -9528,6 +9528,44 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m5_clinical_013": {
+      "schema_version": 1,
+      "item_sha256": "450925b5ec2f45f3b2c3bc61765d80a62a426ccdca8c74ee63d0668eb8e9a45a",
+      "review_sha256": "6d9f828f8e042c7616ef84b1524cfb534382e5b8190c5bc0a4c8e99f160a69ee",
+      "topic_id": "t_7b4fc82d0ccb",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m5_clinical_014": {
+      "schema_version": 1,
+      "item_sha256": "097468930eda85e232eafd76d7e2832f0fa1ad4924f16fea4053bed99bf77625",
+      "review_sha256": "163e064466c95a7575ff071720d6fd07adb6c8e5682875a692f8c7eb58018a46",
+      "topic_id": "t_7b4fc82d0ccb",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
