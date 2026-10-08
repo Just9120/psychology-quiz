@@ -19758,6 +19758,82 @@
       "issues": [],
       "note": "Exact manual-based non-arbitrary coding paragraph, excluding prior any-stem claim and later arbitrary rater-stage/training-effect percentages. Course procedure description, no full manual reading, validated assessment or clinical maturity ranking claim. Primary generic scoring training principles apply but instrument-specific empirical efficacy not asserted.",
       "sources": []
+    },
+    "questions:m1_psyf_079": {
+      "item_sha256": "0627c6aa9dac01df2a3ce89b380029682b5644230810957b403bbb102760194e",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact muscle-sensation/proprioception equivalence only, before therapeutic application claims. Own fictional arm example; indexed primary position-sense definition supports body-position/movement wording. No uniform spinal layering, anatomy exclusivity or treatment claim.",
+      "sources": []
+    },
+    "questions:m1_psyf_080": {
+      "item_sha256": "1a91df33a65812caade77c2705d4321931935ba658960425cb9c0011b71db067",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact safe whole-system emergence illustration after held sleep-memory range ending57300 and before atomic-project anecdote. Only course systemic meaning assessed; no universal consciousness mechanism or reductionism thesis.",
+      "sources": []
+    },
+    "questions:m1_gp_065": {
+      "item_sha256": "eb6130a5b4cfcfc8811dee628d065553bef27423cf6cd8f33fb774570edf1a74",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact consequences-for-self/others sentence, before private night/music vignette. Own generic actor example; historically/course-attributed activity perspective, no universal personality definition, diagnosis, moral ranking or external legal compliance action.",
+      "sources": []
+    },
+    "questions:m6_family_005": {
+      "item_sha256": "da9a714542fdc0637240d7e1b9f6426007816ac2f9130a2d4e8e1ecb03e24399",
+      "discipline_id": "family_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact gradual-autonomy theme only, before universal never/always and age anecdotes. Own generic skills scenario; no feeding/sleep/medical instruction, crisis inevitability, fixed readiness age or withdrawal of necessary protection.",
+      "sources": []
     }
   }
 }
