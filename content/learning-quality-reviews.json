@@ -17649,6 +17649,139 @@
       "issues": [],
       "note": "Simple income/expense timing problem from bonus course only, checked against CFPB cashflow definition. No tax/legal rule, fixed reserve percentage, debt/investment advice or promise of reduced anxiety/financial freedom. Existing bank has no direct cashflow timing concept.",
       "sources": []
+    },
+    "questions:m6_org_002": {
+      "item_sha256": "63bfb664def9439f0e25fec0c10a4695b4429d687561c83887f98980d4fe75a3",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course definition of job/profession description only. No mandatory legal hiring rule, predictive validity, personality diagnosis or historical Stern/Ford attribution. Current bank lacks a direct job-description concept.",
+      "sources": []
+    },
+    "questions:m6_org_003": {
+      "item_sha256": "a71de2cad0e5083bf28dbe824ee763b55c012a9d8284f66d78794885627e8c85",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact attributed course distinction: psychological requirements as part of profession description. No universal personality profile, predictive selection efficacy or Stern authorship/date claim. Distinct from general profession description and clinical psychodiagnostic question.",
+      "sources": []
+    },
+    "questions:m6_org_004": {
+      "item_sha256": "0272841f43991649dcfe1337a1e0a3beb1ea92bf28aea3cc28c155f60ba781ee",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact multi-source feedback definition before held scope52500. Existing full-read receipt preserves bias/non-exclusive-decision limitations. No guaranteed objectivity, dismissal/promotion instruction or proven predictive efficacy.",
+      "sources": []
+    },
+    "questions:m6_org_005": {
+      "item_sha256": "c2ad30553b5487f6a56cc7e484d986f1a20c2031a4935a244fff10589b258320",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course informal influence definition only. Excludes preceding unconditional legal obedience assertion. No personality superiority, universal style effectiveness or named-study causal validation; current bank has no direct role-versus-influence question.",
+      "sources": []
+    },
+    "questions:m6_org_006": {
+      "item_sha256": "1768f58d7b83852476c131ec994363de1e3cc33f55bd06996fb5fd6128b57d76",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Explicit course-framed shared-goal description only. Does not approve preceding oversimplification group=mere gathering, universal team effectiveness, Tuckman causal stages, Belbin fixed labels or Janis attribution. Existing experiment questions mention a team but do not test this concept.",
+      "sources": []
+    },
+    "questions:m6_org_007": {
+      "item_sha256": "bec2e51bbe6177b33d9530e4cdb5cd5ed19cc7f4fb0777e052f62690fa069f9c",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Exact course evaluation distinction reaction/learning/behavior with derivative fictional example. Not a guarantee of efficacy, ROI, business results or sole causal attribution. Current bank lacks a direct training-transfer evaluation question.",
+      "sources": []
+    },
+    "questions:m6_org_008": {
+      "item_sha256": "2fcacb0b73488901d34074ffc8e178886c2e15847718a31c604297432dfa57fe",
+      "discipline_id": "organizational_psychology",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-08",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Fictional derivative organisational intervention-selection problem based on exact course skill-deficit condition and saved review of multi-level hypotheses. No named participant facts, universal ban on training, causal personnel diagnosis or promise to restore sales. Distinct from individual consulting method-goal agreement.",
+      "sources": []
     }
   }
 }
