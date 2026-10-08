@@ -158,3 +158,21 @@ def test_topic_reset_removes_only_review_events_for_deleted_answers(bank):
         assert [row[0] for row in conn.execute("SELECT answer_key FROM user_review_events WHERE user_id=1")] == [
             str(next(row["id"] for row in rows if row["question_id"] == 2))]
         assert conn.execute("SELECT count(*) FROM user_review_sessions WHERE user_id=1").fetchone()[0] == 0
+
+
+def test_queue_ignores_legacy_answer_without_attempt_question_link(bank):
+    with closing(get_connection(str(bank))) as conn, conn:
+        sid = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, sid, [1])
+        answer_quiz(conn, actor_user_id=1, session_id=sid, question_id=1,
+                    selected_option_index=0)
+        # The legacy schema permits an answer without a session-question link.
+        conn.execute("""INSERT INTO quiz_answers
+            (session_id,question_id,selected_option_index,is_correct,answered_at)
+            VALUES(?,2,0,0,'2026-09-01T10:00:00Z')""", (sid,))
+        conn.execute("UPDATE quiz_answers SET answered_at='2026-09-01T10:00:00Z' WHERE question_id=1")
+        before = [tuple(row) for row in conn.execute("SELECT * FROM quiz_answers ORDER BY id")]
+        result = queue(conn, 1, today=date(2026, 9, 2))
+        assert [item['question_id'] for item in result['items'] if item['kind'] == 'quiz'] == [1]
+        assert result['due_count'] == 0
+        assert [tuple(row) for row in conn.execute("SELECT * FROM quiz_answers ORDER BY id")] == before

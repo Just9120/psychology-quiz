@@ -74,6 +74,9 @@ def quiz_queue(conn, actor: int, *, today: date) -> list[dict]:
         AND q.kind!='glossary' AND EXISTS (
             SELECT 1 FROM quiz_answers a JOIN quiz_sessions s ON s.id=a.session_id
             WHERE a.question_id=q.id AND s.user_id=?)""", (actor,)).fetchall()
+    # Only answers joined to an attempt-question snapshot above are eligible.
+    # Keep legacy unlinked rows and newly arriving events out of this read.
+    approved = [row for row in approved if int(row[0]) in grouped]
     editions = capture_questions(conn, [int(row[0]) for row in approved])
     items = []
     for question_id, topic in approved:
