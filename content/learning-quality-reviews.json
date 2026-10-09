@@ -3929,10 +3929,10 @@
       "discipline_id": "fiziologiya_cheloveka"
     },
     "questions:m1_phys_020": {
-      "item_sha256": "ebbdf76e9c731c2c09e6a10c9c88ac3b097056c2b3d3c0cfa4c8048f028afd98",
+      "item_sha256": "bb5bc73fd8876c841f911d56f7e918f7f8535c8fb4765bd8a860c9aef4e0c801",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -3944,7 +3944,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed only blood/tissue-fluid/lymph membership. Excluded fluid-shift analogy and all clinical, blood-ratio, coagulation, endocrine and organ-maturation holds. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "note": "Exact blood/internal environment fragment read; plausible fluid sets distinguish internal environment from secretions and excretion. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m1_phys_021": {
@@ -4085,10 +4085,10 @@
       ]
     },
     "questions:m1_phys_026": {
-      "item_sha256": "d3030d0caea08dc68f1052c14dda968c0ec5509c1a8d234effa5d4814cecd9de",
+      "item_sha256": "b378cbeaac100fbe4527c29798d5711d18fb74da8f612dc646038411adfa3ed3",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4100,7 +4100,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Возврат к спокойному состоянию после нагрузки; вариант не ставит диагноз и не приписывает наблюдению единственную причину. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "Read bounded autonomic recovery fragment; narrowed inference to measured indicator, not a pulse-based diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
@@ -4111,10 +4111,10 @@
       ]
     },
     "questions:m1_phys_027": {
-      "item_sha256": "c9c15906f5b6db014959a9c8ab12d243eb5f6591eb4e8498be791ec5de7024b3",
+      "item_sha256": "9e1ce2c7a1f7189cb019f505634bde2d0813c395a2bd797ca676f46b96c95658",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4126,7 +4126,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw concluding appetite/bowel-symptom passage32764:32990 reviewed, independently corroborated by original Konturek/Brzozowski/Konturek2011 PubMed abstract only for possible stress-related changes in gastrointestinal motility and visceral perception. No diagnostic attribution of every symptom to stress, universal blood-flow percentage, gut-as-first-stress-indicator, anatomical shortcut or treatment advice. Course aggregate overlapping held intervals normalized to their exact union, retaining all twelve issue records and unchanged held coverage. Prior non-character-hold classification was caused by overlap in aggregate, not an unknown original source.",
+      "note": "Exact gastrointestinal fragment and bounded brain-gut review abstract support possible influence; alternatives are unjustified causal/diagnostic conclusions. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1Y4ll-SXmAKMsZvBw8m7keLukQ9I5vK_85h3JebMe8Lk",
@@ -4219,10 +4219,10 @@
       ]
     },
     "questions:m1_phys_031": {
-      "item_sha256": "ad5e1135d2612ac68ffc8de031b7ed60a47d74b82313a686236e9bc77e524021",
+      "item_sha256": "512a611e0bf845087431e8363d3da31cd1d090f8b793c56d38adae0ccd761042",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4234,7 +4234,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
+      "note": "Respiratory transport fragment and OpenStax22.4 gas-exchange passage read; all alternatives confuse exchange and transport rather than unrelated organs. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
@@ -4245,10 +4245,10 @@
       ]
     },
     "questions:m1_phys_032": {
-      "item_sha256": "9beb9db63ff69135732c957fa44f8da83d4b244675c48fd86ef229de736a5436",
+      "item_sha256": "ad0ea767a006dd486a7201b8bf2cbcf1d8eebf11604d60a952d0da42cc98b7e4",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4260,7 +4260,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Первичная мобилизационная гипотеза в указанном стрессовом контексте; универсальные медицинские выводы не переносятся. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "Exact sympathetic mobilisation passage read; avoids diagnosing autonomic cause from nonspecific symptoms. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
@@ -4412,10 +4412,10 @@
       ]
     },
     "questions:m1_phys_038": {
-      "item_sha256": "2545b7d000bac8cf2d874fc72cb638109ac780ce05e1e00f60207b48ec745a67",
+      "item_sha256": "3bb3a7768a24262d559fb62f10e8e9e4c1b74463faacbcd22dca21bdd2e07bca",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4427,7 +4427,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
+      "note": "Read exact limited conscious influence and automatic regulation passage; concrete transition operation, not treatment efficacy. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
@@ -4576,10 +4576,10 @@
       ]
     },
     "questions:m1_phys_044": {
-      "item_sha256": "f2b4d657f6829eea2bfcb88bdd42a92bffd97c5bcb0ef0930edc278e68181680",
+      "item_sha256": "839e92d8b87d37ae3ae71d5cb161256c5f9bc89eddca9280c5d71377fdded8f2",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4591,7 +4591,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Кратковременная мобилизация и последующее восстановление описаны как возможная интерпретация, не диагностика. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "Both exact mobilisation and recovery fragments read; contrasts sequence interpretation with unwarranted exclusion or diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
@@ -4745,10 +4745,10 @@
       ]
     },
     "questions:m1_phys_050": {
-      "item_sha256": "2fb0ae919dcf3fffc87d016ebf96ac2e99c11611ea5dd6e10b570a40530e3690",
+      "item_sha256": "fcc7cda9d7cc98782d49ff3efa8c3ebac923c962670cdfe40fdd6141c4c2412b",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4760,7 +4760,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Точная часть курса о мелатонине, сне/бодрствовании и циркадных ритмах; Endotext подтверждает циркадный сигнал. Не принимаются соседние тезисы о половом развитии, антиоксидантах и старении; ответ допускает физиологическую гипотезу, не диагноз. Текст, варианты и пояснение сохранены.",
+      "note": "Exact melatonin/circadian fragment and bounded Endotext source support regulation; removed immediate endocrine diagnosis and false exclusive psychological cause. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1rkvQhtvLygM2ZsmsM7xN6rQPCI1GGh3mn2R6P1CUrmw",
@@ -4828,10 +4828,10 @@
       ]
     },
     "questions:m1_phys_053": {
-      "item_sha256": "f0e5c65ce65e58ea2a44ece75bb715f10a1d3a595344f1990e768a24e7619cfd",
+      "item_sha256": "ffc269c0eda72885763b3863e8b21771684633d259a2f6e6d8fad1dc2bbf99c6",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -4843,7 +4843,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
+      "note": "Exact breathing-control boundary read; parallel assertions remove grammatical cue and distinguish exclusive-control errors. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
@@ -17081,10 +17081,10 @@
       ]
     },
     "questions:m1_phys_058": {
-      "item_sha256": "86c3736b06c7e41e936006522b6208b290fa2f596b35af102c5a962a728d3b70",
+      "item_sha256": "bfd79ddd275e5360726660165b86e4b5ffd0dd0104970627b734524dae45fcfb",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17096,7 +17096,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Phagocytes; neutrophil/phagocytosis. Excludes eosinophil, universal zoonosis, immune maturation and all held claims. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
+      "note": "Exact neutrophil fragment and OpenStax21.2 phagocyte/chemotaxis passage read; neighboring immune processes instead of unrelated organ functions. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m1_phys_059": {
@@ -17138,10 +17138,10 @@
       "sources": []
     },
     "questions:m1_phys_061": {
-      "item_sha256": "5d938fe1dd76aaa39d09ddac099ddadb0a3a84baf6375d78964879f96980526f",
+      "item_sha256": "d98adab55501ea3f350b90ebcc080879b4c7201e2a4abe68806139b36b05c12d",
       "discipline_id": "fiziologiya_cheloveka",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17153,7 +17153,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Target-cell receptors/intracellular and membrane receptors. Excludes paracrine-only gastrin, therapy/dose and all held claims. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
+      "note": "Exact target-cell receptor fragment and OpenStax17.2 read; distinguishes receptor necessity from delivery/location/production. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m1_phys_062": {
