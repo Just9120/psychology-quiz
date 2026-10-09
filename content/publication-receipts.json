@@ -13050,6 +13050,80 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "questions:m1_phys_063": {
+      "schema_version": 1,
+      "item_sha256": "94d6d043e83fb8a8862975f2e0ee963231f1c2f908546001973264dd4c815a68",
+      "review_sha256": "0e13cfb613da2b349edac23ce17cc6e6a426b97fd339408024fefa1c09ab380f",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_phys_064": {
+      "schema_version": 1,
+      "item_sha256": "066a4f4a50e2b3486b4524fed6188b971307d05d94aefcfe38cba7e20888b05f",
+      "review_sha256": "1c260273c5036d723b4471525997e9a1f1cece32626a02255dfda5a61bd411eb",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_psyf_086": {
+      "schema_version": 1,
+      "item_sha256": "812e67b222843dc40ebd6a69af3f6fd58ccd3a6070c5c5070d65201bc1c88b7f",
+      "review_sha256": "6e818869fc53d6f902dcdd70d5a2296ae565a26e9206714c15104ff18cf0c22d",
+      "topic_id": "t_082cd47dd86a",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:m1_psyf_087": {
+      "schema_version": 1,
+      "item_sha256": "d421052a3a057ea9fd59c42f41d28aafb1d28f3ec8fecb83f42b15c3599f64fb",
+      "review_sha256": "2d7aa98a086d44d6abd09b4ff6eb0a114bbb7fd08081b7ffb8dfc6364ac6dadf",
+      "topic_id": "t_082cd47dd86a",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

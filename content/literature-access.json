@@ -541,6 +541,63 @@
         "access_modes": [],
         "access_review": "Exact official work card identifies Irina Yakutenko, the matching full title and this format. Read/listen and free-excerpt actions are present. Unconditional free full access, subscription eligibility and the specific bibliographic edition are not established."
       }
+    ],
+    "lit_sechenov_reflexes_of_brain": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/ivan-sechenov/refleksy-golovnogo-mozga/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. The book-specific block requires a subscription; trial promotion is not unconditional free full text."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/ivan-sechenov/refleksy-golovnogo-mozga-159325/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. The book-specific block offers purchase and subscription; free wording qualifies subscription, not unconditional full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/ivan-sechenov/refleksy-golovnogo-mozga-8365925/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. The book-specific block offers purchase and subscription; free wording qualifies subscription, not unconditional full access."
+      }
+    ],
+    "lit_bulgakov_heart_of_a_dog": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/v0EomjLq",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. Read/listen and free-excerpt actions are present; full-access conditions and individual account entitlement remain unknown."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/UxkTzDwG",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. Read/listen and free-excerpt actions are present; full-access conditions and individual account entitlement remain unknown."
+      }
     ]
   }
 }

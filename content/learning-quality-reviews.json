@@ -21544,6 +21544,82 @@
       "issues": [],
       "note": "Probabilistic counselling forecast, not medical efficacy guidance, fixed-session cure or claim all uncertainty prevents planning. Exact aims/probabilistic prognosis fragments read. Fictional authored case; exact private fragment receipt validated. Source identities remain private; saved-edition evidence only.",
       "sources": []
+    },
+    "questions:m1_phys_063": {
+      "item_sha256": "94d6d043e83fb8a8862975f2e0ee963231f1c2f908546001973264dd4c815a68",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "New controlled-comparison operation: same axon diameter and conditions, isolate myelination. Exact saltatory glossary fragment plus OpenStax12.4 propagation including diameter contrast read. Distinct from existing myelin definition; no speed number or disease inference. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
+      "sources": []
+    },
+    "questions:m1_phys_064": {
+      "item_sha256": "066a4f4a50e2b3486b4524fed6188b971307d05d94aefcfe38cba7e20888b05f",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "New diagram-to-mechanism classification contrasts electrical contact with chemical cleft, hormone delivery and within-axon propagation. Exact course synapse definition names electrical/chemical types; OpenStax12.5 direct ion passage paragraph individually read. Not another recall of chemical release sequence. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
+      "sources": []
+    },
+    "questions:m1_psyf_086": {
+      "item_sha256": "812e67b222843dc40ebd6a69af3f6fd58ccd3a6070c5c5070d65201bc1c88b7f",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "New operation rejects one-transmitter-one-effect inference. Exact transmitter/receptor lecture fragment and OpenStax12.5 receptor-dependent effect/nicotinic-muscarinic contrast individually reviewed. No universal GABA/excitatory claim, behavior diagnosis or clinical prescription. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
+      "sources": []
+    },
+    "questions:m1_psyf_087": {
+      "item_sha256": "d421052a3a057ea9fd59c42f41d28aafb1d28f3ec8fecb83f42b15c3599f64fb",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "coding-agent",
+      "reviewed_at": "2026-10-10",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "New termination-of-signal operation, absent from reviewed serving questions in this discipline. OpenStax12.5 transmitter elimination/reuptake paragraphs read separately; course transmitter/receptor definition supplies local topic. No pharmacological advice or universal removal mechanism. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
+      "sources": []
     }
   }
 }
