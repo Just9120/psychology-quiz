@@ -521,6 +521,26 @@
         "access_modes": [],
         "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
       }
+    ],
+    "fch_yakutenko_volya_i_samokontrol": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/oSR33NAC",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Exact official work card identifies Irina Yakutenko, the matching full title and this format. Read/listen and free-excerpt actions are present. Unconditional free full access, subscription eligibility and the specific bibliographic edition are not established."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/m6S5hl0I",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Exact official work card identifies Irina Yakutenko, the matching full title and this format. Read/listen and free-excerpt actions are present. Unconditional free full access, subscription eligibility and the specific bibliographic edition are not established."
+      }
     ]
   }
 }

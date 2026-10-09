@@ -155,10 +155,12 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_kreisman_straus_hate_you_dont_leave', 'lit_3c68e7fa4c7ec0ba',
         'lit_burlachuk_psychodiagnostics',
         'fch_gazzaniga_kto_za_glavnogo', 'fch_martynov_mozg', 'fch_kandel_v_poiskah_pamyati',
+        'fch_yakutenko_volya_i_samokontrol',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
     assert {link['format'] for link in links['fch_gazzaniga_kto_za_glavnogo']} == {'text', 'audio'}
+    assert {link['format'] for link in links['fch_yakutenko_volya_i_samokontrol']} == {'text', 'audio'}
     assert {link['provider'] for link in links['fch_martynov_mozg']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     # An identically titled work by another author must never be offered as Carter's book.
     assert 'fch_carter_kak_rabotaet_mozg' not in links

@@ -71,10 +71,10 @@
       ]
     },
     "questions:m1_intro_002": {
-      "item_sha256": "e67a63a522d2555cc038d3a7e1bea8c849cfc02a0e8531161b93b197c14ee792",
+      "item_sha256": "0e8e82f793288b6fa61abe4168f28b72e527068149de87ed461ef1fa851b87da",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -86,7 +86,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "Medical qualification and prescribing, not setting/age/length, distinguish the roles. Replaced implausible distractors with errors about methods and authority; does not certify jurisdictional eligibility. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
@@ -97,10 +97,10 @@
       ]
     },
     "questions:m1_intro_003": {
-      "item_sha256": "111a0a30c4d1cd29162be17f871e8e9780902836450c9e1baeb46e2a9eb3b96b",
+      "item_sha256": "d5ac7e8c8929ca102b2ba49e0fb2dd8f2c7d49e68388434eb80de1c4f453de30",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -112,7 +112,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "Author-created formulations apply the directly read supportive role/client responsibility passage; other requests are not rejected as people, but require reformulation rather than promised control or certification. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
@@ -355,10 +355,10 @@
       ]
     },
     "questions:m1_intro_014": {
-      "item_sha256": "e2440654b6e9c7bf64d1e18becf398d6ea59c203abdc6f2de70ff6a703fbfdb5",
+      "item_sha256": "29f1f3ad99796f40a523df6b26065e58825dbd3436176374394d544e8246b04c",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -370,7 +370,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "Exact introductory role passage plus ACA2014 C.2.a/C.2.b read. Contrast transfer of experience, instruction-only practice and supervision as an automatic substitute; no universal licensing claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
@@ -445,10 +445,10 @@
       "sources": []
     },
     "questions:m1_intro_018": {
-      "item_sha256": "980cfb8e8e198dcaf17bbd28d4620500a5797e8ccec731c9ddee3edf60be3dc3",
+      "item_sha256": "8996cb11fe30e247b1dc6323dda7979c0ef2fba6b74f84ff53c897a9a0ef9118",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -460,7 +460,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read clarification of expectations/needs and joint goals; exclude the absolute statement that a consultant can never be useful without an explicit request. Individual needs and referral limits retained. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
+      "note": "Read exact request/expectation/goal fragments. Each alternative confuses initial complaint, typical plan or unilateral agenda with jointly clarified focus. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m1_intro_019": {
@@ -528,10 +528,10 @@
       "sources": []
     },
     "questions:m1_intro_022": {
-      "item_sha256": "fe1c7f6d32c5e370c2ed97dd7a28f7aec104c156a18c1cca1157036e1960509e",
+      "item_sha256": "907f3b3a68d0d07431c4a513b56a7266f32b33f0d21cfbaf01ada587148ac29b",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -543,7 +543,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "Read exact autonomy/responsibility and psychoeducation passages. Fictional first response; no blanket prohibition of every form of self-disclosure or advice. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
@@ -582,10 +582,10 @@
       ]
     },
     "questions:m1_intro_024": {
-      "item_sha256": "9bf9bebd8274f292bdcc96a943ceb562d3d0447ed03bd9185a70e7cd647da2bb",
+      "item_sha256": "2d9dd6265828d40d33752ebcd4bc0044f15c24fe8de3f5a6c811e7782d8eb912",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -597,7 +597,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "Changed unsupported out-of-hours detail to an ordinary scheduled-session illustration within the directly read time-boundary/previously agreed exceptions fragment. No crisis instructions; same stable ID and separate stored editions preserve history. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
@@ -873,10 +873,10 @@
       ]
     },
     "questions:m1_intro_035": {
-      "item_sha256": "46eb50b7e4eefc7614259bc86a7169d02aec9b93e3bee493d05ac4de9af1cde5",
+      "item_sha256": "cf5be720221b0e4735f2c981b3623e439db20a788c1b157a6c374e123e295113",
       "discipline_id": "vvedenie_v_professiyu",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -888,7 +888,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сохранены описание трудности и приглашение к обсуждению, вместо длинной реплики. Точное понимание субъективного мира клиента, без оценочного ярлыка; прежние неправильные ответы противопоставляют эти принципы.",
+      "note": "Read empathic as-if/client meaning excerpt. Replaced insults with plausible premature interpretation, dismissive normalization and prescription; no efficacy guarantee. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
@@ -2777,10 +2777,10 @@
       "sources": []
     },
     "questions:m1_gp_043": {
-      "item_sha256": "dd5d08faafc50f889eafaf490c43473b0e2142d05cc72088fb8315728a1531f3",
+      "item_sha256": "d299d40cc2e8a7ecbc08ce4c67c28406c3c16d134f20ee29a1ef35e059fc270a",
       "discipline_id": "obschaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -2792,7 +2792,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually read raw definitions for this question, key and explanation. Excluded disputed process/result inversion, numerical attention limits, forgetting-only-unneeded, age rules, human-only imagination, universal speech/volition and all other existing holds. Applied examples are explanatory illustrations, not quoted lecture cases. Supplemental encoding/language scope is bounded; all linked PDF holds preserved in verified extraction coordinates.",
+      "note": "Direct definitions/selectivity passage read; removed conflation of resource limitation with selectivity. Same locator, source hash and retained related conflict mappings/holds; no numerical capacity or diagnostic claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
