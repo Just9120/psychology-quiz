@@ -18,12 +18,29 @@ def test_quality_audit_controlled_calculations() -> None:
 def test_global_canonical_quality_thresholds_and_rapport_resolution() -> None:
     report=build_report()
     g=report["global"]
-    assert g["approved_question_count"] == 641
-    assert g["unique_longest_correct_count"] == 364
+    assert g["approved_question_count"] == 645
+    assert g["unique_longest_correct_count"] == 327
     assert g["high_severity_length_cue_count"] == 0
     assert g["duplicate_normalized_stems"] == {}
     inv,_=load_canonical_inventory(); by_id={r["external_id"]:r for r in inv}
     assert "что такое раппорт в консультировании?" not in {normalize_text(by_id["m3_psychological_consulting_031"]["question_text"])}
+
+
+def test_libet_question_distinguishes_estimated_awareness_from_later_report() -> None:
+    from app.content_publication import load_policy
+    from app.curriculum import load_catalog
+    from scripts.audit_question_quality import iter_questions
+    item = next(q for _, q in iter_questions() if q['id'] == 'm1_psyf_070')
+    assert item['correct_option_index'] == 0
+    assert 'оценённый участником момент' in item['question']
+    assert 'сообщал свою оценку после движения' in item['explanation']
+    assert 'не доказывает отсутствие свободы воли' in item['explanation']
+    assert load_policy().has_private_review('questions', item)
+    editions = [v for v in load_catalog()['editions'].values()
+                if v['external_id'] == item['id']]
+    assert len(editions) == 2
+    assert len({v['topic_id'] for v in editions}) == 1
+    assert len({v['item_sha256'] for v in editions}) == 2
 
 
 def test_question_options_do_not_contain_artificial_padding_phrases() -> None:

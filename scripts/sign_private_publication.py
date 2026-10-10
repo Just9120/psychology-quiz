@@ -42,7 +42,7 @@ class SigningError(ValueError):
 # Owner-approved editions only. A changed question or conflict needs a new review decision.
 SCOPED_LECTURE_CLAIMS = {
     "m1_psyf_070": (
-        "9d5d84b0422ddcf0df7513051d949727d455861c580742c03f47b94a950fcce3",
+        "8f82911e48e81614e7505ef8f4bf7387bc2e30a1e97641afc9e542ab884b3839",
         "characters:15300:15970",
     ),
     "m1_psyf_071": (
@@ -52,6 +52,11 @@ SCOPED_LECTURE_CLAIMS = {
 }
 LECTURE14_SOURCE_SHA256 = "2b6c44d6b7e3ba0511b16b4d8d5884e19812e0bbdba5ffbf8a06b14483e45a5c"
 LECTURE14_CONFLICT_SHA256 = "28e80d17983ba8747aeed407bd322b5d356e2d1ebce133206db894d5db5551d9"
+# The owner approved this precise report-time correction on 2026-10-10.
+# Bind it to the full current hold; the other named edition keeps its old review.
+SCOPED_LECTURE_CONFLICTS = {
+    "m1_psyf_070": "aa33378fc2ee34ce15947065eef8d56811a4d4b8172e2cb895b87861da353a35",
+}
 
 
 def _character_ranges(locator: object) -> list[tuple[int, int]]:
@@ -208,7 +213,8 @@ def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
         if (claim.get("item_sha256") != expected_item_sha
                 or claim.get("locator") != expected_locator
                 or claim.get("snapshot_sha256") != LECTURE14_SOURCE_SHA256
-                or claim.get("conflict_sha256") != LECTURE14_CONFLICT_SHA256):
+                or claim.get("conflict_sha256") != SCOPED_LECTURE_CONFLICTS.get(
+                    dossier["item_id"], LECTURE14_CONFLICT_SHA256)):
             raise SigningError("scoped_claim_review_required")
     try:
         reviewed_at = datetime.fromisoformat(claim["reviewed_at"])
@@ -223,13 +229,19 @@ def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
     if (source_id == "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264"
             and isinstance(held_locator, str)):
         legacy = re.fullmatch(
-            r"extracted_text UTF-8 characters (\d+):(\d+); SHA-256 ([0-9a-f]{64})",
+            r"extracted_text UTF-8 characters (\d+):(\d+); SHA-256 ([0-9a-f]{64})"
+            r"((?:;\s*characters:\d+:\d+)*)",
             held_locator,
         )
         if legacy is None or legacy[3] != record.get("snapshot_sha256"):
             raise SigningError("scoped_claim_locator_required")
-        held_locator = f"characters:{legacy[1]}:{legacy[2]}"
-    held_ranges = _character_ranges(held_locator)
+        held_locator = f"characters:{legacy[1]}:{legacy[2]}{legacy[4]}"
+        # Holds can be recorded in discovery order. Check every held range;
+        # selected publication excerpts still require strict canonical order.
+        held_ranges = [span for part in held_locator.split(";")
+                       for span in _character_ranges(part.strip())]
+    else:
+        held_ranges = _character_ranges(held_locator)
     if any(start < held_end and held_start < end
            for start, end in ranges for held_start, held_end in held_ranges):
         raise SigningError("scoped_claim_overlaps_conflict")
@@ -518,9 +530,15 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         record = processed.get(source_id)
         canonical = registered.get(source_id)
         state = states.get(source_id)
+        # The specifically approved Libet edition also needs a complete
+        # comparison with its later related glossary hold. This does not
+        # approve the source: the exact named-edition gate still runs below.
+        named_related_review = (dossier.get("kind") == "questions"
+                                and dossier.get("item_id") == "m1_psyf_070"
+                                and source_id == "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264")
         allowed_states = {"processed", "conflict_review", "pending_review"} if fragment_v2 else {"processed", "conflict_review"}
         if (item is None or state not in allowed_states
-                or (source_id in related_conflicts and not fragment_v2)
+                or (source_id in related_conflicts and not fragment_v2 and not named_related_review)
                 or not isinstance(record, dict)
                 or source.get("title") != item["title"]
                 or source.get("modified_time") != item["modified_time"]
@@ -578,6 +596,8 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
             except FragmentReviewError as error:
                 raise SigningError(str(error)) from error
         elif state == "conflict_review":
+            if source_id in related_conflicts:
+                _verify_related_fragment_reviews(dossier, source_id, processed, states)
             _verify_scoped_claim(dossier, source, record)
         elif "scoped_claim_review" in dossier:
             raise SigningError("scoped_claim_review_unnecessary")

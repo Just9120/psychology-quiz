@@ -362,6 +362,7 @@ def test_signer_checks_processed_private_source_against_complete_inventory():
     ("glossary", "dopamine", "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w", False),
     ("questions", "m1_psyf_070", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", True),
     ("questions", "m1_psyf_071", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", True),
+    ("questions", "m1_psyf_070", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", "multiple"),
 ])
 def test_scoped_claim_keeps_conflicted_source_on_hold(
         tmp_path, monkeypatch, kind, item_id, source_id, legacy_locator):
@@ -396,6 +397,8 @@ def test_scoped_claim_keeps_conflicted_source_on_hold(
     if legacy_locator:
         record["locator"] = ("extracted_text UTF-8 characters 20:45; SHA-256 "
                              + source["snapshot_sha256"])
+    if legacy_locator == "multiple":
+        record["locator"] += "; characters:19:20"
     dossier["kind"] = kind
     dossier["item_id"] = item_id
     locator = "characters:0:19"
@@ -426,7 +429,49 @@ def test_scoped_claim_keeps_conflicted_source_on_hold(
         })
         monkeypatch.setattr(signer, "LECTURE14_SOURCE_SHA256", source["snapshot_sha256"])
         monkeypatch.setattr(signer, "LECTURE14_CONFLICT_SHA256", fingerprint(record))
+        monkeypatch.setattr(signer, "SCOPED_LECTURE_CONFLICTS", {item_id: fingerprint(record)})
     verify_current_sources(dossier, inventory, {source["id"]: record})
+    if legacy_locator == "multiple":
+        # A later related glossary conflict needs its own exact captured
+        # comparison, while the named lecture edition remains restricted.
+        origin_id = "related_glossary"
+        origin = {**record, "locator": "characters:20:45",
+                  "related_source_ids": [source_id]}
+        inventory["folders"]["root"][0]["children"].append({
+            **inventory["folders"]["root"][0]["children"][0], "id": origin_id})
+        records = {source_id: record, origin_id: origin}
+        with pytest.raises(SigningError, match="related_fragment_review_required"):
+            verify_current_sources(dossier, inventory, records)
+        claim = dossier["scoped_claim_review"]
+        comparison = {
+            "schema_version": 2, "source_id": origin_id,
+            "revision": origin["revision"], "processing_sha256": fingerprint(origin),
+            "target_processing_sha256": fingerprint(record),
+            "origin_snapshot_path": str(snapshot_path),
+            "reviewer": claim["reviewer"], "reviewed_at": claim["reviewed_at"],
+            "decision": "independent_fragment", "item_sha256": claim["item_sha256"],
+            "target_locator": locator, "target_excerpt_sha256": claim["excerpt_sha256"],
+            "note": "Selected first sentence excludes the related disputed statement.",
+            "comparisons": [{"origin_locator": origin["locator"],
+                             "decision": "excluded_from_selected_claim",
+                             "note": "Compared the exact selected sentence; no disputed claim used."}],
+        }
+        related_dossier = {**dossier, "related_conflict_reviews": [comparison]}
+        before = json.dumps(records, sort_keys=True)
+        verify_current_sources(related_dossier, inventory, records)
+        assert json.dumps(records, sort_keys=True) == before
+        changed_origin = {**origin, "reason": "Later related conflict"}
+        with pytest.raises(SigningError, match="related_fragment_review_required"):
+            verify_current_sources(related_dossier, inventory, {source_id: record, origin_id: changed_origin})
+        # The appended earlier range must also block publication, even when
+        # the primary legacy range does not overlap the selected fragment.
+        overlapping = {**record, "locator": record["locator"] + "; characters:0:1"}
+        monkeypatch.setattr(signer, "SCOPED_LECTURE_CONFLICTS", {item_id: fingerprint(overlapping)})
+        claim = {**dossier["scoped_claim_review"], "conflict_sha256": fingerprint(overlapping)}
+        with pytest.raises(SigningError, match="scoped_claim_overlaps_conflict"):
+            verify_current_sources({**dossier, "scoped_claim_review": claim},
+                                   inventory, {source["id"]: overlapping})
+        monkeypatch.setattr(signer, "SCOPED_LECTURE_CONFLICTS", {item_id: fingerprint(record)})
     with pytest.raises(SigningError, match="scoped_claim_review_required"):
         verify_current_sources({**dossier, "item_id": "another_term"},
                                inventory, {source["id"]: record})
