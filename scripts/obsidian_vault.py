@@ -15,6 +15,7 @@ import shutil
 import sys
 import subprocess
 import tempfile
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -31,6 +32,16 @@ SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 SOURCE_ID = re.compile(r"[A-Za-z0-9_-]{20,}\Z")
 GENERATED = "generated"
 STATE = ".psychology-atlas-generated.json"
+
+
+def valid_generated_name(name: str) -> bool:
+    """Portable descriptive filenames, without paths or Obsidian link syntax."""
+    return (isinstance(name, str)
+            and bool(re.fullmatch(r"[A-Za-zА-Яа-яЁё0-9][A-Za-zА-Яа-яЁё0-9 _(),.–—-]{0,109}\.md", name))
+            and not name[:-3].endswith((' ', '.'))
+            and name[:-3].split('.')[0].upper() not in
+            {'CON', 'PRN', 'AUX', 'NUL', *(f'COM{i}' for i in range(1, 10)),
+             *(f'LPT{i}' for i in range(1, 10))})
 
 
 class VaultError(ValueError):
@@ -229,11 +240,13 @@ def _verify_repository_vault(target: Path, *, published_content: bool = False) -
 
 
 def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool = False,
-                published_content: bool = False) -> dict:
-    if (not isinstance(files, dict) or "index.md" not in files
+                published_content: bool = False, replace_catalogue: bool = False) -> dict:
+    if (not isinstance(files, dict) or not ({"index.md", "База знаний.md"} & files.keys())
             or any(not isinstance(content, bytes) or not content for content in files.values())):
         raise VaultError("generated_files_required")
     files = dict(files)
+    if replace_catalogue and not published_content:
+        raise VaultError("catalogue_migration_requires_reviewed_knowledge")
     if published_content:
         from scripts.obsidian_catalogue import render_published
         if files != render_published()[0]:
@@ -258,8 +271,8 @@ def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool 
         if not isinstance(state, dict) or state.get("schema_version") != 1:
             raise VaultError("invalid_generated_state")
         previous = state.get("files")
-        if not isinstance(previous, dict) or any(not NOTE_ID.fullmatch(name.removesuffix(".md"))
-                or not name.endswith(".md") or not isinstance(digest, str) or not SHA256.fullmatch(digest)
+        if not isinstance(previous, dict) or any(not valid_generated_name(name)
+                or not isinstance(digest, str) or not SHA256.fullmatch(digest)
                 for name, digest in previous.items()):
             raise VaultError("invalid_generated_state")
         actual = {p.name for p in generated.iterdir()}
@@ -269,10 +282,33 @@ def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool 
             path = generated / name
             if not path.is_file() or path.is_symlink() or _hash(path.read_bytes()) != digest:
                 raise VaultError("generated_note_changed_by_owner")
+    if replace_catalogue:
+        from scripts.obsidian_catalogue import LEGACY_STATE_SHA256
+        if not previous or _hash((generated / STATE).read_bytes()) != LEGACY_STATE_SHA256:
+            raise VaultError("unknown_catalogue_migration")
+        # Personal links to the removed catalogue need an explicit owner edit;
+        # silently breaking them is not part of replacing the managed export.
+        removed = {name[:-3] for name in previous if name not in files}
+        personal = target / "personal"
+        if personal.is_symlink():
+            raise VaultError("personal_link_migration_required")
+        if personal.is_dir():
+            for path in personal.rglob("*.md"):
+                if path.is_symlink():
+                    raise VaultError("personal_link_migration_required")
+                text = path.read_text(encoding="utf-8")
+                links = WIKI_LINK.findall(text) + re.findall(r"\[[^\]]*\]\(([^)\s]+)\)", text)
+                if any(unquote(link.split('|')[0].split('#')[0]).replace('\\', '/')
+                       .rsplit('/', 1)[-1].removesuffix('.md') in removed for link in links):
+                    raise VaultError("personal_link_migration_required")
     # An incremental manifest is not permission to remove previous note IDs.
     # Preserve their bytes and make the older review scope explicit in the index.
     retained = {name: (generated / name).read_bytes() for name in previous
                 if name != "index.md" and name not in files}
+    if replace_catalogue:
+        # Every old byte was verified against the exact exporter-owned state.
+        # No owner-edited, personal, unknown or arbitrary package is removable.
+        retained = {}
     if published_content and retained:
         from scripts.obsidian_catalogue import RETIRED_NOTE
         # Keep IDs, but never republish withdrawn editions or private manifests.
@@ -300,7 +336,7 @@ def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool 
         if backup.exists() or backup.is_symlink():
             raise VaultError("unrecovered_vault_backup")
         for name, content in files.items():
-            if not name.endswith(".md") or not NOTE_ID.fullmatch(name[:-3]):
+            if not valid_generated_name(name):
                 raise VaultError("invalid_generated_name")
             (staged / name).write_bytes(content)
         state = {"schema_version": 1, "files": {name: _hash(content)

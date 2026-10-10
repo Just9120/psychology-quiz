@@ -1,50 +1,60 @@
 # Obsidian Vault
 
-Это личная база владельца E06. Она содержит summaries и самостоятельные заметки по проверенным учебным материалам, а также связи с понятиями, вопросами, терминами и книгами там, где такие связи проверены. Это не учебный раздел Telegram/Mini App/PWA, не банк вопросов и не разрешение автоматически публиковать производный контент.
+E06 — база знаний на основе источников: самостоятельные понятия, механизмы, модели и смысловые отношения. Это не выгрузка тестов, домашних заданий или книжного каталога. Настоящие имена Markdown-файлов читаемы по-русски; темы служат точками входа, а названия занятий — только основанием утверждений. См. [открытие](../vault/README.md) и [требования](project-spec.md#e06--личная-база-obsidian).
 
-По D-61 очищенный Vault поставляется сейчас в vault/ единого репозитория независимо от visibility. Публичность позже меняет владелец по желанию. Приватные исходники, Drive identifiers/URLs, review dossiers, личные данные и удержанные claims не публикуются. Локальные manifests и прежний private preview сохранены отдельно. См. [открытие Vault](../vault/README.md).
+D-61 разрешает очищенный Vault в `vault/` единого репозитория независимо от visibility; D-62 исправляет ошибочную трактовку поставки PR346/347. Экспорт не меняет публичность. Приватные исходники, Drive identifiers/URLs, досье, личные данные и удержанные утверждения остаются вне Git и клиентских assets.
 
-## Опубликованный пакет и проверка полноты
+## Проверенная редакция знаний
 
-Пакет содержит645 вопросов,85 терминов,281 произведение/319 связей каталога и42 домашних задания.168 тем curriculum,128 с привязанными вопросами;60 вопросов без точной темы.11 понятий в confusable_with не имеют опубликованного определения: gap отмечен текстом, без выдуманной заметки. Аудиоссылки есть у36 произведений; отсутствие ссылки не доказывает отсутствие версии. Полнота относится к текущему банку, не к полному пересказу425 материалов.Также включены3 ранее подготовленные самостоятельные заметки: private source/revision/range validation повторно прошёл на сохранённых inputs. Их очищенные bodies в content/vault-notes.json проверяются по exact reviewed digest; изменение требует нового source review, status сам по себе не разрешает публикацию.1268 Markdown files включают самостоятельные понятия, полные разборы/кейсы и тематические оглавления.
+Текущий пакет содержит316 атомарных заметок,13 содержательных тематических обзоров, стартовую страницу и страницу границ:331 Markdown. Проверены ограниченные фрагменты134 сохранённых источников.637 существующих exact-fragment reviews использованы как доказательства утверждений и объединены по смыслу; это не правило «вопрос → заметка». Определения процессов и свойств дополнительно сверены с сохранённым глоссарием. Исторические модели, метафоры и ограничения вывода обозначены явно.
+
+Полнота относится к объявленному охвату проверенных фрагментов, не ко всем425 материалам. Повторы объединены, спорные утверждения исключены, неподтверждённые редакции не служат основанием новой заметки. Пробелы вне этого охвата сохраняются и описаны в `generated/Границы базы.md`; число страниц не доказывает полноту знаний. Точная source-to-note карта с revision/SHA/locator и редакторскими основаниями хранится приватно. Повторного обхода всего Drive нет.
+
+## Подготовка и воспроизводимый экспорт
+
+Canonical команда остаётся `scripts/obsidian_catalogue.py` для совместимости прежней процедуры, но теперь она не читает банк вопросов, homework, литературу, curriculum или runtime DB. Вход — очищенный `content/vault-notes.json`, schema2: `notes` с `title`, `section`, `body`, `links` (понятие → смысл отношения), `sources` (читаемые названия), и `coverage` с обзорами и границами.
+
+Редактор сначала проверяет самостоятельность утверждения, точную опору в сохранённой редакции, удержанные фрагменты, атомарность и смысл связей. Исследовательские inputs/receipts остаются ignored. В публичный manifest переносится только whitelist знаний. Проверка exact reviewed digest в exporter закрепляет проверенную редакцию; изменение требует нового содержательного source review, а поле status не даёт разрешения. Автоматические checks проверяют воспроизводимость и структуру, но не заменяют эту сверку.
+
+Команды из корня репозитория, Python environment — в [README](../README.md#быстрый-старт-и-проверки):
 
 ```bash
 python scripts/obsidian_catalogue.py --vault vault --repository-vault
 python scripts/obsidian_catalogue.py --vault vault --check
 python scripts/audit_public_assets.py --asset-dir vault
+python -m pytest tests/test_obsidian_vault.py tests/test_obsidian_catalogue.py -q
 ```
 
-CI проверяет exact parity committed пакета и текущих разрешённых редакций. Для проверки всех known private IDs оператор добавляет --private-inventory с полным ignored inventory. Файлы детерминированы, без timestamp/личного прогресса; обновление банка требует обновления Vault. Литература использует существующий reading_order и различает text/audio/access, а не привязки к занятиям.
+Для полного локального privacy scan добавьте `--private-inventory` с текущим ignored inventory. CI знает только tracked registry; его PASS не доказывает отсутствие неизвестных private IDs. Экспорт детерминирован, без даты запуска и личного прогресса. Изменение банка само по себе не переписывает знания.
 
-## Источники и локальный приватный экспорт
+## Сохранность и замена ошибочной выгрузки
 
-Canonical exporter опубликованного банка — scripts/obsidian_catalogue.py. Рабочая папка — корень репозитория, Python environment указан в [README](../README.md#быстрый-старт-и-проверки). Он использует существующий load_policy().can_publish, проверенные curriculum fingerprints и самостоятельные reading topics; не обращается к Drive/LLM или runtime DB. Ни содержимое книг, ни новые психологические утверждения из библиографии не генерируются. scripts/obsidian_vault.py сохраняется для private local manifests и как общий безопасный writer.
+Общий writer `scripts/obsidian_vault.py` управляет только `generated/` с собственным state и hashes. Неизвестные файлы, owner edits, symlinks, неизвестная версия state и незавершённый backup останавливают запись. Файлы вне generated не переписываются. Staging и backup находятся в выбранном Vault; очистка проверяет абсолютный owned target. При ошибке сохраните recovery files.
+
+Для однократной замены неизменённого каталога PR347 есть явный флаг:
+
+```bash
+python scripts/obsidian_catalogue.py --vault vault --repository-vault --replace-catalogue
+```
+
+Он допускает удаление только пакета с закреплённым digest старого state, после сверки каждого старого файла. Любая личная правка, добавленный файл или иной пакет запрещают замену. Ссылки из `personal/` на удаляемые страницы также останавливают миграцию: владелец сначала сохраняет или обновляет свои ссылки. Это осознанная замена ошибочного формата, а не обычное удаление заметок при обновлении. Прежние страницы вопросов не сохраняются в новом пакете. При обычном последующем снятии понятия остаётся нейтральная заметка с прежним именем без переопубликации утверждения; повтор неизменённого обновления идемпотентен.
+
+`--repository-vault` требует authenticated exact origin/full_name, известную boolean visibility, archived=false и push permission. PUBLIC/PRIVATE допустимы только для byte-identical очищенного render output; произвольный private manifest не проходит. Экспорт не выполняет push. Raw private mode сохраняет более строгий visibility guard.
+
+Vault и `content/vault-notes.json` исключены из Docker build context; они не являются asset, API или mount приложения. Archive structure, portable names, wikilinks и managed-state readback проверяются автоматически. Запуск native Obsidian в среде агента не подтверждён и не подменяется проверкой файлов.
+
+## Отдельный локальный приватный экспорт
 
 Manifest имеет `schema_version: 1` и массив `notes`. Для каждой заметки нужны стабильный `id`, `title`, самостоятельный `body`, приватные `source_id`, `source_revision`, `source_sha256`, `source_locator`, а также `reviewer` и `reviewed_at`. `links` ссылаются на другие IDs этого manifest; wikilinks в body тоже проверяются. Необязательные `question_ids`, `term_ids`, `literature_ids` должны разрешаться в действующих content registries. Автоматическая проверка координат/хешей не доказывает содержательную опору body: редактор сверяет тезисы с точным фрагментом источника.
 
 Источник должен быть current `processed`, явно классифицирован как `learning_material`, иметь совпадающие revision/SHA и не находиться в unresolved conflict. Библиография или неизвестная классификация не разрешают создавать знание о содержании книги. Если review задаёт `search_ranges`, locator заметки должен совпадать с одним из проверенных диапазонов; это не approval остального текста.
 
-Private manifest inputs храните в ignored data/ либо отдельной приватной папке. Tracked и неignored inputs отклоняются. Raw private notes с provenance экспортируются только в отдельный локальный Vault либо подтверждённый private repository; публичный пакет строится отдельным exporter только из опубликованного банка.
+Private manifest inputs храните в ignored data/ либо отдельной приватной папке. Tracked и неignored inputs отклоняются. Raw private notes с provenance экспортируются только в отдельный локальный Vault либо подтверждённый private repository; публичный пакет строится отдельно из очищенных и содержательно проверенных знаний.
 
 ```bash
 python scripts/obsidian_vault.py   --manifest data/vault-notes-reviewed.json   --inventory data/source-inventory-current.json   --processing data/source-processing-reviewed.json   --vault /absolute/path/to/private-vault
 ```
 
-## Сохранность обновления
-
-Exporter управляет только `generated/` с собственным state file и проверенными hashes. Личные файлы вне него не меняются; неизвестная папка, чужие/добавленные файлы, правки управляемых заметок, неизвестная версия state и незавершённый backup останавливают обновление. В private local режиме старые note IDs, отсутствующие в частичном новом manifest, сохраняются byte-for-byte для существующих ссылок и перечисляются в index как заметки предыдущих пакетов, не проверенные этим обновлением. Это не подтверждает актуальность их прежнего содержания. Повтор неизменённого обновления идемпотентен.
-
-Staging и backup относятся только к этому export и находятся непосредственно в выбранном Vault; перед рекурсивной очисткой проверяется абсолютный target. При ошибке сохраните recovery files и выясните состояние; не удаляйте их вслепую.
-
-## GitHub и открытие
-
-D-61 заменяет прежний PRIVATE prerequisite D-45/50. Target остаётся vault/ единого psychology-quiz; отдельный репозиторий не меняется. Публичный exporter принимает --repository-vault только после authenticated exact origin/full_name, известной boolean visibility, archived=false и push permission. PUBLIC/PRIVATE разрешены для byte-identical render_published output, произвольный private manifest отвергается. Exporter не меняет visibility и не делает push.
-
-В публичном пакете удалённая из банка редакция заменяется нейтральной заметкой с прежним ID; её содержимое не переопубликовывается. При published_content=True общий writer сверяет файлы с текущим render_published, проверяет retained bytes на private provenance и все wikilinks до записи. Неизвестная visibility, другой target, недоступная authentication или owner edits останавливают запись. Без --repository-vault output внутри любого checkout проекта по-прежнему запрещён.
-
-Vault и content/vault-notes.json исключены из Docker build context и не является PWA/Mini App asset, API или runtime mount. Скачанная папка vault/ открывается в Obsidian, стартовая заметка generated/index.md. Структура и wikilinks проверяются автоматически; запуск native Obsidian в среде агента не подтверждён. Личные заметки сохраняйте в ignored vault/personal/, настройки .obsidian/ и корзина также ignored.
-
-Canonical адресная проверка из корня: python -m pytest tests/test_obsidian_vault.py tests/test_obsidian_catalogue.py -q. Она проверяет source/revision/conflict gates private режима, bibliography boundary, exact committed/public-bank parity, privacy, links, сохранность owner edits/личных файлов/старых note IDs, идемпотентность и Git boundary. Проверка ссылок не подменяет содержательный source review или запуск native Obsidian.
 
 ## Сводка покрытия для владельца
 
