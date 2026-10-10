@@ -88,6 +88,29 @@ test('personal learning shows empty queue and persists a weekly target', async (
   await expect(page.getByLabel('Завершённые попытки')).toHaveValue('2')
 })
 
+test('homework passes at 80 percent and keeps the completed card after reload', async ({ page, request }) => {
+  expect((await request.post(backend + '/__test/reset', { data: { homework: true } })).ok()).toBeTruthy()
+  await fresh(page)
+  await navigate(page, 'Домашние задания')
+  await expect(page.getByRole('heading', { name: 'Закрепление знаний' })).toBeVisible()
+  await page.getByRole('button', { name: 'Начать тест · 5 вопросов' }).click()
+  for (let step = 0; step < 5; step++) {
+    await page.getByRole('radio', { name: step === 0 ? 'Только скорость' : 'Осмысленное повторение' }).check()
+    await page.getByRole('button', { name: 'Проверить ответ' }).click()
+    await page.getByRole('button', { name: step === 4 ? 'Посмотреть результат' : 'Следующий вопрос' }).click()
+  }
+  await expect(page.getByRole('heading', { name: '80% верных ответов' })).toBeVisible()
+  await expect(page.getByText('Выполнено: порог 80% достигнут в этой попытке.')).toBeVisible()
+  await page.getByRole('button', { name: 'К заданиям' }).click()
+  await expect(page.locator('.homework-status')).toContainText('Выполнено')
+  await page.reload()
+  await navigate(page, 'Домашние задания')
+  await expect(page.locator('.homework-status')).toContainText('Выполнено')
+  const catalog = await (await page.request.get('/web/homework/catalog')).json()
+  expect(catalog.assignments[0]).toMatchObject({ completed: true, best_score: 4, best_total: 5 })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+})
+
 test('short desktop viewport keeps sidebar navigation and logout reachable', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 480 })
   await fresh(page)

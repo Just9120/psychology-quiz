@@ -174,7 +174,7 @@ def test_all_published_tasks_start_with_reviewed_questions_and_preserve_old_cred
                 JOIN questions q ON q.id=sq.question_id WHERE sq.session_id=?''', (session_id,))}
             assert selected == set(assignment['question_ids'])
             _finish(conn, actor, started['runner_state'], len(selected))
-            assert _entry(conn, actor)['completed']
+            assert _entry(conn, actor, assignment['id'])['completed']
             assert outcome_for_session(conn, actor_user_id=other, session_id=session_id) is None
         assert outcome_for_session(conn, actor_user_id=actor, session_id=old_session)['passed']
         assert not any(item['completed'] for item in catalog_for_actor(conn, other)['assignments'])

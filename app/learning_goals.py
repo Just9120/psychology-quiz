@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 
 from app.database import begin_write
 from app.payload_validation import is_sqlite_integer
+from app.study_events import completed_studies
 
 KINDS = ("study", "review", "reading")
 
@@ -37,9 +38,8 @@ def overview(conn, actor: int, *, now: datetime | None = None) -> dict:
     targets = {row[0]: int(row[1]) for row in conn.execute(
         "SELECT goal_kind,weekly_target FROM user_learning_goals WHERE user_id=?", (actor,))}
     completed = {
-        "study": conn.execute("""SELECT count(*) FROM quiz_sessions
-            WHERE user_id=? AND status='finished' AND finished_at>=? AND finished_at<?""",
-            (actor, lower, upper)).fetchone()[0],
+        "study": sum(start <= event.completed_at.date() < end
+                     for event in completed_studies(conn, actor)),
         "review": conn.execute("""SELECT count(*) FROM user_review_events
             WHERE user_id=? AND answered_at>=? AND answered_at<?""",
             (actor, lower, upper)).fetchone()[0],

@@ -73,10 +73,13 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 
 `miniapp-react/` собирается из pinned frontend dependencies и сверяется с tracked
 assets в CI до merge. Не заменять deploy command на bare `npx wrangler`: при
-отсутствии root package установка может получить незакреплённую версию. Эти поля
-задают целевую конфигурацию; текущие Cloudflare dashboard settings и их применение
-UNSET до readback владельца существующего Worker. Изменение этой процедуры не
-утверждает, что внешний provider уже обновлён.
+отсутствии root package установка может получить незакреплённую версию. Владелец
+подтвердил эти значения и production branch `main` в dashboard 08.10.2026;
+их применение подтверждает успешный build `7e0122b9-5f9a-46f7-86d2-50c92beb26b1`.
+На 10.10 main build `b0030a9a-1df3-416f-b4f6-d254f4993399` успешен;
+проверенные assets соответствуют поставленной версии. Это Evidence указанных
+поставок, а не гарантия неизменности внешних настроек после проверки. Актуальные
+revision, primary records и ограничения доступа — в [плане](delivery-plan.md#окружения-и-delivery-facts-read-only1010).
 
 1. Опубликовать `miniapp-react/index.html` и его assets на HTTPS static hosting в deployment environment.
 2. После готовности Cloudflare custom domain установить `MINI_APP_URL` на этот HTTPS URL в runtime `.env` на VPS.

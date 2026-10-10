@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT))
 from fastapi import Request
 import uvicorn
 from app.db import get_connection, upsert_approved_questions
-from app import curriculum
+from app import curriculum, homework
 from app.attempt_content import capture_question
 from app.identity_schema import migrate_identity_schema
 from app.auth_schema import migrate_auth_schema
@@ -30,6 +30,8 @@ from scripts.postgres_test_support import isolated_postgres_target
 
 EMAIL = "owner@example.test"
 PASSWORD = "A synthetic browser passphrase"
+REAL_HOMEWORK_CATALOG = homework.load_catalog
+REAL_HOMEWORK_CURRICULUM = homework.load_curriculum
 
 
 class Mailbox:
@@ -49,7 +51,7 @@ def main():
                                EMAIL, "synthetic-only", EMAIL, False)
         app = create_app(db_path=postgres_path or path, bot_token="123:synthetic-e2e", web_settings=settings, web_mailer=mailbox)
 
-        def reset(seed=True, mixed=False):
+        def reset(seed=True, mixed=False, with_homework=False):
             nonlocal path
             path = str(Path(directory) / "synthetic.sqlite3")
             Path(path).unlink(missing_ok=True)
@@ -86,6 +88,16 @@ def main():
                     if index != 4:  # One deliberate source gap, visible in UI.
                         data['editions'][digest] = {'topic_id': 't_111111111111' if index < 5 else 't_222222222222'}
                 curriculum.load_catalog = lambda: data
+                homework.load_catalog = REAL_HOMEWORK_CATALOG
+                homework.load_curriculum = REAL_HOMEWORK_CURRICULUM
+                if with_homework:
+                    homework.load_curriculum = lambda: data
+                    homework.load_catalog = lambda: ({
+                        'id': 'synthetic_homework', 'title': 'Закрепление знаний',
+                        'module': 'Другое', 'discipline_id': 'basics', 'topic_id': 't_111111111111',
+                        'description': 'Синтетическое задание для браузерной проверки.',
+                        'question_ids': [f'test-{index}' for index in range(5)],
+                    },)
                 if mixed:
                     with conn:
                         upsert_approved_questions(conn, [
@@ -123,7 +135,7 @@ def main():
         @app.post("/__test/reset")
         async def reset_fixture(request: Request):
             payload = await request.json()
-            reset(payload.get("seed", True), payload.get("mixed", False))
+            reset(payload.get("seed", True), payload.get("mixed", False), payload.get("homework", False))
             return {"ok": True}
 
         @app.get("/__test/mail")
