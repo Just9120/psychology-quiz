@@ -325,6 +325,18 @@
           "subscription"
         ],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms purchase and subscription. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/daniel-kaneman/dumay-medlenno-reshay-bystro-21636519/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "psf_sapolsky_psihologiya_stressa": [
@@ -338,6 +350,18 @@
           "subscription"
         ],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/robert-sapolski/psihologiya-stressa-66647196/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "lit_677867857cce3e89": [
@@ -349,6 +373,18 @@
         "checked_at": "2026-10-08",
         "access_modes": [],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/ludmila-petranovskaja/taynaya-opora-privyazannost-v-zhizni-rebenka-21620399/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "psf_van_der_kolk_telo_pomnit_vse": [
@@ -360,6 +396,18 @@
         "checked_at": "2026-10-08",
         "access_modes": [],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/bessel-van-der-kolk/telo-pomnit-vse-kakuu-rol-psihologicheskaya-travma-ig-51650002/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "lit_levine_waking_tiger": [
@@ -389,6 +437,15 @@
         "checked_at": "2026-10-08",
         "access_modes": [],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/bd3dSaqF",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official audiobook card confirms work, author and recording duration. The public card offers a free excerpt; full-version payment/subscription conditions were not established, so access modes remain unknown."
       }
     ],
     "lit_covey_seven_habits": [
@@ -402,6 +459,18 @@
           "subscription"
         ],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/stiven-kovi/7-navykov-vysokoeffektivnyh-ludey-moschnye-instrumenty-razviti-5009075/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "lit_kreisman_straus_hate_you_dont_leave": [
@@ -437,6 +506,27 @@
         "checked_at": "2026-10-08",
         "access_modes": [],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/olga-primachenko/s-toboy-ya-doma-kniga-o-tom-kak-lubit-drug-druga-ostavaya-67255313/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/uNLPyO8L",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official audiobook card confirms work, author and recording duration. The public card offers a free excerpt; full-version payment/subscription conditions were not established, so access modes remain unknown."
       }
     ],
     "lit_burlachuk_psychodiagnostics": [
@@ -663,6 +753,18 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/dzhon-kabat-zinn/kuda-by-ty-ni-shel-ty-uzhe-tam-osoznannaya-meditaciya-v-p-42926220/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "lit_dahl_explanatory_dictionary": [
@@ -739,6 +841,27 @@
         "checked_at": "2026-10-10",
         "access_modes": [],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/zigmund-freyd/psihopatologiya-obydennoy-zhizni-65913293/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/L4332pko",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official audiobook card confirms work, author and recording duration. The public card offers a free excerpt; full-version payment/subscription conditions were not established, so access modes remain unknown."
       }
     ],
     "lit_vasilyuk_psychology_experiencing": [
@@ -766,6 +889,18 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/chezare-lombrozo/genialnost-i-pomeshatelstvo-67913210/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "lit_chekhov_death_of_clerk": [
@@ -1144,6 +1279,18 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/robert-chaldini/psihologiya-vliyaniya-7-e-rasshirennoe-izdanie-67779729/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access. This offer is the seventh expanded edition, not a summary; it does not establish the edition used by the course."
       }
     ],
     "lit_4bbfe78685eb81c2": [
@@ -1424,6 +1571,18 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/konrad-lorenc/agressiya-ili-tak-nazyvaemoe-zlo-68331535/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
       }
     ],
     "lit_family_slide_05": [
