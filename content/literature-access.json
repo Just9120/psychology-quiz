@@ -637,6 +637,808 @@
         ],
         "access_review": "Official MyBook title/author/text card inspected on 2026-10-10. Subscription is offered; excerpt/trial is not unconditional free full access. Catalog edition and personal/territorial entitlement unverified."
       }
+    ],
+    "fch_sergeev_dubynin_telo_cheloveka": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/vyacheslav-albertovich-dubynin/telo-cheloveka-67912316/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "psf_kabat_zinn_kuda_by_ty_ni_shel": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/dzhon-kabat-zinn-2/kuda-by-ty-ni-shel-ty-uzhe-tam/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_dahl_explanatory_dictionary": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/GCHXd7bj",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      }
+    ],
+    "lit_bacon_new_organon": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/frensis-bekon/novyj-organon/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_kuhn_structure_scientific_revolutions": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/t-kun/struktura-nauchnyh-revoluciy-7362915/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_anna_freud_ego_defence": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/anna-freyd/ego-i-mehanizmy-zaschity-74420476/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_maslow_new_reaches": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/abraham-maslou/novye-rubezhi-chelovecheskoj-prirody/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_freud_psychopathology_everyday_life": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/f9I6C9w3",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      }
+    ],
+    "lit_vasilyuk_psychology_experiencing": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/f-e-vasiluk/psihologiya-perezhivaniya-71106634/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access. Offered expanded 2024 collection includes the named work; it is not asserted to equal the earlier edition."
+      }
+    ],
+    "lit_lombroso_genius_insanity": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/chezare-lombrozo/genialnost-i-pomeshatelstvo/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_chekhov_death_of_clerk": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/anton-chehov/smert-chinovnika-172158/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/gwPdD03b",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/anton-chehov/smert-chinovnika-4971057/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_5568f7c20141100f": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/nikolay-linde/psihologicheskoe-konsultirovanie-teoriya-i-praktika-42388686/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/GqbYSnT3",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/nikolay-linde/psihologicheskoe-konsultirovanie-teoriya-i-praktika-68004162/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_7b4d2c2bdc54b178": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/robert-nemov/psihologicheskoe-konsultirovanie-2-e-izd-per-i-dop-uchebnik-d-11868795/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      }
+    ],
+    "lit_salinger_catcher_rye": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/dzherom-devid-selindzher-48197/nad-propastu-vo-rzhi-70929682/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_remarque_black_obelisk": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/erih-mariya-remark/chernyy-obelisk-122478/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/erih-mariya-remark/chernyy-obelisk-5957154/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_00a7af60c24a8221": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/t-slotina/psihologiya-lichnosti-uchebnoe-posobie-181646/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/t-slotina/psihologiya-lichnosti-uchebnoe-posobie-71466643/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_1e9a50757f2caf6e": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/tamara-gordeeva/psihologiya-motivacii-dostizheniya/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_c9f5f2a72f8ab645": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/krayg-greys/psihologiya-razvitiya-18321154/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_5c4001030a94d65d": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/mariya-osipova-3/vyhod-iz-detskoj-travmy-obnyat-vnutrennego-rebenka/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_3ecf3ffbaa287019": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/donald-vinnikott/rebenok-semya-i-vneshnij-mir/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_6f18559891d319c1": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/donald-vinnikott/ot-pediatrii-k-psihoanalizu-74432021/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      }
+    ],
+    "lit_zeigarnik_pathopsychology": [
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/bluma-zeygarnik-10382274/patopsihologiya-uchebnik-72312223/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_hellinger_orders_of_love": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/bert-hellinger-2/poryadki-lubvi-72338479/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_a851d2e2d491dfed": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/erik-bern/igry-v-kotorye-igraut-ludi-ludi-kotorye-igraut-v-igry-73459643/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_7bcfce2256481407": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/hb6bROe7",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      }
+    ],
+    "lit_lebon_psychology_peoples_masses": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/gustav-lebon/psihologiya-narodov-i-mass-69692869/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/gustav-lebon/psihologiya-narodov-i-mass-67835535/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_family_slide_04": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/patrisiya-i-zurita-o/trudnyy-podrostok-konflikty-i-silnye-emocii-terapiya-43228655/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/patrisiya-i-zurita-o/trudnyy-podrostok-konflikty-i-silnye-emocii-terapiya-70417396/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_family_slide_06": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/anna-varga/vvedenie-v-sistemnuu-semeynuu-psihoterapiu-9370094/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/anna-varga/vvedenie-v-sistemnuu-semeynuu-psihoterapiu-9374988/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      }
+    ],
+    "lit_family_slide_07": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/glY4zMPZ",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      }
+    ],
+    "lit_family_slide_08": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/virdzhiniya-satir-2/psihoterapiya-semi/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_543dcd562c0460c5": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/robert-chaldini/psihologiya-vliyaniya/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_4bbfe78685eb81c2": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/anatoliy-svencickiy-19720/organizacionnaya-psihologiya-uchebnik-dlya-vuzov-12093761/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      }
+    ],
+    "lit_tolstoy_war_and_peace": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/lev-tolstoy/voyna-i-mir-polnoe-izdanie-v-odnom-tome-72287227/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      }
+    ],
+    "lit_taylor_principles_scientific_management": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/yWdIK4Pv",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      }
+    ],
+    "lit_1febe2b9612a7668": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/valeriy-pavlovich-belyanin/psiholingvistika-50191015/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_6491072220dbf2cb": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/aleksej-leontev/osnovy-psiholingvistiki/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_rybina_muradyan_coach": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/yurij-muradyan-2/delaj-kak-kouch/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_muradyan_atlant_game": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/uriy-muradyan-32823457/igra-atlantov-alhimiya-mechty-70183336/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/uriy-muradyan-32823457/igra-atlantov-alhimiya-mechty-70194052/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      }
+    ],
+    "lit_loehr_schwartz_full_engagement": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/dzhim-loer/zhizn-na-polnoy-moschnosti-upravlenie-energiey-kluch-k-vysokoy-180309/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/dzhim-loer/zhizn-na-polnoy-moschnosti-upravlenie-energiey-kluch-k-vysokoy-6596944/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_zatulovski_everyday_cybernetics": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/ulya-zatulovski/povsednevnaya-kibernetika-70954273/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/ulya-zatulovski/povsednevnaya-kibernetika-71198443/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_eysenck_wilson_personality": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/gans-ajzenk/kak-izmerit-lichnost/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_znakov_understanding_thought_communication": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/v-v-znakov/ponimanie-v-myshlenii-obschenii-chelovecheskom-bytii-67568313/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_znakov_psychology_understanding": [
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/X2bRbbx2",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      }
+    ],
+    "lit_zobkov_understanding_fairytale": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/valeriy-aleksandrovi/psihologiya-ponimaniya-v-skazkoterapii-uchebnoe-posob-55522283/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_moody_life_after_life": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/raymond-moudi/zhizn-posle-zhizni-issledovanie-fenomena-prodolzheniya-zhizn-63422271/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/oezfjvAQ",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/raymond-moudi/zhizn-posle-zhizni-issledovanie-fenomena-prodolzheniya-zhizn-63578091/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_course_mention_f3a45bec2566afc2": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/dzho-bouler/mathematical-mindsets-67222393/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied. English-language PDF by Jo Boaler; translation and file download are not implied."
+      }
+    ],
+    "lit_ae000be9a73115a6": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/elena-martynova-3/individualnoe-psihologicheskoe-konsultirovanie-teo/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_lorenz_on_aggression": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/konrad-lorenc/agressiya-ili-tak-nazyvaemoe-zlo-152103/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      }
+    ],
+    "lit_family_slide_05": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/raznoe-65383/teoriya-semeynyh-sistem-murreya-bouena-osnovnye-ponyatiya-met-9370803/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access. Exact anthology title matched; editorial names in its provider preface are K. Baker and A. Varga, not a single-author Bowen monograph."
+      }
     ]
   }
 }

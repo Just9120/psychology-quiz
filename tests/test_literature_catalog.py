@@ -159,6 +159,26 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_sechenov_reflexes_of_brain', 'lit_bulgakov_heart_of_a_dog',
         'fch_simonov_emotsionalny_mozg', 'fch_simonov_motivirovanny_mozg',
         'fch_ukhtomsky_dominanta',
+        'fch_sergeev_dubynin_telo_cheloveka', 'psf_kabat_zinn_kuda_by_ty_ni_shel',
+        'lit_dahl_explanatory_dictionary', 'lit_lorenz_on_aggression', 'lit_bacon_new_organon',
+        'lit_kuhn_structure_scientific_revolutions', 'lit_anna_freud_ego_defence',
+        'lit_maslow_new_reaches', 'lit_freud_psychopathology_everyday_life',
+        'lit_vasilyuk_psychology_experiencing', 'lit_lombroso_genius_insanity',
+        'lit_chekhov_death_of_clerk', 'lit_5568f7c20141100f', 'lit_ae000be9a73115a6',
+        'lit_7b4d2c2bdc54b178', 'lit_salinger_catcher_rye', 'lit_remarque_black_obelisk',
+        'lit_00a7af60c24a8221', 'lit_1e9a50757f2caf6e',
+        'lit_c9f5f2a72f8ab645', 'lit_5c4001030a94d65d', 'lit_3ecf3ffbaa287019',
+        'lit_6f18559891d319c1', 'lit_zeigarnik_pathopsychology', 'lit_hellinger_orders_of_love',
+        'lit_a851d2e2d491dfed', 'lit_7bcfce2256481407', 'lit_lebon_psychology_peoples_masses',
+        'lit_family_slide_04', 'lit_family_slide_05', 'lit_family_slide_06',
+        'lit_family_slide_07', 'lit_family_slide_08', 'lit_543dcd562c0460c5',
+        'lit_4bbfe78685eb81c2', 'lit_tolstoy_war_and_peace',
+        'lit_taylor_principles_scientific_management', 'lit_1febe2b9612a7668',
+        'lit_6491072220dbf2cb', 'lit_rybina_muradyan_coach', 'lit_muradyan_atlant_game',
+        'lit_loehr_schwartz_full_engagement', 'lit_zatulovski_everyday_cybernetics',
+        'lit_eysenck_wilson_personality', 'lit_znakov_understanding_thought_communication',
+        'lit_znakov_psychology_understanding', 'lit_zobkov_understanding_fairytale',
+        'lit_moody_life_after_life', 'lit_course_mention_f3a45bec2566afc2',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
@@ -167,6 +187,18 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
     assert {link['provider'] for link in links['fch_martynov_mozg']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     # An identically titled work by another author must never be offered as Carter's book.
     assert 'fch_carter_kak_rabotaet_mozg' not in links
+    # Matching a title cannot substitute another author's book or a summary.
+    assert 'lit_e5921321564edbc4' not in links  # Burlachuk, not Linde.
+    assert 'lit_tereshonok_levina_psychology_pedagogy_part1' not in links
+    assert 'lit_org_lecture_02' not in links  # Schein, not Smart Reading.
+    assert 'lit_hsieh_delivering_happiness' not in links  # Both checked editions unavailable.
+    assert 'lit_leonhard_accentuated_personalities' not in links
+    assert 'lit_917071a82ba4c6db' not in links  # Generic title, five-author edition not established.
+    for work in ('lit_5568f7c20141100f', 'lit_00a7af60c24a8221', 'lit_family_slide_06',
+                 'lit_family_slide_04', 'lit_zatulovski_everyday_cybernetics',
+                 'lit_remarque_black_obelisk', 'lit_loehr_schwartz_full_engagement'):
+        assert {link['format'] for link in links[work]} == {'text', 'audio'}
+    assert {link['format'] for link in links['lit_zeigarnik_pathopsychology']} == {'audio'}
     assert {link['format'] for link in links['vygotsky_myshlenie_i_rech']} == {'text', 'audio'}
     assert {link['format'] for link in links['lit_0199865ad8d23ecb']} == {'text'}
     assert {link['format'] for link in links['lit_819808cf97ad8eb5']} == {'text', 'audio'}
