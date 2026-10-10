@@ -1,6 +1,18 @@
 # Delivery Plan
 
-## Current Goal — REMAINING-SCOPE-20261010
+## Изменение требований — исключение RAG, 10.10.2026
+
+Основание — прямое поручение владельца, D-60 в [spec](project-spec.md#d-60--rag-исключён-из-требований-10102026). Генеративный RAG исключён целиком: AC-SRH-04/05 выведены из действующего каталога без переиспользования ID. Текущий scope —93 AC,90 обязательных и3 условных; это изменение состава требований, не новый аудит и не пересчёт готовности. Последний аудиторский snapshot95 AC ниже сохраняется с его датой и SHA.
+
+Векторный/лексический/гибридный поиск AC-SRH-01/02 и условный выбор другой vector DB AC-SRH-03 сохраняются. Q-05 о модели RAG закрыт исключением функции; будущая реализация/замер/поставка больше не входят в roadmap. Подготовленный default-off scaffold использует app/private_rag.py, import RagError/draft_answer в app/private_search.py и COPY в Dockerfile.search: удаление кода/тестов не выполняется данным docs-only изменением. Миграция, изменение индекса, runtime, auth или данных не требуются.
+
+Поставка предыдущей Goal завершена: PR344 merged eb184ab9a4b565d7ef57f7802d412202e2c4b7c4; PR CI38041485334, main CI38041845543 и production CD38042159968/job114184390891 PASS10.10. Runtime bot/API exact revision/image, backup restore/recovery, user-state preservation, PostgreSQL readiness, PWA/public smoke и privacy timer подтверждены primary record. Cloudflare main build b7d10723-468a-4faf-b2b9-bd4ff09a3721 PASS. Встроенная Goal завершена,8/8 AC; пользовательские изменения и private inputs сохранены.
+
+Документальное изменение: branch codex/remove-rag-requirements-20261010, base eb184ab9a4b565d7ef57f7802d412202e2c4b7c4, сохранённый отдельный worktree psychology-quiz-privacy-20261007. Scope PR — только spec/plan. Local scope check PASS:93 unique AC spec/plan совпадают,90 mandatory/3 conditional; исключённые IDs сохранены в истории. Validation: согласованность93 active AC и исключённых IDs, отсутствие RAG в действующем roadmap, история решений и относительные ссылки, git diff --check/self-review REQUIRED local; required pwa-client/validate-and-smoke-test exact revision и обычный docs-only source sync REQUIRED после merge. PR/CI/merge/source sync PENDING до фактических records. Исправления продукта и новая implementation Goal не активируются.
+
+## Последняя завершённая Goal — REMAINING-SCOPE-20261010
+
+Ниже сохранён checkpoint до завершения; его PENDING gates закрыты records PR344/CI/CD выше. Прежняя отсрочка RAG заменена исключением D-60.
 
 Основание: владелец поручил взять весь оставшийся scope и все findings, дополнительно проверить покрытие ссылок на аудиокниги и полноту домашних заданий. Поставка Obsidian/Vault исключена; отдельным ответом подтверждено сохранение отсрочки RAG и правовой работы. Встроенная Goal активна. Baseline `fbfff6902e71ec54fa5638162b8e82db716a3b51`, branch `codex/remaining-scope-20261010`, base тот же; используется сохранённый отдельный checkout `psychology-quiz-privacy-20261007`. Dirty primary и чужой broken main сохранены. PR343 merged, CI38038506034/CD38038804890 PASS; source sync fbfff69 при runtime a93e3d8 и PWA72810ab. Authenticated GitHub: открытых PR нет, strict required pwa-client/validate-and-smoke-test, approvals0, enforce_admins=true.
 
@@ -553,7 +565,9 @@ DoD: все применимые AC реализованы и подтвержд
 
 ## Состояние AC
 
-Все95 строк пересмотрены AUDIT-20261007 по main09a9cef. READY = реализация и подходящие автоматические проверки E-AUD-01–06, не один прошлый счётчик. Retired AC-AUTH-06/D-29 и AC-LIT-08/09/D-42 не входят в таблицу; IDs не переиспользуются.
+Актуальный состав после D-60 —93 AC:90 обязательных и3 условных. Исключённые AC-SRH-04/05 не получают READY и не входят в эту таблицу; прежние оценки95 AC относятся только к указанному audit snapshot. Завершение PR344 подтверждено records в начале плана; локальные PENDING в его сохранённом pre-merge Evidence закрыты этой поставкой.
+
+Исторический каталог95 AC пересмотрен AUDIT-20261007 по main09a9cef и последующим AUDIT-20261010; после D-60 таблица содержит93 действующих AC. READY = реализация и подходящие автоматические проверки E-AUD-01–06, не один прошлый счётчик. Retired AC-AUTH-06/D-29 и AC-LIT-08/09/D-42 не входят в таблицу; IDs не переиспользуются.
 
 | AC | Статус | Scope | Evidence / ограничения |
 | --- | --- | --- | --- |
@@ -604,8 +618,6 @@ DoD: все применимые AC реализованы и подтвержд
 | AC-SRH-01 | READY | MANDATORY | Lexical/semantic/hybrid с references и current reviewed index; seven-case VPS QA PASS. Проверка: SRH в таблице трассировки; E-AUD10-01/06. |
 | AC-SRH-02 | READY | MANDATORY | Rebuildable pgvector и separate role/mount, user/source invariants; VPS index установлен. Проверка: SRH в таблице трассировки; E-AUD10-01/06. |
 | AC-SRH-03 | BACKLOG | CONDITIONAL | CONDITIONAL: измеренного основания менять pgvector нет; implementation N/A до триггера. Проверенный небольшой corpus/7-case QA не доказывает capacity большого corpus. Проверка: SRH в таблице трассировки; E-AUD10-01/06. |
-| AC-SRH-04 | IN_PROGRESS | CONDITIONAL / DEFERRED | D-44: RAG отложен, scaffold не реализованная пользовательская функция; модель/grounding/cost acceptance не выбраны. Проверка: SRH в таблице трассировки; E-AUD10-01/06. |
-| AC-SRH-05 | IN_PROGRESS | CONDITIONAL / DEFERRED | D-44: решение о полезности/ресурсах RAG отложено; платный API не разрешён, измерение модели не выдаётся за выполненное. Проверка: SRH в таблице трассировки; E-AUD10-01/06. |
 | AC-HWK-04 | READY | MANDATORY | Общая source-derived classification и раздел трёх клиентов. Проверка: HWK в таблице трассировки; E-AUD10-04 и E-AUD10-01. |
 | AC-HWK-05 | READY | MANDATORY | Проверенные bank questions вместо эссе/упражнения; не выдаются за выполненную практику. Проверка: HWK в таблице трассировки; E-AUD10-04 и E-AUD10-01. |
 | AC-HWK-06 | READY | MANDATORY | Integer4/5 одной finished attempt; incomplete/сумма retries не дают credit. Проверка: HWK в таблице трассировки; E-AUD10-04 и E-AUD10-01. |
@@ -839,9 +851,9 @@ Revalidation10.10 на a93: все134 прежних ID сохранены; F-00
 
 | Приоритет / scope | Результат / критерий закрытия | Зависимости / non-goals |
 | --- | --- | --- |
-| P2 — активна REMAINING-SCOPE-20261010 | Один основной PR: F-135/AC-GAM-01/02 — завершённые glossary и quiz attempts одинаково учитываются в личных целях/достижениях без дублей и утечки actor. F-136 — homework E2E в existing SQLite/PG desktop/mobile suite. F-027 — точная актуализация двух runbooks. DoD: targeted local regression, current required CI, merge, exact applicable CD/version/readiness/preservation. | Выбрано владельцем10.10; дополнительно finite audio/homework coverage F-137/138. Существующие schema/data adapters и synthetic harness; если выяснится необходимость миграции, спроектировать сохранность до реализации. Не менять content/publication policy, visibility, инфраструктуру, auth policy; без RAG/Vault/legal и полного corpus reread. |
+| Завершено — REMAINING-SCOPE-20261010, PR344 | Один основной PR: F-135/AC-GAM-01/02 — завершённые glossary и quiz attempts одинаково учитываются в личных целях/достижениях без дублей и утечки actor. F-136 — homework E2E в existing SQLite/PG desktop/mobile suite. F-027 — точная актуализация двух runbooks. DoD: targeted local regression, current required CI, merge, exact applicable CD/version/readiness/preservation. | Выбрано владельцем10.10; дополнительно finite audio/homework coverage F-137/138. Существующие schema/data adapters и synthetic harness; если выяснится необходимость миграции, спроектировать сохранность до реализации. Не менять content/publication policy, visibility, инфраструктуру, auth policy; без RAG/Vault/legal и полного corpus reread. |
 | DEFER — единый PRIVATE/Vault | AC-KNW-03: после отдельного решения обеспечить private Git/VPS access, local reviewed notes в vault/, export/link/opening readback | D-50: сейчас repo public/Vault local; отдельный private repository не target. |
-| CONDITIONAL / DEFERRED | SRH-03 — другая vector DB только по измеренному основанию; SRH-04/05 — RAG только после выбора; PRIV-03/04 — отложенная правовая работа | D-44/52 действуют; это не активные blockers следующей предложенной Goal и не утверждение соответствия/неприменимости. |
+| CONDITIONAL / DEFERRED | SRH-03 — другая vector DB только по измеренному основанию; PRIV-03/04 — отложенная правовая работа | D-52 сохраняется; RAG исключён D-60 и не входит в будущий roadmap. Это не активные blockers следующей предложенной Goal и не утверждение соответствия/неприменимости. |
 | Адресные будущие проверки | Новые source revisions, конкретные content contradictions, изменённые provider offers или реальный performance bottleneck проверять адресно | Закрытые F-007/008/015/023/025/026 и editorial exclusions не переоткрывать без нового Evidence. Unknown SLO, provider entitlement/edition, external legacy consumers и host inventory остаются ограничениями знания. |
 
 ### Audit quality review
@@ -857,6 +869,8 @@ Saved source/item fingerprints и текущие publication guards позвол
 Ограничения: нет direct VPS shell/полного firewall/OS scan, большого corpus/load/capacity замера, повторного Cloudflare dashboard read10.10 и billing balance. Safe public reads не меняли аккаунты; реальный Google same-account login подтверждён владельцем ранее, production recovery — primary CD record. RAG/Vault/legal defer сохранены. Advisory snapshot0 не исключает неизвестные уязвимости. Confidence HIGH для Git/CI/CD/hash/settings/repro/арифметики, MEDIUM для полноты semantic/security/UX оценки; непроверенное не выдано за отсутствие проблем. Полный отчёт/исследования остаются вне Git.
 
 ## Checkpoint и следующий шаг
+
+Актуальное изменение10.10.2026: D-60 отменяет RAG, active каталог93 AC. Предыдущая REMAINING-SCOPE Goal завершена PR344/CI/CD; первичные records и границы docs-only изменения приведены в начале плана. Следующий шаг — завершить один docs PR по исключению RAG, required checks/merge и штатный source sync; код и runtime не меняются. Ни прежний RAG scaffold, ни исторические PENDING ниже не создают новой implementation Goal.
 
 10.10.2026: REMAINING-SCOPE-20261010, branch codex/remaining-scope-20261010, base origin/main fbfff6902e71ec54fa5638162b8e82db716a3b51 (audit PR343 merged). Сохранённый worktree psychology-quiz-privacy-20261007; dirty primary codex/curriculum-progress и foreign broken main не затрагивались. Код8/8 AC; F-027/135/136/137/138 устранены локально, E-REM-01–06. RAG/legal/Vault остаются отложенными по явному ответу владельца. Аудиторский snapshot87/90 наa93e3d8 остаётся историческим, новый процент проекта не вычислялся.
 
