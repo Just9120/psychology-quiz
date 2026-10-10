@@ -221,7 +221,7 @@ export interface ErrorsPage {
 }
 export type ReadingStatus = 'not_started' | 'in_progress' | 'read' | 'deferred'
 export type ReadingState = { literature_id: string; work_id?: string; reading_status: ReadingStatus; progress_percent: number | null; updated_at: string }
-export type LiteratureAccessLink = { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }
+export type LiteratureAccessLink = { format: 'text' | 'audio'; narration?: 'synthetic'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }
 export type LiteratureEntry = {
   id: string; topic_id: string; topic_title: string; module: string; year: number | null;
   importance: 'basic' | 'important' | 'additional' | 'advanced' | null;

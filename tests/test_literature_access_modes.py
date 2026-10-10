@@ -37,3 +37,34 @@ def test_telegram_displays_distinct_text_audio_conditions_without_changing_perso
     assert 'Текст · Литрес: Отдельная покупка · По подписке' in text
     assert 'Аудио · Литрес: Условия доступа не подтверждены' in text
     assert state==before
+
+
+def test_yandex_virtual_reader_is_reviewed_audio_and_cannot_be_mislabeled(monkeypatch):
+    offer = {'format': 'audio', 'narration': 'synthetic', 'provider': 'Яндекс Книги',
+             'url': 'https://books.yandex.ru/audio/Ab12Cd34', 'access': 'provider_terms',
+             'checked_at': '2026-10-11', 'access_modes': [],
+             'access_review': 'Exact book card offers a Virtual Reader; full-access terms unknown.'}
+    raw = {'schema_version': 1, 'works': {'work': [offer]}}
+    monkeypatch.setattr(literature, '_load_json_file', lambda path: raw)
+    try:
+        literature.load_access_links.cache_clear()
+        checked = literature.load_access_links()['work'][0]
+        item = {'id': 'book', 'topic_id': 'topic', 'title': 'Книга', 'authors': [],
+                'access_links': [checked]}
+        state = {'reading_status': 'read'}
+        text, keyboard = _item_view(item, state)
+        assert 'Автоозвучка · Яндекс Книги: Условия доступа не подтверждены' in text
+        button = next(button for row in keyboard.inline_keyboard for button in row if button.url)
+        assert button.text == 'Автоозвучка · Яндекс Книги'
+        assert button.url == offer['url'] and state == {'reading_status': 'read'}
+        invalid = [{key: value for key, value in offer.items() if key != 'narration'},
+                   {**offer, 'narration': 'human'}, {**offer, 'format': 'text'},
+                   {**offer, 'url': offer['url'] + '/quotes'},
+                   {**offer, 'url': offer['url'] + '?token=secret'},
+                   {**offer, 'url': 'https://books.yandex.ru.example.org/audio/Ab12Cd34'}]
+        for value in invalid:
+            raw['works']['work'] = [value]; literature.load_access_links.cache_clear()
+            with pytest.raises(ValueError):
+                literature.load_access_links()
+    finally:
+        literature.load_access_links.cache_clear()
