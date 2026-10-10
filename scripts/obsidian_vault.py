@@ -202,8 +202,8 @@ def _remove_owned_directory(path: Path, target: Path) -> None:
     shutil.rmtree(path)
 
 
-def _verify_repository_vault(target: Path) -> None:
-    """Allow only this project's vault after GitHub confirms it is private."""
+def _verify_repository_vault(target: Path, *, published_content: bool = False) -> None:
+    """Verify target and access; private manifests still require private Git."""
     if target != ROOT.resolve() / "vault":
         raise VaultError("repository_vault_path_required")
     try:
@@ -217,7 +217,9 @@ def _verify_repository_vault(target: Path) -> None:
                                   capture_output=True, text=True, timeout=15, check=True)
         metadata = json.loads(response.stdout)
         if (metadata.get("full_name") != "Just9120/psychology-quiz"
-                or metadata.get("private") is not True or metadata.get("archived") is not False
+                or type(metadata.get("private")) is not bool
+                or (not published_content and metadata.get("private") is not True)
+                or metadata.get("archived") is not False
                 or metadata.get("permissions", {}).get("push") is not True):
             raise VaultError("private_repository_required")
     except (OSError, subprocess.SubprocessError, ValueError, AttributeError) as error:
@@ -226,17 +228,22 @@ def _verify_repository_vault(target: Path) -> None:
         raise VaultError("private_repository_verification_unavailable") from None
 
 
-def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool = False) -> dict:
+def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool = False,
+                published_content: bool = False) -> dict:
     if (not isinstance(files, dict) or "index.md" not in files
             or any(not isinstance(content, bytes) or not content for content in files.values())):
         raise VaultError("generated_files_required")
     files = dict(files)
+    if published_content:
+        from scripts.obsidian_catalogue import render_published
+        if files != render_published()[0]:
+            raise VaultError("published_catalogue_required")
     target = vault.resolve(strict=True)
     if not target.is_dir() or vault.is_symlink():
         raise VaultError("separate_private_vault_required")
     repository = _git_common_directory(ROOT)
     if repository_vault:
-        _verify_repository_vault(target)
+        _verify_repository_vault(target, published_content=published_content)
     elif target.is_relative_to(ROOT) or (repository is not None and _git_common_directory(target) == repository):
         raise VaultError("separate_private_vault_required")
     generated = target / GENERATED
@@ -266,12 +273,27 @@ def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool 
     # Preserve their bytes and make the older review scope explicit in the index.
     retained = {name: (generated / name).read_bytes() for name in previous
                 if name != "index.md" and name not in files}
-    if retained:
+    if published_content and retained:
+        from scripts.obsidian_catalogue import RETIRED_NOTE
+        # Keep IDs, but never republish withdrawn editions or private manifests.
+        if any(b"source id:" in data.lower() or b"drive:" in data.lower()
+               for data in retained.values()):
+            raise VaultError("private_provenance_in_public_vault")
+        retained = {name: RETIRED_NOTE for name in retained}
+    if retained and not published_content:
         lines = ["", "## Заметки предыдущих пакетов", "",
                  "Эти заметки сохранены для существующих ссылок; в текущем обновлении их источники не проверялись.", ""]
         lines.extend(f"- [[{name[:-3]}]]" for name in sorted(retained))
         files["index.md"] += ("\n".join(lines) + "\n").encode("utf-8")
-        files.update(retained)
+    files.update(retained)
+    if published_content:
+        from scripts.audit_public_assets import PUBLIC_MARKERS, known_source_ids
+        from scripts.obsidian_catalogue import validate_links
+        needles = [value.encode() for value in known_source_ids()]
+        if any(any(marker in data.lower() for marker in PUBLIC_MARKERS)
+               or any(needle in data for needle in needles) for data in files.values()):
+            raise VaultError("private_provenance_in_public_vault")
+        validate_links(files)
     staged = Path(tempfile.mkdtemp(prefix=".vault-stage-", dir=target))
     backup = target / ".vault-generated-backup"
     try:
