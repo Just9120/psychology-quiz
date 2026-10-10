@@ -1,11 +1,9 @@
-"""Reproducible Obsidian knowledge graph from the published, reviewed bank.
+"""Render reviewed source knowledge; historical command name retained.
 
-No Drive fetch, private dossier export, runtime data or generated assertions.
+No question, homework or literature loader participates in this projection.
 """
 from __future__ import annotations
-
 import argparse
-from collections import defaultdict
 import hashlib
 import json
 from pathlib import Path
@@ -15,245 +13,100 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-
-from app.content_publication import fingerprint, load_policy
-from app.curriculum import load_catalog
-from app.homework import load_catalog as load_homework
-from app.literature import load_literature_items, literature_access_label
-from app.literature_reading import reading_order
-from app.literature_topics import load_reading_topics
 from scripts.audit_public_assets import audit_assets, known_source_ids
-from scripts.obsidian_vault import VaultError, write_vault
-from scripts.owner_source_summary import published_glossary, published_questions
+from scripts.obsidian_vault import VaultError, valid_generated_name, write_vault
 
-RETIRED_NOTE = ('# Заметка предыдущего пакета\n\n'
-                'Эта редакция больше не входит в опубликованный банк. '
-                'Прежнее имя сохранено для ссылок; учебное содержимое не переопубликовано.\n\n'
-                '[[index|К текущей базе]]\n').encode('utf-8')
-# Exact source-reviewed notes from the saved private manifest. Editing this
-# digest requires a renewed source review; status alone grants no publication.
-REVIEWED_NOTES_SHA256 = '6e42340ec5d0bd5ea418c0731818e42c9d038b45bc754d0ff769cd6595941187'
+ENTRY = 'База знаний.md'
+LEGACY_STATE_SHA256 = '7bf9cb0ddcb88c0874624f4ca58e30734e22bbbcc6e2b3c87cc0d30fe5fcd886'
+REVIEWED_NOTES_SHA256 = '30992d5891fb020e56b220c107960249a5ab471806b2ac46b683c02addd2de61'
+RETIRED_NOTE = ('# Заметка предыдущей редакции\n\n'
+                'Эта заметка больше не входит в проверенный пакет. '
+                'Содержимое не переопубликовано; имя сохранено для личных ссылок.\n\n'
+                '[[База знаний]]\n').encode('utf-8')
 
 
 def prepared_notes():
     payload = (ROOT / 'content/vault-notes.json').read_bytes()
     if hashlib.sha256(payload).hexdigest() != REVIEWED_NOTES_SHA256:
         raise VaultError('prepared_note_source_review_required')
-    return json.loads(payload)['notes']
-
-def note_id(kind: str, identity: str) -> str:
-    return kind + '-' + hashlib.sha256(identity.encode()).hexdigest()[:20]
-
-
-def text(value: str) -> str:
-    # Source text cannot introduce new wikilinks or change a generated alias.
-    value = '\n'.join(line.rstrip() for line in value.splitlines())
-    return value.replace('[', r'\[').replace(']', r'\]').replace('|', r'\|')
-
-
-def link(kind: str, identity: str, title: str) -> str:
-    return f"[[{note_id(kind, identity)}|{text(title)}]]"
+    manifest = json.loads(payload)
+    if set(manifest) != {'schema_version', 'notes', 'coverage'} or manifest['schema_version'] != 2:
+        raise VaultError('invalid_knowledge_manifest')
+    if (not isinstance(manifest['notes'], list) or not manifest['notes']
+            or not isinstance(manifest['coverage'], dict)
+            or set(manifest['coverage']) != {'summaries', 'statement'}
+            or not isinstance(manifest['coverage']['summaries'], dict)
+            or not isinstance(manifest['coverage']['statement'], str)
+            or len(manifest['coverage']['statement'].strip()) < 80):
+        raise VaultError('knowledge_coverage_required')
+    return manifest
 
 
 def render_published() -> tuple[dict[str, bytes], dict[str, int]]:
-    questions = published_questions()
-    terms = published_glossary(load_policy())
-    books = load_literature_items()
-    curriculum = load_catalog()
-    homework = load_homework()
-    files: dict[str, bytes] = {}
-    question_topics = defaultdict(list)
-    discipline_questions = defaultdict(list)
-    discipline_terms = defaultdict(list)
-    editions = {value['item_sha256']: value for value in curriculum['editions'].values()}
-    question_ids = {item['id'] for item in questions}
-    discipline_titles = {v['title']: k for k, v in curriculum['disciplines'].items()}
-    term_ids = {item['id'] for item in terms}
-    prepared = prepared_notes()
-    prepared_ids = {item['id']: item['title'] for item in prepared}
-    unmapped = []
-
-    def add(kind, identity, title, body):
-        name = note_id(kind, identity) + '.md'
-        if name in files:
-            raise VaultError('duplicate_public_note')
-        files[name] = ('\n'.join([f'# {text(title)}', '', *body, '', '---',
-                                '[[index|К оглавлению]]', '']) ).encode('utf-8')
-
-    for item in prepared:
-        def resolve_prepared(match):
-            identity, _, alias = match.group(1).partition('|')
-            if identity not in prepared_ids:
-                raise VaultError('prepared_note_link_missing')
-            return link('note', identity, alias or prepared_ids[identity])
-        body = [re.sub(r'\[\[([^\]]+)\]\]', resolve_prepared, item['body']), '',
-                link('discipline', item['discipline_id'], curriculum['disciplines'][item['discipline_id']]['title'])]
-        for field, kind, items, label in (('question_ids', 'question', questions, 'Вопросы'),
-                                        ('term_ids', 'term', terms, 'Понятия'),
-                                        ('literature_ids', 'book', books, 'Литература')):
-            known = {v['id']: v for v in items}
-            if any(value not in known for value in item[field]):
-                raise VaultError('prepared_note_published_link_missing')
-            if item[field]:
-                body += ['', '## ' + label, '']
-                for key in item[field]:
-                    entry = known[key]
-                    title = entry.get('term', entry.get('question', entry.get('title')))
-                    body += ['- ' + link(kind, entry.get('work_id', key), title)]
-        add('note', item['id'], item['title'], body)
-
-    for item in questions:
-        edition = editions.get(fingerprint(item))
-        topic = curriculum['topics'].get(edition['topic_id']) if edition else None
-        discipline = discipline_titles.get(item['category'])
-        if topic and topic['discipline_id'] != discipline:
-            raise VaultError('public_question_topic_mismatch')
-        body = []
-        if topic:
-            question_topics[edition['topic_id']].append(item)
-            body += [link('topic', edition['topic_id'], topic['title']), '']
-        else:
-            unmapped.append(item)
-            body += ['Точная тема не установлена; предметная область: ' + text(item['category']) + '.', '']
-        if discipline:
-            discipline_questions[discipline].append(item)
-        case = item.get('case')
-        if item.get('kind') == 'case':
-            body += ['## Ситуация', '', text(case['situation']), '',
-                     'Подход: ' + text(case['approach']), '', '### Условия', '']
-            body += ['- ' + text(value) for value in case['conditions']]
-        body += ['', '## Вопрос', '', text(item['question']), '', '## Варианты', '']
-        body += [f'{i}. {text(value)}' for i, value in enumerate(item['options'], 1)]
-        body += ['', '## Ответ и пояснение', '',
-                 text(item['options'][item['correct_option_index']]), '', text(item['explanation'])]
-        if item.get('kind') == 'case':
-            body += ['', '### Почему другие варианты не подходят', '']
-            body += [f'{i}. {text(value)}' for i, value in enumerate(case['option_rationales'], 1)]
-            body += ['', '### Границы вывода', '', text(case['ambiguity'])]
-        add('question', item['id'], item['question'], body)
-
-    for item in terms:
-        discipline_terms[item['topic_id']].append(item)
-        body = [text(item['definition']), '', '## Примеры', '']
-        body += ['- ' + text(value) for value in item['examples']]
-        if item['aliases']:
-            body += ['', 'Другие названия: ' + ', '.join(text(v) for v in item['aliases']) + '.']
-        related = item['confusable_with']
-        if related:
-            body += ['', '## Сопоставить понятия', '']
-            body += ['- ' + link('term', value, next(t['term'] for t in terms if t['id'] == value))
-                     for value in related if value in term_ids]
-            body += ['- В опубликованном банке нет самостоятельного определения: `' + value + '`.'
-                     for value in related if value not in term_ids]
-        if item['topic_id'] in curriculum['disciplines']:
-            body += ['', link('discipline', item['topic_id'], curriculum['disciplines'][item['topic_id']]['title'])]
-        add('term', item['id'], item['term'], body)
-
-    for identity, topic in sorted(curriculum['topics'].items()):
-        items = question_topics[identity]
-        body = [link('discipline', topic['discipline_id'], curriculum['disciplines'][topic['discipline_id']]['title']), '',
-                '## Разборы', '', 'Ответы и пояснения находятся в самостоятельных заметках ниже.' if items
-                else 'В текущем опубликованном банке нет вопросов с подтверждённой связью с этой темой.', '']
-        body += ['- ' + link('question', q['id'], q['question']) for q in items]
-        add('topic', identity, topic['title'], body)
-
-    for identity, discipline in sorted(curriculum['disciplines'].items()):
-        body = ['## Темы', '']
-        body += ['- ' + link('topic', key, value['title']) for key, value in curriculum['topics'].items()
-                 if value['discipline_id'] == identity]
-        body += ['', '## Понятия', '']
-        body += ['- ' + link('note', item['id'], item['title']) for item in prepared if item['discipline_id'] == identity]
-        body += ['- ' + link('term', t['id'], t['term']) for t in discipline_terms[identity]]
-        body += ['', '## Все разборы предметной области', '']
-        body += ['- ' + link('question', q['id'], q['question']) for q in discipline_questions[identity]]
-        add('discipline', identity, discipline['title'], body)
-
-    work_groups = defaultdict(list)
-    for item in books:
-        work_groups[item['work_id']].append(item)
-    by_entry = {item['id']: item for item in books}
-    for identity, entries in sorted(work_groups.items()):
-        item = entries[0]
-        body = [', '.join(text(a) for a in item['authors']), '',
-                'Год: ' + (str(item['year']) if item['year'] else 'не установлен'), '',
-                'Это библиографическая карточка, а не конспект прочитанной книги.', '', '## Темы чтения', '']
-        body += ['- ' + link('reading', t['id'], t['title']) for t in item['reading_topics']]
-        body += ['', '## Рекомендация по чтению', '', text(item['why_read'])]
-        prerequisites = {ref for entry in entries for ref in entry['prerequisites']}
-        if prerequisites:
-            body += ['', 'Предварительное чтение:', '']
-            body += ['- ' + link('book', by_entry[ref]['work_id'], by_entry[ref]['title']) for ref in sorted(prerequisites)]
-        body += ['', '## Текст и аудио', '']
-        for offer in item['access_links']:
-            fmt = 'Аудиокнига' if offer['format'] == 'audio' else 'Текст'
-            body += [f"- [{fmt} · {offer['provider']}]({offer['url']}) — {literature_access_label(offer)}. Проверено {offer['checked_at']}."]
-        if not item['access_links']:
-            body += ['Подтверждённых прямых ссылок нет; это не означает отсутствия книги в сервисах.']
-        body += ['', 'Доступ к полной версии зависит от условий сервиса и конкретного издания.', '',
-                 'Поисковый запрос: ' + text(item['book_search']['query'])]
-        if item['metadata_warnings']:
-            body += ['', '## Неуточнённые сведения', '']
-            body += ['- ' + text(value) for value in item['metadata_warnings']]
-        add('book', identity, item['title'], body)
-
-    reading_topics, _ = load_reading_topics()
-    for topic in reading_topics:
-        selected = [item for item in books if topic['id'] in {t['id'] for t in item['reading_topics']}]
-        route = reading_order(selected, books)
-        routed = {entry['item']['work_id'] for entry in route}
-        body = ['Рекомендация по проверенным метаданным; книги одного этапа без зависимостей можно выбирать по интересу.', '',
-                '## Последовательность чтения', '']
-        body += [f"{i}. {link('book', entry['item']['work_id'], entry['item']['title'])} — {entry['stage']}."
-                 for i, entry in enumerate(route, 1)]
-        others = {item['work_id']: item for item in selected if item['work_id'] not in routed}
-        if others:
-            body += ['', '## Без установленной последовательности', '']
-            body += ['- ' + link('book', key, item['title']) for key, item in sorted(others.items())]
-        add('reading', topic['id'], topic['title'], body)
-
-    for item in homework:
-        if not set(item['question_ids']) <= question_ids:
-            raise VaultError('public_homework_question_missing')
-        body = [text(item['description']), '',
-                'Тест проверяет знания; он не подтверждает выполнение исходного эссе, наблюдения или упражнения.', '',
-                'В приложении зачёт требует не менее80% в одной завершённой попытке. Здесь сохраняются только учебные разборы, без личного прогресса.', '',
-                '## Вопросы для самопроверки', '']
-        body += ['- ' + link('question', key, next(q['question'] for q in questions if q['id'] == key)) for key in item['question_ids']]
-        add('homework', item['id'], item['title'], body)
-
-    counts = {'questions': len(questions), 'terms': len(terms), 'works': len(work_groups),
-              'prepared_notes': len(prepared),
-              'literature_associations': len(books), 'topics': len(curriculum['topics']),
-              'topics_with_questions': sum(bool(v) for v in question_topics.values()),
-              'unmapped_questions': len(unmapped), 'homework': len(homework),
-              'missing_comparison_terms': len({v for t in terms for v in t['confusable_with'] if v not in term_ids}),
-              'audio_works': sum(any(o['format'] == 'audio' for o in entries[0]['access_links']) for entries in work_groups.values())}
-    index = ['# PsychologyAtlas — база знаний', '',
-             'Самостоятельные понятия, учебные разборы и библиография из проверенного опубликованного банка.', '',
-             '## Границы и полнота', '',
-             f"Вопросы: {counts['questions']}; понятия: {counts['terms']}; произведения: {counts['works']} ({counts['literature_associations']} связей каталога); домашние задания: {counts['homework']}.", '',
-             f"Темы: {counts['topics']}; с привязанными вопросами: {counts['topics_with_questions']}; вопросов без точной темы: {counts['unmapped_questions']}.", '',
-             f"У {counts['missing_comparison_terms']} упомянутых понятий нет самостоятельного определения в опубликованном глоссарии; это отмечено в заметках без выдуманных ссылок.", '',
-             f"Прямые аудиоссылки подтверждены для {counts['audio_works']} произведений. У остальных аудио не подтверждено.", '',
-             'Это покрытие текущего банка, не пересказ всех425 исходных материалов. Приватные исходники, досье и личный прогресс сюда не входят. Содержание книг не считается изученным по библиографии.', '',
-             '## Предметные области', '']
-    index += ['- ' + link('discipline', key, value['title']) for key, value in curriculum['disciplines'].items()]
-    index += ['', '## Самостоятельные заметки по материалам', '']
-    index += ['- ' + link('note', item['id'], item['title']) for item in prepared]
-    index += ['', '## Литература по темам', '']
-    index += ['- ' + link('reading', t['id'], t['title']) for t in reading_topics]
-    index += ['', '## Домашние задания', '']
-    index += ['- ' + link('homework', item['id'], item['title']) for item in homework]
-    index += ['', '## Разборы без точной темы', '']
-    index += ['- ' + link('question', item['id'], item['question']) for item in unmapped]
-    files['index.md'] = ('\n'.join(index) + '\n').encode('utf-8')
+    manifest = prepared_notes()
+    files, sections = {}, {}
+    for item in manifest['notes']:
+        if not isinstance(item, dict) or set(item) != {'title', 'section', 'body', 'links', 'sources'}:
+            raise VaultError('knowledge_fields_required')
+        title, section, body = item['title'], item['section'], item['body']
+        if (not isinstance(title, str) or not valid_generated_name(title + '.md')
+                or not re.search(r'[А-Яа-яЁё]', title)
+                or title in {'База знаний', 'Границы базы'} or not isinstance(section, str)
+                or not valid_generated_name(section + '.md') or not isinstance(body, str)
+                or len(body.strip()) < 80 or not isinstance(item['links'], dict) or not item['links']
+                or not isinstance(item['sources'], list) or not item['sources']):
+            raise VaultError('invalid_knowledge_note')
+        if re.search(r'(?im)^\s*(?:##?\s*)?(?:вопрос|варианты|ответ и пояснение)\s*$', body):
+            raise VaultError('quiz_dump_forbidden')
+        if any(not isinstance(k, str) or k == title or not valid_generated_name(k + '.md')
+               or not isinstance(v, str) or not v.strip() or '\n' in v or '\r' in v
+               for k, v in item['links'].items()):
+            raise VaultError('semantic_relation_required')
+        lines = [f'# {title}', '', body.strip(), '', '## Связи', '']
+        lines += [f'- [[{target}]] — {relation}' for target, relation in item['links'].items()]
+        if any(not isinstance(v, str) or not v.strip() or '\n' in v or '\r' in v
+               for v in item['sources']):
+            raise VaultError('source_title_required')
+        lines += ['', '## Основание', ''] + ['- ' + value for value in item['sources']]
+        name = title + '.md'
+        if name.casefold() in {v.casefold() for v in files}:
+            raise VaultError('duplicate_knowledge_title')
+        files[name] = ('\n'.join(line.rstrip() for line in lines) + '\n').encode('utf-8')
+        sections.setdefault(section, []).append(title)
+    if set(manifest['coverage']['summaries']) != set(sections):
+        raise VaultError('section_coverage_mismatch')
+    for section, titles in sections.items():
+        name = section + '.md'
+        if name.casefold() in {v.casefold() for v in files}:
+            raise VaultError('section_note_title_collision')
+        overview = manifest['coverage']['summaries'].get(section)
+        if not isinstance(overview, str) or len(overview.strip()) < 80:
+            raise VaultError('section_summary_required')
+        lines = [f'# {section}', '', overview.strip(), '', '## Понятия и связи', '']
+        lines += [f'- [[{title}]]' for title in sorted(titles)]
+        lines += ['', '[[База знаний]]', '']
+        files[name] = '\n'.join(lines).encode('utf-8')
+    lines = ['# База знаний', '',
+             'Самостоятельные заметки по понятиям, механизмам и моделям. '
+             'Смысловые связи объясняют отношения между знаниями. '
+             'Тематические обзоры помогают выбрать точку входа.', '', '## Темы', '']
+    lines += [f'- [[{section}]]' for section in sorted(sections)]
+    lines += ['', '[[Границы базы]] описывает покрытие источников и ограничения.', '']
+    files[ENTRY] = '\n'.join(lines).encode('utf-8')
+    files['Границы базы.md'] = ('# Границы базы\n\n' + manifest['coverage']['statement'].strip()
+                                + '\n\n[[База знаний]]\n').encode('utf-8')
     validate_links(files)
-    return files, counts
+    return files, {'atomic_notes': len(manifest['notes']), 'summaries': len(sections),
+                   'markdown_files': len(files)}
 
 
-def validate_links(files: dict[str, bytes]) -> None:
-    targets = {name[:-3] for name in files}
-    for content in files.values():
+def validate_links(files):
+    targets = {name.removesuffix('.md') for name in files}
+    if len({name.casefold() for name in files}) != len(files):
+        raise VaultError('duplicate_knowledge_title')
+    for name, content in files.items():
+        if not valid_generated_name(name):
+            raise VaultError('invalid_generated_name')
         for target in re.findall(r'\[\[([^\]|]+)(?:\|[^\]]*)?\]\]', content.decode('utf-8')):
             if target not in targets:
                 raise VaultError('public_vault_link_missing')
@@ -263,20 +116,32 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--vault', type=Path, default=ROOT / 'vault')
     parser.add_argument('--repository-vault', action='store_true')
+    parser.add_argument('--replace-catalogue', action='store_true',
+                        help='Replace only the unchanged fingerprinted PR347 catalogue')
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
     files, counts = render_published()
     if args.check:
         generated = args.vault / 'generated'
-        if any((generated / name).read_bytes() != content for name, content in files.items()):
+        if generated.is_symlink() or any(p.is_symlink() or not p.is_file()
+                or (p.name != '.psychology-atlas-generated.json'
+                    and not valid_generated_name(p.name)) for p in generated.iterdir()):
+            raise VaultError('unowned_generated_file')
+        actual = {p.name: p.read_bytes() for p in generated.glob('*.md')}
+        if any(actual.get(name) != content for name, content in files.items()):
             raise VaultError('public_vault_outdated')
-        if any(path.read_bytes() != RETIRED_NOTE for path in generated.glob('*.md') if path.name not in files):
+        if any(data != RETIRED_NOTE for name, data in actual.items() if name not in files):
             raise VaultError('public_vault_unreviewed_note')
-        validate_links({p.name: p.read_bytes() for p in generated.glob('*.md')})
+        validate_links(actual)
+        state = json.loads((generated / '.psychology-atlas-generated.json').read_text(encoding='utf-8'))
+        if (state.get('schema_version') != 1
+                or state.get('files') != {name: hashlib.sha256(data).hexdigest() for name, data in actual.items()}):
+            raise VaultError('invalid_generated_state')
     else:
-        write_vault(args.vault, files, repository_vault=args.repository_vault, published_content=True)
+        write_vault(args.vault, files, repository_vault=args.repository_vault,
+                    published_content=True, replace_catalogue=args.replace_catalogue)
     audit_assets([args.vault / 'generated'], known_source_ids())
-    print('PUBLIC_VAULT_OK', counts)
+    print('KNOWLEDGE_VAULT_OK', counts)
 
 
 if __name__ == '__main__':
