@@ -42,7 +42,7 @@ D-61 заменяет прежний PRIVATE prerequisite D-45/50. Target ост
 
 В публичном пакете удалённая из банка редакция заменяется нейтральной заметкой с прежним ID; её содержимое не переопубликовывается. При published_content=True общий writer сверяет файлы с текущим render_published, проверяет retained bytes на private provenance и все wikilinks до записи. Неизвестная visibility, другой target, недоступная authentication или owner edits останавливают запись. Без --repository-vault output внутри любого checkout проекта по-прежнему запрещён.
 
-Vault исключён из Docker build context и не является PWA/Mini App asset, API или runtime mount. Скачанная папка vault/ открывается в Obsidian, стартовая заметка generated/index.md. Структура и wikilinks проверяются автоматически; запуск native Obsidian в среде агента не подтверждён. Личные заметки сохраняйте в ignored vault/personal/, настройки .obsidian/ и корзина также ignored.
+Vault и content/vault-notes.json исключены из Docker build context и не является PWA/Mini App asset, API или runtime mount. Скачанная папка vault/ открывается в Obsidian, стартовая заметка generated/index.md. Структура и wikilinks проверяются автоматически; запуск native Obsidian в среде агента не подтверждён. Личные заметки сохраняйте в ignored vault/personal/, настройки .obsidian/ и корзина также ignored.
 
 Canonical адресная проверка из корня: python -m pytest tests/test_obsidian_vault.py tests/test_obsidian_catalogue.py -q. Она проверяет source/revision/conflict gates private режима, bibliography boundary, exact committed/public-bank parity, privacy, links, сохранность owner edits/личных файлов/старых note IDs, идемпотентность и Git boundary. Проверка ссылок не подменяет содержательный source review или запуск native Obsidian.
 
