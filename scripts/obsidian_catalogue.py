@@ -18,7 +18,7 @@ from scripts.obsidian_vault import VaultError, valid_generated_name, write_vault
 
 ENTRY = 'База знаний.md'
 LEGACY_STATE_SHA256 = '7bf9cb0ddcb88c0874624f4ca58e30734e22bbbcc6e2b3c87cc0d30fe5fcd886'
-REVIEWED_NOTES_SHA256 = '30992d5891fb020e56b220c107960249a5ab471806b2ac46b683c02addd2de61'
+REVIEWED_NOTES_SHA256 = 'fccd7208d77fb75d09823b0d4aec6f18612471aae8682a01a3f6bd9fda47abaf'
 RETIRED_NOTE = ('# Заметка предыдущей редакции\n\n'
                 'Эта заметка больше не входит в проверенный пакет. '
                 'Содержимое не переопубликовано; имя сохранено для личных ссылок.\n\n'
