@@ -43,6 +43,14 @@ ACCESS_MODE_LABELS = {"free": "Бесплатно", "subscription": "По под
 def literature_access_label(offer: dict[str, Any]) -> str:
     modes = offer.get("access_modes", [])
     return " · ".join(ACCESS_MODE_LABELS[mode] for mode in modes) if modes else "Условия доступа не подтверждены"
+
+
+def literature_format_label(offer: dict[str, Any]) -> str:
+    if offer["format"] == "text":
+        return "Текст"
+    return "Автоозвучка" if offer.get("narration") == "synthetic" else "Аудио"
+
+
 def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
     if (parsed is None or parsed.scheme != "https" or parsed.username or parsed.password
             or parsed.query or parsed.fragment):
@@ -55,7 +63,7 @@ def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
     if provider == "MyBook":
         return parsed.netloc == "mybook.ru" and re.fullmatch(r"/author/[a-z0-9-]+/[a-z0-9-]+/", parsed.path) is not None
     if provider == "Яндекс Книги":
-        kind = "books" if fmt == "text" else "audiobooks"
+        kind = "books" if fmt == "text" else "(?:audiobooks|audio)"
         return parsed.netloc == "books.yandex.ru" and re.fullmatch(r"/" + kind + r"/[A-Za-z0-9]+/?", parsed.path) is not None
     return False
 
@@ -76,7 +84,7 @@ def load_access_links() -> dict[str, list[dict[str, Any]]]:
             required = {"format", "provider", "url", "access", "checked_at"}
             review_fields = {"access_modes", "access_review"}
             if (not isinstance(offer, dict) or not required <= set(offer)
-                    or set(offer) - required not in (set(), review_fields)):
+                    or set(offer) - required not in (set(), review_fields, review_fields | {"narration"})):
                 raise ValueError("Invalid literature access offer")
             if "access_modes" in offer:
                 modes, review = offer["access_modes"], offer["access_review"]
@@ -86,6 +94,10 @@ def load_access_links() -> dict[str, list[dict[str, Any]]]:
                     raise ValueError("Invalid literature access review")
             fmt, url = offer["format"], offer["url"]
             parsed = urlsplit(url) if isinstance(url, str) else None
+            if (("narration" in offer and (fmt != "audio" or offer["narration"] != "synthetic"))
+                    or (offer["provider"] == "Яндекс Книги" and parsed is not None
+                        and parsed.path.startswith("/audio/") and offer.get("narration") != "synthetic")):
+                raise ValueError("Invalid literature narration review")
             checked = offer["checked_at"]
             try:
                 checked_date = isinstance(checked, str) and date.fromisoformat(checked).isoformat() == checked

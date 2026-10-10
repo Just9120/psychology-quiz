@@ -63,6 +63,50 @@
         "checked_at": "2026-10-08",
         "access_modes": [],
         "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/obschatsya-s-rebenkom-kak-72191731/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/obschatsya-s-rebenkom-kak-173474/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/Jr4fLbjY",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. Full-access terms remain unknown; generic free wording is not evidence of unconditional full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/JtV5vD20",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms subscription; a trial or excerpt is not free full audio."
       }
     ],
     "lit_819808cf97ad8eb5": [
@@ -700,6 +744,18 @@
           "subscription"
         ],
         "access_review": "Official MyBook title/author/text card inspected on 2026-10-10. Subscription is offered; excerpt/trial is not unconditional free full access. Catalog edition and personal/territorial entitlement unverified. Card specifies exclusive Litres subscription conditions; access must be checked with the provider."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/pavel-simonov/emocionalnyy-mozg-73179663/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
       }
     ],
     "fch_simonov_motivirovanny_mozg": [
@@ -726,6 +782,18 @@
           "subscription"
         ],
         "access_review": "Official MyBook title/author/text card inspected on 2026-10-10. Subscription is offered; excerpt/trial is not unconditional free full access. Catalog edition and personal/territorial entitlement unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/aleksey-alekseevich-uhtomskiy/dominanta-fiziologiya-povedeniya-57111053/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio. Offered title is Dominanta: physiology of behavior, a collected edition by Ukhtomsky; the course lists any edition."
       }
     ],
     "fch_sergeev_dubynin_telo_cheloveka": [
@@ -1165,6 +1233,16 @@
         "checked_at": "2026-10-10",
         "access_modes": [],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      },
+      {
+        "format": "audio",
+        "narration": "synthetic",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audio/hb6bROe7",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [],
+        "access_review": "Exact official work/title/author card offers Virtual Reader and full reading/listening. Synthetic narration is labelled separately from a recorded audiobook. Full-access terms, edition and personal/territorial entitlement remain unknown; generic free wording or an excerpt does not establish unconditional free access."
       }
     ],
     "lit_lebon_psychology_peoples_masses": [
@@ -1253,6 +1331,16 @@
         "checked_at": "2026-10-10",
         "access_modes": [],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Version-specific full-access conditions remain unknown; no free-full-access claim."
+      },
+      {
+        "format": "audio",
+        "narration": "synthetic",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audio/glY4zMPZ",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [],
+        "access_review": "Exact official work/title/author card offers Virtual Reader and full reading/listening. Synthetic narration is labelled separately from a recorded audiobook. Full-access terms, edition and personal/territorial entitlement remain unknown; generic free wording or an excerpt does not establish unconditional free access."
       }
     ],
     "lit_family_slide_08": [
@@ -1317,6 +1405,18 @@
           "purchase"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/lev-tolstoy/voyna-i-mir-v-4-h-tomah-23188614/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
       }
     ],
     "lit_taylor_principles_scientific_management": [
@@ -1368,6 +1468,18 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/olga-rybina-32832730/delay-kak-kouch-kniga-dlya-teh-kto-hochet-dostich-gen-70324630/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
       }
     ],
     "lit_muradyan_atlant_game": [
@@ -1597,6 +1709,94 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access. Exact anthology title matched; editorial names in its provider preface are K. Baker and A. Varga, not a single-author Bowen monograph."
+      }
+    ],
+    "lit_mill_on_liberty": [
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/dzhon-mill/o-svobode-4/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms subscription; a trial or excerpt is not free full audio."
+      }
+    ],
+    "lit_social_history02_freud": [
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/zigmund-frejd/psihologiya-mass-i-analiz-chelovecheskogo-ya-2/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms subscription; a trial or excerpt is not free full audio."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/db9xSWHO",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. Full-access terms remain unknown; generic free wording is not evidence of unconditional full access."
+      }
+    ],
+    "lit_social_history02_sighele": [
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/scipion-sigele/prestupnaya-tolpa/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms subscription; a trial or excerpt is not free full audio."
+      }
+    ],
+    "lit_yalom_loves_executioner": [
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/irvin-yalom/palach-lubvi-i-drugie-psihoterapevticheskie-istorii-39497754/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio. Offered Russian title is Palach lyubvi; publisher/official-book front matter identifies Love's Executioner & Other Tales of Psychotherapy (1989), matching the anthology listed under Lechenie ot lyubvi; chapter reading states remain separate."
+      }
+    ],
+    "lit_dweck_mindset": [
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/kerol-duek/gibkoe-soznanie-novyy-vzglyad-na-psihologiu-razvitiya-vzroslyh-28755062/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio. Russian translation Gibkoe soznanie: MIF publisher front matter identifies Carol Dweck, Mindset (2006); this is a translated offer, not the catalogued English edition."
+      }
+    ],
+    "lit_5643db88a7fa06b2": [
+      {
+        "format": "audio",
+        "narration": "synthetic",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audio/tD6uAM4o",
+        "access": "provider_terms",
+        "checked_at": "2026-10-11",
+        "access_modes": [],
+        "access_review": "Exact official work/title/author card offers Virtual Reader and full reading/listening. Synthetic narration is labelled separately from a recorded audiobook. Full-access terms, edition and personal/territorial entitlement remain unknown; generic free wording or an excerpt does not establish unconditional free access."
       }
     ]
   }
