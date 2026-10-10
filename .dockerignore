@@ -14,3 +14,4 @@ pwa/dist/
 pwa/test-results/
 pwa/playwright-report/
 vault/
+content/vault-notes.json

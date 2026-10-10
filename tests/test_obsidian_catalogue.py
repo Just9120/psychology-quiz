@@ -25,6 +25,7 @@ def test_committed_vault_matches_every_published_edition_and_resolves_links():
     assert counts['homework'] == len(catalogue.load_homework())
     audit_assets([catalogue.ROOT / 'vault'], known_source_ids())
     assert 'vault/' in (catalogue.ROOT / '.dockerignore').read_text()
+    assert 'content/vault-notes.json' in (catalogue.ROOT / '.dockerignore').read_text()
 
 
 def test_question_and_case_preserve_correct_answer_explanation_and_boundaries():
