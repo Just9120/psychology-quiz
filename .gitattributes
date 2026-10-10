@@ -1,3 +1,6 @@
 # Keep the Mini App HTML source and generated entrypoint reproducible across platforms.
 pwa/miniapp-app/index.html text eol=lf
 miniapp-react/index.html text eol=lf
+# Vault hashes and reviewed-note identity must survive Windows/Linux checkout.
+vault/generated/** text eol=lf
+content/vault-notes.json text eol=lf
