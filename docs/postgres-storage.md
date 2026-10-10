@@ -133,14 +133,14 @@ flock -n /tmp/psychology-quiz-deploy.lock python3 scripts/backup_retention_plan.
   --backup-root /opt/psychology-quiz/.postgres/backups --retention-days 30
 ```
 
-Без `--retention-days` срок UNSET, кандидатов к очистке нет. В команде выше указан согласованный срок 30 дней; она не удаляет файлы. Для recovery point, которым пользуется активная процедура, добавить `--pin-record` с его `record.json`; внешние пути отклоняются. Минимум две новейшие проверенные точки каждого кластера остаются независимо от срока. Failed/unknown records, symlinks, повреждённые dumps, несовместимые identities и недостоверные даты сохраняются. `REVIEW_CANDIDATE` означает только необходимость операторского review с учётом незавершённых recovery records; automatic cleanup не внедрён. Снимок отражает момент проверки, не состояние после освобождения lock. Срок согласован D-47, фактическая очистка и её Evidence ещё не выполнены; никакой RPO/RTO этот инструмент не устанавливает.
+Без `--retention-days` срок UNSET, кандидатов к очистке нет. В команде выше указан согласованный срок 30 дней; она не удаляет файлы. Для recovery point, которым пользуется активная процедура, добавить `--pin-record` с его `record.json`; внешние пути отклоняются. Минимум две новейшие проверенные точки каждого кластера остаются независимо от срока. Failed/unknown records, symlinks, повреждённые dumps, несовместимые identities и недостоверные даты сохраняются. `REVIEW_CANDIDATE` означает только необходимость операторского review с учётом незавершённых recovery records. Inspector остаётся read-only; отдельные механизмы применения и ежедневного запуска описаны ниже. Снимок отражает момент проверки, не состояние после освобождения lock; никакой RPO/RTO этот инструмент не устанавливает.
 
 
-## Подготовленная очистка локальных DB backups
+## Очистка локальных DB backups
 
 [backup_retention.py](../scripts/backup_retention.py) применяет D-47 только к /opt/psychology-quiz/.postgres/backups, под общей deploy lock. Без --apply только план; с --apply --expected-sha <проверенная-revision> проверяются чистая main/exact origin и удаляются лишь известные record.json/database.dump units из свежего перепроверенного плана. Новый unit с unknown файлами, небезопасными paths/permissions, повреждённым dump, unfinished recovery или конфликтом плана не удаляется. Минимум две verified точки каждого cluster и control-record pins сохраняются. Recovery records, live DB и полные VPS snapshots не удаляются. Частичный сбой не считать успешной очисткой.
 
-Код подготовлен локально; production применение пока PENDING. Перед --apply нужны проверенная поставленная revision и read-only review точного плана. Для автоматического запуска подготовлен scoped systemd timer; его установка на VPS ещё PENDING. Application/Nginx logs и переданные копии обрабатываются отдельно.
+Процедура поставлена со scoped systemd timer. Primary CD38033814797 на `a93e3d85b36c0936c066e54767b0dc439c8c9e1c` 10.10.2026 подтвердил `BACKUP_TIMER_OK` и `PRIVACY_RUNTIME_OK`; сводка — в [плане](delivery-plan.md#e-aud10--полный-аудит-10102026). Это подтверждение установки и проверенного runtime, а не доказательство удаления конкретного backup в каждом scheduled run. Ручной --apply требует проверенной поставленной revision и read-only review точного плана. Application/Nginx logs и переданные копии обрабатываются отдельно.
 
 
 ## Ежедневный запуск локальной очистки
@@ -175,6 +175,7 @@ records/повреждённые copies сохраняются, даже есл�
 [адресными tests](../tests/test_install_backup_retention.py), порядок/failure
 поставки — [shell contract](../tests/test_deploy_production_contract.py).
 
-Согласование сроков D-47 само по себе не подтверждает установку этих privileged
-units и выполнение cleanup: для текущего пакета нужны разрешённая поставка и
-runtime Evidence. Полные VPS snapshots остаются под ручным управлением владельца.
+Согласование сроков D-47 само по себе не является runtime Evidence: для новых
+поставок сохраняются проверки установки, а результат конкретного cleanup
+устанавливается по service record. Полные VPS snapshots остаются под ручным
+управлением владельца; этот timer ими не управляет.

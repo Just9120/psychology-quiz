@@ -23,7 +23,9 @@ E-REM-01 / PASS local dirty branch: общий `study_events` считает о�
 
 E-REM-02 / PASS local: permanent synthetic homework browser scenario проверяет4/5→зачёт80%, возврат к карточке и reload/shared persisted state. Existing build/typecheck PASS; адресные homework + styled menus desktop/mobile4 PASS. Тот же сценарий войдёт в existing native PostgreSQL CI, PENDING; production data не используются.
 
-Задачи: [x] fresh main/gates и scope; [x] F-135 local implementation (native CI/delivery PENDING); [x] F-136 local (native CI PENDING); [ ] F-027; [ ] конечная audio coverage; [ ] конечная homework completeness; [ ] local checks/self-review/PR; [ ] CI/merge/delivery/cleanup. Следующий шаг — permanent homework E2E и конечная сверка сохранённых content queues.
+E-REM-03 / PASS local: Cloudflare build settings сопоставлены с подтверждением владельца и build b0030a9a-1df3-416f-b4f6-d254f4993399; backup planner отделён от установленного cleanup timer по CD38033814797 (BACKUP_TIMER_OK / PRIVACY_RUNTIME_OK). Два canonical runbooks исправлены; git diff --check PASS.
+
+Задачи: [x] fresh main/gates и scope; [x] F-135 local implementation (native CI/delivery PENDING); [x] F-136 local (native CI PENDING); [x] F-027 runbooks aligned; [ ] конечная audio coverage; [ ] конечная homework completeness; [ ] local checks/self-review/PR; [ ] CI/merge/delivery/cleanup. Следующий шаг — конечная сверка audio/homework; native CI и delivery после завершения содержимого PR.
 
 ## Previous Goal — AUDIT-20261010 (DONE)
 
