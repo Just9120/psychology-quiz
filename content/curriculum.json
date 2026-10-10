@@ -6723,6 +6723,12 @@
       "topic_id": "t_e39d1d65a4d7",
       "item_sha256": "f7d52fcfca782b627d2185dfd433d2bb29e3d73c3dcdf096b496478d15ee1371",
       "locator": "private review:questions:m6_psyl_012"
+    },
+    "62b2205fd102c3c248a1ce0acbcaa3db605deaeac111660d09bbeffa53d1eac3": {
+      "external_id": "m1_psyf_070",
+      "topic_id": "t_05aeac347c73",
+      "item_sha256": "04d2ba2c6f24bd61c86931a8a6d76ca7dc556e49ec85d49a431cca3b993bf22b",
+      "locator": "private certificate:questions:m1_psyf_070"
     }
   }
 }
