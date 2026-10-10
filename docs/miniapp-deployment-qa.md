@@ -1,10 +1,10 @@
 # Mini App deployment and manual QA checklist
 
-## Итоговый приватный репозиторий (D-45)
+## Репозиторий и Vault (D-61)
 
-Пока идёт разработка, основной репозиторий остаётся PUBLIC ради Actions. Уточнение владельца06.10: не переносить PRIVATE transition или подготовку нового VPS deploy key на текущий этап. Сейчас visibility и Git access не меняются; private Vault notes остаются локально вне Git. Смена visibility относится к окончанию разработки, не к prerequisite текущего PR/merge/CD. Target будущей базы — vault/ единого Just9120/psychology-quiz; существующий отдельный репозиторий сохраняется.
+Основной репозиторий остаётся PUBLIC; visibility позже меняет владелец по желанию. D-61 отменяет прежнее требование обязательного PRIVATE после разработки. Очищенная база уже поставляется в vault/ единого psychology-quiz; правила экспорта, открытия и личных правок — в [процедуре Vault](obsidian-vault.md). Приватные исходники, редакторские досье и личные заметки остаются вне публичного Git и клиентских assets. Существующий отдельный репозиторий не используется для поставки и не удаляется.
 
-Для финального перехода позднее потребуется проверить authenticated VPS Git read access и actual private visibility, сохранив canonical origin/deployment unit и mandatory host verification. Current preflight06.10: VPS origin HTTPS/github.com, credential helper отсутствует, HEAD3c10221. Это не достаточное доказательство отсутствия всех способов authentication и не поручение менять remote/ключи сейчас. Local GitHub metadata read подтвердил admin/push права, existing deploy keys0; новых keys/visibility mutations не выполнено.
+Git access, VPS remote/ключи и visibility не меняются в этой поставке. Если владелец позднее решит изменить visibility, до этого отдельно проверяется authenticated VPS read access с сохранением canonical origin/deployment unit и host verification. Прежний preflight06.10 (HTTPS/github.com, credential helper отсутствует, HEAD3c10221) — исторический snapshot, не подтверждение актуального доступа и не поручение создавать ключи. PRIVATE transition не является обязательным этапом или prerequisite PR/merge/CD/Vault.
 
 ## Действующие правила и delivery snapshot
 
@@ -826,7 +826,7 @@ ignored input, допустимым для canonical Obsidian exporter. Это o
 названий, body, source IDs, locators или reviewer. Runtime не импортирует Vault.
 
 Число 0 означает отсутствие notes для этой темы в переданном manifest, а не
-отсутствие личных заметок в Vault. `PREPARED` не означает export, private GitHub
+отсутствие личных заметок в Vault. `PREPARED` не означает export, repository
 publication, opening smoke или полноту базы. Без manifest сохраняются
 `notes=null`/`UNSET`; stale/conflicted inputs дают отказ вместо прежнего PASS.
 Отдельные glossary terms по lessons этим флагом не классифицируются.
