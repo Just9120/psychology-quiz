@@ -21,7 +21,9 @@ DoD: F-135 устранён для dedicated glossary/shared quiz без дво�
 
 E-REM-01 / PASS local dirty branch: общий `study_events` считает одну завершённую попытку quiz/glossary, нормализует UTC; glossary completion сохраняется отдельно от updated_at и переживает restart/replay. Новая тема glossary едина для dedicated и projected quiz; прежде выданная regularity не дублируется при появлении старой glossary history. Сначала30 targeted tests PASS, после дополнительной регрессии прежней награды13 targeted PASS; те же пять новых scenarios подключены к existing native PG contract, CI PENDING. Legacy completed без restart использует сохранённый updated_at; при первом новом restart время фиксируется. У уже перезапущенных до исправления записей исходное время завершения утрачено: оно не подменяется датой ответа/restart, такие старые записи не участвуют в time-based awards/goals. Ответы/snapshots не переписываются; schema migration не требуется.
 
-Задачи: [x] fresh main/gates и scope; [x] F-135 local implementation (native CI/delivery PENDING); [ ] F-136; [ ] F-027; [ ] конечная audio coverage; [ ] конечная homework completeness; [ ] local checks/self-review/PR; [ ] CI/merge/delivery/cleanup. Следующий шаг — permanent homework E2E и конечная сверка сохранённых content queues.
+E-REM-02 / PASS local: permanent synthetic homework browser scenario проверяет4/5→зачёт80%, возврат к карточке и reload/shared persisted state. Existing build/typecheck PASS; адресные homework + styled menus desktop/mobile4 PASS. Тот же сценарий войдёт в existing native PostgreSQL CI, PENDING; production data не используются.
+
+Задачи: [x] fresh main/gates и scope; [x] F-135 local implementation (native CI/delivery PENDING); [x] F-136 local (native CI PENDING); [ ] F-027; [ ] конечная audio coverage; [ ] конечная homework completeness; [ ] local checks/self-review/PR; [ ] CI/merge/delivery/cleanup. Следующий шаг — permanent homework E2E и конечная сверка сохранённых content queues.
 
 ## Previous Goal — AUDIT-20261010 (DONE)
 
