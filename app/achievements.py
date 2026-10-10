@@ -1,16 +1,12 @@
 """Derive private achievements from completed attempts and captured review evidence."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import timedelta
 import json
 
 from app.curriculum import classification
 from app.repetition import glossary_history
-
-
-def _utc(value: str) -> datetime:
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    return (parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)).astimezone(timezone.utc)
+from app.study_events import completed_studies, utc as _utc
 
 
 def _award(conn, actor: int, kind: str, key: str, at: str) -> None:
@@ -49,23 +45,30 @@ def _glossary_review_awards(conn, actor: int) -> None:
 
 def refresh(conn, actor: int) -> dict:
     """Idempotent materialization; caller holds the actor transaction."""
-    completed = conn.execute("""SELECT id,finished_at FROM quiz_sessions
-        WHERE user_id=? AND status='finished' AND finished_at IS NOT NULL
-        ORDER BY finished_at,id""", (actor,)).fetchall()
-    completed_at = {int(row[0]): row[1] for row in completed}
-    known_topics = set()
+    completed = completed_studies(conn, actor)
+    completed_at = {int(event.key): event.completed_at for event in completed if event.kind == "quiz"}
+    topic_events = [(event.completed_at, f"glossary:{topic}") for event in completed
+                    for topic in event.glossary_topics]
     wrong = set()
     reviewed_answers = {str(row[0]) for row in conn.execute("""SELECT answer_key FROM user_review_events
         WHERE user_id=? AND answer_kind='quiz'""", (actor,))}
     evidence = _quiz_evidence(conn, actor)
-    for item in sorted(evidence, key=lambda value: (completed_at.get(value["session_id"], ""), value["session_id"])):
+    for item in evidence:
         if item["session_id"] not in completed_at or item["snapshot_provenance"] != "captured":
             continue
         content = json.loads(item["content_snapshot"])
-        topic = classification({**content, "content_sha256": item["content_sha256"],
-                                "snapshot_provenance": item["snapshot_provenance"]})["topic_id"]
-        if topic and topic not in known_topics:
-            _award(conn, actor, "new_topic", topic, completed_at[item["session_id"]])
+        parts = content.get("external_id", "").split(":", 2)
+        if content.get("kind") == "glossary" and len(parts) == 3 and parts[0] == "glossary":
+            topic = f"glossary:{parts[1]}"
+        else:
+            topic = classification({**content, "content_sha256": item["content_sha256"],
+                                    "snapshot_provenance": item["snapshot_provenance"]})["topic_id"]
+        if topic:
+            topic_events.append((completed_at[item["session_id"]], topic))
+    known_topics = set()
+    for at, topic in sorted(topic_events):
+        if topic not in known_topics:
+            _award(conn, actor, "new_topic", topic, at.isoformat())
             known_topics.add(topic)
     for item in sorted(evidence, key=lambda value: (_utc(value["answered_at"]), value["answer_id"])):
         if item["snapshot_provenance"] != "captured" or item["question_kind"] == "glossary":
@@ -75,11 +78,14 @@ def refresh(conn, actor: int) -> dict:
             _award(conn, actor, "corrected_error", f"quiz:{key[0]}:{key[1]}", item["answered_at"])
         elif not item["is_correct"]:
             wrong.add(key)
-    weeks = sorted({_utc(at).date() - timedelta(days=_utc(at).weekday()) for at in completed_at.values()})
-    for earlier, later in zip(weeks, weeks[1:]):
+    weeks = sorted({event.completed_at.date() - timedelta(days=event.completed_at.weekday())
+                    for event in completed})
+    regularity_earned = conn.execute("""SELECT 1 FROM user_achievements
+        WHERE user_id=? AND achievement_kind='regularity'""", (actor,)).fetchone()
+    for earlier, later in zip(weeks, weeks[1:]) if not regularity_earned else ():
         if later - earlier == timedelta(days=7):
-            at = next(value for value in completed_at.values() if _utc(value).date() >= later)
-            _award(conn, actor, "regularity", f"{earlier}:{later}", at)
+            at = next(event.completed_at for event in completed if event.completed_at.date() >= later)
+            _award(conn, actor, "regularity", f"{earlier}:{later}", at.isoformat())
             break
     _glossary_review_awards(conn, actor)
     return {"ok": True, "achievements": [

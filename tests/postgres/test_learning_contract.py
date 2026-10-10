@@ -21,3 +21,10 @@ from tests.test_repetition import (
 )
 
 from tests.test_attempt_capture_batch import test_current_bank_batches_preserve_old_attempt_bytes
+from tests.test_study_events import (
+    test_glossary_study_and_regularity_survive_restart_replay_and_actor_isolation,
+    test_mixed_attempts_count_once_and_share_glossary_topic_across_editions,
+    test_week_boundaries_use_utc_completion_not_last_answer_or_updated_time,
+    test_legacy_completion_is_preserved_before_restart_but_unknown_time_is_not_invented,
+    test_existing_regularity_is_not_duplicated_when_old_glossary_history_becomes_visible,
+)

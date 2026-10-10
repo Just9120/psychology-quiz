@@ -12,6 +12,7 @@ import secrets
 
 from app.database import begin_write
 from app.glossary import GLOSSARY_TOPICS, build_glossary_quiz_question, load_glossary_entries
+from app.study_events import glossary_completion
 
 
 class GlossaryError(Exception):
@@ -188,6 +189,8 @@ def advance(conn, actor, sid, step):
         return _public(row, snapshot, value)
     value['step'] += 1
     status = 'completed' if value['step'] > len(snapshot['questions']) else 'in_progress'
+    if status == 'completed':
+        value['completed_at'] = _now()
     result = _public({**dict(row), 'status': status}, snapshot, value)
     value['advances'][str(step)] = result
     _save(conn, row, value, status)
@@ -208,6 +211,10 @@ def restart(conn, actor, sid):
     count = len(snapshot['questions'])
     result = start(conn, actor, snapshot.get('topics', [row['topic_id']]), count if count in (5, 10) else 'all',
                    expected_session_id=active['id'] if active else None, replace_active=True)
+    if row['status'] == 'completed':
+        completed_at = glossary_completion(value, row['updated_at'])
+        if completed_at is not None:
+            value['completed_at'] = completed_at
     value['restarted'] = result['session_id']
     _save(conn, row, value, 'completed' if row['status'] == 'completed' else 'abandoned')
     return result
