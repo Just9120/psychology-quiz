@@ -47,6 +47,7 @@ def note_id(kind: str, identity: str) -> str:
 
 def text(value: str) -> str:
     # Source text cannot introduce new wikilinks or change a generated alias.
+    value = '\n'.join(line.rstrip() for line in value.splitlines())
     return value.replace('[', r'\[').replace(']', r'\]').replace('|', r'\|')
 
 

@@ -306,7 +306,7 @@ def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool 
         state = {"schema_version": 1, "files": {name: _hash(content)
                                                   for name, content in sorted(files.items())}}
         (staged / STATE).write_text(json.dumps(state, sort_keys=True, indent=2) + "\n",
-                                   encoding="utf-8")
+                                   encoding="utf-8", newline="\n")
         if generated.exists():
             os.replace(generated, backup)
         try:
