@@ -1,6 +1,27 @@
 # Delivery Plan
 
-## Current Goal — AUDIT-20261010
+## Current Goal — REMAINING-SCOPE-20261010
+
+Основание: владелец поручил взять весь оставшийся scope и все findings, дополнительно проверить покрытие ссылок на аудиокниги и полноту домашних заданий. Поставка Obsidian/Vault исключена; отдельным ответом подтверждено сохранение отсрочки RAG и правовой работы. Встроенная Goal активна. Baseline `fbfff6902e71ec54fa5638162b8e82db716a3b51`, branch `codex/remaining-scope-20261010`, base тот же; используется сохранённый отдельный checkout `psychology-quiz-privacy-20261007`. Dirty primary и чужой broken main сохранены. PR343 merged, CI38038506034/CD38038804890 PASS; source sync fbfff69 при runtime a93e3d8 и PWA72810ab. Authenticated GitHub: открытых PR нет, strict required pwa-client/validate-and-smoke-test, approvals0, enforce_admins=true.
+
+Scope: F-027/135/136 и восемь связанных AC — GAM-01/02, HWK-04/05/06/07, LIT-03/07. На baseline6/8 реализованы; GAM-01/02 нарушены подтверждённым glossary repro. Для остальных шести требуется сохранить поведение и проверить дополнительную полноту, а не объявлять их отсутствующими. Процент проекта не пересчитывается. Один основной PR включает исправления, содержательные regression tests, проверенные дополнения каталога при найденных пропусках и документацию.
+
+Конечные дополнительные проверки:281 произведение текущего каталога — сопоставить сохранённые official-card/search outcomes с аудиоссылками, отдельно считать works и offers; точные неразрешённые кандидаты проверить у провайдера, подтвердив автора/название/формат. Ненайденная версия не означает, что её не существует; подписку/доступ пользователя не предполагать. Домашние задания:39 текущих карточек и65 сохранённых кандидатов — проверить полноту исходного отбора по сохранённым extraction/review records, различить пропуск, дубль, форму/организационный материал, неподтверждённое утверждение и уже покрытое задание. Исправлять только подтверждённые пропуски с проверенным общим банком. Результаты исследования/исходники остаются приватными. Повторного полного чтения425 материалов нет.
+
+DoD: F-135 устранён для dedicated glossary/shared quiz без двойного счёта, с правильным временем/actor/history; F-136 закрыт permanent homework E2E в существующем SQLite/PG desktop/mobile flow; F-027 закрыт актуализацией двух canonical runbooks. По audio/homework сохранён конечный реестр исходов и counts, проверенные пропуски исправлены. Все8 AC и publication/state/parity gates подтверждены; self-review, current required CI/review, merge и exact applicable CD с recovery/preservation/readiness/public smoke. Non-goals: RAG, Vault delivery, legal work, смена vector DB без измеренного триггера, visibility/infrastructure/auth/policy changes, покупки/логин в книжные сервисы, runtime generation, новые функции или квоты контента ради количества.
+
+| AC / риск | Проверка / ожидаемый результат | Canonical команда/tool, cwd | Environment / этап | Gate |
+| --- | --- | --- | --- | --- |
+| GAM-01/02 / учёт событий | Glossary-only и mixed completed attempts, недельные границы UTC, actor isolation, replay/abandoned/history и отсутствие двойного учёта; сохранение corrected_error | pytest tests/test_learning_goals.py tests/test_achievements.py и соответствующий native learning contract; root | Local адресно; CI native PG | REQUIRED |
+| HWK-04/05 / полнота и источник | Finite candidate dispositions, exact saved evidence,39-current mapping; изменения используют approved bank и сохраняют IDs/old credit | Сохранённые private candidates/review records, validate_questions.py, tests/test_homework_classification.py; root | Local до публикации | REQUIRED |
+| HWK-06/07 / клиентская связка | Permanent synthetic homework start→4/5→зачёт→catalog/reload, изоляция и сохранение прежних сценариев | npm run test:e2e, pwa/; existing Playwright/backend fixture, targeted --grep локально | Local SQLite desktop/mobile; CI SQLite/native PG | REQUIRED |
+| LIT-03/07 / audio identity и условия | Все281 current works имеют проверенный исход; direct audio links относятся к тому же произведению, format/access явно подтверждены либо unknown; личные отметки сохраняются | Existing literature loaders, saved official snapshots и адресный web read; validate_literature.py/tests/test_literature_catalog.py; root | Local finite review + CI | REQUIRED |
+| F-027 / canonical runbooks | Cloudflare значения и backup procedure соответствуют primary records, planner отделён от active cleanup, ссылки действительны | git diff --check, source/record comparison; root | Local self-review | REQUIRED |
+| Общий PR / delivery | Обязательные проверки exact revision, generated Mini App parity при изменении UI; после merge expected runtime/artifact, backup/recovery/user-state/auth/DB/public smoke | Existing CI/CD и canonical deployment procedures | GitHub → production | REQUIRED; без speculative reruns |
+
+Задачи: [x] fresh main/gates и scope; [ ] F-135; [ ] F-136; [ ] F-027; [ ] конечная audio coverage; [ ] конечная homework completeness; [ ] local checks/self-review/PR; [ ] CI/merge/delivery/cleanup. Следующий шаг — общие completed study events и адресная регрессия, параллельно по этапам конечная сверка сохранённых content queues.
+
+## Previous Goal — AUDIT-20261010 (DONE)
 
 Основание: явное поручение владельца 10.10.2026 выполнить полный согласованный аудит после PR #342. Встроенная Goal активирована. Scope: все 16 эпиков/95 AC, требования в обе стороны, код/config/content/tests, безопасность зависимостей, generated/legacy/local области и первичные CI/CD records. Результат — независимая оценка на main, актуальный реестр и предложение следующей Goal. Разрешён один docs PR, изменяющий только `docs/project-spec.md` и `docs/delivery-plan.md`.
 
