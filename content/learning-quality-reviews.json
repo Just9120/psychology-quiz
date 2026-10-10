@@ -12470,10 +12470,10 @@
       ]
     },
     "questions:m2_qual_008": {
-      "item_sha256": "d5994195d23a213018141def0e2724e40e57ad84306307c1b80a2abeb032f2d0",
+      "item_sha256": "67dbc67cec1bb4510137a7a61ec7189cc478142a1e71fe08fb5980f384068718",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -12485,7 +12485,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact practice12 contextual-participant-observation passage supports analysing everyday practices and interaction in context. The historical geography/adolescent-crisis claim stays outside selected scope. No universal access, diagnostic or validity guarantee; course examples are not automatically an identified empirical study.",
+      "note": "Replaced categorical ethical/reactivity straw alternatives with adjacent methods; checked natural-context evidence and retained bounded explanation. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
@@ -13323,10 +13323,10 @@
       ]
     },
     "questions:m2_qual_040": {
-      "item_sha256": "91fc13e9b649cf1e41e47d3ebee37b52e94630939259fe3f09304d91014aef14",
+      "item_sha256": "7c3552c881a73e425462401dad5c310c128309851a46724c8d9070ebff433ea3",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -13338,7 +13338,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed transferability as contextual comparison and potentially meaningful transcription features. No universal representativeness, illness interpretation or clinical efficacy asserted; held attribution excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "note": "Read exact transcription fragment; alternatives now distinguish recordings from summaries/normalization; single-cue diagnostic inference explicitly excluded. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_qual_041": {
@@ -14262,10 +14262,10 @@
       ]
     },
     "questions:m3_psychological_consulting_006": {
-      "item_sha256": "2f4ce3ed2e36110a3c31f031ffd603f0cf7452d8126d4f650113506003ad4ee5",
+      "item_sha256": "ada31eeee05b587f219c2be18769f6a8a148c0687e7f4c3e18a95e8e085c816d",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -14277,7 +14277,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 1. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "note": "Exact active-listening list read; adjacent consultation operations replace medical acts and coercive straw choices. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
@@ -14411,10 +14411,10 @@
       ]
     },
     "questions:m3_psychological_consulting_012": {
-      "item_sha256": "976a527ed95c707638fff0128298d23738352da321aba161a7a3555715affa8b",
+      "item_sha256": "06a38073c3e381e645a8bdf186a11d5465ea8621390512bfaf32cfe72d9fb8bb",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -14426,7 +14426,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Help client consider choices and consequences instead of deciding on their behalf. Authored illustration, no medical or diagnostic interpretation. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "Exact client-choice/autonomy passages read; realistic premature or delegated decisions replace medical/withdrawal trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_013": {
@@ -14456,10 +14456,10 @@
       ]
     },
     "questions:m3_psychological_consulting_014": {
-      "item_sha256": "dab522615ffa4e149ac23209ab629f40443141a847939e750e9e646c547d8e01",
+      "item_sha256": "654b23762336be7cca4ec38d47aece8f1805449009c7f4a258c7fe86d0574cc5",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -14471,7 +14471,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 39. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "note": "Exact synthesis-of-narrative fragment read; distinguish summary from neighboring listening operations. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
@@ -14534,10 +14534,10 @@
       ]
     },
     "questions:m3_psychological_consulting_017": {
-      "item_sha256": "719d9601082a18401bef05d420895b894506ebdb60ebe3fcaeb524efd2d25672",
+      "item_sha256": "69278c66a43117804e971cacda62b034a7f834a95fb41554ef563fcf333b6f9a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -14549,7 +14549,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 21. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "note": "Exact information/hypothesis/strategy definition read; adjacent consultation tasks replace unrelated burnout/relaxation labels. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
@@ -14612,10 +14612,10 @@
       ]
     },
     "questions:m3_psychological_consulting_020": {
-      "item_sha256": "1c39a8aac8ff89d840f5f622b4c338f687f50ba4ac86580e8792558c957bb1aa",
+      "item_sha256": "483b976a288f6eef7bffc4a418c5d8bdb4f5b193c53d350e5fe80c2566bd1177",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -14627,7 +14627,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Educational initial orientation only. Retained daily function does not exclude illness or establish eligibility; clarify symptoms, risks, need for other help, without diagnosis. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "Kept bounded initial-assessment answer and preserved primary supplementary evidence; plausible functioning/risk reasoning errors replace obviously absurd referral claims. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_021": {
@@ -14723,10 +14723,10 @@
       ]
     },
     "questions:m3_psychological_consulting_025": {
-      "item_sha256": "0bf2bfe208bc76baf7fb7610d071c30dad1a473cee066638cf1d240494770d2b",
+      "item_sha256": "67b30aed7d4766def0462898d2d2f78362af8daf74726f241d66e0349e0bc798",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -14738,7 +14738,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 17. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "note": "Exact container metaphor read; narrowed guaranteed safety language and distinguished frame from method/strategy/result. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
@@ -14827,10 +14827,10 @@
       ]
     },
     "questions:m3_psychological_consulting_029": {
-      "item_sha256": "e303092ae7038b1a3ebfd00a746fc4fdb7b8d7e629228cb150a0208f7106b92c",
+      "item_sha256": "f5f5ab250a8ab3884bec42f5d1885b82593d0c4e3d774d7d6fe3c35a5e349de0",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -14842,7 +14842,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
+      "note": "Complete four-stage source passage read; distractors are actual stages rather than straw advice/termination. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
@@ -15030,10 +15030,10 @@
       ]
     },
     "questions:m3_psychological_consulting_037": {
-      "item_sha256": "d12867e0f931db2c1dcd2591f864c50ec20e6620d60d34bd46fc494107653952",
+      "item_sha256": "785e06d34a18d922c13e6e4f47fb79fc844b3913e336d8797bf6cc6df8d0cdce",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15045,7 +15045,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
+      "note": "Read complete ordered model and flexibility passage; all alternatives now plausible stage-order permutations, same scope and no universal protocol claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
@@ -15082,10 +15082,10 @@
       ]
     },
     "questions:m3_psychological_consulting_039": {
-      "item_sha256": "3c60c00c64c695dc3baef52ade2144adce1451e376d6a1670a434f8e8927cd7e",
+      "item_sha256": "52100880abd20155738f8345347ca2a303baa39f6fe12f637e23b6d336162fc7",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15097,7 +15097,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сохранены эмоциональная и рациональная стороны желаемого результата. Ответ не превращает два измерения в два диагноза, типа клиентов или формата консультации. Exact fragment заканчивается до held3981:4093.",
+      "note": "Exact emotional/rational definition read; nearby goal distinctions replace diagnosis/online-mode trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
@@ -15238,10 +15238,10 @@
       ]
     },
     "questions:m3_psychological_consulting_045": {
-      "item_sha256": "441adb1aa58c0abf49367921c09030f93b2eaada3479d1032ba07e004961ea74",
+      "item_sha256": "2c6402d6f11604226fa27a4a140c77c224194d8bdd06cb47645fd8cee2e21de4",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15253,7 +15253,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 37. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "note": "Exact rapport definition read; possible support rather than guaranteed fear reduction, realistic inference errors as alternatives. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
@@ -15342,10 +15342,10 @@
       ]
     },
     "questions:m3_psychological_consulting_049": {
-      "item_sha256": "ed0d749838a93d7edc438a887aa5e8ceb712536baa11edb333f28b540082fca9",
+      "item_sha256": "e15547ba0763490c91b3344a98b61f4368d5d61ffb556e3e86d914330913b72e",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15357,7 +15357,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
+      "note": "Exact three attitudes and previously reviewed Rogers primary evidence retained; neighboring therapeutic attitudes replace caricatured authoritarian/spor alternatives. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
@@ -15413,10 +15413,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_052": {
-      "item_sha256": "ee5c6a2bd16c16fd295833670d30f0b9d3728e1cbea14ae0af8491e146092727",
+      "item_sha256": "90769460f797750452a03bd921ad4c568a257cf7b8617f7a8c2486bf2cc85719",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15428,7 +15428,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
+      "note": "Exact flexibility/readiness passages read; plausible frame/plan distinctions replace terminology/instant-advice cues; 15 minutes is illustrative not a standard. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
@@ -15503,10 +15503,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_056": {
-      "item_sha256": "8d683d9b94833533f8e37e5cc72c4b0765a3f54f4478de045865dc8af7ce3e41",
+      "item_sha256": "8b0355abb7309ada2152452d4a10dddc90774902375b39859620462aebf969ed",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15518,7 +15518,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Attainable work and own influence, not blame for circumstances or removing consultant professional responsibility. Other people actions not promised to change. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "Exact attainable/client-responsibility passage read; plausible incomplete goal criteria replace absurd unattainability demands. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_057": {
@@ -15541,10 +15541,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_058": {
-      "item_sha256": "7654d85e90a174a5d5654f81fea523d08fcc6bc3b926bd73fbaf5cbcdfe676ef",
+      "item_sha256": "42facf58fe02e1b6838c150b674064a4ae8e2f77cf3c4d3f6f009004aecee71a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15556,7 +15556,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 7. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "note": "Exact between-session skill/transfer/autonomy definition read; distinguish transfer from invalid automatic outcome/process inferences. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
@@ -15650,10 +15650,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_063": {
-      "item_sha256": "037255f5deedd8942d22bbbf90c10d9714458b3f28389765583051dc65036f71",
+      "item_sha256": "3356dab856d4efc4be5a9d543b502d4dbeca3aed4f8509fd357a67141740a38a",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15665,7 +15665,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Aims and targets of formulation do not include guaranteeing freedom from all future difficulties. Prognosis expressly probabilistic, no efficacy or cure guarantee. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "Exact formulation and strategy passages read; replaced trivial future-guarantee exception with meaningful explanatory-versus-action section distinction, not removal of relevant context. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_064": {
@@ -15816,10 +15816,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_071": {
-      "item_sha256": "7148590c3f59e537159f4fcd9b0526769a483f6a4068bf69e836a87908b83f5f",
+      "item_sha256": "037c80659664018acf96036628d5961bf6994b90ef2147d7c6f1ca99597ed4da",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15831,7 +15831,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Question narrowed to identification of a studied CBT instrument, not universal superiority or recommending treatment for all behavioral symptoms. Beck primary method-selection text confirms behavioral experiment as one technique; no exposure or medication advice. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "Exact named behavioral-experiment fragment read; adjacent consultation operations replace unsafe treatment prescriptions and straw cases; no efficacy or diagnosis claim added. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_072": {
@@ -15962,10 +15962,10 @@
       ]
     },
     "questions:m3_psychological_consulting_077": {
-      "item_sha256": "2e185978461194ce84b0b53b311ca70dac3090c413c6725770fe3c0da61c59ad",
+      "item_sha256": "f47f2b6f9d5aa45f7a3406bee9f9eaff6865cab2109435148b25ed1916b1601c",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -15977,7 +15977,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Descriptive symptom information versus possible maintaining-pattern hypotheses. Stem narrowed to the teaching model and non-diagnostic recurrent anxiety. No compulsory deep childhood cause, suppressed conflict, specific disorder treatment or universal depth hierarchy. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "Exact symptom-versus-maintaining-mechanism passage read; distinguish nearby kinds of formulation information instead of orthography/administrative trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_078": {
@@ -16064,10 +16064,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_082": {
-      "item_sha256": "29759551d2627ef2052f115b1693c6be43b9fe074203ce7bd8295fb2d2208882",
+      "item_sha256": "c56548f7ef34312e725fe3ddf47f75afe3f5c5bb188899e80a44eae41f82c3ae",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -16079,7 +16079,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed concrete, agreed and feasible homework principles. Removed generic efficacy promise; all fourteen unverifiable numeric/quotation holds excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
+      "note": "Exact agreed/concrete/feasible homework passages read; realistic workload errors replace secrecy/no-homework cues. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_083": {
@@ -16215,10 +16215,10 @@
       ]
     },
     "questions:m3_psychological_consulting_088": {
-      "item_sha256": "4f6eace4f697355fb270d2a63758f2d8b43ca55d8a6e94bce12e385029f6d3fb",
+      "item_sha256": "27c8a5477f1b62f07ae18e3e3cce6e5f3f0254880d5993c4b6e91aa68ee5e93c",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -16230,7 +16230,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 1. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "note": "Previously read first-stage listening passage retained; plausible neighboring operations replace soft-voice/posture cues, scenario clearly establishes interruption/advice. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1qIsvYHdQkJX85Um7il6x-KKDP331u3PQZtiIMlB_M70",
@@ -16241,10 +16241,10 @@
       ]
     },
     "questions:m3_psychological_consulting_089": {
-      "item_sha256": "f2b04eff1cadc01cd70e51e3bd2668aec7e1cd87e29587f868f474caef263ae8",
+      "item_sha256": "1162ed8c048316a3dd83c7f72fc7cf3a7209c1336a66f77406c27f02c485b629",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -16256,7 +16256,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
+      "note": "Read exact complete-information/plain-language passages; new application checks understanding instead of duplicating first-frame checklist. No new legal exception invented. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": [
         {
           "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
@@ -16453,10 +16453,10 @@
       ]
     },
     "questions:m3_psychological_consulting_097": {
-      "item_sha256": "fb7217079b75f839ef45471a67f4a3e5c333f6917067af2f652af95fdf3da40d",
+      "item_sha256": "5c47e3acaa9b45a696b717b3d8f7e381415c460bf1fb18c3887b6248ec897f10",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -16468,7 +16468,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Social/emotional/intrapersonal/context/resources as categories of inquiry. Do not interpret a trait label as sufficient explanation or require unbounded collection of personal details. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "All exact context/resources and three-level information fragments read; plausible incomplete formulations replace labeling/all-purpose-advice trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_098": {
@@ -16543,10 +16543,10 @@
       ]
     },
     "questions:m3_psychological_consulting_101": {
-      "item_sha256": "ea3868dbda042b183ecb462e4118e5b411ccfc7b301312feb465bf9d5bd13fcf",
+      "item_sha256": "f6a8170134a7ab093dcad1ec41813635ba8ac718bbc88c2327e5d70404daafee",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -16558,7 +16558,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Course recommendations link working formulation to strategy/goals/methods. Probabilistic and revisable, no automatic optimal therapy claim. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
+      "note": "Exact hypothesis-to-strategy passage read; plausible plan disconnects replace secret/random/permanent-false caricatures. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m3_psychological_consulting_102": {
@@ -17347,10 +17347,10 @@
       "sources": []
     },
     "questions:m6_family_002": {
-      "item_sha256": "667cad9209349ffa9ece3973713ddd6847e61ec4bacc174c9f87c130b17824b5",
+      "item_sha256": "2e59f6b591a914fe6761b6dbdf4907bb6d67689e5fad13f83d9ac9fb7a7219b1",
       "discipline_id": "family_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17362,7 +17362,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Course-framed circular inquiry: member responses, understandings and changes; no unique causal mechanism, coercion, diagnosis or therapeutic-effect claim. Existing observational/hypothesis items do not explain this family-system inquiry model.",
+      "note": "Exact circular-reaction/interdependence fragment read; neighboring individual/history/normative analytic frames replace blame and universal-cause straw choices. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_quant_002": {
@@ -17385,10 +17385,10 @@
       "sources": []
     },
     "questions:m2_quant_003": {
-      "item_sha256": "03248b7b7196eb541e11fa8cdf412bfea99f7b46827cfd1aa0ed7b34be9e3539",
+      "item_sha256": "08ba5eb2ba31d74cece9f55729b6f7d776ac002476de4911b7ee61c996d5042c",
       "discipline_id": "quantitative_methods",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17400,7 +17400,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Internal-consistency concept, separately from repeated administration and validity. No alpha threshold, guaranteed lower-bound property, unidimensionality proof or automatic validated scoring asserted.",
+      "note": "Read exact alpha/internal-consistency fragment; replaced printing/management trivia with retest, inter-rater and interpretation-quality alternatives. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_quant_004": {
@@ -17423,10 +17423,10 @@
       "sources": []
     },
     "questions:m6_org_001": {
-      "item_sha256": "db1506324bdce4bbde3cef573b4e25e6ff540d9ce3f5f46a92e84273545da691",
+      "item_sha256": "135028a3817ed21e531374290f102a63990c7d99d65ba0ed7b9b4c9680c80602",
       "discipline_id": "organizational_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17438,14 +17438,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Course definition of organizational psychology only. No normative profit-maximization rule, historical industrialization claim, Hawthorne causal conclusion or guaranteed consultancy outcome. Distinct from existing individual-consulting contracts/context items.",
+      "note": "Exact organizational behavior definition read; neighboring psychology fields replace chemistry/grammar history trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_001": {
-      "item_sha256": "bd5941c91c32b47ad0ed3983d18331678cac64d74c952d8830a34d4b6c77eeae",
+      "item_sha256": "233630e1d85a58b67044370ae816e8472aaebdd976ea2908e4e19ab893828514",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17457,14 +17457,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Scope of social psychology, not national-paradigm stereotypes, a complete external-causation thesis or deterministic attitude-to-behavior inference. Separate from existing group influence examples and causal-design questions.",
+      "note": "Exact real/imagined social presence definition read; neighboring fields replace unrelated anatomy/grammar. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m4_dev_001": {
-      "item_sha256": "c5a0d43c94e7b9021064c5300669837656e17dfaf436be13b4624ea894f73204",
+      "item_sha256": "c6684a65759a396110079fa6e87376184696ef3687297ebec491a35553ddae2e",
       "discipline_id": "developmental_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17476,14 +17476,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Lifespan scope of developmental psychology only. No compulsory age-crisis timetable, diagnostic conclusion, disputed infancy milestones or exclusive mother-care rule. Distinct from the state/trait and learning-memory items.",
+      "note": "Exact lifespan coverage read; neighboring psychology fields replace chemistry/legal/grammar trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_psyl_001": {
-      "item_sha256": "454c96654570d55d460c5795f0b0bcff151c3df00e5db4e586746080475aa0c2",
+      "item_sha256": "71a1939a9aec5bca05ef93d489dc6b3ad1ea9043f243d1801d828736cf3d4e49",
       "discipline_id": "psycholinguistics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17495,7 +17495,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Definition of psycholinguistic production/comprehension only. Does not attribute unidentified Kantor book content, validate language-origin hypotheses, therapist influence efficacy, literal thought weight, Chomsky date or personal violence-case conclusions. Existing client-context question remains without semantic duplication.",
+      "note": "Exact production/perception mechanism definition read; adjacent linguistic tasks replace chemistry/legal distractors, no diagnostic speech inference added. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m4_person_001": {
@@ -17670,10 +17670,10 @@
       "sources": []
     },
     "questions:m6_org_003": {
-      "item_sha256": "a71de2cad0e5083bf28dbe824ee763b55c012a9d8284f66d78794885627e8c85",
+      "item_sha256": "f33994414f1dcab136bc3818728215cc15017c2ea1e9a2542fac5a738c36cedb",
       "discipline_id": "organizational_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -17685,7 +17685,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact attributed course distinction: psychological requirements as part of profession description. No universal personality profile, predictive selection efficacy or Stern authorship/date claim. Distinct from general profession description and clinical psychodiagnostic question.",
+      "note": "Exact psychogram-as-psychological-requirements fragment read; distinguish adjacent job-description components without inferring worker traits or clinical diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_org_004": {
@@ -18487,10 +18487,10 @@
       "sources": []
     },
     "questions:m6_org_030": {
-      "item_sha256": "1691fd30b6e167bc5531e472ba9561707799190e65b8e5ea4a46a8ab4b0bcbb7",
+      "item_sha256": "80194990b67d78276d93bdc0cdcac3cc16aa925b3658952b709385f8a9fb380e",
       "discipline_id": "organizational_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -18502,14 +18502,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Short unheld strategic management definition only; excludes next tools-efficacy assertion. Complements org022 HR functions and001 subject without claiming an exclusive legal occupational boundary.",
+      "note": "Exact management-strategy sentence read; real organizational psychology tasks replace clinical/unchecked-motive caricatures; no exclusive professional rights asserted. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_family_003": {
-      "item_sha256": "b3aaa91fa3a389335c847ee3f865cbda9e1c8413da3636a3dc040a99796dd084",
+      "item_sha256": "d5ee7e73ec349c19e1e165b056aab8d6f1bbec95e730d5ac93891bfc43fec2bb",
       "discipline_id": "family_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -18521,7 +18521,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact one-sentence internal-role boundary definition. Excludes neighboring mother-in-law inference and mandatory ideal-family/rigidity claims. Own abstract question, no copied family story or universal clinical diagnosis.",
+      "note": "Exact inner-role boundary fragment read; alternative family concepts replace property/population trivia; explanation remains model-specific and nondiagnostic. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_family_004": {
@@ -18848,10 +18848,10 @@
       "sources": []
     },
     "questions:m4_person_007": {
-      "item_sha256": "153c6a3d3522b00c37b83d8be9a43828b65f58909a901015d44bb6107327d0e7",
+      "item_sha256": "2ff89366ac65680d8aecaac5a034a20d3aeb020ced2bc340d58a58cf44a00475",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -18863,14 +18863,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact conceptual definition before held obligatory hierarchy/one-percent claims6135:6364. Compared with current Rogers conditions and character/ability items; those do not test Maslow self-actualisation. No universal growth law, strict ordering, numeric prevalence, effectiveness or maturity diagnosis adopted.",
+      "note": "Exact needs-model fragment read; other named needs replace absurd absolutes, without a rigid hierarchy claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m4_person_008": {
-      "item_sha256": "11144f76647b039a75a0b5303c88bd603ef625809ea5a54f4f8c49d37d1c4670",
+      "item_sha256": "508f274b78d1cb852a197b5cb49eb26681a9356fda4a7cd588877fb8ee683746",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -18882,7 +18882,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact responsibility/position/choice description666:1062, after held chronology claims and before broad mental-health or universal-effectiveness discussion. Own theoretical distinction; no participant consultation narrative, unrestricted personal agency or promise of clinical benefit.",
+      "note": "Exact choice/responsibility passage read; neighboring explanatory approaches replace guarantees and body-type trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m4_person_009": {
@@ -18905,10 +18905,10 @@
       "sources": []
     },
     "questions:m4_person_010": {
-      "item_sha256": "98628374b73aeb2e9adefb20be7a041eb7ee4917d33dd89acb556592028be79d",
+      "item_sha256": "e8b6c7c52ef9e955e3dfa64adacab498ab7c52b1c57f04d9379b11cf5f9c4d52",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -18920,7 +18920,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact methodology description1488 onward, before chronological narrative and held universal consensus2900:2971. Compare with current Kuhn-attributed paradigm question: new item concerns interpretation/researcher role, not consensus or chronology. No claim of a sole universally accepted scientific history or rejection of empirical verification.",
+      "note": "Exact methodological contrast read; alternatives now reflect distinct emphases rather than denial of verification or universal agreement. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m4_person_011": {
@@ -19114,10 +19114,10 @@
       "sources": []
     },
     "questions:m4_dev_005": {
-      "item_sha256": "010a7c0c2b6f23d876e9afe68cd40c67e90366f7a04b27fdb0c88bfe91d16fcb",
+      "item_sha256": "032c035caa9d395a59b0b5717efd937a1c3025b18673e6eee95ace0998ea1995",
       "discipline_id": "developmental_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19129,14 +19129,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact ignored/rejected self-aspects definition after midlife universal stereotypes and before gender/retreat anecdotes. APA official shadow entry limits term to Jung theoretical tradition and permits positive/negative aspects; course text does not name author here, so no unverified original-author attribution inserted into item. No empirical treatment effect, diagnosis or age necessity asserted.",
+      "note": "Exact shadow-as-unnoticed/rejected-experience fragment read; bounded metaphor remains, plausible self-reflection alternatives replace diagnosis/guarantees. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_psyl_009": {
-      "item_sha256": "dca629cd58207489e1c400b7aba1b1add600c30757792b11afde49f38f8e186d",
+      "item_sha256": "3cc299e58a9770a634ada6bb07971d37658779e7f9e2952b3379bbb4cd359fe7",
       "discipline_id": "psycholinguistics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19148,7 +19148,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact sign-system definition only, before brain-virus, spatial-development and reality claims. Course definition is not a treatment or deterministic causality claim; no source-wide approval.",
+      "note": "Exact sign-system definition read; distinguish system from utterance/process/individual realization rather than reflex/legal/chemical trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_psyl_010": {
@@ -19209,10 +19209,10 @@
       "sources": []
     },
     "questions:m2_pd_004": {
-      "item_sha256": "459c82bccc99aaa7527544588677d62161fd98e4902aa15526c843506cc7e8c6",
+      "item_sha256": "c209160adc5073b6607178bc69ecb206b80744d4770638d72096814cc01d313b",
       "discipline_id": "psychodiagnostics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19224,7 +19224,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact multiple-method comparison definition; own generic study, not private participants. APA indexed methodological-triangulation definition independently supports variety of data collection; no guarantee of validity.",
+      "note": "Exact multiple-method fragment read; distinguish triangulation from neighboring quality procedures without claiming guaranteed truth. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_pd_005": {
@@ -19285,10 +19285,10 @@
       "sources": []
     },
     "questions:m4_person_014": {
-      "item_sha256": "f186c9ce6434a176a618b7cda41afe50880fa65dd435e607ba557acccdb27e79",
+      "item_sha256": "59e42b17ab406f3c614ab614322bf6eca2b9d4badda48a78f3f23489e303fa31",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19300,14 +19300,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact structural-statistical explanation before sweeping historical origin claim. No universal factor count, mechanistic causal inference or diagnosis.",
+      "note": "Read exact shared-structure passage; use nearby statistical tasks and preserve noncausal interpretation limits. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_002": {
-      "item_sha256": "100e49cc168788bbbd0e38f27aca7943ac5a4958d740a8bea891f57616387680",
+      "item_sha256": "b83d112ec2fe3d5c27338c268b25fb05086669134dde98433b1e09a722a2546d",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19319,14 +19319,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact first meaning-based action premise; own conceptual contrast, no private stories or course inaccurate third-premise summary adopted. NLM descriptor is an indexing record and does not verify all Blumer premises; no claimed full original text review.",
+      "note": "Exact meanings/objects first premise read; competing theoretical emphases replace physical-mass and diagnosis distractors. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_003": {
-      "item_sha256": "56fa4fc7790dbd0bb975cf7881b3df2801c6de0b239e395ce008b6d1129d85b6",
+      "item_sha256": "6aa6092a1ffe757375a64f476784d9b49200ce82eddccec91c523f491485b562",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19338,7 +19338,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact theatrical metaphor before guaranteed impression-based control/power claims. Lecturer attribution only; no universal deceit, personality diagnosis or guaranteed influence adopted.",
+      "note": "Exact Goffman dramaturgical image read; alternatives contrast theoretical descriptions without reflex/diagnostic straw claims. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_004": {
@@ -19380,10 +19380,10 @@
       "sources": []
     },
     "questions:m6_social_006": {
-      "item_sha256": "4006c19594a20f072711b7fe2a98225d0b8693f82d1888fa2a3d57d605f08fd2",
+      "item_sha256": "de877ec55490e26970efe273432f84ada454ca03780aa09907c04a52bb6e8b04",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19395,14 +19395,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact reward/cost model passage; first exclusive economy and small trader claims not adopted. Official APA indexed definition independently supports exchange benefits/costs as theory, not universal conscious calculation. Lecture dates, nationality and alleged pure-behaviourist exclusivity not adopted.",
+      "note": "Exact Homans rewards/costs fragment read; nearby social-model relations replace duration/grammar/age trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_007": {
-      "item_sha256": "f5842aed092fdbff393317e6f5b7833f36fc6ff9c6c34594b496626504b5bda3",
+      "item_sha256": "28e81911dba2cafd1e37f920d886241a057a6232731b8ec9be2569138fa30031",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19414,7 +19414,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact implicit everyday rules definition before everyone-knows/general institution exclusions. No jurisdiction advice, universal etiquette, private dialogue or claim that implicit rules are legal norms.",
+      "note": "Exact Garfinkel unwritten-rules fragment read; plausible neighboring objects of study replace chemistry/legal/age cues. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_pd_006": {
@@ -19627,10 +19627,10 @@
       "sources": []
     },
     "questions:m6_social_013": {
-      "item_sha256": "002c896912101388dfd98fb367355c038e95855659f42baca31f38407de0f8a4",
+      "item_sha256": "6315ff33905456797b2eb45a94f3e2306471d80adf0826ab76e625aa811b4ad1",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19642,7 +19642,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact model interpersonal communication orientation only; item general-object framing also supported by adjacent inspected A/B/X diagram text. Deterministic forced similarity/affection claim excluded; no communication prescription.",
+      "note": "Retained exact Newcomb interpersonal-communication scope; competing theoretical domains replace memory/reflex/wire trivia, no agreement guarantee. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_014": {
@@ -19665,10 +19665,10 @@
       "sources": []
     },
     "questions:m2_pd_012": {
-      "item_sha256": "b32fa0163f1cb5f40ebce3a7dcdcc4d9fd5ebf41b071cffd0454b52cbbc068b3",
+      "item_sha256": "e5afee888632d50dc39fb4ad5097b2e4bd3dc3ac92bb3dd6868f938d2e92a029",
       "discipline_id": "psychodiagnostics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19680,7 +19680,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact reference-population passage only. Course wrongly introduces it as standardisation; term corrected to norms using primary Standards5.8–5.9. No whole-source approval, clinical diagnosis or automatic group equivalence.",
+      "note": "Norm-group composition evidence read; distinguish suitability of reference group from administration, retest and internal consistency. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_pd_013": {
@@ -19874,10 +19874,10 @@
       "sources": []
     },
     "questions:m6_ethics_004": {
-      "item_sha256": "c98a8bed0f567b1e3007edce855c100ad04b6ba0cfb76c6bbb73aa5ffc0652fa",
+      "item_sha256": "f8c0197275613f4101bdf91f39cf53aeec3d5c6eafea0d37510ffbe4a8143e4d",
       "discipline_id": "professional_legal_ethics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -19889,7 +19889,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact circumstance/norm relation before broad adulthood example; no legal advice or current-law guarantee.",
+      "note": "Exact circumstance-trigger passage read; neighboring legal concepts replace arbitrary impression choices. Educational terminology only, no applicability or new legal action asserted. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_ethics_005": {
@@ -20007,10 +20007,10 @@
       "sources": []
     },
     "questions:m4_person_017": {
-      "item_sha256": "82c2c86c279341df8f07ece187dfbfba7a22c0183dedbf3c9b5e5621482c961d",
+      "item_sha256": "bae95a5f06f222aa8afce8fe1be0b238291651193be847d72f95c7b8ad7d44fa",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20022,14 +20022,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Four exact relation-category sentences only, excluding nearby universal trait and private/moral examples; descriptive course framework, not validated diagnostic scale.",
+      "note": "All four exact relation fragments read; distinguish relation scheme from adjacent needs/temperament/value schemes, no diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m4_person_018": {
-      "item_sha256": "e7cf2e790e9bf68d3787dab2c5a5021fb0f7c3e86b3dc8a2b99ca275b270ddbf",
+      "item_sha256": "cc04f39787bd9da5587f0b9e54e514e8409416f667c6e3f443de5fb1668cf6d3",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20041,14 +20041,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact value-based classification criterion before private self-typing/pejorative examples; no empirical exhaustive typology asserted.",
+      "note": "Exact Spranger contrast with temperament/constitution read; plausible alternative classification grounds instead of unrelated nerve impulses. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m4_person_019": {
-      "item_sha256": "2e60ba0d105f0ad74e9b541192998377b77454ce2fe5ceba2cc5e52db9834e3e",
+      "item_sha256": "6ea32dd26c8af74997e13d7c07eeb1b8cd204ec57fa2cf46e0670ae19a9979cd",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20060,7 +20060,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Creative/experiential avenues only, before medical anecdote. No promise of treatment/recovery or obligation to suffer; unavoidable-suffering boundary separately corroborated.",
+      "note": "Exact creation/experience fragment read; distinguish pairs within bounded Frankl model instead of punishment and physiology trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_015": {
@@ -20083,10 +20083,10 @@
       "sources": []
     },
     "questions:m6_social_016": {
-      "item_sha256": "77d2e54fe4624502f7849b3a250221ddf0c5e6bd28031d40c5a243bf2e5cb0e2",
+      "item_sha256": "131048bbbca873afb617cb7c5a02f0b087c73c41e7c45b57f9cd20d25c2fb677",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20098,7 +20098,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact assumed-other-attitudes meaning; surrounding transcript typo about control, internal core and social-determinism claims excluded.",
+      "note": "Exact normative Me fragment read; distinguish internalized attitudes from neighboring self-response/presentation/exchange concepts. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_017": {
@@ -20140,10 +20140,10 @@
       "sources": []
     },
     "questions:m6_social_019": {
-      "item_sha256": "0fbfb42e89d814ffea7cc675d367f47325d05b1d724e0ad1c5cf1512cf2db710",
+      "item_sha256": "7588d3093d59c2d4b4e4dee6b1237e49560705a712302e7d68f1c33bfbaeec73",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20155,7 +20155,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact three-strategy enumeration only; no diagnosis from direction label or universal cultural/childhood cause adopted.",
+      "note": "Exact Horney three-movement fragment read; adjacent motivational/meaning/exchange schemes replace sensory/clock trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m1_vnd_060": {
@@ -20387,10 +20387,10 @@
       "sources": []
     },
     "questions:m4_person_024": {
-      "item_sha256": "55d6468078a39664bbcc5c34aa4b22cc212b4b12e001ff71b867bc0f567e44a0",
+      "item_sha256": "7da5e2c96b1468c1febc94842f52a32f3884a5303a9eb4d0fe838bdb56739ab2",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20402,7 +20402,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Attributed construct meaning only; theory lens, not established brain module or clinical test.",
+      "note": "Exact construct-filter passage read; key retained, explanation matches neighboring construct/trait/role/learning alternatives. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:other_bonus_002": {
@@ -20558,10 +20558,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_116": {
-      "item_sha256": "28c706eddf180141a00faa808a1feb02c9bff9ebace346e5a56b53fa040ca54f",
+      "item_sha256": "d225698d187084ee4adc7f58e9abae1130d0f599752abbb953ad660fa1600faa",
       "discipline_id": "psychological_consulting",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20573,7 +20573,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Selected defusion labeling and evidence-for/against distinction; ACBS definition checked. No superiority, mandatory sequencing or efficacy assertion.",
+      "note": "Complete naming-versus-evidence exercise read; near-process confusion replaces diagnostic/coercive straw choices, no treatment guarantee. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m1_gp_066": {
@@ -20710,10 +20710,10 @@
       "sources": []
     },
     "questions:m4_person_026": {
-      "item_sha256": "5c271ddf8e46fdf11a42e6ef34befc2fa1dab036d1a727d3c919a812af0aef2e",
+      "item_sha256": "b385263622d511aabe6c180439356bde3e544ddb48fe8b3eef4eb52a1aa8675e",
       "discipline_id": "personality_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20725,7 +20725,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact attributed signal-function label only; excludes intensity-guarantees-motivation, emotion=certain-cause and medical inference.",
+      "note": "Exact change-as-signal passage read; adjacent functional labels replace unrelated measurement and character claims. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_org_031": {
@@ -20805,10 +20805,10 @@
       "sources": []
     },
     "questions:m6_org_035": {
-      "item_sha256": "0e4921cb9b0cf6a19e955f1d27ddc8c63dce5a23583998bcf6fb4be53010fb8c",
+      "item_sha256": "8f2a13ad3724b805f1bae61b32fb5d26fabdba32dbed7e43817e69ac67f90a87",
       "discipline_id": "organizational_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20820,7 +20820,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact orderer/client distinction; source confidentiality and multi-source considerations already assessed by organizational016/017 and voluntary participation by consulting110. No inference that manager consent replaces participant agreement.",
+      "note": "Exact requester-versus-client example read; narrowed stem to role clarification so other legitimate planning questions cannot be co-correct. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_org_036": {
@@ -20881,10 +20881,10 @@
       "sources": []
     },
     "questions:m6_social_024": {
-      "item_sha256": "746d7459ca1964cc662913d4d020725b2ded277903d234e1b32c4a95edc37f6e",
+      "item_sha256": "712ce66b8c42e29b1bb62e73cee9056406471c5ae73b77b35c525da753ef4cad",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20896,14 +20896,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Only domain-definition paragraph after LeBon/Sighele deterministic claims; historical orientation not modern endorsement or ethnicity/group inferiority.",
+      "note": "Exact historical crowd-object fragment read; neighboring analytic objects replace anatomy/working-memory trivia; old mass stereotypes not endorsed. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m6_social_025": {
-      "item_sha256": "2422df957279ac463d88a4b522de762e165500bf93997ebbf73ac0331651032c",
+      "item_sha256": "6d616da76cf783e32f16a58c9bf492d6ff8cff36c0624dc529948ae422d43043",
       "discipline_id": "social_psychology",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -20915,7 +20915,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Historical subject-matter examples only; metaphorical collective spirit and universal individual determination not accepted as scientific facts. Wundt-specific laws/no-laws contradiction excluded.",
+      "note": "Exact historical language/custom/religion/art fragment read; other psychological materials replace endocrine/neural trivia; no ethnic essentialism endorsed. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m1_psyf_084": {
@@ -21033,10 +21033,10 @@
       "sources": []
     },
     "questions:m2_quant_010": {
-      "item_sha256": "b24000db294764b97a8b3c9df5500b18119e83f6a2d97a5775332a53ec86fe92",
+      "item_sha256": "97e5c372dc842cb867004a028ce6fbf777db3c46ba7b7eaa71f98355ea198f52",
       "discipline_id": "quantitative_methods",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -21048,7 +21048,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact later weights qualification20139 onward outside18400:20100 hold. Fictional overrepresentation example and design caveat independently checked against official stratified-design definition. No approval of original held within-stratum selection shortcut or universal unbiasedness.",
+      "note": "Kept design-weighting scope and limitations; plausible oversampling mistakes replace unrelated length/refusal cues. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_quant_011": {
@@ -21090,10 +21090,10 @@
       "sources": []
     },
     "questions:m6_psyl_012": {
-      "item_sha256": "4cd790d715e9645705ea1283f1eb3af97f4b41fc34b0a587f20188bf6fb1c7c7",
+      "item_sha256": "f7d52fcfca782b627d2185dfd433d2bb29e3d73c3dcdf096b496478d15ee1371",
       "discipline_id": "psycholinguistics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -21105,7 +21105,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course-framed motive/thought/verbal expression sequence only. Primary author attribution not independently confirmed because archive unavailable; therefore question/explanation avoid author, date and origin claim. No literal thought weight, neural prognosis, therapy efficacy or private case narrative.",
+      "note": "Exact motive-to-thought-to-word sequence read; meaningful process-stage alternatives replace physical thought mass and diagnostic traits. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m5_clin_018": {
@@ -21204,10 +21204,10 @@
       "sources": []
     },
     "questions:m2_pd_018": {
-      "item_sha256": "b5d274eacfcaf7c3242bc18810232916e36a12874a319089e3726677ec8b1020",
+      "item_sha256": "1dd911081f8b8df6170f6e5d084dc185599a83159d6b7a7093b0278b570d5324",
       "discipline_id": "psychodiagnostics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -21219,14 +21219,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course transference example only; no participant case reused, universal therapist neutrality, equation of all projection with transference or proof of projective-test validity.",
+      "note": "Read exact prior-relationship transfer fragment; retain model boundaries and use adjacent psychological terms rather than unrelated measurement terms. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m2_pd_019": {
-      "item_sha256": "517a9bd0d0402e30bfecabc456d356327a9d4d47c1353e1239a77551e31e5587",
+      "item_sha256": "3d0c5c9989d9d799595e8378716126ef87216f6f65e5f488421a71fa2c398c1e",
       "discipline_id": "psychodiagnostics",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -21238,14 +21238,14 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact projection-definition clause; explicitly excludes subsequent equation of projection and transference, universal self-projection, protected forms and test-validity claims.",
+      "note": "Read exact subjective-content attribution fragment; adjacent mechanisms replace unrelated retest/norm/randomization trivia; no clinical inference added. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m5_clin_023": {
-      "item_sha256": "29057d648029be6365a66a312fa62d17c3518f60de314af6c206b0993092aae7",
+      "item_sha256": "e54f2c2b1875e1a61de6c1e407b864ff8579dcfc173d1114a36c4b755e777b2a",
       "discipline_id": "klinicheskaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -21257,7 +21257,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact source-framed method/direction versus technique/concrete tools distinction. Not universal taxonomy of therapies, treatment guarantee or demonstration efficacy.",
+      "note": "Exact direction-versus-steps explanation read; neighboring level/stage errors replace diagnosis and test-score trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m5_clin_024": {
@@ -21280,10 +21280,10 @@
       "sources": []
     },
     "questions:m5_clin_025": {
-      "item_sha256": "e9638f1ed8eac8bc20eb58573b395b00a2b76030d023637c22ffcc2a29923733",
+      "item_sha256": "50facd770736b1125f1468247c9850ea05aea128a562b3860b28e81115d427c4",
       "discipline_id": "klinicheskaya_psihologiya",
       "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-10",
       "checks": [
         "meaning",
         "answer",
@@ -21295,7 +21295,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Clean missing-person example only, excluding preceding fixed pathological grief duration and subsequent training anecdote. Definition independently checked in university interview with theory author; own fictional question, no source private narrative or efficacy claim.",
+      "note": "Retained previously reviewed ambiguous-loss scope and supplementary evidence; distinct loss/separation situations replace unrelated measurement/learning terms. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
       "sources": []
     },
     "questions:m5_clin_026": {

@@ -157,6 +157,8 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'fch_gazzaniga_kto_za_glavnogo', 'fch_martynov_mozg', 'fch_kandel_v_poiskah_pamyati',
         'fch_yakutenko_volya_i_samokontrol',
         'lit_sechenov_reflexes_of_brain', 'lit_bulgakov_heart_of_a_dog',
+        'fch_simonov_emotsionalny_mozg', 'fch_simonov_motivirovanny_mozg',
+        'fch_ukhtomsky_dominanta',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}

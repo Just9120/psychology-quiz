@@ -598,6 +598,45 @@
         "access_modes": [],
         "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. Read/listen and free-excerpt actions are present; full-access conditions and individual account entitlement remain unknown."
       }
+    ],
+    "fch_simonov_emotsionalny_mozg": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/pavel-simonov/emocionalnyj-mozg/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official MyBook title/author/text card inspected on 2026-10-10. Subscription is offered; excerpt/trial is not unconditional free full access. Catalog edition and personal/territorial entitlement unverified. Card specifies exclusive Litres subscription conditions; access must be checked with the provider."
+      }
+    ],
+    "fch_simonov_motivirovanny_mozg": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/pavel-simonov/motivirovannyj-mozg-vysshaya-nervnaya-deyatelnost/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official MyBook title/author/text card inspected on 2026-10-10. Subscription is offered; excerpt/trial is not unconditional free full access. Catalog edition and personal/territorial entitlement unverified."
+      }
+    ],
+    "fch_ukhtomsky_dominanta": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/aleksej-uhtomskij-2/dominanta/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-10",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official MyBook title/author/text card inspected on 2026-10-10. Subscription is offered; excerpt/trial is not unconditional free full access. Catalog edition and personal/territorial entitlement unverified."
+      }
     ]
   }
 }

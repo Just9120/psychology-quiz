@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 993
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1050
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 168
@@ -195,7 +195,22 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert source['kind'] == 'learning_material' and source['readable'] is True
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
-        assert historical == {'m1_vnd_002', 'm1_intro_054', 'm2_exp_012', 'm2_exp_058',
+        assert historical == {
+                              'm3_psychological_consulting_116',
+                              'm6_ethics_004', 'm6_family_002', 'm6_family_003',
+                              'm6_org_001', 'm6_org_003', 'm6_org_030', 'm6_org_035',
+                              'm6_psyl_001', 'm6_psyl_009', 'm6_psyl_012',
+                              'm2_pd_004', 'm2_pd_012', 'm2_pd_018', 'm2_pd_019',
+                              'm2_quant_003', 'm2_quant_010',
+                              'm4_dev_001', 'm4_dev_005',
+                              'm4_person_007', 'm4_person_008', 'm4_person_010',
+                              'm4_person_014', 'm4_person_017', 'm4_person_018',
+                              'm4_person_019', 'm4_person_024', 'm4_person_026',
+                              'm5_clin_023', 'm5_clin_025',
+                              'm6_social_001', 'm6_social_002', 'm6_social_003',
+                              'm6_social_006', 'm6_social_007', 'm6_social_013',
+                              'm6_social_016', 'm6_social_019', 'm6_social_024', 'm6_social_025',
+                              'm1_vnd_002', 'm1_intro_054', 'm2_exp_012', 'm2_exp_058',
                               'm1_vnd_034', 'm1_vnd_047', 'm1_vnd_048',
                               'm1_intro_035', 'm2_exp_030', 'm2_exp_046',
                               'm3_psychological_consulting_039',
