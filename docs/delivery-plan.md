@@ -1,6 +1,20 @@
 # Delivery Plan
 
-## Current Goal — OBSIDIAN-KNOWLEDGE-CORRECTION-20261010
+## Current Goal — KNOWLEDGE-COMPLETE-425-20261010
+
+Основание: прямое поручение владельца доделать базу знаний по всем425 материалам, используя сохранённые источники без повторного обхода Drive. Base свежего origin/main5553d4c587c3ead6e594372ba49aa1e2c8a8d927; branch codex/knowledge-complete-425-20261010 в сохранённом worktree psychology-quiz-privacy-20261007. Чужие dirty changes/worktrees сохраняются. Встроенная Goal активна; GitHub required checks pwa-client/validate-and-smoke-test, approvals0.
+
+Результат и scope: AC-KNW-01/03/04/05. Полнота KNW-01 снова IN_PROGRESS: предыдущее исправление охватило134 источника и не заявляло425. Конечный private реестр связывает каждую из425 сохранённых редакций с содержательными заметками либо обоснованным исходом (дубль, библиография без прочитанного произведения, организационная/личная часть, конкретное удержанное утверждение). Источник с локальным hold не исключается целиком, независимые проверенные понятия сохраняются. Дополнить недостающие знания автономными страницами с понятными русскими именами, объясняющими связями и тематическими обзорами. Не подменять покрытие числом страниц или вопросов.
+
+DoD: все425 редакций учтены без неизвестных исходов; существенные пригодные знания источников представлены в базе; новые формулировки проверены по сохранённому содержанию/редакции и удержаниям. Очищенные notes и публичная сводка без raw captures, Drive identifiers, личных данных и private dossiers. Существующие смысловые заметки и personal edits сохраняются. Один основной PR, self-review, required CI exact head, merge, applicable CD и readback архива. Non-goals: повторный полный Drive fetch, банк вопросов/каталог книг в Vault, RAG, правовая работа, visibility/infrastructure/runtime API/schema changes.
+
+Validation Plan: REQUIRED local — finite source-to-capture/review reconciliation425/425, source hash/revision/range checks и содержательный review новых notes/links; existing exporter/check/privacy validators с полным private inventory, адресные tests сохранения personal state и idempotency при изменении writer; git diff --check. REQUIRED CI — оба existing required jobs exact revision. REQUIRED delivery — primary merge/CD records exact revision и archive readback, без повторного deploy ради статуса. Native Obsidian UI RECOMMENDED, недоступный native launch не выдаётся за проверенный. Полный CI локально не повторяется без конкретного риска.
+
+Реализовано по коду3/4 AC текущей Goal: KNW-03/04/05 сохранены по проверенному PR348, KNW-01 IN_PROGRESS до полной сверки425 материалов. Задачи: [x] fresh main/gates и отдельная ветка; [ ] конечный реестр; [ ] недостающие знания; [ ] содержательная/автоматическая проверка; [ ] PR/CI/merge/CD/readback. Следующий шаг — сопоставить сохранённые captures и reviews, однократно исследовать только непокрытые части. Процент проекта не пересчитывается.
+
+E-K425-BASE / PASS10.10: PR348 merged5553d4c; required PR CI38051296361 и main CI38053594136 PASS; production CD38053921089 PASS (HTTP_SMOKE_OK/RUNTIME_EXPOSURE_OK exact5553d4c, auth401, PG18.6, privacy retention/backups).331 Markdown прочитаны из Git archive, exact projection/state/links PASS. Предыдущее исправление intent и F-139 завершено в пределах объявленных134 источников; новый полный425 scope расширяет полноту KNW-01.
+
+## Previous Goal — OBSIDIAN-KNOWLEDGE-CORRECTION-20261010 (DONE)
 
 Основание: владелец отклонил результат PR346/347 как выгрузку тестов и каталога вместо базы знаний по источникам. Исправление ранее порученного scope, не новая функция. Base origin/main12ee7a52ffecc000c32e29092c10d4c6c4f41fe7; branch codex/obsidian-knowledge-correction-20261010, сохранённый отдельный worktree psychology-quiz-privacy-20261007. Primary user changes и чужой worktree не затрагиваются. Fresh GitHub: открытых PR нет, strict pwa-client/validate-and-smoke-test, approvals0, enforce_admins=true. Встроенная Goal активна.
 
