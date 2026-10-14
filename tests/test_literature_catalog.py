@@ -181,6 +181,7 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_moody_life_after_life', 'lit_course_mention_f3a45bec2566afc2',
         'lit_dweck_mindset', 'lit_mill_on_liberty', 'lit_social_history02_sighele',
         'lit_social_history02_freud', 'lit_5643db88a7fa06b2', 'lit_yalom_loves_executioner',
+        'lit_kagan_meanings_psychotherapy', 'lit_2055c41e007c80b8',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
@@ -200,7 +201,7 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
                  'lit_family_slide_04', 'lit_zatulovski_everyday_cybernetics',
                  'lit_remarque_black_obelisk', 'lit_loehr_schwartz_full_engagement'):
         assert {link['format'] for link in links[work]} == {'text', 'audio'}
-    assert {link['format'] for link in links['lit_zeigarnik_pathopsychology']} == {'audio'}
+    assert {link['format'] for link in links['lit_zeigarnik_pathopsychology']} == {'text', 'audio'}
     assert {link['format'] for link in links['vygotsky_myshlenie_i_rech']} == {'text', 'audio'}
     assert {link['format'] for link in links['lit_0199865ad8d23ecb']} == {'text', 'audio'}
     assert {link['format'] for link in links['lit_819808cf97ad8eb5']} == {'text', 'audio'}
