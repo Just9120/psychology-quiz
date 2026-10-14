@@ -381,6 +381,26 @@
           "subscription"
         ],
         "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/daniel-kaneman/dumaj-medlenno-reshaj-bystro-9/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full audiobook, Daniel Kahneman, narrator Igor Knyazev, 14h48m; card identifies Thinking, Fast and Slow. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Card offers subscription; a trial is not unconditional free full audio."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/Sm7xn4hE",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [],
+        "access_review": "Official full audiobook, Daniel Kahneman, narrator Igor Knyazev, 14h48m. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Card confirms subscription for the text version only; full-audio terms remain unknown. The page title and genre tag do not establish free full audio."
       }
     ],
     "psf_sapolsky_psihologiya_stressa": [
@@ -406,6 +426,17 @@
           "subscription"
         ],
         "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/robert-sapolski-2/psihologiya-stressa-5/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full audiobook, Robert Sapolsky, narrator Yuri Elagin, 24h08m. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Card offers subscription; a trial is not unconditional free full audio."
       }
     ],
     "lit_677867857cce3e89": [
@@ -833,6 +864,17 @@
           "subscription"
         ],
         "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/dzhon-kabat-zinn-2/kuda-by-ty-ni-shel-ty-uzhe-tam-2/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full audiobook, Jon Kabat-Zinn, narrator Pavel Konstantinovsky, 7h49m. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. The companion Meditations audiobook is a different work and was excluded. Card offers subscription; a trial is not unconditional free full audio."
       }
     ],
     "lit_dahl_explanatory_dictionary": [
@@ -898,6 +940,15 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/YzRfXaWQ",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [],
+        "access_review": "Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Publisher Alpina non-fiction; translators G. Ball and A. Popogrebsky. Book-specific full-access terms could not be established and remain unknown; generic provider wording does not prove free full text."
       }
     ],
     "lit_freud_psychopathology_everyday_life": [
@@ -1771,6 +1822,35 @@
           "subscription"
         ],
         "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio. Offered Russian title is Palach lyubvi; publisher/official-book front matter identifies Love's Executioner & Other Tales of Psychotherapy (1989), matching the anthology listed under Lechenie ot lyubvi; chapter reading states remain separate."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/irvin-yalom/palach-lyubvi-i-drugie-psihoterapevticheskie-ist-2/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official full audiobook, narrator Amir Rashidov, 12h40m. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Russian title Palach lyubvi corresponds to Love's Executioner, already established by the retained publisher identity review. Card offers subscription; a trial is not unconditional free full audio."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/echFkGOv",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [],
+        "access_review": "Official full text card for Palach lyubvi/Love's Executioner, Irvin Yalom, translator Anna Fenko; original-work identity reuses the retained publisher review. Exact course edition and personal entitlement remain unverified. The excerpt is free; book-specific full-access terms could not be established and remain unknown."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/RIcGPRHw",
+        "access": "provider_terms",
+        "checked_at": "2026-10-14",
+        "access_modes": [],
+        "access_review": "Official full audio card for Palach lyubvi/Love's Executioner, Irvin Yalom, narrator Amir Rashidov, translator A. Fenko, 12h40m. Original-work identity reuses the retained publisher review. Exact course edition and personal entitlement remain unverified. Book-specific full-access terms remain unknown; the page title alone does not prove free full audio."
       }
     ],
     "lit_dweck_mindset": [
