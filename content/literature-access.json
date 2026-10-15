@@ -52,6 +52,17 @@
         "checked_at": "2026-10-14",
         "access_modes": [],
         "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Константин Корольков; Длительность 15 ч. 3 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/lev-vygotskij/myshlenie-i-rech-5/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Lev Vygotsky, full Thinking and Speech, 520 printed pages. Separate 687-page collected works edition is excluded. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_0199865ad8d23ecb": [
@@ -742,6 +753,17 @@
         "checked_at": "2026-10-14",
         "access_modes": [],
         "access_review": "Full anniversary edition with additions, explicitly not the short version or practice diary. Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Сергей Двинянинов; Длительность 15 ч. 54 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/stiven-kovi/sem-navykov-vysokoeffektivnyh-lyudej-moshnye-ins-5/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Seven Habits, Stephen Covey; Sergey Dvinyaninov, 15 h 55 min. Card lists full parts and chapters; short summaries and companion workbooks are excluded. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_kreisman_straus_hate_you_dont_leave": [
@@ -1200,6 +1222,36 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 200 страниц. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/aleksej-uhtomskij-2/dominanta-sbornik/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "free"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. 461 printed pages; Ukhtomsky collected edition. The course explicitly permits any edition. Card marks this Public Domain text as free full reading; registration may be required. Exact course edition, territorial restrictions and personal entitlement are unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audio/SEupa0G0",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Virtual Reader version of the matching Dominanta text (277 printed pages). Synthetic narration, not a human recording. Full-access terms are unknown; free-excerpt wording is insufficient. Exact course edition, territorial restrictions and personal entitlement are unverified.",
+        "narration": "synthetic"
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/SEupa0G0",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official 2026-10-14 title/author/text readback reused unchanged: Dominanta, Ukhtomsky, AST, 277 printed pages. Course explicitly permits any edition. Matching card has a separately checked Virtual Reader version. Full-access terms remain unknown; excerpt and generic free wording are insufficient. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "fch_sergeev_dubynin_telo_cheloveka": [
@@ -1605,6 +1657,17 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 7 мин.; narrator Марина Даринова. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/anton-pavlovich-chehov/smert-chinovnika/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "free"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Death of a Government Clerk, Anton Chekhov, complete short story, 2 printed pages. Card marks Public Domain full text as free; registration may be required. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_5568f7c20141100f": [
@@ -1910,6 +1973,15 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 369 страниц. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "Юрайт",
+        "url": "https://urait.ru/bcode/412675",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official publisher title/author metadata and bcode read back 2026-10-15; bibliographic details corroborated by publisher-indexed card/catalogue. Zeigarnik, Pathopsychology; 2018 third revised edition, 367 pages, ISBN 978-5-9916-4469-3. Current anonymous page renders metadata only; full text, price and entitlement were not inspected. Access modes remain unknown; no free access or exact course-edition equivalence is claimed. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_hellinger_orders_of_love": [
@@ -2126,6 +2198,17 @@
         "checked_at": "2026-10-14",
         "access_modes": [],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/anna-varga/vvedenie-v-sistemnuyu-semejnuyu-psihoterapiyu/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. 199 printed pages; Anna Varga, full textbook. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_family_slide_07": [
@@ -2222,6 +2305,15 @@
           "purchase"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers a purchase; a downloadable file is not implied."
+      },
+      {
+        "format": "text",
+        "provider": "Юрайт",
+        "url": "https://urait.ru/bcode/600375",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official publisher title/author metadata and bcode read back 2026-10-15; bibliographic details corroborated by publisher-indexed card/catalogue. Sventsitsky, Organizational Psychology; 2026, 409 pages, ISBN 978-5-534-18935-3; not the 2005 course edition. Current anonymous page renders metadata only; full text, price and entitlement were not inspected. Access modes remain unknown; no free access or exact course-edition equivalence is claimed. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_tolstoy_war_and_peace": [
@@ -2278,6 +2370,39 @@
         "checked_at": "2026-10-14",
         "access_modes": [],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/lev-tolstoj/vojna-i-mir-2/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. War and Peace, Vladimir Levashyov, 70 h 24 min. Full novel, not abridged volumes or a radio play. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/lev-tolstoj/vojna-i-mir-v-4-h-tomah/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. War and Peace in four volumes, Alexander Klyukvin, 60 h 12 min. Full novel, not abridged volumes or selected chapters. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/lev-tolstoj/vojna-i-mir-7/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. War and Peace in four volumes, Denis Nekrasov, 61 h 43 min. Full novel, not abridged volumes or selected chapters. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_taylor_principles_scientific_management": [
@@ -2558,6 +2683,15 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "text",
+        "provider": "Юрайт",
+        "url": "https://urait.ru/bcode/519620",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official publisher title/author metadata and bcode read back 2026-10-15; bibliographic details corroborated by publisher-indexed card/catalogue. Zobkov, Psychology of Understanding in Fairy-Tale Therapy; 2023, 154 pages, ISBN 978-5-534-13639-5. Current anonymous page renders metadata only; full text, price and entitlement were not inspected. Access modes remain unknown; no free access or exact course-edition equivalence is claimed. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_moody_life_after_life": [
@@ -2615,6 +2749,15 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 5 час. 43 мин.; narrator Михаил Росляков. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/S6QypwCZ",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Raymond Moody, Life After Life Russian translation, full text card. Full-access terms are unknown; generic free wording/excerpt is insufficient. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_course_mention_f3a45bec2566afc2": [
@@ -2747,6 +2890,28 @@
         "checked_at": "2026-10-14",
         "access_modes": [],
         "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Ольга Андреева; Длительность 5 ч. 34 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/dzhon-mill/o-svobode-3/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. On Liberty, John Stuart Mill; Olga Andreeva, 5 h 35 min. Full standalone work. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/dzhon-mill/o-svobode-1/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "free"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. On Liberty, John Stuart Mill, 178 printed pages. Card marks Public Domain full text as free; registration may be required. The unavailable 2014 card is excluded. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_social_history02_freud": [
@@ -2769,6 +2934,26 @@
         "checked_at": "2026-10-11",
         "access_modes": [],
         "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. Full-access terms remain unknown; generic free wording is not evidence of unconditional full access."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/zigmund-frejd/psihologiya-mass-i-analiz-chelovecheskogo-ya/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "free"
+        ],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Group Psychology and the Analysis of the Ego, Sigmund Freud, 82 printed pages, Yakov Kogan translation. Card marks Public Domain full text as free; registration may be required. Other collected editions are excluded. Exact course edition, territorial restrictions and personal entitlement are unverified."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/UkYlKEby",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Group Psychology and the Analysis of the Ego, Sigmund Freud, 2022 Eksmo pocket edition, 250 printed pages; full standalone title card. Full-access terms remain unknown. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_social_history02_sighele": [
@@ -2848,6 +3033,17 @@
           "subscription"
         ],
         "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio. Russian translation Gibkoe soznanie: MIF publisher front matter identifies Carol Dweck, Mindset (2006); this is a translated offer, not the catalogued English edition."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/kerol-duek/gibkoe-soznanie-novyy-vzglyad-na-psihologiu-razvitiya-vzroslyh-6135081/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official 2026-10-15 full-text card: Carol Dweck, Gibkoe soznanie, 415 pages, MIF; priced purchase confirmed. Publisher front matter already identifies the original Mindset (2006); this is a Russian translation, not the English catalogue edition. Subscription is not inferred from a differently priced abonement selection. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_5643db88a7fa06b2": [
@@ -2871,6 +3067,15 @@
           "purchase"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 303 страницы. The version-specific offer block confirms priced purchase; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "Юрайт",
+        "url": "https://urait.ru/bcode/514264",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official publisher title/author metadata and bcode read back 2026-10-15; bibliographic details corroborated by publisher-indexed card/catalogue. Pochebut and Chiker, Organizational Social Psychology; 2023 second revised edition, 246 pages, ISBN 978-5-534-07752-0. Current anonymous page renders metadata only; full text, price and entitlement were not inspected. Access modes remain unknown; no free access or exact course-edition equivalence is claimed. Exact course edition, territorial restrictions and personal entitlement are unverified."
       }
     ],
     "lit_kagan_meanings_psychotherapy": [
