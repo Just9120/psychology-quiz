@@ -764,6 +764,18 @@
           "subscription"
         ],
         "access_review": "Official card readback 2026-10-15 confirms title/author/format. Seven Habits, Stephen Covey; Sergey Dvinyaninov, 15 h 55 min. Card lists full parts and chapters; short summaries and companion workbooks are excluded. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/stiven-kovi/sem-navykov-vysokoeffektivnyh-ludey-moschnye-instrumenty-razvi-4239285/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Seven Habits, Stephen Covey; 583-page full anniversary edition with additions by Sean Covey, not the short version or practice diary. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
     ],
     "lit_kreisman_straus_hate_you_dont_leave": [
@@ -1002,6 +1014,18 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 11 час. 31 мин.; narrator Олег Томилин. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/irina-yakutenko-1266/volya-i-samokontrol-kak-geny-i-mozg-meshaut-nam-borot-30014541/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Willpower and Self-Control, Irina Yakutenko; Oleg Tomilin, 11 h 31 min, full audio. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
     ],
     "lit_sechenov_reflexes_of_brain": [
@@ -1123,6 +1147,66 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 93 печатные страницы. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/mihail-bulgakov/sobache-serdce-620215/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Heart of a Dog, Mikhail Bulgakov; Ivan Litvinov, 4 h 29 min. Full standalone novella, not the three-novella collection. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/mihail-bulgakov/sobache-serdce-6569499/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Heart of a Dog, Mikhail Bulgakov; Boris Plotnikov, 4 h 07 min. Full standalone novella. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/mihail-bulgakov/sobache-serdce-63115648/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Heart of a Dog, Mikhail Bulgakov; Alexander Klyukvin, 3 h 47 min. Full standalone novella. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/mihail-bulgakov/sobache-serdce-173437/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Heart of a Dog, Mikhail Bulgakov; Alexander Andrienko, 3 h 46 min. Full standalone novella. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/mihail-bulgakov/sobache-serdce-74371136/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Heart of a Dog, Mikhail Bulgakov; Mikhail Gorevoy, 4 h 22 min. Full standalone novella. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
     ],
     "fch_simonov_emotsionalny_mozg": [
@@ -2230,6 +2314,18 @@
         "checked_at": "2026-10-11",
         "access_modes": [],
         "access_review": "Exact official work/title/author card offers Virtual Reader and full reading/listening. Synthetic narration is labelled separately from a recorded audiobook. Full-access terms, edition and personal/territorial entitlement remain unknown; generic free wording or an excerpt does not establish unconditional free access."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/raznoe-65383/sistemnaya-psihoterapiya-supruzheskih-par-9367539/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. 469 pages; the collected textbook in the course bibliography, with Anna Varga introduction confirmed in the official excerpt. This work itself is a collection, not a standalone chapter. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
     ],
     "lit_family_slide_08": [
@@ -2478,6 +2574,18 @@
           "subscription"
         ],
         "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/olga-rybina-32832730/delay-kak-kouch-70036954/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Do Like a Coach, Yuri Muradyan and Olga Rybina, full text; author attribution verified on the card. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
     ],
     "lit_muradyan_atlant_game": [
@@ -2954,6 +3062,29 @@
         "checked_at": "2026-10-15",
         "access_modes": [],
         "access_review": "Official card readback 2026-10-15 confirms title/author/format. Group Psychology and the Analysis of the Ego, Sigmund Freud, 2022 Eksmo pocket edition, 250 printed pages; full standalone title card. Full-access terms remain unknown. Exact course edition, territorial restrictions and personal entitlement are unverified."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/zigmund-freyd/psihologiya-mass-i-analiz-chelovecheskogo-ya-6718011/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "free"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Group Psychology and the Analysis of the Ego, Sigmund Freud; 100 pages. Official card labels this Public Domain full text free; registration/provider restrictions may apply. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+      },
+      {
+        "format": "audio",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/audiobook/zigmund-freyd/psihologiya-mass-i-analiz-chelovecheskogo-ya-63389397/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Group Psychology and the Analysis of the Ego, Sigmund Freud; Ruslan Drapalyuk, 3 h 19 min. Standalone full work, not the larger Freud anthology. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
     ],
     "lit_social_history02_sighele": [
@@ -3115,6 +3246,40 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 674 страницы. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+      }
+    ],
+    "lit_searls_inkblots": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/demion-sirlz/test-rorshaha-german-rorshah-ego-test-i-sila-videniya-62972896/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. 661 pages. Russian title Test Rorschach translates The Inkblots: Hermann Rorschach, His Iconic Test, and the Power of Seeing by Damion Searls; original title and copyright 2017 confirmed in official MyBook publisher front matter. Offered Russian translation is not the catalogued English edition. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/mfKfLM0A",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Full text card. Russian title Test Rorschach translates The Inkblots: Hermann Rorschach, His Iconic Test, and the Power of Seeing by Damion Searls; original title and copyright 2017 confirmed in official MyBook publisher front matter. Offered Russian translation is not the catalogued English edition. Full-access terms remain unknown; generic free wording/excerpt is insufficient. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+      },
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/demion-sirlz/test-rorshaha-german-rorshah-ego-test-i-sila-viden/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Official card readback 2026-10-15: author/title/full format matched. 549 printed pages. Russian title Test Rorschach translates The Inkblots: Hermann Rorschach, His Iconic Test, and the Power of Seeing by Damion Searls; original title and copyright 2017 confirmed in official MyBook publisher front matter. Offered Russian translation is not the catalogued English edition. Specific version offers subscription; trial is not unconditional free access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
     ]
   }

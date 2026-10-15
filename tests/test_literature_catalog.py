@@ -181,7 +181,7 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_moody_life_after_life', 'lit_course_mention_f3a45bec2566afc2',
         'lit_dweck_mindset', 'lit_mill_on_liberty', 'lit_social_history02_sighele',
         'lit_social_history02_freud', 'lit_5643db88a7fa06b2', 'lit_yalom_loves_executioner',
-        'lit_kagan_meanings_psychotherapy', 'lit_2055c41e007c80b8',
+        'lit_kagan_meanings_psychotherapy', 'lit_2055c41e007c80b8', 'lit_searls_inkblots',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
