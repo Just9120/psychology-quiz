@@ -182,6 +182,8 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_dweck_mindset', 'lit_mill_on_liberty', 'lit_social_history02_sighele',
         'lit_social_history02_freud', 'lit_5643db88a7fa06b2', 'lit_yalom_loves_executioner',
         'lit_kagan_meanings_psychotherapy', 'lit_2055c41e007c80b8', 'lit_searls_inkblots',
+        'lit_course_mention_62bd57a7137c573f', 'lit_consult4_rogers_new_approaches',
+        'lit_org_lecture_02',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
@@ -193,7 +195,9 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
     # Matching a title cannot substitute another author's book or a summary.
     assert 'lit_e5921321564edbc4' not in links  # Burlachuk, not Linde.
     assert 'lit_tereshonok_levina_psychology_pedagogy_part1' not in links
-    assert 'lit_org_lecture_02' not in links  # Schein, not Smart Reading.
+    # The full English fifth edition is now verified; summaries remain excluded.
+    assert all('/edgar-sheyn/' in offer['url'] and offer['format'] == 'text'
+               for offer in links['lit_org_lecture_02'])
     assert 'lit_hsieh_delivering_happiness' not in links  # Both checked editions unavailable.
     assert 'lit_leonhard_accentuated_personalities' not in links
     assert 'lit_917071a82ba4c6db' not in links  # Generic title, five-author edition not established.

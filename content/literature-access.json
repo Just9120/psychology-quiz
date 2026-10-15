@@ -3281,6 +3281,56 @@
         ],
         "access_review": "Official card readback 2026-10-15: author/title/full format matched. 549 printed pages. Russian title Test Rorschach translates The Inkblots: Hermann Rorschach, His Iconic Test, and the Power of Seeing by Damion Searls; original title and copyright 2017 confirmed in official MyBook publisher front matter. Offered Russian translation is not the catalogued English edition. Specific version offers subscription; trial is not unconditional free access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
       }
+    ],
+    "lit_course_mention_62bd57a7137c573f": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/richard-lazarus-33922132/emocii-i-adaptaciya-73964937/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Проверено 15.10.2026 по официальной карточке. Полный русский перевод Emotion and Adaptation (1991): «Эмоции и адаптация», 608 страниц, 2026, ISBN 978-601-12-7372-5. Оригинальное название и copyright Oxford University Press подтверждены выходными данными официального фрагмента. Карточка предлагает отдельную покупку; чтение на сайте/в приложении, скачивание файла ограничено. Доступность в регионе и личные права доступа не проверены; фрагмент не означает бесплатного полного доступа."
+      }
+    ],
+    "lit_consult4_rogers_new_approaches": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/karl-rodzhers/konsultirovanie-i-psihoterapiya-noveyshie-podhody-v-psiholog-74418596/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Проверено 15.10.2026 по официальной карточке. «Консультирование и психотерапия. Новейшие подходы в психологической практике», полный отдельный том 1, 201 страница, перевод 2015, электронное издание 2016, ISBN 978-5-94193-880-3; название подтверждено титульными/выходными страницами официального фрагмента. Исходная работа опубликована в двух томах: для полного комплекта нужна также ссылка «Случай Герберта Брайена» в этой карточке. Отдельная покупка тома, чтение на сайте/в приложении без скачивания файла. Доступность в регионе и личные права доступа не проверены; фрагмент не означает бесплатного полного доступа."
+      },
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/karl-rodzhers/konsultirovanie-i-psihoterapiya-sluchay-gerberta-brayena-74418606/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Проверено 15.10.2026 по официальной карточке. «Консультирование и психотерапия. Случай Герберта Брайена», полный отдельный том 2, 186 страниц, перевод 2016, ISBN 978-5-94193-881-0. Издатель прямо называет его заключительной частью исходной работы, опубликованной отдельно; том 1 «Новейшие подходы в психологической практике» также связан с этой карточкой. Не самостоятельная замена всей работы. Отдельная покупка тома, чтение на сайте/в приложении без скачивания файла. Доступность в регионе и личные права доступа не проверены; фрагмент не означает бесплатного полного доступа."
+      }
+    ],
+    "lit_org_lecture_02": [
+      {
+        "format": "text",
+        "provider": "Литрес",
+        "url": "https://www.litres.ru/book/edgar-sheyn/organizational-culture-and-leadership-28280940/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-15",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Проверено 15.10.2026 по официальной карточке. Полный английский текст Organizational Culture and Leadership, пятое переработанное издание, 411 страниц, 2017, ISBN 9781119212133; авторы Edgar H. Schein и Peter A. Schein, John Wiley & Sons. Карточка прямо описывает пятое издание той же работы; это оригинал на английском, не русский перевод и не краткое изложение Smart Reading. Конкретное издание курса неизвестно. Отдельная покупка; чтение на сайте/в приложении, скачивание файла ограничено. Доступность в регионе и личные права доступа не проверены; фрагмент не означает бесплатного полного доступа."
+      }
     ]
   }
 }
