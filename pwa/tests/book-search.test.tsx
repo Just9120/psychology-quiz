@@ -4,6 +4,23 @@ import userEvent from '@testing-library/user-event'
 import { BookSearch } from '../src/BookSearch'
 
 describe('BookSearch shared by PWA and Mini App', () => {
+  it('separates additional catalogue searches from confirmed book offers and safely encodes the query', async () => {
+    const user = userEvent.setup()
+    const query = '"Смысл & язык" И. Автор скачать'
+    const view = render(<BookSearch search={{ query, url: 'https://www.google.com/search?q=test' }} />)
+    expect(screen.queryByRole('link', { name: 'МИФ ↗' })).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Поиск в других каталогах' }))
+    for (const name of ['МИФ ↗', 'Альпина ↗', 'Питер ↗']) {
+      const link = screen.getByRole('link', { name })
+      const url = new URL(link.getAttribute('href')!)
+      expect(url.searchParams.get(name === 'МИФ ↗' ? 'query' : 'q')).toBe('"Смысл & язык" И. Автор')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+      expect(link).toHaveAttribute('target', '_blank')
+    }
+    expect(screen.getByText(/В каталоге могут быть бумажные книги/)).toBeVisible()
+    view.rerender(<BookSearch search={{ query: 'Другая', url: 'https://www.google.com/' }} />)
+    expect(screen.getByRole('button', { name: 'Поиск в других каталогах' })).toHaveAttribute('aria-expanded', 'false')
+  })
   it('shows a selectable exact query and outbound search without treating it as a book offer', () => {
     const query = '"Смысл & язык" И. Автор скачать'
     render(<BookSearch search={{ query, url: 'https://www.google.com/search?q=test' }} />)

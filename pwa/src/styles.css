@@ -213,6 +213,12 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .provider-searches > span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 10px; }
 .provider-search { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 9px; color: var(--green); text-decoration: none; font-size: 13px; }
 .provider-search:hover { background: var(--soft-green); border-color: var(--green); }
+.sources-menu { margin-top: 12px; min-width: 0; }
+.sources-trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.sources-kebab { font-size: 24px; line-height: 1; }
+.sources-panel { margin-top: 10px; padding: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
+.sources-panel .book-offer-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.sources-panel .book-offer { background: var(--white, #fff); }
 .literature-search .field textarea { width: 100%; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); font: inherit; font-weight: 400; resize: vertical; }
 .reading-order > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--green); font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; }
 .reading-order > summary::-webkit-details-marker { display: none; }

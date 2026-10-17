@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { SourcesMenu } from './SourcesMenu'
 
 export function BookSearch({ search }: { search?: { query: string; url: string } }) {
   const input = useRef<HTMLTextAreaElement>(null)
@@ -26,7 +27,13 @@ export function BookSearch({ search }: { search?: { query: string; url: string }
       <a className="provider-search" href={`https://www.litres.ru/search/?q=${query}`} target="_blank" rel="noopener noreferrer">Литрес ↗</a>
       <a className="provider-search" href={`https://mybook.ru/search/?q=${query}`} target="_blank" rel="noopener noreferrer">MyBook ↗</a>
       <a className="provider-search" href={`https://books.yandex.ru/search/all/${query}`} target="_blank" rel="noopener noreferrer">Яндекс Книги ↗</a>
-    </div><p className="hint">Это поиск, а не подтверждённые версии книги. Сверьте автора и формат.</p></div>
+    </div>
+      <SourcesMenu key={search.query} label="Поиск в других каталогах"><div className="button-row">
+        <a className="provider-search" href={`https://www.mann-ivanov-ferber.ru/catalog/search/?query=${query}`} target="_blank" rel="noopener noreferrer">МИФ ↗</a>
+        <a className="provider-search" href={`https://alpinabook.ru/search/?q=${query}`} target="_blank" rel="noopener noreferrer">Альпина ↗</a>
+        <a className="provider-search" href={`https://www.piter.com/collection/all?q=${query}`} target="_blank" rel="noopener noreferrer">Питер ↗</a>
+      </div><p className="hint">В каталоге могут быть бумажные книги. Проверьте наличие электронной или аудиоверсии.</p></SourcesMenu>
+      <p className="hint">Это поиск, а не подтверждённые версии книги. Сверьте автора и формат.</p></div>
     <label className="field">Поисковый запрос книги
       <textarea ref={input} readOnly value={search.query} rows={2} />
     </label>

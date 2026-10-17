@@ -275,6 +275,17 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 1 412 печатных страниц. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "Питер",
+        "url": "https://www.piter.com/collection/all/product/osnovy-obschey-psihologii-5e43d1",
+        "access": "provider_terms",
+        "checked_at": "2026-10-17",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official publisher card readback 2026-10-17: Exact Russian title and S. L. Rubinstein. Separate electronic PDF offer shows a purchase price (499 RUB) and download button. Same work, not a guarantee of exact course edition. Personal entitlement and territorial access are unverified; no account or purchase used."
       }
     ],
     "lit_consult_lecture_02": [
@@ -1543,6 +1554,17 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 584 страницы. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "Альпина",
+        "url": "https://alpinabook.ru/catalog/book-novye-rubezhi-chelovecheskoy-prirody/",
+        "access": "provider_terms",
+        "checked_at": "2026-10-17",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official publisher card readback 2026-10-17: Russian Abraham Maslow, 498 pages, 2011, EPUB/MOBI. Publisher states original The Farther Reaches of Human Nature, matching the work. Electronic offer is priced at 399 RUB with add-to-cart. Generic subscription/zero-price marketing does not prove free full access or subscription eligibility for this book. Personal entitlement and territorial access are unverified; no account or purchase used."
       }
     ],
     "lit_freud_psychopathology_everyday_life": [
@@ -1623,6 +1645,17 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 384 печатные страницы. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "Питер",
+        "url": "https://www.piter.com/collection/all/product/psihologiya-perezhivaniya",
+        "access": "provider_terms",
+        "checked_at": "2026-10-17",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official publisher card readback 2026-10-17: Exact Russian title and F. E. Vasilyuk, 288 pages, ISBN 978-5-4461-4127-2. Publisher explicitly identifies a new expanded edition with appendix articles, 2026. Separately priced PDF+EPUB download (449 RUB). Not presented as the exact historical course edition. Personal entitlement and territorial access are unverified; no account or purchase used."
       }
     ],
     "lit_lombroso_genius_insanity": [
@@ -1993,6 +2026,17 @@
           "subscription"
         ],
         "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 180 страниц. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+      },
+      {
+        "format": "text",
+        "provider": "Питер",
+        "url": "https://www.piter.com/collection/all/product/vyhod-iz-detskoy-travmy-obnyat-vnutrennego-rebenka",
+        "access": "provider_terms",
+        "checked_at": "2026-10-17",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official publisher card readback 2026-10-17: Russian Maria Osipova, 240 pages, ISBN 978-5-4461-2296-7. The separate electronic PDF block offers a priced download (349 RUB); paper stock is not inferred as digital availability. Personal entitlement and territorial access are unverified; no account or purchase used."
       }
     ],
     "lit_3ecf3ffbaa287019": [
@@ -2080,6 +2124,17 @@
           "subscription"
         ],
         "access_review": "Official book-specific card checked for author/work/format. Exact catalog edition, regional restrictions and personal entitlement remain unverified. Card offers purchase and subscription; an excerpt or trial is not unconditional free full access."
+      },
+      {
+        "format": "text",
+        "provider": "Питер",
+        "url": "https://www.piter.com/collection/all/product/poryadki-lyubvi",
+        "access": "provider_terms",
+        "checked_at": "2026-10-17",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official publisher card readback 2026-10-17: Russian Bert Hellinger, 384 pages, ISBN 978-5-4461-4396-2, 2026 printing. Electronic offer is separately priced (449 RUB) and explicitly online-reading only. No downloadable file or free full access claimed. Personal entitlement and territorial access are unverified; no account or purchase used."
       }
     ],
     "lit_a851d2e2d491dfed": [
@@ -3467,6 +3522,32 @@
         "checked_at": "2026-10-17",
         "access_modes": [],
         "access_review": "Полная русская версия «Мозг и его потребности 2.0. От питания до признания» Вячеслава Дубынина. Издатель прямо называет её обновлённым изданием бестселлера; исходное название/автор совпадают, официальный фрагмент содержит copyright 2024. Поэтому это новая редакция того же произведения, а не другая книга или саммари. Отличается от редакции курса; полное совпадение текста не утверждается. Полная аудиокнига 19ч 11мин, Алексей Багдасаров, БОМБОРА/Эксмо, 2024. Конкретные условия доступа не подтверждены: бесплатный отрывок и общее слово «бесплатно» в title не равны бесплатной полной версии. Личный/региональный доступ не проверялся."
+      }
+    ],
+    "lit_vasilyuk_understanding_psychotherapy_system": [
+      {
+        "format": "text",
+        "provider": "Питер",
+        "url": "https://www.piter.com/collection/all/product/ponimayuschaya-psihoterapiya-kak-psihotehnicheskaya-sistema",
+        "access": "provider_terms",
+        "checked_at": "2026-10-17",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official publisher card readback 2026-10-17: Exact Russian title and F. E. Vasilyuk, 448 pages, ISBN 978-5-4461-3912-5. Electronic PDF block has a price (499 RUB) and download button. Printed-card year 2027 is reported by the publisher; exact course edition equivalence is not asserted. Personal entitlement and territorial access are unverified; no account or purchase used."
+      }
+    ],
+    "psf_aleksandrov_psihofiziologiya": [
+      {
+        "format": "text",
+        "provider": "Питер",
+        "url": "https://www.piter.com/collection/all/product/psihofiziologiya-uchebnik-dlya-vuzov-5-e-izdanie",
+        "access": "provider_terms",
+        "checked_at": "2026-10-17",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Official publisher card readback 2026-10-17: Russian textbook edited by Yu. I. Aleksandrov, fifth revised edition, 528 pages, ISBN 978-5-4461-1767-3. Separate electronic PDF offer is priced (899 RUB), explicitly online-reading only. Not N. N. Danilova, not a downloadable PDF entitlement, not necessarily the course edition. Personal entitlement and territorial access are unverified; no account or purchase used."
       }
     ]
   }

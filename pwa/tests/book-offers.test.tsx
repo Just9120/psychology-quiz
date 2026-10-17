@@ -2,8 +2,40 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { BookOffers } from '../src/BookOffers'
 import type { LiteratureAccessLink } from '../src/types'
+import userEvent from '@testing-library/user-event'
 
 describe('BookOffers format-specific conditions', () => {
+  it('keeps a sole publisher format visible and collapses alternatives with keyboard and outside dismissal', async () => {
+    const user = userEvent.setup()
+    const base = { access: 'provider_terms' as const, checked_at: '2026-10-17', access_modes: ['purchase' as const] }
+    const links: LiteratureAccessLink[] = [
+      { ...base, format: 'text', provider: 'Литрес', url: 'https://www.litres.ru/book/author/work/' },
+      { ...base, format: 'text', provider: 'Питер', url: 'https://www.piter.com/product/work' },
+      { ...base, format: 'audio', provider: 'МИФ', url: 'https://www.mann-ivanov-ferber.ru/catalog/product/work/' },
+    ]
+    const view = render(<BookOffers links={links} />)
+    expect(screen.getByRole('link', { name: 'Слушать · МИФ' })).toBeVisible()
+    expect(screen.queryByRole('link', { name: 'Читать · Питер' })).not.toBeInTheDocument()
+    const toggle = screen.getByRole('button', { name: 'Ещё источники (1)' })
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    const extra = screen.getByRole('link', { name: 'Читать · Питер' })
+    expect(extra).toHaveAttribute('href', links[1].url)
+    expect(extra).toHaveAttribute('rel', 'noopener noreferrer')
+    await user.tab()
+    expect(extra).toHaveFocus()
+    await user.keyboard('{Escape}')
+    expect(toggle).toHaveFocus()
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await user.click(toggle)
+    await user.click(screen.getByRole('heading', { name: 'Читать или слушать' }))
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await user.click(toggle)
+    view.rerender(<BookOffers links={[links[1], links[2]]} />)
+    expect(screen.queryByRole('button', { name: /Ещё источники/ })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Читать · Питер' })).toBeVisible()
+    expect(screen.getByRole('link', { name: 'Слушать · МИФ' })).toBeVisible()
+  })
   it('distinguishes a virtual reader from a narrated audiobook without claiming free access', () => {
     const base = { format: 'audio' as const, provider: 'Яндекс Книги', access: 'provider_terms' as const, checked_at: '2026-10-11' }
     const links: LiteratureAccessLink[] = [
