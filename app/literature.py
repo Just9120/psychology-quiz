@@ -62,6 +62,12 @@ def _valid_offer_target(provider: object, fmt: object, parsed) -> bool:
         return fmt == "text" and parsed.netloc == "urait.ru" and re.fullmatch(r"/bcode/[0-9]+", parsed.path) is not None
     if provider == "MyBook":
         return parsed.netloc == "mybook.ru" and re.fullmatch(r"/author/[a-z0-9-]+/[a-z0-9-]+/", parsed.path) is not None
+    if provider == "МИФ":
+        return parsed.netloc == "www.mann-ivanov-ferber.ru" and re.fullmatch(r"/catalog/product/[a-z0-9_-]+/?", parsed.path) is not None
+    if provider == "Альпина":
+        return parsed.netloc == "alpinabook.ru" and re.fullmatch(r"/catalog/(?:book|audiobook)-[a-z0-9-]+/?", parsed.path) is not None
+    if provider == "Питер":
+        return parsed.netloc == "www.piter.com" and re.fullmatch(r"(?:/collection/[A-Za-z0-9_-]+)?/product/[a-z0-9-]+/?", parsed.path) is not None
     if provider == "Яндекс Книги":
         kind = "books" if fmt == "text" else "(?:audiobooks|audio)"
         return parsed.netloc == "books.yandex.ru" and re.fullmatch(r"/" + kind + r"/[A-Za-z0-9]+/?", parsed.path) is not None

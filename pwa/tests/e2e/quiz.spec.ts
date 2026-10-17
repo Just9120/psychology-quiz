@@ -46,6 +46,18 @@ test('styled topic menus and reading cards work by keyboard and touch without ov
   await page.locator('.literature-title').filter({ hasText: 'Мозг. Как он устроен' }).click()
   await expect(page.getByRole('link', { name: 'Читать · MyBook' })).toBeVisible()
   await expect(page.getByRole('link', { name: 'Читать · Яндекс Книги' })).toBeVisible()
+  const moreCatalogs = page.getByRole('button', { name: 'Поиск в других каталогах' })
+  await moreCatalogs.click()
+  for (const name of ['МИФ ↗', 'Альпина ↗', 'Питер ↗']) {
+    await expect(page.getByRole('link', { name })).toBeVisible()
+  }
+  await page.getByRole('link', { name: 'Питер ↗' }).press('Escape')
+  await expect(moreCatalogs).toBeFocused()
+  await expect(moreCatalogs).toHaveAttribute('aria-expanded', 'false')
+  await moreCatalogs.click()
+  await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-more-catalogs.png`, fullPage: true })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+  await moreCatalogs.click()
   await page.getByRole('button', { name: 'Скопировать запрос' }).click()
   await expect(page.getByText('Поисковый запрос скопирован.', { exact: true })).toBeVisible()
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(await page.getByRole('textbox', { name: 'Поисковый запрос книги' }).inputValue())

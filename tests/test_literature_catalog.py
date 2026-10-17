@@ -185,6 +185,7 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_course_mention_62bd57a7137c573f', 'lit_consult4_rogers_new_approaches',
         'lit_org_lecture_02', 'lit_b76317a4d7bec59d',
         'lit_newton_principia_1989', 'lit_cefdc62fe30c6d9d', 'fch_dubynin_mozg_i_ego_potrebnosti',
+        'lit_vasilyuk_understanding_psychotherapy_system', 'psf_aleksandrov_psihofiziologiya',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
@@ -271,6 +272,40 @@ def test_curated_offers_allow_multiple_text_providers_and_reject_wrong_targets(m
         literature.load_access_links.cache_clear()
         with pytest.raises(ValueError):
             literature.load_access_links()
+    finally:
+        literature.load_access_links.cache_clear()
+
+
+def test_publisher_offers_accept_only_direct_cards_on_exact_hosts(monkeypatch):
+    import pytest
+    from urllib.parse import urlsplit
+    raw = {"schema_version": 1, "works": {"work": []}}
+    monkeypatch.setattr(literature, '_load_json_file', lambda path: raw)
+    cards = {
+        "МИФ": "https://www.mann-ivanov-ferber.ru/catalog/product/being-human/",
+        "Альпина": "https://alpinabook.ru/catalog/book-potok/",
+        "Питер": "https://www.piter.com/collection/all/product/psihologiya-i-vremya",
+    }
+    try:
+        for provider, url in cards.items():
+            parsed = urlsplit(url)
+            for fmt in ('text', 'audio'):
+                offer = {"provider": provider, "format": fmt, "url": url, "access": "provider_terms", "checked_at": "2026-10-17"}
+                raw['works']['work'] = [offer]
+                literature.load_access_links.cache_clear()
+                assert literature.load_access_links()['work'] == [offer]
+                for bad in (
+                    url.replace(parsed.netloc, parsed.netloc + '.evil.example'),
+                    url.replace(parsed.netloc, 'user@' + parsed.netloc),
+                    url + '?redirect=elsewhere', url + '#download', url.replace('https:', 'http:'),
+                    'https://' + parsed.netloc + '/search/',
+                    'https://' + parsed.netloc + '/catalog/product/../account',
+                    'https://' + parsed.netloc + '/catalog/product/%2e%2e',
+                ):
+                    raw['works']['work'] = [{**offer, 'url': bad}]
+                    literature.load_access_links.cache_clear()
+                    with pytest.raises(ValueError):
+                        literature.load_access_links()
     finally:
         literature.load_access_links.cache_clear()
 

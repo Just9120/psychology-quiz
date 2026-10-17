@@ -71,6 +71,8 @@ Routine entrypoint — [deploy.sh](../deploy.sh), переданный по veri
 - Path: `/`
 - Static assets directory in `wrangler.toml`: `./miniapp-react`
 
+Node.js закреплён корневым [.node-version](../.node-version) на той же версии22.23.1, что и frontend CI; Workers Builds читает этот файл при checkout. Build image default не является частью воспроизводимого контракта. Установка должна работать и с npm10.9.2 образа Cloudflare, и с npm12.0.2 CI: общий override sharp0.35.5 в [package.json](../pwa/package.json) сохраняет прежнюю исправленную версию lockfile. Вложенный miniflare override несовместим с npm10 clean install; не возвращать sharp0.35.4 и не обходить npm ci через npm install. Успешный CI не заменяет actual Cloudflare build и public asset readback. Python auto-detection корневых requirements остаётся свойством внешнего build image, а не требованием Mini App runtime.
+
 `miniapp-react/` собирается из pinned frontend dependencies и сверяется с tracked
 assets в CI до merge. Не заменять deploy command на bare `npx wrangler`: при
 отсутствии root package установка может получить незакреплённую версию. Владелец
