@@ -184,6 +184,7 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_kagan_meanings_psychotherapy', 'lit_2055c41e007c80b8', 'lit_searls_inkblots',
         'lit_course_mention_62bd57a7137c573f', 'lit_consult4_rogers_new_approaches',
         'lit_org_lecture_02', 'lit_b76317a4d7bec59d',
+        'lit_newton_principia_1989', 'lit_cefdc62fe30c6d9d', 'fch_dubynin_mozg_i_ego_potrebnosti',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
