@@ -71,10 +71,10 @@ export function ReadingSummary({ items, allItems = items, busy, onSelect, showAc
     <p role="status">Прочитано {read} из {groups.length}</p>
     {conflicts > 0 && <p className="muted">У {conflicts} работ отметки в учебных списках различаются. Они не включены в число прочитанных до согласования отметок.</p>}
     <h2>Сейчас читаю</h2>
-    {current.length ? <ul>{current.map(item => <li key={item.id}>{showActions ? <button className="text-button" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button> : <span>{item.title ?? 'Книга'}</span>}</li>)}</ul> : <p className="muted">В выбранной теме нет книг со статусом «Читаю».</p>}
+    {current.length ? <ul>{current.map(item => <li key={item.id}>{showActions ? <button className="text-button" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Материал'}</button> : <span>{item.title ?? 'Материал'}</span>}</li>)}</ul> : <p className="muted">В выбранной теме нет материалов со статусом «Читаю».</p>}
     {next && <section aria-label="Следующий шаг чтения">
       <h2>Следующий шаг</h2>
-      <button className="text-button" disabled={busy} onClick={() => onSelect(next.id)}>{continuing ? 'Продолжить' : 'Начать'} «{next.title ?? 'Книга'}»</button>
+      <button className="text-button" disabled={busy} onClick={() => onSelect(next.id)}>{continuing ? 'Продолжить' : 'Начать'} «{next.title ?? 'Материал'}»</button>
       <p className="muted">{continuing ? readingContinuationReason(next) : `Рекомендация агента. ${next.why_read}${next.importance_source === 'teacher' ? (['video', 'article', 'chapter', 'other'].includes(next.type ?? '') ? ' Приоритет материала — из учебного списка.' : ' Приоритет книги — из учебного списка.') : ''}`}</p>
     </section>}
   </aside>

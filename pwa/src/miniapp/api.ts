@@ -13,7 +13,7 @@ const routes = new Set([
 ])
 
 declare global {
-  interface Window { Telegram?: { WebApp?: { initData?: string; ready?: () => void; expand?: () => void } } }
+  interface Window { Telegram?: { WebApp?: { initData?: string; ready?: () => void; expand?: () => void; BackButton?: { show: () => void; hide: () => void; onClick: (callback: () => void) => void; offClick: (callback: () => void) => void } } } }
 }
 
 export class MiniAppError extends Error {
@@ -85,4 +85,4 @@ export const miniApi = {
 }
 
 export type MiniLiteratureTopic = { topic_id: string; title: string; module?: string; modules?: string[] }
-export type MiniLiteratureItem = { module?: string; book_search?: { query: string; url: string }; id: string; work_id?: string; topic_id: string; reading_topics?: { id: string; title: string }[]; reading_level?: string; prerequisites?: string[]; curriculum_topics?: { id: string; title: string }[]; title?: string; authors?: string[]; year?: number | null; why_read?: string; metadata_warnings?: string[]; importance?: 'basic' | 'important' | 'additional' | 'advanced' | null; importance_source?: 'teacher' | 'agent' | null; access_links?: { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }[]; source?: { title?: string; citation?: string }; user_state?: { reading_status: ReadingStatus; progress_percent: number | null; updated_at?: string } | null }
+export type MiniLiteratureItem = { type?: string; module?: string; book_search?: { query: string; url: string }; id: string; work_id?: string; topic_id: string; reading_topics?: { id: string; title: string }[]; reading_level?: string; prerequisites?: string[]; curriculum_topics?: { id: string; title: string }[]; title?: string; authors?: string[]; year?: number | null; why_read?: string; metadata_warnings?: string[]; importance?: 'basic' | 'important' | 'additional' | 'advanced' | null; importance_source?: 'teacher' | 'agent' | null; access_links?: { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }[]; source?: { title?: string; citation?: string }; user_state?: { reading_status: ReadingStatus; progress_percent: number | null; updated_at?: string } | null }

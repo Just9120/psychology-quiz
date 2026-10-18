@@ -34,3 +34,13 @@ it('shows the route, reasons, status and external-topic preparation with working
   await user.click(within(row).getByRole('button', { name: 'Практическая книга' }))
   expect(select).toHaveBeenLastCalledWith('book')
 })
+
+it('distinguishes equal titles by authors and labels a mixed sequence as materials', async () => {
+  const base = { title: 'Психология личности', reading_level: 'core', importance: 'basic', importance_source: 'agent', why_read: 'Изучить основы', prerequisites: [] }
+  const items = [{ ...base, id: 'first', authors: ['Первый автор'] }, { ...base, id: 'second', authors: ['Другой автор'], type: 'article' }]
+  render(<ReadingOrder items={items} allItems={items} busy={false} onSelect={vi.fn()} />)
+  await userEvent.setup().click(screen.getByText('Рекомендуемая последовательность чтения'))
+  expect(screen.getByText('Материалов: 2')).toBeVisible()
+  expect(screen.getByText('Первый автор')).toBeVisible()
+  expect(screen.getByText('Другой автор')).toBeVisible()
+})

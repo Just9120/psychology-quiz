@@ -1,6 +1,6 @@
 import type { ReadingStatus } from './types'
 
-type Item = { id: string; work_id?: string; title?: string; importance?: string | null; importance_source?: string | null; reading_level?: string | null; why_read?: string | null; prerequisites?: string[]; user_state?: { reading_status: ReadingStatus } | null }
+type Item = { id: string; work_id?: string; title?: string; authors?: string[]; type?: string; importance?: string | null; importance_source?: string | null; reading_level?: string | null; why_read?: string | null; prerequisites?: string[]; user_state?: { reading_status: ReadingStatus } | null }
 const stages: Record<string, string> = { foundation: 'Начать с основ', core: 'Основное чтение', applied: 'Применение', deepening: 'Углубление', advanced: 'Продвинутый уровень', reference: 'Справочные материалы' }
 const importance: Record<string, number> = { basic: 0, important: 1, additional: 2, advanced: 3 }
 const statuses: Record<ReadingStatus, string> = { not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', deferred: 'Отложено' }
@@ -35,18 +35,24 @@ export function readingOrder(items: Item[], allItems: Item[] = items) {
 
 export function ReadingOrder({ items, allItems, busy, onSelect }: { items: Item[]; allItems: Item[]; busy: boolean; onSelect: (id: string) => void }) {
   const order = readingOrder(items, allItems)
-  return <details className="panel reading-order"><summary><span>Рекомендуемая последовательность чтения</span><span className="route-count">{order.length} книг</span></summary>
-    <p className="reading-route-intro">Рекомендация агента: начните с подготовки, затем двигайтесь по этапам. Книги одного этапа без зависимостей можно выбирать по интересу.</p>
-    {order.length ? <ol className="reading-steps">{order.map(({ item, stage, prerequisites }, index) => <li className="reading-step" key={item.work_id ?? item.id}>
-      <span className="step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-      <div className="step-content"><div className="step-heading"><button className="text-button reading-step-title" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Книга'}</button>
+  // Group adjacent stages only: regrouping the sorted list could move a prerequisite after its dependent.
+  const groups: { stage: string; start: number; entries: typeof order }[] = []
+  order.forEach(entry => {
+    if (groups.at(-1)?.stage !== entry.stage) groups.push({ stage: entry.stage, start: groups.reduce((sum, group) => sum + group.entries.length, 0), entries: [] })
+    groups.at(-1)!.entries.push(entry)
+  })
+  return <details className="panel reading-order"><summary><span>Рекомендуемая последовательность чтения</span><span className="route-count">Материалов: {order.length}</span></summary>
+    <p className="reading-route-intro">Рекомендация агента: начните с подготовки, затем двигайтесь по этапам. Материалы одного этапа без зависимостей можно выбирать по интересу.</p>
+    {order.length ? <>{groups.map((group, groupIndex) => <details className="reading-stage" key={`${group.stage}:${group.start}`} open={groupIndex === 0}><summary>{group.stage} · {group.entries.length}</summary><ol className="reading-steps" start={group.start + 1}>{group.entries.map(({ item, stage, prerequisites }, index) => <li className="reading-step" key={item.work_id ?? item.id}>
+      <span className="step-number" aria-hidden="true">{String(group.start + index + 1).padStart(2, '0')}</span>
+      <div className="step-content"><div className="step-heading"><button className="text-button reading-step-title" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Материал'}</button>
         <span className={`reading-status status-${item.user_state?.reading_status ?? 'not_started'}`}>{statuses[item.user_state?.reading_status ?? 'not_started']}</span></div>
-        <p className="step-stage">{stage}{item.importance_source === 'teacher' ? ' · приоритет преподавателя' : ''}</p>
+        {item.authors?.length ? <p className="step-authors">{item.authors.join(', ')}</p> : null}<p className="step-stage">{stage}{item.importance_source === 'teacher' ? ' · приоритет преподавателя' : ''}</p>
         <details className="step-details"><summary>Зачем читать{prerequisites.length > 0 ? ' и что прочитать до этого' : ''}</summary><p>{item.why_read}</p>
           {prerequisites.length > 0 && <p>Подготовка: {prerequisites.map((required, position) => <span key={required.id}>{position > 0 && ', '}<button className="text-button" disabled={busy} onClick={() => onSelect(required.id)}>{required.title ?? 'Книга'}</button>{required.user_state?.reading_status === 'read' && ' ✓'}</span>)}</p>}
         </details>
       </div>
-    </li>)}</ol> : <p>Для выбранной темы последовательность пока не определена.</p>}
+    </li>)}</ol></details>)}</> : <p>Для выбранной темы последовательность пока не определена.</p>}
     <p className="hint route-footnote">Остальные материалы доступны в каталоге ниже.</p>
   </details>
 }

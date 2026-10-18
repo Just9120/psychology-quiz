@@ -3,7 +3,7 @@ import type { MailProof } from './types'
 // Run before rendering or fetching anything. No storage, analytics or query transport.
 export function takeMailProof(): MailProof | null {
   const fragment = window.location.hash.slice(1)
-  if (!fragment) return null
+  if (!fragment || fragment.startsWith('/')) return null
   window.history.replaceState(null, '', window.location.pathname)
   const params = new URLSearchParams(fragment)
   for (const purpose of ['verify', 'recover'] as const) {

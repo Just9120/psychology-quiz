@@ -1,3 +1,4 @@
+import { chooseMenu } from './choose-menu'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
@@ -63,7 +64,7 @@ it('keeps unmapped evidence visible and filters history with the chosen curricul
   render(<ProgressView data={data} history={{ ok: true, items: [], next_before: null }} detail={null} busy={false} scope="unmapped" onScope={scope} onRefresh={vi.fn()} onMore={vi.fn()} onOpen={vi.fn()} onBack={vi.fn()} onMoreAnswers={vi.fn()} />)
   expect(screen.getByText(/не приписываются вложенной теме нового банка/)).toBeVisible()
   expect(screen.getByText(/результат карточки относится ко всей попытке/)).toBeVisible()
-  await userEvent.selectOptions(screen.getByRole('combobox'), 'topic:t_111111111111')
+  await chooseMenu(userEvent.setup(), screen.getByRole('combobox'), 'topic:t_111111111111')
   expect(scope).toHaveBeenCalledWith('topic:t_111111111111')
   await userEvent.click(screen.getByRole('button', { name: 'Все попытки' }))
   expect(scope).toHaveBeenCalledWith(null)
@@ -104,4 +105,17 @@ it('clears personal progress when authentication expires on a later page', async
   await userEvent.click(screen.getByRole('button', { name: 'Ещё попытки' }))
   expect(await screen.findByRole('button', { name: 'Войти в пространство' })).toBeVisible()
   expect(screen.queryByText('0 из 1 ответов')).not.toBeInTheDocument()
+})
+
+it('renders the saved case situation, conditions and rationale in history and errors', async () => {
+  const item = { ...answer, case: { situation: 'Исходная ситуация клиента', approach: 'Уточнение запроса', conditions: ['Исходное условие'], ambiguity: 'Учитываем контекст', option_rationales: ['Первый вариант: уточнение', 'Второй вариант: преждевременный совет'] } }
+  const view = render(<AnswerReview item={item} />)
+  expect(screen.getByText('Исходная ситуация клиента')).toBeVisible()
+  expect(screen.getByText('Исходное условие')).toBeVisible()
+  expect(screen.getByText('Второй вариант: преждевременный совет')).toBeVisible()
+  view.unmount()
+  render(<ErrorsView data={{ ...errors, items: [{ ...errors.items[0], case: item.case }] }} busy={false} onRefresh={vi.fn()} onMore={vi.fn()} onTrain={vi.fn()} onResume={vi.fn()} />)
+  await userEvent.setup().click(screen.getByText('Разобрать ответ'))
+  expect(screen.getByText('Исходная ситуация клиента')).toBeVisible()
+  expect(screen.getByText('Учитываем контекст')).toBeVisible()
 })

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { api, ApiError, errorMessage } from './api'
+import { readRoute, writeRoute, type Route, type Section } from './navigation'
 import { AuthScreen } from './AuthScreen'
 import { AccountView } from './AccountView'
 import { Brand, Icon } from './Icon'
@@ -35,7 +36,18 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [pending, setPending] = useState<Answer | null>(null)
   const [uncertainSetup, setUncertainSetup] = useState(false)
   const [glossaryUpdateBlocked, setGlossaryUpdateBlocked] = useState(false)
-  const [view, setView] = useState<'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'account' | 'progress' | 'errors' | 'reset' | 'glossary' | 'literature' | 'learning' | 'ownerStats' | 'ownerContent'>('setup')
+  const [view, setCurrentView] = useState<'quiz' | 'setup' | 'homework' | 'homeworkQuiz' | 'account' | 'progress' | 'errors' | 'reset' | 'glossary' | 'literature' | 'learning' | 'ownerStats' | 'ownerContent'>('setup')
+  const navigationReady = useRef(false)
+  const restoringNavigation = useRef(false)
+  const [navigationRequest, setNavigationRequest] = useState<Route | null>(() => readRoute())
+  const [locationVersion, setLocationVersion] = useState(0)
+  function setView(next: typeof view) {
+    setCurrentView(next)
+    if (!navigationReady.current || restoringNavigation.current) return
+    const target = next === 'homeworkQuiz' ? 'homework' : next === 'reset' ? 'account' : next
+    const current = readRoute()
+    writeRoute(target as Section, current?.view === target ? current.params : undefined)
+  }
   useEffect(() => { setMenuOpen(false) }, [view])
   const [homeworkCatalog, setHomeworkCatalog] = useState<HomeworkCatalog | null>(null)
   const [homeworkId, setHomeworkId] = useState<string | null>(null)
@@ -43,6 +55,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const [resetPreview, setResetPreview] = useState<ResetPreview | null>(null)
   const [glossary, setGlossary] = useState<GlossaryState | null>(null)
   const [glossaryTopics, setGlossaryTopics] = useState<GlossaryTopic[]>([])
+  const literatureFresh = useRef(true)
   const [literature, setLiterature] = useState<LiteratureCatalog | null>(null)
   const [literatureLoad, setLiteratureLoad] = useState(0)
   const [learning, setLearning] = useState<Awaited<ReturnType<typeof loadLearning>> | null>(null)
@@ -64,6 +77,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   const reviewGlossarySession = useRef<string | null>(null)
 
   function clearPrivateState() {
+    navigationReady.current = false
     reviewQuizSession.current = null; reviewGlossarySession.current = null
     setAccount(null); setOptions(null); setState(null); setFeedback(null); setFeedbackQuestion(null)
     setSelected(null); setPending(null); setUncertainSetup(false); setView('setup')
@@ -83,6 +97,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
 
   async function loadAccount() {
     const current = await api.me()
+    setLiterature(null); literatureFresh.current = true
     setAccount(current)
     if (!current.needs_identity) {
       const [available, saved] = await Promise.all([api.options(), api.state()])
@@ -126,6 +141,37 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
   }, [])
   useEffect(() => { if (error) alertRef.current?.focus() }, [error])
 
+  useEffect(() => {
+    const restore = () => { setNavigationRequest(readRoute() ?? { view: 'setup', params: new URLSearchParams() }); setLocationVersion(value => value + 1) }
+    window.addEventListener('popstate', restore)
+    window.addEventListener('hashchange', restore)
+    return () => { window.removeEventListener('popstate', restore); window.removeEventListener('hashchange', restore) }
+  }, [])
+  useEffect(() => {
+    if (booting || busy || !account || account.needs_identity || !options) return
+    if (!navigationRequest) {
+      if (!navigationReady.current) { navigationReady.current = true; writeRoute(view === 'homeworkQuiz' ? 'homework' : view === 'reset' ? 'account' : view, undefined, true) }
+      return
+    }
+    const target = navigationRequest.view
+    setNavigationRequest(null)
+    restoringNavigation.current = true
+    void run(async () => {
+      try {
+        if ((target === 'ownerStats' || target === 'ownerContent') && account.role !== 'owner') { setView('setup'); writeRoute('setup', undefined, true) }
+        else if (target === 'literature') await loadLiterature()
+        else if (target === 'progress') await loadProgress()
+        else if (target === 'errors') await loadErrors()
+        else if (target === 'homework') await loadHomework()
+        else if (target === 'glossary') await loadGlossary()
+        else if (target === 'learning') await loadLearningView()
+        else if (target === 'ownerStats') await loadOwnerStats()
+        else if (target === 'ownerContent') await loadOwnerContent()
+        else setView(target)
+      } finally { restoringNavigation.current = false; navigationReady.current = true }
+    })
+  }, [booting, busy, account, options, navigationRequest])
+
   async function refreshState() {
     const result = await api.state()
     const sameHomework = view === 'homeworkQuiz' && homeworkId && result.runner_state.session?.session_id === state?.session?.session_id
@@ -165,7 +211,15 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
     const [available, current] = await Promise.all([api.glossaryOptions(), api.glossaryState()])
     setGlossaryTopics(available.topics); setGlossary(current.glossary_state); setView('glossary')
   }
-  async function loadLiterature() { setLiterature(await api.literature()); setLiteratureLoad(value => value + 1); setView('literature') }
+  async function loadLiterature() {
+    if (!literature || !literatureFresh.current) { setLiterature(await api.literature()); literatureFresh.current = true; setLiteratureLoad(value => value + 1) }
+    if (view === 'literature' && !restoringNavigation.current) {
+      const params = readRoute()?.params ?? new URLSearchParams()
+      params.delete('book'); params.delete('entry'); writeRoute('literature', params)
+      setLocationVersion(value => value + 1)
+    }
+    setView('literature')
+  }
   async function loadLearningView() { setLearning(await loadLearning()); setView('learning') }
   async function saveGoal(kind: GoalKind, target: number) { await api.setGoal(kind, target); await loadLearningView(); setNotice('Недельная цель сохранена.') }
   async function startReviewQuiz(replace: boolean) {
@@ -248,7 +302,7 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
         : account.needs_identity ? <Onboarding account={account} busy={busy} run={run} refresh={loadAccount} />
           : view === 'homework' && homeworkCatalog ? <HomeworkView catalog={homeworkCatalog} busy={busy} confirmId={homeworkConfirmId} onStart={id => void run(() => startHomework(id, false))} onConfirm={id => void run(() => startHomework(id, true))} onResume={item => void run(() => resumeHomework(item))} onRefresh={() => void run(loadHomework)} />
           : view === 'homeworkQuiz' && state ? <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => void run(loadHomework)} onRefresh={() => void run(refreshState)} homeworkTitle={homeworkCatalog?.assignments.find(item => item.id === homeworkId)?.title ?? 'Домашнее задание'} />
-          : view === 'literature' && literature ? <LiteratureView key={literatureLoad} initial={literature} busy={busy} run={run} />
+          : view === 'literature' && literature ? <LiteratureView key={literatureLoad} initial={literature} busy={busy} run={run} locationVersion={locationVersion} onCatalog={value => { setLiterature(value); literatureFresh.current = true }} onUncertain={() => { literatureFresh.current = false }} />
           : view === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} onUpdateBlocked={setGlossaryUpdateBlocked} />
           : view === 'learning' && learning ? <LearningView {...learning} busy={busy} onRefresh={() => void run(loadLearningView)} onSaveGoal={(kind, target) => void run(() => saveGoal(kind, target))} onStartQuiz={replace => void run(() => startReviewQuiz(replace))} onStartGlossary={(topic, replace) => void run(() => startReviewGlossary(topic, replace))} />
           : view === 'reset' && resetPreview ? <ResetView initial={resetPreview} busy={busy} run={run} onCancel={() => setView('account')} onComplete={afterReset} />
