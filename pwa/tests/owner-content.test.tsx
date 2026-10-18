@@ -1,3 +1,4 @@
+import { chooseMenu } from './choose-menu'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
@@ -23,7 +24,7 @@ it('distinguishes unknown coverage from empty kinds and filters themes without i
   expect(screen.getByText(/Текущее покрытие неизвестно/)).toBeVisible()
   expect(screen.getAllByText('Нет опубликованных заданий: теория, глоссарий.')).toHaveLength(2)
   expect(screen.queryByText(/Модуль/)).not.toBeInTheDocument()
-  await userEvent.setup().selectOptions(screen.getByLabelText('Тема обзора'), 'two')
+  await chooseMenu(userEvent.setup(), screen.getByLabelText('Тема обзора'), 'two')
   expect(screen.queryByRole('heading', { name: 'Первая тема' })).not.toBeInTheDocument()
   expect(screen.getByRole('heading', { name: 'Вторая тема' })).toBeVisible()
   expect(screen.getByText(/Личные заметки Obsidian: покрытие не подтверждено/)).toBeVisible()
@@ -32,12 +33,13 @@ it('distinguishes unknown coverage from empty kinds and filters themes without i
 })
 
 
-it('shows dated lesson coverage, unresolved source holds and unknown notes independently', () => {
+it('shows dated lesson coverage, unresolved source holds and unknown notes independently', async () => {
   const data: OwnerContent = { ok: true, topics: [], unmapped_questions: 0,
     sources: { state: 'PARTIAL', captured_at: '2026-09-30T00:00:00Z', files: 425, folders: 93, processing_records: 6, known_holds: 2, processing: { pending_review: 6, new_unprocessed: 419 },
       coverage: { unreleased_lessons: { total: 3, processing: { pending_review: 3 }, metadata_current: 3, known_holds: 3 }, tracked_sources: 66, untracked_files: 359, source_metadata: { current: 66 }, unmapped_published_questions: 83,
         lessons: [{ id: 'lesson', title: 'Проверенная учебная тема', discipline: 'Дисциплина', kinds: { theory: 0, glossary: 0, case: 0 }, source_metadata_current: false, processing_state: 'pending_review', known_hold: true, glossary_terms: null, notes: null, notes_state: 'UNSET' }] } } }
   render(<OwnerContentView data={data} busy={false} onRefresh={() => {}} />)
+  await userEvent.setup().click(screen.getByText('Дисциплина · тем: 1'))
   expect(screen.getByText("\u0415\u0449\u0451 \u043d\u0435 \u043e\u043f\u0443\u0431\u043b\u0438\u043a\u043e\u0432\u0430\u043d\u043d\u044b\u0435 \u0443\u0447\u0435\u0431\u043d\u044b\u0435 \u0442\u0435\u043c\u044b: 3. \u0410\u043a\u0442\u0443\u0430\u043b\u044c\u043d\u044b\u0435 \u043c\u0435\u0442\u0430\u0434\u0430\u043d\u043d\u044b\u0435: 3; \u0442\u0435\u043c\u044b \u0441 \u0432\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u044f\u043c\u0438: 3." )).toBeVisible()
   expect(screen.getByText(/Редакция источника требует сверки/)).toBeVisible()
   expect(screen.getByText('Есть неразрешённое возражение к источнику.')).toBeVisible()
@@ -47,7 +49,7 @@ it('shows dated lesson coverage, unresolved source holds and unknown notes indep
 })
 
 
-it('shows prepared note counts without claiming Vault publication or complete coverage', () => {
+it('shows prepared note counts without claiming Vault publication or complete coverage', async () => {
   const data: OwnerContent = { ok: true, topics: [], unmapped_questions: 0,
     sources: { state: 'PARTIAL', captured_at: '2026-09-30T00:00:00Z',
       coverage: { tracked_sources: 1, untracked_files: 0, source_metadata: { current: 1 },
@@ -57,6 +59,7 @@ it('shows prepared note counts without claiming Vault publication or complete co
           processing_state: 'processed', known_hold: false, glossary_terms: 2,
           notes: 3, notes_state: 'PREPARED' }] } } }
   render(<OwnerContentView data={data} busy={false} onRefresh={() => {}} />)
+  await userEvent.setup().click(screen.getByText('Дисциплина · тем: 1'))
   expect(screen.getByText('Подготовлено заметок в переданном снимке: 3.')).toBeVisible()
   expect(screen.getByText('Опубликованных терминов с подтверждённой привязкой к этой теме в снимке: 2.')).toBeVisible()
   expect(screen.getByText('Опубликованных терминов без подтверждённой привязки к учебной теме в снимке: 1.')).toBeVisible()

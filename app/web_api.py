@@ -18,7 +18,7 @@ from app.owner_google_oauth import OwnerGoogleOAuth, TTL as OAUTH_TTL
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
 from app.logging_config import configure_noisy_http_client_loggers
 
-GET_ACTIONS = {"auth/google/available", "auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog"}
+GET_ACTIONS = {"auth/google/available", "auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog", "literature/catalog-compact"}
 POST_ACTIONS = {"auth/google/begin", "auth/google/unlink", "auth/register", "auth/verify", "auth/recover", "auth/reset", "auth/login", "auth/logout",
                 "identity/new", "link/start", "link/complete", "profile/name", "owner/stats", "owner/content", "quiz/setup", "quiz/answer", "homework/start", "literature/progress",
                 "progress/history", "progress/attempt", "progress/errors", "progress/train",
@@ -87,8 +87,8 @@ def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf
         actor = account["user_id"]
         if actor is None:
             raise AuthError("identity_required", 409)
-        if action == "literature/catalog":
-            return literature_service.catalog(conn, actor), None
+        if action in {"literature/catalog", "literature/catalog-compact"}:
+            return literature_service.catalog(conn, actor, compact=action.endswith("-compact")), None
         if action == "literature/progress":
             validated = literature_service.validate_progress(payload)
             if isinstance(validated, str):

@@ -148,7 +148,7 @@ test('reading catalog shares a work status across themes, lost save and reload',
   await chooseMenu(page, page.getByLabel('Тема', { exact: true }), first)
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, first)}`)).toBeVisible()
   await page.locator('.reading-order > summary').click()
-  await expect(page.locator('.reading-order ol')).toBeVisible()
+  await expect(page.locator('.reading-stage[open] > ol').first()).toBeVisible()
   await page.locator('.literature-title').filter({ hasText: work.title }).click()
   const title = await page.locator('.literature-detail h2').innerText()
   await expect(page.getByLabel('Учебный список')).toHaveCount(0)
@@ -225,10 +225,10 @@ test('reviewed literature links open a separate provider page without learning c
 
 test('reading empty and failed catalog loads are recoverable', async ({ page }) => {
   await fresh(page)
-  await page.route('**/web/literature/catalog', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'database_unavailable' }) }), { times: 1 })
+  await page.route('**/web/literature/catalog-compact', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'database_unavailable' }) }), { times: 1 })
   await navigate(page, 'Литература')
   await expect(page.getByRole('alert')).toContainText('Сервер занят')
-  await page.route('**/web/literature/catalog', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, works: [], topics: [] }) }), { times: 1 })
+  await page.route('**/web/literature/catalog-compact', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, works: [], topics: [] }) }), { times: 1 })
   await navigate(page, 'Литература')
   await expect(page.getByRole('heading', { name: 'Список пока пуст' })).toBeVisible()
   await page.getByRole('button', { name: 'Обновить каталог и прогресс' }).click()
@@ -493,7 +493,7 @@ test('curriculum filters history and preserves unmapped evidence on reload', asy
   await expect(page.getByRole('heading', { name: 'Дисциплины и темы' })).toBeVisible()
   await page.getByText('Основы психологии · 100% · 5 ответов', { exact: true }).click()
   await page.getByRole('button', { name: 'История и динамика: Память и повторение', exact: true }).click()
-  await expect(page.getByRole('combobox', { name: 'Дисциплина или тема' })).toHaveValue('topic:t_111111111111')
+  await expect(page.getByRole('combobox', { name: 'Дисциплина или тема' })).toHaveAttribute('value', 'topic:t_111111111111')
   await expect(page.getByText(/Фильтр: Память и повторение/)).toBeVisible()
   await expect(page.getByRole('button', { name: /Открыть попытку/ })).toHaveCount(1)
   await page.getByRole('button', { name: /Открыть попытку/ }).click()
@@ -507,7 +507,7 @@ test('curriculum filters history and preserves unmapped evidence on reload', asy
   await page.reload()
   await navigate(page, 'Мой прогресс')
   await expect(page.getByText('7 из 7 ответов', { exact: true })).toBeVisible()
-  await expect(page.getByRole('combobox', { name: 'Дисциплина или тема' })).toHaveValue('')
+  await expect(page.getByRole('combobox', { name: 'Дисциплина или тема' })).toHaveAttribute('value', '')
 })
 
 test('personal progress, historical mistakes and retry-safe training share the quiz state', async ({ page }, testInfo) => {
@@ -730,6 +730,9 @@ async function navigate(page: Page, name: string) {
     if (await menu.getAttribute('aria-expanded') === 'false') await menu.click()
   }
   await page.getByRole('button', { name, exact: true }).click()
+  // A restored section may already show the previous data while a refresh is in flight.
+  // Await its completion before a later test deletes the disposable SQLite file on Windows.
+  await expect.poll(() => action.evaluateAll(buttons => buttons.every(button => !(button as HTMLButtonElement).disabled))).toBe(true)
 }
 
 
@@ -766,4 +769,120 @@ test('reading next step persists start, continuation and completion in the curre
   expect(work.entries.length).toBeGreaterThan(0)
   expect(work.entries.every(entry => entry.user_state?.reading_status === 'read')).toBe(true)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+})
+
+
+test('book deep links survive navigation, browser history, reload and sign in', async ({ page }) => {
+  await fresh(page)
+  let requests = 0
+  page.on('request', request => { if (request.url().endsWith('/web/literature/catalog-compact')) requests++ })
+  await navigate(page, 'Литература')
+  const search = page.getByRole('searchbox', { name: 'Поиск по названию или автору' })
+  await search.fill('Картер')
+  const titleButton = page.locator('.literature-title').filter({ hasText: 'Как работает мозг' })
+  await expect(titleButton).toBeVisible()
+  await titleButton.scrollIntoViewIfNeeded()
+  await titleButton.click()
+  const title = page.locator('.literature-detail h2')
+  await expect(title).toHaveText('Как работает мозг')
+  await expect(title).toBeFocused()
+  const bookURL = page.url()
+  expect(bookURL).toContain('#/literature?')
+  expect(bookURL).toContain('book=')
+  await navigate(page, 'Мой прогресс')
+  await expect(page.getByRole('heading', { name: 'Мой прогресс', exact: true })).toBeVisible()
+  await page.goBack()
+  await expect(title).toHaveText('Как работает мозг')
+  expect(page.url()).toBe(bookURL)
+  expect(requests).toBe(1) // Private per-App cache, not a shared HTTP cache.
+  await page.reload()
+  await expect(title).toHaveText('Как работает мозг')
+  await page.context().clearCookies()
+  await page.reload()
+  await page.getByLabel('Электронная почта').fill(email)
+  await page.getByLabel('Пароль', { exact: true }).fill(password)
+  await page.getByRole('button', { name: 'Войти в пространство' }).click()
+  await expect(title).toHaveText('Как работает мозг')
+  await page.getByRole('button', { name: '← К списку литературы' }).click()
+  await expect(search).toHaveValue('Картер')
+  await expect(page.locator('.literature-title').filter({ hasText: 'Как работает мозг' })).toBeVisible()
+  await page.goBack()
+  await expect(title).toHaveText('Как работает мозг')
+  await page.goForward()
+  await expect(search).toHaveValue('Картер')
+})
+
+test('opening a book from a long list restores its position and focus on return', async ({ page }) => {
+  await fresh(page)
+  await navigate(page, 'Литература')
+  const button = page.locator('.literature-title').nth(70)
+  const title = await button.innerText()
+  await button.scrollIntoViewIfNeeded()
+  const previous = await page.evaluate(() => window.scrollY)
+  await button.click()
+  await expect(page.locator('.literature-detail h2')).toHaveText(title)
+  await expect(page.locator('.literature-detail h2')).toBeFocused()
+  expect(await page.locator('.literature-detail h2').evaluate(node => node.getBoundingClientRect().top)).toBeGreaterThanOrEqual(0)
+  await page.getByRole('button', { name: '← К списку литературы' }).click()
+  await expect(button).toBeFocused()
+  expect(Math.abs(await page.evaluate(() => window.scrollY) - previous)).toBeLessThan(80)
+})
+
+
+test('owner preparation is compact and readable, controls retain contrast at all layouts', async ({ page }, testInfo) => {
+  await fresh(page)
+  const kinds = { theory: 0, glossary: 0, case: 0 }
+  await page.route('**/web/owner/content', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, unmapped_questions: 0,
+    topics: Array.from({ length: 9 }, (_, index) => ({ id: String(index), title: `Тема ${index}`, questions: 0, kinds, glossary_terms: 0, literature_works: 0, gaps: [], notes_state: 'UNSET' })),
+    sources: { state: 'PARTIAL', captured_at: '2026-10-18T00:00:00Z', processing: {}, coverage: {
+      tracked_sources: 2, untracked_files: 0, unmapped_published_questions: 0,
+      unreleased_lessons: { total: 19, metadata_current: 19, known_holds: 0, processing: { processed: 10, pending_review: 9 } },
+      lessons: ['Первая дисциплина', 'Вторая дисциплина'].map((discipline, index) => ({ id: `lesson-${index}`, title: `Подробная тема ${index}`, discipline, kinds, source_metadata_current: true, processing_state: 'processed', notes_state: 'UNSET', glossary_terms: 0 }))
+    } }
+  }) }))
+  await navigate(page, 'Содержание')
+  const widths = testInfo.project.name === 'desktop' ? [1440, 768] : [390]
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 900 })
+    const topic = page.getByRole('combobox', { name: 'Тема обзора' })
+    const preparation = page.getByRole('heading', { name: 'Подготовка по учебным материалам' })
+    expect((await topic.boundingBox())!.y).toBeLessThan((await preparation.boundingBox())!.y)
+    expect(await page.locator('.notice-vertical').evaluate(node => node.scrollWidth <= node.clientWidth)).toBe(true)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await page.screenshot({ path: `test-results/review-owner-${width}.png`, fullPage: true })
+  }
+  await page.getByText('Первая дисциплина · тем: 1').click()
+  await expect(page.getByRole('heading', { name: 'Подробная тема 0' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Подробная тема 1' })).not.toBeVisible()
+  await chooseMenu(page, page.getByRole('combobox', { name: 'Дисциплина подготовки' }), 'Вторая дисциплина')
+  await expect(page.getByText('Первая дисциплина · тем: 1')).toHaveCount(0)
+  await page.getByText('Вторая дисциплина · тем: 1').click()
+  await expect(page.getByRole('heading', { name: 'Подробная тема 1' })).toBeVisible()
+  // WCAG measured pairs: test actual computed author focus ring, placeholder and informative label tokens.
+  const colors = await page.evaluate(() => ({ focus: getComputedStyle(document.documentElement).getPropertyValue('--focus').trim(), muted: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim(), paper: getComputedStyle(document.documentElement).getPropertyValue('--paper').trim() }))
+  const luminance = (hex: string) => {
+    const channels = hex.replace('#', '').match(/../g)!.map(value => parseInt(value, 16) / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+    return .2126 * channels[0] + .7152 * channels[1] + .0722 * channels[2]
+  }
+  const contrast = (a: string, b: string) => { const values = [luminance(a), luminance(b)].sort((a, b) => b - a); return (values[0] + .05) / (values[1] + .05) }
+  for (const background of ['#ffffff', colors.paper]) { expect(contrast(colors.focus, background)).toBeGreaterThanOrEqual(3); expect(contrast(colors.muted, background)).toBeGreaterThanOrEqual(4.5) }
+})
+
+
+test('return from a recommended material preserves the open stage and source focus', async ({ page }) => {
+  await fresh(page)
+  await navigate(page, 'Литература')
+  await page.locator('.reading-order > summary').click()
+  const firstStage = page.locator('.reading-stage').first()
+  await expect(firstStage).toHaveAttribute('open', '')
+  const first = firstStage.locator('.reading-step-title').first()
+  const title = await first.innerText()
+  await first.scrollIntoViewIfNeeded()
+  const previous = await page.evaluate(() => window.scrollY)
+  await first.click()
+  await expect(page.locator('.literature-detail h2')).toHaveText(title)
+  await page.getByRole('button', { name: '← К списку литературы' }).click()
+  await expect(firstStage).toHaveAttribute('open', '')
+  await expect(first).toBeFocused()
+  expect(Math.abs(await page.evaluate(() => window.scrollY) - previous)).toBeLessThan(80)
 })

@@ -58,3 +58,12 @@ it('explains every case alternative after an answer', () => {
   expect(screen.getByRole('region', { name: 'Разбор кейса' })).toHaveTextContent('При новых обстоятельствах пересмотреть.')
   expect(screen.getByText('Не диагностировать')).toBeVisible()
 })
+
+it('distinguishes same-day topic awards by their evidence labels', () => {
+  render(<LearningView review={queue} mastery={mastery} goals={goals} achievements={{ ok: true, achievements: [
+    { kind: 'new_topic', evidence_key: 'one', earned_at: '2026-10-18', basis: 'Внимание' },
+    { kind: 'new_topic', evidence_key: 'two', earned_at: '2026-10-18', basis: 'Память' },
+  ] }} busy={false} onRefresh={vi.fn()} onSaveGoal={vi.fn()} onStartQuiz={vi.fn()} onStartGlossary={vi.fn()} />)
+  expect(screen.getByText(/Новая тема · Внимание/)).toBeVisible()
+  expect(screen.getByText(/Новая тема · Память/)).toBeVisible()
+})

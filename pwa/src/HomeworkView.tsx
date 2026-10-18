@@ -30,7 +30,7 @@ export function HomeworkView({ catalog, busy, confirmId, onStart, onConfirm, onR
     {!assignments.length && <p role="status">Домашних заданий пока нет.</p>}
     {assignments.map(item => <article className="panel homework-card" key={item.id}>
       <p className="eyebrow">{item.discipline}</p>
-      <h2>{item.title}</h2><p className="muted">{item.topic}</p><p>{item.description}</p>
+      <h2>{item.title}</h2>{item.topic.trim().toLocaleLowerCase('ru') !== item.title.trim().toLocaleLowerCase('ru') && <p className="muted">{item.topic}</p>}<p>{item.description}</p>
       <p className="homework-status" role="status">{item.completed ? 'Выполнено' : item.finished_attempts ? 'Пока не выполнено' : 'Не начато'}
         {item.best_score !== null && item.best_total !== null ? ` · лучший результат ${item.best_score} из ${item.best_total}` : ''}</p>
       <div className="homework-actions">

@@ -10,6 +10,15 @@ async function chooseMenu(page: import('@playwright/test').Page, field: import('
   await options.nth(index).click()
 }
 
+async function navigateMini(page: import('@playwright/test').Page, name: string) {
+  const destination = page.getByRole('button', { name, exact: true, includeHidden: true })
+  await expect(destination).toBeAttached()
+  await expect(destination).toBeEnabled()
+  if (!(await destination.isVisible())) await page.getByRole('button', { name: 'Открыть меню', exact: true }).click()
+  await destination.click()
+  await expect(destination).toHaveAttribute('aria-current', 'page')
+}
+
 const site = 'http://127.0.0.1:4174/'
 const question = { session_id: 10, question_id: 20, question_text: 'Первый приём: что сделать?', order_index: 1, total_questions: 1,
   options: [{ option_index: 0, option_text: 'Уточнить запрос' }, { option_index: 1, option_text: 'Поставить диагноз' }] }
@@ -22,6 +31,7 @@ test('built Mini App requires Telegram and keeps initData on the fixed API origi
   await page.goto(site)
   await expect(page.getByRole('heading', { name: 'Откройте в Telegram' })).toBeVisible()
   expect(requests).toEqual([])
+  await expect(page.getByRole('link', { name: 'Открыть бота в Telegram' })).toHaveAttribute('href', 'https://t.me/psychologyquiz1_bot')
 })
 
 test('Mini App recovers its setup screen after the first server load fails', async ({ page }) => {
@@ -124,7 +134,7 @@ test('Telegram Mini App selects mixed glossary topics and shows API feedback', a
       headers: { 'Access-Control-Allow-Origin': site.slice(0, -1) } })
   })
   await page.goto(site)
-  await page.getByRole('button', { name: 'Глоссарий' }).click()
+  await navigateMini(page, 'Глоссарий')
   await page.getByRole('combobox', { name: 'Режим', exact: true }).selectOption('mix')
   await page.getByRole('checkbox', { name: /Память/ }).check()
   await page.getByRole('checkbox', { name: /Внимание/ }).check()
@@ -201,7 +211,7 @@ test('built Mini App opens book offers externally without passing Telegram proof
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, ...payload[path] }), headers: { 'Access-Control-Allow-Origin': site.slice(0, -1) } })
   })
   await page.goto(site)
-  await page.getByRole('button', { name: 'Литература', exact: true }).click()
+  await navigateMini(page, 'Литература')
   await page.getByRole('button', { name: 'Учебная книга', exact: true }).click()
   await expect(page.getByText('Доступ и совпадение издания уточняются у провайдера.')).toBeVisible()
   for (const offer of offers) {
@@ -253,7 +263,7 @@ test('Mini App reading next step persists against the real local backend', async
   async function openReading() {
     await page.goto(site)
     await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
-    await page.getByRole('button', { name: 'Литература', exact: true }).click()
+    await navigateMini(page, 'Литература')
   }
   await openReading()
   const next = page.getByRole('region', { name: 'Следующий шаг чтения' })
@@ -279,4 +289,37 @@ test('Mini App reading next step persists against the real local backend', async
   expect(aliases.length).toBeGreaterThan(0)
   expect(aliases.every(entry => entry.user_state?.reading_status === 'read')).toBe(true)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+})
+
+
+test('Mini App navigation marks the current section and integrates Telegram BackButton', async ({ page }, testInfo) => {
+  await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
+  await page.addInitScript(() => {
+    const state = { shown: false, callback: null as (() => void) | null }
+    ;(window as any).__backButton = state
+    ;(window as any).Telegram = { WebApp: { initData: 'synthetic-miniapp-proof', ready() {}, expand() {}, BackButton: {
+      show() { state.shown = true }, hide() { state.shown = false },
+      onClick(callback: () => void) { state.callback = callback }, offClick(callback: () => void) { if (state.callback === callback) state.callback = null },
+    } } }
+  })
+  await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
+    if (route.request().method() === 'OPTIONS') { await route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': site.slice(0, -1), 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type' } }); return }
+    const payload = route.request().url().endsWith('setup-options') ? { setup_options: setup } : { runner_state: { state: 'setup', status: 'setup', session: null } }
+    await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, ...payload }), headers: { 'Access-Control-Allow-Origin': site.slice(0, -1) } })
+  })
+  await page.goto(site)
+  const quiz = page.getByRole('button', { name: 'Квиз', exact: true, includeHidden: true })
+  await expect(quiz).toHaveAttribute('aria-current', 'page')
+  if ((page.viewportSize()?.width ?? 1280) <= 800) {
+    await expect(page.getByRole('navigation', { name: 'Разделы Mini App', includeHidden: true })).not.toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeInViewport()
+  }
+  await navigateMini(page, 'Мои данные')
+  await expect(page.getByRole('heading', { name: 'Мои учебные данные' })).toBeVisible()
+  await expect.poll(() => page.evaluate(() => (window as any).__backButton.shown)).toBe(true)
+  await page.screenshot({ path: `test-results/review-mini-navigation-${testInfo.project.name}.png` })
+  await page.evaluate(() => (window as any).__backButton.callback())
+  await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
+  await expect.poll(() => page.evaluate(() => (window as any).__backButton.shown)).toBe(false)
+  await expect(quiz).toHaveAttribute('aria-current', 'page')
 })

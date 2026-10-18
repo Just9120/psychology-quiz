@@ -1,5 +1,5 @@
 import { chooseMenu } from './choose-menu'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
 import { LiteratureView } from '../src/LiteratureView'
@@ -122,7 +122,7 @@ it('blocks another reading write after lost confirmation until successful readba
   render(<LiteratureView initial={catalog} busy={false} run={run} />)
   const user = userEvent.setup()
   await user.click(screen.getByRole('button', { name: 'Учебная книга' }))
-  expect(screen.getByText('Автор не указан в источнике')).toBeVisible()
+  expect(within(screen.getByRole('article')).getByText('Автор не указан в источнике')).toBeVisible()
   expect(screen.getByText('Значимость: не определена')).toBeVisible()
   expect(screen.queryByLabelText('Прочитано, %')).not.toBeInTheDocument()
   await chooseMenu(user, screen.getByLabelText('Статус чтения'), 'in_progress')
@@ -211,4 +211,23 @@ it.each(['pwa', 'miniapp'])('keeps topic totals but does not offer off-filter re
   expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
   await chooseMenu(user, screen.getByLabelText('Фильтр статуса чтения'), '')
   expect(screen.getByRole('button', { name: 'Продолжить «Учебная книга»' })).toBeVisible()
+})
+
+
+it.each(['pwa', 'miniapp'])('searches authors and titles, labels nonbooks and keeps the list query on return in %s', async client => {
+  const first = { ...catalog.works[0].entries[0], title: 'Внимание', authors: ['Первый автор'], type: 'article', work_id: 'one' }
+  const second = { ...first, id: 'second', title: 'Память', authors: ['Второй автор'], work_id: 'second', type: 'book' }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, works: [ { ...catalog.works[0], work_id: 'one', title: first.title, authors: first.authors, type: first.type, entries: [first] }, { ...catalog.works[0], work_id: 'second', title: second.title, authors: second.authors, entries: [second] } ] }} busy={false} run={async action => action()} />)
+  else render(<MiniLiterature initial={[first, second]} topics={catalog.topics} busy={false} run={async action => action()} />)
+  const user = userEvent.setup()
+  await user.type(screen.getByRole('searchbox', { name: 'Поиск по названию или автору' }), 'Первый автор')
+  expect(screen.queryByRole('button', { name: 'Память' })).not.toBeInTheDocument()
+  await user.click(screen.getByRole('button', { name: 'Внимание' }))
+  expect(screen.getByText('Статья')).toBeVisible()
+  expect(screen.getByRole('heading', { name: 'Внимание' })).toHaveFocus()
+  await user.click(screen.getByRole('button', { name: client === 'pwa' ? '← К списку литературы' : '← К списку' }))
+  expect(screen.getByRole('searchbox', { name: 'Поиск по названию или автору' })).toHaveValue('Первый автор')
+  await user.clear(screen.getByRole('searchbox', { name: 'Поиск по названию или автору' }))
+  await user.type(screen.getByRole('searchbox', { name: 'Поиск по названию или автору' }), 'неизвестное название')
+  expect(screen.queryByRole('button', { name: 'Внимание' })).not.toBeInTheDocument()
 })

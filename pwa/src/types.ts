@@ -90,7 +90,7 @@ export interface MasteryOverview { ok: true; questions: MasteryGroup; terms: Mas
 export type GoalKind = 'study' | 'review' | 'reading'
 export interface WeeklyGoal { goal_kind: GoalKind; weekly_target: number | null; completed: number; reached: boolean | null }
 export interface GoalsOverview { ok: true; week_start: string; week_end_exclusive: string; goals: WeeklyGoal[] }
-export interface Achievement { kind: 'new_topic' | 'corrected_error' | 'regularity'; evidence_key: string; earned_at: string }
+export interface Achievement { basis?: string; kind: 'new_topic' | 'corrected_error' | 'regularity'; evidence_key: string; earned_at: string }
 export interface AchievementsOverview { ok: true; achievements: Achievement[] }
 export interface QuizState {
   ok: true
@@ -193,6 +193,7 @@ export interface HistoryAttempt extends PracticeCounts {
   total_questions: number
 }
 export interface SavedAnswer {
+  case?: { situation: string; approach: string; conditions: string[]; ambiguity: string; option_rationales: string[] } | null
   answer_id: number
   question_id: number
   session_id: number

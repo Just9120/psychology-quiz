@@ -37,7 +37,7 @@ def test_committed_knowledge_has_descriptive_files_and_semantic_links():
 def test_prepared_notes_need_exact_source_review_not_just_status(tmp_path, monkeypatch):
     content = tmp_path / 'content'
     content.mkdir()
-    (content / 'vault-notes.json').write_text('{"schema_version":2,"notes":[],"status":"approved"}')
+    (content / 'vault-notes.json').write_text('{"schema_version":2,"notes":[],"status":"approved"}', encoding="utf-8")
     monkeypatch.setattr(catalogue, 'ROOT', tmp_path)
     with pytest.raises(exporter.VaultError, match='prepared_note_source_review_required'):
         catalogue.prepared_notes()
@@ -82,13 +82,13 @@ def test_unified_repository_identity_idempotency_and_owner_files(tmp_path, monke
     files = {catalogue.ENTRY: '# База знаний\n'.encode()}
     monkeypatch.setattr(catalogue, 'render_published', lambda: (files, {}))
     vault = tmp_path / 'vault'; (vault / 'personal').mkdir(parents=True)
-    personal = vault / 'personal/Моя заметка.md'; personal.write_text('Owner note')
+    personal = vault / 'personal/Моя заметка.md'; personal.write_text('Owner note', encoding="utf-8")
     exporter.write_vault(vault, files, repository_vault=True, published_content=True)
     exporter.write_vault(vault, files, repository_vault=True, published_content=True)
     assert personal.read_text() == 'Owner note'
     with pytest.raises(exporter.VaultError, match='published_catalogue_required'):
         exporter.write_vault(vault, {catalogue.ENTRY:b'private dossier'}, repository_vault=True, published_content=True)
-    (vault / 'generated' / catalogue.ENTRY).write_text('Owner edit')
+    (vault / 'generated' / catalogue.ENTRY).write_text('Owner edit', encoding="utf-8")
     with pytest.raises(exporter.VaultError, match='generated_note_changed_by_owner'):
         exporter.write_vault(vault, files, repository_vault=True, published_content=True)
     assert (vault / 'generated' / catalogue.ENTRY).read_text() == 'Owner edit'
@@ -125,7 +125,7 @@ def test_explicit_migration_replaces_only_known_unchanged_catalogue(tmp_path, mo
     monkeypatch.setattr(exporter, '_git_common_directory', lambda _: None)
     monkeypatch.setattr(catalogue, 'render_published', lambda: (old, {}))
     vault = tmp_path / 'vault'; (vault / 'personal').mkdir(parents=True)
-    personal = vault / 'personal/Моя заметка.md'; personal.write_text('My own knowledge')
+    personal = vault / 'personal/Моя заметка.md'; personal.write_text('My own knowledge', encoding="utf-8")
     exporter.write_vault(vault, old, published_content=True)
     state = vault / 'generated' / exporter.STATE
     monkeypatch.setattr(catalogue, 'LEGACY_STATE_SHA256', hashlib.sha256(state.read_bytes()).hexdigest())
@@ -138,12 +138,12 @@ def test_explicit_migration_replaces_only_known_unchanged_catalogue(tmp_path, mo
     if obstacle == 'unknown_state':
         state.write_bytes(state.read_bytes()+b'\n'); error='unknown_catalogue_migration'
     if obstacle == 'personal_link':
-        personal.write_text('[[question-old]]'); error='personal_link_migration_required'
+        personal.write_text('[[question-old]]', encoding="utf-8"); error='personal_link_migration_required'
     if obstacle == 'personal_path_link':
-        personal.write_text('[[generated/question-old.md#Вопрос|Моя ссылка]]')
+        personal.write_text('[[generated/question-old.md#Вопрос|Моя ссылка]]', encoding="utf-8")
         error='personal_link_migration_required'
     if obstacle == 'personal_markdown_link':
-        personal.write_text('[Моя ссылка](../generated/question-old.md#Вопрос)')
+        personal.write_text('[Моя ссылка](../generated/question-old.md#Вопрос)', encoding="utf-8")
         error='personal_link_migration_required'
     before = {p.name:p.read_bytes() for p in (vault / 'generated').iterdir()}
     personal_before = personal.read_bytes()

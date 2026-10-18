@@ -32,6 +32,7 @@ def test_private_achievements_from_completed_editions_and_review_events(bank, mo
         result = achievements.refresh(conn, 1)
         assert {item["kind"] for item in result["achievements"]} == {
             "new_topic", "regularity", "corrected_error"}
+        assert next(item for item in result["achievements"] if item["kind"] == "new_topic")["basis"] == "Fixture"
         assert achievements.refresh(conn, 1) == result
         assert achievements.refresh(conn, other)["achievements"] == []
         after_gap = record(conn, choices=(0,))

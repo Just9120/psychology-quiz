@@ -108,7 +108,7 @@ def reading_next_step(items: list[dict], states: dict, all_items: list[dict] | N
             "basis": "personal_reading_state"}
 
 
-def catalog(conn, actor_user_id: int) -> dict[str, Any]:
+def catalog(conn, actor_user_id: int, *, compact: bool = False) -> dict[str, Any]:
     states = load_progress(conn, actor_user_id)
     topics = load_topic_registry()
     works: dict[str, dict] = {}
@@ -119,8 +119,13 @@ def catalog(conn, actor_user_id: int) -> dict[str, Any]:
             "authors": item["authors"], "type": item["type"],
             "access_links": item["access_links"], "book_search": item["book_search"], "entries": []})
         used_topics.add(item["topic_id"])
-        work["entries"].append({**item, "topic_title": topics[item["topic_id"]]["title"],
-            "user_state": states.get(item["id"])})
+        entry = {**item, "topic_title": topics[item["topic_id"]]["title"],
+                 "user_state": states.get(item["id"])}
+        if compact:
+            for field in ("title", "authors", "type", "work_id", "access_links", "book_search"):
+                if field in entry and entry[field] == work.get(field):
+                    del entry[field]
+        work["entries"].append(entry)
     return {"ok": True, "works": list(works.values()), "reading_topics": list_reading_topic_payloads(), "topics": [
         {"topic_id": topic_id, "title": topic["title"], "module": topic["module"],
          "modules": topic.get("modules", [topic["module"]])}

@@ -33,6 +33,7 @@ const errors: Record<string, string> = {
 function message(error: unknown) { return error instanceof MiniAppError ? errors[error.code] ?? (error.status === 401 ? 'Проверка Telegram не прошла. Откройте Mini App заново.' : 'Не удалось выполнить действие. Попробуйте ещё раз.') : 'Не удалось выполнить действие.' }
 
 export function MiniApp() {
+  const [menuOpen, setMenuOpen] = useState(false)
   const [page, setPage] = useState<Page>('setup')
   const [options, setOptions] = useState<SetupOptions | null>(null)
   const [state, setState] = useState<RunnerState | null>(null)
@@ -59,6 +60,15 @@ export function MiniApp() {
   const lock = useRef(false)
   const reviewQuizSession = useRef<number | null>(null)
   const reviewGlossarySession = useRef<string | null>(null)
+  useEffect(() => { setMenuOpen(false) }, [page])
+  useEffect(() => {
+    const back = window.Telegram?.WebApp?.BackButton
+    if (!back) return
+    const goBack = () => { if (!lock.current && !pending && !uncertain) setPage(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup') }
+    if (page === 'quiz' || page === 'setup') back.hide()
+    else { back.show(); back.onClick(goBack) }
+    return () => { back.offClick(goBack); back.hide() }
+  }, [page, pending, uncertain, state?.state])
   const authorized = Boolean(window.Telegram?.WebApp?.initData)
 
   const run = useCallback(async (action: () => Promise<void>) => {
@@ -200,17 +210,17 @@ export function MiniApp() {
     }
   }
 
-  if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p><p>Для пользователей от 18 лет.</p></main>
+  if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p><p>Для пользователей от 18 лет.</p><a className="button primary" href="https://t.me/psychologyquiz1_bot">Открыть бота в Telegram</a></main>
   if (booting) return <main className="loading-screen"><Brand /><p role="status">Восстанавливаем ваши занятия…</p></main>
   return <div className="app-layout miniapp-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
-    <aside className="sidebar"><Brand /><nav aria-label="Разделы Mini App">
-      <button className="nav-item" onClick={() => setPage(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}>Квиз</button>
-      <button className="nav-item" disabled={busy} onClick={() => void run(loadHomework)}>Домашние задания</button>
-      <button className="nav-item" disabled={busy} onClick={() => void run(loadGlossary)}>Глоссарий</button>
-      <button className="nav-item" disabled={busy} onClick={() => void run(loadLiterature)}>Литература</button>
-      <button className="nav-item" disabled={busy} onClick={() => void run(loadProgress)}>Мой прогресс</button>
-      <button className="nav-item" disabled={busy} onClick={() => void run(loadLearning)}>Повторение и цели</button>
-      <button className="nav-item" disabled={busy} onClick={() => setPage('privacy')}>Мои данные</button>
+    <aside className={menuOpen ? 'sidebar menu-open' : 'sidebar'}><Brand /><div className="mobile-header-actions"><button className="menu-toggle" disabled={busy} aria-expanded={menuOpen} aria-controls="miniapp-navigation" onClick={() => setMenuOpen(value => !value)} aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}>Меню</button></div><nav id="miniapp-navigation" aria-label="Разделы Mini App" onClick={event => { if ((event.target as Element).closest('button:not(:disabled), a')) setMenuOpen(false) }}>
+      <button className={page === 'quiz' || page === 'setup' ? 'nav-item active' : 'nav-item'} aria-current={page === 'quiz' || page === 'setup' ? 'page' : undefined} disabled={busy} onClick={() => setPage(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}>Квиз</button>
+      <button className={page === 'homework' || page === 'homeworkQuiz' ? 'nav-item active' : 'nav-item'} aria-current={page === 'homework' || page === 'homeworkQuiz' ? 'page' : undefined} disabled={busy} onClick={() => void run(loadHomework)}>Домашние задания</button>
+      <button className={page === 'glossary' ? 'nav-item active' : 'nav-item'} aria-current={page === 'glossary' ? 'page' : undefined} disabled={busy} onClick={() => void run(loadGlossary)}>Глоссарий</button>
+      <button className={page === 'literature' ? 'nav-item active' : 'nav-item'} aria-current={page === 'literature' ? 'page' : undefined} disabled={busy} onClick={() => void run(loadLiterature)}>Литература</button>
+      <button className={page === 'progress' ? 'nav-item active' : 'nav-item'} aria-current={page === 'progress' ? 'page' : undefined} disabled={busy} onClick={() => void run(loadProgress)}>Мой прогресс</button>
+      <button className={page === 'learning' ? 'nav-item active' : 'nav-item'} aria-current={page === 'learning' ? 'page' : undefined} disabled={busy} onClick={() => void run(loadLearning)}>Повторение и цели</button>
+      <button className={page === 'privacy' ? 'nav-item active' : 'nav-item'} aria-current={page === 'privacy' ? 'page' : undefined} disabled={busy} onClick={() => setPage('privacy')}>Мои данные</button>
       <a className="nav-item miniapp-privacy-link" href="https://telegram.org/privacy-tpa" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
     </nav></aside>
     <div className="workspace"><header className="topbar">Ваше пространство обучения · Telegram · 18+</header><main id="main-content" className="workspace-main" tabIndex={-1}>

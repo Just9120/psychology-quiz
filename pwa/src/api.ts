@@ -12,7 +12,7 @@ const actions = new Set(['auth/google/available', 'auth/google/begin', 'auth/goo
   'auth/logout', 'identity/new', 'link/start', 'link/complete', 'profile/name', 'owner/stats', 'owner/content', 'quiz/state', 'quiz/options', 'quiz/setup', 'quiz/answer', 'homework/catalog', 'homework/start',
   'progress/overview', 'progress/history', 'progress/attempt', 'progress/errors', 'progress/train', 'progress/reset-preview', 'progress/reset-confirm',
   'progress/review', 'progress/mastery', 'progress/goals', 'progress/achievements', 'progress/review-start', 'progress/review-glossary-start', 'progress/goal-set',
-  'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart', 'literature/catalog', 'literature/progress'])
+  'glossary/options', 'glossary/state', 'glossary/setup', 'glossary/answer', 'glossary/next', 'glossary/restart', 'literature/catalog', 'literature/catalog-compact', 'literature/progress'])
 let csrf: string | null = null
 
 export async function request<T>(action: string, payload?: unknown, signal?: AbortSignal): Promise<T> {
@@ -80,7 +80,7 @@ export const api = {
   setGoal: (goal_kind: GoalKind, weekly_target: number) => request<GoalsOverview>('progress/goal-set', { goal_kind, weekly_target }),
   startReviewQuiz: (expected_session_id: number | null, replace_active: boolean, question_count: number | null = 5) => request<QuizState>('progress/review-start', { expected_session_id, replace_active, question_count }),
   startReviewGlossary: (topic_id: string, expected_session_id: string | null, replace_active: boolean, question_count: number | null = 5) => request<{ ok: true; glossary_state: GlossaryState }>('progress/review-glossary-start', { topic_id, expected_session_id, replace_active, question_count }),
-  literature: () => request<LiteratureCatalog>('literature/catalog'),
+  literature: () => request<LiteratureCatalog>('literature/catalog-compact'),
   readingProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) => request<{ ok: true; literature_progress: ReadingState }>('literature/progress', { literature_id, reading_status, progress_percent }),
   glossaryOptions: () => request<{ ok: true; topics: GlossaryTopic[] }>('glossary/options'),
   glossaryState: () => request<{ ok: true; glossary_state: GlossaryState }>('glossary/state'),

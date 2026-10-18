@@ -1,5 +1,6 @@
 """The same user-level progress contracts on a real migrated PostgreSQL DB."""
 from tests.test_progress import (
+    test_case_history_and_errors_keep_original_context_when_bank_changes,
     test_reset_topic_preserves_mixed_answers_snapshots_foreign_and_literature,
     test_reset_all_and_old_confirmation_cannot_remove_new_learning,
     test_reset_confirmation_rejects_changed_answer_and_other_actor,

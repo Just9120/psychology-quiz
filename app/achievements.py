@@ -88,7 +88,17 @@ def refresh(conn, actor: int) -> dict:
             _award(conn, actor, "regularity", f"{earlier}:{later}", at.isoformat())
             break
     _glossary_review_awards(conn, actor)
+    from app.curriculum import load_catalog
+    from app.glossary_service import topics as glossary_topics
+    topic_titles = {key: item["title"] for key, item in load_catalog()["topics"].items()}
+    glossary_titles = {item["topic_id"]: item["title"] for item in glossary_topics()["topics"]}
+    def basis(kind, key):
+        if kind == "new_topic":
+            return glossary_titles.get(key.removeprefix("glossary:"), "Тема глоссария") if key.startswith("glossary:") else topic_titles.get(key, "Учебная тема прежней редакции")
+        if kind == "regularity":
+            return "Занятия две недели подряд"
+        return "Верный повтор после ошибки"
     return {"ok": True, "achievements": [
-        {"kind": row[0], "evidence_key": row[1], "earned_at": row[2]}
+        {"kind": row[0], "evidence_key": row[1], "earned_at": row[2], "basis": basis(row[0], row[1])}
         for row in conn.execute("""SELECT achievement_kind,evidence_key,earned_at FROM user_achievements
             WHERE user_id=? ORDER BY earned_at,achievement_kind,evidence_key""", (actor,))]}

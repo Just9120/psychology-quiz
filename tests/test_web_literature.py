@@ -99,3 +99,38 @@ def test_reading_write_rollback_and_identity_required(web):
             literature_service.save_progress(conn, actor, load_literature_items()[0]['id'], 'read', None)
             raise RuntimeError('rollback')
     assert rows(web) == before
+
+
+def test_compact_catalog_preserves_every_entry_and_private_boundary(web):
+    assert web.client.get('/web/literature/catalog-compact').status_code == 401
+    csrf = linked(web)
+    original = web.client.get('/web/literature/catalog').json()
+    response = web.client.get('/web/literature/catalog-compact')
+    assert response.status_code == 200 and response.headers['cache-control'] == 'no-store'
+    compact = response.json()
+    assert len(json.dumps(compact)) < len(json.dumps(original)) * .8
+    for work, legacy in zip(compact['works'], original['works']):
+        assert work['work_id'] == legacy['work_id']
+        assert len(work['entries']) == len(legacy['entries'])
+        for entry, old in zip(work['entries'], legacy['entries']):
+            assert {**{key: work[key] for key in ('title','authors','type','work_id','access_links','book_search')}, **entry} == old
+    first = compact['works'][0]['entries'][0]['id']
+    assert post(web, 'literature/progress', {'literature_id': first, 'reading_status': 'read', 'progress_percent': None}, csrf=csrf).status_code == 200
+    assert web.client.get('/web/literature/catalog-compact').json()['works'][0]['entries'][0]['user_state']['reading_status'] == 'read'
+    assert web.client.get('/web/literature/catalog-compact?user_id=999').status_code == 400
+    assert post(web, 'auth/logout', csrf=csrf).status_code == 200
+    assert web.client.get('/web/literature/catalog-compact').status_code == 401
+
+
+def test_compact_catalog_keeps_different_edition_metadata(bank, monkeypatch):
+    from copy import deepcopy
+    items = load_literature_items()
+    original = deepcopy(items[0])
+    different = {**deepcopy(original), 'id': 'edition-reviewed-alias', 'title': 'Другое название редакции', 'authors': ['Другой автор'], 'access_links': [], 'book_search': {'query': 'Другая редакция', 'url': 'https://example.test'}}
+    monkeypatch.setattr(literature_service, 'load_literature_items', lambda: [original, different])
+    with closing(get_connection(str(bank))) as conn:
+        compact = literature_service.catalog(conn, 1, compact=True)
+    first, second = compact['works'][0]['entries']
+    assert 'title' not in first
+    for field in ('title', 'authors', 'access_links', 'book_search'):
+        assert second[field] == different[field]
