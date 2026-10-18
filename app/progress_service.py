@@ -164,6 +164,7 @@ def answer_detail(conn, row) -> dict:
     return {"answer_id": row["id"], "question_id": row["question_id"], "session_id": row["session_id"],
             "answered_at": row["answered_at"], "is_correct": bool(row["is_correct"]),
             "question_text": content["question_text"], "topic": content["category"],
+            "case": content.get("case") if content.get("kind") == "case" else None,
             "selected_option_text": "Не знаю" if row["selected_option_index"] == -1 else selected,
             "knowledge_gap": row["selected_option_index"] == -1, "correct_option_text": correct,
             "explanation": content["explanation"], "snapshot_provenance": content["snapshot_provenance"],

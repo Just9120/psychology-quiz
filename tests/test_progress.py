@@ -311,3 +311,29 @@ def test_attempt_page_loads_snapshots_in_two_queries_and_still_rejects_corruptio
                      ("0" * 64, sid, ids[0]))
         with pytest.raises(ValueError, match="missing or corrupt"):
             progress.attempt(conn, 1, sid)
+
+
+def test_case_history_and_errors_keep_original_context_when_bank_changes(bank):
+    import json
+    from copy import deepcopy
+    from tests.test_case_content import CASE
+    with closing(get_connection(str(bank))) as conn, conn:
+        original = deepcopy(CASE)
+        upsert_approved_questions(conn, [original])
+        qid = conn.execute("SELECT id FROM questions WHERE external_id=?", (original["id"],)).fetchone()[0]
+        sid = record(conn, qids=(qid, 1), choices=(1,))
+        before = progress.attempt(conn, 1, sid)
+        assert len(before["items"]) == 1  # unanswered next question is not disclosed
+        assert before["items"][0]["case"] == original["case"]
+        changed = deepcopy(original)
+        changed["case"]["situation"] = "New edition must not replace historical context"
+        changed["case"]["conditions"] = ["Different conditions"]
+        upsert_approved_questions(conn, [changed])
+        assert progress.attempt(conn, 1, sid) == before
+        error = progress.errors(conn, 1)["items"][0]
+        assert error["case"] == original["case"]
+        assert error["edition_state"] == "changed"
+        assert "New edition" not in json.dumps(error)
+        stranger = create_or_load_user(conn, 123987, None, None, None)["id"]
+        with pytest.raises(progress.ProgressError, match="attempt_not_found"):
+            progress.attempt(conn, stranger, sid)
