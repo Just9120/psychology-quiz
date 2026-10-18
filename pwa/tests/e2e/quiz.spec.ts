@@ -732,7 +732,7 @@ async function navigate(page: Page, name: string) {
   await page.getByRole('button', { name, exact: true }).click()
   // A restored section may already show the previous data while a refresh is in flight.
   // Await its completion before a later test deletes the disposable SQLite file on Windows.
-  await expect.poll(async () => await action.count() === 0 || await action.isEnabled()).toBe(true)
+  await expect.poll(() => action.evaluateAll(buttons => buttons.every(button => !(button as HTMLButtonElement).disabled))).toBe(true)
 }
 
 
