@@ -70,7 +70,8 @@ def test_mixed_attempts_count_once_and_share_glossary_topic_across_editions(bank
         result = achievements.refresh(conn, 1)
         topics = [a for a in result['achievements'] if a['kind'] == 'new_topic']
         assert topics == [{'kind': 'new_topic', 'evidence_key': f"glossary:{entry['topic_id']}",
-                           'earned_at': '2026-09-14T12:00:00+00:00'}]
+                           'earned_at': '2026-09-14T12:00:00+00:00',
+                           'basis': dict(GLOSSARY_TOPICS)[entry['topic_id']]}]
         regularity = next(a for a in result['achievements'] if a['kind'] == 'regularity')
         assert regularity['earned_at'] == '2026-09-21T12:00:00+00:00'
         assert json.loads(conn.execute('SELECT snapshot FROM glossary_sessions WHERE id=?', (first,)).fetchone()[0]) == snapshot
