@@ -96,3 +96,10 @@ CD подтверждают первичные records с environment, revision/
 При восстановлении установи PR, merge revision и CD records целевого окружения по Git/GitHub; недостающие ID найди, deploy ради статуса не повторяй. Checkpoint до merge допустим: поставку подтверждают первичные records без обязательной перезаписи Markdown.
 
 DONE требует scope/DoD и обязательных проверок; реализация — также review/merge/applicable delivery всех PR с hotfix. Аудит/ревью — методы/результаты, обозначенные пробелы/blockers, разрешённое сохранение и очистка временных данных либо отчёт о согласованных остатках; публикация без поручения не требуется. Исправимый failure не завершает Goal. При внешнем blocker сохрани причину/нужное действие, продолжая независимую работу. Заверши встроенную Goal по её правилам, сообщи результат, AC/задачи, Evidence, PR/поставку и ограничения. Остановись: следующую Goal выбирает пользователь.
+
+## Инварианты PsychologyAtlas
+
+- Captured editions и история ответов неизменны при обновлении approved bank; actor isolation и идемпотентные receipts сохраняются во всех клиентах.
+- Реальные Drive IDs/URLs и exact capture mapping только локальны; Git использует stable обезличенные references. Изменение provenance обязано сохранять publication guards и существующие review receipts; очистка истории Git не подразумевается обычной миграцией.
+- Cloudflare cloud-nodes.net остаётся custom Full; Strict только exact psy.cloud-nodes.net. Unrelated host rules сохраняются. Mini App — assets-only Worker, а не VPS origin. Изменения settings выполняются только в отдельно порученном scope.
+- Managed Vault содержит source-backed atomic notes и meaningful links; quiz/catalogue dump не заменяет базу знаний. Тематическая связь не равна независимому подтверждению источника; scientific holds не снимаются счётчиком notes.
