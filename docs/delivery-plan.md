@@ -1,6 +1,21 @@
 # Delivery Plan
 
-## Current Goal — REVIEW-FIXES-20261018
+## Current audit — AUDIT-REVIEW-20261021
+
+ACTIVE, local only. Прямое поручение владельца21.10: совместный полный аудит и продуктовое ревью по согласованному плану, Telegram bot включён, screenshots приходят блоками. Base origin/main a8c02a3dcf576373ac85b58a1c660e4a1a6f1b4d; отдельный managed worktree audit-review-20261021/psychology-quiz. Основная dirty ветка curriculum-progress сохраняется и исследуется отдельно.
+
+Scope: все требования/AC, PWA/Mini App/Telegram bot, контент/литература/homework/Vault, backend/data/architecture/dependencies, CI/CD и Cloudflare/Worker. Главная зона сохраняет Full; Strict допускается только для точного проектного hostname после отдельной implementation Goal. Сейчас только чтение настроек.
+
+DoD: единая карта покрытия и positive/negative scenarios с методами/версиями/результатами; подтверждённые findings с existing IDs либо новыми F-140+; свежая оценка AC/эпиков на проверенном main; локальный spec/plan и адаптация разрешённых правил; полный отчёт/скриншоты вне Git; cleanup synthetic data либо конкретные остатки. Скриншоты Telegram блокируют только оставшуюся визуальную часть, независимая работа продолжается. Без push/PR/deploy/code/config fixes, paid actions, load/failure injection или правовой/RAG реализации.
+
+Validation Plan: REQUIRED source/code/config and saved evidence mapping по всем AC; fresh visual/runtime PWA/Mini screenshots на1440/390/768; existing local synthetic tests по конкретным сомнениям и релевантный native-PG CI evidence; read-only production revision/health/auth/assets/config snapshot; Cloudflare API inventory/rules/Worker readback; Telegram code/contracts сразу, user screenshots по поступлению. REQUIRED local report/findings/spec/plan quality review и сохранность primary. Недоступность проверки фиксируется BLOCKED, не PASS/N/A. Повтор suite/источников только при изменениях или конкретном gap.
+
+Research artifacts: вне репозитория, audit-review-20261021 в task visualizations. Новые templates AGENTS/ci-cd-rules адаптируются локально с сохранением проектного routing. Публикация только вместе с будущей выбранной Goal после rebase/revalidation.
+
+Checkpoint: setup/inventory; docs/source and runtime/CF checks in progress. Предыдущая поставка PR360 завершена: main CI39112741394/CD39113079193 PASS и exact public assets/runtime подтверждены18.10; старые PENDING ниже исторические.
+
+
+## Previous Goal — REVIEW-FIXES-20261018 (DONE PR360)
 
 **ACTIVE, 18.10.2026.** Прямое поручение владельца: взять все 15 замечаний полного ревью в одну Goal, исправить и довести до PR/поставки. Base свежего origin/main `3d9efb582687edcce02a562c9d3d1ecbd378e412`; branch `codex/review-fixes-20261018`, managed worktree `review-fixes-20261018/psychology-quiz`. Primary `codex/curriculum-progress` с незакоммиченными изменениями сохраняется отдельно. Открытых PR нет; rulesets пусты; branch protection проверена существующим Git credential: strict pwa-client и validate-and-smoke-test, enforce_admins=true, required approvals=0, force-push запрещён. Connector403/CLI401 не трактуются как отсутствие защиты; git push dry-run PASS, credential не выводился. Встроенная Goal активирована.
 
