@@ -100,77 +100,8 @@
     {
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "question_ids": [
-        "m2_exp_006",
-        "m2_exp_021",
-        "m2_exp_113"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_020",
-        "m2_exp_110"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_048",
-        "m2_exp_094",
-        "m2_exp_100"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_026",
-        "m2_exp_034",
-        "m2_exp_087"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
         "m2_exp_029",
         "m2_exp_030"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_043",
-        "m2_exp_090"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_045",
-        "m2_exp_073"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_046",
-        "m2_exp_084",
-        "m2_exp_116"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_047",
-        "m2_exp_089",
-        "m2_exp_106",
-        "m2_exp_114"
-      ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_067",
-        "m2_exp_104"
       ]
     },
     {
@@ -317,6 +248,13 @@
       "question_ids": [
         "m1_phys_006",
         "m1_psyf_004"
+      ]
+    },
+    {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "question_ids": [
+        "m2_exp_098",
+        "m2_exp_110"
       ]
     }
   ]
