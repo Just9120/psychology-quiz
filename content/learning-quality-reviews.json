@@ -16615,10 +16615,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_098": {
-      "item_sha256": "842a80b58d8519cb7b598c172b7179155b44f50ff769f497c9074720c929cdb9",
+      "item_sha256": "b45e4c6c45a7e9ec388aa7efe12b907e6589f81d59ed661d06a1159ecb0e92d3",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -16630,8 +16630,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Multiple working hypotheses are a flexible course heuristic, not a mandatory clinical count or proof that every single hypothesis causes bias. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Replace dramatic-version/prove-client-wrong straw alternatives with plausible premature or untested hypothesis selection; exact information-test-revise cycle only. Exact selected current source-backed certificate; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m3_psychological_consulting_099": {
       "item_sha256": "0aaa243c1bf3bc4aacd614e8bbe6e550b7339c6ee6b10a6dd062ec9dc5a9ca02",
@@ -17368,10 +17369,10 @@
       "sources": []
     },
     "questions:other_tp_001": {
-      "item_sha256": "9e8659b346db831febf1d0425868ad62cf10856f3102c406a7e4e72f466dc057",
+      "item_sha256": "b334998b3bb06b1460415423521d1da3da519b06a22dc219ce633812c6ed81c5",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17383,14 +17384,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact lesson work/break sequence. Course description and author-specific exercise, no efficacy guarantee or physiological optimality. Official creator page paragraphs Distortion/Philosophy confirms the full method is not just25-minute timer sessions.",
-      "sources": []
+      "note": "FIX: Replace bare memorization of a number pair with application of interval/break sequence; plausible scheduling alternatives, no universal productivity claim. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:other_tp_002": {
-      "item_sha256": "4a6f3e452e76e708638e28718d5364180ac5dfb59197a03d8bceb2b0cbb12754",
+      "item_sha256": "0e52968c21b33f9cfc3a7883e87275ed490b3e535ff0d8d8b8a83e51e23647ac",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17402,14 +17404,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact author-model definition of partial influence. Excludes100-percent control of psychological states, universal energy physiology, victim blame, factual environment safety and guaranteed outcomes.",
-      "sources": []
+      "note": "FIX: Apply influence/control distinction to an authored work situation; distinguish object of action and decision authority, not a universal claim of complete mental control. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:other_tp_003": {
-      "item_sha256": "66e272ba366d61ea1f5df5ad1c7a642c3560bc2836b6af75c123b2df0f88a9b4",
+      "item_sha256": "cfea3c6bd36206ee08d88303ea91cef47fea4d0fa50b168ae0a78fe0e2ea3b02",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17421,14 +17424,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact author exercise of context exploration, scoped to self/relationships/professional environment. Excludes bodily response as proof of true goal, universal happiness guarantee, unverified quotation authorship and clinical validity claims.",
-      "sources": []
+      "note": "FIX: Replace yes/no/emotional-proof/random-acquaintance straw alternatives with actual planning/narrative/scheduling lenses; selected set is part, not exhaustive list of contexts. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:other_tp_004": {
       "item_sha256": "719b9e8a6d4379fa15b751d8c0f23e7a8496beb08f48c1df46ac0bbf85474a2c",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17440,14 +17444,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact author examples of intermediate progress. Excludes guaranteed happiness, universal tracker efficacy, compulsory handwritten letters, unverified five-P expansion and physiological energy claims.",
-      "sources": []
+      "note": "KEEP: Intermediate skills/tasks count as progress but not satisfaction of original end-goal criterion; different objective from reflection on trial005. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:other_tp_005": {
-      "item_sha256": "76d0c231ab895aeb18642dabed520e663cb68d317916a771a793699a7a69b9c3",
+      "item_sha256": "d4d2fc917d1caada2907abf00d12ec20e12f6d0064548dfd2e2750d4b84ca2d0",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17459,8 +17464,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course distinction between planned actions and reflection on already tried steps. No unverified model acronym, timeline authorship, diagnostic validation, universal readiness or therapeutic efficacy asserted.",
-      "sources": []
+      "note": "FIX: Replace tautological before/after timing recall with analysis of a specific unsuccessful trial; no forced positive thinking or guarantee that reflection solves the difficulty. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m2_quant_001": {
       "item_sha256": "1aa0597c659abc0f1849b4971c1b28f97512fbd076fe71a3f5c2756448c5b861",
@@ -17624,8 +17630,8 @@
     "questions:m4_dev_001": {
       "item_sha256": "c6684a65759a396110079fa6e87376184696ef3687297ebec491a35553ddae2e",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17637,8 +17643,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact lifespan coverage read; neighboring psychology fields replace chemistry/legal/grammar trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP: Lifespan developmental subject distinguished from individual differences, social presence and educational learning; no diagnosis or uniform age prediction. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m6_psyl_001": {
       "item_sha256": "71a1939a9aec5bca05ef93d489dc6b3ad1ea9043f243d1801d828736cf3d4e49",
@@ -17679,10 +17686,10 @@
       "sources": []
     },
     "questions:other_brand_001": {
-      "item_sha256": "838e1887209db50248303a216053c3d31dd3b2c1b248dc19e7ab58326a92af4c",
+      "item_sha256": "b1399cfc2554f2d49f5301f1d7c02e5ed5389a6867e684c28f85b11d3e01cba2",
       "discipline_id": "personal_brand",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17694,8 +17701,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Explicit course-framed heuristic definition only; no claim of a scientifically universal personality structure or guaranteed marketing/client outcome. Ends before unverified Luria quotation; historical astronaut, pregnancy/efficacy, ad-frequency and denial-language claims remain held. No currently published brand-definition question duplicates this concept.",
-      "sources": []
+      "note": "FIX: Distinguish umbrella concept from legitimate narrower presentation/marketing components; remove only/exclusively answer cues and exclude lecture revenue/Luria claims. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m5_clinical_002": {
       "item_sha256": "5e81a6b5a51fc181d14a0c0a8ef29b7cdb513d63b841767039e20fe370d710dc",
@@ -17796,10 +17804,10 @@
       "disposition": "retire"
     },
     "questions:other_bonus_001": {
-      "item_sha256": "98962702f4e55ffbac65bcdb22c4f3ae68a9b7e1a42fc035f939d53171b77b87",
+      "item_sha256": "691bc9f9127f216aebe214570290a61c38b8ecef2d6bcde77a759023ebc5dd37",
       "discipline_id": "bonus_lessons",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17811,8 +17819,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Simple income/expense timing problem from bonus course only, checked against CFPB cashflow definition. No tax/legal rule, fixed reserve percentage, debt/investment advice or promise of reduced anxiety/financial freedom. Existing bank has no direct cashflow timing concept.",
-      "sources": []
+      "note": "FIX: Correct omission of amounts from the old key and replace only/merely straw distractors with plausible aggregate/activity data; course bookkeeping principle plus authored temporal condition, no investment or financial-outcome advice. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_org_002": {
       "item_sha256": "63bfb664def9439f0e25fec0c10a4695b4429d687561c83887f98980d4fe75a3",
@@ -17988,10 +17997,10 @@
       "disposition": "keep"
     },
     "questions:m4_dev_002": {
-      "item_sha256": "685472a938ed02a433d69278b7c93fddd29394bce4b6cc94794087613980aed0",
+      "item_sha256": "bc87806e94afb7fbdc66123c20d6a40e4978e7721f10d09f153c5b04faf8cc55",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -18001,10 +18010,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact course warning against self-diagnosis from idealised childhood comparison only. Does not approve universal perfect/imperfect childhood, strength-from-adversity, parent-only rules, fixed crisis ages or causal adult outcomes. Existing developmental item defines field; new item tests limits of inference.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "Retired redundant assessment; previous exact private certificate retained for immutable historical edition."
+      ],
+      "note": "RETIRE: Generic no-diagnosis-from-age-scheme assessment duplicates the more contextual m4_dev_007. Consolidate into revised007 with plausible alternatives and individualized hypotheses; preserve old ID and immutable editions. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "retire"
     },
     "questions:m1_psyf_072": {
       "item_sha256": "c98ac8a2d3b56d4de974da4b070be85ad76fa4507d6e16c8237c481abb15b8e7",
@@ -18849,10 +18861,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_109": {
-      "item_sha256": "b9ee967ebcec111d0537850a9cb73d043823e774b2991538a92d9a56a8b7ec45",
+      "item_sha256": "004dab9c8d83de853d301d5a86b81b57e47caa09de0a79b22a984fc7573c059c",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -18864,8 +18876,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact selected statement that goals can change; collaborative framing retained from already reviewed practice18 goal/agency outline. Excludes subsequent asserted universally deeper true needs and exclusive safe-space mechanism. Own fictional learning situation; compared with095 concrete initial goal, new item tests revision rather than another goal formulation.",
-      "sources": []
+      "note": "FIX: Replace always-useless/unilateral-contract caricatures with premature confirmation/technique/conceptualization decisions; exact goal-change passage, no fixed-session outcome claim. Exact selected current source-backed certificate; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m3_psychological_consulting_110": {
       "item_sha256": "ee87a15a5f4fd146f35d21561219e2f11a3369e55e2027e738cf66cdc64bc100",
@@ -19250,10 +19263,10 @@
       "sources": []
     },
     "questions:m4_dev_003": {
-      "item_sha256": "b3be0c8b9fef2b15ca21b886809f73788a564856f5d8675ead5f6eb3a60ca4d9",
+      "item_sha256": "54a804be648ce1b9f15c6f692a9b628463c561ebea558f7d937f111d1cb65835",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19265,14 +19278,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact final identity-continuity qualification26028 onward after held deterministic stage outcomes20106:26028. Original participant/fictional names and stories omitted; no fixed age cutoffs, compulsory developmental sequence or clinical diagnosis adopted.",
-      "sources": []
+      "note": "FIX: Use plausible fixed-stage/role-only interpretations instead of obviously absolute statements; certify only the explicit closing qualification, not deterministic earlier lecture claims. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m4_dev_004": {
       "item_sha256": "85732c07e6fd8de164cfa75a1394c47b47a63188b70ec6c996e5d6a770cbff02",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19284,14 +19298,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact inner/outer distinction8890 vicinity before oversimplified simple/complex grid. Primary Vasilyuk1984 text71–76 distinguishes inner simple-complex from outer easy-difficult; no assertion that lecture grid labels or stabilisation/change paraphrase are the exact primary taxonomy. New question confined to stated basic event/experience contrast, not diagnosis or universally inevitable crisis.",
-      "sources": []
+      "note": "KEEP: Internal thoughts/feelings distinguished from external event record; no crisis or diagnostic inference from one event. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m4_dev_005": {
       "item_sha256": "032c035caa9d395a59b0b5717efd937a1c3025b18673e6eee95ace0998ea1995",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19303,8 +19318,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact shadow-as-unnoticed/rejected-experience fragment read; bounded metaphor remains, plausible self-reflection alternatives replace diagnosis/guarantees. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP: Named shadow metaphor contrasted with ideal-image/achievement/role constructs; not a mandatory developmental task or clinical technique guarantee. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m6_psyl_009": {
       "item_sha256": "3cc299e58a9770a634ada6bb07971d37658779e7f9e2952b3379bbb4cd359fe7",
@@ -20498,7 +20514,7 @@
       "sources": []
     },
     "questions:m4_dev_007": {
-      "item_sha256": "f983d176eb1ccadbee19c7ec880cf3075b9b2ec54a3f1a8d1c49895e1944992c",
+      "item_sha256": "9d86c05f9ef0b5ce86b857381ad8a2e25da0abf3edf926b86507f215597b9aa7",
       "discipline_id": "developmental_psychology",
       "reviewer": "bank-quality-20261022",
       "reviewed_at": "2026-10-22",
@@ -20513,31 +20529,12 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: The exercise asks for age-relevant tasks, hypotheses and clarifying questions. Age does not establish an inevitable crisis or shared cause. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "note": "FIX: Replace any/only/necessarily distractors with plausible but premature classification/goal/solution steps; retain individualized uncertainty and consolidate generic underdetermination old002 here. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
       "sources": [],
       "disposition": "fix"
     },
     "questions:m4_dev_008": {
-      "item_sha256": "d58369a024583d4c1ba8bf6421698fc0c073ec1e86f39e548164bff9c04a836f",
-      "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Course metaphor only; no obligatory middle-age reappraisal, true-self diagnosis or efficacy; no private classroom story copied.",
-      "sources": []
-    },
-    "questions:m4_dev_009": {
-      "item_sha256": "ceaee22ef6bd8292189cf44c268f6f8115c7059cfb09b89198fc051e94beef8a",
+      "item_sha256": "cf5d66ad3e566abb66688d08a0c3190fc630b4e67a3fdf458ada92e2effb559a",
       "discipline_id": "developmental_psychology",
       "reviewer": "bank-quality-20261022",
       "reviewed_at": "2026-10-22",
@@ -20552,15 +20549,35 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Explore meaning of continued work; the passage offers different motives. Generalizations about unpassed crises, aging and employability remain unapproved. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "note": "FIX: Replace role-as-disorder/age-determines-authenticity straw alternatives with credible role/image/compliance lenses; no archetype mechanism or universal developmental prescription approved. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
+    },
+    "questions:m4_dev_009": {
+      "item_sha256": "997f064b89d63811e55594c520e6ce4db664dfb489fb46f5cfece2cf5c1361c4",
+      "discipline_id": "developmental_psychology",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "FIX: Replace obligatory-crisis/fear/retirement questions with plausible but premature assumptions; meaning inquiry does not pathologize work after retirement eligibility. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
       "sources": [],
       "disposition": "fix"
     },
     "questions:other_tp_006": {
-      "item_sha256": "a3fde2565c89239db1ee17d0e26127b694f8d34bb669cd662c034c15a95afdb8",
+      "item_sha256": "7b9d8727744cc1f6f27a067491a3ad6acddc8111f90f90f5fdcc5854d0bd1fc6",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20572,14 +20589,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Definition/active procrastination distinction only; own fictional illustration, no neural cause, moral diagnosis or guaranteed technique efficacy.",
-      "sources": []
+      "note": "FIX: Replace universal any-busyness/one-cause assertions with differentiated information needs; no laziness label or causal inference from activity alone. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:other_tp_007": {
       "item_sha256": "c72f973a9ce94d59cabec9d107a3336a3b241bd1c3f1e83cfff2fb724f2da904",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20591,8 +20609,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Explicitly metaphorical sentence only; physiological energy, diagnostic instrument and universal recovery claims not adopted.",
-      "sources": []
+      "note": "KEEP: Explicit resource metaphor distinguished from physical-energy measurement, diagnosis and single-cause fatigue inference; protects against pseudoscientific interpretation. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m4_person_024": {
       "item_sha256": "7da5e2c96b1468c1febc94842f52a32f3884a5303a9eb4d0fe838bdb56739ab2",
@@ -20614,7 +20633,7 @@
       "sources": []
     },
     "questions:other_bonus_002": {
-      "item_sha256": "494f15caa9d052a599886e7d0ae0fcb2d502ff7c3ac0ff2beb7ca8c7e907a669",
+      "item_sha256": "245f6818f184557ad61e58d62f145d4bab1b896293084b4117f216c64e7dfa74",
       "discipline_id": "bonus_lessons",
       "reviewer": "bank-quality-20261022",
       "reviewed_at": "2026-10-22",
@@ -20629,15 +20648,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Course distinguishes available resources and debt. Original arithmetic example is 12000 minus5000=7000, no real financial recommendation; debt-refinancing/investment advice outside passage remains unapproved. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "note": "FIX: Replace three absurd free-money claims with exact numeric arithmetic alternatives; distinct balance/obligation objective retained, only stated amounts considered. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
       "sources": [],
       "disposition": "fix"
     },
     "questions:other_brand_002": {
-      "item_sha256": "1601b3716694e1df1210ba77f2b7d6e94bc75061ca646577e857ef1d769e4662",
+      "item_sha256": "60b34636011f72ee2aadf0e568fe5e51610532b67b201bc41f4002a9f75be8b4",
       "discipline_id": "personal_brand",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20649,8 +20668,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Audience-description sentence only; nearby private client/status illustrations and efficacy or revenue promises excluded.",
-      "sources": []
+      "note": "FIX: Use concrete communication-function distinction with three meaningful neighboring information types; no copied personal success case, marketing efficacy or qualification guarantee. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_psyf_081": {
       "item_sha256": "6e15728fc199d6ddbf5e642a28246afa1d85919a59e899e0114a1a5c41ef0e97",
@@ -20825,10 +20845,10 @@
       "sources": []
     },
     "questions:other_tp_008": {
-      "item_sha256": "55236544cbe319f845e62bff3bdc8c2181d1c76ed4c7e3c093d0217b28e3e8fd",
+      "item_sha256": "cf36c80bd97d1d7ae083f2029ab7c766e857320ad7aaa59667bc3c3defec6d09",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20840,14 +20860,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact three-point exercise distinguished from goal decomposition; no NLP efficacy, disputed authorship, transcript future/present typo or autobiographical content.",
-      "sources": []
+      "note": "FIX: Replace recall of arbitrary letter C with functional support/barrier assessment; remove diagnosis and only-position straw alternatives. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:other_tp_009": {
-      "item_sha256": "26c122988e104128f32299630ef55f1c5e410f595c0db939a74e13597d030dfe",
+      "item_sha256": "d46836597264155d8c5c9acd575191c5b1a46687d8903bbe1acd94d469c18c79",
       "discipline_id": "turning_point",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20859,8 +20880,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Bounded reflection prompt on social expectations; excludes blanket goals-guarantee-happiness, bodily authenticity inference and compulsory abandonment of obligations.",
-      "sources": []
+      "note": "FIX: Keep external-influence objective while using real goal dimensions as distractors; reject lecture blanket inference that external norms replace true wishes. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m2_pd_017": {
       "item_sha256": "00c68c3d38bc9d4b3fe1915c647e029e585f8dec063b77fb73bbf4b7e8668be8",
@@ -21173,8 +21195,8 @@
     "questions:m4_dev_010": {
       "item_sha256": "0001296850cb047d32c95f048e9686a11b7eee3f14a3ac77ee5f9b235d3b9ec4",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -21186,8 +21208,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Lecture clause identifies referenced author only; substantive answer independently verified in author1984 chapterII typology71–76. Explicitly distinguishes primary categories from lecturer stability/change paraphrase; no age-crisis inevitability, mental-status diagnosis or wholebook approval.",
-      "sources": []
+      "note": "KEEP: Attributed Vasilyuk inner simple/complex and outer easy/difficult categories retained; theoretical typology not a calendar crisis diagnosis; earlier primary-text correction retained rather than reverting to lecture paraphrase. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m2_quant_007": {
       "item_sha256": "778c448fefeae76010e344a73f86eb117dc548e0c2f93db635e792c30ade739c",

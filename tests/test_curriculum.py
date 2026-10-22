@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1169
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1186
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 173
@@ -291,8 +291,15 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                                   'm2_quant_006', 'm2_quant_007', 'm6_family_004',
                                   'm6_family_005', 'm6_ethics_005', 'm6_ethics_006',
                                   'supervision_intervision_format',
+                                  'other_bonus_001', 'other_bonus_002', 'other_brand_001',
+                                  'other_brand_002', 'other_tp_001', 'other_tp_002',
+                                  'other_tp_003', 'other_tp_005', 'other_tp_006',
+                                  'other_tp_008', 'other_tp_009', 'm4_dev_003',
+                                  'm4_dev_007', 'm4_dev_008', 'm4_dev_009',
+                                  'm3_psychological_consulting_098',
+                                  'm3_psychological_consulting_109',
                               }) - {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} - {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)}
-        assert retired == {'m2_qual_009', 'm2_qual_013', 'm6_ethics_001'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)}
+        assert retired == {'m2_qual_009', 'm2_qual_013', 'm6_ethics_001', 'm4_dev_002'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)}
 
 
 def test_catalog_rejects_orphan_and_ambiguous_identities(mapped):
