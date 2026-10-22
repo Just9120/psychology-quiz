@@ -28,15 +28,13 @@
       "discipline_id": "obschaya_psihologiya",
       "question_ids": [
         "m1_gp_009",
-        "m1_gp_024",
-        "m1_gp_036"
+        "m1_gp_024"
       ]
     },
     {
       "discipline_id": "obschaya_psihologiya",
       "question_ids": [
         "m1_gp_032",
-        "m1_gp_045",
         "m1_gp_050"
       ]
     },
