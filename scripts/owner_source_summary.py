@@ -11,6 +11,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from app.source_inventory import InventoryError, reviewed_graph, processing_status, combine_registries
 from app.content_publication import fingerprint, load_policy
+from app.source_aliases import private_graph_inputs, source_alias
 from app.curriculum import load_reviewed_catalog
 from scripts.source_inventory_report import _read, _snapshot, report, private_json_target, private_registry_input, private_topics_input, combine_private_topics
 
@@ -18,6 +19,7 @@ from scripts.source_inventory_report import _read, _snapshot, report, private_js
 def lesson_coverage(current, processed, registry, curriculum, published_items):
     """Only an exact current question edition acquires its reviewed lesson."""
     snapshot = _snapshot(current)
+    registry, curriculum = private_graph_inputs(snapshot, registry, curriculum)
     graph = reviewed_graph(snapshot, registry, curriculum)
     states = processing_status(snapshot, processed)
     registered = {item["id"]: item for item in registry["sources"]}
@@ -87,7 +89,7 @@ def glossary_coverage(coverage, published_glossary, policy, curriculum):
                     or lesson["processing_state"] != "processed"):
                 continue
             if any(isinstance(ref, dict)
-                   and ref.get("source_id") == source["source_id"]
+                   and source_alias(ref.get("source_id")) == source_alias(source["source_id"])
                    and ref.get("modified_time") == source["modified_time"]
                    and ref.get("snapshot_sha256") == source["snapshot_sha256"] for ref in refs):
                 matched.add(key)
@@ -110,7 +112,7 @@ def prepared_note_coverage(coverage, note_manifest, current, processed, curricul
         matched = []
         for key, topic in curriculum["topics"].items():
             source = topic["source"]
-            if (note["source_id"] == source["source_id"]
+            if (source_alias(note["source_id"]) == source_alias(source["source_id"])
                     and note["source_revision"][0] == source["modified_time"]
                     and note["source_sha256"] == source["snapshot_sha256"]):
                 matched.append(key)

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Icon } from './Icon'
 import { ChoiceMenu } from './ChoiceMenu'
 import type { AttemptPage, ErrorsPage, HistoryAttempt, HistoryPage, ProgressOverview, SavedAnswer } from './types'
@@ -17,7 +17,10 @@ export function AnswerReview({ item }: { item: SavedAnswer }) {
   return <div className="answer-review">
     <p className={item.is_correct ? 'saved-label' : 'warning-text'}>{item.is_correct ? 'Ответ был верным' : 'Ответ был неверным'}</p>
     {legacy && <p className="notice">Редакция восстановлена из банка позже: исходный текст мог отличаться. Сохранённый результат ответа не пересчитан.</p>}
-    {item.case && <section className="saved-case" aria-label="Сохранённый кейс"><h3>Ситуация</h3><p className="case-situation">{item.case.situation}</p><p><strong>Подход:</strong> {item.case.approach}</p><h3>Условия</h3><ul>{item.case.conditions.map((condition, index) => <li key={index}>{condition}</li>)}</ul><h3>Варианты действий</h3><ol>{item.case.option_rationales.map((reason, index) => <li key={index}>{reason}</li>)}</ol><p className="hint">{item.case.ambiguity}</p></section>}
+    {item.case && <section className="saved-case" aria-label="Сохранённый кейс"><h3>Ситуация</h3><p className="case-situation">{item.case.situation}</p><p><strong>Подход:</strong> {item.case.approach}</p><h3>Условия</h3><ul>{item.case.conditions.map((condition, index) => <li key={index}>{condition}</li>)}</ul><h3>Варианты действий</h3><ol>{item.case.option_rationales.map((reason, index) => {
+      const option = item.options?.[index]
+      return <li key={option?.option_index ?? index}><strong>{option?.option_text ?? `Вариант ${index + 1}: текст не сохранён`}</strong>{option?.option_index === item.selected_option_index && <span> · Ваш ответ</span>}{option?.is_correct && <span> · Правильный ответ</span>}<p>{reason}</p></li>
+    })}</ol><p className="hint">{item.case.ambiguity}</p></section>}
     <dl><dt>Ваш ответ</dt><dd>{item.selected_option_text ?? 'Вариант не сохранён'}</dd><dt>{legacy ? 'Правильный ответ восстановленной редакции' : 'Правильный ответ'}</dt><dd>{item.correct_option_text ?? 'Нет данных'}</dd><dt>Объяснение</dt><dd>{item.explanation || 'Для этой редакции объяснение не сохранено.'}</dd></dl>
   </div>
 }
@@ -28,11 +31,30 @@ export function ProgressView({ data, history, detail, busy, onRefresh, onMore, o
   scope?: string | null; onScope?: (scope: string | null) => void
 }) {
   const [topic, setTopic] = useState('')
+  const detailHeading = useRef<HTMLHeadingElement>(null)
+  const returnTo = useRef<{ y: number; id: number } | null>(null)
+  const previousDetail = useRef<number | null>(null)
+  const detailId = detail?.attempt.session_id ?? null
+  useLayoutEffect(() => {
+    if (detailId !== null && previousDetail.current !== detailId) {
+      detailHeading.current?.focus({ preventScroll: true })
+      window.scrollTo({ top: 0 })
+    } else if (detailId === null && previousDetail.current !== null && returnTo.current) {
+      const saved = returnTo.current
+      document.getElementById(`attempt-${saved.id}`)?.focus({ preventScroll: true })
+      window.scrollTo({ top: saved.y })
+    }
+    previousDetail.current = detailId
+  }, [detailId])
+  function openAttempt(id: number) {
+    returnTo.current = { y: window.scrollY, id }
+    onOpen(id)
+  }
   const curriculum = data.curriculum
   const groups = curriculum ? [...curriculum.disciplines.flatMap(item => [item, ...item.topics]), curriculum.unmapped] : []
   const selected = groups.find(item => item.scope === scope)
   const days = selected?.days ?? (curriculum ? data.days : data.topics.find(item => item.topic === topic)?.days ?? data.days)
-  if (detail) return <section className="page-width progress-page"><button className="text-button" disabled={busy} onClick={onBack}>← К прогрессу</button><h1>Разбор попытки</h1><div className="panel attempt-summary"><AttemptSummary item={detail.attempt} /></div>
+  if (detail) return <section className="page-width progress-page"><button className="text-button" disabled={busy} onClick={onBack}>← К прогрессу</button><h1 ref={detailHeading} tabIndex={-1}>Разбор попытки</h1><div className="panel attempt-summary"><AttemptSummary item={detail.attempt} /></div>
     {detail.items.length === 0 && <p className="panel">В этой попытке пока нет сохранённых ответов.</p>}
     <p className="hint">Показана вся попытка, включая ответы по другим темам.</p>
     {detail.items.map(item => <article className="panel review-card" key={item.answer_id}><span className="eyebrow">{item.curriculum?.discipline_title ?? item.topic}</span><p className="hint">{item.curriculum?.topic_title ?? 'Вложенная тема этой редакции не подтверждена'}</p><h2>{item.question_text}</h2><AnswerReview item={item} /></article>)}
@@ -63,7 +85,7 @@ export function ProgressView({ data, history, detail, busy, onRefresh, onMore, o
         <table className="practice-table"><caption className="sr-only">Доля верных ответов по дням</caption><thead><tr><th>День</th><th>Верно</th><th>Ответов</th></tr></thead><tbody>{days.map(item => <tr key={item.day}><th scope="row">{day(item.day)}</th><td><span>{percent(item.accuracy)}</span><progress aria-label={`Верных ответов за ${day(item.day)}`} max={100} value={item.accuracy ?? 0} /></td><td>{item.correct} / {item.answered}</td></tr>)}</tbody></table>
       </section>
     </>}
-    <section className="practice-section"><h2>История попыток</h2>{selected && <p className="notice">Фильтр: {selected.title}. Показаны попытки с ответами в этой группе; результат карточки относится ко всей попытке. <button className="text-button" disabled={busy} onClick={() => onScope?.(null)}>Все попытки</button></p>}{history.items.length === 0 ? <p className="muted">{selected ? 'В этой группе пока нет попыток с ответами.' : 'Пока нет попыток.'}</p> : <ul className="attempt-list">{history.items.map(item => <li className="panel" key={item.session_id}><div className="attempt-summary"><AttemptSummary item={item} /></div><button className="button secondary" disabled={busy} aria-label={`Открыть попытку ${item.session_id}`} onClick={() => onOpen(item.session_id)}>Разобрать ответы<Icon name="arrow" /></button></li>)}</ul>}{history.next_before !== null && <button className="button secondary" disabled={busy} onClick={onMore}>Ещё попытки</button>}</section>
+    <section className="practice-section"><h2>История попыток</h2>{selected && <p className="notice">Фильтр: {selected.title}. Показаны попытки с ответами в этой группе; результат карточки относится ко всей попытке. <button className="text-button" disabled={busy} onClick={() => onScope?.(null)}>Все попытки</button></p>}{history.items.length === 0 ? <p className="muted">{selected ? 'В этой группе пока нет попыток с ответами.' : 'Пока нет попыток.'}</p> : <ul className="attempt-list">{history.items.map(item => <li className="panel" key={item.session_id}><div className="attempt-summary"><AttemptSummary item={item} /></div><button className="button secondary" disabled={busy} id={`attempt-${item.session_id}`} aria-label={`Открыть попытку ${item.session_id}`} onClick={() => openAttempt(item.session_id)}>Разобрать ответы<Icon name="arrow" /></button></li>)}</ul>}{history.next_before !== null && <button className="button secondary" disabled={busy} onClick={onMore}>Ещё попытки</button>}</section>
   </section>
 }
 

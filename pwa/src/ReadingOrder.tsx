@@ -42,8 +42,8 @@ export function ReadingOrder({ items, allItems, busy, onSelect }: { items: Item[
     groups.at(-1)!.entries.push(entry)
   })
   return <details className="panel reading-order"><summary><span>Рекомендуемая последовательность чтения</span><span className="route-count">Материалов: {order.length}</span></summary>
-    <p className="reading-route-intro">Рекомендация агента: начните с подготовки, затем двигайтесь по этапам. Материалы одного этапа без зависимостей можно выбирать по интересу.</p>
-    {order.length ? <>{groups.map((group, groupIndex) => <details className="reading-stage" key={`${group.stage}:${group.start}`} open={groupIndex === 0}><summary>{group.stage} · {group.entries.length}</summary><ol className="reading-steps" start={group.start + 1}>{group.entries.map(({ item, stage, prerequisites }, index) => <li className="reading-step" key={item.work_id ?? item.id}>
+    <p className="reading-route-intro">Рекомендация агента: двигайтесь по номерам шагов. Сначала учитывается необходимая подготовка и значимость материала, поэтому один уровень может встречаться несколько раз. Материалы без зависимостей можно выбирать по интересу.</p>
+    {order.length ? <>{groups.map((group, groupIndex) => <details className="reading-stage" key={`${group.stage}:${group.start}`} open={groupIndex === 0}><summary>Шаги {group.start + 1}–{group.start + group.entries.length} · {group.stage}</summary><ol className="reading-steps" start={group.start + 1}>{group.entries.map(({ item, stage, prerequisites }, index) => <li className="reading-step" key={item.work_id ?? item.id}>
       <span className="step-number" aria-hidden="true">{String(group.start + index + 1).padStart(2, '0')}</span>
       <div className="step-content"><div className="step-heading"><button className="text-button reading-step-title" disabled={busy} onClick={() => onSelect(item.id)}>{item.title ?? 'Материал'}</button>
         <span className={`reading-status status-${item.user_state?.reading_status ?? 'not_started'}`}>{statuses[item.user_state?.reading_status ?? 'not_started']}</span></div>

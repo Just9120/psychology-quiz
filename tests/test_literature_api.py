@@ -12,6 +12,7 @@ from app.db import create_or_load_user
 from app.literature import load_literature_items
 from app.miniapp_api import (
     build_literature_items_response,
+    build_literature_catalog_response,
     build_literature_progress_response,
     build_literature_state_response,
     build_literature_topics_response,
@@ -62,6 +63,24 @@ class LiteratureApiTests(unittest.TestCase):
 
     def _payload(self, response_tuple):
         return json.loads(response_tuple[2].decode("utf-8"))
+
+    def test_compact_catalog_preserves_work_entries_and_actor_states_with_less_transfer(self):
+        compact = build_literature_catalog_response(self.db, self.bot_token, self.init_data)
+        flat = build_literature_items_response(self.db, self.bot_token, self.init_data)
+        self.assertEqual(compact[0], 200)
+        self.assertLess(len(compact[2]), len(flat[2]))
+        actual = {entry['id']: entry for work in self._payload(compact)['works'] for entry in work['entries']}
+        expected = {entry['id']: entry for entry in self._payload(flat)['literature_items']}
+        self.assertEqual(set(actual), set(expected))
+        for key, entry in actual.items():
+            self.assertEqual(entry.get('user_state'), expected[key].get('user_state'))
+            self.assertEqual(entry['prerequisites'], expected[key]['prerequisites'])
+            self.assertEqual(entry['reading_topics'], expected[key]['reading_topics'])
+        route = '/miniapp/literature/catalog-compact'
+        self.assertEqual(self.client.get(route).status_code, 401)
+        response = self.client.get(route, headers={'Authorization': 'tma ' + self.init_data})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), self._payload(compact))
 
     def test_topics_endpoint_returns_literature_topics_and_counts(self):
         code, _, body = build_literature_topics_response(self.db, self.bot_token, self.init_data)

@@ -12,12 +12,16 @@ RUN . /etc/os-release && test "$VERSION_CODENAME" = trixie \
 COPY deploy/search-debian.sources /etc/apt/sources.list.d/debian.sources
 RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/*
+COPY requirements-bootstrap.lock /app/requirements-bootstrap.lock
+RUN python -m pip install --no-cache-dir --require-hashes -r /app/requirements-bootstrap.lock
 COPY requirements-search.lock /app/requirements-search.lock
 RUN pip install --no-cache-dir --require-hashes -r /app/requirements-search.lock
+RUN python -c "from pathlib import Path; import certifi; import pip._vendor.certifi as bundled; assert certifi.__version__ == bundled.__version__; assert Path(certifi.where()).read_bytes() == Path(bundled.where()).read_bytes()"
 COPY app/private_search.py /app/app/private_search.py
 COPY app/private_rag.py /app/app/private_rag.py
 COPY app/postgres_config.py /app/app/postgres_config.py
 COPY app/source_inventory.py /app/app/source_inventory.py
+COPY app/source_aliases.py /app/app/source_aliases.py
 COPY app/source_evidence.py /app/app/source_evidence.py
 COPY content/source-corpus.json /app/content/source-corpus.json
 ENTRYPOINT ["python", "-m", "app.private_search"]

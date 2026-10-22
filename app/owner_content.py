@@ -7,6 +7,7 @@ from pathlib import Path
 from app.glossary import load_glossary_entries
 from app.curriculum import load_catalog
 from app.literature import load_literature_items, load_topic_registry
+from app.knowledge_coverage import published_knowledge
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -123,6 +124,7 @@ def source_summary():
 
 
 def dashboard(conn):
+    knowledge = published_knowledge()
     registry = load_topic_registry()
     # Imported category slugs are derived from their names; they are not the
     # stable identifiers of the public discipline registry.
@@ -150,5 +152,5 @@ def dashboard(conn):
                        "literature_works": len(literature.get(key, set())),
                        "notes_state": "UNSET", "notes": None,
                        "gaps": [kind for kind, count in kinds.items() if count == 0]})
-    return {"ok": True, "topics": topics, "sources": source_summary(),
+    return {"ok": True, "topics": topics, "sources": source_summary(), "knowledge": knowledge,
             "unmapped_questions": sum(sum(kinds.values()) for kinds in counts.values())}

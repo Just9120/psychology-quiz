@@ -14,6 +14,7 @@ export interface Account {
 }
 
 export interface OwnerContent {
+  knowledge?: { state: 'UNSET' | 'PUBLISHED'; reason?: string; published_at?: string; package_sha256?: string; atomic_notes?: number; unmapped_notes?: number; sections?: { title: string; notes: number }[]; lessons?: Record<string, number>; disciplines?: Record<string, number> }
   ok: true
   topics: { id: string; title: string; module: string; questions: number; kinds: Record<'theory' | 'glossary' | 'case', number>; glossary_terms: number | null; literature_works: number; notes_state: 'UNSET'; notes: null; gaps: string[] }[]
   sources: { state: 'UNSET' | 'PARTIAL'; reason?: string; captured_at?: string; observation_basis?: 'saved_inputs'; files?: number; folders?: number; processing?: Record<string, number>; processing_records?: number; known_holds?: number; coverage?: { unreleased_lessons?: { total: number; processing: Record<string, number>; metadata_current: number; known_holds: number }; tracked_sources: number; untracked_files: number; source_metadata: Record<string, number>; unmapped_published_questions: number; prepared_notes_unmapped?: number; unmapped_published_glossary?: number; lessons: { id: string; title: string; discipline: string; kinds: Record<'theory' | 'glossary' | 'case', number>; source_metadata_current: boolean; processing_state: string; known_hold: boolean; glossary_terms: number | null; notes: number | null; notes_state: 'UNSET' | 'PREPARED' }[] } }
@@ -193,6 +194,8 @@ export interface HistoryAttempt extends PracticeCounts {
   total_questions: number
 }
 export interface SavedAnswer {
+  options?: { option_index: number; option_text: string; is_correct: boolean }[]
+  selected_option_index?: number
   case?: { situation: string; approach: string; conditions: string[]; ambiguity: string; option_rationales: string[] } | null
   answer_id: number
   question_id: number

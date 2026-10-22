@@ -2,6 +2,8 @@ import { afterEach, beforeEach, expect, test, vi } from 'vitest'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MiniApp } from '../src/miniapp/MiniApp'
 import { miniRequest } from '../src/miniapp/api'
+import { chooseMenu } from './choose-menu'
+import userEvent from '@testing-library/user-event'
 
 const setupOptions = { categories: [{ id: 1, name: 'Кейсы' }], question_count_choices: [5, 'all'], difficulty_choices: ['any'], content_kind_choices: ['theory', 'glossary', 'case'] }
 const question = { session_id: 10, question_id: 20, question_text: 'Что делать на первой консультации?', order_index: 1, total_questions: 1, options: [{ option_index: 0, option_text: 'Спросить о запросе' }, { option_index: 1, option_text: 'Дать диагноз' }] }
@@ -82,8 +84,7 @@ test('verified Telegram actor can open review, glossary and literature without P
       '/miniapp/learning/achievements': { achievements: [] },
       '/miniapp/answer': { glossary_state: { state: 'idle' } },
       '/miniapp/glossary/topics': { glossary: { topics: [{ topic_id: 'intro', title: 'Введение', available_count: 5 }] } },
-      '/miniapp/literature/topics': { literature_topics: [{ topic_id: 'intro', title: 'Введение' }] },
-      '/miniapp/literature/items': { literature_items: [{ id: 'book-1', topic_id: 'intro', title: 'Учебный список', authors: ['Автор'] }] },
+      '/miniapp/literature/catalog-compact': { topics: [{ topic_id: 'intro', title: 'Введение' }], works: [{ work_id: 'work-1', title: 'Учебный список', authors: ['Автор'], entries: [{ id: 'book-1', topic_id: 'intro' }] }] },
     }
     if (!values[path]) throw Error(`unexpected route ${path}`)
     return reply({ ok: true, ...(values[path] as object) })
@@ -102,5 +103,74 @@ test('verified Telegram actor can open review, glossary and literature without P
   await screen.findByRole('heading', { name: 'Мой прогресс' })
   expect(screen.getByText(/Истории квизов пока нет/)).toBeInTheDocument()
   expect(seen).toContain('/miniapp/glossary/topics')
-  expect(seen).toContain('/miniapp/literature/items')
+  fireEvent.click(screen.getByRole('button', { name: 'Литература' }))
+  await screen.findByRole('heading', { name: 'Литература' })
+  expect(seen.filter(path => path === '/miniapp/literature/catalog-compact')).toHaveLength(1)
+  expect(seen).not.toContain('/miniapp/literature/topics')
+})
+
+test('an actor change during a request rejects the old response', async () => {
+  let resolve!: (response: Response) => void
+  vi.stubGlobal('fetch', vi.fn(() => new Promise<Response>(done => { resolve = done })))
+  const request = miniRequest('literature/catalog-compact')
+  window.Telegram!.WebApp!.initData = 'another-actor'
+  resolve(reply({ ok: true, works: [] }))
+  await expect(request).rejects.toMatchObject({ status: 401 })
+})
+
+test('catalog cache follows the actor, saves shared-work marks without refetch and recovers uncertain writes', async () => {
+  let catalogs = 0, writes = 0, savedStatus = 'not_started'
+  const makeCatalog = () => ({ ok: true, topics: [], works: [{ work_id: 'shared', title: window.Telegram!.WebApp!.initData === 'another-actor' ? 'Другой каталог' : 'Моя книга', authors: ['Автор'],
+    entries: ['one', 'two'].map(id => ({ id, topic_id: id, user_state: { reading_status: savedStatus, progress_percent: null } })) }] })
+  vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL, options?: RequestInit) => {
+    const path = new URL(String(input)).pathname
+    if (path.endsWith('/setup-options')) return reply({ ok: true, setup_options: setupOptions })
+    if (path.endsWith('/state')) return reply({ ok: true, runner_state: idle })
+    if (path.endsWith('/catalog-compact')) { catalogs++; return reply(makeCatalog()) }
+    if (path.endsWith('/progress')) {
+      writes++
+      savedStatus = JSON.parse(String(options?.body)).payload.reading_status
+      if (writes === 2) throw Error('reply lost after commit')
+      return reply({ ok: true, literature_progress: { reading_status: savedStatus, progress_percent: null } })
+    }
+    throw Error(`unexpected route ${path}`)
+  }))
+  render(<MiniApp />)
+  await screen.findByRole('heading', { name: 'Что изучим сегодня?' })
+  fireEvent.click(screen.getByRole('button', { name: 'Литература' }))
+  await screen.findByRole('button', { name: 'Моя книга' })
+  fireEvent.click(screen.getByRole('button', { name: 'Моя книга' }))
+  await chooseMenu(userEvent.setup(), screen.getByLabelText('Статус'), 'read')
+  fireEvent.click(screen.getByRole('button', { name: 'Сохранить чтение' }))
+  await screen.findByText('Отметка сохранена.')
+  expect(catalogs).toBe(1)
+  fireEvent.click(screen.getByRole('button', { name: 'Квиз' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Литература' }))
+  await screen.findByRole('button', { name: 'Моя книга' })
+  expect(screen.getAllByText('Прочитано').length).toBeGreaterThan(0)
+  expect(catalogs).toBe(1)
+  fireEvent.click(screen.getByRole('button', { name: 'Моя книга' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Сохранить чтение' }))
+  await screen.findByText('Сохранение не подтверждено. Сначала обновите каталог.')
+  expect(screen.getByRole('button', { name: 'Сохранить чтение' })).toBeDisabled()
+  fireEvent.click(screen.getByRole('button', { name: 'Квиз' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Литература' }))
+  await screen.findByRole('button', { name: 'Моя книга' })
+  expect(catalogs).toBe(2)
+  // An SDK identity change before a stale DOM handler runs must not populate
+  // B's response under A's cached identity (nor send A's choice as B).
+  window.Telegram!.WebApp!.initData = 'another-actor'
+  fireEvent.click(screen.getByRole('button', { name: 'Обновить каталог' }))
+  await screen.findByRole('alert')
+  expect(catalogs).toBe(2)
+  window.Telegram!.WebApp!.initData = 'verified-test-payload'
+  fireEvent.click(screen.getByRole('button', { name: 'Литература' }))
+  await screen.findByRole('button', { name: 'Моя книга' })
+  expect(catalogs).toBe(3)
+  fireEvent.click(screen.getByRole('button', { name: 'Квиз' }))
+  window.Telegram!.WebApp!.initData = 'another-actor'
+  fireEvent.click(screen.getByRole('button', { name: 'Литература' }))
+  await screen.findByRole('button', { name: 'Другой каталог' })
+  expect(screen.queryByRole('button', { name: 'Моя книга' })).not.toBeInTheDocument()
+  expect(catalogs).toBe(4)
 })

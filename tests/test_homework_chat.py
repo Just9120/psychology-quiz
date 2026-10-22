@@ -2,6 +2,38 @@
 from app import homework_chat
 
 
+def test_paged_hierarchy_keeps_all_long_topics_reachable_and_returns_to_parent_page(monkeypatch):
+    catalog = [{"id": str(index), "title": "Полное длинное название задания " + str(index),
+        "discipline": f"Дисциплина {index // 7:02}", "topic": "Подробное название темы без потери значимых слов " + str(index),
+        "completed": index == 8, "active_session_id": None} for index in range(42)]
+    monkeypatch.setattr(homework_chat, "catalog_for_actor", lambda conn, actor: {"assignments": catalog})
+    seen = set()
+    disciplines = homework_chat._children(catalog, ())
+    for root_page in range(2):
+        text, keyboard = homework_chat._list(None, 42, page=root_page)
+        buttons = [button for row in keyboard.inline_keyboard for button in row]
+        assert len(buttons) <= 7
+        for button in [b for b in buttons if b.callback_data.startswith("hw:nav:")]:
+            discipline = next(path for path in disciplines if homework_chat._path_token(path) == button.callback_data.split(":")[2])
+            for page in range(2):
+                text, keyboard = homework_chat._list(None, 42, navigation=homework_chat._path_token(discipline), page=page)
+                back = keyboard.inline_keyboard[0][0].callback_data
+                assert back == f"hw:list:all:{disciplines.index(discipline) // homework_chat.PAGE_SIZE}"
+                topics = homework_chat._children(catalog, discipline)
+                for row in keyboard.inline_keyboard[1:]:
+                    for child in row:
+                        if not child.callback_data.startswith("hw:nav:") or len(child.callback_data.split(":")) != 3:
+                            continue
+                        path = next(path for path in topics if homework_chat._path_token(path) == child.callback_data.split(":")[2])
+                        assert path[-1] in text  # Full title remains readable even when the button is shortened.
+                        preview, actions = homework_chat._list(None, 42, navigation=homework_chat._path_token(path))
+                        callbacks = [b.callback_data for r in actions.inline_keyboard for b in r]
+                        assert callbacks[0] == f"hw:nav:{homework_chat._path_token(discipline)}:{topics.index(path) // homework_chat.PAGE_SIZE}"
+                        seen.update(value[9:] for value in callbacks if value.startswith("hw:start:"))
+                        assert all(len(value.encode()) <= 64 for value in callbacks)
+    assert seen == {item["id"] for item in catalog}
+
+
 def test_hierarchy_filters_exact_parent_and_keeps_attempt_callbacks(monkeypatch):
     catalog = [
         {"id": "one", "title": "Первое", "module": "Модуль 1", "discipline": "Психология", "topic": "Память", "completed": False, "active_session_id": 12},

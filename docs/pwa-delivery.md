@@ -1,10 +1,10 @@
 # Публикация самостоятельной PWA
 
-После подготовки кода пользователь 19.09.2026 поручил настройку VPS и публикацию PWA. Target и config owner установлены; первичный HTTP маршрут и сертификат подготовлены оператором. Активация backend/static, local HTTPS и public smoke из VPS и независимой сети подтверждены. Первоначальный URLError не воспроизвёлся при read-only повторе проверки; конфигурация не менялась. Real-mail/owner acceptance пока PENDING; результаты и ограничения — в E-PWA-05 плана. [Backend auth/config](pwa-auth.md), [existing VPS procedure](miniapp-deployment-qa.md) и [client/build](pwa-client.md) сохраняют свои роли. Canonical frontend commands — [README](../README.md#pwa-local-run-и-проверки).
+После подготовки кода пользователь 19.09.2026 поручил настройку VPS и публикацию PWA. Target и config owner установлены; первичный HTTP маршрут и сертификат подготовлены оператором. Активация backend/static, local HTTPS и public smoke из VPS и независимой сети подтверждены. Первоначальный URLError не воспроизвёлся при read-only повторе проверки; конфигурация не менялась. Это историческая первичная поставка. Актуальные acceptance/runtime records и ограничения — в [аудиторском baseline](delivery-plan.md#current-audit--audit-review-20261021). [Backend auth/config](pwa-auth.md), [existing VPS procedure](miniapp-deployment-qa.md) и [client/build](pwa-client.md) сохраняют свои роли. Canonical frontend commands — [README](../README.md#pwa-local-run-и-проверки).
 
 ## Установленный target и operator setup
 
-Источник: явные решения владельца, DNS screenshot и вывод root-сессии MobaXterm 19.09.2026; локального SSH-доступа агента нет. Текущий статус поставки и primary records — [Результаты PWA Goal](delivery-plan.md#завершённая-goal--pwa-first-001).
+Источник: явные решения владельца, DNS screenshot и вывод root-сессии MobaXterm 19.09.2026; текущий SSH-доступ агента определяется личным contabo-vps skill, без изменения target или полномочий. Текущий статус поставки и primary records — [Результаты PWA Goal](delivery-plan.md#current-audit--audit-review-20261021).
 
 | Поверхность | Значение / owner |
 | --- | --- |

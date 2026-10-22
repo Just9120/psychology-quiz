@@ -107,6 +107,9 @@ def reviewed_chunks(manifest: dict, corpus: dict, root: Path, reviews: dict | No
     if (manifest.get("schema_version") != 1 or not isinstance(manifest.get("sources"), list)
             or not isinstance(manifest.get("notes", []), list)):
         raise SearchError("invalid_private_manifest")
+    from app.source_aliases import resolve_public_sources
+    corpus = resolve_public_sources(corpus, [item.get("source_id") for item in manifest["sources"]
+                                            if isinstance(item, dict) and isinstance(item.get("source_id"), str)])
     reviewed = {item["id"]: item for item in corpus["sources"]
                 if item.get("kind") == "learning_material" and item.get("readable") is True}
     if manifest["sources"] and not isinstance(reviews, dict):

@@ -15,6 +15,8 @@ from app.classic_quiz_handlers import send_current_question
 
 from app.bot_menu import HOMEWORK_BUTTON_TEXT as BUTTON_TEXT
 
+PAGE_SIZE = 5
+
 
 def _actor(conn, tg_user) -> int:
     user = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
@@ -38,8 +40,15 @@ def _paths(catalog):
     return paths
 
 
-def _list(conn, actor: int, *, navigation: str | None = None):
+def _children(catalog, path):
+    depth = len(path)
+    return sorted({(item["discipline"], item["topic"])[:depth + 1] for item in catalog
+                   if (item["discipline"], item["topic"])[:depth] == path})
+
+
+def _list(conn, actor: int, *, navigation: str | None = None, page: int = 0):
     catalog = catalog_for_actor(conn, actor)["assignments"]
+    full_catalog = catalog
     path = ()
     if navigation is not None:
         path = _paths(catalog).get(navigation)
@@ -53,24 +62,43 @@ def _list(conn, actor: int, *, navigation: str | None = None):
     keyboard = []
     if path:
         lines.append(" → ".join(escape(value) for value in path))
-        back = "hw:nav:" + _path_token(path[:-1]) if len(path) > 1 else "hw:list:all"
+        parent = path[:-1]
+        parent_page = _children(full_catalog, parent).index(path) // PAGE_SIZE
+        back = ("hw:nav:" + _path_token(parent) if parent else "hw:list:all") + f":{parent_page}"
         keyboard.append([InlineKeyboardButton("Назад", callback_data=back)])
-    if not path:
-        for discipline, topic in sorted({(item["discipline"], item["topic"]) for item in catalog}):
-            keyboard.append([InlineKeyboardButton(f"{topic} · {discipline}",
-                callback_data="hw:nav:" + _path_token((discipline, topic)))])
-        if catalog:
-            lines.append("Выберите тему задания.")
-            return "\n".join(lines), InlineKeyboardMarkup(keyboard)
+    if len(path) < 2 and catalog:
+        children = _children(catalog, path)
+        page = max(0, min(page, (len(children) - 1) // PAGE_SIZE))
+        start = page * PAGE_SIZE
+        lines.append(f"{'Дисциплины' if not path else 'Темы'} {start + 1}–{min(start + PAGE_SIZE, len(children))} из {len(children)}.")
+        for index, child in enumerate(children[start:start + PAGE_SIZE], start + 1):
+            title = child[-1]
+            lines.append(f"{index}. {escape(title)}")
+            label = title if len(title) <= 48 else title[:47] + "…"
+            keyboard.append([InlineKeyboardButton(label, callback_data="hw:nav:" + _path_token(child))])
+        current = "hw:nav:" + _path_token(path) if path else "hw:list:all"
+        arrows = []
+        if page:
+            arrows.append(InlineKeyboardButton("← Предыдущие", callback_data=f"{current}:{page - 1}"))
+        if start + PAGE_SIZE < len(children):
+            arrows.append(InlineKeyboardButton("Следующие →", callback_data=f"{current}:{page + 1}"))
+        if arrows:
+            keyboard.append(arrows)
+        return "\n".join(lines), InlineKeyboardMarkup(keyboard)
     if not catalog:
         lines.append("Домашних заданий пока нет.")
     for item in catalog:
         mark = "✅" if item["completed"] else "○"
-        lines.append(f"{mark} <b>{escape(item['title'])}</b> — "
-                     f"{escape(item['discipline'])}, {escape(item['topic'])}")
-        keyboard.append([InlineKeyboardButton(item["title"], callback_data="hw:start:" + item["id"])])
+        single = len(catalog) == 1
+        if single:
+            if not path or item["title"] != path[-1]:
+                lines.append(f"<b>{escape(item['title'])}</b>")
+            lines.append(f"{mark} " + ("Зачёт получен." if item["completed"] else "Зачёт ещё не получен."))
+        else:
+            lines.append(f"{mark} <b>{escape(item['title'])}</b>")
+        keyboard.append([InlineKeyboardButton("Начать тест" if single else item["title"], callback_data="hw:start:" + item["id"])])
         if item["active_session_id"]:
-            keyboard.append([InlineKeyboardButton("Продолжить: " + item["title"],
+            keyboard.append([InlineKeyboardButton("Продолжить тест" if single else "Продолжить: " + item["title"],
                 callback_data="hw:resume:" + str(item["active_session_id"]))])
     return "\n".join(lines), InlineKeyboardMarkup(keyboard)
 
@@ -104,12 +132,13 @@ async def homework_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         return
     action, key = parts[1], parts[2]
     if action in {"list", "nav"}:
-        if len(parts) != 3 or (action == "list" and key != "all"):
+        if (action == "list" and key != "all") or (len(parts) == 4 and (not parts[3].isdigit() or len(parts[3]) > 3)):
             await query.edit_message_text("Обновите список через /homework.")
             return
         with closing(get_connection(settings.db_path)) as conn, conn:
             text, markup = _list(conn, _actor(conn, tg_user),
-                                 navigation=key if action == "nav" else None)
+                                 navigation=key if action == "nav" else None,
+                                 page=int(parts[3]) if len(parts) == 4 else 0)
         await query.edit_message_text(text, reply_markup=markup, parse_mode="HTML")
         return
     with closing(get_connection(settings.db_path)) as conn, conn:

@@ -7,6 +7,30 @@ import pytest
 from app import literature_chat
 
 
+def test_root_pagination_keeps_all_topics_and_exact_return_page(monkeypatch):
+    topics = [{"topic_id": f"topic-{index}", "title": "Полное название темы литературы с уточнениями " + str(index),
+               "item_count": 1} for index in range(22)]
+    monkeypatch.setattr(literature_chat, "list_reading_topic_payloads", lambda: topics)
+    monkeypatch.setattr(literature_chat, "list_literature_topic_payloads", lambda: [])
+    seen = []
+    for page in range(5):
+        text, keyboard = literature_chat._topics(page=page)
+        buttons = [button for row in keyboard.inline_keyboard for button in row]
+        assert len(buttons) <= 7
+        assert all(literature_chat.CALLBACK_PATTERN.fullmatch(button.callback_data) for button in buttons)
+        for button in buttons:
+            if not button.callback_data.startswith("lit:t:"):
+                continue
+            token = button.callback_data.split(":")[2]
+            topic = next(item for item in topics if literature_chat._token(item["topic_id"]) == token)
+            assert topic["title"] in text
+            seen.append(topic["topic_id"])
+            _, details = literature_chat._topic_view([], {}, token, 0)
+            assert details.inline_keyboard[-1][0].callback_data == f"lit:topics:{page}"
+    assert seen == [item["topic_id"] for item in topics]
+    assert literature_chat._topics(page=5) is None
+
+
 def test_additional_course_has_other_section_without_inventing_a_numbered_module(monkeypatch):
     monkeypatch.setattr(literature_chat, "list_reading_topic_payloads", lambda: [
         {"topic_id": "turning_point", "title": "Точка поворота", "module": "other", "item_count": 2},

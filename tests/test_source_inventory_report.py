@@ -41,7 +41,8 @@ def test_private_inventory_report_reconciles_without_exposing_ids(tmp_path, caps
     assert "current_review_gate_requires_reviewed" in capsys.readouterr().err
 
 
-def test_changed_source_keeps_derivative_held_until_new_review(tmp_path):
+@pytest.mark.parametrize("public_aliases", [False, True])
+def test_changed_source_keeps_derivative_held_until_new_review(tmp_path, public_aliases):
     current = export(["private"])
     content = tmp_path / "source.txt"
     content.write_text("first edition", encoding="utf-8")
@@ -70,9 +71,15 @@ def test_changed_source_keeps_derivative_held_until_new_review(tmp_path):
     assert pending["private"]["previous_processed_review"] == first_record
 
     def queued(records):
+        from app.source_aliases import source_alias
+        public_registry, public_reviews = registry, reviews
+        if public_aliases:
+            public_registry = {**registry, "corpus_root_id": source_alias("root"),
+                "sources": [{**source, "id": source_alias("private")}]}
+            public_reviews = json.loads(json.dumps(reviews).replace('"private"', json.dumps(source_alias("private"))))
         return inventory_report.private_review_queue(
-            inventory_report._snapshot(changed), registry, curriculum,
-            processed=records, reviews=reviews)["files"][0]
+            inventory_report._snapshot(changed), public_registry, curriculum,
+            processed=records, reviews=public_reviews)["files"][0]
 
     assert queued(pending)["derivative_ids_requiring_review"] == ["questions:example"]
     completed = source_finalize.finalize(

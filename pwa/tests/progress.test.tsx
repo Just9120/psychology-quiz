@@ -6,11 +6,36 @@ import { AnswerReview, ErrorsView, ProgressView } from '../src/ProgressView'
 import { MiniProgress } from '../src/miniapp/MiniProgress'
 import { App } from '../src/App'
 import { api, ApiError } from '../src/api'
-import type { ErrorsPage, ProgressOverview, SavedAnswer } from '../src/types'
+import type { ErrorsPage, HistoryAttempt, ProgressOverview, SavedAnswer } from '../src/types'
 
 const overview: ProgressOverview = { ok: true, summary: { answered: 1, correct: 0, accuracy: 0, attempts: 1, finished: 0, knowledge_gaps: 0 }, topics: [{ topic: 'Память', answered: 1, correct: 0, accuracy: 0, days: [{ day: '2026-09-20', answered: 1, correct: 0, accuracy: 0 }] }], days: [{ day: '2026-09-20', answered: 1, correct: 0, accuracy: 0 }] }
 const answer: SavedAnswer = { answer_id: 1, question_id: 1, session_id: 1, answered_at: '2026-09-20 06:00:00', is_correct: false, question_text: 'Исходный вопрос?', topic: 'Память', selected_option_text: 'Ошибка', correct_option_text: 'Верный вариант', explanation: 'Исходное объяснение', snapshot_provenance: 'captured', content_sha256: 'original' }
 const errors: ErrorsPage = { ok: true, items: [{ ...answer, edition_state: 'changed', trainable: true }], next_before: null, total: 1, trainable_count: 1, latest_session_id: 1, has_active_attempt: true }
+
+it('opens a deep history row at the heading and returns focus and scroll to that row', async () => {
+  const attempt: HistoryAttempt = { session_id: 42, status: 'finished', started_at: answer.answered_at,
+    finished_at: answer.answered_at, total_questions: 1, answered: 1, correct: 0, accuracy: 0 }
+  const props = { data: overview, history: { ok: true as const, items: [attempt], next_before: null },
+    busy: false, onRefresh: vi.fn(), onMore: vi.fn(), onOpen: vi.fn(), onBack: vi.fn(), onMoreAnswers: vi.fn() }
+  const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
+  const position = vi.spyOn(window, 'scrollY', 'get').mockReturnValue(1800)
+  const view = render(<ProgressView {...props} detail={null} />)
+  const row = document.getElementById('attempt-42')!
+  await userEvent.setup().click(row)
+  expect(props.onOpen).toHaveBeenCalledWith(42)
+  const detail = { ok: true as const, attempt, items: [answer], next_after: 1 }
+  view.rerender(<ProgressView {...props} detail={detail} />)
+  expect(screen.getByRole('heading', { name: 'Разбор попытки' })).toHaveFocus()
+  expect(scroll).toHaveBeenLastCalledWith({ top: 0 })
+  scroll.mockClear()
+  view.rerender(<ProgressView {...props} detail={{ ...detail, items: [answer, { ...answer, answer_id: 2 }] }} />)
+  expect(scroll).not.toHaveBeenCalled()
+  view.rerender(<ProgressView {...props} detail={null} />)
+  expect(document.getElementById('attempt-42')).toHaveFocus()
+  expect(scroll).toHaveBeenLastCalledWith({ top: 1800 })
+  position.mockRestore()
+  scroll.mockRestore()
+})
 
 it('explains small-sample evidence and does not present accuracy as mastery', () => {
   render(<ProgressView data={overview} history={{ ok: true, items: [], next_before: null }} detail={null} busy={false} onRefresh={vi.fn()} onMore={vi.fn()} onOpen={vi.fn()} onBack={vi.fn()} onMoreAnswers={vi.fn()} />)
@@ -113,6 +138,14 @@ it('renders the saved case situation, conditions and rationale in history and er
   expect(screen.getByText('Исходная ситуация клиента')).toBeVisible()
   expect(screen.getByText('Исходное условие')).toBeVisible()
   expect(screen.getByText('Второй вариант: преждевременный совет')).toBeVisible()
+  view.rerender(<AnswerReview item={{ ...item, selected_option_index: 1, options: [
+    { option_index: 0, option_text: 'Сохранённый первый вариант', is_correct: true },
+    { option_index: 1, option_text: 'Сохранённый второй вариант', is_correct: false },
+  ] }} />)
+  expect(screen.getByText('Сохранённый первый вариант')).toBeVisible()
+  expect(screen.getByText('Сохранённый второй вариант')).toBeVisible()
+  expect(screen.getByText('· Ваш ответ')).toBeVisible()
+  expect(screen.getByText('· Правильный ответ')).toBeVisible()
   view.unmount()
   render(<ErrorsView data={{ ...errors, items: [{ ...errors.items[0], case: item.case }] }} busy={false} onRefresh={vi.fn()} onMore={vi.fn()} onTrain={vi.fn()} onResume={vi.fn()} />)
   await userEvent.setup().click(screen.getByText('Разобрать ответ'))

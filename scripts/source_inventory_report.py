@@ -246,6 +246,8 @@ def report(current: dict, *, previous: dict | None = None,
            processed: dict | None = None, links: list | None = None,
            registry: dict | None = None, curriculum: dict | None = None) -> dict:
     snapshot = _snapshot(current)
+    from app.source_aliases import private_graph_inputs
+    registry, curriculum = private_graph_inputs(snapshot, registry, curriculum)
     if processed is not None and not isinstance(processed, dict):
         raise InventoryError("invalid_processing_records")
     if links is not None and not isinstance(links, list):

@@ -48,7 +48,7 @@
       "title": "Тема 1. Кто такой психолог-консультант",
       "discipline_id": "vvedenie_v_professiyu",
       "source": {
-        "source_id": "1F6aa5YozLAjzB7pJFC6WgruwATjqO8fqNPj4LyRWOJw",
+        "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
         "modified_time": "2026-04-05T22:24:03.847Z",
         "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1"
       }
@@ -57,7 +57,7 @@
       "title": "Тема 4. Основы психологической помощи границы, роли и ответственность",
       "discipline_id": "vvedenie_v_professiyu",
       "source": {
-        "source_id": "1QHxP5QHN6_6_Sw7ehjPvvCCLSfJlIQWPGy0leFOR-z0",
+        "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
         "modified_time": "2026-04-05T22:48:11.869Z",
         "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756"
       }
@@ -66,7 +66,7 @@
       "title": "Тема 2. Кто я в профессии личность консультанта",
       "discipline_id": "vvedenie_v_professiyu",
       "source": {
-        "source_id": "1UbzFOxegipLZypjKLZEeVyXnDKovKHqPdFQiebI99Qs",
+        "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
         "modified_time": "2026-04-05T22:13:17.690Z",
         "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017"
       }
@@ -75,7 +75,7 @@
       "title": "Тема 3. Навыки, которые развивает психолог-консультант",
       "discipline_id": "vvedenie_v_professiyu",
       "source": {
-        "source_id": "14lnAmWm0bN-XHtiDAg4_qFQ5-cka4HUZ6K3kxKWSGUc",
+        "source_id": "src_3ab99fc5d2a66c65f159a4abfb87f707dd8e48bbe4b702bee0daaebd1f262ad0",
         "modified_time": "2026-04-05T22:23:50.149Z",
         "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0"
       }
@@ -84,7 +84,7 @@
       "title": "Тема 5. Как проходит психологическая консультация этапы и структура",
       "discipline_id": "vvedenie_v_professiyu",
       "source": {
-        "source_id": "1rs1B8j8jSKgfjVK1Mtt47Xy10_JsjkUPY3HZ9mZ91V4",
+        "source_id": "src_58ddf14e68332d119302f7c1c5753076393fd4231cc40c66b3e52a79be440f71",
         "modified_time": "2026-04-05T22:50:22.529Z",
         "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae"
       }
@@ -93,7 +93,7 @@
       "title": "Тема 6. Введение в клиентский запрос и типы клиентов",
       "discipline_id": "vvedenie_v_professiyu",
       "source": {
-        "source_id": "1nSlaqUVzZ68uwB0LN1gBzdcPFjjPxlf_Jz7rAg5A_XU",
+        "source_id": "src_0e6a24369f82b9bdee72751d75eb4ed7e08da1c188cef04a416e2e6299399b0c",
         "modified_time": "2026-04-05T22:53:25.427Z",
         "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87"
       }
@@ -102,7 +102,7 @@
       "title": "Тема 7. Как учиться на психолога и не сгореть внутренние опоры и поддержка",
       "discipline_id": "vvedenie_v_professiyu",
       "source": {
-        "source_id": "17cRf5sw25ROGoRyzxRBv5kDoGT5B1TOfqz_5Zhj7ugA",
+        "source_id": "src_416cf8d544ac8d0fb672c6f36f5a7b70bc32d4e76c42a2a3251686d67296f13d",
         "modified_time": "2026-04-05T22:57:49.497Z",
         "snapshot_sha256": "7be70a070add6c43e1f82f3bef996ee1e7be7d4fd71ff497467f514270f4c033"
       }
@@ -111,7 +111,7 @@
       "title": "Лекция 1. Психология как Наука",
       "discipline_id": "obschaya_psihologiya",
       "source": {
-        "source_id": "1msXwQrAZFSWsPXRizYNxVQ5FOzxThBKC0ysaZLf172E",
+        "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
         "modified_time": "2026-03-20T13:55:22.021Z",
         "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58"
       }
@@ -120,7 +120,7 @@
       "title": "Лекция 2. Психические процессы",
       "discipline_id": "obschaya_psihologiya",
       "source": {
-        "source_id": "1M28qDQGRGjoPkJ4PbMvsk1de73Rh9o-mJk1gDfZXk-8",
+        "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
         "modified_time": "2026-03-20T14:49:22.978Z",
         "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca"
       }
@@ -129,7 +129,7 @@
       "title": "Лекция 3. Психические состояния и личность",
       "discipline_id": "obschaya_psihologiya",
       "source": {
-        "source_id": "1y0jj5x9z96g7umRni_xRdYywzgGEc5qDfd0V6chYJW4",
+        "source_id": "src_c2c90d58789d9c7c79f84bd540fef66a88b5957dba6170635d01a804ce4404cf",
         "modified_time": "2026-03-20T16:06:27.409Z",
         "snapshot_sha256": "9740f8a0589cda84653431f26175887d93a448aacc4c0709c3ad3fc08648db91"
       }
@@ -138,7 +138,7 @@
       "title": "Практика №1",
       "discipline_id": "obschaya_psihologiya",
       "source": {
-        "source_id": "103jki-4r6iOXZiiPJT_30O9zUqIzntKv3v1hk2WKM0I",
+        "source_id": "src_deaddf3fda6a14e03fad61ef771e8f7db91afc5d6f312259623e2dbdb411272d",
         "modified_time": "2026-04-08T10:01:12.380Z",
         "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24"
       }
@@ -147,7 +147,7 @@
       "title": "Лекция 1. Нервная система",
       "discipline_id": "fiziologiya_cheloveka",
       "source": {
-        "source_id": "1_-az2j-AckkI5Imvc6uDaK1Kn-v8jarZx23U0EWlGY4",
+        "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
         "modified_time": "2026-04-06T14:46:17.530Z",
         "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd"
       }
@@ -156,7 +156,7 @@
       "title": "Лекция 3. Имунная система",
       "discipline_id": "fiziologiya_cheloveka",
       "source": {
-        "source_id": "1EMJFu79Uh7iBGWbHD3tT6uzbK8K8noOPyqGqaKiaQao",
+        "source_id": "src_56639aeff206bdd66dac25cdf2937e537b14f1697022e84ff9532ca3c760f460",
         "modified_time": "2026-04-06T14:48:45.485Z",
         "snapshot_sha256": "dba8cc929d3e30e7393ccd09904fc8401315ac8a6a671b076b0690853872271a"
       }
@@ -165,7 +165,7 @@
       "title": "Лекция 4. Кровеносная система",
       "discipline_id": "fiziologiya_cheloveka",
       "source": {
-        "source_id": "1PJ26qFrCsejtxljlXhcOZS6iyQAEJ1vvaVL2wcLARao",
+        "source_id": "src_a97554926f8297edefbc3a1d1fb807574e511d0daf4703800609201d3496d455",
         "modified_time": "2026-04-06T14:49:49.208Z",
         "snapshot_sha256": "0d32a19d40d64b597fc7358576de26ff8ffc1aaea9c0785727bcd3d4175c49ee"
       }
@@ -174,7 +174,7 @@
       "title": "Лекция 5. Сердечно-сосудистая система",
       "discipline_id": "fiziologiya_cheloveka",
       "source": {
-        "source_id": "1manMKgE7vEbTRpQ92hK0SHpPy6nzhaoLr6blXc9H2U0",
+        "source_id": "src_34e7af0cf12b2b8f1590b185459cd0a66324e576ba86aca4c2d867bc89aed186",
         "modified_time": "2026-04-06T14:50:56.192Z",
         "snapshot_sha256": "a0e8350b9f626c27113cd30ceeb82d79ed065457d081f7283305c1a5cbce47d0"
       }
@@ -183,7 +183,7 @@
       "title": "Лекция 6. Дыхательная система",
       "discipline_id": "fiziologiya_cheloveka",
       "source": {
-        "source_id": "1QBAQrfOYooAT_IZJdzj8P71g8tL26lP4pED-MUxUKMs",
+        "source_id": "src_7f7a18302054659937236d7e21642867a20ffeb9824dabbc3584e4d7e46ae7cd",
         "modified_time": "2026-04-06T14:52:00.573Z",
         "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002"
       }
@@ -192,7 +192,7 @@
       "title": "Лекция 7. Пищеварительная система",
       "discipline_id": "fiziologiya_cheloveka",
       "source": {
-        "source_id": "1Y4ll-SXmAKMsZvBw8m7keLukQ9I5vK_85h3JebMe8Lk",
+        "source_id": "src_6b9af2ad77d48ce20240fbd70408cd663708be3b3c3516b3bc50d6bcb9c87567",
         "modified_time": "2026-04-06T14:53:23.072Z",
         "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39"
       }
@@ -201,7 +201,7 @@
       "title": "Лекция 2. Эндокринная система",
       "discipline_id": "fiziologiya_cheloveka",
       "source": {
-        "source_id": "1rkvQhtvLygM2ZsmsM7xN6rQPCI1GGh3mn2R6P1CUrmw",
+        "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
         "modified_time": "2026-04-06T14:47:58.092Z",
         "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6"
       }
@@ -210,7 +210,7 @@
       "title": "Лекция 1. Основные понятия физиологии ВНД",
       "discipline_id": "fiziologiya_vnd",
       "source": {
-        "source_id": "1QTfeq_XskU_yGCGfVo8Qv6T_H4FTtet9zvcG3Hr9udY",
+        "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
         "modified_time": "2026-04-07T09:56:48.714Z",
         "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068"
       }
@@ -219,7 +219,7 @@
       "title": "Лекция 3. Обучение и память",
       "discipline_id": "fiziologiya_vnd",
       "source": {
-        "source_id": "1zms8Lj6MHRH_LlaSvdGL912ySXawPHCJ9cFJ3kh_vIE",
+        "source_id": "src_cf558bf515114551ff5ce00f816226f1cbde6015b711f26dbd01588299a88cba",
         "modified_time": "2026-04-07T09:57:49.509Z",
         "snapshot_sha256": "a9c5335d6c21ba59f2aea2fc4d565ea777c854b96cb768333bd6791ab0e46dc3"
       }
@@ -228,7 +228,7 @@
       "title": "Лекция 4. Эмоции, принятие решений, воля",
       "discipline_id": "fiziologiya_vnd",
       "source": {
-        "source_id": "1SqvFpDhIdbcZ3UjZNr4s0pGxBQSVHAOAn4UiYG8JQHo",
+        "source_id": "src_9f6f04cc0b808ea0340df0ae83928a72a9cb5d6b388c54f7dad37cc6d9f4a729",
         "modified_time": "2026-04-07T09:58:03.450Z",
         "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91"
       }
@@ -237,7 +237,7 @@
       "title": "Лекция 3. Нейромедиаторы бодрствования и мотивации",
       "discipline_id": "psihofiziologiya",
       "source": {
-        "source_id": "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w",
+        "source_id": "src_be0414ec61aeaaf00cb025d9b112f30a014631f1b5dc794db4c70f2fb9795c47",
         "modified_time": "2026-04-16T15:32:40.272Z",
         "snapshot_sha256": "7ab85f051a13bfe77a5a1bee02e7d634fe899fa2557f288b43e7d8378d6989cf"
       }
@@ -246,7 +246,7 @@
       "title": "Лекция 10. Фильтрация информации и теории внимания",
       "discipline_id": "psihofiziologiya",
       "source": {
-        "source_id": "1DHlksbczPUCoNMVVVDaXX1logCf1NF1RqUvsmw7wlY0",
+        "source_id": "src_b54fbf4a13563dcab7a16d4443460cfe6f3fc9fcf36d8caedad41f76607f5713",
         "modified_time": "2026-04-20T15:33:01.800Z",
         "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e"
       }
@@ -255,7 +255,7 @@
       "title": "Лекция 11. Восприятие и нейросети внимания",
       "discipline_id": "psihofiziologiya",
       "source": {
-        "source_id": "1IBzRpIemHcHkoaZwZFMTypB59YpVpMOgD9jTNzhBnwU",
+        "source_id": "src_db85647c78a44e33101b8b932b09235b6d3ee30b18b730d65698d8094bafc35e",
         "modified_time": "2026-04-20T15:34:30.028Z",
         "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3"
       }
@@ -264,7 +264,7 @@
       "title": "Лекция 14. Свобода воли и мозг",
       "discipline_id": "psihofiziologiya",
       "source": {
-        "source_id": "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264",
+        "source_id": "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93",
         "modified_time": "2026-04-20T15:38:36.917Z",
         "snapshot_sha256": "2b6c44d6b7e3ba0511b16b4d8d5884e19812e0bbdba5ffbf8a06b14483e45a5c"
       }
@@ -273,7 +273,7 @@
       "title": "Лекция 9. Свойства внимания",
       "discipline_id": "psihofiziologiya",
       "source": {
-        "source_id": "1znCyGf9RhkhkbsCKGmWQHGhcliY9kfekglchDlWp9As",
+        "source_id": "src_651219709e64e47fb457967d5163017c0a0b36043470fa033c76ae7abe380bcb",
         "modified_time": "2026-04-20T15:42:20.698Z",
         "snapshot_sha256": "69d87f72192866c1929553a8c26711b6e992c3254e4870ea8c068ab51b16fb37"
       }
@@ -282,7 +282,7 @@
       "title": "Предмет и метод психологии",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "source": {
-        "source_id": "1BPUdGtAb1ekRME2S2J_QCMe52eL9QlfB4GGtpkpMTpA",
+        "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
         "modified_time": "2026-04-22T20:21:51.036Z",
         "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847"
       }
@@ -291,7 +291,7 @@
       "title": "Экспериментальные планы исследований",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "source": {
-        "source_id": "1-kLUQFIdeNgxvgOwx2bTV0-8Zomr8lXJ8RTAglmZ4bg",
+        "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
         "modified_time": "2026-04-22T20:23:09.227Z",
         "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f"
       }
@@ -300,7 +300,7 @@
       "title": "Практика №8",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "source": {
-        "source_id": "1tywnsX7dhePcqxzfaDK1bNZ_Ddf0_ivsYr4_jlOqEQY",
+        "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
         "modified_time": "2026-04-22T20:18:51.271Z",
         "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170"
       }
@@ -309,7 +309,7 @@
       "title": "Практика №7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "source": {
-        "source_id": "1W4C1NsHmyB4_egVdE3zTn6HlWz_FdWwXE6CjMeh6_T0",
+        "source_id": "src_26ba73611f35e832c2613ed23f5f83e4f9394f0ce92cf49ca695815cd23cf0a4",
         "modified_time": "2026-04-22T20:12:28.380Z",
         "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be"
       }
@@ -318,7 +318,7 @@
       "title": "Практика №9",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
       "source": {
-        "source_id": "1DDEOeri2hqM6ML8WmHsZhvFJK7H6L13JYIczXRgBXFQ",
+        "source_id": "src_c3855dd7f3343f1fdc4a5f641d9628c8d2aed5691b3402d6acf753a683f6eb5d",
         "modified_time": "2026-05-14T11:25:02.862Z",
         "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c"
       }
@@ -327,7 +327,7 @@
       "title": "Качественные методы 1",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "source": {
-        "source_id": "19N0i2gCoy7Y9LkimwPA-C2x1m6gSpHXo",
+        "source_id": "src_3a1fe1ba577dea8a84d0019f27eaf39a4da43a4cad37aa593890dde365723836",
         "modified_time": "2026-05-16T13:55:50.170Z",
         "snapshot_sha256": "4de1b2fb6be9cb414c95e6abe6dd56f2270931e8eed9a944b136ea2baf4c741a"
       }
@@ -336,7 +336,7 @@
       "title": "Практика №11",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "source": {
-        "source_id": "1-2cpVVR8XqRC5VfhSKAb3DUgsFkRHlfWrnIX9DGeqvw",
+        "source_id": "src_e4c6d12c804540583039cc642cf858479e9e5fa8dfdeafb954606f55d45a4c11",
         "modified_time": "2026-05-14T11:45:40.351Z",
         "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e"
       }
@@ -345,7 +345,7 @@
       "title": "Практика №12",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "source": {
-        "source_id": "1n_vz7ESupUSo4pVz5o5fW9dpOei3U5lavyUkHgklRBI",
+        "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
         "modified_time": "2026-05-16T14:38:37.594Z",
         "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2"
       }
@@ -354,7 +354,7 @@
       "title": "Качественные методы исследования 2",
       "discipline_id": "kachestvennye_metody_issledovaniya",
       "source": {
-        "source_id": "1JcLSq8ZJ7DeuKJ9HPaHLhGugpjuLDXTv",
+        "source_id": "src_99ff06081a8797d5c3f3b57bfba040f269460c93d93c31fb407f6340adcf09e3",
         "modified_time": "2026-05-16T13:58:40.660Z",
         "snapshot_sha256": "50c21d41d08f270d94eb95628db1eab7aa97256883ce21a14ea63635981acd59"
       }
@@ -363,7 +363,7 @@
       "title": "Урок 1. Введение в психологическое консультирование",
       "discipline_id": "psychological_consulting",
       "source": {
-        "source_id": "1XuTYFE8p7v5ZOKCvsN6Wi9oEpeD3vNotoCZkxqsmPC0",
+        "source_id": "src_fc663085c649b302ae6848bd476eb9c2b910a82537b77376a3de1d9ffd143272",
         "modified_time": "2026-06-07T20:48:25.702Z",
         "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef"
       }
@@ -372,7 +372,7 @@
       "title": "Урок 2. Структура и процесс консультирования. Навыки первичной консультации",
       "discipline_id": "psychological_consulting",
       "source": {
-        "source_id": "1Ridik4xbgjxI7EPdPeH972Gvuh2X43mCCs_KZV1M81M",
+        "source_id": "src_64404c421f559925f008f3065aae298544e8a1dcbbf9a09f0422fb304d62c978",
         "modified_time": "2026-06-07T20:50:34.245Z",
         "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5"
       }
@@ -381,7 +381,7 @@
       "title": "Урок 3. Структура и процесс консультирования. Навыки первичной консультации",
       "discipline_id": "psychological_consulting",
       "source": {
-        "source_id": "1GhRjrPeKdAAxyqGuEUDXiekiIQwmOfDe952TzroYz2Q",
+        "source_id": "src_75f9731160659a51c53e0c047bc5a42b9f236b786a16daec88e8ad57cbf7a528",
         "modified_time": "2026-06-07T20:52:52.371Z",
         "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9"
       }
@@ -390,7 +390,7 @@
       "title": "Урок 4. Структура и процесс консультирования. Навыки первичной консультации",
       "discipline_id": "psychological_consulting",
       "source": {
-        "source_id": "1BsmSary812AW3-6TeNPjTP7P_5imnian0WD_M0ihw34",
+        "source_id": "src_52cf1a1fed01b30c7b4689a8ab432bb363f85ccf46ed7d59943dec0982442a11",
         "modified_time": "2026-06-07T20:55:38.540Z",
         "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2"
       }
@@ -399,7 +399,7 @@
       "title": "Урок 5. Работа с проблемой и целями. Стратегии и методы консультирования",
       "discipline_id": "psychological_consulting",
       "source": {
-        "source_id": "16jnFT2LJuqCLLPVMDIb-b-HQLJmcSnEkQeQ1szlb_Pk",
+        "source_id": "src_3c4943172eef6b478e06617e57914d967db1eef07ade34f3490ac98606cd8d53",
         "modified_time": "2026-06-07T20:57:37.236Z",
         "snapshot_sha256": "4be87573d5a485d1604b7dc16bbe9ba71663130cf60719d6ce2d8b02400da3b1"
       }
@@ -408,7 +408,7 @@
       "title": "Урок 6. Работа с проблемой и целями. Стратегии и методы консультирования",
       "discipline_id": "psychological_consulting",
       "source": {
-        "source_id": "12KB3YxgRV6CufS8ULCAvK3ynz1AFJRJTSDalAJiMcUc",
+        "source_id": "src_3722ab767695cd678443c850dde2852316a577bfbafe0d5f8f1c7493df69a44b",
         "modified_time": "2026-06-07T20:59:38.927Z",
         "snapshot_sha256": "0366a86b8fe070a493683880bcd40f4d7947c046f6f637f27ac54497bce0fad4"
       }
@@ -417,7 +417,7 @@
       "title": "Урок 7. Работа с проблемой и целями. Стратегии и методы консультирования",
       "discipline_id": "psychological_consulting",
       "source": {
-        "source_id": "1AbrBMkvxils16eDiJFNs78caxGOxcgkzEi3cwfi2GPk",
+        "source_id": "src_a558483945039cfb19243cca78d2346b6a54bfa7b7f7c64dc72e37e4e2985861",
         "modified_time": "2026-06-07T21:02:49.961Z",
         "snapshot_sha256": "38df73fe4aab71d9d747c1ae0fc2b89523954a251730a69f1956622951423266"
       }

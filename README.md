@@ -2,7 +2,7 @@
 
 `psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами (включая домашние задания в формате тестов), повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md). Поставка раздела домашних заданий и её Evidence описаны в плане.
 
-Текущая реализация — Telegram-бот на Python/FastAPI, Mini App и самостоятельный PWA quiz client на React/TypeScript/Vite. Клиенты используют общий backend и банк. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#завершённая-goal--pwa-first-001). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. Внутренний pgvector/search готовится отдельно от публичного приложения; его включение требует stateful gates из [операторской процедуры](docs/private-search-operations.md).
+Текущая реализация — Telegram-бот на Python/FastAPI, Mini App и самостоятельный PWA quiz client на React/TypeScript/Vite. Клиенты используют общий backend и банк. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#current-audit--audit-review-20261021). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. Внутренний pgvector/search готовится отдельно от публичного приложения; его включение требует stateful gates из [операторской процедуры](docs/private-search-operations.md).
 
 Текущее состояние продукта: утверждённые вопросы и термины хранятся в `content/`; актуальный состав банка проверяют canonical validators ниже. Вопросы без достаточного подтверждения сохраняются для истории, но снимаются с новой выдачи. Текущая Goal и подтверждённая история поставки домашних заданий указаны в [плане](docs/delivery-plan.md).
 
@@ -50,7 +50,7 @@ Production can run in either long polling or webhook mode. Long polling remains 
 
 Repository-visible GitHub Actions are split by responsibility:
 - open PR and merge approved changes to `main`;
-- CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`;
+- CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`; [scope classifier](scripts/ci_scope.py) проверяет полный diff до PostgreSQL/browser setup. Только README/AGENTS/ci-cd-rules и Markdown в docs допускают пропуск runtime regressions. Required jobs остаются активными, ошибка classifier останавливает их; code/content/Vault/dependency/workflow changes и manual runs выполняют полный набор;
 - routine delivery follows [AGENTS.md](AGENTS.md) and [project procedures](docs/miniapp-deployment-qa.md); workflow/settings changes require their own authorized scope;
 - CI must not deploy, access production SSH, or mutate production runtime state;
 - deployment/CD uses Repository Secrets and the configured target environment; after merge, verify deployed commit/runtime state when deployment matters;
@@ -61,7 +61,7 @@ Repository-visible GitHub Actions are split by responsibility:
 
 ## Быстрый старт и проверки
 
-Рабочий каталог — корень репозитория. Runtime/CI: Python 3.12, package manager — pip; прямые зависимости задают [requirements.txt](requirements.txt), [requirements-dev.txt](requirements-dev.txt) и [requirements-search.txt](requirements-search.txt). Linux runtime/CI устанавливают соответствующие `*.lock` с проверкой хешей; эти файлы получены для Python 3.12 на x86_64 Linux. Для локальной работы используйте изолированное Python-окружение; команды ниже предполагают, что оно активировано. На Windows установка из прямых requirements остаётся локальным вариантом и не подтверждает точный Linux dependency graph.
+Рабочий каталог — корень репозитория. Runtime/CI: Python 3.12, package manager — pip; прямые зависимости задают [requirements.txt](requirements.txt), [requirements-dev.txt](requirements-dev.txt) и [requirements-search.txt](requirements-search.txt). До runtime dependencies устанавливается [requirements-bootstrap.lock](requirements-bootstrap.lock): закреплённый pip с актуальным bundled CA. Linux runtime/CI устанавливают соответствующие `*.lock` с проверкой хешей; эти файлы получены для Python 3.12 на x86_64 Linux. Для локальной работы используйте изолированное Python-окружение; команды ниже предполагают, что оно активировано. На Windows установка из прямых requirements остаётся локальным вариантом и не подтверждает точный Linux dependency graph.
 
 Карта: [app](app/) — bot/API/domain code, [pwa](pwa/) — исходники обоих React-клиентов, [miniapp-react](miniapp-react/) — проверяемая статика Telegram Mini App, [miniapp](miniapp/) — legacy frontend reference, [content](content/) — производный учебный контент, [sql](sql/) — SQLite/PostgreSQL schemas, [scripts](scripts/) — init/seed/validators, [tests](tests/) — pytest suite (включая unittest cases). Entrypoints: [bot](app/main.py) и [FastAPI](app/miniapp_fastapi_runtime.py). Generated audit JSON в docs/audits — прежнее Evidence, не source of truth.
 
@@ -156,7 +156,7 @@ npm run test:e2e
 
 `build` включает `typecheck`; отдельно доступны `npm run typecheck` и `npm run icons` (SVG → checked-in PNG). Format/lint scripts пока N/A, whitespace — корневой `git diff --check`. Linux без browser dependencies: `npx playwright install --with-deps chromium`.
 
-После обеих сборок из корня репозитория запустите `python scripts/audit_public_assets.py --asset-dir pwa/dist --asset-dir miniapp-react --approved-content`. Он проверяет содержимое и имена публичных файлов, а также видимые поля approved questions/glossary/literature на прямые Drive-ссылки и ID из tracked source registry. Оператор с полным ignored Drive inventory добавляет `--private-inventory data/source-inventory-current.json`; без него проверка не охватывает источники вне registry. Команда не печатает найденный закрытый ID.
+После обеих сборок из корня репозитория запустите `python scripts/audit_public_assets.py --asset-dir pwa/dist --asset-dir miniapp-react --approved-content`. Он проверяет содержимое и имена публичных файлов, а также видимые поля approved questions/glossary/literature на прямые Drive-ссылки. Tracked registry использует анонимные aliases; полный поиск реальных IDs требует приватного inventory. Оператор с полным ignored Drive inventory добавляет `--private-inventory data/source-inventory-current.json`; без него проверка не охватывает источники вне registry. Команда не печатает найденный закрытый ID.
 
 Browser tests сами поднимают изолированный backend на loopback 8085 и production preview на 4173; оба порта должны быть свободны. `python` должен указывать на выбранное окружение; иначе задайте `PWA_TEST_PYTHON` абсолютным путём к interpreter (PowerShell: `$env:PWA_TEST_PYTHON = '...'`). Используются только synthetic DB/mail/owner; внешние сервисы не нужны.
 
@@ -176,10 +176,7 @@ Browser tests сами поднимают изолированный backend н�
 
 Активные категории в продукте формируются из БД по `approved`-вопросам (не хардкодятся в UI).
 
-Содержательно:
-- Module 1: рабочий baseline по основным дисциплинам — **296 approved**.
-- Module 2: активные рабочие темы — **`Основы экспериментальной психологии`** (**118 approved**) и **`Качественные методы исследования`** (**53 approved**).
-- Module 3: первая активная категория — **`Психологическое консультирование`** (**108 approved**).
+Доступность задают current publication policy и validators, а не исторические module counts. Канонические [questions](content/questions/), [glossary](content/glossary/), [literature](content/literature/) и [homework](content/homework.json) сохраняют IDs и отдельные правила готовности. [База знаний](docs/obsidian-vault.md) — отдельный проверенный пакет. Обзор владельца получает только [сводку подготовки](content/knowledge-coverage.json), отдельно от датированного снимка проверки источников и нерешённых возражений.
 
 ## Режимы викторины (UX v2)
 
@@ -282,6 +279,10 @@ Source-of-truth модель:
 
 
 ## Mini App setup (MVP)
+
+Worker Builds следит за `miniapp-react/*`, `wrangler.toml`, `pwa/package.json`, `pwa/package-lock.json` и `.node-version`. `SKIP_DEPENDENCY_INSTALL=true` выключает auto install; точный npm install остаётся в build command. [Security headers](pwa/miniapp-app/public/_headers) входят в собранные assets и допускают Telegram SDK/embedding. Каталог использует `/miniapp/literature/catalog-compact`; личный cache существует только в текущей Telegram identity и требует readback после неподтверждённой записи. Старый API сохраняется.
+
+В Telegram литература разбита на страницы, домашние задания выбираются по дисциплине, теме и заданию. Полные названия видны в тексте; переход по страницам сам не начинает попытку. Windows browser harness использует отдельную временную БД на запуск и nonce receipt для адресной очистки после завершения или прерывания; каталоги других запусков сохраняются.
 
 - `MINI_APP_URL` (optional): URL статического Telegram Mini App runner для opt-in команды `/ui`; при отсутствии переменной бот продолжает работать только в classic chat UX режиме.
 - `miniapp-react/index.html` публикуется отдельно Cloudflare Git integration; runtime-секреты и Telegram токены в frontend не размещаются. Старый `miniapp/index.html` сохранён как legacy reference до завершения cross-client миграции.

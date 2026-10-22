@@ -1,0 +1,2 @@
+# Build/runtime installer; independent of application dependencies.
+pip==26.2.2

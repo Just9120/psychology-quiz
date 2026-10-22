@@ -20,9 +20,13 @@ TIMER = 'psychology-quiz-backup-retention.timer'
 SHA = re.compile(r'[0-9a-f]{40}')
 
 
-def definitions(revision):
+def definitions(revision, *, legacy=False):
     if not SHA.fullmatch(revision):
         raise ValueError('exact_revision_required')
+    prepare = '' if legacy else 'ExecStartPre=+/usr/bin/python3 /opt/psychology-quiz/scripts/backup_retention.py --prepare-lock\n'
+    # The privileged pre-command still processes bind paths. Ignore only the
+    # initially absent lock; it exists before the normal restricted command.
+    lock_prefix = '' if legacy else '-'
     return {
         SERVICE: f"""# Managed by psychology-quiz; local backups only.
 [Unit]
@@ -32,11 +36,11 @@ Type=oneshot
 User=root
 UMask=0077
 WorkingDirectory=/opt/psychology-quiz
-ExecStart=/usr/bin/python3 /opt/psychology-quiz/scripts/backup_retention.py --apply --scheduled-from {revision}
+{prepare}ExecStart=/usr/bin/python3 /opt/psychology-quiz/scripts/backup_retention.py --apply --scheduled-from {revision}
 ProtectSystem=strict
 ProtectHome=yes
 NoNewPrivileges=yes
-ReadWritePaths=/opt/psychology-quiz/.postgres /tmp/psychology-quiz-deploy.lock
+ReadWritePaths=/opt/psychology-quiz/.postgres {lock_prefix}/tmp/psychology-quiz-deploy.lock
 TimeoutStartSec=300
 StandardOutput=null
 StandardError=null
@@ -80,7 +84,8 @@ def validate_units(directory, revision):
             original = path.read_text(encoding='utf-8')
             if name == SERVICE:
                 matches = re.findall(r'--scheduled-from ([0-9a-f]{40})', original)
-                if len(matches) != 1 or original != definitions(matches[0])[name]:
+                if len(matches) != 1 or original not in {
+                        definitions(matches[0])[name], definitions(matches[0], legacy=True)[name]}:
                     raise ValueError('unrecognized_existing_unit')
             elif original != content:
                 raise ValueError('unrecognized_existing_unit')

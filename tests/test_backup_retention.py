@@ -4,10 +4,39 @@ import os
 from pathlib import Path
 
 import pytest
-from scripts.backup_retention import plan_cleanup, apply_cleanup
+from scripts.backup_retention import plan_cleanup, apply_cleanup, open_deployment_lock
 from scripts.postgres_backup import file_digest
 
 NOW = datetime(2026, 10, 7, tzinfo=timezone.utc)
+
+
+@pytest.mark.skipif(os.name != 'posix', reason='Linux deployment flock boundary')
+def test_missing_lock_is_prepared_without_replacing_an_in_use_inode(tmp_path):
+    import fcntl
+    path = tmp_path / 'deploy.lock'
+    first = open_deployment_lock(path, os.getuid())
+    try:
+        fcntl.flock(first, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        before = os.fstat(first)
+        other = open_deployment_lock(path, os.getuid())
+        try:
+            assert os.fstat(other).st_ino == before.st_ino
+            with pytest.raises(BlockingIOError):
+                fcntl.flock(other, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        finally:
+            os.close(other)
+    finally:
+        os.close(first)
+    path.chmod(0o666)
+    with pytest.raises(ValueError, match='unsafe_lock'):
+        open_deployment_lock(path, os.getuid())
+    target = tmp_path / 'other'
+    target.write_text('preserve')
+    path.unlink()
+    path.symlink_to(target)
+    with pytest.raises(OSError):
+        open_deployment_lock(path, os.getuid())
+    assert target.read_text() == 'preserve'
 
 
 def state(root):

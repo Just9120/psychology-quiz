@@ -67,3 +67,23 @@ it('shows prepared note counts without claiming Vault publication or complete co
   expect(screen.getByText(/Подготовленных заметок без подтверждённой привязки к учебной теме: 2/)).toBeVisible()
   expect(screen.getByText(/не подтверждение публикации в Obsidian/)).toBeVisible()
 })
+
+it('shows published notes independently of a dated held or revised source and old preparation manifest', async () => {
+  const data: OwnerContent = { ok: true, topics: [], unmapped_questions: 0,
+    knowledge: { state: 'PUBLISHED', published_at: '2026-10-10', atomic_notes: 387, unmapped_notes: 242,
+      sections: [{ title: 'Раздел', notes: 387 }], lessons: { lesson: 5 }, disciplines: {} },
+    sources: { state: 'PARTIAL', captured_at: '2026-10-08T00:00:00Z', known_holds: 321,
+      coverage: { tracked_sources: 1, untracked_files: 0, source_metadata: { changed: 1 },
+        unmapped_published_questions: 0, prepared_notes_unmapped: 4,
+        lessons: [{ id: 'lesson', title: 'Занятие', discipline: 'Дисциплина', kinds: { theory: 0, glossary: 0, case: 0 },
+          source_metadata_current: false, processing_state: 'conflict_review', known_hold: true,
+          glossary_terms: 0, notes: 0, notes_state: 'PREPARED' }] } } }
+  render(<OwnerContentView data={data} busy={false} onRefresh={() => {}} />)
+  await userEvent.setup().click(screen.getByText('Дисциплина · тем: 1'))
+  expect(screen.getByText(/Пакет от 2026-10-10: 387/)).toBeVisible()
+  expect(screen.getByText(/с зарегистрированными занятиями: 242/)).toBeVisible()
+  expect(screen.getByText(/по подтверждённым связям: 5/)).toBeVisible()
+  expect(screen.getByText('Есть неразрешённое возражение к источнику.')).toBeVisible()
+  expect(screen.getByText(/Редакция источника требует сверки/)).toBeVisible()
+  expect(screen.queryByText(/Подготовлено заметок в переданном снимке: 0/)).not.toBeInTheDocument()
+})

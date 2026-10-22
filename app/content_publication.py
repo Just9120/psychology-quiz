@@ -15,7 +15,7 @@ from app.publication_receipt import receipt_error
 from app.source_evidence import locator_precision_review_required
 
 ROOT = Path(__file__).resolve().parent.parent
-CORPUS_ROOT_ID = "119DpAwq3T_9JzlTRMPeB7LX7-vpeO95U"
+CORPUS_ROOT_ID = "src_e9a26a4488f90ae8db31dd39c0cf344245acf256640c29ea0acaf847b3c23ef1"
 # Frozen existing publication, not a claim of source certification. Do not extend.
 LEGACY_SHA256 = "e03468c43558450105c8b3fddd30ed5db432b379e3b49f63b85b4370235dcc11"
 KINDS = {"questions", "glossary", "literature"}
