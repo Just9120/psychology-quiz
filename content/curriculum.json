@@ -6831,6 +6831,72 @@
       "topic_id": "t_5dd8e85bda51",
       "item_sha256": "29cd189af1ca6fc1e761f44913dcaf5ab74ad7d183dc21ea361146b11925ca06",
       "locator": "private certificate:questions:supervision_intervision_format"
+    },
+    "4970a506cd65be23ee8fafa231b40adfff24e5f10b1e54fe96f69f1f3c0e5a0a": {
+      "external_id": "cbt_practice_balanced_belief",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "73ea13162b1dff5320bb95bd8b2a3134f00a311b9b40926c4cc17b0e15997c87",
+      "locator": "private certificate:questions:cbt_practice_balanced_belief"
+    },
+    "8d0b58cbb035a9cdaf24e6427db351a91c3f659ed581cc285d3cd45b1e321b95": {
+      "external_id": "cbt_practice_belief_evidence",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "e998c9696c680042bde35199e5e2273f77772d5649ea5a88e446820656a36284",
+      "locator": "private certificate:questions:cbt_practice_belief_evidence"
+    },
+    "3a6b5de780ee94a8e40b5e46d7c49cfbc4e6901bdb062957feddbd49fc6871b0": {
+      "external_id": "cbt_practice_continuum_grades",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "820e3952e5046cbbfe13e163261d20ffcabfcbd25b48852684770300bbe50556",
+      "locator": "private certificate:questions:cbt_practice_continuum_grades"
+    },
+    "035f5d7ed6789c157416bb78baef853b8690bffdc2aa737fb88a877e1db91c65": {
+      "external_id": "cbt_practice_beliefs_and_conduct",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "f53b4ff26ed62861c33806dc634adfdeba9069a582ceb9574f90f1fa0a149773",
+      "locator": "private certificate:questions:cbt_practice_beliefs_and_conduct"
+    },
+    "2cb8c22fc6525810c14d4e425f4c05f577a83b7ff021f078c0fc9708e4260aa7": {
+      "external_id": "cbt_practice_trust_before_depth",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "25e583a0e461545d31b9094365d14f3575c3af8cd47e620275372bcea8c31867",
+      "locator": "private certificate:questions:cbt_practice_trust_before_depth"
+    },
+    "404188ed70e3ff4dcea7524685fc1775e526faafeff12aa9a2bf165ef2466ed0": {
+      "external_id": "cbt_practice_practice_reflection",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "197f6a6a66c7ac1bfdc93e847f85c80b8f17ce5b72c338a4f14c7a5f55f6a244",
+      "locator": "private certificate:questions:cbt_practice_practice_reflection"
+    },
+    "c027b58133431cb0eae0b5d7cfbd8560ab4fa303206523a2f493a5eda27df3b7": {
+      "external_id": "supervision_reflection_own_reaction",
+      "topic_id": "t_c33c5a419b76",
+      "item_sha256": "181c8e1d8d9c87f948f6eedcabaacce4a0bd57c9a6f4c3fe8bf6ad71dcae151b",
+      "locator": "private certificate:questions:supervision_reflection_own_reaction"
+    },
+    "31d2b1a7141668d6c8eae150328f38bc40a937d8d4f40db7c068de58fd09331f": {
+      "external_id": "supervision_reflection_supervisor_options",
+      "topic_id": "t_c33c5a419b76",
+      "item_sha256": "772bf5da31a1e0230d79ad4f82acdb90a1c252222d0dd000c485296a8c0f199b",
+      "locator": "private certificate:questions:supervision_reflection_supervisor_options"
+    },
+    "780d1a3805e7bb7a43166ba97bbb110cdc6c2e10cdbadcc785aeb7cf43cf0d2b": {
+      "external_id": "supervision_reflection_blind_spot",
+      "topic_id": "t_c33c5a419b76",
+      "item_sha256": "b3bd4dd79aea38889c6528e3c35786c82b24189ea1481f890300bd785be0e54f",
+      "locator": "private certificate:questions:supervision_reflection_blind_spot"
+    },
+    "4f09f829b6f60d22110a9975050b0cbabd56df66a782b3040d2ed1be0fce6920": {
+      "external_id": "supervision_reflection_client_perspective",
+      "topic_id": "t_c33c5a419b76",
+      "item_sha256": "6f6b2c7935265f6d6a4e0cd2d97e17d65bfb00852d1e718bcc61e08ed2f5be11",
+      "locator": "private certificate:questions:supervision_reflection_client_perspective"
+    },
+    "91a307c8933b1c296516f348476e4fbc1b88a25a04b1878e35ff154f433ed04a": {
+      "external_id": "supervision_reflection_transfer_to_practice",
+      "topic_id": "t_c33c5a419b76",
+      "item_sha256": "34dad9e8c10e2fca53107210349cc996a13335e822d5431e2fc5d66625d60467",
+      "locator": "private certificate:questions:supervision_reflection_transfer_to_practice"
     }
   }
 }

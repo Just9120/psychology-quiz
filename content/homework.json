@@ -630,6 +630,37 @@
         "m6_psyl_011",
         "m1_gp_032"
       ]
+    },
+    {
+      "id": "cbt_belief_practice",
+      "title": "Выявление, оценка и изменение убеждений",
+      "module": "Модуль 7",
+      "discipline_id": "cognitive_behavioral_therapy",
+      "topic_id": "t_ff4f6a25db3e",
+      "description": "Тест проверяет понимание работы с убеждениями и её ограничений. Он не подтверждает выполнение упражнения в паре или проведение консультации.",
+      "question_ids": [
+        "cbt_practice_balanced_belief",
+        "cbt_practice_belief_evidence",
+        "cbt_practice_continuum_grades",
+        "cbt_practice_beliefs_and_conduct",
+        "cbt_practice_trust_before_depth",
+        "cbt_practice_practice_reflection"
+      ]
+    },
+    {
+      "id": "supervision_reflective_positions",
+      "title": "Профессиональные позиции и рефлексия случая",
+      "module": "Модуль 6",
+      "discipline_id": "counseling_supervision",
+      "topic_id": "t_c33c5a419b76",
+      "description": "Тест проверяет смысл рефлексивного разбора случая. Личные ответы и клиентские сведения не собираются; прохождение не означает выполнение письменной работы.",
+      "question_ids": [
+        "supervision_reflection_own_reaction",
+        "supervision_reflection_supervisor_options",
+        "supervision_reflection_blind_spot",
+        "supervision_reflection_client_perspective",
+        "supervision_reflection_transfer_to_practice"
+      ]
     }
   ]
 }

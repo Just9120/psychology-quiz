@@ -670,6 +670,14 @@
     "t_5dd8e85bda51": {
       "title": "Коллегиальная поддержка и профессиональные роли",
       "discipline_id": "counseling_supervision"
+    },
+    "t_ff4f6a25db3e": {
+      "title": "Практика: выявление, оценка и изменение убеждений",
+      "discipline_id": "cognitive_behavioral_therapy"
+    },
+    "t_c33c5a419b76": {
+      "title": "Домашняя работа: профессиональные позиции в разборе случая",
+      "discipline_id": "counseling_supervision"
     }
   }
 }
