@@ -12,9 +12,11 @@ const labels: Record<ReadingStatus, string> = { not_started: 'Не начато'
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
 const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
 
-export function MiniLiterature({ initial, topics, busy, run }: {
+export function MiniLiterature({ initial, topics, busy, run, onItems, onInvalidate }: {
   initial: MiniLiteratureItem[]; topics: MiniLiteratureTopic[]; busy: boolean
   run: (action: () => Promise<void>) => Promise<void>
+  onItems?: (items: MiniLiteratureItem[]) => void
+  onInvalidate?: () => void
 }) {
   const [query, setQuery] = useState('')
   const heading = useRef<HTMLHeadingElement>(null)
@@ -42,16 +44,18 @@ export function MiniLiterature({ initial, topics, busy, run }: {
   }
   async function refresh() {
     const result = await miniApi.literatureItems()
-    setItems(result.literature_items); setUncertain(false)
+    setItems(result.literature_items); onItems?.(result.literature_items); setUncertain(false)
     const updated = result.literature_items.find(entry => entry.id === selected)
     if (updated) choose(updated)
   }
   async function save() {
     if (!item) return
     try {
-      await miniApi.literatureProgress(item.id, status, null)
-      await refresh(); setSaved(true)
-    } catch (failure) { setUncertain(true); throw failure }
+      const result = await miniApi.literatureProgress(item.id, status, null)
+      const updated = items.map(entry => (item.work_id ? entry.work_id === item.work_id : entry.id === item.id)
+        ? { ...entry, user_state: { ...result.literature_progress, literature_id: entry.id } } : entry)
+      setItems(updated); onItems?.(updated); setSaved(true)
+    } catch (failure) { setUncertain(true); onInvalidate?.(); throw failure }
   }
   return <section className="page-width literature-page"><span className="eyebrow">СПИСКИ ЛИТЕРАТУРЫ</span><h1>Литература</h1>
     <p className="lead">Книги и другие материалы по темам и ваши личные отметки чтения.</p>

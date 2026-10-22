@@ -325,13 +325,17 @@ def test_case_history_and_errors_keep_original_context_when_bank_changes(bank):
         before = progress.attempt(conn, 1, sid)
         assert len(before["items"]) == 1  # unanswered next question is not disclosed
         assert before["items"][0]["case"] == original["case"]
+        assert [opt["option_text"] for opt in before["items"][0]["options"]] == original["options"]
+        assert before["items"][0]["selected_option_index"] == 1
         changed = deepcopy(original)
         changed["case"]["situation"] = "New edition must not replace historical context"
         changed["case"]["conditions"] = ["Different conditions"]
+        changed["options"][1] = "New option must not replace the historical text"
         upsert_approved_questions(conn, [changed])
         assert progress.attempt(conn, 1, sid) == before
         error = progress.errors(conn, 1)["items"][0]
         assert error["case"] == original["case"]
+        assert [opt["option_text"] for opt in error["options"]] == original["options"]
         assert error["edition_state"] == "changed"
         assert "New edition" not in json.dumps(error)
         stranger = create_or_load_user(conn, 123987, None, None, None)["id"]

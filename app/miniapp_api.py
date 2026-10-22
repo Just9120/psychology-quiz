@@ -18,6 +18,7 @@ from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from functools import wraps
 from app.literature_service import (
+    catalog as _literature_catalog,
     load_progress as _load_literature_progress_by_user, load_item_states as _load_literature_item_states_by_user,
     validate_progress as _validate_literature_progress_payload, save_progress as _upsert_literature_progress,
 )
@@ -352,6 +353,21 @@ def build_literature_topics_response(
                                "reading_topics": list_reading_topic_payloads()})
 
 
+def build_literature_catalog_response(db_path: str, bot_token: str, init_data: str, *, max_age_seconds: int = 3600):
+    verified = _verified_user_or_error(bot_token, init_data, max_age_seconds)
+    if not isinstance(verified, VerifiedInitData):
+        return verified
+    try:
+        with closing(get_connection(db_path)) as conn, conn:
+            user = create_or_load_user(conn, verified.telegram_user_id, verified.username,
+                                       verified.first_name, verified.last_name)
+            return _json(HTTPStatus.OK, _literature_catalog(conn, int(user["id"]), compact=True))
+    except OPERATIONAL_ERRORS as error:
+        if _is_sqlite_locked_error(error):
+            return _database_busy_response()
+        raise
+
+
 def build_literature_items_response(
     db_path: str,
     bot_token: str,
@@ -679,7 +695,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         origin = self.headers.get("Origin", "")
         allowed = origin in parse_allowed_origins(self.allowed_origin)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/homework/catalog", "/miniapp/homework/start", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/answer", "/miniapp/setup", "/miniapp/homework/catalog", "/miniapp/homework/start", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/catalog-compact", "/miniapp/literature/state", "/miniapp/literature/progress"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             logger.info("miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s", "unknown", request_id or "-", HTTPStatus.NOT_FOUND.value, int((time.time() - started_at) * 1000), "yes" if allowed else "no")
             return
@@ -698,7 +714,7 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
         request_id = _read_request_id(self.headers)
         transport = "header_auth"
         init_data = _extract_init_data(self.headers)
-        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/homework/catalog", "/miniapp/glossary/topics", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state"}:
+        if endpoint not in {"/miniapp/state", "/miniapp/setup-options", "/miniapp/homework/catalog", "/miniapp/glossary/topics", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/catalog-compact", "/miniapp/literature/state"}:
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         try:
@@ -730,6 +746,9 @@ class MiniAppApiHandler(BaseHTTPRequestHandler):
                 status, headers, body = build_literature_topics_response(
                     self.db_path, self.bot_token, init_data, max_age_seconds=self.initdata_ttl_seconds
                 )
+            elif endpoint == "/miniapp/literature/catalog-compact":
+                status, headers, body = build_literature_catalog_response(
+                    self.db_path, self.bot_token, init_data, max_age_seconds=self.initdata_ttl_seconds)
             elif endpoint == "/miniapp/literature/items":
                 query = urllib.parse.urlparse(self.path).query
                 params = urllib.parse.parse_qs(query)

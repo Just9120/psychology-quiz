@@ -29,6 +29,7 @@ from app.miniapp_api import (
     build_glossary_start_response,
     build_glossary_topics_response,
     build_literature_items_response,
+    build_literature_catalog_response,
     build_literature_progress_response,
     build_literature_state_response,
     build_literature_topics_response,
@@ -42,6 +43,7 @@ from app.miniapp_api import (
 logger = logging.getLogger("uvicorn.error")
 
 _ENDPOINTS = {"/miniapp/state", "/miniapp/setup-options", "/miniapp/setup", "/miniapp/answer", "/miniapp/homework/catalog", "/miniapp/homework/start", "/miniapp/glossary/topics", "/miniapp/glossary/start", "/miniapp/glossary/answer", "/miniapp/glossary/next", "/miniapp/glossary/restart", "/miniapp/literature/topics", "/miniapp/literature/items", "/miniapp/literature/state", "/miniapp/literature/progress"} | {f"/miniapp/learning/{action}" for action in LEARNING_READ_ACTIONS | LEARNING_WRITE_ACTIONS}
+_ENDPOINTS.add("/miniapp/literature/catalog-compact")
 
 
 def _to_response(status: int, headers: dict[str, str], body: bytes) -> Response:
@@ -259,6 +261,10 @@ def create_app(
     async def options_literature_items(request: Request) -> Response:
         return await _options_response("/miniapp/literature/items", request)
 
+    @app.options("/miniapp/literature/catalog-compact")
+    async def options_literature_catalog(request: Request) -> Response:
+        return await _options_response("/miniapp/literature/catalog-compact", request)
+
     @app.options("/miniapp/literature/state")
     async def options_literature_state(request: Request) -> Response:
         return await _options_response("/miniapp/literature/state", request)
@@ -395,6 +401,10 @@ def create_app(
     @app.get("/miniapp/literature/state")
     async def get_literature_state(request: Request) -> Response:
         return await _get_builder_response("/miniapp/literature/state", request, build_literature_state_response, db_path, bot_token)
+
+    @app.get("/miniapp/literature/catalog-compact")
+    async def get_literature_catalog(request: Request) -> Response:
+        return await _get_builder_response("/miniapp/literature/catalog-compact", request, build_literature_catalog_response, db_path, bot_token)
 
     @app.post("/miniapp/literature/progress")
     async def post_literature_progress(request: Request) -> Response:

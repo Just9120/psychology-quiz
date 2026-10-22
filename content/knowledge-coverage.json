@@ -1,0 +1,115 @@
+{
+  "state": "PUBLISHED",
+  "atomic_notes": 387,
+  "unmapped_notes": 242,
+  "sections": [
+    {
+      "title": "Нервная система и регуляция",
+      "notes": 37
+    },
+    {
+      "title": "Психические процессы и познание",
+      "notes": 37
+    },
+    {
+      "title": "Научное объяснение и исследование",
+      "notes": 70
+    },
+    {
+      "title": "Научение и социальное поведение",
+      "notes": 49
+    },
+    {
+      "title": "Психологическое консультирование",
+      "notes": 31
+    },
+    {
+      "title": "Профессиональная позиция и границы",
+      "notes": 13
+    },
+    {
+      "title": "Клинические понятия и границы вывода",
+      "notes": 24
+    },
+    {
+      "title": "Личность и развитие",
+      "notes": 34
+    },
+    {
+      "title": "Психодиагностика и работа с данными",
+      "notes": 14
+    },
+    {
+      "title": "Язык, речь и понимание",
+      "notes": 21
+    },
+    {
+      "title": "Семья и взаимодействие",
+      "notes": 19
+    },
+    {
+      "title": "Организации и работа",
+      "notes": 29
+    },
+    {
+      "title": "Самоорганизация и профессиональное представление",
+      "notes": 9
+    }
+  ],
+  "lessons": {
+    "t_760b622ba9f6": 5,
+    "t_6f07f36a8251": 6,
+    "t_c17d1ae57018": 4,
+    "t_5f1cca01d535": 4,
+    "t_ab1e7408a209": 4,
+    "t_bc927cd2edda": 2,
+    "t_ae68a82010f9": 1,
+    "t_a6c516bbe92a": 6,
+    "t_8416412afc7d": 10,
+    "t_2be8cec234c0": 3,
+    "t_4451554cf717": 4,
+    "t_2476fabb75f8": 12,
+    "t_32c45a18e1bf": 2,
+    "t_e8545fea4531": 2,
+    "t_f2b92ac4b2ef": 1,
+    "t_c8fdaba2064a": 2,
+    "t_3ec476ff48e7": 3,
+    "t_033b84e9a10e": 3,
+    "t_e9dd359706e6": 10,
+    "t_27f468335f64": 2,
+    "t_17a20a4fb08e": 2,
+    "t_1db07b61e05b": 3,
+    "t_a5bd6646dc05": 2,
+    "t_43f9e7d785af": 2,
+    "t_05aeac347c73": 1,
+    "t_6f9edd8074a3": 1,
+    "t_7a8e0286a42d": 16,
+    "t_219d66e8496a": 21,
+    "t_517448740f11": 6,
+    "t_177f292cc47a": 5,
+    "t_a4cdbc5015b0": 9,
+    "t_3bb3423d5435": 3,
+    "t_03a33ddcf539": 2,
+    "t_6be3cecd6596": 3,
+    "t_059cbac41979": 2,
+    "t_09efb9aedb46": 7,
+    "t_7246705017fc": 5,
+    "t_89b592be8732": 4,
+    "t_84bd9f531980": 3,
+    "t_34b2eed9d99a": 3,
+    "t_944c292b1d23": 1,
+    "t_350cf495eee7": 3
+  },
+  "disciplines": {
+    "fiziologiya_cheloveka": 24,
+    "psihofiziologiya": 8,
+    "obschaya_psihologiya": 21,
+    "fiziologiya_vnd": 14,
+    "osnovy_eksperimentalnoy_psihologii": 46,
+    "kachestvennye_metody_issledovaniya": 8,
+    "psychological_consulting": 22,
+    "vvedenie_v_professiyu": 15
+  },
+  "package_sha256": "fccd7208d77fb75d09823b0d4aec6f18612471aae8682a01a3f6bd9fda47abaf",
+  "published_at": "2026-10-10"
+}

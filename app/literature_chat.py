@@ -19,7 +19,7 @@ from app.literature_reading import reading_order
 
 logger = logging.getLogger(__name__)
 PAGE_SIZE = 5
-CALLBACK_PATTERN = re.compile(r"^lit:(?:topics|r:[0-9a-f]{12}:\d{1,3}|m:[0-9a-f]{12}|t:[0-9a-f]{12}:\d{1,3}(?::[anpdf](?::[0-9a-f]{12})?)?|i:[0-9a-f]{12}|s:[0-9a-f]{12}:[npdf])$")
+CALLBACK_PATTERN = re.compile(r"^lit:(?:topics(?::\d{1,3})?|r:[0-9a-f]{12}:\d{1,3}|m:[0-9a-f]{12}|t:[0-9a-f]{12}:\d{1,3}(?::[anpdf](?::[0-9a-f]{12})?)?|i:[0-9a-f]{12}|s:[0-9a-f]{12}:[npdf])$")
 STATUS_CODES = {
     "n": ("Не начато", "not_started"),
     "p": ("Читаю", "in_progress"),
@@ -66,7 +66,7 @@ def _save(db_path: str, telegram_user, literature_id: str, status: str) -> dict:
         return literature_service.save_progress(conn, int(actor["id"]), literature_id, status, None)
 
 
-def _topics(module_token: str | None = None) -> tuple[str, InlineKeyboardMarkup | None] | None:
+def _topics(module_token: str | None = None, page: int = 0) -> tuple[str, InlineKeyboardMarkup | None] | None:
     topics = list_reading_topic_payloads()
     if not topics:
         return ("Сейчас нет опубликованной литературы.", None) if module_token is None else None
@@ -77,10 +77,24 @@ def _topics(module_token: str | None = None) -> tuple[str, InlineKeyboardMarkup 
     if module_token is not None and module is None:
         return None
     # Old module callbacks remain readable, but navigation now uses all topics.
-    rows = [[InlineKeyboardButton(f"{topic['title']} · {topic['item_count']}",
+    if page < 0 or page * PAGE_SIZE >= len(topics):
+        return None
+    visible = topics[page * PAGE_SIZE:(page + 1) * PAGE_SIZE]
+    rows = [[InlineKeyboardButton(f"{topic['title'] if len(topic['title']) <= 48 else topic['title'][:47] + '…'} · {topic['item_count']}",
              callback_data=f"lit:t:{_token(topic['topic_id'])}:0")]
-            for topic in topics]
-    return "<b>Литература по темам</b>\nВыберите тему, чтобы открыть список чтения.", InlineKeyboardMarkup(rows)
+            for topic in visible]
+    arrows = []
+    if page:
+        arrows.append(InlineKeyboardButton("← Предыдущие темы", callback_data=f"lit:topics:{page - 1}"))
+    if (page + 1) * PAGE_SIZE < len(topics):
+        arrows.append(InlineKeyboardButton("Следующие темы →", callback_data=f"lit:topics:{page + 1}"))
+    if arrows:
+        rows.append(arrows)
+    labels = [f"{page * PAGE_SIZE + index + 1}. {escape(topic['title'])} · {topic['item_count']}"
+              for index, topic in enumerate(visible)]
+    text = ["<b>Литература по темам</b>", "Выберите тему, чтобы открыть список чтения.",
+            f"Темы {page * PAGE_SIZE + 1}–{min((page + 1) * PAGE_SIZE, len(topics))} из {len(topics)}.", *labels]
+    return "\n".join(text), InlineKeyboardMarkup(rows)
 
 
 
@@ -119,7 +133,9 @@ def _topic_view(items: list[dict], states: dict, token: str, page: int, status_f
     rows.extend([[InlineKeyboardButton(label, callback_data=f"lit:t:{token}:0:{code}{suffix}")]
                  for code, (label, _) in STATUS_CODES.items()])
     rows.append([InlineKeyboardButton("Порядок чтения", callback_data=f"lit:r:{token}:0")])
-    rows.append([InlineKeyboardButton("К темам", callback_data="lit:topics")])
+    root_topics = list_reading_topic_payloads()
+    root_index = next((index for index, entry in enumerate(root_topics) if entry["topic_id"] == topic["topic_id"]), 0)
+    rows.append([InlineKeyboardButton("К темам", callback_data=f"lit:topics:{root_index // PAGE_SIZE}")])
     text = f"<b>{escape(topic['title'])}</b>\nПрочитано {summary['read']} из {summary['total']}"
     if summary['conflicts']:
         text += f"\nРазличаются отметки в списках: {summary['conflicts']} работ. Они не включены в число прочитанных."
@@ -236,8 +252,13 @@ async def literature_callback(update, context) -> None:
     if CALLBACK_PATTERN.fullmatch(data) is None:
         await query.message.reply_text("Кнопка устарела. Откройте /literature снова.")
         return
-    if data == "lit:topics":
-        await literature_command(update, context)
+    if data == "lit:topics" or data.startswith("lit:topics:"):
+        page = int(data.split(":")[2]) if data.count(":") == 2 else 0
+        view = await asyncio.to_thread(_topics, None, page)
+        if view is None:
+            await query.message.reply_text("Список изменился. Откройте /literature снова.")
+        else:
+            await query.message.reply_text(view[0], reply_markup=view[1], parse_mode="HTML")
         return
     if data.startswith("lit:m:"):
         view = await asyncio.to_thread(_topics, data.split(":")[2])

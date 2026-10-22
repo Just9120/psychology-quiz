@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
 
 from app.content_publication import DRIVE_REF, fingerprint, load_policy
 from app.curriculum import load_private_bindings, validate_catalog
+from app.source_aliases import private_graph_inputs
 from app.source_inventory import (combine_registries, link_lessons, processing_status,
                                   unresolved_related_conflicts)
 from scripts.sign_private_publication import private_path
@@ -269,6 +270,8 @@ def main() -> int:
             if source_states.get(source_id) == "processed":
                 source_states[source_id] = "related_conflict_review"
     registry = json.loads((ROOT / "content/source-corpus.json").read_text(encoding="utf-8"))
+    if args.inventory is not None:
+        curriculum, quality, registry = private_graph_inputs(inventory, curriculum, quality, registry)
     certified = certified_questions(ROOT, args.signed_dossier)
     private = None
     if args.private_registry:

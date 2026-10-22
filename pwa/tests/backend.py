@@ -4,6 +4,8 @@ from pathlib import Path
 import os
 import sys
 import tempfile
+import json
+import uuid
 from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -43,7 +45,20 @@ class Mailbox:
 
 
 def main():
+    receipt = None
+    run_id = os.environ.get("PWA_E2E_RUN_ID")
     with tempfile.TemporaryDirectory(prefix="pwa-e2e-") as directory, ExitStack() as stack:
+        if os.environ.get("PWA_E2E_RECEIPT"):
+            if str(uuid.UUID(run_id)) != run_id:
+                raise ValueError("invalid synthetic run identity")
+            receipt = Path(os.environ["PWA_E2E_RECEIPT"]).resolve()
+            if (receipt.parent != Path(tempfile.gettempdir()).resolve()
+                    or receipt.name != f"psychology-pwa-{run_id}.json"):
+                raise ValueError("invalid synthetic receipt target")
+            owner = {"run_id": run_id, "pid": os.getpid(), "directory": directory}
+            Path(directory, "owner.json").write_text(json.dumps(owner), encoding="utf-8")
+            with receipt.open("x", encoding="utf-8") as output:
+                json.dump(owner, output)
         path = str(Path(directory) / "synthetic.sqlite3")
         postgres_path = stack.enter_context(isolated_postgres_target(os.environ["POSTGRES_TEST_DSN"])) if os.environ.get("POSTGRES_TEST_DSN") else None
         mailbox = Mailbox()
@@ -155,8 +170,20 @@ def main():
         def health():
             return {"ok": True}
 
+        @app.post("/__test/shutdown")
+        def shutdown(request: Request):
+            from fastapi.responses import JSONResponse
+            if not run_id or request.headers.get("X-PWA-Test-Run") != run_id:
+                return JSONResponse({"ok": False}, status_code=409)
+            server.should_exit = True
+            return {"ok": True}
+
         reset()
-        uvicorn.run(app, host="127.0.0.1", port=8085, access_log=False, log_level="warning")
+        server = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=8085,
+                                             access_log=False, log_level="warning"))
+        server.run()
+    if receipt is not None:
+        receipt.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

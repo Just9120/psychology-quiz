@@ -17,12 +17,31 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  scope:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      runtime_checks: ${{ steps.scope.outputs.runtime_checks }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+      - name: Classify documentation-only changes
+        id: scope
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE: ${{ github.event.before }}
+          CI_EVENT: ${{ github.event_name }}
+        run: python3 scripts/ci_scope.py --github-output "$GITHUB_OUTPUT"
+
   pwa-client:
+    needs: scope
+    if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     services:
       postgres:
-        image: postgres:18.6-bookworm@sha256:3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650
+        image: ${{ needs.scope.outputs.runtime_checks != 'false' && 'postgres:18.6-bookworm@sha256:3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650' || '' }}
         env:
           POSTGRES_DB: psychology_test
           POSTGRES_PASSWORD: synthetic-admin-only
@@ -34,6 +53,11 @@ jobs:
       run:
         working-directory: pwa
     steps:
+      - name: Require successful scope classification
+        working-directory: .
+        env:
+          SCOPE_RESULT: ${{ needs.scope.result }}
+        run: test "$SCOPE_RESULT" = success
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
@@ -41,12 +65,17 @@ jobs:
           cache: npm
           cache-dependency-path: pwa/package-lock.json
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        if: needs.scope.outputs.runtime_checks != 'false'
         with:
           python-version: "3.12"
-      - name: Install pinned frontend tooling and real backend
+      - name: Install pinned frontend tooling
         run: |
           npm install --global npm@12.0.2
           npm ci --ignore-scripts
+      - name: Install real backend for browser regression
+        if: needs.scope.outputs.runtime_checks != 'false'
+        run: |
+          python -m pip install --require-hashes -r ../requirements-bootstrap.lock
           pip install --require-hashes -r ../requirements.lock
       - name: Components, types and production build
         env:
@@ -58,10 +87,12 @@ jobs:
           git diff --exit-code -- ../miniapp-react
           test -z "$(git ls-files --others --exclude-standard ../miniapp-react)"
       - name: Browser regression with temporary SQLite and synthetic mail
+        if: needs.scope.outputs.runtime_checks != 'false'
         run: |
           npx playwright install --with-deps chromium
           npm run test:e2e
       - name: Browser regression after reconciled PostgreSQL import
+        if: needs.scope.outputs.runtime_checks != 'false'
         env:
           POSTGRES_TEST_ADMIN_DSN: postgresql://postgres:synthetic-admin-only@127.0.0.1:5432/psychology_test
           POSTGRES_TEST_DSN: postgresql://psychology_test_app:synthetic-test-only@127.0.0.1:5432/psychology_test
@@ -69,6 +100,7 @@ jobs:
           python ../scripts/postgres_test_support.py
           npm run test:e2e
       - name: Validate HTTPS release and Nginx routing template
+        if: needs.scope.outputs.runtime_checks != 'false'
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends nginx
@@ -82,11 +114,13 @@ jobs:
           retention-days: 7
 
   validate-and-smoke-test:
+    needs: scope
+    if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     services:
       postgres:
-        image: postgres:18.6-bookworm@sha256:3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650
+        image: ${{ needs.scope.outputs.runtime_checks != 'false' && 'postgres:18.6-bookworm@sha256:3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650' || '' }}
         env:
           POSTGRES_DB: psychology_test
           POSTGRES_PASSWORD: synthetic-admin-only
@@ -100,6 +134,10 @@ jobs:
       POSTGRES_TEST_DSN: postgresql://psychology_test_app:synthetic-test-only@127.0.0.1:5432/psychology_test
 
     steps:
+      - name: Require successful scope classification
+        env:
+          SCOPE_RESULT: ${{ needs.scope.result }}
+        run: test "$SCOPE_RESULT" = success
       - name: Checkout repository
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -111,9 +149,12 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install --require-hashes -r requirements-dev.lock
+        run: |
+          python -m pip install --require-hashes -r requirements-bootstrap.lock
+          pip install --require-hashes -r requirements-dev.lock
 
       - name: Behavioral regression suite
+        if: needs.scope.outputs.runtime_checks != 'false'
         env:
           POSTGRES_TEST_CONTAINER: ${{ job.services.postgres.id }}
         run: |
@@ -133,7 +174,7 @@ jobs:
           base="${PR_BASE:-${PUSH_BASE:-HEAD^}}"
           if [[ "$base" == 0000000000000000000000000000000000000000 ]]; then base=HEAD^; fi
           changes=$(git diff --name-only "$base" HEAD)
-          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|deploy/search-debian\.sources|requirements-search\.(txt|lock)|requirements-dev\.(txt|lock)|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
+          if ! grep -Eq '^(app/private_search\.py|app/private_rag\.py|app/postgres_config\.py|app/source_inventory\.py|app/source_aliases\.py|app/source_evidence\.py|content/source-corpus\.json|docker-compose\.yml|Dockerfile\.search|deploy/search-debian\.sources|requirements-search\.(txt|lock)|requirements-bootstrap\.(txt|lock)|requirements-dev\.(txt|lock)|sql/private-search-bootstrap\.sql|scripts/ci_pgvector_transition\.sh|scripts/postgres_vps\.py|tests/integration_private_search_postgres\.py|tests/conftest\.py|\.github/workflows/ci\.yml)$' <<< "$changes"; then
             echo "Private search unchanged; isolated pgvector check not applicable"
             exit 0
           fi
@@ -254,13 +295,20 @@ jobs:
           retention-days: 7
 
       - name: Write CI summary
+        env:
+          RUNTIME_CHECKS: ${{ needs.scope.outputs.runtime_checks }}
         shell: bash
         run: |
           set -euo pipefail
           {
             echo "### CI validation summary"
-            echo "- behavioral pytest suite and compose contract passed"
-            echo "- deployment shell syntax and failure paths passed"
+            if [[ "$RUNTIME_CHECKS" == false ]]; then
+              echo "- documentation-only diff: behavioral/browser/PostgreSQL regression not applicable"
+            else
+              echo "- behavioral pytest suite and compose contract passed"
+              echo "- deployment failure paths passed"
+            fi
+            echo "- deployment shell syntax passed"
             echo "- compileall passed"
             echo "- JSON syntax passed"
             echo "- validate_questions passed"

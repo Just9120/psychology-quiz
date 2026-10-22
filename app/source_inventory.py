@@ -12,6 +12,7 @@ import re
 import unicodedata
 
 from app.source_evidence import locator_precision_review_required
+from app.source_aliases import private_graph_inputs, source_alias
 
 
 class InventoryError(ValueError):
@@ -25,13 +26,15 @@ def combine_registries(public: dict, private: dict) -> dict:
             or set(private) != {"schema_version", "corpus_root_id", "sources"}
             or private["schema_version"] != 1
             or not isinstance(private["sources"], list)
-            or private["corpus_root_id"] != public.get("corpus_root_id")):
+            or not isinstance(private.get("corpus_root_id"), str)
+            or not isinstance(public.get("corpus_root_id"), str)
+            or source_alias(private["corpus_root_id"]) != source_alias(public.get("corpus_root_id"))):
         raise InventoryError("private_registry_root_mismatch")
     public_ids = [item.get("id") for item in public["sources"] if isinstance(item, dict)]
     private_ids = [item.get("id") for item in private["sources"] if isinstance(item, dict)]
     if (len(public_ids) != len(public["sources"]) or len(private_ids) != len(private["sources"])
             or any(not isinstance(value, str) or not value for value in public_ids + private_ids)
-            or len(set(public_ids + private_ids)) != len(public_ids) + len(private_ids)):
+            or len({source_alias(value) for value in public_ids + private_ids}) != len(public_ids) + len(private_ids)):
         raise InventoryError("duplicate_or_invalid_private_source")
     return {**public, "sources": [*public["sources"], *private["sources"]]}
 
@@ -399,6 +402,7 @@ def reviewed_graph(snapshot: dict, registry: dict, curriculum: dict) -> dict:
     snapshot hashes belong to the separate content review record. A stale or
     missing Drive file cannot support a *current* lesson edge.
     """
+    registry, curriculum = private_graph_inputs(snapshot, registry, curriculum)
     if (not isinstance(registry, dict) or registry.get("schema_version") != 1
             or registry.get("corpus_root_id") != snapshot.get("root_id")
             or not isinstance(registry.get("sources"), list)
@@ -515,6 +519,8 @@ def private_review_queue(snapshot: dict, registry: dict, curriculum: dict, *,
                          legacy_derivatives: dict[str, list[str]] | None = None,
                          unmapped_legacy_derivatives: list[str] | None = None) -> dict:
     """Operator-only file-level queue; never return this from a public route."""
+    registry, curriculum, reviews, quality_reviews, legacy_derivatives = private_graph_inputs(
+        snapshot, registry, curriculum, reviews, quality_reviews, legacy_derivatives)
     reviewed_graph(snapshot, registry, curriculum)
     if processed is not None and not isinstance(processed, dict):
         raise InventoryError("invalid_processing_records")

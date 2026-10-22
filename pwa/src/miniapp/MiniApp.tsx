@@ -49,6 +49,11 @@ export function MiniApp() {
   const [glossaryTopics, setGlossaryTopics] = useState<GlossaryTopic[]>([])
   const [literatureItems, setLiteratureItems] = useState<MiniLiteratureItem[] | null>(null)
   const [literatureTopics, setLiteratureTopics] = useState<MiniLiteratureTopic[]>([])
+  const literatureActor = useRef<string | null>(null)
+  const literatureInvalidated = useRef(false)
+  // Capture the owner of the rendered catalog, including handlers left in a
+  // stale DOM before an SDK identity change causes the next React render.
+  const renderedLiteratureActor = literatureActor.current
   const [learning, setLearning] = useState<Learning | null>(null)
   const [progress, setProgress] = useState<ProgressOverview | null>(null)
   const [deletionToken, setDeletionToken] = useState<string | null>(null)
@@ -74,7 +79,12 @@ export function MiniApp() {
   const run = useCallback(async (action: () => Promise<void>) => {
     if (lock.current) return
     lock.current = true; setBusy(true); setError('')
-    try { await action() } catch (failure) { setError(message(failure)) }
+    try { await action() } catch (failure) {
+      if (failure instanceof MiniAppError && failure.status === 401) {
+        literatureActor.current = null; setLiteratureItems(null); setLiteratureTopics([])
+      }
+      setError(message(failure))
+    }
     finally { lock.current = false; setBusy(false); setBooting(false) }
   }, [])
   function applyState(next: RunnerState, recoveredFeedback: Feedback | null = null,
@@ -166,8 +176,14 @@ export function MiniApp() {
     setGlossaryTopics(available.topics); setGlossary(saved.glossary_state); setPage('glossary')
   }
   async function loadLiterature() {
-    const [topics, items] = await Promise.all([miniApi.literatureTopics(), miniApi.literatureItems()])
-    setLiteratureTopics(topics.reading_topics ?? topics.literature_topics); setLiteratureItems(items.literature_items); setPage('literature')
+    const actor = window.Telegram?.WebApp?.initData ?? null
+    if (actor && literatureActor.current === actor && literatureItems && !literatureInvalidated.current) { setPage('literature'); return }
+    setLiteratureItems(null); literatureActor.current = null
+    const items = await miniApi.literatureItems()
+    if (!actor || actor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
+    literatureActor.current = actor
+    literatureInvalidated.current = false
+    setLiteratureTopics(items.reading_topics ?? []); setLiteratureItems(items.literature_items); setPage('literature')
   }
   async function loadLearning() {
     const [review, mastery, goals, achievements] = await Promise.all([miniApi.review(), miniApi.mastery(), miniApi.goals(), miniApi.achievements()])
@@ -243,7 +259,16 @@ export function MiniApp() {
         </section>
         : page === 'homework' && homeworkCatalog ? <HomeworkView catalog={homeworkCatalog} busy={busy} confirmId={homeworkConfirmId} onStart={id => void run(() => startHomework(id, false))} onConfirm={id => void run(() => startHomework(id, true))} onResume={item => void run(() => resumeHomework(item))} onRefresh={() => void run(loadHomework)} />
         : page === 'homeworkQuiz' && state ? <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => void run(loadHomework)} onRefresh={() => void run(refreshQuiz)} homeworkTitle={homeworkCatalog?.assignments.find(item => item.id === homeworkId)?.title ?? 'Домашнее задание'} />
-        : page === 'literature' && literatureItems ? <MiniLiterature initial={literatureItems} topics={literatureTopics} busy={busy} run={run} />
+        : page === 'literature' && literatureItems && literatureActor.current === window.Telegram?.WebApp?.initData ? <MiniLiterature initial={literatureItems} topics={literatureTopics} busy={busy}
+          run={action => run(async () => {
+            if (!renderedLiteratureActor || renderedLiteratureActor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
+            await action()
+          })}
+          onInvalidate={() => { literatureInvalidated.current = true }}
+          onItems={items => {
+            if (!renderedLiteratureActor || renderedLiteratureActor !== literatureActor.current || renderedLiteratureActor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
+            literatureInvalidated.current = false; setLiteratureItems(items)
+          }} />
         : page === 'progress' && progress ? <MiniProgress data={progress} busy={busy} onRefresh={() => void run(loadProgress)} />
         : page === 'glossary' && glossary ? <GlossaryView key={`${glossary.session_id}:${glossary.state}:${glossary.current_question?.step_id}`} initial={glossary} topics={glossaryTopics} busy={busy} run={run} client={miniApi} />
         : page === 'learning' && learning ? <LearningView {...learning} busy={busy} onRefresh={() => void run(loadLearning)} onSaveGoal={(kind: GoalKind, target: number) => void run(async () => { await miniApi.setGoal(kind, target); await loadLearning() })} onStartQuiz={replace => void run(() => startReviewQuiz(replace))} onStartGlossary={(topic, replace) => void run(() => startReviewGlossary(topic, replace))} />

@@ -1,12 +1,12 @@
 import type { AchievementsOverview, Answer, AnswerResult, GlossaryState, GlossaryTopic, GoalKind, GoalsOverview, MasteryOverview, ProgressOverview, QuizState, ReadingStatus, ReviewQueue, Setup, SetupOptions } from '../types'
-import type { HomeworkCatalog, HomeworkStart } from '../types'
+import type { HomeworkCatalog, HomeworkStart, LiteratureCatalog, ReadingState } from '../types'
 
 // Static deployment-owned API target; launch parameters cannot redirect initData.
 const origin = 'https://quiz-api.librechat.online'
 const routes = new Set([
   'state', 'setup-options', 'setup', 'answer', 'homework/catalog', 'homework/start',
   'glossary/topics', 'glossary/start', 'glossary/answer', 'glossary/next',
-  'literature/topics', 'literature/items', 'literature/progress',
+  'literature/topics', 'literature/items', 'literature/catalog-compact', 'literature/progress',
   'learning/overview', 'learning/review', 'learning/mastery', 'learning/goals', 'learning/achievements',
   'learning/goal-set', 'learning/review-start', 'learning/review-glossary-start',
   'learning/delete-prepare', 'learning/delete-confirm',
@@ -36,6 +36,7 @@ export async function miniRequest<T>(route: string, payload?: object): Promise<T
       signal: controller.signal,
     })
     const body = await response.json().catch(() => null)
+    if (window.Telegram?.WebApp?.initData !== initData) throw new MiniAppError('telegram_required', 401)
     if (!response.ok || body?.ok !== true) throw new MiniAppError(typeof body?.error === 'string' ? body.error : 'unavailable', response.status)
     return body as T
   } catch (failure) {
@@ -67,9 +68,14 @@ export const miniApi = {
   glossaryNext: (session_id: string, step_id: number) =>
     miniRequest<{ ok: true; glossary_state: GlossaryState }>('glossary/next', { session_id, step_id }),
   literatureTopics: () => miniRequest<{ ok: true; literature_topics: MiniLiteratureTopic[]; reading_topics?: MiniLiteratureTopic[] }>('literature/topics'),
-  literatureItems: (topic_id?: string) => miniRequest<{ ok: true; literature_items: MiniLiteratureItem[] }>(`literature/items${topic_id ? `?topic_id=${encodeURIComponent(topic_id)}` : ''}`),
+  literatureItems: async (topic_id?: string) => {
+    if (topic_id) return miniRequest<{ ok: true; literature_items: MiniLiteratureItem[]; reading_topics?: MiniLiteratureTopic[] }>(`literature/items?topic_id=${encodeURIComponent(topic_id)}`)
+    const result = await miniRequest<LiteratureCatalog>('literature/catalog-compact')
+    return { ok: true as const, reading_topics: result.reading_topics ?? result.topics,
+      literature_items: result.works.flatMap(({ entries, ...work }) => entries.map(entry => ({ ...work, ...entry }))) }
+  },
   literatureProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) =>
-    miniRequest<{ ok: true; literature_progress: unknown }>('literature/progress', { literature_id, reading_status, progress_percent }),
+    miniRequest<{ ok: true; literature_progress: ReadingState }>('literature/progress', { literature_id, reading_status, progress_percent }),
   review: () => miniRequest<ReviewQueue>('learning/review'),
   overview: () => miniRequest<ProgressOverview>('learning/overview'),
   mastery: () => miniRequest<MasteryOverview>('learning/mastery'),

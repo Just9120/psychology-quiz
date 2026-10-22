@@ -27,6 +27,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from app.content_publication import KINDS, PUBLIC_DRIVE_LINK, PublicationPolicy, fingerprint
+from app.source_aliases import private_graph_inputs, source_alias
 from app.publication_certificate import certificate_payload, key_id
 from scripts.scoped_fragment_review import FragmentReviewError, verify_fragment_review
 from app.source_inventory import (InventoryError, combine_registries, complete_listing, link_lessons,
@@ -192,11 +193,11 @@ def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
     publication_review = dossier.get("publication_review")
     quality_review = dossier.get("quality_review")
     permitted = {
-        ("glossary", "dopamine", "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w"),
-        ("questions", "m1_psyf_070", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264"),
-        ("questions", "m1_psyf_071", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264"),
+        ("glossary", "dopamine", "src_be0414ec61aeaaf00cb025d9b112f30a014631f1b5dc794db4c70f2fb9795c47"),
+        ("questions", "m1_psyf_070", "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93"),
+        ("questions", "m1_psyf_071", "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93"),
     }
-    if ((dossier.get("kind"), dossier.get("item_id"), source_id) not in permitted
+    if ((dossier.get("kind"), dossier.get("item_id"), source_alias(source_id)) not in permitted
             or len(dossier.get("sources", [])) != 1
             or not isinstance(claim, dict)
             or not isinstance(publication_review, dict)
@@ -226,7 +227,7 @@ def _verify_scoped_claim(dossier: dict, source: dict, record: dict) -> None:
         raise SigningError("scoped_claim_review_required")
     ranges = _character_ranges(claim.get("locator"))
     held_locator = record.get("locator")
-    if (source_id == "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264"
+    if (source_alias(source_id) == "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93"
             and isinstance(held_locator, str)):
         legacy = re.fullmatch(
             r"extracted_text UTF-8 characters (\d+):(\d+); SHA-256 ([0-9a-f]{64})"
@@ -478,11 +479,13 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
             folder: complete_listing(pages)
             for folder, pages in inventory["folders"].items()
         })
+        registry, = private_graph_inputs(snapshot, registry)
         private_ids = set()
         if private_registry_path is not None:
             private_registry = private_registry_input(private_registry_path, REPO_ROOT)
             registry = combine_registries(registry, private_registry)
             curriculum = json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8"))
+            curriculum, = private_graph_inputs(snapshot, curriculum)
             classification_catalog = curriculum
             if private_topics_path is not None:
                 classification_catalog = combine_private_topics(
@@ -535,7 +538,7 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
         # approve the source: the exact named-edition gate still runs below.
         named_related_review = (dossier.get("kind") == "questions"
                                 and dossier.get("item_id") == "m1_psyf_070"
-                                and source_id == "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264")
+                                and source_alias(source_id) == "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93")
         allowed_states = {"processed", "conflict_review", "pending_review"} if fragment_v2 else {"processed", "conflict_review"}
         if (item is None or state not in allowed_states
                 or (source_id in related_conflicts and not fragment_v2 and not named_related_review)
@@ -629,6 +632,7 @@ def verify_current_sources(dossier: dict, inventory: dict, processed: dict,
             # A lesson link classifies that exact reviewed fragment, not the whole source.
             catalog = (classification_catalog if private_registry_path is not None else
                        json.loads((REPO_ROOT / "content/curriculum.json").read_text(encoding="utf-8")))
+            catalog, = private_graph_inputs(snapshot, catalog)
             topic = catalog["topics"].get(topic_id)
             expected_source = {"source_id": sources[0]["id"],
                                "modified_time": sources[0]["modified_time"],

@@ -11,6 +11,7 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
   const lessons = data.sources.coverage?.lessons ?? []
   const disciplines = [...new Set(lessons.map(lesson => lesson.discipline))]
   const topics = data.topics.filter(item => !topicId || item.id === topicId)
+  const knowledge = data.knowledge?.state === 'PUBLISHED' ? data.knowledge : undefined
   return <section className="page-width progress-page">
     <span className="eyebrow">ДЛЯ ВЛАДЕЛЬЦА</span><h1>Содержание и пробелы</h1>
     <p className="lead">Опубликованные задания и материалы. Отсутствие заданий показано отдельно; достаточность банка требует содержательной проверки.</p>
@@ -25,11 +26,17 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
         {data.sources.observation_basis === 'saved_inputs' && <p className="muted">Дата сводки — время расчёта. Актуальность папки Google Drive этим расчётом не проверялась.</p>}
       </>}
     </article>
+    {knowledge && <article className="panel"><h2>Опубликованная база знаний</h2>
+      <p>Пакет от {knowledge.published_at}: {knowledge.atomic_notes} самостоятельных заметок; тематических обзоров: {knowledge.sections?.length}.</p>
+      <p>Заметок без подтверждённой связи с зарегистрированными занятиями: {knowledge.unmapped_notes}. Они остаются в базе знаний.</p>
+      <p className="muted">Связь установлена по точным названиям источников опубликованного пакета. Подготовленные заметки не снимают возражения к источникам и не подтверждают актуальность их редакций или полноту личного Obsidian.</p>
+      <details><summary>Разделы базы знаний</summary>{knowledge.sections?.map(section => <p key={section.title}>{section.title}: {section.notes}</p>)}</details>
+    </article>}
     {data.sources.coverage && <article className="panel"><h2>Подготовка по учебным материалам</h2>
       <p>Зарегистрированных источников: {data.sources.coverage.tracked_sources}; файлов вне registry: {data.sources.coverage.untracked_files}.</p>
       <p>Опубликованных вопросов без подтверждённой привязки к учебной теме в снимке: {data.sources.coverage.unmapped_published_questions}.</p>
       {data.sources.coverage.unmapped_published_glossary !== undefined && <p>Опубликованных терминов без подтверждённой привязки к учебной теме в снимке: {data.sources.coverage.unmapped_published_glossary}.</p>}
-      {data.sources.coverage.prepared_notes_unmapped !== undefined && <p>Подготовленных заметок без подтверждённой привязки к учебной теме: {data.sources.coverage.prepared_notes_unmapped}.</p>}
+      {!knowledge && data.sources.coverage.prepared_notes_unmapped !== undefined && <p>Подготовленных заметок без подтверждённой привязки к учебной теме: {data.sources.coverage.prepared_notes_unmapped}.</p>}
       <p className="muted">Привязка проверена по редакции вопроса. Цифры относятся к датированному снимку выше; пустой раздел не означает оценку достаточности.</p>
       {data.sources.coverage.unreleased_lessons && <div className="notice notice-vertical">
         <p>Ещё не опубликованные учебные темы: {data.sources.coverage.unreleased_lessons.total}. Актуальные метаданные: {data.sources.coverage.unreleased_lessons.metadata_current}; темы с возражениями: {data.sources.coverage.unreleased_lessons.known_holds}.</p>
@@ -44,7 +51,7 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
         <p>Теория: {lesson.kinds.theory}; глоссарий: {lesson.kinds.glossary}; кейсы: {lesson.kinds.case}.</p>
         {Object.values(lesson.kinds).every(count => count === 0) && <p className="notice">Нет опубликованных вопросов с подтверждённой привязкой к этой теме.</p>}
         {lesson.glossary_terms !== null ? <p>Опубликованных терминов с подтверждённой привязкой к этой теме в снимке: {lesson.glossary_terms}.</p> : <p className="muted">Отдельные термины: покрытие по этой теме не подтверждено.</p>}
-        {lesson.notes_state === 'PREPARED' ? <><p>Подготовлено заметок в переданном снимке: {lesson.notes}.</p><p className="muted">Это проверка подготовки, а не подтверждение публикации в Obsidian или полноты личной базы. Полнота личной базы по этой теме не подтверждена.</p></> : <p className="muted">Личные заметки: покрытие по этой теме не подтверждено.</p>}
+        {knowledge?.lessons?.[lesson.id] !== undefined ? <p>Заметок в опубликованном пакете по подтверждённым связям: {knowledge.lessons[lesson.id]}. Полнота покрытия занятия не установлена.</p> : lesson.notes_state === 'PREPARED' ? <><p>Подготовлено заметок в переданном снимке: {lesson.notes}.</p><p className="muted">Это проверка подготовки, а не подтверждение публикации в Obsidian или полноты личной базы. Полнота личной базы по этой теме не подтверждена.</p></> : <p className="muted">Личные заметки: покрытие по этой теме не подтверждено.</p>}
       </div>)}</div></details>)}
       <p className="muted">Количество терминов учитывает только проверенную привязку к редакции источника; отсутствие привязки не означает отсутствия термина в корпусе.</p>
     </article>}
@@ -54,7 +61,7 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
       <h2>{topic.title}</h2><p>Вопросов: {topic.questions}</p>
       <p>Теория: {topic.kinds.theory}; глоссарий: {topic.kinds.glossary}; кейсы: {topic.kinds.case}.</p>
       <p>Терминов: {topic.glossary_terms ?? 'не подтверждено'}; произведений в списке чтения: {topic.literature_works}.</p>
-      <p>Личные заметки Obsidian: покрытие не подтверждено.</p>
+      {knowledge?.disciplines?.[topic.id] !== undefined ? <p>Заметок в опубликованном пакете по подтверждённым связям: {knowledge.disciplines[topic.id]}. Полнота личного Obsidian не установлена.</p> : <p>Личные заметки Obsidian: покрытие не подтверждено.</p>}
       {topic.gaps.length > 0 && <p className="notice">Нет опубликованных заданий: {topic.gaps.map(kind => kinds[kind as keyof typeof kinds]).join(', ')}.</p>}
     </article>)}</div>
     <p className="hint">Редактирование и публикация остаются в репозитории. Обзор не изменяет банк и не показывает данные учащихся.</p>

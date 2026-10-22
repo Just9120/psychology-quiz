@@ -9,8 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+COPY requirements-bootstrap.lock /app/requirements-bootstrap.lock
+RUN python -m pip install --no-cache-dir --require-hashes -r /app/requirements-bootstrap.lock
 COPY requirements.lock /app/requirements.lock
 RUN pip install --no-cache-dir --require-hashes -r /app/requirements.lock
+RUN python -c "from pathlib import Path; import certifi; import pip._vendor.certifi as bundled; assert certifi.__version__ == bundled.__version__; assert Path(certifi.where()).read_bytes() == Path(bundled.where()).read_bytes()"
 
 COPY app /app/app
 COPY scripts /app/scripts

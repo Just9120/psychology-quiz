@@ -3,6 +3,19 @@ import userEvent from '@testing-library/user-event'
 import { expect, it, vi } from 'vitest'
 import { ReadingOrder, readingOrder } from '../src/ReadingOrder'
 
+it('labels repeated levels by unique step ranges without moving preparation after its dependent', async () => {
+  const base = { importance: 'basic', importance_source: 'agent', why_read: 'Изучить материал', prerequisites: [] as string[] }
+  const items = [{ ...base, id: 'a', title: 'Подготовка', reading_level: 'core' },
+    { ...base, id: 'b', title: 'Вводный материал', reading_level: 'foundation', prerequisites: ['a'] },
+    { ...base, id: 'c', title: 'Практика', reading_level: 'core', prerequisites: ['b'] }]
+  render(<ReadingOrder items={items} allItems={items} busy={false} onSelect={vi.fn()} />)
+  await userEvent.setup().click(screen.getByText('Рекомендуемая последовательность чтения'))
+  expect(screen.getByText('Шаги 1–1 · Основное чтение')).toBeVisible()
+  expect(screen.getByText('Шаги 2–2 · Начать с основ')).toBeVisible()
+  expect(screen.getByText('Шаги 3–3 · Основное чтение')).toBeVisible()
+  expect(readingOrder(items).map(row => row.item.id)).toEqual(['a', 'b', 'c'])
+})
+
 it('orders prerequisites before an easier dependent, deduplicates works and excludes missing/cyclic preparation', () => {
   const base = { reading_level: 'core', importance: 'basic', importance_source: 'agent', why_read: 'Confirmed purpose', prerequisites: [] as string[] }
   const foundation = { ...base, id: 'z', work_id: 'foundation', reading_level: 'advanced' }

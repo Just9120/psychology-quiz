@@ -51,6 +51,17 @@ def test_preflight_is_read_only_then_install_checks_timer_without_cleanup(bounda
     assert set(p.name for p in root.iterdir()) == {timer.SERVICE, timer.TIMER}
 
 
+def test_known_legacy_unit_upgrades_without_replacing_foreign_configuration(boundary):
+    root, _, _ = boundary
+    for name, content in timer.definitions(OLD, legacy=True).items():
+        (root / name).write_text(content, encoding='utf-8')
+    timer.install(root, SHA)
+    service = (root / timer.SERVICE).read_text(encoding='utf-8')
+    assert '--prepare-lock' in service
+    assert 'ProtectSystem=strict' in service
+    assert 'ReadWritePaths=/opt/psychology-quiz/.postgres -/tmp/psychology-quiz-deploy.lock' in service
+
+
 def test_foreign_or_partial_unit_cannot_be_overwritten(boundary):
     root, _, _ = boundary
     path = root / timer.SERVICE

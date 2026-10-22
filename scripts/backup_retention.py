@@ -141,24 +141,44 @@ def apply_cleanup(state: Path, expected, *, now=None):
     return removed
 
 
+def open_deployment_lock(path=Path('/tmp/psychology-quiz-deploy.lock'), owner_uid=0):
+    """Create the shared inode without replacing/truncating an existing lock."""
+    fd = os.open(path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    try:
+        info, named = os.fstat(fd), os.lstat(path)
+        if (not stat.S_ISREG(info.st_mode) or info.st_uid != owner_uid
+                or info.st_nlink != 1 or info.st_mode & 0o022
+                or (info.st_dev, info.st_ino) != (named.st_dev, named.st_ino)):
+            raise ValueError('unsafe_lock')
+        return fd
+    except BaseException:
+        os.close(fd)
+        raise
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--apply', action='store_true')
+    parser.add_argument('--prepare-lock', action='store_true')
     revision = parser.add_mutually_exclusive_group()
     revision.add_argument('--expected-sha')
     revision.add_argument('--scheduled-from')
     args = parser.parse_args()
+    if args.prepare_lock and (args.apply or args.expected_sha or args.scheduled_from):
+        parser.error('prepare-lock cannot perform retention')
     # Production target is fixed; no caller-supplied directory or remote DB.
     if os.name != 'posix' or os.geteuid() != 0:
         raise SystemExit('BACKUP_RETENTION_STOP: root Linux operator required')
     import fcntl
     if PROJECT.resolve(strict=True) != PROJECT:
         raise SystemExit('BACKUP_RETENTION_STOP: physical target required')
-    fd = os.open('/tmp/psychology-quiz-deploy.lock', os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    fd = open_deployment_lock()
     try:
-        info = os.fstat(fd)
-        if not stat.S_ISREG(info.st_mode) or info.st_uid != 0 or info.st_nlink != 1 or info.st_mode & 0o022:
-            raise ValueError('unsafe_lock')
+        if args.prepare_lock:
+            # Runs before the restrictive mount namespace; no backup reads or
+            # writes, flock acquisition, unlink, chmod or inode replacement.
+            print('BACKUP_RETENTION_LOCK_READY')
+            return 0
         fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
         if args.apply:
             anchor = args.scheduled_from or args.expected_sha

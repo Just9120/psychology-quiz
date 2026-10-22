@@ -301,7 +301,7 @@ def test_signer_requires_source_revision_quality_and_private_nonce():
         sign_review("questions", {**public, "source": {"id": "fixture"}}, dossier, key)
 
 
-def test_signer_checks_processed_private_source_against_complete_inventory():
+def test_signer_checks_processed_private_source_against_complete_inventory(tmp_path, monkeypatch):
     public, dossier = fixture_review()
     source = dossier["sources"][0]
     inventory = {"schema_version": 1, "root_id": "root", "folders": {"root": [{
@@ -357,12 +357,31 @@ def test_signer_checks_processed_private_source_against_complete_inventory():
                           "modified_time": "2026-09-28T00:00:00Z"}]}]}}
         verify_current_sources(dossier, changed, processed)
 
+    # Public aliases must resolve for the primary lesson source even without
+    # an optional private-registry or an alternate-section receipt.
+    from app.source_aliases import source_alias
+    content = tmp_path / 'content'
+    content.mkdir()
+    topic = 't_' + 'a' * 12
+    corpus = {'sources': [{**source, 'id': source_alias(source['id']), 'kind': 'learning_material'}]}
+    (content / 'source-corpus.json').write_text(json.dumps(corpus), encoding='utf-8')
+    catalog = {'topics': {topic: {'source': {'source_id': source_alias(source['id']),
+        'modified_time': source['modified_time'], 'snapshot_sha256': source['snapshot_sha256']}}}}
+    (content / 'curriculum.json').write_text(json.dumps(catalog), encoding='utf-8')
+    dossier.update(curriculum_topic_id=topic, curriculum_link={
+        'source_id': source['id'], 'topic_id': topic, 'lesson_id': topic, 'format': 'document',
+        'revision': processed[source['id']]['revision'], 'corpus_path': source['title'],
+        'reviewer': 'test-reviewer', 'review_note': 'Exact primary lesson',
+        'reviewed_at': '2026-09-27T00:00:00Z'})
+    monkeypatch.setattr(signer, 'REPO_ROOT', tmp_path)
+    verify_current_sources(dossier, inventory, processed, public_item=public)
+
 
 @pytest.mark.parametrize("kind,item_id,source_id,legacy_locator", [
-    ("glossary", "dopamine", "1N5lBZzLSmiGqtQpxIHGIz8y630BfYc8hI7kD9Qcc97w", False),
-    ("questions", "m1_psyf_070", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", True),
-    ("questions", "m1_psyf_071", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", True),
-    ("questions", "m1_psyf_070", "1IkZqA_0yVgzsavRbChHb4hWVUYE1BmuYgtlNp7I3264", "multiple"),
+    ("glossary", "dopamine", "src_be0414ec61aeaaf00cb025d9b112f30a014631f1b5dc794db4c70f2fb9795c47", False),
+    ("questions", "m1_psyf_070", "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93", True),
+    ("questions", "m1_psyf_071", "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93", True),
+    ("questions", "m1_psyf_070", "src_9cf095562121c24292c584a70c8fe77151f7db36894b1beb401ad73c97188f93", "multiple"),
 ])
 def test_scoped_claim_keeps_conflicted_source_on_hold(
         tmp_path, monkeypatch, kind, item_id, source_id, legacy_locator):

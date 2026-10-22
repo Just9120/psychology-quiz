@@ -24,6 +24,47 @@ const question = { session_id: 10, question_id: 20, question_text: 'Первый
   options: [{ option_index: 0, option_text: 'Уточнить запрос' }, { option_index: 1, option_text: 'Поставить диагноз' }] }
 const setup = { categories: [{ id: 1, name: 'Кейсы' }], question_count_choices: [5, 'all'], difficulty_choices: ['any'], content_kind_choices: ['theory', 'glossary', 'case'] }
 
+test('Mini App compact catalog preserves cold navigation and avoids warm personal refetch', async ({ page, request }) => {
+  const backend = 'http://127.0.0.1:8085'
+  expect((await request.post(backend + '/__test/reset', { data: { seed: true } })).ok()).toBe(true)
+  const proof = new URLSearchParams({ auth_date: String(Math.floor(Date.now() / 1000)), user: JSON.stringify({ id: 4242, first_name: 'Synthetic learner' }) })
+  const secret = createHmac('sha256', 'WebAppData').update('123:synthetic-e2e').digest()
+  proof.set('hash', createHmac('sha256', secret).update([...proof.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join('\n')).digest('hex'))
+  await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
+  await page.addInitScript(initData => { window.Telegram = { WebApp: { initData, ready() {}, expand() {} } } }, proof.toString())
+  const samples: { bytes: number; api_ms: number; cold_ui_ms: number; warm_ui_ms: number; encoding: string }[] = []
+  let catalogCalls = 0
+  await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': site.slice(0, -1), 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type' } })
+    const url = new URL(route.request().url()), started = performance.now()
+    const response = await route.fetch({ url: backend + url.pathname + url.search })
+    if (url.pathname.endsWith('/catalog-compact')) {
+      catalogCalls++
+      samples.push({ bytes: (await response.body()).length, api_ms: performance.now() - started, cold_ui_ms: 0, warm_ui_ms: 0, encoding: response.headers()['content-encoding'] ?? 'identity' })
+    }
+    await route.fulfill({ response, headers: { ...response.headers(), 'Access-Control-Allow-Origin': site.slice(0, -1) } })
+  })
+  for (let index = 0; index < 3; index++) {
+    await page.goto(site)
+    await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
+    const cold = performance.now()
+    await navigateMini(page, 'Литература')
+    await expect(page.locator('.literature-card').first()).toBeVisible()
+    samples[index].cold_ui_ms = performance.now() - cold
+    await navigateMini(page, 'Квиз')
+    const warm = performance.now()
+    await navigateMini(page, 'Литература')
+    await expect(page.locator('.literature-card').first()).toBeVisible()
+    samples[index].warm_ui_ms = performance.now() - warm
+    expect(catalogCalls).toBe(index + 1)
+  }
+  const flat = await request.get(backend + '/miniapp/literature/items', { headers: { Authorization: 'tma ' + proof.toString() } })
+  expect(flat.ok()).toBe(true)
+  const flatBytes = (await flat.body()).length
+  expect(samples.every(sample => sample.bytes < flatBytes)).toBe(true)
+  console.log('CATALOG_SAMPLES_LOCAL_SYNTHETIC', JSON.stringify({ flat_bytes: flatBytes, samples }))
+})
+
 test('built Mini App requires Telegram and keeps initData on the fixed API origin', async ({ page }) => {
   await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
   const requests: string[] = []
@@ -204,8 +245,7 @@ test('built Mini App opens book offers externally without passing Telegram proof
     const payload: Record<string, object> = {
       '/miniapp/setup-options': { setup_options: setup },
       '/miniapp/state': { runner_state: { state: 'setup', status: 'setup', session: null } },
-      '/miniapp/literature/topics': { literature_topics: [{ topic_id: 'one', title: 'Тема', module: 'module1' }] },
-      '/miniapp/literature/items': { literature_items: [{ id: 'book', work_id: 'work', title: 'Учебная книга', topic_id: 'one', access_links: offers, user_state: null }] },
+      '/miniapp/literature/catalog-compact': { topics: [{ topic_id: 'one', title: 'Тема', module: 'module1' }], works: [{ work_id: 'work', title: 'Учебная книга', access_links: offers, entries: [{ id: 'book', topic_id: 'one', user_state: null }] }] },
     }
     expect(payload[path]).toBeDefined()
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, ...payload[path] }), headers: { 'Access-Control-Allow-Origin': site.slice(0, -1) } })
