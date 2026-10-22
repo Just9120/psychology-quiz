@@ -17650,8 +17650,8 @@
     "questions:m6_psyl_001": {
       "item_sha256": "71a1939a9aec5bca05ef93d489dc6b3ad1ea9043f243d1801d828736cf3d4e49",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -17663,8 +17663,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact production/perception mechanism definition read; adjacent linguistic tasks replace chemistry/legal distractors, no diagnostic speech inference added. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP: Psycholinguistic psychological mechanisms of speech production/comprehension contrasted with grammar/history/lexicography; no therapeutic or diagnostic efficacy inferred. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m4_person_001": {
       "item_sha256": "1b8efe87fc68b0f874145b7bc03ba5374b69e06d549bf44a6de9ae4b8b2a68ca",
@@ -19129,10 +19130,10 @@
       "sources": []
     },
     "questions:m6_psyl_002": {
-      "item_sha256": "fcd2c8d8a1b8cfa99b84431101a3256f687339890bbde212c55b837ff3070467",
+      "item_sha256": "bfc427b682d84f37d09b53e9d6d44d5a366924325547063d1328d4f3e873ef63",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19144,14 +19145,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact generalisation definition and bounded-experience questions25140:25704 after held self-label deterministic behaviour claim. Own project example, no participant narrative, automatic positive reframing, denial of actual failures or guaranteed change.",
-      "sources": []
+      "note": "FIX: Replace doom/loser/change-profession straw alternatives with useful questions addressing different targets; remove multiple negative quantifier wording, no assumption every generalization is false. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_psyl_003": {
-      "item_sha256": "25fec51da96b788ba7814a3191e0b7e19ab723edb3b7696f1ec189bcbfbcc9a7",
+      "item_sha256": "9df7a786a8abe5bcf7b465e9f36de6fe8773be226d050112242a9f229f9e7a35",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19163,14 +19165,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact referent definition and who-are-they clarification26841:27294. Fictional quotation does not copy participant details. No assumption that referent omission is deception or that parents are implicated.",
-      "sources": []
+      "note": "FIX: All alternatives are neutral and useful information requests; only one resolves who, rather than content/emotion/time. Remove diagnosis and leading-parent suggestions. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_psyl_004": {
-      "item_sha256": "72b5eaa6587f175f3fb9e1471af6c4acfaff60806ace7219802369d81788d6e6",
+      "item_sha256": "269fccc3b05f1420ef609b36c104608c12a38ebf0def0f1a8076e37fff2129fe",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19182,8 +19185,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact presupposition explanation30060:30565. Own example distinct from original participant wording. Does not assert every linguistic presupposition false or therapeutic enquiry must reject all assumptions; tests unverified loaded-question premises.",
-      "sources": []
+      "note": "FIX: Contrast actual evaluative/repetition presuppositions with plausible but absent speaker-ownership/cause/revision inferences; no impossible alternatives. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_psyl_005": {
       "item_sha256": "8aebe21567452508f8e87633c71d70d76bd952805b89adfd90bf931efb1d9c7c",
@@ -19201,34 +19205,35 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Clarify origin, meaning and scope of a rule; real constraints may exist. Replaced ambiguous dative wording with first-person refusal rule. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "note": "KEEP: Already revised in this Goal: rule origin/meaning/conditions contrasted with premature permission/fixed-limitation/lexical-method selection; actual obligations are explicitly not denied. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
+    },
+    "questions:m6_psyl_006": {
+      "item_sha256": "bad79c74f89ff675e356b44334a04a91384e2ca8584c79a7941169ad3c66fe12",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "FIX: Replace yes/no with bounded inference; avoid misclassifying impersonal/indefinite-personal wording as a formal passive grammatical voice. No linguistic form proves a stable personality property. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
       "sources": [],
       "disposition": "fix"
     },
-    "questions:m6_psyl_006": {
-      "item_sha256": "3d384ecb1e6d14e0892e8d83c61efc942dd3289b19152c8ff1b7884b54199bf0",
-      "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact explicit correction32247:32506, not earlier universal literal-language-authority formulation. Own meeting example, no individual agency blame or diagnostic conclusion; preserves qualification from saved outline.",
-      "sources": []
-    },
     "questions:m6_psyl_007": {
-      "item_sha256": "19cf415d05a628fafa2405ac4ea5ad66cfcf72f9983657ff44b9d3c03c1b1e33",
+      "item_sha256": "5f085bc59c16d87cc9a042b906dabb5e439fa6258ab7132b4e5a041740957bd2",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19240,14 +19245,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact individual/contextual metaphor meaning32939:33425, after unsupported broad ecological/heavy-experience efficacy language and before limitless-possibility claim. Own metaphor, not copied private story or fixed-symbol diagnostic rule.",
-      "sources": []
+      "note": "FIX: Use plausible conversational alternatives instead of universal-symbol dictionary/diagnosis/imposed meaning; exclude unsupported ecological/dissociative efficacy claims before selected definition. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_psyl_008": {
-      "item_sha256": "1069cf0108662f703088fe55d8b1b44cb802d7e08fc730ee962e32f89cfdf7a1",
+      "item_sha256": "0a2a6973b3ae0df8cd20f9d1f4be13e03804bcd9337ae46d7bfe2dca4919878d",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19259,8 +19265,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact causal-construction definition and sequence inquiry29024 vicinity before presupposition definition. Own neutral project example; no assertion external influence unreal, every cause internal, medical diagnosis or guaranteed cognitive-change effect.",
-      "sources": []
+      "note": "FIX: Replace diagnosis and independent-law caricatures with common causal-intent/exclusivity/omitted-event inferences; do not dismiss real external causes. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m4_dev_003": {
       "item_sha256": "54a804be648ce1b9f15c6f692a9b628463c561ebea558f7d937f111d1cb65835",
@@ -19325,8 +19332,8 @@
     "questions:m6_psyl_009": {
       "item_sha256": "3cc299e58a9770a634ada6bb07971d37658779e7f9e2952b3379bbb4cd359fe7",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19338,14 +19345,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact sign-system definition read; distinguish system from utterance/process/individual realization rather than reflex/legal/chemical trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP: Language sign system distinguished from situated utterance, formulation process and individual pronunciation; no reality creation by words. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m6_psyl_010": {
       "item_sha256": "074bebb88e3718216866889bb05e8503aa60b80432246f58c760ec7324cc77e9",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19357,8 +19365,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact communicative/emotional/social functional distinctions before magic/reality claim. Own non-private joy example; multiple coexisting functions acknowledged, no exclusive mapping or efficacy inference.",
-      "sources": []
+      "note": "KEEP: Retain exact approved edition: emotion-expression criterion explicitly distinguishes functions and acknowledges simultaneous uses. Magical alternative mirrors an actual held lecture misconception, and the explanation explicitly rejects it as a scientific mechanism; no new source approval. Proposed optional rewording remains withheld while unresolved hold provenance is preserved. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m2_pd_002": {
       "item_sha256": "7f8c01fa91da802d1497efdd375ecbc3ca41296511370447dd4f826c79abcd14",
@@ -20147,8 +20156,8 @@
     "questions:m6_psyl_011": {
       "item_sha256": "8a78e5d5a80941ef33507eb39252be479c1293707fe8a04072fcf6ed539119ea",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20160,8 +20169,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact words/thing distinction only; surrounding simulation, quantum, universal neural and change-guarantee claims not adopted. Historical authorship not assessed.",
-      "sources": []
+      "note": "KEEP: Retain exact approved representation/referent distinction with explicit rejection of words-creating-events and guaranteed reformulation. Distractors correspond to actual source misconceptions; source-wide NLP claims stay held. Proposed optional rewording not signed or published. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m3_psychological_consulting_113": {
       "item_sha256": "965de4378611efa02d5ed82ba5e69ece44c78c05847f248876bfda27068b24cc",
@@ -21335,8 +21345,8 @@
     "questions:m6_psyl_012": {
       "item_sha256": "f7d52fcfca782b627d2185dfd433d2bb29e3d73c3dcdf096b496478d15ee1371",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -21348,8 +21358,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact motive-to-thought-to-word sequence read; meaningful process-stage alternatives replace physical thought mass and diagnostic traits. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP: Named course motive-thought-word scheme framed as a theoretical relation, not invariant universal sequence; alternatives target other speech stages. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m5_clin_018": {
       "item_sha256": "d288be93f1713f8366ccbcf0327ba23212022a9ff1ff31b5d8bda004707005fc",

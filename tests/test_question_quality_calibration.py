@@ -19,7 +19,7 @@ def test_global_canonical_quality_thresholds_and_rapport_resolution() -> None:
     report=build_report()
     g=report["global"]
     assert g["approved_question_count"] == 703
-    assert g["unique_longest_correct_count"] == 320
+    assert g["unique_longest_correct_count"] == 322
     assert g["high_severity_length_cue_count"] == 0
     assert g["duplicate_normalized_stems"] == {}
     inv,_=load_canonical_inventory(); by_id={r["external_id"]:r for r in inv}

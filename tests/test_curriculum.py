@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1186
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1192
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 173
@@ -298,6 +298,8 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                                   'm4_dev_007', 'm4_dev_008', 'm4_dev_009',
                                   'm3_psychological_consulting_098',
                                   'm3_psychological_consulting_109',
+                                  'm6_psyl_002', 'm6_psyl_003', 'm6_psyl_004',
+                                  'm6_psyl_006', 'm6_psyl_007', 'm6_psyl_008',
                               }) - {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} - {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)}
         assert retired == {'m2_qual_009', 'm2_qual_013', 'm6_ethics_001', 'm4_dev_002'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)}
 

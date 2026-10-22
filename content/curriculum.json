@@ -7539,6 +7539,42 @@
       "topic_id": "t_cb4906154e12",
       "item_sha256": "004dab9c8d83de853d301d5a86b81b57e47caa09de0a79b22a984fc7573c059c",
       "locator": "private certificate:questions:m3_psychological_consulting_109"
+    },
+    "41209fc6eeb2741e628ffb97a5b535d86ae611b5428803baa282320ee27ea4d8": {
+      "external_id": "m6_psyl_002",
+      "topic_id": "t_ba868cd218a1",
+      "item_sha256": "bfc427b682d84f37d09b53e9d6d44d5a366924325547063d1328d4f3e873ef63",
+      "locator": "private certificate:questions:m6_psyl_002"
+    },
+    "4d142339bfe5029ced80bcc67ac6e1cffe87398d792576ecc3159ef9ce0f91e6": {
+      "external_id": "m6_psyl_003",
+      "topic_id": "t_ba868cd218a1",
+      "item_sha256": "9df7a786a8abe5bcf7b465e9f36de6fe8773be226d050112242a9f229f9e7a35",
+      "locator": "private certificate:questions:m6_psyl_003"
+    },
+    "7641e06e4313cc9ffd33046e718765c449839e586775d59940afcaa64728c2c1": {
+      "external_id": "m6_psyl_004",
+      "topic_id": "t_ba868cd218a1",
+      "item_sha256": "269fccc3b05f1420ef609b36c104608c12a38ebf0def0f1a8076e37fff2129fe",
+      "locator": "private certificate:questions:m6_psyl_004"
+    },
+    "bc07456947ec5712be013deaf41caffe2d65afebb3f71f1cb273ada8607c3eca": {
+      "external_id": "m6_psyl_006",
+      "topic_id": "t_ba868cd218a1",
+      "item_sha256": "bad79c74f89ff675e356b44334a04a91384e2ca8584c79a7941169ad3c66fe12",
+      "locator": "private certificate:questions:m6_psyl_006"
+    },
+    "db4c13380f561fecbdc640f1b647ca973d5bb48d3e3efdb18c3bae1e450003d0": {
+      "external_id": "m6_psyl_007",
+      "topic_id": "t_ba868cd218a1",
+      "item_sha256": "5f085bc59c16d87cc9a042b906dabb5e439fa6258ab7132b4e5a041740957bd2",
+      "locator": "private certificate:questions:m6_psyl_007"
+    },
+    "728621aed383ce0d240710421bf5aa0d76d49bf2c6b1c18dd8f753148b055805": {
+      "external_id": "m6_psyl_008",
+      "topic_id": "t_ba868cd218a1",
+      "item_sha256": "0a2a6973b3ae0df8cd20f9d1f4be13e03804bcd9337ae46d7bfe2dca4919878d",
+      "locator": "private certificate:questions:m6_psyl_008"
     }
   }
 }
