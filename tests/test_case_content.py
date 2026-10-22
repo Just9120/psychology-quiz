@@ -50,7 +50,7 @@ def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
     topic = next(topic for topic in registry if topic["id"] == "cases")
     assert topic["title"] == item["category"] == "Кейс"
     assert topic["question_file"] == "content/questions/module3/cases.json"
-    assert len(items) == 16
+    assert len(items) == 48
     assert all(candidate["kind"] == "case" for candidate in items)
     with closing(get_connection(str(bank))) as conn, conn:
         upsert_approved_questions(conn, items)

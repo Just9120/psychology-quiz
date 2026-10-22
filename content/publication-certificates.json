@@ -1909,6 +1909,118 @@
       "review_sha256": "b9b02c4c7d7ec75f9f8b28263dedd3c571a5598e14dff4d5fd910a58b6d5e8bc",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "9p7nJduV3nvUIOG3XWYCTcnRDuy4P7uNU+eZHJN6VQVdY+guOLN9he+qXthvg0bjDiVQZFBLdRxtHt+AkEACDg=="
+    },
+    "questions:case_homework_barrier_001": {
+      "schema_version": 1,
+      "item_sha256": "910d008e7f3b07992efe304f765b7b5cd11cab2142ce14376eb924784e78216b",
+      "review_sha256": "6a69af3665165e9dfb0a87df48d4201c660391d616fbe71708b1c0429d933e1a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "l2/SzEd2cjo0WR1fSPVAf85RcqeaAtwHF97MflPlid1ITSco/hEeLc03jzD0V/J6MTLfAx5qRhIhht931gxvCg=="
+    },
+    "questions:case_homework_other_action_001": {
+      "schema_version": 1,
+      "item_sha256": "1f5d5d5f4b506f6f864dab50ce6a2483fecaed6705a9c76675e71f731ca8488c",
+      "review_sha256": "3353308d1f52977d7cb165d751da2b8ba241899f2d7fb0c7bd57e894a579810b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "gTt11cOupzneoXK0cZDCSETvDOULqEgIkLxcbyhERGOvZJEHqxjz9niqBUwU4wKu+Z4/+iWYYl9RLs2+l2TADA=="
+    },
+    "questions:case_emotion_pace_001": {
+      "schema_version": 1,
+      "item_sha256": "3f5bc58c76ba5cb06c7e02b4451477d03e7e7b01698433ce8b149588544324b3",
+      "review_sha256": "73d530a2dcad2f342627265920ce40f304b1694c85440d3b7c1c9dc3603a5935",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "v1ENx8b1FW0Xo+b4LaR68SRl2/abdEmXY3elVsROqGFrlOGHPGUb5lukomlFzJcBKUXnIeYdXsv0w54CFpgfAQ=="
+    },
+    "questions:case_client_skepticism_001": {
+      "schema_version": 1,
+      "item_sha256": "bc55d0789fcc8f50fb29ccd7467d278142398957f9fcac06e8b0fc234a9e603d",
+      "review_sha256": "e1cbaf26b094fe33c2d5692763d8835b2628180a1e7c38e0ef8af3e835fff4e8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "lumvtjioXHTLaSzuLSygfw/Y1De36lT2ExyVQ0tiUXNwmMcmqgQTvmN2uWnPbt/BxB7mzg1Qx5uH0hIkzJY+AA=="
+    },
+    "questions:case_nonverbal_observation_001": {
+      "schema_version": 1,
+      "item_sha256": "a7ce76b4c0a102c38d2847fe2b0884ff972c29ed1a397a27a8920ad4f008340f",
+      "review_sha256": "3fed3c114c55e054470e59736aa8d53c46c0ad76993d4a04d192866b4677b4da",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "bO1VlAp7r0q1YjAFtuPRm2zVzE4h04KqMGZk6XpuhLt9BCl7pKhyduuWM0kfoym9pvwg6VtybkxCVJIZsSctBw=="
+    },
+    "questions:case_support_without_promise_001": {
+      "schema_version": 1,
+      "item_sha256": "b279356d5fc21028cfd19aa0a641a6c604e6c08e0d84007c870eb36e9a38628c",
+      "review_sha256": "0f1b8bd370fa67b428a017457a0ff21056890cae9d9ad2cd7a6f0e85df19d4cc",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "CxvG47NEXqsObBELrpa6Wv0ED4JmVIrI5puq0xSfxq4Rsl5O2XjrzTPOHHZOJZYoQ4NkTLba9uqfQUwE921JBw=="
+    },
+    "questions:case_supervision_fact_question_001": {
+      "schema_version": 1,
+      "item_sha256": "45e173edb42d27d8aad5fe962113afb3ce62f6165d2784d639b2f165cd65f9e0",
+      "review_sha256": "3e0d68d1d458631d513ac0578548f3220ef87cac559502db3552a326fffb7f80",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "KX5AT28H+IuW4+y4ugpn16rEdI/UKOKWqxTwHC7XmjZBFS0QGl8VLrbdH4ZDKxb+Bo923Qr5kNZNXnfyiZYLBQ=="
+    },
+    "questions:case_supervision_specific_difficulty_001": {
+      "schema_version": 1,
+      "item_sha256": "6ca7d187d358cf46567bd081c28ff75d56f9772a1cef5341ea39f6f35718ce50",
+      "review_sha256": "e0f84a39573ecb567ebb6925e62514dbd6134aff413ffae588326f67449fabf6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ygJT8Fvzb9qgd+KuVKcbj1LFrQ+BWm96D3Eg6NbVsC2iwmm1tVrIX64zHZ8m/d2pxc4tJYc6WmMzRC+a5LfFBQ=="
+    },
+    "questions:case_silence_uncertainty_001": {
+      "schema_version": 1,
+      "item_sha256": "c2f5481e94f4fe1b5a2536e8ffb6f9841b8f049a42dad745cb723c0a0fcd60c2",
+      "review_sha256": "e689290928311d4a2ac0978546b4200263f2fe806e3ac68f5d6afcd2838abdff",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "14idZOJUjdirGoZENQxQJ6fHqTdQdVO3Pus4dPoH6dxsREivBzfGOGWNQOXeEdIlTTLzhqKs3WoOmwDjoIMICQ=="
+    },
+    "questions:case_respectful_confrontation_001": {
+      "schema_version": 1,
+      "item_sha256": "c65f3c85fc1336443434d6ffc70cebc5f7992d89224bfd445576f65f3459c275",
+      "review_sha256": "fd196df812b90f2f8fdfb58fa24ffef5e014f9b91d90c408382894ecfe39a795",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "daQODstWT+DoUwricEu+aJKzPv2Yeg7jsF/Mm0DfCwSn20KI2D8BguvOMWsyDf2anO31DZtulxv0+2Ya2UqVBA=="
+    },
+    "questions:case_session_summary_001": {
+      "schema_version": 1,
+      "item_sha256": "a15d9ad43cba1840fc58163b45bc64178836117868dc24067925e8918dcb9872",
+      "review_sha256": "30d3ca6a433245149df5c9d76d81066b44c3e3f4024445f7362cf04f93d4585c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "hLTVlOzopyNCLsE39xmFvKEIMAw92puBtEODMshDqFme0NfzFwHU0jGGGfX8zNrBkiKnxr9nTLmJJkXfgHW8DA=="
+    },
+    "questions:case_goal_decomposition_001": {
+      "schema_version": 1,
+      "item_sha256": "baf67d6da3300e6c040a208dbab8cb7d5f7748d6be2804e7126427b0b67d7f09",
+      "review_sha256": "c7d8637760f3dd3b615bab9c8cb80568bbae46391018aed6c14a238a2d2161b9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "UkHHglNM/REKgtbAQ8jbK/VdDzlDwmC4LOh9dhOALZfY1AGk7Mk86QKf4jSXq6jiO3CRtEXMw4RtDQ8WRRI5AQ=="
+    },
+    "questions:case_homework_transfer_001": {
+      "schema_version": 1,
+      "item_sha256": "cadcc7aaca68dacf8bd99981c7bb953e461b504381e15de943eb399fe0982bd2",
+      "review_sha256": "d3ad0db643d9f09069f300e9c92d8a0823bb94bf6a8ace537be1cb1f04ca92b8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "N9oLEItGlfq90Bh5qtB0NYE0tgwagQKqtgSTYEQ4mrnOzv+TlV5ruDVm0pzYUvN1tjIQwnRdS3XwLRo5c2rRAg=="
+    },
+    "questions:case_scaling_anchors_001": {
+      "schema_version": 1,
+      "item_sha256": "ddf9c67fbfcda4f6f687550c8c6e70605d39eec8b4e6bd1e0eb0a5f5ae0dffbd",
+      "review_sha256": "839af802f882ec4af4785516c976556fbd58409608d5d9d2103fb60e58ee5f17",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1fHowy/0vdd8230YUqa6zV5ho8iFxAXwo/qhDy+lc8F538J0xuy91gVftyLIz+655DQsPEGnLzQACIVVZkWbBQ=="
+    },
+    "questions:case_cbt_automatic_image_001": {
+      "schema_version": 1,
+      "item_sha256": "611f4726f0f69feb98cd17f4b9687773e67b97ae9420100b494495d5c65f9e35",
+      "review_sha256": "6125625e3d2b14928cd4ded7877b642f0f5b282df1a28f31987f5e62fb2848ed",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "+xTHeY+6l2cIlLB5BCGDeYrGOda4h+ur90NYVlqw+JjAiTAQ0B19uLefqScTf8hqVs4DBk6R8n55qesmCAXFAA=="
+    },
+    "questions:case_experiment_outcome_001": {
+      "schema_version": 1,
+      "item_sha256": "d01d0c0f8c8ca1b32de338689678bae7c34ddf2dacca2d21835560e10a91ec0d",
+      "review_sha256": "4851fdf6c89029a59441ac42c5552fc2c506e80e4f662459772ec95410918ad5",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "AwLEF6tcBSiqU9oGceqD6O3glKqNc1WDwS8dPY5p0xYRzwweaeYKndQhl1k9n8xYsvTeQgtq5UW/ecLhhPsQCg=="
     }
   }
 }
