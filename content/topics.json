@@ -170,7 +170,8 @@
     "order": 610,
     "available_contours": [
       "questions",
-      "literature"
+      "literature",
+      "glossary"
     ],
     "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
