@@ -70,9 +70,21 @@ export const miniApi = {
   literatureTopics: () => miniRequest<{ ok: true; literature_topics: MiniLiteratureTopic[]; reading_topics?: MiniLiteratureTopic[] }>('literature/topics'),
   literatureItems: async (topic_id?: string) => {
     if (topic_id) return miniRequest<{ ok: true; literature_items: MiniLiteratureItem[]; reading_topics?: MiniLiteratureTopic[] }>(`literature/items?topic_id=${encodeURIComponent(topic_id)}`)
-    const result = await miniRequest<LiteratureCatalog>('literature/catalog-compact')
-    return { ok: true as const, reading_topics: result.reading_topics ?? result.topics,
-      literature_items: result.works.flatMap(({ entries, ...work }) => entries.map(entry => ({ ...work, ...entry }))) }
+    const actor = window.Telegram?.WebApp?.initData
+    try {
+      const result = await miniRequest<LiteratureCatalog>('literature/catalog-compact')
+      return { ok: true as const, reading_topics: result.reading_topics ?? result.topics,
+        literature_items: result.works.flatMap(({ entries, ...work }) => entries.map(entry => ({ ...work, ...entry }))) }
+    } catch (failure) {
+      // Worker and VPS releases can arrive in either order. A missing route
+      // is also reported as a network error when the old server has no CORS
+      // preflight handler. Both paths are read-only and enforce the same proof.
+      if (!(failure instanceof MiniAppError) || (failure.status !== 404 && failure.code !== 'network')) throw failure
+      if (!actor || actor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
+      const legacy = await miniRequest<{ ok: true; literature_items: MiniLiteratureItem[]; reading_topics?: MiniLiteratureTopic[] }>('literature/items')
+      if (actor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
+      return legacy
+    }
   },
   literatureProgress: (literature_id: string, reading_status: ReadingStatus, progress_percent: number | null) =>
     miniRequest<{ ok: true; literature_progress: ReadingState }>('literature/progress', { literature_id, reading_status, progress_percent }),
