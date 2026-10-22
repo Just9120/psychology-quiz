@@ -36,19 +36,19 @@ def test_reviewed_question_pairs_share_overlap_without_removing_all_mode():
 def test_distinct_learning_objectives_are_not_deferred_as_duplicates():
     distinct_pairs = (
         ("m2_exp_022", "m2_exp_023"),  # internal versus external validity
-        ("m2_exp_023", "m2_exp_048"),  # definition versus tradeoff
-        ("m2_qual_015", "m2_qual_047"),  # consent versus de-identification
+        ("m2_exp_023", "m2_exp_094"),  # transfer definition versus balancing design goals
+        ("m2_qual_008", "m2_qual_034"),  # observation versus researcher reflexivity
         ("m3_psychological_consulting_009", "m3_psychological_consulting_045"),
         ("m3_psychological_consulting_055", "m3_psychological_consulting_066"),
         ("m1_gp_048", "m1_gp_047"),  # one observation versus testing contrary evidence
-        ("m2_exp_020", "m2_exp_098"),  # confound example versus control-variable distinction
+        ("m2_exp_015", "m2_exp_098"),  # manipulated/outcome roles versus control/confounding
         ("m3_psychological_consulting_009", "m3_psychological_consulting_031"),
         ("m3_psychological_consulting_008", "m3_psychological_consulting_027"),
     )
     for first, second in distinct_pairs:
         assert diverse_first([(1, first), (2, second)], 2) == [1, 2]
     assert diverse_first([
-        (1, "m2_exp_048"), (2, "m2_exp_100"), (3, "m2_exp_023")
+        (1, "m2_exp_098"), (2, "m2_exp_110"), (3, "m2_exp_023")
     ], 2) == [1, 3]
 
 

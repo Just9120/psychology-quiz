@@ -8025,6 +8025,42 @@
       "topic_id": "t_d0ae2304480c",
       "item_sha256": "c9e3290e7f0eb9a912fe487b6bae317df57ff31671674d09e006db07b4a86ae6",
       "locator": "private certificate:questions:assessment_report_grounding"
+    },
+    "b1d3fc796cfb97b487baef96427fe1549e481a6eb25789b81d6464e624f36297": {
+      "external_id": "m2_qual_010",
+      "topic_id": "t_5238b79de120",
+      "item_sha256": "6259d92fc994ba9159d6d03c507acf14f8306cc2064c79bf46c065aea98cfd5f",
+      "locator": "private certificate:questions:m2_qual_010"
+    },
+    "7217bb6264c4708c4f9299c84be39cffb48f992777fc23cb8341188304235258": {
+      "external_id": "m2_qual_018",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "a6a014965c62dacf5b6b6c8cd301c98a2bfb760e388f3368d7c8193f86d56c87",
+      "locator": "private certificate:questions:m2_qual_018"
+    },
+    "1f831dffb9d7ec06f781f291b6ec5381c66652c31af418e1905eb617a5a9c05d": {
+      "external_id": "m2_qual_026",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "efc54da7d87c76ab88e9c3f7d9617e4b5cf49af8738da0b985f6a5c1efd391d8",
+      "locator": "private certificate:questions:m2_qual_026"
+    },
+    "0c6fc0a47c590ec0dc7539fed5bf48f9970532cb57121dbb48bb55fcc32c404a": {
+      "external_id": "m2_qual_028",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "f5b337f710f0afe73033ac416d82124c5e88ea49ddd0893c2a0fb1ae1c0cdd96",
+      "locator": "private certificate:questions:m2_qual_028"
+    },
+    "18849d39f31d69041ad4aa4a2f1ff82da8e8e2525de9f1dc871ed631bfd501b8": {
+      "external_id": "m2_qual_034",
+      "topic_id": "t_03a33ddcf539",
+      "item_sha256": "838dc932f64f79287866ae01fbd2f431eb5e86ad042fabc2dc5b60c1edd66330",
+      "locator": "private certificate:questions:m2_qual_034"
+    },
+    "4e8214a73e5d66627d0dea2017876e67b222f57511a41d1b252a005ca3a17864": {
+      "external_id": "m2_qual_042",
+      "topic_id": "t_6be3cecd6596",
+      "item_sha256": "2c398d62c21edd78d1979306479e9d3adc1bda1522f88430fddb230139e2b8bd",
+      "locator": "private certificate:questions:m2_qual_042"
     }
   }
 }
