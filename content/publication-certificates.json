@@ -1503,10 +1503,10 @@
     },
     "questions:cbt_abc_separation": {
       "schema_version": 2,
-      "item_sha256": "98479659ed5096c37d7e25332ac46a9613cc30ffd9027ccb2c5510bc86bc3e1e",
-      "review_sha256": "74743b0a034d8e8925c376a977c42e93811b2253ea22a26580961182a6a04412",
+      "item_sha256": "48ef2c5ce8f6848cc327f321a860fba8568dfa35310170bf2d21e7f49c33dca1",
+      "review_sha256": "bc3ec249ad4c679192e73c29e3d2ccc5deffc860096a1f7e91f61cfce764b0d3",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "NtP8X/eKPXEmQwZNsq7o+TDv6TOyxK3wC+VFl+12Fc3DdSE9sJNhI7c1sFunYG/xeJxaKcbjcT/dLWBqZNmCDw==",
+      "signature": "txaoi3v7sFQZ8vIX0pElh1/JCMP6UsV0X2yWkiTNd89n/goCMf9/rB9xwdN7gHe0gCGrHVAvyFzxCs6SwD6KBA==",
       "topic_id": "t_b7c2c2b3b5e0"
     },
     "questions:cbt_model_components": {
@@ -1519,10 +1519,10 @@
     },
     "questions:cbt_belief_levels": {
       "schema_version": 2,
-      "item_sha256": "d279d2cb7d5e06501d3d5c341a26dc45f26cba68eabaa1825ca271eb0816cfe6",
-      "review_sha256": "b05850d4476094bcf130f8fc98b68970dd68631d825a25c95f33ecb3abba1343",
+      "item_sha256": "0d99507cd838f2e1886cae85c19c6b35ec4ec002de05de1e60cafa256f4d4774",
+      "review_sha256": "183ebc090ec747c690b443426c390ab4cff0461ee0371cf32f252f1f4dfe1cd8",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "H8Nnr5EuxUpjCVXRMg1NNz2j4W/1R4U0ziYGy9WEQIQOstWHOQ45kT7/2XX6ciLsjuErhsRm2VZdZdnavBWDDw==",
+      "signature": "tVumAINXJh5UrynZOZYLLBgVTntFRN/2A7VFDx3sMMOzwWryqfGoZS3Jo+vZc8SQVjqtUIVXHKeYT0nvwdypCA==",
       "topic_id": "t_b7c2c2b3b5e0"
     },
     "questions:cbt_thought_record_fields": {
@@ -1551,18 +1551,18 @@
     },
     "questions:cbt_experiment_function": {
       "schema_version": 2,
-      "item_sha256": "586170ea5e22cdd6165486c36a18d6c50d45adf278810916f28128f12b7b832e",
-      "review_sha256": "fce97d930f9bbc54dffb271902e9d08510ca7a0537130b05715859804277c685",
+      "item_sha256": "472b853a6978f565e4f0f3f21bec6c3720f4ea95f727321c1f4fabf3ba310527",
+      "review_sha256": "38f1602ef47dfd7238cbb0ee4893488117d25e3663f70ce0072a65b246a640c3",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Di/Sx6So/ajT1gd9a5VeRpJrsDskol0N+Csm3xGKjLJ91poTnk52d+28pgbdxVA8SJ8F05eFAicSSzvJ4WB/CQ==",
+      "signature": "3ut9MzeCvzCgb+8ZBrspFE4D4rtMNMge81ODw4C+MI3BA4kwm/Pif36HZ9SBLOE8yY3SyuLirkXrUHn1wkqZBA==",
       "topic_id": "t_b7c2c2b3b5e0"
     },
     "questions:cbt_activation_principle": {
       "schema_version": 2,
-      "item_sha256": "0aefc62515e127c036145507c0687e516d13c6276124b8ce30ffc6350013623d",
-      "review_sha256": "9f1717f3313801c9e22f97caac9bf0e7a6ee1c0ab68308407649510db8525737",
+      "item_sha256": "a09a1eb61bbe6465baada46275dd81f54bd7fb684ff60c8f52fbde3c96bc1a4c",
+      "review_sha256": "28999fb75dc18f076c6df826e6cf5d2c1ee7f4ee826d3becbdcf39b9f0bad524",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "n4DsvtucIecQogZHTD5Qh1Wz+Vr5GgPz4XptNn+ArUXLVkaY8mFibrhvMZRgxJOrJED0jOJ7Fa7U0Nfgks7SDA==",
+      "signature": "EMFFP86cQMzxqnjS6lXl+KmABODkRqtnOCdWSvlwhejvifK+pqqiiiJnepGN/4J3z5Z519ZcTvnmZX2Hxg38AQ==",
       "topic_id": "t_b7c2c2b3b5e0"
     },
     "questions:cbt_arrow_function": {
@@ -1575,18 +1575,18 @@
     },
     "questions:cbt_exposure_hierarchy": {
       "schema_version": 2,
-      "item_sha256": "174dd01c89533e78cc93c91e2e59b2b0f7138f2db892822f8aea2865c3c8f7c2",
-      "review_sha256": "f42758c5b06ca700f947a72c2f288d9228837dc9b5d25565868432ea1ba8b04a",
+      "item_sha256": "3a861343d8c9b2b1d008042e8195ab438522e684b11d062f19384bd4fb311759",
+      "review_sha256": "407f77ef2bd3f076e5bdd2d889fc25d4c8184a3143fcfb49688f188e361c15b4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "urao0kbjlSWE/W8sb0LSbCtI1SmFlFkRr+m/+Z5ZL74OvnaADDCkwZvCb+3KM13eyf9TJjqW0O6yGWk85ryEDg==",
+      "signature": "lfbF0uVGjT9HH/Jzzs156diT5B/8a/a2gVT87B8ryRrfaBOg2MAKF/zW/TG2AD2tBl58CSAZW6aP8+yxPO56Bw==",
       "topic_id": "t_b7c2c2b3b5e0"
     },
     "questions:cbt_automatic_specificity": {
       "schema_version": 2,
-      "item_sha256": "856984c026e9d80fb26602bcc726562642ec08646ff40f8d211e7feb3a0a7698",
-      "review_sha256": "597fa1ebaccbffa0c6e75c4f81c1f69da44790e9e537d6999ebcc79062499e7d",
+      "item_sha256": "a10999ecb40d2ba4c8a693f642c9a07064f8de2f86fc8507987fb57afe7f967b",
+      "review_sha256": "905acafcd6594ccf643834b036d411e997d2e0c4ff608a37da2360a417e8b1b2",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Cc1ghHCGavtLm7shn+JBb2GWWGTGcyKogCRsj2pMmMPwi0D8aODlrJNs+NVulpg+d2o0Sg9F5/nZybbPVk9VBw==",
+      "signature": "PXzY3luCHDqpwNVCpGoSl0J6y5U/YohbfziLr0jjYrvnKSBfWyQP58qIc3NDCHk6bI16tdG3P+Ap5NITcTuLAQ==",
       "topic_id": "t_b7c2c2b3b5e0"
     },
     "questions:cbt_alliance_work": {

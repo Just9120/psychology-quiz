@@ -8085,6 +8085,42 @@
       "topic_id": "t_5dd8e85bda51",
       "item_sha256": "00b89bbc65143ee31f66ac1513d78c296334bfa1e8f2990bd12b8caa31a41fdd",
       "locator": "private certificate:questions:supervision_three_processes"
+    },
+    "2eb4bf717126ef0685b93139b442ec10dd2966ea677edb7cc115a6c999492e1c": {
+      "external_id": "cbt_abc_separation",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "48ef2c5ce8f6848cc327f321a860fba8568dfa35310170bf2d21e7f49c33dca1",
+      "locator": "private certificate:questions:cbt_abc_separation"
+    },
+    "152427d144a06357129e5c16331e5641e6ce078f886aaeca97fd65e5e073b6c1": {
+      "external_id": "cbt_belief_levels",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "0d99507cd838f2e1886cae85c19c6b35ec4ec002de05de1e60cafa256f4d4774",
+      "locator": "private certificate:questions:cbt_belief_levels"
+    },
+    "5d43ff234421064d18e263f61745d1e6423b51afddfda2ff0e71efcece9fe461": {
+      "external_id": "cbt_experiment_function",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "472b853a6978f565e4f0f3f21bec6c3720f4ea95f727321c1f4fabf3ba310527",
+      "locator": "private certificate:questions:cbt_experiment_function"
+    },
+    "c21bba5807e93dd301f06dbcd66f2a9e481782ebd0172cc08efa40a15214dbf9": {
+      "external_id": "cbt_activation_principle",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "a09a1eb61bbe6465baada46275dd81f54bd7fb684ff60c8f52fbde3c96bc1a4c",
+      "locator": "private certificate:questions:cbt_activation_principle"
+    },
+    "9578968cad859a218faf1160f6d553298c31d54cd4ea79e8b5ec95860187f1f5": {
+      "external_id": "cbt_exposure_hierarchy",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "3a861343d8c9b2b1d008042e8195ab438522e684b11d062f19384bd4fb311759",
+      "locator": "private certificate:questions:cbt_exposure_hierarchy"
+    },
+    "64a47262218fe958fe58e3f5d36efcff4d729c65b5356d13853397b93f79e3bf": {
+      "external_id": "cbt_automatic_specificity",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "a10999ecb40d2ba4c8a693f642c9a07064f8de2f86fc8507987fb57afe7f967b",
+      "locator": "private certificate:questions:cbt_automatic_specificity"
     }
   }
 }
