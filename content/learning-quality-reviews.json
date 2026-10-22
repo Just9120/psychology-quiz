@@ -18468,10 +18468,10 @@
       "sources": []
     },
     "questions:m6_org_029": {
-      "item_sha256": "c9876c2b8645443fa4a58b56cfd23c2c9968f3f345e9a8e9b61ec35e2874155c",
+      "item_sha256": "c327fd960c1cb2f9848696b96a9a4038dcdf3ee491f1c89207761a77de34f3a4",
       "discipline_id": "organizational_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -18483,8 +18483,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact generic responsibility/authority distinction after participant anecdote; entirely new abstract case, no participant identity or employer/private story. No universal cause conclusion or delegation efficacy guarantee.",
-      "sources": []
+      "note": "FIX: Investigate responsibilities against authority and resources before a purely personal explanation; no diagnosis or attribution of blame. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_org_030": {
       "item_sha256": "80194990b67d78276d93bdc0cdcac3cc16aa925b3658952b709385f8a9fb380e",
@@ -18696,10 +18697,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_110": {
-      "item_sha256": "74074a7596a7fdc6779796531f0d11276ca4dded93f4564b7c5518fd73c26a09",
+      "item_sha256": "ee87a15a5f4fd146f35d21561219e2f11a3369e55e2027e738cf66cdc64bc100",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -18711,8 +18712,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact refusal/right-to-stop discussion; preceding absolute confidentiality promise outside scope and not adopted. Original hypothetical adult case, no real participant identifiers/story; compared with047/107 contact/silence, new distinction is explicit refusal and voluntary continuation, not inferred resistance.",
-      "sources": []
+      "note": "FIX: A client can decline sensitive questions; discuss a workable continuation rather than infer a hidden cause. No crisis/legal universal is asserted. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m3_psychological_consulting_111": {
       "item_sha256": "4099c50753cc3c49371c54c7f7af2d2a922e111e1489f27afb2c38403beff771",
@@ -19000,10 +19002,10 @@
       "sources": []
     },
     "questions:m6_psyl_005": {
-      "item_sha256": "eec96d9b169ef39c069a60771c0db1e69b78ddaf782247c387439571690801fe",
+      "item_sha256": "8aebe21567452508f8e87633c71d70d76bd952805b89adfd90bf931efb1d9c7c",
       "discipline_id": "psycholinguistics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19015,8 +19017,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact modal/rule inquiry31273:31685. No instruction to break legal, contractual or safety obligations; no universal all-rules-are-distortion interpretation. Neutral educational example not individual counselling or personality diagnosis.",
-      "sources": []
+      "note": "FIX: Clarify origin, meaning and scope of a rule; real constraints may exist. Replaced ambiguous dative wording with first-person refusal rule. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_psyl_006": {
       "item_sha256": "3d384ecb1e6d14e0892e8d83c61efc942dd3289b19152c8ff1b7884b54199bf0",
@@ -19418,10 +19421,10 @@
       "sources": []
     },
     "questions:m2_pd_006": {
-      "item_sha256": "8b5158171f7c9494b4fad80aac0a917930b9c98809de14e247c61cfa7d81c9dd",
+      "item_sha256": "68c350903e8caaba2e9bbee0aee18fcaefac267ecd061b1b6d425b7a862037bc",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19433,8 +19436,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact socially desirable response context; own fictional applicant, possible influence only. No universal lying inference, diagnostic claim or social-desirability score correction. Primary abstract only consulted; full article not read.",
-      "sources": []
+      "note": "FIX: Social desirability in an employment questionnaire is a possible influence, not proof of deceit. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m2_pd_007": {
       "item_sha256": "1af5e1f41c14f684319e1f316b362486060a32da5c92a01e26a4f247dc504864",
@@ -19475,10 +19479,10 @@
       "sources": []
     },
     "questions:m2_pd_009": {
-      "item_sha256": "b1b58b411649c266c48e2e81f96f8654b21f6f969ec636bdc76bd066da1f77f4",
+      "item_sha256": "66f7cd9fafd388782fd9320e6cc79fb5a1f0c1c081d6dd0d08c9ae8be5c86260",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19490,8 +19494,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact observable formal-procedure discussion; fictional omitted items, no participant handwriting/colour details copied and no cause or diagnosis inferred.",
-      "sources": []
+      "note": "FIX: A skipped item is a formal observation; its cause is not established by the omission. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m2_pd_010": {
       "item_sha256": "400330cd1419ffb8266559a863a8e4592fb2c52f11469988fb6e9166aa604cbf",
@@ -19513,10 +19518,10 @@
       "sources": []
     },
     "questions:m2_pd_011": {
-      "item_sha256": "1933334f2a47dab83d6ba726e0a5db524b6cfce3d1961bcca5231d8a98b3cbf4",
+      "item_sha256": "1d41829dbe24078776a8575ce2897381317e3fd3ad49a5abce9044baac3693fb",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19528,14 +19533,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact distinction self-description versus researcher interpretation; original fictional fatigue quote. Not a clinical interpretation of real protocol, not a validation claim for projective testing.",
-      "sources": []
+      "note": "FIX: Reported fatigue is self-description, distinct from the evaluator's explanatory inference. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_social_008": {
-      "item_sha256": "ad100273686df7775f6b3580d5ecf93121ab698f34ccfef1df9a7c84808c8090",
+      "item_sha256": "b8051177b2011f6e3b5148fe40539970efcf0a9fdccd49f6b5003d20990cb7af",
       "discipline_id": "social_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19547,8 +19553,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact observational learning passage only after inaccurate biography. Own adult example; not automatic imitation, aggression generalisation or proof of mirror-neuron mechanism. Existing experiment-scope item retained as distinct.",
-      "sources": []
+      "note": "FIX: Observation of a model differs from reinforcement of each own trial. Four processes constrain performance; does not promise behavior after one viewing. Corrected current primary lesson to part1; historical editions retained. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_social_009": {
       "item_sha256": "aa729f32e6448cce4bad405e7a86fb6ce37d6062302caa90c06825bc8b66ad62",
@@ -19570,10 +19577,10 @@
       "sources": []
     },
     "questions:m6_social_010": {
-      "item_sha256": "40f40d82b309de8dc330a7c232894bcb7de1464009a4ad98a8e5b3647ed346b1",
+      "item_sha256": "07993adaa11b12f94c1542a185cda92303e0b850fdf80685eb0faa1e26598138",
       "discipline_id": "social_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19585,14 +19592,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact internal/external attribution list before overly deterministic temporal-cause rule. Own bus example; classification of proposed explanation only, not proof of causal motive.",
-      "sources": []
+      "note": "FIX: A delayed bus is situational attribution; attribution itself does not prove the cause. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_social_011": {
-      "item_sha256": "9de989a24836114714a72662d21417e470c954e878e7e7418e3134ea595d6842",
+      "item_sha256": "20f1ca8eeff048d16f66c9678fbd417941cd14168140c1dba165a80498114c80",
       "discipline_id": "social_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19604,8 +19612,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact dissonance/consonance definition after held unverified earthquake story. Own promise example; no fixed date attribution, clinical disorder or universal response claimed.",
-      "sources": []
+      "note": "FIX: The question states significant belief/behavior inconsistency plus discomfort, not any difference of opinions. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_social_012": {
       "item_sha256": "5ecaaadc74ed5b844630e52bc42db95e720f59a58d3a65944c250d9abd414f09",
@@ -19703,10 +19712,10 @@
       "sources": []
     },
     "questions:m2_pd_014": {
-      "item_sha256": "8369b83acdfb8fb1d830e4fe853e392b4b58fbf19c311b8076684928b871de82",
+      "item_sha256": "7e126e3d4156729461faa84443a5ae8b35e8993b64553fa17d05dbc8309210be",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -19718,8 +19727,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact self/other experience separation before held complementary-countertransference claims27600:29900. Original fictional irritation example; no transfer of clinician emotion to respondent or group-consensus proof. Existing generic hypothesis item kept distinct.",
-      "sources": []
+      "note": "FIX: The observer's emotional reaction must be separated from evidence about the participant; peer agreement is not factual verification. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m2_pd_015": {
       "item_sha256": "f9d1574b0b970ca901df11a29093b6d2043b53fdfb6d04e397cda74ae6ff261d",
@@ -20102,10 +20112,10 @@
       "sources": []
     },
     "questions:m6_social_017": {
-      "item_sha256": "24bb3a15ffdf07e30f41a2510b6192d7d95ae94eb2e88da91785499db34f1960",
+      "item_sha256": "0dffbd905df9fc79210d4918f78017f90d6973d6c7abdeb8496e9ac5115ee325",
       "discipline_id": "social_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20117,8 +20127,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Course reinforcement positive/negative passage corrected with publisher four-quadrant terminology. Own fictional removal/response-frequency example; avoidance of punishment is not definition of all negative reinforcement.",
-      "sources": []
+      "note": "FIX: Removal of an unpleasant stimulus with increased behavior is negative reinforcement. Course avoidance/relief example supports the mechanism; not a behavior-control recommendation. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m6_social_018": {
       "item_sha256": "570361878744eb6ff7f54a61c47ae61cd2e88b3416d7e2a5f454455fdde6900a",
@@ -20197,10 +20208,10 @@
       "sources": []
     },
     "questions:m4_person_021": {
-      "item_sha256": "e7b68d090aba54924c078ecc09a93fa715e93144c168c42f77e708cd52247fa3",
+      "item_sha256": "73e7ba90ca73a84ffd7787ade8f0afc1f18227d0f785581e616ab3f3984a4d03",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20212,8 +20223,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Simultaneous emotional experience, own fictional example; no somatic/clinical mechanism or lie detection.",
-      "sources": []
+      "note": "FIX: Simultaneous differently directed emotions are possible; the conditions distinguish this from alternating feelings or a purely bodily report. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m4_person_022": {
       "item_sha256": "7ffb47c46d95aef3cfad2330d112fc4f80a4797f8e7500feae2083d3953960f9",
@@ -20292,10 +20304,10 @@
       "sources": []
     },
     "questions:m4_dev_007": {
-      "item_sha256": "6beab8a10804b99acc96c0f0d07b385cfb6de9dd7e0c7a38d1915367638cd41d",
+      "item_sha256": "f983d176eb1ccadbee19c7ec880cf3075b9b2ec54a3f1a8d1c49895e1944992c",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20307,8 +20319,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Task instruction only, own fictional adult illustration; no participant narrative, diagnostic conclusion or age-to-illness causal claim.",
-      "sources": []
+      "note": "FIX: The exercise asks for age-relevant tasks, hypotheses and clarifying questions. Age does not establish an inevitable crisis or shared cause. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m4_dev_008": {
       "item_sha256": "d58369a024583d4c1ba8bf6421698fc0c073ec1e86f39e548164bff9c04a836f",
@@ -20330,10 +20343,10 @@
       "sources": []
     },
     "questions:m4_dev_009": {
-      "item_sha256": "658fcc89399ff45532e3ffcfe596c82da495e29cf90edb056c1a5289a540b724",
+      "item_sha256": "ceaee22ef6bd8292189cf44c268f6f8115c7059cfb09b89198fc051e94beef8a",
       "discipline_id": "developmental_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20345,8 +20358,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact inquiry into motives, own fictional adult case; no private retirement/financial story or fixed productivity/moral prescription.",
-      "sources": []
+      "note": "FIX: Explore meaning of continued work; the passage offers different motives. Generalizations about unpassed crises, aging and employability remain unapproved. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:other_tp_006": {
       "item_sha256": "a3fde2565c89239db1ee17d0e26127b694f8d34bb669cd662c034c15a95afdb8",
@@ -20406,10 +20420,10 @@
       "sources": []
     },
     "questions:other_bonus_002": {
-      "item_sha256": "3a1a949311a9934b21289d82d8700c45e4a66469f82874c16cc13c861e6d2c61",
+      "item_sha256": "494f15caa9d052a599886e7d0ae0fcb2d502ff7c3ac0ff2beb7ca8c7e907a669",
       "discipline_id": "bonus_lessons",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -20421,8 +20435,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Own fully stipulated arithmetic case distinguishes cash resources from known obligations. Exact resource/debt list only; no six-month reserve prescription, legal tax guidance or income guarantee.",
-      "sources": []
+      "note": "FIX: Course distinguishes available resources and debt. Original arithmetic example is 12000 minus5000=7000, no real financial recommendation; debt-refinancing/investment advice outside passage remains unapproved. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:other_brand_002": {
       "item_sha256": "1601b3716694e1df1210ba77f2b7d6e94bc75061ca646577e857ef1d769e4662",
@@ -21185,10 +21200,10 @@
       "sources": []
     },
     "questions:m5_clin_022": {
-      "item_sha256": "9364153c37ac5d3fb292b8d090d402160780519f2efb1974c55eebe356f30ec9",
+      "item_sha256": "cb03fff6b7363dc8e1705b628b481349f57511e17c6ab95a4a591901efc9ce6e",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -21200,8 +21215,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact additional-diagnosis referral clause plus surrounding explicit explanation statement inspected; fictional non-emergency case. No hospitalisation law, urgency algorithm or guaranteed treatment efficacy.",
-      "sources": []
+      "note": "FIX: Explain observed grounds and purpose of referral; no unverified diagnosis or guaranteed outcome. No emergency procedure is prescribed. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m2_pd_018": {
       "item_sha256": "1dd911081f8b8df6170f6e5d084dc185599a83159d6b7a7093b0278b570d5324",
@@ -21261,10 +21277,10 @@
       "sources": []
     },
     "questions:m5_clin_024": {
-      "item_sha256": "7733e736aef2d01113902689af265634e5eedae30034ba568e788ea5253179e9",
+      "item_sha256": "261f32f8c32d7787ec2e2ab0d5ea6862db7ab1c56bb0e8bff24d6fec2c76082c",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -21276,8 +21292,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact voluntary future-contact clause only; excludes immediately following guaranteed-success reassurance, refund rule, permanent availability and prognosis from speech.",
-      "sources": []
+      "note": "FIX: A new support request is possible; no unlimited availability or mandatory continued treatment. Removed dependence on remembering a lecture example. Current exact private fragment certificate; historical source holds and snapshots retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m5_clin_025": {
       "item_sha256": "50facd770736b1125f1468247c9850ea05aea128a562b3860b28e81115d427c4",

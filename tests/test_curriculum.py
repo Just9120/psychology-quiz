@@ -121,10 +121,10 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1051
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1096
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
-    assert len(catalog['disciplines']) == 21 and len(catalog['topics']) == 168
+    assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 172
     assert all(catalog['topics'][key] == value for key, value in core['topics'].items())
     private_bindings = curriculum.load_private_bindings(catalog)
     # Source-free lesson bindings can add learning contours outside the core graph.
@@ -141,6 +141,8 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
         'personal_brand': 'Личный бренд и самопрезентация',
         'professional_legal_ethics': 'Правовые и этические основы профессиональной деятельности психолога-консультанта',
         'bonus_lessons': 'Бонусные уроки',
+        'cognitive_behavioral_therapy': 'Когнитивно-поведенческая терапия',
+        'counseling_supervision': 'Супервизия психологического консультирования',
     }) == {
         k: v['title'] for k, v in registry.items()
         if k != 'cases' and (any(contour in v['available_contours']
@@ -196,6 +198,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
         assert historical == {
+                              'm2_pd_006', 'm2_pd_009', 'm2_pd_011', 'm2_pd_014', 'm3_psychological_consulting_110', 'm4_person_021', 'm4_dev_007', 'm4_dev_009', 'm5_clin_022', 'm5_clin_024', 'm6_social_008', 'm6_social_010', 'm6_social_011', 'm6_social_017', 'm6_org_029', 'm6_psyl_005', 'other_bonus_002',
                               'm1_psyf_070',
                               'm3_psychological_consulting_116',
                               'm6_ethics_004', 'm6_family_002', 'm6_family_003',

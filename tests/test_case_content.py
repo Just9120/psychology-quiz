@@ -6,6 +6,7 @@ from app.quiz_service import build_answer_feedback, prepare_quiz, quiz_setup_opt
 from app.quiz_runner import get_current_question_snapshot
 from contextlib import closing
 import json
+import re
 from pathlib import Path
 from types import SimpleNamespace
 from tests.test_attempt_content import bank
@@ -103,7 +104,8 @@ def test_case_context_is_immutable_with_each_attempt_edition(bank):
         assert CASE["question"] in shown.question_text
         review = build_answer_feedback(conn, first, question_id, 0, True)["case_review"]
         assert review["option_rationales"] == CASE["case"]["option_rationales"]
-        revised = {**CASE, "case": {**CASE["case"], "conditions": ["Изменённое условие"]}}
+        revised = {**CASE, "case": {**CASE["case"], "situation": "Клиент описывает неопределённый запрос.",
+                                              "conditions": ["Изменённое условие"]}}
         upsert_approved_questions(conn, [revised])
         second = start_quiz_session(conn, 1, None)
         store_session_questions(conn, second, [question_id])
@@ -127,3 +129,17 @@ def test_classic_quiz_returns_case_alternative_rationales_without_source_refs(ba
     assert "Неоднозначность" in html and "synthetic-private-id" not in html
     assert "&lt;script&gt;" in format_case_review_html({**CASE["case"],
         "ambiguity": "<script>"}, "normal")
+
+
+def test_current_bank_uses_plain_client_wording_without_rewriting_historical_editions():
+    from scripts.audit_question_quality import iter_questions
+
+    # Authored provenance stays private; historical fixtures above intentionally retain it.
+    unexpected = []
+    for _, item in iter_questions():
+        if item.get("status") != "approved":
+            continue
+        visible = {key: item.get(key) for key in ("question", "options", "explanation", "case")}
+        if re.search(r"вымышлен|выдуман", json.dumps(visible, ensure_ascii=False), re.IGNORECASE):
+            unexpected.append(item["id"])
+    assert unexpected == []
