@@ -8061,6 +8061,30 @@
       "topic_id": "t_6be3cecd6596",
       "item_sha256": "2c398d62c21edd78d1979306479e9d3adc1bda1522f88430fddb230139e2b8bd",
       "locator": "private certificate:questions:m2_qual_042"
+    },
+    "c62c2ce469d7c71ddf1a20f31ab4ac3e21f68855df9d15490e4f6cb1773abb55": {
+      "external_id": "supervision_role_clarity",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "274ea4ebae2aabe9e7e7738d1f51d55920e4dfa980e4095b47e47b87f4f9000b",
+      "locator": "private certificate:questions:supervision_role_clarity"
+    },
+    "646b31c75444c6814beb7baee9a9872fb061c661466196822ef0d445edeb182c": {
+      "external_id": "supervision_peer_support",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "7042ccbc70280486d03b82e0c798474519d4fe5acde7e11ee5af1cb54391216b",
+      "locator": "private certificate:questions:supervision_peer_support"
+    },
+    "e2d1072390b9990fd19fd64ab866a26f752a78f8cd61c8e5c3e0453d0eda5f91": {
+      "external_id": "supervision_support_task",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "f02d8f386b4e5cda13c4c7ad484b2308af91db45bd82ce038787fe2038d804a7",
+      "locator": "private certificate:questions:supervision_support_task"
+    },
+    "5cd068c4238ee38a01d2b07d7aaf0c673dac710d882814dfe0e218a7613c9142": {
+      "external_id": "supervision_three_processes",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "00b89bbc65143ee31f66ac1513d78c296334bfa1e8f2990bd12b8caa31a41fdd",
+      "locator": "private certificate:questions:supervision_three_processes"
     }
   }
 }

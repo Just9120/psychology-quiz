@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1273
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1277
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 173
@@ -300,7 +300,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
                                   'm3_psychological_consulting_109',
                                   'm6_psyl_002', 'm6_psyl_003', 'm6_psyl_004',
                                   'm6_psyl_006', 'm6_psyl_007', 'm6_psyl_008',
-                              }) | {f'm2_exp_{n:03}' for n in (2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 25, 29, 30, 31, 35, 36, 40, 42, 44, 49, 52, 53, 55, 56, 58, 59, 60, 61, 63, 64, 66, 67, 69, 70, 72, 73, 75, 78, 80, 85, 91, 92, 94, 95, 98, 101, 102, 107, 110, 112, 114, 116, 117, 118)} | {f'm2_pd_{n:03}' for n in (1, 2, 4, 5, 7, 8, 9, 11, 12, 13, 15, 16, 17, 19)} | {f'm2_qual_{n:03}' for n in (10, 18, 26, 28, 34, 42)}) - {f'm2_qual_{n:03}' for n in (1, 2, 3, 4, 6, 14, 17, 24, 25, 29, 43, 53)} - {'m2_pd_003'} - {f'm2_exp_{n:03}' for n in (20, 21, 24, 26, 38, 41, 43, 45, 46, 47, 48, 65, 68, 76, 81, 82, 83, 84, 86, 87, 89, 93, 100, 103, 104, 106, 113)} - {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} - {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)}
+                              }) | {f'm2_exp_{n:03}' for n in (2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 25, 29, 30, 31, 35, 36, 40, 42, 44, 49, 52, 53, 55, 56, 58, 59, 60, 61, 63, 64, 66, 67, 69, 70, 72, 73, 75, 78, 80, 85, 91, 92, 94, 95, 98, 101, 102, 107, 110, 112, 114, 116, 117, 118)} | {f'm2_pd_{n:03}' for n in (1, 2, 4, 5, 7, 8, 9, 11, 12, 13, 15, 16, 17, 19)} | {f'm2_qual_{n:03}' for n in (10, 18, 26, 28, 34, 42)}) - {f'm2_qual_{n:03}' for n in (1, 2, 3, 4, 6, 14, 17, 24, 25, 29, 43, 53)} - {'m2_pd_003'} - {f'm2_exp_{n:03}' for n in (20, 21, 24, 26, 38, 41, 43, 45, 46, 47, 48, 65, 68, 76, 81, 82, 83, 84, 86, 87, 89, 93, 100, 103, 104, 106, 113)} - {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} - {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)} | {'supervision_role_clarity', 'supervision_peer_support', 'supervision_support_task', 'supervision_three_processes'}
         assert retired == {'m2_qual_009', 'm2_qual_013', 'm6_ethics_001', 'm4_dev_002'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)} | {f'm2_exp_{n:03}' for n in (20, 21, 24, 26, 38, 41, 43, 45, 46, 47, 48, 65, 68, 76, 81, 82, 83, 84, 86, 87, 89, 93, 100, 103, 104, 106, 113)} | {'m2_pd_003'} | {f'm2_qual_{n:03}' for n in (1, 2, 3, 4, 6, 14, 17, 24, 25, 29, 43, 53)}
 
 
