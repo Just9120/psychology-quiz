@@ -543,12 +543,12 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/robert-sapolski/psihologiya-stressa-29261504/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 924 страницы. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "lit_677867857cce3e89": [
@@ -557,64 +557,64 @@
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/gBHWtHrb",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/ludmila-petranovskaja/taynaya-opora-privyazannost-v-zhizni-rebenka-21620399/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/ludmila-petranovskaja/taynaya-opora-privyazannost-v-zhizni-rebenka-8742586/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 215 страниц. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/PHRy8Zy7",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Ксения Бржезовская; Длительность 6 ч. 51 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/lyudmila-petranovskaya/tajnaya-opora-privyazannost-v-zhizni-rebenka-9/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 6 час. 51 мин.; narrator Ксения Бржезовская. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/lyudmila-petranovskaya/tajnaya-opora-privyazannost-v-zhizni-rebenka-12/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 181 печатная страница. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "psf_van_der_kolk_telo_pomnit_vse": [
@@ -623,64 +623,64 @@
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/Egj6KpUn",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/bessel-van-der-kolk/telo-pomnit-vse-kakuu-rol-psihologicheskaya-travma-ig-51650002/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/bessel-van-der-kolk/telo-pomnit-vse-kakuu-rol-psihologicheskaya-travma-ig-51388931/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 714 страниц. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/bessel-van-der-kolk-2/telo-pomnit-vse-kakuyu-rol-psihologicheskaya-travm/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 610 печатных страниц. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/zbyiRYdU",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Рустам Османов; Длительность 18 ч. 33 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/bessel-van-der-kolk-2/telo-pomnit-vse-kakuyu-rol-psihologicheskaya-tra-2/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 18 час. 33 мин.; narrator Рустам Османов. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "lit_levine_waking_tiger": [
@@ -689,47 +689,52 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/piter-a-levin/probuzhdenie-tigra-iscelenie-travmy-legendarnyy-bestseller-67897689/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/piter-levin/probuzhdenie-tigra-iscelenie-travmy-legendarnyj-be/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/b1jvINVo",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/bd3dSaqF",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official audiobook card confirms work, author and recording duration. The public card offers a free excerpt; full-version payment/subscription conditions were not established, so access modes remain unknown."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/piter-levin/probuzhdenie-tigra-iscelenie-travmy-legendarnyj-2/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 10 час.; narrator Максим Гамаюнов. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "lit_covey_seven_habits": [
@@ -738,64 +743,64 @@
         "provider": "MyBook",
         "url": "https://mybook.ru/author/stiven-kovi/sem-navykov-vysokoeffektivnyh-lyudej-moshnye-instr/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/stiven-kovi/7-navykov-vysokoeffektivnyh-ludey-moschnye-instrumenty-razviti-5009075/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/OG0xJNoT",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Full anniversary edition with additions, explicitly not the short version or practice diary. Direct official card readback 2026-10-14: title/author and full text work matched. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Предлагается дополненное юбилейное издание; для аудиоверсии указан также Шон Кови. Work ID и личные отметки сохранены. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/gMJwtzls",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Full anniversary edition with additions, explicitly not the short version or practice diary. Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Сергей Двинянинов; Длительность 15 ч. 54 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Предлагается дополненное юбилейное издание; для аудиоверсии указан также Шон Кови. Work ID и личные отметки сохранены. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/stiven-kovi/sem-navykov-vysokoeffektivnyh-lyudej-moshnye-ins-5/",
         "access": "provider_terms",
-        "checked_at": "2026-10-15",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Seven Habits, Stephen Covey; Sergey Dvinyaninov, 15 h 55 min. Card lists full parts and chapters; short summaries and companion workbooks are excluded. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/stiven-kovi/sem-navykov-vysokoeffektivnyh-ludey-moschnye-instrumenty-razvi-4239285/",
         "access": "provider_terms",
-        "checked_at": "2026-10-15",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Seven Habits, Stephen Covey; 583-page full anniversary edition with additions by Sean Covey, not the short version or practice diary. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "lit_kreisman_straus_hate_you_dont_leave": [
@@ -804,22 +809,23 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/dzherold-kreysman-12/ya-nenavizhu-tebya-tolko-ne-brosay-menya-pogranichnye-27429603/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
-          "purchase"
+          "purchase",
+          "subscription"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms purchase. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/dzherold-krejsman/ya-nenavizhu-tebya-tolko-ne-brosaj-menya-pogranich/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "lit_3c68e7fa4c7ec0ba": [
@@ -828,64 +834,64 @@
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/M1wF3emq",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/olga-primachenko/s-toboy-ya-doma-kniga-o-tom-kak-lubit-drug-druga-ostavaya-67255313/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/uNLPyO8L",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official audiobook card confirms work, author and recording duration. The public card offers a free excerpt; full-version payment/subscription conditions were not established, so access modes remain unknown."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/olga-primachenko/s-toboy-ya-doma-kniga-o-tom-kak-lubit-drug-druga-ostavaya-67098936/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 218 страниц. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/olga-primachenko/s-toboj-ya-doma-kniga-o-tom-kak-lyubit-drug-druga/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 180 печатных страниц. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/olga-primachenko/s-toboj-ya-doma-kniga-o-tom-kak-lyubit-drug-drug-2/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 6 час. 31 мин.; narrator Ольга Примаченко. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "lit_burlachuk_psychodiagnostics": [
@@ -894,158 +900,136 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/leonid-burlachuk/psihodiagnostika-uchebnik-dlya-vuzov-181636/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
-          "purchase",
-          "subscription"
+          "purchase"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms purchase and subscription. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/leonid-burlachuk/psihodiagnostika-uchebnik-dlya-vuzov-72780217/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/leonid-fokich-burlachuk/psihodiagnostika-uchebnik-dlya-vuzov-2/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 19 час. 32 мин.; narrator Денис А. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
-    "fch_gazzaniga_kto_za_glavnogo": [
-      {
-        "format": "text",
-        "provider": "Литрес",
-        "url": "https://www.litres.ru/book/maykl-gazzaniga/kto-za-glavnogo-svoboda-voli-s-tochki-zreniya-neyrobiologi-23135916/",
-        "access": "provider_terms",
-        "checked_at": "2026-10-09",
-        "access_modes": [],
-        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
-      },
-      {
-        "format": "audio",
-        "provider": "Литрес",
-        "url": "https://www.litres.ru/audiobook/maykl-gazzaniga/kto-za-glavnogo-svoboda-voli-s-tochki-zreniya-neyrobiologi-68967180/",
-        "access": "provider_terms",
-        "checked_at": "2026-10-09",
-        "access_modes": [],
-        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
-      }
-    ],
+    "fch_gazzaniga_kto_za_glavnogo": [],
     "fch_martynov_mozg": [
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/ilya-martynov-21110132/mozg-kak-on-ustroen-i-chto-s-nim-delat-48516624/",
         "access": "provider_terms",
-        "checked_at": "2026-10-09",
-        "access_modes": [],
-        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/ilya-martynov-2/mozg-kak-on-ustroen-i-chto-s-nim-delat/",
         "access": "provider_terms",
-        "checked_at": "2026-10-09",
-        "access_modes": [],
-        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/W3ACAKGu",
         "access": "provider_terms",
-        "checked_at": "2026-10-09",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
-    "fch_kandel_v_poiskah_pamyati": [
-      {
-        "format": "text",
-        "provider": "MyBook",
-        "url": "https://mybook.ru/author/erik-kandel/v-poiskah-pamyati-vozniknovenie-novoj-nauki-o-chel/",
-        "access": "provider_terms",
-        "checked_at": "2026-10-09",
-        "access_modes": [],
-        "access_review": "Official card and direct HTTP 200 readback identify the exact author, work and text/audio format. Offered edition may differ from the bibliography; personal entitlement and current price are not assumed. No account, API, purchase or source text used."
-      }
-    ],
+    "fch_kandel_v_poiskah_pamyati": [],
     "fch_yakutenko_volya_i_samokontrol": [
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/oSR33NAC",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Exact official work card identifies Irina Yakutenko, the matching full title and this format. Read/listen and free-excerpt actions are present. Unconditional free full access, subscription eligibility and the specific bibliographic edition are not established."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/m6S5hl0I",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Exact official work card identifies Irina Yakutenko, the matching full title and this format. Read/listen and free-excerpt actions are present. Unconditional free full access, subscription eligibility and the specific bibliographic edition are not established."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный отрывок не означает свободный доступ ко всему произведению. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/irina-yakutenko/volya-i-samokontrol-kak-geny-i-mozg-meshayut-nam-b/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 397 печатных страниц. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/irina-yakutenko-1266/volya-i-samokontrol-kak-geny-i-mozg-meshaut-nam-borot-27450576/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. Объем 481 страница. The version-specific offer block confirms priced purchase and subscription; no trial or excerpt is called free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/irina-yakutenko/volya-i-samokontrol-kak-geny-i-mozg-meshayut-nam-3/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. duration 11 час. 31 мин.; narrator Олег Томилин. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/irina-yakutenko-1266/volya-i-samokontrol-kak-geny-i-mozg-meshaut-nam-borot-30014541/",
         "access": "provider_terms",
-        "checked_at": "2026-10-15",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official card readback 2026-10-15: author/title/full format matched. Willpower and Self-Control, Irina Yakutenko; Oleg Tomilin, 11 h 31 min, full audio. The specific version offers purchase and subscription; excerpts/trials are not free full access. Exact course edition, territorial restrictions and personal entitlement remain unverified."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       }
     ],
     "lit_sechenov_reflexes_of_brain": [
@@ -1054,35 +1038,35 @@
         "provider": "MyBook",
         "url": "https://mybook.ru/author/ivan-sechenov/refleksy-golovnogo-mozga/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. The book-specific block requires a subscription; trial promotion is not unconditional free full text."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Основной блок этой книги и её состояние подтверждают доступ по подписке; пробный период не означает свободный доступ без условий. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/ivan-sechenov/refleksy-golovnogo-mozga-159325/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. The book-specific block offers purchase and subscription; free wording qualifies subscription, not unconditional full access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/ivan-sechenov/refleksy-golovnogo-mozga-8365925/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Matching work, author and format verified on the official card; the specific bibliographic edition is not established. The book-specific block offers purchase and subscription; free wording qualifies subscription, not unconditional full access."
+        "access_review": "Проверена официальная карточка: произведение, автор и заявленный цифровой формат. Собственное предложение заявленной электронной книги или аудиокниги подтверждает отдельную покупку. В основном блоке этой книги также указана подписка. Соответствие конкретному изданию курса, региональная доступность и личные права доступа не подтверждены."
       },
       {
         "format": "text",
