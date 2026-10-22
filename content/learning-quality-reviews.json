@@ -5020,10 +5020,10 @@
       ]
     },
     "glossary:neuron": {
-      "item_sha256": "8e14a09648c57a149d8e4d14e802ce188c4bebe33df6c401839100c1cc8a7c07",
+      "item_sha256": "d3b476545d03d22748e66cb6495c7b72483246765a74487e8952e14ef8be927c",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5033,13 +5033,9 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference",
-        "source_claim_partially_supported"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Приём, обработка и передача импульсов даны; утверждение о восприятии, эмоциях и поведении в определении не подтверждено. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "KEEP: Nervous-system cell vs its parts/contact; neutral basic functional example, not a clinical inference. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -5047,13 +5043,14 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:dendrites": {
       "item_sha256": "778c6d41d8db2c5d4cac8398cec9444478cb1b0a07019ecfb222312cae34892b",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5065,7 +5062,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
+      "note": "KEEP: Predominantly receiving/integrating processes, distinct from output axon; illustrative diagram not a universal morphology claim. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -5073,13 +5070,14 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:4973:5393"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:axon": {
       "item_sha256": "9caf468e764cd5945328087da9cdae26d1208e3b974dabd20fece05d141de86a",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5091,7 +5089,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
+      "note": "KEEP: Output-conduction process vs dendritic reception; bounded introductory description. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -5099,13 +5097,14 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:4973:5393"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:myelin": {
       "item_sha256": "a4dabcd227a2e99674eab86e8ec50a13ee7f66ea7ddc4c077aeafaad17a051c7",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5117,7 +5116,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверено определение сальтаторного проведения и независимая анатомическая сверка OpenStax Anatomy and Physiology2e12.2. Не публикуются универсальные значения5000/50раз, скорость120м/с, связь детской миелинизации с памятью или совет о лечении.",
+      "note": "KEEP: Saltatory-conduction example distinguishes sheath from cell/axon; no guarantee of perfect reliability or recovery. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
@@ -5125,43 +5124,14 @@
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
           "locator": "characters:5121:5261"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:synapse": {
-      "item_sha256": "dab216fa14fd914bd0f7d5094826eb47f3a7a7cba84a9451fed3b49a9bff14c1",
+      "item_sha256": "71c3baaade05a2706c741b008e18d6397283b8dd48269544e16616959ab3b884",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-27",
-      "checks": [
-        "meaning",
-        "definition",
-        "examples",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference",
-        "source_claim_partially_supported"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. Точечная сверка 27.09.2026: Контакт и химическая/электрическая передача даны; регуляция и медиатор в определении не названы. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
-      "sources": [
-        {
-          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
-          "modified_time": "2026-03-31T06:13:48.046Z",
-          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
-        }
-      ]
-    },
-    "glossary:chemical_synaptic_transmission": {
-      "item_sha256": "68f2c5c179cb67d06691abb200732476e0a3ff124ae6d5436380b43f9ea01582",
-      "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5173,7 +5143,34 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Course fragment определяет синапс и химический способ передачи; точные выделение/рецепторы сверены независимо с OpenStax Anatomy and Physiology2e12.5. Пример не задаёт универсальную скорость, не исключает электрические синапсы и не рекомендует лекарства.",
+      "note": "KEEP: Contact vs mechanism; chemical/electrical alternatives admitted, not all synapses asserted chemical. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "sources": [
+        {
+          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+        }
+      ],
+      "disposition": "keep"
+    },
+    "glossary:chemical_synaptic_transmission": {
+      "item_sha256": "68f2c5c179cb67d06691abb200732476e0a3ff124ae6d5436380b43f9ea01582",
+      "discipline_id": "fiziologiya_cheloveka",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "KEEP: Mechanism of a chemical contact distinguished from the contact structure itself; mediator/receptor example appropriate. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -5181,7 +5178,8 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "characters:155:311"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:reflex_principle": {
       "item_sha256": "05af0d28ebd3100033462ba29f4430e1f7e3fc22789bd38faeec2da8d2c72f98",
@@ -5214,10 +5212,10 @@
       ]
     },
     "glossary:voluntary_involuntary_regulation": {
-      "item_sha256": "1eff8277e83ba898b0755e30333951098c016b8cb9a2622ce4ec37ea840a1417",
+      "item_sha256": "75b75fcedd2cf15577862959c04901f2f4ec96e88a7171e69a58b1e9e9ecd6ae",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5227,13 +5225,9 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "example_is_question_reference",
-        "definition_scope_requires_review"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 12 definitions/short definitions/links reviewed. Neuron/dendrites/axon/myelin/synapse/transmission/CNS/PNS/reflex соответствуют рассмотренному материалу; sleep_stability не source-certified. reflex_principle и voluntary_involuntary_regulation — учебные обобщения, не полная классификация; соматические рефлексы также бывают непроизвольными. Все12 examples — ссылки на ID вопроса вместо самостоятельного примера. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "KEEP: Bounded course comparison of somatic sensory/skeletal and autonomic visceral/gland/smooth-muscle functions. Not an exhaustive organ classification and not a claim all somatic acts are voluntary; independently checked official anatomy teaching source. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -5241,13 +5235,14 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:central_nervous_system": {
       "item_sha256": "03dc3726ee2a1cc3c2d48d0e9bb9fc3a94b95a917d94b4c866864c08b46f3e04",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5259,7 +5254,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
+      "note": "KEEP: Brain and spinal cord, contrasted with peripheral nerves/ganglia; diagram is an example rather than clinical guidance. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -5267,13 +5262,14 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:32003:32483"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:peripheral_nervous_system": {
       "item_sha256": "023d35f6451ecfec8c0b4aae2cf97024e3189bfd28c8ac2694d883574dd92dd8",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5285,7 +5281,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Действующее определение и новый авторский учебный пример сопоставлены с конкретным независимым фрагментом лекции. Обсуждается строение и направление передачи, без переноса спорных возрастных/клинических выводов из других частей. Структура нейрона независимо сверена с OpenStax Anatomy and Physiology2e §12.2. Это иллюстрация, не диагноз или рекомендация; ID и история сохраняются.",
+      "note": "KEEP: Structures outside brain/spinal cord in this introductory classification; no diagnostic or treatment inference. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -5293,7 +5289,8 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:32003:32483"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:sleep_stability": {
       "item_sha256": "3e9c39984042946222916e0837d1cb4190f62bb0dc1feae9f9c796c9c2d4f578",
@@ -5328,8 +5325,8 @@
     "glossary:reflex": {
       "item_sha256": "e490df123e9bb0ef2c61f619c785b25c109d64e6bcfbcdb93dd4c3837941660b",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -5341,7 +5338,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение реакции на раздражитель сверено с точной строкой учебного словаря. Авторский пример коленного рефлекса независимо проверен по OpenStax Anatomy and Physiology2e §14.3, раздел Stretch reflex. Это иллюстрация принципа, не инструкция обследования и не заключение о здоровье по наличию или отсутствию реакции; ID и история сохраняются.",
+      "note": "KEEP: Stimulus-response through nervous system; tendon-reflex example differs from a planned movement, no exam procedure prescribed. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -5349,7 +5346,8 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "characters:450:709"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_001": {
       "item_sha256": "26fbb8aac7f04574d1e115e049941bac32fbbdaa597f53a5d7574d55ec00d2bf",
@@ -6868,8 +6866,8 @@
     "glossary:higher_nervous_activity": {
       "item_sha256": "7c09895ed9d32ce68d482b1560d8cd323c7a08ab77c25c6a9d00720c633969ac",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -6881,7 +6879,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторский исторический пример обучения сигналу из точного фрагмента курса; Pavlov, Conditioned Reflexes, Lecture I/II подтверждает предмет исследования. Не объявляется, что все законы памяти сводятся к условным рефлексам.",
+      "note": "KEEP: Historical Pavlovian acquired regulation explicitly bounded, not a universal cortex-only theory of behavior. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6889,7 +6887,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:5553:6203"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:pavlov_teaching": {
       "item_sha256": "1f5989c3a2e7631f1e4f4d5bd5d99e26fc38527f89285862e4fef637d498d7d9",
@@ -6925,8 +6924,8 @@
     "glossary:unconditioned_reflex": {
       "item_sha256": "39c4a1e714dd3833879915c70ffce670000f986242e64f877342ec62d9e7188c",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -6938,7 +6937,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Вместо номера вопроса использован классический пример врождённой пищевой реакции. OpenStax Psychology2e6.2 различает unconditioned и conditioned response; наличие индивидуальных различий не исключается.",
+      "note": "KEEP: Unlearned response distinguished from acquired signal-response relation; food salivation example unambiguous, no inference of a human clinical diagnosis. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6946,13 +6945,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:8473:8853"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:conditioned_reflex": {
       "item_sha256": "607f5a4037ee9eb7da317dbd3ea62946ef46b583d5530fc28c5cce66afa2d189",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -6964,7 +6964,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Пример классического обусловливания; не утверждаются универсальные необходимые условия памяти, фиксированное число повторений или обязательная реакция на каждый звук.",
+      "note": "KEEP: Signal acquires significance through learning; not every conditioned response has a simple guaranteed training timetable. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6972,7 +6972,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:5553:6503"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:reinforcement": {
       "item_sha256": "380b1c404da1102dd6d6ab2e6ecb21a2d2640c842a06fdab79437e5419a0e461",
@@ -7009,8 +7010,8 @@
     "glossary:extinction": {
       "item_sha256": "374812df057bbdc14368cde33e13aa9f8e892afd7f383ba53caabedd34469a70",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -7022,7 +7023,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Показано поведенческое угасание, без вывода о физическом удалении нервной связи или фиксированном сроке забывания. Held fragment16889:17100 не используется.",
+      "note": "KEEP: Repeated unreinforced signal and weakening of response, not erasure of learning or guaranteed clinical fear removal. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7030,7 +7031,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:14893:15903"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:differentiation": {
       "item_sha256": "5b559e2430c11a7c09a0b01bf804e7f44ac33b9b4a614072d0e1702bad77c1ba",
@@ -7065,8 +7067,8 @@
     "glossary:excitation_and_inhibition": {
       "item_sha256": "d6efbb714b547dea3cb9459b6d3064fdd2430605fe9eb8ce903a795636a226ea",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -7078,7 +7080,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Термины привязаны к исторической исследовательской модели; пример не сводит всё поведение и все клеточные механизмы к двум универсальным причинам.",
+      "note": "KEEP: Named basic pair in historical Pavlovian description, distinct from the single inhibitory-process card. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7086,13 +7088,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:14003:14835"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:inhibition": {
       "item_sha256": "c685fb2e451f5501a1fb2f42e525e90f419307758260a27d5d5fed2308377192",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -7104,7 +7107,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Пример дифференцировочного торможения в павловской терминологии, без утверждения об универсальном клеточном механизме, личности или диагнозе.",
+      "note": "KEEP: Restriction/selection of activity illustrated by differential responding, not moral self-control or a diagnosis. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7112,13 +7115,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:17103:18103"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:balance_of_processes": {
       "item_sha256": "f7b2f0c1d750cd228fa883287b9f51adeba2a9f9d70788d42bf30c9abe13e703",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -7130,7 +7134,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Курс вводит возбуждение/торможение; Pavlov, Lecture XVII описывает их соотношение в наблюдениях за животными. Пример ограничен исторической моделью; не переносится на диагноз, агрессию или риск расстройства человека.",
+      "note": "KEEP: Historical model relation and example explicitly prohibit measuring it from one impulsive act. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7138,13 +7142,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:14003:14835"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:type_of_higher_nervous_activity": {
       "item_sha256": "ca575526c772d00a40a6b8acad91ab5f77b383a64d826d74f588c6165e1256bc",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -7156,7 +7161,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Курс называет историческую типологию; Pavlov, Lectures XVII/XIX описывает типы животных и отдельное исследование свойств процессов. Не добавлено назначение темперамента или психиатрического риска по поведению.",
+      "note": "KEEP: Strength/balance/mobility model, not assignment of a type from a short conversation. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7164,13 +7169,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:25016:25111"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:strength_of_nervous_processes": {
       "item_sha256": "756b44f8bf2791a3c30eac317900aed0ffb2d836922e72386aa54b2057df3eb6",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -7182,7 +7188,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение рассматривается в павловской терминологии. Пример не использует held прогнозы о меланхолическом темпераменте, тревоге, агрессии или психиатрическом риске.",
+      "note": "KEEP: Load tolerance as a theoretical property, not a personal fitness verdict from fatigue. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7190,7 +7196,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:22518:22641"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_001": {
       "item_sha256": "29b087565e1e680b1b4c5d25ec43594dd879099d836163b100cd9fa07bf165ed",
@@ -8912,8 +8919,8 @@
     "glossary:psyf_neuron": {
       "item_sha256": "0a5466c9a0186e30362cb487d9cc03815a1e3085be135a6dbe1966440787408a",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -8925,7 +8932,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение нейрона и пример учебной схемы сопоставлены с первой отдельной строкой первичного словаря и независимо с OpenStax Anatomy and Physiology2e §12.2 (parts of a neuron). Авторский пример не является цитатой, диагностическим признаком или рекомендацией лечения; не утверждает одинаковую морфологию всех клеток. ID и история сохранены.",
+      "note": "KEEP: Cell as information-processing unit in network, not dendrite/contact; foundation reused in a distinct discipline without adding new duplicate cards. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -8933,13 +8940,14 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "characters:21:153"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:psyf_dendrites": {
       "item_sha256": "f25ecfe5dba95b4a2c63d261bc0d4c9461587920428500dd1ec6ff8b7956daa6",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -8951,7 +8959,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Проверена та же точная независимая анатомическая основа, что у карточки dendrites. OpenStax Anatomy and Physiology2e12.2 подтверждает направление сигналов в типичном нейроне; универсальность формы не утверждается.",
+      "note": "KEEP: Receiving processes distinguished from the whole neuron, axon and synapse; topical foundation reuse, no clinical inference. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -8959,13 +8967,14 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:4973:5393"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:psyf_synapse": {
       "item_sha256": "546fc56d9c5fb0ca507ec414aa5b129b320ba5a7cb590372e9c7ab0271e69cc7",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -8977,7 +8986,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторский пример изменяемой эффективности передачи. Курс подтверждает определение синапса, Bliss and Lomo 1973 — длительную потенциацию в конкретном эксперименте на кроликах; не обещается усиление любого синапса при любом повторении.",
+      "note": "KEEP: Contact efficacy can change in an experimental example; not every repeated input guarantees lasting strengthening. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -8985,13 +8994,14 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "characters:155:311"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:chemical_synapse": {
       "item_sha256": "db4fd3a022972fe55e8235eeddb2e9490dfe7bf30cf487847fd90edc9b1bd6e3",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -9003,7 +9013,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Тот же научный механизм применяется в двух предметных контурах; это не утверждение, что любые клетки контактируют лишь химически. Точное определение курса плюс независимо проверенный механизм OpenStax Anatomy and Physiology2e12.5, без held hyperpolarization-universality claim.",
+      "note": "KEEP: Chemical contact uses release and receptors; distinct from the broader regulated-connection concept. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -9011,13 +9021,14 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "characters:155:311"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:gaba_inhibition": {
       "item_sha256": "2933bee757c3143a0a394aa7b0fecc0f6830a9a9c32dad0eda4d2aebbf923099",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -9029,7 +9040,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторский пример тормозной передачи с явно ограниченным контекстом. Курс: только основное определение ГАМК, без процента клеток/постоянной конкуренции. OpenStax Anatomy and Physiology 2e, 12.5: рецепторная зависимость эффекта; не утверждается универсальное торможение во всех возрастах.",
+      "note": "KEEP: Adult inhibitory example explicitly conditional on receptor/cell state; no universal GABA-always-inhibitory claim across development. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
@@ -9037,13 +9048,14 @@
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
           "locator": "characters:572:646"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:noradrenaline": {
       "item_sha256": "f4f11badf2a83aefbf60dad483d7faa4cd015259d8921d85a542be93aa7ec736",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -9055,7 +9067,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторский пример роли системы, без численного вывода или диагностики по поведению. Курс называет норадреналин в связи с бдительностью; Waterhouse and Navarra 2022 отдельно рассматривают норадреналиновые нейроны голубого пятна в модуляции бодрствования и внимания. Спорная схема локализации других сетей не утверждается.",
+      "note": "KEEP: Arousal/vigilance modulation rather than diagnosing mediator level from distraction; no medicine advice. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_ed9a5f5d35585ee3e75c6ed84016659e9e4e7b469c4928a60cf88a30f13ee1be",
@@ -9063,13 +9075,14 @@
           "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
           "locator": "characters:6995:7196"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:melatonin": {
       "item_sha256": "25adc60e0467826debacead30738b64a74bd177e0ed9bedc99ab0ef190710f7a",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -9081,7 +9094,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторский пример циркадного сигнала. Курс: выработка мелатонина эпифизом; Endotext, Main Function of the Pineal Gland — связь с внутренними часами и светом/темнотой. Лечебные, противоопухолевые и универсальные нормы сна не добавляются.",
+      "note": "KEEP: Biological-night timing signal, not a universal sleep-duration rule or supplementation recommendation. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
@@ -9089,13 +9102,14 @@
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
           "locator": "characters:2222:2296"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:inhibition_attention": {
       "item_sha256": "2dd0cf55f7ed89b9c4d64adaa5bde20f673cc90d4b66f4e33c9694bc6cbcf950",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -9107,7 +9121,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторский пример контроля конкурирующего ответа по заданию Stroop 1935. Курс подтверждает активную природу торможения, но не доказывает конкретный механизм эффекта Струпа. Пример не отождествляет психологический контроль с единственным медиатором и не повторяет неверный тезис об энергии.",
+      "note": "KEEP: Task-specific interference control illustrated by Stroop-like conflict; not proof of neurotransmitter level or a unitary mechanism. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
@@ -9115,13 +9129,14 @@
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
           "locator": "characters:5876:6016"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:neuroplasticity": {
       "item_sha256": "99dbf7059b541a3c5eafa5f288d926f61657d9108745a6ca8b0c351432a960c1",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -9133,7 +9148,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Авторский пример адаптации нервной системы. Курс упоминает изменение связей при долговременной памяти; исключено универсальное требование новых окончаний. OpenStax Psychology 2e, 3.4 независимо определяет нейропластичность и ограниченность выводов о восстановлении.",
+      "note": "KEEP: Experience-dependent reorganization possible; example explicitly rejects guaranteed full recovery. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
@@ -9141,7 +9156,8 @@
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
           "locator": "characters:1220:1300"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:limited_attention_resource": {
       "item_sha256": "5114f6e83cd930ded32dfdf84587e25b709f0c5fce83b313874d13d2192c2354",
@@ -12156,8 +12172,8 @@
     "glossary:exp_psych_hypothesis": {
       "item_sha256": "9465155b64648dc36e9a33b930e4badff6b8d5f881d84946b7d87fa54f25a63b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -12169,7 +12185,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Полное определение/пример рабочей проверяемой гипотезы сверены с точным описанием подтверждающего эксперимента. Статистическое подтверждение не приравнивается к окончательному доказательству. Question alias заменён точным приватным primary review; текст и ID сохраняются.",
+      "note": "KEEP: Prediction/working supposition connected to procedure, not a final proof; cross-topic basic hypothesis concept retained within its experimental context. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
@@ -12177,7 +12193,8 @@
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
           "locator": "characters:7903:8251"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:exp_psych_observation": {
       "item_sha256": "33b23127a3e0146160e4a7efc20b421adb6748a3015d86a7a6378db46fa13174",
@@ -12298,8 +12315,8 @@
     "glossary:exp_psych_control_group": {
       "item_sha256": "f10cfe714732e84bcc60e08f4f2bcb821ca97f9844f0233c3b5216341cb389d8",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -12311,7 +12328,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Курс прямо связывает контрольную группу с отделением воздействия от времени, тестирования и иных факторов. Самостоятельный пример/определение поддержаны; без обещания идеальной эквивалентности групп. Question alias заменён exact source review.",
+      "note": "KEEP: Comparison intended to assess alternatives, not control-group presence alone proving causality. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
@@ -12319,13 +12336,14 @@
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
           "locator": "characters:17000:17110"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:exp_psych_alternative_explanation": {
       "item_sha256": "991e2e2e4f4e99352c76148d76498011ace75e0b4e934f7c609c8f604d1301a4",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -12337,7 +12355,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение/пример альтернативных причин сверены с угрозами внутренней валидности: история, созревание и повторное тестирование. Пример не утверждает, что повторное тестирование всегда объясняет весь эффект. Прямое основание сохранено приватно.",
+      "note": "KEEP: Other possible cause to assess, distinct from a factor itself or the comparison group. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
@@ -12345,13 +12363,14 @@
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
           "locator": "characters:12503:13503"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:exp_psych_internal_validity": {
       "item_sha256": "3d3bdf42526a37ba3d7eb415645b3f7e0659b6aa41e378573da59fe28de3ab91",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -12363,7 +12382,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Курс прямо определяет обоснованность причинного вывода и необходимость исключить посторонние факторы. Самостоятельный пример контроля сохраняется, без безусловной гарантии. Question reference заменён exact primary review.",
+      "note": "KEEP: Causal inference inside study, distinguished from generalization beyond it; not absolute certainty. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
@@ -12371,13 +12390,14 @@
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
           "locator": "characters:10928:11328"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:exp_psych_external_validity": {
-      "item_sha256": "42ecf6418849d3d5734acf468876e8b665e9379ab1e408dd8e30cb6adaae378b",
+      "item_sha256": "0b4228d66289b34f582a2af7e4897c427ea71175648643df747365656f8218c6",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-09-20",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -12387,12 +12407,9 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "partial",
-      "issues": [
-        "question_reference_is_not_primary_source",
-        "definition_scope_requires_review"
-      ],
-      "note": "Определение сопоставлено с указанным первичным фрагментом, а не утверждено по вопросу. 10 терминов имеют самостоятельные примеры, не ссылки вместо examples. Определения в основном различимы. У confounding_variable alias «побочная переменная» слишком широк: не всякая побочная переменная — confound. external_validity описывает «осторожность», точнее говорить об обоснованности обобщения. question refs не являются первичными источниками; отдельно нужен прямой источник для hindsight и operational_definition. 29.09.2026: редакция снята с выдачи fail-closed gate до точного подтверждения всего определения и самостоятельного примера; ID и прежний текст сохранены.",
+      "source_support": "supported",
+      "issues": [],
+      "note": "KEEP: Transfer across samples/settings/measurement, distinguished from causal cleanliness inside a study. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
@@ -12400,7 +12417,8 @@
           "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
           "locator": "extracted text, Unicode characters (zero-based, end exclusive): 1700:3950, 4600:9200, 9200:27050"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m2_qual_001": {
       "item_sha256": "5030acb0c24371f2d03d7eacf4c0241cf364067b74fce028aabe656d6d3ea593",
@@ -13807,8 +13825,8 @@
     },
     "glossary:qual_methods_qualitative_methods": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -13829,7 +13847,8 @@
         "duplicates",
         "sources"
       ],
-      "note": "Exact SHA-bound course OCR fragments on meanings/context/individual cases and complementary methods visually checked against unchanged PDF slides11/12/15. Original PDF hash preserved in canonical source metadata. Independent case-study definition and mixed evidence support recorded separately from course model; no universal qualitative/quantitative divide, therapist-method replacement, book-identity inference from damaged OCR or full-source approval. Examples now demonstrate actual interview/case-study use; a question/snippet is not treated as a primary source."
+      "note": "KEEP: Meaning/context/experience studied; qualitative and quantitative approaches not declared mutually exclusive. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_semistructured_interview": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
@@ -13917,8 +13936,8 @@
     },
     "glossary:qual_methods_transcription": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -13939,12 +13958,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
+      "note": "KEEP: Audio-to-text procedure, not the expressive properties of the resulting text; meaningful detail choice contextualized. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_case_study": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -13965,12 +13985,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Exact SHA-bound course OCR fragments on meanings/context/individual cases and complementary methods visually checked against unchanged PDF slides11/12/15. Original PDF hash preserved in canonical source metadata. Independent case-study definition and mixed evidence support recorded separately from course model; no universal qualitative/quantitative divide, therapist-method replacement, book-identity inference from damaged OCR or full-source approval. Examples now demonstrate actual interview/case-study use; a question/snippet is not treated as a primary source."
+      "note": "KEEP: Bounded case/context and multiple appropriate sources, not necessarily one interview or a clinical anecdote. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_phenomenological_openness": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -13991,12 +14012,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Exact SHA-bound OCR pages15/21 visually checked against unchanged PDF, defining a pedagogical model rather than universal scientific/clinical rules. Subject approach does not prohibit studying/explaining data; openness/not-knowing do not discard expertise, assumptions or reflexive checks. Instrument model does not establish therapeutic efficacy or replace methods with personality. Examples are illustrative applications. Entire held pages10/18/20 unchanged in coverage after coordinate conversion."
+      "note": "KEEP: Course-framed openness to participant experience; retained card already includes not-knowing stance, no expertise rejection. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_methodological_reflection": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14008,7 +14030,7 @@
           "locator": "characters:130940:131250;characters:132150:133100"
         }
       ],
-      "item_sha256": "f62ea414d6bc3e817083722b867af21196c2610172a5297f2026510a54559ca1",
+      "item_sha256": "5ffe591bb2b1767bba4aa3cca28126dca15f034205d42629dd3baaf6850a3ae9",
       "checks": [
         "meaning",
         "definition",
@@ -14017,12 +14039,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
+      "note": "RETIRE: Current definition/example repeats the researcher-reflexivity analysis of assumptions and influence, without a separately assessable contrast; retire as a redundant card, not a claim the source term is false. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "retire"
     },
     "glossary:qual_methods_subject_approach": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14043,12 +14066,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Exact SHA-bound OCR pages15/21 visually checked against unchanged PDF, defining a pedagogical model rather than universal scientific/clinical rules. Subject approach does not prohibit studying/explaining data; openness/not-knowing do not discard expertise, assumptions or reflexive checks. Instrument model does not establish therapeutic efficacy or replace methods with personality. Examples are illustrative applications. Entire held pages10/18/20 unchanged in coverage after coordinate conversion."
+      "note": "KEEP: Participant agency/position distinguished from epistemic uncertainty and procedural control, explicitly course-framed. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_position_of_not_knowing": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14060,7 +14084,7 @@
           "locator": "characters:8792:9392"
         }
       ],
-      "item_sha256": "886d6bb097c5946f5e32e99758a83c2509d1c01ce239f83bdc267a344fc8c707",
+      "item_sha256": "c56b62aeb488be97409a540e4e825f561bcacd7f5d60517fa6d52d48ba68d7d0",
       "checks": [
         "meaning",
         "definition",
@@ -14069,12 +14093,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Exact SHA-bound OCR pages15/21 visually checked against unchanged PDF, defining a pedagogical model rather than universal scientific/clinical rules. Subject approach does not prohibit studying/explaining data; openness/not-knowing do not discard expertise, assumptions or reflexive checks. Instrument model does not establish therapeutic efficacy or replace methods with personality. Examples are illustrative applications. Entire held pages10/18/20 unchanged in coverage after coordinate conversion."
+      "note": "RETIRE: Current definition/example repeats phenomenological-openness card, which already names this stance; retire duplicate assessment without declaring the two terms universal synonyms. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "retire"
     },
     "glossary:qual_methods_double_attention": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14095,12 +14120,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
+      "note": "KEEP: Concurrent attention to method/process and participant contact, distinct from introspective analysis of bias. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_researcher_bias": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14121,12 +14147,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
+      "note": "KEEP: Assumptions/position that can influence data, distinct from the reflexive activity of examining that influence. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_text_texture": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14147,12 +14174,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Individually reviewed exact raw practice12 passages on transcript details, researcher assumptions/reflection, contact and methodological attention. Examples are educational adaptations, not literal participant histories. Course-specific labels are explicitly contextualized. No guarantee of error-free member checking, fixed psychotherapeutic effect or forced positive conclusion; all current holds retained."
+      "note": "KEEP: Expressive properties of material distinguished from the act of transcription; no fixed transcription convention for every approach. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_method_as_instrument": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14173,12 +14201,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "Exact SHA-bound OCR pages15/21 visually checked against unchanged PDF, defining a pedagogical model rather than universal scientific/clinical rules. Subject approach does not prohibit studying/explaining data; openness/not-knowing do not discard expertise, assumptions or reflexive checks. Instrument model does not establish therapeutic efficacy or replace methods with personality. Examples are illustrative applications. Entire held pages10/18/20 unchanged in coverage after coordinate conversion."
+      "note": "KEEP: Course-framed method as support/structure, not a guarantee or replacement of method by personality. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_researcher_reflexivity": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14199,7 +14228,8 @@
         "duplicates",
         "sources"
       ],
-      "note": "Точный фрагмент требует рефлексировать авторские предпосылки, позиции, установки и ценности. Определение и пример самоанализа исследователя поддержаны; question/supplied snippet aliases заменены проверенной приватной координатой, не whole-source approval."
+      "note": "KEEP: Analysis of own influence on knowledge production; covers the duplicated methodological-reflection assessment. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "glossary:qual_methods_thick_description": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
@@ -14231,8 +14261,8 @@
     },
     "glossary:qual_methods_transferability": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14253,7 +14283,8 @@
         "duplicates",
         "sources"
       ],
-      "note": "Фрагмент явно отличает переносимость от статистической репрезентативности и обсуждает применимость подробного описания в иных контекстах. Определение/пример поддержаны, без универсального обобщения на популяцию. Приватный exact review заменяет question/snippet aliases."
+      "note": "KEEP: Context-sensitive applicability distinguished from statistical population representativeness; no universal transfer guarantee. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "disposition": "keep"
     },
     "questions:m3_psychological_consulting_001": {
       "item_sha256": "78a3286b44a1e71fff2e7e05719dd97fcea9f208f6abd9e8be3f3d7b0d48a1e8",
@@ -16890,8 +16921,8 @@
     "glossary:here_and_now_focus": {
       "item_sha256": "8390f413f2651f95cf0228f229bf6fe1c6e568256fb2e6bd8f5087b2f479e729",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -16903,7 +16934,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually read4920:5120 current-problem focus. Removed clinical-health exclusion from general definition; focus does not establish a ban on history or a diagnosis. Existing fictional example retained and read.",
+      "note": "KEEP: Present working concern, explicitly not a ban on discussing past or a healthy-only eligibility rule. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_fc663085c649b302ae6848bd476eb9c2b910a82537b77376a3de1d9ffd143272",
@@ -16911,13 +16942,14 @@
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
           "locator": "characters:4920:5120"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:client_responsibility": {
       "item_sha256": "b54621b9668cba380234ed95147950244b38fd231898d8c1bce4194be2c596bc",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -16929,7 +16961,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Individually read3820:3958 client finds/chooses/implements decisions. Replaces total outcome responsibility with participation/choice/action; preserved example does not transfer professional duties or blame client.",
+      "note": "KEEP: Participation in own choices, not blame or sole responsibility for all outcomes. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_fc663085c649b302ae6848bd476eb9c2b910a82537b77376a3de1d9ffd143272",
@@ -16937,13 +16969,14 @@
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
           "locator": "characters:3820:3958"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:complaint": {
-      "item_sha256": "daf45062faeae6f1550e622340640827666ff6889d00b543fc8800c85ae5422e",
+      "item_sha256": "8f501184b8b12786c1d46121447cbc9c54931dcc82f4c74e8787403d234d03ea",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -16955,7 +16988,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
+      "note": "FIX: Course-framed initial complaint distinguished from agreed desired focus; example remains illustrative, no real history claimed. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16963,13 +16996,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1227:1368"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:client_request": {
-      "item_sha256": "d04db4da8eace5c3ac325a7c5c57aae6df69fafe76fda0a2c2ff203412b6fc42",
+      "item_sha256": "34f2497a08e6884437d0326ce47ca7b6d9410dee9b07a838283fd8943ad61032",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -16981,7 +17015,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
+      "note": "FIX: Agreed working result/participation distinguished from initial dissatisfaction; not a promise to change another person. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16989,13 +17023,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1370:1491"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:reflective_listening": {
       "item_sha256": "e3b8020d37a88bd4b0fb41c2a487a73977dbf72760dcb0436d70cff0842614d1",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -17007,7 +17042,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
+      "note": "KEEP: Listening operations and client correction distinguish it from feeling reflection alone and open-question form. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17015,13 +17050,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:0:255"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:open_question": {
-      "item_sha256": "afe785c48148ff34ba0d09a2b756d9355c4ac8f4062e025db43e434f61bb69d6",
+      "item_sha256": "4ba7d54373dd15a3fbafc00328c28a0561a218ff30022e5ca569a80b477775b7",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -17033,7 +17069,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Invitation to a developed answer, not a rigid first-word rule; independently authored example retained. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17041,13 +17077,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:4131:4284"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:therapeutic_contract": {
-      "item_sha256": "20b061ba2c1533ae354af2c9dbf338a48dd5ed8c9136dd2c7cae58ff0acc71a1",
+      "item_sha256": "065e4226b1f8310adac61171bf236c338aea2bbc1517f30cc6848a4390f69c12",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -17059,7 +17096,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
+      "note": "FIX: Agreed roles/conditions/goals/methods/privacy, not a guarantee or trust quality itself. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17067,13 +17104,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:2855:3037"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:rapport": {
-      "item_sha256": "7376b5671f43a7fdfd030149bca0365a2e70775f1d1853d5682a352d847e46bd",
+      "item_sha256": "96525aa492c9c63e30b93949cd8392e21941e62ad1b9e0ba4caed92f512ee96b",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -17085,7 +17123,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
+      "note": "FIX: Trust/contact quality distinguished from working agreement and full alliance model; source efficacy guarantees excluded. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17093,13 +17131,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:6311:6489"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:metagoal": {
       "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -17111,7 +17150,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Метацель показана через будущую самостоятельность, без обещания гарантированного результата и фиксированного числа сессий.",
+      "note": "KEEP: Future independent coping capacity rather than the current single concern; no guaranteed outcome. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_fc663085c649b302ae6848bd476eb9c2b910a82537b77376a3de1d9ffd143272",
@@ -17119,13 +17158,14 @@
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
           "locator": "characters:7690:8136"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:reflection_of_feelings": {
-      "item_sha256": "bac9388502c2d2336b49d752947119ce3577748bd5db30c693f1e7d8ddb0d374",
+      "item_sha256": "10be6c242eb04aca193053a6e167f07606ffd4c0dc33c8e888a5213090bd1f65",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -17137,7 +17177,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Определение и краткая формулировка сопоставлены с отдельной строкой первичного словаря. Новый авторский вымышленный пример показывает признак понятия, не утверждает эффективность техники, диагноз или правовое правило. Интерпретация чувства дана как проверяемая гипотеза клиента, а не чтение скрытых мотивов. ID и история сохраняются; содержательного дубля самостоятельного примера не найдено.",
+      "note": "FIX: Tentative verbalization checked by client, not mind-reading or an established account of another person's intentions. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17145,7 +17185,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:4428:4601"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:case_first_consultation_001": {
       "item_sha256": "5e9e0ac58b584762a72ea7a94ff66bc874b349808d4195d747911d576cd5f24a",
@@ -17169,8 +17210,8 @@
     "glossary:case_conceptualization": {
       "item_sha256": "8c874daf392fedecc150c895cfd889a326bbdbe1a8a40b7617b004bd80c8b080",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -17182,7 +17223,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "KEEP: Organized facts/hypotheses/strategy, distinct from a diagnosis or finalized explanation. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17190,7 +17231,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:3333:3538"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_058": {
       "item_sha256": "bfd79ddd275e5360726660165b86e4b5ffd0dd0104970627b734524dae45fcfb",

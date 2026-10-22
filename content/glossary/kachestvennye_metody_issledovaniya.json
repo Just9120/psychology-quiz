@@ -154,7 +154,7 @@
       "qual_methods_phenomenological_openness"
     ],
     "difficulty": "hard",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "qual_methods_subject_approach",
@@ -192,7 +192,7 @@
       "qual_methods_subject_approach"
     ],
     "difficulty": "medium",
-    "status": "approved"
+    "status": "deprecated"
   },
   {
     "id": "qual_methods_double_attention",
