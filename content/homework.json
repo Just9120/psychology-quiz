@@ -7,13 +7,13 @@
       "module": "Модуль 1",
       "discipline_id": "vvedenie_v_professiyu",
       "topic_id": "t_c17d1ae57018",
-      "description": "Тест проверяет профессиональные принципы. Личные письменные ответы не оцениваются и не сохраняются.",
+      "description": "Тест проверяет понимание профессиональной рефлексии: мотивы, ресурсы, ограничения и цели обучения. Личные письменные ответы не оцениваются и не сохраняются; прохождение теста не подтверждает выполнение самоисследования.",
       "question_ids": [
-        "m1_intro_007",
-        "m1_intro_014",
-        "m1_intro_015",
-        "m1_intro_019",
-        "m1_intro_025"
+        "intro_reflection_motive",
+        "intro_reflection_resources",
+        "intro_reflection_family",
+        "intro_reflection_private_answers",
+        "intro_reflection_future_learning"
       ]
     },
     {
@@ -22,13 +22,13 @@
       "module": "Модуль 1",
       "discipline_id": "vvedenie_v_professiyu",
       "topic_id": "t_c17d1ae57018",
-      "description": "Тест проверяет конфиденциальность и профессиональную рефлексию. Он не подтверждает ведение дневника.",
+      "description": "Тест проверяет смысл фактической и рефлексивной частей дневника, приватность и подготовку вопросов к супервизии. Он не подтверждает ведение дневника; личные записи не запрашиваются.",
       "question_ids": [
-        "m1_intro_004",
-        "m1_intro_015",
-        "m1_intro_016",
-        "m1_intro_025",
-        "m1_intro_033"
+        "intro_diary_observation",
+        "intro_diary_own_response",
+        "intro_diary_supervision_question",
+        "intro_diary_privacy",
+        "intro_diary_weekly_pattern"
       ]
     },
     {
@@ -37,13 +37,13 @@
       "module": "Модуль 1",
       "discipline_id": "vvedenie_v_professiyu",
       "topic_id": "t_5f1cca01d535",
-      "description": "Тест проверяет навыки наблюдения и слушания. Он не подтверждает выполнение упражнения с другим человеком.",
+      "description": "Тест проверяет понимание слушания, уточнения и рефлексии наблюдений. Он не подтверждает выполнение упражнения с другим человеком; личный разговор или записи не запрашиваются.",
       "question_ids": [
         "m1_intro_010",
         "m1_intro_011",
         "m1_intro_033",
-        "m3_psychological_consulting_006",
-        "m3_psychological_consulting_007"
+        "intro_listening_observation_note",
+        "intro_listening_feedback"
       ]
     },
     {

@@ -7209,6 +7209,78 @@
       "topic_id": "t_6f07f36a8251",
       "item_sha256": "ebfe73501cfe889f8e4d4a4258bc3954c8fa74ff14745157a25ba8fb3a3f50ac",
       "locator": "private certificate:questions:m1_intro_049"
+    },
+    "29dacb279f7d736de5fb1e06084147211d666712d5595c2e2a14e1eb692c5d40": {
+      "external_id": "intro_reflection_motive",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "fbf6d1bf0ebb3cc2797ccac7f3a9b569bf379f998d6422d923ea7d01febcfc85",
+      "locator": "private certificate:questions:intro_reflection_motive"
+    },
+    "4f080784a2f1f9e6021e5b38867bdff67d29552b7eac6df9c803d70e173a010e": {
+      "external_id": "intro_reflection_resources",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "5a417a339be321a88bb37f4c9519f07aa58016154845adb21670cceea8079067",
+      "locator": "private certificate:questions:intro_reflection_resources"
+    },
+    "f56df2b30624091f4ac812664286bed70672bc3c2a5e6d928a8f41c3f454314b": {
+      "external_id": "intro_reflection_family",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "9f803de0413693f8bda8fa7a8f4c8aa2aace483e8d25a06002531661c53e1b97",
+      "locator": "private certificate:questions:intro_reflection_family"
+    },
+    "f5a3d1550d6e88171a4548fe4f15a356bc5be8d27691e8ed47409666fe15aecc": {
+      "external_id": "intro_reflection_private_answers",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "9dfb0737bd8fc05518e5781d41fe85b742cd29ad1d9f6ed70f76e1a2e0d66c49",
+      "locator": "private certificate:questions:intro_reflection_private_answers"
+    },
+    "efec88e0afc41f2194ee9a1b5cf15e02212d8b80c94302608f16bcde5b1f7cd5": {
+      "external_id": "intro_reflection_future_learning",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "967bacdf6cc1ed586407d407d15dea0904c4fca073497e81827fffb0064ef425",
+      "locator": "private certificate:questions:intro_reflection_future_learning"
+    },
+    "f79546459c5eec693e062fb0b82eae6e0ca3d4ef1641bd927519a6698c6114b5": {
+      "external_id": "intro_diary_observation",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "584406e289170ee63d22bb98554d0742d6217f318ea415bad9095e312d31f42d",
+      "locator": "private certificate:questions:intro_diary_observation"
+    },
+    "51e7079ebd1dfd692ef3612c4802095e1c6cd77051630aa38a10a323c6f05c9d": {
+      "external_id": "intro_diary_own_response",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "c8c95afaacd46b5728e9f3fed4f935a70a2067add0af51bd953c9d8adbf9709a",
+      "locator": "private certificate:questions:intro_diary_own_response"
+    },
+    "19c4a85ec3795748ab667033dd9dc535219aee432786e3ada2a4faddcf02fc48": {
+      "external_id": "intro_diary_supervision_question",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "68ae5d3a09dfbe62614516c762ef464fc7f8101df6f5cc02ab9c3bdf12ebddc6",
+      "locator": "private certificate:questions:intro_diary_supervision_question"
+    },
+    "7192e08180333fb484e6d20e28768c4d091c577b2101c092541a859c5af84dff": {
+      "external_id": "intro_diary_privacy",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "f721d1e2199cf5696320cab536ef354b6e9eeb0b109e50c841f2acf2cfc79b92",
+      "locator": "private certificate:questions:intro_diary_privacy"
+    },
+    "f1628316f6813e95b9f3664b450e327e1547a3ecac352dd081246d5edd5055b8": {
+      "external_id": "intro_diary_weekly_pattern",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "8bc80c7f3c73f83a9f35eadb3c11b1b0422f870ce980b3b8d244b4b053b48865",
+      "locator": "private certificate:questions:intro_diary_weekly_pattern"
+    },
+    "dc389ebdfc1a5943ee16df75f9f1bb522eaa3b45faaec13cd9fd457df5703a5b": {
+      "external_id": "intro_listening_observation_note",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "b17aed50c5e0c3fd353366c0f8f0ed8389a02d71cd6cfc6d207b3ffcf5dc1e6e",
+      "locator": "private certificate:questions:intro_listening_observation_note"
+    },
+    "41366009a67f35c05551ac21f0fca938caee00e1ce647a11089a444aa80a34e5": {
+      "external_id": "intro_listening_feedback",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "992ee8788bb59835977b0947f0fa09297eb99ca981a937c3dc57f8ba9139acd4",
+      "locator": "private certificate:questions:intro_listening_feedback"
     }
   }
 }
