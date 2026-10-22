@@ -3183,6 +3183,83 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "BL8iQMWGq2Zs1er9mtXdrgsV0z1U1vKmjhuBLKtv4BCj2aI/ug4gu9CVOVeprJFwSzJt29FHy7AaUj/Q4Ub7Ag==",
       "topic_id": "t_ba868cd218a1"
+    },
+    "literature:lit_family_slide_05": {
+      "schema_version": 1,
+      "item_sha256": "070784f349349471f6a8a085c3d7e495133ac489bf4055ac85848194eaa32c87",
+      "review_sha256": "4f439c1dbcdf4bee4ff6051ca7dd2830809e10334f12b3f3bf4d1a6a601b6b77",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "iJdc0NF6iGRzhO+rvEd+aQt38VwssX8oQDBvjdnP5NKBTuS55KITEcHiD9NnKgNcIZJhqTPVT+e3WRsmiFntCw=="
+    },
+    "literature:lit_family_slide_06": {
+      "schema_version": 1,
+      "item_sha256": "bfc83d46b887a0263107ee33b805c02c2b0428479a7e6df9a833f25e630cd141",
+      "review_sha256": "ed19325064024594f566e04c6ed1c732793ec543e9cda7b230b76feb954e1d0a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "TgPYtYn4IuHNoB5VsDriZQw75DF7pxP3GoxuA4LKDD/FNcoRkqyztG3Gzv9VRYDQ2HXTZNeRr2iGE/oq/enRAA=="
+    },
+    "literature:lit_family_slide_07": {
+      "schema_version": 1,
+      "item_sha256": "510875e7c09ffe9052b2a4e40d0ccface75abbb686e15fbc5f9a105589a9f58a",
+      "review_sha256": "2df27210f3b4394bf0eb24cb6955592679da2025dde501183e0ef758c134e897",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "4qB916mNwILmj8dwkzrnT2+HDRQfjmisfEKq3g3YjCFir1ppIwqiMohlwcz7Mp1dV5jsDzNqYXUCSw9vKOhUBA=="
+    },
+    "literature:lit_family_slide_08": {
+      "schema_version": 1,
+      "item_sha256": "a0253734aa5e9e2ee58fc636d697fe8e92b3ee7a7b498888eeea8ea15d6aefe4",
+      "review_sha256": "0459068e2adc59148841a827b1361c13423341e87bcccae7461c613b1144f186",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "11Cr3t0MJpuuACeZWaDg+DnkdQ7ALvJG0XRJJX9oNHFn1U0BHNXsmPddyleVkoigJdecB2D6l+n2b0B+8/+WBg=="
+    },
+    "literature:lit_family_slide_09": {
+      "schema_version": 1,
+      "item_sha256": "11d333e8fe1bcfac5b316500cdcb565d2ab93465b190acc925d688563cb030af",
+      "review_sha256": "1b2c4dbbc0f19415b8e86f745e85ff49fd00cd98305750af241b8f6a1a84b1db",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Km7zxqSxEvlYQfwhMg8IYZy/Hh4Vt7EOZx6A60ZL8g452PN1GRhLnR8jbrgD+CVAmE3Kli9iJGVKPzGmpGDuCQ=="
+    },
+    "literature:psf_danilova_psihofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "dc757c3c13c9eaefdc8bbb6f956aeb9176f8fc752251d6219dc41c17345f7166",
+      "review_sha256": "dc27869fd1b34cc37430e0e101fe0f261cdb958fc711b396637ccca9e333da53",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "z9hcQM148A2Dxwi9bbb/bcsqhAmqliV99xRcyCUsFdQap9r0JfkW8jt7wAag6n6O2mZj/kKpmBmTbbm1GJQIBA=="
+    },
+    "literature:psf_ilyin_psihofiziologiya_sostoyaniy": {
+      "schema_version": 1,
+      "item_sha256": "d7ba70f28fc5d3d696f2b7e91fbeeccb91799292cff813be4dd6fb0850e64e0a",
+      "review_sha256": "69fd53cbb4c35aa87d33d6d15a48995ea93c65dd4b3241f9a537024c721e1e3a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1n0hX/iYQs8maCfqUBR5bVKHZP2cU1c+HXU1IAJkN872W8LnXsw+4z0OphAkPJ0Ru5Hn9MSdKaof7TWX7nl3AA=="
+    },
+    "literature:psf_aleksandrov_psihofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "283e60d62dc0d972b557c292ffa5c62fb9937416dbb40e0eb6e123c09aaf374f",
+      "review_sha256": "bd28f5d7edcd6cea8ec017200d3d64fd1b4de1757a1bb3696fac2170d3120292",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "4pNQ1/jKiwpKHQZUPQl1hQe594mdP3y9UsLimzR4PknXu1xvDnVauqEts7jcTSnDiUq1CxS4RswMH9CG8vQSDA=="
+    },
+    "literature:psf_van_der_kolk_telo_pomnit_vse": {
+      "schema_version": 1,
+      "item_sha256": "9afa022e27a278d27caee74868295a0a98dacdd322651dc64bd46e3cf1f85cda",
+      "review_sha256": "17184c0498767f1548de1f0c09601b7f0b6b7bd1e904ec12fe8c0dddb97db717",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "6Mq0ZZN0CSg4UckEyIZ5O7g2RoJczWgzNf7xMTLNQAxtqg48/2imNkD+J7nUZL7Zp61YolMQ2mbqD9g7REmsCw=="
+    },
+    "literature:psf_sapolsky_psihologiya_stressa": {
+      "schema_version": 1,
+      "item_sha256": "27e2a07834e4922ebc10d9c174208b1cc79a75bb5e531ec1589005a62a6cd456",
+      "review_sha256": "d7f820cb5eb349078e09170c453b28f0e9c5df06745440f85a64baec2fb5e5d8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "yd89tzDDnefXw94/mSGx4cwJYftItENza3F48JO1UgvLwyhLCoPa/YkJ0gzhKOuzfIJt2JpxGZxB5Aewlj0yAA=="
+    },
+    "literature:psf_kabat_zinn_kuda_by_ty_ni_shel": {
+      "schema_version": 1,
+      "item_sha256": "31a8b00b2f425f34f11a902be870833e1489d0dc4df0be0e464f55bfa8520b22",
+      "review_sha256": "08e19c24ca5227e44157d2c3d86b7929d95ef1191ac0d38efd75cae4107070a6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Knrd6+DmpCHe6mHXB5rWuMM7jqu8Q2KQyBKmcVv6g7PJkUBVn1UIFlq8kGwGLulcdcqC9bBU5zvP8e3258RVCg=="
     }
   }
 }

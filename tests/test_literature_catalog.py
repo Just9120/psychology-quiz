@@ -186,10 +186,15 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_org_lecture_02', 'lit_b76317a4d7bec59d',
         'lit_newton_principia_1989', 'lit_cefdc62fe30c6d9d', 'fch_dubynin_mozg_i_ego_potrebnosti',
         'lit_vasilyuk_understanding_psychotherapy_system', 'psf_aleksandrov_psihofiziologiya',
+        'judith_beck_cbt_basics_beyond', 'lit_nosov_mishkina_kasha',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
-    assert {link['format'] for link in links['fch_gazzaniga_kto_za_glavnogo']} == {'text', 'audio'}
+    # Both original offers are now explicitly unavailable; a search hit does not restore them.
+    assert links['fch_gazzaniga_kto_za_glavnogo'] == []
+    assert links['fch_kandel_v_poiskah_pamyati'] == []
+    assert {link['format'] for link in links['judith_beck_cbt_basics_beyond']} == {'text'}
+    assert {link['format'] for link in links['lit_nosov_mishkina_kasha']} == {'audio'}
     assert {link['format'] for link in links['fch_yakutenko_volya_i_samokontrol']} == {'text', 'audio'}
     assert {link['provider'] for link in links['fch_martynov_mozg']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     # An identically titled work by another author must never be offered as Carter's book.
