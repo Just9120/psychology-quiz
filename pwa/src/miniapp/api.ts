@@ -77,8 +77,9 @@ export const miniApi = {
         literature_items: result.works.flatMap(({ entries, ...work }) => entries.map(entry => ({ ...work, ...entry }))) }
     } catch (failure) {
       // Worker and VPS releases can arrive in either order. A missing route
-      // may use the authenticated legacy response; auth/network failures cannot.
-      if (!(failure instanceof MiniAppError) || failure.status !== 404) throw failure
+      // is also reported as a network error when the old server has no CORS
+      // preflight handler. Both paths are read-only and enforce the same proof.
+      if (!(failure instanceof MiniAppError) || (failure.status !== 404 && failure.code !== 'network')) throw failure
       if (!actor || actor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
       const legacy = await miniRequest<{ ok: true; literature_items: MiniLiteratureItem[]; reading_topics?: MiniLiteratureTopic[] }>('literature/items')
       if (actor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)

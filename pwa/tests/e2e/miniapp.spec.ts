@@ -331,6 +331,35 @@ test('Mini App reading next step persists against the real local backend', async
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 })
 
+test('Mini App reads the authenticated legacy catalog when the old server lacks compact CORS preflight', async ({ page, request }) => {
+  const backend = 'http://127.0.0.1:8085'
+  expect((await request.post(backend + '/__test/reset', { data: { seed: true } })).ok()).toBe(true)
+  const proof = new URLSearchParams({ auth_date: String(Math.floor(Date.now() / 1000)), user: JSON.stringify({ id: 4242, first_name: 'Synthetic learner' }) })
+  const secret = createHmac('sha256', 'WebAppData').update('123:synthetic-e2e').digest()
+  proof.set('hash', createHmac('sha256', secret).update([...proof.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join('\n')).digest('hex'))
+  await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
+  await page.addInitScript(initData => { window.Telegram = { WebApp: { initData, ready() {}, expand() {} } } }, proof.toString())
+  const paths: string[] = []
+  await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
+    const url = new URL(route.request().url())
+    if (url.pathname.endsWith('/catalog-compact')) {
+      // Old FastAPI has neither this GET route nor its OPTIONS handler. The
+      // browser sees CORS failure, not a readable HTTP404 JSON response.
+      return route.fulfill({ status: 404, contentType: 'application/json', body: '{"detail":"Not Found"}' })
+    }
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': site.slice(0, -1), 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type' } })
+    paths.push(url.pathname)
+    expect(route.request().headers().authorization).toBe('tma ' + proof.toString())
+    const response = await route.fetch({ url: backend + url.pathname + url.search })
+    await route.fulfill({ response, headers: { ...response.headers(), 'Access-Control-Allow-Origin': site.slice(0, -1) } })
+  })
+  await page.goto(site)
+  await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
+  await navigateMini(page, 'Литература')
+  await expect(page.locator('.literature-card').first()).toBeVisible()
+  expect(paths.filter(path => path.endsWith('/literature/items'))).toHaveLength(1)
+})
+
 
 test('Mini App navigation marks the current section and integrates Telegram BackButton', async ({ page }, testInfo) => {
   await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
