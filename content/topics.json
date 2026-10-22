@@ -305,7 +305,8 @@
     "order": 710,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Source-backed current private fragment review; raw sources and publication dossiers remain local."
   },
@@ -321,7 +322,8 @@
     "order": 690,
     "available_contours": [
       "questions",
-      "glossary"
+      "glossary",
+      "literature"
     ],
     "source_notes": "Source-backed current private fragment review; raw sources and publication dossiers remain local."
   }

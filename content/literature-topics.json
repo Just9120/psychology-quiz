@@ -979,6 +979,27 @@
     ],
     "lit_course_mention_0378825302da1e51": [
       "reading_education"
+    ],
+    "marcinkovskaya_history_psychology": [
+      "reading_history"
+    ],
+    "radyuk_ellis_beck_models": [
+      "reading_therapy"
+    ],
+    "beck_rush_shaw_emery_cognitive_depression": [
+      "reading_therapy"
+    ],
+    "beck_emery_anxiety_phobias": [
+      "reading_therapy"
+    ],
+    "judith_beck_cbt_basics_beyond": [
+      "reading_therapy"
+    ],
+    "greenberger_padesky_mood_management": [
+      "reading_therapy"
+    ],
+    "khovansky_comfortable_consultant": [
+      "reading_counseling"
     ]
   }
 }

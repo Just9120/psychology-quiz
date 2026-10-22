@@ -2245,6 +2245,55 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "MTqO7QuznlYg4STA7auqXBVoCo/cfD8tAE/pJcMtexUWMU5pdZ4CnpykYT1oGj35NRoXm5ifP+/2zvFFPEOeCQ==",
       "topic_id": "t_9ce550077bb9"
+    },
+    "literature:marcinkovskaya_history_psychology": {
+      "schema_version": 1,
+      "item_sha256": "1afee711dbe630c417d9fcbf471bf4a08932862e809b1be60b5f0b2b10b2b147",
+      "review_sha256": "49824da06ac0c94597c9afcf8fae83aa908f8205ea2aed78c8897b3d3385c432",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "jxQEHtb3A+H82T1eg66QXPQh2RFUuLIhqF/yHiGljHudJSdpCFi1n+2Ejp46H5DAU29Tpa1ZCjpvpKiBDGUGCw=="
+    },
+    "literature:radyuk_ellis_beck_models": {
+      "schema_version": 1,
+      "item_sha256": "96382b5cbe6af919715902fa6e2f26eb5166f8bbc2c7fbe901dff50e57ce53ce",
+      "review_sha256": "df5ccaf89ae94e9bc2da45844036cfba78719e1507b01758c7c72d624937896a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "PeJGqVh7xSu1/6GKs6dDdUIOuDzKCVTt9pQ+kxcd9iQjA0yOnRBo4XR8IP/kfgOAKG92x1zrarx+xco+OGQvBw=="
+    },
+    "literature:beck_rush_shaw_emery_cognitive_depression": {
+      "schema_version": 1,
+      "item_sha256": "fa92095066fa66476319a2688df3d28887205a8a9b12f7c67169bdb1f34a2651",
+      "review_sha256": "137efb9c309f8174f816983e090bf5c50a070136252d9ed7d6e2945991bed2ec",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "6i+0pisIp48ANXosz7GlP9rL/QfVerg84tuo+g2csCq3blvHxU9cI8U5Enw5dbURvODB9D4NqeRHUIQklvbyBg=="
+    },
+    "literature:beck_emery_anxiety_phobias": {
+      "schema_version": 1,
+      "item_sha256": "708f8def56e7f023b0b1b1dc2d0a151153326c65a5efc02073bc0569a23aff17",
+      "review_sha256": "4cb53cb85e253315d3593c000c4e9bc9e143841843ba2fc92408f1dc86760cb0",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JT+86/MDh1toGJbzvP3G+4LT/bIkzWTqYh7e1swTXZ+rPAZAzOPByX3dCGNztkDGKcuD2DstCA4iY+mKAYqPDA=="
+    },
+    "literature:judith_beck_cbt_basics_beyond": {
+      "schema_version": 1,
+      "item_sha256": "167cc24ada8c6478f63bbcaf981369f977cb397a9f44329e2f7b78efb2b465d9",
+      "review_sha256": "a14184bba414f2b8ea43dc8d79bb8a44c46b8cc7e585fe793c3c0290a244bc09",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "YkTHiakBP3cJ3iN2UIXSNO+aH5y3JeqT0TyAuXVTppcLR8cYU5lrg0pUBxdKwMsghm+vR55simAyQSP7hXsjDA=="
+    },
+    "literature:greenberger_padesky_mood_management": {
+      "schema_version": 1,
+      "item_sha256": "17a535483346286dc594484b725781b18bced43d9bfc7776ccdb04489664f20a",
+      "review_sha256": "0d449ad566e0b313f5bbcbf0fcf66c0141347f8a8eb5df169725bb5028c53409",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "iw9vYeJ6wFca6mx+/qCsYu6t7CAmyT/HYOd0qrgMvYFXplp3Xn+OjI/ub0WXEbIPGPxuwICddxdq3IsSq7pzCQ=="
+    },
+    "literature:khovansky_comfortable_consultant": {
+      "schema_version": 1,
+      "item_sha256": "8697142825977392dc78bfdd2355c6a84a9dca5856804a0b63ef181d13585dd1",
+      "review_sha256": "7c6472926bf58fc3783e1be843f0f19cae56aca198ee7eaaaaeb2a3cd8445b52",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "pMUnNBQUImJQPpMuoCU+wd0OQeXS97cX/pgw0jdyGcRMTucVL+unuiPXgEXuwgYKn9ZpR18v0pt0b2OsP7/mDg=="
     }
   }
 }
