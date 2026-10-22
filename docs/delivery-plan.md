@@ -1,6 +1,40 @@
 # Delivery Plan
 
-## Current Goal — AUDIT-FINDINGS-20261022
+## Current Goal — BANK-QUALITY-20261022
+
+Прямое поручение22.10.2026: IMPLEMENT утверждённого плана расширения/содержательного улучшения банка. Один основной PR; base origin/main9dca7471bc126cbf51bcce37837cd75e307d0b33; branch codex/bank-quality-20261022; managed worktree bank-quality-20261022/psychology-quiz. Primary dirty curriculum-progress/d77ab7a и чужой local main/broken worktrees сохранить; preservation manifest только в ignored data/bank-quality-20261022.
+
+Результат/DoD: содержательный review всех активных вопросов/терминов и42existing homework; самостоятельные темы КПТ и супервизии с source-backed questions/glossary/homework/literature по доступным материалам; минимум48approved вопросов темы «Кейс»; активный видимый текст использует «клиент» без «вымышленный/выдуманный». Разнообразные учебные цели, один обоснованный ключ, plausible alternatives, контекстные объяснения; нет тематических дублей ради количества. Existing IDs/snapshots/history/reading marks и scientific holds сохранить. Для каждого reviewed элемента — оставить/исправить/заменить/снять с новой выдачи с основанием. Полноту процесса подтверждает ledger, не автоматическая метрика качества.
+
+Scope16существующих AC: AC-FND-01; AC-QUIZ-06/08/09/10; AC-GLO-01; AC-HWK-04/05; AC-LIT-01/03/04/06/07/10; AC-SRC-07/09. Статусы текущей Goal ещё IN_PROGRESS; прошлые READY не выдаются за новое содержательное ревью. Процент проекта не пересчитывается.
+
+Источники: только Google Drive «Психология» и все её подпапки. Полная metadata inventory с pagination; новые/изменённые материалы читаются, matching captured fragments повторно используются. Найденные КПТ lectures/glossary/PDF/bibliography/practices51–54 и supervision lectures/practices — первоочередные. «Кейсы психологии / Кейсы коллег» исключены. Авторские обстоятельства client cases не выдают за реальные; основания ответов подтверждаются курсом. Научная внешняя проверка не заменяет Drive, holds не снимать автоматически. Raw sources/IDs/captures/dossiers только ignored storage; public references anonymous. Не менять legacy allowlists, signing/publication gates, API или attempt format.
+
+Литература: новые упоминания и проверка существующего каталога, точных work/edition identities, связей/порядка/значимости без выдуманных prerequisites. Один полный проход существующих ссылок и поиска недостающих официальных text/audio versions по разрешённым каталогам. Каждому work — конечный исход/дата/ограничение; paper/sample/search не full digital evidence. Не обещать100%форматов и не искать бесконечно. Book account/API integration, runtime generation, RAG/Obsidian overhaul,2FA/dependency migration и paid resources — non-goals.
+
+| Validation / риск | Проверка / ожидаемый результат | Команда/tool, environment/этап | Gate |
+| --- | --- | --- | --- |
+| Source completeness/privacy | Recursive metadata pagination; revisions/digests; known raw IDs absent public tree/assets | Drive tools + existing source capture/review/signer scripts; private local | REQUIRED |
+| Content correctness | Every active item disposition; exact fragment/answer/explanation/ambiguity/duplicate review; current private dossiers for changed/new items | Source reads + learning review/publication validators; local | REQUIRED |
+| Case expansion/wording | >=48 approved contextual cases; new active wording without fictional-client labels; same source guards | validate_questions.py, validate_learning_reviews.py, test_case_content.py/publication suites | REQUIRED |
+| Homework/new topics | Existing42 reviewed; source tasks added; new themes visible,80%single-attempt unchanged, actor isolation | topic/glossary/homework validators + affected tests; local + CI SQLite/PostgreSQL | REQUIRED |
+| Literature/state | All works checked once; exact offers/conditions and uncertainty, stable work IDs/personal marks | validate_literature.py + existing literature/catalog/state tests; local + CI | REQUIRED |
+| Preservation/delivery | Full seed keeps captured snapshots/history; required CI/review, protected merge; exact normal VPS/PWA/Worker delivery and read-only smoke | canonical repository workflow, source/state/privacy regression and post-checks | REQUIRED |
+| Native visuals | New theme/quiz/case/homework/literature key states on desktop/mobile; screenshot findings only when needed | existing synthetic browser harness; no real learner writes | RECOMMENDED |
+
+Checkpoint22.10: Goal active; base/branch/worktree и primary preservation установлены. GitHub protection config read403 integration; не обходить gates, native protected merge после checks. Metadata inventory PASS:104folders/456files,31new/425unchanged/0missing, pagination complete;31new readable captures saved privately, scanned article recovered as4page PDF and visually reviewed (article pages163–167, preceding-page references excluded). Source content review ещё IN_PROGRESS, metadata/capture не означает approval. Found F156: module labels restricted1–6, new verified module7 requires extension with same validation/identity/privacy gates. Следующий шаг — source classifications/fragments, new topic content и complete review batches; literal source text/private dossiers только ignored storage.
+
+Checkpoint реализации22.10: contract slice module7 готов — source→public labels→runtime navigation принимает положительные номера модулей, malformed/zero IDs отклоняет;12 targeted label tests PASS. По коду0/16AC Goal полностью закрыто: новый контент/source reviews и остальные контуры ещё в работе. Fresh inventory/data captures сохранены приватно; signed/receipt approval ещё не выдавались. Для scanned Хованский article сохранён original PDF SHAaea2a4d60479a5ca155e5e7caf39eee3eacd813d1ba3a5401cc102e98411c54b, просмотрены4скана, article163–167, preceding162не относится к библиографии курса; blank последняя страница. Статья — рефлексивный разбор, не универсальное основание клинических правил. Следующий шаг — private source classifications и точные фрагменты, публикация первых КПТ/супервизия items с неизменёнными gates, затем полный content review и литература.
+
+### Finding F-156 / IN_PROGRESS
+
+Module-label validation rejects verified new module7 (app/curriculum.py and scripts/validate_topics.py, positive1–6 bounds). AC-FND-01/QUIZ-10; P2, confidence HIGH. IMPLEMENT positive course module IDs without hardcoded upper bound; malformed/zero IDs remain invalid; source-backed classification and signed/receipt publication unchanged. Regression for new module source→labels→navigation and invalid IDs required.
+
+## Previous Goal — AUDIT-FINDINGS-20261022 / COMPLETE
+
+Первичные records: PR361/34bd642, CI39752407223/CD39753193062 PASS; necessary hotfix PR362/9dca747, CI39755277045/CD39756170084 PASS. Исходные16findings обработаны,4/4affected AC;2FA accepted risk, DNSSEC active. Backend34bd642/PWA+Worker9dca747; primary preserved, own branches/worktree cleaned. F154 Pillow/FastEmbed compatibility candidate DEFER отдельно. Нижеследующий checkpoint сохранён как история до merge, не текущая незавершённая работа.
+
+## Historical checkpoint — AUDIT-FINDINGS-20261022
 
 Necessary hotfix F-155 / IN_PROGRESS22.10: PR361 merged34bd642 после явного подтверждения владельцем merge/поставки; PR CI39747613920 PASS, main CI39752407223 и CD39753193062 PASS: backend/PWA34bd642, HTTP/runtime/backup/privacy gates подтверждены09:13UTC. Worker уже активировал версиюba1a9a4c09:03UTC, а прежний backend отвечает404 на новый catalog-compact до штатного CD. Это подтверждённый mixed-version compatibility gap F-150, не второй основной PR. Owned hotfix branch codex/fix-miniapp-catalog-rollout от34bd642; primary dirty checkout и чужой main/broken worktrees сохраняются. Исправление: authenticated legacy items fallback при404 или read-only network/CORS failure нового endpoint;401/500 и actor transitions fail closed. Одна резервная GET-попытка с тем же Telegram proof, без повторов записей. Старый endpoint/IDs/states не менять. DoD: targeted fallback/access/actor tests, оба client builds/generated parity, required CI/review и normal protected hotfix merge, applicable delivery после завершения PR361. Не отменять исправляющую backend поставку, не обходить CI и не менять2FA. Повторная поставка не запускается ради статуса. По коду4/4AC основной Goal; closure всех findings и runtime gates ещё PENDING.
 

@@ -68,3 +68,27 @@ def test_public_labels_cannot_rename_existing_topics_or_reassign_editions():
     with pytest.raises(ValueError, match="Conflicting curriculum topic label"):
         merge_public_labels(catalog, labels)
     assert catalog == before
+
+
+@pytest.mark.parametrize("number", [7, 10])
+def test_new_course_module_exports_source_backed_labels_without_rewriting_history(number):
+    catalog, private, registry, snapshot = fixture()
+    source = registry["sources"][0]
+    source["corpus_path"] = f"Модуль {number}/Lecture"
+    snapshot["paths"][source["id"]] = [[f"Модуль {number}", "Lecture"]]
+    before = deepcopy(catalog)
+    labels = project_labels(catalog, private, registry, snapshot)
+    result = merge_public_labels(catalog, labels)
+    assert result["disciplines"]["development"]["module"] == f"module{number}"
+    assert result["disciplines"]["development"]["modules"] == [f"module{number}"]
+    assert result["editions"] == before["editions"]
+    assert "source" not in labels["topics"]["t_123456789abc"]
+
+
+@pytest.mark.parametrize("module", ["module0", "module01", "module-1", "module7extra"])
+def test_positive_course_module_extension_keeps_malformed_labels_invalid(module):
+    values = fixture()
+    labels = project_labels(*values)
+    labels["disciplines"]["development"].update(module=module, modules=[module])
+    with pytest.raises(ValueError, match="Invalid curriculum discipline label"):
+        merge_public_labels(values[0], labels)

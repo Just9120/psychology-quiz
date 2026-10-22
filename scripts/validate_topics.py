@@ -132,7 +132,7 @@ def validate() -> list[str]:
         if "modules" in topic:
             modules = topic["modules"]
             if (not isinstance(modules, list) or not modules
-                    or any(not isinstance(value, str) or re.fullmatch(r"module[1-6]", value) is None for value in modules)
+                    or any(not isinstance(value, str) or re.fullmatch(r"module[1-9][0-9]*", value) is None for value in modules)
                     or len(set(modules)) != len(modules) or topic.get("module") not in modules):
                 errors.append(f"{label}: modules must contain unique course modules including the primary module")
 

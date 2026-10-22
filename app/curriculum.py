@@ -60,9 +60,9 @@ def merge_public_labels(catalog, document):
                 or not isinstance(item, dict) or set(item) != {"title", "module", "modules"}
                 or not isinstance(item["title"], str) or not item["title"].strip()
                 or (item["module"] is not None and
-                    (not isinstance(item["module"], str) or re.fullmatch(r"module[1-6]", item["module"]) is None))
+                    (not isinstance(item["module"], str) or re.fullmatch(r"module[1-9][0-9]*", item["module"]) is None))
                 or not isinstance(item["modules"], list)
-                or any(not isinstance(value, str) or re.fullmatch(r"module[1-6]", value) is None for value in item["modules"])
+                or any(not isinstance(value, str) or re.fullmatch(r"module[1-9][0-9]*", value) is None for value in item["modules"])
                 or len(set(item["modules"])) != len(item["modules"])
                 or item["module"] != (item["modules"][0] if len(item["modules"]) == 1 else None)):
             raise ValueError("Invalid curriculum discipline label")
