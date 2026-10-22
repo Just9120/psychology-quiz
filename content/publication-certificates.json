@@ -1639,10 +1639,10 @@
     },
     "questions:case_cbt_abc_interpretation_001": {
       "schema_version": 1,
-      "item_sha256": "23338d131238e60e064a01e4f3d5605bdf49eb10df86b2abb10d16f09a8a5b9e",
-      "review_sha256": "c867a3deb6616b7192c5620abe5dc4a39f5ee57fb64bd8d78645381d26896384",
+      "item_sha256": "c73cd3272ad63ce37613c73cc1730c91f8f06e5766feff5d24a183ce53290ebe",
+      "review_sha256": "e8c39a5230be7519c690f4c3c86dba85e59ab2c0318fd48edd612a96297e7a22",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "A6c+clRF/tCZ9xRYzdKUY0Sbu0u8l4E0B+r+6hHL1YeNN06FlMJ2x1YUzDaQ4KRm5vqoJXSEtuos65T0ie4RBw=="
+      "signature": "YFvRLez4azR29jWFj6fbtN6OWUX504e11GdXxIUrj/GjzHpp6QaUXnlklmBgvuakXSDMrEEwN1WsjY3gMDK8AA=="
     },
     "questions:case_cbt_emotion_and_evaluation_001": {
       "schema_version": 1,

@@ -22040,6 +22040,72 @@
       "issues": [],
       "note": "New termination-of-signal operation, absent from reviewed serving questions in this discipline. OpenStax12.5 transmitter elimination/reuptake paragraphs read separately; course transmitter/receptor definition supplies local topic. No pharmacological advice or universal removal mechanism. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
       "sources": []
+    },
+    "questions:cbt_abc_separation": {
+      "item_sha256": "0410dcf6600ff4d39dcf6652ea68227fbfc9dcb5ba668abf42390b2692ed468a",
+      "discipline_id": "cognitive_behavioral_therapy",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "unconfirmed",
+      "issues": [
+        "Inactive retired edition: no new publication approval sought. Exact prior approved body/private certificate retained separately for historical evidence; not current publication eligibility."
+      ],
+      "note": "RETIRE semantic duplicate of case_cbt_abc_interpretation_001. Both classify B in a workplace episode with the same event/interpretation/emotion/behaviour alternatives; context change alone does not add an objective. Full prior item and retained case reviewed; stable ID and immutable editions preserved. Current inactive edition is not represented as source-supported approval.",
+      "sources": [],
+      "disposition": "retire"
+    },
+    "questions:cbt_experiment_function": {
+      "item_sha256": "4768ed32c6df83b5116bea3b7f76aca9dda1e687e7c77043cce193301828daff",
+      "discipline_id": "cognitive_behavioral_therapy",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "unconfirmed",
+      "issues": [
+        "Inactive retired edition: no new publication approval sought. Exact prior approved body/private certificate retained separately for historical evidence; not current publication eligibility."
+      ],
+      "note": "RETIRE semantic duplicate of case_cbt_behavioral_test_001. Both distinguish an actual request/observed response from discussion/preparation; no extra learning objective in the flat item. Full prior item and retained case reviewed; stable ID and immutable editions preserved. Current inactive edition is not represented as source-supported approval.",
+      "sources": [],
+      "disposition": "retire"
+    },
+    "questions:cbt_activation_principle": {
+      "item_sha256": "dedfe9bcd07674c6cebe1100dd0221de6a9a2ed17369b75ed8fc4ea7474c5418",
+      "discipline_id": "cognitive_behavioral_therapy",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "unconfirmed",
+      "issues": [
+        "Inactive retired edition: no new publication approval sought. Exact prior approved body/private certificate retained separately for historical evidence; not current publication eligibility."
+      ],
+      "note": "RETIRE semantic duplicate of case_cbt_gradual_activation_001. Both select gradual meaningful feasible activity; retain authored leisure case with plausible adjacent alternatives. Full prior item and retained case reviewed; stable ID and immutable editions preserved. Current inactive edition is not represented as source-supported approval.",
+      "sources": [],
+      "disposition": "retire"
     }
   }
 }

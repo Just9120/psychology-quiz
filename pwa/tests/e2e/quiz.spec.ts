@@ -905,7 +905,7 @@ test('canonical new topics and ABC homework work with durable case feedback', as
   const card = page.locator('.homework-card').filter({ has: page.getByRole('heading', { name: 'ABC-разбор и дневник наблюдений', exact: true }) })
   await expect(card).toContainText('не подтверждает выполнение самонаблюдения')
   await card.getByRole('button', { name: 'Начать тест · 5 вопросов', exact: true }).click()
-  const choices = [0, 1, 1, 0, 3] // One wrong answer, then four correct in this single attempt.
+  const choices = [1, 1, 1, 0, 3] // One wrong answer, then four correct in this single attempt.
   for (let index = 0; index < choices.length; index++) {
     if (index === 4) {
       await expect(page.locator('.question-heading')).toContainText('Клиент записал в дневнике')

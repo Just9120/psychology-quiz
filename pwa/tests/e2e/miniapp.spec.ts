@@ -421,7 +421,7 @@ test('canonical new bank reaches Mini App topics and structured homework cases',
   await navigateMini(page, 'Домашние задания')
   const card = page.locator('.homework-card').filter({ has: page.getByRole('heading', { name: 'ABC-разбор и дневник наблюдений', exact: true }) })
   await card.getByRole('button', { name: 'Начать тест · 5 вопросов', exact: true }).click()
-  const choices = [0, 1, 1, 0, 3]
+  const choices = [1, 1, 1, 0, 3]
   for (let index = 0; index < choices.length; index++) {
     if (index === 4) {
       await expect(page.locator('.question-heading')).toContainText('Клиент записал в дневнике')

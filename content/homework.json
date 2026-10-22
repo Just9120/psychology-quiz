@@ -670,7 +670,7 @@
       "topic_id": "t_b7c2c2b3b5e0",
       "description": "Подготовительный тест по различению события, интерпретации, эмоций и поведения. Он проверяет понимание ABC-разбора и дневника; не подтверждает выполнение самонаблюдения, обсуждение случая в группе или проведение консультации.",
       "question_ids": [
-        "cbt_abc_separation",
+        "case_cbt_abc_interpretation_001",
         "cbt_model_components",
         "cbt_thought_record_fields",
         "cbt_automatic_specificity",
