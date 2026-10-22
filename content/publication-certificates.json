@@ -1653,17 +1653,17 @@
     },
     "questions:case_cbt_conditional_rule_001": {
       "schema_version": 1,
-      "item_sha256": "df29de5afbfd455b1aedc968da7d02413f439dbe438e285196238e175638aaf3",
-      "review_sha256": "20224c256cf2c3e03262c71a8a89947215d5f7b318ab29a9cee5cf1cf535fae2",
+      "item_sha256": "9afce7ed92ed3e3069335f66d1b22b135a12d4c150c9b2869a5ab80f876b7b37",
+      "review_sha256": "c59b83ed7a3d7d3b76906e3029d2457c66ea063a19132738f321e6c13c561aed",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "M+nOB9cIFqCFEVjHR/PCg0hApkK3yBTTloWDTVRBCAd9s7ID3ybpAAP+gbgZMcsKI/ICnlDWQyo+JOHtqz57CQ=="
+      "signature": "bY1RRZ8X1GWM/OVVdzM79FFxMQsOm4GWo7dN1thdDpksUI/327IUGQY8zWCkCLIdd+eIgVnyvNbuJm7Ita7vAw=="
     },
     "questions:case_cbt_core_belief_001": {
       "schema_version": 1,
-      "item_sha256": "0fc736ee7de4aceefe6ab7a7b61d1fe5c0599d7730235e0060e62ac5d411c37e",
-      "review_sha256": "2e720ba58a936b6e577914adb314385e7afcdf70469a34ad4b37f427af775d17",
+      "item_sha256": "6ec38135729dd06fcd738f3179399f4155052af183963b954aa86db17c32c96f",
+      "review_sha256": "550b724caf59ac069c9c26eab212b1caef9a75e04fef9b0c681a095c542fe588",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "hON/7HzbSxEIiH67TiPuduiB6lyCiBGdGxhaPFhllIps9qqqsd47kbQ/03XfydHHoVWMr22bIUMpp9gQJPZ5BQ=="
+      "signature": "bDiY9pGYiITFEc3ZvFj66qI7NVIisRyPtKRWUJLFBB43sFHW3QNyTnVE65XQvG1eNKcWqny3mlIMGJwFFYCwCw=="
     },
     "questions:case_cbt_diary_action_001": {
       "schema_version": 1,
@@ -1674,24 +1674,24 @@
     },
     "questions:case_cbt_socratic_alternatives_001": {
       "schema_version": 1,
-      "item_sha256": "4b971af774290bae235bdbf38f7207fd0b5e95cd9b9aa777b3235e1b06b8c94d",
-      "review_sha256": "06e32c437b1fccb4a608195556c55e582219338f6c30a9625541e42bc49d8beb",
+      "item_sha256": "2fe9a01f174e1e54743568eb3d6867d978b90f92ee96d4d5cce9701a4e12791d",
+      "review_sha256": "341d10919f9315517c98e6e6a0729b41775618635db5af792716912a078c1e4c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "1e3j53oX50oKd/D+MHezw6VGx3p6i2BLk42STR4gCXpcKhpLsXgOgep29Tmw6Xv8mHyjKX2tuw8rOAREIJsGAw=="
+      "signature": "Ryn4wwQuc7nnN2ch6shIWFmemzTrNiF6vloesoChoTW5MM/wB3XQZQw7ndyE7kCe+dslk9dmVlpxI+rVVbqXBA=="
     },
     "questions:case_cbt_behavioral_test_001": {
       "schema_version": 1,
-      "item_sha256": "5ba4eee9563a404b738d1af19e17390b5024b22cfd1a70448777730ca5490c82",
-      "review_sha256": "d762f20a6a05b90e2e3bc6f377059094555aaeadca737c23043ffa5a21b6094e",
+      "item_sha256": "a5540907dc4fd9b7364ac77c24c498a4c89a6338cecb752c82f166dfa1463870",
+      "review_sha256": "7a001807ed6f78bbd0ec7dea3abad098970a55525b7ac7c4ad7dea5ee398763f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "V1vBWgdVeQIgRUrs7JNBSCeDMo8Iqcuvr4kWROZbZdbVm7arPYMKLPYZXHBw0zUvMIf77q263ZKOP1FB8Gc3Bg=="
+      "signature": "bd7HH0RfJTNxf0zUtHG5iIhET19LxMCasZSiVeef1CgfJVa86tNw+nYmRsnTZepmv8k/o5fAdMbBO2ZegLpxCQ=="
     },
     "questions:case_cbt_gradual_activation_001": {
       "schema_version": 1,
-      "item_sha256": "34b7f4005fe7e919b7ec238224f4881d30210d42aa3f6bddaecc5b1cd67e6308",
-      "review_sha256": "049b6080a0c5efb25d4edf5faa16e972b65f259ee6fcaeab6343fbae0fc5f0a8",
+      "item_sha256": "9777779cbb3512d56660469140b20f08b1360ba405b6285c0b1dff8d7d19a1e7",
+      "review_sha256": "5e280420d6d0dc40243a552c58d9a5ac0658b2676c493f8cfe84d322c7bc3ce1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "gShcLHt/NWPH1otCKzuI8g4kECRTxQLACB6zmCcyD02TOBZjiNmmb/6BCBbNPzJ0NcuiAGcMp8Vf5CTP8tp1Cg=="
+      "signature": "crpNQYGWAXgUvavq66ikt57W4GqFJGM1OcQdM/TPvVEE/QPNd2fakeJMP0JMnPhdNbYnSxEHvBdlBHCV2fZBDQ=="
     },
     "questions:case_first_consultation_001": {
       "schema_version": 1,
@@ -1786,10 +1786,10 @@
     },
     "questions:case_cbt_exposure_plan_001": {
       "schema_version": 1,
-      "item_sha256": "6a238d29e5b6fdde6c4c6b7ca48138671a151efd18f8e26250c96a302ced08a4",
-      "review_sha256": "2c9345ee95fe66229c7443449d219abd05dca46283d762c96858c50670bd00b4",
+      "item_sha256": "7dbfb9babf7b416871bf45ccc9cdf70bddff3bb816dd34e151fe09bae97a4dcd",
+      "review_sha256": "e4c0e0be17a655eff2dc5d4d50a10d1b813e273f5e3d2ee4af5c625521aecc09",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "hvO6TxeoyK7ZthRb6vdL9MgG85QM26w2rKzVguD2xCE4woRR4kzo0dqQ8/240okYk1hzEc5duEY8pvLk2EvqDA=="
+      "signature": "SxseZz5m45fKQizB///NPaH1Bxr8liBVdnuPrxvDcyrTH1cb4pPvnRDOF9Ymi0lH+SK5pVok7wqzM7WOeHFJDg=="
     },
     "questions:case_cbt_arrow_meaning_001": {
       "schema_version": 1,
@@ -1800,17 +1800,17 @@
     },
     "questions:case_cbt_triad_future_001": {
       "schema_version": 1,
-      "item_sha256": "5e2dc25f994d4057632e1364a5c45163c2c864839beac3dfa852fc4f16fbda0f",
-      "review_sha256": "e3f16ecedfcf98e6c47081eeb0ec49d9215f839f51ec1f590ef7233d187266c9",
+      "item_sha256": "9b3e2616f67934c2d151cf433cf7374908e7cb8f501b66f07cea7c19b9ea6b78",
+      "review_sha256": "75aecd766b5b5f6deacf55e1bdcbe52b7433cf96d71e3bccfbd926ef3feb18d1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "MD697RebmIfZTIklFFT9QghsPkhPg972sY2CqSZzDhbqBcQOsm8QMY7z7DIpPWTlcqucXmYKeIivp4a/yfNkDA=="
+      "signature": "5d5SiOtrlLVL1fzZgDJZbGSdfyXTabE3+OJdvwa8K2uausD4KSR2C1rOIs4H79SMuD+Tl1BdkEE75gSTZxk/Cg=="
     },
     "questions:case_cbt_alliance_collaboration_001": {
       "schema_version": 1,
-      "item_sha256": "b68e0bf3944563df485b06119f73eba0505cdf6a9b59c3c543d51dd60b1b0ce7",
-      "review_sha256": "6211b6dcae2a36e1ba7dda3942988666a57766259411225cd2eed64af675b8f2",
+      "item_sha256": "a83017b82cc74c8fe8768ce90eec463a92650491b26d551951a4d875a585494f",
+      "review_sha256": "1af2aaef3c91dccd166cfbe67b4a98b65a917d938bf915835b305aab85c776fa",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "DfovPsozGodHr9Pdoci/c0dfGO/eBZlwLso9/DxXtwx9j+k7AT0aXZcZy3NrxNEWZyzchClEmmyazW7VfIbHDw=="
+      "signature": "4Vl7ftoOcA9dtQ7PS2YJ5kfBSPDKv+80FzAr0dwSGlod7nvy5ZGJuxegKC9Phvq0jdjTKdcdqrZbbQDTTIYUBw=="
     },
     "questions:case_supervision_question_001": {
       "schema_version": 1,
