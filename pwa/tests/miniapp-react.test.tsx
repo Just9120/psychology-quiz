@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, expect, test, vi } from 'vitest'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MiniApp } from '../src/miniapp/MiniApp'
-import { miniRequest } from '../src/miniapp/api'
+import { miniApi, miniRequest } from '../src/miniapp/api'
 import { chooseMenu } from './choose-menu'
 import userEvent from '@testing-library/user-event'
 
@@ -116,6 +116,25 @@ test('an actor change during a request rejects the old response', async () => {
   window.Telegram!.WebApp!.initData = 'another-actor'
   resolve(reply({ ok: true, works: [] }))
   await expect(request).rejects.toMatchObject({ status: 401 })
+})
+
+test.each([404, 401, 500])('catalog rolling delivery handles HTTP %s without bypassing auth or server failures', async status => {
+  const calls: string[] = []
+  const items = [{ id: 'legacy-one', topic_id: 'intro', work_id: 'one', title: 'Прежний каталог', user_state: { reading_status: 'read', progress_percent: null } }]
+  vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL, options?: RequestInit) => {
+    const path = new URL(String(input)).pathname
+    calls.push(path)
+    expect((options?.headers as Record<string, string>).Authorization).toBe('tma verified-test-payload')
+    if (path.endsWith('/catalog-compact')) return new Response(status === 404 ? '<h1>Not Found</h1>' : JSON.stringify({ ok: false, error: 'unavailable' }), { status })
+    return reply({ ok: true, literature_items: items })
+  }))
+  if (status === 404) {
+    expect((await miniApi.literatureItems()).literature_items).toEqual(items)
+    expect(calls).toEqual(['/miniapp/literature/catalog-compact', '/miniapp/literature/items'])
+  } else {
+    await expect(miniApi.literatureItems()).rejects.toMatchObject({ status })
+    expect(calls).toEqual(['/miniapp/literature/catalog-compact'])
+  }
 })
 
 test('catalog cache follows the actor, saves shared-work marks without refetch and recovers uncertain writes', async () => {
