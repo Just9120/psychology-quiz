@@ -244,3 +244,48 @@ def test_revised_assignment_and_repeated_seed_preserve_finished_and_active_attem
         current_ids = next(item['question_ids'] for item in current_catalog if item['id'] == 'professional_diary')
         assert selected == set(current_ids) and selected.isdisjoint(earlier_ids)
         assert _entry(conn, actor, 'professional_diary')['completed']
+
+
+def test_cbt_preparation_homework_keeps_structured_case_and_single_attempt_credit(tmp_path):
+    from app.attempt_content import get_attempt_content
+    from app.quiz_runner import get_current_question_snapshot
+
+    path = tmp_path / "cbt-case-homework.sqlite3"
+    actor, other = _bank(path)
+    with closing(get_connection(str(path))) as conn, conn:
+        started = start_homework(conn, actor_user_id=actor, assignment_id="cbt_abc_observation",
+                                 payload={"replace_active": False})
+        sid = int(started["runner_state"]["session"]["session_id"])
+        rows = conn.execute("""SELECT q.id,q.external_id FROM quiz_session_questions sq
+            JOIN questions q ON q.id=sq.question_id WHERE sq.session_id=? ORDER BY sq.order_index""",
+                            (sid,)).fetchall()
+        assert len(rows) == 5 and rows[-1]["external_id"] == "case_cbt_diary_action_001"
+        for row in rows[:-1]:
+            right = conn.execute("SELECT option_index FROM question_options WHERE question_id=? AND is_correct=1",
+                                 (row["id"],)).fetchone()[0]
+            assert answer_quiz(conn, actor_user_id=actor, session_id=sid, question_id=row["id"],
+                               selected_option_index=right)["submission_status"] == "accepted"
+        qid = int(rows[-1]["id"])
+        captured = get_attempt_content(conn, sid, qid)
+        assert captured["kind"] == "case"
+        assert len(captured["case"]["option_rationales"]) == 4
+        shown = get_current_question_snapshot(conn, actor_user_id=actor, session_id=sid)
+        assert captured["case"]["situation"] in shown.question_text
+        assert not _entry(conn, actor, "cbt_abc_observation")["completed"]
+        bank = [q for source in Path("content/questions").rglob("*.json")
+                for q in json.loads(source.read_text(encoding="utf-8")) if q["status"] == "approved"]
+        upsert_approved_questions(conn, bank, authoritative=True)
+        upsert_approved_questions(conn, bank, authoritative=True)
+        assert get_attempt_content(conn, sid, qid) == captured
+        wrong = next(o["option_index"] for o in captured["options"] if not o["is_correct"])
+        result = answer_quiz(conn, actor_user_id=actor, session_id=sid, question_id=qid,
+                             selected_option_index=wrong)
+        assert result["submission_status"] == "accepted"
+        outcome = outcome_for_session(conn, actor_user_id=actor, session_id=sid)
+        assert outcome["passed"] and outcome["attempt_finished"]
+        assert _entry(conn, actor, "cbt_abc_observation")["best_score"] == 4
+        assert not _entry(conn, actor, "first_consultation")["completed"]
+        assert outcome_for_session(conn, actor_user_id=other, session_id=sid) is None
+    with closing(get_connection(str(path))) as conn:
+        assert _entry(conn, actor, "cbt_abc_observation")["completed"]
+        assert not _entry(conn, other, "cbt_abc_observation")["completed"]

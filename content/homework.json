@@ -661,6 +661,21 @@
         "supervision_reflection_client_perspective",
         "supervision_reflection_transfer_to_practice"
       ]
+    },
+    {
+      "id": "cbt_abc_observation",
+      "title": "ABC-разбор и дневник наблюдений",
+      "module": "Модуль 7",
+      "discipline_id": "cognitive_behavioral_therapy",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "description": "Подготовительный тест по различению события, интерпретации, эмоций и поведения. Он проверяет понимание ABC-разбора и дневника; не подтверждает выполнение самонаблюдения, обсуждение случая в группе или проведение консультации.",
+      "question_ids": [
+        "cbt_abc_separation",
+        "cbt_model_components",
+        "cbt_thought_record_fields",
+        "cbt_automatic_specificity",
+        "case_cbt_diary_action_001"
+      ]
     }
   ]
 }
