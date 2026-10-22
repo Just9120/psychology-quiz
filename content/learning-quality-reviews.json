@@ -45,10 +45,10 @@
   },
   "items": {
     "questions:m1_intro_001": {
-      "item_sha256": "1e509fe067ac81ec75a9faf3a16d5cf208498acd7638f8eaab17f89af3e131af",
+      "item_sha256": "34ad2d8c50acde83d68d0d0c4538f2fa9fa24954244e6e16bb0d2bc0b98564f8",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -60,7 +60,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "FIX: Role support distinguished from three plausible ways to substitute the consultant's judgment; removed unrelated profession distractors. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -68,13 +68,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:3209:3572;characters:4084:4920"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_002": {
       "item_sha256": "0e8e82f793288b6fa61abe4168f28b72e527068149de87ed461ef1fa851b87da",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -86,7 +87,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Medical qualification and prescribing, not setting/age/length, distinguish the roles. Replaced implausible distractors with errors about methods and authority; does not certify jurisdictional eligibility. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP: Qualification distinction explicit in exact course passage; no claim that psychiatrists do not use conversation. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -94,13 +95,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:2294:2515"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_003": {
       "item_sha256": "d5ac7e8c8929ca102b2ba49e0fb2dd8f2c7d49e68388434eb80de1c4f453de30",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -112,7 +114,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Author-created formulations apply the directly read supportive role/client responsibility passage; other requests are not rejected as people, but require reformulation rather than promised control or certification. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP: Different starting requests distinguish own inquiry from controlling others or outsourcing choice; explanation allows clarification. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -120,13 +122,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:3209:3572"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_004": {
-      "item_sha256": "858433af7c370fb160b275848d3f0c62ec0fe950cacb7e53640870fbd28c768c",
+      "item_sha256": "b87080c84b28239373302a204b47d3b1ab230cab8ea946d0f68fcafb20e8f015",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -138,7 +141,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "FIX: Replaced absolute secrecy/friends/technical-ban caricatures; no new legal exception asserted. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -146,13 +149,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:15359:15457"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_005": {
-      "item_sha256": "8481c31125d2b4550be386a8e9d9bff3f259ceb37eca56034c272fd4d81109c8",
+      "item_sha256": "64889d471ec0aefefb89b1c94a303ca8d860607744da65222c4fbf67c2df07c5",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -164,7 +168,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "FIX: Discriminates role boundary from personal distance/preferences without blanket dual-role claims. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -172,13 +176,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:2300:2789"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_006": {
-      "item_sha256": "020b8c54f719f4f5a2b02ae2a214f4f39e2e8cc910b6239f81039d44687899b9",
+      "item_sha256": "35679d470793fdd1ba6226f1d2a36cc12b5e672b057fd2cae7ee2d740f2da9f9",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -190,7 +195,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "FIX: Applied comprehension vs signature, timing and deferred explanation; no formal legal requirement inferred. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -198,13 +203,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:5734:6157;characters:15359:15457"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_007": {
-      "item_sha256": "d06dcb169e43d32cf96acc54f795a91c38f970b6ac66a5a9ac11480ab0e91bbf",
+      "item_sha256": "134719e8207d1756caa321e3ed3e43ecf0cdbcda28c913018307e4fcfb87542d",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -216,14 +222,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "note": "REPLACE: Replaced empathy slogan duplicate with preparation/self-regulation objective; assignment identity retained. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "replace"
     },
     "questions:m1_intro_008": {
-      "item_sha256": "a264ca2da288b0e30515123d98be5632f8df9f7dfab094a85c7098a3b6be8f71",
+      "item_sha256": "29430131eb56dd845c5e6250b90da77483fb1d05d06c9977ead068dc52f624fd",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -235,7 +242,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "FIX: Distinguishes information from prescriptive control rather than asking why all advice is bad. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -243,13 +250,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:13411:13946"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_009": {
-      "item_sha256": "5c30021ab35a0b27f6ed9ad628203049cc2e1e7169b3ad2950a1346eba5e5e63",
+      "item_sha256": "33b7252c00a2c187b931e347e89c96c9d56473b4d9dc90cdb9f4201bed984977",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -259,16 +267,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "Withdrawn from new delivery for semantic redundancy. Earlier private publication certificate remains evidence only for the immutable historical active edition."
+      ],
+      "note": "RETIRE: Near-duplicate of empathy item010: same definition, same contrast and no additional learning task. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "retire"
     },
     "questions:m1_intro_010": {
-      "item_sha256": "265982d6f756864dd6379bf2ea568c36c032dc49a57876979b5f28af6f818ce1",
+      "item_sha256": "283769d6466bcf610df1e70f9d7bb318d93621a7768e9039458767019207ba47",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -280,14 +291,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "note": "FIX: Four comparable emotion-understanding alternatives; distinct from preparation item007. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_011": {
-      "item_sha256": "65ed064e311ab276327c6659805a0a0379cfdd5aaeb74fc5cea62ed54db1c7a0",
+      "item_sha256": "87f10055ba139a81d708b0fd8f825d7817378a9aa5d185e287434ce838e9fc07",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -299,14 +311,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Active listening as paraphrase, tentative emotion reflection and client clarification. No mind reading or infallible emotion/deception inference. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Behavioral listening task; alternatives are legitimate other tasks but not the requested accuracy check. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_012": {
-      "item_sha256": "4f2114f3b74aceb18d9888e16cce6ef833afd589c3a861a1409d05540bbc3bcd",
+      "item_sha256": "82da7125d949cb2f54449ca94f5b6135f7d07074f47644887f21134716da7b1e",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -318,7 +331,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "FIX: Replaced superiority/domination caricatures with plausible scheduling choices; no complete alliance model claim. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -326,13 +339,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:2300:2789;characters:7893:8479"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_013": {
       "item_sha256": "b28674421c56e6a4bb8ebf2262533bdb4305da6c7ebec46d5157f0052645dec8",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -344,7 +358,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "KEEP: Referral/competence condition already checked in prior exact edition and professional-scope evidence; no automatic referral for silence or disagreement. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -352,13 +366,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:2294:2515;characters:3209:3572"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_014": {
       "item_sha256": "29f1f3ad99796f40a523df6b26065e58825dbd3436176374394d544e8246b04c",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -370,7 +385,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact introductory role passage plus ACA2014 C.2.a/C.2.b read. Contrast transfer of experience, instruction-only practice and supervision as an automatic substitute; no universal licensing claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP: Task-specific preparation contrasted with borrowed competence, an instruction and supervision; no blanket ban on new learning. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -378,13 +393,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:3209:3572"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_015": {
-      "item_sha256": "2694de04e74cfac6b909f175db199d833db9b1ad19ee88612952ad44254c6d0b",
+      "item_sha256": "2c43b08f582e1a1b58c5bc53aebb3da552d11061409b1e71c349e3b701daea4b",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -396,14 +412,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Supervision is professional reflective support, not a legal condition or replacement of education. Course preparation paragraph supports its role in sustaining practice; separate BACP primary definition and supervision60/61 support reflection/quality/client safety. No guaranteed outcome, statutory rule or country-specific requirement. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
-      "sources": []
+      "note": "FIX: Replaced education replacement/mandatory rights caricatures with discrimination among support functions. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_016": {
-      "item_sha256": "1054cc563210eb7607b04e44e6e7820e33dab60488c186cda0723e4db9a1853f",
+      "item_sha256": "05c00b83680d39ac54852fe18da6479773f63a7504f6858d9e4423aeb160fa17",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -415,7 +432,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "FIX: Specific responsibility objective; plausible confidence/preference/borrowed-experience errors replace miracles. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -423,13 +440,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:4038:4429;characters:5734:6157"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_017": {
-      "item_sha256": "1a4099bc1e97e95eafd7937411a705ede6aa1ff507e0487877b4078ffdbff8c1",
+      "item_sha256": "013c8a24069bdd7cc674fda9eb2cae93a268d57a04eaa9d6a57875c543c5b864",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -441,14 +459,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Course first contact, role clarification, client questions and active listening support a respectful frame. This is not a full consent/crisis/confidentiality protocol; emotional empathy does not require fusion with the client feelings. No universal session script. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
-      "sources": []
+      "note": "FIX: Introduces purpose-specific first-meeting choices, not obviously hostile behavior. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_018": {
       "item_sha256": "8996cb11fe30e247b1dc6323dda7979c0ef2fba6b74f84ff53c897a9a0ef9118",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -460,14 +479,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read exact request/expectation/goal fragments. Each alternative confuses initial complaint, typical plan or unilateral agenda with jointly clarified focus. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP: Clarification purpose and shared goal are explicit; not a fixed universal session plan. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "keep"
     },
     "questions:m1_intro_019": {
-      "item_sha256": "001ef37e109b5f1cee47c18d8999b1eee25727881db8cc0c7b073cf73aeef825",
+      "item_sha256": "41af8c58558e4f9352d62c984143e13859cf685eba36ea366a39b60c1578005a",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -479,7 +499,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "FIX: Preserves homework theory item; no directive/goal-avoidance caricatures. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -487,13 +507,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:4084:4920;characters:13411:13946"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_020": {
-      "item_sha256": "68de193e34fb944f72a5027c5f5b3234988f20c020db3f43453dedbb78cd11e5",
+      "item_sha256": "43c208110e246251f2d8e754b781505de8d8258b0084b1c7753610a8b30aaa58",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -505,14 +526,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read clients willingness to invest, joint work and client own subsequent steps; explanation now attributes cooperation to this course model. No claim that every durable change requires the same client activity or that technique guarantees outcome. Exact private receipt and topic binding verified; legacy broad/description references retained only in private history.",
-      "sources": []
+      "note": "FIX: Differentiates allocation of roles; no attribution of all unsuccessful outcomes to client. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_021": {
-      "item_sha256": "cbf4c5e4f3a5676f05b863e48471e1791da9a1f2019d0b9c97eca298bf658ae1",
+      "item_sha256": "5dccbfe7789495874c0a55261a7ffc96d5ac4c7e78974988f6bfee7b1f0f0fad",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -524,14 +546,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Open questions clarify a initially vague request. Own illustration not inferred hidden trauma and not refusal because the request is initially unclear. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Single initial step with sufficient ordinary-consultation context; removed hidden-trauma and life-advice cues. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_022": {
       "item_sha256": "907f3b3a68d0d07431c4a513b56a7266f32b33f0d21cfbaf01ada587148ac29b",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -543,7 +566,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read exact autonomy/responsibility and psychoeducation passages. Fictional first response; no blanket prohibition of every form of self-disclosure or advice. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP: Client asks for personal advice; response elicits criteria, distinct from theoretical autonomy item019 and information item008. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -551,7 +574,8 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:4084:4920;characters:13411:13946"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_023": {
       "item_sha256": "f1d77bdddc8d9e82be40c983eee75a78faa594c73ca08a0599b5dc1b47a70dda",
@@ -584,8 +608,8 @@
     "questions:m1_intro_024": {
       "item_sha256": "2d9dd6265828d40d33752ebcd4bc0044f15c24fe8de3f5a6c811e7782d8eb912",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -597,7 +621,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Changed unsupported out-of-hours detail to an ordinary scheduled-session illustration within the directly read time-boundary/previously agreed exceptions fragment. No crisis instructions; same stable ID and separate stored editions preserve history. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP: No urgent threat and no agreed extension specify boundary task; exceptions discussed without automatic flexibility. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -605,13 +629,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:7893:8479"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_025": {
-      "item_sha256": "b16793e99f049423969da31d59fe08f340e219974c3f65b5e5139f497b9fd43e",
+      "item_sha256": "805e9b542930ab44e9db0ecd066bef51f3f0760174631a5c533a1f2e706f9ed2",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -623,14 +648,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "note": "FIX: Plausible intellectualization/avoidance alternatives; no overt coercion. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_026": {
-      "item_sha256": "787b5afc4ad48c33920f76ca23b05cbebf6b93367fff38ff0211e5e93bef1c89",
+      "item_sha256": "5f2e9fadce666717c8616056afb655e03fab7942fee8d5355e8989b87081206f",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -642,7 +668,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "RETIRE: Near-duplicate of autonomy application022; no independent decision beyond asking about client criteria. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -650,13 +676,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:4084:4920;characters:13411:13946"
         }
-      ]
+      ],
+      "disposition": "retire"
     },
     "questions:m1_intro_027": {
-      "item_sha256": "6c5c3578e645d2fb9deb84d1a7b291b2a6d57214ed9c84648429ab17de956e46",
+      "item_sha256": "513aba117e4fc1628fa7025bb8d25596baf3e9064d9ded3e5048296f1e749284",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -668,7 +695,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "RETIRE: Near-duplicate of task-specific competence014 and referral013; same decision without a new discriminating objective. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -676,13 +703,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:3209:3572"
         }
-      ]
+      ],
+      "disposition": "retire"
     },
     "questions:m1_intro_028": {
-      "item_sha256": "76dd5dff4e7522d18a3c10316d7e0b5fe976a707ebe22631a7c705ab7f73312e",
+      "item_sha256": "4aeac30c905915e66d3338372f180424b27f62a09c4073a9e8c87540b5f21235",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -692,16 +720,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Question now concerns difficulty formulating a request; it is not a rule to replace crisis assessment or stabilization of acute danger with ordinary conversation structuring. Course supports attentive questions to clarify the focus. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "Withdrawn from new delivery for semantic redundancy. Earlier private publication certificate remains evidence only for the immutable historical active edition."
+      ],
+      "note": "RETIRE: Near-duplicate of first-step unclear-request item021; replacement already supplies sufficient conditions. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "retire"
     },
     "questions:m1_intro_029": {
-      "item_sha256": "337b8de934ea54bf6cdadd6eda4b5db2bc792aeb54300e9aee2aa5743e708ae3",
+      "item_sha256": "d29c319ff1c829fccee10e7e534b3d5343a39817a51b4911588e86abfb98efe1",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -713,14 +744,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Acceptance and respect for client experience, not a guarantee of openness, therapeutic change or endorsement of every factual belief. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Comparable supportive-sounding responses, with context-specific explanation of errors. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_030": {
-      "item_sha256": "5ede2767a88c6a2c8e9b971f776e166da44a264dd63f12d182d5aad35d51c867",
+      "item_sha256": "bc1e94025a42ebb3d6332832d577ecf32f97897e209731725e76fcdd196adba7",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -732,7 +764,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "RETIRE: General approving slogan overlaps responsibility016 and professional-frame049 without an additional discriminating task. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -740,7 +772,8 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:2300:2789;characters:5734:6157"
         }
-      ]
+      ],
+      "disposition": "retire"
     },
     "questions:m1-q3": {
       "item_sha256": "255fa12870b28df3fb2d92c55cdc3b2954bd2f3e9ad91f2e6933f33b8be0c944",
@@ -828,10 +861,10 @@
       ]
     },
     "questions:m1_intro_033": {
-      "item_sha256": "eab00d2875a287e45d3ca402e925096b1882205ff701f80579fda93edf340481",
+      "item_sha256": "40e061c1ccf8cb278961bee5967f74b0d53639bc6cb40a5ed8e07b6d8afdccc0",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -843,14 +876,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Checking own understanding of client words and situation before interpreting. Source contextual example is a teaching illustration, not evidence of a universal cause. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Concrete context clarification distinguishes inquiry from presuppositions; diary/listening homework identities retained. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_034": {
       "item_sha256": "6b668d645fae30f2e98834a2575d01438f89f438fa83bb108409de90a147549a",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -862,7 +896,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "KEEP: Ordinary requested sharing with another professional requires clarifying scope and consent; no universal legal exception taught. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -870,13 +904,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:5734:6157;characters:15359:15457"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_035": {
       "item_sha256": "cf5be720221b0e4735f2c981b3623e439db20a788c1b157a6c374e123e295113",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -888,7 +923,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read empathic as-if/client meaning excerpt. Replaced insults with plausible premature interpretation, dismissive normalization and prescription; no efficacy guarantee. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP: Comparable phrased responses distinguish validation from untested interpretation, normalization-as-dismissal and promise. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
@@ -896,13 +931,14 @@
           "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
           "locator": "characters:5877:6313"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_036": {
-      "item_sha256": "9156ff6cc962d39fbad3e5560a61349a30a373eea80038791c3f81e44b2546ca",
+      "item_sha256": "6f2a9c8d8430cbcab739f57b73dd0c8b6d85fdcbe03761edfef4116c69b31d2f",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -914,7 +950,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "RETIRE: Reverse-key restatement of the no-guarantee principle; application041 now contrasts conditional promises. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -922,13 +958,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:5734:6157"
         }
-      ]
+      ],
+      "disposition": "retire"
     },
     "questions:m1_intro_037": {
-      "item_sha256": "2cb3abd4809f9cdfc3d7f45fd42d293c74a1eac78a0ef9ef638388522a38e71f",
+      "item_sha256": "d7040c53ea619886b51832ebd699d43e6a536190c68ee2ced2630e176e4c5e57",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -940,7 +977,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course passages confirm supportive role/client choice and the medical qualification of psychiatrist. Competence/referral items _013/_014/_027/_037 rely additionally on directly read ACA2014 C.2.a/A.11.a; course alone does not establish detailed competence rules. Held healthy-only scope, categorical boundary termination and unconditional qualification promise remain excluded. Applied examples are teaching illustrations; no service/legal eligibility determination.",
+      "note": "RETIRE: Combines the same role/referral decision already tested by001/013/014; no distinct source-backed objective. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -948,13 +985,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:2294:2515;characters:3209:3572"
         }
-      ]
+      ],
+      "disposition": "retire"
     },
     "questions:m1_intro_038": {
-      "item_sha256": "09bb60eb17aac5562e52b63744126efc6b2dc26b59f3d6d549864640e551b7c9",
+      "item_sha256": "f84913add09ce82f26ec7f0300b8caddb9fdcf67ea3a03c8c32eb9ab317088a4",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -966,8 +1004,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Clarify manifestations and working goals instead of premature diagnostic labelling. No diagnosis or treatment entitlement inferred from the course. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Explores expectation of certainty rather than repeating unclear-request item021. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_039": {
       "item_sha256": "da810154763028d9b70f18ebe871a114dad62c5fe0e1c59f3c7f04c324946fef",
@@ -1026,10 +1065,10 @@
       ]
     },
     "questions:m1_intro_041": {
-      "item_sha256": "c720b4749b2e0aca9277ff7470208639c5bff7ffea87690bc56b2b2b39ebc64d",
+      "item_sha256": "9b4b257cedf2eb831d370ed68621638fe9a2bb9c06a740122f6720a9860d6097",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -1041,7 +1080,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "FIX: All alternatives are plausible conditional promises, no impossible-change/abrupt-termination caricatures. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -1049,13 +1088,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:5734:6157"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_042": {
-      "item_sha256": "6d80e1cb6ddd802135507df24d8fbe8b4fa5caa959245e791ca76fe84c3dc191",
+      "item_sha256": "d50e4f821b57515cdd0dcfafb38c985793add036a4c4d4429324b35a032d86c2",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -1065,10 +1105,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Explicit tentative reflection and question to verify emotion/meaning with client. Neither infer emotion as certain nor override client refusal. Both independent held issues remain unchanged. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "Withdrawn from new delivery for semantic redundancy. Earlier private publication certificate remains evidence only for the immutable historical active edition."
+      ],
+      "note": "RETIRE: Near-duplicate of accuracy-check listening011; no independent source-supported task. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "retire"
     },
     "questions:m1_intro_043": {
       "item_sha256": "3fcca96a44d52ae2ec599ec3135fdb901417e0f9b9ec22ed835c24eeba4f9f54",
@@ -1099,10 +1142,10 @@
       ]
     },
     "questions:m1_intro_044": {
-      "item_sha256": "12841949b4693ac3f30db447d8403dca01e3670244206d4d286f2e0149fe1683",
+      "item_sha256": "9e4e170d9e15e54b90e50303660d90be6365fdfd78bfda3b3a23b6a229c3d7d0",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -1114,8 +1157,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Client own perspective and attainable agreed focus. External referral is not proof of passivity, and work is not imposed on the client. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Preserves external-referral motivation objective without coercive or automatic-refusal distractors. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_045": {
       "item_sha256": "c37690fb232fc7d34427674b41d6ef68da92dc2424fadd7d8f3858b61490b6f6",
@@ -1146,10 +1190,10 @@
       ]
     },
     "questions:m1_intro_046": {
-      "item_sha256": "2bff26a9b68632ae42bbcafed56db878fb6af14f46f8d9b3b7f24371fd3a3f83",
+      "item_sha256": "1f564b84078b0099a29ca3c46534261664f5324f8b3711e66b7d0d80ca87c522",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -1161,7 +1205,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course passages on distinct roles, informed agreement, limits of help, method familiarity and agreed time/confidentiality boundaries. ACA2014 corroborates competence and specifically the ordinary consent-based history-transfer example; no universal legal/service claim. All three current source holds preserved, including overbroad dual-relationship bans, unqualified mandatory disclosure and mislabelled out-of-hours confidentiality. Applied situations are educational examples, not quoted course cases.",
+      "note": "FIX: Applied informed participation rather than another generic autonomy slogan. Current full wording/options/key/explanation checked; previous source holds retained.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -1169,13 +1213,14 @@
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
           "locator": "characters:2300:2789;characters:5734:6157"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_047": {
-      "item_sha256": "042c8af28f22fce6245f776cf819f68552af59f6b167230aad1486a158ed468d",
+      "item_sha256": "4b2a146775c4fc6c00aaff2120c157b3ef6e6e2357bb1e67aa62cda0ef0d70fc",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -1187,14 +1232,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed empathy without losing the as-if boundary, professional boundaries and reflexivity. Cases are hypothetical applications, not transcript participant cases or efficacy guarantees. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "note": "REPLACE: Replaced rescue-impulse duplicate of item025 with support-function distinction explicitly present in course. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "replace"
     },
     "questions:m1_intro_048": {
-      "item_sha256": "0826abf3513e4c6838a629ba5fb697a1562629da7cfad859697a77a8f32267ea",
+      "item_sha256": "01aaf4f5d7fec2097a460516f4d6febbd7a37631fbe9f429165311e261c20134",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -1206,14 +1252,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Joking is not proof of resistance or its cause. Tentative inquiry about avoidance and a next step only with client willingness; no pressure to overcome refusal and no guaranteed effectiveness. Course describes empathy and exploring possible barriers, not a scientifically fixed client type. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "note": "FIX: Sufficient conditions remove inferred avoidance label; no pressure to overcome resistance. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_049": {
-      "item_sha256": "e5f320de51be34c6c66cef8d9fc9a4c058b78e44c3444783d4747718d924ec4d",
+      "item_sha256": "ebfe73501cfe889f8e4d4a4258bc3954c8fa74ff14745157a25ba8fb3a3f50ac",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "answer",
@@ -1225,8 +1272,9 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Reviewed professional versus friendly interaction and responsibilities; all held healing, incidence and psychotherapy-regulation claims excluded. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "note": "FIX: True neighboring features of friendship are contrasted with the defining professional frame; no hostile alternatives. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "sources": [],
+      "disposition": "fix"
     },
     "questions:m1_intro_050": {
       "item_sha256": "16dd3d499b4cd8555d682a9f4210fe6e1542784a89a38c2d75260152bc63640b",
@@ -1399,8 +1447,8 @@
     "glossary:psychologist_consultant_role": {
       "item_sha256": "f2cb07a7d835d541b9f7c2abcf5bb0adfd5e65845a0668334966eeaa95223a46",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1412,7 +1460,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Немедикаментозная консультативная работа показана вымышленным примером, без универсальных утверждений о лицензировании или психотерапии.",
+      "note": "KEEP: Support for exploring experience/choice distinct from medical qualification; example does not promise an outcome. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -1420,13 +1468,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:3301:3940"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:psychiatrist_difference": {
       "item_sha256": "aef9ec9333506b43f59659c2fee4a8694ff477fd30534a868fbad4887dead167",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1438,7 +1487,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Пример различает медицинскую и консультативную роль, не ставит диагноз и не назначает препарат. Проверено точное описание психиатра, вне held psychotherapy fragment.",
+      "note": "KEEP: Medical qualification and medication role match named introductory course passage and prior review; no prescribing guidance or eligibility advice. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -1446,13 +1495,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:2294:2610"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:consulting_request_topics": {
       "item_sha256": "940ad4f501d2e21e68a807dea374a127e03be4ef0c88823663f3fb0aa173420a",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1464,7 +1514,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Пример иллюстрирует жизненный и профессиональный запрос, без определения пригодности конкретного человека к консультированию по одному описанию.",
+      "note": "KEEP: Examples describe typical concerns, not an exhaustive healthy-only eligibility rule; distinct from agreed working focus. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -1472,13 +1522,14 @@
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
           "locator": "characters:3301:3650"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:confidentiality": {
-      "item_sha256": "36b2e0d1a8383e9e3fad71c6d2b5ac383f5020146933bfbed198ceb2e461e229",
+      "item_sha256": "c52fcf8e9df7815729f71bbd94ab0ef054373667bacf23a634c9c22c2c94dbba",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1490,7 +1541,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Removed fictional label from independently authored storage/privacy illustration; no specific legal exception added. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -1498,13 +1549,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:8485:8779"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:professional_boundary": {
-      "item_sha256": "5757c6821def57324f16e68ceb7ca9ea1ef975b04952275dac9d337983910d59",
+      "item_sha256": "77356af5b274b159a8d934697a995be7162891d1bb1a6c82a3400f0b37c7366b",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1516,7 +1568,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Removed fictional label; clarified role frame rather than claiming boundaries mechanically prevent every role conflict. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -1524,13 +1576,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:2855:3037"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:informed_consent": {
-      "item_sha256": "37104547b1f5f3ea95005dd3f666af3f3215fd17e39af2c6dc33634afb950948",
+      "item_sha256": "7287d994d1820fe73f83e7339250df3757641fc7418934acf25606ce5b93e793",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1542,7 +1595,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Removed fictional label; voluntary decision after understandable explanation retained, no signature-only assertion. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -1550,13 +1603,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:2227:2398"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:professional_position": {
-      "item_sha256": "f942b7cdd6dd2579a9d132e0b129e0f60db452787dd8927656989788bfee8790",
+      "item_sha256": "a3c9558b8dcd17665e6de8874cb54d004e5d075efb769ad099dadf7c97c4dda3",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1568,7 +1622,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Removed fictional label and distinguished professional role/ethics/goals from empathy, listening and client-centered attention. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -1576,13 +1630,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:8485:8779"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:client_autonomy": {
-      "item_sha256": "6ee682f708be970ff70e9e76dc3bb7ffc8a3bfa1bebebae31e66df43a928b2e1",
+      "item_sha256": "7ef51aacc8dad1c6f488d7f59b33627d7075cce38e32b276b6f331d676c78437",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1594,7 +1649,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Removed fictional label; distinction between informational support and substituting a choice remains explicit. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -1602,13 +1657,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:8485:8779"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:client_centeredness": {
       "item_sha256": "9c090e3cbc22ac86b713f35efe862998bf77a97442b63756c7fa0b7d3567bf2f",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1620,7 +1676,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Пример опирается на точное описание субъективного мира клиента и профессиональных границ в processed лекции. Не обещает гарантированной эффективности и не заменяет автономию клиента готовым советом.",
+      "note": "KEEP: Focus on subjective meaning is explicit; does not claim complete coverage of a named therapeutic school, and differs from who makes the choice. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
@@ -1628,13 +1684,14 @@
           "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
           "locator": "characters:5877:6773"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "glossary:empathy": {
-      "item_sha256": "85ca7a03648b6ec75aec8d42df68ea6a9820590759067a82576b48836a81bb13",
+      "item_sha256": "5b4a232debd4415de00dfc5463662919cb4673277eff0fbd1582bae4fcc1679d",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1646,7 +1703,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Removed fictional label; retained understanding-as-if and checking with the client, not guessing or emotional fusion. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -1654,13 +1711,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:8781:8975"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:active_listening": {
-      "item_sha256": "e507da3485a6717641828983c727025b701100b1c1de3f2943aeafb905b81bee",
+      "item_sha256": "61e5269200e14d72d8ec54872506a7188c315cf797145169692ba1d20bc85b10",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261022",
+      "reviewed_at": "2026-10-22",
       "checks": [
         "meaning",
         "definition",
@@ -1672,7 +1730,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Самостоятельный авторский вымышленный пример иллюстрирует действующее определение, сопоставленное с точной строкой первичного словаря. Это не цитата, не обещание эффективности, не диагноз, не правило законодательства и не оценка скрытых мотивов. Пример отличается от остальных по учебному признаку; ID и история сохраняются.",
+      "note": "FIX: Removed fictional label; example shows paraphrase/correction as a listening action, distinct from empathy stance. Complete current term/definitions/examples/confusion links checked.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -1680,7 +1738,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:0:255"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "glossary:working_alliance": {
       "item_sha256": "90705821751e39307705e14cbb005df832d09449081c1c0d2087fb477b5fb872",

@@ -7,16 +7,7 @@
       "question_ids": [
         "m1_intro_008",
         "m1_intro_019",
-        "m1_intro_022",
-        "m1_intro_026"
-      ]
-    },
-    {
-      "discipline_id": "vvedenie_v_professiyu",
-      "question_ids": [
-        "m1_intro_013",
-        "m1_intro_027",
-        "m1_intro_037"
+        "m1_intro_022"
       ]
     },
     {
@@ -24,13 +15,6 @@
       "question_ids": [
         "m1_intro_021",
         "m1_intro_044"
-      ]
-    },
-    {
-      "discipline_id": "vvedenie_v_professiyu",
-      "question_ids": [
-        "m1_intro_036",
-        "m1_intro_041"
       ]
     },
     {
