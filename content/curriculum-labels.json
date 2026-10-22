@@ -142,6 +142,20 @@
       "title": "Точка поворота. 5 шагов",
       "module": null,
       "modules": []
+    },
+    "cognitive_behavioral_therapy": {
+      "title": "Когнитивно-поведенческая терапия",
+      "module": "module7",
+      "modules": [
+        "module7"
+      ]
+    },
+    "counseling_supervision": {
+      "title": "Супервизия психологического консультирования",
+      "module": "module6",
+      "modules": [
+        "module6"
+      ]
     }
   },
   "topics": {
@@ -648,6 +662,14 @@
     "t_fded5a914d5a": {
       "title": "Психология горя и утраты. Часть 2",
       "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_b7c2c2b3b5e0": {
+      "title": "Базовые понятия и когнитивная модель",
+      "discipline_id": "cognitive_behavioral_therapy"
+    },
+    "t_5dd8e85bda51": {
+      "title": "Коллегиальная поддержка и профессиональные роли",
+      "discipline_id": "counseling_supervision"
     }
   }
 }

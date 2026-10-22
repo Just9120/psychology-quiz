@@ -45,24 +45,24 @@
     },
     "questions:case_goal_method_001": {
       "schema_version": 1,
-      "item_sha256": "470d5f35f5f80dda78c5181e6f5dca34a64a71716c112b407cb90bc076feac6b",
-      "review_sha256": "1349f5d5798ac6e89e05cad8d0eddc214038c2d3222685c60c5a2f6e4fea964e",
+      "item_sha256": "e3d13b3b7f85b30d1cabfac6566fa577d9290acc1eee0364bd811b8b933795bc",
+      "review_sha256": "4f6a59625b73078f06ebd780e164935ce564037df8660b0631725889c7aad170",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "6ejRuXgdd2iqMLEvox8Se9WaGLqTm9LCk5YaAlyKsTl3p6bnRV6E5HrTlOH2rfgCU064tVB/uL0wD4q+0AAmCw=="
+      "signature": "yoG1oZNXKOP0qcUttbOaP2qujH784aQk3wssj0P/UrL21s5edTKAP5A4Do/shMiehJQNNruyX+Gn/BUYkv/3Bg=="
     },
     "questions:case_ambivalence_001": {
       "schema_version": 1,
-      "item_sha256": "ba42a15478557366e58ea6c456c76446374c09fa875b2511cbcf9397be1c87a4",
-      "review_sha256": "72301497a4aa1c19ecae6364908811df8756fd6304f3a8fc95f9225c7cade93c",
+      "item_sha256": "79021b17992acc1b7c265fc240e047a2cf0d13508b9cfb540d9d7482f2f54eba",
+      "review_sha256": "0f5cf694c3bd7fb8c3c7341e4f0816f5c200732c987033f04a74ad8e3bf566dc",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "sPEGy5ncV/ykclapp4YjREWOuHWpz0DMvGVYbaFyeZWS38f9Yhtb+rVmMGb2GEaB0zlIh9lLvcvZjc7hRZYmAg=="
+      "signature": "JgVB2L0nKUGijL+7N98wWhjRlCwvKuxcfuZ8BRHyCjwkS/2hDo5vflgIGnRnN4ZVM4RCzT+NHNwuhSj4Umq9CQ=="
     },
     "questions:case_ending_plan_001": {
       "schema_version": 1,
-      "item_sha256": "b5e7db31d2a1589bc81c2513dfc6774bccfd16ca6968b1518574950061bc87a7",
-      "review_sha256": "17075b2db8f497cfdecfe2a572476a7f1d2033438430ae173e17ef848c3ab5de",
+      "item_sha256": "8e406684bcbb01874148cdbb6666d8fc9a0bca474f86452193c2a4d488b12540",
+      "review_sha256": "dbc5e8bd6e9a42bd8bab88eaed8359df1b99bff29a5b2ce696fab2350bed8c79",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "JKG0q/gQU3KIq34Sl6AUHXk9XNxDFcwbcI4B+noJTiIi4lyb0I8kkPxDEgC2xsyCcNA7wFN3TrpmHynp+s2lCA=="
+      "signature": "Ps4u2zfF7RRB863qgr2D5GykJjXkDwZUQHhU1MHFlSH89SA1qkpH3TdPWrUlDcoErOBka1jP4dnQKb73DIf+CQ=="
     },
     "glossary:neuron": {
       "schema_version": 1,
@@ -1388,6 +1388,527 @@
       "review_sha256": "e7b6074664e340eb67f5838571fdda085c3713210a7c92fa6339c7fcef52efdc",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "mFw14MMO1y31Z+ZuWTG+RdzggBBQ+sf2JcFREHhJWADnJqCXEVE5CAoLEsZLo8gVR4T8gl3gMxScNqSDXbYZAw=="
+    },
+    "glossary:cbt_cognitions": {
+      "schema_version": 1,
+      "item_sha256": "e32a5d14d48e8c02abe12ff9097f67c5e1775199cdb075bb24455d9d238ae6ec",
+      "review_sha256": "5a625e3e639f7e86ab34e5ce2dd2a586d3e0bae1addd2f591177127539e30a89",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "w9dzv+qFnVysZV2Y7nOWUvo5qWVIsANKjGLuDsChYUXyxHkDEXAy3yQNcROI46wMdJar8FT8KxsU8Bn337X4Ag=="
+    },
+    "glossary:cbt_cognitive_model": {
+      "schema_version": 1,
+      "item_sha256": "b7b12536f928311bd96aaa7a220e671f91632383f642cf2f01e60467d90eab3b",
+      "review_sha256": "c9ccfa467545cb6cfe161c3b526c1552fc2ee34aeda78598462d0a27ae00553c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "b4I6KF2gsfCPKxC7nXliz1enZjnxES54hNWd97ozM+s/ShzpxOml1Dm6Z+r9v5npKh6h9wK6jyP6/kAkQ9caCA=="
+    },
+    "glossary:cbt_abc_model": {
+      "schema_version": 1,
+      "item_sha256": "acc55af359c8bc5f8f76242ae6067b1ac6ec0a02e16ec127148d79ddd02b8c17",
+      "review_sha256": "9c447dd2f38ae1a6cffa4b00f0c3257c5cd46bb7f7ba234da8a28df11d0f2cff",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ZDoDIvldrFQSd6UyyXMIZF4YCgi1wJfVvaGXst2XmyXvCJ23nNMP6AqHkyDX0K1CtDQbfoK6sehwltZCIe7DDQ=="
+    },
+    "glossary:cbt_automatic_thoughts": {
+      "schema_version": 1,
+      "item_sha256": "708728b6469d9a1581e82d918878152a1657c73a4e848f5cf3308e6c06769c84",
+      "review_sha256": "4c8362f3f368a7412f753c2b7a0444966b84ab7a753100de7386e0a6b341d17f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "M5NrB7x/s3emLWe1uKjDhy+1ctQRkKfYUVdTSz/a973Qz/GB143WXNn8zsOeru+9ks6JTF77KUBPaczTDcmTDg=="
+    },
+    "glossary:cbt_intermediate_beliefs": {
+      "schema_version": 1,
+      "item_sha256": "d51c90892335e8ddf461979ddea998a28acdc44f2aca0f59b0e269fa628df6fc",
+      "review_sha256": "5fb4bde1399a7f6424dd061de090ebda341077a9655a483736c1df9d9336c292",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "jXtQGOnsNr1Kt6xxK73WdFV7MTBwTSlh1P4oXi4GvhRIW/EVwbbqC1vI/jIK32RXtGaCzhwMkOnUZL+WW33LBg=="
+    },
+    "glossary:cbt_core_beliefs": {
+      "schema_version": 1,
+      "item_sha256": "d5c636e1234227965d4c864cdf4785c0c2d25d40bad80035e1a17a0c6100c350",
+      "review_sha256": "8f5bac54b0491cbfa74c79ac46d5e793973ee01e37955f24187c2ec40abad381",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "oF9mRSHc7zaJyyQSHxAG/43lGvevZR84ABY9huyrUuqKIp3lE08MIEtUUnGgGT/s67KRdI2pDsnlZpXqVR+lBw=="
+    },
+    "glossary:cbt_cognitive_distortions": {
+      "schema_version": 1,
+      "item_sha256": "7de80ee88520e3b8a7c56d06cd55147d11d33ed1c26d65900ecb711ea7ce3799",
+      "review_sha256": "cf6039c30b34d84cf0048e681cec641027e01b91610b2bb9cbbd78cde28d4f3b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1rXKlYfxYddPT1texYJeptmayJqC5UFz5YgokBFq+1I6lXRSdPs5/DN+nAzViM2kLJiwMnMXMTHADhnx4g+RDg=="
+    },
+    "glossary:cbt_depressive_triad": {
+      "schema_version": 1,
+      "item_sha256": "198c8f3b3d614ae72fe6b164aedd0773eee1cf133f99ad38d3451356f109a773",
+      "review_sha256": "f50b2ddada8bee3d4062c04385cd6d61c957015520542d4ce1be7ce36f6d81ec",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "CgWtQfZcp9Gg6H50YYCFebPB0w+L2piD25W32PVfuWj2ccLvtB+UzzK1BspGtfaqP/H6HM53qpD+ij5Ol4+jAw=="
+    },
+    "glossary:cbt_thought_record": {
+      "schema_version": 1,
+      "item_sha256": "2555d234087ad5a629e918368ac36396b8f75e70e703d9f4546a33e14165d66f",
+      "review_sha256": "becc51c25e9217b2f1abf09b2ae51b7142e6781f48c3eaeb4f0ad735cdff4e94",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "WNd7AY+vLx+8mgPOzQLrP+9b4To4eOXf+DjBdPq5oH18nb3zR+L4TSMJQO2baljGIhCuQCqGhpIJARcItKHkAQ=="
+    },
+    "glossary:cbt_cognitive_restructuring": {
+      "schema_version": 1,
+      "item_sha256": "469400ac2f846b9cfc1a02c4ee94f8a0a906763c2dcc08169fca4519e37a3cdc",
+      "review_sha256": "0300ee3c726311e68078641be364aaa5f90d6d5822e1f911386a50c5cb46eb16",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "qwnZfnf9waEYi8lt0TBlQ7sS+28lqTQU8SC6MOAsOFwIUR85fm53LUPrZ+uyRAD0JFmKnPzlqvNofsUMaYXxBg=="
+    },
+    "glossary:cbt_socratic_dialogue": {
+      "schema_version": 1,
+      "item_sha256": "3581b177fbb091d65504584b346e4ee560ca047e29a1b5a4bf5a2bd732ac83df",
+      "review_sha256": "a59ef2ff529cc78ba735d33aa55ccae37beade930a5a14986f299f7e892a617b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "/7gG3JhSH+TQghXRgeNW2x/g7JlRY7L2O/J/T5NHwf+iZfcbwQMMDpelqYTzNQ/Z2JaDRjLMungysGEzfgmeBA=="
+    },
+    "glossary:cbt_downward_arrow": {
+      "schema_version": 1,
+      "item_sha256": "fa009b16121aa6da66c839b5d8bda4c944b88df3823e2ab8bf025e438b6884c5",
+      "review_sha256": "03c3960d3b29a79d7f01bfd0ef8d801f0b60f3e977b440e7b617866f07200e03",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "OW0leregEdB5muhKAZv+LGKPhpRqLgBX4paQahG3Gd36r93uPPjXe/fvDA+FQsfRkNKsZcQUH/8vwjgBgfeADQ=="
+    },
+    "glossary:cbt_behavioral_activation": {
+      "schema_version": 1,
+      "item_sha256": "e5c7102f163460285f4983d86efa795b98fdb0d4289bac5ca9af834609dc8705",
+      "review_sha256": "9143d757cdb4f351a39b3e74e07fec15008ec4024823ec23c87a4f6a05859e00",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "gP31HZaerAK3jpTm9Badbf2HjitBbqFO6ok18crm/liMiLdF1iC4ef4JNJ1ZassKG9SEZn2BFUcMPTi8l6A6Dw=="
+    },
+    "glossary:cbt_behavioral_experiment": {
+      "schema_version": 1,
+      "item_sha256": "98ce771a13b3cc8b9404389ebe63b7bedd2a32ee6462eb3f9b64960232e72528",
+      "review_sha256": "3b85d08dbcb87504f6d1be416ce03ae64e5fa9390330b3a70c04d0de4d5fd1b2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "orhjdVY5TIrkh952JYWPNREkH/JHEs1eG+xdfejgePTu5IUNQ4LrroBkMt8FPrY7Zqgf2n8xX/vrRO43R+7WCQ=="
+    },
+    "glossary:cbt_exposure": {
+      "schema_version": 1,
+      "item_sha256": "28899be0b658d7476bc0c4ed34185be15a65461b5eafea3dacd69afa7f863f0b",
+      "review_sha256": "498c9d030101783b5efa795d14a1ca064166df70581fd34e7cbb25027a0e10f5",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0DyUAAsiRql9k0bbuj6HYPWcjHzHDp5Z/jKjRlIn6tvakYXUn/5MHKf3+QlQZ4YmGWGggi5zPdtagtpmnnOdCA=="
+    },
+    "glossary:cbt_working_alliance": {
+      "schema_version": 1,
+      "item_sha256": "a621dc44d4e0ad4268790fb5a2cd913c4db13baf9a3309ffbd021d24462faa30",
+      "review_sha256": "bd0e48aeaa2533781378cf32992738976ae4407113019ea7a8388a8201970c9c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "4Fa82uOYSGb70auqUtKMdxR8gbJPfXL5MWeRYMHHZ56yqheNVpL4dwWODkKOUjctGTzez7lrZFkh4WxfBZAQCg=="
+    },
+    "questions:cbt_abc_separation": {
+      "schema_version": 2,
+      "item_sha256": "98479659ed5096c37d7e25332ac46a9613cc30ffd9027ccb2c5510bc86bc3e1e",
+      "review_sha256": "74743b0a034d8e8925c376a977c42e93811b2253ea22a26580961182a6a04412",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "NtP8X/eKPXEmQwZNsq7o+TDv6TOyxK3wC+VFl+12Fc3DdSE9sJNhI7c1sFunYG/xeJxaKcbjcT/dLWBqZNmCDw==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_model_components": {
+      "schema_version": 2,
+      "item_sha256": "04f55b7afe822c83149888c52a7f5b1ee97bd10791e45140eff2a28c3710802a",
+      "review_sha256": "a923acf357b31a44ce122b4c688f81c9a1a631f6ae5e682613ccf86592e43303",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "q5kRuA8C9kRtxc5hSNU6JPvPR3h0zu8iXCvpAK8ldTBWIKL33TiARYfwZxQ13DpNSYIHyrUxeSlpijtioCbCCw==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_belief_levels": {
+      "schema_version": 2,
+      "item_sha256": "d279d2cb7d5e06501d3d5c341a26dc45f26cba68eabaa1825ca271eb0816cfe6",
+      "review_sha256": "b05850d4476094bcf130f8fc98b68970dd68631d825a25c95f33ecb3abba1343",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "H8Nnr5EuxUpjCVXRMg1NNz2j4W/1R4U0ziYGy9WEQIQOstWHOQ45kT7/2XX6ciLsjuErhsRm2VZdZdnavBWDDw==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_thought_record_fields": {
+      "schema_version": 2,
+      "item_sha256": "30e94c4376263813b3ed081d33267dcee4524d3f69c1f1d2587ec9ae3699a438",
+      "review_sha256": "746a562c969f04af65b3e5a3dd78f663ab0b53effb5b2038c8ec22aecd98ee4f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JkQiqctYxKpcO3+zPcF+OLOZkiVQSPeBSKb2fJCT8yPRXuWv8Np7uIMaOKN4nOUmiaH+ymiBpyZ35xkQCoB6Bw==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_restructuring_evaluation": {
+      "schema_version": 2,
+      "item_sha256": "139059101db75c551d7b69a9370fe901c26180ace6c714b8b83c273ac350f487",
+      "review_sha256": "1108f018ed2dc467e0bed8b76e0fbabd4a3291d5bb4c947f1d89ad56208b8a8a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "VxUM2Ly9a8cM3kkt18Z5MPBsZ3gA/PWQZiJ3UfLC4SmOn8VdCz3CQZnB62yoFpZEn+QjQ7hdTFX8j5S1dBrlAg==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_socratic_inquiry": {
+      "schema_version": 2,
+      "item_sha256": "69e8545aac8e6f67ca93b57d43a0ff27a6879c2d3bd6ddbdc690b6b035612cea",
+      "review_sha256": "f9945cf9fd36ca21f78a5a31fcec066902f8dba945ce0b7ab3bec6b51a18fa20",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "g9yUOIXcFlpyZpQ8+mZ1pPmvmruUyCMoPTfHlYVPayDeIlaOnZpCacDtubaJYEpR+K7jdbsIV/VLHlpUXg+YAQ==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_experiment_function": {
+      "schema_version": 2,
+      "item_sha256": "586170ea5e22cdd6165486c36a18d6c50d45adf278810916f28128f12b7b832e",
+      "review_sha256": "fce97d930f9bbc54dffb271902e9d08510ca7a0537130b05715859804277c685",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Di/Sx6So/ajT1gd9a5VeRpJrsDskol0N+Csm3xGKjLJ91poTnk52d+28pgbdxVA8SJ8F05eFAicSSzvJ4WB/CQ==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_activation_principle": {
+      "schema_version": 2,
+      "item_sha256": "0aefc62515e127c036145507c0687e516d13c6276124b8ce30ffc6350013623d",
+      "review_sha256": "9f1717f3313801c9e22f97caac9bf0e7a6ee1c0ab68308407649510db8525737",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "n4DsvtucIecQogZHTD5Qh1Wz+Vr5GgPz4XptNn+ArUXLVkaY8mFibrhvMZRgxJOrJED0jOJ7Fa7U0Nfgks7SDA==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_arrow_function": {
+      "schema_version": 2,
+      "item_sha256": "9d77f6289a899ceea98723fda20c94f05016f2fad3429ab6244367fd6027db44",
+      "review_sha256": "5a831f599dba91ae2f6e8af27c8c4dd4c57bb9198190e3869f789bbe6cd8a612",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "tWhRGLAXM9Tr7UbAKE5J4yaCZ6yEKaXDqgBLlwCFVV4D10hzM1HgmuJ0oZ+0Lc8nhMtB2/q3lAEAUzC+4UfhDQ==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_exposure_hierarchy": {
+      "schema_version": 2,
+      "item_sha256": "174dd01c89533e78cc93c91e2e59b2b0f7138f2db892822f8aea2865c3c8f7c2",
+      "review_sha256": "f42758c5b06ca700f947a72c2f288d9228837dc9b5d25565868432ea1ba8b04a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "urao0kbjlSWE/W8sb0LSbCtI1SmFlFkRr+m/+Z5ZL74OvnaADDCkwZvCb+3KM13eyf9TJjqW0O6yGWk85ryEDg==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_automatic_specificity": {
+      "schema_version": 2,
+      "item_sha256": "856984c026e9d80fb26602bcc726562642ec08646ff40f8d211e7feb3a0a7698",
+      "review_sha256": "597fa1ebaccbffa0c6e75c4f81c1f69da44790e9e537d6999ebcc79062499e7d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Cc1ghHCGavtLm7shn+JBb2GWWGTGcyKogCRsj2pMmMPwi0D8aODlrJNs+NVulpg+d2o0Sg9F5/nZybbPVk9VBw==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:cbt_alliance_work": {
+      "schema_version": 2,
+      "item_sha256": "6ab22a0a5807a365cad7a300cd881862fa7c535f1281b3bf46c0beb793e80a9b",
+      "review_sha256": "9c6e1c063819c0364cd20ca7a7208617d3ab4cfe4142db5483e21abbcf8c8853",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "t0m10BomQmHaUiejKU796azdIsBc3/NIe3ICypW9MVpUXqCGlOLD8/FAxNCDmvEz3D5ybAAw2Rmk9c9aFfAmAQ==",
+      "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "questions:supervision_role_clarity": {
+      "schema_version": 2,
+      "item_sha256": "b05c16a7d89f466e5477a256cfd19e358c95fb33049a4d77f335247b4693e73a",
+      "review_sha256": "01f719a01f237cac702717d0f2d9126e1eaab3fbf37495fc1fb63a7b1fa85842",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "FHMH9imvKcJYgn2SW8Di7rjtG42VKDkuSW9iOs6ZGDmUm/y6wSmUqL06BIJKQ6djicLO2xm5shWrzeKrnoD4AQ==",
+      "topic_id": "t_5dd8e85bda51"
+    },
+    "questions:supervision_peer_support": {
+      "schema_version": 2,
+      "item_sha256": "97aedb46873d6503a508b027da999bf5d92e1f7a3cd7cc965c268ab5e7dcc5eb",
+      "review_sha256": "658e72aafbc202d7acedd6e6d42c8cab13ddcbf7ec8183e76c9e98ca0f982327",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "CjmhOlzf8d0WuWCFD13XpULB7l/ZzTKN8Z/mieUQgrUljxM/2jhb0VwIhvMKyAOMbhPX55+zDO8ZPW/UdxyqCQ==",
+      "topic_id": "t_5dd8e85bda51"
+    },
+    "questions:supervision_support_task": {
+      "schema_version": 2,
+      "item_sha256": "ab66829e126a18c792b6d99fafb4069f93ba30d9eae8716b1a53f6c850bb3615",
+      "review_sha256": "8e450f15d2d1badbd158626dade002fa56a02ae0cc204f73e535a23265aa6d0e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "wUcNZ/RnObfxdypztAPcENy1eNgFCvoA0/bKbRkH9kfRtW6Am1cFUhZeZRpr3LdA5nyQUjcFGEq74QPRPwpvDA==",
+      "topic_id": "t_5dd8e85bda51"
+    },
+    "questions:supervision_three_processes": {
+      "schema_version": 2,
+      "item_sha256": "31677e28eec492fd34c7b11f80bf8d181121af42ddcb598f66d4c2e636ee4c47",
+      "review_sha256": "2fdec12d02e227274b9cac83226acc73e7de8b54825a9509cc1191a25c15e18d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "g6uP4Q+zgSfFJUIb5TggC916ucJiSySoSjvn5/S7WsILkIw4jGZSEmKlehXpowYVRtm7zTn/vT6Vmk4zezN+Cw==",
+      "topic_id": "t_5dd8e85bda51"
+    },
+    "questions:supervision_intervision_format": {
+      "schema_version": 2,
+      "item_sha256": "29cd189af1ca6fc1e761f44913dcaf5ab74ad7d183dc21ea361146b11925ca06",
+      "review_sha256": "1628a0ae93e1e3f9f85bd17fffb9cf50b416ae62908a11f4f1c056279e74bffb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "20zKqjHwXNBo1jWLKymlnrRKKabu+dli8PH9mrBQ8a6Kk+tjXOlPe9Q/Y9mYJKjI2MOOi6lHaO10G0DPTcdfCw==",
+      "topic_id": "t_5dd8e85bda51"
+    },
+    "questions:case_cbt_abc_interpretation_001": {
+      "schema_version": 1,
+      "item_sha256": "23338d131238e60e064a01e4f3d5605bdf49eb10df86b2abb10d16f09a8a5b9e",
+      "review_sha256": "c867a3deb6616b7192c5620abe5dc4a39f5ee57fb64bd8d78645381d26896384",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "A6c+clRF/tCZ9xRYzdKUY0Sbu0u8l4E0B+r+6hHL1YeNN06FlMJ2x1YUzDaQ4KRm5vqoJXSEtuos65T0ie4RBw=="
+    },
+    "questions:case_cbt_emotion_and_evaluation_001": {
+      "schema_version": 1,
+      "item_sha256": "583728eb26b2220df515086c0510d2b73c5243f608ff5fb7e84790c5c6c37d31",
+      "review_sha256": "f10c445bdc35fbf7df0513945899585ffae836ea169e694dbbca0234b9273f83",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7QZCWgjCk2foY16Vk367qkYET1M3/Ouggcu0EH9cswAUwfiEPqGnjNIcTaF7dt7MewjfHAgiyenCU6FCNQyMDg=="
+    },
+    "questions:case_cbt_conditional_rule_001": {
+      "schema_version": 1,
+      "item_sha256": "df29de5afbfd455b1aedc968da7d02413f439dbe438e285196238e175638aaf3",
+      "review_sha256": "20224c256cf2c3e03262c71a8a89947215d5f7b318ab29a9cee5cf1cf535fae2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "M+nOB9cIFqCFEVjHR/PCg0hApkK3yBTTloWDTVRBCAd9s7ID3ybpAAP+gbgZMcsKI/ICnlDWQyo+JOHtqz57CQ=="
+    },
+    "questions:case_cbt_core_belief_001": {
+      "schema_version": 1,
+      "item_sha256": "0fc736ee7de4aceefe6ab7a7b61d1fe5c0599d7730235e0060e62ac5d411c37e",
+      "review_sha256": "2e720ba58a936b6e577914adb314385e7afcdf70469a34ad4b37f427af775d17",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "hON/7HzbSxEIiH67TiPuduiB6lyCiBGdGxhaPFhllIps9qqqsd47kbQ/03XfydHHoVWMr22bIUMpp9gQJPZ5BQ=="
+    },
+    "questions:case_cbt_diary_action_001": {
+      "schema_version": 1,
+      "item_sha256": "1122a8955b99efa7de9bfe7ee500b1b40778b7bde381f84d779e4825ea3e9ee7",
+      "review_sha256": "d227ea673ef0f2cf26ececd41fedf908dcaa644dc9b3b68d5c05dcd170cf4363",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "I6Yly/KVnGZysqpm9HhV/fJ1qi2Nqvi5qw38UGThYG1ZBzEvVii+XJMN3Rm3Z5kXURe8L/Rl9Qnn0qJP5Yx6Bw=="
+    },
+    "questions:case_cbt_socratic_alternatives_001": {
+      "schema_version": 1,
+      "item_sha256": "4b971af774290bae235bdbf38f7207fd0b5e95cd9b9aa777b3235e1b06b8c94d",
+      "review_sha256": "06e32c437b1fccb4a608195556c55e582219338f6c30a9625541e42bc49d8beb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "1e3j53oX50oKd/D+MHezw6VGx3p6i2BLk42STR4gCXpcKhpLsXgOgep29Tmw6Xv8mHyjKX2tuw8rOAREIJsGAw=="
+    },
+    "questions:case_cbt_behavioral_test_001": {
+      "schema_version": 1,
+      "item_sha256": "5ba4eee9563a404b738d1af19e17390b5024b22cfd1a70448777730ca5490c82",
+      "review_sha256": "d762f20a6a05b90e2e3bc6f377059094555aaeadca737c23043ffa5a21b6094e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "V1vBWgdVeQIgRUrs7JNBSCeDMo8Iqcuvr4kWROZbZdbVm7arPYMKLPYZXHBw0zUvMIf77q263ZKOP1FB8Gc3Bg=="
+    },
+    "questions:case_cbt_gradual_activation_001": {
+      "schema_version": 1,
+      "item_sha256": "34b7f4005fe7e919b7ec238224f4881d30210d42aa3f6bddaecc5b1cd67e6308",
+      "review_sha256": "049b6080a0c5efb25d4edf5faa16e972b65f259ee6fcaeab6343fbae0fc5f0a8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "gShcLHt/NWPH1otCKzuI8g4kECRTxQLACB6zmCcyD02TOBZjiNmmb/6BCBbNPzJ0NcuiAGcMp8Vf5CTP8tp1Cg=="
+    },
+    "questions:case_first_consultation_001": {
+      "schema_version": 1,
+      "item_sha256": "90bac2374720c8055b3b70ba0975fab0fde4db437c4444d66a157000b95aeb5c",
+      "review_sha256": "d809d68abed5f03ac293b1561b7b1c9a31e11013a3e36bf53954567237cf2a4d",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "0VelA1lg07/ouKNaIkKSQKHugeeSOGR5EotgaKHhTAoxuavbVXG33OLE/xHsB8sRsCLiSwiFI4MPUlqHrqPOCQ=="
+    },
+    "questions:case_clarify_meaning_001": {
+      "schema_version": 1,
+      "item_sha256": "e7d73cc8bae77996926a26067a99b517e4ba832b804a0da485151f55e25c2451",
+      "review_sha256": "a7472ac84d1e02ae15656a3f7a22ff744b7277c9184970141b3797c21f828a97",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "R+zg6TfdbVBiWkxSqHcODEyVdUutBmuUOU/wJCDoMBYzoh8JXIGVYysnMFFSn+/nIfXW033AFjNlQsKMWk5HAA=="
+    },
+    "questions:case_check_emotion_001": {
+      "schema_version": 1,
+      "item_sha256": "65d244bc8d329eff2c96b52b5502e681ba73c4e1c40054a66434b1e857860dd2",
+      "review_sha256": "03d00778d32b09a3cbcee064d8b5521c257ec95ff54df12cd5c22f7f24904bd8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "UYv+69I4/hjT7Y6PRRMsm6xuUcBtHClEBELl8C1VKxOGUIFBBLrahIORYMGI18nHBwFB+ekXU2Cm+8pigIXbAg=="
+    },
+    "questions:case_client_choice_001": {
+      "schema_version": 1,
+      "item_sha256": "e590ac634afc2c447af134f9aaab371d26681af089d79b5322427b2723ed0e54",
+      "review_sha256": "dea1aec90e7273e5a84ada7d4f31361615abdcdd73537934d22bf7fa41c73155",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "pnGJRSdjyWMzt6zp3eyzy3VwicFyf+pdQE8X5xbZ+Xslpwi82/TgH26CdapZVn7CBccVMtPkdwlTtZVjr0yqCw=="
+    },
+    "questions:case_competence_limit_001": {
+      "schema_version": 1,
+      "item_sha256": "2ad864abc4249b31a8a3ac6711eda8178d982b12c91a895a4a5df873362fd1f9",
+      "review_sha256": "724a1f5219d092f3a007f074be0eb2cadca66fbb53274c2818330163f05dd678",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "zOlGUBuVhooiEkr42n87tSeGRT8t4cz5Wo4otXPK6eNKoxWHz/Cvr5l7pWlbKGQdO2e++VocOI3a7Kazk8MRCA=="
+    },
+    "questions:case_online_privacy_001": {
+      "schema_version": 1,
+      "item_sha256": "f3591e8184eb71476e37cf4a34196d0bc4a586e7f1991241d57ffb30a3d524f7",
+      "review_sha256": "f52598bf8728e3a7c9f211c87bd901cabb3a33402d9d456c31e0ef3b18606368",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "O8gb8k6sEX8Z8QjM60EdhUKQI5g9Wvv6k1zNPnZI2iye+fvOqt5BVPD/qE1gPyiXSTrYMQlC1LFajONvoa3kCA=="
+    },
+    "questions:case_informed_start_001": {
+      "schema_version": 1,
+      "item_sha256": "6ee1e7b9d1db1e0e6bd8e551780864e24bb84eeb5a3d796786376ad037f34a40",
+      "review_sha256": "77d17a35a9df73c44afbf204bf50794d95de9412b0094c60fb48f35f1c6c8d12",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "k2JRB8gUrutRV2Cc3XqPh3dvj8+I5yIhjRxh8SP4DuB6/H+d8dw8w5NOVPSAc0ECScfV7KLRT3++WFoGyTIYAg=="
+    },
+    "questions:case_goal_own_actions_001": {
+      "schema_version": 1,
+      "item_sha256": "ce0ea3126c2e4cbb05a9f30eebdb1cfc3d47502569a1b53691ab0c71016a011f",
+      "review_sha256": "c46692504ec67cce374cf3f11346b18c599f14293186caf0e2bdf993a4591d2f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kOBpGfnLCYQinaoR59gy/pRb8+oHVqj3Ss7ITPsQOJe/Kt3pkf9RC1sjaIS8FN1AZkubmtwqa+ieCvCjDMlYCg=="
+    },
+    "questions:case_progress_criteria_001": {
+      "schema_version": 1,
+      "item_sha256": "158a5632434787912b8ccb459f450dbe3908dbd86d4985822b1f565d807b1970",
+      "review_sha256": "0d9cb968d12c9bb9b7bcd856ec72861995464165c16861cbb2599b00f4ee9a38",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "97IQkKDl/BCiaAg/nRlmvVTe7kQcZb2c+kjNsCuuowCcPHLHuDNInpRrjwG/f+lASL+VUjsgVLGHBNiZvDhWDg=="
+    },
+    "questions:case_revise_hypothesis_001": {
+      "schema_version": 1,
+      "item_sha256": "28dcf8564bf84055154b885511529e9f8d168463b07103e64be33fed2e541177",
+      "review_sha256": "5fa1092276bf89755ff21344edc59d80999ef21107361affbd32a467126d9eeb",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "rQPnvcWVClfaGUxb1vIM/cUilrFwq/1Zs+JBZxUMr38yZwBW92IDgS1171ke6X3JQFlacGu1Stc9tKyCwuzgAA=="
+    },
+    "questions:case_test_hypothesis_001": {
+      "schema_version": 1,
+      "item_sha256": "999a659b1ceed190d6bbd60fee35e9a775b077ba9af263bd4cd7dd1ba9c63771",
+      "review_sha256": "fa7d404f3c20f237d3721fb05ecd2752ec5e27081adb050cdff4d7b10ce8e51e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "ofFjZxH2Ckanb2yDMbeU1PadtXRPQrWSqORHNP5dxDRyMBxI9Dts1NafYM2PmtzlW/sbvQStibt53nlhQXlFBw=="
+    },
+    "questions:case_compare_hypotheses_001": {
+      "schema_version": 1,
+      "item_sha256": "583fca39bdad2e73a221a17d5a3bc42a92b1d4207f1c618b04076b6fbcfc359a",
+      "review_sha256": "e4fcfd35d13a09a5fd9c3000a854476b5c52622b3d448bf07c4b7ac78eeaac8c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "m0kuNup+KkTDE7dYdV9AG4I/m58s66w2Y6Od2deBODqYpLH33qoppzf398Bvr0PijvNsc1TuRPz5DCWQNm0zAw=="
+    },
+    "questions:case_realistic_forecast_001": {
+      "schema_version": 1,
+      "item_sha256": "ad00b48c34173f6c4f23957a85d86046e9229b3a587cfe9fe958eb7bcfe928dc",
+      "review_sha256": "ac4fbf278635c4b083a42b6d4eaa39ffd8c1f66e4ebbd0821ace348beffae48b",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "DKXDzNp4U/bUFrbNuaNsGnOwPUwa+Ke/foxWsSRMmq78eywz7vnHErDFMOxkbKuSY44uBO+IjaqJLZ3+uJ3VDQ=="
+    },
+    "questions:case_cbt_exposure_plan_001": {
+      "schema_version": 1,
+      "item_sha256": "6a238d29e5b6fdde6c4c6b7ca48138671a151efd18f8e26250c96a302ced08a4",
+      "review_sha256": "2c9345ee95fe66229c7443449d219abd05dca46283d762c96858c50670bd00b4",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "hvO6TxeoyK7ZthRb6vdL9MgG85QM26w2rKzVguD2xCE4woRR4kzo0dqQ8/240okYk1hzEc5duEY8pvLk2EvqDA=="
+    },
+    "questions:case_cbt_arrow_meaning_001": {
+      "schema_version": 1,
+      "item_sha256": "d4153695e8296db6e19108e4e26ad37cf1ede1666c0d3a33460c8221163ea0c2",
+      "review_sha256": "fd6f7471d5d046107d8b0c6cd4367a65c9c05c3ad27bb3b82ce5ad2cc5fe1f73",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "7C7zV8yNr+QQwl3Dw8GESNXxLNjUBnXkjtbYjw+VQ7Mu4IBvKG3jeignHAhLzhn3VmpOOcxDmxYfQwoW94bjBg=="
+    },
+    "questions:case_cbt_triad_future_001": {
+      "schema_version": 1,
+      "item_sha256": "5e2dc25f994d4057632e1364a5c45163c2c864839beac3dfa852fc4f16fbda0f",
+      "review_sha256": "e3f16ecedfcf98e6c47081eeb0ec49d9215f839f51ec1f590ef7233d187266c9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "MD697RebmIfZTIklFFT9QghsPkhPg972sY2CqSZzDhbqBcQOsm8QMY7z7DIpPWTlcqucXmYKeIivp4a/yfNkDA=="
+    },
+    "questions:case_cbt_alliance_collaboration_001": {
+      "schema_version": 1,
+      "item_sha256": "b68e0bf3944563df485b06119f73eba0505cdf6a9b59c3c543d51dd60b1b0ce7",
+      "review_sha256": "6211b6dcae2a36e1ba7dda3942988666a57766259411225cd2eed64af675b8f2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "DfovPsozGodHr9Pdoci/c0dfGO/eBZlwLso9/DxXtwx9j+k7AT0aXZcZy3NrxNEWZyzchClEmmyazW7VfIbHDw=="
+    },
+    "questions:case_supervision_question_001": {
+      "schema_version": 1,
+      "item_sha256": "aa5051592e6f50aa4177648b17fd58f9980bcdec25deeeaffc2d83f94db9ca66",
+      "review_sha256": "ea236f7fe7d69044d491f1bb21449d3bb120b2a2ab3cbd90d4e4fa03cf0405ef",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Tg2mwpC4jngo4YSUwzyWwWZEnvq2WoEUucB46hQrfPmSDcXSELV54oxwkYE5K9/1NZbEviWVwoeEI5uX+c7PCA=="
+    },
+    "questions:case_supervision_role_transition_001": {
+      "schema_version": 1,
+      "item_sha256": "237a1f6251c2ded85b9aa365d6b531f1ce7d6884bb895f2345a59d6a445e9253",
+      "review_sha256": "e2e08f9ed4a49dfd9ada086c78d9f1e09a2325e32c51d33b46ad84c38b133cec",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "pw8otFdj6IxrAZOrRD9AFK0PM2lKm4YY6FibQNjC45g19C+i2cOuyV3fqDcCoySyqQYKga/1VN0Uu6xZUtNSAA=="
+    },
+    "questions:case_supervision_own_motive_001": {
+      "schema_version": 1,
+      "item_sha256": "338b910aa0b7bf5dc18e861722c579dbb6456ca3bf4c14c9e7b6bcb3537e4189",
+      "review_sha256": "935b28624a095353d952072b13e746c68caa2731065e854ed05d375a3a95cb9a",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "B2NZoIc6sRUWORFayJP8PiML21PqTFd0F6xuyvGeL0kw5lHezMykKhRohU4w2EGLaT1j/qELAdyhLKl0O4z/AQ=="
+    },
+    "questions:case_supervision_process_roles_001": {
+      "schema_version": 1,
+      "item_sha256": "ad4c2af3d41d614da74068e47db186dcce31bf1a9087122783d6aef336487c46",
+      "review_sha256": "4b79990dc1f0fde3ede5a93660e6da6b307c84989347809e47c68712a7748a02",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "nusjZggA74ysiuaH0PjAICqx2u/yCux1ZYZ3RJXQw631whAeBhvtcSCK0Umh2E5sa+x3kg4KP4Bl1JllcDvwCg=="
+    },
+    "glossary:supervision_professional_supervision": {
+      "schema_version": 1,
+      "item_sha256": "96568392370251587ca6f9818745cfa37349463da635f536135d7e845a434d06",
+      "review_sha256": "6aefa3ddd34d1315790eb0a9ae0e05905b1bf90f7773e6b1ed9241cafda063f5",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "LXHDMx/B+K0YB3SchruZ7+CVEM+2DiUqxVJQuGkuK3NKhcjEmg+AYQGSVs+T6skI0zl9lmZ3nYL3w+6blFEuCA=="
+    },
+    "glossary:supervision_intervision": {
+      "schema_version": 1,
+      "item_sha256": "8a5ba36d0a09ee93aec11d352050b068d8e367306d01c30de3d0a1f3fa96fdc2",
+      "review_sha256": "f160e97dadaba2db8e25fd767e1f1647cdc543de3331edaf4a44c389963e00da",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "WL0B69k4eqkn+wKMq8xXKIlUbgQ+4/7lxjEIRN5usSuiV9j7p2A2muAQfLS+bDDm21/DlDyWCZtZbTjScmwVAA=="
+    },
+    "glossary:supervision_dual_roles": {
+      "schema_version": 1,
+      "item_sha256": "0e77636a12e80a6a2b900d037942c51bc28c594c075cce5d718c4abdfecf938b",
+      "review_sha256": "39dab12655bcbf9e142af59db6ceb333a5c91aa3688751e08ef12f6cc61192e3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "gUNK/5Qcs9b76QxTh++IP+wS58FHZYI51cp0OxPO9NxKiQ4p7mHnDXDKZNnjx4IsRl5cQxHfyHP/9qQ82IR9Cg=="
+    },
+    "glossary:supervision_professional_community": {
+      "schema_version": 1,
+      "item_sha256": "369121b62bfaff8ced5fb24bc2f0de24f7926ff804893d90f8c031876a60f41a",
+      "review_sha256": "fd98d490fcd027dd1182ea819672fd97409fa51bdce8d90ca8506c79ae6539e7",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "kWPbh7vLY34RZdVuUM6XrWMNsRmGcCspvAkaZzItgaDD4BT1UE1cgVLU4Nc570v2nyalkwEQSvG9puLYDyLrAg=="
+    },
+    "glossary:supervision_supervisory_request": {
+      "schema_version": 1,
+      "item_sha256": "d4741123be294c4fbbcdaff50a0b54c750c783b93935aa721cfdee8bd43a62e1",
+      "review_sha256": "324bcf773f9412ad328199915c8ae0b0523d764af830b09daae5d16b936f2ea2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "o0EP5Frf+219Oz/GWOdBaawjhmMdERvO/taJWqH0v6o3Vw+fizMSV4dwjSYPeUGEjBtHlFp0LQGSqUl/iAaIDg=="
+    },
+    "glossary:supervision_factual_clarification": {
+      "schema_version": 1,
+      "item_sha256": "c569618f2ead85529024501d57215c05e50dc2b5bf5757aa043e5d42c9e00e47",
+      "review_sha256": "6d88c9ce685e32fb15efaae091526a3fef4f4db32f02ee624f56991e35db1e0f",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "BnATwi6UUeIbSdxCI1M6UfTb8IKI17VcBVTYQe4M8kG1zwlId7iCewbyX0n1xlcOcz7b5sCmJiKSo8mSWikDCQ=="
+    },
+    "glossary:supervision_alternative_hypotheses": {
+      "schema_version": 1,
+      "item_sha256": "3e2b411abc9e15dcc6f7ba47260d8b338543997a0c187879e6422ea9574ccf87",
+      "review_sha256": "f17541d661deed42d6dd2e32b445307e967937e77ef8c5e981f1dbadd598100e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "j7rl+ZXF6RzPkM3s6ng+r35tTiO4yNCU30l6SXxT9eTmX7028u5xFdRCdQAyds3DYkllUnEVjteatUhwv57KAQ=="
+    },
+    "glossary:supervision_professional_self_reflection": {
+      "schema_version": 1,
+      "item_sha256": "3cf18797f450e532da399925d220e05cfad78a532f178c657192e4ffc21b3eff",
+      "review_sha256": "e239b3bc3430cf6352db34d27050837502d9a87ef18e3abac99e20a1623aebc8",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "UScA2Pd7HeGGOcJqmPyTsCaoCvcm2U+ZrxUNb29iiy5/dSm2BOGrfBxLEZED3Kmwg3F2LpW7UxyqCBbbe89LDQ=="
+    },
+    "glossary:supervision_group_sharing": {
+      "schema_version": 1,
+      "item_sha256": "1292c944e6dfa2967385b4a9a7f5bbf8302fe62e2f32357d314da2f822c620a2",
+      "review_sha256": "86d439807fc003b133c0f48d2b863f24b04ca9a539b3999d8418cee058077c0c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "FBCzVa3ZLCA8RIO6eykMzyuwwySYGZ5DmPNeMMxVLMLWf5o8leZD2Z7USTOR42vkDsiMty1bO2KGcySRT2rmCQ=="
+    },
+    "glossary:supervision_consultation_dynamics": {
+      "schema_version": 1,
+      "item_sha256": "5f952237d5582f8b24ae4606ad161b628658f06b0327a66dc34a3ecbd605c136",
+      "review_sha256": "b9b02c4c7d7ec75f9f8b28263dedd3c571a5598e14dff4d5fd910a58b6d5e8bc",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "9p7nJduV3nvUIOG3XWYCTcnRDuy4P7uNU+eZHJN6VQVdY+guOLN9he+qXthvg0bjDiVQZFBLdRxtHt+AkEACDg=="
     }
   }
 }

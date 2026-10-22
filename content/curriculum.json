@@ -6729,6 +6729,108 @@
       "topic_id": "t_05aeac347c73",
       "item_sha256": "04d2ba2c6f24bd61c86931a8a6d76ca7dc556e49ec85d49a431cca3b993bf22b",
       "locator": "private certificate:questions:m1_psyf_070"
+    },
+    "aa260c696cc6f0d0a015ba14012252c4b4d128d70d60fb16663622fbfcd6c889": {
+      "external_id": "cbt_abc_separation",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "98479659ed5096c37d7e25332ac46a9613cc30ffd9027ccb2c5510bc86bc3e1e",
+      "locator": "private certificate:questions:cbt_abc_separation"
+    },
+    "be02ec853231884d151402ad33192a32abfe9d6edf8a505c3374c772bc704705": {
+      "external_id": "cbt_model_components",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "04f55b7afe822c83149888c52a7f5b1ee97bd10791e45140eff2a28c3710802a",
+      "locator": "private certificate:questions:cbt_model_components"
+    },
+    "4737816183f8dd6f9dc1929d3fc2f1b60d260bf92c28c5684e62876458876f3b": {
+      "external_id": "cbt_belief_levels",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "d279d2cb7d5e06501d3d5c341a26dc45f26cba68eabaa1825ca271eb0816cfe6",
+      "locator": "private certificate:questions:cbt_belief_levels"
+    },
+    "254b9c76ea79188e07db886c164c6350475a9365949a4f2b8f30aebf7436a217": {
+      "external_id": "cbt_thought_record_fields",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "30e94c4376263813b3ed081d33267dcee4524d3f69c1f1d2587ec9ae3699a438",
+      "locator": "private certificate:questions:cbt_thought_record_fields"
+    },
+    "ab00c5a6360bd9392fc3d7e97ad5c61c113901d4a25450b2080efacfb4b7bae0": {
+      "external_id": "cbt_restructuring_evaluation",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "139059101db75c551d7b69a9370fe901c26180ace6c714b8b83c273ac350f487",
+      "locator": "private certificate:questions:cbt_restructuring_evaluation"
+    },
+    "37065c242a680c0fbae4652a3cd07a9a7cad1f36dde1984ae6029c3ca41a7c84": {
+      "external_id": "cbt_socratic_inquiry",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "69e8545aac8e6f67ca93b57d43a0ff27a6879c2d3bd6ddbdc690b6b035612cea",
+      "locator": "private certificate:questions:cbt_socratic_inquiry"
+    },
+    "d9b323fe0c8afaf1fdfcb3d75a2bc93f2d162a155501c3b44b0fcb9acf909cfc": {
+      "external_id": "cbt_experiment_function",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "586170ea5e22cdd6165486c36a18d6c50d45adf278810916f28128f12b7b832e",
+      "locator": "private certificate:questions:cbt_experiment_function"
+    },
+    "b5c876045a4547d459640eab725a64e018c4683fd47abd01df66d31b54254931": {
+      "external_id": "cbt_activation_principle",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "0aefc62515e127c036145507c0687e516d13c6276124b8ce30ffc6350013623d",
+      "locator": "private certificate:questions:cbt_activation_principle"
+    },
+    "fb0a316f85e5acfc7ed822a083d2f12056a6a1a92ca29eaa0f2252136fee6575": {
+      "external_id": "cbt_arrow_function",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "9d77f6289a899ceea98723fda20c94f05016f2fad3429ab6244367fd6027db44",
+      "locator": "private certificate:questions:cbt_arrow_function"
+    },
+    "1970864f08ec2413ed78e68e2c3363678af2d7f0718d6cad752273149da4ad7d": {
+      "external_id": "cbt_exposure_hierarchy",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "174dd01c89533e78cc93c91e2e59b2b0f7138f2db892822f8aea2865c3c8f7c2",
+      "locator": "private certificate:questions:cbt_exposure_hierarchy"
+    },
+    "d1a28d2f313db6f2c36edcaf189ac199d53e2652a00961dcde54e62e1706ae5e": {
+      "external_id": "cbt_automatic_specificity",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "856984c026e9d80fb26602bcc726562642ec08646ff40f8d211e7feb3a0a7698",
+      "locator": "private certificate:questions:cbt_automatic_specificity"
+    },
+    "ea1090c38b5769f4099a9f37db73bb4a5d95d2f2314ed2605aaf8be41d4ae1ed": {
+      "external_id": "cbt_alliance_work",
+      "topic_id": "t_b7c2c2b3b5e0",
+      "item_sha256": "6ab22a0a5807a365cad7a300cd881862fa7c535f1281b3bf46c0beb793e80a9b",
+      "locator": "private certificate:questions:cbt_alliance_work"
+    },
+    "8eb13d57128254276154186ef0f3f56acef97669e5bd6d103a6f64647dc1ef49": {
+      "external_id": "supervision_role_clarity",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "b05c16a7d89f466e5477a256cfd19e358c95fb33049a4d77f335247b4693e73a",
+      "locator": "private certificate:questions:supervision_role_clarity"
+    },
+    "cc2aac6533b46c72dd6b8a267573cc97cdb768bb9fbf825f64c1be6882d4805e": {
+      "external_id": "supervision_peer_support",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "97aedb46873d6503a508b027da999bf5d92e1f7a3cd7cc965c268ab5e7dcc5eb",
+      "locator": "private certificate:questions:supervision_peer_support"
+    },
+    "da003102b827dfb7b4337a0366676b401417babf737708fea9f59e96c2dd31f2": {
+      "external_id": "supervision_support_task",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "ab66829e126a18c792b6d99fafb4069f93ba30d9eae8716b1a53f6c850bb3615",
+      "locator": "private certificate:questions:supervision_support_task"
+    },
+    "ef3e3f329aaddd24c4d50d26e6a837d3888349f367ec0fbd4bd2804f9c993d89": {
+      "external_id": "supervision_three_processes",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "31677e28eec492fd34c7b11f80bf8d181121af42ddcb598f66d4c2e636ee4c47",
+      "locator": "private certificate:questions:supervision_three_processes"
+    },
+    "56291452de3fd58455ecc6823837db6c8d1e6d98a72db43fd5d2985af9d445ac": {
+      "external_id": "supervision_intervision_format",
+      "topic_id": "t_5dd8e85bda51",
+      "item_sha256": "29cd189af1ca6fc1e761f44913dcaf5ab74ad7d183dc21ea361146b11925ca06",
+      "locator": "private certificate:questions:supervision_intervision_format"
     }
   }
 }
