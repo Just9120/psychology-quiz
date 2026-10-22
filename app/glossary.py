@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import escape
+import hashlib
 import json
 from pathlib import Path
 import random
+import re
 import unicodedata
 from typing import Any
 
@@ -12,17 +14,42 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 from app.content_publication import load_policy
 
 GLOSSARY_UNAVAILABLE_TEXT = "Глоссарий временно недоступен. Попробуйте позже."
-GLOSSARY_TOPICS: tuple[tuple[str, str], ...] = (
-    ("vvedenie_v_professiyu", "Введение в профессию"),
-    ("obschaya_psihologiya", "Общая психология"),
-    ("fiziologiya_cheloveka", "Физиология человека"),
-    ("fiziologiya_vnd", "Физиология ВНД"),
-    ("psihofiziologiya", "Психофизиология"),
-    ("osnovy_eksperimentalnoy_psihologii", "Основы экспериментальной психологии"),
-    ("kachestvennye_metody_issledovaniya", "Качественные методы исследования"),
-    ("psychological_consulting", "Психологическое консультирование"),
-)
-GLOSSARY_TOPIC_CALLBACK_TOKENS = {
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+_GLOSSARY_DIR = _REPO_ROOT / "content" / "glossary"
+
+
+def _load_glossary_topics(path: Path) -> tuple[tuple[str, str], ...]:
+    """Discover the declared contour; publication approval still gates each term."""
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return ()
+    if not isinstance(raw, list):
+        return ()
+    selected = []
+    seen = set()
+    for topic in raw:
+        if not isinstance(topic, dict):
+            return ()
+        if topic.get("status") != "active":
+            continue
+        contours = topic.get("available_contours", [])
+        if not isinstance(contours, list):
+            return ()
+        if "glossary" not in contours:
+            continue
+        identity, title = topic.get("id"), topic.get("title")
+        if (not isinstance(identity, str) or re.fullmatch(r"[a-z0-9_]+", identity) is None
+                or identity in seen or not isinstance(title, str) or not title.strip()):
+            return ()
+        selected.append((identity, title))
+        seen.add(identity)
+    return tuple(selected)
+
+
+GLOSSARY_TOPICS = _load_glossary_topics(_REPO_ROOT / "content" / "topics.json")
+# Keep existing buttons usable after a content release.
+_LEGACY_GLOSSARY_TOPIC_CALLBACK_TOKENS = {
     "vvp": "vvedenie_v_professiyu",
     "op": "obschaya_psihologiya",
     "fch": "fiziologiya_cheloveka",
@@ -32,10 +59,22 @@ GLOSSARY_TOPIC_CALLBACK_TOKENS = {
     "oep": "osnovy_eksperimentalnoy_psihologii",
     "pc": "psychological_consulting",
 }
+
+
+def _glossary_topic_tokens(topics: tuple[tuple[str, str], ...]) -> dict[str, str]:
+    legacy = {identity: token for token, identity in _LEGACY_GLOSSARY_TOPIC_CALLBACK_TOKENS.items()}
+    tokens = {}
+    for identity, _title in topics:
+        token = legacy.get(identity) or "t" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:12]
+        if token in tokens:
+            raise ValueError("Duplicate glossary callback token")
+        tokens[token] = identity
+    return tokens
+
+
+GLOSSARY_TOPIC_CALLBACK_TOKENS = _glossary_topic_tokens(GLOSSARY_TOPICS)
 GLOSSARY_TOPIC_ID_TO_TOKEN = {topic_id: token for token, topic_id in GLOSSARY_TOPIC_CALLBACK_TOKENS.items()}
 GLOSSARY_QUIZ_SESSION_KEY = "glossary_quiz_session"
-_REPO_ROOT = Path(__file__).resolve().parent.parent
-_GLOSSARY_DIR = _REPO_ROOT / "content" / "glossary"
 
 
 @dataclass(frozen=True)

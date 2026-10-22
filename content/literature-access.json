@@ -7,62 +7,55 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/lev-vygotskiy-30932777/myshlenie-i-rech-7759426/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Book-specific offer block shows a priced purchase and reading by subscription. The adjacent free wording belongs to the subscription offer, not unconditional free full text."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/lev-vygotskiy-30932777/myshlenie-i-rech-65226391/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Audiobook-specific offer block shows a priced purchase and listening by subscription. A trial/subscription promotion is not unconditional free audio."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/lev-vygotskij/myshlenie-i-rech/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
-      },
-      {
-        "format": "text",
-        "provider": "Яндекс Книги",
-        "url": "https://books.yandex.ru/books/Pzvjabyc",
-        "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/cIKPA3mp",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Константин Корольков; Длительность 15 ч. 3 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/lev-vygotskij/myshlenie-i-rech-5/",
         "access": "provider_terms",
-        "checked_at": "2026-10-15",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official card readback 2026-10-15 confirms title/author/format. Lev Vygotsky, full Thinking and Speech, 520 printed pages. Separate 687-page collected works edition is excluded. The specific offer confirms subscription; trial/excerpt is not free full access. Exact course edition, territorial restrictions and personal entitlement are unverified."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "lit_0199865ad8d23ecb": [
@@ -71,73 +64,74 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/obschatsya-s-rebenkom-kak-130203/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/TzNJn23h",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/obschatsya-s-rebenkom-kak-72191731/",
         "access": "provider_terms",
-        "checked_at": "2026-10-11",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/obschatsya-s-rebenkom-kak-173474/",
         "access": "provider_terms",
-        "checked_at": "2026-10-11",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms purchase and subscription; a trial or excerpt is not free full audio."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/Jr4fLbjY",
         "access": "provider_terms",
-        "checked_at": "2026-10-11",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. Full-access terms remain unknown; generic free wording is not evidence of unconditional full access."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/JtV5vD20",
         "access": "provider_terms",
-        "checked_at": "2026-10-11",
-        "access_modes": [
-          "subscription"
-        ],
-        "access_review": "Official full-audio card reviewed for work/title/author/format and narrator/duration. Exact catalog edition, translation, territorial restrictions and personal entitlement remain unverified. The book-specific offer confirms subscription; a trial or excerpt is not free full audio."
+        "checked_at": "2026-10-22",
+        "access_modes": [],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/yuliya-gippenrejter/obshatsya-s-rebenkom-kak-7/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 160 печатных страниц. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "lit_819808cf97ad8eb5": [
@@ -146,36 +140,42 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-180602/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/prodolzhaem-obschatsya-s-rebenkom-tak-568685/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/yTCndCWN",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/DRana646",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Леонтина Броцкая; Длительность 7 ч. 27 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "gippenreiter_vvedenie_v_obschuyu_psihologiyu": [
@@ -184,61 +184,64 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/uliya-gippenreyter/vvedenie-v-obschuu-psihologiu-kurs-lekciy-180603/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Book-specific offer block shows a priced purchase and reading by subscription. Edition and personal entitlement remain unverified."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/uliya-gippenreyter/vvedenie-v-obschuu-psihologiu-6180795/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/yuliya-gippenrejter/vvedenie-v-obshuyu-psihologiyu-kurs-lekcij/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/yuliya-gippenrejter/vvedenie-v-obshuyu-psihologiyu/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/JIUJ6mpq",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/GbFAxjnS",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Галина Чигинская; Длительность 13 ч. 20 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "nurkova_berezanskaya_obschaya_psihologiya": [
@@ -258,34 +261,34 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/sergey-rubinshteyn/osnovy-obschey-psihologii-50405712/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Book-specific offer block shows a priced purchase and reading by subscription. The partial audiobook in related versions is not this full text."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/s-l-rubinshtejn/osnovy-obshej-psihologii-3/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 1 412 печатных страниц. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Питер",
         "url": "https://www.piter.com/collection/all/product/osnovy-obschey-psihologii-5e43d1",
         "access": "provider_terms",
-        "checked_at": "2026-10-17",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase"
         ],
-        "access_review": "Official publisher card readback 2026-10-17: Exact Russian title and S. L. Rubinstein. Separate electronic PDF offer shows a purchase price (499 RUB) and download button. Same work, not a guarantee of exact course edition. Personal entitlement and territorial access are unverified; no account or purchase used."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Отдельный блок «Электронная книга», PDF, цена и «Скачать» подтверждают покупку цифровой версии; бумажный вариант не использован как её доказательство. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "lit_consult_lecture_02": [
@@ -294,54 +297,64 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/irvin-yalom/dar-psihoterapii-73836533/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/irvin-yalom/dar-psihoterapii-41894046/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/irvin-yalom/dar-psihoterapii-3/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/irvin-yalom/dar-psihoterapii-2/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/Gk6cUMrt",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/iqcjB0UT",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full audio work matched. Рассказчик Андрей Крупник; Длительность 7 ч. 38 мин. The public card confirms the format; full-version access terms remain unknown. Free excerpts and generic page-title wording do not establish free full access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "lit_consult_lecture_01": [
@@ -350,9 +363,11 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/karl-rodzhers/stanovlenie-lichnosti-vzglyad-na-psihoterapiu-74431861/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "lit_5505760c8ef8c4b8": [
@@ -361,51 +376,50 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/aleksandr-asmolov/psihologiya-lichnosti-kulturno-istoricheskoe-ponimanie-r-3300775/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/a-g-asmolov/psihologiya-lichnosti-kulturno-istoricheskoe-ponim/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Direct official card readback 2026-10-14: title/author and full text work matched. 527 печатных страниц. The book-specific offer block confirms subscription access; the trial is not unconditional free access. Course-edition equivalence and personal entitlement are not assumed."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
-    "lit_8c4dd1a3c39ecbcf": [
-      {
-        "format": "audio",
-        "provider": "Литрес",
-        "url": "https://www.litres.ru/audiobook/galina-andreeva/socialnaya-psihologiya-292322/",
-        "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
-      }
-    ],
+    "lit_8c4dd1a3c39ecbcf": [],
     "lit_25a5d2f1c7ba76e1": [
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Предложение относится к сборнику двух названных работ Лурии. Личные отметки этих разных произведений не объединяются. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Предложение относится к сборнику двух названных работ Лурии. Личные отметки этих разных произведений не объединяются. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "lit_4f9768a778fe2a01": [
@@ -414,18 +428,24 @@
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-38204362/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Предложение относится к сборнику двух названных работ Лурии. Личные отметки этих разных произведений не объединяются. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/a-r-luriya/poteryannyy-i-vozvraschennyy-mir-malenkaya-knizhka-o-bolshoy-pa-41560700/",
         "access": "provider_terms",
-        "checked_at": "2026-10-03",
-        "access_modes": [],
-        "access_review": "URL rechecked through public web on 2026-10-03; available extraction failed or did not establish version-specific access conditions. Prior bibliographic URL retained; conditions explicitly unknown. No personal account, API or payment used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "purchase",
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Предложение относится к сборнику двух названных работ Лурии. Личные отметки этих разных произведений не объединяются. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "lit_kahneman_thinking_fast_slow": [
@@ -434,64 +454,64 @@
         "provider": "MyBook",
         "url": "https://mybook.ru/author/daniel-kaneman/dumaj-medlenno-reshaj-bystro/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. Version-specific access conditions could not be established; explicitly unknown. No personal account, purchase or API used."
+        "checked_at": "2026-10-22",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/books/ApOv8ISe",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
-        "access_modes": [
-          "subscription"
-        ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+        "checked_at": "2026-10-22",
+        "access_modes": [],
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
         "provider": "Литрес",
         "url": "https://www.litres.ru/book/daniel-kaneman/dumay-medlenno-reshay-bystro-6444517/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms purchase and subscription. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/daniel-kaneman/dumay-medlenno-reshay-bystro-21636519/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "MyBook",
         "url": "https://mybook.ru/author/daniel-kaneman/dumaj-medlenno-reshaj-bystro-9/",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official full audiobook, Daniel Kahneman, narrator Igor Knyazev, 14h48m; card identifies Thinking, Fast and Slow. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Card offers subscription; a trial is not unconditional free full audio."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Яндекс Книги",
         "url": "https://books.yandex.ru/audiobooks/Sm7xn4hE",
         "access": "provider_terms",
-        "checked_at": "2026-10-14",
+        "checked_at": "2026-10-22",
         "access_modes": [],
-        "access_review": "Official full audiobook, Daniel Kahneman, narrator Igor Knyazev, 14h48m. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Card confirms subscription for the text version only; full-audio terms remain unknown. The page title and genre tag do not establish free full audio."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Условия полного доступа по открытой карточке не установлены; бесплатный фрагмент и рекламное слово «бесплатно» не считаются свободным полным доступом. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       }
     ],
     "psf_sapolsky_psihologiya_stressa": [
@@ -500,34 +520,23 @@
         "provider": "MyBook",
         "url": "https://mybook.ru/author/robert-sapolski-2/psihologiya-stressa-2/",
         "access": "provider_terms",
-        "checked_at": "2026-10-08",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "subscription"
         ],
-        "access_review": "Official card identifies the title, author and format; the offered edition and personal entitlement remain unverified. The book-specific access block confirms subscription. An excerpt or trial is not free full access."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственная карточка книги подтверждает доступ по подписке; пробный период не означает бесплатного полного доступа без условий. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "audio",
         "provider": "Литрес",
         "url": "https://www.litres.ru/audiobook/robert-sapolski/psihologiya-stressa-66647196/",
         "access": "provider_terms",
-        "checked_at": "2026-10-10",
+        "checked_at": "2026-10-22",
         "access_modes": [
           "purchase",
           "subscription"
         ],
-        "access_review": "Official audiobook card confirms the named work, author, narrator and full-length recording; purchase and subscription controls apply to this audio edition. Trial wording does not mean unconditional free access."
-      },
-      {
-        "format": "audio",
-        "provider": "MyBook",
-        "url": "https://mybook.ru/author/robert-sapolski-2/psihologiya-stressa-5/",
-        "access": "provider_terms",
-        "checked_at": "2026-10-14",
-        "access_modes": [
-          "subscription"
-        ],
-        "access_review": "Official full audiobook, Robert Sapolsky, narrator Yuri Elagin, 24h08m. Exact original-work title and author matched on the official card; this is the full work, not a summary or commentary. Exact course edition, regional availability and personal entitlement remain unverified. Card offers subscription; a trial is not unconditional free full audio."
+        "access_review": "Проверена официальная карточка: название, автор и заявленный цифровой формат. Собственное предложение электронной книги или аудиокниги подтверждает отдельную покупку. В блоке доступа также указана подписка. Совпадение с конкретным изданием курса, территориальные ограничения и личные права доступа не подтверждены."
       },
       {
         "format": "text",
