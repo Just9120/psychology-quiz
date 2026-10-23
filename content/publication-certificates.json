@@ -3942,6 +3942,20 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "4xGhJytj0FaksvH7QCrLUe5HJFRVs3Yjmv+EUiYLRi/Cx2eo4Wqq1RCSj8165utDaL7NRspBk0YOVYDo0hapDg==",
       "topic_id": "t_42733136bf34"
+    },
+    "questions:case_cbt_decatastrophizing_coping_001": {
+      "schema_version": 1,
+      "item_sha256": "653dda993a98aeb6a7324b4e08769be8b110ed24c92c3ea8650abc837ee65147",
+      "review_sha256": "1bd3d09bb15a19805be0b14f570e8e0e0bf5464eec09156be5d8468a57d659ad",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "J2vNfGOzxOUuY8ThzbTIAj+n33V5lFm1aAboSIXzHKVVLvNJnv/Wb6BrsqjEWeT8msTfaTJoU9WKPc4mMoECAg=="
+    },
+    "glossary:cbt_decatastrophizing": {
+      "schema_version": 1,
+      "item_sha256": "8aea7726891b9155ad5958c0ee6f88b769de9a1e1b10d1d45a488aeab0bc8a48",
+      "review_sha256": "3e56083d13eaf39b6664bb69185582f1c7462a5273688517fc612b41b4ec73f1",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "u9AjBS6DH3CxqgLUv5wv7QdICoT8mORlmqbl8mJ4onwgZl2saUKwWpuuFTINHOu8LC8TO/jWC4m4Ybs3UdVhDg=="
     }
   }
 }

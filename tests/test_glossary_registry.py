@@ -51,7 +51,7 @@ def test_legacy_callbacks_and_new_topic_callbacks_remain_stable_and_bounded():
         assert glossary.GLOSSARY_TOPIC_ID_TO_TOKEN[identity] == token
     assert glossary._glossary_topic_tokens(glossary.GLOSSARY_TOPICS) == glossary.GLOSSARY_TOPIC_CALLBACK_TOKENS
     payload = {row['topic_id']: row for row in glossary_service.topics()['topics']}
-    for identity, count in [('cognitive_behavioral_therapy', 22), ('counseling_supervision', 10), ('social_psychology', 10)]:
+    for identity, count in [('cognitive_behavioral_therapy', 23), ('counseling_supervision', 10), ('social_psychology', 10)]:
         assert payload[identity]['available_count'] == count
         token = glossary.GLOSSARY_TOPIC_ID_TO_TOKEN[identity]
         assert glossary.callback_token_to_topic_id(token) == identity
