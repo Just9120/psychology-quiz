@@ -3956,6 +3956,13 @@
       "review_sha256": "3e56083d13eaf39b6664bb69185582f1c7462a5273688517fc612b41b4ec73f1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "u9AjBS6DH3CxqgLUv5wv7QdICoT8mORlmqbl8mJ4onwgZl2saUKwWpuuFTINHOu8LC8TO/jWC4m4Ybs3UdVhDg=="
+    },
+    "questions:case_cbt_activity_mastery_pleasure_001": {
+      "schema_version": 1,
+      "item_sha256": "f804f5494ec865641ac318cb05b5498cc69106ac8506b1e7d82f09c94f687b08",
+      "review_sha256": "79adc752ab8db03d83824f3ff0cc809b83d80b112f271b9c3475e6fcdce8d73e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "b99j04Ipjw+JgVultJxndQGNub1g2M4cHFjuijHw9It1Lh1JeG+3YYxhzAz9XYsWA7G+axMp3kvrFhBJPOBTDw=="
     }
   }
 }
