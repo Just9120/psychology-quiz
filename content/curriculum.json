@@ -8121,6 +8121,12 @@
       "topic_id": "t_b7c2c2b3b5e0",
       "item_sha256": "a10999ecb40d2ba4c8a693f642c9a07064f8de2f86fc8507987fb57afe7f967b",
       "locator": "private certificate:questions:cbt_automatic_specificity"
+    },
+    "2c6f42f37904c2075d1d5940ea917677c7f536b55877f7761086bb3dbd17227a": {
+      "external_id": "cbt_programme_and_technique",
+      "topic_id": "t_42733136bf34",
+      "item_sha256": "1893bb8f953e0a56f4c7281e8ca25c231af7694b155732aecdec23ef85c5f13d",
+      "locator": "private certificate:questions:cbt_programme_and_technique"
     }
   }
 }

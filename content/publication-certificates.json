@@ -3934,6 +3934,14 @@
       "review_sha256": "0e5583612a79a1dfd6ecd1992faa1f5961c03f9e4c2651b3e7bc5477ba806303",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "sh+sEeOkdrEYY3qD1zr9fZ5uxT2BDnooDyjOJdnifzm5R/LqZbJCaLW1p4TRGZlqK/e/5dRPiuIW5rus9CZcAA=="
+    },
+    "questions:cbt_programme_and_technique": {
+      "schema_version": 2,
+      "item_sha256": "1893bb8f953e0a56f4c7281e8ca25c231af7694b155732aecdec23ef85c5f13d",
+      "review_sha256": "d33bff4fdce03081355a89fdd31fcdbbcf08b78e62271c16438995651fce16b9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "4xGhJytj0FaksvH7QCrLUe5HJFRVs3Yjmv+EUiYLRi/Cx2eo4Wqq1RCSj8165utDaL7NRspBk0YOVYDo0hapDg==",
+      "topic_id": "t_42733136bf34"
     }
   }
 }

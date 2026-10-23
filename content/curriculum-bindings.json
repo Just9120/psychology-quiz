@@ -9833,6 +9833,14 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "PXzY3luCHDqpwNVCpGoSl0J6y5U/YohbfziLr0jjYrvnKSBfWyQP58qIc3NDCHk6bI16tdG3P+Ap5NITcTuLAQ==",
       "topic_id": "t_b7c2c2b3b5e0"
+    },
+    "2c6f42f37904c2075d1d5940ea917677c7f536b55877f7761086bb3dbd17227a": {
+      "schema_version": 2,
+      "item_sha256": "1893bb8f953e0a56f4c7281e8ca25c231af7694b155732aecdec23ef85c5f13d",
+      "review_sha256": "d33bff4fdce03081355a89fdd31fcdbbcf08b78e62271c16438995651fce16b9",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "4xGhJytj0FaksvH7QCrLUe5HJFRVs3Yjmv+EUiYLRi/Cx2eo4Wqq1RCSj8165utDaL7NRspBk0YOVYDo0hapDg==",
+      "topic_id": "t_42733136bf34"
     }
   }
 }
