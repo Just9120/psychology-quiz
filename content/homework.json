@@ -52,13 +52,13 @@
       "module": "Модуль 3",
       "discipline_id": "psychological_consulting",
       "topic_id": "t_7246705017fc",
-      "description": "Тест проверяет понятия первой встречи. Он не подтверждает участие в практической сессии.",
+      "description": "Подготовительный тест по условиям первой встречи: пространству, понятному объяснению правил, приватности, слушанию и прояснению ожиданий. Он не подтверждает оформление кабинета, юридическую проверку согласия или проведение консультации.",
       "question_ids": [
-        "m3_psychological_consulting_004",
-        "m3_psychological_consulting_005",
+        "m3_psychological_consulting_025",
+        "m3_psychological_consulting_089",
+        "case_online_privacy_001",
         "m3_psychological_consulting_006",
-        "m3_psychological_consulting_008",
-        "m3_psychological_consulting_009"
+        "case_first_consultation_001"
       ]
     },
     {
@@ -592,13 +592,13 @@
       "module": "Модуль 6",
       "discipline_id": "psycholinguistics",
       "topic_id": "t_ba868cd218a1",
-      "description": "Различаем запись переживаний, наблюдаемые действия и вывод о причине изменений. Тест не оценивает личный дневник и не подтверждает эффект переформулировки.",
+      "description": "Тест по учебному разбору: точность описания, значение правил, различение состояния и устойчивой особенности, границы причинных выводов. Он не оценивает личный дневник и не подтверждает эффект переформулировки.",
       "question_ids": [
         "m1_gp_032",
         "m6_psyl_008",
-        "m6_psyl_010",
-        "m2_exp_006",
-        "m1_gp_014"
+        "m6_psyl_005",
+        "m1_gp_014",
+        "m2_exp_006"
       ]
     },
     {
