@@ -18422,10 +18422,10 @@
       "disposition": "keep"
     },
     "questions:m4_person_001": {
-      "item_sha256": "1b8efe87fc68b0f874145b7bc03ba5374b69e06d549bf44a6de9ae4b8b2a68ca",
+      "item_sha256": "b8f6e43572215f1329a8721a4b8cd1a1596b568e5d968f574850cec26a2a92c0",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18437,8 +18437,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Historical theory terminology only, explicitly attributed to Freud. The exact excerpt ends before developmental/sex-identification/Electra claims held at16800:17500. No universal causal development, brain-localization, diagnosis, treatment efficacy or proven personality mechanism asserted. Current bank lacks a direct item on this structural-model distinction.",
-      "sources": []
+      "note": "Freudsuperego as attributed moral-conscience concept,not anatomical structure/chronological stage or necessaryOedipus/same-sex-parent mechanism. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_a04e9f6b6e61f23de0bcd6457af23c4db8ba00ef832b263366ef58cd58e9df37",
+          "modified_time": "2026-07-12T06:16:53.267Z",
+          "snapshot_sha256": "83b75a2d4890557a3e94f877f37448b28ff20c3c4f594fc94dc2b29f74eaf059",
+          "locator": "characters:16709:16852"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:other_brand_001": {
       "item_sha256": "b1399cfc2554f2d49f5301f1d7c02e5ed5389a6867e684c28f85b11d3e01cba2",
@@ -18766,7 +18774,7 @@
           "locator": "characters:15093:15151"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_gp_062": {
       "item_sha256": "26c9c03d365fed185c6dd16b8b5e4a65660ff458da9865f3012bac8443b4089c",
@@ -19578,7 +19586,7 @@
           "locator": "characters:15919:16083"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_psyf_074": {
       "item_sha256": "0a26737e4b494b12ef1f73939c1d925ed378922c35cd206ca020af6eb18ebf12",
@@ -19827,10 +19835,10 @@
       "sources": []
     },
     "questions:m4_person_004": {
-      "item_sha256": "4fde59b408f44f98107f9d033842f70d790d6db08051b8c260c8329c88276c54",
+      "item_sha256": "dd57bf8620729b30e994ede481e1bb384dca02ce167bdb7e8afd12ab6c3d1cdc",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19842,8 +19850,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact characters34561:34696 after held damaged Merlin attribution34274:34518 and before first-impression assertion. No liquid/energy explanation, modern universality of Pavlov typology, hand-shake or accentuation diagnosis. OpenStax11.6 independently discusses temperament reactivity/self-regulation, but not exact Merlin definition; no claim that primary validates damaged attribution.",
-      "sources": []
+      "note": "Temperament dynamic aspect,not moralvalue/knowledge/goals;no fluidtheory/instant temperament or professional potential diagnosis. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_27ce54f73801ebd1b9437ab8a8455b7ebf575a2139536a42c94155deb8f484ef",
+          "modified_time": "2026-07-12T06:18:53.042Z",
+          "snapshot_sha256": "1c93a52d3429aee1df0f759740dc1a3e7a03351699d81fc079598c151489c1c1",
+          "locator": "characters:34561:34695"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m4_person_005": {
       "item_sha256": "27dbf5c752bfb1dfba5c2be19a27d8229e6ed400408b1abe327d579a8a815633",
@@ -19900,10 +19916,10 @@
       "disposition": "keep"
     },
     "questions:m4_person_007": {
-      "item_sha256": "2ff89366ac65680d8aecaac5a034a20d3aeb020ced2bc340d58a58cf44a00475",
+      "item_sha256": "b54730edd5cb6bd8426104a7d0eb30c08f91387fff4b02e3b10e74f03fed6959",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19915,14 +19931,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact needs-model fragment read; other named needs replace absurd absolutes, without a rigid hierarchy claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Maslowselfactualisation concept distinctfrom safety/recognition/belonging;not rigid need order or onepercent prevalence. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_2cba534d11898414704e7cfdb4b07bcef73b6fc4390a9fae380a6b1b32a92a6a",
+          "modified_time": "2026-07-16T20:51:08.740Z",
+          "snapshot_sha256": "0abbe14a72d82da9e08f6471397271d5a71a8fb2904d0d2665e50a45dc3149a3",
+          "locator": "characters:5979:6079"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m4_person_008": {
       "item_sha256": "508f274b78d1cb852a197b5cb49eb26681a9356fda4a7cd588877fb8ee683746",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19934,14 +19958,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact choice/responsibility passage read; neighboring explanatory approaches replace guarantees and body-type trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Attributed existential choice of feasible position/responsibility,not total control/blame,suffering obligation or guaranteed treatment. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_1aa5012ca2e6855cd49cc59c031e631b6d78d98569cbf7e064fc4fc3c50fd523",
+          "modified_time": "2026-07-16T20:52:32.005Z",
+          "snapshot_sha256": "abab4ef1e8ca2ec02ca82fe3dcf3d41e187c335d6b9fda92216d954969b01855",
+          "locator": "characters:666:1062"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_009": {
-      "item_sha256": "88a292f74fcbc043754b2dae4ffb896905148ec1ce59c6dd68dadcfb86d551b7",
+      "item_sha256": "9eeb638a746d9a022b8d9880645bd9abefcb0ac70790baf5004917d9bdb6f3e5",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19953,14 +19985,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact continuum and non-moral-classification passage2354:2763. Energy wording/majority distribution not adopted; no conflation of psychoticism scale with clinical diagnosis, vocational categorisation or one-answer individual score. Current trait/state questions do not cover dimensional versus binary distinction.",
-      "sources": []
+      "note": "Eysenck continuum as degree between poles,not separate categorical/developmental/value type or literal energy. Correct existing private lesson binding from course glossary to the actual current Lecture6 with the same public lesson label/body/ID. Original glossary-based dossier retained privately;no whole-source scientific promotion. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_90960e22d39a316de971b81280a497e381aec932bf139dbb2de5d71a61a25924",
+          "modified_time": "2026-07-12T06:22:38.928Z",
+          "snapshot_sha256": "9a477749b4c43e2d15a8b920d40cef89ae544f37e070e5a90dd5488d9b7afef7",
+          "locator": "characters:2412:2490"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_010": {
-      "item_sha256": "e8b6c7c52ef9e955e3dfa64adacab498ab7c52b1c57f04d9379b11cf5f9c4d52",
+      "item_sha256": "8600ba4ff20b5f03c95d1cf1d6cdd4b682827e54a1883520ebb854d75000bb60",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19972,14 +20012,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact methodological contrast read; alternatives now reflect distinct emphases rather than denial of verification or universal agreement. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Humanities methodological emphasis on description/interpretation,not allscience consensus/one1970srevolution or immunity to verification. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_d0c094632c07c1c2f9aaf6ab8d2109f45ba30df5f320be6cb205c5ceb3634c88",
+          "modified_time": "2026-07-16T20:51:46.425Z",
+          "snapshot_sha256": "dc83900b870b81710ac38ac33ec027a245cb91d54d69b07c5bb516c240cd4ba1",
+          "locator": "characters:1488:1610"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m4_person_011": {
-      "item_sha256": "dd4340bb88e535974c45e6a596af2cdeaf31a41775b39fa625b2066371941146",
+      "item_sha256": "e955113b500fc09c0bed83063f16cb8466896810f4037928d47d544a20242e90",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19991,8 +20039,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact three coexisting aspects conceptual definitions, no damaged author identity/chronology repair, mental-disorder universal claim, treatment effectiveness or participant anecdote. New distinction not covered by selected responsibility/choice question; own distractors test environment versus relational versus self-awareness aspects.",
-      "sources": []
+      "note": "Explicitly attributed existential-analytic distinction of coexisting modes of experience: Mitwelt concerns interpersonal relations,Umwelt the material/biological environment and Eigenwelt self-awareness. Neither isolated causal systems,BPSdomains,exhaustive diagnosis,nor mutually exclusive types of people. School terminology is not empirical universality. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_1aa5012ca2e6855cd49cc59c031e631b6d78d98569cbf7e064fc4fc3c50fd523",
+          "snapshot_sha256": "abab4ef1e8ca2ec02ca82fe3dcf3d41e187c335d6b9fda92216d954969b01855",
+          "modified_time": "2026-07-16T20:52:32.005Z",
+          "locator": "characters:1996:2082;characters:2221:2374;characters:2374:2474"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_psyl_002": {
       "item_sha256": "bfc427b682d84f37d09b53e9d6d44d5a366924325547063d1328d4f3e873ef63",
@@ -20380,10 +20436,10 @@
       "disposition": "keep"
     },
     "questions:m4_person_012": {
-      "item_sha256": "5bc57443188b80f8cbb2a37e63045b24adbd42c310bfdfd98b3721dab305b7c6",
+      "item_sha256": "039d7a945d43601ad8f01fcf1ab504dd81fd82bd762599f064201eee6bad7a2e",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20395,14 +20451,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact stated hypothesis only before toxic-label deterministic predictions. Hypothesis attribution, not universal cross-language proof, exact Galton chronology or word-based diagnosis.",
-      "sources": []
+      "note": "Lexical hypothesis is a research proposal: dictionary descriptors can be studied as indicators of individual differences. No identical structure in all languages,English-newest/most-words claim,Galton-date key or certain behavioural forecast from a toxic label. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_4a2d0f8b0fbe0070fa25279ebd847b82c57cda1f73a3ef63de9b5a80c3eae27e",
+          "snapshot_sha256": "3212597324566b250d6778af6d70bd5be9276c8520f3108e531808b302a09014",
+          "modified_time": "2026-07-12T06:39:59.393Z",
+          "locator": "characters:14308:14478;characters:16211:16310"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_013": {
-      "item_sha256": "ca8ada0d8babc448a203af5dcfa2929c323ec20ea2385fb2386b966da180e401",
+      "item_sha256": "c8331af7b959ac3c56675bb66eb2ec9843f60a403e2254cd204d0595559be640",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20414,14 +20478,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact five-factor structure passage; independently read OpenStax67–69,75–77 supports five names and continuum. No universal cross-cultural consensus, fixed permanence, nervous-speed equation, clinical diagnosis or outcome prediction.",
-      "sources": []
+      "note": "Five broad trait dimensions can vary jointly in a profile rather than one mutually exclusive type,age stage or list of trained skills. Source contrasts descriptive continua and broad factors; no every-item correlation,statistical causal mechanism,universal cross-cultural structure,automatic diagnosis or all-instruments validity. Author-lab selected page corroborates multidimensional scope only. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_4a2d0f8b0fbe0070fa25279ebd847b82c57cda1f73a3ef63de9b5a80c3eae27e",
+          "snapshot_sha256": "3212597324566b250d6778af6d70bd5be9276c8520f3108e531808b302a09014",
+          "modified_time": "2026-07-12T06:39:59.393Z",
+          "locator": "characters:14308:14478;characters:14505:14585;characters:18099:18191;characters:18360:18461"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_014": {
-      "item_sha256": "59e42b17ab406f3c614ab614322bf6eca2b9d4badda48a78f3f23489e303fa31",
+      "item_sha256": "0053f276af0b00ea677af4c52ce3410d5cd9d12c75ea4ce7b08047e0bed2fd94",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20433,8 +20505,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read exact shared-structure passage; use nearby statistical tasks and preserve noncausal interpretation limits. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Factoranalysis shared structure across indicators versus meancomparison/personclustering/regression;not allitems mutually correlate,exclusive5factors or causalmechanism proof. Applied methodological stem removes source-recall framing. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_4a2d0f8b0fbe0070fa25279ebd847b82c57cda1f73a3ef63de9b5a80c3eae27e",
+          "modified_time": "2026-07-12T06:39:59.393Z",
+          "snapshot_sha256": "3212597324566b250d6778af6d70bd5be9276c8520f3108e531808b302a09014",
+          "locator": "characters:17602:17787"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_002": {
       "item_sha256": "c1325666894565e725a566507e5bdead9bcf5f860fb3eb842005979e93f10b49",
@@ -21016,10 +21096,10 @@
       "disposition": "fix"
     },
     "questions:m4_person_015": {
-      "item_sha256": "6796151bcb72e2cceeca84084372e5aa1d1fca78ae77ba13c884fb365b5887b4",
+      "item_sha256": "6179adefb67ada8e99ae6ae1d9a66b9a094b2e50b9bcb071b4f4ab133d74b39f",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21031,8 +21111,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact manual-based non-arbitrary coding paragraph, excluding prior any-stem claim and later arbitrary rater-stage/training-effect percentages. Course procedure description, no full manual reading, validated assessment or clinical maturity ranking claim. Primary generic scoring training principles apply but instrument-specific empirical efficacy not asserted.",
-      "sources": []
+      "note": "The course describes special manual-based coding of a set of sentence completions by a rater. The question tests procedure recognition,not actual scoring,eligibility,validity or stage assignment. No arbitrary interchangeable stems,1996first/latest claim,allninelevels proved,automatic two-week competence or public test reproduction. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_4a2d0f8b0fbe0070fa25279ebd847b82c57cda1f73a3ef63de9b5a80c3eae27e",
+          "snapshot_sha256": "3212597324566b250d6778af6d70bd5be9276c8520f3108e531808b302a09014",
+          "modified_time": "2026-07-12T06:39:59.393Z",
+          "locator": "characters:38051:38390"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_079": {
       "item_sha256": "09261c696f880760596d1640c59dcb813a814ea7782fb012029437501e912dd6",
@@ -21315,10 +21403,10 @@
       "sources": []
     },
     "questions:m4_person_017": {
-      "item_sha256": "bae95a5f06f222aa8afce8fe1be0b238291651193be847d72f95c7b8ad7d44fa",
+      "item_sha256": "cd86ded4bd3e4ddb1b3a4bdca53c661ed88408a3d9e43cf0ebc51e0115cf3639",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21330,14 +21418,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "All four exact relation fragments read; distinguish relation scheme from adjacent needs/temperament/value schemes, no diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Apply character-schema relation-to-task to conscientious/negligent taskwork instead of memorising four-domain list;not developmental stage,moralrank or trait/motive inferred from one act. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_27ce54f73801ebd1b9437ab8a8455b7ebf575a2139536a42c94155deb8f484ef",
+          "modified_time": "2026-07-12T06:18:53.042Z",
+          "snapshot_sha256": "1c93a52d3429aee1df0f759740dc1a3e7a03351699d81fc079598c151489c1c1",
+          "locator": "characters:6086:6191"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m4_person_018": {
-      "item_sha256": "cc04f39787bd9da5587f0b9e54e514e8409416f667c6e3f443de5fb1668cf6d3",
+      "item_sha256": "8039e3d503cb9103244bac3216b0b15c181b7e0f85795e8f94b44a227bd219a5",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21349,14 +21445,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact Spranger contrast with temperament/constitution read; plausible alternative classification grounds instead of unrelated nerve impulses. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Spranger historical ideal values,not physicalconstitution/temperament or questionnaire factor;not six exclusive fixed real-person types. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_90960e22d39a316de971b81280a497e381aec932bf139dbb2de5d71a61a25924",
+          "modified_time": "2026-07-12T06:22:38.928Z",
+          "snapshot_sha256": "9a477749b4c43e2d15a8b920d40cef89ae544f37e070e5a90dd5488d9b7afef7",
+          "locator": "characters:3085:3241"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m4_person_019": {
-      "item_sha256": "6ea32dd26c8af74997e13d7c07eeb1b8cd204ec57fa2cf46e0670ae19a9979cd",
+      "item_sha256": "a0e05a6b867ac83cfdf8ed542102a8918b847a85c88ea08f60ae7d8fb345220c",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21368,8 +21472,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact creation/experience fragment read; distinguish pairs within bounded Frankl model instead of punishment and physiology trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Frankl creative versus experiential meanings,not imposed hierarchy/onlyifotherwaysfail or imperative to endure avoidable harm. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_1aa5012ca2e6855cd49cc59c031e631b6d78d98569cbf7e064fc4fc3c50fd523",
+          "modified_time": "2026-07-16T20:52:32.005Z",
+          "snapshot_sha256": "abab4ef1e8ca2ec02ca82fe3dcf3d41e187c335d6b9fda92216d954969b01855",
+          "locator": "characters:3355:3625"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_015": {
       "item_sha256": "315c9ba0880ced3b13dfd81c0ac0bfbe2987c9bb27887b9349327354b77f062d",
@@ -21526,10 +21638,10 @@
       "sources": []
     },
     "questions:m4_person_020": {
-      "item_sha256": "c83ea299b2b2d7065ee798a038529a0832275655cdfb9e6946ce4726fcd07ab9",
+      "item_sha256": "c691b5b28e6f3c9e6aa0e512ebd927ecb4676563fd43b014acaeb719a39260ba",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21541,14 +21653,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Attributed humanistic choice/intentionality emphasis only; no innate-goodness proof, universal agency or victim blame.",
-      "sources": []
+      "note": "Question names the humanistic account of choice,intentionality,aims and meaning as a school commitment. Adjacent approaches are represented by limited different emphases. No biological universal,innately-good assertion,unlimited control,blame for distress,all-therapies passive-person stereotype or guaranteed self-healing. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_2cba534d11898414704e7cfdb4b07bcef73b6fc4390a9fae380a6b1b32a92a6a",
+          "snapshot_sha256": "0abbe14a72d82da9e08f6471397271d5a71a8fb2904d0d2665e50a45dc3149a3",
+          "modified_time": "2026-07-16T20:51:08.740Z",
+          "locator": "characters:2343:2625"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_021": {
-      "item_sha256": "73e7ba90ca73a84ffd7787ade8f0afc1f18227d0f785581e616ab3f3984a4d03",
+      "item_sha256": "a134205cb39904b35eafc43c58669b8126bbbba6661dada6e6c3643ef0042faf",
       "discipline_id": "personality_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21560,15 +21680,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Simultaneous differently directed emotions are possible; the conditions distinguish this from alternating feelings or a purely bodily report. Current exact private fragment certificate; historical source holds and snapshots retained.",
-      "sources": [],
+      "note": "Possible simultaneous distinct emotions in authored ordinary experience,not alternation/synonym or anxiety onlysomatic;no diagnosis/lie inference or guaranteed moodlift. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_361df51c6b840d0ea2a967d59a0d67ed1ceebfcf6fc710968a5472500ca8e7f6",
+          "modified_time": "2026-07-12T06:20:47.688Z",
+          "snapshot_sha256": "a7d7c93c93752661390f85857ddd9b95bcb64cfc2311ee6011b9d337227579ee",
+          "locator": "characters:43777:43872"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m4_person_022": {
-      "item_sha256": "7ffb47c46d95aef3cfad2330d112fc4f80a4797f8e7500feae2083d3953960f9",
+      "item_sha256": "63812ea4ea92980df65e1549359bc2b17940962e98484af0f6c74726779308d8",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21580,8 +21707,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact three structural groups in attributed Merlin framework; no disputed Ananyev highest-level hierarchy adopted.",
-      "sources": []
+      "note": "Merlin attributed organism/psychic/socialpsychic modellevels,not completecausaltheory or abilitydevelopment guarantee;no conflatedAnanyev/nameclaim. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_90960e22d39a316de971b81280a497e381aec932bf139dbb2de5d71a61a25924",
+          "modified_time": "2026-07-12T06:22:38.928Z",
+          "snapshot_sha256": "9a477749b4c43e2d15a8b920d40cef89ae544f37e070e5a90dd5488d9b7afef7",
+          "locator": "characters:9122:9371"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_020": {
       "item_sha256": "6beb918a1bf80f10ecc69a09e2c6c650e2594caa6d68664f331c99450d0009a4",
@@ -21638,10 +21773,10 @@
       "disposition": "keep"
     },
     "questions:m4_person_023": {
-      "item_sha256": "b6ac2f120de1d04b03b4164a065f3b49e086639fffe3f3dbb5c42b6b40ac7f9c",
+      "item_sha256": "579cb7fa1023430d1cbdb4e2742b62fcc111de6d6b5946e36f8baa085e4c67a3",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21653,8 +21788,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Bounded formal-operation concept; lecture tower disappearance, absent logic/reality and universal developmental timeline not adopted. Corroborated foundation presentation of operational structures.",
-      "sources": []
+      "note": "The course explicitly introduces Piaget formal operations and formal logical thinking; original Piaget1972abstract verifies hypothetical reasoning beyond present concrete situations as the scientific clarification of that same course construct. No substitution of an unrelated web curriculum. No fixed universal age,all-or-none individual stage diagnosis,concrete-operation inability to reason/dream-reality claim or therapy/relationship competence prerequisite. Question distinguishes a type of reasoning rather than classifying a person. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_4a2d0f8b0fbe0070fa25279ebd847b82c57cda1f73a3ef63de9b5a80c3eae27e",
+          "snapshot_sha256": "3212597324566b250d6778af6d70bd5be9276c8520f3108e531808b302a09014",
+          "modified_time": "2026-07-12T06:39:59.393Z",
+          "locator": "characters:29976:30132"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_dev_007": {
       "item_sha256": "9d86c05f9ef0b5ce86b857381ad8a2e25da0abf3edf926b86507f215597b9aa7",
@@ -21773,8 +21916,8 @@
     "questions:m4_person_024": {
       "item_sha256": "7da5e2c96b1468c1febc94842f52a32f3884a5303a9eb4d0fe838bdb56739ab2",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21786,8 +21929,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact construct-filter passage read; key retained, explanation matches neighboring construct/trait/role/learning alternatives. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Kellyconstruct as interpretive system distinctfrom trait/role/conditionedreaction;not everyact fullyconscious rationalprediction or soleorigin of cognitivepsychology. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_a04e9f6b6e61f23de0bcd6457af23c4db8ba00ef832b263366ef58cd58e9df37",
+          "modified_time": "2026-07-12T06:16:53.267Z",
+          "snapshot_sha256": "83b75a2d4890557a3e94f877f37448b28ff20c3c4f594fc94dc2b29f74eaf059",
+          "locator": "characters:52311:52429"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_bonus_002": {
       "item_sha256": "245f6818f184557ad61e58d62f145d4bab1b896293084b4117f216c64e7dfa74",
@@ -22009,7 +22160,7 @@
           "locator": "characters:23968:24071"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_psyf_082": {
       "item_sha256": "2763eac84a7e1daa32475648fb9ab43a80e8dfefd28f6e6a9f01ddafc646d58a",
