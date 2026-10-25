@@ -8877,6 +8877,30 @@
       "topic_id": "t_c17d1ae57018",
       "item_sha256": "09c01f1d381b38faf3a3018e82f8404c08f26763e3b397f06bd2be1a0ecaa78e",
       "locator": "private certificate:questions:m1_intro_047"
+    },
+    "374a4bc37a8662e2b42003fc569a02f9c79b7f3196cfadedf061eb91bbc8f9de": {
+      "external_id": "m1_intro_029",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "da65174a6e09bcf7828096b547dbded207cf4ca362cf1bc7c5eaa34211499b5b",
+      "locator": "private certificate:questions:m1_intro_029"
+    },
+    "747a00980df45f0269be1c1d11fe1cc3f0e99e23d92b5c993b4ee3376e7142ef": {
+      "external_id": "m1_intro_033",
+      "topic_id": "t_5f1cca01d535",
+      "item_sha256": "bf840187c53b546c242dfba1933cced59fa272ef6e5df2c8ae40f11d3d82ef0e",
+      "locator": "private certificate:questions:m1_intro_033"
+    },
+    "aa6fc508f2163a8f91c50c364133e33333a32bd8cad63d297966a853d6b6d317": {
+      "external_id": "m1_intro_034",
+      "topic_id": "t_6f07f36a8251",
+      "item_sha256": "60bc556ccf5f18a9fa916587790d5ced1056b1480ab9e29a231545c8fb658dd3",
+      "locator": "private certificate:questions:m1_intro_034"
+    },
+    "8e24d21c326ea4acc0f4923d799fddf7da984a91b4f233e8c9aff86bf274aa7b": {
+      "external_id": "m1_intro_054",
+      "topic_id": "t_bc927cd2edda",
+      "item_sha256": "388c84893c5a0d605516bd593e75d5bbe4ccbf5ff1966e4896cfbd11f315d9a0",
+      "locator": "private certificate:questions:m1_intro_054"
     }
   }
 }

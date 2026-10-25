@@ -128,8 +128,8 @@
     "questions:m1_intro_004": {
       "item_sha256": "b87080c84b28239373302a204b47d3b1ab230cab8ea946d0f68fcafb20e8f015",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -141,7 +141,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced absolute secrecy/friends/technical-ban caricatures; no new legal exception asserted. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Professional confidentiality protects information with communicated limits,not only records or any-colleague permission. No concrete legal exception/threshold/recipient/country rule inferred.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -150,13 +150,13 @@
           "locator": "characters:15359:15457"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_005": {
       "item_sha256": "64889d471ec0aefefb89b1c94a303ca8d860607744da65222c4fbf67c2df07c5",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -168,7 +168,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Discriminates role boundary from personal distance/preferences without blanket dual-role claims. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Work role/conditions versus ordinary personal distance/emotional restraint or clinician convenience. Warmth compatible with professional boundaries;no universal all-other-contacts legal prohibition.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -177,13 +177,13 @@
           "locator": "characters:2300:2789"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_006": {
       "item_sha256": "35679d470793fdd1ba6226f1d2a36cc12b5e672b057fd2cae7ee2d740f2da9f9",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -195,7 +195,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Applied comprehension vs signature, timing and deferred explanation; no formal legal requirement inferred. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "A signed form without comprehension does not establish informed participation;explain before decision and check understanding. Not a universal written-form requirement or attendance-as-all-future-method-consent.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -204,7 +204,7 @@
           "locator": "characters:5734:6157;characters:15359:15457"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_007": {
       "item_sha256": "134719e8207d1756caa321e3ed3e43ecf0cdbcda28c913018307e4fcfb87542d",
@@ -312,8 +312,8 @@
     "questions:m1_intro_011": {
       "item_sha256": "87f10055ba139a81d708b0fd8f825d7817378a9aa5d185e287434ce838e9fc07",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -325,15 +325,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Behavioral listening task; alternatives are legitimate other tasks but not the requested accuracy check. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Paraphrase then client verification checks meaning;hypothesis,next fact or solution may follow but do not check what was already heard. No universal no-interruption/closed-question/eye-contact rule.",
+      "sources": [
+        {
+          "source_id": "src_3ab99fc5d2a66c65f159a4abfb87f707dd8e48bbe4b702bee0daaebd1f262ad0",
+          "modified_time": "2026-04-05T22:23:50.149Z",
+          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
+          "locator": "characters:1868:2114;characters:3607:3996"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_012": {
       "item_sha256": "82da7125d949cb2f54449ca94f5b6135f7d07074f47644887f21134716da7b1e",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -345,7 +352,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced superiority/domination caricatures with plausible scheduling choices; no complete alliance model claim. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Prior agreement on time/change rules provides predictability,not guaranteed trust/effect;not automatic extension or inflexible exception prohibition.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -354,7 +361,7 @@
           "locator": "characters:2300:2789;characters:7893:8479"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_013": {
       "item_sha256": "16c359e54b0457b13c2c41ebcf47fed2b462a58cc91e01bc3cf8c5a0c37d0015",
@@ -440,8 +447,8 @@
     "questions:m1_intro_016": {
       "item_sha256": "05c00b83680d39ac54852fe18da6479773f63a7504f6858d9e4423aeb160fa17",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -453,22 +460,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Specific responsibility objective; plausible confidence/preference/borrowed-experience errors replace miracles. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Task-specific preparation,grounds/application/limitations rather than confidence,client preference or colleague authority. Positive preparation/consent text only;exclude confidence-as-efficacy and care-as-unreviewed-experiment.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "characters:4038:4429;characters:5734:6157"
+          "locator": "characters:5734:6157;characters:10900:12029"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_017": {
       "item_sha256": "013c8a24069bdd7cc674fda9eb2cae93a268d57a04eaa9d6a57875c543c5b864",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -480,15 +487,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Introduces purpose-specific first-meeting choices, not obviously hostile behavior. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "First-contact unfamiliarity calls for introduction,role explanation and questions;long-term plan,full history or theory alone do not clarify the initial frame. No guaranteed rapport/efficacy or mandatory exact session format.",
+      "sources": [
+        {
+          "source_id": "src_58ddf14e68332d119302f7c1c5753076393fd4231cc40c66b3e52a79be440f71",
+          "modified_time": "2026-04-05T22:50:22.529Z",
+          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
+          "locator": "characters:4557:5003"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_018": {
       "item_sha256": "8996cb11fe30e247b1dc6323dda7979c0ef2fba6b74f84ff53c897a9a0ef9118",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -500,8 +514,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Clarification purpose and shared goal are explicit; not a fixed universal session plan. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
+      "note": "Explore expectations/needs and jointly agree feasible focus;typical-case template,first complaint as final goal or clinician-imposed plan insufficient. No exclusion from all help for initially unformed request.",
+      "sources": [
+        {
+          "source_id": "src_58ddf14e68332d119302f7c1c5753076393fd4231cc40c66b3e52a79be440f71",
+          "modified_time": "2026-04-05T22:50:22.529Z",
+          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
+          "locator": "characters:4064:4488;characters:5851:6317"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m1_intro_019": {
@@ -534,8 +555,8 @@
     "questions:m1_intro_020": {
       "item_sha256": "43c208110e246251f2d8e754b781505de8d8258b0084b1c7753610a8b30aaa58",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -547,15 +568,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Differentiates allocation of roles; no attribution of all unsuccessful outcomes to client. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Shared but different roles:professional process responsibility and client participation in goals/steps. No guaranteed compliance/outcome,client blame or requirement to use any requested method;stop before held blanket attendance claim.",
+      "sources": [
+        {
+          "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
+          "modified_time": "2026-04-05T22:48:11.869Z",
+          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
+          "locator": "characters:10900:12029"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_021": {
       "item_sha256": "5dccbfe7789495874c0a55261a7ffc96d5ac4c7e78974988f6bfee7b1f0f0fad",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -567,9 +595,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Single initial step with sufficient ordinary-consultation context; removed hidden-trauma and life-advice cues. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Explicit no urgent threat;ask what prompted current help-seeking. Do not impose typical goal/technique or require a ready request before help;positive inquiry clause only.",
+      "sources": [
+        {
+          "source_id": "src_58ddf14e68332d119302f7c1c5753076393fd4231cc40c66b3e52a79be440f71",
+          "modified_time": "2026-04-05T22:50:22.529Z",
+          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
+          "locator": "characters:4064:4488;characters:5851:6317"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_022": {
       "item_sha256": "907f3b3a68d0d07431c4a513b56a7266f32b33f0d21cfbaf01ada587148ac29b",
@@ -629,8 +664,8 @@
     "questions:m1_intro_024": {
       "item_sha256": "2d9dd6265828d40d33752ebcd4bc0044f15c24fe8de3f5a6c811e7782d8eb912",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -642,7 +677,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: No urgent threat and no agreed extension specify boundary task; exceptions discussed without automatic flexibility. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Explicit ordinary session/no urgent threat;discuss future extension request and rules while preserving current agreed time. Neither automatic permanent extension nor no permissible negotiated change.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -757,10 +792,10 @@
       "disposition": "retire"
     },
     "questions:m1_intro_029": {
-      "item_sha256": "d29c319ff1c829fccee10e7e534b3d5343a39817a51b4911588e86abfb98efe1",
+      "item_sha256": "da65174a6e09bcf7828096b547dbded207cf4ca362cf1bc7c5eaa34211499b5b",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -772,8 +807,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Comparable supportive-sounding responses, with context-specific explanation of errors. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
+      "note": "Actual second-key explanation previously called the reflection first;now names the significant-experience/current-feeling phrase. Acknowledge and ask,not minimise,assume self-esteem cause or judge severity from one line.",
+      "sources": [
+        {
+          "source_id": "src_3ab99fc5d2a66c65f159a4abfb87f707dd8e48bbe4b702bee0daaebd1f262ad0",
+          "modified_time": "2026-04-05T22:23:50.149Z",
+          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
+          "locator": "characters:1868:2114"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m1_intro_030": {
@@ -889,10 +931,10 @@
       ]
     },
     "questions:m1_intro_033": {
-      "item_sha256": "40e061c1ccf8cb278961bee5967f74b0d53639bc6cb40a5ed8e07b6d8afdccc0",
+      "item_sha256": "bf840187c53b546c242dfba1933cced59fa272ef6e5df2c8ae40f11d3d82ef0e",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -904,15 +946,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Concrete context clarification distinguishes inquiry from presuppositions; diary/listening homework identities retained. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
+      "note": "Actual second-key explanation previously called the question first;now names the event/repetition clarification. Other options assume habitual reaction,causal trait or settled explanation absent from the premise.",
+      "sources": [
+        {
+          "source_id": "src_3ab99fc5d2a66c65f159a4abfb87f707dd8e48bbe4b702bee0daaebd1f262ad0",
+          "modified_time": "2026-04-05T22:23:50.149Z",
+          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
+          "locator": "characters:5128:5349"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m1_intro_034": {
-      "item_sha256": "6b668d645fae30f2e98834a2575d01438f89f438fa83bb108409de90a147549a",
+      "item_sha256": "60bc556ccf5f18a9fa916587790d5ced1056b1480ab9e29a231545c8fb658dd3",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -924,7 +973,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Ordinary requested sharing with another professional requires clarifying scope and consent; no universal legal exception taught. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "New explicit ordinary transfer with recipient/scope unspecified and no described urgent threat. Clarify intended recipient,information and understandable transfer agreement;medical status not permission for all records and blanket refusal not required. No disclosure-without-consent legal determination.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -933,7 +982,7 @@
           "locator": "characters:5734:6157;characters:15359:15457"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_intro_035": {
       "item_sha256": "2266e0ea10482b182d1ee5a2497d27c9d9b522463332dc980f99c4cdee67f6e4",
@@ -1019,8 +1068,8 @@
     "questions:m1_intro_038": {
       "item_sha256": "f84913add09ce82f26ec7f0300b8caddb9fdcf67ea3a03c8c32eb9ab317088a4",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1032,9 +1081,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Explores expectation of certainty rather than repeating unclear-request item021. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Insufficient information for what-is-wrong explanation:clarify actual difficulty/desired understanding. No single-reply diagnosis,automatic favourite theory or standard-treatment plan.",
+      "sources": [
+        {
+          "source_id": "src_58ddf14e68332d119302f7c1c5753076393fd4231cc40c66b3e52a79be440f71",
+          "modified_time": "2026-04-05T22:50:22.529Z",
+          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
+          "locator": "characters:4064:4488;characters:5851:6317"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_039": {
       "item_sha256": "da810154763028d9b70f18ebe871a114dad62c5fe0e1c59f3c7f04c324946fef",
@@ -1095,8 +1151,8 @@
     "questions:m1_intro_041": {
       "item_sha256": "9b4b257cedf2eb831d370ed68621638fe9a2bb9c06a740122f6720a9860d6097",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1108,7 +1164,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: All alternatives are plausible conditional promises, no impossible-change/abrupt-termination caricatures. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Discuss aims/time/uncertainty without promising an exact individual outcome;mean duration,contract or recommendation compliance are not guarantees. No legal contract-enforceability claim.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
@@ -1117,7 +1173,7 @@
           "locator": "characters:5734:6157"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_042": {
       "item_sha256": "d50e4f821b57515cdd0dcfafb38c985793add036a4c4d4429324b35a032d86c2",
@@ -1172,8 +1228,8 @@
     "questions:m1_intro_044": {
       "item_sha256": "9e4e170d9e15e54b90e50303660d90be6365fdfd78bfda3b3a23b6a229c3d7d0",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1185,9 +1241,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Preserves external-referral motivation objective without coercive or automatic-refusal distractors. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Referral by employer does not establish own client goal;ask individual perspective/expectation rather than impose employer/majority/clinician programme. No employer information-access permission.",
+      "sources": [
+        {
+          "source_id": "src_58ddf14e68332d119302f7c1c5753076393fd4231cc40c66b3e52a79be440f71",
+          "modified_time": "2026-04-05T22:50:22.529Z",
+          "snapshot_sha256": "90648250a0cd3551ae57320e32721557abbdb43d162171404434239b8eb14aae",
+          "locator": "characters:4064:4488;characters:5851:6317"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_045": {
       "item_sha256": "c37690fb232fc7d34427674b41d6ef68da92dc2424fadd7d8f3858b61490b6f6",
@@ -1220,8 +1283,8 @@
     "questions:m1_intro_046": {
       "item_sha256": "1f564b84078b0099a29ca3c46534261664f5324f8b3711e66b7d0d80ca87c522",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1233,16 +1296,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Applied informed participation rather than another generic autonomy slogan. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Client may ask purpose and discuss informed next step;clinician retains professional responsibility. Not obligatory participation/complete disclosure or client choice as sufficient method qualification.",
       "sources": [
         {
           "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
           "modified_time": "2026-04-05T22:48:11.869Z",
           "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
-          "locator": "characters:2300:2789;characters:5734:6157"
+          "locator": "characters:5734:6157;characters:10900:12029"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_047": {
       "item_sha256": "09c01f1d381b38faf3a3018e82f8404c08f26763e3b397f06bd2be1a0ecaa78e",
@@ -1274,8 +1337,8 @@
     "questions:m1_intro_048": {
       "item_sha256": "01aaf4f5d7fec2097a460516f4d6febbd7a37631fbe9f429165311e261c20134",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1287,15 +1350,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Sufficient conditions remove inferred avoidance label; no pressure to overcome resistance. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Client explicitly reports joke function and fear;agree manageable exploration after clarification,not infer resistance from smile alone,force depth or impose therapist hidden need. Exact invitation to self-exploration only.",
+      "sources": [
+        {
+          "source_id": "src_0e6a24369f82b9bdee72751d75eb4ed7e08da1c188cef04a416e2e6299399b0c",
+          "modified_time": "2026-04-05T22:53:25.427Z",
+          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
+          "locator": "characters:10403:10567"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_049": {
       "item_sha256": "ebfe73501cfe889f8e4d4a4258bc3954c8fa74ff14745157a25ba8fb3a3f50ac",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1307,9 +1377,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: True neighboring features of friendship are contrasted with the defining professional frame; no hostile alternatives. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Professional roles/conditions/responsibility distinguish counselling from friendship;empathy/listening/important topics can occur in both. No coldness prescription or claim friendship has no legal significance.",
+      "sources": [
+        {
+          "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
+          "modified_time": "2026-04-05T22:48:11.869Z",
+          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
+          "locator": "characters:2300:2789;characters:10900:12029"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_050": {
       "item_sha256": "16dd3d499b4cd8555d682a9f4210fe6e1542784a89a38c2d75260152bc63640b",
@@ -1563,8 +1640,8 @@
     "glossary:confidentiality": {
       "item_sha256": "c52fcf8e9df7815729f71bbd94ab0ef054373667bacf23a634c9c22c2c94dbba",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1576,22 +1653,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Removed fictional label from independently authored storage/privacy illustration; no specific legal exception added. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Protect client information within applicable professional/legal limits and clarified agreed use. No unlimited secrecy,automatic parental/colleague/third-party access or invented crisis reporting rule.",
       "sources": [
         {
-          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "characters:8485:8779"
+          "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
+          "modified_time": "2026-04-05T22:48:11.869Z",
+          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
+          "locator": "characters:15359:15457"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:professional_boundary": {
       "item_sha256": "77356af5b274b159a8d934697a995be7162891d1bb1a6c82a3400f0b37c7366b",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1603,22 +1680,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Removed fictional label; clarified role frame rather than claiming boundaries mechanically prevent every role conflict. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Working roles and responsibility distinct from personal relationships. Authored business-partner proposal examined for role conflict;not a verified blanket ban on every incidental/multiple contact in every setting.",
       "sources": [
         {
-          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "characters:2855:3037"
+          "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
+          "modified_time": "2026-04-05T22:48:11.869Z",
+          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
+          "locator": "characters:2300:2789"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:informed_consent": {
-      "item_sha256": "7287d994d1820fe73f83e7339250df3757641fc7418934acf25606ce5b93e793",
+      "item_sha256": "55ad5c7b844408e47044b0cd633c0a78835b90b412aa6a6c4ea2737ae3259405",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1630,13 +1707,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Removed fictional label; voluntary decision after understandable explanation retained, no signature-only assertion. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Clarify that consent is a voluntary informed decision,not the explanation alone or a signature proving comprehension. Goals/format/risks/limits discussed. No generic current legal form/representation or all-method ongoing-consent rule.",
       "sources": [
         {
-          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "characters:2227:2398"
+          "source_id": "src_a89b804e6b29af76a8ff1cb485dce87db6709dc7200befd4c1177b474c085386",
+          "modified_time": "2026-04-05T22:48:11.869Z",
+          "snapshot_sha256": "b29e3c5a667cfbc41623c317abb9dbde654d94d0f2e06a07100517351e904756",
+          "locator": "characters:5734:6157;characters:10900:12029;characters:15359:15457"
         }
       ],
       "disposition": "fix"
@@ -1752,8 +1829,8 @@
     "glossary:active_listening": {
       "item_sha256": "61e5269200e14d72d8ec54872506a7188c315cf797145169692ba1d20bc85b10",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1765,16 +1842,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Removed fictional label; example shows paraphrase/correction as a listening action, distinct from empathy stance. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Clarification/content/feeling reflection with possible correction,not accurate access to hidden experience,mandatory posture/eye contact or a fixed universal sequence.",
       "sources": [
         {
-          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "characters:0:255"
+          "source_id": "src_3ab99fc5d2a66c65f159a4abfb87f707dd8e48bbe4b702bee0daaebd1f262ad0",
+          "modified_time": "2026-04-05T22:23:50.149Z",
+          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
+          "locator": "characters:1868:2114;characters:3607:3996"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:working_alliance": {
       "item_sha256": "90705821751e39307705e14cbb005df832d09449081c1c0d2087fb477b5fb872",
@@ -23144,6 +23221,87 @@
         }
       ],
       "note": "Review recurring situations,reactions,resources and change;page count,initial-theory confirmation or absence of doubt not professional growth. Not a clinical progress/competence guarantee.",
+      "disposition": "keep"
+    },
+    "questions:m1_intro_054": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "388c84893c5a0d605516bd593e75d5bbe4ccbf5ff1966e4896cfbd11f315d9a0",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_0e6a24369f82b9bdee72751d75eb4ed7e08da1c188cef04a416e2e6299399b0c",
+          "modified_time": "2026-04-05T22:53:25.427Z",
+          "snapshot_sha256": "ca4a9d79a9979a20d7c50a47b274e764988f13d9fc83b4318bb89efe801e8d87",
+          "locator": "characters:16715:16758"
+        }
+      ],
+      "note": "Conditional clinical-learning example:prior urgent help/safety assessment given;current capacity,consent,goals/support still matter. No mandatory deep work/childhood cause,universal stabilisation protocol,guaranteed calm or breathing technique. Only literal readiness clause qualified;all unsafe surrounding protocol held.",
+      "disposition": "fix"
+    },
+    "questions:intro_listening_observation_note": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "b17aed50c5e0c3fd353366c0f8f0ed8389a02d71cd6cfc6d207b3ffcf5dc1e6e",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_3ab99fc5d2a66c65f159a4abfb87f707dd8e48bbe4b702bee0daaebd1f262ad0",
+          "modified_time": "2026-04-05T22:23:50.149Z",
+          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
+          "locator": "characters:22704:23959"
+        }
+      ],
+      "note": "Actual exercise knowledge:record own clarification,response and learning,not diagnose others from impression,persuade or measure amount of private disclosure. Source permits diary/practice,not clinical competence certification or collecting personal conversations.",
+      "disposition": "keep"
+    },
+    "questions:intro_listening_feedback": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "992ee8788bb59835977b0947f0fa09297eb99ca981a937c3dc57f8ba9139acd4",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_3ab99fc5d2a66c65f159a4abfb87f707dd8e48bbe4b702bee0daaebd1f262ad0",
+          "modified_time": "2026-04-05T22:23:50.149Z",
+          "snapshot_sha256": "b4ed70e38fa246170648da80936fa14f4721db9efcb381e9af8dd55f0bdf96b0",
+          "locator": "characters:22704:23959"
+        }
+      ],
+      "note": "Participant correction improves tentative understanding;do not privilege supposed nonverbal anger over their report or infer global lack of empathy. Use feedback for learning,not mindreading/pretence detection.",
       "disposition": "keep"
     }
   }
