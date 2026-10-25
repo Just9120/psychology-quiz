@@ -9333,6 +9333,60 @@
       "topic_id": "t_6d89c8fc95f4",
       "item_sha256": "abdd24ee1850b02e8c54099e022ee0a6821e2f867304cf6e321bb0b280d27ff3",
       "locator": "private review:questions:m6_psyl_011"
+    },
+    "c0b393c13c3f8596c1f97f981bf1abf4d01079682415e25ed3e51a73e9e507da": {
+      "external_id": "m2_pd_006",
+      "topic_id": "t_50367f0a1a1d",
+      "item_sha256": "a212bdac8b7775b710623223bb8f92a74725d6f69e476a3fafb0fe92f3176f8e",
+      "locator": "private certificate:questions:m2_pd_006"
+    },
+    "46576746c7e26994ff502ca6185a84789de4c725ffeabb9ed7cab9ca5a439df2": {
+      "external_id": "m2_pd_011",
+      "topic_id": "t_5aebea2fd740",
+      "item_sha256": "67b1003ea0767617d0e9593f2b1ceaf0e4e8c76415e73d6e8660e72667ac94e7",
+      "locator": "private certificate:questions:m2_pd_011"
+    },
+    "1896cb9029cba1e3fb574546f9289c8847712f063a9ba012d575147be1a401ab": {
+      "external_id": "m2_pd_015",
+      "topic_id": "t_5aebea2fd740",
+      "item_sha256": "eb7947614ca14de36087f5cf27309d9a2ddd95a9f85d22401313d1d7524de36d",
+      "locator": "private certificate:questions:m2_pd_015"
+    },
+    "cd46a14a2b960046ed18ecc2b1e809aae3d603601e408ceaedae808d7396f884": {
+      "external_id": "assessment_feedback_agreement",
+      "topic_id": "t_5aebea2fd740",
+      "item_sha256": "5a82a421c40214e70e69e7e31c0a09caa19de886fa628e8a7c1989ade70eb312",
+      "locator": "private certificate:questions:assessment_feedback_agreement"
+    },
+    "936bfdeac999c8aa0fb4d3babef45896401fbddf1eeeb1ea49d491df19b1e851": {
+      "external_id": "m5_clinical_004",
+      "topic_id": "t_ed21996686a8",
+      "item_sha256": "3c7b03761dfd16b7e448d164577bfb7043cd017f5546aac435ddf4206874066d",
+      "locator": "private review:questions:m5_clinical_004"
+    },
+    "1efd82852eb0ec22d3b4a74060bb116c18caeee857913c865e5174b24d6accd3": {
+      "external_id": "m5_clinical_017",
+      "topic_id": "t_284ec6eeecd6",
+      "item_sha256": "8a54acaf1308280b4758f0cc63247592ae9a4b501c8e61ea0558be683b271594",
+      "locator": "private review:questions:m5_clinical_017"
+    },
+    "ad8fa546e72d4b8bb8cd0a39d81a96db55fb9a08b7728181f51f14f115381d5a": {
+      "external_id": "m5_clin_025",
+      "topic_id": "t_fded5a914d5a",
+      "item_sha256": "fd782156ba957aeba041bd6b4d5f9c1651d2029e4e32adddf9010f20e8761142",
+      "locator": "private review:questions:m5_clin_025"
+    },
+    "7a28b7dd8624c8509c1ee05aa2665d92c817c1001b7717d6e3b8f133cb37baf2": {
+      "external_id": "m4_dev_010",
+      "topic_id": "t_ef4a29dbfadb",
+      "item_sha256": "bec94d5e8a97014c87207ba65a36b40f513b2c9b014ab3965b2ca5b0ed2952ed",
+      "locator": "private review:questions:m4_dev_010"
+    },
+    "24b6cc1b5ef02e58a2569a7ee31fa73ef83657b0054dcc5fbcc581b59168772f": {
+      "external_id": "m3_psychological_consulting_020",
+      "topic_id": "t_09efb9aedb46",
+      "item_sha256": "205201b22d523292b91b6d90bb6c028095db87416e00611cba1c724ef9823dc2",
+      "locator": "private review:questions:m3_psychological_consulting_020"
     }
   }
 }

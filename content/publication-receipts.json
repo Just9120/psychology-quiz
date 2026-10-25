@@ -7176,13 +7176,13 @@
     },
     "questions:m3_psychological_consulting_020": {
       "schema_version": 1,
-      "item_sha256": "483b976a288f6eef7bffc4a418c5d8bdb4f5b193c53d350e5fe80c2566bd1177",
-      "review_sha256": "8112e00f61d686c3fcda10cd9e827a14e7f47cad3bcdf683ef3dc74fe14a51a5",
+      "item_sha256": "205201b22d523292b91b6d90bb6c028095db87416e00611cba1c724ef9823dc2",
+      "review_sha256": "25db81af50c6eaf24fd17b20595da88a27dfab2f91ecd14119a749ce370a1261",
       "topic_id": "t_09efb9aedb46",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -8843,13 +8843,13 @@
     },
     "questions:m2_pd_001": {
       "schema_version": 1,
-      "item_sha256": "a38fa605e1c88ca4a67cb844670f19448c7b4f777e59d5093fe021267c9a5e9e",
-      "review_sha256": "8f89c51737b886324fb78454e5b82f8e6aa2b42fbebf22feddfb3e7c61e5dfc6",
+      "item_sha256": "b4214de8c82add9cf5d7b36e51fda94fc575b740c40579abf65a5e2037b8ce6b",
+      "review_sha256": "42a6605565e7c346f45bba8d642b68fbc4b5998a3dc23c4a7e4fbfdf21c92bf1",
       "topic_id": "t_290c97a08218",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -9205,7 +9205,7 @@
     "questions:m5_clinical_003": {
       "schema_version": 1,
       "item_sha256": "cac3aa102b3f4a934f086e728b8ceeda49a8afcd5914ecf00f8308d2c29783e2",
-      "review_sha256": "655e83db3a0d60679de7241bbe39f37c95bd7fe9a2f2c9184ca52b5eae59990c",
+      "review_sha256": "67651f482061ea000b7a684aa3203a45dc9fb44dbb110a211ae417cf33b34834",
       "topic_id": "t_ed21996686a8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -9223,13 +9223,13 @@
     },
     "questions:m5_clinical_004": {
       "schema_version": 1,
-      "item_sha256": "f6a572530c7a9a1f788da6a3523a9876dc297fce8d0b2ff8485ae8226539bd8e",
-      "review_sha256": "34335044fc8fb37661add273b45a06acc7f085ddbbf11086e1a1c086203da79f",
+      "item_sha256": "3c7b03761dfd16b7e448d164577bfb7043cd017f5546aac435ddf4206874066d",
+      "review_sha256": "329965958c892c82fc1d5961915b7c596fc7d8c4c168f54450b10dd5f5c799ee",
       "topic_id": "t_ed21996686a8",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -9243,7 +9243,7 @@
     "questions:m5_clinical_005": {
       "schema_version": 1,
       "item_sha256": "3428010b8fb12f62faf4b356675ec8451413989beaea1405e4d11ef716a11817",
-      "review_sha256": "bf9770ba566579109a245fc9c4e8dc14f55a61d794c34fa7cc3592d3ec6f7709",
+      "review_sha256": "58afb64963a8d29697eaa49b8e60d2f63ca12aa736ecaf974a0d2645edb7ae71",
       "topic_id": "t_ed21996686a8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -9528,7 +9528,7 @@
     "questions:m5_clinical_006": {
       "schema_version": 1,
       "item_sha256": "460de6d30979146bcc1b903d94d5b21271757fd7e8229731578d0b445b230d80",
-      "review_sha256": "58460120ee54d48770c1b23b5a5da0d736e77a752986eddc4ba2238202c528de",
+      "review_sha256": "9b0d4ac988c08e035cc363f9cc87ea46c4e4ad637551f3151ebc823bfb76549e",
       "topic_id": "t_ed21996686a8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10744,7 +10744,7 @@
     "questions:m4_dev_004": {
       "schema_version": 1,
       "item_sha256": "3485a772a307c51b6990c65860affdb567ed46cc25175e471a1eb109552994f8",
-      "review_sha256": "6704a1b8c317e0e1427ff576055c89ad04930f1ba8dca275d80eabca6dbef037",
+      "review_sha256": "54bc5195870269d6d22a12d190a90367662230e010cb425f26b6f9b64e89f1e6",
       "topic_id": "t_ef4a29dbfadb",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10819,13 +10819,13 @@
     },
     "questions:m2_pd_002": {
       "schema_version": 1,
-      "item_sha256": "7f8c01fa91da802d1497efdd375ecbc3ca41296511370447dd4f826c79abcd14",
-      "review_sha256": "baec36ed6413fdef971dd182006329eb6d267e2ee3b217783a3964a6156b05a8",
+      "item_sha256": "8ed1406906a0fce6f71f68a608555b0b396535a19f84d28fb6a0d40537a861fb",
+      "review_sha256": "6464fabe70b20aa922501a44557c63eab3607d3cf48a6ab07fe19a5c1a8691f0",
       "topic_id": "t_50367f0a1a1d",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -10858,7 +10858,7 @@
     "questions:m2_pd_004": {
       "schema_version": 1,
       "item_sha256": "1f40d70be1e59eaf933a5dde42ed78ae6452898be6a6be704e691701352fc30e",
-      "review_sha256": "6991062d5db03699af8eeecac561685b12818fcbb91f00420b96d265cec12451",
+      "review_sha256": "1b48a035d7f32226e4a0dd033f20569c2c9c0e571d05e25c21268c8e2c0245b1",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10877,7 +10877,7 @@
     "questions:m2_pd_005": {
       "schema_version": 1,
       "item_sha256": "ed751176994a5dc879d292828b6aba8f650f551d2360343d92c785c594b5eb1e",
-      "review_sha256": "b0f3c32b3362dc4f4cbf422c0acf2095a7966bb7735a2463d6625eb18cf402a2",
+      "review_sha256": "93032acac3cf3970c6e2dd0d05070d7bdfda8e8308e257ac02449aea288de6c5",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10896,7 +10896,7 @@
     "questions:m4_person_012": {
       "schema_version": 1,
       "item_sha256": "039d7a945d43601ad8f01fcf1ab504dd81fd82bd762599f064201eee6bad7a2e",
-      "review_sha256": "68f1958a211e4e3284f306a3211eb7d772b4bf492936e38aa4200da499a4b0cb",
+      "review_sha256": "9ac1ecf4289a569a5e7d31fa5bf47906e28484a86f9d5295ef23aa8bb985e7fe",
       "topic_id": "t_06b57c568b62",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10915,7 +10915,7 @@
     "questions:m4_person_013": {
       "schema_version": 1,
       "item_sha256": "c8331af7b959ac3c56675bb66eb2ec9843f60a403e2254cd204d0595559be640",
-      "review_sha256": "88f7d5132f59e3a250641fb823e91a8d42e42fb84f76fe044c7c79e2ee429646",
+      "review_sha256": "8f09da55c692e06ceeaa3f9860815de150c1ef84bb0bb9680742eef10531ed57",
       "topic_id": "t_06b57c568b62",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10934,7 +10934,7 @@
     "questions:m4_person_014": {
       "schema_version": 1,
       "item_sha256": "0053f276af0b00ea677af4c52ce3410d5cd9d12c75ea4ce7b08047e0bed2fd94",
-      "review_sha256": "07a4ffd5f9f5e98f5ca95edaedd577d533958fac074a4c37edc487e995e8c7df",
+      "review_sha256": "0436924405f69530372607c14c316122997597cfde8b13a70c97fabb3d9571fa",
       "topic_id": "t_06b57c568b62",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11066,13 +11066,13 @@
     },
     "questions:m2_pd_006": {
       "schema_version": 1,
-      "item_sha256": "8b5158171f7c9494b4fad80aac0a917930b9c98809de14e247c61cfa7d81c9dd",
-      "review_sha256": "effd5193479a70a899ff34dc24333ad060f48482be550507d02be382de91b7c5",
+      "item_sha256": "a212bdac8b7775b710623223bb8f92a74725d6f69e476a3fafb0fe92f3176f8e",
+      "review_sha256": "5062fc9d9c8a164484d18e6ec1f64e5207c40da7c3804b12d4e6c69aff5d2616",
       "topic_id": "t_50367f0a1a1d",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -11086,7 +11086,7 @@
     "questions:m2_pd_007": {
       "schema_version": 1,
       "item_sha256": "7545a586b0cc4e4fa8f44f70bd7a2d01a6ead4fdba03764d7f13f39cc38e74be",
-      "review_sha256": "1680139c709365c50c2516a2ee21ca2c7bad5ed3c28568b188f76d00c06dd298",
+      "review_sha256": "2efa17d4873fb5ecb2e8e01f19478a1721e216d0e4b5a0d7062e36019d48f859",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11105,7 +11105,7 @@
     "questions:m2_pd_008": {
       "schema_version": 1,
       "item_sha256": "eb0ed834d91ebc03ec2a443794bdb08c6574d7e02a39666bb054f2ec17c36c91",
-      "review_sha256": "7e6c0f807be4d358eb54529081ea86ac9eb547d8e92282b6b358636f485040a5",
+      "review_sha256": "f975e0b1fb539eacc14b1d7a19f6ae64b7950b4aabb26c71586405bf83f7660a",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11123,13 +11123,13 @@
     },
     "questions:m2_pd_009": {
       "schema_version": 1,
-      "item_sha256": "b1b58b411649c266c48e2e81f96f8654b21f6f969ec636bdc76bd066da1f77f4",
-      "review_sha256": "6d5835fb1b5cbab83664c2b60f2c8f1f7b46e186d3753a74086347aa3b2dfec0",
+      "item_sha256": "9c4a14925514622c431e528fc87e37e58d531726ac680e3e52801aaf944cde01",
+      "review_sha256": "8885d5b96a59b444df19fa33e4930fab3738652c1a7ec4151a3cd777f466842f",
       "topic_id": "t_5aebea2fd740",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -11143,12 +11143,12 @@
     "questions:m2_pd_010": {
       "schema_version": 1,
       "item_sha256": "400330cd1419ffb8266559a863a8e4592fb2c52f11469988fb6e9166aa604cbf",
-      "review_sha256": "06d2d1573a7fc6d2283e9ef50651a6307a4dbae05653634a6c9b9e0e3f1b4a0d",
+      "review_sha256": "55d0cc5a26787705807f850c9ec956898f350f64ce88361e5b4bd5af3c31be3c",
       "topic_id": "t_5aebea2fd740",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -11161,13 +11161,13 @@
     },
     "questions:m2_pd_011": {
       "schema_version": 1,
-      "item_sha256": "1933334f2a47dab83d6ba726e0a5db524b6cfce3d1961bcca5231d8a98b3cbf4",
-      "review_sha256": "1ca6944c0069b96d281def33b85db5d69dfce0d3d446dcb3452ff7178029c383",
+      "item_sha256": "67b1003ea0767617d0e9593f2b1ceaf0e4e8c76415e73d6e8660e72667ac94e7",
+      "review_sha256": "b4ee4286e43b69b3d8ff8689695fd5fea8df8e121f3a2a2c90cf65e1bfb77f08",
       "topic_id": "t_5aebea2fd740",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -11314,7 +11314,7 @@
     "questions:m2_pd_012": {
       "schema_version": 1,
       "item_sha256": "1633fed0c241186833e426f184512db88388af1ad237725459aab3123a9092b9",
-      "review_sha256": "2546d48516b4df388cee6c7e2c70981028799b360761b6590152dd3f419cbd3d",
+      "review_sha256": "c86a2883a5a6cfd005a19d72d4edc3d718f24a384022f52e05f4eb186116f5fa",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11333,7 +11333,7 @@
     "questions:m2_pd_013": {
       "schema_version": 1,
       "item_sha256": "4760916a165346dae0bb6ade5c14c52275c1c604ae15bb913654f12bf3470a1a",
-      "review_sha256": "2dddf158317bbea31a8de5d08fe22f352373e8af2a189127aab4407bbd8b15c7",
+      "review_sha256": "39aaff13d9281c568895a1f447390ca60168ad6ea3fac563d9bc56a822f11877",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11351,13 +11351,13 @@
     },
     "questions:m2_pd_014": {
       "schema_version": 1,
-      "item_sha256": "8369b83acdfb8fb1d830e4fe853e392b4b58fbf19c311b8076684928b871de82",
-      "review_sha256": "ebe679e3cef2cb90a5e011d9242b55481c4efeecc7fc8607060f10dccfef7a6b",
+      "item_sha256": "7e126e3d4156729461faa84443a5ae8b35e8993b64553fa17d05dbc8309210be",
+      "review_sha256": "32753e3f7ef2f22af3a62d477977def402588ea5d2a680adff24bd8435b5177a",
       "topic_id": "t_5aebea2fd740",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -11370,13 +11370,13 @@
     },
     "questions:m2_pd_015": {
       "schema_version": 1,
-      "item_sha256": "f9d1574b0b970ca901df11a29093b6d2043b53fdfb6d04e397cda74ae6ff261d",
-      "review_sha256": "4651c9e8d259da44bb3aac374a32beb899bab17d1fa25e0376f8ab714274f9b6",
+      "item_sha256": "eb7947614ca14de36087f5cf27309d9a2ddd95a9f85d22401313d1d7524de36d",
+      "review_sha256": "5f3ece1f2cc62d60c791008d99b9b0cf9bebf01a2aacaf55c6a4e85bfc6b3667",
       "topic_id": "t_5aebea2fd740",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -11390,7 +11390,7 @@
     "questions:m4_person_015": {
       "schema_version": 1,
       "item_sha256": "6179adefb67ada8e99ae6ae1d9a66b9a094b2e50b9bcb071b4f4ab133d74b39f",
-      "review_sha256": "3fe89fa4ae27b3e93b83c37b78a8a2c4d7c975347a956f88adf93dfde7c50f94",
+      "review_sha256": "5e7c1e6819548cde9caf251281f0ceb180a89e45e8df35f9bb3ed612714adddb",
       "topic_id": "t_06b57c568b62",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11922,7 +11922,7 @@
     "questions:m4_person_023": {
       "schema_version": 1,
       "item_sha256": "579cb7fa1023430d1cbdb4e2742b62fcc111de6d6b5946e36f8baa085e4c67a3",
-      "review_sha256": "abc96c3ac32ed3314f7a47fc69c3c0d2b841b7f82c657a2be8235eb37192588e",
+      "review_sha256": "09654b48343f92444785e5d7d48dc00279bf9328c54bd7a38941b67e6057de4a",
       "topic_id": "t_06b57c568b62",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12149,13 +12149,13 @@
     },
     "questions:m5_clinical_017": {
       "schema_version": 1,
-      "item_sha256": "7e7bbf5bc3806a5dcf35128035f7ba845d6fa05490fa0d15969a6e23d69e7cde",
-      "review_sha256": "8b4984ca31a48acad92c641654066117e78f6501980152c05a4d7ce7c132b684",
+      "item_sha256": "8a54acaf1308280b4758f0cc63247592ae9a4b501c8e61ea0558be683b271594",
+      "review_sha256": "c9625541b5cfe39c68f70a47f97539b052b727cea09892b2bfe910b245fd65d1",
       "topic_id": "t_284ec6eeecd6",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -12302,7 +12302,7 @@
     "questions:m2_pd_017": {
       "schema_version": 1,
       "item_sha256": "fd800a0c7f8ef6c2d9f14a1fd66be7a092b2446271a45032593756f36774a7cf",
-      "review_sha256": "98931ddbd4fff29683768f7d80c0d9649056809b2f78b33286dd741a0e5252d8",
+      "review_sha256": "fd5bdf2614e526ea60b39b2af70bf588ce4f20331364e14b95a32b399565a713",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12605,13 +12605,13 @@
     },
     "questions:m4_dev_010": {
       "schema_version": 1,
-      "item_sha256": "0001296850cb047d32c95f048e9686a11b7eee3f14a3ac77ee5f9b235d3b9ec4",
-      "review_sha256": "a66a93857a6c45c91b42697e54affe7485c854a433aafde809dffe9ed1e8a2c7",
+      "item_sha256": "bec94d5e8a97014c87207ba65a36b40f513b2c9b014ab3965b2ca5b0ed2952ed",
+      "review_sha256": "7636bfded34d8bdfb5d6744e536636b75c4d615919f826128a70cb7489c6dacf",
       "topic_id": "t_ef4a29dbfadb",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -12853,12 +12853,12 @@
     "questions:m2_pd_018": {
       "schema_version": 1,
       "item_sha256": "1dd911081f8b8df6170f6e5d084dc185599a83159d6b7a7093b0278b570d5324",
-      "review_sha256": "680bc630b3a80fde8f26c7ef47e790b3d4c0c1dc1ce73071d8da99d5b180c226",
+      "review_sha256": "15102c03523e6aa58cb6b60469984df99a71342570bb1577773c37afc65043b2",
       "topic_id": "t_2fecd8a4c446",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -12871,13 +12871,13 @@
     },
     "questions:m2_pd_019": {
       "schema_version": 1,
-      "item_sha256": "3d0c5c9989d9d799595e8378716126ef87216f6f65e5f488421a71fa2c398c1e",
-      "review_sha256": "1566434a1c483353119f034cff08ca4a2e2e6dfa74d7013f6842d6452a55a5f8",
+      "item_sha256": "f57b00196878ae03be0f3ebcb9784504e8705f6f1f22c2f08ff7651bc92f254f",
+      "review_sha256": "e6a30d31ff5e2978a3b38a031947a9de5957f2b1237d0a5a51caed370eb1f695",
       "topic_id": "t_2fecd8a4c446",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -12891,12 +12891,12 @@
     "questions:m5_clin_023": {
       "schema_version": 1,
       "item_sha256": "e54f2c2b1875e1a61de6c1e407b864ff8579dcfc173d1114a36c4b755e777b2a",
-      "review_sha256": "b5204bd78a190d19b443a60bcf080165f3277c866f5e006883dd240cd74710ad",
+      "review_sha256": "4400fa0e73a781cdadf94351d2e60f00d5c91d29a11668861a167780bebee1ff",
       "topic_id": "t_5f8628e3fbce",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -12928,13 +12928,13 @@
     },
     "questions:m5_clin_025": {
       "schema_version": 1,
-      "item_sha256": "50facd770736b1125f1468247c9850ea05aea128a562b3860b28e81115d427c4",
-      "review_sha256": "9ca5d77f027068607cbe9ffb125663427f015a33498e7c7dd0b3442b34f23547",
+      "item_sha256": "fd782156ba957aeba041bd6b4d5f9c1651d2029e4e32adddf9010f20e8761142",
+      "review_sha256": "8995404e2f80befb75a0db34746d912aac1d4fb0df7d5c64790ef947ca113b3e",
       "topic_id": "t_fded5a914d5a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -15548,7 +15548,7 @@
     "questions:assessment_report_grounding": {
       "schema_version": 1,
       "item_sha256": "c9e3290e7f0eb9a912fe487b6bae317df57ff31671674d09e006db07b4a86ae6",
-      "review_sha256": "4d8cb986144eee0e00c04223ce8b51a1b2fdc8c90b9c3c2f5328d1a4ab5ac301",
+      "review_sha256": "d3e721395c39d05e9559cd01c79c5670af442203174541f65f610f160a2eefec",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -17445,6 +17445,25 @@
       "reviewer": "private-review",
       "reviewed_at": "2026-10-25",
       "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:assessment_feedback_agreement": {
+      "schema_version": 1,
+      "item_sha256": "5a82a421c40214e70e69e7e31c0a09caa19de886fa628e8a7c1989ade70eb312",
+      "review_sha256": "189b0b3588b36bcf1c94b7e263e395490263028163ffaabf9d72d2e79c570026",
+      "topic_id": "t_5aebea2fd740",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
         "sources"
       ],
       "source_support": "supported"

@@ -15356,10 +15356,10 @@
       "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_020": {
-      "item_sha256": "483b976a288f6eef7bffc4a418c5d8bdb4f5b193c53d350e5fe80c2566bd1177",
+      "item_sha256": "205201b22d523292b91b6d90bb6c028095db87416e00611cba1c724ef9823dc2",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15371,8 +15371,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Kept bounded initial-assessment answer and preserved primary supplementary evidence; plausible functioning/risk reasoning errors replace obviously absurd referral claims. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Actual clinical-course activity-with-inner-distress counterexample supports existing consultation-boundary objective through explicit cross-module supplementary relationship. WHOprimary distinction separately verifies insufficiency of work/decision capacity for diagnosis/exclusion;not old Intro1healthy-only rule,mandatory referral from one emotion or treatment advice. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_3f9c1dc8660130ead8e28dfe268a603f1eb3bca18f9db763b9a77aaf4a422b5d",
+          "modified_time": "2026-08-04T10:04:35.543Z",
+          "snapshot_sha256": "bd6003ceea42d3337cfb00b55625829c30b56005e1db6db061c60e1691fe8fd7",
+          "locator": "characters:30696:30801;characters:30802:30928"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m3_psychological_consulting_021": {
       "item_sha256": "b47ffe077a14d258913706849068a13237ca26f3761a952e289d25b8787f6515",
@@ -18125,8 +18133,8 @@
     "questions:m2_pd_001": {
       "item_sha256": "b4214de8c82add9cf5d7b36e51fda94fc575b740c40579abf65a5e2037b8ce6b",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18138,9 +18146,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Distinguish actual diagnostic formats, not spontaneous reaction/instant-change straw alternatives; no approval of personality diagnosis from appearance. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Explicit organised assessment with agreed purpose versus embedded observation,not validity guaranteed by test battery. Existing exact scenario retained;not teacher-instruction recall. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_ffbe7648cd0939a69b9a6cb2f8f0b8de1f57441197344a88724275a95e9ad229",
+          "modified_time": "2026-05-29T10:06:00.494Z",
+          "snapshot_sha256": "f3c9ec20b7dd15d42272d2a2b22c785919ff3c8169797145bba61bb96b5afc0f",
+          "locator": "characters:1598:1830"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_tp_001": {
       "item_sha256": "b334998b3bb06b1460415423521d1da3da519b06a22dc219ce633812c6ed81c5",
@@ -18640,10 +18655,10 @@
       "disposition": "keep"
     },
     "questions:m5_clinical_004": {
-      "item_sha256": "f6a572530c7a9a1f788da6a3523a9876dc297fce8d0b2ff8485ae8226539bd8e",
+      "item_sha256": "3c7b03761dfd16b7e448d164577bfb7043cd017f5546aac435ddf4206874066d",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18655,8 +18670,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Course brief language-disorder introduction checked against NIDCD primary health definition. Correction is in derivative language wording, not source transcript. No aphasia subtype, lesion mapping, articulation-only definition or individual diagnosis; existing bank has no direct aphasia item.",
-      "sources": []
+      "note": "Aphasia as language expression/comprehension,not motor articulation alone. Course explicitly discusses aphasia and oral/written comprehension;NIDCD primary medical definition separately verifies general distinction/cooccurrence. Not fixed Broca/Wernicke-only localisation or one-error diagnosis. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_a9763161d11b6cf0600bf977fe17931c7c6c951e808e64e9de5a30e57156f547",
+          "modified_time": "2026-08-04T10:07:48.209Z",
+          "snapshot_sha256": "9a8fcb11149b6a11d3c98ce2a9020b55b749f770b701ee9865a79781612d2865",
+          "locator": "characters:2426:2461;characters:2491:2525"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m5_clinical_005": {
       "item_sha256": "3428010b8fb12f62faf4b356675ec8451413989beaea1405e4d11ef716a11817",
@@ -20440,7 +20463,7 @@
           "locator": "characters:9017:9107"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m4_dev_005": {
       "item_sha256": "459df91c8e744dc3d3900b820e1675e833e2955e30b114811066067e71ec6ba9",
@@ -20526,8 +20549,8 @@
     "questions:m2_pd_002": {
       "item_sha256": "8ed1406906a0fce6f71f68a608555b0b396535a19f84d28fb6a0d40537a861fb",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20539,9 +20562,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "S-data source is own report,not every questionnaire T-data. Only literal S-reflection clause qualified;neighbouring L-live/autobiography confusion and test-objectivity claims remain held. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_caf289c91f0a8343b552b368dff4be258238ef8776de39dbfb22917cb4b808ca",
+          "modified_time": "2026-06-03T14:19:01.053Z",
+          "snapshot_sha256": "d98306efa2e26176bc12a058fc7441e13a6e686b00471b868b3003f9f5d37e73",
+          "locator": "characters:75165:75248"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_003": {
       "item_sha256": "81c02617a5ebd03cbeadbe9f7e877b72628ca9f81aa59f179ae27dd562edd28a",
@@ -20698,7 +20728,7 @@
           "locator": "characters:17602:17787"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m6_social_002": {
       "item_sha256": "c1325666894565e725a566507e5bdead9bcf5f860fb3eb842005979e93f10b49",
@@ -20863,10 +20893,10 @@
       "disposition": "keep"
     },
     "questions:m2_pd_006": {
-      "item_sha256": "68c350903e8caaba2e9bbee0aee18fcaefac267ecd061b1b6d425b7a862037bc",
+      "item_sha256": "a212bdac8b7775b710623223bb8f92a74725d6f69e476a3fafb0fe92f3176f8e",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20878,9 +20908,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Plausible alternative response biases replace technical-process straw foils. Deliberate favourable-impression condition supports socialdesirability as possible influence,not proof all answers false. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_caf289c91f0a8343b552b368dff4be258238ef8776de39dbfb22917cb4b808ca",
+          "modified_time": "2026-06-03T14:19:01.053Z",
+          "snapshot_sha256": "d98306efa2e26176bc12a058fc7441e13a6e686b00471b868b3003f9f5d37e73",
+          "locator": "characters:8466:8508;characters:9164:9246"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_pd_007": {
       "item_sha256": "7545a586b0cc4e4fa8f44f70bd7a2d01a6ead4fdba03764d7f13f39cc38e74be",
@@ -20939,8 +20976,8 @@
     "questions:m2_pd_009": {
       "item_sha256": "9c4a14925514622c431e528fc87e37e58d531726ac680e3e52801aaf944cde01",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20952,15 +20989,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Observed omitted items as formal protocol characteristics;do not infer intentionality,noncompliance motive or diagnosis from missing entries. Adjacent deliberate-omission wording excluded. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_c46a2e7c9ef4c4037fa3ff780e8e1c4e8d9f8c233dfa2c3db6f4bb718109d7d8",
+          "modified_time": "2026-07-01T10:48:01.094Z",
+          "snapshot_sha256": "30b6ea496a736bf3caa5df9f7f68e33022dc30aad326164bd27a2c027e3f9694",
+          "locator": "characters:77766:77871"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_010": {
       "item_sha256": "400330cd1419ffb8266559a863a8e4592fb2c52f11469988fb6e9166aa604cbf",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20972,15 +21016,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
+      "note": "Count stated units/occurrences as quantitative content analysis,not emotion salience or diagnosis. Exact given operation,not all psycholinguistic methods equivalent. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_c46a2e7c9ef4c4037fa3ff780e8e1c4e8d9f8c233dfa2c3db6f4bb718109d7d8",
+          "modified_time": "2026-07-01T10:48:01.094Z",
+          "snapshot_sha256": "30b6ea496a736bf3caa5df9f7f68e33022dc30aad326164bd27a2c027e3f9694",
+          "locator": "characters:81092:81193"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_pd_011": {
-      "item_sha256": "bee09fa8cd0d18004485fc986b6a2dca70381c6a1fdd797ff4a634b9c3f6d8ac",
+      "item_sha256": "67b1003ea0767617d0e9593f2b1ceaf0e4e8c76415e73d6e8660e72667ac94e7",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20992,8 +21043,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
+      "note": "Self-report versus plausible explanatory hypotheses;remove exaggerated all-responsibility/hidden-denial foils. No subjective cause inferred from one sentence. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_c46a2e7c9ef4c4037fa3ff780e8e1c4e8d9f8c233dfa2c3db6f4bb718109d7d8",
+          "modified_time": "2026-07-01T10:48:01.094Z",
+          "snapshot_sha256": "30b6ea496a736bf3caa5df9f7f68e33022dc30aad326164bd27a2c027e3f9694",
+          "locator": "characters:81426:81514"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m6_social_008": {
@@ -21242,8 +21300,8 @@
     "questions:m2_pd_014": {
       "item_sha256": "7e126e3d4156729461faa84443a5ae8b35e8993b64553fa17d05dbc8309210be",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21255,15 +21313,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
+      "note": "Researcher own reaction distinguished from respondent data;reflexive verification,not countertransference as direct client truth or colleagues agreement as proof. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_c46a2e7c9ef4c4037fa3ff780e8e1c4e8d9f8c233dfa2c3db6f4bb718109d7d8",
+          "modified_time": "2026-07-01T10:48:01.094Z",
+          "snapshot_sha256": "30b6ea496a736bf3caa5df9f7f68e33022dc30aad326164bd27a2c027e3f9694",
+          "locator": "characters:26986:27040;characters:27263:27397"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_pd_015": {
-      "item_sha256": "4a7a353cc03ba466c797d3c146f165452d0f1a8018ef49aba1e4b7b1d75ff66b",
+      "item_sha256": "eb7947614ca14de36087f5cf27309d9a2ddd95a9f85d22401313d1d7524de36d",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21275,8 +21340,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Author a bounded client-feedback example; no real history or personal source text reused. Replace miraculous-success/ideal-person flattery distractors by plausible but unsupported trait/motive/measurement inferences. Current full question reviewed; no whole-source approval.",
-      "sources": [],
+      "note": "Fix substantive explanation ordinal error:old said first phrase although key second. Refer to actual repeated-goal observation without position label;not stable trait/need/selfcontrol inferred from text or flattering feedback. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_c46a2e7c9ef4c4037fa3ff780e8e1c4e8d9f8c233dfa2c3db6f4bb718109d7d8",
+          "modified_time": "2026-07-01T10:48:01.094Z",
+          "snapshot_sha256": "30b6ea496a736bf3caa5df9f7f68e33022dc30aad326164bd27a2c027e3f9694",
+          "locator": "characters:81426:81514;characters:91408:91475"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m4_person_015": {
@@ -22299,10 +22371,10 @@
       "sources": []
     },
     "questions:m5_clinical_017": {
-      "item_sha256": "7e7bbf5bc3806a5dcf35128035f7ba845d6fa05490fa0d15969a6e23d69e7cde",
+      "item_sha256": "8a54acaf1308280b4758f0cc63247592ae9a4b501c8e61ea0558be683b271594",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22314,8 +22386,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Two exact definition sentences; no clinical vignette, violence stigma, automatic diagnosis or all4D requirement. Publisher distress/functional-impairment distinction independently checked.",
-      "sources": []
+      "note": "Functional task/selfcare impairment versus subjective distress and thought content. Course literal definitions retained;not all4criteria necessary,no diagnosis/psychosisdanger inference or absence of work impairment proving health. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_3f9c1dc8660130ead8e28dfe268a603f1eb3bca18f9db763b9a77aaf4a422b5d",
+          "modified_time": "2026-08-04T10:04:35.543Z",
+          "snapshot_sha256": "bd6003ceea42d3337cfb00b55625829c30b56005e1db6db061c60e1691fe8fd7",
+          "locator": "characters:30518:30625;characters:31794:31955"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_pd_016": {
       "item_sha256": "245ccb2e0773de7edb1f771a792fac7027e98de5f0c7a30d3d3d0130b88cc0e4",
@@ -22859,10 +22939,10 @@
       "disposition": "keep"
     },
     "questions:m4_dev_010": {
-      "item_sha256": "0001296850cb047d32c95f048e9686a11b7eee3f14a3ac77ee5f9b235d3b9ec4",
+      "item_sha256": "bec94d5e8a97014c87207ba65a36b40f513b2c9b014ab3965b2ca5b0ed2952ed",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22874,9 +22954,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Attributed Vasilyuk inner simple/complex and outer easy/difficult categories retained; theoretical typology not a calendar crisis diagnosis; earlier primary-text correction retained rather than reverting to lecture paraphrase. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Correct axes explicitly present in allowed supplementary Lebedeva course interview;remove claim of reading primary Vasilyukbook. Plausible swapped-axis/stability alternatives assess model meaning. New exact lesson-section support,not original lecture wrong-axis approval or maturity hierarchy. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_70593b425e2fbb304e477349d733c75676a047331da000bd40066bc6b61620cb",
+          "modified_time": "2026-06-01T08:31:19.532Z",
+          "snapshot_sha256": "183368dc3bb1a187e7f94e5b67f99c4b8e13fda2a7f78e161acee48610ec448a",
+          "locator": "characters:7033:7117;characters:7118:7236"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_quant_007": {
       "item_sha256": "778c448fefeae76010e344a73f86eb117dc548e0c2f93db635e792c30ade739c",
@@ -23173,8 +23260,8 @@
     "questions:m2_pd_018": {
       "item_sha256": "1dd911081f8b8df6170f6e5d084dc185599a83159d6b7a7093b0278b570d5324",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -23186,15 +23273,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
+      "note": "Transference in attributed psychoanalytic model as earlier relational feelings/expectations experienced toward therapist;only illustrative parent-related relation clause qualified,not all projection transference or every criticism caused by client past. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_f33c7d6736c42b4b6c68cb68320d9f4ef3479d6b62f1c0668344f90b0e9dfbf3",
+          "modified_time": "2026-07-01T10:44:28.585Z",
+          "snapshot_sha256": "23cd44c78a17a14ea44fabbcf01ba685223f9082ec0d1012fdf757aa4bc81e08",
+          "locator": "characters:49968:50078"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_pd_019": {
       "item_sha256": "f57b00196878ae03be0f3ebcb9784504e8705f6f1f22c2f08ff7651bc92f254f",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -23206,15 +23300,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Projection as attributed assigning own subjective contents to another;not proof of hidden mechanisms from one response or validity of projective tests. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_f33c7d6736c42b4b6c68cb68320d9f4ef3479d6b62f1c0668344f90b0e9dfbf3",
+          "modified_time": "2026-07-01T10:44:28.585Z",
+          "snapshot_sha256": "23cd44c78a17a14ea44fabbcf01ba685223f9082ec0d1012fdf757aa4bc81e08",
+          "locator": "characters:49721:49869"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m5_clin_023": {
       "item_sha256": "e54f2c2b1875e1a61de6c1e407b864ff8579dcfc173d1114a36c4b755e777b2a",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -23226,8 +23327,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact direction-versus-steps explanation read; neighboring level/stage errors replace diagnosis and test-score trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Method direction versus concrete technique in the course model;not any modality/technique efficacy guaranteed or unquestioned cause from initial hypothesis. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_d21c5560c79e4182cfe2dea3cd778da90dbf75e550dc2c3e4e45dfdf824387ce",
+          "modified_time": "2026-09-05T20:54:01.866Z",
+          "snapshot_sha256": "3a763bd7cea24897c7120164dc615fde6e17eef6e0183f4a3af17a60062abe62",
+          "locator": "characters:6482:6607"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m5_clin_024": {
       "item_sha256": "261f32f8c32d7787ec2e2ab0d5ea6862db7ab1c56bb0e8bff24d6fec2c76082c",
@@ -23250,10 +23359,10 @@
       "disposition": "fix"
     },
     "questions:m5_clin_025": {
-      "item_sha256": "50facd770736b1125f1468247c9850ea05aea128a562b3860b28e81115d427c4",
+      "item_sha256": "fd782156ba957aeba041bd6b4d5f9c1651d2029e4e32adddf9010f20e8761142",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -23265,8 +23374,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Retained previously reviewed ambiguous-loss scope and supplementary evidence; distinct loss/separation situations replace unrelated measurement/learning terms. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "Existing course loss/missing-person topic supports independently authored condition;PaulineBossprimarydefinition separately verifies descriptive ambiguous-loss term. Term is not asserted verbatim in course lecture;no fixed grief stage/time/pathology,afterlife or treatment prescription. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_96323c7024e799e3a0acbfa66d2dc2ce8672f182ca566956f876791d3eff437b",
+          "modified_time": "2026-08-04T10:01:19.427Z",
+          "snapshot_sha256": "6b481b329ae3b1487386790ff788ed5dd040665e1c0424e689ad840a662ca298",
+          "locator": "characters:45182:45220"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m5_clin_026": {
       "item_sha256": "78fa4503037572edd216348ba88c8fd5418bd1776b5783ebd944290891d54a07",
