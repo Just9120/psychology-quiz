@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1387
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1392
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 174
@@ -197,7 +197,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert source['kind'] == 'learning_material' and source['readable'] is True
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
-        assert historical == ((({
+        assert historical == (((({
                               'm6_social_002', 'm6_social_004', 'm6_social_005', 'm6_social_015', 'm6_social_018', 'm6_social_020', 'm6_social_021', 'm6_social_022', 'm6_social_023',
                               'm2_pd_006', 'm2_pd_009', 'm2_pd_011', 'm2_pd_014', 'm3_psychological_consulting_110', 'm4_person_021', 'm4_dev_007', 'm4_dev_009', 'm5_clin_022', 'm5_clin_024', 'm6_social_008', 'm6_social_010', 'm6_social_011', 'm6_social_017', 'm6_org_029', 'm6_psyl_005', 'other_bonus_002',
                               'm1_psyf_070',
@@ -421,8 +421,8 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             'm3_psychological_consulting_086',
             'm3_psychological_consulting_098',
             'm3_psychological_consulting_102',
-        }
-        assert retired == ({'m2_qual_009', 'm2_qual_013', 'm6_ethics_001', 'm4_dev_002'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)} | {f'm2_exp_{n:03}' for n in (20, 21, 24, 26, 38, 41, 43, 45, 46, 47, 48, 65, 68, 76, 81, 82, 83, 84, 86, 87, 89, 93, 100, 103, 104, 106, 113)} | {'m2_pd_003'} | {f'm2_qual_{n:03}' for n in (1, 2, 3, 4, 6, 14, 17, 24, 25, 29, 43, 53)} | {'cbt_abc_separation', 'cbt_experiment_function', 'cbt_activation_principle'}) | {
+        }) - {'m2_exp_108'}
+        assert retired == (({'m2_qual_009', 'm2_qual_013', 'm6_ethics_001', 'm4_dev_002'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)} | {f'm2_exp_{n:03}' for n in (20, 21, 24, 26, 38, 41, 43, 45, 46, 47, 48, 65, 68, 76, 81, 82, 83, 84, 86, 87, 89, 93, 100, 103, 104, 106, 113)} | {'m2_pd_003'} | {f'm2_qual_{n:03}' for n in (1, 2, 3, 4, 6, 14, 17, 24, 25, 29, 43, 53)} | {'cbt_abc_separation', 'cbt_experiment_function', 'cbt_activation_principle'}) | {
             'm1_psyf_002',
             'm1_psyf_013',
             'm1_psyf_021',
@@ -462,7 +462,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             'm3_psychological_consulting_102',
             'm3_psychological_consulting_113',
             'm5_clinical_013',
-        }
+        }) | {'m2_exp_108'}
 
 
 def test_catalog_rejects_orphan_and_ambiguous_identities(mapped):

@@ -9244,10 +9244,10 @@
       ]
     },
     "questions:m2_exp_001": {
-      "item_sha256": "c568234ec07cca00032c9fbfa4b05b32d542c076bf6026d126964a1294bd16e2",
+      "item_sha256": "88aba6fb4339c428221ee48fdd84f4d9745a379f3a29ce0126b532d71564bebc",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9259,15 +9259,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Operational definition is distinguished from causal theory, everyday meaning and statistical conclusion; procedure remains task-dependent. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "FIX teacher-wording recall and overbroad working-definition equivalence. Author-created attention example distinguishes observable operational measure from conceptual meaning,hypothesis and mechanism. Course31110:31335establishes measured outcome;term occurs in course but loose6030formulation remains held. Primary OpenStax2.3lines81-83directly read as scientific clarification,not replacement course content. No validated attention test,diagnosis or universal tenminute protocol claimed.",
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:31110:31335"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_exp_002": {
       "item_sha256": "c22d2d914d7a274f8f60db159c8adaf4050e6bd10d2feb52bd7563f34888b414",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9279,15 +9286,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Bound the reflection/regulation definition to its course model; replace absolute distractors with recognizable restricted objects of study. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "KEEP explicitly named teaching model reflection/regulation,not most-common ontology or empirical claim about all minds. Only its definition selected;free-association detector and overbroad operationalisation statement remain held.",
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:5428:5661"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_003": {
       "item_sha256": "657f034ecf24b208799a092ade9018f8784519143476733abf1e32cbddfcc531",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9299,9 +9313,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Separate theoretical frameworks from actual but different research practices; no longest qualified correct-only answer. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "KEEP definition of polyparadigmatic framing and coexisting explanatory/problem frameworks. No claim Kuhn diagnosed contemporary psychology,all frameworks equally supported,or new paradigm must contain prior one. Selected alternative view is after the problematic replacement narrative.",
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:21125:21260"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_004": {
       "item_sha256": "9804bd1ca91b617500e87d9daa6e0a724dc2887a4c4abd3097b8bfa25118174b",
@@ -9441,8 +9462,8 @@
     "questions:m2_exp_009": {
       "item_sha256": "92ebc7a1826f28865be1ef5ca590e8a743728172f19604c144281812f7bfe358",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9454,15 +9475,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Apply the distinction to an explicit research aim, not the false claim that idiographic inquiry refuses measurement. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "KEEP nomothetic purpose in worker-load/error scenario. Generality is a stated aim,not proved population transfer or definition by participant count/numbers. No induction/deduction binary or universal all-human effect adopted.",
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:26221:26439"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_010": {
       "item_sha256": "ae47ecaf4a2c7107d9a9c9397cbd142b8a834fe7c26e675462bfcee911281214",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9474,7 +9502,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use an explicit individual-case purpose and plausible neighboring research aims. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP idiographic purpose understanding this career-change case. Does not forbid measurement or equate every qualitative procedure with idiography,small sample with no statistics,or universal inductive direction.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
@@ -9483,13 +9511,13 @@
           "locator": "characters:26469:26689"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_011": {
       "item_sha256": "36e6c99e0f30986449804bc7ffbe267c8b3c43303d6675e6d0621c883c30b990",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9501,7 +9529,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace always/never distractors with actual complementary methods; no mandatory qualitative-first sequence. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP sequential interviews then survey to link category content with estimated prevalence. Source explicitly allows combination and reversed order. No universal mandated sequence,automatic representativeness or one-case generalisation.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
@@ -9510,13 +9538,13 @@
           "locator": "characters:26782:27101"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_012": {
       "item_sha256": "a499e2dc70e7f2537431d020084e89eb96f35fa6eb51e9c66d79b297af759029",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9528,22 +9556,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Retain the scientific correction to the lecture shorthand; contrast two plausible one-to-one mappings and sample-size confusion. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP both data approaches can combine generalisation and checking implications. Correct logical distinction remains;source mixed/iterative allowance and positive induction description used. Wrong one-to-one qualitative/quantitative induction/deduction assignment is excluded and still held.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:26782:27101"
+          "locator": "characters:14356:14410;characters:26782:27101"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_013": {
       "item_sha256": "c3519d70eebce57192f62d4aec3e0d75bc4b2aadcaf4112d0c3fa2000a582501",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9555,22 +9583,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Contrast actual research outputs rather than claiming quantitative studies need no ethics or cannot study mental processes. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP measured compliance permits comparisons across specified procedure variants. No65percent universality,no complete motivation disclosure,no reenactment/ethics permission or claim only qualitative methods can examine motives.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:29907:30248"
+          "locator": "characters:30106:30248"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_014": {
       "item_sha256": "cd9b839539c78f4b62fd0d303dd0ac50094a845f5c8f2bbed0b9f3ff08d05521",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9582,22 +9610,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Make competing motivational hypotheses plausible and distinguish observation from inferred motive. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP one observed act underdetermines motives;alternatives are hypotheses. Selected experiment-specific incompleteness is not universal inability of quantitative methods to study inner experience. No named actual participant story copied.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:29907:30248"
+          "locator": "characters:30307:30407"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_015": {
       "item_sha256": "c90317112739865f7ad4600ea39770efdadd2dcaf3adb757aacfaec51c978ccf",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9609,7 +9637,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use a self-contained manipulation/outcome task and reciprocal plausible variable confusions. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP manipulated noise level versus observed response time in explicitly experimental scenario. The exact neutral IV/DV/control clauses are selected,not following false description of every empirical study or compulsory removal of person/context.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
@@ -9618,13 +9646,13 @@
           "locator": "characters:31110:31335"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_016": {
       "item_sha256": "817e632dff715269fa8281e12b1650fdbae3715b68f6860f715f94cebe0d2ab3",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9636,22 +9664,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Bound philosophical distinction to the course scheme and replace impossible absolutes by meaningful methodological contrasts. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP contrast of explicitly discussed objectivity ideals. Select only exclude-versus-account-for influence clauses,not adjoining false impossibility of studying subjectivity or universal equal causal power over reality. Not a prescription to remove all context or accept any personal view as evidence.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:16044:16456;characters:32147:32284"
+          "locator": "characters:32030:32101;characters:32147:32211"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_017": {
-      "item_sha256": "84992abac319083f4aebc22ab80a4cd47211c5ab0bb9d6b742efcd3299b56050",
+      "item_sha256": "f9492de6ca0f818bc364883918c451f705727d3eabfd43ad9d1a3d61137207b0",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9663,13 +9691,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Operationalize a concrete hypothesis; replace claims that science has no assumptions with actual but insufficient study components. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "FIX absurd title/overview distractor:three plausible study-planning decisions now contrast with a specified testable expectation. Retain keyposition and original objective. Hypothetico-deductive procedure only;not exhaustive demarcation or claim nonrejection makes a hypothesis true.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:303:513"
+          "locator": "characters:17724:17864"
         }
       ],
       "disposition": "fix"
@@ -10482,8 +10510,8 @@
     "questions:m2_exp_049": {
       "item_sha256": "27f64254caae56c50d7d894c6864faa484f7be578a1e90079eca9bb9870f4e1e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10495,49 +10523,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Refine the lecture shorthand against Wundt Outlines of Psychology section3: controlled experimental observation, not arbitrary introspection or Titchener-style decomposition. Primary verification https://psychclassics.yorku.ca/Wundt/Outlines/sec3.htm . Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP Wundt experimental organisation/controlled observation claim;select actual neutral introductory method clause. Does not conflate Wundt/Titchener,elementalist introspection and all laboratory methods. Prior primary historical correction in exact current item retained,no new date/protocol claim.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:1381:1674"
-        }
-      ],
-      "disposition": "fix"
-    },
-    "questions:m2_exp_050": {
-      "item_sha256": "9a335aaf3b103d323efd46a8496d238d8dbae616202e2f0239b66659624bf910",
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "KEEP: Course-framed Gestalt whole-organization focus contrasted with actual historical objects of inquiry, not an all-schools universal claim. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [
-        {
-          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
-          "modified_time": "2026-04-22T20:21:51.036Z",
-          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:1674:2195"
+          "locator": "characters:1381:1541"
         }
       ],
       "disposition": "keep"
     },
-    "questions:m2_exp_051": {
-      "item_sha256": "d2e2e39aee6be8f2b9efc86b686259ea68a5406894e407159c2578dbb3cd646d",
+    "questions:m2_exp_050": {
+      "item_sha256": "076cedf8bdcaef9163097cf8db3e2eee50e8cece476588bcc6fc26fd37b6030b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10549,13 +10550,40 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Organization of whole versus simple element sum accurately distinguished; reversed and method-only claims explained. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "FIX lecture-recall stem to authored dot-arrangement task. Gestalt research task concerns organisation of perceptual whole;three alternatives reflect adjacent distinct explanatory programmes. No sole valid theory,clinical Gestalt-therapy claim,or all-school equivalence.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:1674:2195"
+          "locator": "characters:1992:2082"
+        }
+      ],
+      "disposition": "fix"
+    },
+    "questions:m2_exp_051": {
+      "item_sha256": "d2e2e39aee6be8f2b9efc86b686259ea68a5406894e407159c2578dbb3cd646d",
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "KEEP historical conceptual whole-versus-sum distinction,not arithmetic law of quantified sensations or empirical endorsement of every Gestalt claim. Named school definition only;no Wundt/Titchener conflation.",
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:1674:1870"
         }
       ],
       "disposition": "keep"
@@ -10563,8 +10591,8 @@
     "questions:m2_exp_052": {
       "item_sha256": "015f098d1422c6bf408fb468c124fc27f382eeca72882a6c5d4316c0507dbac4",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10576,22 +10604,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace anti-measurement and innate-ideas straw alternatives with actual competing historical objects of inquiry. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP historically scoped behaviour/learning programme. Excludes named-list conflation and next black-box universal statement;item explicitly retains differences between behaviourist versions and modern approaches.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:2788:3041"
+          "locator": "characters:2846:3041"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_053": {
       "item_sha256": "e21d210f5680b6c81467d60fd128e01bc303b97f28482365d82664eaeec963d0",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10603,22 +10631,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Contrast neighboring genuine learning accounts rather than impossibility of animal research. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP attributed Thorndike trial/consequence learning pattern in puzzle boxes,not all learning mechanism/human generalisation or exact modern reinforcement chronology. Source outcome/conclusion selected,not unverified physical lever details.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:3315:4169"
+          "locator": "characters:3867:4169"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_054": {
       "item_sha256": "aaf67429f07126878c6039bcf3814b021e827d96b0588ea16cc04d0732ef5331",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10630,22 +10658,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Historical psychoanalytic/behavioral causal emphasis accurately contrasted without clinical efficacy claim. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP attributed explanatory contrast between psychoanalytic hidden motive/conflict and classic behaviourist learning programme. No free-association discovery of actual hidden causes,universal absence of empirical studies,or identical schools/clinical mechanisms accepted.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:2788:3041;characters:4169:5072"
+          "locator": "characters:2846:3041;characters:4169:4634"
         }
       ],
       "disposition": "keep"
     },
     "questions:m2_exp_055": {
-      "item_sha256": "8c075ca188aef5153f3199b7085592dcaa673bae18299a0d603cdd593685741f",
+      "item_sha256": "9d73a08b1bf273d709c1685615f960f781eccfe92519c23ae66db33ded7d39d7",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10657,22 +10685,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Keep the supported historical function without equating Bacon classifications with all modern cognitive-bias constructs. Primary Bacon Novum Organum bookI idols discussion checked https://www.gutenberg.org/files/45988/old/45988-h/45988-h.htm . Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "FIX course-framing stem to direct Bacon-idols research-position concept. Sources of systematic mistaken judgment are historical proposal,not literal modern cognitive-bias taxonomy,randomisation/statistical test or Kuhn revolution scheme.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:14094:14951"
+          "locator": "characters:14548:14729"
         }
       ],
       "disposition": "fix"
     },
     "questions:m2_exp_056": {
-      "item_sha256": "89995d93d21271978ee75689fa9cda42d53038ae19bd5166361f1c36de53d193",
+      "item_sha256": "d65da1db1216a3ee032fea2c80573610753f0f218d3a99dee8fb4ea2edccd448",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10684,13 +10712,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use real neighboring philosophies; distinguish course-level verification from final proof. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "FIX lecture-schema wording to direct named verification-principle question. Empirical support is contrasted with falsification/paradigm/programme concepts;no final proof of universal theory,value-free science guarantee or all-method unity claim.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:16044:16456"
+          "locator": "characters:16159:16365"
         }
       ],
       "disposition": "fix"
@@ -10698,8 +10726,8 @@
     "questions:m2_exp_057": {
       "item_sha256": "930ca3b69e77494cf7da2edc09a7f65435b2e1bdca0c94f0ef285e9777f44009",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10711,13 +10739,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Popperian confirmation-versus-falsifiability limit remains explicit and no final proof is asserted. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "KEEP attributed Popper nonfinality of confirming a falsifiable theory. Universal raven counterexample is logical illustration,not statistical rejection without error or exhaustive universal demarcation. Unsupported conditionally-true sentence excluded/still held.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
           "modified_time": "2026-04-22T20:21:51.036Z",
           "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
-          "locator": "characters:16852:17202;characters:17261:17864"
+          "locator": "characters:17037:17202"
         }
       ],
       "disposition": "keep"
@@ -10725,8 +10753,8 @@
     "questions:m2_exp_058": {
       "item_sha256": "6117b431b97b19802bbd56ed730639c2ad6b38961a0d342d77986361e45aaf5b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10738,15 +10766,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Remove unsupported author-attribution guessing; test meaning and distinguish normal-science/revolution/program states. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "KEEP conceptual pre-paradigmatic absence of shared framework,not definitive current status/quality diagnosis of psychology or undocumented attribution to Kuhn. Full explanation retains disputed application and alternative models.",
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:21007:21125"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_059": {
       "item_sha256": "bde8aee2a3538869f527a5af8119ba80b007d50e611397cbaf24c402c5e8856a",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10758,9 +10793,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Apply the actual core/belt distinction and avoid authority/popularity/no-criticism distractors. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "KEEP Lakatos protective-belt change with core retained. Named programme model,not universal quality hierarchy or proof that preserving a programme makes it progressive. No psychological theory empirically validated from its label.",
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:21921:22345"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_060": {
       "item_sha256": "08917120da1c2b13adef87971b11417689edf53384a10341da86c2eb1610081c",
@@ -11994,10 +12036,10 @@
       "disposition": "fix"
     },
     "questions:m2_exp_108": {
-      "item_sha256": "4db33955eb730313f89432e6656b1e7ab556916a577a186be2d11d7ecbbcf3c7",
+      "item_sha256": "b912d10fa074855532d4ae057374ac3918c82e65956ea1d750c2c8d8cc372acd",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -12007,9 +12049,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "KEEP: Manipulated video/text learning format distinctly identifies IV; other real variables have other roles. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "108only identifies IV in video/text example with one-line definition;015already tests IV/DV distinction and control-characteristic limits in a contextual problem. Same primary31110fragment and no separate objective beyond subset recall. Retain richer015only after exact current source/publication acceptance;108has zero homework references. Exact current accepted target015now published locally;all old108editions/snapshots/results remain.",
       "sources": [
         {
           "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
@@ -12018,7 +12062,7 @@
           "locator": "characters:31110:31335"
         }
       ],
-      "disposition": "keep"
+      "disposition": "consolidate"
     },
     "questions:m2_exp_109": {
       "item_sha256": "d0f4c3849c4657232e7ae2c98435f16c9b444fe9d7390e1be64ba4b3b82eb00b",
