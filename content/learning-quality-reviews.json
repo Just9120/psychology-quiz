@@ -18288,8 +18288,8 @@
     "questions:m6_social_001": {
       "item_sha256": "233630e1d85a58b67044370ae816e8472aaebdd976ea2908e4e19ab893828514",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18301,8 +18301,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Area of study distinguished from developmental, differential and cognitive psychology; no reduction of all behavior to environment. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Social context of thoughts,feelings and behaviour,not total external determination or a strict national/disciplinary divide. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_e19226ce20277dc02bcb5581d30fd6d0130cecb3156658841b60abcf7c3e5fa8",
+          "modified_time": "2026-09-08T12:03:50.053Z",
+          "snapshot_sha256": "3808392a94015339cbefa0e0f287bb8b0fe17bb891a6e850b9c1d28524f6f25c",
+          "locator": "characters:1553:1771"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m4_dev_001": {
@@ -20332,8 +20339,8 @@
     "questions:m6_social_002": {
       "item_sha256": "c1325666894565e725a566507e5bdead9bcf5f860fb3eb842005979e93f10b49",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20345,15 +20352,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced recall of the numbered course premise with discrimination of meaning-based action from related social concepts. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Meaning-based action distinguished from exchange,self-presentation and normative role expectation;not numbered-premise recall or disputed Blumer third-premise wording. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:67868:68127"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_social_003": {
-      "item_sha256": "6aa6092a1ffe757375a64f476784d9b49200ce82eddccec91c523f491485b562",
+      "item_sha256": "9801c12469a341d21122de40f51e8504236afa128c0263a6b532dc9e69eaa08c",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20365,15 +20379,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Dramaturgical metaphor distinguishes impression management from exchange, balance and role-taking; no guaranteed power or deceit inference. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Dramaturgical self-presentation image,not guaranteed power/control or deliberate lying;course-wording prompt removed. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:77726:77934"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_004": {
       "item_sha256": "2a703f22605e2aa44ad91e7adddc7c1e05cbd8b2331a2b5df3a543160969cf65",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20385,15 +20406,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced implausible diagnosis/biography distractors with adjacent individual-character, Me and self-presentation concepts; not an empirical stereotype of professions. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Fromm social-character concept distinguished from individual character/Me/presentation;not all members/professions share one type. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:38899:39102"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_social_005": {
       "item_sha256": "2b27b2933a51ccfbf6149ea85e3624c2eadb233690b67d2c1fe885f54b97ad46",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20405,15 +20433,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced absurd social-media and total-domination alternatives with plausible neighboring motives; Adler's social interest remains a named theoretical concept. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Adler named social-interest cooperation/support,not number of contacts/health diagnosis or moral ranking. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:54248:54552"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_social_006": {
       "item_sha256": "de877ec55490e26970efe273432f84ada454ca03780aa09907c04a52bb6e8b04",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20425,15 +20460,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Reward/cost framework does not imply conscious calculation or monetary transaction; distinct from other social-interaction theories. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Homans model compares rewards/costs including nonfinancial aspects;not all relations only trade or all people consciously calculate. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:82370:82506"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_social_007": {
       "item_sha256": "28e81911dba2cafd1e37f920d886241a057a6232731b8ec9be2569138fa30031",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20445,8 +20487,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Tacit everyday rules, context and community variation; no universal cultural norm inferred. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Garfinkel everyday implicit expectations,not one rule universal to every culture/institution or permission harmful breaching. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:80006:80112"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_pd_006": {
@@ -20584,10 +20633,10 @@
       "disposition": "fix"
     },
     "questions:m6_social_008": {
-      "item_sha256": "b8051177b2011f6e3b5148fe40539970efcf0a9fdccd49f6b5003d20990cb7af",
+      "item_sha256": "44d5a193ebc2805202f7d2a64c5867ee50ee66f97e0d8dca2deaa2c3e17b0555",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20599,15 +20648,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Observation of a model contrasted with own-trial reinforcement; performance conditions prevent a guaranteed imitation claim. Current source part1 binding retained. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Authored observing-a-model situation;four plausible adjacent learning mechanisms replace no-experience/only-reward foils. Acquisition distinct from performance. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:46498:46996"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_009": {
-      "item_sha256": "aa729f32e6448cce4bad405e7a86fb6ce37d6062302caa90c06825bc8b66ad62",
+      "item_sha256": "740043e3460525dd5fce4918c9d41d41dad3973e056b3fcb7ee0a66171925724",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20619,15 +20675,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Retention distinguished from attention, reproduction and motivation; memory does not prove ability or intention to act. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Bandura retention distinguished from attention,reproduction,motivation;explicit model attribution and actual Part1source replace unsupported Part2binding. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:47728:48006"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_010": {
       "item_sha256": "07993adaa11b12f94c1542a185cda92303e0b850fdf80685eb0faa1e26598138",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20639,15 +20702,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Situational causal attribution is an interpretation, not proven cause; external/internal contrast is unambiguous. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "External transport hypothesis vs personal cause;attribution is interpretation,not proven actual motive or unique-cause inference. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_ece0cdc1398142d538cd6d87b0ae75fb9e68dae51b6b078f1286444a4dd6d92c",
+          "modified_time": "2026-09-08T12:12:53.195Z",
+          "snapshot_sha256": "7da62b76193191950b1cd11540678da8d7fcf94622aa8b63db8f8d1412212069",
+          "locator": "characters:7767:8067;characters:8143:8397"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_social_011": {
       "item_sha256": "20f1ca8eeff048d16f66c9678fbd417941cd14168140c1dba165a80498114c80",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20659,15 +20729,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Important belief/behavior inconsistency plus discomfort specifies the concept, not any difference of opinion. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Relevant incompatible belief/action plus observed discomfort;not any two opinions/disagreement or medical diagnosis. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_ece0cdc1398142d538cd6d87b0ae75fb9e68dae51b6b078f1286444a4dd6d92c",
+          "modified_time": "2026-09-08T12:12:53.195Z",
+          "snapshot_sha256": "7da62b76193191950b1cd11540678da8d7fcf94622aa8b63db8f8d1412212069",
+          "locator": "characters:31843:32247"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_social_012": {
       "item_sha256": "5ecaaadc74ed5b844630e52bc42db95e720f59a58d3a65944c250d9abd414f09",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20679,15 +20756,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Behavior changes while belief remains; differs substantively from item022 where belief content changes. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Behaviour changes while belief remains;not guaranteed relief or instruction to ignore valid evidence. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_ece0cdc1398142d538cd6d87b0ae75fb9e68dae51b6b078f1286444a4dd6d92c",
+          "modified_time": "2026-09-08T12:12:53.195Z",
+          "snapshot_sha256": "7da62b76193191950b1cd11540678da8d7fcf94622aa8b63db8f8d1412212069",
+          "locator": "characters:32897:33080"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_social_013": {
       "item_sha256": "6315ff33905456797b2eb45a94f3e2306471d80adf0826ab76e625aa811b4ad1",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20699,15 +20783,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Two participants and a common object; no guaranteed agreement or attachment through communication. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Newcomb communication and shared object domain,not inevitable convergence/liking or only three real relationship outcomes. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_ece0cdc1398142d538cd6d87b0ae75fb9e68dae51b6b078f1286444a4dd6d92c",
+          "modified_time": "2026-09-08T12:12:53.195Z",
+          "snapshot_sha256": "7da62b76193191950b1cd11540678da8d7fcf94622aa8b63db8f8d1412212069",
+          "locator": "characters:22011:22090;characters:22213:22266"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_social_014": {
-      "item_sha256": "e66cc1b97ce5a82fca0004a2bfc2bac1308d4c9b19fd02be6de17225f411b7a4",
+      "item_sha256": "ac54d09ae8ffccaf1173529a74015bf336a9ceb5aa8c0a14c28c8044eecca0dc",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20719,9 +20810,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Perceiver/other/object triad; transcript R/P transcription difference does not change concepts or justify inferred motives. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Heider perceived person-other-object roles,not actual mutual feelings;source R/Ptranscription variable recall replaced by conceptual triad elements. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_ece0cdc1398142d538cd6d87b0ae75fb9e68dae51b6b078f1286444a4dd6d92c",
+          "modified_time": "2026-09-08T12:12:53.195Z",
+          "snapshot_sha256": "7da62b76193191950b1cd11540678da8d7fcf94622aa8b63db8f8d1412212069",
+          "locator": "characters:14835:15285"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_pd_012": {
       "item_sha256": "1633fed0c241186833e426f184512db88388af1ad237725459aab3123a9092b9",
@@ -21176,8 +21274,8 @@
     "questions:m6_social_015": {
       "item_sha256": "315c9ba0880ced3b13dfd81c0ac0bfbe2987c9bb27887b9349327354b77f062d",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21189,15 +21287,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "REPLACE: Replaced a named-label tuple with the explicitly recoverable course life-script concept. Deterministic claims that childhood fixes every outcome and winner/loser labels are excluded; earlier publication is not declared false. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "replace"
+      "note": "Berne childhood-script historical concept,not predetermined whole life/client diagnosis from one phrase. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:58095:58240"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_social_016": {
       "item_sha256": "131048bbbca873afb617cb7c5a02f0b087c73c41e7c45b57f9cd20d25c2fb677",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21209,15 +21314,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Me as internalized attitudes distinguished from I response, public image and exchange. Not group obedience or a maturity diagnosis. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Mead Me internalised attitudes of others,not anatomy/superego equivalence or false ASRcontrol polarity. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:73277:73453"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_social_017": {
       "item_sha256": "0dffbd905df9fc79210d4918f78017f90d6973d6c7abdeb8496e9ac5115ee325",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21229,15 +21341,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Removal of an unpleasant stimulus accompanied by increased frequency; negative reinforcement separated from punishment and habituation. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Actual increase in action frequency after stimulus removal;not any escape/punishment,negative cost or moral badness. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:29231:29366"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_social_018": {
-      "item_sha256": "b9b34752356cd970db983c94e3103424de6b12ea7960e8db2f51fafb21a57c63",
+      "item_sha256": "7f40922a8aa9819885c1737853f8dab755c086cfa296a5df848829de7e7ecfa5",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21249,15 +21368,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced remote sensory/extinction alternatives with source-defined neighboring processes. Course slide historical date for Triplett is not used; primary 1898 original checked as scientific context, no universal facilitation claim. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Observed improvement with passive audience;explicit no coaction,not universal audience facilitation/history dates. Actual native definition replaces PDFscope. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:16743:16930"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m6_social_019": {
       "item_sha256": "7588d3093d59c2d4b4e4dee6b1237e49560705a712302e7d68f1c33bfbaeec73",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21269,8 +21395,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named Horney directions only; no pathological type, profession or diagnosis assigned from ordinary behavior. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
+      "note": "Horney toward/away/against framework directions,not exclusive permanent diagnostic types or occupation stereotypes. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:35033:35058;characters:35430:35455;characters:35780:35805"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m1_vnd_060": {
@@ -21353,8 +21486,8 @@
     "questions:m6_social_020": {
       "item_sha256": "6beb918a1bf80f10ecc69a09e2c6c650e2594caa6d68664f331c99450d0009a4",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21366,15 +21499,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "REPLACE: Replaced recall of ordinal stage number with the task characteristic; no inevitable age trajectory or single-parenting-cause claim. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "replace"
+      "note": "Erikson initiative-vs-guilt model task,not mandatory age cutoff,parental blame or irreversible fate. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:28285:28434"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_social_021": {
       "item_sha256": "1f9e62206f2c3ab0df3d65cca414b44e8c457fb37e8570c64cf3931ceafcc1d6",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21386,9 +21526,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced three obvious negative paraphrases with distinct adjacent learning/role processes. Role coordination, not compulsory competition, is the criterion. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Mead organised game coordination of related roles,not competition-only/imaginary-only play or full social membership diagnosis. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_41d55ae105f498610ad517f472050d78c4b50d3343e8795de61f3dccd1e4a692",
+          "modified_time": "2026-09-08T12:17:01.577Z",
+          "snapshot_sha256": "d9c68a9936509177213d9934c76c2b8798027d5436804e798177d5c24e68ef21",
+          "locator": "characters:74963:75422"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_023": {
       "item_sha256": "b6ac2f120de1d04b03b4164a065f3b49e086639fffe3f3dbb5c42b6b40ac7f9c",
@@ -22033,8 +22180,8 @@
     "questions:m6_social_022": {
       "item_sha256": "fcfbfc036be91201f4867daf9addc3c949ff2b1c70d1f5bc76196e97b8f62adb",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22046,15 +22193,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Applied change of belief distinguished from action change, added justification and information avoidance; alternatives have comparable length. No endorsement of the revised belief. Exact private fragment certificate.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Belief content changes,behaviour unchanged;distinct objective from012and not endorsement of an untrue belief. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_ece0cdc1398142d538cd6d87b0ae75fb9e68dae51b6b078f1286444a4dd6d92c",
+          "modified_time": "2026-09-08T12:12:53.195Z",
+          "snapshot_sha256": "7da62b76193191950b1cd11540678da8d7fcf94622aa8b63db8f8d1412212069",
+          "locator": "characters:32897:33080"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_social_023": {
-      "item_sha256": "4e4482973e60bc18efdc5431cb844399188274c4fa074ca4d5cec770374688e9",
+      "item_sha256": "6dfaef737bc26fec55f0232554f066a57cbac3b2f3fc3d2ce5d1d74244e78ccf",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22066,15 +22220,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "REPLACE: Replaced a modern hypothesis refinement with a precise course-defined distinction. Original1939 inevitability claims remain unapproved; Berkowitz1989 primary abstract confirms that the later refinement is not a universal causal law and does not substitute for course material. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "replace"
+      "note": "Frustrator barrier/resource shortage vs frustration/suppression/displacement;not iffaggression or hopelessness. Actual native definition replaces PDFscope. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:52835:53045"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_024": {
-      "item_sha256": "712ce66b8c42e29b1bb62e73cee9056406471c5ae73b77b35c525da753ef4cad",
+      "item_sha256": "a4b8c3ebe459ebc8c1ecae510c582461283ae0d97867baba9da8f581029887b3",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22086,15 +22247,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Historical subject of mass/crowd research only; intelligence-loss and responsibility-loss generalizations excluded. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Historical crowd/mass subject only,not loss of intelligence/responsibility,elite coercion or inevitable all-group aggression. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:12161:12186"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_social_025": {
-      "item_sha256": "6d616da76cf783e32f16a58c9bf492d6ff8cff36c0624dc529948ae422d43043",
+      "item_sha256": "643e5dd28977b2e44da873e2357005a24c44eb551862172b4b58672df618dab7",
       "discipline_id": "social_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22106,9 +22274,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Historical cultural materials distinguished from tests, exchange and work roles; no ethnic essentialism or individual-trait inference. Current full stem/options/key/explanation checked. Previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Historical language/custom/art subject;new exact course wording removes unsupported religion detail,not a national-spirit fact or ethnic character inference. Full current stem/key/options/explanation,one defensible answer/alternative errors,duplicate objectives and exact source/incoming restrictions reviewed;all scientific/privacy holds retained.",
+      "sources": [
+        {
+          "source_id": "src_1d34237da0f45c3d0c735d51393e97463c012f9d6e5ccb1996d2ec279c223703",
+          "modified_time": "2026-09-08T12:08:54.243Z",
+          "snapshot_sha256": "2c4530890c9624360afda719b3638313e748db715e3e8c783e0194165baa9991",
+          "locator": "characters:10588:10624;characters:10955:10979"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_084": {
       "item_sha256": "d7f1015754dc305eaccba6a4ca140ade692f093ff87da69ec55e1340aacc3515",
