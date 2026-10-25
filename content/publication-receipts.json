@@ -17620,6 +17620,84 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "literature:lit_bulgakov_heart_of_a_dog": {
+      "schema_version": 1,
+      "item_sha256": "9d3f35b535d4e8bcf72f8d677de6694a6bef6b6c88eb1aec44f223ab77d44b73",
+      "review_sha256": "35a2071faf3b4910dc68de64557e7d28dd3e70902b90dacaabcb7765fb075d1c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_consult_lecture_01": {
+      "schema_version": 1,
+      "item_sha256": "d7061ef8ce1c779e1c80abc6a18f7db8e441250713427cbe8998586d0aafc6e2",
+      "review_sha256": "625e1132b2c551039ff807e88c32e007955c5d74f52074f6c0dde1e4618801d1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_consult_lecture_02": {
+      "schema_version": 1,
+      "item_sha256": "211b060d6f36968df89a3ef8fa7c91a2c2c7014964904aa6996cea18d30f7bd0",
+      "review_sha256": "84869934578a0cb1d19da0704d5fad83c7a8a2f1e24d42d15be5356284181bdd",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_loehr_schwartz_full_engagement": {
+      "schema_version": 1,
+      "item_sha256": "63a821f139c522e66650819e10080cd3037a54364f2ea1dd4cf3f395b81ed382",
+      "review_sha256": "6778786f5ad14be45e4aff0be874550b41c8ffa6f5c5d6ce217f272754bf64b2",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_covey_seven_habits": {
+      "schema_version": 1,
+      "item_sha256": "1640d400e3d40a7b3f03a62731053271391e2d606040e4d8c1bcc8162365fcc8",
+      "review_sha256": "2399debe1084345752fc12e789f7257fc0519254cd6474080520bda476a50bea",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_tolstoy_war_and_peace": {
+      "schema_version": 1,
+      "item_sha256": "939ca7cf60574c8020ccf470774e2240975cbf2f8b4c7327d223595c22d7052b",
+      "review_sha256": "6ad21800b40db7aa9be270c892ed07ba005bb4352e6f217acad1dd72f50633d1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

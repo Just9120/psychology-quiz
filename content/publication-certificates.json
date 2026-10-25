@@ -146,17 +146,17 @@
     },
     "literature:lit_consult_lecture_01": {
       "schema_version": 1,
-      "item_sha256": "f1ce9faef6834cb0f72d06ec28d486e62662e1bdea0888f44ddf506ff7b3fd15",
-      "review_sha256": "9abb2e99331d677bf6381d9fcaf630789e3b813966cb26b3a75aa4b170988bfa",
+      "item_sha256": "d7061ef8ce1c779e1c80abc6a18f7db8e441250713427cbe8998586d0aafc6e2",
+      "review_sha256": "625e1132b2c551039ff807e88c32e007955c5d74f52074f6c0dde1e4618801d1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "hBsov8cARz0ZwqPKtCN1JcmRKFnEk8lGFe8P5ORHBZgPeIgWmYV0DdsHy+800uPsH5RSm8mXoYhXBRWnGoK9AQ=="
+      "signature": "5IeSZqOXfIoXDH7M0yJau1UjTqKZywe4maYN5iFXMfYzi1PzpXd/tLR9Oar/drGXf7BwBNWL4c5Bf2LkqV/xAw=="
     },
     "literature:lit_consult_lecture_02": {
       "schema_version": 1,
-      "item_sha256": "51e856c9ad7e35b2604787edad5ad341b6da8ed9839ab1f08d28581fcd4ad6dc",
-      "review_sha256": "37edf2154e04fe5ddc78a6b2a1faadbe4cbe823650d8db043e6f906d886841d1",
+      "item_sha256": "211b060d6f36968df89a3ef8fa7c91a2c2c7014964904aa6996cea18d30f7bd0",
+      "review_sha256": "84869934578a0cb1d19da0704d5fad83c7a8a2f1e24d42d15be5356284181bdd",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "HVq5pY2E6SUe422+hxcOyPqT66Xglp6o0jo+3Gyc6W59Gi/pFgrB4DEVBPvcc4GuPo+Q48ZVszywFl3BWzLSDA=="
+      "signature": "cU7pDrdgm2IURr1/QODg00GxVPBoOR7KVI/gPjez7P4HpzaYeM5anEMs5XyRIXfnGMuNDVBVCHikO6hnyPZ7Ag=="
     },
     "literature:lit_kuhn_structure_scientific_revolutions": {
       "schema_version": 1,
@@ -294,16 +294,16 @@
     "literature:lit_loehr_schwartz_full_engagement": {
       "schema_version": 1,
       "item_sha256": "63a821f139c522e66650819e10080cd3037a54364f2ea1dd4cf3f395b81ed382",
-      "review_sha256": "ce6360b4f472d532617db23c28c7a35218dd446b480690d657b127b138eabf0f",
+      "review_sha256": "6778786f5ad14be45e4aff0be874550b41c8ffa6f5c5d6ce217f272754bf64b2",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "bjYpmBSHkaOaLxQ+hg36krKDtjjrbt3sjuMT2F1hnn1Kkwg6mEN3SOYVkVEBvIXo7nIx9jdTohwk1NougJ1MAA=="
+      "signature": "i/doyAGAS2B2DwWAqd+wPOe4tzDcobkre/P1T1aI+cmXpo3ijOwXg/bCaWGoME89FQqj9DS6ZPqpirwrbP62BA=="
     },
     "literature:lit_covey_seven_habits": {
       "schema_version": 1,
       "item_sha256": "1640d400e3d40a7b3f03a62731053271391e2d606040e4d8c1bcc8162365fcc8",
-      "review_sha256": "c685a706ee5da381859541d00365cf8df583e8e0364a3e3ffdc77865470b9cce",
+      "review_sha256": "2399debe1084345752fc12e789f7257fc0519254cd6474080520bda476a50bea",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "uUCd8oVxJJWqWE1KRSELsKDI3n9jiNPHcjH4M4AZyCVUov0WGhhRSCOF5bdlCfO1HNhb4WqG7Co96W8Q1AGqDQ=="
+      "signature": "zyNlV06MVhcEIeI3wop9ImVjoavsVTpvQZDhb7w207lPXgvPrfotcv1lVdCqTkV68ZaWiIKixbvoqX5jaZ9XCw=="
     },
     "literature:lit_levine_waking_tiger": {
       "schema_version": 1,
@@ -699,17 +699,17 @@
     },
     "literature:lit_tolstoy_war_and_peace": {
       "schema_version": 1,
-      "item_sha256": "42f8239c334004c55ded4646c32a2e3c1edcda6e8bfa13556097bc149eb5895f",
-      "review_sha256": "624891142533b5736439eab9661bad8cd5ebe5aef0e74792561a0156e7795dba",
+      "item_sha256": "939ca7cf60574c8020ccf470774e2240975cbf2f8b4c7327d223595c22d7052b",
+      "review_sha256": "6ad21800b40db7aa9be270c892ed07ba005bb4352e6f217acad1dd72f50633d1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "dILp4sDPXJhX9VN9wQyr1OKMMhPg84wLCvooXeg0sXaUr+RAOyVUwrLU+YvPcS/qnrCnYF0VgbvI9zd4gZ9xAQ=="
+      "signature": "w4n+Y1mo0zy9AejFt31c1Ezx4p77epKlN++jghryQuYzBHw8FRFaiTqwelzcua0chkutdi0F+hu1T69qZHsmAw=="
     },
     "literature:lit_bulgakov_heart_of_a_dog": {
       "schema_version": 1,
       "item_sha256": "9d3f35b535d4e8bcf72f8d677de6694a6bef6b6c88eb1aec44f223ab77d44b73",
-      "review_sha256": "0e6c9b9337560d38b713b0db24ca230d41a01c49cf5b225863f7cfb6aa9128ee",
+      "review_sha256": "35a2071faf3b4910dc68de64557e7d28dd3e70902b90dacaabcb7765fb075d1c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "abUtYy9nJ/B7ULNOVJZlNSdWYrMZws1DaDuEvaScRDhLDsPS/kad6A7dJlBtjUwQt+tv3Ga3Zh71DZW43fvdCg=="
+      "signature": "5aF3tMRyYRLJ6N9qziKVZ6+7fHQvs27wZk9kPuD0rZnG3YAaOwMt/t0hVYU/9OWZ6nqZb6cFYZ74ZfnqiKnCAg=="
     },
     "literature:lit_zeigarnik_pathopsychology": {
       "schema_version": 1,
