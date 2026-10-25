@@ -13298,8 +13298,8 @@
     },
     "questions:case_cbt_activity_mastery_pleasure_001": {
       "schema_version": 1,
-      "item_sha256": "f804f5494ec865641ac318cb05b5498cc69106ac8506b1e7d82f09c94f687b08",
-      "review_sha256": "8fff9f7dd9d3159c156042f339addff139dbfd4c3794d9df2f1b48240d9348e6",
+      "item_sha256": "549f1d32e68545845ef5e03bae95937706a7ef86a1aafe1aa3d1be18b2959afc",
+      "review_sha256": "920fbeb20b4fb6a4bf32a83f8cfad021926ed0dc3d852244be1134b6cbbd6182",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -13874,8 +13874,8 @@
     },
     "questions:case_supervision_process_roles_001": {
       "schema_version": 1,
-      "item_sha256": "3337dd0c75a63b8f0a059079add20a122cc18fedb8ba9c36153ddc1fbb5a55e9",
-      "review_sha256": "08578a7ae5b9f5cfbdc97413f1ee86aae69c091da0390ad9cd76afed426408d8",
+      "item_sha256": "9ff80751aec570d1abe4ede1a7c3f4b6f39bdd7fcbae9abe2037bba158dd8fd1",
+      "review_sha256": "2b71509217b23100647b2314e68a3dc6f62c15d71c15b4c330e25723cdf47027",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",

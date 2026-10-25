@@ -7,6 +7,7 @@ from app.quiz_runner import get_current_question_snapshot
 from contextlib import closing
 import json
 import re
+import pytest
 from pathlib import Path
 from types import SimpleNamespace
 from tests.test_attempt_content import bank
@@ -143,3 +144,24 @@ def test_current_bank_uses_plain_client_wording_without_rewriting_historical_edi
         if re.search(r"вымышлен|выдуман", json.dumps(visible, ensure_ascii=False), re.IGNORECASE):
             unexpected.append(item["id"])
     assert unexpected == []
+
+
+@pytest.mark.parametrize(("external_id", "expected"), [
+    ("case_supervision_process_roles_001", ("замена имени", "узнаваемым")),
+    ("case_cbt_activity_mastery_pleasure_001", ("от 0 до 5", "Чем выше оценка")),
+])
+def test_real_case_material_context_is_visible_before_answer(bank, external_id, expected):
+    items = json.loads(Path("content/questions/module3/cases.json").read_text(encoding="utf-8"))
+    item = next(item for item in items if item["id"] == external_id)
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, [item])
+        question_id = conn.execute(
+            "SELECT id FROM questions WHERE external_id=?", (external_id,)
+        ).fetchone()[0]
+        session = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, session, [question_id])
+        shown = get_current_question_snapshot(conn, actor_user_id=1, session_id=session)
+        assert shown.status == "ok"
+        # These facts must be present before answer feedback reveals case metadata.
+        for fact in expected:
+            assert fact in shown.question_text
