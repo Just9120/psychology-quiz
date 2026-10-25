@@ -350,19 +350,23 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         for forbidden in ("source_refs", "supplied_snippet", "question:m2_exp", "exp_psych_", "short_definition", "definition"):
             self.assertNotIn(forbidden, dumped)
 
-    def test_build_miniapp_context_setup_includes_safe_glossary_topics(self):
+    def test_setup_url_for_full_current_registry_uses_safe_bounded_hydration(self):
         user = create_or_load_user(self.conn, 2222, "u2", "U2", None)
         state = build_miniapp_runner_state(self.conn, actor_user_id=int(user["id"]))
         url, used_fallback = build_miniapp_url_with_fallback("https://e.co/u", [{"id": 1, "name": "Cat"}], state)
-        self.assertFalse(used_fallback)
+        self.assertTrue(used_fallback)
         self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
         encoded = url.split("context=", 1)[1]
-        padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
-        ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
-        self.assertEqual("setup", ctx.get("mode"))
-        titles = [topic["title"] for topic in ctx["glossary"]["topics"]]
-        self.assertIn("Качественные методы исследования", titles)
-        self.assertIn("Основы экспериментальной психологии", titles)
+        ctx = json.loads(base64.urlsafe_b64decode((encoded + "=" * ((4 - len(encoded) % 4) % 4)).encode()).decode())
+        self.assertEqual("setup", ctx["mode"])
+        self.assertTrue(ctx["setup_hydration_required"])
+        self.assertEqual([], ctx["categories"])
+        self.assertNotIn("glossary", ctx)
+        # With the configured production API,compact hydration is the primary route.
+        configured, fallback = build_miniapp_url_with_fallback(
+            "https://e.co/u", [{"id": 1, "name": "Cat"}], state, api_base_url="https://api.example.com")
+        self.assertFalse(fallback)
+        self.assertLessEqual(len(configured), MAX_MINIAPP_URL_LENGTH)
         dumped = json.dumps(ctx, ensure_ascii=False)
         for forbidden in ("source_refs", "supplied_snippet", "question:m2_exp", "exp_psych_", "short_definition", "definition"):
             self.assertNotIn(forbidden, dumped)
@@ -544,7 +548,7 @@ class MiniAppRunnerContractTests(unittest.TestCase):
 
     def test_force_setup_context_overrides_active_session(self):
         setup_state = {"state": "setup", "status": "force_setup", "server_derived": True}
-        url, _ = build_miniapp_url_with_fallback(
+        url, fallback = build_miniapp_url_with_fallback(
             "https://example.com/ui",
             [{"id": 1, "name": "Category 1"}],
             setup_state,
@@ -554,7 +558,10 @@ class MiniAppRunnerContractTests(unittest.TestCase):
         padded = encoded + ("=" * ((4 - len(encoded) % 4) % 4))
         ctx = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
         self.assertEqual("setup", ctx.get("mode"))
-        self.assertEqual(1, len(ctx.get("categories", [])))
+        self.assertTrue(fallback)
+        self.assertLessEqual(len(url), MAX_MINIAPP_URL_LENGTH)
+        self.assertEqual([], ctx["categories"])
+        self.assertTrue(ctx["setup_hydration_required"])
         self.assertTrue(ctx.get("force_setup"))
         self.assertTrue(ctx.get("abandons_active_session"))
 
