@@ -19890,8 +19890,8 @@
     "questions:m6_psyl_002": {
       "item_sha256": "bfc427b682d84f37d09b53e9d6d44d5a366924325547063d1328d4f3e873ef63",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19903,15 +19903,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace doom/loser/change-profession straw alternatives with useful questions addressing different targets; remove multiple negative quantifier wording, no assumption every generalization is false. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact prior reviewed body retained;authored client project statement. Ask cases/scope/possible exceptions without presuming an exception or that every all/never utterance is false,distorted or pathological. All four alternatives are useful questions with distinct targets. Literal generalising definition and exploratory questions only;not forced positive reframing.",
+      "sources": [
+        {
+          "source_id": "src_412975725d55a494610d91c400a1e6dbd77330659115367b1b829a5192d97b77",
+          "modified_time": "2026-09-14T11:13:49.409Z",
+          "snapshot_sha256": "5f2b35aa497d218307cfd6816a9734bd31080c04dec0ccf1e20a76ad5699f983",
+          "locator": "characters:25257:25366;characters:25427:25624"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_psyl_003": {
       "item_sha256": "9df7a786a8abe5bcf7b465e9f36de6fe8773be226d050112242a9f229f9e7a35",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19923,15 +19930,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: All alternatives are neutral and useful information requests; only one resolves who, rather than content/emotion/time. Remove diagnosis and leading-parent suggestions. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact prior reviewed body retained;resolve who they refers to,not infer hidden person,motive or diagnosis from omission. Other options ask event content,emotion and time. Selected explicit referent definition outside own held range;no claim all omitted references are intentional protection or unconscious avoidance.",
+      "sources": [
+        {
+          "source_id": "src_412975725d55a494610d91c400a1e6dbd77330659115367b1b829a5192d97b77",
+          "modified_time": "2026-09-14T11:13:49.409Z",
+          "snapshot_sha256": "5f2b35aa497d218307cfd6816a9734bd31080c04dec0ccf1e20a76ad5699f983",
+          "locator": "characters:26841:27002"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_psyl_004": {
       "item_sha256": "269fccc3b05f1420ef609b36c104608c12a38ebf0def0f1a8076e37fff2129fe",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19943,15 +19957,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Contrast actual evaluative/repetition presuppositions with plausible but absent speaker-ownership/cause/revision inferences; no impossible alternatives. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact prior reviewed body retained;negative evaluation and repeated-event presuppositions distinguished from absent evaluation ownership,cause and revision. Recognise what the question assumes,not assert those assumptions true. Source definition/example used as attributed linguistic analysis,not universal ban on causal questions.",
+      "sources": [
+        {
+          "source_id": "src_412975725d55a494610d91c400a1e6dbd77330659115367b1b829a5192d97b77",
+          "modified_time": "2026-09-14T11:13:49.409Z",
+          "snapshot_sha256": "5f2b35aa497d218307cfd6816a9734bd31080c04dec0ccf1e20a76ad5699f983",
+          "locator": "characters:29600:30480"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_psyl_005": {
       "item_sha256": "8aebe21567452508f8e87633c71d70d76bd952805b89adfd90bf931efb1d9c7c",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19963,15 +19984,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Already revised in this Goal: rule origin/meaning/conditions contrasted with premature permission/fixed-limitation/lexical-method selection; actual obligations are explicitly not denied. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Exact prior reviewed first-person refusal rule retained;explore origin,meaning and scope,not impose opposite rule,diagnose by must wording or presume no real duty. Only literal perceived possibilities/constraints and rule-origin questions;prescriptive compulsory doubt excluded. Context/contracts/safety and actual responsibilities remain relevant.",
+      "sources": [
+        {
+          "source_id": "src_412975725d55a494610d91c400a1e6dbd77330659115367b1b829a5192d97b77",
+          "modified_time": "2026-09-14T11:13:49.409Z",
+          "snapshot_sha256": "5f2b35aa497d218307cfd6816a9734bd31080c04dec0ccf1e20a76ad5699f983",
+          "locator": "characters:30812:30901;characters:31576:31661"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_psyl_006": {
       "item_sha256": "bad79c74f89ff675e356b44334a04a91384e2ca8584c79a7941169ad3c66fe12",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19983,15 +20011,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace yes/no with bounded inference; avoid misclassifying impersonal/indefinite-personal wording as a formal passive grammatical voice. No linguistic form proves a stable personality property. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact prior reviewed wording retained;sentence does not specify cancellation agent orspeaker role. No grammatical-passive mislabelling,stable low-agency diagnosis,assumed external cause or denial of harm. Selected explicit source statement that interpretation remains a revisable hypothesis and not diagnosis.",
+      "sources": [
+        {
+          "source_id": "src_412975725d55a494610d91c400a1e6dbd77330659115367b1b829a5192d97b77",
+          "modified_time": "2026-09-14T11:13:49.409Z",
+          "snapshot_sha256": "5f2b35aa497d218307cfd6816a9734bd31080c04dec0ccf1e20a76ad5699f983",
+          "locator": "characters:32416:32506"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_psyl_007": {
       "item_sha256": "5f085bc59c16d87cc9a042b906dabb5e439fa6258ab7132b4e5a041740957bd2",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20003,15 +20038,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use plausible conversational alternatives instead of universal-symbol dictionary/diagnosis/imposed meaning; exclude unsupported ecological/dissociative efficacy claims before selected definition. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact prior reviewed authored work metaphor retained;ask its personal meaning in this situation rather than colleague language,paraphrase-only or imposed expert terminology. Selected source explicitly rejects universal image decoding. No meaning dictionary,automatic change,ecological/dissociative cure or original distinctive source story used.",
+      "sources": [
+        {
+          "source_id": "src_412975725d55a494610d91c400a1e6dbd77330659115367b1b829a5192d97b77",
+          "modified_time": "2026-09-14T11:13:49.409Z",
+          "snapshot_sha256": "5f2b35aa497d218307cfd6816a9734bd31080c04dec0ccf1e20a76ad5699f983",
+          "locator": "characters:33054:33251"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_psyl_008": {
       "item_sha256": "0a2a6973b3ae0df8cd20f9d1f4be13e03804bcd9337ae46d7bfe2dca4919878d",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20023,9 +20065,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace diagnosis and independent-law caricatures with common causal-intent/exclusivity/omitted-event inferences; do not dismiss real external causes. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact prior reviewed project/conversation sentence retained;reported causal interpretation distinguished from proven sole cause,other person intent and absent intervening events. Real external causes are not automatically excluded orblamed on language. Literal causal-definition-plus-interpretation limitation only.",
+      "sources": [
+        {
+          "source_id": "src_412975725d55a494610d91c400a1e6dbd77330659115367b1b829a5192d97b77",
+          "modified_time": "2026-09-14T11:13:49.409Z",
+          "snapshot_sha256": "5f2b35aa497d218307cfd6816a9734bd31080c04dec0ccf1e20a76ad5699f983",
+          "locator": "characters:29046:29240"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_dev_003": {
       "item_sha256": "54a804be648ce1b9f15c6f692a9b628463c561ebea558f7d937f111d1cb65835",
