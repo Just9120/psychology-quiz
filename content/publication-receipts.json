@@ -17776,6 +17776,84 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "literature:lit_course_mention_practice19_consulting_theory_practice": {
+      "schema_version": 1,
+      "item_sha256": "b04364bb3719a5aa86c50bb268fc053a68196c56bf7984e8ee392a1009feb5c2",
+      "review_sha256": "76a06a261a62c98462aa9b57c37d882d58a7651d5bb3fecf99cb8f3c58634910",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_c0537b6dc885ea1f": {
+      "schema_version": 1,
+      "item_sha256": "f98cec54e4106061f0774ec01a5863038929bd984f0afd529f628bc99bcd8f35",
+      "review_sha256": "a85067842093e04163be9e9d0d03865910ebeca5be2c08827a2b869006bf3545",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_6190d3b37fdeeab5": {
+      "schema_version": 1,
+      "item_sha256": "16b7ee5b802588bed4878e30da96d0285331de5e8b74084eb4aff77fa65d3a14",
+      "review_sha256": "e7facec0673e32d85a8693413aac4bc0ef61103f162e5e173b1f77782e8a8ce6",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_93082f75dd37021b": {
+      "schema_version": 1,
+      "item_sha256": "c8ccd1a086d16bb781ed1c4973ef79f8f29d99780ba182b5ba786a1625bb3a30",
+      "review_sha256": "b1f3ec0dd765cf8413ca596c840b369afe1b26456699f0db20ff186e2403eda8",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_2d2ab1a9e58aaa66": {
+      "schema_version": 1,
+      "item_sha256": "3aa2009e878a5fe821033de9a4736f28096fdfc4c7eb03a2b7c26f96a6683934",
+      "review_sha256": "fb93c20f123260c996266e2b3e5e6cc7e7ef19fac4b0e5ac73aa85a7044e9ed6",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_yalom_loves_executioner": {
+      "schema_version": 1,
+      "item_sha256": "c2ed20c7d1a6a1f1fb3a72e28df72e469cbc70e6affe869c595d79edc5832d46",
+      "review_sha256": "fb6b974336b8dd79e0532cf4808e9745adb537df72ad35f21dbf2e3b7e4d0bf1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

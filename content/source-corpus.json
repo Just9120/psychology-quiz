@@ -114,12 +114,14 @@
       "kind": "bibliography",
       "readable": true,
       "modified_time": "2026-08-30T19:32:03.425Z",
-      "snapshot_sha256": "0aeb9c10e133fbe195bc9f4416fbe6b361f5725112d6a19516a983aa99142250",
+      "snapshot_sha256": "12e554939abdf0474ab103a51f66c9930f924a3eed0795bfdf024b85a6c46ece",
       "snapshot_kind": "extracted_text",
-      "reviewed_at": "2026-09-20",
-      "reviewer": "coding-agent",
-      "review_method": "connected Drive text review",
-      "limitations": "Прочитан список литературы; доступность содержания перечисленных работ не подтверждена."
+      "reviewed_at": "2026-10-25",
+      "reviewer": "bank-quality-bibliography-refresh-20261026",
+      "review_method": "Current original DOCX structure and complete extracted bibliography read; exact paragraph content matched current snapshot after whitespace normalisation. Earlier extraction representation unavailable;new capture is explicitly distinct,not reconstructed. Bibliographic identity/reading role only;no scientific or full-book approval.",
+      "limitations": "Прочитан список литературы; доступность содержания перечисленных работ не подтверждена.",
+      "original_snapshot_kind": "file_bytes",
+      "original_snapshot_sha256": "a8aaf35d4492a2382c4e3b369aacbcfa5a1927089892a9838088f42aaccc0d26"
     },
     {
       "id": "src_b336f667775bcec30f18f45da4e9a47bfeb2fcb6c059ef4d3df2bf46e2d86ab3",
