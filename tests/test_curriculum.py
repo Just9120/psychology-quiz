@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1473
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1482
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 174
@@ -198,6 +198,9 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
         assert historical == ((((({
+                              'm4_dev_003', 'm4_dev_004', 'm4_dev_005', 'm4_dev_008',
+                              'm6_family_002', 'm6_ethics_003', 'm6_ethics_006',
+                              'm6_psyl_010', 'm6_psyl_011',
                               'm3_psychological_consulting_101',
                               'm4_person_001', 'm4_person_004', 'm4_person_007',
                               'm4_person_010', 'm4_person_014', 'm4_person_017',

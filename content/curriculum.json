@@ -9279,6 +9279,60 @@
       "topic_id": "t_3d6b038c413a",
       "item_sha256": "fcd7e4e5c13b7746911ac7f996e18630b2388d086b83952517523d8abfbb32f5",
       "locator": "private certificate:questions:m3_psychological_consulting_110"
+    },
+    "a8a15f4fb87da601a7a8a811d0f6cf574c8323ca422bb8bd3b688c803e596d48": {
+      "external_id": "m4_dev_003",
+      "topic_id": "t_41a5946c3222",
+      "item_sha256": "b47d6278b68f232ea6b55773c1f69806a351d73ce6681f32da62452b7c2f02fc",
+      "locator": "private certificate:questions:m4_dev_003"
+    },
+    "d46226a74f9ae86927ad66594aee2ef856db537156bfd5dc9ae577706f5fe71f": {
+      "external_id": "m4_dev_004",
+      "topic_id": "t_ef4a29dbfadb",
+      "item_sha256": "3485a772a307c51b6990c65860affdb567ed46cc25175e471a1eb109552994f8",
+      "locator": "private review:questions:m4_dev_004"
+    },
+    "32dc0b1e1b3d8fa535b84609643b5f35899b8c29e362a0cca76f38016dbf4f50": {
+      "external_id": "m4_dev_005",
+      "topic_id": "t_d54f1d369642",
+      "item_sha256": "459df91c8e744dc3d3900b820e1675e833e2955e30b114811066067e71ec6ba9",
+      "locator": "private review:questions:m4_dev_005"
+    },
+    "4334acd0208ce5a9aa922824b698877b8822ed5c0f2bf6286398b87b49818142": {
+      "external_id": "m4_dev_008",
+      "topic_id": "t_d54f1d369642",
+      "item_sha256": "6f9a073aef823ad7d4fe4fff77a176d91c52b4abbdca0f9fa41178c65cae2c02",
+      "locator": "private certificate:questions:m4_dev_008"
+    },
+    "dd99670528751e66bcf12db0dcd3535bb0ecc8f3b39ee7092523f7d1648f5fea": {
+      "external_id": "m6_family_002",
+      "topic_id": "t_79cbec1d3bf8",
+      "item_sha256": "30758cece56bc9c41272914d3820e48133d9f677b3d22d23b38dc704bc28341f",
+      "locator": "private review:questions:m6_family_002"
+    },
+    "424c7730457d697edf3e93759cc58d948690446da3ba897265d83374d70f5fea": {
+      "external_id": "m6_ethics_003",
+      "topic_id": "t_1e3eef176953",
+      "item_sha256": "e5bca0ba168624dbf4f2e30e9fbe9573babfe5e58566b8ee2b90bef519444b6d",
+      "locator": "private review:questions:m6_ethics_003"
+    },
+    "2325f6d5897989b9d216b82256d026cff6bea2c3aa49f4cf08f2b46e916010ec": {
+      "external_id": "m6_ethics_006",
+      "topic_id": "t_452e1eafc29f",
+      "item_sha256": "f9df6445de932ba7c3ca1ebc565803f73bfb947648e96818d8c6c0c61202220f",
+      "locator": "private certificate:questions:m6_ethics_006"
+    },
+    "eaab18189f10175f66ea881797b284440b7b0eb512d513aa3be9fb4778243ffd": {
+      "external_id": "m6_psyl_010",
+      "topic_id": "t_47b1d61583c9",
+      "item_sha256": "6526e02bd4dd600c2de261d59b859ae512b65d53ee5af174a3c414e94686d980",
+      "locator": "private review:questions:m6_psyl_010"
+    },
+    "1fe8a8613367dcc950aa10156baac91014d9574c58c2169ad5b1ae5e9ab39b4b": {
+      "external_id": "m6_psyl_011",
+      "topic_id": "t_6d89c8fc95f4",
+      "item_sha256": "abdd24ee1850b02e8c54099e022ee0a6821e2f867304cf6e321bb0b280d27ff3",
+      "locator": "private review:questions:m6_psyl_011"
     }
   }
 }

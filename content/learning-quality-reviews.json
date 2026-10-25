@@ -18307,8 +18307,8 @@
     "questions:m6_family_001": {
       "item_sha256": "4b980e03d9c75d4623684801080b6e88c4a9be07ab67a408fd1ae75fd6a533fe",
       "discipline_id": "family_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18320,15 +18320,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Sibling interaction identifies named subsystem; model terminology does not judge family health. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Sibling subsystem as attributed family-system vocabulary;not compulsory family structure/health rating,child blame or one universal task set. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_1b8adf17ce3e4c8b82c83d7a1e6e7f5aa034bd5048a17a97f03095647cfb8f2c",
+          "modified_time": "2026-09-08T15:18:30.746Z",
+          "snapshot_sha256": "ee2d0404a315eb83be86f59809a93aece874cabcee78305f6a7878e391c87daf",
+          "locator": "characters:43573:43652"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_family_002": {
-      "item_sha256": "2e59f6b591a914fe6761b6dbdf4907bb6d67689e5fad13f83d9ac9fb7a7219b1",
+      "item_sha256": "30758cece56bc9c41272914d3820e48133d9f677b3d22d23b38dc704bc28341f",
       "discipline_id": "family_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18340,9 +18347,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Circular questions investigate reciprocal reactions and understandings; explanation explicitly rejects causal or efficacy proof. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Authored repeated-planning disagreement asks concrete mutual-response sequence;other alternatives are legitimate trait/history/frequency inquiries. Not universal allconnected causality,equal blame,shared-session prescription or neutrality overriding protection. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_1b8adf17ce3e4c8b82c83d7a1e6e7f5aa034bd5048a17a97f03095647cfb8f2c",
+          "modified_time": "2026-09-08T15:18:30.746Z",
+          "snapshot_sha256": "ee2d0404a315eb83be86f59809a93aece874cabcee78305f6a7878e391c87daf",
+          "locator": "characters:67308:67361;characters:67600:67718"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_quant_002": {
       "item_sha256": "b0ecdebc32bef890caba8a3216ce38537b075183ca227fa781272adcf1b4ba53",
@@ -18474,8 +18488,8 @@
     "questions:m4_dev_001": {
       "item_sha256": "c6684a65759a396110079fa6e87376184696ef3687297ebec491a35553ddae2e",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18487,15 +18501,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Lifespan developmental subject distinguished from individual differences, social presence and educational learning; no diagnosis or uniform age prediction. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Lifespan-development subject versus individual/social/educational distinctions;exact definition,not age diagnosis or uniform developmental calendar. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_3c9282fd845c00ca272a593e74c91a866c8059c091a30154dbb3bb62ba18ae37",
+          "modified_time": "2026-07-21T08:11:08.128Z",
+          "snapshot_sha256": "4c588757b164d2def800e77d8b14343d627ec7c5d8e90b2212cd4a50568567ab",
+          "locator": "characters:566:661"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_psyl_001": {
       "item_sha256": "71a1939a9aec5bca05ef93d489dc6b3ad1ea9043f243d1801d828736cf3d4e49",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18507,8 +18528,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Psycholinguistic psychological mechanisms of speech production/comprehension contrasted with grammar/history/lexicography; no therapeutic or diagnostic efficacy inferred. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Production/comprehension as two psychological speech processes versus grammatical/history/lexicographic tasks;not all counselling language guarantees clinical effect or individual phrase diagnosis. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_cd9f4b09d46311440f97cec56b450ad451151132f4d14166b76cda7d51e0daa9",
+          "modified_time": "2026-09-21T07:20:17.855Z",
+          "snapshot_sha256": "4b09485d5af34d96a2c71b4acc0cac3fdf1789cc576a1cdd8dc2e7203e6e7d62",
+          "locator": "characters:1580:1669;characters:1713:1836"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m4_person_001": {
@@ -19614,8 +19642,8 @@
     "questions:m6_family_003": {
       "item_sha256": "d5ee7e73ec349c19e1e165b056aab8d6f1bbec95e730d5ac93891bfc43fec2bb",
       "discipline_id": "family_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19627,15 +19655,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Internal role/subsystem boundaries distinguished from external contacts, rituals and lifecycle; no prescribed duties or diagnosis. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Internal roles/subsystem boundaries versus external contacts,rituals and lifecycle;not mandated hierarchy,child protection waiver or diagnostic family label. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_1b8adf17ce3e4c8b82c83d7a1e6e7f5aa034bd5048a17a97f03095647cfb8f2c",
+          "modified_time": "2026-09-08T15:18:30.746Z",
+          "snapshot_sha256": "ee2d0404a315eb83be86f59809a93aece874cabcee78305f6a7878e391c87daf",
+          "locator": "characters:46704:46812"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_family_004": {
       "item_sha256": "8709109a31ba4adac8da8b8057d03486281003e9870f6ac946fb6dfa152259c0",
       "discipline_id": "family_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19647,9 +19682,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace impossible total-control/no-conflict alternatives with meaningful family-system dimensions; retain explicit theoretical scope and reject deterministic lifecycle claims. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Preservation/development as two principles of the stated theoretical model;not physical laws,every-family marriage/childbirth path or inevitable crisis sequence. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_1b8adf17ce3e4c8b82c83d7a1e6e7f5aa034bd5048a17a97f03095647cfb8f2c",
+          "modified_time": "2026-09-08T15:18:30.746Z",
+          "snapshot_sha256": "ee2d0404a315eb83be86f59809a93aece874cabcee78305f6a7878e391c87daf",
+          "locator": "characters:809:932;characters:1525:1584"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_gp_063": {
       "item_sha256": "58ce65a0eb665601f2db471f493bec19dc6b310bbbec2d4e1f5391ae4f3bc7b2",
@@ -20347,10 +20389,10 @@
       "disposition": "keep"
     },
     "questions:m4_dev_003": {
-      "item_sha256": "54a804be648ce1b9f15c6f692a9b628463c561ebea558f7d937f111d1cb65835",
+      "item_sha256": "b47d6278b68f232ea6b55773c1f69806a351d73ce6681f32da62452b7c2f02fc",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20362,15 +20404,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use plausible fixed-stage/role-only interpretations instead of obviously absolute statements; certify only the explicit closing qualification, not deterministic earlier lecture claims. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Authored adult professional change assesses revisable selfdefinition,not teacher closing-phrase recall. Plausible fixed-role/stage interpretations require missing grounds;no obligatory identity rebuilding or pathology. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_59b0e9946958fd220f128845d37870e99ed6476427bf7d6218c8ac689fc832a5",
+          "modified_time": "2026-07-21T08:12:37.340Z",
+          "snapshot_sha256": "5acddeeb7d61a9a55da129ebb6d96eb167718e6be4f9bf524cb6582f92c33220",
+          "locator": "characters:26028:26064"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m4_dev_004": {
-      "item_sha256": "85732c07e6fd8de164cfa75a1394c47b47a63188b70ec6c996e5d6a770cbff02",
+      "item_sha256": "3485a772a307c51b6990c65860affdb567ed46cc25175e471a1eb109552994f8",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20382,15 +20431,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Internal thoughts/feelings distinguished from external event record; no crisis or diagnostic inference from one event. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Applied work-change thoughts/feelings versus external circumstances;parallel factual alternatives remove absurd date-only cue. Not a diagnosis or acceptance of misstated Vasilyuk axes. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_8edb64d5adf7ce12e04f159d1d02734f99d85cce1f0c78d58ff13a3eb5690de6",
+          "modified_time": "2026-07-21T08:13:53.402Z",
+          "snapshot_sha256": "0ef06c6e424c580a2b2aa733b467a92df51656bbbaec2088387faae7bac95448",
+          "locator": "characters:9017:9107"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m4_dev_005": {
-      "item_sha256": "032c035caa9d395a59b0b5717efd937a1c3025b18673e6eee95ace0998ea1995",
+      "item_sha256": "459df91c8e744dc3d3900b820e1675e833e2955e30b114811066067e71ec6ba9",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20402,15 +20458,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named shadow metaphor contrasted with ideal-image/achievement/role constructs; not a mandatory developmental task or clinical technique guarantee. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Shadow as named exploratory metaphor about ignored/rejected experience,not proven causal structure,mandatory midlife task or guaranteed treatment. Remove teacher-wording framing and vary key position;all option meanings retained. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_3242176679f89794847e2e076fae47670ef0efb5740ce4019cb1ed31c5f3f47f",
+          "modified_time": "2026-07-21T08:20:13.462Z",
+          "snapshot_sha256": "7c66e6de97ae1b5ea2e2371ccbf82f8a0553b39cc1908337473feacfb8711d00",
+          "locator": "characters:7931:8036"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_psyl_009": {
       "item_sha256": "3cc299e58a9770a634ada6bb07971d37658779e7f9e2952b3379bbb4cd359fe7",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20422,15 +20485,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Language sign system distinguished from situated utterance, formulation process and individual pronunciation; no reality creation by words. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Language sign system and communication/thinking/culture functions;not a concrete utterance or individual pronunciation,magic wordworld creation or neural reprogramming. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_96a679e637cb7022347f7f2d0a0d4ac9729110c5cbcd02d86417101c55a0cf42",
+          "modified_time": "2026-09-21T07:35:56.580Z",
+          "snapshot_sha256": "50ec46dce6aff67bc62307d4c6069aafb8967ff000688b9b86828f00579ffb4d",
+          "locator": "characters:959:1002;characters:1044:1125"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_psyl_010": {
-      "item_sha256": "074bebb88e3718216866889bb05e8503aa60b80432246f58c760ec7324cc77e9",
+      "item_sha256": "6526e02bd4dd600c2de261d59b859ae512b65d53ee5af174a3c414e94686d980",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20442,9 +20512,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Retain exact approved edition: emotion-expression criterion explicitly distinguishes functions and acknowledges simultaneous uses. Magical alternative mirrors an actual held lecture misconception, and the explanation explicitly rejects it as a scientific mechanism; no new source approval. Proposed optional rewording remains withheld while unresolved hold provenance is preserved. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Specified emotion-expression aspect versus other legitimate functions;replace scientifically unsupported magic distractor. One utterance can serve several functions;no exclusive language-determinism mechanism. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_96a679e637cb7022347f7f2d0a0d4ac9729110c5cbcd02d86417101c55a0cf42",
+          "modified_time": "2026-09-21T07:35:56.580Z",
+          "snapshot_sha256": "50ec46dce6aff67bc62307d4c6069aafb8967ff000688b9b86828f00579ffb4d",
+          "locator": "characters:1044:1125;characters:2220:2257;characters:2365:2417"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_pd_002": {
       "item_sha256": "8ed1406906a0fce6f71f68a608555b0b396535a19f84d28fb6a0d40537a861fb",
@@ -21305,8 +21382,8 @@
     "questions:m6_family_005": {
       "item_sha256": "699d79676188573d40db30288a13007561134d561291db9229d7ac9814d3fdc9",
       "discipline_id": "family_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21318,15 +21395,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use concrete spoon-learning situation, adjacent bounded course recommendations and realistic control/help alternatives; exclude prefrontal-maturation guarantees and unsafe parent anecdotes. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Feasible voluntary selfpractice in safe conditions,spoon example;not age-specific norm,brainmaturation schedule,forced obedience or universal parenting/feeding procedure. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_7af8f040add54fdb334fa1385eb59c83e9970c5eefd863fc5edd973733676769",
+          "modified_time": "2026-09-08T15:22:27.366Z",
+          "snapshot_sha256": "a027f10c54d669122ff0b4091942e4214ec5da070050786cb797322bbd0d9503",
+          "locator": "characters:10145:10261"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_ethics_002": {
       "item_sha256": "48b5265066dab712232b0f46cc11a390948faf2128106f8b1a62af994fab457f",
       "discipline_id": "professional_legal_ethics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21338,15 +21422,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Moral appraisal and legal grounds differ; no current statutory claim or specific sanction taught. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Moral appraisal versus legal grounds in general norm theory;not current enforceability/crime/clinical confidentiality rule or identity of law and morality. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_f73aa95867cdd11faf5e52c232c4d10cacbb21e48313c982853cd62c4012c00b",
+          "modified_time": "2026-09-21T12:25:41.285Z",
+          "snapshot_sha256": "a125bfee52fe83556ec11a2c162f796670ff31626f6e99c6823abe062fda34c6",
+          "locator": "characters:6989:7038"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_ethics_003": {
-      "item_sha256": "61ace4422a989e69ce68d91a34d33b180ce3e204b203a7f35615cfa3d6bbc64e",
+      "item_sha256": "e5bca0ba168624dbf4f2e30e9fbe9573babfe5e58566b8ee2b90bef519444b6d",
       "discipline_id": "professional_legal_ethics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21358,15 +21449,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named transition from external norm to inner regulation, with explicit warning against inferring motive from observed compliance. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "External norm becoming internal regulation,with four parallel named concepts;not mental motive inferred from one unobserved compliant act. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_f73aa95867cdd11faf5e52c232c4d10cacbb21e48313c982853cd62c4012c00b",
+          "modified_time": "2026-09-21T12:25:41.285Z",
+          "snapshot_sha256": "a125bfee52fe83556ec11a2c162f796670ff31626f6e99c6823abe062fda34c6",
+          "locator": "characters:2053:2154"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_ethics_004": {
       "item_sha256": "f8c0197275613f4101bdf91f39cf53aeec3d5c6eafea0d37510ffbe4a8143e4d",
       "discipline_id": "professional_legal_ethics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21378,8 +21476,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Juridical fact distinguished from norm, relation and sanction in a course-framed scheme; actual legal consequence not inferred. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Juridical fact as circumstance activating the model norm,distinct from norm/relation/sanction;not an actual age/legal duty or present statutory advice. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_b553e88d2c5d9ffdefd46bdb1d908e25a0995fece830c125d38861e1e06178a8",
+          "modified_time": "2026-09-21T12:26:47.955Z",
+          "snapshot_sha256": "2e9e7658d3a2a2d98f83b01a49d24239b731e285bd6b5fefa2106289ac29aebe",
+          "locator": "characters:2881:3002"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_ethics_005": {
@@ -21410,10 +21515,10 @@
       "disposition": "keep"
     },
     "questions:m6_ethics_006": {
-      "item_sha256": "b9fe08c3fbdad7fb22742584f4f4375dbb3efbcac2394534933d4d660daf7521",
+      "item_sha256": "f9df6445de932ba7c3ca1ebc565803f73bfb947648e96818d8c6c0c61202220f",
       "discipline_id": "professional_legal_ethics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21425,15 +21530,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use credible legal/document alternatives rather than personal impressions and study goals; bound definition to the selected course model, do not endorse lecture blanket confidentiality/legal claims. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "General repeatedly-applicable norm versus individual adjudication/agreement/instruction. Correct overnarrow public-authority-only impression using primary SupremeCourt2018paragraph2 verification;course generic legal-norm clause retained as learning basis. No specific litigation/permissions/confidentiality conclusion. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_5ba0faa582df6233165a286bcf7c6540148b4697e0763abb5babcd89c60ad7ee",
+          "modified_time": "2026-09-27T18:03:35.180Z",
+          "snapshot_sha256": "1f94f239d147e215161a7026c80001d95d0013fd1fa4154cfd249dd056bb85d3",
+          "locator": "characters:734:804"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m6_psyl_011": {
-      "item_sha256": "8a78e5d5a80941ef33507eb39252be479c1293707fe8a04072fcf6ed539119ea",
+      "item_sha256": "abdd24ee1850b02e8c54099e022ee0a6821e2f867304cf6e321bb0b280d27ff3",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21445,9 +21557,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Retain exact approved representation/referent distinction with explicit rejection of words-creating-events and guaranteed reformulation. Distractors correspond to actual source misconceptions; source-wide NLP claims stay held. Proposed optional rewording not signed or published. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Authored evaluation of a meeting applies representation-versus-event analogy;all alternatives legitimate other linguistic distinctions. Not generic fact-check next-step case duplicate,words create events,all-beliefs destiny or real political class story. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_078c9ee400d40b29a93f62aab9fdec7eb6a0e07ee0455ecfe4752d6da8f7581e",
+          "modified_time": "2026-09-21T07:39:35.672Z",
+          "snapshot_sha256": "cae27ba0ad15a73e53c58f91c73a81654f9e49a5895e8611db515431d64351a4",
+          "locator": "characters:2050:2080;characters:5398:5428"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m3_psychological_consulting_113": {
       "item_sha256": "9a9dc64ff05a23386177ac7e5f9c11fbb11721496426531b05adddf4aaae81b9",
@@ -21909,8 +22028,8 @@
     "questions:m4_dev_007": {
       "item_sha256": "9d86c05f9ef0b5ce86b857381ad8a2e25da0abf3edf926b86507f215597b9aa7",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21922,15 +22041,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace any/only/necessarily distractors with plausible but premature classification/goal/solution steps; retain individualized uncertainty and consolidate generic underdetermination old002 here. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Individual hypotheses/questions for similar complaints;age frame can guide inquiry but not establish cause,stage or same goal. Exclude mandatory normative-crisis assumption in adjacent instructions. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_fa897714eeb855da0700986bbb2f337c661056254859b42dfcada81c3c143952",
+          "modified_time": "2026-07-12T06:46:12.459Z",
+          "snapshot_sha256": "534866300a5e13c5ef780c70afa0e56b5954045a2c98d18ead5cab1249c5043e",
+          "locator": "characters:24529:24616"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_dev_008": {
-      "item_sha256": "cf5d66ad3e566abb66688d08a0c3190fc630b4e67a3fdf458ada92e2effb559a",
+      "item_sha256": "6f9a073aef823ad7d4fe4fff77a176d91c52b4abbdca0f9fa41178c65cae2c02",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21942,15 +22068,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace role-as-disorder/age-determines-authenticity straw alternatives with credible role/image/compliance lenses; no archetype mechanism or universal developmental prescription approved. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Authored workplace role/own-feeling contrast applies mask metaphor;not compulsory persona performance,essential true-self scale or inferred archetypal brain mechanism. Distinct from social roleexpectation/performance definitions. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_3242176679f89794847e2e076fae47670ef0efb5740ce4019cb1ed31c5f3f47f",
+          "modified_time": "2026-07-21T08:20:13.462Z",
+          "snapshot_sha256": "7c66e6de97ae1b5ea2e2371ccbf82f8a0553b39cc1908337473feacfb8711d00",
+          "locator": "characters:17184:17263"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m4_dev_009": {
       "item_sha256": "997f064b89d63811e55594c520e6ce4db664dfb489fb46f5cfece2cf5c1361c4",
       "discipline_id": "developmental_psychology",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21962,9 +22095,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace obligatory-crisis/fear/retirement questions with plausible but premature assumptions; meaning inquiry does not pathologize work after retirement eligibility. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Work-after-retirement eligibility is not a problem by itself;inquire own meaning,not forced retirement,age stereotype or exhaustive intrinsic-versus-status motive binary. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_1a94754100ff715704ae103e5db8c56ae5ee50d1b3edf5cd54130f99d209d6f2",
+          "modified_time": "2026-07-21T08:22:01.106Z",
+          "snapshot_sha256": "c5d5b967216d7812b7f0ed61a036b4d975bdbdf6f2b6f0f139f480b15330b14b",
+          "locator": "characters:5977:6036"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_tp_006": {
       "item_sha256": "7b9d8727744cc1f6f27a067491a3ad6acddc8111f90f90f5fdcc5854d0bd1fc6",
@@ -22903,8 +23043,8 @@
     "questions:m6_psyl_012": {
       "item_sha256": "f7d52fcfca782b627d2185dfd433d2bb29e3d73c3dcdf096b496478d15ee1371",
       "discipline_id": "psycholinguistics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22916,8 +23056,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named course motive-thought-word scheme framed as a theoretical relation, not invariant universal sequence; alternatives target other speech stages. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Attributed motive→thought→word teaching scheme,not universally fixed sequence of every utterance,allthoughts linguistic or guaranteed influence on another person. Complete current question/key/all four alternatives/explanation checked against exact course clauses and earlier whole-body reviews. Existing425complete source reads reused,not a corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_cd9f4b09d46311440f97cec56b450ad451151132f4d14166b76cda7d51e0daa9",
+          "modified_time": "2026-09-21T07:20:17.855Z",
+          "snapshot_sha256": "4b09485d5af34d96a2c71b4acc0cac3fdf1789cc576a1cdd8dc2e7203e6e7d62",
+          "locator": "characters:5276:5371"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m5_clin_018": {

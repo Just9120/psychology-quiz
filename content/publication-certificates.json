@@ -2162,17 +2162,17 @@
     "questions:m4_dev_007": {
       "schema_version": 2,
       "item_sha256": "9d86c05f9ef0b5ce86b857381ad8a2e25da0abf3edf926b86507f215597b9aa7",
-      "review_sha256": "16c51773b9a0fb5d4b52d8783272f535a46608262e3b53a6e9459e37167bc90f",
+      "review_sha256": "253bfed0a6ca91a7dad639691c1f31cee5d6c8b56ec3800d023a41736b7d91ff",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "lx8VNmkuNBZ8Mgc87/d8ZCNHzvBITa7v7N1c+8vdJBUZ1qDksen8I/1PzwG0i6UX2O1Ari9u6j0DvzThRYt0Ag==",
+      "signature": "zV8229mdMMcK4Ik3N3MDUGtJxBOz2TH6MRJmQBMp8U8LkKPNRjSJccM2rVxStDy8J8bCZ+QD65jGgLCW3VAQDQ==",
       "topic_id": "t_34dd25f0b3ca"
     },
     "questions:m4_dev_009": {
       "schema_version": 2,
       "item_sha256": "997f064b89d63811e55594c520e6ce4db664dfb489fb46f5cfece2cf5c1361c4",
-      "review_sha256": "3cfe5b5a9c7afbb779e1d5b9dd0b6446d2d4a4fc9464cfd0cb4fee7eeaa5b815",
+      "review_sha256": "bc7383703464ec66373e62a1c58e1b804eb1b89218acae62d98368067dcdf485",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "TNofuzuEkgczFum/O0uHoLvMw2DQzDfLz0NKzf2jBGgAZXRkQw4dSaXR+1PWCr2vVmSyV7sR5bGsZ622/MlkCA==",
+      "signature": "+9e2bg68LC90PrC70HtUSLTUMFn/5kFFK0UX8S893g0XFH6Ywc511kmiOfxirgGW9C8H9Ejes1v9c8BNsBTZDA==",
       "topic_id": "t_8ea62b03f36a"
     },
     "questions:m5_clin_022": {
@@ -2996,17 +2996,17 @@
     "questions:m6_family_004": {
       "schema_version": 2,
       "item_sha256": "8709109a31ba4adac8da8b8057d03486281003e9870f6ac946fb6dfa152259c0",
-      "review_sha256": "8471c8a9167fb16c3024a1e5bd97cbe3c8e24924cdd75e6c859ce75c99f57339",
+      "review_sha256": "7885ad728a014c32ef5ea522213cac4ec686e1519aa35f8e4f19e4bc3b54d6d6",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "qwe4QQ+33a90RAWQ029gioLyZQsoKr7AFVoqh5avpd9bXCe7e9JJ8oJXwyKgFeFvvPI8VLoSMWZCJY48ZCZ/DA==",
+      "signature": "y4R86b+WC45/LGA2/L8nKpaoxDFkSh71+k73Ja0r6OsFhsLoGg0huhBIke1b3208fl3yBOswMdVcrCG+BkfTCQ==",
       "topic_id": "t_79cbec1d3bf8"
     },
     "questions:m6_family_005": {
       "schema_version": 2,
       "item_sha256": "699d79676188573d40db30288a13007561134d561291db9229d7ac9814d3fdc9",
-      "review_sha256": "5951c6533280a3b7cacf0f060172bff48abd4f778348c6f70d827a8f3df67128",
+      "review_sha256": "0059187c79f1e608f75dad3335a8e6ad2311fb39e973600121a972898bd8baf4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "7yg0IXL6o+C7uXMBOJVUutivxHIKOduvRkWIKXOdb5waQp11KxgJ39/1w48lIBpNs7m9mCqifSew+cISNUb5AQ==",
+      "signature": "YEj2cWfEkkf5SSXPAsxZpdth+VAvwrmS4MEXQUoy5tdtjQ2f6y08aeQMY7VTalLHjTRpBdvlfwcg1zcJ7gZVDw==",
       "topic_id": "t_c3a5dde091f0"
     },
     "questions:m6_ethics_005": {
@@ -3019,10 +3019,10 @@
     },
     "questions:m6_ethics_006": {
       "schema_version": 2,
-      "item_sha256": "b9fe08c3fbdad7fb22742584f4f4375dbb3efbcac2394534933d4d660daf7521",
-      "review_sha256": "fce7ed702fce3c5ff547b9199cdc2f931ab283150c5099c7cc86be8e47748f07",
+      "item_sha256": "f9df6445de932ba7c3ca1ebc565803f73bfb947648e96818d8c6c0c61202220f",
+      "review_sha256": "88de88a2eaf50172a704e036929030651788b9a5a3a5c6fbc2e6dbec92e670e2",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "RWwXSKjUO0S9Sg9YCwmCfNniRTRcj7OqKLueEW/EZZ7/QHxAR3bFj0nktPKMXHnV42dJNrAaZE/1J5gdSD58Cw==",
+      "signature": "uMzMXtaOGo7BD8Xn8fmJol5CtTeLZq4wAXSgJsNURQD4oMdcdXsmZs5Uda1NqHs6c00yvUvWIeZ26d1kho70DQ==",
       "topic_id": "t_452e1eafc29f"
     },
     "questions:other_bonus_001": {
@@ -3107,18 +3107,18 @@
     },
     "questions:m4_dev_003": {
       "schema_version": 2,
-      "item_sha256": "54a804be648ce1b9f15c6f692a9b628463c561ebea558f7d937f111d1cb65835",
-      "review_sha256": "7cf4ca4d515475d637057b9bd9827c21edb2a87ca352e97597250d85c6c45ed2",
+      "item_sha256": "b47d6278b68f232ea6b55773c1f69806a351d73ce6681f32da62452b7c2f02fc",
+      "review_sha256": "a370388cb9570f9189418073c8054194ae728a23dcb201f95e46292e9db8fb8b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "oWgkZG7pCiK05S/A12CUQ+TW+CkEiFRO8oEmn4PJ2hNcW3acFdes8PJDqvwRrW5duWVYTKDVZ7bXr7foeHQsBg==",
+      "signature": "AUMgbVnycysx37eLfJA46LOj8l4nj7dXago2WD0ytYLrvjFWPztVUNy0scpAUrClpnV5mHQUgHHBwgUOjcQ9CA==",
       "topic_id": "t_41a5946c3222"
     },
     "questions:m4_dev_008": {
       "schema_version": 2,
-      "item_sha256": "cf5d66ad3e566abb66688d08a0c3190fc630b4e67a3fdf458ada92e2effb559a",
-      "review_sha256": "ded6ebee01c7f04c7e1dfa0c36c444f014e7a289b8e94faa1d7fcdc33fe26291",
+      "item_sha256": "6f9a073aef823ad7d4fe4fff77a176d91c52b4abbdca0f9fa41178c65cae2c02",
+      "review_sha256": "679d32bf36bf5e7b35d5d413b20f777b3bafe16b2139d6f48528711327318770",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "kGBQhrFhUGoo8IaPPQ9MyBFVEZbr9Dm43cEqWZKuqv9q36AQX3aCtXYzaFhYP9NYNclsT/7k63o+u1NYP1RpDQ==",
+      "signature": "HASnJLOWgEbEVRAgZxS+li6emgrnWS+G1ltx78mpFutIbgVUTY1BCFP2OhSpDAJCxt6LxIQCXfD/aJfeTyJDDw==",
       "topic_id": "t_d54f1d369642"
     },
     "questions:m3_psychological_consulting_098": {
@@ -3188,37 +3188,37 @@
     "literature:lit_family_slide_05": {
       "schema_version": 1,
       "item_sha256": "070784f349349471f6a8a085c3d7e495133ac489bf4055ac85848194eaa32c87",
-      "review_sha256": "4f439c1dbcdf4bee4ff6051ca7dd2830809e10334f12b3f3bf4d1a6a601b6b77",
+      "review_sha256": "885130dcbfd59d731dc466a877dfd5b52c3a2cfb66220522d6fca2dc3ee04cb0",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "iJdc0NF6iGRzhO+rvEd+aQt38VwssX8oQDBvjdnP5NKBTuS55KITEcHiD9NnKgNcIZJhqTPVT+e3WRsmiFntCw=="
+      "signature": "wA2MTGEoPCq1GDz3U0qOPw6rS6nqHWTKsuPO4DQgpvRgVtpi6zkNCTq4FHptdGU1E35krTXA/mro7GuNYbkfDA=="
     },
     "literature:lit_family_slide_06": {
       "schema_version": 1,
       "item_sha256": "bfc83d46b887a0263107ee33b805c02c2b0428479a7e6df9a833f25e630cd141",
-      "review_sha256": "ed19325064024594f566e04c6ed1c732793ec543e9cda7b230b76feb954e1d0a",
+      "review_sha256": "7017983780d2dcfddbee49c9ecf6e8aff2ef730bf6e02b892e93331d8132ca50",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "TgPYtYn4IuHNoB5VsDriZQw75DF7pxP3GoxuA4LKDD/FNcoRkqyztG3Gzv9VRYDQ2HXTZNeRr2iGE/oq/enRAA=="
+      "signature": "a0gVCkIes73T0ZQiRZWH7T7I8Lk+c24ocMjTfxeTp1YPIi9sLuWE8tCAJXwkE5eQXy6cgecKswFWbnOff8JkBQ=="
     },
     "literature:lit_family_slide_07": {
       "schema_version": 1,
       "item_sha256": "510875e7c09ffe9052b2a4e40d0ccface75abbb686e15fbc5f9a105589a9f58a",
-      "review_sha256": "2df27210f3b4394bf0eb24cb6955592679da2025dde501183e0ef758c134e897",
+      "review_sha256": "5172d15e338b34db39a338ef7957bb3d56835fd43ea9ce4c989577eae416e3ac",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "4qB916mNwILmj8dwkzrnT2+HDRQfjmisfEKq3g3YjCFir1ppIwqiMohlwcz7Mp1dV5jsDzNqYXUCSw9vKOhUBA=="
+      "signature": "H06HxjFA8snpJO6wA5uuxxUBCeW3j33F308ynVWy+S/hX55qBZed20lecT9KqulNxJqRpZfY1Wj17S/m9voaCA=="
     },
     "literature:lit_family_slide_08": {
       "schema_version": 1,
       "item_sha256": "a0253734aa5e9e2ee58fc636d697fe8e92b3ee7a7b498888eeea8ea15d6aefe4",
-      "review_sha256": "0459068e2adc59148841a827b1361c13423341e87bcccae7461c613b1144f186",
+      "review_sha256": "b343b4cee675a7da9334b3e27b7d97698db08d1aedf6ce13d0d5de2907946b55",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "11Cr3t0MJpuuACeZWaDg+DnkdQ7ALvJG0XRJJX9oNHFn1U0BHNXsmPddyleVkoigJdecB2D6l+n2b0B+8/+WBg=="
+      "signature": "w/pzHN/9T2eUckBK/AkfdjDPNAhpzS+rpAfQ0cZoDXtfb9XbMcX6rOktujAh4wD972sPu/kHoEhodgyY2gMNBQ=="
     },
     "literature:lit_family_slide_09": {
       "schema_version": 1,
       "item_sha256": "11d333e8fe1bcfac5b316500cdcb565d2ab93465b190acc925d688563cb030af",
-      "review_sha256": "1b2c4dbbc0f19415b8e86f745e85ff49fd00cd98305750af241b8f6a1a84b1db",
+      "review_sha256": "9ca7357b6d2aa9e9a491590292e44716aa95bc7ea0c18e25d45a5249163a1975",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Km7zxqSxEvlYQfwhMg8IYZy/Hh4Vt7EOZx6A60ZL8g452PN1GRhLnR8jbrgD+CVAmE3Kli9iJGVKPzGmpGDuCQ=="
+      "signature": "O/5ud9zNALj6nfGgcxXZrorJMWvS8wNPm/LloQxynwNihuwYteyccrOzQOfNGO+vKyNZdtPOmNrhhggY1UzvAw=="
     },
     "literature:psf_danilova_psihofiziologiya": {
       "schema_version": 1,
