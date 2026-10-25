@@ -328,7 +328,7 @@
     "glossary:dendrites": {
       "schema_version": 1,
       "item_sha256": "778c6d41d8db2c5d4cac8398cec9444478cb1b0a07019ecfb222312cae34892b",
-      "review_sha256": "352f9ce7c05c89c720ca8cb417932210dda95535c0ccd186ce330e819a8741bd",
+      "review_sha256": "9fbd374c40a9ea8e0b41431e0a11ef318656b18fc7e87917b265b7fa6a9ab98a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -346,7 +346,7 @@
     "glossary:axon": {
       "schema_version": 1,
       "item_sha256": "366bc939f6b5fb236f8248c3b672441ebd4f7cc1a94a93342f15bc9fd6d3106d",
-      "review_sha256": "979f0e29e485e207de6007afeb07d330ce40976833626872728d7ac226738ce2",
+      "review_sha256": "ca1f0ccc2dcdab9865fb5aa6e3de246ccd2c11a21947658ceb9f52fa2075a4f2",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -364,7 +364,7 @@
     "glossary:central_nervous_system": {
       "schema_version": 1,
       "item_sha256": "03dc3726ee2a1cc3c2d48d0e9bb9fc3a94b95a917d94b4c866864c08b46f3e04",
-      "review_sha256": "35f97112d4a8504878c480f763607133c32e53cb8476850553518e73e9a89074",
+      "review_sha256": "003574b93adc404ba38d1a68024c4dd37ebdea2a116f3dbfc7710785f243aaf3",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -382,7 +382,7 @@
     "glossary:peripheral_nervous_system": {
       "schema_version": 1,
       "item_sha256": "023d35f6451ecfec8c0b4aae2cf97024e3189bfd28c8ac2694d883574dd92dd8",
-      "review_sha256": "a29b386bacde1391f8d2dd9717d201c67554b0ac843806f1fb27afeac21ef87e",
+      "review_sha256": "475cf030f3b03b3ef0af97e5972c5dbee037b2114cea72a49243e4e9dfb3265a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -960,7 +960,7 @@
     "glossary:chemical_synaptic_transmission": {
       "schema_version": 1,
       "item_sha256": "68f2c5c179cb67d06691abb200732476e0a3ff124ae6d5436380b43f9ea01582",
-      "review_sha256": "59d6bee778de54c38b47b6c5aa7f8e66c39e231a0dfaf9b7928af97491f2590f",
+      "review_sha256": "07d2b4bbafbfa45ae97964869351d70d1bb61ebde2566a47ed94a8847ed0c066",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -978,7 +978,7 @@
     "glossary:chemical_synapse": {
       "schema_version": 1,
       "item_sha256": "20c48d4741dc81e90ca84034e3d3a8b1d6376c294336431937ab71cdecb089da",
-      "review_sha256": "d169951b30d42b68803dddc12ca004b6d218c4a75a113e9aedef9e9c28093a8a",
+      "review_sha256": "748bc9fadd14cb8135ede025cb25d271101c0a2488447e3100daea1207894935",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -1393,7 +1393,7 @@
     "questions:m1_phys_002": {
       "schema_version": 1,
       "item_sha256": "bae8206daa192faad9dc94b39924a9167431bfac32637bcbd6bb0e2fdc88f467",
-      "review_sha256": "b78f48467912f1f4c2f337f3360206e0ecf5bda144ebd8b0b130c60256308ee9",
+      "review_sha256": "fd3cce2f4c61647e6013c3d7dd301e9ac1e0ae8e8a3297e8bee058396c7f93aa",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -1411,7 +1411,7 @@
     "questions:m1_phys_003": {
       "schema_version": 1,
       "item_sha256": "2291222b988938bb4335bf7e1d4b4eb447d288f3a34483ae19db6c36fb798c23",
-      "review_sha256": "f8987c62f8815ac4538fa624f3b8a4d43489a671f2e46b67e55e636c8dfb65c3",
+      "review_sha256": "cb0284a5bd8f377f15cd8a0867090ab9515f77c4316f72d905d806889ab34bd0",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -1429,7 +1429,7 @@
     "questions:m1_phys_009": {
       "schema_version": 1,
       "item_sha256": "1d27016171f3b4cedcba91c7786667e83c6e6aa7b901a3c593303e003fba124f",
-      "review_sha256": "cc2a4e534954b57e02b290a5da9d0ee424c0ea7629b71998a8c7e30d91bbcbe4",
+      "review_sha256": "1112fba1e6e2200bd5927fa48bd42e303097a26ffda36f5b3a096147621cc07e",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -1447,7 +1447,7 @@
     "questions:m1_phys_010": {
       "schema_version": 1,
       "item_sha256": "14d7fec9af1ff6e8f5eef3694a66eaeb5df3f1adcd80bd459994810f6736145e",
-      "review_sha256": "cf7a0e688d40599a7ff0fa961d2185930f6c4afb4180adbbc85737006bb0f820",
+      "review_sha256": "073e94e9a14afb6b1ca055c6f8801cfb4f97719e037a8f07659ae5a2e732bbb1",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -1466,7 +1466,7 @@
     "questions:m1_phys_014": {
       "schema_version": 1,
       "item_sha256": "de51fd226b57e3ba905b956a23169409215cdd05efff4bae5334806f98b2bc03",
-      "review_sha256": "9e832068444e5f623170e234cba918474438a4c111f5bddfcc9370f4613ccacd",
+      "review_sha256": "fdf3c898e5a576584fb05d380776cfbeb44bb2760966bc786b82ffd9ce39b438",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -1485,7 +1485,7 @@
     "questions:m1_phys_015": {
       "schema_version": 1,
       "item_sha256": "ceece7aa0925ea52ce4ae15aeb3fcf51c75bfe4a5170e50c2fb8bdf7bc69637b",
-      "review_sha256": "6a98c9505d7c13d6b4e5d302941897c08a3141f5921cac6c151e867f46d4f008",
+      "review_sha256": "fd253799b0fded14cc6f473d83331cde1b5085674a6029cf7b73f3e238642d76",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -1522,7 +1522,7 @@
     "questions:m1_phys_026": {
       "schema_version": 1,
       "item_sha256": "f1157743f5471b31161291a69a17b2fa23ece9c81c82e8c1776b36544bc6bcbe",
-      "review_sha256": "b0853b6cc06f3d73d80c574b5f6d8848ab8ae0c033f9ecbbaa9b8a3aecc91e25",
+      "review_sha256": "d692b8f211e5e91d962567d3e35689482c3e7b3f7c095c59977d190f55329959",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -1541,7 +1541,7 @@
     "questions:m1_phys_032": {
       "schema_version": 1,
       "item_sha256": "5eef2cd355153da4d8c611273b333a12ecd24be1f804204f06644499399b2157",
-      "review_sha256": "994208a5f8144cb5766473492be15461f14fd154659333d4f927c26e2e9ff416",
+      "review_sha256": "992f64d4650e345eec5778bf982b8fda24bdf5e40b9ad74da00ea63f830eb0fb",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -1560,7 +1560,7 @@
     "questions:m1_phys_044": {
       "schema_version": 1,
       "item_sha256": "8d8e50806c0037b1b7ecec68a95f04cb10bd44e04e0bff4a9b86fd9025eba076",
-      "review_sha256": "e11b169cc41fd7a4ca2db6655efa5862266265fa63782a9446e6780e082588ca",
+      "review_sha256": "39459fb6176544cbd27417ec26ea1165081545b8a24a586c07de47495aeacc68",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -1597,7 +1597,7 @@
     "questions:m1_phys_006": {
       "schema_version": 1,
       "item_sha256": "330c6dcfb86adb5cd97c3045508e3e267d8337d4485e05da63b2583739ee2702",
-      "review_sha256": "813dfcaeab2bb0c8fe117be154df9e18ade7537fda451d72885f31d4aedcfab3",
+      "review_sha256": "c6a67e28e1dfd99e91626346347477b33e3eec5251a416546aa305b1b2d11208",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -4703,7 +4703,7 @@
     "questions:m1_psyf_003": {
       "schema_version": 1,
       "item_sha256": "31dd775f4008355c3d11f46666e1227f6e95cbfa31238e04e277a26ef0729879",
-      "review_sha256": "94eedf0fde74e6701b700fb4d64ed7d39df4c35bf6302a415993619c29d19cf0",
+      "review_sha256": "a54d2a7abd401c0d3ac9d174328994e247518c6d344516ad15600f2d4eb07c5a",
       "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -4741,7 +4741,7 @@
     "questions:m1_psyf_005": {
       "schema_version": 1,
       "item_sha256": "7556297214f797e67e90fb7399d1fc6ddfc86d3503cf7ebefeba95c88f816f26",
-      "review_sha256": "5d667eb21b909e6a6a45eb7b82b22e4f37f90b0ed9d62de70f0831755748a0b3",
+      "review_sha256": "f07056c1275e83a15ef713ac610c1f5d0ee0bf487bf9aef7ad147a90441f523e",
       "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -5309,7 +5309,7 @@
     "questions:m1_phys_008": {
       "schema_version": 1,
       "item_sha256": "19e51508048303d367d7fa4ef4923141771c2d6d5c9bac500de29cc2cbf98d7e",
-      "review_sha256": "8306dbe52d69408c4624d3b21cbf7d2bea1b91d1edfbd58a66ef0d21077efcee",
+      "review_sha256": "01792d5a34fca4fe0f5f1dbe99a19d7d0757142400ddb3ac717d799f6346a4aa",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -5810,7 +5810,7 @@
     "questions:m1_psyf_027": {
       "schema_version": 1,
       "item_sha256": "b4c2d11ceddf2179eeb30fe699146080363a98a9c1f98546805e8659acc1f0b9",
-      "review_sha256": "c89d6d428845e096ac04392714fce8db0e1439f8654166cb2e7ae4ef40f999e7",
+      "review_sha256": "3f7881d2060dbd883e1bb1d4f77c421d4eed468f255d6e89e7c97122785ee661",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -9135,7 +9135,7 @@
     "questions:m6_psyl_001": {
       "schema_version": 1,
       "item_sha256": "71a1939a9aec5bca05ef93d489dc6b3ad1ea9043f243d1801d828736cf3d4e49",
-      "review_sha256": "f81489c10a69f1d109c96a1ccf0d893d07b31e990172dcc24a83c786a77781d9",
+      "review_sha256": "bbee424b11d3fd5bbc6d38d885ce1ac7cab9ccdf075858c0123220e03515ae9a",
       "topic_id": "t_e39d1d65a4d7",
       "decision": "approved",
       "purpose": "learning_content",
@@ -9192,7 +9192,7 @@
     "questions:m5_clinical_002": {
       "schema_version": 1,
       "item_sha256": "fa8e4988989ea81e2f5fabdab27c03946bd8f13d2f79c094dcc8bc9abacc3a00",
-      "review_sha256": "d7a1071f3f0bc678cf44ba1dcf236635906c6a4ad8736b02d81eccf043d2e5b5",
+      "review_sha256": "4c3ce14cea92fbb3c8e83045590cc313050088aa39cf35e55234b681141ab793",
       "topic_id": "t_bb895f94e077",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10218,7 +10218,7 @@
     "questions:m1_psyf_074": {
       "schema_version": 1,
       "item_sha256": "0a26737e4b494b12ef1f73939c1d925ed378922c35cd206ca020af6eb18ebf12",
-      "review_sha256": "39246047eab166f35618a56054d1c12a8504101eb1ca9b0982f942d72600b685",
+      "review_sha256": "e484b03ce4aad25a1e95fa7271a8ab8e714422ac32400d9be7c2512bb7a9b3ba",
       "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10351,7 +10351,7 @@
     "questions:m3_psychological_consulting_110": {
       "schema_version": 1,
       "item_sha256": "fcd7e4e5c13b7746911ac7f996e18630b2388d086b83952517523d8abfbb32f5",
-      "review_sha256": "37ec46412ad6dc7f4dd1d160a2a4bd90f96bd9b910cb313a27f7f8414b9bbd68",
+      "review_sha256": "4fda26fd62dd5fac7b328b932dd94b0888bec3aac92ce75777ce777fffa759a4",
       "topic_id": "t_3d6b038c413a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10864,7 +10864,7 @@
     "questions:m2_pd_004": {
       "schema_version": 1,
       "item_sha256": "1f40d70be1e59eaf933a5dde42ed78ae6452898be6a6be704e691701352fc30e",
-      "review_sha256": "1b48a035d7f32226e4a0dd033f20569c2c9c0e571d05e25c21268c8e2c0245b1",
+      "review_sha256": "211486f863f0da85a92f7bc61319b918be9a6307eb436cd952b81977f5b9eec8",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10883,7 +10883,7 @@
     "questions:m2_pd_005": {
       "schema_version": 1,
       "item_sha256": "ed751176994a5dc879d292828b6aba8f650f551d2360343d92c785c594b5eb1e",
-      "review_sha256": "93032acac3cf3970c6e2dd0d05070d7bdfda8e8308e257ac02449aea288de6c5",
+      "review_sha256": "c92b22335648ca4266f8588f4148bdfb47968045348802acaf8c2d9c9a4d56e6",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10959,7 +10959,7 @@
     "questions:m6_social_002": {
       "schema_version": 1,
       "item_sha256": "c1325666894565e725a566507e5bdead9bcf5f860fb3eb842005979e93f10b49",
-      "review_sha256": "aaea90a97ad54980a10558d547a182136fbcbb1ac212031a0b48066302301c1d",
+      "review_sha256": "f2ee38a5d62555615ed2df3d97be4f754564bb8fa61aac7ab9ff7966291002a3",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10978,7 +10978,7 @@
     "questions:m6_social_003": {
       "schema_version": 1,
       "item_sha256": "9801c12469a341d21122de40f51e8504236afa128c0263a6b532dc9e69eaa08c",
-      "review_sha256": "50bcd98040b02685f53869256e6c331f55e28b48e05c807aaf169bc021e0d1b6",
+      "review_sha256": "f352bcb12cb1c56f6d3afc2b77db840b6a1543273b5be1b7a9d885397286464c",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10997,7 +10997,7 @@
     "questions:m6_social_004": {
       "schema_version": 1,
       "item_sha256": "2a703f22605e2aa44ad91e7adddc7c1e05cbd8b2331a2b5df3a543160969cf65",
-      "review_sha256": "57ce088e9737f73b2cdc9e78cdea09e791c8bf8287001fc076d3cf5f635e3bb7",
+      "review_sha256": "30caa6d6643d1bfc31fb1d037ae7e5b9f945fe905d590f7115bf6eae67f95834",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11016,7 +11016,7 @@
     "questions:m6_social_005": {
       "schema_version": 1,
       "item_sha256": "2b27b2933a51ccfbf6149ea85e3624c2eadb233690b67d2c1fe885f54b97ad46",
-      "review_sha256": "e310ca2a6f9b279ea920469e4288d7e2899cd93b84ed8ddcb41569b0b843befe",
+      "review_sha256": "6dd7a5a5446b700079e113218137478b98ab300f0ac2894c377024dc43a58488",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11054,7 +11054,7 @@
     "questions:m6_social_007": {
       "schema_version": 1,
       "item_sha256": "28e81911dba2cafd1e37f920d886241a057a6232731b8ec9be2569138fa30031",
-      "review_sha256": "1aac7d75c2461192c25630d1baf11a357627edce256ee6dfb08e898ebd05ee14",
+      "review_sha256": "88e9794945412058a78df4b7b6c685e779a6af3c51323f1e51c08b52d62d8aec",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11092,7 +11092,7 @@
     "questions:m2_pd_007": {
       "schema_version": 1,
       "item_sha256": "7545a586b0cc4e4fa8f44f70bd7a2d01a6ead4fdba03764d7f13f39cc38e74be",
-      "review_sha256": "2efa17d4873fb5ecb2e8e01f19478a1721e216d0e4b5a0d7062e36019d48f859",
+      "review_sha256": "601843f2949cd0d6c491f0dedef0bdb9c84bd994dc3a8739e65d3785bc4c908f",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11111,7 +11111,7 @@
     "questions:m2_pd_008": {
       "schema_version": 1,
       "item_sha256": "eb0ed834d91ebc03ec2a443794bdb08c6574d7e02a39666bb054f2ec17c36c91",
-      "review_sha256": "f975e0b1fb539eacc14b1d7a19f6ae64b7950b4aabb26c71586405bf83f7660a",
+      "review_sha256": "4ddae984699beff6ea9a449bb20993a4c7b1b5c2f86a4438a36bc05d03974d9a",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11225,7 +11225,7 @@
     "questions:m6_social_010": {
       "schema_version": 1,
       "item_sha256": "07993adaa11b12f94c1542a185cda92303e0b850fdf80685eb0faa1e26598138",
-      "review_sha256": "1e6f6ff4b3f8d813b02369a54a2efba3f640fdc18db286fdeaad9bc4c15df993",
+      "review_sha256": "7d55c99c1359d37184268782482a317cf8ae564417e28bc8602e10334f11ed4e",
       "topic_id": "t_7d11c6491ee3",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11244,7 +11244,7 @@
     "questions:m6_social_011": {
       "schema_version": 1,
       "item_sha256": "20f1ca8eeff048d16f66c9678fbd417941cd14168140c1dba165a80498114c80",
-      "review_sha256": "8ab71786be1285d6f9f4a2e8be82a72cc361bdfcaf6470248fded33c8fa09547",
+      "review_sha256": "28e8b5929be99a631606123d4f7d72ebe04c7a55df73a31105756f0b9f13c419",
       "topic_id": "t_7d11c6491ee3",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11263,7 +11263,7 @@
     "questions:m6_social_012": {
       "schema_version": 1,
       "item_sha256": "5ecaaadc74ed5b844630e52bc42db95e720f59a58d3a65944c250d9abd414f09",
-      "review_sha256": "747c804d664d15732639d73d7e1cdba1ee75e12957a96e811b19c7a774cb45cf",
+      "review_sha256": "edb3feafc9737163c600cc58fe5877ff6e9731257560e42dbcf2dc4d6cf897d6",
       "topic_id": "t_7d11c6491ee3",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11282,7 +11282,7 @@
     "questions:m6_social_013": {
       "schema_version": 1,
       "item_sha256": "6315ff33905456797b2eb45a94f3e2306471d80adf0826ab76e625aa811b4ad1",
-      "review_sha256": "6d4c57c225639b2739441642cda761a1a4972699f1d1ea3137e5780c5b125724",
+      "review_sha256": "c13084d03e47d8e37a3e28da8efdd159f1e18cc3e893ba2bc07a30d09a7da4e1",
       "topic_id": "t_7d11c6491ee3",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11301,7 +11301,7 @@
     "questions:m6_social_014": {
       "schema_version": 1,
       "item_sha256": "ac54d09ae8ffccaf1173529a74015bf336a9ceb5aa8c0a14c28c8044eecca0dc",
-      "review_sha256": "709e7a4ed931a50a6ce3aa97c96092be206f9363bb3e709f0f2050dee569b531",
+      "review_sha256": "60cdaf1d7f75d0798a30bb168517527eed87b8bcb157e494ca520f9fd2dec56f",
       "topic_id": "t_7d11c6491ee3",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11320,7 +11320,7 @@
     "questions:m2_pd_012": {
       "schema_version": 1,
       "item_sha256": "1633fed0c241186833e426f184512db88388af1ad237725459aab3123a9092b9",
-      "review_sha256": "c86a2883a5a6cfd005a19d72d4edc3d718f24a384022f52e05f4eb186116f5fa",
+      "review_sha256": "859122544d69f052646b32422211c79a01e914e0e6d9f626c8b7971d09cb3441",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11339,7 +11339,7 @@
     "questions:m2_pd_013": {
       "schema_version": 1,
       "item_sha256": "4760916a165346dae0bb6ade5c14c52275c1c604ae15bb913654f12bf3470a1a",
-      "review_sha256": "39aaff13d9281c568895a1f447390ca60168ad6ea3fac563d9bc56a822f11877",
+      "review_sha256": "347e6639f75e6006237adb23e54f973584a789ebcbf95d44220ba4babcead59a",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11415,7 +11415,7 @@
     "questions:m1_psyf_079": {
       "schema_version": 1,
       "item_sha256": "09261c696f880760596d1640c59dcb813a814ea7782fb012029437501e912dd6",
-      "review_sha256": "e979301a39f013c5f4f17275b5ad1d0b580a703bb6549e667e334ad143dc3f35",
+      "review_sha256": "aa07d2f348b98a31539352393d00e909ce7b2194ba18637879dd475475b6710c",
       "topic_id": "t_628424ccc652",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11719,7 +11719,7 @@
     "questions:m6_social_015": {
       "schema_version": 1,
       "item_sha256": "315c9ba0880ced3b13dfd81c0ac0bfbe2987c9bb27887b9349327354b77f062d",
-      "review_sha256": "92f2ab1e7729649e4d5190f3e54d060c23f7de54798a0bd67b1c29de7b648245",
+      "review_sha256": "6cd2a608cf5d47ef8fe31b09932b0c4d698eea3e39b5bf5af64a8ecc71d75457",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11738,7 +11738,7 @@
     "questions:m6_social_016": {
       "schema_version": 1,
       "item_sha256": "131048bbbca873afb617cb7c5a02f0b087c73c41e7c45b57f9cd20d25c2fb677",
-      "review_sha256": "03193224cd3684496e5e100996f176dc75795b0b58fa0ddf112fdc6b539dbab1",
+      "review_sha256": "ae23b6408f6f093d7eddebbebf29bdc4e3eadae2ec7cbda6c7079201241526b5",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11795,7 +11795,7 @@
     "questions:m6_social_019": {
       "schema_version": 1,
       "item_sha256": "7588d3093d59c2d4b4e4dee6b1237e49560705a712302e7d68f1c33bfbaeec73",
-      "review_sha256": "61a9da092240f4e26784c1fee68abb3a7d2fbc23bf5bfbe8217f48e459a5c1a3",
+      "review_sha256": "0a21c8cdefd20634c84c3080a6ab23a838cfae0d4851a4639fb02125a866225b",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11890,7 +11890,7 @@
     "questions:m6_social_020": {
       "schema_version": 1,
       "item_sha256": "6beb918a1bf80f10ecc69a09e2c6c650e2594caa6d68664f331c99450d0009a4",
-      "review_sha256": "159398b607e8a647043eb770664ac3109c21310dd95f92e4b622d29bd7db135b",
+      "review_sha256": "ee9beffa25665cbb0229fc8611ac7e1727e5a8d25658832e36b5774466a0534b",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -11909,7 +11909,7 @@
     "questions:m6_social_021": {
       "schema_version": 1,
       "item_sha256": "1f9e62206f2c3ab0df3d65cca414b44e8c457fb37e8570c64cf3931ceafcc1d6",
-      "review_sha256": "e94d9fad0f8a8e7f1752da4837012b7c0bef2452e028ae8dd3b0173e4e8c45ef",
+      "review_sha256": "99f7d4876f02db33e2b98b74bc8cc1615e0bb2f15b0212f6f72bd843782f3521",
       "topic_id": "t_c200db7e665a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12137,7 +12137,7 @@
     "questions:m5_clinical_016": {
       "schema_version": 1,
       "item_sha256": "2c67ef7db19df9c3c908f02a93d08fa0b56f1fa034ad68c92593d74cad4952db",
-      "review_sha256": "0353061faeaa3788c1ccd10b86b3d80f56ab4172f03f5623291a3141f861547b",
+      "review_sha256": "74ec3fc728bb48cce858964e7c58de79dc23d4bd609e49e12b7d0ceb5096f4c1",
       "topic_id": "t_bb895f94e077",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12308,7 +12308,7 @@
     "questions:m2_pd_017": {
       "schema_version": 1,
       "item_sha256": "fd800a0c7f8ef6c2d9f14a1fd66be7a092b2446271a45032593756f36774a7cf",
-      "review_sha256": "fd5bdf2614e526ea60b39b2af70bf588ce4f20331364e14b95a32b399565a713",
+      "review_sha256": "19c3857d595152194749763b3e3572038ca3ef0337c1bb5ccd117a961b970568",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12498,7 +12498,7 @@
     "questions:m6_social_022": {
       "schema_version": 1,
       "item_sha256": "fcfbfc036be91201f4867daf9addc3c949ff2b1c70d1f5bc76196e97b8f62adb",
-      "review_sha256": "e34f081c2324e5588e3ae67d302f2763a56be8dda31d8083e9413b66dc09b611",
+      "review_sha256": "1997d43ece906995da5307f9944f858106c4afbded235d8dd9f63b51743d0a73",
       "topic_id": "t_7d11c6491ee3",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12593,7 +12593,7 @@
     "questions:m1_psyf_085": {
       "schema_version": 1,
       "item_sha256": "93d1a9e354164922844adb031476363ad9931d11b258f47f5942dca308d8c621",
-      "review_sha256": "cf8bffe42140b1b864e14ab5f63c42f8bc77eb646316ab98c7d29406be40ab0e",
+      "review_sha256": "eb5ac5951ab736ab7531156e953e917e2e8c5d272696439e84e698c1a31d663c",
       "topic_id": "t_628424ccc652",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12745,7 +12745,7 @@
     "questions:m6_psyl_012": {
       "schema_version": 1,
       "item_sha256": "f7d52fcfca782b627d2185dfd433d2bb29e3d73c3dcdf096b496478d15ee1371",
-      "review_sha256": "5bf3b461a2a8010f9e6a0fed368b4900694ea1a0f360f3211406b87a470f8a5c",
+      "review_sha256": "7ed06557d37e1f370401746554f56a1a29c57151ec800c59010024efbef12e4d",
       "topic_id": "t_e39d1d65a4d7",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12783,7 +12783,7 @@
     "questions:m5_clin_019": {
       "schema_version": 1,
       "item_sha256": "82f96e170d6410a195c0e97824df6fb96d15d98aea582e9f59de0cf260547aed",
-      "review_sha256": "e66c5f63e0e0909d774cef105153a2e4c2297fe14460bbea488c99a4fd20ca42",
+      "review_sha256": "cb2ff754ae9580116d8435a4f208bb0de63f3409bfa4c18d00e4bceb4068097c",
       "topic_id": "t_be63ccbdf1d7",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12802,7 +12802,7 @@
     "questions:m5_clin_020": {
       "schema_version": 1,
       "item_sha256": "b06f81030c3f5a8ad3916a2477aa2b3c289bb71cefb63adb1c0a30dc64efa112",
-      "review_sha256": "9637c75a15e24d9e4db6dc22312cffe5b515dcafdda7a4e3544e893043567367",
+      "review_sha256": "198a8ad9e49b5c57f33e8723d187dd1051dc2661bf2941764c10cc25aa5f4a45",
       "topic_id": "t_bb895f94e077",
       "decision": "approved",
       "purpose": "learning_content",
@@ -13208,7 +13208,7 @@
     "questions:m1_phys_064": {
       "schema_version": 1,
       "item_sha256": "066a4f4a50e2b3486b4524fed6188b971307d05d94aefcfe38cba7e20888b05f",
-      "review_sha256": "5b7f3eb74d2343fed24514c0caa85cd868f94d131103388f530126a3a2995ac3",
+      "review_sha256": "d3dcf0837482c09caad01dda2705021af388725e927b3abad0d17c772107d293",
       "topic_id": "t_2476fabb75f8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -13246,7 +13246,7 @@
     "questions:m1_psyf_087": {
       "schema_version": 1,
       "item_sha256": "eee78cdab11c2a5d28899ac989be3e9e9001c467ae921753608eafef5b3d678f",
-      "review_sha256": "f8de11dad6a0c700d843f445607c6f7bbed592c83f396ac9caf0ac74045661a2",
+      "review_sha256": "0df989cf9177810dad42a9c65187e48737efb557e39621765e733c1968330a24",
       "topic_id": "t_082cd47dd86a",
       "decision": "approved",
       "purpose": "learning_content",
@@ -15556,7 +15556,7 @@
     "questions:assessment_report_grounding": {
       "schema_version": 1,
       "item_sha256": "c9e3290e7f0eb9a912fe487b6bae317df57ff31671674d09e006db07b4a86ae6",
-      "review_sha256": "d3e721395c39d05e9559cd01c79c5670af442203174541f65f610f160a2eefec",
+      "review_sha256": "69e1c842f33d7aafd23203671b1522438349b9abf107610a3b9c2b1574292211",
       "topic_id": "t_d0ae2304480c",
       "decision": "approved",
       "purpose": "learning_content",
@@ -17304,7 +17304,7 @@
     "literature:lit_course_mention_lebon_crowd": {
       "schema_version": 1,
       "item_sha256": "5817a7761ccce910051c09f9b2e0bc53a9fbf6c550eb5c5c75b2ca8ad0eb98a4",
-      "review_sha256": "0d4ad9b1f025722f577b8875dba972765fce9874c7854888d83a1cd576d4e738",
+      "review_sha256": "8a744e13490701e46f930dd83c836804b7ff74657abe2e0765de0aa9b6d04d96",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17356,7 +17356,7 @@
     "literature:lit_lebon_psychology_peoples_masses": {
       "schema_version": 1,
       "item_sha256": "76d3983463ae45f8a872e89f58375140303e9593b1604d3be14ebdee1526d3fc",
-      "review_sha256": "3e094518ab7f86d46fa9168674bf3566d0431e9affc1473d43749992b8e93a0d",
+      "review_sha256": "a02d1f43e460b54311ef849e1cca8af3afedd4593daa22fc0bf1208c9968b398",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17369,7 +17369,7 @@
     "literature:lit_social_history01_miller_dollard": {
       "schema_version": 1,
       "item_sha256": "e71e042edc25bd939174972182054bc08b0b63b20567031c9708ef416735a939",
-      "review_sha256": "1288a94b3ae6a6f7fd2dbb3d34da3810a85ad24a731cc4981047f2675a226215",
+      "review_sha256": "64861ff94632082bf753c2c6035e3c763320143723f9b5ca46bc7ce9f2796e5a",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17382,7 +17382,7 @@
     "literature:lit_social_history01_sighele": {
       "schema_version": 1,
       "item_sha256": "7446bf51d5199d80ba710a7c0bda933223cc8fc6f063f6f9f9a9d91f0c766e0f",
-      "review_sha256": "3bf1698633aaa3aafbf62232c2a172c51aa53da064a13dddd292b187784c2217",
+      "review_sha256": "e94842f4a54700df582444302574ac0d343ed376e248bee072133d7d9c113953",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17395,7 +17395,7 @@
     "literature:lit_social_history02_freud": {
       "schema_version": 1,
       "item_sha256": "0be41d2c7629d2a261989dfb04c48c37bd85d1f339bc02ed8750e5238a4ea4e8",
-      "review_sha256": "18fd3509d424ac66665ddd08d3e85252d6e2eadd6b0b82013a028ad3a420e683",
+      "review_sha256": "b7e18a1c435e209eb56f94881c67415253f50e164dcd6d2811fdbd624a5d636b",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17408,7 +17408,7 @@
     "literature:lit_social_history02_lebon": {
       "schema_version": 1,
       "item_sha256": "dc3137023be7de032aada5ba8273d1ccdb67e047ffd075e358068163a6750212",
-      "review_sha256": "afe8a709911d17319b2bb2a2daefedcb1b67a86e0418e618103d83f27217a14e",
+      "review_sha256": "c8a3bf1a0a2ff93b48f871310e726d9984daa5ffa740ace3103f850485d77a33",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17421,7 +17421,7 @@
     "literature:lit_social_history02_miller_dollard": {
       "schema_version": 1,
       "item_sha256": "2c0123813cab0973a023dc45b72e2252de2080e3831ad819e0860d978cd2ec93",
-      "review_sha256": "16dd5f7677d3b75b427b9dfbed2278a32aa52fc8c5ce0b25e05c21122d9495c8",
+      "review_sha256": "21d883843e96b5235503f03c0df91795f5ffdbabf2485bca0478b1874006ceeb",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17434,7 +17434,7 @@
     "literature:lit_social_history02_sighele": {
       "schema_version": 1,
       "item_sha256": "ff06464544fa08edbaf10e9d3abad42e388356748edeadc557211ac036454b46",
-      "review_sha256": "f2013de21cbccb3821a699c7a9be21bf4bb2b346317f52c4a79c382173fd9cfe",
+      "review_sha256": "4eb38ede3c12a83ac852bba7029e7f0748d4e4786ee8f6741834b8efd9f5ed91",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17447,7 +17447,7 @@
     "literature:lit_social_history02_wundt": {
       "schema_version": 1,
       "item_sha256": "a0c235604dc9ed18803aa74df697931a25ff3c415a25f919b9fe62e256b03171",
-      "review_sha256": "86c5a63bf148713ae756e2ee4bb18720f1a0cedf369ddd5eb8c14acc877f5653",
+      "review_sha256": "a450c31a1caac0292c684af80c65a24804448f618c1d213867e33221541b70c7",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",
@@ -17570,7 +17570,7 @@
     "glossary:electrical_synapse": {
       "schema_version": 1,
       "item_sha256": "d48bb8ed687bf17f8e859115f4eb1f9ce98e6792298c4d77ff2417cd376395c6",
-      "review_sha256": "11a119573b3e998aecd5d6a98bc517378c21fa13088c0dd7a37b52d8ac273d9f",
+      "review_sha256": "63b226a6ec686edc5188f79916f19b67d04ccabc3f25541b1a3860fffa90d02b",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -17588,7 +17588,7 @@
     "glossary:proprioception": {
       "schema_version": 1,
       "item_sha256": "34333b388afc5d8ac971e1992d2a8bb00b933ff05a78c5ac06c7d73a110f2913",
-      "review_sha256": "d3e96a478111305d2d08243eb31478dfa61f68cd5ea3fd48cb5a1e694a6b7e2c",
+      "review_sha256": "00f9f63c0c7d7f82eb28688489b481de2b6f46e264858ff4c17df830c96618a2",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -17606,7 +17606,7 @@
     "glossary:interoception": {
       "schema_version": 1,
       "item_sha256": "55b35de90c7a6d44c7fefd34027b48acc82f1f84b771b9385b1ab0bf3885fda3",
-      "review_sha256": "3267b8a155292aaefa368f42bead19e10af52d9747329b1147f2143f799a5c5f",
+      "review_sha256": "b1a7dfd6dcc562e05e30759e25e262a11925479a1ec8454e950870661584b55b",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -17846,6 +17846,97 @@
       "schema_version": 1,
       "item_sha256": "c2ed20c7d1a6a1f1fb3a72e28df72e469cbc70e6affe869c595d79edc5832d46",
       "review_sha256": "fb6b974336b8dd79e0532cf4808e9745adb537df72ad35f21dbf2e3b7e4d0bf1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_sechenov_reflexes_of_brain": {
+      "schema_version": 1,
+      "item_sha256": "03d44a1b440d43723e4541f45f6af469d5499acaa27b3febb3c4fe8a3f6e8748",
+      "review_sha256": "3e7e7cbb2941816c1ad755e39d525ab3b55b228335deb33056bd0ae7046f6fe0",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_kreisman_straus_hate_you_dont_leave": {
+      "schema_version": 1,
+      "item_sha256": "8af14fc2099d40c4161403a216061d5250f00a43f490360ffa2759b52bfc2f78",
+      "review_sha256": "6d74c948488eac71cb42fa1b05e78e90ca8dc45dd079e662089884acfd79eaee",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_hy_loevinger_measuring_ego_development": {
+      "schema_version": 1,
+      "item_sha256": "6f04c34a170498e52fdcde4808d5ad00abb446fce5665b2cf0cc94c5d7949f2f",
+      "review_sha256": "1ee09576b52fc547048683971b5b52fd658849704174bfe35c98214c58e98ea7",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_golovakha_kronik_psychological_time": {
+      "schema_version": 1,
+      "item_sha256": "3751f1f0b552f955e38225922a36af35bcebaaeb81d01d1c9d5831d05ce80193",
+      "review_sha256": "df50860c0a7f25f4c6e1a2fb93f165866d9a47bdccefd817ba7d589cf28f99b4",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_kantor_objective_psychology_grammar": {
+      "schema_version": 1,
+      "item_sha256": "95cfc177f933212b3ad8024312c103c93b6ac5bf6fd7aa01cd816160b7f446f3",
+      "review_sha256": "bc58f04fcfa06bf5f950cc6ce6c8fa59dad4adbec8003aa0b8201747cc26fba2",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_consult_practice17_kochiunas": {
+      "schema_version": 1,
+      "item_sha256": "86eba36cd424091d0cd74a1038a4a514d8a1162361d004e29e9d6f674ed95a86",
+      "review_sha256": "dc612141d586d8023f797a14558e387a99799d6804c9cf31dc76b65a659d11e0",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_social_history03_freud": {
+      "schema_version": 1,
+      "item_sha256": "14bd33a99b623b0197f3a515ca357ee88161a836738a4af8a49cc571d136bc61",
+      "review_sha256": "69b48c5e71ba1486eaf7e79c830605bdb20cf4ee2e65a9e7e2b1f250342daec7",
       "decision": "approved",
       "purpose": "bibliographic_metadata",
       "reviewer": "private-review",

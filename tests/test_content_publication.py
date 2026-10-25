@@ -311,19 +311,40 @@ def test_current_learning_reviews_do_not_use_bibliographies_as_knowledge():
     policy = publication.load_policy()
     quality = json.loads((publication.ROOT / "content" / "learning-quality-reviews.json")
                          .read_text(encoding="utf-8"))["items"]
-    published = set()
+    published = {}
     for kind in ("questions", "glossary"):
         for path in (publication.ROOT / "content" / kind).rglob("*.json"):
             for item in json.loads(path.read_text(encoding="utf-8")):
                 if policy.can_publish(kind, item):
-                    published.add(f"{kind}:{item['id']}")
-    assert published <= quality.keys() | policy.certificates.keys()
+                    published[f"{kind}:{item['id']}"] = item
+    for key, item in published.items():
+        kind = key.split(":", 1)[0]
+        assert key in quality or policy.has_private_review(kind, item), key
     for key, review in quality.items():
         if not key.startswith(("questions:", "glossary:")):
             continue
         for evidence in review["sources"]:
-            source = policy.sources[evidence["source_id"]]
-            assert source["kind"] == "learning_material", key
+            source = policy.sources.get(evidence["source_id"])
+            if source is not None:
+                assert source["kind"] == "learning_material", key
+                assert source["readable"] is True, key
+            else:
+                # Private source metadata stays outside Git. The existing signer
+                # tests reject bibliography/excluded kinds before a source-free
+                # approval can enter this registry. An unknown alias alone is
+                # never evidence: require the exact current authenticated review.
+                kind = key.split(":", 1)[0]
+                assert key in published, key
+                item = published[key]
+                assert review["item_sha256"] == publication.fingerprint(item), key
+                assert review["source_support"] == "supported", key
+                expected_checks = {"meaning", "ambiguity", "duplicates", "sources"}
+                expected_checks |= ({"definition", "examples"} if kind == "glossary"
+                                    else {"answer", "explanation"})
+                assert set(review["checks"]) == expected_checks, key
+                assert policy.has_private_review(kind, item), key
+                current = policy.private_review_record(kind, item["id"])
+                assert current["item_sha256"] == publication.fingerprint(item), key
 
 
 @pytest.mark.parametrize("kind", ["glossary", "literature"])
