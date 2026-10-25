@@ -5536,8 +5536,8 @@
     "questions:m1_vnd_001": {
       "item_sha256": "26fbb8aac7f04574d1e115e049941bac32fbbdaa597f53a5d7574d55ec00d2bf",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5549,7 +5549,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
+      "note": "KEEP field-level example:experience/context-guided adjustment versus peripheral/organ reflex regulation. Source describes acquired adaptation;an authored new-task example is not anatomical localisation,exhaustive definition or a client neural diagnosis. Distinct goal from022specific conditional-reaction identification.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5557,13 +5557,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:4600:5050"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_002": {
       "item_sha256": "8e09db58f13fec290293094ccf4aebd3219f2be599db6e40b81f57f51103b572",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5575,7 +5576,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw source passages explicitly attribute the classical terminology and conditioned-reflex research to Pavlov. Replaced unrelated broad legacy locator, preserved all source holds and unchanged question/answer/explanation. No whole-source approval.",
+      "note": "KEEP historical attribution with four comparable researchers. Classic systematic conditional-reflex tradition belongs to Pavlov;not Nobel prize for conditioning,first discussion ever or exclusive authorship of all learning mechanisms. Distinct introductory history objective.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5587,13 +5588,14 @@
       "resolution": {
         "action": "FIX",
         "previous_item_sha256": "0a7b9929aa1fc9d4843e7f90b6ed9381727f112433eecafd12c75919667486a9"
-      }
+      },
+      "disposition": "keep"
     },
     "questions:m1_vnd_003": {
-      "item_sha256": "911596cf0bf19992e8ecd6091f2c0d246dec85b07dcae404eaf2c93b51685033",
+      "item_sha256": "4d88f8154410aa220e7186351563eee96dc65c25a7ef8cb04ce56a40f5fd665d",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5605,15 +5607,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
+      "note": "FIX all alternatives now concern salivation under different antecedents. Direct food-in-mouth is the unique unconditioned example;food-paired sound/dish/feeder examples explicitly require prior experience. No absent blink source or conscious strategy foil.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:4600:5050;characters:8380:8660"
+          "locator": "characters:4801:5010;characters:6006:6165;characters:8438:8660"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_004": {
       "item_sha256": "a8f32b685a388f9ded14190d12b28584dfc8fd7833241fd4d14aa1c397acb6d5",
@@ -5723,10 +5726,10 @@
       ]
     },
     "questions:m1_vnd_008": {
-      "item_sha256": "65bea25702f9b4d0a9719f7ba8281556e35150e79d1b874487845b87df5377cb",
+      "item_sha256": "d856eb431a0a64d83f09b423bbe39e8364c7a561f4813ba2a80a569c217ded10",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5738,7 +5741,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
+      "note": "FIX parallel concise process/state pairs replace irrelevant tissue-growth foil;explanation distinguishes historical basic excitation/inhibition terminology from cognitive operations/states. Named framework,not exhaustive modern all-brain mechanism.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5746,7 +5749,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:14042:14127"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_009": {
       "item_sha256": "68356cbe9c7a3b3352b2a9f9c91e13b22c4c569e98d88b657b13df8ecd9caaae",
@@ -5778,10 +5782,10 @@
       "disposition": "consolidate"
     },
     "questions:m1_vnd_010": {
-      "item_sha256": "88b93ccb4d79ef5b471b268509bc07aae86fd91097b63bb0c591539b6d31a728",
+      "item_sha256": "97afe926b6ca5306f91248ae798aa38aaa84cde4c1de7eb20647bc48b84b1429",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5793,15 +5797,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read exact balance/mobility/inhibition fragments; alternatives now same-level properties. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX remove definitions embedded in options that repeat the stem and reveal key. Balance is a literal attributed property;strength/mobility/sensory threshold are distinct. No diagnosis from conversation or one reaction.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:14042:14857;characters:22944:23036;characters:23828:24068"
+          "locator": "characters:22944:23036"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_011": {
       "item_sha256": "da15fa49b0f3a073e0d7523faeb7208cff0ba4e53609c0e8c02dc755872dc6f2",
@@ -5832,8 +5837,8 @@
     "questions:m1_vnd_012": {
       "item_sha256": "0b8b6aa6b615712693157a914b74c691e730655f740c55b87e82e57d6598c401",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5845,7 +5850,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact strength definition read; same-model alternatives, no human diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP historical strength definition with comparable property alternatives. Load-related work capacity in model is distinct from switching,balance and detection threshold. No fixed temperament,body size,muscle power or fatigue diagnosis.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5853,7 +5858,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:22518:22641"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_013": {
       "item_sha256": "f3c4a8d98db3e008be4a0e8157e356008bf47f8052aacd4b49fb62f2f4f733c4",
@@ -5962,8 +5968,8 @@
     "questions:m1_vnd_017": {
       "item_sha256": "b44427d2aa3c0afa87b86efcb2b68e30f1ddf7a8388d661abc9f91af1992045f",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5975,7 +5981,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Both exact extinction and food-reinstatement passages read; inference bounded to acquired-response recovery. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP bounded inference from described weakening and quick recovery after renewed food. Observed change does not prove total erasure;not promise every skill survives or can always be restored. No literal channel mechanism or individual prognosis.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5983,7 +5989,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:15637:15697;characters:16398:16615"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_018": {
       "item_sha256": "ab4d3e28fca357fa1b462154a6af391e40fa2515c28f561b8895b68db57c1756",
@@ -6088,8 +6095,8 @@
     "questions:m1_vnd_022": {
       "item_sha256": "147785cce7492c22ee931403a7171b029d68c8d55fcad771d65283c693297b3d",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6101,7 +6108,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact acquired signal-reaction fragment read; removed single-client causal diagnosis and compares neighboring learning phenomena. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP explicit initial neutral signal/acquisition/before-outcome conditions distinguish conditioned response from habituation,extinction and unconditioned response. No clinical causal inference or mandatory pairing count.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6109,13 +6116,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:6006:6165"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_023": {
-      "item_sha256": "12d4390155c18579f5b91421ad6dbcf04e52596bce9cc8fbb27c7530cd4f242c",
+      "item_sha256": "9796415560336ca0f59abe0d1fac7651a5e05ac37a7c40cdd649cc6a80817150",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6127,7 +6135,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact no-food and measured weakening fragments read; explicit prior pairing resolves habituation ambiguity. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX remove visible editor history and explain all alternatives under specified reinforcement withdrawal. Extinction response weakening is not memory erasure or new innate response. Distinct identification objective from017inference/recovery and024differential contingencies.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6135,13 +6143,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:15637:15697;characters:16201:16294"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_024": {
-      "item_sha256": "ab6632c69a817cbbb3f861852b6e365316ddbf6b19aa25998b42499d59f28cb7",
+      "item_sha256": "2da8d12f3688fd426e7b8acd3dd9e4b987fc09b30642c166efe4b56b0645a051",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6153,7 +6162,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact90-versus60 metronome differentiated reinforcement fragment read; explicit procedure supports unique learning category. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX ask which process the two-cue differential reinforcement procedure describes rather than recalling lecturer wording. Preserved versus weakened response makes discrimination unique;not undifferentiated sensory filtering or human moral control.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6161,7 +6170,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:17945:18232"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_025": {
       "item_sha256": "3c614ba4675c05543de547b949e6e7b2d0b55623494d73ca1cc4c8faf734eff5",
@@ -6409,10 +6419,10 @@
       ]
     },
     "questions:m1_vnd_034": {
-      "item_sha256": "e9913fe48113e45a202d5a07226f59573c2969947ad39097882e2dcdb82de51c",
+      "item_sha256": "00e52857fdf24e26d58fcb1781a62727b9fee6791a3ba35830bda4313bdf0761",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6424,15 +6434,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact unconditional/conditional inhibition classification read; replaces repeated generic role item with classification operation. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "Explicit historical Pavlov conditional/unconditional framework distinguishes inborn versus learned forms; named subtypes are not universal modern cellular mechanisms. Replaced unrelated volitional-function pair with a credible adjacent presynaptic/postsynaptic contrast at cellular level. No temperament/person-worth diagnosis,positive/negative emotion identity,all-brain moral control or reflex timing guarantee. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
-          "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:14003:14835"
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "locator": "characters:14453:14551;characters:14700:15017"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_035": {
       "item_sha256": "8da48695ded0a31f8fcea317693b0f6112c1a867ac57c67185138b2318a6bb7e",
@@ -6600,10 +6611,10 @@
       ]
     },
     "questions:m1_vnd_041": {
-      "item_sha256": "42837ac49c47b478877b2fd37468151f42c2172faaa6e6af42df6b107fe35efd",
+      "item_sha256": "be273b5c25d9a3072b93acb1a648f592f2a5d0af26a88392cdda7865857cef82",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6615,15 +6626,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact mobility fragment read; application discriminates same-model properties and avoids identifying human neural type. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX equally concise property alternatives remove answer-by-definition cue. Switching is historical mobility,not measured current neural type/person capacity from one task. No aggression or fixed-profession interpretation.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:14042:14857;characters:23828:24068"
+          "locator": "characters:23828:24068"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_042": {
       "item_sha256": "7f4dbfdac53bc98adc169f704d006312445c8cd8bc4679d1b7ff1997f8c9e35d",
@@ -6678,10 +6690,10 @@
       ]
     },
     "questions:m1_vnd_044": {
-      "item_sha256": "2fa0fd06c1c2c45427fbed8028bc5690b24a7f689b1d82680216b1424b034dfd",
+      "item_sha256": "9540793f1aa31c0cda25e293ba29bd3822e52c2450faca0db01e1f3aefb337b0",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6693,21 +6705,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw course fragments: external. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
+      "note": "FIX concise comparable inhibition labels and contextual explanation;remove ambiguous delay/gap definition from distractor. Novel extra stimulus and temporary waning indicate external inhibition in this procedure;not trace/delay conflation or all distraction biochemical proof.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:12380:12862"
+          "locator": "characters:12380:12554;characters:14042:14857"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_045": {
-      "item_sha256": "7cc8361b71fe3ee053182716fe894b6c00ecbcabcda02eca531948cced340f48",
+      "item_sha256": "e34870bf06b64e6129fa307e79e9b84ef82f7c1e0f535d10c64ee9266728ec65",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6719,15 +6732,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact acquired linkage and external inhibition fragments read; coherent causal roles, no dangling pronoun or universal efficacy. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "REPLACE low-quality implausible two-clause foils with concrete procedural choice retaining signal-food pairing while reducing stated noise. All alternatives specify the same two dimensions. Removing a stated distraction is not sufficient guarantee of learning;no universal four-condition law.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:6006:6165;characters:12380:12862"
+          "locator": "characters:6006:6165;characters:12380:12554"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_vnd_046": {
       "item_sha256": "075c771e072352e737b9c2af9991dba9502f9f7bd7cc927c99315e933d944b16",
@@ -6758,10 +6772,10 @@
       ]
     },
     "questions:m1_vnd_047": {
-      "item_sha256": "60fd92bc351fe45ee29afc58a6643ca6aee99ee71a609d459f937fafe7b3932b",
+      "item_sha256": "c253471d909e448306dbfe0a35c2c4ca1b90fdc19e387b1a28b2e9a340c0291e",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6773,15 +6787,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Сохранён интегративный охват внешнего и четырёх внутренних форм торможения при сокращении ответа. Фрагмент включает перечисление форм; held физическое удаление связи и сроки забывания исключены. Отличие учебной цели от m1_vnd_034 сохранено.",
+      "note": "Three procedural illustrations: repeated nonreinforcement,different contingencies for similar signals,and delayed reinforcement while CScontinues. Course names the four-type framework and describes extinction/differentiation. Exact delay-versus-trace correction is verified against originalPavlov1927lectures3/6,not borrowed as a new curriculum topic. Single omission is not guaranteed permanent erasure,reinforcement/generalisation not inhibition by themselves,and no cortical/biochemical/client-state mechanism is inferred. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
-          "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:14042:14857; characters:15637:15697; characters:17945:18232; characters:20397:20482"
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "locator": "characters:14700:15017;characters:15637:15697;characters:17769:17945;characters:20397:20482"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_048": {
       "item_sha256": "a679880c6a6b28646e6b06950ac1bb9aa4196ad4e61bb64dd6bfd1c7465e6e80",
@@ -6810,10 +6825,10 @@
       ]
     },
     "questions:m1_vnd_049": {
-      "item_sha256": "03072f5501b4e94c98331d6e86df4d68cb46b4b9e914c7b53473a3d89825c85d",
+      "item_sha256": "4a80fa57a479d041fa6e91bdc4d884cfa520a8006cbf9574eac829d406ff248b",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6825,15 +6840,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact differentiation and delayed-waiting fragments read; new contrast operation resolves overlap with generic inhibition item. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "Distinct application objective: differential reinforcement between two similar signals versus timing of response during one continuing conditioned signal. Current draft explicitly keeps CSactive through reinforcement,as in original author delay example; the additional course cue-off/gap fragment20871:21103is entirely held and not used. A gap after CSoffset is trace,not the stated continuing-CScondition. No universal two/three-minute cutoff,sleep threshold,dog/cat temperament or clinical inference. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
-          "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:14042:14857;characters:17945:18232;characters:20397:20482"
+          "modified_time": "2026-04-07T09:56:48.714Z",
+          "locator": "characters:17769:17945;characters:20397:20482"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_050": {
       "item_sha256": "14d026e404043e9bc3018650f383ed95678a37d935d2c327e72825112aafb6cb",
@@ -7063,10 +7079,10 @@
       ]
     },
     "glossary:higher_nervous_activity": {
-      "item_sha256": "7c09895ed9d32ce68d482b1560d8cd323c7a08ab77c25c6a9d00720c633969ac",
+      "item_sha256": "175496b654a6cc3ebff7218c3c2304cb04d9b4c387d877d5f8a5a2fc986c6067",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7078,16 +7094,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Historical Pavlovian acquired regulation explicitly bounded, not a universal cortex-only theory of behavior. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX replace unsupported sole cortical/goal wording with attributed acquired behavioural adaptation/learning concept. Example remains bounded Pavlov experiment;no claim all mental life reducible to conditioning or external stimulus only.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:5553:6203"
+          "locator": "characters:4615:5010;characters:5553:6203"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:pavlov_teaching": {
       "item_sha256": "1f5989c3a2e7631f1e4f4d5bd5d99e26fc38527f89285862e4fef637d498d7d9",
@@ -7121,10 +7137,10 @@
       ]
     },
     "glossary:unconditioned_reflex": {
-      "item_sha256": "39c4a1e714dd3833879915c70ffce670000f986242e64f877342ec62d9e7188c",
+      "item_sha256": "d5c5f0e4a954bbb31629450eedc195c7e42fc5006c7b167a20f9bc3f9c3590b6",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7136,7 +7152,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Unlearned response distinguished from acquired signal-response relation; food salivation example unambiguous, no inference of a human clinical diagnosis. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX definition/example consistently use exact salivation-to-food course contrast rather than absent blink example. Innate does not mean all stimulus intensity/state/context irrelevant.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7145,13 +7161,13 @@
           "locator": "characters:8473:8853"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:conditioned_reflex": {
-      "item_sha256": "607f5a4037ee9eb7da317dbd3ea62946ef46b583d5530fc28c5cce66afa2d189",
+      "item_sha256": "143832ff52643123a627da8f198ed21ced0a8c443eb1870357b362a0aefe3b6f",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7163,7 +7179,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Signal acquires significance through learning; not every conditioned response has a simple guaranteed training timetable. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX distinguish originally neutral from already learned signal;neutrality is relative to measured response. Acquired signal meaning is not automatic timetable or necessary all-learning recipe.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7172,7 +7188,7 @@
           "locator": "characters:5553:6503"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:reinforcement": {
       "item_sha256": "380b1c404da1102dd6d6ab2e6ecb21a2d2640c842a06fdab79437e5419a0e461",
@@ -7207,10 +7223,10 @@
       ]
     },
     "glossary:extinction": {
-      "item_sha256": "374812df057bbdc14368cde33e13aa9f8e892afd7f383ba53caabedd34469a70",
+      "item_sha256": "5ce1a743b4aa9be491872c034144c3ed1db7f8880e95e5b078620c0779947335",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7222,16 +7238,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Repeated unreinforced signal and weakening of response, not erasure of learning or guaranteed clinical fear removal. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX define observed conditional-response weakening with explicit non-erasure limitation and conditions. Exact measured response and recovery example,not universal archive/revival or human exposure-treatment guarantee.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:14893:15903"
+          "locator": "characters:15597:15697;characters:16201:16615"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:differentiation": {
       "item_sha256": "5b559e2430c11a7c09a0b01bf804e7f44ac33b9b4a614072d0e1702bad77c1ba",
@@ -7266,8 +7282,8 @@
     "glossary:excitation_and_inhibition": {
       "item_sha256": "d6efbb714b547dea3cb9459b6d3064fdd2430605fe9eb8ce903a795636a226ea",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7279,7 +7295,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named basic pair in historical Pavlovian description, distinct from the single inhibitory-process card. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP attributed pair in historical nervous-regulation model,distinct from inhibitory-process-only card. No identity with reward/punishment or positive/negative emotion;not current cellular assay.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7291,10 +7307,10 @@
       "disposition": "keep"
     },
     "glossary:inhibition": {
-      "item_sha256": "c685fb2e451f5501a1fb2f42e525e90f419307758260a27d5d5fed2308377192",
+      "item_sha256": "e98397378116674fc3f401106f2e4695ffda1f4a54ace9c4032ffc7c2cb5abaa",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7306,7 +7322,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Restriction/selection of activity illustrated by differential responding, not moral self-control or a diagnosis. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX scope definition to historical observed response suppression rather than any irrelevant activity or broad behavioural reorganisation. Differential responding example retained;no assertion about GABA/synaptic mechanism,will or moral worth.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7315,13 +7331,13 @@
           "locator": "characters:17103:18103"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:balance_of_processes": {
-      "item_sha256": "f7b2f0c1d750cd228fa883287b9f51adeba2a9f9d70788d42bf30c9abe13e703",
+      "item_sha256": "de15c3a723638bf81b76f2d2a672fa3dd51ea330f2f785142e5a00002575acca",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7333,22 +7349,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Historical model relation and example explicitly prohibit measuring it from one impulsive act. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX historical excitation/inhibition relation replaces unsupported generic causal claims about stability/flexibility. Distinguish strength/mobility;no client maturity or temperament diagnosis.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:14003:14835"
+          "locator": "characters:22944:23036"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:type_of_higher_nervous_activity": {
-      "item_sha256": "ca575526c772d00a40a6b8acad91ab5f77b383a64d826d74f588c6165e1256bc",
+      "item_sha256": "c2edd679e78f673d4a4ca0aad989f5094fbd87aeae943eb8c4911d95e2bfbbda",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7360,22 +7376,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Strength/balance/mobility model, not assignment of a type from a short conversation. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX explicit named historical combination of three properties;exact three definitions jointly support statement,not old incorrectly selected title-only range. No exhaustive modern biology,fixed work suitability or single-interview assignment.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
           "modified_time": "2026-04-07T09:56:48.714Z",
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
-          "locator": "characters:25016:25111"
+          "locator": "characters:22253:22641;characters:22944:23036;characters:23828:24068"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:strength_of_nervous_processes": {
-      "item_sha256": "756b44f8bf2791a3c30eac317900aed0ffb2d836922e72386aa54b2057df3eb6",
+      "item_sha256": "a868a41d407f4efb891fc4b1d2cffeb05ecdebc53b3ba4becabdc44a0c145207",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -7387,7 +7403,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Load tolerance as a theoretical property, not a personal fitness verdict from fatigue. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX state historical model in both definitions,not just example. Capacity under intensive load is not direct fatigue measurement,will/muscle strength,worth or professional fitness.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -7396,7 +7412,7 @@
           "locator": "characters:22518:22641"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_psyf_001": {
       "item_sha256": "29b087565e1e680b1b4c5d25ec43594dd879099d836163b100cd9fa07bf165ed",
